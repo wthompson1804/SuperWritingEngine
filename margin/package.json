@@ -1,0 +1,15 @@
+{
+  "name": "margin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A publishing platform where readers never need an account to read.",
+  "type": "commonjs",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --no-warnings server.js",
+    "dev": "node --no-warnings --watch server.js",
+    "test": "node --no-warnings --test test/*.test.js",
+    "digest": "node --no-warnings scripts/digest.js",
+    "reset": "rm -f data/margin.db data/margin.db-* && echo 'database removed; it will re-seed on next start'"
+  }
+}
