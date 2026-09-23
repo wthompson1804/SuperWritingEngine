@@ -2,6 +2,7 @@
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const { open, helpers } = require('./lib/db');
 const { seed } = require('./lib/seed');
 const { render, esc } = require('./lib/markdown');
@@ -12,6 +13,7 @@ const views = require('./lib/views');
 const ring = require('./lib/ring');
 const { importSubstack, exportAuthor } = require('./lib/portability');
 const { toCsv } = require('./lib/csv');
+const ap = require('./lib/activitypub');
 
 const STATIC = path.join(__dirname, 'public');
 const MIME = { '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8' };
@@ -27,7 +29,12 @@ class HttpError extends Error { constructor(status, msg) { super(msg); this.stat
 function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'data', 'margin.db'), demoSignals = process.env.MARGIN_DEMO_SIGNALS !== '0', secureCookies = process.env.MARGIN_SECURE_COOKIES === '1',
   // No mail provider is wired up, so by default the confirmation link is shown on screen
   // instead of being emailed. Set MARGIN_SHOW_MAIL=0 once real delivery exists.
-  showMail = process.env.MARGIN_SHOW_MAIL !== '0' } = {}) {
+  showMail = process.env.MARGIN_SHOW_MAIL !== '0',
+  // The canonical public URL. Fediverse ids must be stable, so set this in
+  // production (e.g. https://margin.example). Falls back to the request host.
+  publicUrl = process.env.MARGIN_PUBLIC_URL || '',
+  // Tests and local development federate over http with private addresses.
+  apInsecure = process.env.MARGIN_AP_INSECURE === '1' } = {}) {
   const h = helpers(open(dbFile));
   seed(h, { demoSignals });
 
@@ -78,9 +85,54 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     return Buffer.concat(chunks);
   }
 
-  const baseUrl = (req) => `${req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http'}://${req.headers.host}`;
+  const baseUrl = (req) => publicUrl.replace(/\/$/, '') || `${req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http'}://${req.headers.host}`;
+  const fed = ap.createFederation(h, { allowHttp: apInsecure, allowPrivate: apInsecure, log: (m) => console.warn('[ap]', m) });
+  const apJson = (res, obj, status = 200, type = 'application/activity+json') => send(res, status, JSON.stringify(obj), { 'Content-Type': `${type}; charset=utf-8`, 'Cache-Control': 'max-age=60', 'Access-Control-Allow-Origin': '*' });
   const queueMail = (to, subject, body, kind) => h.run('INSERT INTO mail (to_email, subject, body, kind, created_at) VALUES (?,?,?,?,?)', to, subject, body, kind, Date.now());
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Everything that happens the first time a piece goes public: email to
+  // confirmed followers, and a Create to fediverse followers. Used by the
+  // editor and by the scheduler.
+  let lastBase = '';
+  function publishNow(postId, base) {
+    const post = h.get('SELECT * FROM posts WHERE id = ?', postId);
+    if (!post) return;
+    const first = !post.published_at;
+    h.run(`UPDATE posts SET status = 'published', publish_at = NULL, published_at = coalesce(published_at, ?) WHERE id = ?`, Date.now(), postId);
+    if (!first) return;
+    const author = h.get('SELECT * FROM authors WHERE id = ?', post.author_id);
+    const fresh = h.get('SELECT * FROM posts WHERE id = ?', postId);
+    fed.publish(base, author, fresh);
+    for (const sub of h.all(`SELECT email, token FROM email_subs WHERE author_id = ? AND status = 'active'`, author.id)) {
+      queueMail(sub.email, `New from ${author.name}: ${fresh.title}`,
+        `${fresh.title}\n${fresh.dek}\n\nRead it: ${base}/p/${fresh.slug}?via=follow\n\nYou get this because you asked for ${author.name}'s new pieces. One click stops it: ${base}/unsubscribe/${sub.token}`, 'new-post');
+    }
+  }
+
+  // Background jobs: scheduled posts, and one reminder for unconfirmed email
+  // follows (about 6 in 10 double opt-ins go unconfirmed without one).
+  function runJobs(now = Date.now()) {
+    const base = publicUrl.replace(/\/$/, '') || lastBase;
+    if (!base) return;
+    for (const p of h.all(`SELECT id FROM posts WHERE status = 'scheduled' AND publish_at <= ?`, now)) publishNow(p.id, base);
+    for (const sub of h.all(`SELECT s.id, s.email, s.token, a.name FROM email_subs s JOIN authors a ON a.id = s.author_id
+                             WHERE s.status = 'pending' AND s.reminded_at IS NULL AND s.created_at < ? AND s.created_at > ?`, now - 86400000, now - 7 * 86400000)) {
+      queueMail(sub.email, `Still want ${sub.name}'s new pieces?`, `You asked to get ${sub.name}'s new pieces by email but haven't confirmed yet.\n\nConfirm: ${base}/confirm/${sub.token}\n\nIf you've changed your mind, ignore this. We won't ask again.`, 'reminder');
+      h.run('UPDATE email_subs SET reminded_at = ? WHERE id = ?', now, sub.id);
+    }
+  }
+  setInterval(runJobs, 30000).unref();
+
+  const MEDIA_DIR = dbFile === ':memory:' ? path.join(require('node:os').tmpdir(), `margin-media-${process.pid}`) : path.join(path.dirname(dbFile), 'media');
+  // Accept only formats we can recognize by their first bytes.
+  function sniffImage(buf) {
+    if (buf.length > 8 && buf.readUInt32BE(0) === 0x89504e47) return ['image/png', 'png'];
+    if (buf.length > 3 && buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) return ['image/jpeg', 'jpg'];
+    if (buf.length > 6 && /^GIF8[79]a/.test(buf.toString('latin1', 0, 6))) return ['image/gif', 'gif'];
+    if (buf.length > 12 && buf.toString('latin1', 0, 4) === 'RIFF' && buf.toString('latin1', 8, 12) === 'WEBP') return ['image/webp', 'webp'];
+    return null;
+  }
 
   function currentAuthor(req) {
     const t = auth.parseCookies(req.headers.cookie).ms;
@@ -136,6 +188,10 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   on('GET', /^\/p\/([\w-]+)$/, (req, res, m, ctx) => {
     const post = publishedPost(m[1]);
     if (!post) return html(res, views.notFound({ viewer: ctx.author }), 404);
+    if (ap.wantsActivityJson(req)) {
+      const a = h.get('SELECT * FROM authors WHERE id = ?', post.author_id);
+      return apJson(res, { '@context': 'https://www.w3.org/ns/activitystreams', ...ap.articleJson(baseUrl(req), a, post) });
+    }
     const author = h.get('SELECT id, handle, name, bio, accent, blogroll FROM authors WHERE id = ?', post.author_id);
     const rendered = render(post.body_md);
     const notes = h.all('SELECT id, para, display_name, quote, body, created_at FROM notes WHERE post_id = ? AND hidden = 0 ORDER BY created_at', post.id);
@@ -151,12 +207,14 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   });
 
   on('GET', /^\/@([\w]+)$/, (req, res, m, ctx) => {
-    const author = h.get('SELECT id, handle, name, bio, now_line, accent, blogroll FROM authors WHERE handle = ?', m[1].toLowerCase());
+    const author = h.get('SELECT id, handle, name, bio, now_line, accent, blogroll, created_at FROM authors WHERE handle = ?', m[1].toLowerCase());
     if (!author) return html(res, views.notFound({ viewer: ctx.author }), 404);
+    if (ap.wantsActivityJson(req)) return apJson(res, ap.actorJson(h, baseUrl(req), author));
     const posts = h.all(`SELECT slug, title, dek, words, published_at FROM posts WHERE author_id = ? AND status = 'published' ORDER BY published_at DESC`, author.id);
     const recommendedBy = h.all('SELECT handle, name, blogroll FROM authors WHERE id != ?', author.id)
       .filter((a) => a.blogroll.split('\n').map((l) => l.trim().toLowerCase()).includes('@' + author.handle));
-    html(res, views.authorPage({ author, posts, viewer: ctx.author, blogroll: ring.parseBlogroll(h, author.blogroll), recommendedBy }));
+    html(res, views.authorPage({ author, posts, viewer: ctx.author, blogroll: ring.parseBlogroll(h, author.blogroll), recommendedBy,
+      fediHandle: `@${author.handle}@${new URL(baseUrl(req)).host}` }));
   });
 
   on('GET', /^\/ring$/, (req, res, m, ctx) => html(res, views.ringPage({ ring: ring.ringOrder(h), viewer: ctx.author })));
@@ -285,7 +343,8 @@ ${items}
     if (m[1] === 'new') return html(res, views.editor({ author: ctx.author }));
     const post = h.get('SELECT * FROM posts WHERE id = ? AND author_id = ?', Number(m[1]), ctx.author.id);
     if (!post) return html(res, views.notFound({ viewer: ctx.author }), 404);
-    html(res, views.editor({ author: ctx.author, post }));
+    const q = ctx.url.searchParams;
+    html(res, views.editor({ author: ctx.author, post, notice: q.has('scheduled') ? 'Scheduled. It will go live on its own.' : q.has('saved') ? 'Saved.' : '' }));
   }));
 
   on('POST', /^\/write\/(new|\d+)$/, needAuthor(async (req, res, m, ctx) => {
@@ -293,7 +352,7 @@ ${items}
     const title = String(b.title || '').trim().slice(0, 140);
     const dek = String(b.dek || '').trim().slice(0, 240);
     const body = String(b.body_md || '').slice(0, 200_000);
-    const action = ['save', 'publish', 'unpublish'].includes(b.action) ? b.action : 'save';
+    const action = ['save', 'publish', 'unpublish', 'schedule', 'unschedule'].includes(b.action) ? b.action : 'save';
     const now = Date.now();
     let post = m[1] === 'new' ? null : h.get('SELECT * FROM posts WHERE id = ? AND author_id = ?', Number(m[1]), ctx.author.id);
     if (m[1] !== 'new' && !post) return html(res, views.notFound({ viewer: ctx.author }), 404);
@@ -308,19 +367,17 @@ ${items}
       const slug = post.status === 'published' || post.published_at ? post.slug : slugify(title, post.id);
       h.run('UPDATE posts SET title = ?, dek = ?, body_md = ?, words = ?, slug = ?, updated_at = ? WHERE id = ?', title, dek, body, words, slug, now, post.id);
     }
-    const firstPublish = action === 'publish' && !post.published_at;
-    if (action === 'publish') h.run(`UPDATE posts SET status = 'published', published_at = coalesce(published_at, ?) WHERE id = ?`, now, post.id);
-    if (firstPublish) {
-      const base = baseUrl(req);
-      const fresh0 = h.get('SELECT slug, title, dek FROM posts WHERE id = ?', post.id);
-      for (const sub of h.all(`SELECT email, token FROM email_subs WHERE author_id = ? AND status = 'active'`, ctx.author.id)) {
-        queueMail(sub.email, `New from ${ctx.author.name}: ${fresh0.title}`,
-          `${fresh0.title}\n${fresh0.dek}\n\nRead it: ${base}/p/${fresh0.slug}?via=follow\n\nYou get this because you asked for ${ctx.author.name}'s new pieces. One click stops it: ${base}/unsubscribe/${sub.token}`, 'new-post');
+    if (action === 'publish') publishNow(post.id, baseUrl(req));
+    if (action === 'schedule') {
+      const at = Date.parse(String(b.publish_at || ''));
+      if (!Number.isFinite(at) || at < now + 60000) {
+        return html(res, views.editor({ author: ctx.author, post: h.get('SELECT * FROM posts WHERE id = ?', post.id), error: 'Pick a time at least a minute from now.' }), 400);
       }
+      h.run(`UPDATE posts SET status = 'scheduled', publish_at = ? WHERE id = ?`, at, post.id);
     }
-    if (action === 'unpublish') h.run(`UPDATE posts SET status = 'draft' WHERE id = ?`, post.id);
+    if (action === 'unpublish' || action === 'unschedule') h.run(`UPDATE posts SET status = 'draft', publish_at = NULL WHERE id = ?`, post.id);
     const fresh = h.get('SELECT * FROM posts WHERE id = ?', post.id);
-    redirect(res, action === 'publish' ? `/p/${fresh.slug}` : `/write/${fresh.id}`);
+    redirect(res, action === 'publish' ? `/p/${fresh.slug}` : `/write/${fresh.id}${action === 'schedule' ? '?scheduled=1' : '?saved=1'}`);
   }));
 
   // ----- anonymous reading signals -----
@@ -541,11 +598,86 @@ ${items}
     redirect(res, '/dashboard#notes');
   }));
 
+  // ---------- writer tools: autosave, uploads, test hooks ----------
+  on('POST', /^\/write\/(\d+)\/autosave$/, needAuthor(async (req, res, m, ctx) => {
+    const b = await readBody(req, 300_000);
+    const post = h.get('SELECT * FROM posts WHERE id = ? AND author_id = ?', Number(m[1]), ctx.author.id);
+    if (!post) return json(res, { ok: false }, 404);
+    // Autosave never publishes and never touches a published piece's live text.
+    if (post.status === 'published') return json(res, { ok: false, reason: 'published' }, 409);
+    const body = String(b.body_md ?? post.body_md).slice(0, 200_000);
+    h.run('UPDATE posts SET title = ?, dek = ?, body_md = ?, words = ?, updated_at = ? WHERE id = ?',
+      String(b.title ?? post.title).trim().slice(0, 140) || post.title, String(b.dek ?? post.dek).trim().slice(0, 240), body, render(body).words, Date.now(), post.id);
+    json(res, { ok: true, savedAt: Date.now() });
+  }));
+
+  on('POST', /^\/desk\/upload$/, needAuthor(async (req, res, m, ctx) => {
+    const buf = await readRaw(req, 5 * 1024 * 1024);
+    const kind = sniffImage(buf);
+    if (!kind) return json(res, { ok: false, error: 'Use a PNG, JPEG, GIF or WebP image under 5 MB.' }, 400);
+    const file = `${crypto.createHash('sha256').update(buf).digest('hex').slice(0, 24)}.${kind[1]}`;
+    fs.mkdirSync(MEDIA_DIR, { recursive: true });
+    const dest = path.join(MEDIA_DIR, file);
+    if (!fs.existsSync(dest)) fs.writeFileSync(dest, buf);
+    h.run('INSERT OR IGNORE INTO media (author_id, file, mime, bytes, created_at) VALUES (?,?,?,?,?)', ctx.author.id, file, kind[0], buf.length, Date.now());
+    json(res, { ok: true, url: `/media/${file}` });
+  }));
+
+  on('GET', /^\/media\/([a-f0-9]{24}\.(png|jpg|gif|webp))$/, (req, res, m) => {
+    const row = h.get('SELECT mime FROM media WHERE file = ?', m[1]);
+    const file = path.join(MEDIA_DIR, m[1]);
+    if (!row || !fs.existsSync(file)) return send(res, 404, 'not found');
+    send(res, 200, fs.readFileSync(file), { 'Content-Type': row.mime, 'Cache-Control': 'public, max-age=31536000, immutable', 'Content-Security-Policy': "default-src 'none'; img-src 'self'" });
+  });
+
+  // ---------- fediverse ----------
+  on('GET', /^\/\.well-known\/webfinger$/, (req, res, m, ctx) => {
+    const doc = ap.webfinger(h, baseUrl(req), ctx.url.searchParams.get('resource'));
+    if (!doc) return json(res, { error: 'not found' }, 404);
+    apJson(res, doc, 200, 'application/jrd+json');
+  });
+  const apAuthor = (handle) => h.get('SELECT * FROM authors WHERE handle = ?', handle);
+  on('GET', /^\/ap\/users\/([a-z0-9_]+)$/, (req, res, m) => {
+    const a = apAuthor(m[1]);
+    return a ? apJson(res, ap.actorJson(h, baseUrl(req), a)) : json(res, { error: 'not found' }, 404);
+  });
+  on('GET', /^\/ap\/users\/([a-z0-9_]+)\/outbox$/, (req, res, m) => {
+    const a = apAuthor(m[1]);
+    return a ? apJson(res, ap.outboxJson(h, baseUrl(req), a)) : json(res, { error: 'not found' }, 404);
+  });
+  on('GET', /^\/ap\/users\/([a-z0-9_]+)\/followers$/, (req, res, m) => {
+    const a = apAuthor(m[1]);
+    return a ? apJson(res, ap.followersJson(h, baseUrl(req), a)) : json(res, { error: 'not found' }, 404);
+  });
+  on('GET', /^\/ap\/posts\/(\d+)$/, (req, res, m) => {
+    const post = h.get(`SELECT * FROM posts WHERE id = ? AND status = 'published'`, Number(m[1]));
+    if (!post) return json(res, { error: 'not found' }, 404);
+    apJson(res, { '@context': 'https://www.w3.org/ns/activitystreams', ...ap.articleJson(baseUrl(req), h.get('SELECT * FROM authors WHERE id = ?', post.author_id), post) });
+  });
+  const inbox = async (req, res, m) => {
+    const raw = await readRaw(req, 256 * 1024);
+    let activity;
+    try { activity = JSON.parse(raw.toString('utf8')); } catch { return json(res, { error: 'bad json' }, 400); }
+    // Sign our key fetches as the writer being addressed (or any writer, for the shared inbox).
+    const target = (m && m[1] && apAuthor(m[1])) || h.get('SELECT * FROM authors ORDER BY id LIMIT 1');
+    const base = baseUrl(req);
+    try {
+      const signer = await fed.verifyInbox(req, raw, fed.signerFor(base, target));
+      const result = fed.receive(base, activity, signer);
+      json(res, { ok: true, result }, 202);
+    } catch (e) {
+      json(res, { error: String(e.message || e) }, 401);
+    }
+  };
+  on('POST', /^\/ap\/users\/([a-z0-9_]+)\/inbox$/, inbox);
+  on('POST', /^\/ap\/inbox$/, inbox);
+
   // ---------- dispatcher ----------
   async function handle(req, res) {
     const url = new URL(req.url, 'http://x');
     const ip = req.socket.remoteAddress || '';
     const ctx = { url, author: currentAuthor(req), proto: req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http' };
+    if (req.headers.host) lastBase = `${ctx.proto}://${req.headers.host}`;
     if (req.method === 'POST' && url.pathname.startsWith('/api/') && limited(ip)) return json(res, { ok: false, error: 'Slow down a little.' }, 429);
     if (req.method === 'POST' && (url.pathname === '/login' || url.pathname === '/signup') && limited('auth:' + ip, 20)) return html(res, views.notFound({}), 429);
     const method = req.method === 'HEAD' ? 'GET' : req.method;
@@ -564,7 +696,7 @@ ${items}
       if (!res.headersSent) json(res, { ok: false, error: status === 500 ? 'Something broke.' : e.message }, status);
     });
   });
-  return { server, h };
+  return { server, h, fed, runJobs };
 }
 
 module.exports = { createApp };

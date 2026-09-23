@@ -36,6 +36,23 @@ Desk research done to revise Margin, not user research. **Method limits:** a net
 | Open rates are broken: Apple Mail had ~49% of opens and inflates them. Medium measures reading time instead | https://www.beehiiv.com/blog/apple-mpp-open-rate ; https://help.medium.com/hc/en-us/articles/360036691193 |
 | Stripe's 2.9% + 30¢ takes 8.8% of a $5 tip and ~18% of a $2 tip. No public tip conversion data | https://checkoutpage.com/blog/stripe-processing-fees |
 
+## Usability, by persona (round 2)
+
+| Finding | Persona | Source |
+|---|---|---|
+| Presbyopia affects >80% of Americans by 45 and ~100% from ~52. ~128M US presbyopes | R2 | AOA · https://www.aoa.org/news/clinical-eye-care/diseases-and-conditions/for-128-million-us-presbyopes-doctors-of-optometry-can-provide-treatment-options |
+| 16px is the floor for body text; larger helps older users (18px for 50+ *(unverified: secondary)*) | R2 | NN/g via https://www.greadme.com/blog/seo/best-font-sizes-for-readability-complete-guide |
+| ~55 characters per line read most easily on screen (Dyson & Kipping 1998; Dyson & Haselgrove 2001) | R2 | https://www.sciencedirect.com/science/article/abs/pii/S1071581901904586 |
+| 30–40%+ of iOS users change the default text size *(unverified: developer blogs)* | R2 | https://lickability.com/blog/dynamic-type-and-in-app-font-scaling/ |
+| iOS Safari's selection menu can't be suppressed, and custom tooltips "fight" it. Android's floating toolbar sits over content | R2, R3 | https://discuss.prosemirror.net/t/how-to-disable-the-mobile-safari-selection-menu/2581 |
+| Readwise Reader on mobile: double-tap a paragraph to highlight it | R2 | https://docs.readwise.io/reader/docs/faqs/highlights-tags-notes |
+| Double opt-in: Mailchimp saw ~61% never confirm and switched to single opt-in (2017). Beehiiv sends a "Smart Nudge" reminder | R1 → follower | https://mjtsai.com/blog/2017/11/21/mailchimp-switches-to-single-opt-in/ ; https://www.beehiiv.com/support/article/13081072798743-how-to-enable-double-opt-in-and-smart-nudge |
+| Dark text on light reads and proofreads better, for young and old readers, especially at small sizes. NN/g: follow the OS setting, and offer a switch | R2 | https://pubmed.ncbi.nlm.nih.gov/25135324/ ; https://www.nngroup.com/articles/dark-mode/ |
+| Monospace prose reads more slowly; fine for short labels | all | https://practicaltypography.com/monospaced-fonts.html |
+| Substack's 2023 "Follow" (no email) confused readers, and writers had to explain that "follow ≠ newsletter" | R1, R2, W3 | https://techcrunch.com/2023/08/15/substack-expands-further-into-social-networking-with-a-new-follow-button/ |
+| Writers complain about drafts not syncing or getting lost, and about Substack's lack of tables and footnotes. No ranked survey found | W1–W3 | https://postolithic.substack.com/p/substack-mobile-vs-desktop-what-gives |
+| No peer-reviewed evidence that reading progress bars raise completion | R1 | (searched; nothing found) |
+
 ## What this changed
 
 See [DESIGN.md §0](DESIGN.md#0-what-v3-changed-and-why).

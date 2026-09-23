@@ -9,9 +9,16 @@ function esc(s) {
   ));
 }
 
-function inline(src) {
+// Images may only come from Margin's own /media/ store. Hotlinked images
+// would hand every reader's IP address to a third party.
+const IMG = /!\[([^\]]*)\]\((\/media\/[\w.-]+)\)/g;
+
+function inline(src, fn) {
   let out = esc(src);
   out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
+  out = out.replace(IMG, (m, alt, url) => `<img src="${url}" alt="${alt}" loading="lazy" decoding="async">`);
+  out = out.replace(/!\[([^\]]*)\]\((https?:\/\/[^)\s]+)\)/g, (m, alt, url) => `[Image: ${alt || 'external'}](${url})`);
+  if (fn) out = out.replace(/\[\^([\w-]{1,20})\]/g, (m, id) => fn(id) || m);
   out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   out = out.replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?!\w)/g, '$1<em>$2</em>');
   out = out.replace(/(^|[^\w])_([^_\s][^_]*?)_(?!\w)/g, '$1<em>$2</em>');
@@ -25,6 +32,8 @@ function inline(src) {
 
 function plain(src) {
   return String(src)
+    .replace(IMG, '$1')
+    .replace(/\[\^[\w-]{1,20}\]/g, '')
     .replace(/`([^`]+)`/g, '$1')
     .replace(/\*\*([^*]+)\*\*/g, '$1')
     .replace(/\*([^*]+)\*/g, '$1')
@@ -34,7 +43,21 @@ function plain(src) {
 
 // Returns { html, blocks: [{ i, kind, text, words }], words }
 function render(md) {
-  const lines = String(md || '').replace(/\r\n?/g, '\n').split('\n');
+  // Footnote definitions ("[^1]: text") are pulled out first and listed at the end.
+  const defs = new Map();
+  const lines = String(md || '').replace(/\r\n?/g, '\n').split('\n').filter((l) => {
+    const m = l.match(/^\[\^([\w-]{1,20})\]:\s+(.*)$/);
+    if (m) { defs.set(m[1], m[2]); return false; }
+    return true;
+  });
+  const used = [];
+  const fn = (id) => {
+    if (!defs.has(id)) return null;
+    let n = used.indexOf(id) + 1;
+    if (!n) { used.push(id); n = used.length; }
+    return `<sup class="fnref"><a href="#fn-${esc(id)}" id="fnref-${esc(id)}-${n}" aria-label="Footnote ${n}">${n}</a></sup>`;
+  };
+  const inl = (t) => inline(t, fn);
   const html = [];
   const blocks = [];
   let para = [];
@@ -51,14 +74,17 @@ function render(md) {
   const flushPara = () => {
     if (!para.length) return;
     const text = para.join(' ');
-    const i = addBlock('p', text);
-    html.push(`<p data-p="${i}">${inline(text)}</p>`);
+    const fig = text.match(/^!\[([^\]]*)\]\((\/media\/[\w.-]+)\)$/);
+    const i = addBlock(fig ? 'img' : 'p', text);
+    html.push(fig
+      ? `<figure data-p="${i}"><img src="${fig[2]}" alt="${esc(fig[1])}" loading="lazy" decoding="async">${fig[1] ? `<figcaption>${esc(fig[1])}</figcaption>` : ''}</figure>`
+      : `<p data-p="${i}">${inl(text)}</p>`);
     para = [];
   };
   const flushList = () => {
     if (!list) return;
     const tag = list.ordered ? 'ol' : 'ul';
-    const items = list.items.map((t) => `<li data-p="${addBlock('li', t)}">${inline(t)}</li>`);
+    const items = list.items.map((t) => `<li data-p="${addBlock('li', t)}">${inl(t)}</li>`);
     html.push(`<${tag}>${items.join('')}</${tag}>`);
     list = null;
   };
@@ -66,7 +92,7 @@ function render(md) {
     if (!quote.length) return;
     const text = quote.join(' ');
     const i = addBlock('quote', text);
-    html.push(`<blockquote data-p="${i}"><p>${inline(text)}</p></blockquote>`);
+    html.push(`<blockquote data-p="${i}"><p>${inl(text)}</p></blockquote>`);
     quote = [];
   };
   const flushAll = () => { flushPara(); flushList(); flushQuote(); };
@@ -86,7 +112,7 @@ function render(md) {
       flushAll();
       const level = Math.min(m[1].length + 1, 4); // # -> h2; the title owns h1
       const i = addBlock('h', m[2]);
-      html.push(`<h${level} data-p="${i}">${inline(m[2])}</h${level}>`);
+      html.push(`<h${level} data-p="${i}">${inl(m[2])}</h${level}>`);
       continue;
     }
     if (/^(-{3,}|\*{3,})\s*$/.test(line)) { flushAll(); html.push('<hr>'); continue; }
@@ -104,6 +130,10 @@ function render(md) {
   }
   if (code) html.push(`<pre><code>${esc(code.join('\n'))}</code></pre>`);
   flushAll();
+  if (used.length) {
+    html.push(`<section class="footnotes" aria-label="Footnotes"><ol>${used.map((id) =>
+      `<li id="fn-${esc(id)}">${inline(defs.get(id))} <a href="#fnref-${esc(id)}-${used.indexOf(id) + 1}" aria-label="Back to text">↩</a></li>`).join('')}</ol></section>`);
+  }
 
   const words = blocks.reduce((n, b) => n + b.words, 0);
   return { html: html.join('\n'), blocks, words };

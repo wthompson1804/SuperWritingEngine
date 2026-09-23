@@ -131,6 +131,41 @@ CREATE TABLE IF NOT EXISTS mail (
   kind TEXT NOT NULL,
   created_at INTEGER NOT NULL
 );
+-- Fediverse: remote followers, cached remote actors, outbound delivery queue.
+CREATE TABLE IF NOT EXISTS ap_followers (
+  id INTEGER PRIMARY KEY,
+  author_id INTEGER NOT NULL REFERENCES authors(id),
+  actor TEXT NOT NULL,
+  inbox TEXT NOT NULL,
+  created_at INTEGER NOT NULL,
+  UNIQUE (author_id, actor)
+);
+CREATE TABLE IF NOT EXISTS ap_actors (
+  key_id TEXT PRIMARY KEY,
+  actor TEXT NOT NULL,
+  doc TEXT NOT NULL,
+  fetched_at INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS ap_deliveries (
+  id INTEGER PRIMARY KEY,
+  author_id INTEGER NOT NULL REFERENCES authors(id),
+  inbox TEXT NOT NULL,
+  body TEXT NOT NULL,
+  attempts INTEGER NOT NULL DEFAULT 0,
+  next_at INTEGER NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending',
+  last_error TEXT,
+  created_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ap_deliveries_due ON ap_deliveries(status, next_at);
+CREATE TABLE IF NOT EXISTS media (
+  id INTEGER PRIMARY KEY,
+  author_id INTEGER NOT NULL REFERENCES authors(id),
+  file TEXT UNIQUE NOT NULL,
+  mime TEXT NOT NULL,
+  bytes INTEGER NOT NULL,
+  created_at INTEGER NOT NULL
+);
 CREATE TABLE IF NOT EXISTS outbox (
   id INTEGER PRIMARY KEY,
   reader_id INTEGER NOT NULL REFERENCES readers(id),
@@ -160,6 +195,10 @@ const COLUMNS = [
   ['notes', 'hidden', 'INTEGER NOT NULL DEFAULT 0'],
   ['notes', 'flags', 'INTEGER NOT NULL DEFAULT 0'],
   ['posts', 'imported_from', "TEXT NOT NULL DEFAULT ''"],
+  ['authors', 'ap_public_key', "TEXT NOT NULL DEFAULT ''"],
+  ['posts', 'publish_at', 'INTEGER'],
+  ['email_subs', 'reminded_at', 'INTEGER'],
+  ['authors', 'ap_private_key', "TEXT NOT NULL DEFAULT ''"],
 ];
 function migrate(db) {
   for (const [table, col, def] of COLUMNS) {

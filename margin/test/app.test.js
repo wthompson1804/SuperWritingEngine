@@ -365,3 +365,62 @@ test('passed-on links preview the passage; brief has RSS', async () => {
   const items = (await rss.text()).match(/<item>/g) || [];
   assert.ok(items.length >= 1 && items.length <= 5);
 });
+
+// ---------------- v4: writer tools ----------------
+test('footnotes and uploaded images render; hotlinked images do not', () => {
+  const r = render('A claim.[^1]\n\n![Chart](/media/0123456789abcdef01234567.png)\n\n![x](https://tracker.example/p.gif)\n\n[^1]: The source.');
+  assert.match(r.html, /<sup class="fnref"><a href="#fn-1"/);
+  assert.match(r.html, /<section class="footnotes"[\s\S]*The source\./);
+  assert.match(r.html, /<figure data-p="1"><img src="\/media\/0123456789abcdef01234567.png" alt="Chart"/);
+  assert.ok(!/<img[^>]+tracker\.example/.test(r.html), 'external images become links');
+  assert.ok(!r.blocks.some((b) => b.text.includes('[^1]')));
+});
+
+test('image upload: sniffed by content, served with a locked-down CSP', async () => {
+  const cookie = await loginAs('mara');
+  const png = Buffer.from('89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c4890000000d4944415478da63f8ffff3f0005fe02fea7d6a4a10000000049454e44ae426082', 'hex');
+  const up = await (await fetch(base + '/desk/upload', { method: 'POST', headers: { Cookie: cookie, 'Content-Type': 'image/png' }, body: png })).json();
+  assert.match(up.url, /^\/media\/[a-f0-9]{24}\.png$/);
+  const img = await fetch(base + up.url);
+  assert.equal(img.headers.get('content-type'), 'image/png');
+  assert.match(img.headers.get('content-security-policy'), /default-src 'none'/);
+  const fake = await fetch(base + '/desk/upload', { method: 'POST', headers: { Cookie: cookie }, body: Buffer.from('<svg onload=alert(1)>') });
+  assert.equal(fake.status, 400);
+  assert.equal((await fetch(base + '/desk/upload', { method: 'POST', redirect: 'manual', body: png })).status, 303, 'writers only');
+});
+
+test('autosave keeps drafts safe and never touches published text', async () => {
+  const cookie = await loginAs('mara');
+  const d = await formPost('/write/new', { title: 'Autosaved', dek: '', body_md: 'v1', action: 'save' }, cookie);
+  const id = d.headers.get('location').match(/\/write\/(\d+)/)[1];
+  const r = await (await fetch(`${base}/write/${id}/autosave`, { method: 'POST', headers: { Cookie: cookie, 'Content-Type': 'application/json' }, body: JSON.stringify({ title: 'Autosaved', body_md: 'v2 typed' }) })).json();
+  assert.equal(r.ok, true);
+  assert.equal(app.h.get('SELECT body_md FROM posts WHERE id = ?', Number(id)).body_md, 'v2 typed');
+  const pub = app.h.get(`SELECT id FROM posts WHERE slug = 'the-meeting-is-the-work-now'`).id;
+  const blocked = await fetch(`${base}/write/${pub}/autosave`, { method: 'POST', headers: { Cookie: cookie, 'Content-Type': 'application/json' }, body: JSON.stringify({ body_md: 'oops' }) });
+  assert.equal(blocked.status, 409);
+  const theo = await loginAs('theo');
+  assert.equal((await fetch(`${base}/write/${id}/autosave`, { method: 'POST', headers: { Cookie: theo, 'Content-Type': 'application/json' }, body: '{}' })).status, 404);
+});
+
+test('scheduled publishing goes live on time and notifies once', async () => {
+  const cookie = await loginAs('ravi');
+  await post('/api/subscribe', { handle: 'ravi', email: 'sched@example.org' });
+  await fetch(base + app.h.get(`SELECT token FROM email_subs WHERE email = 'sched@example.org'`).token.replace(/^/, '/confirm/'));
+  const soon = new Date(Date.now() + 5 * 60000).toISOString();
+  const r = await formPost('/write/new', { title: 'Later Piece', dek: '', body_md: 'Soon.', action: 'schedule', publish_at: soon }, cookie);
+  assert.match(r.headers.get('location'), /scheduled=1/);
+  assert.equal((await fetch(base + '/p/later-piece')).status, 404);
+  assert.equal((await formPost('/write/new', { title: 'Past', body_md: 'x', action: 'schedule', publish_at: '2001-01-01T00:00' }, cookie)).status, 400);
+  app.runJobs(Date.now() + 10 * 60000);
+  assert.equal((await fetch(base + '/p/later-piece')).status, 200);
+  app.runJobs(Date.now() + 20 * 60000);
+  assert.equal(app.h.get(`SELECT count(*) n FROM mail WHERE to_email = 'sched@example.org' AND kind = 'new-post'`).n, 1);
+});
+
+test('unconfirmed email follows get exactly one reminder', async () => {
+  await post('/api/subscribe', { handle: 'mara', email: 'slow@example.org' });
+  app.h.run(`UPDATE email_subs SET created_at = ? WHERE email = 'slow@example.org'`, Date.now() - 2 * 86400000);
+  app.runJobs(); app.runJobs();
+  assert.equal(app.h.get(`SELECT count(*) n FROM mail WHERE to_email = 'slow@example.org' AND kind = 'reminder'`).n, 1);
+});

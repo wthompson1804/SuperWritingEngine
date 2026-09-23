@@ -2,3 +2,4 @@ data/*.db
 data/*.db-*
 data/outbox/
 node_modules/
+data/media/

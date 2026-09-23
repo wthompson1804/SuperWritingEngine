@@ -145,7 +145,7 @@ function authorDashboard(h, authorId) {
                       WHERE p.author_id = ? GROUP BY a.kind, a.event`, authorId);
   const funnel = {};
   for (const r of asks) (funnel[r.kind] ||= { shown: 0, accepted: 0 })[r.event] = r.n;
-  const drafts = h.all(`SELECT id, slug, title, updated_at FROM posts WHERE author_id = ? AND status = 'draft' ORDER BY updated_at DESC`, authorId);
+  const drafts = h.all(`SELECT id, slug, title, status, publish_at, updated_at FROM posts WHERE author_id = ? AND status IN ('draft', 'scheduled') ORDER BY status DESC, updated_at DESC`, authorId);
   const sources = h.all(`SELECT v.source, count(*) AS n FROM views v JOIN posts p ON p.id = v.post_id
                          WHERE p.author_id = ? GROUP BY v.source ORDER BY n DESC`, authorId);
   const now = h.get(`SELECT count(*) AS n FROM views v JOIN posts p ON p.id = v.post_id WHERE p.author_id = ? AND v.seen_at > ?`, authorId, Date.now() - 90000).n;
@@ -162,7 +162,8 @@ function authorDashboard(h, authorId) {
                           WHERE f.author_id = ? AND f.delta > 0 GROUP BY a.id ORDER BY n DESC`, authorId);
   const notesList = h.all(`SELECT n.id, n.body, n.quote, n.display_name, n.hidden, n.flags, n.created_at, p.slug, p.title
                            FROM notes n JOIN posts p ON p.id = n.post_id WHERE p.author_id = ? ORDER BY n.flags DESC, n.created_at DESC LIMIT 50`, authorId);
-  return { posts, followers, keyedFollowers, list, funnel, drafts, sources, now, recommendedBy, emailSubs, emailPending, sent, received, notesList };
+  const fedi = h.get('SELECT count(*) AS n FROM ap_followers WHERE author_id = ?', authorId).n;
+  return { posts, followers, keyedFollowers, list, funnel, drafts, sources, now, recommendedBy, emailSubs, emailPending, sent, received, notesList, fedi };
 }
 
 // Per-paragraph view of one piece: how many readers reached it and how many kept it.

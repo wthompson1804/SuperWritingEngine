@@ -48,6 +48,7 @@ ${og.url ? h`<meta property="og:url" content="${og.url}"><link rel="canonical" h
 <meta name="twitter:card" content="summary">` : ''}
 <link rel="preload" href="/static/fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/static/style.css">
+<script src="/static/prefs.js"></script>
 <link rel="alternate" type="application/rss+xml" title="Margin" href="/feed.xml">
 </head>
 <body${raw(accent ? ` class="acc-${esc(accent)}"` : '')}>
@@ -56,12 +57,25 @@ ${og.url ? h`<meta property="og:url" content="${og.url}"><link rel="canonical" h
   <div class="site-inner">
     <a class="brand" href="/" aria-label="Margin, home"><span class="pilcrow" aria-hidden="true">¶</span>Margin</a>
     <p class="addr" aria-hidden="true">margin<span>${path}</span></p>
+    <button class="aa" type="button" id="aa-btn" aria-expanded="false" aria-controls="aa-panel" title="Text size and theme">Aa</button>
     <nav aria-label="Site">
       ${NAV.map(([href, label, key]) => h`<a href="${href}"${raw(active === key ? ' aria-current="page"' : '')}>${label}</a>`)}
       ${author ? h`<a href="/dashboard"${raw(active === 'dashboard' ? ' aria-current="page"' : '')}>desk</a>` : h`<a href="/write"${raw(active === 'write' ? ' aria-current="page"' : '')}>write</a>`}
     </nav>
   </div>
 </header>
+<div class="aa-panel box" id="aa-panel" hidden role="dialog" aria-label="Reading settings">
+  <p class="bar"><span>reading settings</span><button type="button" class="link" id="aa-close" aria-label="Close">×</button></p>
+  <div class="box-body">
+    <fieldset><legend>Text size</legend><div class="seg" data-pref="size">
+      <button type="button" data-v="s">A−</button><button type="button" data-v="m">A</button><button type="button" data-v="l">A+</button><button type="button" data-v="xl">A++</button>
+    </div></fieldset>
+    <fieldset><legend>Theme</legend><div class="seg" data-pref="theme">
+      <button type="button" data-v="system">System</button><button type="button" data-v="light">Light</button><button type="button" data-v="dark">Dark</button>
+    </div></fieldset>
+    <p class="small muted">Saved in this browser only.</p>
+  </div>
+</div>
 <main id="main">${body}</main>
 <footer class="site">
   <div class="site-inner">
@@ -238,7 +252,7 @@ function article({ post, author, rendered, notes, topKeep, keepCounts, next, vie
   });
 }
 
-function authorPage({ author, posts, viewer, blogroll, recommendedBy }) {
+function authorPage({ author, posts, viewer, blogroll, recommendedBy, fediHandle }) {
   return layout({
     title: author.name, author: viewer, scripts: ['author.js'], accent: author.accent, path: `/@${author.handle}`,
     data: { handle: author.handle, name: author.name, hasRecs: blogroll.some((b) => b.kind === 'writer') },
@@ -249,17 +263,22 @@ function authorPage({ author, posts, viewer, blogroll, recommendedBy }) {
     <h1>${author.name}</h1>
     ${author.bio ? h`<p class="lede">${author.bio}</p>` : ''}
     ${author.now_line ? h`<p class="now-line">${author.now_line}</p>` : ''}
-    <div class="row">
-      <button class="btn primary" type="button" id="follow-btn" data-handle="${author.handle}" aria-pressed="false">Follow</button>
-      <a class="btn" href="/feed.xml?author=${author.handle}">RSS</a>
+    <div class="follow-ways">
+      <h2 class="label">Get ${author.name.split(' ')[0]}’s new pieces</h2>
+      <div class="way">
+        <button class="btn primary" type="button" id="follow-btn" data-handle="${author.handle}" aria-pressed="false">Follow here</button>
+        <p class="small muted">They appear at the top of Today in this browser. No account, no email.</p>
+      </div>
+      <form class="way email-follow" id="email-follow" data-handle="${author.handle}">
+        <label class="sr-only" for="ef-email">Your email</label>
+        <div class="row"><input id="ef-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email"><button class="btn" type="submit">Email me new pieces</button></div>
+        <p class="small muted" id="ef-msg" aria-live="polite">Only ${author.name}’s pieces, after you confirm. One-click unsubscribe.</p>
+      </form>
+      ${fediHandle ? h`<div class="way">
+        <p class="small"><strong>On Mastodon, Threads or another fediverse app?</strong> Search for <code class="fedi" id="fedi-handle">${fediHandle}</code> and follow. <button type="button" class="link small" id="copy-fedi">copy</button></p>
+      </div>` : ''}
+      <p class="small mono"><a href="/feed.xml?author=${author.handle}">rss feed</a></p>
     </div>
-    <p class="small muted">Following needs no account. It’s remembered in this browser.</p>
-    <form class="email-follow row" id="email-follow" data-handle="${author.handle}">
-      <label class="sr-only" for="ef-email">Email</label>
-      <input id="ef-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email">
-      <button class="btn" type="submit">Email me new pieces</button>
-    </form>
-    <p class="small muted" id="ef-msg" aria-live="polite">Only ${author.name}’s new pieces, and only after you confirm. One-click unsubscribe. No account.</p>
     <div id="recs"></div>
   </section>
   <section class="hp-posts">
@@ -463,7 +482,7 @@ ${dash.posts.length ? h`<div class="table-wrap" tabindex="0" role="region" aria-
     <td>${p.keeps}</td><td>${p.passes}</td><td>${p.follows}</td><td>${p.notes}</td><td>${money(p.tip_cents)}</td></tr>`)}
   </tbody>
 </table></div>` : h`<p class="empty">Nothing published yet. <a href="/write/new">Write your first piece.</a></p>`}
-${dash.drafts.length ? h`<h2>Drafts</h2><ul class="plain">${dash.drafts.map((d) => h`<li><a href="/write/${d.id}">${d.title || 'Untitled'}</a> <span class="muted small">saved ${fmtDate(d.updated_at)}</span></li>`)}</ul>` : ''}
+${dash.drafts.length ? h`<h2>Drafts &amp; scheduled</h2><ul class="plain">${dash.drafts.map((d) => h`<li><a href="/write/${d.id}">${d.title || 'Untitled'}</a> <span class="muted small">${d.status === 'scheduled' ? h`<strong>scheduled</strong> for ${new Date(d.publish_at).toUTCString()}` : `saved ${fmtDate(d.updated_at)}`}</span></li>`)}</ul>` : ''}
 
 <div class="two-col">
   <section>
@@ -491,6 +510,7 @@ ${dash.drafts.length ? h`<h2>Drafts</h2><ul class="plain">${dash.drafts.map((d) 
       ${stat(dash.emailSubs, 'email followers')}
       ${stat(dash.emailPending, 'awaiting confirmation')}
       ${stat(dash.list.length, 'reader-key followers sharing email')}
+      ${stat(dash.fedi, 'fediverse followers')}
     </div>
     <div class="row"><a class="btn" href="/dashboard/list.csv">Export list (CSV)</a></div>
   </section>
@@ -566,27 +586,46 @@ function postDetail({ author, post, stats, paras }) {
   });
 }
 
-function editor({ author, post, error }) {
+function editor({ author, post, error, notice }) {
   const p = post || { id: 'new', title: '', dek: '', body_md: '', status: 'draft', slug: '' };
   return layout({
     title: p.id === 'new' ? 'New piece' : `Edit: ${p.title}`, author, active: 'dashboard', scripts: ['write.js'], accent: author.accent, path: '/desk/write',
+    data: { id: p.id, status: p.status },
     body: h`
 <section class="editor">
-  <p class="small mono"><a href="/dashboard">← desk</a> ${p.status === 'published' ? h`· <a href="/p/${p.slug}">view published</a>` : ''}</p>
+  <p class="small mono"><a href="/dashboard">← desk</a> ${p.status === 'published' ? h`· <a href="/p/${p.slug}">view published</a>` : ''}
+    <span class="save-state" id="save-state" aria-live="polite">${p.status === 'published' ? 'published: changes go live when you press Update' : p.id === 'new' ? 'not saved yet' : 'saved'}</span></p>
   ${error ? h`<p class="error" role="alert">${error}</p>` : ''}
+  ${notice ? h`<p class="ok" role="status">${notice}</p>` : ''}
+  ${p.status === 'scheduled' ? h`<p class="scheduled-note">Scheduled for <strong><time class="local-time" datetime="${new Date(p.publish_at).toISOString()}">${new Date(p.publish_at).toUTCString()}</time></strong>.</p>` : ''}
   <form method="post" action="/write/${String(p.id)}" class="stack" id="editor-form">
     <label>Title <input name="title" required maxlength="140" value="${p.title}" class="title-input"></label>
     <label>Dek <span class="small muted">One sentence that goes under the title.</span><input name="dek" maxlength="240" value="${p.dek}"></label>
     <div class="editor-grid">
-      <label>Body <span class="small muted">Markdown: ## heading, *italic*, **bold**, &gt; quote, - list, [link](https://…)</span>
-        <textarea name="body_md" id="body_md" rows="24">${p.body_md}</textarea></label>
+      <div class="stack">
+        <label>Body <span class="small muted">Markdown: ## heading, *italic*, **bold**, &gt; quote, - list, [link](https://…), footnote[^1] with a line “[^1]: note”</span>
+          <textarea name="body_md" id="body_md" rows="24">${p.body_md}</textarea></label>
+        <div class="row tools">
+          <label class="btn file-btn">Add image<input type="file" id="image-file" accept="image/png,image/jpeg,image/gif,image/webp"></label>
+          <span class="small muted" id="upload-state" aria-live="polite">Or paste or drop an image into the text. Images are stored on Margin, never hotlinked.</span>
+        </div>
+      </div>
       ${box('draft check', h`<p class="muted small">Based on the SuperWritingEngine voice spec. It’s advice only and never blocks publishing.</p><div id="check-results" aria-live="polite"><p class="muted small">Start writing…</p></div>`, 'checks')}
     </div>
-    <div class="row">
+    <div class="row publish-row">
       <button class="btn" name="action" value="save">Save draft</button>
-      <button class="btn primary" name="action" value="publish">${p.status === 'published' ? 'Update' : 'Publish'}</button>
+      <button class="btn primary" name="action" value="publish">${p.status === 'published' ? 'Update' : 'Publish now'}</button>
       ${p.status === 'published' ? h`<button class="btn danger" name="action" value="unpublish">Unpublish</button>` : ''}
     </div>
+    ${p.status !== 'published' ? h`<details class="schedule"${raw(p.status === 'scheduled' ? ' open' : '')}>
+      <summary>Schedule instead</summary>
+      <div class="row">
+        <label>Publish at <span class="small muted">(your local time)</span><input type="datetime-local" name="publish_at" id="publish_at" data-ms="${p.publish_at || ''}"></label>
+        <button class="btn" name="action" value="schedule">Schedule</button>
+        ${p.status === 'scheduled' ? h`<button class="btn" name="action" value="unschedule">Cancel schedule</button>` : ''}
+      </div>
+      <p class="small muted">Followers get the email and fediverse post when it goes live, not before.</p>
+    </details>` : ''}
   </form>
 </section>`,
   });
