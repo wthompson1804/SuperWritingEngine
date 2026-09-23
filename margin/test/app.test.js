@@ -146,7 +146,7 @@ test('writer flow: signup, draft, check, publish, dashboard, CSV', async () => {
   const detail = await fetch(base + '/dashboard/p/the-meeting-is-the-work-now', { headers: { Cookie: maraCookie } });
   assert.equal(detail.status, 200);
   const csv = await fetch(base + '/dashboard/list.csv', { headers: { Cookie: maraCookie } });
-  assert.match(await csv.text(), /^email,following_since/);
+  assert.match(await csv.text(), /^email,source,since\n/);
 
   const check = await (await post('/api/check', { body_md: 'In recent years, things changed.' })).json();
   assert.ok(check.opening.some((r) => r.level === 'warn'));
@@ -218,4 +218,150 @@ test('declaration and fonts are served locally', async () => {
   assert.equal(f.headers.get('content-type'), 'font/woff2');
   assert.equal((await fetch(base + '/static/../server.js')).status, 404);
   assert.match(d.headers.get('content-security-policy'), /font-src 'self'/);
+});
+
+// ---------------- v3 ----------------
+const { writeZip, readZip } = require('../lib/zip');
+const { parseCsv, toCsv } = require('../lib/csv');
+const { htmlToMarkdown } = require('../lib/htmlmd');
+const { expectedCompletion, quality } = require('../lib/signals');
+
+const formPost = (p, obj, cookie) => fetch(base + p, { method: 'POST', redirect: 'manual', headers: { 'Content-Type': 'application/x-www-form-urlencoded', ...(cookie ? { Cookie: cookie } : {}) }, body: new URLSearchParams(obj) });
+async function loginAs(handle) {
+  const r = await formPost('/login', { handle, password: 'demo-password' });
+  return r.headers.get('set-cookie').split(';')[0];
+}
+
+test('csv round-trips quotes/newlines and neutralizes formulas', () => {
+  const rows = parseCsv('a,b\n"x, ""y""","line1\nline2"\n');
+  assert.deepEqual(rows, [{ a: 'x, "y"', b: 'line1\nline2' }]);
+  assert.match(toCsv(['e'], [{ e: '=HYPERLINK("x")' }]), /"'=HYPERLINK/);
+});
+
+test('html to markdown keeps structure and drops Substack widgets', () => {
+  const md = htmlToMarkdown(`<div class="body"><h2>Why</h2><p>It is <strong>bold</strong> and <em>odd</em> &amp; <a href="https://x.com/a">linked</a>.</p>
+    <div class="subscription-widget-wrap"><div class="subscription-widget"><button>Subscribe</button></div></div>
+    <blockquote><p>A quote.</p></blockquote><ul><li>one</li><li>two</li></ul>
+    <figure><img src="https://cdn.example/i.png" alt="x"><figcaption>A chart</figcaption></figure><script>alert(1)</script></div>`);
+  assert.match(md, /^# Why/m);
+  assert.match(md, /It is \*\*bold\*\* and \*odd\* & \[linked\]\(https:\/\/x.com\/a\)\./);
+  assert.match(md, /^> A quote\.$/m);
+  assert.match(md, /^- one$/m);
+  assert.match(md, /\[Image: A chart\]\(https:\/\/cdn.example\/i.png\)/);
+  assert.ok(!/Subscribe|alert/.test(md));
+});
+
+test('ranking compares finish rate against length', () => {
+  assert.ok(expectedCompletion(3000) < expectedCompletion(600));
+  const short = { words: 500, views: 100, reads: 60, keeps: 0, passes: 0, tips: 0 };
+  const long = { words: 4000, views: 100, reads: 45, keeps: 0, passes: 0, tips: 0 };
+  assert.ok(quality(long) > quality(short), 'a long piece finished by 45% beats a short one finished by 60%');
+});
+
+test('substack import: posts, drafts, subscribers, idempotent; export re-imports', async () => {
+  const zip = writeZip([
+    ['posts.csv', 'post_id,post_date,is_published,email_sent_at,type,audience,title,subtitle,podcast_url\n'
+      + '101.hello-world,2024-03-01T10:00:00.000Z,true,,newsletter,everyone,Hello World,"A first post, with comma",\n'
+      + '102.paid-thing,2024-04-01T10:00:00.000Z,true,,newsletter,only_paid,Paid Thing,,\n'
+      + '103.a-draft,,false,,newsletter,everyone,A Draft,,\n'
+      + '104.thread,2024-05-01T10:00:00.000Z,true,,thread,everyone,A Thread,,\n'],
+    ['posts/101.hello-world.html', '<p>The first claim is the point.</p><p>Second <em>paragraph</em>.</p>'],
+    ['posts/102.paid-thing.html', '<p>Paid words.</p>'],
+    ['posts/103.a-draft.html', '<p>Unfinished.</p>'],
+    ['email_list.hello.csv', 'email,active_subscription,expiry,email_disabled,prefer_digests,created_at\n'
+      + 'A@Example.com,false,,false,false,2024-01-01T00:00:00.000Z\n'
+      + 'paid@example.com,true,2025-01-01,false,false,2024-01-02T00:00:00.000Z\n'
+      + 'gone@example.com,false,,true,false,2024-01-03T00:00:00.000Z\n'
+      + 'not-an-email,false,,false,false,\n'],
+  ]);
+  const su = await formPost('/signup', { name: 'Importer', handle: 'importer', password: 'long-enough-pw' });
+  const cookie = su.headers.get('set-cookie').split(';')[0];
+  const up = (buf) => fetch(base + '/desk/import', { method: 'POST', headers: { 'Content-Type': 'application/zip', Cookie: cookie }, body: buf });
+  const r = await (await up(zip)).json();
+  assert.equal(r.ok, true);
+  assert.deepEqual([r.report.posts.published, r.report.posts.drafts, r.report.posts.skipped], [1, 2, 1]);
+  assert.deepEqual([r.report.subscribers.imported, r.report.subscribers.paid, r.report.subscribers.skipped], [2, 1, 2]);
+  assert.ok(r.report.warnings.some((w) => /paid-only/.test(w)));
+  const art = await fetch(base + '/p/hello-world');
+  assert.equal(art.status, 200);
+  assert.match(await art.text(), /Second <em>paragraph<\/em>/);
+  assert.equal((await fetch(base + '/p/paid-thing')).status, 404, 'paid posts are drafts');
+  const again = await (await up(zip)).json();
+  assert.equal(again.report.posts.already, 3);
+  assert.equal(again.report.subscribers.already, 2);
+  assert.equal((await (await up(Buffer.from('nope'))).json()).ok, false);
+  assert.equal((await fetch(base + '/desk/import', { method: 'POST', redirect: 'manual', body: zip })).status, 303, 'writers only');
+
+  // Export, then import that export as a different writer.
+  const ex = await fetch(base + '/desk/export.zip', { headers: { Cookie: cookie } });
+  assert.equal(ex.headers.get('content-type'), 'application/zip');
+  const files = readZip(Buffer.from(await ex.arrayBuffer()));
+  assert.ok(files.has('posts.csv') && files.has('email_list.importer.csv') && files.has('README.txt'));
+  assert.equal(parseCsv(files.get('email_list.importer.csv').toString()).length, 2);
+  const su2 = await formPost('/signup', { name: 'Second', handle: 'second', password: 'long-enough-pw' });
+  const c2 = su2.headers.get('set-cookie').split(';')[0];
+  const re = await (await fetch(base + '/desk/import', { method: 'POST', headers: { 'Content-Type': 'application/zip', Cookie: c2 }, body: Buffer.from(await (await fetch(base + '/desk/export.zip', { headers: { Cookie: cookie } })).arrayBuffer()) })).json();
+  assert.equal(re.report.posts.published, 1);
+  assert.equal(re.report.posts.drafts, 2);
+  assert.equal(re.report.subscribers.imported, 2);
+});
+
+test('email follow: double opt-in, new-post mail, unsubscribe, no duplicate', async () => {
+  const bad = await post('/api/subscribe', { handle: 'june', email: 'nope' });
+  assert.equal(bad.status, 400);
+  const r = await (await post('/api/subscribe', { handle: 'june', email: 'Reader@Example.org', via: 'mara' })).json();
+  assert.equal(r.pending, true);
+  assert.match(r.previewLink, /^\/confirm\//);
+  const row = app.h.get(`SELECT * FROM email_subs WHERE email = 'reader@example.org'`);
+  assert.equal(row.status, 'pending');
+  assert.ok(row.via_author_id, 'credited to the recommending writer');
+  assert.ok(app.h.get(`SELECT id FROM mail WHERE to_email = 'reader@example.org' AND kind = 'confirm'`));
+  const conf = await fetch(base + r.previewLink);
+  assert.match(await conf.text(), /on June Hale’s list/);
+  assert.equal((await (await post('/api/subscribe', { handle: 'june', email: 'reader@example.org' })).json()).already, true);
+
+  const cookie = await loginAs('june');
+  await formPost('/write/new', { title: 'June Writes Again', dek: 'd', body_md: 'A claim.', action: 'publish' }, cookie);
+  const mail = app.h.get(`SELECT * FROM mail WHERE to_email = 'reader@example.org' AND kind = 'new-post'`);
+  assert.match(mail.subject, /June Writes Again/);
+  const unsub = mail.body.match(/\/unsubscribe\/[\w-]+/)[0];
+  assert.equal((await fetch(base + unsub)).status, 200);
+  assert.equal(app.h.get(`SELECT status FROM email_subs WHERE email = 'reader@example.org'`).status, 'unsubscribed');
+  const csv = await (await fetch(base + '/dashboard/list.csv', { headers: { Cookie: cookie } })).text();
+  assert.ok(!csv.includes('reader@example.org'), 'unsubscribed addresses leave the list');
+});
+
+test('recommendations after a follow, credited in the ledger', async () => {
+  const recs = await (await fetch(base + '/api/recs?handle=theo')).json();
+  assert.deepEqual(recs.recs.map((x) => x.handle), ['ravi', 'mara']);
+  await post('/api/follow', { handle: 'ravi', delta: 1, via: 'theo' });
+  const cookie = await loginAs('theo');
+  const dash = await (await fetch(base + '/dashboard', { headers: { Cookie: cookie } })).text();
+  assert.match(dash, /followers you sent others/);
+});
+
+test('note moderation: flags dedupe per visitor, writer can hide and show', async () => {
+  const key = (await (await post('/api/key/new', {})).json()).key;
+  const n = await (await post('/api/note', { key, slug: 'nobody-owns-the-sidewalk', para: 0, body: 'spammy spam' })).json();
+  await post('/api/note/flag', { id: n.note.id });
+  await post('/api/note/flag', { id: n.note.id });
+  assert.equal(app.h.get('SELECT flags FROM notes WHERE id = ?', n.note.id).flags, 1);
+  const cookie = await loginAs('theo');
+  const hide = await formPost(`/desk/notes/${n.note.id}/hide`, {}, cookie);
+  assert.equal(hide.status, 303);
+  assert.ok(!(await (await fetch(base + '/p/nobody-owns-the-sidewalk')).text()).includes('spammy spam'));
+  const mara = await loginAs('mara');
+  assert.equal((await formPost(`/desk/notes/${n.note.id}/show`, {}, mara)).status, 404, 'only the piece’s writer moderates');
+  await formPost(`/desk/notes/${n.note.id}/show`, {}, cookie);
+  assert.ok((await (await fetch(base + '/p/nobody-owns-the-sidewalk')).text()).includes('spammy spam'));
+});
+
+test('passed-on links preview the passage; brief has RSS', async () => {
+  const page = await (await fetch(base + '/p/the-bus-stop-is-the-city?via=passed&p=0')).text();
+  assert.match(page, /<meta property="og:title" content="“A city&#39;s real priorities/);
+  assert.match(page, /<link rel="canonical" href="http:\/\/127.0.0.1:\d+\/p\/the-bus-stop-is-the-city">/);
+  const rss = await fetch(base + '/brief.xml');
+  assert.match(rss.headers.get('content-type'), /rss/);
+  const items = (await rss.text()).match(/<item>/g) || [];
+  assert.ok(items.length >= 1 && items.length <= 5);
 });

@@ -1,8 +1,39 @@
-# Margin: design rationale (v2)
+# Margin: design rationale (v3)
 
 Margin is a long-form publishing platform where readers never need an account to read. This document covers who it's for, what changed between v1 and v2 and why, and what's still unproven.
 
-> **Honesty note.** Every persona below is a hypothesis built from desk reasoning. None of it comes from interviews or usage data. §7 lists the cheapest way to test each one. Treat the design as a set of bets, not findings.
+> **Honesty note.** The personas are hypotheses. v3 checked them against published data ([RESEARCH.md](RESEARCH.md)), but that is still desk research: nobody has been interviewed and there is no usage data. §7 lists the cheapest test for each bet.
+
+---
+
+## 0. What v3 changed and why
+
+Desk research (sources in [RESEARCH.md](RESEARCH.md)) overturned three of v2's bets and supported two others.
+
+| v2 bet | What the evidence said | v3 change |
+|---|---|---|
+| No email; readers follow locally and a "reader key" carries identity | Writers leave Substack mainly to **own their list**. The one channel a digest has is email. The 5-item cap is well supported: Pew found 62% of newsletter readers don't read most of what arrives | **Email follow per writer**: double opt-in, one writer at a time, one-click unsubscribe, no account or password. New pieces go to confirmed followers. Writers export the list any time. The reader key stays, for syncing the commonplace |
+| The ring and blogrolls will solve cold start | **No evidence** webrings or blogrolls drive meaningful traffic ("slow burn"). The mechanism with numbers behind it is **recommendations at the moment of subscribing**: 40–50% of Substack's new subscriptions; 10–20% of Beehiiv growth | **Recommendations after follow**: when a reader follows a writer (locally or by email), they see the writers that writer recommends, each with one-click follow. Every follow is credited to the recommender, and the desk shows the ledger ("you sent 12 followers; others sent you 9"). The ring stays as texture, not strategy |
+| Rank by completion | Completion falls with length, so raw completion rewards short posts | **Length-normalized ranking**: each piece is compared with a baseline for its length, and the card says so ("Finished by 52% of readers. Typical for its length: 60%"). The baseline is hand-set and marked in code for recalibration |
+| A local commonplace is enough | Pocket died in 2025. Most readers won't get a key, so browser-only data quietly vanishes | Durable storage request (`navigator.storage.persist`). A **backup warning** after 3 passages without a key. Exports in Markdown, JSON and a **Readwise-compatible CSV**. The key can be saved as a file. **Spaced resurfacing** (1, 3, 7, 21, 60 days) replaces random resurfacing, because it's Readwise's proven loop |
+| Passage links via Margin's own URL scheme | Text fragments are native in every major browser. Sharing happens in messaging apps, via copy-paste | "Pass it on" links now carry a **text fragment**, so browsers highlight the passage even without Margin's script. Passed links **preview the quote itself** (Open Graph) in iMessage, WhatsApp and Slack |
+| (none) | Established writers' biggest barrier is migration. Substack's export format is known exactly (verified from Ghost's migrator) | **Substack import**: posts with original dates and slugs, subtitles, drafts, and the email list. Paid-only posts become drafts, with a warning. Re-running is safe. **Export** writes Substack's own layout back out, so Ghost's importer can read a Margin writer |
+| Moderation later | Discovery surfaces inherit moderation problems (Substack, July 2025) | **Flag** on every margin note (deduped; 3 flags hide it), and writers can **hide or show** notes on their own pieces from the desk |
+| Tips | The fixed card fee eats small tips | Minimum $3, and the fee is shown honestly ("$5 leaves about $4.55") |
+| Writer analytics | Open rates are broken by Apple's Mail Privacy Protection | Margin never had open rates. Added **median reading time**, and the "typical for its length" column |
+
+**Deliberately not done in v3:**
+- **ActivityPub.** The research says it's now expected (Ghost 6, WordPress, WriteFreely). But a half-working implementation is worse than none, and this environment can't reach a real Mastodon server to test against. It's the top item for v4.
+- **Real email and payments.** Both are well-solved problems, deferred on purpose. Confirmation and new-post emails are written to a `mail` table, and the prototype shows the confirmation link on screen.
+- **Per-passage preview images.** Not done yet.
+
+**Evidence that still cuts against Margin:**
+- Pleasure reading is down 40% in 20 years.
+- Only 17–18% pay for news, mostly for one subscription.
+- There's no quantitative evidence that quote sharing drives readership, so "pass it on" remains the least-proven bet.
+- Substack's growth comes from exactly the app-and-network machinery Margin refuses to build.
+
+Margin is betting that a smaller, calmer network, one that sends readers between writers deliberately, is enough. That hasn't been shown.
 
 ---
 
@@ -123,10 +154,10 @@ Modern commitments that the early web didn't have: accessible contrast (4.5:1 mi
 
 ## 8. Open questions and known weaknesses
 
-1. **Import is missing** (W3). It's the most important unbuilt feature.
+1. ~~Import is missing~~ Substack import and export are built (v3). **ActivityPub** is now the biggest missing piece.
 2. **Anonymous signals are gameable.** Follows, passes, tips and "reading now" can be inflated by a script. Rate limits only slow this down. Mitigation later: weight keyed actions more heavily, and look for anomalies.
-3. **Key loss** is still unrecoverable by design. Whether to offer email recovery is your call.
-4. **Moderation**: margin notes have no report or hide flow, and writers can't remove notes on their own pieces yet.
+3. **Key loss** is still unrecoverable by design. v3 softens it with a key file download and backup nudges. Readers who follow by email now have an email relationship with that writer, but it isn't tied to their key. Linking them would allow recovery at some cost to anonymity. That's a product decision still to make.
+4. **Moderation**: v3 adds flags and writer hide/show. There's still no platform-level review queue, no rules page, and no appeal. And the front page and recommendations are editorial surfaces that need a written policy.
 5. **The ring doesn't scale as a flat list.** At 500 writers it needs topics or smaller sub-rings. That's a nice problem to have.
 6. **Payments and email are simulated.** Both are well-solved problems, deliberately deferred.
 7. **The moat question** from v1 still stands. "No login" isn't defensible. The combination of passage-level sharing, a ring that routes readers to newcomers, and a reader-owned commonplace might be. That's the bet.

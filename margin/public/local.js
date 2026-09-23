@@ -38,9 +38,65 @@
   function scheduleSync() { if (!load().readerKey) return; clearTimeout(timer); timer = setTimeout(sync, 800); }
   function update(fn) { var s = load(); fn(s); save(s); scheduleSync(); return s; }
 
-  function follow(handle, name, on, slug) {
+  function follow(handle, name, on, slug, via) {
     update(function (s) { s.follows[handle] = { on: on, name: name, ts: Date.now() }; });
-    return api('/api/follow', { handle: handle, delta: on ? 1 : -1, slug: slug, key: load().readerKey || undefined });
+    return api('/api/follow', { handle: handle, delta: on ? 1 : -1, slug: slug, via: via, key: load().readerKey || undefined });
+  }
+
+  // Ask the browser not to evict our storage. Pocket's lesson: things people
+  // keep have to survive. Browsers may say no; that's fine.
+  function persist() {
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function () {}); } catch (e) { /* ignore */ }
+  }
+
+  function emailFollow(handle, email, via) {
+    return api('/api/subscribe', { handle: handle, email: email, via: via });
+  }
+
+  // "Writers X reads": shown right after someone follows X.
+  function renderRecs(root, handle, name, slug) {
+    if (!root) return;
+    fetch('/api/recs?handle=' + encodeURIComponent(handle)).then(function (r) { return r.json(); }).then(function (r) {
+      var recs = (r.recs || []).filter(function (x) { return !isFollowing(x.handle); });
+      if (!recs.length) return;
+      root.innerHTML = '';
+      var box = el('div', { class: 'recs' }, [el('p', { class: 'label', text: name.split(' ')[0].toLowerCase() + ' recommends' })]);
+      recs.forEach(function (x) {
+        var btn = el('button', { class: 'btn', type: 'button', text: 'Follow' });
+        btn.addEventListener('click', function () {
+          follow(x.handle, x.name, true, slug, handle);
+          btn.textContent = 'Following'; btn.disabled = true;
+        });
+        box.appendChild(el('div', { class: 'rec' }, [
+          el('div', {}, [
+            el('a', { href: '/@' + x.handle + '?via=ring', text: x.name }),
+            x.now_line ? el('p', { class: 'small muted', text: x.now_line }) : null,
+            x.latest ? el('p', { class: 'small' }, ['Latest: ', el('a', { href: '/p/' + x.latest.slug + '?via=next', text: x.latest.title })]) : null,
+          ]),
+          btn,
+        ]));
+      });
+      root.appendChild(box);
+    }).catch(function () {});
+  }
+
+  function emailForm(handle, name, via, onDone) {
+    var input = el('input', { type: 'email', required: true, placeholder: 'you@example.com', autocomplete: 'email', 'aria-label': 'Your email' });
+    var msg = el('p', { class: 'small muted', 'aria-live': 'polite', text: 'Only ' + name + '’s new pieces, after you confirm. One-click unsubscribe. No account.' });
+    var form = el('form', { class: 'row email-follow', on: { submit: function (e) {
+      e.preventDefault();
+      emailFollow(handle, input.value, via).then(function (r) {
+        if (!r.ok) { msg.textContent = r.error || 'That didn’t work.'; return; }
+        msg.innerHTML = '';
+        if (r.already) { msg.textContent = 'You’re already on ' + name + '’s list.'; return; }
+        msg.appendChild(document.createTextNode('Check your inbox for a confirmation link. '));
+        if (r.previewLink) {
+          msg.appendChild(el('span', { class: 'mono' }, ['(Prototype: email isn’t sent yet. ', el('a', { href: r.previewLink, text: 'confirm here' }), '.)']));
+        }
+        if (onDone) onDone(r);
+      });
+    } } }, [input, el('button', { class: 'btn', type: 'submit', text: 'Email me new pieces' })]);
+    return el('div', {}, [form, msg]);
   }
   function isFollowing(handle) { var f = load().follows[handle]; return !!(f && f.on); }
   function liveKept(s) {
@@ -83,6 +139,11 @@
     }
     (kids || []).forEach(function (c) { if (c != null) n.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
     return n;
+  }
+
+  function download(name, text, type) {
+    var a = el('a', { href: URL.createObjectURL(new Blob([text], { type: type || 'text/plain' })), download: name });
+    document.body.appendChild(a); a.click(); a.remove();
   }
 
   var pageData = null;
@@ -130,6 +191,11 @@
     keyText.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); keyText.classList.remove('masked'); } });
     root.appendChild(el('p', {}, [keyText]));
     root.appendChild(el('p', { class: 'small', text: 'Write it down or put it in your password manager. It\'s the only way back in: we store a scrambled version and can\'t recover it for you.' }));
+    root.appendChild(el('div', { class: 'row' }, [
+      el('button', { class: 'btn', type: 'button', text: 'Save key as a file', on: { click: function () {
+        download('margin-reader-key.txt', 'Your Margin reader key:\n\n' + load().readerKey + '\n\nUse it at ' + location.origin + '/commonplace ("I already have a key") on any device.\n', 'text/plain');
+      } } }),
+    ]));
     var email = el('input', { type: 'email', value: prefs.email || '', placeholder: 'you@example.com', 'aria-label': 'Email (optional)' });
     var digest = el('input', { type: 'checkbox' }); digest.checked = !!prefs.digest;
     var share = el('input', { type: 'checkbox' }); share.checked = !!prefs.share_email;
@@ -157,7 +223,8 @@
   window.Margin = {
     load: load, save: save, api: api, update: update, sync: sync, follow: follow, isFollowing: isFollowing,
     keep: keep, liveKept: liveKept, createKey: createKey, useKey: useKey, uuid: uuid, el: el, data: pageData,
-    renderKeyPanel: renderKeyPanel,
+    renderKeyPanel: renderKeyPanel, persist: persist, emailFollow: emailFollow, emailForm: emailForm,
+    renderRecs: renderRecs, download: download,
   };
 
   // Pull the latest from the server once per page if this browser holds a key.

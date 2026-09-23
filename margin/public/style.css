@@ -287,6 +287,7 @@ legend { font: 600 .8rem var(--mono); padding: 0 var(--s1); }
 .cp-item blockquote { margin: 0; padding: var(--s2) var(--s3); background: var(--surface); border: 1px solid var(--hair); border-left: 4px solid var(--keep); font-size: 1.1rem; }
 .cp-item blockquote a { color: var(--ink); text-decoration: none; }
 .cp-item textarea { font-size: .95rem; }
+.cp-item button.link { justify-self: start; }
 .cp-tools { display: flex; flex-wrap: wrap; gap: var(--s2); }
 .key-panel h2 { font-size: 1.15rem; }
 .key-panel details summary { cursor: pointer; font: .82rem var(--mono); min-height: 44px; display: flex; align-items: center; }
@@ -304,6 +305,26 @@ code.key.masked { color: transparent; text-shadow: 0 0 9px rgba(27,26,23,.7); us
 .articles h2 .mono { font-size: .9rem; color: var(--link); margin-right: .3rem; }
 .prose ul { padding-left: 1.2rem; margin: 0; display: grid; gap: var(--s2); }
 .prose h2 { margin-top: var(--s3); }
+
+/* ---------- v3: follows, recs, moderation, import ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.email-follow { flex-wrap: nowrap; }
+.email-follow input { flex: 1 1 12rem; min-width: 0; }
+.recs { display: grid; gap: var(--s2); margin-top: var(--s2); padding: var(--s3); border: 2px dashed var(--ink); background: var(--bg); }
+.rec { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); padding: var(--s2) 0; border-top: 1px dotted var(--hair); }
+.rec:first-of-type { border-top: 0; }
+.rec > div { display: grid; gap: 2px; }
+.rec > div > a { font-family: var(--display); font-weight: 650; font-size: 1.1rem; }
+.resurface-actions { margin-top: var(--s2); }
+.resurface-actions .btn { min-height: 44px; font-size: .75rem; padding: 0 .7rem; }
+.backup { margin-bottom: var(--s4); }
+.backup .bar { background: var(--keep); color: #1b1a17; }
+.notes-admin li { display: grid; gap: var(--s1); padding: var(--s3); border: 2px solid var(--ink); background: var(--surface); }
+.notes-admin li.is-hidden { opacity: .7; border-style: dashed; }
+.steps { margin: 0; padding-left: 1.2rem; display: grid; gap: var(--s2); }
+.warnings li { color: var(--err); font-size: .9rem; }
+.flag-note { font: inherit; min-height: 44px; padding: 0 .2rem; color: var(--ink-2); display: inline-flex; align-items: center; }
+@media (max-width: 480px) { .email-follow { flex-wrap: wrap; } .rec { flex-direction: column; align-items: flex-start; } }
 
 /* ---------- auth / desk ---------- */
 .narrow { max-width: 30rem; margin: 0 auto; }

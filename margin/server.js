@@ -10,6 +10,8 @@ const auth = require('./lib/auth');
 const signals = require('./lib/signals');
 const views = require('./lib/views');
 const ring = require('./lib/ring');
+const { importSubstack, exportAuthor } = require('./lib/portability');
+const { toCsv } = require('./lib/csv');
 
 const STATIC = path.join(__dirname, 'public');
 const MIME = { '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8' };
@@ -22,7 +24,10 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 class HttpError extends Error { constructor(status, msg) { super(msg); this.status = status; } }
 
-function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'data', 'margin.db'), demoSignals = process.env.MARGIN_DEMO_SIGNALS !== '0', secureCookies = process.env.MARGIN_SECURE_COOKIES === '1' } = {}) {
+function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'data', 'margin.db'), demoSignals = process.env.MARGIN_DEMO_SIGNALS !== '0', secureCookies = process.env.MARGIN_SECURE_COOKIES === '1',
+  // No mail provider is wired up, so by default the confirmation link is shown on screen
+  // instead of being emailed. Set MARGIN_SHOW_MAIL=0 once real delivery exists.
+  showMail = process.env.MARGIN_SHOW_MAIL !== '0' } = {}) {
   const h = helpers(open(dbFile));
   seed(h, { demoSignals });
 
@@ -61,6 +66,21 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     }
     return Object.fromEntries(new URLSearchParams(text));
   }
+
+  async function readRaw(req, limit) {
+    const chunks = [];
+    let size = 0;
+    for await (const c of req) {
+      size += c.length;
+      if (size > limit) throw new HttpError(413, 'That file is too large (50 MB max).');
+      chunks.push(c);
+    }
+    return Buffer.concat(chunks);
+  }
+
+  const baseUrl = (req) => `${req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http'}://${req.headers.host}`;
+  const queueMail = (to, subject, body, kind) => h.run('INSERT INTO mail (to_email, subject, body, kind, created_at) VALUES (?,?,?,?,?)', to, subject, body, kind, Date.now());
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function currentAuthor(req) {
     const t = auth.parseCookies(req.headers.cookie).ms;
@@ -118,13 +138,16 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     if (!post) return html(res, views.notFound({ viewer: ctx.author }), 404);
     const author = h.get('SELECT id, handle, name, bio, accent, blogroll FROM authors WHERE id = ?', post.author_id);
     const rendered = render(post.body_md);
-    const notes = h.all('SELECT para, display_name, quote, body, created_at FROM notes WHERE post_id = ? ORDER BY created_at', post.id);
+    const notes = h.all('SELECT id, para, display_name, quote, body, created_at FROM notes WHERE post_id = ? AND hidden = 0 ORDER BY created_at', post.id);
+    const passP = ctx.url.searchParams.get('via') === 'passed' ? Number(ctx.url.searchParams.get('p')) : NaN;
+    const passage = Number.isInteger(passP) ? rendered.blocks[passP]?.text : null;
     const kc = h.all('SELECT para, count(*) AS n FROM keeps WHERE post_id = ? GROUP BY para ORDER BY n DESC', post.id);
     const keepCounts = Object.fromEntries(kc.map((r) => [r.para, r.n]));
     const topKeep = kc[0] && kc[0].n >= 3 ? { para: kc[0].para, n: kc[0].n } : null;
     const reads = h.get(`SELECT count(*) AS n FROM views WHERE post_id = ? AND max_depth >= 0.9 AND dwell_ms >= ?`, post.id, post.words * signals.MS_PER_WORD_FLOOR).n;
     html(res, views.article({ post, author, rendered, notes, topKeep, keepCounts, next: signals.nextReads(h, post), viewer: ctx.author,
-      stats: { now: ring.readingNow(h, post.id), reads }, blogroll: ring.parseBlogroll(h, author.blogroll) }));
+      stats: { now: ring.readingNow(h, post.id), reads }, blogroll: ring.parseBlogroll(h, author.blogroll),
+      og: { url: `${baseUrl(req)}/p/${post.slug}`, passage } }));
   });
 
   on('GET', /^\/@([\w]+)$/, (req, res, m, ctx) => {
@@ -146,6 +169,19 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   on('GET', /^\/commonplace$/, (req, res, m, ctx) => html(res, views.commonplace({ viewer: ctx.author })));
   on('GET', /^\/brief$/, (req, res, m, ctx) => html(res, views.brief({ picks: signals.frontPage(h).slice(0, 5), viewer: ctx.author })));
   on('GET', /^\/about$/, (req, res, m, ctx) => html(res, views.about({ viewer: ctx.author })));
+
+  // The Brief as RSS: same five pieces, no email needed.
+  on('GET', /^\/brief\.xml$/, (req, res) => {
+    const base = baseUrl(req);
+    const picks = signals.frontPage(h).slice(0, 5);
+    const items = picks.map((p) => `<item><title>${esc(p.title)}</title><link>${base}/p/${p.slug}?via=brief</link><guid isPermaLink="false">brief:${p.slug}</guid>
+<dc:creator>${esc(p.author_name)}</dc:creator><description>${esc(p.dek)} (${p.minutes} min)</description></item>`).join('\n');
+    send(res, 200, `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel>
+<title>The Brief · Margin</title><link>${base}/brief</link><description>Five pieces at most. When you've read them, you're done.</description>
+${items}
+</channel></rss>`, { 'Content-Type': 'application/rss+xml; charset=utf-8' });
+  });
 
   on('GET', /^\/feed\.xml$/, (req, res, m, ctx) => {
     const handle = ctx.url.searchParams.get('author');
@@ -236,8 +272,12 @@ ${items}
   }));
 
   on('GET', /^\/dashboard\/list\.csv$/, needAuthor((req, res, m, ctx) => {
-    const rows = signals.authorDashboard(h, ctx.author.id).list;
-    const csv = ['email,following_since', ...rows.map((r) => `"${String(r.email).replace(/"/g, '""')}",${new Date(r.created_at).toISOString()}`)].join('\n');
+    const subs = h.all(`SELECT email, source, coalesce(confirmed_at, created_at) AS since FROM email_subs WHERE author_id = ? AND status = 'active'`, ctx.author.id);
+    const keyed = signals.authorDashboard(h, ctx.author.id).list;
+    const seen = new Set(subs.map((r) => r.email));
+    const rows = [...subs.map((r) => ({ email: r.email, source: r.source === 'import' ? 'imported' : 'email follow', since: new Date(r.since).toISOString() })),
+      ...keyed.filter((r) => !seen.has(r.email)).map((r) => ({ email: r.email, source: 'reader key (shared)', since: new Date(r.created_at).toISOString() }))];
+    const csv = toCsv(['email', 'source', 'since'], rows);
     send(res, 200, csv, { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': `attachment; filename="margin-${ctx.author.handle}-list.csv"` });
   }));
 
@@ -268,7 +308,16 @@ ${items}
       const slug = post.status === 'published' || post.published_at ? post.slug : slugify(title, post.id);
       h.run('UPDATE posts SET title = ?, dek = ?, body_md = ?, words = ?, slug = ?, updated_at = ? WHERE id = ?', title, dek, body, words, slug, now, post.id);
     }
+    const firstPublish = action === 'publish' && !post.published_at;
     if (action === 'publish') h.run(`UPDATE posts SET status = 'published', published_at = coalesce(published_at, ?) WHERE id = ?`, now, post.id);
+    if (firstPublish) {
+      const base = baseUrl(req);
+      const fresh0 = h.get('SELECT slug, title, dek FROM posts WHERE id = ?', post.id);
+      for (const sub of h.all(`SELECT email, token FROM email_subs WHERE author_id = ? AND status = 'active'`, ctx.author.id)) {
+        queueMail(sub.email, `New from ${ctx.author.name}: ${fresh0.title}`,
+          `${fresh0.title}\n${fresh0.dek}\n\nRead it: ${base}/p/${fresh0.slug}?via=follow\n\nYou get this because you asked for ${ctx.author.name}'s new pieces. One click stops it: ${base}/unsubscribe/${sub.token}`, 'new-post');
+      }
+    }
     if (action === 'unpublish') h.run(`UPDATE posts SET status = 'draft' WHERE id = ?`, post.id);
     const fresh = h.get('SELECT * FROM posts WHERE id = ?', post.id);
     redirect(res, action === 'publish' ? `/p/${fresh.slug}` : `/write/${fresh.id}`);
@@ -324,7 +373,8 @@ ${items}
     const post = b.slug ? publishedPost(b.slug) : null;
     const delta = Number(b.delta) < 0 ? -1 : 1;
     const reader = b.key ? readerByKey(b.key) : null;
-    h.run('INSERT INTO follow_events (author_id, post_id, delta, keyed, created_at) VALUES (?,?,?,?,?)', a.id, post ? post.id : null, delta, reader ? 1 : 0, Date.now());
+    const via = b.via ? h.get('SELECT id FROM authors WHERE handle = ?', String(b.via)) : null;
+    h.run('INSERT INTO follow_events (author_id, post_id, delta, keyed, via_author_id, created_at) VALUES (?,?,?,?,?,?)', a.id, post ? post.id : null, delta, reader ? 1 : 0, via && via.id !== a.id ? via.id : null, Date.now());
     if (reader) syncFollows(reader, { [b.handle]: { on: delta > 0, ts: Date.now() } });
     json(res, { ok: true });
   });
@@ -406,9 +456,90 @@ ${items}
     if (today >= 20) return json(res, { ok: false, error: 'That\'s 20 notes today. Come back tomorrow.' }, 429);
     const name = String(b.name || '').trim().slice(0, 40) || 'A reader';
     const quote = String(b.quote || '').trim().slice(0, 400);
-    h.run('INSERT INTO notes (post_id, para, reader_id, display_name, quote, body, created_at) VALUES (?,?,?,?,?,?,?)', post.id, para, reader.id, name, quote, body, Date.now());
-    json(res, { ok: true, note: { para, display_name: name, quote, body } });
+    const id = Number(h.run('INSERT INTO notes (post_id, para, reader_id, display_name, quote, body, created_at) VALUES (?,?,?,?,?,?,?)', post.id, para, reader.id, name, quote, body, Date.now()).lastInsertRowid);
+    json(res, { ok: true, note: { id, para, display_name: name, quote, body } });
   });
+
+  // Anyone can flag a note. Three flags hide it until the writer looks.
+  const flagged = new Set();
+  on('POST', /^\/api\/note\/flag$/, async (req, res) => {
+    const b = await readBody(req, 1024);
+    const id = Number(b.id);
+    const k = `${req.socket.remoteAddress}:${id}`;
+    if (!Number.isInteger(id) || !h.get('SELECT id FROM notes WHERE id = ?', id)) return json(res, { ok: false }, 400);
+    if (!flagged.has(k)) {
+      flagged.add(k);
+      h.run('UPDATE notes SET flags = flags + 1, hidden = CASE WHEN flags + 1 >= 3 AND hidden = 0 THEN 1 ELSE hidden END WHERE id = ?', id);
+    }
+    json(res, { ok: true });
+  });
+
+  // Who this writer recommends: the moment after a follow is when readers
+  // are most open to the next writer (it's what drives Substack's network).
+  on('GET', /^\/api\/recs$/, (req, res, m, ctx) => {
+    const a = h.get('SELECT id, blogroll FROM authors WHERE handle = ?', String(ctx.url.searchParams.get('handle') || ''));
+    if (!a) return json(res, { recs: [] });
+    const recs = ring.parseBlogroll(h, a.blogroll).filter((r) => r.kind === 'writer').slice(0, 3).map((r) => {
+      const handle = r.href.slice(2);
+      const latest = h.get(`SELECT p.slug, p.title FROM posts p JOIN authors x ON x.id = p.author_id WHERE x.handle = ? AND p.status = 'published' ORDER BY p.published_at DESC LIMIT 1`, handle);
+      return { handle, name: r.title, now_line: r.note, latest };
+    });
+    json(res, { recs });
+  });
+
+  // Email follow: double opt-in, one writer at a time, no account.
+  on('POST', /^\/api\/subscribe$/, async (req, res) => {
+    const b = await readBody(req, 2048);
+    const a = h.get('SELECT id, handle, name FROM authors WHERE handle = ?', String(b.handle || ''));
+    const email = String(b.email || '').trim().toLowerCase().slice(0, 200);
+    if (!a) return json(res, { ok: false, error: 'Unknown writer.' }, 400);
+    if (!EMAIL_RE.test(email)) return json(res, { ok: false, error: 'That email doesn’t look right.' }, 400);
+    const via = b.via ? h.get('SELECT id FROM authors WHERE handle = ?', String(b.via)) : null;
+    let sub = h.get('SELECT * FROM email_subs WHERE author_id = ? AND email = ?', a.id, email);
+    if (sub && sub.status === 'active') return json(res, { ok: true, already: true });
+    if (!sub) {
+      h.run(`INSERT INTO email_subs (author_id, email, token, status, source, via_author_id, created_at) VALUES (?,?,?, 'pending', 'follow', ?, ?)`,
+        a.id, email, auth.token(18), via && via.id !== a.id ? via.id : null, Date.now());
+      sub = h.get('SELECT * FROM email_subs WHERE author_id = ? AND email = ?', a.id, email);
+    } else if (sub.status === 'unsubscribed') h.run(`UPDATE email_subs SET status = 'pending' WHERE id = ?`, sub.id);
+    const link = `${baseUrl(req)}/confirm/${sub.token}`;
+    queueMail(email, `Confirm: new pieces from ${a.name}`, `Someone (hopefully you) asked to get ${a.name}'s new pieces on Margin by email.\n\nConfirm: ${link}\n\nIf it wasn't you, ignore this and nothing happens.`, 'confirm');
+    json(res, { ok: true, pending: true, ...(showMail ? { previewLink: `/confirm/${sub.token}` } : {}) });
+  });
+
+  on('GET', /^\/confirm\/([\w-]{10,64})$/, (req, res, m, ctx) => {
+    const sub = h.get('SELECT s.*, a.name, a.handle FROM email_subs s JOIN authors a ON a.id = s.author_id WHERE s.token = ?', m[1]);
+    if (!sub) return html(res, views.notFound({ viewer: ctx.author }), 404);
+    if (sub.status !== 'active') h.run(`UPDATE email_subs SET status = 'active', confirmed_at = ? WHERE id = ?`, Date.now(), sub.id);
+    html(res, views.mailResult({ kind: 'confirmed', sub, viewer: ctx.author }));
+  });
+
+  on('GET', /^\/unsubscribe\/([\w-]{10,64})$/, (req, res, m, ctx) => {
+    const sub = h.get('SELECT s.*, a.name, a.handle FROM email_subs s JOIN authors a ON a.id = s.author_id WHERE s.token = ?', m[1]);
+    if (!sub) return html(res, views.notFound({ viewer: ctx.author }), 404);
+    h.run(`UPDATE email_subs SET status = 'unsubscribed' WHERE id = ?`, sub.id);
+    html(res, views.mailResult({ kind: 'unsubscribed', sub, viewer: ctx.author }));
+  });
+
+  // ----- portability and moderation on the desk -----
+  on('GET', /^\/desk\/import$/, needAuthor((req, res, m, ctx) => html(res, views.importPage({ author: ctx.author }))));
+  on('POST', /^\/desk\/import$/, needAuthor(async (req, res, m, ctx) => {
+    const buf = await readRaw(req, 50 * 1024 * 1024);
+    try {
+      json(res, { ok: true, report: importSubstack(h, ctx.author.id, buf) });
+    } catch (e) {
+      json(res, { ok: false, error: e.message || 'Could not read that file.' }, 400);
+    }
+  }));
+  on('GET', /^\/desk\/export\.zip$/, needAuthor((req, res, m, ctx) => {
+    send(res, 200, exportAuthor(h, ctx.author), { 'Content-Type': 'application/zip', 'Content-Disposition': `attachment; filename="margin-${ctx.author.handle}-export.zip"` });
+  }));
+  on('POST', /^\/desk\/notes\/(\d+)\/(hide|show)$/, needAuthor((req, res, m, ctx) => {
+    const note = h.get('SELECT n.id FROM notes n JOIN posts p ON p.id = n.post_id WHERE n.id = ? AND p.author_id = ?', Number(m[1]), ctx.author.id);
+    if (!note) return html(res, views.notFound({ viewer: ctx.author }), 404);
+    h.run('UPDATE notes SET hidden = ?, flags = CASE WHEN ? = 0 THEN 0 ELSE flags END WHERE id = ?', m[2] === 'hide' ? 2 : 0, m[2] === 'hide' ? 2 : 0, note.id);
+    redirect(res, '/dashboard#notes');
+  }));
 
   // ---------- dispatcher ----------
   async function handle(req, res) {

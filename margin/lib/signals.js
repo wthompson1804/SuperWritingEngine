@@ -36,10 +36,26 @@ function postStats(h, where = '1=1', ...args) {
     ORDER BY p.published_at DESC`, ...args);
 }
 
-// Quality is a smoothed completion rate with a prior of 50%, nudged up by
-// keeps, passes and tips. The prior means a piece with 2 views isn't judged on them.
+// Finishing a long piece is harder than finishing a short one. Across the web,
+// completion falls as length grows (Chartbeat, Medium read ratios), so raw
+// finish rate would push the front page toward short posts. We compare each
+// piece against a baseline for its length instead.
+// ASSUMPTION: the curve (60% at 400 words, down about 9 points per doubling,
+// floor 20%) is set by hand from public ranges (Medium read ratios of roughly
+// 40–70%, Chartbeat's ~30s average engaged time). Recalibrate it from Margin's
+// own views once there are a few thousand of them.
+function expectedCompletion(words) {
+  const w = Math.max(300, words || 0);
+  return Math.min(0.65, Math.max(0.2, 0.6 - 0.09 * Math.log2(w / 400)));
+}
+
+// Quality is completion relative to that baseline, smoothed with a prior worth
+// four ordinary views, and nudged up by keeps, passes and tips. A piece at the
+// baseline scores 1.0; a piece with two views isn't judged on them.
 function quality(s) {
-  return (s.reads + 0.5 * s.keeps + s.passes + 2 * s.tips + 2) / (s.views + 4);
+  const e = expectedCompletion(s.words);
+  const prior = 4;
+  return (s.reads + 0.5 * s.keeps + s.passes + 2 * s.tips + prior * e) / (s.views * e + prior);
 }
 
 function authorViews(h) {
@@ -90,7 +106,11 @@ function frontPage(h, now = Date.now()) {
 
 function reason(s) {
   if (s.newVoice) return 'New voice. Here so it gets a fair read.';
-  if (s.views >= 10) return `Finished by ${Math.round((100 * s.reads) / s.views)}% of people who opened it.`;
+  if (s.views >= 10) {
+    const got = Math.round((100 * s.reads) / s.views);
+    const typical = Math.round(100 * expectedCompletion(s.words));
+    return `Finished by ${got}% of readers. Typical for its length: ${typical}%.`;
+  }
   return 'Just published.';
 }
 
@@ -112,6 +132,8 @@ function authorDashboard(h, authorId) {
   for (const p of posts) {
     const depths = h.all('SELECT max_depth FROM views WHERE post_id = ?', p.id).map((r) => r.max_depth);
     p.medianDepth = median(depths);
+    p.expected = expectedCompletion(p.words);
+    p.medianMinutes = median(h.all('SELECT dwell_ms FROM views WHERE post_id = ? AND dwell_ms > 0', p.id).map((r) => r.dwell_ms)) / 60000;
     p.completion = p.views ? p.reads / p.views : 0;
     p.minutes = readingMinutes(p.words);
   }
@@ -130,7 +152,17 @@ function authorDashboard(h, authorId) {
   const me = '@' + h.get('SELECT handle FROM authors WHERE id = ?', authorId).handle;
   const recommendedBy = h.all('SELECT handle, name, blogroll FROM authors WHERE id != ?', authorId)
     .filter((a) => a.blogroll.split('\n').map((l) => l.trim().toLowerCase()).includes(me));
-  return { posts, followers, keyedFollowers, list, funnel, drafts, sources, now, recommendedBy };
+  const emailSubs = h.get(`SELECT count(*) AS n FROM email_subs WHERE author_id = ? AND status = 'active'`, authorId).n;
+  const emailPending = h.get(`SELECT count(*) AS n FROM email_subs WHERE author_id = ? AND status = 'pending'`, authorId).n;
+  // Recommendation ledger: followers you sent to other writers, and followers
+  // other writers sent you. Substack's network runs on this; ours is visible.
+  const sent = h.get(`SELECT count(*) AS n FROM follow_events WHERE via_author_id = ? AND delta > 0`, authorId).n
+    + h.get(`SELECT count(*) AS n FROM email_subs WHERE via_author_id = ?`, authorId).n;
+  const received = h.all(`SELECT a.handle, a.name, count(*) AS n FROM follow_events f JOIN authors a ON a.id = f.via_author_id
+                          WHERE f.author_id = ? AND f.delta > 0 GROUP BY a.id ORDER BY n DESC`, authorId);
+  const notesList = h.all(`SELECT n.id, n.body, n.quote, n.display_name, n.hidden, n.flags, n.created_at, p.slug, p.title
+                           FROM notes n JOIN posts p ON p.id = n.post_id WHERE p.author_id = ? ORDER BY n.flags DESC, n.created_at DESC LIMIT 50`, authorId);
+  return { posts, followers, keyedFollowers, list, funnel, drafts, sources, now, recommendedBy, emailSubs, emailPending, sent, received, notesList };
 }
 
 // Per-paragraph view of one piece: how many readers reached it and how many kept it.
@@ -152,4 +184,4 @@ function paragraphMap(h, post) {
   });
 }
 
-module.exports = { frontPage, nextReads, authorDashboard, paragraphMap, readingMinutes, quality, MS_PER_WORD_FLOOR, NEW_VOICE_VIEWS };
+module.exports = { frontPage, nextReads, authorDashboard, paragraphMap, readingMinutes, quality, expectedCompletion, MS_PER_WORD_FLOOR, NEW_VOICE_VIEWS };

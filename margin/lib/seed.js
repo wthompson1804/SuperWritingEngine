@@ -229,6 +229,16 @@ function seedSignals(h, postId, authorId, p, words, now) {
   const passes = 2 + Math.floor(r() * 9);
   for (let i = 0; i < passes; i++) h.run('INSERT INTO passes (post_id, para, created_at) VALUES (?,?,?)', postId, hot, now);
   for (let i = 0; i < 3; i++) h.run('INSERT INTO tips (post_id, amount_cents, created_at) VALUES (?,?,?)', postId, [300, 500, 1000][i], now);
+  // Some followers arrived through another writer's recommendation list.
+  const recommender = { mara: 'theo', theo: 'mara' }[p.author];
+  const viaId = recommender && h.get('SELECT id FROM authors WHERE handle = ?', recommender).id;
+  for (let i = 0; i < 2 + Math.floor(r() * 4); i++) h.run('INSERT INTO follow_events (author_id, post_id, delta, via_author_id, created_at) VALUES (?,?,1,?,?)', authorId, postId, viaId, now);
+  // Synthetic email followers on reserved example.com addresses.
+  for (let i = 0; i < 6 + Math.floor(r() * 10); i++) {
+    const at = now - Math.floor(r() * 30 * DAY);
+    h.run(`INSERT OR IGNORE INTO email_subs (author_id, email, token, status, source, created_at, confirmed_at) VALUES (?,?,?, 'active', 'follow', ?, ?)`,
+      authorId, `reader${Math.floor(r() * 100000)}@example.com`, crypto.randomBytes(12).toString('base64url'), at, at);
+  }
   const shown = 30 + Math.floor(r() * 40);
   for (let i = 0; i < shown; i++) h.run(`INSERT INTO asks (post_id, kind, event, created_at) VALUES (?, 'follow', 'shown', ?)`, postId, now);
   for (let i = 0; i < follows; i++) h.run(`INSERT INTO asks (post_id, kind, event, created_at) VALUES (?, 'follow', 'accepted', ?)`, postId, now);

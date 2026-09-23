@@ -32,7 +32,7 @@ const NAV = [
   ['/declaration', 'declaration', 'declaration'],
 ];
 
-function layout({ title, body, author, scripts = [], data, active = '', accent = '', path = '/' }) {
+function layout({ title, body, author, scripts = [], data, active = '', accent = '', path = '/', og = null }) {
   return '<!doctype html>' + h`<html lang="en">
 <head>
 <meta charset="utf-8">
@@ -40,6 +40,12 @@ function layout({ title, body, author, scripts = [], data, active = '', accent =
 <title>${title ? `${title} · Margin` : 'Margin: read anything, keep what matters'}</title>
 <meta name="description" content="Long-form writing you can read without an account. Keep what matters. Pass it on.">
 <meta name="color-scheme" content="light dark">
+${og ? h`<meta property="og:site_name" content="Margin">
+<meta property="og:type" content="${og.type || 'article'}">
+<meta property="og:title" content="${og.title}">
+<meta property="og:description" content="${og.description || ''}">
+${og.url ? h`<meta property="og:url" content="${og.url}"><link rel="canonical" href="${og.url}">` : ''}
+<meta name="twitter:card" content="summary">` : ''}
 <link rel="preload" href="/static/fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/static/style.css">
 <link rel="alternate" type="application/rss+xml" title="Margin" href="/feed.xml">
@@ -145,15 +151,19 @@ function blogrollList(items) {
   return h`<ul class="blogroll">${items.map((b) => h`<li><a href="${b.href}"${raw(b.kind === 'web' ? ' rel="noopener"' : '')}>${b.title}</a>${b.note ? h` <span class="muted small">${b.kind === 'web' ? `(${b.note})` : `· ${b.note}`}</span>` : ''}</li>`)}</ul>`;
 }
 
-function article({ post, author, rendered, notes, topKeep, keepCounts, next, viewer, stats, blogroll }) {
+function article({ post, author, rendered, notes, topKeep, keepCounts, next, viewer, stats, blogroll, og = {} }) {
   const minutes = readingMinutes(post.words);
   const notesByPara = new Map();
   for (const n of notes) { if (!notesByPara.has(n.para)) notesByPara.set(n.para, []); notesByPara.get(n.para).push(n); }
   return layout({
     title: post.title, author: viewer, scripts: ['read.js'], accent: author.accent, path: `/p/${post.slug}`,
+    // A passed-on link previews the passage itself in iMessage, WhatsApp, Slack.
+    og: { title: og.passage ? `“${og.passage.length > 180 ? og.passage.slice(0, 177) + '…' : og.passage}”` : post.title,
+      description: og.passage ? `${post.title} · ${author.name} · ${minutes} min on Margin` : (post.dek || `${author.name} on Margin`), url: og.url },
     data: {
       slug: post.slug, title: post.title, words: post.words, minMs: post.words * 87,
       author: { handle: author.handle, name: author.name },
+      hasRecs: blogroll.some((b) => b.kind === 'writer'),
       noteCounts: Object.fromEntries([...notesByPara].map(([p, ns]) => [p, ns.length])),
       topKeep, keepCounts,
     },
@@ -185,7 +195,7 @@ function article({ post, author, rendered, notes, topKeep, keepCounts, next, vie
       <div class="row">
         ${[300, 500, 1000].map((c) => h`<button class="btn" type="button" data-tip="${c}">${money(c)}</button>`)}
       </div>
-      <p class="muted small">Prototype: no money moves; the tip is only recorded.</p>
+      <p class="muted small">Card fees take about 30¢ + 2.9% of each tip, so $5 leaves about $4.55 for ${author.name}. Prototype: no money moves yet; the tip is only recorded.</p>
       <p class="ok small" id="tip-thanks" hidden role="status">Thank you. ${author.name} will see it.</p>
     </div>
   </div>
@@ -206,7 +216,7 @@ function article({ post, author, rendered, notes, topKeep, keepCounts, next, vie
   ${notes.length ? [...notesByPara].sort((a, b) => a[0] - b[0]).map(([p, ns]) => h`
     <div class="note-group" id="notes-p${p}" data-p="${p}">
       ${ns[0].quote ? h`<blockquote class="note-quote"><a href="#p-${p}">${ns[0].quote}</a></blockquote>` : h`<p class="muted small">On paragraph ${p + 1}</p>`}
-      ${ns.map((n) => h`<div class="note"><p>${n.body}</p><p class="meta mono">— ${n.display_name}, ${fmtDate(n.created_at)}</p></div>`)}
+      ${ns.map((n) => h`<div class="note"><p>${n.body}</p><p class="meta mono">— ${n.display_name}, ${fmtDate(n.created_at)} · <button type="button" class="link flag-note" data-note="${n.id}">flag</button></p></div>`)}
     </div>`) : h`<p class="empty" id="notes-empty">Nothing in the margin yet. Select a passage and choose “note” to write the first one.</p>`}
   <form class="note-form box" id="note-form" hidden>
     <p class="bar"><span>new margin note</span></p>
@@ -231,7 +241,7 @@ function article({ post, author, rendered, notes, topKeep, keepCounts, next, vie
 function authorPage({ author, posts, viewer, blogroll, recommendedBy }) {
   return layout({
     title: author.name, author: viewer, scripts: ['author.js'], accent: author.accent, path: `/@${author.handle}`,
-    data: { handle: author.handle, name: author.name },
+    data: { handle: author.handle, name: author.name, hasRecs: blogroll.some((b) => b.kind === 'writer') },
     body: h`
 <div class="homepage">
   <section class="hp-head">
@@ -244,6 +254,13 @@ function authorPage({ author, posts, viewer, blogroll, recommendedBy }) {
       <a class="btn" href="/feed.xml?author=${author.handle}">RSS</a>
     </div>
     <p class="small muted">Following needs no account. It’s remembered in this browser.</p>
+    <form class="email-follow row" id="email-follow" data-handle="${author.handle}">
+      <label class="sr-only" for="ef-email">Email</label>
+      <input id="ef-email" type="email" name="email" required placeholder="you@example.com" autocomplete="email">
+      <button class="btn" type="submit">Email me new pieces</button>
+    </form>
+    <p class="small muted" id="ef-msg" aria-live="polite">Only ${author.name}’s new pieces, and only after you confirm. One-click unsubscribe. No account.</p>
+    <div id="recs"></div>
   </section>
   <section class="hp-posts">
     <h2 class="label">Writing</h2>
@@ -297,7 +314,9 @@ function commonplace({ viewer }) {
   <aside class="rail">
     <section class="box key-box"><p class="bar"><span>reader key</span><span aria-hidden="true">⚿</span></p><div class="box-body key-panel" id="key-panel"></div></section>
     <div class="cp-tools">
-      <button class="btn" type="button" id="export-md">Export as Markdown</button>
+      <button class="btn" type="button" id="export-md">Export Markdown</button>
+      <button class="btn" type="button" id="export-json">Export JSON</button>
+      <button class="btn" type="button" id="export-readwise">Readwise CSV</button>
       <button class="btn danger" type="button" id="clear-local">Forget this device</button>
     </div>
   </aside>
@@ -312,7 +331,8 @@ function brief({ picks, viewer }) {
     body: h`
 <section class="masthead">
   <h1>The Brief</h1>
-  <p class="lede">One email on Sunday with five pieces at most. New work from writers you follow comes first, then what people finished most. When you’ve read it, you’re done for the week.</p>
+  <p class="lede">Five pieces at most, once a week. New work from writers you follow comes first, then what people finished most. When you’ve read it, you’re done for the week.</p>
+  <p class="mono small">get it by <a href="/brief.xml">rss</a> (no email) · or by email with a reader key →</p>
 </section>
 <div class="cp-layout">
   ${box(`preview · about ${minutes} min`, h`<ol class="brief-list">
@@ -361,7 +381,8 @@ function about({ viewer }) {
     <li><strong>No wall, no pop-up.</strong> Every piece is complete, and nothing asks for anything until you’ve finished it.</li>
     <li><strong>Keep.</strong> Select a sentence and choose keep. It goes to your <a href="/commonplace">commonplace</a> and comes back on the front page later.</li>
     <li><strong>Pass it on.</strong> Select a sentence and choose pass it on. You get a link that opens the piece with that passage highlighted. The writer sees the piece was passed on. They never learn who passed it.</li>
-    <li><strong>Follow</strong> a writer without an email. Their new pieces appear at the top of Today.</li>
+    <li><strong>Follow</strong> a writer here with no email, and their new pieces appear at the top of Today. Or give an email to <em>that one writer</em> to get their new pieces there. You confirm it first, it’s one click to leave, and they can see your address because you asked them to write to you.</li>
+    <li><strong>Resurfacing.</strong> Kept passages come back on the front page after 1, 3, 7, 21 and 60 days, so you actually remember them.</li>
     <li><strong>A reader key</strong> is four words and a code. It syncs your commonplace across devices and lets you write margin notes. If you want <a href="/brief">The Brief</a>, you can add an email to it.</li>
   </ul>
   <h2>If you’re writing</h2>
@@ -369,11 +390,13 @@ function about({ viewer }) {
     <li>A homepage with a “now” line, your own accent color, and a list of who you read.</li>
     <li>Numbers that mean something: <strong>verified reads</strong> (reached the end, and was on the page long enough to have read it), where people stop, what they keep, and how often the piece gets passed on.</li>
     <li>A place in <a href="/ring">the ring</a>. Two front-page spots are held for writers with small audiences.</li>
-    <li>A list you can export. Readers can choose to share their email with writers they follow.</li>
+    <li>A list you own: readers who asked for your pieces by email and confirmed. Import yours from Substack, and export everything, in Substack’s own format, any time.</li>
+    <li>Recommendations that work both ways: when someone follows you, they see the writers you recommend, and the desk shows who you sent readers to and who sent them to you.</li>
     <li>A draft check based on a writing-voice specification. It flags throat-clearing openings, hedges, and “it isn’t X, it’s Y” framing.</li>
   </ul>
   <h2>What we record</h2>
-  <p>Readers get no cookies. Each open tab makes up a random id and reports how far it scrolled, how long it was visible, and which paragraph numbers were kept or passed on. That’s all. No IP addresses are stored, no identity is recorded, and nothing follows you to other sites.</p>
+  <p>Readers get no cookies. Each open tab makes up a random id and reports how far it scrolled, how long it was visible, and which paragraph numbers were kept or passed on. No IP addresses are stored, no identity is recorded, and nothing follows you to other sites.</p>
+  <p>If you follow a writer by email, that writer (and only that writer) gets your address, because you asked for their pieces. Nobody else does: not other writers, not advertisers. Unsubscribing removes you from their list.</p>
 </article>`,
   });
 }
@@ -428,15 +451,15 @@ function dashboard({ author, dash }) {
   ${stat(dash.followers, 'followers')}
   ${stat(money(totals.tips), 'tips (simulated)')}
 </div>
-<p class="muted small">A verified read means someone reached 90% of the piece and the page was visible for at least a third of normal reading time. Followers includes anonymous follows; ${plural(dash.keyedFollowers, 'follower')} ${dash.keyedFollowers === 1 ? 'has' : 'have'} a reader key.</p>
+<p class="muted small">“Typical” is the usual finish rate for a piece of that length. Long pieces are harder to finish, so Margin ranks against that, not raw completion. A verified read means someone reached 90% of the piece and the page was visible for at least a third of normal reading time. Followers includes anonymous follows; ${plural(dash.keyedFollowers, 'follower')} ${dash.keyedFollowers === 1 ? 'has' : 'have'} a reader key.</p>
 
 <h2>Pieces</h2>
 ${dash.posts.length ? h`<div class="table-wrap" tabindex="0" role="region" aria-label="Pieces table"><table class="data">
-  <thead><tr><th scope="col">Piece</th><th scope="col">Opens</th><th scope="col">Reads</th><th scope="col">Finish</th><th scope="col">Median depth</th><th scope="col">Kept</th><th scope="col">Passed on</th><th scope="col">Follows</th><th scope="col">Notes</th><th scope="col">Tips</th></tr></thead>
+  <thead><tr><th scope="col">Piece</th><th scope="col">Opens</th><th scope="col">Reads</th><th scope="col">Finish</th><th scope="col">Typical</th><th scope="col">Median time</th><th scope="col">Median depth</th><th scope="col">Kept</th><th scope="col">Passed on</th><th scope="col">Follows</th><th scope="col">Notes</th><th scope="col">Tips</th></tr></thead>
   <tbody>
   ${dash.posts.map((p) => h`<tr>
     <td><a href="/dashboard/p/${p.slug}">${p.title}</a> <a class="small muted" href="/write/${p.id}">edit</a></td>
-    <td>${p.views}</td><td>${p.reads}</td><td>${p.views ? pct(p.completion) : '—'}</td><td>${p.views ? pct(p.medianDepth) : '—'}</td>
+    <td>${p.views}</td><td>${p.reads}</td><td>${p.views ? pct(p.completion) : '—'}</td><td class="muted">${pct(p.expected)}</td><td>${p.views ? `${p.medianMinutes.toFixed(1)} min` : '—'}</td><td>${p.views ? pct(p.medianDepth) : '—'}</td>
     <td>${p.keeps}</td><td>${p.passes}</td><td>${p.follows}</td><td>${p.notes}</td><td>${money(p.tip_cents)}</td></tr>`)}
   </tbody>
 </table></div>` : h`<p class="empty">Nothing published yet. <a href="/write/new">Write your first piece.</a></p>`}
@@ -460,10 +483,38 @@ ${dash.drafts.length ? h`<h2>Drafts</h2><ul class="plain">${dash.drafts.map((d) 
   </section>
 </div>
 
-<h2>Your list</h2>
-<p class="muted">Readers who follow you with a reader key and chose to share their email. You can take it anywhere.</p>
-${dash.list.length ? h`<ul class="plain">${dash.list.slice(0, 20).map((r) => h`<li class="mono small">${r.email} <span class="muted">since ${fmtDate(r.created_at)}</span></li>`)}</ul>` : h`<p class="empty">Empty so far. It fills when readers get a key, follow you, and choose to share their email.</p>`}
-<p><a class="btn" href="/dashboard/list.csv">Export CSV</a></p>`,
+<div class="two-col">
+  <section>
+    <h2>Your list</h2>
+    <p class="muted">People who asked for your new pieces by email and confirmed it, plus anyone you imported. It’s yours: export it any time.</p>
+    <div class="stats tight">
+      ${stat(dash.emailSubs, 'email followers')}
+      ${stat(dash.emailPending, 'awaiting confirmation')}
+      ${stat(dash.list.length, 'reader-key followers sharing email')}
+    </div>
+    <div class="row"><a class="btn" href="/dashboard/list.csv">Export list (CSV)</a></div>
+  </section>
+  <section>
+    <h2>Recommendations</h2>
+    <p class="muted">When readers follow you, Margin shows them the writers on your list. The ledger is public between writers: it’s how the network grows without an algorithm.</p>
+    <div class="stats tight">
+      ${stat(dash.sent, 'followers you sent others')}
+      ${stat(dash.received.reduce((n, r) => n + r.n, 0), 'followers others sent you')}
+    </div>
+    ${dash.received.length ? h`<p class="small">${dash.received.map((r, i) => h`${i ? ', ' : ''}<a href="/@${r.handle}">${r.name}</a> (${r.n})`)}</p>` : ''}
+  </section>
+</div>
+
+<h2 id="notes">Margin notes on your pieces</h2>
+${dash.notesList.length ? h`<ul class="plain notes-admin">${dash.notesList.map((n) => h`<li class="${n.hidden ? 'is-hidden' : ''}">
+  <p><span class="mono small">${n.hidden === 1 ? '⚑ hidden by reader flags' : n.hidden === 2 ? 'hidden by you' : n.flags ? `⚑ ${n.flags} flag${n.flags === 1 ? '' : 's'}` : 'visible'}</span> · <a href="/p/${n.slug}#notes">${n.title}</a></p>
+  <p>“${n.body}” <span class="muted small">— ${n.display_name}</span></p>
+  <form method="post" action="/desk/notes/${n.id}/${n.hidden ? 'show' : 'hide'}" class="inline"><button class="btn" type="submit">${n.hidden ? 'Show' : 'Hide'}</button></form>
+</li>`)}</ul>` : h`<p class="empty">No notes yet.</p>`}
+
+<h2>Come and go freely</h2>
+<p class="muted">Bring your archive and list from Substack, or take everything with you. Exports use Substack’s layout, so Ghost’s importer and others can read them.</p>
+<div class="row"><a class="btn" href="/desk/import">Import from Substack</a> <a class="btn" href="/desk/export.zip">Export everything (.zip)</a></div>`,
   });
 }
 
@@ -541,8 +592,38 @@ function editor({ author, post, error }) {
   });
 }
 
+function mailResult({ kind, sub, viewer }) {
+  return layout({
+    title: kind === 'confirmed' ? 'Confirmed' : 'Unsubscribed', author: viewer, path: `/${kind}`,
+    body: h`<div class="narrow">${box(kind === 'confirmed' ? 'confirmed.txt' : 'unsubscribed.txt', kind === 'confirmed'
+      ? h`<h1>You’re on ${sub.name}’s list.</h1><p>New pieces from ${sub.name} will come to <strong>${sub.email}</strong>. Nothing else will: no digests or promotions unless you ask. Every email has a one-click way out.</p><p><a href="/@${sub.handle}">Back to ${sub.name}’s homepage</a></p>`
+      : h`<h1>Done. No more email from ${sub.name}.</h1><p>You can still read everything without an account, any time.</p><p><a href="/@${sub.handle}">${sub.name}’s homepage</a> · <a href="/">today’s reading</a></p>`)}</div>`,
+  });
+}
+
+function importPage({ author }) {
+  return layout({
+    title: 'Import from Substack', author, active: 'dashboard', accent: author.accent, scripts: ['import.js'], path: '/desk/import',
+    body: h`<div class="narrow wide">
+  <p class="small mono"><a href="/dashboard">← desk</a></p>
+  ${box('import from substack', h`
+    <h1>Bring your archive</h1>
+    <ol class="steps">
+      <li>On Substack go to <strong>Settings → Exports → Create new export</strong>. Download the zip when it’s ready.</li>
+      <li>Choose it below. Posts, subtitles, dates and your email list come across. Your links keep their slugs where they’re free.</li>
+    </ol>
+    <p class="muted small">Public posts are published with their original dates. Paid-only posts come in as drafts, because Margin has no paywall. Images keep loading from Substack’s servers. Running the import twice won’t create duplicates.</p>
+    <form id="import-form" class="stack">
+      <label>Substack export (.zip) <input type="file" id="import-file" accept=".zip,application/zip" required></label>
+      <button class="btn primary" type="submit">Import</button>
+    </form>
+    <div id="import-result" aria-live="polite"></div>`)}
+</div>`,
+  });
+}
+
 function notFound({ viewer } = {}) {
   return layout({ title: 'Not found', author: viewer, path: '/404', body: h`<div class="narrow">${box('404.txt', h`<h1>Nothing here.</h1><p>That page moved, or never existed. The web is like that sometimes.</p><p><a href="/">Back to today’s reading</a> · <a href="/ring/random">somewhere random</a></p>`)}</div>` });
 }
 
-module.exports = { layout, home, article, authorPage, ringPage, commonplace, brief, declaration, about, authForm, dashboard, profileForm, postDetail, editor, notFound, h, raw, fmtDate };
+module.exports = { layout, home, article, authorPage, ringPage, commonplace, brief, declaration, about, authForm, dashboard, profileForm, postDetail, editor, notFound, mailResult, importPage, h, raw, fmtDate };

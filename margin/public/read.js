@@ -96,14 +96,23 @@
     var keptN = M.liveKept(s).length;
     if (!M.isFollowing(handle)) {
       logAsk('follow', 'shown');
-      var btn = el('button', { class: 'btn primary', text: 'Follow ' + name, on: { click: function () {
-        M.follow(handle, name, true, D.slug); logAsk('follow', 'accepted');
+      var recs = el('div', { class: 'recs-slot' });
+      var after = function (text, r) {
+        logAsk('follow', 'accepted');
         root.innerHTML = '';
-        root.appendChild(el('p', { text: 'Following. New pieces from ' + name + ' will sit at the top of Today in this browser.' }));
+        var p = el('p', { text: text });
+        if (r && r.previewLink) p.appendChild(el('span', { class: 'mono small' }, [' (Prototype: email isn’t sent yet. ', el('a', { href: r.previewLink, text: 'confirm here' }), '.)']));
+        root.appendChild(el('div', { class: 'ask' }, [p, recs]));
+        M.renderRecs(recs, handle, name, D.slug);
+      };
+      var btn = el('button', { class: 'btn primary', text: 'Follow ' + name, on: { click: function () {
+        M.follow(handle, name, true, D.slug);
+        after('Following. New pieces from ' + name + ' will sit at the top of Today in this browser.');
       } } });
       root.appendChild(el('div', { class: 'ask' }, [
-        el('p', {}, [el('strong', { text: 'Want the next one from ' + name + '?' }), ' Follow without an account or an email. We remember it in this browser.']),
-        btn,
+        el('p', {}, [el('strong', { text: 'Want the next one from ' + name + '?' }), ' Follow here with no account, or get new pieces by email.']),
+        el('div', { class: 'row' }, [btn]),
+        M.emailForm(handle, name, null, function (r) { if (r.already) return; M.follow(handle, name, true, D.slug); after('Almost there: confirm the email and you’re on ' + name + '’s list. Following here too.', r); }),
       ]));
       return;
     }
@@ -216,12 +225,23 @@
     if (!form.hidden) { form.hidden = true; pending = null; }
   });
 
+  function fragEnc(t) { return encodeURIComponent(t).replace(/-/g, '%2D').replace(/,/g, '%2C').replace(/&/g, '%26'); }
+  function textFragment(text) {
+    var words = text.replace(/[“”"]/g, ' ').trim().split(/\s+/).filter(Boolean);
+    if (!words.length) return '';
+    if (words.length <= 10) return '#:~:text=' + fragEnc(words.join(' '));
+    return '#:~:text=' + fragEnc(words.slice(0, 5).join(' ')) + ',' + fragEnc(words.slice(-5).join(' '));
+  }
+
   // Pass it on: a link that opens this piece with this passage highlighted.
   // The writer sees that the piece was passed on, not who passed it.
   function doPass(info) {
     M.api('/api/pass', { slug: D.slug, para: info.para }).then(function (r) {
       if (!r || !r.ok) { toast('Could not make a link. Try again.'); return; }
-      var url = location.origin + r.url;
+      // A text fragment (#:~:text=) makes browsers highlight the passage
+      // natively (Chrome, Edge, Safari 16.1+, Firefox 131+), even without our
+      // script. The ?p= parameter is for our own highlight and the preview.
+      var url = location.origin + r.url + textFragment(info.text);
       var coarse = window.matchMedia && matchMedia('(pointer: coarse)').matches;
       if (coarse && navigator.share) {
         navigator.share({ title: D.title, text: '“' + info.text + '”', url: url }).catch(function () {});
@@ -240,7 +260,15 @@
     setTimeout(function () { t.remove(); }, 2800);
   }
 
+  document.querySelectorAll('.flag-note').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (!confirm('Flag this note as spam or abuse? Three flags hide it until the writer reviews it.')) return;
+      M.api('/api/note/flag', { id: Number(b.getAttribute('data-note')) }).then(function () { b.textContent = 'flagged'; b.disabled = true; });
+    });
+  });
+
   function doKeep(info) {
+    M.persist();
     M.keep({ slug: D.slug, title: D.title, author: D.author.name, handle: D.author.handle, para: info.para, text: info.text, note: '' });
     M.api('/api/keep', { slug: D.slug, para: info.para, pv: pv });
     var node = paraEl(info.para);

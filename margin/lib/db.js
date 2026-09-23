@@ -109,6 +109,28 @@ CREATE TABLE IF NOT EXISTS passes (
   created_at INTEGER NOT NULL
 );
 CREATE INDEX IF NOT EXISTS passes_post ON passes(post_id);
+-- Email follows: one writer, one address, double opt-in. No account.
+CREATE TABLE IF NOT EXISTS email_subs (
+  id INTEGER PRIMARY KEY,
+  author_id INTEGER NOT NULL REFERENCES authors(id),
+  email TEXT NOT NULL,
+  token TEXT UNIQUE NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending',
+  source TEXT NOT NULL DEFAULT 'follow',
+  via_author_id INTEGER REFERENCES authors(id),
+  created_at INTEGER NOT NULL,
+  confirmed_at INTEGER,
+  UNIQUE (author_id, email)
+);
+-- Mail that would be sent. Delivery is not wired up in this prototype.
+CREATE TABLE IF NOT EXISTS mail (
+  id INTEGER PRIMARY KEY,
+  to_email TEXT NOT NULL,
+  subject TEXT NOT NULL,
+  body TEXT NOT NULL,
+  kind TEXT NOT NULL,
+  created_at INTEGER NOT NULL
+);
 CREATE TABLE IF NOT EXISTS outbox (
   id INTEGER PRIMARY KEY,
   reader_id INTEGER NOT NULL REFERENCES readers(id),
@@ -134,6 +156,10 @@ const COLUMNS = [
   ['authors', 'accent', "TEXT NOT NULL DEFAULT 'cobalt'"],
   ['authors', 'blogroll', "TEXT NOT NULL DEFAULT ''"],
   ['views', 'seen_at', 'INTEGER NOT NULL DEFAULT 0'],
+  ['follow_events', 'via_author_id', 'INTEGER'],
+  ['notes', 'hidden', 'INTEGER NOT NULL DEFAULT 0'],
+  ['notes', 'flags', 'INTEGER NOT NULL DEFAULT 0'],
+  ['posts', 'imported_from', "TEXT NOT NULL DEFAULT ''"],
 ];
 function migrate(db) {
   for (const [table, col, def] of COLUMNS) {
