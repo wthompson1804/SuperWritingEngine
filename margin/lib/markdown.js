@@ -110,7 +110,7 @@ function render(md) {
     let m;
     if ((m = line.match(/^(#{1,3})\s+(.*)$/))) {
       flushAll();
-      const level = Math.min(m[1].length + 1, 4); // # -> h2; the title owns h1
+      const level = m[1].length === 3 ? 3 : 2; // the title owns h1; # and ## are sections, ### subsections
       const i = addBlock('h', m[2]);
       html.push(`<h${level} data-p="${i}">${inl(m[2])}</h${level}>`);
       continue;

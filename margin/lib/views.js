@@ -92,13 +92,14 @@ ${og.url ? h`<meta property="og:url" content="${og.url}"><link rel="canonical" h
 </footer>
 ${data ? h`<script type="application/json" id="page-data">${raw(JSON.stringify(data).replace(/</g, '\\u003c'))}</script>` : ''}
 <script src="/static/local.js"></script>
+<script src="/static/ui.js"></script>
 ${scripts.map((s) => h`<script src="/static/${s}"></script>`)}
 </body>
 </html>`.s;
 }
 
 function box(title, inner, cls = '') {
-  return h`<section class="box ${cls}"><p class="bar"><span>${title}</span><span aria-hidden="true">□ ×</span></p><div class="box-body">${inner}</div></section>`;
+  return h`<section class="box ${cls}"><p class="bar"><span>${title}</span><span class="dots" aria-hidden="true"></span></p><div class="box-body">${inner}</div></section>`;
 }
 
 function card(s, i) {
@@ -125,6 +126,10 @@ function home({ picks, author, liveNow, spot, now }) {
     <p class="lede">${plural(picks.length, 'piece')}, about ${minutes} minutes. That’s the whole page. Read what you like, keep the lines that matter, and pass them on.</p>
   </section>
 
+  <div class="personal">
+    <div id="following" hidden>${box('new from writers you follow', h`<div id="following-list"></div>`)}</div>
+    <div id="resurface" hidden>${box('from your commonplace', h`<blockquote id="resurface-text"></blockquote><p class="meta" id="resurface-meta"></p>`, 'resurface')}</div>
+  </div>
   <ol class="picks" aria-label="Today's pieces">
     ${picks.map(card)}
   </ol>
@@ -141,8 +146,6 @@ function home({ picks, author, liveNow, spot, now }) {
       <div><dt>accounts required</dt><dd>0</dd></div>
       <div><dt>updated</dt><dd>${fmtTime(now)}</dd></div>
     </dl>`)}
-    <div id="resurface" hidden>${box('from your commonplace', h`<blockquote id="resurface-text"></blockquote><p class="meta" id="resurface-meta"></p>`, 'resurface')}</div>
-    <div id="following" hidden>${box('writers you follow', h`<div id="following-list"></div>`)}</div>
     ${spot ? box('from the ring', h`<p class="spot-name"><a href="/@${spot.handle}?via=ring">${spot.name}</a></p>
       ${spot.now_line ? h`<p class="now-line">${spot.now_line}</p>` : ''}
       ${spot.latest_slug ? h`<p class="small">Latest: <a href="/p/${spot.latest_slug}?via=ring">${spot.latest_title}</a></p>` : ''}
@@ -178,6 +181,7 @@ function article({ post, author, rendered, notes, topKeep, keepCounts, next, vie
       slug: post.slug, title: post.title, words: post.words, minMs: post.words * 87,
       author: { handle: author.handle, name: author.name },
       hasRecs: blogroll.some((b) => b.kind === 'writer'),
+      fediHandle: og.fediHandle || '',
       noteCounts: Object.fromEntries([...notesByPara].map(([p, ns]) => [p, ns.length])),
       topKeep, keepCounts,
     },
@@ -193,25 +197,24 @@ function article({ post, author, rendered, notes, topKeep, keepCounts, next, vie
       <span class="live" aria-hidden="true"></span><span id="now-n">${stats.now}</span> reading now · ${stats.reads ? h`finished by <span id="fin-n">${stats.reads}</span> ${stats.reads === 1 ? 'person' : 'people'}` : 'be the first to finish it'}
     </p>
   </header>
-  <div class="passed-banner" id="passed-banner" hidden role="note">
-    <p><strong>Someone passed this to you.</strong> The passage they picked is highlighted below.</p>
-  </div>
+  ${og.published ? h`<p class="ok published-note" role="status">Published. ${og.published}</p>` : ''}
   <div class="body" id="body">${raw(rendered.html)}</div>
-  <p class="hint mono" id="hint">tip: select any sentence to keep it, pass it on, or write in the margin</p>
+  <p class="hint" id="hint">Select any sentence, or use the <span aria-hidden="true">⋯</span> beside a paragraph, to keep it, pass it on, or write in the margin.</p>
 </article>
 
 <section class="finish box" id="finish" hidden aria-live="polite">
   <p class="bar"><span>you finished it</span><span aria-hidden="true">✓</span></p>
   <div class="box-body">
     <div id="ask"></div>
-    <div class="tip" id="tip">
-      <p><strong>Pay what it was worth.</strong> No account. All of it goes to ${author.name}.</p>
+    <details class="tip" id="tip">
+      <summary>Pay what it was worth</summary>
+      <p class="small">No account needed. All of it goes to ${author.name}, minus card fees (about 30¢ + 2.9%, so $5 leaves about $4.55).</p>
       <div class="row">
         ${[300, 500, 1000].map((c) => h`<button class="btn" type="button" data-tip="${c}">${money(c)}</button>`)}
       </div>
-      <p class="muted small">Card fees take about 30¢ + 2.9% of each tip, so $5 leaves about $4.55 for ${author.name}. Prototype: no money moves yet; the tip is only recorded.</p>
+      <p class="muted small">Prototype: no money moves yet; the tip is only recorded.</p>
       <p class="ok small" id="tip-thanks" hidden role="status">Thank you. ${author.name} will see it.</p>
-    </div>
+    </details>
   </div>
 </section>
 
@@ -248,6 +251,7 @@ function article({ post, author, rendered, notes, topKeep, keepCounts, next, vie
   <button type="button" data-act="keep">keep</button>
   <button type="button" data-act="pass">pass it on</button>
   <button type="button" data-act="note">note</button>
+  <button type="button" data-act="close" class="selbar-close" aria-label="Close">×</button>
 </div>`,
   });
 }
@@ -284,7 +288,7 @@ function authorPage({ author, posts, viewer, blogroll, recommendedBy, fediHandle
   <section class="hp-posts">
     <h2 class="label">Writing</h2>
     ${posts.length ? h`<ol class="picks plain-picks">${posts.map((p) => h`<li class="card" data-slug="${p.slug}"><div class="card-main">
-      <h2><a href="/p/${p.slug}?via=author">${p.title}</a></h2>
+      <h3><a href="/p/${p.slug}?via=author">${p.title}</a></h3>
       ${p.dek ? h`<p class="dek">${p.dek}</p>` : ''}
       <p class="meta">${fmtDate(p.published_at)} · ${readingMinutes(p.words)} min<span class="done-mark" hidden> · ✓ finished</span></p>
     </div></li>`)}</ol>` : h`<p class="empty">Nothing published yet. Check back, or follow to see it first.</p>`}
@@ -336,8 +340,12 @@ function commonplace({ viewer }) {
       <button class="btn" type="button" id="export-md">Export Markdown</button>
       <button class="btn" type="button" id="export-json">Export JSON</button>
       <button class="btn" type="button" id="export-readwise">Readwise CSV</button>
-      <button class="btn danger" type="button" id="clear-local">Forget this device</button>
     </div>
+    <details class="danger-zone">
+      <summary>Erase everything on this device</summary>
+      <p class="small">Removes every kept passage, note, follow and finished piece from this browser. If you have a reader key, the copy Margin holds stays.</p>
+      <button class="btn danger" type="button" id="clear-local">Erase this browser’s copy</button>
+    </details>
   </aside>
 </div>`,
   });
@@ -462,19 +470,19 @@ function dashboard({ author, dash }) {
 </section>
 <div class="stats">
   ${stat(h`<span class="live" aria-hidden="true"></span>${dash.now}`, 'reading now')}
-  ${stat(totals.views, 'opens')}
-  ${stat(totals.reads, 'verified reads')}
+  ${stat(totals.views, 'opened')}
+  ${stat(totals.reads, 'read to the end')}
   ${stat(totals.views ? pct(totals.reads / totals.views) : '—', 'finish rate')}
   ${stat(totals.keeps, 'passages kept')}
   ${stat(totals.passes, 'passed on')}
   ${stat(dash.followers, 'followers')}
   ${stat(money(totals.tips), 'tips (simulated)')}
 </div>
-<p class="muted small">“Typical” is the usual finish rate for a piece of that length. Long pieces are harder to finish, so Margin ranks against that, not raw completion. A verified read means someone reached 90% of the piece and the page was visible for at least a third of normal reading time. Followers includes anonymous follows; ${plural(dash.keyedFollowers, 'follower')} ${dash.keyedFollowers === 1 ? 'has' : 'have'} a reader key.</p>
+<p class="muted small">“Typical” is the usual finish rate for a piece of that length. Long pieces are harder to finish, so Margin ranks against that, not raw completion. “Read to the end” means someone reached 90% of the piece and the page was visible for at least a third of normal reading time. Followers includes anonymous follows; ${plural(dash.keyedFollowers, 'follower')} ${dash.keyedFollowers === 1 ? 'has' : 'have'} a reader key.</p>
 
 <h2>Pieces</h2>
 ${dash.posts.length ? h`<div class="table-wrap" tabindex="0" role="region" aria-label="Pieces table"><table class="data">
-  <thead><tr><th scope="col">Piece</th><th scope="col">Opens</th><th scope="col">Reads</th><th scope="col">Finish</th><th scope="col">Typical</th><th scope="col">Median time</th><th scope="col">Median depth</th><th scope="col">Kept</th><th scope="col">Passed on</th><th scope="col">Follows</th><th scope="col">Notes</th><th scope="col">Tips</th></tr></thead>
+  <thead><tr><th scope="col">Piece</th><th scope="col">Opened</th><th scope="col">Read to end</th><th scope="col">Finish</th><th scope="col">Typical</th><th scope="col">Median time</th><th scope="col">Median depth</th><th scope="col">Kept</th><th scope="col">Passed on</th><th scope="col">Follows</th><th scope="col">Notes</th><th scope="col">Tips</th></tr></thead>
   <tbody>
   ${dash.posts.map((p) => h`<tr>
     <td><a href="/dashboard/p/${p.slug}">${p.title}</a> <a class="small muted" href="/write/${p.id}">edit</a></td>
@@ -491,8 +499,8 @@ ${dash.drafts.length ? h`<h2>Drafts &amp; scheduled</h2><ul class="plain">${dash
     <p class="muted small">“Passed on” counts people who arrived through a passage link another reader shared. That’s word of mouth, measured without knowing who said it.</p>
   </section>
   <section>
-    <h2>The earned ask</h2>
-    <p class="muted small">Readers are only asked for something after they finish a piece.</p>
+    <h2>When readers were asked</h2>
+    <p class="muted small">Margin asks readers to follow only after they reach the end of a piece. This is how often they said yes.</p>
     <div class="stats tight">
       ${stat(f.shown ? pct(f.accepted / f.shown) : '—', `follow: ${f.accepted} of ${f.shown}`)}
       ${stat(k.shown ? pct(k.accepted / k.shown) : '—', `reader key: ${k.accepted} of ${k.shown}`)}
@@ -509,7 +517,7 @@ ${dash.drafts.length ? h`<h2>Drafts &amp; scheduled</h2><ul class="plain">${dash
     <div class="stats tight">
       ${stat(dash.emailSubs, 'email followers')}
       ${stat(dash.emailPending, 'awaiting confirmation')}
-      ${stat(dash.list.length, 'reader-key followers sharing email')}
+      ${stat(dash.list.length, 'shared their email via a reader key')}
       ${stat(dash.fedi, 'fediverse followers')}
     </div>
     <div class="row"><a class="btn" href="/dashboard/list.csv">Export list (CSV)</a></div>
@@ -538,7 +546,7 @@ ${dash.notesList.length ? h`<ul class="plain notes-admin">${dash.notesList.map((
   });
 }
 
-function profileForm({ author, accents, error, saved }) {
+function profileForm({ author, accents, error, saved, dropped = [] }) {
   return layout({
     title: 'Edit homepage', author, active: 'dashboard', accent: author.accent, path: '/desk/profile',
     body: h`
@@ -548,6 +556,7 @@ function profileForm({ author, accents, error, saved }) {
     <h1>Your homepage</h1>
     ${error ? h`<p class="error" role="alert">${error}</p>` : ''}
     ${saved ? h`<p class="ok" role="status">Saved. <a href="/@${author.handle}">See it →</a></p>` : ''}
+    ${dropped.length ? h`<div class="error" role="alert"><p>These lines in “Who you read” weren’t saved:</p><ul>${dropped.map((d) => h`<li><code>${d.line}</code>: ${d.why}</li>`)}</ul></div>` : ''}
     <form method="post" action="/desk/profile" class="stack">
       <label>Name <input name="name" required maxlength="60" value="${author.name}"></label>
       <label>About you <textarea name="bio" maxlength="280" rows="3">${author.bio}</textarea></label>
@@ -586,11 +595,11 @@ function postDetail({ author, post, stats, paras }) {
   });
 }
 
-function editor({ author, post, error, notice }) {
+function editor({ author, post, error, notice, reach = { email: 0, fedi: 0 } }) {
   const p = post || { id: 'new', title: '', dek: '', body_md: '', status: 'draft', slug: '' };
   return layout({
     title: p.id === 'new' ? 'New piece' : `Edit: ${p.title}`, author, active: 'dashboard', scripts: ['write.js'], accent: author.accent, path: '/desk/write',
-    data: { id: p.id, status: p.status },
+    data: { id: p.id, status: p.status, firstPublish: !p.published_at, reach },
     body: h`
 <section class="editor">
   <p class="small mono"><a href="/dashboard">← desk</a> ${p.status === 'published' ? h`· <a href="/p/${p.slug}">view published</a>` : ''}
@@ -600,7 +609,7 @@ function editor({ author, post, error, notice }) {
   ${p.status === 'scheduled' ? h`<p class="scheduled-note">Scheduled for <strong><time class="local-time" datetime="${new Date(p.publish_at).toISOString()}">${new Date(p.publish_at).toUTCString()}</time></strong>.</p>` : ''}
   <form method="post" action="/write/${String(p.id)}" class="stack" id="editor-form">
     <label>Title <input name="title" required maxlength="140" value="${p.title}" class="title-input"></label>
-    <label>Dek <span class="small muted">One sentence that goes under the title.</span><input name="dek" maxlength="240" value="${p.dek}"></label>
+    <label>Subtitle <span class="small muted">One sentence under the title. It also shows in link previews.</span><input name="dek" maxlength="240" value="${p.dek}"></label>
     <div class="editor-grid">
       <div class="stack">
         <label>Body <span class="small muted">Markdown: ## heading, *italic*, **bold**, &gt; quote, - list, [link](https://…), footnote[^1] with a line “[^1]: note”</span>
@@ -661,8 +670,12 @@ function importPage({ author }) {
   });
 }
 
+function tooMany() {
+  return layout({ title: 'Slow down', path: '/429', body: h`<div class="narrow">${box('429.txt', h`<h1>Too many tries.</h1><p>Wait a minute, then try again.</p><p><a href="/login">Back to sign-in</a></p>`)}</div>` });
+}
+
 function notFound({ viewer } = {}) {
   return layout({ title: 'Not found', author: viewer, path: '/404', body: h`<div class="narrow">${box('404.txt', h`<h1>Nothing here.</h1><p>That page moved, or never existed. The web is like that sometimes.</p><p><a href="/">Back to today’s reading</a> · <a href="/ring/random">somewhere random</a></p>`)}</div>` });
 }
 
-module.exports = { layout, home, article, authorPage, ringPage, commonplace, brief, declaration, about, authForm, dashboard, profileForm, postDetail, editor, notFound, mailResult, importPage, h, raw, fmtDate };
+module.exports = { tooMany, layout, home, article, authorPage, ringPage, commonplace, brief, declaration, about, authForm, dashboard, profileForm, postDetail, editor, notFound, mailResult, importPage, h, raw, fmtDate };

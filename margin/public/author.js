@@ -6,7 +6,7 @@
   var recs = document.getElementById('recs');
   function paint() {
     var on = M.isFollowing(D.handle);
-    btn.textContent = on ? 'Following' : 'Follow';
+    btn.textContent = on ? 'Following here ✓' : 'Follow here';
     btn.classList.toggle('primary', !on);
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
   }
@@ -26,7 +26,7 @@
       if (!r.ok) { msg.textContent = r.error || 'That didn’t work.'; return; }
       msg.innerHTML = '';
       if (r.already) { msg.textContent = 'You’re already on ' + D.name + '’s list.'; return; }
-      msg.appendChild(document.createTextNode('Check your inbox for a confirmation link. '));
+      msg.appendChild(document.createTextNode('One step left: open the email we just sent and tap confirm. It works for 7 days, and we’ll remind you once. '));
       if (r.previewLink) msg.appendChild(M.el('span', { class: 'mono' }, ['(Prototype: email isn’t sent yet. ', M.el('a', { href: r.previewLink, text: 'confirm here' }), '.)']));
       if (!M.isFollowing(D.handle)) { M.follow(D.handle, D.name, true); paint(); }
       M.renderRecs(recs, D.handle, D.name);

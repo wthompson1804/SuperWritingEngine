@@ -70,7 +70,7 @@ function importSubstack(h, authorId, zipBuf, now = Date.now()) {
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || truthy(row.email_disabled)) { report.subscribers.skipped++; continue; }
         if (truthy(row.active_subscription)) report.subscribers.paid++;
         const res = h.run(`INSERT OR IGNORE INTO email_subs (author_id, email, token, status, source, created_at, confirmed_at)
-                           VALUES (?,?,?, 'active', 'import', ?, ?)`, authorId, email, crypto.randomBytes(18).toString('base64url'), Date.parse(row.created_at) || now, now);
+                           VALUES (?,?,?, 'active', 'import', ?, ?)`, authorId, email, crypto.randomBytes(18).toString('base64url'), Date.parse(row.created_at) || now, Date.parse(row.created_at) || now);
         if (res.changes) report.subscribers.imported++; else report.subscribers.already++;
       }
     }

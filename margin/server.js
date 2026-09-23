@@ -91,6 +91,17 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   const queueMail = (to, subject, body, kind) => h.run('INSERT INTO mail (to_email, subject, body, kind, created_at) VALUES (?,?,?,?,?)', to, subject, body, kind, Date.now());
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  function reach(authorId) {
+    return {
+      email: h.get(`SELECT count(*) AS n FROM email_subs WHERE author_id = ? AND status = 'active'`, authorId).n,
+      fedi: h.get('SELECT count(*) AS n FROM ap_followers WHERE author_id = ?', authorId).n,
+    };
+  }
+  const reachText = (authorId) => {
+    const r = reach(authorId);
+    return `It went to ${r.email} email follower${r.email === 1 ? '' : 's'} and ${r.fedi} fediverse follower${r.fedi === 1 ? '' : 's'}; everyone else sees it on your homepage and in the ring.`;
+  };
+
   // Everything that happens the first time a piece goes public: email to
   // confirmed followers, and a Create to fediverse followers. Used by the
   // editor and by the scheduler.
@@ -203,7 +214,8 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     const reads = h.get(`SELECT count(*) AS n FROM views WHERE post_id = ? AND max_depth >= 0.9 AND dwell_ms >= ?`, post.id, post.words * signals.MS_PER_WORD_FLOOR).n;
     html(res, views.article({ post, author, rendered, notes, topKeep, keepCounts, next: signals.nextReads(h, post), viewer: ctx.author,
       stats: { now: ring.readingNow(h, post.id), reads }, blogroll: ring.parseBlogroll(h, author.blogroll),
-      og: { url: `${baseUrl(req)}/p/${post.slug}`, passage } }));
+      og: { url: `${baseUrl(req)}/p/${post.slug}`, passage, fediHandle: `@${author.handle}@${new URL(baseUrl(req)).host}`,
+        published: ctx.author && ctx.author.id === post.author_id && ctx.url.searchParams.has('published') ? reachText(post.author_id) : '' } }));
   });
 
   on('GET', /^\/@([\w]+)$/, (req, res, m, ctx) => {
@@ -317,9 +329,20 @@ ${items}
       const author = { ...h.get('SELECT * FROM authors WHERE id = ?', ctx.author.id), ...b, accent };
       return html(res, views.profileForm({ author, accents: ring.ACCENTS, error: 'Your homepage needs a name.' }), 400);
     }
+    const lines = String(b.blogroll || '').split('\n').map((l) => l.trim()).filter(Boolean);
+    const dropped = [];
+    for (const line of lines) {
+      if (/^@[a-z0-9_]{2,24}$/i.test(line)) {
+        if (!h.get('SELECT id FROM authors WHERE handle = ?', line.slice(1).toLowerCase())) dropped.push({ line, why: 'no writer with that handle on Margin' });
+      } else if (!/^https?:\/\/\S+/i.test(line)) dropped.push({ line, why: 'use @handle or a link starting with https://' });
+    }
+    if (lines.length - dropped.length > 12) dropped.push({ line: '…', why: 'only the first 12 are kept' });
     h.run('UPDATE authors SET name = ?, bio = ?, now_line = ?, accent = ?, blogroll = ? WHERE id = ?',
-      name, String(b.bio || '').trim().slice(0, 280), String(b.now_line || '').trim().slice(0, 140), accent, ring.normalizeBlogroll(b.blogroll), ctx.author.id);
-    redirect(res, '/desk/profile?saved=1');
+      name, String(b.bio || '').trim().slice(0, 280), String(b.now_line || '').trim().slice(0, 140), accent,
+      ring.normalizeBlogroll(lines.filter((l) => !dropped.some((d) => d.line === l)).join('\n')), ctx.author.id);
+    if (!dropped.length) return redirect(res, '/desk/profile?saved=1');
+    const author = h.get('SELECT id, handle, name, bio, now_line, accent, blogroll FROM authors WHERE id = ?', ctx.author.id);
+    html(res, views.profileForm({ author, accents: ring.ACCENTS, saved: true, dropped }));
   }));
 
   on('GET', /^\/dashboard\/p\/([\w-]+)$/, needAuthor((req, res, m, ctx) => {
@@ -340,11 +363,11 @@ ${items}
   }));
 
   on('GET', /^\/write\/(new|\d+)$/, needAuthor((req, res, m, ctx) => {
-    if (m[1] === 'new') return html(res, views.editor({ author: ctx.author }));
+    if (m[1] === 'new') return html(res, views.editor({ author: ctx.author, reach: reach(ctx.author.id) }));
     const post = h.get('SELECT * FROM posts WHERE id = ? AND author_id = ?', Number(m[1]), ctx.author.id);
     if (!post) return html(res, views.notFound({ viewer: ctx.author }), 404);
     const q = ctx.url.searchParams;
-    html(res, views.editor({ author: ctx.author, post, notice: q.has('scheduled') ? 'Scheduled. It will go live on its own.' : q.has('saved') ? 'Saved.' : '' }));
+    html(res, views.editor({ author: ctx.author, post, reach: reach(ctx.author.id), notice: q.has('scheduled') ? 'Scheduled. It will go live on its own.' : q.has('saved') ? 'Saved.' : '' }));
   }));
 
   on('POST', /^\/write\/(new|\d+)$/, needAuthor(async (req, res, m, ctx) => {
@@ -377,7 +400,7 @@ ${items}
     }
     if (action === 'unpublish' || action === 'unschedule') h.run(`UPDATE posts SET status = 'draft', publish_at = NULL WHERE id = ?`, post.id);
     const fresh = h.get('SELECT * FROM posts WHERE id = ?', post.id);
-    redirect(res, action === 'publish' ? `/p/${fresh.slug}` : `/write/${fresh.id}${action === 'schedule' ? '?scheduled=1' : '?saved=1'}`);
+    redirect(res, action === 'publish' ? `/p/${fresh.slug}${post.published_at ? '' : '?published=1'}` : `/write/${fresh.id}${action === 'schedule' ? '?scheduled=1' : '?saved=1'}`);
   }));
 
   // ----- anonymous reading signals -----
@@ -497,6 +520,7 @@ ${items}
     if (!reader) return json(res, { ok: false }, 404);
     const email = String(b.email || '').trim().slice(0, 200);
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json(res, { ok: false, error: 'That email doesn\'t look right.' }, 400);
+    if (!email && (b.digest || b.share_email)) return json(res, { ok: false, error: 'Add an email address first. The Brief and sharing both need one.' }, 400);
     h.run('UPDATE readers SET email = ?, digest = ?, share_email = ?, updated_at = ? WHERE id = ?', email || null, b.digest && email ? 1 : 0, b.share_email && email ? 1 : 0, Date.now(), reader.id);
     json(res, { ok: true, prefs: prefsOf(h.get('SELECT * FROM readers WHERE id = ?', reader.id)) });
   });
@@ -679,7 +703,7 @@ ${items}
     const ctx = { url, author: currentAuthor(req), proto: req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http' };
     if (req.headers.host) lastBase = `${ctx.proto}://${req.headers.host}`;
     if (req.method === 'POST' && url.pathname.startsWith('/api/') && limited(ip)) return json(res, { ok: false, error: 'Slow down a little.' }, 429);
-    if (req.method === 'POST' && (url.pathname === '/login' || url.pathname === '/signup') && limited('auth:' + ip, 20)) return html(res, views.notFound({}), 429);
+    if (req.method === 'POST' && (url.pathname === '/login' || url.pathname === '/signup') && limited('auth:' + ip, 20)) return html(res, views.tooMany(), 429);
     const method = req.method === 'HEAD' ? 'GET' : req.method;
     for (const r of routes) {
       if (r.method !== method) continue;

@@ -43,16 +43,23 @@
       items.forEach(function (k) {
         var note = el('textarea', { rows: '2', placeholder: 'Why did this matter?', 'aria-label': 'Your note on this passage' });
         note.value = k.note || '';
-        note.addEventListener('change', function () {
-          M.update(function (s) { var x = s.kept[k.id]; if (x) { x.keptAt = keptAt(x); x.note = note.value; x.ts = Date.now(); } });
+        var noteState = el('span', { class: 'small muted note-state', 'aria-live': 'polite' });
+        var timer = null;
+        note.addEventListener('input', function () {
+          noteState.textContent = '…';
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            M.update(function (s) { var x = s.kept[k.id]; if (x) { x.keptAt = keptAt(x); x.note = note.value; x.ts = Date.now(); } });
+            noteState.textContent = 'saved';
+          }, 500);
         });
         sec.appendChild(el('div', { class: 'cp-item' }, [
           el('blockquote', {}, [el('a', { href: '/p/' + slug + '#p-' + k.para, text: k.text })]),
           note,
-          el('button', { class: 'link small', type: 'button', text: 'Remove', on: { click: function () {
+          el('div', { class: 'row' }, [noteState, el('button', { class: 'link small', type: 'button', text: 'Remove passage', on: { click: function () {
             M.update(function (s) { var x = s.kept[k.id]; if (x) { x.keptAt = keptAt(x); x.deleted = true; x.ts = Date.now(); } });
             render();
-          } } }),
+          } } })]),
         ]));
       });
       list.appendChild(sec);
@@ -90,7 +97,7 @@
   document.getElementById('export-json').addEventListener('click', exportJson);
   document.getElementById('export-readwise').addEventListener('click', exportReadwise);
   document.getElementById('clear-local').addEventListener('click', function () {
-    if (!confirm('Forget every passage, follow and finished piece on this device? If you have a reader key, your copy on the server stays.')) return;
+    if (!confirm('Erase every passage, note, follow and finished piece in this browser? This can’t be undone here. (A reader key’s copy on Margin stays.)')) return;
     try { localStorage.removeItem('margin:v1'); } catch (e) { /* ignore */ }
     render(); M.renderKeyPanel(document.getElementById('key-panel'), { onChange: render });
   });

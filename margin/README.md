@@ -7,7 +7,15 @@ A long-form publishing platform where **readers never need an account to read**,
 
 - **v3 (research-driven):** email follow per writer with double opt-in, recommendations shown right after a follow (credited to the recommending writer), length-normalized ranking, Substack import/export, text-fragment passage links with quote previews, spaced resurfacing, backup/export for the commonplace, and note moderation.
 
-Why it's shaped this way: **[DESIGN.md](DESIGN.md)** (§0 has what changed in v3 and why). Sources: **[RESEARCH.md](RESEARCH.md)**.
+- **v4 (refinement):**
+  - Every writer is followable from Mastodon and Threads via ActivityPub.
+  - Keep, pass it on and note work by keyboard and screen reader.
+  - A share sheet on phones, and a toolbar docked to the bottom on touch screens.
+  - One ask at the end of a piece.
+  - Reading settings (text size, light/dark).
+  - For writers: autosave, image upload, footnotes, scheduled publishing, and a publish confirmation.
+
+Why it's shaped this way: **[DESIGN.md](DESIGN.md)**. §0 has what changed in v4, §0b what changed in v3. Sources: **[RESEARCH.md](RESEARCH.md)**.
 
 ## Run it
 
@@ -16,7 +24,7 @@ Requires Node 22.13+ and has no dependencies. It uses the built-in `node:sqlite`
 ```bash
 cd margin
 npm start            # http://localhost:3000  (PORT=... to change)
-npm test             # 21 tests, including Substack import/export round-trip, email opt-in, moderation
+npm test             # 33 tests, including ActivityPub signatures both ways, Substack import/export, autosave, scheduling
 npm run digest       # build this week's Brief for opted-in readers into data/outbox/
 npm run reset        # delete the local database; it re-seeds on next start
 ```
@@ -60,6 +68,10 @@ public/fonts/        self-hosted Newsreader, Fraunces, IBM Plex Mono (SIL Open F
 scripts/digest.js    The Brief builder
 test/app.test.js     end-to-end tests against an in-memory database
 ```
+
+## Deploying federation
+
+Set `MARGIN_PUBLIC_URL=https://your.domain` (fediverse ids must be stable and on HTTPS) and `MARGIN_SECURE_COOKIES=1`. Writers are then `@handle@your.domain`. Outbound fetches refuse private IPs and non-HTTPS URLs, but they don't resolve DNS, so put the server behind an egress firewall. `MARGIN_AP_INSECURE=1` exists only for local testing.
 
 ## What is simulated
 

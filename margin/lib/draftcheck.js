@@ -57,6 +57,9 @@ function checkBody(md) {
   for (const p of ACADEMIC) { const n = count(p); if (n) out.push({ level: 'warn', rule: 'A.2', msg: `Academic distance: "${p}".` }); }
   for (const [r, verb] of NOMINALIZED) if (r.test(text)) out.push({ level: 'warn', rule: 'A.2', msg: `"${text.match(r)[0]}" → "${verb}".` });
 
+  const placeholders = (text.match(/Describe the image for people who can’t see it/g) || []).length;
+  if (placeholders) out.push({ level: 'warn', rule: 'img', msg: `${placeholders} image${placeholders === 1 ? ' still has' : 's still have'} placeholder alt text. Describe ${placeholders === 1 ? 'it' : 'them'} before publishing; it also becomes the caption.` });
+
   const words = countWords(text);
   const questions = (text.match(/\?/g) || []).length;
   const allowed = Math.max(1, Math.floor(words / 500));

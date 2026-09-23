@@ -133,7 +133,8 @@ test('writer flow: signup, draft, check, publish, dashboard, CSV', async () => {
   assert.equal((await fetch(base + '/p/a-test-piece')).status, 404, 'drafts are not public');
 
   const pub = await form(`/write/${id}`, { title: 'A Test Piece, Renamed', dek: 'd', body_md: 'The claim is simple.\n\nMore text.', action: 'publish' }, cookie);
-  assert.equal(pub.headers.get('location'), '/p/a-test-piece-renamed');
+  assert.equal(pub.headers.get('location'), '/p/a-test-piece-renamed?published=1');
+  assert.match(await (await fetch(base + '/p/a-test-piece-renamed?published=1', { headers: { Cookie: cookie } })).text(), /Published\. It went to 0 email followers/);
   assert.equal((await fetch(base + '/p/a-test-piece-renamed')).status, 200);
 
   // Another writer can't edit it.
@@ -142,7 +143,7 @@ test('writer flow: signup, draft, check, publish, dashboard, CSV', async () => {
   assert.equal((await fetch(`${base}/write/${id}`, { headers: { Cookie: maraCookie } })).status, 404);
 
   const dash = await (await fetch(base + '/dashboard', { headers: { Cookie: maraCookie } })).text();
-  assert.match(dash, /verified reads/);
+  assert.match(dash, /read to the end/);
   const detail = await fetch(base + '/dashboard/p/the-meeting-is-the-work-now', { headers: { Cookie: maraCookie } });
   assert.equal(detail.status, 200);
   const csv = await fetch(base + '/dashboard/list.csv', { headers: { Cookie: maraCookie } });
@@ -196,7 +197,10 @@ test('writer homepage settings validate accent and blogroll', async () => {
   const cookie = login.headers.get('set-cookie').split(';')[0];
   const save = await fetch(base + '/desk/profile', { method: 'POST', redirect: 'manual', headers: { 'Content-Type': 'application/x-www-form-urlencoded', Cookie: cookie },
     body: new URLSearchParams({ name: 'Ravi M.', bio: 'b', now_line: 'Now: gears', accent: 'hotpink', blogroll: '@june\njavascript:alert(1)\nhttps://example.com Example\nnot a link' }) });
-  assert.equal(save.status, 303);
+  assert.equal(save.status, 200, 'dropped lines are reported, not silently discarded');
+  const saved = await save.text();
+  assert.match(saved, /weren’t saved/);
+  assert.match(saved, /not a link/);
   const row = app.h.get(`SELECT name, accent, blogroll, now_line FROM authors WHERE handle = 'ravi'`);
   assert.equal(row.accent, 'cobalt');
   assert.equal(row.blogroll, '@june\nhttps://example.com Example');
@@ -423,4 +427,17 @@ test('unconfirmed email follows get exactly one reminder', async () => {
   app.h.run(`UPDATE email_subs SET created_at = ? WHERE email = 'slow@example.org'`, Date.now() - 2 * 86400000);
   app.runJobs(); app.runJobs();
   assert.equal(app.h.get(`SELECT count(*) n FROM mail WHERE to_email = 'slow@example.org' AND kind = 'reminder'`).n, 1);
+});
+
+test('The Brief needs an email; login rate limit explains itself; imports keep dates', async () => {
+  const key = (await (await post('/api/key/new', {})).json()).key;
+  const r = await post('/api/key/prefs', { key, email: '', digest: true });
+  assert.equal(r.status, 400);
+  assert.match((await r.json()).error, /Add an email/);
+  let last;
+  for (let i = 0; i < 22; i++) last = await fetch(base + '/login', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'handle=x&password=y' });
+  assert.equal(last.status, 429);
+  assert.match(await last.text(), /Too many tries/);
+  const imported = app.h.get(`SELECT confirmed_at FROM email_subs WHERE email = 'a@example.com'`);
+  assert.equal(new Date(imported.confirmed_at).toISOString().slice(0, 10), '2024-01-01');
 });

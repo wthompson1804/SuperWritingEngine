@@ -89,7 +89,7 @@
         if (!r.ok) { msg.textContent = r.error || 'That didn’t work.'; return; }
         msg.innerHTML = '';
         if (r.already) { msg.textContent = 'You’re already on ' + name + '’s list.'; return; }
-        msg.appendChild(document.createTextNode('Check your inbox for a confirmation link. '));
+        msg.appendChild(document.createTextNode('One step left: open the email we just sent and tap confirm. It works for 7 days, and we’ll remind you once. '));
         if (r.previewLink) {
           msg.appendChild(el('span', { class: 'mono' }, ['(Prototype: email isn’t sent yet. ', el('a', { href: r.previewLink, text: 'confirm here' }), '.)']));
         }
@@ -210,7 +210,7 @@
       el('label', { class: 'check' }, [digest, ' Send me The Brief: one email on Sundays, five pieces at most']),
       el('label', { class: 'check' }, [share, ' Share my email with writers I follow, so I stay on their list if I ever leave Margin']),
       el('div', { class: 'row' }, [el('button', { class: 'btn primary', type: 'submit', text: 'Save' }), el('button', { class: 'btn ghost', type: 'button', text: 'Sync now', on: { click: function () { sync().then(function (r) { msg.textContent = r && r.ok ? 'Synced.' : 'Sync failed.'; if (opts.onChange) opts.onChange(); }); } } }),
-        el('button', { class: 'btn ghost', type: 'button', text: 'Forget key on this device', on: { click: function () {
+        el('button', { class: 'btn ghost', type: 'button', text: 'Sign this browser out of the key', on: { click: function () {
           if (!confirm('Remove the key from this browser? Your passages stay here, and the key still works everywhere else.')) return;
           var t = load(); t.readerKey = null; t.prefs = null; save(t); renderKeyPanel(root, opts);
         } } })]),

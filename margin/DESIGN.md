@@ -1,4 +1,4 @@
-# Margin: design rationale (v3)
+# Margin: design rationale (v4)
 
 Margin is a long-form publishing platform where readers never need an account to read. This document covers who it's for, what changed between v1 and v2 and why, and what's still unproven.
 
@@ -6,7 +6,54 @@ Margin is a long-form publishing platform where readers never need an account to
 
 ---
 
-## 0. What v3 changed and why
+## 0. What v4 changed and why (refinement pass)
+
+v4 was mostly about making what exists work well for each persona. There were two inputs:
+- a second round of desk research on usability ([RESEARCH.md](RESEARCH.md), "Usability, by persona")
+- a hands-on audit that drove every persona's journey in a real browser, on phone and desktop
+
+**Fixed: things the audit found broken**
+
+| Problem | Persona | Fix |
+|---|---|---|
+| Keep, pass it on and note were unreachable by keyboard or screen reader (the only way in was a text selection) | R2, R3 | Every paragraph has a **⋯ actions button**. It appears on hover and focus, focus moves into the toolbar, and Escape returns it |
+| On phones, "pass it on" fell back to a blocking `prompt()` with a 150-character URL, and dropped the quote | R3 | An inline **share sheet** with the quote and the link preselected and a Copy button. The phone's own share sheet is used when available |
+| The person receiving a passed link never saw "someone passed this to you" (it was scrolled off-screen) | R1 | The label now sits **directly above the highlighted passage** |
+| The custom toolbar collided with iOS and Android's own selection menus, which pages can't suppress | R2, R3 | On touch screens the toolbar **docks to the bottom**, shows the quote, and appears faster |
+| The finish box led with the tip, then stacked three asks | R1 | **One ask**, shown on reaching the end: "Follow Theo here". Email and Mastodon sit behind one tap; the tip collapses to a line |
+| On phones, "new from writers you follow" rendered *below* "end of today" | R2 | Your own boxes (follows, resurfacing) come before the picks on every screen |
+| "Note" without a key jumped to the bottom of the page | R2 | The key gate and the note form open **right under the paragraph** |
+| The Brief checkbox without an email said "Saved" but didn't save | R2 | A clear error |
+| Kept passages could end mid-word; a stray empty text node broke reselecting | R2 | Selections **snap to whole words**; the highlight is normalized |
+| The phone header took 21% of the screen | all | One compact row plus a scrollable nav: **12%** |
+| Contrast failures: the dark-mode backup bar (2.15:1) and the green badges (4.44:1) | all | Fixed |
+| Small targets: blogroll and footer links (16–17px), note counts (29px) | all | 44px hit areas |
+
+**Changed: things the research pointed to**
+
+| Evidence | Change |
+|---|---|
+| ~100% of people over ~52 are presbyopic. 30–40% of iOS users change their text size. Dark-on-light reads better, but people want a switch (NN/g) | **Reading settings (Aa)**: four text sizes and light/dark/system, applied before first paint and stored in the browser only. Phone body text stays ~19px |
+| Monospace slows reading beyond short labels | Mono stays on labels only, with nothing below ~13.5px |
+| Substack's "Follow" (no email) confused people | Labels say how the updates arrive: **"Follow here"** (this browser), **"Email me new pieces"**, and the **fediverse handle** |
+| ~61% of double opt-ins never confirm (Mailchimp) | The on-page message says exactly what to do next, and **one reminder** goes out after 24 hours (never a second) |
+| Writers lose drafts; they miss images and footnotes | **Autosave** (browser immediately, server every 2 seconds for drafts), a restore prompt for a newer local copy, and a warning before you leave with unsaved changes. **Image upload** by button, paste or drop, stored on Margin (hotlinked images would leak readers' IPs), with an alt-text prompt the draft check enforces. **Footnotes** |
+| Established writers expect to plan releases | **Scheduled publishing** in local time. Followers are notified when it goes live |
+| Publishing emails everyone, irreversibly | A **confirmation** that names how many people will receive it, then a "Published: it went to N people" notice |
+| Ghost 6, WordPress and WriteFreely all federate | **ActivityPub**: every writer is `@handle@your-domain`, followable from Mastodon, Threads and others without a Margin account. New pieces go out as Articles. HTTP signatures are verified both ways (tested against a local stand-in server) |
+| Front-page reasons below the baseline read as warnings ("56%… typical 62%") | Numbers show only when they're good news ("more than most pieces this long"). Otherwise the card shows a plain count |
+| Jargon on the desk | Renamed: "opened" and "read to the end" (was opens / verified reads); "When readers were asked" (was The earned ask); "Subtitle" (was Dek) |
+
+**Still not done, honestly:**
+- Real email and payment delivery.
+- ActivityPub hasn't been tried against a real Mastodon server; this environment can't reach the public internet. Also missing on the fediverse side: replies, boosts, Update on edit, and Delete on unpublish.
+- The outbound URL guard doesn't resolve DNS. Production needs an egress firewall.
+- The docked toolbar still appears *alongside* the phone's native menu (a web page can't hide that menu). It's clear of it now, not instead of it.
+- Selection on touch still depends on the phone's long-press selection. There's no double-tap-to-keep yet.
+
+---
+
+## 0b. What v3 changed and why
 
 Desk research (sources in [RESEARCH.md](RESEARCH.md)) overturned three of v2's bets and supported two others.
 

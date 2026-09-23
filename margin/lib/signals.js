@@ -107,9 +107,11 @@ function frontPage(h, now = Date.now()) {
 function reason(s) {
   if (s.newVoice) return 'New voice. Here so it gets a fair read.';
   if (s.views >= 10) {
-    const got = Math.round((100 * s.reads) / s.views);
-    const typical = Math.round(100 * expectedCompletion(s.words));
-    return `Finished by ${got}% of readers. Typical for its length: ${typical}%.`;
+    const got = s.reads / s.views;
+    // Only show the comparison when it's good news; below-baseline numbers
+    // on a front page read as warnings, not reasons.
+    if (got > expectedCompletion(s.words) * 1.05) return `Finished by ${Math.round(100 * got)}% of readers, more than most pieces this long.`;
+    return `Read to the end by ${s.reads} ${s.reads === 1 ? 'person' : 'people'}.`;
   }
   return 'Just published.';
 }
