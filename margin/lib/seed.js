@@ -11,9 +11,22 @@ const { render } = require('./markdown');
 const DAY = 86400000;
 
 const AUTHORS = [
-  { handle: 'mara', name: 'Mara Okafor', bio: 'Writes about work, institutions, and the gap between the org chart and what actually happens.' },
-  { handle: 'theo', name: 'Theo Lindqvist', bio: 'Cities, infrastructure, and the boring systems that decide how your day goes.' },
-  { handle: 'june', name: 'June Hale', bio: 'New here. Writing about attention, reading, and what we owe the things we finish.' },
+  { handle: 'mara', name: 'Mara Okafor', accent: 'vermilion',
+    bio: 'Writes about work, institutions, and the gap between the org chart and what actually happens.',
+    now: 'Now: interviewing night-shift supervisors about who really runs a hospital.',
+    blogroll: '@june\n@theo\nhttps://en.wikipedia.org/wiki/Commonplace_book On commonplace books' },
+  { handle: 'theo', name: 'Theo Lindqvist', accent: 'teal',
+    bio: 'Cities, infrastructure, and the boring systems that decide how your day goes.',
+    now: 'Now: riding every crosstown bus line in one city, end to end.',
+    blogroll: '@ravi\n@mara\nhttps://www.gutenberg.org Project Gutenberg' },
+  { handle: 'june', name: 'June Hale', accent: 'plum',
+    bio: 'New here. Writing about attention, reading, and what we owe the things we finish.',
+    now: 'Now: keeping a paper list of everything I finish. Fourteen so far.',
+    blogroll: '@mara' },
+  { handle: 'ravi', name: 'Ravi Menon', accent: 'moss',
+    bio: 'Fixes things for a living. Writes about repair, tools, and objects that outlive their warranties.',
+    now: 'Now: rebuilding a 1987 sewing machine with parts from three others.',
+    blogroll: '@theo\nhttps://www.ifixit.com iFixit repair guides' },
 ];
 
 const POSTS = [
@@ -118,6 +131,30 @@ A handful of cities took sidewalk repair back from property owners and treated i
 The lesson generalizes. Whenever you see something shared that's falling apart, ask who owns it. The answer is usually "several people, sort of," and that's the whole problem.`,
   },
   {
+    author: 'ravi', slug: 'the-screw-you-cant-turn', daysAgo: 3,
+    title: 'The Screw You Can\u2019t Turn',
+    dek: 'A single fastener tells you whether a company expects you to own the thing you bought.',
+    body: `Every product tells you who it thinks owns it, and the message is usually hidden in a screw head.
+
+A standard Phillips screw says: open me, you're allowed. A pentalobe or a tri-wing says the opposite. It isn't there for strength or cost. It's there so that the person holding the device can't get inside it without buying a special tool, and most people won't.
+
+## What the fastener decides
+
+Last month a neighbor brought me a coffee grinder that had stopped turning. The motor was fine. A plastic gear the size of a coin had split. The part costs about two dollars. To reach it I had to get past four security screws and a clip designed to snap on the way out.
+
+The manufacturer's answer was a new grinder for ninety dollars. The fastener made that decision long before the gear broke.
+
+## Repair is a design choice
+
+We talk about repair as a skill, something you either have or don't. Mostly it's a permission. When the case opens with a coin, the manual lists part numbers, and the gear is sold separately, ordinary people fix things. When any one of those is missing, only professionals do, and they charge accordingly.
+
+> A screw you can't turn is a policy you didn't vote for.
+
+## What to look for
+
+Before you buy anything with a motor or a battery, flip it over. Count the screw types. Search for the model number plus "teardown." If the first result is someone prying it open with a guitar pick and swearing, you're not buying the thing. You're renting it until the first part fails.`,
+  },
+  {
     author: 'june', slug: 'finishing-is-a-feature', daysAgo: 1,
     title: 'Finishing Is a Feature',
     dek: 'Almost everything on a screen is built so you never reach the end. Reading used to be the exception.',
@@ -148,10 +185,10 @@ function seed(h, { demoSignals = true, now = Date.now() } = {}) {
   const pw = hashPassword('demo-password');
   h.tx(() => {
     const ids = {};
-    for (const a of AUTHORS) {
-      ids[a.handle] = Number(h.run('INSERT INTO authors (handle, name, bio, pw_hash, created_at) VALUES (?,?,?,?,?)',
-        a.handle, a.name, a.bio, pw, now - 60 * DAY).lastInsertRowid);
-    }
+    AUTHORS.forEach((a, i) => {
+      ids[a.handle] = Number(h.run('INSERT INTO authors (handle, name, bio, now_line, accent, blogroll, pw_hash, created_at) VALUES (?,?,?,?,?,?,?,?)',
+        a.handle, a.name, a.bio, a.now, a.accent, a.blogroll, pw, now - (60 - i) * DAY).lastInsertRowid);
+    });
     for (const p of POSTS) {
       const at = now - p.daysAgo * DAY;
       const words = render(p.body).words;
@@ -170,7 +207,7 @@ function rng(seedStr) {
 }
 
 function seedSignals(h, postId, authorId, p, words, now) {
-  if (p.author === 'june') return; // the new voice starts cold, like a real one would
+  if (p.author === 'june' || p.author === 'ravi') return; // new voices start cold, like real ones would
   const r = rng(p.slug);
   const views = 180 + Math.floor(r() * 260);
   const blocks = render(p.body).blocks.length;
@@ -179,7 +216,7 @@ function seedSignals(h, postId, authorId, p, words, now) {
     const depth = roll < 0.28 ? r() * 0.3 : roll < 0.45 ? 0.3 + r() * 0.55 : 0.9 + r() * 0.1;
     const dwell = Math.floor(depth * words * (120 + r() * 260));
     h.run('INSERT INTO views (pv, post_id, max_depth, dwell_ms, source, created_at) VALUES (?,?,?,?,?,?)',
-      crypto.randomUUID(), postId, depth, dwell, r() < 0.6 ? 'front' : 'direct', now - Math.floor(r() * p.daysAgo * DAY));
+      crypto.randomUUID(), postId, depth, dwell, ['front', 'front', 'front', 'direct', 'passed', 'follow', 'ring', 'brief'][Math.floor(r() * 8)], now - Math.floor(r() * p.daysAgo * DAY));
   }
   const hot = Math.floor(r() * blocks);
   const keeps = 10 + Math.floor(r() * 30);
@@ -189,6 +226,8 @@ function seedSignals(h, postId, authorId, p, words, now) {
   }
   const follows = 4 + Math.floor(r() * 12);
   for (let i = 0; i < follows; i++) h.run('INSERT INTO follow_events (author_id, post_id, delta, created_at) VALUES (?,?,1,?)', authorId, postId, now);
+  const passes = 2 + Math.floor(r() * 9);
+  for (let i = 0; i < passes; i++) h.run('INSERT INTO passes (post_id, para, created_at) VALUES (?,?,?)', postId, hot, now);
   for (let i = 0; i < 3; i++) h.run('INSERT INTO tips (post_id, amount_cents, created_at) VALUES (?,?,?)', postId, [300, 500, 1000][i], now);
   const shown = 30 + Math.floor(r() * 40);
   for (let i = 0; i < shown; i++) h.run(`INSERT INTO asks (post_id, kind, event, created_at) VALUES (?, 'follow', 'shown', ?)`, postId, now);

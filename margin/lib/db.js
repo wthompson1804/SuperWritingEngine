@@ -101,6 +101,14 @@ CREATE TABLE IF NOT EXISTS notes (
   created_at INTEGER NOT NULL
 );
 CREATE INDEX IF NOT EXISTS notes_post ON notes(post_id);
+-- "Pass it on": someone copied a link to a specific passage.
+CREATE TABLE IF NOT EXISTS passes (
+  id INTEGER PRIMARY KEY,
+  post_id INTEGER NOT NULL REFERENCES posts(id),
+  para INTEGER NOT NULL,
+  created_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS passes_post ON passes(post_id);
 CREATE TABLE IF NOT EXISTS outbox (
   id INTEGER PRIMARY KEY,
   reader_id INTEGER NOT NULL REFERENCES readers(id),
@@ -116,7 +124,23 @@ function open(file) {
   const db = new DatabaseSync(file);
   db.exec('PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;');
   db.exec(SCHEMA);
+  migrate(db);
   return db;
+}
+
+// Additive migrations for databases created by earlier versions.
+const COLUMNS = [
+  ['authors', 'now_line', "TEXT NOT NULL DEFAULT ''"],
+  ['authors', 'accent', "TEXT NOT NULL DEFAULT 'cobalt'"],
+  ['authors', 'blogroll', "TEXT NOT NULL DEFAULT ''"],
+  ['views', 'seen_at', 'INTEGER NOT NULL DEFAULT 0'],
+];
+function migrate(db) {
+  for (const [table, col, def] of COLUMNS) {
+    const has = db.prepare(`PRAGMA table_info(${table})`).all().some((c) => c.name === col);
+    if (!has) db.exec(`ALTER TABLE ${table} ADD COLUMN ${col} ${def}`);
+  }
+  db.exec('CREATE INDEX IF NOT EXISTS views_seen ON views(seen_at)');
 }
 
 // Tiny helpers so call sites read cleanly.

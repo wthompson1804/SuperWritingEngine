@@ -9,11 +9,12 @@ const { checkDraft } = require('./lib/draftcheck');
 const auth = require('./lib/auth');
 const signals = require('./lib/signals');
 const views = require('./lib/views');
+const ring = require('./lib/ring');
 
 const STATIC = path.join(__dirname, 'public');
-const MIME = { '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon' };
+const MIME = { '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8' };
 const SECURITY_HEADERS = {
-  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
+  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
 };
@@ -64,7 +65,7 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   function currentAuthor(req) {
     const t = auth.parseCookies(req.headers.cookie).ms;
     if (!t) return null;
-    return h.get('SELECT a.id, a.handle, a.name, a.bio FROM sessions s JOIN authors a ON a.id = s.author_id WHERE s.token = ?', t) || null;
+    return h.get('SELECT a.id, a.handle, a.name, a.bio, a.accent FROM sessions s JOIN authors a ON a.id = s.author_id WHERE s.token = ?', t) || null;
   }
   const sessionCookie = (tok, maxAge) => `ms=${tok}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secureCookies ? '; Secure' : ''}`;
 
@@ -107,26 +108,40 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   const routes = [];
   const on = (method, pattern, fn) => routes.push({ method, pattern, fn });
 
-  on('GET', /^\/$/, (req, res, m, ctx) => html(res, views.home({ picks: signals.frontPage(h), author: ctx.author })));
+  on('GET', /^\/$/, (req, res, m, ctx) => {
+    const picks = signals.frontPage(h);
+    html(res, views.home({ picks, author: ctx.author, liveNow: ring.readingNow(h), spot: ring.spotlight(h), now: Date.now() }));
+  });
 
   on('GET', /^\/p\/([\w-]+)$/, (req, res, m, ctx) => {
     const post = publishedPost(m[1]);
     if (!post) return html(res, views.notFound({ viewer: ctx.author }), 404);
-    const author = h.get('SELECT id, handle, name, bio FROM authors WHERE id = ?', post.author_id);
+    const author = h.get('SELECT id, handle, name, bio, accent, blogroll FROM authors WHERE id = ?', post.author_id);
     const rendered = render(post.body_md);
     const notes = h.all('SELECT para, display_name, quote, body, created_at FROM notes WHERE post_id = ? ORDER BY created_at', post.id);
     const kc = h.all('SELECT para, count(*) AS n FROM keeps WHERE post_id = ? GROUP BY para ORDER BY n DESC', post.id);
     const keepCounts = Object.fromEntries(kc.map((r) => [r.para, r.n]));
     const topKeep = kc[0] && kc[0].n >= 3 ? { para: kc[0].para, n: kc[0].n } : null;
-    html(res, views.article({ post, author, rendered, notes, topKeep, keepCounts, next: signals.nextReads(h, post), viewer: ctx.author }));
+    const reads = h.get(`SELECT count(*) AS n FROM views WHERE post_id = ? AND max_depth >= 0.9 AND dwell_ms >= ?`, post.id, post.words * signals.MS_PER_WORD_FLOOR).n;
+    html(res, views.article({ post, author, rendered, notes, topKeep, keepCounts, next: signals.nextReads(h, post), viewer: ctx.author,
+      stats: { now: ring.readingNow(h, post.id), reads }, blogroll: ring.parseBlogroll(h, author.blogroll) }));
   });
 
   on('GET', /^\/@([\w]+)$/, (req, res, m, ctx) => {
-    const author = h.get('SELECT id, handle, name, bio FROM authors WHERE handle = ?', m[1].toLowerCase());
+    const author = h.get('SELECT id, handle, name, bio, now_line, accent, blogroll FROM authors WHERE handle = ?', m[1].toLowerCase());
     if (!author) return html(res, views.notFound({ viewer: ctx.author }), 404);
     const posts = h.all(`SELECT slug, title, dek, words, published_at FROM posts WHERE author_id = ? AND status = 'published' ORDER BY published_at DESC`, author.id);
-    html(res, views.authorPage({ author, posts, viewer: ctx.author }));
+    const recommendedBy = h.all('SELECT handle, name, blogroll FROM authors WHERE id != ?', author.id)
+      .filter((a) => a.blogroll.split('\n').map((l) => l.trim().toLowerCase()).includes('@' + author.handle));
+    html(res, views.authorPage({ author, posts, viewer: ctx.author, blogroll: ring.parseBlogroll(h, author.blogroll), recommendedBy }));
   });
+
+  on('GET', /^\/ring$/, (req, res, m, ctx) => html(res, views.ringPage({ ring: ring.ringOrder(h), viewer: ctx.author })));
+  on('GET', /^\/ring\/(next|prev|random)$/, (req, res, m, ctx) => {
+    const to = ring.ringStep(h, String(ctx.url.searchParams.get('from') || ''), m[1]);
+    redirect(res, to ? `/@${to.handle}?via=ring` : '/ring');
+  });
+  on('GET', /^\/declaration$/, (req, res, m, ctx) => html(res, views.declaration({ viewer: ctx.author })));
 
   on('GET', /^\/commonplace$/, (req, res, m, ctx) => html(res, views.commonplace({ viewer: ctx.author })));
   on('GET', /^\/brief$/, (req, res, m, ctx) => html(res, views.brief({ picks: signals.frontPage(h).slice(0, 5), viewer: ctx.author })));
@@ -147,10 +162,11 @@ ${items}
 </channel></rss>`, { 'Content-Type': 'application/rss+xml; charset=utf-8' });
   });
 
-  on('GET', /^\/static\/([\w.-]+)$/, (req, res, m) => {
+  on('GET', /^\/static\/((?:fonts\/)?[\w.-]+)$/, (req, res, m) => {
     const file = path.join(STATIC, m[1]);
-    if (!file.startsWith(STATIC) || !fs.existsSync(file)) return send(res, 404, 'not found');
-    send(res, 200, fs.readFileSync(file), { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'public, max-age=300' });
+    if (!file.startsWith(STATIC + path.sep) || !fs.existsSync(file)) return send(res, 404, 'not found');
+    const long = file.endsWith('.woff2');
+    send(res, 200, fs.readFileSync(file), { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream', 'Cache-Control': long ? 'public, max-age=31536000, immutable' : 'public, max-age=300' });
   });
 
   // ----- writer auth -----
@@ -193,6 +209,24 @@ ${items}
   const needAuthor = (fn) => (req, res, m, ctx) => (ctx.author ? fn(req, res, m, ctx) : redirect(res, '/login'));
 
   on('GET', /^\/dashboard$/, needAuthor((req, res, m, ctx) => html(res, views.dashboard({ author: ctx.author, dash: signals.authorDashboard(h, ctx.author.id) }))));
+
+  on('GET', /^\/desk\/profile$/, needAuthor((req, res, m, ctx) => {
+    const author = h.get('SELECT id, handle, name, bio, now_line, accent, blogroll FROM authors WHERE id = ?', ctx.author.id);
+    html(res, views.profileForm({ author, accents: ring.ACCENTS, saved: ctx.url.searchParams.has('saved') }));
+  }));
+
+  on('POST', /^\/desk\/profile$/, needAuthor(async (req, res, m, ctx) => {
+    const b = await readBody(req, 20000);
+    const name = String(b.name || '').trim().slice(0, 60);
+    const accent = ring.ACCENTS.includes(b.accent) ? b.accent : 'cobalt';
+    if (!name) {
+      const author = { ...h.get('SELECT * FROM authors WHERE id = ?', ctx.author.id), ...b, accent };
+      return html(res, views.profileForm({ author, accents: ring.ACCENTS, error: 'Your homepage needs a name.' }), 400);
+    }
+    h.run('UPDATE authors SET name = ?, bio = ?, now_line = ?, accent = ?, blogroll = ? WHERE id = ?',
+      name, String(b.bio || '').trim().slice(0, 280), String(b.now_line || '').trim().slice(0, 140), accent, ring.normalizeBlogroll(b.blogroll), ctx.author.id);
+    redirect(res, '/desk/profile?saved=1');
+  }));
 
   on('GET', /^\/dashboard\/p\/([\w-]+)$/, needAuthor((req, res, m, ctx) => {
     const post = h.get('SELECT * FROM posts WHERE slug = ? AND author_id = ?', m[1], ctx.author.id);
@@ -247,11 +281,31 @@ ${items}
     if (!post || !UUID.test(String(b.pv))) return json(res, { ok: false }, 400);
     const depth = Math.min(1, Math.max(0, Number(b.depth) || 0));
     const dwell = Math.min(6 * 3600 * 1000, Math.max(0, Math.floor(Number(b.dwell) || 0)));
-    const source = ['front', 'follow', 'brief', 'author', 'next', 'direct'].includes(b.source) ? b.source : 'direct';
-    h.run(`INSERT INTO views (pv, post_id, max_depth, dwell_ms, source, keyed, created_at) VALUES (?,?,?,?,?,?,?)
-      ON CONFLICT(pv) DO UPDATE SET max_depth = max(max_depth, excluded.max_depth), dwell_ms = max(dwell_ms, excluded.dwell_ms)
-      WHERE views.post_id = excluded.post_id`, b.pv, post.id, depth, dwell, source, b.keyed ? 1 : 0, Date.now());
-    json(res, { ok: true });
+    const source = ['front', 'follow', 'brief', 'author', 'next', 'ring', 'passed', 'direct'].includes(b.source) ? b.source : 'direct';
+    const now = Date.now();
+    // seen_at only moves while the page is visible, so "reading now" means reading now.
+    const seen = b.visible === false ? 0 : now;
+    h.run(`INSERT INTO views (pv, post_id, max_depth, dwell_ms, source, keyed, created_at, seen_at) VALUES (?,?,?,?,?,?,?,?)
+      ON CONFLICT(pv) DO UPDATE SET max_depth = max(max_depth, excluded.max_depth), dwell_ms = max(dwell_ms, excluded.dwell_ms),
+        seen_at = CASE WHEN excluded.seen_at > 0 THEN excluded.seen_at ELSE 0 END
+      WHERE views.post_id = excluded.post_id`, b.pv, post.id, depth, dwell, source, b.keyed ? 1 : 0, now, seen);
+    json(res, { ok: true, now: ring.readingNow(h, post.id) });
+  });
+
+  on('GET', /^\/api\/presence$/, (req, res, m, ctx) => {
+    const post = publishedPost(ctx.url.searchParams.get('slug'));
+    if (!post) return json(res, { ok: false }, 404);
+    const reads = h.get(`SELECT count(*) AS n FROM views WHERE post_id = ? AND max_depth >= 0.9 AND dwell_ms >= ?`, post.id, post.words * signals.MS_PER_WORD_FLOOR).n;
+    json(res, { ok: true, now: ring.readingNow(h, post.id), reads });
+  });
+
+  on('POST', /^\/api\/pass$/, async (req, res) => {
+    const b = await readBody(req, 4096);
+    const post = publishedPost(b.slug);
+    const para = Number(b.para);
+    if (!post || !Number.isInteger(para) || para < 0 || para > 5000) return json(res, { ok: false }, 400);
+    h.run('INSERT INTO passes (post_id, para, created_at) VALUES (?,?,?)', post.id, para, Date.now());
+    json(res, { ok: true, url: `/p/${post.slug}?via=passed&p=${para}` });
   });
 
   on('POST', /^\/api\/keep$/, async (req, res) => {

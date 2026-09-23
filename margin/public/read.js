@@ -10,7 +10,8 @@
 
   // ---------- where did this reader come from ----------
   var source = 'direct';
-  var via = new URLSearchParams(location.search).get('via');
+  var params = new URLSearchParams(location.search);
+  var via = params.get('via');
   if (via) source = via;
   else if (document.referrer) {
     try {
@@ -34,16 +35,32 @@
     if (document.visibilityState === 'visible' && Date.now() - lastActive < 30000) dwell += 1000;
     checkFinish();
   }
+  // Beacons go out every 10s while visible (that's what "reading now" counts),
+  // and once more with visible:false when the tab is hidden or closed.
   function beacon(final) {
-    if (maxDepth === sent.depth && dwell === sent.dwell) return;
+    var visible = !final && document.visibilityState === 'visible';
     sent = { depth: maxDepth, dwell: dwell };
-    var payload = JSON.stringify({ slug: D.slug, pv: pv, depth: maxDepth, dwell: dwell, source: source, keyed: !!M.load().readerKey });
-    if (final && navigator.sendBeacon) navigator.sendBeacon('/api/read', new Blob([payload], { type: 'text/plain' }));
-    else fetch('/api/read', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(function () {});
+    var payload = JSON.stringify({ slug: D.slug, pv: pv, depth: maxDepth, dwell: dwell, source: source, keyed: !!M.load().readerKey, visible: visible });
+    if (final && navigator.sendBeacon) { navigator.sendBeacon('/api/read', new Blob([payload], { type: 'text/plain' })); return; }
+    fetch('/api/read', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true })
+      .then(function (r) { return r.json(); })
+      .then(function (r) { if (r && typeof r.now === 'number') setText('now-n', r.now); })
+      .catch(function () {});
   }
+  function setText(id, v) { var n = document.getElementById(id); if (n) n.textContent = String(v); }
+  function presence() {
+    fetch('/api/presence?slug=' + encodeURIComponent(D.slug)).then(function (r) { return r.json(); }).then(function (r) {
+      if (!r || !r.ok) return;
+      setText('now-n', Math.max(1, r.now)); setText('fin-n', r.reads);
+    }).catch(function () {});
+  }
+  // The server-rendered count doesn't include this tab yet; you are reading too.
+  var nowEl = document.getElementById('now-n');
+  if (nowEl) nowEl.textContent = String((parseInt(nowEl.textContent, 10) || 0) + 1);
   setInterval(tick, 1000);
-  setInterval(function () { beacon(false); }, 10000);
-  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') beacon(true); });
+  setInterval(function () { if (document.visibilityState === 'visible') beacon(false); }, 10000);
+  setInterval(function () { if (document.visibilityState === 'visible') presence(); }, 30000);
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') beacon(true); else beacon(false); });
   window.addEventListener('pagehide', function () { beacon(true); });
   setTimeout(function () { maxDepth = Math.max(maxDepth, depthNow()); beacon(false); }, 1500);
 
@@ -79,7 +96,7 @@
     var keptN = M.liveKept(s).length;
     if (!M.isFollowing(handle)) {
       logAsk('follow', 'shown');
-      var btn = el('button', { class: 'btn', text: 'Follow ' + name, on: { click: function () {
+      var btn = el('button', { class: 'btn primary', text: 'Follow ' + name, on: { click: function () {
         M.follow(handle, name, true, D.slug); logAsk('follow', 'accepted');
         root.innerHTML = '';
         root.appendChild(el('p', { text: 'Following. New pieces from ' + name + ' will sit at the top of Today in this browser.' }));
@@ -96,7 +113,7 @@
       box.appendChild(el('p', {}, [el('strong', { text: 'You\'ve finished ' + finishedN + ' piece' + (finishedN === 1 ? '' : 's') + ' and kept ' + keptN + ' passage' + (keptN === 1 ? '' : 's') + '.' }),
         ' They only live in this browser. A reader key is four words and a code: no email, no password. It keeps everything and lets you write in the margin.']));
       var panel = el('div', { class: 'key-panel inline' });
-      box.appendChild(el('button', { class: 'btn', text: 'Get a reader key', on: { click: function () {
+      box.appendChild(el('button', { class: 'btn primary', text: 'Get a reader key', on: { click: function () {
         M.createKey().then(function (r) { if (r.key) { logAsk('key', 'accepted'); M.renderKeyPanel(panel, { justCreated: true }); box.querySelector('button').remove(); } });
       } } }));
       box.appendChild(panel);
@@ -137,7 +154,13 @@
     });
   }
   paintKeeps();
-  if (/^#p-\d+$/.test(location.hash)) {
+  var passedPara = source === 'passed' ? params.get('p') : null;
+  if (passedPara != null && paraEl(passedPara)) {
+    var pp = paraEl(passedPara);
+    pp.classList.add('passed-hl');
+    document.getElementById('passed-banner').hidden = false;
+    setTimeout(function () { pp.scrollIntoView({ block: 'center' }); }, 60);
+  } else if (/^#p-\d+$/.test(location.hash)) {
     var target = paraEl(location.hash.slice(3));
     if (target) { target.scrollIntoView({ block: 'center' }); target.classList.add('flash'); }
   }
@@ -182,9 +205,33 @@
     var info = current;
     bar.hidden = true;
     window.getSelection().removeAllRanges();
+    var hint = document.getElementById('hint'); if (hint) hint.hidden = true;
     if (act === 'keep') doKeep(info);
+    else if (act === 'pass') doPass(info);
     else openNote(info);
   });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (!bar.hidden) { bar.hidden = true; return; }
+    if (!form.hidden) { form.hidden = true; pending = null; }
+  });
+
+  // Pass it on: a link that opens this piece with this passage highlighted.
+  // The writer sees that the piece was passed on, not who passed it.
+  function doPass(info) {
+    M.api('/api/pass', { slug: D.slug, para: info.para }).then(function (r) {
+      if (!r || !r.ok) { toast('Could not make a link. Try again.'); return; }
+      var url = location.origin + r.url;
+      var coarse = window.matchMedia && matchMedia('(pointer: coarse)').matches;
+      if (coarse && navigator.share) {
+        navigator.share({ title: D.title, text: '“' + info.text + '”', url: url }).catch(function () {});
+        return;
+      }
+      var copy = navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText('“' + info.text + '” ' + url) : Promise.reject();
+      copy.then(function () { toast('Copied the quote and a link that opens right at it. Send it to someone.'); })
+        .catch(function () { window.prompt('Copy this link. It opens right at the passage:', url); });
+    });
+  }
 
   function toast(msg) {
     var t = el('div', { class: 'toast', role: 'status', text: msg });
@@ -215,7 +262,7 @@
         el('p', {}, [el('strong', { text: 'Margin notes need a reader key.' }), ' It\'s four words and a code, with no email and no name. That keeps the margin free of spam without asking you who you are.']),
       ]);
       var panel = el('div', { class: 'key-panel inline' });
-      gate.appendChild(el('button', { class: 'btn', text: 'Get a key and write the note', on: { click: function () {
+      gate.appendChild(el('button', { class: 'btn primary', text: 'Get a key and write the note', on: { click: function () {
         M.createKey().then(function (r) {
           if (!r.key) return;
           M.renderKeyPanel(panel, { justCreated: true });

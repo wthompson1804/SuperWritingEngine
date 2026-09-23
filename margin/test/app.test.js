@@ -50,9 +50,9 @@ test('front page and articles need no account and set no cookies', async () => {
   assert.equal(res.status, 200);
   assert.equal(res.headers.get('set-cookie'), null);
   const page = await res.text();
-  assert.match(page, /Today's reading/);
-  assert.match(page, /New voice/); // cold-start slot for the writer with no audience
-  const cards = page.match(/class="card/g) || [];
+  assert.match(page, /Today’s reading/);
+  assert.match(page, /new voice/); // cold-start slot for the writer with no audience
+  const cards = page.match(/<li class="card/g) || [];
   assert.ok(cards.length >= 1 && cards.length <= 7);
 
   const art = await fetch(base + '/p/the-bus-stop-is-the-city');
@@ -142,7 +142,7 @@ test('writer flow: signup, draft, check, publish, dashboard, CSV', async () => {
   assert.equal((await fetch(`${base}/write/${id}`, { headers: { Cookie: maraCookie } })).status, 404);
 
   const dash = await (await fetch(base + '/dashboard', { headers: { Cookie: maraCookie } })).text();
-  assert.match(dash, /Verified reads/);
+  assert.match(dash, /verified reads/);
   const detail = await fetch(base + '/dashboard/p/the-meeting-is-the-work-now', { headers: { Cookie: maraCookie } });
   assert.equal(detail.status, 200);
   const csv = await fetch(base + '/dashboard/list.csv', { headers: { Cookie: maraCookie } });
@@ -156,4 +156,66 @@ test('rss feed lists published pieces', async () => {
   const xml = await (await fetch(base + '/feed.xml?author=theo')).text();
   assert.match(xml, /The Bus Stop Is the City/);
   assert.ok(!xml.includes('The Meeting Is the Work Now'));
+});
+
+test('the ring: directory, next/prev/random, blogrolls and "read by"', async () => {
+  const ringPage = await (await fetch(base + '/ring')).text();
+  for (const n of ['Mara Okafor', 'Theo Lindqvist', 'June Hale', 'Ravi Menon']) assert.match(ringPage, new RegExp(n));
+  const next = await fetch(base + '/ring/next?from=mara', { redirect: 'manual' });
+  assert.equal(next.status, 303);
+  assert.equal(next.headers.get('location'), '/@theo?via=ring');
+  const prev = await fetch(base + '/ring/prev?from=mara', { redirect: 'manual' });
+  assert.match(prev.headers.get('location'), /^\/@\w+\?via=ring$/);
+  const rnd = await fetch(base + '/ring/random?from=mara', { redirect: 'manual' });
+  assert.ok(!rnd.headers.get('location').startsWith('/@mara'));
+  const june = await (await fetch(base + '/@june')).text();
+  assert.match(june, /read by/);          // Mara lists June
+  assert.match(june, /Mara Okafor/);
+  assert.match(june, /acc-plum/);
+  const art = await (await fetch(base + '/p/the-bus-stop-is-the-city')).text();
+  assert.match(art, /theo reads/);
+  assert.match(art, /the margin ring/);
+});
+
+test('pass it on and presence', async () => {
+  const r = await (await post('/api/pass', { slug: 'the-screw-you-cant-turn', para: 2 })).json();
+  assert.equal(r.url, '/p/the-screw-you-cant-turn?via=passed&p=2');
+  const pv = uuid();
+  const beat = await (await post('/api/read', { slug: 'the-screw-you-cant-turn', pv, depth: 0.3, dwell: 5000, source: 'passed' })).json();
+  assert.ok(beat.now >= 1);
+  const pres = await (await fetch(base + '/api/presence?slug=the-screw-you-cant-turn')).json();
+  assert.ok(pres.now >= 1);
+  await post('/api/read', { slug: 'the-screw-you-cant-turn', pv, depth: 0.3, dwell: 6000, visible: false });
+  const after = await (await fetch(base + '/api/presence?slug=the-screw-you-cant-turn')).json();
+  assert.equal(after.now, pres.now - 1, 'hiding the tab stops counting as reading now');
+  assert.equal(app.h.get(`SELECT source FROM views WHERE pv = ?`, pv).source, 'passed');
+});
+
+test('writer homepage settings validate accent and blogroll', async () => {
+  const login = await fetch(base + '/login', { method: 'POST', redirect: 'manual', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ handle: 'ravi', password: 'demo-password' }) });
+  const cookie = login.headers.get('set-cookie').split(';')[0];
+  const save = await fetch(base + '/desk/profile', { method: 'POST', redirect: 'manual', headers: { 'Content-Type': 'application/x-www-form-urlencoded', Cookie: cookie },
+    body: new URLSearchParams({ name: 'Ravi M.', bio: 'b', now_line: 'Now: gears', accent: 'hotpink', blogroll: '@june\njavascript:alert(1)\nhttps://example.com Example\nnot a link' }) });
+  assert.equal(save.status, 303);
+  const row = app.h.get(`SELECT name, accent, blogroll, now_line FROM authors WHERE handle = 'ravi'`);
+  assert.equal(row.accent, 'cobalt');
+  assert.equal(row.blogroll, '@june\nhttps://example.com Example');
+  assert.equal(row.now_line, 'Now: gears');
+  const page = await (await fetch(base + '/@ravi')).text();
+  assert.match(page, /href="https:\/\/example.com"/);
+  assert.ok(!page.includes('javascript:'));
+  const dash = await (await fetch(base + '/dashboard', { headers: { Cookie: cookie } })).text();
+  assert.match(dash, /Where readers came from/);
+  assert.match(dash, /Theo Lindqvist<\/a> lists you/);
+});
+
+test('declaration and fonts are served locally', async () => {
+  const d = await fetch(base + '/declaration');
+  assert.equal(d.status, 200);
+  assert.match(await d.text(), /We would like the web back/);
+  const f = await fetch(base + '/static/fonts/newsreader-latin-wght-normal.woff2');
+  assert.equal(f.status, 200);
+  assert.equal(f.headers.get('content-type'), 'font/woff2');
+  assert.equal((await fetch(base + '/static/../server.js')).status, 404);
+  assert.match(d.headers.get('content-security-policy'), /font-src 'self'/);
 });

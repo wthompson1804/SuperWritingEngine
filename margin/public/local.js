@@ -103,7 +103,7 @@
         ? 'The Brief needs somewhere to go, so it needs an email address. That address hangs off a reader key: four words and a code, and no password. Get a key, then add the address.'
         : 'Right now your ' + kept + ' kept passage' + (kept === 1 ? '' : 's') + ' and ' + follows + ' follow' + (follows === 1 ? '' : 's') + ' live only in this browser. A reader key is four words and a code, with no email and no password. It keeps them on every device and lets you write in the margin.' }));
       var status = el('p', { class: 'small muted', 'aria-live': 'polite' });
-      var get = el('button', { class: 'btn', text: 'Get a reader key', on: { click: function () {
+      var get = el('button', { class: 'btn primary', text: 'Get a reader key', on: { click: function () {
         get.disabled = true;
         createKey().then(function (r) {
           if (!r.key) { status.textContent = r.error || 'Could not create a key.'; get.disabled = false; return; }
@@ -127,6 +127,7 @@
     root.appendChild(el('h2', { text: opts.justCreated ? 'Here is your reader key' : 'Your reader key' }));
     var keyText = el('code', { class: 'key' + (opts.justCreated ? '' : ' masked'), text: s.readerKey, tabindex: '0', title: 'Click to show' });
     keyText.addEventListener('click', function () { keyText.classList.remove('masked'); });
+    keyText.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); keyText.classList.remove('masked'); } });
     root.appendChild(el('p', {}, [keyText]));
     root.appendChild(el('p', { class: 'small', text: 'Write it down or put it in your password manager. It\'s the only way back in: we store a scrambled version and can\'t recover it for you.' }));
     var email = el('input', { type: 'email', value: prefs.email || '', placeholder: 'you@example.com', 'aria-label': 'Email (optional)' });
@@ -142,7 +143,7 @@
       el('label', {}, ['Email ', el('span', { class: 'small muted', text: '(optional, only needed for The Brief)' }), email]),
       el('label', { class: 'check' }, [digest, ' Send me The Brief: one email on Sundays, five pieces at most']),
       el('label', { class: 'check' }, [share, ' Share my email with writers I follow, so I stay on their list if I ever leave Margin']),
-      el('div', { class: 'row' }, [el('button', { class: 'btn', type: 'submit', text: 'Save' }), el('button', { class: 'btn ghost', type: 'button', text: 'Sync now', on: { click: function () { sync().then(function (r) { msg.textContent = r && r.ok ? 'Synced.' : 'Sync failed.'; if (opts.onChange) opts.onChange(); }); } } }),
+      el('div', { class: 'row' }, [el('button', { class: 'btn primary', type: 'submit', text: 'Save' }), el('button', { class: 'btn ghost', type: 'button', text: 'Sync now', on: { click: function () { sync().then(function (r) { msg.textContent = r && r.ok ? 'Synced.' : 'Sync failed.'; if (opts.onChange) opts.onChange(); }); } } }),
         el('button', { class: 'btn ghost', type: 'button', text: 'Forget key on this device', on: { click: function () {
           if (!confirm('Remove the key from this browser? Your passages stay here, and the key still works everywhere else.')) return;
           var t = load(); t.readerKey = null; t.prefs = null; save(t); renderKeyPanel(root, opts);

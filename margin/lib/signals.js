@@ -28,16 +28,18 @@ function postStats(h, where = '1=1', ...args) {
            (SELECT count(*) FROM tips t WHERE t.post_id = p.id) AS tips,
            (SELECT coalesce(sum(amount_cents), 0) FROM tips t WHERE t.post_id = p.id) AS tip_cents,
            (SELECT coalesce(sum(delta), 0) FROM follow_events f WHERE f.post_id = p.id) AS follows,
-           (SELECT count(*) FROM notes n WHERE n.post_id = p.id) AS notes
+           (SELECT count(*) FROM notes n WHERE n.post_id = p.id) AS notes,
+           (SELECT count(*) FROM passes x WHERE x.post_id = p.id) AS passes,
+           (SELECT count(*) FROM views v WHERE v.post_id = p.id AND v.source = 'passed') AS passed_in
     FROM posts p JOIN authors a ON a.id = p.author_id
     WHERE p.status = 'published' AND ${where}
     ORDER BY p.published_at DESC`, ...args);
 }
 
 // Quality is a smoothed completion rate with a prior of 50%, nudged up by
-// keeps and tips. The prior means a piece with 2 views isn't judged on them.
+// keeps, passes and tips. The prior means a piece with 2 views isn't judged on them.
 function quality(s) {
-  return (s.reads + 0.5 * s.keeps + 2 * s.tips + 2) / (s.views + 4);
+  return (s.reads + 0.5 * s.keeps + s.passes + 2 * s.tips + 2) / (s.views + 4);
 }
 
 function authorViews(h) {
@@ -122,7 +124,13 @@ function authorDashboard(h, authorId) {
   const funnel = {};
   for (const r of asks) (funnel[r.kind] ||= { shown: 0, accepted: 0 })[r.event] = r.n;
   const drafts = h.all(`SELECT id, slug, title, updated_at FROM posts WHERE author_id = ? AND status = 'draft' ORDER BY updated_at DESC`, authorId);
-  return { posts, followers, keyedFollowers, list, funnel, drafts };
+  const sources = h.all(`SELECT v.source, count(*) AS n FROM views v JOIN posts p ON p.id = v.post_id
+                         WHERE p.author_id = ? GROUP BY v.source ORDER BY n DESC`, authorId);
+  const now = h.get(`SELECT count(*) AS n FROM views v JOIN posts p ON p.id = v.post_id WHERE p.author_id = ? AND v.seen_at > ?`, authorId, Date.now() - 90000).n;
+  const me = '@' + h.get('SELECT handle FROM authors WHERE id = ?', authorId).handle;
+  const recommendedBy = h.all('SELECT handle, name, blogroll FROM authors WHERE id != ?', authorId)
+    .filter((a) => a.blogroll.split('\n').map((l) => l.trim().toLowerCase()).includes(me));
+  return { posts, followers, keyedFollowers, list, funnel, drafts, sources, now, recommendedBy };
 }
 
 // Per-paragraph view of one piece: how many readers reached it and how many kept it.
@@ -131,14 +139,16 @@ function paragraphMap(h, post) {
   const depths = h.all('SELECT max_depth FROM views WHERE post_id = ?', post.id).map((r) => r.max_depth);
   const keeps = new Map(h.all('SELECT para, count(*) AS n FROM keeps WHERE post_id = ? GROUP BY para', post.id).map((r) => [r.para, r.n]));
   const notes = new Map(h.all('SELECT para, count(*) AS n FROM notes WHERE post_id = ? GROUP BY para', post.id).map((r) => [r.para, r.n]));
+  const passes = new Map(h.all('SELECT para, count(*) AS n FROM passes WHERE post_id = ? GROUP BY para', post.id).map((r) => [r.para, r.n]));
   let cum = 0;
-  const maxKeep = Math.max(1, ...keeps.values());
+  const maxLove = Math.max(1, ...blocks.map((b) => (keeps.get(b.i) || 0) + (passes.get(b.i) || 0)));
   return blocks.map((b) => {
     const start = words ? cum / words : 0;
     cum += b.words;
     const reached = depths.length ? depths.filter((d) => d >= start).length / depths.length : 0;
     const k = keeps.get(b.i) || 0;
-    return { ...b, reached, keeps: k, keepShare: k / maxKeep, notes: notes.get(b.i) || 0 };
+    const ps = passes.get(b.i) || 0;
+    return { ...b, reached, keeps: k, passes: ps, keepShare: (k + ps) / maxLove, notes: notes.get(b.i) || 0 };
   });
 }
 
