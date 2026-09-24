@@ -47,7 +47,7 @@ v4 was mostly about making what exists work well for each persona. There were tw
 **Still not done, honestly:**
 - Real email and payment delivery.
 - ActivityPub hasn't been tried against a real Mastodon server; this environment can't reach the public internet. Also missing on the fediverse side: replies, boosts, Update on edit, and Delete on unpublish.
-- The outbound URL guard doesn't resolve DNS. Production needs an egress firewall.
+- The outbound URL guard resolves DNS and blocks private ranges, but a DNS answer can change between check and connect (rebinding). Production should still use an egress firewall.
 - The docked toolbar still appears *alongside* the phone's native menu (a web page can't hide that menu). It's clear of it now, not instead of it.
 - Selection on touch still depends on the phone's long-press selection. There's no double-tap-to-keep yet.
 
