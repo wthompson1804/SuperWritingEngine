@@ -21,6 +21,9 @@ const SECURITY_HEADERS = {
   'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
+  // Pages and fediverse JSON share URLs (content negotiation); caches must
+  // keep them apart.
+  'Vary': 'Accept',
 };
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -29,12 +32,18 @@ class HttpError extends Error { constructor(status, msg) { super(msg); this.stat
 function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'data', 'margin.db'), demoSignals = process.env.MARGIN_DEMO_SIGNALS !== '0', secureCookies = process.env.MARGIN_SECURE_COOKIES === '1',
   // No mail provider is wired up, so by default the confirmation link is shown on screen
   // instead of being emailed. Set MARGIN_SHOW_MAIL=0 once real delivery exists.
-  showMail = process.env.MARGIN_SHOW_MAIL !== '0',
+  // Shows the confirmation link on screen, because no mail is actually sent.
+  // It lets anyone confirm any address, so it defaults to off whenever a
+  // public URL is configured (i.e. in production).
+  showMail = process.env.MARGIN_SHOW_MAIL ? process.env.MARGIN_SHOW_MAIL === '1' : !process.env.MARGIN_PUBLIC_URL,
   // The canonical public URL. Fediverse ids must be stable, so set this in
   // production (e.g. https://margin.example). Falls back to the request host.
   publicUrl = process.env.MARGIN_PUBLIC_URL || '',
   // Tests and local development federate over http with private addresses.
-  apInsecure = process.env.MARGIN_AP_INSECURE === '1' } = {}) {
+  apInsecure = process.env.MARGIN_AP_INSECURE === '1',
+  // Behind a reverse proxy every request comes from the proxy's address; set
+  // this so rate limits and flags use the real client (X-Forwarded-For).
+  trustProxy = process.env.MARGIN_TRUST_PROXY === '1' } = {}) {
   const h = helpers(open(dbFile));
   seed(h, { demoSignals });
 
@@ -48,6 +57,31 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     return b.n > max;
   }
   setInterval(() => { const cut = Date.now() - 60000; for (const [k, b] of buckets) if (b.t < cut) buckets.delete(k); }, 60000).unref();
+
+  // Longer-window quotas for anonymous signals that feed the ranking, so a
+  // script can't manufacture reads or passes. Kept in memory, never stored.
+  const quotas = new Map();
+  function allow(key, max, windowMs) {
+    const now = Date.now();
+    const q = quotas.get(key);
+    if (!q || now - q.t > windowMs) { quotas.set(key, { t: now, n: 1, w: windowMs }); return true; }
+    q.n += 1;
+    return q.n <= max;
+  }
+  setInterval(() => { const now = Date.now(); for (const [k, q] of quotas) if (now - q.t > q.w) quotas.delete(k); }, 300000).unref();
+
+  // The client's network address: the proxy's forwarded address when trusted,
+  // and IPv6 grouped by /64 (one household or server gets a whole /64, so
+  // per-address limits on single IPv6 addresses are easy to dodge).
+  function clientIp(req) {
+    let ip = (trustProxy && String(req.headers['x-forwarded-for'] || '').split(',')[0].trim()) || req.socket.remoteAddress || '';
+    ip = ip.replace(/^::ffff:(?=\d+\.)/i, '');
+    if (!ip.includes(':')) return ip;
+    const [l, r = ''] = ip.split('::');
+    const left = l ? l.split(':') : [], right = r ? r.split(':') : [];
+    const full = [...left, ...Array(Math.max(0, 8 - left.length - right.length)).fill('0'), ...right];
+    return full.slice(0, 4).join(':') + '::/64';
+  }
 
   // ---------- helpers ----------
   const send = (res, status, body, headers = {}) => {
@@ -86,6 +120,12 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   }
 
   const baseUrl = (req) => publicUrl.replace(/\/$/, '') || `${req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http'}://${req.headers.host}`;
+  // Links that leave the site (emails, scheduled jobs) must never come from
+  // an anonymous request's Host header, or anyone could point them elsewhere.
+  // Order: the configured public URL, else the address a signed-in writer
+  // last used, else (local development only) this request's host.
+  let writerBase = '';
+  const mailBase = (req) => publicUrl.replace(/\/$/, '') || writerBase || (req ? baseUrl(req) : '');
   const fed = ap.createFederation(h, { allowHttp: apInsecure, allowPrivate: apInsecure, log: (m) => console.warn('[ap]', m) });
   const apJson = (res, obj, status = 200, type = 'application/activity+json') => send(res, status, JSON.stringify(obj), { 'Content-Type': `${type}; charset=utf-8`, 'Cache-Control': 'max-age=60', 'Access-Control-Allow-Origin': '*' });
   const queueMail = (to, subject, body, kind) => h.run('INSERT INTO mail (to_email, subject, body, kind, created_at) VALUES (?,?,?,?,?)', to, subject, body, kind, Date.now());
@@ -106,7 +146,6 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   // Everything that happens the first time a piece goes public: email to
   // confirmed followers, and a Create to fediverse followers. Used by the
   // editor and by the scheduler.
-  let lastBase = '';
   function publishNow(postId, base) {
     const post = h.get('SELECT * FROM posts WHERE id = ?', postId);
     if (!post) return;
@@ -125,7 +164,7 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   // Background jobs: scheduled posts, and one reminder for unconfirmed email
   // follows (about 6 in 10 double opt-ins go unconfirmed without one).
   function runJobs(now = Date.now()) {
-    const base = publicUrl.replace(/\/$/, '') || lastBase;
+    const base = mailBase(null);
     if (!base) return;
     for (const p of h.all(`SELECT id FROM posts WHERE status = 'scheduled' AND publish_at <= ?`, now)) publishNow(p.id, base);
     for (const sub of h.all(`SELECT s.id, s.email, s.token, a.name FROM email_subs s JOIN authors a ON a.id = s.author_id
@@ -149,7 +188,7 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   function currentAuthor(req) {
     const t = auth.parseCookies(req.headers.cookie).ms;
     if (!t) return null;
-    return h.get('SELECT a.id, a.handle, a.name, a.bio, a.accent FROM sessions s JOIN authors a ON a.id = s.author_id WHERE s.token = ?', t) || null;
+    return h.get('SELECT a.id, a.handle, a.name, a.bio, a.accent FROM sessions s JOIN authors a ON a.id = s.author_id WHERE s.token = ? AND s.created_at > ?', t, Date.now() - 30 * 86400000) || null;
   }
   const sessionCookie = (tok, maxAge) => `ms=${tok}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secureCookies ? '; Secure' : ''}`;
 
@@ -397,7 +436,7 @@ ${items}
       const slug = post.status === 'published' || post.published_at ? post.slug : slugify(title, post.id);
       h.run('UPDATE posts SET title = ?, dek = ?, body_md = ?, words = ?, slug = ?, updated_at = ? WHERE id = ?', title, dek, body, words, slug, now, post.id);
     }
-    if (action === 'publish') publishNow(post.id, baseUrl(req));
+    if (action === 'publish') publishNow(post.id, mailBase(req));
     if (action === 'schedule') {
       const at = Date.parse(String(b.publish_at || ''));
       if (!Number.isFinite(at) || at < now + 60000) {
@@ -411,12 +450,16 @@ ${items}
   }));
 
   // ----- anonymous reading signals -----
-  on('POST', /^\/api\/read$/, async (req, res) => {
+  on('POST', /^\/api\/read$/, async (req, res, m, ctx) => {
     const b = await readBody(req, 4096);
     const post = publishedPost(b.slug);
     if (!post || !UUID.test(String(b.pv))) return json(res, { ok: false }, 400);
+    // A new page view counts only a few times per address per piece per hour;
+    // beyond that the beacon is accepted and ignored.
+    if (!h.get('SELECT 1 FROM views WHERE pv = ?', b.pv) && !allow(`view:${ctx.ip}:${post.id}`, 5, 3600000)) return json(res, { ok: true, now: ring.readingNow(h, post.id) });
     const depth = Math.min(1, Math.max(0, Number(b.depth) || 0));
-    const dwell = Math.min(6 * 3600 * 1000, Math.max(0, Math.floor(Number(b.dwell) || 0)));
+    // No one reads slower than about a word a second (plus two minutes' grace).
+    const dwell = Math.min(6 * 3600 * 1000, post.words * 1000 + 120000, Math.max(0, Math.floor(Number(b.dwell) || 0)));
     const source = ['front', 'follow', 'brief', 'author', 'next', 'ring', 'passed', 'direct'].includes(b.source) ? b.source : 'direct';
     const now = Date.now();
     // seen_at only moves while the page is visible, so "reading now" means reading now.
@@ -435,12 +478,13 @@ ${items}
     json(res, { ok: true, now: ring.readingNow(h, post.id), reads });
   });
 
-  on('POST', /^\/api\/pass$/, async (req, res) => {
+  on('POST', /^\/api\/pass$/, async (req, res, m, ctx) => {
     const b = await readBody(req, 4096);
     const post = publishedPost(b.slug);
     const para = Number(b.para);
     if (!post || !Number.isInteger(para) || para < 0 || para > 5000) return json(res, { ok: false }, 400);
-    h.run('INSERT INTO passes (post_id, para, created_at) VALUES (?,?,?)', post.id, para, Date.now());
+    // The link always works; only the first few passes per address count.
+    if (allow(`pass:${ctx.ip}:${post.id}`, 5, 3600000)) h.run('INSERT INTO passes (post_id, para, created_at) VALUES (?,?,?)', post.id, para, Date.now());
     json(res, { ok: true, url: `/p/${post.slug}?via=passed&p=${para}` });
   });
 
@@ -497,8 +541,9 @@ ${items}
   });
 
   // ----- reader keys -----
-  on('POST', /^\/api\/key\/new$/, async (req, res) => {
-    const b = await readBody(req, 600_000);
+  on('POST', /^\/api\/key\/new$/, async (req, res, m, ctx) => {
+    if (!allow(`key:${ctx.ip}`, 20, 3600000)) return json(res, { ok: false, error: 'Too many new keys from here. Try again later.' }, 429);
+    const b = await readBody(req, 200_000);
     const key = auth.newReaderKey();
     const data = mergeData({}, b.data || {});
     const now = Date.now();
@@ -549,14 +594,15 @@ ${items}
   });
 
   // Anyone can flag a note. Three flags hide it until the writer looks.
-  const flagged = new Set();
-  on('POST', /^\/api\/note\/flag$/, async (req, res) => {
+  const flagged = new Map(); // visitor+note -> time; pruned daily, never stored
+  setInterval(() => { const cut = Date.now() - 86400000; for (const [k, t] of flagged) if (t < cut) flagged.delete(k); }, 3600000).unref();
+  on('POST', /^\/api\/note\/flag$/, async (req, res, m, ctx) => {
     const b = await readBody(req, 1024);
     const id = Number(b.id);
-    const k = `${req.socket.remoteAddress}:${id}`;
+    const k = `${ctx.ip}:${id}`;
     if (!Number.isInteger(id) || !h.get('SELECT id FROM notes WHERE id = ?', id)) return json(res, { ok: false }, 400);
     if (!flagged.has(k)) {
-      flagged.add(k);
+      flagged.set(k, Date.now());
       h.run('UPDATE notes SET flags = flags + 1, hidden = CASE WHEN flags + 1 >= 3 AND hidden = 0 THEN 1 ELSE hidden END WHERE id = ?', id);
     }
     json(res, { ok: true });
@@ -596,7 +642,7 @@ ${items}
         auth.token(18), Date.now(), via && via.id !== a.id ? via.id : null, sub.id);
       sub = h.get('SELECT * FROM email_subs WHERE id = ?', sub.id);
     }
-    const link = `${baseUrl(req)}/confirm/${sub.token}`;
+    const link = `${mailBase(req)}/confirm/${sub.token}`;
     queueMail(email, `Confirm: new pieces from ${a.name}`, `Someone (hopefully you) asked to get ${a.name}'s new pieces on Margin by email.\n\nConfirm: ${link}\n\nIf it wasn't you, ignore this and nothing happens.`, 'confirm');
     json(res, { ok: true, pending: true, ...(showMail ? { previewLink: `/confirm/${sub.token}` } : {}) });
   });
@@ -716,7 +762,10 @@ ${items}
         h.run('DELETE FROM ap_followers WHERE actor = ?', keyActor);
         return json(res, { ok: true, result: 'deleted' }, 202);
       }
-      json(res, { error: String(e.message || e) }, 401);
+      // Keep the reason in our logs, not in the response: echoing it would
+      // tell a prober what our fetches of their URLs returned.
+      console.warn('[ap] inbox rejected:', String(e.message || e).slice(0, 200));
+      json(res, { error: 'Signature not accepted.' }, 401);
     }
   };
   on('POST', /^\/ap\/users\/([a-z0-9_]+)\/inbox$/, inbox);
@@ -725,10 +774,23 @@ ${items}
   // ---------- dispatcher ----------
   async function handle(req, res) {
     const url = new URL(req.url, 'http://x');
-    const ip = req.socket.remoteAddress || '';
-    const ctx = { url, author: currentAuthor(req), proto: req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http' };
-    if (req.headers.host) lastBase = `${ctx.proto}://${req.headers.host}`;
+    const ip = clientIp(req);
+    const ctx = { url, ip, author: currentAuthor(req), proto: req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http' };
+    // Cross-site request check for everything a signed-in writer can do (and
+    // for sign-in itself). Browsers say where a request came from; anything
+    // from another site is refused. Anonymous /api and fediverse /ap routes
+    // are meant to be called from anywhere.
+    if (req.method === 'POST' && !url.pathname.startsWith('/api/') && !url.pathname.startsWith('/ap/')) {
+      const site = req.headers['sec-fetch-site'];
+      const origin = req.headers.origin;
+      const own = [baseUrl(req), `${ctx.proto}://${req.headers.host}`];
+      if ((site && site !== 'same-origin' && site !== 'none') || (origin && origin !== 'null' && !own.includes(origin)) || origin === 'null') {
+        return html(res, views.notFound({}), 403);
+      }
+    }
+    if (ctx.author && req.headers.host) writerBase = `${ctx.proto}://${req.headers.host}`;
     if (req.method === 'POST' && url.pathname.startsWith('/api/') && limited(ip)) return json(res, { ok: false, error: 'Slow down a little.' }, 429);
+    if (req.method === 'POST' && url.pathname.startsWith('/ap/') && limited('ap:' + ip, 60)) return json(res, { error: 'Slow down.' }, 429);
     if (req.method === 'POST' && (url.pathname === '/login' || url.pathname === '/signup') && limited('auth:' + ip, 20)) return html(res, views.tooMany(), 429);
     const method = req.method === 'HEAD' ? 'GET' : req.method;
     for (const r of routes) {

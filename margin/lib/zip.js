@@ -5,8 +5,20 @@
 const zlib = require('node:zlib');
 
 const MAX_ENTRY = 64 * 1024 * 1024;
+// Whole-archive limits, so a small zip can't expand into gigabytes (several
+// directory entries pointing at one compressed blob was the trick).
+const MAX_TOTAL = 256 * 1024 * 1024;
+const MAX_ENTRIES = 20000;
 
 function readZip(buf) {
+  try { return readZipUnsafe(buf); } catch (e) {
+    // Truncated or hand-crafted archives fail on out-of-range reads.
+    if (e instanceof RangeError || e.code === 'ERR_OUT_OF_RANGE' || e.code === 'ERR_BUFFER_OUT_OF_BOUNDS') throw new Error('That zip file is damaged or incomplete.');
+    throw e;
+  }
+}
+
+function readZipUnsafe(buf) {
   if (!Buffer.isBuffer(buf) || buf.length < 22) throw new Error('Not a zip file.');
   // Find the end-of-central-directory record (it may be followed by a comment).
   let eocd = -1;
@@ -15,8 +27,11 @@ function readZip(buf) {
   }
   if (eocd < 0) throw new Error('Not a zip file.');
   const count = buf.readUInt16LE(eocd + 10);
+  if (count > MAX_ENTRIES) throw new Error('That zip has too many files.');
   let p = buf.readUInt32LE(eocd + 16);
   const files = new Map();
+  const seen = new Set();
+  let total = 0;
   for (let n = 0; n < count; n++) {
     if (buf.readUInt32LE(p) !== 0x02014b50) throw new Error('Corrupt zip directory.');
     const method = buf.readUInt16LE(p + 10);
@@ -30,13 +45,21 @@ function readZip(buf) {
     p += 46 + nameLen + extraLen + commentLen;
     if (name.endsWith('/')) continue;
     if (usize > MAX_ENTRY) throw new Error(`${name} is too large.`);
+    if (seen.has(local)) throw new Error('Corrupt zip: entries overlap.');
+    seen.add(local);
     if (buf.readUInt32LE(local) !== 0x04034b50) throw new Error('Corrupt zip entry.');
     const start = local + 30 + buf.readUInt16LE(local + 26) + buf.readUInt16LE(local + 28);
     const raw = buf.subarray(start, start + csize);
     let data;
     if (method === 0) data = Buffer.from(raw);
-    else if (method === 8) data = zlib.inflateRawSync(raw, { maxOutputLength: MAX_ENTRY });
-    else throw new Error(`${name} uses an unsupported compression method.`);
+    else if (method === 8) {
+      // Cap by what's actually produced, not what the header claims.
+      try { data = zlib.inflateRawSync(raw, { maxOutputLength: Math.max(1, Math.min(MAX_ENTRY, MAX_TOTAL - total)) }); } catch (e) {
+        throw new Error(e instanceof RangeError ? 'That zip expands to more than 256 MB.' : `Couldn’t unpack ${name}.`);
+      }
+    } else throw new Error(`${name} uses an unsupported compression method.`);
+    total += data.length;
+    if (total > MAX_TOTAL) throw new Error('That zip expands to more than 256 MB.');
     files.set(name, data);
   }
   return files;

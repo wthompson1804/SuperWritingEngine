@@ -48,6 +48,7 @@ function importSubstack(h, authorId, zipBuf, now = Date.now()) {
       if (type === 'thread') { report.posts.skipped++; continue; }
       const html = htmlByKey.get(postId);
       if (!html) { report.posts.skipped++; continue; }
+      if (html.length > 2 * 1024 * 1024) { report.posts.skipped++; report.tooBig = (report.tooBig || 0) + 1; continue; }
       const origin = `substack:${postId}`;
       if (h.get('SELECT id FROM posts WHERE author_id = ? AND imported_from = ?', authorId, origin)) { report.posts.already++; continue; }
       const body = htmlToMarkdown(html);
@@ -78,6 +79,7 @@ function importSubstack(h, authorId, zipBuf, now = Date.now()) {
   });
 
   const n = (x, one, many) => `${x} ${x === 1 ? one : many}`;
+  if (report.tooBig) report.warnings.push(`${n(report.tooBig, 'post was', 'posts were')} over 2 MB of HTML and skipped.`);
   if (report.posts.paidToDraft) report.warnings.push(`${n(report.posts.paidToDraft, 'paid-only post', 'paid-only posts')} came in as drafts. Margin has no paywall, so publishing makes them free.`);
   if (report.subscribers.paid) report.warnings.push(`${n(report.subscribers.paid, 'paid subscriber', 'paid subscribers')} came in as email followers. Their billing stays with Substack until you move it (Margin has no payments yet).`);
   if (report.posts.published + report.posts.drafts) report.warnings.push('Images still load from Substack’s servers. Notes, comments and podcast audio aren’t in Substack’s export.');

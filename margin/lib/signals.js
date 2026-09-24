@@ -55,7 +55,9 @@ function expectedCompletion(words) {
 function quality(s) {
   const e = expectedCompletion(s.words);
   const prior = 4;
-  return (s.reads + 0.5 * s.keeps + s.passes + 2 * s.tips + prior * e) / (s.views * e + prior);
+  // Tips are left out while they're simulated: an unpaid tip costs nothing to
+  // forge. Add them back (paid ones only) once real payments exist.
+  return (s.reads + 0.5 * s.keeps + s.passes + prior * e) / (s.views * e + prior);
 }
 
 function authorViews(h) {

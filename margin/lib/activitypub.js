@@ -16,6 +16,7 @@
 
 const crypto = require('node:crypto');
 const net = require('node:net');
+const dns = require('node:dns').promises;
 const { render } = require('./markdown');
 
 const AS = 'https://www.w3.org/ns/activitystreams';
@@ -130,37 +131,88 @@ function parseSignature(header) {
   return out.keyId && out.signature ? out : null;
 }
 
-// Refuses URLs that could reach the server's own network. It checks literal
-// IPs and local hostnames only; DNS names that resolve to private addresses
-// need an egress firewall in production.
+// Outbound requests go only to public addresses. Private, loopback,
+// link-local, CGNAT, documentation, multicast and IPv6 transition ranges
+// (NAT64, 6to4, Teredo) are all refused, and hostnames are resolved and
+// checked before connecting. A DNS answer that changes between the check and
+// the connection (rebinding) is still possible, so production should also sit
+// behind an egress firewall.
+const BLOCKED = new net.BlockList();
+for (const [a, p] of [['0.0.0.0', 8], ['10.0.0.0', 8], ['100.64.0.0', 10], ['127.0.0.0', 8], ['169.254.0.0', 16], ['172.16.0.0', 12],
+  ['192.0.0.0', 24], ['192.0.2.0', 24], ['192.88.99.0', 24], ['192.168.0.0', 16], ['198.18.0.0', 15], ['198.51.100.0', 24],
+  ['203.0.113.0', 24], ['224.0.0.0', 4], ['240.0.0.0', 4]]) BLOCKED.addSubnet(a, p, 'ipv4');
+for (const [a, p] of [['::', 128], ['::1', 128], ['64:ff9b::', 96], ['64:ff9b:1::', 48], ['100::', 64], ['2001::', 32], ['2001:db8::', 32],
+  ['2002::', 16], ['fc00::', 7], ['fe80::', 10], ['fec0::', 10], ['ff00::', 8]]) BLOCKED.addSubnet(a, p, 'ipv6');
+
+function blockedIp(ip) {
+  const v = net.isIP(ip);
+  if (!v) return true;
+  if (v === 6) {
+    const mapped = ip.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/i);
+    if (mapped) return BLOCKED.check(mapped[1], 'ipv4');
+    // Also catch hex-form mapped addresses like ::ffff:7f00:1.
+    const hex = ip.match(/^::ffff:([0-9a-f]{1,4}):([0-9a-f]{1,4})$/i);
+    if (hex) { const a = parseInt(hex[1], 16), b = parseInt(hex[2], 16); return BLOCKED.check(`${a >> 8}.${a & 255}.${b >> 8}.${b & 255}`, 'ipv4'); }
+    return BLOCKED.check(ip, 'ipv6');
+  }
+  return BLOCKED.check(ip, 'ipv4');
+}
+
+// Synchronous screen: scheme, and literal hosts. Returns a URL or null.
 function allowedUrl(raw, { allowHttp = false, allowPrivate = false } = {}) {
   let u;
   try { u = new URL(raw); } catch { return null; }
   if (u.protocol !== 'https:' && !(allowHttp && u.protocol === 'http:')) return null;
+  if (u.username || u.password) return null;
   if (!allowPrivate) {
-    const host = u.hostname.replace(/^\[|\]$/g, '');
-    if (/^(localhost|.*\.local|.*\.internal)$/i.test(host)) return null;
-    if (net.isIP(host)) {
-      if (/^(10\.|127\.|0\.|169\.254\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(host)) return null;
-      if (/^(::1?|f[cd]|fe80)/i.test(host)) return null;
-    }
+    const host = u.hostname.replace(/^\[|\]$/g, '').replace(/\.+$/, '').toLowerCase();
+    if (!host || /(^|\.)(localhost|local|internal|localdomain|home\.arpa)$/.test(host)) return null;
+    if (net.isIP(host) ? blockedIp(host) : !host.includes('.')) return null;
   }
   return u;
+}
+
+// Full check: also resolves the hostname and screens every address.
+async function publicUrl(raw, guard) {
+  const u = allowedUrl(raw, guard);
+  if (!u) return null;
+  if (guard.allowPrivate) return u;
+  const host = u.hostname.replace(/^\[|\]$/g, '');
+  if (net.isIP(host)) return u;
+  try {
+    const addrs = await dns.lookup(host.replace(/\.+$/, ''), { all: true, verbatim: true });
+    if (!addrs.length || addrs.some((x) => blockedIp(x.address))) return null;
+  } catch { return null; }
+  return u;
+}
+
+// Reads a response body, giving up past a size limit instead of buffering it all.
+async function readCapped(res, limit) {
+  const reader = res.body && res.body.getReader();
+  if (!reader) return '';
+  const chunks = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.length;
+    if (size > limit) { reader.cancel().catch(() => {}); throw new Error('Response too large'); }
+    chunks.push(value);
+  }
+  return Buffer.concat(chunks).toString('utf8');
 }
 
 function createFederation(h, { allowHttp = false, allowPrivate = false, fetchImpl = fetch, log = () => {} } = {}) {
   const guard = { allowHttp, allowPrivate };
 
   async function signedGet(url, signer) {
-    const u = allowedUrl(url, guard);
+    const u = await publicUrl(url, guard);
     if (!u) throw new Error('URL not allowed');
     const headers = { accept: 'application/activity+json, application/ld+json' };
     if (signer) Object.assign(headers, signHeaders({ method: 'GET', url: u.href, body: null, ...signer }));
     const res = await fetchImpl(u.href, { headers, signal: AbortSignal.timeout(10000), redirect: 'error' });
     if (!res.ok) throw Object.assign(new Error(`GET ${u.href} → ${res.status}`), { gone: res.status === 410 });
-    const text = await res.text();
-    if (text.length > 1_000_000) throw new Error('Response too large');
-    return JSON.parse(text);
+    return JSON.parse(await readCapped(res, 1_000_000));
   }
 
   // Fetch (or reuse) the remote actor behind a keyId.
@@ -223,6 +275,7 @@ function createFederation(h, { allowHttp = false, allowPrivate = false, fetchImp
         const k = ensureKeys(h, a.id);
         const base = JSON.parse(d.body).actor.replace(/\/ap\/users\/.*$/, '');
         try {
+          if (!(await publicUrl(d.inbox, guard))) throw new Error('inbox address not allowed');
           const headers = signHeaders({ method: 'POST', url: d.inbox, body: d.body, keyId: ids(base, a.handle).key, privateKey: k.privateKey });
           const res = await fetchImpl(d.inbox, { method: 'POST', headers: { ...headers, 'content-type': 'application/activity+json' }, body: d.body, signal: AbortSignal.timeout(15000), redirect: 'error' });
           if (res.ok) { h.run(`UPDATE ap_deliveries SET status = 'done', attempts = attempts + 1 WHERE id = ?`, d.id); continue; }

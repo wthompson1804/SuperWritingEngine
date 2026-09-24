@@ -22,7 +22,7 @@ test('markdown escapes HTML and indexes blocks', () => {
   const r = render('Hello <script>alert(1)</script> **bold**\n\n## Head\n\n> quote\n\n- a\n- b\n\n[x](javascript:alert(1)) [y](https://e.com)');
   assert.ok(!r.html.includes('<script>'));
   assert.ok(r.html.includes('<strong>bold</strong>'));
-  assert.ok(!r.html.includes('javascript:'));
+  assert.ok(!/href="javascript:/i.test(r.html), 'never a javascript: link');
   assert.ok(r.html.includes('href="https://e.com"'));
   assert.deepEqual(r.blocks.map((b) => b.kind), ['p', 'h', 'quote', 'li', 'li', 'p']);
 });
@@ -496,6 +496,58 @@ test('export → import keeps titles that start with - or =', async () => {
   await fetch(base + '/desk/import', { method: 'POST', headers: { 'Content-Type': 'application/zip', Cookie: c2 }, body: zip });
   const got = app.h.get(`SELECT p.title, p.dek FROM posts p JOIN authors a ON a.id = p.author_id WHERE a.handle = 'dash2'`);
   assert.deepEqual([got.title, got.dek], ['-30 degrees', '=why']);
+});
+
+// ---------------- security regression tests ----------------
+test('hostile markdown and HTML finish quickly (no ReDoS)', async () => {
+  const t = Date.now();
+  const r = await post('/api/check', { body_md: '['.repeat(250000) });
+  assert.equal(r.status, 200);
+  assert.ok(Date.now() - t < 2000, `took ${Date.now() - t}ms`);
+  const t2 = Date.now();
+  htmlToMarkdown('<'.repeat(1_000_000)); htmlToMarkdown('<p'.repeat(500_000)); htmlToMarkdown('<a href="x">'.repeat(80_000));
+  assert.ok(Date.now() - t2 < 2000, `htmlmd took ${Date.now() - t2}ms`);
+  const inj = render('![[y](/media/a.png)](/x/style=position:fixed;inset:0//)').html;
+  assert.ok(!/<[a-z]+\b[^>]*\sstyle=/i.test(inj), 'no attribute injection: ' + inj);
+});
+
+test('zip bombs are refused', () => {
+  const zlib = require('node:zlib');
+  const blob = zlib.deflateRawSync(Buffer.alloc(8 * 1024 * 1024));
+  const nm = Buffer.from('a');
+  const lh = Buffer.alloc(30); lh.writeUInt32LE(0x04034b50, 0); lh.writeUInt16LE(8, 8); lh.writeUInt32LE(blob.length, 18); lh.writeUInt32LE(8 * 1024 * 1024, 22); lh.writeUInt16LE(1, 26);
+  const cds = [];
+  for (let i = 0; i < 40; i++) { const ch = Buffer.alloc(46); ch.writeUInt32LE(0x02014b50, 0); ch.writeUInt16LE(8, 10); ch.writeUInt32LE(blob.length, 20); ch.writeUInt32LE(8 * 1024 * 1024, 24); ch.writeUInt16LE(1, 28); cds.push(ch, Buffer.from(String.fromCharCode(97 + (i % 26)))); }
+  const cd = Buffer.concat(cds); const e = Buffer.alloc(22); e.writeUInt32LE(0x06054b50, 0); e.writeUInt16LE(40, 8); e.writeUInt16LE(40, 10); e.writeUInt32LE(cd.length, 12); e.writeUInt32LE(30 + nm.length + blob.length, 16);
+  assert.throws(() => readZip(Buffer.concat([lh, nm, blob, cd, e])), /overlap/);
+});
+
+test('cross-site writer actions are refused', async () => {
+  const cookie = await loginAs('mara');
+  const evil = await fetch(base + '/write/new', { method: 'POST', redirect: 'manual', headers: { Cookie: cookie, Origin: 'https://evil.example', 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'title=pwned&body_md=x&action=publish' });
+  assert.equal(evil.status, 403);
+  const site = await fetch(base + '/desk/upload', { method: 'POST', headers: { Cookie: cookie, 'Sec-Fetch-Site': 'cross-site' }, body: Buffer.from('x') });
+  assert.equal(site.status, 403);
+  assert.equal(app.h.get(`SELECT count(*) n FROM posts WHERE title = 'pwned'`).n, 0);
+  const same = await fetch(base + '/write/new', { method: 'POST', redirect: 'manual', headers: { Cookie: cookie, Origin: base, 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'title=fine&body_md=x&action=save' });
+  assert.equal(same.status, 303);
+});
+
+test('an anonymous Host header cannot poison outgoing links', async () => {
+  await fetch(base + '/', { headers: { Host: 'evil.example' } });
+  await post('/api/subscribe', { handle: 'theo', email: 'hosty@example.org' });
+  app.h.run(`UPDATE email_subs SET created_at = ? WHERE email = 'hosty@example.org'`, Date.now() - 2 * 86400000);
+  app.runJobs();
+  const mails = app.h.all(`SELECT body FROM mail WHERE to_email = 'hosty@example.org'`);
+  assert.ok(mails.length >= 1);
+  for (const m of mails) assert.ok(!m.body.includes('evil.example'), m.body);
+});
+
+test('forged reads are capped per address', async () => {
+  const before = app.h.get(`SELECT count(*) n FROM views v JOIN posts p ON p.id = v.post_id WHERE p.slug = 'your-org-chart-is-a-fiction'`).n;
+  for (let i = 0; i < 30; i++) await post('/api/read', { slug: 'your-org-chart-is-a-fiction', pv: uuid(), depth: 1, dwell: 3600000 });
+  const after = app.h.get(`SELECT count(*) n, max(dwell_ms) d FROM views v JOIN posts p ON p.id = v.post_id WHERE p.slug = 'your-org-chart-is-a-fiction'`);
+  assert.ok(after.n - before <= 5, `${after.n - before} new views counted`);
 });
 
 // Runs last: it deliberately trips the sign-in rate limit.

@@ -9,9 +9,12 @@ function esc(s) {
   ));
 }
 
+// Bracket and paren classes exclude both delimiters ([^[\]], [^()]) so a
+// flood of "[" or "(" can't make these patterns rescan the string from every
+// position (that was quadratic: a 120 KB body stalled the server for 23s).
 // Images may only come from Margin's own /media/ store. Hotlinked images
 // would hand every reader's IP address to a third party.
-const IMG = /!\[([^\]]*)\]\((\/media\/[\w.-]+)\)/g;
+const IMG = /!\[([^[\]]*)\]\((\/media\/[\w.-]+)\)/g;
 
 function inline(src, fn) {
   // Code spans, images, footnote markers and link targets are set aside as
@@ -21,9 +24,9 @@ function inline(src, fn) {
   let out = esc(String(src).replace(/\u0000/g, ''));
   out = out.replace(/`([^`]+)`/g, (m, c) => hold(`<code>${c}</code>`));
   out = out.replace(IMG, (m, alt, url) => hold(`<img src="${url}" alt="${alt}" loading="lazy" decoding="async">`));
-  out = out.replace(/!\[([^\]]*)\]\((https?:\/\/[^)\s]+)\)/g, (m, alt, url) => `[Image: ${alt || 'external'}](${url})`);
+  out = out.replace(/!\[([^[\]]*)\]\((https?:\/\/[^()\s]+)\)/g, (m, alt, url) => `[Image: ${alt || 'external'}](${url})`);
   if (fn) out = out.replace(/\[\^([\w-]{1,20})\]/g, (m, id) => { const r = fn(id); return r ? hold(r) : m; });
-  out = out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, text, url) => {
+  out = out.replace(/\[([^[\]]+)\]\(([^()\s]+)\)/g, (m, text, url) => {
     const u = url.replace(/&amp;/g, '&');
     if (!/^(https?:\/\/|\/|#|mailto:)/i.test(u)) return text;
     return hold(`<a href="${esc(u)}" rel="noopener nofollow">`) + text + hold('</a>');
@@ -44,7 +47,7 @@ function plain(src) {
     .replace(/\*\*([^*]+)\*\*/g, '$1')
     .replace(/\*([^*]+)\*/g, '$1')
     .replace(/(^|[^\w])_([^_]+)_(?!\w)/g, '$1$2')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+    .replace(/\[([^[\]]+)\]\([^()]+\)/g, '$1');
 }
 
 // Returns { html, blocks: [{ i, kind, text, words }], words }
@@ -85,7 +88,7 @@ function render(md) {
   const flushPara = () => {
     if (!para.length) return;
     const text = para.join(' ');
-    const fig = text.match(/^!\[([^\]]*)\]\((\/media\/[\w.-]+)\)$/);
+    const fig = text.match(/^!\[([^[\]]*)\]\((\/media\/[\w.-]+)\)$/);
     const i = addBlock(fig ? 'img' : 'p', text);
     html.push(fig
       ? `<figure data-p="${i}"><img src="${fig[2]}" alt="${esc(fig[1])}" loading="lazy" decoding="async">${fig[1] ? `<figcaption>${esc(fig[1])}</figcaption>` : ''}</figure>`
