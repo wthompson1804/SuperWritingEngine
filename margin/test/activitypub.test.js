@@ -9,6 +9,7 @@ const { createApp } = require('../server');
 const { signHeaders, digestOf, allowedUrl } = require('../lib/activitypub');
 
 let app, base, remote, remoteBase;
+let gone = false;
 const received = [];
 const keys = crypto.generateKeyPairSync('rsa', { modulusLength: 2048, publicKeyEncoding: { type: 'spki', format: 'pem' }, privateKeyEncoding: { type: 'pkcs8', format: 'pem' } });
 
@@ -25,6 +26,7 @@ test.before(async () => {
   remote = http.createServer(async (req, res) => {
     const chunks = []; for await (const c of req) chunks.push(c);
     const body = Buffer.concat(chunks).toString();
+    if (req.method === 'GET' && req.url === '/users/alice' && gone) { res.writeHead(410); return res.end(); }
     if (req.method === 'GET' && req.url === '/users/alice') {
       res.writeHead(200, { 'content-type': 'application/activity+json' });
       return res.end(JSON.stringify({ id: `${remoteBase}/users/alice`, type: 'Person', preferredUsername: 'alice', inbox: `${remoteBase}/users/alice/inbox`, endpoints: { sharedInbox: `${remoteBase}/inbox` }, publicKey: { id: `${remoteBase}/users/alice#main-key`, owner: `${remoteBase}/users/alice`, publicKeyPem: keys.publicKey } }));
@@ -130,4 +132,16 @@ test('outbound URL guard blocks private and non-https targets by default', () =>
   assert.equal(allowedUrl('https://localhost/x'), null);
   assert.equal(allowedUrl('https://[::1]/x'), null);
   assert.ok(allowedUrl('https://mastodon.social/users/x'));
+});
+
+test('a deleted account (410) can still remove itself as a follower', async () => {
+  // Alice follows again, then her account is deleted on her server.
+  await signedPost('/ap/users/theo/inbox', { id: `${remoteBase}/follows/9`, type: 'Follow', actor: `${remoteBase}/users/alice`, object: `${base}/ap/users/theo` });
+  assert.equal(app.h.get('SELECT count(*) n FROM ap_followers').n, 1);
+  app.h.run('DELETE FROM ap_actors'); // no cached key either: the hardest case
+  gone = true;
+  const r = await signedPost('/ap/inbox', { id: `${remoteBase}/users/alice#delete`, type: 'Delete', actor: `${remoteBase}/users/alice`, object: `${remoteBase}/users/alice` });
+  assert.equal(r.status, 202);
+  assert.equal(app.h.get('SELECT count(*) n FROM ap_followers').n, 0);
+  gone = false;
 });

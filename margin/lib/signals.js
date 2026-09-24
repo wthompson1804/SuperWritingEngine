@@ -158,10 +158,13 @@ function authorDashboard(h, authorId) {
   const emailPending = h.get(`SELECT count(*) AS n FROM email_subs WHERE author_id = ? AND status = 'pending'`, authorId).n;
   // Recommendation ledger: followers you sent to other writers, and followers
   // other writers sent you. Substack's network runs on this; ours is visible.
+  // Both sides count the same things: follows here, plus confirmed email follows.
   const sent = h.get(`SELECT count(*) AS n FROM follow_events WHERE via_author_id = ? AND delta > 0`, authorId).n
-    + h.get(`SELECT count(*) AS n FROM email_subs WHERE via_author_id = ?`, authorId).n;
-  const received = h.all(`SELECT a.handle, a.name, count(*) AS n FROM follow_events f JOIN authors a ON a.id = f.via_author_id
-                          WHERE f.author_id = ? AND f.delta > 0 GROUP BY a.id ORDER BY n DESC`, authorId);
+    + h.get(`SELECT count(*) AS n FROM email_subs WHERE via_author_id = ? AND status = 'active'`, authorId).n;
+  const received = h.all(`SELECT a.handle, a.name, count(*) AS n FROM (
+                            SELECT via_author_id AS v FROM follow_events WHERE author_id = ? AND delta > 0 AND via_author_id IS NOT NULL
+                            UNION ALL SELECT via_author_id FROM email_subs WHERE author_id = ? AND status = 'active' AND via_author_id IS NOT NULL
+                          ) x JOIN authors a ON a.id = x.v GROUP BY a.id ORDER BY n DESC`, authorId, authorId);
   const notesList = h.all(`SELECT n.id, n.body, n.quote, n.display_name, n.hidden, n.flags, n.created_at, p.slug, p.title
                            FROM notes n JOIN posts p ON p.id = n.post_id WHERE p.author_id = ? ORDER BY n.flags DESC, n.created_at DESC LIMIT 50`, authorId);
   const fedi = h.get('SELECT count(*) AS n FROM ap_followers WHERE author_id = ?', authorId).n;

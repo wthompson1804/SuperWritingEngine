@@ -194,7 +194,7 @@ function article({ post, author, rendered, notes, topKeep, keepCounts, next, vie
     ${post.dek ? h`<p class="dek">${post.dek}</p>` : ''}
     <p class="meta mono">${fmtDate(post.published_at)} · ${minutes} min read</p>
     <p class="counter mono" id="counter" aria-live="off">
-      <span class="live" aria-hidden="true"></span><span id="now-n">${stats.now}</span> reading now · ${stats.reads ? h`finished by <span id="fin-n">${stats.reads}</span> ${stats.reads === 1 ? 'person' : 'people'}` : 'be the first to finish it'}
+      <span class="live" aria-hidden="true"></span><span id="now-n">${stats.now}</span> reading now · <span id="fin-line" data-reads="${stats.reads}">${stats.reads ? `finished by ${stats.reads} ${stats.reads === 1 ? 'person' : 'people'}` : 'be the first to finish it'}</span>
     </p>
   </header>
   ${og.published ? h`<p class="ok published-note" role="status">Published. ${og.published}</p>` : ''}
@@ -490,7 +490,7 @@ ${dash.posts.length ? h`<div class="table-wrap" tabindex="0" role="region" aria-
     <td>${p.keeps}</td><td>${p.passes}</td><td>${p.follows}</td><td>${p.notes}</td><td>${money(p.tip_cents)}</td></tr>`)}
   </tbody>
 </table></div>` : h`<p class="empty">Nothing published yet. <a href="/write/new">Write your first piece.</a></p>`}
-${dash.drafts.length ? h`<h2>Drafts &amp; scheduled</h2><ul class="plain">${dash.drafts.map((d) => h`<li><a href="/write/${d.id}">${d.title || 'Untitled'}</a> <span class="muted small">${d.status === 'scheduled' ? h`<strong>scheduled</strong> for ${new Date(d.publish_at).toUTCString()}` : `saved ${fmtDate(d.updated_at)}`}</span></li>`)}</ul>` : ''}
+${dash.drafts.length ? h`<h2>Drafts &amp; scheduled</h2><ul class="plain">${dash.drafts.map((d) => h`<li><a href="/write/${d.id}">${d.title || 'Untitled'}</a> <span class="muted small">${d.status === 'scheduled' ? h`<strong>scheduled</strong> for <time class="local-time" datetime="${new Date(d.publish_at).toISOString()}">${new Date(d.publish_at).toUTCString()}</time>` : `saved ${fmtDate(d.updated_at)}`}</span></li>`)}</ul>` : ''}
 
 <div class="two-col">
   <section>
@@ -622,7 +622,7 @@ function editor({ author, post, error, notice, reach = { email: 0, fedi: 0 } }) 
       ${box('draft check', h`<p class="muted small">Based on the SuperWritingEngine voice spec. It’s advice only and never blocks publishing.</p><div id="check-results" aria-live="polite"><p class="muted small">Start writing…</p></div>`, 'checks')}
     </div>
     <div class="row publish-row">
-      <button class="btn" name="action" value="save">Save draft</button>
+      ${p.status !== 'published' ? h`<button class="btn" name="action" value="save">Save draft</button>` : ''}
       <button class="btn primary" name="action" value="publish">${p.status === 'published' ? 'Update' : 'Publish now'}</button>
       ${p.status === 'published' ? h`<button class="btn danger" name="action" value="unpublish">Unpublish</button>` : ''}
     </div>
@@ -642,8 +642,10 @@ function editor({ author, post, error, notice, reach = { email: 0, fedi: 0 } }) 
 
 function mailResult({ kind, sub, viewer }) {
   return layout({
-    title: kind === 'confirmed' ? 'Confirmed' : 'Unsubscribed', author: viewer, path: `/${kind}`,
-    body: h`<div class="narrow">${box(kind === 'confirmed' ? 'confirmed.txt' : 'unsubscribed.txt', kind === 'confirmed'
+    title: { confirmed: 'Confirmed', unsubscribed: 'Unsubscribed', stale: 'Link no longer active', expired: 'Link expired' }[kind], author: viewer, path: `/${kind}`,
+    body: kind === 'stale' || kind === 'expired'
+      ? h`<div class="narrow">${box('link.txt', h`<h1>${kind === 'expired' ? 'That confirmation link has expired.' : 'You’re not on this list anymore.'}</h1><p>${kind === 'expired' ? 'Links work for 7 days.' : 'You unsubscribed, so old links don’t sign you back up.'} To get ${sub.name}’s new pieces by email, sign up again on their homepage.</p><p><a href="/@${sub.handle}">${sub.name}’s homepage</a></p>`)}</div>`
+      : h`<div class="narrow">${box(kind === 'confirmed' ? 'confirmed.txt' : 'unsubscribed.txt', kind === 'confirmed'
       ? h`<h1>You’re on ${sub.name}’s list.</h1><p>New pieces from ${sub.name} will come to <strong>${sub.email}</strong>. Nothing else will: no digests or promotions unless you ask. Every email has a one-click way out.</p><p><a href="/@${sub.handle}">Back to ${sub.name}’s homepage</a></p>`
       : h`<h1>Done. No more email from ${sub.name}.</h1><p>You can still read everything without an account, any time.</p><p><a href="/@${sub.handle}">${sub.name}’s homepage</a> · <a href="/">today’s reading</a></p>`)}</div>`,
   });

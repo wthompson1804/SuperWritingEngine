@@ -9,7 +9,7 @@ const { frontPage, readingMinutes } = require('../lib/signals');
 const { esc } = require('../lib/markdown');
 
 const WEEK = 7 * 86400000;
-const BASE = process.env.MARGIN_BASE_URL || 'http://localhost:3000';
+const BASE = (process.env.MARGIN_PUBLIC_URL || process.env.MARGIN_BASE_URL || 'http://localhost:3000').replace(/\/$/, '');
 
 function buildBrief(h, reader, now = Date.now()) {
   let data = {};

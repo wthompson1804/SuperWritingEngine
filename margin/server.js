@@ -90,6 +90,7 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   const apJson = (res, obj, status = 200, type = 'application/activity+json') => send(res, status, JSON.stringify(obj), { 'Content-Type': `${type}; charset=utf-8`, 'Cache-Control': 'max-age=60', 'Access-Control-Allow-Origin': '*' });
   const queueMail = (to, subject, body, kind) => h.run('INSERT INTO mail (to_email, subject, body, kind, created_at) VALUES (?,?,?,?,?)', to, subject, body, kind, Date.now());
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const CONFIRM_TTL = 7 * 86400000;
 
   function reach(authorId) {
     return {
@@ -257,7 +258,7 @@ ${items}
     const handle = ctx.url.searchParams.get('author');
     const rows = h.all(`SELECT p.*, a.name AS author_name, a.handle FROM posts p JOIN authors a ON a.id = p.author_id
       WHERE p.status = 'published' ${handle ? 'AND a.handle = ?' : ''} ORDER BY p.published_at DESC LIMIT 20`, ...(handle ? [handle] : []));
-    const base = `${ctx.proto}://${req.headers.host}`;
+    const base = baseUrl(req);
     const items = rows.map((p) => `<item><title>${esc(p.title)}</title><link>${base}/p/${p.slug}</link><guid>${base}/p/${p.slug}</guid>
 <dc:creator>${esc(p.author_name)}</dc:creator><pubDate>${new Date(p.published_at).toUTCString()}</pubDate>
 <description>${esc(render(p.body_md).html)}</description></item>`).join('\n');
@@ -386,6 +387,12 @@ ${items}
         ctx.author.id, slugify(title), title, dek, body, words, now, now).lastInsertRowid);
       post = h.get('SELECT * FROM posts WHERE id = ?', id);
     } else {
+      // "Save draft" must never change a live piece: published text changes
+      // only through Update (action=publish).
+      if (post.status === 'published' && action === 'save') {
+        return html(res, views.editor({ author: ctx.author, post: { ...post, title, dek, body_md: body }, reach: reach(ctx.author.id),
+          error: 'This piece is live. Press Update to publish your changes, or Unpublish to take it down first.' }), 409);
+      }
       // Slugs are frozen once published so links never break.
       const slug = post.status === 'published' || post.published_at ? post.slug : slugify(title, post.id);
       h.run('UPDATE posts SET title = ?, dek = ?, body_md = ?, words = ?, slug = ?, updated_at = ? WHERE id = ?', title, dek, body, words, slug, now, post.id);
@@ -582,7 +589,13 @@ ${items}
       h.run(`INSERT INTO email_subs (author_id, email, token, status, source, via_author_id, created_at) VALUES (?,?,?, 'pending', 'follow', ?, ?)`,
         a.id, email, auth.token(18), via && via.id !== a.id ? via.id : null, Date.now());
       sub = h.get('SELECT * FROM email_subs WHERE author_id = ? AND email = ?', a.id, email);
-    } else if (sub.status === 'unsubscribed') h.run(`UPDATE email_subs SET status = 'pending' WHERE id = ?`, sub.id);
+    } else if (sub.status === 'unsubscribed' || (sub.status === 'pending' && Date.now() - sub.created_at > CONFIRM_TTL)) {
+      // A fresh start: new token (old links stop working), new clock for the
+      // 7-day window and the single reminder.
+      h.run(`UPDATE email_subs SET status = 'pending', token = ?, created_at = ?, reminded_at = NULL, via_author_id = coalesce(?, via_author_id) WHERE id = ?`,
+        auth.token(18), Date.now(), via && via.id !== a.id ? via.id : null, sub.id);
+      sub = h.get('SELECT * FROM email_subs WHERE id = ?', sub.id);
+    }
     const link = `${baseUrl(req)}/confirm/${sub.token}`;
     queueMail(email, `Confirm: new pieces from ${a.name}`, `Someone (hopefully you) asked to get ${a.name}'s new pieces on Margin by email.\n\nConfirm: ${link}\n\nIf it wasn't you, ignore this and nothing happens.`, 'confirm');
     json(res, { ok: true, pending: true, ...(showMail ? { previewLink: `/confirm/${sub.token}` } : {}) });
@@ -591,7 +604,13 @@ ${items}
   on('GET', /^\/confirm\/([\w-]{10,64})$/, (req, res, m, ctx) => {
     const sub = h.get('SELECT s.*, a.name, a.handle FROM email_subs s JOIN authors a ON a.id = s.author_id WHERE s.token = ?', m[1]);
     if (!sub) return html(res, views.notFound({ viewer: ctx.author }), 404);
-    if (sub.status !== 'active') h.run(`UPDATE email_subs SET status = 'active', confirmed_at = ? WHERE id = ?`, Date.now(), sub.id);
+    // Only a pending sign-up can be confirmed, and only within 7 days. An old
+    // link must never undo an unsubscribe.
+    if (sub.status === 'unsubscribed') return html(res, views.mailResult({ kind: 'stale', sub, viewer: ctx.author }), 410);
+    if (sub.status === 'pending') {
+      if (sub.source !== 'import' && Date.now() - sub.created_at > CONFIRM_TTL) return html(res, views.mailResult({ kind: 'expired', sub, viewer: ctx.author }), 410);
+      h.run(`UPDATE email_subs SET status = 'active', confirmed_at = ? WHERE id = ?`, Date.now(), sub.id);
+    }
     html(res, views.mailResult({ kind: 'confirmed', sub, viewer: ctx.author }));
   });
 
@@ -690,6 +709,13 @@ ${items}
       const result = fed.receive(base, activity, signer);
       json(res, { ok: true, result }, 202);
     } catch (e) {
+      // The actor's own server says it's gone (410) and this is its Delete:
+      // nothing left to verify against, and nothing to protect. Drop it.
+      const keyActor = (/keyId="([^"#]+)/.exec(String(req.headers.signature || '')) || [])[1];
+      if (e.gone && activity && activity.type === 'Delete' && keyActor && activity.actor === keyActor) {
+        h.run('DELETE FROM ap_followers WHERE actor = ?', keyActor);
+        return json(res, { ok: true, result: 'deleted' }, 202);
+      }
       json(res, { error: String(e.message || e) }, 401);
     }
   };

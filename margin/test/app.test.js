@@ -429,6 +429,76 @@ test('unconfirmed email follows get exactly one reminder', async () => {
   assert.equal(app.h.get(`SELECT count(*) n FROM mail WHERE to_email = 'slow@example.org' AND kind = 'reminder'`).n, 1);
 });
 
+// ---------------- regression tests from the v4 review ----------------
+test('a malformed cookie does not break pages', async () => {
+  const r = await fetch(base + '/', { headers: { Cookie: 'x=%E0%A4%A; other=1' } });
+  assert.equal(r.status, 200);
+});
+
+test('"save" never changes a live piece', async () => {
+  const cookie = await loginAs('theo');
+  const p = app.h.get(`SELECT * FROM posts WHERE slug = 'nobody-owns-the-sidewalk'`);
+  const r = await formPost(`/write/${p.id}`, { title: p.title, dek: p.dek, body_md: 'SNEAKY EDIT', action: 'save' }, cookie);
+  assert.equal(r.status, 409);
+  assert.ok(!(await (await fetch(base + '/p/nobody-owns-the-sidewalk')).text()).includes('SNEAKY EDIT'));
+  const editor = await (await fetch(`${base}/write/${p.id}`, { headers: { Cookie: cookie } })).text();
+  assert.ok(!editor.includes('value="save"'), 'no Save draft button on a live piece');
+});
+
+test('email follow lifecycle: old links cannot undo an unsubscribe; resubscribe starts fresh', async () => {
+  const email = 'cycle@example.org';
+  const first = await (await post('/api/subscribe', { handle: 'june', email })).json();
+  await fetch(base + first.previewLink);
+  const row = () => app.h.get('SELECT * FROM email_subs WHERE email = ?', email);
+  await fetch(`${base}/unsubscribe/${row().token}`);
+  const replay = await fetch(base + first.previewLink);
+  assert.equal(replay.status, 410);
+  assert.equal(row().status, 'unsubscribed');
+  // Resubscribing much later: new token, new clock, no instant reminder.
+  app.h.run('UPDATE email_subs SET created_at = ? WHERE email = ?', Date.now() - 3 * 86400000, email);
+  const again = await (await post('/api/subscribe', { handle: 'june', email })).json();
+  assert.notEqual(again.previewLink, first.previewLink);
+  app.runJobs();
+  assert.equal(app.h.get(`SELECT count(*) n FROM mail WHERE to_email = ? AND kind = 'reminder'`, email).n, 0);
+  // Links expire after 7 days.
+  app.h.run('UPDATE email_subs SET created_at = ? WHERE email = ?', Date.now() - 8 * 86400000, email);
+  assert.equal((await fetch(base + again.previewLink)).status, 410);
+  assert.equal(row().status, 'pending');
+});
+
+test('markdown keeps code, URLs and nesting intact', () => {
+  const r = (md) => render(md).html;
+  assert.match(r('`_x_` `**y**`'), /<code>_x_<\/code> <code>\*\*y\*\*<\/code>/);
+  assert.match(r('[s](https://ex.com/_a_/b)'), /href="https:\/\/ex.com\/_a_\/b"/);
+  assert.match(r('**bold *em* in**'), /<strong>bold <em>em<\/em> in<\/strong>/);
+  const twice = r('A[^1] B[^1]\n\n[^1]: n');
+  assert.match(twice, /id="fnref-1-1"/);
+  assert.match(twice, /id="fnref-1-2"/);
+  assert.match(r('```\n[^1]: code\n```'), /<code>\[\^1\]: code<\/code>/);
+  assert.match(r('3. three\n4. four'), /<ol start="3">/);
+});
+
+test('substack HTML: code blocks, escaped tags and links in bold survive', () => {
+  const md = htmlToMarkdown('<pre><code>if (a &lt; b) {\n  x();\n}</code></pre><p>Wrap it in &lt;div&gt; tags</p><p><strong><a href="https://x.com">bold link</a></strong></p>');
+  assert.match(md, /```\nif \(a < b\) \{\n {2}x\(\);\n\}\n```/);
+  assert.match(md, /Wrap it in <div> tags/);
+  assert.match(md, /\*\*\[bold link\]\(https:\/\/x.com\)\*\*/);
+  assert.match(render(md).html, /Wrap it in &lt;div&gt; tags/, 'rendered as text, not markup');
+});
+
+test('export → import keeps titles that start with - or =', async () => {
+  const su = await formPost('/signup', { name: 'Dash', handle: 'dash', password: 'long-enough-pw' });
+  const c = su.headers.get('set-cookie').split(';')[0];
+  await formPost('/write/new', { title: '-30 degrees', dek: '=why', body_md: 'Cold.', action: 'publish' }, c);
+  const zip = Buffer.from(await (await fetch(base + '/desk/export.zip', { headers: { Cookie: c } })).arrayBuffer());
+  const su2 = await formPost('/signup', { name: 'Dash2', handle: 'dash2', password: 'long-enough-pw' });
+  const c2 = su2.headers.get('set-cookie').split(';')[0];
+  await fetch(base + '/desk/import', { method: 'POST', headers: { 'Content-Type': 'application/zip', Cookie: c2 }, body: zip });
+  const got = app.h.get(`SELECT p.title, p.dek FROM posts p JOIN authors a ON a.id = p.author_id WHERE a.handle = 'dash2'`);
+  assert.deepEqual([got.title, got.dek], ['-30 degrees', '=why']);
+});
+
+// Runs last: it deliberately trips the sign-in rate limit.
 test('The Brief needs an email; login rate limit explains itself; imports keep dates', async () => {
   const key = (await (await post('/api/key/new', {})).json()).key;
   const r = await post('/api/key/prefs', { key, email: '', digest: true });

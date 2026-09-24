@@ -14,19 +14,25 @@ function esc(s) {
 const IMG = /!\[([^\]]*)\]\((\/media\/[\w.-]+)\)/g;
 
 function inline(src, fn) {
-  let out = esc(src);
-  out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
-  out = out.replace(IMG, (m, alt, url) => `<img src="${url}" alt="${alt}" loading="lazy" decoding="async">`);
+  // Code spans, images, footnote markers and link targets are set aside as
+  // placeholders first, so emphasis rules can't reach inside them.
+  const held = [];
+  const hold = (html) => `\u0000${held.push(html) - 1}\u0000`;
+  let out = esc(String(src).replace(/\u0000/g, ''));
+  out = out.replace(/`([^`]+)`/g, (m, c) => hold(`<code>${c}</code>`));
+  out = out.replace(IMG, (m, alt, url) => hold(`<img src="${url}" alt="${alt}" loading="lazy" decoding="async">`));
   out = out.replace(/!\[([^\]]*)\]\((https?:\/\/[^)\s]+)\)/g, (m, alt, url) => `[Image: ${alt || 'external'}](${url})`);
-  if (fn) out = out.replace(/\[\^([\w-]{1,20})\]/g, (m, id) => fn(id) || m);
-  out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  out = out.replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?!\w)/g, '$1<em>$2</em>');
-  out = out.replace(/(^|[^\w])_([^_\s][^_]*?)_(?!\w)/g, '$1<em>$2</em>');
+  if (fn) out = out.replace(/\[\^([\w-]{1,20})\]/g, (m, id) => { const r = fn(id); return r ? hold(r) : m; });
   out = out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, text, url) => {
     const u = url.replace(/&amp;/g, '&');
     if (!/^(https?:\/\/|\/|#|mailto:)/i.test(u)) return text;
-    return `<a href="${esc(u)}" rel="noopener nofollow">${text}</a>`;
+    return hold(`<a href="${esc(u)}" rel="noopener nofollow">`) + text + hold('</a>');
   });
+  out = out.replace(/\*\*(?=\S)(.+?)\*\*/g, '<strong>$1</strong>');
+  out = out.replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?!\w)/g, '$1<em>$2</em>');
+  out = out.replace(/(^|[^\w])_([^_\s][^_]*?)_(?!\w)/g, '$1<em>$2</em>');
+  // Placeholders can nest (a code span inside link text), so restore until done.
+  for (let i = 0; i < 3 && out.includes('\u0000'); i++) out = out.replace(/\u0000(\d+)\u0000/g, (m, n) => held[Number(n)]);
   return out;
 }
 
@@ -45,17 +51,22 @@ function plain(src) {
 function render(md) {
   // Footnote definitions ("[^1]: text") are pulled out first and listed at the end.
   const defs = new Map();
+  let fence = false;
   const lines = String(md || '').replace(/\r\n?/g, '\n').split('\n').filter((l) => {
-    const m = l.match(/^\[\^([\w-]{1,20})\]:\s+(.*)$/);
+    if (/^```/.test(l)) fence = !fence;
+    const m = !fence && l.match(/^\[\^([\w-]{1,20})\]:\s+(.*)$/);
     if (m) { defs.set(m[1], m[2]); return false; }
     return true;
   });
   const used = [];
+  const uses = new Map();
   const fn = (id) => {
     if (!defs.has(id)) return null;
     let n = used.indexOf(id) + 1;
     if (!n) { used.push(id); n = used.length; }
-    return `<sup class="fnref"><a href="#fn-${esc(id)}" id="fnref-${esc(id)}-${n}" aria-label="Footnote ${n}">${n}</a></sup>`;
+    const k = (uses.get(id) || 0) + 1; // each reference gets its own id
+    uses.set(id, k);
+    return `<sup class="fnref"><a href="#fn-${esc(id)}" id="fnref-${esc(id)}-${k}" aria-label="Footnote ${n}">${n}</a></sup>`;
   };
   const inl = (t) => inline(t, fn);
   const html = [];
@@ -85,7 +96,7 @@ function render(md) {
     if (!list) return;
     const tag = list.ordered ? 'ol' : 'ul';
     const items = list.items.map((t) => `<li data-p="${addBlock('li', t)}">${inl(t)}</li>`);
-    html.push(`<${tag}>${items.join('')}</${tag}>`);
+    html.push(`<${tag}${list.ordered && list.start !== 1 ? ` start="${list.start}"` : ''}>${items.join('')}</${tag}>`);
     list = null;
   };
   const flushQuote = () => {
@@ -120,7 +131,7 @@ function render(md) {
     if ((m = line.match(/^\s*([-*]|\d+\.)\s+(.*)$/))) {
       flushPara(); flushQuote();
       const ordered = /\d/.test(m[1]);
-      if (!list || list.ordered !== ordered) { flushList(); list = { ordered, items: [] }; }
+      if (!list || list.ordered !== ordered) { flushList(); list = { ordered, items: [], start: ordered ? Math.min(parseInt(m[1], 10), 1e9) : 1 }; }
       list.items.push(m[2]);
       continue;
     }
@@ -132,7 +143,7 @@ function render(md) {
   flushAll();
   if (used.length) {
     html.push(`<section class="footnotes" aria-label="Footnotes"><ol>${used.map((id) =>
-      `<li id="fn-${esc(id)}">${inline(defs.get(id))} <a href="#fnref-${esc(id)}-${used.indexOf(id) + 1}" aria-label="Back to text">↩</a></li>`).join('')}</ol></section>`);
+      `<li id="fn-${esc(id)}">${inline(defs.get(id))} <a href="#fnref-${esc(id)}-1" aria-label="Back to text">↩</a></li>`).join('')}</ol></section>`);
   }
 
   const words = blocks.reduce((n, b) => n + b.words, 0);

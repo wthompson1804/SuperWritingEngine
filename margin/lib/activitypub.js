@@ -157,7 +157,7 @@ function createFederation(h, { allowHttp = false, allowPrivate = false, fetchImp
     const headers = { accept: 'application/activity+json, application/ld+json' };
     if (signer) Object.assign(headers, signHeaders({ method: 'GET', url: u.href, body: null, ...signer }));
     const res = await fetchImpl(u.href, { headers, signal: AbortSignal.timeout(10000), redirect: 'error' });
-    if (!res.ok) throw new Error(`GET ${u.href} → ${res.status}`);
+    if (!res.ok) throw Object.assign(new Error(`GET ${u.href} → ${res.status}`), { gone: res.status === 410 });
     const text = await res.text();
     if (text.length > 1_000_000) throw new Error('Response too large');
     return JSON.parse(text);
@@ -168,7 +168,13 @@ function createFederation(h, { allowHttp = false, allowPrivate = false, fetchImp
     const actorUrl = keyId.split('#')[0];
     const cached = h.get('SELECT * FROM ap_actors WHERE key_id = ?', keyId);
     if (cached && !refresh && Date.now() - cached.fetched_at < 24 * 3600 * 1000) return JSON.parse(cached.doc);
-    let doc = await signedGet(actorUrl, signer);
+    let doc;
+    try { doc = await signedGet(actorUrl, signer); } catch (e) {
+      // A deleted account (410) still signs its own Delete with its old key;
+      // the cached copy of that key, however old, is what verifies it.
+      if (e.gone && cached) return JSON.parse(cached.doc);
+      throw e;
+    }
     // Some servers put the key on a separate document that points at its owner.
     if (!doc.inbox && doc.owner) doc = await signedGet(doc.owner, signer);
     if (!doc.publicKey || !doc.publicKey.publicKeyPem) throw new Error('Actor has no public key');

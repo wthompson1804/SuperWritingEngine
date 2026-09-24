@@ -24,15 +24,16 @@ function parseCsv(text) {
   return nonEmpty.slice(1).map((r) => Object.fromEntries(head.map((hd, i) => [hd, r[i] ?? ''])));
 }
 
-function cell(v) {
+function cell(v, guard = true) {
   const s = v == null ? '' : String(v);
-  // Neutralize spreadsheet formula injection, then quote.
-  const safe = /^[=+\-@\t\r]/.test(s) ? `'${s}` : s;
+  // Neutralize spreadsheet formula injection (for files people open in a
+  // spreadsheet), then quote. Machine-read exports turn the guard off.
+  const safe = guard && /^[=+\-@\t\r]/.test(s) ? `'${s}` : s;
   return /[",\n\r]/.test(safe) || safe !== s ? `"${safe.replace(/"/g, '""')}"` : safe;
 }
 
-function toCsv(header, rows) {
-  return [header.join(','), ...rows.map((r) => header.map((k) => cell(r[k])).join(','))].join('\n') + '\n';
+function toCsv(header, rows, { guard = true } = {}) {
+  return [header.join(','), ...rows.map((r) => header.map((k) => cell(r[k], guard)).join(','))].join('\n') + '\n';
 }
 
 module.exports = { parseCsv, toCsv };

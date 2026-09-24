@@ -51,8 +51,9 @@ function importSubstack(h, authorId, zipBuf, now = Date.now()) {
       const origin = `substack:${postId}`;
       if (h.get('SELECT id FROM posts WHERE author_id = ? AND imported_from = ?', authorId, origin)) { report.posts.already++; continue; }
       const body = htmlToMarkdown(html);
-      const title = String(row.title || '').trim() || 'Untitled';
-      const dek = String(row.subtitle || '').trim().slice(0, 240);
+      const unguard = (v) => String(v || '').trim().replace(/^'(?=[=+\-@])/, '');
+      const title = unguard(row.title) || 'Untitled';
+      const dek = unguard(row.subtitle).slice(0, 240);
       const audience = String(row.audience || 'everyone').toLowerCase();
       const published = truthy(row.is_published) && audience === 'everyone';
       const date = Date.parse(row.post_date) || now;
@@ -90,13 +91,13 @@ function exportAuthor(h, author) {
   const files = [];
   files.push(['posts.csv', toCsv(['post_id', 'post_date', 'is_published', 'email_sent_at', 'type', 'audience', 'title', 'subtitle', 'podcast_url'],
     posts.map((p) => ({ post_id: `${p.id}.${p.slug}`, post_date: iso(p.published_at || p.created_at), is_published: p.status === 'published' ? 'true' : 'false',
-      email_sent_at: '', type: 'newsletter', audience: 'everyone', title: p.title, subtitle: p.dek, podcast_url: '' })))]);
+      email_sent_at: '', type: 'newsletter', audience: 'everyone', title: p.title, subtitle: p.dek, podcast_url: '' })), { guard: false })]);
   for (const p of posts) {
     files.push([`posts/${p.id}.${p.slug}.html`, render(p.body_md).html.replace(/ data-p="\d+"/g, '')]);
     files.push([`markdown/${p.slug}.md`, `# ${p.title}\n\n${p.dek ? `*${p.dek}*\n\n` : ''}${p.body_md}\n`]);
   }
   files.push([`email_list.${author.handle}.csv`, toCsv(['email', 'active_subscription', 'expiry', 'email_disabled', 'prefer_digests', 'created_at'],
-    subs.map((s) => ({ email: s.email, active_subscription: 'false', expiry: '', email_disabled: 'false', prefer_digests: 'false', created_at: iso(s.created_at) })))]);
+    subs.map((s) => ({ email: s.email, active_subscription: 'false', expiry: '', email_disabled: 'false', prefer_digests: 'false', created_at: iso(s.created_at) })), { guard: false })]);
   files.push(['README.txt', `Export of @${author.handle} from Margin, ${new Date().toISOString()}.
 
 posts.csv, posts/*.html and email_list.*.csv follow Substack's export layout,
