@@ -108,12 +108,12 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     return Object.fromEntries(new URLSearchParams(text));
   }
 
-  async function readRaw(req, limit) {
+  async function readRaw(req, limit, tooBig = `That file is too large (${Math.round(limit / 1048576)} MB max).`) {
     const chunks = [];
     let size = 0;
     for await (const c of req) {
       size += c.length;
-      if (size > limit) throw new HttpError(413, 'That file is too large (50 MB max).');
+      if (size > limit) throw new HttpError(413, tooBig);
       chunks.push(c);
     }
     return Buffer.concat(chunks);
@@ -183,6 +183,23 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     if (buf.length > 6 && /^GIF8[79]a/.test(buf.toString('latin1', 0, 6))) return ['image/gif', 'gif'];
     if (buf.length > 12 && buf.toString('latin1', 0, 4) === 'RIFF' && buf.toString('latin1', 8, 12) === 'WEBP') return ['image/webp', 'webp'];
     return null;
+  }
+
+  // Stores an image (sniffed, content-addressed) and returns its file name,
+  // or null if it isn't a PNG/JPEG/GIF/WebP. Used by upload and by import.
+  function saveMedia(authorId, buf) {
+    const kind = sniffImage(buf);
+    if (!kind || buf.length > 5 * 1024 * 1024) return null;
+    const file = `${crypto.createHash('sha256').update(buf).digest('hex').slice(0, 24)}.${kind[1]}`;
+    fs.mkdirSync(MEDIA_DIR, { recursive: true });
+    const dest = path.join(MEDIA_DIR, file);
+    if (!fs.existsSync(dest)) fs.writeFileSync(dest, buf);
+    h.run('INSERT OR IGNORE INTO media (author_id, file, mime, bytes, created_at) VALUES (?,?,?,?,?)', authorId, file, kind[0], buf.length, Date.now());
+    return file;
+  }
+  function readMedia(file) {
+    const f = path.join(MEDIA_DIR, file);
+    return /^[a-f0-9]{24}\.(png|jpg|gif|webp)$/.test(file) && fs.existsSync(f) ? fs.readFileSync(f) : null;
   }
 
   function currentAuthor(req) {
@@ -419,7 +436,7 @@ ${items}
     const now = Date.now();
     let post = m[1] === 'new' ? null : h.get('SELECT * FROM posts WHERE id = ? AND author_id = ?', Number(m[1]), ctx.author.id);
     if (m[1] !== 'new' && !post) return html(res, views.notFound({ viewer: ctx.author }), 404);
-    if (!title) return html(res, views.editor({ author: ctx.author, post: { ...(post || { id: 'new', status: 'draft', slug: '' }), title, dek, body_md: body }, error: 'A piece needs a title.' }), 400);
+    if (!title) return html(res, views.editor({ author: ctx.author, post: { ...(post || { id: 'new', status: 'draft', slug: '' }), title, dek, body_md: body }, reach: reach(ctx.author.id), error: 'A piece needs a title.' }), 400);
     const words = render(body).words;
     if (!post) {
       const id = Number(h.run(`INSERT INTO posts (author_id, slug, title, dek, body_md, words, status, created_at, updated_at) VALUES (?,?,?,?,?,?, 'draft', ?, ?)`,
@@ -440,7 +457,7 @@ ${items}
     if (action === 'schedule') {
       const at = Date.parse(String(b.publish_at || ''));
       if (!Number.isFinite(at) || at < now + 60000) {
-        return html(res, views.editor({ author: ctx.author, post: h.get('SELECT * FROM posts WHERE id = ?', post.id), error: 'Pick a time at least a minute from now.' }), 400);
+        return html(res, views.editor({ author: ctx.author, post: h.get('SELECT * FROM posts WHERE id = ?', post.id), reach: reach(ctx.author.id), error: 'Pick a time at least a minute from now.' }), 400);
       }
       h.run(`UPDATE posts SET status = 'scheduled', publish_at = ? WHERE id = ?`, at, post.id);
     }
@@ -672,13 +689,13 @@ ${items}
   on('POST', /^\/desk\/import$/, needAuthor(async (req, res, m, ctx) => {
     const buf = await readRaw(req, 50 * 1024 * 1024);
     try {
-      json(res, { ok: true, report: importSubstack(h, ctx.author.id, buf) });
+      json(res, { ok: true, report: importSubstack(h, ctx.author.id, buf, { saveMedia }) });
     } catch (e) {
       json(res, { ok: false, error: e.message || 'Could not read that file.' }, 400);
     }
   }));
   on('GET', /^\/desk\/export\.zip$/, needAuthor((req, res, m, ctx) => {
-    send(res, 200, exportAuthor(h, ctx.author), { 'Content-Type': 'application/zip', 'Content-Disposition': `attachment; filename="margin-${ctx.author.handle}-export.zip"` });
+    send(res, 200, exportAuthor(h, ctx.author, { readMedia }), { 'Content-Type': 'application/zip', 'Content-Disposition': `attachment; filename="margin-${ctx.author.handle}-export.zip"` });
   }));
   on('POST', /^\/desk\/notes\/(\d+)\/(hide|show)$/, needAuthor((req, res, m, ctx) => {
     const note = h.get('SELECT n.id FROM notes n JOIN posts p ON p.id = n.post_id WHERE n.id = ? AND p.author_id = ?', Number(m[1]), ctx.author.id);
@@ -702,13 +719,8 @@ ${items}
 
   on('POST', /^\/desk\/upload$/, needAuthor(async (req, res, m, ctx) => {
     const buf = await readRaw(req, 5 * 1024 * 1024);
-    const kind = sniffImage(buf);
-    if (!kind) return json(res, { ok: false, error: 'Use a PNG, JPEG, GIF or WebP image under 5 MB.' }, 400);
-    const file = `${crypto.createHash('sha256').update(buf).digest('hex').slice(0, 24)}.${kind[1]}`;
-    fs.mkdirSync(MEDIA_DIR, { recursive: true });
-    const dest = path.join(MEDIA_DIR, file);
-    if (!fs.existsSync(dest)) fs.writeFileSync(dest, buf);
-    h.run('INSERT OR IGNORE INTO media (author_id, file, mime, bytes, created_at) VALUES (?,?,?,?,?)', ctx.author.id, file, kind[0], buf.length, Date.now());
+    const file = saveMedia(ctx.author.id, buf);
+    if (!file) return json(res, { ok: false, error: 'Use a PNG, JPEG, GIF or WebP image under 5 MB.' }, 400);
     json(res, { ok: true, url: `/media/${file}` });
   }));
 
@@ -805,6 +817,13 @@ ${items}
     Promise.resolve(handle(req, res)).catch((e) => {
       const status = e.status || 500;
       if (status === 500) console.error(e);
+      if (status === 413) {
+        // We stopped reading mid-upload. Close this connection once the reply
+        // is out, or the unread body would poison the next request on it.
+        res.setHeader('Connection', 'close');
+        const sock = req.socket;
+        res.on('finish', () => { if (sock && !sock.destroyed) sock.destroySoon(); });
+      }
       if (!res.headersSent) json(res, { ok: false, error: status === 500 ? 'Something broke.' : e.message }, status);
     });
   });

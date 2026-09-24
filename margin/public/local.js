@@ -22,10 +22,25 @@
   }
 
   function payload(s) { return { kept: s.kept, follows: s.follows, finished: s.finished }; }
+  // Merge, never replace: anything changed here while a sync was in flight
+  // must survive the reply. Per entry, the newest timestamp wins (the same
+  // rule the server uses), so deletions and unfollows stick too.
+  function mergeMap(a, b) {
+    var out = {};
+    [a || {}, b || {}].forEach(function (m) {
+      Object.keys(m).forEach(function (id) {
+        var v = m[id];
+        if (v && typeof v === 'object' && (!out[id] || (Number(v.ts) || 0) >= (Number(out[id].ts) || 0))) out[id] = v;
+      });
+    });
+    return out;
+  }
   function absorb(r) {
     if (!r || !r.data) return;
     var cur = load();
-    cur.kept = r.data.kept || {}; cur.follows = r.data.follows || {}; cur.finished = r.data.finished || {};
+    cur.kept = mergeMap(r.data.kept, cur.kept);
+    cur.follows = mergeMap(r.data.follows, cur.follows);
+    cur.finished = mergeMap(r.data.finished, cur.finished);
     if (r.prefs) cur.prefs = r.prefs;
     save(cur);
   }
@@ -228,5 +243,6 @@
   };
 
   // Pull the latest from the server once per page if this browser holds a key.
-  if (load().readerKey) sync();
+  // Pages that show follows or passages re-render when this settles.
+  window.Margin.ready = load().readerKey ? sync() : Promise.resolve(null);
 })();

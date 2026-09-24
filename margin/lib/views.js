@@ -599,7 +599,7 @@ function editor({ author, post, error, notice, reach = { email: 0, fedi: 0 } }) 
   const p = post || { id: 'new', title: '', dek: '', body_md: '', status: 'draft', slug: '' };
   return layout({
     title: p.id === 'new' ? 'New piece' : `Edit: ${p.title}`, author, active: 'dashboard', scripts: ['write.js'], accent: author.accent, path: '/desk/write',
-    data: { id: p.id, status: p.status, firstPublish: !p.published_at, reach },
+    data: { id: p.id, status: p.status, firstPublish: !p.published_at, reach, updatedAt: p.updated_at || null },
     body: h`
 <section class="editor">
   <p class="small mono"><a href="/dashboard">← desk</a> ${p.status === 'published' ? h`· <a href="/p/${p.slug}">view published</a>` : ''}

@@ -72,4 +72,5 @@
     }).catch(function () {});
   }
   paint();
+  M.ready.then(function (r) { if (r && r.ok) paint(); });
 })();

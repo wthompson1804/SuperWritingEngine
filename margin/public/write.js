@@ -36,9 +36,20 @@
   function saveServer() {
     if (D.id === 'new' || D.status === 'published') { say(D.status === 'published' ? 'unsaved changes: press Update to publish them' : 'saved in this browser; Save draft to keep it on Margin'); return; }
     say('saving…');
-    fetch('/write/' + D.id + '/autosave', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(snapshot()) })
+    var sent = snapshot();
+    fetch('/write/' + D.id + '/autosave', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(sent) })
       .then(function (r) { return r.json(); })
-      .then(function (r) { if (r.ok) { dirty = false; say('saved ' + new Date(r.savedAt).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })); try { localStorage.removeItem(LOCAL); } catch (e) { /* ignore */ } } else say('not saved: check your connection'); })
+      .then(function (r) {
+        if (!r.ok) { say('not saved: check your connection'); return; }
+        D.updatedAt = r.savedAt;
+        // Only call it saved if nothing was typed while the request was out.
+        var now = snapshot();
+        if (now.title === sent.title && now.dek === sent.dek && now.body_md === sent.body_md) {
+          dirty = false;
+          say('saved ' + new Date(r.savedAt).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }));
+          try { localStorage.removeItem(LOCAL); } catch (e) { /* ignore */ }
+        }
+      })
       .catch(function () { say('offline: saved in this browser only'); });
   }
   function changed() {
@@ -54,7 +65,8 @@
   // Offer to restore a local copy that's newer than what the server has.
   try {
     var saved = JSON.parse(localStorage.getItem(LOCAL) || 'null');
-    if (saved && (saved.body_md !== ta.value || saved.title !== title.value) && (saved.body_md || saved.title)) {
+    // Offer it only if it differs and is newer than the copy Margin holds.
+    if (saved && (saved.body_md !== ta.value || saved.title !== title.value) && (saved.body_md || saved.title) && (!D.updatedAt || saved.at > D.updatedAt)) {
       var bar = el('div', { class: 'restore', role: 'status' }, [
         el('span', { text: 'There’s a newer copy of this draft in this browser, from ' + new Date(saved.at).toLocaleString() + '.' }),
         el('button', { class: 'btn', type: 'button', text: 'Restore it', on: { click: function () { title.value = saved.title; dek.value = saved.dek; ta.value = saved.body_md; bar.remove(); changed(); } } }),

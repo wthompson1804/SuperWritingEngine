@@ -24,7 +24,7 @@ Requires Node 22.13+ and has no dependencies. It uses the built-in `node:sqlite`
 ```bash
 cd margin
 npm start            # http://localhost:3000  (PORT=... to change)
-npm test             # 33 tests, including ActivityPub signatures both ways, Substack import/export, autosave, scheduling
+npm test             # 48 tests, including ActivityPub signatures, import/export round-trips, and security regressions
 npm run digest       # build this week's Brief for opted-in readers into data/outbox/
 npm run reset        # delete the local database; it re-seeds on next start
 ```
@@ -71,7 +71,7 @@ test/app.test.js     end-to-end tests against an in-memory database
 
 ## Deploying federation
 
-Set `MARGIN_PUBLIC_URL=https://your.domain` (fediverse ids must be stable and on HTTPS) and `MARGIN_SECURE_COOKIES=1`. Writers are then `@handle@your.domain`. Outbound fetches refuse private IPs and non-HTTPS URLs, but they don't resolve DNS, so put the server behind an egress firewall. `MARGIN_AP_INSECURE=1` exists only for local testing.
+Set `MARGIN_PUBLIC_URL=https://your.domain` (fediverse ids, email links and scheduled jobs all use it) and `MARGIN_SECURE_COOKIES=1`. Behind a reverse proxy, also set `MARGIN_TRUST_PROXY=1` so rate limits see real client addresses. Writers are then `@handle@your.domain`. Outbound fetches refuse private IPs and non-HTTPS URLs, but they don't resolve DNS, so put the server behind an egress firewall. `MARGIN_AP_INSECURE=1` exists only for local testing.
 
 ## What is simulated
 

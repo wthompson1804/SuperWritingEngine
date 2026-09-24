@@ -17,6 +17,8 @@
     if (on) M.renderRecs(recs, D.handle, D.name);
   });
   paint();
+  // A key synced from another device may have changed the follow state.
+  M.ready.then(paint);
 
   var form = document.getElementById('email-follow');
   var msg = document.getElementById('ef-msg');

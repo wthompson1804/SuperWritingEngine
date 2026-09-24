@@ -21,8 +21,11 @@ function ringStep(h, fromHandle, dir) {
     const others = ring.filter((a) => a.handle !== fromHandle);
     return (others.length ? others : ring)[Math.floor(Math.random() * (others.length || ring.length))];
   }
+  // From outside the ring (a writer with nothing published yet), "next" is
+  // the first writer and "prev" the last.
+  if (i < 0) return dir === 'prev' ? ring[ring.length - 1] : ring[0];
   const step = dir === 'prev' ? -1 : 1;
-  return ring[((i < 0 ? 0 : i) + step + ring.length) % ring.length];
+  return ring[(i + step + ring.length) % ring.length];
 }
 
 // Blogroll lines are either "@handle" or "https://url Optional title".

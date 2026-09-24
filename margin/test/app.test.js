@@ -231,9 +231,14 @@ const { htmlToMarkdown } = require('../lib/htmlmd');
 const { expectedCompletion, quality } = require('../lib/signals');
 
 const formPost = (p, obj, cookie) => fetch(base + p, { method: 'POST', redirect: 'manual', headers: { 'Content-Type': 'application/x-www-form-urlencoded', ...(cookie ? { Cookie: cookie } : {}) }, body: new URLSearchParams(obj) });
+// Sessions are reused so the suite stays under the sign-in rate limit.
+const sessions = new Map();
 async function loginAs(handle) {
+  if (sessions.has(handle)) return sessions.get(handle);
   const r = await formPost('/login', { handle, password: 'demo-password' });
-  return r.headers.get('set-cookie').split(';')[0];
+  const c = r.headers.get('set-cookie').split(';')[0];
+  sessions.set(handle, c);
+  return c;
 }
 
 test('csv round-trips quotes/newlines and neutralizes formulas', () => {
@@ -548,6 +553,45 @@ test('forged reads are capped per address', async () => {
   for (let i = 0; i < 30; i++) await post('/api/read', { slug: 'your-org-chart-is-a-fiction', pv: uuid(), depth: 1, dwell: 3600000 });
   const after = app.h.get(`SELECT count(*) n, max(dwell_ms) d FROM views v JOIN posts p ON p.id = v.post_id WHERE p.slug = 'your-org-chart-is-a-fiction'`);
   assert.ok(after.n - before <= 5, `${after.n - before} new views counted`);
+});
+
+// ---------------- regression tests from the browser bug hunt ----------------
+test('export → import between writers is lossless (footnotes and images)', async () => {
+  const c1 = (await formPost('/signup', { name: 'Img', handle: 'imgwriter', password: 'long-enough-pw' })).headers.get('set-cookie').split(';')[0];
+  const png = Buffer.from('89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c4890000000d4944415478da63f8ffff3f0005fe02fea7d6a4a10000000049454e44ae426082', 'hex');
+  const up = await (await fetch(base + '/desk/upload', { method: 'POST', headers: { Cookie: c1 }, body: png })).json();
+  const body = `A claim.[^1]\n\n![A chart](${up.url})\n\n[^1]: The source.`;
+  await formPost('/write/new', { title: 'Lossless', dek: '', body_md: body, action: 'publish' }, c1);
+  const zip = Buffer.from(await (await fetch(base + '/desk/export.zip', { headers: { Cookie: c1 } })).arrayBuffer());
+  const files = readZip(zip);
+  assert.ok([...files.keys()].some((k) => k.startsWith('media/')), 'images travel in the export');
+  const c2 = (await formPost('/signup', { name: 'Img2', handle: 'imgwriter2', password: 'long-enough-pw' })).headers.get('set-cookie').split(';')[0];
+  await fetch(base + '/desk/import', { method: 'POST', headers: { Cookie: c2, 'Content-Type': 'application/zip' }, body: zip });
+  const got = app.h.get(`SELECT p.body_md FROM posts p JOIN authors a ON a.id = p.author_id WHERE a.handle = 'imgwriter2'`);
+  assert.equal(got.body_md, body);
+});
+
+test('import flattens multi-line titles and reports shortened ones', async () => {
+  const c = (await formPost('/signup', { name: 'Nl', handle: 'nlwriter', password: 'long-enough-pw' })).headers.get('set-cookie').split(';')[0];
+  const zip = writeZip([
+    ['posts.csv', 'post_id,post_date,is_published,email_sent_at,type,audience,title,subtitle,podcast_url\n1.a,2025-01-01,true,,newsletter,everyone,"Title with\nnewline","Sub\r\nline",\n2.b,2025-01-01,true,,newsletter,everyone,' + 'x'.repeat(300) + ',,\n'],
+    ['posts/1.a.html', '<p>One.</p>'], ['posts/2.b.html', '<p>Two.</p>'],
+  ]);
+  const r = await (await fetch(base + '/desk/import', { method: 'POST', headers: { Cookie: c, 'Content-Type': 'application/zip' }, body: zip })).json();
+  assert.ok(r.report.warnings.some((w) => /shortened/.test(w)));
+  const row = app.h.get(`SELECT title, dek FROM posts WHERE slug = 'a'`);
+  assert.deepEqual([row.title, row.dek], ['Title with newline', 'Sub line']);
+});
+
+test('small server fixes: ring from outside, upload size message, reach on error pages', async () => {
+  assert.equal((await fetch(base + '/ring/next?from=nobody', { redirect: 'manual' })).headers.get('location'), '/@mara?via=ring');
+  const cookie = await loginAs('theo');
+  const big = await fetch(base + '/desk/upload', { method: 'POST', headers: { Cookie: cookie }, body: Buffer.alloc(6 * 1024 * 1024) });
+  assert.equal(big.status, 413);
+  assert.match((await big.json()).error, /5 MB/);
+  const err = await (await formPost('/write/new', { title: 'T', body_md: 'x', action: 'schedule', publish_at: '2001-01-01T00:00:00Z' }, cookie)).text();
+  const reach = JSON.parse(err.match(/id="page-data">([^<]+)</)[1]).reach;
+  assert.ok(reach.email > 0, 'confirmation dialog knows the real audience');
 });
 
 // Runs last: it deliberately trips the sign-in rate limit.

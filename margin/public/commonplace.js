@@ -85,7 +85,8 @@
   }
   // Readwise's CSV import takes Highlight, Title, Author, URL, Note, Location, Date.
   function exportReadwise() {
-    var q = function (v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; };
+    // Quote everything, and defuse cells a spreadsheet would run as formulas.
+    var q = function (v) { var s = String(v == null ? '' : v); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return '"' + s.replace(/"/g, '""') + '"'; };
     var rows = ['Highlight,Title,Author,URL,Note,Location,Date'];
     sorted().forEach(function (k) {
       rows.push([k.text, k.title, k.author, location.origin + '/p/' + k.slug, k.note || '', k.para + 1, new Date(keptAt(k)).toISOString().slice(0, 19).replace('T', ' ')].map(q).join(','));

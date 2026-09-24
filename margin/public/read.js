@@ -51,7 +51,8 @@
   function presence() {
     fetch('/api/presence?slug=' + encodeURIComponent(D.slug)).then(function (r) { return r.json(); }).then(function (r) {
       if (!r || !r.ok) return;
-      setText('now-n', Math.max(1, r.now)); setText('fin-n', r.reads);
+      setText('now-n', Math.max(1, r.now));
+      if (r.reads > 0) setText('fin-line', 'finished by ' + r.reads + ' ' + (r.reads === 1 ? 'person' : 'people'));
     }).catch(function () {});
   }
   // The server-rendered count doesn't include this tab yet; you are reading too.
@@ -94,7 +95,8 @@
     root.innerHTML = '';
     var s = M.load();
     var name = D.author.name, handle = D.author.handle, first = name.split(' ')[0];
-    var finishedN = Object.keys(s.finished).length;
+    // This piece counts: the reader has just reached its end.
+    var finishedN = Object.keys(s.finished).length + (s.finished[D.slug] ? 0 : 1);
     var keptN = M.liveKept(s).length;
     if (!M.isFollowing(handle)) {
       logAsk('follow', 'shown');
@@ -152,19 +154,39 @@
     var tk = paraEl(D.topKeep.para);
     if (tk) { tk.classList.add('most-kept'); tk.setAttribute('data-kept', 'Kept by ' + D.topKeep.n + ' readers'); }
   }
+  // Highlights a kept passage even when it spans <em>, links or other inline
+  // markup: walk the paragraph's text nodes (skipping our own furniture),
+  // match on whitespace-normalized text, then wrap each touched piece.
+  var FURNITURE = '.mcount, .p-act, .fnref, .passed-tag';
   function markText(node, text) {
-    var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
-    var t;
+    if (!text) return false;
+    var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, { acceptNode: function (t) {
+      return t.parentElement && t.parentElement.closest(FURNITURE) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+    } });
+    var map = [], flat = '', prevSpace = true, t;
     while ((t = walker.nextNode())) {
-      var i = t.nodeValue.indexOf(text);
-      if (i >= 0) {
-        var r = document.createRange(); r.setStart(t, i); r.setEnd(t, i + text.length);
-        try { r.surroundContents(el('mark', { class: 'kept-mark' })); } catch (e) { /* spans elements */ }
-        node.normalize(); // no empty text nodes left behind
-        return true;
+      for (var i = 0; i < t.data.length; i++) {
+        var ch = t.data[i], sp = /\s/.test(ch);
+        if (sp && prevSpace) continue;
+        flat += sp ? ' ' : ch; map.push([t, i]); prevSpace = sp;
       }
     }
-    return false;
+    var at = flat.indexOf(text);
+    if (at < 0) return false;
+    var start = map[at], end = map[at + text.length - 1];
+    // Collect [node, from, to] slices in document order, then wrap back to front.
+    var slices = [], cur = null;
+    for (var k = at; k < at + text.length; k++) {
+      var nd = map[k][0], off = map[k][1];
+      if (!cur || cur[0] !== nd) { cur = [nd, off, off + 1]; slices.push(cur); } else cur[2] = off + 1;
+    }
+    for (var j = slices.length - 1; j >= 0; j--) {
+      var sl = slices[j], r = document.createRange();
+      r.setStart(sl[0], sl[1]); r.setEnd(sl[0], sl[2]);
+      try { r.surroundContents(el('mark', { class: 'kept-mark' })); } catch (e) { /* ignore */ }
+    }
+    node.normalize(); // no empty text nodes left behind
+    return !!(start && end);
   }
   M.liveKept().filter(function (k) { return k.slug === D.slug; }).forEach(function (k) {
     var node = paraEl(k.para); if (!node) return;
@@ -229,13 +251,16 @@
     var start = range.startContainer.nodeType === 1 ? range.startContainer : range.startContainer.parentElement;
     var p = start && start.closest && start.closest('[data-p]');
     if (!p || !body.contains(p)) return null;
-    var text;
     if (!p.contains(range.endContainer)) {
       // Keep within one paragraph; if the selection runs on, clip to this one.
       var r2 = document.createRange(); r2.setStart(range.startContainer, range.startOffset); r2.setEndAfter(p.lastChild);
-      text = r2.toString();
-    } else text = range.toString();
-    text = text.replace(/[⋯]/g, '').replace(/\s+/g, ' ').trim();
+      range = r2;
+    }
+    // Footnote numbers, note counts and the ⋯ button aren't part of the text.
+    var frag = document.createElement('div');
+    frag.appendChild(range.cloneContents());
+    frag.querySelectorAll(FURNITURE).forEach(function (x) { x.remove(); });
+    var text = frag.textContent.replace(/\s+/g, ' ').trim();
     if (text.length < 3) return null;
     return { para: Number(p.getAttribute('data-p')), text: text.slice(0, 600), rect: range.getBoundingClientRect() };
   }
@@ -282,7 +307,9 @@
     if (e.key !== 'Escape') return;
     if (sheet && !sheet.hidden) { closeSheet(); return; }
     if (!bar.hidden) { closeBar(true); return; }
-    if (!form.hidden) closeNote();
+    if (!form.hidden) { closeNote(); return; }
+    var gate = document.getElementById('note-gate');
+    if (gate && !gate.querySelector('.key-panel').children.length) { gate.remove(); pending = null; }
   });
 
   function toast(msg) {
@@ -294,6 +321,8 @@
 
   // ---------- keep ----------
   function doKeep(info) {
+    var dup = M.liveKept().some(function (k) { return k.slug === D.slug && k.para === info.para && k.text === info.text; });
+    if (dup) { toast('Already in your commonplace.'); return; }
     M.persist();
     M.keep({ slug: D.slug, title: D.title, author: D.author.name, handle: D.author.handle, para: info.para, text: info.text, note: '' });
     M.api('/api/keep', { slug: D.slug, para: info.para, pv: pv });
@@ -406,7 +435,9 @@
   function closeNote() {
     form.hidden = true; form.reset(); pending = null;
     home.parentNode.insertBefore(form, home.nextSibling);
-    var gate = document.getElementById('note-gate'); if (gate) gate.remove();
+    // A just-issued key stays on screen: the reader still needs to write it down.
+    var gate = document.getElementById('note-gate');
+    if (gate && !gate.querySelector('.key-panel').children.length) gate.remove();
   }
   document.getElementById('note-cancel').addEventListener('click', closeNote);
   form.addEventListener('submit', function (e) {
@@ -420,9 +451,10 @@
         el('blockquote', { class: 'note-quote', text: r.note.quote }),
         el('div', { class: 'note' }, [el('p', { text: r.note.body }), el('p', { class: 'meta', text: '— ' + r.note.display_name + ', just now' })]),
       ]);
+      if (!document.getElementById('notes-p' + r.note.para)) group.id = 'notes-p' + r.note.para;
       home.parentNode.insertBefore(group, home);
       var p = paraEl(r.note.para);
-      if (p && !p.querySelector('.mcount')) p.insertBefore(el('a', { class: 'mcount', href: '#notes', 'aria-label': 'Margin notes on this passage', text: '1' }), p.querySelector('.p-act'));
+      if (p && !p.querySelector('.mcount')) p.insertBefore(el('a', { class: 'mcount', href: '#notes-p' + r.note.para, 'aria-label': '1 margin note on this passage', text: '1' }), p.querySelector('.p-act'));
       closeNote();
       toast('Added to the margin.');
     });
