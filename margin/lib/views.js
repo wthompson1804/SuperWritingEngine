@@ -546,7 +546,7 @@ ${dash.notesList.length ? h`<ul class="plain notes-admin">${dash.notesList.map((
   });
 }
 
-function profileForm({ author, accents, error, saved, dropped = [] }) {
+function profileForm({ author, accents, error, saved, dropped = [], pwError, pwSaved }) {
   return layout({
     title: 'Edit homepage', author, active: 'dashboard', accent: author.accent, path: '/desk/profile',
     body: h`
@@ -568,6 +568,14 @@ function profileForm({ author, accents, error, saved, dropped = [] }) {
       <label>Who you read <span class="small muted">One per line: <code>@handle</code> for writers here, or <code>https://… Title</code> for anywhere on the web. Up to 12.</span>
         <textarea name="blogroll" rows="6" class="mono-input">${author.blogroll}</textarea></label>
       <button class="btn primary" type="submit">Save homepage</button>
+    </form>`)}
+  ${box('password', h`
+    ${pwError ? h`<p class="error" role="alert">${pwError}</p>` : ''}
+    ${pwSaved ? h`<p class="ok" role="status">Password changed. Every other signed-in browser has been signed out.</p>` : ''}
+    <form method="post" action="/desk/password" class="stack">
+      <label>Current password <input type="password" name="current" required autocomplete="current-password"></label>
+      <label>New password <input type="password" name="next" required minlength="10" autocomplete="new-password"><span class="small muted">At least 10 characters. Changing it signs out every other browser.</span></label>
+      <button class="btn" type="submit">Change password</button>
     </form>`)}
 </div>`,
   });

@@ -14,6 +14,8 @@ const ring = require('./lib/ring');
 const { importSubstack, exportAuthor } = require('./lib/portability');
 const { toCsv } = require('./lib/csv');
 const ap = require('./lib/activitypub');
+const { createMailer } = require('./lib/mailer');
+const ops = require('./lib/ops');
 
 const STATIC = path.join(__dirname, 'public');
 const MIME = { '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8' };
@@ -21,6 +23,10 @@ const SECURITY_HEADERS = {
   'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'X-Frame-Options': 'DENY',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()',
+  'Cross-Origin-Opener-Policy': 'same-origin',
+  'Cross-Origin-Resource-Policy': 'same-origin',
   // Pages and fediverse JSON share URLs (content negotiation); caches must
   // keep them apart.
   'Vary': 'Accept',
@@ -43,7 +49,18 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   apInsecure = process.env.MARGIN_AP_INSECURE === '1',
   // Behind a reverse proxy every request comes from the proxy's address; set
   // this so rate limits and flags use the real client (X-Forwarded-For).
-  trustProxy = process.env.MARGIN_TRUST_PROXY === '1' } = {}) {
+  trustProxy = process.env.MARGIN_TRUST_PROXY === '1',
+  smtpUrl = process.env.MARGIN_SMTP_URL || '', mailFrom = process.env.MARGIN_MAIL_FROM || '',
+  logRequests = process.env.MARGIN_LOG === '1', sendMail = null } = {}) {
+  // Refuse a production configuration that would quietly be unsafe.
+  const isProd = /^https:\/\//i.test(publicUrl);
+  if (isProd) {
+    if (process.env.MARGIN_SHOW_MAIL === undefined) showMail = false; // real site: never show confirm links on screen
+    if (!secureCookies && process.env.MARGIN_SECURE_COOKIES !== '0') secureCookies = true; // https implies Secure cookies
+    if (apInsecure) throw new Error('MARGIN_AP_INSECURE=1 must not be set with an https MARGIN_PUBLIC_URL');
+    if (showMail && process.env.MARGIN_SHOW_MAIL === '1') throw new Error('MARGIN_SHOW_MAIL=1 lets anyone confirm any email address; unset it in production');
+    if (demoSignals && process.env.MARGIN_DEMO_SIGNALS !== '0' && !process.env.MARGIN_ALLOW_DEMO) demoSignals = false; // never seed fake numbers on a public site
+  }
   const h = helpers(open(dbFile));
   seed(h, { demoSignals });
 
@@ -84,8 +101,9 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   }
 
   // ---------- helpers ----------
+  const hsts = isProd ? { 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains' } : {};
   const send = (res, status, body, headers = {}) => {
-    res.writeHead(status, { ...SECURITY_HEADERS, ...headers });
+    res.writeHead(status, { ...SECURITY_HEADERS, ...hsts, ...headers });
     res.end(body);
   };
   const html = (res, body, status = 200, headers = {}) => send(res, status, body, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', ...headers });
@@ -128,7 +146,18 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   const mailBase = (req) => publicUrl.replace(/\/$/, '') || writerBase || (req ? baseUrl(req) : '');
   const fed = ap.createFederation(h, { allowHttp: apInsecure, allowPrivate: apInsecure, log: (m) => console.warn('[ap]', m) });
   const apJson = (res, obj, status = 200, type = 'application/activity+json') => send(res, status, JSON.stringify(obj), { 'Content-Type': `${type}; charset=utf-8`, 'Cache-Control': 'max-age=60', 'Access-Control-Allow-Origin': '*' });
-  const queueMail = (to, subject, body, kind) => h.run('INSERT INTO mail (to_email, subject, body, kind, created_at) VALUES (?,?,?,?,?)', to, subject, body, kind, Date.now());
+  const queueMail = (to, subject, body, kind) => {
+    h.run('INSERT INTO mail (to_email, subject, body, kind, created_at, next_at) VALUES (?,?,?,?,?,?)', to, subject, body, kind, Date.now(), Date.now());
+    setImmediate(() => mailer.drain().catch(() => {}));
+  };
+  const mailer = createMailer(h, { smtpUrl, from: mailFrom, domain: publicUrl ? new URL(publicUrl).host : 'margin', send: sendMail, log: (m) => console.warn('[mail]', m) });
+  if (mailer.enabled) showMail = false; // real delivery: never show links on screen
+  setInterval(() => mailer.drain().catch(() => {}), 60000).unref();
+  if (dbFile !== ':memory:') {
+    setInterval(() => { try { console.log('[ops] prune', JSON.stringify(ops.prune(h))); } catch (e) { console.error('[ops] prune failed', e); } }, 6 * 3600 * 1000).unref();
+    setInterval(() => ops.backupDb(h.db, dbFile).then((f) => f && console.log('[ops] backup', f)).catch((e) => console.error('[ops] backup failed', e)), 24 * 3600 * 1000).unref();
+  }
+  const logReq = logRequests ? ops.requestLogger() : null;
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const CONFIRM_TTL = 7 * 86400000;
 
@@ -164,6 +193,7 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   // Background jobs: scheduled posts, and one reminder for unconfirmed email
   // follows (about 6 in 10 double opt-ins go unconfirmed without one).
   function runJobs(now = Date.now()) {
+    mailer.drain().catch(() => {});
     const base = mailBase(null);
     if (!base) return;
     for (const p of h.all(`SELECT id FROM posts WHERE status = 'scheduled' AND publish_at <= ?`, now)) publishNow(p.id, base);
@@ -205,10 +235,12 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   function currentAuthor(req) {
     const t = auth.parseCookies(req.headers.cookie).ms;
     if (!t) return null;
-    return h.get('SELECT a.id, a.handle, a.name, a.bio, a.accent FROM sessions s JOIN authors a ON a.id = s.author_id WHERE s.token = ? AND s.created_at > ?', t, Date.now() - 30 * 86400000) || null;
+    return h.get(`SELECT a.id, a.handle, a.name, a.bio, a.accent FROM sessions s JOIN authors a ON a.id = s.author_id
+                  WHERE s.token = ? AND s.created_at > ? AND s.created_at >= a.pw_changed_at`, t, Date.now() - 30 * 86400000) || null;
   }
   const sessionCookie = (tok, maxAge) => `ms=${tok}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secureCookies ? '; Secure' : ''}`;
 
+  const DUMMY_HASH = auth.hashPassword('not-a-real-password');
   const publishedPost = (slug) => h.get(`SELECT * FROM posts WHERE slug = ? AND status = 'published'`, String(slug || ''));
   const readerByKey = (key) => { const kh = auth.hashKey(key); return kh ? h.get('SELECT * FROM readers WHERE key_hash = ?', kh) : null; };
 
@@ -340,7 +372,10 @@ ${items}
   on('POST', /^\/login$/, async (req, res) => {
     const b = await readBody(req);
     const a = h.get('SELECT * FROM authors WHERE handle = ?', String(b.handle || '').toLowerCase().trim());
-    if (!a || !auth.verifyPassword(b.password || '', a.pw_hash)) return html(res, views.authForm({ mode: 'login', error: 'That handle and password don\'t match.', values: b }), 401);
+    // Verify against a dummy hash when the handle is unknown, so the response
+    // takes the same time either way and handles can't be enumerated by timing.
+    const ok = auth.verifyPassword(b.password || '', a ? a.pw_hash : DUMMY_HASH) && !!a;
+    if (!ok) return html(res, views.authForm({ mode: 'login', error: 'That handle and password don\'t match.', values: b }), 401);
     const tok = auth.token();
     h.run('INSERT INTO sessions (token, author_id, created_at) VALUES (?,?,?)', tok, a.id, Date.now());
     redirect(res, '/dashboard', { 'Set-Cookie': sessionCookie(tok, 60 * 60 * 24 * 30) });
@@ -373,9 +408,27 @@ ${items}
 
   on('GET', /^\/dashboard$/, needAuthor((req, res, m, ctx) => html(res, views.dashboard({ author: ctx.author, dash: signals.authorDashboard(h, ctx.author.id) }))));
 
+  // Changing the password signs every other session out, including a
+  // stolen one; the current session is re-issued.
+  on('POST', /^\/desk\/password$/, needAuthor(async (req, res, m, ctx) => {
+    const b = await readBody(req, 4096);
+    const a = h.get('SELECT * FROM authors WHERE id = ?', ctx.author.id);
+    const author = { ...a };
+    if (!auth.verifyPassword(b.current || '', a.pw_hash)) return html(res, views.profileForm({ author, accents: ring.ACCENTS, pwError: 'That isn’t your current password.' }), 401);
+    if (String(b.next || '').length < 10) return html(res, views.profileForm({ author, accents: ring.ACCENTS, pwError: 'Use a new password of at least 10 characters.' }), 400);
+    const now = Date.now();
+    const tok = auth.token();
+    h.tx(() => {
+      h.run('UPDATE authors SET pw_hash = ?, pw_changed_at = ? WHERE id = ?', auth.hashPassword(b.next), now, a.id);
+      h.run('DELETE FROM sessions WHERE author_id = ?', a.id);
+      h.run('INSERT INTO sessions (token, author_id, created_at) VALUES (?,?,?)', tok, a.id, now);
+    });
+    redirect(res, '/desk/profile?pw=1', { 'Set-Cookie': sessionCookie(tok, 60 * 60 * 24 * 30) });
+  }));
+
   on('GET', /^\/desk\/profile$/, needAuthor((req, res, m, ctx) => {
     const author = h.get('SELECT id, handle, name, bio, now_line, accent, blogroll FROM authors WHERE id = ?', ctx.author.id);
-    html(res, views.profileForm({ author, accents: ring.ACCENTS, saved: ctx.url.searchParams.has('saved') }));
+    html(res, views.profileForm({ author, accents: ring.ACCENTS, saved: ctx.url.searchParams.has('saved'), pwSaved: ctx.url.searchParams.has('pw') }));
   }));
 
   on('POST', /^\/desk\/profile$/, needAuthor(async (req, res, m, ctx) => {
@@ -783,9 +836,15 @@ ${items}
   on('POST', /^\/ap\/users\/([a-z0-9_]+)\/inbox$/, inbox);
   on('POST', /^\/ap\/inbox$/, inbox);
 
+  // Liveness for load balancers: cheap, no auth, and no detail that helps a prober.
+  on('GET', /^\/healthz$/, (req, res) => {
+    try { h.get('SELECT 1'); json(res, { ok: true }); } catch { json(res, { ok: false }, 503); }
+  });
+
   // ---------- dispatcher ----------
   async function handle(req, res) {
     const url = new URL(req.url, 'http://x');
+    if (logReq) logReq(req, res);
     const ip = clientIp(req);
     const ctx = { url, ip, author: currentAuthor(req), proto: req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http' };
     // Cross-site request check for everything a signed-in writer can do (and
@@ -827,13 +886,19 @@ ${items}
       if (!res.headersSent) json(res, { ok: false, error: status === 500 ? 'Something broke.' : e.message }, status);
     });
   });
-  return { server, h, fed, runJobs };
+  return { server, h, fed, runJobs, mailer, prune: () => ops.prune(h), backup: () => ops.backupDb(h.db, dbFile),
+    shutdown: ops.gracefulShutdown(server, h.db, { log: (m) => console.log('[ops]', m) }) };
 }
 
 module.exports = { createApp };
 
 if (require.main === module) {
   const port = Number(process.env.PORT) || 3000;
-  const { server } = createApp();
-  server.listen(port, () => console.log(`Margin is running at http://localhost:${port}`));
+  const app = createApp();
+  app.server.keepAliveTimeout = 65000; // longer than most proxies' idle timeout
+  app.server.headersTimeout = 70000;
+  app.server.requestTimeout = 120000;
+  app.server.listen(port, process.env.HOST || '0.0.0.0', () => console.log(`Margin is running at http://localhost:${port}`));
+  for (const sig of ['SIGTERM', 'SIGINT']) process.on(sig, () => app.shutdown(sig));
+  process.on('unhandledRejection', (e) => console.error('[unhandled]', e));
 }

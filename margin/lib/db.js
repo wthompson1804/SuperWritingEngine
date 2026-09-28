@@ -199,6 +199,12 @@ const COLUMNS = [
   ['posts', 'publish_at', 'INTEGER'],
   ['email_subs', 'reminded_at', 'INTEGER'],
   ['authors', 'ap_private_key', "TEXT NOT NULL DEFAULT ''"],
+  ['mail', 'status', "TEXT NOT NULL DEFAULT 'pending'"],
+  ['mail', 'attempts', 'INTEGER NOT NULL DEFAULT 0'],
+  ['mail', 'next_at', 'INTEGER NOT NULL DEFAULT 0'],
+  ['mail', 'sent_at', 'INTEGER'],
+  ['mail', 'last_error', 'TEXT'],
+  ['authors', 'pw_changed_at', 'INTEGER NOT NULL DEFAULT 0'],
 ];
 function migrate(db) {
   for (const [table, col, def] of COLUMNS) {
@@ -206,6 +212,9 @@ function migrate(db) {
     if (!has) db.exec(`ALTER TABLE ${table} ADD COLUMN ${col} ${def}`);
   }
   db.exec('CREATE INDEX IF NOT EXISTS views_seen ON views(seen_at)');
+  db.exec('CREATE INDEX IF NOT EXISTS views_created ON views(created_at)');
+  db.exec('CREATE INDEX IF NOT EXISTS mail_due ON mail(status, next_at)');
+  db.exec('CREATE INDEX IF NOT EXISTS sessions_author ON sessions(author_id)');
 }
 
 // Tiny helpers so call sites read cleanly.
