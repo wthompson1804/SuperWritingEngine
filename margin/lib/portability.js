@@ -88,7 +88,7 @@ function importSubstack(h, authorId, zipBuf, { saveMedia = null, now = Date.now(
     for (const [, data] of [...files].filter(([n]) => /(^|\/)email_list[^/]*\.csv$/i.test(n))) {
       for (const row of parseCsv(data.toString('utf8'))) {
         const email = String(row.email || '').trim().toLowerCase();
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || truthy(row.email_disabled)) { report.subscribers.skipped++; continue; }
+        if (!/^[a-z0-9._%+'-]+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,63}$/i.test(email) || truthy(row.email_disabled)) { report.subscribers.skipped++; continue; }
         if (truthy(row.active_subscription)) report.subscribers.paid++;
         const res = h.run(`INSERT OR IGNORE INTO email_subs (author_id, email, token, status, source, created_at, confirmed_at)
                            VALUES (?,?,?, 'active', 'import', ?, ?)`, authorId, email, crypto.randomBytes(18).toString('base64url'), Date.parse(row.created_at) || now, Date.parse(row.created_at) || now);

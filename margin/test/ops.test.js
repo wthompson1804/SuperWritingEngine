@@ -383,3 +383,28 @@ test('backups are private to the service user', async () => {
   app.close();
   fs.rmSync(dir, { recursive: true, force: true });
 });
+
+test('the site cannot be turned into a spam cannon', async () => {
+  await withApp({}, async (app, base) => {
+    const sub = (handle, email) => fetch(base + '/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ handle, email }) });
+    const mailTo = (e) => app.h.get('SELECT count(*) n FROM mail WHERE to_email = ?', e).n;
+    // Addresses with routing tricks are refused outright, not normalised away.
+    for (const bad of ['x<victim@example.org>y', 'victim@example.org,other@example.org', 'a b@example.org', 'victim@localhost', '"quoted"@example.org']) {
+      assert.equal((await sub('mara', bad)).status, 400, bad);
+    }
+    const j = (p, b) => fetch(base + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }).then((r) => r.json());
+    const { key } = await j('/api/key/new', {});
+    assert.equal((await j('/api/key/prefs', { key, email: 'x<victim@example.org>y' })).ok, false);
+    // Case variants are one address.
+    await sub('mara', 'Victim@Example.org');
+    assert.equal(app.h.get(`SELECT count(*) n FROM email_subs WHERE email = 'victim@example.org'`).n, 1);
+    // One address, every writer: at most three confirmation mails an hour in total.
+    for (const w of ['theo', 'june', 'ravi']) await sub(w, 'victim@example.org');
+    assert.equal(mailTo('victim@example.org'), 3);
+    assert.equal(app.h.get(`SELECT count(*) n FROM email_subs WHERE email = 'victim@example.org' AND status = 'pending'`).n, 4, 'sign-ups still recorded; only the mail is held');
+    // One client, many addresses: capped per hour.
+    let last;
+    for (let i = 0; i < 25; i++) last = await sub('mara', `r${i}@example.org`);
+    assert.equal(last.status, 429);
+  });
+});

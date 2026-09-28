@@ -161,8 +161,12 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   const fed = ap.createFederation(h, { allowHttp: apInsecure, allowPrivate: apInsecure, log: (m) => console.warn('[ap]', m) });
   const apJson = (res, obj, status = 200, type = 'application/activity+json') => send(res, status, JSON.stringify(obj), { 'Content-Type': `${type}; charset=utf-8`, 'Cache-Control': 'max-age=60', 'Access-Control-Allow-Origin': '*', 'Cross-Origin-Resource-Policy': 'cross-origin' });
   const queueMail = (to, subject, body, kind) => {
+    // Unsolicited kinds (anyone can type any address) are capped per address
+    // across all writers, so the site can't be used to bomb an inbox.
+    if (['confirm', 'verify'].includes(kind) && !allow(`mailto:${to}`, 3, 3600000)) { console.warn(`[mail] not sending another ${kind} to ${to} this hour`); return false; }
     h.run('INSERT INTO mail (to_email, subject, body, kind, created_at, next_at) VALUES (?,?,?,?,?,?)', to, subject, body, kind, Date.now(), Date.now());
     setImmediate(() => mailer.drain().catch(() => {}));
+    return true;
   };
   const mailer = createMailer(h, { smtpUrl, from: mailFrom, domain: publicUrl ? new URL(publicUrl).host : 'margin', send: sendMail, log: (m) => console.warn('[mail]', m) });
   if (mailer.enabled) showMail = false; // real delivery: never show links on screen
@@ -174,7 +178,11 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     every(24 * 3600 * 1000, doBackup);
   }
   const logReq = logRequests ? ops.requestLogger() : null;
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Strict on purpose: the SMTP client takes the part inside <>, so an
+  // address like x<victim@b.c>y would reach victim@b.c under a different
+  // key every time and defeat the per-address limits below.
+  const EMAIL_RE = /^[a-z0-9._%+'-]+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,63}$/;
+  const cleanEmail = (v) => String(v || '').trim().toLowerCase().slice(0, 200);
   const CONFIRM_TTL = 7 * 86400000;
 
   function reach(authorId) {
@@ -675,8 +683,8 @@ ${items}
     const b = await readBody(req, 4096);
     const reader = readerByKey(b.key);
     if (!reader) return json(res, { ok: false }, 404);
-    const email = String(b.email || '').trim().slice(0, 200);
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json(res, { ok: false, error: 'That email doesn\'t look right.' }, 400);
+    const email = cleanEmail(b.email);
+    if (email && !EMAIL_RE.test(email)) return json(res, { ok: false, error: 'That email doesn\'t look right.' }, 400);
     if (!email && (b.digest || b.share_email)) return json(res, { ok: false, error: 'Add an email address first. The Brief and sharing both need one.' }, 400);
     // A new address must be confirmed by its owner before anything is sent
     // to it or shared with writers. The wish is remembered until then.
@@ -755,12 +763,14 @@ ${items}
   });
 
   // Email follow: double opt-in, one writer at a time, no account.
-  on('POST', /^\/api\/subscribe$/, async (req, res) => {
+  on('POST', /^\/api\/subscribe$/, async (req, res, m, ctx) => {
     const b = await readBody(req, 2048);
     const a = h.get('SELECT id, handle, name FROM authors WHERE handle = ?', String(b.handle || ''));
-    const email = String(b.email || '').trim().toLowerCase().slice(0, 200);
+    const email = cleanEmail(b.email);
     if (!a) return json(res, { ok: false, error: 'Unknown writer.' }, 400);
     if (!EMAIL_RE.test(email)) return json(res, { ok: false, error: 'That email doesn’t look right.' }, 400);
+    // One address can't sign up the whole internet: 20 attempts an hour.
+    if (!allow(`subscribe:${ctx.ip}`, 20, 3600000)) return json(res, { ok: false, error: 'Too many sign-ups from here. Try again later.' }, 429);
     const via = b.via ? h.get('SELECT id FROM authors WHERE handle = ?', String(b.via)) : null;
     let sub = h.get('SELECT * FROM email_subs WHERE author_id = ? AND email = ?', a.id, email);
     if (sub && sub.status === 'active') return json(res, { ok: true, already: true });

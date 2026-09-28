@@ -24,7 +24,7 @@ Requires Node 22.16+ and has no dependencies. It uses the built-in `node:sqlite`
 ```bash
 cd margin
 npm start            # http://localhost:3000  (PORT=... to change)
-npm test             # 69 tests: ActivityPub signatures, import/export round-trips, SMTP, backups, security regressions
+npm test             # 70 tests: ActivityPub signatures, import/export round-trips, SMTP, backups, security regressions
 npm run digest       # build this week's Brief for opted-in readers into data/outbox/
 npm run reset        # delete the local database; it re-seeds on next start
 ```
