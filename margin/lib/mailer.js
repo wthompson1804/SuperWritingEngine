@@ -3,7 +3,8 @@
 // TLS) with no dependencies. Nothing is sent unless MARGIN_SMTP_URL is set,
 // e.g. smtp://user:pass@smtp.example.com:587 or smtps://user:pass@host:465.
 // Each row is tried up to 5 times with backoff, then marked failed. Rows are
-// claimed one at a time, so a crash mid-send loses at most one retry.
+// claimed one at a time; a row left claimed by a crash is re-queued at startup
+// (so a crash mid-send can, at worst, send one message twice).
 
 const net = require('node:net');
 const tls = require('node:tls');
@@ -27,6 +28,7 @@ function smtpSend(cfg, { from, to, subject, text, messageId }) {
     let sock = cfg.secure ? tls.connect({ host: cfg.host, port: cfg.port, servername: cfg.host }) : net.connect({ host: cfg.host, port: cfg.port });
     let buf = '';
     let step = 0;
+    let upgraded = false;
     const timer = setTimeout(() => fail(new Error('SMTP timeout')), 30000);
     const fail = (e) => { clearTimeout(timer); try { sock.destroy(); } catch { /* ignore */ } reject(e); };
     const write = (line) => sock.write(line + '\r\n');
@@ -37,7 +39,14 @@ function smtpSend(cfg, { from, to, subject, text, messageId }) {
     ].join('\r\n');
     const steps = [
       () => write(`EHLO ${cfg.ehlo || 'margin'}`),
-      () => { if (!cfg.secure && cfg.starttls && /STARTTLS/i.test(buf)) { write('STARTTLS'); return 'starttls'; } return 'auth'; },
+      (reply) => {
+        if (cfg.secure || upgraded) return 'auth';
+        if (cfg.starttls && /^250[- ]STARTTLS/im.test(reply)) { write('STARTTLS'); return 'starttls'; }
+        // Credentials must never cross the wire in the clear. Without
+        // STARTTLS, only an explicit starttls=0 (a local relay) may continue.
+        if (cfg.starttls) throw new Error('SMTP server did not offer STARTTLS; use smtps:// or add ?starttls=0 for a trusted local relay');
+        return 'auth';
+      },
       () => { write('AUTH PLAIN ' + Buffer.from(`\0${cfg.user}\0${cfg.pass}`).toString('base64')); },
       () => write(`MAIL FROM:<${addr(from)}>`),
       () => write(`RCPT TO:<${addr(to)}>`),
@@ -58,11 +67,12 @@ function smtpSend(cfg, { from, to, subject, text, messageId }) {
       const reply = buf; buf = '';
       if (code >= 400) return fail(new Error(`SMTP ${code}: ${reply.trim().slice(0, 200)}`));
       if (step === 1 && !cfg.user) { step = 3; steps[step](); step++; return; }
-      const r = steps[step] ? steps[step]() : null;
+      let r;
+      try { r = steps[step] ? steps[step](reply) : null; } catch (e) { return fail(e); }
       if (r === 'starttls') {
         // Upgrade in place, then start over from EHLO on the secure socket.
         sock.removeAllListeners('data');
-        sock = tls.connect({ socket: sock, servername: cfg.host }, () => { buf = ''; step = 1; attach(); write(`EHLO ${cfg.ehlo || 'margin'}`); });
+        sock = tls.connect({ socket: sock, servername: cfg.host }, () => { upgraded = true; buf = ''; step = 1; attach(); write(`EHLO ${cfg.ehlo || 'margin'}`); });
         sock.on('error', fail);
         return;
       }
@@ -85,6 +95,8 @@ function createMailer(h, { smtpUrl = process.env.MARGIN_SMTP_URL || '', from = p
   const enabled = !!(cfg || send);
   if (cfg && !from) throw new Error('MARGIN_MAIL_FROM is required when MARGIN_SMTP_URL is set');
   const deliver = send || ((msg) => smtpSend(cfg, msg));
+  // A crash mid-send leaves rows claimed; on startup they go back in the queue.
+  h.run(`UPDATE mail SET status = 'pending' WHERE status = 'sending'`);
   let draining = false;
 
   async function drain() {

@@ -685,19 +685,27 @@ ${items}
     if (changed) {
       if (!allow(`keymail:${ctx.ip}`, 5, 3600000)) return json(res, { ok: false, error: 'Too many address changes. Try again later.' }, 429);
       const tok = auth.token(18);
-      h.run('UPDATE readers SET email = ?, email_verified_at = NULL, verify_token = ?, digest = 0, share_email = 0, want_digest = ?, want_share = ?, updated_at = ? WHERE id = ?',
-        email, tok, b.digest ? 1 : 0, b.share_email ? 1 : 0, Date.now(), reader.id);
+      h.run('UPDATE readers SET email = ?, email_verified_at = NULL, verify_token = ?, verify_sent_at = ?, digest = 0, share_email = 0, want_digest = ?, want_share = ?, updated_at = ? WHERE id = ?',
+        email, tok, Date.now(), b.digest ? 1 : 0, b.share_email ? 1 : 0, Date.now(), reader.id);
       queueMail(email, 'Confirm your email for Margin', `Someone (hopefully you) added this address to a Margin reader key.\n\nConfirm: ${mailBase(req)}/verify/${tok}\n\nIf it wasn't you, ignore this and nothing happens.`, 'verify');
       return json(res, { ok: true, pending: true, prefs: prefsOf(h.get('SELECT * FROM readers WHERE id = ?', reader.id)), ...(showMail ? { previewLink: `/verify/${tok}` } : {}) });
     }
-    h.run('UPDATE readers SET email = ?, digest = ?, share_email = ?, updated_at = ? WHERE id = ?', email || null, b.digest && verified ? 1 : 0, b.share_email && verified ? 1 : 0, Date.now(), reader.id);
+    if (!email) {
+      // Removing the address forgets everything about it.
+      h.run('UPDATE readers SET email = NULL, email_verified_at = NULL, verify_token = NULL, verify_sent_at = NULL, digest = 0, share_email = 0, want_digest = 0, want_share = 0, updated_at = ? WHERE id = ?', Date.now(), reader.id);
+    } else {
+      // Same address: apply the choices now if it's verified, otherwise
+      // remember them for when it is.
+      h.run('UPDATE readers SET digest = ?, share_email = ?, want_digest = ?, want_share = ?, updated_at = ? WHERE id = ?',
+        b.digest && verified ? 1 : 0, b.share_email && verified ? 1 : 0, b.digest ? 1 : 0, b.share_email ? 1 : 0, Date.now(), reader.id);
+    }
     json(res, { ok: true, prefs: prefsOf(h.get('SELECT * FROM readers WHERE id = ?', reader.id)) });
   });
 
   on('GET', /^\/verify\/([\w-]{10,64})$/, (req, res, m, ctx) => {
     const r = h.get('SELECT * FROM readers WHERE verify_token = ? AND email IS NOT NULL', m[1]);
     if (!r) return html(res, views.notFound({ viewer: ctx.author }), 404);
-    if (Date.now() - r.updated_at > CONFIRM_TTL) return html(res, views.notFound({ viewer: ctx.author }), 410);
+    if (Date.now() - (r.verify_sent_at || 0) > CONFIRM_TTL) return html(res, views.notFound({ viewer: ctx.author }), 410);
     h.run('UPDATE readers SET email_verified_at = ?, verify_token = NULL, digest = want_digest, share_email = want_share, updated_at = ? WHERE id = ?', Date.now(), Date.now(), r.id);
     html(res, views.mailResult({ kind: 'verified', sub: { email: r.email }, viewer: ctx.author }));
   });

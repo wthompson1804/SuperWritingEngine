@@ -29,8 +29,11 @@ ProtectKernelTunables=true
 ProtectControlGroups=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
 LockPersonality=true
-MemoryDenyWriteExecute=true
 SystemCallArchitectures=native
+# (MemoryDenyWriteExecute is deliberately absent: V8's JIT needs writable
+# executable memory and the process crash-loops with it on.)
+# Files the app creates (database, backups, media) are private to its user.
+UMask=0077
 
 [Install]
 WantedBy=multi-user.target

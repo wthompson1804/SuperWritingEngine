@@ -4,7 +4,7 @@
   "private": true,
   "description": "A publishing platform where readers never need an account to read.",
   "type": "commonjs",
-  "engines": { "node": ">=22.13" },
+  "engines": { "node": ">=22.16" },
   "scripts": {
     "start": "node --no-warnings server.js",
     "dev": "node --no-warnings --watch server.js",

@@ -210,6 +210,7 @@ const COLUMNS = [
   ['readers', 'verify_token', 'TEXT'],
   ['readers', 'want_digest', 'INTEGER NOT NULL DEFAULT 0'],
   ['readers', 'want_share', 'INTEGER NOT NULL DEFAULT 0'],
+  ['readers', 'verify_sent_at', 'INTEGER'],
 ];
 function migrate(db) {
   for (const [table, col, def] of COLUMNS) {

@@ -10,6 +10,7 @@ const path = require('node:path');
 const { createApp } = require('../server');
 const { smtpSend, createMailer } = require('../lib/mailer');
 const { open, helpers } = require('../lib/db');
+const { prune } = require('../lib/ops');
 
 // Browsers send an Origin header on every POST; the CSRF check relies on it.
 // Node's fetch doesn't, so add it here once for every test in this file.
@@ -272,4 +273,113 @@ test('deeply nested or oversized sync payloads are flattened, not crashed on', a
     const big = await (await j('/api/key/sync', { key, data: { follows: many } })).json();
     assert.equal(Object.keys(big.data.follows).length, 500, 'follows capped at 500, newest kept');
   });
+});
+
+// ---------------- third security review: regressions ----------------
+// A fake server that can advertise STARTTLS. It records every command so a
+// test can prove credentials never went over the wire in the clear.
+function fakeSmtpStarttls({ offer }) {
+  const lines = [];
+  const server = net.createServer((sock) => {
+    sock.write('220 fake ESMTP\r\n');
+    sock.on('data', (chunk) => {
+      if (sock.writableEnded) return; // the client's TLS hello after we hung up
+      for (const line of chunk.toString().split('\r\n')) {
+        if (line === '') continue;
+        lines.push(line);
+        if (/^EHLO/i.test(line)) sock.write(offer ? '250-fake\r\n250-STARTTLS\r\n250 AUTH PLAIN\r\n' : '250-fake\r\n250 AUTH PLAIN\r\n');
+        else if (/^STARTTLS/i.test(line)) { sock.write('220 go ahead\r\n'); sock.end(); } // no cert here: the handshake is not the point
+        else sock.write('250 ok\r\n');
+      }
+    });
+  });
+  return new Promise((r) => server.listen(0, '127.0.0.1', () => r({ server, port: server.address().port, lines })));
+}
+
+test('smtp client issues STARTTLS when offered and refuses to send credentials without it', async () => {
+  const msg = { from: 'a@b.c', to: 'd@e.f', subject: 's', text: 't', messageId: 'm@x' };
+  const offered = await fakeSmtpStarttls({ offer: true });
+  await assert.rejects(smtpSend({ host: '127.0.0.1', port: offered.port, secure: false, starttls: true, user: 'u', pass: 'p' }, msg));
+  assert.ok(offered.lines.some((l) => /^STARTTLS$/i.test(l)), 'STARTTLS was sent');
+  assert.ok(!offered.lines.some((l) => /^AUTH/i.test(l)), 'no AUTH on the plaintext socket');
+  offered.server.close();
+  const bare = await fakeSmtpStarttls({ offer: false });
+  await assert.rejects(smtpSend({ host: '127.0.0.1', port: bare.port, secure: false, starttls: true, user: 'u', pass: 'p' }, msg), /did not offer STARTTLS/);
+  assert.ok(!bare.lines.some((l) => /^AUTH/i.test(l)), 'credentials withheld when the server has no TLS');
+  bare.server.close();
+});
+
+test('mail rows left claimed by a crash are re-queued at startup', () => {
+  const h = helpers(open(':memory:'));
+  h.run(`INSERT INTO mail (to_email, subject, body, kind, created_at, next_at, status) VALUES ('x@y.z','s','b','t',?,0,'sending')`, Date.now());
+  createMailer(h, { from: 'a@b.c', send: async () => {} });
+  assert.equal(h.get('SELECT status FROM mail').status, 'pending');
+});
+
+test('followers are pruned only after a month of nothing but failures', () => {
+  const h = helpers(open(':memory:'));
+  require('../lib/seed').seed(h, { demoSignals: false });
+  const author = h.get('SELECT id FROM authors LIMIT 1').id;
+  const now = Date.now(), day = 86400000;
+  const follower = (n, inbox) => h.run('INSERT INTO ap_followers (author_id, actor, inbox, created_at) VALUES (?,?,?,?)', author, `https://${n}/u/a`, inbox, now);
+  const delivery = (inbox, status, at) => h.run('INSERT INTO ap_deliveries (author_id, inbox, body, next_at, status, created_at) VALUES (?,?,?,?,?,?)', author, inbox, '{}', at, status, at);
+  follower('once.test', 'https://once.test/inbox'); delivery('https://once.test/inbox', 'failed', now - day);
+  follower('mixed.test', 'https://mixed.test/inbox'); delivery('https://mixed.test/inbox', 'failed', now - 40 * day); delivery('https://mixed.test/inbox', 'done', now - 2 * day);
+  follower('dead.test', 'https://dead.test/inbox'); delivery('https://dead.test/inbox', 'failed', now - 40 * day); delivery('https://dead.test/inbox', 'failed', now - 5 * day);
+  const out = prune(h, now);
+  assert.equal(out.followers, 1);
+  assert.deepEqual(h.all('SELECT inbox FROM ap_followers ORDER BY inbox').map((r) => r.inbox), ['https://mixed.test/inbox', 'https://once.test/inbox']);
+});
+
+test('a Follow whose inbox is on another host is refused', () => {
+  const { createFederation } = require('../lib/activitypub');
+  const h = helpers(open(':memory:'));
+  require('../lib/seed').seed(h, { demoSignals: false });
+  const fed = createFederation(h, { allowHttp: true, allowPrivate: true });
+  const follow = { type: 'Follow', actor: 'https://social.example/users/eve', object: 'http://margin.test/ap/users/theo' };
+  const signer = { id: 'https://social.example/users/eve', inbox: 'https://social.example/users/eve/inbox', endpoints: { sharedInbox: 'https://victim.example/inbox' } };
+  assert.equal(fed.receive('http://margin.test', follow, signer), 'bad-inbox');
+  assert.equal(h.get('SELECT count(*) n FROM ap_followers').n, 0);
+  assert.equal(h.get('SELECT count(*) n FROM ap_deliveries').n, 0, 'no signed Accept queued for the foreign host');
+  assert.equal(fed.receive('http://margin.test', follow, { ...signer, endpoints: { sharedInbox: 'https://social.example/inbox' } }), 'followed');
+  fed.stop();
+});
+
+test('reader-key email: verify link expires by send time, clearing the address forgets it, choices apply once verified', async () => {
+  await withApp({}, async (app, base) => {
+    const j = (p, b) => fetch(base + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }).then((r) => r.json());
+    const { key } = await j('/api/key/new', {});
+    const first = await j('/api/key/prefs', { key, email: 'r@example.org', digest: true });
+    assert.ok(first.pending);
+    const token = app.h.get(`SELECT verify_token FROM readers WHERE email = 'r@example.org'`).verify_token;
+    // Keeping the key in use (updated_at bumps) must not extend the link's life.
+    app.h.run(`UPDATE readers SET verify_sent_at = ?, updated_at = ? WHERE email = 'r@example.org'`, Date.now() - 8 * 86400000, Date.now());
+    assert.equal((await fetch(base + '/verify/' + token)).status, 410);
+    app.h.run(`UPDATE readers SET verify_sent_at = ? WHERE email = 'r@example.org'`, Date.now());
+    assert.equal((await fetch(base + '/verify/' + token)).status, 200);
+    let row = app.h.get(`SELECT * FROM readers WHERE email = 'r@example.org'`);
+    assert.ok(row.email_verified_at); assert.equal(row.digest, 1, 'the wish recorded before verification is applied');
+    // Same address, new choices: applied immediately because it is verified.
+    const upd = await j('/api/key/prefs', { key, email: 'r@example.org', digest: false, share_email: true });
+    assert.deepEqual([upd.prefs.digest, upd.prefs.share_email, upd.prefs.verified], [false, true, true]);
+    row = app.h.get(`SELECT * FROM readers WHERE email = 'r@example.org'`);
+    assert.deepEqual([row.want_digest, row.want_share], [0, 1]);
+    // Clearing the address forgets everything, including the verification.
+    const cleared = await j('/api/key/prefs', { key, email: '' });
+    assert.deepEqual(cleared.prefs, { email: '', digest: false, share_email: false, verified: false, wantDigest: false, wantShare: false });
+    assert.equal(app.h.get('SELECT count(*) n FROM readers WHERE email IS NOT NULL').n, 0);
+    // Re-adding the same address starts over as unverified.
+    const again = await j('/api/key/prefs', { key, email: 'r@example.org' });
+    assert.ok(again.pending); assert.equal(again.prefs.verified, false);
+  });
+});
+
+test('backups are private to the service user', async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'margin-ops-'));
+  const app = createApp({ dbFile: path.join(dir, 'm.db'), demoSignals: false });
+  const file = await app.backup();
+  assert.equal(fs.statSync(file).mode & 0o777, 0o600);
+  assert.equal(fs.statSync(path.dirname(file)).mode & 0o777, 0o700);
+  app.close();
+  fs.rmSync(dir, { recursive: true, force: true });
 });

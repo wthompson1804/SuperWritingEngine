@@ -312,6 +312,11 @@ function createFederation(h, { allowHttp = false, allowPrivate = false, fetchImp
       }
       const batch = [...byHost.values()].slice(0, 8);
       await Promise.allSettled(batch.map(deliverOne));
+      // Forget penalties that have expired, and keep the map small.
+      for (const [host, p] of hostPenalty) if (p.until <= now) hostPenalty.delete(host);
+      if (hostPenalty.size > 5000) for (const host of [...hostPenalty.keys()].slice(0, hostPenalty.size - 5000)) hostPenalty.delete(host);
+      // A big fan-out (a post to many servers) shouldn't wait 15 s per 8 hosts.
+      if (byHost.size > batch.length) setImmediate(drain);
     } finally { draining = false; }
   }
   const timer = setInterval(drain, 15000);
@@ -331,6 +336,10 @@ function createFederation(h, { allowHttp = false, allowPrivate = false, fetchImp
       const a = targetAuthor(activity.object);
       if (!a) return 'unknown-target';
       const inbox = (signerDoc.endpoints && signerDoc.endpoints.sharedInbox) || signerDoc.inbox;
+      // A follower's inbox must be on its own server; otherwise a Follow could
+      // point our signed deliveries at any host it likes.
+      const sameOrigin = (u) => { try { return new URL(u).origin === new URL(signerDoc.id).origin; } catch { return false; } };
+      if (!sameOrigin(inbox) || !sameOrigin(signerDoc.inbox)) return 'bad-inbox';
       h.run(`INSERT INTO ap_followers (author_id, actor, inbox, created_at) VALUES (?,?,?,?)
              ON CONFLICT(author_id, actor) DO UPDATE SET inbox = excluded.inbox`, a.id, signerDoc.id, inbox, Date.now());
       const u = ids(base, a.handle);
