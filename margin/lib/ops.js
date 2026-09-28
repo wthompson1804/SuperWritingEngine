@@ -45,6 +45,10 @@ function prune(h, now = Date.now()) {
   out.outbox = h.run('DELETE FROM outbox WHERE created_at < ?', now - 30 * DAY).changes;
   out.deliveries = h.run(`DELETE FROM ap_deliveries WHERE status IN ('done', 'failed') AND created_at < ?`, now - 30 * DAY).changes;
   out.actors = h.run('DELETE FROM ap_actors WHERE fetched_at < ? AND actor NOT IN (SELECT actor FROM ap_followers)', now - 30 * DAY).changes;
+  // Followers whose inbox has failed every delivery for a month are gone.
+  out.followers = h.run(`DELETE FROM ap_followers WHERE inbox IN (
+    SELECT inbox FROM ap_deliveries WHERE status = 'failed' AND created_at > ?
+    EXCEPT SELECT inbox FROM ap_deliveries WHERE status = 'done' AND created_at > ?)`, now - 30 * DAY, now - 30 * DAY).changes;
   out.sessions = h.run('DELETE FROM sessions WHERE created_at < ?', now - 30 * DAY).changes;
   out.pending = h.run(`DELETE FROM email_subs WHERE status = 'pending' AND created_at < ?`, now - 30 * DAY).changes;
   h.db.exec('PRAGMA wal_checkpoint(TRUNCATE)');

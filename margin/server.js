@@ -56,13 +56,19 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   const isProd = /^https:\/\//i.test(publicUrl);
   if (isProd) {
     if (process.env.MARGIN_SHOW_MAIL === undefined) showMail = false; // real site: never show confirm links on screen
-    if (!secureCookies && process.env.MARGIN_SECURE_COOKIES !== '0') secureCookies = true; // https implies Secure cookies
+    if (process.env.MARGIN_SECURE_COOKIES === '0') throw new Error('MARGIN_SECURE_COOKIES=0 is not allowed with an https MARGIN_PUBLIC_URL');
+    secureCookies = true; // https implies Secure cookies
     if (apInsecure) throw new Error('MARGIN_AP_INSECURE=1 must not be set with an https MARGIN_PUBLIC_URL');
     if (showMail && process.env.MARGIN_SHOW_MAIL === '1') throw new Error('MARGIN_SHOW_MAIL=1 lets anyone confirm any email address; unset it in production');
     if (demoSignals && process.env.MARGIN_DEMO_SIGNALS !== '0' && !process.env.MARGIN_ALLOW_DEMO) demoSignals = false; // never seed fake numbers on a public site
   }
   const h = helpers(open(dbFile));
   seed(h, { demoSignals });
+
+  // Background timers are tracked so close() can cancel them.
+  const timers = [];
+  const every = (ms, fn) => { const t = setInterval(fn, ms); t.unref(); timers.push(t); };
+  const later = (ms, fn) => { const t = setTimeout(fn, ms); t.unref(); timers.push(t); };
 
   // In-memory rate limit for anonymous writes. IPs are never persisted.
   const buckets = new Map();
@@ -73,7 +79,7 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     b.n += 1;
     return b.n > max;
   }
-  setInterval(() => { const cut = Date.now() - 60000; for (const [k, b] of buckets) if (b.t < cut) buckets.delete(k); }, 60000).unref();
+  every(60000, () => { const cut = Date.now() - 60000; for (const [k, b] of buckets) if (b.t < cut) buckets.delete(k); });
 
   // Longer-window quotas for anonymous signals that feed the ranking, so a
   // script can't manufacture reads or passes. Kept in memory, never stored.
@@ -85,18 +91,26 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     q.n += 1;
     return q.n <= max;
   }
-  setInterval(() => { const now = Date.now(); for (const [k, q] of quotas) if (now - q.t > q.w) quotas.delete(k); }, 300000).unref();
+  every(300000, () => { const now = Date.now(); for (const [k, q] of quotas) if (now - q.t > q.w) quotas.delete(k); });
 
   // The client's network address: the proxy's forwarded address when trusted,
   // and IPv6 grouped by /64 (one household or server gets a whole /64, so
   // per-address limits on single IPv6 addresses are easy to dodge).
+  // With a trusted proxy, the client address is the LAST X-Forwarded-For
+  // entry (the one our proxy appended); anything earlier is client-supplied
+  // and forgeable. Values that aren't IPs fall back to the socket address.
   function clientIp(req) {
-    let ip = (trustProxy && String(req.headers['x-forwarded-for'] || '').split(',')[0].trim()) || req.socket.remoteAddress || '';
-    ip = ip.replace(/^::ffff:(?=\d+\.)/i, '');
+    let ip = req.socket.remoteAddress || '';
+    if (trustProxy) {
+      const hops = String(req.headers['x-forwarded-for'] || '').split(',').map((x) => x.trim()).filter(Boolean);
+      const last = hops[hops.length - 1];
+      if (last && require('node:net').isIP(last.replace(/^\[|\]$/g, ''))) ip = last.replace(/^\[|\]$/g, '');
+    }
+    ip = ip.replace(/^::ffff:(?=\d+\.)/i, '').toLowerCase();
     if (!ip.includes(':')) return ip;
     const [l, r = ''] = ip.split('::');
     const left = l ? l.split(':') : [], right = r ? r.split(':') : [];
-    const full = [...left, ...Array(Math.max(0, 8 - left.length - right.length)).fill('0'), ...right];
+    const full = [...left, ...Array(Math.max(0, 8 - left.length - right.length)).fill('0'), ...right].map((x) => (parseInt(x, 16) || 0).toString(16));
     return full.slice(0, 4).join(':') + '::/64';
   }
 
@@ -145,17 +159,19 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   let writerBase = '';
   const mailBase = (req) => publicUrl.replace(/\/$/, '') || writerBase || (req ? baseUrl(req) : '');
   const fed = ap.createFederation(h, { allowHttp: apInsecure, allowPrivate: apInsecure, log: (m) => console.warn('[ap]', m) });
-  const apJson = (res, obj, status = 200, type = 'application/activity+json') => send(res, status, JSON.stringify(obj), { 'Content-Type': `${type}; charset=utf-8`, 'Cache-Control': 'max-age=60', 'Access-Control-Allow-Origin': '*' });
+  const apJson = (res, obj, status = 200, type = 'application/activity+json') => send(res, status, JSON.stringify(obj), { 'Content-Type': `${type}; charset=utf-8`, 'Cache-Control': 'max-age=60', 'Access-Control-Allow-Origin': '*', 'Cross-Origin-Resource-Policy': 'cross-origin' });
   const queueMail = (to, subject, body, kind) => {
     h.run('INSERT INTO mail (to_email, subject, body, kind, created_at, next_at) VALUES (?,?,?,?,?,?)', to, subject, body, kind, Date.now(), Date.now());
     setImmediate(() => mailer.drain().catch(() => {}));
   };
   const mailer = createMailer(h, { smtpUrl, from: mailFrom, domain: publicUrl ? new URL(publicUrl).host : 'margin', send: sendMail, log: (m) => console.warn('[mail]', m) });
   if (mailer.enabled) showMail = false; // real delivery: never show links on screen
-  setInterval(() => mailer.drain().catch(() => {}), 60000).unref();
+  every(60000, () => mailer.drain().catch(() => {}));
   if (dbFile !== ':memory:') {
-    setInterval(() => { try { console.log('[ops] prune', JSON.stringify(ops.prune(h))); } catch (e) { console.error('[ops] prune failed', e); } }, 6 * 3600 * 1000).unref();
-    setInterval(() => ops.backupDb(h.db, dbFile).then((f) => f && console.log('[ops] backup', f)).catch((e) => console.error('[ops] backup failed', e)), 24 * 3600 * 1000).unref();
+    every(6 * 3600 * 1000, () => { try { console.log('[ops] prune', JSON.stringify(ops.prune(h))); } catch (e) { console.error('[ops] prune failed', e); } });
+    const doBackup = () => ops.backupDb(h.db, dbFile).then((f) => f && console.log('[ops] backup', f)).catch((e) => console.error('[ops] backup failed', e));
+    later(5000, doBackup); // a process restarted often would otherwise never back up
+    every(24 * 3600 * 1000, doBackup);
   }
   const logReq = logRequests ? ops.requestLogger() : null;
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -203,7 +219,7 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
       h.run('UPDATE email_subs SET reminded_at = ? WHERE id = ?', now, sub.id);
     }
   }
-  setInterval(runJobs, 30000).unref();
+  every(30000, runJobs);
 
   const MEDIA_DIR = dbFile === ':memory:' ? path.join(require('node:os').tmpdir(), `margin-media-${process.pid}`) : path.join(path.dirname(dbFile), 'media');
   // Accept only formats we can recognize by their first bytes.
@@ -236,11 +252,16 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     const t = auth.parseCookies(req.headers.cookie).ms;
     if (!t) return null;
     return h.get(`SELECT a.id, a.handle, a.name, a.bio, a.accent FROM sessions s JOIN authors a ON a.id = s.author_id
-                  WHERE s.token = ? AND s.created_at > ? AND s.created_at >= a.pw_changed_at`, t, Date.now() - 30 * 86400000) || null;
+                  WHERE s.token = ? AND s.created_at > ? AND s.created_at >= a.pw_changed_at`, auth.hashToken(t), Date.now() - 30 * 86400000) || null;
   }
   const sessionCookie = (tok, maxAge) => `ms=${tok}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secureCookies ? '; Secure' : ''}`;
 
-  const DUMMY_HASH = auth.hashPassword('not-a-real-password');
+  const DUMMY_HASH = require('./lib/seed').SEED_HASH; // any valid hash: only its cost matters
+  const newSession = (authorId) => {
+    const tok = auth.token();
+    h.run('INSERT INTO sessions (token, author_id, created_at) VALUES (?,?,?)', auth.hashToken(tok), authorId, Date.now());
+    return tok;
+  };
   const publishedPost = (slug) => h.get(`SELECT * FROM posts WHERE slug = ? AND status = 'published'`, String(slug || ''));
   const readerByKey = (key) => { const kh = auth.hashKey(key); return kh ? h.get('SELECT * FROM readers WHERE key_hash = ?', kh) : null; };
 
@@ -252,14 +273,31 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   }
 
   // Merge two commonplace blobs entry by entry; newest timestamp wins.
+  // Entries are flat records of strings/numbers/booleans; anything else is
+  // dropped so a nested payload can't grow without limit or blow the stack.
+  const LIMITS = { kept: 5000, follows: 500, finished: 5000 };
+  function flat(v) {
+    if (!v || typeof v !== 'object' || Array.isArray(v)) return null;
+    const out = {};
+    for (const [k, x] of Object.entries(v)) {
+      if (k === '__proto__' || k === 'constructor') continue;
+      if (['string', 'number', 'boolean'].includes(typeof x)) out[k] = typeof x === 'string' ? x.slice(0, 2000) : x;
+    }
+    return out;
+  }
   function mergeData(a, b) {
     const out = {};
     for (const k of ['kept', 'follows', 'finished']) {
-      const m = { ...(a?.[k] || {}) };
+      const m = {};
+      for (const [id, v] of Object.entries(a?.[k] || {})) { const f = flat(v); if (f) m[id] = f; }
       for (const [id, v] of Object.entries(b?.[k] || {})) {
-        if (!v || typeof v !== 'object') continue;
-        if (!m[id] || (Number(v.ts) || 0) >= (Number(m[id].ts) || 0)) m[id] = v;
+        const f = flat(v);
+        if (!f || String(id).length > 200) continue;
+        if (!m[id] || (Number(f.ts) || 0) >= (Number(m[id].ts) || 0)) m[id] = f;
       }
+      // Over the cap, keep the newest.
+      const ids = Object.keys(m);
+      if (ids.length > LIMITS[k]) for (const id of ids.sort((x, y) => (Number(m[y].ts) || 0) - (Number(m[x].ts) || 0)).slice(LIMITS[k])) delete m[id];
       out[k] = m;
     }
     return out;
@@ -274,7 +312,7 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     }
   }
 
-  const prefsOf = (r) => ({ email: r.email || '', digest: !!r.digest, share_email: !!r.share_email });
+  const prefsOf = (r) => ({ email: r.email || '', digest: !!r.digest, share_email: !!r.share_email, verified: !!r.email_verified_at, wantDigest: !!r.want_digest, wantShare: !!r.want_share });
 
   // ---------- routes ----------
   const routes = [];
@@ -361,7 +399,7 @@ ${items}
     const file = path.join(STATIC, m[1]);
     if (!file.startsWith(STATIC + path.sep) || !fs.existsSync(file)) return send(res, 404, 'not found');
     const long = file.endsWith('.woff2');
-    send(res, 200, fs.readFileSync(file), { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream', 'Cache-Control': long ? 'public, max-age=31536000, immutable' : 'public, max-age=300' });
+    send(res, 200, fs.readFileSync(file), { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream', 'Cache-Control': long ? 'public, max-age=31536000, immutable' : 'public, max-age=300', 'Cross-Origin-Resource-Policy': 'cross-origin' });
   });
 
   // ----- writer auth -----
@@ -374,11 +412,9 @@ ${items}
     const a = h.get('SELECT * FROM authors WHERE handle = ?', String(b.handle || '').toLowerCase().trim());
     // Verify against a dummy hash when the handle is unknown, so the response
     // takes the same time either way and handles can't be enumerated by timing.
-    const ok = auth.verifyPassword(b.password || '', a ? a.pw_hash : DUMMY_HASH) && !!a;
+    const ok = (await auth.verifyPassword(b.password || '', a ? a.pw_hash : DUMMY_HASH)) && !!a;
     if (!ok) return html(res, views.authForm({ mode: 'login', error: 'That handle and password don\'t match.', values: b }), 401);
-    const tok = auth.token();
-    h.run('INSERT INTO sessions (token, author_id, created_at) VALUES (?,?,?)', tok, a.id, Date.now());
-    redirect(res, '/dashboard', { 'Set-Cookie': sessionCookie(tok, 60 * 60 * 24 * 30) });
+    redirect(res, '/dashboard', { 'Set-Cookie': sessionCookie(newSession(a.id), 60 * 60 * 24 * 30) });
   });
 
   on('POST', /^\/signup$/, async (req, res) => {
@@ -391,15 +427,13 @@ ${items}
     else if (String(b.password || '').length < 10) error = 'Use a password of at least 10 characters.';
     else if (h.get('SELECT id FROM authors WHERE handle = ?', handle)) error = 'That handle is taken.';
     if (error) return html(res, views.authForm({ mode: 'signup', error, values: b }), 400);
-    const id = Number(h.run('INSERT INTO authors (handle, name, bio, pw_hash, created_at) VALUES (?,?,?,?,?)', handle, name, '', auth.hashPassword(b.password), Date.now()).lastInsertRowid);
-    const tok = auth.token();
-    h.run('INSERT INTO sessions (token, author_id, created_at) VALUES (?,?,?)', tok, id, Date.now());
-    redirect(res, '/write/new', { 'Set-Cookie': sessionCookie(tok, 60 * 60 * 24 * 30) });
+    const id = Number(h.run('INSERT INTO authors (handle, name, bio, pw_hash, created_at) VALUES (?,?,?,?,?)', handle, name, '', await auth.hashPassword(b.password), Date.now()).lastInsertRowid);
+    redirect(res, '/write/new', { 'Set-Cookie': sessionCookie(newSession(id), 60 * 60 * 24 * 30) });
   });
 
   on('POST', /^\/logout$/, (req, res) => {
     const t = auth.parseCookies(req.headers.cookie).ms;
-    if (t) h.run('DELETE FROM sessions WHERE token = ?', t);
+    if (t) h.run('DELETE FROM sessions WHERE token = ?', auth.hashToken(t));
     redirect(res, '/', { 'Set-Cookie': sessionCookie('', 0) });
   });
 
@@ -414,14 +448,15 @@ ${items}
     const b = await readBody(req, 4096);
     const a = h.get('SELECT * FROM authors WHERE id = ?', ctx.author.id);
     const author = { ...a };
-    if (!auth.verifyPassword(b.current || '', a.pw_hash)) return html(res, views.profileForm({ author, accents: ring.ACCENTS, pwError: 'That isn’t your current password.' }), 401);
+    if (!(await auth.verifyPassword(b.current || '', a.pw_hash))) return html(res, views.profileForm({ author, accents: ring.ACCENTS, pwError: 'That isn’t your current password.' }), 401);
     if (String(b.next || '').length < 10) return html(res, views.profileForm({ author, accents: ring.ACCENTS, pwError: 'Use a new password of at least 10 characters.' }), 400);
     const now = Date.now();
+    const newHash = await auth.hashPassword(b.next);
     const tok = auth.token();
     h.tx(() => {
-      h.run('UPDATE authors SET pw_hash = ?, pw_changed_at = ? WHERE id = ?', auth.hashPassword(b.next), now, a.id);
+      h.run('UPDATE authors SET pw_hash = ?, pw_changed_at = ? WHERE id = ?', newHash, now, a.id);
       h.run('DELETE FROM sessions WHERE author_id = ?', a.id);
-      h.run('INSERT INTO sessions (token, author_id, created_at) VALUES (?,?,?)', tok, a.id, now);
+      h.run('INSERT INTO sessions (token, author_id, created_at) VALUES (?,?,?)', auth.hashToken(tok), a.id, now);
     });
     redirect(res, '/desk/profile?pw=1', { 'Set-Cookie': sessionCookie(tok, 60 * 60 * 24 * 30) });
   }));
@@ -632,19 +667,39 @@ ${items}
     const blob = JSON.stringify(data);
     if (blob.length > 2_000_000) return json(res, { ok: false, error: 'Commonplace is too large to sync.' }, 413);
     h.run('UPDATE readers SET data = ?, updated_at = ? WHERE id = ?', blob, Date.now(), reader.id);
-    syncFollows(reader, data.follows);
+    syncFollows(reader, (b.data && b.data.follows) || {}); // only what this device changed
     json(res, { ok: true, data, prefs: prefsOf(reader) });
   });
 
-  on('POST', /^\/api\/key\/prefs$/, async (req, res) => {
+  on('POST', /^\/api\/key\/prefs$/, async (req, res, m, ctx) => {
     const b = await readBody(req, 4096);
     const reader = readerByKey(b.key);
     if (!reader) return json(res, { ok: false }, 404);
     const email = String(b.email || '').trim().slice(0, 200);
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json(res, { ok: false, error: 'That email doesn\'t look right.' }, 400);
     if (!email && (b.digest || b.share_email)) return json(res, { ok: false, error: 'Add an email address first. The Brief and sharing both need one.' }, 400);
-    h.run('UPDATE readers SET email = ?, digest = ?, share_email = ?, updated_at = ? WHERE id = ?', email || null, b.digest && email ? 1 : 0, b.share_email && email ? 1 : 0, Date.now(), reader.id);
+    // A new address must be confirmed by its owner before anything is sent
+    // to it or shared with writers. The wish is remembered until then.
+    const changed = email && email !== (reader.email || '');
+    const verified = email && !changed && reader.email_verified_at;
+    if (changed) {
+      if (!allow(`keymail:${ctx.ip}`, 5, 3600000)) return json(res, { ok: false, error: 'Too many address changes. Try again later.' }, 429);
+      const tok = auth.token(18);
+      h.run('UPDATE readers SET email = ?, email_verified_at = NULL, verify_token = ?, digest = 0, share_email = 0, want_digest = ?, want_share = ?, updated_at = ? WHERE id = ?',
+        email, tok, b.digest ? 1 : 0, b.share_email ? 1 : 0, Date.now(), reader.id);
+      queueMail(email, 'Confirm your email for Margin', `Someone (hopefully you) added this address to a Margin reader key.\n\nConfirm: ${mailBase(req)}/verify/${tok}\n\nIf it wasn't you, ignore this and nothing happens.`, 'verify');
+      return json(res, { ok: true, pending: true, prefs: prefsOf(h.get('SELECT * FROM readers WHERE id = ?', reader.id)), ...(showMail ? { previewLink: `/verify/${tok}` } : {}) });
+    }
+    h.run('UPDATE readers SET email = ?, digest = ?, share_email = ?, updated_at = ? WHERE id = ?', email || null, b.digest && verified ? 1 : 0, b.share_email && verified ? 1 : 0, Date.now(), reader.id);
     json(res, { ok: true, prefs: prefsOf(h.get('SELECT * FROM readers WHERE id = ?', reader.id)) });
+  });
+
+  on('GET', /^\/verify\/([\w-]{10,64})$/, (req, res, m, ctx) => {
+    const r = h.get('SELECT * FROM readers WHERE verify_token = ? AND email IS NOT NULL', m[1]);
+    if (!r) return html(res, views.notFound({ viewer: ctx.author }), 404);
+    if (Date.now() - r.updated_at > CONFIRM_TTL) return html(res, views.notFound({ viewer: ctx.author }), 410);
+    h.run('UPDATE readers SET email_verified_at = ?, verify_token = NULL, digest = want_digest, share_email = want_share, updated_at = ? WHERE id = ?', Date.now(), Date.now(), r.id);
+    html(res, views.mailResult({ kind: 'verified', sub: { email: r.email }, viewer: ctx.author }));
   });
 
   on('POST', /^\/api\/note$/, async (req, res) => {
@@ -665,7 +720,7 @@ ${items}
 
   // Anyone can flag a note. Three flags hide it until the writer looks.
   const flagged = new Map(); // visitor+note -> time; pruned daily, never stored
-  setInterval(() => { const cut = Date.now() - 86400000; for (const [k, t] of flagged) if (t < cut) flagged.delete(k); }, 3600000).unref();
+  every(3600000, () => { const cut = Date.now() - 86400000; for (const [k, t] of flagged) if (t < cut) flagged.delete(k); });
   on('POST', /^\/api\/note\/flag$/, async (req, res, m, ctx) => {
     const b = await readBody(req, 1024);
     const id = Number(b.id);
@@ -712,6 +767,12 @@ ${items}
         auth.token(18), Date.now(), via && via.id !== a.id ? via.id : null, sub.id);
       sub = h.get('SELECT * FROM email_subs WHERE id = ?', sub.id);
     }
+    // A pending sign-up already has its mail; sending another on every call
+    // would let anyone flood an address. One resend per hour at most.
+    if (sub.status === 'pending' && sub.confirm_sent_at && Date.now() - sub.confirm_sent_at < 3600000) {
+      return json(res, { ok: true, pending: true, ...(showMail ? { previewLink: `/confirm/${sub.token}` } : {}) });
+    }
+    h.run('UPDATE email_subs SET confirm_sent_at = ? WHERE id = ?', Date.now(), sub.id);
     const link = `${mailBase(req)}/confirm/${sub.token}`;
     queueMail(email, `Confirm: new pieces from ${a.name}`, `Someone (hopefully you) asked to get ${a.name}'s new pieces on Margin by email.\n\nConfirm: ${link}\n\nIf it wasn't you, ignore this and nothing happens.`, 'confirm');
     json(res, { ok: true, pending: true, ...(showMail ? { previewLink: `/confirm/${sub.token}` } : {}) });
@@ -781,7 +842,7 @@ ${items}
     const row = h.get('SELECT mime FROM media WHERE file = ?', m[1]);
     const file = path.join(MEDIA_DIR, m[1]);
     if (!row || !fs.existsSync(file)) return send(res, 404, 'not found');
-    send(res, 200, fs.readFileSync(file), { 'Content-Type': row.mime, 'Cache-Control': 'public, max-age=31536000, immutable', 'Content-Security-Policy': "default-src 'none'; img-src 'self'" });
+    send(res, 200, fs.readFileSync(file), { 'Content-Type': row.mime, 'Cache-Control': 'public, max-age=31536000, immutable', 'Content-Security-Policy': "default-src 'none'; img-src 'self'", 'Cross-Origin-Resource-Policy': 'cross-origin' });
   });
 
   // ---------- fediverse ----------
@@ -858,11 +919,14 @@ ${items}
       if ((site && site !== 'same-origin' && site !== 'none') || (origin && origin !== 'null' && !own.includes(origin)) || origin === 'null') {
         return html(res, views.notFound({}), 403);
       }
+      // A browser too old to say where a request came from can't prove it
+      // came from here; for a signed-in writer that's not good enough.
+      if (ctx.author && !site && !origin) return html(res, views.notFound({}), 403);
     }
     if (ctx.author && req.headers.host) writerBase = `${ctx.proto}://${req.headers.host}`;
     if (req.method === 'POST' && url.pathname.startsWith('/api/') && limited(ip)) return json(res, { ok: false, error: 'Slow down a little.' }, 429);
     if (req.method === 'POST' && url.pathname.startsWith('/ap/') && limited('ap:' + ip, 60)) return json(res, { error: 'Slow down.' }, 429);
-    if (req.method === 'POST' && (url.pathname === '/login' || url.pathname === '/signup') && limited('auth:' + ip, 20)) return html(res, views.tooMany(), 429);
+    if (req.method === 'POST' && ['/login', '/signup', '/desk/password'].includes(url.pathname) && limited('auth:' + ip, 20)) return html(res, views.tooMany(), 429);
     const method = req.method === 'HEAD' ? 'GET' : req.method;
     for (const r of routes) {
       if (r.method !== method) continue;
@@ -886,7 +950,15 @@ ${items}
       if (!res.headersSent) json(res, { ok: false, error: status === 500 ? 'Something broke.' : e.message }, status);
     });
   });
-  return { server, h, fed, runJobs, mailer, prune: () => ops.prune(h), backup: () => ops.backupDb(h.db, dbFile),
+  // Stops everything without exiting the process (tests, embedding).
+  function close() {
+    for (const t of timers) clearTimeout(t);
+    fed.stop && fed.stop();
+    server.close();
+    if (server.closeAllConnections) server.closeAllConnections();
+    try { h.db.close(); } catch { /* already closed */ }
+  }
+  return { server, h, fed, runJobs, mailer, prune: () => ops.prune(h), backup: () => ops.backupDb(h.db, dbFile), close,
     shutdown: ops.gracefulShutdown(server, h.db, { log: (m) => console.log('[ops]', m) }) };
 }
 

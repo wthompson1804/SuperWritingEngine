@@ -8,6 +8,16 @@ const { newReaderKey, hashKey, normalizeKey } = require('../lib/auth');
 const { buildBrief } = require('../scripts/digest');
 
 let app, base;
+
+// Browsers send an Origin header on every POST; the CSRF check relies on it.
+// Node's fetch doesn't, so add it here once for every test in this file.
+const realFetch = globalThis.fetch;
+globalThis.fetch = (url, init = {}) => {
+  const method = (init.method || 'GET').toUpperCase();
+  const headers = { ...(init.headers || {}) };
+  if (method === 'POST' && !('Origin' in headers) && !('origin' in headers)) headers.Origin = new URL(String(url)).origin;
+  return realFetch(url, { ...init, headers });
+};
 test.before(async () => {
   app = createApp({ dbFile: ':memory:', demoSignals: true });
   await new Promise((r) => app.server.listen(0, r));
@@ -106,8 +116,17 @@ test('reader key: create, sync, merge, follows, prefs, notes', async () => {
 
   const bad = await post('/api/key/prefs', { key: created.key, email: 'nope' });
   assert.equal(bad.status, 400);
+  // A new address does nothing until its owner confirms it.
+  const pend = await (await post('/api/key/prefs', { key: created.key, email: 'r@example.com', digest: true, share_email: true })).json();
+  assert.equal(pend.pending, true);
+  assert.equal(pend.prefs.digest, false);
+  assert.equal(pend.prefs.share_email, false);
+  assert.ok(app.h.get(`SELECT id FROM mail WHERE to_email = 'r@example.com' AND kind = 'verify'`));
+  assert.equal((await fetch(base + pend.previewLink)).status, 200);
   const ok = await (await post('/api/key/prefs', { key: created.key, email: 'r@example.com', digest: true, share_email: true })).json();
-  assert.deepEqual(ok.prefs, { email: 'r@example.com', digest: true, share_email: true });
+  assert.equal(ok.prefs.digest, true);
+  assert.equal(ok.prefs.share_email, true);
+  assert.equal(ok.prefs.verified, true);
 
   assert.equal((await post('/api/note', { slug: 'the-bus-stop-is-the-city', para: 1, body: 'x' })).status, 403);
   const note = await (await post('/api/note', { key: created.key, slug: 'the-bus-stop-is-the-city', para: 1, body: '<b>Good</b> point', quote: 'Look' })).json();

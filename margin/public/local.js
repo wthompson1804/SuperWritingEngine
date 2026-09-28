@@ -218,7 +218,16 @@
     var form = el('form', { class: 'stack prefs', on: { submit: function (e) {
       e.preventDefault();
       api('/api/key/prefs', { key: load().readerKey, email: email.value, digest: digest.checked, share_email: share.checked }).then(function (r) {
-        if (r.ok) { var t = load(); t.prefs = r.prefs; save(t); msg.textContent = 'Saved.'; } else msg.textContent = r.error || 'Could not save.';
+        if (!r.ok) { msg.textContent = r.error || 'Could not save.'; return; }
+        var t = load(); t.prefs = r.prefs; save(t);
+        msg.innerHTML = '';
+        if (r.pending) {
+          // A new address is on hold until its owner confirms it.
+          msg.appendChild(document.createTextNode('One step left: open the email we sent to ' + email.value + ' and confirm it. Until then nothing is sent or shared. '));
+          if (r.previewLink) msg.appendChild(el('span', { class: 'mono' }, ['(Prototype: email isn’t sent yet. ', el('a', { href: r.previewLink, text: 'confirm here' }), '.)']));
+        } else if (email.value && r.prefs && !r.prefs.verified && (digest.checked || share.checked)) {
+          msg.textContent = 'Saved, but that address isn’t confirmed yet, so The Brief and sharing stay off. Check your inbox for the confirmation link.';
+        } else msg.textContent = 'Saved.';
       });
     } } }, [
       el('label', {}, ['Email ', el('span', { class: 'small muted', text: '(optional, only needed for The Brief)' }), email]),

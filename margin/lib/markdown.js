@@ -3,8 +3,10 @@
 // short list of inline forms is re-enabled. Every readable block gets a
 // data-p index so highlights, margin notes and drop-off can anchor to it.
 
+// Control characters are dropped as well: they're never wanted in prose and
+// they make RSS/XML ill-formed.
 function esc(s) {
-  return String(s).replace(/[&<>"']/g, (c) => (
+  return String(s).replace(/[\x00-\x08\x0b\x0c\x0e-\x1f]/g, '').replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
 }

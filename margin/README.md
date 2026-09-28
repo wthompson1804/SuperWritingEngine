@@ -24,7 +24,7 @@ Requires Node 22.13+ and has no dependencies. It uses the built-in `node:sqlite`
 ```bash
 cd margin
 npm start            # http://localhost:3000  (PORT=... to change)
-npm test             # 48 tests, including ActivityPub signatures, import/export round-trips, and security regressions
+npm test             # 56 tests: ActivityPub signatures, import/export round-trips, SMTP, backups, security regressions
 npm run digest       # build this week's Brief for opted-in readers into data/outbox/
 npm run reset        # delete the local database; it re-seeds on next start
 ```
@@ -66,15 +66,32 @@ lib/seed.js          demo writers, pieces and optional synthetic signals
 public/              CSS and small vanilla-JS files (local state, reading, commonplace, editor)
 public/fonts/        self-hosted Newsreader, Fraunces, IBM Plex Mono (SIL Open Font License)
 scripts/digest.js    The Brief builder
+lib/mailer.js        dependency-free SMTP client and the retrying mail queue
+lib/ops.js           request logging, online backups, pruning, graceful shutdown
+deploy/              env reference, systemd unit, Caddyfile; Dockerfile at the root
 test/app.test.js     end-to-end tests against an in-memory database
 ```
 
-## Deploying federation
+## Deploying
 
-Set `MARGIN_PUBLIC_URL=https://your.domain` (fediverse ids, email links and scheduled jobs all use it) and `MARGIN_SECURE_COOKIES=1`. Behind a reverse proxy, also set `MARGIN_TRUST_PROXY=1` so rate limits see real client addresses. Writers are then `@handle@your.domain`. Outbound fetches only go to public HTTPS addresses: hostnames are resolved and every address is checked against private and reserved ranges. A DNS answer can still change between that check and the connection, so production should also sit behind an egress firewall. `MARGIN_AP_INSECURE=1` exists only for local testing.
+Everything is configured by environment variables; `deploy/margin.env.example` documents each one. The two that matter:
+
+- `MARGIN_PUBLIC_URL=https://your.domain` switches on **production mode**: Secure cookies, HSTS, no on-screen confirmation links, no synthetic demo numbers, and a startup check that refuses unsafe settings. Fediverse ids, email links and scheduled posts all use it, so it must not change once readers and remote servers have seen it.
+- `MARGIN_SMTP_URL` and `MARGIN_MAIL_FROM` turn on real email (confirmations, new-piece notices, reminders). Without them, mail queues in the database and is never sent.
+
+Also set `MARGIN_TRUST_PROXY=1` behind a reverse proxy so rate limits see real client addresses, and `MARGIN_LOG=1` for one JSON line per request.
+
+Ways to run it:
+- **Docker:** `docker build -t margin . && docker run -p 3000:3000 -v margin-data:/app/data --env-file deploy/margin.env margin`. The image has a health check and shuts down cleanly on stop.
+- **systemd:** `deploy/margin.service` (a hardened unit) plus `deploy/Caddyfile` for automatic HTTPS in front.
+
+What the process does on its own: an online backup of the database at startup and then daily into `data/backups/` (last 7 kept), pruning of tables that would otherwise grow forever (page views older than 90 days, sent mail, finished fediverse deliveries, expired sessions) every 6 hours, mail delivery retries, and a graceful drain on SIGTERM. `GET /healthz` is the liveness check.
+
+**Federation:** writers are `@handle@your.domain`. Outbound fetches go only to public HTTPS addresses: hostnames are resolved and every address is checked against private and reserved ranges. A DNS answer can still change between that check and the connection, so production should also sit behind an egress firewall. `MARGIN_AP_INSECURE=1` exists only for local testing and is refused in production mode.
+
+**Scaling:** this is a single-process app. Rate limits and note flags are in memory, SQLite is on local disk, and a second process would double-send mail and fediverse deliveries. One well-provisioned server handles a lot of reading; horizontal scaling would need shared limits and a mail worker lock.
 
 ## What is simulated
 
 - **Tips** are recorded but no money moves. Plug in a payment provider in `POST /api/tip`.
-- **Email** (confirmations, new-post notices, The Brief) is written to the `mail` and `outbox` tables, not sent. The confirmation link is shown on screen (`MARGIN_SHOW_MAIL=0` hides it once a provider is wired up). The Brief is also available as RSS at `/brief.xml`.
-- Set `MARGIN_SECURE_COOKIES=1` behind HTTPS.
+- **Email** is real once `MARGIN_SMTP_URL` is set (see Deploying). Without it, mail is queued in the `mail` table and the confirmation link is shown on screen for local testing. The Brief is built by `npm run digest` into `data/outbox/` and is also available as RSS at `/brief.xml`.

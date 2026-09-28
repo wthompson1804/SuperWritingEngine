@@ -1,19 +1,27 @@
 'use strict';
 const crypto = require('node:crypto');
 
-function hashPassword(pw) {
+// scrypt runs on the thread pool (crypto.scrypt), never on the event loop:
+// a burst of sign-in attempts must not stall every reader's page.
+const scrypt = (pw, salt, len) => new Promise((resolve, reject) => crypto.scrypt(String(pw), salt, len, (e, k) => (e ? reject(e) : resolve(k))));
+
+async function hashPassword(pw) {
   const salt = crypto.randomBytes(16);
-  const hash = crypto.scryptSync(String(pw), salt, 32);
+  const hash = await scrypt(pw, salt, 32);
   return `scrypt$${salt.toString('hex')}$${hash.toString('hex')}`;
 }
 
-function verifyPassword(pw, stored) {
+async function verifyPassword(pw, stored) {
   const [alg, saltHex, hashHex] = String(stored).split('$');
   if (alg !== 'scrypt' || !saltHex || !hashHex) return false;
   const want = Buffer.from(hashHex, 'hex');
-  const got = crypto.scryptSync(String(pw), Buffer.from(saltHex, 'hex'), want.length);
+  const got = await scrypt(pw, Buffer.from(saltHex, 'hex'), want.length);
   return crypto.timingSafeEqual(want, got);
 }
+
+// Session tokens are stored hashed, like reader keys: a copy of the
+// database doesn't hand out live sessions.
+const hashToken = (t) => crypto.createHash('sha256').update('margin-session:' + String(t)).digest('hex');
 
 function token(bytes = 24) {
   return crypto.randomBytes(bytes).toString('base64url');
@@ -68,4 +76,4 @@ function parseCookies(header) {
   return out;
 }
 
-module.exports = { hashPassword, verifyPassword, token, newReaderKey, normalizeKey, hashKey, parseCookies, WORDS };
+module.exports = { hashPassword, verifyPassword, hashToken, token, newReaderKey, normalizeKey, hashKey, parseCookies, WORDS };

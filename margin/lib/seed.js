@@ -5,7 +5,10 @@
 // MARGIN_DEMO_SIGNALS=0 to seed pieces without them.
 
 const crypto = require('node:crypto');
-const { hashPassword } = require('./auth');
+// The demo password hash is computed once, synchronously, so seeding can
+// stay synchronous; real accounts use the async path.
+const SEED_SALT = Buffer.from('6d617267696e2d64656d6f2d73616c74', 'hex');
+const SEED_HASH = `scrypt$${SEED_SALT.toString('hex')}$${crypto.scryptSync('demo-password', SEED_SALT, 32).toString('hex')}`;
 const { render } = require('./markdown');
 
 const DAY = 86400000;
@@ -182,7 +185,7 @@ This piece ends in one more sentence, and nothing will play after it. If a line 
 
 function seed(h, { demoSignals = true, now = Date.now() } = {}) {
   if (h.get('SELECT count(*) AS n FROM authors').n > 0) return false;
-  const pw = hashPassword('demo-password');
+  const pw = SEED_HASH;
   h.tx(() => {
     const ids = {};
     AUTHORS.forEach((a, i) => {
@@ -244,4 +247,4 @@ function seedSignals(h, postId, authorId, p, words, now) {
   for (let i = 0; i < follows; i++) h.run(`INSERT INTO asks (post_id, kind, event, created_at) VALUES (?, 'follow', 'accepted', ?)`, postId, now);
 }
 
-module.exports = { seed, AUTHORS, POSTS };
+module.exports = { seed, AUTHORS, POSTS, SEED_HASH };

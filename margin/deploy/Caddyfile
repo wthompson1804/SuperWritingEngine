@@ -1,0 +1,14 @@
+# Reverse proxy with automatic HTTPS. Caddy sets X-Forwarded-For and
+# X-Forwarded-Proto, so run Margin with MARGIN_TRUST_PROXY=1.
+margin.example {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:3000 {
+		# Uploads and imports can be large; fediverse deliveries are slow.
+		transport http {
+			read_timeout 120s
+		}
+	}
+	request_body {
+		max_size 52MB
+	}
+}

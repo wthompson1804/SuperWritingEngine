@@ -9,6 +9,16 @@ const { createApp } = require('../server');
 const { signHeaders, digestOf, allowedUrl } = require('../lib/activitypub');
 
 let app, base, remote, remoteBase;
+
+// Browsers send an Origin header on every POST; the CSRF check relies on it.
+// Node's fetch doesn't, so add it here once for every test in this file.
+const realFetch = globalThis.fetch;
+globalThis.fetch = (url, init = {}) => {
+  const method = (init.method || 'GET').toUpperCase();
+  const headers = { ...(init.headers || {}) };
+  if (method === 'POST' && !('Origin' in headers) && !('origin' in headers)) headers.Origin = new URL(String(url)).origin;
+  return realFetch(url, { ...init, headers });
+};
 let gone = false;
 const received = [];
 const keys = crypto.generateKeyPairSync('rsa', { modulusLength: 2048, publicKeyEncoding: { type: 'spki', format: 'pem' }, privateKeyEncoding: { type: 'pkcs8', format: 'pem' } });

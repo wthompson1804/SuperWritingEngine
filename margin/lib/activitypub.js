@@ -212,7 +212,7 @@ function createFederation(h, { allowHttp = false, allowPrivate = false, fetchImp
     if (signer) Object.assign(headers, signHeaders({ method: 'GET', url: u.href, body: null, ...signer }));
     const res = await fetchImpl(u.href, { headers, signal: AbortSignal.timeout(10000), redirect: 'error' });
     if (!res.ok) throw Object.assign(new Error(`GET ${u.href} → ${res.status}`), { gone: res.status === 410 });
-    return JSON.parse(await readCapped(res, 1_000_000));
+    return JSON.parse(await readCapped(res, 256 * 1024));
   }
 
   // Fetch (or reuse) the remote actor behind a keyId.
@@ -233,9 +233,15 @@ function createFederation(h, { allowHttp = false, allowPrivate = false, fetchImp
     // The actor must live on the same origin as the key that signed, or a
     // server could claim to speak for someone else's account.
     if (!doc.id || new URL(doc.id).origin !== new URL(keyId).origin) throw new Error('Key and actor origins differ');
+    // Cache only what verification needs, bounded per remote origin, so an
+    // inbox flood can't fill the database with megabytes of actor documents.
+    const slim = { id: doc.id, inbox: doc.inbox, endpoints: doc.endpoints && doc.endpoints.sharedInbox ? { sharedInbox: doc.endpoints.sharedInbox } : undefined, publicKey: { publicKeyPem: doc.publicKey.publicKeyPem } };
+    const origin = new URL(doc.id).origin;
+    const perOrigin = h.get('SELECT count(*) AS n FROM ap_actors WHERE actor LIKE ?', origin + '/%').n;
+    if (perOrigin >= 2000 && !cached) throw new Error('Too many actors cached for that server');
     h.run(`INSERT INTO ap_actors (key_id, actor, doc, fetched_at) VALUES (?,?,?,?)
-           ON CONFLICT(key_id) DO UPDATE SET actor = excluded.actor, doc = excluded.doc, fetched_at = excluded.fetched_at`, keyId, doc.id, JSON.stringify(doc), Date.now());
-    return doc;
+           ON CONFLICT(key_id) DO UPDATE SET actor = excluded.actor, doc = excluded.doc, fetched_at = excluded.fetched_at`, keyId, doc.id, JSON.stringify(slim), Date.now());
+    return slim;
   }
 
   // Verifies an inbox POST. Returns the signing actor document, or throws.
@@ -265,32 +271,52 @@ function createFederation(h, { allowHttp = false, allowPrivate = false, fetchImp
   }
 
   let draining = false;
+  // Deliveries run a few at a time, one in flight per remote host, so a
+  // server that accepts connections and never answers only ties up its own
+  // slot. A host that keeps failing is skipped for a while.
+  const hostPenalty = new Map(); // host -> { fails, until }
+  async function deliverOne(d) {
+    const a = h.get('SELECT id, handle FROM authors WHERE id = ?', d.author_id);
+    const k = ensureKeys(h, a.id);
+    const base = JSON.parse(d.body).actor.replace(/\/ap\/users\/.*$/, '');
+    const host = new URL(d.inbox).host;
+    try {
+      if (!(await publicUrl(d.inbox, guard))) throw new Error('inbox address not allowed');
+      const headers = signHeaders({ method: 'POST', url: d.inbox, body: d.body, keyId: ids(base, a.handle).key, privateKey: k.privateKey });
+      const res = await fetchImpl(d.inbox, { method: 'POST', headers: { ...headers, 'content-type': 'application/activity+json' }, body: d.body, signal: AbortSignal.timeout(15000), redirect: 'error' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      h.run(`UPDATE ap_deliveries SET status = 'done', attempts = attempts + 1 WHERE id = ?`, d.id);
+      hostPenalty.delete(host);
+    } catch (e) {
+      const attempts = d.attempts + 1;
+      h.run(`UPDATE ap_deliveries SET attempts = ?, next_at = ?, last_error = ?, status = ? WHERE id = ?`,
+        attempts, Date.now() + 30000 * 2 ** attempts, String(e.message).slice(0, 200), attempts >= MAX_ATTEMPTS ? 'failed' : 'pending', d.id);
+      const p = hostPenalty.get(host) || { fails: 0, until: 0 };
+      p.fails += 1; p.until = Date.now() + Math.min(6 * 3600000, 60000 * 2 ** p.fails);
+      hostPenalty.set(host, p);
+      log(`delivery to ${d.inbox} failed: ${e.message}`);
+    }
+  }
   async function drain() {
     if (draining) return;
     draining = true;
     try {
-      const due = h.all(`SELECT * FROM ap_deliveries WHERE status = 'pending' AND next_at <= ? ORDER BY id LIMIT 20`, Date.now());
+      const now = Date.now();
+      const due = h.all(`SELECT * FROM ap_deliveries WHERE status = 'pending' AND next_at <= ? ORDER BY id LIMIT 200`, now);
+      const byHost = new Map();
       for (const d of due) {
-        const a = h.get('SELECT id, handle FROM authors WHERE id = ?', d.author_id);
-        const k = ensureKeys(h, a.id);
-        const base = JSON.parse(d.body).actor.replace(/\/ap\/users\/.*$/, '');
-        try {
-          if (!(await publicUrl(d.inbox, guard))) throw new Error('inbox address not allowed');
-          const headers = signHeaders({ method: 'POST', url: d.inbox, body: d.body, keyId: ids(base, a.handle).key, privateKey: k.privateKey });
-          const res = await fetchImpl(d.inbox, { method: 'POST', headers: { ...headers, 'content-type': 'application/activity+json' }, body: d.body, signal: AbortSignal.timeout(15000), redirect: 'error' });
-          if (res.ok) { h.run(`UPDATE ap_deliveries SET status = 'done', attempts = attempts + 1 WHERE id = ?`, d.id); continue; }
-          throw new Error(`HTTP ${res.status}`);
-        } catch (e) {
-          const attempts = d.attempts + 1;
-          h.run(`UPDATE ap_deliveries SET attempts = ?, next_at = ?, last_error = ?, status = ? WHERE id = ?`,
-            attempts, Date.now() + 30000 * 2 ** attempts, String(e.message).slice(0, 200), attempts >= MAX_ATTEMPTS ? 'failed' : 'pending', d.id);
-          log(`delivery to ${d.inbox} failed: ${e.message}`);
-        }
+        let host; try { host = new URL(d.inbox).host; } catch { continue; }
+        const p = hostPenalty.get(host);
+        if (p && p.until > now) continue;
+        if (!byHost.has(host)) byHost.set(host, d); // one per host per tick
       }
+      const batch = [...byHost.values()].slice(0, 8);
+      await Promise.allSettled(batch.map(deliverOne));
     } finally { draining = false; }
   }
   const timer = setInterval(drain, 15000);
   timer.unref();
+  const stop = () => clearInterval(timer);
 
   // Handles a verified activity addressed to one of our writers.
   function receive(base, activity, signerDoc) {
@@ -330,7 +356,7 @@ function createFederation(h, { allowHttp = false, allowPrivate = false, fetchImp
     return inboxes.length;
   }
 
-  return { verifyInbox, receive, publish, drain, signerFor: (base, author) => ({ keyId: ids(base, author.handle).key, privateKey: ensureKeys(h, author.id).privateKey }) };
+  return { verifyInbox, receive, publish, drain, stop, signerFor: (base, author) => ({ keyId: ids(base, author.handle).key, privateKey: ensureKeys(h, author.id).privateKey }) };
 }
 
 module.exports = { createFederation, actorJson, articleJson, outboxJson, followersJson, webfinger, wantsActivityJson, signHeaders, digestOf, allowedUrl, ids };

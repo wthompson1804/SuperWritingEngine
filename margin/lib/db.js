@@ -205,6 +205,11 @@ const COLUMNS = [
   ['mail', 'sent_at', 'INTEGER'],
   ['mail', 'last_error', 'TEXT'],
   ['authors', 'pw_changed_at', 'INTEGER NOT NULL DEFAULT 0'],
+  ['email_subs', 'confirm_sent_at', 'INTEGER'],
+  ['readers', 'email_verified_at', 'INTEGER'],
+  ['readers', 'verify_token', 'TEXT'],
+  ['readers', 'want_digest', 'INTEGER NOT NULL DEFAULT 0'],
+  ['readers', 'want_share', 'INTEGER NOT NULL DEFAULT 0'],
 ];
 function migrate(db) {
   for (const [table, col, def] of COLUMNS) {

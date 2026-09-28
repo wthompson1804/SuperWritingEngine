@@ -1,0 +1,36 @@
+# systemd unit for a single-server deployment. Put the app in /srv/margin,
+# create the `margin` user, and copy this to /etc/systemd/system/.
+#   sudo systemctl daemon-reload && sudo systemctl enable --now margin
+[Unit]
+Description=Margin
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=margin
+Group=margin
+WorkingDirectory=/srv/margin
+EnvironmentFile=/etc/margin.env
+ExecStart=/usr/bin/node --no-warnings server.js
+Restart=on-failure
+RestartSec=3
+KillSignal=SIGTERM
+TimeoutStopSec=15
+
+# Hardening: the process only needs to write under data/.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/margin/data
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LockPersonality=true
+MemoryDenyWriteExecute=true
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target

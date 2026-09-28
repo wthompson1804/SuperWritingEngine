@@ -650,8 +650,10 @@ function editor({ author, post, error, notice, reach = { email: 0, fedi: 0 } }) 
 
 function mailResult({ kind, sub, viewer }) {
   return layout({
-    title: { confirmed: 'Confirmed', unsubscribed: 'Unsubscribed', stale: 'Link no longer active', expired: 'Link expired' }[kind], author: viewer, path: `/${kind}`,
-    body: kind === 'stale' || kind === 'expired'
+    title: { confirmed: 'Confirmed', unsubscribed: 'Unsubscribed', stale: 'Link no longer active', expired: 'Link expired', verified: 'Email confirmed' }[kind], author: viewer, path: `/${kind}`,
+    body: kind === 'verified'
+      ? h`<div class="narrow">${box('confirmed.txt', h`<h1>That’s your address.</h1><p><strong>${sub.email}</strong> is confirmed for your reader key. Whatever you asked for, The Brief or sharing with writers you follow, is on now.</p><p><a href="/commonplace">Back to your commonplace</a></p>`)}</div>`
+      : kind === 'stale' || kind === 'expired'
       ? h`<div class="narrow">${box('link.txt', h`<h1>${kind === 'expired' ? 'That confirmation link has expired.' : 'You’re not on this list anymore.'}</h1><p>${kind === 'expired' ? 'Links work for 7 days.' : 'You unsubscribed, so old links don’t sign you back up.'} To get ${sub.name}’s new pieces by email, sign up again on their homepage.</p><p><a href="/@${sub.handle}">${sub.name}’s homepage</a></p>`)}</div>`
       : h`<div class="narrow">${box(kind === 'confirmed' ? 'confirmed.txt' : 'unsubscribed.txt', kind === 'confirmed'
       ? h`<h1>You’re on ${sub.name}’s list.</h1><p>New pieces from ${sub.name} will come to <strong>${sub.email}</strong>. Nothing else will: no digests or promotions unless you ask. Every email has a one-click way out.</p><p><a href="/@${sub.handle}">Back to ${sub.name}’s homepage</a></p>`
