@@ -408,3 +408,16 @@ test('the site cannot be turned into a spam cannon', async () => {
     assert.equal(last.status, 429);
   });
 });
+
+test('malformed sync entries and out-of-range note paragraphs are handled, not crashed on', async () => {
+  await withApp({}, async (app, base) => {
+    const j = (p, b) => fetch(base + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) });
+    const { key } = await (await j('/api/key/new', {})).json();
+    const r = await j('/api/key/sync', { key, data: { follows: { theo: null, mara: 'yes', june: { on: true, ts: 1 } } } });
+    assert.equal(r.status, 200);
+    assert.equal(app.h.get('SELECT count(*) n FROM reader_follows').n, 1, 'only the well-formed follow is recorded');
+    const slug = app.h.get(`SELECT slug FROM posts WHERE status = 'published' LIMIT 1`).slug;
+    assert.equal((await j('/api/note', { key, slug, para: 1e300, body: 'hello' })).status, 400);
+    assert.equal((await j('/api/note', { key, slug, para: 1, body: 'hello' })).status, 200);
+  });
+});

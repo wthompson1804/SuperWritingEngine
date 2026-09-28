@@ -424,6 +424,14 @@ test('autosave keeps drafts safe and never touches published text', async () => 
   const r = await (await fetch(`${base}/write/${id}/autosave`, { method: 'POST', headers: { Cookie: cookie, 'Content-Type': 'application/json' }, body: JSON.stringify({ title: 'Autosaved', body_md: 'v2 typed' }) })).json();
   assert.equal(r.ok, true);
   assert.equal(app.h.get('SELECT body_md FROM posts WHERE id = ?', Number(id)).body_md, 'v2 typed');
+  // A slow older save from the same tab that lands after a newer one is ignored.
+  const save = (seq, body_md) => fetch(`${base}/write/${id}/autosave`, { method: 'POST', headers: { Cookie: cookie, 'Content-Type': 'application/json' }, body: JSON.stringify({ tab: 't1', seq, body_md }) }).then((r) => r.json());
+  await save(2, 'v3 newer');
+  const late = await save(1, 'v2 older');
+  assert.equal(late.stale, true);
+  assert.equal(app.h.get('SELECT body_md FROM posts WHERE id = ?', Number(id)).body_md, 'v3 newer');
+  await save(3, 'v4');
+  assert.equal(app.h.get('SELECT body_md FROM posts WHERE id = ?', Number(id)).body_md, 'v4');
   const pub = app.h.get(`SELECT id FROM posts WHERE slug = 'the-meeting-is-the-work-now'`).id;
   const blocked = await fetch(`${base}/write/${pub}/autosave`, { method: 'POST', headers: { Cookie: cookie, 'Content-Type': 'application/json' }, body: JSON.stringify({ body_md: 'oops' }) });
   assert.equal(blocked.status, 409);

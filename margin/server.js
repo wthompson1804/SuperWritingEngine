@@ -314,7 +314,7 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   function syncFollows(reader, follows) {
     for (const [handle, f] of Object.entries(follows || {})) {
       const a = h.get('SELECT id FROM authors WHERE handle = ?', handle);
-      if (!a) continue;
+      if (!a || !f || typeof f !== 'object') continue;
       if (f.on) h.run('INSERT OR IGNORE INTO reader_follows (reader_id, author_id, created_at) VALUES (?,?,?)', reader.id, a.id, Number(f.ts) || Date.now());
       else h.run('DELETE FROM reader_follows WHERE reader_id = ? AND author_id = ?', reader.id, a.id);
     }
@@ -725,7 +725,7 @@ ${items}
     const post = publishedPost(b.slug);
     const para = Number(b.para);
     const body = String(b.body || '').trim().slice(0, 1200);
-    if (!post || !Number.isInteger(para) || para < 0 || !body) return json(res, { ok: false, error: 'Write something first.' }, 400);
+    if (!post || !Number.isInteger(para) || para < 0 || para > 5000 || !body) return json(res, { ok: false, error: 'Write something first.' }, 400);
     const today = h.get('SELECT count(*) AS n FROM notes WHERE reader_id = ? AND created_at > ?', reader.id, Date.now() - 86400000).n;
     if (today >= 20) return json(res, { ok: false, error: 'That\'s 20 notes today. Come back tomorrow.' }, 429);
     const name = String(b.name || '').trim().slice(0, 40) || 'A reader';
@@ -837,12 +837,22 @@ ${items}
   }));
 
   // ---------- writer tools: autosave, uploads, test hooks ----------
+  const autosaveSeq = new Map();
   on('POST', /^\/write\/(\d+)\/autosave$/, needAuthor(async (req, res, m, ctx) => {
     const b = await readBody(req, 300_000);
     const post = h.get('SELECT * FROM posts WHERE id = ? AND author_id = ?', Number(m[1]), ctx.author.id);
     if (!post) return json(res, { ok: false }, 404);
     // Autosave never publishes and never touches a published piece's live text.
     if (post.status === 'published') return json(res, { ok: false, reason: 'published' }, 409);
+    // Autosaves from one editor tab carry a sequence number; one that arrives
+    // after a later one is dropped, so slow responses can't roll text back.
+    const seq = Number(b.seq), tab = String(b.tab || '').slice(0, 40);
+    if (tab && Number.isFinite(seq)) {
+      const last = autosaveSeq.get(post.id);
+      if (last && last.tab === tab && last.seq >= seq) return json(res, { ok: true, savedAt: last.at, stale: true });
+      if (autosaveSeq.size > 10000) autosaveSeq.delete(autosaveSeq.keys().next().value);
+      autosaveSeq.set(post.id, { tab, seq, at: Date.now() });
+    }
     const body = String(b.body_md ?? post.body_md).slice(0, 200_000);
     h.run('UPDATE posts SET title = ?, dek = ?, body_md = ?, words = ?, updated_at = ? WHERE id = ?',
       String(b.title ?? post.title).trim().slice(0, 140) || post.title, String(b.dek ?? post.dek).trim().slice(0, 240), body, render(body).words, Date.now(), post.id);

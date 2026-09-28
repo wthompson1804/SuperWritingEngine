@@ -29,7 +29,7 @@
   // ---------- autosave ----------
   // Every change goes to this browser at once, and to the server a couple of
   // seconds later (drafts only: a published piece changes only on Update).
-  var dirty = false, saveTimer = null;
+  var dirty = false, saveTimer = null, seq = 0, tab = Math.random().toString(36).slice(2);
   function snapshot() { return { title: title.value, dek: dek.value, body_md: ta.value, at: Date.now() }; }
   function say(text) { if (state) state.textContent = text; }
   function saveLocal() { try { localStorage.setItem(LOCAL, JSON.stringify(snapshot())); } catch (e) { /* ignore */ } }
@@ -37,7 +37,8 @@
     if (D.id === 'new' || D.status === 'published') { say(D.status === 'published' ? 'unsaved changes: press Update to publish them' : 'saved in this browser; Save draft to keep it on Margin'); return; }
     say('saving…');
     var sent = snapshot();
-    fetch('/write/' + D.id + '/autosave', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(sent) })
+    // Numbered so the server can ignore a slow, older save that lands late.
+    fetch('/write/' + D.id + '/autosave', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ seq: ++seq, tab: tab }, sent)) })
       .then(function (r) { return r.json(); })
       .then(function (r) {
         if (!r.ok) { say('not saved: check your connection'); return; }

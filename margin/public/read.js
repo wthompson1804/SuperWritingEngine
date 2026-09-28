@@ -203,7 +203,7 @@
 
   // Arriving from a passed-on link: label the passage itself, so the context
   // is on screen next to the highlight rather than scrolled away above it.
-  var passedPara = source === 'passed' ? params.get('p') : null;
+  var passedPara = source === 'passed' && /^\d{1,5}$/.test(params.get('p') || '') ? params.get('p') : null;
   if (passedPara != null && paraEl(passedPara)) {
     var pp = paraEl(passedPara);
     pp.classList.add('passed-hl');

@@ -6,7 +6,7 @@
 // Control characters are dropped as well: they're never wanted in prose and
 // they make RSS/XML ill-formed.
 function esc(s) {
-  return String(s).replace(/[\x00-\x08\x0b\x0c\x0e-\x1f]/g, '').replace(/[&<>"']/g, (c) => (
+  return String(s).replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\ufffe\uffff]/g, '').replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
 }
@@ -30,7 +30,8 @@ function inline(src, fn) {
   if (fn) out = out.replace(/\[\^([\w-]{1,20})\]/g, (m, id) => { const r = fn(id); return r ? hold(r) : m; });
   out = out.replace(/\[([^[\]]+)\]\(([^()\s]+)\)/g, (m, text, url) => {
     const u = url.replace(/&amp;/g, '&');
-    if (!/^(https?:\/\/|\/|#|mailto:)/i.test(u)) return text;
+    // Site-relative means site-relative: no protocol-relative //host links.
+    if (!/^(https?:\/\/|\/(?![\/\\])|#|mailto:)/i.test(u)) return text;
     return hold(`<a href="${esc(u)}" rel="noopener nofollow">`) + text + hold('</a>');
   });
   out = out.replace(/\*\*(?=\S)(.+?)\*\*/g, '<strong>$1</strong>');
