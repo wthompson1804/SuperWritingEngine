@@ -179,7 +179,9 @@ CREATE TABLE IF NOT EXISTS outbox (
 function open(file) {
   if (file !== ':memory:') fs.mkdirSync(path.dirname(file), { recursive: true });
   const db = new DatabaseSync(file);
-  db.exec('PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;');
+  // WAL + synchronous=NORMAL: durable across a process crash, and the
+  // recommended pairing; only a power cut can lose the last transactions.
+  db.exec('PRAGMA journal_mode = WAL; PRAGMA synchronous = NORMAL; PRAGMA foreign_keys = ON;');
   db.exec(SCHEMA);
   migrate(db);
   return db;
@@ -221,6 +223,7 @@ function migrate(db) {
   db.exec('CREATE INDEX IF NOT EXISTS views_created ON views(created_at)');
   db.exec('CREATE INDEX IF NOT EXISTS mail_due ON mail(status, next_at)');
   db.exec('CREATE INDEX IF NOT EXISTS sessions_author ON sessions(author_id)');
+  db.exec('CREATE INDEX IF NOT EXISTS posts_imported ON posts(author_id, imported_from)');
 }
 
 // Tiny helpers so call sites read cleanly.
@@ -238,7 +241,9 @@ function helpers(db) {
     run: (sql, ...a) => stmt(sql).run(...a),
     tx(fn) {
       db.exec('BEGIN');
-      try { const r = fn(); db.exec('COMMIT'); return r; } catch (e) { db.exec('ROLLBACK'); throw e; }
+      // SQLite may already have rolled back (full disk, I/O error); keep the
+      // real error rather than "no transaction is active".
+      try { const r = fn(); db.exec('COMMIT'); return r; } catch (e) { try { db.exec('ROLLBACK'); } catch { /* already rolled back */ } throw e; }
     },
   };
 }

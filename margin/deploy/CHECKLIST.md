@@ -14,6 +14,7 @@ Work through this in order. Each item is something the code can't do for you.
 - [ ] Only the reverse proxy can reach the app port (`HOST=127.0.0.1`, or a firewall rule).
 - [ ] Outbound traffic from the app is restricted to ports 443 (federation) and your SMTP port. Margin checks addresses before connecting, but a DNS answer can change between the check and the connection; an egress firewall closes that gap.
 - [ ] The proxy limits request bodies to about 52 MB (imports) and has a read timeout of at least 120 s.
+- [ ] Sign-up is open to anyone. Each writer is capped at 500 images / 200 MB and 2,000 imported posts per run, but a wave of throwaway accounts is still a disk-usage risk: watch `data/` growth in the first weeks or put sign-up behind an invite.
 
 ## Data
 - [ ] `data/` is on persistent storage and is the only writable path. Backups land in `data/backups/` daily; copy them off the machine on a schedule, because a backup on the same disk isn't a backup.

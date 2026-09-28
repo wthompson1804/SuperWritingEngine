@@ -43,7 +43,11 @@ function prune(h, now = Date.now()) {
   const out = {};
   out.views = h.run('DELETE FROM views WHERE created_at < ?', now - 90 * DAY).changes;
   out.mail = h.run(`DELETE FROM mail WHERE status IN ('sent', 'failed') AND created_at < ?`, now - 30 * DAY).changes;
+  // A confirmation nobody could send for a week is dead (its link has expired).
+  out.unsent = h.run(`DELETE FROM mail WHERE status = 'pending' AND created_at < ?`, now - 7 * DAY).changes;
   out.outbox = h.run('DELETE FROM outbox WHERE created_at < ?', now - 30 * DAY).changes;
+  // Reader keys that were made and never used for anything.
+  out.readers = h.run(`DELETE FROM readers WHERE email IS NULL AND length(data) < 80 AND updated_at < ? AND id NOT IN (SELECT reader_id FROM reader_follows) AND id NOT IN (SELECT reader_id FROM notes) AND id NOT IN (SELECT reader_id FROM outbox)`, now - 90 * DAY).changes;
   // An inbox that has been failing for a month straight, with no success and
   // nothing still pending, belongs to a dead server: drop its followers.
   // (Decided before old deliveries are deleted, or the evidence is gone.)

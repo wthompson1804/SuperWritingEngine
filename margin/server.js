@@ -35,7 +35,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 class HttpError extends Error { constructor(status, msg) { super(msg); this.status = status; } }
 
-function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'data', 'margin.db'), demoSignals = process.env.MARGIN_DEMO_SIGNALS !== '0', secureCookies = process.env.MARGIN_SECURE_COOKIES === '1',
+function createApp({ mediaQuota = {}, dbFile = process.env.MARGIN_DB || path.join(__dirname, 'data', 'margin.db'), demoSignals = process.env.MARGIN_DEMO_SIGNALS !== '0', secureCookies = process.env.MARGIN_SECURE_COOKIES === '1',
   // No mail provider is wired up, so by default the confirmation link is shown on screen
   // instead of being emailed. Set MARGIN_SHOW_MAIL=0 once real delivery exists.
   // Shows the confirmation link on screen, because no mail is actually sent.
@@ -135,7 +135,10 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
     const text = Buffer.concat(chunks).toString('utf8');
     const type = String(req.headers['content-type'] || '');
     if (type.includes('application/json') || type.includes('text/plain')) {
-      try { return text ? JSON.parse(text) : {}; } catch { throw new HttpError(400, 'Bad JSON'); }
+      let v;
+      try { v = text ? JSON.parse(text) : {}; } catch { throw new HttpError(400, 'Bad JSON'); }
+      if (!v || typeof v !== 'object' || Array.isArray(v)) throw new HttpError(400, 'Bad JSON');
+      return v;
     }
     return Object.fromEntries(new URLSearchParams(text));
   }
@@ -181,7 +184,7 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
   // Strict on purpose: the SMTP client takes the part inside <>, so an
   // address like x<victim@b.c>y would reach victim@b.c under a different
   // key every time and defeat the per-address limits below.
-  const EMAIL_RE = /^[a-z0-9._%+'-]+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,63}$/;
+  const EMAIL_RE = /^[a-z0-9][a-z0-9._%+'-]*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,63}$/;
   const cleanEmail = (v) => String(v || '').trim().toLowerCase().slice(0, 200);
   const CONFIRM_TTL = 7 * 86400000;
 
@@ -241,13 +244,27 @@ function createApp({ dbFile = process.env.MARGIN_DB || path.join(__dirname, 'dat
 
   // Stores an image (sniffed, content-addressed) and returns its file name,
   // or null if it isn't a PNG/JPEG/GIF/WebP. Used by upload and by import.
+  // Each writer gets a fixed share of the disk; the disk also holds the
+  // database, so one account must not be able to fill it.
+  const MEDIA_QUOTA = { bytes: 200 * 1024 * 1024, files: 500, ...mediaQuota };
+  function mediaRoom(authorId, extra = 0) {
+    const u = h.get('SELECT coalesce(sum(bytes), 0) AS bytes, count(*) AS files FROM media WHERE author_id = ?', authorId);
+    return u.bytes + extra <= MEDIA_QUOTA.bytes && u.files < MEDIA_QUOTA.files;
+  }
   function saveMedia(authorId, buf) {
     const kind = sniffImage(buf);
     if (!kind || buf.length > 5 * 1024 * 1024) return null;
     const file = `${crypto.createHash('sha256').update(buf).digest('hex').slice(0, 24)}.${kind[1]}`;
-    fs.mkdirSync(MEDIA_DIR, { recursive: true });
     const dest = path.join(MEDIA_DIR, file);
-    if (!fs.existsSync(dest)) fs.writeFileSync(dest, buf);
+    if (h.get('SELECT 1 FROM media WHERE author_id = ? AND file = ?', authorId, file) && fs.existsSync(dest)) return file;
+    if (!mediaRoom(authorId, buf.length)) return false; // over quota
+    fs.mkdirSync(MEDIA_DIR, { recursive: true });
+    if (!fs.existsSync(dest)) {
+      // Write beside, then rename: a full disk must not leave a short file
+      // that a later upload of the same bytes would trust.
+      const tmp = `${dest}.${process.pid}.tmp`;
+      try { fs.writeFileSync(tmp, buf); fs.renameSync(tmp, dest); } catch (e) { try { fs.unlinkSync(tmp); } catch { /* gone */ } throw e; }
+    }
     h.run('INSERT OR IGNORE INTO media (author_id, file, mime, bytes, created_at) VALUES (?,?,?,?,?)', authorId, file, kind[0], buf.length, Date.now());
     return file;
   }
@@ -601,16 +618,19 @@ ${items}
     json(res, { ok: true, url: `/p/${post.slug}?via=passed&p=${para}` });
   });
 
-  on('POST', /^\/api\/keep$/, async (req, res) => {
+  on('POST', /^\/api\/keep$/, async (req, res, m, ctx) => {
     const b = await readBody(req, 4096);
     const post = publishedPost(b.slug);
     const para = Number(b.para);
     if (!post || !Number.isInteger(para) || para < 0 || para > 5000 || !UUID.test(String(b.pv))) return json(res, { ok: false }, 400);
+    // Keeps count toward ranking, so like passes only the first few per
+    // address count. The reader's own copy lives in their browser regardless.
+    if (!allow(`keep:${ctx.ip}:${post.id}`, 10, 3600000)) return json(res, { ok: true });
     h.run('INSERT OR IGNORE INTO keeps (post_id, pv, para, created_at) VALUES (?,?,?,?)', post.id, b.pv, para, Date.now());
     json(res, { ok: true });
   });
 
-  on('POST', /^\/api\/follow$/, async (req, res) => {
+  on('POST', /^\/api\/follow$/, async (req, res, m, ctx) => {
     const b = await readBody(req, 4096);
     const a = h.get('SELECT id FROM authors WHERE handle = ?', String(b.handle || ''));
     if (!a) return json(res, { ok: false }, 400);
@@ -618,24 +638,25 @@ ${items}
     const delta = Number(b.delta) < 0 ? -1 : 1;
     const reader = b.key ? readerByKey(b.key) : null;
     const via = b.via ? h.get('SELECT id FROM authors WHERE handle = ?', String(b.via)) : null;
-    h.run('INSERT INTO follow_events (author_id, post_id, delta, keyed, via_author_id, created_at) VALUES (?,?,?,?,?,?)', a.id, post ? post.id : null, delta, reader ? 1 : 0, via && via.id !== a.id ? via.id : null, Date.now());
+    if (allow(`follow:${ctx.ip}:${a.id}`, 10, 3600000)) h.run('INSERT INTO follow_events (author_id, post_id, delta, keyed, via_author_id, created_at) VALUES (?,?,?,?,?,?)', a.id, post ? post.id : null, delta, reader ? 1 : 0, via && via.id !== a.id ? via.id : null, Date.now());
     if (reader) syncFollows(reader, { [b.handle]: { on: delta > 0, ts: Date.now() } });
     json(res, { ok: true });
   });
 
-  on('POST', /^\/api\/ask$/, async (req, res) => {
+  on('POST', /^\/api\/ask$/, async (req, res, m, ctx) => {
     const b = await readBody(req, 4096);
     const post = publishedPost(b.slug);
     if (!post || !['follow', 'key'].includes(b.kind) || !['shown', 'accepted'].includes(b.event)) return json(res, { ok: false }, 400);
-    h.run('INSERT INTO asks (post_id, kind, event, created_at) VALUES (?,?,?,?)', post.id, b.kind, b.event, Date.now());
+    if (allow(`ask:${ctx.ip}:${post.id}`, 20, 3600000)) h.run('INSERT INTO asks (post_id, kind, event, created_at) VALUES (?,?,?,?)', post.id, b.kind, b.event, Date.now());
     json(res, { ok: true });
   });
 
-  on('POST', /^\/api\/tip$/, async (req, res) => {
+  on('POST', /^\/api\/tip$/, async (req, res, m, ctx) => {
     const b = await readBody(req, 4096);
     const post = publishedPost(b.slug);
     const cents = Math.floor(Number(b.cents));
     if (!post || !(cents >= 100 && cents <= 50000)) return json(res, { ok: false }, 400);
+    if (!allow(`tip:${ctx.ip}:${post.id}`, 5, 3600000)) return json(res, { ok: false, error: 'That is enough tipping for one hour.' }, 429);
     h.run('INSERT INTO tips (post_id, amount_cents, note, created_at) VALUES (?,?,?,?)', post.id, cents, String(b.note || '').slice(0, 280), Date.now());
     json(res, { ok: true, simulated: true });
   });
@@ -818,13 +839,19 @@ ${items}
 
   // ----- portability and moderation on the desk -----
   on('GET', /^\/desk\/import$/, needAuthor((req, res, m, ctx) => html(res, views.importPage({ author: ctx.author }))));
+  // An import runs on the main thread, so only one at a time, a few per
+  // writer per hour, and never more than IMPORT_MAX posts in one go.
+  let importing = false;
   on('POST', /^\/desk\/import$/, needAuthor(async (req, res, m, ctx) => {
+    if (!allow(`import:${ctx.author.id}`, 6, 3600000)) return json(res, { ok: false, error: 'Six imports an hour is the limit. Try again later.' }, 429);
+    if (importing) return json(res, { ok: false, error: 'Another import is running. Try again in a minute.' }, 429);
     const buf = await readRaw(req, 50 * 1024 * 1024);
+    importing = true;
     try {
       json(res, { ok: true, report: importSubstack(h, ctx.author.id, buf, { saveMedia }) });
     } catch (e) {
       json(res, { ok: false, error: e.message || 'Could not read that file.' }, 400);
-    }
+    } finally { importing = false; }
   }));
   on('GET', /^\/desk\/export\.zip$/, needAuthor((req, res, m, ctx) => {
     send(res, 200, exportAuthor(h, ctx.author, { readMedia }), { 'Content-Type': 'application/zip', 'Content-Disposition': `attachment; filename="margin-${ctx.author.handle}-export.zip"` });
@@ -860,8 +887,10 @@ ${items}
   }));
 
   on('POST', /^\/desk\/upload$/, needAuthor(async (req, res, m, ctx) => {
+    if (!allow(`upload:${ctx.author.id}`, 120, 3600000)) return json(res, { ok: false, error: 'That is a lot of images for one hour. Try again later.' }, 429);
     const buf = await readRaw(req, 5 * 1024 * 1024);
     const file = saveMedia(ctx.author.id, buf);
+    if (file === false) return json(res, { ok: false, error: `Your image space is full (${MEDIA_QUOTA.files} files or ${MEDIA_QUOTA.bytes / 1048576} MB). Reuse images you have already uploaded.` }, 413);
     if (!file) return json(res, { ok: false, error: 'Use a PNG, JPEG, GIF or WebP image under 5 MB.' }, 400);
     json(res, { ok: true, url: `/media/${file}` });
   }));
@@ -926,8 +955,15 @@ ${items}
   on('POST', /^\/ap\/inbox$/, inbox);
 
   // Liveness for load balancers: cheap, no auth, and no detail that helps a prober.
+  // Readiness, not just liveness: the database must take a write lock and
+  // the media directory must be writable, or the site is only half up.
   on('GET', /^\/healthz$/, (req, res) => {
-    try { h.get('SELECT 1'); json(res, { ok: true }); } catch { json(res, { ok: false }, 503); }
+    try {
+      h.db.exec('BEGIN IMMEDIATE; ROLLBACK;');
+      fs.mkdirSync(MEDIA_DIR, { recursive: true });
+      fs.accessSync(MEDIA_DIR, fs.constants.W_OK);
+      json(res, { ok: true });
+    } catch (e) { json(res, { ok: false, error: String(e.message).slice(0, 120) }, 503); }
   });
 
   // ---------- dispatcher ----------

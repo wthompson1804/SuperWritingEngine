@@ -97,6 +97,9 @@ function createMailer(h, { smtpUrl = process.env.MARGIN_SMTP_URL || '', from = p
   const deliver = send || ((msg) => smtpSend(cfg, msg));
   // A crash mid-send leaves rows claimed; on startup they go back in the queue.
   h.run(`UPDATE mail SET status = 'pending' WHERE status = 'sending'`);
+  // Mail queued before delivery was configured (or an old, pre-queue row)
+  // must not go out in a burst a week later: its links have expired anyway.
+  h.run(`UPDATE mail SET status = 'failed', last_error = 'expired before sending' WHERE status = 'pending' AND created_at < ?`, Date.now() - 7 * 86400000);
   let draining = false;
 
   async function drain() {

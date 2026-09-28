@@ -421,3 +421,73 @@ test('malformed sync entries and out-of-range note paragraphs are handled, not c
     assert.equal((await j('/api/note', { key, slug, para: 1, body: 'hello' })).status, 200);
   });
 });
+
+// ---------- exhaustion review: regressions ----------
+const png = (n) => Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), Buffer.from(`image number ${n}`)]);
+const loginMara = async (base) => (await fetch(base + '/login', { method: 'POST', redirect: 'manual', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'handle=mara&password=demo-password' })).headers.get('set-cookie').split(';')[0];
+
+test('a writer cannot fill the disk: media quota, uploads outside it refused', async () => {
+  await withApp({ mediaQuota: { files: 3 } }, async (app, base) => {
+    const cookie = await loginMara(base);
+    const up = (buf) => fetch(base + '/desk/upload', { method: 'POST', headers: { 'Content-Type': 'image/png', Cookie: cookie }, body: buf });
+    for (let i = 0; i < 3; i++) assert.equal((await up(png(i))).status, 200);
+    const full = await up(png(99));
+    assert.equal(full.status, 413);
+    assert.match((await full.json()).error, /image space is full/);
+    assert.equal((await up(png(1))).status, 200, 'an image already stored is always fine');
+    assert.equal(app.h.get(`SELECT count(*) n FROM media`).n, 3);
+  });
+});
+
+test('keeps, follows, asks and tips are rate-limited per address so ranking cannot be bought', async () => {
+  await withApp({}, async (app, base) => {
+    const j = (p, b) => fetch(base + p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) });
+    const slug = app.h.get(`SELECT slug FROM posts WHERE status = 'published' LIMIT 1`).slug;
+    for (let i = 0; i < 30; i++) await j('/api/keep', { slug, para: i % 5, pv: require('node:crypto').randomUUID() });
+    assert.equal(app.h.get('SELECT count(*) n FROM keeps').n, 10);
+    for (let i = 0; i < 30; i++) await j('/api/follow', { handle: 'theo', delta: 1 });
+    assert.equal(app.h.get('SELECT count(*) n FROM follow_events').n, 10);
+    let last;
+    for (let i = 0; i < 8; i++) last = await j('/api/tip', { slug, cents: 50000 });
+    assert.equal(last.status, 429);
+    assert.equal(app.h.get('SELECT count(*) n FROM tips').n, 5);
+    // A JSON body that is not an object is a 400, not a crash.
+    for (const body of ['null', '5', '[1]', '"x"']) {
+      const r = await fetch(base + '/api/read', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+      assert.equal(r.status, 400, body);
+    }
+  });
+});
+
+test('import of thousands of colliding slugs stays linear and is capped', async () => {
+  const { writeZip } = require('../lib/zip');
+  await withApp({}, async (app, base) => {
+    const cookie = await loginMara(base);
+    const rows = ['post_id,post_date,is_published,type,title,subtitle,audience'];
+    const files = [];
+    for (let i = 1; i <= 2500; i++) { rows.push(`${i}.same-title,2024-01-01T00:00:00Z,true,newsletter,Same title,,everyone`); files.push([`posts/${i}.same-title.html`, Buffer.from(`<p>Body ${i}</p>`)]); }
+    files.push(['posts.csv', Buffer.from(rows.join('\n') + '\n')]);
+    const t = Date.now();
+    const r = await (await fetch(base + '/desk/import', { method: 'POST', headers: { 'Content-Type': 'application/zip', Cookie: cookie }, body: writeZip(files) })).json();
+    const ms = Date.now() - t;
+    assert.equal(r.ok, true);
+    assert.equal(r.report.posts.published, 2000, 'capped at 2000 per run');
+    assert.equal(r.report.capped, 2000);
+    assert.ok(ms < 4000, `import took ${ms} ms`);
+    assert.equal(app.h.get(`SELECT count(DISTINCT slug) n FROM posts WHERE slug LIKE 'same-title%'`).n, 2000);
+  });
+});
+
+test('health checks readiness; mail that could not be sent for a week is dropped', async () => {
+  await withApp({}, async (app, base) => {
+    assert.equal((await fetch(base + '/healthz')).status, 200);
+    const old = Date.now() - 8 * 86400000;
+    app.h.run(`INSERT INTO mail (to_email, subject, body, kind, created_at, next_at) VALUES ('a@b.co','s','b','confirm',?,0)`, old);
+    app.h.run(`INSERT INTO mail (to_email, subject, body, kind, created_at, next_at) VALUES ('c@d.co','s','b','confirm',?,0)`, Date.now());
+    assert.equal(app.prune().unsent, 1);
+    app.h.run(`INSERT INTO mail (to_email, subject, body, kind, created_at, next_at) VALUES ('e@f.co','s','b','confirm',?,0)`, old);
+    const sent = [];
+    createMailer(app.h, { from: 'x@y.co', send: async (m) => sent.push(m) });
+    assert.equal(app.h.get(`SELECT status FROM mail WHERE to_email = 'e@f.co'`).status, 'failed', 'a stale row is not sent when delivery is switched on');
+  });
+});

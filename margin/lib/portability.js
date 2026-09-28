@@ -15,12 +15,17 @@ const { render } = require('./markdown');
 
 const truthy = (v) => /^(true|t|1|yes)$/i.test(String(v || '').trim());
 
-function uniqueSlug(h, base) {
+// `next` remembers, per base, where the last probe for this run stopped, so
+// a thousand posts sharing one title cost a thousand lookups, not a million.
+function uniqueSlug(h, base, next = new Map()) {
   const clean = String(base || '').toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'untitled';
-  let slug = clean; let n = 2;
-  while (h.get('SELECT id FROM posts WHERE slug = ?', slug)) slug = `${clean}-${n++}`;
+  let n = next.get(clean) || 1;
+  let slug = n === 1 ? clean : `${clean}-${n}`;
+  while (h.get('SELECT id FROM posts WHERE slug = ?', slug)) { n++; slug = `${clean}-${n}`; }
+  next.set(clean, n + 1);
   return slug;
 }
+const IMPORT_MAX = 2000; // posts per run; the import blocks the event loop
 
 function findFile(files, test) {
   for (const [name, data] of files) if (test(name)) return [name, data];
@@ -55,7 +60,10 @@ function importSubstack(h, authorId, zipBuf, { saveMedia = null, now = Date.now(
   }
 
   h.tx(() => {
+    const slugNext = new Map();
+    let taken = 0;
     for (const row of postsCsv ? parseCsv(postsCsv[1].toString('utf8')) : []) {
+      if (taken >= IMPORT_MAX) { report.posts.skipped++; report.capped = IMPORT_MAX; continue; }
       const postId = String(row.post_id || '').trim();
       if (!postId) { report.posts.skipped++; continue; }
       const type = String(row.type || 'newsletter').toLowerCase();
@@ -77,7 +85,8 @@ function importSubstack(h, authorId, zipBuf, { saveMedia = null, now = Date.now(
       const audience = String(row.audience || 'everyone').toLowerCase();
       const published = truthy(row.is_published) && audience === 'everyone';
       const date = Date.parse(row.post_date) || now;
-      const slug = uniqueSlug(h, postId.includes('.') ? postId.slice(postId.indexOf('.') + 1) : title);
+      const slug = uniqueSlug(h, postId.includes('.') ? postId.slice(postId.indexOf('.') + 1) : title, slugNext);
+      taken++;
       h.run(`INSERT INTO posts (author_id, slug, title, dek, body_md, words, status, published_at, created_at, updated_at, imported_from)
              VALUES (?,?,?,?,?,?,?,?,?,?,?)`, authorId, slug, title.slice(0, 140), dek, body, render(body).words,
       published ? 'published' : 'draft', published ? date : null, date, now, origin);
@@ -88,7 +97,7 @@ function importSubstack(h, authorId, zipBuf, { saveMedia = null, now = Date.now(
     for (const [, data] of [...files].filter(([n]) => /(^|\/)email_list[^/]*\.csv$/i.test(n))) {
       for (const row of parseCsv(data.toString('utf8'))) {
         const email = String(row.email || '').trim().toLowerCase();
-        if (!/^[a-z0-9._%+'-]+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,63}$/i.test(email) || truthy(row.email_disabled)) { report.subscribers.skipped++; continue; }
+        if (!/^[a-z0-9][a-z0-9._%+'-]*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,63}$/i.test(email) || truthy(row.email_disabled)) { report.subscribers.skipped++; continue; }
         if (truthy(row.active_subscription)) report.subscribers.paid++;
         const res = h.run(`INSERT OR IGNORE INTO email_subs (author_id, email, token, status, source, created_at, confirmed_at)
                            VALUES (?,?,?, 'active', 'import', ?, ?)`, authorId, email, crypto.randomBytes(18).toString('base64url'), Date.parse(row.created_at) || now, Date.parse(row.created_at) || now);
