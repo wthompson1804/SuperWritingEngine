@@ -45,8 +45,8 @@ v4 was mostly about making what exists work well for each persona. There were tw
 | Jargon on the desk | Renamed: "opened" and "read to the end" (was opens / verified reads); "When readers were asked" (was The earned ask); "Subtitle" (was Dek) |
 
 **Still not done, honestly:**
-- Real email and payment delivery.
-- ActivityPub hasn't been tried against a real Mastodon server; this environment can't reach the public internet. Also missing on the fediverse side: replies, boosts, Update on edit, and Delete on unpublish.
+- Payments. Email is now real (SMTP) when configured.
+- ActivityPub hasn't been tried against a real Mastodon server; this environment can't reach the public internet. Delivery, signatures and the SSRF guard are tested against local stand-ins only. Also missing on the fediverse side: replies, boosts, Update on edit, and Delete on unpublish.
 - The outbound URL guard resolves DNS and blocks private ranges, but a DNS answer can change between check and connect (rebinding). Production should still use an egress firewall.
 - The docked toolbar still appears *alongside* the phone's native menu (a web page can't hide that menu). It's clear of it now, not instead of it.
 - Selection on touch still depends on the phone's long-press selection. There's no double-tap-to-keep yet.
@@ -81,6 +81,16 @@ Desk research (sources in [RESEARCH.md](RESEARCH.md)) overturned three of v2's b
 - Substack's growth comes from exactly the app-and-network machinery Margin refuses to build.
 
 Margin is betting that a smaller, calmer network, one that sends readers between writers deliberately, is enough. That hasn't been shown.
+
+---
+
+## 0c. Production hardening (after v4)
+
+Three adversarial review rounds (code correctness, security, and a hands-on browser bug hunt, then two further security passes on the fixes) found about 70 issues. All were fixed, each with a regression test. The serious ones: quadratic regexes that let one anonymous request stall the server; a 66 KB zip that expanded to gigabytes; host-header poisoning of email links; server-side request forgery through the fediverse inbox; forged reads moving pieces up the front page; a sync race that lost readers' passages; old confirmation links re-subscribing people who had unsubscribed; and, once real email existed, confirmation-mail flooding and unverified addresses reaching writers' lists.
+
+What "production ready" now means here: a dependency-free SMTP mailer with a retrying queue; online SQLite backups and pruning; graceful shutdown; a health endpoint; JSON request logs; hashed session tokens; async password hashing; a production mode (triggered by an https `MARGIN_PUBLIC_URL`) that turns on Secure cookies and HSTS and refuses unsafe settings; and deployment files (Docker, systemd, Caddy). `deploy/CHECKLIST.md` lists what the code can't do for you.
+
+What it still is not: multi-process, load-tested, or reviewed by a human security professional. It's a single-server app that has been attacked hard by automated reviewers and fixed accordingly.
 
 ---
 
