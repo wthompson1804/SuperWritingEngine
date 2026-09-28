@@ -1,0 +1,6 @@
+data/
+test/
+node_modules/
+*.md
+deploy/
+.git*
