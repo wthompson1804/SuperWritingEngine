@@ -1,7 +1,7 @@
 {
  "started": "2026-11-15T18:21:08+00:00",
- "srp_pages": 291,
- "detail_pages": 835,
+ "srp_pages": 296,
+ "detail_pages": 858,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -404,13 +404,19 @@
    "drive_min": 37.1,
    "props": 3,
    "rows": 10
+  },
+  {
+   "city": "ny/yonkers",
+   "drive_min": 37.1,
+   "props": 24,
+   "rows": 36
   }
  ],
  "cities_unmatched_far": [],
- "props_discovered": 1499,
- "props_skipped_lowprice_gt_3000": 664,
+ "props_discovered": 1523,
+ "props_skipped_lowprice_gt_3000": 665,
  "reasons": {
-  "ok": 830,
+  "ok": 853,
   "no_unit_le_3000": 5
  },
  "blocked": null,
