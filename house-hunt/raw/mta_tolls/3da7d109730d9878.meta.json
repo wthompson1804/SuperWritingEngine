@@ -1,0 +1,7 @@
+{
+ "url": "https://api.us.socrata.com/api/catalog/v1?domains=data.ny.gov&q=MTA+Bridges+and+Tunnels+toll+rates&limit=20",
+ "retrieved_at": "2026-11-15T23:44:05+00:00",
+ "status": 200,
+ "path": "raw/mta_tolls/3da7d109730d9878.json",
+ "source": "mta_tolls"
+}

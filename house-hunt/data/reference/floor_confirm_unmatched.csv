@@ -1,36 +1,11 @@
 building_id,unit_label,floor,basis,source_url,value
 b_812b71fdaf,?,,unparsed,https://www.trulia.com/home/949-w-end-ave-d-new-york-ny-10025-2106139475,top floor (number not stated; city data lists 12 floors)
 b_564c337ac7,*,2.0,confirmed,https://www.avaloncommunities.com/new-jersey/somerville-apartments/avalon-somerville-station/apartment/NJ033-NJ033-022-265,2
-b_564c337ac7,*,2.0,confirmed,https://www.avaloncommunities.com/new-jersey/somerville-apartments/avalon-somerville-station/,2
-b_d1ea8abdfa,*,5.0,confirmed,https://sightmap.com/embed/5eved96mwqo,5
-b_d1ea8abdfa,*,5.0,confirmed,https://sightmap.com/embed/5eved96mwqo,5
-b_2eb7945a67,*,4.0,confirmed,https://libertybayclub.com/floorplans/,4
-b_b5e1e32afb,*,1.0,confirmed,https://www.jcentraburlington.com/floorplans/,1
-b_b5e1e32afb,*,1.0,confirmed,https://www.jcentraburlington.com/floorplans/,1
-b_17baeace72,*,3.0,confirmed,https://bltliveworkplay.com/apartments/stamford/allure/availability/,3
 b_1897e7d980,231,2.0,confirmed,https://bygomes.com/page-data/property/envy/231/page-data.json,unit 231: 2nd Floor
 b_1897e7d980,308,3.0,confirmed,https://bygomes.com/page-data/property/envy/308/page-data.json,unit 308: 3rd Floor
 b_1897e7d980,309,3.0,confirmed,https://bygomes.com/page-data/property/envy/309/page-data.json,unit 309: 3rd Floor
 b_1897e7d980,G02,1.0,confirmed,https://bygomes.com/page-data/property/envy/G02/page-data.json,unit G02: Ground Floor
-b_c7dc5c431d,*,6.0,confirmed,https://www.trulia.com/home/13828-queens-blvd-6k-jamaica-ny-11435-2061738454,6
-b_c7dc5c431d,*,6.0,confirmed,https://www.zumper.com/listings/29559763p/1-bedroom-briarwood-new-york-ny,6
-b_687bc98c0f,*,3.0,confirmed,https://www.zumper.com/listings/22466815p/studio-briarwood-new-york-ny,3
-b_687bc98c0f,*,3.0,confirmed,https://www.trulia.com/home/13523-82nd-ave-3f-jamaica-ny-11435-2108233681,3
 b_3c6898b295,?,,unparsed,https://www.trulia.com/home/12333-83rd-ave-3203-kew-gardens-ny-11415-2086095362,high floor (unit 3203)
-b_e238fa37aa,*,5.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/shearwood-station,5
-b_e238fa37aa,*,4.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/shearwood-station,4
-b_9ef71faae0,*,13.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/the-leaf,13
-b_9ef71faae0,*,26.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/the-leaf,26
-b_13d50af205,*,7.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/motif,7
-b_13d50af205,*,7.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/motif,7
-b_65e32f9559,*,8.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/two-clinton-park,8
-b_65e32f9559,*,23.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/two-clinton-park,23
-b_70cede3f5b,*,14.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/stella,14
-b_70cede3f5b,*,6.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/stella,6
-b_5e0963f022,*,23.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/one-clinton-park,23
-b_5e0963f022,*,20.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/one-clinton-park,20
-b_590bdd448d,*,7.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/25-maple-avenue,7
-b_590bdd448d,*,6.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/25-maple-avenue,6
 b_89871dc4dd,*,3.0,confirmed,https://www.avaloncommunities.com/new-jersey/union-apartments/avalon-union/apartment/NJ026-NJ026-005-5306,3
 b_4317e61e15,*,6.0,confirmed,https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny,6
 b_4317e61e15,*,6.0,confirmed,https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny,6

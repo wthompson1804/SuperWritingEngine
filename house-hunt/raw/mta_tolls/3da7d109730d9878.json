@@ -1,0 +1,3622 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "MTA Bridges & Tunnels Hourly Traffic Rates: 2010 - 2025",
+            "id" : "qzve-kjga",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This deprecated dataset provides data showing the number of vehicles (including cars, buses, trucks and motorcycles) that pass through each of the bridges and tunnels operated by the MTA each hour of the day. For a more detailed look traffic, refer to dataset https://data.ny.gov/d/ebfx-2m7v/.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "http://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-04-17T14:50:15.000Z",
+            "createdAt" : "2015-11-12T18:56:42.000Z",
+            "metadata_updated_at" : "2025-04-17T14:50:15.000Z",
+            "data_updated_at" : "2025-04-14T11:00:44.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 225,
+                "page_views_last_month" : 828,
+                "page_views_total" : 55274,
+                "page_views_last_week_log" : 7.820178962415189,
+                "page_views_last_month_log" : 9.69522829149575,
+                "page_views_total_log" : 15.754339499590952
+              },
+            "columns_name" :
+              [
+                "Hour",
+                "Date",
+                "Plaza ID",
+                "# Vehicles - VToll",
+                "Direction",
+                "# Vehicles - E-ZPass"
+              ],
+            "columns_field_name" :
+              [
+                "hour",
+                "date",
+                "plaza_id",
+                "vehicles_vtoll",
+                "direction",
+                "vehicles_e_zpass"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Calendar date",
+                "Number",
+                "Number",
+                "Text",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "This is the hour (0-23) associated with the line data (0 = between 12 AM to 1 AM)",
+                "This is the date associated with the line data.",
+                "This is the Plaza number or Facility ID which is a number-coded ID representing each toll plaza.  21 = Robert F. Kennedy Bridge Bronx Plaza and Queens Plaza (TBX); 22 = Robert F. Kennedy Bridge Manhattan Plaza (TBM); 23 = Bronx-Whitestone Bridge (BWB); 24 = Henry Hudson Bridge (HHB); 25 = Marine Parkway-Gil Hodges Memorial Bridge (MPB); 26 = Cross Bay Veterans Memorial Bridge (CBB); 27 = Queens Midtown Tunnel (QMT); 28 = Hugh L. Carey Tunnel (HCT); 29 = Throgs Neck Bridge (TNB); 30 = Verrazano-Narrows Bridge (VNB)",
+                "The column labeled VToll is the number of vehicles passing by facilities without E-ZPass Tag or carried malfunctional tag. Toll will be collected by mail later.",
+                "Direction of Traffic: I = Inbound (IB); O = Outbound (OB).  TBX: IB – Manhattan or Queens or The Bronx (two Toll Plazas at Queens northbound and Bronx southbound) TBM: OB – The Bronx or Queens BWB: IB - The Bronx, OB – Queens; HHB: IB – Manhattan, OB – The Bronx;  MPB: IB – Rockaways, OB – Brooklyn;  CBB: IB – Rockaways, OB – Queens; QMT: IB – Manhattan, OB – Queens;  HCT: IB – Manhattan, OB – Brooklyn;  TNB: IB – The Bronx, OB – Queens; VNB: OB - Staten Island, IB - Brooklyn",
+                "This is the number of vehicles that pass through each bridge or tunnel’s toll plaza using E-ZPass."
+              ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                { "view" : "date", "align" : "center" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                { "align" : "center" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                }
+              ],
+            "download_count" : 23046,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2021-04-23T19:38:15.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "traffic",
+                "hourly",
+                "mta bridges & tunnels",
+                "b&t",
+                "bridges & tunnels"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "https://data.ny.gov/d/ebfx-2m7v/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Toll plaza"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Bridges and Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "2010 - 2025"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "This dataset is no longer updated. Data users should use https://data.ny.gov/d/ebfx-2m7v/ instead."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/qzve-kjga",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bridges-Tunnels-Hourly-Traffic-Rates-2010-2025/qzve-kjga",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Daily Ridership and Traffic: Beginning 2020",
+            "id" : "sayj-mze2",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The daily ridership dataset provides systemwide ridership and traffic estimates for subways (including the Staten Island Railway), buses, Long Island Rail Road, Metro-North Railroad, Access-A-Ride, Bridges and Tunnels, and the Central Business District and Congestion Relief Zone since the start of Congestion Pricing",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-13T23:03:59.000Z",
+            "createdAt" : "2025-01-03T21:43:33.000Z",
+            "metadata_updated_at" : "2026-11-13T23:03:58.000Z",
+            "data_updated_at" : "2026-11-13T23:03:59.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 1427,
+                "page_views_last_month" : 7403,
+                "page_views_total" : 92677,
+                "page_views_last_week_log" : 10.4797802640291,
+                "page_views_last_month_log" : 12.854089179870575,
+                "page_views_total_log" : 16.499939290592764
+              },
+            "columns_name" : [ "Count", "Mode", "Date" ],
+            "columns_field_name" : [ "count", "mode", "date" ],
+            "columns_datatype" : [ "Number", "Text", "Calendar date" ],
+            "columns_description" :
+              [
+                "The daily total estimated ridership or traffic",
+                "The MTA mode being measured",
+                "The date of travel (MM/DD/YYYY)"
+              ],
+            "columns_format" :
+              [
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {},
+                { "view" : "date", "align" : "center" }
+              ],
+            "download_count" : 133578,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-03T21:51:45.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "mta bridges & tunnels",
+                "ridership",
+                "sir",
+                "staten island railway",
+                "subway",
+                "traffic",
+                "paratransit",
+                "nyct",
+                "new york city transit",
+                "mta bus",
+                "passengers",
+                "mtabc",
+                "mnr",
+                "metro-north railroad",
+                "metro-north",
+                "long island rail road",
+                "lirr",
+                "daily",
+                "customers",
+                "congestion relief zone",
+                "commuter rail",
+                "central business district tolling program",
+                "central business district",
+                "cbdtp",
+                "bus",
+                "b&t",
+                "access-a-ride",
+                "aar"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "Due to the processes followed to allow next-day ridership and traffic figures to be published, the figures in this dataset may differ from official ridership totals published elsewhere by MTA."
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Agency, day"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York Metropolitan Area"
+                },
+                {
+                  "key" : "Dataset-Summary_Data-Frequency",
+                  "value" : "Weekdays"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Daily"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York City Transit, MTA Bus Company, Long Island Rail Road, Metro-North Railroad, Access-A-Ride, MTA Bridges and Tunnels, Staten Island Railway"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 3/1/2020"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/sayj-mze2",
+        "link" : "https://data.ny.gov/Transportation/MTA-Daily-Ridership-and-Traffic-Beginning-2020/sayj-mze2",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bridges & Tunnels Hourly Reconciled Crossings: 2019 - 2024",
+            "id" : "rtih-nq26",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset provides data showing the most updated view of toll collections by payment method (E-ZPass, Tolls by Mail, and Unbillable) for each vehicle that crosses an MTA-owned facility.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-09-19T15:40:08.000Z",
+            "createdAt" : "2025-09-15T20:41:17.000Z",
+            "metadata_updated_at" : "2025-09-19T15:40:08.000Z",
+            "data_updated_at" : "2025-09-19T15:17:09.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 51,
+                "page_views_last_month" : 141,
+                "page_views_total" : 11217,
+                "page_views_last_week_log" : 5.700439718141093,
+                "page_views_last_month_log" : 7.149747119504682,
+                "page_views_total_log" : 13.453527867681785
+              },
+            "columns_name" :
+              [
+                "Payment Method",
+                "Facility ID",
+                "Transaction Type",
+                "Traffic Count",
+                "Revenue Collected",
+                "Direction",
+                "Vehicle Class",
+                "Facility",
+                "Vehicle Class Description",
+                "Hour",
+                "Date",
+                "Transit Timestamp",
+                "Vehicle Class Category"
+              ],
+            "columns_field_name" :
+              [
+                "payment_method",
+                "facility_id",
+                "transaction_type",
+                "traffic_count",
+                "revenue_collected",
+                "direction",
+                "vehicle_class",
+                "facility",
+                "vehicle_class_description",
+                "hour",
+                "date",
+                "transit_timestamp",
+                "vehicle_class_category"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Calendar date",
+                "Calendar date",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Latest payment method for the finalized transaction, which depends on whether the toll or fee was fully collected or not. Options include E-ZPass, Tolls by Mail, System Unbillable, or Customer Unbillable.",
+                "This is a number-coded ID representing each toll plaza. 21 - Robert F. Kennedy Bridge Bronx;  22 - Robert F. Kennedy Bridge Manhattan;  23 - Bronx - Whitestone Bridge;  24 - Henry Hudson Bridge;  25 - Marine Parkway Bridge;  26 - Cross Bay Bridge;  27 - Queens Midtown Tunnel;  28 - Hugh L. Carey Tunnel;  29 - Throgs Neck Bridge;  30 – Verrazzano - Narrows Bridge",
+                "Detail of transaction, respective to the latest payment method: E-ZPass is either posted to a Home agency (New York Customer Service Center, labeled as NYCSC) or Away (non-NYCSC) agency; Tolls by Mail are sent to either a unregistered private video account (PUVA), unregistered business video account (BUVA), or unregistered video account (UVA) account;  Customer or System unbillable transactions are further detailed.",
+                "The number of vehicle crossings.",
+                "Total tolls and fees collected.",
+                "The cardinal traffic direction and respective borough name. In the case of the Cross Bay Veterans Memorial Bridge, only the traffic direction is listed as it is within Queens.",
+                "Prior to September 1, 2023 vehicle classes 1-21 were used. Currently classes 31-39 are used. Additional information is available in the overview documentation.",
+                "Full name of the toll plaza.",
+                "Description of vehicle based on class. ",
+                "The hour of the crossings (0-23).",
+                "The date of the crossings without the hourly timestamp.",
+                "Timestamp the crossings took place in local time. All crossings here are rounded up to the nearest hour. For example, a crossing that took place at 1:37pm will be reported as having taken place at 1pm.",
+                "Broader category of vehicle class used for reporting."
+              ],
+            "columns_format" :
+              [
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                { "view" : "date", "align" : "center" },
+                { "view" : "date_time", "align" : "center" },
+                {}
+              ],
+            "download_count" : 948,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-09-17T18:12:39.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" : [ "hourly traffic", "bridges and tunnels" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Toll plaza"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Bridges and Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "2019-2024"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/rtih-nq26",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bridges-Tunnels-Hourly-Reconciled-Crossings-20/rtih-nq26",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bridges and Tunnels Hourly Crossings: Beginning 2019",
+            "id" : "ebfx-2m7v",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset provides hourly bridge and tunnels crossings by facility, direction, vehicle class, and payment method. This dataset is a count of all traffic on the facilities, regardless of whether the driver ultimately pays the toll.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-09T19:02:04.000Z",
+            "createdAt" : "2025-01-30T19:05:48.000Z",
+            "metadata_updated_at" : "2026-11-09T18:48:03.000Z",
+            "data_updated_at" : "2026-11-09T19:02:04.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 219,
+                "page_views_last_month" : 878,
+                "page_views_total" : 12266,
+                "page_views_last_week_log" : 7.781359713524661,
+                "page_views_last_month_log" : 9.779719355143405,
+                "page_views_total_log" : 13.582494848247523
+              },
+            "columns_name" :
+              [
+                "Date",
+                "Vehicle Class",
+                "Vehicle Class Description",
+                "Transit Timestamp",
+                "Facility",
+                "Direction",
+                "Vehicle Class Category",
+                "Traffic Count",
+                "Facility ID",
+                "Hour",
+                "Payment Method"
+              ],
+            "columns_field_name" :
+              [
+                "date",
+                "vehicle_class",
+                "vehicle_class_description",
+                "transit_timestamp",
+                "facility",
+                "direction",
+                "vehicle_class_category",
+                "traffic_count",
+                "facility_id",
+                "hour",
+                "payment_method"
+              ],
+            "columns_datatype" :
+              [
+                "Calendar date",
+                "Number",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Number",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The date of the crossings without the hourly timestamp.",
+                "Prior to September 1, 2023 vehicle classes 1-21 were used. Currently classes 31-39 are used. Additional information is available in the overview documentation.",
+                "  Description of vehicle based on class. ",
+                "Timestamp the crossings took place in local time. All crossings here are rounded up to the nearest hour. For example, a crossing that took place at 1:37pm will be reported as having taken place at 1pm.",
+                "Full name of the toll plaza.",
+                "The cardinal traffic direction and respective borough name. In the case of the Cross Bay Veterans Memorial Bridge, only the traffic direction is listed as it is within Queens.",
+                "Broader category of vehicle class used for reporting.",
+                "The number of vehicle crossings.",
+                "This is a number-coded ID representing each toll plaza. 21 - Robert F. Kennedy Bridge Bronx;  22 - Robert F. Kennedy Bridge Manhattan;  23 - Bronx Whitestone Bridge;  24 - Henry Hudson Bridge;  25 - Marine Parkway Bridge;  26 - Cross Bay Veterans Memorial Bridge;  27 - Queens Midtown Tunnel;  28 - Hugh L. Carey Tunnel;  29 - Throgs Neck Bridge;  30 - Verrazzano-Narrows Bridge",
+                "The hour of the crossings (0-23).",
+                "Preliminary payment method read from the vehicle of either E-ZPass or Tolls by Mail, subject to change based on the actual payment. "
+              ],
+            "columns_format" :
+              [
+                { "view" : "date", "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "view" : "date_time", "align" : "center" },
+                {},
+                {},
+                {},
+                { "noCommas" : "true", "align" : "right" },
+                { "noCommas" : "true", "align" : "center" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {}
+              ],
+            "download_count" : 3834,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-31T13:44:45.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "e-zpass",
+                "mta bridges & tunnels",
+                "tolls by mail",
+                "traffic",
+                "hourly",
+                "b&t",
+                "bridges & tunnels",
+                "crossings"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Vehicle crossings by hour, facility, direction, vehicle class, and payment type"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Weekly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Bridges and Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2019"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/ebfx-2m7v",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bridges-and-Tunnels-Hourly-Crossings-Beginning/ebfx-2m7v",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bridges and Tunnels Roadway Interdictions of Persistent Toll Violators: Beginning 2019",
+            "id" : "awjr-rbak",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset provides aggregated daily counts of interdictions of persistent toll violators at each B&T facility, including the date and facility of interdiction.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-13T16:06:13.000Z",
+            "createdAt" : "2025-02-04T20:48:46.000Z",
+            "metadata_updated_at" : "2026-11-13T16:05:41.000Z",
+            "data_updated_at" : "2026-11-13T16:06:13.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 33,
+                "page_views_last_month" : 139,
+                "page_views_total" : 1979,
+                "page_views_last_week_log" : 5.08746284125034,
+                "page_views_last_month_log" : 7.129283016944966,
+                "page_views_total_log" : 10.951284714966972
+              },
+            "columns_name" : [
+                               "Facility",
+                               "Date",
+                               "Command",
+                               "Interdictions"
+                             ],
+            "columns_field_name" :
+              [ "facility", "date", "command", "interdictions" ],
+            "columns_datatype" : [ "Text", "Calendar date", "Text", "Number" ],
+            "columns_description" :
+              [
+                "The three-letter ID for each facility.  RFK = Robert F. Kennedy Bridge; BWB = Bronx Whitestone Bridge;  CBB = Cross Bay Bridge;  HHB = Henry Hudson Bridge;  MPB = Marine Parkway Bridges;  QMT = Queens Midtown Tunnel;  HLC = Hugh L. Carey Tunnel; TNB = Throgs Neck Bridge;  VNB = Verrazano-Narrows Bridge",
+                "The date when the interdictions occurred, in a MM/DD/YYYY format.",
+                "The command forces the officer is associated with.",
+                "The total count of interdictions of persistent toll violators recorded at the facility for that day."
+              ],
+            "columns_format" :
+              [
+                {},
+                { "view" : "date", "align" : "center" },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "noCommas" : "true",
+                  "align" : "right"
+                }
+              ],
+            "download_count" : 879,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2026-01-05T22:32:42.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "mta bridges & tunnels",
+                "revenue",
+                "safety",
+                "interdictions",
+                "b&t",
+                "bridges & tunnels",
+                "bridges",
+                "violators",
+                "motorists",
+                "persistent",
+                "tolls",
+                "locations",
+                "tunnels"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Persistent Toll Violators"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "MTA Bridges & Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2019"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/awjr-rbak",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bridges-and-Tunnels-Roadway-Interdictions-of-P/awjr-rbak",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Daily Ridership Data: 2020 - 2025",
+            "id" : "vxuj-8kew",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This deprecated dataset provides systemwide ridership and traffic estimates for subways (including the Staten Island Railway), buses, Long Island Rail Road, Metro-North Railroad, Access-A-Ride, and Bridges and Tunnels, beginning 3/1/2020, and provides a percentage comparison against a comparable pre-pandemic date.\n\nNext-day estimates for daily ridership, without the pre-pandemic comparison, are now provided at https://data.ny.gov/d/sayj-mze2",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-01-14T15:52:24.000Z",
+            "createdAt" : "2022-03-14T23:40:58.000Z",
+            "metadata_updated_at" : "2025-01-14T15:52:24.000Z",
+            "data_updated_at" : "2025-01-10T23:03:44.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 736,
+                "page_views_last_month" : 3888,
+                "page_views_total" : 260419,
+                "page_views_last_week_log" : 9.52552080909507,
+                "page_views_last_month_log" : 11.925183519434208,
+                "page_views_total_log" : 17.990480724756083
+              },
+            "columns_name" :
+              [
+                "Bridges and Tunnels: % of Comparable Pre-Pandemic Day",
+                "Bridges and Tunnels: Total Traffic",
+                "Metro-North: Total Estimated Ridership",
+                "Buses: Total Estimated Ridership",
+                "Access-A-Ride: Total Scheduled Trips",
+                "LIRR: % of Comparable Pre-Pandemic Day",
+                "Metro-North: % of Comparable Pre-Pandemic Day",
+                "Buses: % of Comparable Pre-Pandemic Day",
+                "Subways: % of Comparable Pre-Pandemic Day",
+                "Subways: Total Estimated Ridership",
+                "Date",
+                "Staten Island Railway: % of Comparable Pre-Pandemic Day",
+                "Staten Island Railway: Total Estimated Ridership",
+                "LIRR: Total Estimated Ridership",
+                "Access-A-Ride: % of Comparable Pre-Pandemic Day"
+              ],
+            "columns_field_name" :
+              [
+                "bridges_and_tunnels_of_comparable_pre_pandemic_day",
+                "bridges_and_tunnels_total_traffic",
+                "metro_north_total_estimated_ridership",
+                "buses_total_estimated_ridersip",
+                "access_a_ride_total_scheduled_trips",
+                "lirr_of_comparable_pre_pandemic_day",
+                "metro_north_of_comparable_pre_pandemic_day",
+                "buses_of_comparable_pre_pandemic_day",
+                "subways_of_comparable_pre_pandemic_day",
+                "subways_total_estimated_ridership",
+                "date",
+                "staten_island_railway_of_comparable_pre_pandemic_day",
+                "staten_island_railway_total_estimated_ridership",
+                "lirr_total_estimated_ridership",
+                "access_a_ride_of_comparable_pre_pandemic_day"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Calendar date",
+                "Number",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "The daily total traffic as a percentage of total traffic on an equivalent day prior to the COVID-19 pandemic. Blank value indicates that the ridership data was not or is not currently available or applicable.",
+                "The daily total Bridges and Tunnels traffic. Blank value indicates that the ridership data was not or is not currently available or applicable.",
+                "The daily total estimated Metro-North ridership. Blank value indicates that the ridership data was not or is not currently available or applicable.",
+                "The daily total estimated bus ridership.",
+                "The daily total scheduled Access-A-Ride trips. Blank value indicates that the ridership data was not or is not currently available or applicable.",
+                "The daily ridership estimate as a percentage of LIRR ridership on an equivalent day prior to the COVID-19 pandemic.",
+                "The daily ridership estimate as a percentage of Metro-North ridership on an equivalent day prior to the COVID-19 pandemic.",
+                "The daily ridership estimate as a percentage of bus ridership on an equivalent day prior to the COVID-19 pandemic.",
+                "The daily ridership estimate as a percentage of subway ridership on an equivalent day prior to the COVID-19 pandemic.",
+                "The daily total estimated subway ridership.",
+                "The date of travel (MM/DD/YYYY).",
+                "The daily ridership estimate as a percentage of SIR ridership on an equivalent day prior to the COVID-19 pandemic.",
+                "The daily total estimated SIR ridership.",
+                "The daily total estimated LIRR ridership. Blank value indicates that the ridership data was not or is not currently available or applicable.",
+                "The daily total scheduled trips as a percentage of total scheduled trips on an equivalent day prior to the COVID-19 pandemic. Blank value indicates that the ridership data was not or is not currently available or applicable."
+              ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "center"
+                },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "center"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "center"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "center"
+                },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "center"
+                },
+                { "align" : "right" },
+                { "view" : "date", "align" : "center" },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "center"
+                },
+                { "align" : "right" },
+                { "align" : "right" },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "center"
+                }
+              ],
+            "download_count" : 408460,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-07-10T17:20:36.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "lirr",
+                "commuter rail",
+                "mta bridges & tunnels",
+                "mta bus",
+                "new york city transit",
+                "bus",
+                "mtabc",
+                "customers",
+                "daily",
+                "subway",
+                "staten island railway",
+                "sir",
+                "ridership",
+                "passengers",
+                "metro-north",
+                "paratransit",
+                "nyct",
+                "metro-north railroad",
+                "mnr",
+                "b&t",
+                "access-a-ride",
+                "long island rail road",
+                "aar",
+                "traffic"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "MTA Daily Ridership and Traffic: Beginning 2020: https://data.ny.gov/d/sayj-mze2"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Agency, day"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York Metropolitan Area"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York City Transit, MTA Bus Company, Long Island Rail Road, Metro-North Railroad, Access-A-Ride, MTA Bridges and Tunnels, Staten Island Railway"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "March 2020 to January 2025"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "Due to the processes followed to allow next-day ridership and traffic figures to be published, the figures in this dataset may differ from official ridership totals published elsewhere by MTA."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/vxuj-8kew",
+        "link" : "https://data.ny.gov/Transportation/MTA-Daily-Ridership-Data-2020-2025/vxuj-8kew",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bridges & Tunnels Daily Traffic Rates by Vehicle Class: 2005-2024",
+            "id" : "dtj7-qync",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This deprecated dataset provides data showing the number of vehicles (including cars, buses, trucks and motorcycles) that pass through each of the nine bridges and tunnels operated by the MTA each day. The data is now shared by the hour at https://data.ny.gov/d/qzve-kjga/",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-09-09T17:21:27.000Z",
+            "createdAt" : "2023-02-27T23:36:42.000Z",
+            "metadata_updated_at" : "2025-09-09T17:21:27.000Z",
+            "data_updated_at" : "2025-09-08T12:32:34.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 73,
+                "page_views_last_month" : 280,
+                "page_views_total" : 10151,
+                "page_views_last_week_log" : 6.209453365628951,
+                "page_views_last_month_log" : 8.134426320220927,
+                "page_views_total_log" : 13.309476353841106
+              },
+            "columns_name" :
+              [
+                "Class 7",
+                "Class 4",
+                "Day Of Week",
+                "Class 18",
+                "Holiday",
+                "Class 14",
+                "Class 8",
+                "Class 2",
+                "Class 9",
+                "Class 31",
+                "Class 21",
+                "Class 20",
+                "Class 11",
+                "Class 10",
+                "Class 32",
+                "Class 36",
+                "Collection Date",
+                "Class 1",
+                "Class 3",
+                "Class 5",
+                "Class 6",
+                "Class 13",
+                "Class 15",
+                "Class 16",
+                "Class 17",
+                "Class 19",
+                "Class 34",
+                "Class 35",
+                "Class 37",
+                "Class 38",
+                "Total",
+                "Class 12",
+                "Class 33",
+                "Class 39",
+                "Plaza"
+              ],
+            "columns_field_name" :
+              [
+                "class_7",
+                "class_4",
+                "day_of_week",
+                "class_18",
+                "holiday",
+                "class_14",
+                "class_8",
+                "class_2",
+                "class_9",
+                "class_31",
+                "class_21",
+                "class_20",
+                "class_11",
+                "class_10",
+                "class_32",
+                "class_36",
+                "collection_date",
+                "class_1",
+                "class_3",
+                "class_5",
+                "class_6",
+                "class_13",
+                "class_15",
+                "class_16",
+                "class_17",
+                "class_19",
+                "class_34",
+                "class_35",
+                "class_37",
+                "class_38",
+                "total",
+                "class_12",
+                "class_33",
+                "class_39",
+                "plaza"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Truck 4 Axle",
+                "Truck 2 Axle",
+                "1 - Sunday, 2 – Monday, 3 – Tuesday, 4 – Wednesday, 5 – Thursday, 6 – Friday, 7 - Saturday",
+                "Truck 9 Axle",
+                "1 - National Holiday, 0 – Not a Holiday",
+                "Place holder for special vehicles",
+                "Truck 5 Axle",
+                "Car/ 1 Axle Trailer",
+                "Motorcycle",
+                "2 Axle Passenger Vehicle",
+                "Motorcycle/ 1 Axle Trailer",
+                "Truck 11 Axle",
+                "Franchise Bus 3 Axle",
+                "Non-Revenue",
+                "2 Axle Commercial Vehicle",
+                "6 Axle or Greater Commercial Vehicle",
+                "Month / Day / Year",
+                "Car",
+                "Car/ 2 Axle Trailer",
+                "Franchise Bus 2 Axle",
+                "Truck 3 Axle",
+                "Truck 7 Axle",
+                "Car/ 3 Axle Trailer",
+                "Car/ 4 Axle Trailer",
+                "Truck 8 Axle",
+                "Truck 10 Axle",
+                "4 Axle Commercial Vehicle",
+                "5 Axle Commercial Vehicle",
+                "2 and 3 Axle NYC Franchise Bus",
+                "Passenger Car with 2, 3, or 4 Additional Axles",
+                "The number of daily crossings for each bridge and vehicle class.",
+                "Truck 6 Axle",
+                "3 Axle Commercial Vehicle",
+                "Motorcycle, Motorcycle with Additional Axles",
+                "This is the Plaza number or Facility ID which is a number-coded ID representing each toll plaza.   21 - Robert F. Kennedy Bridge Bronx;  22 - Robert F. Kennedy Bridge Manhattan;  23 - Bronx Whitestone Bridge;  24 - Henry Hudson Bridge;  25 - Marine Parkway Bridge;  26 - Cross Bay Veterans Memorial Bridge;  27 - Queens Midtown Tunnel;  28 - Hugh L. Carey Tunnel;  29 - Throgs Neck Bridge;  30 - Verrazzano-Narrows Bridge"
+              ],
+            "columns_format" :
+              [
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "view" : "date", "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                { "align" : "right" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                }
+              ],
+            "download_count" : 1955,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2024-08-14T16:29:10.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "traffic",
+                "monthly",
+                "b&t",
+                "bridges & tunnels",
+                "mta bridges & tunnels"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Toll plaza, vehicle class, day"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : " Bridges and Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "2005 - 2024"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/dtj7-qync",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bridges-Tunnels-Daily-Traffic-Rates-by-Vehicle/dtj7-qync",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA E-ZPass Retailers Locations Map",
+            "id" : "j4qs-zffk",
+            "resource_name" : null,
+            "parent_fxf" : [ "y59h-w6v4" ],
+            "description" : "This dataset is a moment in time snapshot of the locations of authorized businesses that can sell E-ZPass tags. It includes the name of the company, and its address.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "map",
+            "updatedAt" : "2026-04-21T21:01:33.000Z",
+            "createdAt" : "2021-07-09T15:02:23.000Z",
+            "metadata_updated_at" : "2026-04-21T21:01:33.000Z",
+            "data_updated_at" : "2024-07-17T22:56:05.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 136,
+                "page_views_last_month" : 448,
+                "page_views_total" : 63128,
+                "page_views_last_week_log" : 7.098032082960527,
+                "page_views_last_month_log" : 8.810571634741148,
+                "page_views_total_log" : 15.946015277704566
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 3953,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "visualization_canvas_map",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2024-07-17T23:17:53.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "bridges & tunnels",
+                "retailers",
+                "mta bridges & tunnels",
+                "location",
+                "e-zpass",
+                "b&t"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Retailer"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York Metropolitan Area"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Bridges and Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "2013 (approximate)"
+                },
+                { "key" : "Local-Data_Municipality-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_Municipality_Column", "value" : "city" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/j4qs-zffk",
+        "link" : "https://data.ny.gov/Transportation/MTA-E-ZPass-Retailers-Locations-Map/j4qs-zffk",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Congestion Relief Zone Vehicle Entries: Beginning 2025",
+            "id" : "t6yz-b64h",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset provides the number of crossings into the Congestion Relief Zone by crossing location and vehicle class, in 10-minute intervals. This data should not be used for revenue calculations, as entries do not include information about exemption statuses, payment methods, and repeat entries.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-12T19:45:51.000Z",
+            "createdAt" : "2025-01-28T15:15:40.000Z",
+            "metadata_updated_at" : "2026-11-12T19:29:35.000Z",
+            "data_updated_at" : "2026-11-12T19:45:51.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 296,
+                "page_views_last_month" : 1585,
+                "page_views_total" : 33109,
+                "page_views_last_week_log" : 8.214319120800766,
+                "page_views_last_month_log" : 10.63117705570398,
+                "page_views_total_log" : 15.014979390284362
+              },
+            "columns_name" :
+              [
+                "Toll Hour",
+                "Excluded Roadway Entries",
+                "Detection Region",
+                "Day of Week",
+                "Day of Week Int",
+                "Minute of Hour",
+                "Detection Group",
+                "CRZ Entries",
+                "Vehicle Class",
+                "Toll 10 Minute Block",
+                "Hour of Day",
+                "Time Period",
+                "Toll Week",
+                "Toll Date"
+              ],
+            "columns_field_name" :
+              [
+                "toll_hour",
+                "excluded_roadway_entries",
+                "detection_region",
+                "day_of_week",
+                "day_of_week_int",
+                "minute_of_hour",
+                "detection_group",
+                "crz_entries",
+                "vehicle_class",
+                "toll_10_minute_block",
+                "hour_of_day",
+                "time_period",
+                "toll_week",
+                "toll_date"
+              ],
+            "columns_datatype" :
+              [
+                "Calendar date",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Calendar date",
+                "Calendar date"
+              ],
+            "columns_description" :
+              [
+                "Hour on which the vehicle entry is allocated to, represented as a timestamp at 0 minutes in MM/DD/YYYY HH:MM:SS AM/PM format.",
+                "How many entries in this interval entered the CBD but stayed on excluded roadways.",
+                " Which region the crossing comes from. For example, the Williamsburg Bridge is listed as Brooklyn. ",
+                " Day of the week of the Toll Hour as plain text (i.e. Sunday, Monday, etc.)",
+                "Day of the week of the Toll Hour, represented as a numeral. 1 corresponds to Sunday, and 7 corresponds to Saturday. ",
+                "Starting minute of the 10 minute block for this entry.",
+                "Which crossing the entry was first detected at. ",
+                "How many entries in this interval entered the Congestion Relief Zone (the CBD minus the number of entries that kept to excluded roadways).",
+                "Category of vehicle, as detected by the tolling system. Classes are:  1 - Cars, Pickups and Vans*; 2 - Single-Unit Trucks; 3 - Multi-Unit Trucks; 4 - Buses; 5 - Motorcycles; TLC Taxi/FHV**. *Not including TLC Taxi/ FHV vehicles, which are subject to a per-trip toll. ** Taxis and FHVs not charged in a Per-Trip Charge Plan (PTCP) are tolled by vehicle class and appear in those categories.",
+                "10-minute block within the hour on which the vehicle entry is allocated to, represented as a timestamp at the start of the block in MM/DD/YYYY HH:MM:SS AM/PM format.",
+                "Hour on which the vehicle entry is allocated as a  single integer.",
+                "Whether the hour would receive peak or overnight tolls. The current schedule has peak tolls from 5 AM to 9 PM on weekdays, and 9 AM to 9 PM on weekends. Refer to the tolling schedule here: https://congestionreliefzone.mta.info/.",
+                "The Sunday corresponding to the Toll Date, defining the weeks of data in MM/DD/YYYY format.",
+                "Date on which the vehicle entry is allocated to in MM/DD/YYYY format."
+              ],
+            "columns_format" :
+              [
+                { "view" : "date_time", "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {},
+                { "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {},
+                { "view" : "date_time", "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "view" : "date", "align" : "center" },
+                { "view" : "date", "align" : "center" }
+              ],
+            "download_count" : 5915,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-28T15:37:08.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "central business district",
+                "mta bridges & tunnels",
+                "toll crossing",
+                "traffic",
+                "trips",
+                "tunnel",
+                "vehicle class",
+                "crz",
+                "cbdtp",
+                "b&t",
+                "bridge",
+                "central business district tolling program",
+                "congestion",
+                "congestion relief zone"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "This data should not be used for calculating revenue related to the Congestion Pricing Program, as entries do not include information about exemption statuses, payment methods, and repeat entries."
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "10-minute, toll crossing, vehicle class"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Weekly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2025"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/t6yz-b64h",
+        "link" : "https://data.ny.gov/Transportation/MTA-Congestion-Relief-Zone-Vehicle-Entries-Beginni/t6yz-b64h",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Eastbound Tunnel and Bridge Traffic Monthly Volume, Port Authority of NY NJ:  Beginning 2011",
+            "id" : "5uvq-7ebw",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Port Authority collects eastbound vehicle traffic volumes from its toll plazas at the six Port Authority vehicular crossings (i.e., George Washington Bridge, Holland Tunnel, Lincoln Tunnel, Goethals Bridge, Outerbridge Crossing and Bayonne Bridge).  This dataset contains monthly eastbound traffic volumes for each crossing and for all Port Authority crossings combined, based on vehicles passing through Authority’s toll plazas, for each month starting in January 2011 through December 2012.  The dataset contains traffic volumes for three types of vehicles (autos, buses, trucks) for each month.",
+            "attribution" : "The Port Authority of NY & NJ",
+            "attribution_link" : "https://www.panynj.gov/port-authority/en/index.html",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-04-15T21:03:07.000Z",
+            "createdAt" : "2013-05-09T17:57:32.000Z",
+            "metadata_updated_at" : "2026-04-15T21:03:07.000Z",
+            "data_updated_at" : "2016-10-11T19:50:29.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 89,
+                "page_views_last_month" : 287,
+                "page_views_total" : 11737,
+                "page_views_last_week_log" : 6.491853096329675,
+                "page_views_last_month_log" : 8.169925001442312,
+                "page_views_total_log" : 13.518898992777313
+              },
+            "columns_name" :
+              [
+                "Year",
+                "Eastbound Volume",
+                "Bridge/Tunnel",
+                "Month",
+                "Vehicles Type"
+              ],
+            "columns_field_name" :
+              [
+                "year",
+                "eastbound_volume",
+                "bridge_tunnel",
+                "month",
+                "vehicles_type"
+              ],
+            "columns_datatype" : [
+                                   "Number",
+                                   "Number",
+                                   "Text",
+                                   "Text",
+                                   "Text"
+                                 ],
+            "columns_description" : [ "", "", "", "", "" ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                {},
+                {},
+                {},
+                { "align" : "right" }
+              ],
+            "download_count" : 4808,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2016-10-11T19:51:12.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "port authority",
+                "bridges",
+                "traffic",
+                "tunnels",
+                "vehicles"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.panynj.gov/bridges-tunnels/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "The Port Authority of New York & New Jersey, Tunnels Bridges & Terminals Department, Transportation & Revenue Programs Division"
+                },
+                { "key" : "Dataset-Summary_Units", "value" : "Vehicles" },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "djacobs@panynj.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "By Facility and Vehicle Type"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "Interstate vehicular crossings between New York and New Jersey"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Tunnels, Bridges & Terminals Department"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2011"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Port Authority of New York and New Jersey"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "Because the Port Authority only collects tolls in the eastbound direction (towards NYC) on all of its crossings, the traffic volumes in this dataset represent only eastbound traffic for each time period."
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Eastbound (New York-bound) direction only. Revenue information cannot be extrapolated or calculated from this data."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/5uvq-7ebw",
+        "link" : "https://data.ny.gov/Transportation/Eastbound-Tunnel-and-Bridge-Traffic-Monthly-Volume/5uvq-7ebw",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Eastbound Tunnel and Bridge Traffic Annual Volume, Port Authority of NY NJ:  Beginning 2002",
+            "id" : "9ray-6dmy",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Port Authority collects eastbound vehicle traffic volumes from its toll plazas at the six Port Authority vehicular crossings (i.e., George Washington Bridge, Holland Tunnel, Lincoln Tunnel, Goethals Bridge, Outerbridge Crossing and Bayonne Bridge).  This dataset contains annual eastbound traffic volumes for each crossing and for all Port Authority crossings combined, based on vehicles passing through Authority’s toll plazas, for each year from 2002 through 2012.  The dataset contains traffic volumes for three types of vehicles (autos, buses, trucks) for each year.",
+            "attribution" : "The Port Authority of NY & NJ",
+            "attribution_link" : "https://www.panynj.gov/port-authority/en/index.html",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-04-15T21:03:51.000Z",
+            "createdAt" : "2013-05-09T16:01:29.000Z",
+            "metadata_updated_at" : "2026-04-15T21:03:51.000Z",
+            "data_updated_at" : "2016-10-11T19:46:24.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 91,
+                "page_views_last_month" : 328,
+                "page_views_total" : 11897,
+                "page_views_last_week_log" : 6.523561956057013,
+                "page_views_last_month_log" : 8.361943773735241,
+                "page_views_total_log" : 13.538431462950003
+              },
+            "columns_name" :
+              [ "Eastbound Volume", "Vehicle Type", "Bridge/Tunnel", "Year" ],
+            "columns_field_name" :
+              [ "eastbound_volume", "vehicle_type", "bridge_tunnel", "year" ],
+            "columns_datatype" : [ "Number", "Text", "Text", "Number" ],
+            "columns_description" : [ "", "", "", "" ],
+            "columns_format" :
+              [
+                {},
+                { "align" : "right" },
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                }
+              ],
+            "download_count" : 4286,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2016-10-11T19:48:31.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "port authority",
+                "traffic",
+                "vehicles",
+                "tunnels",
+                "bridges"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.panynj.gov/bridges-tunnels/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "The Port Authority of New York & New Jersey, Tunnels Bridges & Terminals Department, Transportation & Revenue Programs Division"
+                },
+                { "key" : "Dataset-Summary_Units", "value" : "Vehicles" },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "djacobs@panynj.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "By Facility and Vehicle Type"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "Interstate vehicular crossings between New York and New Jersey "
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Tunnels, Bridges & Terminals Department"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2002"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Port Authority of New York and New Jersey"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "Because the Port Authority only collects tolls in the eastbound direction (towards NYC) on all of its crossings, the traffic volumes in this dataset represent only eastbound traffic for each time period."
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Eastbound (New York-bound) direction only.  Revenue information cannot be extrapolated or calculated from this data. "
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/9ray-6dmy",
+        "link" : "https://data.ny.gov/Transportation/Eastbound-Tunnel-and-Bridge-Traffic-Annual-Volume-/9ray-6dmy",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Central Business District Geofence Map",
+            "id" : "vaq5-qfkz",
+            "resource_name" : null,
+            "parent_fxf" : [ "srxy-5nxn" ],
+            "description" : "This dataset consists of a set of 2D geofence polygons that are intended to capture the Manhattan CBD as defined by the MTA Reform and Traffic Mobility Act. That legislation defines it as the geographic area of Manhattan south of and inclusive of 60th Street, not including the Franklin D. Roosevelt (FDR) Drive and the West Side Highway/Route 9A, the Battery Park Underpass and any surface roadway portion of the Hugh L. Carey Tunnel that connects to West Street (the West Side Highway/Route 9A).",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "map",
+            "updatedAt" : "2026-04-21T20:50:59.000Z",
+            "createdAt" : "2024-05-31T15:32:27.000Z",
+            "metadata_updated_at" : "2026-04-21T20:50:59.000Z",
+            "data_updated_at" : "2025-01-10T15:22:02.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 80,
+                "page_views_last_month" : 314,
+                "page_views_total" : 6918,
+                "page_views_last_week_log" : 6.339850002884625,
+                "page_views_last_month_log" : 8.29920801838728,
+                "page_views_total_log" : 12.756347825516588
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 11,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "visualization_canvas_map",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-09T20:25:09.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "congestion",
+                "cbd",
+                "central business district",
+                "cbdtp",
+                "central business district tolling program",
+                "tunnel",
+                "traffic",
+                "mta bridges & tunnels",
+                "polygon",
+                "geofence",
+                "boundary",
+                "bridge",
+                "b&t",
+                "congestion relief zone"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                { "key" : "Dataset-Summary_Granularity", "value" : "Polygon" },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning June 2024"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/vaq5-qfkz",
+        "link" : "https://data.ny.gov/Transportation/MTA-Central-Business-District-Geofence-Map/vaq5-qfkz",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bridges & Tunnels Daily E-ZPass Usage Rate by Vehicle Class: 2005-2024",
+            "id" : "vf6y-3my4",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This deprecated dataset provides data showing the number of vehicles (including cars, buses, trucks and motorcycles) using E-ZPass that pass through each of the nine bridges and tunnels operated by the MTA each day. The data is now shared by the hour at https://data.ny.gov/d/qzve-kjga/",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-09-09T17:19:40.000Z",
+            "createdAt" : "2023-02-27T23:21:16.000Z",
+            "metadata_updated_at" : "2025-09-09T17:19:40.000Z",
+            "data_updated_at" : "2025-09-08T12:32:58.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 71,
+                "page_views_last_month" : 199,
+                "page_views_total" : 6501,
+                "page_views_last_week_log" : 6.169925001442312,
+                "page_views_last_month_log" : 7.643856189774724,
+                "page_views_total_log" : 12.666667840690357
+              },
+            "columns_name" :
+              [
+                "Class 32",
+                "Class 3",
+                "Class 2",
+                "Class 1",
+                "Collection Date",
+                "Total",
+                "Class 39",
+                "Class 38",
+                "Class 37",
+                "Class 35",
+                "Class 31",
+                "Class 18",
+                "Class 16",
+                "Class 19",
+                "Class 20",
+                "Class 4",
+                "Class 34",
+                "Class 36",
+                "Plaza",
+                "Day Of Week",
+                "Holiday",
+                "Class 5",
+                "Class 6",
+                "Class 33",
+                "Class 21",
+                "Class 17",
+                "Class 15",
+                "Class 14",
+                "Class 13",
+                "Class 12",
+                "Class 11",
+                "Class 10",
+                "Class 9",
+                "Class 8",
+                "Class 7"
+              ],
+            "columns_field_name" :
+              [
+                "class_32",
+                "class_3",
+                "class_2",
+                "class_1",
+                "collection_date",
+                "total",
+                "class_39",
+                "class_38",
+                "class_37",
+                "class_35",
+                "class_31",
+                "class_18",
+                "class_16",
+                "class_19",
+                "class_20",
+                "class_4",
+                "class_34",
+                "class_36",
+                "plaza",
+                "day_of_week",
+                "holiday",
+                "class_5",
+                "class_6",
+                "class_33",
+                "class_21",
+                "class_17",
+                "class_15",
+                "class_14",
+                "class_13",
+                "class_12",
+                "class_11",
+                "class_10",
+                "class_9",
+                "class_8",
+                "class_7"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "2 Axle Commercial Vehicle",
+                "Car/2 Axle Trailer",
+                "Car/1 Axle Trailer",
+                "Car",
+                "The date in MM-DD-YYYY format",
+                "The number of daily crossings for each bridge and vehicle class using E-ZPass.",
+                "Motorcycle, Motorcycle with Additional Axles",
+                "Passenger Car with 2, 3, or 4 Additional Axles",
+                "2 and 3 Axle NYC Franchise Bus",
+                "5 Axle Commercial Vehicle",
+                "2 Axle Passenger Vehicle",
+                "Truck 9 Axle",
+                "Car/4 Axle Trailer",
+                "Truck 10 Axle",
+                "Truck 11 Axle",
+                "Truck 2 Axle",
+                "4 Axle Commercial Vehicle",
+                "6 Axle or Greater Commercial Vehicle",
+                "This is the Plaza number or Facility ID which is a number-coded ID representing each toll plaza.  21 - Robert F. Kennedy Bridge Bronx/Queens;  22 -Robert F. Kennedy Bridge Manhattan;  23 - Bronx Whitestone Bridge;  24 - Henry Hudson Bridge;  25 - Marine Parkway Bridge;  26 - Cross Bay Veterans Memorial Bridge;  27 - Queens Midtown Tunnel;   28 - Hugh L. Carey Tunnel; 29 - Throgs Neck Bridge; 30 - Verrazzano-Narrows Bridge",
+                "1 - Sunday, 2 – Monday, 3 – Tuesday, 4 – Wednesday, 5 – Thursday, 6 – Friday, 7 - Saturday",
+                "1 - National Holiday, 0 – Not a Holiday",
+                "Franchise Bus 2 Axle",
+                "Truck 3 Axle",
+                "3 Axle Commercial Vehicle",
+                "Motorcycle/ 1 Axle Trailer",
+                "Truck 8 Axle",
+                "Car/3 Axle Trailer",
+                "Place holder for special vehicles",
+                "Truck 7 Axle",
+                "Truck 6 Axle",
+                "Franchise Bus 3 Axle",
+                "Non-Revenue",
+                "Motorcycle",
+                "Truck 5 Axle",
+                "Truck 4 Axle"
+              ],
+            "columns_format" :
+              [
+                { "align" : "right" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "view" : "date", "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                { "align" : "right" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                }
+              ],
+            "download_count" : 1754,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2024-08-14T16:11:41.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" : [ "day", "vehicle class", "toll plaza" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Toll Plaza, vehicle class, day"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Bridges and Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "2005 - 2024"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/vf6y-3my4",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bridges-Tunnels-Daily-E-ZPass-Usage-Rate-by-Ve/vf6y-3my4",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Central Business District Geofence: Beginning June 2024",
+            "id" : "srxy-5nxn",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset consists of a set of 2D geofence polygons that are intended to capture the Manhattan CBD as defined by the MTA Reform and Traffic Mobility Act. That legislation defines it as the geographic area of Manhattan south of and inclusive of 60th Street, not including the Franklin D. Roosevelt (FDR) Drive and the West Side Highway/Route 9A, the Battery Park Underpass and any surface roadway portion of the Hugh L. Carey Tunnel that connects to West Street (the West Side Highway/Route 9A).",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-06-26T15:46:19.000Z",
+            "createdAt" : "2024-05-31T14:52:07.000Z",
+            "metadata_updated_at" : "2025-06-26T15:46:19.000Z",
+            "data_updated_at" : "2025-01-10T15:22:02.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 100,
+                "page_views_last_month" : 353,
+                "page_views_total" : 7412,
+                "page_views_last_week_log" : 6.6582114827517955,
+                "page_views_last_month_log" : 8.467605550082997,
+                "page_views_total_log" : 12.85584179604994
+              },
+            "columns_name" : [ "polygon" ],
+            "columns_field_name" : [ "polygon" ],
+            "columns_datatype" : [ "Polygon" ],
+            "columns_description" :
+              [
+                "Polygon geometry data in the shape of the Central Business District."
+              ],
+            "columns_format" : [ {} ],
+            "download_count" : 2856,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2024-05-31T15:08:33.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "cbdtp",
+                "tunnel",
+                "traffic",
+                "polygon",
+                "mta bridges & tunnels",
+                "geofence",
+                "congestion relief zone",
+                "congestion",
+                "central business district tolling program",
+                "central business district",
+                "cbd",
+                "b&t",
+                "bridge",
+                "boundary"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                { "key" : "Dataset-Summary_Granularity", "value" : "Polygon" },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning June 2024"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/srxy-5nxn",
+        "link" : "https://data.ny.gov/Transportation/MTA-Central-Business-District-Geofence-Beginning-J/srxy-5nxn",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA E-ZPass Retailers Locations",
+            "id" : "y59h-w6v4",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset is a moment in time snapshot of the locations of authorized businesses that can sell E-ZPass tags. It includes the name of the company, and its address.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2024-08-13T15:15:22.000Z",
+            "createdAt" : "2013-04-25T16:15:29.000Z",
+            "metadata_updated_at" : "2024-08-13T15:15:22.000Z",
+            "data_updated_at" : "2024-07-17T22:56:05.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 174,
+                "page_views_last_month" : 600,
+                "page_views_total" : 244013,
+                "page_views_last_week_log" : 7.45121111183233,
+                "page_views_last_month_log" : 9.231221180711186,
+                "page_views_total_log" : 17.89660439743461
+              },
+            "columns_name" :
+              [
+                "STREET_2",
+                "STATE",
+                "NYS Municipal Boundaries",
+                "Georeference",
+                "COMPANY",
+                "CITY",
+                "STREET_1",
+                "ZIP_CODE"
+              ],
+            "columns_field_name" :
+              [
+                "street_2",
+                "state",
+                ":@computed_region_yamh_8v7k",
+                "georeference",
+                "company",
+                "city",
+                "street_1",
+                "zip_code"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Number",
+                "Point",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "This is the second street information field. It usually contains information such as FLOOR or SUITE numbers. Although, some retailer entries have the actual street address here because additional information was provided in STREET_1.",
+                "The state where the retailer is located.",
+                "This column was automatically created in order to record in what polygon from the dataset 'NYS Municipal Boundaries' (yamh-8v7k) the point in column 'georeference' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "Open Data/Socrata-generated geocoding information from supplied address components.",
+                "This is the retailer's company name.",
+                "The city where the retailer is located.",
+                "This is the first street information field. Although most retailer entries have the actual street address, there are entries that provide additional information, and the actual street address will be found in the STREET_2 field.",
+                "The ZIP code associated with the city and state."
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                }
+              ],
+            "download_count" : 14595,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2021-07-09T17:08:42.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "mta bridges & tunnels",
+                "e-zpass",
+                "location",
+                "retailers",
+                "b&t",
+                "bridges & tunnels"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Retailer"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York Metropolitan Area"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Bridges and Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "2013 (approximate)"
+                },
+                { "key" : "Local-Data_Municipality-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_Municipality_Column", "value" : "city" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/y59h-w6v4",
+        "link" : "https://data.ny.gov/Transportation/MTA-E-ZPass-Retailers-Locations/y59h-w6v4",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Colors",
+            "id" : "3uhz-sej2",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset includes the RGB Hex code and CMYK values for the colors used by the MTA for its various services, including the New York City Subway, the Staten Island Railway, the Long Island Rail Road, Metro-North Railroad, and Bridges & Tunnels, and for the MTA logo itself.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-13T16:07:38.000Z",
+            "createdAt" : "2023-08-28T18:12:34.000Z",
+            "metadata_updated_at" : "2026-11-13T16:07:37.000Z",
+            "data_updated_at" : "2026-11-13T16:07:38.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 266,
+                "page_views_last_month" : 1161,
+                "page_views_total" : 20869,
+                "page_views_last_week_log" : 8.060695931687555,
+                "page_views_last_month_log" : 10.18239435340453,
+                "page_views_total_log" : 14.349142980047198
+              },
+            "columns_name" : [ "Service", "CMYK", "Hex color", "Operator" ],
+            "columns_field_name" :
+              [ "service", "cmyk", "hex_color", "operator" ],
+            "columns_datatype" : [ "Text", "Text", "Text", "Text" ],
+            "columns_description" :
+              [
+                "The specific service that uses the specific color.",
+                "This code comes in the form of the four codes representing the percentage of the color used. The four values within the parenthesis are (Cyan, Magenta, Yellow, Black). The specific values represent the percentage of each color. This model is mainly used for printing.",
+                "The six-digit hexadecimal triplet used to represent colors in various computing applications.",
+                "The operator (MTA, New York City Subway, Staten Island Railway, Long Island Rail Road, Metro-North Railroad, Bridges & Tunnels)."
+              ],
+            "columns_format" : [ {}, {}, {}, {} ],
+            "download_count" : 2818,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-08-28T18:43:10.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "mnr",
+                "mta bridges & tunnels",
+                "new york city transit",
+                "nyct",
+                "sir",
+                "staten island railway",
+                "subway",
+                "bridges & tunnels",
+                "b&t",
+                "design",
+                "color",
+                "commuter rail",
+                "lirr",
+                "long island rail road",
+                "metro-north railroad",
+                "metro-north"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Data broken down by Operator and Service"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York Metropolitan Area"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "As needed"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                { "key" : "Dataset-Summary_Time-Period", "value" : "Current" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/3uhz-sej2",
+        "link" : "https://data.ny.gov/Transportation/MTA-Colors/3uhz-sej2",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bridges & Tunnels Safety Indicators: Beginning 2018",
+            "id" : "7h37-mvq2",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset provides information on various indicators of safety measured by MTA Bridges & Tunnels, along with targets for some indicators. The indicators are a combination of preventative measures taken to prevent unsafe incidents, as well as occurrences of unsafe incidents.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-13T16:07:26.000Z",
+            "createdAt" : "2024-07-16T16:02:06.000Z",
+            "metadata_updated_at" : "2026-11-13T16:07:25.000Z",
+            "data_updated_at" : "2026-11-13T16:07:26.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 66,
+                "page_views_last_month" : 154,
+                "page_views_total" : 3002,
+                "page_views_last_week_log" : 6.066089190457772,
+                "page_views_last_month_log" : 7.276124405274238,
+                "page_views_total_log" : 11.552188759557149
+              },
+            "columns_name" : [ "Metric", "Value", "Month", "Target" ],
+            "columns_field_name" : [ "metric", "value", "month", "target" ],
+            "columns_datatype" : [
+                                   "Text",
+                                   "Number",
+                                   "Calendar date",
+                                   "Number"
+                                 ],
+            "columns_description" :
+              [
+                "The safety indicators measured in this dataset are: Customer Collisions Rate per Million Vehicles, Employee Lost Time Injuries Rate per 200,000 Hours Worked, Workforce Development – Number of Participants, Safety Task Force Inspections, Fire Code Audits Completed, FDNY Liaison Visits, Customer injury collisions rate per million vehicles.",
+                "The count of the provided safety metric.",
+                "Represents the time period in which the metrics are being calculated, rounded up to the first day of the month. For example, data for January 2023 will appear under 1/1/2023 ",
+                "If the metric has a specific target, the value is included here."
+              ],
+            "columns_format" :
+              [
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "view" : "date", "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                }
+              ],
+            "download_count" : 6139,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2024-07-16T16:15:36.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "b&t",
+                "collisions",
+                "employees",
+                "employee training",
+                "fires",
+                "injuries",
+                "lost time accident rate",
+                "lost time accidents",
+                "safety",
+                "mta bridges & tunnels",
+                "accident prevention",
+                "accidents",
+                "audits",
+                "bridges & tunnels"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Month, safety indicator"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "MTA Bridges & Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2018"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/7h37-mvq2",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bridges-Tunnels-Safety-Indicators-Beginning-20/7h37-mvq2",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Monthly Ridership / Traffic Data: Beginning January 2008",
+            "id" : "xfre-bxip",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset provides systemwide ridership and traffic estimates for subways (including the Staten Island Railway), NYCT bus, MTA Bus, Long Island Rail Road, Metro-North Railroad, Access-A-Ride, Bridges and Tunnels and Staten Island Railway on a monthly basis.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-10-26T21:12:47.000Z",
+            "createdAt" : "2022-12-02T21:02:16.000Z",
+            "metadata_updated_at" : "2026-10-26T21:12:46.000Z",
+            "data_updated_at" : "2026-10-26T21:12:47.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 155,
+                "page_views_last_month" : 748,
+                "page_views_total" : 15853,
+                "page_views_last_week_log" : 7.285402218862249,
+                "page_views_last_month_log" : 9.54882190845875,
+                "page_views_total_log" : 13.95255926105684
+              },
+            "columns_name" : [ "Month", "Ridership", "Agency" ],
+            "columns_field_name" : [ "month", "ridership", "agency" ],
+            "columns_datatype" : [ "Calendar date", "Number", "Text" ],
+            "columns_description" :
+              [
+                "This is the month of the reported ridership value.",
+                "The number of riders for the reported month.",
+                "Name of the agency reporting the ridership value."
+              ],
+            "columns_format" :
+              [
+                { "view" : "iso_8601_date", "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "align" : "center" }
+              ],
+            "download_count" : 8794,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2024-12-16T21:52:26.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "traffic",
+                "access-a-ride",
+                "b&t",
+                "bus",
+                "commuter rail",
+                "customers",
+                "lirr",
+                "long island rail road",
+                "metro-north",
+                "metro-north railroad",
+                "mnr",
+                "monthly",
+                "mtabc",
+                "mta bridges & tunnels",
+                "mta bus",
+                "new york city transit",
+                "nyct",
+                "paratransit",
+                "passengers",
+                "ridership",
+                "aar",
+                "sir",
+                "staten island railway",
+                "subway"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Agency, month"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York Metropolitan Area"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York City Transit, MTA Bus Company, Long Island Rail Road, Metro-North Railroad, Access-A-Ride, Bridges and Tunnels, Staten Island Railway"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning January 2008"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/xfre-bxip",
+        "link" : "https://data.ny.gov/Transportation/MTA-Monthly-Ridership-Traffic-Data-Beginning-Janua/xfre-bxip",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bridges and Tunnels Summonses: Beginning 2019",
+            "id" : "kbnz-4kmf",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset provides information on summonses issued for violations that took place on B&T facilities, including the month each summons was issued, the location, and the summons type.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-13T16:33:23.000Z",
+            "createdAt" : "2025-05-21T14:16:38.000Z",
+            "metadata_updated_at" : "2026-11-13T16:33:21.000Z",
+            "data_updated_at" : "2026-11-13T16:33:23.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 58,
+                "page_views_last_month" : 130,
+                "page_views_total" : 1451,
+                "page_views_last_week_log" : 5.882643049361842,
+                "page_views_last_month_log" : 7.03342300153745,
+                "page_views_total_log" : 10.50382573799575
+              },
+            "columns_name" :
+              [
+                "Facility ID",
+                "Month",
+                "Reporting Category",
+                "Count",
+                "Facility Name"
+              ],
+            "columns_field_name" :
+              [
+                "facility_id",
+                "month",
+                "reporting_category",
+                "count",
+                "facility_name"
+              ],
+            "columns_datatype" :
+              [ "Text", "Calendar date", "Text", "Number", "Text" ],
+            "columns_description" :
+              [
+                "The three-letter ID for each bridge facility. BWB = Bronx-Whitestone Bridge, CBB = Cross Bay Bridge, CRU = Collision Reduction Unit, FET = Fare Evasion Task Force, HHB = Henry Hudson Bridge, HLC = Hugh L. Carey Tunnel, MPB = Marine Parkway Bridges, QMT = Queens Midtown Tunne,l RFK = Robert F. Kennedy Bridge, TNB = Throgs Neck Bridge, VNB = Verrazano-Narrows Bridge",
+                "The date the summons was issued, rolled up to the first day of the reported month.",
+                "The type of summons (Driver Violation, Toll Violation, Hazardous Driving, Vehicle Equipment, Truck, Other).",
+                "The count of summons aggregated by all other fields.",
+                "The full name of the facility"
+              ],
+            "columns_format" :
+              [
+                { "align" : "center" },
+                { "view" : "date", "align" : "center" },
+                {},
+                { "groupSeparator" : ",", "align" : "right" },
+                {}
+              ],
+            "download_count" : 1544,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-05-21T14:32:57.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "violations",
+                "felonies",
+                "bridges",
+                "bridges & tunnels",
+                "b&t",
+                "crimes",
+                "criminal summonses",
+                "tab",
+                "tunnels",
+                "locations",
+                "summonses",
+                "security",
+                "arrests",
+                "mta bridges & tunnels",
+                "motorists",
+                "transit adjudication bureau"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Summons by month by facility by summons type"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "MTA Bridges & Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2019"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/kbnz-4kmf",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bridges-and-Tunnels-Summonses-Beginning-2019/kbnz-4kmf",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bridges and Tunnels Collisions: Beginning 2019",
+            "id" : "2wqd-qady",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset provides information on collisions that have taken place at B&T facilities.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-13T16:40:29.000Z",
+            "createdAt" : "2025-05-20T16:04:58.000Z",
+            "metadata_updated_at" : "2026-11-13T16:40:27.000Z",
+            "data_updated_at" : "2026-11-13T16:40:29.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 41,
+                "page_views_last_month" : 145,
+                "page_views_total" : 1977,
+                "page_views_last_week_log" : 5.392317422778761,
+                "page_views_last_month_log" : 7.189824558880018,
+                "page_views_total_log" : 10.94982671075911
+              },
+            "columns_name" :
+              [
+                "Facility Name",
+                "Facility ID",
+                "Month",
+                "Collisions with Injuries",
+                "Crossings",
+                "Collisions with Injuries Per Million Crossings",
+                "Collisions per Million Crossings",
+                "Collisions"
+              ],
+            "columns_field_name" :
+              [
+                "facility_name",
+                "facility_id",
+                "month",
+                "collisions_with_injuries",
+                "crossings",
+                "collisions_with_injuries_per_million_crossings",
+                "collisions_per_million",
+                "collisions"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "The full facility name",
+                "The three-letter ID for each bridge facility. BWB = Bronx-Whitestone Bridge CBB = Cross Bay Bridge HHB = Henry Hudson Bridge HLC = Hugh L. Carey Tunnel MPB = Marine Parkway Bridges QMT = Queens Midtown Tunnel RFK = Robert F. Kennedy Bridge TNB = Throgs Neck Bridge VNB = Verrazano-Narrows Bridge",
+                "The date of the collision, in a MM/DD/YYYY format",
+                "The count of collisions with injuries",
+                "The count of vehicle crossings",
+                "Collisions with injuries per million crossings rate",
+                "Collisions per million crossings rate",
+                "The count of collisions"
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                { "view" : "date", "align" : "center" },
+                { "groupSeparator" : ",", "align" : "right" },
+                { "groupSeparator" : ",", "align" : "right" },
+                { "groupSeparator" : ",", "align" : "right" },
+                { "groupSeparator" : ",", "align" : "right" },
+                { "groupSeparator" : ",", "align" : "right" }
+              ],
+            "download_count" : 1460,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-05-20T18:05:31.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "mta bridges & tunnels",
+                "safety",
+                "locations",
+                "b&t",
+                "tunnels",
+                "accidents",
+                "motorists",
+                "bridges",
+                "bridges & tunnels",
+                "collisions",
+                "injuries",
+                "customer accidents"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Collisions by day and facility"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "MTA Bridges & Tunnels"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2019"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/2wqd-qady",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bridges-and-Tunnels-Collisions-Beginning-2019/2wqd-qady",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      }
+    ],
+  "resultSetSize" : 59,
+  "timings" : { "serviceMillis" : 24, "searchMillis" : [ 2, 9 ] },
+  "warnings" : []
+}
