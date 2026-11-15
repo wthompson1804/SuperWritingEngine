@@ -1,0 +1,16 @@
+targets: 1260 pages to fetch (0 rows skipped: not a Trulia /home/ or /building/ URL)
+targets 25/1260 {'ok': 25} rows=10175 fetched=18
+targets 50/1260 {'ok': 50} rows=10175 fetched=43
+targets 75/1260 {'ok': 75} rows=10175 fetched=68
+targets 100/1260 {'ok': 100} rows=10175 fetched=93
+targets 125/1260 {'ok': 125} rows=10175 fetched=118
+targets 150/1260 {'ok': 150} rows=10175 fetched=143
+targets 175/1260 {'ok': 175} rows=10175 fetched=168
+targets 200/1260 {'ok': 200} rows=10182 fetched=193
+targets 225/1260 {'ok': 225} rows=10182 fetched=218
+targets 250/1260 {'ok': 250} rows=10182 fetched=243
+targets 275/1260 {'ok': 275} rows=10182 fetched=268
+targets 300/1260 {'ok': 300} rows=10182 fetched=293
+targets 325/1260 {'ok': 325} rows=10182 fetched=318
+targets 350/1260 {'ok': 350} rows=10182 fetched=343
+targets 375/1260 {'ok': 375} rows=10185 fetched=368

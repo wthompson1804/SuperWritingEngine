@@ -110,6 +110,8 @@ def gate_elevator(r):
                   default=None)
     if tallest is not None and tallest >= INFER_ELEVATOR_FLOORS:
         return "pass", "inferred_6plus_floors"
+    if "high-rise" in str(getattr(r, "community_building_type", "")).lower().replace(" ", "-"):
+        return "pass", "inferred_high_rise_label"
     return "unknown", ""
 
 
@@ -155,6 +157,34 @@ def main():
     df["also_seen_at"] = df.groupby("dedupe_key").url.transform(lambda s: " ".join(s.iloc[1:6]))
     df = df.drop_duplicates("dedupe_key", keep="first").copy()
     n_dedup = len(df)
+
+    # community-level facts read from management sites' own pages (scripts/community_facts.py) fill listing blanks
+    cf = DATA / "reference" / "community_facts.csv"
+    if cf.exists():
+        c = pd.read_csv(cf, dtype=str, keep_default_na=False)
+        c["_k"] = c.source_site + "|" + c.building_name.str.lower().str.strip()
+        c = c.drop_duplicates("_k").set_index("_k")
+        k = df.source_site + "|" + df.building_name.str.lower().str.strip()
+        blank = lambda col: df[col].astype(str).str.strip().str.lower().isin(["", "unknown", "nan"])
+
+        def fill(col, src, ok=lambda v: v not in ("", "unknown")):
+            v = k.map(c[src]).fillna("")
+            m = blank(col) & v.map(ok)
+            df.loc[m, col] = v[m]
+        fill("dogs", "dogs")
+        fill("dog_weight_limit_lb", "dog_weight_limit_lb", lambda v: v.replace(".", "").isdigit())
+        fill("elevator", "elevator")
+        fill("building_floors", "floors_total", lambda v: v.isdigit())
+        fill("building_floors", "highest_floor_mentioned", lambda v: v.isdigit())
+        fill("pet_rent", "pet_rent_monthly", lambda v: v.replace(".", "").isdigit())
+        fill("parking_fee", "parking_fee_monthly", lambda v: v.replace(".", "").isdigit())
+        fill("parking_type", "parking_type")
+        df["community_building_type"] = k.map(c["building_type"]).fillna("")
+        df["community_required_fees"] = k.map(c["required_monthly_fees"]).fillna("")
+        for col in ("pool", "dog_park_pet_spa", "gym", "controlled_access", "package_room"):
+            df["community_" + col] = k.map(c[col]).fillna("")
+    else:
+        df["community_building_type"] = ""
 
     df["g_type"] = df.apply(gate_type, axis=1)
     df["g_rent"] = df.apply(gate_rent, axis=1)

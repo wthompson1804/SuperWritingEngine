@@ -1,0 +1,32 @@
+#
+# JonahSystems robots.txt
+#
+# images, css, and js blocked below are for the CMS, not the website
+#
+# images, css, and js for the website are not blocked via these settings
+#
+#
+
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /cms/
+Disallow: /assets/videos/
+Disallow: /assets/audio/
+Disallow: /css/
+Disallow: /frmxprt/
+Disallow: /images/
+Disallow: /js/
+Disallow: /share-this/
+Disallow: /skylease-preview/
+
+User-agent: Baiduspider
+User-agent: Baiduspider+
+Disallow: /
+
+User-agent: Screaming Frog SEO Spider
+Allow: /
+
+User-agent: PowerMapper
+Allow: /
+
+Sitemap: https://courthouseliving.com/sitemap.xml

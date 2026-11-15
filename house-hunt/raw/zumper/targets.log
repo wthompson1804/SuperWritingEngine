@@ -1,2 +1,26 @@
 targets {'rows': 50, 'skipped_not_zumper': 0, 'building_pages': 0, 'listing_pages': 0, 'reused_cache': 50, 'non_200': 0}
 targets {'rows': 100, 'skipped_not_zumper': 0, 'building_pages': 0, 'listing_pages': 5, 'reused_cache': 95, 'non_200': 0}
+targets {'rows': 200, 'skipped_not_zumper': 0, 'building_pages': 34, 'listing_pages': 71, 'reused_cache': 95, 'non_200': 0}
+targets {'rows': 250, 'skipped_not_zumper': 0, 'building_pages': 49, 'listing_pages': 106, 'reused_cache': 95, 'non_200': 0}
+targets {'rows': 350, 'skipped_not_zumper': 0, 'building_pages': 93, 'listing_pages': 161, 'reused_cache': 96, 'non_200': 0}
+targets stage: {'rows': 451, 'skipped_not_zumper': 0, 'building_pages': 131, 'listing_pages': 224, 'reused_cache': 96, 'non_200': 0}
+card filter: {'lines': 15943, 'zip_not_in_grid': 417, 'beds_gt1': 0, 'over_cap': 40}
+build: {'cards': 3551, 'detail_rows': 1394, 'card_rows': 2382, 'dropped_detail_over_cap': 262, 'dropped_detail_beds': 627, 'dropped_inactive': 987, 'extra_units_from_building': 300, 'propagated_dogs': 2, 'propagated_elevator': 20, 'propagated_floors': 0, 'dropped_zip_not_in_grid_after_detail': 0, 'rows_written': 3692}
+  available_date: 724/3692 (19%)
+  dogs {'yes': 1177, 'unknown': 2355, 'no': 160}
+  elevator {'yes': 592, 'unknown': 3069, 'no': 31}
+  floor: 119/3692 (3%)
+  building_floors: 22/3692 (0%)
+  sqft: 3282/3692 (88%)
+  unit: 642/3692 (17%)
+  pet_rent: 169/3692 (4%)
+  parking_type: 1156/3692 (31%)
+  parking_fee: 62/3692 (1%)
+  laundry: 786/3692 (21%)
+  utilities_included: 111/3692 (3%)
+  dog_weight_limit_lb: 42/3692 (1%)
+  manager: 3690/3692 (99%)
+  photo_url: 3650/3692 (98%)
+  other_monthly_fees_json: 1226/3692 (33%)
+  detail_level {'detail': 1314, 'card': 2378}
+  state {'NY': 1274, 'NJ': 1975, 'CT': 431, 'PA': 12}

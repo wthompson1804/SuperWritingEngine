@@ -7,8 +7,8 @@
   "fetch_max_low": 2850.0,
   "minutes": 44.0
  },
- "srp_pages": 380,
- "detail_pages": 912,
+ "srp_pages": 550,
+ "detail_pages": 1271,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -555,14 +555,292 @@
    "drive_min": 42.9,
    "props": 3,
    "rows": 1
+  },
+  {
+   "city": "nj/passaic",
+   "drive_min": 43.0,
+   "props": 10,
+   "rows": 10
+  },
+  {
+   "city": "ny/dobbs-ferry",
+   "drive_min": 43.1,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "nj/harrison",
+   "drive_min": 43.2,
+   "props": 9,
+   "rows": 105
+  },
+  {
+   "city": "nj/wallington",
+   "drive_min": 43.4,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/westwood",
+   "drive_min": 43.7,
+   "props": 4,
+   "rows": 6
+  },
+  {
+   "city": "nj/closter",
+   "drive_min": 43.8,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/newark",
+   "drive_min": 43.9,
+   "props": 58,
+   "rows": 116
+  },
+  {
+   "city": "ny/north-babylon",
+   "drive_min": 43.9,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ct/byram",
+   "drive_min": 44.1,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/paterson",
+   "drive_min": 44.1,
+   "props": 34,
+   "rows": 36
+  },
+  {
+   "city": "ny/port-chester",
+   "drive_min": 44.1,
+   "props": 2,
+   "rows": 5
+  },
+  {
+   "city": "ny/white-plains",
+   "drive_min": 44.5,
+   "props": 22,
+   "rows": 63
+  },
+  {
+   "city": "nj/harrington-park",
+   "drive_min": 44.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/dix-hills",
+   "drive_min": 45.3,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/bayonne",
+   "drive_min": 45.7,
+   "props": 38,
+   "rows": 120
+  },
+  {
+   "city": "nj/clifton",
+   "drive_min": 45.8,
+   "props": 16,
+   "rows": 40
+  },
+  {
+   "city": "ct/greenwich",
+   "drive_min": 46.2,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/deer-park",
+   "drive_min": 46.6,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/elizabeth",
+   "drive_min": 46.9,
+   "props": 16,
+   "rows": 31
+  },
+  {
+   "city": "ny/babylon",
+   "drive_min": 47.2,
+   "props": 4,
+   "rows": 4
+  },
+  {
+   "city": "nj/hawthorne",
+   "drive_min": 47.4,
+   "props": 2,
+   "rows": 4
+  },
+  {
+   "city": "nj/woodland-park",
+   "drive_min": 47.6,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ny/staten-island",
+   "drive_min": 47.8,
+   "props": 38,
+   "rows": 31
+  },
+  {
+   "city": "nj/singac",
+   "drive_min": 48.1,
+   "props": 2,
+   "rows": 8
+  },
+  {
+   "city": "nj/totowa",
+   "drive_min": 48.1,
+   "props": 4,
+   "rows": 4
+  },
+  {
+   "city": "nj/ridgewood",
+   "drive_min": 48.5,
+   "props": 5,
+   "rows": 6
+  },
+  {
+   "city": "nj/midland-park",
+   "drive_min": 48.6,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "nj/upper-montclair",
+   "drive_min": 49.3,
+   "props": 3,
+   "rows": 10
+  },
+  {
+   "city": "ny/huntington",
+   "drive_min": 49.3,
+   "props": 7,
+   "rows": 5
+  },
+  {
+   "city": "nj/northvale",
+   "drive_min": 49.7,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "ny/bay-shore",
+   "drive_min": 49.7,
+   "props": 4,
+   "rows": 5
+  },
+  {
+   "city": "nj/east-orange",
+   "drive_min": 49.8,
+   "props": 15,
+   "rows": 80
+  },
+  {
+   "city": "nj/glen-ridge",
+   "drive_min": 49.9,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ct/darien",
+   "drive_min": 55.9,
+   "props": 6,
+   "rows": 0
+  },
+  {
+   "city": "ct/westport",
+   "drive_min": 71.2,
+   "props": 4,
+   "rows": 7
+  },
+  {
+   "city": "nj/belleville",
+   "drive_min": 46.5,
+   "props": 19,
+   "rows": 27
+  },
+  {
+   "city": "nj/bloomfield",
+   "drive_min": 48.1,
+   "props": 14,
+   "rows": 34
+  },
+  {
+   "city": "nj/clark",
+   "drive_min": 69.5,
+   "props": 2,
+   "rows": 10
+  },
+  {
+   "city": "nj/edison",
+   "drive_min": 68.4,
+   "props": 5,
+   "rows": 12
+  },
+  {
+   "city": "nj/irvington",
+   "drive_min": 48.7,
+   "props": 16,
+   "rows": 34
+  },
+  {
+   "city": "nj/livingston",
+   "drive_min": 63.3,
+   "props": 2,
+   "rows": 12
+  },
+  {
+   "city": "nj/montclair",
+   "drive_min": 52.1,
+   "props": 11,
+   "rows": 18
   }
  ],
- "cities_unmatched_far": [],
- "props_discovered": 1707,
- "props_skipped_lowprice_gt_3000": 795,
+ "cities_unmatched_far": [
+  {
+   "city": "ct/bloomfield",
+   "km_to_grid": 40.7
+  },
+  {
+   "city": "ct/hamden",
+   "km_to_grid": 0.4
+  },
+  {
+   "city": "ct/milford-city",
+   "km_to_grid": 1.5
+  },
+  {
+   "city": "ct/stratford",
+   "km_to_grid": 2.4
+  },
+  {
+   "city": "ct/trumbull",
+   "km_to_grid": 1.4
+  },
+  {
+   "city": "nj/hamilton-township",
+   "km_to_grid": 0.1
+  }
+ ],
+ "props_discovered": 2094,
+ "props_skipped_lowprice_gt_3000": 823,
  "reasons": {
-  "ok": 904,
-  "no_unit_le_3000": 8
+  "ok": 1262,
+  "no_unit_le_3000": 8,
+  "no_listing_object": 1
  },
  "blocked": null,
  "dogs_no_rows": 0

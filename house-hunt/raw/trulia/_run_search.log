@@ -97,3 +97,10 @@ search 950/1036 zip 10932: total=0 cards=0 all cards=9724 fetched=1026
 search 960/1036 zip 08629: total=2 cards=2 all cards=9807 fetched=1037
 search 970/1036 zip 07882: total=10 cards=10 all cards=9859 fetched=1047
 search 980/1036 zip 06524: total=0 cards=0 all cards=9954 fetched=1057
+search 990/1036 zip 06473: total=4 cards=4 all cards=10016 fetched=1067
+search 1000/1036 zip 06798: total=6 cards=6 all cards=10037 fetched=1077
+search 1010/1036 zip 12790: total=2 cards=2 all cards=10058 fetched=1087
+search 1020/1036 zip 06706: total=9 cards=8 all cards=10089 fetched=1097
+search 1030/1036 zip 08060: total=24 cards=24 all cards=10149 fetched=1107
+search 1036/1036 zip 12589: total=6 cards=3 all cards=10189 fetched=1113
+done: 10175 rows {'building_unit': 3, 'detail': 43, 'card': 10129}; zips in state 1048; cards 10189; details 45; network fetches 1113
