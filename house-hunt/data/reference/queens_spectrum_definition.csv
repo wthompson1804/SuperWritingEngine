@@ -1,8 +1,8 @@
 measure,column,queens_median,kind,same_band,big_band,direction
 all_in,all_in,2536.5,abs,75.0,250.0,lower is better
 sqft,sqft,645.0,abs,50.0,150.0,higher is better
-drive_min,drive_min_to,11.3,abs,5.0,20.0,"neutral: 1 closer, 5 farther"
-transit_min,transit_sat_median,32.0,abs,10.0,30.0,"neutral: 1 closer, 5 farther"
+drive_min,drive_min_to,11.3,abs,5.0,20.0,lower is better
+transit_min,transit_sat_median,32.0,abs,10.0,30.0,lower is better
 violent_crime,violent,2.93,ratio,0.2,0.5,lower is better
 property_crime,property,17.35,ratio,0.2,0.5,lower is better
 food_and_drink_nearby,restaurants_800m,30.5,ratio,0.25,0.6,higher is better

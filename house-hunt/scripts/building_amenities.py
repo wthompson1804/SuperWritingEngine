@@ -328,13 +328,13 @@ def ev(seg, m=None, width=170) -> str:
 RX = {
     "pool": r"(?i)\b(swimming |lap |plunge |saltwater |salt water |infinity )?pools?\b|\bpoolside\b",
     "pool_veto": r"(?i)pool table|car ?pool|whirlpool|pool view|billiard|pool hall|ping pong",
-    "gym": r"(?i)\bgym(nasium)?\b|fitness (cent(er|re)|studio|room|club|facilit|area|space|gym)|exercise (room|facilit)|health club|work-?out (room|facilit|studio)|\bfitness\b",
+    "gym": r"(?i)\bgym(nasium)?\b|fitness (cent(er|re)|studio|room|club|facilit|area|space|gym)|exercise (room|facilit)|health club|work-?out (room|facilit|studio)",
     "doorman": r"(?i)\bdoor ?(man|men|person|people)\b|\bconcierge\b|attended lobby|lobby attendant|front desk (attendant|staff|service)|24[- ]?h(ou)?r front desk",
     "doorman_veto": r"(?i)virtual door|package concierge|concierge trash|trash concierge|valet trash|video door|virtual concierge|electronic door|cyber ?door|tele-?door",
     "h24": r"(?i)24[- /]?(h(ou)?rs?|/ ?7|x7)|twenty[- ]four hour|full[- ]time door|round[- ]the[- ]clock",
     "part": r"(?i)part[- ]time|evening door|daytime door|weekend door|limited hours",
     "access": r"(?i)key ?-?fob|\bfob\b|intercom|gated (entry|entrance|community|access|complex|property|building)|\bgated\b|secur(e|ed|ity) (entry|entrance|access|building|lobby|door)|"
-              r"controlled[- ]access|access[- ]control|controlled entry|limited access|video (door|entry|security)|virtual door ?man|buzzer|keyless (building )?entry|butterfly ?mx|key ?card access|latch (access|entry)",
+              r"controlled[- ]access|access[- ]control|controlled entry|limited access|video (door|entry|security)|virtual door ?man|buzzer|keyless (building entry|entry system)|butterfly ?mx|key ?card access|latch (access|entry)",
     "access_veto": r"(?i)gated (parking|lot|garage)",
     "dog_run": r"(?i)\bdog[- ]?run\b",
     "dog_park": r"(?i)\b(dog|bark|pet|pooch|paw)[- ]?park\b|off[- ]leash|pet (play )?area|dog (play )?area|pet relief|dog relief",
@@ -347,9 +347,9 @@ RX = {
                     r"laundry on (every|each|site|premises)|laundry (is )?on[- ]site|\blaundry\b",
     "laundry_veto": r"(?i)hook-?ups?|laundromat|laundry service|dry clean",
     "roof": r"(?i)roof[- ]?(top|deck|terrace|garden|lounge)|\brooftop\b|sun ?deck|court ?yard|outdoor (space|lounge|kitchen|dining|terrace|area|living|seating|grill|fire|entertain|amenit)|"
-            r"\bbbq\b|barbe(c|q)ue|grill(s|ing)? (area|station)|\bbbq/grill\b|fire ?pit|community garden|\bgarden\b|common (terrace|patio)|shared (terrace|patio|yard|backyard|outdoor)|landscaped|picnic|pergola|cabana|green space",
-    "roof_veto": r"(?i)garden[- ]style|garden apartment|garden level|garden city|garden state|gardens? (blvd|ave|rd|st|pkwy)|kew gardens|botanic|olive garden|garden tub",
-    "balcony": r"(?i)\bbalcon(y|ies)\b|\bpatio\b|private (terrace|outdoor|deck|yard|backyard|roof)|\bterrace\b|juliet|\blanai\b",
+            r"\bbbq\b|barbe(c|q)ue|grill(s|ing)? (area|station)|\bbbq/grill\b|fire ?pit|community garden|\bgarden\b|(common|shared|public|outdoor|floor|amenity|sky|landscaped|communal|community|resident) (terrace|patio|yard|backyard|deck)|shared outdoor|landscaped|picnic|pergola|cabana|green space",
+    "roof_veto": r"(?i)garden[- ]style|garden apartment|garden level|garden city|garden state|gardens? (blvd|ave|rd|st|pkwy)|kew gardens|botanic|olive garden|garden tub|\bprivate\b",
+    "balcony": r"(?i)\bbalcon(y|ies)\b|\bpatio\b|private (terrace|outdoor|deck|yard|backyard|roof)|juliet|\blanai\b",
     "balcony_veto": r"(?i)roof[- ]?(top)? terrace|common terrace|shared terrace|terrace (ave|st|rd|pl|blvd|court|ct)\b|sky terrace|amenity terrace|pool terrace|poolside terrace|community terrace|count: 0",
     "package": r"(?i)\bpackage|\bparcel|amazon (hub|locker)|\bluxer\b|mail ?room",
     "package_veto": r"(?i)technology package|tech package|cable package|package (deal|includes|of )|appliance package|finish package|amenity package|internet package|utility package|media package",
@@ -390,14 +390,18 @@ def classify(segs_by_url: list[tuple[str, list]]):
         kinds, evs = set(), []
         for seg, m in hs:
             t = seg[2]
-            w = t[max(0, m.start() - 60):m.end() + 40]
             k = set()
-            if re.search(r"(?i)indoor\s*(/|&|and|or)\s*outdoor|outdoor\s*(/|&|and|or)\s*indoor", w):
-                k = {"indoor", "outdoor"}
-            else:
-                if re.search(r"(?i)\bindoor\b", w):
+            for pm in re.finditer(RX["pool"], t):
+                before = re.split(r"[,;.:(]", t[max(0, pm.start() - 40):pm.start()])[-1]
+                after = re.split(r"[,;.]", t[pm.end():pm.end() + 28])[0]
+                w = before + " POOL " + after
+                if re.search(r"(?i)in-?door\s*(/|&|and|or|-)\s*out-?door|out-?door\s*(/|&|and|or|-)\s*in-?door", w):
+                    k |= {"indoor", "outdoor"}
+                    continue
+                if re.search(r"(?i)\bin-?door\b", before) or re.search(r"(?i)^\s*[-(]?\s*in-?door", after):
                     k.add("indoor")
-                if re.search(r"(?i)\boutdoor\b|roof[- ]?top|\broof\b|open[- ]air", w):
+                if re.search(r"(?i)\bout-?door\b|roof[- ]?top|\broof\b|open[- ]air", before) or \
+                        re.search(r"(?i)^\s*[-(]?\s*out-?door|^\s*on the roof", after):
                     k.add("outdoor")
             if k - kinds or not evs:
                 evs.append((ev(seg, m), seg[3]))
@@ -484,7 +488,10 @@ def classify(segs_by_url: list[tuple[str, list]]):
             R["in_unit_laundry"] = ("on_site_only", ev(*hs[0]), hs[0][0][3])
 
     simple("roof_deck_or_outdoor_space", "roof", desc_nearby=True)
-    simple("balcony_some_units", "balcony")
+    if not simple("balcony_some_units", "balcony"):
+        hs = [(x, re.search(r"(?i)\bterrace\b", x[2])) for x in flat if x[0] == "list" and "unit" in x[1] and re.search(r"(?i)\bterrace\b", x[2])]
+        if hs:
+            R["balcony_some_units"] = ("yes", ev(*hs[0]), hs[0][0][3])
     simple("package_room", "package")
     simple("coworking_or_lounge", "cowork", desc_nearby=True)
     simple("elevator_stated", "elevator")
@@ -712,6 +719,11 @@ def process(key: str, urows: list[dict], lrows: list[dict], cf: dict, idx: dict,
             v = cf_value(col, crow.get(fact, ""), crow.get(fact + "_snippet", ""))
             if v:
                 R[col] = (v, "[community_facts.csv] " + clean(crow.get(fact + "_snippet", ""))[:200], crow.get(fact + "_source_url") or crow.get("community_url"))
+        cfp = cf_value("pool", crow.get("pool", ""), "")
+        if "pool" in R and cfp in ("indoor", "outdoor", "both") and R["pool"][0] != cfp and R["pool"][0] != "both":
+            have = R["pool"][0]
+            merged = cfp if have == "yes_type_unknown" else "both"   # indoor on one page + outdoor on another
+            R["pool"] = (merged, R["pool"][1] + " || [community_facts.csv] " + clean(crow.get("pool_snippet", ""))[:200], R["pool"][2])
         if "gated_or_garage_parking" not in R and crow.get("parking_type", "").strip():
             pt = crow["parking_type"].lower()
             typ = ("garage" if "garage" in pt else "gated_lot" if "gated" in pt else "covered" if "covered" in pt

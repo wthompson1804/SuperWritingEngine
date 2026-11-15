@@ -157,11 +157,11 @@ def main():
     u.to_csv(DATA / "ranked_units.csv", index=False)
 
     # ---- five-point spectrum against staying in Queens (Will, 2026-11-15): 3 = about the same as Queens,
-    #      1-2 = worse for her, 4-5 = better for her. Distance is "closer / farther", not better / worse.
+    #      1-2 = worse for her, 4-5 = better for her. Closer to her parents counts as better (Will, 2026-11-15).
     home = u[u.hood_area.astype(str).eq("Queens")]
     SPEC = {  # column, kind, small band, big band, higher_is_better (None = neutral: 1 much closer .. 5 much farther)
         "all_in": ("all_in", "abs", 75, 250, False), "sqft": ("sqft", "abs", 50, 150, True),
-        "drive_min": ("drive_min_to", "abs", 5, 20, None), "transit_min": ("transit_sat_median", "abs", 10, 30, None),
+        "drive_min": ("drive_min_to", "abs", 5, 20, False), "transit_min": ("transit_sat_median", "abs", 10, 30, False),  # Will: closer to her parents is better
         "violent_crime": ("violent", "ratio", 0.2, 0.5, False), "property_crime": ("property", "ratio", 0.2, 0.5, False),
         "food_and_drink_nearby": ("restaurants_800m", "ratio", 0.25, 0.6, True),
         "walk_to_green": ("park_walk_min", "abs", 2, 6, False), "parking": ("parking_rank", "abs", 0.5, 1.5, True),
