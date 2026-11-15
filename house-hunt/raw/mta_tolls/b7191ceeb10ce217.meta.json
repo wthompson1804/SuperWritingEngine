@@ -1,0 +1,7 @@
+{
+ "url": "https://en.wikipedia.org/w/api.php?action=query&prop=extracts%7Crevisions&rvprop=timestamp%7Cids&explaintext=1&titles=Verrazzano%E2%80%93Narrows+Bridge&format=json",
+ "retrieved_at": "2026-11-15T23:46:32+00:00",
+ "status": 200,
+ "path": "raw/mta_tolls/b7191ceeb10ce217.json",
+ "source": "mta_tolls"
+}
