@@ -6542,7 +6542,8 @@
 "grid_zcta": "06896",
 "drive_min": 91.8,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:32:48+00:00"
 },
 "west-haven-ct": {
 "name": "West Haven",
@@ -6654,7 +6655,8 @@
 "grid_zcta": "06877",
 "drive_min": 88.9,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:32:35+00:00"
 },
 "brewster-ny": {
 "name": "Brewster",
@@ -6711,7 +6713,8 @@
 "grid_zcta": "10512",
 "drive_min": 88.8,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:32:33+00:00"
 },
 "new-milford-ct": {
 "name": "New Milford",
@@ -6880,7 +6883,8 @@
 "grid_zcta": "10918",
 "drive_min": 89.9,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:32:44+00:00"
 },
 "wurtsboro-ny": {
 "name": "Wurtsboro",
@@ -7799,7 +7803,7 @@
 "grid_zcta": "11941",
 "drive_min": 90.7,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "laurel-ny": {
 "name": "Laurel",
@@ -7883,7 +7887,8 @@
 "grid_zcta": "11949",
 "drive_min": 88.0,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:32:28+00:00"
 },
 "hampton-bays-ny": {
 "name": "Hampton Bays",
@@ -8010,7 +8015,7 @@
 "grid_zcta": "11786",
 "drive_min": 88.8,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "ridge-ny": {
 "name": "Ridge",
@@ -9677,7 +9682,7 @@
 "grid_zcta": "08852",
 "drive_min": 88.6,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "stanhope-nj": {
 "name": "Stanhope",
@@ -9807,7 +9812,7 @@
 "grid_zcta": "07718",
 "drive_min": 89.3,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "leonardo-nj": {
 "name": "Leonardo",
@@ -9821,7 +9826,7 @@
 "grid_zcta": "07737",
 "drive_min": 91.0,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "red-bank-nj": {
 "name": "Red Bank",
@@ -9835,7 +9840,8 @@
 "grid_zcta": "07701",
 "drive_min": 89.0,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:32:39+00:00"
 },
 "navesink-nj": {
 "name": "Navesink",
@@ -9934,7 +9940,8 @@
 "grid_zcta": "10996",
 "drive_min": 88.7,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:32:30+00:00"
 },
 "garrison-ny": {
 "name": "Garrison",
@@ -9990,7 +9997,8 @@
 "grid_zcta": "07419",
 "drive_min": 89.4,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:32:41+00:00"
 },
 "ogdensburg-nj": {
 "name": "Ogdensburg",
@@ -10018,7 +10026,7 @@
 "grid_zcta": "07871",
 "drive_min": 87.9,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "chester-nj": {
 "name": "Chester",
@@ -10032,7 +10040,7 @@
 "grid_zcta": "07930",
 "drive_min": 91.8,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "jamesburg-nj": {
 "name": "Jamesburg",
@@ -10061,7 +10069,7 @@
 "grid_zcta": "08831",
 "drive_min": 87.9,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "somerville-nj": {
 "name": "Somerville",
@@ -10133,7 +10141,7 @@
 "grid_zcta": "07726",
 "drive_min": 90.9,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "somerset-county-nj": {
 "name": "Somerset County",
@@ -10189,7 +10197,7 @@
 "grid_zcta": "07702",
 "drive_min": 91.0,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "eatontown-nj": {
 "name": "Eatontown",
@@ -10329,7 +10337,7 @@
 "grid_zcta": "11786",
 "drive_min": 88.8,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "highlands-nj": {
 "name": "Highlands",
@@ -10427,7 +10435,7 @@
 "grid_zcta": "08512",
 "drive_min": 90.0,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "hightstown-nj": {
 "name": "Hightstown",
@@ -10483,7 +10491,7 @@
 "grid_zcta": "07726",
 "drive_min": 90.9,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "roosevelt-nj": {
 "name": "Roosevelt",
@@ -10496,6 +10504,160 @@
 "grid_km": 0.27,
 "grid_zcta": "08555",
 "drive_min": 96.9,
+"in_area": true,
+"status": "new"
+},
+"monmouth-beach-nj": {
+"name": "Monmouth Beach",
+"state": "NJ",
+"lat": 40.3359265350001,
+"lng": -73.98734544,
+"listing_count": 16,
+"studios": 0,
+"onebeds": 5,
+"grid_km": 0.15,
+"grid_zcta": "07750",
+"drive_min": 101.0,
+"in_area": true,
+"status": "new"
+},
+"west-long-branch-nj": {
+"name": "West Long Branch",
+"state": "NJ",
+"lat": 40.2885159750001,
+"lng": -74.02000302,
+"listing_count": 44,
+"studios": 0,
+"onebeds": 1,
+"grid_km": 0.07,
+"grid_zcta": "07764",
+"drive_min": 96.4,
+"in_area": true,
+"status": "new"
+},
+"long-branch-nj": {
+"name": "Long Branch",
+"state": "NJ",
+"lat": 40.2949970100001,
+"lng": -73.9921030199999,
+"listing_count": 244,
+"studios": 4,
+"onebeds": 46,
+"grid_km": 0.19,
+"grid_zcta": "07740",
+"drive_min": 100.7,
+"in_area": true,
+"status": "new"
+},
+"oakhurst-nj": {
+"name": "Oakhurst",
+"state": "NJ",
+"lat": 40.2614589600001,
+"lng": -74.02659858,
+"listing_count": 114,
+"studios": 1,
+"onebeds": 1,
+"grid_km": 0.34,
+"grid_zcta": "07755",
+"drive_min": 99.8,
+"in_area": true,
+"status": "new"
+},
+"sussex-airport-fwn-53-county-road-639-sussex-nj": {
+"name": "Sussex Airport (FWN), 53 County Road 639, Sussex",
+"state": "NJ",
+"lat": 41.200279,
+"lng": -74.6230549,
+"listing_count": 0,
+"studios": null,
+"onebeds": null,
+"grid_km": 5.3,
+"grid_zcta": "07461",
+"drive_min": 103.1,
+"in_area": true,
+"status": "new"
+},
+"sussex-nj": {
+"name": "Sussex",
+"state": "NJ",
+"lat": 41.2098177,
+"lng": -74.6076614,
+"listing_count": 12,
+"studios": 1,
+"onebeds": 4,
+"grid_km": 4.14,
+"grid_zcta": "07461",
+"drive_min": 103.1,
+"in_area": true,
+"status": "new"
+},
+"lafayette-township-nj": {
+"name": "Lafayette Township",
+"state": "NJ",
+"lat": 41.0984301,
+"lng": -74.6884965,
+"listing_count": 0,
+"studios": null,
+"onebeds": null,
+"grid_km": 0.7,
+"grid_zcta": "07848",
+"drive_min": 98.3,
+"in_area": true,
+"status": "new"
+},
+"wantage-nj": {
+"name": "Wantage",
+"state": "NJ",
+"lat": 41.256843,
+"lng": -74.6166192,
+"listing_count": 0,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 1.21,
+"grid_zcta": "07461",
+"drive_min": 103.1,
+"in_area": true,
+"status": "new"
+},
+"branchville-nj": {
+"name": "Branchville",
+"state": "NJ",
+"lat": 41.1464852,
+"lng": -74.7523874,
+"listing_count": 5,
+"studios": 0,
+"onebeds": 1,
+"grid_km": 3.79,
+"grid_zcta": "07822",
+"drive_min": 103.5,
+"in_area": true,
+"status": "new"
+},
+"hampton-nj": {
+"name": "Hampton Township",
+"state": "NJ",
+"lat": 41.1087588,
+"lng": -74.8011315,
+"listing_count": 0,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 5.72,
+"grid_zcta": "07860",
+"drive_min": 107.3,
+"in_area": true,
+"status": "new"
+},
+"montague-township-nj": {
+"name": "Montague Township",
+"state": "NJ",
+"lat": 41.2956937,
+"lng": -74.7839936,
+"listing_count": 0,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 4.76,
+"grid_zcta": "07827",
+"drive_min": 115.4,
 "in_area": true,
 "status": "new"
 }
