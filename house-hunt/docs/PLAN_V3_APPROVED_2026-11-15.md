@@ -20,7 +20,7 @@ Nine of ten Phase 1 agents were interrupted; their scripts and caches are partia
 | Type | Studio or 1BR |
 | Money | Listed rent ≤ $3,000 **and** all-in ≤ $3,000. All-in = rent + required fees + pet rent + parking + estimated electric, gas and internet where not included. Any estimated or missing line gets an asterisk |
 | Move-in | Available now through Dec 15, 2026 |
-| Dog | Dogs explicitly allowed, and any weight limit is **25 lb or more** (Will lowered it from 40 on 2026-11-15: the dog will not exceed 25 lb). "Not stated" fails until the building's pet policy confirms it |
+| Dog | Dogs explicitly allowed, and any weight limit is **25 lb or more** (Will lowered it from 40 on 2026-11-15: the dog will not exceed 25 lb). A size-only policy of "small dogs" passes (Will, 2026-11-15), with a tour question to confirm the limit. "Not stated" fails until the building's pet policy confirms it |
 | Building | Elevator building only. No walk-ups and **no ground-floor units**. Where a listing does not state it, a building of 6+ floors is treated as having an elevator, with an asterisk (Will, 2026-11-15) |
 | Place | Free-flow drive to Jamaica station under 2 hours. **Queens is included** (Will reversed the earlier exclusion) |
 | Proof | Live link; price and date read from the listing page itself, with the time seen |
