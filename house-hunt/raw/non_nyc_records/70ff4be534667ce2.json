@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"3e34fe6c-e483-ee11-8179-001dd8065b31","ultra_name":"ATLAS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043342001","ultra_addressline1":"270 JOHNSTON AVE","ultra_block":"15801","ultra_lot":"49.01","ultra_propertyinterest":{
+        "Id":"09ae345a-e483-ee11-8179-001dd8087fe8","Name":"ATLAS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"ATLAS","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9cad345a-e483-ee11-8179-001dd8087fe8","Name":"FD JOHNSTON AVE LLC"
+      },"ultra_zipcode":"07304","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c9f85052-7f21-ee11-8f6c-001dd80aed16","ultra_name":"THE ATLAS","ultra_registrationnumber":"0906-01217-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"270 JOHNSTON AVE","ultra_block":"15801","ultra_lot":"49.01","ultra_propertyinterest":{
+        "Id":"f32e5946-7f21-ee11-8f6c-001dd80aed16","Name":"THE ATLAS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"THE ATLAS","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0c2f5946-7f21-ee11-8f6c-001dd80aed16","Name":"FD JOHNSTON LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

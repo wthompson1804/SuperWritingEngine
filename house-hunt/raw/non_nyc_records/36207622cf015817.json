@@ -1,0 +1,49 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"3","value":[
+    {
+      "ultra_buildingid":"f21c4211-7854-ec11-8c62-001dd802f14e","ultra_name":"THE HAZEL","ultra_registrationnumber":"0906-01159-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"89 MONITOR ST.","ultra_block":"19003","ultra_lot":"8.01","ultra_propertyinterest":{
+        "Id":"859d4505-7854-ec11-8c62-001dd802f14e","Name":"THE HAZEL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"THE HAZEL","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":{
+        "Id":"dd1c4211-7854-ec11-8c62-001dd802f14e","Name":"KONE"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"36d2490b-7854-ec11-8c62-001dd802f14e","Name":"BW 89 MONITOR LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"54f6153c-7d6c-ef11-a671-001dd8037580","ultra_name":"The HAZEL (99 Monitor ST) Consolidated","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043186002","ultra_addressline1":"89 MONITOR STREET","ultra_block":"19003","ultra_lot":"1.02","ultra_propertyinterest":{
+        "Id":"6f835f67-496e-ec11-8f8e-001dd8032165","Name":"THE HAZEL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"THE HAZEL","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"The Hazel 89 Monitor","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3a835f67-496e-ec11-8f8e-001dd8032165","Name":"FDAD MAPLE LLC"
+      },"ultra_zipcode":"07304","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"95a2dd7a-496e-ec11-8f8e-001dd8032165","ultra_name":"THE HAZEL [89 MONITOR ST]","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043186001","ultra_addressline1":"89 MONITOR ST","ultra_block":"19003","ultra_lot":"8.01","ultra_propertyinterest":{
+        "Id":"6f835f67-496e-ec11-8f8e-001dd8032165","Name":"THE HAZEL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"THE HAZEL","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3a835f67-496e-ec11-8f8e-001dd8032165","Name":"FDAD MAPLE LLC"
+      },"ultra_zipcode":"07304","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"9","value":[
+    {
+      "ultra_buildingid":"654a5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"155 N WASHINGTON","ultra_registrationnumber":"0203-00106-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"155 N WASHINGTON AV","ultra_block":"28","ultra_lot":"54","ultra_propertyinterest":{
+        "Id":"9d71e59f-9f2f-e811-8120-1458d04e2fb8","Name":"155 N WASHINGTON"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ca2b7521-162f-e811-8126-1458d04eb810","Name":"BERGENFIELD BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"18b7e2ae-b42f-e811-8122-1458d04ece60","Name":"LACOR INC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3109d6b0-e5cb-488c-a78c-6e546846aada","ultra_name":"155 WASHINGTON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0210028163001","ultra_addressline1":"155 WASHINGTON AVE","ultra_block":"909","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"ce106583-a2d9-44e7-aa5a-0a0ffed03e6a","Name":"155 WASHINGTON AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"d82b7521-162f-e811-8126-1458d04eb810","Name":"DUMONT BORO"
+      },"ultra_propertyportalsearchfield":"155 WASHINGTON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d910ed83-6032-4e22-99a0-e259362a534e","Name":"DELORES MAGDA"
+      },"ultra_zipcode":"07628","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"03403c99-d72f-e811-8122-1458d04ece60","ultra_name":"CLOVER ENTERPRISES","ultra_registrationnumber":"0714-00423-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"155 WASHINGTON ST","ultra_block":"66","ultra_lot":"45","ultra_propertyinterest":{
+        "Id":"d087d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"CLOVER ENTERPRISES"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"CLOVER ENTERPRISES","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c92457f4-7eba-ec11-983e-001dd800e9c1","Name":"155 WASHINGTON STREET URBAN RENEWAL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b9d55575-d72f-e811-8122-1458d04ece60","ultra_name":"G WASHINGTON SCHOOL","ultra_registrationnumber":"0251-00123-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"155 WASHINGTON PL","ultra_block":"2202","ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"7d82e59f-9f2f-e811-8120-1458d04e2fb8","Name":"G WASHINGTON SCHOOL"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"2a2c7521-162f-e811-8126-1458d04eb810","Name":"RIDGEWOOD VILLAGE"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"3e1cfe08-fc42-e811-8120-1458d04eaba0","Name":"Kencor Elevator Systems"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8cc7e2ae-b42f-e811-8122-1458d04ece60","Name":"Ridgewood Public Schools"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"754a5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"HILL PLAZA","ultra_registrationnumber":"0203-00114-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"155 S WASHINGTON AV","ultra_block":"244","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"ad71e59f-9f2f-e811-8120-1458d04e2fb8","Name":"HILL PLAZA"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ca2b7521-162f-e811-8126-1458d04eb810","Name":"BERGENFIELD BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"14f60d8a-a33e-e811-8121-1458d04e2fb8","Name":"THOMAS HILL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"96a621b7-d72f-e811-8122-1458d04ece60","ultra_name":"TOWERS AT PORTSIDE","ultra_registrationnumber":"0906-00381-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"155 WASHINGTON ST","ultra_block":"60","ultra_lot":"34","ultra_propertyinterest":{
+        "Id":"2a9ad6c6-9f2f-e811-8120-1458d04e2fb8","Name":"TOWERS AT PORTSIDE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e83f3dc7-b42f-e811-8122-1458d04ece60","Name":"EQUITY APARTMENTS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"223a0d6f-5bde-43d3-92c4-f99db09c561c","ultra_name":"TWRS AT PORTSIDE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906024276001","ultra_addressline1":"155 WASHINGTON ST","ultra_block":"15902","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"1c380d35-163d-4172-93c5-43e8f43ee529","Name":"PORTSIDE TOWERS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"PORTSIDE TOWERS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"01b09b20-b8d2-4122-8d5a-db456984abcb","Name":"TWRS AT PORTSIDE URBAN RENEWALCO LLC"
+      },"ultra_zipcode":"07302","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e488f349-d0d2-ec11-a7b4-001dd800e74c","ultra_name":"URBY NEWARK","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714076640002","ultra_addressline1":"155 WASHINGTON ST","ultra_block":"66","ultra_lot":"45","ultra_propertyinterest":{
+        "Id":"d1905cf0-cfd2-ec11-a7b4-001dd800e74c","Name":"URBY NEWARK"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"URBY NEWARK","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"141-159 WASHINGTON ST","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3594d3e8-cfd2-ec11-a7b4-001dd800e74c","Name":"155 WASHINGTON ST URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07102","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a31e6e0b-d0d2-ec11-a7b4-001dd800efae","ultra_name":"URBY NEWARK","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714076640001","ultra_addressline1":"155 WASHINGTON ST","ultra_block":"66","ultra_lot":"45","ultra_propertyinterest":{
+        "Id":"d1905cf0-cfd2-ec11-a7b4-001dd800e74c","Name":"URBY NEWARK"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"URBY NEWARK","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"141-159 WASHINGTON ST","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3594d3e8-cfd2-ec11-a7b4-001dd800e74c","Name":"155 WASHINGTON ST URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07102","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}
