@@ -76,11 +76,13 @@ gate fact stated on the page.
   2026-11-15: her dog is at most 25 lb): the unit carries the note "page says small dogs; no weight number" and the tour question "Confirm the
   dog weight limit in pounds". A stated limit under 25 lb, no dogs, and service animals only still exclude. A policy that conflicts between
   two aggregators is an open fact; the building's own site or its manager's page outranks an aggregator.
-- One open fact: ranked, held in `data/needs_confirmation.csv` with the question. Two or more: sketchy, excluded.
+- One open fact: ranked with the 0.97 certainty factor and listed in `data/needs_confirmation.csv` with the question. Two or more: sketchy, excluded.
 
-**Shown.** Clean on every gate fact, not an avoid building, **seen live in the evidence pass** (live status `live` or `changed`), at most 2 per
-building (counted on `building_id`, duplicates of a unit removed first), best 10 per neighborhood. Clean candidates without a live check go to
-`data/needs_live_check.csv` and are not shown. `scripts/check_registry.py` fails the run if a shown unit breaks any of these rules.
+**Shown (owner, 2026-11-15).** Not an avoid building, and at most **one** thing still open, counting the three gate facts and a missing live
+check alike. A unit with one open item is shown with an asterisk (`confirm_asterisk`, `confirm_what`, `confirm_why`). A unit with one open gate
+fact and no live check waits in `data/needs_live_check.csv`. At most 2 per building (counted on `building_id`, duplicates of a unit removed
+first), best 10 per neighborhood. `data/needs_confirmation.csv` is the phone-call list. `scripts/check_registry.py` fails the run if a shown
+unit breaks any of these rules.
 
 **Scoring changes.** Pool, doorman and the other amenity tests reject negatives and near-misses ("Pool table", "none listed", "no doorman
 stated"; a virtual doorman counts as controlled access only). A confirmed "no weight limit" scores as the best weight policy. The

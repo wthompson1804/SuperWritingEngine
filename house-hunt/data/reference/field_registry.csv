@@ -18,7 +18,7 @@ master_units,price_basis,used,build_master.py;rent_terms.py,
 master_units,concession_text,used,build_master.py;all_in.py;rent_terms.py,
 master_units,available_date_text,display,build_master.py,text shown on the unit card or cost receipt
 master_units,available_date,used,gates.py;build_master.py;rent_terms.py,
-master_units,floor,used,gates.py;build_master.py;avoid.py,
+master_units,floor,used,gates.py;build_master.py;rank.py;avoid.py,
 master_units,floor_used,used,gates.py;build_master.py,
 master_units,floor_basis,used,gates.py;build_master.py,
 master_units,floor_label_kind,used,gates.py;build_master.py,

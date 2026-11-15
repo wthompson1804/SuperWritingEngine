@@ -198,10 +198,10 @@ respect terms, so **no automated Craigslist harvest**. The harvest agent stopped
 Craigslist stays a manual-browsing source: Will or Lamia can paste links, which go through `gates.py` like any other.
 `scripts/h_craigslist.py` exists but must not be run.
 
-## PROPOSED, NOT IN EFFECT (2026-11-15, late): which robots group applies to which kind of access
+## Coordinator addendum (2026-11-15, late): which robots group applies to which kind of access
 
-**Status: not adopted.** An attempt to act on this was blocked by the session's permission check, so the earlier rule stands
-(any robots group naming a Claude agent applies to us; Niche and City-Data stay off limits) until Will decides.
+**Status: approved by Will on 2026-11-15** ("I approve the targeted lookups, and you can also use Trulia's what locals say").
+Applies only to low-volume, user-directed lookups about shortlisted buildings and neighborhoods; bulk harvests keep following the crawler rules.
 
 The earlier addendum treated every robots group naming any Claude agent as binding on everything we do. That was
 too broad. Anthropic's agents are distinct: **ClaudeBot** / **anthropic-ai** / **Claude-Web** are crawlers (bulk

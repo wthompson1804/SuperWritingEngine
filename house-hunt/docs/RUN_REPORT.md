@@ -1,4 +1,4 @@
-# Run report (2026-11-15T22:40:16+00:00)
+# Run report (2026-11-15T22:43:30+00:00)
 
 ## Steps
 
@@ -32,12 +32,13 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2020 | 2020 | +0 |
 | within the $3,000 all-in cap | 1664 | 1664 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 1185 | 1039 | +146 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 120 | 68 | +52 |
-| avoid cards | 30 | 24 | +6 |
-| held back for one confirmation | 317 | 307 | +10 |
-| clean, waiting for a live check (not shown) | 93 | 52 | +41 |
-| neighborhoods with 3+ shown places | 13 | 8 | +5 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 1185 | 1185 | +0 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 324 | 324 | +0 |
+| avoid cards | 30 | 30 | +0 |
+|   shown with an asterisk (one thing to confirm) | 211 | 211 | +0 |
+| held back for one confirmation | 189 | 189 | +0 |
+| clean, waiting for a live check (not shown) | 190 | 190 | +0 |
+| neighborhoods with 3+ shown places | 36 | 36 | +0 |
 | buildings in the master table | 608 | 608 | +0 |
 
 ## Why units left
@@ -67,33 +68,33 @@
 
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
-| The Fresh-Start Year      |               5 |       64 |       6 |             0 |
-| The Little-City Year      |              35 |      522 |      36 |             7 |
-| The Old-Neighborhood Year |              50 |      183 |      49 |            21 |
-| The Quiet-Street Year     |              14 |       26 |       2 |             0 |
-| The Room-to-Breathe Year  |              53 |      376 |      22 |             0 |
-| The Walk-Everywhere Year  |               9 |       14 |       5 |             2 |
+| The Fresh-Start Year      |               5 |       64 |      23 |             0 |
+| The Little-City Year      |              35 |      522 |     110 |             7 |
+| The Old-Neighborhood Year |              50 |      183 |      92 |            21 |
+| The Quiet-Street Year     |              14 |       26 |      15 |             0 |
+| The Room-to-Breathe Year  |              53 |      376 |      76 |             0 |
+| The Walk-Everywhere Year  |               9 |       14 |       8 |             2 |
 
 ## Fill rate among shown units (percent with a value)
 
 | Field | % |
 |---|---|
-| sqft | 72 |
-| unit_floor | 100 |
+| sqft | 79 |
+| unit_floor | 74 |
 | elevator_basis | 100 |
-| dog_weight_limit_lb | 13 |
-| parking_type | 71 |
-| parking_fee | 17 |
-| pet_rent | 38 |
-| pool | 22 |
-| doorman | 32 |
-| year_built | 68 |
-| toll_rt_ezpass | 57 |
-| transit_sat_median | 100 |
-| near_violent_250m_24m | 40 |
-| live_status | 100 |
-| rent_first_full_payment_date | 70 |
-| ev_pause_notes | 38 |
+| dog_weight_limit_lb | 18 |
+| parking_type | 74 |
+| parking_fee | 18 |
+| pet_rent | 44 |
+| pool | 28 |
+| doorman | 27 |
+| year_built | 58 |
+| toll_rt_ezpass | 40 |
+| transit_sat_median | 92 |
+| near_violent_250m_24m | 28 |
+| live_status | 77 |
+| rent_first_full_payment_date | 73 |
+| ev_pause_notes | 28 |
 
 ## Last lines of each step
 
@@ -220,7 +221,7 @@ units 2020; cost gate {'pass': 1664, 'fail': 356}; rent asterisk 1289; rent term
 
 **ranking and selection**
 ```
-evidence: 4 units excluded, shown 120, avoid cards 30, held for a confirmation 317, clean but waiting for a live check 93, shown without a live check 0
+evidence: 4 units excluded, shown 324, avoid cards 30, of them with an asterisk 211 ({'floor': 103, 'live check': 77, 'elevator': 29, 'dogs allowed': 2}), held for a confirmation 189, waiting for a live check 190
 stages: 2020 costed -> -356 over the all-in cap -> -363 Jamaica safety rule -> -29 failed a gate on confirmed facts -> -83 sketchy -> -4 evidence exclusions -> 1185 ranked
 (kept 1185 units; candidates 533; shown 491; pools: {'': 820, 'pool': 341, 'indoor': 24}
 ```

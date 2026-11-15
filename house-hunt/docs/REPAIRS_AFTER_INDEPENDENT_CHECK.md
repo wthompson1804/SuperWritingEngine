@@ -14,48 +14,69 @@ for every example string quoted in the check; first step of `scripts/run_all.py`
 other agents added listings while this work ran (18,290 → 20,464 after dedupe), so the totals moved for that reason
 too. The last table follows the 207 units shown before, which removes that effect.
 
-| | Before | After |
-|---|---|---|
-| Listings after dedupe | 18,290 | 20,464 |
-| Listings failing the floor gate / on the floor gate alone | 1,612 / 1,269 | 1,076 / 804 |
-| Units costed in the master | 1,524 | 2,020 (22 duplicates of a unit in the same building removed) |
-| Units over the $3,000 all-in cap | 211 | 356 |
-| Ranked | 961 | 1,185 |
-| **Shown** | **207** | **120** |
-| Held for one confirmation (`needs_confirmation.csv`) | 200 | 317 |
-| Clean, waiting for a live check (`needs_live_check.csv`) | did not exist (21 shown without one, 5 "blocked") | 93, none shown |
-| Avoid cards | 27 | 30 |
-| Avoid buildings | 48 | 48 (three reasons reworded or removed, see W19) |
-| Neighborhoods with 3+ shown places | 26 | 13 |
-| Rows in `master_conflicts.csv` | 212 | 53 |
+Two owner decisions arrived during the repair (both described below): "small dogs" with no number passes the dog
+gate, and a unit with exactly one thing still to confirm is shown with an asterisk instead of being held. The middle
+column is the strict state after the W1–W20 repairs and the small-dogs rule, before the asterisk rule; the right column
+is the final state on disk.
+
+| | Before | Repairs, strict ("confirmed before shown") | Final (one open item shown with an asterisk) |
+|---|---|---|---|
+| Listings after dedupe | 18,290 | 20,464 | 20,464 |
+| Listings failing the floor gate / on the floor gate alone | 1,612 / 1,269 | 1,076 / 804 | same |
+| Units costed in the master | 1,524 | 2,020 (22 duplicate listings of a unit merged) | same |
+| Units over the $3,000 all-in cap | 211 | 356 | 356 |
+| Ranked | 961 | 1,185 | 1,185 |
+| **Shown** | **207** | **120** | **324** (113 with nothing open, 211 with an asterisk) |
+| Held for one confirmation, not shown | 200 | 317 | 189 |
+| `needs_confirmation.csv` (phone-call list) | 200 | 317 | 323 (shown-with-asterisk units flagged) |
+| Waiting for a live check, not shown (`needs_live_check.csv`) | did not exist; 26 shown without one | 93 | 190 (one open gate fact and no live check) |
+| Avoid cards | 27 | 30 | 30 |
+| Avoid buildings | 48 | 48 | 48 (three reasons reworded or removed, W19) |
+| Neighborhoods with 3+ shown places | 26 | 13 | 36 |
+| Rows in `master_conflicts.csv` | 212 | 53 | 53 |
 
 Shown units by basis:
 
-| Fact | Before (207) | After (120) |
-|---|---|---|
-| Floor: confirmed | 20 | 32 |
-| Floor: stated on the page | 23 (17 of them really derived from the unit number) | 1 |
-| Floor: inferred | 164 (any label) | 87, all from a simple label, floor 3 or higher, marked "read from the unit number" |
-| Elevator: confirmed / amenities page / official record / stated | 182 / 14 / 6 / 5 | 112 / 2 / 6 / 0 |
-| Dogs allowed: confirmed / stated | 193 / 14 | 116 / 4 |
-| "Small dogs", no pound figure | 60, unmarked | 52, each with the note and tour question (owner's rule, below) |
-| Live check: live / changed / blocked / none | 179 / 2 / 5 / 21 | 119 / 1 / 0 / 0 |
-| Rent asterisk (special offer) | 52 | 45 |
-| Most shown in one building | 3 | 2 |
+| Fact | Before (207) | Strict (120) | Final (324) |
+|---|---|---|---|
+| Floor: confirmed | 20 | 32 | 41 |
+| Floor: stated on the page | 23 (17 really derived from the unit number) | 1 | 14 |
+| Floor: inferred, accepted (simple label, floor 3+, "read from the unit number") | none marked; 164 inferred from any label | 87 | 166 |
+| Floor: open, shown with an asterisk (unknown 84, inferred but not accepted 19) | 0 | 0 | 103 |
+| Elevator: confirmed / amenities page / official record / stated | 182 / 14 / 6 / 5 | 112 / 2 / 6 / 0 | 218 / 65 / 11 / 1 |
+| Elevator: inferred, shown with an asterisk | 0 (hidden as "stated") | 0 | 29 |
+| Dogs allowed: confirmed / stated | 193 / 14 | 116 / 4 | 250 / 74 |
+| Dogs conflicting between aggregators, asterisk | 0 | 0 | 2 |
+| "Small dogs", no pound figure | 60, unmarked | 52, with note and tour question | 109, with note and tour question |
+| Live check: live / changed / blocked / none | 179 / 2 / 5 / 21 | 119 / 1 / 0 / 0 | 242 / 5 / 3 / 74 (the 77 without one carry the asterisk) |
+| Rent asterisk (special offer) | 52 | 45 | 140 |
+| Most shown in one building | 3 | 2 | 2 |
+| Highest all-in | 2,998 (understated) | 2,993 | 2,999 |
 
-What happened to the 207 units shown before:
+Of the 207 units shown before: 93 were still shown under the strict rule and 155 are shown in the final state (65 of
+them with an asterisk). Of the rest, 14 are over the $3,000 cap once parking, fees and utilities are read correctly, 10
+are no longer in the master (source row changed or gone), 3 were merged as duplicates, and the others have two open
+items, wait for a live check, or fell outside the best 10 of their neighborhood.
 
-| Outcome | Units |
-|---|---|
-| Still shown | 93 |
-| Held: "Which floor is the unit on?" (floor 2 from a label, a complex label, or no reading) | 56 |
-| Held: elevator only inferred | 2 |
-| Ranked but not clean on another count, not selected | 15 |
-| Over the $3,000 cap once parking, fees and utilities were read correctly | 14 |
-| Waiting for a live check | 12 |
-| No longer in the master (source row changed or gone since the check) | 10 |
-| Merged as a duplicate of another listing of the same unit | 3 |
-| Excluded (hard gate 1, sketchy 1) | 2 |
+## Owner's change during the repair: one open item is shown with an asterisk
+
+This replaces "confirmed before shown" for the single-open-fact case. In `rank.py` (selection block):
+
+- Open items are the three gate facts (elevator only inferred; floor unknown or inferred in a way the floor rule does
+  not accept; dogs conflicting between aggregators) and a missing live check. A unit with **at most one** open item,
+  not in an avoid building, enters the shown selection, ranked normally (0.97 certainty factor for an open gate fact).
+- It carries `confirm_asterisk = yes`, `confirm_what` (elevator / floor / dogs allowed / live check) and `confirm_why`,
+  one plain sentence. `build_page_data.py` exports them as `confirm {asterisk, what, why}` on every unit.
+- Not shown: two or more open gate facts (sketchy), a gate failed on a confirmed or stated fact, sketchy listings,
+  avoid buildings, and a unit with one open gate fact **and** no live check (it waits in `needs_live_check.csv`).
+- `needs_confirmation.csv` is the phone-call list: every candidate with one open gate fact, with
+  `shown_with_asterisk`, `confirm_what`, `confirm_why`.
+- `check_registry.py` fails the run if a shown unit has more than one open item, has one without the three asterisk
+  fields, or names the wrong fact in `confirm_what`.
+- Wording: the coordinator's example for the floor read "ground-floor units are ruled out". The pipeline cannot
+  establish that for a floor it does not know, so the sentence says only what is known ("The listing does not give
+  the floor, and the unit number does not show it."). **84 shown units have an unknown floor; some may be on the
+  ground floor.**
 
 ## Owner's change during the repair: "small dogs" passes
 
@@ -80,8 +101,9 @@ her dog is at most 25 lb, so a size word with no pound figure **passes** the dog
   derived from unit number" is treated as inferred, not stated.
 - `build_master.py` (unit table): `unit_floor_basis` is confirmed / stated / inferred / unknown, with
   `unit_floor_label_kind`. An evidence row that read the floor "from unit number" is inferred whatever its status.
-- `rank.py`: clean on floor only if confirmed or stated; an inferred floor ≥ 3 from a simple label is accepted with
-  `floor_basis_note` and the tour question "Confirm the floor"; everything else is held.
+- `rank.py`: settled on floor only if confirmed or stated; an inferred floor ≥ 3 from a simple label is accepted with
+  `floor_basis_note` and the tour question "Confirm the floor"; everything else is an open fact (held under the
+  strict rule; shown with an asterisk under the owner's later rule if it is the unit's only open item).
 
 **W2. Small dogs.** See the owner's change above. Building-level flag `dog_size_only` is set from the listing's pet
 card, the harvest note and any evidence row (whatever its status). The three "contradicts: small dogs only" buildings
@@ -129,8 +151,10 @@ income-cap language excludes.
 **W11. Letter-only ground-floor guess.** `gates.py`: only G, GR, LOBBY, BSMT read as ground. "B2", "C4", "L3" become
 floor unknown. Listings failing on the floor gate alone: 1,269 → 804, on a larger listing set.
 
-**W12. Shown before the evidence pass.** `rank.py`: shown requires live status `live` or `changed`. Clean candidates
-without one go to `data/needs_live_check.csv` (93) and into `site/data.json` as `awaiting_live_check`, not as places.
+**W12. Shown before the evidence pass.** `rank.py`: a live check means live status `live` or `changed`. Under the
+owner's later rule a missing live check is one open item: a unit with nothing else open is shown with the asterisk
+"live check" (77 units); a unit with an open gate fact as well goes to `data/needs_live_check.csv` (190) and into
+`site/data.json` as `awaiting_live_check`, not as a place.
 
 **W13. Live price changes.** `all_in.py`: the live price is the rent, and rent-terms figures are re-based on it.
 
@@ -157,7 +181,7 @@ stay avoid on the other; 1000 Pacific St stays avoid on its ratings verdict inst
 
 **W20. Conflicting dog policy.** `parsers.dog_conflict`, used in `build_master.py` and `avoid.py`. The building's own
 or its manager's page wins (19 E 19th St, 100 Avenue G, Third & Valley → yes). Aggregator against aggregator is
-`conflicting`: held with "Are dogs allowed?" (467 West Ave, 8 Norden Pl, 1455 Washington Blvd and others).
+`conflicting`: an open fact with the question "Are dogs allowed?" (467 West Ave, 8 Norden Pl, 1455 Washington Blvd and others).
 
 **Cosmetic.** `lines_known` now counts stated cost lines (`all_in_stated_line_count`); numeric values are compared as
 numbers in `master_conflicts.csv`; the Mesa Verde exclusion reads "elevator not established: the sources conflict";
@@ -172,8 +196,8 @@ where an offer changes the monthly figure.
 | A2–A4 The Jefferson 462 | Parking $100 (first spot); utilities tenant-paid; "no amenity fee" = $0; all-in $3,142, over the cap |
 | A5–A8 The Agnes | Coordinates, drive (40.1 min) and nearest park (Lincoln Park) now from the right point |
 | A9 The Agnes name | **Left.** The name is the first listing row's; no source is clearly the better one |
-| A10 Parkside 2307, A11 Harrison Yards H2-316 | Floor unknown; held |
-| A12 The Brompton 7B | Elevator `inferred`; held |
+| A10 Parkside 2307, A11 Harrison Yards H2-316 | Floor unknown: an open fact (asterisk "floor" if nothing else is open) |
+| A12 The Brompton 7B | Elevator `inferred`: an open fact |
 | A13 The Botanic 444 rent | **Not fixable here**: needs a live check. It is no longer shown without one |
 | A14 Regency on Hudson, A15 The Highlands | Parking read from the Trulia fee lines ($150; $100, the cheapest covered or garage option) |
 | A16 The Edge at Raritan Heights 329 | Parking $0: one free surface spot |
@@ -187,6 +211,8 @@ where an offer changes the monthly figure.
 - The "conflicting dog policy" rule on a listing's own `CONFLICT` note still excludes the unit as sketchy (approved in
   `docs/RANKING.md`); W20's softer rule was applied to evidence rows only.
 - Avoid cards are not required to be clean on every gate fact, as before.
+- The stage label "shown (every gate fact confirmed or stated; ...)" in `run_all.py` / `RUN_REPORT.md` was kept so the
+  run history still lines up; it now includes asterisked units (counted on the next row).
 - Parking parse: one free-text description that mixes water, pet and parking prices reads $50 where $75 is right.
 - Harvesters still do not write a basis column; `gates.py` reads the basis from their notes.
 - The independent check should be re-run on a fresh sample (its own step 6).
