@@ -1,0 +1,8 @@
+User-agent:	*
+Disallow:	/system
+Disallow:	/templates
+Allow:	/frameworks
+Disallow:	/images
+Disallow:	/data
+Disallow:	/*.*$
+Crawl-delay: 10

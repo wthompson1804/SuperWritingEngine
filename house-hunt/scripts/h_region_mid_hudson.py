@@ -145,6 +145,19 @@ def zfacts(b):
             wl = str(max(int(x) for x in mw))
         if dogs == "unknown" and re.search(r"(?i)\bdogs?\b", gen) and not C.DOG_NO.search(gen):
             dogs = "yes"
+    desc = b.get("description") or ""
+    for sent in re.split(r"(?<=[.!?\n])\s+", desc):
+        if re.search(r"(?i)\b(dogs?|pets?|weight)\b", sent):
+            mw = re.findall(r"(\d{2,3})\s*(?:#|lbs?\b|pounds?|lb\.)", sent)
+            if mw:
+                pets.append("description: " + sent.strip()[:220])
+                if not wl:
+                    wl = str(max(int(x) for x in mw))
+                if dogs == "unknown" and re.search(r"(?i)\bdogs?\b", sent):
+                    dogs = "yes"
+    if elev == "unknown" and re.search(r"(?i)\belevators?\b", desc) and not re.search(r"(?i)no elevator", desc):
+        elev = "yes"
+        pets.append("(elevator mentioned in description)")
     if large is False and dogs == "yes":
         pets.append("LARGE DOGS NOT ALLOWED (Zillow size flag)")
     units = []
@@ -261,6 +274,8 @@ def zj(url, write=None):
             fl = ""
             mfl = re.fullmatch(r"(\d)(\d\d)[A-Z]?", un)
             fees = u.get("totalRequiredMonthlyMinFee")
+            if mfl and elev == "yes":
+                r["floor"] = mfl.group(1)
             r.update(unit=un, beds=u.get("beds"), baths=u.get("baths"), sqft=u.get("sqft") or "", listed_rent=u.get("price") or "",
                      available_date=u["_avail"], available_date_text=u["_availtxt"],
                      other_monthly_fees_json=C.jdump({"required_monthly_fees_min": fees}) if fees else "")
@@ -268,6 +283,10 @@ def zj(url, write=None):
                 r["price_basis"] = "floor plan 'from' price (Zillow building page)"
         r["listing_id"] = SRC + ":z:" + hashlib.sha1((url + "|" + str(r.get("unit", ""))).encode()).hexdigest()[:12]
         note = prefix
+        if r.get("floor") == "1":
+            note = (note + " Unit number suggests GROUND FLOOR (1xx).").strip()
+        elif r.get("floor"):
+            note = (note + " Floor inferred from unit number.").strip()
         if one and len(ok) > 1:
             note += f" {len(ok)} studio/1BR units <= 3000 on the page; only the cheapest recorded."
         r["notes"] = (note + " " + ov.get("notes", "")).strip()

@@ -1,0 +1,8 @@
+
+User-agent: *
+Disallow: /journal
+User-agent: Bingbot
+User-agent: Googlebot
+User-agent: Slurp
+Disallow:
+Sitemap: https://greenviewny.com/journal/sitemap.xml

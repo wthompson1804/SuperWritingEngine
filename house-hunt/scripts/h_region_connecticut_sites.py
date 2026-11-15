@@ -19,6 +19,11 @@ LINK = re.compile(r"pet|faq|amenit|feature|polic", re.I)
 PLAT = {"rentcafe": r"rentcafe|securecafe", "entrata": r"entrata|prospectportal", "realpage": r"realpage|onsite\.com|leasestar", "appfolio": r"appfolio",
         "knock": r"knockrentals|knockcrm|utm_knock", "funnel": r"funnelleasing|nestio", "engrain": r"sightmap|engrain", "yardi_nwg": r"nwgapi"}
 
+from h_mgmt_common import DOG_YES, DOG_NO
+WEIGHT = re.compile(r"(?i)\b\d{2,3}\s*(?:-\s*)?(?:lbs?\b|pounds?\b|lb\.)|no (?:weight|size) (?:limit|restriction)|weight (?:limit|restriction)s?")
+ELEV = re.compile(r"(?i)elevator")
+STORIES = re.compile(r"(?i)\b(\d{1,2}|four|five|six|seven|eight|nine|ten|eleven|twelve)[- ]stor(?:y|ies)\b|\b\d{1,2} floors\b|high[- ]rise|mid[- ]rise")
+
 def snips(t, width=110, cap=18):
     out, last = [], -10**9
     for m in KW.finditer(t):
@@ -49,8 +54,9 @@ def do(name, site):
     for l in re.findall(r'href="([^"#]+)"', h):
         if not LINK.search(l) or re.search(r"\.(css|js|png|jpe?g|svg|pdf|ico|woff2?)(\?|$)|privacy|cookie|wp-json|wp-content|xmlrpc|feed", l, re.I): continue
         u = clean(urljoin(site + "/", l))
-        if urlparse(u).netloc == host and u != site and u not in links: links.append(u)
-    for u in links[:5]:
+        if urlparse(u).netloc.replace("www.", "") == host.replace("www.", "") and u.rstrip("/") != site and u not in links: links.append(u)
+    links.sort(key=lambda u: (0 if re.search("pet", u, re.I) else 1 if re.search("faq", u, re.I) else 2))
+    for u in links[:6]:
         try:
             h2, m2 = polite_get(u, SRC)
         except BotWall as e:
@@ -58,6 +64,14 @@ def do(name, site):
         except Exception as e:
             continue
         if m2["status"] == 200: pages.append((u, h2, m2))
+    facts = {"dog_yes": [], "dog_no": [], "weights": [], "elevator": [], "stories": []}
+    for u, hh, mm in pages:
+        t = strip_tags(hh)
+        for key, rx in (("dog_yes", DOG_YES), ("dog_no", DOG_NO), ("weights", WEIGHT), ("elevator", ELEV), ("stories", STORIES)):
+            for mm2 in list(rx.finditer(t))[:3]:
+                c = t[max(0, mm2.start() - 120): mm2.end() + 120].strip()
+                if all(c[40:100] not in x["text"] for x in facts[key]): facts[key].append({"url": u, "seen": mm["retrieved_at"], "text": c})
+    rec["facts"] = facts
     for u, hh, mm in pages:
         t = strip_tags(hh)
         title = re.search(r"(?is)<title[^>]*>(.*?)</title>", hh)
@@ -75,10 +89,13 @@ def show(rec):
     seen = set()
     for p in rec["pages"]:
         print(f"  - {p['url']} [{p.get('seen','')}] {p.get('title','')} textlen={p.get('textlen')} prices={p.get('prices')} {p.get('blocked','')}")
-        for s in p.get("snips", []):
+        for s in ([] if "--facts" in sys.argv else p.get("snips", [])):
             k = s[30:90]
             if k in seen: continue
             seen.add(k); print("      ~", s[:260])
+    if "--facts" in sys.argv:
+        for k, v in (rec.get("facts") or {}).items():
+            for x in v[:3]: print(f"      [{k}] {x['text'][:250]}  <{x['url']}>")
 
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]

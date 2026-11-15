@@ -59,6 +59,20 @@ Old Phase 1 leftovers (`scripts/p1_*.py`, `data/metrics/`) are partial; only `ac
 
 ## Log
 
+### 2026-11-15, session 1 (late night): groups and safety rule settled
+- **Lifestyle groups approved** (6 groups; `scripts/lifestyle_groups.py`, centres saved in `data/reference/lifestyle_group_centres.csv`
+  so later runs assign new neighborhoods to the same groups; `--refit` only on purpose). Labels + subheads are in that script's `LABELS`
+  (Will wants evocative labels with a plain subhead; current set is a proposal awaiting his reaction).
+- **Safety rule (Will):** violent crime above Jamaica's precinct rate (9.8 per 1,000) = cut; property crime above Jamaica's = flag only.
+  See `docs/SAFETY_BASIS.md`. Benchmarks vs US / metro / local: `scripts/crime_benchmarks.py`.
+- We do **not** collect detached houses: all passing units are in elevator buildings; "detached share" describes the surrounding tract.
+- Trulia "Small dogs only" listings pass the dog gate with a tour question about the weight limit (Will has not objected).
+- Pipeline order now: `gates.py` → `enrich_nyc_pluto.py` → `gates.py` → `enrich_units.py` → `build_neighborhoods.py` →
+  `lifestyle_features.py` → `lifestyle_color.py` → `crime_benchmarks.py` → `lifestyle_groups.py`.
+- Still to do: fold `places.color()` into portraits; split Jersey City into its neighborhoods; rerun everything when the 5 region agents,
+  Apartment List outer ring and remaining Trulia targets finish; selection algorithm (design proposed to Will, not yet approved);
+  avoid list; evidence table and text; page build.
+
 ### 2026-11-15, session 1 (night): checkpoint A feedback from Will
 - **Rejected** grouping years by drive band and setting. Years must group by **lifestyle, not location** ("places that rhyme").
   Interim analysis in `docs/LIFESTYLE_ANALYSIS.md`; rerun after the regional agents finish, then bring names to Will.

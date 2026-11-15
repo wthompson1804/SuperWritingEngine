@@ -31,3 +31,13 @@ Caveats: rates describe the police agency or NYPD precinct, not the block; NYPD 
 
 Safety gate: a neighborhood is excluded when its violent-crime rate is 1.5 times the US average or more.
 That removes 27 neighborhoods and 100 units, and keeps 75 neighborhoods and 509 units.
+
+## Rule Will set (2026-11-15, supersedes the proposal above)
+
+**Jamaica is the yardstick** (NYPD 103rd Precinct, where her parents live: violent 9.8 and property 25.0 per 1,000).
+- **Violent crime above Jamaica's rate: the neighborhood is cut.**
+- **Property crime above Jamaica's rate: flagged, not cut.**
+Implemented in `scripts/lifestyle_groups.py` (`safety_cut`, `property_flag`, `violent_vs_jamaica`, `property_vs_jamaica`).
+First run: 6 neighborhoods cut (14 units): Mott Haven-Port Morris, Tremont, Ocean Hill, East Harlem (North), Mount Hope,
+Norwood. Property flag: Harlem (South), Morris Park, Pelham Parkway-Van Nest, Flemington.
+The US, metro and local ratios stay in the data for context on the page.

@@ -7,8 +7,8 @@
   "fetch_max_low": 2850.0,
   "minutes": 0
  },
- "srp_pages": 805,
- "detail_pages": 1563,
+ "srp_pages": 898,
+ "detail_pages": 1637,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1251,6 +1251,186 @@
    "drive_min": 67.6,
    "props": 2,
    "rows": 4
+  },
+  {
+   "city": "nj/rockaway",
+   "drive_min": 68.3,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/florham-park",
+   "drive_min": 68.5,
+   "props": 4,
+   "rows": 2
+  },
+  {
+   "city": "ny/fire-island",
+   "drive_min": 68.5,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "ny/ocean-beach",
+   "drive_min": 68.5,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "nj/metuchen",
+   "drive_min": 68.9,
+   "props": 7,
+   "rows": 38
+  },
+  {
+   "city": "ny/farmingville",
+   "drive_min": 69.2,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/sayreville",
+   "drive_min": 70.4,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "ny/centereach",
+   "drive_min": 70.4,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/boonton",
+   "drive_min": 71.8,
+   "props": 2,
+   "rows": 6
+  },
+  {
+   "city": "nj/south-amboy",
+   "drive_min": 71.9,
+   "props": 2,
+   "rows": 15
+  },
+  {
+   "city": "nj/north-plainfield",
+   "drive_min": 72.0,
+   "props": 2,
+   "rows": 8
+  },
+  {
+   "city": "nj/plainfield",
+   "drive_min": 72.0,
+   "props": 6,
+   "rows": 11
+  },
+  {
+   "city": "ny/selden",
+   "drive_min": 72.0,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/stony-brook",
+   "drive_min": 73.8,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/basking-ridge",
+   "drive_min": 74.0,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/south-plainfield",
+   "drive_min": 74.0,
+   "props": 1,
+   "rows": 3
+  },
+  {
+   "city": "nj/new-brunswick",
+   "drive_min": 74.1,
+   "props": 10,
+   "rows": 66
+  },
+  {
+   "city": "nj/dover",
+   "drive_min": 74.2,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/morris-plains",
+   "drive_min": 74.2,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/wharton",
+   "drive_min": 74.2,
+   "props": 2,
+   "rows": 6
+  },
+  {
+   "city": "nj/dunellen",
+   "drive_min": 74.5,
+   "props": 1,
+   "rows": 4
+  },
+  {
+   "city": "nj/laurence-harbor",
+   "drive_min": 74.8,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/yaphank",
+   "drive_min": 75.0,
+   "props": 2,
+   "rows": 0
+  },
+  {
+   "city": "nj/highland-park",
+   "drive_min": 75.4,
+   "props": 4,
+   "rows": 4
+  },
+  {
+   "city": "ny/coram",
+   "drive_min": 75.4,
+   "props": 4,
+   "rows": 10
+  },
+  {
+   "city": "ny/peekskill",
+   "drive_min": 75.8,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "nj/morristown",
+   "drive_min": 76.7,
+   "props": 11,
+   "rows": 33
+  },
+  {
+   "city": "nj/matawan",
+   "drive_min": 77.6,
+   "props": 6,
+   "rows": 19
+  },
+  {
+   "city": "ct/ridgefield",
+   "drive_min": 78.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/mount-arlington",
+   "drive_min": 78.3,
+   "props": 4,
+   "rows": 13
   }
  ],
  "cities_unmatched_far": [
@@ -1275,10 +1455,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2421,
- "props_skipped_lowprice_gt_3000": 858,
+ "props_discovered": 2505,
+ "props_skipped_lowprice_gt_3000": 868,
  "reasons": {
-  "ok": 1554,
+  "ok": 1628,
   "no_unit_le_3000": 8,
   "no_listing_object": 1
  },

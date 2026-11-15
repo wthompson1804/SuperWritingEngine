@@ -1,0 +1,8 @@
+user-agent: *
+disallow: /admin
+disallow: /account
+disallow: /checkout
+disallow: /cart
+disallow: /confirm
+sitemap: https://d28f3w0x9i80nq.cloudfront.net/sitemaps/bedfordhallstamford.com/sitemap.xml
+  

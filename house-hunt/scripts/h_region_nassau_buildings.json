@@ -447,5 +447,560 @@
   "min_rent_seen": "2026-11-15T19:56:01+00:00",
   "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
   "note": "Apartment List page last updated 2026-09-22 (stale); one studio at $3,299; dogs allowed; elevator not stated."
+ },
+ {
+  "name": "1 East Broadway (co-op)",
+  "address": "1 East Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/1-broadway-e-4b-long-beach-ny-11561-2056714008",
+  "elevator": "yes",
+  "floors": "8",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/1-broadway-e-4b-long-beach-ny-11561-2056714008",
+   "https://www.trulia.com/home/1-e-broadway-2h-long-beach-ny-11561-2102363182",
+   "https://www.trulia.com/home/1-e-broadway-7a-long-beach-ny-11561-2125127703"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Listing for #2H mentions a party room on the 8th floor, so 6+ floors (elevator assumed under the 6+ floors rule)."
+ },
+ {
+  "name": "10 Franklin Blvd",
+  "address": "10 Franklin Blvd",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/10-franklin-blvd-504-long-beach-ny-11561-466410136",
+  "elevator": "unknown",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/10-franklin-blvd-504-long-beach-ny-11561-466410136",
+   "https://www.trulia.com/home/10-franklin-blvd-600-long-beach-ny-11561-466388554"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Elevator not stated on the listing pages."
+ },
+ {
+  "name": "100 West Broadway (condo, doorman)",
+  "address": "100 West Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/100-w-broadway-2m-long-beach-ny-11561-2089413964",
+  "elevator": "unknown",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/100-w-broadway-2m-long-beach-ny-11561-2089413964"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Listing: 24/7 doorman, heated pool, laundry on every floor; elevator not stated in words."
+ },
+ {
+  "name": "21 Arizona Ave (condo)",
+  "address": "21 Arizona Ave",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/21-arizona-ave-101-long-beach-ny-11561-2056687372",
+  "elevator": "unknown",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/21-arizona-ave-101-long-beach-ny-11561-2056687372",
+   "https://www.trulia.com/home/21-arizona-ave-306-long-beach-ny-11561-31408176"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Condo; elevator not stated."
+ },
+ {
+  "name": "235 East Park Ave",
+  "address": "235 Park Ave",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/235-park-ave-205-long-beach-ny-11561-2056763952",
+  "elevator": "yes",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/235-park-ave-205-long-beach-ny-11561-2056763952"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Trulia lists Elevator."
+ },
+ {
+  "name": "25 West Broadway (condo)",
+  "address": "25 West Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/25-w-broadway-204-long-beach-ny-11561-2069636201",
+  "elevator": "yes",
+  "floors": "",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Listing says small dogs / case by case, no number",
+  "agg": [
+   "https://www.trulia.com/home/25-w-broadway-204-long-beach-ny-11561-2069636201"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Trulia lists Elevator. \"Pets considered on a case-by-case basis\"; Trulia size field: small dogs."
+ },
+ {
+  "name": "251-255 West Broadway",
+  "address": "251-255 West Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/251-255-w-broadway-203-long-beach-ny-11561-447567289",
+  "elevator": "unknown",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/251-255-w-broadway-203-long-beach-ny-11561-447567289"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Structured field says dogs not allowed, description says \"Pets considered at owners discretion\" (contradictory). Elevator not stated."
+ },
+ {
+  "name": "310 Riverside Blvd",
+  "address": "310 Riverside Blvd",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/310-riverside-blvd-3h-long-beach-ny-11561-2080741741",
+  "elevator": "yes",
+  "floors": "",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Listing says small dogs / case by case, no number",
+  "agg": [
+   "https://www.trulia.com/home/310-riverside-blvd-3h-long-beach-ny-11561-2080741741",
+   "https://www.trulia.com/home/310-riverside-blvd-6j-long-beach-ny-11561-2056770238"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Listing #3H: \"PET FRIENDLY ... ELEVATOR BUILDING\", Trulia size field: small dogs. Listing #6J: dogs not allowed. Policy differs by owner/unit."
+ },
+ {
+  "name": "330 East Broadway",
+  "address": "330 East Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/330-e-broadway-109-long-beach-ny-11561-466535981",
+  "elevator": "unknown",
+  "floors": "",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Listing says small dogs / case by case, no number; elevator not stated",
+  "agg": [
+   "https://www.trulia.com/home/330-e-broadway-109-long-beach-ny-11561-466535981"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). \"pets considered on a case-by-case basis\"; Trulia size field: small dogs. Elevator not stated."
+ },
+ {
+  "name": "345 Shore Road",
+  "address": "345 Shore Rd",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/345-shore-rd-2e-long-beach-ny-11561-464982367",
+  "elevator": "unknown",
+  "floors": "",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Listing says small dogs / case by case, no number; elevator not stated",
+  "agg": [
+   "https://www.trulia.com/home/345-shore-rd-2e-long-beach-ny-11561-464982367"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). \"pets considered on a case-by-case basis\"; Trulia size field: small dogs. Elevator not stated."
+ },
+ {
+  "name": "420 Shore Road (co-op)",
+  "address": "420 Shore Rd",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/420-shore-rd-3b-long-beach-ny-11561-2117718856",
+  "elevator": "yes",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/420-shore-rd-3b-long-beach-ny-11561-2117718856"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Trulia: dogs not allowed. Apartment List copy of the same unit lists an elevator."
+ },
+ {
+  "name": "470 East Broadway",
+  "address": "470 East Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/470-e-broadway-a2-long-beach-ny-11561-465326291",
+  "elevator": "unknown",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/470-e-broadway-a2-long-beach-ny-11561-465326291",
+   "https://www.trulia.com/home/470-e-broadway-c2-long-beach-ny-11561-402417394"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). \"No pets allowed.\" Elevator not stated."
+ },
+ {
+  "name": "475 West Broadway",
+  "address": "475 West Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/475-w-broadway-1-a-long-beach-ny-11561-459101450",
+  "elevator": "no",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no elevator (listing says so), no pets",
+  "agg": [
+   "https://www.trulia.com/home/475-w-broadway-1-a-long-beach-ny-11561-459101450",
+   "https://www.trulia.com/home/475-w-broadway-b2-long-beach-ny-11561-2056698094"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Listing #B2: \"No Elevator ... No pets\"."
+ },
+ {
+  "name": "529 West Broadway (co-op)",
+  "address": "529 West Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/529-w-broadway-2c-long-beach-ny-11561-447221858",
+  "elevator": "yes",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/529-w-broadway-2c-long-beach-ny-11561-447221858"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). \"building amenities include an elevator\"; dogs not allowed."
+ },
+ {
+  "name": "740 East Broadway (co-op)",
+  "address": "740 East Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/740-e-broadway-2f-long-beach-ny-11561-450896703",
+  "elevator": "yes",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:cats only or no pets (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/740-e-broadway-2f-long-beach-ny-11561-450896703",
+   "https://www.trulia.com/home/740-e-broadway-5l-long-beach-ny-11561-2080862651",
+   "https://www.trulia.com/home/740-e-broadway-5n-long-beach-ny-11561-466157517"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Trulia lists Elevator; #2F and #5L dogs not allowed, #5N cats only."
+ },
+ {
+  "name": "750 Shore Road",
+  "address": "750 Shore Rd",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/750-shore-rd-1h-long-beach-ny-11561-2082526485",
+  "elevator": "yes",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:cats only or no pets (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/750-shore-rd-1h-long-beach-ny-11561-2082526485"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Trulia lists Elevator; cats only."
+ },
+ {
+  "name": "780 West Broadway (Ocean Walk Condominium)",
+  "address": "780 West Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/780-w-broadway-2d-long-beach-ny-11561-2088020893",
+  "elevator": "yes",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/780-w-broadway-2d-long-beach-ny-11561-2088020893"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Trulia lists Elevator; dogs not allowed."
+ },
+ {
+  "name": "824 East Broadway",
+  "address": "824 East Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/824-e-broadway-301-long-beach-ny-11561-465208516",
+  "elevator": "unknown",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/824-e-broadway-301-long-beach-ny-11561-465208516"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Dogs not allowed. Elevator not stated."
+ },
+ {
+  "name": "830 East Broadway",
+  "address": "830 East Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/830-e-broadway-108-long-beach-ny-11561-2068523214",
+  "elevator": "unknown",
+  "floors": "",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Listing says small dogs / case by case, no number; elevator not stated",
+  "agg": [
+   "https://www.trulia.com/home/830-e-broadway-108-long-beach-ny-11561-2068523214"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Trulia size field: small dogs. Elevator not stated."
+ },
+ {
+  "name": "830 Shore Road (co-op)",
+  "address": "830 Shore Rd",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/830-shore-rd-long-beach-ny-11561-31406649",
+  "elevator": "yes",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no dogs (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/830-shore-rd-3q-long-beach-ny-11561-2088372411",
+   "https://www.trulia.com/home/830-shore-rd-4m-long-beach-ny-11561-2088296886",
+   "https://www.trulia.com/home/830-shore-rd-long-beach-ny-11561-31406649"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Trulia lists Elevator; \"No pets\"."
+ },
+ {
+  "name": "855 East Broadway",
+  "address": "855 East Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/855-e-broadway-lc-long-beach-ny-11561-2124903371",
+  "elevator": "unknown",
+  "floors": "",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:cats only or no pets (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/855-e-broadway-lc-long-beach-ny-11561-2124903371",
+   "https://www.trulia.com/home/855-e-broadway-le-long-beach-ny-11561-2095707451"
+  ],
+  "note": "Condo/co-op or owner-rented units, facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). #LC cats only, #LE no pets. Elevator not stated."
+ },
+ {
+  "name": "12 Brooklyn Ave",
+  "address": "12 Brooklyn Ave",
+  "town": "Valley Stream",
+  "zip": "11581",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/12-brooklyn-ave-501-valley-stream-ny-11581-2098736887",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Trulia size field says small dogs; listing text says only 'Pet friendly'",
+  "agg": [
+   "https://www.trulia.com/home/12-brooklyn-ave-501-valley-stream-ny-11581-2098736887",
+   "https://www.trulia.com/home/12-brooklyn-ave-505-valley-stream-ny-11581-2098739507"
+  ],
+  "from_csv": [
+   {
+    "file": "zumper.csv",
+    "url_contains": "20529380p"
+   },
+   {
+    "file": "zumper.csv",
+    "url_contains": "5231942p"
+   }
+  ],
+  "row": {
+   "elevator": "yes"
+  },
+  "note": "New-construction building by Valley Stream LIRR (gym on the first floor, basement parking, heat and hot water included per the listing). Units 501 and 505 (fifth floor by unit number). Elevator is stated on the Zumper copies of these listings (elevator=yes there), not on the Trulia pages. No leasing site found."
+ },
+ {
+  "name": "142 Main St (condo)",
+  "address": "142 Main St",
+  "town": "Mineola",
+  "zip": "11501",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/142-main-st-4a-mineola-ny-11501-2102586359",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Trulia size field says small dogs; text says 'Pets allowed', board approval needed",
+  "agg": [
+   "https://www.trulia.com/home/142-main-st-4a-mineola-ny-11501-2102586359"
+  ],
+  "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Trulia lists Elevator. Unit 4A (fourth floor by unit number). Condo: tenant needs board approval."
+ },
+ {
+  "name": "10 Wendell St (co-op)",
+  "address": "10 Wendell St",
+  "town": "Hempstead",
+  "zip": "11550",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/10-wendell-st-20-hempstead-ny-11550-453062624",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Trulia size field says small dogs, no number",
+  "agg": [
+   "https://www.trulia.com/home/10-wendell-st-20-hempstead-ny-11550-453062624"
+  ],
+  "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Listing text: 'Full-Service Co-Op Rental. Subject to Board Approval ... Elevator Building ... Doorman'."
+ },
+ {
+  "name": "22 and 30 Wendell St (co-op)",
+  "address": "22 Wendell St",
+  "town": "Hempstead",
+  "zip": "11550",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/22-wendell-st-5-hempstead-ny-11550-466631572",
+  "elevator": "yes",
+  "dogs": "no",
+  "verdict": "fails:cats only (stated on the unit listings)",
+  "agg": [
+   "https://www.trulia.com/home/22-wendell-st-5-hempstead-ny-11550-466631572",
+   "https://www.trulia.com/home/30-wendell-st-20-hempstead-ny-11550-452059221"
+  ],
+  "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). 'Elevator Building ... Doorman'. Cats allowed only."
+ },
+ {
+  "name": "316 Fulton Ave",
+  "address": "316 Fulton Ave",
+  "town": "Hempstead",
+  "zip": "11550",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/316-fulton-ave-10-hempstead-ny-11550-2068684785",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Unit 10 listing: small dogs (no number); unit 4 listing: dogs not allowed",
+  "agg": [
+   "https://www.trulia.com/home/316-fulton-ave-10-hempstead-ny-11550-2068684785",
+   "https://www.trulia.com/home/316-fulton-ave-4-hempstead-ny-11550-2068681120"
+  ],
+  "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Unit 10 listing text: 'Central AC and Heat, Elevator Building'."
+ },
+ {
+  "name": "280 Guy Lombardo Ave (co-op)",
+  "address": "280 Guy Lombardo Ave",
+  "town": "Freeport",
+  "zip": "11520",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/280-guy-lombardo-ave-3m-freeport-ny-11520-466518986",
+  "elevator": "yes",
+  "dogs": "no",
+  "verdict": "fails:no pets (stated on the listing)",
+  "agg": [
+   "https://www.trulia.com/home/280-guy-lombardo-ave-3m-freeport-ny-11520-466518986"
+  ],
+  "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). 'attractive elevator building ... No pets and no smoking permitted ... Co-op board approval required'."
+ },
+ {
+  "name": "1 Waterview Dr",
+  "address": "1 Waterview Dr",
+  "town": "Port Washington",
+  "zip": "11050",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/1-waterview-dr-18e2-pt-washington-ny-11050-461438920",
+  "elevator": "unknown",
+  "dogs": "no",
+  "verdict": "fails:no dogs (stated on the listing)",
+  "agg": [
+   "https://www.trulia.com/home/1-waterview-dr-18e2-pt-washington-ny-11050-461438920"
+  ],
+  "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Unit 18E2; elevator not stated."
+ },
+ {
+  "name": "2 Herrick Dr",
+  "address": "2 Herrick Dr",
+  "town": "Lawrence",
+  "zip": "11559",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/2-herrick-dr-3g-lawrence-ny-11559-2102983923",
+  "elevator": "unknown",
+  "dogs": "no",
+  "verdict": "fails:no dogs (stated on the listing)",
+  "agg": [
+   "https://www.trulia.com/home/2-herrick-dr-3g-lawrence-ny-11559-2102983923"
+  ],
+  "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Unit 3G; elevator not stated."
+ },
+ {
+  "name": "362 W Merrick Rd",
+  "address": "362 W Merrick Rd",
+  "town": "Valley Stream",
+  "zip": "11580",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/362-w-merrick-rd-204-valley-stream-ny-11580-459187867",
+  "elevator": "unknown",
+  "dogs": "no",
+  "verdict": "fails:no dogs (stated on the listing)",
+  "agg": [
+   "https://www.trulia.com/home/362-w-merrick-rd-204-valley-stream-ny-11580-459187867"
+  ],
+  "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Unit 204; elevator not stated."
+ },
+ {
+  "name": "2 Nagel Ct",
+  "address": "2 Nagel Ct",
+  "town": "Merrick",
+  "zip": "11566",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/2-nagel-ct-2a-merrick-ny-11566-2066877010",
+  "elevator": "unknown",
+  "dogs": "no",
+  "verdict": "fails:no dogs (stated on the listing)",
+  "agg": [
+   "https://www.trulia.com/home/2-nagel-ct-2a-merrick-ny-11566-2066877010"
+  ],
+  "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). Unit 2A; elevator not stated."
+ },
+ {
+  "name": "410 N Corona Ave",
+  "address": "410 N Corona Ave",
+  "town": "Valley Stream",
+  "zip": "11580",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/410-n-corona-ave-a10-valley-stream-ny-11580-2078299122",
+  "elevator": "no",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "fails:walk-up building (listing says 'walk up building')",
+  "agg": [
+   "https://www.trulia.com/home/410-n-corona-ave-a10-valley-stream-ny-11580-2078299122"
+  ],
+  "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). "
  }
 ]

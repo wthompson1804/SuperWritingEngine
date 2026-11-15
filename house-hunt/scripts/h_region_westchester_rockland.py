@@ -42,8 +42,11 @@ def norm_addr(a: str, z: str) -> str:
     return " ".join(rep.get(w, w) for w in a.split()) + "|" + (z or "")[:5]
 
 
-def floor_from_unit(u: str) -> str:
+def floor_from_unit(u: str, rx: str = "") -> str:
     u = (u or "").strip().upper()
+    if rx:
+        m = re.search(rx, u)
+        return str(int(m.group(1))) if m else ""
     m = re.fullmatch(r"(?:PH)?(\d{1,2})[A-Z]", u)
     if m: return str(int(m.group(1)))
     m = re.fullmatch(r"(\d{1,2})(\d{2})[A-Z]?", u)
@@ -114,6 +117,23 @@ def gdc_rows() -> dict[str, list[dict]]:
     return g
 
 
+def al_rows() -> dict[str, list[dict]]:
+    """Apartment List property-page rows already read today (data/listings_raw/apartmentlist.csv), by building name."""
+    g = defaultdict(list)
+    p = OUT_DIR / "apartmentlist.csv"
+    if p.exists():
+        for r in csv.DictReader(open(p, newline="")):
+            if r["state"] == "NY" and r["building_name"]:
+                r["listing_id"] = "region_wr:" + r["listing_id"]
+                r["notes"] = "row carried over from the Apartment List property page read earlier today; " + re.sub(r"drive_min=[\d.]+; ", "", r["notes"])
+                g[r["building_name"]].append(r)
+    return g
+
+
+POS_ELEV = re.compile(r"(?i)elevator (building|access)|elevator in (the )?building|(laundry|parking)[^.]{0,40}\belevator|accessible by elevator|high-speed elevator|^\s*elevator\s*$|\belevator\b")
+NEG_ELEV = re.compile(r"(?i)walk[- ]?up|no elevator")
+
+
 def apply_building(rows: list[dict], c: dict, key: str) -> tuple[list[dict], dict]:
     """Merge curated building facts into rows; collapse to one BUILDING_FAILS row when a gate clearly fails."""
     notes_b = []
@@ -128,7 +148,8 @@ def apply_building(rows: list[dict], c: dict, key: str) -> tuple[list[dict], dic
     if c.get("dog_src"): notes_b.append(f"dog policy from {c['dog_src']}")
     sm_only = small_only(policy) and not c.get("large_ok")
     # ---- elevator
-    floors_seen = [int(f) for f in (floor_from_unit(r.get("unit", "")) if not str(r.get("floor") or "").isdigit() else r["floor"] for r in rows) if str(f).isdigit()]
+    ufo = bool(c.get("unit_floor_ok"))  # unit numbers encode the floor (checked by hand for this building)
+    floors_seen = [int(f) for f in ((floor_from_unit(r.get("unit", ""), c.get("unit_floor_rx", "")) if ufo else "") if not str(r.get("floor") or "").isdigit() else r["floor"] for r in rows) if str(f).isdigit()]
     bfl = str(c.get("floors") or first.get("building_floors") or "")
     elev, basis = "unknown", ""
     if c.get("elevator"):
@@ -139,10 +160,17 @@ def apply_building(rows: list[dict], c: dict, key: str) -> tuple[list[dict], dic
         elev, basis = "yes", f"6+ floors ({bfl} floors)"
     elif floors_seen and max(floors_seen) >= 6:
         elev, basis = "yes", f"6+ floors (unit numbers on the page reach floor {max(floors_seen)})"
+    else:
+        desc = first.get("_desc") or ""
+        sent = [s.strip() for s in re.split(r"(?<=[.!?])\s+|\n+", desc) if re.search(r"(?i)elevator|walk[- ]?up", s)]
+        if sent and NEG_ELEV.search(" ".join(sent)):
+            elev, basis = "no", "listing description: '" + sent[0][:160] + "'"
+        elif sent and POS_ELEV.search(" ".join(sent)):
+            elev, basis = "yes", "listing description: '" + sent[0][:160] + "'"
     for r in rows:
         if not str(r.get("floor") or "").isdigit():
-            f = floor_from_unit(r.get("unit", ""))
-            if f and r.get("listing_type") == "managed_building":
+            f = floor_from_unit(r.get("unit", ""), c.get("unit_floor_rx", ""))
+            if f and ufo:
                 r["floor"] = f
                 r["notes"] = (r.get("notes", "") + "; floor derived from unit number").strip("; ")
         r["building_name"] = name or r.get("building_name", "")
@@ -196,8 +224,13 @@ def main() -> None:
     refresh = "--refresh-sightmap" in sys.argv
     tr = load_trulia()
     gdc = gdc_rows()
+    al = al_rows()
     all_rows, buildings, used = [], [], set()
-    by_trulia = {c["trulia"]: (k, c) for k, c in CURATED.items() if c.get("trulia")}
+    slug = {re.sub(r"-\d+$", "", u): u for u in tr}
+    for c in CURATED.values():  # curated Trulia references are slugs without the numeric id
+        if c.get("trulia"):
+            c["trulia_slug"] = c["trulia"]
+            c["trulia"] = slug.get(c["trulia"], "")
     # 1. curated buildings (own-site sources first)
     for key, c in CURATED.items():
         rows: list[dict] = []
@@ -213,6 +246,9 @@ def main() -> None:
                           lat=c.get("lat", ""), lon=c.get("lon", ""), listing_type="managed_building", building_url=c["gdc"],
                           notes="floor-plan row (unit number not published on gdcrentals.com); " + re.sub(r"; building-type text:.*", "", r.get("notes", "")))
                      for r in gdc.get(c["gdc"], [])]
+        if c.get("al"):
+            have = {str(r.get("unit")).lstrip("0").upper() for r in rows if r.get("unit")}
+            rows += [dict(r) for r in al.get(c["al"], []) if str(r.get("unit")).lstrip("0").upper() not in have]
         for m in c.get("units", []):
             rows.append(dict({k: "" for k in COLS}, **m))
         if c.get("trulia"):

@@ -1,0 +1,8 @@
+User-Agent: *
+Allow: /wp-content/uploads/
+Disallow: /wp-content/plugins/
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /readme.html
+
+Sitemap: https://www.halsteadnorwalk.com/sitemap_index.xml

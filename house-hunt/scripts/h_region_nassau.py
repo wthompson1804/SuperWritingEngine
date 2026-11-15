@@ -116,7 +116,9 @@ def main() -> None:
             rows += [dict(r) for r in rr]
         for fc in b.get("from_csv", []):  # rows another harvest script already read from the manager's own site
             with open(ROOT / "data" / "listings_raw" / fc["file"], newline="") as f:
-                rows += [dict(r) for r in csv.DictReader(f) if r["building_name"] == fc["building_name"]]
+                rows += [dict(r) for r in csv.DictReader(f)
+                         if (fc.get("building_name") and r["building_name"] == fc["building_name"])
+                         or (fc.get("url_contains") and fc["url_contains"] in r["url"])]
         for u in b.get("units", []):
             r = {k: "" for k in COLS}
             r.update(u)

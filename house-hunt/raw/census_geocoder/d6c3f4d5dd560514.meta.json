@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=122+Golf+Links+Rd%2C+Middletown%2C+NY+10940&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T20:06:32+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/d6c3f4d5dd560514.json",
+ "source": "census_geocoder"
+}
