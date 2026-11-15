@@ -51,3 +51,17 @@ less).
 
 Final reply to the coordinator, under 200 words: buildings done; units live / gone / changed; facts confirmed vs
 unconfirmed; evidence items by category; the buildings with the most serious evidence.
+
+## Addendum for round 2 (2026-11-15): structured ratings, so buildings outside NYC can be judged statistically
+
+NYC buildings have city complaint records; buildings elsewhere do not, so for EVERY building also record, in
+`data/evidence/ratings_batch_<n>.csv` (one row per building per rating source you can read):
+addr_key, building_name, rating_source (e.g. "Google rating shown on Zumper", "Apartment List", "Openigloo",
+"building's own site widget"), rating_value (stars), rating_scale (5), review_count, as_of_date,
+reviews_read (how many review texts you could read), reviews_last_6_months, negative_last_6_months,
+negative_older, serious_issue_tags_last_6_months (semicolon list from: no_heat_hot_water, pests, mold,
+elevator_outage, car_break_in, package_theft, unresponsive_management, fees_or_deposit, safety_incident, noise),
+source_url. "Negative" = 1 or 2 stars, or text reporting one of those serious issues. If no rating is visible
+anywhere, write one row with rating_source = none_found and where you looked.
+The dog weight gate is now **25 lb or more** (it was 40). Local news sites Patch and QNS disallow Claude in
+robots.txt: don't fetch them.

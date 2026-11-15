@@ -8,7 +8,9 @@ Outputs:
 Rules (Will, docs/PLAN_V3_APPROVED_2026-11-15.md, later amendments):
   DROP   listing gone; dogs not allowed or elevator contradicted on the building's page; ground-floor unit; listing the
          checker judged not open-market, not genuine, stale or a duplicate; dog policy conflicting between sources.
-  AVOID  car crime: 3+ independent reports at the building or its parking in 24 months
+  AVOID  car crime: 3+ independent reports at the building or its parking in 24 months, or (NYC, police-located
+         incidents) vehicle theft + theft from vehicles within 250 m in 24 months at least double the median for
+         candidate buildings in the city
          elevator: 3+ independent outage reports in 24 months, or (NYC) 3+ elevator complaints AND above the citywide
                    90th percentile for similar buildings in 24 months
          management, judged on the LAST 6 MONTHS: 3+ dated tenant reports of serious problems in that window, or (NYC)
@@ -71,8 +73,15 @@ def main():
     R = I[~is_count_summary]
     nf = DATA / "evidence" / "nyc_records_flags.csv"
     N = pd.read_csv(nf, dtype=str, keep_default_na=False) if nf.exists() else pd.DataFrame(columns=["addr_key", "flag", "count", "per_100_units", "baseline_p90", "query_url", "metric", "period"])
+    # police-located car crime near the building (NYC only): the approved rule is "at least double the median for
+    # candidate buildings in the same city". Counts = vehicle theft + theft from vehicle within 250 m, last 24 months.
+    U = pd.read_csv(DATA / "units.csv", low_memory=False)
+    U = U[U.unit_status == "pass"].drop_duplicates("addr_key")
+    U["car250"] = pd.to_numeric(U.near_veh_theft_24m, errors="coerce") + pd.to_numeric(U.near_theft_from_veh_24m, errors="coerce").fillna(0)
+    car_med = U.car250.median()
+    car250 = U.set_index("addr_key").car250.dropna()
     rows = []
-    keys = sorted(set(I.addr_key) | set(N.addr_key) | set(L.addr_key))
+    keys = sorted(set(I.addr_key) | set(N.addr_key) | set(L.addr_key) | set(car250.index))
     for k in keys:
         r, n = R[R.addr_key == k], N[N.addr_key == k]
         flags = set(n.flag)
@@ -86,6 +95,9 @@ def main():
         nyc6 = [f for f in flags if f.endswith("_6m_above_p90") and not f.startswith("elevator")]
         nyc_el = "elevator_complaints_24m_ge_3" in flags and "elevator_complaints_24m_above_p90" in flags
         reasons, pause = [], []
+        c250 = car250.get(k)
+        if c250 is not None and c250 >= 2 * car_med:
+            reasons.append(f"car crime: {int(c250)} vehicle thefts and thefts from vehicles within 250 m in 24 months (police data), at least double the median of {car_med:.0f} for candidate buildings in New York City")
         if car24 >= 3: reasons.append(f"car crime: {car24} independent reports in 24 months")
         elif cnt("car_crime"): pause.append(f"car crime mentioned ({cnt('car_crime')} report(s), below the threshold or older)")
         if el24 >= 3: reasons.append(f"elevator: {el24} tenant reports of outages in 24 months")
@@ -104,6 +116,7 @@ def main():
         pos = r[r.category == "positive"].sort_values("dt", ascending=False).head(3)
         rows.append({"addr_key": k, "avoid": "yes" if reasons else "no", "reasons": "; ".join(reasons), "pause_notes": "; ".join(pause),
                      "evidence_json": json.dumps(ev), "positive_json": json.dumps([{"date": x.item_date, "excerpt": x.excerpt[:300], "url": x.source_url} for x in pos.itertuples()]),
+                     "car_crime_250m_24m": c250 if c250 is not None else "", "nyc_candidate_median_car_crime": car_med,
                      "n_car24": car24, "n_elevator24": el24, "n_mgmt_6m": mg6, "n_mgmt_older": mg_old, "nyc_flags": ";".join(sorted(flags - {"none"}))})
     A = pd.DataFrame(rows); A.to_csv(DATA / "avoid_buildings.csv", index=False)
     print(f"exclusions: {len(X)} rows on {X.addr_key.nunique()} buildings; avoid buildings: {(A.avoid == 'yes').sum()} of {len(A)}; with pause notes: {(A.pause_notes != '').sum()}")
