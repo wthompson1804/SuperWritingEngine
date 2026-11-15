@@ -45,7 +45,12 @@ GROUND_LIKELY = re.compile(r"(?:possibl[ey]|likely|probably|may be|would be|coul
                            r"(?:ground|floor 1\b)[^.;|]{0,25}(?:is possible|possible)|ground-level entry|floor 1, if", re.I)
 
 
-COOP = re.compile(r"\\bco-?op\\b|board approval|approval by (?:the )?board|cooperative apartment|tenants corp|owners corp|owners,? inc", re.I)
+# Independent check 2, D5: this pattern was written r"\\bco-?op\\b", which in a raw string is a literal backslash + "b",
+# so the first alternative could never match. The other patterns above were checked for the same slip: none has it
+# (scripts/test_rules.py asserts that no pattern in this file contains a doubled backslash and that each one matches
+# its own example).
+COOP = re.compile(r"\bco-?ops?\b|board approval|approval by (?:the )?board|cooperative (?:apartment|building|unit)|tenants corp|owners corp|owners,? inc", re.I)
+NOT_COOP = re.compile(r"different co-op buildings|not (?:a |in a )?co-?op|co-?op city|no co-?op|condo/co-?op or owner-rented|rather than (?:a )?co-?op|is a rental,? not", re.I)
 
 
 def _around(t, m, n=70):
@@ -121,6 +126,8 @@ def main():
         if m and BUILDING_WIDE.search(m.group(0)) and not re.search(r"market[- ]rate and|are not\b", r.value, re.I):
             ex.append((r.addr_key, "", "not open to her: " + _around(r.value, m), r.source_url))
     MU = pd.read_csv(DATA / "master_units.csv", dtype=str, keep_default_na=False, usecols=["addr_key", "unit"], low_memory=False)
+    MU_ID = pd.read_csv(DATA / "master_units.csv", dtype=str, keep_default_na=False, usecols=["addr_key", "unit", "listing_id"], low_memory=False)
+    unassigned = []
     units_at = MU.groupby("addr_key").unit.apply(lambda x: sorted(set(x))).to_dict()
     # a floor the checker CONFIRMED as 1 / ground is a gate failure too, not only a "contradicts" row (batch 13: J Centra)
     for r in C[(C.status == "confirmed") & C.fact.str.lower().str.startswith("floor")].itertuples():
@@ -155,7 +162,21 @@ def main():
                 if labs1:
                     ex.append((r.addr_key, ";".join(dict.fromkeys(labs1)), "possible ground-floor unit (checker's reading; no page states the floor): " + t[:140], r.source_url))
                 elif GROUND_LIKELY.search(t):
-                    ex.append((r.addr_key, "", "possible ground-floor unit (checker's reading; no page states the floor): " + t[:140], r.source_url))
+                    # Independent check 2: this used to exclude the WHOLE building when no unit could be named (62 Treat
+                    # St lost plan "208" because plan "103" reads as floor 1). Now: the floor-plan row the text names;
+                    # the building's only listed row; otherwise nothing is excluded and the reading is left to the
+                    # reviewer (data/reference/ground_reading_unassigned.csv).
+                    rows_here = MU_ID[MU_ID.addr_key == r.addr_key]
+                    hit_plan = [x.listing_id for x in rows_here.itertuples()
+                                if (pm := re.search(r":plan-([^:]+)", x.listing_id)) and re.search(r"[\"'“ ]" + re.escape(pm.group(1).replace("_", " ")) + r"[\"'” ,:;.]", t)
+                                and GROUND_LIKELY.search(next((c for c in re.split(r"[;|]|\. (?=Plan)", t) if pm.group(1).replace("_", " ") in c), ""))]
+                    if hit_plan:
+                        for lid in hit_plan:
+                            ex.append((r.addr_key, "", "possible ground-floor unit (checker's reading; no page states the floor): " + t[:140], r.source_url, lid))
+                    elif len(rows_here) == 1:
+                        ex.append((r.addr_key, "", "possible ground-floor unit (checker's reading; no page states the floor): " + t[:140], r.source_url))
+                    else:
+                        unassigned.append({"addr_key": r.addr_key, "reading": t[:300], "source": r.source_url})
     # co-op rentals are out (owner, 2026-11-15): board approval may not fit a Dec 15 move-in. A building is a co-op when
     # the city's record classes it as one (PLUTO D0, D4, C6, C8) or a checker's note / the listing says co-op or board approval.
     MP = pd.read_csv(DATA / "master_units.csv", dtype=str, keep_default_na=False, low_memory=False)
@@ -164,16 +185,18 @@ def main():
     for k, g in MP.groupby("addr_key"):
         t = " | ".join(" ".join(g[c].astype(str)) for c in ["notes", "building_type", "required_fees_text", "building_name"] if c in g)
         m = COOP.search(t)
-        if m:
+        if m and not NOT_COOP.search(t):
             ex.append((k, "", "co-op rental (listing text): " + _around(t, m), g.url.iloc[0] if "url" in g else ""))
     for D, cols, src in [(L, ["notes"], "listing_url"), (F, ["fact", "value", "quote"], "source_url"), (C, ["value", "quote"], "source_url")]:
         for r in D.to_dict("records"):
             t = " | ".join(str(r.get(c, "")) for c in cols)
             m = COOP.search(t)
-            if m and not re.search(r"different co-op buildings|not a co-?op", t, re.I):
+            if m and not NOT_COOP.search(t):
                 ex.append((r["addr_key"], "", "co-op rental (checker's note): " + _around(t, m), r.get(src, "")))
-    X = pd.DataFrame(ex, columns=["addr_key", "unit", "reason", "source"]).drop_duplicates()
+    X = pd.DataFrame([e if len(e) == 5 else e + ("",) for e in ex], columns=["addr_key", "unit", "reason", "source", "listing_id"]).drop_duplicates()
+    # a whole-building row (unit == "" and no listing_id) excludes every unit; a row with listing_id excludes that row only
     X.to_csv(DATA / "unit_exclusions.csv", index=False)
+    pd.DataFrame(unassigned, columns=["addr_key", "reading", "source"]).to_csv(DATA / "reference" / "ground_reading_unassigned.csv", index=False)
 
     I = I[~I.category.isin(["none_found", ""])].copy()
     I["dt"] = I.item_date.map(when)

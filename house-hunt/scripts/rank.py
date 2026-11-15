@@ -36,6 +36,7 @@ POOL_BUMP, INDOOR_POOL_BUMP = 3, 6
 UNKNOWN_PCT = 25
 CERTAINTY = {"clean": 1.0, "one_inferred": 0.97}
 MAX_PER_BUILDING, SHOWN, CANDIDATES = 2, 10, 15
+CAP, NEAR_CAP = 3000, 100          # D12: within $100 of the cap with an unknown cost line -> asterisk "cost near the cap"
 COLOR_DIR = DATA / "enriched_color"
 
 
@@ -130,6 +131,20 @@ def main():
     n_hard = int((hard != "").sum()); u = u[hard == ""].copy()
     s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
 
+    # ---- reviewed verdicts (independent check 2): data/evidence/review_verdicts.csv holds one row per unit whose
+    # evidence a reviewer has read. remove -> excluded here, before ranking, with the reviewer's reason.
+    # asterisk -> the unit counts as having that open fact (below). ok -> nothing added. A verdict never closes a fact
+    # the rules leave open; scripts/check_registry.py fails the run if a shown unit has no current ok / asterisk verdict.
+    vf = DATA / "evidence" / "review_verdicts.csv"
+    V = pd.read_csv(vf, dtype=str, keep_default_na=False).drop_duplicates("listing_id", keep="last").set_index("listing_id") if vf.exists() else \
+        pd.DataFrame(columns=["verdict", "kind", "what_to_confirm", "why"])
+    vd = lambda c: u.listing_id.map(V[c]).fillna("") if len(V) else pd.Series("", index=u.index)
+    rm = vd("verdict").eq("remove")
+    u[rm].assign(drop_reason="reviewed: " + vd("why")[rm], review_kind=vd("kind")[rm]).to_csv(DATA / "excluded_by_review.csv", index=False)
+    n_rev = int(rm.sum()); u = u[~rm].copy()
+    s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
+    vd = lambda c: u.listing_id.map(V[c]).fillna("") if len(V) else pd.Series("", index=u.index)
+
     # ---- listing confidence
     age = pd.to_numeric(u.get("listing_age_days"), errors="coerce")
     med = u.groupby("hood_id").all_in.transform("median")
@@ -149,39 +164,100 @@ def main():
     #            size field) with no pound figure PASSES (owner, 2026-11-15: her dog is at most 25 lb): the unit can be
     #            shown, with the note "page says small dogs; no weight number" and a tour question
     wl = wl.reindex(u.index); fl = fl.reindex(u.index)
-    inf_e = s("elevator_basis").isin(["inferred", "", "unknown"]) | s("elevator").str.lower().ne("yes")
+    v_ast = vd("verdict").eq("asterisk")
+    vk = vd("kind").where(v_ast, "")
+    # elevator: no page or record states one (base), or the evidence pass looked and could not confirm it (D2, D7, D9),
+    # or the reviewer's verdict says it is not established for this building
+    base_e = s("elevator_basis").isin(["inferred", "", "unknown"]) | s("elevator").str.lower().ne("yes")
+    inf_e = base_e | s("elevator_evidence_open").ne("") | vk.eq("elevator")
     fb, fk = s("unit_floor_basis"), s("unit_floor_label_kind")
     floor_settled = fb.isin(["confirmed", "stated"])
     floor_from_label_ok = fb.eq("inferred") & fk.eq("simple") & (fl >= 3)
-    inf_f = ~(floor_settled | floor_from_label_ok)
+    inf_f = ~(floor_settled | floor_from_label_ok) | vk.eq("floor")
     u["floor_basis_note"] = np.where(floor_from_label_ok, "read from the unit number", "")
-    dog_open = s("dogs_allowed").str.lower().ne("yes")
+    # dogs: allowed must be stated or confirmed, and dogs must be NAMED as allowed (D2, D3): an unconfirmed evidence
+    # row, "pets upon approval", "case by case" or small pets with dogs unnamed leave the fact open
+    base_d = s("dogs_allowed").str.lower().ne("yes")
+    dog_open = base_d | s("dogs_evidence_open").ne("") | vk.eq("dogs")
     dog_small = s("dog_size_only").ne("") & wl.isna()
     # An elevator "inferred from height" only counts as one open fact when a page or record gives the building 6+ floors.
     # Where the height itself was read off a unit label ("36D", "801"), the elevator is simply unknown: not shown.
     bfl = pd.to_numeric(s("building_floors"), errors="coerce").where(~s("building_floors_basis").isin(["inferred", ""]))
-    tall = (bfl.fillna(0) >= 6) | (pd.to_numeric(s("pluto_floors"), errors="coerce").fillna(0) >= 6)
-    weak_e = inf_e & ~tall
-    n_inf = inf_e.astype(int) + weak_e.astype(int) + inf_f.astype(int) + dog_open.astype(int)
+    # the city's floor count is used only when the tax lot is the listing's own address (D16)
+    tall = (bfl.fillna(0) >= 6) | ((pd.to_numeric(s("pluto_floors"), errors="coerce").fillna(0) >= 6) & s("pluto_lot_ok").eq("yes"))
+    weak_e = base_e & ~tall
+    # ---- the other things a renter must not find out later (independent check 2)
+    #  lease      the listed price belongs to a lease longer than 13 months, or is only "the lowest over the lease terms" (D8)
+    #  cost       all-in within $100 of the cap while pet rent, parking or required fees is unknown and counted as $0 (D12)
+    #  listing    an evidence warning about the listing itself (wrong address, generic text, owner on record), D6
+    #  availability  the row is a floor plan, not a named unit: no unit, floor or date could be checked (D1)
+    #  plus whatever a reviewer's asterisk verdict names (availability, listing, eligibility, condo, other)
+    lm = pd.to_numeric(s("price_lease_months"), errors="coerce")
+    p12 = pd.to_numeric(s("price_12_month"), errors="coerce")
+    lease_open = (lm > 13) | s("price_lowest_of_terms").eq("yes") | vk.eq("lease_term")
+    cost_open = (u.all_in >= CAP - NEAR_CAP) & (pd.to_numeric(s("all_in_unknown_count"), errors="coerce").fillna(0) >= 1)
+    plan_only = s("unit").map(parsers.unit_label_key).eq("") & (s("detail_level").eq("building_floorplan") | s("listing_id").str.contains(":plan-") | s("unit").str.strip().ne(""))
+    avail_open = plan_only | vk.isin(["not_available"])
+    listing_open = s("listing_warning").ne("") | vk.isin(["unverified", "wrong_building"])
+    elig_open, condo_open, other_open = vk.eq("restricted"), vk.eq("coop_condo"), vk.eq("other")
+    unknown_lines = s("all_in_unknown_lines").str.replace("building fees (part)", "some required fees", regex=False).str.replace("building fees", "required fees").str.replace("parking fee", "parking") \
+        .map(lambda t: " / ".join(x for x in t.split("; ") if x in ("pet rent", "parking", "required fees", "some required fees")))
+    lease_why = np.where(lm > 13, "The listed price is for a " + lm.fillna(0).astype(int).astype(str) + "-month lease."
+                         + pd.Series(np.where(p12.notna(), " The 12-month price is $" + p12.fillna(0).astype(int).astype(str) + ", which is what the cost here uses.", " The 12-month price is not published."), index=u.index),
+                         "The listed price is the lowest over the lease terms offered; the term it belongs to and the 12-month price are not published.")
+    OPEN = [  # key, flag, label on the page, why, question
+        ("elevator", inf_e, "elevator",
+         np.where(base_e, "No page states an elevator; the building's height suggests one.", "The evidence pass could not confirm an elevator for this building: " + s("elevator_evidence_open").str.replace("the evidence pass could not confirm it: ", "", regex=False).str[:140]),
+         "Does this building have an elevator?"),
+        ("floor", inf_f, "floor", None, None),
+        ("dogs", dog_open, "dogs allowed",
+         np.where(base_d, "Two listing sites disagree on whether dogs are allowed, and the building's own page does not settle it.",
+                  "Dogs are not confirmed as allowed here: " + s("dogs_evidence_open").str.replace("the evidence pass could not confirm it: ", "", regex=False).str[:140]),
+         "Are dogs allowed? (dogs must be named as allowed, not 'pets on approval')"),
+        ("lease", lease_open, "lease term", lease_why, "What is the rent on a 12-month lease?"),
+        ("cost", cost_open, "cost near the cap", "Cost near the cap: " + unknown_lines + " not published. The all-in figure counts them as $0 and is within $" + str(NEAR_CAP) + " of $3,000.",
+         "What are the pet rent, parking and required monthly fees?"),
+        ("availability", avail_open, "availability", "This is a floor-plan price, not a named unit: no unit, floor or date could be checked.", "Which unit is available at this price, on which floor, and from when?"),
+        ("listing", listing_open, "listing", "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160], "Is this listing for this building, and is it genuine?"),
+        ("eligibility", elig_open, "eligibility", "", "Is this unit open to any renter?"),
+        ("condo", condo_open, "condo rules", "", "What are the building's rules for renting this unit?"),
+        ("other", other_open, "other", "", ""),
+    ]
+    KIND_KEY = {"elevator": "elevator", "floor": "floor", "dogs": "dogs", "lease_term": "lease", "not_available": "availability", "unverified": "listing",
+                "wrong_building": "listing", "restricted": "eligibility", "coop_condo": "condo", "other": "other"}
+    n_inf = weak_e.astype(int)
+    for _, flag, *_rest in OPEN:
+        n_inf = n_inf + flag.astype(int)
     u["dog_size_note"] = np.where(dog_small, parsers.SMALL_DOG_NOTE, "")
     floor_q = np.where(fb.eq("inferred"), "Which floor is the unit on? (" + s("unit_floor").str.replace(r"\.0$", "", regex=True) + " is only a guess from the unit number " + s("unit") + "); ",
                        "Which floor is the unit on?; ")
-    u["to_confirm"] = (pd.Series(np.where(inf_e, "Does the building have an elevator? (so far only inferred from its height); ", ""), index=u.index)
-                       + pd.Series(np.where(inf_f, floor_q, ""), index=u.index)
-                       + pd.Series(np.where(dog_open, "Are dogs allowed? (the sources disagree); ", ""), index=u.index))
+    fnum = s("unit_floor").str.replace(r"\.0$", "", regex=True)
+    floor_why = np.where(inf_f & fb.eq("inferred"), "No page states the floor; " + fnum + " is only read from the unit number " + s("unit") + ".",
+                         "The listing does not give the floor, and the unit number does not show it.")
+    v_why, v_q, v_key = vd("why").where(v_ast, ""), vd("what_to_confirm").where(v_ast, ""), vk.map(KIND_KEY).fillna("")
+    what_l, why_l, q_l, keys_l = [], [], [], []
+    cols_ = [(k, f.values, lab, np.asarray(floor_why if k == "floor" else (w if not isinstance(w, str) else np.full(len(u), w, dtype=object))), (None if k == "floor" else q)) for k, f, lab, w, q in OPEN]
+    fq = pd.Series(floor_q, index=u.index).str.rstrip("; ").values
+    for i in range(len(u)):
+        whats, whys, qs, keys = [], [], [], []
+        for k, f, lab, w, q in cols_:
+            if f[i]:
+                reviewed = v_key.iloc[i] == k
+                keys.append(k); whats.append(lab)
+                whys.append(v_why.iloc[i] if reviewed and v_why.iloc[i] else str(w[i]))
+                qs.append(v_q.iloc[i] if reviewed and v_q.iloc[i] else (fq[i] if k == "floor" else q))
+        what_l.append("; ".join(whats)); why_l.append(" ".join(whys)); q_l.append("; ".join(x for x in qs if x)); keys_l.append(";".join(keys))
+    u["open_keys"] = keys_l
+    u["to_confirm"] = [q + "; " if q else "" for q in q_l]
     u["tour_confirm"] = (pd.Series(np.where(floor_from_label_ok, "Confirm the floor; ", ""), index=u.index)
                          + pd.Series(np.where(dog_small, "Confirm the dog weight limit in pounds; ", ""), index=u.index)).str.rstrip("; ")
     # the one open fact, in plain words, for the asterisk on the page (owner, 2026-11-15: a unit with exactly one open
     # gate fact is shown with an asterisk instead of being held back)
-    fnum = s("unit_floor").str.replace(r"\.0$", "", regex=True)
-    u["confirm_what"] = np.where(inf_e, "elevator", np.where(inf_f, "floor", np.where(dog_open, "dogs allowed", "")))
-    u["confirm_why"] = np.where(inf_e, "No page states an elevator; the building's height suggests one.",
-                       np.where(inf_f & fb.eq("inferred"), "No page states the floor; " + fnum + " is only read from the unit number " + s("unit") + ".",
-                       np.where(inf_f, "The listing does not give the floor, and the unit number does not show it.",
-                       np.where(dog_open, "Two listing sites disagree on whether dogs are allowed, and the building's own page does not settle it.", ""))))
+    u["confirm_what"], u["confirm_why"] = what_l, why_l
+    u["review_verdict"], u["review_kind"] = vd("verdict"), vd("kind")
     u["open_gate_facts"] = n_inf
     u["confidence"] = np.where(reasons != "", "sketchy", np.where(n_inf == 0, "clean", np.where(n_inf == 1, "one_inferred", "sketchy")))
-    u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(weak_e, "elevator not stated on any page and the building's height is not known (it was guessed from the unit label)", np.where(n_inf >= 2, "two or more unconfirmed gate facts", "")))
+    u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(weak_e, "elevator not stated on any page and the building's height is not known (it was guessed from the unit label)", np.where(n_inf >= 2, "two or more things unconfirmed: " + u.confirm_what, "")))
     u[u.confidence == "sketchy"].to_csv(DATA / "excluded_sketchy.csv", index=False)
     n_sk = int((u.confidence == "sketchy").sum())
     u = u[u.confidence != "sketchy"].copy()
@@ -196,13 +272,17 @@ def main():
         # "5106" excludes "005-5106" (independent check W17, W18)
         X = pd.read_csv(xf, dtype=str, keep_default_na=False)
         X["building_id"] = X.addr_key.map(xw).fillna("")
+        if "listing_id" not in X:
+            X["listing_id"] = ""
+        by_lid = set(X[X.listing_id != ""].listing_id)                      # a row that names one listing excludes only it
+        X = X[X.listing_id == ""]
         whole_k, whole_b = set(X[X.unit == ""].addr_key), set(X[(X.unit == "") & (X.building_id != "")].building_id)
         pairs = {}
         for r in X[X.unit != ""].itertuples():
             for uu in r.unit.split(";"):
                 pairs.setdefault(r.building_id or r.addr_key, []).append(uu.strip())
         hit = [any(parsers.units_match(x, str(un)) for x in pairs.get(b_, []) + pairs.get(a_, [])) for a_, b_, un in zip(u.addr_key, u.building_id, u.unit)]
-        bad = u.addr_key.isin(whole_k) | u.building_id.isin(whole_b) | pd.Series(hit, index=u.index)
+        bad = u.addr_key.isin(whole_k) | u.building_id.isin(whole_b) | pd.Series(hit, index=u.index) | u.listing_id.isin(by_lid)
         u[bad].assign(drop_reason="evidence pass").to_csv(DATA / "excluded_by_evidence.csv", index=False)
         n_ex = int(bad.sum()); u = u[~bad].copy()
     s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
@@ -331,7 +411,8 @@ def main():
             d = (v >= v[i]).all(axis=1) & (v > v[i]).any(axis=1)
             if d.any():
                 u.loc[g.index[i], "dominated"] = True
-    u = u.sort_values(["hood_id", "dominated", "rank_score"], ascending=[True, True, False])
+    # D19: selection must not depend on file order. Equal scores: a unit seen live in the evidence pass first, then listing_id.
+    u = u.sort_values(["hood_id", "dominated", "rank_score", "live_ok", "listing_id"], ascending=[True, True, False, False, True], kind="mergesort")
     # at most 2 per building, counted on the building (not the address key: independent check W8)
     u["nth_in_building"] = u.groupby("building_id").cumcount() + 1
     elig = u.nth_in_building <= MAX_PER_BUILDING
@@ -417,7 +498,7 @@ def main():
     print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, of them with an asterisk {int((u.shown & (u.confirm_asterisk == 'yes')).sum())} "
           f"({u[u.shown & (u.confirm_asterisk == 'yes')].confirm_what.value_counts().to_dict()}), held for a confirmation {int(u.held_for_confirmation.sum())}, "
           f"waiting for a live check {int(u.needs_live_check.sum())}")
-    print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
+    print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_rev} removed by a reviewed verdict -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
     print(f"(kept {len(u)} units; candidates {int(u.candidate.sum())}; shown {int(u.shown_pre_evidence.sum())}; pools: {u.pool.value_counts().to_dict()}")
 
 
