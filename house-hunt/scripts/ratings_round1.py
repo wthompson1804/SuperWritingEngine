@@ -152,8 +152,62 @@ def norm_street(a):
     return re.sub(r"\s+(apt|unit|ste)\b.*", "", a)
 
 
+_PB = None
+
+
+def pb_index():
+    """Zumper building ids seen on the cached Zumper search and listing pages (raw/zumper/): id, slug, address, lat/lng."""
+    global _PB
+    f = lib.RAW / "ratings_r1" / "zumper_pb_index.json"
+    if _PB is None and f.exists():
+        _PB = json.loads(f.read_text())
+    if _PB is None:
+        _PB = {}
+
+        def w(o):
+            if isinstance(o, dict):
+                if o.get("pb_url") and o.get("pb_id"):
+                    _PB[str(o["pb_id"])] = {k: o.get(k) for k in ("address", "pb_url", "pb_id", "building_name", "zipcode", "lat", "lng")}
+                for v in o.values():
+                    w(v)
+            elif isinstance(o, list):
+                for x in o:
+                    w(x)
+        seen = set()
+        for line in open(lib.RAW / "zumper" / "_index.jsonl"):
+            try:
+                m = json.loads(line)
+            except Exception:
+                continue
+            if m.get("status") != 200 or m["path"] in seen or "/apartment-buildings/" in m["url"]:
+                continue
+            seen.add(m["path"])
+            try:
+                w(Z.parse_state((lib.ROOT / m["path"]).read_text(errors="replace")))
+            except Exception:
+                pass
+        f.parent.mkdir(parents=True, exist_ok=True); f.write_text(json.dumps(_PB))
+    return _PB
+
+
+def house_no(a):
+    m = re.match(r"\s*(\d+)(?:-(\d+))?", a or "")
+    return (m.group(1) + (m.group(2) or "")) if m else ""
+
+
 def zumper_urls(r):
     urls = []
+    try:
+        la, lo = float(r["lat"]), float(r["lon"])
+        for b in pb_index().values():
+            if b.get("lat") is None:
+                continue
+            dist = (((b["lat"] - la) * 111000) ** 2 + ((b["lng"] - lo) * 84000) ** 2) ** 0.5
+            same_no = house_no(b.get("address")) and house_no(b.get("address")) == house_no(r["address"])
+            if (dist < 150 and same_no and str(b.get("zipcode") or "").zfill(5) == r["zip"].zfill(5)):
+                urls.append(f"https://www.zumper.com/apartment-buildings/p{b['pb_id']}/{b['pb_url']}")
+    except ValueError:
+        pass
     for f in glob.glob(str(lib.RAW / "evidence_*" / "zumper_bld.json")):
         v = json.load(open(f)).get(r["addr_key"]) or {}
         if v.get("status") == 200 and v.get("url"):

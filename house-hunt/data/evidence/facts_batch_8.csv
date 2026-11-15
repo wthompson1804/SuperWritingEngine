@@ -1,0 +1,309 @@
+addr_key,fact,value,quote,source_url
+740-748 washington ave|07109,management_company,DK New Jersey Real Estate LLC,Trulia: property management company,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,total_units,114,Trulia unit details,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,available_units_listed,7,Trulia unit details,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,pool,yes (type not stated),Pool: Pool,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,parking,Garage,Parking & Garage: Garage,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,parking,Parking=Attached Garage,Parking & Garage: Parking=Attached Garage,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,parking,Parking=Gated covered parking.,Parking & Garage: Parking=Gated covered parking.,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,fee:monthlyOptionalFees,Pet rent ($65),Trulia costs and fees: Pet rent ($65) = Contact for details,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,fee:oneTimeOptionalFees,Pet deposit ($500),Trulia costs and fees: Pet deposit ($500) = Contact for details,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,dog:number_allowed,2,Trulia pet policy: Number allowed 2,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,special_offer,"ONE MONTH FREE ON AN 18-MONTH LEASE $1,000 SECURITY FOR CREDIT OVER 700! $250 Move in Fees waived!","Offer good until November 30, 2026",https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,special_offer,"One bedroom $2150 - Units 502, 504, 511 - 636 sq. ft","Offer good until November 30, 2026",https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+740-748 washington ave|07109,listing_last_modified,2026-10-21,Trulia activeListing.lastDateModified,https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+500 district dr|07922,total_units,179,Apartment List total_units_count,https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,pet_rent,65.00,Apartment List pet policy (general): rent,https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,pet_fee,500.00,Apartment List pet policy (general): fee,https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,pet_limit,2,Apartment List pet policy (general): limit,https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,deposit_fee,2552.00,Apartment List deposit_fee_text,https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,application_fee,$50.00,Apartment List application_fee_text,https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,required_monthly_fees,110,Apartment List unit data: required_fees (total_price minus base_price),https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,pool,yes (type not stated),"Apartment List amenity ""Pool""",https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,garage,yes,"Apartment List amenity ""Garage""",https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,listing_updated_at,2026-11-15,Apartment List updated_at,https://www.apartmentlist.com/nj/summit/rt-500
+1 avalon way|07005,management_company,AvalonBay,Apartment List pmc_display_name,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,year_built,2019,Apartment List year_built,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,total_units,350,Apartment List total_units_count,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,pet_rent,"$55 per month, per pet",Apartment List pet policy (general): rent,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,pet_fee,$500,Apartment List pet policy (general): fee,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,pet_limit,2,Apartment List pet policy (general): limit,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,pet_restrictions,Aggressive breed restriction,Apartment List pet policy (general): restrictions,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,parking,1 spot per apartment,Apartment List parking,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,deposit_fee,$750,Apartment List deposit_fee_text,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,application_fee,100.00,Apartment List application_fee_text,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,additional_fees,Renter's insurance required,Apartment List additional_fees_text,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,move_in_fees,Amenity fee $550 per lease term,Apartment List move_in_fees_text,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,lease_terms,12 months,Apartment List lease_terms_text,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,pool,yes (type not stated),"Apartment List amenity ""Pool""",https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,garage,yes,"Apartment List amenity ""Garage""",https://www.apartmentlist.com/nj/boonton/avalon-boonton
+1 avalon way|07005,listing_updated_at,2026-11-15,Apartment List updated_at,https://www.apartmentlist.com/nj/boonton/avalon-boonton
+36 washington ave|07008,total_units,244,Apartment List total_units_count,https://www.apartmentlist.com/nj/carteret/the-botanic
+36 washington ave|07008,required_monthly_fees,97.55,Apartment List unit data: required_fees (total_price minus base_price),https://www.apartmentlist.com/nj/carteret/the-botanic
+36 washington ave|07008,listing_updated_at,2026-11-14,Apartment List updated_at,https://www.apartmentlist.com/nj/carteret/the-botanic
+2 river rd|07928,total_units,208,Apartment List total_units_count,https://www.apartmentlist.com/nj/chatham/the-ivy
+2 river rd|07928,pet_rent,$50/month,Apartment List pet policy (general): rent,https://www.apartmentlist.com/nj/chatham/the-ivy
+2 river rd|07928,pet_fee,$500,Apartment List pet policy (general): fee,https://www.apartmentlist.com/nj/chatham/the-ivy
+2 river rd|07928,parking,covered_lot; other; Garage Covered: $150/Month,Apartment List parking,https://www.apartmentlist.com/nj/chatham/the-ivy
+2 river rd|07928,deposit_fee,"$1,000- 1.5x Month Base Rent",Apartment List deposit_fee_text,https://www.apartmentlist.com/nj/chatham/the-ivy
+2 river rd|07928,application_fee,$50,Apartment List application_fee_text,https://www.apartmentlist.com/nj/chatham/the-ivy
+2 river rd|07928,required_monthly_fees,64,Apartment List unit data: required_fees (total_price minus base_price),https://www.apartmentlist.com/nj/chatham/the-ivy
+2 river rd|07928,pool,yes (type not stated),"Apartment List amenity ""Pool""",https://www.apartmentlist.com/nj/chatham/the-ivy
+2 river rd|07928,concierge,yes,"Apartment List amenity ""24hr concierge""",https://www.apartmentlist.com/nj/chatham/the-ivy
+2 river rd|07928,garage,yes,"Apartment List amenity ""Garage""",https://www.apartmentlist.com/nj/chatham/the-ivy
+2 river rd|07928,listing_updated_at,2026-11-14,Apartment List updated_at,https://www.apartmentlist.com/nj/chatham/the-ivy
+540 main st 9f|07928,total_units,100,Apartment List total_units_count,https://www.apartmentlist.com/nj/chatham/spring-brooke-apartments
+540 main st 9f|07928,pet_rent,50.0,Apartment List pet policy (general): rent,https://www.apartmentlist.com/nj/chatham/spring-brooke-apartments
+540 main st 9f|07928,pet_limit,2,Apartment List pet policy (general): limit,https://www.apartmentlist.com/nj/chatham/spring-brooke-apartments
+540 main st 9f|07928,pet_restrictions,Call for more information and breed restrictions.,Apartment List pet policy (general): restrictions,https://www.apartmentlist.com/nj/chatham/spring-brooke-apartments
+540 main st 9f|07928,parking,surface_lot; Permit parking. Detached garages available at $150 per month. Please call us for complete Parking information.,Apartment List parking,https://www.apartmentlist.com/nj/chatham/spring-brooke-apartments
+540 main st 9f|07928,garage,yes,"Apartment List amenity ""Garage""",https://www.apartmentlist.com/nj/chatham/spring-brooke-apartments
+540 main st 9f|07928,listing_updated_at,2026-11-15,Apartment List updated_at,https://www.apartmentlist.com/nj/chatham/spring-brooke-apartments
+540 main st|07928,management_company,"Fieldstone Properties, LLC",Trulia: property management company,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,total_units,35,Trulia unit details,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,available_units_listed,7,Trulia unit details,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,utilities_included,"Garbage, Gas, Heat, Sewer, Water, Hot Water","Rental Terms, Policies & Fees: Rent Includes=Garbage, Gas, Heat, Sewer, Water, Hot Water",https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,deposit,"$4,013 - $5,393","Rental Terms, Policies & Fees: Deposit Fee=$4,013 - $5,393",https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,parking,Parking Policy: Permit parking. Detached garages available at $150 per month. Please call us for complete Parking information.,Surface Parking: Parking Policy: Permit parking. Detached garages available at $150 per month. Please call us for complete Parking information.,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,fee:oneTimeRequiredFees,Application fee,Trulia costs and fees: Application fee = Contact for details,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,fee:oneTimeRequiredFees,Security deposit,Trulia costs and fees: Security deposit = 4012.5,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,fee:monthlyOptionalFees,Cat rent ($50),Trulia costs and fees: Cat rent ($50) = Contact for details,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,fee:monthlyOptionalFees,Dog rent ($50),Trulia costs and fees: Dog rent ($50) = Contact for details,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,fee:oneTimeOptionalFees,Cat fee ($250 per cat),Trulia costs and fees: Cat fee ($250 per cat) = Contact for details,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,fee:oneTimeOptionalFees,Dog fee ($250 per dog),Trulia costs and fees: Dog fee ($250 per dog) = Contact for details,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,dog:number_allowed,2,Trulia pet policy: Number allowed 2,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,dog:monthly_dog_rent,$50/mo,Trulia pet policy: Monthly dog rent $50/mo,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,dog:one-time_fee,$250,Trulia pet policy: One-time fee $250,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,special_offer,2bed apt homes starting at $2575 PLUS 1st months rent free - move in by 11/20,,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+540 main st|07928,listing_last_modified,2026-10-03,Trulia activeListing.lastDateModified,https://www.trulia.com/building/spring-brook-at-chatham-540-main-st-chatham-nj-07928-1001550647
+51 lincoln ave|07050,total_units,245,Apartment List total_units_count,https://www.apartmentlist.com/nj/orange/lia-by-vermella
+51 lincoln ave|07050,pet_rent,50.0,Apartment List pet policy (general): rent,https://www.apartmentlist.com/nj/orange/lia-by-vermella
+51 lincoln ave|07050,pet_fee,500.0,Apartment List pet policy (general): fee,https://www.apartmentlist.com/nj/orange/lia-by-vermella
+51 lincoln ave|07050,pet_limit,2,Apartment List pet policy (general): limit,https://www.apartmentlist.com/nj/orange/lia-by-vermella
+51 lincoln ave|07050,parking,covered_lot,Apartment List parking,https://www.apartmentlist.com/nj/orange/lia-by-vermella
+51 lincoln ave|07050,pool,yes (type not stated),"Apartment List amenity ""Pool""",https://www.apartmentlist.com/nj/orange/lia-by-vermella
+51 lincoln ave|07050,listing_updated_at,2026-11-15,Apartment List updated_at,https://www.apartmentlist.com/nj/orange/lia-by-vermella
+416 highland ave|07050,total_units,138,Apartment List total_units_count,https://www.apartmentlist.com/nj/orange/416-highland-ave-312--4
+416 highland ave|07050,deposit_fee,2270.00,Apartment List deposit_fee_text,https://www.apartmentlist.com/nj/orange/416-highland-ave-312--4
+416 highland ave|07050,garage,yes,"Apartment List amenity ""Garage""",https://www.apartmentlist.com/nj/orange/416-highland-ave-312--4
+416 highland ave|07050,listing_updated_at,2026-11-12,Apartment List updated_at,https://www.apartmentlist.com/nj/orange/416-highland-ave-312--4
+80 e mcfarlan st|07801,total_units,90,Trulia unit details,https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+80 e mcfarlan st|07801,available_units_listed,46,Trulia unit details,https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+80 e mcfarlan st|07801,parking,Parking=Parking Lot,Parking & Garage: Parking=Parking Lot,https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+80 e mcfarlan st|07801,deposit,$500,"Rental Terms, Policies & Fees: Deposit Fee=$500",https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+80 e mcfarlan st|07801,fee:monthlyRequiredFees,Covered parking fee,Trulia costs and fees: Covered parking fee = Contact for details,https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+80 e mcfarlan st|07801,fee:monthlyRequiredFees,Pet fee,Trulia costs and fees: Pet fee = Contact for details,https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+80 e mcfarlan st|07801,fee:oneTimeRequiredFees,Pet deposit,Trulia costs and fees: Pet deposit = Contact for details,https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+80 e mcfarlan st|07801,fee:oneTimeRequiredFees,Security deposit,Trulia costs and fees: Security deposit = Contact for details,https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+80 e mcfarlan st|07801,dog:number_allowed,1,Trulia pet policy: Number allowed 1,https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+80 e mcfarlan st|07801,special_offer,\Move into 80East by 12/31/2026 and enjoy ONE MONTH FREE on a 14 month lease. Dont miss this limited time offer. Contact us today to secure your new home and start the New Year with extra savings.,"Offer good until December 30, 2026",https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+80 e mcfarlan st|07801,listing_last_modified,2026-07-08,Trulia activeListing.lastDateModified,https://www.trulia.com/building/80east-luxury-apartments-dover-nj-80-e-mcfarlan-st-dover-nj-07801-2792782357
+240 s harrison st|07018,management_company,Blackstone Realty,Trulia: property management company,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,total_units,96,Trulia unit details,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,available_units_listed,0,Trulia unit details,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,utilities_included,"Electricity, Heat, Cooling, Water","Rental Terms, Policies & Fees: Rent Includes=Electricity, Heat, Cooling, Water",https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,deposit,"$1,000","Rental Terms, Policies & Fees: Deposit Fee=$1,000",https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,parking,Parking=Parking Lot,Parking & Garage: Parking=Parking Lot,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,parking,Parking=Uncovered/Gated Parking Lot,Parking & Garage: Parking=Uncovered/Gated Parking Lot,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,fee:monthlyRequiredFees,Covered parking fee,Trulia costs and fees: Covered parking fee = Contact for details,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,fee:monthlyRequiredFees,Pet rent,Trulia costs and fees: Pet rent = Contact for details,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,fee:monthlyRequiredFees,Surface lot parking fee,Trulia costs and fees: Surface lot parking fee = Contact for details,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,fee:oneTimeRequiredFees,Application fee,Trulia costs and fees: Application fee = Contact for details,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,fee:oneTimeRequiredFees,Pet deposit,Trulia costs and fees: Pet deposit = Contact for details,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,fee:oneTimeRequiredFees,Security deposit,Trulia costs and fees: Security deposit = Contact for details,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,dog:number_allowed,2,Trulia pet policy: Number allowed 2,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,special_offer,"Limited Time Offer: Up to 3 MONTHS FREE RENT, terms and conditions apply","Offer good until November 30, 2026",https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,concierge,yes,"From gated entry and secure parking to the upmost concierge service, every detail reflects a commitment to upscale, modern living",https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+240 s harrison st|07018,listing_last_modified,2026-10-29,Trulia activeListing.lastDateModified,https://www.trulia.com/building/aura-240-240-s-harrison-st-east-orange-nj-07018-1001470460
+299 s harrison st|07018,total_units,118,Trulia unit details,https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365
+299 s harrison st|07018,available_units_listed,6,Trulia unit details,https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365
+299 s harrison st|07018,utilities_included,"Heat, Hot Water","Rental Terms, Policies & Fees: Rent Includes=Heat, Hot Water",https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365
+299 s harrison st|07018,parking,Parking=Parking Lot,Parking & Garage: Parking=Parking Lot,https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365
+299 s harrison st|07018,fee:oneTimeRequiredFees,Application fee,Trulia costs and fees: Application fee = Contact for details,https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365
+299 s harrison st|07018,dog:number_allowed,2,Trulia pet policy: Number allowed 2,https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365
+299 s harrison st|07018,special_offer,ONE MONTH FREE (On Select Units),"Offer good until January 31, 2027",https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365
+299 s harrison st|07018,listing_last_modified,2026-10-21,Trulia activeListing.lastDateModified,https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365
+5 lawrence st|07003,total_units,361,Trulia unit details,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,available_units_listed,18,Trulia unit details,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,deposit,"$2,025 - $3,995","Rental Terms, Policies & Fees: Deposit Fee=$2,025 - $3,995",https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,parking,Assigned Parking,Garage Parking: Assigned Parking,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,parking,1 spaces available,Garage Parking: 1 spaces available,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,parking,$150 parking fee,Garage Parking: $150 parking fee,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,fee:oneTimeRequiredFees,Security deposit,Trulia costs and fees: Security deposit = 2050,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,fee:monthlyOptionalFees,Cat rent ($75),Trulia costs and fees: Cat rent ($75) = Contact for details,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,fee:monthlyOptionalFees,Dog rent ($75),Trulia costs and fees: Dog rent ($75) = Contact for details,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,fee:oneTimeOptionalFees,Cat deposit ($500),Trulia costs and fees: Cat deposit ($500) = Contact for details,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,fee:oneTimeOptionalFees,Dog deposit ($500),Trulia costs and fees: Dog deposit ($500) = Contact for details,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,dog:monthly_dog_rent,$75/mo,Trulia pet policy: Monthly dog rent $75/mo,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,dog:dog_deposit,$500,Trulia pet policy: Dog deposit $500,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+5 lawrence st|07003,listing_last_modified,2026-11-11,Trulia activeListing.lastDateModified,https://www.trulia.com/building/parkway-lofts-5-lawrence-st-bloomfield-nj-07003-1012472609
+99 gorge rd|07020,management_company,Skylight Real Estate Partners,Trulia: property management company,https://www.trulia.com/building/riello-edgewater-99-gorge-rd-edgewater-nj-07020-1001443934
+99 gorge rd|07020,total_units,226,Trulia unit details,https://www.trulia.com/building/riello-edgewater-99-gorge-rd-edgewater-nj-07020-1001443934
+99 gorge rd|07020,available_units_listed,22,Trulia unit details,https://www.trulia.com/building/riello-edgewater-99-gorge-rd-edgewater-nj-07020-1001443934
+99 gorge rd|07020,pool,yes (type not stated),Pool: Pool,https://www.trulia.com/building/riello-edgewater-99-gorge-rd-edgewater-nj-07020-1001443934
+99 gorge rd|07020,special_offer,*NOW OFFERING UP TO 2 MONTHS FREE! * On Select Units and Lease Terms.,,https://www.trulia.com/building/riello-edgewater-99-gorge-rd-edgewater-nj-07020-1001443934
+99 gorge rd|07020,concierge,yes,"Set on the Edgewater waterfront directly across from the city, The Riello offers newly upgraded one, two, three and four bedroom residences with resort style amenities and 24 hour concierge service",https://www.trulia.com/building/riello-edgewater-99-gorge-rd-edgewater-nj-07020-1001443934
+99 gorge rd|07020,listing_last_modified,2026-11-11,Trulia activeListing.lastDateModified,https://www.trulia.com/building/riello-edgewater-99-gorge-rd-edgewater-nj-07020-1001443934
+77-81 s st|07728,management_company,Goldberg Realty,Trulia: property management company,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+77-81 s st|07728,total_units,30,Trulia unit details,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+77-81 s st|07728,available_units_listed,1,Trulia unit details,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+77-81 s st|07728,fee:monthlyOptionalFees,Cat rent ($35 per cat),Trulia costs and fees: Cat rent ($35 per cat) = Contact for details,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+77-81 s st|07728,fee:monthlyOptionalFees,Dog rent ($50 per dog),Trulia costs and fees: Dog rent ($50 per dog) = Contact for details,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+77-81 s st|07728,fee:oneTimeOptionalFees,Cat deposit ($250 per cat),Trulia costs and fees: Cat deposit ($250 per cat) = Contact for details,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+77-81 s st|07728,fee:oneTimeOptionalFees,Dog deposit ($250 per dog),Trulia costs and fees: Dog deposit ($250 per dog) = Contact for details,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+77-81 s st|07728,dog:number_allowed,2,Trulia pet policy: Number allowed 2,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+77-81 s st|07728,dog:monthly_dog_rent,$50/mo,Trulia pet policy: Monthly dog rent $50/mo,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+77-81 s st|07728,dog:dog_deposit,$250,Trulia pet policy: Dog deposit $250,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+77-81 s st|07728,listing_last_modified,2026-10-30,Trulia activeListing.lastDateModified,https://www.trulia.com/building/freehold-in-town-commons-77-81-south-st-freehold-nj-07728-2356074159
+500 n ave|07027,management_company,BNE Real Estate Group,Apartment List pmc_display_name,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,year_built,2009,Apartment List year_built,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,total_units,59,Apartment List total_units_count,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,pet_rent,$50/month,Apartment List pet policy (general): rent,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,pet_fee,$500,Apartment List pet policy (general): fee,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,pet_limit,2,Apartment List pet policy (general): limit,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,pet_restrictions,25 lbs,Apartment List pet policy (general): restrictions,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,parking,covered_lot; other; Open lot,Apartment List parking,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,deposit_fee,"$1,000- 1.5x Month Base Rent",Apartment List deposit_fee_text,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,application_fee,$50,Apartment List application_fee_text,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,additional_fees,Renter's insurance required,Apartment List additional_fees_text,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,lease_terms,12 months,Apartment List lease_terms_text,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+500 n ave|07027,listing_updated_at,2026-11-15,Apartment List updated_at,https://www.apartmentlist.com/nj/garwood/the-lofts-at-garwood--1
+90 lupton ln|07508,management_company,Platinum Realty Management,Trulia: property management company,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,total_units,174,Trulia unit details,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,available_units_listed,1,Trulia unit details,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,utilities_included,"Garbage, Gas, Heat, Sewer, Hot Water","Rental Terms, Policies & Fees: Rent Includes=Garbage, Gas, Heat, Sewer, Hot Water",https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,deposit,"$2,022","Rental Terms, Policies & Fees: Deposit Fee=$2,022",https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,fee:oneTimeRequiredFees,Application fee ($50 per adult applicant),Trulia costs and fees: Application fee ($50 per adult applicant) = Contact for details,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,fee:oneTimeRequiredFees,Renters insurance fee,Trulia costs and fees: Renters insurance fee = Contact for details,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,fee:monthlyOptionalFees,Cat rent ($50 per cat),Trulia costs and fees: Cat rent ($50 per cat) = Contact for details,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,fee:monthlyOptionalFees,Dog rent ($50 per dog),Trulia costs and fees: Dog rent ($50 per dog) = Contact for details,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,fee:oneTimeOptionalFees,Cat Fee ($300 each),Trulia costs and fees: Cat Fee ($300 each) = Contact for details,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,fee:oneTimeOptionalFees,Dog Fee ($300 each),Trulia costs and fees: Dog Fee ($300 each) = Contact for details,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,dog:monthly_dog_rent,$50/mo,Trulia pet policy: Monthly dog rent $50/mo,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+90 lupton ln|07508,listing_last_modified,2026-10-22,Trulia activeListing.lastDateModified,https://www.trulia.com/building/haledon-estates-apartments-90-lupton-ln-haledon-nj-07508-2737454957
+132 yale ave|07304,management_company,URL Management LLC,Trulia: property management company,https://www.trulia.com/building/the-agnes-132-yale-ave-jersey-city-nj-07304-2748217177
+132 yale ave|07304,total_units,233,Trulia unit details,https://www.trulia.com/building/the-agnes-132-yale-ave-jersey-city-nj-07304-2748217177
+132 yale ave|07304,available_units_listed,7,Trulia unit details,https://www.trulia.com/building/the-agnes-132-yale-ave-jersey-city-nj-07304-2748217177
+132 yale ave|07304,special_offer,FALL INTO EXCLUSIVE SAVINGS! Your New Home Comes with Extra Perks! 1 MONTH FREE on select homes! Offer valid on select homes and lease terms. Restrictions apply.,,https://www.trulia.com/building/the-agnes-132-yale-ave-jersey-city-nj-07304-2748217177
+132 yale ave|07304,attended_lobby,yes,"There's also a robust amenity package boasting an attended lobby, outdoor pool and sundeck, BBQs and dining areas, resident lounge, fitness center, co-working spaces, community kitchen, dog run and spa, shuttle service to the PATH, and more",https://www.trulia.com/building/the-agnes-132-yale-ave-jersey-city-nj-07304-2748217177
+132 yale ave|07304,listing_last_modified,2026-10-14,Trulia activeListing.lastDateModified,https://www.trulia.com/building/the-agnes-132-yale-ave-jersey-city-nj-07304-2748217177
+161 van wagenen ave|07306,total_units,124,Trulia unit details,https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+161 van wagenen ave|07306,available_units_listed,14,Trulia unit details,https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+161 van wagenen ave|07306,furnished,yes,"Rental Terms, Policies & Fees: Furnished",https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+161 van wagenen ave|07306,parking,Garage,Parking & Garage: Garage,https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+161 van wagenen ave|07306,parking,Parking=Attached Garage,Parking & Garage: Parking=Attached Garage,https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+161 van wagenen ave|07306,parking,Parking=Self assisted parking with secured entrance.,Parking & Garage: Parking=Self assisted parking with secured entrance.,https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+161 van wagenen ave|07306,fee:monthlyRequiredFees,Amenity fee,Trulia costs and fees: Amenity fee = Contact for details,https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+161 van wagenen ave|07306,dog:number_allowed,2,Trulia pet policy: Number allowed 2,https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+161 van wagenen ave|07306,special_offer,On 12 months lease 13th month rent free,"Offer good until November 30, 2026",https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+161 van wagenen ave|07306,concierge,yes,"Experience unparalleled convenience with 24-hour concierge service, valet-secured parking, a private dog park, and a stunning rooftop lounge with skyline views",https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+161 van wagenen ave|07306,listing_last_modified,2026-11-06,Trulia activeListing.lastDateModified,https://www.trulia.com/building/metrovue-161-van-wagenen-ave-jersey-city-nj-07306-2734146684
+55 jordan ave|07306,management_company,Serhant,Trulia: property management company,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,total_units,267,Trulia unit details,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,available_units_listed,0,Trulia unit details,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,deposit,$1,"Rental Terms, Policies & Fees: Deposit Fee=$1",https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,fee:oneTimeRequiredFees,Application fee,Trulia costs and fees: Application fee = Contact for details,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,fee:oneTimeRequiredFees,Security deposit,Trulia costs and fees: Security deposit = 2350,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,fee:monthlyOptionalFees,Covered parking fee ($325),Trulia costs and fees: Covered parking fee ($325) = Contact for details,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,fee:monthlyOptionalFees,in-unit Washer/Dryer ($100),Trulia costs and fees: in-unit Washer/Dryer ($100) = Contact for details,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,dog:number_allowed,1,Trulia pet policy: Number allowed 1,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,special_offer,1 month free,,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,special_offer,2 months free on select units,,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,attended_lobby,yes,"Everyday conveniences are built into the property as well, including an attended lobby, video intercom access directly from your phone, package storage, common-area Wi-Fi, laundry facilities, bike storage, and a bike repair station",https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+55 jordan ave|07306,listing_last_modified,2026-10-26,Trulia activeListing.lastDateModified,https://www.trulia.com/building/55-jordan-55-jordan-ave-jersey-city-nj-07306-2742176439
+134 baldwin ave|07306,total_units,90,Trulia unit details,https://www.trulia.com/building/134-baldwin-ave-134-baldwin-ave-jersey-city-nj-07306-2747805557
+134 baldwin ave|07306,available_units_listed,9,Trulia unit details,https://www.trulia.com/building/134-baldwin-ave-134-baldwin-ave-jersey-city-nj-07306-2747805557
+134 baldwin ave|07306,utilities_included,"Garbage, Sewer, Water","Rental Terms, Policies & Fees: Rent Includes=Garbage, Sewer, Water",https://www.trulia.com/building/134-baldwin-ave-134-baldwin-ave-jersey-city-nj-07306-2747805557
+134 baldwin ave|07306,parking,Garage,Parking & Garage: Garage,https://www.trulia.com/building/134-baldwin-ave-134-baldwin-ave-jersey-city-nj-07306-2747805557
+134 baldwin ave|07306,parking,Parking=Attached Garage,Parking & Garage: Parking=Attached Garage,https://www.trulia.com/building/134-baldwin-ave-134-baldwin-ave-jersey-city-nj-07306-2747805557
+134 baldwin ave|07306,listing_last_modified,2026-08-06,Trulia activeListing.lastDateModified,https://www.trulia.com/building/134-baldwin-ave-134-baldwin-ave-jersey-city-nj-07306-2747805557
+76 cottage st|07306,total_units,42,Trulia unit details,https://www.trulia.com/building/appletree-suites-76-cottage-st-jersey-city-nj-07306-2750786817
+76 cottage st|07306,available_units_listed,12,Trulia unit details,https://www.trulia.com/building/appletree-suites-76-cottage-st-jersey-city-nj-07306-2750786817
+76 cottage st|07306,furnished,yes,"Rental Terms, Policies & Fees: Furnished",https://www.trulia.com/building/appletree-suites-76-cottage-st-jersey-city-nj-07306-2750786817
+76 cottage st|07306,listing_last_modified,2026-10-17,Trulia activeListing.lastDateModified,https://www.trulia.com/building/appletree-suites-76-cottage-st-jersey-city-nj-07306-2750786817
+19 rock st|07306,management_company,Goldberg Management,Trulia: property management company,https://www.trulia.com/building/19-rock-19-rock-st-jersey-city-nj-07306-2737966541
+19 rock st|07306,total_units,56,Trulia unit details,https://www.trulia.com/building/19-rock-19-rock-st-jersey-city-nj-07306-2737966541
+19 rock st|07306,available_units_listed,3,Trulia unit details,https://www.trulia.com/building/19-rock-19-rock-st-jersey-city-nj-07306-2737966541
+19 rock st|07306,utilities_included,"Garbage, Sewer, Water","Rental Terms, Policies & Fees: Rent Includes=Garbage, Sewer, Water",https://www.trulia.com/building/19-rock-19-rock-st-jersey-city-nj-07306-2737966541
+19 rock st|07306,parking,Garage,Parking & Garage: Garage,https://www.trulia.com/building/19-rock-19-rock-st-jersey-city-nj-07306-2737966541
+19 rock st|07306,parking,"Parking=Attached Garage, Parking Lot","Parking & Garage: Parking=Attached Garage, Parking Lot",https://www.trulia.com/building/19-rock-19-rock-st-jersey-city-nj-07306-2737966541
+19 rock st|07306,parking,Parking=Parking options starting at $250,Parking & Garage: Parking=Parking options starting at $250,https://www.trulia.com/building/19-rock-19-rock-st-jersey-city-nj-07306-2737966541
+19 rock st|07306,listing_last_modified,2026-09-23,Trulia activeListing.lastDateModified,https://www.trulia.com/building/19-rock-19-rock-st-jersey-city-nj-07306-2737966541
+26 brook st|07302,management_company,Emerson Leasing Co. I LLC,Trulia: property management company,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+26 brook st|07302,total_units,80,Trulia unit details,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+26 brook st|07302,available_units_listed,5,Trulia unit details,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+26 brook st|07302,parking,Garage,Parking & Garage: Garage,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+26 brook st|07302,parking,Parking=Attached Garage,Parking & Garage: Parking=Attached Garage,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+26 brook st|07302,parking,Parking=Parking is an additional $175-$250 for a dedicated parking space in the building. The garage is private.,Parking & Garage: Parking=Parking is an additional $175-$250 for a dedicated parking space in the building. The garage is private.,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+26 brook st|07302,fee:monthlyOptionalFees,Pet rent ($50),Trulia costs and fees: Pet rent ($50) = Contact for details,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+26 brook st|07302,fee:oneTimeOptionalFees,Pet deposit ($500),Trulia costs and fees: Pet deposit ($500) = Contact for details,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+26 brook st|07302,dog:number_allowed,2,Trulia pet policy: Number allowed 2,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+26 brook st|07302,concierge,yes,24/7 Concierge Service,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+26 brook st|07302,listing_last_modified,2026-10-01,Trulia activeListing.lastDateModified,https://www.trulia.com/building/skylar-lofts-jc-26-brook-st-jersey-city-nj-07302-2772160629
+156 e cedar st|07039,management_company,Goldberg Realty Associates,Apartment List pmc_display_name,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,year_built,1986,Apartment List year_built,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,total_units,168,Apartment List total_units_count,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,pet_fee,$250 per pet,Apartment List pet policy (general): fee,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,pet_limit,2,Apartment List pet policy (general): limit,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,pet_restrictions,Breed and Weight Restrictions,Apartment List pet policy (general): restrictions,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,dogs_rent,$50,Apartment List pet policy (dogs): rent,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,cats_rent,$35,Apartment List pet policy (cats): rent,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,deposit_fee,one month rent,Apartment List deposit_fee_text,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,application_fee,$50,Apartment List application_fee_text,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,lease_terms,12 months,Apartment List lease_terms_text,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,occupancy_type,senior,Apartment List occupancy_types,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+156 e cedar st|07039,listing_updated_at,2026-11-15,Apartment List updated_at,https://www.apartmentlist.com/nj/livingston/cedar-street-commons-62-senior-housing
+51 okner pkwy|07039,pet_limit,1,Apartment List pet policy (general): limit,https://www.apartmentlist.com/nj/livingston/canterly-place
+51 okner pkwy|07039,deposit_fee,0.00,Apartment List deposit_fee_text,https://www.apartmentlist.com/nj/livingston/canterly-place
+51 okner pkwy|07039,listing_updated_at,2026-11-14,Apartment List updated_at,https://www.apartmentlist.com/nj/livingston/canterly-place
+10 ridgedale ave|07940,management_company,Kriegman and Smith,Trulia: property management company,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,total_units,2,Trulia unit details,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,available_units_listed,5,Trulia unit details,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,fee:monthlyOptionalFees,Cat rent ($50),Trulia costs and fees: Cat rent ($50) = Contact for details,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,fee:monthlyOptionalFees,Dog rent ($50),Trulia costs and fees: Dog rent ($50) = Contact for details,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,fee:oneTimeOptionalFees,Cat fee ($250 per cat),Trulia costs and fees: Cat fee ($250 per cat) = Contact for details,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,fee:oneTimeOptionalFees,Dog fee ($250 per dog),Trulia costs and fees: Dog fee ($250 per dog) = Contact for details,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,dog:number_allowed,2,Trulia pet policy: Number allowed 2,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,dog:monthly_dog_rent,$50/mo,Trulia pet policy: Monthly dog rent $50/mo,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,dog:one-time_fee,$250,Trulia pet policy: One-time fee $250,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,special_offer,"LIVE FREE UNTIL DECEMBER 1, 2026! Move in now and enjoy FREE RENT until 12/1/2026 at select apartment homes at General Wayne Townhomes and Ridgedale Gardens in Madison, NJ. Looking for an apartment or",,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,special_offer,"LIVE FREE UNTIL December 1, 2026! Move in now and enjoy FREE RENT until December 1, 2026 at select apartment homes at General Wayne Townhomes and Ridgedale Gardens in Madison, NJ. Looking for an apart",,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+10 ridgedale ave|07940,listing_last_modified,2026-11-11,Trulia activeListing.lastDateModified,https://www.trulia.com/building/general-wayne-and-ridgedale-gardens-10-ridgedale-ave-madison-nj-07940-1001577384
+2 s willow st|07042,total_units,200,Apartment List total_units_count,https://www.apartmentlist.com/nj/montclair/two-south-willow
+2 s willow st|07042,pet_rent,$75/month,Apartment List pet policy (general): rent,https://www.apartmentlist.com/nj/montclair/two-south-willow
+2 s willow st|07042,pet_fee,One time Pet Fee $500,Apartment List pet policy (general): fee,https://www.apartmentlist.com/nj/montclair/two-south-willow
+2 s willow st|07042,parking,"Assigned Parking $200/month , Unassigned Parking $150/month",Apartment List parking,https://www.apartmentlist.com/nj/montclair/two-south-willow
+2 s willow st|07042,deposit_fee,"Deposit: $1000-6000  |  Security deposit based on credit application. Standard security for approved applicants is $1,000 but can be up to one-and-a-half-month's rent.",Apartment List deposit_fee_text,https://www.apartmentlist.com/nj/montclair/two-south-willow
+2 s willow st|07042,application_fee,Application Fee $125,Apartment List application_fee_text,https://www.apartmentlist.com/nj/montclair/two-south-willow
+2 s willow st|07042,move_in_fees,Admin fee $600,Apartment List move_in_fees_text,https://www.apartmentlist.com/nj/montclair/two-south-willow
+2 s willow st|07042,required_monthly_fees,57.14,Apartment List unit data: required_fees (total_price minus base_price),https://www.apartmentlist.com/nj/montclair/two-south-willow
+2 s willow st|07042,concierge,yes,"Apartment List amenity ""Concierge""",https://www.apartmentlist.com/nj/montclair/two-south-willow
+2 s willow st|07042,garage,yes,"Apartment List amenity ""Garage""",https://www.apartmentlist.com/nj/montclair/two-south-willow
+2 s willow st|07042,listing_updated_at,2026-11-15,Apartment List updated_at,https://www.apartmentlist.com/nj/montclair/two-south-willow
+83 87 forest st|07042,management_company,Rock Properties,Trulia: property management company,https://www.trulia.com/building/walk-to-nyc-train-restaurants-heat-hw-pre-war-charm-montclair-83-87-forest-st-montclair-nj-07042-2508228479
+83 87 forest st|07042,total_units,14,Trulia unit details,https://www.trulia.com/building/walk-to-nyc-train-restaurants-heat-hw-pre-war-charm-montclair-83-87-forest-st-montclair-nj-07042-2508228479
+83 87 forest st|07042,available_units_listed,1,Trulia unit details,https://www.trulia.com/building/walk-to-nyc-train-restaurants-heat-hw-pre-war-charm-montclair-83-87-forest-st-montclair-nj-07042-2508228479
+83 87 forest st|07042,deposit,"$2,295","Rental Terms, Policies & Fees: Deposit Fee=$2,295",https://www.trulia.com/building/walk-to-nyc-train-restaurants-heat-hw-pre-war-charm-montclair-83-87-forest-st-montclair-nj-07042-2508228479
+83 87 forest st|07042,fee:oneTimeRequiredFees,Security deposit,Trulia costs and fees: Security deposit = Contact for details,https://www.trulia.com/building/walk-to-nyc-train-restaurants-heat-hw-pre-war-charm-montclair-83-87-forest-st-montclair-nj-07042-2508228479
+83 87 forest st|07042,listing_last_modified,2026-10-20,Trulia activeListing.lastDateModified,https://www.trulia.com/building/walk-to-nyc-train-restaurants-heat-hw-pre-war-charm-montclair-83-87-forest-st-montclair-nj-07042-2508228479
+500 district dr|07922,management_company,Greystar,RT 500 Residences is professionally managed by Greystar.,https://rt500residences.com/faqs/
+500 district dr|07922,parking,"private garage, EV charging; fee not stated",Yes. RT 500 offers private garage parking as well as EV charging stations for electric vehicle owners.,https://rt500residences.com/faqs/
+1 avalon way|07005,required_monthly_fees,85,"AvalonBay unit data: price 2535, totalPrice 2620 (unit 1177); price 2010, totalPrice 2095 (unit 2154)",https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/
+1 avalon way|07005,restricted_breeds,Akitas; Alaskan Malamutes; American Bull Dogs; American Staffordshire Terriers; Argentine Dogos; Bull Mastiffs; Cane Corsos; Doberman Pinschers; Fila Brasileiros; German Shepherds; Pit Bulls; Presa Canarios; Rottweiler; Staffordshire Bull Terriers; Tosa Inus; Wolf Hybrids; mixes,The following breeds are restricted,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/
+1 avalon way|07005,pool,outdoor,"Community amenities include a fitness center, outdoor pool, resident lounge, and courtyard with gas grills.",https://www.apartmentlist.com/nj/boonton/avalon-boonton
+540 main st 9f|07928,pet_fee,$250 per pet one-time; $50 per pet monthly,"A $250 one-time pet fee per pet is due at move-in, along with $50 monthly pet rent per pet.",https://springbrookchatham.com/faq/
+540 main st 9f|07928,parking,on-site parking free; private garages from $99/month,"Residents enjoy access to on-site parking at no additional cost. Private garages are also available for rent starting at $99 per month, subject to availability.",https://springbrookchatham.com/faq/
+540 main st 9f|07928,guest_parking,none on site,Guest parking is not available on-site.,https://springbrookchatham.com/faq/
+540 main st|07928,pet_fee,$250 per pet one-time; $50 per pet monthly,"A $250 one-time pet fee per pet is due at move-in, along with $50 monthly pet rent per pet.",https://springbrookchatham.com/faq/
+540 main st|07928,parking,on-site parking free; private garages from $99/month,"Residents enjoy access to on-site parking at no additional cost. Private garages are also available for rent starting at $99 per month, subject to availability.",https://springbrookchatham.com/faq/
+540 main st|07928,guest_parking,none on site,Guest parking is not available on-site.,https://springbrookchatham.com/faq/
+80 e mcfarlan st|07801,pet_fee,$500 non-refundable deposit; $50 monthly,"A $500 non-refundable pet deposit applies, along with a $50 monthly pet fee.",https://www.80eastdover.com/
+80 e mcfarlan st|07801,parking,on-site parking and EV charging; fee not stated,"The community provides convenient on-site parking and EV charging stations, making commuting and everyday travel effortless.",https://www.80eastdover.com/
+5 lawrence st|07003,pet_fee,$500 per pet non-refundable; $75 per pet monthly; limit 2,Limit of 2 pets per home. Maximum adult weight is 65 pounds. Non-refundable pet fee is $500 per pet. Monthly pet rent of $75 will be charged per pet.,https://www.parkwaylofts.com/amenities/
+5 lawrence st|07003,management_company,AJH Management (named in a resident testimonial on the building site; start date not given),it's only gotten better and better since AJH management placed Melanie and her team in place,https://www.parkwaylofts.com/
+5 lawrence st|07003,concierge,yes,24/7 Concierge,https://www.parkwaylofts.com/
+90 lupton ln|07508,pet_fee,$300 registration; $50 per pet monthly; limit 1 pet,Non-refundable registration fee of $300. Monthly fee $50 per pet.,https://www.haledonestates.com/amenities/
+90 lupton ln|07508,parking,free,Haledon Estates Apartments offer free vehicle parking for our residents.,https://www.haledonestates.com/amenities/
+90 lupton ln|07508,year_built,1965,Zumper building data: year_built 1965,https://www.zumper.com/address/90-lupton-ln-haledon-nj-07508-usa
+76 cottage st|07306,year_built,2021,Zumper building data: year_built 2021,https://www.zumper.com/address/76-cottage-st-jersey-city-nj-07306-usa
+36 washington ave|07008,required_monthly_fees,$295 flat utilities fee (Zumper); $97.55 required fees (Apartment List): the two sources differ,"Zumper fees: Utilities, ""Flat rate to cover electricity, Internet etc."", 29500 cents",https://www.zumper.com/apartment-buildings/1821404/36-washington-avenue-carteret-nj

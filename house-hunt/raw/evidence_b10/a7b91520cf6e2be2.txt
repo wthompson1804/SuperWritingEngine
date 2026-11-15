@@ -1,0 +1,8 @@
+Sitemap: https://www.sterlingparcny.com/sitemap.xml
+User-Agent: *
+Disallow: 
+Disallow: /ajax/
+Disallow: /floorplans/tour/
+Disallow: /interior_decorator_app/
+Disallow: /interior_decorator/
+Disallow: /newsletters/viewer/
