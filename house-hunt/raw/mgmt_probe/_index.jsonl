@@ -647,3 +647,10 @@
 {"url": "https://qlic.com/availability", "retrieved_at": "2026-11-15T18:52:30+00:00", "status": 404, "path": "raw/mgmt_probe/9ac9ce7dcbd3b9e0.html", "source": "mgmt_probe"}
 {"url": "https://qlic.com/floorplans/", "retrieved_at": "2026-11-15T18:52:32+00:00", "status": 404, "path": "raw/mgmt_probe/eb45203817bdc250.html", "source": "mgmt_probe"}
 {"url": "https://thepierrepontbk.com/robots.txt", "retrieved_at": "2026-11-15T18:52:32+00:00", "status": 200, "path": "raw/mgmt_probe/d330364c22a4454d.txt", "source": "mgmt_probe"}
+{"url": "https://thepierrepontbk.com/", "retrieved_at": "2026-11-15T18:52:42+00:00", "status": 200, "path": "raw/mgmt_probe/04d836058f34bc7f.html", "source": "mgmt_probe"}
+{"url": "https://www.rentalexandercrossing.com/check-availability/", "retrieved_at": "2026-11-15T18:52:43+00:00", "status": 200, "path": "raw/mgmt_probe/4b0a8ea79b223dca.html", "source": "mgmt_probe"}
+{"url": "https://www.rentalexandercrossing.com/residents/", "retrieved_at": "2026-11-15T18:52:45+00:00", "status": 200, "path": "raw/mgmt_probe/a570b09c434fc8af.html", "source": "mgmt_probe"}
+{"url": "https://www.rentalexandercrossing.com/site-map/", "retrieved_at": "2026-11-15T18:52:47+00:00", "status": 200, "path": "raw/mgmt_probe/7dc1f29f1033944f.html", "source": "mgmt_probe"}
+{"url": "https://themillgreenwich.com/residents/", "retrieved_at": "2026-11-15T18:52:49+00:00", "status": 200, "path": "raw/mgmt_probe/9ec6038141c03a51.html", "source": "mgmt_probe"}
+{"url": "https://themillgreenwich.com/site-map/", "retrieved_at": "2026-11-15T18:52:50+00:00", "status": 200, "path": "raw/mgmt_probe/1d8a4273762520ef.html", "source": "mgmt_probe"}
+{"url": "https://thepierrepontbk.com/floorplans", "retrieved_at": "2026-11-15T18:52:52+00:00", "status": 404, "path": "raw/mgmt_probe/61dc27289d9cb432.html", "source": "mgmt_probe"}
