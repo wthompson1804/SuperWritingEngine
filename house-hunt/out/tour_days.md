@@ -174,7 +174,7 @@ About 95 straight-line miles and 192 minutes of driving in total (estimate), bef
 - Address: 150 Broad St, Stamford CT
 - Units and all-in monthly cost: 530: $2,674*; 536: $2,648* (* = some cost lines still unknown)
 - Year: The Little-City Year
-- Asterisk: unit 530: confirm lease term (The listed price is for a 21-month lease. The 12-month price is not published.)
+- Asterisk: unit 530: confirm lease term (The listed price is for a 21-month lease.)
 - Asterisk: unit 530: rent terms open ("For a limited time, enjoy up to 1-months free and $500 in look-and-lease savings on select units and")
 - Asterisk: unit 530: all-in does not yet include parking fee
 - Asterisk: unit 536: confirm lease term (The listed price is for a 21-month lease. The 12-month price is not published.)
@@ -226,12 +226,10 @@ About 100 straight-line miles and 216 minutes of driving in total (estimate), be
 - Address: 275 N Harrison St, Princeton NJ
 - Units and all-in monthly cost: 431: $2,919
 - Year: The Quiet-Street Year
-- Asterisk: unit 431: confirm elevator (The evidence pass could not confirm an elevator for this building: yes (Apartment List amenity tag only)
-- Asterisk: Elevator || not listed on AvalonBay's own pages
-- Asterisk: [The 21 community features and the unit's 14 featu)
+- Asterisk: unit 431: confirm elevator (The owner's own pages list 21 community features and 14 unit features and no elevator; only a listing site's tag says there is one.)
 - Asterisk: unit 431: rent terms open ("* Advertised rates include 1 month off! * Terms and conditions apply.
 - Asterisk: term 12: price 2805, totalPr")
-- On the tour: Does this building have an elevator?
+- On the tour: Does this building have an elevator that serves this unit?
 - Listing: https://www.apartmentlist.com/nj/princeton/avalon-princeton-on-harrison
 
 Back to the start: 50.0 straight-line miles, about 99 min (estimate: OSRM free-flow from the pipeline, no traffic).

@@ -1,0 +1,15 @@
+
+# START YOAST BLOCK
+# ---------------------------
+
+User-Agent: *
+Allow: /wp-content/uploads/
+Disallow: /wp-admin/
+Disallow: /readme.html
+Disallow: /refer/
+Disallow: /*.html
+Disallow: /wp-content/uploads/wpo-plugins-tables-list.json
+ 
+Sitemap: https://springfield-nj.us/post-sitemap.xml
+Sitemap: https://springfield-nj.us/page-sitemap.xml
+# END YOAST BLOCK

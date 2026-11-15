@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" class="no-js usn">
+<head>
+            <!-- Google Analytics -->
+        <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+    <!-- Google Fonts -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="preconnect" href="//fonts.googleapis.com" crossorigin>
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
+
+<!-- Google -->
+<link rel="dns-prefetch" href="//www.gstatic.com">
+<link rel="preconnect" href="//www.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="//www.google.com">
+<link rel="preconnect" href="//www.google.com" crossorigin>
+
+<!-- Icons -->
+<link rel="preload" href="/css/GOV/icons/ionicons.woff2?v=4.5.4" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/css/GOV/icons/ionicons.woff?v=4.5.4" as="font" type="font/woff" crossorigin>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=2">
+        <link rel="canonical" href="https://www.montvalenj.gov/" />
+    <title>Home | The Borough of Montvale, NJ.</title>
+    <meta name="description" content="The official website for the The Borough of Montvale, NJ.">
+            <link rel="alternate" hreflang="en-us" href="https://www.montvalenj.gov/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Home | The Borough of Montvale, NJ." />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="https://www.montvalenj.gov/" />
+    <meta property="og:description" content="The official website for the The Borough of Montvale, NJ." />
+    <meta property="og:site_name" content="The Borough of Montvale, NJ" />
+    <meta name="robots" content="index,follow">
+    <meta name="pageID" content="1425" />
+
+    
+
+
+
+
+    <link fetchpriority="high" href="/sb/sitebuilder-ltr-css-bundle.css.v1-10-9-0" media="screen" rel="stylesheet" />
+<link fetchpriority="high" href="/sb/sitebuilder-css-bundle.css.v1-10-9-0" media="screen" rel="stylesheet" />
+<link fetchpriority="high" href="/sb/sitebuilder-css-small-bundle.css.v1-10-9-0" media="screen and (min-width:0) and (max-width:1079px)" rel="stylesheet" />
+<link fetchpriority="high" href="/sb/sitebuilder-css-large-bundle.css.v1-10-9-0" media="screen and (min-width:1080px)" rel="stylesheet" />
+<link rel="stylesheet" media="screen" fetchpriority="high" href="/uSkinned/css/generated/6126ca18-e19d-4914-b7c0-61f74c28defc.css?version=639178355654500000" />
+<link fetchpriority="low" href="/sb/sitebuilder-css-prnt-bundle.css.v1-10-9-0" media="print" rel="stylesheet" />
+
+<link fetchpriority="high" href="/sb/gov-css-bundle.css.v1-10-9-0" media="screen" rel="stylesheet" />
+    <link rel="stylesheet" media="screen" fetchpriority="high" href="/css/GOV/modules/alert/alert.css" />
+
+
+            <link rel="shortcut icon" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=32&amp;height=32">
+        <link rel="apple-touch-icon" sizes="57x57" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=57&amp;height=57">
+        <link rel="apple-touch-icon" sizes="60x60" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=60&amp;height=60">
+        <link rel="apple-touch-icon" sizes="72x72" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=72&amp;height=72">
+        <link rel="apple-touch-icon" sizes="76x76" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=76&amp;height=76">
+        <link rel="apple-touch-icon" sizes="114x114" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=114&amp;height=114">
+        <link rel="apple-touch-icon" sizes="120x120" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=120&amp;height=120">
+        <link rel="apple-touch-icon" sizes="144x144" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=144&amp;height=144">
+        <link rel="apple-touch-icon" sizes="152x152" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=152&amp;height=152">
+        <link rel="apple-touch-icon" sizes="180x180" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=180&amp;height=180">
+        <link rel="icon" sizes="16x16" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=16&amp;height=16">
+        <link rel="icon" sizes="32x32" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=32&amp;height=32">
+        <link rel="icon" sizes="96x96" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=96&amp;height=96">
+        <link rel="icon" sizes="192x192" type="image/svg" href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=192&amp;height=192">
+        <meta name="msapplication-square70x70logo" content="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=70&height=70" />
+        <meta name="msapplication-square150x150logo" content="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=150&height=150" />
+        <meta name="msapplication-wide310x150logo" content="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=310&height=150" />
+        <meta name="msapplication-square310x310logo" content="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg?width=310&height=310" />
+
+            <script>
+var notificationExDays = 365;        </script>
+
+    
+<link href="/css/GOV/themes/gs-theme-evergreen.css" media="screen" rel="stylesheet">        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async fetchpriority="high" src="https://www.googletagmanager.com/gtag/js?id=G-E6M6L0Y2WP"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-E6M6L0Y2WP');
+        </script>
+
+</head>
+<body 
+    
+ class="body-bg body-bg-solid header-14-lg header-03-sm show_header-on-scroll-lg hide_header-on-scroll-sm directional-icons-chevron   full-page          secondary-navigation-underline-link-hover  content-underline-link-hover  footer-underline-link-hover    "
+
+>
+            <!-- Notification -->
+        <div id="NotificationPanel" class="usn-notification position-left base-bg closed" role="dialog" aria-label="Cookie consent notification" aria-describedby="cookieconsent:desc">
+            <div class="inner">
+
+                
+
+                    <div id="cookieconsent:desc" class="text base-text">
+                        <p>This website uses cookies to enhance usability and provide you with a more personal experience. By using this website, you agree to our use of cookies as explained in our <a href="/website-terms-of-use/" title="Privacy Policy">Privacy Policy</a>.</p>
+                    </div>
+                <p class="link">
+                    <button class="btn base-btn-bg base-btn-bg base-btn-bg-solid base-btn-bg-hover base-btn-bg-hover-solid base-btn-text base-btn-borders accept-cookies" aria-label="Agree to cookie consent message">
+                        <span></span>
+                        Agree
+                    </button>
+                </p>
+            </div>
+        </div>
+        <!--// Notification -->
+
+
+
+
+
+
+
+    <section class="umb--alerts umb--alerts--banners">
+            <div id="alert-banner-5640" class="umb--alert umb--alert--warning" role="alert" aria-labelledby="alert-banner-1-title" aria-describedby="alert-banner-1-description">
+                <div class="umb--alert__container">
+                    <div class="umb--alert__icon"></div>
+
+                            <div class="umb--alert__content">
+                                <div class="umb--alert__title" id="alert-banner-1-title">Construction work will occur in Huff Park over the next two weeks, and some areas may be temporarily closed. Please observe all fencing and barriers, and thank you for your patience.</div>
+                                <div class="umb--alert__summary" id="alert-banner-1-description"></div>
+                            </div>
+
+                    <button class="umb--alert__close" type="button">
+                        <span class="umb--alert__close__icon" aria-hidden="true"></span>
+                        <span class="umb--alert__close__text">Close alert</span>
+                    </button>
+                </div>
+            </div>
+    </section>
+
+
+
+
+    
+
+    <!-- Site -->
+    <div id="site">
+
+        <!-- Header -->
+            <header id="site-header" class="header-bg header-bg-solid" tabindex="-1">
+        <!-- Skip links -->
+        <a class="skip-to-content" id="skip-to-content-link" href="#site-content">Skip to main content</a>
+        <a class="skip-to-content" id="skip-to-footer-link" href="#site-footer">Skip to footer</a>
+        <!--// Skip links -->
+        <div class="container">
+
+            <div class="row">
+
+                    <div id="logo" >
+        <a href="/" title="The Borough of Montvale, NJ">
+                                <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/da4nv5zt/montvale-nj-vectored-seal.svg"  alt="" fetchpriority="high">
+                <span class="sr-only">The Borough of Montvale, NJ</span>
+        </a>
+    </div>
+
+
+
+                    <!-- Expand -->
+                    <button id="burgerNavStyle" class="expand-header expand-3-bars expand-even-lines expand-active-cross" type="button" aria-expanded="false" aria-label="Expand header">
+                        <span>Menu</span>
+                    </button>
+                    <!--// Expand -->
+                <!-- Main navigation -->
+        <nav aria-label="Main" class="main main-advanced nav-dropdown navigation-dropdown-bg navigation-dropdown-bg-solid">
+            <ul>
+            <li class="has-child mega-menu-header-container  ">
+                <span>
+                    <a href="https://www.montvalenj.gov/your-government/" >Your Government</a>
+                </span>
+
+                    <button class="expand-subpages" type="button" aria-expanded="false" aria-label="Expand sub pages Your Government">
+                        <span aria-hidden="true" class="sr-only">Expand sub pages Your Government</span>
+                    </button>
+                    <div class="mega-menu header-container items-3">
+                        <div class="menu-container">
+                            
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="/your-government/agendas-and-minutes/" target="_self">Agendas and Minutes</a></li>
+                            <li class=""><a href="/your-government/boards-and-commissions/" target="_self">Boards and Commissions</a></li>
+                            <li class=""><a href="https://ecode360.com/MO0150" target="_blank">Borough Code</a></li>
+                            <li class=""><a href="/your-government/budget-and-financial-documents/" target="_self">Budget and Financial Documents</a></li>
+            </ul>
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="/your-government/clerk/" target="_self">Clerk</a></li>
+                            <li class=""><a href="/your-government/directory/" target="_self">Directory</a></li>
+                            <li class=""><a href="/your-government/legal-public-notices/" target="_self">Legal / Public Notices</a></li>
+                            <li class=""><a href="https://montvaletv.viebit.com/?folder=Council&#x2B;Meetings" target="_blank">Meeting Videos</a></li>
+            </ul>
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="https://eforms-main.govpilot.com/NJ/montvale" target="_blank">Online Services</a></li>
+                            <li class=""><a href="https://main.govpilot.com/web/public/4aec5dfb-47f_Report-a-Concern-Borough-of-Montvale?uid=7013&amp;ust=NJ&amp;pu=1&amp;id=0" target="_blank">Report a Concern</a></li>
+                            <li class=""><a href="https://montvale.us13.list-manage.com/subscribe?u=5078e690f8b0e93fefadae043&amp;id=be3343eec9" target="_blank">Subscribe to Mayor&#x27;s Newsletter</a></li>
+            </ul>
+
+                        </div>
+                    </div>
+            </li>
+            <li class="has-child mega-menu-header-container  ">
+                <span>
+                    <a href="https://www.montvalenj.gov/departments/" >Departments</a>
+                </span>
+
+                    <button class="expand-subpages" type="button" aria-expanded="false" aria-label="Expand sub pages Departments">
+                        <span aria-hidden="true" class="sr-only">Expand sub pages Departments</span>
+                    </button>
+                    <div class="mega-menu header-container items-3">
+                        <div class="menu-container">
+                            
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="/departments/building-and-construction/" target="_self">Building and Construction</a></li>
+                            <li class=""><a href="/departments/pascack-joint-municipal-court/" target="_self">Pascack Joint Municipal Court</a></li>
+                            <li class=""><a href="/departments/finance/" target="_self">Finance</a></li>
+                            <li class=""><a href="/departments/fire-department/" target="_self">Fire Department</a></li>
+                            <li class=""><a href="/departments/fire-prevention/" target="_self">Fire Prevention</a></li>
+            </ul>
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="/departments/library/" target="_self">Library</a></li>
+                            <li class=""><a href="/departments/oem/" target="_self">OEM</a></li>
+                            <li class=""><a href="/departments/police/" target="_self">Police</a></li>
+                            <li class=""><a href="/departments/public-works-recycling/" target="_self">Public Works &amp; Recycling</a></li>
+                            <li class=""><a href="/departments/recreation/" target="_self">Recreation</a></li>
+            </ul>
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="/departments/registrar/" target="_self">Registrar</a></li>
+                            <li class=""><a href="/departments/tax-assessor/" target="_self">Tax Assessor</a></li>
+                            <li class=""><a href="/departments/tax-collector/" target="_self">Tax Collector</a></li>
+                            <li class=""><a href="https://www.tbvacnj.org/" target="_blank">Tri-boro Ambulance</a></li>
+                            <li class=""><a href="/departments/zoning-and-land-use/" target="_self">Zoning and Land Use</a></li>
+            </ul>
+
+                        </div>
+                    </div>
+            </li>
+            <li class="has-child mega-menu-header-container  ">
+                <span>
+                    <a href="https://www.montvalenj.gov/living-in-montvale/" >Living in Montvale</a>
+                </span>
+
+                    <button class="expand-subpages" type="button" aria-expanded="false" aria-label="Expand sub pages Living in Montvale">
+                        <span aria-hidden="true" class="sr-only">Expand sub pages Living in Montvale</span>
+                    </button>
+                    <div class="mega-menu header-container items-3">
+                        <div class="menu-container">
+                            
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="/living-in-montvale/affordable-housing/" target="_self">Affordable Housing</a></li>
+                            <li class=""><a href="/living-in-montvale/animal-control/" target="_self">Animal Control</a></li>
+                            <li class=""><a href="/living-in-montvale/borough-newsletter/" target="_self">Borough Newsletter</a></li>
+                            <li class=""><a href="/living-in-montvale/community-groups/" target="_self">Community Groups</a></li>
+                            <li class=""><a href="/living-in-montvale/education/" target="_self">Education</a></li>
+                            <li class=""><a href="/living-in-montvale/emergency-notifications/" target="_self">Emergency Notifications</a></li>
+            </ul>
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="https://www.montvalenj.gov/departments/library/" target="_blank">Library</a></li>
+                            <li class=""><a href="/living-in-montvale/montvale-access/" target="_self">MonTVale Access</a></li>
+                            <li class=""><a href="https://wipp.edmundsgovtech.cloud/home?wippId=0236" target="_blank">Property Taxes</a></li>
+                            <li class=""><a href="https://main.govpilot.com/web/public/4aec5dfb-47f_Report-a-Concern-Borough-of-Montvale?uid=7013&amp;ust=NJ&amp;pu=1&amp;id=0" target="_blank">Report a Concern</a></li>
+                            <li class=""><a href="https://apps.coned.com/slrRequests/streetlightrepair.aspx" target="_blank">Report Street Light Outage</a></li>
+                            <li class=""><a href="/living-in-montvale/social-services/" target="_self">Social Services</a></li>
+            </ul>
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="/living-in-montvale/stormwater/" target="_self">Stormwater</a></li>
+                            <li class=""><a href="https://www.montvalenj.gov/departments/public-works-recycling/" target="_self">Trash and Recycling</a></li>
+                            <li class=""><a href="/living-in-montvale/travel-commuting/" target="_self">Travel &amp; Commuting</a></li>
+                            <li class=""><a href="/living-in-montvale/utilities/" target="_self">Utilities</a></li>
+                            <li class=""><a href="/living-in-montvale/administrative-forms/" target="_self">Administrative Forms</a></li>
+                            <li class=""><a href="/living-in-montvale/accessibility/" target="_self">Accessibility</a></li>
+            </ul>
+
+                        </div>
+                    </div>
+            </li>
+            <li class="has-child mega-menu-header-container  ">
+                <span>
+                    <a href="https://www.montvalenj.gov/activities-and-recreation/" >Activities and Recreation</a>
+                </span>
+
+                    <button class="expand-subpages" type="button" aria-expanded="false" aria-label="Expand sub pages Activities and Recreation">
+                        <span aria-hidden="true" class="sr-only">Expand sub pages Activities and Recreation</span>
+                    </button>
+                    <div class="mega-menu header-container items-3">
+                        <div class="menu-container">
+                            
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="/departments/recreation/annual-events/" target="_self">Annual Events</a></li>
+                            <li class=""><a href="/departments/recreation/court-badges/" target="_self">Court Badges</a></li>
+                            <li class=""><a href="https://register.capturepoint.com/reg/login.cfm?cuBNAf3c0p4trnasCJNBkrfRqxVZCsM1ugTdgJwcwr%2BLxIFL2ZCtvf%2Fw" target="_blank">Field and Facility Reservations</a></li>
+            </ul>
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="https://montvaleathleticleague.org/" target="_blank">Montvale Athletic League</a></li>
+                            <li class=""><a href="/activities-and-recreation/parks-and-trails/" target="_self">Parks and Trails</a></li>
+                            <li class=""><a href="/activities-and-recreation/photographs/" target="_self">Photographs</a></li>
+            </ul>
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="https://www.montvalenj.gov/departments/recreation/recreation-programs/" target="_self">Recreation Programs</a></li>
+                            <li class=""><a href="/activities-and-recreation/senior-club/" target="_self">Senior Club</a></li>
+                            <li class=""><a href="https://www.montvalenj.gov/departments/library/" target="_blank">Library</a></li>
+            </ul>
+
+                        </div>
+                    </div>
+            </li>
+            <li class="has-child mega-menu-header-container  ">
+                <span>
+                    <a href="https://www.montvalenj.gov/business-and-development/" >Business and Development</a>
+                </span>
+
+                    <button class="expand-subpages" type="button" aria-expanded="false" aria-label="Expand sub pages Business and Development">
+                        <span aria-hidden="true" class="sr-only">Expand sub pages Business and Development</span>
+                    </button>
+                    <div class="mega-menu header-container items-3">
+                        <div class="menu-container">
+                            
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="https://www.montvalenj.gov/departments/building-and-construction/" target="_blank">Building Permits and Inspections</a></li>
+                            <li class=""><a href="https://main.govpilot.com/web/public/99cff4c0-495_Business-Insurance-Certificates-Registry-Borough-of-Montvale?uid=7013&amp;ust=NJ&amp;pu=1&amp;id=0" target="_blank">Business Insurance Registration</a></li>
+                            <li class=""><a href="/business-and-development/economic-development/" target="_self">Economic Development</a></li>
+            </ul>
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="/business-and-development/maps/" target="_self">Maps</a></li>
+                            <li class=""><a href="https://www.montvalenj.gov/your-government/boards-and-commissions/planning-board/" target="_self">Planning Board</a></li>
+                            <li class=""><a href="/business-and-development/stormwater-management/" target="_self">Stormwater Management</a></li>
+            </ul>
+            <ul class="justify-content-start text-left">
+                            <li class=""><a href="https://montvalechamber.com/" target="_blank">Chamber of Commerce</a></li>
+                            <li class=""><a href="https://calendar.montvalenj.gov/" target="_blank">Calendar</a></li>
+            </ul>
+
+                        </div>
+                    </div>
+            </li>
+            </ul>
+        </nav>
+                <!--// Main navigation -->
+                <!-- Secondary navigation -->
+                
+        <nav aria-label="Secondary" class="secondary nav-dropdown navigation-dropdown-bg navigation-dropdown-bg-solid">
+            <ul>
+                            <li><span><a href="/your-government/directory/?id=2366&amp;culture=en-US"  ><i class="icon usn_ion-md-clock before"></i>Hours:  M-W 8am-4pm, Th 8am-6pm, F 8am-12pm</a></span></li>
+                            <li><span><a href="tel:2013915700"  ><i class="icon usn_ion-ios-phone-portrait before"></i>Phone: 201.391.5700</a></span></li>
+                            <li><span><a href="https://maps.app.goo.gl/MNunrmQZ4mmo7BoZ7" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" ><i class="icon usn_ion-md-mail before"></i>12 DePiero Drive Montvale NJ 07645</a></span></li>
+
+                <li class="dropdown" data-area="memberArea" data-content="1425"></li>
+
+
+            </ul>
+        </nav>
+
+                <!--// Secondary navigation -->
+                <!-- CTA Links -->
+                
+                <!--// CTA Links -->
+                <!-- Site search -->
+                <!--// Site search -->
+                <!-- Site search Advanced -->
+                                            <div class="form site-search-form site-search radio-topnav">
+                                <div class="gs-search-popup-wrapper">
+                                        <div class="gs-search-inputs">
+
+
+    <!-- GOOGLE SEARCH -->
+        <div class="search-form-container google_search_field-topnav" data-placeholder="Search the Montvale website..." data-engine-id=" f5828ff54ce0d4fe5" data-btn="base-btn-bg base-btn-bg-solid base-btn-bg-hover base-btn-bg-hover-solid" name="google_search_field-topnav" data-selector="GOVGoogleSearch">
+            <div class="google-search-container site-search-input" aria-label="Site search" data-search="Search">
+                <gcse:searchbox-only></gcse:searchbox-only>
+            </div>
+        </div>
+    <!--// GOOGLE SEARCH -->
+
+                                        </div>
+
+    <!-- SEARCH SELECTION -->
+    <!--// SEARCH SELECTION -->
+
+                                </div>
+
+                                <button class="expand-search" type="button" data-toggle="collapse" aria-label="Expand site search">
+                                    <em>Expand Search</em>
+                                    <i aria-hidden="true" class="icon usn_ion-ios-search search-icon"></i>
+                                    <i aria-hidden="true" class="icon usn_ion-md-close close-icon" tabindex="0"></i>
+                                </button>
+                            </div>
+
+                <!--// Site search Advanced -->
+
+            </div>
+
+        </div>
+    </header>
+
+
+        <!--// Header -->
+        <!-- Content -->
+        <main id="site-content" tabindex="-1">
+
+            
+            
+
+
+        <section class="content base-bg p-0"><div class="container">
+        <!-- Row -->
+        <div class="row">
+            <div class="heading-col col p-0">
+
+
+                <h1 class="sr-only heading main base-heading">Home</h1>
+
+
+            </div>
+        </div>
+        <!--// Row -->
+        </div></section>
+    <section class="content component gs-news-ticker usn_cmp_newsfeed c4-bg c4-bg-solid pt-0 pb-0 " >  
+
+        <div class="component-inner">
+                    <div class="container">
+
+
+
+                    <!--FEED BODY-->
+            <div class="gs-feed-wrapper gs-feed-carousel sliderHasAutoplay "   >
+               
+                
+                    <div class="gs-feed-body no-border">
+
+                        <div class="gs-feed-list-news  slides" data-slick='{"autoplay": true, "autoplaySpeed": 3000,"dots": false ,"arrows": true ,"slidesToShow": 1}'>
+                                    <div class="gs-feed-list-item">
+                                        <div class="gs-feed-list-content">
+                                            <div class="gs-feed-list-meta">
+                                                <a href="/news/official-news/snow-angels-volunteer-program/" title="Click to open Snow Angels Volunteer Program"
+                                                class="gs-feed-list-title">Snow Angels Volunteer Program</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="gs-feed-list-item">
+                                        <div class="gs-feed-list-content">
+                                            <div class="gs-feed-list-meta">
+                                                <a href="/news/official-news/free-rabies-clinic-sat-nov-7-2026/" title="Click to open FREE Rabies  Clinic - Sat., Nov. 7, 2026"
+                                                class="gs-feed-list-title">FREE Rabies  Clinic - Sat., Nov. 7, 2026</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="gs-feed-list-item">
+                                        <div class="gs-feed-list-content">
+                                            <div class="gs-feed-list-meta">
+                                                <a href="/news/official-news/montvale-home-improvement-program/" title="Click to open Montvale Home Improvement Program"
+                                                class="gs-feed-list-title">Montvale Home Improvement Program</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="gs-feed-list-item">
+                                        <div class="gs-feed-list-content">
+                                            <div class="gs-feed-list-meta">
+                                                <a href="/news/official-news/updated-traffic-advisory-montana-construction-to-begin-night-work-on-summit-avenue-on-914/" title="Click to open UPDATED Traffic Advisory -Montana Construction to begin night work on Summit Avenue on 9/14"
+                                                class="gs-feed-list-title">UPDATED Traffic Advisory -Montana Construction to begin night work on Summit Avenue on 9/14</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                        <div class="gs-feed-footer no-border">      
+                                    <a class="btn  c4-btn-bg c4-btn-bg-solid c4-btn-bg-hover-solid c4-btn-text c4-btn-borders" href="https://www.montvalenj.gov/news/alerts/"  >
+                                        <span></span>
+                                        Borough Alerts - View All
+                                    </a>
+                            
+                        </div>
+            </div>  
+
+
+
+
+                    </div>
+        </div>
+    </section>
+    <section class="content component usn_cmp_banner base-bg base-bg-solid  gs-banner-opacity" >  
+
+        <div class="component-inner">
+
+
+                                <div class="item item_overlay item_medium-banner  c2-bg c2-bg-solid ">
+
+                                <!-- IMAGE -->
+                                <div class="image lazyload background-image "  style="background-image:url('https://media-002-us.cdn.govstack.com/montvalenj-us/media/1mbbnhdi/huff-pond.jpg?width=750&height=140&v=1dce937ae015bf0&format=webp')"  data-bgset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/1mbbnhdi/huff-pond.jpg?width=3000&height=1400&v=1dce937ae015bf0&format=webp [type:image/webp] | https://media-002-us.cdn.govstack.com/montvalenj-us/media/1mbbnhdi/huff-pond.jpg?width=3000&height=1400&v=1dce937ae015bf0 1x" data-sizes="auto"   role="img" aria-label="">
+                                </div>
+                                <!--// IMAGE -->
+
+                            <div class="inner">
+                                <div class="container">
+                                    <!-- ROW -->
+                                    <div class="row text-center justify-content-center info_align-middle">
+                                        <div class="info col">
+                                            <div class="text c2-text " data-os-animation="fadeInDown" data-os-animation-delay="0s" data-os-animation-duration="1s">
+                                                <h4>Welcome To The</h4>
+<h2 class="heading lg">Borough of Montvale</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--// ROW -->
+                                </div>
+                            </div>
+
+
+                    </div>
+
+
+
+        </div>
+    </section>
+    <section class="content component usn_cmp_pods c4-bg c4-bg-solid p-0 d-xs-none_only d-sm-none_only d-md-none_only homepage-search-row" >  
+
+        <div class="component-inner">
+                    <div class="container"><div class="row justify-content-center"><div class="content-col center-col col">
+
+
+
+                        <div class="component-main row listing listing_no-spacing listing_basic-grid listing-pods " >
+                          <div class="item usn_pod_searchlinksadvanced items-1-lg items-1-md items-1-sm items-1-xs  items-1 col-12 ">
+                            <div class="inner">
+                                                                    <div class="gs-search-component gs-search-component-radio">
+                                    <div class="gs-search-inputs">
+
+    <!-- GOOGLE SEARCH -->
+        <div class="search-form-container google_search_field-component" data-placeholder="Search the Montvale website..." data-engine-id=" f5828ff54ce0d4fe5" data-btn="c4-btn-bg c4-btn-bg-hover c4-btn-text c4-btn-borders" name="google_search_field-component" data-selector="GOVGoogleSearch">
+            <div class="google-search-container site-search" aria-label="Site search" data-search="Search">
+                <gcse:searchbox-only></gcse:searchbox-only>
+            </div>
+        </div>
+    <!--// GOOGLE SEARCH -->
+
+                                    </div>
+                                    <!-- Search selection -->
+
+    <!-- SEARCH SELECTION -->
+    <!--// SEARCH SELECTION -->
+
+                                </div>
+
+                                </div>
+                            </div>
+            </div>
+
+
+
+
+                    </div></div></div>
+        </div>
+    </section>
+    <section class="content component usn_cmp_pods c4-bg c4-bg-solid p-0 d-lg-none_only d-xl-none_only " >  
+
+        <div class="component-inner">
+                    <div class="container">
+
+
+
+                        <div class="component-main row listing listing_no-spacing listing_basic-grid listing-pods " >
+                          <div class="item usn_pod_searchlinksadvanced     items-1 col-12 ">
+                            <div class="inner">
+                                                                    <div class="gs-search-component gs-search-component-radio">
+                                    <div class="gs-search-inputs">
+
+    <!-- GOOGLE SEARCH -->
+        <div class="search-form-container google_search_field-component" data-placeholder="Search the Montvale website..." data-engine-id=" f5828ff54ce0d4fe5" data-btn="c4-btn-bg c4-btn-bg-hover c4-btn-text c4-btn-borders" name="google_search_field-component" data-selector="GOVGoogleSearch">
+            <div class="google-search-container site-search" aria-label="Site search" data-search="Search">
+                <gcse:searchbox-only></gcse:searchbox-only>
+            </div>
+        </div>
+    <!--// GOOGLE SEARCH -->
+
+                                    </div>
+                                    <!-- Search selection -->
+
+    <!-- SEARCH SELECTION -->
+    <!--// SEARCH SELECTION -->
+
+                                </div>
+
+                                </div>
+                            </div>
+            </div>
+
+
+
+
+                    </div>
+        </div>
+    </section>
+    <section class="content component usn_cmp_pods base-bg base-bg-solid pb-0 gs-icon-row-center" >  
+
+        <div class="component-inner">
+                    <div class="container">
+
+
+
+                        <div class="component-main row listing  listing_basic-grid listing-pods " >
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://main.govpilot.com/web/public/4aec5dfb-47f_Report-a-Concern-Borough-of-Montvale?uid=7013&amp;ust=NJ&amp;pu=1&amp;id=0" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/wijnhpyp/tools-wrench-screwdriver.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Report a Concern</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://www.montvalenj.gov/departments/public-works-recycling/trash-recycle-coach/" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/kffjksog/recycle_bin.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Trash &amp; Recycling</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://wipp.edmundsgovtech.cloud/home?wippId=0236" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/docn4q3n/property.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Tax Payment</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://portalnjmcdirect-cloud.njcourts.gov/prweb/PRServletPublicAuth/app/MuniPay/wQ2guhy8lqKPggD8pVI7RLYVZ9vxwNMF*/!STANDARD?AppName=NJMC&amp;fromBrowserHistory=true" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/00fpssrk/court-library-city.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Pay Tickets</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://www.montvalenj.gov/news/" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/5h0dlj2d/megaphone.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>News</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://eforms-main.govpilot.com/NJ/montvale#"  >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/tu0khk3p/open-laptop.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Online Services</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="/your-government/agendas-and-minutes/mayor-and-council/#"  >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/entl0ig4/meeting.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Council Meetings</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="/your-government/public-notices/"  >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/3indxy5e/auction-hammer.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Public Notices</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://www.montvalenj.gov/departments/recreation/"  >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/xkldgdil/person-riding-bike.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Recreation</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://montvalenj-us.govstack.com/your-government/directory/#"  >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/m0xdqtv5/phone-ringing.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Directory</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://montvalenj-us.govstack.com/departments/recreation/field-and-facility-reservations/lightning-detection/#"  >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/hg2nzg2t/locate-flash.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Lightning Detection</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-6 col-12 item_text-below usn_pod_textimage items-6-lg items-3-md items-3-sm items-2-xs  text-center  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://www.montvalenj.gov/departments/building-and-construction/"  >
+                    <div class="image    ">
+                                    <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/dywliw15/hammer.svg" alt="">
+
+                    </div>
+                    <div class="info ">
+
+                        
+
+                            <div class="text base-text">
+                                <p>Construction</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            </div>
+
+
+
+
+                    </div>
+        </div>
+    </section>
+    <section class="content component usn_cmp_pods base-bg base-bg-solid  " >  
+
+        <div class="component-inner">
+                    <div class="container">
+
+
+
+                        <div class="component-main row listing  listing_basic-grid listing-pods " >
+            <div class="item   items-4 col-12 item_text-below usn_pod_textimage items-4-lg items-3-md items-2-sm items-2-xs  text-left  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/hpenw3mg/mayors-welcome-message-11326.pdf" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                    <div class="image   image16by10 ">
+                                    <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/nvpatouk/mayor.png?rxy=0.668158090976883,0.40303032073036105&amp;width=1600&amp;height=1000&amp;v=1dd15ed0a9740a0&format=webp 1x" width="400" height="250">
+                    <img class="lazyload " src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/nvpatouk/mayor.png?rxy=0.668158090976883,0.40303032073036105&amp;width=400&amp;height=250&amp;v=1dd15ed0a9740a0&format=webp" width="400" height="250" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/nvpatouk/mayor.png?rxy=0.668158090976883,0.40303032073036105&amp;width=1600&amp;height=1000&amp;v=1dd15ed0a9740a0&format=webp 1x" alt="">
+            </picture>
+
+                    </div>
+                    <div class="info ">
+
+                        <p class="heading sm base-heading " >Mayor's Corner</p>
+
+                            <div class="text base-text">
+                                <div></div>
+<div>
+<div>A Welcome Message from the Mayor!</div>
+</div>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-4 col-12 item_text-below usn_pod_textimage items-4-lg items-3-md items-2-sm items-2-xs  text-left  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://register.capturepoint.com/reg/login.cfm?cuBNAf3c0p4trnasCJNBkrfRqxVZCsM1ugTdgJwcwr%2BLxIFL2ZCtvf%2Fw" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                    <div class="image   image16by10 ">
+                                    <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/z3cnwffb/senior-ctr-sign.jpg?rxy=0.298967534472702,0.5442967181984956&amp;width=1600&amp;height=1000&amp;v=1dce937ad492f80&format=webp 1x" width="400" height="250">
+                    <img class="lazyload " src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/z3cnwffb/senior-ctr-sign.jpg?rxy=0.298967534472702,0.5442967181984956&amp;width=400&amp;height=250&amp;v=1dce937ad492f80&format=webp" width="400" height="250" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/z3cnwffb/senior-ctr-sign.jpg?rxy=0.298967534472702,0.5442967181984956&amp;width=1600&amp;height=1000&amp;v=1dce937ad492f80&format=webp 1x" alt="">
+            </picture>
+
+                    </div>
+                    <div class="info ">
+
+                        <p class="heading sm base-heading " >Field and Facility Reservations</p>
+
+                            <div class="text base-text">
+                                <p>Reserve Fields and Facilities in the Borough using CommunityPass</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-4 col-12 item_text-below usn_pod_textimage items-4-lg items-3-md items-2-sm items-2-xs  text-left  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://www.montvalenj.gov/departments/police/"  >
+                    <div class="image   image16by10 ">
+                                    <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/xy5d1yqz/pd1.jpeg?rxy=0.5001338612835058,0.5351326493798177&amp;width=1600&amp;height=1000&amp;v=1dd0d5a364b38a0&format=webp 1x" width="400" height="250">
+                    <img class="lazyload " src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/xy5d1yqz/pd1.jpeg?rxy=0.5001338612835058,0.5351326493798177&amp;width=400&amp;height=250&amp;v=1dd0d5a364b38a0&format=webp" width="400" height="250" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/xy5d1yqz/pd1.jpeg?rxy=0.5001338612835058,0.5351326493798177&amp;width=1600&amp;height=1000&amp;v=1dd0d5a364b38a0&format=webp 1x" alt="">
+            </picture>
+
+                    </div>
+                    <div class="info ">
+
+                        <p class="heading sm base-heading " >Police Department</p>
+
+                            <div class="text base-text">
+                                <p>Find out more about the officers keeping our community safe.</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-4 col-12 item_text-below usn_pod_textimage items-4-lg items-3-md items-2-sm items-2-xs  text-left  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://www.montvalenj.gov/departments/fire-department/"  >
+                    <div class="image   image16by10 ">
+                                    <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/n2zh4eal/old-fire-truck.jpg?width=1600&amp;height=1000&amp;v=1dd0d58ac96ccb0&format=webp 1x" width="400" height="250">
+                    <img class="lazyload " src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/n2zh4eal/old-fire-truck.jpg?width=400&amp;height=250&amp;v=1dd0d58ac96ccb0&format=webp" width="400" height="250" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/n2zh4eal/old-fire-truck.jpg?width=1600&amp;height=1000&amp;v=1dd0d58ac96ccb0&format=webp 1x" alt="">
+            </picture>
+
+                    </div>
+                    <div class="info ">
+
+                        <p class="heading sm base-heading " >Montvale Fire Department</p>
+
+                            <div class="text base-text">
+                                <p>Over 100 Years of Dedicated Service</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-4 col-12 item_text-below usn_pod_textimage items-4-lg items-3-md items-2-sm items-2-xs  text-left  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://www.montvalenj.gov/your-government/boards-and-commissions/environmental-commission/"  >
+                    <div class="image   image16by10 ">
+                                    <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/3cppa4ry/ec-image.png?width=1600&amp;height=1000&amp;v=1dd6163df81df70&format=webp 1x" width="400" height="250">
+                    <img class="lazyload " src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/3cppa4ry/ec-image.png?width=400&amp;height=250&amp;v=1dd6163df81df70&format=webp" width="400" height="250" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/3cppa4ry/ec-image.png?width=1600&amp;height=1000&amp;v=1dd6163df81df70&format=webp 1x" alt="">
+            </picture>
+
+                    </div>
+                    <div class="info ">
+
+                        <p class="heading sm base-heading " >Environmental Commission</p>
+
+                            <div class="text base-text">
+                                <p>Learn how Montvale’s Environmental Commission protects natural spaces and leads community efforts for a cleaner, greener future.</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-4 col-12 item_text-below usn_pod_textimage items-4-lg items-3-md items-2-sm items-2-xs  text-left  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/w5edilfa/christmas-tree-lighting-2026.png" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                    <div class="image   image16by10 ">
+                                    <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/w5edilfa/christmas-tree-lighting-2026.png?width=1600&amp;height=1000&amp;v=1dd6bbfb97e4a50&format=webp 1x" width="400" height="250">
+                    <img class="lazyload " src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/w5edilfa/christmas-tree-lighting-2026.png?width=400&amp;height=250&amp;v=1dd6bbfb97e4a50&format=webp" width="400" height="250" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/w5edilfa/christmas-tree-lighting-2026.png?width=1600&amp;height=1000&amp;v=1dd6bbfb97e4a50&format=webp 1x" alt="">
+            </picture>
+
+                    </div>
+                    <div class="info ">
+
+                        <p class="heading sm base-heading " >2026 Christmas Tree Lighting</p>
+
+                            <div class="text base-text">
+                                <div>Join Us for the Annual Christmas Tree Lighting Event!</div>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-4 col-12 item_text-below usn_pod_textimage items-4-lg items-3-md items-2-sm items-2-xs  text-left  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://montvaletv.viebit.com/?folder=ALL" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                    <div class="image   image16by10 ">
+                                    <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/s4dhkqav/tv-access.jpeg?rxy=0.49405212483759786,0.5441256592775994&amp;width=1600&amp;height=1000&amp;v=1dd0d5dfd12cbd0&format=webp 1x" width="400" height="250">
+                    <img class="lazyload " src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/s4dhkqav/tv-access.jpeg?rxy=0.49405212483759786,0.5441256592775994&amp;width=400&amp;height=250&amp;v=1dd0d5dfd12cbd0&format=webp" width="400" height="250" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/s4dhkqav/tv-access.jpeg?rxy=0.49405212483759786,0.5441256592775994&amp;width=1600&amp;height=1000&amp;v=1dd0d5dfd12cbd0&format=webp 1x" alt="">
+            </picture>
+
+                    </div>
+                    <div class="info ">
+
+                        <p class="heading sm base-heading " >MonTVale Access</p>
+
+                            <div class="text base-text">
+                                <p>Watch Meetings, Interviews and Special Events</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            <div class="item   items-4 col-12 item_text-below usn_pod_textimage items-4-lg items-3-md items-2-sm items-2-xs  text-left  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner   ">
+                    <a href="https://www.montvalenj.gov/living-in-montvale/affordable-housing/"  >
+                    <div class="image   image16by10 ">
+                                    <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/uj5npgaj/housing_small.jpg?width=1600&amp;height=1000&amp;v=1dd1470b6d3a800&format=webp 1x" width="400" height="250">
+                    <img class="lazyload " src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/uj5npgaj/housing_small.jpg?width=400&amp;height=250&amp;v=1dd1470b6d3a800&format=webp" width="400" height="250" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/uj5npgaj/housing_small.jpg?width=1600&amp;height=1000&amp;v=1dd1470b6d3a800&format=webp 1x" alt="">
+            </picture>
+
+                    </div>
+                    <div class="info ">
+
+                        <p class="heading sm base-heading " >Affordable Housing</p>
+
+                            <div class="text base-text">
+                                <p>Explore Local Affordable Housing Resources</p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            </div>
+
+
+
+
+                    </div>
+        </div>
+    </section>
+    <section class="content component usn_cmp_pods c3-bg c3-bg-solid  " >  
+
+        <div class="component-inner">
+                    <div class="container">
+
+
+
+                        <div class="component-main row listing  listing_basic-grid listing-pods " >
+             <div class="item  items-3 col-12 usn_pod_newsfeed     "> <div class="inner ">
+        <!--FEED BODY-->
+            <div class="gs-feed-wrapper "   >
+                  <div class="gs-feed-header ">
+<h2 class="">News</h2>                    </div>
+                    <div class="gs-feed-body ">
+                            <ul class="gs-feed-list-news row listing listing_basic-grid" >
+                    <li class="gs-feed-list-item items-1 item item_text-right text-left  divider-lines">
+                <div class="inner ">
+                  
+                    <div class="gs-feed-list-content info  ">
+           
+                        <div class="gs-feed-list-meta text ">
+                     
+            
+                    <a href="/news/official-news/snow-angels-volunteer-program/" title="Click to open Snow Angels Volunteer Program"
+                                class="gs-feed-list-title ">Snow Angels Volunteer Program</a>
+                                <div class="gs-feed-list-author-date">
+                                    <!--author-->
+
+                                        <span class="gs-feed-list-date">Nov 05, 2026</span>
+                                        <br />
+                                </div>
+                    
+                        </div>
+                    </div>
+                   </div>
+                </li>
+                    <li class="gs-feed-list-item items-1 item item_text-right text-left  divider-lines">
+                <div class="inner ">
+                  
+                    <div class="gs-feed-list-content info  ">
+           
+                        <div class="gs-feed-list-meta text ">
+                     
+            
+                    <a href="/news/official-news/veolia-water-system-testing-may-affect-water-pressure-on-thurs-nov-5/" title="Click to open Veolia Water System Testing May Affect Water Pressure on Thurs. Nov. 5"
+                                class="gs-feed-list-title ">Veolia Water System Testing May Affect Water Pressure on Thurs. Nov. 5</a>
+                                <div class="gs-feed-list-author-date">
+                                    <!--author-->
+
+                                        <span class="gs-feed-list-date">Nov 03, 2026</span>
+                                        <br />
+                                </div>
+                    
+                        </div>
+                    </div>
+                   </div>
+                </li>
+                    <li class="gs-feed-list-item items-1 item item_text-right text-left  divider-lines">
+                <div class="inner ">
+                  
+                    <div class="gs-feed-list-content info  ">
+           
+                        <div class="gs-feed-list-meta text ">
+                     
+            
+                    <a href="/news/official-news/free-rabies-clinic-sat-nov-7-2026/" title="Click to open FREE Rabies  Clinic - Sat., Nov. 7, 2026"
+                                class="gs-feed-list-title ">FREE Rabies  Clinic - Sat., Nov. 7, 2026</a>
+                                <div class="gs-feed-list-author-date">
+                                    <!--author-->
+
+                                        <span class="gs-feed-list-date">Nov 02, 2026</span>
+                                        <br />
+                                </div>
+                    
+                        </div>
+                    </div>
+                   </div>
+                </li>
+                    <li class="gs-feed-list-item items-1 item item_text-right text-left  divider-lines">
+                <div class="inner ">
+                  
+                    <div class="gs-feed-list-content info  ">
+           
+                        <div class="gs-feed-list-meta text ">
+                     
+            
+                    <a href="/news/official-news/montvale-home-improvement-program/" title="Click to open Montvale Home Improvement Program"
+                                class="gs-feed-list-title ">Montvale Home Improvement Program</a>
+                                <div class="gs-feed-list-author-date">
+                                    <!--author-->
+
+                                        <span class="gs-feed-list-date">Oct 27, 2026</span>
+                                        <br />
+                                </div>
+                    
+                        </div>
+                    </div>
+                   </div>
+                </li>
+                    <li class="gs-feed-list-item items-1 item item_text-right text-left  divider-lines">
+                <div class="inner ">
+                  
+                    <div class="gs-feed-list-content info  ">
+           
+                        <div class="gs-feed-list-meta text ">
+                     
+            
+                    <a href="/news/official-news/vote-by-mail-information/" title="Click to open Vote By Mail Information"
+                                class="gs-feed-list-title ">Vote By Mail Information</a>
+                                <div class="gs-feed-list-author-date">
+                                    <!--author-->
+
+                                        <span class="gs-feed-list-date">Oct 16, 2026</span>
+                                        <br />
+                                </div>
+                    
+                        </div>
+                    </div>
+                   </div>
+                </li>
+                    <li class="gs-feed-list-item items-1 item item_text-right text-left  divider-lines">
+                <div class="inner ">
+                  
+                    <div class="gs-feed-list-content info  ">
+           
+                        <div class="gs-feed-list-meta text ">
+                     
+            
+                    <a href="/news/official-news/tri-boro-volunteer-ambulance-corps-recruitment-open-house-nov-8th-1200pm-400pm/" title="Click to open TRI-BORO Volunteer Ambulance Corps - Recruitment Open House Nov 8th 12:00pm - 4:00pm"
+                                class="gs-feed-list-title ">TRI-BORO Volunteer Ambulance Corps - Recruitment Open House Nov 8th 12:00pm - 4:00pm</a>
+                                <div class="gs-feed-list-author-date">
+                                    <!--author-->
+
+                                        <span class="gs-feed-list-date">Oct 16, 2026</span>
+                                        <br />
+                                </div>
+                    
+                        </div>
+                    </div>
+                   </div>
+                </li>
+                             </ul>
+                    </div>
+                        <div class="gs-feed-footer ">      
+                                <a class="gs-feed-link" href="/news/" title="Click to open news">View All News</a>
+                            
+                        </div>
+                
+            </div>
+        </div></div>
+             <div class="item  items-3 col-12 usn_pod_calendarfeed     "> <div class="inner ">
+        <div class="gs-feed-wrapper "   >
+            <div class="gs-feed-list-">
+                <div class="gs-feed-header ">
+<h2 class="">Events</h2>                </div>
+                <div class="gs-feed-body ">
+                    <ul class="gs-feed-list-events">
+                                    <li class="gs-feed-list-item item item_text-right divider-lines">
+                <div class="inner">
+
+                    <div class="gs-feed-list-content info">
+                            <span class="gs-feed-list-boxdate">
+                                <span class="gs-feed-list-month">Nov</span>
+                            <span class="gs-feed-list-day">16</span>
+                        </span>
+                        <div class="gs-feed-list-meta">
+                            <a href="https://calendar.montvalenj.gov/meetings/detail/2026-11-16-1945-Environmental-Commission-Meeting2" title="Click to open Environmental Commission Meeting"
+                               class="gs-feed-list-title">Environmental Commission Meeting</a>
+                                <span class="gs-feed-list-time">7:45 PM </span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="gs-feed-list-item item item_text-right divider-lines">
+                <div class="inner">
+
+                    <div class="gs-feed-list-content info">
+                            <span class="gs-feed-list-boxdate">
+                                <span class="gs-feed-list-month">Nov</span>
+                            <span class="gs-feed-list-day">17</span>
+                        </span>
+                        <div class="gs-feed-list-meta">
+                            <a href="https://calendar.montvalenj.gov/meetings/detail/2026-11-17-1930-Planning-Board-Meeting2" title="Click to open Planning Board Meeting"
+                               class="gs-feed-list-title">Planning Board Meeting</a>
+                                <span class="gs-feed-list-time">7:30 PM </span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="gs-feed-list-item item item_text-right divider-lines">
+                <div class="inner">
+
+                    <div class="gs-feed-list-content info">
+                            <span class="gs-feed-list-boxdate">
+                                <span class="gs-feed-list-month">Dec</span>
+                            <span class="gs-feed-list-day">01</span>
+                        </span>
+                        <div class="gs-feed-list-meta">
+                            <a href="https://calendar.montvalenj.gov/meetings/detail/2026-12-01-1930-Planning-Board-Meeting2" title="Click to open Planning Board Meeting"
+                               class="gs-feed-list-title">Planning Board Meeting</a>
+                                <span class="gs-feed-list-time">7:30 PM </span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="gs-feed-list-item item item_text-right divider-lines">
+                <div class="inner">
+
+                    <div class="gs-feed-list-content info">
+                            <span class="gs-feed-list-boxdate">
+                                <span class="gs-feed-list-month">Dec</span>
+                            <span class="gs-feed-list-day">07</span>
+                        </span>
+                        <div class="gs-feed-list-meta">
+                            <a href="https://calendar.montvalenj.gov/meetings/detail/2026-12-07-1900-Board-of-Health-Meeting2" title="Click to open Board of Health Meeting"
+                               class="gs-feed-list-title">Board of Health Meeting</a>
+                                <span class="gs-feed-list-time">7:00 PM  - 8:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="gs-feed-list-item item item_text-right divider-lines">
+                <div class="inner">
+
+                    <div class="gs-feed-list-content info">
+                            <span class="gs-feed-list-boxdate">
+                                <span class="gs-feed-list-month">Dec</span>
+                            <span class="gs-feed-list-day">10</span>
+                        </span>
+                        <div class="gs-feed-list-meta">
+                            <a href="https://calendar.montvalenj.gov/meetings/detail/2026-12-10-1930-Mayor-amp-Council-Public-Meeting2" title="Click to open Mayor &amp;amp; Council Public Meeting"
+                               class="gs-feed-list-title">Mayor &amp; Council Public Meeting</a>
+                                <span class="gs-feed-list-time">7:30 PM </span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+                    </ul>
+                </div>
+                    <div class="gs-feed-footer ">
+                        <a class="gs-feed-link" href="https://calendar.montvalenj.gov/" title="Click to open events">View all Events</a>
+                    </div>
+
+            </div>
+        </div>
+        </div></div>
+
+            <div class="item item_has-bg  items-3 col-12 item_text-below usn_pod_textimage     text-left  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+            <div class="inner base-bg base-bg-solid  ">
+                    <a href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/y03p5l3k/snow-angel-flyer-2026.png" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                    <div class="info ">
+
+                                <p class="secondary-heading base-secondary-heading " >In The News</p>
+
+
+                            <div class="text base-text">
+                                <p><img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/y03p5l3k/snow-angel-flyer-2026.png?rmode=max&amp;width=743&amp;height=962" alt="" width="743" height="962"></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+                            </div>
+
+                    </div>
+                </a>
+            </div>
+    </div>
+            </div>
+
+
+
+
+                    </div>
+        </div>
+    </section>
+    <section class="content component usn_cmp_gallery base-bg base-bg-solid  " >  
+
+        <div class="component-inner">
+                    <div class="container">
+
+
+
+                    <div class="component-main row  listing  listing_basic-grid listing_gallery" >
+
+                        <div class="item items-6 col-12   items-6-lg items-3-md items-2-sm items-2-xs " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+                            <div class="image">
+                                    <a href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/mkabqnmq/2026-hhw-003-_page_1.jpg" aria-label="Open image" aria-haspopup="dialog" role="button" data-toggle="lightbox" data-type="image" data-gallery="galleryname_7ed27f8d-222b-4cae-bd47-45232d2c2bec">
+
+                                            <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/mkabqnmq/2026-hhw-003-_page_1.jpg?width=640&amp;height=828&format=webp 1x" width="160" height="207">
+                    <img class="lazyload" src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/mkabqnmq/2026-hhw-003-_page_1.jpg?width=160&amp;height=207&format=webp" width="160" height="207" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/mkabqnmq/2026-hhw-003-_page_1.jpg?width=640&amp;height=828&format=webp 1x" alt="">
+            </picture>
+
+
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="item items-6 col-12   items-6-lg items-3-md items-2-sm items-2-xs " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+                            <div class="image">
+                                    <a href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/d32jptm5/screenshot_27-10-2026_114921_.jpeg" aria-label="Open image" aria-haspopup="dialog" role="button" data-toggle="lightbox" data-type="image" data-gallery="galleryname_7ed27f8d-222b-4cae-bd47-45232d2c2bec">
+
+                                            <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/d32jptm5/screenshot_27-10-2026_114921_.jpeg?width=802&amp;height=1053&format=webp 1x" width="200" height="263">
+                    <img class="lazyload" src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/d32jptm5/screenshot_27-10-2026_114921_.jpeg?width=200&amp;height=263&format=webp" width="200" height="263" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/d32jptm5/screenshot_27-10-2026_114921_.jpeg?width=802&amp;height=1053&format=webp 1x" alt="">
+            </picture>
+
+
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="item items-6 col-12   items-6-lg items-3-md items-2-sm items-2-xs " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+                            <div class="image">
+                                    <a href="https://media-002-us.cdn.govstack.com/montvalenj-us/media/n3ljmpgk/screenshot_27-10-2026_143235_.jpeg" aria-label="Open image" aria-haspopup="dialog" role="button" data-toggle="lightbox" data-type="image" data-gallery="galleryname_7ed27f8d-222b-4cae-bd47-45232d2c2bec">
+
+                                            <picture>
+                <source type="image/webp" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/n3ljmpgk/screenshot_27-10-2026_143235_.jpeg?width=814&amp;height=1054&format=webp 1x" width="203" height="263">
+                    <img class="lazyload" src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/n3ljmpgk/screenshot_27-10-2026_143235_.jpeg?width=203&amp;height=263&format=webp" width="203" height="263" data-srcset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/n3ljmpgk/screenshot_27-10-2026_143235_.jpeg?width=814&amp;height=1054&format=webp 1x" alt="">
+            </picture>
+
+
+                                </a>
+
+                            </div>
+                        </div>
+
+        </div>
+
+
+
+
+
+
+                    </div>
+        </div>
+    </section>
+    <section class="content component usn_cmp_banner base-bg base-bg-solid  " >  
+
+        <div class="component-inner">
+
+
+                                <div class="item item_overlay item_short-banner  c2-bg c2-bg-solid ">
+
+                                <!-- IMAGE -->
+                                <div class="image lazyload background-image "  style="background-image:url('https://media-002-us.cdn.govstack.com/montvalenj-us/media/engarqx3/family_park.jpg?width=750&height=100&v=1da7becd94e3310&format=webp')"  data-bgset="https://media-002-us.cdn.govstack.com/montvalenj-us/media/engarqx3/family_park.jpg?width=3000&height=1000&v=1da7becd94e3310&format=webp [type:image/webp] | https://media-002-us.cdn.govstack.com/montvalenj-us/media/engarqx3/family_park.jpg?width=3000&height=1000&v=1da7becd94e3310 1x" data-sizes="auto"   role="img" aria-label="">
+                                </div>
+                                <!--// IMAGE -->
+
+                            <div class="inner">
+                                <div class="container">
+                                    <!-- ROW -->
+                                    <div class="row text-center justify-content-center info_align-middle">
+                                        <div class="info col">
+<p class="heading  c2-heading "  data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s" >Stay up-to-date with what's happening in Montvale</p>                                            <p class="link " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="1.2s">
+                                                    <a class="btn  c1-btn-bg c1-btn-bg-solid c1-btn-bg-hover-solid c1-btn-text c1-btn-borders" href="https://www.montvalenj.gov/subscribe/"  >
+                                                        <span></span>
+                                                        <i class="icon usn_ion-md-mail before"></i>Sign up for News and Alerts
+                                                    </a>
+                                                    <a class="btn  c1-btn-bg c1-btn-bg-solid c1-btn-bg-hover-solid c1-btn-text c1-btn-borders" href="https://calendar.montvalenj.gov/default/Subscription"  >
+                                                        <span></span>
+                                                        <i class="icon usn_ion-ios-calendar before"></i>Sign up for Calendar updates
+                                                    </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!--// ROW -->
+                                </div>
+                            </div>
+
+
+                    </div>
+
+
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+            
+
+        </main>
+        <!--// Content -->
+        <!-- Footer -->
+                    <footer id="site-footer" class="footer-bg footer-bg-solid" tabindex="-1">
+
+                <!-- Breadcrumb -->
+                
+                <!--// Breadcrumb -->
+
+                <div class="container">
+
+                        <!-- Row -->
+                        <div class="row listing">
+
+            <div class="item  footer-item   col-lg-3 col-md-5 col-12 col  item_text-below usn_pod_textimage textAlignmentLeft  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="0.9s">
+            <div class="inner   ">
+                    <div class="info ">
+
+                        <p class="heading sm footer-heading " >Contact Us</p>
+
+                            <div class="text footer-text">
+                                <p><strong>Borough of Montvale</strong><br>12 DePiero Drive<br>Montvale, NJ 07645<br>Phone: <a href="tel:201-391-5700" title="tel:201-391-5700">201-391-5700</a></p>
+                            </div>
+
+                    </div>
+            </div>
+    </div>
+            <div class="item  footer-item offset-lg-1 offset-md-1 col-lg-3 col-md-5 col-12 col  item_text-below usn_pod_textimage textAlignmentLeft  " data-os-animation="fadeIn" data-os-animation-delay="0s" data-os-animation-duration="0.9s">
+            <div class="inner   ">
+                    <div class="info ">
+
+                        <p class="heading sm footer-heading " >Resources</p>
+
+                            <div class="text footer-text">
+                                <p><a href="/sitemap/" title="Sitemap">Sitemap</a><br><a href="/living-in-montvale/accessibility/" title="Accessibility">Accessibility</a><br><a href="/website-terms-of-use/" title="Privacy Policy">Website Terms of Use</a></p>
+                            </div>
+
+                    </div>
+            </div>
+    </div>
+                                            <div class="item footer-item usn_pod_sociallinks offset-lg-1  col-lg-4 col-md-12 col-12 col ">
+                                        
+                                                <div class="inner">
+                                                    <p class="heading sm footer-heading "  data-os-animation="fadeInDown" data-os-animation-delay="0s" data-os-animation-duration="1s" >Connect With Us</p>        <nav class="social " data-os-animation="fadeInDown" data-os-animation-delay="0s" data-os-animation-duration="1s" aria-label="Social links">
+
+            <ul>
+                        <li>
+                            <span>
+                                <a href="https://www.facebook.com/BoroughofMontvale" class="" data-icon="" target="_blank" rel="noreferrer noopener"  title="Link will open in a new window/tab" >
+                                            <img src="https://media-002-us.cdn.govstack.com/montvalenj-us/media/1otpokoh/facebook_circle.svg" alt="Facebook Icon">
+                                        <span class="sr-only">Facebook</span>
+                                </a>
+                            </span>
+                        </li>
+            </ul>
+        </nav>
+
+                                                </div>
+                                           
+                                        </div>
+
+                        </div>
+                        <!--// Row -->
+                    <!-- Row -->
+                    <div class="row">
+
+                        <div class="col">
+                            <nav aria-label="Footer" class="footer-navigation">
+                                <ul>
+                                    <li><div>&copy; 2026 Borough of Montvale</div></li>
+                                                    <li><span><a href="https://eforms-main.govpilot.com/NJ/montvale"  >Online Services</a></span></li>
+                <li><span><a href="https://www.montvalenj.gov/your-government/directory/"  >Directory</a></span></li>
+                <li><span><a href="https://www.montvalenj.gov/sitemap/"  >Sitemap</a></span></li>
+
+                                    <li class="site-credit">
+                                        <div>Made with </div>
+                                        <span><a target="_blank" rel="noopener" title="Link will open in a new window/tab" href="https://www.govstack.com/">Govstack</a></span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+                    <!--// Row -->
+
+                            <!-- Back to top -->
+        <div class="usn_back-to-top position-right">
+            <button id="back-to-top-link" aria-label="Back to top" class="btn base-btn-bg base-btn-bg base-btn-bg-solid base-btn-bg-hover base-btn-bg-hover-solid base-btn-text base-btn-borders btn-back-to-top">
+                <span></span>
+                <i aria-hidden="true" class="icon"></i><span aria-hidden="true" class="d-none">Back to top</span>
+            </button>
+        </div>
+        <!--// Back to top -->
+
+
+                </div>
+            </footer>
+
+        <!--// Footer -->
+
+    </div>
+    <!--// Site -->
+
+    
+    
+
+
+		<script fetchpriority="high" src="/sb/sitebuilder-js-bundle.js.v1-10-9-0" type="text/javascript"></script>
+		<script fetchpriority="high" src="/sb/gov-js-bundle.js.v1-10-9-0" type="text/javascript"></script>
+		<script async defer fetchpriority="low" src="https://www.google.com/recaptcha/api.js"></script>
+
+<script>
+    $(document).ready(function(){
+        let lastCtrlTime = 0;
+        // milli seconds
+        const doublePressWindow = 500;
+        document.addEventListener('keyup', function (event){
+            if(event.key === "Control"){
+                const now = Date.now();
+                if(now - lastCtrlTime <= doublePressWindow){
+                    let metaPageId = document.querySelector("meta[name='pageID']")
+                        .getAttribute("content");
+                    // reset time
+                    lastCtrlTime = 0;
+                    var backofficeEditUrl = window.location.protocol + '//' + window.location.hostname + '/umbraco/#/content/content/edit/' + metaPageId;
+                    window.location.href = backofficeEditUrl;
+                }
+                else{
+                    lastCtrlTime = now;
+                }
+            }
+        });
+    });
+</script>
+<script>
+    $(function(){
+        $('body').attr('data-large-breakpoint', 1080);
+    });
+</script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script fetchpriority="high" src="/sb/gov-alerts-js-bundle.js.v1-10-9-0" type="text/javascript"></script>
+                                                                                            <script type="text/javascript" fetchpriority="low" src="https://cse.google.com/cse.js?cx= f5828ff54ce0d4fe5"></script>
+
+    <script defer="" fetchpriority="high" src="/sb/gov-members-nav-js-bundle.js.v1-10-9-0" type="text/javascript"></script>
+
+    
+    
+
+    
+
+</body>
+
+</html>

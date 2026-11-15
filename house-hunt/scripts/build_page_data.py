@@ -91,7 +91,11 @@ def unit(r):
                      # display field for the page: "NYC records", "rating screen: <verdict>", "none readable", or null when the building was not in the evidence pass
                      "public_evidence": PUBLIC_EVIDENCE.get(g("building_id"))},
         "confirm": {"asterisk": g("confirm_asterisk") == "yes", "what": g("confirm_what") if g("confirm_asterisk") == "yes" else None,
-                    "why": g("confirm_why") if g("confirm_asterisk") == "yes" else None},
+                    "why": g("confirm_why") if g("confirm_asterisk") == "yes" else None,
+                    # the question to ask, in the reviewer's or the rule's words (independent check 2)
+                    "question": (qs[0] if qs and g("confirm_what") != "live check" else None) if g("confirm_asterisk") == "yes" else None,
+                    "reviewed": g("review_verdict")},
+        "cost_check": {"cap_margin": g("cap_margin"), "unknown_count": g("all_in_unknown_count"), "lease_term_months": g("rent_lease_term_months"), "price_12_month": g("rent_12_month_price")},
         "confidence": g("confidence"), "tour_questions": qs,
         "links": {"listing": g("url"), "building": g("building_url")}, "source_site": g("source_site"),
         "live": {"status": g("live_status"), "checked_at": g("live_checked_at")}, "price_seen_at": g("last_seen"),
@@ -129,9 +133,22 @@ def main():
         VQ = pd.read_csv(vq, dtype=str, keep_default_na=False)
         if "verified" in VQ:
             VQ = VQ[VQ.verified.str.lower().isin(["true", "yes", "1"])]
+        # independent check 2, D20: quotes dropped by decision (wrong municipality; a writer named by office)
+        qx = DATA / "voices" / "quote_exclusions.csv"
+        QX = [(r.hood_id, r.excerpt_starts_with) for r in pd.read_csv(qx, dtype=str, keep_default_na=False).itertuples()] if qx.exists() else []
+
+        def area_key(t):
+            t = re.sub(r",\s*[A-Z]{2}$", "", str(t).strip())
+            return re.sub(r"\b(township|city of|city|town|village|borough)\b|\(.*?\)|[^a-z]", "", t.lower())
         for r in VQ.itertuples():
+            if any(r.hood_id == h and r.excerpt.startswith(x) for h, x in QX):
+                continue
+            # D20: keep source_area. A quote about a wider or different area than the neighborhood it is filed under
+            # says so ("about Corona" under North Corona). Thread titles used as an area name are not shown.
+            sa = getattr(r, "source_area", "")
+            about = re.sub(r",\s*[A-Z]{2}$", "", sa) if sa and len(sa) <= 40 and area_key(sa) != area_key(r.neighborhood) else None
             voices.setdefault(r.hood_id, []).append({"excerpt": r.excerpt, "theme": r.theme, "sentiment": r.sentiment, "context": r.speaker_context,
-                                                     "source": r.source_site, "date": r.post_date, "url": r.permalink})
+                                                     "source": r.source_site, "date": r.post_date, "url": r.permalink, "source_area": sa or None, "about": about})
     vs = DATA / "voices" / "neighborhood_survey.csv"
     if vs.exists():
         for r in pd.read_csv(vs, dtype=str, keep_default_na=False).itertuples():

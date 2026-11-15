@@ -74,11 +74,17 @@ def load_blocked() -> dict:
 
 
 def save_blocked() -> None:
-    d = load_blocked()
-    for host, (kind, val) in F._robots.items():
-        if kind == "blocked" and host not in d:
-            d[host] = f"round 2 ({lib.now_iso()}): {val}"
-    BLOCKED_HOSTS.write_text(json.dumps(d, indent=1, sort_keys=True))
+    """Merge this process's refusals into the shared file (locked: several hosts are crawled in parallel)."""
+    import fcntl
+    mine = {h: v for h, (k, v) in F._robots.items() if k == "blocked"}
+    with open(str(BLOCKED_HOSTS) + ".lock", "w") as lk:
+        fcntl.flock(lk, fcntl.LOCK_EX)
+        d = json.loads(BLOCKED_HOSTS.read_text()) if BLOCKED_HOSTS.exists() else {}
+        new = {h: v for h, v in mine.items() if h not in d and h not in ROUND1_REFUSED and not v.startswith("host refused")}
+        if new or not BLOCKED_HOSTS.exists():
+            for h, v in new.items():
+                d[h] = f"round 2 ({lib.now_iso()}): {v}"
+            BLOCKED_HOSTS.write_text(json.dumps(d, indent=1, sort_keys=True))
 
 
 _orig_robots_ok = F.robots_ok

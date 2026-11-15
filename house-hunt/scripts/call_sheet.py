@@ -210,8 +210,9 @@ def read_ids(arg: str) -> list[str]:
     if p.exists() and p.is_file():
         text = p.read_text(encoding="utf8")
         first = text.splitlines()[0] if text.strip() else ""
-        if "listing_id" in [c.strip() for c in first.split(",")]:
-            col = pd.read_csv(p, dtype=str, keep_default_na=False)["listing_id"]
+        header = [c.strip() for c in first.split(",")]
+        if "listing_id" in header or "listing_ids" in header:
+            col = pd.read_csv(p, dtype=str, keep_default_na=False)["listing_id" if "listing_id" in header else "listing_ids"]
             ids = []
             for v in col:  # a call-sheet row can hold several ids joined with "; "
                 ids += [x.strip() for x in v.split(";")]

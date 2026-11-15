@@ -37,6 +37,8 @@ DISPLAY = {  # pattern -> why it is kept but not scored
     r"^rent_(offer_text|free_months|lease_months|first_full_payment_date|first_full_payment_note|needs_call|listed_price_is|gross|basis_kind|asterisk)$": "rent terms shown beside the asterisk",
     r"^(excerpt|quote|item_date|about|category|building_site|detail)$": "evidence text shown on avoid and pause cards",
     r"^(parking_text|optional_fees_text|dog_weight_text|dogs_allowed_note|elevator_note)$": "source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)",
+    r"^(price_term_text|price_lease_quote|price_lease_source|pluto_lot_address|review_kind)$": "source sentence or record behind the lease-term asterisk and the NYC lot check (independent check 2)",
+    r"^(dob_active_elevators)$": "the city's count of active passenger elevators on the lot: gate input in build_master.py, asserted in this script",
     r"^(duplicate_listing_ids)$": "other listings of the same unit, merged into this row (their links are in also_seen_at)",
     r"^(near_vs_baseline|crime_latest|crime_source|crime_year|nyc_record_flags)$": "context shown when she asks how a score was reached",
     r"^nycrec_": "NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule",

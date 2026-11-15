@@ -586,7 +586,9 @@ def build(args):
                       "bins": ";".join(sorted(bins[b])), "in_pluto": int(b in pl), "in_hpd_buildings": int(bool(hb_by.get(b))),
                       "has_hpd_registration": int(bool(reg_by.get(b))), "has_hpd_complaint_rows": int(bool(C.get(b))),
                       "has_hpd_violation_rows": int(bool(V.get(b))), "has_311_rows": int(bool(S.get(b))),
-                      "has_dob_elevator_device": int(bool(DV.get(b))), "has_bedbug_filing": int(bool(BED.get(b))),
+                      # independent check 2, D4: only an ACTIVE passenger elevator counts; an accessibility lift is not an elevator
+                      "has_dob_elevator_device": int(any(r.get("device_type") == "Elevator" and r.get("device_status") == "Active" for r in DV.get(b, []))),
+                      "has_dob_any_device": int(bool(DV.get(b))), "has_bedbug_filing": int(bool(BED.get(b))),
                       "has_eviction_rows": int(bool(EVI.get(b) or evi_addr.get(b)))})
     M = pd.DataFrame(mrows)
     M.to_csv(OUT / "nyc_records_match.csv", index=False)

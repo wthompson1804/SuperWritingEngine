@@ -1,0 +1,73 @@
+User-agent: *
+Disallow: /search-site
+Disallow: /search-site/*
+Disallow: /*?pager=
+Disallow: /*?s=
+Disallow: /page/*/?s=
+Disallow: /events/page/*/
+Disallow: /locations/page/*/
+Disallow: /documents/page/*/
+Disallow: /events/action~
+
+User-agent: Applebot
+Crawl-delay: 10
+Disallow: /search-site
+Disallow: /search-site/*
+Disallow: /*?pager=
+Disallow: /*?s=
+Disallow: /page/*/?s=
+Disallow: /events/page/*/
+Disallow: /locations/page/*/
+Disallow: /documents/page/*/
+Disallow: /events/action~
+
+User-agent: Bingbot
+Crawl-delay: 10
+Disallow: /search-site
+Disallow: /search-site/*
+Disallow: /*?pager=
+Disallow: /*?s=
+Disallow: /page/*/?s=
+Disallow: /events/page/*/
+Disallow: /locations/page/*/
+Disallow: /documents/page/*/
+Disallow: /events/action~
+
+User-agent: YandexBot
+Crawl-delay: 10
+Disallow: /search-site
+Disallow: /search-site/*
+Disallow: /*?pager=
+Disallow: /*?s=
+Disallow: /page/*/?s=
+Disallow: /events/page/*/
+Disallow: /locations/page/*/
+Disallow: /documents/page/*/
+Disallow: /events/action~
+
+User-agent: DuckDuckBot
+Crawl-delay: 10
+Disallow: /search-site
+Disallow: /search-site/*
+Disallow: /*?pager=
+Disallow: /*?s=
+Disallow: /page/*/?s=
+Disallow: /events/page/*/
+Disallow: /locations/page/*/
+Disallow: /documents/page/*/
+Disallow: /events/action~
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+# START YOAST BLOCK
+# ---------------------------
+User-agent: *
+Disallow:
+
+Sitemap: https://www.somervillenj.org/sitemap_index.xml
+# ---------------------------
+# END YOAST BLOCK

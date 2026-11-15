@@ -503,7 +503,9 @@ var RULE_FLAG=[
   {rule:"resident_permit",label:"The resident permit depends on where the car is registered",re:/out-of-state|out-of-town|registered in|registration[^.]{0,60}(show|address|same)|(licen[cs]e and|valid vehicle|motor vehicle|permanent vehicle) registration/i}
 ];
 /* Confirmation asterisk (unit.confirm): the plain word for what is open, and how to find the matching tour question. */
-var CONFIRM_WORD={floor:"the floor",elevator:"the elevator","dogs allowed":"whether dogs are allowed","live check":"that the listing is still live"};
+var CONFIRM_WORD={floor:"the floor",elevator:"the elevator","dogs allowed":"whether dogs are allowed","live check":"that the listing is still live",
+  "lease term":"the lease term behind this price","cost near the cap":"pet rent, parking and fees (cost near the cap)",availability:"that a unit is available",
+  listing:"that the listing is genuine and for this building",eligibility:"that the unit is open to any renter","condo rules":"the building's rules for renting this unit",other:"one more thing (see the card)"};
 var CONFIRM_Q={floor:[/floor/i,"Which floor is the unit on?"],elevator:[/elevator/i,"Does the building have an elevator?"],"dogs allowed":[/dogs allowed/i,"Are dogs allowed?"],"live check":[/still available/i,"Is this unit still available, and at what price?"]};
 var Q_PARKING="Where do residents park overnight, and is a permit needed?";
 var Q_EVIDENCE="How are repairs handled, and how often has the elevator been out of service? (no public records or readable reviews were found for this building)";
@@ -629,7 +631,7 @@ function rulesBlock(a,order,what){a=sortRules(a,order);var top=a.slice(0,RULES_S
   return '<ul class="rules">'+top.map(ruleLi).join("")+'</ul>'+(rest.length?'<details class="fold"><summary>'+rest.length+' more '+what+(rest.length===1?' rule':' rules')+'</summary><ul class="rules">'+rest.map(ruleLi).join("")+'</ul></details>':'')}
 function conf(U){return U.confirm&&U.confirm.asterisk?U.confirm:null}
 function confWhat(U){var c=conf(U);return c?(CONFIRM_WORD[c.what]||c.what||"one thing"):""}
-function confQ(U){var c=conf(U);if(!c)return null;var k=CONFIRM_Q[c.what],qs=U.tour_questions||[];
+function confQ(U){var c=conf(U);if(!c)return null;if(c.question)return c.question;var k=CONFIRM_Q[c.what],qs=U.tour_questions||[];
   if(!k)return "Ask the building to confirm "+(c.what||"this")+".";
   for(var i=0;i<qs.length;i++)if(k[0].test(qs[i]))return qs[i];
   return k[1]}
@@ -966,6 +968,7 @@ function voiceQuote(v){var u=okUrl(v.url),sn=/^pos/i.test(v.sentiment||"")?"pos"
   if(sn)bits.push(sn==="pos"?"Positive":"Negative");
   bits.push(dayStr(v.date,true)||(v.date?String(v.date):"date not known"));
   if(v.context)bits.push(String(v.context));
+  if(v.about)bits.push("about "+String(v.about));
   return '<p class="quote'+(sn?' '+sn:'')+'">“'+esc(v.excerpt)+'”<small>'+esc(bits.join(" · "))+(u?' · <a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(v.source||hostOf(u))+' ↗</a>':(v.source?' · '+esc(v.source):'')+' · no link in the data')+'</small></p>'}
 function voicesSection(H){var loc=H.local||{},themes=[],by={};
   var vs=(loc.voices||[]).map(function(v){return typeof v==="string"?{excerpt:v}:v}).filter(function(v){return v&&v.excerpt});

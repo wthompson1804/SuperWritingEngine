@@ -1,4 +1,9 @@
 {
+ "agriculture.ny.gov": "round 2 (2026-11-15T23:54:20+00:00): HTTP 403 bot wall",
+ "jcparking.cmrpay.com": "round 2 (2026-11-15T23:51:04+00:00): robots.txt HTTP 403 bot wall",
+ "www.brookfieldct.gov": "round 2 (2026-11-15T23:53:46+00:00): robots.txt HTTP 403 bot wall",
+ "www.franklintwpnj.org": "round 2 (2026-11-15T23:53:22+00:00): robots.txt HTTP 403 bot wall",
+ "www.maplewoodnj.gov": "round 2 (2026-11-15T23:54:01+00:00): robots.txt HTTP 403 bot wall",
  "www.montclairnjusa.org": "round 1: robots.txt HTTP 403 bot wall",
  "www.morrisplainsboro.org": "round 1: robots.txt HTTP 403 bot wall",
  "www.newarknj.gov": "round 1: robots.txt HTTP 403 bot wall",
@@ -6,6 +11,9 @@
  "www.nysenate.gov": "round 1: HTTP 403 Cloudflare",
  "www.stamfordct.gov": "round 1: robots.txt HTTP 403 bot wall",
  "www.townofnewpaltz.org": "round 1: HTTP 403 bot wall",
+ "www.townofwallkill.com": "round 2 (2026-11-15T23:54:19+00:00): HTTP 403",
+ "www.waynetownship.com": "round 2 (2026-11-15T23:53:44+00:00): robots.txt HTTP 403 bot wall",
+ "www.weehawken-nj.us": "round 2 (2026-11-15T23:53:45+00:00): robots.txt HTTP 403 bot wall",
  "www.westportct.gov": "round 1: robots.txt HTTP 403 bot wall",
  "www.yonkersny.gov": "round 1: robots.txt HTTP 403 bot wall",
  "www.yonkersparkingauthority.com": "round 1: robots.txt HTTP 403 bot wall"

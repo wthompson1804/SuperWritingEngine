@@ -352,9 +352,54 @@ def pick(cands):
 
 # ------------------------------------------------------------------ hand edits made after reading the rows
 # (excerpt prefixes; safety / car_crime / parking rows were all read by hand, see docs/harvest_notes/voices_round2.md)
-DROP: list[str] = []
-THEME_FIX: dict[str, str] = {}
-SENT_FIX: dict[str, str] = {}
+DROP: list[str] = ['The Police Department consists of about 25% brass',
+ 'If there was change that I would like to see, it would be for there to be new roads',
+ 'The public schools on the Upper West are very good',
+ 'Very quiet at night which can be a good thing. The highschool',
+ 'East Rutherford provided a temporary safe haven',
+ 'It bugs me how much of our resources',
+ 'Police say it is okay.',
+ 'The town is super supportive, and I feel safe here as',
+ 'You walk around the premise at night',
+ 'We have some good local food places, but I would stay at night',
+ 'If I could change anything, I would like to see continued improvements in traffic management',
+ 'I do not really like the safety in the public schools']
+THEME_FIX: dict[str, str] = {'A countless number of parking lots': 'value',
+ "From family friendly restaurants like Alfonso's": 'social_life',
+ "I don't like that the high taxes go to cops": 'value',
+ "I like that in Bay Ridge, it's quite at night": 'noise',
+ "It isn't very fun being on the outs": 'social_life',
+ 'Lots of schools and playgrounds. It gets pretty quiet': 'noise',
+ 'That being said, I do wish there was a little more of a social crowd': 'social_life'}
+SENT_FIX: dict[str, str] = {'A countless number of parking lots': 'negative',
+ 'Although parking is tough': 'negative',
+ 'Although the town is small, there are many safe places': 'positive',
+ 'As a native to NYC, I have truly never felt more safe': 'positive',
+ "Despite these good qualities, it's safety varies": 'mixed',
+ "Fairfield is a very safe town. There haven't": 'positive',
+ "From family friendly restaurants like Alfonso's": 'positive',
+ 'I do, however, know that it is a super safe town': 'positive',
+ "I don't like that the high taxes go to cops": 'negative',
+ "I like that in Bay Ridge, it's quite at night": 'positive',
+ 'I would also like to see continued improvements in cleanliness, safety': 'mixed',
+ "I've never felt unsafe walking home alone at night": 'positive',
+ 'In this clean community, crime rates are extremely low': 'positive',
+ 'It feels just about as new york city can feel': 'positive',
+ 'It is a very nice community, where the town is very hardworking': 'positive',
+ "It's also extremely safe so you don't have to worry": 'positive',
+ 'It’s a cool neighborhood to live in, crime rate': 'positive',
+ 'Lots of schools and playgrounds. It gets pretty quiet': 'positive',
+ 'Love living in Garwood': 'positive',
+ 'One of the main things i would like to see change my neighborhood': 'negative',
+ 'One thing I would like to change, though, is not feeling genuinely safe': 'negative',
+ 'One thing I would like to see are more drug and rehabilitation': 'negative',
+ 'Our community came together to help everyone': 'negative',
+ 'Seymour is much safer and quieter': 'positive',
+ 'Street parking is hard anywhere': 'negative',
+ 'The negatives about living in Elizabeth is parking': 'negative',
+ 'The only thing I would like to see change in is safety': 'negative',
+ 'There no crime/robbery': 'positive',
+ 'They also need to address the lack of parking': 'negative'}
 
 # ------------------------------------------------------------------ build + verify
 def norm(x): return re.sub(r"\s+", " ", x).strip()
@@ -396,7 +441,7 @@ def build():
             raw = (lib.ROOT / path).read_text(encoding="utf8", errors="ignore")
             title, rating, count, revs = parse_niche(raw)
             area = label or re.sub(r" Reviews - Niche$", "", title)
-            if not label and not right_place(h, title):
+            if not label and (not right_place(h, title) or "Reviews" not in title):
                 skipped.append(f"niche: page '{title}' is not this place; dropped"); continue
             names = [h["name"], re.sub(r",.*| \(.*", "", area)]
             n0 = len(cands)

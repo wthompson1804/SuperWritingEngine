@@ -289,17 +289,13 @@ def building_feature_fields(feats, hl, description: str) -> dict:
         elif re.search(r"\belevator", d, re.I):
             notes.append("description mentions elevator")
     floor = ""
-    mf = re.search(r"\b(\d{1,2})(?:st|nd|rd|th)[- ]floor\b", d, re.I)
-    words = {"first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6, "seventh": 7, "top": None,
-             "ground": 0}
-    if mf:
-        floor = mf.group(1)
+    # independent check 2, D10: the first "Nth floor" phrase is often an amenity ("8th-floor sundeck"); only a phrase
+    # about the unit counts, and two unit phrases that disagree give no floor (scripts/parsers.py)
+    import parsers as _parsers
+    fd = _parsers.floor_from_description(d)
+    if fd is not None:
+        floor = str(fd)
         notes.append("floor from description text")
-    else:
-        mw = re.search(r"\b(first|second|third|fourth|fifth|sixth|seventh|ground)[- ]floor\b", d, re.I)
-        if mw:
-            floor = str(words[mw.group(1).lower()])
-            notes.append("floor from description text")
     bfloors = ""
     for _, _, n, v in vals:
         if re.fullmatch(r"(stories|number of stories|levels|building floors|floors in building)", n.strip(), re.I) \

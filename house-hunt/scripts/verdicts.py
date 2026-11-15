@@ -71,13 +71,13 @@ def _load():
     _cache["a2b"] = dict(zip(xw.addr_key, xw.building_id))
     for fam in FAMILIES:
         fs = sorted(glob.glob(str(DATA / "evidence" / f"{fam}_batch_*.csv")))
-        D = pd.concat([pd.read_csv(f, dtype=str, keep_default_na=False).assign(_file=Path(f).name) for f in fs], ignore_index=True) if fs else pd.DataFrame()
+        D = pd.concat([pd.read_csv(f, dtype=str, keep_default_na=False).assign(src_file=Path(f).name) for f in fs], ignore_index=True) if fs else pd.DataFrame()
         if len(D):
             D["building_id"] = D.addr_key.map(_cache["a2b"]).fillna("")
         _cache[fam] = D
     for name, f in (("nyc", "nyc_records.csv"), ("non_nyc", "non_nyc_records.csv")):
         p = DATA / "evidence" / f
-        D = pd.read_csv(p, dtype=str, keep_default_na=False).assign(_file=f) if p.exists() else pd.DataFrame()
+        D = pd.read_csv(p, dtype=str, keep_default_na=False).assign(src_file=f) if p.exists() else pd.DataFrame()
         if len(D):
             D["building_id"] = D.addr_key.map(_cache["a2b"]).fillna("")
         _cache[name] = D
@@ -105,7 +105,7 @@ def evidence_hash(building_id: str) -> str:
     for fam in FAMILIES:
         D = ev[fam]
         if len(D):
-            cols = [x for x in D.columns if x not in ("_file", "building_id", "retrieved_at")]
+            cols = [x for x in D.columns if x not in ("src_file", "building_id", "retrieved_at")]
             for line in sorted("\x1f".join(str(v) for v in row) for row in D[cols].itertuples(index=False)):
                 h.update(line.encode("utf-8", "ignore") + b"\n")
     N = ev["nyc"]
@@ -153,24 +153,24 @@ def _tagged(building_id: str):
     rows = []
     L = ev["live_check"]
     if len(L):
-        for i, r in enumerate(L.sort_values(["_file", "unit", "checked_at"]).itertuples(), 1):
-            rows.append((f"L{i}", "live_check", r._file, f"unit '{r.unit}' {r.status} price {r.price_now} avail '{r.available_now_text}' matches={r.matches_stored} | {r.notes}", r))
+        for i, r in enumerate(L.sort_values(["src_file", "unit", "checked_at"]).itertuples(), 1):
+            rows.append((f"L{i}", "live_check", r.src_file, f"unit '{r.unit}' {r.status} price {r.price_now} avail '{r.available_now_text}' matches={r.matches_stored} | {r.notes}", r))
     C = ev["confirm"]
     if len(C):
-        for i, r in enumerate(C.sort_values(["_file", "fact"]).itertuples(), 1):
-            rows.append((f"C{i}", "confirm", r._file, f"{r.fact} [{r.status}] {r.value} | {r.quote}", r))
+        for i, r in enumerate(C.sort_values(["src_file", "fact"]).itertuples(), 1):
+            rows.append((f"C{i}", "confirm", r.src_file, f"{r.fact} [{r.status}] {r.value} | {r.quote}", r))
     F = ev["facts"]
     if len(F):
-        for i, r in enumerate(F.sort_values(["_file", "fact"]).itertuples(), 1):
-            rows.append((f"F{i}", "facts", r._file, f"{r.fact}: {r.value} | {r.quote}", r))
+        for i, r in enumerate(F.sort_values(["src_file", "fact"]).itertuples(), 1):
+            rows.append((f"F{i}", "facts", r.src_file, f"{r.fact}: {r.value} | {r.quote}", r))
     I = ev["items"]
     if len(I):
-        for i, r in enumerate(I.sort_values(["_file", "item_date"]).itertuples(), 1):
-            rows.append((f"I{i}", "items", r._file, f"({r.category}, {r.item_date}, about {r.about}) {r.excerpt}", r))
+        for i, r in enumerate(I.sort_values(["src_file", "item_date"]).itertuples(), 1):
+            rows.append((f"I{i}", "items", r.src_file, f"({r.category}, {r.item_date}, about {r.about}) {r.excerpt}", r))
     N = ev["nyc"]
     if len(N):
         for i, r in enumerate(N[N.record_type.isin(["pluto_lot", "dob_elevator_devices_active"])].sort_values("record_type").itertuples(), 1):
-            rows.append((f"N{i}", "nyc", r._file, f"{r.record_type}: count {r.count}; {r.detail} (match {r.match_basis})", r))
+            rows.append((f"N{i}", "nyc", r.src_file, f"{r.record_type}: count {r.count}; {r.detail} (match {r.match_basis})", r))
     return rows
 
 
@@ -243,7 +243,7 @@ def add_lines(lines, numbered=None):
             continue
         if verdict == "ok" and not quote:
             ev = evidence(b)
-            files = sorted({f for fam in FAMILIES for f in (ev[fam]._file.unique() if len(ev[fam]) else [])})
+            files = sorted({f for fam in FAMILIES for f in (ev[fam].src_file.unique() if len(ev[fam]) else [])})
             quote = "every evidence row for this building was read; nothing in them fails a gate or adds a doubt beyond what the rules already mark"
             file = "; ".join(files) or "no evidence rows on file for this building"
         new.append({"listing_id": lid, "building_id": b, "addr_key": M.at[lid, "addr_key"], "unit": M.at[lid, "unit"], "verdict": verdict, "kind": kind if verdict != "ok" else "",

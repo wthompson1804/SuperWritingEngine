@@ -140,7 +140,8 @@ def main():
         if pk is not None and pk <= 1000:
             lines.append({"line": "parking (a spot is included)" if pk == 0 else "parking", "amount": pk, "basis": r.get("parking_fee_monthly_basis", "stated"), "note": pnote})
         elif "street" in ptype and not re.search(r"garage|off[- ]street|lot", ptype):
-            lines.append({"line": "parking (street)", "amount": 0, "basis": "stated"})
+            # D21: $0 because a listing for this building says street parking and none mentions a garage or lot
+            lines.append({"line": "parking (street)", "amount": 0, "basis": "stated", "note": "street parking only, per a listing for this building; no garage or lot is mentioned"})
         else:
             lines.append({"line": "parking", "amount": 0, "basis": "unknown", "note": pnote}); unknown.append("parking fee")
         # utilities: only an explicit "included" removes an estimate; "paid by resident" never does (W5)

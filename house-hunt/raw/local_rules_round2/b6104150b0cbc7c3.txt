@@ -1,0 +1,7 @@
+  User-agent: *
+  Disallow: /app_code/
+  Disallow: /app_data/
+  Disallow: /bin/
+  Disallow: /images/
+  Disallow: /scripts/
+  Disallow: /upload/
