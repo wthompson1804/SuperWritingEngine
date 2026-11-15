@@ -45,6 +45,9 @@ GROUND_LIKELY = re.compile(r"(?:possibl[ey]|likely|probably|may be|would be|coul
                            r"(?:ground|floor 1\b)[^.;|]{0,25}(?:is possible|possible)|ground-level entry|floor 1, if", re.I)
 
 
+COOP = re.compile(r"\\bco-?op\\b|board approval|approval by (?:the )?board|cooperative apartment|tenants corp|owners corp|owners,? inc", re.I)
+
+
 def _around(t, m, n=70):
     t = str(t)
     return t[max(0, m.start() - n): m.end() + n].replace("\n", " ").strip()
@@ -153,6 +156,22 @@ def main():
                     ex.append((r.addr_key, ";".join(dict.fromkeys(labs1)), "possible ground-floor unit (checker's reading; no page states the floor): " + t[:140], r.source_url))
                 elif GROUND_LIKELY.search(t):
                     ex.append((r.addr_key, "", "possible ground-floor unit (checker's reading; no page states the floor): " + t[:140], r.source_url))
+    # co-op rentals are out (owner, 2026-11-15): board approval may not fit a Dec 15 move-in. A building is a co-op when
+    # the city's record classes it as one (PLUTO D0, D4, C6, C8) or a checker's note / the listing says co-op or board approval.
+    MP = pd.read_csv(DATA / "master_units.csv", dtype=str, keep_default_na=False, low_memory=False)
+    for k, g in MP[MP.get("pluto_class", "").isin(["D0", "D4", "C6", "C8"])].groupby("addr_key"):
+        ex.append((k, "", f"co-op building (city record, building class {g.pluto_class.iloc[0]})", "https://www.nyc.gov/site/planning/data-maps/open-data/dwn-pluto-mappluto.page"))
+    for k, g in MP.groupby("addr_key"):
+        t = " | ".join(" ".join(g[c].astype(str)) for c in ["notes", "building_type", "required_fees_text", "building_name"] if c in g)
+        m = COOP.search(t)
+        if m:
+            ex.append((k, "", "co-op rental (listing text): " + _around(t, m), g.url.iloc[0] if "url" in g else ""))
+    for D, cols, src in [(L, ["notes"], "listing_url"), (F, ["fact", "value", "quote"], "source_url"), (C, ["value", "quote"], "source_url")]:
+        for r in D.to_dict("records"):
+            t = " | ".join(str(r.get(c, "")) for c in cols)
+            m = COOP.search(t)
+            if m and not re.search(r"different co-op buildings|not a co-?op", t, re.I):
+                ex.append((r["addr_key"], "", "co-op rental (checker's note): " + _around(t, m), r.get(src, "")))
     X = pd.DataFrame(ex, columns=["addr_key", "unit", "reason", "source"]).drop_duplicates()
     X.to_csv(DATA / "unit_exclusions.csv", index=False)
 
