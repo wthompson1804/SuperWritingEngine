@@ -24,3 +24,7 @@ targets 550/1260 {'ok': 550} rows=10264 fetched=543
 targets 575/1260 {'ok': 575} rows=10268 fetched=568
 targets 600/1260 {'ok': 600} rows=10268 fetched=593
 targets 625/1260 {'ok': 625} rows=10300 fetched=618
+targets 650/1260 {'ok': 650} rows=10324 fetched=643
+targets 675/1260 {'ok': 675} rows=10428 fetched=668
+targets 700/1260 {'ok': 700} rows=10435 fetched=693
+targets 725/1260 {'ok': 725} rows=10478 fetched=718

@@ -36,3 +36,15 @@ overlap, as lifestyles do; raw 26-feature clustering scored 0.11-0.12).
 
 Open: the suburb group is broad (main-street train towns vs highway-side complexes) and should split once more
 neighborhoods are in; beach and river towns are not yet in the data.
+
+## Second pass (2026-11-15 night): more colour variables
+
+Will asked for the next tier of variables to be added "for colour": the aim is a data-informed picture of the kind
+of life in each group, not maximum explained variance. Added (`scripts/lifestyle_color.py` → `data/lifestyle_color.csv`):
+college-degree share, households with children, age 65+, hour-plus commutes, housing built since 2010 and before
+1940, tract median rent, distances to supermarket, Trader Joe's, Target, vet, dog park and train station, breweries
+and restaurants within 1.6 km, her unit's median size and all-in cost. New indices: new_build, families_and_elders,
+degrees, errands_on_foot (11 indices in all, `data/lifestyle_indices.csv`, column `group` = 7-group Ward clustering).
+Silhouette falls to 0.14 at k = 7 (more dimensions, more overlap); the groups are read as portraits, not hard classes.
+A further OSM pass (gyms, bookshops, cinemas, markets, playgrounds, big-box, parking area, footpaths) is being added
+to the places tool as `color()`.

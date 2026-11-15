@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=30+Edgewater+Pl%2C+Beacon%2C+NY+12508&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T19:48:12+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/68ed2698f211558b.json",
+ "source": "census_geocoder"
+}

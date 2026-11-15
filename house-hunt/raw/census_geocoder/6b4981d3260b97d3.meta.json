@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=24+Edgewater+Pl%2C+Beacon%2C+NY+12508&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T19:48:13+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/6b4981d3260b97d3.json",
+ "source": "census_geocoder"
+}

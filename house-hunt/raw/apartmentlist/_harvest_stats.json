@@ -7,8 +7,8 @@
   "fetch_max_low": 2850.0,
   "minutes": 44.0
  },
- "srp_pages": 692,
- "detail_pages": 1451,
+ "srp_pages": 746,
+ "detail_pages": 1514,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1041,6 +1041,108 @@
    "drive_min": 59.9,
    "props": 3,
    "rows": 3
+  },
+  {
+   "city": "nj/summit",
+   "drive_min": 60.5,
+   "props": 7,
+   "rows": 17
+  },
+  {
+   "city": "nj/avenel",
+   "drive_min": 60.7,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/butler",
+   "drive_min": 60.8,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/riverdale",
+   "drive_min": 60.8,
+   "props": 3,
+   "rows": 6
+  },
+  {
+   "city": "nj/short-hills",
+   "drive_min": 60.9,
+   "props": 2,
+   "rows": 3
+  },
+  {
+   "city": "ny/mount-kisco",
+   "drive_min": 60.9,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ny/northport",
+   "drive_min": 61.1,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "nj/wanaque",
+   "drive_min": 61.2,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/garwood",
+   "drive_min": 61.5,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "nj/perth-amboy",
+   "drive_min": 62.0,
+   "props": 5,
+   "rows": 5
+  },
+  {
+   "city": "ct/norwalk",
+   "drive_min": 62.5,
+   "props": 24,
+   "rows": 100
+  },
+  {
+   "city": "ny/sayville",
+   "drive_min": 62.6,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/new-city",
+   "drive_min": 62.9,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/westfield",
+   "drive_min": 63.3,
+   "props": 5,
+   "rows": 6
+  },
+  {
+   "city": "ny/nesconset",
+   "drive_min": 63.3,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "nj/colonia",
+   "drive_min": 63.6,
+   "props": 1,
+   "rows": 8
+  },
+  {
+   "city": "nj/woodbridge",
+   "drive_min": 63.6,
+   "props": 12,
+   "rows": 41
   }
  ],
  "cities_unmatched_far": [
@@ -1085,10 +1187,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2293,
- "props_skipped_lowprice_gt_3000": 842,
+ "props_discovered": 2365,
+ "props_skipped_lowprice_gt_3000": 851,
  "reasons": {
-  "ok": 1442,
+  "ok": 1505,
   "no_unit_le_3000": 8,
   "no_listing_object": 1
  },

@@ -121,14 +121,67 @@ def main():
         print("status", m["status"], "| retrieved", m["retrieved_at"], "| raw", m["path"])
         i = s.find("Updated ")
         print("HEAD:", s[i:i + 420] if i > 0 else s[:300])
-        a, b = s.find("Floor plans All"), s.find("Amenities for")
-        fp = s[a:b] if 0 < a < b else ""
-        fp = re.sub(r"Check availability .*?(?=(\S+ ){0,8}?(Studio|\d bed) \d)", "| ", fp)
-        print("PLANS:", fp[:1800])
-        c = s.find("Building details", b)
-        print("AMEN/POLICY:", s[b:c][:2200])
-        for x in snippets(s, r"(?i)elevator|\bdogs?\b|\bpets?\b|\blbs?\b|stories|floors\b|year built|available (now|\w+ \d)", 90, 14):
-            print(" -", x)
+        a = s.find("Floor plans", i)
+        c = s.find("Building details", a)
+        body = s[a:c if c > 0 else a + 6000]
+        # keep unit header lines (name, beds, baths, sqft, price), drop the long marketing paragraphs
+        units = re.findall(r"((?:[^.]{0,70}?)(?:Studio|\d bed)s? [\d.]+ baths? (?:[\d,]+ sqft )?\$[\d,]+ /mo)", body)
+        print("UNITS:", " || ".join(u.strip()[-110:] for u in units)[:2500])
+        d = body.find("Amenities for")
+        print("AMEN/POLICY:", body[d:][:1800] if d > 0 else body[-1500:])
+        end = s.find("Nearby", c if c > 0 else 0)
+        for x in snippets(s[i:end if end > 0 else len(s)], r"(?i)\bdogs?\b|\bpets? (policy|rent|fee|deposit)|\blbs?\b|stories|year built|available (now|\w+ \d)|walk-?up", 100, 14):
+            if "dogs and cats ok" not in x and "Pet friendly " not in x and "Pet-friendly Ap" not in x:
+                print(" -", x)
+    elif cmd == "zl":  # compact view of a Zillow building page
+        try:
+            t, m = fetch(sys.argv[2])
+        except (C.BotWall, RuntimeError) as e:
+            print("BLOCKED/ERR:", str(e)[:200])
+            return
+        s = C.strip_tags(t)
+        tt = re.search(r"(?is)<title[^>]*>(.*?)</title>", t)
+        print("status", m["status"], "| retrieved", m["retrieved_at"], "| raw", m["path"], "|", tt.group(1)[:120] if tt else "")
+        a = s.find("Back to search")
+        b = s.find("Nearby apartments for rent", a)
+        b = b if b > 0 else s.find("What&#x27;s special", a)
+        w0 = s.find("What&#x27;s special", a); print("PRICING:", s[a:min(b, w0) if w0 > 0 else b][:1500])
+        c = s.find("Facts, features & policies")
+        d = s.find("Neighborhood:", c)
+        print("FACTS:", s[c:d][:1500])
+        w = s.find("What&#x27;s special")
+        if w > 0: print("SPECIAL:", s[w:w+1200][-800:])
+    elif cmd == "zs":  # Zillow city/zip rentals search page -> buildings and listings (enumeration only)
+        try:
+            t, m = fetch(sys.argv[2])
+        except (C.BotWall, RuntimeError) as e:
+            print("BLOCKED/ERR:", str(e)[:200])
+            return
+        mm = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', t, re.S)
+        tt = re.search(r"(?is)<title[^>]*>(.*?)</title>", t)
+        print("status", m["status"], m["retrieved_at"], tt.group(1)[:100] if tt else "")
+        d = json.loads(mm.group(1)) if mm else {}
+        def walk(o):
+            if isinstance(o, dict):
+                if "detailUrl" in o and ("address" in o or "buildingName" in o):
+                    yield o
+                for v in o.values():
+                    yield from walk(v)
+            elif isinstance(o, list):
+                for v in o:
+                    yield from walk(v)
+        seen = set()
+        only_b = len(sys.argv) > 3
+        for o in walk(d):
+            u = o["detailUrl"]
+            if u in seen:
+                continue
+            seen.add(u)
+            if only_b and "homedetails" in u:
+                continue
+            pr = o.get("price") or ";".join(f"{x.get('beds')}bd {x.get('price')}" for x in (o.get("units") or []))
+            print(o.get("buildingName") or "-", "|", o.get("address"), "|", pr, "|", u.replace("https://www.zillow.com", ""))
+        print("total listed:", len(seen))
     elif cmd == "geo":
         print(geo(sys.argv[2]))
     elif cmd == "unit":

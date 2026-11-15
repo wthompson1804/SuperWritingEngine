@@ -14,7 +14,7 @@ from h_mgmt_common import polite_get, BotWall, strip_tags, ROOT
 from h_mgmt_sightmap import find_embed
 
 SRC = "region_westchester_rockland"
-MAXP = 7
+MAXP = 5
 LINK_RE = re.compile(r"floor-?plans?|availab|apartments?$|residences|pet|amenit|faq|feature|fees|policies|lease|pricing|units|gallery-and|neighborhood-and", re.I)
 KW = re.compile(r"(?i)\bpets?\b|\bdogs?\b|\blbs?\b|pounds|elevator|stor(?:y|ies|ey)|\bfloors\b|parking|garage|\bfees?\b|utilit|available now|move.in|breed|concierge|doorman")
 PLAT = {"sightmap": r"sightmap\.com", "rentcafe": r"rentcafe|securecafe|yardi", "entrata": r"entrata|prospectportal", "knock": r"knockrentals|knockcrm",
@@ -61,24 +61,52 @@ def probe(url, deep=True, quiet=False):
                 break
             except Exception as e:
                 res["block"] += f" | {u}: error {repr(e)[:80]}"
+    seen = set()
+    def uniq(text, rx, n, w=120):
+        out = []
+        for m in re.finditer(rx, text):
+            s = text[max(0, m.start() - w):m.start() + w + 80].strip()
+            key = re.sub(r"\W+", "", text[m.start():m.start() + 60].lower())
+            if key in seen: continue
+            seen.add(key); out.append(s)
+            if len(out) >= n: break
+        return out
+    res["text"] = {}
     for u, (h, mm) in pages.items():
         for k, rx in PLAT.items():
             if re.search(rx, h, re.I): res["platform"].add(k)
         e = find_embed(h)
         if e: res["sightmap"] = e
         t = strip_tags(h)
-        prices = sorted(set(re.findall(r"\$\s?[1-9],?\d{3}\b", t)))[:30]
-        res["pages"][u] = {"status": mm["status"], "at": mm["retrieved_at"], "path": mm.get("path"), "len": len(h), "title": (re.search(r"<title[^>]*>(.*?)</title>", h, re.S | re.I) or [None, ""])[1].strip()[:100],
-                           "prices": prices, "snips": snippets(t), "ext": sorted(set(re.findall(r'https?://[a-z0-9.-]*(?:rentcafe|securecafe|entrata|prospectportal|sightmap|knock|appfolio|nestio|funnel|streeteasy|apartments|zillow|loftliving|realpage|onlineleasing|myresman|engrain|showmojo|buildium|managebuilding)[a-z0-9.-]*\.[a-z]+/[^"\'<> ]*', h)))[:8]}
+        res["text"][u] = t
+        res["pages"][u] = {"status": mm["status"], "at": mm["retrieved_at"], "path": mm.get("path"), "len": len(h),
+                           "title": (re.search(r"<title[^>]*>(.*?)</title>", h, re.S | re.I) or [None, ""])[1].strip()[:90],
+                           "prices": sorted(set(re.findall(r"\$\s?[1-9],?\d{3}\b", t)))[:12],
+                           "pet": uniq(t, r"(?i)\bdogs?\b|\bbreeds?\b|\d+ ?(lbs?\b|pounds)|weight limit|\bpets? (policy|fee|rent|deposit)|no pets|pets (are )?(allowed|welcome|not)", 5),
+                           "elev": uniq(t, r"(?i)elevator|\b\d+[- ]stor(y|ies)|\bstories\b", 2, 80),
+                           "park": uniq(t, r"(?i)parking|garage", 2, 70)}
     res["links"] = links[:40]
     if not quiet:
-        print("=" * 100); print(url, "| platform:", sorted(res["platform"]), "| sightmap:", res["sightmap"], "| block:", res["block"])
+        print("=" * 80); print(url, "| platform:", sorted(res["platform"]), "| sightmap:", res["sightmap"], "| block:", res["block"])
         for u, p in res["pages"].items():
-            print("--", u, p["status"], p["len"], "|", p["title"], "| prices:", p["prices"][:14])
-            if p["ext"]: print("   ext:", p["ext"])
-            for s in p["snips"]: print("   >", s)
+            print("--", u, p["status"], p["len"], "|", p["title"], "| prices:", p["prices"])
+            for k in ("pet", "elev", "park"):
+                for s in p[k]: print("   %s>" % k, s[:300])
+        if res["sightmap"]:
+            try:
+                import h_mgmt_sightmap as sm
+                us, info = sm.units(res["sightmap"], SRC)
+                c = [x for x in us if x["beds"] in (0, 1) and x["price"] and x["price"] <= 3000]
+                w = [x for x in c if (x["available_on"] or "9") <= "2026-12-15"]
+                print("   SIGHTMAP:", info.get("asset_name"), info.get("address"), "units", len(us), "st/1br<=3000:", len(c), "in window:", len(w), "floors:", info.get("floor_labels"))
+                for x in w[:6]: print("     ", x["unit"], x["beds"], x["sqft"], x["price"], x["total_min"], x["available_on"], "fl", x["floor"], x["required_fees"])
+            except Exception as e:
+                print("   SIGHTMAP error", repr(e)[:200])
     return res
 
 if __name__ == "__main__":
     for u in sys.argv[1:]:
-        probe(u)
+        try:
+            probe(u)
+        except Exception as e:
+            print("ERR", u, repr(e)[:200])
