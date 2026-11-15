@@ -85,6 +85,8 @@ def _raw_get(url, source, ext):
         code = int(m.group(1)) if m else None
         log(url=url, status=code, note="fetch error: " + msg[-120:], at=lib.now_iso())
         if code in (429, 503): kill(host, url, f"HTTP {code}")
+        elif re.search(r"reset by peer|Connection aborted|RemoteDisconnected", msg):
+            kill(host, url, "connection reset/aborted by the server (treated as a refusal, to be safe)")
         else: _soft_stop.add(host); print("STOP (this run)", host, msg[-120:], flush=True)
         return None, None
     if walled(meta["status"], content.decode("utf8", "ignore")):
