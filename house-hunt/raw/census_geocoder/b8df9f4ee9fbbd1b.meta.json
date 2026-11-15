@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=306+Bluestone+Ct%2C+Maybrook%2C+NY+12543&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:59:53+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/b8df9f4ee9fbbd1b.json",
+ "source": "census_geocoder"
+}

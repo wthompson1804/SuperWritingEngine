@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=44+River+St%2C+Milford%2C+CT+06460&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:00:26+00:00",
+ "status": 200,
+ "path": "raw/region_connecticut/9ea93ed0f1a9b081.json",
+ "source": "region_connecticut"
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=280+Crown+St%2C+New+Haven%2C+CT+06511&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:00:26+00:00",
+ "status": 200,
+ "path": "raw/region_connecticut/c7e5a0d4f196b424.json",
+ "source": "region_connecticut"
+}

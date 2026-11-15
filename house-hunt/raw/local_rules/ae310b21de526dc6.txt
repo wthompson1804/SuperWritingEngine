@@ -1,0 +1,7 @@
+User-Agent: *
+Disallow: 
+Disallow: /siteassets
+Disallow: /react
+Disallow: /samlassert
+Disallow: /dashboard
+Disallow: /dashboard/tools/tests

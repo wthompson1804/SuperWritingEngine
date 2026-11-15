@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1042,
- "detail_pages": 1764,
+ "srp_pages": 1115,
+ "detail_pages": 1824,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1721,6 +1721,150 @@
    "drive_min": 94.2,
    "props": 1,
    "rows": 0
+  },
+  {
+   "city": "nj/plainsboro-center",
+   "drive_min": 95.1,
+   "props": 3,
+   "rows": 44
+  },
+  {
+   "city": "nj/princeton-junction",
+   "drive_min": 95.1,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/princeton-meadows",
+   "drive_min": 95.1,
+   "props": 8,
+   "rows": 22
+  },
+  {
+   "city": "nj/hightstown",
+   "drive_min": 95.3,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/eatontown",
+   "drive_min": 95.5,
+   "props": 2,
+   "rows": 4
+  },
+  {
+   "city": "nj/tinton-falls",
+   "drive_min": 95.5,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/oceanport",
+   "drive_min": 96.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/west-long-branch",
+   "drive_min": 96.4,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ct/shelton",
+   "drive_min": 96.6,
+   "props": 6,
+   "rows": 26
+  },
+  {
+   "city": "ny/goshen",
+   "drive_min": 96.8,
+   "props": 6,
+   "rows": 6
+  },
+  {
+   "city": "ny/newburgh",
+   "drive_min": 96.9,
+   "props": 9,
+   "rows": 12
+  },
+  {
+   "city": "ny/orange-lake",
+   "drive_min": 96.9,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/florida",
+   "drive_min": 97.0,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ct/bethel",
+   "drive_min": 97.1,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/freehold",
+   "drive_min": 97.1,
+   "props": 4,
+   "rows": 3
+  },
+  {
+   "city": "nj/west-freehold",
+   "drive_min": 97.1,
+   "props": 4,
+   "rows": 4
+  },
+  {
+   "city": "nj/hackettstown",
+   "drive_min": 97.2,
+   "props": 3,
+   "rows": 6
+  },
+  {
+   "city": "ny/warwick",
+   "drive_min": 97.5,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ct/derby",
+   "drive_min": 98.0,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ny/quiogue",
+   "drive_min": 98.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/westhampton-beach",
+   "drive_min": 98.0,
+   "props": 2,
+   "rows": 0
+  },
+  {
+   "city": "ct/orange",
+   "drive_min": 98.3,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/pawling",
+   "drive_min": 98.4,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "ny/riverhead",
+   "drive_min": 98.7,
+   "props": 2,
+   "rows": 0
   }
  ],
  "cities_unmatched_far": [
@@ -1745,11 +1889,11 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2640,
- "props_skipped_lowprice_gt_3000": 876,
+ "props_discovered": 2705,
+ "props_skipped_lowprice_gt_3000": 881,
  "reasons": {
-  "ok": 1755,
-  "no_unit_le_3000": 8,
+  "ok": 1814,
+  "no_unit_le_3000": 9,
   "no_listing_object": 1
  },
  "blocked": null,

@@ -1,0 +1,21 @@
+User-agent: *
+Disallow: /wp-admin/
+Allow: /?display=wide
+Allow: /wp-content/uploads/
+Disallow: /wp-content/plugins/
+Disallow: /cgi-bin
+Disallow: /refer/
+Disallow: /new-calendar/action~posterboard/
+Disallow: /new-calendar/action~agenda/
+Disallow: /new-calendar/action~oneday/
+Disallow: /new-calendar/action~month/
+Disallow: /new-calendar/action~week/
+Disallow: /new-calendar/action~stream/
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: http://www.villageofnewpaltz.org/post-sitemap.xml
+Sitemap: http://www.villageofnewpaltz.org/page-sitemap.xml
+Sitemap: http://www.villageofnewpaltz.org/category-sitemap.xml
+Sitemap: http://www.villageofnewpaltz.org/hosting-sitemap.xml

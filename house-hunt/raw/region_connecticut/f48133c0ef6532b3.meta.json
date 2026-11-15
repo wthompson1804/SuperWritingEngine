@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=305+George+St%2C+New+Haven%2C+CT+06511&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:00:28+00:00",
+ "status": 200,
+ "path": "raw/region_connecticut/f48133c0ef6532b3.json",
+ "source": "region_connecticut"
+}

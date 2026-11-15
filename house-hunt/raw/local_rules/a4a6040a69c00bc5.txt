@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /database/
+Disallow: /import/
+Disallow: /kiosk/
+Disallow: /utilities/
+Disallow: /uploads/enforcement/
+
+Sitemap: http://www.njnbpa.org/sitemap.xml

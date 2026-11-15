@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=20+Day+Street%2C+Norwalk%2C+CT+06854&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:00:25+00:00",
+ "status": 200,
+ "path": "raw/region_connecticut/308f3c92f67f6289.json",
+ "source": "region_connecticut"
+}

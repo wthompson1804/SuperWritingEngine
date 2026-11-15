@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=100+Canter+Ct%2C+Goshen%2C+NY+10924&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:58:55+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/62fd53c94222cd03.json",
+ "source": "census_geocoder"
+}

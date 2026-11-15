@@ -268,6 +268,51 @@ def digest(muni: str, rx: str | None = None, width: int = 260) -> None:
             print("  -", h)
 
 
+SM = re.compile(r"park(ing)?[-_/]|parking|overnight|dog|animal|pets?\b|snow|sweep|leash|garage|meter|canine|"
+                r"street[-_ ]clean|alternate|winter", re.I)
+SM_NO = re.compile(r"agenda|minutes|calendar|/news|civicalerts|bids?\b|rfp|job|employment|parks?-and-rec.*program|"
+                   r"\.(jpg|png|gif|docx?|xlsx?)$|park-?(rental|pavilion)|pickleball|tennis|camp|parkway|parker", re.I)
+
+
+def sitemap(muni: str, base: str, max_pages: int = 18) -> None:
+    urls: list[str] = []
+    todo = [base.rstrip("/") + "/sitemap.xml"]
+    seen = set()
+    while todo and len(seen) < 8:
+        sm = todo.pop(0)
+        if sm in seen:
+            continue
+        seen.add(sm)
+        ok, why = robots_ok(sm)
+        if not ok:
+            print("  ROBOTS-BLOCKED", sm, why[:80])
+            continue
+        try:
+            body, meta = lib.cached_get(sm, SRC, ext="xml", retries=2, timeout=45)
+        except Exception as e:  # noqa: BLE001
+            print("  ERROR", sm, repr(e)[:100])
+            continue
+        if meta["status"] != 200:
+            print("  FAIL", meta["status"], sm)
+            continue
+        locs = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body.decode("utf-8", "replace"))
+        for l in locs:
+            l = l.replace("&amp;", "&")
+            if l.endswith(".xml") or "sitemap" in l.lower():
+                todo.append(l)
+            else:
+                urls.append(l)
+    print(f"  sitemap urls: {len(urls)}")
+    cand = [u for u in dict.fromkeys(urls) if SM.search(urlparse(u).path) and not SM_NO.search(u)]
+    cand.sort(key=lambda u: (-len(SM.findall(urlparse(u).path)), len(u)))
+    print(f"  candidates: {len(cand)}")
+    for u in cand[:max_pages]:
+        if not text_path(u).exists():
+            fetch(muni, u)
+    for u in cand[max_pages:max_pages + 40]:
+        print("  (not fetched)", u)
+
+
 def grep(sub: str, rx: str, width: int = 240, mx: int = 5) -> None:
     pat = re.compile(rx, re.I)
     seen = set()
@@ -290,6 +335,68 @@ def grep(sub: str, rx: str, width: int = 240, mx: int = 5) -> None:
                 print("  -", h)
 
 
+BODY = re.compile(r"overnight|permit|alternate side|street (sweep|clean)|snow|meter|garage|monthly|per month|dogs?\b|"
+                  r"leash|licens|canine|feces|waste|guest|visitor|\$\d|a\.m\.|p\.m\.|\d ?[ap]m\b", re.I)
+
+
+def body(muni: str, per_page: int = 700, rx: str | None = None) -> None:
+    """Print keyword lines of each page with host boilerplate (lines repeated on 3+ pages) removed."""
+    from collections import Counter
+    pat = re.compile(rx, re.I) if rx else BODY
+    recs, seen = [], set()
+    for line in PAGES.read_text().splitlines():
+        r = json.loads(line)
+        if r["muni"] == muni and r["url"] not in seen:
+            seen.add(r["url"])
+            r["lines"] = [norm(x) for x in (lib.ROOT / r["text"]).read_text().splitlines() if norm(x)]
+            recs.append(r)
+    cnt = Counter()
+    for r in recs:
+        for x in set(r["lines"]):
+            cnt[(urlparse(r["url"]).netloc, x)] += 1
+    for r in recs:
+        host = urlparse(r["url"]).netloc
+        if not rx and not STRONG.search(r["title"] + " " + urlparse(r["url"]).path):
+            continue
+        keep = [x for x in r["lines"] if cnt[(host, x)] < 3]
+        txt = " | ".join(keep) if r["title"] != "(pdf)" else " ".join(keep)
+        hits, last = [], -1
+        for m in pat.finditer(txt):
+            if m.start() < last:
+                continue
+            a, b = max(0, m.start() - 110), min(len(txt), m.end() + 230)
+            hits.append(txt[a:b])
+            last = b
+        if not hits:
+            continue
+        out = " ... ".join(hits)
+        print(f"## {r['url']} [{len(txt)}c]\n   {out[:per_page]}")
+
+
+def view(muni: str, n: int = 600, rx: str | None = None) -> None:
+    """Print the first n chars of each topic page's own text (host boilerplate lines removed)."""
+    from collections import Counter
+    pat = re.compile(rx, re.I) if rx else SM
+    recs, seen = [], set()
+    for line in PAGES.read_text().splitlines():
+        r = json.loads(line)
+        if r["muni"] == muni and r["url"] not in seen:
+            seen.add(r["url"])
+            r["lines"] = [norm(x) for x in (lib.ROOT / r["text"]).read_text().splitlines() if norm(x)]
+            recs.append(r)
+    cnt = Counter()
+    for r in recs:
+        for x in set(r["lines"]):
+            cnt[(urlparse(r["url"]).netloc, x)] += 1
+    for r in recs:
+        if not pat.search(r["title"] + " " + r["url"]) or (not rx and SM_NO.search(r["url"])):
+            continue
+        host = urlparse(r["url"]).netloc
+        keep = [x for x in r["lines"] if cnt[(host, x)] < 3 and len(x) > 3]
+        txt = " ".join(keep)
+        print(f"## {r['url']} [{len(txt)}c]\n   {txt[:n]}")
+
+
 def pages(muni: str) -> None:
     seen = set()
     for line in PAGES.read_text().splitlines():
@@ -303,6 +410,15 @@ if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "grep":
         grep(sys.argv[2], sys.argv[3], int(sys.argv[4]) if len(sys.argv) > 4 else 240, int(sys.argv[5]) if len(sys.argv) > 5 else 5)
+        sys.exit()
+    if cmd == "sitemap":
+        sitemap(sys.argv[2], sys.argv[3], int(sys.argv[4]) if len(sys.argv) > 4 else 18)
+        sys.exit()
+    if cmd == "body":
+        body(sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 700, sys.argv[4] if len(sys.argv) > 4 else None)
+        sys.exit()
+    if cmd == "view":
+        view(sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 600, sys.argv[4] if len(sys.argv) > 4 else None)
         sys.exit()
     if cmd == "pages":
         pages(sys.argv[2])

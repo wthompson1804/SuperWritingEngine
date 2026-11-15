@@ -1,0 +1,21 @@
+# See http://www.robotstxt.org/wc/norobots.html for documentation on how to use the robots.txt file
+User-agent: *
+Crawl-delay: 10
+
+# apparently this is needed to allow google crawling our customer's listing site 
+# (e.g. https://www.sdppm.com/available.html) since they include a reference to 
+# /javascript/listings.js. so sure, google, you can download any asset you'd like. 
+Allow: /javascripts
+Allow: /images
+Allow: /stylesheets
+Allow: /listings$
+Allow: /listings/listings
+Allow: /listings/javascript
+Allow: /listings/images
+Allow: /listings/stylesheets
+
+# allow crawlers to find the noindex
+Allow: /im/investor/login
+
+Disallow: /
+

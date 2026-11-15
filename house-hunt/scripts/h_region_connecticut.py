@@ -31,11 +31,44 @@ ABBR = {"street": "st", "avenue": "ave", "boulevard": "blvd", "road": "rd", "dri
         "north": "n", "south": "s", "east": "e", "west": "w", "square": "sq", "terrace": "ter", "highway": "hwy", "extension": "ext"}
 
 
+# same building under two address spellings on different sites
+ALIAS = {"15 schooner ln|06460": "1 schooner ln|06460", "78 olive st|06511": "78 olive st|06510"}
+
+
+def geocode(addr, town, zp):
+    """Census geocoder (cached in raw/region_connecticut/) for buildings whose source page gave no coordinates."""
+    try:
+        c, m = lib.cached_get("https://geocoding.geo.census.gov/geocoder/locations/onelineaddress", "region_connecticut",
+                              params={"address": f"{addr}, {town}, CT {zp}", "benchmark": "Public_AR_Current", "format": "json"})
+        mt = json.loads(c)["result"]["addressMatches"]
+        if mt: return round(mt[0]["coordinates"]["y"], 6), round(mt[0]["coordinates"]["x"], 6)
+    except Exception:
+        pass
+    return "", ""
+
+
+def add_unit_rows(b, rows, label):
+    """Append rows whose unit is not already listed for the building; note the other site's price when it differs."""
+    have = {str(x.get("unit")).strip().lower(): x for x in b["rows"] if str(x.get("unit") or "").strip()}
+    for r in rows:
+        u = str(r.get("unit") or "").strip().lower()
+        if u and u in have:
+            o = have[u]
+            if int(num(o["listed_rent"]) or 0) != int(num(r["listed_rent"]) or 0):
+                o["notes"] = (o.get("notes") or "") + f"; {label} shows ${int(num(r['listed_rent']))} for this unit ({r.get('price_basis','')})"
+            if not o.get("concession_text") and r.get("concession_text"): o["concession_text"] = r["concession_text"]
+            continue
+        r = dict(r); r["listing_id"] = "rc:" + r["listing_id"]
+        b["rows"].append(r)
+        if u: have[u] = r
+
+
 def akey(addr, zp):
     a = re.sub(r"[.,#]", " ", (addr or "").lower())
     a = re.sub(r"\b(apt|unit|ste|suite)\b.*$", "", a)
     a = re.sub(r"^(\d+)\s*-\s*\d+\b", r"\1", a)
-    return " ".join(ABBR.get(w, w) for w in a.split()) + "|" + str(zp or "").zfill(5)[:5]
+    k = " ".join(ABBR.get(w, w) for w in a.split()) + "|" + str(zp or "").zfill(5)[:5]
+    return ALIAS.get(k, k)
 
 
 def covered_keys():
@@ -140,15 +173,13 @@ def from_trulia(bs):
         setif(b, "utilities_included", r0.get("utilities_included")); setif(b, "floors", r0.get("building_floors"))
         m = re.search(r"building has (\d+) units", r0.get("notes") or "")
         if m: setif(b, "unit_count", m.group(1))
-        have = {(str(x.get("unit")).lower(), int(num(x["listed_rent"]) or 0)) for x in b["rows"]}
+        keep = []
         for r in d["rows"]:
             pr = num(r.get("listed_rent"))
-            if pr is None: continue
+            if pr is None or str(r.get("beds")) not in ("0", "1"): continue
             b["min_all"] = pr if b["min_all"] is None else min(b["min_all"], pr)
-            if pr > CAP or str(r.get("beds")) not in ("0", "1"): continue
-            if (str(r.get("unit")).lower(), int(pr)) in have: continue
-            r = dict(r); r["listing_id"] = "rc:" + r["listing_id"]
-            b["rows"].append(r)
+            if pr <= CAP: keep.append(r)
+        add_unit_rows(b, keep, "Trulia")
 
 
 def from_zumper(bs):
@@ -172,10 +203,9 @@ def from_zumper(bs):
         pr = num(r["listed_rent"])
         if pr is None: continue
         b["min_all"] = pr if b["min_all"] is None else min(b["min_all"], pr)
-        have = {(str(x.get("unit")).lower(), int(num(x["listed_rent"]) or 0)) for x in b["rows"]}
-        if pr <= CAP and str(r["beds"]) in ("0", "1") and (str(r["unit"]).lower(), int(pr)) not in have:
-            x = dict(r); x["listing_id"] = "rc:" + x["listing_id"]; x["address"] = addr
-            b["rows"].append(x)
+        if pr <= CAP and str(r["beds"]) in ("0", "1"):
+            x = dict(r); x["address"] = addr
+            add_unit_rows(b, [x], "Zumper")
 
 
 def from_sightmap(bs):
@@ -255,9 +285,10 @@ def verdict(b):
     elif wl is not None and wl < MIN_WL: v = f"fails:dog weight limit {int(wl)} lb"
     elif b["elevator"] == "no": v = "fails:no elevator"
     elif not rows and b["min_all"] is not None and b["min_all"] > CAP: v = f"fails:nothing <= $3,000 (lowest studio/1BR seen ${int(b['min_all'])})"
+    elif b.get("blocked") and not rows and b["elevator"] != "yes": v = "blocked"
     elif b["elevator"] != "yes": v = "unconfirmed:elevator not stated" + ("" if b["dogs"] == "yes" else "; dogs not named")
     elif b["dogs"] != "yes": v = "unconfirmed:dogs not named on the page"
-    elif rows and not win: v = "fails:nothing available by 2026-12-15"
+    elif rows and not win and all((r.get("available_date") or "") for r in rows): v = "fails:nothing available by 2026-12-15"
     elif not rows: v = "blocked" if b.get("blocked") and b["min_all"] is None else "pass_no_availability"
     else: v = "pass_with_units"
     return v, rows, win
@@ -270,6 +301,8 @@ def main():
     out_rows, brows = [], []
     stats = collections.Counter()
     for k, b in sorted(bs.items(), key=lambda kv: (G.get(kv[1]["zip"], 999), kv[1]["name"])):
+        if b["town"] == "Milford city": b["town"] = "Milford"
+        if not b["lat"] and re.match(r"\d", b["address"]): b["lat"], b["lon"] = geocode(b["address"], b["town"], b["zip"])
         v, rows, win = verdict(b)
         b["already_covered"] = cov.get(k, "")
         stats[v.split(":")[0]] += 1
@@ -281,6 +314,9 @@ def main():
         if b["pool"]: bnote += f"; pool: {b['pool']}"
         if b["doorman"]: bnote += f"; doorman: {b['doorman']}"
         if b["year_built"]: bnote += f"; year built {b['year_built']}"
+        if rows and not win and v == "pass_with_units": bnote = ("availability date not shown on the listing page (ask); " + bnote).strip("; ")
+        if re.search(r"Small Dog \| Policy \| Allowed", b.get("dog_text", "")) and "Large Dog" not in b.get("dog_text", "") and not b["weight_limit"]:
+            bnote = ("Zumper pet table names only 'Small Dog' as allowed (no weight number): confirm size limit; " + bnote).strip("; ")
         if v.startswith(("fails", "blocked")) or not rows:
             tag = "BUILDING_FAILS: " if v.startswith("fails") else "NO_AVAILABILITY: " if v == "pass_no_availability" else "BLOCKED: " if v == "blocked" else "UNCONFIRMED: "
             r = dict(base)

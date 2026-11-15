@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=100+Morgan+Street%2C+Stamford%2C+CT+06905&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:00:24+00:00",
+ "status": 200,
+ "path": "raw/region_connecticut/08e9354362463255.json",
+ "source": "region_connecticut"
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=10+Otto+Way%2C+Poughkeepsie%2C+NY+12603&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:58:54+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/c46fb5a9b0a672bf.json",
+ "source": "census_geocoder"
+}
