@@ -125,6 +125,24 @@ def main():
     n_sk = int((u.confidence == "sketchy").sum())
     u = u[u.confidence != "sketchy"].copy()
 
+    # ---- evidence pass results (scripts/avoid.py): exclusions, avoid buildings, live verification
+    xf, af = DATA / "unit_exclusions.csv", DATA / "avoid_buildings.csv"
+    n_ex = 0
+    if xf.exists():
+        X = pd.read_csv(xf, dtype=str, keep_default_na=False)
+        whole = set(X[X.unit == ""].addr_key)
+        pairs = {(r.addr_key, uu.strip().lower()) for r in X[X.unit != ""].itertuples() for uu in r.unit.split(";")}
+        bad = u.addr_key.isin(whole) | pd.Series([(a_, str(b_).strip().lower()) in pairs for a_, b_ in zip(u.addr_key, u.unit)], index=u.index)
+        u[bad].assign(drop_reason="evidence pass").to_csv(DATA / "excluded_by_evidence.csv", index=False)
+        n_ex = int(bad.sum()); u = u[~bad].copy()
+    if af.exists():
+        AV = pd.read_csv(af, dtype=str, keep_default_na=False).drop_duplicates("addr_key").set_index("addr_key")
+        for c in ["avoid", "reasons", "pause_notes", "evidence_json", "positive_json"]:
+            u["ev_" + c] = u.addr_key.map(AV[c]).fillna("")
+        u["evidence_checked"] = u.addr_key.isin(AV.index)
+    else:
+        u["ev_avoid"], u["evidence_checked"] = "", False
+
     am = DATA / "reference" / "building_amenities.csv"
     A = pd.read_csv(am, dtype=str, keep_default_na=False).drop_duplicates("addr_key").set_index("addr_key") if am.exists() else pd.DataFrame()
     a = lambda col: (u.addr_key.map(A[col]) if col in A else pd.Series("", index=u.index)).fillna("").astype(str).str.lower()
@@ -223,6 +241,17 @@ def main():
     u.loc[elig, "hood_rank"] = u[elig].groupby("hood_id").cumcount() + 1
     u["candidate"] = u.hood_rank <= CANDIDATES
     u["shown_pre_evidence"] = u.hood_rank <= SHOWN
+    # after evidence: avoid buildings leave the shown list and become avoid cards (up to 5 per neighborhood)
+    is_avoid = u.ev_avoid.eq("yes")
+    ok = elig & ~is_avoid
+    u["shown_rank"] = np.nan
+    u.loc[ok, "shown_rank"] = u[ok].groupby("hood_id").cumcount() + 1
+    u["shown"] = u.shown_rank <= SHOWN
+    av = elig & is_avoid
+    u["avoid_rank"] = np.nan
+    u.loc[av, "avoid_rank"] = u[av].groupby("hood_id").cumcount() + 1
+    u["avoid_card"] = u.avoid_rank <= 5
+    u["needs_evidence"] = (u.shown | (u.hood_rank <= CANDIDATES)) & ~u.evidence_checked
     u.to_csv(DATA / "ranked_units.csv", index=False)
 
     # ---- five-point spectrum against staying in Queens (Will, 2026-11-15): 3 = about the same as Queens,
@@ -265,6 +294,7 @@ def main():
             r[name + "_vs_home"] = round(r[name] - pd.to_numeric(home[c], errors="coerce").median(), 1)
         rows.append(r)
     pd.DataFrame(rows).to_csv(DATA / "group_exchange.csv", index=False)
+    print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, shown-but-not-yet-evidence-checked {int((u.shown & ~u.evidence_checked).sum())}")
     print(f"kept {len(u)} units ({n_cut} cut by the Jamaica safety rule, {n_sk} dropped as sketchy); candidates {int(u.candidate.sum())}; shown {int(u.shown_pre_evidence.sum())}; pools: {u.pool.value_counts().to_dict()}")
 
 
