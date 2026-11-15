@@ -161,7 +161,23 @@ def read_apartmentlist(text):
     pieces, exp = [], ""
     if not best:
         return pieces, exp, "listing object not found in cached page"
-    for s in best.get("specials") or []:
+    # The page carries the listing twice; only the shorter copy (big fields replaced by "$ref" pointers) has its
+    # `specials` list filled, and `best` is the longer one, whose specials are always []. Collect specials from every
+    # copy of the same rental_id, as scripts/h_apartmentlist.py: parse_listing does (independent check W6).
+    specials, seen_sp = list(best.get("specials") or []), set()
+    for m in re.finditer(r'"specials":\[\{', fl):
+        try:
+            arr, _ = DEC.raw_decode(fl, m.start() + 11)
+        except json.JSONDecodeError:
+            continue
+        back = fl.rfind('"listing":{"rental_id":"', 0, m.start())
+        if back < 0 or not fl.startswith(str(best.get("rental_id")), back + 24):
+            continue
+        for sp in arr:
+            if isinstance(sp, dict) and sp.get("id") not in seen_sp:
+                seen_sp.add(sp.get("id"))
+                specials.append(sp)
+    for s in specials:
         if isinstance(s, dict):
             t = clean(s.get("raw_text") or s.get("description") or s.get("title") or "")
             if t:
@@ -269,7 +285,7 @@ def load_evidence():
     facts, live = defaultdict(list), defaultdict(list)
     for f in sorted(glob.glob(str(EVID / "facts_batch_*.csv"))):
         for r in csv.DictReader(open(f, newline="", encoding="utf8")):
-            if (r.get("fact") or "").startswith(("concession", "price_basis")):
+            if (r.get("fact") or "").startswith(("concession", "price_basis", "special")):
                 facts[r["addr_key"]].append(r)
     for f in sorted(glob.glob(str(EVID / "live_check_batch_*.csv"))):
         for r in csv.DictReader(open(f, newline="", encoding="utf8")):
