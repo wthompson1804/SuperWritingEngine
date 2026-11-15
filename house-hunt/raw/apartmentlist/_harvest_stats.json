@@ -1,7 +1,7 @@
 {
  "started": "2026-11-15T18:21:08+00:00",
- "srp_pages": 213,
- "detail_pages": 728,
+ "srp_pages": 220,
+ "detail_pages": 736,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -260,13 +260,25 @@
    "drive_min": 32.2,
    "props": 0,
    "rows": 0
+  },
+  {
+   "city": "ny/port-washington",
+   "drive_min": 32.2,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/cliffside-park",
+   "drive_min": 32.3,
+   "props": 7,
+   "rows": 16
   }
  ],
  "cities_unmatched_far": [],
- "props_discovered": 1361,
+ "props_discovered": 1369,
  "props_skipped_lowprice_gt_3000": 633,
  "reasons": {
-  "ok": 725,
+  "ok": 733,
   "no_unit_le_3000": 3
  },
  "blocked": null,

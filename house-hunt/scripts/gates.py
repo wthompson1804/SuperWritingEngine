@@ -98,9 +98,19 @@ def gate_dog(r):
     return "pass"
 
 
+INFER_ELEVATOR_FLOORS = 6  # Will, 2026-11-15: a building of 6+ floors is treated as having an elevator (asterisk)
+
+
 def gate_elevator(r):
+    """Returns (result, basis). basis is 'stated' or 'inferred_6plus_floors'."""
     e = str(r.elevator).strip().lower()
-    return {"yes": "pass", "no": "fail"}.get(e, "unknown")
+    if e in ("yes", "no"):
+        return {"yes": "pass", "no": "fail"}[e], "stated"
+    tallest = max([v for v in (to_num(r.building_floors), to_num(r.floor), floor_from_unit(r.unit)) if v is not None],
+                  default=None)
+    if tallest is not None and tallest >= INFER_ELEVATOR_FLOORS:
+        return "pass", "inferred_6plus_floors"
+    return "unknown", ""
 
 
 def gate_floor(r):
@@ -150,7 +160,9 @@ def main():
     df["g_rent"] = df.apply(gate_rent, axis=1)
     df["g_movein"] = df.apply(gate_movein, axis=1)
     df["g_dog"] = df.apply(gate_dog, axis=1)
-    df["g_elevator"] = df.apply(gate_elevator, axis=1)
+    el = df.apply(gate_elevator, axis=1)
+    df["g_elevator"] = [x[0] for x in el]
+    df["elevator_basis"] = [x[1] for x in el]
     fl = df.apply(gate_floor, axis=1)
     df["g_floor"] = [x[0] for x in fl]
     df["floor_used"] = [x[1] for x in fl]
