@@ -1,0 +1,839 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"59","value":[
+    {
+      "ultra_buildingid":"1f02c9a3-f75c-f011-877b-001dd803d067","ultra_name":"10","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1429036959013","ultra_addressline1":"2 WILLOW LANE","ultra_block":"392","ultra_lot":"1.05","ultra_propertyinterest":{
+        "Id":"e3901c69-355c-f011-877b-001dd80c29f4","Name":"VILLAS AT PARQ, A CONDOMINIUM"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"c02e7521-162f-e811-8126-1458d04eb810","Name":"PARSIPPANY-TROY HILLS TWP"
+      },"ultra_propertyportalsearchfield":"VILLAS AT PARQ, A CONDOMINIUM","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"PARSIPPANY-TROY HILLS TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f3651863-355c-f011-877b-001dd80c29f4","Name":"VILLAS AT PARQ CONDOMINIUM ASSOCIATION INC"
+      },"ultra_zipcode":"07054","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d9085717-d773-4361-ab42-4243bea9110b","ultra_name":"1002 WILLOW AV","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905014523001","ultra_addressline1":"1002 WILLOW AVE","ultra_block":"162","ultra_lot":"22","ultra_propertyinterest":{
+        "Id":"c4988305-a9c9-4f9a-a751-1e6e4eb3523a","Name":"1002 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"1002 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7ec15cf8-d925-f011-998a-001dd803d745","Name":"MARTIN & JUSTIN & EMILY VELTRE"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a9a8359d-8fdf-4efe-9223-a7d9431177c3","ultra_name":"1012 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905014466001","ultra_addressline1":"1012 WILLOW AVE","ultra_block":"162","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"676f524c-416d-4fdf-8301-cc6cb8665429","Name":"1012 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"1012 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3788e640-1e86-4e86-8a7d-5b4ce31feab6","Name":"JANIE & TRYFON KOUKOUNAS"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"25958a94-91fd-42f7-a974-158a3b0178af","ultra_name":"1030-1032 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905019893001","ultra_addressline1":"1030-1032 WILLOW AVE","ultra_block":"162","ultra_lot":"10.1","ultra_propertyinterest":{
+        "Id":"2c394364-d202-499b-917b-4e24d505e648","Name":"1030-1032 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"1030-1032 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a1f7877f-a4ab-4b65-a0b6-cdcfb1e6dc4a","Name":"1030-1032 WILLOW AV CONDOASSOC"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c2f4a720-7dbc-4dad-be2d-6335facc6f32","ultra_name":"112 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905016610001","ultra_addressline1":"112 WILLOW AVE","ultra_block":"33","ultra_lot":"28","ultra_propertyinterest":{
+        "Id":"231dd779-ad0e-4b73-8002-e3320bf23223","Name":"112 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"112 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"388f8784-7682-eb11-a812-001dd802f35e","Name":"WILLOW 12 LLC"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5172190f-577e-4cb9-8d44-1953892377fa","ultra_name":"1132 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905030265001","ultra_addressline1":"1132 WILLOW AVE","ultra_block":"163","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"b4d05324-49c5-4849-8de2-1bb234fc19f4","Name":"1132 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"1132 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"978a7f37-3ba0-4b64-8468-09ccb258e011","Name":"1132 WILLOW AV CONDO ASSOC"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3c3b3c99-d72f-e811-8122-1458d04ece60","ultra_name":"12 E WILLOW ST","ultra_registrationnumber":"0712-00178-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"12 E WILLOW ST","ultra_block":"1004","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"1e84d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"12 E WILLOW ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"3e2d7521-162f-e811-8126-1458d04eb810","Name":"MILLBURN TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"144d4226-d146-ea11-a999-001dd8009f4b","Name":"Liberty Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9c2b3dc7-b42f-e811-8122-1458d04ece60","Name":"E & R SIEGEL GROUP LLC DR E SIEGEL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c5c6701d-79ed-ec11-bb3b-001dd800c2bd","ultra_name":"12 WILLOW DR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1337023763006","ultra_addressline1":"12 WILLOW DR","ultra_block":"34","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"2a78e9eb-78ed-ec11-bb3b-001dd800a938","Name":"2 WILLOW DR"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"662e7521-162f-e811-8126-1458d04eb810","Name":"OCEAN TWP (M)"
+      },"ultra_propertyportalsearchfield":"2 WILLOW DR","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"OCEAN TWP (M)","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1a78e9eb-78ed-ec11-bb3b-001dd800a938","Name":"CONTINENTAL LAND DEVELOPERS LLC"
+      },"ultra_zipcode":"07712","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"349b24d6-e438-4de8-a60d-fbd27399d9e3","ultra_name":"12 WILLOW ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1424009798001","ultra_addressline1":"12 WILLOW ST","ultra_block":"2303","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"43c17418-b390-492a-bb59-0702c1d631f1","Name":"12 WILLOW ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b62e7521-162f-e811-8126-1458d04eb810","Name":"MORRISTOWN TOWN"
+      },"ultra_propertyportalsearchfield":"12 WILLOW ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ec407158-70e0-ee11-904d-001dd80b30b8","Name":"87 WESTERN AVE INC."
+      },"ultra_zipcode":"07963","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"47076932-fe5b-46ee-bc67-baa3a10fc2c7","ultra_name":"1802 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0911013723001","ultra_addressline1":"1802 WILLOW AVE","ultra_block":"9","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"f8caa5e7-23f8-4ca8-b909-9b637c9254ea","Name":"1802 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"1802 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5e7638a2-6093-47ac-b845-72018ac297dc","Name":"JAIME & ELDRIES VEGA"
+      },"ultra_zipcode":"07086","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4d949d01-0045-4931-90b9-0714a03ff0e7","ultra_name":"1822 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0911004028001","ultra_addressline1":"1822 WILLOW AVE","ultra_block":"9","ultra_lot":"8.01","ultra_propertyinterest":{
+        "Id":"f03e0936-0c33-4049-8396-eb49f26d8bf8","Name":"1822 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"1822 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c07653e2-288e-4a3c-900c-8070db4f1001","Name":"1822 WILLOW AV LLC"
+      },"ultra_zipcode":"07086","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"32911c69-355c-f011-877b-001dd80c29f4","ultra_name":"2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1429036959001","ultra_addressline1":"52 WILLOW LANE","ultra_block":"392","ultra_lot":"1.05","ultra_propertyinterest":{
+        "Id":"e3901c69-355c-f011-877b-001dd80c29f4","Name":"VILLAS AT PARQ, A CONDOMINIUM"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"c02e7521-162f-e811-8126-1458d04eb810","Name":"PARSIPPANY-TROY HILLS TWP"
+      },"ultra_propertyportalsearchfield":"VILLAS AT PARQ, A CONDOMINIUM","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"PARSIPPANY-TROY HILLS TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f3651863-355c-f011-877b-001dd80c29f4","Name":"VILLAS AT PARQ CONDOMINIUM ASSOCIATION INC"
+      },"ultra_zipcode":"07054","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e867a515-2c20-eb11-a813-001dd8018943","ultra_name":"2 SOUTH WILLOW","ultra_registrationnumber":"0713-00281-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2 SOUTH WILLOW STREET","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"d164a515-2c20-eb11-a813-001dd8018943","Name":"BSREP 11 WELLMONT EAST URBAN RENEWAL LLC"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"402d7521-162f-e811-8126-1458d04eb810","Name":"MONTCLAIR TOWN"
+      },"ultra_propertyportalsearchfield":"BSREP 11 WELLMONT EAST URBAN RENEWAL LLC","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"MONTCLAIR TOWN","ultra_elsamaintenancecompany":{
+        "Id":"02adf32e-d45a-e811-812e-1458d04ef938","Name":"Otis Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d964a515-2c20-eb11-a813-001dd8018943","Name":"BSREP II WELLMONT EAST URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ef9867f9-78ed-ec11-bb3b-001dd800c2bd","ultra_name":"2 WILLOW DR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1337023763001","ultra_addressline1":"2 WILLOW DR","ultra_block":"34","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"2a78e9eb-78ed-ec11-bb3b-001dd800a938","Name":"2 WILLOW DR"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"662e7521-162f-e811-8126-1458d04eb810","Name":"OCEAN TWP (M)"
+      },"ultra_propertyportalsearchfield":"2 WILLOW DR","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"OCEAN TWP (M)","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1a78e9eb-78ed-ec11-bb3b-001dd800a938","Name":"CONTINENTAL LAND DEVELOPERS LLC"
+      },"ultra_zipcode":"07712","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b3565d6f-d72f-e811-8122-1458d04ece60","ultra_name":"2 WILLOW TREE RD","ultra_registrationnumber":"0229-00115-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2 WILLOW TREE RD","ultra_block":"802","ultra_lot":"20","ultra_propertyinterest":{
+        "Id":"df7be59f-9f2f-e811-8120-1458d04e2fb8","Name":"2 WILLOW TREE RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"fe2b7521-162f-e811-8126-1458d04eb810","Name":"LEONIA BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"491d790f-8713-e911-812a-1458d04e0ca0","Name":"Liberty Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"06c1e2ae-b42f-e811-8122-1458d04ece60","Name":"KULITE PRODUCTS INC MICHAEL GOOD, PLANT MGR"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d8c4feda-d72f-e811-8122-1458d04ece60","ultra_name":"2 WILLOW WALK DR","ultra_registrationnumber":"1436-00121-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2 WILLOW WALK DR","ultra_block":"6201","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"912d9443-9a2f-e811-8122-1458d04ece60","Name":"2 WILLOW WALK DR"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"ce2e7521-162f-e811-8126-1458d04eb810","Name":"ROXBURY TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"e54f08fd-e531-e811-811f-1458d04eaba0","Name":"Otis"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3b7297e8-b42f-e811-8122-1458d04ece60","Name":"LAKESIDE VILLAGE ASSOC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f94aa012-c7e9-48d4-ad59-24869dc5bd36","ultra_name":"20-22 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1814011265001","ultra_addressline1":"20-22 WILLOW AVE","ultra_block":"143","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"27a95dc0-bba9-4659-8b1c-9ab47f7a6546","Name":"20-22 WILLOW AVE LLC"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"702f7521-162f-e811-8126-1458d04eb810","Name":"NORTH PLAINFIELD BORO"
+      },"ultra_propertyportalsearchfield":"20-22 WILLOW AVE LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c615c9b9-6e48-f011-877a-001dd80c29f4","Name":"20-22 WILLOW AVE LLC"
+      },"ultra_zipcode":"07060","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9519acec-e49b-4708-8752-73a070e830dc","ultra_name":"20-22 WILLOW ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0702016494001","ultra_addressline1":"20-22 WILLOW ST","ultra_block":"134","ultra_lot":"78","ultra_propertyinterest":{
+        "Id":"34f2fa60-39a4-47f9-8b2a-bb76a88f9efa","Name":"20-22 WILLOW ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"2a2d7521-162f-e811-8126-1458d04eb810","Name":"BLOOMFIELD TOWN"
+      },"ultra_propertyportalsearchfield":"20-22 WILLOW ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e0513aee-6b4a-4820-bf91-b390cf741010","Name":"JULIO LUGO"
+      },"ultra_zipcode":"07003","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a6ee833b-79ed-ec11-bb3b-001dd800c2bd","ultra_name":"22 WILLOW DR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1337023763011","ultra_addressline1":"22 WILLOW DR","ultra_block":"34","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"2a78e9eb-78ed-ec11-bb3b-001dd800a938","Name":"2 WILLOW DR"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"662e7521-162f-e811-8126-1458d04eb810","Name":"OCEAN TWP (M)"
+      },"ultra_propertyportalsearchfield":"2 WILLOW DR","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"OCEAN TWP (M)","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1a78e9eb-78ed-ec11-bb3b-001dd800a938","Name":"CONTINENTAL LAND DEVELOPERS LLC"
+      },"ultra_zipcode":"07712","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3ab4cb88-babb-446b-8358-4dd2c2e51af2","ultra_name":"222 Willow Avenue Condominium Association","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905023956001","ultra_addressline1":"222 WILLOW AVE","ultra_block":"43","ultra_lot":"24","ultra_propertyinterest":{
+        "Id":"76d8eead-bfb4-4a2b-a86b-02223abe171d","Name":"222 WILLOW AVE CONDOS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"222 WILLOW AVE CONDOS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7b12ff4c-7301-ef11-a1fe-001dd8009794","Name":"THE 222 WILLOW AVENUE CONDOMINIUM ASSOCIATION, INC."
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7b61490b-1622-4b72-a995-5cd69cf11f9a","ultra_name":"232 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905018458001","ultra_addressline1":"232 WILLOW AVE","ultra_block":"43","ultra_lot":"19","ultra_propertyinterest":{
+        "Id":"1b1ddd2b-e7d5-49be-9683-48285414f2ff","Name":"232 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"232 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"686204fe-9a5d-4aba-b923-cfade9424666","Name":"MARK NISLER "
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"17f2d8f4-6f1b-43e1-b85b-023e8e9d641b","ultra_name":"272 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1325005044001","ultra_addressline1":"272 WILLOW AVE","ultra_block":"179","ultra_lot":"47","ultra_propertyinterest":{
+        "Id":"131dc34a-ffb3-4b52-9e70-402f3f01a999","Name":"272 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":"272 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a45d440f-be4e-4161-8e69-386fc2b6ab7e","Name":"ARNOLD JAMES"
+      },"ultra_zipcode":"07740","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6917a722-85f1-4c32-bac5-76cf8b05fa5e","ultra_name":"32 N WILLOW ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0713013945001","ultra_addressline1":"32 N WILLOW ST","ultra_block":"3204","ultra_lot":"29","ultra_propertyinterest":{
+        "Id":"6a7c27b1-8024-4894-b7a1-6a838ca755b6","Name":"32 N WILLOW ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"402d7521-162f-e811-8126-1458d04eb810","Name":"MONTCLAIR TOWN"
+      },"ultra_propertyportalsearchfield":"32 N WILLOW ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9ff17391-d8d0-4cad-85e9-5421e1af621f","Name":"DC Christopher LLC"
+      },"ultra_zipcode":"07042","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6db89459-79ed-ec11-bb3b-001dd800c2bd","ultra_name":"32 WILLOW DR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1337023763016","ultra_addressline1":"32 WILLOW DR","ultra_block":"34","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"2a78e9eb-78ed-ec11-bb3b-001dd800a938","Name":"2 WILLOW DR"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"662e7521-162f-e811-8126-1458d04eb810","Name":"OCEAN TWP (M)"
+      },"ultra_propertyportalsearchfield":"2 WILLOW DR","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"OCEAN TWP (M)","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1a78e9eb-78ed-ec11-bb3b-001dd800a938","Name":"CONTINENTAL LAND DEVELOPERS LLC"
+      },"ultra_zipcode":"07712","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"06e9c491-fad5-4113-912c-26c47e19b6a4","ultra_name":"32 WILLOWDALE AV","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"32 WILLOWDALE AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"31eff9a5-dfdd-4524-ba66-2c6291b778ba","Name":"32 WILLOWDALE AV"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"402d7521-162f-e811-8126-1458d04eb810","Name":"MONTCLAIR TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"070420000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6b1b6c19-5d4a-4d4b-a57b-5b28e0f08173","ultra_name":"352 WILLOW AV","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"352 WILLOW AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"a15760bb-9aa3-4c3c-964c-de612de501f0","Name":"352 WILLOW AV"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"077400000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"19e148b6-0b8a-4496-ae66-5cd8e9606b18","ultra_name":"42 N WILLOW ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0713009070001","ultra_addressline1":"42 N WILLOW ST","ultra_block":"3204","ultra_lot":"24","ultra_propertyinterest":{
+        "Id":"76cda758-62fb-4f2b-bfbf-4f89059e6922","Name":"42 N WILLOW ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"402d7521-162f-e811-8126-1458d04eb810","Name":"MONTCLAIR TOWN"
+      },"ultra_propertyportalsearchfield":"42 N WILLOW ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fa2c20cd-c464-495c-8334-6a050281d4ab","Name":"42 NORTH WILLOW ST LLC"
+      },"ultra_zipcode":"07042","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8fd45445-e13b-4336-8727-a39b62b42247","ultra_name":"42 WILLOW ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901009349001","ultra_addressline1":"42 WILLOW ST","ultra_block":"147","ultra_lot":"27","ultra_propertyinterest":{
+        "Id":"bf1cb0d7-aff1-44ac-b9fa-b612dead2138","Name":"42 WILLOW ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"42 WILLOW ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8fac807c-a951-4676-a839-45996c992b64","Name":"WOLFGANG MARSCHHAUSER"
+      },"ultra_zipcode":"07002","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2c724aa2-0e30-4567-b45c-8b03550362d5","ultra_name":"602 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905007950001","ultra_addressline1":"602 WILLOW AVE","ultra_block":"158","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"d21801df-8c40-4630-a0cb-bfee30af1f52","Name":"602 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"602 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3f250159-df52-4e34-befa-95f10b98ddfc","Name":"602 WILLOW AV CONDO ASSOC"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"503584e3-3c8b-4b6d-8025-a9fc7ffe5df1","ultra_name":"702 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905016993001","ultra_addressline1":"702 WILLOW AVE","ultra_block":"159","ultra_lot":"23","ultra_propertyinterest":{
+        "Id":"0a05186e-29e9-4cc4-9a29-4a8c895a5edd","Name":"702 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"702 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4d90d8d6-467c-402f-a748-27ff3425d8bb","Name":"MARIA & DINO PICINICH"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e9305415-12cb-4f10-b10c-b3bbdc6f6326","ultra_name":"722 WILLOW AVENUE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905014920001","ultra_addressline1":"722 WILLOW AVE","ultra_block":"159","ultra_lot":"18","ultra_propertyinterest":{
+        "Id":"42355864-6263-46e4-867c-c704e6c34a5b","Name":"722 WILLOW AVENUE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"722 WILLOW AVENUE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9d736902-c357-460a-a8e3-ceb54c991232","Name":"FWW LLC"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f3ecaf1b-6c7f-47a9-a520-9d18755ab6d9","ultra_name":"800-812 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905018989001","ultra_addressline1":"800-812 WILLOW AVE","ultra_block":"160","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"52606f71-0a7d-4101-906b-7bcd974309f5","Name":"800-812 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"800-812 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"AKA 804 WILLOW AV","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"50ad7c5a-89b2-49b9-ae8d-d2a1b49628f7","Name":"800-812 WILLOW AV-T&M CONTR CO"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"13b8b64d-6431-4c80-acb5-64552fe86ec3","ultra_name":"832 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905002507001","ultra_addressline1":"832 WILLOW AVE","ultra_block":"160","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"e7565e5f-aeb7-4a9a-8a39-5a23afab4a20","Name":"NORTHVALE II URBAN RENEWAL ASSOCIATES"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"NORTHVALE II URBAN RENEWAL ASSOCIATES","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c2fd5791-019b-ec11-b3fe-001dd8023b68","Name":"NORTHVALE II URBAN REN ASSOC LP"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ffb55a12-8703-459b-9ff2-2a6a73197166","ultra_name":"912 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905016614001","ultra_addressline1":"912 WILLOW AVE","ultra_block":"161","ultra_lot":"27","ultra_propertyinterest":{
+        "Id":"526b11e0-49db-486d-a727-f5e94f5767a4","Name":"912 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"912 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7b1f4711-3933-4c36-99e9-71b767b442ec","Name":"THOMAS & SUZANNE DEAN"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"efcfc731-ad2a-f011-8c4e-001dd80bcb64","ultra_name":"92 Willow Street","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0702042618001","ultra_addressline1":"92 Willow Street","ultra_block":"126","ultra_lot":"108","ultra_propertyinterest":{
+        "Id":"a4cec731-ad2a-f011-8c4e-001dd80bcb64","Name":"92 WILLOW MANOR CONDOS"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"2a2d7521-162f-e811-8126-1458d04eb810","Name":"BLOOMFIELD TOWN"
+      },"ultra_propertyportalsearchfield":"92 WILLOW MANOR CONDOS","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"BLOOMFIELD TOWN","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"21f22187-4600-f111-8407-001dd80bcb40","Name":"92 WILLOW MANOR CONDOMINIUM ASSN INC."
+      },"ultra_zipcode":"07003","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"efba3d7e-67cd-4bc0-8c5c-521c21f6cafd","ultra_name":"922 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905015532001","ultra_addressline1":"922 WILLOW AVE","ultra_block":"161","ultra_lot":"23","ultra_propertyinterest":{
+        "Id":"c2d6bc45-f0d1-4325-8890-95acca20e4a7","Name":"922 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"922 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"32fd10b7-5eb4-ed11-83fe-001dd80726d6","Name":"ERIC MARSCHCHAUSER"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"177d9f01-f5ff-45e9-9d9e-d1a2984b4102","ultra_name":"942 WILLOW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905014404001","ultra_addressline1":"942 WILLOW AVE","ultra_block":"161","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"32594450-d27f-4384-8edd-1fbb17dd717f","Name":"942 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"942 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"89f98a12-09b1-ec11-983e-001dd80380ea","Name":"ANTONIO & ALEXANDRIA DAMELIO"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e07bebcd-ab31-4702-bc7d-ee12c19977a3","ultra_name":"BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1215010945002","ultra_addressline1":"348-362 WILLOWBROOK DR","ultra_block":"120.01","ultra_lot":"4.05","ultra_propertyinterest":{
+        "Id":"87aeddda-1a84-45fc-92a0-e88323ac8e20","Name":"Willowbrooke Condominium"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"082e7521-162f-e811-8126-1458d04eb810","Name":"NORTH BRUNSWICK TWP"
+      },"ultra_propertyportalsearchfield":"Willowbrooke Condominium","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"BLDG 2","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b3661fd3-1818-43a4-bbe2-3ac79c84c712","Name":"WILLOWBROOKE CONDO ASSN"
+      },"ultra_zipcode":"08902","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8de654fe-b0b3-ed11-83fe-001dd8070ecc","ultra_name":"BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0324040447005","ultra_addressline1":"416-422 Willowturn Blvd","ultra_block":"121","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"44e661f2-b0b3-ed11-83fe-001dd8070ecc","Name":"400-438 WILLOWTURN BLVD"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"802c7521-162f-e811-8126-1458d04eb810","Name":"MOUNT LAUREL TWP"
+      },"ultra_propertyportalsearchfield":"400-438 WILLOWTURN BLVD","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"MOUNT LAUREL TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ffc2e72d-54bc-ed11-83ff-001dd8070e60","Name":"GATEWOOD VILLAGE 1 CONDO ASSOC"
+      },"ultra_zipcode":"08054","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"acc673ee-7706-42f2-bfd1-554ae4e21ef9","ultra_name":"BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1215010945005","ultra_addressline1":"252-282 WILLOWBROOK DR","ultra_block":"120.01","ultra_lot":"4.05","ultra_propertyinterest":{
+        "Id":"87aeddda-1a84-45fc-92a0-e88323ac8e20","Name":"Willowbrooke Condominium"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"082e7521-162f-e811-8126-1458d04eb810","Name":"NORTH BRUNSWICK TWP"
+      },"ultra_propertyportalsearchfield":"Willowbrooke Condominium","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"BLDG 5","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b3661fd3-1818-43a4-bbe2-3ac79c84c712","Name":"WILLOWBROOKE CONDO ASSN"
+      },"ultra_zipcode":"08902","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a7e45a6a-a9ab-ed11-aad1-001dd80726d6","ultra_name":"BUILDING 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0324040446003","ultra_addressline1":"516-522 WILLOW TURN","ultra_block":"303.04","ultra_lot":"79","ultra_propertyinterest":{
+        "Id":"9ad55164-a9ab-ed11-aad1-001dd80726d6","Name":"GATEWOOD PARK MANOR I CONDOMINIUM ASSOCIATION"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"802c7521-162f-e811-8126-1458d04eb810","Name":"MOUNT LAUREL TWP"
+      },"ultra_propertyportalsearchfield":"GATEWOOD PARK MANOR I CONDOMINIUM ASSOCIATION","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"MOUNT LAUREL TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"57a3225e-a9ab-ed11-aad1-001dd80726d6","Name":"GATEWOOD PARK MANOR CONDOMINIUM ASSOCIATION"
+      },"ultra_zipcode":"08054","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c3c65c70-a9ab-ed11-aad1-001dd80726d6","ultra_name":"BUILDING 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0324040446006","ultra_addressline1":"542-552 WILLOW TURN","ultra_block":"303.04","ultra_lot":"79","ultra_propertyinterest":{
+        "Id":"9ad55164-a9ab-ed11-aad1-001dd80726d6","Name":"GATEWOOD PARK MANOR I CONDOMINIUM ASSOCIATION"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"802c7521-162f-e811-8126-1458d04eb810","Name":"MOUNT LAUREL TWP"
+      },"ultra_propertyportalsearchfield":"GATEWOOD PARK MANOR I CONDOMINIUM ASSOCIATION","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"MOUNT LAUREL TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"57a3225e-a9ab-ed11-aad1-001dd80726d6","Name":"GATEWOOD PARK MANOR CONDOMINIUM ASSOCIATION"
+      },"ultra_zipcode":"08054","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fd1c6738-1c4b-4cbc-8513-c68eb95a2262","ultra_name":"CRESTWOOD VLG I BLDG 102","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1518006897102","ultra_addressline1":"602 WILLOW LN","ultra_block":"90","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"0e135685-7453-46e6-a2ea-ff603e9ace87","Name":"CRESTWOOD VLG I"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f82e7521-162f-e811-8126-1458d04eb810","Name":"MANCHESTER TWP"
+      },"ultra_propertyportalsearchfield":"CRESTWOOD VLG I","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"RETIREMENT COM","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b2deb96b-2d19-439c-97d8-218a4aed472f","Name":"CRESTWOOD VIG CO-OP INC 1"
+      },"ultra_zipcode":"08759","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"73aff601-dbc3-4c1a-a314-3493326eb54d","ultra_name":"CRESTWOOD VLG I BLDG 105","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1518006897105","ultra_addressline1":"612 WILLOW LN","ultra_block":"90","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"0e135685-7453-46e6-a2ea-ff603e9ace87","Name":"CRESTWOOD VLG I"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f82e7521-162f-e811-8126-1458d04eb810","Name":"MANCHESTER TWP"
+      },"ultra_propertyportalsearchfield":"CRESTWOOD VLG I","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"RETIREMENT COM","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b2deb96b-2d19-439c-97d8-218a4aed472f","Name":"CRESTWOOD VIG CO-OP INC 1"
+      },"ultra_zipcode":"08759","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"611dfcd8-d29f-4b05-aed2-83167b2bfc38","ultra_name":"FORREST CREEK CONDO BLDG 13","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0820006054013","ultra_addressline1":"49-52 WILLOWOOD CT","ultra_block":"49","ultra_lot":"49","ultra_propertyinterest":{
+        "Id":"427adbe2-a8f5-41fd-a1e5-69e90e2c428b","Name":"FORREST CREEK CONDO"
+      },"ultra_county":{
+        "Id":"00f4aaf2-63e4-e711-8125-1458d054d020","Name":"GLOUCESTER"
+      },"ultra_municipality":{
+        "Id":"7a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST DEPTFORD TWP"
+      },"ultra_propertyportalsearchfield":"FORREST CREEK CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"BLDG M","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"813787fa-6561-4c4a-90f5-e1ead478b83f","Name":"FORREST CREEK CONDO ASSOC"
+      },"ultra_zipcode":"08096","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"754beb1b-f973-4a58-82e3-f2a96c6f995b","ultra_name":"LAKESIDE VILLAGE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1436026028001","ultra_addressline1":"2 WILLOW WALK DR","ultra_block":"6201","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"78c9e882-fce8-4dc8-9bba-557db62dfc12","Name":"LAKESIDE VILLAGE"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"ce2e7521-162f-e811-8126-1458d04eb810","Name":"ROXBURY TWP"
+      },"ultra_propertyportalsearchfield":"LAKESIDE VILLAGE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"LAKESIDE VILLAGE","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cceededf-2791-4f15-9085-972969377d89","Name":"LAKESIDE VILLAGE ASSN"
+      },"ultra_zipcode":"07852","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3451d63a-913a-493f-89e2-8b3301bdb73c","ultra_name":"LAKESIDE VILLAGE BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1436026028002","ultra_addressline1":"2 WILLOW WALK DR","ultra_block":"6201","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"78c9e882-fce8-4dc8-9bba-557db62dfc12","Name":"LAKESIDE VILLAGE"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"ce2e7521-162f-e811-8126-1458d04eb810","Name":"ROXBURY TWP"
+      },"ultra_propertyportalsearchfield":"LAKESIDE VILLAGE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"LAKESIDE VILLAGE","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cceededf-2791-4f15-9085-972969377d89","Name":"LAKESIDE VILLAGE ASSN"
+      },"ultra_zipcode":"07852","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d031fa63-cf54-485a-8c45-feeb0f56a908","ultra_name":"NANCY'S PLACE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"32 S  WILLOW","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"b6da4209-66c9-4bc3-ab91-1c27a70509d6","Name":"NANCY'S PLACE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"402d7521-162f-e811-8126-1458d04eb810","Name":"MONTCLAIR TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f2c6e092-6c9f-48b8-83a6-c0b011e32eb1","Name":"COVENANT HOUSE NJ, INC"
+      },"ultra_zipcode":"07042","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b7513c99-d72f-e811-8122-1458d04ece60","ultra_name":"NORTHVALE II","ultra_registrationnumber":"0905-00203-004","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"832 WILLOW AV","ultra_block":"160","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"8e95d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"NORTHVALE II"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"be3b3dc7-b42f-e811-8122-1458d04ece60","Name":"NORTHVALE II"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"58ecada1-ad9e-4952-836f-5c1b0d93afc6","ultra_name":"PARKERS WALK BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2004042587001","ultra_addressline1":"515-522 WILLOW CT","ultra_block":"155","ultra_lot":"3.01","ultra_propertyinterest":{
+        "Id":"e5526556-5fdc-4b91-bf05-6de7c0691625","Name":"PARKERS WALK"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b62f7521-162f-e811-8126-1458d04eb810","Name":"ELIZABETH CITY"
+      },"ultra_propertyportalsearchfield":"PARKERS WALK","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"989dc67a-95aa-4589-9b2f-676a25faf60e","Name":"PARKERS WALK URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07208","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ef1b7007-29f2-46f0-b406-219fda9a2c26","ultra_name":"PARKERS WALK BLDG 9","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2004042587009","ultra_addressline1":"472-482 WILLOW CT","ultra_block":"155","ultra_lot":"3.01","ultra_propertyinterest":{
+        "Id":"e5526556-5fdc-4b91-bf05-6de7c0691625","Name":"PARKERS WALK"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b62f7521-162f-e811-8126-1458d04eb810","Name":"ELIZABETH CITY"
+      },"ultra_propertyportalsearchfield":"PARKERS WALK","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"989dc67a-95aa-4589-9b2f-676a25faf60e","Name":"PARKERS WALK URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07208","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1b78d7b5-c1ef-498d-aa92-87fb2a9928c2","ultra_name":"SOCIETY HILL at JERSEY CITY II  BLDG 36","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906042832011","ultra_addressline1":"1-12 WILLOW ST","ultra_block":"0","ultra_lot":"0","ultra_propertyinterest":{
+        "Id":"580ab7ac-030f-47fb-90ac-cee1af68f6e2","Name":"SOCIETY HILL AT JERSEY CITY II"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"SOCIETY HILL AT JERSEY CITY II","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1e71bb28-d7ed-4c51-8702-692c91019fdd","Name":"SOCIETY HILL at JERSEY CITY II CONDO ASSOC."
+      },"ultra_zipcode":"07305","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"21e9cdd1-c5b2-4ed3-86d5-5edca8035c8e","ultra_name":"SOCIETY HILL at JERSEY CITY II  BLDG 54","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906042832028","ultra_addressline1":"49-72 WILLOW ST","ultra_block":"0","ultra_lot":"0","ultra_propertyinterest":{
+        "Id":"580ab7ac-030f-47fb-90ac-cee1af68f6e2","Name":"SOCIETY HILL AT JERSEY CITY II"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"SOCIETY HILL AT JERSEY CITY II","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1e71bb28-d7ed-4c51-8702-692c91019fdd","Name":"SOCIETY HILL at JERSEY CITY II CONDO ASSOC."
+      },"ultra_zipcode":"07305","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9f30e7be-f0fd-4859-9f65-ac7edba8e20c","ultra_name":"THE POINTE AT WINDING BROOK BLDG 16","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1909024202016","ultra_addressline1":"2-12 WILLOW CIR","ultra_block":"31","ultra_lot":"800806","ultra_propertyinterest":{
+        "Id":"dc1c5416-6ad1-463f-b2b6-07c39b56d4b1","Name":"THE POINTE AT WINDING BROOK"
+      },"ultra_county":{
+        "Id":"18f4aaf2-63e4-e711-8125-1458d054d020","Name":"SUSSEX"
+      },"ultra_municipality":{
+        "Id":"902f7521-162f-e811-8126-1458d04eb810","Name":"HAMBURG BORO"
+      },"ultra_propertyportalsearchfield":"THE POINTE AT WINDING BROOK","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"26fe3faf-cfd4-4aa3-9689-4a5ad6c68c86","Name":"POINT AT WINDING BROOK"
+      },"ultra_zipcode":"07438","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"52281614-2ebf-462e-8aba-f644baca054f","ultra_name":"THE POINTE AT WINDING BROOK BLDG 19","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1909024202019","ultra_addressline1":"26-32 WILLOW CIR","ultra_block":"31","ultra_lot":"800604","ultra_propertyinterest":{
+        "Id":"dc1c5416-6ad1-463f-b2b6-07c39b56d4b1","Name":"THE POINTE AT WINDING BROOK"
+      },"ultra_county":{
+        "Id":"18f4aaf2-63e4-e711-8125-1458d054d020","Name":"SUSSEX"
+      },"ultra_municipality":{
+        "Id":"902f7521-162f-e811-8126-1458d04eb810","Name":"HAMBURG BORO"
+      },"ultra_propertyportalsearchfield":"THE POINTE AT WINDING BROOK","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"26fe3faf-cfd4-4aa3-9689-4a5ad6c68c86","Name":"POINT AT WINDING BROOK"
+      },"ultra_zipcode":"07438","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cfe5de81-c229-f011-8c4e-001dd8084346","ultra_name":"THE WILLOW AT LONG BRANCH","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1325040778001","ultra_addressline1":"272 WILLOW AVE","ultra_block":"179","ultra_lot":"47","ultra_propertyinterest":{
+        "Id":"a8dfe17b-c229-f011-8c4e-001dd8084346","Name":"272 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":"272 WILLOW AVE","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"LONG BRANCH CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b53ae775-c229-f011-8c4e-001dd8084346","Name":"WILLOW BREEZE LLC"
+      },"ultra_zipcode":"07740","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"67673b84-3603-f011-bae2-001dd80a623a","ultra_name":"THE WILLOW AT LONG BRANCH","ultra_registrationnumber":"1325-00200-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"272 WILLOW AVE","ultra_block":"179","ultra_lot":"47","ultra_propertyinterest":{
+        "Id":"32673b84-3603-f011-bae2-001dd80a623a","Name":"THE WILLOW AT LONG BRANCH"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":"THE WILLOW AT LONG BRANCH","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"LONG BRANCH CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"48673b84-3603-f011-bae2-001dd80a623a","Name":"BACC BUILDERS INC."
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a06629ff-1701-4115-ae2a-24ed7fa058a2","ultra_name":"WILLOW CREST CONDO","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905016861001","ultra_addressline1":"208-212 WILLOW AVE","ultra_block":"43","ultra_lot":"31","ultra_propertyinterest":{
+        "Id":"34ba0b03-c262-449b-b930-12f400f934ce","Name":"WILLOW CREST CONDO"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"WILLOW CREST CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7d0a74ce-45a2-ed11-aad0-001dd8070ecc","Name":"WILLOW CREST CONDOMINIUM"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6b37764b-5c44-4299-8541-da6a28d505ff","ultra_name":"WILLOW LANE CONDO ASSOC","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905021815001","ultra_addressline1":"902 WILLOW AVE","ultra_block":"161","ultra_lot":"31","ultra_propertyinterest":{
+        "Id":"6049c62f-a70c-4444-bf7a-260ad3c60aba","Name":"902 WILLOW AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"902 WILLOW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"74c89ff2-8d19-431f-9449-c66c976715c1","Name":"WILLOW LANE CONDO ASSOC "
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=2+Kinderkamack+Road%2C+Hackensack%2C+NJ+07601&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:12+00:00",
+ "status": 200,
+ "path": "raw/independent_check/22537c42bcd61234.json",
+ "source": "independent_check"
+}

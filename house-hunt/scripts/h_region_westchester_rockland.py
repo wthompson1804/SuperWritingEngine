@@ -29,6 +29,7 @@ OUT = OUT_DIR / "region_westchester_rockland.csv"
 BOUT = ROOT / "data" / "reference" / "region_buildings_westchester_rockland.csv"
 TRULIA = ROOT / "raw" / SRC / "trulia_detail.jsonl"
 CAP, WINDOW_END = 3000, "2026-12-15"
+MIN_WL = 25  # dog weight gate lowered from 40 to 25 lb (plan v3 update)
 BCOLS = ["building_name", "address", "town", "state", "zip", "url", "floors", "elevator", "elevator_basis", "dogs",
          "dog_weight_limit_lb", "dog_policy_text", "verdict", "units_written", "units_in_window", "min_rent_seen",
          "manager", "source_url", "notes"]
@@ -191,8 +192,7 @@ def apply_building(rows: list[dict], c: dict, key: str) -> tuple[list[dict], dic
     undated = [r for r in rows if not r.get("available_date")]
     fail = ""
     if dogs == "no": fail = "no dogs"
-    elif wl.isdigit() and int(wl) < 40: fail = f"dog weight limit {wl} lb"
-    elif sm_only: fail = "small dogs only (pet card says Size allowed: Small; no weight number given)"
+    elif wl.isdigit() and int(wl) < MIN_WL: fail = f"dog weight limit {wl} lb"
     elif elev == "no": fail = "no elevator"
     elif c.get("fail"): fail = c["fail"]
     elif rows and not win and not undated: fail = "nothing available by 2026-12-15"
@@ -206,6 +206,10 @@ def apply_building(rows: list[dict], c: dict, key: str) -> tuple[list[dict], dic
         verdict = "pass_with_units"
     else:
         verdict = "unconfirmed:" + "+".join(x for x, ok in (("dogs", dogs == "yes"), ("elevator", elev == "yes")) if not ok)
+    if sm_only and not verdict.startswith("fails:"):
+        # gate is now 25 lb: "Size allowed: Small" with no number can no longer be read as a clear fail
+        verdict = "unconfirmed:dog size (pet card says Size allowed: Small; no weight number given)" + ("+elevator" if elev != "yes" else "")
+        for r in rows: r["notes"] = "DOG SIZE UNCONFIRMED: listing pet card says 'Size allowed: Small' with no weight number; " + r.get("notes", "")
     out = rows
     if verdict.startswith("fails:") and rows:
         best = sorted(win or rows, key=lambda r: float(r["listed_rent"]))[0]

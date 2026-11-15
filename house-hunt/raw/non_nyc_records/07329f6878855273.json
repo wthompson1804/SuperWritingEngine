@@ -1,0 +1,63 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"4","value":[
+    {
+      "ultra_buildingid":"4a3063eb-0f73-4109-94ca-e399a8221bbb","ultra_name":"381 MONROE ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1607036830001","ultra_addressline1":"381 MONROE ST","ultra_block":"2166","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"0d6d096d-cd30-4463-991b-0125e54932ed","Name":"381 MONROE ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"242f7521-162f-e811-8126-1458d04eb810","Name":"PASSAIC CITY"
+      },"ultra_propertyportalsearchfield":"381 MONROE ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"619ff8fd-70ff-eb11-94ef-001dd8028153","Name":"NUNEZ PROPERTY MANAGEMENT LLC"
+      },"ultra_zipcode":"07055","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"24e91c76-fa03-4744-a9ec-88ba6a9d0132","ultra_name":"81 MONROE ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905035649001","ultra_addressline1":"81 MONROE ST","ultra_block":"16","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"87f82a01-1b78-4eb6-a96b-a1077aff4fd3","Name":"81 MONROE ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"81 MONROE ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8ed6767d-b805-410c-a468-347caa332f0c","Name":"81 MONROE ST CONDO ASSN"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"36c3f3cf-592e-ea11-a999-001dd800951b","ultra_name":"THE MINT","ultra_registrationnumber":"2013-00179-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"81 MONROE ST","ultra_block":"1.02","ultra_lot":"318","ultra_propertyinterest":{
+        "Id":"df0ed5c9-592e-ea11-a999-001dd800951b","Name":"THE MINT"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"c82f7521-162f-e811-8126-1458d04eb810","Name":"RAHWAY CITY"
+      },"ultra_propertyportalsearchfield":"THE MINT","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"RAHWAY CITY","ultra_elsamaintenancecompany":{
+        "Id":"2fc3f3cf-592e-ea11-a999-001dd800951b","Name":"SCHINDLER ELEVATOR"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"eb0ed5c9-592e-ea11-a999-001dd800951b","Name":"DORNOCH RAHWAY II URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3800eb83-f619-4096-b708-a0a88fc01944","ultra_name":"THE MINT","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2013036628001","ultra_addressline1":"81 MONROE ST","ultra_block":"318","ultra_lot":"1.02","ultra_propertyinterest":{
+        "Id":"7b40b0a1-7a31-4065-a007-ba73a6510ebc","Name":"THE MINT AT RAHWAY I"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"c82f7521-162f-e811-8126-1458d04eb810","Name":"RAHWAY CITY"
+      },"ultra_propertyportalsearchfield":"THE MINT AT RAHWAY I","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b10348f1-642e-ef11-840a-001dd80b3af2","Name":"EXTRA MINT URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

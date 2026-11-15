@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1715+US+Highway+46%2C+Parsippany-Troy+Hills%2C+NJ+07054&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:10+00:00",
+ "status": 200,
+ "path": "raw/independent_check/5ca5bb4116178c4e.json",
+ "source": "independent_check"
+}

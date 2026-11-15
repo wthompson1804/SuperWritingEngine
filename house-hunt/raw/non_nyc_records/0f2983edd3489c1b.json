@@ -1,0 +1,509 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"36","value":[
+    {
+      "ultra_buildingid":"e27713fd-326e-40c5-bcca-04f993e387cd","ultra_name":"THE PARK AT RARITAN RD BLDG 100","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887001","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1cf7973a-091b-4a5b-b5f7-2eece5302cad","ultra_name":"THE PARK AT RARITAN RD BLDG 1000","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887010","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b308590e-2f7c-476c-84a3-873de814b969","ultra_name":"THE PARK AT RARITAN RD BLDG 1100","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887011","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4d1e30c2-c0be-4512-8613-5ad5d58c5f7d","ultra_name":"THE PARK AT RARITAN RD BLDG 1200","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887012","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8eb54cbd-7e13-47e2-8d93-cb39ad529081","ultra_name":"THE PARK AT RARITAN RD BLDG 1300","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887013","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d23f3102-da83-ee11-8179-001dd8087fe8","ultra_name":"THE PARK AT RARITAN RD BLDG 1500","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887022","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"00403102-da83-ee11-8179-001dd8087fe8","ultra_name":"THE PARK AT RARITAN RD BLDG 1600","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887023","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f8952c1a-da83-ee11-8179-001dd8087fe8","ultra_name":"THE PARK AT RARITAN RD BLDG 1700","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887030","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8c952c1a-da83-ee11-8179-001dd8087fe8","ultra_name":"THE PARK AT RARITAN RD BLDG 1800","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887029","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"41bd9048-8883-437a-bd11-ee117b4dd7ce","ultra_name":"THE PARK AT RARITAN RD BLDG 200","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887002","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bb43370e-da83-ee11-8179-001dd8087fe8","ultra_name":"THE PARK AT RARITAN RD BLDG 2100","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887026","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"63534b8c-1093-f011-b4cc-001dd8084346","ultra_name":"THE PARK AT RARITAN RD BLDG 2200","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887033","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fc52392c-da83-ee11-8179-001dd8087fe8","ultra_name":"THE PARK AT RARITAN RD BLDG 2300","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887032","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"56203526-da83-ee11-8179-001dd8087fe8","ultra_name":"THE PARK AT RARITAN RD BLDG 2400","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887031","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9d4e3414-da83-ee11-8179-001dd8087fe8","ultra_name":"THE PARK AT RARITAN RD BLDG 2500","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887027","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"014f3414-da83-ee11-8179-001dd8087fe8","ultra_name":"THE PARK AT RARITAN RD BLDG 2600","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887028","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"70544b8c-1093-f011-b4cc-001dd8084346","ultra_name":"THE PARK AT RARITAN RD BLDG 2700","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887034","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3e9f4f92-1093-f011-b4cc-001dd8084346","ultra_name":"THE PARK AT RARITAN RD BLDG 2800","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887035","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3fd05398-1093-f011-b4cc-001dd8084346","ultra_name":"THE PARK AT RARITAN RD BLDG 2900","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887036","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f681e4ab-43e2-45a6-b46a-d6edd3c045e0","ultra_name":"THE PARK AT RARITAN RD BLDG 300","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887003","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b4d05398-1093-f011-b4cc-001dd8084346","ultra_name":"THE PARK AT RARITAN RD BLDG 3000","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887037","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f87a4e9e-1093-f011-b4cc-001dd8084346","ultra_name":"THE PARK AT RARITAN RD BLDG 3100","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887038","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4a4655a4-1093-f011-b4cc-001dd8084346","ultra_name":"THE PARK AT RARITAN RD BLDG 3200","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887039","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"46b31d97-bfc2-403d-9a52-3d72253bb024","ultra_name":"THE PARK AT RARITAN RD BLDG 3300","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887016","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"03657ca0-2e15-44f7-ae9d-142db7326759","ultra_name":"THE PARK AT RARITAN RD BLDG 3400","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887017","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f0a3838f-d332-4dde-9597-ace81ff4440f","ultra_name":"THE PARK AT RARITAN RD BLDG 3500","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887014","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4e630a19-abb9-4f02-9996-8499eb3fee9f","ultra_name":"THE PARK AT RARITAN RD BLDG 3600","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887018","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"299636fc-d983-ee11-8179-001dd8087fe8","ultra_name":"THE PARK AT RARITAN RD BLDG 3700","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887020","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ROSELLE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ecacf41f-fb38-4b64-8041-73f72c96aa4e","ultra_name":"THE PARK AT RARITAN RD BLDG 3800","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887015","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"743db448-2780-4263-b671-afbf324eae44","ultra_name":"THE PARK AT RARITAN RD BLDG 3900","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887019","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"eb0f82fe-7454-4307-a0bf-6d6fdbc1660f","ultra_name":"THE PARK AT RARITAN RD BLDG 400","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887004","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fd0e01b1-1f4c-4a71-9bd8-2cccacad2629","ultra_name":"THE PARK AT RARITAN RD BLDG 500","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887005","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"59737537-dbf0-4b17-9a09-c4e29382ea29","ultra_name":"THE PARK AT RARITAN RD BLDG 600","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887006","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"27a1ea34-825b-456a-b669-16a0ea05c3ac","ultra_name":"THE PARK AT RARITAN RD BLDG 700","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887007","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"62ff5146-cda8-4307-9192-c6ba62b4ff66","ultra_name":"THE PARK AT RARITAN RD BLDG 800","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887008","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f11e0e3e-8735-48f3-8a25-9a30d766e159","ultra_name":"THE PARK AT RARITAN RD BLDG 900","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014036887009","ultra_addressline1":"417 RARITAN RD","ultra_block":"7505","ultra_lot":"30","ultra_propertyinterest":{
+        "Id":"000feb71-dffe-4237-9e5b-a40cda9702b3","Name":"THE PARK AT RARITAN RD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"THE PARK AT RARITAN RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db921e0d-452b-4302-8958-d8b302414d2a","Name":"ROSELLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

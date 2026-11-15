@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=44+Hudson+St%2C+Yonkers%2C+NY+10701&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:14+00:00",
+ "status": 200,
+ "path": "raw/independent_check/037924e4f1cc2e63.json",
+ "source": "independent_check"
+}

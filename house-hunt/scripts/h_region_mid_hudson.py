@@ -240,8 +240,8 @@ def zj(url, write=None):
             prefix = "BUILDING_FAILS: income-restricted (affordable) housing; eligibility rules apply."
         elif dogs == "no":
             prefix = "BUILDING_FAILS: dogs not allowed."
-        elif f["wl"].isdigit() and int(f["wl"]) < 40:
-            prefix = f"BUILDING_FAILS: dog weight limit {f['wl']} lb (under 40)."
+        elif f["wl"].isdigit() and int(f["wl"]) < 25:
+            prefix = f"BUILDING_FAILS: dog weight limit {f['wl']} lb (under 25)."
         elif f["large"] is False and not f["wl"].isdigit():
             prefix = "BUILDING_FAILS: page allows small dogs only (large dogs not allowed; no weight number given, confirm the limit)."
         elif elev == "no":

@@ -1,0 +1,49 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"3","value":[
+    {
+      "ultra_buildingid":"10c4feda-d72f-e811-8122-1458d04ece60","ultra_name":"THE RESERVE @ RIVERDALE","ultra_registrationnumber":"1433-00124-003","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"6000 RIVERDALE RD","ultra_block":"30","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"fd2c9443-9a2f-e811-8122-1458d04ece60","Name":"THE RESERVE @ RIVERDALE"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"c82e7521-162f-e811-8126-1458d04eb810","Name":"RIVERDALE BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"01b8940c-f652-e811-8229-1458d04e1b18","Name":"Kone North"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ab7197e8-b42f-e811-8122-1458d04ece60","Name":"NEWARK METRO MULTI FAMILY C/O THE RESERVE @ RIVERDALE"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"65cd0fc0-52a6-43f3-9024-dfee30581a59","ultra_name":"THE RESERVE AT RIVERDALE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1433036204001","ultra_addressline1":"6000 RIVERDALE RD","ultra_block":"30","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"3470064a-eef1-47c5-9ac4-13fb0359d8e4","Name":"THE RESERVE AT RIVERDALE"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"c82e7521-162f-e811-8126-1458d04eb810","Name":"RIVERDALE BORO"
+      },"ultra_propertyportalsearchfield":"THE RESERVE AT RIVERDALE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"4000 & 5000 RIVERDALE RD","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c58cede2-218d-4ddd-8236-e2fadf2ea987","Name":"Newark Metro Multifamily Exchange LLC"
+      },"ultra_zipcode":"07457","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d24b4190-0e9b-4c4b-9bb7-fc9a2d93b3f7","ultra_name":"THE RESERVE AT RIVERDALE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1433036204002","ultra_addressline1":"6000 RIVERDALE RD","ultra_block":"30","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"3470064a-eef1-47c5-9ac4-13fb0359d8e4","Name":"THE RESERVE AT RIVERDALE"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"c82e7521-162f-e811-8126-1458d04eb810","Name":"RIVERDALE BORO"
+      },"ultra_propertyportalsearchfield":"THE RESERVE AT RIVERDALE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"4000 & 5000 RIVERDALE RD","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c58cede2-218d-4ddd-8236-e2fadf2ea987","Name":"Newark Metro Multifamily Exchange LLC"
+      },"ultra_zipcode":"07457","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

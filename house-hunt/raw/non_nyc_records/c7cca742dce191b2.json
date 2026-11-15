@@ -1,0 +1,19 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"1","value":[
+    {
+      "ultra_buildingid":"04a13fcc-9eac-4cd5-917e-34937905663d","ultra_name":"Building 400","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1436036280001","ultra_addressline1":"400 CARDINAL CT","ultra_block":"9401","ultra_lot":"13.01","ultra_propertyinterest":{
+        "Id":"ba457f0e-1142-4a2e-bd0a-88aab4fb103a","Name":"AP PARC AT ROXBURY LLC"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"ce2e7521-162f-e811-8126-1458d04eb810","Name":"ROXBURY TWP"
+      },"ultra_propertyportalsearchfield":"AP PARC AT ROXBURY LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"dee3273b-05cf-ed11-b596-001dd8070a7e","Name":"AP PARC AT ROXBURY LLC"
+      },"ultra_zipcode":"07852","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

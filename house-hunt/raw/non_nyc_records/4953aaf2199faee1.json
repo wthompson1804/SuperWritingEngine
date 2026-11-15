@@ -1,0 +1,103 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"7","value":[
+    {
+      "ultra_buildingid":"94920a50-9788-47ff-8d56-0e290cd91101","ultra_name":"100-114 WILLOWBROOK DR BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1215008519005","ultra_addressline1":"212-226 WILLOWBROOK DR","ultra_block":"4.05","ultra_lot":"126.01","ultra_propertyinterest":{
+        "Id":"c85a75ff-fa82-4a4d-ad5a-2c703d958ff9","Name":"100-114 WILLOWBROOK DR"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"082e7521-162f-e811-8126-1458d04eb810","Name":"NORTH BRUNSWICK TWP"
+      },"ultra_propertyportalsearchfield":"100-114 WILLOWBROOK DR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ee3d9527-d84a-495d-a3e4-30404f6a4c3f","Name":"BROOKDALE ASSOC LLC"
+      },"ultra_zipcode":"08902","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"68f4bb1f-147b-4520-bc10-4e937bf37d9e","ultra_name":"24-26 BROOKDALE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714005997001","ultra_addressline1":"24-26 BROOKDALE AVE","ultra_block":"4063","ultra_lot":"25","ultra_propertyinterest":{
+        "Id":"53736c81-3452-46f8-b4a3-2ec47b6a14d6","Name":"24-26 BROOKDALE AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"24-26 BROOKDALE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a2dd8156-87b8-4a0b-8ed3-812eff01f4a8","Name":"ROBERT & ROBYN BROWN"
+      },"ultra_zipcode":"07106","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f9e5facd-ee9a-f011-b4cc-001dd80c2ab9","ultra_name":"40 Center Street JC LLC","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043534001","ultra_addressline1":"26 BROOK STREET","ultra_block":"13803","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"29bfa3c1-ee9a-f011-b4cc-001dd80c2ab9","Name":"26 BROOK ST."
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"26 BROOK ST.","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"40-42 CENTER STREET JERSEY CITY NJ 07302","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c08a61bb-ee9a-f011-b4cc-001dd80c2ab9","Name":"40 CENTER STREET JC LLC"
+      },"ultra_zipcode":"07302","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5b842bbe-cff3-429f-b2a5-3eec4853f2da","ultra_name":"BEAVER BROOK RUN CONDO BLDG 25","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1208020183025","ultra_addressline1":"16-26 BROOKVIEW CT","ultra_block":"75","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"1ea4efed-d53b-4799-961e-63e150a9d8dd","Name":"BEAVER BROOK RUN CONDO"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"fa2d7521-162f-e811-8126-1458d04eb810","Name":"JAMESBURG BORO"
+      },"ultra_propertyportalsearchfield":"BEAVER BROOK RUN CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"554eb180-06ae-4db0-8302-7c4a2727e111","Name":"BEAVER BROOK RUN CONDO ASSOC"
+      },"ultra_zipcode":"07730","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4550a8b8-2146-49f8-91be-4b2d155468d2","ultra_name":"LAMER 1 CONDO BLDG 20","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1219021796020","ultra_addressline1":"16-26 UPPERBROOK CT","ultra_block":"6.02","ultra_lot":"499","ultra_propertyinterest":{
+        "Id":"97bf177b-8512-449b-94db-7e3b5b502e6a","Name":"LAMER 1 CONDO"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"102e7521-162f-e811-8126-1458d04eb810","Name":"SAYREVILLE BORO"
+      },"ultra_propertyportalsearchfield":"LAMER 1 CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a2e805d2-66ba-41c4-b53c-a06d36593ed1","Name":"LAMER 1 CONDO ASSOC"
+      },"ultra_zipcode":"08859","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"081d0b07-6099-f011-b4cc-001dd80c2ab9","ultra_name":"SKYLAR LOFTS","ultra_registrationnumber":"0906-01305-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"26 BROOK ST","ultra_block":"13803","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"9036e500-6099-f011-b4cc-001dd80c2ab9","Name":"SKYLAR LOFTS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"SKYLAR LOFTS","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d71c0b07-6099-f011-b4cc-001dd80c2ab9","Name":"40 CENTER STREET JC LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"044bc890-ffa9-4d25-abdc-891df3ebef2f","ultra_name":"TRAFALGAR GARDENS BLDG 8","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1205009013008","ultra_addressline1":"26 MINEBROOK RD","ultra_block":"643D","ultra_lot":"1913 1","ultra_propertyinterest":{
+        "Id":"217349d2-daf4-4bb5-a977-d7aec5b900e2","Name":"TRAFALGAR GARDENS BLDG 1"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"f42d7521-162f-e811-8126-1458d04eb810","Name":"EDISON TWP"
+      },"ultra_propertyportalsearchfield":"TRAFALGAR GARDENS BLDG 1","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"52fcf4a0-2b94-4bd0-9c90-bbc769e739de","Name":"TRAFALGAR GDNS ASSOC"
+      },"ultra_zipcode":"08820","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

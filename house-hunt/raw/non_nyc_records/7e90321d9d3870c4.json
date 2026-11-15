@@ -1,0 +1,153 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"10","value":[
+    {
+      "ultra_buildingid":"7e3a8739-f9b5-41db-a3fd-9b2d73d27a86","ultra_name":"140 HANOVER ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"140 HANOVER ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"e7924dd1-3951-4b57-ab82-c3f105463757","Name":"140 HANOVER ST"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"086080000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2f0c84b4-de8a-4e39-a722-2c05b4e1b275","ultra_name":"40 EAST HANOVER AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1423033295001","ultra_addressline1":"40 E HANOVER AVE","ultra_block":"24","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"0cd172e1-4a0e-4ba2-886e-936ad4936a7f","Name":"THE HIGHLANDS AT MORRIS PLAINS APTS"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b42e7521-162f-e811-8126-1458d04eb810","Name":"MORRIS PLAINS BORO"
+      },"ultra_propertyportalsearchfield":"THE HIGHLANDS AT MORRIS PLAINS APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"299ad075-d868-f011-bec3-001dd80b1a80","Name":"SRE NJ MORRIS PLAINS 40 LLC"
+      },"ultra_zipcode":"07950","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"93290470-8f19-4054-8eb7-ea85e1404645","ultra_name":"40 EAST HANOVER AVE BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1423033295002","ultra_addressline1":"40 E HANOVER AVE","ultra_block":"24","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"0cd172e1-4a0e-4ba2-886e-936ad4936a7f","Name":"THE HIGHLANDS AT MORRIS PLAINS APTS"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b42e7521-162f-e811-8126-1458d04eb810","Name":"MORRIS PLAINS BORO"
+      },"ultra_propertyportalsearchfield":"THE HIGHLANDS AT MORRIS PLAINS APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"299ad075-d868-f011-bec3-001dd80b1a80","Name":"SRE NJ MORRIS PLAINS 40 LLC"
+      },"ultra_zipcode":"07950","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"86befeda-d72f-e811-8122-1458d04ece60","ultra_name":"HIGHLAND @ MORRIS PLAINS","ultra_registrationnumber":"1423-00110-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"40 E HANOVER AV","ultra_block":"24","ultra_lot":"13467","ultra_propertyinterest":{
+        "Id":"bd289443-9a2f-e811-8122-1458d04ece60","Name":"HIGHLAND @ MORRIS PLAINS"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b42e7521-162f-e811-8126-1458d04eb810","Name":"MORRIS PLAINS BORO"
+      },"ultra_propertyportalsearchfield":"HIGHLAND @ MORRIS PLAINS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"bf07961a-5cad-e811-8121-1458d04e0ca0","Name":"Arrow Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8aadafd8-b42f-e811-8122-1458d04ece60","Name":"THE HIGHLANDS @ MORRIS PLAINS MARTIN WEINKOVE COMM MGR"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"788b21b6-9a31-4476-8fec-2bbe0404c026","ultra_name":"MORRIS SHELTER INC","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"540 W HANOVER, 2ND FL","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"a0a4a199-38e5-41be-9bbf-dc8162578e46","Name":"MORRIS SHELTER INC"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b62e7521-162f-e811-8126-1458d04eb810","Name":"MORRISTOWN TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5038346b-a3db-4c31-91c0-ac7eb0a5e1eb","Name":"HOMELESS SOLUTIONS INC"
+      },"ultra_zipcode":"079630000","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8ae7519f-706d-4eaa-943f-baa1878725f8","ultra_name":"MORRIS SHELTER INC. II-MEN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"540 W HANOVER, 1ST FL","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"035b97db-612e-4bb2-a0ae-b3c45659d30d","Name":"MORRIS SHELTER INC. II-MEN"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b62e7521-162f-e811-8126-1458d04eb810","Name":"MORRISTOWN TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5038346b-a3db-4c31-91c0-ac7eb0a5e1eb","Name":"HOMELESS SOLUTIONS INC"
+      },"ultra_zipcode":"079630000","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9bbdfeda-d72f-e811-8122-1458d04ece60","ultra_name":"MORRIS VIEW I","ultra_registrationnumber":"1422-00116-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"340 W HANOVER AV","ultra_block":"249","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"47289443-9a2f-e811-8122-1458d04ece60","Name":"MORRIS VIEW I"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b22e7521-162f-e811-8126-1458d04eb810","Name":"MORRIS TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"cdb7cae7-c5ef-eb11-bacb-001dd801ccff","Name":"Slade"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"00adafd8-b42f-e811-8122-1458d04ece60","Name":"COUNTY OF MORRIS BLDG & GROUNDS DEPT"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9dbdfeda-d72f-e811-8122-1458d04ece60","ultra_name":"MORRIS VIEW II","ultra_registrationnumber":"1422-00116-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"540 W HANOVER AV","ultra_block":"249","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"47289443-9a2f-e811-8122-1458d04ece60","Name":"MORRIS VIEW I"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b22e7521-162f-e811-8126-1458d04eb810","Name":"MORRIS TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"822f8dc5-d612-e911-812d-1458d04e2c70","Name":"Cesco Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"00adafd8-b42f-e811-8122-1458d04ece60","Name":"COUNTY OF MORRIS BLDG & GROUNDS DEPT"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a1bdfeda-d72f-e811-8122-1458d04ece60","ultra_name":"MORRIS VIEW NURSING HOME","ultra_registrationnumber":"1422-00116-004","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"540 W HANOVER AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"47289443-9a2f-e811-8122-1458d04ece60","Name":"MORRIS VIEW I"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b22e7521-162f-e811-8126-1458d04eb810","Name":"MORRIS TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"ed635f03-898b-e811-810d-1458d04e0ca0","Name":"Cesco"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"00adafd8-b42f-e811-8122-1458d04ece60","Name":"COUNTY OF MORRIS BLDG & GROUNDS DEPT"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7b7491f8-c496-4f2d-9474-307e93588552","ultra_name":"YWCA OF TRENTON","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"140 E HANOVER ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"5dcb3ed4-d498-46d2-ab8a-a1d90110d33e","Name":"YWCA OF TRENTON"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"086080000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

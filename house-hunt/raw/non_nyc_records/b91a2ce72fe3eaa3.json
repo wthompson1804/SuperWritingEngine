@@ -1,0 +1,33 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"8a3c1abd-d72f-e811-8122-1458d04ece60","ultra_name":"RIVERWATCH COMMONS","ultra_registrationnumber":"1214-00212-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 HIRAM SQ","ultra_block":"3","ultra_lot":"35.01","ultra_propertyinterest":{
+        "Id":"a7bb3e2d-9a2f-e811-8122-1458d04ece60","Name":"RIVERWATCH COMMONS"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9697afd8-b42f-e811-8122-1458d04ece60","Name":"RIVERWATCH COMMONS L.P."
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3667dbc3-26c5-41be-bdb5-21dd7571f807","ultra_name":"RIVERWATCH COMMONS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214010896001","ultra_addressline1":"100 HIRAM SQ","ultra_block":"3","ultra_lot":"35.01","ultra_propertyinterest":{
+        "Id":"0da27fc7-3de1-4176-8d56-fb6b034c6eed","Name":"RIVERWATCH COMMONS"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"RIVERWATCH COMMONS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"95a27de3-2eea-ef11-be20-001dd80ad181","Name":"MC RIVERWATCH NB, LLC / MACK-CALI"
+      },"ultra_zipcode":"08901","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

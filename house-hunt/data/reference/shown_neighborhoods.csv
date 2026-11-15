@@ -1,0 +1,86 @@
+id,name,area,state,shown
+ct:bridgeport,Bridgeport,Greater Bridgeport Planning Region,CT,1
+ct:danbury,Danbury,Western Connecticut Planning Region,CT,2
+ct:milford-city-balance-,Milford city (balance),South Central Connecticut Planning Region,CT,3
+ct:norwalk,Norwalk,Western Connecticut Planning Region,CT,3
+ct:stamford,Stamford,Western Connecticut Planning Region,CT,10
+ct:trumbull,Trumbull,Greater Bridgeport Planning Region,CT,2
+ct:westport,Westport,Western Connecticut Planning Region,CT,2
+nj:atlantic-highlands,Atlantic Highlands,Monmouth County,NJ,1
+nj:bayonne,Bayonne,Hudson County,NJ,3
+nj:belleville,Belleville,Essex County,NJ,2
+nj:bloomfield,Bloomfield,Essex County,NJ,3
+nj:bogota,Bogota,Bergen County,NJ,2
+nj:bordentown,Bordentown,Burlington County,NJ,1
+nj:carteret,Carteret,Middlesex County,NJ,2
+nj:city-of-orange,City of Orange,Essex County,NJ,3
+nj:clifton,Clifton,Passaic County,NJ,1
+nj:dover,Dover,Morris County,NJ,2
+nj:east-orange,East Orange,Essex County,NJ,4
+nj:edgewater,Edgewater,Bergen County,NJ,1
+nj:englewood,Englewood,Bergen County,NJ,1
+nj:hackensack,Hackensack,Bergen County,NJ,9
+nj:harrison,Harrison,Hudson County,NJ,7
+nj:hawthorne,Hawthorne,Passaic County,NJ,1
+nj:jersey-city,Jersey City,Hudson County,NJ,10
+nj:montclair,Montclair,Essex County,NJ,2
+nj:montvale,Montvale,Bergen County,NJ,1
+nj:morris-plains,Morris Plains,Morris County,NJ,1
+nj:mount-arlington,Mount Arlington,Morris County,NJ,2
+nj:new-brunswick,New Brunswick,Middlesex County,NJ,4
+nj:newark,Newark,Essex County,NJ,9
+nj:north-bergen,North Bergen,Hudson County,NJ,2
+nj:parsippany-troy-hills,Parsippany-Troy Hills,Morris County,NJ,4
+nj:plainfield,Plainfield,Union County,NJ,1
+nj:rahway,Rahway,Union County,NJ,2
+nj:riverdale,Riverdale,Morris County,NJ,2
+nj:teaneck,Teaneck,Bergen County,NJ,1
+nj:west-new-york,West New York,Hudson County,NJ,1
+ny:astoria-central-,Astoria (Central),Queens,NY,0
+ny:astoria-east-woodside-north-,Astoria (East)-Woodside (North),Queens,NY,1
+ny:bedford-stuyvesant-east-,Bedford-Stuyvesant (East),Brooklyn,NY,2
+ny:bedford-stuyvesant-west-,Bedford-Stuyvesant (West),Brooklyn,NY,0
+ny:brighton-beach,Brighton Beach,Brooklyn,NY,2
+ny:east-flatbush-erasmus,East Flatbush-Erasmus,Brooklyn,NY,4
+ny:east-flatbush-farragut,East Flatbush-Farragut,Brooklyn,NY,3
+ny:east-new-york-north-,East New York (North),Brooklyn,NY,0
+ny:elmhurst,Elmhurst,Queens,NY,3
+ny:flatbush,Flatbush,Brooklyn,NY,1
+ny:flatlands,Flatlands,Brooklyn,NY,2
+ny:flushing-willets-point,Flushing-Willets Point,Queens,NY,4
+ny:forest-hills,Forest Hills,Queens,NY,2
+ny:hamilton-heights-sugar-hill,Hamilton Heights-Sugar Hill,Manhattan,NY,0
+ny:harlem-north-,Harlem (North),Manhattan,NY,0
+ny:haverstraw,Haverstraw,Rockland County,NY,4
+ny:hempstead,Hempstead,Nassau County,NY,3
+ny:inwood,Inwood,Manhattan,NY,0
+ny:jamaica,Jamaica,Queens,NY,6
+ny:jamaica-estates-holliswood,Jamaica Estates-Holliswood,Queens,NY,1
+ny:jamaica-hills-briarwood,Jamaica Hills-Briarwood,Queens,NY,4
+ny:kew-gardens,Kew Gardens,Queens,NY,2
+ny:kingsbridge-heights-van-cortlandt-village,Kingsbridge Heights-Van Cortlandt Village,Bronx,NY,0
+ny:lagrange,LaGrange,Dutchess County,NY,1
+ny:larchmont,Larchmont,Westchester County,NY,1
+ny:madison,Madison,Brooklyn,NY,1
+ny:middle-village,Middle Village,Queens,NY,1
+ny:middletown,Middletown,Orange County,NY,2
+ny:mineola,Mineola,Nassau County,NY,1
+ny:mount-vernon,Mount Vernon,Westchester County,NY,2
+ny:murray-hill-broadway-flushing,Murray Hill-Broadway Flushing,Queens,NY,1
+ny:new-paltz,New Paltz,Ulster County,NY,2
+ny:new-rochelle,New Rochelle,Westchester County,NY,10
+ny:north-corona,North Corona,Queens,NY,1
+ny:old-astoria-hallets-point,Old Astoria-Hallets Point,Queens,NY,4
+ny:peekskill,Peekskill,Westchester County,NY,2
+ny:pelham-bay-country-club-city-island,Pelham Bay-Country Club-City Island,Bronx,NY,1
+ny:port-chester,Port Chester,Westchester County,NY,2
+ny:prospect-lefferts-gardens-wingate,Prospect Lefferts Gardens-Wingate,Brooklyn,NY,3
+ny:rego-park,Rego Park,Queens,NY,1
+ny:sheepshead-bay-manhattan-beach-gerritsen-beach,Sheepshead Bay-Manhattan Beach-Gerritsen Beach,Brooklyn,NY,1
+ny:sunnyside,Sunnyside,Queens,NY,1
+ny:upper-east-side-lenox-hill-roosevelt-island,Upper East Side-Lenox Hill-Roosevelt Island,Manhattan,NY,1
+ny:valley-stream,Valley Stream,Nassau County,NY,1
+ny:washington-heights-north-,Washington Heights (North),Manhattan,NY,0
+ny:white-plains,White Plains,Westchester County,NY,6
+ny:williamsbridge-olinville,Williamsbridge-Olinville,Bronx,NY,0
+ny:yonkers,Yonkers,Westchester County,NY,9

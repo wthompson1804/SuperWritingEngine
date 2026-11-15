@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=132+Yale+Ave%2C+Jersey+City%2C+NJ+07304&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:08+00:00",
+ "status": 200,
+ "path": "raw/independent_check/84ca07e80696eca2.json",
+ "source": "independent_check"
+}

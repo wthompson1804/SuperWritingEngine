@@ -1,0 +1,33 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"55a6feda-d72f-e811-8122-1458d04ece60","ultra_name":"FAIRWAY BLDG #3","ultra_registrationnumber":"1217-00221-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1636 STELTON RD","ultra_block":"9001","ultra_lot":"44.14","ultra_propertyinterest":{
+        "Id":"abbe3e2d-9a2f-e811-8122-1458d04ece60","Name":"FAIRWAY BLDG #3"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"0c2e7521-162f-e811-8126-1458d04eb810","Name":"PISCATAWAY TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4a9aafd8-b42f-e811-8122-1458d04ece60","Name":"FAIRWAY COMMERCIAL SOUTH LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2941b19f-81a7-4815-8bc8-2f6647c87644","ultra_name":"FAIRWAY BUILDING 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1217025162003","ultra_addressline1":"1636 STELTON RD","ultra_block":"9001","ultra_lot":"44.14","ultra_propertyinterest":{
+        "Id":"42b069b0-177f-42a2-9f2d-198f2d1fe073","Name":"FAIRWAY BUILDING 1"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"0c2e7521-162f-e811-8126-1458d04eb810","Name":"PISCATAWAY TWP"
+      },"ultra_propertyportalsearchfield":"FAIRWAY BUILDING 1","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"40a0f4b2-bb9c-4296-bfb1-92fd3bec6fc1","Name":"FAIRWAY COMMERICAL NORTH LLC"
+      },"ultra_zipcode":"08854","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"2471c350-c3de-e911-a987-001dd800ba25","ultra_name":"134 BALDWIN APARTMENT BUILD","ultra_registrationnumber":"0906-01080-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"134 BALDWIN AVE","ultra_block":"12302","ultra_lot":"2.01","ultra_propertyinterest":{
+        "Id":"0171c350-c3de-e911-a987-001dd800ba25","Name":"134 BALDWIN APARTMENT BUILD"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"134 BALDWIN APARTMENT BUILD","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":{
+        "Id":"1e71c350-c3de-e911-a987-001dd800ba25","Name":"OTIS"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0c71c350-c3de-e911-a987-001dd800ba25","Name":"TOVASTE BALDWIN LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ce49a82f-0b55-eb11-a812-001dd8018943","ultra_name":"134 BALDWIN AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043099001","ultra_addressline1":"134 BALDWIN AVE","ultra_block":"12302","ultra_lot":"2.01","ultra_propertyinterest":{
+        "Id":"719aad29-0b55-eb11-a812-001dd8018943","Name":"134 BALDWIN AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"134 BALDWIN AVE","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5e9aad29-0b55-eb11-a812-001dd8018943","Name":"TOVASTE BALDWIN LLC"
+      },"ultra_zipcode":"07306","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

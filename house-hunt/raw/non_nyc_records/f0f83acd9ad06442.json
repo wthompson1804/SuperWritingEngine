@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"a2166b33-f8f1-ea11-a813-001dd8018943","ultra_name":"100 WATER","ultra_registrationnumber":"0906-01105-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"132 YALE STREET","ultra_block":"20703","ultra_lot":"2.01","ultra_propertyinterest":{
+        "Id":"ce116527-f8f1-ea11-a813-001dd8018943","Name":"100 WATER"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"100 WATER","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":{
+        "Id":"70166b33-f8f1-ea11-a813-001dd8018943","Name":"KONE"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3ebb5f2d-f8f1-ea11-a813-001dd8018943","Name":"ROB GIANNONE"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bcb3c6a1-bc38-eb11-a813-001dd8016c9d","ultra_name":"THE AGNES","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043096001","ultra_addressline1":"132 YALE AVE","ultra_block":"20703","ultra_lot":"2.01","ultra_propertyinterest":{
+        "Id":"543bc79b-bc38-eb11-a813-001dd8016c9d","Name":"THE AGNES"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"THE AGNES","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"213bc79b-bc38-eb11-a813-001dd8016c9d","Name":"100 WATER STREET DEVELOPMENT LLC"
+      },"ultra_zipcode":"07304","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

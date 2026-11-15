@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1+Saint+Marys+Convent%2C+Peekskill%2C+NY+10566&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:00+00:00",
+ "status": 200,
+ "path": "raw/independent_check/4f053974dd4acfae.json",
+ "source": "independent_check"
+}

@@ -1,0 +1,344 @@
+{
+ "amityville": {
+  "/ny/amityville/avalon-amityville": 3040,
+  "/ny/amityville/91-ireland-place": 4000,
+  "/ny/amityville/13-robert-court-street": 2800,
+  "/ny/amityville/132-merrick-road": 2450
+ },
+ "copiague": {
+  "/ny/copiague/77-east-santa-barbara-rd": 2800,
+  "/ny/copiague/105-hawkins-boulevard": 2450,
+  "/ny/copiague/11-doges-promenade": 3000,
+  "/ny/copiague/33-nicole-court": 3700,
+  "/ny/copiague/840-montauk-highway--2": 2410
+ },
+ "lindenhurst": {
+  "/ny/lindenhurst/240-kramer-drive": 2800,
+  "/ny/lindenhurst/445-s-wellwood-avenue": 2600,
+  "/ny/lindenhurst/361-s-1st-street": 3500,
+  "/ny/lindenhurst/349-n-4th-street": 4500,
+  "/ny/lindenhurst/305-nevada-street": 3500,
+  "/ny/lindenhurst/276-s-8th-street": 2500,
+  "/ny/lindenhurst/222-centre-avenue": 2800
+ },
+ "babylon": {
+  "/ny/babylon/33-deer-park-avenue--3": 2200,
+  "/ny/babylon/1-park-avenue": 3200,
+  "/ny/babylon/50-the-crescent--1": 2100,
+  "/ny/babylon/10-colt-avenue": 3000,
+  "/ny/babylon/93-deer-park-avenue--1": 2200,
+  "/ny/babylon/26-frederick-avenue": 2000
+ },
+ "west-babylon": {
+  "/ny/west-babylon/568-centerwood-street--1": 2650,
+  "/ny/west-babylon/904-11th-street": 4150,
+  "/ny/west-babylon/94-sheffield-avenue": 2350,
+  "/ny/west-babylon/7-angelica-court": 1600,
+  "/ny/west-babylon/301-flurry-lane": 3000,
+  "/ny/west-babylon/1569-4th-street": 2000,
+  "/ny/west-babylon/4-cumberbach-street": 3500
+ },
+ "north-babylon": {
+  "/ny/north-babylon/12-chapel-place": 2150,
+  "/ny/north-babylon/532-french-avenue": 4500,
+  "/ny/north-babylon/50-pacific-street": 2600,
+  "/ny/north-babylon/848-sunrise-highway": null
+ },
+ "wyandanch": {
+  "/ny/wyandanch/7-patton-avenue": 2950,
+  "/ny/wyandanch/310-state-avenue": 2600,
+  "/ny/wyandanch/211-parkway-boulevard": 2200
+ },
+ "deer-park": {
+  "/ny/deer-park/4-bedroom-home-with-pool-and-expansive-deck-4-westwood-avenue-deer-park-ny": 4200,
+  "/ny/deer-park/1806-deer-park-avenue": 3000,
+  "/ny/deer-park/53-n-1st": 3800,
+  "/ny/deer-park/79-w-16th": 5650,
+  "/ny/deer-park/90-e-7th-street--1": 2500
+ },
+ "huntington": {
+  "/ny/huntington/140-wall-street--2": 1950,
+  "/ny/huntington/50-2f-stewart-avenue": 4600,
+  "/ny/huntington/297-nassau-road": 2800,
+  "/ny/huntington/57-spring-road": 4500,
+  "/ny/huntington/51-gibson-ave": 3800,
+  "/ny/huntington/362-new-york-avenue--1": 1950,
+  "/ny/huntington/23-cranbrook-court": 4800,
+  "/ny/huntington/28-w-neck-road--1": 2795,
+  "/ny/huntington/417-new-york-avenue--4": 3250,
+  "/ny/huntington/302-a-main-street": 3900,
+  "/ny/huntington/276-main-street": 3300,
+  "/ny/huntington/99-wall-street--1": 4200,
+  "/ny/huntington/25-knollwood-avenue": 2550,
+  "/ny/huntington/13-woodland-lane": 3800
+ },
+ "huntington-station": {
+  "/ny/huntington-station/avalon-huntington-station": 3930,
+  "/ny/huntington-station/164-w-19th-st--1": 4800,
+  "/ny/huntington-station/1046-new-york-avenue--1": 3150,
+  "/ny/huntington-station/13-cedarwood-drive": 2300,
+  "/ny/huntington-station/6-raphael-street": 5500,
+  "/ny/huntington-station/187-e-11th-street": 2850,
+  "/ny/huntington-station/91-north-street": 3500
+ },
+ "melville": {
+  "/ny/melville/avalon-melville": 3180,
+  "/ny/melville/54-vermont": 2400,
+  "/ny/melville/long-island-melville": null,
+  "/ny/melville/124-brattle-circle": 5500,
+  "/ny/melville/822-portofino-place": 3650
+ },
+ "bay-shore": {
+  "/ny/bay-shore/shoregate": 2661,
+  "/ny/bay-shore/20-22-bay-shore-avenue": 4000,
+  "/ny/bay-shore/117-s-clinton-ave": 1500,
+  "/ny/bay-shore/114-s-clinton-avenue": 2700,
+  "/ny/bay-shore/52-maple-avenue": 3300,
+  "/ny/bay-shore/39-chapman-place--1": 2800,
+  "/ny/bay-shore/136-north-clinton-avenue-2": 3500,
+  "/ny/bay-shore/45-montgomery-avenue": 3500,
+  "/ny/bay-shore/149-newbrook-lane": 2800,
+  "/ny/bay-shore/12-garden-street": 3300,
+  "/ny/bay-shore/23-2b-june-court": 1900,
+  "/ny/bay-shore/45-pinebrook-place": 2225,
+  "/ny/bay-shore/26-2nd-avenue": 2875
+ },
+ "islip": {
+  "/ny/islip/90-finch-lane": 3000,
+  "/ny/islip/78-cleveland-street": 3250,
+  "/ny/islip/3-e-walnut-street": 2700,
+  "/ny/islip/16-willow-avenue--1": 3025,
+  "/ny/islip/359-moffitt-boulevard": 3950,
+  "/ny/islip/587-main-st--2": 1020,
+  "/ny/islip/584-main-street": 3000
+ },
+ "central-islip": {
+  "/ny/central-islip/57-adams-rd": 2700,
+  "/ny/central-islip/290-leaf-avenue": 3500,
+  "/ny/central-islip/1334-connetquot-avenue": 3600,
+  "/ny/central-islip/300-carleton-avenue": 3695
+ },
+ "brentwood": {},
+ "sayville": {
+  "/ny/sayville/47-river-street": 4500,
+  "/ny/sayville/80-budenos-drive": 4950,
+  "/ny/sayville/309-sunrise-drive": 5000,
+  "/ny/sayville/31-barbara-court": 1995,
+  "/ny/sayville/15-henry-street": 3800,
+  "/ny/sayville/15-river-road": 4000,
+  "/ny/sayville/18-sterling-place": 5500
+ },
+ "patchogue": {
+  "/ny/patchogue/new-village-at-patchogue--4": 3045,
+  "/ny/patchogue/195-river-avenue": 3500,
+  "/ny/patchogue/renaissance-bay": 2450,
+  "/ny/patchogue/69-n-ocean-avenue": 3000,
+  "/ny/patchogue/16-south-street": 3500,
+  "/ny/patchogue/76-amity-street": 3250
+ },
+ "east-patchogue": {
+  "/ny/east-patchogue/222-s-dunton-avenue": 2400,
+  "/ny/east-patchogue/18-miramar-avenue": 2400,
+  "/ny/east-patchogue/16-roosevelt-boulevard": 6000
+ },
+ "ronkonkoma": {
+  "/ny/ronkonkoma/the-core": 2577,
+  "/ny/ronkonkoma/85-w-5th-street": null,
+  "/ny/ronkonkoma/alston-station-yards": 2838,
+  "/ny/ronkonkoma/2129-julia-goldbach-avenue": 2800,
+  "/ny/ronkonkoma/221-shelter-road": 4500
+ },
+ "hauppauge": {
+  "/ny/hauppauge/carlow-wind-watch": 3974,
+  "/ny/hauppauge/renaissance-hills": 2645,
+  "/ny/hauppauge/271-lilac-lane": 3800,
+  "/ny/hauppauge/11-silver-spruce-way": 5500
+ },
+ "smithtown": {
+  "/ny/smithtown/4-wadsworth-place": 5500,
+  "/ny/smithtown/365-rt-111": 2500
+ },
+ "kings-park": {
+  "/ny/kings-park/125-w-main-street": 4500,
+  "/ny/kings-park/78-lakebridge-drive-s": 4000,
+  "/ny/kings-park/119-whittier-drive": 5500
+ },
+ "port-jefferson": {
+  "/ny/port-jefferson/the-shipyard-at-port-jefferson-harbor-apartments": 4238,
+  "/ny/port-jefferson/415-myrtle-avenue": 2400
+ },
+ "port-jefferson-station": {
+  "/ny/port-jefferson-station/74-clifton-place": 3200,
+  "/ny/port-jefferson-station/24-jarvin": 3500,
+  "/ny/port-jefferson-station/3-crown-street": 2400
+ },
+ "coram": {
+  "/ny/coram/the-point-at-pine-ridge": 2675,
+  "/ny/coram/11-barclay-drive": 2050,
+  "/ny/coram/49-fargo-court": 2100,
+  "/ny/coram/18-sharon-drive": 5000,
+  "/ny/coram/58-coram-swezeytown-road": 4200,
+  "/ny/coram/11-halliday-rd": 2700,
+  "/ny/coram/25-willow-drive": 4300,
+  "/ny/coram/3-embassy-road": 5999,
+  "/ny/coram/27-stuart-drive": 2000
+ },
+ "bohemia": {
+  "/ny/bohemia/4-brooktree-court": 2500
+ },
+ "holbrook": {
+  "/ny/holbrook/29-laurel-street": 3300,
+  "/ny/holbrook/448-terry-boulevard": 3600,
+  "/ny/holbrook/124-fairfield-drive": 3950,
+  "/ny/holbrook/418-erie-st": 1200,
+  "/ny/holbrook/5000-express-dr-s": 3300,
+  "/ny/holbrook/20-bradbury-court": 4400
+ },
+ "riverhead": {
+  "/ny/riverhead/331-e-main": 3500,
+  "/ny/riverhead/2-dolphin-way": 6495,
+  "/ny/riverhead/205-osborn-avenue": 2900,
+  "/ny/riverhead/424-sweezy-avenue": 3200
+ },
+ "commack": {
+  "/ny/commack/31-starlight-drive": 4000,
+  "/ny/commack/76-wintercress-lane": 5750,
+  "/ny/commack/21-sandy-hill-road": 3900,
+  "/ny/commack/47-beacon-lane": 1850,
+  "/ny/commack/11-penguin-lane": 5000,
+  "/ny/commack/6-warbler-lane": 5500,
+  "/ny/commack/28-annandale-road": 7500
+ },
+ "farmingville": {
+  "/ny/farmingville/the-arboretum--1": 3604,
+  "/ny/farmingville/5521-express-drive-north": 1100,
+  "/ny/farmingville/34-college-hills-drive": 4500,
+  "/ny/farmingville/7-mark-lane": 2200
+ },
+ "yaphank": {
+  "/ny/yaphank/the-brio-at-the-boulevard--2": 3125,
+  "/ny/yaphank/the-reserve-at-the-boulevard": 3599,
+  "/ny/yaphank/152-yaphank-avenue": 3100,
+  "/ny/yaphank/3-meadows-lane": 4200
+ },
+ "medford": {
+  "/ny/medford/3-richard-drive": 2200
+ },
+ "selden": {
+  "/ny/selden/37-ruland-road": 5250,
+  "/ny/selden/11-oak-place--1": 3600,
+  "/ny/selden/43-newtown-avenue": 4500,
+  "/ny/selden/12-edna-ln": 2000
+ },
+ "centereach": {
+  "/ny/centereach/48-champlin-street": 2400,
+  "/ny/centereach/97-oneida-avenue": 5450,
+  "/ny/centereach/2-province-dr": 5750,
+  "/ny/centereach/339-avenue-b": 6500,
+  "/ny/centereach/23-dianne-avenue": 2500,
+  "/ny/centereach/20-tulip-hill-lane": 4100
+ },
+ "lake-grove": {
+  "/ny/lake-grove/64-magnolia-avenue": 3000
+ },
+ "stony-brook": {
+  "/ny/stony-brook/63-hastings-drive": 4300,
+  "/ny/stony-brook/7-chestnut-street": 3800,
+  "/ny/stony-brook/1337-stony-brook-road": 6000,
+  "/ny/stony-brook/20-strathmore-gate-drive": 3650,
+  "/ny/stony-brook/81-university-heights-drive": 4800
+ },
+ "northport": {
+  "/ny/northport/48-ocean-avenue": 5000,
+  "/ny/northport/113-stanton-street": 10000,
+  "/ny/northport/23-laurel-avenue": 2100,
+  "/ny/northport/201-woodbine-avenue": 6350,
+  "/ny/northport/210-lewis-road": 5000,
+  "/ny/northport/168-lewis-road": 4800,
+  "/ny/northport/15-garfield-street": 4900
+ },
+ "east-northport": {
+  "/ny/east-northport/215-bellerose-avenue": 2100,
+  "/ny/east-northport/61-norton-drive": 4600,
+  "/ny/east-northport/76-keane-lane": null,
+  "/ny/east-northport/50-grand-place": 3000,
+  "/ny/east-northport/360-larkfield-road": 2400,
+  "/ny/east-northport/45-valley-road": 1750,
+  "/ny/east-northport/25-ripley-drive": 4600,
+  "/ny/east-northport/219-bellerose-avenue": 5100,
+  "/ny/east-northport/49-georgia-street": 4000
+ },
+ "islandia": {
+  "/ny/islandia/502-towne-house-village": 2950
+ },
+ "holtsville": {},
+ "mount-sinai": {
+  "/ny/mount-sinai/246-shore-road": 5900,
+  "/ny/mount-sinai/20-hilltop-avenue": 5000
+ },
+ "middle-island": {
+  "/ny/middle-island/the-villas-at-oak-run": 3725,
+  "/ny/middle-island/98-church-lane": 1650,
+  "/ny/middle-island/289-fairview-circle": 2650,
+  "/ny/middle-island/856-birchwood-park-drive": 3500,
+  "/ny/middle-island/140-artist-lake-drive": 2295,
+  "/ny/middle-island/196-artist-lake-drive": 2250
+ },
+ "oakdale": {},
+ "west-islip": {},
+ "east-islip": {
+  "/ny/east-islip/7-suffolk-lane": 5500,
+  "/ny/east-islip/31-the-moor": 15000
+ },
+ "greenlawn": {
+  "/ny/greenlawn/5-boulevard-avenue": 2700,
+  "/ny/greenlawn/27-stuyvesant": 3400
+ },
+ "dix-hills": {
+  "/ny/dix-hills/1171-carlls-straight-path": 6300,
+  "/ny/dix-hills/24-new-jersey-street": 6800,
+  "/ny/dix-hills/126-bagatelle-road": 5500,
+  "/ny/dix-hills/3-redwood-drive": 8500,
+  "/ny/dix-hills/1158-carlls-straight-path": 2500,
+  "/ny/dix-hills/37-buckingham-drive": 5950,
+  "/ny/dix-hills/1-brothers-court": 4600
+ },
+ "nesconset": {
+  "/ny/nesconset/avalon-commons": 3145,
+  "/ny/nesconset/221-s-lake-avenue": 1825,
+  "/ny/nesconset/65-mayfair-road": 6300,
+  "/ny/nesconset/15-park-avenue": 3500
+ },
+ "st-james": {
+  "/ny/st-james/455-moriches-road": 2700,
+  "/ny/st-james/2-huber-pl": 3700,
+  "/ny/st-james/24-arlington-avenue": 5500
+ },
+ "rocky-point": {
+  "/ny/rocky-point/25-nymph-road": 1700,
+  "/ny/rocky-point/25-wildwood-road": 10000,
+  "/ny/rocky-point/124-prince-road--1": 2300,
+  "/ny/rocky-point/25-polk-street--1": 2300
+ },
+ "miller-place": {},
+ "shirley": {
+  "/ny/shirley/24-peters-drive": 3800,
+  "/ny/shirley/11-thornwood-drive": 3650,
+  "/ny/shirley/364-lockwood-drive": null,
+  "/ny/shirley/126-trafalgar-drive": 4500
+ },
+ "mastic": {
+  "/ny/mastic/14-mastic-boulevard": 3999,
+  "/ny/mastic/20-pitts-avenue": 2850
+ },
+ "center-moriches": {
+  "/ny/center-moriches/12-seaview-lane": 40000,
+  "/ny/center-moriches/96-lake-avenue": 7670,
+  "/ny/center-moriches/64-beachfern-road": 5500
+ },
+ "calverton": {
+  "/ny/calverton/216-hill-rise": 3200,
+  "/ny/calverton/305-edwards-avenue": 3600,
+  "/ny/calverton/16-mastro-court": 7500
+ }
+}

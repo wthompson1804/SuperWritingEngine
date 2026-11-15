@@ -1,0 +1,275 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"19","value":[
+    {
+      "ultra_buildingid":"86f9e4e3-e6ef-4c34-b4a2-dfde54f3ab17","ultra_name":"126-128 3RD AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714023148001","ultra_addressline1":"126-128 3RD AVE","ultra_block":"527","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"2054c9bd-0583-42ef-9515-3f62ea82401c","Name":"126-128 3RD AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"126-128 3RD AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"df84bf33-828d-ef11-ac21-001dd80621a3","Name":"SYR REALTY LLC"
+      },"ultra_zipcode":"07104","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f48f3999-3712-4d86-818e-8be780be182b","ultra_name":"126-128 N 3RD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608014045001","ultra_addressline1":"126-128 N 3RD ST","ultra_block":"202","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"268c2a13-3c37-4c22-b214-44c517295b51","Name":"126-128 N 3RD ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"126-128 N 3RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"be509efd-16d3-49b7-a720-105cba7715ac","Name":"Kohinur Begum"
+      },"ultra_zipcode":"07502","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e7349d1d-6cbe-4628-9479-dd4dfe11d45c","ultra_name":"128 63RD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0912015987001","ultra_addressline1":"128 63RD ST","ultra_block":"25","ultra_lot":"36","ultra_propertyinterest":{
+        "Id":"016cab59-bb4c-4194-8592-5db5531816db","Name":"128 63RD ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":"128 63RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b79c0f7e-6842-41dd-8c5b-c0aab878e8cd","Name":"JOSE G ARGUETA"
+      },"ultra_zipcode":"07093","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"71fb66d9-087d-4cde-b268-40048f517eba","ultra_name":"128 W 23RD Street BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901042748001","ultra_addressline1":"128 W 23RD ST","ultra_block":"201","ultra_lot":"39","ultra_propertyinterest":{
+        "Id":"bd1b2487-89cc-4383-b810-da4656b316a9","Name":"128 W 23RD Street"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"128 W 23RD Street","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"34ad754d-22bd-4a96-8097-abbf4006ab3f","Name":"ROBERT TREGLIA"
+      },"ultra_zipcode":"07733","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"880528a1-eac4-4065-bfa1-3f342a4bd17c","ultra_name":"228 3RD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714033845001","ultra_addressline1":"228 3RD ST","ultra_block":"1914","ultra_lot":"44","ultra_propertyinterest":{
+        "Id":"bfb45c3e-da99-4269-ab04-050ef418d70c","Name":"228 3RD ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"228 3RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4d7ea9b4-83b6-f111-aaac-001dd8088f8f","Name":"OSSCAR PITA"
+      },"ultra_zipcode":"07107","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e6ee4393-d72f-e811-8122-1458d04ece60","ultra_name":"228 43RD ST","ultra_registrationnumber":"0509-00136-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"228 43RD ST","ultra_block":"43.04","ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"3a7ad6c6-9f2f-e811-8120-1458d04e2fb8","Name":"228 43RD ST"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"fc2c7521-162f-e811-8126-1458d04eb810","Name":"SEA ISLE CITY"
+      },"ultra_propertyportalsearchfield":"228 43RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"0bfa0928-1739-e811-81fa-1458d04e1b18","Name":"South Jersey Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"64223dc7-b42f-e811-8122-1458d04ece60","Name":"228 43rd St Condo Assoc, Inc"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9b845936-3af4-4dbd-9818-7435e14d6830","ultra_name":"228 43RD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0509014482001","ultra_addressline1":"228 43RD ST","ultra_block":"43.04","ultra_lot":"17.02","ultra_propertyinterest":{
+        "Id":"2e55a294-3da6-428f-ba15-a262a83a7968","Name":"228 43RD ST"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"fc2c7521-162f-e811-8126-1458d04eb810","Name":"SEA ISLE CITY"
+      },"ultra_propertyportalsearchfield":"228 43RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"dc292124-8224-4d54-b73c-cb5c6775f622","Name":"228 43rd Street Condominium"
+      },"ultra_zipcode":"08243","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7aa42c1f-f0b9-44f7-8a07-7c78a3005430","ultra_name":"228 73RD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0908013714001","ultra_addressline1":"228 73RD ST","ultra_block":"294","ultra_lot":"32","ultra_propertyinterest":{
+        "Id":"c820d908-586f-4fc0-8161-c45833624907","Name":"228 73RD ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"922d7521-162f-e811-8126-1458d04eb810","Name":"NORTH BERGEN TWP"
+      },"ultra_propertyportalsearchfield":"228 73RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6f66c548-4945-f011-877a-001dd8084fd9","Name":"228 73RD STREET LLC"
+      },"ultra_zipcode":"07047","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7d9657b7-354e-445a-a27b-408a50d920b0","ultra_name":"28 E 33RD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901032817001","ultra_addressline1":"28 E 33RD ST","ultra_block":"146","ultra_lot":"33","ultra_propertyinterest":{
+        "Id":"b26e436a-64b6-4a58-b68b-5f6b5e0ca476","Name":"28 E 33RD ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"28 E 33RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e6340d7c-158d-f111-ab10-001dd80bcf22","Name":"SAMEH MERHOM"
+      },"ultra_zipcode":"07002","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7101feae-97e1-4884-b543-08500548d3d8","ultra_name":"28 N 3RD ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"28 N 3RD ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"bf42403f-0122-4347-a9c5-fadf7e01bce4","Name":"28 N 3RD ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"000000000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"22a3b531-0e40-42da-b022-451dfc7c041f","ultra_name":"28 W 53RD","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901042726001","ultra_addressline1":"28 W 53RD ST","ultra_block":"40","ultra_lot":"33","ultra_propertyinterest":{
+        "Id":"039e9f32-d924-4895-be51-7e53e3ac2a75","Name":"28 W 53RD"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"28 W 53RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e59584f0-4582-4a38-b29e-94fed8369bdc","Name":"MARY CAREY"
+      },"ultra_zipcode":"07002","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"efd449c1-3948-4189-a755-37cc10a9a4a0","ultra_name":"424-428 EAST 33RD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608027222001","ultra_addressline1":"424-428 E 33RD ST","ultra_block":"8704","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"21049a26-c2d7-442b-bc56-38aeddbd150e","Name":"424-428 EAST 33RD ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"424-428 EAST 33RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bfe53290-b778-4e3d-8bf9-7181a7ac2714","Name":"RAMON A JOAQUIN"
+      },"ultra_zipcode":"07504","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f857fdce-ff50-4480-997a-82445141f4bf","ultra_name":"426-428 3RD AVE W BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714028848001","ultra_addressline1":"426-428 W 3RD AVE","ultra_block":"1945","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"4d9533b3-4062-46c8-92e4-ae09c42157ce","Name":"426-428 3RD AVE W"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"426-428 3RD AVE W","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6ee028b3-2617-f111-8407-001dd80a67ab","Name":"ANGEL SUMBA ZHANGALLIMBAY"
+      },"ultra_zipcode":"07107","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8d7335bd-9b81-480d-bfdf-2d911bd59192","ultra_name":"528 43RD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0910012095001","ultra_addressline1":"528 43RD ST","ultra_block":"249","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"725685a7-a976-4a78-99ee-63b43de46c8e","Name":"528 43RD ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"528 43RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c12c405f-fa8b-4b5a-9bbd-f8fdf07f763e","Name":"JOSE PEREZ"
+      },"ultra_zipcode":"07087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"43640fd0-f7b6-45d4-bc45-aa195b771d07","ultra_name":"626-28 N 3RD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0610005884001","ultra_addressline1":"626-28 N 3RD ST","ultra_block":"293","ultra_lot":"24","ultra_propertyinterest":{
+        "Id":"86c2bee8-2bc8-46fe-abf9-bfc8ae861e70","Name":"626-28 N 3RD ST"
+      },"ultra_county":{
+        "Id":"fcf3aaf2-63e4-e711-8125-1458d054d020","Name":"CUMBERLAND"
+      },"ultra_municipality":{
+        "Id":"1e2d7521-162f-e811-8126-1458d04eb810","Name":"MILLVILLE CITY"
+      },"ultra_propertyportalsearchfield":"626-28 N 3RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"04cf79d4-54c0-4740-abf2-902731b6c539","Name":"VICTOR & CHERI CECCHIN"
+      },"ultra_zipcode":"08332","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5591b210-63be-45e4-bbdf-6abd30244b4a","ultra_name":"726-728 E 23RD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608002941001","ultra_addressline1":"726-728 E 23RD ST","ultra_block":"3819","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"f5c1396e-114e-4db1-aa8a-106498070186","Name":"726-728 E 23RD ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"726-728 E 23RD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"44bd4e21-5efc-ec11-bb3b-001dd803410f","Name":"DARWISH NOOR"
+      },"ultra_zipcode":"07504","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"56cbbd9e-493f-450a-b194-3920c20f697f","ultra_name":"BLDG 13","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901017663013","ultra_addressline1":"28 W 23RD ST","ultra_block":"202","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"c84b7de5-baa9-46d5-8bb1-962addc49767","Name":"MANSARD APARTMENTS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"MANSARD APARTMENTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1f5a550d-704f-4374-9c74-cabb25aa84e4","Name":"MANSARD GARDENS ASSN LLC"
+      },"ultra_zipcode":"07002","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e8483c99-d72f-e811-8122-1458d04ece60","ultra_name":"GASLIGHT COMMONS","ultra_registrationnumber":"0719-00130-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"28 W 3RD ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"c88ed6c6-9f2f-e811-8120-1458d04e2fb8","Name":"GASLIGHT COMMONS"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"4c2d7521-162f-e811-8126-1458d04eb810","Name":"SOUTH ORANGE VILLAGE"
+      },"ultra_propertyportalsearchfield":"GASLIGHT COMMONS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"e6f35a6d-d27b-e811-8106-1458d04e0ca0","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5a353dc7-b42f-e811-8122-1458d04ece60","Name":"GASLIGHT COMMONS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d557284d-e013-4235-9229-1a81caab0c29","ultra_name":"NO-JURI-1-FAM","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"628 3RD ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"d41667a3-b50b-42fc-8f51-81e747be1e60","Name":"NO-JURI-1-FAM"
+      },"ultra_county":{
+        "Id":"1cf4aaf2-63e4-e711-8125-1458d054d020","Name":"WARREN"
+      },"ultra_municipality":{
+        "Id":"de2f7521-162f-e811-8126-1458d04eb810","Name":"BELVIDERE TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"078230000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,371 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"26","value":[
+    {
+      "ultra_buildingid":"22d91c17-e31b-f111-8343-001dd80c0373","ultra_name":"10-11 Lazarus Dr","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1316029025179","ultra_addressline1":"10-11 Lazarus Dr","ultra_block":"42.12","ultra_lot":"10-11","ultra_propertyinterest":{
+        "Id":"3aa6000b-1eb0-f011-bbd3-001dd80a623a","Name":"Poet's Corner"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"3c2e7521-162f-e811-8126-1458d04eb810","Name":"FREEHOLD TWP"
+      },"ultra_propertyportalsearchfield":"Poet's Corner","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"FREEHOLD TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6cf40505-1eb0-f011-bbd3-001dd80a623a","Name":"POETS CORNER HOMEOWNERS ASSN INC"
+      },"ultra_zipcode":"07728","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fdb32771-914e-4e06-a6a7-592ba76dda35","ultra_name":"11 CLUB HOUSE RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0329006575001","ultra_addressline1":"11 CLUB HOUSE RD","ultra_block":"407","ultra_lot":"101","ultra_propertyinterest":{
+        "Id":"bab43c69-a593-4365-9a2f-ad308ff182bd","Name":"11 CLUB HOUSE RD"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"8a2c7521-162f-e811-8126-1458d04eb810","Name":"PEMBERTON TWP"
+      },"ultra_propertyportalsearchfield":"11 CLUB HOUSE RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5037c732-faf0-45c4-a3d5-40538caecff8","Name":"EDWARD STALKER"
+      },"ultra_zipcode":"00000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a3499620-12e4-4625-9330-6fd384585b4b","ultra_name":"11 Pine Cluster Circle","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1326000311011","ultra_addressline1":"11 PINE CLUSTER CIR","ultra_block":"417","ultra_lot":"11.01","ultra_propertyinterest":{
+        "Id":"a7245000-c283-4007-9975-6687a3ebe224","Name":"COVERED BRIDGE CONDOS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"502e7521-162f-e811-8126-1458d04eb810","Name":"MANALAPAN TWP"
+      },"ultra_propertyportalsearchfield":"COVERED BRIDGE CONDOS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ea833489-4bf3-4ad1-9358-6e187cd7c480","Name":"COVERED BRIDGE CONDO ASSN, INC"
+      },"ultra_zipcode":"07726","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ab42354e-b395-f111-ab0f-001dd80a67ab","ultra_name":"1-11 CLUBHOUSE RD.","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1911040741010","ultra_addressline1":"1-11 CLUBHOUSE RD.","ultra_block":"16.20","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"744a4026-b395-f111-ab0f-001dd8084fd9","Name":"THE HILLS AT CRYSTAL SPRINGS"
+      },"ultra_county":{
+        "Id":"18f4aaf2-63e4-e711-8125-1458d054d020","Name":"SUSSEX"
+      },"ultra_municipality":{
+        "Id":"942f7521-162f-e811-8126-1458d04eb810","Name":"HARDYSTON TWP"
+      },"ultra_propertyportalsearchfield":"THE HILLS AT CRYSTAL SPRINGS","ultra_countyportalsearchfield":"SUSSEX","ultra_municipalityportalsearchfield":"HARDYSTON TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"94494026-b395-f111-ab0f-001dd8084fd9","Name":"THE HILLS AT CRYSTAL SPRINGS"
+      },"ultra_zipcode":"07419","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e78aac50-cf1f-4b78-923b-e1f36bb0d57d","ultra_name":"111 COLUMBUS PL BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2015025307001","ultra_addressline1":"111 COLUMBUS PL","ultra_block":"311","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"c00096f3-1674-4922-8eaf-cfe465a550ce","Name":"111 COLUMBUS PL"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"cc2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE PARK BORO"
+      },"ultra_propertyportalsearchfield":"111 COLUMBUS PL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bcd1d08b-3158-ec11-8f8e-001dd802354f","Name":"111 COLUMBUS LLC"
+      },"ultra_zipcode":"07204","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"49961d7e-0069-487e-9404-89eb5be71509","ultra_name":"111 HAUXHAUST AV BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0911002639001","ultra_addressline1":"111 HAUXHAUST AVE","ultra_block":"38","ultra_lot":"20","ultra_propertyinterest":{
+        "Id":"f4a11b9f-df99-4ff6-9528-d923b5a13423","Name":"111 HAUXHURST AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"111 HAUXHURST AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f6bf5c7a-4ab8-ed11-83fe-001dd807232c","Name":"MANISH DEORUKHKAR"
+      },"ultra_zipcode":"07086","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"83e9b154-6f61-4a45-928d-c240f2b05e47","ultra_name":"111 HOUSTON ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714034350001","ultra_addressline1":"111 HOUSTON ST","ultra_block":"1006","ultra_lot":"72.03","ultra_propertyinterest":{
+        "Id":"cb850c20-249b-4ef4-8df5-205a6ad08e24","Name":"111 HOUSTON ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"111 HOUSTON ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"52380453-a0cf-4d88-b39f-84dbe7e9a167","Name":"JOAQUIM SOARES"
+      },"ultra_zipcode":"07105","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"df816f74-387c-4faf-9fc7-a3a5fe76570c","ultra_name":"111 HUSSA ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2009013195001","ultra_addressline1":"111 HUSSA ST","ultra_block":"197","ultra_lot":"26","ultra_propertyinterest":{
+        "Id":"f6c017d8-d53d-4aad-8380-246101e63ee7","Name":"111 HUSSA ST"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"c02f7521-162f-e811-8126-1458d04eb810","Name":"LINDEN CITY"
+      },"ultra_propertyportalsearchfield":"111 HUSSA ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bb754d44-229a-430e-ba9b-ea64e6870a24","Name":"DANUTA BIERNACKI"
+      },"ultra_zipcode":"07036","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f07a167b-eaef-4898-8da3-42739d307a3a","ultra_name":"111 LOCUST AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0265029211001","ultra_addressline1":"111 LOCUST AVE","ultra_block":"39","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"0b5c9326-03cf-4c9e-b89d-591c9be48939","Name":"111 LOCUST AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"462c7521-162f-e811-8126-1458d04eb810","Name":"WALLINGTON BORO"
+      },"ultra_propertyportalsearchfield":"111 LOCUST AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5a632d4a-101e-4e5d-8a28-143a54c35cb7","Name":"Kristijan Ivcheski"
+      },"ultra_zipcode":"07057","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"508b0949-6577-45bc-b417-c658b6afddc2","ultra_name":"111 SUSSEX ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906022184001","ultra_addressline1":"111 SUSSEX ST","ultra_block":"14401","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"6c715ec7-a568-43d8-95a0-d175344ca6a6","Name":"111 SUSSEX ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"111 SUSSEX ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"01bf3895-395d-4dbf-bb7f-b9683dd1a19c","Name":"OFER OURIEL"
+      },"ultra_zipcode":"07302","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"42550bdd-e935-e911-a963-001dd80081ad","ultra_name":"211 AUGUSTA STREET","ultra_registrationnumber":"1220-00123-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"211 AUGUSTA STREET","ultra_block":"46","ultra_lot":"17.01","ultra_propertyinterest":{
+        "Id":"f8aaecd6-e935-e911-a963-001dd80081ad","Name":"211 AUGUSTA STREET"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"122e7521-162f-e811-8126-1458d04eb810","Name":"SOUTH AMBOY CITY"
+      },"ultra_propertyportalsearchfield":"211 AUGUSTA STREET","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"SOUTH AMBOY CITY","ultra_elsamaintenancecompany":{
+        "Id":"1a464d96-a5f9-e811-8128-1458d04e0ca0","Name":"PL screw Driven"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0babecd6-e935-e911-a963-001dd80081ad","Name":"DAVID STREET PROPERTIES"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"50851c24-8475-435a-b007-119db6365984","ultra_name":"211 E CROCUS RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0515003283001","ultra_addressline1":"211 E CROCUS RD","ultra_block":"21.01","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"df2e69fe-e5fe-49ae-a0b7-b60ee1ddf2e2","Name":"211 E CROCUS RD"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"082d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CREST BORO"
+      },"ultra_propertyportalsearchfield":"211 E CROCUS RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e6439400-0510-4028-bd1e-8e5be9d1cade","Name":"BCBS LLC"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a5c2135b-c114-431e-882d-7b73f21a93fe","ultra_name":"211Augusta St","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1220026405001","ultra_addressline1":"211 Augusta ST","ultra_block":"46","ultra_lot":"17.01","ultra_propertyinterest":{
+        "Id":"f0ce1b73-03fb-4128-b9c0-f594c2c8e0f9","Name":"211 Augusta St"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"122e7521-162f-e811-8126-1458d04eb810","Name":"SOUTH AMBOY CITY"
+      },"ultra_propertyportalsearchfield":"211 Augusta St","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cdcf2e99-e44c-4110-868c-d01377e2206e","Name":"David Street Properties LLC"
+      },"ultra_zipcode":"08879","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"78b5446b-27fd-492d-8c2f-f81d867dab83","ultra_name":"BLDG 65","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1337008478028","ultra_addressline1":"1411 RUSTIC DR","ultra_block":"182","ultra_lot":"72","ultra_propertyinterest":{
+        "Id":"165e75e8-1594-4d09-ab2a-9999cd749ac7","Name":"COLD INDIAN SPRINGS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"662e7521-162f-e811-8126-1458d04eb810","Name":"OCEAN TWP (M)"
+      },"ultra_propertyportalsearchfield":"COLD INDIAN SPRINGS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"BLDG 65","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"95761417-1c01-4ebc-bb45-d2f76df5a371","Name":"COLD INDIAN SPRINGS LLC"
+      },"ultra_zipcode":"07712","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9fbbb580-9c70-45e4-882b-fe93bb85af73","ultra_name":"BLDG KINGHTS ANOR APTS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2015020000001","ultra_addressline1":"111 LOCUST ST","ultra_block":"607","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"ccc99acd-cfcb-4236-b199-3426a6add1eb","Name":"111 LOCUST ST"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"cc2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE PARK BORO"
+      },"ultra_propertyportalsearchfield":"111 LOCUST ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6a9443a6-0222-f011-998a-001dd80bcb64","Name":"LOCUST PROPERTY MANAGEMENT LLC"
+      },"ultra_zipcode":"07204","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"66b721b7-d72f-e811-8122-1458d04ece60","ultra_name":"FAITH BAPTIST CHURCH","ultra_registrationnumber":"1103-00190-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2111 KUSER RD","ultra_block":"2448","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"81b03e2d-9a2f-e811-8122-1458d04ece60","Name":"FAITH BAPTIST CHURCH"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"d42d7521-162f-e811-8126-1458d04eb810","Name":"HAMILTON TWP (M)"
+      },"ultra_propertyportalsearchfield":"FAITH BAPTIST CHURCH","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"65428dfa-9a3e-e811-8123-1458d04ece60","Name":"FAITH BAPTIST CHURCH"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9ef587d1-95d1-48d4-ae5b-b47684b3de30","ultra_name":"GROVES BLDG 1 BLDG 12","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1110023823012","ultra_addressline1":"1-11 BENJAMIN RUSH ","ultra_block":"9705","ultra_lot":"3","ultra_propertyinterest":{
+        "Id":"49c5eb4f-dd08-4146-a9bb-0b7cd0959a74","Name":"GROVES"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"ea2d7521-162f-e811-8126-1458d04eb810","Name":"PRINCETON-CONSOLIDATED"
+      },"ultra_propertyportalsearchfield":"GROVES","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0c12a6ca-a7e6-4ee3-a2d4-dbbb2303fdfd","Name":"WASHINGTON OAKS HOA"
+      },"ultra_zipcode":"08540","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"94a213d6-405c-402d-84ab-aa5cf32f2db8","ultra_name":"MIDDLEBROOK AT MONMOUTH BLDG 7  (18)","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1337008466007","ultra_addressline1":"1511 RUSTIC DR","ultra_block":"182","ultra_lot":"68","ultra_propertyinterest":{
+        "Id":"429891be-055a-42d1-bcce-aa1a4e092f4f","Name":"MIDDLEBROOK AT MONMOUTH"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"662e7521-162f-e811-8126-1458d04eb810","Name":"OCEAN TWP (M)"
+      },"ultra_propertyportalsearchfield":"MIDDLEBROOK AT MONMOUTH","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"66a25f2c-cd52-49d8-b3d9-751c7c8377cb","Name":"MIDDLEBROOK AT MONMOUTH"
+      },"ultra_zipcode":"07712","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6ac78cd7-c4de-4552-8de9-4af5257b9f63","ultra_name":"PANTHER VALLEY CONDOS BLDG 9","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2101027954009","ultra_addressline1":"1-11 RUSHMORE LN","ultra_block":"729","ultra_lot":"45","ultra_propertyinterest":{
+        "Id":"64d74f68-e6cb-4707-8d93-ee374a20c622","Name":"PANTHER VALLEY CONDOS"
+      },"ultra_county":{
+        "Id":"1cf4aaf2-63e4-e711-8125-1458d054d020","Name":"WARREN"
+      },"ultra_municipality":{
+        "Id":"da2f7521-162f-e811-8126-1458d04eb810","Name":"ALLAMUCHY TWP"
+      },"ultra_propertyportalsearchfield":"PANTHER VALLEY CONDOS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"841921b0-ba94-4473-8c0f-29b6bafb3efd","Name":"PANTHER VALLEY PROPERTY OWNERS ASSN "
+      },"ultra_zipcode":"07820","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"518bd028-b1a2-49b8-9908-a7b0bc3dc81c","ultra_name":"ROSSMOOR MUTUAL 4 LEISURE WORLD BLDG 10","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1213006634010","ultra_addressline1":"11 SUSSEX WAY","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"82c1d8ec-c554-4f2c-a68c-8fa9a604fa5c","Name":"ROSSMOOR MUTUAL 4"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"042e7521-162f-e811-8126-1458d04eb810","Name":"MONROE TWP (M)"
+      },"ultra_propertyportalsearchfield":"ROSSMOOR MUTUAL 4","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"ROSSMOOR RETIREMENT COMMUNITY","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5badc845-e8ff-4b78-ba38-c578b2adaf2e","Name":"ROSSMOOR COMMUNITY ASSN INC"
+      },"ultra_zipcode":"08831","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5bdf3677-b473-4be8-adcb-f44e6fae5607","ultra_name":"STRICKLAND FARM CONDO BLDG 28","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1316023604028","ultra_addressline1":"2801-2811 ICE HOUSE CT","ultra_block":"83","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"5867d49e-2feb-4b50-a5ea-a36c16f21bad","Name":"STRICKLAND FARM CONDO"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"3c2e7521-162f-e811-8126-1458d04eb810","Name":"FREEHOLD TWP"
+      },"ultra_propertyportalsearchfield":"STRICKLAND FARM CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"702b9796-bd46-4b6b-b655-698c89cb9183","Name":"STRICKLAND FARM CONDO ASSN"
+      },"ultra_zipcode":"07728","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bc2e1161-6d49-477e-8555-5fe334e08208","ultra_name":"STRICKLAND FARM CONDO BLDG 29","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1316023604029","ultra_addressline1":"2901-2911 SMOKE HOUSE CT","ultra_block":"81","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"5867d49e-2feb-4b50-a5ea-a36c16f21bad","Name":"STRICKLAND FARM CONDO"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"3c2e7521-162f-e811-8126-1458d04eb810","Name":"FREEHOLD TWP"
+      },"ultra_propertyportalsearchfield":"STRICKLAND FARM CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"702b9796-bd46-4b6b-b655-698c89cb9183","Name":"STRICKLAND FARM CONDO ASSN"
+      },"ultra_zipcode":"07728","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"19d95575-d72f-e811-8122-1458d04ece60","ultra_name":"TENAFLY HIGH SCHOOL","ultra_registrationnumber":"0261-00113-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"11 COLUMBUS DR","ultra_block":"1210","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"4385e59f-9f2f-e811-8120-1458d04e2fb8","Name":"TENAFLY HIGH SCHOOL"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"3e2c7521-162f-e811-8126-1458d04eb810","Name":"TENAFLY BORO"
+      },"ultra_propertyportalsearchfield":"TENAFLY HIGH SCHOOL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"18cae2ae-b42f-e811-8122-1458d04ece60","Name":"TENAFLY BD OF EDUCATION HIGH SCHOOL M MOORE"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2ccdbf36-191d-4ace-a237-10433dccf3e3","ultra_name":"THE EDGE AT RARITAN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214066723001","ultra_addressline1":"11 S US HWY 1 HWY","ultra_block":"703","ultra_lot":"17.02","ultra_propertyinterest":{
+        "Id":"47177edd-39d5-4c8c-b781-87ee095ea111","Name":"RARITAN HEIGHTS"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"RARITAN HEIGHTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5d4124df-148b-eb11-a812-001dd80181ff","Name":"RARITAN HEIGHTS PHASE III, LLC"
+      },"ultra_zipcode":"08901","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"24cb54df-dbe3-4228-83cf-bb281d26b172","ultra_name":"THE POINTE AT GALLOPING HILL BLDG 31","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019026508031","ultra_addressline1":"511 CLUBHOUSE CT","ultra_block":"3202","ultra_lot":"15.101","ultra_propertyinterest":{
+        "Id":"22044324-36ca-44d8-af77-e0c7517c9b10","Name":"THE POINTE AT GALLOPING HILL"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"THE POINTE AT GALLOPING HILL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"46451b34-67be-473c-95ce-88281b26e866","Name":"THE POINTE AT GALLOPING HILL CONDO ASSN"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a071d27f-b229-4eb8-88ab-d135a0609607","ultra_name":"THE VILLAGES CONDOS BLDG 71","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1319009513071","ultra_addressline1":"111 PILATUS PLATZ ","ultra_block":"5.01","ultra_lot":"143.01","ultra_propertyinterest":{
+        "Id":"2dde6b0b-4682-4534-8a0f-488a4605b551","Name":"THE VILLAGES CONDOS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"422e7521-162f-e811-8126-1458d04eb810","Name":"HOWELL TWP"
+      },"ultra_propertyportalsearchfield":"THE VILLAGES CONDOS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"143.01","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"050cc065-3e2f-4e27-8292-a7b70e65a4b6","Name":"THE VILLAGES ASSN"
+      },"ultra_zipcode":"07731","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"a9f35b96-f6cd-ef11-b8e9-001dd80b7793","ultra_name":"MASON","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1429036957002","ultra_addressline1":"1515 ROUTE 10","ultra_block":"200","ultra_lot":"1.05","ultra_propertyinterest":{
+        "Id":"2f16025d-f6cd-ef11-b8e9-001dd8081e38","Name":"THE DISTRICT AT 1515"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"c02e7521-162f-e811-8126-1458d04eb810","Name":"PARSIPPANY-TROY HILLS TWP"
+      },"ultra_propertyportalsearchfield":"THE DISTRICT AT 1515","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"PARSIPPANY-TROY HILLS TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e015025d-f6cd-ef11-b8e9-001dd8081e38","Name":"DISTRICT AT 1515 URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07054","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f42cbcbc-9681-ef11-a670-001dd80621a3","ultra_name":"MASON - BLDG B","ultra_registrationnumber":"1429-00295-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1515 ROUTE 10","ultra_block":"200","ultra_lot":"1.05","ultra_propertyinterest":{
+        "Id":"4f1228f7-ff7c-ef11-a671-001dd8065479","Name":"THE DISTRICT AT 1515 PARSIPPANY, LLC"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"c02e7521-162f-e811-8126-1458d04eb810","Name":"PARSIPPANY-TROY HILLS TWP"
+      },"ultra_propertyportalsearchfield":"THE DISTRICT AT 1515 PARSIPPANY, LLC","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"PARSIPPANY-TROY HILLS TWP","ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"611228f7-ff7c-ef11-a671-001dd8065479","Name":"THE DISTRICT AT 1515 PARSIPPANY, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

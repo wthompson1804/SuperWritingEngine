@@ -1,0 +1,85 @@
+sitemap: https://www.padmapper.com/sitemap.xml.gz
+
+user-agent: *
+disallow: /api
+disallow: /backlinks
+disallow: /external
+disallow: /padmapper-account
+disallow: /static
+disallow: /*?box=
+disallow: /*&box=
+disallow: /*login.php
+disallow: /buildings/*/cost-calculator
+disallow: /rentals/*/cost-calculator
+
+user-agent: googlebot
+disallow: /api
+disallow: /backlinks
+disallow: /external
+disallow: /padmapper-account
+disallow: /static
+disallow: /*?box=
+disallow: /*&box=
+disallow: /*login.php
+allow: /api/t
+disallow: /buildings/*/cost-calculator
+disallow: /rentals/*/cost-calculator
+
+user-agent: bingbot
+disallow: /api
+disallow: /backlinks
+disallow: /external
+disallow: /padmapper-account
+disallow: /static
+disallow: /*?box=
+disallow: /*&box=
+disallow: /*login.php
+allow: /api/t
+disallow: /buildings/*/cost-calculator
+disallow: /rentals/*/cost-calculator
+
+user-agent: ImagesiftBot
+crawl-delay: 5
+disallow: /api
+
+user-agent: ias-va
+crawl-delay: 5
+disallow: /api
+
+user-agent: BLEXBot
+disallow: /
+
+user-agent: BoardReader
+disallow: /
+
+user-agent: rogerbot
+disallow: /
+
+user-agent: ltx71
+disallow: /
+
+user-agent: ccbot
+disallow: /
+
+user-agent: Yandex
+disallow: /
+
+user-agent: MJ12bot
+disallow: /
+
+user-agent: DataForSeoBot
+disallow: /
+
+user-agent: Neevabot
+disallow: /
+
+User-agent: ia_archiver
+Disallow: /*?*
+
+User-agent: archive.org_bot
+Disallow: /*?*
+
+User-agent: ia_archiver-web.archive.org
+Disallow: /*?*
+
+host: www.padmapper.com

@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1+City+Pl%2C+White+Plains%2C+NY+10601&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:06+00:00",
+ "status": 200,
+ "path": "raw/independent_check/b7b0e565c1dccbc6.json",
+ "source": "independent_check"
+}

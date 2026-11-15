@@ -1,0 +1,247 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"17","value":[
+    {
+      "ultra_buildingid":"d8ca407f-7f7f-48d3-86de-cea4873a36f8","ultra_name":"112 SYLVAN AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714033437001","ultra_addressline1":"112 SYLVAN AVE","ultra_block":"836","ultra_lot":"12.09","ultra_propertyinterest":{
+        "Id":"f3ca8b30-36d9-4dc5-95f8-2c3af9f1d3f8","Name":"112 SYLVAN AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"112 SYLVAN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"54920349-0e7b-4e41-bd1e-e3f131abbd4d","Name":"NELSA PEREZ"
+      },"ultra_zipcode":"07104","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5d273445-1655-441e-a0a5-25d8dfc3046a","ultra_name":"12 MATEN VAN BUREN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1213022894066","ultra_addressline1":"12 MATEN VAN BUREN","ultra_block":"27.3","ultra_lot":"30.35","ultra_propertyinterest":{
+        "Id":"8469ab0a-6f0e-45ce-b863-f6444b27b6ea","Name":"CONCORDIA"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"042e7521-162f-e811-8126-1458d04eb810","Name":"MONROE TWP (M)"
+      },"ultra_propertyportalsearchfield":"CONCORDIA","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"27.04","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2e7ac833-9cc0-4d9e-a496-207b7cfe4944","Name":"CONCORDIA HOMEOWNERS ASSN"
+      },"ultra_zipcode":"08831","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2410dea9-e3b6-4301-a346-7894dd2ab629","ultra_name":"12 VAN REP PEN ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"12 VAN REP PEN ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"e7ca8229-cdfb-44d7-af49-3690987aaa76","Name":"12 VAN REP PEN ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"000000000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f0f8ce01-ddba-ee11-a569-001dd80a8449","ultra_name":"12 VAN RIPER RD","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0236036894001","ultra_addressline1":"12 VAN RIPER RD","ultra_block":"3302","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"224b07f9-dcba-ee11-a569-001dd80a8cf0","Name":"AR LANDMARK MONTVALE, LLC"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"0c2c7521-162f-e811-8126-1458d04eb810","Name":"MONTVALE BORO"
+      },"ultra_propertyportalsearchfield":"AR LANDMARK MONTVALE, LLC","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"MONTVALE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bf3f0af3-dcba-ee11-a569-001dd80a8cf0","Name":"AR LANDMARK MONTVALE, LLC"
+      },"ultra_zipcode":"07645","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6c634f13-80ad-456b-88db-8f7882364a9a","ultra_name":"12 VAN WINKLE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1607007929001","ultra_addressline1":"12 VAN WINKLE AVE","ultra_block":"27","ultra_lot":"4064A","ultra_propertyinterest":{
+        "Id":"dfa4d252-2e68-438d-836c-2cac36ab690e","Name":"12 VAN WINKLE AVE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"242f7521-162f-e811-8126-1458d04eb810","Name":"PASSAIC CITY"
+      },"ultra_propertyportalsearchfield":"12 VAN WINKLE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"210a60b8-6836-ec11-b6e5-001dd800c1ec","Name":"12 VAN WINKLE AVENUE LLC"
+      },"ultra_zipcode":"07055","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bd8e768f-0f2f-4646-b3dd-f1e67f8c0121","ultra_name":"210-212 VAN HOUTEN AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1607025544001","ultra_addressline1":"210-212 VAN HOUTEN AVE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"d9a31610-c59c-47bb-abb1-e5f647fd4189","Name":"210-212 VAN HOUTEN AVE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"242f7521-162f-e811-8126-1458d04eb810","Name":"PASSAIC CITY"
+      },"ultra_propertyportalsearchfield":"210-212 VAN HOUTEN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"78888647-2e52-4505-a42f-ac42691f447e","Name":"MR & MRS S J FERRANTE"
+      },"ultra_zipcode":"07055","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"dd9435f0-84af-480b-b868-fea409f9afa4","ultra_name":"412 VAN HOUTEN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608027528001","ultra_addressline1":"412 VAN HOUTEN ST","ultra_block":"4205","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"94e660b1-8d3b-4772-b525-1f4735365b01","Name":"412 VAN HOUTEN ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"412 VAN HOUTEN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4577cd37-a789-4e1b-b3e7-f765abc5d317","Name":"DILENNY SANTANA"
+      },"ultra_zipcode":"07501","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1eea8719-4a1c-4a23-b92d-1b4d1c32e161","ultra_name":"710-712 PENNSYLVANIA AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2004017252001","ultra_addressline1":"710-712 PENNSYLVANIA AVE","ultra_block":"11","ultra_lot":"1295","ultra_propertyinterest":{
+        "Id":"3485f786-e1b3-491c-976d-385cff734da2","Name":"710-712 PENNSYLVANIA AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b62f7521-162f-e811-8126-1458d04eb810","Name":"ELIZABETH CITY"
+      },"ultra_propertyportalsearchfield":"710-712 PENNSYLVANIA AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6acccc7f-0146-f011-877a-001dd80b1a80","Name":"JYB PROPERTIES LLC"
+      },"ultra_zipcode":"07201","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f447b4b4-2f19-4098-aa88-b75116d381af","ultra_name":"710-712 VAN BUREN AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2004029546001","ultra_addressline1":"710-712 VAN BUREN AVE","ultra_block":"8","ultra_lot":"1736","ultra_propertyinterest":{
+        "Id":"e3255498-3349-4eb3-b036-c4e4c70b40aa","Name":"710-712 VAN BUREN AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b62f7521-162f-e811-8126-1458d04eb810","Name":"ELIZABETH CITY"
+      },"ultra_propertyportalsearchfield":"710-712 VAN BUREN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7546aa13-c2e6-465b-b39d-4936c7db7c5d","Name":"FLORBELA & PAULO GOMES"
+      },"ultra_zipcode":"07201","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"93c994bd-2c74-ee11-8dee-001dd8065b31","ultra_name":"AR LANDMARK MONTVALE, LLC","ultra_registrationnumber":"0236-00160-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"12 VAN RIPER  RD.","ultra_block":"3302","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"0a879cb7-2c74-ee11-8dee-001dd8065b31","Name":"AR LANDMARK MONTVALE, LLC"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"0c2c7521-162f-e811-8126-1458d04eb810","Name":"MONTVALE BORO"
+      },"ultra_propertyportalsearchfield":"AR LANDMARK MONTVALE, LLC","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"MONTVALE BORO","ultra_elsamaintenancecompany":{
+        "Id":"47c7a29a-f214-e911-812a-1458d04e0ca0","Name":"Otis Fairfield"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"11879cb7-2c74-ee11-8dee-001dd8065b31","Name":"AR LANDMARK MONTVALE, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5972b09a-501e-e911-a95e-001dd80081ad","ultra_name":"BRISTAL @ ENGLEWOOD","ultra_registrationnumber":"0215-00224-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"412 S VAN BRUNT ST","ultra_block":"10.01","ultra_lot":"2516","ultra_propertyinterest":{
+        "Id":"4972b09a-501e-e911-a95e-001dd80081ad","Name":"BRISTAL @ ENGLEWOOD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"e22b7521-162f-e811-8126-1458d04eb810","Name":"ENGLEWOOD CITY"
+      },"ultra_propertyportalsearchfield":"BRISTAL @ ENGLEWOOD","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"ENGLEWOOD CITY","ultra_elsamaintenancecompany":{
+        "Id":"01b8940c-f652-e811-8229-1458d04e1b18","Name":"Kone North"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4b72b09a-501e-e911-a95e-001dd80081ad","Name":"HSRE-EB ENGLEWOOD LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2127a18b-509f-490b-ae07-85839c52c337","ultra_name":"TAYLOR WOODS APTS BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0436019671001","ultra_addressline1":"1301-1312 Vandon LOOP","ultra_block":"2401","ultra_lot":"6.01","ultra_propertyinterest":{
+        "Id":"46ca700c-58b6-423f-9767-2282b017ac9d","Name":"TAYLOR WOODS APTS"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"e82c7521-162f-e811-8126-1458d04eb810","Name":"WINSLOW TWP"
+      },"ultra_propertyportalsearchfield":"TAYLOR WOODS APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"839cc156-1d5e-ee11-be6e-001dd80650bc","Name":"TAYLOR WOODS & ONEIDA ACQUISITION"
+      },"ultra_zipcode":"08009","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"77b4828e-4429-47f4-9ec1-a433f8a6aa34","ultra_name":"TAYLOR WOODS APTS BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0436019671005","ultra_addressline1":"1001-1012 Vandon LOOP","ultra_block":"2401","ultra_lot":"6.01","ultra_propertyinterest":{
+        "Id":"46ca700c-58b6-423f-9767-2282b017ac9d","Name":"TAYLOR WOODS APTS"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"e82c7521-162f-e811-8126-1458d04eb810","Name":"WINSLOW TWP"
+      },"ultra_propertyportalsearchfield":"TAYLOR WOODS APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"839cc156-1d5e-ee11-be6e-001dd80650bc","Name":"TAYLOR WOODS & ONEIDA ACQUISITION"
+      },"ultra_zipcode":"08009","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7ae9a25d-37dd-4a12-ba55-d72800ad9795","ultra_name":"VAN WAGENEN APTS BLDG 112","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906002317008","ultra_addressline1":"112 VAN WAGENEN AVE","ultra_block":"10502","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"17531bfc-3dc7-4768-b3b6-8828e7c9e256","Name":"VAN WAGENEN I UBRAN RENEWAL APTS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"VAN WAGENEN I UBRAN RENEWAL APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b0c351e0-4757-eb11-a812-001dd8018943","Name":"VAN WAGENEN I URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07307","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2da721b7-d72f-e811-8122-1458d04ece60","ultra_name":"VAN WAGENEN I APTS","ultra_registrationnumber":"0906-00434-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"112 VAN WAGENEN AV","ultra_block":"1873","ultra_lot":"9.B","ultra_propertyinterest":{
+        "Id":"929ad6c6-9f2f-e811-8120-1458d04e2fb8","Name":"VAN WAGENEN I APTS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"50403dc7-b42f-e811-8122-1458d04ece60","Name":"VAN WGENEN I ASSOC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0c936d88-f377-ed11-81ab-001dd807232c","ultra_name":"VILLAGES AT COUNTRY VIEW","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1213040057023","ultra_addressline1":"2102-2112 Savannah dr","ultra_block":"36","ultra_lot":"3.1","ultra_propertyinterest":{
+        "Id":"215bb110-b726-ec11-b6e6-001dd802dd9a","Name":"VILLAGES AT COUNTRY VIEW CONDOMINIUM"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"042e7521-162f-e811-8126-1458d04eb810","Name":"MONROE TWP (M)"
+      },"ultra_propertyportalsearchfield":"VILLAGES AT COUNTRY VIEW CONDOMINIUM","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"MONROE TWP (M)","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"155bb110-b726-ec11-b6e6-001dd802dd9a","Name":"VILLAGES AT COUNTRY VIEW CONDO ASSOC INC"
+      },"ultra_zipcode":"08831","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"76da658e-f377-ed11-81ab-001dd807232c","ultra_name":"VILLAGES AT COUNTRY VIEW","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1213040057024","ultra_addressline1":"2202-2212 SAVANNAH DR","ultra_block":"36","ultra_lot":"3.1","ultra_propertyinterest":{
+        "Id":"215bb110-b726-ec11-b6e6-001dd802dd9a","Name":"VILLAGES AT COUNTRY VIEW CONDOMINIUM"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"042e7521-162f-e811-8126-1458d04eb810","Name":"MONROE TWP (M)"
+      },"ultra_propertyportalsearchfield":"VILLAGES AT COUNTRY VIEW CONDOMINIUM","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"MONROE TWP (M)","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"155bb110-b726-ec11-b6e6-001dd802dd9a","Name":"VILLAGES AT COUNTRY VIEW CONDO ASSOC INC"
+      },"ultra_zipcode":"08837","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"1","value":[
+    {
+      "ultra_buildingid":"021ded11-5a5e-4f14-927b-502224e31a25","ultra_name":"90","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1603015141008","ultra_addressline1":"90 LUPTON ","ultra_block":"85","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"03f974cf-531f-4d2e-bed0-d8f177adfa77","Name":"HALEDON ESTATES LLC"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"1c2f7521-162f-e811-8126-1458d04eb810","Name":"HALEDON BORO"
+      },"ultra_propertyportalsearchfield":"HALEDON ESTATES LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a8f68d0e-5a00-ec11-94ef-001dd8028153","Name":"HALEDON ESTATES LLC"
+      },"ultra_zipcode":"07508","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

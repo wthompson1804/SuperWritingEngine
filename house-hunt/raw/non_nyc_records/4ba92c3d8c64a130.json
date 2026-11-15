@@ -1,0 +1,21 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"1","value":[
+    {
+      "ultra_buildingid":"4de2aa8e-3e60-f111-bec6-001dd80bcf22","ultra_name":"CENTURION SLEEPY HOLLOW","ultra_registrationnumber":"2012-00247-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1222 SOUTH AVENUE","ultra_block":"625","ultra_lot":"02","ultra_propertyinterest":{
+        "Id":"9385b288-3e60-f111-bec6-001dd80bcf22","Name":"CENTURION SLEEPY HOLLOW"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"c62f7521-162f-e811-8126-1458d04eb810","Name":"PLAINFIELD CITY"
+      },"ultra_propertyportalsearchfield":"CENTURION SLEEPY HOLLOW","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"PLAINFIELD CITY","ultra_elsamaintenancecompany":{
+        "Id":"4edb3f81-082d-ec11-b6e5-001dd800cc3f","Name":"Action Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7786b288-3e60-f111-bec6-001dd80bcf22","Name":"CENTURION PLAINFIELD 1222 SOUTH AVENUE URBAN RENEWAL, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"1","value":[
+    {
+      "ultra_buildingid":"b0bbfeda-d72f-e811-8122-1458d04ece60","ultra_name":"EMPLOYMENT HORIZONS","ultra_registrationnumber":"1412-00181-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"10 RIDGEDALE AVE","ultra_block":"1101","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"bb269443-9a2f-e811-8122-1458d04ece60","Name":"EMPLOYMENT HORIZONS"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"9e2e7521-162f-e811-8126-1458d04eb810","Name":"HANOVER TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"78abafd8-b42f-e811-8122-1458d04ece60","Name":"EMPLOYMENT HORIZONS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

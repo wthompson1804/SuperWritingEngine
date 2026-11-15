@@ -1,0 +1,19 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"1","value":[
+    {
+      "ultra_buildingid":"143e3c99-d72f-e811-8122-1458d04ece60","ultra_name":"LEFCOURT NEWARK TOWER","ultra_registrationnumber":"0714-00246-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1180 RAYMOND BD","ultra_block":"144","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"9286d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"LEFCOURT NEWARK TOWER"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"LEFCOURT NEWARK TOWER","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e82d3dc7-b42f-e811-8122-1458d04ece60","Name":"1180 ASTRO INVESTORS, LLCOC C/O CRG MGMT, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

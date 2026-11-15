@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lamia's House Hunt Mock-up 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&family=Figtree:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Same pink daytime-TV set as the House Hunt pages: blush paper, berry pink, plum ink, butter sign, mint for "strong".
+     Layout: one phone-width column that runs like an episode. A step bar on top (pick a year, take the tour, compare),
+     a labelled "My top three" bar on the bottom, and a guide dog who says what to do next. */
+  --paper:#FFF4F7;
+  --ink:#3A1630;
+  --muted:#7A5670;
+  --berry:#E0457B;
+  --berry-deep:#C12C62;
+  --rose:#FFD3E1;
+  --blush:#FFE7EF;
+  --butter:#FFD86B;
+  --butter-deep:#D9A91A;
+  --mint:#3FB98A;
+  --mint-ink:#1B6F50;
+  --coral-ink:#A5342B;
+  --white:#FFFFFF;
+  --line:#F3CADA;
+  --plum2:#55234A;
+  --script:"Yellowtail","Brush Script MT",cursive;
+  --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --body:"Figtree","Segoe UI",system-ui,sans-serif;
+  --s5:#3FB98A; --s4:#9AD9A8; --s3:#FFD86B; --s2:#FFA77A; --s1:#F0625A;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;padding-bottom:150px;-webkit-text-size-adjust:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+p{margin:0}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance}
+:focus-visible{outline:3px solid var(--butter-deep);outline-offset:2px;border-radius:8px}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px}
+#view{outline:0}
+.stack{display:grid;gap:16px}
+.stack.tight{gap:12px}
+
+/* ---------- Top bar (scrolls away) and step bar (stays) ---------- */
+.top .wrap{display:flex;align-items:center;gap:8px;min-height:54px}
+.brand{flex:1;min-width:0;display:flex;align-items:baseline;gap:6px;text-decoration:none;overflow:hidden}
+.brand b{font-family:var(--script);font-weight:400;font-size:30px;color:var(--berry);line-height:1}
+.brand span{font-family:var(--display);font-weight:800;font-stretch:80%;font-size:17px;white-space:nowrap}
+@media (max-width:480px){.brand span{display:none}.brand b{font-size:25px}.pillbtn{padding:0 10px}.top .wrap{gap:6px}}
+@media (max-width:389px){.pillbtn .fw{display:none}.pillbtn{padding:0 8px;font-size:13px}.brand b{font-size:23px}}
+.pillbtn{flex:0 0 auto;display:flex;align-items:center;gap:6px;min-height:44px;border-radius:999px;border:2px solid var(--ink);background:var(--white);padding:0 12px;font-family:var(--display);font-weight:800;font-size:14px}
+.pillbtn i{font-style:normal;background:var(--ink);color:var(--white);border-radius:999px;padding:1px 8px;font-size:13px;font-variant-numeric:tabular-nums}
+.steps{position:sticky;top:0;z-index:20;background:var(--paper);border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
+.steps .wrap{display:flex;align-items:center;gap:6px;padding-top:6px;padding-bottom:6px}
+.back{width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:var(--white);display:grid;place-items:center;flex:0 0 auto;padding:0}
+.back[hidden]{display:none}
+.step{flex:1 1 0;min-width:0;min-height:44px;display:flex;align-items:center;justify-content:center;gap:6px;border-radius:999px;border:2px solid var(--line);background:var(--white);font-family:var(--display);font-weight:800;font-size:13px;line-height:1.05;padding:0 6px;color:var(--muted);text-align:left}
+.step i{font-style:normal;flex:0 0 auto;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--line);color:var(--ink);font-size:13px}
+.step.on{border-color:var(--ink);background:var(--ink);color:var(--white)}
+.step.on i{background:var(--butter)}
+.step.ready{border-color:var(--berry-deep);background:var(--berry-deep);color:#fff}
+.step.ready i{background:#fff;color:var(--berry-deep)}
+.step{font-stretch:85%}
+.steps .zoom{align-items:stretch;gap:4px;padding-top:0}
+.zoom>a,.zoom>button,.zoom>.todo{flex:1 1 0;min-width:0;min-height:44px;border-radius:14px;border:2px solid var(--ink);background:var(--white);padding:3px 8px;text-align:left;text-decoration:none;display:grid;align-content:center;line-height:1.1}
+.zoom small{font-size:11px;font-weight:700;color:var(--muted)}
+.zoom b{font-family:var(--display);font-weight:800;font-stretch:85%;font-size:13px;overflow-wrap:anywhere}
+.zoom .on{background:var(--ink);color:#fff}
+.zoom .on small{color:#F3DDE8}
+.zoom .todo{border-style:dashed;border-color:#C9A6BD}
+.zoom .todo b{color:var(--berry-deep)}
+.zoom .off{opacity:.65}
+.zoom .off b{color:var(--muted)}
+.zoom .sep{flex:0 0 auto;align-self:center;font-weight:800;color:var(--muted)}
+body.hl-tray .tray,body.hl-steps .steps{pointer-events:none}
+.crumbs{display:flex;flex-wrap:wrap;gap:2px 6px;font-size:14px;font-weight:700;color:var(--muted);padding-top:10px}
+.crumbs a{text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:3px;padding:6px 0}
+.crumbs span{padding:6px 0}
+
+/* ---------- Title card ---------- */
+.title-card{background:radial-gradient(120% 90% at 50% 0%,#FFC1D6 0%,#FFE1EB 55%,var(--paper) 100%);padding:20px 0 16px;text-align:center;overflow:hidden}
+.logo{display:inline-block;max-width:420px;width:100%;padding:0 12px}
+.logo svg{display:block;width:min(230px,62%);height:auto;margin:0 auto -12px}
+.logo .name{font-family:var(--script);font-size:clamp(62px,19vw,94px);line-height:1;color:var(--berry);display:block;transform:rotate(-5deg);text-shadow:3px 3px 0 var(--white),6px 6px 0 var(--ink)}
+.logo .show{display:inline-block;margin-top:8px;font-family:var(--display);font-weight:800;font-stretch:78%;font-size:clamp(24px,7vw,34px);line-height:1;background:var(--ink);color:var(--white);padding:4px 14px 7px;border-radius:12px;transform:rotate(1.5deg)}
+.tagline{margin-top:14px;font-weight:800;font-size:19px;padding:0 16px}
+.mock{margin-top:12px;background:var(--butter);border:2px solid var(--ink);border-radius:14px;padding:8px 12px;font-size:14px;font-weight:800;text-align:center}
+
+/* ---------- Sections ---------- */
+.sec{margin-top:24px}
+.sec h2{font-weight:800;font-stretch:82%;font-size:clamp(28px,7.6vw,38px);line-height:1}
+.sec h2 .s{font-family:var(--script);font-weight:400;font-stretch:100%;color:var(--berry);font-size:1.15em;margin-right:6px}
+.sec-intro{color:var(--muted);margin:8px 0 12px}
+.kicker{font-family:var(--script);font-size:26px;color:var(--berry);line-height:1}
+.lab{font-family:var(--display);font-weight:800;font-size:15px;margin:10px 0 6px}
+
+/* ---------- Guide tip ---------- */
+.tip{display:flex;align-items:center;gap:10px;background:var(--white);border:2px solid var(--ink);border-radius:18px;padding:8px 12px;margin-top:12px;font-weight:700;font-size:15px;line-height:1.3}
+.tip svg{flex:0 0 auto;width:34px;height:34px}
+.tip b{font-family:var(--display)}
+.tip .arr{margin-left:auto;flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--berry-deep);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:19px;line-height:1;animation:nudge 1.2s ease-in-out 3}
+@keyframes nudge{50%{transform:translateY(5px)}}
+@media (prefers-reduced-motion:reduce){.tip .arr{animation:none}}
+.helper{font-size:14px;font-weight:700;color:var(--muted)}
+.minilab{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:-2px}
+.mapnote{font-size:13px;font-weight:700;color:var(--muted);padding:4px 8px 6px;text-align:center}
+.sec[id]{scroll-margin-top:128px}
+.wl small{font-size:12px;font-weight:800;color:var(--muted);align-self:center;margin-right:2px}
+
+/* ---------- How it works, wish list ---------- */
+.how{background:var(--white);border:3px solid var(--ink);border-radius:22px;padding:14px;display:grid;gap:10px;box-shadow:5px 5px 0 var(--berry)}
+.how h3{font-weight:800;font-size:20px}
+.how ol{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.how li{display:flex;gap:10px;align-items:flex-start;font-weight:600;font-size:15px;line-height:1.3}
+.how li i{font-style:normal;flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--butter);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:14px}
+.how li b{font-family:var(--display);font-weight:800}
+.wish{display:flex;flex-wrap:wrap;gap:6px}
+.wish span{font-size:14px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--white);border:2px solid var(--ink)}
+.wl{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.w{font-size:12px;font-weight:800;padding:2px 8px;border-radius:999px;display:inline-flex;align-items:center;gap:4px}
+.w.ok{background:#DDF3E8;color:var(--mint-ink)}
+.w.no{background:#FFE9E7;color:var(--coral-ink)}
+
+/* ---------- Chips, badges, buttons ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:14px;font-weight:800;padding:4px 11px;border-radius:999px;background:var(--white);border:2px solid var(--ink);font-variant-numeric:tabular-nums;display:inline-flex;align-items:center;gap:6px}
+.chip.yel{background:var(--butter)}
+.limchips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 14px;padding:10px;border:2px dashed var(--line);border-radius:18px;background:var(--white);width:100%;text-align:left}
+.limchips em{font-style:normal;font-family:var(--display);font-weight:800;font-size:15px;margin-right:2px}
+.limchips .chip{border-color:var(--line);background:var(--paper);font-size:13px}
+.limchips .chg{margin-left:auto;font-weight:800;font-size:14px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:3px}
+.fit{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:14px;border-radius:999px;padding:5px 12px;background:#DDF3E8;color:var(--mint-ink);font-variant-numeric:tabular-nums}
+.fit.zero{background:#FFE3E1;color:var(--coral-ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;font-family:var(--display);font-weight:800;font-size:17px;text-decoration:none;border-radius:999px;padding:8px 20px;border:2px solid var(--ink);background:var(--white);text-align:center;line-height:1.1}
+.btn.main{background:var(--berry-deep);border-color:var(--berry-deep);color:#fff}
+.btn.held{background:var(--mint-ink);border-color:var(--mint-ink);color:#fff}
+.btn.held small{display:block;font-family:var(--body);font-size:12px;font-weight:700;color:#D6F0E4;margin-top:2px}
+.btn.sm{min-height:44px;font-size:15px;padding:6px 16px}
+.btn.wide{width:100%}
+.link{background:none;border:0;padding:10px 0;font-weight:800;font-size:15px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:3px;min-height:44px}
+.x{width:44px;height:44px;border-radius:50%;background:none;border:0;font-size:24px;line-height:1;font-weight:800;flex:0 0 auto}
+.bar{display:inline-grid;grid-template-columns:repeat(5,10px);gap:2px;vertical-align:middle}
+.bar i{height:10px;border-radius:5px;background:#F6E3EA}
+.bar.s5 i{background:var(--s5)}
+.bar.s4 i:nth-child(-n+4){background:var(--s4)}
+.bar.s3 i:nth-child(-n+3){background:var(--s3)}
+.bar.s2 i:nth-child(-n+2){background:var(--s2)}
+.bar.s1 i:nth-child(1){background:var(--s1)}
+.readybar{display:grid;gap:8px;background:var(--butter);border:3px solid var(--ink);border-radius:20px;padding:12px 14px;margin-top:14px}
+.readybar b{font-family:var(--display);font-weight:800;font-size:18px;line-height:1.15}
+.nexts{display:grid;gap:8px;margin-top:22px}
+
+/* ---------- Art and photos ---------- */
+.art{position:relative;background:#FFE7EF;border-bottom:2px solid var(--line)}
+.art>svg{display:block;width:100%;height:auto}
+.art[data-act]{cursor:pointer}
+.art.round{border:2px solid var(--line);border-radius:22px;overflow:hidden}
+.photos{position:absolute;right:10px;bottom:10px;display:inline-flex;align-items:center;gap:8px;min-height:44px;border-radius:999px;border:2px solid var(--ink);background:var(--white);padding:0 14px 0 12px;font-family:var(--display);font-weight:800;font-size:15px;box-shadow:3px 3px 0 var(--berry)}
+.photos svg{width:20px;height:20px;flex:0 0 auto}
+
+/* ---------- Day tiles ---------- */
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;font-weight:700;color:var(--muted);margin:8px 0 2px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:16px;height:16px;border-radius:5px;display:inline-block}
+.sw.s,.t-s{background:#DDF3E8;border:2px solid var(--mint)}
+.sw.m,.t-m{background:#FFF3C9;border:2px solid var(--butter-deep)}
+.sw.y,.t-y{background:var(--white);border:2px solid var(--ink)}
+.sw.u,.t-u{background:var(--paper);border:2px dashed #C9A6BD}
+.strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.tile{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:8px;align-items:center;text-align:left;border-radius:16px;padding:8px 8px 8px 10px;min-height:60px}
+.tile::after{content:"›";grid-column:3;grid-row:1 / span 2;font-family:var(--display);font-weight:800;font-size:22px;line-height:1;color:var(--muted)}
+.tile .ti{grid-row:1 / span 2;width:28px;height:28px;border-radius:50%;background:var(--white);display:grid;place-items:center;box-shadow:inset 0 0 0 2px var(--line)}
+.tile .ti svg{width:18px;height:18px}
+.tile .tl{font-size:12px;font-weight:700;color:var(--muted);line-height:1.1}
+.tile b{font-family:var(--display);font-weight:800;font-stretch:82%;font-size:15px;line-height:1.1;overflow-wrap:anywhere}
+.t-u b{color:var(--muted)}
+.mini{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.mini span{height:30px;border-radius:9px;display:grid;place-items:center}
+.mini svg{width:16px;height:16px}
+
+/* ---------- Year cards ---------- */
+.life{display:block;text-decoration:none;background:var(--white);border:3px solid var(--ink);border-radius:26px;overflow:hidden;box-shadow:5px 5px 0 var(--berry)}
+.life .body{padding:12px 16px 16px;display:grid;gap:8px}
+.life .tag{font-weight:800;color:var(--berry-deep);font-size:15px}
+.life h3{font-weight:800;font-stretch:80%;font-size:clamp(28px,8vw,34px);line-height:.98}
+.life .catch{font-size:15px;color:var(--muted)}
+.life .catch b{color:var(--ink)}
+.life .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:2px}
+.life .enter{font-family:var(--display);font-weight:800;font-size:17px;background:var(--berry-deep);color:#fff;border-radius:999px;padding:8px 16px}
+.life.none{box-shadow:none;border-color:var(--line)}
+.life.none .art{opacity:.45;filter:grayscale(.8)}
+.hero{background:var(--white);border:3px solid var(--ink);border-radius:26px;overflow:hidden}
+.hero .body{padding:12px 16px 16px;display:grid;gap:6px}
+.hero h1{font-weight:800;font-stretch:80%;font-size:clamp(30px,8.6vw,40px);line-height:.96}
+.tiles3{display:grid;gap:8px}
+.t3{background:var(--ink);color:#fff;border-radius:18px;padding:12px 14px}
+.t3 small{display:block;color:#F3DDE8;font-weight:700;font-size:13px}
+.t3 b{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums}
+.t3 span{display:block;color:#F3DDE8;font-size:14px;margin-top:2px}
+.map{background:var(--white);border:2px solid var(--line);border-radius:22px;padding:8px}
+.map svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
+.map text{font-family:var(--body);font-weight:800}
+.hood{display:grid;gap:8px;text-decoration:none;background:var(--white);border:2px solid var(--ink);border-radius:20px;padding:12px 14px}
+.hood .hd{display:flex;align-items:center;gap:10px}
+.pinl{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:2.5px solid var(--ink);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:15px}
+.hood h4{font-weight:800;font-stretch:85%;font-size:21px;line-height:1.05}
+.hood small{color:var(--muted);font-weight:700}
+.hood .foot{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.hood .enter{font-family:var(--display);font-weight:800}
+
+/* ---------- Neighborhood and place ---------- */
+.two{display:grid;gap:10px}
+.panel{border-radius:18px;padding:12px 14px}
+.panel h4{font-weight:800;font-size:18px}
+.panel ul{margin:4px 0 0;padding-left:20px}
+.panel li{margin:3px 0}
+.love{background:#E7F7EF}
+.pause{background:#FFE9E7}
+.unit{background:var(--white);border:2px solid var(--ink);border-radius:22px;padding:12px 14px;display:grid;gap:10px}
+.unit .row{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.unit h4{font-weight:800;font-stretch:85%;font-size:22px;line-height:1.05}
+.unit small{color:var(--muted);font-weight:700}
+.unit .acts{display:flex;flex-wrap:wrap;gap:8px}
+.unit .acts .btn{flex:1 1 140px}
+.unit.out{border-style:dashed;border-color:#D9B7C6;background:#FCF6F8}
+.unit.out .dim{opacity:.55}
+.why{font-size:14px;font-weight:700;color:var(--coral-ink);background:#FFE9E7;border-radius:12px;padding:7px 10px}
+.sign{flex:0 0 auto;text-align:center;position:relative;padding-top:14px}
+.sign::before{content:"";position:absolute;top:0;left:50%;width:4px;height:16px;background:var(--ink);transform:translateX(-50%)}
+.sign .board{background:var(--butter);border:3px solid var(--ink);border-radius:14px;padding:6px 12px;min-width:104px;transform:rotate(2deg)}
+.sign small{display:block;font-weight:800;font-size:11px;color:var(--ink)}
+.sign strong{display:block;font-family:var(--display);font-weight:800;font-size:25px;line-height:1;font-variant-numeric:tabular-nums}
+.sign em{display:block;font-style:normal;font-size:11px;font-weight:700}
+details.receipt{border:2px dashed var(--ink);border-radius:16px;padding:2px 14px;font-variant-numeric:tabular-nums}
+details.receipt summary{font-weight:800;min-height:44px;display:flex;align-items:center;cursor:pointer}
+details.receipt div{display:flex;justify-content:space-between;gap:12px;padding:3px 0;font-weight:600}
+details.receipt .tot{border-top:2px solid var(--ink);margin-top:4px;padding:6px 0 8px;font-weight:800}
+.voice{font-size:18px;line-height:1.45}
+.ask{background:var(--paper);border:2px dashed var(--line);border-radius:18px;padding:12px 16px}
+.ask b{font-family:var(--display);font-weight:800;font-size:18px}
+.ask ul{margin:6px 0 0;padding-left:20px}
+
+/* ---------- The decision ---------- */
+.names{display:grid;gap:8px}
+.name{display:flex;align-items:center;gap:10px;background:var(--white);border:2px solid var(--ink);border-radius:16px;padding:6px 6px 6px 12px}
+.name div{flex:1;min-width:0}
+.name b{font-family:var(--display);font-weight:800;font-size:17px;line-height:1.1}
+.name small{display:block;color:var(--muted);font-weight:700;font-size:13px}
+.num{flex:0 0 auto;min-width:26px;height:26px;border-radius:50%;display:inline-grid;place-items:center;font-family:var(--display);font-weight:800;font-size:15px;color:#fff}
+.n0{background:var(--berry-deep)}.n1{background:var(--ink)}.n2{background:var(--mint-ink)}
+.pairbox{background:var(--ink);color:#fff;border-radius:22px;padding:16px;display:grid;gap:10px;margin-top:14px}
+.pairbox h3{font-family:var(--script);font-weight:400;font-size:32px;line-height:1;color:#FF9EC0}
+.pairbox p{font-size:18px;line-height:1.4}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{min-height:44px;border-radius:999px;border:2px solid #8A5C7E;background:none;color:#fff;font-family:var(--display);font-weight:800;font-size:15px;padding:0 14px}
+.seg button[aria-pressed="true"]{background:#FF9EC0;border-color:#FF9EC0;color:var(--ink)}
+.feel{background:var(--butter);border:2px solid var(--ink);border-radius:20px;padding:12px 14px;margin-top:12px}
+.feel b{font-family:var(--display);font-weight:800;font-size:18px}
+.feel ul{margin:6px 0 0;padding-left:20px}
+.feel li{margin:4px 0}
+.cmp-head{position:sticky;top:58px;z-index:10;background:var(--paper);padding:10px 0 8px;margin-top:8px}
+.cols{display:grid;gap:8px}
+.cols.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cols.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.colh{display:flex;align-items:center;gap:6px;background:var(--butter);border:2px solid var(--ink);border-radius:14px;padding:5px 8px;min-width:0}
+.colh .pr{font-family:var(--display);font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+.rowc{background:var(--white);border:2px solid var(--line);border-radius:18px;padding:10px;display:grid;gap:8px}
+.rowc h4{font-size:16px;font-weight:800;display:flex;gap:8px;align-items:center;line-height:1.15}
+.rowc h4 svg{width:20px;height:20px;flex:0 0 auto}
+.rowc h4 em{font-style:normal;margin-left:auto;font-family:var(--body);font-size:12px;font-weight:800;color:var(--muted);background:var(--paper);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.cell{border-radius:12px;padding:8px;background:var(--paper);font-size:14px;font-weight:800;line-height:1.2;min-width:0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;border:2px solid transparent}
+.cell.edge,.cell.t-s{background:#DDF3E8;border-color:var(--mint)}
+.cell.t-m{background:#FFF3C9;border-color:var(--butter-deep)}
+.cell.t-y{background:var(--white);border-color:var(--ink)}
+.cell.t-u{background:var(--paper);border:2px dashed #C9A6BD;color:var(--muted)}
+.cell .bar{display:grid;margin:0 0 4px}
+.tiesrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+.switch{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:800;font-size:15px}
+.switch input{width:22px;height:22px;accent-color:var(--berry-deep)}
+.tiesrow small{color:var(--muted);font-weight:700}
+.tour-list{margin-top:22px;background:var(--white);border:3px solid var(--ink);border-radius:24px;padding:16px;display:grid;gap:10px;box-shadow:5px 5px 0 var(--berry)}
+.tour-list h3{font-weight:800;font-stretch:82%;font-size:28px;line-height:1}
+#copyStatus{font-weight:800;color:var(--mint-ink)}
+.empty{background:var(--white);border:2px dashed var(--line);border-radius:22px;padding:18px 16px;display:grid;gap:12px;justify-items:start}
+.lease{margin-top:16px;color:var(--muted);font-weight:700;font-size:15px}
+
+/* ---------- My top three (bottom bar) ---------- */
+.tray{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--ink);color:#fff;border-radius:22px 22px 0 0;box-shadow:0 -6px 20px rgba(58,22,48,.25)}
+.tray .wrap{padding-top:10px;padding-bottom:12px;display:grid;gap:8px}
+.tr-text{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.tr-text b{font-family:var(--script);font-weight:400;font-size:24px;color:#FF9EC0;line-height:1}
+.tr-text span{font-size:14px;font-weight:700;color:#F3DDE8;line-height:1.2}
+.tr-row{display:flex;align-items:center;gap:6px}
+.slot{flex:1 1 0;min-width:0;height:52px;border-radius:14px;border:2px dashed #8A5C7E;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:12px;font-weight:800;color:#C9A6BD;line-height:1.1;text-decoration:none}
+.slot.full{border:0;background:var(--plum2);color:#fff;font-variant-numeric:tabular-nums}
+.slot.full b{font-family:var(--display);font-size:15px}
+.go{flex:0 0 auto;height:52px;border-radius:999px;border:0;background:#6B3A60;color:#E3C9D9;font-family:var(--display);font-weight:800;font-size:16px;padding:0 16px;text-decoration:none;display:flex;align-items:center}
+.go.live{background:#FF9EC0;color:var(--ink)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,216,107,.9)}100%{box-shadow:0 0 0 16px rgba(255,216,107,0)}}
+.tray.bump{animation:pulse 1s ease-out 2}
+.go.live.bump{animation:pulse 1s ease-out 3}
+
+/* ---------- Sheets ---------- */
+.scrim{position:fixed;inset:0;background:rgba(58,22,48,.4);z-index:39}
+.scrim[hidden]{display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--white);border-top:3px solid var(--ink);border-radius:26px 26px 0 0;box-shadow:0 -10px 30px rgba(58,22,48,.28);transform:translateY(105%);visibility:hidden;transition:transform .22s ease,visibility 0s linear .22s;max-height:86%;overflow:auto;padding-bottom:18px}
+.sheet.open{transform:none;visibility:visible;transition:transform .22s ease}
+.sh-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding-top:14px}
+.sh-top h2{font-weight:800;font-stretch:82%;font-size:26px;line-height:1}
+.sh-top small{display:block;font-family:var(--body);font-stretch:100%;font-size:14px;font-weight:700;color:var(--muted);margin-top:4px}
+.bigcap{border-radius:18px;padding:12px 14px;margin-top:12px;font-family:var(--display);font-weight:800;font-size:24px;line-height:1.1}
+.sheet ul{margin:10px 0 0;padding-left:20px}
+.sheet li{margin:4px 0}
+.quote{background:var(--paper);border-radius:14px;padding:10px 12px;font-size:15px;margin-top:12px}
+.quote small{display:block;color:var(--muted);font-weight:700;margin-top:2px}
+.src{font-size:13px;color:var(--muted);font-weight:700;margin-top:10px}
+.fitline{font-weight:800;margin:6px 0 8px;font-variant-numeric:tabular-nums}
+.lstrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:6px}
+.lstrip div{display:flex;align-items:center;justify-content:space-between;gap:4px;border-radius:12px;padding:6px 8px;background:var(--paper);font-size:13px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.lstrip div.zero{background:#FFE3E1;color:var(--coral-ink)}
+.lstrip i{font-style:normal;font-family:var(--display);font-size:16px}
+.lim{display:grid;gap:2px;padding:8px 0 6px;border-top:2px solid var(--line)}
+.lim label{font-family:var(--display);font-weight:800;font-size:18px}
+.lim output{font-weight:700;color:var(--muted);font-size:15px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:40px;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:5px;background:var(--rose)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:32px;height:32px;border-radius:50%;background:var(--berry);border:3px solid var(--white);box-shadow:0 0 0 2px var(--ink);margin-top:-11px}
+input[type=range]::-moz-range-track{height:10px;border-radius:5px;background:var(--rose)}
+input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--berry);border:3px solid var(--white);box-shadow:0 0 0 2px var(--ink)}
+
+/* ---------- Tour ---------- */
+.tourscrim{position:fixed;inset:0;background:rgba(58,22,48,.55);z-index:55}
+.tourscrim[hidden]{display:none}
+.tour{position:fixed;left:0;right:0;bottom:168px;z-index:57;pointer-events:none}
+.tour[hidden]{display:none}
+.tour .card{pointer-events:auto;max-width:528px;margin:0 16px;background:var(--white);border:3px solid var(--ink);border-radius:24px;padding:16px;display:grid;gap:8px;box-shadow:6px 6px 0 var(--berry)}
+@media (min-width:592px){.tour .card{margin:0 auto}}
+.tour .hd{display:flex;align-items:center;gap:10px}
+.tour .hd svg{width:44px;height:44px;flex:0 0 auto}
+.tour h2{font-weight:800;font-stretch:82%;font-size:24px;line-height:1.05}
+.tour .dots{display:flex;gap:6px}
+.tour .dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.tour .dots i.on{background:var(--berry-deep)}
+.tour .acts{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
+body.hl-tray .tray{z-index:56;box-shadow:0 0 0 5px var(--butter)}
+body.hl-steps .steps{z-index:56;box-shadow:0 0 0 5px var(--butter)}
+
+/* ---------- Toast ---------- */
+.toast{position:fixed;left:50%;bottom:136px;transform:translateX(-50%);background:var(--white);color:var(--ink);padding:10px 16px;border-radius:18px;font-weight:800;font-size:15px;z-index:50;opacity:0;pointer-events:none;transition:opacity .2s;width:max-content;max-width:92%;text-align:center;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--berry)}
+.toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){.sheet,.toast{transition:none}.tray.bump,.go.live.bump{animation:none}}
+@media (min-width:600px){.two{grid-template-columns:1fr 1fr}.tiles3{grid-template-columns:repeat(3,1fr)}}
+
+/* ---- mock 4: one back line, hooks, plain facts ---- */
+.trail{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:2px solid var(--line)}
+.trail .wrap{display:flex;align-items:center;gap:8px;min-height:58px}
+.trail .bk{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:var(--white);display:grid;place-items:center}
+.trail .path{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:5px;font-family:var(--display);font-weight:800;font-stretch:85%;font-size:15px;white-space:nowrap;overflow:hidden}
+.trail .path a{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;padding:13px 1px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px}
+.trail .path a:first-child{flex:0 0 auto}
+.trail .path span{flex:0 0 auto;color:var(--muted)}
+.trail .helpb{flex:0 0 auto;min-width:44px;height:44px;border-radius:999px;border:2px solid var(--line);background:var(--white);font-family:var(--display);font-weight:800;font-size:15px;padding:0 12px;color:var(--plum2)}
+.trail .brand{flex:1 1 auto}
+.trail .brand span{display:inline}
+body.hl-trail .trail{z-index:56;box-shadow:0 0 0 5px var(--butter);pointer-events:none}
+.sec[id]{scroll-margin-top:72px}
+.coldopen{max-width:30em;margin:8px auto 0;padding:0 20px;font-size:16px;line-height:1.4}
+.mock{font-size:13px;padding:6px 10px;border-width:2px}
+.wishbox{background:var(--white);border:2px solid var(--ink);border-radius:20px;padding:12px 14px}
+.wishbox h3{font-weight:800;font-size:19px}
+.wishbox ul{margin:8px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 10px;font-weight:700;font-size:14.5px;line-height:1.25}
+.wishbox li{display:flex;gap:6px}
+.wishbox li::before{content:"✓";color:var(--mint-ink);font-weight:800}
+.lead{font-size:17px;margin-top:8px}
+.hook{font-family:var(--display);font-weight:800;font-stretch:88%;font-size:19px;line-height:1.15;color:var(--berry-deep)}
+.pull{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-size:16px;line-height:1.3}
+.pull li{display:flex;gap:9px;align-items:baseline}
+.pull li::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--berry);transform:translateY(-1px)}
+.snag{font-size:15px;color:var(--muted)}
+.snag b{color:var(--ink)}
+.facts{font-size:14.5px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.fit,.fit.zero{background:none;padding:0;border-radius:0;font-size:14.5px}
+.life .enter,.hood .enter{font-family:var(--display);font-weight:800;font-size:17px;background:var(--berry-deep);color:#fff;border-radius:999px;padding:8px 16px;white-space:nowrap}
+.hood{gap:7px}
+.hood .foot{margin-top:2px}
+.limline{font-size:14.5px;font-weight:700;color:var(--muted);margin:12px 0;line-height:1.4}
+.limline b{color:var(--ink)}
+.limline .link{display:inline-block;padding:8px 0;min-height:0;font-size:14.5px;color:var(--ink)}
+.unit .acts .btn{padding:8px 12px;font-size:16px}
+.upnext{display:grid;gap:4px;text-decoration:none;background:var(--blush);border:2px dashed var(--berry);border-radius:20px;padding:12px 14px;margin-top:24px}
+.upnext small{font-family:var(--script);font-size:23px;color:var(--berry);line-height:1.05}
+.upnext b{font-family:var(--display);font-weight:800;font-stretch:85%;font-size:22px;line-height:1.05}
+.upnext span{font-size:16px;line-height:1.3}
+.upnext em{font-style:normal;justify-self:end;font-family:var(--display);font-weight:800;font-size:17px;color:var(--berry-deep)}
+.hero .btn.wide{margin-top:6px}
+
+.trail[hidden]{display:none}
+.trail .path{font-size:14.5px}
+.trail .path a{flex-shrink:1}
+.trail .path a:nth-of-type(2):not(:last-of-type){flex-shrink:6}
+.foothelp{text-align:center;margin:26px 0 0}
+.foothelp .link{color:var(--muted)}
+.map svg{max-width:270px}
+.logo svg{width:min(190px,52%)}
+.logo .name{font-size:clamp(54px,16vw,84px)}
+.title-card{padding:24px 0 12px}
+.coldopen b{font-family:var(--display)}
+.mock{margin-top:10px}
+
+.who{margin-top:10px;font-size:16px;line-height:1.4}
+.who b{display:block;font-family:var(--display);font-weight:800;font-size:15px;color:var(--berry-deep)}
+.amen{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.amen li{display:flex;gap:12px;align-items:flex-start}
+.amen .ai{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--white);border:2px solid var(--line);display:grid;place-items:center}
+.amen .ai svg{width:22px;height:22px}
+.amen b{display:block;font-family:var(--display);font-weight:800;font-size:16px;line-height:1.2}
+.amen div span{font-size:16px;line-height:1.3}
+.panel .quote{background:rgba(255,255,255,.65)}
+.fold{background:var(--white);border:2px dashed var(--line);border-radius:18px;padding:10px 14px}
+.fold summary{font-family:var(--display);font-weight:800;font-size:17px;cursor:pointer;padding:6px 0}
+.fold ul{margin:6px 0 4px;padding-left:20px}
+</style>
+</head>
+<body>
+
+<nav class="trail" id="trail" aria-label="Where you are, and the way back"></nav>
+
+<main id="view" tabindex="-1"></main>
+
+<p class="foothelp"><button type="button" class="link" data-act="tour-open">How it works</button></p>
+
+<div class="tray" id="tray" aria-label="My top three"></div>
+
+<div class="scrim" id="scrim" data-act="close-sheet" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Details" aria-hidden="true"><div class="wrap" id="sheetBody"></div></div>
+
+<div class="sheet" id="limsheet" role="dialog" aria-label="My limits" aria-hidden="true">
+  <div class="wrap">
+    <div class="sh-top"><h2>My limits</h2><button type="button" class="btn sm main" data-act="limits-close">Done</button></div>
+    <p class="fitline" id="fitline"></p>
+    <div class="lstrip" id="lstrip"></div>
+    <div class="lim"><label for="lim-cost">Monthly cost</label><output id="out-cost" for="lim-cost"></output><input type="range" id="lim-cost" data-k="cost" min="1800" max="3200" step="50"></div>
+    <div class="lim"><label for="lim-mins">Distance from Mom and Dad</label><output id="out-mins" for="lim-mins"></output><input type="range" id="lim-mins" data-k="mins" min="15" max="120" step="5"></div>
+    <div class="lim"><label for="lim-safe">Safety</label><output id="out-safe" for="lim-safe"></output><input type="range" id="lim-safe" data-k="safe" min="1" max="5" step="1"></div>
+    <div class="lim"><label for="lim-sqft">Space</label><output id="out-sqft" for="lim-sqft"></output><input type="range" id="lim-sqft" data-k="sqft" min="400" max="900" step="50"></div>
+    <button type="button" class="link" data-act="limits-reset">Put them back where they started</button>
+  </div>
+</div>
+
+<div class="tourscrim" id="tourscrim" hidden></div>
+<div class="tour" id="tour" role="dialog" aria-modal="true" aria-label="How it works" hidden><div class="card" id="tourCard"></div></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ================= Invented data. No real places, buildings or people. ================= */
+var CAP=2800;
+var STORY={"close":{"blurb":"Your own keys, ten minutes from the kitchen you grew up in.","hero":"You know these streets already: which bakery sells out by nine, which block floods when it rains. The apartment is small and entirely yours, and Sunday dinner is a short drive, not a trip.","catchT":"Small rooms, street parking","catchL":"You pay city prices for a studio, and the car sleeps wherever you can find a spot.","m":{"work":["Your desk sits by the one window that gets morning light. By noon you have walked to the corner for a coffee and a pork bun, and the woman at the counter knows your order.","I thought I'd feel like I never left home. It turns out ten minutes is plenty of distance.","Priya, moved out of her parents' place last spring"],"dog":["The block is busy until late, so you are never the only one out. You do two loops under the streetlights and wave at the same neighbor walking the same bulldog.","There are always people around. I like that more than I like quiet.","Marisol, has a terrier mix"],"sat":["Friends are a short ride away and the night ends when you want it to. Then you circle for parking: ten minutes on a good night, twenty-five on a bad one.","I love the neighborhood and I hate looking for a spot after eleven. Both are true.","Dev, drives a small car on purpose"],"sun":["You leave at 1:40 for a two o'clock lunch. If your mom needs something on a Wednesday, you are there before the kettle boils.","My dad drops off soup. I didn't ask for the soup. I'd miss the soup.","Priya"]}},"garden":{"blurb":"A quiet courtyard, a bedroom with a door, and a parking spot with your number on it.","hero":"Two-story brick buildings set around lawns, built for people who drive. Nothing here is trying to impress you. It is calm, it is green, and your car is thirty steps from your door.","catchT":"Quiet after nine","catchL":"The nearest place with a line out the door is a fifteen-minute drive.","m":{"work":["You take calls with the window open and hear a lawnmower, not a siren. At lunch you walk the loop path with the dog and eat on a bench.","I get more done here than I ever did in the city. It's almost suspicious.","Hannah, works in payroll software"],"dog":["The paths are lit and the gate is closed. You pass two other dog owners, and by October you know the dogs' names before the people's.","I walk at ten at night and don't think twice. That was the whole point of moving.","Renee, has a corgi"],"sat":["You drive to dinner in the next town and split a ride home if there's wine. Your spot is waiting, under a light, with nobody's bumper in it.","Nobody has ever taken my space. Not once in three years.","Marcus"],"sun":["Half an hour on roads you could drive asleep, with no bridge and no toll. You are home before dark with leftovers on the passenger seat.","It's far enough that I call first. It's close enough that I always go.","Hannah"]}},"tower":{"blurb":"The eleventh floor of a new building, in a small city that has just woken up.","hero":"A front desk signs for your packages and the garage is under the building. Downstairs there is a ramen place, a climbing gym and a bar with trivia on Tuesdays. Everyone in the elevator moved here in the last two years, same as you.","catchT":"Fees stack up","catchL":"The rent is fair. The garage, the amenity fee and the pet rent arrive on top of it.","m":{"work":["You start in the apartment and move to the co-working lounge on six when you want people around. Someone always brings a dog to the lounge.","I met most of my friends in that lounge, pretending to work.","Tobi, product designer"],"dog":["You take the elevator down, cross one lit street, and you are at the riverwalk dog run. The lobby attendant says goodnight to the dog by name.","Having someone at the desk at night matters more than I expected.","Elena, has a mini poodle"],"sat":["Everything is a walk, so the car never moves. You come home through a lobby, not a parking lot.","Fob in the garage, fob in the elevator, fob at my door. My mother has finally stopped asking.","Elena"],"sun":["Forty-five minutes and one bridge. You learn which lane to be in and what the toll costs, and you stop noticing both.","The toll annoys me every single time, and then my mom makes rice and I forget.","Tobi"]}},"beach":{"blurb":"A boardwalk at the end of your street and salt on the car by Friday.","hero":"Summer is loud and winter is yours. From October to May the town belongs to the people who live here: the boardwalk is empty at seven in the morning, and the bartender has time to talk.","catchT":"Two towns in one","catchL":"July is crowded and parking is a fight. February is beautiful, and half the restaurants are closed.","m":{"work":["You open the laptop after a boardwalk walk, with sand still in the dog's paws. On slow afternoons you work from the café that faces the water.","I take my eleven o'clock call from a bench looking at the ocean. Nobody at work knows.","Jo, account manager"],"dog":["In the off-season you have the boardwalk lights and the sound of the water. In summer there are crowds until midnight, which is its own kind of safe.","Winter nights are dark and empty out here. I love it. My sister wouldn't.","Camille, has a lab mix"],"sat":["Three bars, one of them good, all of them walkable. From June on you do not move the car on a Saturday, because your spot will be gone.","Locals have a rule. Park Friday, walk until Monday.","Jo"],"sun":["An hour, sometimes more behind the beach traffic in summer. Coming home, you smell the water before you see it.","My parents think it's far. Then they visit in June and stay till Tuesday.","Camille"]}},"river":{"blurb":"A main street with a bookshop, hills behind it, and the most space your money buys.","hero":"An old mill town that artists and young families found a decade ago. Your apartment has high ceilings and a second room you can't quite name yet. On Saturday the farmers' market takes over the square.","catchT":"A real drive home","catchL":"Your parents are an hour to nearly two away, and you will feel it on a Sunday night.","m":{"work":["The second room becomes an office with a door that closes. At three you walk to the bakery, and the trail along the river starts behind it.","I have a room just for work. In the city that room was my bed.","Noor, grant writer"],"dog":["Main Street is closed up by nine and the sidewalks are yours. It is quiet the way small towns are quiet, with porch lights and one car every few minutes.","It's safe and it's very dark. I bought a good flashlight and a reflective leash.","Abby, has a rescue hound"],"sat":["There is one wine bar, one brewery and a music night at the old firehouse. You know people at all three by spring, and you park in front of your own building.","It's the same forty people every weekend. I didn't expect to like that so much.","Noor"],"sun":["You leave at noon to eat at two. The drive is pretty until the last half hour, and you can't drop by on a weeknight.","I go every other week now, not every week. I stay longer when I go.","Abby"]}},"city":{"blurb":"Everything you could want within six blocks, and a car you barely use.","hero":"The apartment is the smallest on this list and the street is the most alive. You could eat somewhere new every night for a year. The open question is whether the car is a freedom here or a chore.","catchT":"The car is a burden","catchL":"Street parking means moving it twice a week, and a garage costs as much as a car payment.","m":{"work":["Your desk folds away at six because the room is also the living room. You work from three different cafés in a week and never repeat a lunch.","My apartment is tiny, so the neighborhood is my living room. That's the deal.","Imani, copywriter"],"dog":["The sidewalks are full at nine and still busy at midnight. The dog run is two blocks away and has its own social scene.","I've never once been alone on my street at night. Loud, sure. Alone, never.","Sofia, has a frenchie"],"sat":["You walk to dinner, walk to the bar, walk home. The car has not moved since Tuesday and you are a little worried about the street-cleaning sign.","Two tickets my first month. Now there's an alarm on my phone called MOVE THE CAR.","Imani"],"sun":["Under an hour on paper, with a tunnel and a toll each way. Traffic decides the rest.","It's the most expensive lunch of my week before I even sit down.","Sofia"]}}};
+var LIVES=[{"id":"close","short":"Stay close","name":"The Stay-Close Year","tag":"Queens, minutes from Mom and Dad","color":"#F2A2B8","mins":[10,25],"rent":[2000,2600],"sqft":[430,600],"safety":[3,4],"park":["Street","Street","Driveway"],"toll":0,"ang":[-150,-30,60],"q":{"work":["I thought I'd feel like I never left home. It turns out ten minutes is plenty of distance.","Priya, moved out of her parents' place last spring"],"night":["There are always people around. I like that more than I like quiet.","Marisol, has a terrier mix"],"sat":["I love the neighborhood and I hate looking for a spot after eleven. Both are true.","Dev, drives a small car on purpose"],"sun":["My dad drops off soup. I didn't ask for the soup. I'd miss the soup.","Priya"]},"b":{"wake":["Coffee and a pork bun on the corner","Neighbors out early"],"work":["Desk by the one bright window","Lunch is a five-minute walk"],"after":["Friends a short ride away","Open late, every night"],"sat":["The night ends when you want","Circling for a spot after eleven"]}},{"id":"garden","short":"Garden","name":"The Garden and Garage Year","tag":"Low buildings, lawns, your own spot","color":"#9AD9A8","mins":[25,45],"rent":[2050,2550],"sqft":[680,860],"safety":[4,5],"park":["Gated lot","Garage","Driveway"],"toll":0,"ang":[-20,2,24],"q":{"work":["I get more done here than I ever did in the city. It's almost suspicious.","Hannah, works in payroll software"],"night":["I walk at ten at night and don't think twice. That was the whole point of moving.","Renee, has a corgi"],"sat":["Nobody has ever taken my space. Not once in three years.","Marcus"],"sun":["It's far enough that I call first. It's close enough that I always go.","Hannah"]},"b":{"wake":["Dog out on the loop path","Quiet enough to hear birds"],"work":["Calls with the window open","Lunch on a bench outside"],"after":["Dinner means a short drive","Gym and groceries by car"],"sat":["Drive out, split a ride home","Your spot is always waiting"]}},{"id":"tower","short":"Tower","name":"The Downtown Tower Year","tag":"Small-city high-rise with a front desk","color":"#6FA8DC","mins":[35,60],"rent":[2100,2750],"sqft":[600,760],"safety":[3,5],"park":["Garage","Garage","Paid lot"],"toll":15,"ang":[-92,-70,-48],"q":{"work":["I met most of my friends in that lounge, pretending to work.","Tobi, product designer"],"night":["Having someone at the desk at night matters more than I expected.","Elena, has a mini poodle"],"sat":["Fob in the garage, fob in the elevator, fob at my door. My mother has finally stopped asking.","Elena"],"sun":["The toll annoys me every single time, and then my mom makes rice and I forget.","Tobi"]},"b":{"wake":["Elevator down, one lit crossing","Coffee in the lobby"],"work":["Start at home, move to the lounge","Someone always brings a dog"],"after":["Ramen, climbing gym, trivia downstairs","The car stays parked"],"sat":["Everything is a walk","Home through a lobby, not a lot"]}},{"id":"beach","short":"Beach","name":"The Beach Town Year","tag":"Boardwalk mornings, salt air","color":"#FFD86B","mins":[35,85],"rent":[1950,2700],"sqft":[620,800],"safety":[3,5],"park":["Lot","Street","Garage"],"toll":0,"ang":[64,34,54],"q":{"work":["I take my eleven o'clock call from a bench looking at the ocean. Nobody at work knows.","Jo, account manager"],"night":["Winter nights are dark and empty out here. I love it. My sister wouldn't.","Camille, has a lab mix"],"sat":["Locals have a rule. Park Friday, walk until Monday.","Jo"],"sun":["My parents think it's far. Then they visit in June and stay till Tuesday.","Camille"]},"b":{"wake":["Boardwalk before breakfast","Sand in the dog's paws"],"work":["Laptop after the walk","Calls from a bench by the water"],"after":["Three bars, one of them good","Quieter from October to May"],"sat":["Park Friday, walk until Monday","Summer crowds, winter calm"]}},{"id":"river","short":"River","name":"The River Town Year","tag":"Main street, hills, water views","color":"#B79CD9","mins":[55,105],"rent":[1750,2300],"sqft":[740,960],"safety":[4,5],"park":["Driveway","Lot","Street"],"toll":15,"ang":[-124,-108,-138],"q":{"work":["I have a room just for work. In the city that room was my bed.","Noor, grant writer"],"night":["It's safe and it's very dark. I bought a good flashlight and a reflective leash.","Abby, has a rescue hound"],"sat":["It's the same forty people every weekend. I didn't expect to like that so much.","Noor"],"sun":["I go every other week now, not every week. I stay longer when I go.","Abby"]},"b":{"wake":["The trail starts behind the bakery","Porch lights and quiet streets"],"work":["A second room with a door","Bakery run at three"],"after":["Main Street closes by nine","The same friendly faces"],"sat":["The market takes over the square","Wine bar, brewery, music night"]}},{"id":"city","short":"Big city","name":"The Big City Year","tag":"Everything right outside the door","color":"#C8553D","mins":[40,70],"rent":[2250,2800],"sqft":[420,560],"safety":[3,4],"park":["Street","Paid garage","Street"],"toll":32,"ang":[178,160,200],"q":{"work":["My apartment is tiny, so the neighborhood is my living room. That's the deal.","Imani, copywriter"],"night":["I've never once been alone on my street at night. Loud, sure. Alone, never.","Sofia, has a frenchie"],"sat":["Two tickets my first month. Now there's an alarm on my phone called MOVE THE CAR.","Imani"],"sun":["It's the most expensive lunch of my week before I even sit down.","Sofia"]},"b":{"wake":["The dog run has a social scene","Coffee on every block"],"work":["Desk folds away at six","A new lunch spot daily"],"after":["Walk to dinner, walk home","Somewhere new every night"],"sat":["The car hasn't moved since Tuesday","Watch the street-cleaning sign"]}}];
+var HOODTXT={"close-1":{"name":"Linden Terrace","place":"Queens (pretend)","mins":10,"safety":3,"park":["Street"],"intro":"Six-story brick co-ops and a bakery on every corner.","love":["Ten minutes to Mom and Dad, door to door","Late-night food within two blocks","A busy, well-lit main avenue"],"pause":["Street parking only, and it is tight after 8pm","Studios run small, around 450 square feet"],"parkFact":"Street parking, moved twice a week","dogFact":"Pocket park, four blocks away","q":[["I've lived on this block eleven years and I still find new restaurants.","Tasha"],["Don't bring a big car. Bring a small car and patience.","Rob"]],"b":["The Lindale","88 Sutter Place","Carrow Arms"],"day":[["Pocket park, 4 blocks","m"],["Bakery on the corner","s"],["Food till midnight","s"],["Busy, well-lit avenue","m"],["Friends a short ride","s"]]},"close-2":{"name":"Maple Court","place":"Queens (pretend)","mins":15,"safety":4,"park":["Driveway","Street"],"intro":"Garden co-ops around shared lawns, quieter and a little farther from the train.","love":["Courtyards to walk the dog in","Driveway spots come with some units","Quiet side streets"],"pause":["Older buildings, so ask about the heat","A bus ride to anything fun"],"parkFact":"Some driveways, otherwise street","dogFact":"Courtyard lawns at the door","q":[["It feels like a small town that happens to be in the city.","Ines"],["The radiators have opinions. You get used to it.","Paul"]],"b":["Maple Court, Building C","The Ashgrove","14 Garden Lane"],"day":[["Courtyard lawns outside","s"],["Quiet side streets","s"],["Bus to the fun","m"],["Calm, some driveways","s"],["Sleepy, drive out","m"]]},"close-3":{"name":"Briar Hollow","place":"Queens (pretend)","mins":25,"safety":4,"park":["Street"],"intro":"Tree-lined blocks of two-family houses beside the big park.","love":["The big park is a five-minute walk","The easiest street parking in this group","Calm and residential"],"pause":["You rent from a homeowner, not a company","Few places to go out nearby"],"parkFact":"Street parking, usually easy","dogFact":"Big park, five minutes on foot","q":[["My landlord lives downstairs and waters my plants when I travel.","Grace"],["It's sleepy. I drive ten minutes for anything fun.","Leo"]],"b":["212 Briar Street","The Holloway House","9 Larch Road"],"day":[["Big park, 5 min","s"],["Landlord lives downstairs","m"],["Few places nearby","m"],["Easy street parking","s"],["Off-leash hour, park","s"]]},"garden-1":{"name":"Fernwood Commons","place":"Eastmere","mins":25,"safety":5,"park":["Gated lot"],"intro":"Brick garden apartments around a pond, five minutes from a train station.","love":["A numbered spot in a gated lot","A lit walking loop around the pond","A train nearby for city nights"],"pause":["Kitchens are dated in the older section","The pool closes on Labor Day"],"parkFact":"Gated lot, one numbered spot included","dogFact":"Pond loop and a fenced dog run","q":[["I picked it for the parking and stayed for the pond.","Alicia"],["The renovated units are worth the extra money. The others are not.","Sam"]],"b":["Fernwood, Pond Side","Fernwood, Gate Side","The Reeds"],"day":[["Pond loop, 2 min","s"],["Quiet desk, pond view","s"],["Quiet after 9","m"],["Gated, lit paths","s"],["Drive to dinner","m"]]},"garden-2":{"name":"Willow Run","place":"Quillby","mins":35,"safety":5,"park":["Garage"],"intro":"Newer three-story buildings with elevators, beside a county park.","love":["Elevators, and garages under the buildings","Park trails start at the property line","The newest finishes in this group"],"pause":["Garage spots cost extra","You will drive for groceries"],"parkFact":"Garage under the building, monthly fee","dogFact":"County park trails and a dog wash","q":[["I walk out my door and I'm on a trail in two minutes.","Bea"],["It's beautiful, and a little lonely until you join something.","Kofi"]],"b":["Willow Run East","Willow Run West","Trailhead Lofts"],"day":[["Trail at the door","s"],["New, fast internet","s"],["Drive for groceries","m"],["Garage under building","s"],["Lonely until you join","m"]]},"garden-3":{"name":"Orchard Park","place":"Dunmarrow","mins":45,"safety":4,"park":["Driveway"],"intro":"A 1970s complex with big rooms, tall trees and long-time neighbors.","love":["The largest rooms for the money","Parking right at your door","Long-time neighbors who look out for each other"],"pause":["No elevator, so ask for the ground floor","Laundry is in a shared room"],"parkFact":"Open spots right at your door","dogFact":"Wide lawns and a town park","q":[["My living room fits a real couch and a dining table. Remember those?","Yvonne"],["It's dated. It's also spotless, and the super answers his phone.","Hal"]],"b":["Orchard Park, Building 4","Orchard Park, Building 11","Pippin Court"],"day":[["Wide lawns, town park","s"],["Room for a desk","s"],["Not known yet","u"],["Park at your door","s"],["Quiet, drive to fun","m"]]},"tower-1":{"name":"Cask Street","place":"Port Averly","mins":35,"safety":4,"park":["Garage"],"intro":"Converted warehouses and new towers around a brewery district.","love":["Bars and restaurants at your feet","A front desk around the clock","A garage inside the building"],"pause":["Weekend noise until 1am on the lower floors","Garage and amenity fees add up"],"parkFact":"Garage under the building, monthly fee","dogFact":"Riverwalk dog run across the street","q":[["Ask for a high floor facing the river. The street side is loud.","Mina"],["I've never met so many people in an elevator.","Chris"]],"b":["The Cooperage","One Cask Street","Malt House Lofts"],"day":[["Riverwalk dog run","s"],["Co-working lounge upstairs","s"],["Bars at your feet","s"],["Front desk all night","s"],["Loud until 1am","m"]]},"tower-2":{"name":"Station Square","place":"Wexmoor","mins":45,"safety":5,"park":["Garage"],"intro":"New buildings around a rebuilt train station, with a grocery store downstairs.","love":["Groceries in the building next door","A roof deck and a pool","Quieter than the bar district"],"pause":["Still some construction next door","Fewer independent restaurants"],"parkFact":"Garage, monthly fee, fob entry","dogFact":"Rooftop dog run and a small plaza","q":[["I haven't carried groceries more than a block in a year.","Dani"],["It's a little too new. Give it five years.","Omar"]],"b":["Station Square North","The Signal","Platform Nine"],"day":[["Rooftop dog run","s"],["Groceries next door","s"],["Roof deck and pool","s"],["Garage, fob entry","s"],["Fewer restaurants","m"]]},"tower-3":{"name":"Foundry Row","place":"Halvern","mins":60,"safety":3,"park":["Paid lot"],"intro":"Cheaper towers on blocks that are still catching up.","love":["The lowest rents for a new building","Big units with city views","A real arts scene"],"pause":["Some blocks are empty at night","Parking is in a paid lot down the street"],"parkFact":"Paid lot, a block from the door","dogFact":"One small dog park, five blocks","q":[["The building is great. After dark I take a car home and don't walk it.","Jules"],["You get so much apartment here. The neighborhood is a work in progress.","Ana"]],"b":["The Crucible","Foundry Row Tower","Anvil House"],"day":[["Dog park, 5 blocks","m"],["Big unit, city views","s"],["Real arts scene","s"],["Empty blocks at night","m"],["Galleries and openings","s"]]},"beach-1":{"name":"Boardwalk East","place":"Saltmarsh Point","mins":50,"safety":4,"park":["Lot"],"intro":"Mid-rise buildings a block from the sand, with a train back toward the city.","love":["The ocean is a one-block walk","A train station in town","A main street that stays open all year"],"pause":["Summer weekend parking is a fight","Salt air is hard on a car"],"parkFact":"Building lot, tight in summer","dogFact":"Boardwalk at dawn, beach off-season","q":[["From October to May this is the best-kept secret within an hour of the city.","Lou"],["In July I don't move my car. I just don't.","Nat"]],"b":["The Breakers","Seaglass Court","40 Boardwalk East"],"day":[["Boardwalk at dawn","s"],["Café facing the water","s"],["Main street, year-round","s"],["Lot tight in summer","m"],["Packed in July","m"]]},"beach-2":{"name":"Dune Row","place":"Pelican Shoal","mins":65,"safety":5,"park":["Street","Lot"],"intro":"A quieter stretch of low buildings where the beach crowds thin out.","love":["The calmest beach in the group","Easy parking outside July and August","Neighbors who stay all year"],"pause":["Few restaurants open in winter","A car is a must"],"parkFact":"Street and small lots, easy off-season","dogFact":"Empty beach walks most of the year","q":[["It's me, the dog and the gulls from November to April.","Maeve"],["If you need a scene, this is not it.","Eli"]],"b":["Dune Row Bungalows","The Sandpiper","Marram House"],"day":[["Empty beach walks","s"],["Quiet, bright porch","s"],["Few open in winter","m"],["Dark, calm, safe","s"],["No scene here","m"]]},"beach-3":{"name":"Old Harbor","place":"Kettle Cove","mins":85,"safety":4,"park":["Garage","Lot"],"intro":"A fishing harbor turned weekend town, the farthest out and the prettiest.","love":["Harbor views and seafood shacks","The most apartment for the money here","A tight year-round community"],"pause":["Nearly 90 minutes to Mom and Dad","Very quiet from January to March"],"parkFact":"Garage in the newer building, lots elsewhere","dogFact":"Harbor path and a town green","q":[["I know my mail carrier, my barista and the harbor master.","Fran"],["It's far. You have to want this.","Theo"]],"b":["Harbor Master's Row","The Net Loft","Kettle Cove Landing"],"day":[["Harbor path, town green","s"],["Water out the window","s"],["Seafood shacks","s"],["Silent in winter","m"],["Tight year-round crowd","s"]]},"river-1":{"name":"Mill Street","place":"Ashby Landing","mins":60,"safety":5,"park":["Driveway"],"intro":"Brick mill buildings turned into lofts, beside the river path.","love":["Loft ceilings and huge windows","The river path at the back door","A farmers' market on Saturdays"],"pause":["About an hour to Mom and Dad","Old buildings can be drafty"],"parkFact":"Private lot behind the mill","dogFact":"River path, lit as far as the bridge","q":[["My ceilings are fourteen feet. I had to buy a ladder for the smoke detector.","Wren"],["Winter heating bills are no joke in a loft.","Ike"]],"b":["Ashby Mill Lofts","The Weave Shed","Spindle Works"],"day":[["River path, back door","s"],["Loft, room to work","s"],["Bakery and a bookshop","s"],["Lit to the bridge","s"],["Farmers' market Saturdays","s"]]},"river-2":{"name":"Upper Main","place":"Corwen Falls","mins":80,"safety":5,"park":["Lot","Street"],"intro":"A steep main street of shops and porches, with a waterfall park at the top.","love":["The most walkable small town here","A waterfall park and trails","Cafés people work from all day"],"pause":["Hilly, so think about ice in January","Street parking on a slope"],"parkFact":"Lot behind Main, some street on a slope","dogFact":"Falls park trails","q":[["Everything I need is on one street, and the street is gorgeous.","Pilar"],["You'll want good tires and good boots.","Gus"]],"b":["31 Upper Main","The Falls House","Porchlight Row"],"day":[["Falls park trails","s"],["Cafés to work from","s"],["Everything on one street","s"],["Steep, icy in January","m"],["Brewery and music night","s"]]},"river-3":{"name":"The Flats","place":"Brindle Ferry","mins":105,"safety":4,"park":["Street"],"intro":"The farthest town out, flat and green, where the rent drops.","love":["The lowest rents on the whole list","Space for an office and a guest bed","A kayak launch in town"],"pause":["An hour and 45 minutes to Mom and Dad","Two restaurants and one bar"],"parkFact":"Street parking, never a problem","dogFact":"Riverside fields, quiet all day","q":[["I pay less than I did for a room in the city, and I have a garden.","Odile"],["My friends came once. It's a long way to come twice.","Ben"]],"b":["Brindle Flats","Ferry Lane Cottages","The Towpath"],"day":[["Riverside fields","s"],["Not known yet","u"],["Two restaurants, one bar","m"],["Parking never a problem","s"],["Kayak launch in town","s"]]},"city-1":{"name":"Dockside","place":"Harlan Yards","mins":40,"safety":4,"park":["Paid garage"],"intro":"Glass towers on the waterfront, with a ferry stop and a skyline view.","love":["Skyline views from the gym","Doorman buildings throughout","Ferry and train both close"],"pause":["Garage parking costs a small fortune","Studios only at this price"],"parkFact":"Paid garage, steep monthly fee","dogFact":"Waterfront promenade, two dog runs","q":[["The view still gets me every single morning.","Kira"],["I pay for a garage spot I use on Sundays.","Jon"]],"b":["Dockside One","The Gantry","Slipway Tower"],"day":[["Promenade, two dog runs","s"],["Skyline from the gym","s"],["Ferry and train close","s"],["Doorman, pricey garage","m"],["All within six blocks","s"]]},"city-2":{"name":"Elm and Ninth","place":"Midvale","mins":55,"safety":4,"park":["Street"],"intro":"Walk-up blocks and corner bars, the most lived-in neighborhood here.","love":["The best food and nightlife on the list","A real neighborhood feel","Cheaper than the waterfront"],"pause":["Street parking, moved twice a week","Older buildings, so check for an elevator"],"parkFact":"Street parking, moved twice a week","dogFact":"Busy dog run, two blocks","q":[["Every block has a place I love.","Rae"],["I've gotten very good at parallel parking.","Tom"]],"b":["Elm and Ninth","The Corner House","Ninth Street Arms"],"day":[["Dog run, 2 blocks","s"],["Three cafés a week","s"],["Best food here","s"],["Move car twice weekly","m"],["Corner bars, walk home","s"]]},"city-3":{"name":"The Printworks","place":"Garrow Heights","mins":70,"safety":3,"park":["Street","Paid garage"],"intro":"Old factories turning into apartments at the edge of the city.","love":["The biggest city apartments for the money","New buildings with roof decks","A food scene on its way up"],"pause":["Car break-ins come up in reviews","A longer walk to the train"],"parkFact":"Street, or a paid garage nearby","dogFact":"New park along the rail trail","q":[["The apartment is a steal. I just never leave anything in my car.","Zoe"],["Give it a couple of years. It's getting better fast.","Marc"]],"b":["The Printworks","Typeset Lofts","Inkwell House"],"day":[["Not known yet","u"],["Big for the city","s"],["Food scene rising","s"],["Car break-ins reported","m"],["Roof decks, new spots","s"]]}};
+var LIFE_DAY={
+ close:{day:[["Coffee on the corner","s"],["Desk by the window","s"],["Open late, every night","s"],["Busy streets, tight parking","m"],["Friends a short ride","s"]],
+  wake:"The block is awake before you are. Coffee and a pork bun are two minutes away, and the dog gets a loop past the bakery.",after:"Dinner is a walk, a friend is a short ride, and nothing closes early."},
+ garden:{day:[["Loop path with the dog","s"],["Quiet, window open","s"],["Dinner is a drive","m"],["Lit paths, own spot","s"],["Calm, drive for fun","m"]],
+  wake:"You step out to lawns and a lit loop path. The only traffic is other dog walkers.",after:"Evenings are quiet. Dinner out means a short drive, and so do the gym and the groceries."},
+ tower:{day:[["Elevator, then riverwalk","s"],["Lounge on six","s"],["Ramen and trivia downstairs","s"],["Front desk, garage","s"],["Lively, sometimes loud","m"]],
+  wake:"Elevator down, coffee in the lobby, one lit crossing to the riverwalk.",after:"The ramen place, the climbing gym and trivia night are all downstairs. The car stays parked."},
+ beach:{day:[["Boardwalk before breakfast","s"],["Café by the water","s"],["Quiet outside summer","m"],["Dark, calm off-season","m"],["Summer crowds, winter calm","m"]],
+  wake:"You walk the boardwalk before breakfast and come home with sand in the dog's paws.",after:"There are three bars, one of them good. From October to May the town is quiet by eight."},
+ river:{day:[["Trail behind the bakery","s"],["A room just for work","s"],["Shuts at nine","m"],["Quiet, very dark","m"],["Market, brewery, music","s"]],
+  wake:"Porch lights, quiet streets, and a trail that starts behind the bakery.",after:"Main Street is closed up by nine. You cook more, and the bartender knows your name."},
+ city:{day:[["Coffee on every block","s"],["Desk folds away","m"],["Somewhere new nightly","s"],["Busy late, hard parking","m"],["Everything on foot","s"]],
+  wake:"Coffee on every block, and a dog run with its own social scene.",after:"You walk to dinner and walk home. You could eat somewhere new every night for a year."}
+};
+var PULL={
+ close:["Mom's cooking is ten minutes away","Food until midnight, friends a short ride off"],
+ garden:["A parking spot that is always yours","Lawns and lit paths for the dog"],
+ tower:["A front desk, a gym and a view","Dinner and groceries an elevator ride away"],
+ beach:["Dawn walks on an empty boardwalk","The ocean at the end of your street"],
+ river:["The most space your money buys","A main street where they learn your dog's name"],
+ city:["Everything within six blocks","The best food and nightlife on the list"]};
+var LEAD={
+ close:"Three corners of Queens. Each makes a different deal with the car.",
+ garden:"Three complexes: one by a pond, one by a trail, one with the biggest rooms.",
+ tower:"Three small cities: the lively one, the easy one and the cheap one.",
+ beach:"Three shore towns, each quieter and farther out than the last.",
+ river:"Three river towns. The rent drops as the drive grows.",
+ city:"Three neighborhoods: the polished one, the lived-in one and the up-and-coming one."};
+var HOOK={
+ "close-1":{h:"The one ten minutes from Mom's kitchen",p:["A bakery on every corner","Food till midnight, two blocks away"],c:"street parking gets tight after 8pm"},
+ "close-2":{h:"The one with lawns at the door",p:["Courtyards the dog can sniff around in","Some places come with a driveway"],c:"a bus ride to anything fun"},
+ "close-3":{h:"The one beside the big park",p:["Off-leash hour, five minutes on foot","The easiest street parking of the three"],c:"your landlord lives downstairs"},
+ "garden-1":{h:"The one with the pond and the numbered spot",p:["A lit loop around the water for night walks","A train nearby for city nights"],c:"kitchens are dated in the older section"},
+ "garden-2":{h:"The one where the trail starts at your door",p:["Elevators, and a garage under the building","The newest kitchens of the three"],c:"you will drive for groceries"},
+ "garden-3":{h:"The one with the biggest rooms",p:["Park right at your front door","Neighbors who have been here for decades"],c:"no elevator, so ask for the ground floor"},
+ "tower-1":{h:"The one above the brewery district",p:["Dinner and drinks an elevator ride away","A front desk awake all night"],c:"loud until 1am on the lower floors"},
+ "tower-2":{h:"The one with groceries downstairs",p:["A roof deck, a pool and a rooftop dog run","Quieter than the bar district"],c:"construction next door, for now"},
+ "tower-3":{h:"The one where your money goes furthest",p:["Big places with city views","Galleries and openings most weekends"],c:"some blocks are empty at night"},
+ "beach-1":{h:"The one a block from the sand",p:["Coffee facing the water before work","A main street that stays open all winter"],c:"parking is a fight in July"},
+ "beach-2":{h:"The one with the empty beach",p:["Dog walks with nobody else in sight","Neighbors who stay all year"],c:"few restaurants open in winter"},
+ "beach-3":{h:"The prettiest one, and the farthest",p:["Water out the window, seafood down the street","The most apartment for the money here"],c:"nearly 90 minutes to Mom and Dad"},
+ "river-1":{h:"The one with loft ceilings",p:["Huge windows and room to work","A river path out the back door"],c:"old mills can be drafty"},
+ "river-2":{h:"The one with a waterfall at the top of the street",p:["Everything you need on one walkable street","Cafés people work from all day"],c:"steep, and icy in January"},
+ "river-3":{h:"The one where the rent drops",p:["Room for an office and a guest bed","A kayak launch in town"],c:"an hour and 45 minutes to Mom and Dad"},
+ "city-1":{h:"The one with the skyline view",p:["A doorman, and a gym facing the water","Ferry and train both close"],c:"the garage costs a small fortune"},
+ "city-2":{h:"The one with the best food on the list",p:["Corner bars you can walk home from","A real, lived-in neighborhood"],c:"you move the car twice a week"},
+ "city-3":{h:"The up-and-coming one",p:["The biggest city apartments for the money","New buildings with roof decks"],c:"car break-ins come up in reviews"}};
+var FLAVOR_HOOK=["The one with the morning light","The one with the new kitchen","The quiet one, facing the courtyard","The one with the balcony","The one with closets, plural","The one with its own washer and dryer","The one with a real living room","The one with sky over the sink","The one with the new floors","The one with neighbors who hold the door"];
+var NW={1:"One",2:"Two",3:"Three"};
+var FEEL={
+ "close-1":{feel:"Loud in a good way. The avenue is lit and busy until midnight, and the side streets smell like bread by six.",who:"Families who have been here thirty years, nurses coming off the late shift, and plenty of people your age who never left Queens.",food:"Three bakeries, dumplings till midnight, a diner that learns your order",errands:"Supermarket and pharmacy on the avenue, both a walk",around:"Bus at the corner, subway eight blocks. The car is for Sundays"},
+ "close-2":{feel:"Low brick buildings around shared lawns, where the loudest thing is a lawnmower. It feels like a small town folded into Queens.",who:"Retired couples, young families, and neighbors who notice when your car has not moved.",food:"One good pizzeria and a deli. Anything else is a bus ride",errands:"Grocery store five minutes by car, with its own lot",around:"Bus to the train in fifteen minutes. Easy driving, easy parking"},
+ "close-3":{feel:"Tree-lined blocks of two-family houses that end at the big park. Evenings are porch lights and dog walkers.",who:"Homeowners who rent out the top floor, teachers, city workers, and every dog owner within a mile.",food:"A bagel shop, a Greek diner, and not much after nine",errands:"A small shopping strip, ten minutes on foot",around:"You will drive most places, and parking is easy when you get back"},
+ "garden-1":{feel:"Brick buildings set around a pond, with a lit path that everyone walks after dinner. It is tidy, green and calm on purpose.",who:"Nurses and teachers, a few retirees, and commuters who take the train in and want quiet when they get home.",food:"A diner and a Thai place by the station. Real choice is a drive",errands:"Supermarket five minutes by car, pharmacy by the station",around:"Train to the city five minutes away. Your numbered spot waits at home"},
+ "garden-2":{feel:"New buildings at the edge of a county park, so the view from the kitchen is trees. It is quiet enough to hear the trail runners go by.",who:"People who work from home, new parents, and a running club that meets at the trailhead on Saturdays.",food:"A café at the trailhead. Restaurants are a ten-minute drive",errands:"Big grocery stores ten minutes away, always by car",around:"Everything is a drive, and the garage makes that easy"},
+ "garden-3":{feel:"A 1970s complex under tall trees, with rooms built before anyone thought of shrinking them. People wave from their cars here.",who:"Long-time neighbors, some here for decades, who know the mail carrier by name and will soon know yours.",food:"A family Italian place and a bakery in the town center",errands:"Town center five minutes by car: grocery, hardware, vet",around:"Park at your door. The highway is ten minutes off"},
+ "tower-1":{feel:"Old warehouses and new towers around a brewery district that fills up every Friday. It has the energy of a place that just got popular.",who:"People in their late twenties and thirties, mostly new to town, who moved here to walk to dinner.",food:"Ramen, tacos, two breweries and a good coffee bar, all downstairs",errands:"A small market on the block. The big grocery is a short drive",around:"Walk to almost everything. The car sleeps in the garage"},
+ "tower-2":{feel:"A new square built around a rebuilt train station, with a grocery store on the ground floor. It is polished, convenient and a little quiet.",who:"Commuters, couples and remote workers who chose easy over lively.",food:"Familiar chains and one good bakery. Few independents so far",errands:"Groceries, pharmacy and dry cleaner without crossing a street",around:"Train in the square. Garage under the building, fob entry"},
+ "tower-3":{feel:"New towers on blocks that are still catching up, with galleries in the old storefronts. Half of it is exciting and half of it is empty.",who:"Artists, students and first-time renters who came for the price and stayed for the openings.",food:"A few great cheap spots and a coffee roaster, with gaps in between",errands:"One grocery store, six blocks away",around:"Paid lot a block from the door. Walkable by day"},
+ "beach-1":{feel:"A block from the sand, on a main street that keeps its lights on in February. Summer belongs to visitors. The rest of the year belongs to you.",who:"Year-rounders, surfers with day jobs, and city people who took the train out one weekend and stayed.",food:"Cafés facing the water, a fish place, a bar with a fireplace",errands:"A small grocery in town, a bigger one ten minutes inland",around:"Train station in town. The building lot gets tight in July"},
+ "beach-2":{feel:"Low buildings where the boardwalk runs out and the beach goes quiet. On a weekday in March you can walk for an hour and meet two people.",who:"Neighbors who stay all year: retirees, nurses, a few writers, and their dogs.",food:"A breakfast spot and one bar. Most kitchens close for winter",errands:"Groceries are a fifteen-minute drive",around:"A car is a must, and parking is easy outside summer"},
+ "beach-3":{feel:"A working harbor that turned into a weekend town, with boats outside the window. It is the prettiest place on the list, and it knows it.",who:"A tight year-round crowd of fishermen, shop owners and people who came for a summer and never left.",food:"Seafood shacks, a bakery and a wine bar. Quiet from January to March",errands:"One market in town. Real shopping is twenty minutes away",around:"No train. Everything, including Mom and Dad, is a drive"},
+ "river-1":{feel:"Brick mills turned into lofts, with the river running behind them. On Saturday mornings the whole town is at the farmers' market.",who:"Designers, bakers, remote workers and people who left the city for more room.",food:"A bakery, a bookshop café and two good dinner spots",errands:"Co-op grocery on Main. A supermarket ten minutes out",around:"Private lot behind the mill. The river path is lit to the bridge"},
+ "river-2":{feel:"One steep main street of shops and porches, with a waterfall at the top. You can get through a whole day without starting the car.",who:"Café regulars with laptops, musicians, and shop owners who live above the shop.",food:"Three cafés, a brewery with music nights, a noodle bar",errands:"Grocery, pharmacy and hardware, all on Main",around:"Walk everywhere. Mind the hill in January"},
+ "river-3":{feel:"The last town on the list, flat and green, with fields running down to the river. It is very quiet and very cheap, and both are the point.",who:"Farm families, a few artists, and remote workers who wanted a spare room.",food:"Two restaurants and one bar, and you will know all three",errands:"General store in town. The supermarket is twenty minutes off",around:"Parking is never a problem. The drive to Queens is"},
+ "city-1":{feel:"Glass towers on the waterfront, with the skyline across the water. Everything is new, staffed and a little anonymous.",who:"Young professionals, people in finance and tech, and a lot of small dogs in raincoats.",food:"Polished restaurants, a food hall and coffee on every corner",errands:"Grocery store in the next tower, open late",around:"Ferry and train both close. The garage costs a small fortune"},
+ "city-2":{feel:"Walk-up blocks, corner bars and a line outside the good bakery. It is the most lived-in neighborhood on the list.",who:"Everyone: old-timers on stoops, bartenders, grad students, and friends who insist you come out.",food:"The best food on the list, from dollar slices to a tasting menu",errands:"A bodega on every block, a supermarket three blocks away",around:"Train two blocks away. The car moves twice a week for street cleaning"},
+ "city-3":{feel:"Old factories turning into apartments at the edge of the city. There is a new place to eat every month, and a few blocks you would skip late at night.",who:"Artists, chefs and people priced out of the waterfront, most of them new here.",food:"A food scene on its way up: pop-ups, a roastery, a great bar",errands:"One supermarket, a ten-minute walk",around:"A longer walk to the train. Street parking, or a paid garage nearby"}};
+var FLAVOR=["Morning light lands in the bedroom.","The kitchen was redone last year.","The windows face a courtyard, so it is quiet.","There is a balcony just big enough for two chairs and a dog bed.","Closets, plural.","A washer and dryer hide behind a door in the hall.","The living room fits a couch and a table at the same time.","You can see a strip of sky from the kitchen sink.","The floors are new and the bathroom is not.","The elevator is slow and the neighbors hold the door."];
+var PARK_LINE={"Garage":"Your car lives in the garage under the building, so the walk to your door is indoors.","Gated lot":"Your numbered spot is behind a gate, under a light.","Driveway":"You park right outside your own door.","Lot":"You park in the building's lot, which fills up on busy weekends.","Paid lot":"The car goes in a paid lot down the block, a walk you will notice in January.","Paid garage":"A garage spot exists, and it costs about as much as a car payment.","Street":"The car sleeps on the street, wherever you find a spot that night."};
+var PARK_FEE={"Garage":175,"Paid garage":250,"Gated lot":75,"Paid lot":120,"Lot":0,"Driveway":0,"Street":0};
+var PARK_RANK={"Garage":4,"Gated lot":4,"Driveway":3,"Paid garage":3,"Lot":2,"Paid lot":2,"Street":1};
+var PARK_PHRASE={"Garage":"a garage spot","Gated lot":"a gated lot","Driveway":"a driveway","Paid garage":"a paid garage","Lot":"a lot spot","Paid lot":"a paid lot","Street":"street parking"};
+var ANG={garden:[-50,0,50],tower:[-110,-70,-40],city:[180,150,205]};
+var HOODS=[],UNITS=[],L_BY={},H_BY={},U_BY={};
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+(function build(){
+  var r=rng(20261115),ABC="ABC";
+  function clamp(n){return Math.max(1,Math.min(5,n))}
+  LIVES.forEach(function(L){
+    L_BY[L.id]=L;L.hoods=[];
+    for(var h=0;h<3;h++){
+      var X=HOODTXT[L.id+"-"+(h+1)],H={id:L.id+"-"+(h+1),life:L,letter:ABC[h],toll:L.toll,ang:(ANG[L.id]||L.ang)[h],units:[]};
+      ["name","place","mins","safety","intro","love","pause","parkFact","dogFact","q","day"].forEach(function(k){H[k]=X[k]});
+      var n=2+(r()<0.5?1:0);
+      for(var u=0;u<n;u++){
+        var rent=Math.round((L.rent[0]+(L.rent[1]-L.rent[0])*r())/25)*25;
+        var sqft=Math.round((L.sqft[0]+(L.sqft[1]-L.sqft[0])*r())/10)*10;
+        var park=X.park[Math.floor(r()*X.park.length)];
+        var U={id:H.id+"-"+(u+1),hood:H,life:L,name:X.b[u],ix:UNITS.length,beds:sqft<560?"Studio":"1 BR",
+          rent:rent,park:park,parkFee:PARK_FEE[park],pet:35,fee:r()<0.4?50:0,sqft:sqft,mins:H.mins,toll:L.toll,
+          safety:H.safety,fiber:r()<0.6,cafe:2+Math.floor(r()*11),green:1+Math.floor(r()*8),floors:2+Math.floor(r()*8)};
+        U.night=clamp(U.safety+(r()<0.3?-1:0));
+        U.allIn=U.rent+U.parkFee+U.pet+U.fee;
+        H.units.push(U);UNITS.push(U);U_BY[U.id]=U;
+      }
+      L.hoods.push(H);HOODS.push(H);H_BY[H.id]=H;
+    }
+  });
+})();
+function unitsOf(L){var o=[];L.hoods.forEach(function(H){o=o.concat(H.units)});return o}
+HOODS.forEach(function(H){var us=H.units;
+  function best(f,dir){var a=us.slice().sort(function(x,y){return dir*(f(x)-f(y))});return f(a[0])!==f(a[1])?a[0]:null}
+  var c=best(function(u){return u.allIn},1),b=best(function(u){return u.sqft},-1),k=best(function(u){return PARK_RANK[u.park]},-1),g=best(function(u){return u.green},1);
+  [[c,"The cheapest one here"],[b,"The biggest one here"],[k&&PARK_RANK[k.park]>=3?k:null,k?"The one with "+PARK_PHRASE[k.park]:""],[g,"The closest to green space"]].forEach(function(t){if(t[0]&&!t[0].hook)t[0].hook=t[1]});
+  us.forEach(function(u){if(!u.hook)u.hook=FLAVOR_HOOK[u.ix%FLAVOR_HOOK.length];u.tease=FLAVOR[u.ix%FLAVOR.length]})});
+
+/* ================= State ================= */
+var DEF={cost:2800,mins:120,safe:3,sqft:400};
+var KEY="lamia-mock4-v1";
+var S={lim:{cost:DEF.cost,mins:DEF.mins,safe:DEF.safe,sqft:DEF.sqft},held:[],pair:[0,1],hideTies:true,seenTour:false,tourAt:-1};
+try{var saved=JSON.parse(localStorage.getItem(KEY)||"null");
+  if(saved){["cost","mins","safe","sqft"].forEach(function(k){if(saved.lim&&typeof saved.lim[k]==="number")S.lim[k]=saved.lim[k]});
+    if(Array.isArray(saved.held))S.held=saved.held.filter(function(id){return U_BY[id]}).slice(0,3);
+    S.seenTour=!!saved.seenTour}
+}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({lim:S.lim,held:S.held,seenTour:S.seenTour}))}catch(e){}}
+
+/* ================= Helpers ================= */
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
+function money(n){return "$"+Number(n).toLocaleString("en-US")}
+function lis(a){return a.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")}
+function list(a){return a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1]}
+function range(arr,f){var v=arr.map(f);return [Math.min.apply(null,v),Math.max.apply(null,v)]}
+function bar(n){return '<span class="bar s'+n+'" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>'}
+function hours(mins){return Math.round(4*2*mins/60*10)/10}
+function heldIx(id){return S.held.indexOf(id)}
+function why(U){var L=S.lim,o=[];
+  if(U.allIn>L.cost)o.push(money(U.allIn)+" is over your "+money(L.cost));
+  if(U.mins>L.mins)o.push(U.mins+" minutes is past your "+L.mins);
+  if(U.safety<L.safe)o.push("Safety "+U.safety+", and you asked for "+L.safe+" or better");
+  if(U.sqft<L.sqft)o.push(U.sqft+" sq ft, and you asked for "+L.sqft+" or more");
+  return o}
+function fits(U){return why(U).length===0}
+function fitBadge(n,total){return '<span class="fit'+(n?'':' zero')+'">'+(n?n+" of "+total+" places fit":"Nothing fits your limits")+'</span>'}
+function wish(U){return [{t:"Budget",ok:U.allIn<=CAP},{t:"Parking",ok:PARK_RANK[U.park]>=3},{t:"Safe",ok:U.safety>=4},{t:"Green",ok:U.green<=5}]}
+function wishCount(U){return wish(U).filter(function(w){return w.ok}).length}
+function wishRow(U,lab){return '<div class="wl" aria-label="Wish list: '+wishCount(U)+' of 4">'+(lab?'<small>Wish list</small>':'')+wish(U).map(function(w){return '<span class="w '+(w.ok?'ok':'no')+'">'+(w.ok?'✓':'✗')+' '+w.t+'</span>'}).join("")+'</div>'}
+var SLOTS=[{k:"wake",t:"Wake up",s:"Wake up"},{k:"work",t:"Work",s:"Work"},{k:"after",t:"After work",s:"After work"},{k:"night",t:"Night",s:"Night"},{k:"sat",t:"Saturday",s:"Saturday"},{k:"sun",t:"Sunday, Mom and Dad",s:"Sunday visit"}];
+var TINT_WORD={s:"Strong",m:"Mixed",y:"Your call",u:"Not known yet"};
+function dayOfHood(H){return SLOTS.map(function(sl,i){
+  if(sl.k==="sun")return {k:"sun",t:sl.t,s:sl.s,cap:H.mins+" min, "+(H.toll?money(H.toll)+" tolls":"no toll"),tint:"y"};
+  return {k:sl.k,t:sl.t,s:sl.s,cap:H.day[i][0],tint:H.day[i][1]}})}
+function dayOfLife(L){var m=range(L.hoods,function(x){return x.mins});return SLOTS.map(function(sl,i){
+  if(sl.k==="sun")return {k:"sun",t:sl.t,s:sl.s,cap:m[0]+" to "+m[1]+" min",tint:"y"};
+  return {k:sl.k,t:sl.t,s:sl.s,cap:LIFE_DAY[L.id].day[i][0],tint:LIFE_DAY[L.id].day[i][1]}})}
+function dayOfUnit(U){var d=dayOfHood(U.hood),big=U.sqft>=600;
+  d[0]={k:"wake",t:"Wake up",s:"Wake up",cap:"Green space, "+U.green+" min",tint:U.green<=5?"s":"m"};
+  d[1]={k:"work",t:"Work",s:"Work",cap:(U.fiber?"Fiber, ":"No fiber, ")+(big?"real desk":"small desk"),tint:U.fiber&&big?"s":"m"};
+  d[3]={k:"night",t:"Night",s:"Night",cap:U.park+", feels "+(U.night>=4?"safe":U.night===3?"mixed":"uneasy"),tint:U.night>=4&&PARK_RANK[U.park]>=3?"s":"m"};
+  return d}
+function voice(U){var size=U.sqft>=800?", with room for a proper desk":U.sqft<500?", where the bed and the couch share a room":"";
+  return "A "+(U.beds==="Studio"?"studio":"one-bedroom")+" of "+U.sqft+" square feet"+size+". "+PARK_LINE[U.park]+" "+FLAVOR[U.ix%FLAVOR.length]}
+function uLove(U){var o=[];
+  if(PARK_RANK[U.park]>=3)o.push("Parking sorted: "+PARK_PHRASE[U.park]);
+  o.push("Green space a "+U.green+"-minute walk away");
+  if(U.fiber)o.push("Fiber internet for the workday");
+  if(U.sqft>=700)o.push(U.sqft+" square feet to spread out in");
+  o.push(FLAVOR[(U.ix+3)%FLAVOR.length].replace(/\.$/,""));
+  return o.slice(0,3)}
+function uPause(U){var o=[];
+  if(PARK_RANK[U.park]<=2)o.push("Parking means "+PARK_PHRASE[U.park]);
+  if(U.night<=3)o.push("Night walks feel like a "+U.night+" out of 5");
+  if(U.fee>0)o.push("A "+money(U.fee)+" monthly building fee");
+  if(U.sqft<520)o.push("Tight at "+U.sqft+" square feet");
+  if(U.allIn>CAP)o.push("Runs past your "+money(CAP)+" cap");
+  o.push("Photos flatter it, so see it in person");
+  return o.slice(0,2)}
+function uAsk(U){return [PARK_RANK[U.park]>=3?"Is the parking spot guaranteed in the lease, and what does it cost?":"What is parking like at 9pm on a weeknight?","What does the all-in monthly come to, in writing?","Is there a weight or breed limit for dogs?"]}
+
+/* ================= Icons and informative art ================= */
+var IC={
+ wake:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18a6 6 0 0 1 12 0z" fill="#FFD86B" stroke="#3A1630" stroke-width="2"/><path d="M2 18h20M12 5v3M5 9l2 2M19 9l-2 2" stroke="#3A1630" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>',
+ work:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="2" fill="#3A1630"/><rect x="6.5" y="7.5" width="11" height="6" fill="#FFD86B"/><path d="M2 19h20" stroke="#3A1630" stroke-width="2.6" stroke-linecap="round"/></svg>',
+ after:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v8a2 2 0 0 0 2 2v10M5 2v6M9 2v6M17 22V2c-2.5 1-4 4-4 8h4" stroke="#3A1630" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>',
+ night:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2.5a8 8 0 1 0 6.5 12A7 7 0 0 1 15 2.5z" fill="#3A1630"/><circle cx="6" cy="6" r="1.8" fill="#E0457B"/></svg>',
+ sat:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16l-8 9z" fill="#E0457B" stroke="#3A1630" stroke-width="2" stroke-linejoin="round"/><path d="M12 13v7M8 21h8" stroke="#3A1630" stroke-width="2.4" stroke-linecap="round"/></svg>',
+ sun:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v10H3z" fill="#3A1630"/><path d="M12 12.2c-1.2-2.2-4.6-1.4-4.1 1 .3 1.5 2.2 2.7 4.1 4.1 1.9-1.4 3.8-2.6 4.1-4.1.5-2.4-2.9-3.2-4.1-1z" fill="#FF9EC0"/></svg>',
+ money:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#3A1630"/><text x="12" y="17" text-anchor="middle" font-size="14" font-weight="800" fill="#FFD86B" font-family="Figtree, sans-serif">$</text></svg>',
+ space:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="#3A1630"/><path d="M8 16V8h8" stroke="#FFD86B" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>',
+ car:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" fill="#3A1630"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9" stroke="#fff" stroke-width="2.4" fill="none"/></svg>',
+ safe:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" fill="#3A1630"/><path d="m8.5 12 2.4 2.4L15.6 9.7" stroke="#FFD86B" stroke-width="2.2" fill="none"/></svg>',
+ list:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="2" width="18" height="20" rx="3" fill="#3A1630"/><path d="m7 8 1.6 1.6L11.5 7M7 14l1.6 1.6 2.9-2.6M14 8.5h4M14 14.5h4" stroke="#FFD86B" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>',
+ cam:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="3" fill="#3A1630"/><path d="M8 6l1.5-3h5L16 6z" fill="#3A1630"/><circle cx="12" cy="13" r="4" fill="#FFD86B"/></svg>',
+ pup:'<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 9c-4 3-4 11 1 13zM27 9c4 3 4 11-1 13z" fill="#8A5A34"/><circle cx="16" cy="17" r="11" fill="#C68B59"/><circle cx="12" cy="15" r="1.8" fill="#3A1630"/><circle cx="20" cy="15" r="1.8" fill="#3A1630"/><ellipse cx="16" cy="20.5" rx="3" ry="2.2" fill="#3A1630"/><path d="M13 24q3 3 6 0" stroke="#3A1630" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>'
+};
+IC.bag='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 13H6z" fill="#FFD86B" stroke="#3A1630" stroke-width="2" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="#3A1630" stroke-width="2"/></svg>';
+IC.rail='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3" fill="#E0457B" stroke="#3A1630" stroke-width="2"/><rect x="8" y="6" width="8" height="4" rx="1" fill="#fff"/><circle cx="9" cy="13.5" r="1.3" fill="#3A1630"/><circle cx="15" cy="13.5" r="1.3" fill="#3A1630"/><path d="M8 21l2-4M16 21l-2-4" stroke="#3A1630" stroke-width="2" stroke-linecap="round"/></svg>';
+function skyBits(){return '<circle cx="540" cy="36" r="20" fill="#FFD86B"/><ellipse cx="80" cy="34" rx="40" ry="12" fill="#fff"/><ellipse cx="108" cy="27" rx="26" ry="10" fill="#fff"/>'}
+function bld(x,base,w,h,c,roof){
+  var y=base-h,o='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="3" fill="'+c+'"/>';
+  var cols=Math.max(1,Math.floor((w-10)/22)),rows=Math.max(1,Math.floor((h-16)/22)),ox=(w-cols*22+8)/2;
+  for(var r=0;r<rows;r++)for(var k=0;k<cols;k++)o+='<rect x="'+(x+ox+k*22)+'" y="'+(y+10+r*22)+'" width="14" height="11" rx="2" fill="#FFF8E1"/>';
+  if(roof==="peak")o+='<path d="M'+(x-8)+' '+(y+3)+' L'+(x+w/2)+' '+(y-22)+' L'+(x+w+8)+' '+(y+3)+'z" fill="#3A1630"/>';
+  else o+='<rect x="'+(x-4)+'" y="'+(y-7)+'" width="'+(w+8)+'" height="9" rx="3" fill="#3A1630"/>';
+  return o}
+function tree(x,base){return '<rect x="'+(x-3)+'" y="'+(base-16)+'" width="6" height="16" fill="#3A1630"/><circle cx="'+x+'" cy="'+(base-32)+'" r="20" fill="#3FB98A"/>'}
+function car(x,base){return '<rect x="'+x+'" y="'+(base-22)+'" width="70" height="16" rx="6" fill="#E0457B"/><path d="M'+(x+12)+' '+(base-22)+'l8-14h26l10 14z" fill="#E0457B"/><circle cx="'+(x+17)+'" cy="'+(base-5)+'" r="7" fill="#3A1630"/><circle cx="'+(x+53)+'" cy="'+(base-5)+'" r="7" fill="#3A1630"/>'}
+function dog(x,base){return '<g transform="translate('+x+','+(base-28)+')"><ellipse cx="22" cy="14" rx="18" ry="9" fill="#C68B59"/><circle cx="40" cy="6" r="8" fill="#C68B59"/><rect x="8" y="18" width="5" height="10" fill="#C68B59"/><rect x="30" y="18" width="5" height="10" fill="#C68B59"/><path d="M4 10 0 2" stroke="#C68B59" stroke-width="4" stroke-linecap="round"/><circle cx="43" cy="4" r="1.6" fill="#3A1630"/></g>'}
+function post(x,g,ch){return '<line x1="'+x+'" y1="'+(g-44)+'" x2="'+x+'" y2="'+g+'" stroke="#3A1630" stroke-width="4"/><rect x="'+(x-13)+'" y="'+(g-66)+'" width="26" height="24" rx="5" fill="#FFD86B" stroke="#3A1630" stroke-width="3"/><text x="'+x+'" y="'+(g-48)+'" text-anchor="middle" font-size="16" font-weight="800" fill="#3A1630" font-family="Figtree, sans-serif">'+ch+'</text>'}
+/* Where the car sleeps, drawn so the parking type reads at a glance. */
+function parkScene(p,x,g){var o="",k;
+  if(p==="Garage"||p==="Paid garage"){o+='<rect x="'+x+'" y="'+(g-62)+'" width="108" height="62" rx="4" fill="#3A1630"/><rect x="'+(x+9)+'" y="'+(g-46)+'" width="90" height="46" fill="#7A5670"/>'+car(x+19,g);if(p==="Paid garage")o+=post(x+128,g,"$")}
+  else if(p==="Gated lot"){o+='<rect x="'+(x-6)+'" y="'+(g-3)+'" width="124" height="7" fill="#D9C7D0"/>'+car(x+18,g);for(k=0;k<7;k++)o+='<line x1="'+(x+k*18)+'" y1="'+(g-42)+'" x2="'+(x+k*18)+'" y2="'+g+'" stroke="#3A1630" stroke-width="4"/>';o+='<line x1="'+(x-4)+'" y1="'+(g-30)+'" x2="'+(x+112)+'" y2="'+(g-30)+'" stroke="#3A1630" stroke-width="4"/>'}
+  else if(p==="Driveway"){o+='<rect x="'+x+'" y="'+(g-3)+'" width="100" height="7" fill="#D9C7D0"/>'+car(x+14,g)}
+  else if(p==="Lot"||p==="Paid lot"){o+='<rect x="'+x+'" y="'+(g-3)+'" width="96" height="7" fill="#D9C7D0"/>'+car(x+8,g)+post(x+112,g,p==="Paid lot"?"$":"P")}
+  else{o+=car(x+10,g+38)}
+  return o}
+function ground(g){return '<rect x="0" y="'+g+'" width="600" height="20" fill="#9AD9A8"/><rect x="0" y="'+(g+20)+'" width="600" height="30" fill="#8E7A88"/><path d="M0 '+(g+35)+'h600" stroke="#fff" stroke-width="3" stroke-dasharray="22 16"/>'}
+function homes(L,g){var c=L.color;
+  if(L.id==="close")return bld(40,g,84,74,"#F2A2B8","peak")+bld(132,g,84,88,"#C9B6A6","peak")+bld(224,g,84,74,"#B79CD9","peak");
+  if(L.id==="garden")return bld(40,g,250,62,c,"peak");
+  if(L.id==="tower")return bld(110,g,110,118,c,"flat")+bld(40,g,62,70,"#C9B6A6","flat");
+  if(L.id==="beach")return bld(40,g,100,62,c,"peak")+bld(154,g,120,84,"#F2A2B8","flat");
+  if(L.id==="river")return bld(40,g,74,56,c,"flat")+bld(120,g,74,70,"#FFD86B","flat")+bld(200,g,74,56,"#F2A2B8","flat");
+  return bld(40,g,60,104,"#C9B6A6","flat")+bld(108,g,64,124,c,"flat")+bld(180,g,60,92,"#6FA8DC","flat")+bld(248,g,56,112,"#B79CD9","flat")}
+function backdrop(L,g){
+  if(L.id==="beach")return '<rect x="430" y="'+(g-44)+'" width="170" height="44" fill="#7CC8F2"/><path d="M446 '+(g-26)+'q12-7 24 0t24 0 24 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>';
+  if(L.id==="river")return '<ellipse cx="460" cy="'+g+'" rx="170" ry="52" fill="#9AD9A8"/><rect x="330" y="'+(g-10)+'" width="270" height="10" fill="#7CC8F2"/>';
+  return ""}
+function lifeArt(L){var g=150;return '<svg viewBox="0 0 600 200" role="img" aria-label="Illustration for '+esc(L.name)+'">'+skyBits()+backdrop(L,g)+ground(g)+homes(L,g)+tree(360,g)+tree(430,g)+dog(480,g+18)+'</svg>'}
+function hoodArt(H){var g=150,p=HOODTXT[H.id].park[0];return '<svg viewBox="0 0 600 200" role="img" aria-label="'+esc(H.name)+', where the car sleeps in '+esc(PARK_PHRASE[p])+'">'+skyBits()+backdrop(H.life,g)+ground(g)+homes(H.life,g)+parkScene(p,328,g)+tree(500,g)+dog(540,g+18)+'</svg>'}
+function unitArt(U){var g=150,fh=Math.min(U.floors,5),bw=U.floors<=3?220:150;return '<svg viewBox="0 0 600 200" role="img" aria-label="'+esc(U.name)+', where the car sleeps in '+esc(PARK_PHRASE[U.park])+'">'+skyBits()+ground(g)+bld(70,g,bw,fh*22+26,U.life.color,U.floors<=3?"peak":"flat")+parkScene(U.park,328,g)+tree(500,g)+dog(540,g+18)+'</svg>'}
+function ringMap(hoods,hi){
+  var cx=160,cy=150,R=128,la=112*Math.PI/180,o='<svg viewBox="0 0 320 300" role="img" aria-label="Map of drive time from Mom and Dad">';
+  [30,60,90,120].forEach(function(m){var r=m/120*R;o+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="#F3CADA" stroke-width="2" stroke-dasharray="'+(m===120?"0":"4 5")+'"/><text x="'+(cx+r*Math.cos(la))+'" y="'+(cy+r*Math.sin(la)+4)+'" text-anchor="middle" font-size="10" fill="#7A5670" stroke="#fff" stroke-width="4" paint-order="stroke">'+(m===120?"2 hours":m+" min")+'</text>'});
+  o+='<g transform="translate('+(cx-13)+','+(cy-14)+')"><path d="M2 12 13 2l11 10v13H2z" fill="#3A1630"/><path d="M13 13.5c-1.4-2.6-5.4-1.6-4.8 1.2.4 1.7 2.6 3.1 4.8 4.8 2.2-1.7 4.4-3.1 4.8-4.8.6-2.8-3.4-3.8-4.8-1.2z" fill="#FF9EC0"/></g>';
+  hoods.forEach(function(H){var r=Math.max(40,H.mins/120*R),a=H.ang*Math.PI/180,x=cx+r*Math.cos(a),y=cy+r*Math.sin(a),on=H.id===hi;
+    o+='<a href="#hood-'+H.id+'" aria-label="'+esc(H.name)+', '+H.mins+' minutes">'+(on?'<circle cx="'+x+'" cy="'+y+'" r="20" fill="none" stroke="#E0457B" stroke-width="3"/>':'')+'<circle cx="'+x+'" cy="'+y+'" r="14" fill="'+H.life.color+'" stroke="#3A1630" stroke-width="2.5"/><text x="'+x+'" y="'+(y+5)+'" text-anchor="middle" font-size="14" fill="#3A1630">'+H.letter+'</text></a>'});
+  return o+'</svg>'}
+
+/* ================= Shared pieces ================= */
+function tip(text){return '<p class="tip">'+IC.pup+'<span>'+text+'</span><i class="arr" aria-hidden="true">↓</i></p>'}
+function sign(U){return '<div class="sign"><div class="board"><small>All-in monthly</small><strong>'+money(U.allIn)+'</strong><em>'+U.beds+', '+U.sqft+' sq ft</em></div></div>'}
+function holdBtn(U,wide,quiet){var i=heldIx(U.id);
+  return '<button type="button" class="btn '+(i>-1?'held':quiet?'':'main')+(wide?' wide':'')+'" data-act="hold" data-id="'+U.id+'" aria-pressed="'+(i>-1)+'">'+(i>-1?'<span>Held as House '+(i+1)+'<small>Tap to let go</small></span>':'Hold this place')+'</button>'}
+function photosBtn(kind,name){return '<button type="button" class="photos" data-act="photos" data-kind="'+kind+'" data-name="'+esc(name)+'">'+IC.cam+'Tap here for photos</button>'}
+function legend(){return '<div class="legend" aria-label="What the tile colors mean"><span><i class="sw s"></i>Strong</span><span><i class="sw m"></i>Mixed</span><span><i class="sw y"></i>Your call</span><span><i class="sw u"></i>Not known yet</span></div>'}
+function tileBtn(level,id,d){return '<button type="button" class="tile t-'+d.tint+'" data-act="tile" data-level="'+level+'" data-id="'+id+'" data-k="'+d.k+'" aria-label="'+esc(d.t)+': '+esc(d.cap)+'. '+TINT_WORD[d.tint]+'"><span class="ti">'+IC[d.k]+'</span><span class="tl">'+esc(d.s)+'</span><b>'+esc(d.cap)+'</b></button>'}
+function dayStrip(level,id,d,tipText){return tip(tipText)+legend()+'<p class="lab">A weekday</p><div class="strip">'+d.slice(0,4).map(function(x){return tileBtn(level,id,x)}).join("")+'</div><p class="lab">A weekend</p><div class="strip">'+d.slice(4).map(function(x){return tileBtn(level,id,x)}).join("")+'</div>'}
+function mini(H){var d=dayOfHood(H);return '<div class="mini" role="img" aria-label="A day here: '+d.map(function(x){return x.t+" "+TINT_WORD[x.tint]}).join(", ")+'">'+d.map(function(x){return '<span class="t-'+x.tint+'">'+IC[x.k]+'</span>'}).join("")+'</div>'}
+function limLine(n,total,what){
+  return '<p class="limline">'+(n===total?'<b>All '+total+'</b> '+what+' fit your limits.':'<b>'+n+' of '+total+'</b> '+what+' fit your limits.')+' <button type="button" class="link" data-act="limits-open">Change my limits</button></p>'}
+function wishLine(U){var miss=wish(U).filter(function(w){return !w.ok}).map(function(w){return w.t.toLowerCase()});
+  return 'Wish list: '+wishCount(U)+' of 4'+(miss.length?' · misses '+list(miss):'')}
+function pullList(a){return '<ul class="pull">'+lis(a)+'</ul>'}
+function upNext(label,href,title,hook){return '<a class="upnext" href="#'+href+'"><small>'+label+'</small><b>'+esc(title)+'</b>'+(hook?'<span>'+esc(hook)+'</span>':'')+'<em>Go there ›</em></a>'}
+function unitCard(U){var w=why(U),out=w.length>0;
+  return '<article class="unit'+(out?' out':'')+'"><div class="row dim"><div><h4>'+esc(U.name)+'</h4><p class="hook" style="margin:3px 0">'+esc(U.hook)+'</p><small>'+U.beds+' · '+U.sqft+' sq ft · '+esc(U.park)+'</small></div>'+sign(U)+'</div>'+
+    '<p class="dim">'+esc(U.tease)+'</p><p class="facts dim">'+wishLine(U)+'</p>'+
+    (out?'<p class="why"><b>Outside your limits.</b> '+esc(w.join(". "))+'.</p>':'')+
+    '<div class="acts"><a class="btn main" href="#unit-'+U.id+'">Look inside ›</a>'+holdBtn(U,false,true)+'</div></article>'}
+
+/* ================= Views ================= */
+function vLives(){
+  var all=UNITS.filter(fits).length;
+  var h='<header class="title-card"><div class="logo" role="img" aria-label="Lamia\'s House Hunt"><svg viewBox="0 0 360 70" aria-hidden="true"><path d="M30 66 180 8 330 66" fill="none" stroke="#3A1630" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="262" y="16" width="20" height="34" rx="3" fill="#3A1630"/><path d="M180 30c-5-9-19-6-17 4 1 6 9 11 17 17 8-6 16-11 17-17 2-10-12-13-17-4z" fill="#E0457B"/></svg><span class="name">Lamia\'s</span><span class="show">House Hunt</span></div><p class="tagline">Tonight: Lamia finds her first place.</p><p class="coldopen">Her own keys for the first time. A car she can\'t give up, a small dog on the way, and Mom and Dad in Queens.</p><p class="coldopen"><b>On her wish list:</b> under $2,800 all-in, easy parking, safe at night, green for the dog, one flight of stairs at most.</p></header>';
+  h+='<div class="wrap"><p class="mock">Mock-up. Every place, price, person and quote here is invented.</p>';
+  h+='<section class="sec" id="sec-years" style="margin-top:18px"><h2><span class="s">Pick</span>a year</h2><p class="lead">Six ways your first year on your own could go.</p>'+tip("<b>Tap a year</b> to step into it.")+'<div class="stack" style="margin-top:14px">';
+  LIVES.forEach(function(L){var us=unitsOf(L),n=us.filter(fits).length,c=range(us,function(u){return u.allIn}),m=range(L.hoods,function(x){return x.mins});
+    h+='<a class="life'+(n?'':' none')+'" href="#life-'+L.id+'"><div class="art">'+lifeArt(L)+'</div><div class="body"><p class="tag">'+esc(L.tag)+'</p><h3>'+esc(L.name)+'</h3><p>'+esc(STORY[L.id].blurb)+'</p>'+pullList(PULL[L.id])+'<p class="snag"><b>The catch:</b> '+esc(STORY[L.id].catchT.toLowerCase())+'.</p><p class="facts">'+money(c[0])+' to '+money(c[1])+' a month · '+m[0]+' to '+m[1]+' min to Mom and Dad</p><div class="foot"><span class="facts">'+(n===us.length?us.length+' places to see':n?n+' of '+us.length+' places fit your limits':'Nothing here fits your limits')+'</span><span class="enter">Step in ›</span></div></div></a>'});
+  return h+'</div>'+limLine(all,UNITS.length,"places")+'<p class="helper">A lease is 12 months. You are choosing a year to try, not forever.</p></section></div>'}
+
+function vLife(L){
+  var us=unitsOf(L),c=range(us,function(u){return u.allIn}),m=range(L.hoods,function(x){return x.mins}),T=STORY[L.id],n=us.filter(fits).length,nx=LIVES[LIVES.indexOf(L)+1];
+  var h='<div class="wrap">';
+  h+='<section class="sec" style="margin-top:14px"><div class="hero"><div class="art">'+lifeArt(L)+'</div><div class="body"><p class="kicker">Step into</p><h1>'+esc(L.name)+'</h1><p>'+esc(T.hero)+'</p><button type="button" class="btn main wide" data-act="scrollto" data-to="sec-hoods">Meet its 3 neighborhoods ↓</button></div></div></section>';
+  h+='<section class="sec"><h2><span class="s">What</span>it costs you</h2><div class="tiles3" style="margin-top:10px"><div class="t3"><small>Money</small><b>'+money(c[0])+' to '+money(c[1])+'</b><span>a month, all-in, car included</span></div><div class="t3"><small>Distance</small><b>'+m[0]+' to '+m[1]+' minutes</b><span>from Mom and Dad'+(L.toll?", "+money(L.toll)+" in tolls a visit":", no tolls")+'</span></div><div class="t3"><small>The catch</small><b>'+esc(T.catchT)+'</b><span>'+esc(T.catchL)+'</span></div></div></section>';
+  h+='<section class="sec" id="sec-hoods"><h2><span class="s">Tour</span>a neighborhood</h2><p class="lead">'+esc(LEAD[L.id])+'</p>'+tip("<b>Tap a neighborhood</b> to tour it.")+'<div class="map" style="margin-top:12px">'+ringMap(L.hoods,null)+'<p class="mapnote">Mom and Dad\'s house is in the middle. Each ring is half an hour farther out. The real version uses an actual map with town names.</p></div><div class="stack tight" style="margin-top:12px">';
+  L.hoods.forEach(function(H){var k=H.units.filter(fits).length,N=H.units.length,K=HOOK[H.id],r=range(H.units,function(u){return u.allIn});
+    h+='<a class="hood" href="#hood-'+H.id+'"><div class="hd"><span class="pinl" style="background:'+L.color+'">'+H.letter+'</span><div><h4>'+esc(H.name)+'</h4><small>'+esc(H.place)+' · '+H.mins+' min to Mom and Dad</small></div></div><p class="hook">'+esc(K.h)+'</p>'+pullList(K.p)+'<p class="snag"><b>The catch:</b> '+esc(K.c)+'.</p><div class="foot"><span class="facts">'+(k===N?N+' places, from '+money(r[0]):k?k+' of '+N+' places fit your limits':'Nothing here fits your limits')+'</span><span class="enter">Tour it ›</span></div></a>'});
+  h+='</div></section>';
+  h+=nx?upNext("Or try another year","life-"+nx.id,nx.name,STORY[nx.id].blurb):upNext("That was the last year","lives","Back to all six years","");
+  return h+'</div>'}
+
+function vHood(H){
+  var L=H.life,nx=L.hoods[L.hoods.indexOf(H)+1],nxL=LIVES[LIVES.indexOf(L)+1],K=HOOK[H.id],F=FEEL[H.id],N=H.units.length,k=H.units.filter(fits).length,r=range(H.units,function(u){return u.allIn});
+  var h='<div class="wrap">';
+  h+='<section class="sec" style="margin-top:14px"><div class="hero"><div class="art" data-act="photos" data-kind="hood" data-name="'+esc(H.name)+'">'+hoodArt(H)+photosBtn("hood",H.name)+'</div><div class="body"><p class="kicker">'+esc(L.name)+'</p><h1>'+esc(H.name)+'</h1><p class="hook">'+esc(K.h)+'</p><p class="facts">'+esc(H.place)+' · '+H.mins+' min to Mom and Dad · '+(H.toll?money(H.toll)+" in tolls a visit":"no tolls")+' · safety '+H.safety+' of 5</p><button type="button" class="btn main wide" data-act="scrollto" data-to="sec-places">See its '+N+' places ↓</button></div></div></section>';
+  h+='<section class="sec"><h2><span class="s">The</span>feel</h2><p class="lead">'+esc(F.feel)+'</p><p class="who"><b>Who lives here</b>'+esc(F.who)+'</p><p class="quote">“'+esc(H.q[0][0])+'”<small>'+esc(H.q[0][1])+', lives here</small></p></section>';
+  h+='<section class="sec"><h2><span class="s">What\'s</span>here</h2><ul class="amen">'+[[IC.car,"For the car",H.parkFact],[IC.pup,"For the dog",H.dogFact],[IC.after,"Food and coffee",F.food],[IC.bag,"Errands",F.errands],[IC.rail,"Getting around",F.around]].map(function(a){return '<li><span class="ai">'+a[0]+'</span><div><b>'+a[1]+'</b><span>'+esc(a[2])+'</span></div></li>'}).join("")+'</ul></section>';
+  h+='<section class="sec"><div class="panel pause"><h4>Gives us pause</h4><ul>'+lis(H.pause)+'</ul><p class="quote">“'+esc(H.q[1][0])+'”<small>'+esc(H.q[1][1])+', lives here</small></p></div></section>';
+  h+='<section class="sec" id="sec-places"><h2><span class="s">Places</span>to see</h2><p class="lead">'+NW[N]+' places are open here, from '+money(r[0])+' to '+money(r[1])+' a month, everything in.</p>'+tip("<b>Tap Look inside</b> to tour a place. Like it? <b>Hold it.</b>")+limLine(k,N,"places here")+'<div class="stack tight">'+H.units.map(unitCard).join("")+'</div></section>';
+  h+=nx?upNext("Up next in this year","hood-"+nx.id,nx.name,HOOK[nx.id].h):nxL?upNext("Up next: another year","life-"+nxL.id,nxL.name,STORY[nxL.id].blurb):upNext("You have seen them all","lives","Back to all six years","");
+  return h+'</div>'}
+
+function vUnit(U){
+  var H=U.hood,L=U.life,w=why(U),nx=H.units[H.units.indexOf(U)+1],nxH=L.hoods[L.hoods.indexOf(H)+1],held=heldIx(U.id)>-1;
+  var h='<div class="wrap">';
+  h+='<section class="sec" style="margin-top:14px"><div class="unit'+(w.length?' out':'')+'"><div class="row"><div><p class="kicker">'+esc(H.name)+'</p><h4 style="font-size:30px">'+esc(U.name)+'</h4><p class="hook" style="margin:4px 0">'+esc(U.hook)+'</p><small>'+U.beds+' · '+U.sqft+' sq ft · '+esc(U.park)+'</small></div>'+sign(U)+'</div>'+(w.length?'<p class="why"><b>Outside your limits.</b> '+esc(w.join(". "))+'.</p>':'');
+  h+='<div class="art round" data-act="photos" data-kind="unit" data-name="'+esc(U.name)+'">'+unitArt(U)+photosBtn("unit",U.name)+'</div>';
+  h+='<div><b style="font-family:var(--display);font-size:16px">Your wish list: '+wishCount(U)+' of 4</b>'+wishRow(U)+'</div>'+holdBtn(U,true)+'<p class="helper">'+(held?(S.held.length>=2?'Ready to weigh them? Tap <b>Compare</b>, at the bottom of the screen.':'It is waiting in My top three, at the bottom of the screen. Hold one more to compare.'):'Holding it adds it to My top three, at the bottom of the screen.')+'</p>';
+  h+='<details class="receipt"><summary>What is in the '+money(U.allIn)+'</summary><div><span>Rent</span><span>'+money(U.rent)+'</span></div><div><span>Parking, '+esc(U.park.toLowerCase())+'</span><span>'+money(U.parkFee)+'</span></div><div><span>Pet rent</span><span>'+money(U.pet)+'</span></div><div><span>Building fees</span><span>'+money(U.fee)+'</span></div><div class="tot"><span>All-in monthly</span><span>'+money(U.allIn)+'</span></div></details></div></section>';
+  h+='<section class="sec"><p class="voice">'+esc(voice(U))+'</p></section>';
+  h+='<section class="sec"><h2><span class="s">A day</span>here</h2>'+dayStrip("unit",U.id,dayOfUnit(U),"<b>Tap a tile</b> to see more about that part of the day.")+'</section>';
+  h+='<section class="sec"><div class="two"><div class="panel love"><h4>You\'ll love</h4><ul>'+lis(uLove(U))+'</ul></div><div class="panel pause"><h4>Gives us pause</h4><ul>'+lis(uPause(U))+'</ul></div></div></section>';
+  h+='<section class="sec"><details class="fold"><summary>Questions to ask on the tour</summary><ul>'+lis(uAsk(U))+'</ul></details></section>';
+  h+=nx?upNext("Up next here","unit-"+nx.id,nx.name,nx.hook):nxH?upNext("Up next: the next neighborhood","hood-"+nxH.id,nxH.name,HOOK[nxH.id].h):upNext("That was the last place in this year","life-"+L.id,"Back to "+L.name,"");
+  return h+'</div>'}
+function pairText(A,B,a,b){
+  var s=[],d=B.allIn-A.allIn,gain=[],lose=[];
+  s.push(Math.abs(d)<25?"Same money.":b+" costs "+money(Math.abs(d))+(d>0?" more":" less")+" a month than "+a+".");
+  var q=B.sqft-A.sqft;if(q>=50)gain.push(q+" more square feet");else if(q<=-50)lose.push((-q)+" square feet");
+  var p=PARK_RANK[B.park]-PARK_RANK[A.park];if(p>0)gain.push(PARK_PHRASE[B.park]);else if(p<0)lose.push(PARK_PHRASE[A.park]);
+  var f=B.safety-A.safety;if(f>0)gain.push("a higher safety score, "+B.safety+" against "+A.safety);else if(f<0)lose.push(["","a point","two points","three points","four points"][-f]+" of safety, "+B.safety+" against "+A.safety);
+  if(gain.length)s.push(b+" gives you "+list(gain)+".");
+  if(lose.length)s.push("You give up "+list(lose)+".");
+  if(!gain.length&&!lose.length)s.push("On space, parking and safety they are level.");
+  var m=B.mins-A.mins;s.push(Math.abs(m)>=5?b+" is "+Math.abs(m)+" minutes "+(m>0?"farther from":"closer to")+" Mom and Dad, each way.":"They are the same distance from Mom and Dad.");
+  return s.join(" ")}
+function feelIt(A,B,a,b){var o=[],d=Math.abs(B.allIn-A.allIn),q=Math.abs(B.sqft-A.sqft);
+  if(d>=25)o.push(money(d)+" a month is "+money(d*12)+" over the year.");
+  if(A.mins!==B.mins)o.push("Four visits a month: "+a+" is "+hours(A.mins)+" hours in the car, "+b+" is "+hours(B.mins)+".");
+  if(A.toll||B.toll)o.push("Tolls for those visits: "+a+" "+money(4*A.toll)+", "+b+" "+money(4*B.toll)+" a month.");
+  if(q>=200)o.push(q+" square feet is about one extra room.");
+  else if(q>=80)o.push(q+" square feet is about a walk-in closet and a desk nook.");
+  return o}
+function vCompare(){
+  var H=S.held.map(function(id){return U_BY[id]}).filter(Boolean),n=H.length;
+  var h='<div class="wrap"><section class="sec" style="margin-top:14px"><h2><span class="s">The</span>decision</h2>';
+  if(n<2){return h+tip("This is where your top three line up, side by side.")+'<div class="empty" style="margin-top:12px"><p><b>'+(n?"You are holding one place. Hold one more.":"You are not holding anything yet.")+'</b></p><p>Open a year, visit a neighborhood, and tap <b>Hold this place</b> on one you like. Held places wait in <b>My top three</b>, the bar at the bottom of the screen.</p><a class="btn main" href="#lives">Pick a year</a></div></section></div>'}
+  h+=tip("Same money, same day, side by side. <b>Mint marks the stronger one.</b> Distance stays unmarked, because only you know whether farther is better.");
+  h+='<div class="names" style="margin-top:12px">'+H.map(function(U,i){return '<div class="name"><span class="num n'+i+'">'+(i+1)+'</span><div><a href="#unit-'+U.id+'"><b>'+esc(U.name)+'</b></a><small>'+esc(U.hood.name)+' · '+esc(U.life.short)+'</small></div><button type="button" class="x" data-act="release" data-id="'+U.id+'" aria-label="Let go of '+esc(U.name)+'">×</button></div>'}).join("")+'</div>';
+  var pairs=n===3?[[0,1],[0,2],[1,2]]:[[0,1]];
+  if(!pairs.some(function(p){return p[0]===S.pair[0]&&p[1]===S.pair[1]}))S.pair=[0,1];
+  var A=H[S.pair[0]],B=H[S.pair[1]],an="House "+(S.pair[0]+1),bn="House "+(S.pair[1]+1);
+  h+='<div class="pairbox"><h3>The trade, in plain words</h3>';
+  if(n===3)h+='<div class="seg" role="group" aria-label="Which two to weigh">'+pairs.map(function(p){var on=p[0]===S.pair[0]&&p[1]===S.pair[1];return '<button type="button" data-act="pair" data-p="'+p[0]+"-"+p[1]+'" aria-pressed="'+on+'">'+(p[0]+1)+' against '+(p[1]+1)+'</button>'}).join("")+'</div>';
+  h+='<p>'+esc(pairText(A,B,an,bn))+'</p></div>';
+  var f=feelIt(A,B,an,bn);if(f.length)h+='<div class="feel"><b>What that feels like</b><ul>'+lis(f)+'</ul></div>';
+  h+='<div class="cmp-head"><div class="cols c'+n+'">'+H.map(function(U,i){return '<div class="colh"><span class="num n'+i+'">'+(i+1)+'</span><span class="pr">'+money(U.allIn)+'</span></div>'}).join("")+'</div></div><div class="stack tight">';
+  var rows=[
+   {icon:IC.money,label:"Monthly, all-in",cells:H.map(function(U){return {html:money(U.allIn)}}),nums:H.map(function(U){return U.allIn}),tol:24,best:"low"},
+   {icon:IC.space,label:"Space",cells:H.map(function(U){return {html:U.sqft+" sq ft, "+U.beds}}),nums:H.map(function(U){return U.sqft}),tol:20,best:"high"},
+   {icon:IC.car,label:"Where the car sleeps",cells:H.map(function(U){return {html:esc(U.park)}}),nums:H.map(function(U){return PARK_RANK[U.park]}),tol:0,best:"high"},
+   {icon:IC.safe,label:"Feeling safe",cells:H.map(function(U){return {html:bar(U.safety)+U.safety+" of 5"}}),nums:H.map(function(U){return U.safety}),tol:0,best:"high"},
+   {icon:IC.list,label:"Your wish list",cells:H.map(function(U){return {html:wishCount(U)+" of 4"}}),nums:H.map(wishCount),tol:0,best:"high"}];
+  var days=H.map(dayOfUnit);
+  SLOTS.forEach(function(sl,i){
+    var tints=days.map(function(d){return d[i].tint}),same=sl.k==="sun"?(Math.max.apply(null,H.map(function(U){return U.mins}))-Math.min.apply(null,H.map(function(U){return U.mins})))<5:tints.every(function(t){return t===tints[0]});
+    rows.push({icon:IC[sl.k],label:sl.t,cells:days.map(function(d){return {html:esc(d[i].cap),cls:"t-"+d[i].tint}}),tie:same,best:null,note:sl.k==="sun"?"your call":""})});
+  var hidden=0;
+  rows.forEach(function(R){var tie=R.nums?(Math.max.apply(null,R.nums)-Math.min.apply(null,R.nums))<=R.tol:R.tie;
+    if(tie&&S.hideTies){hidden++;return}
+    var best=R.best==="low"?Math.min.apply(null,R.nums):R.best==="high"?Math.max.apply(null,R.nums):null;
+    h+='<div class="rowc"><h4>'+R.icon+esc(R.label)+(tie?'<em>level</em>':R.note?'<em>'+R.note+'</em>':'')+'</h4><div class="cols c'+n+'">'+R.cells.map(function(c,i){return '<div class="cell'+(!tie&&best!==null&&R.nums[i]===best?' edge':'')+(c.cls?' '+c.cls:'')+'">'+c.html+'</div>'}).join("")+'</div></div>'});
+  h+='</div><div class="tiesrow"><label class="switch" for="ties"><input type="checkbox" id="ties"'+(S.hideTies?' checked':'')+'>Hide rows that are level</label><small>'+(hidden?hidden+(hidden===1?" row":" rows")+" hidden":S.hideTies?"Nothing is level":"Showing every row")+'</small></div>';
+  h+='<div class="tour-list"><h3>Go see them</h3><p>This is the finish line: two or three places to visit in person, with the questions to ask at each.</p><button type="button" class="btn main" data-act="copy">Copy my tour list</button><span id="copyStatus" role="status" aria-live="polite"></span></div>';
+  h+='<p class="lease">A lease is 12 months. You are choosing a year to try, not forever.</p>';
+  return h+'</section></div>'}
+
+/* ================= Sheets ================= */
+function shTop(title,sub){return '<div class="sh-top"><h2>'+title+(sub?'<small>'+sub+'</small>':'')+'</h2><button type="button" class="btn sm" data-act="close-sheet" id="shClose">Close</button></div>'}
+function tileSheet(level,id,k){
+  var U=U_BY[id],H=U.hood,Lf=H.life,big=U.sqft>=600,b,q=null;
+  var d=dayOfUnit(U).filter(function(x){return x.k===k})[0];
+  if(d.tint==="u")b=["We have not found this yet","It gets checked before the real version","No guess is shown in its place"];
+  else if(k==="wake"){b=["Nearest green space: "+U.green+" minutes on foot",H.dogFact].concat(Lf.b.wake.slice(0,1));q=H.q[0]}
+  else if(k==="work"){b=[U.fiber?"Fiber internet in the building":"No fiber here, so ask what speed you really get",U.sqft+" square feet"+(big?", room for a real desk":", so the desk shares the room"),U.cafe+" cafés within a ten-minute walk"];q=Lf.q.work}
+  else if(k==="after"){b=Lf.b.after;q=H.q[1]}
+  else if(k==="night"){b=[PARK_LINE[U.park],"Night walks feel like a "+U.night+" out of 5","Car break-ins nearby: "+(H.safety>=5?"rare":H.safety===4?"uncommon":"some reports")];q=Lf.q.night}
+  else if(k==="sat"){b=Lf.b.sat;q=Lf.q.sat}
+  else{b=[H.mins+" minutes each way",H.toll?money(H.toll)+" in tolls per visit":"No tolls on the route","Four visits a month: "+hours(H.mins)+" hours in the car"+(H.toll?", "+money(4*H.toll)+" in tolls":"")];q=Lf.q.sun}
+  var h=shTop(esc(d.t),U.name===H.name?esc(U.name):esc(U.name)+', '+esc(H.name))+'<p class="bigcap t-'+d.tint+'">'+esc(d.cap)+'</p><ul>'+lis(b)+'</ul>';
+  if(q)h+='<p class="quote">“'+esc(q[0])+'”<small>'+esc(q[1])+'</small></p>';
+  return h+'<p class="src">'+TINT_WORD[d.tint]+'. In the real version, each line links to where it came from.</p>'}
+function photosSheet(kind,name){
+  return shTop("Photos",esc(name))+'<p style="margin-top:12px">'+(kind==="unit"?'In the real tool, this tap opens the photo page for <b>'+esc(name)+'</b> on its own listing, in a new tab.':'In the real tool, this tap opens a photo gallery of <b>'+esc(name)+'</b> on the neighborhood\'s own site, in a new tab.')+'</p><p class="src">This mock has no real places, so there is nowhere to send you yet.</p>'}
+
+/* ================= Tour ================= */
+var TOUR=[
+ {t:"Welcome to your show",b:"Tonight you find your first place. Pick a year, then a neighborhood, then a place. A back arrow at the top of each page takes you back.",hl:""},
+ {t:"Hold your top three",b:"Like a place? Tap Hold this place. It waits down here, in My top three.",hl:"tray"},
+ {t:"Compare, then go see them",b:"With two or three held, tap Compare. They line up side by side, in plain words.",hl:"tray"}
+];
+
+/* ================= Shell ================= */
+var view=document.getElementById("view"),tray=document.getElementById("tray"),trailEl=document.getElementById("trail"),sheet=document.getElementById("sheet"),sheetBody=document.getElementById("sheetBody"),scrim=document.getElementById("scrim"),limsheet=document.getElementById("limsheet"),toastEl=document.getElementById("toast"),tourEl=document.getElementById("tour"),tourCard=document.getElementById("tourCard"),tourScrim=document.getElementById("tourscrim");
+var current="lives",lastTour="",toastT=null,lastFocus=null;
+function parse(r){
+  if(r.indexOf("life-")===0&&L_BY[r.slice(5)])return{v:"life",o:L_BY[r.slice(5)]};
+  if(r.indexOf("hood-")===0&&H_BY[r.slice(5)])return{v:"hood",o:H_BY[r.slice(5)]};
+  if(r.indexOf("unit-")===0&&U_BY[r.slice(5)])return{v:"unit",o:U_BY[r.slice(5)]};
+  if(r==="compare")return{v:"compare"};
+  return{v:"lives"}}
+function parentOf(r){var p=parse(r);
+  if(p.v==="life")return "lives";
+  if(p.v==="hood")return "life-"+p.o.life.id;
+  if(p.v==="unit")return "hood-"+p.o.hood.id;
+  if(p.v==="compare")return lastTour||"lives";
+  return "lives"}
+function renderTrail(){var p=parse(current),v=p.v,h='<div class="wrap">',c=[];
+  var arrow='<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8" fill="none" stroke="#3A1630" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  trailEl.hidden=v==="lives";
+  if(v!=="lives"){
+    if(v==="compare")c.push([lastTour?"Back to the tour":"Back to the years",lastTour||"lives"]);
+    else{var L=v==="life"?p.o:p.o.life;c.push(["Years","lives"]);
+      if(v!=="life")c.push([L.short,"life-"+L.id]);
+      if(v==="unit")c.push([p.o.hood.name,"hood-"+p.o.hood.id])}
+    var up=c[c.length-1];
+    h+='<a class="bk" href="#'+up[1]+'" aria-label="Back: '+esc(up[0])+'">'+arrow+'</a><div class="path">'+c.map(function(x,i){return (i?'<span aria-hidden="true">›</span>':'')+'<a href="#'+x[1]+'">'+esc(x[0])+'</a>'}).join("")+'</div>'}
+  trailEl.innerHTML=h+'</div>'}
+function renderView(){var p=parse(current);
+  view.innerHTML=p.v==="life"?vLife(p.o):p.v==="hood"?vHood(p.o):p.v==="unit"?vUnit(p.o):p.v==="compare"?vCompare():vLives();
+  renderTrail()}
+function renderTray(){var n=S.held.length;
+  var msg=n===0?"Tap Hold this place on one you like. It waits here.":n===1?"One held. Hold one more to compare.":n===2?"Two held. Ready to compare, or hold a third.":"Three held. Time to compare.";
+  var h='<div class="wrap"><div class="tr-text"><b>My top three</b><span id="trayMsg">'+msg+'</span></div><div class="tr-row">';
+  for(var i=0;i<3;i++){var U=U_BY[S.held[i]];
+    h+=U?'<a class="slot full" href="#unit-'+U.id+'" aria-label="House '+(i+1)+', '+esc(U.name)+', '+money(U.allIn)+'"><span>House '+(i+1)+'</span><b>'+money(U.allIn)+'</b></a>':'<div class="slot" aria-hidden="true"><span>House '+(i+1)+'</span><span>empty</span></div>'}
+  h+='<a class="go'+(n>=2?' live':'')+'" id="goBtn" href="#compare">Compare'+(n>=2?' '+n:'')+'</a></div></div>';
+  tray.innerHTML=h}
+function renderCounts(){
+  var n=UNITS.filter(fits).length;
+  document.getElementById("fitline").textContent=n+" of "+UNITS.length+" places fit your limits";
+  document.getElementById("lstrip").innerHTML=LIVES.map(function(L){var c=unitsOf(L).filter(fits).length;return '<div'+(c?'':' class="zero"')+'><span>'+esc(L.short)+'</span><i>'+c+'</i></div>'}).join("");
+  var L=S.lim;
+  document.getElementById("out-cost").textContent="Up to "+money(L.cost)+" a month, all-in"+(L.cost>CAP?", past your "+money(CAP)+" cap":L.cost===CAP?", your cap":"");
+  document.getElementById("out-mins").textContent=L.mins>=120?"Anywhere in the two-hour circle":"Within "+L.mins+" minutes";
+  document.getElementById("out-safe").textContent=L.safe<=1?"Any safety score":L.safe>=5?"Only a 5":"A "+L.safe+" or better";
+  document.getElementById("out-sqft").textContent=L.sqft<=400?"Any size":"At least "+L.sqft+" sq ft"}
+function syncSliders(){["cost","mins","safe","sqft"].forEach(function(k){document.getElementById("lim-"+k).value=S.lim[k]})}
+var scrolls={};
+function isAncestor(a,b){var r=b;for(var i=0;i<4;i++){r=parentOf(r);if(r===a)return true;if(r==="lives")return false}return false}
+/* Zooming out, or coming back from the decision, returns her to where she was on that page. */
+function go(r){
+  var p=parse(r),next=p.v==="lives"?"lives":r,prev=current;
+  scrolls[prev]=window.scrollY;current=next;
+  if(p.v==="life"||p.v==="hood"||p.v==="unit")lastTour=current;
+  try{if(location.hash.replace(/^#/,"")!==current)location.hash=current}catch(e){}
+  renderView();
+  window.scrollTo(0,next!==prev&&scrolls[next]!=null&&(prev==="compare"||isAncestor(next,prev))?scrolls[next]:0);
+  try{view.focus({preventScroll:true})}catch(e){}}
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add("on");clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove("on")},3200)}
+function bump(el){if(!el)return;el.classList.remove("bump");void el.offsetWidth;el.classList.add("bump")}
+function openSheet(html){lastFocus=document.activeElement;sheetBody.innerHTML=html;sheet.scrollTop=0;sheet.classList.add("open");sheet.setAttribute("aria-hidden","false");scrim.hidden=false;
+  var c=document.getElementById("shClose");if(c){try{c.focus({preventScroll:true})}catch(e){}}}
+function closeSheet(){sheet.classList.remove("open");sheet.setAttribute("aria-hidden","true");scrim.hidden=true;if(lastFocus&&lastFocus.focus){try{lastFocus.focus({preventScroll:true})}catch(e){}}}
+function openLimits(on){limsheet.classList.toggle("open",on);limsheet.setAttribute("aria-hidden",String(!on))}
+function showTour(i){
+  document.body.classList.remove("hl-tray","hl-trail");
+  if(i<0||i>=TOUR.length){S.tourAt=-1;tourEl.hidden=true;tourScrim.hidden=true;S.seenTour=true;save();return}
+  S.tourAt=i;var T=TOUR[i];
+  if(T.hl)document.body.classList.add("hl-"+T.hl);
+  tourCard.innerHTML='<div class="hd">'+IC.pup+'<h2>'+esc(T.t)+'</h2></div><p>'+esc(T.b)+'</p><div class="acts"><div class="dots" aria-hidden="true">'+TOUR.map(function(_,j){return '<i'+(j===i?' class="on"':'')+'></i>'}).join("")+'</div><div style="display:flex;gap:8px"><button type="button" class="btn sm" data-act="tour-skip">'+(i===TOUR.length-1?"Close":"Skip")+'</button><button type="button" class="btn sm main" data-act="tour-next" id="tourNext">'+(i===TOUR.length-1?"Start the show":"Next")+'</button></div></div>';
+  tourEl.hidden=false;tourScrim.hidden=false;
+  try{document.getElementById("tourNext").focus({preventScroll:true})}catch(e){}}
+function tourText(){var H=S.held.map(function(id){return U_BY[id]});
+  return "LAMIA'S TOUR LIST (mock-up, invented data)\n\n"+H.map(function(U,i){return "House "+(i+1)+". "+U.name+", "+U.hood.name+" ("+U.life.name+")\n   "+money(U.allIn)+" all-in · "+U.beds+", "+U.sqft+" sq ft · "+U.park+"\n   "+dayOfUnit(U).map(function(d){return d.t+": "+d.cap}).join("\n   ")+"\n   Ask: "+uAsk(U).join(" ")}).join("\n\n")}
+
+document.addEventListener("click",function(e){
+  var t=e.target.closest?e.target.closest("[data-act],a[href^='#']"):null;
+  if(!t){if(limsheet.classList.contains("open")&&!limsheet.contains(e.target))openLimits(false);return}
+  var act=t.getAttribute("data-act"),id=t.getAttribute("data-id");
+  if(!act){e.preventDefault();closeSheet();openLimits(false);go(t.getAttribute("href").slice(1));return}
+  if(act==="back"){closeSheet();openLimits(false);go(parentOf(current))}
+  else if(act==="step"){var n=t.getAttribute("data-n");closeSheet();openLimits(false);
+    if(n==="1")go("lives");else if(n==="3")go("compare");else if(lastTour)go(lastTour);else{go("lives");toast("Pick a year first. Then the tour starts.")}}
+  else if(act==="limits-open"){openLimits(true)}
+  else if(act==="limits-close"){openLimits(false)}
+  else if(act==="limits-reset"){S.lim={cost:DEF.cost,mins:DEF.mins,safe:DEF.safe,sqft:DEF.sqft};syncSliders();save();renderCounts();renderView()}
+  else if(act==="close-sheet"){closeSheet()}
+  else if(act==="scrollto"){var sec=document.getElementById(t.getAttribute("data-to"));if(sec)sec.scrollIntoView({block:"start"})}
+  else if(act==="tile"){openSheet(tileSheet(t.getAttribute("data-level"),id,t.getAttribute("data-k")))}
+  else if(act==="photos"){openSheet(photosSheet(t.getAttribute("data-kind"),t.getAttribute("data-name")))}
+  else if(act==="tour-open"){openLimits(false);closeSheet();showTour(0)}
+  else if(act==="tour-next"){showTour(S.tourAt+1)}
+  else if(act==="tour-skip"){showTour(-1)}
+  else if(act==="hold"){var i=heldIx(id),y=window.scrollY;
+    if(i>-1){S.held.splice(i,1);toast("Let go.")}
+    else if(S.held.length>=3){toast("Three is the limit. Let one go first.");return}
+    else{S.held.push(id);var c=S.held.length;
+      toast(c===1?"Held as House 1. It waits below, in My top three.":c===2?"Two held. Tap Compare, below, to weigh them.":"Three held. Tap Compare, below.")}
+    save();renderTray();renderView();window.scrollTo(0,y);
+    if(S.held.length===1)bump(tray);else if(S.held.length>=2)bump(document.getElementById("goBtn"))}
+  else if(act==="release"){var j=heldIx(id);if(j>-1)S.held.splice(j,1);save();renderTray();renderView()}
+  else if(act==="pair"){var p=t.getAttribute("data-p").split("-"),y2=window.scrollY;S.pair=[+p[0],+p[1]];renderView();window.scrollTo(0,y2)}
+  else if(act==="copy"){var st=document.getElementById("copyStatus"),txt=tourText();
+    var fb=function(){try{var ta=document.createElement("textarea");ta.value=txt;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var ok=document.execCommand("copy");document.body.removeChild(ta);st.textContent=ok?"Copied":"Copying is blocked here."}catch(err){st.textContent="Copying is blocked here."}};
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){st.textContent="Copied"},fb)}else fb()}catch(err){fb()}}
+});
+document.addEventListener("change",function(e){if(e.target&&e.target.id==="ties"){var y=window.scrollY;S.hideTies=e.target.checked;renderView();window.scrollTo(0,y)}});
+limsheet.addEventListener("input",function(e){var k=e.target&&e.target.getAttribute("data-k");if(!k)return;S.lim[k]=+e.target.value;save();renderCounts();var y=window.scrollY;renderView();window.scrollTo(0,y)});
+document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;
+  if(S.tourAt>-1)showTour(-1);else if(sheet.classList.contains("open"))closeSheet();else if(limsheet.classList.contains("open"))openLimits(false)});
+window.addEventListener("hashchange",function(){var r=location.hash.replace(/^#/,"")||"lives";if(r!==current){closeSheet();go(r)}});
+
+syncSliders();renderCounts();renderTray();
+go((function(){try{return location.hash.replace(/^#/,"")}catch(e){return ""}})()||"lives");
+if(!S.seenTour)showTour(0);
+})();
+</script>
+</body>
+</html>

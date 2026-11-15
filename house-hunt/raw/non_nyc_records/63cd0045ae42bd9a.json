@@ -1,0 +1,53 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"3","value":[
+    {
+      "ultra_buildingid":"a9c0feda-d72f-e811-8122-1458d04ece60","ultra_name":"BLDG 8","ultra_registrationnumber":"1426-00120-005","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"8100 FIELDSTONE DR","ultra_block":"61","ultra_lot":"42.01","ultra_propertyinterest":{
+        "Id":"732a9443-9a2f-e811-8122-1458d04ece60","Name":"BLDG 2"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"ba2e7521-162f-e811-8126-1458d04eb810","Name":"MOUNT ARLINGTON BORO"
+      },"ultra_propertyportalsearchfield":"BLDG 2","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"MOUNT ARLINGTON BORO","ultra_elsamaintenancecompany":{
+        "Id":"e6f35a6d-d27b-e811-8106-1458d04e0ca0","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1cafafd8-b42f-e811-8122-1458d04ece60","Name":"WP MT ARLINGTON CONSTRUCTION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"abc0feda-d72f-e811-8122-1458d04ece60","ultra_name":"BLDG 9","ultra_registrationnumber":"1426-00120-006","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"9100 FIELDSTONE DR","ultra_block":"61","ultra_lot":"42.01","ultra_propertyinterest":{
+        "Id":"732a9443-9a2f-e811-8122-1458d04ece60","Name":"BLDG 2"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"ba2e7521-162f-e811-8126-1458d04eb810","Name":"MOUNT ARLINGTON BORO"
+      },"ultra_propertyportalsearchfield":"BLDG 2","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"MOUNT ARLINGTON BORO","ultra_elsamaintenancecompany":{
+        "Id":"e6f35a6d-d27b-e811-8106-1458d04e0ca0","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1cafafd8-b42f-e811-8122-1458d04ece60","Name":"WP MT ARLINGTON CONSTRUCTION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a7c0feda-d72f-e811-8122-1458d04ece60","ultra_name":"WOODMONT BLDG 7","ultra_registrationnumber":"1426-00120-004","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"7100 FIELDSTONE DR","ultra_block":"61","ultra_lot":"42.01","ultra_propertyinterest":{
+        "Id":"732a9443-9a2f-e811-8122-1458d04ece60","Name":"BLDG 2"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"ba2e7521-162f-e811-8126-1458d04eb810","Name":"MOUNT ARLINGTON BORO"
+      },"ultra_propertyportalsearchfield":"BLDG 2","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"MOUNT ARLINGTON BORO","ultra_elsamaintenancecompany":{
+        "Id":"e6f35a6d-d27b-e811-8106-1458d04e0ca0","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1cafafd8-b42f-e811-8122-1458d04ece60","Name":"WP MT ARLINGTON CONSTRUCTION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

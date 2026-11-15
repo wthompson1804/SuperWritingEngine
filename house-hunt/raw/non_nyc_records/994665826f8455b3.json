@@ -1,0 +1,33 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"e2c2feda-d72f-e811-8122-1458d04ece60","ultra_name":"MODERA PARSIPPANY","ultra_registrationnumber":"1429-00286-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1715 US ROUTE 46","ultra_block":"6.04","ultra_lot":"725","ultra_propertyinterest":{
+        "Id":"332c9443-9a2f-e811-8122-1458d04ece60","Name":"MODERA PARSIPPANY"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"c02e7521-162f-e811-8126-1458d04eb810","Name":"PARSIPPANY-TROY HILLS TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cb7097e8-b42f-e811-8122-1458d04ece60","Name":"PARSIPPANY DEV LLC N/A"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"473720c0-67ed-4bd0-afd2-67fa2fa80f64","ultra_name":"MODERA PARSIPPANY","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1429036953001","ultra_addressline1":"1715 US HIGHWAY 46 ","ultra_block":"725","ultra_lot":"6.04","ultra_propertyinterest":{
+        "Id":"4067d46c-26e0-42d8-9091-a2ff07cfb6e9","Name":"1715 US HIGHWAY 46"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"c02e7521-162f-e811-8126-1458d04eb810","Name":"PARSIPPANY-TROY HILLS TWP"
+      },"ultra_propertyportalsearchfield":"1715 US HIGHWAY 46","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6ad387a7-55bc-ee11-a569-001dd80b3432","Name":"PARSIPPANY OWNER LLC"
+      },"ultra_zipcode":"07054","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,1841 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"129","value":[
+    {
+      "ultra_buildingid":"9c6bf7e4-b02c-4e3c-8a4a-efb91133c56b","ultra_name":"1500 CORLIES AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1334005450001","ultra_addressline1":"1500 CORLIES AVE","ultra_block":"1108","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"31065773-fdf4-48c7-9d47-ca37dbd25d14","Name":"1500 CORLIES AVE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"602e7521-162f-e811-8126-1458d04eb810","Name":"NEPTUNE TWP"
+      },"ultra_propertyportalsearchfield":"1500 CORLIES AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6e3ccb58-15f9-eb11-94ef-001dd802a898","Name":"1500 CORLIES AVE CORP"
+      },"ultra_zipcode":"07753","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f0b548a7-8c3b-4fd0-b1d4-80711b466ed3","ultra_name":"1500 E ST GEORGE AVEBLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2009019906001","ultra_addressline1":"1500 E ST GEORGE AVE","ultra_block":"45","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"59362656-ea01-449d-bf28-88bed149c168","Name":"1500 E ST GEORGE AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"c02f7521-162f-e811-8126-1458d04eb810","Name":"LINDEN CITY"
+      },"ultra_propertyportalsearchfield":"1500 E ST GEORGE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"094490b5-6535-4740-bbcd-5958665608e3","Name":"WILFRED WRIGHT"
+      },"ultra_zipcode":"07036","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3a32aea0-e67a-4b5b-bede-4c2bfb66d1cc","ultra_name":"1500 HORNBERGER AVENUE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0315022314001","ultra_addressline1":"1500 HORNBERGER AVE","ultra_block":"118","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"71a3f4f8-e732-4c74-bd19-7b8802c2b5ea","Name":"1500 HORNBERGER AVENUE"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"6e2c7521-162f-e811-8126-1458d04eb810","Name":"FLORENCE TWP"
+      },"ultra_propertyportalsearchfield":"1500 HORNBERGER AVENUE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8a622bf3-51a1-4692-a774-fb01916fa28d","Name":"PIPA HOLDINGS LLC"
+      },"ultra_zipcode":"08554","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"691fa6cf-8187-40a5-b9e7-fb64a174a34f","ultra_name":"1500 KERRIGAN AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0910000167001","ultra_addressline1":"1500 KERRIGAN AVE","ultra_block":"80","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"4a1891aa-c905-4872-afd6-4c84818f4ffd","Name":"1500 KERRIGAN AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"1500 KERRIGAN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"824 15TH ST","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ac6236ec-6e6d-ec11-8f8e-001dd8032561","Name":"FIVE MFP REALTY LLC"
+      },"ultra_zipcode":"07087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b0a29fdb-a3e2-42c2-a60c-58433060643f","ultra_name":"1500 LIBERTY AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2007003887001","ultra_addressline1":"1500 LIBERTY AVE","ultra_block":"401","ultra_lot":"34","ultra_propertyinterest":{
+        "Id":"eed65502-5b9d-42da-8387-5ee552f0318d","Name":"1500 LIBERTY AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"bc2f7521-162f-e811-8126-1458d04eb810","Name":"HILLSIDE TWP"
+      },"ultra_propertyportalsearchfield":"1500 LIBERTY AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a1f0bd99-1a56-ed11-bba2-001dd80726d6","Name":"1500 LIBERTY LLC"
+      },"ultra_zipcode":"07205","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"18b31da1-33e5-4092-971b-a4d646598801","ultra_name":"1500 S CLINTON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111002805001","ultra_addressline1":"1500 S CLINTON AVE","ultra_block":"20208","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"d141c6b7-2a26-4fe6-a78c-3612755f65e6","Name":"1500 S CLINTON AVE"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"1500 S CLINTON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f5d8042a-dd84-49c1-97d2-a27d83f1e225","Name":"VICENTE BARRIENTOS"
+      },"ultra_zipcode":"08611","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c0e6ad54-022e-4062-8b38-7290bc489976","ultra_name":"1500 S WOOD AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2009023528001","ultra_addressline1":"1500 S WOOD AVE","ultra_block":"546","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"54282ed5-e91e-4b19-9da7-89b8b2b17b25","Name":"1500 S WOOD AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"c02f7521-162f-e811-8126-1458d04eb810","Name":"LINDEN CITY"
+      },"ultra_propertyportalsearchfield":"1500 S WOOD AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cf0070bc-171a-ec11-b6e6-001dd800c14a","Name":"NICHOLAS MARLOW"
+      },"ultra_zipcode":"07036","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3f4d2830-ee43-40a2-942f-6f98bbf666b7","ultra_name":"1500 SUMMIT AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0910006438001","ultra_addressline1":"1500 SUMMIT AVE","ultra_block":"79","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"c3c33260-51da-48e5-ba1b-5ad3b9f50cc7","Name":"1500 SUMMIT AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"1500 SUMMIT AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"726 15TH ST","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3163309c-1077-4590-b43e-4f917e01f2e7","Name":"1500 SUMMIT AV LLC"
+      },"ultra_zipcode":"07087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"dbe948be-665f-410b-827d-1a4985a105c8","ultra_name":"1500 VERMONT AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1514030345001","ultra_addressline1":"1500 VERMONT AVE","ultra_block":"1081","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"87ad1972-2f82-46d3-a317-a03d17722a46","Name":"1500 VERMONT AVE"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":"1500 VERMONT AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c6b75574-fdbd-49c0-99b4-12941d163a44","Name":"BETH MEDRASH OF ASBURY PARK IN"
+      },"ultra_zipcode":"08701","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"801d6e6e-ce53-4932-ae78-3af10b59e646","ultra_name":"1520-26 45TH ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0908012723001","ultra_addressline1":"4500 LIBERTY AVE","ultra_block":"122","ultra_lot":"96","ultra_propertyinterest":{
+        "Id":"eaec133e-a098-43dc-98be-5f189d2d5ccf","Name":"1520-26 45TH ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"922d7521-162f-e811-8126-1458d04eb810","Name":"NORTH BERGEN TWP"
+      },"ultra_propertyportalsearchfield":"1520-26 45TH ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cbe48604-4b71-4521-9c40-cf09dbec849f","Name":"RODRIGO OSORIO"
+      },"ultra_zipcode":"07047","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"84e1d6e1-6703-433e-97b4-22dc2657e851","ultra_name":"2500 NEW YORK AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0910030555001","ultra_addressline1":"2500 NEW YORK AVE","ultra_block":"140","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"8289cdbe-bf05-41a8-a114-26a1e79e6f20","Name":"2500 NEW YORK AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"2500 NEW YORK AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2cfaf515-8aeb-4605-aaa4-611d765b3f33","Name":"JOSEPH GAUDIO"
+      },"ultra_zipcode":"07087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0607707e-1db7-4538-afd8-3541afb80aa5","ultra_name":"426 25TH ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0910013392001","ultra_addressline1":"2500 BERGENLINE AVE","ultra_block":"141","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"6f7ae8dd-94a4-4432-ac90-80b0be532346","Name":"2500 BERGENLINE AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"2500 BERGENLINE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"426 25TH ST","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b27030d0-2d5b-f011-bec2-001dd80c2ab9","Name":"PRADIP ACHARYA"
+      },"ultra_zipcode":"07087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b70d08bf-6bdb-40bd-a3eb-249b1656af5a","ultra_name":"4500 BERGENLINE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0910013081001","ultra_addressline1":"4500 BERGENLINE AVE","ultra_block":"268","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"719a6e5a-8a92-40b6-ae0e-33078c4848b1","Name":"4500 BERGENLINE AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"4500 BERGENLINE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7e744f96-8560-429a-84b7-5e0ea8da3854","Name":"VICTOR & AVIDA BAS"
+      },"ultra_zipcode":"07087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3bbcdc72-c827-4d90-99c3-a929df2d83e9","ultra_name":"496-500 UNION AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0701004583001","ultra_addressline1":"496-500 UNION AVE","ultra_block":"7101","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"5aeeb725-07ad-4aae-b58c-42466742e46c","Name":"496-500 UNION AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"282d7521-162f-e811-8126-1458d04eb810","Name":"BELLEVILLE TOWN"
+      },"ultra_propertyportalsearchfield":"496-500 UNION AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"66ae6313-cb20-ee11-8f6c-001dd805f38d","Name":"ROSA FIALA"
+      },"ultra_zipcode":"07109","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"364c72dd-b615-4fc7-8b0b-e4a14404d688","ultra_name":"498-500 HAWTHORNE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714009108001","ultra_addressline1":"498-500 HAWTHORNE AVE","ultra_block":"3066","ultra_lot":"3","ultra_propertyinterest":{
+        "Id":"bd1c3d79-4338-4f26-83be-4e56314d8bf6","Name":"498-500 HAWTHORNE AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"498-500 HAWTHORNE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"715665c9-4c8b-ec11-8d20-001dd800b66a","Name":"498 HAWTHORNE LLC"
+      },"ultra_zipcode":"07112","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"89e78717-24e0-4367-97d6-b79d16d4a4de","ultra_name":"498-500 ROSEVILLE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714013863001","ultra_addressline1":"498-500 ROSEVILLE AVE","ultra_block":"196","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"1acad495-239e-4512-a176-666c9ae0cb27","Name":"498-500 ROSEVILLE AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"498-500 ROSEVILLE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"36bcaef3-4c38-4fc3-83ff-f85141283b84","Name":"MERCEDES ESPINAL "
+      },"ultra_zipcode":"07107","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"32009418-a0ae-4921-b42d-e1d0df44f9f6","ultra_name":"498-500 W GRAND AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2013016290001","ultra_addressline1":"498-500 W GRAND AVE","ultra_block":"165","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"1e182646-6a76-41b3-9de7-0098aa796f83","Name":"498-500 W GRAND AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"c82f7521-162f-e811-8126-1458d04eb810","Name":"RAHWAY CITY"
+      },"ultra_propertyportalsearchfield":"498-500 W GRAND AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e66cfcc2-f5d8-4af8-83c3-e0c28fbacee9","Name":"1457 RICHMOND RD LLC"
+      },"ultra_zipcode":"07065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"03584751-3ff2-f011-8407-001dd80bcb40","ultra_name":"5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0435019722005","ultra_addressline1":"500 JON HICKS AVENUE","ultra_block":"202","ultra_lot":"4.02","ultra_propertyinterest":{
+        "Id":"28185e3f-3ff2-f011-8407-001dd80bcb40","Name":"WOODLAND VIEW"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"e62c7521-162f-e811-8126-1458d04eb810","Name":"WATERFORD TWP"
+      },"ultra_propertyportalsearchfield":"WOODLAND VIEW","ultra_countyportalsearchfield":"CAMDEN","ultra_municipalityportalsearchfield":"WATERFORD TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ee545939-3ff2-f011-8407-001dd80bcb40","Name":"HAINES BOULEVARD HOUSING ASSOCIATES, LLC"
+      },"ultra_zipcode":"08004","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"eea337af-d9e2-ee11-904d-001dd80a8cf0","ultra_name":"500","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0824030034005","ultra_addressline1":"500 FIDUCIOSO AVENUE","ultra_block":"2.09","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"57ae22a3-d9e2-ee11-904d-001dd80a8cf0","Name":"TAVISTOCK AT WOOLWICH"
+      },"ultra_county":{
+        "Id":"00f4aaf2-63e4-e711-8125-1458d054d020","Name":"GLOUCESTER"
+      },"ultra_municipality":{
+        "Id":"822d7521-162f-e811-8126-1458d04eb810","Name":"WOOLWICH TWP"
+      },"ultra_propertyportalsearchfield":"TAVISTOCK AT WOOLWICH","ultra_countyportalsearchfield":"GLOUCESTER","ultra_municipalityportalsearchfield":"WOOLWICH TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b72c239d-d9e2-ee11-904d-001dd80a8cf0","Name":"WOOLWICH HOUSING ASSOCIATES LLC"
+      },"ultra_zipcode":"08085","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5071dc5b-94a0-4824-94a0-93798f86567b","ultra_name":"500","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0102003853001","ultra_addressline1":"500 N INDIANA AVE","ultra_block":"508","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"fa88ef60-7abd-4676-9d18-413e9daaf1fc","Name":"IN 500"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"9a2b7521-162f-e811-8126-1458d04eb810","Name":"ATLANTIC CITY"
+      },"ultra_propertyportalsearchfield":"IN 500","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cfb2719b-14af-ee11-a569-001dd80bf47e","Name":"STEPHEN GUARINO"
+      },"ultra_zipcode":"08401","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9df304d7-76d5-4b29-8887-01dcbe313c2b","ultra_name":"500 1ST AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2004011890001","ultra_addressline1":"500 1ST AVE","ultra_block":"760","ultra_lot":"22","ultra_propertyinterest":{
+        "Id":"693f52c2-dc20-4bb0-8ed2-36cc646778a4","Name":"500 1ST AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b62f7521-162f-e811-8126-1458d04eb810","Name":"ELIZABETH CITY"
+      },"ultra_propertyportalsearchfield":"500 1ST AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a1edd536-7951-ee11-be6e-001dd8087654","Name":"JENNY FLORES"
+      },"ultra_zipcode":"07206","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3addf7a9-8795-48b6-af6a-4f9cc29f96e7","ultra_name":"500 7TH AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1303003560001","ultra_addressline1":"500 7TH AVE","ultra_block":"203","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"e62da9f5-67af-4b60-b23a-ed6b09a294f9","Name":"500 7TH AVE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"222e7521-162f-e811-8126-1458d04eb810","Name":"ASBURY PARK CITY"
+      },"ultra_propertyportalsearchfield":"500 7TH AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ec20b920-9f6b-4893-87ec-a2c7c4e75cb7","Name":"CNJ CONSTRUCTION LLC"
+      },"ultra_zipcode":"07712","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"54394ffb-6971-f011-bec3-001dd803d745","ultra_name":"500 Anderson Ave","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0206042693001","ultra_addressline1":"500 Anderson Ave","ultra_block":"1603","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"26394ffb-6971-f011-bec3-001dd803d745","Name":"500 ANDERSON CONDOS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"d02b7521-162f-e811-8126-1458d04eb810","Name":"CLIFFSIDE PARK BORO"
+      },"ultra_propertyportalsearchfield":"500 ANDERSON CONDOS","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"CLIFFSIDE PARK BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9371ae9a-f097-f011-b4cc-001dd8084fd9","Name":"500 ANDERSON CONDOMINIUM ASSN INC"
+      },"ultra_zipcode":"07010","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e24b5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"500 ANDERSON AVE","ultra_registrationnumber":"0206-00149-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 ANDERSON AVE","ultra_block":"1603","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"f572e59f-9f2f-e811-8120-1458d04e2fb8","Name":"500 ANDERSON AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"d02b7521-162f-e811-8126-1458d04eb810","Name":"CLIFFSIDE PARK BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"62b8e2ae-b42f-e811-8122-1458d04ece60","Name":"ANDERSON AVE LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1a52dca9-cee3-4c4c-ac46-ce878016b09a","ultra_name":"500 BALDWIN AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906015881001","ultra_addressline1":"500 BALDWIN AVE","ultra_block":"5802","ultra_lot":"46","ultra_propertyinterest":{
+        "Id":"f01eabfa-1a53-4b25-a638-bc96c1a2d5ac","Name":"500 BALDWIN AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"500 BALDWIN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"496d26e3-cc0e-ef11-9f89-001dd80864a1","Name":"SBR GROUP 2, LLC"
+      },"ultra_zipcode":"07306","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"97cb106f-bc07-46ff-9893-a58cf98d73ad","ultra_name":"500 BAY AV CONDO BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0508010038001","ultra_addressline1":"500 BAY AVENORTH ","ultra_block":"412","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"308b7c19-bae3-47b3-beb7-2eb63549d2ad","Name":"500 BAY AV CONDO"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"fa2c7521-162f-e811-8126-1458d04eb810","Name":"OCEAN CITY"
+      },"ultra_propertyportalsearchfield":"500 BAY AV CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"NORTH BLDG","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1ce89f44-0e7e-404b-a351-4706fa85a603","Name":"500 BAY CONDOMINIUM ASSOC"
+      },"ultra_zipcode":"08226","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"40ae728e-0a6d-414c-a04f-ff6f236786df","ultra_name":"500 BAY AV CONDO BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0508010038002","ultra_addressline1":"500 BAY AVESOUTH ","ultra_block":"412","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"308b7c19-bae3-47b3-beb7-2eb63549d2ad","Name":"500 BAY AV CONDO"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"fa2c7521-162f-e811-8126-1458d04eb810","Name":"OCEAN CITY"
+      },"ultra_propertyportalsearchfield":"500 BAY AV CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"SOUTH BLDG","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1ce89f44-0e7e-404b-a351-4706fa85a603","Name":"500 BAY CONDOMINIUM ASSOC"
+      },"ultra_zipcode":"08226","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"755b4e0a-0d92-42c8-b8b4-e4056760d756","ultra_name":"500 BERGEN AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906016763001","ultra_addressline1":"500 BERGEN AVE","ultra_block":"17904","ultra_lot":"3","ultra_propertyinterest":{
+        "Id":"580a1a75-a35e-4911-af1f-e1b5e18510e2","Name":"500 BERGEN AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"500 BERGEN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2b9096d9-2976-4937-bdbb-8b6f997825fa","Name":"445-500 BERGEN LLC C/O PAUL SCIARRA"
+      },"ultra_zipcode":"07304","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"65027e51-cc8a-4bc3-af62-24eaffa073f1","ultra_name":"500 BRINKERHOFF AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0219004386001","ultra_addressline1":"500 BRINKERHOFF AVE","ultra_block":"1151","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"4c5da701-c896-4f47-a87f-271d38550b54","Name":"500 BRINKERHOFF AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":"500 BRINKERHOFF AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a83ad73b-94b3-ed11-83fe-001dd8070ecc","Name":"KYOUNGSUNG USA LLC"
+      },"ultra_zipcode":"07024","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4cc98fa1-65b2-ef11-b8e8-001dd80884ff","ultra_name":"500 CENTRAL AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2020042725001","ultra_addressline1":"500 CENTRAL AVE","ultra_block":"3006","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"11c98fa1-65b2-ef11-b8e8-001dd80884ff","Name":"500 CENTRAL AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d62f7521-162f-e811-8126-1458d04eb810","Name":"WESTFIELD TOWN"
+      },"ultra_propertyportalsearchfield":"500 CENTRAL AVE","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"WESTFIELD TOWN","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2c485e9b-65b2-ef11-b8e8-001dd80884ff","Name":"500 CENTRAL WESTFIELD LLC"
+      },"ultra_zipcode":"07090","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"152e8bd0-db0e-4523-b64c-99619b5ef3b2","ultra_name":"500 CLIFTON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1514040346001","ultra_addressline1":"500 clifton AVE","ultra_block":"94","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"3300e1db-bfac-4782-a42d-fec11c721987","Name":"500 CLIFTON AVE"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":"500 CLIFTON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0629c58b-e081-40dd-a3b9-fd7e421fe59f","Name":"LAKEWOOD SENIOR APARTMENTS URBAN RENEWAL LLC "
+      },"ultra_zipcode":"08701","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0fde5030-a734-f011-8c4e-001dd80bcb64","ultra_name":"500 COMMUNIPAW AVE LLC","ultra_registrationnumber":"0906-01293-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 COMMUNIPAW AVE","ultra_block":"17003","ultra_lot":"8.01","ultra_propertyinterest":{
+        "Id":"3e393d1e-a734-f011-8c4e-001dd80bcb64","Name":"500 COMMUNIPAW AVE LLC"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"500 COMMUNIPAW AVE LLC","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":{
+        "Id":"00de5030-a734-f011-8c4e-001dd80bcb64","Name":"LIONSTAR MANAGEMENT"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"79c54324-a734-f011-8c4e-001dd80bcb64","Name":"500 COMMUNIPAW AVE LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2cd2d48b-9e07-4106-96bd-b8aec1f6334c","ultra_name":"500 EASTON AVEAT LANDING LN BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214021634001","ultra_addressline1":"500 EASTON AVEAT LANDING LN","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"74e0b242-a9ef-4ac4-adda-4f6e35e7398a","Name":"500 EASTON AVEAT LANDING LN"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"500 EASTON AVEAT LANDING LN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"19e37a1a-168b-49f3-ac20-00f00493fc65","Name":"PARKER NURSING HOME"
+      },"ultra_zipcode":"08901","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f8c20066-dc66-4c23-9e75-b83c078b3abd","ultra_name":"500 GARFIELD AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906008044001","ultra_addressline1":"500 GARFIELD AVE","ultra_block":"26001","ultra_lot":"42.01","ultra_propertyinterest":{
+        "Id":"d560e745-85c1-411f-a954-d5753d33edff","Name":"500 GARFIELD JC LLC"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"500 GARFIELD JC LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"363932e2-9267-48e8-b676-0b0f39c36333","Name":"500 Garfield JC LLC"
+      },"ultra_zipcode":"07305","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3a4f5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"500 GRAND AVE","ultra_registrationnumber":"0215-00196-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 GRAND AVE","ultra_block":"3005","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"b775e59f-9f2f-e811-8120-1458d04e2fb8","Name":"500 GRAND AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"e22b7521-162f-e811-8126-1458d04eb810","Name":"ENGLEWOOD CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"36bbe2ae-b42f-e811-8122-1458d04ece60","Name":"GRAND 2 LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5b4a5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"500 HILLSIDE AVE","ultra_registrationnumber":"0202-00108-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 HILLSIDE AVE","ultra_block":"39","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"9371e59f-9f2f-e811-8120-1458d04e2fb8","Name":"500 HILLSIDE AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"c82b7521-162f-e811-8126-1458d04eb810","Name":"ALPINE BORO"
+      },"ultra_propertyportalsearchfield":"500 HILLSIDE AVE","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"ALPINE BORO","ultra_elsamaintenancecompany":{
+        "Id":"5acce9b5-64a8-e811-811f-1458d04e0ca0","Name":"Jersey"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"10b7e2ae-b42f-e811-8122-1458d04ece60","Name":"ALPINE BD OF EDUCATION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ffe3ce06-3f89-4ff0-a128-90d9ee9f3afa","ultra_name":"500 HUDSON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0911009587001","ultra_addressline1":"500 HUDSON AVE","ultra_block":"24","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"26e5eb6f-5bf6-48d8-9d88-ad1857616562","Name":"500 HUDSON AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"500 HUDSON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f6af1a62-b101-4073-b611-44bef8f4a9a9","Name":"HILDA ABDELAZIZ"
+      },"ultra_zipcode":"07086","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9a5e6dc1-3acd-48d9-92f9-d5090df8558f","ultra_name":"500 JERSEY AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906022701001","ultra_addressline1":"500 JERSEY AVE","ultra_block":"12803","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"a418af5b-17c0-417c-a69f-5b9706064c4d","Name":"500 JERSEY AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"500 JERSEY AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d0bb0851-3dd1-486a-b879-78c099ef3ebe","Name":"FIRST CT. HOLDING GROUP LLC. IV"
+      },"ultra_zipcode":"07302","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"faf9aaeb-cde2-48e5-90f5-cde47afe1a11","ultra_name":"500 LAREINE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1307009294001","ultra_addressline1":"500 LAREINE AVE","ultra_block":"34","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"9c028432-9399-47aa-bc00-4db687c400e4","Name":"500 LAREINE AVE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"2a2e7521-162f-e811-8126-1458d04eb810","Name":"BRADLEY BEACH BORO"
+      },"ultra_propertyportalsearchfield":"500 LAREINE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6cc77b9f-10c7-4b03-9ded-d2cb16508a0a","Name":"SAMUEL POLUSO"
+      },"ultra_zipcode":"07720","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8f91702a-8a17-4ab4-a0f8-fe7662698843","ultra_name":"500 MADISON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608022856001","ultra_addressline1":"500 MADISON AVE","ultra_block":"15","ultra_lot":"BEO643","ultra_propertyinterest":{
+        "Id":"ac7ff355-3c56-488c-a1fa-eb0a241959d8","Name":"500 MADISON AVE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"500 MADISON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"VACANT-BOARD-SEAL","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e4682a53-fcda-4aad-b1bb-a2f0fe1ca857","Name":"CAMERON & KEITH BOURNE"
+      },"ultra_zipcode":"07501","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"03841a3c-1ed4-41f8-b647-4dcf8ad62db4","ultra_name":"500 MANILA AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906009479001","ultra_addressline1":"500 MANILA AVE","ultra_block":"10102","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"83206b17-1b3d-4b1b-b330-fecc3cbc4a68","Name":"500 MANILA AVENUE URBAN RENEWAL LLC"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"500 MANILA AVENUE URBAN RENEWAL LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2fc492d7-986f-4388-b532-7e51049bf657","Name":"500 Manila Ave Urban Renewal LLC"
+      },"ultra_zipcode":"07302","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"84691e1d-752c-4081-bedd-46cf631a9c81","ultra_name":"500 MCBRIDE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1616022368001","ultra_addressline1":"500 MCBRIDE AVE","ultra_block":"1","ultra_lot":"1.02","ultra_propertyinterest":{
+        "Id":"f5131790-8393-4492-824a-1b3a6898005c","Name":"500 MCBRIDE AVE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"362f7521-162f-e811-8126-1458d04eb810","Name":"WOODLAND PARK"
+      },"ultra_propertyportalsearchfield":"500 MCBRIDE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"308d0ad1-1fb7-48c6-97b9-0bde34d73790","Name":"BOROLINE LLC"
+      },"ultra_zipcode":"07424","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fbd795dc-3360-4a33-9406-2aa57dfccfa7","ultra_name":"500 MORNINGSIDE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0218024231001","ultra_addressline1":"500 MORNINGSIDE AVE","ultra_block":"412","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"44f26e3d-f2d9-45ec-a63f-b62ccc3b60fe","Name":"500 MORNINGSIDE AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"e82b7521-162f-e811-8126-1458d04eb810","Name":"FAIRVIEW BORO"
+      },"ultra_propertyportalsearchfield":"500 MORNINGSIDE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"311da78a-749b-4b81-aa94-e9014504f3b8","Name":"ANTON & ANTONIA MIRKOVIC"
+      },"ultra_zipcode":"07022","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cdf622d6-064c-e911-a974-001dd800b582","ultra_name":"500 N BAY AVE","ultra_registrationnumber":"1503-00123-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500  N BAY AVE","ultra_block":"167","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"bff622d6-064c-e911-a974-001dd800b582","Name":"500 N BAY AVE"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"da2e7521-162f-e811-8126-1458d04eb810","Name":"BEACH HAVEN BORO"
+      },"ultra_propertyportalsearchfield":"500 N BAY AVE","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"BEACH HAVEN BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c1f622d6-064c-e911-a974-001dd800b582","Name":"500 NORTH BAY AVE CONDOMINIUM ASSOCIATION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"28d0c91b-9beb-4a73-b15b-9c4c194eb7aa","ultra_name":"500 N S CAROLINA AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0102008177003","ultra_addressline1":"500 N S CAROLINA AVE","ultra_block":"595","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"a2a45046-8af0-4810-acc4-5c447706fb1f","Name":"CARVER HALL"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"9a2b7521-162f-e811-8126-1458d04eb810","Name":"ATLANTIC CITY"
+      },"ultra_propertyportalsearchfield":"CARVER HALL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"17417743-253d-4341-968c-f8d63cf88cb0","Name":"CARVER HALL URBAN RENEWAL LP"
+      },"ultra_zipcode":"08401","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"07a1ce4c-9546-ee11-be6d-001dd8065396","ultra_name":"500 NYE AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0709036951001","ultra_addressline1":"500 NYE AVE","ultra_block":"211","ultra_lot":"23","ultra_propertyinterest":{
+        "Id":"a55cd646-9546-ee11-be6d-001dd8065396","Name":"500 NYE AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"382d7521-162f-e811-8126-1458d04eb810","Name":"IRVINGTON TOWN"
+      },"ultra_propertyportalsearchfield":"500 NYE AVE","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"IRVINGTON TOWN","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"475cd646-9546-ee11-be6d-001dd8065396","Name":"500 NYE AVENUE LLC"
+      },"ultra_zipcode":"07111","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c447b914-9f91-4092-b8bf-14d7689d1f98","ultra_name":"500 ORCHARD AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0327022967001","ultra_addressline1":"500 ORCHARD AVE","ultra_block":"72","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"b6aa7e36-33c8-4f8d-98ef-e5160c902d3c","Name":"500 ORCHARD AVE"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"862c7521-162f-e811-8126-1458d04eb810","Name":"PALMYRA BORO"
+      },"ultra_propertyportalsearchfield":"500 ORCHARD AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"690f17bb-5bb2-ef11-b8e9-001dd80b2865","Name":"YI SUN"
+      },"ultra_zipcode":"08065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"88cbe5b5-2b8d-e911-a978-001dd80081ad","ultra_name":"500 PALISADES","ultra_registrationnumber":"0906-01068-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 PALISADES AVENUE","ultra_block":"2401","ultra_lot":"1 & 2","ultra_propertyinterest":{
+        "Id":"69cbe5b5-2b8d-e911-a978-001dd80081ad","Name":"500 PALISADES"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"500 PALISADES","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"76cbe5b5-2b8d-e911-a978-001dd80081ad","Name":"PALISADE SQUARE LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c369dad7-f367-4bd5-a929-64cf907b9e16","ultra_name":"500 PARK AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0705004404001","ultra_addressline1":"500 PARK AVE","ultra_block":"564","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"2a2e2e36-1481-44c5-98f9-afc59990f8a8","Name":"500 PARK AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"500 PARK AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3611b86d-e335-ee11-bdf5-001dd80abb61","Name":"500 PARK AVENUE EQUITIES LLC"
+      },"ultra_zipcode":"07018","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0b0eeba5-9d24-4f2a-b47a-6424a9c81153","ultra_name":"500 RANCOCAS AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0309007608001","ultra_addressline1":"500 RANCOCAS AVE","ultra_block":"1406","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"935fe5ad-aba4-403c-96be-d8802798b476","Name":"500 RANCOCAS AVE"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"622c7521-162f-e811-8126-1458d04eb810","Name":"DELANCO TWP"
+      },"ultra_propertyportalsearchfield":"500 RANCOCAS AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d9ca40f3-a2e5-4c82-8996-33efe3645df3","Name":"JOHN WIGMORE"
+      },"ultra_zipcode":"08075","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"12611e79-0414-42a3-b474-26c44f558ddc","ultra_name":"500 Riverside Avenue BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0232042661001","ultra_addressline1":"500 Riverside AVE","ultra_block":"117","ultra_lot":"1.1","ultra_propertyinterest":{
+        "Id":"f8a6e28e-88a1-42f3-8db8-932de984c4f7","Name":"500 RIVERSIDE AVENUE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"042c7521-162f-e811-8126-1458d04eb810","Name":"LYNDHURST TWP"
+      },"ultra_propertyportalsearchfield":"500 RIVERSIDE AVENUE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"96b95e0f-d781-4534-a1b3-3ec40852febd","Name":"500 Riverside Ave Condo Assn "
+      },"ultra_zipcode":"07071","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9c760725-f1a4-4349-8c52-c92759eeadb7","ultra_name":"500 S BAYVIEW AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1527020297001","ultra_addressline1":"500 S BAYVIEW AVE","ultra_block":"18","ultra_lot":"4.01","ultra_propertyinterest":{
+        "Id":"cc2d3a0b-a1ba-4fba-b9f8-1cc6d730ddf2","Name":"500 S BAYVIEW AVE"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"0a2f7521-162f-e811-8126-1458d04eb810","Name":"SEASIDE PARK BORO"
+      },"ultra_propertyportalsearchfield":"500 S BAYVIEW AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"af659aba-d50e-ee11-8f6c-001dd8040109","Name":"SEASIDE OCEANSIDE VII CONDOMINIUM ASSOCIATION, INC."
+      },"ultra_zipcode":"08752","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"be09d6e7-07b3-4e72-a601-33fad8ba9bf2","ultra_name":"500 SAYRE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1216010322001","ultra_addressline1":"500 SAYRE AVE","ultra_block":"178","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"aa5ccc6c-d43e-4776-89e4-0f9d8287a434","Name":"500 SAYRE AVE"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"0a2e7521-162f-e811-8126-1458d04eb810","Name":"PERTH AMBOY CITY"
+      },"ultra_propertyportalsearchfield":"500 SAYRE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"11dd65a9-50da-4ca3-a795-3b1aab4c7b9d","Name":"ARCADIO & LUISA RIVERA"
+      },"ultra_zipcode":"08861","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d1c9feda-d72f-e811-8122-1458d04ece60","ultra_name":"500 SUMMER AVE","ultra_registrationnumber":"1514-00223-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 SUMMER AVE","ultra_block":"402","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"89319443-9a2f-e811-8122-1458d04ece60","Name":"500 SUMMER AVE"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"5acce9b5-64a8-e811-811f-1458d04e0ca0","Name":"Jersey"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"217697e8-b42f-e811-8122-1458d04ece60","Name":"YESHIVE TORAS ARON"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cc8cb2ca-6400-48df-b9c7-6efba860c0c3","ultra_name":"500 SUMMER AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714012827001","ultra_addressline1":"500 SUMMER AVE","ultra_block":"625","ultra_lot":"45","ultra_propertyinterest":{
+        "Id":"6d1942d3-6e5e-46dd-8093-4ad8fdaf7b85","Name":"500 SUMMER AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"500 SUMMER AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"VACANT-BOARD-SEAL","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Vacant Boarded and Sealed","Value":240000009
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"749f301c-bef0-ed11-8849-001dd8070a7e","Name":"JOHN KURUVILLA"
+      },"ultra_zipcode":"07104","ultra_propertyinterest-statuscode":{
+        "Name":"Vacant Boarded & Sealed","Value":240000005
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2e08e23f-c8c9-4238-a46a-cc05a7c04e18","ultra_name":"500 SUMMIT AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0219011472001","ultra_addressline1":"500 SUMMIT AVE","ultra_block":"4454","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"ead0230d-a295-414c-a4a3-b621340125c5","Name":"500 SUMMIT AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":"500 SUMMIT AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3c83cf5e-1b1e-f111-8342-001dd8084fd9","Name":"AYSEL SONUPARLAK"
+      },"ultra_zipcode":"07024","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4845aa1c-57fe-4771-9676-7d1f315abc08","ultra_name":"500 UNION AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608012461001","ultra_addressline1":"500 UNION AVE","ultra_block":"912","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"66d9be68-1424-4897-bdac-badab83bf090","Name":"500 UNION AVE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"500 UNION AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"35c390f2-7089-4103-a5b1-e086a4e567a0","Name":"BARTOLO & MARIA S GOMEZ"
+      },"ultra_zipcode":"07522","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"85820628-8354-4f14-a29b-e87f615de6c4","ultra_name":"500 W NEW JERSEY AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0121004904001","ultra_addressline1":"500 W NEW JERSEY AVE","ultra_block":"1720","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"4f1ca3fa-1ad8-48b9-b937-c40f10e12644","Name":"500 W NEW JERSEY AVE"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"c02b7521-162f-e811-8126-1458d04eb810","Name":"SOMERS POINT CITY"
+      },"ultra_propertyportalsearchfield":"500 W NEW JERSEY AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f43a4d7e-097a-f111-ab0e-001dd80a67ab","Name":"RUBY LE"
+      },"ultra_zipcode":"08244","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ef28a2b8-f300-ec11-94ef-001dd802839a","ultra_name":"500 WILEY AVENUE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111040756005","ultra_addressline1":"500 WILEY AVENUE","ultra_block":"8705","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"31cba9b2-f300-ec11-94ef-001dd802839a","Name":"TURNER POINTE"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"TURNER POINTE","ultra_countyportalsearchfield":"MERCER","ultra_municipalityportalsearchfield":"TRENTON CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"150 ROSELLE AVE","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"60aaacac-f300-ec11-94ef-001dd802839a","Name":"HOUSING AUTHORITY OF THE CITY OF TRENTON"
+      },"ultra_zipcode":"08638","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5b67592a-94ab-f111-aaac-001dd80bcf22","ultra_name":"500-510 E California Ave","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0119030190004","ultra_addressline1":"500 E California Ave","ultra_block":"334","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"c8c55924-94ab-f111-aaac-001dd80bcf22","Name":"BAYVIEW MEADOWS CONDOS"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"bc2b7521-162f-e811-8126-1458d04eb810","Name":"PLEASANTVILLE CITY"
+      },"ultra_propertyportalsearchfield":"BAYVIEW MEADOWS CONDOS","ultra_countyportalsearchfield":"ATLANTIC","ultra_municipalityportalsearchfield":"PLEASANTVILLE CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1630611e-94ab-f111-aaac-001dd80bcf22","Name":"Bayview Meadows Condos"
+      },"ultra_zipcode":"08232","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"32d43587-7da2-42e0-81e7-dd9384588258","ultra_name":"510 UNION AVE BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0256021566002","ultra_addressline1":"500 UNION AVE","ultra_block":"211.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"853123cb-b6ba-4999-96f4-036f42bd2f8a","Name":"RIVER VILLAGE CORP."
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"342c7521-162f-e811-8126-1458d04eb810","Name":"RUTHERFORD BORO"
+      },"ultra_propertyportalsearchfield":"RIVER VILLAGE CORP.","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e7512f33-91cc-4fd9-a6bd-b235f0c71787","Name":"RIVER VILLAGE CORPC/O CREST MGMT SVC"
+      },"ultra_zipcode":"07070","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d9ed5ae1-7efa-43b7-9ef0-ead3f864ff24","ultra_name":"5500 PALISADE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0912042753001","ultra_addressline1":"5500 PALISADE AVE","ultra_block":"81","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"c646e3d8-e280-45d2-969a-d600258bf26e","Name":"5500 PALISADE AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":"5500 PALISADE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"468bd580-555d-4817-a539-932035d5cf7b","Name":"5500 PALISADES AVENUE LLC"
+      },"ultra_zipcode":"07093","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d7162ba3-eb6a-421f-9cc5-87d1920aedbe","ultra_name":"5502 ATLANTIC AVE BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0515003241002","ultra_addressline1":"5500 ATLANTIC AVE","ultra_block":"6.02","ultra_lot":"4.02","ultra_propertyinterest":{
+        "Id":"f1f4ca5a-51ea-48a7-b710-6cda5907400b","Name":"5502 ATLANTIC AVE"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"082d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CREST BORO"
+      },"ultra_propertyportalsearchfield":"5502 ATLANTIC AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bba92cfb-afd7-ed11-a7c7-001dd8070ecc","Name":"5500 ATLANTIC AVENUE CONDO ASSOCIATION"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a3b221b7-d72f-e811-8122-1458d04ece60","ultra_name":"6500 BERGENLINE AVE","ultra_registrationnumber":"0912-00234-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"6500 BERGENLINE AVE","ultra_block":"18","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"23ad3e2d-9a2f-e811-8122-1458d04ece60","Name":"6500 BERGENLINE AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7689afd8-b42f-e811-8122-1458d04ece60","Name":"CHRIST ST JOHN LUTHERAN CHURCH"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7821f108-1a60-4d62-850e-38cca89c9ed2","ultra_name":"6500 PALISADE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0912013486001","ultra_addressline1":"6500 PALISADE AVE","ultra_block":"17","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"e76c2476-342d-488f-81fe-4980d4051eb1","Name":"6500 PALISADE AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":"6500 PALISADE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"66da9d72-1b13-47d0-9cb6-48d73b0da571","Name":"VICTOR MILLAN"
+      },"ultra_zipcode":"070932312","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3426d240-ecc1-491c-8625-558ab381c9c0","ultra_name":"7500 PARK AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0908024673001","ultra_addressline1":"7500 PARK AVE","ultra_block":"312","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"bba03030-f954-4718-bb2f-955769bbbaab","Name":"7500 PARK AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"922d7521-162f-e811-8126-1458d04eb810","Name":"NORTH BERGEN TWP"
+      },"ultra_propertyportalsearchfield":"7500 PARK AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"07186734-d8cb-4566-9f81-02da5f95addf","Name":"FRANCIS VAVOSA"
+      },"ultra_zipcode":"07047","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"960b438d-d74c-4d66-b070-b4a2133a3944","ultra_name":"8500 NEW JERSEY AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0515000161001","ultra_addressline1":"8500 NEW JERSEY AVE","ultra_block":"140","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"acced4ec-f66d-4b31-8738-b0bbf734d18e","Name":"8500 NEW JERSEY AVE"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"082d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CREST BORO"
+      },"ultra_propertyportalsearchfield":"8500 NEW JERSEY AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bd1906ba-6df3-43b4-a72b-595ff639e19c","Name":"D'ARANCIO GIUSEPPE"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7f8224ab-20a4-4333-9235-26f26f248315","ultra_name":"ATRIUM CONDO","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1503023338001","ultra_addressline1":"500 ENGLESIDE AVE","ultra_block":"129","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"836f2672-012c-40af-9cfe-3825a0843063","Name":"ATRIUM CONDO"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"da2e7521-162f-e811-8126-1458d04eb810","Name":"BEACH HAVEN BORO"
+      },"ultra_propertyportalsearchfield":"ATRIUM CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"828195fb-96d3-46d6-86ee-f43fe3443eab","Name":"ATRIUM CONDO C/O RONALD TORLINI"
+      },"ultra_zipcode":"08008","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e9381abd-d72f-e811-8122-1458d04ece60","ultra_name":"BAPS","ultra_registrationnumber":"1205-00276-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2500 WOODBRIDGE AVE","ultra_block":"375HH","ultra_lot":"12J","ultra_propertyinterest":{
+        "Id":"f3b83e2d-9a2f-e811-8122-1458d04ece60","Name":"BAPS"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"f42d7521-162f-e811-8126-1458d04eb810","Name":"EDISON TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0095afd8-b42f-e811-8122-1458d04ece60","Name":"BAPSNE"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f5d35575-d72f-e811-8122-1458d04ece60","ultra_name":"BERGEN CTY DPW MAINTENANCE","ultra_registrationnumber":"0246-00292-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 JEROME AVE","ultra_block":"6402","ultra_lot":"3","ultra_propertyinterest":{
+        "Id":"ed80e59f-9f2f-e811-8120-1458d04e2fb8","Name":"BERGEN CTY DPW MAINTENANCE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"202c7521-162f-e811-8126-1458d04eb810","Name":"PARAMUS BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"26c14987-7c36-e811-811f-1458d04e2938","Name":"Metro Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fec5e2ae-b42f-e811-8122-1458d04ece60","Name":"BERGEN CTY DEPT OF PUBLIC WORKS/Peter Gerrity"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"095c878e-bf21-4ee1-b9a6-3cdc3e320693","ultra_name":"BLAIRHOUSE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1804020878001","ultra_addressline1":"500 E UNION AVE","ultra_block":"13-02","ultra_lot":"48","ultra_propertyinterest":{
+        "Id":"73df6c09-bf70-48d7-b6df-2f9d8e3f3397","Name":"BLAIRHOUSE"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"5c2f7521-162f-e811-8126-1458d04eb810","Name":"BOUND BROOK BORO"
+      },"ultra_propertyportalsearchfield":"BLAIRHOUSE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4c624188-cb04-48ad-ba6f-fe5f55720527","Name":"BOUND BROOK HOLDING LLC"
+      },"ultra_zipcode":"08805","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f1b544ac-ddcc-4cd0-b849-3fa056ef1093","ultra_name":"BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0507002983001","ultra_addressline1":"500 E 13TH AVE","ultra_block":"413","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"eab84c30-c482-4713-bd3d-166c2d835826","Name":"BLDG 1"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"f82c7521-162f-e811-8126-1458d04eb810","Name":"NORTH WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"BLDG 1","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d2735296-4cae-43b7-9bc0-e6fc747101c6","Name":"CLIPPER CONDO ASSN"
+      },"ultra_zipcode":"02983","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6e6cec08-425e-ea11-a99f-001dd800951b","ultra_name":"BLDG 1200","ultra_registrationnumber":"0108-00141-004","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2500 ENGLISH CREEK AVE","ultra_block":"1401","ultra_lot":"2.01","ultra_propertyinterest":{
+        "Id":"f56ee59f-9f2f-e811-8120-1458d04e2fb8","Name":"ATLANTIC LIFE CENTER"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"a62b7521-162f-e811-8126-1458d04eb810","Name":"EGG HARBOR TWP"
+      },"ultra_propertyportalsearchfield":"ATLANTIC LIFE CENTER","ultra_countyportalsearchfield":"ATLANTIC","ultra_municipalityportalsearchfield":"EGG HARBOR TWP","ultra_elsamaintenancecompany":{
+        "Id":"b050976b-a1f9-e811-812e-1458d04e2f20","Name":"DW"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"74b4e2ae-b42f-e811-8122-1458d04ece60","Name":"ATLANTIC CARE HEALTH SYSTEM ATTN FACILITIES"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0db504d1-c53c-4607-8e46-d6b382cf06f0","ultra_name":"BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0507005432002","ultra_addressline1":"2500 ATLANTIC AVE","ultra_block":"226","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"0699c6fe-dcd4-4d9c-a454-6ac0bb44cf61","Name":"BLDG 1"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"f82c7521-162f-e811-8126-1458d04eb810","Name":"NORTH WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"BLDG 1","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"2504 ATLANTIC AV","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"965bab46-140b-4f85-986e-5a85b9cdfb6a","Name":"ERIN SHORES CONDO ASSN"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"415a7208-30df-eb11-bacb-001dd8028371","ultra_name":"BLDG 5","ultra_registrationnumber":"0421-00106-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 E OAK AVE","ultra_block":"510","ultra_lot":"1 & 3","ultra_propertyinterest":{
+        "Id":"225a7208-30df-eb11-bacb-001dd8028371","Name":"BLDG 5"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"ca2c7521-162f-e811-8126-1458d04eb810","Name":"LAWNSIDE BORO"
+      },"ultra_propertyportalsearchfield":"BLDG 5","ultra_countyportalsearchfield":"CAMDEN","ultra_municipalityportalsearchfield":"LAWNSIDE BORO","ultra_elsamaintenancecompany":{
+        "Id":"660ca298-4228-ec11-b6e6-001dd802d682","Name":"Schindler"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"255a7208-30df-eb11-bacb-001dd8028371","Name":"STATION OAK PARTNERS LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"24ed1545-22c6-f011-bbd3-001dd8084fd9","ultra_name":"Brigadune Condos","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0103020040001","ultra_addressline1":"3500 Ocean Ave","ultra_block":"3304","ultra_lot":"5.01-5.08","ultra_propertyinterest":{
+        "Id":"d4ec1545-22c6-f011-bbd3-001dd8084fd9","Name":"BRIGADUNE CONDOS"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"9c2b7521-162f-e811-8126-1458d04eb810","Name":"BRIGANTINE CITY"
+      },"ultra_propertyportalsearchfield":"BRIGADUNE CONDOS","ultra_countyportalsearchfield":"ATLANTIC","ultra_municipalityportalsearchfield":"BRIGANTINE CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7d178122-8724-f111-8342-001dd80a67ab","Name":"BRIGADUNE CONDOMINIUM ASSN"
+      },"ultra_zipcode":"08203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e595f049-e74c-499a-ae04-dc74250ab0e9","ultra_name":"BRIGANTINE BEACH CLUB","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0103010999001","ultra_addressline1":"4500 W BRIGANTINE AVE","ultra_block":"3502","ultra_lot":"3.002","ultra_propertyinterest":{
+        "Id":"b2e5751d-7fe1-40be-8243-19d2ad0f61bd","Name":"BRIGANTINE BEACH CLUB"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"9c2b7521-162f-e811-8126-1458d04eb810","Name":"BRIGANTINE CITY"
+      },"ultra_propertyportalsearchfield":"BRIGANTINE BEACH CLUB","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9a8d68f0-c878-4dd8-9af0-008d0c0218f4","Name":"BRIGANTINE BEACH CLUB ASSN"
+      },"ultra_zipcode":"08203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f0f8643f-87b4-4780-ad0b-abd9f355a057","ultra_name":"BRIGANTINE BEACH CLUB CONDO 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0103010785001","ultra_addressline1":"4500 W BRIGANTINE AVE","ultra_block":"3502","ultra_lot":"3.001","ultra_propertyinterest":{
+        "Id":"60d51637-c2e4-4bba-b03a-769e83cc91cc","Name":"BRIGANTINE BEACH CLUB CONDO 2"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"9c2b7521-162f-e811-8126-1458d04eb810","Name":"BRIGANTINE CITY"
+      },"ultra_propertyportalsearchfield":"BRIGANTINE BEACH CLUB CONDO 2","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8b462a7e-73e0-4bcc-8f36-99fc72808b7d","Name":"BRIGANTINE BEACH CONDO 2"
+      },"ultra_zipcode":"08203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"47e3c915-8d24-498f-9666-a5f902596d10","ultra_name":"BROWN'S","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 MCLEAN AVE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"63800539-1060-42ee-b92b-28a1a5d55228","Name":"BROWN'S"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"062f7521-162f-e811-8126-1458d04eb810","Name":"POINT PLEASANT BEACH BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"087420000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3d459abe-ddd4-ef11-8eea-001dd80b2865","ultra_name":"CENTRAL PARK","ultra_registrationnumber":"2020-00221-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 CENTRAL AVE","ultra_block":"3006","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"b4d89ab8-ddd4-ef11-8eea-001dd80b2865","Name":"CENTRAL PARK"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d62f7521-162f-e811-8126-1458d04eb810","Name":"WESTFIELD TOWN"
+      },"ultra_propertyportalsearchfield":"CENTRAL PARK","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"WESTFIELD TOWN","ultra_elsamaintenancecompany":{
+        "Id":"04459abe-ddd4-ef11-8eea-001dd80b2865","Name":"500 CENTRAL WESTFIELD, LLC"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ecd89ab8-ddd4-ef11-8eea-001dd80b2865","Name":"500 CENTRAL WESTFIELD, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8428d404-d82f-e811-8122-1458d04ece60","ultra_name":"CHAPEL OF LOVE & REMEMBRANCE","ultra_registrationnumber":"2019-00208-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1500 STUYVESANT AVE","ultra_block":"5309","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"d79db256-9a2f-e811-8122-1458d04ece60","Name":"CHAPEL OF LOVE & REMEMBRANCE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9d9197e8-b42f-e811-8122-1458d04ece60","Name":"HOLLYWOOD MEMORIAL PARK"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"647c2fb3-a7a3-4751-b35c-368db2c90665","ultra_name":"CHATEAU INN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1348010645001","ultra_addressline1":"500 WARREN AVE","ultra_block":"62","ultra_lot":"19","ultra_propertyinterest":{
+        "Id":"38207520-ef39-4abd-b2ff-0cb8003c9d1e","Name":"CHATEAU INN"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"7c2e7521-162f-e811-8126-1458d04eb810","Name":"SPRING LAKE BORO"
+      },"ultra_propertyportalsearchfield":"CHATEAU INN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fa29c536-481c-41e5-875c-a97b9b721379","Name":"SCOSMIC INC"
+      },"ultra_zipcode":"07762","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c70208a1-0967-4ba9-8052-7458a80265c5","ultra_name":"CHATEAUINN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1348010645002","ultra_addressline1":"500 warren AVE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"38207520-ef39-4abd-b2ff-0cb8003c9d1e","Name":"CHATEAU INN"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"7c2e7521-162f-e811-8126-1458d04eb810","Name":"SPRING LAKE BORO"
+      },"ultra_propertyportalsearchfield":"CHATEAU INN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fa29c536-481c-41e5-875c-a97b9b721379","Name":"SCOSMIC INC"
+      },"ultra_zipcode":"07762","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b6b021b7-d72f-e811-8122-1458d04ece60","ultra_name":"Colin Powell School","ultra_registrationnumber":"0910-00244-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1500 NEW YORK AVE","ultra_block":"75","ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"89ab3e2d-9a2f-e811-8122-1458d04ece60","Name":"Colin Powell School"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"Colin Powell School","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"UNION CITY (H)","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ae473dc7-b42f-e811-8122-1458d04ece60","Name":"UNION CITY BOE"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7c610680-2e02-43c5-b0eb-0897fa66fe86","ultra_name":"CONVERSE COTTAGE INN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1503023154001","ultra_addressline1":"500 S ATLANTIC AVE","ultra_block":"120","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"ef5beb45-902d-43ea-9234-c90013d89ebe","Name":"CONVERSE COTTAGE INN"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"da2e7521-162f-e811-8126-1458d04eb810","Name":"BEACH HAVEN BORO"
+      },"ultra_propertyportalsearchfield":"CONVERSE COTTAGE INN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"253e0e0b-1dc8-4cd0-8a2e-5edc9f53f2d1","Name":"SCERBO OCEAN LLC"
+      },"ultra_zipcode":"08008","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"19791b82-fddd-4e54-b8aa-80ce19e6c710","ultra_name":"CORDOBA CONDOS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0507006837001","ultra_addressline1":"1500 ATLANTIC AVE","ultra_block":"236","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"564373a1-f295-4508-8e05-3589f2aa9e97","Name":"CORDOBA CONDOS"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"f82c7521-162f-e811-8126-1458d04eb810","Name":"NORTH WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"CORDOBA CONDOS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"1500 ATLANTIC AV","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e32d23be-bd2a-44cd-83d6-64c565587a46","Name":"CORDOBA CONDO ASSN"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"796a26d4-17f6-eb11-bacb-001dd8027420","ultra_name":"CORNERSTONE EQUITIES","ultra_registrationnumber":"1514-00332-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1500 AVENUE OF THE STATES","ultra_block":"961","ultra_lot":"2.09","ultra_propertyinterest":{
+        "Id":"826229ce-17f6-eb11-bacb-001dd8027420","Name":"CORNERSTONE EQUITIES"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":"CORNERSTONE EQUITIES","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"LAKEWOOD TWP","ultra_elsamaintenancecompany":{
+        "Id":"9f509519-c1ad-eb11-b1ac-001dd801df8b","Name":"Schindler"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fe6926d4-17f6-eb11-bacb-001dd8027420","Name":"CORNERSTONE EQUITIES"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"45c2dc1a-beb7-4ad8-a459-c6d60d1496e2","ultra_name":"EAST GATE OF RIDGEWOOD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0251018016001","ultra_addressline1":"500 E RIDGEWOOD AVE","ultra_block":"4004","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"282a35e9-0753-4f8f-80c2-2295be3fdce9","Name":"EAST GATE OF RIDGEWOOD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"2a2c7521-162f-e811-8126-1458d04eb810","Name":"RIDGEWOOD VILLAGE"
+      },"ultra_propertyportalsearchfield":"EAST GATE OF RIDGEWOOD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"45283f51-b433-49bc-a2ed-13f53bdebf31","Name":"E RIDGEWOOD AV LLC"
+      },"ultra_zipcode":"07450","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"68548d90-eb4f-4fed-b4ba-98669c0af489","ultra_name":"EAST GATE OF RIDGEWOOD BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0251018016002","ultra_addressline1":"500 E RIDGEWOOD AVE","ultra_block":"4004","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"282a35e9-0753-4f8f-80c2-2295be3fdce9","Name":"EAST GATE OF RIDGEWOOD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"2a2c7521-162f-e811-8126-1458d04eb810","Name":"RIDGEWOOD VILLAGE"
+      },"ultra_propertyportalsearchfield":"EAST GATE OF RIDGEWOOD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"45283f51-b433-49bc-a2ed-13f53bdebf31","Name":"E RIDGEWOOD AV LLC"
+      },"ultra_zipcode":"07450","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"94acfeda-d72f-e811-8122-1458d04ece60","ultra_name":"FIRST PRESBYTERIAN CHURCH","ultra_registrationnumber":"1306-00112-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 9th Ave","ultra_block":"82","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"bac33e2d-9a2f-e811-8122-1458d04ece60","Name":"FIRST PRESBYTERIAN CHURCH"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"282e7521-162f-e811-8126-1458d04eb810","Name":"BELMAR BORO"
+      },"ultra_propertyportalsearchfield":"FIRST PRESBYTERIAN CHURCH","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"BELMAR BORO","ultra_elsamaintenancecompany":{
+        "Id":"e6f35a6d-d27b-e811-8106-1458d04e0ca0","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d7438dfa-9a3e-e811-8123-1458d04ece60","Name":"FIRST PRESBYTERIAN CHURCH"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1f3a2e8d-bc1a-ea11-a98a-001dd80081ad","ultra_name":"GARFIELD PUBLIC LIBRARY","ultra_registrationnumber":"0221-00146-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 MIDLAND AVE","ultra_block":"88","ultra_lot":"215.04","ultra_propertyinterest":{
+        "Id":"ee392e8d-bc1a-ea11-a98a-001dd80081ad","Name":"GARFIELD PUBLIC LIBRARY"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ee2b7521-162f-e811-8126-1458d04eb810","Name":"GARFIELD CITY"
+      },"ultra_propertyportalsearchfield":"GARFIELD PUBLIC LIBRARY","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"GARFIELD CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"50f60d8a-a33e-e811-8121-1458d04e2fb8","Name":"CITY OF GARFIELD"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0154a009-79cb-4076-9014-f56eb0060494","ultra_name":"HIGHLAND APTS BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0427014323001","ultra_addressline1":"5500 HIGHLAND AVE","ultra_block":"5724","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"bce687c2-ca4e-43a6-9ee6-3c87324b2d7b","Name":"HIGHLAND APTS"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"d62c7521-162f-e811-8126-1458d04eb810","Name":"PENNSAUKEN TWP"
+      },"ultra_propertyportalsearchfield":"HIGHLAND APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a81dff18-3424-44e1-8624-cadbfe292253","Name":"HIGHLAND APTS LLC"
+      },"ultra_zipcode":"08110","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"85137560-f61a-44f8-9ead-d294def00a6a","ultra_name":"HIGHLAND APTS BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0427014323002","ultra_addressline1":"5500 HIGHLAND AVE","ultra_block":"5724","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"bce687c2-ca4e-43a6-9ee6-3c87324b2d7b","Name":"HIGHLAND APTS"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"d62c7521-162f-e811-8126-1458d04eb810","Name":"PENNSAUKEN TWP"
+      },"ultra_propertyportalsearchfield":"HIGHLAND APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a81dff18-3424-44e1-8624-cadbfe292253","Name":"HIGHLAND APTS LLC"
+      },"ultra_zipcode":"08110","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fba221b7-d72f-e811-8122-1458d04ece60","ultra_name":"HOBOKEN LIBRARY","ultra_registrationnumber":"0905-00434-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 PARK AVE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"4097d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"HOBOKEN LIBRARY"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"623d3dc7-b42f-e811-8122-1458d04ece60","Name":"HOBOKEN FREE PUBLIC LIBRARY"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"646ee290-5c88-e911-a977-001dd800ba25","ultra_name":"HOTEL @PORT IMPERIAL (Garage)","ultra_registrationnumber":"0911-00175-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 AVE @ PORT IMPERIAL","ultra_block":"6401","ultra_lot":"3.02","ultra_propertyinterest":{
+        "Id":"5c6ee290-5c88-e911-a977-001dd800ba25","Name":"HOTEL @PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"HOTEL @PORT IMPERIAL","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"WEEHAWKEN TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"242670c3-e091-e911-a97a-001dd8009f4b","Name":"PORT IMPERIAL SOUTH 4/5 GARAGE LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"071ba75f-d979-46d6-9a3f-6381359a3d10","ultra_name":"Hotels at Port Imperial","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0911042751001","ultra_addressline1":"500 Avenue at Port Imperial ","ultra_block":"64.01","ultra_lot":"3.02","ultra_propertyinterest":{
+        "Id":"11da594d-0255-40fb-87a7-f1c2eac1fd8d","Name":"Hotels at Port Imperial"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"Hotels at Port Imperial","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c2ef6b20-b345-4ec4-a1e1-30b81535a2da","Name":"XS Hotel Urban Renewal Associates"
+      },"ultra_zipcode":"07086","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7597d514-ca74-47fc-a071-a9a7a849bed4","ultra_name":"ISLE OF CAPRI MOTEL","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0507005270001","ultra_addressline1":"500 OCEAN AVE","ultra_block":"321","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"39d98d0a-d2e9-428d-9eff-93a328747dae","Name":"SEAPORT INN"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"f82c7521-162f-e811-8126-1458d04eb810","Name":"NORTH WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"SEAPORT INN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2ffc72a3-8b53-f011-877a-001dd80c2ab9","Name":"SEAPORT INN CONDO ASSOCIATION"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"af1db6d2-7674-4b2d-931d-9b53eb7433bb","ultra_name":"LA QUINTS DEL MAR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0505010732001","ultra_addressline1":"500 E RALEIGH AVE","ultra_block":"735.02","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"ee25ac43-b2cb-4909-881e-03514a373d9d","Name":"LA QUINTS DEL MAR CONDOS"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"f42c7521-162f-e811-8126-1458d04eb810","Name":"LOWER TWP"
+      },"ultra_propertyportalsearchfield":"LA QUINTS DEL MAR CONDOS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4f852ace-6728-47f4-b482-82c73a34ad78","Name":"LA QUINTA DEL MAR CONDO ASSN"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0c4cb0b1-ffd1-4162-a538-a912c7f393cd","ultra_name":"LASALLE APTS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0102007671001","ultra_addressline1":"3500 ATLANTIC AVE","ultra_block":"BC05","ultra_lot":"20","ultra_propertyinterest":{
+        "Id":"51e19ee7-b27a-4e57-90a7-73214e1e9ae9","Name":"LASALLE APTS"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"9a2b7521-162f-e811-8126-1458d04eb810","Name":"ATLANTIC CITY"
+      },"ultra_propertyportalsearchfield":"LASALLE APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5bc7133b-3fe9-4067-b425-d5f3630b2153","Name":"ARTHUR & CEOLA MAGILL"
+      },"ultra_zipcode":"08401","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a1ac414d-3684-ec11-8d20-001dd801cf7b","ultra_name":"LEGACY VACATION RESORTS BRIGANTINE VILLAS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0103002644002","ultra_addressline1":"1500 OCEAN AVE","ultra_block":"1402","ultra_lot":"3.17","ultra_propertyinterest":{
+        "Id":"ebf8c7c2-cac6-47e6-b159-8f3745737796","Name":"LEGACY VACATION RESORTS BRIGANTINE"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"9c2b7521-162f-e811-8126-1458d04eb810","Name":"BRIGANTINE CITY"
+      },"ultra_propertyportalsearchfield":"LEGACY VACATION RESORTS BRIGANTINE","ultra_countyportalsearchfield":"ATLANTIC","ultra_municipalityportalsearchfield":"BRIGANTINE CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Vacant","Value":240000006
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"63f33571-6517-45d8-87e1-bb98b0eb5863","Name":"Celebrity Resorts Brigantine"
+      },"ultra_zipcode":"08203","ultra_propertyinterest-statuscode":{
+        "Name":"Vacant","Value":240000000
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e34c6048-1bed-4207-a86a-6648a522eb34","ultra_name":"LOFTS AT GARWOOD","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2006035974001","ultra_addressline1":"500 NORTH AVE","ultra_block":"106","ultra_lot":"9.01","ultra_propertyinterest":{
+        "Id":"1d476b54-1d28-4c18-a164-3dc6c7ecce0d","Name":"LOFTS AT GARWOOD"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ba2f7521-162f-e811-8126-1458d04eb810","Name":"GARWOOD BORO"
+      },"ultra_propertyportalsearchfield":"LOFTS AT GARWOOD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a05760d5-f479-4782-868d-9aa6cc3210ce","Name":"LOFTS AT GARWOOD LLC"
+      },"ultra_zipcode":"07027","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0fcde74c-3c57-41eb-8162-9accd245195a","ultra_name":"MANAYUNK SUNRISE APTS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0507003019001","ultra_addressline1":"500 E 19TH AVE","ultra_block":"294","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"bc51e5cd-62d3-41b1-b7b2-d55b9eb0dac4","Name":"MANAYUNK SUNRISE APTS"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"f82c7521-162f-e811-8126-1458d04eb810","Name":"NORTH WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"MANAYUNK SUNRISE APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"36569143-defa-eb11-94ef-001dd802a184","Name":"KEVIN O'BRIEN"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7428d404-d82f-e811-8122-1458d04ece60","ultra_name":"MCCRACKEN FUNERAL HOME","ultra_registrationnumber":"2019-00200-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1500 MORRIS AVE","ultra_block":"1306","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"c79db256-9a2f-e811-8122-1458d04ece60","Name":"MCCRACKEN FUNERAL HOME"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"f662a183-3aa5-e811-811d-1458d04e0ca0","Name":"WCH"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8f9197e8-b42f-e811-8122-1458d04ece60","Name":"MANAGER"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3e593897-68e1-45dd-b315-adbe55e2b288","ultra_name":"NO JURISDICTION","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0509004332001","ultra_addressline1":"4500 LANDIS AVE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"ec7f9f73-62ac-44b5-b3fd-b1e0908d5039","Name":"NO JURISDICTION"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"fc2c7521-162f-e811-8126-1458d04eb810","Name":"SEA ISLE CITY"
+      },"ultra_propertyportalsearchfield":"NO JURISDICTION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5d9ae590-af4d-4887-9905-90c3c21bef0d","Name":"MARY DONOVAN"
+      },"ultra_zipcode":"08243","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2bcb77ac-0e25-46a1-8837-674563c2af0d","ultra_name":"PLEASANT VALLEY APTS BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0322008815001","ultra_addressline1":"500 CAMDEN AVE","ultra_block":"2000","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"fd52d95c-0ae3-4fbd-89a5-b73eb3dc28f6","Name":"MOORESTOWN PLEASANT VALLEY APTS LLC"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"7c2c7521-162f-e811-8126-1458d04eb810","Name":"MOORESTOWN TWP"
+      },"ultra_propertyportalsearchfield":"MOORESTOWN PLEASANT VALLEY APTS LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2b548ab1-7b60-4e00-bdee-adae37774340","Name":"MOORESTOWN PLEASANT VALLEY"
+      },"ultra_zipcode":"08057","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"727ab05f-bda9-409f-9564-7c382f070ac1","ultra_name":"PLEASANT VALLEY APTS BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0322008815002","ultra_addressline1":"500 CAMDEN AVE","ultra_block":"2000","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"fd52d95c-0ae3-4fbd-89a5-b73eb3dc28f6","Name":"MOORESTOWN PLEASANT VALLEY APTS LLC"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"7c2c7521-162f-e811-8126-1458d04eb810","Name":"MOORESTOWN TWP"
+      },"ultra_propertyportalsearchfield":"MOORESTOWN PLEASANT VALLEY APTS LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2b548ab1-7b60-4e00-bdee-adae37774340","Name":"MOORESTOWN PLEASANT VALLEY"
+      },"ultra_zipcode":"08057","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ce9637b7-8773-419d-bfc4-a26179939925","ultra_name":"PLEASANT VALLEY APTS BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0322008815003","ultra_addressline1":"500 CAMDEN AVE","ultra_block":"2000","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"fd52d95c-0ae3-4fbd-89a5-b73eb3dc28f6","Name":"MOORESTOWN PLEASANT VALLEY APTS LLC"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"7c2c7521-162f-e811-8126-1458d04eb810","Name":"MOORESTOWN TWP"
+      },"ultra_propertyportalsearchfield":"MOORESTOWN PLEASANT VALLEY APTS LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2b548ab1-7b60-4e00-bdee-adae37774340","Name":"MOORESTOWN PLEASANT VALLEY"
+      },"ultra_zipcode":"08057","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fa85cdc4-7eed-4c09-91e4-518ef1e564c1","ultra_name":"PLEASANT VALLEY APTS BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0322008815004","ultra_addressline1":"500 CAMDEN AVE","ultra_block":"2000","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"fd52d95c-0ae3-4fbd-89a5-b73eb3dc28f6","Name":"MOORESTOWN PLEASANT VALLEY APTS LLC"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"7c2c7521-162f-e811-8126-1458d04eb810","Name":"MOORESTOWN TWP"
+      },"ultra_propertyportalsearchfield":"MOORESTOWN PLEASANT VALLEY APTS LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2b548ab1-7b60-4e00-bdee-adae37774340","Name":"MOORESTOWN PLEASANT VALLEY"
+      },"ultra_zipcode":"08057","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"31a999d1-509b-4ff6-8266-fe8e22ad7717","ultra_name":"PLEASANT VALLEY APTS BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0322008815005","ultra_addressline1":"500 CAMDEN AVE","ultra_block":"2000","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"fd52d95c-0ae3-4fbd-89a5-b73eb3dc28f6","Name":"MOORESTOWN PLEASANT VALLEY APTS LLC"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"7c2c7521-162f-e811-8126-1458d04eb810","Name":"MOORESTOWN TWP"
+      },"ultra_propertyportalsearchfield":"MOORESTOWN PLEASANT VALLEY APTS LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2b548ab1-7b60-4e00-bdee-adae37774340","Name":"MOORESTOWN PLEASANT VALLEY"
+      },"ultra_zipcode":"08057","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"60a339ee-d745-4bc3-b680-ab690902f382","ultra_name":"PLEASANT VALLEY APTS BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0322008815006","ultra_addressline1":"500 CAMDEN AVE","ultra_block":"2000","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"fd52d95c-0ae3-4fbd-89a5-b73eb3dc28f6","Name":"MOORESTOWN PLEASANT VALLEY APTS LLC"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"7c2c7521-162f-e811-8126-1458d04eb810","Name":"MOORESTOWN TWP"
+      },"ultra_propertyportalsearchfield":"MOORESTOWN PLEASANT VALLEY APTS LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2b548ab1-7b60-4e00-bdee-adae37774340","Name":"MOORESTOWN PLEASANT VALLEY"
+      },"ultra_zipcode":"08057","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2bf61ced-3c8f-451a-8616-967f63b322f5","ultra_name":"PLZ","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0219009459001","ultra_addressline1":"1500 PALISADE AVE","ultra_block":"3253","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"a79c2793-e7e1-4811-857d-08bae8fb7c99","Name":"PLZ"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":"PLZ","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"THE PLAZA","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9488eb08-3e26-46ee-b13d-b901a958e0a0","Name":"SOUTHBRIDGE PARK THE PLZ"
+      },"ultra_zipcode":"07024","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2d2670c3-e091-e911-a97a-001dd8009f4b","ultra_name":"PORT IMPERIAL SO 4/5 GARAGE","ultra_registrationnumber":"0911-00176-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 AVE @ PORT IMPERIAL","ultra_block":"3.02","ultra_lot":"64.01","ultra_propertyinterest":{
+        "Id":"202670c3-e091-e911-a97a-001dd8009f4b","Name":"PORT IMPERIAL SO 4/5 GARAGE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"PORT IMPERIAL SO 4/5 GARAGE","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"WEEHAWKEN TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"242670c3-e091-e911-a97a-001dd8009f4b","Name":"PORT IMPERIAL SOUTH 4/5 GARAGE LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"79c9feda-d72f-e811-8122-1458d04ece60","ultra_name":"Prospect Professional Center","ultra_registrationnumber":"1514-00183-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 RIVER AVE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"3b319443-9a2f-e811-8122-1458d04ece60","Name":"River Equities"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":"River Equities","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"LAKEWOOD TWP","ultra_elsamaintenancecompany":{
+        "Id":"5acce9b5-64a8-e811-811f-1458d04e0ca0","Name":"Jersey"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fa6e3355-d7e6-ee11-904d-001dd80b3ddb","Name":"RIVER EQUITIES"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3ec2feda-d72f-e811-8122-1458d04ece60","ultra_name":"PUBLIC SAFETY TRAINING","ultra_registrationnumber":"1429-00214-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 W HANOVER AVE","ultra_block":"7","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"ad2b9443-9a2f-e811-8122-1458d04ece60","Name":"FIRE & POLICE ACADEMY"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"c02e7521-162f-e811-8126-1458d04eb810","Name":"PARSIPPANY-TROY HILLS TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4d7097e8-b42f-e811-8122-1458d04ece60","Name":"COUNTY OF MORRIS WILLIAM HUDZIK"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"33b121b7-d72f-e811-8122-1458d04ece60","ultra_name":"RIVERS EDGE @ PORT IMPERIAL","ultra_registrationnumber":"0911-00142-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1500 AVE @ PORT IMPERIAL","ultra_block":"64.01","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"f7ab3e2d-9a2f-e811-8122-1458d04ece60","Name":"RIVERS EDGE @ PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"RIVERS EDGE @ PORT IMPERIAL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"47c7a29a-f214-e911-812a-1458d04e0ca0","Name":"Otis Fairfield"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1a483dc7-b42f-e811-8122-1458d04ece60","Name":"PORT IMPERIAL SOUTH 15 LLC & RIVER EDGE @ PORT IMPERIAL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"042565ce-76d1-4a0c-a36e-439ce3dd9dbe","ultra_name":"RiversEdge at Port Imperial","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0911036100001","ultra_addressline1":"1500 Avenue at Port Imperial ","ultra_block":"64.01","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"d1c14328-960b-4b7f-8cfa-4f30be78b81d","Name":"RIVERSEDGE AT PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"RIVERSEDGE AT PORT IMPERIAL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"da1e1c85-bd5f-4e92-be3c-262005e84f98","Name":"Port Imperial South 15, L.L.C."
+      },"ultra_zipcode":"07086","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8c0b7d08-9772-ea11-a811-001dd8018866","ultra_name":"RIVERSIDE MEDICAL GROUP","ultra_registrationnumber":"0908-00265-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"7500 BERGENLINE AVE","ultra_block":"280","ultra_lot":"37","ultra_propertyinterest":{
+        "Id":"8a708402-9772-ea11-a811-001dd8018866","Name":"RIVERSIDE MEDICAL GROUP"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"922d7521-162f-e811-8126-1458d04eb810","Name":"NORTH BERGEN TWP"
+      },"ultra_propertyportalsearchfield":"RIVERSIDE MEDICAL GROUP","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"NORTH BERGEN TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"390b7d08-9772-ea11-a811-001dd8018866","Name":"RIVERSIDE MEDICAL GROUP"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4deb4b39-8bf0-f011-8406-001dd800c744","ultra_name":"SEA ISLE CITY COMMUNITY CENTER","ultra_registrationnumber":"0509-00157-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"4500 CENTRAL AVE SEA ISLE CITY NJ 08243","ultra_block":"45.04","ultra_lot":"1-32","ultra_propertyinterest":{
+        "Id":"8e634a2d-8bf0-f011-8406-001dd800c744","Name":"SEA ISLE CITY COMMUNITY CENTER"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"fc2c7521-162f-e811-8126-1458d04eb810","Name":"SEA ISLE CITY"
+      },"ultra_propertyportalsearchfield":"SEA ISLE CITY COMMUNITY CENTER","ultra_countyportalsearchfield":"CAPE MAY","ultra_municipalityportalsearchfield":"SEA ISLE CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"12644a2d-8bf0-f011-8406-001dd800c744","Name":"SEA ISLE CITY COMMUNITY CENTER"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"16e335dd-4f09-4007-b59e-d1289a5ea5dc","ultra_name":"STANFORD COURT","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0267020704001","ultra_addressline1":"500 CENTER AVE","ultra_block":"701","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"f0e5073c-bb2f-47fe-99c1-1a1f4e396ef6","Name":"STANFORD COURT"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"4a2c7521-162f-e811-8126-1458d04eb810","Name":"WESTWOOD BORO"
+      },"ultra_propertyportalsearchfield":"STANFORD COURT","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0821aa94-ddd4-ef11-8eea-001dd80b2865","Name":"STANFORD COURT DE LLC"
+      },"ultra_zipcode":"07675","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c1672b2c-77c9-4290-a2b6-471ca208d45a","ultra_name":"STOP THE HEROIN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 MAPLE AVENUE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"5a659b77-78a4-4e3e-9891-f5ee6b795afe","Name":"STOP THE HEROIN"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"ba2b7521-162f-e811-8126-1458d04eb810","Name":"NORTHFIELD CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"dd78074d-dd7d-44bb-a641-48104ce5490a","Name":"RASIK Corportation"
+      },"ultra_zipcode":"08225","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3d8370be-866d-e811-8244-1458d04e1b18","ultra_name":"STRESS CARE","ultra_registrationnumber":"1326-00136-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 PARK AVE","ultra_block":"74","ultra_lot":"24.10","ultra_propertyinterest":{
+        "Id":"cad375b8-866d-e811-8244-1458d04e1b18","Name":"STRESS CARE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"502e7521-162f-e811-8126-1458d04eb810","Name":"MANALAPAN TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f18270be-866d-e811-8244-1458d04e1b18","Name":"500 PARK AVENUE ASSOCIATES"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"471caa75-422f-4322-8cf2-895939cd9a30","ultra_name":"SUITCASE MOTEL & TRAVEL","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0507005392001","ultra_addressline1":"1500 NEW JERSEY AVE","ultra_block":"174","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"b9731d4e-00c8-44b3-bcb9-c63f208e7dbc","Name":"1500 NEW JERSEY AVE"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"f82c7521-162f-e811-8126-1458d04eb810","Name":"NORTH WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"1500 NEW JERSEY AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9495467b-0e71-4108-b7cc-7fb1e146a66e","Name":"MAJURA DALPIAZ"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1a65f7a7-8901-eb11-a815-001dd8018943","ultra_name":"THE GRAND SADDLE BROOK","ultra_registrationnumber":"0257-00149-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 VAN BUSSEN AVE","ultra_block":"402","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"ced4fca1-8901-eb11-a815-001dd8018943","Name":"THE GRAND SADDLE BROOK"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"362c7521-162f-e811-8126-1458d04eb810","Name":"SADDLE BROOK TWP"
+      },"ultra_propertyportalsearchfield":"THE GRAND SADDLE BROOK","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"SADDLE BROOK TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d5d4fca1-8901-eb11-a815-001dd8018943","Name":"MAZIM REALTY TRUST"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8cd72063-feec-e811-812f-1458d0509d88","ultra_name":"THE HOTELS AT PORT IMPERIAL","ultra_registrationnumber":"0911-00172-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"500 AVENUE AT PORT IMPERIAL","ultra_block":"64.01","ultra_lot":"3.02","ultra_propertyinterest":{
+        "Id":"6cd72063-feec-e811-812f-1458d0509d88","Name":"THE HOTELS AT PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"THE HOTELS AT PORT IMPERIAL","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"WEEHAWKEN TWP","ultra_elsamaintenancecompany":{
+        "Id":"02adf32e-d45a-e811-812e-1458d04ef938","Name":"Otis Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"72d72063-feec-e811-812f-1458d0509d88","Name":"XS HOTEL URBAN RENEWAL ASSOCIATES, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3f70f885-3979-4c32-b0ce-a10edab6587e","ultra_name":"THE LENOX","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0910021230001","ultra_addressline1":"500 CENTRAL AVE","ultra_block":"22","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"8477fa3e-33c8-4eda-9c1d-50ee19e74879","Name":"LENOX CONDO ASSOCIATION"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"LENOX CONDO ASSOCIATION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"35cfca7e-14c2-436c-ace4-c21cd2ad6fec","Name":"LENOX CONDO ASSOCIATION"
+      },"ultra_zipcode":"07087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e21b925d-c99c-43b7-b6b2-c01a225f87dc","ultra_name":"THE VILLAS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0103008717001","ultra_addressline1":"1500 OCEAN AVE","ultra_block":"1402","ultra_lot":"3.01","ultra_propertyinterest":{
+        "Id":"5a1a3c87-1ff9-45fc-afbe-3f454ec93172","Name":"THE VILLAS"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"9c2b7521-162f-e811-8126-1458d04eb810","Name":"BRIGANTINE CITY"
+      },"ultra_propertyportalsearchfield":"THE VILLAS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f8620b8e-fa16-410b-8b63-bd4cac799cec","Name":"BRIGANTINE VILLAS CONDO ASSNINC C/O LEGACY VA"
+      },"ultra_zipcode":"08203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4008a54d-b8f2-4d8f-84eb-c41605af9f80","ultra_name":"THE WAVERLY AT NEPTUNE BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1335023848004","ultra_addressline1":"500 WAVERLY AVE","ultra_block":"1500","ultra_lot":"23.04","ultra_propertyinterest":{
+        "Id":"7e1b1a95-26cf-469c-a3d5-62bf990fef5f","Name":"THE WAVERLY AT NEPTUNE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"622e7521-162f-e811-8126-1458d04eb810","Name":"NEPTUNE CITY BORO"
+      },"ultra_propertyportalsearchfield":"THE WAVERLY AT NEPTUNE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2df5362e-390c-4f69-996c-1c202e85af74","Name":"NEPTUNE PARTNERS LLC"
+      },"ultra_zipcode":"07753","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"294a5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"VENTNOR LIBRARY","ultra_registrationnumber":"0122-00126-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"6500 ATLANTIC AVE","ultra_block":"28","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"6571e59f-9f2f-e811-8120-1458d04e2fb8","Name":"VENTNOR LIBRARY"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"c22b7521-162f-e811-8126-1458d04eb810","Name":"VENTNOR CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"9f509519-c1ad-eb11-b1ac-001dd801df8b","Name":"Schindler"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e4b6e2ae-b42f-e811-8122-1458d04ece60","Name":"VENTNOR CITY HALL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"696d77d9-59b8-ed11-83fe-001dd807232c","ultra_name":"WINSLOW SR APARTMENTS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0436019676001","ultra_addressline1":"500 LAMPART AVENUE","ultra_block":"2903","ultra_lot":"12.01","ultra_propertyinterest":{
+        "Id":"406d77d9-59b8-ed11-83fe-001dd807232c","Name":"WINSLOW SR. APARTMENTS"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"e82c7521-162f-e811-8126-1458d04eb810","Name":"WINSLOW TWP"
+      },"ultra_propertyportalsearchfield":"WINSLOW SR. APARTMENTS","ultra_countyportalsearchfield":"CAMDEN","ultra_municipalityportalsearchfield":"WINSLOW TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"42af69d3-59b8-ed11-83fe-001dd807232c","Name":"WINSLOW CCUM 4 URBAN RENEWAL AFFORDABLE HOUSING LLC"
+      },"ultra_zipcode":"08080","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

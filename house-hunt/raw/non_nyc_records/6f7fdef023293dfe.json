@@ -1,0 +1,49 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"3","value":[
+    {
+      "ultra_buildingid":"040ce5f0-6f42-4802-acd8-5bafcbce4d76","ultra_name":"70-72/74-76COTTAGE PL BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0212008212002","ultra_addressline1":"74-76 COTTAGE PL","ultra_block":"23.02","ultra_lot":"31","ultra_propertyinterest":{
+        "Id":"ddc791f8-f61b-4b8b-8f6a-bd9f69946892","Name":"70-72/74-76COTTAGE PL"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"dc2b7521-162f-e811-8126-1458d04eb810","Name":"EAST RUTHERFORD BORO"
+      },"ultra_propertyportalsearchfield":"70-72/74-76COTTAGE PL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"54821594-02a9-4553-9b00-1297613aea8e","Name":"MAZIERKI CAPITAL INVESTMENT"
+      },"ultra_zipcode":"07073","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9397053e-8398-eb11-b1ac-001dd8027753","ultra_name":"76 COTTAGE ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043116001","ultra_addressline1":"76 COTTAGE ST","ultra_block":"7902","ultra_lot":"67.01","ultra_propertyinterest":{
+        "Id":"6798ca37-8398-eb11-b1ac-001dd8027753","Name":"APPLETREE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"APPLETREE","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"85300f44-0a34-f111-88b4-001dd80c29f3","Name":"APPLE INVESTMENTS LLC"
+      },"ultra_zipcode":"07306","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"06bea4de-8314-eb11-a813-001dd8018943","ultra_name":"Appletree Suites","ultra_registrationnumber":"0906-01108-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"76 COTTAGE STREET","ultra_block":"7902","ultra_lot":"68","ultra_propertyinterest":{
+        "Id":"05bca4de-8314-eb11-a813-001dd8018943","Name":"COTTAGE PLAZA LLC"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"COTTAGE PLAZA LLC","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":{
+        "Id":"4dcd03de-490b-ec11-94ef-001dd80283a0","Name":"Jersey Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8cbca4de-8314-eb11-a813-001dd8018943","Name":"COTTAGE PLAZA LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

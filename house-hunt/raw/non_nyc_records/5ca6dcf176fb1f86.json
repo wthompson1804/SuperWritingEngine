@@ -1,0 +1,191 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"13","value":[
+    {
+      "ultra_buildingid":"4a9321c9-646d-f011-bec3-001dd8084aea","ultra_name":"17-27 LIVINGSTON ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714077306001","ultra_addressline1":"17-27 LIVINGSTON ST","ultra_block":"2519","ultra_lot":"09","ultra_propertyinterest":{
+        "Id":"ce9430bd-646d-f011-bec3-001dd8084aea","Name":"17-27 LIVINGSTON ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"17-27 LIVINGSTON ST","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"679430bd-646d-f011-bec3-001dd8084aea","Name":"19 LV LLC"
+      },"ultra_zipcode":"07103","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a94900cd-547f-f011-b4cc-001dd80a6c87","ultra_name":"19 LIVINGSTON ST","ultra_registrationnumber":"0714-01278-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"17-27 LIVINGSTON ST","ultra_block":"2519","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"2c7dfcc0-547f-f011-b4cc-001dd80a6c87","Name":"19 LIVINGSTON ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"19 LIVINGSTON ST","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":{
+        "Id":"424900cd-547f-f011-b4cc-001dd80a6c87","Name":"EASTERN ELEVATORS"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"af7dfcc0-547f-f011-b4cc-001dd80a6c87","Name":"19 LV LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f55f8fd1-28b8-44b7-bd22-8cfec17f2825","ultra_name":"227 LIVINGSTON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214009528001","ultra_addressline1":"227 LIVINGSTON AVE","ultra_block":"227","ultra_lot":"5.01","ultra_propertyinterest":{
+        "Id":"2851a6fb-b9ae-481f-bfc6-8ff10769c315","Name":"227 LIVINGSTON AVE"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"227 LIVINGSTON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7ccce4ef-afee-4790-be37-14b3a22cb77c","Name":"MARY KUCSAN"
+      },"ultra_zipcode":"08902","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"674fba68-d91f-476a-9e3a-da6396fa5d20","ultra_name":"327 LIVINGSTON ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2004029942001","ultra_addressline1":"327 LIVINGSTON ST","ultra_block":"3","ultra_lot":"654","ultra_propertyinterest":{
+        "Id":"320568fa-b38f-4687-b65d-79f68601814a","Name":"327 LIVINGSTON ST"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b62f7521-162f-e811-8126-1458d04eb810","Name":"ELIZABETH CITY"
+      },"ultra_propertyportalsearchfield":"327 LIVINGSTON ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"55e492c4-764c-4ceb-ada7-0b58ce9cf23f","Name":"JOAO SILVERSTRE MATOS PINTO "
+      },"ultra_zipcode":"07206","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"41a19326-1d10-4321-b53c-4e08b8ea471f","ultra_name":"347 LIVINGSTON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214008761001","ultra_addressline1":"347 LIVINGSTON AVE","ultra_block":"300","ultra_lot":"2.01","ultra_propertyinterest":{
+        "Id":"30bdd421-1dc5-49ed-8d59-7b625da49d25","Name":"347 LIVINGSTON AVE"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"347 LIVINGSTON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ee26e5b8-5130-43ce-916b-ce14b7e8b36a","Name":"BIBO XU"
+      },"ultra_zipcode":"08901","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"78c56105-df1f-4819-99e9-14a2d4da4f71","ultra_name":"387 LIVINGSTON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214023093001","ultra_addressline1":"387 LIVINGSTON AVE","ultra_block":"327","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"c1232a28-cba3-408c-abfc-71622cb947a2","Name":"387 LIVINGSTON AVE"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"387 LIVINGSTON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"35957aa2-12ec-4af7-97ea-ba47a7c8a5ac","Name":"GEORGE ELGHOSSAIN"
+      },"ultra_zipcode":"08901","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c08b34e9-c029-eb11-a813-001dd8018943","ultra_name":"407 LIVINGSTON AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214066726001","ultra_addressline1":"407 LIVINGSTON AVE","ultra_block":"340","ultra_lot":"1.04","ultra_propertyinterest":{
+        "Id":"134b3ce3-c029-eb11-a813-001dd8018943","Name":"407 LIVINGSTON AVE"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"407 LIVINGSTON AVE","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"NEW BRUNSWICK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5f4a3ce3-c029-eb11-a813-001dd8018943","Name":"407 LIVINGSTON AVE LLC"
+      },"ultra_zipcode":"08873","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6df709eb-2751-eb11-a812-001dd8018943","ultra_name":"447 LIVINGSTON ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2004042670001","ultra_addressline1":"447 LIVINGSTON ST","ultra_block":"675","ultra_lot":"40","ultra_propertyinterest":{
+        "Id":"70c7c7e4-2751-eb11-a812-001dd8018943","Name":"447 LIVINGSTON ST"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b62f7521-162f-e811-8126-1458d04eb810","Name":"ELIZABETH CITY"
+      },"ultra_propertyportalsearchfield":"447 LIVINGSTON ST","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ELIZABETH CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9f4e11bb-b3b8-ef11-b8e9-001dd80b2865","Name":"709 S 15TH ST HOLDINGS LLC"
+      },"ultra_zipcode":"07206","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"90ba8881-649c-4b33-945d-34c603af3e83","ultra_name":"67 LIVINGSTON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214022401001","ultra_addressline1":"67 LIVINGSTON AVE","ultra_block":"130","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"786975ee-a12c-43c7-8d15-86a88a9511a4","Name":"67 LIVINGSTON AVE"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"67 LIVINGSTON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7c917809-bef3-4efd-bbd7-6beb83dc287c","Name":"AZRA, RUBINA, & NADEEM SHAHIDI"
+      },"ultra_zipcode":"08901","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cd4b4484-2d93-f011-b4cc-001dd8084aea","ultra_name":"AVALON AT BECKER FARM BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0718028923002","ultra_addressline1":"87 LIVINGSTON AVE","ultra_block":"30.1","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"96b72a0b-2d93-f011-b4cc-001dd80340cd","Name":"AVALON AT BECKER FARM"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"4a2d7521-162f-e811-8126-1458d04eb810","Name":"ROSELAND BORO"
+      },"ultra_propertyportalsearchfield":"AVALON AT BECKER FARM","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"ROSELAND BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b3751305-2d93-f011-b4cc-001dd80340cd","Name":"AVALON ROSELAND LIVINGSTON URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07068","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e3393c99-d72f-e811-8122-1458d04ece60","ultra_name":"LIVINGSTON MUNICIPAL BLDG","ultra_registrationnumber":"0710-00183-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"357 S LIVINGSTON AVE","ultra_block":"3100","ultra_lot":"55","ultra_propertyinterest":{
+        "Id":"f882d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"LIVINGSTON MUNICIPAL BLDG"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"3a2d7521-162f-e811-8126-1458d04eb810","Name":"LIVINGSTON TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"bf07961a-5cad-e811-8121-1458d04e0ca0","Name":"Arrow Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7a2a3dc7-b42f-e811-8122-1458d04ece60","Name":"TWP OF LIVINGSTON"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"853d1abd-d72f-e811-8122-1458d04ece60","ultra_name":"PORFORMING ART CENTER","ultra_registrationnumber":"1214-00327-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"7 LIVINGSTON AVE","ultra_block":"12","ultra_lot":"15.02","ultra_propertyinterest":{
+        "Id":"7dbc3e2d-9a2f-e811-8122-1458d04ece60","Name":"PORFORMING ART CENTER"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4098afd8-b42f-e811-8122-1458d04ece60","Name":"CULTURAL CTR REDEV ASSOC URBAN RENEWAL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e47f7e68-786e-4fd6-8c32-7f3f4a173e22","ultra_name":"Premiere Residences BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214066724001","ultra_addressline1":"7 Livingston AVE","ultra_block":"12","ultra_lot":"15.02","ultra_propertyinterest":{
+        "Id":"c950a5f1-e7e1-48b3-be7a-33beedaf612e","Name":"Premiere Residences"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"Premiere Residences","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b9bae37d-3b60-4c22-b632-96dc739b1c8e","Name":"NBCCR Urban Renewal LLC "
+      },"ultra_zipcode":"08901","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

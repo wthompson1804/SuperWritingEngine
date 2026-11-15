@@ -1,0 +1,47 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"3","value":[
+    {
+      "ultra_buildingid":"7b6f296f-997a-ef11-a670-001dd80afdfc","ultra_name":"483 FOREST ST BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0907040745005","ultra_addressline1":"483 FOREST ST","ultra_block":"192","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"856e0b63-997a-ef11-a670-001dd80afdfc","Name":"FOREST JUNCTION CONDOS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"902d7521-162f-e811-8126-1458d04eb810","Name":"KEARNY TOWN"
+      },"ultra_propertyportalsearchfield":"FOREST JUNCTION CONDOS","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"KEARNY TOWN","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"266e0b63-997a-ef11-a670-001dd80afdfc","Name":"FOREST JUNCTION A CONDOMINUM"
+      },"ultra_zipcode":"07032","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"83e9dcf9-c05a-4460-825b-3720deead6e2","ultra_name":"Hawthorne Square BLDG 180","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1604040777005","ultra_addressline1":"183 Forest AVE","ultra_block":"174","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"627a9aa9-bd19-454c-a996-c6cc45180f31","Name":"HAWTHORNE SQUARE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"1e2f7521-162f-e811-8126-1458d04eb810","Name":"HAWTHORNE BORO"
+      },"ultra_propertyportalsearchfield":"HAWTHORNE SQUARE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bef7f29e-6eaa-4997-85d1-369a89f36b50","Name":"Hawthorne Square LLC"
+      },"ultra_zipcode":"07506","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3d35540a-2ada-4600-a2eb-c5eeab47b120","ultra_name":"SHORT HILLS CLUB VILLAGE BLDG 11","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2017017965011","ultra_addressline1":"75-83 FOREST DR","ultra_block":"102","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"49881c4d-2a0e-4c37-9d39-e5e53051f725","Name":"SHORT HILLS CLUB VILLAGE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d02f7521-162f-e811-8126-1458d04eb810","Name":"SPRINGFIELD TWP (U)"
+      },"ultra_propertyportalsearchfield":"SHORT HILLS CLUB VILLAGE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"aa19b477-4aaf-426e-8636-18e117251b50","Name":"SH CLUB VILLAGE LLC"
+      },"ultra_zipcode":"07081","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

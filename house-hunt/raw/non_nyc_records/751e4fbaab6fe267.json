@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"bce06474-f8cb-f111-a05c-001dd8084fd9","ultra_name":"CANTERLY PLACE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0710036930001","ultra_addressline1":"51 OKNER PKWY","ultra_block":"100","ultra_lot":"3.02","ultra_propertyinterest":{
+        "Id":"6727db60-f8cb-f111-a05c-001dd80a67ab","Name":"CANTERLY PLACE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"3a2d7521-162f-e811-8126-1458d04eb810","Name":"LIVINGSTON TWP"
+      },"ultra_propertyportalsearchfield":"CANTERLY PLACE","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"LIVINGSTON TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9867e05a-f8cb-f111-a05c-001dd80a67ab","Name":"OKNER PARKWAY DEVELOPMENT PARTNERS URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07039","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"811bb7d6-dd0c-f111-8407-001dd80bcb40","ultra_name":"CANTERLY PLACE","ultra_registrationnumber":"0710-00222-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"51 OKNER PARKWAY","ultra_block":"100","ultra_lot":"3.02","ultra_propertyinterest":{
+        "Id":"3f95c8ca-dd0c-f111-8407-001dd80bcb40","Name":"CANTERLY PLACE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"3a2d7521-162f-e811-8126-1458d04eb810","Name":"LIVINGSTON TWP"
+      },"ultra_propertyportalsearchfield":"CANTERLY PLACE","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"LIVINGSTON TWP","ultra_elsamaintenancecompany":{
+        "Id":"231bc1d0-dd0c-f111-8407-001dd80bcb40","Name":"SCHINDLER ELEVATOR CORP."
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5695c8ca-dd0c-f111-8407-001dd80bcb40","Name":"OKNER PARKWAY DEVELOPMENT PARTNERS URBAN RENEWAL, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

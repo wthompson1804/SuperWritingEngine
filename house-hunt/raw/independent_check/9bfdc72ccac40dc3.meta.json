@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=56+Prospect+St%2C+Yonkers%2C+NY+10701&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:04+00:00",
+ "status": 200,
+ "path": "raw/independent_check/9bfdc72ccac40dc3.json",
+ "source": "independent_check"
+}
