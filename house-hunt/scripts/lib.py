@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -32,6 +34,20 @@ HOST_DELAY = {
     "geocoding.geo.census.gov": 0.3,
     "data.cityofnewyork.us": 0.3,
 }
+
+
+_SECRET_PARAMS = re.compile(r"([?&](?:key|api_key|apikey|token)=)[^&]+", re.I)
+
+
+def redact(url: str) -> str:
+    """Strip API keys from URLs before they are written to raw/ or data/ (both are committed)."""
+    return _SECRET_PARAMS.sub(r"\1REDACTED", url)
+
+
+def census_key() -> str:
+    """Census API key, kept outside the repo. Pass as params={'key': census_key()}; logs are redacted."""
+    p = Path(os.environ.get("CENSUS_API_KEY_FILE", "/root/.config/house-hunt/census_api_key"))
+    return os.environ.get("CENSUS_API_KEY") or (p.read_text().strip() if p.exists() else "")
 
 
 def now_iso() -> str:
@@ -74,7 +90,7 @@ def cached_get(url: str, source: str, *, params: dict | None = None, ext: str = 
                 last_err = f"HTTP {r.status_code}"
                 time.sleep(5 * (attempt + 1))
                 continue
-            meta = {"url": full_url, "retrieved_at": now_iso(), "status": r.status_code,
+            meta = {"url": redact(full_url), "retrieved_at": now_iso(), "status": r.status_code,
                     "path": str(path.relative_to(ROOT)), "source": source}
             if r.status_code == 200:
                 path.write_bytes(r.content)
@@ -85,7 +101,7 @@ def cached_get(url: str, source: str, *, params: dict | None = None, ext: str = 
         except requests.RequestException as e:  # network hiccup: back off and retry
             last_err = repr(e)
             time.sleep(3 * (attempt + 1))
-    raise RuntimeError(f"fetch failed after {retries} tries: {full_url}: {last_err}")
+    raise RuntimeError(f"fetch failed after {retries} tries: {redact(full_url)}: {last_err}")
 
 
 def get_json(url: str, source: str, *, attempts: int = 4, **kw):
@@ -102,4 +118,4 @@ def get_json(url: str, source: str, *, attempts: int = 4, **kw):
             Path(str(p).rsplit(".", 1)[0] + ".meta.json").unlink(missing_ok=True)
             time.sleep(5 * (i + 1))
             kw["refresh"] = True
-    raise RuntimeError(f"non-JSON response after {attempts} tries: {url}")
+    raise RuntimeError(f"non-JSON response after {attempts} tries: {redact(url)}")

@@ -49,6 +49,7 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
 - Travel anchor: **Jamaica LIRR station** (Sutphin Blvd and Archer Ave), GTFS LIRR stop_id 102 (40.699608, -73.808530).
 - Budget cap: $2,800/month all-in. Tiers by listed rent: `comfortable` ≤ $2,400, `at_cap` $2,401–2,800,
   `stretch` $2,801–**3,000**. Will set the $3,000 ceiling on 2026-11-15; the brief's $3,200 no longer applies. Collect nothing above $3,000.
-- Move-in: **December 2026 only** (Will, 2026-11-15). Tag `move_in_fit`; don't drop on date.
+- Move-in: **December 1, 2026** (Will, 2026-11-15, replacing "December" and the brief's January). A unit must be
+  available on or before Dec 1. Tag `move_in_fit` (`ready_by_dec1`, `after_dec1`, `unknown`).
 - Studio or 1BR only. Elevator, or at most one flight of stairs. Small dog (under 40 lb).
 - Visits are weekend and evening trips, not commutes.

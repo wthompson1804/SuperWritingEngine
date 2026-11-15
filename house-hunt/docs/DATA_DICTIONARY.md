@@ -88,7 +88,7 @@ One row per unit listing per source. Deduplicated by `dedupe_key`; the duplicate
 | laundry | `in_unit`, `in_building`, `none`, `unknown`. |
 | listing_type | `managed_building`, `condo_coop`, `unit_in_house`, `unknown`. |
 | tier | By listed rent: `comfortable` ≤ 2,400; `at_cap` 2,401–2,800; `stretch` 2,801–3,000. Listings above $3,000 are not collected. |
-| move_in_fit | `dec_2026` (available in December 2026), `before_dec` (now or November; may need holding), `after_dec`, `unknown`. Target is December 2026 only. |
+| move_in_fit | `ready_by_dec1` (available now or on/before 2026-12-01), `after_dec1`, `unknown` (no date stated). Target move-in is **December 1, 2026**. |
 | flags | Semicolon list: `dogs_unknown`, `stairs_unknown`, `price_basis_unknown`, `stale_listing` … |
 | link_status, link_checked_at | Result of the latest link check. |
 | raw_path, notes | |
