@@ -220,6 +220,26 @@ def dog_size_only(policy_text) -> bool:
     return False
 
 
+SMALL_DOG_NOTE = "page says small dogs; no weight number"
+
+
+def building_fails_reason(notes):
+    """Reason a harvester's 'BUILDING_FAILS: ...' note still excludes a unit, or '' when it does not.
+
+    Owner's rule (2026-11-15): 'small dogs' with no pound figure passes the dog gate (her dog is at most 25 lb), so a
+    flag that says only 'small dogs only' no longer excludes. Every other flag does: no dogs, a stated limit under
+    25 lb, income- or age-restricted, no elevator, walk-up, nothing in budget.
+    """
+    t = str(notes or "").strip()
+    if not t.startswith("BUILDING_FAILS"):
+        return ""
+    reason = re.sub(r"^BUILDING_FAILS:?\s*(?:fails:)?\s*", "", t)
+    first = re.split(r";|\.\s", reason)[0].lower()
+    small_only = re.search(r"small dogs?|small pets?", first) and not re.search(
+        r"\bno dogs\b|\bno pets\b|(?<!large )dogs? (?:are )?not allowed|weight limit|\d+ ?lbs?\b|income|age-|senior|\b55\+|lottery|walk-?up|no elevator|nothing|cats only", first)
+    return "" if small_only else reason[:110]
+
+
 def dog_conflict(value):
     """Read a 'dogs_allowed' evidence row marked 'contradicts'. Returns 'no', 'yes' or 'conflicting'.
 

@@ -85,6 +85,9 @@ def gate_movein(r):
 
 
 def gate_dog(r):
+    """Dogs must be explicitly allowed; a stated limit under 25 lb fails. A size word with no number ("small dogs",
+    "Size allowed: Small") passes (owner, 2026-11-15: her dog is at most 25 lb); scripts/rank.py adds the note and the
+    tour question. "Pet friendly" or cats only, with no dogs named, stays unknown or fails as the harvester recorded it."""
     d = str(r.dogs).strip().lower()
     if d == "no":
         return "fail"

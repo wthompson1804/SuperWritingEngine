@@ -123,7 +123,8 @@ def main():
                       # ordinary screening ("income 3x rent", "40x rent") is not income-restricted housing (W10)
                       (s("income_requirement").map(parsers.income_restricted), "income-restricted unit"),
                       (s("building_type").str.contains("senior|62\\+", case=False), "senior housing"),
-                      (s("notes").str.strip().str.startswith("BUILDING_FAILS"), "harvest note: " + s("notes").str.strip().str.slice(0, 110))]:
+                      # a harvester's BUILDING_FAILS flag excludes, except one that says only "small dogs only" (owner, 2026-11-15)
+                      (s("notes").map(parsers.building_fails_reason).ne(""), "harvest note: BUILDING_FAILS: " + s("notes").map(parsers.building_fails_reason))]:
         hard = pd.Series(np.where(cond & (hard == ""), why, hard), index=u.index)
     u[hard != ""].assign(drop_reason=hard[hard != ""]).to_csv(DATA / "excluded_by_confirmed_facts.csv", index=False)
     n_hard = int((hard != "").sum()); u = u[hard == ""].copy()
@@ -144,8 +145,9 @@ def main():
     #  floor     confirmed or stated on the page is settled. A floor read from a simple unit label ("4F", "305") that
     #            comes out at 3 or higher is accepted with a note and a tour question; any other inferred floor
     #            (2, or from a label with a separator, a building prefix or four digits) and an unknown floor are open
-    #  dogs      a size word ("small dogs") with no pound figure is open whatever the basis of "dogs allowed";
-    #            a policy that conflicts between two aggregators is open
+    #  dogs      a policy that conflicts between two aggregators is open. A size word ("small dogs", or "small" in a
+    #            size field) with no pound figure PASSES (owner, 2026-11-15: her dog is at most 25 lb): the unit can be
+    #            shown, with the note "page says small dogs; no weight number" and a tour question
     wl = wl.reindex(u.index); fl = fl.reindex(u.index)
     inf_e = s("elevator_basis").isin(["inferred", "", "unknown"]) | s("elevator").str.lower().ne("yes")
     fb, fk = s("unit_floor_basis"), s("unit_floor_label_kind")
@@ -155,14 +157,15 @@ def main():
     u["floor_basis_note"] = np.where(floor_from_label_ok, "read from the unit number", "")
     dog_open = s("dogs_allowed").str.lower().ne("yes")
     dog_small = s("dog_size_only").ne("") & wl.isna()
-    n_inf = inf_e.astype(int) + inf_f.astype(int) + dog_small.astype(int) + dog_open.astype(int)
+    n_inf = inf_e.astype(int) + inf_f.astype(int) + dog_open.astype(int)
+    u["dog_size_note"] = np.where(dog_small, parsers.SMALL_DOG_NOTE, "")
     floor_q = np.where(fb.eq("inferred"), "Which floor is the unit on? (" + s("unit_floor").str.replace(r"\.0$", "", regex=True) + " is only a guess from the unit number " + s("unit") + "); ",
                        "Which floor is the unit on?; ")
     u["to_confirm"] = (pd.Series(np.where(inf_e, "Does the building have an elevator? (so far only inferred from its height); ", ""), index=u.index)
                        + pd.Series(np.where(inf_f, floor_q, ""), index=u.index)
-                       + pd.Series(np.where(dog_open, "Are dogs allowed? (the sources disagree); ", ""), index=u.index)
-                       + pd.Series(np.where(dog_small, "What is the dog weight limit in pounds?; ", ""), index=u.index))
-    u["tour_confirm"] = np.where(floor_from_label_ok, "Confirm the floor", "")
+                       + pd.Series(np.where(dog_open, "Are dogs allowed? (the sources disagree); ", ""), index=u.index))
+    u["tour_confirm"] = (pd.Series(np.where(floor_from_label_ok, "Confirm the floor; ", ""), index=u.index)
+                         + pd.Series(np.where(dog_small, "Confirm the dog weight limit in pounds; ", ""), index=u.index)).str.rstrip("; ")
     u["confidence"] = np.where(reasons != "", "sketchy", np.where(n_inf == 0, "clean", np.where(n_inf == 1, "one_inferred", "sketchy")))
     u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(n_inf >= 2, "two or more unconfirmed gate facts", ""))
     u[u.confidence == "sketchy"].to_csv(DATA / "excluded_sketchy.csv", index=False)
@@ -269,7 +272,7 @@ def main():
     u["p_dog"] = blend((pct(u.park_walk_min, False), 25), (pct(u.park_ha_800m), 15), (pct(u.dog_park_m, False), 15),
                        (pct(n("woods_ha_within_800m")), 5), (pct(n("vet_count_1600m")), 10), (pct(n("pet_count_1600m")), 5),
                        (pd.Series(np.where(dogam, 100, UNKNOWN_PCT), index=u.index), 10), (pct(u.pet_rent, False), 5),
-                       (pd.Series(np.where(weight_ok, 100, np.where(dog_small, 10, UNKNOWN_PCT)), index=u.index), 10))
+                       (pd.Series(np.where(weight_ok, 100, UNKNOWN_PCT), index=u.index), 10))
     u["p_daily"] = blend((pct(u.cafes_800m), 20), (pct(n("supermarket_m_c") if "supermarket_m_c" in u else n("supermarket_m"), False), 25),
                          (pct(n("gym_count_800m")), 15), (pct(n("library_count_1600m")), 5), (pct(n("market_count_1600m")), 10),
                          (pct(n("convenience_count_800m")), 10), (pct(u.motorway_m), 15))

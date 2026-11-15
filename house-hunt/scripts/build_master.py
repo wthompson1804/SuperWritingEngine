@@ -443,6 +443,7 @@ def main():
                 kind, lb = parsers.parse_dog_weight(val) if fact.startswith("dog_weight") else ("size_only" if parsers.dog_size_only(val) else "", None)
                 if kind == "size_only":
                     M.add(b, "dog_size_only", "yes: " + val[:120], "confirmed", r.source_url)
+            # (dog_size_only is a display fact: "small dogs" passes the gate, owner 2026-11-15; rank.py adds note + tour question)
             if r.status == "unconfirmed":        # an unconfirmed row never upgrades a basis (W3)
                 continue
             if fact.startswith("elevator"):

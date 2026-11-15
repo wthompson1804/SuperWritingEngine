@@ -1,4 +1,4 @@
-# Run report (2026-11-15T22:36:50+00:00)
+# Run report (2026-11-15T22:40:16+00:00)
 
 ## Steps
 
@@ -26,19 +26,19 @@
 
 | Stage | Now | Previous run | Change |
 |---|---|---|---|
-| listings harvested (after dedupe) | 20464 | 18290 | +2174 |
-| pass every listing gate | 2598 | 2027 | +571 |
-|   pending: a gate fact is unstated | 13595 | 12069 | +1526 |
-|   fail a gate | 4271 | 4194 | +77 |
-| costed in the master table | 2020 | 1524 | +496 |
-| within the $3,000 all-in cap | 1664 | 1313 | +351 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 1039 | 961 | +78 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 68 | 207 | -139 |
-| avoid cards | 24 | 27 | -3 |
-| held back for one confirmation | 307 | 200 | +107 |
-| clean, waiting for a live check (not shown) | 52 |  |  |
-| neighborhoods with 3+ shown places | 8 | 26 | -18 |
-| buildings in the master table | 608 | 551 | +57 |
+| listings harvested (after dedupe) | 20464 | 20464 | +0 |
+| pass every listing gate | 2598 | 2598 | +0 |
+|   pending: a gate fact is unstated | 13595 | 13595 | +0 |
+|   fail a gate | 4271 | 4271 | +0 |
+| costed in the master table | 2020 | 2020 | +0 |
+| within the $3,000 all-in cap | 1664 | 1664 | +0 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 1185 | 1039 | +146 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 120 | 68 | +52 |
+| avoid cards | 30 | 24 | +6 |
+| held back for one confirmation | 317 | 307 | +10 |
+| clean, waiting for a live check (not shown) | 93 | 52 | +41 |
+| neighborhoods with 3+ shown places | 13 | 8 | +5 |
+| buildings in the master table | 608 | 608 | +0 |
 
 ## Why units left
 
@@ -50,12 +50,12 @@
 - ground-floor unit: 2
 - listing gone at live check: 2
 - harvest note: BUILDING_FAILS: income-restricted lottery building with a waitlist (page says so), 0 units available: 1
-- small do: 1
-- harvest note: BUILDING_FAILS: age-restricted community (55+/senior) per the Trulia building page. Auto record from the Truli: 1
+- small dogs only. Trulia: 1
+- harvest note: BUILDING_FAILS: age-restricted community (55+/senior) per the Trulia building page. Auto record from the Trulia building page: 1
 
 **excluded_sketchy.csv**
 
-- two or more unconfirmed gate facts: 179
+- two or more unconfirmed gate facts: 33
 - listing 60+ days old: 26
 - conflicting dog policy: 13
 - no unit or building named: 5
@@ -67,39 +67,39 @@
 
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
-| The Fresh-Start Year      |               5 |       62 |       4 |             0 |
-| The Little-City Year      |              32 |      491 |      32 |             7 |
-| The Old-Neighborhood Year |              40 |      130 |      10 |            15 |
-| The Quiet-Street Year     |              13 |       25 |       2 |             0 |
-| The Room-to-Breathe Year  |              47 |      322 |      18 |             0 |
-| The Walk-Everywhere Year  |               7 |        9 |       2 |             2 |
+| The Fresh-Start Year      |               5 |       64 |       6 |             0 |
+| The Little-City Year      |              35 |      522 |      36 |             7 |
+| The Old-Neighborhood Year |              50 |      183 |      49 |            21 |
+| The Quiet-Street Year     |              14 |       26 |       2 |             0 |
+| The Room-to-Breathe Year  |              53 |      376 |      22 |             0 |
+| The Walk-Everywhere Year  |               9 |       14 |       5 |             2 |
 
 ## Fill rate among shown units (percent with a value)
 
 | Field | % |
 |---|---|
-| sqft | 97 |
+| sqft | 72 |
 | unit_floor | 100 |
 | elevator_basis | 100 |
-| dog_weight_limit_lb | 24 |
-| parking_type | 88 |
-| parking_fee | 26 |
-| pet_rent | 60 |
-| pool | 37 |
-| doorman | 43 |
-| year_built | 56 |
-| toll_rt_ezpass | 34 |
+| dog_weight_limit_lb | 13 |
+| parking_type | 71 |
+| parking_fee | 17 |
+| pet_rent | 38 |
+| pool | 22 |
+| doorman | 32 |
+| year_built | 68 |
+| toll_rt_ezpass | 57 |
 | transit_sat_median | 100 |
-| near_violent_250m_24m | 9 |
+| near_violent_250m_24m | 40 |
 | live_status | 100 |
-| rent_first_full_payment_date | 51 |
-| ev_pause_notes | 32 |
+| rent_first_full_payment_date | 70 |
+| ev_pause_notes | 38 |
 
 ## Last lines of each step
 
 **parser tests (every example in docs/INDEPENDENT_CHECK.md)**
 ```
-test_parsers: 243 assertions passed
+test_parsers: 259 assertions passed
 ```
 
 **gates (merge, dedupe, gate each listing)**
@@ -220,9 +220,9 @@ units 2020; cost gate {'pass': 1664, 'fail': 356}; rent asterisk 1289; rent term
 
 **ranking and selection**
 ```
-evidence: 4 units excluded, shown 68, avoid cards 24, held for a confirmation 307, clean but waiting for a live check 52, shown without a live check 0
-stages: 2020 costed -> -356 over the all-in cap -> -363 Jamaica safety rule -> -29 failed a gate on confirmed facts -> -229 sketchy -> -4 evidence exclusions -> 1039 ranked
-(kept 1039 units; candidates 431; shown 401; pools: {'': 682, 'pool': 334, 'indoor': 23}
+evidence: 4 units excluded, shown 120, avoid cards 30, held for a confirmation 317, clean but waiting for a live check 93, shown without a live check 0
+stages: 2020 costed -> -356 over the all-in cap -> -363 Jamaica safety rule -> -29 failed a gate on confirmed facts -> -83 sketchy -> -4 evidence exclusions -> 1185 ranked
+(kept 1185 units; candidates 533; shown 491; pools: {'': 820, 'pool': 341, 'indoor': 24}
 ```
 
 **field registry, wiring check and shown-list assertions**

@@ -11,9 +11,11 @@ It also fails if an analysis script reads a side file directly instead of the ma
 
 Shown-list assertions (added after docs/INDEPENDENT_CHECK.md): the run fails when any unit with shown = True in
 data/ranked_units.csv breaks one of Will's rules: elevator inferred or unknown; floor under 2, unknown, or inferred in a
-way the floor rule does not accept; dogs not explicitly allowed, a size-only dog policy, or a weight limit under 25 lb;
+way the floor rule does not accept; dogs not explicitly allowed, or a weight limit under 25 lb (a size-only "small dogs" policy passes, by the owner's rule of
+2026-11-15, but must carry its note and tour question);
 all-in over $3,000; available after 2026-12-15; no live check; a duplicate unit; more than 2 shown in one building;
-a neighborhood cut by the Jamaica safety rule; an avoid building; a harvest note that says BUILDING_FAILS.
+a neighborhood cut by the Jamaica safety rule; an avoid building; a harvest note that says BUILDING_FAILS for any reason
+other than "small dogs only".
 """
 import glob, re, sys
 from pathlib import Path
@@ -75,7 +77,8 @@ def shown_violations():
     flag(col("dogs_allowed").str.lower() != "yes", "dogs not explicitly allowed")
     flag(~col("dogs_allowed_basis").isin(["confirmed", "stated", "community_page", "amenities_page"]), "dogs-allowed basis is inferred or unknown")
     wl = num("dog_weight_limit_lb")
-    flag((col("dog_size_only") != "") & wl.isna(), "size-only dog policy with no pound figure")
+    size_only = (col("dog_size_only") != "") & wl.isna()
+    flag(size_only & ~(col("dog_size_note").ne("") & col("tour_confirm").str.contains("dog weight limit")), "size-only dog policy shown without its note and tour question")
     flag(wl < MIN_DOG_LB, f"dog weight limit under {MIN_DOG_LB} lb")
     flag(~(num("all_in") <= CAP), f"all-in over ${CAP:,} or missing")
     av = col("available_date").str.strip().str.lower()
@@ -93,7 +96,7 @@ def shown_violations():
         cut = set(G[G.safety_cut.str.lower() == "true"].hood_id)
         flag(col("hood_id").isin(cut), "neighborhood cut by the Jamaica safety rule")
     flag(col("ev_avoid") == "yes", "avoid building")
-    flag(col("notes").str.strip().str.startswith("BUILDING_FAILS"), "harvest note says BUILDING_FAILS")
+    flag(col("notes").map(parsers.building_fails_reason) != "", "harvest note says BUILDING_FAILS (for a reason other than small dogs only)")
     return out
 
 

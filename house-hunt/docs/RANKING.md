@@ -72,7 +72,9 @@ gate fact stated on the page.
 - Floor: confirmed, or stated on the page. A floor read from a simple unit label ("4F", "305") that comes out at 3 or higher is accepted,
   marked "read from the unit number", with the tour question "Confirm the floor". Any other inferred floor (floor 2, or a label with a
   separator, a building prefix or four digits) and an unknown floor are open facts.
-- Dogs: allowed must be stated or confirmed. A size word ("small dogs") with no pound figure is an open fact. A policy that conflicts between
+- Dogs: allowed must be stated or confirmed. A size word ("small dogs", or "small" in a size field) with no pound figure **passes** (owner,
+  2026-11-15: her dog is at most 25 lb): the unit carries the note "page says small dogs; no weight number" and the tour question "Confirm the
+  dog weight limit in pounds". A stated limit under 25 lb, no dogs, and service animals only still exclude. A policy that conflicts between
   two aggregators is an open fact; the building's own site or its manager's page outranks an aggregator.
 - One open fact: ranked, held in `data/needs_confirmation.csv` with the question. Two or more: sketchy, excluded.
 

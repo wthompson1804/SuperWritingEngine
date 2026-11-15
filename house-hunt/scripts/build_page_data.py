@@ -33,8 +33,11 @@ def j(x, default):
 def unit(r):
     g = lambda c: v(r.get(c))
     qs = [q for q in str(g("to_confirm") or "").split("; ") if q]
-    if g("tour_confirm"):
-        qs.append(str(g("tour_confirm")) + f" (floor {int(float(g('unit_floor')))} is read from the unit number {g('unit')})")
+    for q in str(g("tour_confirm") or "").split("; "):
+        if q.startswith("Confirm the floor"):
+            qs.append(q + f" (floor {int(float(g('unit_floor')))} is read from the unit number {g('unit')})")
+        elif q:
+            qs.append(q + (" (the page says small dogs and gives no number)" if "dog weight" in q else ""))
     if g("rent_needs_call") == "yes":
         qs.append("Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?")
     for line in str(g("all_in_unknown_lines") or "").split("; "):
@@ -54,7 +57,7 @@ def unit(r):
         "all_in": g("all_in"), "all_in_gross": g("all_in_gross"), "all_in_lines": j(r.get("all_in_lines"), []),
         "all_in_unknown": [x for x in str(g("all_in_unknown_lines") or "").split("; ") if x],
         "elevator": {"value": g("elevator"), "basis": g("elevator_basis")},
-        "dog": {"allowed": g("dogs_allowed"), "basis": g("dogs_allowed_basis"), "weight_limit_lb": g("dog_weight_limit_lb"), "size_only_note": g("dog_size_only"), "policy_text": g("dog_policy_text"), "pet_rent": g("pet_rent")},
+        "dog": {"allowed": g("dogs_allowed"), "basis": g("dogs_allowed_basis"), "weight_limit_lb": g("dog_weight_limit_lb"), "size_note": g("dog_size_note"), "size_only_source": g("dog_size_only"), "policy_text": g("dog_policy_text"), "pet_rent": g("pet_rent")},
         "parking": {"type": g("parking_type"), "rank": g("parking_rank"), "fee": g("parking_fee"), "fee_note": g("parking_fee_note"), "options_text": g("parking_options")},
         "amenities": {"pool": g("pool") or None, "pool_text": g("pool_text"), "doorman": g("doorman") or None, "doorman_text": g("doorman_text"), "controlled_access": g("controlled_access"),
                       "gym": g("gym"), "in_unit_laundry": g("in_unit_laundry"), "laundry": g("laundry"), "package_room": g("package_room"),

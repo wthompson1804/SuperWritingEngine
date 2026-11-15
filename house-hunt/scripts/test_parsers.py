@@ -172,6 +172,18 @@ eq(P.dog_size_only("Dogs: Allowed (Number allowed: 2; Size allowed: Small; Weigh
 eq(P.dog_size_only("yes (small dogs)"), True, "W2 'yes (small dogs)'")
 eq(P.dog_size_only("Dogs & Cats | tag: PET FRIENDLY"), False, "no size word")
 
+# ---- owner's change (2026-11-15): "small dogs" with no number passes; a BUILDING_FAILS flag that says only that no longer excludes
+eq(P.building_fails_reason("BUILDING_FAILS: small dogs only (pet card says Size allowed: Small; no weight number given); one row kept for the record. building has 92 units"), "", "The Brompton: small dogs only is not a fail")
+eq(P.building_fails_reason("BUILDING_FAILS: page allows small dogs only (large dogs not allowed); floor plan A1"), "", "small dogs only, large not allowed")
+eq(P.building_fails_reason("BUILDING_FAILS: only cats and small dogs allowed (no weight number)"), "", "cats and small dogs")
+for s in ["BUILDING_FAILS: no dogs", "BUILDING_FAILS: fails:no dogs", "BUILDING_FAILS: dog weight limit 20 lb (under 25).", "BUILDING_FAILS: dogs not allowed.",
+          "BUILDING_FAILS: age-restricted community (55+/senior) per the Trulia building page.", "BUILDING_FAILS: income-restricted lottery building with a waitlist",
+          "BUILDING_FAILS: no elevator", "BUILDING_FAILS: cats only or no pets (stated on the unit listings)", "BUILDING_FAILS: nothing at or under $3,000 / no studio or 1BR listed",
+          "BUILDING_FAILS: no pets (Trulia building page: dogs not allowed)", "BUILDING_FAILS: small dogs only, weight limit 15 lb"]:
+    eq(bool(P.building_fails_reason(s)), True, f"still excludes: {s}")
+eq(P.building_fails_reason("building has 316 units, 12 available"), "", "no flag")
+eq(P.parse_dog_weight("20 lb"), ("limit", 20.0), "a stated limit under 25 lb is still a number the gate fails")
+
 # ---- W20: conflicting dog policy
 eq(P.dog_conflict("Zumper's page for the address says no pets (its record shows only 6 units, so it may be stale); the building site and Apartment List say pet-friendly"), "yes", "19 E 19th St: own site wins")
 eq(P.dog_conflict("no (Trulia)"), "conflicting", "100 Avenue G / 467 West Ave / 8 Norden Pl: an aggregator's no against the listing")
