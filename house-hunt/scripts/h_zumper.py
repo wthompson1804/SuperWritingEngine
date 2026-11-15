@@ -367,6 +367,7 @@ def fee_amount(f: dict):
     return money(lo), money(hi if hi is not None else lo)
 
 
+WORDNUM = {w: i + 1 for i, w in enumerate("one two three four five six seven eight nine ten eleven twelve".split())}
 LAUNDRY_UNIT = ("In Unit Laundry", "Washer/Dryer", "Washer Dryer", "In-Unit Laundry", "Washer/Dryer In Unit")
 PARK_WORDS = ("Parking", "Garage", "Carport")
 UTIL_TAGS = {"Utilities Included": "all utilities", "Heat Included": "heat", "Gas Included": "gas",
@@ -402,6 +403,8 @@ def facts_from(entity: dict, vt: str, bld: dict | None, bvt: str):
             break
     dogs = "unknown"
     dm = re.search(r"Dog\|Policy\|([^|]+)", pol)
+    if re.search(r"Small Dog\|Policy\|Allowed", pol) and not re.search(r"(?<!Small )Dog\|Policy\|Allowed", pol):
+        notes.append("policy block lists 'Small Dog' only")
     if dm:
         v = dm.group(1).strip().lower()
         if v.startswith("allowed"):
@@ -448,6 +451,18 @@ def facts_from(entity: dict, vt: str, bld: dict | None, bvt: str):
     # ---- elevator: only a positive tag is evidence; absence of the tag is unknown
     f["elevator"] = "yes" if any("elevator" in t.lower() for t in alltags) else "unknown"
     fl = entity.get("floors") or (bld or {}).get("floors")
+    if not fl:
+        groups = dict((bld or {}).get("amenity_groups") or {})
+        groups.update(entity.get("amenity_groups") or {})
+        for t in alltags:
+            m = re.fullmatch(r"(\w+) Floors?", t)
+            if m and (groups.get(t) or {}).get("group") == 3:      # group 3 = building-level amenity
+                w = m.group(1).lower()
+                n = int(w) if w.isdigit() else WORDNUM.get(w)
+                if n:
+                    fl = n
+            elif m and (m.group(1).isdigit() or m.group(1).lower() in WORDNUM):
+                notes.append(f"tag '{t}' at unit level (unit spans floors?)")
     f["building_floors"] = fl if fl else ""
 
     # ---- parking
@@ -470,12 +485,19 @@ def facts_from(entity: dict, vt: str, bld: dict | None, bvt: str):
     # ---- utilities / laundry
     util = sorted({v for k, v in UTIL_TAGS.items() if k in alltags})
     f["utilities_included"] = "; ".join(util)
-    if any(t in alltags for t in LAUNDRY_UNIT) or any("in unit" in t.lower() and "laundry" in t.lower() for t in alltags):
+    f["_ambig_util"] = sorted(t for t in alltags if t in ("Water", "Gas", "Electricity", "Heat", "Hot Water", "Sewage",
+                                                         "Garbage", "Internet", "Cable", "Electric", "Gas Utilities"))
+    low = {t.lower() for t in alltags}
+    if (any(t in alltags for t in LAUNDRY_UNIT) or any("in-unit laundry" in t or "in unit laundry" in t for t in low)
+            or ("washer" in low and "dryer" in low)):
         f["laundry"] = "in_unit"
-    elif any("laundry" in t.lower() for t in alltags):
+    elif any("laundry" in t for t in low):
         f["laundry"] = "on_site"
+    elif any("hookup" in t for t in low):
+        f["laundry"] = "hookups"
     else:
         f["laundry"] = ""
+    f["_conc"] = sorted(t for t in alltags if t in ("Free Rent", "No Fee", "Move-in Special", "Move In Special"))
     f["_notes"] = notes
     return f
 
@@ -486,29 +508,61 @@ def fees_block(vt: str) -> str:
         return ""
     s = vt[i + 1:i + 2500]
     for stop in ("|Questions about", "|Location|", "|Similar", "|Explore the", "|Report this", "|Frequently",
-                 "|Nearby", "|Schools"):
+                 "|Nearby", "|Schools", "|About ", "|Building details|", "|Property details|"):
         j = s.find(stop)
         if j >= 0:
             s = s[:j]
     return s.strip("|")
 
 
+CADENCE = re.compile(r"^(Monthly|One-time|Per-applicant|Annual|Yearly|Weekly|Situational|Per )", re.I)
+AMOUNT = re.compile(r"^(\$[\d,]+(?:\.\d\d)?(?:\s*-\s*\$[\d,]+(?:\.\d\d)?)?|Contact Property|Included|Free|Varies.*)$", re.I)
+
+
 def parse_fee_text(block: str):
-    """Monthly pet rent / parking fee from the visible 'Policies and fees' block. Returns (pet_rent, parking_fee)."""
+    """Parse the visible 'Policies and fees' block into fee lines.
+
+    The block is a token stream: section headers (REQUIRED FEES, OPTIONAL FEES, Parking, Pets, Dog, Cat ...)
+    and triples `name | cadence sentence | amount`. Returns (fees, pet_rent, parking_fee).
+    """
+    toks = [t.strip() for t in block.split("|") if t.strip()]
+    fees = []
+    req = ""
+    sect = ""
+    species = ""
+    for i, t in enumerate(toks):
+        if t in ("REQUIRED FEES", "OPTIONAL FEES"):
+            req = "required" if t.startswith("REQ") else "optional"
+            sect = species = ""
+        elif t in ("Parking", "Pets", "Storage", "Utilities & Services", "Move-In Fees", "Applicants", "Other",
+                   "Other Fees", "Amenities", "Services"):
+            sect = t
+            species = ""
+        elif re.fullmatch(r"(Small |Large )?(Dog|Cat)s?|Other Pets?|Birds?|Fish", t):
+            species = t
+        if i + 2 < len(toks) and CADENCE.match(toks[i + 1]) and AMOUNT.match(toks[i + 2]):
+            fees.append({"name": t, "cadence": CADENCE.match(toks[i + 1]).group(1).strip().lower(),
+                         "terms": toks[i + 1], "amount": toks[i + 2], "section": sect, "species": species,
+                         "requirement": req})
+    def num(a):
+        m = re.match(r"\$([\d,]+(?:\.\d\d)?)", a)
+        return m.group(1).replace(",", "") if m else ""
     pet = park = ""
-    m = re.search(r"(?:Pet Rent|Monthly Pet (?:Rent|Fee)|Dog Rent)[^$]{0,80}?\$([\d,]+(?:\.\d\d)?)", block, re.I)
-    if m and re.search(r"month|/mo|per month", block[m.start():m.end() + 60], re.I):
-        pet = m.group(1).replace(",", "")
-    m = re.search(r"\|Parking\|(.{0,300})", block)
-    if m:
-        seg = m.group(1)
-        j = seg.find("|Pets|")
-        if j >= 0:
-            seg = seg[:j]
-        a = re.search(r"\$([\d,]+(?:\.\d\d)?)", seg)
-        if a and re.search(r"month|/mo", seg, re.I):
-            park = a.group(1).replace(",", "")
-    return pet, park
+    monthly = [f for f in fees if f["cadence"] == "monthly"]
+    dogm = [f for f in monthly if "dog" in (f["species"] + " " + f["name"] + " " + f["terms"]).lower() and num(f["amount"])]
+    anym = [f for f in monthly if (f["section"] == "Pets" or re.search(r"\bpet\b", f["name"], re.I))
+            and "cat" not in f["species"].lower() and num(f["amount"])]
+    if dogm:
+        pet = num(dogm[0]["amount"])
+    elif anym:
+        pet = num(anym[0]["amount"])
+    pk = [f for f in monthly if (f["section"] == "Parking" or re.search(r"parking|garage|carport", f["name"], re.I))
+          and num(f["amount"])]
+    if pk:
+        park = num(pk[0]["amount"])
+        if len(pk) > 1:
+            park = "-".join(sorted({num(f["amount"]) for f in pk}, key=float)) if len({num(f["amount"]) for f in pk}) > 1 else park
+    return fees, pet, park
 
 
 def iso_avail(v, today):
@@ -565,13 +619,20 @@ def build():
         for k in ("dogs", "dog_policy_text", "dog_weight_limit_lb", "elevator", "building_floors", "parking_type",
                   "utilities_included", "laundry"):
             r[k] = f[k]
-        pet, park = parse_fee_text(block)
+        lines, pet, park = parse_fee_text(block)
         r["pet_rent"], r["parking_fee"] = pet, park
         blob = {}
+        mon = [x for x in lines if x["cadence"] == "monthly"]
+        if mon:
+            blob["monthly"] = [{k: v for k, v in x.items() if v and k != "cadence"} for x in mon]
+        oth = [x for x in lines if x["cadence"] != "monthly"]
+        if oth:
+            blob["non_monthly"] = [{"name": x["name"], "amount": x["amount"], "cadence": x["cadence"],
+                                    "requirement": x["requirement"]} for x in oth]
         if f["_fees"]:
-            blob["fees_json"] = f["_fees"]
-        if block:
-            blob["policies_and_fees_text"] = block.replace("|", " | ")[:1500]
+            blob["page_data_fees"] = f["_fees"]   # cadence code: 30 monthly, 0 one-time, -1 situational
+        if f.get("_ambig_util"):
+            blob["utility_tags_unclear_if_included"] = f["_ambig_util"]
         r["other_monthly_fees_json"] = json.dumps(blob, ensure_ascii=False) if blob else ""
 
     def unit_row(L, url, level, seen, raw_path, bld, f, block, vt, kind):
@@ -595,14 +656,30 @@ def build():
             if m:
                 unit = m.group(1)
                 notes.append("unit parsed from title/address")
+        unit = re.sub(r"^(?:#|\s|unit|apt\.?|apartment)+", "", str(unit), flags=re.I).strip(" #")
         r["unit"] = unit
         r["floor"] = loc.get("floor") if loc.get("floor") is not None else ""
         if r["floor"] == "":
-            m = re.search(r"\b(ground|first|1st|second|2nd|third|3rd|fourth|4th|fifth|5th|sixth|6th|seventh|7th|"
-                          r"eighth|8th|ninth|9th|tenth|10th|\d{1,2}(?:st|nd|rd|th))[- ]floor\b",
-                          (L.get("description") or "") + " " + (L.get("short_description") or "") + " " + title, re.I)
+            ORD = (r"(ground|first|1st|second|2nd|third|3rd|fourth|4th|fifth|5th|sixth|6th|seventh|7th|"
+                   r"eighth|8th|ninth|9th|tenth|10th|\d{1,2}(?:st|nd|rd|th))")
+            own = (L.get("description") or "") + " " + (L.get("short_description") or "") + " " + title
+            m = re.search(r"\b(?:located|situated|unit|apartment|apt|studio|bedroom|home|residence|is) (?:is )?"
+                          r"(?:conveniently )?(?:located |situated )?on the " + ORD + r"[- ]floor\b", own, re.I) or \
+                re.search(r"\b" + ORD + r"[- ]floor (?:unit|apartment|apt|studio|one[- ]bedroom|1[- ]?(?:br|bed(?:room)?)|"
+                          r"walk[- ]?up|corner|rear|front)\b", own, re.I)
             if m:
-                notes.append(f"floor text in description: '{m.group(0)}'")
+                w = m.group(1).lower()
+                n = {"ground": 1, "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6,
+                     "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10}.get(w)
+                if n is None and w[0].isdigit():
+                    n = int(re.match(r"\d+", w).group(0))
+                if n:
+                    r["floor"] = n
+                    notes.append(f"floor from description text: '{m.group(0)}'" + (" (ground)" if w == "ground" else ""))
+            else:
+                m = re.search(r"\b" + ORD + r"[- ]floor\b", own, re.I)
+                if m:
+                    notes.append(f"floor text in description (not used): '{m.group(0)}'")
         r["beds"] = L.get("bedrooms") if L.get("bedrooms") is not None else ""
         hb = L.get("half_bathrooms") or 0
         ba = L.get("bathrooms")
@@ -617,8 +694,12 @@ def build():
         if L.get("base_min_price") is not None and L.get("base_min_price") != price:
             notes.append(f"base_min_price={L['base_min_price']}")
         sp = (bld or {}).get("specials") or L.get("specials")
+        conc = []
         if sp:
-            r["concession_text"] = json.dumps(sp, ensure_ascii=False)[:500]
+            conc.append(json.dumps(sp, ensure_ascii=False)[:400])
+        if f.get("_conc"):
+            conc.append("tags: " + ", ".join(f["_conc"]))
+        r["concession_text"] = " ; ".join(conc)
         r["available_date_text"], r["available_date"] = iso_avail(L.get("date_available"), today)
         mgr = L.get("brokerage_name") or (bld or {}).get("brokerage_name") or ""
         ag = (L.get("listing_agents") or (bld or {}).get("agents") or [{}])[0]

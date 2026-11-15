@@ -1,7 +1,7 @@
 {
  "started": "2026-11-15T18:21:08+00:00",
- "srp_pages": 224,
- "detail_pages": 744,
+ "srp_pages": 291,
+ "detail_pages": 835,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -278,14 +278,140 @@
    "drive_min": 32.4,
    "props": 8,
    "rows": 8
+  },
+  {
+   "city": "nj/west-new-york",
+   "drive_min": 32.4,
+   "props": 20,
+   "rows": 35
+  },
+  {
+   "city": "ny/sea-cliff",
+   "drive_min": 32.5,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/englewood",
+   "drive_min": 32.9,
+   "props": 9,
+   "rows": 31
+  },
+  {
+   "city": "ny/eastchester",
+   "drive_min": 33.0,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "nj/ridgefield",
+   "drive_min": 33.1,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/levittown",
+   "drive_min": 33.3,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/mamaroneck",
+   "drive_min": 33.3,
+   "props": 4,
+   "rows": 3
+  },
+  {
+   "city": "nj/hoboken",
+   "drive_min": 33.4,
+   "props": 36,
+   "rows": 9
+  },
+  {
+   "city": "nj/ridgefield-park",
+   "drive_min": 33.6,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/lido-beach",
+   "drive_min": 33.6,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/point-lookout",
+   "drive_min": 33.6,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/tuckahoe",
+   "drive_min": 34.1,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/bogota",
+   "drive_min": 34.2,
+   "props": 4,
+   "rows": 28
+  },
+  {
+   "city": "ny/syosset",
+   "drive_min": 35.2,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/amityville",
+   "drive_min": 35.3,
+   "props": 3,
+   "rows": 2
+  },
+  {
+   "city": "nj/fairview",
+   "drive_min": 35.7,
+   "props": 4,
+   "rows": 4
+  },
+  {
+   "city": "ny/glen-cove",
+   "drive_min": 35.7,
+   "props": 5,
+   "rows": 3
+  },
+  {
+   "city": "nj/tenafly",
+   "drive_min": 36.1,
+   "props": 4,
+   "rows": 4
+  },
+  {
+   "city": "ny/plainview",
+   "drive_min": 36.2,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/hackensack",
+   "drive_min": 36.9,
+   "props": 23,
+   "rows": 74
+  },
+  {
+   "city": "nj/bergenfield",
+   "drive_min": 37.1,
+   "props": 3,
+   "rows": 10
   }
  ],
  "cities_unmatched_far": [],
- "props_discovered": 1377,
- "props_skipped_lowprice_gt_3000": 633,
+ "props_discovered": 1499,
+ "props_skipped_lowprice_gt_3000": 664,
  "reasons": {
-  "ok": 741,
-  "no_unit_le_3000": 3
+  "ok": 830,
+  "no_unit_le_3000": 5
  },
  "blocked": null,
  "dogs_no_rows": 0
