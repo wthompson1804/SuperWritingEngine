@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ny.gov/resource/ca8h-8gjq.json?%24where=year+%3E%3D+2022&%24limit=5000&%24order=county%2Cagency%2Cyear",
+ "retrieved_at": "2026-11-15T18:13:53+00:00",
+ "status": 200,
+ "path": "raw/ny_dcjs/fa211bfc447d888a.json",
+ "source": "ny_dcjs"
+}

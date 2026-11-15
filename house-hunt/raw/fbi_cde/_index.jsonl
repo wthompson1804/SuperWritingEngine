@@ -1,2 +1,5 @@
 {"url": "https://api.usa.gov/crime/fbi/cde/agency/byStateAbbr/CT", "retrieved_at": "2026-11-15T18:12:10+00:00", "status": 200, "path": "raw/fbi_cde/30239684fe9b574e.json", "source": "fbi_cde"}
 {"url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/CT0013500/motor-vehicle-theft?from=01-2024&to=12-2024", "retrieved_at": "2026-11-15T18:12:10+00:00", "status": 200, "path": "raw/fbi_cde/3e8e1f7e80240a62.json", "source": "fbi_cde"}
+{"url": "https://api.usa.gov/crime/fbi/cde/agency/byStateAbbr/NY", "retrieved_at": "2026-11-15T18:13:51+00:00", "status": 200, "path": "raw/fbi_cde/8665181ce074e402.json", "source": "fbi_cde"}
+{"url": "https://api.usa.gov/crime/fbi/cde/agency/byStateAbbr/NJ", "retrieved_at": "2026-11-15T18:13:52+00:00", "status": 200, "path": "raw/fbi_cde/cdd29f7ea17210e4.json", "source": "fbi_cde"}
+{"url": "https://api.usa.gov/crime/fbi/cde/agency/byStateAbbr/PA", "retrieved_at": "2026-11-15T18:13:53+00:00", "status": 200, "path": "raw/fbi_cde/92e16f3e0ad0a0fa.json", "source": "fbi_cde"}

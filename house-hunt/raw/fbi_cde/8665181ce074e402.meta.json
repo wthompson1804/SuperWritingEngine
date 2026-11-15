@@ -1,0 +1,7 @@
+{
+ "url": "https://api.usa.gov/crime/fbi/cde/agency/byStateAbbr/NY",
+ "retrieved_at": "2026-11-15T18:13:51+00:00",
+ "status": 200,
+ "path": "raw/fbi_cde/8665181ce074e402.json",
+ "source": "fbi_cde"
+}

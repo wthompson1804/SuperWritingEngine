@@ -188,3 +188,12 @@ Claude-Web) apply to us and override the generic group.** Effect on the sources:
 | Openigloo | Claude-User: allowed except `/api`, `/_nuxt`, `/internal` | Usable for HTML pages |
 
 The test run made about 4 requests to Kushner 2.1 s apart, against its 10 s crawl-delay. Future harvests must honour `Crawl-delay`.
+
+## Coordinator addendum (2026-11-15, evening): Craigslist is off limits for scripts
+
+Craigslist's robots.txt allows the search and posting pages, but its Terms of Use prohibit collecting content
+"via robots, spiders, scripts, scrapers, crawlers, or any automated or manual equivalent". Working rule 3 says to
+respect terms, so **no automated Craigslist harvest**. The harvest agent stopped after 20 test requests and wrote
+0 listings. Search-card counts seen: Queens studio + 1BR ≤ $3,000 with dogs OK, 106 results; Hudson Valley, 63.
+Craigslist stays a manual-browsing source: Will or Lamia can paste links, which go through `gates.py` like any other.
+`scripts/h_craigslist.py` exists but must not be run.
