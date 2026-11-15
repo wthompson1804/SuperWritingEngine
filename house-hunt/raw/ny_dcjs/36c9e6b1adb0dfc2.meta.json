@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ny.gov/resource/ca8h-8gjq.json?%24select=year%2Ccount%28%2A%29&%24group=year&%24order=year+DESC&%24limit=5",
+ "retrieved_at": "2026-11-15T18:12:07+00:00",
+ "status": 200,
+ "path": "raw/ny_dcjs/36c9e6b1adb0dfc2.json",
+ "source": "ny_dcjs"
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ny.gov/resource/ca8h-8gjq.json?%24select=county%2Ccount%28%2A%29&%24group=county&%24limit=100",
+ "retrieved_at": "2026-11-15T18:12:08+00:00",
+ "status": 200,
+ "path": "raw/ny_dcjs/78495f9b7b758327.json",
+ "source": "ny_dcjs"
+}

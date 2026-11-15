@@ -1,0 +1,7 @@
+{
+ "url": "https://api.usa.gov/crime/fbi/cde/agency/byStateAbbr/CT",
+ "retrieved_at": "2026-11-15T18:12:10+00:00",
+ "status": 200,
+ "path": "raw/fbi_cde/30239684fe9b574e.json",
+ "source": "fbi_cde"
+}

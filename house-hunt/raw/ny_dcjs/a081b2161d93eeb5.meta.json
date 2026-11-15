@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ny.gov/resource/ca8h-8gjq.json?%24limit=3&county=Nassau&%24order=year+DESC",
+ "retrieved_at": "2026-11-15T18:12:06+00:00",
+ "status": 200,
+ "path": "raw/ny_dcjs/a081b2161d93eeb5.json",
+ "source": "ny_dcjs"
+}
