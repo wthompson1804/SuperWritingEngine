@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"f3e49005-4b13-f111-8407-001dd80bcf22","ultra_name":"THE RESIDENCES AT WEST SIDE SQUARE","ultra_registrationnumber":"0906-01321-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1075 WEST SIDE AVE","ultra_block":"9301","ultra_lot":"30.01","ultra_propertyinterest":{
+        "Id":"4a837ef9-4a13-f111-8407-001dd80bcf22","Name":"THE RESIDENCES AT WEST SIDE SQUARE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"THE RESIDENCES AT WEST SIDE SQUARE","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ec837ef9-4a13-f111-8407-001dd80bcf22","Name":"AVENIR WEST SIDE SQUARE, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"228d94b3-9fed-f011-8407-001dd80c2ab9","ultra_name":"THE RESIDENCES AT WEST SIDE SQUARE CONDOS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043563001","ultra_addressline1":"1075 W SIDE AVE","ultra_block":"9301","ultra_lot":"30.01","ultra_propertyinterest":{
+        "Id":"e76b9c9b-9fed-f011-8407-001dd80c2ab9","Name":"THE RESIDENCES AT WEST SIDE SQUARE CONDOS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"THE RESIDENCES AT WEST SIDE SQUARE CONDOS","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ecf3a395-9fed-f011-8407-001dd80c2ab9","Name":"WEST SIDE SQUARE CONDOMINIUM ASSN INC"
+      },"ultra_zipcode":"07306","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

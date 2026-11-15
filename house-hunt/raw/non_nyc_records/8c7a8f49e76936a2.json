@@ -1,0 +1,187 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"13","value":[
+    {
+      "ultra_buildingid":"7741455f-4b67-4b11-879d-a411eeb5d84c","ultra_name":"Avalon Union BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158001","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"854183e2-403f-485a-8c2a-1e3ce084f7d8","ultra_name":"Avalon Union BLDG 10","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158010","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9ca38142-7b78-4f3f-a6fd-b23b75b5767b","ultra_name":"Avalon Union BLDG 11","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158011","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bd65d623-fed5-4d47-9bea-73614b7bb37e","ultra_name":"Avalon Union BLDG 12","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158012","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"92619129-b446-41d2-85f1-6ebf56d50bef","ultra_name":"Avalon Union BLDG 13","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158013","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"656db72b-9c67-456c-bdeb-7308356c9f3c","ultra_name":"Avalon Union BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158002","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"aa1c3852-a4d8-4edc-8cef-a1a461dbb29b","ultra_name":"Avalon Union BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158003","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c0585490-343f-4b4c-8285-8cb1729b142d","ultra_name":"Avalon Union BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158004","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d04f08c1-1195-4a68-ac26-6f1778b609c7","ultra_name":"Avalon Union BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158005","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"36af551a-cc7c-41b4-afbe-21bdd99f0890","ultra_name":"Avalon Union BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158006","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"30109c77-e175-49cd-9c4b-092d317c1743","ultra_name":"Avalon Union BLDG 7","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158007","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"21b9132a-3da9-4a7d-a393-0a4dff256494","ultra_name":"Avalon Union BLDG 8","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158008","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a1eca8b7-33aa-4201-93ba-100c4cda50f9","ultra_name":"Avalon Union BLDG 9","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019037158009","ultra_addressline1":"2400 Vauxhall RD","ultra_block":"5009","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f79a7322-3f46-4baa-a4fa-2d8ee0f49a3e","Name":"AVALON UNION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"AVALON UNION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337f8da4-163d-4ef7-8572-3cf2c51e9ea9","Name":"Union Urban Renewal LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

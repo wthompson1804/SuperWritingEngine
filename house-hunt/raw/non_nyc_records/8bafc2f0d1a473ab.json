@@ -1,0 +1,131 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"9","value":[
+    {
+      "ultra_buildingid":"312f4871-aecc-4475-9437-36419c272dc0","ultra_name":"534-540 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1404022270001","ultra_addressline1":"534-540 MAIN ST","ultra_block":"33","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"556e70cb-2529-4d9d-822f-a1e64284712c","Name":"534-540 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"534-540 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a4a7d60c-8f5f-4af1-abe1-97911faa4894","Name":"SPRING BROOK AT CHATHAM"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d5681bc7-ad27-44b3-bd36-c2cdc7c6c476","ultra_name":"534-540 MAIN ST BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1404022270002","ultra_addressline1":"534-540 MAIN ST","ultra_block":"33","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"556e70cb-2529-4d9d-822f-a1e64284712c","Name":"534-540 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"534-540 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a4a7d60c-8f5f-4af1-abe1-97911faa4894","Name":"SPRING BROOK AT CHATHAM"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8ae45d86-5f02-46bd-b8ac-eb3a8e635039","ultra_name":"534-540 MAIN ST BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1404022270003","ultra_addressline1":"534-540 MAIN ST","ultra_block":"33","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"556e70cb-2529-4d9d-822f-a1e64284712c","Name":"534-540 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"534-540 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a4a7d60c-8f5f-4af1-abe1-97911faa4894","Name":"SPRING BROOK AT CHATHAM"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"130d387e-5ce3-ec11-a7b4-001dd8033bda","ultra_name":"534-540 MAIN ST BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1404022270004","ultra_addressline1":"534-540 MAIN ST","ultra_block":"33","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"556e70cb-2529-4d9d-822f-a1e64284712c","Name":"534-540 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"534-540 MAIN ST","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"CHATHAM BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a4a7d60c-8f5f-4af1-abe1-97911faa4894","Name":"SPRING BROOK AT CHATHAM"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2bf66980-60e3-ec11-a7b4-001dd8033bda","ultra_name":"534-540 MAIN ST BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1404022270005","ultra_addressline1":"534-540 MAIN ST","ultra_block":"33","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"556e70cb-2529-4d9d-822f-a1e64284712c","Name":"534-540 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"534-540 MAIN ST","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"CHATHAM BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a4a7d60c-8f5f-4af1-abe1-97911faa4894","Name":"SPRING BROOK AT CHATHAM"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a43de976-61e3-ec11-a7b4-001dd8033bda","ultra_name":"534-540 MAIN ST BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1404022270006","ultra_addressline1":"534-540 MAIN ST","ultra_block":"33","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"556e70cb-2529-4d9d-822f-a1e64284712c","Name":"534-540 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"534-540 MAIN ST","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"CHATHAM BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a4a7d60c-8f5f-4af1-abe1-97911faa4894","Name":"SPRING BROOK AT CHATHAM"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"792f11d1-62e3-ec11-a7b4-001dd8033bda","ultra_name":"534-540 MAIN ST BLDG 8","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1404022270008","ultra_addressline1":"534-540 MAIN ST","ultra_block":"33","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"556e70cb-2529-4d9d-822f-a1e64284712c","Name":"534-540 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"534-540 MAIN ST","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"CHATHAM BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a4a7d60c-8f5f-4af1-abe1-97911faa4894","Name":"SPRING BROOK AT CHATHAM"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7a0d14ab-63e3-ec11-a7b4-001dd8033bda","ultra_name":"534-540 MAIN ST BLDG 9","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1404022270009","ultra_addressline1":"534-540 MAIN ST","ultra_block":"33","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"556e70cb-2529-4d9d-822f-a1e64284712c","Name":"534-540 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"534-540 MAIN ST","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"CHATHAM BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a4a7d60c-8f5f-4af1-abe1-97911faa4894","Name":"SPRING BROOK AT CHATHAM"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3b8f2757-62e3-ec11-a7b4-001dd8033bda","ultra_name":"534-540CMAIN ST BLDG 7","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1404022270007","ultra_addressline1":"534-540 MAIN ST","ultra_block":"33","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"556e70cb-2529-4d9d-822f-a1e64284712c","Name":"534-540 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"534-540 MAIN ST","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"CHATHAM BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a4a7d60c-8f5f-4af1-abe1-97911faa4894","Name":"SPRING BROOK AT CHATHAM"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

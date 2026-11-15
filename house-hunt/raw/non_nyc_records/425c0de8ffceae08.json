@@ -1,0 +1,33 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"82353c99-d72f-e811-8122-1458d04ece60","ultra_name":"240 S HARRISON STREET REALTY C","ultra_registrationnumber":"0705-00112-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"240 S HARRISON ST","ultra_block":"720","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"3c7fd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"240 S HARRISON STREET REALTY C"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"794466c6-90b1-ea11-a812-001dd8018230","Name":"INDIGO 240 URBAN RENEWAL CO LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f4052fbc-10f1-451e-9449-ef98213c56ee","ultra_name":"Aura 240","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0705032704001","ultra_addressline1":"232-240 S HARRISON ST","ultra_block":"720","ultra_lot":"9.01","ultra_propertyinterest":{
+        "Id":"c813cab9-f682-4484-b0f3-bbb9ab73463f","Name":"232-240 S HARRISON ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"232-240 S HARRISON ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bb35adb1-523a-403b-b376-13a714433f65","Name":"Indigo 240 Urban Renewal Co. LLC"
+      },"ultra_zipcode":"07018","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

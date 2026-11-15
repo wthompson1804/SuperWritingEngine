@@ -1,0 +1,51 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"3","value":[
+    {
+      "ultra_buildingid":"3ddc5575-d72f-e811-8122-1458d04ece60","ultra_name":"RIVERTON COUNTRY CLUB","ultra_registrationnumber":"0308-00112-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1416 HIGHLAND AV","ultra_block":"1201","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"eb87e59f-9f2f-e811-8120-1458d04e2fb8","Name":"RIVERTON COUNTRY CLUB"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"602c7521-162f-e811-8126-1458d04eb810","Name":"CINNAMINSON TWP"
+      },"ultra_propertyportalsearchfield":"RIVERTON COUNTRY CLUB","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"CINNAMINSON TWP","ultra_elsamaintenancecompany":{
+        "Id":"60486bc9-6696-e811-8117-1458d04e0ca0","Name":"Otis Elevator Company"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bacce2ae-b42f-e811-8122-1458d04ece60","Name":"RIVERTON COUNTRY CLUB"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f0635ce1-fd82-ee11-8179-001dd8065396","ultra_name":"THE HIGHLAND","ultra_registrationnumber":"0717-00209-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"416 HIGHLAND AVE","ultra_block":"5202","ultra_lot":"5,6,7,8,9","ultra_propertyinterest":{
+        "Id":"c7f153d5-fd82-ee11-8179-001dd8065396","Name":"THE HIGHLAND"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"482d7521-162f-e811-8126-1458d04eb810","Name":"ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"THE HIGHLAND","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"ORANGE CITY","ultra_elsamaintenancecompany":{
+        "Id":"c9635ce1-fd82-ee11-8179-001dd8065396","Name":"PEEK PROPERTIES"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4af253d5-fd82-ee11-8179-001dd8065396","Name":"PEEK HIGHLAND I OWNER URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2d145760-bcd1-ee11-9079-001dd80b3d60","ultra_name":"THE HIGHLAND","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0717042745001","ultra_addressline1":"416 HIGHLAND AVE","ultra_block":"5202","ultra_lot":"5.01","ultra_propertyinterest":{
+        "Id":"a8a90a4e-bcd1-ee11-9079-001dd80b3de3","Name":"THE HIGHLAND"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"482d7521-162f-e811-8126-1458d04eb810","Name":"ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"THE HIGHLAND","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"ORANGE CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c0a80a4e-bcd1-ee11-9079-001dd80b3de3","Name":"PEEK HIGHLAND I OWNER URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07050","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

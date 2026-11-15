@@ -1,0 +1,7 @@
+{
+ "url": "https://serviceportal.dca.nj.gov/_odata/bhibuildings?$inlinecount=allpages&$filter=substringof%28%272400%20%27%2Cultra_addressline1%29%20and%20substringof%28%27VAUXHALL%27%2Cultra_addressline1%29",
+ "retrieved_at": "2026-11-15T21:43:19+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/8c7a8f49e76936a2.json",
+ "source": "non_nyc_records"
+}

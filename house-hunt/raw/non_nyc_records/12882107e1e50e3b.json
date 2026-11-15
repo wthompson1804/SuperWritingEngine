@@ -1,0 +1,1499 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"104","value":[
+    {
+      "ultra_buildingid":"e618cbd9-d22a-4ed7-a507-00dd121d183e","ultra_name":"0-32 SADDLE RIVER RD","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"0-32 SADDLE RIVER RD","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"f91c0249-d969-42fb-9546-247078d106d9","Name":"0-32 SADDLE RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"e62b7521-162f-e811-8126-1458d04eb810","Name":"FAIR LAWN BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"074100000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5713839d-4550-4b8b-bce0-8f958f486af7","ultra_name":"0-32 SADDLE RIVER RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0217026444001","ultra_addressline1":"0-32 SADDLE RIVER RD","ultra_block":"1103","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"fa3d27b2-84fa-4b9b-b1be-036cd51d0d84","Name":"0-32 SADDLE RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"e62b7521-162f-e811-8126-1458d04eb810","Name":"FAIR LAWN BORO"
+      },"ultra_propertyportalsearchfield":"0-32 SADDLE RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a82e70b7-515d-47ff-97c1-f101ae9ae0cc","Name":"STEPHEN CRAFFEN"
+      },"ultra_zipcode":"07410","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d6af5a63-fa9e-4f6e-89d2-1aaa35018c18","ultra_name":"102 RIVER RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0204021304001","ultra_addressline1":"102 RIVER RD","ultra_block":"110","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"9644782e-06eb-4347-8f2d-535d733ff0f2","Name":"102 RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"cc2b7521-162f-e811-8126-1458d04eb810","Name":"BOGOTA BORO"
+      },"ultra_propertyportalsearchfield":"102 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9539ff59-0591-ed11-aad1-001dd807232c","Name":"JOSEPH R CIANFRONE"
+      },"ultra_zipcode":"07603","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1623a3b8-097d-f011-b4cc-001dd80a623a","ultra_name":"12  221-232 RIVERWALK WAY","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1602040665005","ultra_addressline1":"221-232 RIVERWALK WAY","ultra_block":"84.01","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"8b23719d-097d-f011-b4cc-001dd80c2ab9","Name":"RIVERWALK AT CLIFTON CONDOS"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"1a2f7521-162f-e811-8126-1458d04eb810","Name":"CLIFTON CITY"
+      },"ultra_propertyportalsearchfield":"RIVERWALK AT CLIFTON CONDOS","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"CLIFTON CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"81d87897-097d-f011-b4cc-001dd80c2ab9","Name":"RIVERWALK CONDO ASSOC"
+      },"ultra_zipcode":"07014","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8723ed35-f18c-f111-ab10-001dd8084fd9","ultra_name":"1272 S River Rd","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1202025998001","ultra_addressline1":"1272 S River Rd","ultra_block":"5","ultra_lot":"16.02","ultra_propertyinterest":{
+        "Id":"37538c2e-f18c-f111-ab10-001dd803dca7","Name":"STAYBRIDGE SUITES-CRANBURY-SOUTH BRUNSWICK"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"ee2d7521-162f-e811-8126-1458d04eb810","Name":"CRANBURY TWP"
+      },"ultra_propertyportalsearchfield":"STAYBRIDGE SUITES-CRANBURY-SOUTH BRUNSWICK","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"CRANBURY TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"96518c2e-f18c-f111-ab10-001dd803dca7","Name":"Chosen Lodging Llc"
+      },"ultra_zipcode":"08512","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"02da2b37-d8b3-462b-94d3-a7aa69638f9e","ultra_name":"1420-22 RIVER RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0213012663001","ultra_addressline1":"1420-22 RIVER RD","ultra_block":"7","ultra_lot":"8.01","ultra_propertyinterest":{
+        "Id":"30208ee2-4a62-44c4-9a2b-76f308d7c590","Name":"1420-22 RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":"1420-22 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"14b5b090-e355-45e1-86a0-27ee144d9048","Name":"RIVER VIEW ASSOC"
+      },"ultra_zipcode":"07020","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"71ff4383-ea7e-ec11-8d20-001dd80369c0","ultra_name":"14-22 RIVERVIEW AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1325040754013","ultra_addressline1":"14-22 RIVERVIEW AVE","ultra_block":"455","ultra_lot":"6.01","ultra_propertyinterest":{
+        "Id":"2e62bb16-8b98-eb11-b1ac-001dd8027753","Name":"21-148 SHORE DR"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":"21-148 SHORE DR","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"LONG BRANCH CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bc2bb6ed-ea7e-ec11-8d20-001dd80369c0","Name":"PATTEN WOODS CONDOMINIUM ASSOCIATION"
+      },"ultra_zipcode":"07440","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ec739bbe-097d-f011-b4cc-001dd80a623a","ultra_name":"15  251-262 RIVERWALK WAY","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1602040665008","ultra_addressline1":"251-262 RIVERWALK WAY","ultra_block":"84.01","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"8b23719d-097d-f011-b4cc-001dd80c2ab9","Name":"RIVERWALK AT CLIFTON CONDOS"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"1a2f7521-162f-e811-8126-1458d04eb810","Name":"CLIFTON CITY"
+      },"ultra_propertyportalsearchfield":"RIVERWALK AT CLIFTON CONDOS","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"CLIFTON CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"81d87897-097d-f011-b4cc-001dd80c2ab9","Name":"RIVERWALK CONDO ASSOC"
+      },"ultra_zipcode":"07014","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"deb83793-8459-40ac-8901-410dfc86831e","ultra_name":"168 MUSCONETCONG RIVER RD BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1019026112002","ultra_addressline1":"172 MUSCONETCONG RIVER RD","ultra_block":"69","ultra_lot":"42","ultra_propertyinterest":{
+        "Id":"28ec7496-209c-4a91-a92f-21e394d6c2c4","Name":"168 MUSCONETCONG RIVER RD"
+      },"ultra_county":{
+        "Id":"04f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUNTERDON"
+      },"ultra_municipality":{
+        "Id":"c02d7521-162f-e811-8126-1458d04eb810","Name":"LEBANON TWP"
+      },"ultra_propertyportalsearchfield":"168 MUSCONETCONG RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"172 musconetcong river rd","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"03c5e33c-e569-4a67-9c69-447bd9aed294","Name":"M River Properties LLC"
+      },"ultra_zipcode":"07831","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ae7d07d7-f196-4121-a2ae-b9ac312a1e49","ultra_name":"210-212 RIVERVIEW PL BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0206009508001","ultra_addressline1":"210-212 RIVERVIEW PL","ultra_block":"405","ultra_lot":"38","ultra_propertyinterest":{
+        "Id":"874df6ec-f4eb-4904-a3e3-999c69038f8d","Name":"210-212 RIVERVIEW PL"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"d02b7521-162f-e811-8126-1458d04eb810","Name":"CLIFFSIDE PARK BORO"
+      },"ultra_propertyportalsearchfield":"210-212 RIVERVIEW PL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ec1f9e23-1cb8-4c65-9a3b-58b87b24fcca","Name":"HYNEK BENEDYKTA"
+      },"ultra_zipcode":"07010","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"01a78ad7-dddd-4513-b7cf-0fbc60256e8a","ultra_name":"22 RIVERSIDE DR BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2003006144001","ultra_addressline1":"22 RIVERSIDE DR","ultra_block":"265","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"a9ce2ebc-772c-473b-9d09-5aa08db868e2","Name":"22 RIVERSIDE DR"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b42f7521-162f-e811-8126-1458d04eb810","Name":"CRANFORD TWP"
+      },"ultra_propertyportalsearchfield":"22 RIVERSIDE DR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"00c99405-5073-4054-942b-5da9e8a60caa","Name":"22 RIVERSIDE DRIVE CORP"
+      },"ultra_zipcode":"07016","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"aab058d7-5a45-4d88-8b08-18dcfae803e3","ultra_name":"252 RIVER DR BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0221012841001","ultra_addressline1":"252 RIVER DR","ultra_block":"5","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d7e9fdb9-ebfd-4074-9cd7-86765a5fc63f","Name":"252 RIVER DR"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ee2b7521-162f-e811-8126-1458d04eb810","Name":"GARFIELD CITY"
+      },"ultra_propertyportalsearchfield":"252 RIVER DR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"RIVERSIDE PL","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"25e37502-c6ad-f011-bbd3-001dd8084346","Name":"MAJBOUR ENTERPRISE LLC"
+      },"ultra_zipcode":"07026","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8448d33d-12cf-44c9-a64b-3b1b73552aa5","ultra_name":"2712 RIVER AV","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2712 RIVER AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"07dc1c8d-7a8c-4234-ab03-b9d6799474e3","Name":"2712 RIVER AV"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b02c7521-162f-e811-8126-1458d04eb810","Name":"CAMDEN CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"000000000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"937cdafe-d72f-e811-8122-1458d04ece60","ultra_name":"312 RIVER ST","ultra_registrationnumber":"1608-00243-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"312 RIVER ST","ultra_block":"C0498","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"3b389443-9a2f-e811-8122-1458d04ece60","Name":"312 RIVER ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"5acce9b5-64a8-e811-811f-1458d04e0ca0","Name":"Jersey"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5d7c97e8-b42f-e811-8122-1458d04ece60","Name":"DELTA LAMBSKIN PRODUCTS INC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ed25ca5c-2d58-4ba6-bd1e-ed10595b173a","ultra_name":"340-342 OLD RIVER RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0213036369001","ultra_addressline1":"340-342 OLD RIVER RD","ultra_block":"86-88","ultra_lot":"22-23","ultra_propertyinterest":{
+        "Id":"aca3b022-1778-46d6-8ce1-fdd8accbbbe2","Name":"340-342 OLD RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":"340-342 OLD RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f9f16263-db73-ec11-8f8e-001dd80206e4","Name":"INFINITY EDGEWATER OWNER, LLC"
+      },"ultra_zipcode":"702011100","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7d797cce-5608-4231-93ee-90f293349c9f","ultra_name":"412 RIVER AV","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"412 RIVER AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"eff36244-7c8a-4f13-8c24-ae3c911215b7","Name":"412 RIVER AV"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"062f7521-162f-e811-8126-1458d04eb810","Name":"POINT PLEASANT BEACH BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"000000000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"905e7d45-1ea2-4b49-a60d-f4d57596bf5c","ultra_name":"42 RIVER DR BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1106023370001","ultra_addressline1":"42 RIVER DR","ultra_block":"135","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"42aeca24-9871-4378-a38c-0d1a85f0d9a9","Name":"42 RIVER DR"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"da2d7521-162f-e811-8126-1458d04eb810","Name":"HOPEWELL TWP (M)"
+      },"ultra_propertyportalsearchfield":"42 RIVER DR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"beca8f73-77b9-4551-b46e-bcf95f6ea009","Name":"NOLA BENCZE"
+      },"ultra_zipcode":"00000","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5657f184-483c-48e9-83de-824b862ab62f","ultra_name":"442 RIVER DR BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0221036619001","ultra_addressline1":"442 RIVER DR","ultra_block":"81","ultra_lot":"51","ultra_propertyinterest":{
+        "Id":"b369a1bd-564b-47a9-b797-f5b72db7b58b","Name":"442 RIVER DR"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ee2b7521-162f-e811-8126-1458d04eb810","Name":"GARFIELD CITY"
+      },"ultra_propertyportalsearchfield":"442 RIVER DR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a2cc36fb-9324-4418-a97a-38866b251122","Name":"RIVERGATE ASSOC LLC "
+      },"ultra_zipcode":"07026","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b5d63965-2e45-4ef6-bc7e-5eb2da210960","ultra_name":"442-448 RIVER RD BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0716004241002","ultra_addressline1":"450-452 RIVER RD","ultra_block":"1200","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"21eff69f-3d3a-4b62-abc8-3cf79bde0ce0","Name":"442-448 RIVER RD"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"462d7521-162f-e811-8126-1458d04eb810","Name":"NUTLEY TOWN"
+      },"ultra_propertyportalsearchfield":"442-448 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"27393756-4586-4e5a-8c96-0bae960349df","Name":"REGENCY AT RIVER RD CONDOS"
+      },"ultra_zipcode":"07110","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5f74a981-4758-49a2-a21d-3e8feb5eae8b","ultra_name":"442-448 RIVER RD BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0716004241003","ultra_addressline1":"454-462 RIVER RD","ultra_block":"1200","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"21eff69f-3d3a-4b62-abc8-3cf79bde0ce0","Name":"442-448 RIVER RD"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"462d7521-162f-e811-8126-1458d04eb810","Name":"NUTLEY TOWN"
+      },"ultra_propertyportalsearchfield":"442-448 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"27393756-4586-4e5a-8c96-0bae960349df","Name":"REGENCY AT RIVER RD CONDOS"
+      },"ultra_zipcode":"07110","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f97e258c-b4d2-478e-8568-e9570574f591","ultra_name":"452 RIVER Realty LLC BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608031786001","ultra_addressline1":"452 RIVER ST","ultra_block":"2909","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"5566e3ab-8e33-40e5-9b02-6f97a51b5149","Name":"452 RIVER ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"452 RIVER ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7e5c425a-227d-4f80-8a0f-54847276d7d9","Name":"452 RIVER REALTY LLC"
+      },"ultra_zipcode":"07522","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"eba633e8-e981-4dc1-ba28-16836272d94e","ultra_name":"452 RIVERSIDE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0232023783001","ultra_addressline1":"452 RIVERSIDE AVE","ultra_block":"119","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"2467352f-2990-450e-b167-27352788d0d1","Name":"452 RIVERSIDE AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"042c7521-162f-e811-8126-1458d04eb810","Name":"LYNDHURST TWP"
+      },"ultra_propertyportalsearchfield":"452 RIVERSIDE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e7205f87-83c9-4405-983e-4e0263594d71","Name":"BENJAMIN SOWIZRAL"
+      },"ultra_zipcode":"07071","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"22e87fb3-e94d-4403-9fa0-4618d1a43b55","ultra_name":"490-492 RIVER ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608019658001","ultra_addressline1":"490-492 RIVER ST","ultra_block":"2908","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"2f559381-9476-40bb-99f8-5c5f641f216b","Name":"490-492 RIVER ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"490-492 RIVER ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e045a7da-a6ba-40cd-8f04-8da68d3926e6","Name":"DENIS & VIVIANE MIDY"
+      },"ultra_zipcode":"07524","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"01473c99-d72f-e811-8122-1458d04ece60","ultra_name":"492 RIVER RD","ultra_registrationnumber":"0716-00122-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"492 RIVER RD","ultra_block":"516","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"4e8dd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"492 RIVER RD"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"462d7521-162f-e811-8126-1458d04eb810","Name":"NUTLEY TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e0333dc7-b42f-e811-8122-1458d04ece60","Name":"RA 492 RIVER RD LLC REXCORP REALTY"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2238b3fe-b649-4f95-8670-b337c1bc44ca","ultra_name":"512 RIVER RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0821008468001","ultra_addressline1":"512 RIVER RD","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"fe353a1a-f78e-4eb8-9260-33a9e7894ed6","Name":"512 RIVER RD"
+      },"ultra_county":{
+        "Id":"00f4aaf2-63e4-e711-8125-1458d054d020","Name":"GLOUCESTER"
+      },"ultra_municipality":{
+        "Id":"7c2d7521-162f-e811-8126-1458d04eb810","Name":"WESTVILLE BORO"
+      },"ultra_propertyportalsearchfield":"512 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"057a4b89-d3b5-4eb9-ad2e-f6b9d0232e1e","Name":"NEVER REGISTERED"
+      },"ultra_zipcode":"08093","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f157613f-fd96-ef11-ac21-001dd80621a3","ultra_name":"5201-5212 RIVERFRONT DR BLDG 20","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0327035662029","ultra_addressline1":"5201-5212 RIVERFRONT DR","ultra_block":"152","ultra_lot":"9.02","ultra_propertyinterest":{
+        "Id":"5e018b08-fd96-ef11-ac21-001dd803a96f","Name":"THE RIVERFRONT AT PALMYRA CONDOS"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"862c7521-162f-e811-8126-1458d04eb810","Name":"PALMYRA BORO"
+      },"ultra_propertyportalsearchfield":"THE RIVERFRONT AT PALMYRA CONDOS","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"PALMYRA BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db1aa1d0-e9c6-f011-bbd3-001dd803d745","Name":"THE RIVERFRONT AT PALMYRA CONDO ASSN INC"
+      },"ultra_zipcode":"08065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0243d56c-da13-49a7-91a6-2bf99ca01e7f","ultra_name":"520-522 RIVER ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608013464001","ultra_addressline1":"520-522 RIVER ST","ultra_block":"2907","ultra_lot":"3","ultra_propertyinterest":{
+        "Id":"2e7e20e7-1f3b-4cea-80d5-1e8ca3439ebe","Name":"520-522 RIVER ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"520-522 RIVER ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1ec9ea71-de74-4908-b98e-e30387ccd747","Name":"Paromas Corp."
+      },"ultra_zipcode":"07504","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3358613f-fd96-ef11-ac21-001dd80621a3","ultra_name":"5401-5412 RIVERFRONT DR BLDG 21","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0327035662030","ultra_addressline1":"5401-5412 RIVERFRONT DR","ultra_block":"152","ultra_lot":"9.02","ultra_propertyinterest":{
+        "Id":"5e018b08-fd96-ef11-ac21-001dd803a96f","Name":"THE RIVERFRONT AT PALMYRA CONDOS"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"862c7521-162f-e811-8126-1458d04eb810","Name":"PALMYRA BORO"
+      },"ultra_propertyportalsearchfield":"THE RIVERFRONT AT PALMYRA CONDOS","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"PALMYRA BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db1aa1d0-e9c6-f011-bbd3-001dd803d745","Name":"THE RIVERFRONT AT PALMYRA CONDO ASSN INC"
+      },"ultra_zipcode":"08065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"65cf24be-4a97-4639-b572-ff291ee1a3b9","ultra_name":"540-542 RIVER ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608021890001","ultra_addressline1":"540-542 RIVER ST","ultra_block":"2907","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"03eb47d9-86b9-46fe-bc79-ad8b2e5c9cc1","Name":"540-542 RIVER ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"540-542 RIVER ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a0e47b40-6d98-ef11-ac21-001dd80b2865","Name":"540 RIVER LLC"
+      },"ultra_zipcode":"07524","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7e12668e-c027-4f2e-b8e3-8e97f7e11094","ultra_name":"552 RIVER ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608003924001","ultra_addressline1":"552 RIVER ST","ultra_block":"2907","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"cab27785-4d7a-4137-b305-20ca33e7d44f","Name":"552 RIVER ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"552 RIVER ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a94999e9-017a-f111-ab0e-001dd80a67ab","Name":"CHRISTOPHER CHAN"
+      },"ultra_zipcode":"07500","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"eabe6045-fd96-ef11-ac21-001dd80621a3","ultra_name":"5601-5612 RIVERFRONT DR BLDG 22","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0327035662031","ultra_addressline1":"5601-5612 RIVERFRONT DR","ultra_block":"152","ultra_lot":"9.02","ultra_propertyinterest":{
+        "Id":"5e018b08-fd96-ef11-ac21-001dd803a96f","Name":"THE RIVERFRONT AT PALMYRA CONDOS"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"862c7521-162f-e811-8126-1458d04eb810","Name":"PALMYRA BORO"
+      },"ultra_propertyportalsearchfield":"THE RIVERFRONT AT PALMYRA CONDOS","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"PALMYRA BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db1aa1d0-e9c6-f011-bbd3-001dd803d745","Name":"THE RIVERFRONT AT PALMYRA CONDO ASSN INC"
+      },"ultra_zipcode":"08065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"22bf6045-fd96-ef11-ac21-001dd80621a3","ultra_name":"5801-5812 RIVERFRONT DR BLDG 23","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0327035662032","ultra_addressline1":"5801-5812 RIVERFRONT DR","ultra_block":"152","ultra_lot":"9.02","ultra_propertyinterest":{
+        "Id":"5e018b08-fd96-ef11-ac21-001dd803a96f","Name":"THE RIVERFRONT AT PALMYRA CONDOS"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"862c7521-162f-e811-8126-1458d04eb810","Name":"PALMYRA BORO"
+      },"ultra_propertyportalsearchfield":"THE RIVERFRONT AT PALMYRA CONDOS","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"PALMYRA BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db1aa1d0-e9c6-f011-bbd3-001dd803d745","Name":"THE RIVERFRONT AT PALMYRA CONDO ASSN INC"
+      },"ultra_zipcode":"08065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6afd86a1-c5c6-4d82-b606-543fe13c3908","ultra_name":"580-582 RIVER ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608021768001","ultra_addressline1":"580-582 RIVER ST","ultra_block":"2906","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"69b0c1d8-2e7b-40a6-9b87-c6d7a0075b46","Name":"580-582 RIVER ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"580-582 RIVER ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2cccf51e-48cb-40a7-b7b3-297aa4670f4f","Name":"AMELIA VALDEZ"
+      },"ultra_zipcode":"07504","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"118849f8-e7e1-ec11-a7b4-001dd8033bda","ultra_name":"58-62 RIVERSIDE COURT","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714076649015","ultra_addressline1":"58-62 RIVERSIDE COURT","ultra_block":"00769","ultra_lot":"00001","ultra_propertyinterest":{
+        "Id":"77dc59c8-e7e1-ec11-a7b4-001dd8033bda","Name":"RIVERSIDE VILLA"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"RIVERSIDE VILLA","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"1959-2011 MCCARTER HWY","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6bdc59c8-e7e1-ec11-a7b4-001dd8033bda","Name":"NEWARK HOUSING AUTHORITY"
+      },"ultra_zipcode":"07104","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7a7c276c-4514-ee11-8f6d-001dd808445a","ultra_name":"58-72 RIVER LN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0309026065030","ultra_addressline1":"58-72 RIVER LN","ultra_block":"500","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"0e3ce420-4514-ee11-8f6d-001dd80840c7","Name":"RIVERS EDGE AT DELANCO CONDOMINUM"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"622c7521-162f-e811-8126-1458d04eb810","Name":"DELANCO TWP"
+      },"ultra_propertyportalsearchfield":"RIVERS EDGE AT DELANCO CONDOMINUM","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"DELANCO TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f99f3187-3540-ee11-bdf4-001dd8076e0c","Name":"RIVERS EDGE AT DELANCO CONDOMINIUM ASSOCIATION"
+      },"ultra_zipcode":"08075","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b8a221b7-d72f-e811-8122-1458d04ece60","ultra_name":"600/602 TERRACE DORMS","ultra_registrationnumber":"0905-00399-003","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"600/602 RIVER TERRACE","ultra_block":"228","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"0697d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"BABIO CTR FOR TECH MGMT"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"283d3dc7-b42f-e811-8122-1458d04ece60","Name":"STEVENS INSTITUTE OF TECHNOLOG PHYSICAL PLANT DEPT"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"57bf6045-fd96-ef11-ac21-001dd80621a3","ultra_name":"6001-6012 RIVERFRONT DR BLDG 24","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0327035662033","ultra_addressline1":"6001-6012 RIVERFRONT DR","ultra_block":"152","ultra_lot":"9.02","ultra_propertyinterest":{
+        "Id":"5e018b08-fd96-ef11-ac21-001dd803a96f","Name":"THE RIVERFRONT AT PALMYRA CONDOS"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"862c7521-162f-e811-8126-1458d04eb810","Name":"PALMYRA BORO"
+      },"ultra_propertyportalsearchfield":"THE RIVERFRONT AT PALMYRA CONDOS","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"PALMYRA BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db1aa1d0-e9c6-f011-bbd3-001dd803d745","Name":"THE RIVERFRONT AT PALMYRA CONDO ASSN INC"
+      },"ultra_zipcode":"08065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1a358ff3-51ea-44cb-9226-5dede66473be","ultra_name":"62 RIVERDALE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1333000725001","ultra_addressline1":"62 RIVERDALE AVE","ultra_block":"44.02","ultra_lot":"6.02","ultra_propertyinterest":{
+        "Id":"67dd0421-a2fd-4a91-8147-027515aab71f","Name":"62 RIVERDALE AVE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"5e2e7521-162f-e811-8126-1458d04eb810","Name":"MONMOUTH BEACH BORO"
+      },"ultra_propertyportalsearchfield":"62 RIVERDALE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3a429386-da27-ee11-9965-001dd80abb61","Name":"MB2RIVERDALE, LLC"
+      },"ultra_zipcode":"07750","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"41c20315-fd96-ef11-ac21-001dd80621a3","ultra_name":"6201-6212 RIVERFRONT DR BLDG 25","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0327035662001","ultra_addressline1":"6201-6212 RIVERFRONT DR","ultra_block":"152","ultra_lot":"9.02","ultra_propertyinterest":{
+        "Id":"5e018b08-fd96-ef11-ac21-001dd803a96f","Name":"THE RIVERFRONT AT PALMYRA CONDOS"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"862c7521-162f-e811-8126-1458d04eb810","Name":"PALMYRA BORO"
+      },"ultra_propertyportalsearchfield":"THE RIVERFRONT AT PALMYRA CONDOS","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"PALMYRA BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db1aa1d0-e9c6-f011-bbd3-001dd803d745","Name":"THE RIVERFRONT AT PALMYRA CONDO ASSN INC"
+      },"ultra_zipcode":"08065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e8fe584b-fd96-ef11-ac21-001dd80621a3","ultra_name":"6401-6412 RIVERFRONT DR BLDG 27","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0327035662034","ultra_addressline1":"6401-6412 RIVERFRONT DR","ultra_block":"152","ultra_lot":"9.02","ultra_propertyinterest":{
+        "Id":"5e018b08-fd96-ef11-ac21-001dd803a96f","Name":"THE RIVERFRONT AT PALMYRA CONDOS"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"862c7521-162f-e811-8126-1458d04eb810","Name":"PALMYRA BORO"
+      },"ultra_propertyportalsearchfield":"THE RIVERFRONT AT PALMYRA CONDOS","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"PALMYRA BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db1aa1d0-e9c6-f011-bbd3-001dd803d745","Name":"THE RIVERFRONT AT PALMYRA CONDO ASSN INC"
+      },"ultra_zipcode":"08065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"32ff584b-fd96-ef11-ac21-001dd80621a3","ultra_name":"6601-6612 RIVERFRONT DR BLDG 29","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0327035662035","ultra_addressline1":"6601-6612 RIVERFRONT DR","ultra_block":"152","ultra_lot":"9.02","ultra_propertyinterest":{
+        "Id":"5e018b08-fd96-ef11-ac21-001dd803a96f","Name":"THE RIVERFRONT AT PALMYRA CONDOS"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"862c7521-162f-e811-8126-1458d04eb810","Name":"PALMYRA BORO"
+      },"ultra_propertyportalsearchfield":"THE RIVERFRONT AT PALMYRA CONDOS","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"PALMYRA BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db1aa1d0-e9c6-f011-bbd3-001dd803d745","Name":"THE RIVERFRONT AT PALMYRA CONDO ASSN INC"
+      },"ultra_zipcode":"08065","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"29e925b2-036f-4c58-a07a-79d984f38af3","ultra_name":"662 RIVER ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608017277001","ultra_addressline1":"662 RIVER ST","ultra_block":"2104","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"f8e5d56f-fe9b-4887-a273-d8d57dca34c5","Name":"662 RIVER ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"662 RIVER ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6b8c51d9-94e7-49dc-9489-3a5afbea56af","Name":"ELALFY MOHAMED"
+      },"ultra_zipcode":"07524","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e34c13c1-72a8-4923-b378-3818b0b6d498","ultra_name":"748-752 RIVER ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608022748001","ultra_addressline1":"748-752 RIVER ST","ultra_block":"2203","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"7c45d117-46cd-48eb-b55c-b930e57ab74e","Name":"748-752 RIVER ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"748-752 RIVER ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5dafe9e7-f61f-4eba-bde8-15c6c3a02667","Name":"110 MARKET STREET LLC"
+      },"ultra_zipcode":"07514","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0e5a738a-56ba-470c-980e-fdabe345a6c0","ultra_name":"7912 RIVER RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0908030205001","ultra_addressline1":"7912 RIVER RD","ultra_block":"438","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"4f871f02-c46c-45d2-87a7-8f3b2d65a59b","Name":"7912 RIVER RD"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"922d7521-162f-e811-8126-1458d04eb810","Name":"NORTH BERGEN TWP"
+      },"ultra_propertyportalsearchfield":"7912 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"7912 RIVER RD","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2ed36c0b-6e53-4037-a260-36b1cd581428","Name":"7912 RIVER RD APT LLC"
+      },"ultra_zipcode":"07047","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3c628540-7682-4a66-ba7d-ef1743d39751","ultra_name":"812 RIVERSIDE AV","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"812 RIVERSIDE AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"cd3c89c9-feb3-406e-aba0-c0eb939a5e33","Name":"812 RIVERSIDE AV"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"000000000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"298c76ab-fdee-4f92-aa69-6830f22fe646","ultra_name":"812 RIVERSIDE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111003913001","ultra_addressline1":"812 RIVERSIDE AVE","ultra_block":"31901","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"84ef05b5-6e56-4879-ada0-5624084e7f91","Name":"812 RIVERSIDE AVE"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"812 RIVERSIDE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4446957e-4e98-496a-a6d9-2c00f6be93c1","Name":"WILLIAM E HUTSON"
+      },"ultra_zipcode":"00000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"55199f25-b6f2-40e1-a18c-57e37690063f","ultra_name":"822 RIVERSIDE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111004861001","ultra_addressline1":"822 RIVERSIDE AVE","ultra_block":"31901","ultra_lot":"6.01","ultra_propertyinterest":{
+        "Id":"a21b9c45-ce01-497e-8d60-124ee5783615","Name":"822 RIVERSIDE AVE"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"822 RIVERSIDE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"71ec7dcb-1b46-4009-99d1-ea3cf59baaed","Name":"Dianne Lockhart"
+      },"ultra_zipcode":"08618","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c5dc1597-a342-4b98-9ba3-da981440013f","ultra_name":"872 RIVER DR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0221005440001","ultra_addressline1":"872 RIVER DR","ultra_block":"201","ultra_lot":"20","ultra_propertyinterest":{
+        "Id":"2ef28f7c-254b-43ab-846a-22f9a5d0cf4a","Name":"872 RIVER DR"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ee2b7521-162f-e811-8126-1458d04eb810","Name":"GARFIELD CITY"
+      },"ultra_propertyportalsearchfield":"872 RIVER DR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"860 RIVER DR","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"03a3f54b-96d2-ef11-8eea-001dd8086003","Name":"860 RIVER DRIVE INC."
+      },"ultra_zipcode":"07021","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e61703ae-7578-462f-baa6-87286c60f68f","ultra_name":"882 RIVER RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0260004736001","ultra_addressline1":"882 RIVER RD","ultra_block":"302","ultra_lot":"3","ultra_propertyinterest":{
+        "Id":"f000b0f6-374e-47d8-a8d8-fa2d0b540e49","Name":"882 RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"3c2c7521-162f-e811-8126-1458d04eb810","Name":"TEANECK TWP"
+      },"ultra_propertyportalsearchfield":"882 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1cae080a-c6b6-46af-8725-79f27f2a41ab","Name":"FAIRLEIGH DICKINSON UNIVERSITY"
+      },"ultra_zipcode":"07666","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"353d805a-d208-4334-b9f7-9dc33b719590","ultra_name":"902 RIVER RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0213005656001","ultra_addressline1":"902 RIVER RD","ultra_block":"57","ultra_lot":"3","ultra_propertyinterest":{
+        "Id":"338b1470-cd7a-4a98-808e-4d8cc4bf2257","Name":"902 RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":"902 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"43a718ce-e5c8-ed11-b597-001dd807232c","Name":"ESTATE OF AGUSTIN U. YAP"
+      },"ultra_zipcode":"07020","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"57391a94-2efe-433e-aa35-6bd53c772074","ultra_name":"912 RIVERSIDE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111005275001","ultra_addressline1":"912 RIVERSIDE AVE","ultra_block":"32201","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"a4d38dc1-20ef-4bc7-b332-3be4e3fe1e27","Name":"912 RIVERSIDE AVE"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"912 RIVERSIDE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1580a4e8-bcc2-421b-8b5b-8c871c6441ba","Name":"COMMUNITY KEEPERS LLC"
+      },"ultra_zipcode":"08618","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ff66d7b3-328f-48df-96bc-ff796a14050e","ultra_name":"932 RIVER RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0213018126001","ultra_addressline1":"932 RIVER RD","ultra_block":"00051","ultra_lot":"00019","ultra_propertyinterest":{
+        "Id":"c53b01a4-6c21-4b6c-8fda-5619ac9ae362","Name":"932 RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":"932 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"48ff3dd9-94bb-4c63-ae51-d8f941f97c78","Name":"932-936 RIVER RD ASSOC LLC"
+      },"ultra_zipcode":"07020","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f4a34aec-e7e1-ec11-a7b4-001dd8033bda","ultra_name":"98-102 RIVERSIDE COURT","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714076649007","ultra_addressline1":"98-102 RIVERSIDE COURT","ultra_block":"00769","ultra_lot":"00001","ultra_propertyinterest":{
+        "Id":"77dc59c8-e7e1-ec11-a7b4-001dd8033bda","Name":"RIVERSIDE VILLA"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"RIVERSIDE VILLA","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"1959-2011 MCCARTER HWY","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6bdc59c8-e7e1-ec11-a7b4-001dd8033bda","Name":"NEWARK HOUSING AUTHORITY"
+      },"ultra_zipcode":"07104","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"baa221b7-d72f-e811-8122-1458d04ece60","ultra_name":"ALTORFER ACADEMIC COMPLEX","ultra_registrationnumber":"0905-00399-004","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"610-612 RIVER TERRACE","ultra_block":"12-13","ultra_lot":"228","ultra_propertyinterest":{
+        "Id":"0697d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"BABIO CTR FOR TECH MGMT"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"283d3dc7-b42f-e811-8122-1458d04ece60","Name":"STEVENS INSTITUTE OF TECHNOLOG PHYSICAL PLANT DEPT"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"547fdafe-d72f-e811-8122-1458d04ece60","ultra_name":"BCI","ultra_registrationnumber":"1612-00138-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"922 RIVERVIEW DR","ultra_block":"169","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"9b3a9443-9a2f-e811-8122-1458d04ece60","Name":"BCI"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"2e2f7521-162f-e811-8126-1458d04eb810","Name":"TOTOWA BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0e92ec20-4da7-eb11-b1ac-001dd802e6a3","Name":"922 RVD LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9c201b3b-e3c2-4fc5-b101-0b8eb35cd760","ultra_name":"BLDG 8","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111005195008","ultra_addressline1":"1932 RIVERSIDE DR","ultra_block":"35201","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"5b5851f0-c450-4950-bdc6-3bb5bf69c0d0","Name":"BROOKVILLE COMMONS"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"BROOKVILLE COMMONS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"585df8e0-5c8b-44cf-982e-a538b74fac31","Name":"BROOKVILLE COMMONS"
+      },"ultra_zipcode":"08618","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"59b5feda-d72f-e811-8122-1458d04ece60","ultra_name":"COLONY HOUSE","ultra_registrationnumber":"1340-00132-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"122 N RIVERSIDE AV","ultra_block":"7","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"2bcb3e2d-9a2f-e811-8122-1458d04ece60","Name":"COLONY HOUSE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"6c2e7521-162f-e811-8126-1458d04eb810","Name":"RED BANK BORO"
+      },"ultra_propertyportalsearchfield":"COLONY HOUSE","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"RED BANK BORO","ultra_elsamaintenancecompany":{
+        "Id":"783f296f-09ef-eb11-bacb-001dd801a3d1","Name":"Jersey Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5aa6afd8-b42f-e811-8122-1458d04ece60","Name":"PARK RIDGE LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"09505d6f-d72f-e811-8122-1458d04ece60","ultra_name":"COLUMBIA SAVINGS","ultra_registrationnumber":"0217-00132-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"5-22 SADDLE RIVER RD","ultra_block":"1409","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"6976e59f-9f2f-e811-8120-1458d04e2fb8","Name":"COLUMBIA SAVINGS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"e62b7521-162f-e811-8126-1458d04eb810","Name":"FAIR LAWN BORO"
+      },"ultra_propertyportalsearchfield":"COLUMBIA SAVINGS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"144d4226-d146-ea11-a999-001dd8009f4b","Name":"Liberty Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"373d8dfa-9a3e-e811-8123-1458d04ece60","Name":"COLUMBIA SAVINGS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b9e0ae2f-df90-414e-8503-e1ae897d518a","ultra_name":"CORNERSTONE RESIDENCE,LLC","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"22 RIVERVIEW DRIVE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"3d141aef-4f09-4542-a2fc-667432226d22","Name":"CORNERSTONE RESIDENCE,LLC"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8a2e7521-162f-e811-8126-1458d04eb810","Name":"BOONTON TWP"
+      },"ultra_propertyportalsearchfield":"CORNERSTONE RESIDENCE,LLC","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"BOONTON TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"817aa814-523b-440e-a073-88b44d28e4c6","Name":"RIVERVIEW RESIDENCES, LLC"
+      },"ultra_zipcode":"07005","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2a9fc8f8-4f7a-4ebf-b0c8-a1788b95c706","ultra_name":"DEVONSHIRE ARMS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1207008499001","ultra_addressline1":"2 RIVER RD","ultra_block":"4 5","ultra_lot":"189","ultra_propertyinterest":{
+        "Id":"271facc7-abaa-469c-a8d3-b1de972fa3e1","Name":"DEVONSHIRE ARMS"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"f82d7521-162f-e811-8126-1458d04eb810","Name":"HIGHLAND PARK BORO"
+      },"ultra_propertyportalsearchfield":"DEVONSHIRE ARMS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f3bbf4fc-2479-4b70-bacb-7516c7ee0634","Name":"THE RIVER LLC C/O ANTHONY ROSAMILIA"
+      },"ultra_zipcode":"08904","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c580dafe-d72f-e811-8122-1458d04ece60","ultra_name":"DOLAN & TRAYNOR","ultra_registrationnumber":"1614-00191-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"32 RIVERVIEW DR","ultra_block":"604","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"9d3b9443-9a2f-e811-8122-1458d04ece60","Name":"DOLAN & TRAYNOR"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"322f7521-162f-e811-8126-1458d04eb810","Name":"WAYNE TWP"
+      },"ultra_propertyportalsearchfield":"DOLAN & TRAYNOR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"47c7a29a-f214-e911-812a-1458d04e0ca0","Name":"Otis Fairfield"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f61b6d76-954b-ec11-8c62-001dd802fdab","Name":"RIVERVIEW PROPERTY ASSOC LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"16deb399-3792-f011-b4cc-001dd803d067","ultra_name":"GERARDS RIVERVIEW BLDG B","ultra_registrationnumber":"0304-00132-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"102 RIVERGATE BLVD","ultra_block":"140.01","ultra_lot":"2.01","ultra_propertyinterest":{
+        "Id":"f824ad93-3792-f011-b4cc-001dd803d067","Name":"GERARDS RIVERVIEW BLDG B"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"582c7521-162f-e811-8126-1458d04eb810","Name":"BORDENTOWN TWP"
+      },"ultra_propertyportalsearchfield":"GERARDS RIVERVIEW BLDG B","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"BORDENTOWN TWP","ultra_elsamaintenancecompany":{
+        "Id":"93881089-077c-ef11-a671-001dd8029de0","Name":"Schindler Elevator Corp"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3a25ad93-3792-f011-b4cc-001dd803d067","Name":"VOADV PROPERTY INC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e165584d-300b-f011-bae2-001dd80c2ab9","ultra_name":"GERARDS RIVERVIEW BLDG B","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0304025126002","ultra_addressline1":"102 RIVERGATE BLVD","ultra_block":"140.01","ultra_lot":"1.02","ultra_propertyinterest":{
+        "Id":"9aad4a47-300b-f011-bae2-001dd80c2ab9","Name":"GERARD'S RIVERVIEW"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"582c7521-162f-e811-8126-1458d04eb810","Name":"BORDENTOWN TWP"
+      },"ultra_propertyportalsearchfield":"GERARD'S RIVERVIEW","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"BORDENTOWN TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"500 ROUTE 130","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"19ad4a47-300b-f011-bae2-001dd80c2ab9","Name":"VOADV PROPERTY INC"
+      },"ultra_zipcode":"08505","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8a3a1abd-d72f-e811-8122-1458d04ece60","ultra_name":"GREENBROOK PUMPING STATION","ultra_registrationnumber":"1211-00108-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"162 RIVER RD","ultra_block":"363","ultra_lot":"3.B","ultra_propertyinterest":{
+        "Id":"4bba3e2d-9a2f-e811-8122-1458d04ece60","Name":"GREENBROOK PUMPING STATION"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"002e7521-162f-e811-8126-1458d04eb810","Name":"MIDDLESEX BORO"
+      },"ultra_propertyportalsearchfield":"GREENBROOK PUMPING STATION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5696afd8-b42f-e811-8122-1458d04ece60","Name":"MIDDLESEX CTY UTILITIES AUTH MAINTENANCE DEPT"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7c80dafe-d72f-e811-8122-1458d04ece60","ultra_name":"KENSAAY OFFICE BUILDING","ultra_registrationnumber":"1614-00168-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"22 RIVERVIEW DR","ultra_block":"178","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"733b9443-9a2f-e811-8122-1458d04ece60","Name":"KENSAAY OFFICE BUILDING"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"322f7521-162f-e811-8126-1458d04eb810","Name":"WAYNE TWP"
+      },"ultra_propertyportalsearchfield":"KENSAAY OFFICE BUILDING","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"WAYNE TWP","ultra_elsamaintenancecompany":{
+        "Id":"60486bc9-6696-e811-8117-1458d04e0ca0","Name":"Otis Elevator Company"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"457f97e8-b42f-e811-8122-1458d04ece60","Name":"KENSAAY ASSOCIATES"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"519d3f4f-8e8b-4338-9214-d5c75adb1b93","ultra_name":"L WESTMORELAND","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"722 RIVERSIDE AVENUE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"85730b21-376e-4562-a0cd-5f629a29dd00","Name":"L WESTMORELAND"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"13d5c4ad-d7cd-42d0-a474-d97648a70025","Name":"LANIER WESTMORELAND"
+      },"ultra_zipcode":"08618","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1e202300-1f51-f011-877a-001dd8084aea","ultra_name":"LAKE TAPPAN COMMONS","ultra_registrationnumber":"0253-00114-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"102 SCULLY WAY RIVER VALE, NJ 07675","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"2fe902f4-1e51-f011-877a-001dd8084aea","Name":"LAKE TAPPAN COMMONS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"2e2c7521-162f-e811-8126-1458d04eb810","Name":"RIVER VALE TWP"
+      },"ultra_propertyportalsearchfield":"LAKE TAPPAN COMMONS","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"RIVER VALE TWP","ultra_elsamaintenancecompany":{
+        "Id":"01683bf8-2b10-e911-812c-1458d04e2c70","Name":"TKE"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"62e902f4-1e51-f011-877a-001dd8084aea","Name":"LAKE TAPPAN URBAN RENEWAL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"eaf92c90-08ff-47a3-840d-b62065139685","ultra_name":"LEISURE CHATEAU CARE CTR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1514023247001","ultra_addressline1":"962 RIVER AVE","ultra_block":"430","ultra_lot":"64","ultra_propertyinterest":{
+        "Id":"f6c55e35-5006-487a-b894-ed5c89957e89","Name":"LEISURE CHATEAU CARE CTR"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":"LEISURE CHATEAU CARE CTR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"752a1fae-e5d2-4312-85e6-c0d089427908","Name":"CONG SHEARIS ISRAEL"
+      },"ultra_zipcode":"08701","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"efc8feda-d72f-e811-8122-1458d04ece60","ultra_name":"LEISURE CHATEAU HOSPITAL","ultra_registrationnumber":"1514-00120-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"962 RIVER AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"c9309443-9a2f-e811-8122-1458d04ece60","Name":"LEISURE CHATEAU HOSPITAL"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":"LEISURE CHATEAU HOSPITAL","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"LAKEWOOD TWP","ultra_elsamaintenancecompany":{
+        "Id":"7d747673-cd19-ef11-9f89-001dd8030266","Name":"Eastern"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5d7597e8-b42f-e811-8122-1458d04ece60","Name":"LEISURE CHATEAU"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"815b1e4f-1b48-4b23-806d-27a1171458ff","ultra_name":"NORTH VILLAGE 1 BLDG 12","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0230018219012","ultra_addressline1":"12 RIVER ST EXTENTION ","ultra_block":"5.01","ultra_lot":"1.02","ultra_propertyinterest":{
+        "Id":"088ff2b6-7fec-4a2b-b135-3b2991c0cfff","Name":"NORTH VILLAGE 1"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"002c7521-162f-e811-8126-1458d04eb810","Name":"LITTLE FERRY BORO"
+      },"ultra_propertyportalsearchfield":"NORTH VILLAGE 1","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7f42f933-0278-4410-9274-247bf45bf023","Name":"NORTH VILLAGE 1 LLC"
+      },"ultra_zipcode":"07643","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4a426fa8-3d71-4cdc-b199-b5081963c9e9","ultra_name":"NORTH VILLAGE 1 BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0230018219002","ultra_addressline1":"2 RIVER ST EXTENTION ","ultra_block":"5.01","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"088ff2b6-7fec-4a2b-b135-3b2991c0cfff","Name":"NORTH VILLAGE 1"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"002c7521-162f-e811-8126-1458d04eb810","Name":"LITTLE FERRY BORO"
+      },"ultra_propertyportalsearchfield":"NORTH VILLAGE 1","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7f42f933-0278-4410-9274-247bf45bf023","Name":"NORTH VILLAGE 1 LLC"
+      },"ultra_zipcode":"07643","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9e5f8c99-b253-4281-9a64-0aa4d75dc767","ultra_name":"NORTH VILLAGE 1 BLDG 22","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0230018219022","ultra_addressline1":"22 RIVER ST EXTENTION ","ultra_block":"5.01","ultra_lot":"1.02","ultra_propertyinterest":{
+        "Id":"088ff2b6-7fec-4a2b-b135-3b2991c0cfff","Name":"NORTH VILLAGE 1"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"002c7521-162f-e811-8126-1458d04eb810","Name":"LITTLE FERRY BORO"
+      },"ultra_propertyportalsearchfield":"NORTH VILLAGE 1","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7f42f933-0278-4410-9274-247bf45bf023","Name":"NORTH VILLAGE 1 LLC"
+      },"ultra_zipcode":"07643","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7cd85575-d72f-e811-8122-1458d04ece60","ultra_name":"NORTHPOINTE DORMETORY","ultra_registrationnumber":"0260-00126-005","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1102 RIVER RD","ultra_block":"401","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"af84e59f-9f2f-e811-8120-1458d04e2fb8","Name":"ALUMNI HALL"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"3c2c7521-162f-e811-8126-1458d04eb810","Name":"TEANECK TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9ac9e2ae-b42f-e811-8122-1458d04ece60","Name":"FAIRLEIGH DICKENSON UNIVERSITY FACILITIES PLANNING DEPT"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7efccaac-6902-4905-ad25-a1cecb459a75","ultra_name":"NORTHVIEW APARTMENTS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0213017532001","ultra_addressline1":"1252 RIVER RD","ultra_block":"24","ultra_lot":"32","ultra_propertyinterest":{
+        "Id":"250cfddc-1859-41dc-adbd-1ffe73925ac0","Name":"NORTHVIEW APARTMENTS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":"NORTHVIEW APARTMENTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fff0ba3c-7e73-47c8-a586-cde96c122287","Name":"NORTVIEW LLC"
+      },"ultra_zipcode":"07020","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6aa0a21f-ea97-4617-a3f1-aa8e41a7b56d","ultra_name":"RIVER BAY GARDEN APARTMENTS BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1505025993004","ultra_addressline1":"2 Riverbay CT","ultra_block":"956","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"22faaa09-a2ab-42b7-b62d-303ebacb74da","Name":"RIVER BAY GARDEN APARTMENTS"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"de2e7521-162f-e811-8126-1458d04eb810","Name":"BERKELEY TWP"
+      },"ultra_propertyportalsearchfield":"RIVER BAY GARDEN APARTMENTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"365a325c-46a1-46a3-b29d-0fa2182d3e57","Name":"RIVER BAY GARDENS LLC"
+      },"ultra_zipcode":"08721","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8759b1e6-63d4-f011-8544-001dd80bcb64","ultra_name":"River Renaissance Condos BLDG 10","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0212036225010","ultra_addressline1":"1001-1012 River ST","ultra_block":"6.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"09784498-63d4-f011-8544-001dd80c29f4","Name":"RIVER RENAISSANCE CONDOS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"dc2b7521-162f-e811-8126-1458d04eb810","Name":"EAST RUTHERFORD BORO"
+      },"ultra_propertyportalsearchfield":"RIVER RENAISSANCE CONDOS","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"EAST RUTHERFORD BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d3d6f741-3fe0-f011-8543-001dd8008d46","Name":"RIVER RENAISSANCE CONDOMINIUMS"
+      },"ultra_zipcode":"07073","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"926a95bc-63d4-f011-8544-001dd80bcb64","ultra_name":"River Renaissance Condos BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0212036225003","ultra_addressline1":"310-312 River ST","ultra_block":"6.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"09784498-63d4-f011-8544-001dd80c29f4","Name":"RIVER RENAISSANCE CONDOS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"dc2b7521-162f-e811-8126-1458d04eb810","Name":"EAST RUTHERFORD BORO"
+      },"ultra_propertyportalsearchfield":"RIVER RENAISSANCE CONDOS","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"EAST RUTHERFORD BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d3d6f741-3fe0-f011-8543-001dd8008d46","Name":"RIVER RENAISSANCE CONDOMINIUMS"
+      },"ultra_zipcode":"07073","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f5e4b7ce-63d4-f011-8544-001dd80bcb64","ultra_name":"River Renaissance Condos BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0212036225006","ultra_addressline1":"601-612 River ST","ultra_block":"6.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"09784498-63d4-f011-8544-001dd80c29f4","Name":"RIVER RENAISSANCE CONDOS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"dc2b7521-162f-e811-8126-1458d04eb810","Name":"EAST RUTHERFORD BORO"
+      },"ultra_propertyportalsearchfield":"RIVER RENAISSANCE CONDOS","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"EAST RUTHERFORD BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d3d6f741-3fe0-f011-8543-001dd8008d46","Name":"RIVER RENAISSANCE CONDOMINIUMS"
+      },"ultra_zipcode":"07073","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3973b0d4-63d4-f011-8544-001dd80bcb64","ultra_name":"River Renaissance Condos BLDG 7","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0212036225007","ultra_addressline1":"701-712 River ST","ultra_block":"6.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"09784498-63d4-f011-8544-001dd80c29f4","Name":"RIVER RENAISSANCE CONDOS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"dc2b7521-162f-e811-8126-1458d04eb810","Name":"EAST RUTHERFORD BORO"
+      },"ultra_propertyportalsearchfield":"RIVER RENAISSANCE CONDOS","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"EAST RUTHERFORD BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d3d6f741-3fe0-f011-8543-001dd8008d46","Name":"RIVER RENAISSANCE CONDOMINIUMS"
+      },"ultra_zipcode":"07073","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0f7eafe0-63d4-f011-8544-001dd80bcb64","ultra_name":"River Renaissance Condos BLDG 9","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0212036225009","ultra_addressline1":"901-912 River ST","ultra_block":"6.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"09784498-63d4-f011-8544-001dd80c29f4","Name":"RIVER RENAISSANCE CONDOS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"dc2b7521-162f-e811-8126-1458d04eb810","Name":"EAST RUTHERFORD BORO"
+      },"ultra_propertyportalsearchfield":"RIVER RENAISSANCE CONDOS","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"EAST RUTHERFORD BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d3d6f741-3fe0-f011-8543-001dd8008d46","Name":"RIVER RENAISSANCE CONDOMINIUMS"
+      },"ultra_zipcode":"07073","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"929c241f-6449-e811-821c-1458d04e1b18","ultra_name":"River Trace","ultra_registrationnumber":"1805-00143-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"102 North Branch River Road","ultra_block":"55","ultra_lot":"10.25","ultra_propertyinterest":{
+        "Id":"d3880819-6449-e811-821c-1458d04e1b18","Name":"River Trace"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"5e2f7521-162f-e811-8126-1458d04eb810","Name":"BRANCHBURG TWP"
+      },"ultra_propertyportalsearchfield":"River Trace","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"e54f08fd-e531-e811-811f-1458d04eaba0","Name":"Otis"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"08371d43-a924-ed11-b83c-001dd803ef72","Name":"RIVER TRACE AT BRANCHBURG"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ea8ddafe-d72f-e811-8122-1458d04ece60","ultra_name":"RIVERSIDE CONDO","ultra_registrationnumber":"2003-00106-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"22 RIVERSIDE DR","ultra_block":"265","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d1459443-9a2f-e811-8122-1458d04ece60","Name":"RIVERSIDE CONDO"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b42f7521-162f-e811-8126-1458d04eb810","Name":"CRANFORD TWP"
+      },"ultra_propertyportalsearchfield":"RIVERSIDE CONDO","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"CRANFORD TWP","ultra_elsamaintenancecompany":{
+        "Id":"ed635f03-898b-e811-810d-1458d04e0ca0","Name":"Cesco"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"418997e8-b42f-e811-8122-1458d04ece60","Name":"RIVERSIDE CONDO ASSOC HOMESTEAD MGMT SERVICES INC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"39331abd-d72f-e811-8122-1458d04ece60","ultra_name":"RIVERSIDE TOWERS","ultra_registrationnumber":"1111-00275-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1112 RIVERSIDE AV","ultra_block":"32302","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"69b43e2d-9a2f-e811-8122-1458d04ece60","Name":"RIVERSIDE TOWERS"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"RIVERSIDE TOWERS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bc90afd8-b42f-e811-8122-1458d04ece60","Name":"RIVERSIDE TOWERS MGMT LLC NATE MENDLOWITZ"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0ab6b980-d1b5-408c-8ba2-842b94e1bbf1","ultra_name":"RIVERSIDE TOWERS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111005545001","ultra_addressline1":"1112 RIVERSIDE AVE","ultra_block":"32302","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"3a355764-7f58-4ee3-a790-fe9404d02f7f","Name":"RIVERSIDE TOWER HOLDINGS"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"RIVERSIDE TOWER HOLDINGS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"adf2b68d-1c67-f011-bec2-001dd80a623a","Name":"RIVERSIDE TOWER HOLDINGS LLC"
+      },"ultra_zipcode":"08618","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"88dd5575-d72f-e811-8122-1458d04ece60","ultra_name":"ROEBLING VILLAGE INN","ultra_registrationnumber":"0315-00110-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"32 RIVERSIDE AVE","ultra_block":"137","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"0789e59f-9f2f-e811-8120-1458d04e2fb8","Name":"ROEBLING VILLAGE INN"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"6e2c7521-162f-e811-8126-1458d04eb810","Name":"FLORENCE TWP"
+      },"ultra_propertyportalsearchfield":"ROEBLING VILLAGE INN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"4b3ebe77-5796-e811-8121-1458d0509d88","Name":"THYSSEN KRUP"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cecde2ae-b42f-e811-8122-1458d04ece60","Name":"ROEBLING VILLAGE INN LP ACCOUNTS PAYABLE"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5952063c-124d-4fc9-b206-fe61dacaa6b9","ultra_name":"ROEBLING VILLAGE INN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0315023016001","ultra_addressline1":"32 RIVERSIDE AVE","ultra_block":"137","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"334ac4de-8911-48fc-a968-76f2f3e7ef19","Name":"ROEBLING VILLAGE INN"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"6e2c7521-162f-e811-8126-1458d04eb810","Name":"FLORENCE TWP"
+      },"ultra_propertyportalsearchfield":"ROEBLING VILLAGE INN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"71811c43-b4a0-45e1-9baf-775f34d1c2fa","Name":"ROEBLING VILLAGE INN LP"
+      },"ultra_zipcode":"08554","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"23726699-b861-43ce-916c-a9a54b370111","ultra_name":"SHREWSBURY MANOR BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1340010363005","ultra_addressline1":"72 RIVERSIDE AVE","ultra_block":"7","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"91505f09-8d9b-42a1-a5a3-b9a48a676ce6","Name":"SHREWSBURY MANOR"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"6c2e7521-162f-e811-8126-1458d04eb810","Name":"RED BANK BORO"
+      },"ultra_propertyportalsearchfield":"SHREWSBURY MANOR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"68fe1ff7-1d00-4983-b423-fad1556586c9","Name":"SHREWSBURY MANOR INC"
+      },"ultra_zipcode":"07701","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3e27d404-d82f-e811-8122-1458d04ece60","ultra_name":"SMYTHE VOLVO","ultra_registrationnumber":"2018-00215-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"36-42 RIVER RD","ultra_block":"201","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"019db256-9a2f-e811-8122-1458d04ece60","Name":"SMYTHE VOLVO"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d22f7521-162f-e811-8126-1458d04eb810","Name":"SUMMIT CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"e97df787-b4f1-e911-a98e-001dd800a749","Name":"ThyssenKrupp Local 1"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d79097e8-b42f-e811-8122-1458d04ece60","Name":"SYMTHE VOLVO INC KEVIN J RLANAGAN"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e0b221b7-d72f-e811-8122-1458d04ece60","ultra_name":"SOUTH BRANCH PUMPING STATION","ultra_registrationnumber":"1006-00106-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"512 RIVER RD","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"59ad3e2d-9a2f-e811-8122-1458d04ece60","Name":"SOUTH BRANCH PUMPING STATION"
+      },"ultra_county":{
+        "Id":"04f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUNTERDON"
+      },"ultra_municipality":{
+        "Id":"a62d7521-162f-e811-8126-1458d04eb810","Name":"CLINTON TWP"
+      },"ultra_propertyportalsearchfield":"SOUTH BRANCH PUMPING STATION","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"7ce75ecc-2218-e911-8131-1458d04e2f20","Name":"otis"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"aa89afd8-b42f-e811-8122-1458d04ece60","Name":"NJ WATER SUPPLY AUTH"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"73361abd-d72f-e811-8122-1458d04ece60","ultra_name":"STAYBRIDGE SUITES HOTEL","ultra_registrationnumber":"1202-00124-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1272 S RIVER RD","ultra_block":"5","ultra_lot":"16.02","ultra_propertyinterest":{
+        "Id":"e5b63e2d-9a2f-e811-8122-1458d04ece60","Name":"STAYBRIDGE SUITES HOTEL"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"ee2d7521-162f-e811-8126-1458d04eb810","Name":"CRANBURY TWP"
+      },"ultra_propertyportalsearchfield":"STAYBRIDGE SUITES HOTEL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"e6f35a6d-d27b-e811-8106-1458d04e0ca0","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fc92afd8-b42f-e811-8122-1458d04ece60","Name":"RIYA CRANBURY LLC DBA SBS CRANBURY"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4be2590c-14c1-ea11-a812-001dd8018943","ultra_name":"SUNRISE OF SUMMIT","ultra_registrationnumber":"2018-00233-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"22 RIVER ROAD","ultra_block":"201","ultra_lot":"9.01","ultra_propertyinterest":{
+        "Id":"e39a6106-14c1-ea11-a812-001dd8018943","Name":"Stonepeak"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d22f7521-162f-e811-8126-1458d04eb810","Name":"SUMMIT CITY"
+      },"ultra_propertyportalsearchfield":"Stonepeak","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"SUMMIT CITY","ultra_elsamaintenancecompany":{
+        "Id":"0b9dd351-6254-e811-812c-1458d04ef938","Name":"Thyssen Krupp Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"df86272c-5ad0-f011-bbd3-001dd803d067","Name":"STONEPEAK"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2ad6135b-f36a-4a4d-8c2c-1286acf62afc","ultra_name":"SUTTON WOODS CONDO BLDG 16","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1405031731016","ultra_addressline1":"230-252 RIVER EDGE DR","ultra_block":"64.04","ultra_lot":"01","ultra_propertyinterest":{
+        "Id":"fc5db743-9df4-4d1e-a746-96587e404d3f","Name":"SUTTON WOODS CONDO"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"902e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM TWP"
+      },"ultra_propertyportalsearchfield":"SUTTON WOODS CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9ecfc9dc-f2c3-4674-84af-c8d24409586b","Name":"SUTTON WOODS CONDO ASSOC"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ea86dafe-d72f-e811-8122-1458d04ece60","ultra_name":"THE CENTER SCHOOL","ultra_registrationnumber":"1808-00113-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2 RIVERVIEW DR","ultra_block":"517.03","ultra_lot":"3.10","ultra_propertyinterest":{
+        "Id":"27409443-9a2f-e811-8122-1458d04ece60","Name":"THE CENTER SCHOOL"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"642f7521-162f-e811-8126-1458d04eb810","Name":"FRANKLIN TWP (S)"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"c2ada89c-a1f9-e811-812e-1458d04e2f20","Name":"Morris County Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c78397e8-b42f-e811-8122-1458d04ece60","Name":"THE CENTER SCHOOL DOUGLAS LAIDLAW"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d50c28e7-e457-ee11-be6e-001dd8065be9","ultra_name":"THE IVY","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1404028322001","ultra_addressline1":"2 RIVER ROAD","ultra_block":"135","ultra_lot":"11.01","ultra_propertyinterest":{
+        "Id":"3207fdd3-e457-ee11-be6e-001dd8065396","Name":"THE IVY"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"THE IVY","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"CHATHAM BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6d06fdd3-e457-ee11-be6e-001dd8065396","Name":"CHATHAM RIVER ROAD URBAN RENEWAL, LLC"
+      },"ultra_zipcode":"07928","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e704a3da-ae58-ee11-be6e-001dd80bf0ab","ultra_name":"THE IVY","ultra_registrationnumber":"1404-00133-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2 RIVER ROAD","ultra_block":"135","ultra_lot":"11.01","ultra_propertyinterest":{
+        "Id":"3afba5d4-ae58-ee11-be6e-001dd80bf0ab","Name":"THE IVY"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8e2e7521-162f-e811-8126-1458d04eb810","Name":"CHATHAM BORO"
+      },"ultra_propertyportalsearchfield":"THE IVY","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"CHATHAM BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2c04a3da-ae58-ee11-be6e-001dd80bf0ab","Name":"CHATHAM RIVER ROAD PARTNERS, URBAN RENEWAL, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b096dafe-d72f-e811-8122-1458d04ece60","ultra_name":"THE SOLOMON ORGANIZATION","ultra_registrationnumber":"2018-00114-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"92 RIVER RD","ultra_block":"202","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"459cb256-9a2f-e811-8122-1458d04ece60","Name":"THE SOLOMON ORGANIZATION"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d22f7521-162f-e811-8126-1458d04eb810","Name":"SUMMIT CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"01683bf8-2b10-e911-812c-1458d04e2c70","Name":"TKE"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1d9097e8-b42f-e811-8122-1458d04ece60","Name":"SALEM CROSSING LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d40384e0-c081-4387-8ae1-5958d40b1f81","ultra_name":"TRISTATE BIBLE CAMP BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1914031129001","ultra_addressline1":"2 RIVER RD","ultra_block":"1","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"9542d940-d891-4e48-8990-a9d12a2ee315","Name":"TRISTATE BIBLE CAMP"
+      },"ultra_county":{
+        "Id":"18f4aaf2-63e4-e711-8125-1458d054d020","Name":"SUSSEX"
+      },"ultra_municipality":{
+        "Id":"9a2f7521-162f-e811-8126-1458d04eb810","Name":"MONTAGUE TWP"
+      },"ultra_propertyportalsearchfield":"TRISTATE BIBLE CAMP","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e6519f1a-ba01-4dde-87d0-561e503fe462","Name":"FELLOWSHIP OF FUNDAMENTALBIBLE CHURCHES"
+      },"ultra_zipcode":"07827","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"966f6e55-47c6-4e37-a4d1-f299c7b2955a","ultra_name":"TRISTATE BIBLE CAMP BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1914031129002","ultra_addressline1":"2 RIVER RD","ultra_block":"1","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"9542d940-d891-4e48-8990-a9d12a2ee315","Name":"TRISTATE BIBLE CAMP"
+      },"ultra_county":{
+        "Id":"18f4aaf2-63e4-e711-8125-1458d054d020","Name":"SUSSEX"
+      },"ultra_municipality":{
+        "Id":"9a2f7521-162f-e811-8126-1458d04eb810","Name":"MONTAGUE TWP"
+      },"ultra_propertyportalsearchfield":"TRISTATE BIBLE CAMP","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e6519f1a-ba01-4dde-87d0-561e503fe462","Name":"FELLOWSHIP OF FUNDAMENTALBIBLE CHURCHES"
+      },"ultra_zipcode":"07827","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"df88b85e-dd07-4633-ac1a-7faa7ba493ce","ultra_name":"TRISTATE BIBLE CAMP BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1914031129003","ultra_addressline1":"2 RIVER RD","ultra_block":"1","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"9542d940-d891-4e48-8990-a9d12a2ee315","Name":"TRISTATE BIBLE CAMP"
+      },"ultra_county":{
+        "Id":"18f4aaf2-63e4-e711-8125-1458d054d020","Name":"SUSSEX"
+      },"ultra_municipality":{
+        "Id":"9a2f7521-162f-e811-8126-1458d04eb810","Name":"MONTAGUE TWP"
+      },"ultra_propertyportalsearchfield":"TRISTATE BIBLE CAMP","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e6519f1a-ba01-4dde-87d0-561e503fe462","Name":"FELLOWSHIP OF FUNDAMENTALBIBLE CHURCHES"
+      },"ultra_zipcode":"07827","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a4e3b3f0-1d52-4814-948a-89c62a93d4bc","ultra_name":"TRISTATE BIBLE CAMP BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1914031129004","ultra_addressline1":"2 RIVER RD","ultra_block":"1","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"9542d940-d891-4e48-8990-a9d12a2ee315","Name":"TRISTATE BIBLE CAMP"
+      },"ultra_county":{
+        "Id":"18f4aaf2-63e4-e711-8125-1458d054d020","Name":"SUSSEX"
+      },"ultra_municipality":{
+        "Id":"9a2f7521-162f-e811-8126-1458d04eb810","Name":"MONTAGUE TWP"
+      },"ultra_propertyportalsearchfield":"TRISTATE BIBLE CAMP","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e6519f1a-ba01-4dde-87d0-561e503fe462","Name":"FELLOWSHIP OF FUNDAMENTALBIBLE CHURCHES"
+      },"ultra_zipcode":"07827","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d463b985-7145-4bba-95ad-d7e736744133","ultra_name":"TRISTATE BIBLE CAMP BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1914031129005","ultra_addressline1":"2 RIVER RD","ultra_block":"1","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"9542d940-d891-4e48-8990-a9d12a2ee315","Name":"TRISTATE BIBLE CAMP"
+      },"ultra_county":{
+        "Id":"18f4aaf2-63e4-e711-8125-1458d054d020","Name":"SUSSEX"
+      },"ultra_municipality":{
+        "Id":"9a2f7521-162f-e811-8126-1458d04eb810","Name":"MONTAGUE TWP"
+      },"ultra_propertyportalsearchfield":"TRISTATE BIBLE CAMP","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e6519f1a-ba01-4dde-87d0-561e503fe462","Name":"FELLOWSHIP OF FUNDAMENTALBIBLE CHURCHES"
+      },"ultra_zipcode":"07827","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"04463c99-d72f-e811-8122-1458d04ece60","ultra_name":"TWO RIVERFRONT PLAZA","ultra_registrationnumber":"0714-01071-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2 RIVERFRONT PLZ STE 200","ultra_block":"136","ultra_lot":"63-02","ultra_propertyinterest":{
+        "Id":"a28cd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"TWO RIVERFRONT PLAZA"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2a333dc7-b42f-e811-8122-1458d04ece60","Name":"HATRIX SJP RIVERFRONT PLZ I URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0fd85575-d72f-e811-8122-1458d04ece60","ultra_name":"VILLA MARIE CLAIR","ultra_registrationnumber":"0258-00101-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"12 W SADDLE RIVER RD","ultra_block":"2002","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"5384e59f-9f2f-e811-8120-1458d04e2fb8","Name":"VILLA MARIE CLAIR"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"382c7521-162f-e811-8126-1458d04eb810","Name":"SADDLE RIVER BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"38868107-d320-e911-a95f-001dd800a749","Name":"Pride & Service"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"42c9e2ae-b42f-e811-8122-1458d04ece60","Name":"HOLY NAME HOSPITAL ATTN: VICE PRESIDENT, FAC MGMT"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"846c1011-ec5e-4440-bda1-63d68325a525","ultra_name":"VILLA MARIE CLAIRE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"12 W SADDLE RIVER RD","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"8e7863a7-f266-4e7b-95f6-08314e53c420","Name":"VILLA MARIE CLAIRE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"382c7521-162f-e811-8126-1458d04eb810","Name":"SADDLE RIVER BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f4f70044-77a7-434e-ab00-f6ad4905f55b","Name":"VILLA MARIE CLAIRE "
+      },"ultra_zipcode":"074580000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

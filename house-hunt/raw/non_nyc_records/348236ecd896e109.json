@@ -1,0 +1,33 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"8bbec425-76cb-47bc-95ad-053be8e89cfe","ultra_name":"PARK HUDSON","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0908022875001","ultra_addressline1":"9060 PALISADE AVE","ultra_block":"429","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"23d98bcb-fe38-4c9e-b6c3-1cc8102cdaea","Name":"PARK HUDSON"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"922d7521-162f-e811-8126-1458d04eb810","Name":"NORTH BERGEN TWP"
+      },"ultra_propertyportalsearchfield":"PARK HUDSON","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1274b0c5-b870-4f7b-8404-087868fb78bf","Name":"PARK HUDSON CONDO ASSOC"
+      },"ultra_zipcode":"07047","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d8ac21b7-d72f-e811-8122-1458d04ece60","ultra_name":"PARK HUDSON","ultra_registrationnumber":"0908-00102-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"9060 PALISADE AV","ultra_block":"429","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"5da83e2d-9a2f-e811-8122-1458d04ece60","Name":"PARK HUDSON"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"922d7521-162f-e811-8126-1458d04eb810","Name":"NORTH BERGEN TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d4443dc7-b42f-e811-8122-1458d04ece60","Name":"PARK HUDSON TENANTS CORP"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

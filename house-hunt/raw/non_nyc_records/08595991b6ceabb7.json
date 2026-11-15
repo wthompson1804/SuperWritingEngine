@@ -1,0 +1,201 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"14","value":[
+    {
+      "ultra_buildingid":"7752d8fe-0471-4ab6-b33a-3ccb15565957","ultra_name":"ABERDEEN WOODS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330020592001","ultra_addressline1":"133 ABERDEEN RD","ultra_block":"154","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"6b48aa0a-d2f8-4fa0-af6b-6fdc8a1426da","Name":"ABERDEEN WOODS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"ABERDEEN WOODS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"47d0e6e1-5bbf-ed11-83ff-001dd80704a5","Name":"ABERDEEN WOODS HOLDINGS, LLC"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ad985136-1469-4eed-a49c-ff99f48051b2","ultra_name":"LEISUR VIL E BLDG 229","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1514023331229","ultra_addressline1":"1033 ABERDEEN DR","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"d5c1ec67-2147-41ca-b3c2-a3ccbb929351","Name":"LEISURE VILLAGE"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":"LEISURE VILLAGE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"914fb4fd-c003-4aa6-b56b-bd06d129c52d","Name":"LEISURE VIL E ASSOC"
+      },"ultra_zipcode":"08701","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b36abe55-ad6d-4c38-b25e-6e33308d3e4a","ultra_name":"TREE HAVEN APTS BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140001","ultra_addressline1":"33 ABERDEEN RD","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"E ABERDEEN_NJACTB","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c7867375-696c-404c-88af-d054681e4ca8","ultra_name":"TREE HAVEN APTS BLDG 10","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140010","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"30fe75e3-16c8-4c78-bc04-9197333bbb17","ultra_name":"TREE HAVEN APTS BLDG 11","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140011","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3d8082a0-b5fb-468e-82b8-40d5765879f8","ultra_name":"TREE HAVEN APTS BLDG 12","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140012","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"86a09c4a-7a2e-45ee-81af-49d455ec756f","ultra_name":"TREE HAVEN APTS BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140002","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"77fe6b2d-9c5f-440e-a105-c7d289d7fbf6","ultra_name":"TREE HAVEN APTS BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140003","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f8c26059-6122-4858-9470-c31c01ba3273","ultra_name":"TREE HAVEN APTS BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140004","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6775679a-7843-4155-b27f-0a403a0b2d8c","ultra_name":"TREE HAVEN APTS BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140005","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5bbb830b-75a5-4d34-af12-f92fdd8a7311","ultra_name":"TREE HAVEN APTS BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140006","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f983eb3e-78c9-4e57-8438-c1e83ba189db","ultra_name":"TREE HAVEN APTS BLDG 7","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140007","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"75571c13-d8fd-4c03-9e85-b122a9872523","ultra_name":"TREE HAVEN APTS BLDG 8","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140008","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"741023be-0290-47f0-b7a0-33af2c357816","ultra_name":"TREE HAVEN APTS BLDG 9","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1330009140009","ultra_addressline1":"33 ABERDEEN RD TREE HAVENIII ","ultra_block":"154","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"7dded3b2-6012-4c8a-b7b5-b1626277b857","Name":"TREE HAVEN APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"582e7521-162f-e811-8126-1458d04eb810","Name":"ABERDEEN TWP"
+      },"ultra_propertyportalsearchfield":"TREE HAVEN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1b5e646e-e0df-48ca-973c-6cb341eaead9","Name":"TREE HAVEN APARTMENTS, LLC/PRC MGMT"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

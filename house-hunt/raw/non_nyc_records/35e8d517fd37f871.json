@@ -1,0 +1,105 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"7","value":[
+    {
+      "ultra_buildingid":"86c3b73c-c021-40f2-b180-1d1eff475bb9","ultra_name":"165 N MAPLE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0705025495001","ultra_addressline1":"165 N MAPLE AVE","ultra_block":"261","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"fae883f3-03a6-41c5-a42e-c5467c39210a","Name":"165 N MAPLE AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"165 N MAPLE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d70f0680-a342-415a-839d-f1537ef60331","Name":"EDDYE & GILBERT SMALL"
+      },"ultra_zipcode":"07018","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cb0544cb-bcb3-49e3-adf4-bc1547555a04","ultra_name":"35-65 MAPLEWOOD TER BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1514040383002","ultra_addressline1":"35-65 MAPLEWOOD TER","ultra_block":"11.19","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d25b06eb-6b73-ee11-8dee-001dd8065be9","Name":"1-33 MAPLEWOOD TER"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":"1-33 MAPLEWOOD TER","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"LAKEWOOD TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"88a7bae4-6b73-ee11-8dee-001dd8065be9","Name":"SOUTHGATE AT LAKEWOOD LLC"
+      },"ultra_zipcode":"08701","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9423bba0-d319-49eb-91c4-0630b8f20bb0","ultra_name":"365 MAPLE ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0907015333001","ultra_addressline1":"365 MAPLE ST","ultra_block":"60","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"97194103-d6a2-4fc8-9115-854d88161b66","Name":"365 MAPLE ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"902d7521-162f-e811-8126-1458d04eb810","Name":"KEARNY TOWN"
+      },"ultra_propertyportalsearchfield":"365 MAPLE ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ed752499-8392-41e1-946d-c00fa2ffe570","Name":"MANUEL & FERREIRA JOSE RAMOS"
+      },"ultra_zipcode":"07032","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5f97eb9d-f75d-41ac-b57a-8e7e8163c746","ultra_name":"65 MAPLE ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0907003434001","ultra_addressline1":"65 MAPLE ST","ultra_block":"17","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"532591e3-b1b3-4b79-bdd2-fc2f9ef6a637","Name":"65 MAPLE ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"902d7521-162f-e811-8126-1458d04eb810","Name":"KEARNY TOWN"
+      },"ultra_propertyportalsearchfield":"65 MAPLE ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f069ff43-65ae-4d5a-b30a-65de62cdf222","Name":"JOAN DREFKO"
+      },"ultra_zipcode":"07032","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fe508941-a9af-e911-a98c-001dd800b582","ultra_name":"SOLARIS LOFTS","ultra_registrationnumber":"0906-01072-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"65 MAPLE ST","ultra_block":"1.01","ultra_lot":"19004","ultra_propertyinterest":{
+        "Id":"b29a8b3b-a9af-e911-a98c-001dd800b582","Name":"SOLARIS LOFTS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"SOLARIS LOFTS","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":{
+        "Id":"f7508941-a9af-e911-a98c-001dd800b582","Name":"S E C"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"be9a8b3b-a9af-e911-a98c-001dd800b582","Name":"MONITOR MAPLE URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5c37ecb4-1bce-4e20-9e63-fd1420552578","ultra_name":"SOLARIS LOFTS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043001001","ultra_addressline1":"65 Maple ST","ultra_block":"19004","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"83a31675-918d-40bf-8c67-b7de4d6cdc9a","Name":"SOLARIS LOFTS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"SOLARIS LOFTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ce369f51-2617-ed11-b83c-001dd8014b5e","Name":"BW SOLARIS LLC"
+      },"ultra_zipcode":"07304","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bc6a20ff-8d80-43d4-a02e-08b0e388da7a","ultra_name":"SUBURBAN TER BLDG 5 (465)","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0223007884005","ultra_addressline1":"465 MAPLE HILL DR","ultra_block":"355","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"82189423-5306-4673-a92a-a6b5c73758fa","Name":"SUBURBAN TERRACE CONDOMINIUMS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"SUBURBAN TERRACE CONDOMINIUMS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7bad073e-0953-46d6-bf79-6f92f91b2bf1","Name":"Suburban Terrace Condo Assoc Inc"
+      },"ultra_zipcode":"07601","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

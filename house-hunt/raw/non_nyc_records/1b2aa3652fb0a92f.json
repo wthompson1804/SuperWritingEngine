@@ -1,0 +1,423 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"29","value":[
+    {
+      "ultra_buildingid":"d1b84b90-7017-4ac1-8d5d-317903b83754","ultra_name":"10 OCEAN BLVD","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1304009088001","ultra_addressline1":"10 OCEAN BLVD","ultra_block":"95","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"40bc757c-fc78-40ec-a6a7-398ed47e93ac","Name":"10 OCEAN BLVD"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"242e7521-162f-e811-8126-1458d04eb810","Name":"ATLANTIC HIGHLANDS BORO"
+      },"ultra_propertyportalsearchfield":"10 OCEAN BLVD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"359279aa-d3bb-4b5a-8471-e3d2d33d75f3","Name":"ELK HARBOR VIEW, LLC"
+      },"ultra_zipcode":"07716","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d959d098-7b97-423f-8aed-54e5e72955d2","ultra_name":"10 OCEAN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1317021568001","ultra_addressline1":"10 OCEAN ST","ultra_block":"10","ultra_lot":"3.01","ultra_propertyinterest":{
+        "Id":"a898c244-3ffc-43dd-8e45-2951648083c7","Name":"10 OCEAN ST"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"3e2e7521-162f-e811-8126-1458d04eb810","Name":"HIGHLANDS BORO"
+      },"ultra_propertyportalsearchfield":"10 OCEAN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"16895863-e98c-47c0-821f-9288cd0886f8","Name":"Susan Gladstone           and Janice Zaula"
+      },"ultra_zipcode":"07723","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8562b744-7d87-422c-be0d-943d73794d56","ultra_name":"110 OCEAN AVENUE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"110 OCEAN AVENUE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"d11db001-f740-4ac4-b31a-7c425c1f3935","Name":"110 OCEAN AVENUE"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"9a2b7521-162f-e811-8126-1458d04eb810","Name":"ATLANTIC CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"99aaf066-8cb0-4a24-b61d-74448e2ae488","Name":"HOGAR CREA INT. INC OF NEWARK"
+      },"ultra_zipcode":"08401","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"de61a1ee-43a7-4c9f-a6f7-0fd9f52b451f","ultra_name":"1206-1226 OCEAN DR BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0501019511003","ultra_addressline1":"1250-1310 OCEAN DR","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"7f210a9b-53c5-4296-9921-d9aef65f5bc9","Name":"1206-1226 OCEAN DR"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"ec2c7521-162f-e811-8126-1458d04eb810","Name":"AVALON BORO"
+      },"ultra_propertyportalsearchfield":"1206-1226 OCEAN DR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4b21759c-24c6-4078-b918-ebbba162da43","Name":"OCEAN DRIVE CONDOS"
+      },"ultra_zipcode":"00000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"290eb890-1cc3-467e-8313-7906c8756260","ultra_name":"210 Ocean Ave BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1343020543001","ultra_addressline1":"210 OCEAN AVE","ultra_block":"33","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"c838a6e4-e9e6-4f6f-8b27-297f9169e9e9","Name":"210 OCEAN AVE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"722e7521-162f-e811-8126-1458d04eb810","Name":"SEA BRIGHT BORO"
+      },"ultra_propertyportalsearchfield":"210 OCEAN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"210 OCEAN AV","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cbade2ae-a48f-492f-b46e-6a69211cad8c","Name":"210 SB LLC"
+      },"ultra_zipcode":"07760","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"be0bc5ae-62b0-f111-aaac-001dd80bcf22","ultra_name":"2-10 Ocean Breeze Ct","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1530040048002","ultra_addressline1":"2-10 Ocean Breeze Ct","ultra_block":"158","ultra_lot":"9.25","ultra_propertyinterest":{
+        "Id":"5b0ac5ae-62b0-f111-aaac-001dd80bcf22","Name":"ISLAND CREST"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"102f7521-162f-e811-8126-1458d04eb810","Name":"STAFFORD TWP"
+      },"ultra_propertyportalsearchfield":"ISLAND CREST","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"STAFFORD TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4959d28e-7cb7-f111-aaac-001dd80db51f","Name":"MATRIX PROPERTY MANAGHEMENT GROUP"
+      },"ultra_zipcode":"08050","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"dd6dc2a8-d412-427c-a703-7d062a94a837","ultra_name":"410 OCEAN GATE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1521006706001","ultra_addressline1":"410 OCEAN GATE AVE","ultra_block":"14","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"dd048815-be2b-4254-bac2-515f87e540ef","Name":"410 OCEAN GATE AVE"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"fe2e7521-162f-e811-8126-1458d04eb810","Name":"OCEAN GATE BORO"
+      },"ultra_propertyportalsearchfield":"410 OCEAN GATE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b3572438-c7a9-4cc2-8de3-8b383bd3d1fd","Name":"GORDON PULASKI"
+      },"ultra_zipcode":"08740","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7364de6a-06b4-428e-8072-bfcd217365fe","ultra_name":"4910 Ocean Ave Condo Assn","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0514003138001","ultra_addressline1":"4910 E OCEAN AVE","ultra_block":"42","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"545acde0-a1a2-4d6f-90b7-07a72ee62de4","Name":"4910 OCEAN "
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"062d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"4910 OCEAN ","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4681db31-08b6-42be-a57d-491f5243b12b","Name":"ocean ave condo association"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8f9c1475-0ba5-4f62-b4ad-4f9c6bb50232","ultra_name":"710 OCEAN AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0508010449001","ultra_addressline1":"710 OCEAN AVE","ultra_block":"705","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"04688440-c605-4a6f-a7a8-e82041501d40","Name":"710 OCEAN AVE"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"fa2c7521-162f-e811-8126-1458d04eb810","Name":"OCEAN CITY"
+      },"ultra_propertyportalsearchfield":"710 OCEAN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1159d662-683f-4fda-8434-7db81aae6774","Name":"711 OCEAN AV CONDO ASSN"
+      },"ultra_zipcode":"08226","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"edaac039-17b5-ec11-983e-001dd8033e06","ultra_name":"910 OCEAN AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0508030048001","ultra_addressline1":"910 OCEAN AVE","ultra_block":"902","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"9faac039-17b5-ec11-983e-001dd8033e06","Name":"910 OCEAN AVE CONDOS"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"fa2c7521-162f-e811-8126-1458d04eb810","Name":"OCEAN CITY"
+      },"ultra_propertyportalsearchfield":"910 OCEAN AVE CONDOS","ultra_countyportalsearchfield":"CAPE MAY","ultra_municipalityportalsearchfield":"OCEAN CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1f73ca07-620b-f011-bae3-001dd803d745","Name":"910 OCEAN AVE CONDOMINIUM"
+      },"ultra_zipcode":"08226","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"23ffadbd-d33c-4733-976b-0a3365c2e4cb","ultra_name":"BEACH HUGGER MOTEL","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0507005363001","ultra_addressline1":"210 OCEAN AVE","ultra_block":"324","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"8e1fe33f-83ef-44af-a2df-32d68e08b5d1","Name":"2 BEACH HUGGER CONDO ASSOC. INC."
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"f82c7521-162f-e811-8126-1458d04eb810","Name":"NORTH WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"2 BEACH HUGGER CONDO ASSOC. INC.","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e1567044-c95e-ed11-9562-001dd8070ecc","Name":"2 STREET BEACH HUGGER CONDO ASSOC. INC"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bc5af52b-160a-4d18-af8c-8a0112b6093f","ultra_name":"BEL AIR MOTEL","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0515005657001","ultra_addressline1":"5510 OCEAN AVE","ultra_block":"6.03","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"79181859-e73b-4d62-8da8-52b06f0f24f8","Name":"BEL AIR MOTEL"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"082d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CREST BORO"
+      },"ultra_propertyportalsearchfield":"BEL AIR MOTEL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"601fd3e6-e5b1-49ac-aac1-247f7884ed94","Name":"STEPHEN REESER"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"953a9d43-6b95-4d6d-a971-196f58dfb7a7","ultra_name":"DAYS INN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0514004183001","ultra_addressline1":"4610 OCEAN AVE","ultra_block":"74","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"692e6439-59e7-4e92-b3b6-d34acc29cab2","Name":"SANDS MOTEL"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"062d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"SANDS MOTEL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6a1af99d-5e1f-ef11-9f89-001dd801adfe","Name":"PLIERS, LLC"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"45acfeda-d72f-e811-8122-1458d04ece60","ultra_name":"HARBOURVIEW TOWER","ultra_registrationnumber":"1304-00102-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"10 OCEAN BD","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"6bc33e2d-9a2f-e811-8122-1458d04ece60","Name":"HARBOURVIEW TOWER"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"242e7521-162f-e811-8126-1458d04eb810","Name":"ATLANTIC HIGHLANDS BORO"
+      },"ultra_propertyportalsearchfield":"HARBOURVIEW TOWER","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"ATLANTIC HIGHLANDS BORO","ultra_elsamaintenancecompany":{
+        "Id":"24b05818-a2ba-e811-8125-1458d04e2c70","Name":"Pride & Service"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d69eafd8-b42f-e811-8122-1458d04ece60","Name":"ELK INVESTORS C/O S KOLENOVICH"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"66f04393-d72f-e811-8122-1458d04ece60","ultra_name":"HIALEAH CONDO","ultra_registrationnumber":"0515-00197-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"6210 OCEAN AVE","ultra_block":"38.03","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"9c7bd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"HIALEAH CONDO"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"082d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CREST BORO"
+      },"ultra_propertyportalsearchfield":"HIALEAH CONDO","ultra_countyportalsearchfield":"CAPE MAY","ultra_municipalityportalsearchfield":"WILDWOOD CREST BORO","ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b8233dc7-b42f-e811-8122-1458d04ece60","Name":"HIALEAH CONDO ASSC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e9983877-cf4e-4dbb-8fe5-bf5a6c198d60","ultra_name":"HIALEAH CONDOMINIUM","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0515011185001","ultra_addressline1":"6210 OCEAN AVE","ultra_block":"38.03","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"e0bcbc8a-6cd3-4cf5-b713-690a93cace34","Name":"HIALEAH CONDOMINIUM"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"082d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CREST BORO"
+      },"ultra_propertyportalsearchfield":"HIALEAH CONDOMINIUM","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fdec7576-b606-4778-afa4-acfe9f3d6f1f","Name":"HIALEAH CONDO ASSN"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a0a902c4-ce7b-4aab-b802-a1f61e83dfeb","ultra_name":"OCEAN GLEN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0514003298001","ultra_addressline1":"2910 OCEAN AVE","ultra_block":"228","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"085a2119-6a7b-4ed7-b85f-cdd8e792531f","Name":"OCEAN AVE GUEST HOUSE"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"062d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"OCEAN AVE GUEST HOUSE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9b46459a-75cb-ee11-9079-001dd80b3ddb","Name":"BOARDWALKS BEST INC"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"084d7fbe-2b9e-47b4-9a3f-8d6700dbcac0","ultra_name":"OCEAN SAFARI","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0515003118001","ultra_addressline1":"5610 OCEAN AVE","ultra_block":"11.03","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"0b15f822-65d1-41d4-809f-fec23833dabf","Name":"AMERICAN SAFARI"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"082d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CREST BORO"
+      },"ultra_propertyportalsearchfield":"OCEAN SAFARI","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4c7160b7-4ab2-eb11-8236-001dd802cdd0","Name":"AMERICAN SAFARI HOTEL LLC"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a1f95cfa-e8e8-42fb-88a9-1770b2eb30ad","ultra_name":"OCEAN SANDS MOTEL","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0514000693001","ultra_addressline1":"3710 OCEAN AVE","ultra_block":"166","ultra_lot":"18","ultra_propertyinterest":{
+        "Id":"65d8652e-1b85-440a-aba6-a7f007d606b7","Name":"OCEAN SANDS MOTEL"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"062d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"OCEAN SANDS MOTEL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d8a547e6-a7fa-4a4e-8d87-ac01cad3d946","Name":"OCEAN SANDS PROP LLC"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0ab0feda-d72f-e811-8122-1458d04ece60","ultra_name":"OCEAN VIEW TOWERS","ultra_registrationnumber":"1325-00119-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"510 OCEAN AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"e9c63e2d-9a2f-e811-8122-1458d04ece60","Name":"OCEAN VIEW TOWERS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"5acce9b5-64a8-e811-811f-1458d04e0ca0","Name":"Jersey"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1aa2afd8-b42f-e811-8122-1458d04ece60","Name":"OCEAN VIEW TOWERS ATTN: ASSOCIATION ADVISORS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"59a43ed9-2017-f111-8407-001dd80a67ab","ultra_name":"Ocean View Towers Condos","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1325040785001","ultra_addressline1":"510 Ocean ave","ultra_block":"140","ultra_lot":"5.01-5.34","ultra_propertyinterest":{
+        "Id":"c24644d3-2017-f111-8407-001dd80a67ab","Name":"OCEAN VIEW TOWERS CONDOS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":"OCEAN VIEW TOWERS CONDOS","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"LONG BRANCH CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cc3636cd-2017-f111-8407-001dd80a67ab","Name":"Ocean View Towers Assn Inc"
+      },"ultra_zipcode":"07740","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"744f41a1-b3c7-4fd3-9cc3-f1759434e18a","ultra_name":"OCEANVIEW TER APTS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1307006190001","ultra_addressline1":"510 OCEAN AVE","ultra_block":"51","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"f1195a9e-e9d0-4eeb-a884-8bde963c5d1b","Name":"OCEANVIEW TER APTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"2a2e7521-162f-e811-8126-1458d04eb810","Name":"BRADLEY BEACH BORO"
+      },"ultra_propertyportalsearchfield":"OCEANVIEW TER APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"87798de5-0d28-45ff-82df-17cb9da46092","Name":"OCEANVIEW TERRACE APARTMENTS INC"
+      },"ultra_zipcode":"07720","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"569e64d4-e84b-4c8d-a1e5-83d2eb687444","ultra_name":"RUS MAR MOTAL","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0514003167001","ultra_addressline1":"5010 OCEAN AVE","ultra_block":"33","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"444e1d04-423a-420c-b895-75e987322e2b","Name":"RUS MAR MOTEL"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"062d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"RUS MAR MOTEL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"59776268-a283-ec11-8d20-001dd801ef62","Name":"5010 OCEAN AVENUE LLC"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"58ef4393-d72f-e811-8122-1458d04ece60","ultra_name":"Sands Motel","ultra_registrationnumber":"0514-00104-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"4610 OCEAN AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"a27ad6c6-9f2f-e811-8120-1458d04e2fb8","Name":"6 Tenags"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"062d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"6 Tenags","ultra_countyportalsearchfield":"CAPE MAY","ultra_municipalityportalsearchfield":"WILDWOOD CITY","ultra_elsamaintenancecompany":{
+        "Id":"1af2296e-8536-e811-81fa-1458d04e1b18","Name":"Atlas"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cd3a4b0c-fe69-ef11-a671-001dd805e055","Name":"DAYS INN - OWNER"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fc72a13e-6d6b-43e8-8531-fabf9e3187d6","ultra_name":"SEAKIST MOTEL","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0514005547001","ultra_addressline1":"5210 OCEAN AVE","ultra_block":"16","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"592a5049-eb93-474d-b65e-ecf7904ee598","Name":"5210 OCEAN AVE"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"062d7521-162f-e811-8126-1458d04eb810","Name":"WILDWOOD CITY"
+      },"ultra_propertyportalsearchfield":"5210 OCEAN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"810512ec-33dd-4717-a411-91e7fd7c483e","Name":"SEA KIST ON THE BEACH LLC"
+      },"ultra_zipcode":"08260","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"aeacfeda-d72f-e811-8122-1458d04ece60","ultra_name":"SUMMER WINDS CONDO","ultra_registrationnumber":"1307-00107-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"210 OCEAN PARK AV","ultra_block":"24","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"d4c33e2d-9a2f-e811-8122-1458d04ece60","Name":"SUMMER WINDS CONDO"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"2a2e7521-162f-e811-8126-1458d04eb810","Name":"BRADLEY BEACH BORO"
+      },"ultra_propertyportalsearchfield":"SUMMER WINDS CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"3b5f3fec-0c34-eb11-a813-001dd8016c9d","Name":"Jersey Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"80521855-4a0c-ed11-82e3-001dd8041f0f","Name":"SUMMER WINDS CONDO"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"65e541e4-5089-478d-8570-206895823482","ultra_name":"The Old Post Office Bldg","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0502020197001","ultra_addressline1":"210 Ocean ST","ultra_block":"1049","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f1cf02a3-77ad-45f4-baeb-493aaa2d178b","Name":"THE OLD POST OFFICE BLDG"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"ee2c7521-162f-e811-8126-1458d04eb810","Name":"CAPE MAY CITY"
+      },"ultra_propertyportalsearchfield":"THE OLD POST OFFICE BLDG","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b83ece2f-86f0-44c2-accf-e324148165da","Name":"Naples Family LP"
+      },"ultra_zipcode":"08204","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"40b151c8-3d47-e911-a966-001dd800ba25","ultra_name":"THE WAVE","ultra_registrationnumber":"1325-00160-006","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"110 Ocean Ave","ultra_block":"222.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"33c73e2d-9a2f-e811-8122-1458d04ece60","Name":"PIER VILLAGE BLDG 3"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":"PIER VILLAGE BLDG 3","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"LONG BRANCH CITY","ultra_elsamaintenancecompany":{
+        "Id":"1af2296e-8536-e811-81fa-1458d04e1b18","Name":"Atlas"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"530d1aa1-4f10-ea11-a991-001dd800a749","Name":"PIER VILLAGE II URBAN RENEWAL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"90173edf-08fd-406b-b16c-27b8f9945292","ultra_name":"WAVE RESORT BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1325040733001","ultra_addressline1":"110 OCEAN AVE","ultra_block":"222.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"3b142dde-c996-4008-b7e0-1b09528f1f40","Name":"WAVE RESORT"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":"WAVE RESORT","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6122d54d-0f1a-f011-998a-001dd80a623a","Name":"PIER VILLAGE III HOTEL URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07740","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

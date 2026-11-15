@@ -3,18 +3,18 @@
 Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evidence/*.csv. No network requests. Every passing unit was checked and has one row.
 
 - Units checked: **1524** (one row each; `offer_type = none` for units with no such language).
-- Units with any concession, special-offer or price-basis language: **516**.
-- Units whose price or offer is for a lease term other than 12 months: **324**.
+- Units with any concession, special-offer or price-basis language: **518**.
+- Units whose price or offer is for a lease term other than 12 months: **326**.
 - Units that need a call (`needs_call = yes`): **490** in 89 buildings.
 
 ## Counts by offer_type
 
 | offer_type | units |
 |---|---|
-| none | 1008 |
+| none | 1006 |
 | months_free | 438 |
 | other | 51 |
-| reduced_deposit_or_fee | 18 |
+| reduced_deposit_or_fee | 20 |
 | dollar_credit | 6 |
 | look_and_lease | 3 |
 
@@ -23,16 +23,16 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | listed_price_is | units |
 |---|---|
 | gross | 1045 |
-| unknown | 395 |
-| net_effective | 84 |
+| unknown | 393 |
+| net_effective | 86 |
 
 ## Confidence
 
 | confidence | units |
 |---|---|
 | stated_on_page | 1038 |
-| assumed_terms | 481 |
-| computed_from_stated_terms | 5 |
+| assumed_terms | 479 |
+| computed_from_stated_terms | 7 |
 
 ## Free-period timing
 
@@ -47,7 +47,7 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 ## Gross rent above the listed price (stated or computed from stated terms)
 
-**7** units have a determined gross rent above the listed price.
+**9** units have a determined gross rent above the listed price.
 
 | unit | listed | gross | gap | free months / lease | confidence |
 |---|---|---|---|---|---|
@@ -55,13 +55,15 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Alvista Rise #1922 | 2435 | 2825 | 390 | 2.5 / 18 | stated_on_page |
 | Harmony West | 2562 | 2776 | 214 | 1 / 13 | computed_from_stated_terms |
 | Harmony West | 2492 | 2700 | 208 | 1 / 13 | computed_from_stated_terms |
+| Arc House | 2500 | 2708 | 208 | 1 / 13 | computed_from_stated_terms |
 | Harmony West | 2423 | 2625 | 202 | 1 / 13 | computed_from_stated_terms |
 | Harmony West | 2377 | 2575 | 198 | 1 / 13 | computed_from_stated_terms |
+| Arc House | 2300 | 2492 | 192 | 1 / 13 | computed_from_stated_terms |
 | Harmony West | 2077 | 2250 | 173 | 1 / 13 | computed_from_stated_terms |
 
 ## Largest possible gaps where the basis is unknown (scenario: listed price is net-effective)
 
-429 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
+427 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
 
 | unit | listed | gross if listed is net | gap | free months / lease | basis |
 |---|---|---|---|---|---|
@@ -94,7 +96,7 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 ## Gross rent over $3,000 (rent only, all-in aside)
 
 - Determined gross over $3,000: **0** units.
-- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **188** units in 23 buildings.
+- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **186** units in 22 buildings.
 
 | building | units | listed range | scenario gross (max) | free months / lease |
 |---|---|---|---|---|
@@ -108,7 +110,6 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Riello Edgewater | 1 | 2800-2800 | 3360 | 2 / 12 assumed |
 | Skyline New Rochelle | 7 | 2640-2795 | 3354 | 2 / 12 assumed |
 | The Atwater | 13 | 2538-2785 | 3342 | 2 / 12 |
-| Arc House | 2 | 2300-2500 | 3333 | 3 / 12 assumed |
 | West Side Square | 1 | 2636-2636 | 3330 | 2.5 / 12 assumed |
 | Hudson 44 | 3 | 2595-2750 | 3300 | 2 / 12 assumed |
 | Bedford Hall Apartments | 5 | 2635-2735 | 3282 | 2 / 12 assumed |

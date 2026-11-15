@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"b730f11f-02ef-ef11-be21-001dd80d756b","ultra_name":"80 FREEMAN ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714077178001","ultra_addressline1":"80 FREEMAN ST","ultra_block":"2474","ultra_lot":"1.02","ultra_propertyinterest":{
+        "Id":"4de78e21-65d3-ef11-8eea-001dd80afdfc","Name":"80 FREEMAN ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"80 FREEMAN ST","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"72-94 Freeman St","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d2cb7e1b-65d3-ef11-8eea-001dd80afdfc","Name":"BALLANTINE F PROPERTY OWNER URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07105","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d2d3a667-f487-ef11-ac20-001dd802dc9c","ultra_name":"THE BALLANTINE","ultra_registrationnumber":"0714-01258-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"80 FREEMAN STREET","ultra_block":"2474","ultra_lot":"1.02","ultra_propertyinterest":{
+        "Id":"0e739e5b-f487-ef11-ac20-001dd802dc9c","Name":"THE BALLANTINE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"THE BALLANTINE","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"35739e5b-f487-ef11-ac20-001dd802dc9c","Name":"BALLANTINE F PROPERTY OWNER URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

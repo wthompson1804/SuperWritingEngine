@@ -1,0 +1,763 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"53","value":[
+    {
+      "ultra_buildingid":"ddcba599-4b48-ef11-a316-001dd802d49b","ultra_name":"100 EISENHOWER PARKWAY","ultra_registrationnumber":"0710-00214-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 EISENHOWER PARKWAY","ultra_block":"6101","ultra_lot":"45","ultra_propertyinterest":{
+        "Id":"b3cba599-4b48-ef11-a316-001dd802d49b","Name":"100 EISENHOWER PARKWAY"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"3a2d7521-162f-e811-8126-1458d04eb810","Name":"LIVINGSTON TWP"
+      },"ultra_propertyportalsearchfield":"100 EISENHOWER PARKWAY","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"LIVINGSTON TWP","ultra_elsamaintenancecompany":{
+        "Id":"9f509519-c1ad-eb11-b1ac-001dd801df8b","Name":"Schindler"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b7cba599-4b48-ef11-a316-001dd802d49b","Name":"LIVINGSTON CORPORATE PARK ASSOCIATES LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"58d45575-d72f-e811-8122-1458d04ece60","ultra_name":"100 PARK AV","ultra_registrationnumber":"0247-00117-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 PARK AV","ultra_block":"1901","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"3f81e59f-9f2f-e811-8120-1458d04e2fb8","Name":"100 PARK AV"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"222c7521-162f-e811-8126-1458d04eb810","Name":"PARK RIDGE BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"700e88e7-61f9-e811-8132-1458d0509d88","Name":"VERTICAL PLATFORM LIFT"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"96f60d8a-a33e-e811-8121-1458d04e2fb8","Name":"WELLS FARGO"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"70565d6f-d72f-e811-8122-1458d04ece60","ultra_name":"100 PARK AVE","ultra_registrationnumber":"0227-00112-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 PARK AVE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"a17be59f-9f2f-e811-8120-1458d04e2fb8","Name":"100 PARK AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"fa2b7521-162f-e811-8126-1458d04eb810","Name":"HILLSDALE BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"783f296f-09ef-eb11-bacb-001dd801a3d1","Name":"Jersey Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ccc0e2ae-b42f-e811-8122-1458d04ece60","Name":"100 PARK AVE ASSC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7d6e2a81-adad-419a-ba94-7f659bc0dba3","ultra_name":"100 PARK AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0705025115001","ultra_addressline1":"100 PARK AVE","ultra_block":"70","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"b5f08425-f750-46d9-b00e-b3abe637140b","Name":"100 PARK AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"100 PARK AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7cd2b014-91b0-47c7-b1b3-e71cb29bf02b","Name":"REGISTERED NEVER"
+      },"ultra_zipcode":"07019","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6574ce06-1c78-4ee8-9709-444fbe1a7ac3","ultra_name":"100 PARK ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0717027273001","ultra_addressline1":"100 PARK ST","ultra_block":"1803","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"18fc2dea-7ae1-4308-b04f-d70ad5169658","Name":"100 PARK ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"482d7521-162f-e811-8126-1458d04eb810","Name":"ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"100 PARK ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"43decbc0-2143-4a98-b3c1-8d618865fbbd","Name":"100 Park Street Orange LLC"
+      },"ultra_zipcode":"07050","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3add4b2f-43ed-457e-aed1-aecd2e4d02c3","ultra_name":"100 PARK ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0713014220001","ultra_addressline1":"100 PARK ST","ultra_block":"2306","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"f1763a8e-df82-4745-ac0a-a451613d34fd","Name":"100 PARK ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"402d7521-162f-e811-8126-1458d04eb810","Name":"MONTCLAIR TOWN"
+      },"ultra_propertyportalsearchfield":"100 PARK ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"034153a4-fd03-42b5-a262-09c56339d8d1","Name":"100 Park St LLC"
+      },"ultra_zipcode":"07042","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9105a456-fc80-4995-bc79-bfbd0dbd5da6","ultra_name":"1100 BLACK HORSE PK BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0415033771001","ultra_addressline1":"1100 BLACK HORSE PARK","ultra_block":"1106","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"63fe01bc-14af-4f0f-a706-f056610359e9","Name":"1100 BLACK HORSE PK"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"be2c7521-162f-e811-8126-1458d04eb810","Name":"GLOUCESTER TWP"
+      },"ultra_propertyportalsearchfield":"1100 BLACK HORSE PK","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2bb022ae-ef6b-4895-a9e7-49db43f943ab","Name":"KAPPA IV LLC"
+      },"ultra_zipcode":"08029","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c4328df1-3786-413c-b587-5ddf2bd7feec","ultra_name":"2000 Crescent Way BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409032737002","ultra_addressline1":"100 Garden Park BLVD","ultra_block":"54.01","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"1adee38c-0f9f-4801-95c7-e459923c952d","Name":"2000 CRESCENT WAY"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"2000 CRESCENT WAY","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7144b2e5-10b4-4630-a214-8c4b00ca3472","Name":"Associa MID-Atlantic-Condo Mgmt."
+      },"ultra_zipcode":"08002","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1730024c-bb1a-4163-96e2-0d9764ffebd7","ultra_name":"42 51ST ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0912015633001","ultra_addressline1":"5100 PARK AVE","ultra_block":"86","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"cde3850d-7943-4154-8d16-654ec5b43b46","Name":"42 51ST ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":"42 51ST ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e8fd8eb2-2229-47de-8ab7-83815753fd2a","Name":"MILO ASSOC LLC"
+      },"ultra_zipcode":"07093","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"93ebb324-29eb-4636-85e8-8c2ebc0ba264","ultra_name":"7100 PARK AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0903020974001","ultra_addressline1":"7100 PARK AVE","ultra_block":"37","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d2ac9505-7aad-4f66-b842-b0cc679922a0","Name":"7100 PARK AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"882d7521-162f-e811-8126-1458d04eb810","Name":"GUTTENBERG TOWN"
+      },"ultra_propertyportalsearchfield":"7100 PARK AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a9300fb1-4486-4ef4-9e9e-288f95701d91","Name":"PARK ONE PROPERTIES LLC"
+      },"ultra_zipcode":"07093","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"11381abd-d72f-e811-8122-1458d04ece60","ultra_name":"ARCADIAN GARDENS","ultra_registrationnumber":"1205-00188-003","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 MENLO PARK","ultra_block":"690","ultra_lot":"350","ultra_propertyinterest":{
+        "Id":"4bb83e2d-9a2f-e811-8122-1458d04ece60","Name":"MENLO PARK MALL"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"f42d7521-162f-e811-8126-1458d04eb810","Name":"EDISON TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4a94afd8-b42f-e811-8122-1458d04ece60","Name":"CHARLES MALL COMPANY LP"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"01bbfeda-d72f-e811-8122-1458d04ece60","ultra_name":"BASF NA HEADQUARTERS","ultra_registrationnumber":"1411-00162-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 PARK AVE","ultra_block":"1401","ultra_lot":"1.04","ultra_propertyinterest":{
+        "Id":"1b269443-9a2f-e811-8122-1458d04ece60","Name":"BASF NA HEADQUARTERS"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"9c2e7521-162f-e811-8126-1458d04eb810","Name":"FLORHAM PARK BORO"
+      },"ultra_propertyportalsearchfield":"BASF NA HEADQUARTERS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"9f509519-c1ad-eb11-b1ac-001dd801df8b","Name":"Schindler"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"dcaaafd8-b42f-e811-8122-1458d04ece60","Name":"BASF CORPORATION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c706b75c-c063-ee11-be6e-001dd8087ab7","ultra_name":"BLDG 65","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1205040581065","ultra_addressline1":"98-100 PARKGATE DR","ultra_block":"593","ultra_lot":"50","ultra_propertyinterest":{
+        "Id":"f10de1b1-763c-4a65-9728-dad6cd54aeec","Name":"PARK GATE CONDO ASSOCIATION"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"f42d7521-162f-e811-8126-1458d04eb810","Name":"EDISON TWP"
+      },"ultra_propertyportalsearchfield":"PARK GATE CONDO ASSOCIATION","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"EDISON TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7a3a920c-5489-ee11-8179-001dd8065b31","Name":"PARKGATE CONDO ASSOC"
+      },"ultra_zipcode":"08820","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e4341abd-d72f-e811-8122-1458d04ece60","ultra_name":"BRISTOL MYERS SQUIBB","ultra_registrationnumber":"1113-00110-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 NASSAU PARK BD","ultra_block":"7.04","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"e5b53e2d-9a2f-e811-8122-1458d04ece60","Name":"BRISTOL MYERS SQUIBB"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e82d7521-162f-e811-8126-1458d04eb810","Name":"WEST WINDSOR TWP"
+      },"ultra_propertyportalsearchfield":"BRISTOL MYERS SQUIBB","ultra_countyportalsearchfield":"MERCER","ultra_municipalityportalsearchfield":"WEST WINDSOR TWP","ultra_elsamaintenancecompany":{
+        "Id":"783f296f-09ef-eb11-bacb-001dd801a3d1","Name":"Jersey Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fe91afd8-b42f-e811-8122-1458d04ece60","Name":"BRISTOL-MYERS SQUIBB COMPANY ATTN: FACILITIES DEPT"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"363c7f0f-ac74-46c8-a4e9-78b8578a3bb8","ultra_name":"EAST PARK REST HOME","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 PARK AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"8d1c0351-521d-424d-8a26-7fa40a1df1ba","Name":"EAST PARK REST HOME"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"070170000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"49af21b7-d72f-e811-8122-1458d04ece60","ultra_name":"FERGUSON","ultra_registrationnumber":"0909-00224-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"50-100 MEADOWLANDS PARKWAY","ultra_block":"52","ultra_lot":"4.01","ultra_propertyinterest":{
+        "Id":"6daa3e2d-9a2f-e811-8122-1458d04ece60","Name":"FERGUSON"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"942d7521-162f-e811-8126-1458d04eb810","Name":"SECAUCUS TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b4463dc7-b42f-e811-8122-1458d04ece60","Name":"50 MEADOWLANDS PARKWAY LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ff4a3c99-d72f-e811-8122-1458d04ece60","ultra_name":"FULTON BANK","ultra_registrationnumber":"0802-00136-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 PARK AV","ultra_block":"67","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"6890d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"FULTON BANK"
+      },"ultra_county":{
+        "Id":"00f4aaf2-63e4-e711-8125-1458d054d020","Name":"GLOUCESTER"
+      },"ultra_municipality":{
+        "Id":"562d7521-162f-e811-8126-1458d04eb810","Name":"DEPTFORD TWP"
+      },"ultra_propertyportalsearchfield":"FULTON BANK","ultra_countyportalsearchfield":"GLOUCESTER","ultra_municipalityportalsearchfield":"DEPTFORD TWP","ultra_elsamaintenancecompany":{
+        "Id":"02adf32e-d45a-e811-812e-1458d04ef938","Name":"Otis Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f6363dc7-b42f-e811-8122-1458d04ece60","Name":"FULTON BANK FAC.MGR"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d161c78c-4323-ef11-840a-001dd80b3423","ultra_name":"HIGHGATE AT LIVINGSTON","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0710036926001","ultra_addressline1":"100 EISENHOWER PARKWAY","ultra_block":"6101","ultra_lot":"45","ultra_propertyinterest":{
+        "Id":"b7def685-4323-ef11-840a-001dd8030266","Name":"HIGHGATE AT LIVINGSTON"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"3a2d7521-162f-e811-8126-1458d04eb810","Name":"LIVINGSTON TWP"
+      },"ultra_propertyportalsearchfield":"HIGHGATE AT LIVINGSTON","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"LIVINGSTON TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4a97fe7f-4323-ef11-840a-001dd8030266","Name":"LIVINGSTON CORPORATE PARK ASSOCIATES LLC"
+      },"ultra_zipcode":"07039","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ce9fb350-184c-ee11-be6d-001dd80bf47e","ultra_name":"LAKEWOOD CHEDER SCHOOL","ultra_registrationnumber":"1514-00361-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 S PARK AV","ultra_block":"248.01","ultra_lot":"69","ultra_propertyinterest":{
+        "Id":"949fb350-184c-ee11-be6d-001dd80bf47e","Name":"LAKEWOOD CHEDER SCHOOL"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":"LAKEWOOD CHEDER SCHOOL","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"LAKEWOOD TWP","ultra_elsamaintenancecompany":{
+        "Id":"9f509519-c1ad-eb11-b1ac-001dd801df8b","Name":"Schindler"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"989fb350-184c-ee11-be6d-001dd80bf47e","Name":"LAKEWOOD CHEDER SCHOOL INC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"335b5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"MACY'S-PARAMUS STORE","ultra_registrationnumber":"0246-00109-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 PARAMUS PARK CTR","ultra_block":"6207","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"917fe59f-9f2f-e811-8120-1458d04e2fb8","Name":"Macy's-PARAMUS STORE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"202c7521-162f-e811-8126-1458d04eb810","Name":"PARAMUS BORO"
+      },"ultra_propertyportalsearchfield":"Macy's-PARAMUS STORE","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"PARAMUS BORO","ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a6c4e2ae-b42f-e811-8122-1458d04ece60","Name":"MACYS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0d381abd-d72f-e811-8122-1458d04ece60","ultra_name":"MENLO PARK MALL","ultra_registrationnumber":"1205-00188-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 MENLO PARK","ultra_block":"690","ultra_lot":"35","ultra_propertyinterest":{
+        "Id":"4bb83e2d-9a2f-e811-8122-1458d04ece60","Name":"MENLO PARK MALL"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"f42d7521-162f-e811-8126-1458d04eb810","Name":"EDISON TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4a94afd8-b42f-e811-8122-1458d04ece60","Name":"CHARLES MALL COMPANY LP"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0f381abd-d72f-e811-8122-1458d04ece60","ultra_name":"MENLO PARK MALL OFFICE BLDG","ultra_registrationnumber":"1205-00188-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 MENLO PARK","ultra_block":"690","ultra_lot":"35","ultra_propertyinterest":{
+        "Id":"4bb83e2d-9a2f-e811-8122-1458d04ece60","Name":"MENLO PARK MALL"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"f42d7521-162f-e811-8126-1458d04eb810","Name":"EDISON TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4a94afd8-b42f-e811-8122-1458d04ece60","Name":"CHARLES MALL COMPANY LP"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"967760e3-91d8-4415-bd83-536c3bb47c05","ultra_name":"ORCHARD PARK CONDO ASSOC BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0201042686001","ultra_addressline1":"100 ORCHARD PARK","ultra_block":"1710","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"9370b885-8e1b-45f1-8bb6-5ffbd24830b1","Name":"ORCHARD COMMONS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"c62b7521-162f-e811-8126-1458d04eb810","Name":"ALLENDALE BORO"
+      },"ultra_propertyportalsearchfield":"ORCHARD COMMONS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"42672c26-e388-4c05-928e-952ef3641f3d","Name":"ORCHARD PARK CONDO"
+      },"ultra_zipcode":"07401","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9cae21b7-d72f-e811-8122-1458d04ece60","ultra_name":"ORICA","ultra_registrationnumber":"0909-00138-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 PARK PLZ DR","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"cba93e2d-9a2f-e811-8122-1458d04ece60","Name":"ORICA"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"942d7521-162f-e811-8126-1458d04eb810","Name":"SECAUCUS TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2c463dc7-b42f-e811-8122-1458d04ece60","Name":"ORICA"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b6ae21b7-d72f-e811-8122-1458d04ece60","ultra_name":"ORICA/SOUTH","ultra_registrationnumber":"0909-00153-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 PARK PLZ DR","ultra_block":"142","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"e5a93e2d-9a2f-e811-8122-1458d04ece60","Name":"ORICA/SOUTH"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"942d7521-162f-e811-8126-1458d04eb810","Name":"SECAUCUS TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"42463dc7-b42f-e811-8122-1458d04ece60","Name":"ACIRO REALTY ATTN: LOIS MANZO"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"46dc95c9-2b96-4e74-a59c-8c3d4b5c1e0d","ultra_name":"PLUCKEMIN PARK BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1801021280001","ultra_addressline1":"100 PLUCKEMIN PARK CT. ","ultra_block":"58","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"756d39b0-8066-40d2-b637-fbb9a5379de3","Name":"PLUCKEMIN PARK"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"562f7521-162f-e811-8126-1458d04eb810","Name":"BEDMINSTER TWP"
+      },"ultra_propertyportalsearchfield":"PLUCKEMIN PARK","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"859893a5-5ed4-4475-be8e-c7d85e89bfc6","Name":"PLUCKEMIN PARK HOLDINGS LLC"
+      },"ultra_zipcode":"07921","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"03b065c0-d26f-410c-8650-6e4bfd54f05b","ultra_name":"RIVER PARK AT RARITAN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1816030107001","ultra_addressline1":"100 RIVER PARK DR","ultra_block":"116","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"fdc00a95-3242-4c0e-b471-84ccea38300b","Name":"RIVER PARK AT RARITAN"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"742f7521-162f-e811-8126-1458d04eb810","Name":"RARITAN BORO"
+      },"ultra_propertyportalsearchfield":"RIVER PARK AT RARITAN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cf6aa06d-92f0-f011-8407-001dd80a67ab","Name":"CL LENA OWNER LP"
+      },"ultra_zipcode":"08869","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"118adafe-d72f-e811-8122-1458d04ece60","ultra_name":"RIVERPARK @ RARITAN","ultra_registrationnumber":"1816-00118-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 RIVERPARK DR","ultra_block":"116/116.0","ultra_lot":"12/12.01","ultra_propertyinterest":{
+        "Id":"9b429443-9a2f-e811-8122-1458d04ece60","Name":"RIVERPARK @ RARITAN"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"742f7521-162f-e811-8126-1458d04eb810","Name":"RARITAN BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"178697e8-b42f-e811-8122-1458d04ece60","Name":"RARITAN TOWN CENTER LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"53af21b7-d72f-e811-8122-1458d04ece60","ultra_name":"THE HARPER","ultra_registrationnumber":"0909-00230-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 PARK PLAZA DR","ultra_block":"227","ultra_lot":"4.03","ultra_propertyinterest":{
+        "Id":"77aa3e2d-9a2f-e811-8122-1458d04ece60","Name":"THE HARPER"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"942d7521-162f-e811-8126-1458d04eb810","Name":"SECAUCUS TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b8463dc7-b42f-e811-8122-1458d04ece60","Name":"100 PARK PLAZA URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e9356f61-0e74-4013-b219-16c73905fbe6","ultra_name":"THE HARPER BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0909036684001","ultra_addressline1":"100 PARK PLAZA DR","ultra_block":"227","ultra_lot":"4.07","ultra_propertyinterest":{
+        "Id":"fbd056ef-5aa7-480c-afba-6c9187d1d23b","Name":"THE HARPER AT HARMON MEADOW"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"942d7521-162f-e811-8126-1458d04eb810","Name":"SECAUCUS TOWN"
+      },"ultra_propertyportalsearchfield":"THE HARPER AT HARMON MEADOW","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d316d36d-60e5-4e5f-b1cb-f9a47d4a3e92","Name":"100 PARK PLAZA URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07096","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bdf777af-ca3a-47b4-af92-4ddb55e2a455","ultra_name":"THE HILLS BY LENAR CONDO BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1435030077001","ultra_addressline1":"100 PARKVIEW LN","ultra_block":"22401.0","ultra_lot":"1-5","ultra_propertyinterest":{
+        "Id":"94ecdd0a-7333-4262-8a48-dfc4cb08b002","Name":"THE HILLS BY LENAR CONDO"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"cc2e7521-162f-e811-8126-1458d04eb810","Name":"ROCKAWAY TWP"
+      },"ultra_propertyportalsearchfield":"THE HILLS BY LENAR CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1974e829-7d86-41c1-99a8-b821cb59a7e2","Name":"THE HILLS BY LENAR CONDO ASSN C/O INTEGRA MANAGEMENT"
+      },"ultra_zipcode":"07866","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ed5dd3f0-0b2d-4585-ac5c-ae9957537cc7","ultra_name":"THE HILLS BY LENAR CONDO BLDG 11","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1435030077011","ultra_addressline1":"1100 PARKVIEW LN","ultra_block":"22401.11","ultra_lot":"1-6","ultra_propertyinterest":{
+        "Id":"94ecdd0a-7333-4262-8a48-dfc4cb08b002","Name":"THE HILLS BY LENAR CONDO"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"cc2e7521-162f-e811-8126-1458d04eb810","Name":"ROCKAWAY TWP"
+      },"ultra_propertyportalsearchfield":"THE HILLS BY LENAR CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1974e829-7d86-41c1-99a8-b821cb59a7e2","Name":"THE HILLS BY LENAR CONDO ASSN C/O INTEGRA MANAGEMENT"
+      },"ultra_zipcode":"07866","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3d525d6f-d72f-e811-8122-1458d04ece60","ultra_name":"THE MODERN","ultra_registrationnumber":"0219-00263-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 PARK AV","ultra_block":"4851.04","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"2978e59f-9f2f-e811-8120-1458d04e2fb8","Name":"THE MODERN"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8ebde2ae-b42f-e811-8122-1458d04ece60","Name":"FORT LEE PHASE II URBAN RENEWAL ASSOCIATES LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1d6d370e-6481-4782-b624-38bf000bdf0c","ultra_name":"THE MODERN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0219042425001","ultra_addressline1":"100 PARK AVE","ultra_block":"4851.04","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"c7b1828a-7987-4163-beeb-9e8395e44356","Name":"THE MODERN"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":"THE MODERN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"50195470-db9a-4f29-9eae-917be9cdd38e","Name":"FORT LEE PHASE II URBAN RENEWAL ASSOC. LLC"
+      },"ultra_zipcode":"07024","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4f698f80-a7d5-4647-8413-f069f96f7e30","ultra_name":"THE WATERFORD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402001","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 APRK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cd748459-2151-433a-a900-636420735566","ultra_name":"THE WATERFORD BLDG 10","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402010","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"60985af6-b775-4fa1-bc52-49b63423ef24","ultra_name":"THE WATERFORD BLDG 11","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402011","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8bd83c5d-ad93-434f-9ac2-dbdbf7f54f92","ultra_name":"THE WATERFORD BLDG 12","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402012","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fd22051d-a76b-4517-b0d6-369e0c3efe73","ultra_name":"THE WATERFORD BLDG 13","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402013","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"42eee0c4-0929-47e9-9e65-ee267734e7ae","ultra_name":"THE WATERFORD BLDG 14","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402014","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2149b75d-2aa1-48e5-83e0-c66aa572c19b","ultra_name":"THE WATERFORD BLDG 15","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402015","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c14e5835-a51f-4240-a734-43f05ef744b3","ultra_name":"THE WATERFORD BLDG 16","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402016","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"601029d7-a823-44dd-bf3b-bd5c4a96d3b5","ultra_name":"THE WATERFORD BLDG 17","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402017","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d4981fe3-5466-426f-8d64-27e3c3ec6595","ultra_name":"THE WATERFORD BLDG 18","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402018","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c51d25ae-aae4-4018-9405-fb5399a0442f","ultra_name":"THE WATERFORD BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402002","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a4530b3d-f053-4b0a-850f-8543d2357b8b","ultra_name":"THE WATERFORD BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402003","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d2a7c64e-1a10-4747-90a5-c4a50f21a5d5","ultra_name":"THE WATERFORD BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402004","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"084b1eb8-a355-43e6-b062-6b86862ca941","ultra_name":"THE WATERFORD BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402005","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"859b9e4f-89f4-4a39-8d12-d08b9afcd605","ultra_name":"THE WATERFORD BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402006","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7b25d6b4-4991-4e62-98b8-79d52a38c2bc","ultra_name":"THE WATERFORD BLDG 7","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402007","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f3b0eeee-ba4a-431e-bdf3-99b5e93211b1","ultra_name":"THE WATERFORD BLDG 8","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402008","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4a7deed3-993a-439b-9471-14c0bc5ff397","ultra_name":"THE WATERFORD BLDG 9","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402009","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"100 PARK BLVD 60B","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"72eb60cf-e8d0-4ec6-acff-b4e31e16b302","ultra_name":"WATERFORD APTS BLDG 19","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0409000402019","ultra_addressline1":"100 PARK BLVD","ultra_block":"402.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d8e1df66-3226-47e6-8ebb-d7bd666c26fe","Name":"THE WATERFORD"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b22c7521-162f-e811-8126-1458d04eb810","Name":"CHERRY HILL TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERFORD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e30f440b-2929-42f9-9c67-736e7eb45e7b","Name":"WATERFORD OWNERS CORP"
+      },"ultra_zipcode":"08034","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"8cd84eb5-5c49-f111-88b4-001dd80bcf22","ultra_name":"AVIVA","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043609001","ultra_addressline1":"189 PHILLIP ST","ultra_block":"21504","ultra_lot":"4.04","ultra_propertyinterest":{
+        "Id":"5b188c95-5c49-f111-88b3-001dd80be1b8","Name":"AVIVA"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"AVIVA","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4cb2938f-5c49-f111-88b3-001dd80be1b8","Name":"SCITECH SCITY LLC"
+      },"ultra_zipcode":"07305","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"668e4683-e455-f111-bec5-001dd80be1b8","ultra_name":"AVIVA","ultra_registrationnumber":"0906-01330-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"189 PHILLIP STREET","ultra_block":"21504","ultra_lot":"4.04","ultra_propertyinterest":{
+        "Id":"24af4777-e455-f111-bec5-001dd80be1b8","Name":"AVIVA"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"AVIVA","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":{
+        "Id":"ae4c149c-920f-e911-812f-1458d04e2f20","Name":"Kone Local 1"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8461497d-e455-f111-bec5-001dd80be1b8","Name":"SCITECH SCITY LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

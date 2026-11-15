@@ -1,0 +1,49 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"3","value":[
+    {
+      "ultra_buildingid":"fa32bea4-8eca-461e-abfa-29aa7698ddd3","ultra_name":"1775 WINDSOR RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0260035568001","ultra_addressline1":"1775 WINDSOR RD","ultra_block":"5201","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"44a86719-787c-41fb-8da4-3bc4d6935bd3","Name":"1775 WINDSOR RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"3c2c7521-162f-e811-8126-1458d04eb810","Name":"TEANECK TWP"
+      },"ultra_propertyportalsearchfield":"1775 WINDSOR RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7008400f-7ebd-ef11-b8e9-001dd8086003","Name":"AVALONBAY COMMUNITIES"
+      },"ultra_zipcode":"07666","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b4342526-3d5d-e911-a970-001dd800a749","ultra_name":"AVALON TEANECK","ultra_registrationnumber":"0260-00195-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1775 WINDSOR ROAD","ultra_block":"2","ultra_lot":"5201","ultra_propertyinterest":{
+        "Id":"a1342526-3d5d-e911-a970-001dd800a749","Name":"AVALON TEANECK"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"3c2c7521-162f-e811-8126-1458d04eb810","Name":"TEANECK TWP"
+      },"ultra_propertyportalsearchfield":"AVALON TEANECK","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"TEANECK TWP","ultra_elsamaintenancecompany":{
+        "Id":"4ee4ec6e-3f37-e811-81fa-1458d04e1b18","Name":"KONE"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a9342526-3d5d-e911-a970-001dd800a749","Name":"AVALON TEANECK LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"acd85575-d72f-e811-8122-1458d04ece60","ultra_name":"GIVANDAN-ROURE","ultra_registrationnumber":"0260-00153-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1775 WINDSOR RD","ultra_block":"5201","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"df84e59f-9f2f-e811-8120-1458d04e2fb8","Name":"GIVANDAN-ROURE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"3c2c7521-162f-e811-8126-1458d04eb810","Name":"TEANECK TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bac9e2ae-b42f-e811-8122-1458d04ece60","Name":"GIVANDAN-ROURE"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

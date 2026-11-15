@@ -2,26 +2,30 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-15, evening)
+## Current state (2026-11-15, late)
 
-**Authority: `docs/PLAN_V3_APPROVED_2026-11-15.md`** (gates, avoid rules, steps, checkpoints). It supersedes the
-handoff brief's phases, tiers, $2,800 cap, "no ranking" rule and the 98-area scope. UI spec: mock-up 4
-(artifact 45EsZ66YhUkf5fTWz3ZjU2; layout only, none of its text or data carries over) and `docs/UX_BRIEF_2026-11-15.md`.
+**Authorities, newest first:** `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` (one connected data model) → `docs/RANKING.md` (v2) →
+`docs/SAFETY_BASIS.md` (Jamaica rule) → `docs/PLAN_V3_APPROVED_2026-11-15.md` (gates; dog limit now 25 lb) → UX brief and mock-up 4.
+`docs/DATA_USE_AUDIT_2026-11-15.md` explains why the master model exists.
 
-| Step | Status |
+**Run everything:** `python3 scripts/run_all.py` (or `--fast` after evidence-only changes). It writes `docs/RUN_REPORT.md`
+(stage counts, reasons, fill rates, change since last run) and ends with `scripts/check_registry.py`, which fails if a
+collected field is unaccounted for or an analysis script reads a side file instead of the master tables.
+
+| Piece | Status |
 |---|---|
-| 1 Lookup tools (drive+tolls, transit, crime, places, utilities) | 5 agents running; outputs in `scripts/tools/`, notes in `docs/tools_notes/` |
-| 2 Broad-net harvest | Search grid done (`data/reference/search_grid.csv`, 1,048 ZIPs). 5 harvest agents running (Trulia, Zumper, Craigslist, Apartment List, management sites) → `data/listings_raw/` |
-| 2b Normalize, geocode, dedupe, gates (`scripts/gates.py`) | Not started |
-| 3 Neighborhoods and years → **checkpoint A with Will** | Not started |
-| 4 Depth on chosen places | Not started |
-| 5 Avoid list → **checkpoint B** | Not started |
-| 6 Synthesis (evidence table, rules, text) | Not started |
-| 7 Build page, publish as a NEW private artifact → **checkpoint C** | Not started |
-| 8 Final price and link re-check (Nov 21) | Not started |
-
-If agents were interrupted: re-launch with `docs/HARVEST_AGENT_BRIEF.md` / `docs/TOOLS_AGENT_BRIEF.md`; scripts resume from `raw/` caches.
-Old Phase 1 leftovers (`scripts/p1_*.py`, `data/metrics/`) are partial; only `acs.csv` is complete.
+| Master tables (`data/master_buildings.csv`, `data/master_units.csv`, conflicts, crosswalk) | Built; every merged fact has basis + source |
+| Rent terms (`data/rent_terms.csv`): net-effective basis, gross rent, first full payment date, needs-call flag | Built for all passing units |
+| All-in cost on the master (`scripts/all_in.py`), incl. `all_in_gross` | Built |
+| Confirmed before shown; `data/needs_confirmation.csv` lists held-back units with the question to ask | Enforced in `scripts/rank.py` |
+| Ranking v2 + nearby violent crime, crime trend, transit extras; avoid rules incl. police car crime near NYC buildings | Done |
+| Evidence pass round 1 (batches 1–6, NYC records) and round 2 (batches 7–11) | Done |
+| Outside-NYC rating standard (`docs/RATING_STANDARD.md`, `data/evidence/rating_standard.csv`) and non-NYC records | Files exist; agent report pending; NOT yet wired into `avoid.py` |
+| Independent 30-unit check (`docs/INDEPENDENT_CHECK.md`) | Agent running |
+| Region agents (Nassau, Suffolk, Westchester/Rockland, Mid-Hudson, Connecticut) and Apartment List outer ring | Relaunched after plan mode cancelled them; when they finish: `run_all.py`, then an evidence round for new candidates, then `run_all.py --fast` |
+| Lifestyle groups: six years, labels and subheads approved; Jersey City still one lump | Split Jersey City; refit only on purpose |
+| Never collected: street-parking rules, dog rules, neighborhood-level voices, photos; MTA toll rates (Will), Reddit key (Will) | Open |
+| Evidence table for text, scene writing, page build, final link and price re-check | Not started |
 
 ## Answers from Will (2026-11-15), which override the handoff brief
 

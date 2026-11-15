@@ -292,7 +292,8 @@ def main():
                 d[f"agency_property_per_1000_{y.get('year')}"] = y.get("property_per_1000")
                 d[f"agency_burglary_per_1000_{y.get('year')}"] = y.get("burglary_per_1000")
         extra[b] = d
-    B = B.join(pd.DataFrame.from_dict(extra, orient="index"), rsuffix="_x")
+    E = pd.DataFrame.from_dict(extra, orient="index")
+    B = B.drop(columns=[c for c in E.columns if c in B.columns]).join(E)
     # NYC records and avoid inputs, keyed through the crosswalk
     nf = DATA / "evidence" / "nyc_records.csv"
     if nf.exists():

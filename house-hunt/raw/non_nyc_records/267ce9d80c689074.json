@@ -1,0 +1,187 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"13","value":[
+    {
+      "ultra_buildingid":"b65b371f-df7f-4d31-bd48-5780a8b4b3da","ultra_name":"128-130 W CLINTON ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1409026078001","ultra_addressline1":"128-130 W CLINTON ST","ultra_block":"606","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"481d7f16-ef9d-4806-9df0-705a97ebbd40","Name":"128-130 W CLINTON ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"982e7521-162f-e811-8126-1458d04eb810","Name":"DOVER"
+      },"ultra_propertyportalsearchfield":"128-130 W CLINTON ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f06b2472-0a16-467d-970e-9e903ce10b2c","Name":"HERMINO AGRONT"
+      },"ultra_zipcode":"07801","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c1f84d93-25b2-463c-9447-e152a8d6e694","ultra_name":"130 CLINTON PL BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0212027638001","ultra_addressline1":"130 CLINTON PL","ultra_block":"49","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"56573c76-ae2d-4a24-81e5-020538a33a14","Name":"130 CLINTON PL"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"dc2b7521-162f-e811-8126-1458d04eb810","Name":"EAST RUTHERFORD BORO"
+      },"ultra_propertyportalsearchfield":"130 CLINTON PL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"baf411f0-a0c5-4347-962d-dbd5e8fb66ac","Name":"CARMELA & CARLO LANZELLOTTA"
+      },"ultra_zipcode":"07073","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d4b482e9-8ff3-4c0a-935b-80cb224eb4e2","ultra_name":"228-230 CLINTON ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608028936001","ultra_addressline1":"228-230 CLINTON ST","ultra_block":"404","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"e0100a30-4912-439c-b421-b34417852d55","Name":"228-230 CLINTON ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"228-230 CLINTON ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"546587eb-f11e-ed11-b83c-001dd803ca0d","Name":"JAR CACHIMAN LLC"
+      },"ultra_zipcode":"07522","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f5736bd2-3cbd-4dff-a2a6-11f7b0891a06","ultra_name":"28-30 CLINTON TER BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0709017642001","ultra_addressline1":"28-30 CLINTON TER","ultra_block":"9","ultra_lot":"22","ultra_propertyinterest":{
+        "Id":"82c39e24-c9d3-4c37-8641-4780a1435ce6","Name":"28-30 CLINTON TER"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"382d7521-162f-e811-8126-1458d04eb810","Name":"IRVINGTON TOWN"
+      },"ultra_propertyportalsearchfield":"28-30 CLINTON TER","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3559eb2d-8ce8-eb11-bacb-001dd800bb95","Name":"SUKHDEEP PROPERTIES LLC"
+      },"ultra_zipcode":"07111","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c63e3c99-d72f-e811-8122-1458d04ece60","ultra_name":"30 CLINTON URBAN RENEWAL","ultra_registrationnumber":"0714-00326-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"30 CLINTON ST","ultra_block":"145","ultra_lot":"68","ultra_propertyinterest":{
+        "Id":"2c87d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"30 CLINTON URBAN RENEWAL"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"30 CLINTON URBAN RENEWAL","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bc730ef5-1de2-ea11-a813-001dd8018230","Name":"30 CLINTON URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3ced6a3a-e29f-4515-922e-757e39ff2e29","ultra_name":"30 S CLINTON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111005416001","ultra_addressline1":"30 S CLINTON AVE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"eb7563bb-380e-4090-bfbb-8f61194e7b23","Name":"30 S CLINTON AVE"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"30 S CLINTON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8582640b-cc89-4456-ba73-e4442c227eb8","Name":"RO-COR INC"
+      },"ultra_zipcode":"08609","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"16f91879-5d3f-496d-b591-09b5dd4fed18","ultra_name":"530 N CLINTON AV","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"530 N CLINTON AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"82189a83-f286-4048-a897-3939f1834d0b","Name":"530 N CLINTON AV"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"000000000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e0ef2ad6-b670-f111-ab0d-001dd802f839","ultra_name":"830 S CLINTON AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111040804001","ultra_addressline1":"830 S CLINTON AVE","ultra_block":"16206","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"98ef2ad6-b670-f111-ab0d-001dd802f839","Name":"830 S CLINTON AVE"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"830 S CLINTON AVE","ultra_countyportalsearchfield":"MERCER","ultra_municipalityportalsearchfield":"TRENTON CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7379a036-fbd6-f111-a05c-001dd80bcf22","Name":"830 S CLINTON REALTY LLC"
+      },"ultra_zipcode":"08611","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a9373c99-d72f-e811-8122-1458d04ece60","ultra_name":"CINRAM ASSOCIATES","ultra_registrationnumber":"0707-00125-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"130 CLINTON RD","ultra_block":"701","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"3681d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"CINRAM ASSOCIATES"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"342d7521-162f-e811-8126-1458d04eb810","Name":"FAIRFIELD TWP (E)"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d4283dc7-b42f-e811-8122-1458d04ece60","Name":"CINRAM ASSOCIATES"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c6a221b7-d72f-e811-8122-1458d04ece60","ultra_name":"CYPRESS PT CONDO ASSOCIATION","ultra_registrationnumber":"0905-00408-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1330 CLINTON ST","ultra_block":"115","ultra_lot":"9.01","ultra_propertyinterest":{
+        "Id":"1297d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"CYPRESS PT CONDO ASSOCIATION"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"383d3dc7-b42f-e811-8122-1458d04ece60","Name":"CYPRESS PT CONDO ASSOCIATION S/A/A"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"51a221b7-d72f-e811-8122-1458d04ece60","ultra_name":"HOBOKEN MIDTOWN PARKING GARAGE","ultra_registrationnumber":"0905-00353-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"302-330 CLINTON ST","ultra_block":"52","ultra_lot":"2,4,5,18.","ultra_propertyinterest":{
+        "Id":"ac96d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"HOBOKEN MIDTOWN PARKING GARAGE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cc3c3dc7-b42f-e811-8122-1458d04ece60","Name":"HOBOKEN PARKING UTILITY"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8ea121b7-d72f-e811-8122-1458d04ece60","ultra_name":"MEDICAL ARTS BLDG","ultra_registrationnumber":"0905-00262-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"330 CLINTON","ultra_block":"52","ultra_lot":"21","ultra_propertyinterest":{
+        "Id":"0296d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"MEDICAL ARTS BLDG"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"283c3dc7-b42f-e811-8122-1458d04ece60","Name":"FRANCISCAN HEALTH SYSTEM OF NJ"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"59493c99-d72f-e811-8122-1458d04ece60","ultra_name":"MUNICIPAL BLDG","ultra_registrationnumber":"0721-00109-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"30 CLINTON RD","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"268fd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"MUNICIPAL BLDG"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"502d7521-162f-e811-8126-1458d04eb810","Name":"WEST CALDWELL BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b6353dc7-b42f-e811-8122-1458d04ece60","Name":"GORDON BRUCHAC,FACILITIES MGR TWP OF WEST CALDWELL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

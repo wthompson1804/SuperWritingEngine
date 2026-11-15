@@ -1,0 +1,79 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"5","value":[
+    {
+      "ultra_buildingid":"ae5f9241-7149-42c3-aa2e-2726d0e7252a","ultra_name":"110 E COMMERCE ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0601010086001","ultra_addressline1":"110 E COMMERCE ST","ultra_block":"119","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"a24e862f-bb2d-40d5-9d85-7a722b0b2835","Name":"110 E COMMERCE ST"
+      },"ultra_county":{
+        "Id":"fcf3aaf2-63e4-e711-8125-1458d054d020","Name":"CUMBERLAND"
+      },"ultra_municipality":{
+        "Id":"0c2d7521-162f-e811-8126-1458d04eb810","Name":"BRIDGETON CITY"
+      },"ultra_propertyportalsearchfield":"110 E COMMERCE ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f4bc39f9-675c-4726-920b-3741ffc4c987","Name":"BRIDGETON HOUSING AUTHORITY"
+      },"ultra_zipcode":"08302","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d19c9b37-fd35-43c4-9f73-50cb8c11a087","ultra_name":"1110 N COMMERCE ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0814006571001","ultra_addressline1":"1110 N COMMERCE ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"c9b2b009-4dc0-470a-b1c3-e5ba11e4c8c8","Name":"1110 N COMMERCE ST"
+      },"ultra_county":{
+        "Id":"00f4aaf2-63e4-e711-8125-1458d054d020","Name":"GLOUCESTER"
+      },"ultra_municipality":{
+        "Id":"6e2d7521-162f-e811-8126-1458d04eb810","Name":"PAULSBORO BORO"
+      },"ultra_propertyportalsearchfield":"1110 N COMMERCE ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"efbf2944-2dd1-4661-8993-d2ce9e47c6bf","Name":"JOSE VALENTIN"
+      },"ultra_zipcode":"08066","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c84a5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"410 COMMERCE BD","ultra_registrationnumber":"0205-00106-003","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"410 COMMERCE BD","ultra_block":"131.2","ultra_lot":"64.05","ultra_propertyinterest":{
+        "Id":"f571e59f-9f2f-e811-8120-1458d04e2fb8","Name":"PAN-TON INC"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ce2b7521-162f-e811-8126-1458d04eb810","Name":"CARLSTADT BORO"
+      },"ultra_propertyportalsearchfield":"PAN-TON INC","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"CARLSTADT BORO","ultra_elsamaintenancecompany":{
+        "Id":"db839995-b45f-e911-a971-001dd800a749","Name":"Slade Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6cb7e2ae-b42f-e811-8122-1458d04ece60","Name":"JO ANN DIGIACOMO"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7cf04393-d72f-e811-8122-1458d04ece60","ultra_name":"HOUSING AUTHORITY BRIDGETON","ultra_registrationnumber":"0601-00101-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"110 E COMMERCE ST","ultra_block":"119","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"ae7bd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"HOUSING AUTHORITY BRIDGETON"
+      },"ultra_county":{
+        "Id":"fcf3aaf2-63e4-e711-8125-1458d054d020","Name":"CUMBERLAND"
+      },"ultra_municipality":{
+        "Id":"0c2d7521-162f-e811-8126-1458d04eb810","Name":"BRIDGETON CITY"
+      },"ultra_propertyportalsearchfield":"HOUSING AUTHORITY BRIDGETON","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"0bfa0928-1739-e811-81fa-1458d04e1b18","Name":"South Jersey Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ca233dc7-b42f-e811-8122-1458d04ece60","Name":"BRIDGETON HOUSING AUTH"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cc4dc353-f2c0-f011-bbd3-001dd803d745","ultra_name":"THE MERCER","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714077374001","ultra_addressline1":"10 COMMERCE COURT","ultra_block":"144.01","ultra_lot":"46","ultra_propertyinterest":{
+        "Id":"b09f9c36-f2c0-f011-bbd3-001dd80c29f4","Name":"THE MERCER"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"THE MERCER","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"18329830-f2c0-f011-bbd3-001dd80c29f4","Name":"10 COMMERCE COURT CONDOMINIUM ASSN INC"
+      },"ultra_zipcode":"07102","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

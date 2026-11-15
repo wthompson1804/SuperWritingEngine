@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"a497590b-24ae-43fd-83ab-48b48291e152","ultra_name":"263 FRANKLIN AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0251015780001","ultra_addressline1":"263 FRANKLIN AVE","ultra_block":"2012","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"07c1c8bb-c083-43d0-985a-e1f7487d768f","Name":"263 FRANKLIN AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"2a2c7521-162f-e811-8126-1458d04eb810","Name":"RIDGEWOOD VILLAGE"
+      },"ultra_propertyportalsearchfield":"263 FRANKLIN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cef51f4b-6011-42be-8d15-23bd59cd773c","Name":"VIRGINIA ACQUISITION II LLC"
+      },"ultra_zipcode":"07451","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b5d55575-d72f-e811-8122-1458d04ece60","ultra_name":"FRANKLIN  MAPLE APTS","ultra_registrationnumber":"0251-00121-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"263 FRANKLIN AV","ultra_block":"2012","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"7982e59f-9f2f-e811-8120-1458d04e2fb8","Name":"FRANKLIN  MAPLE APTS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"2a2c7521-162f-e811-8126-1458d04eb810","Name":"RIDGEWOOD VILLAGE"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"db839995-b45f-e911-a971-001dd800a749","Name":"Slade Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"88c7e2ae-b42f-e811-8122-1458d04ece60","Name":"VIRGINIA ACQUISITION II"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

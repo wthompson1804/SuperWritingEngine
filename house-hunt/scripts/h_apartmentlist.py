@@ -240,6 +240,40 @@ def parse_listing(html: str):
             continue
         if "available_units" in o and (best is None or len(o) > len(best)):
             best = o
+    if best is None:
+        return None
+    # The page carries the listing twice. The second copy replaces big fields with "$ref" pointers, but it is
+    # the only copy whose `specials` list is filled (the first copy always has specials=[]). Collect specials
+    # from every copy of the same rental_id.
+    specials, seen = [], set()
+    for m in re.finditer(r'"specials":\[\{', fl):
+        try:
+            arr, _ = DEC.raw_decode(fl, m.start() + 11)
+        except json.JSONDecodeError:
+            continue
+        back = fl.rfind('"listing":{"rental_id":"', 0, m.start())
+        if back < 0 or not fl.startswith(str(best.get("rental_id")), back + 24):
+            continue
+        for sp in arr:
+            if isinstance(sp, dict) and sp.get("id") not in seen:
+                seen.add(sp.get("id"))
+                specials.append(sp)
+    if specials:
+        best["specials"] = specials
+    # Long descriptions are stored as a flight text row ("87:T42c,<text>") and referenced as "$87".
+    d = best.get("description")
+    if isinstance(d, str) and re.fullmatch(r"\$[0-9a-f]+", d):
+        m = re.search(r"(?:^|\n)" + d[1:] + r":T([0-9a-f]+),", fl)
+        if m:
+            t = fl[m.end():m.end() + int(m.group(1), 16)]
+            t = re.split(r"\n?[0-9a-f]{1,4}:(?:\[|\{|\"|T[0-9a-f]+,|I\[)", t)[0]
+            try:
+                t = t.encode("latin-1").decode("utf8")  # flight text rows come out double-encoded
+            except (UnicodeEncodeError, UnicodeDecodeError):
+                pass
+            best["description"] = t
+        else:
+            best["description"] = ""
     return best
 
 
@@ -356,8 +390,14 @@ def build_rows(L, pslug, meta, grid_zips, grid):
         fees["fee_url"] = L["fees"]["fee_url"]
     specials = []
     for s in L.get("specials") or []:
-        specials.append(txt(s.get("description") or s.get("title") or s) if isinstance(s, dict) else txt(s))
-    concession = " | ".join(x for x in specials if x)[:600]
+        if not isinstance(s, dict):
+            specials.append(txt(s))
+            continue
+        t = txt(s.get("raw_text") or s.get("description") or s.get("title"))
+        if t and txt(s.get("expires_at")):
+            t += f" (expires {txt(s.get('expires_at'))[:10]})"
+        specials.append(t)
+    concession = " | ".join(dict.fromkeys(x for x in specials if x))[:900]
 
     rtype = txt(L.get("rental_type")).lower()
     managed = bool(txt(L.get("pmc_display_name"))) or (L.get("total_units_count") or 0) >= 5
@@ -484,6 +524,9 @@ def main():
     ap.add_argument("--only", default="")
     ap.add_argument("--fetch-max-low", type=float, default=MAX_RENT,
                     help="skip the property page when the search page's lowest price is above this")
+    ap.add_argument("--reparse", action="store_true",
+                    help="first rebuild every existing row from its cached property page (no network)")
+    ap.add_argument("--min-drive", type=float, default=0, help="skip cities nearer than this (already harvested)")
     ap.add_argument("--minutes", type=float, default=0, help="stop starting new cities after this many minutes")
     a = ap.parse_args()
     REFRESH = a.refresh
@@ -502,6 +545,30 @@ def main():
              "props_discovered": 0, "props_skipped_lowprice_gt_3000": 0, "reasons": {}, "blocked": None,
              "dogs_no_rows": 0}
     done_props: set = set()
+    if a.reparse:
+        n_pages = n_rows = n_gone = 0
+        for rp in sorted({r["raw_path"] for r in rows.values() if r.get("raw_path")}):
+            fp, mp = lib.ROOT / rp, lib.ROOT / (rp.rsplit(".", 1)[0] + ".meta.json")
+            if not (fp.exists() and mp.exists()):
+                continue
+            meta = json.loads(mp.read_text())
+            L = parse_listing(fp.read_bytes().decode("utf8", "replace"))
+            if not L:
+                continue
+            rr, _ = build_rows(L, meta["url"][len(BASE):], meta, grid_zips, grid)
+            new_ids = {r["listing_id"] for r in rr}
+            for lid in [k for k, r in rows.items() if r.get("raw_path") == rp and k not in new_ids]:
+                n_gone += 1  # kept as is: same cached page, should not happen
+            for r in rr:
+                old = rows.get(r["listing_id"])
+                if old:
+                    r["first_seen"] = min(old["first_seen"], r["first_seen"])
+                rows[r["listing_id"]] = r
+                n_rows += 1
+            n_pages += 1
+        save(rows)
+        log(f"reparse: pages={n_pages} rows rebuilt={n_rows} rows not regenerated={n_gone} total={len(rows)} "
+            f"with concession={sum(1 for r in rows.values() if r.get('concession_text'))}")
 
     import time as _t
     t0 = _t.time()
@@ -560,10 +627,11 @@ def main():
                 stats["cities_unmatched_far"].append({"city": slug, "km_to_grid": round(d, 1)})
 
     try:
-        for drive, slug in [c for c in cities if c[0] <= 50]:
+        for drive, slug in [c for c in cities if a.min_drive <= c[0] <= 50]:
             do_city(slug, drive)
-        do_unmatched()  # mostly NJ townships 30-70 min out; done after the <= 50 min cities
-        for drive, slug in [c for c in cities if c[0] > 50]:
+        if not a.min_drive:
+            do_unmatched()  # mostly NJ townships 30-70 min out; done after the <= 50 min cities
+        for drive, slug in [c for c in cities if c[0] > max(50, a.min_drive - 1e-9)]:
             do_city(slug, drive)
     except Blocked as e:
         stats["blocked"] = str(e)

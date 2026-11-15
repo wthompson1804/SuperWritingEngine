@@ -1,0 +1,7 @@
+{
+ "url": "https://serviceportal.dca.nj.gov/_odata/bhibuildings?$inlinecount=allpages&$filter=substringof%28%27263%20%27%2Cultra_addressline1%29%20and%20substringof%28%27FRANKLIN%27%2Cultra_addressline1%29",
+ "retrieved_at": "2026-11-15T21:42:34+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/87b6a2385c0cd54a.json",
+ "source": "non_nyc_records"
+}

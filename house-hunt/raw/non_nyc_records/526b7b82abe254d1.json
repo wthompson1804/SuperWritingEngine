@@ -1,0 +1,109 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"7","value":[
+    {
+      "ultra_buildingid":"a735f972-07ef-45b4-be60-6ef2dd78859a","ultra_name":"553-555 NEWMAN PL BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2014015217001","ultra_addressline1":"553-555 NEWMAN PL","ultra_block":"1401","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"bcf82886-c353-4e1f-83fe-b089d4fd0b64","Name":"553-555 NEWMAN PL"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"ca2f7521-162f-e811-8126-1458d04eb810","Name":"ROSELLE BORO"
+      },"ultra_propertyportalsearchfield":"553-555 NEWMAN PL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"90b747b5-a828-4f3a-b7ce-733873f0ad8f","Name":"KRZYSZTOF GUTOWSKI & ANETTE BEDNARSKA"
+      },"ultra_zipcode":"07203","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9028a402-4fff-ef11-9340-001dd8063ca4","ultra_name":"555 NEW BRUNSWICK AVE","ultra_registrationnumber":"1225-00336-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"555 NEW BRUNSWICK AVE","ultra_block":"59.08","ultra_lot":"6.02","ultra_propertyinterest":{
+        "Id":"2728a402-4fff-ef11-9340-001dd8063ca4","Name":"555 NEW BRUNSWICK AVE"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"555 NEW BRUNSWICK AVE","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"WOODBRIDGE TWP","ultra_elsamaintenancecompany":{
+        "Id":"675158fe-80fa-e811-812b-1458d04e2c70","Name":"Current Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3828a402-4fff-ef11-9340-001dd8063ca4","Name":"40 VAN DYKE AVENUE URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b7a9feda-d72f-e811-8122-1458d04ece60","ultra_name":"OLSEN TOWERS","ultra_registrationnumber":"1225-00114-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"555 NEW BRUNSWICK AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"44c13e2d-9a2f-e811-8122-1458d04ece60","Name":"OLSEN TOWERS"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"af438dfa-9a3e-e811-8123-1458d04ece60","Name":"WOODBRIDGE HOUSING AUTH"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9c347820-b6c5-42b9-9604-e7fba8b67dd1","ultra_name":"OLSEN TOWERS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1225020237001","ultra_addressline1":"555 NEW BRUNSWICK AVE","ultra_block":"59.08","ultra_lot":"6.022","ultra_propertyinterest":{
+        "Id":"45f8f4de-7a91-4c7c-8589-60b9e166861c","Name":"OLSEN TOWERS"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"OLSEN TOWERS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"HOUSING AUTHORITY","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"450968ec-1858-f011-877b-001dd80a6c87","Name":"THE WOODBRIDGE REDEVELOPMENT AGENCY"
+      },"ultra_zipcode":"07095","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"744f9a62-b6fd-ef11-9340-001dd80a7b5f","ultra_name":"THE PARK AT FORDS CORNER","ultra_registrationnumber":"1225-00335-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"555 NEW BRUNSWICK AVENUE FORDS, NJ 08863","ultra_block":"59.08","ultra_lot":"6.02","ultra_propertyinterest":{
+        "Id":"50bf935c-b6fd-ef11-9340-001dd80a7b5f","Name":"THE PARK AT FORDS CORNER"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"THE PARK AT FORDS CORNER","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"WOODBRIDGE TWP","ultra_elsamaintenancecompany":{
+        "Id":"675158fe-80fa-e811-812b-1458d04e2c70","Name":"Current Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"59bf935c-b6fd-ef11-9340-001dd80a7b5f","Name":"40 VAN DYKE AVENUE URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b3524bd3-f87b-f111-ab0e-001dd80be1b8","ultra_name":"THE PARK AT FORDS CORNER","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1225040841001","ultra_addressline1":"555 NEW BRUNSWICK AVE","ultra_block":"59.08","ultra_lot":"6.021","ultra_propertyinterest":{
+        "Id":"20575eb5-f87b-f111-ab0e-001dd80be1b8","Name":"THE PARK AT FORDS CORNER"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"THE PARK AT FORDS CORNER","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"WOODBRIDGE TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"83565eb5-f87b-f111-ab0e-001dd80be1b8","Name":"40 VAN DYKE AVENUE URBAN RENEWAL LLC"
+      },"ultra_zipcode":"08863","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cd3590b7-a6c8-f111-aaae-001dd80a67ab","ultra_name":"WILLING HEART COMMUNITY CARE CENTER","ultra_registrationnumber":"0714-01303-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"555 DR. MARTIN LUTHER KING BLVD., NEWARK, NJ 07103","ultra_block":"2497","ultra_lot":"44","ultra_propertyinterest":{
+        "Id":"5e9597b1-a6c8-f111-aaae-001dd80a67ab","Name":"WILLING HEART COMMUNITY CARE CENTER"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"WILLING HEART COMMUNITY CARE CENTER","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":{
+        "Id":"db810801-f55e-ea11-a994-001dd80081ad","Name":"Arrow Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b39597b1-a6c8-f111-aaae-001dd80a67ab","Name":"METROPOLITAN BAPTIST CHURCH"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

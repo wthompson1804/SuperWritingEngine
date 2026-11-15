@@ -1,0 +1,7 @@
+{
+ "url": "https://serviceportal.dca.nj.gov/_odata/bhibuildings?$inlinecount=allpages&$filter=substringof%28%277132%20%27%2Cultra_addressline1%29%20and%20substringof%28%27HEATHER%27%2Cultra_addressline1%29",
+ "retrieved_at": "2026-11-15T21:44:13+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/c9b93cc4dd065da1.json",
+ "source": "non_nyc_records"
+}

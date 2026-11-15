@@ -1,0 +1,223 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"15","value":[
+    {
+      "ultra_buildingid":"a77bdafe-d72f-e811-8122-1458d04ece60","ultra_name":"136 WASHINGTON ST","ultra_registrationnumber":"1608-00141-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"136 WASHINGTON ST","ultra_block":"G0785","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"77379443-9a2f-e811-8122-1458d04ece60","Name":"136 Washington"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"136 Washington","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"9b3afd97-1d8c-e811-8115-1458d0509d88","Name":"Essex Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f8517b36-5884-ec11-8d20-001dd801ed04","Name":"114-118 ELLISON ST ARB 21"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ca61b248-436d-4606-a60b-760e678eebc4","ultra_name":"336 WASHINGTON ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0717017451001","ultra_addressline1":"336 WASHINGTON ST","ultra_block":"601","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"cf0f4a3a-47f6-4254-a52f-9abf82bf2419","Name":"336 WASHINGTON ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"482d7521-162f-e811-8126-1458d04eb810","Name":"ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"336 WASHINGTON ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"22c0c7b7-8f65-4b1f-99a8-fc548ef6573f","Name":"LORETTA ETAL MARRA"
+      },"ultra_zipcode":"07050","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2becd1a9-daae-433f-9cc5-9b5081d37692","ultra_name":"36 WASHINGTON ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0323022415001","ultra_addressline1":"36 WASHINGTON ST","ultra_block":"78","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"6601ffe0-de4e-4900-b9ba-9fee769a39cc","Name":"36 WASHINGTON ST"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"7e2c7521-162f-e811-8126-1458d04eb810","Name":"MOUNT HOLLY TWP"
+      },"ultra_propertyportalsearchfield":"36 WASHINGTON ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f885eab8-cd3b-417c-a873-8b53d4c3805b","Name":"BROWNMILL MGMT LLC"
+      },"ultra_zipcode":"08060","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bbbcf5c2-dd23-4dad-ae28-aa5953dbbb6d","ultra_name":"36 WASHINGTON ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0701025993001","ultra_addressline1":"36 WASHINGTON ST","ultra_block":"7603","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"82a5eff5-532c-405e-a186-226fe3de5194","Name":"36 WASHINGTON ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"282d7521-162f-e811-8126-1458d04eb810","Name":"BELLEVILLE TOWN"
+      },"ultra_propertyportalsearchfield":"36 WASHINGTON ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"125415ad-6cb1-4773-950e-b11929298557","Name":"GERARDO & MARIA ALEGRE"
+      },"ultra_zipcode":"07109","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"518051e1-a484-47e3-ba09-9b16fddc7e09","ultra_name":"536 WASHINGTON ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905015552001","ultra_addressline1":"536 WASHINGTON ST","ultra_block":"204","ultra_lot":"24.02","ultra_propertyinterest":{
+        "Id":"298ea365-1172-4ef1-9a76-cfbce3758686","Name":"536 WASHINGTON ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"536 WASHINGTON ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9fbeaa16-cc90-ec11-8d20-001dd801def4","Name":"MDF 304 BLOOMFIELD LLC"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"964a5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"BERGENFIELD MEDICAL ARTS BLDG","ultra_registrationnumber":"0203-00129-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"136 N WASHINGTON AVE","ultra_block":"85","ultra_lot":"17.01","ultra_propertyinterest":{
+        "Id":"c971e59f-9f2f-e811-8120-1458d04e2fb8","Name":"BERGENFIELD MEDICAL ARTS BLDG"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ca2b7521-162f-e811-8126-1458d04eb810","Name":"BERGENFIELD BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"42b7e2ae-b42f-e811-8122-1458d04ece60","Name":"TOM2 BERGENFIELD LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6f6c56ee-9425-ea11-a98d-001dd800ba25","ultra_name":"BIRDSALL BUILDING","ultra_registrationnumber":"1507-00276-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"236 WASHINGTON ST","ultra_block":"653","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"3b6c56ee-9425-ea11-a98d-001dd800ba25","Name":"BIRDSALL BUILDING"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"e22e7521-162f-e811-8126-1458d04eb810","Name":"TOMS RIVER"
+      },"ultra_propertyportalsearchfield":"BIRDSALL BUILDING","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"TOMS RIVER","ultra_elsamaintenancecompany":{
+        "Id":"660ca298-4228-ec11-b6e6-001dd802d682","Name":"Schindler"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"576c56ee-9425-ea11-a98d-001dd800ba25","Name":"BIRDSALL ASSOC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"34179aa5-f967-4833-a807-b17c11b97286","ultra_name":"BLDG 13","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0112006886015","ultra_addressline1":"1531-1536 WASHINGTON CT","ultra_block":"1061","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"af91edfd-e295-4d8c-94a1-f04b9295ff5d","Name":"MAYS LANDING VILLAGE CONDO"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"ae2b7521-162f-e811-8126-1458d04eb810","Name":"HAMILTON TWP (A)"
+      },"ultra_propertyportalsearchfield":"MAYS LANDING VILLAGE CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a4187f39-28d8-416f-89ed-757091076f05","Name":"MAYS LANDING VILLAGE CONDO ASSN"
+      },"ultra_zipcode":"08330","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0d473c99-d72f-e811-8122-1458d04ece60","ultra_name":"HLR CREDIT UNION","ultra_registrationnumber":"0716-00127-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"536 WASHINGTON AV","ultra_block":"18","ultra_lot":"504","ultra_propertyinterest":{
+        "Id":"588dd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"HLR CREDIT UNION"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"462d7521-162f-e811-8126-1458d04eb810","Name":"NUTLEY TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ec333dc7-b42f-e811-8122-1458d04ece60","Name":"HLR FEDERALA CREDIT UNION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3a473c99-d72f-e811-8122-1458d04ece60","ultra_name":"PROPONENT FEDERAL CREDIT UNION","ultra_registrationnumber":"0716-00148-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"536 WASHINGTON AVE","ultra_block":"460.1","ultra_lot":"6.01","ultra_propertyinterest":{
+        "Id":"808dd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"PROPONENT FEDERAL CREDIT UNION"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"462d7521-162f-e811-8126-1458d04eb810","Name":"NUTLEY TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"10343dc7-b42f-e811-8122-1458d04ece60","Name":"PROPONEMT FEDERAL CREDIT UNION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c4c6feda-d72f-e811-8122-1458d04ece60","ultra_name":"SOVEREIGN BANK","ultra_registrationnumber":"1507-00123-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"36 WASHINGTON ST","ultra_block":"B-660","ultra_lot":"9-11","ultra_propertyinterest":{
+        "Id":"192f9443-9a2f-e811-8122-1458d04ece60","Name":"SOVEREIGN BANK"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"e22e7521-162f-e811-8126-1458d04eb810","Name":"TOMS RIVER"
+      },"ultra_propertyportalsearchfield":"SOVEREIGN BANK","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"5acce9b5-64a8-e811-811f-1458d04e0ca0","Name":"Jersey"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7bdcd530-3e7d-ec11-8d20-001dd8036a29","Name":"36 WASHINGTON ST LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"20e33690-a55e-4e78-b8a4-2352b7e73628","ultra_name":"WASHINGTON FORT LLC BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0219012870001","ultra_addressline1":"236 WASHINGTON AVE","ultra_block":"7054","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"40d64c66-d45c-456b-b62e-965af6d2688f","Name":"236 WASHINGTON AVE LLC"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":"236 WASHINGTON AVE LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5ef5d599-c47c-ee11-8179-001dd80bf47e","Name":"236 WASHINGTON AVE LLC"
+      },"ultra_zipcode":"07024","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8e27ccb1-aef0-ec11-bb3b-001dd801c63a","ultra_name":"WASHINGTON LOFTS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1201040119001","ultra_addressline1":"36 WASHINGTON AVE","ultra_block":"6502","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"6da617a1-aef0-ec11-bb3b-001dd801e87d","Name":"THE BOTANIC"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"ec2d7521-162f-e811-8126-1458d04eb810","Name":"CARTERET BORO"
+      },"ultra_propertyportalsearchfield":"THE BOTANIC","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"CARTERET BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"37d2747f-dc4f-ed11-bba0-001dd80726d6","Name":"RK CARTERET URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07008","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7ae40202-72af-ec11-983e-001dd80380ea","ultra_name":"WASHINGTON LOFTS","ultra_registrationnumber":"1201-00146-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"36 WASHINGTON AVE","ultra_block":"6502","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"04d108f6-71af-ec11-983e-001dd80380ea","Name":"The Botanic"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"ec2d7521-162f-e811-8126-1458d04eb810","Name":"CARTERET BORO"
+      },"ultra_propertyportalsearchfield":"The Botanic","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"CARTERET BORO","ultra_elsamaintenancecompany":{
+        "Id":"9f509519-c1ad-eb11-b1ac-001dd801df8b","Name":"Schindler"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3c2ba010-fe53-ee11-be6e-001dd8065955","Name":"LIVING CARTERET URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"936fd9f2-ded5-4ffb-a9b1-32cc19aa032b","ultra_name":"WASHINGTON PARK APTS BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0408007612003","ultra_addressline1":"2912-36 WASHINGTON ST","ultra_block":"1049","ultra_lot":"19","ultra_propertyinterest":{
+        "Id":"d03daa29-1102-43c0-a2e0-e22d9287d489","Name":"WASHINGTON PARK APTS BLDG 1"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b02c7521-162f-e811-8126-1458d04eb810","Name":"CAMDEN CITY"
+      },"ultra_propertyportalsearchfield":"WASHINGTON PARK APTS BLDG 1","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"337-343 GRAND ST","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"49393b0e-6592-401c-ab2e-cda481e5b59b","Name":"WASHINGTON PARK MGMT LLC"
+      },"ultra_zipcode":"08105","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

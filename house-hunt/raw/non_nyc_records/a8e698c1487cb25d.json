@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"1b535d6f-d72f-e811-8122-1458d04ece60","ultra_name":"LIFE OPPORTUNITIES","ultra_registrationnumber":"0222-00117-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"34 VALLEY RD","ultra_block":"84","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"cb78e59f-9f2f-e811-8120-1458d04e2fb8","Name":"LIFE OPPORTUNITIES"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f02b7521-162f-e811-8126-1458d04eb810","Name":"GLEN ROCK BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"700e88e7-61f9-e811-8132-1458d0509d88","Name":"VERTICAL PLATFORM LIFT"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2ebee2ae-b42f-e811-8122-1458d04ece60","Name":"LIFE OPPORTUNITIES UNLIMITED"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0bc7c74b-397a-4995-9b77-cdd40d54b4f5","ultra_name":"Valley & Bloom BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0713042572001","ultra_addressline1":"34 Valley RD","ultra_block":"1404","ultra_lot":"18","ultra_propertyinterest":{
+        "Id":"30226bf0-c939-4f1b-985e-e8664e46bdc6","Name":"Valley & Bloom"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"402d7521-162f-e811-8126-1458d04eb810","Name":"MONTCLAIR TOWN"
+      },"ultra_propertyportalsearchfield":"Valley & Bloom","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bc9bf98d-4fe0-4111-a2bb-38380c0e6554","Name":"MAP URBAN RENEWAL"
+      },"ultra_zipcode":"07042","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

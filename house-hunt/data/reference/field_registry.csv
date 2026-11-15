@@ -1,0 +1,858 @@
+table,field,status,referenced_by,note
+master_units,listing_id,used,build_master.py;all_in.py;rank.py;build_neighborhoods.py;lifestyle_features.py;rent_terms.py,
+master_units,building_id,used,build_master.py;all_in.py;rank.py,
+master_units,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
+master_units,source_site,used,gates.py;build_master.py;avoid.py,
+master_units,url,used,gates.py;build_master.py;rank.py;avoid.py;crime_benchmarks.py;rent_terms.py,
+master_units,building_url,display,build_master.py,link shown on the page
+master_units,also_seen_at,used,gates.py;build_master.py,
+master_units,detail_level,used,gates.py;build_master.py,
+master_units,first_seen,not_used,build_master.py,bookkeeping or already folded into a merged field
+master_units,last_seen,not_used,build_master.py,bookkeeping or already folded into a merged field
+master_units,unit,used,gates.py;build_master.py;rank.py;avoid.py;rent_terms.py,
+master_units,beds,used,gates.py;build_master.py;all_in.py;rank.py;rent_terms.py;enrich_units.py,
+master_units,baths,display,build_master.py,label shown on the page
+master_units,sqft,used,gates.py;build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
+master_units,listed_rent,used,gates.py;build_master.py;all_in.py;rent_terms.py;enrich_units.py,
+master_units,price_basis,used,build_master.py;rent_terms.py,
+master_units,concession_text,used,build_master.py;all_in.py;rent_terms.py,
+master_units,available_date_text,display,build_master.py,text shown on the unit card or cost receipt
+master_units,available_date,used,gates.py;build_master.py;rent_terms.py,
+master_units,floor,used,gates.py;build_master.py;avoid.py,
+master_units,floor_used,used,gates.py;build_master.py,
+master_units,g_floor,used,gates.py;build_master.py,
+master_units,listing_age_days,used,gates.py;build_master.py;rank.py,
+master_units,stale_listing,used,gates.py;build_master.py,
+master_units,photo_url,display,build_master.py,link shown on the page
+master_units,raw_path,used,build_master.py;rent_terms.py,
+master_units,notes,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py,
+master_units,other_monthly_fees_json,used,build_master.py;all_in.py;enrich_units.py,
+master_units,listing_type,not_used,build_master.py,bookkeeping or already folded into a merged field
+master_units,gate_status,used,gates.py;build_master.py;enrich_units.py,
+master_units,live_status,used,build_master.py;all_in.py;rank.py,
+master_units,live_price,used,build_master.py;all_in.py,
+master_units,live_available_text,display,build_master.py,text shown on the unit card or cost receipt
+master_units,live_checked_at,not_used,build_master.py,bookkeeping or already folded into a merged field
+master_units,live_notes,used,build_master.py;rank.py,
+master_units,unit_floor,used,build_master.py;rank.py,
+master_units,unit_floor_basis,used,build_master.py;rank.py,
+master_units,unit_floor_source,provenance,build_master.py,travels with unit_floor
+master_units,address,used,gates.py;build_master.py;rank.py;rent_terms.py,
+master_units,city,used,gates.py;build_master.py;rating_standard.py,
+master_units,state,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;crime_benchmarks.py;rating_standard.py,
+master_units,zip5,used,gates.py;build_master.py;rating_standard.py,
+master_units,lat,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,lon,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,hood,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;crime_benchmarks.py,
+master_units,hood_id,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;lifestyle_groups.py;crime_benchmarks.py,
+master_units,hood_area,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;crime_benchmarks.py,
+master_units,drive_min_zip,used,gates.py,
+master_units,pluto_class,used,gates.py;build_master.py,
+master_units,pluto_floors,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_color.py,
+master_units,pluto_units,used,gates.py;build_master.py,
+master_units,pluto_year,used,gates.py;build_master.py;rank.py;lifestyle_color.py,
+master_units,pluto_bbl,used,gates.py;rating_standard.py,
+master_units,drive_min_to,used,rank.py;build_neighborhoods.py;lifestyle_features.py;enrich_units.py,
+master_units,drive_min_from,used,enrich_units.py,
+master_units,drive_miles,used,enrich_units.py,
+master_units,toll_rt_ezpass,used,rank.py;build_neighborhoods.py;enrich_units.py,
+master_units,toll_complete,used,build_neighborhoods.py;enrich_units.py,
+master_units,toll_known_subtotal,used,enrich_units.py,
+master_units,toll_items,used,enrich_units.py,
+master_units,transit_sat_fastest,used,enrich_units.py,
+master_units,transit_sat_median,used,rank.py;build_neighborhoods.py;enrich_units.py,
+master_units,transit_transfers,used,enrich_units.py,
+master_units,transit_summary,used,enrich_units.py,
+master_units,transit_status,used,enrich_units.py,
+master_units,last_sat_departure,used,enrich_units.py,
+master_units,police_agency,used,build_neighborhoods.py;crime_benchmarks.py;enrich_units.py,
+master_units,police_geography,used,crime_benchmarks.py;enrich_units.py,
+master_units,crime_source,used,build_neighborhoods.py;crime_benchmarks.py;enrich_units.py,
+master_units,crime_year,used,build_neighborhoods.py;lifestyle_groups.py;crime_benchmarks.py;enrich_units.py,
+master_units,crime_latest,used,build_neighborhoods.py;lifestyle_features.py;crime_benchmarks.py;enrich_units.py,
+master_units,near_veh_theft_24m,used,rank.py;avoid.py;enrich_units.py,
+master_units,near_theft_from_veh_24m,used,rank.py;avoid.py;enrich_units.py,
+master_units,near_vs_baseline,used,enrich_units.py,
+master_units,park_name,used,enrich_units.py,
+master_units,park_walk_min,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_units,park_ha_800m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_units,dog_park_name,used,enrich_units.py,
+master_units,dog_park_m,used,rank.py;lifestyle_color.py;lifestyle_groups.py;enrich_units.py,
+master_units,restaurants_800m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_units,bars_800m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_units,cafes_800m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_units,bars_1600m,used,rank.py;enrich_units.py,
+master_units,restaurants_1600m,used,lifestyle_color.py;enrich_units.py,
+master_units,music_1600m,used,lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_units,supermarket,used,build_master.py;enrich_units.py,
+master_units,supermarket_m,used,rank.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,coast_m,used,build_neighborhoods.py;enrich_units.py,
+master_units,beach_m,used,build_neighborhoods.py;lifestyle_features.py;enrich_units.py,
+master_units,open_water_m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_units,train_station,used,build_master.py;enrich_units.py,
+master_units,train_station_m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,motorway_m,used,rank.py;lifestyle_features.py;enrich_units.py,
+master_units,util_1br,used,enrich_units.py,
+master_units,util_1br_complete,used,enrich_units.py,
+master_units,util_studio,used,enrich_units.py,
+master_units,elevator,used,gates.py;build_master.py;rank.py;avoid.py,
+master_units,elevator_basis,used,gates.py;build_master.py;rank.py,
+master_units,elevator_source,provenance,,travels with elevator
+master_units,dogs_allowed,used,build_master.py;rank.py;avoid.py,
+master_units,dogs_allowed_basis,used,rank.py,
+master_units,dogs_allowed_source,provenance,,travels with dogs_allowed
+master_units,dog_policy_text,used,build_master.py;rank.py,
+master_units,dog_policy_text_basis,provenance,,travels with dog_policy_text
+master_units,dog_policy_text_source,provenance,,travels with dog_policy_text
+master_units,dog_weight_limit_lb,used,gates.py;build_master.py;rank.py,
+master_units,dog_weight_limit_lb_basis,provenance,,travels with dog_weight_limit_lb
+master_units,dog_weight_limit_lb_source,provenance,,travels with dog_weight_limit_lb
+master_units,pet_rent_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
+master_units,pet_rent_monthly_basis,used,all_in.py,
+master_units,pet_rent_monthly_source,provenance,,travels with pet_rent_monthly
+master_units,parking_type,used,gates.py;build_master.py;all_in.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
+master_units,parking_type_basis,provenance,,travels with parking_type
+master_units,parking_type_source,provenance,,travels with parking_type
+master_units,building_floors,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
+master_units,building_floors_basis,provenance,,travels with building_floors
+master_units,building_floors_source,provenance,,travels with building_floors
+master_units,laundry,used,build_master.py;rank.py,
+master_units,laundry_basis,provenance,,travels with laundry
+master_units,laundry_source,provenance,,travels with laundry
+master_units,manager,display,build_master.py,label shown on the page
+master_units,manager_basis,provenance,,travels with manager
+master_units,manager_source,provenance,,travels with manager
+master_units,utilities_included,used,build_master.py;all_in.py,
+master_units,utilities_included_basis,used,all_in.py,
+master_units,utilities_included_source,provenance,,travels with utilities_included
+master_units,building_name,used,gates.py;build_master.py;rank.py;rent_terms.py;rating_standard.py,
+master_units,building_name_basis,provenance,,travels with building_name
+master_units,building_name_source,provenance,,travels with building_name
+master_units,gym,used,gates.py;build_master.py;rank.py,
+master_units,gym_basis,provenance,,travels with gym
+master_units,gym_source,provenance,,travels with gym
+master_units,controlled_access,used,gates.py;build_master.py;rank.py,
+master_units,controlled_access_basis,provenance,,travels with controlled_access
+master_units,controlled_access_source,provenance,,travels with controlled_access
+master_units,dog_amenities,used,build_master.py;rank.py,
+master_units,dog_amenities_basis,provenance,,travels with dog_amenities
+master_units,dog_amenities_source,provenance,,travels with dog_amenities
+master_units,in_unit_laundry,used,build_master.py;rank.py,
+master_units,in_unit_laundry_basis,provenance,,travels with in_unit_laundry
+master_units,in_unit_laundry_source,provenance,,travels with in_unit_laundry
+master_units,outdoor_space,used,build_master.py;rank.py,
+master_units,outdoor_space_basis,provenance,,travels with outdoor_space
+master_units,outdoor_space_source,provenance,,travels with outdoor_space
+master_units,package_room,used,gates.py;build_master.py;rank.py,
+master_units,package_room_basis,provenance,,travels with package_room
+master_units,package_room_source,provenance,,travels with package_room
+master_units,lounge_or_coworking,used,build_master.py;rank.py,
+master_units,lounge_or_coworking_basis,provenance,,travels with lounge_or_coworking
+master_units,lounge_or_coworking_source,provenance,,travels with lounge_or_coworking
+master_units,year_built,used,build_master.py;rank.py,
+master_units,year_built_basis,provenance,,travels with year_built
+master_units,year_built_source,provenance,,travels with year_built
+master_units,pet_one_time_fee_text,display,build_master.py,text shown on the unit card or cost receipt
+master_units,pet_one_time_fee_text_basis,provenance,,travels with pet_one_time_fee_text
+master_units,pet_one_time_fee_text_source,provenance,,travels with pet_one_time_fee_text
+master_units,required_fees_text,used,build_master.py;all_in.py,
+master_units,required_fees_text_basis,used,all_in.py,
+master_units,required_fees_text_source,provenance,,travels with required_fees_text
+master_units,lease_terms_text,used,build_master.py;rent_terms.py,
+master_units,lease_terms_text_basis,provenance,,travels with lease_terms_text
+master_units,lease_terms_text_source,provenance,,travels with lease_terms_text
+master_units,concession_text_evidence,display,build_master.py,text shown on the unit card or cost receipt
+master_units,concession_text_evidence_basis,provenance,,travels with concession_text_evidence
+master_units,concession_text_evidence_source,provenance,,travels with concession_text_evidence
+master_units,pool,used,gates.py;build_master.py;rank.py;lifestyle_color.py,
+master_units,pool_basis,provenance,,travels with pool
+master_units,pool_source,provenance,,travels with pool
+master_units,doorman,used,build_master.py;rank.py,
+master_units,doorman_basis,provenance,,travels with doorman
+master_units,doorman_source,provenance,,travels with doorman
+master_units,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
+master_units,parking_fee_monthly_basis,used,all_in.py,
+master_units,parking_fee_monthly_source,provenance,,travels with parking_fee_monthly
+master_units,balconies,used,build_master.py;rank.py,
+master_units,balconies_basis,provenance,,travels with balconies
+master_units,balconies_source,provenance,,travels with balconies
+master_units,unit_count,display,build_master.py,label shown on the page
+master_units,unit_count_basis,provenance,,travels with unit_count
+master_units,unit_count_source,provenance,,travels with unit_count
+master_units,building_type,used,gates.py;build_master.py;rank.py,
+master_units,building_type_basis,provenance,,travels with building_type
+master_units,building_type_source,provenance,,travels with building_type
+master_units,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
+master_units,rent_regulation_basis,provenance,,travels with rent_regulation
+master_units,rent_regulation_source,provenance,,travels with rent_regulation
+master_units,income_requirement,used,build_master.py;rank.py,
+master_units,income_requirement_basis,provenance,,travels with income_requirement
+master_units,income_requirement_source,provenance,,travels with income_requirement
+master_units,listing_warning,display,build_master.py,text shown on the unit card or cost receipt
+master_units,listing_warning_basis,provenance,,travels with listing_warning
+master_units,listing_warning_source,provenance,,travels with listing_warning
+master_units,addr_keys,not_used,build_master.py,bookkeeping or already folded into a merged field
+master_units,n_listed_units,not_used,build_master.py,bookkeeping or already folded into a merged field
+master_units,transit_sat_transfers,used,build_master.py;rank.py,
+master_units,transit_sat_summary,display,build_master.py,text shown on the unit card or cost receipt
+master_units,transit_last_sat_departure_from_jamaica,used,build_master.py;rank.py,
+master_units,transit_sun_return_fastest,display,build_master.py,figure shown in a scene or receipt
+master_units,transit_sun_return_median,used,build_master.py;rank.py;enrich_units.py,
+master_units,agency_violent_per_1000_2025,used,build_master.py;rank.py,
+master_units,agency_property_per_1000_2025,display,,area context shown beside the violent-crime trend
+master_units,agency_burglary_per_1000_2025,display,,area context shown beside the violent-crime trend
+master_units,agency_violent_per_1000_2024,used,build_master.py;rank.py,
+master_units,agency_property_per_1000_2024,display,,area context shown beside the violent-crime trend
+master_units,agency_burglary_per_1000_2024,display,,area context shown beside the violent-crime trend
+master_units,agency_violent_per_1000_2023,used,build_master.py;rank.py,
+master_units,agency_property_per_1000_2023,display,,area context shown beside the violent-crime trend
+master_units,agency_burglary_per_1000_2023,display,,area context shown beside the violent-crime trend
+master_units,agency_violent_per_1000_2022,used,build_master.py;rank.py,
+master_units,agency_property_per_1000_2022,display,,area context shown beside the violent-crime trend
+master_units,agency_burglary_per_1000_2022,display,,area context shown beside the violent-crime trend
+master_units,near250_robbery_24m,used,build_master.py;rank.py,
+master_units,near250_robbery_evening_share,used,build_master.py;rank.py,
+master_units,near250_robbery_2023,used,build_master.py;rank.py,
+master_units,near250_robbery_2025,used,build_master.py;rank.py,
+master_units,near250_robbery_borough_median,used,build_master.py;rank.py,
+master_units,near250_robbery_above_borough_p80,used,build_master.py;rank.py,
+master_units,near250_felony_assault_24m,used,build_master.py;rank.py,
+master_units,near250_felony_assault_evening_share,used,build_master.py;rank.py,
+master_units,near250_felony_assault_2023,used,build_master.py;rank.py,
+master_units,near250_felony_assault_2025,used,build_master.py;rank.py,
+master_units,near250_felony_assault_borough_median,used,build_master.py;rank.py,
+master_units,near250_felony_assault_above_borough_p80,used,build_master.py;rank.py,
+master_units,near250_burglary_24m,used,build_master.py;rank.py,
+master_units,near250_burglary_evening_share,used,build_master.py;rank.py,
+master_units,near250_burglary_2023,used,build_master.py;rank.py,
+master_units,near250_burglary_2025,used,build_master.py;rank.py,
+master_units,near250_burglary_borough_median,used,build_master.py;rank.py,
+master_units,near250_burglary_above_borough_p80,used,build_master.py;rank.py,
+master_units,near250_grand_larceny_motor_vehicle_24m,used,build_master.py;rank.py,
+master_units,near250_grand_larceny_motor_vehicle_evening_share,used,build_master.py;rank.py,
+master_units,near250_grand_larceny_motor_vehicle_2023,used,build_master.py;rank.py,
+master_units,near250_grand_larceny_motor_vehicle_2025,used,build_master.py;rank.py,
+master_units,near250_grand_larceny_motor_vehicle_borough_median,used,build_master.py;rank.py,
+master_units,near250_grand_larceny_motor_vehicle_above_borough_p80,used,build_master.py;rank.py,
+master_units,near250_theft_from_vehicle_24m,used,build_master.py;rank.py,
+master_units,near250_theft_from_vehicle_evening_share,used,build_master.py;rank.py,
+master_units,near250_theft_from_vehicle_2023,used,build_master.py;rank.py,
+master_units,near250_theft_from_vehicle_2025,used,build_master.py;rank.py,
+master_units,near250_theft_from_vehicle_borough_median,used,build_master.py;rank.py,
+master_units,near250_theft_from_vehicle_above_borough_p80,used,build_master.py;rank.py,
+master_units,near250_vehicle_parts_theft_24m,used,build_master.py;rank.py,
+master_units,near250_vehicle_parts_theft_evening_share,used,build_master.py;rank.py,
+master_units,near250_vehicle_parts_theft_2023,used,build_master.py;rank.py,
+master_units,near250_vehicle_parts_theft_2025,used,build_master.py;rank.py,
+master_units,near250_vehicle_parts_theft_borough_median,used,build_master.py;rank.py,
+master_units,near250_vehicle_parts_theft_above_borough_p80,used,build_master.py;rank.py,
+master_units,near250_vehicle_criminal_mischief_24m,used,build_master.py;rank.py,
+master_units,near250_vehicle_criminal_mischief_evening_share,used,build_master.py;rank.py,
+master_units,near250_vehicle_criminal_mischief_2023,used,build_master.py;rank.py,
+master_units,near250_vehicle_criminal_mischief_2025,used,build_master.py;rank.py,
+master_units,near250_vehicle_criminal_mischief_borough_median,used,build_master.py;rank.py,
+master_units,near250_vehicle_criminal_mischief_above_borough_p80,used,build_master.py;rank.py,
+master_units,nycrec_bedbug_infested_units__latest_filing,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_complaints__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_complaints__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_complaints__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_complaints__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_complaints__all_years_in_dataset,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_complaints__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_complaints__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_devices_active__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_violations__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_violations__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_violations__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_violations__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_violations__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_violations__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_dob_elevator_violations_active__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_building_record__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_all__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_all__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_all__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_all__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_all__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_all__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_door_window_security__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_door_window_security__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_door_window_security__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_door_window_security__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_door_window_security__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_door_window_security__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_elevator__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_elevator__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_elevator__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_elevator__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_elevator__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_elevator__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_heat_hot_water__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_heat_hot_water__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_heat_hot_water__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_heat_hot_water__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_heat_hot_water__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_heat_hot_water__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_mold__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_mold__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_mold__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_mold__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_mold__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_mold__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_pests__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_pests__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_pests__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_pests__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_pests__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_complaints_pests__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_registration__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_a__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_a__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_a__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_a__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_a__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_a__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_b__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_b__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_b__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_b__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_b__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_b__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_c__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_c__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_c__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_c__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_c__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_c__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_hpd_violations_class_c_open__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_marshal_evictions_residential__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_marshal_evictions_residential__2024_to_date,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_marshal_evictions_residential__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_marshal_evictions_residential__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_marshal_evictions_residential__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_marshal_evictions_residential__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_pluto_lot__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_blocked_driveway__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_blocked_driveway__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_blocked_driveway__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_blocked_driveway__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_blocked_driveway__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_blocked_driveway__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_derelict_or_abandoned_vehicle__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_derelict_or_abandoned_vehicle__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_derelict_or_abandoned_vehicle__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_derelict_or_abandoned_vehicle__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_derelict_or_abandoned_vehicle__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_derelict_or_abandoned_vehicle__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_dob__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_dob__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_dob__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_dob__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_dob__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_dob__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_hpd__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_hpd__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_hpd__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_hpd__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_hpd__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_elevator_hpd__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_heat_hot_water__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_heat_hot_water__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_heat_hot_water__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_heat_hot_water__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_heat_hot_water__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_heat_hot_water__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_illegal_parking__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_illegal_parking__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_illegal_parking__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_illegal_parking__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_illegal_parking__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_illegal_parking__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_noise_residential__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_noise_residential__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_noise_residential__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_noise_residential__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_noise_residential__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_noise_residential__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_unsanitary_condition__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_unsanitary_condition__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_unsanitary_condition__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_unsanitary_condition__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_unsanitary_condition__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nycrec_sr311_unsanitary_condition__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_units,nyc_record_flags,used,build_master.py;rating_standard.py,
+master_units,rent_basis,used,all_in.py,
+master_units,rent_basis_kind,used,all_in.py,
+master_units,rent_gross,used,all_in.py,
+master_units,rent_asterisk,used,all_in.py,
+master_units,rent_listed_price_is,used,all_in.py,
+master_units,rent_offer_text,used,all_in.py,
+master_units,rent_free_months,used,all_in.py,
+master_units,rent_lease_months,used,all_in.py,
+master_units,rent_first_full_payment_date,used,all_in.py,
+master_units,rent_first_full_payment_note,used,all_in.py,
+master_units,rent_needs_call,used,all_in.py,
+master_units,all_in,used,all_in.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,all_in_gross,used,all_in.py,
+master_units,all_in_lines,used,all_in.py;rank.py;enrich_units.py,
+master_units,all_in_unknown_lines,used,all_in.py,
+master_units,all_in_estimated_lines,used,all_in.py,
+master_units,cost_gate,used,all_in.py;rank.py,
+master_buildings,building_id,used,build_master.py;all_in.py;rank.py,
+master_buildings,address,used,gates.py;build_master.py;rank.py;rent_terms.py,
+master_buildings,city,used,gates.py;build_master.py;rating_standard.py,
+master_buildings,state,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;crime_benchmarks.py;rating_standard.py,
+master_buildings,zip5,used,gates.py;build_master.py;rating_standard.py,
+master_buildings,lat,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_buildings,lon,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_buildings,hood,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;crime_benchmarks.py,
+master_buildings,hood_id,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;lifestyle_groups.py;crime_benchmarks.py,
+master_buildings,hood_area,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;crime_benchmarks.py,
+master_buildings,drive_min_zip,used,gates.py,
+master_buildings,pluto_class,used,gates.py;build_master.py,
+master_buildings,pluto_floors,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_color.py,
+master_buildings,pluto_units,used,gates.py;build_master.py,
+master_buildings,pluto_year,used,gates.py;build_master.py;rank.py;lifestyle_color.py,
+master_buildings,pluto_bbl,used,gates.py;rating_standard.py,
+master_buildings,drive_min_to,used,rank.py;build_neighborhoods.py;lifestyle_features.py;enrich_units.py,
+master_buildings,drive_min_from,used,enrich_units.py,
+master_buildings,drive_miles,used,enrich_units.py,
+master_buildings,toll_rt_ezpass,used,rank.py;build_neighborhoods.py;enrich_units.py,
+master_buildings,toll_complete,used,build_neighborhoods.py;enrich_units.py,
+master_buildings,toll_known_subtotal,used,enrich_units.py,
+master_buildings,toll_items,used,enrich_units.py,
+master_buildings,transit_sat_fastest,used,enrich_units.py,
+master_buildings,transit_sat_median,used,rank.py;build_neighborhoods.py;enrich_units.py,
+master_buildings,transit_transfers,used,enrich_units.py,
+master_buildings,transit_summary,used,enrich_units.py,
+master_buildings,transit_status,used,enrich_units.py,
+master_buildings,last_sat_departure,used,enrich_units.py,
+master_buildings,police_agency,used,build_neighborhoods.py;crime_benchmarks.py;enrich_units.py,
+master_buildings,police_geography,used,crime_benchmarks.py;enrich_units.py,
+master_buildings,crime_source,used,build_neighborhoods.py;crime_benchmarks.py;enrich_units.py,
+master_buildings,crime_year,used,build_neighborhoods.py;lifestyle_groups.py;crime_benchmarks.py;enrich_units.py,
+master_buildings,crime_latest,used,build_neighborhoods.py;lifestyle_features.py;crime_benchmarks.py;enrich_units.py,
+master_buildings,near_veh_theft_24m,used,rank.py;avoid.py;enrich_units.py,
+master_buildings,near_theft_from_veh_24m,used,rank.py;avoid.py;enrich_units.py,
+master_buildings,near_vs_baseline,used,enrich_units.py,
+master_buildings,park_name,used,enrich_units.py,
+master_buildings,park_walk_min,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_buildings,park_ha_800m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_buildings,dog_park_name,used,enrich_units.py,
+master_buildings,dog_park_m,used,rank.py;lifestyle_color.py;lifestyle_groups.py;enrich_units.py,
+master_buildings,restaurants_800m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_buildings,bars_800m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_buildings,cafes_800m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_buildings,bars_1600m,used,rank.py;enrich_units.py,
+master_buildings,restaurants_1600m,used,lifestyle_color.py;enrich_units.py,
+master_buildings,music_1600m,used,lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_buildings,supermarket,used,build_master.py;enrich_units.py,
+master_buildings,supermarket_m,used,rank.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_buildings,coast_m,used,build_neighborhoods.py;enrich_units.py,
+master_buildings,beach_m,used,build_neighborhoods.py;lifestyle_features.py;enrich_units.py,
+master_buildings,open_water_m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
+master_buildings,train_station,used,build_master.py;enrich_units.py,
+master_buildings,train_station_m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_buildings,motorway_m,used,rank.py;lifestyle_features.py;enrich_units.py,
+master_buildings,util_1br,used,enrich_units.py,
+master_buildings,util_1br_complete,used,enrich_units.py,
+master_buildings,util_studio,used,enrich_units.py,
+master_buildings,elevator,used,gates.py;build_master.py;rank.py;avoid.py,
+master_buildings,elevator_basis,used,gates.py;build_master.py;rank.py,
+master_buildings,elevator_source,provenance,,travels with elevator
+master_buildings,dogs_allowed,used,build_master.py;rank.py;avoid.py,
+master_buildings,dogs_allowed_basis,used,rank.py,
+master_buildings,dogs_allowed_source,provenance,,travels with dogs_allowed
+master_buildings,dog_policy_text,used,build_master.py;rank.py,
+master_buildings,dog_policy_text_basis,provenance,,travels with dog_policy_text
+master_buildings,dog_policy_text_source,provenance,,travels with dog_policy_text
+master_buildings,dog_weight_limit_lb,used,gates.py;build_master.py;rank.py,
+master_buildings,dog_weight_limit_lb_basis,provenance,,travels with dog_weight_limit_lb
+master_buildings,dog_weight_limit_lb_source,provenance,,travels with dog_weight_limit_lb
+master_buildings,pet_rent_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
+master_buildings,pet_rent_monthly_basis,used,all_in.py,
+master_buildings,pet_rent_monthly_source,provenance,,travels with pet_rent_monthly
+master_buildings,parking_type,used,gates.py;build_master.py;all_in.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
+master_buildings,parking_type_basis,provenance,,travels with parking_type
+master_buildings,parking_type_source,provenance,,travels with parking_type
+master_buildings,building_floors,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
+master_buildings,building_floors_basis,provenance,,travels with building_floors
+master_buildings,building_floors_source,provenance,,travels with building_floors
+master_buildings,laundry,used,build_master.py;rank.py,
+master_buildings,laundry_basis,provenance,,travels with laundry
+master_buildings,laundry_source,provenance,,travels with laundry
+master_buildings,manager,display,build_master.py,label shown on the page
+master_buildings,manager_basis,provenance,,travels with manager
+master_buildings,manager_source,provenance,,travels with manager
+master_buildings,utilities_included,used,build_master.py;all_in.py,
+master_buildings,utilities_included_basis,used,all_in.py,
+master_buildings,utilities_included_source,provenance,,travels with utilities_included
+master_buildings,building_name,used,gates.py;build_master.py;rank.py;rent_terms.py;rating_standard.py,
+master_buildings,building_name_basis,provenance,,travels with building_name
+master_buildings,building_name_source,provenance,,travels with building_name
+master_buildings,gym,used,gates.py;build_master.py;rank.py,
+master_buildings,gym_basis,provenance,,travels with gym
+master_buildings,gym_source,provenance,,travels with gym
+master_buildings,controlled_access,used,gates.py;build_master.py;rank.py,
+master_buildings,controlled_access_basis,provenance,,travels with controlled_access
+master_buildings,controlled_access_source,provenance,,travels with controlled_access
+master_buildings,dog_amenities,used,build_master.py;rank.py,
+master_buildings,dog_amenities_basis,provenance,,travels with dog_amenities
+master_buildings,dog_amenities_source,provenance,,travels with dog_amenities
+master_buildings,in_unit_laundry,used,build_master.py;rank.py,
+master_buildings,in_unit_laundry_basis,provenance,,travels with in_unit_laundry
+master_buildings,in_unit_laundry_source,provenance,,travels with in_unit_laundry
+master_buildings,outdoor_space,used,build_master.py;rank.py,
+master_buildings,outdoor_space_basis,provenance,,travels with outdoor_space
+master_buildings,outdoor_space_source,provenance,,travels with outdoor_space
+master_buildings,package_room,used,gates.py;build_master.py;rank.py,
+master_buildings,package_room_basis,provenance,,travels with package_room
+master_buildings,package_room_source,provenance,,travels with package_room
+master_buildings,lounge_or_coworking,used,build_master.py;rank.py,
+master_buildings,lounge_or_coworking_basis,provenance,,travels with lounge_or_coworking
+master_buildings,lounge_or_coworking_source,provenance,,travels with lounge_or_coworking
+master_buildings,year_built,used,build_master.py;rank.py,
+master_buildings,year_built_basis,provenance,,travels with year_built
+master_buildings,year_built_source,provenance,,travels with year_built
+master_buildings,pet_one_time_fee_text,display,build_master.py,text shown on the unit card or cost receipt
+master_buildings,pet_one_time_fee_text_basis,provenance,,travels with pet_one_time_fee_text
+master_buildings,pet_one_time_fee_text_source,provenance,,travels with pet_one_time_fee_text
+master_buildings,required_fees_text,used,build_master.py;all_in.py,
+master_buildings,required_fees_text_basis,used,all_in.py,
+master_buildings,required_fees_text_source,provenance,,travels with required_fees_text
+master_buildings,lease_terms_text,used,build_master.py;rent_terms.py,
+master_buildings,lease_terms_text_basis,provenance,,travels with lease_terms_text
+master_buildings,lease_terms_text_source,provenance,,travels with lease_terms_text
+master_buildings,concession_text_evidence,display,build_master.py,text shown on the unit card or cost receipt
+master_buildings,concession_text_evidence_basis,provenance,,travels with concession_text_evidence
+master_buildings,concession_text_evidence_source,provenance,,travels with concession_text_evidence
+master_buildings,pool,used,gates.py;build_master.py;rank.py;lifestyle_color.py,
+master_buildings,pool_basis,provenance,,travels with pool
+master_buildings,pool_source,provenance,,travels with pool
+master_buildings,doorman,used,build_master.py;rank.py,
+master_buildings,doorman_basis,provenance,,travels with doorman
+master_buildings,doorman_source,provenance,,travels with doorman
+master_buildings,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
+master_buildings,parking_fee_monthly_basis,used,all_in.py,
+master_buildings,parking_fee_monthly_source,provenance,,travels with parking_fee_monthly
+master_buildings,balconies,used,build_master.py;rank.py,
+master_buildings,balconies_basis,provenance,,travels with balconies
+master_buildings,balconies_source,provenance,,travels with balconies
+master_buildings,unit_count,display,build_master.py,label shown on the page
+master_buildings,unit_count_basis,provenance,,travels with unit_count
+master_buildings,unit_count_source,provenance,,travels with unit_count
+master_buildings,building_type,used,gates.py;build_master.py;rank.py,
+master_buildings,building_type_basis,provenance,,travels with building_type
+master_buildings,building_type_source,provenance,,travels with building_type
+master_buildings,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
+master_buildings,rent_regulation_basis,provenance,,travels with rent_regulation
+master_buildings,rent_regulation_source,provenance,,travels with rent_regulation
+master_buildings,income_requirement,used,build_master.py;rank.py,
+master_buildings,income_requirement_basis,provenance,,travels with income_requirement
+master_buildings,income_requirement_source,provenance,,travels with income_requirement
+master_buildings,listing_warning,display,build_master.py,text shown on the unit card or cost receipt
+master_buildings,listing_warning_basis,provenance,,travels with listing_warning
+master_buildings,listing_warning_source,provenance,,travels with listing_warning
+master_buildings,addr_keys,not_used,build_master.py,bookkeeping or already folded into a merged field
+master_buildings,n_listed_units,not_used,build_master.py,bookkeeping or already folded into a merged field
+master_buildings,transit_sat_transfers,used,build_master.py;rank.py,
+master_buildings,transit_sat_summary,display,build_master.py,text shown on the unit card or cost receipt
+master_buildings,transit_last_sat_departure_from_jamaica,used,build_master.py;rank.py,
+master_buildings,transit_sun_return_fastest,display,build_master.py,figure shown in a scene or receipt
+master_buildings,transit_sun_return_median,used,build_master.py;rank.py;enrich_units.py,
+master_buildings,agency_violent_per_1000_2025,used,build_master.py;rank.py,
+master_buildings,agency_property_per_1000_2025,display,,area context shown beside the violent-crime trend
+master_buildings,agency_burglary_per_1000_2025,display,,area context shown beside the violent-crime trend
+master_buildings,agency_violent_per_1000_2024,used,build_master.py;rank.py,
+master_buildings,agency_property_per_1000_2024,display,,area context shown beside the violent-crime trend
+master_buildings,agency_burglary_per_1000_2024,display,,area context shown beside the violent-crime trend
+master_buildings,agency_violent_per_1000_2023,used,build_master.py;rank.py,
+master_buildings,agency_property_per_1000_2023,display,,area context shown beside the violent-crime trend
+master_buildings,agency_burglary_per_1000_2023,display,,area context shown beside the violent-crime trend
+master_buildings,agency_violent_per_1000_2022,used,build_master.py;rank.py,
+master_buildings,agency_property_per_1000_2022,display,,area context shown beside the violent-crime trend
+master_buildings,agency_burglary_per_1000_2022,display,,area context shown beside the violent-crime trend
+master_buildings,near250_robbery_24m,used,build_master.py;rank.py,
+master_buildings,near250_robbery_evening_share,used,build_master.py;rank.py,
+master_buildings,near250_robbery_2023,used,build_master.py;rank.py,
+master_buildings,near250_robbery_2025,used,build_master.py;rank.py,
+master_buildings,near250_robbery_borough_median,used,build_master.py;rank.py,
+master_buildings,near250_robbery_above_borough_p80,used,build_master.py;rank.py,
+master_buildings,near250_felony_assault_24m,used,build_master.py;rank.py,
+master_buildings,near250_felony_assault_evening_share,used,build_master.py;rank.py,
+master_buildings,near250_felony_assault_2023,used,build_master.py;rank.py,
+master_buildings,near250_felony_assault_2025,used,build_master.py;rank.py,
+master_buildings,near250_felony_assault_borough_median,used,build_master.py;rank.py,
+master_buildings,near250_felony_assault_above_borough_p80,used,build_master.py;rank.py,
+master_buildings,near250_burglary_24m,used,build_master.py;rank.py,
+master_buildings,near250_burglary_evening_share,used,build_master.py;rank.py,
+master_buildings,near250_burglary_2023,used,build_master.py;rank.py,
+master_buildings,near250_burglary_2025,used,build_master.py;rank.py,
+master_buildings,near250_burglary_borough_median,used,build_master.py;rank.py,
+master_buildings,near250_burglary_above_borough_p80,used,build_master.py;rank.py,
+master_buildings,near250_grand_larceny_motor_vehicle_24m,used,build_master.py;rank.py,
+master_buildings,near250_grand_larceny_motor_vehicle_evening_share,used,build_master.py;rank.py,
+master_buildings,near250_grand_larceny_motor_vehicle_2023,used,build_master.py;rank.py,
+master_buildings,near250_grand_larceny_motor_vehicle_2025,used,build_master.py;rank.py,
+master_buildings,near250_grand_larceny_motor_vehicle_borough_median,used,build_master.py;rank.py,
+master_buildings,near250_grand_larceny_motor_vehicle_above_borough_p80,used,build_master.py;rank.py,
+master_buildings,near250_theft_from_vehicle_24m,used,build_master.py;rank.py,
+master_buildings,near250_theft_from_vehicle_evening_share,used,build_master.py;rank.py,
+master_buildings,near250_theft_from_vehicle_2023,used,build_master.py;rank.py,
+master_buildings,near250_theft_from_vehicle_2025,used,build_master.py;rank.py,
+master_buildings,near250_theft_from_vehicle_borough_median,used,build_master.py;rank.py,
+master_buildings,near250_theft_from_vehicle_above_borough_p80,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_parts_theft_24m,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_parts_theft_evening_share,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_parts_theft_2023,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_parts_theft_2025,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_parts_theft_borough_median,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_parts_theft_above_borough_p80,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_criminal_mischief_24m,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_criminal_mischief_evening_share,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_criminal_mischief_2023,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_criminal_mischief_2025,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_criminal_mischief_borough_median,used,build_master.py;rank.py,
+master_buildings,near250_vehicle_criminal_mischief_above_borough_p80,used,build_master.py;rank.py,
+master_buildings,nycrec_bedbug_infested_units__latest_filing,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_complaints__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_complaints__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_complaints__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_complaints__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_complaints__all_years_in_dataset,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_complaints__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_complaints__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_devices_active__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_violations__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_violations__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_violations__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_violations__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_violations__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_violations__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_dob_elevator_violations_active__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_building_record__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_all__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_all__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_all__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_all__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_all__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_all__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_door_window_security__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_door_window_security__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_door_window_security__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_door_window_security__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_door_window_security__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_door_window_security__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_elevator__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_elevator__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_elevator__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_elevator__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_elevator__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_elevator__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_heat_hot_water__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_heat_hot_water__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_heat_hot_water__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_heat_hot_water__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_heat_hot_water__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_heat_hot_water__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_mold__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_mold__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_mold__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_mold__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_mold__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_mold__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_pests__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_pests__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_pests__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_pests__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_pests__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_complaints_pests__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_registration__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_a__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_a__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_a__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_a__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_a__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_a__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_b__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_b__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_b__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_b__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_b__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_b__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_c__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_c__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_c__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_c__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_c__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_c__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_hpd_violations_class_c_open__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_marshal_evictions_residential__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_marshal_evictions_residential__2024_to_date,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_marshal_evictions_residential__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_marshal_evictions_residential__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_marshal_evictions_residential__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_marshal_evictions_residential__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_pluto_lot__current,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_blocked_driveway__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_blocked_driveway__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_blocked_driveway__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_blocked_driveway__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_blocked_driveway__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_blocked_driveway__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_derelict_or_abandoned_vehicle__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_derelict_or_abandoned_vehicle__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_derelict_or_abandoned_vehicle__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_derelict_or_abandoned_vehicle__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_derelict_or_abandoned_vehicle__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_derelict_or_abandoned_vehicle__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_dob__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_dob__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_dob__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_dob__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_dob__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_dob__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_hpd__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_hpd__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_hpd__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_hpd__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_hpd__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_elevator_hpd__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_heat_hot_water__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_heat_hot_water__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_heat_hot_water__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_heat_hot_water__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_heat_hot_water__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_heat_hot_water__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_illegal_parking__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_illegal_parking__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_illegal_parking__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_illegal_parking__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_illegal_parking__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_illegal_parking__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_noise_residential__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_noise_residential__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_noise_residential__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_noise_residential__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_noise_residential__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_noise_residential__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_unsanitary_condition__2023,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_unsanitary_condition__2024,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_unsanitary_condition__2025,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_unsanitary_condition__2026_ytd,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_unsanitary_condition__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nycrec_sr311_unsanitary_condition__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
+master_buildings,nyc_record_flags,used,build_master.py;rating_standard.py,
+evidence:items,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
+evidence:items,building_name,used,gates.py;build_master.py;rank.py;rent_terms.py;rating_standard.py,
+evidence:items,category,used,avoid.py,
+evidence:items,item_date,used,avoid.py,
+evidence:items,excerpt,used,avoid.py,
+evidence:items,source_site,used,gates.py;build_master.py;avoid.py,
+evidence:items,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+evidence:items,about,used,rating_standard.py,
+evidence:items,retrieved_at,not_used,,bookkeeping or already folded into a merged field
+evidence:facts,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
+evidence:facts,fact,used,build_master.py;avoid.py;rent_terms.py,
+evidence:facts,value,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;rent_terms.py;enrich_units.py,
+evidence:facts,quote,used,rent_terms.py,
+evidence:facts,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+evidence:confirm,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
+evidence:confirm,fact,used,build_master.py;avoid.py;rent_terms.py,
+evidence:confirm,value,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;rent_terms.py;enrich_units.py,
+evidence:confirm,quote,used,rent_terms.py,
+evidence:confirm,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+evidence:confirm,status,used,build_master.py;avoid.py;enrich_units.py,
+evidence:live_check,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
+evidence:live_check,listing_url,used,avoid.py;rent_terms.py,
+evidence:live_check,unit,used,gates.py;build_master.py;rank.py;avoid.py;rent_terms.py,
+evidence:live_check,status,used,build_master.py;avoid.py;enrich_units.py,
+evidence:live_check,price_now,used,build_master.py,
+evidence:live_check,available_now_text,used,build_master.py,
+evidence:live_check,matches_stored,not_used,,bookkeeping or already folded into a merged field
+evidence:live_check,building_site_url,used,rent_terms.py,
+evidence:live_check,checked_at,used,build_master.py,
+evidence:live_check,notes,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py,
+evidence:ratings,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
+evidence:ratings,building_name,used,gates.py;build_master.py;rank.py;rent_terms.py;rating_standard.py,
+evidence:ratings,rating_source,used,rating_standard.py,
+evidence:ratings,rating_value,used,rating_standard.py,
+evidence:ratings,rating_scale,used,rating_standard.py,
+evidence:ratings,review_count,used,rating_standard.py,
+evidence:ratings,as_of_date,used,rating_standard.py,
+evidence:ratings,reviews_read,used,rating_standard.py,
+evidence:ratings,reviews_last_6_months,used,rating_standard.py,
+evidence:ratings,negative_last_6_months,used,rating_standard.py,
+evidence:ratings,negative_older,used,rating_standard.py,
+evidence:ratings,serious_issue_tags_last_6_months,used,rating_standard.py,
+evidence:ratings,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+evidence:ratings,retrieved_at,not_used,,bookkeeping or already folded into a merged field
+evidence:ratings,notes,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py,
+evidence:nyc_records_flags,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
+evidence:nyc_records_flags,bbl,not_used,,NYC records detail behind the flags
+evidence:nyc_records_flags,address,used,gates.py;build_master.py;rank.py;rent_terms.py,
+evidence:nyc_records_flags,units_in_building,used,build_master.py,
+evidence:nyc_records_flags,caution,not_used,,NYC records detail behind the flags
+evidence:nyc_records_flags,flag,used,build_master.py;avoid.py;crime_benchmarks.py;rating_standard.py,
+evidence:nyc_records_flags,metric,used,avoid.py,
+evidence:nyc_records_flags,period,used,build_master.py;avoid.py,
+evidence:nyc_records_flags,count,used,build_master.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py,
+evidence:nyc_records_flags,per_100_units,used,avoid.py,
+evidence:nyc_records_flags,baseline_median,not_used,,NYC records detail behind the flags
+evidence:nyc_records_flags,baseline_p80,not_used,,NYC records detail behind the flags
+evidence:nyc_records_flags,baseline_p90,used,avoid.py,
+evidence:nyc_records_flags,baseline_p95,not_used,,NYC records detail behind the flags
+evidence:nyc_records_flags,above_p95,not_used,,NYC records detail behind the flags
+evidence:nyc_records_flags,detail,used,rent_terms.py,
+evidence:nyc_records_flags,query_url,used,avoid.py,
+evidence:nyc_records_flags,retrieved_at,not_used,,bookkeeping or already folded into a merged field
+evidence:rating_standard,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
+evidence:rating_standard,building_name,used,gates.py;build_master.py;rank.py;rent_terms.py;rating_standard.py,
+evidence:rating_standard,city,used,gates.py;build_master.py;rating_standard.py,
+evidence:rating_standard,state,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;crime_benchmarks.py;rating_standard.py,
+evidence:rating_standard,zip5,used,gates.py;build_master.py;rating_standard.py,
+evidence:rating_standard,region,used,rating_standard.py,
+evidence:rating_standard,round,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;lifestyle_groups.py;crime_benchmarks.py;rating_standard.py,
+evidence:rating_standard,ratings_checked,used,rating_standard.py,
+evidence:rating_standard,best_source,used,rating_standard.py,
+evidence:rating_standard,best_source_label,used,rating_standard.py,
+evidence:rating_standard,rating,used,rating_standard.py,
+evidence:rating_standard,review_count,used,rating_standard.py,
+evidence:rating_standard,rating_as_of,used,rating_standard.py,
+evidence:rating_standard,rating_age_months,used,rating_standard.py,
+evidence:rating_standard,rating_stale,used,rating_standard.py,
+evidence:rating_standard,all_sources,used,rating_standard.py,
+evidence:rating_standard,reviews_read_all_sources,used,rating_standard.py,
+evidence:rating_standard,recent_reviews_read,used,rating_standard.py,
+evidence:rating_standard,recent_negative,used,rating_standard.py,
+evidence:rating_standard,older_negative,used,rating_standard.py,
+evidence:rating_standard,recent_tags,used,rating_standard.py,
+evidence:rating_standard,rating_verdict,used,rating_standard.py,
+evidence:rating_standard,rating_verdict_why,used,rating_standard.py,
+evidence:rating_standard,rule_applies,used,rating_standard.py,
+evidence:rating_standard,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+evidence:rating_standard,has_nyc_records,used,rating_standard.py,
+evidence:rating_standard,avoid,used,rank.py;avoid.py;rating_standard.py,
+evidence:rating_standard,reasons,used,rank.py;avoid.py;rating_standard.py,
+evidence:rating_standard,nyc_record_flags,used,build_master.py;rating_standard.py,
+rent_terms,listing_id,used,build_master.py;all_in.py;rank.py;build_neighborhoods.py;lifestyle_features.py;rent_terms.py,
+rent_terms,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
+rent_terms,listed_rent,used,gates.py;build_master.py;all_in.py;rent_terms.py;enrich_units.py,
+rent_terms,listed_price_is,used,all_in.py;rent_terms.py,
+rent_terms,offer_text,used,all_in.py;rent_terms.py,
+rent_terms,offer_type,used,all_in.py;rent_terms.py,
+rent_terms,free_months,used,all_in.py;rent_terms.py,
+rent_terms,free_period_timing,used,rent_terms.py,
+rent_terms,lease_months,used,all_in.py;rent_terms.py,
+rent_terms,gross_monthly_rent,used,all_in.py;rent_terms.py,
+rent_terms,net_effective_monthly,used,all_in.py;rent_terms.py,
+rent_terms,first_full_payment_date,used,all_in.py;rent_terms.py,
+rent_terms,first_full_payment_note,used,all_in.py;rent_terms.py,
+rent_terms,offer_expires,used,rent_terms.py,
+rent_terms,conditions,used,rent_terms.py,
+rent_terms,computed_how,used,rent_terms.py,
+rent_terms,confidence,used,rank.py;rent_terms.py,
+rent_terms,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+rent_terms,needs_call,used,all_in.py;rent_terms.py,
+rent_terms,gross_if_listed_is_net,used,all_in.py;rent_terms.py,
+rent_terms,net_if_listed_is_gross,used,rent_terms.py,
