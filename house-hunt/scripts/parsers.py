@@ -58,6 +58,15 @@ def unit_key(unit) -> str:
     return re.sub(r"[^a-z0-9]", "", clean_unit(unit))
 
 
+_PLAN_LABEL = re.compile(r"\bbeds?\b|\bbaths?\b|\$|\bstudio\b|floor ?plan|^plan\b|\bbedroom", re.I)
+
+
+def unit_label_key(unit) -> str:
+    """unit_key, but '' for a label that describes a floor plan instead of naming a unit ('1 bed, 1 bath, $1675',
+    '1 Bed - 1 Bath', '907 (floor plan)'): such a row is not a named unit (independent check 2, D1, D17)."""
+    return "" if _PLAN_LABEL.search(str(unit or "")) else unit_key(unit)
+
+
 def unit_tail(unit) -> str:
     """Last segment of a label with a separator, leading zeros dropped: '005-5106' -> '5106', '001-215' -> '215'."""
     segs = [s for s in re.split(r"[^a-z0-9]+", clean_unit(unit)) if s]
@@ -377,6 +386,10 @@ def parse_parking(text):
     t = re.sub(r"\bincluded\s*=\s*true\b", "included in rent", t, flags=re.I)
     t = re.sub(r"\b\w+\s*=\s*(?:true|false)\b", " ", t, flags=re.I)
     t = re.sub(r"\[[^\]]{0,60}\]", " ", t)                                 # '[parking comment]' tags
+    # a bracket that says the amount is not on this page, or quotes another listing's price, never sets the fee
+    # (independent check 2, D15: 2072 20th Ln took $200 from the 1483 Shore Pkwy listing)
+    t = re.sub(r"\([^)]*(?:not stated here|amount not stated|another (?:listing|building)|other (?:listing|building)|same complex|different (?:listing|building))[^)]*\)",
+               " ", t, flags=re.I)
     if re.fullmatch(r"\s*\$?\d+(?:\.\d+)?(?:\s*-\s*\$?\d+(?:\.\d+)?)?\s*", t):
         t = "parking: " + t
     t = re.sub(r"(:\s*)(\d+(?:\.\d+)?(?:\s*-\s*\d+(?:\.\d+)?)?)\s*(?=$|;|\(|,)", r"\1$\2 ", t)   # 'Parking - Garage: 185'
@@ -504,8 +517,26 @@ def monthly_fees_from_text(text, unit=""):
         v = money(tl)
         return (v, "parsed from the fee text") if v <= 400 else (None, f"${v:g} not counted: no monthly wording")
     tot, found, notes, per_unit, counted = 0.0, False, [], {}, []
-    lead = re.match(r"\s*" + AMT + r"\s*(?:/\s*mo(?:nth)?|a month|per month|monthly)?\s*:", t)          # '$182: A $90 + B $92'
-    body = t[lead.end():] if lead else t
+    lead = re.match(r"\s*" + AMT + r"\s*(?:/\s*mo(?:nth)?\.?|a month|per month|monthly)?\s*:", t)          # '$182: A $90 + B $92'
+    if not lead:
+        # '$100/mo (trash $25 + amenity $75); electricity separate': the total, then its own breakdown in brackets
+        # (independent check 2, D13). Only when the bracket holds two or more amounts that add up to the total.
+        lm = re.match(r"\s*" + AMT + r"\s*(?:/\s*mo(?:nth)?\.?|a month|per month|monthly)?\s*\(([^)]*)\)", t)
+        if lm:
+            inner = [_f(a, b) for a, b in re.findall(AMT, lm.group(3))]
+            if len(inner) >= 2 and abs(sum(inner) - _f(lm.group(1), lm.group(2))) < 0.5:
+                lead = lm
+    # a range ('$35-$45', '$35 to $45') is one fee, counted once at its high end (the safe side for a cost cap), D13
+    ranges = []
+
+    def _range(m):
+        lo, hi = _f(m.group(1), m.group(2)), _f(m.group(3), m.group(4))
+        if hi >= lo:
+            ranges.append((lo, hi))
+            return f"${hi:g}"
+        return m.group(0)
+    t_r = re.sub(AMT + r"\s*(?:-|–|to)\s*" + AMT, _range, t[lead.end():] if lead else t)
+    body = t_r
     for clause in re.split(r";|\||\+|\bplus\b|,(?!\d{3})|\.\s+(?=[A-Z])|\band\b(?=[^$]*\$)", body):
         c = clause.strip()
         if not c:
@@ -560,6 +591,8 @@ def monthly_fees_from_text(text, unit=""):
             found = True
         else:
             notes.append("the fee differs by unit (" + ", ".join(f"${v:g}" for v in sorted(set(per_unit.values()))) + " seen on other units)")
+    for lo, hi in ranges:
+        notes.append(f"the page gives a range ${lo:g}-${hi:g}; the high end is counted")
     if found:
         return tot, "; ".join(["parsed from the fee text"] + notes)
     if re.search(r"amounts? not (?:stated|shown|published)|not published|fee exists|\bfees?\b", tl) and not re.search(r"^\s*renter'?s insurance required\s*$", tl):
@@ -770,3 +803,122 @@ def income_restricted(text) -> bool:
                  r"area median income|income rules|income-?qualified|section 8 only|lihtc|not exceed|no more than \$|below \$\d", t):
         return True
     return bool(re.search(r"income (?:of |between |from )?\$[\d,]+\s*(?:to|-|–|and)\s*\$[\d,]+", t))
+
+
+# ---------------------------------------------------------------------- independent check 2 (D8, D10): lease term, floor
+_AMENITY_AFTER = (r"(?:\s+(?:resident'?s?|residents'|furnished|landscaped|rooftop|roof|outdoor|indoor|sky|panoramic|common|shared|private club))*"
+                  r"\s+(?:terraces?|sun ?decks?|decks?|lounges?|gym|fitness|amenit\w+|laundry|pool|club ?room|clubhouse|garden|roof|"
+                  r"library|playroom|party room|common|courtyard|solarium|spa|theat\w+|co-?working|storage)")
+_FLOOR_WORDS = {"first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6, "seventh": 7, "ground": 0}
+
+
+def floor_from_description(text):
+    """The unit's floor as a listing description states it, or None.
+
+    The first 'Nth floor' phrase is NOT enough (independent check 2, D10): '8th-floor sundeck', '11th floor Terraces'
+    and "7th Floor Resident's Lounge" describe an amenity, and settled three units on the wrong floor. A phrase counts
+    only when it is not about an amenity; if two unit phrases disagree the floor is not stated.
+    """
+    t = str(text or "")
+    found = []
+    for m in re.finditer(r"\b(?:(\d{1,2})(?:st|nd|rd|th)|(first|second|third|fourth|fifth|sixth|seventh|ground))[- ]floor\b", t, re.I):
+        after = t[m.end():m.end() + 60]
+        before = t[max(0, m.start() - 40):m.start()].lower()
+        if re.match(_AMENITY_AFTER, after, re.I) or re.search(r"(?:on|and|from) (?:the|our|a) (?:roof ?deck|rooftop)[^.]{0,20}$|\band\s*$", before) and re.match(r"\s+terrace", after, re.I):
+            continue
+        if re.search(r"\b(?:through|to|thru)\s+(?:the\s+)?$|\bfloors?\s+\d+\s*-\s*$", before):
+            continue
+        f = int(m.group(1)) if m.group(1) else _FLOOR_WORDS[m.group(2).lower()]
+        found.append(f)
+    vals = set(found)
+    return found[0] if len(vals) == 1 else None
+
+
+def lease_term_from_text(text):
+    """What a checker's note says about the lease term the LISTED price belongs to (independent check 2, D8).
+
+    Returns {'months': int|None, 'price_12': float|None, 'lowest_of_terms': bool, 'quote': str}.
+    months      the term the listed price is quoted for ('Price is for a 24 Months lease', '$2,340 IS THE 20-MONTH
+                LEASE PRICE', 'lease 15 mo', '15-month lease price', '$2,590 is the 18-month term')
+    price_12    the 12-month price where the same note gives it ('12-month price $2,430', '12-month base is $2,105')
+    lowest_of_terms  the note says only that the price is the lowest over the lease terms offered (term not named)
+    An offer sentence ('1 month free on a 14-month lease') is not a statement about the listed price and yields nothing.
+    """
+    t = re.sub(r"\s+", " ", str(text or ""))
+    out = {"months": None, "price_12": None, "lowest_of_terms": False, "quote": ""}
+    if not t.strip():
+        return out
+    N = r"(\d{1,2})(?:[- ]?(?:or|/|to)[- ]?(\d{1,2}))?"
+    pats = [r"price(?: shown)? is for a " + N + r"[- ]months?[- ](?:lease|term)",
+            r"\bis the " + N + r"[- ]months?[- ]?(?:lease[- ])?(?:price|term|base)",
+            r"\bIS THE " + N + r"-MONTH LEASE PRICE",
+            N + r"-month[- ](?:lease[- ])?(?:lease price|price|base)\b",
+            r"lease (?:term|length) shown(?: is)? " + N + r" months?",
+            r"lowest price is for a " + N + r"-month lease",
+            r"priced for a " + N + r"-month term",
+            r"\blease " + N + r" mo\b",
+            r"\bPlan [^,;.]{1,40}, " + N + r"-month lease",
+            r"\$[\d,]+(?: base| total)?[^.;|]{0,40}\bon a " + N + r"-month lease",
+            r"\(" + N + r"-month term\)", r"\(" + N + r"(?:/\d{1,2})? mo\)",
+            r"for an? " + N + r"-month term", r"lease_length " + N + r"\b",
+            N + r"-month lease, (?:available|move-in)"]
+    best = None
+    for p in pats:
+        for m in re.finditer(p, t, re.I):
+            pre = t[max(0, m.start() - 45):m.start()].lower()
+            if re.search(r"free (?:on|with|when|for)|months? free|off (?:on|with)|sign an?|receive|special|credit on|\b12-month (?:price|base|term)", pre) and "price" not in m.group(0).lower():
+                continue
+            mo = max(int(x) for x in m.groups() if x)
+            if mo == 12 and re.search(r"12-month (?:price|base)", m.group(0), re.I):
+                continue                                   # '12-month price $2,430' is the comparison, not the listed term
+            if best is None or m.start() < best[0]:
+                best = (m.start(), mo, t[max(0, m.start() - 30):m.end() + 40].strip())
+    if best:
+        out["months"], out["quote"] = best[1], best[2]
+    m = re.search(r"12-month (?:price|base(?: rent)?|term)(?: is| rent)?:? \$?(\d{1,2},?\d{3})\b", t, re.I)
+    if m:
+        out["price_12"] = float(m.group(1).replace(",", ""))
+    m = re.search(r"lowest (?:price|of any term)? ?over (?:the )?lease terms[^.;|]{0,40}|the lowest of any term", t, re.I)
+    if m:
+        out["lowest_of_terms"] = True
+        out["quote"] = out["quote"] or m.group(0).strip()
+    return out
+
+
+DOGS_NOT_EXPLICIT = re.compile(
+    r"case[- ]by[- ]case|upon approval|with (?:the )?(?:landlord|owner)(?:'s)? approval|subject to (?:landlord |owner |board )?approval|dogs? (?:are )?not named|"
+    r"species (?:and size )?not stated|pets? considered|pets? negotiable|contact for more information on pet|no policy text|pets allowed; species|"
+    r"dogs? not mentioned|does not (?:name|mention) dogs", re.I)
+
+
+def dogs_not_explicit(text) -> str:
+    """The phrase that shows dogs are NOT explicitly allowed ('pets upon approval', 'case by case', small pets with dogs
+    unnamed), or ''. The owner's rule: dogs must be named as allowed (independent check 2, D3)."""
+    m = DOGS_NOT_EXPLICIT.search(str(text or ""))
+    return m.group(0) if m else ""
+
+
+def lot_address_agrees(listing_address, lot_address) -> bool:
+    """True when a tax lot's address is the listing's address: same house number ('35-16' = '3516'), or the listing's
+    number inside the lot's range ('1010' in '1010-1012'), on a street whose first word agrees. A neighbouring lot
+    ('142-38' vs '142-32', a corner lot filed under the cross street) is not the listing's lot (independent check 2, D16)."""
+    a, b = str(listing_address or "").lower(), str(lot_address or "").lower()
+    ma, mb = re.match(r"\s*(\d+(?:-\d+)?)\s+(.*)", a), re.match(r"\s*(\d+(?:-\d+)?)\s+(.*)", b)
+    if not ma or not mb:
+        return False
+
+    def street(s):
+        s = re.split(r",", s)[0]
+        s = re.sub(r"\b(?:north|south|east|west|n|s|e|w)\b\.?", " ", s)
+        w = re.findall(r"[a-z0-9]+", s)
+        return re.sub(r"(\d+)(?:st|nd|rd|th)$", r"\1", w[0]) if w else ""
+    if street(ma.group(2)) != street(mb.group(2)):
+        return False
+    na, nb = ma.group(1), mb.group(1)
+    if na.replace("-", "") == nb.replace("-", ""):
+        return True
+    if "-" in nb and "-" not in na:                       # lot filed as a range 1010-1012 (not a Queens 142-32 number)
+        lo, hi = nb.split("-")
+        if len(lo) == len(hi) and lo.isdigit() and hi.isdigit() and int(lo) <= int(na) <= int(hi) and int(hi) - int(lo) <= 40:
+            return True
+    return False

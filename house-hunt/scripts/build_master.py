@@ -217,7 +217,8 @@ class Merge:
 
 CONFLICT_FIELDS = {"elevator", "dogs_allowed", "dog_weight_limit_lb", "parking_fee_monthly", "pet_rent_monthly",
                    "building_floors", "year_built"}
-TEXT_APPEND = {"required_fees_text", "utilities_included", "concession_text_evidence", "optional_fees_text", "parking_text"}
+TEXT_APPEND = {"required_fees_text", "utilities_included", "concession_text_evidence", "optional_fees_text", "parking_text",
+               "listing_warning", "price_term_text", "elevator_evidence_open", "dogs_evidence_open"}
 GOOD_FLOORCOUNT = ("confirmed", "official_record", "community_page")     # floor counts trusted to bound a unit-label reading
 
 
@@ -317,6 +318,11 @@ def apply_fact(M, b, fact, value, quote, url):
         M.add(b, "concession_text_evidence", v, C, url)
     elif f.startswith("lease_terms"):
         M.add(b, "lease_terms_text", v, C, url)
+    elif f.startswith(("lease_term_of_listed_price", "lease_term_priced", "price_basis", "lease_and_deposit")):
+        # the term the listed price belongs to (independent check 2, D8): kept as text, read per unit below
+        M.add(b, "price_term_text", f"{v} | {quote}" if not is_blank(quote) and str(quote) != str(v) else v, C, url)
+    elif f.startswith(("address_mismatch", "listing_address_mismatch", "address_note")):
+        M.add(b, "listing_warning", "address: " + str(v), C, url)          # D6: was not mapped
     elif f.startswith("rent_regulation"):
         M.add(b, "rent_regulation", v, C, url)
     elif f.startswith(("income_requirement", "income_restrict")):
@@ -341,7 +347,8 @@ def apply_fact(M, b, fact, value, quote, url):
 KNOWN_FACT_PREFIXES = ("parking", "garage", "pet_rent", "dog", "pet_fee", "fee:", "required", "amenity_fee", "additional_fees", "fees_and",
                        "optional_monthly_fee", "utilities", "pool", "doorman", "concierge", "year_built", "total_units", "units", "building_floors",
                        "management_company", "registered_manager", "laundry", "concession", "special", "lease_terms", "rent_regulation",
-                       "income", "listing_warning", "building_type", "pet_limit", "pet_restrictions")
+                       "income", "listing_warning", "building_type", "pet_limit", "pet_restrictions", "lease_term", "price_basis", "lease_and",
+                       "address_mismatch", "listing_address_mismatch", "address_note")
 
 
 def main():
@@ -363,15 +370,48 @@ def main():
     def bid_of(addr_key):
         return A2B.get(addr_key)
 
+    # NYC tax lot (independent check 2, D16): PLUTO facts are used only when the lot's address IS the listing's address.
+    # A neighbouring lot within 40 m ('142-38' matched to '142-32', a corner lot filed under the cross street) gives
+    # no elevator, floor count, year or unit count. D4: the city's device list must not show zero active elevators.
+    lot_ok, lot_addr, dob_el = {}, {}, {}
+    pf = DATA / "reference" / "nyc_building_facts.csv"
+    if pf.exists():
+        PF = pd.read_csv(pf, dtype=str, keep_default_na=False)
+        a_of = U.drop_duplicates("addr_key").set_index("addr_key").address.to_dict()
+        for r in PF.itertuples():
+            if r.match_basis in ("house_number+location", "nearest_lot"):
+                lot_addr[r.addr_key] = r.pluto_address
+                lot_ok[r.addr_key] = parsers.lot_address_agrees(a_of.get(r.addr_key, r.addr_key.split("|")[0]), r.pluto_address)
+    nrf = DATA / "evidence" / "nyc_records.csv"
+    if nrf.exists():
+        NR = pd.read_csv(nrf, dtype=str, keep_default_na=False)
+        for r in NR[NR.record_type == "dob_elevator_devices_active"].itertuples():
+            try:
+                dob_el[r.addr_key] = (int(float(r.count)), r.detail[:160])
+            except ValueError:
+                pass
+
+    def official_elevator_ok(addr_key):
+        """An elevator may rest on the city's building class only on the listing's own lot, and not where the city's
+        device list for that lot shows no active passenger elevator (an accessibility lift is not an elevator)."""
+        return lot_ok.get(addr_key, False) and dob_el.get(addr_key, (1, ""))[0] > 0
+
     M = Merge()
     # ------------------------------------------------------------------ 5/6. listing rows + inference
     for r in U.itertuples():
         b, src = r.building_id, r.url
         el_basis = getattr(r, "elevator_basis", "")
-        if r.g_elevator == "pass":
+        if r.g_elevator == "pass" and not (el_basis.startswith("nyc") and not official_elevator_ok(r.addr_key)):
             # 'stated' only when the page lists an elevator; a harvester's "6+ floors" note is an inference (W3)
             M.add(b, "elevator", "yes", "inferred" if el_basis.startswith("inferred") else ("official_record" if el_basis.startswith("nyc") else "stated"),
                   src if not el_basis.startswith("nyc") else "NYC PLUTO building class " + getattr(r, "pluto_class", ""))
+        if r.addr_key in lot_addr:
+            M.add(b, "pluto_lot_ok", "yes" if lot_ok.get(r.addr_key) else "no", "official_record", "data/reference/nyc_building_facts.csv")
+            M.add(b, "pluto_lot_address", lot_addr[r.addr_key], "official_record", "data/reference/nyc_building_facts.csv")
+        if r.addr_key in dob_el:
+            M.add(b, "dob_active_elevators", str(dob_el[r.addr_key][0]), "official_record", "data/evidence/nyc_records.csv")
+            if dob_el[r.addr_key][0] == 0:
+                M.add(b, "elevator_note", "city device list for this lot shows no active passenger elevator: " + dob_el[r.addr_key][1], "official_record", "data/evidence/nyc_records.csv")
         M.add(b, "dogs_allowed", yesno(r.dogs), "stated", src)
         M.add(b, "dog_policy_text", r.dog_policy_text, "stated", src)
         M.add(b, "dog_weight_limit_lb", r.dog_weight_limit_lb if re.fullmatch(r"[\d.]+", r.dog_weight_limit_lb or "") else "", "stated", src)
@@ -401,7 +441,7 @@ def main():
         M.add(b, "building_name", r.building_name, "stated", src)
         for col, fld in [("pluto_floors", "building_floors"), ("pluto_year", "year_built"), ("pluto_units", "unit_count")]:
             v = getattr(r, col, "")
-            if re.fullmatch(r"[\d.]+", v or "") and float(v) > 0:
+            if re.fullmatch(r"[\d.]+", v or "") and float(v) > 0 and lot_ok.get(r.addr_key, False):
                 M.add(b, fld, str(int(float(v))), "official_record", "NYC PLUTO (64uk-42ks)")
         for col, fld in [("community_pool", "pool"), ("community_gym", "gym"), ("community_controlled_access", "controlled_access"),
                          ("community_package_room", "package_room"), ("community_dog_park_pet_spa", "dog_amenities"),
@@ -433,6 +473,11 @@ def main():
     C, F, L = cat("confirm_batch_*.csv"), cat("facts_batch_*.csv"), cat("live_check_batch_*.csv")
     floor_rows = []                              # (building, unit label or '*', floor, basis, source)
     dog_yes, dog_contra = {}, {}
+    # independent check 2, D2: a fact the evidence pass looked for and could NOT confirm is open, whatever the
+    # harvester stored. seen[(building, fact)] = {"confirmed": n, "unconfirmed": [text, ...]}
+    seen = {}
+    PLUTO_ONLY = re.compile(r"pluto|bldgclass|building class|public record|class D\d|nyc_records_match|cityofnewyork", re.I)
+    PAGE_WORDS = re.compile(r"listing (?:says|states|lists)|on the listing|amenit|description|own site|building(?:'s)? (?:site|page)|floor ?plans? page", re.I)
     if len(C):
         for r in C.itertuples():
             b, fact, val = bid_of(r.addr_key), r.fact.lower(), r.value
@@ -444,15 +489,36 @@ def main():
                 if kind == "size_only":
                     M.add(b, "dog_size_only", "yes: " + val[:120], "confirmed", r.source_url)
             # (dog_size_only is a display fact: "small dogs" passes the gate, owner 2026-11-15; rank.py adds note + tour question)
+            gate_fact = "elevator" if fact.startswith("elevator") else ("dogs_allowed" if fact.startswith("dogs_allowed") else "")
+            txt = f"{val} | {r.quote}"
+            if gate_fact:
+                st = seen.setdefault((b, gate_fact), {"confirmed": 0, "unconfirmed": []})
+                if r.status == "unconfirmed":
+                    st["unconfirmed"].append((txt[:260], r.source_url))
+            if gate_fact == "dogs_allowed" and r.status != "contradicts":
+                ne = parsers.dogs_not_explicit(txt)
+                if ne:                           # D3: "pets upon approval", "case by case", dogs not named: not explicit, any status
+                    M.add(b, "dogs_evidence_open", f"dogs are not named as allowed ('{ne}'): {txt[:200]}", "confirmed", r.source_url)
             if r.status == "unconfirmed":        # an unconfirmed row never upgrades a basis (W3)
                 continue
             if fact.startswith("elevator"):
                 if r.status == "contradicts":
                     M.add(b, "elevator", "conflicting" if re.search(r"conflict|not established", val, re.I) else "no", "confirmed", r.source_url)
                     M.add(b, "elevator_note", val[:200], "confirmed", r.source_url)
+                elif PLUTO_ONLY.search(txt + " " + r.source_url) and not PAGE_WORDS.search(re.sub(r"not on the listing", "", txt)):
+                    # D4: "confirmed" on the strength of the city's building class alone is an official record at best,
+                    # and only on the listing's own lot with an active elevator device on file
+                    if official_elevator_ok(r.addr_key):
+                        M.add(b, "elevator", yesno(val) or "yes", "official_record", "NYC PLUTO building class (evidence pass): " + r.quote[:120])
+                        st["confirmed"] += 1
+                    else:
+                        st["unconfirmed"].append(("the city's record for a neighbouring lot, or a lot with no active elevator on file: " + txt[:200], r.source_url))
                 else:
                     # "yes (inferred from height)" written by the evidence agent is still an inference
-                    M.add(b, "elevator", yesno(val), "inferred" if re.search(r"inferred|implied|treated as|plan rule", val, re.I) else "confirmed", r.source_url)
+                    inferred_ = bool(re.search(r"inferred|implied|treated as|plan rule", val, re.I))
+                    M.add(b, "elevator", yesno(val), "inferred" if inferred_ else "confirmed", r.source_url)
+                    if not inferred_:
+                        st["confirmed"] += 1
             elif fact.startswith("dogs_allowed"):
                 if r.status == "contradicts":
                     dog_contra.setdefault(b, []).append((val, r.source_url))
@@ -460,6 +526,7 @@ def main():
                     if not is_aggregator(r.source_url):      # only the building's own or its manager's page outranks an aggregator
                         dog_yes[b] = r.source_url
                     M.add(b, "dogs_allowed", yesno(val) or "yes", "confirmed", r.source_url)
+                    st["confirmed"] += 1
             elif fact.startswith("dog_weight"):
                 if kind == "no_limit" and r.status == "confirmed":
                     M.add(b, "dog_weight_limit_lb", "no limit", "confirmed", r.source_url)
@@ -472,11 +539,17 @@ def main():
                 M.add(b, "building_floors", f"{n:g}" if n else "", "confirmed", r.source_url)
             elif fact.startswith("floor"):
                 pairs, inferred = parsers.parse_floor_confirm(val)
+                # D10: the checker often wrote "floor inferred from the unit number" in the quote, not the value
+                inferred = inferred or bool(re.search(r"inferred|derived|from (?:the )?unit (?:number|label)s?|by unit numbering|implied|my reading", r.quote or "", re.I))
                 for lab, fl_ in pairs:
                     # a floor the checker read off the unit number is an inference, whatever the row's status (W1)
-                    floor_rows.append((b, lab, fl_, "inferred" if inferred else "confirmed", r.source_url, val[:120]))
+                    floor_rows.append((b, lab, fl_, "inferred" if inferred else "confirmed", r.source_url, val[:120], r.quote or ""))
                 if not pairs and not re.search(r"unknown|unconfirmed", val, re.I):
-                    floor_rows.append((b, "?", None, "unparsed", r.source_url, val[:120]))
+                    floor_rows.append((b, "?", None, "unparsed", r.source_url, val[:120], r.quote or ""))
+    for (b, gate_fact), st in seen.items():
+        if st["unconfirmed"] and not st["confirmed"]:
+            for t_, src_ in st["unconfirmed"][:3]:
+                M.add(b, gate_fact.split("_")[0] + "_evidence_open", "the evidence pass could not confirm it: " + t_, "confirmed", src_)
     # conflicting dog policy (W20): the building's own site or management feed wins over an aggregator; aggregator
     # against aggregator is an open fact ("Are dogs allowed?"), not a "no"
     for b, rows_ in dog_contra.items():
@@ -573,7 +646,7 @@ def main():
 
     # the same unit listed twice inside one building (W8): same normalized label, or - with no label - the same beds,
     # sq ft and rent. Keep the building's own site over an aggregator, then the fuller row; remember the other links.
-    MU["ukey_"] = MU.unit.map(parsers.unit_key)
+    MU["ukey_"] = MU.unit.map(parsers.unit_label_key)       # '1 bed, 1 bath, $1675' is a plan description, not a unit (D17)
     MU["utail_"] = MU.unit.map(parsers.unit_tail)
     MU["upri_"] = (~MU.source_site.map(is_aggregator)).astype(int) * 4 + (MU.detail_level.str.lower() != "card").astype(int) * 2 + (MU.ukey_ != "").astype(int)
     MU = MU.sort_values(["building_id", "upri_"], ascending=[True, False], kind="stable")
@@ -616,9 +689,31 @@ def main():
             g = by_b.get(b)
             if g is None:
                 continue
-            hit = g[[parsers.unit_key(x) == parsers.unit_key(un) for x in g.unit]]
-            if not len(hit) and parsers.unit_key(un):
-                hit = g[[parsers.units_match(x, un) for x in g.unit]]
+            if parsers.unit_label_key(un):
+                hit = g[[parsers.unit_key(x) == parsers.unit_key(un) for x in g.unit]]
+                if not len(hit):
+                    hit = g[[parsers.units_match(x, un) for x in g.unit]]
+            else:
+                # D11: a row with no unit number takes a live-check row only when that row is about it: the same
+                # stored label, price or plan name, or the building's only unlabelled row and only unlabelled check.
+                # (Before, blank matched blank and every floor plan of a building took the same check.)
+                row = MU.loc[i]
+                blank = g[[parsers.unit_label_key(x) == "" for x in g.unit]]
+                plan = re.search(r":plan-([^:]+)", str(row.listing_id))
+                plan_name = plan.group(1).replace("_", " ").strip().lower() if plan else ""
+                price = str(row.listed_rent).split(".")[0]
+
+                def about(lr):
+                    n = str(lr.notes).lower().replace(",", "")
+                    if str(un).strip() and parsers.unit_key(lr.unit) == parsers.unit_key(un):
+                        return True
+                    if plan_name and re.search(r"(?<![\w-])" + re.escape(plan_name) + r"(?![\w-])", n):
+                        return True
+                    return bool(price) and (str(lr.price_now).split(".")[0] == price or re.search(r"\$\s?" + re.escape(price) + r"(?!\d)", n) is not None)
+                hit = blank[[about(lr) for lr in blank.itertuples()]]
+                n_unlabelled = int((MU.building_id.eq(b) & MU.unit.map(parsers.unit_label_key).eq("")).sum())
+                if not len(hit) and len(blank) == 1 and n_unlabelled == 1:
+                    hit = blank
             if len(hit):
                 for col, new in live_cols:
                     MU.at[i, new] = hit.iloc[-1][col]
@@ -630,14 +725,42 @@ def main():
     fr_by_b, used = {}, set()
     for j, fr in enumerate(floor_rows):
         fr_by_b.setdefault(fr[0], []).append((j,) + fr[1:])
+    labels_in_b = MU.groupby("building_id").unit.apply(lambda x: [u for u in x if parsers.unit_label_key(u)]).to_dict()
+
+    def star_unit(b, text):
+        """The one unit of the building that a floor row without a unit label is about, read from its quote
+        ('Unit 265 ... Floor 2'), or None (D10: Avalon Somerville 022-265 had two confirmed rows that never landed)."""
+        named = [u for u in labels_in_b.get(b, []) if re.search(r"(?<![\w-])(?:" + re.escape(u) + "|" + re.escape(parsers.unit_tail(u) or u) + r")(?![\w-])", text, re.I)]
+        return named[0] if len(set(named)) == 1 else None
+    desc_floor_ok = {}
+
+    def description_floor(raw_path, stated):
+        """D10: a floor the harvester took from the first 'Nth floor' phrase of a description counts as stated only
+        when a phrase with that floor is about the unit, not an amenity ('8th-floor sundeck')."""
+        key = (raw_path, stated)
+        if key not in desc_floor_ok:
+            try:
+                txt = Path(DATA.parent / raw_path).read_text(errors="ignore")
+            except OSError:
+                txt = ""
+            txt = txt.replace("\\n", " ").replace("\\u2019", "'")
+            ok = False
+            for m in re.finditer(r"[^.!?\"<>]{0,80}\b" + str(int(float(stated))) + r"(?:st|nd|rd|th)[- ]floor\b[^.!?\"<>]{0,60}", txt, re.I):
+                if parsers.floor_from_description(m.group(0)) == int(float(stated)):
+                    ok = True
+                    break
+            desc_floor_ok[key] = ok
+        return desc_floor_ok[key]
     fl, flb, fls, flk = [], [], [], []
-    for b, un, stated, gbasis in zip(MU.building_id, MU.unit, MU.floor_used, MU.floor_basis):
+    for b, un, stated, gbasis, hnote, rawp in zip(MU.building_id, MU.unit, MU.floor_used, MU.floor_basis, MU.notes, MU.raw_path):
+        if gbasis == "stated" and "floor from description text" in str(hnote) and re.fullmatch(r"[\d.]+", str(stated)) and not description_floor(rawp, stated):
+            gbasis = "description_amenity"           # the phrase was about an amenity: the floor is not stated
         got = None
         for want in ("confirmed", "inferred"):
-            for j, lab, f_, basis, src, _ in fr_by_b.get(b, []):
+            for j, lab, f_, basis, src, _, quote_ in fr_by_b.get(b, []):
                 if basis != want:
                     continue
-                if (lab != "*" and parsers.units_match(lab, un)) or (lab == "*" and n_in_b.get(b) == 1):
+                if (lab != "*" and parsers.units_match(lab, un)) or (lab == "*" and (n_in_b.get(b) == 1 or (parsers.unit_label_key(un) and star_unit(b, quote_) == un))):
                     got = (f_, basis, src); used.add(j)
                     break
             if got:
@@ -656,11 +779,35 @@ def main():
         else:
             fl.append(""); flb.append("unknown"); fls.append(""); flk.append(kind)
     MU["unit_floor"], MU["unit_floor_basis"], MU["unit_floor_source"], MU["unit_floor_label_kind"] = fl, flb, fls, flk
-    unmatched = [fr for j, fr in enumerate(floor_rows) if j not in used and fr[3] in ("confirmed", "unparsed")]
+    unmatched = [fr[:6] for j, fr in enumerate(floor_rows) if j not in used and fr[3] in ("confirmed", "unparsed")]
     pd.DataFrame(unmatched, columns=["building_id", "unit_label", "floor", "basis", "source_url", "value"]).to_csv(DATA / "reference" / "floor_confirm_unmatched.csv", index=False)
     MU = MU.drop(columns=["ukey_", "utail_"])
     bcols = [c for c in B.columns if c not in MU.columns]
     MU = MU.join(B[bcols], on="building_id")
+    # D8: the lease term the listed price belongs to, from the unit's own live-check note, else the building's
+    # lease-term fact, else the listing's own price basis ('12-month lease', 'lease term 24 Months').
+    ltm, lt12, ltq, ltsrc, ltlow = [], [], [], [], []
+    for note, fact_txt, pb, un in zip(MU.live_notes, MU.get("price_term_text", pd.Series("", index=MU.index)).fillna(""), MU.price_basis, MU.unit):
+        got = None
+        for src_, txt in (("live check", note), ("evidence fact", fact_txt), ("listing", pb)):
+            if src_ == "evidence fact":
+                # a building-level fact names its units when it is not about all of them
+                parts = [x for x in str(txt).split(" || ") if x.strip()]
+                txt = " ; ".join(x for x in parts if not re.search(r"\bunit\b", x, re.I) or (parsers.unit_label_key(un) and re.search(r"(?<![\w-])" + re.escape(parsers.unit_tail(un) or un) + r"(?![\w-])", x)))
+                txt = re.sub(r"^\s*(\d{1,2}) months\b", r"price is for a \1-month lease", txt)
+                txt = re.sub(r"term (\d{1,2}): price (\d{4})", lambda m: f"{m.group(1)}-month price ${m.group(2)}" if m.group(1) == "12" else m.group(0), txt)
+            if src_ == "listing":
+                txt = re.sub(r"lease term (\d{1,2}) Months", r"price is for a \1-month lease", str(txt))
+            lt = parsers.lease_term_from_text(txt)
+            if lt["months"] or lt["lowest_of_terms"]:
+                got = (lt, src_)
+                break
+        if got:
+            lt, src_ = got
+            ltm.append(lt["months"] or ""); lt12.append(lt["price_12"] or ""); ltq.append(lt["quote"][:200]); ltsrc.append(src_); ltlow.append("yes" if lt["lowest_of_terms"] and not lt["months"] else "")
+        else:
+            ltm.append(""); lt12.append(""); ltq.append(""); ltsrc.append(""); ltlow.append("")
+    MU["price_lease_months"], MU["price_12_month"], MU["price_lease_quote"], MU["price_lease_source"], MU["price_lowest_of_terms"] = ltm, lt12, ltq, ltsrc, ltlow
     MU.to_csv(DATA / "master_units.csv", index=False)
 
     print(f"buildings: {len(B)} (from {U.addr_key.nunique()} addr_keys); units: {len(MU)} (+{len(dups)} duplicates of a unit in the same building, data/duplicate_units.csv); conflicts: {len(conflicts)}")
