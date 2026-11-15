@@ -31,6 +31,25 @@ NOT_REAL = re.compile(r"not an open-market|income restricted|far under market|no
                       r"listing looks stale|duplicate candidate|out-of-state phone|below the median price|probably not a real|verify before relying", re.I)
 
 
+# Findings that make a listing unusable for her, wherever the checker wrote them (live-check notes or facts).
+INELIGIBLE = re.compile(r"AGE-RESTRICTED|55\+ (?:only|senior|independent|communit)|(?:this as|is) a 55\+ communit|senior housing|active adult community designed|"
+                        r"(?-i:WAITLIST)|No Units currently available|Rented/Leased|income[- ]restricted|income limits|Pet-free community|"
+                        r"probably a dead listing|cannot be found|describes? a different building", re.I)
+BUILDING_WIDE = re.compile(r"AGE-RESTRICTED|55\+|senior housing|active adult|income[- ]restricted|income limits|Pet-free", re.I)
+NO_LIFT_READING = re.compile(r"probably (?:a )?walk-?up|probably no elevator|my reading: (?:no elevator|unlikely|probably)|My reading: unlikely|fits a small walk-?up|"
+                             r"without elevators|came from the unit label only|height inference came from reading|low-rise garden|garden complex: probably", re.I)
+GROUND_READING = re.compile(r"ground|first[- ]floor|\bfloor 1\b|reading 1\b|^\s*\)?\s*:\s*1\b|:\s*1\?|:\s*1\b(?!\d)", re.I)
+
+
+GROUND_LIKELY = re.compile(r"(?:possibl[ey]|likely|probably|may be|would be|could be)[^.;|]{0,30}(?:ground|floor 1\b|first[- ]floor)|"
+                           r"(?:ground|floor 1\b)[^.;|]{0,25}(?:is possible|possible)|ground-level entry|floor 1, if", re.I)
+
+
+def _around(t, m, n=70):
+    t = str(t)
+    return t[max(0, m.start() - n): m.end() + n].replace("\n", " ").strip()
+
+
 def cat(kind):
     fs = glob.glob(str(DATA / "evidence" / f"{kind}_batch_*.csv"))
     return pd.concat([pd.read_csv(f, dtype=str, keep_default_na=False).assign(batch=Path(f).stem.split("_batch_")[-1]) for f in fs], ignore_index=True)
@@ -87,6 +106,45 @@ def main():
                 ex.append((r.addr_key, ";".join(gf), "ground-floor unit: " + r.value[:120], r.source_url))
         elif f.startswith("dog_weight") and re.search(r"\b(1\d|2[0-4]) ?lb", r.value):
             ex.append((r.addr_key, "", "dog weight limit under 25 lb: " + r.value[:120], r.source_url))
+    # --- eligibility and checker readings (round 3 review): a finding in the checker's notes must reach the list ---
+    F = cat("facts")
+    for r in L.itertuples():
+        m = INELIGIBLE.search(r.notes or "")
+        if m:
+            whole = bool(BUILDING_WIDE.search(m.group(0)))
+            ex.append((r.addr_key, "" if whole else r.unit, "not open to her or not really available: " + _around(r.notes, m), r.listing_url))
+    for r in F.itertuples():
+        m = INELIGIBLE.search(r.value)                      # the checker's own statement, not a quoted page line
+        if m and BUILDING_WIDE.search(m.group(0)) and not re.search(r"market[- ]rate and|are not\b", r.value, re.I):
+            ex.append((r.addr_key, "", "not open to her: " + _around(r.value, m), r.source_url))
+    MU = pd.read_csv(DATA / "master_units.csv", dtype=str, keep_default_na=False, usecols=["addr_key", "unit"], low_memory=False)
+    units_at = MU.groupby("addr_key").unit.apply(lambda x: sorted(set(x))).to_dict()
+    for r in C[C.status != "confirmed"].itertuples():
+        f, t = r.fact.lower(), f"{r.value} | {r.quote}"
+        if f.startswith("elevator") and r.status != "contradicts":
+            m = NO_LIFT_READING.search(t)
+            if m:
+                ex.append((r.addr_key, "", "elevator not stated anywhere and the checker's reading is that there is none: " + _around(t, m), r.source_url))
+        elif f.startswith("floor") and r.status != "contradicts":
+            labs = [x for x in units_at.get(r.addr_key, []) if x]
+            named = [x for x in labs if re.search(r"(?<![\w-])" + re.escape(x) + r"(?![\w-])", t)]
+            if named:
+                hit_named = False
+                for x in named:
+                    clause = next((c for c in re.split(r"[;|]|\. ", t) if re.search(r"(?<![\w-])" + re.escape(x) + r"(?![\w-])", c)), "")
+                    after = clause.split(x, 1)[1] if x in clause else clause
+                    if GROUND_READING.search(after):
+                        ex.append((r.addr_key, x, "possible ground-floor unit (checker's reading; no page states the floor): " + clause.strip()[:140], r.source_url))
+                        hit_named = True
+                if not hit_named and len(named) == 1 and GROUND_LIKELY.search(t):
+                    ex.append((r.addr_key, named[0], "possible ground-floor unit (checker's reading; no page states the floor): " + t[:140], r.source_url))
+            else:
+                # unit labels written differently from ours ("2106: floor 1"): take the labels from the text
+                labs1 = re.findall(r"(?<![\w-])([A-Za-z]{0,3}-?\d[\w-]{1,7}):\s*(?:floor\s*)?1\b(?!\d)", t)
+                if labs1:
+                    ex.append((r.addr_key, ";".join(dict.fromkeys(labs1)), "possible ground-floor unit (checker's reading; no page states the floor): " + t[:140], r.source_url))
+                elif GROUND_LIKELY.search(t):
+                    ex.append((r.addr_key, "", "possible ground-floor unit (checker's reading; no page states the floor): " + t[:140], r.source_url))
     X = pd.DataFrame(ex, columns=["addr_key", "unit", "reason", "source"]).drop_duplicates()
     X.to_csv(DATA / "unit_exclusions.csv", index=False)
 

@@ -157,7 +157,12 @@ def main():
     u["floor_basis_note"] = np.where(floor_from_label_ok, "read from the unit number", "")
     dog_open = s("dogs_allowed").str.lower().ne("yes")
     dog_small = s("dog_size_only").ne("") & wl.isna()
-    n_inf = inf_e.astype(int) + inf_f.astype(int) + dog_open.astype(int)
+    # An elevator "inferred from height" only counts as one open fact when a page or record gives the building 6+ floors.
+    # Where the height itself was read off a unit label ("36D", "801"), the elevator is simply unknown: not shown.
+    bfl = pd.to_numeric(s("building_floors"), errors="coerce").where(~s("building_floors_basis").isin(["inferred", ""]))
+    tall = (bfl.fillna(0) >= 6) | (pd.to_numeric(s("pluto_floors"), errors="coerce").fillna(0) >= 6)
+    weak_e = inf_e & ~tall
+    n_inf = inf_e.astype(int) + weak_e.astype(int) + inf_f.astype(int) + dog_open.astype(int)
     u["dog_size_note"] = np.where(dog_small, parsers.SMALL_DOG_NOTE, "")
     floor_q = np.where(fb.eq("inferred"), "Which floor is the unit on? (" + s("unit_floor").str.replace(r"\.0$", "", regex=True) + " is only a guess from the unit number " + s("unit") + "); ",
                        "Which floor is the unit on?; ")
@@ -176,7 +181,7 @@ def main():
                        np.where(dog_open, "Two listing sites disagree on whether dogs are allowed, and the building's own page does not settle it.", ""))))
     u["open_gate_facts"] = n_inf
     u["confidence"] = np.where(reasons != "", "sketchy", np.where(n_inf == 0, "clean", np.where(n_inf == 1, "one_inferred", "sketchy")))
-    u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(n_inf >= 2, "two or more unconfirmed gate facts", ""))
+    u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(weak_e, "elevator not stated on any page and the building's height is not known (it was guessed from the unit label)", np.where(n_inf >= 2, "two or more unconfirmed gate facts", "")))
     u[u.confidence == "sketchy"].to_csv(DATA / "excluded_sketchy.csv", index=False)
     n_sk = int((u.confidence == "sketchy").sum())
     u = u[u.confidence != "sketchy"].copy()

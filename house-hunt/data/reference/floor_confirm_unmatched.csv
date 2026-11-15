@@ -1,4 +1,12 @@
 building_id,unit_label,floor,basis,source_url,value
+b_812b71fdaf,?,,unparsed,https://www.trulia.com/home/949-w-end-ave-d-new-york-ny-10025-2106139475,top floor (number not stated; city data lists 12 floors)
+b_564c337ac7,*,2.0,confirmed,https://www.avaloncommunities.com/new-jersey/somerville-apartments/avalon-somerville-station/apartment/NJ033-NJ033-022-265,2
+b_564c337ac7,*,2.0,confirmed,https://www.avaloncommunities.com/new-jersey/somerville-apartments/avalon-somerville-station/,2
+b_d1ea8abdfa,*,5.0,confirmed,https://sightmap.com/embed/5eved96mwqo,5
+b_d1ea8abdfa,*,5.0,confirmed,https://sightmap.com/embed/5eved96mwqo,5
+b_2eb7945a67,*,4.0,confirmed,https://libertybayclub.com/floorplans/,4
+b_b5e1e32afb,*,1.0,confirmed,https://www.jcentraburlington.com/floorplans/,1
+b_b5e1e32afb,*,1.0,confirmed,https://www.jcentraburlington.com/floorplans/,1
 b_17baeace72,*,3.0,confirmed,https://bltliveworkplay.com/apartments/stamford/allure/availability/,3
 b_1897e7d980,231,2.0,confirmed,https://bygomes.com/page-data/property/envy/231/page-data.json,unit 231: 2nd Floor
 b_1897e7d980,308,3.0,confirmed,https://bygomes.com/page-data/property/envy/308/page-data.json,unit 308: 3rd Floor
@@ -27,3 +35,4 @@ b_89871dc4dd,*,3.0,confirmed,https://www.avaloncommunities.com/new-jersey/union-
 b_4317e61e15,*,6.0,confirmed,https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny,6
 b_4317e61e15,*,6.0,confirmed,https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny,6
 b_8055c78811,?,,unparsed,https://www.noblenj.com/,no unit number; every residence is on floor 3 or higher
+b_958ef9248e,*,2.0,confirmed,https://www.apartmentlist.com/nj/burlington/village-square,2
