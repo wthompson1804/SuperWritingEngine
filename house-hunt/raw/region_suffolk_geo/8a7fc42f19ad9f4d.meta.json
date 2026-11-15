@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=217+W+Broadway%2C+Port+Jefferson%2C+NY+11777&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:34+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/8a7fc42f19ad9f4d.json",
+ "source": "region_suffolk_geo"
+}

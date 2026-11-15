@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=410+Princeton+Road%2C+Yaphank%2C+NY+11980&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:35+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/5f7d3f3919a46522.json",
+ "source": "region_suffolk_geo"
+}

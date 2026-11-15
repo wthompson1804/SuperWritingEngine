@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1700+East+5th+Street%2C+Huntington+Station%2C+NY+11746&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:29+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/b0d272a0f39f579f.json",
+ "source": "region_suffolk_geo"
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1+N+Country+Rd%2C+Port+Jefferson%2C+NY+11777&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:35+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/937fd24df250e903.json",
+ "source": "region_suffolk_geo"
+}

@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1141,
- "detail_pages": 1871,
+ "srp_pages": 1148,
+ "detail_pages": 1876,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1913,6 +1913,24 @@
    "drive_min": 101.0,
    "props": 5,
    "rows": 3
+  },
+  {
+   "city": "nj/sea-bright",
+   "drive_min": 101.0,
+   "props": 5,
+   "rows": 5
+  },
+  {
+   "city": "ny/east-quogue",
+   "drive_min": 101.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/allentown",
+   "drive_min": 102.2,
+   "props": 0,
+   "rows": 0
   }
  ],
  "cities_unmatched_far": [
@@ -1937,10 +1955,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2759,
+ "props_discovered": 2764,
  "props_skipped_lowprice_gt_3000": 888,
  "reasons": {
-  "ok": 1861,
+  "ok": 1866,
   "no_unit_le_3000": 9,
   "no_listing_object": 1
  },

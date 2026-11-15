@@ -1799,5 +1799,30 @@
    "https://www.trulia.com/home/address-not-disclosed-hempstead-ny-11550-463127058"
   ],
   "note": "Trulia unit listing with the address withheld: 'Pet friendly, no pet fee - garage parking', large one-bedroom near the Hempstead / Garden City border just off Mulford Place, heat and hot water included, on-site laundry, courtyard, basement parking available. 1BR $2,800. Elevator not stated."
+ },
+ {
+  "name": "Fairfield Estates at Lynbrook Village",
+  "address": "140 Broadway",
+  "town": "Lynbrook",
+  "zip": "11563",
+  "url": "https://fairfieldproperties.com/fairfield-estates-at-lynbrook-village/",
+  "source_url": "https://fairfieldproperties.com/fairfield-estates-at-lynbrook-village/",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "30",
+  "verdict": "unconfirmed:elevator not stated on Fairfield's page or Trulia (historic circa-1924 building; ask)",
+  "agg": [
+   "https://www.trulia.com/building/fairfield-estates-at-lynbrook-village-140-broadway-lynbrook-ny-11563-2751761459"
+  ],
+  "row": {
+   "dogs": "yes",
+   "dog_weight_limit_lb": "30",
+   "pet_rent": "35",
+   "utilities_included": "Heat and hot water included (Fairfield page)",
+   "manager": "Fairfield Properties",
+   "dog_policy_text": "Fairfield page: 'Pet policy: Monthly fee $35 per dog/$400 security deposit. Weight limit 30 lbs. $20 per cat/$300 security deposit. Restrictions apply.'",
+   "concession_text": "LEASE APT 1A FOR NOVEMBER-2026 FREE RENT!* Inflation Buster Special Lease Choice Of 18-Months With No Increase* $99 Security* *Restrictions Apply. (Fairfield page 2026-11-15; listed prices are gross 'from' prices)"
+  },
+  "note": "Fairfield's own page (read 2026-11-15): 'historic, circa 1924 building' moments from Lynbrook LIRR, fob access with door intercom; dogs $35/month, 30 lb weight limit (passes the 25 lb gate); heat and hot water included; 1BR from $2,650 / $2,720. Special: November 2026 free on apartment 1A (a first-floor unit by its number) plus the 18-month no-increase lease. The word elevator appears nowhere on the page, so this may be a walk-up: confirm by phone before touring. Rows are Trulia floor-plan rows (no unit number or floor)."
  }
 ]

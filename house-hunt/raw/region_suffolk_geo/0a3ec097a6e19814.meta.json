@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=366+Broadway%2C+Amityville%2C+NY+11701&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:29+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/0a3ec097a6e19814.json",
+ "source": "region_suffolk_geo"
+}

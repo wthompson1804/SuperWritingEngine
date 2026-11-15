@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1+Village+Green+Way%2C+Patchogue%2C+NY+11772&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:31+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/a1e3dd485f7dbe2c.json",
+ "source": "region_suffolk_geo"
+}

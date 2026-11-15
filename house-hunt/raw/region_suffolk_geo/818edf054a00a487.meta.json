@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=331+E+Main+St%2C+Riverhead%2C+NY+11901&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:36+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/818edf054a00a487.json",
+ "source": "region_suffolk_geo"
+}

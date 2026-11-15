@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=588+N+Bicycle+Path%2C+Port+Jefferson+Station%2C+NY+11776&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:35+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/22fa9419a9581027.json",
+ "source": "region_suffolk_geo"
+}

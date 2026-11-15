@@ -313,15 +313,34 @@ def sitemap(muni: str, base: str, max_pages: int = 18) -> None:
         print("  (not fetched)", u)
 
 
-def grep(sub: str, rx: str, width: int = 240, mx: int = 5) -> None:
-    pat = re.compile(rx, re.I)
-    seen = set()
+def _clean(muni_or_sub: str):
+    """Yield (record, own_text) with host boilerplate lines (on 3+ pages of the host) removed."""
+    from collections import Counter
+    allr, seen = [], set()
     for line in PAGES.read_text().splitlines():
         r = json.loads(line)
-        if sub not in r["url"] and sub != r["muni"] or r["url"] in seen:
+        if r["url"] in seen:
             continue
         seen.add(r["url"])
-        text = norm((lib.ROOT / r["text"]).read_text())
+        allr.append(r)
+    hosts = {urlparse(r["url"]).netloc for r in allr if muni_or_sub == r["muni"] or muni_or_sub in r["url"]}
+    cnt = Counter()
+    for r in allr:
+        h = urlparse(r["url"]).netloc
+        if h in hosts:
+            r["lines"] = [norm(x) for x in (lib.ROOT / r["text"]).read_text().splitlines() if norm(x)]
+            for x in set(r["lines"]):
+                cnt[(h, x)] += 1
+    for r in allr:
+        if muni_or_sub == r["muni"] or muni_or_sub in r["url"]:
+            h = urlparse(r["url"]).netloc
+            yield r, " ".join(x for x in r["lines"] if cnt[(h, x)] < 3 or r["title"] == "(pdf)")
+
+
+def grep(sub: str, rx: str, width: int = 240, mx: int = 5, cap: int = 3500) -> None:
+    pat = re.compile(rx, re.I)
+    used = 0
+    for r, text in _clean(sub):
         hits, last = [], -1
         for m in pat.finditer(text):
             if m.start() < last:
@@ -333,6 +352,10 @@ def grep(sub: str, rx: str, width: int = 240, mx: int = 5) -> None:
             print(f"## {r['url']} ({len(hits)})")
             for h in hits[:mx]:
                 print("  -", h)
+                used += len(h)
+            if used > cap:
+                print("  [output cap reached]")
+                return
 
 
 BODY = re.compile(r"overnight|permit|alternate side|street (sweep|clean)|snow|meter|garage|monthly|per month|dogs?\b|"

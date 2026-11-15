@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1721+Motor+Parkway%2C+Hauppauge%2C+NY+11749&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:32+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/a5a6cb5879c3b527.json",
+ "source": "region_suffolk_geo"
+}

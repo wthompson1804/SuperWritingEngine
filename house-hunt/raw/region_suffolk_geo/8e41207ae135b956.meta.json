@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1+East+Main+Street%2C+Bay+Shore%2C+NY+11706&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:30+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/8e41207ae135b956.json",
+ "source": "region_suffolk_geo"
+}

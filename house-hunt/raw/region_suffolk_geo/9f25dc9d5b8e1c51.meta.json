@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=313+Avalon+Circle%2C+Nesconset+%28Smithtown%29%2C+NY+11787&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:33+00:00",
+ "status": 200,
+ "path": "raw/region_suffolk_geo/9f25dc9d5b8e1c51.json",
+ "source": "region_suffolk_geo"
+}
