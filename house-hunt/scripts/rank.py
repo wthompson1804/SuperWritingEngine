@@ -156,14 +156,40 @@ def main():
     u["shown_pre_evidence"] = u.hood_rank <= SHOWN
     u.to_csv(DATA / "ranked_units.csv", index=False)
 
-    # ---- exchange rates against staying near home
-    home = u[pd.to_numeric(u.drive_min_to, errors="coerce") <= NEAR_HOME_DRIVE_MIN]
+    # ---- five-point spectrum against staying in Queens (Will, 2026-11-15): 3 = about the same as Queens,
+    #      1-2 = worse for her, 4-5 = better for her. Distance is "closer / farther", not better / worse.
+    home = u[u.hood_area.astype(str).eq("Queens")]
+    SPEC = {  # column, kind, small band, big band, higher_is_better (None = neutral: 1 much closer .. 5 much farther)
+        "all_in": ("all_in", "abs", 75, 250, False), "sqft": ("sqft", "abs", 50, 150, True),
+        "drive_min": ("drive_min_to", "abs", 5, 20, None), "transit_min": ("transit_sat_median", "abs", 10, 30, None),
+        "violent_crime": ("violent", "ratio", 0.2, 0.5, False), "property_crime": ("property", "ratio", 0.2, 0.5, False),
+        "food_and_drink_nearby": ("restaurants_800m", "ratio", 0.25, 0.6, True),
+        "walk_to_green": ("park_walk_min", "abs", 2, 6, False), "parking": ("parking_rank", "abs", 0.5, 1.5, True),
+    }
+    spec_rows = []
+    for name, (c, kind, small, big, hib) in SPEC.items():
+        base = pd.to_numeric(home[c], errors="coerce").median()
+        x = pd.to_numeric(u[c], errors="coerce")
+        d = (x - base) if kind == "abs" else (x - base) / base
+        step = np.where(d.abs() <= small, 0, np.where(d.abs() <= big, 1, 2)) * np.sign(d)
+        if hib is False:
+            step = -step
+        u[f"vsq_{name}"] = np.where(x.isna(), np.nan, 3 + step)
+        u[f"vsq_{name}_diff"] = (x - base).round(1)
+        spec_rows.append({"measure": name, "column": c, "queens_median": round(base, 2), "kind": kind, "same_band": small,
+                          "big_band": big, "direction": "higher is better" if hib else ("lower is better" if hib is False else "neutral: 1 closer, 5 farther")})
+    pd.DataFrame(spec_rows).to_csv(DATA / "reference" / "queens_spectrum_definition.csv", index=False)
+    u.to_csv(DATA / "ranked_units.csv", index=False)
+
+    # ---- exchange rates against staying in Queens
     meas = {"all_in": "all_in", "sqft": "sqft", "drive_min": "drive_min_to", "transit_min": "transit_sat_median",
             "toll_round_trip": "toll_rt_ezpass", "violent_per_1000": "violent", "property_per_1000": "property",
             "restaurants_800m": "restaurants_800m", "park_walk_min": "park_walk_min", "parking_rank": "parking_rank"}
     rows = []
-    for k, g in list(u.groupby("group_label")) + [("NEAR HOME (drive <= 15 min)", home)]:
+    for k, g in list(u.groupby("group_label")) + [("STAYING IN QUEENS (baseline)", home)]:
         r = {"group": k, "units": len(g), "neighborhoods": g.hood_id.nunique()}
+        for name in SPEC:
+            r["vsq_" + name] = round(g[f"vsq_{name}"].median(), 0)
         for name, c in meas.items():
             r[name] = round(pd.to_numeric(g[c], errors="coerce").median(), 1)
             r[name + "_vs_home"] = round(r[name] - pd.to_numeric(home[c], errors="coerce").median(), 1)

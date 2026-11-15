@@ -21,3 +21,12 @@ against everything). `data/group_exchange.csv` holds each year's medians and its
 (units within a 15-minute drive of Jamaica). These run in the background; the page shows them only on demand.
 
 **Safety gate before ranking:** neighborhoods with violent or property crime above Jamaica's precinct are cut.
+
+## Five-point spectrum against staying in Queens (Will, 2026-11-15)
+
+The compare stage must be easy to read: every measure is placed on five points with **Queens in the centre**
+(3 = about the same as the median passing unit in Queens; 1-2 = worse for her; 4-5 = better for her; for distance,
+1 = much closer to her parents and 5 = much farther, with no better/worse colour). Bands are in real units and are
+stored in `data/reference/queens_spectrum_definition.csv`; per-unit values are the `vsq_*` columns of
+`data/ranked_units.csv` (with `vsq_*_diff` holding the plain difference, e.g. +120 sq ft). The underlying
+calculations stay in the background and are shown only when she asks how a point was reached.
