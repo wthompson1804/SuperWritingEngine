@@ -10,7 +10,7 @@ def strip(o):
     return o
 for line in open(S+'fetch1.log'):
     u,st,n,path,ts=json.loads(line)
-    if 'trulia.com' not in u: continue
+    if 'trulia.com' not in u or st!=200: continue
     html=open(path,encoding='utf-8',errors='replace').read()
     m=re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>',html,re.S)
     if not m: print(u,'NO NEXT_DATA'); continue

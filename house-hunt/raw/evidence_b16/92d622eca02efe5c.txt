@@ -1,0 +1,57 @@
+User-Agent: OAI-SearchBot
+User-Agent: ChatGPT-User
+User-Agent: Claude-User
+User-Agent: Claude-SearchBot
+User-Agent: PerplexityBot
+User-Agent: Perplexity-User
+Allow: /
+Allow: /_next/image
+Allow: /_next/static
+Disallow: /api/
+Disallow: /customer/
+Disallow: /signin
+Disallow: /magiclink/
+Disallow: /reset-password/
+Disallow: /gallery
+Disallow: /search
+
+User-Agent: GPTBot
+User-Agent: ClaudeBot
+User-Agent: Google-Extended
+User-Agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+Disallow: /customer/
+Disallow: /signin
+Disallow: /magiclink/
+Disallow: /reset-password/
+Disallow: /_next/
+Disallow: /listing/
+
+User-Agent: CCBot
+User-Agent: Omgilibot
+User-Agent: Meta-ExternalAgent
+User-Agent: FacebookBot
+User-Agent: Bytespider
+Disallow: /
+
+User-Agent: *
+Allow: /
+Allow: /_next/static/
+Allow: /_next/image
+Disallow: /api/
+Disallow: /customer/
+Disallow: /signin
+Disallow: /magiclink/
+Disallow: /reset-password/
+Disallow: /_next/
+Disallow: /search?
+Disallow: /agents?
+Disallow: /offices?
+
+User-Agent: AhrefsBot
+User-Agent: MJ12bot
+User-Agent: SemrushBot
+Disallow: /
+
+Sitemap: https://exitrealtyliberty.com/sitemap.xml

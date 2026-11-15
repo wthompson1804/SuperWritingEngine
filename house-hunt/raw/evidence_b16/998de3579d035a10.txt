@@ -1,0 +1,33 @@
+# robots.txt for blochost.com
+# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://blochost.com/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /sidekiq/
+Disallow: /dashboard/
+Disallow: /users/
+Disallow: /sites/*/edit
+Disallow: /sites/*/edit_domain
+Disallow: /sites/*/edit_email
+Disallow: /sites/*/edit_scr_token
+Disallow: /site_pages/*/edit
+Disallow: /site_photos/*/edit
+Disallow: /site_blocks/*/edit
+Disallow: /help/
+Disallow: /pages/
+Disallow: /domains/
+
+# Allow important content
+Allow: /sites/
+Allow: /websites/
+Allow: /assets/
+Allow: /images/
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1

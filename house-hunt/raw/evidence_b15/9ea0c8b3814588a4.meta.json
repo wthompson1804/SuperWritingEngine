@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/64uk-42ks.json?$select=bbl,address,bldgclass,numfloors,unitsres,numbldgs,yearbuilt,ownername&$where=address%20like%20'2072%2020%25'%20and%20borough='BK'&$limit=20",
+ "retrieved_at": "2026-11-15T22:50:14+00:00",
+ "status": 200,
+ "path": "raw/evidence_b15/9ea0c8b3814588a4.json",
+ "source": "evidence_b15"
+}

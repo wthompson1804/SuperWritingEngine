@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /wp-content/uploads/2012/08/FairRecords_Aug27.docx
+Crawl-delay: 600
+
+Sitemap: https://westfaironline.com/sitemap_index.xml
+
+
+#WP Import Export Rule
+User-agent: *
+Disallow: /wp-content/uploads/wp-import-export-lite/

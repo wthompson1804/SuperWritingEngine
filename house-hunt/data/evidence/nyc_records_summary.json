@@ -1,6 +1,6 @@
 {
  "as_of": "2026-11-15",
- "built_at": "2026-11-15T21:14:37+00:00",
+ "built_at": "2026-11-15T22:48:34+00:00",
  "building_lists": {
   "/home/user/SuperWritingEngine/house-hunt/data/reference/evidence_batches/all_candidate_buildings.csv": {
    "rows": 208,
@@ -9,11 +9,15 @@
   "/home/user/SuperWritingEngine/house-hunt/data/reference/evidence_batches/round2_candidate_buildings.csv": {
    "rows": 141,
    "with_pluto_bbl": 0
+  },
+  "/home/user/SuperWritingEngine/house-hunt/data/reference/evidence_batches/round3_candidate_buildings.csv": {
+   "rows": 171,
+   "with_pluto_bbl": 49
   }
  },
- "candidates": 99,
- "distinct_bbl": 89,
- "requests_this_run": 26,
+ "candidates": 148,
+ "distinct_bbl": 137,
+ "requests_this_run": 40,
  "periods": [
   [
    "last_6_months",
@@ -47,15 +51,15 @@
   ]
  ],
  "match_rates_by_bbl": {
-  "in_pluto": "89/89",
-  "in_hpd_buildings": "89/89",
-  "has_hpd_registration": "88/89",
-  "has_hpd_complaint_rows": "83/89",
-  "has_hpd_violation_rows": "87/89",
-  "has_311_rows": "88/89",
-  "has_dob_elevator_device": "86/89",
-  "has_bedbug_filing": "86/89",
-  "has_eviction_rows": "43/89"
+  "in_pluto": "137/137",
+  "in_hpd_buildings": "136/137",
+  "has_hpd_registration": "133/137",
+  "has_hpd_complaint_rows": "125/137",
+  "has_hpd_violation_rows": "130/137",
+  "has_311_rows": "136/137",
+  "has_dob_elevator_device": "131/137",
+  "has_bedbug_filing": "129/137",
+  "has_eviction_rows": "67/137"
  },
  "house_number_disagrees": [
   {
@@ -187,9 +191,61 @@
    "addr_key": "630 w 163rd st|10032",
    "bbl": "1021370091",
    "pluto_address": "86 FT WASHINGTON AVENUE"
+  },
+  {
+   "addr_key": "9949 shore rd|11209",
+   "bbl": "3061330001",
+   "pluto_address": "9937 SHORE ROAD"
+  },
+  {
+   "addr_key": "100 w 139th st|10030",
+   "bbl": "1020070036",
+   "pluto_address": "561 LENOX AVENUE"
+  },
+  {
+   "addr_key": "3250 93rd st|11369",
+   "bbl": "4014220019",
+   "pluto_address": "32-30 93 STREET"
+  },
+  {
+   "addr_key": "3310 nostrand ave|11229",
+   "bbl": "3073080032",
+   "pluto_address": "3280 NOSTRAND AVENUE"
+  },
+  {
+   "addr_key": "2900 nostrand ave|11229",
+   "bbl": "3076900073",
+   "pluto_address": "2892 NOSTRAND AVENUE"
+  },
+  {
+   "addr_key": "3280-3310 nostrand ave|11229",
+   "bbl": "3073080032",
+   "pluto_address": "3280 NOSTRAND AVENUE"
+  },
+  {
+   "addr_key": "1802 ocean ave|11230",
+   "bbl": "3067480014",
+   "pluto_address": "1800 OCEAN AVENUE"
+  },
+  {
+   "addr_key": "5550 netherland ave|10471",
+   "bbl": "2059500429",
+   "pluto_address": "5530 NETHERLAND AVENUE"
+  },
+  {
+   "addr_key": "5 stuyvesant pl|10301",
+   "bbl": "5000120015",
+   "pluto_address": "160 RICHMOND TERRACE"
+  },
+  {
+   "addr_key": "545 edgecombe ave|10032",
+   "bbl": "1021090041",
+   "pluto_address": "461 WEST 159 STREET"
   }
  ],
- "bbl_without_bin": [],
+ "bbl_without_bin": [
+  "1022037501"
+ ],
  "non_D_class": [
   {
    "bbl": "3039647501",
@@ -256,6 +312,48 @@
    "pluto_address": "NAVY PIER COURT",
    "pluto_bldgclass": "RM",
    "pluto_unitsres": "467"
+  },
+  {
+   "bbl": "3064947503",
+   "pluto_address": "623 AVENUE H",
+   "pluto_bldgclass": "RM",
+   "pluto_unitsres": "38"
+  },
+  {
+   "bbl": "3069407501",
+   "pluto_address": "2121 SHORE PARKWAY",
+   "pluto_bldgclass": "R4",
+   "pluto_unitsres": "110"
+  },
+  {
+   "bbl": "1022037501",
+   "pluto_address": "405 WEST 206TH STREET",
+   "pluto_bldgclass": "RM",
+   "pluto_unitsres": "224"
+  },
+  {
+   "bbl": "5024007501",
+   "pluto_address": "80 RICHMOND HILL ROAD",
+   "pluto_bldgclass": "R4",
+   "pluto_unitsres": "243"
+  },
+  {
+   "bbl": "4161137502",
+   "pluto_address": "260 BEACH 81 STREET",
+   "pluto_bldgclass": "R4",
+   "pluto_unitsres": "103"
+  },
+  {
+   "bbl": "4161127501",
+   "pluto_address": "79-14 ROCKAWAY BEACH BLVD",
+   "pluto_bldgclass": "R4",
+   "pluto_unitsres": "86"
+  },
+  {
+   "bbl": "3074057501",
+   "pluto_address": "2781A OCEAN AVENUE",
+   "pluto_bldgclass": "RM",
+   "pluto_unitsres": "72"
   }
  ],
  "evictions_matched_by_address": {},
@@ -370,21 +468,21 @@
   }
  },
  "flag_counts_by_addr_key": {
-  "elevator_complaints_24m_ge_3": 30,
-  "elevator_complaints_6m_ge_1": 24,
-  "mold_complaints_24m_above_p90": 12,
-  "elevator_complaints_24m_above_p90": 12,
-  "pest_complaints_24m_above_p90": 9,
-  "mold_complaints_6m_above_p90": 9,
-  "class_c_violations_6m_above_p90": 9,
-  "pest_complaints_6m_above_p90": 8,
-  "heat_hot_water_complaints_24m_above_p90": 7,
-  "class_c_violations_24m_above_p90": 7,
-  "elevator_complaints_6m_above_p90": 6,
-  "heat_hot_water_complaints_6m_above_p90": 5
+  "elevator_complaints_24m_ge_3": 44,
+  "elevator_complaints_6m_ge_1": 43,
+  "elevator_complaints_24m_above_p90": 17,
+  "class_c_violations_6m_above_p90": 17,
+  "mold_complaints_24m_above_p90": 14,
+  "pest_complaints_24m_above_p90": 14,
+  "mold_complaints_6m_above_p90": 14,
+  "pest_complaints_6m_above_p90": 13,
+  "heat_hot_water_complaints_24m_above_p90": 13,
+  "elevator_complaints_6m_above_p90": 12,
+  "class_c_violations_24m_above_p90": 11,
+  "heat_hot_water_complaints_6m_above_p90": 9
  },
- "addr_keys_with_flags": 44,
- "bbls_with_flags": 38,
+ "addr_keys_with_flags": 74,
+ "bbls_with_flags": 67,
  "retrieved_at_by_query": {
   "baseline_class_c_violations": "2026-11-15T20:50:19+00:00",
   "baseline_elevator_complaints": "2026-11-15T20:50:06+00:00",
@@ -392,21 +490,21 @@
   "baseline_hpd_elevator_complaints": "2026-11-15T20:50:10+00:00",
   "baseline_mold_complaints": "2026-11-15T20:50:03+00:00",
   "baseline_pest_complaints": "2026-11-15T20:50:01+00:00",
-  "bedbug": "2026-11-15T20:49:20+00:00",
-  "dob_compl": "2026-11-15T20:49:41+00:00",
+  "bedbug": "2026-11-15T22:47:52+00:00",
+  "dob_compl": "2026-11-15T22:48:32+00:00",
   "dob_compl_years": "2026-11-15T20:49:42+00:00",
-  "dob_elev": "2026-11-15T20:49:18+00:00",
-  "dob_safety_viol": "2026-11-15T20:49:19+00:00",
-  "evictions": "2026-11-15T20:49:21+00:00",
-  "evictions_addr": "2026-11-15T20:49:22+00:00",
-  "hpd_bldg": "2026-11-15T20:49:27+00:00",
-  "hpd_compl": "2026-11-15T20:49:13+00:00",
-  "hpd_contacts": "2026-11-15T20:49:40+00:00",
-  "hpd_reg": "2026-11-15T20:49:28+00:00",
-  "hpd_viol": "2026-11-15T20:49:11+00:00",
-  "pluto": "2026-11-15T20:49:09+00:00",
+  "dob_elev": "2026-11-15T22:47:47+00:00",
+  "dob_safety_viol": "2026-11-15T22:47:50+00:00",
+  "evictions": "2026-11-15T22:47:53+00:00",
+  "evictions_addr": "2026-11-15T22:48:05+00:00",
+  "hpd_bldg": "2026-11-15T22:48:14+00:00",
+  "hpd_compl": "2026-11-15T22:47:40+00:00",
+  "hpd_contacts": "2026-11-15T22:48:30+00:00",
+  "hpd_reg": "2026-11-15T22:48:14+00:00",
+  "hpd_viol": "2026-11-15T22:47:36+00:00",
+  "pluto": "2026-11-15T22:47:33+00:00",
   "pluto_population": "2026-11-15T20:49:44+00:00",
-  "sr311": "2026-11-15T20:49:17+00:00"
+  "sr311": "2026-11-15T22:47:46+00:00"
  },
  "failures": [
   "DOB Complaints Received (eabe-havv): eabe-havv as retrieved holds 866335 rows, latest date_entered year 2022; no rows in any reporting period, so DOB elevator complaints are taken from 311 (complaint_type 'Elevator', agency DOB) instead"

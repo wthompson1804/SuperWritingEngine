@@ -1,0 +1,34 @@
+User-agent: Googlebot
+Allow: /css/
+Allow: /css_system/
+Allow: /js/
+Allow: /js_system/
+
+User-agent: *
+Disallow: /css/
+Disallow: /css_system/
+Disallow: /js/
+Disallow: /js_system/
+Disallow: /account/
+Disallow: /calendar/post/
+Disallow: /forms/
+Disallow: /login.html
+Disallow: /poll_process.html
+Disallow: /post_comments.html
+Disallow: /my_profile.html
+Disallow: /my_stuff.html
+Disallow: /user_profile.html
+Disallow: /ajax/
+Disallow: /register.html
+Disallow: /report_item.html
+Disallow: /send_item.html
+Disallow: /subscribe/
+Disallow: /renew/
+Disallow: /account/
+Disallow: /resetpassword/
+Disallow: /reset/
+Disallow: /alacarte/
+Disallow: /lookup/
+Disallow: /register-local/
+Disallow: /entercode/
+

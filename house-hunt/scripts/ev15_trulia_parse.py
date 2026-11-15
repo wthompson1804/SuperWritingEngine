@@ -8,7 +8,7 @@ def strip(o):
     if isinstance(o,dict): return {k:strip(v) for k,v in o.items() if k not in('__typename','iconUrl','logoUrl') and v not in (None,[],{})}
     if isinstance(o,list): return [strip(x) for x in o]
     return o
-for line in open(S+'fetch1.log'):
+for line in open(S+'fetch_ok.log'):
     u,st,n,path,ts=json.loads(line)
     if 'trulia.com' not in u: continue
     html=open(path,encoding='utf-8',errors='replace').read()

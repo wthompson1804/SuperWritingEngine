@@ -1,0 +1,18 @@
+User-agent: *
+Disallow: /cgi/brx
+Disallow: /apartmentimages/*stgimg.*
+Disallow: /apartments/img
+Disallow: /listings
+Disallow: /apartmentlistings
+Disallow: /search/*?*
+Disallow: /ll/
+
+User-agent: Googlebot
+Disallow: /cgi/brx
+Disallow: /apartmentimages/*stgimg.*
+Disallow: /apartments/img
+Disallow: /listings
+Disallow: /ll/
+
+User-agent: bingbot
+Crawl-delay: 15

@@ -1,0 +1,94 @@
+{
+ "https://www.apartmentlist.com/nj/north-bergen/8300-boulevard-e": {
+  "at": "2026-11-15T22:47:55+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "https://www.apartmentlist.com/nj/old-bridge/99-bridge": {
+  "at": "2026-11-15T22:47:58+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "https://www.apartmentlist.com/nj/princeton/avalon-princeton-on-harrison": {
+  "at": "2026-11-15T22:48:00+00:00",
+  "agg": {
+   "@type": "AggregateRating",
+   "ratingValue": 4,
+   "ratingCount": 1,
+   "reviewCount": 1,
+   "bestRating": 5,
+   "worstRating": 1
+  },
+  "reviews": [
+   {
+    "propertyId": 90606231,
+    "propertyName": "Avalon Princeton on Harrison",
+    "submitDate": "2025-04-06T21:39:43.000+00:00",
+    "authorName": "Peter",
+    "detail": "Things are still in construction that I hoped would be ready by now, mail is somewhat unpredictable in terms of deliveries being left all over the place, but overall I\u2019m happy all things considered.",
+    "overallScore": 4,
+    "valueScore": 4,
+    "amenitiesScore": 4,
+    "locationScore": 5,
+    "managementScore": 5,
+    "maintenanceScore": 5,
+    "parkingScore": 4,
+    "noiseScore": 5,
+    "type": "email",
+    "moderated": "keep"
+   }
+  ]
+ },
+ "https://www.apartmentlist.com/nj/red-bank/grandville-towers": {
+  "at": "2026-11-15T22:48:02+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "https://www.apartmentlist.com/nj/somerville/avalon-somerville-station": {
+  "at": "2026-11-15T22:48:05+00:00",
+  "agg": {
+   "@type": "AggregateRating",
+   "ratingValue": 5,
+   "ratingCount": 1,
+   "reviewCount": 1,
+   "bestRating": 5,
+   "worstRating": 1
+  },
+  "reviews": [
+   {
+    "propertyId": 58610350,
+    "propertyName": "Avalon Somerville Station",
+    "submitDate": "2024-10-17T20:22:00.000+00:00",
+    "authorName": "Drake",
+    "detail": "Very nice spot with accommodating staff. Extra charges for all bells and whistles but safety and quality is high.",
+    "overallScore": 5,
+    "valueScore": 4,
+    "amenitiesScore": 5,
+    "locationScore": 5,
+    "managementScore": 5,
+    "maintenanceScore": 5,
+    "parkingScore": 5,
+    "noiseScore": 5,
+    "type": "email",
+    "moderated": "keep"
+   }
+  ]
+ },
+ "https://www.apartmentlist.com/nj/somerville/the-edge-at-main": {
+  "at": "2026-11-15T22:48:08+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "https://www.apartmentlist.com/nj/princeton/woodmont-way-at-west-windsor": {
+  "at": "2026-11-15T22:48:19+00:00",
+  "agg": {
+   "@type": "AggregateRating",
+   "ratingValue": 5,
+   "ratingCount": 1,
+   "reviewCount": 1,
+   "bestRating": 5,
+   "worstRating": 1
+  },
+  "reviews": []
+ }
+}

@@ -30,6 +30,9 @@ def j(x, default):
         return default
 
 
+PUBLIC_EVIDENCE = {}  # building_id -> what the evidence pass could read (data/avoid_buildings.csv: public_evidence); filled in main()
+
+
 def unit(r):
     g = lambda c: v(r.get(c))
     qs = [q for q in str(g("to_confirm") or "").split("; ") if q]
@@ -84,7 +87,9 @@ def unit(r):
         "vs_queens": {k[4:]: g(k) for k in r.index if k.startswith("vsq_") and not k.endswith("_diff")},
         "vs_queens_diff": {k[4:-5]: g(k) for k in r.index if k.startswith("vsq_") and k.endswith("_diff")},
         "evidence": {"checked": bool(r.get("evidence_checked")), "avoid": g("ev_avoid") == "yes", "avoid_reasons": g("ev_reasons"), "pause_notes": g("ev_pause_notes"),
-                     "items": j(r.get("ev_evidence_json"), []), "positive": j(r.get("ev_positive_json"), [])},
+                     "items": j(r.get("ev_evidence_json"), []), "positive": j(r.get("ev_positive_json"), []),
+                     # display field for the page: "NYC records", "rating screen: <verdict>", "none readable", or null when the building was not in the evidence pass
+                     "public_evidence": PUBLIC_EVIDENCE.get(g("building_id"))},
         "confirm": {"asterisk": g("confirm_asterisk") == "yes", "what": g("confirm_what") if g("confirm_asterisk") == "yes" else None,
                     "why": g("confirm_why") if g("confirm_asterisk") == "yes" else None},
         "confidence": g("confidence"), "tour_questions": qs,
@@ -97,6 +102,14 @@ def main():
     R = pd.read_csv(DATA / "ranked_units.csv", low_memory=False, dtype={"zip5": str})
     G = pd.read_csv(DATA / "lifestyle_groups.csv").set_index("hood_id")
     E = pd.read_csv(DATA / "group_exchange.csv")
+    # same join as scripts/rank.py (address key -> building id, avoid rows first), carrying the one column rank.py leaves behind
+    af, xwf = DATA / "avoid_buildings.csv", DATA / "reference" / "building_crosswalk.csv"
+    if af.exists() and xwf.exists():
+        AV = pd.read_csv(af, dtype=str, keep_default_na=False)
+        if "public_evidence" in AV:
+            AV["building_id"] = AV.addr_key.map(pd.read_csv(xwf, dtype=str).set_index("addr_key").building_id)
+            AV = AV.dropna(subset=["building_id"]).sort_values("avoid", ascending=False).drop_duplicates("building_id")
+            PUBLIC_EVIDENCE.update({b: (e or None) for b, e in zip(AV.building_id, AV.public_evidence)})
     held_ids = set(pd.read_csv(DATA / "needs_confirmation.csv").listing_id) if (DATA / "needs_confirmation.csv").exists() else set()
     shown, avoid, held = R[R.shown], R[R.avoid_card], R[R.listing_id.isin(held_ids) & ~R.shown]
     # candidates with an open gate fact that the evidence pass has not seen live yet: listed for the evidence agents, not shown as places
@@ -171,7 +184,7 @@ def main():
                               "Unknown cost lines count as $0 and are named on each receipt."]},
            "years": years, "neighborhoods": hoods, "units": [unit(r) for _, r in shown.iterrows()],
            "avoid": [unit(r) for _, r in avoid.iterrows()], "held": [unit(r) for _, r in held.iterrows()],
-           "awaiting_live_check": [{"id": r.listing_id, "building": v(r.building_name), "address": v(r.address), "unit": v(r.unit), "hood_id": r.hood_id,
+           "awaiting_live_check": [{"id": r.listing_id, "building": v(r.building_name), "address": v(r.address), "unit": v(r.unit), "hood_id": r.hood_id, "year": v(r.group_key), "price_seen_at": v(r.last_seen),
                                     "rank": v(r.rank_score), "all_in": v(r.all_in), "listing": v(r.url)} for r in awaiting.itertuples()]}
     (ROOT / "site").mkdir(exist_ok=True)
     (ROOT / "site" / "data.json").write_text(json.dumps(out, default=str, allow_nan=False))

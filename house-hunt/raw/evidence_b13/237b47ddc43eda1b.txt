@@ -1,0 +1,9 @@
+User-agent: *
+disallow: /refs/
+disallow: /runtimes/
+disallow: /wwwroot/ 
+disallow: /js/
+disallow: /lib/
+disallow: /dashboard/
+disallow: /*.ashx
+sitemap: https://www.loftsat335.com/sitemap.xml

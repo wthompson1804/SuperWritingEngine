@@ -1,4 +1,4 @@
-# Site notes: `site/index.html` (written 2026-11-15)
+# Site notes: `site/index.html` (written 2026-11-15, updated the same evening for confirmation asterisks, local rules, voices and sources)
 
 The page is one file with inline CSS and JS. It reads `window.HOUSE_HUNT_DATA` when present and otherwise fetches
 `data.json` from its own folder. `python3 scripts/build_site.py` writes `site/dist/index.html` with the data inlined
@@ -10,10 +10,20 @@ quote, hook, "flavor" sentence or scene text from the mock is in the page.
 Routes: `#lives`, `#year-<id>`, `#hood-<id>`, `#unit-<id>`, `#compare`. State (limits, held places, tour seen) is in
 `localStorage` under `lamia-house-hunt-v1`, inside try/catch.
 
+Tables at the top of the script, each meant to be corrected in one place: `TINT` (tile colours), `SOURCES` ("How we got
+this" wording), `RULE_WORD` / `PARK_RULE_ORDER` / `DOG_RULE_ORDER` / `SAT_RULES` / `WAKE_RULES` / `RULE_FLAG` (local
+rules), `CONFIRM_WORD` / `CONFIRM_Q` (confirmation asterisk), and the fixed sentences `Q_PARKING`, `Q_EVIDENCE`,
+`NO_EVIDENCE`, `SMALL_DOG`, `NO_PARK_RULES`, `NO_DOG_RULES`, `NO_VOICES`.
+
 Test: serve `site/` (`python3 -m http.server`) and run
 `BASE=http://localhost:PORT OUT=site/screens node scripts/site_walkthrough_test.js` (add `W=360` for the narrow run,
 which takes no screenshots). It walks the whole flow, asserts no console errors and no horizontal overflow, checks the
-limit counts against the data, and opens every year, neighborhood and unit view once.
+limit counts against the data, and opens every year, neighborhood and unit view once. It also opens a unit with a
+confirmation asterisk from its card, a neighborhood with local rules and its Saturday and wake-up sheets, a neighborhood
+without rules, a street-or-unknown-parking unit under a flagged parking rule, a small-dog unit and a no-public-evidence
+unit, and it turns on the "nothing left to confirm" limit and reloads to see it kept. Resident voices are empty in the
+data, so the test feeds one neighborhood made-up quotes (through a route on `data.json`, in the test only) to check
+grouping, balance, the fold and overflow.
 
 ## Tint rules (the `TINT` table at the top of the script)
 
@@ -35,6 +45,54 @@ part in the tint.
 Limits (four sliders): cost $1,600 to $3,000 (floor of the cheapest all-in to the cap), drive 5 to 120 minutes, safety
 in four steps (violent crime no higher than Jamaica's rate, under 75%, under half, under a quarter), space 350 to 950 sq ft
 (from the data). A place with an unknown size or crime ratio drops out as soon as that limit is moved off its start.
+A fifth control, the checkbox "Only places with nothing left to confirm", sets aside every place whose
+`confirm.asterisk` is true (212 of 325 today); it is saved with the sliders and cleared by the reset link. A rent
+asterisk alone does not count.
+
+## What the update added (all from `data.json`)
+
+- **Confirmation asterisk** (`unit.confirm`). A berry `*` after the name and a butter pill "* To confirm: the floor /
+  the elevator / whether dogs are allowed / that the listing is still live" on the card and the unit page. The unit
+  page has a dashed box "* Still to confirm" quoting `confirm.why`, then "What to ask:" with the matching line from
+  `tour_questions` (found by `CONFIRM_Q`'s pattern; when the list has none, as for a live check, the fallback
+  question in `CONFIRM_Q` is used and added to the tour questions). Home, year and neighborhood each say "N of the M
+  places … carry an asterisk". The rent asterisk stays on the price; the pill's words tell the two apart.
+- **Small dogs**. When `dog.weight_limit_lb` is null and `dog.size_note` is set (the pipeline's small-only test; the
+  fallback is `policy_text` with "small" and without "large"), the unit page says "For the dog: The page says small dogs;
+  no weight number given" under the opening paragraph, with the listing link. The wake-up sheet and the building facts
+  use the same words. It is not put under "Gives us pause".
+- **Local rules** (`neighborhood.local.parking_rules`, `.dog_rules`). On the neighborhood page, under "For the car"
+  and "For the dog": label, summary and a link named after the municipality; the first three in `PARK_RULE_ORDER` /
+  `DOG_RULE_ORDER` are shown and the rest sit in a "N more parking rules" fold. With none: "Local parking rules not
+  found yet. On a tour, ask: Where do residents park overnight, and is a permit needed?" and "Local dog rules not found
+  yet." Every unit in a neighborhood without parking rules gets that question in its tour list. The Saturday sheet
+  quotes the overnight, permit, guest and city-lot rules; the wake-up sheet quotes leash, parks, dog-park and clean-up
+  rules. A unit whose parking kind is street, unknown or "kind not stated" shows a box "Before the car sleeps on the
+  street" when a rule matches `RULE_FLAG`: an `overnight_parking` summary that reads as a ban or permit requirement, or a
+  `resident_permit` summary that ties the permit to registration. These are word patterns on the summary, so a new
+  summary phrased differently can be missed or wrongly caught; check the box after each local-rules refresh.
+- **What residents say** (`local.voices`, `local.survey`). Always present. Empty: "No resident comments found yet."
+  Filled: one heading per theme; where a theme has both positive and negative quotes, the same number of each is shown
+  (up to two, newest first, alternating) and the rest go in a "N more on this" fold; with one side only, up to three and
+  a line saying only that side was found. Each quote shows Positive/Negative, date, context and a link named after the
+  source; no names. Survey rows read "{measure}: {value}." with source, as-of date and link.
+- **Evidence labels** (`evidence.public_evidence`, added to `build_page_data.py` from `data/avoid_buildings.csv`).
+  "none readable" or "rating screen: not_enough_data" with no items, quotes or pause notes gives, under "Gives us
+  pause", "No public records or readable reviews for this building; ask on the tour" (153 units today), plus the tour
+  question in `Q_EVIDENCE`. Null (the building was not in the evidence pass) keeps "…have not been checked yet". The
+  building facts name what was read (`EVIDENCE_WORD`).
+- **Held and waiting lists**. `held[]` stays under "Worth a phone call" (intro now says two or more things to confirm;
+  each item shows `confirm.why`). `awaiting_live_check[]` today is 190 rows, 189 of them the same places as `held[]`:
+  those stay in "Worth a phone call" with a line "* Not re-checked yet …", so nothing is listed twice. A row that is not
+  in `held[]`, `units[]` or `avoid[]` (one today, in Stamford) appears under "Not re-checked yet" on its neighborhood
+  page, or in a year-page fold when its neighborhood is not listed. Without the list both pieces are skipped.
+  `build_page_data.py` now also writes `year` and `price_seen_at` on those rows.
+- **Sources**. Every URL in the data is linked: listing, building page, evidence items, each local rule, each voice
+  and survey row, each waiting row. Figures with no URL carry a "How we got this" line built from `SOURCES`: on every
+  tile sheet, the five-point sheet, the unit paragraph, the neighborhood "What's here" and "Feeling safe" sections, the
+  year "What it costs you" section, under the home map, and as a list in the footer. Crime lines add the police agency
+  and year from the data. The tolls and census wordings ("E-ZPass toll rates for the toll points on that route", "U.S.
+  Census Bureau American Community Survey") are mine, not from the brief; correct them in `SOURCES` if wrong.
 
 ## Template sentences
 
@@ -87,16 +145,17 @@ not, a red line says a paying month costs more than the cap.
   takes a string, a list of strings, or a list of `{text, url, date}`.
 - `years[].catch` is null: the year card shows no catch line, and the third dark tile on the year page shows the
   typical violent-crime rate. A string (or `{text}`) turns both into "The catch".
-- `neighborhoods[].local.parking_rules` and `.dog_rules` are null: shown as "Street-parking rules: Not known yet" and
-  "Local dog rules: Not known yet". A string or `{text}` replaces them.
-- `neighborhoods[].local.voices` is empty: the "The feel" section is left out. Items shaped like evidence
-  (`excerpt`, `date`, `url`, `source`) render as dated quotes with a source link.
+- `neighborhoods[].local.voices` and `.survey` are empty for all 132 neighborhoods: the section shows "No resident
+  comments found yet." The filled layout has only been seen with the test's made-up quotes.
+- Local rules exist for 62 (parking) and 57 (dog) of 132 neighborhoods; the rest show the "not found yet" lines.
 - Unit hooks ("The one with…") are gone; the size sentence stands in their place.
 
 ## Known gaps
 
-- Source links exist only where the data has a URL: the listing, the building page and each evidence item. Map counts,
-  travel times, tolls and crime rates carry no URL in `data.json`, and each tile sheet says so.
+- Map counts, travel times, tolls and crime rates carry no URL in `data.json`; they are sourced in words only.
+- A unit with both a rent offer and an open confirmation shows two asterisks (price and name). The words beside each
+  say which is which, but the mark is the same character.
+- New York City neighborhoods carry 12 or 13 parking rules each; three show and the rest are one tap away.
 - 109 of the held places sit in neighborhoods that are not in `neighborhoods[]`. They appear on the year page under
   "Worth a phone call, in other towns", with a town name read from `hood_id` (for example `nj:woodbridge`).
 - The map has no coastline or roads: pins from real coordinates, rings in straight-line miles. Year pins are numbered to

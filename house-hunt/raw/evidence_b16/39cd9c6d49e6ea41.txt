@@ -1,0 +1,14 @@
+# Reference: https://developers.google.com/webmasters/control-crawl-index/docs/robots_txt
+
+User-agent: *
+Allow: /
+Disallow: /users/login
+Disallow: /experiments
+Disallow: /light_cycle
+Disallow: /shortlist
+Disallow: /signup
+Disallow: /base-price-lock
+Disallow: /all-in-price-lock
+Disallow: /app/open
+
+Sitemap: https://www.apartmentlist.com/sitemap.xml

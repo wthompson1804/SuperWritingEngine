@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/feu5-w2e2.json?%24where=registrationid+in+%28430964%2C430967%2C430968%2C430969%2C430970%2C430971%2C430972%2C431592%2C432261%2C433872%2C433893%2C434070%2C434114%2C434132%2C434192%2C434194%2C434251%2C434254%2C434325%2C434355%2C434685%2C434687%2C434731%2C501233%2C501234%2C501693%2C501832%29&%24order=registrationcontactid&%24limit=50000&%24offset=0",
+ "retrieved_at": "2026-11-15T22:48:31+00:00",
+ "status": 200,
+ "path": "raw/nyc_records/0fd61c0bcc4f3998.json",
+ "source": "nyc_records"
+}

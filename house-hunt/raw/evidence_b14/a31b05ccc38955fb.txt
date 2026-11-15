@@ -1,0 +1,105 @@
+# See http://www.robotstxt.org/wc/norobots.html for documentation on how to use the robots.txt file
+#
+# To ban all spiders from the entire site uncomment the next two lines:
+User-Agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=no
+#Disallow: /
+Disallow: /admin
+Disallow: /users/sign_in
+Disallow: /users 
+Disallow: /transactions
+Disallow: /article.asp
+Disallow: /column.asp
+Disallow: /photos
+Disallow: /tracked_urls
+Disallow: /search*
+Disallow: /towns.json
+Disallow: /category.json
+Disallow: /*.php
+Disallow: /*.php$
+Disallow: /api/v1/masterhead*
+Disallow: /newsletters
+Disallow: /subscriptions
+Disallow: /towns/*/games/*
+Disallow: /migration_api
+
+User-Agent: Googlebot
+Disallow: /admin
+Disallow: /users/sign_in
+Disallow: /users 
+Disallow: /transactions
+Disallow: /photos
+Disallow: /tracked_urls
+Disallow: /article.asp*
+Disallow: /column.asp*
+Disallow: /admin
+Disallow: /users/sign_in
+Disallow: /transactions
+Disallow: /article.asp
+Disallow: /column.asp
+Disallow: /photos
+Disallow: /tracked_urls
+Disallow: /search*
+Disallow: /newsletters
+Disallow: /subscriptions
+Disallow: /migration_api
+
+User-Agent: Googlebot-Image
+Allow: /*
+Disallow: /admin
+Disallow: /users/sign_in
+Disallow: /users 
+Disallow: /transactions
+Disallow: /article.asp*
+Disallow: /column.asp*
+Disallow: /search*
+
+User-Agent: Adsbot-Google
+Allow: /*
+Disallow: /admin
+Disallow: /users/sign_in
+Disallow: /users
+Disallow: /transactions
+Disallow: /article.asp*
+Disallow: /column.asp*
+Disallow: /search*
+
+User-Agent: LinkedInBot/1.0
+Allow: /
+
+# slow down Yahoo
+User-agent: Slurp
+Crawl-delay: 10
+
+# slow down Bing
+User-agent: Bingbot
+Crawl-delay: 10
+
+User-agent: AhrefsBot
+Disallow: /
+User-agent: AhrefsSiteAudit
+Disallow: /
+User-agent: PetalBot
+Disallow: /
+User-agent: SEMrushBot
+Disallow: /
+User-agent: SemrushBot
+Disallow: /
+User-agent: SemrushBot-SA
+Disallow: /
+User-agent: ShapBot
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: cohere-ai
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+
+Sitemap: https://www.tapinto.net/sitemaps/sitemap-altpress-index.xml

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+  
+Sitemap: https://brooklyn.news12.com/sitemaps/news.xml.gz
+Sitemap: https://brooklyn.news12.com/sitemaps/sitemap.xml.gz
