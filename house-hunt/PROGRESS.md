@@ -2,30 +2,34 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-15, late)
+## Current state (2026-11-15, end of day)
 
-**Authorities, newest first:** `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` (one connected data model) → `docs/RANKING.md` (v2) →
-`docs/SAFETY_BASIS.md` (Jamaica rule) → `docs/PLAN_V3_APPROVED_2026-11-15.md` (gates; dog limit now 25 lb) → UX brief and mock-up 4.
-`docs/DATA_USE_AUDIT_2026-11-15.md` explains why the master model exists.
+**Authorities, newest first:** `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` → `docs/RANKING.md` (v2) → `docs/SAFETY_BASIS.md`
+→ `docs/PLAN_V3_APPROVED_2026-11-15.md` (gates; dog limit 25 lb; size-only "small dogs" passes) → UX brief and mock-up 4 (layout only).
+The "data only, no UI, no ranking" lines in `CLAUDE.md` and the handoff brief are superseded: the job is now the finished decision page.
 
-**Run everything:** `python3 scripts/run_all.py` (or `--fast` after evidence-only changes). It writes `docs/RUN_REPORT.md`
-(stage counts, reasons, fill rates, change since last run) and ends with `scripts/check_registry.py`, which fails if a
-collected field is unaccounted for or an analysis script reads a side file instead of the master tables.
+**Run everything:** `python3 scripts/run_all.py` (`--fast` after evidence-only changes) → `scripts/build_page_data.py` →
+`scripts/build_site.py` → `site/dist/index.html`. Publish as a NEW private artifact (never replace the mock).
+
+**Latest run:** 20,464 listings → 2,598 pass listing gates → 1,653 within the all-in cap → 995 ranked → **344 shown**
+(194 with an asterisk: floor 159, live check 31, elevator 4, dogs 2), 36 avoid cards, 63 held. 132 neighborhoods on the page.
+By year: Little-City ~119, Old-Neighborhood ~93, Room-to-Breathe ~91, Fresh-Start 24, Walk-Everywhere 10, Quiet-Street 9.
 
 | Piece | Status |
 |---|---|
-| Master tables (`data/master_buildings.csv`, `data/master_units.csv`, conflicts, crosswalk) | Built; every merged fact has basis + source |
-| Rent terms (`data/rent_terms.csv`): net-effective basis, gross rent, first full payment date, needs-call flag | Built for all passing units |
-| All-in cost on the master (`scripts/all_in.py`), incl. `all_in_gross` | Built |
-| Confirmed before shown; `data/needs_confirmation.csv` lists held-back units with the question to ask | Enforced in `scripts/rank.py` |
-| Ranking v2 + nearby violent crime, crime trend, transit extras; avoid rules incl. police car crime near NYC buildings | Done |
-| Evidence pass round 1 (batches 1–6, NYC records) and round 2 (batches 7–11) | Done |
-| Outside-NYC rating standard (`docs/RATING_STANDARD.md`, `data/evidence/rating_standard.csv`) and non-NYC records | Files exist; agent report pending; NOT yet wired into `avoid.py` |
-| Independent 30-unit check (`docs/INDEPENDENT_CHECK.md`) | Agent running |
-| Region agents (Nassau, Suffolk, Westchester/Rockland, Mid-Hudson, Connecticut) and Apartment List outer ring | Relaunched after plan mode cancelled them; when they finish: `run_all.py`, then an evidence round for new candidates, then `run_all.py --fast` |
-| Lifestyle groups: six years, labels and subheads approved; Jersey City still one lump | Split Jersey City; refit only on purpose |
-| Never collected: street-parking rules, dog rules, neighborhood-level voices, photos; MTA toll rates (Will), Reddit key (Will) | Open |
-| Evidence table for text, scene writing, page build, final link and price re-check | Not started |
+| Master tables, rent terms, all-in cost, ranking v2, avoid rules, registry check | Done |
+| Evidence rounds 1–3 (batches 1–17), NYC records, non-NYC records, rating standard | Done |
+| Checker findings reach the list (`scripts/avoid.py`): age/income-restricted, waitlist, rented, dead listing, pet-free, "probably no elevator" readings, confirmed or probable ground-floor units | Added after round 3 showed they were being missed |
+| Elevator "inferred from height" needs a real building height (page or record, 6+ floors); a height guessed from a unit label ("36D") no longer counts (`scripts/rank.py`) | Done |
+| First independent check + repairs (`docs/INDEPENDENT_CHECK.md`, `docs/REPAIRS_AFTER_INDEPENDENT_CHECK.md`) | Done |
+| Second independent check (`docs/INDEPENDENT_CHECK_2.md`) | Running; fix what it finds, then publish the draft |
+| Neighborhood voices: 890 verified quotes, 79 neighborhoods, 873 from Niche | Done; 53 later neighborhoods have none |
+| Local rules (parking, dogs) for 34 of 56 municipalities | Done |
+| Trulia | Blocking us (403/CAPTCHA) since the evening of Nov 15. No Trulia requests until a single test on Nov 16. About 100 NYC shown units cannot be re-checked until then |
+| Jersey City split into neighborhoods; written scene text; photos; MTA toll rates (Will); Reddit key (Will) | Open |
+
+**Robots lapses to remember (told to Will):** the voices agent restarted after a Niche 403 (21 neighborhoods; quotes kept pending Will's call);
+evidence batch 13 sent six more Trulia requests after the first refusals. Agent briefs must say: one refusal ends that host for the session.
 
 ## Answers from Will (2026-11-15), which override the handoff brief
 
