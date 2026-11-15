@@ -26,7 +26,7 @@ from lib import DATA, ROOT
 
 ANALYSIS = ["all_in.py", "rank.py"]                      # must read only the master tables (+ group / evidence-rule outputs)
 ALLOWED_INPUTS = {"master_units.csv", "master_buildings.csv", "lifestyle_groups.csv", "unit_exclusions.csv", "avoid_buildings.csv",
-                  "rent_terms.csv", "building_crosswalk.csv", "lifestyle_color.csv"}
+                  "rent_terms.csv", "building_crosswalk.csv", "lifestyle_color.csv", "review_verdicts.csv"}
 USERS = ["gates.py", "build_master.py", "all_in.py", "rank.py", "avoid.py", "build_neighborhoods.py", "lifestyle_features.py",
          "lifestyle_color.py", "lifestyle_groups.py", "crime_benchmarks.py", "rent_terms.py", "rating_standard.py", "enrich_units.py"]
 CAP, WINDOW_END, MAX_PER_BUILDING, MIN_DOG_LB = 3000, "2026-12-15", 2, 25
@@ -74,22 +74,47 @@ def shown_violations():
     # A fact that fails outright (no elevator, floor under 2, dogs not allowed) is never shown.
     el = col("elevator").str.lower()
     flag(el.isin(["no", "conflicting"]), "elevator contradicted or conflicting")
-    open_e = (el != "yes") | ~col("elevator_basis").isin(["confirmed", "stated", "official_record", "amenities_page", "community_page"])
+    open_e = (el != "yes") | ~col("elevator_basis").isin(["confirmed", "stated", "official_record", "amenities_page", "community_page"]) | (col("elevator_evidence_open") != "")
     fl, fb, fk = num("unit_floor"), col("unit_floor_basis"), col("unit_floor_label_kind")
     flag(fl < 2, "floor under 2")
     open_f = ~(fb.isin(["confirmed", "stated"]) | ((fb == "inferred") & (fk == "simple") & (fl >= 3)))
     dg = col("dogs_allowed").str.lower()
     flag(dg == "no", "dogs not allowed")
     flag((dg == "yes") & ~col("dogs_allowed_basis").isin(["confirmed", "stated", "community_page", "amenities_page"]), "dogs-allowed basis is inferred or unknown")
-    open_d = dg != "yes"
+    open_d = (dg != "yes") | (col("dogs_evidence_open") != "")
     open_l = ~col("live_status").isin(["live", "changed"])
-    n_open = open_e.astype(int) + open_f.astype(int) + open_d.astype(int) + open_l.astype(int)
-    flag(n_open > 1, "more than one open item (gate facts to confirm plus a missing live check)")
+    # independent check 2: lease term over 13 months (D8), cost near the cap with an unknown line (D12), a floor-plan
+    # row (D1), an evidence warning about the listing (D6), and whatever a reviewer's asterisk verdict names
+    open_lease = (num("price_lease_months") > 13) | (col("price_lowest_of_terms") == "yes")
+    open_cost = (num("all_in") >= CAP - 100) & (num("all_in_unknown_count").fillna(0) >= 1)
+    open_avail = (S.unit.map(parsers.unit_label_key) == "") & ((col("detail_level") == "building_floorplan") | col("listing_id").str.contains(":plan-") | (S.unit.str.strip() != ""))
+    open_listing = col("listing_warning") != ""
+    opens = {"elevator": open_e, "floor": open_f, "dogs allowed": open_d, "lease term": open_lease, "cost near the cap": open_cost,
+             "availability": open_avail, "listing": open_listing, "eligibility": open_e & False, "condo rules": open_e & False, "other": open_e & False}
+    import verdicts
+    V = verdicts.load_verdicts().drop_duplicates("listing_id", keep="last").set_index("listing_id")
+    KIND_LABEL = {"elevator": "elevator", "floor": "floor", "dogs": "dogs allowed", "lease_term": "lease term", "not_available": "availability", "unverified": "listing",
+                  "wrong_building": "listing", "restricted": "eligibility", "coop_condo": "condo rules", "other": "other"}
+    vlab = S.listing_id.map(lambda l: KIND_LABEL.get(V.at[l, "kind"], "") if l in V.index and V.at[l, "verdict"] == "asterisk" else "")
+    for lab in opens:
+        opens[lab] = opens[lab] | (vlab == lab)
+    opens["live check"] = open_l
+    n_open = sum(m.astype(int) for m in opens.values())
+    flag(n_open > 1, "more than one open item (things to confirm plus a missing live check)")
     has_star = (col("confirm_asterisk") == "yes") & (col("confirm_what") != "") & (col("confirm_why") != "")
     flag((n_open == 1) & ~has_star, "one open item but no confirm_asterisk / confirm_what / confirm_why")
-    for m, what in [(open_e, "elevator"), (open_f, "floor"), (open_d, "dogs allowed"), (open_l, "live check")]:
+    for what, m in opens.items():
         flag((n_open == 1) & m & (col("confirm_what") != what), f"confirm_what does not name the open item ({what})")
     flag((n_open == 0) & (col("confirm_asterisk") == "yes"), "asterisk on a unit with nothing open")
+    # THE REVIEW RULE (independent check 2): every shown unit must have a row in data/evidence/review_verdicts.csv with
+    # verdict ok or asterisk, written against the evidence as it stands now. A unit nobody has read the evidence for
+    # cannot be shown.
+    why_of = dict(verdicts.unreviewed(S))
+    for lid, name, unit in S[S.listing_id.isin(why_of)][["listing_id", "building_name", "unit"]].itertuples(index=False):
+        out.append(f"{lid} ({name} {unit}): {why_of[lid]}")
+    # D4 / D16: an elevator may not rest on the city's record of a neighbouring lot, or of a lot with no active elevator
+    flag((col("elevator_basis") == "official_record") & ((col("pluto_lot_ok") != "yes") | (num("dob_active_elevators") == 0)),
+         "elevator rests on the city's record for a lot that is not the listing's address, or one with no active elevator on file")
     wl = num("dog_weight_limit_lb")
     size_only = (col("dog_size_only") != "") & wl.isna()
     flag(size_only & ~(col("dog_size_note").ne("") & col("tour_confirm").str.contains("dog weight limit")), "size-only dog policy shown without its note and tour question")
@@ -101,6 +126,7 @@ def shown_violations():
     nolabel = S.unit.map(parsers.unit_key) == ""
     key = key.where(~nolabel, S.building_id + "|" + col("beds") + "|" + col("sqft") + "|" + col("listed_rent"))
     flag(key.duplicated(keep=False), "duplicate unit on the shown list")
+    flag(col("review_verdict") == "remove", "a reviewed verdict says remove")
     flag(S.groupby("building_id").listing_id.transform("count") > MAX_PER_BUILDING, f"more than {MAX_PER_BUILDING} shown in one building")
     flag(col("safety_cut").str.lower() == "true", "safety_cut neighborhood")
     gf = DATA / "lifestyle_groups.csv"

@@ -1,0 +1,2 @@
+{"muni": "jersey-city", "url": "https://www.jerseycitynj.gov/UserFiles/Servers/Server_6189660/File/City Hall/Public Safety/Division of Parking/Defective Parking Meters Update.pdf", "reason": "HTTP 404", "at": "2026-11-15T23:49:56+00:00"}
+{"muni": "jersey-city", "url": "http://data.jerseycitynj.gov/showcase/parking-zones-in-downtown", "reason": "error RuntimeError('fetch failed after 2 tries: http://data.jerseycitynj.gov/showcase/parking-zones-in-downtown: ConnectionError(MaxRetryError(\\'HTTPConnect", "at": "2026-11-15T23:50:08+00:00"}
