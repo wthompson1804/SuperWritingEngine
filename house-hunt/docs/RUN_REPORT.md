@@ -1,4 +1,4 @@
-# Run report (2026-11-15T23:16:23+00:00)
+# Run report (2026-11-15T23:36:34+00:00)
 
 ## Steps
 
@@ -23,13 +23,13 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2575 | 2575 | +0 |
 | within the $3,000 all-in cap | 1653 | 1653 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 980 | 995 | -15 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 332 | 344 | -12 |
-| avoid cards | 35 | 36 | -1 |
-|   shown with an asterisk (one thing to confirm) | 190 | 194 | -4 |
-| held back for one confirmation | 61 | 63 | -2 |
-| clean, waiting for a live check (not shown) | 59 | 61 | -2 |
-| neighborhoods with 3+ shown places | 38 | 41 | -3 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 980 | 980 | +0 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 332 | 332 | +0 |
+| avoid cards | 35 | 35 | +0 |
+|   shown with an asterisk (one thing to confirm) | 190 | 190 | +0 |
+| held back for one confirmation | 61 | 61 | +0 |
+| clean, waiting for a live check (not shown) | 59 | 59 | +0 |
+| neighborhoods with 3+ shown places | 38 | 38 | +0 |
 | buildings in the master table | 665 | 665 | +0 |
 
 ## Why units left
