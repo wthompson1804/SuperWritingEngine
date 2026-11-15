@@ -163,6 +163,19 @@ def main():
     el = df.apply(gate_elevator, axis=1)
     df["g_elevator"] = [x[0] for x in el]
     df["elevator_basis"] = [x[1] for x in el]
+    # NYC: official building class from PLUTO (scripts/enrich_nyc_pluto.py) settles what the listing leaves unstated
+    pf = DATA / "reference" / "nyc_building_facts.csv"
+    if pf.exists():
+        pl = pd.read_csv(pf, dtype=str, keep_default_na=False).set_index("addr_key")
+        for col in ("elevator_from_class", "pluto_class", "pluto_floors", "pluto_units", "pluto_year", "pluto_bbl", "match_basis"):
+            df[col] = df.addr_key.map(pl[col]) if col in pl else ""
+        df[["elevator_from_class", "pluto_class", "pluto_floors", "pluto_units", "pluto_year", "pluto_bbl", "match_basis"]] = \
+            df[["elevator_from_class", "pluto_class", "pluto_floors", "pluto_units", "pluto_year", "pluto_bbl", "match_basis"]].fillna("")
+        unstated = df.elevator_basis != "stated"
+        yes = unstated & (df.elevator_from_class == "yes")
+        no = unstated & (df.elevator_from_class == "no") & (df.elevator_basis == "")
+        df.loc[yes, ["g_elevator", "elevator_basis"]] = ["pass", "nyc_pluto_building_class"]
+        df.loc[no, ["g_elevator", "elevator_basis"]] = ["fail", "nyc_pluto_building_class"]
     fl = df.apply(gate_floor, axis=1)
     df["g_floor"] = [x[0] for x in fl]
     df["floor_used"] = [x[1] for x in fl]

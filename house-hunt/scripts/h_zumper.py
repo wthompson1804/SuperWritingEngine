@@ -7,6 +7,8 @@ Stages (each idempotent and resumable; pages are cached under raw/zumper/ by lib
   python3 scripts/h_zumper.py details   # listing and building detail pages for every qualifying card
   python3 scripts/h_zumper.py build     # normalise caches -> data/listings_raw/zumper.csv
   python3 scripts/h_zumper.py all
+  python3 scripts/h_zumper.py targets FILE.csv   # fetch only the pages in FILE.csv (column `url`, optional
+                                                 # `building_url`; one request per building), then rebuild
 
 Options: --max-min N (seconds budget for a fetching stage), --refresh (refetch cached pages; updates last_seen).
 
@@ -35,6 +37,7 @@ BASE = "https://www.zumper.com"
 lib.HOST_DELAY["www.zumper.com"] = 2.2
 RAWD = lib.RAW / SRC
 CITIES_F = RAWD / "cities.json"          # discovered cities and search status
+TARGETS_F = RAWD / "targets_map.json"    # written by `targets`: listing path -> building path, page list
 CARDS_F = RAWD / "cards.jsonl"           # one line per (search page, card)
 BLOCK_F = RAWD / "BLOCKED.txt"
 OUT = lib.DATA / "listings_raw" / "zumper.csv"
@@ -318,6 +321,91 @@ def details(max_min: float, refresh: bool):
     except Blocked as e:
         print("BLOCKED:", e)
     print("details stage: visited", n, "of", len(order))
+
+
+def to_path(u: str) -> str:
+    """Zumper URL or path -> robots-allowed path, or '' (query strings are dropped, never sent)."""
+    u = (u or "").strip()
+    u = re.sub(r"^https?://(www\.)?zumper\.com", "", u).split("?")[0].split("#")[0]
+    return u if re.match(r"^/(listings|apartment-buildings)/[^/]+/[^/]+$", u) else ""
+
+
+def targets(csv_path: str, refresh: bool, max_age_h: float):
+    """Fetch only the pages named in a CSV (column `url`, optional `building_url`), then rebuild the output CSV.
+
+    One request per building: a row whose `url` or `building_url` is a Zumper building page costs one fetch of
+    that page however many units point at it. A /listings/ row is fetched itself only when it has no building
+    page, or when the building page does not list it. Cached copies younger than --max-age-h (default 12) are
+    reused unless --refresh is given. The price in the output always comes from the page fetched here.
+    """
+    cards, _ = load_cards()
+    lid_by_url = {c["card"].get("url"): lid for lid, c in cards.items()}
+    tmap = json.loads(TARGETS_F.read_text()) if TARGETS_F.exists() else {"listing_to_building": {}, "pages": []}
+    pages = set(tmap["pages"])
+    fetched_now = set()
+    stat = {"rows": 0, "skipped_not_zumper": 0, "building_pages": 0, "listing_pages": 0, "reused_cache": 0,
+            "non_200": 0}
+
+    def get(path):
+        if path in fetched_now:
+            return cache_lookup(path)[0]
+        st, meta, _ = cache_lookup(path)
+        fresh = False
+        if st and not refresh:
+            age = (datetime.now(timezone.utc) - datetime.fromisoformat(meta["retrieved_at"])).total_seconds() / 3600
+            fresh = age <= max_age_h
+        if fresh:
+            stat["reused_cache"] += 1
+        else:
+            st, meta, _ = fetch(path, refresh=True)
+            if meta["status"] != 200:
+                stat["non_200"] += 1
+                print("  HTTP", meta["status"], path)
+            stat["building_pages" if path.startswith("/apartment-buildings/") else "listing_pages"] += 1
+        fetched_now.add(path)
+        pages.add(path)
+        return st
+
+    def ent_of(st):
+        return (((st or {}).get("detail") or {}).get("entity") or {}).get("data") or {}
+
+    try:
+        for row in csv.DictReader(open(csv_path)):
+            stat["rows"] += 1
+            u, b = to_path(row.get("url", "")), to_path(row.get("building_url", ""))
+            if b and not b.startswith("/apartment-buildings/"):
+                b = ""
+            if not u and not b:
+                stat["skipped_not_zumper"] += 1
+                continue
+            if u.startswith("/apartment-buildings/"):
+                get(u)
+                continue
+            if u and b:
+                e = ent_of(get(b))
+                lid = lid_by_url.get(u)
+                m = re.match(r"zumper-(\d+)$", row.get("listing_id", "") or "")
+                if lid is None and m:
+                    lid = int(m.group(1))
+                ids = {L.get("listing_id") for L in e.get("floorplan_listings") or []}
+                if lid is not None and lid in ids:
+                    tmap["listing_to_building"][u] = b
+                    continue
+                get(u)                      # building page does not list this unit: read the unit page itself
+                continue
+            if u:
+                e = ent_of(get(u))
+                if e.get("pb_id") and e.get("pb_url"):
+                    get(f"/apartment-buildings/p{e['pb_id']}/{e['pb_url']}")
+            else:
+                get(b)
+            if stat["rows"] % 50 == 0:
+                print("targets", stat, flush=True)
+    except Blocked as e:
+        print("BLOCKED:", e)
+    tmap["pages"] = sorted(pages)
+    TARGETS_F.write_text(json.dumps(tmap, indent=0))
+    print("targets stage:", stat)
 
 
 # ---------------------------------------------------------------- normalise
@@ -684,7 +772,11 @@ def build():
         hb = L.get("half_bathrooms") or 0
         ba = L.get("bathrooms")
         r["baths"] = (ba + 0.5 * hb) if ba is not None else ""
-        r["sqft"] = L.get("square_feet") or ""
+        r["sqft"] = L.get("square_feet") or (L.get("unit_data") or {}).get("min_square_feet") or ""
+        if r["sqft"] == "":
+            cs = (cards.get(L.get("listing_id")) or {}).get("card", {}).get("min_square_feet")
+            if cs:
+                notes.append(f"sqft absent on detail page; search card showed {cs}")
         price = L.get("min_price") if L.get("min_price") is not None else L.get("price")
         r["listed_rent"] = price
         if L.get("max_price") and L.get("max_price") != price:
@@ -749,13 +841,35 @@ def build():
         r["notes"] = "; ".join(notes)
         return r
 
-    for lid, c in sorted(cards.items(), key=lambda kv: kv[1]["drive_min"]):
+    tmap = json.loads(TARGETS_F.read_text()) if TARGETS_F.exists() else {"listing_to_building": {}, "pages": []}
+    l2b = tmap["listing_to_building"]
+    card_urls = {c["card"].get("url") for c in cards.values()}
+    items = sorted(cards.items(), key=lambda kv: kv[1]["drive_min"])
+    # target pages that no search card points at (still normalised if they are cached)
+    items += [(None, {"card": {"url": u}}) for u in tmap["pages"] if u not in card_urls]
+    for lid, c in items:
         card = c["card"]
-        url = card.get("url") or ""
+        own_url = card.get("url") or ""
+        url = own_url
+        st, meta, text = cache_lookup(url) if url else (None, None, None)
+        alt = l2b.get(own_url)
+        if alt:
+            ast, ameta, atext = cache_lookup(alt)
+            # targets mode read the building page instead of (or after) the listing page: use the newer one
+            if ast and (st is None or ameta["retrieved_at"] > meta["retrieved_at"]):
+                if alt in done_pages:
+                    if lid is not None and f"zumper-{lid}" in rows:
+                        rows[f"zumper-{lid}"]["url"] = BASE + own_url
+                    else:
+                        counts["target_listing_not_active_on_building_page"] = counts.get(
+                            "target_listing_not_active_on_building_page", 0) + 1
+                    continue
+                url, st, meta, text = alt, ast, ameta, atext
         if url in done_pages:
             continue
-        st, meta, text = cache_lookup(url) if url else (None, None, None)
         ent = (((st or {}).get("detail") or {}).get("entity") or {}).get("data") if st else None
+        if not ent and lid is None:
+            continue
         if not ent:
             # ---- card only (detail page not fetched yet or not parseable)
             r = base_row(lid, url, "card", c["seen"], c["raw_path"])
@@ -814,6 +928,12 @@ def build():
                     counts["extra_units_from_building"] += 1
                 rows[r["listing_id"]] = r
                 counts["detail_rows"] += 1
+            if url != own_url and lid is not None:
+                if f"zumper-{lid}" in rows:
+                    rows[f"zumper-{lid}"]["url"] = BASE + own_url
+                else:
+                    counts["target_listing_not_active_on_building_page"] = counts.get(
+                        "target_listing_not_active_on_building_page", 0) + 1
         else:
             bld, bvt, bblock = None, "", ""
             if ent.get("pb_id") and ent.get("pb_url"):
@@ -885,7 +1005,10 @@ def main():
         search(max_min, refresh)
     if stage in ("details", "all"):
         details(max_min, refresh)
-    if stage in ("build", "all"):
+    if stage == "targets":
+        # python3 scripts/h_zumper.py targets <file.csv> [--refresh] [--max-age-h 12]
+        targets(a[1], refresh, float(a[a.index("--max-age-h") + 1]) if "--max-age-h" in a else 12.0)
+    if stage in ("build", "all", "targets"):
         build()
 
 

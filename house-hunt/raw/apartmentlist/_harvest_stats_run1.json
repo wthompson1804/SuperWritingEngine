@@ -1,0 +1,496 @@
+{
+ "started": "2026-11-15T18:21:08+00:00",
+ "srp_pages": 343,
+ "detail_pages": 945,
+ "cities_done": [
+  {
+   "city": "ny/queens",
+   "drive_min": 4.5,
+   "props": 148,
+   "rows": 115
+  },
+  {
+   "city": "ny/floral-park",
+   "drive_min": 14.9,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/elmont",
+   "drive_min": 16.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/lynbrook",
+   "drive_min": 16.4,
+   "props": 3,
+   "rows": 1
+  },
+  {
+   "city": "ny/north-valley-stream",
+   "drive_min": 17.1,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ny/valley-stream",
+   "drive_min": 17.1,
+   "props": 3,
+   "rows": 1
+  },
+  {
+   "city": "ny/woodmere",
+   "drive_min": 18.3,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/great-neck-plaza",
+   "drive_min": 18.8,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/franklin-square",
+   "drive_min": 18.9,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ny/hewlett",
+   "drive_min": 19.3,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/mineola",
+   "drive_min": 20.0,
+   "props": 6,
+   "rows": 4
+  },
+  {
+   "city": "ny/rockville-centre",
+   "drive_min": 20.1,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "ny/west-hempstead",
+   "drive_min": 20.7,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "ny/atlantic-beach",
+   "drive_min": 21.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/east-atlantic-beach",
+   "drive_min": 21.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/williston-park",
+   "drive_min": 21.4,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/great-neck",
+   "drive_min": 22.0,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "ny/oceanside",
+   "drive_min": 22.0,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/bronx",
+   "drive_min": 22.3,
+   "props": 127,
+   "rows": 131
+  },
+  {
+   "city": "ny/brooklyn",
+   "drive_min": 22.7,
+   "props": 378,
+   "rows": 178
+  },
+  {
+   "city": "ny/garden-city",
+   "drive_min": 22.8,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "ny/hempstead",
+   "drive_min": 23.1,
+   "props": 3,
+   "rows": 2
+  },
+  {
+   "city": "ny/freeport",
+   "drive_min": 23.5,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "ny/roslyn",
+   "drive_min": 25.2,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "ny/merrick",
+   "drive_min": 25.9,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/island-park",
+   "drive_min": 26.0,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "ny/mount-vernon",
+   "drive_min": 26.0,
+   "props": 7,
+   "rows": 6
+  },
+  {
+   "city": "ny/pelham",
+   "drive_min": 26.0,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/uniondale",
+   "drive_min": 26.3,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/new-rochelle",
+   "drive_min": 28.1,
+   "props": 18,
+   "rows": 83
+  },
+  {
+   "city": "ny/westbury",
+   "drive_min": 28.3,
+   "props": 4,
+   "rows": 5
+  },
+  {
+   "city": "nj/fort-lee",
+   "drive_min": 28.5,
+   "props": 21,
+   "rows": 50
+  },
+  {
+   "city": "ny/new-york",
+   "drive_min": 28.6,
+   "props": 557,
+   "rows": 180
+  },
+  {
+   "city": "ny/long-beach",
+   "drive_min": 28.7,
+   "props": 32,
+   "rows": 27
+  },
+  {
+   "city": "nj/leonia",
+   "drive_min": 29.2,
+   "props": 4,
+   "rows": 5
+  },
+  {
+   "city": "nj/englewood-cliffs",
+   "drive_min": 29.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/east-meadow",
+   "drive_min": 29.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/jericho",
+   "drive_min": 30.0,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/edgewater",
+   "drive_min": 31.4,
+   "props": 5,
+   "rows": 4
+  },
+  {
+   "city": "nj/union-city",
+   "drive_min": 31.4,
+   "props": 14,
+   "rows": 14
+  },
+  {
+   "city": "nj/palisades-park",
+   "drive_min": 31.6,
+   "props": 5,
+   "rows": 7
+  },
+  {
+   "city": "ny/hicksville",
+   "drive_min": 31.7,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "ny/manorhaven",
+   "drive_min": 32.2,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/port-washington",
+   "drive_min": 32.2,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/cliffside-park",
+   "drive_min": 32.3,
+   "props": 7,
+   "rows": 16
+  },
+  {
+   "city": "nj/guttenberg",
+   "drive_min": 32.4,
+   "props": 8,
+   "rows": 8
+  },
+  {
+   "city": "nj/west-new-york",
+   "drive_min": 32.4,
+   "props": 20,
+   "rows": 35
+  },
+  {
+   "city": "ny/sea-cliff",
+   "drive_min": 32.5,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/englewood",
+   "drive_min": 32.9,
+   "props": 9,
+   "rows": 31
+  },
+  {
+   "city": "ny/eastchester",
+   "drive_min": 33.0,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "nj/ridgefield",
+   "drive_min": 33.1,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/levittown",
+   "drive_min": 33.3,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/mamaroneck",
+   "drive_min": 33.3,
+   "props": 4,
+   "rows": 3
+  },
+  {
+   "city": "nj/hoboken",
+   "drive_min": 33.4,
+   "props": 36,
+   "rows": 9
+  },
+  {
+   "city": "nj/ridgefield-park",
+   "drive_min": 33.6,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/lido-beach",
+   "drive_min": 33.6,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/point-lookout",
+   "drive_min": 33.6,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/tuckahoe",
+   "drive_min": 34.1,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/bogota",
+   "drive_min": 34.2,
+   "props": 4,
+   "rows": 28
+  },
+  {
+   "city": "ny/syosset",
+   "drive_min": 35.2,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/amityville",
+   "drive_min": 35.3,
+   "props": 3,
+   "rows": 2
+  },
+  {
+   "city": "nj/fairview",
+   "drive_min": 35.7,
+   "props": 4,
+   "rows": 4
+  },
+  {
+   "city": "ny/glen-cove",
+   "drive_min": 35.7,
+   "props": 5,
+   "rows": 3
+  },
+  {
+   "city": "nj/tenafly",
+   "drive_min": 36.1,
+   "props": 4,
+   "rows": 4
+  },
+  {
+   "city": "ny/plainview",
+   "drive_min": 36.2,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/hackensack",
+   "drive_min": 36.9,
+   "props": 23,
+   "rows": 74
+  },
+  {
+   "city": "nj/bergenfield",
+   "drive_min": 37.1,
+   "props": 3,
+   "rows": 10
+  },
+  {
+   "city": "ny/yonkers",
+   "drive_min": 37.1,
+   "props": 24,
+   "rows": 36
+  },
+  {
+   "city": "nj/east-rutherford",
+   "drive_min": 37.4,
+   "props": 5,
+   "rows": 19
+  },
+  {
+   "city": "nj/little-ferry",
+   "drive_min": 37.5,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/jersey-city",
+   "drive_min": 37.7,
+   "props": 122,
+   "rows": 313
+  },
+  {
+   "city": "ny/copiague",
+   "drive_min": 38.0,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "nj/secaucus",
+   "drive_min": 38.1,
+   "props": 6,
+   "rows": 24
+  },
+  {
+   "city": "ny/woodbury",
+   "drive_min": 38.3,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ny/rye",
+   "drive_min": 38.4,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/lindenhurst",
+   "drive_min": 38.6,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/cresskill",
+   "drive_min": 38.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/rutherford",
+   "drive_min": 39.0,
+   "props": 3,
+   "rows": 6
+  },
+  {
+   "city": "ny/east-farmingdale",
+   "drive_min": 39.3,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/farmingdale",
+   "drive_min": 39.3,
+   "props": 2,
+   "rows": 2
+  }
+ ],
+ "cities_unmatched_far": [],
+ "props_discovered": 1670,
+ "props_skipped_lowprice_gt_3000": 725,
+ "reasons": {
+  "ok": 938,
+  "no_unit_le_3000": 7
+ },
+ "blocked": null,
+ "dogs_no_rows": 0
+}

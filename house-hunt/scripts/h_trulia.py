@@ -9,9 +9,11 @@ Two phases, both resumable (state in raw/trulia/_state.json, pages cached by lib
                                        or per floor plan when the page lists no units (building_floorplan)
 
 Usage:
-  python3 scripts/h_trulia.py                       # search every ZIP, then details, nearest-first
+  python3 scripts/h_trulia.py                       # search every ZIP (cards only; the default)
+  python3 scripts/h_trulia.py --phase all           # search, then every detail page, nearest-first (about 10 h)
   python3 scripts/h_trulia.py --phase search
   python3 scripts/h_trulia.py --phase detail --max-minutes 110
+  python3 scripts/h_trulia.py --targets x.csv       # fetch only the URLs in x.csv (column url, optional building_url)
   python3 scripts/h_trulia.py --reparse             # rebuild the CSV from cached pages, no network
 
 Re-running refetches pages older than --refresh-hours (default 20) and updates last_seen.
@@ -781,6 +783,66 @@ def order_of(state) -> dict:
     return {BASE + u: min([dm.get(z, 9e9) for z in c.get("zips", [])] or [9e9]) for u, c in state["cards"].items()}
 
 
+def do_detail(u: str, state, rows, a) -> None:
+    """Fetch one /home/ or /building/ page (u is the path) and replace that URL's rows with what the page says."""
+    nd, meta = fetch(BASE + u, a.refresh_hours, a.reparse)
+    full = BASE + u
+    if nd is None:
+        if a.reparse:
+            return
+        state["details"][u] = {"at": now_iso(), "status": "gone", "why": f"http {meta['status']}"}
+        drop_url_rows(rows, full, set())
+        return
+    new, why = parse_detail(nd, meta)
+    c = state["cards"].get(u) or {}
+    for r in new:
+        r["first_seen"] = min(c.get("first_seen") or r["first_seen"], r["first_seen"])
+    put_rows(rows, new)
+    drop_url_rows(rows, full, {r["listing_id"] for r in new})
+    state["details"][u] = {"at": meta["retrieved_at"], "status": "ok" if new else "dropped", "why": why,
+                           "rows": len(new)}
+
+
+TARGET_RE = re.compile(r"^https://www\.trulia\.com(/(?:home|building)/[A-Za-z0-9._~%-]+)/?$")
+
+
+def run_targets(state, rows, a, deadline) -> None:
+    """--targets CSV (column `url`, optional `building_url`): fetch only those pages.
+
+    A Trulia /building/ URL in either column is fetched once and refreshes every unit row of that building.
+    A /home/ URL is fetched as itself (its row is keyed by that page). Other URLs are skipped and counted.
+    """
+    paths, skipped = [], 0
+    with open(a.targets, newline="", encoding="utf8") as f:
+        for row in csv.DictReader(f):
+            cands = [(row.get("building_url") or "").strip(), (row.get("url") or "").strip()]
+            ms = [TARGET_RE.match(c.split("?")[0].split("#")[0]) for c in cands]
+            pick = next((m.group(1) for m in ms if m and m.group(1).startswith("/building/")), None) \
+                or (ms[1].group(1) if ms[1] else None)
+            if not pick or pick.endswith("_li"):  # /building/*_li is disallowed by robots.txt
+                skipped += 1
+                continue
+            if pick not in paths:
+                paths.append(pick)
+    order = order_of(state)
+    print(f"targets: {len(paths)} pages to fetch ({skipped} rows skipped: not a Trulia /home/ or /building/ URL)",
+          flush=True)
+    tally = {}
+    for i, u in enumerate(paths, 1):
+        if time.time() > deadline:
+            print("targets: time budget reached", flush=True)
+            break
+        do_detail(u, state, rows, a)
+        st = (state["details"].get(u) or {}).get("status", "not cached")
+        tally[st] = tally.get(st, 0) + 1
+        if i % 25 == 0 or i == len(paths):
+            save_state(state)
+            save_rows(rows, order)
+            print(f"targets {i}/{len(paths)} {tally} rows={len(rows)} fetched={N_FETCHED}", flush=True)
+    save_state(state)
+    save_rows(rows, order)
+
+
 def run_detail(state, rows, a, deadline) -> None:
     order = order_of(state)
     urls = sorted(state["cards"], key=lambda u: (order[BASE + u], u))
@@ -799,22 +861,9 @@ def run_detail(state, rows, a, deadline) -> None:
         if time.time() > deadline:
             print("detail: time budget reached", flush=True)
             break
-        nd, meta = fetch(BASE + u, a.refresh_hours, a.reparse)
-        full = BASE + u
-        if nd is None:
-            if a.reparse:
-                continue
-            state["details"][u] = {"at": now_iso(), "status": "gone", "why": f"http {meta['status']}"}
-            drop_url_rows(rows, full, set())
-        else:
-            new, why = parse_detail(nd, meta)
-            c = state["cards"][u]
-            for r in new:
-                r["first_seen"] = min(c.get("first_seen") or r["first_seen"], r["first_seen"])
-            put_rows(rows, new)
-            drop_url_rows(rows, full, {r["listing_id"] for r in new})
-            state["details"][u] = {"at": meta["retrieved_at"], "status": "ok" if new else "dropped", "why": why,
-                                   "rows": len(new)}
+        do_detail(u, state, rows, a)
+        if u not in state["details"]:
+            continue
         if i % 25 == 0 or i == len(todo):
             save_state(state)
             save_rows(rows, order)
@@ -827,7 +876,8 @@ def run_detail(state, rows, a, deadline) -> None:
 def main() -> int:
     global DELAY, READ_ONLY
     ap = argparse.ArgumentParser()
-    ap.add_argument("--phase", choices=["search", "detail", "all"], default="all")
+    ap.add_argument("--phase", choices=["search", "detail", "all"], default="search")
+    ap.add_argument("--targets", help="CSV with column url (optional building_url): fetch only these detail pages")
     ap.add_argument("--max-zips", type=int, default=0)
     ap.add_argument("--max-details", type=int, default=0)
     ap.add_argument("--max-minutes", type=float, default=0)
@@ -842,9 +892,13 @@ def main() -> int:
     rows = {} if a.reparse else load_rows()
     code = 0
     try:
-        if a.phase in ("search", "all"):
+        if a.targets:
+            run_targets(state, rows, a, deadline)
+        elif a.phase in ("search", "all"):
             run_search(state, rows, None, a, deadline)
-        if a.phase in ("detail", "all") or a.reparse:
+        if a.targets:
+            pass
+        elif a.phase in ("detail", "all") or a.reparse:
             run_detail(state, rows, a, deadline)
     except Blocked as e:
         print("STOPPED:", e, flush=True)

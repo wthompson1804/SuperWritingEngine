@@ -482,6 +482,9 @@ def main():
     ap.add_argument("--refresh", action="store_true")
     ap.add_argument("--max-drive", type=float, default=120.0)
     ap.add_argument("--only", default="")
+    ap.add_argument("--fetch-max-low", type=float, default=MAX_RENT,
+                    help="skip the property page when the search page's lowest price is above this")
+    ap.add_argument("--minutes", type=float, default=0, help="stop starting new cities after this many minutes")
     a = ap.parse_args()
     REFRESH = a.refresh
 
@@ -495,12 +498,18 @@ def main():
         unmatched = [u for u in unmatched if u in only]
 
     rows = load_existing()
-    stats = {"started": lib.now_iso(), "srp_pages": 0, "detail_pages": 0, "cities_done": [], "cities_unmatched_far": [],
+    stats = {"started": lib.now_iso(), "args": vars(a), "srp_pages": 0, "detail_pages": 0, "cities_done": [], "cities_unmatched_far": [],
              "props_discovered": 0, "props_skipped_lowprice_gt_3000": 0, "reasons": {}, "blocked": None,
              "dogs_no_rows": 0}
     done_props: set = set()
 
+    import time as _t
+    t0 = _t.time()
+
     def do_city(slug, drive):
+        if a.minutes and _t.time() - t0 > a.minutes * 60:
+            stats.setdefault("not_reached_time_budget", []).append({"city": slug, "drive_min": drive})
+            return
         found = discover_city(slug, stats)
         n_new = n_rows = 0
         for pslug, lp in sorted(found.items()):
@@ -508,7 +517,7 @@ def main():
                 continue
             done_props.add(pslug)
             stats["props_discovered"] += 1
-            if isinstance(lp, (int, float)) and lp > MAX_RENT:
+            if isinstance(lp, (int, float)) and lp > a.fetch_max_low:
                 stats["props_skipped_lowprice_gt_3000"] += 1
                 continue
             html, meta = fetch(pslug)
