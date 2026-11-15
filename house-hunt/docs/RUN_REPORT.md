@@ -1,4 +1,4 @@
-# Run report (2026-11-15T22:43:30+00:00)
+# Run report (2026-11-15T22:46:27+00:00)
 
 ## Steps
 
@@ -30,16 +30,16 @@
 | pass every listing gate | 2598 | 2598 | +0 |
 |   pending: a gate fact is unstated | 13595 | 13595 | +0 |
 |   fail a gate | 4271 | 4271 | +0 |
-| costed in the master table | 2020 | 2020 | +0 |
+| costed in the master table | 2575 | 2020 | +555 |
 | within the $3,000 all-in cap | 1664 | 1664 | +0 |
 | ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 1185 | 1185 | +0 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 324 | 324 | +0 |
-| avoid cards | 30 | 30 | +0 |
-|   shown with an asterisk (one thing to confirm) | 211 | 211 | +0 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 325 | 324 | +1 |
+| avoid cards | 29 | 30 | -1 |
+|   shown with an asterisk (one thing to confirm) | 212 | 211 | +1 |
 | held back for one confirmation | 189 | 189 | +0 |
 | clean, waiting for a live check (not shown) | 190 | 190 | +0 |
 | neighborhoods with 3+ shown places | 36 | 36 | +0 |
-| buildings in the master table | 608 | 608 | +0 |
+| buildings in the master table | 665 | 608 | +57 |
 
 ## Why units left
 
@@ -68,18 +68,18 @@
 
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
-| The Fresh-Start Year      |               5 |       64 |      23 |             0 |
-| The Little-City Year      |              35 |      522 |     110 |             7 |
-| The Old-Neighborhood Year |              50 |      183 |      92 |            21 |
+| The Fresh-Start Year      |               7 |       68 |      25 |             0 |
+| The Little-City Year      |              34 |      521 |     110 |             7 |
+| The Old-Neighborhood Year |              50 |      183 |      93 |            20 |
 | The Quiet-Street Year     |              14 |       26 |      15 |             0 |
-| The Room-to-Breathe Year  |              53 |      376 |      76 |             0 |
+| The Room-to-Breathe Year  |              52 |      373 |      74 |             0 |
 | The Walk-Everywhere Year  |               9 |       14 |       8 |             2 |
 
 ## Fill rate among shown units (percent with a value)
 
 | Field | % |
 |---|---|
-| sqft | 79 |
+| sqft | 78 |
 | unit_floor | 74 |
 | elevator_basis | 100 |
 | dog_weight_limit_lb | 18 |
@@ -135,77 +135,82 @@ test_parsers: 259 assertions passed
 625 692
 650 692
 675 692
-{'pass': 2042, 'fail_all_in': 556} buildings: 633
+{'pass': 2598} buildings: 692
 coordinates: {'listing rows agree': 662, 'census_geocoder': 3}; lookups redone at a corrected coordinate: 0 address keys
 ```
 
 **neighborhood assignment**
 ```
 # Checkpoint A: neighborhoods and proposed years
-Passing units: 2042 in 633 buildings, across 201 neighborhoods; 101 neighborhoods have 3+ passing places.
-Cluster quality (silhouette; higher is cleaner): {5: 0.178, 6: 0.18}. Using k=6.
+Passing units: 2598 in 692 buildings, across 214 neighborhoods; 109 neighborhoods have 3+ passing places.
+Cluster quality (silhouette; higher is cleaner): {5: 0.152, 6: 0.157}. Using k=6.
 ```
 
 **lifestyle features**
 ```
-201 neighborhoods; {'people_per_km2': 0.0, 'age_25_34_share': 0.0, 'median_age': 0.0, 'living_alone_share': 0.0, 'renter_share': 0.0, 'big_building_share': 0.0, 'detached_house_share': 0.0, 'median_year_built': 0.0, 'no_car_share': 0.0, 'transit_commute_share': 0.0, 'walk_commute_share': 0.0, 'wfh_share': 0.0, 'median_hh_income': 0.0, 'newcomer_share': 0.0, 'restaurants_800m': 0.0, 'bars_800m': 0.0, 'cafes_800m': 0.0, 'music_1600m': 0.0, 'park_ha_800m': 0.0, 'park_walk_min': 0.0, 'open_water_m': 0.0, 'beach_m': 0.0, 'supermarket_m': 0.0, 'train_station_m': 0.07, 'motorway_m': 0.0, 'violent_per_1000': 0.02, 'vehicle_theft_per_1000': 0.02, 'sqft': 0.22, 'bfloors': 0.94, 'garage': 0.0, 'sqft_per_1000usd': 0.22}
+214 neighborhoods; {'people_per_km2': 0.0, 'age_25_34_share': 0.0, 'median_age': 0.0, 'living_alone_share': 0.0, 'renter_share': 0.0, 'big_building_share': 0.0, 'detached_house_share': 0.0, 'median_year_built': 0.0, 'no_car_share': 0.0, 'transit_commute_share': 0.0, 'walk_commute_share': 0.0, 'wfh_share': 0.0, 'median_hh_income': 0.0, 'newcomer_share': 0.0, 'restaurants_800m': 0.0, 'bars_800m': 0.0, 'cafes_800m': 0.0, 'music_1600m': 0.0, 'park_ha_800m': 0.0, 'park_walk_min': 0.0, 'open_water_m': 0.0, 'beach_m': 0.0, 'supermarket_m': 0.0, 'train_station_m': 0.07, 'motorway_m': 0.0, 'violent_per_1000': 0.02, 'vehicle_theft_per_1000': 0.02, 'sqft': 0.21, 'bfloors': 0.93, 'garage': 0.0, 'sqft_per_1000usd': 0.21}
 ```
 
 **lifestyle colour**
 ```
-201 {'college_degree_share': 0.0, 'households_with_kids_share': 0.0, 'age_65plus_share': 0.0, 'commute_60min_plus_share': 0.0, 'built_since_2010_share': 0.0, 'built_before_1940_share': 0.0, 'tract_median_rent': 0.01, 'rent_burden_pct': 0.01, 'supermarket_m': 0.0, 'trader_joes_m': 0.19, 'whole_foods_m': 0.25, 'target_m': 0.04, 'vet_m': 0.0, 'dog_park_m': 0.0, 'train_station_m': 0.07, 'breweries_1600m': 0.0, 'restaurants_1600m': 0.0, 'transit_to_parents_min': 0.12, 'pool': 0.0, 'garage_or_gated': 0.0, 'street_parking': 0.0, 'building_floors': 0.58, 'building_year': 0.64, 'unit_sqft': 0.22, 'all_in': 0.0}
+214 {'college_degree_share': 0.0, 'households_with_kids_share': 0.0, 'age_65plus_share': 0.0, 'commute_60min_plus_share': 0.0, 'built_since_2010_share': 0.0, 'built_before_1940_share': 0.0, 'tract_median_rent': 0.01, 'rent_burden_pct': 0.0, 'supermarket_m': 0.0, 'trader_joes_m': 0.2, 'whole_foods_m': 0.25, 'target_m': 0.04, 'vet_m': 0.0, 'dog_park_m': 0.0, 'train_station_m': 0.07, 'breweries_1600m': 0.0, 'restaurants_1600m': 0.0, 'transit_to_parents_min': 0.12, 'pool': 0.0, 'garage_or_gated': 0.0, 'street_parking': 0.0, 'building_floors': 0.58, 'building_year': 0.64, 'unit_sqft': 0.21, 'all_in': 0.0}
 ```
 
 **crime benchmarks**
 ```
-std       3.11           0.94              0.90              0.98                       0.64
+std       3.05           0.92              0.89              0.97                       0.63
 min       0.00           0.00              0.00              0.00                       0.00
-25%       0.78           0.23              0.22              0.43                       0.26
-50%       2.09           0.63              0.60              0.72                       0.54
-75%       4.07           1.23              1.19              1.46                       0.86
+25%       0.78           0.23              0.22              0.42                       0.23
+50%       1.99           0.60              0.57              0.73                       0.50
+75%       4.00           1.20              1.15              1.45                       0.85
 max      17.21           5.22              5.02              7.26                       4.56
 ```
 
 **lifestyle groups (saved centres)**
 ```
-enclave :: Wilton[8]; Teaneck[7]; Westport[5]; Montgomery[4]; Chatham[3]; Berkeley Heights[3]; Millburn[3]; Fairfield[2]; Roxbury[2]; Summit[2]
-middle :: Jersey City[223]; Stamford[118]; Parsippany-Troy Hills[93]; New Rochelle[60]; Yonkers[55]; Port Chester[41]; Hackensack[34]; White Plains[33]; Danbury[24]; Franklin[17]
-new_water :: Norwalk[53]; Harrison[28]; New Brunswick[17]; Edgewater[2]; Weehawken[2]; Long Island City-Hunters Point[1]
-pre_car :: New Haven[319]; Kew Gardens[6]; Bedford-Stuyvesant (West)[2]; Bay Ridge[2]; Sunnyside[2]; Astoria (Central)[2]; Upper West Side-Manhattan Valley[2]; Hoboken[1]; Astoria (East)-Woodside (North)[1]; Crown Heights (North)[1]
-settled :: Newark[54]; Flushing-Willets Point[19]; Jamaica Hills-Briarwood[12]; Jamaica[11]; Mott Haven-Port Morris[9]; Hempstead[8]; Jackson Heights[8]; East Flatbush-Erasmus[7]; Mount Vernon[6]; West New York[5]
-space :: Bridgeport[59]; Bayonne[52]; Dover[41]; Burlington[20]; Trumbull[19]; Flemington[18]; East Brunswick[17]; East Orange[16]; Bogota[15]; Shelton[14]
+enclave :: Harrison[23]; Wilton[8]; Teaneck[7]; Westport[5]; Berkeley Heights[4]; Montgomery[4]; Millburn[3]; Chatham[3]; Watchung[2]; Fairfield[2]
+middle :: Jersey City[335]; Stamford[166]; Parsippany-Troy Hills[114]; New Rochelle[93]; Yonkers[76]; White Plains[66]; Port Chester[59]; Hackensack[43]; Danbury[24]; Franklin[17]
+new_water :: Norwalk[97]; Harrison[42]; New Brunswick[21]; North Bergen[12]; Fort Lee[9]; Weehawken[6]; Edgewater[2]; Long Island City-Hunters Point[1]
+pre_car :: New Haven[330]; Kew Gardens[6]; Astoria (Central)[2]; Bedford-Stuyvesant (West)[2]; Bay Ridge[2]; Sunnyside[2]; Upper West Side-Manhattan Valley[2]; Astoria (East)-Woodside (North)[1]; Hoboken[1]; East Midtown-Turtle Bay[1]
+settled :: Newark[54]; Flushing-Willets Point[19]; Jamaica Hills-Briarwood[12]; Jamaica[11]; Hempstead[11]; East Flatbush-Erasmus[9]; Mott Haven-Port Morris[9]; Jackson Heights[8]; West New York[8]; Mount Vernon[8]
+space :: Bridgeport[108]; Bayonne[54]; Dover[41]; Clifton[22]; Burlington[21]; Trumbull[19]; East Brunswick[19]; Flemington[18]; East Orange[17]; Bogota[16]
 ```
 
 **building amenities (cached pages)**
 ```
-passing buildings: 633; already in csv: 692; to process: 0
+  year_built                    130   18.8%
+  year_renovated                 16    2.3%
+  total_floors                   32    4.6%
+  unit_count                    185   26.7%
+  management_company            105   15.2%
+  fetched: 0
 ```
 
 **master tables**
 ```
-  manager                {'stated': 300, 'confirmed': 154, 'unknown': 126, 'amenities_page': 28}
-  utilities_included     {'unknown': 514, 'confirmed': 53, 'community_page': 24, 'stated': 17}
-  unit floor basis {'unknown': 965, 'inferred': 902, 'stated': 85, 'confirmed': 68} | label kind of inferred {'simple': 896, 'complex': 6}
-  confirmed floor values: 93 read, 25 matched no unit in the master (most are units that left the list), 2 not parseable (data/reference/floor_confirm_unmatched.csv)
-  live status {'not checked': 1626, 'live': 379, 'changed': 8, 'blocked': 5, 'gone': 2} | coordinates {'listing rows agree': 605, 'census_geocoder': 3}
-  evidence facts not mapped to a field: {'building_size': 81, 'building_site': 59, 'listing_last_modified': 37, 'owner_of_record': 24, 'listing_broker': 22, 'listing_date': 21, 'openigloo_summary': 16, 'available_units_listed': 16, 'move_in_fees': 14, 'pet_count_limit': 13, 'dog': 12, 'building_size_openigloo': 9, 'application_fee': 8, 'listing_updated_at': 8, 'deposit': 8, 'one_time_fee': 5, 'ownership_change': 5, 'building_name': 5, 'deposit_fee': 5, 'former_or_other_name': 5, 'open_violations_note': 5, 'ownership': 4, 'price_history': 4, 'storage': 4, 'own_site_price': 3}
+  manager                {'stated': 332, 'confirmed': 154, 'unknown': 139, 'amenities_page': 40}
+  utilities_included     {'unknown': 566, 'confirmed': 53, 'community_page': 26, 'stated': 20}
+  unit floor basis {'unknown': 1288, 'inferred': 1065, 'stated': 155, 'confirmed': 67} | label kind of inferred {'simple': 1058, 'complex': 7}
+  confirmed floor values: 93 read, 26 matched no unit in the master (most are units that left the list), 2 not parseable (data/reference/floor_confirm_unmatched.csv)
+  live status {'not checked': 2175, 'live': 384, 'changed': 9, 'blocked': 5, 'gone': 2} | coordinates {'listing rows agree': 662, 'census_geocoder': 3}
+  evidence facts not mapped to a field: {'building_size': 81, 'building_site': 59, 'listing_last_modified': 37, 'owner_of_record': 24, 'listing_broker': 22, 'listing_date': 21, 'openigloo_summary': 16, 'available_units_listed': 16, 'pet_count_limit': 14, 'move_in_fees': 14, 'dog': 12, 'building_size_openigloo': 9, 'application_fee': 8, 'listing_updated_at': 8, 'deposit': 8, 'one_time_fee': 5, 'ownership_change': 5, 'building_name': 5, 'deposit_fee': 5, 'former_or_other_name': 5, 'open_violations_note': 5, 'ownership': 4, 'price_history': 4, 'storage': 4, 'own_site_price': 3}
 ```
 
 **rent terms**
 ```
-2042 rows -> data/rent_terms.csv
-offer_type: {'months_free': 1050, 'none': 742, 'other': 127, 'reduced_deposit_or_fee': 51, 'dollar_credit': 27, 'weeks_free': 29, 'look_and_lease': 16}
-listed_price_is: {'net_effective': 91, 'gross': 893, 'unknown': 1058}
-needs_call: {'yes': 1175, 'no': 867}
+2598 rows -> data/rent_terms.csv
+offer_type: {'months_free': 1384, 'none': 867, 'other': 196, 'reduced_deposit_or_fee': 68, 'dollar_credit': 28, 'weeks_free': 35, 'look_and_lease': 20}
+listed_price_is: {'net_effective': 153, 'gross': 1090, 'unknown': 1355}
+needs_call: {'yes': 1539, 'no': 1059}
 ```
 
 **all-in cost**
 ```
-units 2020; cost gate {'pass': 1664, 'fail': 356}; rent asterisk 1289; rent terms file present
-  unknown building fees: 1326
-  unknown pet rent: 869
-  unknown parking fee: 1378
-  unknown gas: 428
+units 2575; cost gate {'pass': 1664, 'fail': 911}; rent asterisk 1720; rent terms file present
+  unknown building fees: 1569
+  unknown pet rent: 1011
+  unknown parking fee: 1664
+  unknown gas: 489
   gross above cap while basis passes: 26
 ```
 
@@ -214,15 +219,15 @@ units 2020; cost gate {'pass': 1664, 'fail': 356}; rent asterisk 1289; rent term
                                               13523 82nd ave|11435                                                                                                                                            elevator: 3+ complaints to the city in 24 months, above the 90th percentile for similar buildings
                                                14202 84th dr|11435                                                                                                              management: city records in the last 6 months above the 90th percentile on class_c_violations, mold_complaints, pest_complaints
                                            14345 sanford ave|11355                                                                                                                                            elevator: 3+ complaints to the city in 24 months, above the 90th percentile for similar buildings
-                                              14725 94th ave|11435                                                                     car crime: 46 vehicle thefts and thefts from vehicles within 250 m in 24 months (police data), at least double the median of 20 for candidate buildings in New York City
+                                              14725 94th ave|11435                                                                     car crime: 46 vehicle thefts and thefts from vehicles within 250 m in 24 months (police data), at least double the median of 21 for candidate buildings in New York City
                                              148-33 90th ave|11435                                                                                                    management: city records in the last 6 months above the 90th percentile on class_c_violations, heat_hot_water_complaints, pest_complaints
                                              148-37 88th ave|11435                                                                                          
 ```
 
 **ranking and selection**
 ```
-evidence: 4 units excluded, shown 324, avoid cards 30, of them with an asterisk 211 ({'floor': 103, 'live check': 77, 'elevator': 29, 'dogs allowed': 2}), held for a confirmation 189, waiting for a live check 190
-stages: 2020 costed -> -356 over the all-in cap -> -363 Jamaica safety rule -> -29 failed a gate on confirmed facts -> -83 sketchy -> -4 evidence exclusions -> 1185 ranked
+evidence: 4 units excluded, shown 325, avoid cards 29, of them with an asterisk 212 ({'floor': 103, 'live check': 78, 'elevator': 29, 'dogs allowed': 2}), held for a confirmation 189, waiting for a live check 190
+stages: 2575 costed -> -911 over the all-in cap -> -363 Jamaica safety rule -> -29 failed a gate on confirmed facts -> -83 sketchy -> -4 evidence exclusions -> 1185 ranked
 (kept 1185 units; candidates 533; shown 491; pools: {'': 820, 'pool': 341, 'indoor': 24}
 ```
 

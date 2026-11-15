@@ -1,4 +1,5 @@
 building_id,unit_label,floor,basis,source_url,value
+b_17baeace72,*,3.0,confirmed,https://bltliveworkplay.com/apartments/stamford/allure/availability/,3
 b_1897e7d980,231,2.0,confirmed,https://bygomes.com/page-data/property/envy/231/page-data.json,unit 231: 2nd Floor
 b_1897e7d980,308,3.0,confirmed,https://bygomes.com/page-data/property/envy/308/page-data.json,unit 308: 3rd Floor
 b_1897e7d980,309,3.0,confirmed,https://bygomes.com/page-data/property/envy/309/page-data.json,unit 309: 3rd Floor
@@ -22,7 +23,7 @@ b_5e0963f022,*,23.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/one-
 b_5e0963f022,*,20.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/one-clinton-park,20
 b_590bdd448d,*,7.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/25-maple-avenue,7
 b_590bdd448d,*,6.0,confirmed,https://www.apartmentlist.com/ny/new-rochelle/25-maple-avenue,6
-b_d06ad3d154,312,3.0,confirmed,https://www.greystar.com/25-north-lex-white-plains-ny/p_21088,unit 610: floor 6; unit 312: floor 3
+b_89871dc4dd,*,3.0,confirmed,https://www.avaloncommunities.com/new-jersey/union-apartments/avalon-union/apartment/NJ026-NJ026-005-5306,3
 b_4317e61e15,*,6.0,confirmed,https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny,6
 b_4317e61e15,*,6.0,confirmed,https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny,6
 b_8055c78811,?,,unparsed,https://www.noblenj.com/,no unit number; every residence is on floor 3 or higher

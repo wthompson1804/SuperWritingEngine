@@ -2,53 +2,53 @@
 
 Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evidence/*.csv. No network requests. Every passing unit was checked and has one row.
 
-- Units checked: **2042** (one row each; `offer_type = none` for units with no such language).
-- Units with any concession, special-offer or price-basis language: **1300**.
-- Units whose price or offer is for a lease term other than 12 months: **464**.
-- Units that need a call (`needs_call = yes`): **1175** in 189 buildings.
+- Units checked: **2598** (one row each; `offer_type = none` for units with no such language).
+- Units with any concession, special-offer or price-basis language: **1731**.
+- Units whose price or offer is for a lease term other than 12 months: **584**.
+- Units that need a call (`needs_call = yes`): **1539** in 213 buildings.
 
 ## Counts by offer_type
 
 | offer_type | units |
 |---|---|
-| months_free | 1050 |
-| none | 742 |
-| other | 127 |
-| reduced_deposit_or_fee | 51 |
-| weeks_free | 29 |
-| dollar_credit | 27 |
-| look_and_lease | 16 |
+| months_free | 1384 |
+| none | 867 |
+| other | 196 |
+| reduced_deposit_or_fee | 68 |
+| weeks_free | 35 |
+| dollar_credit | 28 |
+| look_and_lease | 20 |
 
 ## Listed price basis
 
 | listed_price_is | units |
 |---|---|
-| unknown | 1058 |
-| gross | 893 |
-| net_effective | 91 |
+| unknown | 1355 |
+| gross | 1090 |
+| net_effective | 153 |
 
 ## Confidence
 
 | confidence | units |
 |---|---|
-| assumed_terms | 1163 |
-| stated_on_page | 852 |
-| computed_from_stated_terms | 27 |
+| assumed_terms | 1524 |
+| stated_on_page | 1044 |
+| computed_from_stated_terms | 30 |
 
 ## Free-period timing
 
 | timing | units |
 |---|---|
-| unknown | 1026 |
-| (no free period) | 963 |
-| upfront | 40 |
-| end_of_lease | 7 |
+| unknown | 1359 |
+| (no free period) | 1179 |
+| upfront | 42 |
+| end_of_lease | 12 |
 | specific_months | 5 |
 | spread_monthly | 1 |
 
 ## Gross rent above the listed price (stated or computed from stated terms)
 
-**12** units have a determined gross rent above the listed price.
+**15** units have a determined gross rent above the listed price.
 
 | unit | listed | gross | gap | free months / lease | confidence |
 |---|---|---|---|---|---|
@@ -57,6 +57,9 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | The Riverhouse | 2025 | 2430 | 405 | 3 / 18 | computed_from_stated_terms |
 | The Riverhouse | 1975 | 2370 | 395 | 3 / 18 | computed_from_stated_terms |
 | Alvista Rise #1922 | 2435 | 2825 | 390 | 2.5 / 18 | stated_on_page |
+| Arc House | 2875 | 3115 | 240 | 1 / 13 | computed_from_stated_terms |
+| Arc House | 2855 | 3093 | 238 | 1 / 13 | computed_from_stated_terms |
+| Arc House | 2830 | 3066 | 236 | 1 / 13 | computed_from_stated_terms |
 | Harmony West | 2562 | 2776 | 214 | 1 / 13 | computed_from_stated_terms |
 | Harmony West | 2492 | 2700 | 208 | 1 / 13 | computed_from_stated_terms |
 | Arc House | 2500 | 2708 | 208 | 1 / 13 | computed_from_stated_terms |
@@ -67,10 +70,12 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 ## Largest possible gaps where the basis is unknown (scenario: listed price is net-effective)
 
-1067 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
+1404 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
 
 | unit | listed | gross if listed is net | gap | free months / lease | basis |
 |---|---|---|---|---|---|
+| Axis 201 #0308 | 2856 | 5712 | 2856 | 3 / 6 | unknown |
+| Axis 201 #0508 | 2856 | 5712 | 2856 | 3 / 6 | unknown |
 | Axis 201 #0259 | 2762 | 5524 | 2762 | 3 / 6 | unknown |
 | Axis 201 #0209 | 2732 | 5464 | 2732 | 3 / 6 | unknown |
 | Axis 201 #0213 | 2670 | 5340 | 2670 | 3 / 6 | unknown |
@@ -94,66 +99,113 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Axis 201 #0247 | 2535 | 5070 | 2535 | 3 / 6 | unknown |
 | Axis 201 #0355 | 2525 | 5050 | 2525 | 3 / 6 | unknown |
 | Axis 201 #0310 | 2498 | 4996 | 2498 | 3 / 6 | unknown |
-| Axis 201 #0466 | 2498 | 4996 | 2498 | 3 / 6 | unknown |
-| Axis 201 #0261 | 2495 | 4990 | 2495 | 3 / 6 | unknown |
 
 ## Gross rent over $3,000 (rent only, all-in aside)
 
-- Determined gross over $3,000: **0** units.
-- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **323** units in 50 buildings.
+- Determined gross over $3,000: **3** units: Arc House ($3066); Arc House ($3093); Arc House ($3115)
+- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **658** units in 99 buildings.
 
 | building | units | listed range | scenario gross (max) | free months / lease |
 |---|---|---|---|---|
-| Axis 201 | 44 | 1805-2762 | 5524 | 3 / 6 |
+| Axis 201 | 46 | 1805-2856 | 5712 | 3 / 6 |
+| Halstead Parsippany | 23 | 2384-2999 | 3999 | 3 / 12 |
+| The Jefferson | 6 | 2740-2990 | 3987 | 3 / 12 assumed |
 | Brookside Wilton | 8 | 2650-2650 | 3975 | 2 / 6 |
-| The Jefferson | 3 | 2740-2840 | 3787 | 3 / 12 assumed |
-| The Alary | 8 | 2538-2773 | 3697 | 3 / 12 assumed |
-| Halstead Parsippany | 19 | 2384-2757 | 3676 | 3 / 12 |
+| The Alary | 9 | 2538-2975 | 3967 | 3 / 12 assumed |
+| Twenty Fair | 6 | 2400-2925 | 3900 | 1-3 / 12 assumed |
+| The Winston | 26 | 2350-2850 | 3800 | 3 / 12 |
+| Piper | 34 | 2499-3000 | 3789 | 2.5 / 12 |
+| West Side Square | 72 | 2439-2998 | 3787 | 2.5 / 12 |
+| Berkeley House | 1 | 2838-2838 | 3784 | 3 / 12 assumed |
 | The Taft Apartments | 3 | 2160-2435 | 3652 | 3 / 9 |
-| The Winston | 25 | 2350-2630 | 3507 | 3 / 12 |
-| West Side Square | 35 | 2439-2747 | 3470 | 2.5 / 12 |
+| Twenty50 | 5 | 2850-3000 | 3600 | 1 / 6 |
+| EDGE | 16 | 2513-2995 | 3594 | 2 / 12 |
+| 1 Lyon Place | 2 | 2830-2995 | 3594 | 1-2 / 12 assumed |
+| Clifton & Co. | 18 | 2533-2978 | 3574 | 2 / 12 |
+| 500 PARQ | 11 | 2560-2960 | 3552 | 2 / 12 |
+| Skyline New Rochelle | 10 | 2640-2955 | 3546 | 2 / 12 assumed |
+| Aviva | 96 | 2541-2994 | 3538 | 2 / 13 |
+| Julius | 3 | 2880-2940 | 3528 | 2 / 12 |
+| Scribe | 17 | 2509-2936 | 3523 | 2 / 12 assumed |
+| 51 South | 5 | 2808-2932 | 3518 | 2 / 12 |
+| Hudson 44 | 5 | 2595-2900 | 3480 | 2 / 12 assumed |
 | Aura 240 | 1 | 2595-2595 | 3460 | 3 / 12 assumed |
-| Piper | 14 | 2499-2700 | 3411 | 2.5 / 12 |
-| EDGE | 14 | 2513-2837 | 3404 | 2 / 12 |
-| The Current on River | 5 | 2595-2825 | 3390 | 2 / 12 |
-| 51 South | 2 | 2808-2808 | 3370 | 2 / 12 |
+| The Current on River | 6 | 2595-2875 | 3450 | 2 / 12 |
+| Port & Main | 5 | 2750-2850 | 3420 | 2 / 12 assumed |
+| 42 Broad | 2 | 2873-2964 | 3387 | 1.5 / 12 assumed |
+| Noble' | 1 | 2900-2900 | 3383 | 1-2 / 12 assumed |
+| Summer House | 13 | 2575-2921 | 3370 | 2 / 13 |
 | Riello Edgewater | 1 | 2800-2800 | 3360 | 2 / 12 assumed |
-| Skyline New Rochelle | 7 | 2640-2795 | 3354 | 2 / 12 assumed |
-| Aviva | 40 | 2541-2797 | 3306 | 2 / 13 |
-| Hudson 44 | 3 | 2595-2750 | 3300 | 2 / 12 assumed |
+| Avalon Somerville Station | 1 | 2940-2940 | 3360 | 1.5 / 12 |
+| 75 Tresser | 7 | 2665-2957 | 3343 | 1.38 / 12 |
+| Stella | 3 | 2758-2893 | 3338 | 2 / 15 |
+| Avalon Yonkers | 3 | 2675-2920 | 3337 | 1.5 / 12 |
+| Hedges at Hawthorne | 2 | 2800-2850 | 3325 | 2 / 14 |
+| Starling | 1 | 3000-3000 | 3284 | 1.38 / 16 |
 | Bedford Hall Apartments | 5 | 2635-2735 | 3282 | 2 / 12 assumed |
-| 500 PARQ | 5 | 2560-2733 | 3280 | 2 / 12 |
-| Clifton & Co. | 10 | 2533-2724 | 3269 | 2 / 12 |
+| The Walcott Hackensack | 4 | 2610-2831 | 3267 | 2 / 15 |
+| The Magnolia | 11 | 2825-2995 | 3267 | 1 / 12 assumed |
+| Fairfield The Wel at Lindenhurst | 1 | 2995-2995 | 3267 | 1 / 12 assumed |
+| Carraway | 4 | 2700-2858 | 3266 | 1.5 / 12 assumed |
+| Hudson Lights | 3 | 2936-2994 | 3266 | 1 / 12 |
+| Harbourside SoNo | 4 | 2918-2992 | 3264 | 1 / 12 assumed |
 | 360 State Street | 19 | 2454-2646 | 3257 | 3 / 16 |
-| Twenty Fair | 1 | 2400-2400 | 3200 | 1-3 / 12 assumed |
-| The Walcott Hackensack | 3 | 2610-2763 | 3188 | 2 / 15 |
-| Harbor Pointe | 4 | 2774-2829 | 3183 | 2 / 18 |
+| The Wyldes | 6 | 2861-2982 | 3253 | 1 / 12 |
+| TGM Anchor Point | 6 | 2825-2980 | 3251 | 1 / 12 |
+| The Confluence at Norwalk | 3 | 2761-3000 | 3250 | 1 / 12 |
+| The Metro | 3 | 2795-2975 | 3245 | 1 / 12 assumed |
+| Admirals Cove | 4 | 2795-2975 | 3245 | 1 / 12 assumed |
+| Alexander Crossing | 1 | 2838-2838 | 3243 | 1.5 / 12 |
+| The Asher | 7 | 2812-2968 | 3238 | 1 / 12 assumed |
+| The Hazel | 1 | 2989-2989 | 3238 | 1 / 13 |
+| 66 Summer Street | 7 | 2817-2962 | 3231 | 1 / 12 assumed |
+| The Smyth | 1 | 2953-2953 | 3221 | 1 / 12 |
+| Parkside at the Harbors | 2 | 2850-2950 | 3218 | 1 / 12 assumed |
+| Overlook Flats | 1 | 2950-2950 | 3218 | 1 / 12 assumed |
+| J Centra Burlington | 3 | 2699-2844 | 3215 | 1.38 / 12 |
+| Newport Rentals | 4 | 2912-2942 | 3209 | 0.5-1 / 12 |
+| Harbor Pointe | 5 | 2774-2850 | 3206 | 2 / 18 |
+| The Enclave | 2 | 2975-2990 | 3204 | 1 / 15 |
+| Sawyer | 1 | 2999-2999 | 3199 | 1 / 16 |
+| The Audubon New Haven | 6 | 2640-2797 | 3197 | 1.5 / 12 assumed |
+| Atlantic Station | 2 | 2881-2931 | 3197 | 1 / 12 |
+| The Arbor | 2 | 2818-2928 | 3194 | 1 / 12 |
+| Solaris Lofts | 1 | 2948-2948 | 3194 | 1 / 13 |
+| Metrovue | 9 | 2825-2925 | 3191 | 1 / 12 |
+| Modera New Rochelle | 2 | 2855-2924 | 3190 | 1 / 12 |
+| City Crossing | 2 | 2892-2917 | 3182 | 1 / 12 assumed |
 | Atlas | 2 | 2573-2651 | 3181 | 2 / 12 |
-| The Audubon New Haven | 5 | 2640-2778 | 3175 | 1.5 / 12 assumed |
+| 111 Harbor Point | 2 | 2752-2914 | 3179 | 1 / 12 assumed |
+| The Hazel Jersey City | 2 | 2776-2898 | 3178 | 1-1.5 / 17 |
 | Avalon Wayne | 1 | 2645-2645 | 3174 | 2 / 12 |
+| Woodmont Station at Cranford | 1 | 2955-2955 | 3166 | 1 / 15 |
+| Willett Point | 1 | 2900-2900 | 3164 | 1-2 / 12 assumed |
+| The Reserve at Clarkstown | 1 | 2900-2900 | 3164 | 1 / 12 assumed |
+| Glenview House | 1 | 2899-2899 | 3163 | 1 / 12 |
+| 25 North Lex | 4 | 2806-2948 | 3159 | 1 / 12 |
+| 1 Martine at City Square | 2 | 2775-2895 | 3158 | 1 / 12 assumed |
+| Harrison Yards | 4 | 2815-2895 | 3158 | 1 / 12 |
+| Fort Hill Peekskill | 4 | 2775-2895 | 3158 | 1 / 12 assumed |
 | The Residences at Courthouse Square | 3 | 2650-2700 | 3150 | 2 / 14 |
-| Scribe | 2 | 2509-2606 | 3127 | 2 / 12 assumed |
-| 75 Tresser | 3 | 2665-2765 | 3126 | 1.38 / 12 |
+| Valley and Bloom | 5 | 2803-2905 | 3147 | 1 / 13 |
+| Miroza Tower III | 2 | 2850-2950 | 3124 | 1 / 18 |
 | Parc at Glenbrook Apartments | 1 | 2598-2598 | 3118 | 1.5-2 / 12 assumed |
-| Carraway | 1 | 2700-2700 | 3086 | 1.5 / 12 assumed |
-| Metrovue | 4 | 2825-2825 | 3082 | 1 / 12 |
+| AVE Clifton | 1 | 2872-2872 | 3111 | 1 / 13 |
+| The Waypointe Apartments | 3 | 2781-2836 | 3094 | 1 / 12 assumed |
+| Harbor Landing Apartments | 1 | 2958-2958 | 3087 | 0.5 / 12 |
+| The Duchess | 1 | 2828-2828 | 3085 | 1 / 12 |
+| Pier Village | 1 | 2931-2931 | 3085 | 1 / 20 |
+| Encore | 1 | 2888-2888 | 3081 | 0.5-1 / 16 |
 | Reserve at Riverdale | 1 | 2753-2753 | 3059 | 1 / 10 |
-| Avalon Yonkers | 1 | 2675-2675 | 3057 | 1.5 / 12 |
 | The Pointe at Neptune | 2 | 2801-2801 | 3056 | 1 / 12 |
-| J Centra Burlington | 2 | 2699-2699 | 3051 | 1.38 / 12 |
 | The Liberty Building | 1 | 2477-2477 | 3049 | 2-3 / 12 assumed |
-| Admirals Cove | 1 | 2795-2795 | 3049 | 1 / 12 assumed |
-| The Hazel Jersey City | 1 | 2776-2776 | 3045 | 1-1.5 / 17 |
+| Riverside | 1 | 2795-2795 | 3049 | 1 / 12 assumed |
 | 1177 Greens Farms | 1 | 2735-2735 | 3039 | 1 / 10 |
 | The Mitchell | 1 | 2781-2781 | 3034 | 1 / 12 assumed |
 | Avalon Teaneck | 2 | 2760-2780 | 3033 | 1 / 12 |
-| Summer House | 2 | 2575-2599 | 3032 | 2 / 14 |
+| The Atwater | 2 | 2785-2800 | 3033 | 1-2 / 12 assumed |
 | 30 Broad Street | 1 | 2775-2775 | 3027 | 1 / 12 assumed |
-| 1 Martine at City Square | 1 | 2775-2775 | 3027 | 1 / 12 assumed |
-| The Atwater | 1 | 2785-2785 | 3017 | 1-2 / 12 assumed |
 | 80East / Luxury Apartments / Dover, NJ | 2 | 2800-2800 | 3015 | 1 / 14 |
-| The Confluence at Norwalk | 1 | 2761-2761 | 3012 | 1 / 12 |
-| 111 Harbor Point | 1 | 2752-2752 | 3002 | 1 / 12 assumed |
 
 ## Method and limits
 
