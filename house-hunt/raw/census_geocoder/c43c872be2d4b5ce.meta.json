@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=125+Parkway+Rd%2C+Bronxville%2C+NY+10708&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:13+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/c43c872be2d4b5ce.json",
+ "source": "census_geocoder"
+}

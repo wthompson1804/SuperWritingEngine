@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=290+E+Main+St%2C+Elmsford%2C+NY+10523&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:18+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/9ca8d1feea44709e.json",
+ "source": "census_geocoder"
+}

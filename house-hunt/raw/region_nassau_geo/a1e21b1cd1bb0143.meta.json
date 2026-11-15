@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=630+Shore+Rd%2C+Long+Beach%2C+NY+11561&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:02+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/a1e21b1cd1bb0143.json",
+ "source": "region_nassau_geo"
+}

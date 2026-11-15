@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=66+Cedar+Hill+Ave%2C+Nyack%2C+NY+10960&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:19+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/1ecbf91b9258a055.json",
+ "source": "census_geocoder"
+}

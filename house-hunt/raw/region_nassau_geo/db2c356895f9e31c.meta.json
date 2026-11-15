@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=951+Oceanfront+St%2C+Long+Beach%2C+NY+11561&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:02:00+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/db2c356895f9e31c.json",
+ "source": "region_nassau_geo"
+}

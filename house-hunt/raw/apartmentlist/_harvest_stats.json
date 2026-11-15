@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1127,
- "detail_pages": 1839,
+ "srp_pages": 1141,
+ "detail_pages": 1871,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1889,6 +1889,30 @@
    "drive_min": 99.9,
    "props": 10,
    "rows": 15
+  },
+  {
+   "city": "nj/princeton",
+   "drive_min": 100.2,
+   "props": 14,
+   "rows": 109
+  },
+  {
+   "city": "nj/long-branch",
+   "drive_min": 100.7,
+   "props": 20,
+   "rows": 35
+  },
+  {
+   "city": "ny/quogue",
+   "drive_min": 100.8,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/monmouth-beach",
+   "drive_min": 101.0,
+   "props": 5,
+   "rows": 3
   }
  ],
  "cities_unmatched_far": [
@@ -1913,10 +1937,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2720,
- "props_skipped_lowprice_gt_3000": 881,
+ "props_discovered": 2759,
+ "props_skipped_lowprice_gt_3000": 888,
  "reasons": {
-  "ok": 1829,
+  "ok": 1861,
   "no_unit_le_3000": 9,
   "no_listing_object": 1
  },

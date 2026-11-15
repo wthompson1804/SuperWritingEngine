@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=92+Main+St%2C+Yonkers%2C+NY+10701&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:11+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/6ee1620b22c1a551.json",
+ "source": "census_geocoder"
+}

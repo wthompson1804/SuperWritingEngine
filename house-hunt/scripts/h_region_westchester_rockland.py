@@ -334,7 +334,10 @@ def main() -> None:
                 if any(x["elevator"] == "yes" for x in t) and not c.get("elevator"):
                     c["elevator"], c["elev_basis"] = "yes", "Trulia building page lists an elevator (" + c["trulia"] + ")"
         a = al_match(c.get("al") or c.get("name") or (rows[0].get("building_name") if rows else ""), c.get("address") or (rows[0].get("address") if rows else ""), c.get("zip") or (rows[0].get("zip") if rows else ""))
-        if a: al_facts(c, a)
+        if a:
+            al_facts(c, a)
+            for r in rows:
+                if not r.get("lat") and a.get("lat"): r["lat"], r["lon"] = a["lat"], a["lon"]
         out, b = apply_building(rows, c, key)
         all_rows += out; buildings.append(b)
     # 2. every other Trulia detail page
@@ -409,6 +412,22 @@ def main() -> None:
     for r in all_rows:
         for k in list(r):
             if k.startswith("_"): r.pop(k)
+    geo_cache: dict[str, tuple] = {}
+    for r in all_rows:  # Census geocoder for rows whose page gave no coordinates
+        if r.get("lat") or not (r.get("address") and r.get("zip")): continue
+        q = f"{re.sub(r'(?i)[ ,]+(apt|unit|#).*$', '', r['address'])}, {r.get('city', '')}, NY {r['zip']}"
+        if q not in geo_cache:
+            geo_cache[q] = ("", "")
+            try:
+                c, m = lib.cached_get("https://geocoding.geo.census.gov/geocoder/locations/onelineaddress", "census_geocoder",
+                                      params={"address": q, "benchmark": "Public_AR_Current", "format": "json"})
+                mt = (json.loads(c).get("result") or {}).get("addressMatches") or []
+                if mt: geo_cache[q] = (round(mt[0]["coordinates"]["y"], 6), round(mt[0]["coordinates"]["x"], 6))
+            except Exception:
+                pass
+        if geo_cache[q][0]:
+            r["lat"], r["lon"] = geo_cache[q]
+            r["notes"] = (r.get("notes", "") + "; lat/lon from the Census geocoder").strip("; ")
     seen_ids, dedup = set(), []
     for r in all_rows:  # the same unit can arrive from a property matched under two names; keep the first copy
         if r["listing_id"] in seen_ids: continue

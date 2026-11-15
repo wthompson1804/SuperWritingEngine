@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=178+Pine+St%2C+Freeport%2C+NY+11520&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:02:01+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/a7677380c2d11bf9.json",
+ "source": "region_nassau_geo"
+}

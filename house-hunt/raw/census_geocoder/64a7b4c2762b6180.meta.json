@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1177+Warburton+Ave%2C+Yonkers%2C+NY+10701&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:12+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/64a7b4c2762b6180.json",
+ "source": "census_geocoder"
+}

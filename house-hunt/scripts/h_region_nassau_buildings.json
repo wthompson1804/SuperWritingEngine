@@ -845,7 +845,7 @@
   "row": {
    "elevator": "yes"
   },
-  "note": "New-construction building by Valley Stream LIRR (gym on the first floor, basement parking, heat and hot water included per the listing). Units 501 and 505 (fifth floor by unit number). Elevator is stated on the Zumper copies of these listings (elevator=yes there), not on the Trulia pages. No leasing site found."
+  "note": "New-construction building by Valley Stream LIRR (gym on the first floor, basement parking, heat and hot water included per the listing). Units 501 and 505 (fifth floor by unit number). Elevator is stated on the Zumper copies of these listings (elevator=yes there), not on the Trulia pages. No leasing site found. This address is Sun Valley Towers (72 units, opened 2016, Alma Realty) per trade-press search results; no leasing site of its own was found."
  },
  {
   "name": "142 Main St (condo)",
@@ -1002,5 +1002,802 @@
    "https://www.trulia.com/home/410-n-corona-ave-a10-valley-stream-ny-11580-2078299122"
   ],
   "note": "Condo/co-op or owner-rented units; facts from the Trulia unit listing pages (policy is per listing, not a building leasing office). "
+ },
+ {
+  "name": "Fairfield Estates at Woodmere",
+  "address": "37 Woodmere Blvd",
+  "town": "Woodmere",
+  "zip": "11598",
+  "url": "https://fairfieldproperties.com/fairfield-estates-at-woodmere/",
+  "source_url": "https://fairfieldproperties.com/fairfield-estates-at-woodmere/",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "30",
+  "verdict": "pass",
+  "agg": [
+   "https://www.trulia.com/building/fairfield-estates-at-woodmere-37-woodmere-blvd-woodmere-ny-11598-1001489336"
+  ],
+  "row": {
+   "elevator": "yes",
+   "dogs": "yes",
+   "dog_weight_limit_lb": "30",
+   "pet_rent": "35",
+   "utilities_included": "Gas heat and hot water included (Fairfield page)",
+   "laundry": "On-site laundry center",
+   "manager": "Fairfield Properties",
+   "dog_policy_text": "Fairfield page: 'Pet policy: Monthly fee $35 per dog/$400 pet deposit* Weight limit 30 lbs. $20 per cat/$300 pet deposit* Restrictions apply.' Trulia: Dogs allowed (size: small)",
+   "price_basis": "floor-plan 'from' price, gross (special is a lease-term offer, no free months)"
+  },
+  "note": "Fairfield's own page (read 2026-11-15): 'Historic Elevator Building with Hotel-Style Lobby'; pet policy $35/dog/month, $400 deposit, weight limit 30 lb (passes the 25 lb gate; was a fail at 40); gas heat and hot water included; lease one or two years; special: 'Inflation Buster Move-In Special Lease Choice Of 18 Months With No Increase* $99 Security*' (no free months, prices are gross). Fairfield lists Studio from $2,235 and 1BR from $2,845 / $2,900 / $2,980; it publishes no unit numbers, floors or dates (unit list is on RentCafe, bot-walled). Rows are Trulia floor-plan rows marked 'Available Now': unit and floor unknown, ask for a unit above the ground floor. Parking, pool, doorman, year built: not stated."
+ },
+ {
+  "name": "Fairfield Estates at Rockville Centre",
+  "address": "555 Merrick Rd",
+  "town": "Rockville Centre",
+  "zip": "11570",
+  "url": "https://fairfieldproperties.com/fairfield-estates-at-rockville-centre/",
+  "source_url": "https://www.trulia.com/building/fairfield-estates-at-rockville-centre-555-merrick-rd-rockville-centre-ny-11570-2750783800",
+  "elevator": "yes",
+  "floors": "3",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "unconfirmed:dog policy. Trulia's page says no pets; Fairfield's own page states no pet policy at all",
+  "agg": [
+   "https://www.trulia.com/building/fairfield-estates-at-rockville-centre-555-merrick-rd-rockville-centre-ny-11570-2750783800"
+  ],
+  "row": {
+   "elevator": "yes",
+   "building_floors": "3",
+   "dogs": "unknown",
+   "utilities_included": "Gas heat included (Fairfield page)",
+   "manager": "Fairfield Properties"
+  },
+  "note": "Fairfield page: 'Luxury Three Story Rental Community With Elevator'; one-year lease; gas heat included; exterior parking; 1BR from $2,675 on Fairfield's page (Trulia floor-plan row shows $2,425). Trulia pet field: 'Dogs: Not allowed, Cats: Not allowed'. Fairfield's page is silent on pets (the neighbouring Fairfield Tudor at 565 Merrick Rd page says $35 per dog, size restrictions may apply). No unit numbers or dates published."
+ },
+ {
+  "name": "Fairfield Metro at Floral Park",
+  "address": "77 South Tyson Ave",
+  "town": "Floral Park",
+  "zip": "11001",
+  "url": "https://fairfieldproperties.com/fairfield-metro-at-floral-park/",
+  "source_url": "https://fairfieldproperties.com/fairfield-metro-at-floral-park/",
+  "elevator": "yes",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest 1BR from $3,125 on Fairfield's page; no studios)",
+  "min_rent": 3125,
+  "min_rent_url": "https://fairfieldproperties.com/fairfield-metro-at-floral-park/",
+  "min_rent_seen": "2026-11-15T18:36:05+00:00",
+  "min_rent_basis": "'from' price, gross",
+  "note": "Fairfield page: 'Elevator Building'; 'Parking: Lot and Covered at nominal fee'; special 'Inflation Buster Special Lease Choice Of 18 Months With No Increase* $99 Security Special*' (no free months). 1BR from $3,125 / $3,185; 2BR from $3,880. Pet policy not stated on the page."
+ },
+ {
+  "name": "Fairfield 365 Stewart at Garden City",
+  "address": "365 Stewart Ave",
+  "town": "Garden City",
+  "zip": "11530",
+  "url": "https://fairfieldproperties.com/fairfield-365-stewart-at-garden-city/",
+  "source_url": "https://fairfieldproperties.com/fairfield-365-stewart-at-garden-city/",
+  "elevator": "yes",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (studio from $3,055, 1BR from $3,280 on Fairfield's page)",
+  "min_rent": 3055,
+  "min_rent_url": "https://fairfieldproperties.com/fairfield-365-stewart-at-garden-city/",
+  "min_rent_seen": "2026-11-15T18:19:31+00:00",
+  "min_rent_basis": "'from' price, gross",
+  "note": "Fairfield page: 'Elevator building', built in 1938, 'Private garage parking, ample outdoor parking'. Studio from $3,055 ($55 over the cap); 1BR from $3,280. Pet policy not stated on the page."
+ },
+ {
+  "name": "Fairfield Metro at Farmingdale Village",
+  "address": "148 South Front St",
+  "town": "Farmingdale",
+  "zip": "11735",
+  "url": "https://fairfieldproperties.com/fairfield-metro-at-farmingdale-village/",
+  "source_url": "https://fairfieldproperties.com/fairfield-metro-at-farmingdale-village/",
+  "elevator": "yes",
+  "floors": "4",
+  "dogs": "yes",
+  "weight": "75",
+  "verdict": "fails:nothing at or under $3,000 (1BR from $3,400 on Fairfield's page; no studios)",
+  "min_rent": 3400,
+  "min_rent_url": "https://fairfieldproperties.com/fairfield-metro-at-farmingdale-village/",
+  "min_rent_seen": "2026-11-15T18:33:37+00:00",
+  "min_rent_basis": "'from' price, gross",
+  "row": {
+   "pet_rent": "75",
+   "parking_type": "Covered garage parking with available reserved spaces; surface lot"
+  },
+  "note": "Fairfield page: 'Elevator Access Buildings', built 2014-2016, 196 units / 4 stories, at Farmingdale LIRR. 'Dogs Allowed ... $400 one-time pet security fee, and a pet rent of $75 per month. Aggressive breeds are prohibited. There is a weight limit of 75 pounds per pet', 2 pets. Special: 'Penthouse Special-GET NOVEMBER 2026 RENT FREE*! All Others GET $1000 OFF ONE TIME With Move In By 11/24/26* Inflation Buster Move-In On Or Before 11/30/26 For Lease Choice Of 12-Month Or Take An 18-Month With No Increase* $99 Security*'. Dog park. 1BR from $3,400."
+ },
+ {
+  "name": "The Plaza 360 (Fairfield)",
+  "address": "360 Central Ave",
+  "town": "Lawrence",
+  "zip": "11559",
+  "url": "https://fairfieldproperties.com/the-plaza-360/",
+  "source_url": "https://www.trulia.com/building/the-plaza-360-residences-by-fairfield-360-central-ave-lawrence-ny-11559-2748185059",
+  "elevator": "yes",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (1BR $3,260 on Trulia; styles from $3,140 on Fairfield's page); Trulia also says no pets",
+  "min_rent": 3140,
+  "min_rent_url": "https://fairfieldproperties.com/the-plaza-360/",
+  "min_rent_seen": "2026-11-15T18:16:05+00:00",
+  "min_rent_basis": "'from' price, gross",
+  "note": "Fairfield page lists styles from $3,140 and states no pet policy. Trulia building page: elevator listed, 40 units, 'Dogs: Not allowed', 1BR $3,260; special 'Inflation Buster Special- 18-Months With No Increase* $99 Security*'."
+ },
+ {
+  "name": "Fairfield Oceanfront East and West at Long Beach",
+  "address": "951 Oceanfront St",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "https://fairfieldproperties.com/fairfield-oceanfront-east-at-long-beach/",
+  "source_url": "https://fairfieldproperties.com/fairfield-oceanfront-east-at-long-beach/",
+  "elevator": "unknown",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "unconfirmed:no apartment styles or prices are listed on Fairfield's pages (951 and 985 Oceanfront St); elevator and pet policy not stated",
+  "seen": "2026-11-15",
+  "note": "Fairfield's two West End oceanfront communities (951 and 985 Oceanfront St). Their pages (fairfield-oceanfront-east-at-long-beach, fairfield-oceanfront-west-at-long-beach) show an empty 'Apartment Styles' list: nothing advertised. No elevator, floors or pet text. A Zumper listing at 979 Oceanfront #8 (1BR $2,500, dogs unknown) is next door and not Fairfield's. Phone the Fairfield Long Beach office to ask."
+ },
+ {
+  "name": "Cornerstone Westbury",
+  "address": "461 Railroad Ave",
+  "town": "Westbury",
+  "zip": "11590",
+  "url": "https://cornerstonewestbury.com/",
+  "source_url": "https://cornerstonewestbury.com/floorplans/",
+  "elevator": "unknown",
+  "floors": "4",
+  "dogs": "yes",
+  "weight": "none",
+  "verdict": "unconfirmed:elevator not stated on the leasing site, Greystar, Apartment List or Trulia pages (4-storey mid-rise built 2023; ask)",
+  "from_csv": [
+   {
+    "file": "mgmt_greystar.csv",
+    "building_name": "Cornerstone Westbury"
+   }
+  ],
+  "row": {
+   "dogs": "yes",
+   "dog_weight_limit_lb": "none",
+   "pet_rent": "75",
+   "building_floors": "4",
+   "manager": "Greystar",
+   "dog_policy_text": "Trulia building page (cornerstone-westbury-461-railroad-ave, read 2026-11-15): 'We welcome 2 pets per apartment home. There is a $75.00 per month per pet fee. No weight restrictions, however no aggressive breeds allowed'; Apartment List: dogs allowed, limit 2. Leasing site: 'We're a pet-friendly apartment community!'",
+   "parking_type": "Private garage parking; Trulia fee list: Parking $75, Garage $150, EV $150 per month",
+   "concession_text": "This season we're giving YOU 1 month free on base rent! *Min lease term and conditions apply. Subject to change. New move ins only. (Apartment List and Trulia, 2026-11-15; listed prices are gross base rent, not net-effective)"
+  },
+  "note": "Greystar-managed, 461 Railroad Ave by Westbury LIRR, built 2023 (Apartment List), 72 units in phase 1. Leasing site floor plan S3 studio 561 sq ft: 'Total Monthly Leasing Price' $2,915.35 - $3,085.35, base rent $2,825 - $2,995 on 12 months (required monthly fees about $90.35), 'Only 3 left'. Units from Greystar's own page: 1306 and 1307 (floor 3), 1206 (floor 2), dates already passed so available now. Dogs: no weight limit, breed list, $75 per pet per month, 2 pets. Special: 1 month free on base rent (gross prices shown). With required fees, pet rent and parking the all-in is likely over $3,000 before any concession: gate script to compute. Elevator is not stated on any allowed page (a third-party listing site's search snippet lists one: not used as a fact)."
+ },
+ {
+  "name": "Avalon Rockville Centre",
+  "address": "80 N Centre Ave",
+  "town": "Rockville Centre",
+  "zip": "11570",
+  "url": "https://www.avaloncommunities.com/new-york/rockville-centre-apartments/avalon-rockville-centre/",
+  "source_url": "https://www.avaloncommunities.com/new-york/rockville-centre-apartments/avalon-rockville-centre/",
+  "elevator": "unknown",
+  "floors": "4",
+  "dogs": "yes",
+  "weight": "none",
+  "verdict": "fails:nothing available by 2026-12-15 (only unit at or under $3,000 is studio 311, available 2027-01-14 on Avalon's own page; Trulia shows it as available now)",
+  "from_csv": [
+   {
+    "file": "mgmt_avalon.csv",
+    "building_name": "Avalon Rockville Centre"
+   }
+  ],
+  "note": "AvalonBay, at Rockville Centre LIRR, 165 units; highest floor among available units 4; elevator not stated on Avalon's page. Dogs welcome, no weight limit stated, breed list. Studio 311 (floor 3, 493 sq ft): $2,765 on a 15-month lease, $2,895 on 12 months. Outdoor swimming pool. Specials on Trulia 2026-11-15: '* Apply by 11-16 for 1 month off! * Terms and conditions apply.' and '* Save up to $150/mo on select apartments!'."
+ },
+ {
+  "name": "233 Shore Rd",
+  "address": "233 Shore Rd",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/233-shore-rd-233-shore-rd-long-beach-ny-11561-2750784396",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (Trulia: small dogs, no number) and elevator (not stated on the Trulia building page)",
+  "agg": [
+   "https://www.trulia.com/building/233-shore-rd-233-shore-rd-long-beach-ny-11561-2750784396"
+  ],
+  "note": "40-unit rental building a block from the boardwalk. Trulia building page: 4 units listed 'Available Now' (studios #5 $2,100, #20 $2,150, #29 $2,150; 1BR #33 $2,400), 'NO FEE', 'Includes 1 free parking spot' (parking lot), outdoor pool, on-site laundry room. 'Dogs: Allowed (Size allowed: Small)'. Elevator not stated on this page; no leasing site found. Unit numbers do not show the floor."
+ },
+ {
+  "name": "315 West Broadway",
+  "address": "315 W Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "https://platinumfgp.com/developments/315-west-broadway",
+  "source_url": "https://www.trulia.com/building/315-west-broadway-315-w-broadway-long-beach-ny-11561-2780152128",
+  "elevator": "unknown",
+  "floors": "3",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "unconfirmed:elevator not stated (3 storeys, built 1927, per the broker's building page); dogs incl. large allowed, no weight number",
+  "agg": [
+   "https://www.trulia.com/building/315-west-broadway-315-w-broadway-long-beach-ny-11561-2780152128"
+  ],
+  "row": {
+   "building_floors": "3"
+  },
+  "note": "On the boardwalk. Broker page (platinumfgp.com): 'Built in 1927, 44 Units, 3 Stories'; newly renovated, in-unit laundry. Trulia: 'Dogs: Allowed, large dogs allowed, 1 pet max'; specials: '$500 off monthly during first lease term on 1 br's and studios!', 'No broker fee!' (page does not say whether the listed prices are before or after the $500: ask). Units: 3C studio $2,000 (third floor by unit number), 1L 1BR $2,500 and 1H 1BR $3,000 (first floor by unit number: ground-floor gate). 'Generous public parking adjacent'. Elevator not stated anywhere."
+ },
+ {
+  "name": "25 Franklin Blvd",
+  "address": "25 Franklin Blvd",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.zumper.com/listings/63513183/1-bedroom-east-end-south-long-beach-ny",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "35",
+  "verdict": "unconfirmed:elevator not stated on the Zumper listing (unit 4P, so at least 4 floors); availability date not stated",
+  "from_csv": [
+   {
+    "file": "zumper.csv",
+    "url_contains": "63513183"
+   }
+  ],
+  "row": {
+   "dogs": "yes",
+   "dog_weight_limit_lb": "35",
+   "utilities_included": "Heat, gas and water (listing text)"
+  },
+  "note": "Owner/broker listing (Coldwell Banker feed) on Zumper: 1BR #4P $2,400, 'Pets Welcome (Up To 35Lbs)', 'Rent Includes Heat, Gas & W[ater]'. 35 lb passes the 25 lb gate. Elevator and date not stated; floor 4 by unit number."
+ },
+ {
+  "name": "Surfview Towers (listing, address withheld)",
+  "address": "",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466385354",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (Trulia: small dogs, no number)",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466385354"
+  ],
+  "row": {
+   "elevator": "yes",
+   "floor": "4"
+  },
+  "note": "Trulia unit listing with the address withheld (coordinates on the page are approximate). Policy is per listing, not a building leasing office. Trulia size field: small dogs; no weight number. Listing text: 'Surfview Towers, ideally situated directly along the iconic Long Beach Boardwalk ... fourth-floor, one-bedroom ... private terrace ... oceanfront swimming pool, convenient on-site laundry facilities, elevator access, and on-site building maintenance'. 1BR $2,544, available now."
+ },
+ {
+  "name": "100 Clinton Ave (co-op)",
+  "address": "100 Clinton Ave",
+  "town": "Mineola",
+  "zip": "11501",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/100-clinton-ave-2x-mineola-ny-11501-2101495029",
+  "elevator": "yes",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no pets (stated on the Trulia listing)",
+  "agg": [
+   "https://www.trulia.com/home/100-clinton-ave-2x-mineola-ny-11501-2101495029"
+  ],
+  "note": "Owner-rented studio #2X $2,500, 'second floor of a well maintained elevator building'. Trulia: dogs not allowed, cats not allowed."
+ },
+ {
+  "name": "The Legacy, 289 Post Ave",
+  "address": "289 Post Ave",
+  "town": "Westbury",
+  "zip": "11590",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/289-post-ave-204-westbury-ny-11590-2116928504",
+  "elevator": "yes",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no pets (stated on the Trulia listing)",
+  "agg": [
+   "https://www.trulia.com/home/289-post-ave-204-westbury-ny-11590-2116928504"
+  ],
+  "note": "16-apartment building 'equipped with an elevator'; 1BR #204 $2,650 available 2026-11-15. Trulia: dogs not allowed, cats not allowed."
+ },
+ {
+  "name": "Great Neck elevator building (listing, address withheld)",
+  "address": "",
+  "town": "Great Neck",
+  "zip": "11021",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-great-neck-ny-11021-448472039",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (Trulia: small dogs, no number); no availability date on the listing",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-great-neck-ny-11021-448472039"
+  ],
+  "row": {
+   "elevator": "yes"
+  },
+  "note": "Trulia unit listing with the address withheld: '1 bedroom apartment in an elevator and laundry building', balcony, parking available, heat and water included, close to the LIRR. $2,950. Small dogs per Trulia's size field."
+ },
+ {
+  "name": "Morgan Parc",
+  "address": "199 Second St",
+  "town": "Mineola",
+  "zip": "11501",
+  "url": "https://www.morganparc.com/",
+  "source_url": "https://www.morganparc.com/availabilities/",
+  "elevator": "unknown",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "blocked",
+  "seen": "2026-11-15T21:51:32+00:00",
+  "note": "Luxury doorman building at Mineola LIRR (24-hour doorman, rooftop 50-ft swimming pool: outdoor, on the roof). The availabilities page loads its unit list with JavaScript ('Please wait while we load the availabilities'); no prices, pet policy or the word elevator in the HTML. Not on Trulia or Apartment List at or under $3,000, so very likely above the cap."
+ },
+ {
+  "name": "Long Beach boardwalk-area listing 465942179 (address withheld)",
+  "address": "",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-465942179",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (small dogs / case by case, no number) and elevator (not stated); building not named",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-465942179"
+  ],
+  "note": "Trulia unit listing with the address withheld (coordinates on the page are approximate). Policy is per listing, not a building leasing office. Trulia size field: small dogs; no weight number. 1BR $2,550: 'balcony with ocean views. The building features a pool, boardwalk access and laundry ... Heat, water and gas included. Pets/ small dogs are welcome!' Broker fee."
+ },
+ {
+  "name": "Long Beach boardwalk-area listing 466085026 (address withheld)",
+  "address": "",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466085026",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (small dogs / case by case, no number) and elevator (not stated); building not named",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466085026"
+  ],
+  "note": "Trulia unit listing with the address withheld (coordinates on the page are approximate). Policy is per listing, not a building leasing office. Trulia size field: small dogs; no weight number. 1BR $2,261: 'high rise building located on the boardwalk ... large in-ground Pool and laundry room on every floor ... private balcony'. Tenant pays electric, cable/internet."
+ },
+ {
+  "name": "Long Beach boardwalk-area listing 466425691 (address withheld)",
+  "address": "",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466425691",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (small dogs / case by case, no number) and elevator (not stated); building not named",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466425691"
+  ],
+  "note": "Trulia unit listing with the address withheld (coordinates on the page are approximate). Policy is per listing, not a building leasing office. Trulia size field: small dogs; no weight number. 1BR $2,260 from 2026-12-01: 'BALCONY on the ocean and the boardwalk ... The building features a pool and laundry rooms on every floor. Heat, water and gas are included in rent. Pets (cats and small dogs) are allowed with additional pet fees.' Broker fee."
+ },
+ {
+  "name": "Long Beach boardwalk-area listing 466446610 (address withheld)",
+  "address": "",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466446610",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (small dogs / case by case, no number) and elevator (not stated); building not named",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466446610"
+  ],
+  "note": "Trulia unit listing with the address withheld (coordinates on the page are approximate). Policy is per listing, not a building leasing office. Trulia size field: small dogs; no weight number. 1BR $2,550: ocean-view balcony, swimming pool, on-site laundry; 'Pet policy is considered on a case-by-case basis'. Heat, gas and water included."
+ },
+ {
+  "name": "Long Beach boardwalk-area listing 466458622 (address withheld)",
+  "address": "",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466458622",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (small dogs / case by case, no number) and elevator (not stated); building not named",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466458622"
+  ],
+  "note": "Trulia unit listing with the address withheld (coordinates on the page are approximate). Policy is per listing, not a building leasing office. Trulia size field: small dogs; no weight number. Studio $2,400: near Shore Road and the boardwalk, on-site laundry; 'Pets are considered on a case-by-case basis'. Heat, gas and water included."
+ },
+ {
+  "name": "Long Beach boardwalk-area listing 466463093 (address withheld)",
+  "address": "",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466463093",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (small dogs / case by case, no number) and elevator (not stated); building not named",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-466463093"
+  ],
+  "note": "Trulia unit listing with the address withheld (coordinates on the page are approximate). Policy is per listing, not a building leasing office. Trulia size field: small dogs; no weight number. 1BR $2,700: near Shore Road and the boardwalk, on-site laundry; 'The building is pet friendly on a case-by-case basis'. Gas, heat and water included."
+ },
+ {
+  "name": "Long Beach boardwalk-area listing 442124653 (address withheld)",
+  "address": "",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-442124653",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (small dogs / case by case, no number) and elevator (not stated); building not named",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-long-beach-ny-11561-442124653"
+  ],
+  "note": "Trulia unit listing with the address withheld (coordinates on the page are approximate). Policy is per listing, not a building leasing office. Trulia size field: small dogs; no weight number. 1BR $2,395 with balcony: 'Boardwalk & Beach across the street'. No date on the listing."
+ },
+ {
+  "name": "10 West Apartments",
+  "address": "10 W Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/10-west-apartments-10-w-broadway-long-beach-ny-11561-2745532029",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,996 on the Trulia building page)",
+  "note": "On West Broadway, a block from the boardwalk. Trulia building page (read 2026-11-15): 109 units in building; elevator not stated; pets: Dogs: Allowed (Size allowed: Small, large) | Cats: Allowed (Size allowed: n/a) | Summary: Dogs & Cats | Cats, small dogs, large dogs allowed | Cats: Allowed | Cats: | Restrictions: None | Dogs: Allowed | Dogs: | Restrictions: None. Parking: Special Features: Flooring Wood, Garage, Newly Renovated Apartment Homes, Other, Parking, Pet Amenities, Split Rent Payments With Flex, Sundeck.",
+  "lat": 40.584244637892,
+  "lon": -73.66460822226,
+  "min_rent": 3996,
+  "min_rent_url": "https://www.trulia.com/building/10-west-apartments-10-w-broadway-long-beach-ny-11561-2745532029",
+  "min_rent_seen": "2026-11-15T22:00:05+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "Fairfield Gables at Rockville Centre",
+  "address": "91 Grand Ave",
+  "town": "Rockville Centre",
+  "zip": "11570",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/fairfield-gables-at-rockville-centre-91-grand-ave-rockville-centre-ny-11570-2010416653",
+  "elevator": "unknown",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "unconfirmed:elevator not stated; dog policy unclear (Trulia's page says no pets, Fairfield's own page states no pet policy)",
+  "note": "Fairfield's own page for this community lists no styles or pet policy; Trulia's Fairfield feed marks pets 'not allowed' on communities whose Fairfield page has no pet line, so treat as unconfirmed if it matters. Trulia building page (read 2026-11-15): 52 units in building; elevator not stated; pets: Dogs: Not allowed | Cats: Not allowed | Summary: No | Summary: No pets allowed.",
+  "lat": 40.6607182,
+  "lon": -73.6419926,
+  "agg": [
+   "https://www.trulia.com/building/fairfield-gables-at-rockville-centre-91-grand-ave-rockville-centre-ny-11570-2010416653"
+  ]
+ },
+ {
+  "name": "One Third Avenue",
+  "address": "1 3rd Ave",
+  "town": "Mineola",
+  "zip": "11501",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/one-third-avenue-1-3rd-ave-mineola-ny-11501-2748073172",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,995 on the Trulia building page)",
+  "note": "At Mineola LIRR. Trulia building page (read 2026-11-15): 311 units in building; elevator listed; pets: Dogs: Allowed (Size allowed: Small) | Cats: Allowed (Size allowed: n/a) | Summary: Dogs & Cats | Cats, small dogs allowed | Cats: Allowed. Parking: Garage; Parking: Attached Garage; Special Features: Garage.",
+  "lat": 40.738925616204,
+  "lon": -73.641300030216,
+  "min_rent": 3995,
+  "min_rent_url": "https://www.trulia.com/building/one-third-avenue-1-3rd-ave-mineola-ny-11501-2748073172",
+  "min_rent_seen": "2026-11-15T22:00:16+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "The Montage",
+  "address": "111 2nd St",
+  "town": "Mineola",
+  "zip": "11501",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-montage-111-2nd-st-mineola-ny-11501-2796461963",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,700 on the Trulia building page)",
+  "note": "New building by Mineola LIRR. Trulia building page (read 2026-11-15): 92 units in building; elevator listed; pets: Dogs: Allowed (Number allowed: 1; Size allowed: Small) | Cats: Allowed (Number allowed: 1; Size allowed: n/a) | Summary: Dogs & Cats | Cats, small dogs allowed | Cats: Allowed | Cats: 1 pet max. Special-offer text: '1 MONTH FREE ON 12 OR 24 MONTH LEASE'. Parking: Garage; Parking: Attached Garage.",
+  "lat": 40.741986020738,
+  "lon": -73.637388650113,
+  "min_rent": 3700,
+  "min_rent_url": "https://www.trulia.com/building/the-montage-111-2nd-st-mineola-ny-11501-2796461963",
+  "min_rent_seen": "2026-11-15T22:00:19+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "Fairfield Estates at Stewart Manor",
+  "address": "605 Tulip Ave",
+  "town": "Garden City",
+  "zip": "11530",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/fairfield-estates-at-stewart-manor-605-tulip-ave-garden-city-ny-11530-2748185263",
+  "elevator": "unknown",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "unconfirmed:elevator not stated; dog policy unclear (Trulia's page says no pets, Fairfield's own page states no pet policy)",
+  "note": "Fairfield's own page lists no styles or pet policy; elevator not stated. Trulia special: 'Inflation Buster Lease Special 18-Month With No Increase* $99 Security*'. Trulia building page (read 2026-11-15): 50 units in building; elevator not stated; pets: Dogs: Not allowed | Cats: Not allowed | Summary: No | Summary: No pets allowed. Special-offer text: 'Inflation Buster Lease Special 18-Month With No Increase* $99 Security* *Restrictions.'. Parking: Parking Lot; Parking: Parking Lot; Parking: Assigned Parking; Special Features: Community Parking, Frameless Shower Doors, Glamour Lighting Fixtures, .",
+  "lat": 40.7179732,
+  "lon": -73.688667,
+  "agg": [
+   "https://www.trulia.com/building/fairfield-estates-at-stewart-manor-605-tulip-ave-garden-city-ny-11530-2748185263"
+  ]
+ },
+ {
+  "name": "Heritage Westminster",
+  "address": "111 Hempstead Tpke",
+  "town": "West Hempstead",
+  "zip": "11552",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/heritage-westminster-111-hempstead-tpke-west-hempstead-ny-11552-2768412303",
+  "elevator": "yes",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no pets (Trulia building page: dogs not allowed); lowest studio/1BR $3,084",
+  "note": "Trulia building page (read 2026-11-15): 428 units in building; elevator listed; pets: Dogs: Not allowed | Cats: Not allowed | Summary: No | Summary: No pets allowed. Parking: Special Features: Courtyard, Electronic Thermostat, Free Weights, Garage, Garage Lot, Gas Range, Media Room, Off Street Parking, Recreation Room, Recy.",
+  "lat": 40.704108863088,
+  "lon": -73.642908705875,
+  "min_rent": 3084,
+  "min_rent_url": "https://www.trulia.com/building/heritage-westminster-111-hempstead-tpke-west-hempstead-ny-11552-2768412303",
+  "min_rent_seen": "2026-11-15T22:00:28+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "The Maestro",
+  "address": "255 Great Neck Rd",
+  "town": "Great Neck",
+  "zip": "11021",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/maestro-255-great-neck-rd-great-neck-ny-11021-2747820167",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $4,595 on the Trulia building page)",
+  "note": "Trulia building page (read 2026-11-15): 94 units in building; elevator listed; pets: Dogs: Allowed (Size allowed: Small) | Cats: Allowed (Size allowed: n/a) | Summary: Dogs & Cats | Cats, small dogs allowed | Cats: Allowed | Dogs: Allowed | Dogs: Small dogs allowed. Parking: Garage; Parking: Attached Garage; Special Features: Garage, Individual Temperature Control, Keyless Entry System, Surround Sound With I Dock.",
+  "lat": 40.78171,
+  "lon": -73.732709,
+  "min_rent": 4595,
+  "min_rent_url": "https://www.trulia.com/building/maestro-255-great-neck-rd-great-neck-ny-11021-2747820167",
+  "min_rent_seen": "2026-11-15T22:00:33+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "Oxford Plaza",
+  "address": "720 Middle Neck Rd",
+  "town": "Great Neck",
+  "zip": "11024",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/oxford-plaza-720-middle-neck-rd-great-neck-ny-11024-2750787816",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,895 on the Trulia building page)",
+  "note": "Trulia building page (read 2026-11-15): 62 units in building; elevator listed; pets: Dogs: Allowed (Size allowed: Small) | Cats: Allowed (Size allowed: n/a) | Summary: Dogs & Cats | Cats, small dogs allowed | Cats: Allowed | Dogs: Allowed | Dogs: Small dogs allowed. Parking: Garage; Parking: Attached Garage; Special Features: Garage, Off Street Parking.",
+  "lat": 40.806636608868,
+  "lon": -73.735853948629,
+  "min_rent": 3895,
+  "min_rent_url": "https://www.trulia.com/building/oxford-plaza-720-middle-neck-rd-great-neck-ny-11024-2750787816",
+  "min_rent_seen": "2026-11-15T22:00:39+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "The Channel Club",
+  "address": "100 Waterview Rd",
+  "town": "Island Park",
+  "zip": "11558",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-channel-club-100-waterview-rd-island-park-ny-11558-2782195157",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,600 on the Trulia building page)",
+  "note": "Waterfront, Reynolds Channel. Trulia building page (read 2026-11-15): 86 units in building; elevator listed; pets: Dogs: Allowed (Size allowed: Small, large) | Cats: Allowed (Size allowed: n/a) | Summary: Dogs & Cats | Cats, small dogs, large dogs allowed | Cats: Allowed | Dogs: Allowed | Dogs: Large dogs allowed. Parking: Parking Lot; Parking: Parking Lot; Parking: Garage Parking: $60.00 per month - Boat Slip Fee: $100.00 per linear foot per season; Special Features: Co.",
+  "lat": 40.5960112,
+  "lon": -73.6537892,
+  "min_rent": 3600,
+  "min_rent_url": "https://www.trulia.com/building/the-channel-club-100-waterview-rd-island-park-ny-11558-2782195157",
+  "min_rent_seen": "2026-11-15T22:00:45+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "The Bridgeview",
+  "address": "80 Waterfront Blvd",
+  "town": "Island Park",
+  "zip": "11558",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-bridgeview-80-waterfront-blvd-island-park-ny-11558-2010373355",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,700 on the Trulia building page)",
+  "note": "New waterfront building on Reynolds Channel. Trulia building page (read 2026-11-15): 117 units in building; elevator listed; pets: Dogs: Allowed (Number allowed: 2; Size allowed: Small) | Cats: Allowed (Number allowed: 2; Size allowed: n/a) | Summary: Dogs & Cats | Cats, small dogs allowed | Cats: Allowed | Cats: 2 pet max. Special-offer text: 'We are offering one month's rent free on a 13-month lease.'. Parking: Garage; Parking: Attached Garage, Parking Lot; Parking: Garage Parking Fee: $125.00 per month\nPreferred Garage Parking Fee: $175.00 per month\nOutdoor .",
+  "lat": 40.597042688386,
+  "lon": -73.655846570524,
+  "min_rent": 3700,
+  "min_rent_url": "https://www.trulia.com/building/the-bridgeview-80-waterfront-blvd-island-park-ny-11558-2010373355",
+  "min_rent_seen": "2026-11-15T22:00:48+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "Pine Gardens",
+  "address": "178 Pine St",
+  "town": "Freeport",
+  "zip": "11520",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/pine-gardens-178-pine-st-freeport-ny-11520-1002373781",
+  "elevator": "unknown",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "unconfirmed:no prices or units published on the Trulia building page; elevator and pet policy not stated",
+  "note": "Pine Gardens, near the Nautical Mile: garden community, Trulia shows no price (\"Contact for price\"), no elevator or pet text. Trulia building page (read 2026-11-15): 48 units in building; elevator not stated; pets: not stated.",
+  "seen": "2026-11-15T22:00:51+00:00"
+ },
+ {
+  "name": "The Vanderbilt",
+  "address": "990 Corporate Dr",
+  "town": "Westbury",
+  "zip": "11590",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-vanderbilt-990-corporate-dr-westbury-ny-11590-2748517134",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $6,300 on the Trulia building page)",
+  "note": "Trulia building page (read 2026-11-15): 194 units in building; elevator listed; pets: Dogs: Allowed (Size allowed: Small, large) | Cats: Allowed (Size allowed: n/a) | Summary: Dogs & Cats | Cats, small dogs, large dogs allowed | Cats: Allowed | Cats: | Restrictions: None | Dogs: Allowed | Dogs: | Restrictions: None. Parking: Special Features: 9 Ceilings, Bellhop Service, Bridal Suite, Cabanas, Central HVAC, Childrens Playroom, Complimentary Exterior Parking, Courtyard, GE .",
+  "lat": 40.738733,
+  "lon": -73.600306,
+  "min_rent": 6300,
+  "min_rent_url": "https://www.trulia.com/building/the-vanderbilt-990-corporate-dr-westbury-ny-11590-2748517134",
+  "min_rent_seen": "2026-11-15T22:00:57+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "The Selby",
+  "address": "695 Merrick Ave",
+  "town": "Westbury",
+  "zip": "11590",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-selby-695-merrick-ave-westbury-ny-11590-2750794413",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $5,275 on the Trulia building page)",
+  "note": "Trulia building page (read 2026-11-15): 237 units in building; elevator listed; pets: Dogs: Allowed (Size allowed: Small, large) | Cats: Allowed (Size allowed: n/a) | Summary: Dogs & Cats | Cats, small dogs, large dogs allowed | Cats: Allowed | Cats: | Restrictions: None | Dogs: Allowed | Dogs: | Restrictions: None. Parking: Special Features: 9 10 Ceilings, Abundant Kitchen Storage, Barbecues, Bellhop Service, Brushed Brass Medicine Cabinets, Cabanas, Complimentary Fitness.",
+  "lat": 40.740579890956,
+  "lon": -73.585483241664,
+  "min_rent": 5275,
+  "min_rent_url": "https://www.trulia.com/building/the-selby-695-merrick-ave-westbury-ny-11590-2750794413",
+  "min_rent_seen": "2026-11-15T22:01:00+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "Avalon Westbury",
+  "address": "1299 Corporate Dr",
+  "town": "Westbury",
+  "zip": "11590",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/avalon-westbury-1299-corporate-dr-westbury-ny-11590-1001641733",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,584 on the Trulia building page)",
+  "note": "Trulia building page (read 2026-11-15): 396 units in building; elevator not stated; pets: Dogs: Allowed (Size allowed: Small, large) | Cats: Allowed (Size allowed: n/a) | Summary: Dogs & Cats | Cats, small dogs, large dogs allowed | Pet Policy: $600 one-time fee, $50/monthly rent, 2 pet maximum, breed restrictions apply. | Cats: Allowed | Dogs: All.",
+  "lat": 40.743228906268,
+  "lon": -73.59005738529,
+  "min_rent": 3584,
+  "min_rent_url": "https://www.trulia.com/building/avalon-westbury-1299-corporate-dr-westbury-ny-11590-1001641733",
+  "min_rent_seen": "2026-11-15T22:01:03+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "300 Edwards St",
+  "address": "300 Edwards St",
+  "town": "Roslyn",
+  "zip": "11576",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-chalet-apartments-300-edwards-st-roslyn-ny-11576-2747819960",
+  "elevator": "yes",
+  "dogs": "no",
+  "weight": "",
+  "verdict": "fails:no pets (Trulia building page: dogs not allowed); lowest studio/1BR $3,450",
+  "note": "Trulia special text: 'NO BROKER FEE | *1 FREE MONTH ON 11-MONTH LEASE* Net effective rent advertised.' (so the listed price is net-effective, gross is higher). Trulia building page (read 2026-11-15): 142 units in building; elevator listed; pets: Dogs: Not allowed | Cats: Not allowed | Summary: No | Summary: No pets allowed. Special-offer text: 'NO BROKER FEE | *1 FREE MONTH ON 11-MONTH LEASE* Net effective rent advertised.  Call or email our leasing office for full details and current leasing specials!'. Parking: Parking Lot; Parking: Parking Lot; Parking: INDOOR PARKING- $135.00 PER MTH\nOUTDOOR PARKING- $75.00 PER MTH\nSTORAGE- $150.00 PER MTH; Special Features.",
+  "lat": 40.7939027,
+  "lon": -73.6469931,
+  "min_rent": 3450,
+  "min_rent_url": "https://www.trulia.com/building/the-chalet-apartments-300-edwards-st-roslyn-ny-11576-2747819960",
+  "min_rent_seen": "2026-11-15T22:01:08+00:00",
+  "min_rent_basis": "base rent"
+ },
+ {
+  "name": "Arden",
+  "address": "100 Dickson St",
+  "town": "Glen Cove",
+  "zip": "11542",
+  "url": "https://www.greystar.com/arden-glen-cove-ny/p_23710",
+  "source_url": "https://www.trulia.com/building/arden-100-dickson-st-glen-cove-ny-11542-2797577200",
+  "elevator": "unknown",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "unconfirmed:no prices or units published on the Trulia building page; elevator and pet policy not stated",
+  "note": "New building in downtown Glen Cove: attended lobby, lounge, golf simulator, fitness centre, sauna. Trulia shows no prices or units (\"Contact for price\"). Trulia building page (read 2026-11-15): 101 units in building; elevator not stated; pets: not stated. Greystar's page for Arden (greystar.com/arden-glen-cove-ny/p_23710, cached 2026-11-15) gives building type Mid-Rise, 'Pet Friendly', pool, and no floor-plan prices: it appears to be pre-leasing.",
+  "seen": "2026-11-15T22:01:15+00:00"
+ },
+ {
+  "name": "Executive Towers at Lido",
+  "address": "854 E Broadway",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "",
+  "elevator": "unknown",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "blocked",
+  "seen": "2026-11-15",
+  "note": "Rental tower complex at the Lido end of East Broadway. No leasing site of its own was found; it is listed only on apartments.com and forrent.com, which are bot-walled / not allowed sources (apartments.com robots.txt returns 403). Not on Trulia, Zumper or Apartment List at any price on 2026-11-15. Unverified lead from a search-result snippet only (not a recorded fact): the forrent listing is said to state 'NO PETS ALLOWED' and 1BR from about $2,800. Needs a phone call: (516) 882-6202 per the apartments.com snippet."
+ },
+ {
+  "name": "Crystal House",
+  "address": "630 Shore Rd",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "",
+  "elevator": "unknown",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "blocked",
+  "seen": "2026-11-15",
+  "note": "Rental building on Shore Road. No leasing site of its own was found; listed only on apartments.com, forrent.com, homes.com and Zillow (bot-walled or off limits to this pipeline). Not on Trulia, Zumper or Apartment List at any price on 2026-11-15. Unverified lead from search-result snippets only (not a recorded fact): those listings are said to state 'No Dogs Allowed, No Pets Allowed'. Needs a phone call to confirm."
+ },
+ {
+  "name": "Hempstead new-construction courtyard building (listing, address withheld)",
+  "address": "",
+  "town": "Hempstead",
+  "zip": "11550",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-hempstead-ny-11550-2053660887",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (Trulia: small dogs, no number) and elevator (not stated); building not named",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-hempstead-ny-11550-2053660887"
+  ],
+  "note": "Trulia unit listing with the address withheld: 'Brand-New Construction Courtyard Building', private balcony, island kitchen, parking available, heat and hot water included. 1BR $2,865, available now. Elevator not stated."
+ },
+ {
+  "name": "Hempstead building off Mulford Place (listing, address withheld)",
+  "address": "",
+  "town": "Hempstead",
+  "zip": "11550",
+  "url": "",
+  "source_url": "https://www.trulia.com/home/address-not-disclosed-hempstead-ny-11550-463127058",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit (Trulia: small dogs, no number) and elevator (not stated); no availability date; building not named",
+  "agg": [
+   "https://www.trulia.com/home/address-not-disclosed-hempstead-ny-11550-463127058"
+  ],
+  "note": "Trulia unit listing with the address withheld: 'Pet friendly, no pet fee - garage parking', large one-bedroom near the Hempstead / Garden City border just off Mulford Place, heat and hot water included, on-site laundry, courtyard, basement parking available. 1BR $2,800. Elevator not stated."
  }
 ]

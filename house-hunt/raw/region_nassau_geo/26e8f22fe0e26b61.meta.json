@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=360+Central+Ave%2C+Lawrence%2C+NY+11559&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:02:00+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/26e8f22fe0e26b61.json",
+ "source": "region_nassau_geo"
+}

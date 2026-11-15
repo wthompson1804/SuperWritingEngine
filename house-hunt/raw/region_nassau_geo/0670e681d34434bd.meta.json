@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=77+South+Tyson+Ave%2C+Floral+Park%2C+NY+11001&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:01:58+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/0670e681d34434bd.json",
+ "source": "region_nassau_geo"
+}

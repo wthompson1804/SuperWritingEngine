@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=21+Scarsdale+Rd%2C+Yonkers%2C+NY+10707&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:13+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/4fd9af03d69e218c.json",
+ "source": "census_geocoder"
+}

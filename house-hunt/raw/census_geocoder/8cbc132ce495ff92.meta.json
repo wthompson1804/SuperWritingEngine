@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=720+Pelham+Rd%2C+New+Rochelle%2C+NY+10805&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:11+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/8cbc132ce495ff92.json",
+ "source": "census_geocoder"
+}

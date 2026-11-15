@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=148+South+Front+St%2C+Farmingdale%2C+NY+11735&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:01:59+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/ea60de0b3c6ab6cf.json",
+ "source": "region_nassau_geo"
+}

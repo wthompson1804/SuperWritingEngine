@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=199+Second+St%2C+Mineola%2C+NY+11501&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:02:01+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/a4c391364a1d60f8.json",
+ "source": "region_nassau_geo"
+}

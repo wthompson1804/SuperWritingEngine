@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=117+Ravine+Ave%2C+Yonkers%2C+NY+10701&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:03:12+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/7ccf661aa830730f.json",
+ "source": "census_geocoder"
+}
