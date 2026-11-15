@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/kj4p-ruqc.json?%24where=%28boroid%3D4+AND+block%3D9712+AND+lot%3D161%29+OR+%28boroid%3D4+AND+block%3D9712+AND+lot%3D186%29+OR+%28boroid%3D4+AND+block%3D9740+AND+lot%3D142%29+OR+%28boroid%3D4+AND+block%3D9761+AND+lot%3D14%29+OR+%28boroid%3D4+AND+block%3D9761+AND+lot%3D30%29+OR+%28boroid%3D4+AND+block%3D9762+AND+lot%3D10%29+OR+%28boroid%3D4+AND+block%3D9836+AND+lot%3D22%29+OR+%28boroid%3D4+AND+block%3D9954+AND+lot%3D49%29+OR+%28boroid%3D4+AND+block%3D9998+AND+lot%3D7502%29+OR+%28boroid%3D4+AND+block%3D10101+AND+lot%3D150%29+OR+%28boroid%3D4+AND+block%3D10151+AND+lot%3D75%29+OR+%28boroid%3D4+AND+block%3D16112+AND+lot%3D7501%29+OR+%28boroid%3D4+AND+block%3D16113+AND+lot%3D7502%29+OR+%28boroid%3D4+AND+block%3D16174+AND+lot%3D23%29+OR+%28boroid%3D5+AND+block%3D12+AND+lot%3D15%29+OR+%28boroid%3D5+AND+block%3D487+AND+lot%3D7501%29+OR+%28boroid%3D5+AND+block%3D2400+AND+lot%3D7501%29&%24order=buildingid&%24limit=50000&%24offset=0",
+ "retrieved_at": "2026-11-15T22:48:28+00:00",
+ "status": 200,
+ "path": "raw/nyc_records/6638cbe7d0c1dea6.json",
+ "source": "nyc_records"
+}
