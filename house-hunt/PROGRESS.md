@@ -59,6 +59,19 @@ Old Phase 1 leftovers (`scripts/p1_*.py`, `data/metrics/`) are partial; only `ac
 
 ## Log
 
+### 2026-11-15, session 1 (after midnight UTC-side): ranking v2 and evidence pass
+- **Safety rule final:** neither violent nor property crime may exceed Jamaica's precinct (9.8 / 25.0 per 1,000); lower ranks higher.
+- **Ranking v2 approved and implemented** (`scripts/rank.py`, `docs/RANKING.md`): sketchy listings dropped; eight parts
+  (safety 22, building 16, cost 12, car 12, space 12, distance 10, dog 8, daily life 8); 70% universal + 30% the year's promise;
+  pool bump +3 / indoor +6; closer to her parents is better; five-point spectrum against staying in Queens for the compare screen
+  (calculations stay in the background, shown on a click). Building amenities: `data/reference/building_amenities.csv`.
+- **Evidence pass running** on the 264 candidate units / 208 buildings (top 15 per neighborhood): 6 batch agents
+  (`docs/EVIDENCE_AGENT_BRIEF.md` → `data/evidence/*_batch_<n>.csv`), one NYC public-records agent (`data/evidence/nyc_records*.csv`),
+  and one agent adding **Envy by Gomes, 58 Norfolk St, Newark** at Will's request (`data/listings_raw/manual.csv`).
+- After evidence lands: write `scripts/avoid.py` (apply thresholds to dated evidence; management judged on last 6 months), drop units
+  that are gone or unconfirmed, then rerun everything once the 5 region agents and Apartment List's outer ring finish
+  (Will: "we'll run another pass once the remainder comes in").
+
 ### 2026-11-15, session 1 (late night): groups and safety rule settled
 - **Lifestyle groups approved** (6 groups; `scripts/lifestyle_groups.py`, centres saved in `data/reference/lifestyle_group_centres.csv`
   so later runs assign new neighborhoods to the same groups; `--refit` only on purpose). Labels + subheads are in that script's `LABELS`
