@@ -68,3 +68,4 @@
 {"url": "https://www.morganparc.com/sightmap/", "retrieved_at": "2026-11-15T18:56:04+00:00", "status": 404, "path": "raw/mgmt_sightmap_sites/7faf7b3162671827.html", "source": "mgmt_sightmap_sites"}
 {"url": "https://www.morganparc.com/apartments/", "retrieved_at": "2026-11-15T18:56:06+00:00", "status": 404, "path": "raw/mgmt_sightmap_sites/490bde714b845706.html", "source": "mgmt_sightmap_sites"}
 {"url": "https://www.morganparc.com/availabilities/", "retrieved_at": "2026-11-15T18:56:08+00:00", "status": 200, "path": "raw/mgmt_sightmap_sites/2f2cc8b95e08677b.html", "source": "mgmt_sightmap_sites"}
+{"url": "https://www.morganparc.com/residences/", "retrieved_at": "2026-11-15T18:56:10+00:00", "status": 404, "path": "raw/mgmt_sightmap_sites/f523c7e6535596b3.html", "source": "mgmt_sightmap_sites"}

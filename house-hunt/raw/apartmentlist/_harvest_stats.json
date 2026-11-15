@@ -1,7 +1,7 @@
 {
  "started": "2026-11-15T18:21:08+00:00",
- "srp_pages": 220,
- "detail_pages": 736,
+ "srp_pages": 224,
+ "detail_pages": 744,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -272,13 +272,19 @@
    "drive_min": 32.3,
    "props": 7,
    "rows": 16
+  },
+  {
+   "city": "nj/guttenberg",
+   "drive_min": 32.4,
+   "props": 8,
+   "rows": 8
   }
  ],
  "cities_unmatched_far": [],
- "props_discovered": 1369,
+ "props_discovered": 1377,
  "props_skipped_lowprice_gt_3000": 633,
  "reasons": {
-  "ok": 733,
+  "ok": 741,
   "no_unit_le_3000": 3
  },
  "blocked": null,
