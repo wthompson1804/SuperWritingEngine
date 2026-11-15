@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1166,
- "detail_pages": 1902,
+ "srp_pages": 1212,
+ "detail_pages": 1953,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1961,6 +1961,102 @@
    "drive_min": 103.6,
    "props": 20,
    "rows": 17
+  },
+  {
+   "city": "nj/ocean-grove",
+   "drive_min": 103.6,
+   "props": 13,
+   "rows": 11
+  },
+  {
+   "city": "nj/highlands",
+   "drive_min": 103.8,
+   "props": 6,
+   "rows": 6
+  },
+  {
+   "city": "nj/wanamassa",
+   "drive_min": 103.8,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/hamilton-square",
+   "drive_min": 104.7,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/lawrenceville",
+   "drive_min": 104.9,
+   "props": 4,
+   "rows": 25
+  },
+  {
+   "city": "ny/mechanicstown",
+   "drive_min": 104.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/scotchtown",
+   "drive_min": 104.9,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/hampton-bays",
+   "drive_min": 105.1,
+   "props": 5,
+   "rows": 0
+  },
+  {
+   "city": "ny/walden",
+   "drive_min": 105.1,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "nj/avon-by-the-sea",
+   "drive_min": 105.4,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/belmar",
+   "drive_min": 105.4,
+   "props": 8,
+   "rows": 8
+  },
+  {
+   "city": "nj/flemington",
+   "drive_min": 105.4,
+   "props": 3,
+   "rows": 20
+  },
+  {
+   "city": "ny/mountain-lodge-park",
+   "drive_min": 105.5,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ny/beacon",
+   "drive_min": 106.4,
+   "props": 7,
+   "rows": 7
+  },
+  {
+   "city": "nj/bordentown",
+   "drive_min": 107.1,
+   "props": 4,
+   "rows": 16
+  },
+  {
+   "city": "nj/mercerville",
+   "drive_min": 107.2,
+   "props": 2,
+   "rows": 2
   }
  ],
  "cities_unmatched_far": [
@@ -1985,11 +2081,11 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2797,
- "props_skipped_lowprice_gt_3000": 895,
+ "props_discovered": 2854,
+ "props_skipped_lowprice_gt_3000": 901,
  "reasons": {
-  "ok": 1892,
-  "no_unit_le_3000": 9,
+  "ok": 1941,
+  "no_unit_le_3000": 11,
   "no_listing_object": 1
  },
  "blocked": null,

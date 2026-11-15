@@ -229,14 +229,14 @@ details.receipt .fn{font-size:13px;font-weight:700;color:var(--muted);padding:2p
 .upnext em{font-style:normal;justify-self:end;font-family:var(--display);font-weight:800;font-size:17px;color:var(--berry-deep)}
 .quote{background:var(--paper);border-radius:14px;padding:10px 12px;font-size:15px;margin-top:10px;overflow-wrap:anywhere}
 .quote small{display:block;color:var(--muted);font-weight:700;margin-top:4px}
-.srcl{font-weight:800;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:3px;white-space:nowrap;display:inline-block;padding:6px 0}
-li .srcl{padding:2px 0}
+.srcl{font-weight:800;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:3px;white-space:nowrap;display:inline-flex;align-items:center;min-height:44px;vertical-align:middle;padding:0 2px}
 
 /* ---------- The decision ---------- */
 .names{display:grid;gap:8px}
 .name{display:flex;align-items:center;gap:10px;background:var(--white);border:2px solid var(--ink);border-radius:16px;padding:6px 6px 6px 12px}
 .name div{flex:1;min-width:0}
-.name a{display:block;padding:4px 0}
+.name a{display:block;padding:13px 0 7px}
+.name small{padding-bottom:8px}
 .name b{font-family:var(--display);font-weight:800;font-size:17px;line-height:1.1}
 .name small{display:block;color:var(--muted);font-weight:700;font-size:13px}
 .num{flex:0 0 auto;min-width:26px;height:26px;border-radius:50%;display:inline-grid;place-items:center;font-family:var(--display);font-weight:800;font-size:15px;color:#fff}
@@ -291,7 +291,7 @@ button.pt small{margin:0}
 .tour-list h3{font-weight:800;font-stretch:82%;font-size:28px;line-height:1}
 #copyStatus{font-weight:800;color:var(--mint-ink)}
 .empty{background:var(--white);border:2px dashed var(--line);border-radius:22px;padding:18px 16px;display:grid;gap:12px;justify-items:start}
-.lease{margin-top:16px;color:var(--muted);font-weight:700;font-size:15px}
+.lease{color:var(--ink);font-weight:800;font-size:15px}
 
 /* ---------- My top three (bottom bar) ---------- */
 .tray{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--ink);color:#fff;border-radius:22px 22px 0 0;box-shadow:0 -6px 20px rgba(58,22,48,.25)}
@@ -449,7 +449,7 @@ var TINT_WORD={s:"Strong",m:"Mixed",y:"Your call",u:"Not known yet"};
 var NK="Not known yet";
 var KEY="lamia-house-hunt-v1";
 /* Safety limit steps: violent crime relative to Jamaica (unit.moments.night.violent_vs_jamaica). */
-var SAFE_STEPS=[null,{max:1,incl:true,t:"No higher than Jamaica"},{max:0.75,t:"Under 75% of Jamaica's rate"},{max:0.5,t:"Under half of Jamaica's rate"},{max:0.25,t:"Under a quarter of Jamaica's rate"}];
+var SAFE_STEPS=[null,{max:1,t:"no higher than Jamaica's rate",w:"no higher than Jamaica's"},{max:0.75,t:"under 75% of Jamaica's rate",w:"under 75%"},{max:0.5,t:"under half of Jamaica's rate",w:"under half"},{max:0.25,t:"under a quarter of Jamaica's rate",w:"under a quarter"}];
 var YEAR_COLORS=["#9AD9A8","#6FA8DC","#B79CD9","#F2A2B8","#FFD86B","#C8553D"];
 var WALK_M_PER_MIN=80; /* 800 m is called "a 10-minute walk" throughout */
 
@@ -584,7 +584,7 @@ function why(U){var L=S.lim,o=[],d=U.moments.sun.drive_min,x=U.moments.night.vio
   if(d!=null&&L.mins<LIM.mins.max&&Math.round(d)>L.mins)o.push(r0(d)+" minutes by car is past your "+L.mins);
   if(L.safe>1){var st=SAFE_STEPS[L.safe];
     if(x==null)o.push("Crime rate not known yet, and you set a safety limit");
-    else if(!(x<st.max))o.push("Violent crime is "+pct(x)+" of Jamaica's rate, and you asked for "+st.t.toLowerCase().replace(" of jamaica's rate",""))}
+    else if(!(x<st.max))o.push("Violent crime is "+pct(x)+" of Jamaica's rate, and you asked for "+st.w)}
   if(L.sqft>LIM.sqft.min){
     if(U.sqft==null)o.push("Size not known yet, and you asked for "+L.sqft+" sq ft or more");
     else if(U.sqft<L.sqft)o.push(r0(U.sqft)+" sq ft, and you asked for "+L.sqft+" or more")}
@@ -723,12 +723,12 @@ function mapSvg(pts,opt){
   function X(mx){return W/2+(mx-cxm)*sc}function Y(my){return Hh/2-(my-cym)*sc}
   var ax=X(0),ay=Y(0),steps=[1,2,5,10,25,50],step=50;
   for(var i=0;i<steps.length;i++){if(far/steps[i]<=4.2){step=steps[i];break}}
-  var o='<svg viewBox="0 0 '+W+' '+Hh+'" role="img" aria-label="'+esc(opt.label)+'">';
+  var labs="",o='<svg viewBox="0 0 '+W+' '+Hh+'" role="img" aria-label="'+esc(opt.label)+'">';
   var la=Math.atan2(Hh/2-ay,W/2-ax);if(Math.abs(W/2-ax)<8&&Math.abs(Hh/2-ay)<8)la=112*Math.PI/180;
   for(var m=step;m<=far+step*0.99;m+=step){var r=m*sc;
     o+='<circle cx="'+ax.toFixed(1)+'" cy="'+ay.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="none" stroke="#F3CADA" stroke-width="2" stroke-dasharray="4 5"/>';
     var lx=ax+r*Math.cos(la+0.5),ly=ay+r*Math.sin(la+0.5);
-    if(lx>20&&lx<W-20&&ly>10&&ly<Hh-6)o+='<text x="'+lx.toFixed(1)+'" y="'+(ly+4).toFixed(1)+'" text-anchor="middle" font-size="10" fill="#7A5670" stroke="#fff" stroke-width="4" paint-order="stroke">'+m+(m===1?" mile":" miles")+'</text>'}
+    if(lx>20&&lx<W-20&&ly>10&&ly<Hh-6)labs+='<text x="'+lx.toFixed(1)+'" y="'+(ly+4).toFixed(1)+'" text-anchor="middle" font-size="10" fill="#7A5670" stroke="#fff" stroke-width="4" paint-order="stroke">'+m+(m===1?" mile":" miles")+'</text>'}
   o+='<text x="'+(W-14)+'" y="18" text-anchor="middle" font-size="11" fill="#7A5670">N</text><path d="M'+(W-14)+' 22v14m-4-10 4-5 4 5" stroke="#7A5670" stroke-width="2" fill="none" stroke-linecap="round"/>';
   var R=opt.numbered?12:6.5;
   P.forEach(function(q){q.tx=X(q.mx);q.ty=Y(q.my);q.x=q.tx;q.y=q.ty});
@@ -748,6 +748,7 @@ function mapSvg(pts,opt){
     o+='<circle cx="'+q.x.toFixed(1)+'" cy="'+q.y.toFixed(1)+'" r="'+R+'" fill="'+p.color+'" stroke="#3A1630" stroke-width="'+(opt.numbered?2.5:1.5)+'"'+(p.dim?' opacity=".45"':'')+'/>';
     if(opt.numbered)o+='<text x="'+q.x.toFixed(1)+'" y="'+(q.y+4.5).toFixed(1)+'" text-anchor="middle" font-size="'+(String(p.label).length>1?11:13)+'" fill="#3A1630">'+esc(p.label)+'</text>';
     o+='</a>'});
+  o+=labs;
   if(opt.names){P.forEach(function(q){var right=q.x<W*0.6;o+='<text x="'+(q.x+(right?R+4:-R-4)).toFixed(1)+'" y="'+(q.y+4).toFixed(1)+'" text-anchor="'+(right?"start":"end")+'" font-size="11" fill="#3A1630" stroke="#fff" stroke-width="4" paint-order="stroke">'+esc(q.p.short||q.p.name)+'</text>'})}
   return o+'</svg>'}
 function yearMap(Y,hi){var hs=Y.hoods.concat(Y.avoidOnly);
@@ -830,11 +831,13 @@ function fitText(n,total,word){return total===0?"Nothing to tour here yet":n===t
    Accepts a string, a list of strings, or a list of {text, url, date}. Returns "" when empty. */
 function slotText(v){if(!v)return "";var a=Array.isArray(v)?v:typeof v==="object"&&!v.text?Object.keys(v).map(function(k){return v[k]}):[v];
   return a.filter(Boolean).map(function(x){return typeof x==="string"?'<p class="slot-text">'+esc(x)+'</p>':'<p class="slot-text">'+esc(x.text||x.excerpt||"")+(x.date?' <small class="facts">'+esc(dayStr(x.date,true)||x.date)+'</small>':'')+ext(x.url,"source")+'</p>'}).join("")}
-var CAT_WORD={management:"Management",safety_incident:"Safety incident at the address",mold_complaints:"Mold complaints",elevator_complaints:"Elevator complaints",elevator:"Elevator",pest_complaints:"Pest complaints",class_c_violations:"Serious housing violations",heat_hot_water_complaints:"Heat and hot water complaints"};
+var CAT_WORD={management:"Management",safety_incident:"Safety incident at the address",mold_complaints:"Mold complaints",elevator_complaints:"Elevator complaints",elevator:"Elevator",pest_complaints:"Pest complaints",class_c_violations:"Serious housing violations (class C)",heat_hot_water_complaints:"Heat and hot water complaints"};
 function quote(it){var bits=[];if(it.category)bits.push(CAT_WORD[it.category]||humanize(it.category));bits.push(dayStr(it.date,true)||"date not known");
   var u=okUrl(it.url);
-  return '<p class="quote">“'+esc(it.excerpt||it.text||"")+'”<small>'+esc(bits.join(" · "))+(u?' · <a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(hostOf(u))+' ↗</a>':' · no link in the data')+(it.source?'<br>'+esc(it.source):'')+'</small></p>'}
-function splitNotes(s){return String(s||"").split(/;\s*/).filter(Boolean).map(function(x){return x.charAt(0).toUpperCase()+x.slice(1)})}
+  var tx=String(it.excerpt||it.text||""),rec=/^\d/.test(tx);
+  return '<p class="quote">'+(rec?"On record: ":"“")+esc(tx)+(rec?"":"”")+'<small>'+esc(bits.join(" · "))+(u?' · <a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(hostOf(u))+' ↗</a>':' · no link in the data')+(it.source?'<br>'+esc(it.source):'')+'</small></p>'}
+function plainCats(x){return String(x).replace(/\b[a-z]+(?:_[a-z]+)+\b/g,function(k){return (CAT_WORD[k]||k.replace(/_/g," ")).toLowerCase()})}
+function splitNotes(s){return String(s||"").split(/;\s*/).filter(Boolean).map(function(x){x=plainCats(x);return x.charAt(0).toUpperCase()+x.slice(1)})}
 
 function yearFacts(Y){var M=Y.medians||{},o=[];
   if(M.all_in!=null)o.push("A typical place: "+(M.sqft!=null?r0(M.sqft)+" sq ft for ":"")+money(Math.round(M.all_in))+" a month, all-in");
@@ -883,7 +886,6 @@ function vLives(){
     h+='<a class="life'+(none?' none':'')+'" href="'+href("year",Y.id)+'"><div class="art">'+yearArt(Y)+'</div><div class="body"><p class="tag">'+pl(Y.hoods.length,"neighborhood")+' · '+pl(us.length,"place")+'</p><h3>'+esc(Y.label)+'</h3><p>'+esc(Y.subhead||"")+'</p>'+pullList(yearFacts(Y))+(Y.catch?'<p class="snag"><b>The catch:</b> '+esc(typeof Y.catch==="string"?Y.catch:Y.catch.text||"")+'</p>':'')+'<p class="facts">'+(c?money(c[0])+' to '+money(c[1])+' a month':'Prices '+NK.toLowerCase())+' · '+(m?r0(m[0])+' to '+r0(m[1])+' min drive to Mom and Dad':'drive '+NK.toLowerCase())+'</p><div class="foot"><span class="facts">'+fitText(n,us.length,"place")+'</span><span class="enter">Step in ›</span></div></div></a>'});
   h+='</div>'+limLine(all,UNITS.length,"places")+'</section>';
   h+='<section class="sec"><h2><span class="s">The</span>whole map</h2><div class="map" style="margin-top:12px">'+overviewMap()+'<div class="maplegend">'+YEARS.map(function(Y){return '<a href="'+href("year",Y.id)+'"><i style="background:'+Y.color+'"></i>'+esc(Y.short)+'</a>'}).join("")+'</div><p class="mapnote">The house is Mom and Dad\'s. Each dot is a neighborhood, coloured by its year; faded dots have nothing inside your limits. Rings are miles in a straight line, not driving time.</p></div></section>';
-  h+='<p class="lease">A lease is 12 months. You are choosing a year to try, not forever.</p>';
   return h+'</div>'}
 
 function hoodCard(H,Y){var k=H.units.filter(fits).length,N=H.units.length,r=H.all_in_range,none=!k;
@@ -896,7 +898,7 @@ function vYear(Y){
   var scenes=slotText(Y.scenes);
   h+='<section class="sec"><h2><span class="s">A day</span>in this year</h2>'+(scenes||'<p class="lead">What is typical here, from the '+pl(us.length,"place")+' on show:</p><div style="margin-top:8px">'+pullList(yearFacts(Y))+'</div>')+'</section>';
   h+='<section class="sec"><h2><span class="s">What</span>it costs you</h2><div class="tiles3" style="margin-top:10px"><div class="t3"><small>Money</small><b>'+(c?money(c[0])+' to '+money(c[1]):NK)+'</b><span>a month, all-in'+(M.all_in!=null?'; typical '+money(Math.round(M.all_in)):'')+'</span></div><div class="t3"><small>Distance</small><b>'+(m?r0(m[0])+' to '+r0(m[1])+' minutes':NK)+'</b><span>by car to Mom and Dad, without traffic; '+(M.toll_round_trip==null?'tolls not known yet':M.toll_round_trip===0?'typically no tolls':'typically '+money(M.toll_round_trip)+' in tolls a visit')+'</span></div>'+
-    (Y.catch?'<div class="t3"><small>The catch</small><span style="font-size:16px;color:#fff">'+esc(typeof Y.catch==="string"?Y.catch:Y.catch.text||"")+'</span></div>':'<div class="t3"><small>Safety</small><b>'+(M.violent_per_1000!=null?M.violent_per_1000+' per 1,000':NK)+'</b><span>violent crimes per resident-thousand a year, typically'+(JAM.violent_per_1000!=null?'; '+JAM.violent_per_1000+' around Mom and Dad\'s':'')+'</span></div>')+'</div></section>';
+    (Y.catch?'<div class="t3"><small>The catch</small><span style="font-size:16px;color:#fff">'+esc(typeof Y.catch==="string"?Y.catch:Y.catch.text||"")+'</span></div>':'<div class="t3"><small>Safety</small><b>'+(M.violent_per_1000!=null?M.violent_per_1000+' per 1,000':NK)+'</b><span>violent crimes per 1,000 residents a year, typically'+(JAM.violent_per_1000!=null?'; '+JAM.violent_per_1000+' around Mom and Dad\'s':'')+'</span></div>')+'</div></section>';
   if(SPEC.length&&Y.vs_queens){h+='<section class="sec"><h2><span class="s">Against</span>staying in Queens</h2><p class="scalekey">'+pips(3)+'<span>The middle mark is a typical Queens place. Left is worse for you, right is better. Tap a line to see how it was reached.</span></p><div class="ylist">'+SPEC.map(function(s){var p=Y.vs_queens[s.measure],dk=YEAR_DIFF_KEY[s.measure],d=dk&&Y.vs_queens_diff?Y.vs_queens_diff[dk]:null;p=p==null?null:Math.round(p);
       return pointBtn("year",Y.id,s.measure,p,d==null?(p===3?"same":"difference not in the data"):fmtDiff(s.measure,d),true)}).join("")+'</div></section>'}
   h+='<section class="sec" id="sec-hoods"><h2><span class="s">Tour</span>a neighborhood</h2><p class="lead">'+pl(hs.length,"neighborhood")+', nearest to Mom and Dad first.</p>'+tip("<b>Tap a neighborhood</b> to tour it.")+'<div class="map" style="margin-top:12px">'+yearMap(Y,null)+'<p class="mapnote">The house is Mom and Dad\'s. Numbers match the list below. Rings are miles in a straight line, not driving time.</p></div>'+limLine(us.filter(fits).length,us.length,"places in this year")+'<div class="stack tight">';
@@ -935,12 +937,12 @@ function vHood(H){
   var sf=[];
   sf.push(s.violent_per_1000!=null?r1(s.violent_per_1000)+" violent crimes per 1,000 residents a year"+(s.year?" ("+Math.round(s.year)+")":"")+(JAM.violent_per_1000!=null?"; around Mom and Dad's it is "+JAM.violent_per_1000:"")+".":"Violent crime rate: "+NK+".");
   if(s.vs_jamaica!=null)sf.push(SAY.crime({violent_vs_jamaica:s.vs_jamaica})+(s.vs_us!=null?" Against the United States as a whole: "+times(s.vs_us)+".":""));
-  sf.push(s.property_per_1000!=null?r1(s.property_per_1000)+" property crimes per 1,000 residents a year"+(s.property_vs_jamaica!=null?", "+times(s.property_vs_jamaica)+" the rate around Mom and Dad's":"")+".":"Property crime rate: "+NK+".");
+  sf.push(s.property_per_1000!=null?r1(s.property_per_1000)+" property crimes per 1,000 residents a year"+(s.property_vs_jamaica!=null?(Math.abs(s.property_vs_jamaica-1)<0.005?", the same rate as around Mom and Dad's":", "+times(s.property_vs_jamaica)+" the rate around Mom and Dad's"):"")+".":"Property crime rate: "+NK+".");
   if(s.geography)sf.push("These numbers describe the police area, not the block: "+s.geography+".");
   h+='<section class="sec"><h2><span class="s">Feeling</span>safe</h2><ul class="pull" style="margin-top:10px">'+lis(sf)+'</ul></section>';
   if(N){h+='<section class="sec" id="sec-places"><h2><span class="s">Places</span>to see</h2><p class="lead">'+pl(N,"place")+(N===1?" is":" are")+' open here'+(r?(r[0]===r[1]?', at '+money(r[0]):', from '+money(r[0])+' to '+money(r[1]))+' a month, everything in':'')+'.</p>'+tip("<b>Tap Look inside</b> to tour a place. Like it? <b>Hold it.</b>")+limLine(k,N,"places here")+'<div class="stack tight">'+H.units.map(unitCard).join("")+'</div></section>'}
   else h+='<section class="sec" id="sec-places"><div class="empty"><p><b>Nothing to tour here yet.</b></p><p>No place in this neighborhood has passed every check.</p></div></section>';
-  if(H.avoid.length)h+='<section class="sec" id="sec-avoid"><h2><span class="s">Looks good,</span>but avoid</h2><p class="lead">'+pl(H.avoid.length,"place")+' here '+(H.avoid.length===1?"passes":"pass")+' on paper. The records and the residents say otherwise.</p><div class="stack tight" style="margin-top:12px">'+H.avoid.map(avoidCard).join("")+'</div></section>';
+  if(H.avoid.length)h+='<section class="sec" id="sec-avoid"><h2><span class="s">Looks good,</span>but avoid</h2><p class="lead">'+pl(H.avoid.length,"place")+' here '+(H.avoid.length===1?"passes":"pass")+' on paper. Each has a recorded reason to avoid it, shown with its evidence.</p><div class="stack tight" style="margin-top:12px">'+H.avoid.map(avoidCard).join("")+'</div></section>';
   h+=callBox(HELD_BY_HOOD[H.id]||[],"Good on everything we could check, with one fact still unconfirmed. Call and ask the question shown. Until then they cannot be held for compare.",null);
   h+=nx?upNext("Up next in this year",href("hood",nx.id),nx.name,hoodWhere(nx)+" · "+hoodDrive(nx)):nxY?upNext("Up next: another year",href("year",nxY.id),nxY.label,nxY.subhead):upNext("You have seen them all","#lives","Back to all "+YEARS.length+" years","");
   return h+'</div>'}
@@ -1039,7 +1041,7 @@ function feelIt(A,B,a,b){var o=[],d=Math.abs(B.all_in-A.all_in),ma=A.moments.sun
 function vCompare(){
   var H=S.held.map(function(id){return U_BY[id]}).filter(Boolean),n=H.length;
   var h='<div class="wrap"><section class="sec" style="margin-top:14px"><h2><span class="s">The</span>decision</h2>';
-  if(n<2){return h+tip("This is where your top three line up, side by side.")+'<div class="empty" style="margin-top:12px"><p><b>'+(n?"You are holding one place. Hold one more.":"You are not holding anything yet.")+'</b></p><p>Open a year, visit a neighborhood, and tap <b>Hold this place</b> on one you like. Held places wait in <b>My top three</b>, the bar at the bottom of the screen.</p><a class="btn main" href="#lives">Pick a year</a></div><p class="lease">A lease is 12 months. You are choosing a year to try, not forever.</p></section></div>'}
+  if(n<2){return h+tip("This is where your top three line up, side by side.")+'<div class="empty" style="margin-top:12px"><p><b>'+(n?"You are holding one place. Hold one more.":"You are not holding anything yet.")+'</b></p><p>Open a year, visit a neighborhood, and tap <b>Hold this place</b> on one you like. Held places wait in <b>My top three</b>, the bar at the bottom of the screen.</p><a class="btn main" href="#lives">Pick a year</a></div></section></div>'}
   h+=tip("Same money, same day, side by side. <b>Mint marks the stronger one.</b> No single score is made, here or anywhere.");
   h+='<div class="names" style="margin-top:12px">'+H.map(function(U,i){return '<div class="name"><span class="num n'+i+'">'+(i+1)+'</span><div><a href="'+href("unit",U.id)+'"><b>'+esc(uName(U))+'</b></a><small>'+esc((U.unit?"Unit "+U.unit+" · ":"")+hoodOf(U).name+" · "+yearOf(U).short)+'</small></div><button type="button" class="x" data-act="release" data-id="'+esc(U.id)+'" aria-label="Let go of '+esc(uName(U))+'">×</button></div>'}).join("")+'</div>';
   var pairs=n===3?[[0,1],[0,2],[1,2]]:[[0,1]];
@@ -1073,7 +1075,6 @@ function vCompare(){
       return pointBtn("unit",U.id,s.measure,p,s.measure==="parking"?parkWordShort(U):fmtDiff(s.measure,d),false)}).join("")+'</div></div>'});
     h+='</div></section>'}
   h+='<div class="tour-list"><h3>Go see them</h3><p>This is the finish line: two or three places to visit in person, with the questions to ask at each.</p><button type="button" class="btn main" data-act="copy">Copy my tour list</button><span id="copyStatus" role="status" aria-live="polite"></span></div>';
-  h+='<p class="lease">A lease is 12 months. You are choosing a year to try, not forever.</p>';
   return h+'</section></div>'}
 
 /* ================= Sheets ================= */
@@ -1138,11 +1139,11 @@ function renderCounts(){
   var L=S.lim;
   document.getElementById("out-cost").textContent="Up to "+money(L.cost)+" a month, all-in"+(L.cost>=CAP?", your cap":"");
   document.getElementById("out-mins").textContent=L.mins>=LIM.mins.max?"Anywhere within two hours by car":"Within "+L.mins+" minutes by car, without traffic";
-  document.getElementById("out-safe").textContent="Violent crime: "+SAFE_STEPS[L.safe].t.toLowerCase()+(L.safe===1?" (every place here)":"");
+  document.getElementById("out-safe").textContent="Violent crime: "+SAFE_STEPS[L.safe].t+(L.safe===1?" (every place here)":"");
   document.getElementById("out-sqft").textContent=L.sqft<=LIM.sqft.min?"Any size":"At least "+L.sqft+" sq ft"}
 function syncSliders(){["cost","mins","safe","sqft"].forEach(function(k){var el=document.getElementById("lim-"+k);el.min=LIM[k].min;el.max=LIM[k].max;el.step=LIM[k].step;el.value=S.lim[k]})}
 function renderFoot(){var C=META.counts||{},notes=META.notes||[];
-  document.getElementById("foot").innerHTML='<p>A lease is 12 months. You are choosing a year to try, not forever.</p><p style="margin-top:8px">'+esc([C.shown!=null?pl(C.shown,"place")+" shown":"",C.avoid!=null?pl(C.avoid,"avoid card"):"",C.held!=null?C.held+" waiting on a phone call":""].filter(Boolean).join(" · "))+'</p><p>Data built '+esc(seenLong(META.built_at))+'.</p>'+(notes.length?'<ul>'+lis(notes)+'</ul>':'')+'<p><button type="button" class="link" data-act="tour-open">How it works</button></p>'}
+  document.getElementById("foot").innerHTML='<p class="lease">A lease is 12 months. You are choosing a year to try, not forever.</p><p style="margin-top:8px">'+esc([C.shown!=null?pl(C.shown,"place")+" shown":"",C.avoid!=null?pl(C.avoid,"avoid card"):"",C.held!=null?C.held+" waiting on a phone call":""].filter(Boolean).join(" · "))+'</p><p>Data built '+esc(seenLong(META.built_at))+'.</p>'+(notes.length?'<ul>'+lis(notes)+'</ul>':'')+'<p><button type="button" class="link" data-act="tour-open">How it works</button></p>'}
 var scrolls={};
 function isAncestor(a,b){var r=b;for(var i=0;i<4;i++){r=parentOf(r);if(r===a)return true;if(r==="lives")return false}return false}
 /* Zooming out, or coming back from the decision, returns her to where she was on that page. */
