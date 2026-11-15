@@ -1,7 +1,9 @@
 """Official NYC public records per candidate building (NYC Open Data / Socrata), for "avoid" decisions.
 
-Inputs : data/reference/evidence_batches/all_candidate_buildings.csv (rows with pluto_bbl), or --buildings CSV
-         with columns addr_key, address, zip, pluto_bbl; or --bbl 4006060029 [--bbl ...] for ad-hoc lots.
+Inputs : by default every data/reference/evidence_batches/*candidate_buildings.csv (rows with pluto_bbl), or
+         --buildings A.csv B.csv ... (columns addr_key, address, zip, pluto_bbl); or --bbl 4006060029 [--bbl ...].
+         Outputs always cover the union of the lists given, one set of rows per addr_key, so adding a new round's
+         list "appends" its buildings without duplicating the earlier ones.
 Outputs: data/evidence/nyc_records.csv            one row per building x record type x period
          data/evidence/nyc_records_baseline.csv   citywide yardstick (PLUTO class D*, 20+ residential units)
          data/evidence/nyc_records_flags.csv      per-building flags against the yardstick
@@ -241,9 +243,20 @@ SIZE_BANDS = [("all_20plus", 20, 10 ** 9), ("20-49", 20, 50), ("50-99", 50, 100)
 def load_candidates(args) -> pd.DataFrame:
     if args.bbl:
         return pd.DataFrame([{"addr_key": f"bbl:{b}", "address": "", "zip": "", "bbl": b} for b in args.bbl])
-    d = pd.read_csv(args.buildings, dtype=str, keep_default_na=False)
-    d = d[d.pluto_bbl.str.strip() != ""].copy()
-    d["bbl"] = d.pluto_bbl.map(lambda x: str(int(float(x))))
+    files = args.buildings or sorted(str(x) for x in CAND.parent.glob("*candidate_buildings.csv"))
+    parts = []
+    for fp in files:  # earlier files win when an addr_key is in more than one list
+        x = pd.read_csv(fp, dtype=str, keep_default_na=False)
+        n_all = len(x)
+        x = x[x.pluto_bbl.str.strip() != ""].copy() if "pluto_bbl" in x.columns else x.iloc[0:0].copy()
+        print(f"building list {fp}: rows={n_all} with pluto_bbl={len(x)}", flush=True)
+        args.list_counts[str(fp)] = {"rows": n_all, "with_pluto_bbl": len(x)}
+        for col in ("address", "zip"):
+            if col not in x.columns:
+                x[col] = ""
+        parts.append(x)
+    d = pd.concat(parts, ignore_index=True)
+    d["bbl"] = d.pluto_bbl.map(lambda v: str(int(float(v))))
     d = d[d.bbl.str.len() == 10]
     return d.drop_duplicates("addr_key")[["addr_key", "address", "zip", "bbl"]].reset_index(drop=True)
 
@@ -672,7 +685,7 @@ def build(args):
     # ---- summary for the notes ----------------------------------------------------------------------
     Mb = M.drop_duplicates("bbl")
     summary = {
-        "as_of": str(as_of), "built_at": now_iso(), "candidates": len(cand), "distinct_bbl": len(bbls), "requests_this_run": F.requests,
+        "as_of": str(as_of), "built_at": now_iso(), "building_lists": args.list_counts, "candidates": len(cand), "distinct_bbl": len(bbls), "requests_this_run": F.requests,
         "periods": [(a, str(s), str(e - timedelta(days=1))) for a, s, e in P],
         "match_rates_by_bbl": {k: f"{int(Mb[k].sum())}/{len(Mb)}" for k in Mb.columns if k.startswith(("in_", "has_"))},
         "house_number_disagrees": M[M.house_number_agrees == "no"][["addr_key", "bbl", "pluto_address"]].to_dict("records"),
@@ -727,9 +740,13 @@ def verify(n, recs, bbls):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--buildings", default=str(CAND), help="CSV with addr_key, address, zip, pluto_bbl")
+    ap.add_argument("--buildings", nargs="+", default=None,
+                    help="one or more CSVs with addr_key, address, zip, pluto_bbl; outputs cover the union (deduplicated on addr_key). "
+                         "Default: every *candidate_buildings.csv in data/reference/evidence_batches/")
     ap.add_argument("--bbl", action="append", help="ad-hoc 10-digit BBL (repeatable); replaces --buildings")
     ap.add_argument("--as-of", default="", help="YYYY-MM-DD, default today (UTC)")
     ap.add_argument("--refresh", action="store_true", help="refetch even if cached")
     ap.add_argument("--verify", type=int, default=0, help="re-run N single-building count URLs live and compare")
-    build(ap.parse_args())
+    _a = ap.parse_args()
+    _a.list_counts = {}
+    build(_a)

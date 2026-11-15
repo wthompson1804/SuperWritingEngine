@@ -160,6 +160,11 @@ row has the count, rate, median, p80, p90, p95 and `above_p95`.
 
 ## Reuse
 
-`python3 scripts/nyc_building_records.py` rebuilds everything for the candidate file.
-`--buildings other.csv` (columns addr_key, address, zip, pluto_bbl) or `--bbl 4006060029 --bbl ...` for new lots
-(note: this rewrites the same output files for that set). `--as-of YYYY-MM-DD`, `--refresh`, `--verify N`.
+`python3 scripts/nyc_building_records.py` rebuilds all outputs for the union of every
+`data/reference/evidence_batches/*candidate_buildings.csv` (rows with a `pluto_bbl`), one set of rows per addr_key, so a
+new round's list adds its buildings without duplicating earlier ones. Explicit lists:
+`--buildings A.csv B.csv ...` (columns addr_key, address, zip, pluto_bbl). Ad-hoc lots: `--bbl 4006060029 --bbl ...`
+(this rewrites the same output files for that set only). Also `--as-of YYYY-MM-DD`, `--refresh`, `--verify N`.
+
+Rerun of 2026-11-15 21:15 UTC with `round2_candidate_buildings.csv` (141 rows): **0 rows have a `pluto_bbl`** and none is
+in the five boroughs (NJ 70, NY suburbs 46, CT 25), so the outputs are unchanged at 99 addr_keys.

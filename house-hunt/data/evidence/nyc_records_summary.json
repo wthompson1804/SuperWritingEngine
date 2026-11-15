@@ -1,6 +1,16 @@
 {
  "as_of": "2026-11-15",
- "built_at": "2026-11-15T20:50:19+00:00",
+ "built_at": "2026-11-15T21:14:37+00:00",
+ "building_lists": {
+  "/home/user/SuperWritingEngine/house-hunt/data/reference/evidence_batches/all_candidate_buildings.csv": {
+   "rows": 208,
+   "with_pluto_bbl": 99
+  },
+  "/home/user/SuperWritingEngine/house-hunt/data/reference/evidence_batches/round2_candidate_buildings.csv": {
+   "rows": 141,
+   "with_pluto_bbl": 0
+  }
+ },
  "candidates": 99,
  "distinct_bbl": 89,
  "requests_this_run": 26,
