@@ -81,8 +81,8 @@ def main() -> None:
             elev = "unknown"
         if re.search(r"(?i)no (pets|dogs)|pets? (are )?not (allowed|permitted)", pet_txt):
             dogs = "no"
-        elif re.search(r"(?i)(pet|dog)[- ]friendly|dogs? (welcome|allowed|permitted)|pets? (welcome|allowed|permitted)|dog (park|run)", pet_txt):
-            dogs = "yes"
+        elif re.search(r"(?i)dog[- ]friendly|dogs? (are )?(welcome|allowed|permitted)|dog (park|run)", pet_txt):
+            dogs = "yes"  # "Pet Friendly" alone does not name dogs: stays unknown, text kept in dog_policy_text
         else:
             dogs = "unknown"
         park_txt = sentences(body, r"(?i)\b(parking|garage|carport)s?\b", 3)

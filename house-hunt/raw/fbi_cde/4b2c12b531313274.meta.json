@@ -1,0 +1,7 @@
+{
+ "url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/NJ0160600/P?from=01-2023&to=12-2025",
+ "retrieved_at": "2026-11-15T18:36:30+00:00",
+ "status": 200,
+ "path": "raw/fbi_cde/4b2c12b531313274.json",
+ "source": "fbi_cde"
+}

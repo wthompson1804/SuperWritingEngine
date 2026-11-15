@@ -647,7 +647,30 @@ def build(verbose=True):
         pickle.dump(net, f, protocol=pickle.HIGHEST_PROTOCOL)
     tmp.replace(NET_PATH)
     log("wrote", NET_PATH, f"{NET_PATH.stat().st_size / 1e6:.0f} MB")
+    _write_feed_table(net)
     return net
+
+
+def _write_feed_table(net):
+    """data/reference/transit_feeds.csv: one row per feed with what the router used."""
+    out = ROOT / "data" / "reference" / "transit_feeds.csv"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    counts = {}
+    for fk in net["node_feed"]:
+        counts[fk] = counts.get(fk, 0) + 1
+    with open(out, "w", newline="") as f:
+        wr = csv.writer(f)
+        wr.writerow(["feed_key", "system", "status", "source_url", "retrieved_at", "saturday_date_used",
+                     "sunday_date_used", "weekday_date_used", "calendar_substituted", "stops_in_network", "notes"])
+        for k, (label, src) in FEEDS.items():
+            if k in net["feeds"]:
+                e = net["feeds"][k]
+                sub = "; ".join(sorted({v["reason"] for v in e["subs"].values()}))
+                wr.writerow([k, label, "used", e["url"], e["retrieved_at"], e["dates"]["sat"], e["dates"]["sun"],
+                             e["dates"]["wkd"], "yes" if e["subs"] else "no", counts.get(k, 0), sub])
+            else:
+                wr.writerow([k, label, "not_used", src if src != "manifest" else "", "", "", "", "", "", 0,
+                             net["feed_errors"].get(k, "")])
 
 
 # ------------------------------------------------------------------------------------------------- lookup
@@ -884,8 +907,9 @@ def _prov(n, feeds_used, day_keys, extra_method=""):
     urls = [n["feeds"][fk]["url"] for fk in feeds_used]
     rts = [n["feeds"][fk]["retrieved_at"] for fk in feeds_used]
     method = ("Scheduled GTFS timetables for " + ", ".join(sorted({SERVICE_DATES[d] for d in day_keys})) +
-              f"; walking at {WALK_KMH} km/h over straight-line distance x {WALK_DETOUR}; journeys minimise "
-              f"arrival time + {TRANSFER_PENALTY_S // 60} min per transfer." + (" " + extra_method if extra_method else ""))
+              f"; walking at {WALK_KMH} km/h over straight-line distance x {WALK_DETOUR}." +
+              (" " + extra_method if extra_method else
+               f" Journeys minimise arrival time + {TRANSFER_PENALTY_S // 60} min per transfer."))
     p = dict(value_type="estimate" if subs else "found", source_url="; ".join(urls) if urls else None,
              retrieved_at=min(rts) if rts else n["built_at"], method=method)
     if subs:
@@ -1042,7 +1066,8 @@ def route(lat: float, lon: float, when: str = "sat_midday") -> dict:
         rs = _profile_legs(n, tt, x[2], x[3], False, P)[0] if w["direction"] == "to_jamaica" \
             else _forward_legs(n, tt, idx, x[2], x[3])
         all_used.update(r["feed"] for r in rs)
-    prov_med = _prov(n, all_used, [day], "Median over the sampled departures (feeds of every sampled journey listed).")
+    prov_med = _prov(n, all_used, [day], f"Journeys minimise arrival time + {TRANSFER_PENALTY_S // 60} min per transfer. Median over the "
+                     "sampled departures (feeds of every sampled journey listed).")
     res.update(
         status="ok",
         fastest_minutes=dict(value=round(fastest_min, 1), departure=_hhmm(t), **prov),
