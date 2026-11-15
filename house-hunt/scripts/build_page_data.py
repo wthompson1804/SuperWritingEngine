@@ -102,6 +102,27 @@ def main():
     # candidates with an open gate fact that the evidence pass has not seen live yet: listed for the evidence agents, not shown as places
     live_ids = set(pd.read_csv(DATA / "needs_live_check.csv").listing_id) if (DATA / "needs_live_check.csv").exists() else set()
     awaiting = R[R.listing_id.isin(live_ids)]
+    # local rules (street parking, dogs) and resident voices, keyed by neighborhood
+    local, voices, survey = {}, {}, {}
+    lr = DATA / "reference" / "local_rules.csv"
+    if lr.exists():
+        LR = pd.read_csv(lr, dtype=str, keep_default_na=False)
+        for r in LR[LR.value_type == "found"].itertuples():
+            for hid in [h.strip() for h in r.applies_to_hood_ids.split(";") if h.strip()]:
+                local.setdefault(hid, {"street_parking": [], "dogs": []}).setdefault(r.topic, []).append(
+                    {"rule": r.rule, "summary": r.summary, "quote": r.quote, "url": r.source_url, "municipality": r.municipality})
+    vq = DATA / "voices" / "neighborhood_quotes.csv"
+    if vq.exists():
+        VQ = pd.read_csv(vq, dtype=str, keep_default_na=False)
+        if "verified" in VQ:
+            VQ = VQ[VQ.verified.str.lower().isin(["true", "yes", "1"])]
+        for r in VQ.itertuples():
+            voices.setdefault(r.hood_id, []).append({"excerpt": r.excerpt, "theme": r.theme, "sentiment": r.sentiment, "context": r.speaker_context,
+                                                     "source": r.source_site, "date": r.post_date, "url": r.permalink})
+    vs = DATA / "voices" / "neighborhood_survey.csv"
+    if vs.exists():
+        for r in pd.read_csv(vs, dtype=str, keep_default_na=False).itertuples():
+            survey.setdefault(r.hood_id, []).append({"measure": r.measure, "value": r.value, "source": r.source_site, "as_of": r.as_of, "url": r.source_url})
     hoods = []
     for hid, g in R.groupby("hood_id"):
         s = g[g.shown]
@@ -122,7 +143,8 @@ def main():
                                                           "bars_800m", "cafes_800m", "park_ha_800m", "park_walk_min", "open_water_m", "dog_park_m", "supermarket_m_c"]},
                       "vs_queens": {k[4:]: v(pd.to_numeric(g[k], errors="coerce").median()) for k in g.columns if k.startswith("vsq_") and not k.endswith("_diff")},
                       "unit_ids": list(s.sort_values("shown_rank").listing_id), "avoid_ids": list(g[g.avoid_card].listing_id),
-                      "local": {"parking_rules": None, "dog_rules": None, "voices": []}})
+                      "local": {"parking_rules": local.get(hid, {}).get("street_parking") or None, "dog_rules": local.get(hid, {}).get("dogs") or None,
+                                "voices": voices.get(hid, []), "survey": survey.get(hid, [])}})
     years = []
     for key, g in R.groupby("group_key"):
         s = g[g.shown]
