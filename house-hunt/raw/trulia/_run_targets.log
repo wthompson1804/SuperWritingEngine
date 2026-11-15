@@ -29,3 +29,63 @@ targets 675/1260 {'ok': 675} rows=10428 fetched=668
 targets 700/1260 {'ok': 700} rows=10435 fetched=693
 targets 725/1260 {'ok': 725} rows=10478 fetched=718
 targets 750/1260 {'ok': 750} rows=10539 fetched=743
+Traceback (most recent call last):
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_trulia.py", line 960, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_trulia.py", line 937, in main
+    run_targets(state, rows, a, deadline)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_trulia.py", line 875, in run_targets
+    do_detail(u, state, rows, a)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_trulia.py", line 788, in do_detail
+    nd, meta = fetch(BASE + u, a.refresh_hours, a.reparse)
+               ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_trulia.py", line 105, in fetch
+    content, meta = cached_get(url, SRC, ext="html", refresh=refresh or attempt > 0, retries=1, timeout=45)
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/lib.py", line 88, in cached_get
+    r = requests.request(method, url, params=params, data=data, headers=h, timeout=timeout)
+  File "/root/.local/lib/python3.13/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/lib/python3.13/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/root/.local/lib/python3.13/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+  File "/root/.local/lib/python3.13/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/root/.local/lib/python3.13/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/root/.local/lib/python3.13/site-packages/urllib3/connectionpool.py", line 540, in _make_request
+    response = conn.getresponse()
+  File "/root/.local/lib/python3.13/site-packages/urllib3/connection.py", line 638, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/local/lib/python3.13/http/client.py", line 1478, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 343, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/http/client.py", line 304, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/socket.py", line 723, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "/usr/local/lib/python3.13/ssl.py", line 1327, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/ssl.py", line 1161, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyboardInterrupt

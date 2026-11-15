@@ -1,0 +1,9 @@
+User-agent: *
+disallow: /refs/
+disallow: /runtimes/
+disallow: /wwwroot/ 
+disallow: /js/
+disallow: /lib/
+disallow: /dashboard/
+
+Sitemap: https://www.rentthemason.com/sitemap.xml

@@ -89,6 +89,188 @@ def bldg_upsert(d):
     return len(old)
 
 
+def zbuilding(url):
+    """Fetch a Zillow building page and return (building dict, meta) from its __NEXT_DATA__ JSON."""
+    t, m = fetch(url)
+    mm = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', t, re.S)
+    if not mm:
+        return None, m
+    d = json.loads(mm.group(1))
+    try:
+        b = d["props"]["pageProps"]["componentProps"]["initialReduxState"]["gdp"]["building"]
+    except (KeyError, TypeError):
+        b = None
+    return b, m
+
+
+def zfacts(b):
+    from datetime import datetime, timezone
+    am = json.dumps(b.get("structuredAmenities") or {}) + json.dumps((b.get("buildingAttributes") or {}))
+    summ = (b.get("amenitySummary") or {}).get("buildingDetails") or []
+    stories = next((re.match(r"(\d+) stor", x).group(1) for x in summ if re.match(r"(\d+) stor", x)), "")
+    elev = "yes" if re.search(r'"Elevator', am) else ("yes" if stories and int(stories) >= 6 else "unknown")
+    pets = []
+    dogs, wl, petrent, large = "unknown", "", "", None
+    for pp in ((b.get("detailedPetPolicy") or {}).get("petPolicies") or []):
+        typ = ((pp.get("petSize") or "") + " " + (pp.get("petType") or "")).strip()
+        bits = [str(typ), "allowed" if pp.get("allowed") else "NOT allowed"]
+        for k in ("maxWeightAllowed", "maxNumberAllowed", "monthlyFee", "oneTimeFee", "deposit", "restrictions", "comment", "description"):
+            if pp.get(k) not in (None, "", []):
+                bits.append(f"{k}={pp[k]}")
+        pets.append(" ".join(bits))
+        if "dog" in str(typ).lower():
+            if "large" in str(typ).lower():
+                large = bool(pp.get("allowed"))
+            if pp.get("allowed"):
+                dogs = "yes"
+                if pp.get("maxWeightAllowed"):
+                    wl = str(pp["maxWeightAllowed"])
+                if pp.get("monthlyFee"):
+                    petrent = str(pp["monthlyFee"])
+            elif dogs != "yes":
+                dogs = "no"
+    dp = b.get("detailedPetPolicy") or {}
+    def _txt(v):
+        if isinstance(v, list):
+            return " ".join(_txt(x) for x in v)
+        if isinstance(v, dict):
+            return " ".join(str(x) for x in v.values() if x)
+        return str(v)
+    gen = " ".join(_txt(dp.get(k)) for k in ("general", "restrictions", "comments", "descriptions") if dp.get(k)).strip()
+    if gen:
+        pets.insert(0, "general: " + gen)
+        mw = re.findall(r"(\d{2,3})\s*(?:#|lbs?\b|pounds?|lb\.)", gen)
+        if mw and not wl:
+            wl = str(max(int(x) for x in mw))
+        if dogs == "unknown" and re.search(r"(?i)\bdogs?\b", gen) and not C.DOG_NO.search(gen):
+            dogs = "yes"
+    if large is False and dogs == "yes":
+        pets.append("LARGE DOGS NOT ALLOWED (Zillow size flag)")
+    units = []
+    for fp in b.get("floorPlans") or []:
+        us = fp.get("units") or []
+        if not us:
+            us = [{"unitNumber": "floor plan " + str(fp.get("name") or ""), "beds": fp.get("beds"), "baths": fp.get("baths"),
+                   "price": fp.get("minPrice") or fp.get("price"), "sqft": fp.get("sqft"), "availableFrom": fp.get("availableFrom"), "_fp": True}]
+        for u in us:
+            u = dict(u)
+            u.setdefault("baths", fp.get("baths"))
+            u["_plan"] = fp.get("name")
+            af = str(u.get("availableFrom") or "")
+            if af == "0":
+                u["_avail"], u["_availtxt"] = "now", "Available now"
+            elif af.isdigit() and len(af) > 9:
+                dt = datetime.fromtimestamp(int(af) / 1000, tz=timezone.utc).date().isoformat()
+                u["_avail"], u["_availtxt"] = dt, dt
+            else:
+                u["_avail"], u["_availtxt"] = "", af
+            units.append(u)
+    for u in b.get("ungroupedUnits") or []:
+        u = dict(u)
+        af = str(u.get("availableFrom") or "")
+        if af == "0":
+            u["_avail"], u["_availtxt"] = "now", "Available now"
+        elif af.isdigit() and len(af) > 9:
+            dt = datetime.fromtimestamp(int(af) / 1000, tz=timezone.utc).date().isoformat()
+            u["_avail"], u["_availtxt"] = dt, dt
+        else:
+            u["_avail"], u["_availtxt"] = "", af
+        units.append(u)
+    today = datetime.now(timezone.utc).date().isoformat()
+    for u in units:  # a listed date already in the past means available now; keep the page's date in the text
+        if u["_avail"] and u["_avail"] != "now" and u["_avail"] <= today:
+            u["_availtxt"] = f"available from {u['_avail']} (past date: now)"
+            u["_avail"] = "now"
+    park = (b.get("buildingAttributes") or {}).get("parkingTypes") or []
+    return dict(stories=stories, elevator=elev, dogs=dogs, wl=wl, petrent=petrent, large=large, pets=pets, units=units, summ=summ,
+                parking=", ".join(park), offers=[o.get("description") or o.get("title") or "" for o in (b.get("specialOffers") or [])])
+
+
+def zj(url, write=None):
+    b, m = zbuilding(url)
+    if not b:
+        print("NO BUILDING JSON", m.get("status"))
+        return
+    f = zfacts(b)
+    name = b.get("buildingName") or b.get("streetAddress")
+    print(f"## {name} | {b.get('fullAddress')} | {b.get('latitude')},{b.get('longitude')} | {m['retrieved_at']} | {m['path']}")
+    print("   summary:", f["summ"], "| elevator:", f["elevator"], "| lowIncome:", b.get("isLowIncome"), "| senior:", b.get("isSeniorHousing"),
+          "| parking:", f["parking"], "| offers:", f["offers"])
+    print("   pets:", "; ".join(f["pets"]) or (b.get("amenityDetails") or {}).get("pets"))
+    small = sorted([u for u in f["units"] if u.get("beds") in (0, 1)], key=lambda u: u.get("price") or 9e9)
+    if write is not None:  # drop this building's earlier rows so a re-run replaces them
+        if OUT.exists():
+            with open(OUT, newline="") as fh:
+                keep = [r for r in csv.DictReader(fh) if not (r["url"] == url and ":z:" in r["listing_id"])]
+            with open(OUT, "w", newline="") as fh:
+                w = csv.DictWriter(fh, fieldnames=C.COLS)
+                w.writeheader()
+                w.writerows(keep)
+    print("   studio/1BR:", " | ".join(f"{u.get('unitNumber')} {u.get('beds')}bd ${u.get('price')} {u.get('sqft')}sf {u['_availtxt']} fee{u.get('totalRequiredMonthlyMinFee')}" for u in small[:14]),
+          f"(+{max(0, len(small) - 14)} more)", "| other beds:", sorted({u.get("beds") for u in f["units"] if u.get("beds") not in (0, 1)}))
+    desc = b.get("description") or ""
+    for x in snippets(desc, r"(?i)elevator|walk-?up|\bdogs?\b|\bpets?\b|breed|\blbs?\b|pound|stor(y|ies)|floor\b|55|senior|income", 80, 6):
+        print("   desc:", x)
+    if write is None:
+        return
+    ov = kv(write)
+    ok = [u for u in small if u.get("price") and u["price"] <= 3000]
+    elev = ov.get("elevator", f["elevator"])
+    dogs = ov.get("dogs", f["dogs"])
+    policy = "; ".join(f["pets"]) or ("pets listed: " + ", ".join((b.get("amenityDetails") or {}).get("pets") or []))
+    prefix = ov.get("prefix", "")
+    if not prefix:
+        if dogs == "no":
+            prefix = "BUILDING_FAILS: dogs not allowed."
+        elif (f["wl"].isdigit() and int(f["wl"]) < 40) or (f["large"] is False and not f["wl"].isdigit()):
+            prefix = "BUILDING_FAILS: large dogs not allowed / weight limit under 40 lb."
+        elif elev == "no":
+            prefix = "BUILDING_FAILS: no elevator."
+        elif not small:
+            prefix = "NO_AVAILABILITY: no studio or 1BR listed."
+        elif not ok and not any(u.get("price") for u in small):
+            prefix = "PRICE_NOT_LISTED: studio/1BR shown as available but rent is 'on request'."
+        elif not ok:
+            prefix = f"BUILDING_FAILS: nothing <= 3000 (cheapest studio/1BR {small[0].get('price')})."
+        elif elev == "unknown":
+            prefix = f"ELEVATOR_UNKNOWN: no elevator listed on the page ({f['stories'] or '?'} stories); likely garden-style walk-up, confirm."
+    one = bool(prefix)
+    rows = (ok or small)[:1] if one else ok
+    base = dict(source_site="zillow.com", url=url, detail_level="building_page", first_seen=m["retrieved_at"], last_seen=m["retrieved_at"],
+                building_name=name, address=b.get("streetAddress"), city=b.get("city"), state=b.get("state"), zip=b.get("zipcode"),
+                lat=b.get("latitude"), lon=b.get("longitude"), dogs=dogs, dog_policy_text=policy[:500], dog_weight_limit_lb=f["wl"],
+                elevator=elev, building_floors=f["stories"], parking_type=f["parking"], pet_rent=f["petrent"],
+                concession_text="; ".join(f["offers"])[:300], listing_type="managed_building", building_url=ov.get("building_url", url),
+                raw_path=m["path"], manager=ov.get("manager", (b.get("buildingPropertyRules") or {}).get("brokerNameIfRequired", "") or ""),
+                laundry="; ".join((b.get("amenitySummary") or {}).get("laundry") or []), price_basis="base rent (Zillow building page)")
+    base["manager"] = base["manager"].replace("Listings by: Listing by: ", "")
+    out = []
+    for u in rows or [None]:
+        r = dict(base)
+        if u:
+            un = str(u.get("unitNumber") or "").replace("Unit ", "")
+            fl = ""
+            mfl = re.fullmatch(r"(\d)(\d\d)[A-Z]?", un)
+            fees = u.get("totalRequiredMonthlyMinFee")
+            r.update(unit=un, beds=u.get("beds"), baths=u.get("baths"), sqft=u.get("sqft") or "", listed_rent=u.get("price") or "",
+                     available_date=u["_avail"], available_date_text=u["_availtxt"],
+                     other_monthly_fees_json=C.jdump({"required_monthly_fees_min": fees}) if fees else "")
+            if u.get("_fp"):
+                r["price_basis"] = "floor plan 'from' price (Zillow building page)"
+        r["listing_id"] = SRC + ":z:" + hashlib.sha1((url + "|" + str(r.get("unit", ""))).encode()).hexdigest()[:12]
+        note = prefix
+        if one and len(ok) > 1:
+            note += f" {len(ok)} studio/1BR units <= 3000 on the page; only the cheapest recorded."
+        r["notes"] = (note + " " + ov.get("notes", "")).strip()
+        out.append(r)
+    n = C.upsert(OUT, out)
+    verdict = ov.get("verdict") or ("pass_with_units" if not prefix else prefix.split(":")[0].lower() + ":" + prefix.split(":", 1)[1].strip()[:90])
+    bldg_upsert(dict(name=name, address=b.get("streetAddress"), town=b.get("city"), url=ov.get("building_url", url), floors=f["stories"],
+                     elevator=elev, dogs=dogs + ("" if f["large"] is None else (" (large dogs ok)" if f["large"] else " (large dogs NOT allowed)")),
+                     weight_limit=f["wl"] or "not_stated", verdict=verdict, source_url=url, notes=ov.get("notes", "")))
+    print(f"   WROTE {len(out)} row(s); csv rows {n}; verdict {verdict}")
+
+
 def main():
     cmd = sys.argv[1]
     if cmd in ("fetch", "text"):
@@ -182,6 +364,20 @@ def main():
             pr = o.get("price") or ";".join(f"{x.get('beds')}bd {x.get('price')}" for x in (o.get("units") or []))
             print(o.get("buildingName") or "-", "|", o.get("address"), "|", pr, "|", u.replace("https://www.zillow.com", ""))
         print("total listed:", len(seen))
+    elif cmd == "zj":
+        try:
+            zj(sys.argv[2])
+        except (C.BotWall, RuntimeError) as e:
+            print("BLOCKED/ERR:", str(e)[:200])
+    elif cmd == "zw":
+        try:
+            zj(sys.argv[2], sys.argv[3:])
+        except (C.BotWall, RuntimeError) as e:
+            print("BLOCKED/ERR:", str(e)[:200])
+    elif cmd == "show":
+        with open(OUT, newline="") as fh:
+            for r in csv.DictReader(fh):
+                print(" | ".join(str(r[k])[:int(n)] for k, n in (("building_name", 28), ("city", 12), ("unit", 14), ("beds", 1), ("listed_rent", 5), ("available_date", 10), ("dogs", 7), ("dog_weight_limit_lb", 4), ("elevator", 7), ("floor", 2), ("notes", 70))))
     elif cmd == "geo":
         print(geo(sys.argv[2]))
     elif cmd == "unit":

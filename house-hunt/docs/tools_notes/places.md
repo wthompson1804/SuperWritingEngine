@@ -1,6 +1,6 @@
 # places: what is around an address (OpenStreetMap)
 
-Module: `scripts/tools/places.py`. Functions: `near(lat, lon)` and `area_profile(lat, lon, radius_m=1200)`.
+Module: `scripts/tools/places.py`. Functions: `near(lat, lon)`, `area_profile(lat, lon, radius_m=1200)` and `color(lat, lon)` (last section).
 Self-test: `python3 -m scripts.tools.places` (add `--json` for the full dicts). Rebuild: `python3 -m scripts.tools.places --build`.
 
 ## Source and vintage
@@ -139,3 +139,86 @@ supermarkets 3,026; pharmacies 2,194; vets 591; coworking 86; dog parks 504 (247
 | Stamford CT | Gateway Park, 111 m | 2 | 13 | Target, 916 m | coastline, 510 m | Stamford, 10 m | I 95, 69 m |
 | Jersey City Grove St | Van Vorst Park, 316 m | 31 | 92 | Salman Grocery, 320 m | Morris Canal Basin, 660 m | Hoboken Terminal, 2,160 m (PATH Grove Street 93 m) | I 78, 1,015 m |
 | Beacon NY | Long Dock Park, 136 m | 2 | 5 | Key Food, 1,097 m | Hudson River, 78 m | Beacon, 17 m | I 84, 1,349 m |
+
+## color(lat, lon): the kind of life around a building (added 2026-11-15)
+
+Second index, built from the same regional cut (`region.osm.pbf`, same vintage and source as above; nothing was
+re-downloaded). Files: `raw/big/osm/region_color.osm.pbf` (152 MB) and `color_index.pkl` (365 MB). Build:
+`python3 -m scripts.tools.places --build-color` (about 3 minutes). **Load 1.4 s once, then about 3 ms per call**
+(1,048 grid points in 3.1 s). Same value format as `near()`.
+
+For each category: `<cat>_count_800m`, `<cat>_count_1600m` and `<cat>_examples` (up to 3 nearest **named** places
+within 1,600 m, with metres and OSM link). `shop_any` has counts only.
+
+| Group | Key prefix | OSM tags | In index |
+|---|---|---|---|
+| culture | `bookshop` | `shop=books` | 417 |
+| | `library` | `amenity=library` | 1,369 |
+| | `cinema_theatre` | `amenity=cinema`, `theatre`, `arts_centre` | 1,387 |
+| | `gallery_museum` | `tourism=gallery`, `museum` | 1,389 |
+| fitness_and_play | `gym` | `leisure=fitness_centre`, `amenity=gym`, or `sport` including yoga or pilates | 2,023 |
+| | `playground` | `leisure=playground` | 10,412 |
+| | `pitch` | `leisure=pitch`, `sports_centre` | 50,807 |
+| | `tennis` | the same with `sport` including tennis | 17,027 |
+| | `community_garden` | `leisure=garden` + `garden:type=community`, or `landuse=allotments` | 708 |
+| food | `market` | `amenity=marketplace` | 279 |
+| | `fast_food` | `amenity=fast_food` | 11,247 |
+| | `diner_ice_cream` | `amenity=ice_cream`, or `cuisine` including diner | 1,419 |
+| pets | `pet` | `shop=pet`, `pet_grooming` | 776 |
+| | `vet` | `amenity=veterinary` (from the main index) | 591 |
+| main_street | `hair_beauty` | `shop=hairdresser`, `beauty` | 8,410 |
+| | `shop_any` | `shop=*` except no / vacant | 65,426 |
+| | `convenience` | `shop=convenience` | 6,322 |
+| | `laundry` | `shop=laundry` | 1,704 |
+| car_oriented | `fuel` | `amenity=fuel` | 5,104 |
+| | `drive_through` | `drive_through=yes` on any place | 3,072 |
+| | `big_box` | `shop=department_store`, `wholesale`, `doityourself`; or `shop=mall` or `building=retail` with an outline over 5,000 m2 | 2,317 |
+| | `surface_parking_ha_within_800m` | `amenity=parking` areas, excluding `parking=underground`, `multi-storey`, `rooftop`, `street_side`, `lane` | 82,747 outlines, 21,666 ha |
+| street_pattern | `intersections_within_800m` (with `per_km2`) | nodes where 3 or more street segments meet; streets = `highway` residential, living_street, unclassified, tertiary, secondary, primary, trunk, pedestrian | 518,178 |
+| | `footway_km_within_800m` | `highway=footway`, `pedestrian`, `path` | 75,249 km |
+| | `cycleway_km_within_800m` | `highway=cycleway` | 2,868 km |
+| | `bike_lane_street_km_within_800m` | streets with `cycleway`, `cycleway:left`, `:right` or `:both` = lane or track | 2,608 km |
+| trees | `tree_row_km_within_800m` | `natural=tree_row` | 501 km |
+| | `woods_ha_within_800m` | `natural=wood`, `landuse=forest` areas | 58,609 outlines |
+
+Methods: counts are straight-line; outlines count once at their centroid; same-name duplicates within 60 m are
+merged. Areas are the mapped outlines clipped to an 800 m circle with overlaps counted once (`share_of_circle`
+included). Lengths are estimates: ways are cut into pieces of at most 25 m and pieces whose midpoint is inside the
+circle are summed.
+
+### color() caveats
+
+- **Footway length mostly measures mapping style, not walkability.** Where sidewalks and crossings are drawn as
+  separate ways (NYC, Jersey City, Stamford) it is 30 to 70 km within 800 m; where they are not, it is near zero on
+  equally walkable streets. **Use `intersections_within_800m` as the street-pattern signal**; it depends only on
+  the road network, which is complete everywhere. Divided roads add a few extra nodes.
+- **Pitches count each court or field separately.** Forest Hills shows 45 tennis courts within 800 m because of the
+  West Side Tennis Club; this is not 45 public courts. Access (private club, school) is not checked. Most pitches
+  and playgrounds are unnamed, so examples are sparse.
+- **Gyms, bookshops, pet shops, laundromats, hairdressers and convenience stores are under-mapped outside the urban
+  core.** Zero means "none mapped". `shop_any` is the most robust retail signal but is still a floor.
+- **Markets**: `amenity=marketplace` covers farmers' markets, greenmarkets and other markets alike; only 279 mapped.
+  Seasonal markets are often missing.
+- **Community gardens**: 708 mapped, mostly NYC (GreenThumb gardens). Many are tagged only `leisure=garden` without
+  the type and are missed.
+- **Drive-through** depends on a tag mappers often omit; treat as a floor. **Fuel stations** are well mapped.
+- **Big box** by outline picks up enclosed malls and large retail buildings in cities too (9 within 1,600 m of
+  Grove Street, Jersey City: Newport Centre and neighbours), so read it with surface parking, not alone.
+- **Surface parking**: lots are well mapped in cities and commercial strips; small private lots and driveways are
+  not. Untagged structures (a garage with no `parking=multi-storey`) count as surface.
+- **Woods**: outlines only; street trees are not counted, and `natural=tree_row` is rarely mapped (501 km in the
+  whole box), so the tree-row value is near zero almost everywhere and should not be compared. Wooded parks tagged
+  only `leisure=park` are not woods here (see `park_area_ha_within_800m` in `near()`).
+- **Bike lanes**: on-street lanes are reported separately from off-street cycleways; older `cycleway=shared_lane`
+  (sharrows) is excluded.
+
+### color() self-test (800 m unless stated)
+
+| Point | Shops | Gyms | Fast food | Big box (1,600 m) | Surface parking ha | Intersections | Woods ha |
+|---|---|---|---|---|---|---|---|
+| Jamaica station | 155 | 0 | 37 | 6 | 2.34 | 201 | 0.0 |
+| Forest Hills | 148 | 6 | 30 | 1 | 0.86 | 213 | 0.28 |
+| Long Beach NY | 23 | 3 | 5 | 0 | 7.99 | 167 | 0.0 |
+| Stamford CT | 11 | 0 | 1 | 3 | 11.49 | 156 | 0.0 |
+| Jersey City Grove St | 84 | 4 | 12 | 9 | 14.32 | 186 | 2.21 |
+| Beacon NY | 20 | 0 | 0 | 0 | 8.9 | 61 | 14.59 |
