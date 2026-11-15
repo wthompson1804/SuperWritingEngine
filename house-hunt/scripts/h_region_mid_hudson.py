@@ -23,8 +23,25 @@ KEY = r"(?i)elevator|walk-?up|stor(y|ies)|floors?\b|\bdogs?\b|\bpets?\b|breed|\b
 
 
 def fetch(url):
-    t, m = C.polite_get(url, SRC)
-    return t, m
+    """polite_get plus a cross-process throttle (each CLI call is a new process): >= 2.5 s or Crawl-delay per host."""
+    import time
+    from urllib.parse import urlparse
+    host = urlparse(url).netloc
+    st = lib.RAW / SRC / "_last_hit.json"
+    st.parent.mkdir(parents=True, exist_ok=True)
+    hits = json.loads(st.read_text()) if st.exists() else {}
+    try:
+        cd = C.crawl_delay(host, SRC)
+    except Exception:
+        cd = 0
+    wait = hits.get(host, 0) + max(2.5, cd) - time.time()
+    if wait > 0:
+        time.sleep(wait)
+    try:
+        return C.polite_get(url, SRC)
+    finally:
+        hits[host] = time.time()
+        st.write_text(json.dumps(hits))
 
 
 def snippets(text, pat, width=110, cap=60):
