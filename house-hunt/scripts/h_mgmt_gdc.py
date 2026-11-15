@@ -9,7 +9,7 @@ import json
 import re
 import sys
 
-from h_mgmt_common import OUT_DIR, BotWall, polite_get, strip_tags, upsert, fill_rates, weight_limit
+from h_mgmt_common import OUT_DIR, BotWall, polite_get, strip_tags, upsert, fill_rates, weight_limit, dog_status
 from h_mgmt_gardencommunities import snips
 
 SRC = "mgmt_gdc"
@@ -47,6 +47,7 @@ def main() -> None:
         park_txt = snips(text, r"(?i)\b(parking|garages?)\b", 3, 50)
         util_txt = snips(text, r"(?i)(heat|hot water|gas|water|electric|utilities)[^.|]{0,30}included|included[^.|]{0,30}(heat|hot water)", 3, 50)
         dogs = "no" if re.search(r"(?i)no (pets|dogs)", pet_txt) else ("yes" if re.search(r"(?i)\bdogs?\b", pet_txt) else "unknown")
+        dogs = dog_status(pet_txt)
         elev = "yes" if re.search(r"(?i)\belevators?\b", text) else "unknown"
         laundry = "in_unit" if re.search(r"(?i)washers? (and|&) dryers?|washer/dryer|in-unit laundry", text) else ("on_site" if re.search(r"(?i)laundry", text) else "unknown")
         seen, rows = set(), []

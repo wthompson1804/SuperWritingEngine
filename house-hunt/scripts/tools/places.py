@@ -56,7 +56,7 @@ RIVER_MIN_M2 = 20000.0  # 2 ha per mapped polygon piece (rivers are mapped in pi
 ANCHOR_RADIUS_M = 10000.0
 LAMP_RADIUS_M = 150.0
 LAMP_COVERAGE_RADIUS_M = 500.0
-LAMP_COVERAGE_MIN = 30  # lamps within 500 m needed before the 150 m count is treated as real
+LAMP_COVERAGE_MIN = 150  # lamps within 500 m needed before the 150 m count is treated as real
 X0, Y0 = 600000.0, 4500000.0  # offsets so building coordinates fit float32 at centimetre precision
 CELL = 250.0
 
@@ -665,7 +665,7 @@ def _building(idx, xy) -> dict:
     how = "the point is inside this building outline" if inside else \
         f"the point is not inside any outline; nearest outline is {best_d:.0f} m away (geocoded points often sit at the kerb)"
     url = OSM_URL + b["ref"][bi]
-    btype = b["types"][int(z["tcode"][bi])]
+    btype = str(b["types"][int(z["tcode"][bi])])
     lev, h = float(z["levels"][bi]), float(z["height"][bi])
     out = {
         "building": _val(idx, url, vt, how, metres_from_point=int(round(best_d)), name=b["names"].get(bi),
@@ -725,9 +725,9 @@ def near(lat: float, lon: float) -> dict:
     green["nearest_dog_park"] = _nearest_feature(idx, "dog_park", xy, "dog park")
 
     out_ = _counts(idx, xy, (800.0, 1600.0))
-    for c in ("cafe", "bakery", "bar"):
+    for c, plural in (("cafe", "cafes"), ("bakery", "bakeries"), ("bar", "bars")):
         lst = _nearest_pts(idx, c, xy, 5, 1600.0, named_only=True)
-        out_[f"nearest_{c}s"] = _val(idx, lst, "found", names_m, osm_tags=TAG_DEFS[c]) if lst else \
+        out_[f"nearest_{plural}"] = _val(idx, lst, "found", names_m, osm_tags=TAG_DEFS[c]) if lst else \
             _missing(idx, f"no named {c} mapped within 1,600 m", osm_tags=TAG_DEFS[c])
 
     errands = {"nearest_supermarket": _nearest_feature(idx, "supermarket", xy, "supermarket"),
@@ -755,6 +755,12 @@ def near(lat: float, lon: float) -> dict:
         "motorway_m": _nearest_line(idx, "motorway", xy, "motorway"),
         "streetlamps_within_150m": _lamps(idx, xy),
     }
+    cw, rw = setting["coastline_m"], setting["river_or_lake_shore_m"]
+    if cw["value"] is not None and rw["value"] is not None:
+        nw = cw if cw["value"] <= rw["value"] else rw
+        setting["nearest_open_water_m"] = _val(
+            idx, nw["value"], "found", "the smaller of coastline_m and river_or_lake_shore_m",
+            name=nw.get("name"), kind=nw.get("kind") or "coastline", osm_url=nw.get("osm_url"))
     st = idx["pts"].get("station")
     if st is not None:  # nearest station that is not subway or light rail (commuter or intercity rail)
         dist, ix = st["tree"].query(xy, k=min(60, len(st["xy"])))
@@ -789,9 +795,10 @@ def area_profile(lat: float, lon: float, radius_m: float = 1200) -> dict:
         counts[f"{k}_count"] = _val(idx, _count(idx, k, xy, r), "found", how,
                                     osm_tags=f"shop in {sorted(ANCHOR_SHOPS)} with name or brand matching {label}")
     names = {}
-    for c in ("cafe", "bakery", "bar", "restaurant", "brewery", "music"):
+    for c, plural in (("cafe", "cafes"), ("bakery", "bakeries"), ("bar", "bars"), ("restaurant", "restaurants"),
+                      ("brewery", "breweries"), ("music", "music_venues")):
         lst = _nearest_pts(idx, c, xy, 5, r, named_only=True)
-        names[f"nearest_{c}s"] = _val(idx, lst, "found", f"nearest named places within {int(r)} m, nearest first",
+        names[f"nearest_{plural}"] = _val(idx, lst, "found", f"nearest named places within {int(r)} m, nearest first",
                                       osm_tags=TAG_DEFS[c]) if lst else \
             _missing(idx, f"no named {c} mapped within {int(r)} m", osm_tags=TAG_DEFS[c])
     green = _parks(idx, xy, r)

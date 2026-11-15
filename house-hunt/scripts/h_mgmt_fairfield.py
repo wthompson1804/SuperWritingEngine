@@ -11,7 +11,7 @@ import json
 import re
 import sys
 
-from h_mgmt_common import OUT_DIR, BotWall, grid, polite_get, strip_tags, upsert, fill_rates, weight_limit
+from h_mgmt_common import OUT_DIR, BotWall, grid, polite_get, strip_tags, upsert, fill_rates, weight_limit, dog_status
 
 SRC = "mgmt_fairfield"
 BASE = "https://fairfieldproperties.com"
@@ -85,6 +85,7 @@ def main() -> None:
             dogs = "yes"  # "Pet Friendly" alone does not name dogs: stays unknown, text kept in dog_policy_text
         else:
             dogs = "unknown"
+        dogs = dog_status(pet_txt)
         park_txt = sentences(body, r"(?i)\b(parking|garage|carport)s?\b", 3)
         util_txt = sentences(body, r"(?i)\b(heat|hot water|gas|electric|utilities)\b[^.|]{0,40}\bincluded|included[^.|]{0,40}\b(heat|hot water|gas|electric)", 3)
         laundry = "in_unit" if re.search(r"(?i)washer\s*/?\s*(and\s*)?dryer", body) else ("on_site" if re.search(r"(?i)laundry", body) else "unknown")

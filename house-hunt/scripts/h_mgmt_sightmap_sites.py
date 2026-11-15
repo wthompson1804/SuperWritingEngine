@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
-from h_mgmt_common import OUT_DIR, BotWall, grid, jdump, polite_get, strip_tags, upsert, fill_rates, weight_limit
+from h_mgmt_common import OUT_DIR, BotWall, grid, jdump, polite_get, strip_tags, upsert, fill_rates, weight_limit, dog_status
 from h_mgmt_gardencommunities import snips
 import h_mgmt_sightmap as sm
 
@@ -73,6 +73,7 @@ def main() -> None:
         elev_txt = snips(text, r"(?i)elevator|mid-rise|high-rise|stor(y|ies)\b", 3)
         util_txt = snips(text, r"(?i)(heat|hot water|gas|water|electric|utilities|wi-?fi|internet)[^.|]{0,30}included|included[^.|]{0,30}(heat|hot water)", 3, 50)
         dogs = "no" if re.search(r"(?i)no (pets|dogs)|dogs? (are )?not (allowed|permitted)", pet_txt) else ("yes" if re.search(r"(?i)\bdogs?\b", pet_txt) else "unknown")
+        dogs = dog_status(pet_txt)
         elev = "yes" if re.search(r"(?i)\belevators?\b", text) else "unknown"
         laundry = "in_unit" if re.search(r"(?i)washers? (and|&) dryers?|washer/dryer|in-(home|unit) (laundry|washer)", text) else ("on_site" if re.search(r"(?i)laundry", text) else "unknown")
         nums = [int(x) for x in info.get("floor_labels", []) if str(x).isdigit()]

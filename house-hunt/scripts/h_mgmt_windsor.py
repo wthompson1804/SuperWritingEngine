@@ -10,7 +10,7 @@ import json
 import re
 import sys
 
-from h_mgmt_common import OUT_DIR, BotWall, grid, jdump, polite_get, strip_tags, upsert, fill_rates, weight_limit
+from h_mgmt_common import OUT_DIR, BotWall, grid, jdump, polite_get, strip_tags, upsert, fill_rates, weight_limit, dog_status
 from h_mgmt_gardencommunities import snips
 
 SRC = "mgmt_windsor"
@@ -57,6 +57,7 @@ def main() -> None:
         pet_txt = snips(text + " || " + ftext, r"(?i)\b(pets?|dogs?|breed)\b", 6, 110)
         park_txt = snips(text + " || " + ftext, r"(?i)\b(parking|garages?)\b", 4, 90)
         dogs = "no" if re.search(r"(?i)no (pets|dogs)", pet_txt) else ("yes" if re.search(r"(?i)\bdogs?\b", pet_txt) else "unknown")
+        dogs = dog_status(pet_txt)
         elev = "yes" if re.search(r"(?i)\belevators?\b", text) else "unknown"
         laundry = "in_unit" if re.search(r"(?i)washers? (and|&) dryers?|washer/dryer|in-(home|unit) (laundry|washer)", text) else "unknown"
         pr = re.search(r"Pet Rent.{0,160}?\$([\d.]+)", ftext)

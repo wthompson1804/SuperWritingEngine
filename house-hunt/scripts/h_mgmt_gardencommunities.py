@@ -13,7 +13,7 @@ import re
 import sys
 from datetime import datetime
 
-from h_mgmt_common import OUT_DIR, ROOT, BotWall, polite_get, strip_tags, upsert, fill_rates, weight_limit
+from h_mgmt_common import OUT_DIR, ROOT, BotWall, polite_get, strip_tags, upsert, fill_rates, weight_limit, dog_status
 
 SRC = "mgmt_gardencommunities"
 BASE = "https://www.gardencommunities.com"
@@ -108,6 +108,7 @@ def main() -> None:
             dogs = "yes"
         else:
             dogs = "unknown"  # "pet-friendly" alone does not name dogs
+        dogs = dog_status(pet_txt)
         elev = "yes" if re.search(r"(?i)\belevators?\b", text) else "unknown"
         laundry = "in_unit" if re.search(r"(?i)in-suite washer|washers? (and|&) dryers?|washer/dryer", text) else ("on_site" if re.search(r"(?i)laundry", text) else "unknown")
         pm = re.search(r'data-splide-lazy="([^"]+)"', html)

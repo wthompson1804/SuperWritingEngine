@@ -1,7 +1,7 @@
 {
  "started": "2026-11-15T18:21:08+00:00",
- "srp_pages": 188,
- "detail_pages": 703,
+ "srp_pages": 203,
+ "detail_pages": 722,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -212,13 +212,43 @@
    "drive_min": 29.2,
    "props": 4,
    "rows": 5
+  },
+  {
+   "city": "nj/englewood-cliffs",
+   "drive_min": 29.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/east-meadow",
+   "drive_min": 29.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/jericho",
+   "drive_min": 30.0,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/edgewater",
+   "drive_min": 31.4,
+   "props": 5,
+   "rows": 4
+  },
+  {
+   "city": "nj/union-city",
+   "drive_min": 31.4,
+   "props": 14,
+   "rows": 14
   }
  ],
  "cities_unmatched_far": [],
- "props_discovered": 1334,
- "props_skipped_lowprice_gt_3000": 631,
+ "props_discovered": 1354,
+ "props_skipped_lowprice_gt_3000": 632,
  "reasons": {
-  "ok": 700,
+  "ok": 719,
   "no_unit_le_3000": 3
  },
  "blocked": null,

@@ -9,7 +9,7 @@ import json
 import re
 import sys
 
-from h_mgmt_common import OUT_DIR, BotWall, grid, polite_get, strip_tags, upsert, fill_rates, weight_limit
+from h_mgmt_common import OUT_DIR, BotWall, grid, polite_get, strip_tags, upsert, fill_rates, weight_limit, dog_status
 from h_mgmt_gardencommunities import snips
 
 SRC = "mgmt_gardenhomes"
@@ -75,6 +75,7 @@ def main() -> None:
             dogs = "yes"
         else:
             dogs = "unknown"
+        dogs = dog_status(pet_txt)
         ad = attr(b, "data-availabledate")
         dm = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})", ad)
         city_state = re.match(r"(.+?),\s*([A-Z]{2})", p.get("csz", ""))

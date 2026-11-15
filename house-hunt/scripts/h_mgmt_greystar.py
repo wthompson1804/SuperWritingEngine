@@ -11,7 +11,7 @@ import json
 import re
 import sys
 
-from h_mgmt_common import OUT_DIR, BotWall, grid, jdump, polite_get, upsert, fill_rates, weight_limit
+from h_mgmt_common import OUT_DIR, BotWall, grid, jdump, polite_get, upsert, fill_rates, weight_limit, dog_status
 
 SRC = "mgmt_greystar"
 OUT = OUT_DIR / "mgmt_greystar.csv"
@@ -107,6 +107,7 @@ def main() -> None:
             dogs = "yes"
         else:
             dogs = "unknown"  # "pet" wording only: dogs not named
+        dogs = dog_status(pet_txt)
         elev = "yes" if re.search(r"(?i)elevator", blob) else "unknown"
         laundry = "in_unit" if re.search(r"(?i)(in-unit|in-home|in unit|full[- ]size)[^|]{0,25}(washer|laundry)|washer\s*(and|&|/)\s*dryer", blob) else ("on_site" if re.search(r"(?i)laundry", blob) else "unknown")
         floors_seen = [int(u["floorShortLabel"]) for u in units if str(u.get("floorShortLabel", "")).lstrip("-").isdigit()]

@@ -8,7 +8,7 @@ import json
 import re
 import sys
 
-from h_mgmt_common import OUT_DIR, BotWall, grid, jdump, polite_get, strip_tags, upsert, fill_rates, weight_limit
+from h_mgmt_common import OUT_DIR, BotWall, grid, jdump, polite_get, strip_tags, upsert, fill_rates, weight_limit, dog_status
 import h_mgmt_sightmap as sm
 
 SRC = "mgmt_blt"
@@ -75,6 +75,7 @@ def main() -> None:
         pr = re.search(r"\$(\d+)\s*(?:per month|/month|monthly)?\s*pet rent|pet rent[^$]{0,30}\$(\d+)", pet_txt)
         pet_rent = (pr.group(1) or pr.group(2)) if pr else ""
         pf = re.findall(r"\$(\d+)", park_txt)
+        dogs = dog_status(pet_txt)
         elev = "yes" if re.search(r"(?i)elevator", text) else "unknown"
         elev_note = "elevator is mentioned on the community page (amenity, FAQ or on-page resident review text)" if elev == "yes" else "elevator not stated on page"
         nums = [int(x) for x in info.get("floor_labels", []) if str(x).isdigit()]

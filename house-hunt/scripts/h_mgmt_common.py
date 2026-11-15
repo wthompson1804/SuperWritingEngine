@@ -148,6 +148,21 @@ def weight_limit(text: str) -> str:
     return str(max(v)) if v else ""
 
 
+DOG_NO = re.compile(r"(?i)\bno (pets|dogs)\b|(pets?|dogs?) (are )?not (allowed|permitted|accepted)|cats only|pet[- ]free")
+DOG_YES = re.compile(r"(?i)dog (run|park|wash|spa|station|grooming|walk|area|lounge|friendly)|dog-friendly|bark park|canine|paw wash|"
+                     r"dogs? (are )?(welcome|allowed|permitted|accepted)|cats? (and|&|or) dogs?|dogs? (and|&|or) cats?|"
+                     r"per dog|dog (fee|rent|deposit)")
+
+
+def dog_status(text: str) -> str:
+    """yes only when the page names dogs as allowed or has a dog amenity; 'pet-friendly' alone stays unknown."""
+    if not text:
+        return "unknown"
+    if DOG_NO.search(text):
+        return "no"
+    return "yes" if DOG_YES.search(text) else "unknown"
+
+
 def fill_rates(csv_path: Path) -> dict:
     with open(csv_path, newline="") as f:
         rows = list(csv.DictReader(f))
