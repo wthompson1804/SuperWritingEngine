@@ -87,7 +87,7 @@ def main():
         for l in open(OUT):
             r = json.loads(l); done[r["name"]] = r
     todo = []
-    if AL.exists():
+    if AL.exists() and "--extra" not in sys.argv:
         for l in open(AL):
             d = json.loads(l)
             if d["website"]: todo.append((d["name"], clean(d["website"])))

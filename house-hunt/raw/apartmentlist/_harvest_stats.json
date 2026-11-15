@@ -7,8 +7,8 @@
   "fetch_max_low": 2850.0,
   "minutes": 0
  },
- "srp_pages": 796,
- "detail_pages": 1558,
+ "srp_pages": 805,
+ "detail_pages": 1563,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1233,6 +1233,24 @@
    "drive_min": 66.6,
    "props": 3,
    "rows": 13
+  },
+  {
+   "city": "nj/madison",
+   "drive_min": 66.6,
+   "props": 4,
+   "rows": 2
+  },
+  {
+   "city": "ny/holbrook",
+   "drive_min": 66.7,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/watchung",
+   "drive_min": 67.6,
+   "props": 2,
+   "rows": 4
   }
  ],
  "cities_unmatched_far": [
@@ -1257,10 +1275,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2414,
- "props_skipped_lowprice_gt_3000": 856,
+ "props_discovered": 2421,
+ "props_skipped_lowprice_gt_3000": 858,
  "reasons": {
-  "ok": 1549,
+  "ok": 1554,
   "no_unit_le_3000": 8,
   "no_listing_object": 1
  },
