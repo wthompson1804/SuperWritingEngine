@@ -1,0 +1,33 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"d4f33f62-b4ac-4181-87b6-bbf597a2d105","ultra_name":"620 BLOOMFIELD ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0905019451001","ultra_addressline1":"620 BLOOMFIELD ST","ultra_block":"193","ultra_lot":"40.02","ultra_propertyinterest":{
+        "Id":"c2b9f639-4001-4e15-bda4-f28b04d4bd1d","Name":"620 BLOOMFIELD ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8c2d7521-162f-e811-8126-1458d04eb810","Name":"HOBOKEN CITY"
+      },"ultra_propertyportalsearchfield":"620 BLOOMFIELD ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a9a79778-0bef-eb11-bacb-001dd801a3d1","Name":"620 BLOOMFIELD ST LLC"
+      },"ultra_zipcode":"07030","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c0f25fbc-5968-ee11-9ae6-001dd80650bc","ultra_name":"THE ROYAL - BUILDING B","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0702042615002","ultra_addressline1":"610-620 BLOOMFIELD AVENUE","ultra_block":"227","ultra_lot":"24","ultra_propertyinterest":{
+        "Id":"52bb35a3-5968-ee11-9ae6-001dd8065b31","Name":"THE ROYAL"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"2a2d7521-162f-e811-8126-1458d04eb810","Name":"BLOOMFIELD TOWN"
+      },"ultra_propertyportalsearchfield":"THE ROYAL","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"BLOOMFIELD TOWN","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b51109b8-8606-f111-8407-001dd80bcb64","Name":"IVC ROYAL URBAN RENEWAL LL, LLC"
+      },"ultra_zipcode":"07003","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

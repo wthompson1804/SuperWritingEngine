@@ -1,0 +1,215 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"15","value":[
+    {
+      "ultra_buildingid":"22fe9cbe-a015-49a3-8231-7460420ade75","ultra_name":"164 PARKER ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714007747001","ultra_addressline1":"164 PARKER ST","ultra_block":"507","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"f6fe0137-2ecd-4a63-b42a-5515aa816e0d","Name":"164 PARKER ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"164 PARKER ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Vacant Boarded and Sealed","Value":240000009
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3aa39834-2690-ec11-8d20-001dd801de42","Name":"SUMMIT PROPERTIES LLC"
+      },"ultra_zipcode":"07104","ultra_propertyinterest-statuscode":{
+        "Name":"Vacant Boarded & Sealed","Value":240000005
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f394c064-e7db-4a96-a665-842227477930","ultra_name":"264 PARK ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"264 PARK ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"5eba26e8-25b1-4891-9df9-6c2e25a5e66a","Name":"264 PARK ST"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"076010000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5fbaf745-da82-4dcc-806e-2d56eb63ab11","ultra_name":"64 E PARK ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0705003003001","ultra_addressline1":"64 E PARK ST","ultra_block":"820","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"e953a9d5-74ec-43b5-93b4-da2cd489dce2","Name":"64 E PARK ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"64 E PARK ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e17980fd-bda2-42a9-8530-937a307a4ec4","Name":"SABRO LLC MOLLA LLC"
+      },"ultra_zipcode":"07017","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5802352b-d4a7-4016-bb36-fe638d74f0c7","ultra_name":"64 E PARK ST BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0705003003002","ultra_addressline1":"64 E PARK ST","ultra_block":"820","ultra_lot":"60","ultra_propertyinterest":{
+        "Id":"e953a9d5-74ec-43b5-93b4-da2cd489dce2","Name":"64 E PARK ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"64 E PARK ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e17980fd-bda2-42a9-8530-937a307a4ec4","Name":"SABRO LLC MOLLA LLC"
+      },"ultra_zipcode":"07017","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1fef92aa-edb0-4716-82ad-d58bf268fdce","ultra_name":"64 E PARK ST BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0705003003003","ultra_addressline1":"64 E PARK ST","ultra_block":"820","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"e953a9d5-74ec-43b5-93b4-da2cd489dce2","Name":"64 E PARK ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"64 E PARK ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e17980fd-bda2-42a9-8530-937a307a4ec4","Name":"SABRO LLC MOLLA LLC"
+      },"ultra_zipcode":"07017","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"097f84ea-fd75-49ba-9831-32c1bc3f4971","ultra_name":"64 HOMESTEAD PARK BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714031549001","ultra_addressline1":"64 HOMESTEAD PARK","ultra_block":"3044.02","ultra_lot":"33","ultra_propertyinterest":{
+        "Id":"6081f799-a206-403d-bbea-af0b8e04d85a","Name":"64 HOMESTEAD PARK"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"64 HOMESTEAD PARK","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Vacant Boarded and Sealed","Value":240000009
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4ec0af99-443c-ee11-bdf5-001dd8076e0c","Name":"64 HOMESTEAD PARK HOLDINGS LLC"
+      },"ultra_zipcode":"07108","ultra_propertyinterest-statuscode":{
+        "Name":"Vacant Boarded & Sealed","Value":240000005
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1b072925-5cd0-45ec-9eb8-8efe8951ccf7","ultra_name":"64 PARK AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714013206001","ultra_addressline1":"64 PARK AVE","ultra_block":"490","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"284c28cf-2812-4a3f-86f8-337c8664c131","Name":"64 PARK AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"64 PARK AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5b56fc4b-0d9d-4482-80e6-57f264e26c32","Name":"AMBROSINA & MIGUEL RAMIREZ"
+      },"ultra_zipcode":"07104","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8abc50d1-452e-452a-9b50-1d8b5455f5b0","ultra_name":"64 Park Avenue-Bloomfield LLC BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0702019556001","ultra_addressline1":"64 PARK AVE","ultra_block":"253","ultra_lot":"18","ultra_propertyinterest":{
+        "Id":"48124257-4c0d-435b-82cf-aabb074b6d5e","Name":"64 PARK AVENUE-BLOOMFIELD LLC"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"2a2d7521-162f-e811-8126-1458d04eb810","Name":"BLOOMFIELD TOWN"
+      },"ultra_propertyportalsearchfield":"64 PARK AVENUE-BLOOMFIELD LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"70df60c0-e075-4faa-a776-8a42b7b761c5","Name":"64 Park Avenue-Bloomfield LLC"
+      },"ultra_zipcode":"07003","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"116d6d0e-ac29-4437-93ee-3d89e99cbcff","ultra_name":"64 PARK ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906016359001","ultra_addressline1":"64 PARK ST","ultra_block":"17101","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"38674ff3-c3c3-4ee3-9b01-7da83d0f2cbd","Name":"64 PARK ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"64 PARK ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b42b004e-1481-4aed-95c8-0d9e57aa6c97","Name":"64 PARK STLLC C/O ARTHUR PRONTI"
+      },"ultra_zipcode":"07304","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d562c31b-c8b4-403a-b110-d3429418ea82","ultra_name":"64 PARKWAY ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0265020273001","ultra_addressline1":"64 PARKWAY ST","ultra_block":"5","ultra_lot":"20","ultra_propertyinterest":{
+        "Id":"245d9224-2654-4e5a-b1ec-e542d8a30da4","Name":"64 PARKWAY ST"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"462c7521-162f-e811-8126-1458d04eb810","Name":"WALLINGTON BORO"
+      },"ultra_propertyportalsearchfield":"64 PARKWAY ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"HAYWARD PL","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"34624454-d0ca-42f5-8e53-d9bb740bc983","Name":"GRAZYNA KACPRZYK"
+      },"ultra_zipcode":"07057","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9896348e-0e19-4e92-8066-19dfc95e40ec","ultra_name":"864 PARK AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0252010492001","ultra_addressline1":"864 PARK AVE","ultra_block":"213","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"70742547-50b3-459a-8e55-e993287529e0","Name":"864 PARK AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"2c2c7521-162f-e811-8126-1458d04eb810","Name":"RIVER EDGE BORO"
+      },"ultra_propertyportalsearchfield":"864 PARK AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"db29c3e7-72d7-4e37-817c-bebcc019c80c","Name":"F&A PARK ASSOC LLC"
+      },"ultra_zipcode":"07661","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"499c7d95-74f4-eb11-bacb-001dd802747f","ultra_name":"BLDG A EALRY CHILDHOOD CTR","ultra_registrationnumber":"1607-00289-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"64 PARKER AVE","ultra_block":"4057","ultra_lot":"52","ultra_propertyinterest":{
+        "Id":"359c7d95-74f4-eb11-bacb-001dd802747f","Name":"BLDG A EALRY CHILDHOOD CTR"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"242f7521-162f-e811-8126-1458d04eb810","Name":"PASSAIC CITY"
+      },"ultra_propertyportalsearchfield":"BLDG A EALRY CHILDHOOD CTR","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"PASSAIC CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9ad293a7-6ef4-eb11-bacb-001dd802747f","Name":"PASSAIC PUBLIC SCHOOLS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"888bd33f-764e-4ccb-b09f-33b5fbfd0cee","ultra_name":"HADDON HILLS APTS BLDG 37","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0416003452037","ultra_addressline1":"262-264 PARK AVE","ultra_block":"1801","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d7f7e4f2-a4d6-4421-9393-e956907718b6","Name":"HADDON HILLS APTS"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"c02c7521-162f-e811-8126-1458d04eb810","Name":"HADDON TWP"
+      },"ultra_propertyportalsearchfield":"HADDON HILLS APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1bca232f-7468-4cef-bbda-3f30d1881246","Name":"HADDON HILLS ASSOC LLC"
+      },"ultra_zipcode":"08033","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bc333c99-d72f-e811-8122-1458d04ece60","ultra_name":"PARK BERKLEY APARTMENTS","ultra_registrationnumber":"0702-00118-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"64 PARK AV","ultra_block":"253","ultra_lot":"18","ultra_propertyinterest":{
+        "Id":"e67dd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"PARK BERKLEY APARTMENTS"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"2a2d7521-162f-e811-8126-1458d04eb810","Name":"BLOOMFIELD TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ec253dc7-b42f-e811-8122-1458d04ece60","Name":"PARK BERKLEY APTS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"48bf19a9-deb8-43db-98ba-7288ef08b6ed","ultra_name":"PARKSIDE NEIGHBORHOOD CONDO BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1801031482002","ultra_addressline1":"33-64 PARKSIDE RD","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"fbe40a32-a8a5-45ad-b2ee-af16510bcef6","Name":"PARKSIDE NEIGHBORHOOD CONDO"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"562f7521-162f-e811-8126-1458d04eb810","Name":"BEDMINSTER TWP"
+      },"ultra_propertyportalsearchfield":"PARKSIDE NEIGHBORHOOD CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5843198f-ae3a-49da-85ba-4eeaefb02498","Name":"PARKSIDE NEIGHBORHOOD CONDO "
+      },"ultra_zipcode":"07921","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

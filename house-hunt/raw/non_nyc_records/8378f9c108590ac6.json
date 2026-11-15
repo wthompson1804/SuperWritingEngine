@@ -1,0 +1,63 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"4","value":[
+    {
+      "ultra_buildingid":"6e6e5724-7eb6-445a-bf7c-10c301c360c0","ultra_name":"150 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1009030660001","ultra_addressline1":"150 MAIN ST","ultra_block":"38","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"c9c78b21-ef20-4631-9164-fdb0a7329845","Name":"150 MAIN ST"
+      },"ultra_county":{
+        "Id":"04f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUNTERDON"
+      },"ultra_municipality":{
+        "Id":"ac2d7521-162f-e811-8126-1458d04eb810","Name":"FLEMINGTON BORO"
+      },"ultra_propertyportalsearchfield":"150 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f46cded8-7956-4062-972c-325c2c1fcf40","Name":"AMASA ENTERPR LLC "
+      },"ultra_zipcode":"08822","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"aaabfeda-d72f-e811-8122-1458d04ece60","ultra_name":"CORBO RESTAURANT SUPPLY","ultra_registrationnumber":"1303-00125-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"150 MAIN ST","ultra_block":"109","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"dfc23e2d-9a2f-e811-8122-1458d04ece60","Name":"CORBO RESTAURANT SUPPLY"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"222e7521-162f-e811-8126-1458d04eb810","Name":"ASBURY PARK CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"529eafd8-b42f-e811-8122-1458d04ece60","Name":"GERARD S CORBO INC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"526306de-d085-eb11-a812-001dd802e14b","ultra_name":"THE BRICK","ultra_registrationnumber":"0223-00425-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"150 MAIN STREET","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"0c6006de-d085-eb11-a812-001dd802e14b","Name":"THE BRICK"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"THE BRICK","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"HACKENSACK CITY","ultra_elsamaintenancecompany":{
+        "Id":"d76206de-d085-eb11-a812-001dd802e14b","Name":"SCHINDLER ELEVATOR CORPORATION"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b16006de-d085-eb11-a812-001dd802e14b","Name":"150-170 MAIN STREET HACKENSACK URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bbf56c13-f293-ec11-8d20-001dd8034b06","ultra_name":"THE BRICK OF HACKENSACK","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0223042661001","ultra_addressline1":"150 MAIN STREET","ultra_block":"302","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"62798719-ee93-ec11-8d20-001dd8034b39","Name":"THE BRICK OF HACKENSACK"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"THE BRICK OF HACKENSACK","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"HACKENSACK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"39798719-ee93-ec11-8d20-001dd8034b39","Name":"150-170 MAIN STREET HACKENSACK LLC"
+      },"ultra_zipcode":"07601","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

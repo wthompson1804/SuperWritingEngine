@@ -1,0 +1,221 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"15","value":[
+    {
+      "ultra_buildingid":"67e78f7b-3235-4515-a6db-8f657da3220b","ultra_name":"280 OAK ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1607020271001","ultra_addressline1":"280 OAK ST","ultra_block":"2173","ultra_lot":"32","ultra_propertyinterest":{
+        "Id":"2bc25bce-fa3a-4813-9cc7-8a765a87e7e9","Name":"280 OAK ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"242f7521-162f-e811-8126-1458d04eb810","Name":"PASSAIC CITY"
+      },"ultra_propertyportalsearchfield":"280 OAK ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"16e67b6e-abcd-4d7b-a936-7e8b9287fd20","Name":"BEN & NOLI RLTY LLC C/O DZUDET ALE"
+      },"ultra_zipcode":"07055","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9987d7b7-3b7c-eb11-a812-001dd8028211","ultra_name":"376-380 OAK ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1216040812001","ultra_addressline1":"376-380 OAK ST","ultra_block":"157","ultra_lot":"21.01","ultra_propertyinterest":{
+        "Id":"7387d7b7-3b7c-eb11-a812-001dd8028211","Name":"376-380 OAK ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"0a2e7521-162f-e811-8126-1458d04eb810","Name":"PERTH AMBOY CITY"
+      },"ultra_propertyportalsearchfield":"376-380 OAK ST","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"PERTH AMBOY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"374 OAK ST","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6887d7b7-3b7c-eb11-a812-001dd8028211","Name":"374 OAK LLC"
+      },"ultra_zipcode":"08861","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"29f2b481-c711-4b71-b4f1-39c96ee78319","ultra_name":"380 OAK ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1607020774001","ultra_addressline1":"380 OAK ST","ultra_block":"2175","ultra_lot":"59","ultra_propertyinterest":{
+        "Id":"b5cf010d-e3fc-47d7-99ec-d377f1225aa1","Name":"380 OAK ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"242f7521-162f-e811-8126-1458d04eb810","Name":"PASSAIC CITY"
+      },"ultra_propertyportalsearchfield":"380 OAK ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"90895e53-3f25-ec11-b6e6-001dd802d682","Name":"JOSE & ALTAGRACIAS SALAZAR"
+      },"ultra_zipcode":"07055","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"11b2feda-d72f-e811-8122-1458d04ece60","ultra_name":"80 OAK HILL ASSOCIATE","ultra_registrationnumber":"1331-00111-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"80 OAK HILL RD","ultra_block":"879","ultra_lot":"77","ultra_propertyinterest":{
+        "Id":"7ec83e2d-9a2f-e811-8122-1458d04ece60","Name":"80 OAK HILL ASSOCIATE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"5a2e7521-162f-e811-8126-1458d04eb810","Name":"MIDDLETOWN TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"a1d31de4-ef94-e811-8116-1458d04e0ca0","Name":"Dura-Lift"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b6a3afd8-b42f-e811-8122-1458d04ece60","Name":"80 OAK HILL RD"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cab2feda-d72f-e811-8122-1458d04ece60","ultra_name":"80 OAK HILL RD","ultra_registrationnumber":"1331-00180-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"80 OAK HILL RD","ultra_block":"173","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"fdc83e2d-9a2f-e811-8122-1458d04ece60","Name":"80 OAK HILL RD"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"5a2e7521-162f-e811-8126-1458d04eb810","Name":"MIDDLETOWN TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"a1d31de4-ef94-e811-8116-1458d04e0ca0","Name":"Dura-Lift"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"32a4afd8-b42f-e811-8122-1458d04ece60","Name":"80 OAK HILL ASSC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d71a2475-61a0-42bc-9d20-19205f5b8b77","ultra_name":"Atlantic Pointe Apartments BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1331010064005","ultra_addressline1":"65-80 THOUSAND OAKS DR","ultra_block":"729","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"f92ed713-2df4-46c9-a6bd-321b38d96075","Name":"ATLANTIC POINTE APARTMENTS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"5a2e7521-162f-e811-8126-1458d04eb810","Name":"MIDDLETOWN TWP"
+      },"ultra_propertyportalsearchfield":"ATLANTIC POINTE APARTMENTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e8ce972e-6cab-f011-bbd3-001dd8084346","Name":"ATLANTIC HIGHLANDS HOLDING I LLC"
+      },"ultra_zipcode":"07712","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f9496f66-7436-454a-b2ef-e21f6f40b273","ultra_name":"Building B","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111040729003","ultra_addressline1":"42-80 PIN OAK (even)","ultra_block":"24202","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"9aa71e17-52b1-4a26-bad1-511ba27c5d4d","Name":"THE VILLAGE AT LAMBERT GREEN"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"THE VILLAGE AT LAMBERT GREEN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"afc894b9-fdd9-48b0-ae52-83c0569f17e8","Name":"Ohio Strawberry LLC"
+      },"ultra_zipcode":"08638","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0437763c-c99e-45be-a1f2-ee8e7abc71c3","ultra_name":"BUILDING B WILLOWS AT LITTLE EGG HARBOR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1516040039001","ultra_addressline1":"180 OAK LN","ultra_block":"292","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"0a1dbb6f-0203-4260-8749-344080ecc531","Name":"THE WILLOWS AT LITTLE EGG HARBOR"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f42e7521-162f-e811-8126-1458d04eb810","Name":"LITTLE EGG HARBOR TWP"
+      },"ultra_propertyportalsearchfield":"THE WILLOWS AT LITTLE EGG HARBOR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b75a0a53-fe97-450a-9545-7f2dee39b781","Name":"OAK LANE LEH LLC"
+      },"ultra_zipcode":"08087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d3462a11-cb1c-47a2-854d-f12e64231005","ultra_name":"BUILDING C WILLOWS AT LITTLE EGG HARBOR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1516040039002","ultra_addressline1":"180 OAK LN","ultra_block":"292","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"0a1dbb6f-0203-4260-8749-344080ecc531","Name":"THE WILLOWS AT LITTLE EGG HARBOR"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f42e7521-162f-e811-8126-1458d04eb810","Name":"LITTLE EGG HARBOR TWP"
+      },"ultra_propertyportalsearchfield":"THE WILLOWS AT LITTLE EGG HARBOR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b75a0a53-fe97-450a-9545-7f2dee39b781","Name":"OAK LANE LEH LLC"
+      },"ultra_zipcode":"08087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b143d1b2-96b5-4f9a-bb98-9f509b536966","ultra_name":"BUILDING D WILLOWS AT LITTLE EGG HARBOR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1516040039003","ultra_addressline1":"180 OAK LN","ultra_block":"292","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"0a1dbb6f-0203-4260-8749-344080ecc531","Name":"THE WILLOWS AT LITTLE EGG HARBOR"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f42e7521-162f-e811-8126-1458d04eb810","Name":"LITTLE EGG HARBOR TWP"
+      },"ultra_propertyportalsearchfield":"THE WILLOWS AT LITTLE EGG HARBOR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b75a0a53-fe97-450a-9545-7f2dee39b781","Name":"OAK LANE LEH LLC"
+      },"ultra_zipcode":"08087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"744a9a5d-5028-4c73-a175-9eb4f3a6a802","ultra_name":"BUILDING E WILLOWS AT LITTLE EGG HARBOR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1516040039004","ultra_addressline1":"180 OAK LN","ultra_block":"292","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"0a1dbb6f-0203-4260-8749-344080ecc531","Name":"THE WILLOWS AT LITTLE EGG HARBOR"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f42e7521-162f-e811-8126-1458d04eb810","Name":"LITTLE EGG HARBOR TWP"
+      },"ultra_propertyportalsearchfield":"THE WILLOWS AT LITTLE EGG HARBOR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b75a0a53-fe97-450a-9545-7f2dee39b781","Name":"OAK LANE LEH LLC"
+      },"ultra_zipcode":"08087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d8512819-a4b3-4948-866d-5065e6299c45","ultra_name":"BUILDING F WILLOWS AT LITTLE EGG HARBOR","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1516040039005","ultra_addressline1":"180 OAK LN","ultra_block":"292","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"0a1dbb6f-0203-4260-8749-344080ecc531","Name":"THE WILLOWS AT LITTLE EGG HARBOR"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f42e7521-162f-e811-8126-1458d04eb810","Name":"LITTLE EGG HARBOR TWP"
+      },"ultra_propertyportalsearchfield":"THE WILLOWS AT LITTLE EGG HARBOR","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b75a0a53-fe97-450a-9545-7f2dee39b781","Name":"OAK LANE LEH LLC"
+      },"ultra_zipcode":"08087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"32cafeda-d72f-e811-8122-1458d04ece60","ultra_name":"CHEIN BAIS YAAKOV","ultra_registrationnumber":"1514-00277-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"580 OAK ST","ultra_block":"1151","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"e5319443-9a2f-e811-8122-1458d04ece60","Name":"CHEIN BAIS YAAKOV"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f02e7521-162f-e811-8126-1458d04eb810","Name":"LAKEWOOD TWP"
+      },"ultra_propertyportalsearchfield":"CHEIN BAIS YAAKOV","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"LAKEWOOD TWP","ultra_elsamaintenancecompany":{
+        "Id":"e6f35a6d-d27b-e811-8106-1458d04e0ca0","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7b7697e8-b42f-e811-8122-1458d04ece60","Name":"MARK ZEMBA"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0da952e8-88b8-4ac1-89bd-7dc3ebdf9c6c","ultra_name":"GEORGETOWN APTS BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1215005154002","ultra_addressline1":"1380 OAKTREE DR","ultra_block":"30","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"39b362c4-ec16-4724-a4b2-51a94589481c","Name":"GEORGETOWN APTS"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"082e7521-162f-e811-8126-1458d04eb810","Name":"NORTH BRUNSWICK TWP"
+      },"ultra_propertyportalsearchfield":"GEORGETOWN APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"81e02068-9580-402a-8dca-6beb2ead0ecf","Name":"GEORGETOWN LLC"
+      },"ultra_zipcode":"08902","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"747c672b-3a47-4dee-b1f2-193a20374577","ultra_name":"OVERLOOK AT FLANDERS BLDG 80","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1427014277080","ultra_addressline1":"80 OAKWOOD VLG","ultra_block":"4600","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"16de62b8-c7ff-49f5-a0db-ca2da83dc354","Name":"OVERLOOK AT FLANDERS"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"bc2e7521-162f-e811-8126-1458d04eb810","Name":"MOUNT OLIVE TWP"
+      },"ultra_propertyportalsearchfield":"OVERLOOK AT FLANDERS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"4600","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1e61ca48-3cf6-4620-affc-787e4b82e31b","Name":"Oakwood Village Real Estate LLC"
+      },"ultra_zipcode":"07828","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://serviceportal.dca.nj.gov/_odata/bhibuildings?$inlinecount=allpages&$filter=substringof%28%27691%20%27%2Cultra_addressline1%29%20and%20substringof%28%27CLIFTON%27%2Cultra_addressline1%29",
+ "retrieved_at": "2026-11-15T21:37:03+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/54ff301a94541845.json",
+ "source": "non_nyc_records"
+}

@@ -43,40 +43,56 @@ def cached(url, ext):
     return P.get(url, ext=ext)
 
 
+SUFFIX = {"st", "street", "ave", "avenue", "blvd", "boulevard", "rd", "road", "dr", "drive", "ter", "terrace", "pl", "place", "ln", "lane",
+          "ct", "court", "way", "pkwy", "parkway", "hwy", "highway", "tpke", "turnpike", "plz", "plaza", "sq", "cir"}
+
+
 def street_tokens(address):
+    """House number and the street words worth searching on (first word, then the last word before the suffix)."""
     a = re.sub(r"[#,].*", "", address).strip()
     m = re.match(r"(\d+)(?:-\d+)?\s+(.*)", a)
     if not m:
-        return None, None
-    words = [w for w in re.split(r"\s+", m.group(2)) if w.lower().strip(".") not in DIRS]
-    words = [w for w in words if not re.fullmatch(r"\d+[a-z]?", w.lower()) or re.search(r"(st|nd|rd|th)$", w.lower())]
-    return m.group(1), (words[0].upper().strip(".") if words else None)
+        return None, []
+    words = [w.strip(".") for w in re.split(r"\s+", m.group(2)) if w.lower().strip(".") not in DIRS]
+    words = [w for w in words if w.lower() not in SUFFIX and len(w) > 1 and (not re.fullmatch(r"\d+[a-z]?", w.lower()) or re.search(r"(st|nd|rd|th)$", w.lower()))]
+    words = [w for w in words if w.lower() not in ("apt", "unit", "at", "of", "the")]
+    toks = []
+    for w in ([words[0], words[-1]] if words else []):
+        if w.upper() not in toks:
+            toks.append(w.upper())
+    return m.group(1), toks
 
 
 def bhi_search(r):
-    no, tok = street_tokens(r["address"])
-    if not no or not tok:
+    no, toks = street_tokens(r["address"])
+    if not no or not toks:
         return [], "", "address has no house number + street"
-    flt = f"substringof('{no} ',ultra_addressline1) and substringof('{tok}',ultra_addressline1)"
-    url = f"{PORTAL}/_odata/bhibuildings?$inlinecount=allpages&$filter=" + quote(flt)
-    c, m = cached(url, "json")
-    if not c:
-        return [], url, f"search not available ({m.get('status')})"
-    try:
-        vals = json.loads(c).get("value", [])
-    except Exception:
-        return [], url, "search returned non-JSON"
     city = re.sub(r"[^a-z]", "", r["city"].lower().replace("city of ", "").split(",")[0])
-    keep = []
-    for v in vals:
-        muni = re.sub(r"[^a-z]", "", ((v.get("ultra_municipality") or {}).get("Name") or "").lower())
-        addr = (v.get("ultra_addressline1") or "").upper()
-        z = (v.get("ultra_zipcode") or "")[:5]
-        if not addr.startswith(no + " "):
-            continue
-        if z == r["zip"].zfill(5) or (city and (city[:6] in muni or muni[:6] in city)):
-            keep.append(v)
-    return keep, url, (f"{len(vals)} search hits, {len(keep)} at this house number in this municipality or ZIP", m.get("retrieved_at", ""))
+    tried, url, when = [], "", ""
+    for tok in toks:
+        flt = f"substringof('{no} ',ultra_addressline1) and substringof('{tok}',ultra_addressline1)"
+        url = f"{PORTAL}/_odata/bhibuildings?$inlinecount=allpages&$filter=" + quote(flt)
+        c, m = cached(url, "json")
+        if not c:
+            tried.append(f"'{no} {tok}': search not available ({m.get('status')})"); continue
+        try:
+            vals = json.loads(c).get("value", [])
+        except Exception:
+            tried.append(f"'{no} {tok}': non-JSON reply"); continue
+        when = m.get("retrieved_at", "")
+        keep = []
+        for v in vals:
+            muni = re.sub(r"[^a-z]", "", ((v.get("ultra_municipality") or {}).get("Name") or "").lower())
+            addr = (v.get("ultra_addressline1") or "").upper()
+            z = (v.get("ultra_zipcode") or "")[:5]
+            if not addr.startswith(no + " "):
+                continue
+            if z == r["zip"].zfill(5) or (city and (city[:6] in muni or muni[:6] in city)):
+                keep.append(v)
+        tried.append(f"'{no}' + '{tok}': {len(vals)} search hits, {len(keep)} at this house number in this municipality or ZIP")
+        if keep:
+            return keep, url, ("; ".join(tried), when)
+    return [], url, ("; ".join(tried) + "; not found under this street address (a complex may be registered under another address, or the building may not be a registered multiple dwelling yet)", when)
 
 
 def report_date(url):

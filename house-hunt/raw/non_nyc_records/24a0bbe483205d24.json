@@ -1,0 +1,117 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"8","value":[
+    {
+      "ultra_buildingid":"a2449dcc-c85d-f011-bec2-001dd803d067","ultra_name":"112 North Kinderkamack Road","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0236036896001","ultra_addressline1":"112 North Kinderkamack Road","ultra_block":"702","ultra_lot":"37.08","ultra_propertyinterest":{
+        "Id":"36439dcc-c85d-f011-bec2-001dd803d067","Name":"ALAYNA TOWNHOUSE CONDOS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"0c2c7521-162f-e811-8126-1458d04eb810","Name":"MONTVALE BORO"
+      },"ultra_propertyportalsearchfield":"ALAYNA TOWNHOUSE CONDOS","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"MONTVALE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8c7d25c1-9573-f011-b4cc-001dd80c2ab9","Name":"ALAYNA TOWNHOUSE CONDOMINIUM ASSN INC"
+      },"ultra_zipcode":"07645","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b01b1d28-b847-f011-877a-001dd8084aea","ultra_name":"132 Kinderkamack Rd","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0236036895001","ultra_addressline1":"132  Kinderkamack Rd","ultra_block":"702","ultra_lot":"34.01","ultra_propertyinterest":{
+        "Id":"17b21d22-b847-f011-877a-001dd8084aea","Name":"KATY TOWNHOUSE CONDOS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"0c2c7521-162f-e811-8126-1458d04eb810","Name":"MONTVALE BORO"
+      },"ultra_propertyportalsearchfield":"KATY TOWNHOUSE CONDOS","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"MONTVALE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"13b01d22-b847-f011-877a-001dd8084aea","Name":"Katy Townhouse Condominiums"
+      },"ultra_zipcode":"07645","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"14b4102a-05ac-46a0-8319-0505d203e9f2","ultra_name":"222 KINDERKAMACK RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0244024339001","ultra_addressline1":"222 KINDERKAMACK RD","ultra_block":"223","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"8c38442d-47c7-4706-97b1-3bd8d88eca21","Name":"222 REALTY COMPANY LLC"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"1c2c7521-162f-e811-8126-1458d04eb810","Name":"ORADELL BORO"
+      },"ultra_propertyportalsearchfield":"222 REALTY COMPANY LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"73bb7c69-cd1e-f011-998a-001dd8084aea","Name":"222 REALTY COMPANY LLC"
+      },"ultra_zipcode":"07649","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f7774fa4-8d4a-45fc-89d0-9be6fa4a28c1","ultra_name":"282 KINDERKAMACK RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0244023471001","ultra_addressline1":"282 KINDERKAMACK RD","ultra_block":"1202","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"3b40dc13-792f-49eb-8461-0c6570dc1153","Name":"282 KINDERKAMACK RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"1c2c7521-162f-e811-8126-1458d04eb810","Name":"ORADELL BORO"
+      },"ultra_propertyportalsearchfield":"282 KINDERKAMACK RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"30f6d098-067d-4548-b328-1db9bce1a188","Name":"KATHERINE DAWSON"
+      },"ultra_zipcode":"07649","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"90454994-a427-ed11-b83c-001dd8040282","ultra_name":"THE JEFFERSON","ultra_registrationnumber":"0223-00432-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2 KINDERKAMACK ROAD","ultra_block":"532.02","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"d211458e-a427-ed11-b83c-001dd8040282","Name":"THE JEFFERSON"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"THE JEFFERSON","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"HACKENSACK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e311458e-a427-ed11-b83c-001dd8040282","Name":"HACKENSACK JEFFERSON URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"39bd9793-760e-ed11-82e3-001dd8041c15","ultra_name":"THE JEFFERSON","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0223042665001","ultra_addressline1":"2 KINDERKAMACK ROAD","ultra_block":"532.02","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"558c9278-760e-ed11-82e3-001dd8041f0f","Name":"THE JEFFERSON"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"THE JEFFERSON","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"HACKENSACK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"488c9278-760e-ed11-82e3-001dd8041f0f","Name":"HACKENSACK JEFFERSON, LLC"
+      },"ultra_zipcode":"07601","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0ac36be2-1104-4c00-b780-20e0af364a2a","ultra_name":"WESTWOOD HILLS APTS BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0267023178005","ultra_addressline1":"150-152 KINDERKAMACK RD","ultra_block":"19-20","ultra_lot":"1503","ultra_propertyinterest":{
+        "Id":"bf4e5099-d822-4955-808d-1d91b0c5be79","Name":"WESTWOOD HILLS APTS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"4a2c7521-162f-e811-8126-1458d04eb810","Name":"WESTWOOD BORO"
+      },"ultra_propertyportalsearchfield":"WESTWOOD HILLS APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"1-5 SUTTON PL","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a3cbd6a3-2bf8-47ff-b2e3-4ac2f1bf4b93","Name":"WESTWOOD HILLS HEKEMIAN CO INC"
+      },"ultra_zipcode":"07675","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d079bb4b-7b38-47d9-b68d-2738155d80ea","ultra_name":"WESTWOOD HILLS APTS BLDG 7","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0267023178007","ultra_addressline1":"140-142 KINDERKAMACK RD","ultra_block":"19-20","ultra_lot":"1503","ultra_propertyinterest":{
+        "Id":"bf4e5099-d822-4955-808d-1d91b0c5be79","Name":"WESTWOOD HILLS APTS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"4a2c7521-162f-e811-8126-1458d04eb810","Name":"WESTWOOD BORO"
+      },"ultra_propertyportalsearchfield":"WESTWOOD HILLS APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a3cbd6a3-2bf8-47ff-b2e3-4ac2f1bf4b93","Name":"WESTWOOD HILLS HEKEMIAN CO INC"
+      },"ultra_zipcode":"07675","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"4","value":[
+    {
+      "ultra_buildingid":"e11e0d41-c966-ef11-bfe3-001dd808999f","ultra_name":"750 Walnut Ave - BLDG A","ultra_registrationnumber":"2003-00194-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"750 WALNUT AVE - BLDG A","ultra_block":"541","ultra_lot":"2.01","ultra_propertyinterest":{
+        "Id":"d8be0f2e-c966-ef11-bfe3-001dd808999f","Name":"750 Walnut Ave"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b42f7521-162f-e811-8126-1458d04eb810","Name":"CRANFORD TWP"
+      },"ultra_propertyportalsearchfield":"750 Walnut Ave","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"CRANFORD TWP","ultra_elsamaintenancecompany":{
+        "Id":"fb8b063b-c966-ef11-bfe3-001dd808999f","Name":"KONE INC."
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"dcbe0f2e-c966-ef11-bfe3-001dd808999f","Name":"750 WALNUT AVENUE RESIDENTIAL URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ad841747-23f9-ef11-9341-001dd80645bc","ultra_name":"750 WALNUT AVE - BLDG B","ultra_registrationnumber":"2003-00194-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"750 WALNUT AVE - BLDG B","ultra_block":"541","ultra_lot":"2.01","ultra_propertyinterest":{
+        "Id":"d8be0f2e-c966-ef11-bfe3-001dd808999f","Name":"750 Walnut Ave"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b42f7521-162f-e811-8126-1458d04eb810","Name":"CRANFORD TWP"
+      },"ultra_propertyportalsearchfield":"750 Walnut Ave","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"CRANFORD TWP","ultra_elsamaintenancecompany":{
+        "Id":"e78b063b-c966-ef11-bfe3-001dd808999f","Name":"KONE INC."
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"dcbe0f2e-c966-ef11-bfe3-001dd808999f","Name":"750 WALNUT AVENUE RESIDENTIAL URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c209eb8f-752e-ef11-840a-001dd80b3af2","ultra_name":"750 WALNUT AVE, BLDG A","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2003036771001","ultra_addressline1":"750 WALNUT AVE BLDG A","ultra_block":"541","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"84026b80-752e-ef11-840a-001dd808b262","Name":"750 WALNUT AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b42f7521-162f-e811-8126-1458d04eb810","Name":"CRANFORD TWP"
+      },"ultra_propertyportalsearchfield":"750 WALNUT AVE","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"CRANFORD TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6e026b80-752e-ef11-840a-001dd808b262","Name":"750 WALNUT AVENUE RESIDENTIAL URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07016","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"19eae6a1-752e-ef11-840a-001dd80b3af2","ultra_name":"750 WALNUT AVE, BLDG B","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2003036771002","ultra_addressline1":"750 WALNUT AVE BLDG B","ultra_block":"541","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"84026b80-752e-ef11-840a-001dd808b262","Name":"750 WALNUT AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b42f7521-162f-e811-8126-1458d04eb810","Name":"CRANFORD TWP"
+      },"ultra_propertyportalsearchfield":"750 WALNUT AVE","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"CRANFORD TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6e026b80-752e-ef11-840a-001dd808b262","Name":"750 WALNUT AVENUE RESIDENTIAL URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07016","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

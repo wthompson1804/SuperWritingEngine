@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"0d5163f0-e3ae-ed11-aad1-001dd807232c","ultra_name":"127 TALMAGE AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1804040804001","ultra_addressline1":"127 TALMAGE AVE","ultra_block":"23","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"f75063f0-e3ae-ed11-aad1-001dd807232c","Name":"127 TALMAGE AVE"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"5c2f7521-162f-e811-8126-1458d04eb810","Name":"BOUND BROOK BORO"
+      },"ultra_propertyportalsearchfield":"127 TALMAGE AVE","ultra_countyportalsearchfield":"SOMERSET","ultra_municipalityportalsearchfield":"BOUND BROOK BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6ea5e7c4-bf60-ef11-bfe3-001dd8065479","Name":"ATLANTIC PACIFIC PARTNERS URBAN  RENEWAL LLC"
+      },"ultra_zipcode":"08805","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"707defd2-a6f5-ed11-a7c6-001dd80726d6","ultra_name":"ATLANTIC PACIFIC PARTNERS URBAN RENEWAL LLC","ultra_registrationnumber":"1804-00142-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"127 TALMAGE AVE","ultra_block":"41.01","ultra_lot":"23","ultra_propertyinterest":{
+        "Id":"4f95f4cc-a6f5-ed11-a7c6-001dd80726d6","Name":"ATLANTIC PACIFIC PARTNERS URBAN RENEWAL LLC"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"5c2f7521-162f-e811-8126-1458d04eb810","Name":"BOUND BROOK BORO"
+      },"ultra_propertyportalsearchfield":"ATLANTIC PACIFIC PARTNERS URBAN RENEWAL LLC","ultra_countyportalsearchfield":"SOMERSET","ultra_municipalityportalsearchfield":"BOUND BROOK BORO","ultra_elsamaintenancecompany":{
+        "Id":"f0218d5b-5790-ee11-8179-001dd80bf0ab","Name":"East Coast llc"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8c227979-907c-f111-ab0e-001dd80be1b8","Name":"ATLANTIC PACIFIC PARTNERS URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

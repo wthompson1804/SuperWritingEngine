@@ -1,0 +1,265 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"18","value":[
+    {
+      "ultra_buildingid":"00ed4e4b-3ff2-f011-8407-001dd80bcb40","ultra_name":"1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0435019722003","ultra_addressline1":"100 JOHN HICKS AVENUE","ultra_block":"202","ultra_lot":"4.02","ultra_propertyinterest":{
+        "Id":"28185e3f-3ff2-f011-8407-001dd80bcb40","Name":"WOODLAND VIEW"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"e62c7521-162f-e811-8126-1458d04eb810","Name":"WATERFORD TWP"
+      },"ultra_propertyportalsearchfield":"WOODLAND VIEW","ultra_countyportalsearchfield":"CAMDEN","ultra_municipalityportalsearchfield":"WATERFORD TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ee545939-3ff2-f011-8407-001dd80bcb40","Name":"HAINES BOULEVARD HOUSING ASSOCIATES, LLC"
+      },"ultra_zipcode":"08004","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6cae22a3-d9e2-ee11-904d-001dd80a8cf0","ultra_name":"100","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0824030034001","ultra_addressline1":"100 FIDUCIOSO AVENUE","ultra_block":"2.09","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"57ae22a3-d9e2-ee11-904d-001dd80a8cf0","Name":"TAVISTOCK AT WOOLWICH"
+      },"ultra_county":{
+        "Id":"00f4aaf2-63e4-e711-8125-1458d054d020","Name":"GLOUCESTER"
+      },"ultra_municipality":{
+        "Id":"822d7521-162f-e811-8126-1458d04eb810","Name":"WOOLWICH TWP"
+      },"ultra_propertyportalsearchfield":"TAVISTOCK AT WOOLWICH","ultra_countyportalsearchfield":"GLOUCESTER","ultra_municipalityportalsearchfield":"WOOLWICH TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b72c239d-d9e2-ee11-904d-001dd80a8cf0","Name":"WOOLWICH HOUSING ASSOCIATES LLC"
+      },"ultra_zipcode":"08085","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6238a257-8af2-ee11-904c-001dd80a8012","ultra_name":"100 AVENUE G","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901042910001","ultra_addressline1":"100 AVENUE G","ultra_block":"451","ultra_lot":"1.02","ultra_propertyinterest":{
+        "Id":"6acaa44e-8af2-ee11-904b-001dd8066613","Name":"100 AVENUE G"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"100 AVENUE G","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"BAYONNE CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6f4136d0-bf1d-ef11-9f89-001dd80864a1","Name":"22ND STREET BAYONNE OWNER LLC"
+      },"ultra_zipcode":"07002","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b9cba9b2-f300-ec11-94ef-001dd802839a","ultra_name":"100 WILEY AVENUE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111040756001","ultra_addressline1":"100 WILEY AVENUE","ultra_block":"8705","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"31cba9b2-f300-ec11-94ef-001dd802839a","Name":"TURNER POINTE"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"TURNER POINTE","ultra_countyportalsearchfield":"MERCER","ultra_municipalityportalsearchfield":"TRENTON CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"150 ROSELLE AVE","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"60aaacac-f300-ec11-94ef-001dd802839a","Name":"HOUSING AUTHORITY OF THE CITY OF TRENTON"
+      },"ultra_zipcode":"08638","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5972a6be-f300-ec11-94ef-001dd802839a","ultra_name":"1100 WILEY AVENUE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1111040756010","ultra_addressline1":"1100 WILEY AVENUE","ultra_block":"8705","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"31cba9b2-f300-ec11-94ef-001dd802839a","Name":"TURNER POINTE"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"e42d7521-162f-e811-8126-1458d04eb810","Name":"TRENTON CITY"
+      },"ultra_propertyportalsearchfield":"TURNER POINTE","ultra_countyportalsearchfield":"MERCER","ultra_municipalityportalsearchfield":"TRENTON CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"150 ROSELLE AVE","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"60aaacac-f300-ec11-94ef-001dd802839a","Name":"HOUSING AUTHORITY OF THE CITY OF TRENTON"
+      },"ultra_zipcode":"08638","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"00a7b47c-e772-ec11-8f8e-001dd802067c","ultra_name":"2100 KERRIGAN","ultra_registrationnumber":"0910-00291-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2100 KERRIGAN AVENUE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"d659bc76-e772-ec11-8f8e-001dd802067c","Name":"2100 KERRIGAN"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"2100 KERRIGAN","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"UNION CITY (H)","ultra_elsamaintenancecompany":{
+        "Id":"e2a6b47c-e772-ec11-8f8e-001dd802067c","Name":"SCHINDLER ELEVATOR CORP"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e559bc76-e772-ec11-8f8e-001dd802067c","Name":"2100 KERRIGAN AVE UC LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"93102a60-44da-ee11-9078-001dd80b3d60","ultra_name":"3100 BERGENLINE AVENUE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0910042919001","ultra_addressline1":"3100 BERGENLINE AVENUE","ultra_block":"168.02","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"99d59659-44da-ee11-9078-001dd80b3d60","Name":"3100 BERGENLINE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"3100 BERGENLINE","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"UNION CITY (H)","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6dd59659-44da-ee11-9078-001dd80b3d60","Name":"BERGENLINE 3100, LLC"
+      },"ultra_zipcode":"07087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0fec3d95-eecf-ed11-b596-001dd807232c","ultra_name":"5100 HUDSON","ultra_registrationnumber":"0912-00267-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"5100 - 04 HUDSON AVENUE","ultra_block":"92","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"1fe2408f-eecf-ed11-b596-001dd807232c","Name":"5100 HUDSON"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":"5100 HUDSON","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"WEST NEW YORK TOWN","ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"38e2408f-eecf-ed11-b596-001dd807232c","Name":"5100 HUDSON WNY LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d664512d-7233-ed11-9daf-001dd8021d04","ultra_name":"APARTMENT BUILDINGS 1, 2, 3, 4, 5 & 6","ultra_registrationnumber":"1203-00114-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 SOUTH WASHINGTON AVENUE","ultra_block":"85","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"047f1d27-7233-ed11-9daf-001dd8021d04","Name":"THE NELL"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"f02d7521-162f-e811-8126-1458d04eb810","Name":"DUNELLEN BORO"
+      },"ultra_propertyportalsearchfield":"THE NELL","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"DUNELLEN BORO","ultra_elsamaintenancecompany":{
+        "Id":"01b8940c-f652-e811-8229-1458d04e1b18","Name":"Kone North"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0a7f1d27-7233-ed11-9daf-001dd8021d04","Name":"DUNELLEN PRISM ASSOCIATES URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"94c25a29-7a57-ec11-8f8e-001dd80234c8","ultra_name":"BUILDING B","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2001036117002","ultra_addressline1":"100 LOCUST AVENUE","ultra_block":"1901","ultra_lot":"35","ultra_propertyinterest":{
+        "Id":"ddbfc207-7a57-ec11-8f8e-001dd8023505","Name":"WOODCREST AT BERKELEY HEIGHTS"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b02f7521-162f-e811-8126-1458d04eb810","Name":"BERKELEY HEIGHTS TWP"
+      },"ultra_propertyportalsearchfield":"WOODCREST AT BERKELEY HEIGHTS","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"BERKELEY HEIGHTS TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cbbfc207-7a57-ec11-8f8e-001dd8023505","Name":"LOCUST BERKELEY DEVELOPERS URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07922","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7bfa6190-014d-40de-b047-ce4d9bb24981","ultra_name":"GREATER ESSEX SOBER LIVING","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 GLENWOOD AVENUE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"3ef7f244-b5e0-41ea-a6a0-cf82a7588e57","Name":"GREATER ESSEX SOBER LIVING"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"07017","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4238db75-e408-4eaa-86dc-d97560116c6b","ultra_name":"RIVERHOUSE 11 AVENUE AT PORT IMPERIAL BLDG RH11","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0911042741001","ultra_addressline1":"1100 Avenue at Port Imperial ","ultra_block":"64.01","ultra_lot":"1.05","ultra_propertyinterest":{
+        "Id":"45df942a-4e88-466b-96a6-09e9b35e3ebb","Name":"RIVERHOUSE 11 AVENUE AT PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"RIVERHOUSE 11 AVENUE AT PORT IMPERIAL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b83e5078-18aa-ec11-b3fe-001dd8030c93","Name":"PORT IMPERIAL SOUTH 11 URBAN RENEWAL, L.L.C"
+      },"ultra_zipcode":"07086","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"490df0c8-c3e9-e811-812c-1458d04e2f20","ultra_name":"RIVERHOUSE II","ultra_registrationnumber":"0911-00171-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1100 AVENUE @ PORT IMPERIAL","ultra_block":"64.01","ultra_lot":"1.05","ultra_propertyinterest":{
+        "Id":"2d0df0c8-c3e9-e811-812c-1458d04e2f20","Name":"RIVERHOUSE II"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"RIVERHOUSE II","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"WEEHAWKEN TWP","ultra_elsamaintenancecompany":{
+        "Id":"e6f35a6d-d27b-e811-8106-1458d04e0ca0","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"310df0c8-c3e9-e811-812c-1458d04e2f20","Name":"PORT IMPERIAL SOUTH II C/O ROSELAND"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e7c80345-06ed-f011-8406-001dd8008d46","ultra_name":"SHELTER HARBOR CONDO ASSOCIATION","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1503040047001","ultra_addressline1":"1100 N. BAY AVENUE","ultra_block":"204","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"bdc80345-06ed-f011-8406-001dd8008d46","Name":"SHELTER HARBOR CONDOS"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"da2e7521-162f-e811-8126-1458d04eb810","Name":"BEACH HAVEN BORO"
+      },"ultra_propertyportalsearchfield":"SHELTER HARBOR CONDOS","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"BEACH HAVEN BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"20b50d3f-06ed-f011-8406-001dd8008d46","Name":"SHELTER HARBOR CONDOMINIUM ASSN"
+      },"ultra_zipcode":"08008","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"44c90345-06ed-f011-8406-001dd8008d46","ultra_name":"SHELTER HARBOR CONDO ASSOCIATION","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1503040047002","ultra_addressline1":"1100 N. BAY AVENUE","ultra_block":"207","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"bdc80345-06ed-f011-8406-001dd8008d46","Name":"SHELTER HARBOR CONDOS"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"da2e7521-162f-e811-8126-1458d04eb810","Name":"BEACH HAVEN BORO"
+      },"ultra_propertyportalsearchfield":"SHELTER HARBOR CONDOS","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"BEACH HAVEN BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"20b50d3f-06ed-f011-8406-001dd8008d46","Name":"SHELTER HARBOR CONDOMINIUM ASSN"
+      },"ultra_zipcode":"08008","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d7902c9b-cd79-ef11-a670-001dd80afdfc","ultra_name":"THE BABAY HOMES","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1201040125001","ultra_addressline1":"100 JACKSON AVENUE","ultra_block":"3601","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"c3902c9b-cd79-ef11-a670-001dd80afdfc","Name":"THE BABAY HOMES"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"ec2d7521-162f-e811-8126-1458d04eb810","Name":"CARTERET BORO"
+      },"ultra_propertyportalsearchfield":"THE BABAY HOMES","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"CARTERET BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8aaff894-cd79-ef11-a670-001dd80afdfc","Name":"JACKSON AVE HOMES LLC"
+      },"ultra_zipcode":"08820","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e74b5e31-c5c4-ed11-83ff-001dd8070a7e","ultra_name":"THE JOURNALIST","ultra_registrationnumber":"0906-01202-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 TUERS AVENUE","ultra_block":"12203","ultra_lot":"20.01","ultra_propertyinterest":{
+        "Id":"984b5e31-c5c4-ed11-83ff-001dd8070a7e","Name":"THE JOURNALIST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"THE JOURNALIST","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ad4b5e31-c5c4-ed11-83ff-001dd8070a7e","Name":"100 TUERS AVENUE ASSOCIATES LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ffbefeda-d72f-e811-8122-1458d04ece60","ultra_name":"WEST PARKING GARAGE","ultra_registrationnumber":"1424-00143-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 MADISON AVENUE","ultra_block":"4201","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"29299443-9a2f-e811-8122-1458d04ece60","Name":"JCP&L PARKING GARAGE"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b62e7521-162f-e811-8126-1458d04eb810","Name":"MORRISTOWN TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f2adafd8-b42f-e811-8122-1458d04ece60","Name":"ATLANTIC HEALTH"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"10","value":[
+    {
+      "ultra_buildingid":"a3555d6f-d72f-e811-8122-1458d04ece60","ultra_name":"142 JOHN ST","ultra_registrationnumber":"0223-00374-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"142 JOHN ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"e57ae59f-9f2f-e811-8120-1458d04e2fb8","Name":"142 JOHN ST"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"22c0e2ae-b42f-e811-8122-1458d04ece60","Name":"JOHN ST REALTY LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ee608bea-f9f5-4cfd-a78a-f2212534f162","ultra_name":"142 JOHNSON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714025458001","ultra_addressline1":"142 JOHNSON AVE","ultra_block":"2699","ultra_lot":"59","ultra_propertyinterest":{
+        "Id":"6d62423a-8aa1-4c2f-ae60-cf895adbae12","Name":"142 JOHNSON AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"142 JOHNSON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"76beb426-e337-f011-8c4e-001dd80bcb64","Name":"142 JOHNSON HOLDINGS LLC"
+      },"ultra_zipcode":"07103","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a88e0fec-eec9-49aa-a611-9728e2c3924b","ultra_name":"142 JOHNSTON AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0907014120001","ultra_addressline1":"142 JOHNSTON AVE","ultra_block":"4","ultra_lot":"10","ultra_propertyinterest":{
+        "Id":"ddfe0a53-5e03-45ea-b34a-1c2a3d29c368","Name":"142 JOHNSTON AVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"902d7521-162f-e811-8126-1458d04eb810","Name":"KEARNY TOWN"
+      },"ultra_propertyportalsearchfield":"142 JOHNSTON AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1dc2ef0c-90a3-454b-a837-93f8e6abbc65","Name":"DANIEL ROCHA"
+      },"ultra_zipcode":"07032","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fa439ee6-4ba1-43dd-a17e-ca690872d975","ultra_name":"342 JOHN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0902003792001","ultra_addressline1":"342 JOHN ST","ultra_block":"1562","ultra_lot":"18","ultra_propertyinterest":{
+        "Id":"0caeaf57-8a7a-47df-919f-537d57d0481d","Name":"342 JOHN ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"862d7521-162f-e811-8126-1458d04eb810","Name":"EAST NEWARK BORO"
+      },"ultra_propertyportalsearchfield":"342 JOHN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5b3bcb37-b790-eb11-a812-001dd801c813","Name":"MICHAEL MANCINI"
+      },"ultra_zipcode":"07092","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ee024b31-9a8c-4ad1-be63-5b2051988f93","ultra_name":"40-42 JOHNSON ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714022513001","ultra_addressline1":"40-42 JOHNSON ST","ultra_block":"923","ultra_lot":"11.20","ultra_propertyinterest":{
+        "Id":"9a82f75a-663d-4c22-be96-dbddc7adc230","Name":"40-42 JOHNSON ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"40-42 JOHNSON ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"68aeeee2-dcfa-f011-8407-001dd808439e","Name":"38-40 JOHNSON ST LLC"
+      },"ultra_zipcode":"07105","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d6f1be98-6e56-4e3a-8fbb-b4f1d28a3e1e","ultra_name":"442 JOHN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0902026817001","ultra_addressline1":"442 JOHN ST","ultra_block":"10","ultra_lot":"45","ultra_propertyinterest":{
+        "Id":"80f1eb2f-6852-47d2-9be1-274f222bcabd","Name":"442 JOHN ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"862d7521-162f-e811-8126-1458d04eb810","Name":"EAST NEWARK BORO"
+      },"ultra_propertyportalsearchfield":"442 JOHN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2f89cd4b-56a2-ed11-aad0-001dd8070ecc","Name":"NINE MFP REALTY LLC"
+      },"ultra_zipcode":"07029","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6304679b-6089-419c-872d-dbb125f0075e","ultra_name":"942 JOHNSON PL BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2019006139001","ultra_addressline1":"942 JOHNSON PL","ultra_block":"2901","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"3df3405f-68c4-4ea0-aa58-50acd7bb6e34","Name":"942 JOHNSON PL"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d42f7521-162f-e811-8126-1458d04eb810","Name":"UNION TWP (U)"
+      },"ultra_propertyportalsearchfield":"942 JOHNSON PL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"31-35 ELMWOOD AVE","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0b79631e-9687-4d41-a1b8-447d9a5be65f","Name":"85 ROSE LLC"
+      },"ultra_zipcode":"07083","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7e1ac86c-dd72-f011-bec3-001dd80a623a","ultra_name":"BLDG 42 JOHN ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0702042620005","ultra_addressline1":"42 JOHN ST","ultra_block":"482","ultra_lot":"62","ultra_propertyinterest":{
+        "Id":"2aabf9dc-fe42-f011-877a-001dd80340cd","Name":"BLOOMFIELD COMMONS CONDOS"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"2a2d7521-162f-e811-8126-1458d04eb810","Name":"BLOOMFIELD TOWN"
+      },"ultra_propertyportalsearchfield":"BLOOMFIELD COMMONS CONDOS","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"BLOOMFIELD TOWN","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0533ce5a-dd72-f011-bec3-001dd80a623a","Name":"Bloomfield Commons Condominium Association, Inc."
+      },"ultra_zipcode":"07003","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f48f776d-7ae2-f011-8544-001dd80a6c87","ultra_name":"JOHNSTON RESERVE","ultra_registrationnumber":"0906-01315-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"342 JOHNSTON AVE","ultra_block":"17506","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"78688c60-7ae2-f011-8544-001dd80a6c87","Name":"JOHNSTON RESERVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"JOHNSTON RESERVE","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f2217867-7ae2-f011-8544-001dd80a6c87","Name":"342 JOHNSTON EQUITIES LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3512bd95-b511-f111-8406-001dd812f02c","ultra_name":"JOHNSTON RESERVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906043577001","ultra_addressline1":"342 JOHNSTON AVE","ultra_block":"17506","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"8b3bcc89-b511-f111-8406-001dd812f02c","Name":"JOHNSTON RESERVE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"JOHNSTON RESERVE","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"JERSEY CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5c3bcc89-b511-f111-8406-001dd812f02c","Name":"342 JOHNSTON EQUITIES LLC"
+      },"ultra_zipcode":"07305","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

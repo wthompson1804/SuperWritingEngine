@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"106bb77d-745b-f111-bec5-001dd80be1b8","ultra_name":"691 CLIFTON AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1602040673001","ultra_addressline1":"691 CLIFTON AVE","ultra_block":"30.01","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"31956d72-745b-f111-bec6-001dd80c29f3","Name":"691 CLIFTON AVE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"1a2f7521-162f-e811-8126-1458d04eb810","Name":"CLIFTON CITY"
+      },"ultra_propertyportalsearchfield":"691 CLIFTON AVE","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"CLIFTON CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ec946d72-745b-f111-bec6-001dd80c29f3","Name":"691 CLIFTON AVENUE OWNER LLC"
+      },"ultra_zipcode":"07001","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5bf5f939-11c8-ed11-b597-001dd80704a5","ultra_name":"CLIFTON STATION APARTMENTS","ultra_registrationnumber":"1602-00296-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"691 CLIFTON AVENUE","ultra_block":"30.01","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"3df4f939-11c8-ed11-b597-001dd80704a5","Name":"CLIFTON STATION APARTMENTS"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"1a2f7521-162f-e811-8126-1458d04eb810","Name":"CLIFTON CITY"
+      },"ultra_propertyportalsearchfield":"CLIFTON STATION APARTMENTS","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"CLIFTON CITY","ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"42f4f939-11c8-ed11-b597-001dd80704a5","Name":"KEVIN CODEY"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

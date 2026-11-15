@@ -1,0 +1,33 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"7ddcde22-3a2b-4adc-926c-5620e4faa064","ultra_name":"CLIFTON CORP STES","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1602034424001","ultra_addressline1":"743 PASSAIC AVE","ultra_block":"71.01","ultra_lot":"46","ultra_propertyinterest":{
+        "Id":"c0c67251-a284-4218-9a28-d189b4063ccb","Name":"THE AVE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"1a2f7521-162f-e811-8126-1458d04eb810","Name":"CLIFTON CITY"
+      },"ultra_propertyportalsearchfield":"THE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ca1670a5-6768-ee11-9ae6-001dd8065b31","Name":"KCI CLIFTON OWNERCO, LP"
+      },"ultra_zipcode":"07012","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b5e37ce0-d72f-e811-8122-1458d04ece60","ultra_name":"TKV CLIFTON","ultra_registrationnumber":"1602-00235-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"743 PASSAIC AVE","ultra_block":"71.01","ultra_lot":"46","ultra_propertyinterest":{
+        "Id":"c7349443-9a2f-e811-8122-1458d04ece60","Name":"TKV CLIFTON"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"1a2f7521-162f-e811-8126-1458d04eb810","Name":"CLIFTON CITY"
+      },"ultra_propertyportalsearchfield":"TKV CLIFTON","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"CLIFTON CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"317997e8-b42f-e811-8122-1458d04ece60","Name":"TKV CLIFTON, LP"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

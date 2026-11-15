@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"3754d497-7b15-44ad-b76b-640a7d8d9a8b","ultra_name":"316-318 AVENUE C BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901029108001","ultra_addressline1":"316-318 AVENUE C ","ultra_block":"264","ultra_lot":"36","ultra_propertyinterest":{
+        "Id":"666e0003-c408-44aa-8845-5399a17a0458","Name":"316-318 AVENUE C"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"316-318 AVENUE C","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5e25ca9f-2ea9-40aa-bc83-f7e556ebb591","Name":"TAHIR MAHWOOD ALI"
+      },"ultra_zipcode":"07002","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"23d343fe-7904-ee11-8f6d-001dd803e07c","ultra_name":"LOFTS ON AVENUE E-440","ultra_registrationnumber":"0901-00301-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"318 AVENUE E","ultra_block":"440","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"aad243fe-7904-ee11-8f6d-001dd803e07c","Name":"LOFTS ON AVENUE E-440"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"LOFTS ON AVENUE E-440","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"BAYONNE CITY","ultra_elsamaintenancecompany":{
+        "Id":"6ec12f26-f589-e811-810d-1458d04e2c70","Name":"SCHINDLER"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b6d243fe-7904-ee11-8f6d-001dd803e07c","Name":"LOFTS ON AVENUE E, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

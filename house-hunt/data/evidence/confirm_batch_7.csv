@@ -1,0 +1,143 @@
+addr_key,fact,value,quote,source_url,status
+333 state st|06604,elevator,yes,"Elevator (Interior Features: Levels, Entrance, & Accessibility)",https://www.trulia.com/building/333-state-st-333-state-st-bridgeport-ct-06604-1002139313,confirmed
+333 state st|06604,floor,unit 604: 6,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/333-state-st-333-state-st-bridgeport-ct-06604-1002139313,unconfirmed
+333 state st|06604,dogs_allowed,yes,"Dogs: Allowed; Size allowed: Small, large",https://www.trulia.com/building/333-state-st-333-state-st-bridgeport-ct-06604-1002139313,confirmed
+333 state st|06604,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'; own site: not found (searches return listing sites only)",https://www.trulia.com/building/333-state-st-333-state-st-bridgeport-ct-06604-1002139313,unconfirmed
+100 reserve rd|06810,elevator,yes,"Elevator (Interior Features: Levels, Entrance, & Accessibility)",https://www.trulia.com/building/residences-at-the-summit-100-reserve-rd-danbury-ct-06810-2751605456,confirmed
+100 reserve rd|06810,floor,unit M2-07: 2,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/residences-at-the-summit-100-reserve-rd-danbury-ct-06810-2751605456,unconfirmed
+100 reserve rd|06810,floor,unit M4-22: 4,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/residences-at-the-summit-100-reserve-rd-danbury-ct-06810-2751605456,unconfirmed
+100 reserve rd|06810,dogs_allowed,yes,"Dogs: Allowed; Size allowed: Small, large",https://www.trulia.com/building/residences-at-the-summit-100-reserve-rd-danbury-ct-06810-2751605456,confirmed
+100 reserve rd|06810,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'",https://www.trulia.com/building/residences-at-the-summit-100-reserve-rd-danbury-ct-06810-2751605456,unconfirmed
+50 derby ave|06418,elevator,unconfirmed,no elevator listed on: https://www.trulia.com/building/franklin-school-lofts-50-derby-ave-derby-ct-06418-2776764321 ; https://www.bluebrookproperties.com/franklin-school-lofts,https://www.trulia.com/building/franklin-school-lofts-50-derby-ave-derby-ct-06418-2776764321,unconfirmed
+50 derby ave|06418,floor,unit 51-A: unknown,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/franklin-school-lofts-50-derby-ave-derby-ct-06418-2776764321,unconfirmed
+50 derby ave|06418,dogs_allowed,yes,"Dogs: Allowed; Size allowed: Small, large",https://www.trulia.com/building/franklin-school-lofts-50-derby-ave-derby-ct-06418-2776764321,confirmed
+50 derby ave|06418,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'",https://www.trulia.com/building/franklin-school-lofts-50-derby-ave-derby-ct-06418-2776764321,unconfirmed
+1-5 schooner ln|06460,elevator,select buildings only,"private and controlled access entries, covered parking and an elevator. Additional features vary by unit ... *Elevator Access",https://paredimcommunities.com/communities/spinnaker-wharf/,unconfirmed
+1-5 schooner ln|06460,floor,unit 5-02E: unknown,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/milford-city/spinnaker-wharf-apartments--1,unconfirmed
+1-5 schooner ln|06460,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/milford-city/spinnaker-wharf-apartments--1,confirmed
+1-5 schooner ln|06460,dog_weight_limit,"limit exists, number missing from the page",A pound maximum weight limit per pet will be strictly enforced.,https://www.apartmentlist.com/ct/milford-city/spinnaker-wharf-apartments--1,unconfirmed
+1 avalon dr|06460,elevator,unconfirmed,"no elevator listed on: https://www.apartmentlist.com/ct/milford-city/merion-milford (own site: HTTP 403 (bot wall), not read)",https://www.apartmentlist.com/ct/milford-city/merion-milford,unconfirmed
+1 avalon dr|06460,floor,unit 7211: 2,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/milford-city/merion-milford,unconfirmed
+1 avalon dr|06460,floor,unit 1133: 1,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/milford-city/merion-milford,unconfirmed
+1 avalon dr|06460,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/milford-city/merion-milford,confirmed
+1 avalon dr|06460,dog_weight_limit,not stated,"no weight limit stated on the listing page; own site: HTTP 403 (bot wall), not read",https://www.apartmentlist.com/ct/milford-city/merion-milford,unconfirmed
+158 cherry st|06460,elevator,yes,Elevator (amenity list),https://www.apartmentlist.com/ct/milford-city/spinnaker-brook,confirmed
+158 cherry st|06460,floor,unit 158-2L: 2,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/milford-city/spinnaker-brook,unconfirmed
+158 cherry st|06460,floor,unit 158-2H: 2,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/milford-city/spinnaker-brook,unconfirmed
+158 cherry st|06460,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/milford-city/spinnaker-brook,confirmed
+158 cherry st|06460,dog_weight_limit,30,"Pet Policy: Two pets/unit, 30 lbs max weight, breed and additional deposits apply",https://www.trulia.com/building/spinnaker-brook-158-cherry-st-milford-ct-06460-2744859506,confirmed
+467 w ave|06850,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/norwalk/piper,confirmed
+467 w ave|06850,floor,unit 3012: 3,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/norwalk/piper,unconfirmed
+467 w ave|06850,floor,unit 1013: 1,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/norwalk/piper,unconfirmed
+467 w ave|06850,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/norwalk/piper,confirmed
+467 w ave|06850,dogs_allowed,no (Trulia),Dogs: Not allowed (Trulia building page; the Apartment List page for the same building lists dogs as allowed),https://www.trulia.com/building/piper-467-west-ave-norwalk-ct-06850-2753811727,contradicts
+467 w ave|06850,dog_weight_limit,not stated,no weight limit stated on the listing page,https://www.trulia.com/building/piper-467-west-ave-norwalk-ct-06850-2753811727,unconfirmed
+515 w ave|06850,elevator,yes,Yes. The Waypointe provides elevator access in all buildings.,https://www.thewaypointe.com/faq/,confirmed
+515 w ave|06850,floor,unit MB128: 1,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/norwalk/the-waypointe-apartments,unconfirmed
+515 w ave|06850,floor,unit MB232: 2,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/norwalk/the-waypointe-apartments,unconfirmed
+515 w ave|06850,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/norwalk/the-waypointe-apartments,confirmed
+515 w ave|06850,dog_weight_limit,100,"Pet Policy: Limit 2, maximum weight of 100lbs, $500 one time non-refundable fee, $40/mo per cat and $70/mo per dog",https://www.trulia.com/building/the-waypointe-515-west-ave-norwalk-ct-06850-1009251582,confirmed
+26 belden ave|06850,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/norwalk/the-confluence-at-norwalk,confirmed
+26 belden ave|06850,floor,unit 2318: 3,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/norwalk/the-confluence-at-norwalk,unconfirmed
+26 belden ave|06850,floor,unit 2140: 1,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/norwalk/the-confluence-at-norwalk,unconfirmed
+26 belden ave|06850,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/norwalk/the-confluence-at-norwalk,confirmed
+26 belden ave|06850,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'; own site: HTTP 403 (bot wall), not read",https://www.trulia.com/building/the-confluence-at-norwalk-26-belden-ave-norwalk-ct-06850-1001813470,unconfirmed
+101 washington st|06854,elevator,yes,"Elevator (Interior Features: Levels, Entrance, & Accessibility)",https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032,confirmed
+101 washington st|06854,floor,unit 313: 3,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032,unconfirmed
+101 washington st|06854,floor,unit 401: 4,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032,unconfirmed
+101 washington st|06854,dogs_allowed,yes,Dogs: Allowed; Size allowed: Small,https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032,confirmed
+101 washington st|06854,dog_weight_limit,"small dogs only, number not stated",Dogs: Allowed; Number allowed: 1; Size allowed: Small,https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032,unconfirmed
+8 norden pl|06855,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/norwalk/halstead-norwalk,confirmed
+8 norden pl|06855,floor,unit 212: 2,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/norwalk/halstead-norwalk,unconfirmed
+8 norden pl|06855,floor,unit 310: 3,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/norwalk/halstead-norwalk,unconfirmed
+8 norden pl|06855,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/norwalk/halstead-norwalk,confirmed
+8 norden pl|06855,dogs_allowed,no (Trulia),Dogs: Not allowed (Trulia building page; the Apartment List page for the same building lists dogs as allowed),https://www.trulia.com/building/halstead-norwalk-8-norden-pl-norwalk-ct-06855-1001652613,contradicts
+8 norden pl|06855,dog_weight_limit,not stated,no weight limit stated on the listing page,https://www.trulia.com/building/halstead-norwalk-8-norden-pl-norwalk-ct-06855-1001652613,unconfirmed
+75 tresser blvd|06901,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/stamford/75-tresser,confirmed
+75 tresser blvd|06901,floor,unit 421: 4,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/75-tresser,unconfirmed
+75 tresser blvd|06901,floor,unit 521: 5,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/75-tresser,unconfirmed
+75 tresser blvd|06901,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/stamford/75-tresser,confirmed
+75 tresser blvd|06901,dog_weight_limit,"limit exists, number not published","Yes, 75 Tresser is a pet-friendly community. Breed restrictions, weight limits, and pet fees apply.",https://www.75tresser.com/faqs/,unconfirmed
+1340 washington blvd|06902,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/stamford/parallel-41--1,confirmed
+1340 washington blvd|06902,floor,unit 217: 2,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/parallel-41--1,unconfirmed
+1340 washington blvd|06902,floor,unit 323: 3,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/parallel-41--1,unconfirmed
+1340 washington blvd|06902,dogs_allowed,yes,Dogs allowed (amenity list),https://www.apartmentlist.com/ct/stamford/parallel-41--1,confirmed
+1340 washington blvd|06902,dog_weight_limit,65,65 lb Weight Limit 2 Pet Limit Some Breed Restrictions,https://www.trulia.com/building/parallel-41-1340-washington-blvd-stamford-ct-06902-1002385434,confirmed
+355 atlantic st|06901,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/stamford/atlantic-station,confirmed
+355 atlantic st|06901,floor,unit 23A: 23,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/atlantic-station,unconfirmed
+355 atlantic st|06901,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/stamford/atlantic-station,confirmed
+355 atlantic st|06901,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'",https://www.trulia.com/building/atlantic-station-355-atlantic-st-stamford-ct-06901-2747974504,unconfirmed
+1455 washington blvd|06902,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/stamford/stamford-corners,confirmed
+1455 washington blvd|06902,floor,unit 341: 3,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/stamford-corners,unconfirmed
+1455 washington blvd|06902,dogs_allowed,yes,Dogs allowed (amenity list),https://www.apartmentlist.com/ct/stamford/stamford-corners,confirmed
+1455 washington blvd|06902,dogs_allowed,no (Trulia),Dogs: Not allowed (Trulia building page; the Apartment List page for the same building lists dogs as allowed),https://www.trulia.com/building/stamford-corners-1455-washington-blvd-stamford-ct-06902-1001522631,contradicts
+1455 washington blvd|06902,dog_weight_limit,not stated,"no weight limit stated on the listing page; own site: HTTP 403 (bot wall), not read",https://www.trulia.com/building/stamford-corners-1455-washington-blvd-stamford-ct-06902-1001522631,unconfirmed
+750 summer st|06901,elevator,yes,"Elevator (Interior Features: Levels, Entrance, & Accessibility)",https://www.trulia.com/building/750-summer-street-750-summer-st-stamford-ct-06901-1045077069,confirmed
+750 summer st|06901,floor,unit 603: 6,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/750-summer-street-750-summer-st-stamford-ct-06901-1045077069,unconfirmed
+750 summer st|06901,dogs_allowed,yes,"Dogs: Allowed; Size allowed: Small, large",https://www.trulia.com/building/750-summer-street-750-summer-st-stamford-ct-06901-1045077069,confirmed
+750 summer st|06901,dog_weight_limit,75,Weight limit (lbs.): 75,https://www.trulia.com/building/750-summer-street-750-summer-st-stamford-ct-06901-1045077069,confirmed
+44 john st|06902,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/stamford/the-hazel,confirmed
+44 john st|06902,floor,unit 203: 2,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/the-hazel,unconfirmed
+44 john st|06902,floor,unit 324: 3,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/the-hazel,unconfirmed
+44 john st|06902,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/stamford/the-hazel,confirmed
+44 john st|06902,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'",https://www.trulia.com/building/the-hazel-stamford-44-john-st-stamford-ct-06902-2764583694,unconfirmed
+66 glenbrook rd|06902,elevator,yes,"Elevator (Interior Features: Levels, Entrance, & Accessibility)",https://www.trulia.com/building/parc-at-glenbrook-apartments-66-glenbrook-rd-stamford-ct-06902-1001933587,confirmed
+66 glenbrook rd|06902,floor,unit 2328: 3,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/parc-at-glenbrook-apartments-66-glenbrook-rd-stamford-ct-06902-1001933587,unconfirmed
+66 glenbrook rd|06902,dogs_allowed,yes,"Dogs: Allowed; Size allowed: Small, large",https://www.trulia.com/building/parc-at-glenbrook-apartments-66-glenbrook-rd-stamford-ct-06902-1001933587,confirmed
+66 glenbrook rd|06902,dog_weight_limit,40,Dogs Allowed: Breed Restriction and Weight Restriction of 40lbs.,https://parcatglenbrook.com/about/,confirmed
+150 southfield ave|06902,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/stamford/tgm-anchor-point,confirmed
+150 southfield ave|06902,floor,unit 1109: 1,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/tgm-anchor-point,unconfirmed
+150 southfield ave|06902,floor,unit 1323: 3,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/tgm-anchor-point,unconfirmed
+150 southfield ave|06902,dogs_allowed,yes,"allowed pets: birds, cats, dogs, fish",https://www.apartmentlist.com/ct/stamford/tgm-anchor-point,confirmed
+150 southfield ave|06902,dog_weight_limit,"limit exists, number not published",Weight and breed restrictions apply. Please call for details.,https://www.apartmentlist.com/ct/stamford/tgm-anchor-point,unconfirmed
+184 summer st|06901,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/stamford/summer-house--1,confirmed
+184 summer st|06901,floor,unit 0807: 8,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/summer-house--1,unconfirmed
+184 summer st|06901,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/stamford/summer-house--1,confirmed
+184 summer st|06901,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'",https://www.trulia.com/building/summer-house-apartments-184-summer-st-stamford-ct-06901-2750808731,unconfirmed
+201 broad st|06901,elevator,yes,Elevator Access,https://canterburygreenapartments.com/,confirmed
+201 broad st|06901,building_floors,14,A 14-story mixed-use office and apartment building in downtown Stamford has sold for $25 million,https://hartfordbusiness.com/article/mixed-use-stamford-office-apartment-tower-sells-for-25m/,confirmed
+201 broad st|06901,floor,"unit 2204: 2 (ambiguous: tower 2, floor 2; the building has 14 storeys)",inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stamford/canterbury-green--2,unconfirmed
+201 broad st|06901,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/stamford/canterbury-green--2,confirmed
+201 broad st|06901,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'",https://www.trulia.com/building/canterbury-green-201-broad-st-stamford-ct-06901-1037829552,unconfirmed
+545 bedford st|06901,elevator,yes,Rack 'em up for game night just an elevator ride from your door.,https://www.bedfordhallapartments.com/,confirmed
+545 bedford st|06901,floor,unit 516: 5,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/bedford-hall-apartments-545-bedford-st-stamford-ct-06901-2742140126,unconfirmed
+545 bedford st|06901,dogs_allowed,yes,"Dogs: Allowed; Size allowed: Small, large",https://www.trulia.com/building/bedford-hall-apartments-545-bedford-st-stamford-ct-06901-2742140126,confirmed
+545 bedford st|06901,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'",https://www.trulia.com/building/bedford-hall-apartments-545-bedford-st-stamford-ct-06901-2742140126,unconfirmed
+1000 avalon way|06614,elevator,unconfirmed,"no elevator listed on: https://www.apartmentlist.com/ct/stratford/merion-stratford (own site: HTTP 403 (bot wall), not read)",https://www.apartmentlist.com/ct/stratford/merion-stratford,unconfirmed
+1000 avalon way|06614,floor,unit 1104: 1,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stratford/merion-stratford,unconfirmed
+1000 avalon way|06614,floor,unit 4304: 3,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/stratford/merion-stratford,unconfirmed
+1000 avalon way|06614,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/stratford/merion-stratford,confirmed
+1000 avalon way|06614,dog_weight_limit,not stated,"no weight limit stated on the listing page; own site: HTTP 403 (bot wall), not read",https://www.apartmentlist.com/ct/stratford/merion-stratford,unconfirmed
+100 avalon gates|06611,elevator,yes,Elevator (also listed on the Trulia building page),https://www.apartmentlist.com/ct/trumbull/the-royce-at-trumbull,confirmed
+100 avalon gates|06611,floor,unit 4234: 2,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/trumbull/the-royce-at-trumbull,unconfirmed
+100 avalon gates|06611,floor,unit 9114: 1,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/trumbull/the-royce-at-trumbull,unconfirmed
+100 avalon gates|06611,dogs_allowed,yes,Dogs allowed (amenity list),https://www.apartmentlist.com/ct/trumbull/the-royce-at-trumbull,confirmed
+100 avalon gates|06611,dog_weight_limit,no limit,"There are no weight limits for dogs, but we do have breed restrictions.",https://www.royceattrumbull.com/pet-policya5b776fb,confirmed
+2300 reservoir ave|06611,elevator,unconfirmed,no elevator listed on: https://www.apartmentlist.com/ct/trumbull/woodside-trumbull ; https://www.trulia.com/building/woodside-trumbull-100-woodside-ct-trumbull-ct-06611-2750920248 ; https://woodsidetrumbull.com/,https://www.apartmentlist.com/ct/trumbull/woodside-trumbull,unconfirmed
+2300 reservoir ave|06611,floor,unit 9210: 2,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/trumbull/woodside-trumbull,unconfirmed
+2300 reservoir ave|06611,floor,unit 8311: 3,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/ct/trumbull/woodside-trumbull,unconfirmed
+2300 reservoir ave|06611,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/ct/trumbull/woodside-trumbull,confirmed
+2300 reservoir ave|06611,dog_weight_limit,"limit exists, number not published","Yes, Woodside Trumbull is a pet-friendly community. Breed restrictions, weight limits, and pet fees apply.",https://woodsidetrumbull.com/faqs/,unconfirmed
+33 aberdeen rd|07747,elevator,unconfirmed,"no elevator listed on: https://www.apartmentlist.com/nj/matawan/tree-haven-apartments ; https://www.trulia.com/building/tree-haven-33-aberdeen-rd-aberdeen-nj-07747-1045891266 (own site: HTTP 403 (bot wall), not read)",https://www.apartmentlist.com/nj/matawan/tree-haven-apartments,unconfirmed
+33 aberdeen rd|07747,building_floors,2,thick black smoke curling upward from under the roof of the two-story brick building,https://nj1015.com/woman-dies-after-apartment-building-fire-in-aberdeen-nj/,confirmed
+33 aberdeen rd|07747,floor,unit 31B: unknown,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/nj/matawan/tree-haven-apartments,unconfirmed
+33 aberdeen rd|07747,dogs_allowed,yes,Dogs allowed (amenity list),https://www.apartmentlist.com/nj/matawan/tree-haven-apartments,confirmed
+33 aberdeen rd|07747,dog_weight_limit,80,Weight limit (lbs.): 80 ... Restrictions: 50 lb. restriction for Greyhounds,https://www.trulia.com/building/tree-haven-33-aberdeen-rd-aberdeen-nj-07747-1045891266,confirmed
+1101 schindler dr|07747,elevator,unconfirmed,"no elevator listed on: https://www.apartmentlist.com/nj/matawan/the-link-at-aberdeen-station ; https://www.trulia.com/building/the-link-at-aberdeen-station-1101-schindler-dr-aberdeen-nj-07747-2734220747 (own site: HTTP 403 (bot wall), not read)",https://www.apartmentlist.com/nj/matawan/the-link-at-aberdeen-station,unconfirmed
+1101 schindler dr|07747,floor,unit 5102: 1,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/nj/matawan/the-link-at-aberdeen-station,unconfirmed
+1101 schindler dr|07747,floor,unit 1213: 2,inferred from the unit number only; the page does not state the floor,https://www.apartmentlist.com/nj/matawan/the-link-at-aberdeen-station,unconfirmed
+1101 schindler dr|07747,dogs_allowed,yes,"allowed pets: cats, dogs",https://www.apartmentlist.com/nj/matawan/the-link-at-aberdeen-station,confirmed
+1101 schindler dr|07747,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'; own site: HTTP 403 (bot wall), not read",https://www.trulia.com/building/the-link-at-aberdeen-station-1101-schindler-dr-aberdeen-nj-07747-2734220747,unconfirmed
+10 ocean blvd|07716,elevator,yes,"Elevator (Interior Features: Levels, Entrance, & Accessibility)",https://www.trulia.com/building/elk-harbor-view-llc-10-ocean-blvd-atlantic-highlands-nj-07716-1001443078,confirmed
+10 ocean blvd|07716,building_floors,11,the 11 story high rise has apartments ranging from Studio's - 3BR's,https://www.trulia.com/building/elk-harbor-view-llc-10-ocean-blvd-atlantic-highlands-nj-07716-1001443078,confirmed
+10 ocean blvd|07716,floor,unit 7C: 7,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/elk-harbor-view-llc-10-ocean-blvd-atlantic-highlands-nj-07716-1001443078,unconfirmed
+10 ocean blvd|07716,dogs_allowed,yes,"Dogs: Allowed; Size allowed: Small, large",https://www.trulia.com/building/elk-harbor-view-llc-10-ocean-blvd-atlantic-highlands-nj-07716-1001443078,confirmed
+10 ocean blvd|07716,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'; own site: not found (searches return listing sites only)",https://www.trulia.com/building/elk-harbor-view-llc-10-ocean-blvd-atlantic-highlands-nj-07716-1001443078,unconfirmed
+260 ave e|07002,elevator,yes,"Elevator (Interior Features: Levels, Entrance, & Accessibility)",https://www.trulia.com/building/skyelofts-north-260-avenue-e-bayonne-nj-07002-2748969158,confirmed
+260 ave e|07002,floor,unit S207: 2,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/skyelofts-north-260-avenue-e-bayonne-nj-07002-2748969158,unconfirmed
+260 ave e|07002,floor,unit 417: 4,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/building/skyelofts-north-260-avenue-e-bayonne-nj-07002-2748969158,unconfirmed
+260 ave e|07002,dogs_allowed,yes,"Dogs: Allowed; Size allowed: Small, large",https://www.trulia.com/building/skyelofts-north-260-avenue-e-bayonne-nj-07002-2748969158,confirmed
+260 ave e|07002,dog_weight_limit,not stated (large dogs allowed per Trulia),"no weight limit stated on the listing page; Trulia pet card says 'Size allowed: Small, large'",https://www.trulia.com/building/skyelofts-north-260-avenue-e-bayonne-nj-07002-2748969158,unconfirmed
+66 glenbrook rd|06902,dog_weight_limit,40,Dogs must be under 40 pounds,https://www.trulia.com/building/parc-at-glenbrook-apartments-66-glenbrook-rd-stamford-ct-06902-1001933587,confirmed
+158 cherry st|06460,dog_weight_limit,number missing from the page,A pound maximum weight limit per pet will be strictly enforced.,https://www.apartmentlist.com/ct/milford-city/spinnaker-brook,unconfirmed
+515 w ave|06850,dog_weight_limit,not stated on the own site,Pet policies and any restrictions are confirmed during the leasing process.,https://www.thewaypointe.com/faq/,unconfirmed

@@ -1,0 +1,103 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"7","value":[
+    {
+      "ultra_buildingid":"eae42b42-8c4f-400d-9047-af5ed36521fa","ultra_name":"119 19TH ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0910009857001","ultra_addressline1":"119 19TH ST","ultra_block":"178","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"ebc607db-e29b-492c-8234-56e6eb8c3320","Name":"119 19TH ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"119 19TH ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2adf0bdb-3c5a-4c7f-a143-46211af824e6","Name":"LEVY MOISES"
+      },"ultra_zipcode":"07087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"af4f3c99-d72f-e811-8122-1458d04ece60","ultra_name":"19 EAST","ultra_registrationnumber":"0901-00272-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"19 E 19TH ST","ultra_block":"221","ultra_lot":"102","ultra_propertyinterest":{
+        "Id":"2894d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"19 EAST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"763a3dc7-b42f-e811-8122-1458d04ece60","Name":"BAYONNE 19TH ST URBAN RENEWAL ASS. LLC C/O BRAD INGERMAN"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"616835ea-573c-431c-bd4a-13c7f031160a","ultra_name":"19 EAST ST APTS BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901042757001","ultra_addressline1":"19 E 19th ST","ultra_block":"221","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"5e46edce-696a-49e0-8388-3fe704bb1ac5","Name":"19 EAST ST APTS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"19 EAST ST APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b23465a8-63af-ec11-983e-001dd803821a","Name":"19E19 URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07002","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bd65a18c-5a73-4c6e-9f52-c70223493c0b","ultra_name":"317-319 S 19TH ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714002158001","ultra_addressline1":"317-319 S 19TH ST","ultra_block":"1794","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"e8758250-3ac3-4a0f-8941-bb0c43c518a5","Name":"317-319 S 19TH ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"317-319 S 19TH ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d1743d82-cc0d-4cf1-a15f-e07c973ae0e0","Name":"Mangste El"
+      },"ultra_zipcode":"07103","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"71c0d45c-514f-494a-a152-53b6dec7c397","ultra_name":"919 19th St BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0910042792001","ultra_addressline1":"919 19th ST","ultra_block":"96","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"2a23e4e5-50c2-49d3-b868-aa4a3daf7a29","Name":"919 19TH ST"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"962d7521-162f-e811-8126-1458d04eb810","Name":"UNION CITY (H)"
+      },"ultra_propertyportalsearchfield":"919 19TH ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"feb859c6-8d59-43f7-bbb1-ba2f84bc0434","Name":"Pedro Mejia & Amalia Chevalier"
+      },"ultra_zipcode":"07087","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"278a46ac-7334-4068-b2f3-501ebbba98f1","ultra_name":"919 E 19TH ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608027036001","ultra_addressline1":"919 E 19TH ST","ultra_block":"6411","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"b0970329-e669-4db1-ade9-b1aa81182dbd","Name":"919 E 19TH ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"919 E 19TH ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"14d3595a-ae6d-4847-ba8b-6a8a272c40b7","Name":"ROBERTI VALENZUELA"
+      },"ultra_zipcode":"07504","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5bfa1fbf-8559-4ce7-a903-0addecc4f325","ultra_name":"TECLA GIZZI","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"219 19TH AVE","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"2f95afb2-2eab-41bd-aced-dd7a01fa893c","Name":"TECLA GIZZI"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"2a2e7521-162f-e811-8126-1458d04eb810","Name":"BRADLEY BEACH BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"07719","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

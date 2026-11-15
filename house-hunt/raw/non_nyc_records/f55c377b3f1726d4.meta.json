@@ -1,0 +1,7 @@
+{
+ "url": "https://serviceportal.dca.nj.gov/_odata/bhibuildings?$inlinecount=allpages&$filter=substringof%28%2773%20%27%2Cultra_addressline1%29%20and%20substringof%28%27BROWNSTONE%27%2Cultra_addressline1%29",
+ "retrieved_at": "2026-11-15T21:37:43+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/f55c377b3f1726d4.json",
+ "source": "non_nyc_records"
+}

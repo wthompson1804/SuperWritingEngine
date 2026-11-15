@@ -1,0 +1,19 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"1","value":[
+    {
+      "ultra_buildingid":"6619fc07-f924-eb11-a813-001dd801892c","ultra_name":"1000 W FORT LEE RD","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0204034080001","ultra_addressline1":"1000 W FORT LEE RD","ultra_block":"72","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"5e19fc07-f924-eb11-a813-001dd801892c","Name":"4000 WEST FORT LEE RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"cc2b7521-162f-e811-8126-1458d04eb810","Name":"BOGOTA BORO"
+      },"ultra_propertyportalsearchfield":"4000 WEST FORT LEE RD","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"BOGOTA BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3d19fc07-f924-eb11-a813-001dd801892c","Name":"RCB URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07603","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"7","value":[
+    {
+      "ultra_buildingid":"e9a98f43-c168-e811-8244-1458d04e1b18","ultra_name":"475 MAIN ST","ultra_registrationnumber":"1224-00111-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"475 MAIN ST","ultra_block":"108","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"ea5c973d-c168-e811-8244-1458d04e1b18","Name":"475 MAIN ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1a2e7521-162f-e811-8126-1458d04eb810","Name":"SPOTSWOOD BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"0f2fb309-4f59-e811-8123-1458d04e2938","Name":"VPL Screw"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ee5c973d-c168-e811-8244-1458d04e1b18","Name":"TED RICCI"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5d3a1abd-d72f-e811-8122-1458d04ece60","ultra_name":"475 MAIN ST METUCHEN","ultra_registrationnumber":"1210-00112-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"475 MAIN ST","ultra_block":"114","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"25ba3e2d-9a2f-e811-8122-1458d04ece60","Name":"475 MAIN ST METUCHEN"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"fe2d7521-162f-e811-8126-1458d04eb810","Name":"METUCHEN BORO"
+      },"ultra_propertyportalsearchfield":"475 MAIN ST METUCHEN","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"METUCHEN BORO","ultra_elsamaintenancecompany":{
+        "Id":"01b8940c-f652-e811-8229-1458d04e1b18","Name":"Kone North"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3c236a46-46ad-e911-a980-001dd80081ad","Name":"JONES LANG LASALLE"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"34fd2dc1-0cf3-f011-8407-001dd80a67ab","ultra_name":"HOLLOW PINES","ultra_registrationnumber":"1508-00002-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"475 MAIN STREET","ultra_block":"29","ultra_lot":"13.01","ultra_propertyinterest":{
+        "Id":"092038b5-0cf3-f011-8407-001dd80a67ab","Name":"HOLLOW PINES"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"e42e7521-162f-e811-8126-1458d04eb810","Name":"EAGLESWOOD TWP"
+      },"ultra_propertyportalsearchfield":"HOLLOW PINES","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"EAGLESWOOD TWP","ultra_elsamaintenancecompany":{
+        "Id":"fb2090a4-009c-e811-8125-1458d0509d88","Name":"Abby Lifts"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0c6535bb-0cf3-f011-8407-001dd80a67ab","Name":"EAGLES FLY LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a2505d6f-d72f-e811-8122-1458d04ece60","ultra_name":"MALCOLM TOWERS","ultra_registrationnumber":"0219-00102-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"475 MAIN ST","ultra_block":"4407-4408","ultra_lot":"23-29","ultra_propertyinterest":{
+        "Id":"f976e59f-9f2f-e811-8120-1458d04e2fb8","Name":"MALCOLM TOWERS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"66bce2ae-b42f-e811-8122-1458d04ece60","Name":"E M F ASSOCIATES LIMITED C/O MALCOLM TOWERS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"18be9b2b-64f4-485a-89f2-80480642d926","ultra_name":"MALCOLM TOWERS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0219008116001","ultra_addressline1":"475 MAIN ST","ultra_block":"4457","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"e806bfcc-8e47-48a4-a695-24803fc265f8","Name":"MALCOLM TOWERS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":"MALCOLM TOWERS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c70fcaac-fada-432b-b3b0-ad000a15d43e","Name":"CCM CO LLC"
+      },"ultra_zipcode":"07024","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7afd1b18-7ea0-f011-b41c-001dd8084fd9","ultra_name":"THE ELKS","ultra_registrationnumber":"0717-00215-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"475 MAIN ST","ultra_block":"2301","ultra_lot":"31","ultra_propertyinterest":{
+        "Id":"9d4e2112-7ea0-f011-b41c-001dd8084fd9","Name":"THE ELKS"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"482d7521-162f-e811-8126-1458d04eb810","Name":"ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"THE ELKS","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"ORANGE CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e24e2112-7ea0-f011-b41c-001dd8084fd9","Name":"VA 475 URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4fbe4329-188f-f011-b4cc-001dd8084fd9","ultra_name":"THE ELKS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0717042757001","ultra_addressline1":"475 MAIN STREET","ultra_block":"2301","ultra_lot":"31","ultra_propertyinterest":{
+        "Id":"ce646e20-188f-f011-b4cc-001dd803d067","Name":"THE ELKS"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"482d7521-162f-e811-8126-1458d04eb810","Name":"ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"THE ELKS","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"ORANGE CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c6f8751a-188f-f011-b4cc-001dd803d067","Name":"VA 475 URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07050","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

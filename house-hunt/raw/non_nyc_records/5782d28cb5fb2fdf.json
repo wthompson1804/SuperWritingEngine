@@ -1,0 +1,243 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"16","value":[
+    {
+      "ultra_buildingid":"1e43134e-1803-4c0e-b931-09c6f43e4705","ultra_name":"AVALON  BLDG 8","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1217040063008","ultra_addressline1":"8001-8011 AVALON WAY","ultra_block":"2101","ultra_lot":"11.06","ultra_propertyinterest":{
+        "Id":"df93f3d7-4bb3-45d1-aba0-3e538845a2bd","Name":"AVALON PISCATAWAY"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"0c2e7521-162f-e811-8126-1458d04eb810","Name":"PISCATAWAY TWP"
+      },"ultra_propertyportalsearchfield":"AVALON PISCATAWAY","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"30fca047-d598-46a6-8e5e-1d6daa6ed1a7","Name":"AVALON PISCATAWAY LLC"
+      },"ultra_zipcode":"08854","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"485598dc-8c91-4e56-a372-894df5caad2b","ultra_name":"AVALON AT WESTMONT STATION BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0269036706003","ultra_addressline1":"401 AVALON DR","ultra_block":"346","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"159ba158-60ea-4f98-a187-cc7aa1e9f660","Name":"VOLAIR WESMONT"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"4e2c7521-162f-e811-8126-1458d04eb810","Name":"WOOD-RIDGE BORO"
+      },"ultra_propertyportalsearchfield":"VOLAIR WESMONT","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9d8d2262-662f-f011-8c4e-001dd8084fd9","Name":"VOLAIR WESMONT LLC"
+      },"ultra_zipcode":"07075","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d9a4de6a-1106-4a67-86d9-ef3dd32a4c86","ultra_name":"AVALON AT WESTMONT STATION BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0269036706004","ultra_addressline1":"501 AVALON DR","ultra_block":"346","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"159ba158-60ea-4f98-a187-cc7aa1e9f660","Name":"VOLAIR WESMONT"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"4e2c7521-162f-e811-8126-1458d04eb810","Name":"WOOD-RIDGE BORO"
+      },"ultra_propertyportalsearchfield":"VOLAIR WESMONT","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9d8d2262-662f-f011-8c4e-001dd8084fd9","Name":"VOLAIR WESMONT LLC"
+      },"ultra_zipcode":"07075","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"18de1187-a163-4aa7-9989-274ac959da5a","ultra_name":"AVALON AT WESTMONT STATION BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0269036706001","ultra_addressline1":"601 AVALON DR","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"159ba158-60ea-4f98-a187-cc7aa1e9f660","Name":"VOLAIR WESMONT"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"4e2c7521-162f-e811-8126-1458d04eb810","Name":"WOOD-RIDGE BORO"
+      },"ultra_propertyportalsearchfield":"VOLAIR WESMONT","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9d8d2262-662f-f011-8c4e-001dd8084fd9","Name":"VOLAIR WESMONT LLC"
+      },"ultra_zipcode":"07075","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d5880c17-5831-4ed4-be90-a52dec645d46","ultra_name":"AVALON BLDG 12","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1217040063012","ultra_addressline1":"11001-11011 AVALON WAY","ultra_block":"2101","ultra_lot":"11.06","ultra_propertyinterest":{
+        "Id":"df93f3d7-4bb3-45d1-aba0-3e538845a2bd","Name":"AVALON PISCATAWAY"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"0c2e7521-162f-e811-8126-1458d04eb810","Name":"PISCATAWAY TWP"
+      },"ultra_propertyportalsearchfield":"AVALON PISCATAWAY","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"30fca047-d598-46a6-8e5e-1d6daa6ed1a7","Name":"AVALON PISCATAWAY LLC"
+      },"ultra_zipcode":"08854","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e2dc3a52-3029-46dd-b8e4-c54e62f17579","ultra_name":"AVALON BOONTON","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1401034976001","ultra_addressline1":"1 AVALON WAY","ultra_block":"69","ultra_lot":"72","ultra_propertyinterest":{
+        "Id":"e36399c4-290e-455f-bff6-83884f8c4e57","Name":"1 AVALON WAY"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"882e7521-162f-e811-8126-1458d04eb810","Name":"BOONTON TOWN"
+      },"ultra_propertyportalsearchfield":"1 AVALON WAY","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"52cf3767-cfda-4837-b92e-839951a08d9a","Name":"BOONTON URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07005","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6f2c2cef-511e-e911-a95e-001dd80081ad","ultra_name":"AVALON BOONTON BLDG. E","ultra_registrationnumber":"1402-00111-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1 AVALON WAY","ultra_block":"69","ultra_lot":"72","ultra_propertyinterest":{
+        "Id":"5e2c2cef-511e-e911-a95e-001dd80081ad","Name":"AVALON BOONTON BLDG. E"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8a2e7521-162f-e811-8126-1458d04eb810","Name":"BOONTON TWP"
+      },"ultra_propertyportalsearchfield":"AVALON BOONTON BLDG. E","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"BOONTON TWP","ultra_elsamaintenancecompany":{
+        "Id":"144d4226-d146-ea11-a999-001dd8009f4b","Name":"Liberty Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6ac7fc56-8530-e911-a960-001dd80081ad","Name":"BOONTON URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cbda5575-d72f-e811-8122-1458d04ece60","ultra_name":"BLDG 4","ultra_registrationnumber":"0269-00116-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"401 AVALON DR","ultra_block":"1","ultra_lot":"339","ultra_propertyinterest":{
+        "Id":"b386e59f-9f2f-e811-8120-1458d04e2fb8","Name":"Avalon Bay Commmunities"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"4e2c7521-162f-e811-8126-1458d04eb810","Name":"WOOD-RIDGE BORO"
+      },"ultra_propertyportalsearchfield":"Avalon Bay Commmunities","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"WOOD-RIDGE BORO","ultra_elsamaintenancecompany":{
+        "Id":"491d790f-8713-e911-812a-1458d04e0ca0","Name":"Liberty Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"82cbe2ae-b42f-e811-8122-1458d04ece60","Name":"AVALON BAY COMMUNITIES INC C/O AVALON @ WESTMONT STATION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cdda5575-d72f-e811-8122-1458d04ece60","ultra_name":"BLDG 5","ultra_registrationnumber":"0269-00116-003","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"501 AVALON DR","ultra_block":"1","ultra_lot":"339","ultra_propertyinterest":{
+        "Id":"b386e59f-9f2f-e811-8120-1458d04e2fb8","Name":"Avalon Bay Commmunities"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"4e2c7521-162f-e811-8126-1458d04eb810","Name":"WOOD-RIDGE BORO"
+      },"ultra_propertyportalsearchfield":"Avalon Bay Commmunities","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"WOOD-RIDGE BORO","ultra_elsamaintenancecompany":{
+        "Id":"491d790f-8713-e911-812a-1458d04e0ca0","Name":"Liberty Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"82cbe2ae-b42f-e811-8122-1458d04ece60","Name":"AVALON BAY COMMUNITIES INC C/O AVALON @ WESTMONT STATION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c9da5575-d72f-e811-8122-1458d04ece60","ultra_name":"BLDG 6","ultra_registrationnumber":"0269-00116-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"601 AVALON DR","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"b386e59f-9f2f-e811-8120-1458d04e2fb8","Name":"Avalon Bay Commmunities"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"4e2c7521-162f-e811-8126-1458d04eb810","Name":"WOOD-RIDGE BORO"
+      },"ultra_propertyportalsearchfield":"Avalon Bay Commmunities","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"WOOD-RIDGE BORO","ultra_elsamaintenancecompany":{
+        "Id":"491d790f-8713-e911-812a-1458d04e0ca0","Name":"Liberty Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"82cbe2ae-b42f-e811-8122-1458d04ece60","Name":"AVALON BAY COMMUNITIES INC C/O AVALON @ WESTMONT STATION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"072d446d-fc22-e911-a95e-001dd800951b","ultra_name":"BLDG B2","ultra_registrationnumber":"1402-00111-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1 AVALON WAY","ultra_block":"69","ultra_lot":"72","ultra_propertyinterest":{
+        "Id":"5e2c2cef-511e-e911-a95e-001dd80081ad","Name":"AVALON BOONTON BLDG. E"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8a2e7521-162f-e811-8126-1458d04eb810","Name":"BOONTON TWP"
+      },"ultra_propertyportalsearchfield":"AVALON BOONTON BLDG. E","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"BOONTON TWP","ultra_elsamaintenancecompany":{
+        "Id":"144d4226-d146-ea11-a999-001dd8009f4b","Name":"Liberty Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6ac7fc56-8530-e911-a960-001dd80081ad","Name":"BOONTON URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3a751b07-fd22-e911-a95e-001dd800951b","ultra_name":"BLDG B2","ultra_registrationnumber":"1402-00111-003","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1 AVALON WAY","ultra_block":"69","ultra_lot":"72","ultra_propertyinterest":{
+        "Id":"5e2c2cef-511e-e911-a95e-001dd80081ad","Name":"AVALON BOONTON BLDG. E"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8a2e7521-162f-e811-8126-1458d04eb810","Name":"BOONTON TWP"
+      },"ultra_propertyportalsearchfield":"AVALON BOONTON BLDG. E","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"BOONTON TWP","ultra_elsamaintenancecompany":{
+        "Id":"144d4226-d146-ea11-a999-001dd8009f4b","Name":"Liberty Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6ac7fc56-8530-e911-a960-001dd80081ad","Name":"BOONTON URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"441b9a4c-fd22-e911-a95e-001dd800951b","ultra_name":"BLDG C","ultra_registrationnumber":"1402-00111-004","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1 AVALON WAY","ultra_block":"69","ultra_lot":"72","ultra_propertyinterest":{
+        "Id":"5e2c2cef-511e-e911-a95e-001dd80081ad","Name":"AVALON BOONTON BLDG. E"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8a2e7521-162f-e811-8126-1458d04eb810","Name":"BOONTON TWP"
+      },"ultra_propertyportalsearchfield":"AVALON BOONTON BLDG. E","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"BOONTON TWP","ultra_elsamaintenancecompany":{
+        "Id":"144d4226-d146-ea11-a999-001dd8009f4b","Name":"Liberty Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6ac7fc56-8530-e911-a960-001dd80081ad","Name":"BOONTON URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ac982fc8-e268-f111-a824-001dd80db51f","ultra_name":"BLDG F","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1614042466005","ultra_addressline1":"101-111 AVALON CR","ultra_block":"3103","ultra_lot":"19","ultra_propertyinterest":{
+        "Id":"2fb581e0-5316-f111-8407-001dd800c744","Name":"AVALON WAYNE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"322f7521-162f-e811-8126-1458d04eb810","Name":"WAYNE TWP"
+      },"ultra_propertyportalsearchfield":"AVALON WAYNE","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"WAYNE TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"1453 VALLEY RD","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a5b481e0-5316-f111-8407-001dd800c744","Name":"AVB WAYNE VALLEY LLC"
+      },"ultra_zipcode":"07470","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"30992fc8-e268-f111-a824-001dd80db51f","ultra_name":"BLDG G","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1614042466006","ultra_addressline1":"1101-1111 AVALON CR","ultra_block":"3103","ultra_lot":"19","ultra_propertyinterest":{
+        "Id":"2fb581e0-5316-f111-8407-001dd800c744","Name":"AVALON WAYNE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"322f7521-162f-e811-8126-1458d04eb810","Name":"WAYNE TWP"
+      },"ultra_propertyportalsearchfield":"AVALON WAYNE","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"WAYNE TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"1453 VALLEY RD","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a5b481e0-5316-f111-8407-001dd800c744","Name":"AVB WAYNE VALLEY LLC"
+      },"ultra_zipcode":"07470","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f6e82cce-e268-f111-a824-001dd80db51f","ultra_name":"BLDG I","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1614042466008","ultra_addressline1":"901-911 AVALON CR","ultra_block":"3103","ultra_lot":"19","ultra_propertyinterest":{
+        "Id":"2fb581e0-5316-f111-8407-001dd800c744","Name":"AVALON WAYNE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"322f7521-162f-e811-8126-1458d04eb810","Name":"WAYNE TWP"
+      },"ultra_propertyportalsearchfield":"AVALON WAYNE","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"WAYNE TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"1453 VALLEY RD","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a5b481e0-5316-f111-8407-001dd800c744","Name":"AVB WAYNE VALLEY LLC"
+      },"ultra_zipcode":"07470","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

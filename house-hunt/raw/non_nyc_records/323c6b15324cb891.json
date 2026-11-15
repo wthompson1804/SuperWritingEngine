@@ -1,0 +1,89 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"6","value":[
+    {
+      "ultra_buildingid":"5bed855a-4888-4e49-b13a-3eaae5815caa","ultra_name":"55 Monroe Place-Bloomfield LLC BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0702018723001","ultra_addressline1":"55 MONROE PL","ultra_block":"282","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"a2db8844-ee1f-41c9-b990-e961ee9f941d","Name":"55 Monroe Place-Bloomfield LLC"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"2a2d7521-162f-e811-8126-1458d04eb810","Name":"BLOOMFIELD TOWN"
+      },"ultra_propertyportalsearchfield":"55 Monroe Place-Bloomfield LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8301ee92-1362-4144-9f85-73b53d09f8b7","Name":"55 Monroe Place-Bloomfield LLC"
+      },"ultra_zipcode":"07003","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0ebff456-6d31-43ce-bece-b5fa21220d5a","ultra_name":"55 MONROE ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714021795001","ultra_addressline1":"55 MONROE ST","ultra_block":"1989","ultra_lot":"37","ultra_propertyinterest":{
+        "Id":"47ebce28-9afe-4740-8e22-25f5e49c50e0","Name":"55 MONROE ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"55 MONROE ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5035ee62-a831-4c9b-b63c-84e585b377d7","Name":"JAIME & ROSA BARBOSA"
+      },"ultra_zipcode":"07105","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bc0bf046-6779-4762-8528-20b638935255","ultra_name":"853-55 MONROE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2004000276001","ultra_addressline1":"853-55 MONROE AVE","ultra_block":"12","ultra_lot":"1193","ultra_propertyinterest":{
+        "Id":"1f60a13a-268c-483c-a484-fd81138113f1","Name":"853-55 MONROE AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b62f7521-162f-e811-8126-1458d04eb810","Name":"ELIZABETH CITY"
+      },"ultra_propertyportalsearchfield":"853-55 MONROE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4561abcc-03d4-4d40-aeed-6884c69018ee","Name":"Hilario Rivero"
+      },"ultra_zipcode":"07201","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"be333c99-d72f-e811-8122-1458d04ece60","ultra_name":"APARTMENT HOUSE","ultra_registrationnumber":"0702-00119-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"55 MONROE PL","ultra_block":"282","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"e87dd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"APARTMENT HOUSE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"2a2d7521-162f-e811-8126-1458d04eb810","Name":"BLOOMFIELD TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ee253dc7-b42f-e811-8122-1458d04ece60","Name":"MONROE MANAGEMENT CO"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"36391abd-d72f-e811-8122-1458d04ece60","ultra_name":"MENLO PARK ELEM SCH","ultra_registrationnumber":"1205-00308-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"155 MONROE AVE","ultra_block":"622A","ultra_lot":"1A","ultra_propertyinterest":{
+        "Id":"31b93e2d-9a2f-e811-8122-1458d04ece60","Name":"MENLO PARK ELEM SCH"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"f42d7521-162f-e811-8126-1458d04eb810","Name":"EDISON TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4295afd8-b42f-e811-8122-1458d04ece60","Name":"EDISON BOE EDISON TWP PUBLIC SCHOOLS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e9ee9dbf-9800-4133-aa29-c40f7506efc5","ultra_name":"MONROE GARDENS APT BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2004016190003","ultra_addressline1":"1033-1055 MONROE AVE","ultra_block":"1098","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"c7400d30-1e9b-4977-ba51-9a6f3f811420","Name":"MONROE GARDENS APT"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b62f7521-162f-e811-8126-1458d04eb810","Name":"ELIZABETH CITY"
+      },"ultra_propertyportalsearchfield":"MONROE GARDENS APT","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"14f007d0-9da5-400f-8bd8-17ed9410d5bb","Name":"MONROE GARDENS LLC"
+      },"ultra_zipcode":"07201","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

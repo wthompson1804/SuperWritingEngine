@@ -1,0 +1,61 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"4","value":[
+    {
+      "ultra_buildingid":"4b4a60ed-5ebc-ee11-a569-001dd80a8012","ultra_name":"2100 N CENTRAL","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0219030500002","ultra_addressline1":"2100 N CENTRAL RD","ultra_block":"6105","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"9e4d55ea-fb2e-46bc-a308-c4a976bcd588","Name":"2100 NORTH CENTRAL ROAD FL LLC"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":"2100 NORTH CENTRAL ROAD FL LLC","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"FORT LEE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0f2c81ca-7bbc-ee11-a569-001dd80b30b8","Name":"2100 NORTH CENTRAL ROAD FL LLC"
+      },"ultra_zipcode":"07024","ultra_propertyinterest-statuscode":{
+        "Name":"Vacant Boarded & Sealed","Value":240000005
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1d525d6f-d72f-e811-8122-1458d04ece60","ultra_name":"2100 NORTH CENTRAL","ultra_registrationnumber":"0219-00247-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2100 N CENTRAL RD","ultra_block":"6105","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"0978e59f-9f2f-e811-8120-1458d04e2fb8","Name":"2100 NORTH CENTRAL"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"70bde2ae-b42f-e811-8122-1458d04ece60","Name":"2100 NORTH CENTRAL RD LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bb505d6f-d72f-e811-8122-1458d04ece60","ultra_name":"KWASHA LIPTON BUILDING","ultra_registrationnumber":"0219-00114-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"2100 N CENTRAL RD","ultra_block":"6105","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"0f77e59f-9f2f-e811-8120-1458d04e2fb8","Name":"KWASHA LIPTON BUILDING"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7cbce2ae-b42f-e811-8122-1458d04ece60","Name":"KWASHA LIPTON"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c726aff9-3229-4067-ae77-3e2a42d4f330","ultra_name":"POINTE SOUTH","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1515003772001","ultra_addressline1":"2100 GRAND CENTRAL AVE","ultra_block":"48.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"11f790f5-58f9-4c09-b30b-84527d6bde6a","Name":"POINTE SOUTH"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"f22e7521-162f-e811-8126-1458d04eb810","Name":"LAVALLETTE BORO"
+      },"ultra_propertyportalsearchfield":"POINTE SOUTH","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1a9be6f9-b4cc-40cb-b6ec-f6483ea1c776","Name":"POINTE SOUTH CONDOS "
+      },"ultra_zipcode":"08735","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

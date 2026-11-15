@@ -1,0 +1,289 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"20","value":[
+    {
+      "ultra_buildingid":"c2aa833b-55a4-4668-8ca2-9d1053c45fa6","ultra_name":"100 RIVERSIDE PL BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1525014390001","ultra_addressline1":"100 RIVERSIDE PL","ultra_block":"151","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"224eb6cc-7b23-4057-881c-a3ceef1ccdb7","Name":"100 RIVERSIDE PL"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"062f7521-162f-e811-8126-1458d04eb810","Name":"POINT PLEASANT BEACH BORO"
+      },"ultra_propertyportalsearchfield":"100 RIVERSIDE PL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"90ed7538-9e8e-4adc-b531-4cfc07881333","Name":"SAILFISH COVE CONDO"
+      },"ultra_zipcode":"08742","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"06d55575-d72f-e811-8122-1458d04ece60","ultra_name":"1100 RIVER ST PARTNERS","ultra_registrationnumber":"0249-00113-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1100 RIVER ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"dd81e59f-9f2f-e811-8120-1458d04e2fb8","Name":"1100 RIVER ST PARTNERS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"262c7521-162f-e811-8126-1458d04eb810","Name":"RIDGEFIELD BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f0c6e2ae-b42f-e811-8122-1458d04ece60","Name":"1100 RIVER ST PARTNERS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9b7bbca4-8f18-43a5-aa6b-c1e1f64bb7af","ultra_name":"882 RIVER RD BLDG 14","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0260004736014","ultra_addressline1":"1100 River RD","ultra_block":"1","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"f000b0f6-374e-47d8-a8d8-fa2d0b540e49","Name":"882 RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"3c2c7521-162f-e811-8126-1458d04eb810","Name":"TEANECK TWP"
+      },"ultra_propertyportalsearchfield":"882 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1cae080a-c6b6-46af-8725-79f27f2a41ab","Name":"FAIRLEIGH DICKINSON UNIVERSITY"
+      },"ultra_zipcode":"07666","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e74d5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"AVALON @ EDGEWATER","ultra_registrationnumber":"0213-00149-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 RIVER MEWS LANE","ultra_block":"74","ultra_lot":"1&3","ultra_propertyinterest":{
+        "Id":"a574e59f-9f2f-e811-8120-1458d04e2fb8","Name":"AVALON EDGEWATER BLDG1"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"16bae2ae-b42f-e811-8122-1458d04ece60","Name":"AVALON BAY COMMUNITIES INC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d74d5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"AVALON @ EDGEWATER BLDG D","ultra_registrationnumber":"0213-00143-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 RIVER MEWS LN","ultra_block":"74","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"9974e59f-9f2f-e811-8120-1458d04e2fb8","Name":"AVALON @ EDGEWATER BLDG D"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0abae2ae-b42f-e811-8122-1458d04ece60","Name":"AVALON BAY COMMUNITIES"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8f4fb821-0d88-46a7-9cf8-5683fee44559","ultra_name":"AVALON AT EDGEWATER BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0213030893002","ultra_addressline1":"100 RIVER MEWS ","ultra_block":"74","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"d5592e4f-0481-4bfe-ae54-79ce1323bcc0","Name":"AVALON AT EDGEWATER"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":"AVALON AT EDGEWATER","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"23361f95-1f67-f011-bec2-001dd80a623a","Name":"EDGEWATER FINANCING LLC"
+      },"ultra_zipcode":"07020","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e54d5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"AVALON EDGEWATER BLDG1","ultra_registrationnumber":"0213-00149-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 RIVER MEWS LANE","ultra_block":"74","ultra_lot":"1.01","ultra_propertyinterest":{
+        "Id":"a574e59f-9f2f-e811-8120-1458d04e2fb8","Name":"AVALON EDGEWATER BLDG1"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"16bae2ae-b42f-e811-8122-1458d04ece60","Name":"AVALON BAY COMMUNITIES INC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"07a43208-77ae-49ad-ace5-6fafafe0245f","ultra_name":"BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0204008644001","ultra_addressline1":"100 RIVER RD","ultra_block":"110","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"842abd05-7fc6-45d6-80cc-5405f006bf9f","Name":"100 RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"cc2b7521-162f-e811-8126-1458d04eb810","Name":"BOGOTA BORO"
+      },"ultra_propertyportalsearchfield":"100 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5fe9b2ff-e65d-4e7f-b74b-b9d6ea56622f","Name":"BOGOTA ROYAL INVESTORS LL "
+      },"ultra_zipcode":"07603","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"502db723-47d0-4764-8333-79f7b8f37726","ultra_name":"BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0204008644002","ultra_addressline1":"100 RIVER RD","ultra_block":"110","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"842abd05-7fc6-45d6-80cc-5405f006bf9f","Name":"100 RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"cc2b7521-162f-e811-8126-1458d04eb810","Name":"BOGOTA BORO"
+      },"ultra_propertyportalsearchfield":"100 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5fe9b2ff-e65d-4e7f-b74b-b9d6ea56622f","Name":"BOGOTA ROYAL INVESTORS LL "
+      },"ultra_zipcode":"07603","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bfc2f204-8799-44f6-9878-ac6985d25c7e","ultra_name":"BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0204008644003","ultra_addressline1":"100 RIVER RD","ultra_block":"110","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"842abd05-7fc6-45d6-80cc-5405f006bf9f","Name":"100 RIVER RD"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"cc2b7521-162f-e811-8126-1458d04eb810","Name":"BOGOTA BORO"
+      },"ultra_propertyportalsearchfield":"100 RIVER RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5fe9b2ff-e65d-4e7f-b74b-b9d6ea56622f","Name":"BOGOTA ROYAL INVESTORS LL "
+      },"ultra_zipcode":"07603","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0b6cf204-b41e-f011-998a-001dd80a623a","ultra_name":"EXTRA SPACE STORAGE","ultra_registrationnumber":"0263-00121-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 ROUTE 17 NORTH, UPPER SADDLE RIVER, NEW JERSEY 07458","ultra_block":"1304","ultra_lot":"7.01","ultra_propertyinterest":{
+        "Id":"8a1ddef8-b31e-f011-998a-001dd80a623a","Name":"EXTRA SPACE STORAGE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"422c7521-162f-e811-8126-1458d04eb810","Name":"UPPER SADDLE RIVER BORO"
+      },"ultra_propertyportalsearchfield":"EXTRA SPACE STORAGE","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"UPPER SADDLE RIVER BORO","ultra_elsamaintenancecompany":{
+        "Id":"3712f121-c475-ef11-a670-001dd80afdfc","Name":"Otis Elevator Co - Fairfield"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b71ddef8-b31e-f011-998a-001dd80a623a","Name":"PSI ATLANTIC USR NJ, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"dd7eab72-1eb4-4eb0-851c-a9663e7f80cd","ultra_name":"PARK HOUSE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0213017222001","ultra_addressline1":"1100 RIVER RD","ultra_block":"34","ultra_lot":"35","ultra_propertyinterest":{
+        "Id":"ec075b55-6811-453c-9d9c-3ffbeb843365","Name":"PARK HOUSE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":"PARK HOUSE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"429ace29-79d1-4cf3-be2b-9d0aa18f0b7d","Name":"1100 RIVER RD C/O UNITED RLTYDMITRI"
+      },"ultra_zipcode":"07020","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ed4d5d6f-d72f-e811-8122-1458d04ece60","ultra_name":"PARK HOUSE CONDOMINIUM","ultra_registrationnumber":"0213-00152-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1100 RIVER RD","ultra_block":"34","ultra_lot":"35","ultra_propertyinterest":{
+        "Id":"ab74e59f-9f2f-e811-8120-1458d04e2fb8","Name":"PARK HOUSE CONDOMINIUM"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"de2b7521-162f-e811-8126-1458d04eb810","Name":"EDGEWATER BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1cbae2ae-b42f-e811-8122-1458d04ece60","Name":"1100 RIVER ROAD LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c2bcccb7-b9df-ee11-904d-001dd80a8449","ultra_name":"RFEHC URBAN RENEWAL, LLC","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0223042680002","ultra_addressline1":"100 RIVER STREET","ultra_block":"300","ultra_lot":"3.01","ultra_propertyinterest":{
+        "Id":"3cdf7b77-b9df-ee11-904d-001dd80b3b4d","Name":"PRINT HOUSE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"PRINT HOUSE","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"HACKENSACK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c9db7e71-b9df-ee11-904d-001dd80b3b4d","Name":"RFEHB URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07601","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"03b065c0-d26f-410c-8650-6e4bfd54f05b","ultra_name":"RIVER PARK AT RARITAN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1816030107001","ultra_addressline1":"100 RIVER PARK DR","ultra_block":"116","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"fdc00a95-3242-4c0e-b471-84ccea38300b","Name":"RIVER PARK AT RARITAN"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"742f7521-162f-e811-8126-1458d04eb810","Name":"RARITAN BORO"
+      },"ultra_propertyportalsearchfield":"RIVER PARK AT RARITAN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cf6aa06d-92f0-f011-8407-001dd80a67ab","Name":"CL LENA OWNER LP"
+      },"ultra_zipcode":"08869","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"118adafe-d72f-e811-8122-1458d04ece60","ultra_name":"RIVERPARK @ RARITAN","ultra_registrationnumber":"1816-00118-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 RIVERPARK DR","ultra_block":"116/116.0","ultra_lot":"12/12.01","ultra_propertyinterest":{
+        "Id":"9b429443-9a2f-e811-8122-1458d04ece60","Name":"RIVERPARK @ RARITAN"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"742f7521-162f-e811-8126-1458d04eb810","Name":"RARITAN BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"178697e8-b42f-e811-8122-1458d04ece60","Name":"RARITAN TOWN CENTER LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b2f5ad2c-5ecd-4e65-9d6c-458a1c31a50d","ultra_name":"RIVERVIEW W","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0610011119001","ultra_addressline1":"100 RIVERSIDE DR","ultra_block":"120","ultra_lot":"23","ultra_propertyinterest":{
+        "Id":"5497aeac-1f20-4787-b268-adf232afe1b2","Name":"RIVERVIEW W"
+      },"ultra_county":{
+        "Id":"fcf3aaf2-63e4-e711-8125-1458d054d020","Name":"CUMBERLAND"
+      },"ultra_municipality":{
+        "Id":"1e2d7521-162f-e811-8126-1458d04eb810","Name":"MILLVILLE CITY"
+      },"ultra_propertyportalsearchfield":"RIVERVIEW W","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e2a98a59-a5c7-4eca-932b-c3df166ef4b3","Name":"MILLVILLE HSG AUTHORITY"
+      },"ultra_zipcode":"08332","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0bf14393-d72f-e811-8122-1458d04ece60","ultra_name":"RIVERVIEW WEST","ultra_registrationnumber":"0610-00105-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"100 RIVERSIDE DR","ultra_block":"120","ultra_lot":"23","ultra_propertyinterest":{
+        "Id":"267cd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"RIVERVIEW WEST"
+      },"ultra_county":{
+        "Id":"fcf3aaf2-63e4-e711-8125-1458d054d020","Name":"CUMBERLAND"
+      },"ultra_municipality":{
+        "Id":"1e2d7521-162f-e811-8126-1458d04eb810","Name":"MILLVILLE CITY"
+      },"ultra_propertyportalsearchfield":"RIVERVIEW WEST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"4141f4c6-0a3c-e811-8120-1458d04e2938","Name":"TEC (The Elevator Company)"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3b3f8dfa-9a3e-e811-8123-1458d04ece60","Name":"MILLVILLE HOUSING AUTH"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c98c16aa-08f1-ee11-904c-001dd80b30b8","ultra_name":"THE WATERMARK","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0908042753001","ultra_addressline1":"8100 RIVER RD","ultra_block":"438","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"a3a3dc9d-08f1-ee11-904c-001dd80b3432","Name":"THE WATERMARK"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"922d7521-162f-e811-8126-1458d04eb810","Name":"NORTH BERGEN TWP"
+      },"ultra_propertyportalsearchfield":"THE WATERMARK","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"NORTH BERGEN TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b32ff696-dafc-ee11-a1fe-001dd80399d2","Name":"THE WATERMARK CONDO ASSOC"
+      },"ultra_zipcode":"07047","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"14ae21b7-d72f-e811-8122-1458d04ece60","ultra_name":"THE WATERMARK ON HUDSON","ultra_registrationnumber":"0908-00235-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"8100 RIVER RD","ultra_block":"438","ultra_lot":"2.2","ultra_propertyinterest":{
+        "Id":"55a93e2d-9a2f-e811-8122-1458d04ece60","Name":"THE WATERMARK ON HUDSON"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"922d7521-162f-e811-8126-1458d04eb810","Name":"NORTH BERGEN TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c2453dc7-b42f-e811-8122-1458d04ece60","Name":"WCI COMMUNITIES INC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

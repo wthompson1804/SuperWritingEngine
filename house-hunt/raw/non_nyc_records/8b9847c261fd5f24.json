@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"8c688ff8-0fe0-ef11-8eea-001dd80654df","ultra_name":"6500 K JOHNSON BLVD","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0304025125001","ultra_addressline1":"6500 K JOHNSON BLVD","ultra_block":"57","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"45688ff8-0fe0-ef11-8eea-001dd80654df","Name":"TEAM CAMPUS CONDOS"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"582c7521-162f-e811-8126-1458d04eb810","Name":"BORDENTOWN TWP"
+      },"ultra_propertyportalsearchfield":"TEAM CAMPUS CONDOS","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"BORDENTOWN TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"TEAM CAMPUS 85 ROUTE 130","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5ee8ddfa-be31-f011-8c4e-001dd80a6c87","Name":"TEAM CAMPUS CONDOMINIUM ASSN INC"
+      },"ultra_zipcode":"08505","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7bdb5575-d72f-e811-8122-1458d04ece60","ultra_name":"BLDG C","ultra_registrationnumber":"0304-00118-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"6500 K JOHNSON BD","ultra_block":"57","ultra_lot":"6.02","ultra_propertyinterest":{
+        "Id":"4987e59f-9f2f-e811-8120-1458d04e2fb8","Name":"BLDG C"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"582c7521-162f-e811-8126-1458d04eb810","Name":"BORDENTOWN TWP"
+      },"ultra_propertyportalsearchfield":"BLDG C","ultra_countyportalsearchfield":"BURLINGTON","ultra_municipalityportalsearchfield":"BORDENTOWN TWP","ultra_elsamaintenancecompany":{
+        "Id":"23985126-3433-e811-811f-1458d04e2938","Name":"Thyssen Krupp Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"18cce2ae-b42f-e811-8122-1458d04ece60","Name":"K JOHNSON URBAN RENEWAL, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

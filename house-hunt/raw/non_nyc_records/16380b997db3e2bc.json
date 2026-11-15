@@ -1,0 +1,33 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"d51773e1-ff22-e911-a95e-001dd800951b","ultra_name":"SH6 ENGLEWOOD SOUTH III","ultra_registrationnumber":"0215-00225-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"75 STERLING BLVD","ultra_block":"2602","ultra_lot":"3.04","ultra_propertyinterest":{
+        "Id":"b21773e1-ff22-e911-a95e-001dd800951b","Name":"SH6 ENGLEWOOD SOUTH III"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"e22b7521-162f-e811-8126-1458d04eb810","Name":"ENGLEWOOD CITY"
+      },"ultra_propertyportalsearchfield":"SH6 ENGLEWOOD SOUTH III","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"ENGLEWOOD CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bb1773e1-ff22-e911-a95e-001dd800951b","Name":"SHG ENGLEWOOD SOUTH LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7bccf134-b9f7-4f35-a32b-b21a785429c8","ultra_name":"Vivian","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0215040015001","ultra_addressline1":"75 STERLING BLVD","ultra_block":"2602","ultra_lot":"3.04","ultra_propertyinterest":{
+        "Id":"37aff55c-638d-4b8d-b91c-fc040327539b","Name":"SHG Englewood S III LLC"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"e22b7521-162f-e811-8126-1458d04eb810","Name":"ENGLEWOOD CITY"
+      },"ultra_propertyportalsearchfield":"SHG Englewood S III LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9ceb799c-5879-43d6-9f17-eb7ae32a2565","Name":"SHG ENGLEWOOD S III LLC "
+      },"ultra_zipcode":"07631","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

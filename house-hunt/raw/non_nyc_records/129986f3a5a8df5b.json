@@ -1,0 +1,105 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"7","value":[
+    {
+      "ultra_buildingid":"8867dded-6860-486b-81fa-0354d5aad17e","ultra_name":"435 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1210010377001","ultra_addressline1":"435 MAIN ST","ultra_block":"114","ultra_lot":"21","ultra_propertyinterest":{
+        "Id":"e998df8e-e5df-428e-b2ce-a4905c214804","Name":"435 MAIN ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"fe2d7521-162f-e811-8126-1458d04eb810","Name":"METUCHEN BORO"
+      },"ultra_propertyportalsearchfield":"435 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"55e3852a-da6d-45c9-9e71-0d60c8e88710","Name":"LEE MGMT LLC"
+      },"ultra_zipcode":"08840","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"62d60e8d-b423-4d5e-9cf5-a5a373fe8421","ultra_name":"BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0219014223006","ultra_addressline1":"435 MAIN ST","ultra_block":"4501","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"52619fe2-11b2-497a-9449-6d426e34b6a6","Name":"FORT LEE GARDENS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"ea2b7521-162f-e811-8126-1458d04eb810","Name":"FORT LEE BORO"
+      },"ultra_propertyportalsearchfield":"FORT LEE GARDENS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e5c5b72b-65a6-4041-a1e7-8740092fd041","Name":"FORT LINWOOD ASSN LLC"
+      },"ultra_zipcode":"07024","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"37e8ec17-8e70-f111-ab0d-001dd80be1b8","ultra_name":"FATHER ENGLISH FOOD PANTRY","ultra_registrationnumber":"1608-00613-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"435 MAIN STREET","ultra_block":"6115","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"48e4fe05-8e70-f111-ab0d-001dd80be1b8","Name":"FATHER ENGLISH FOOD PANTRY"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"FATHER ENGLISH FOOD PANTRY","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"PATERSON CITY","ultra_elsamaintenancecompany":{
+        "Id":"8ce7ec17-8e70-f111-ab0d-001dd80be1b8","Name":"HANDI LIFT"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b025f70b-8e70-f111-ab0d-001dd80be1b8","Name":"CATHOLIC FAMILY & COMMUNITY SERVICES"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e8535d6f-d72f-e811-8122-1458d04ece60","ultra_name":"HOLMAN MOVING SYSTEMS","ultra_registrationnumber":"0223-00170-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"435 MAIN ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"6979e59f-9f2f-e811-8120-1458d04e2fb8","Name":"Walcott Hackensack"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"Walcott Hackensack","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"cfed6c53-fc8d-ed11-81ad-001dd80704a5","Name":"WAYPOINT HACKENSACK U RENEWAL OWNER LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"049b4ddd-2750-461b-b6c6-9392f537b075","ultra_name":"THE SCHAEFER HOUSE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2119012104001","ultra_addressline1":"435 SOUTH MAIN STREET","ultra_block":"2003","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"e9501050-ca83-45ee-b64d-f8f0ae43ced0","Name":"THE SCHAEFER HOUSE"
+      },"ultra_county":{
+        "Id":"1cf4aaf2-63e4-e711-8125-1458d054d020","Name":"WARREN"
+      },"ultra_municipality":{
+        "Id":"fe2f7521-162f-e811-8126-1458d04eb810","Name":"PHILLIPSBURG TOWN"
+      },"ultra_propertyportalsearchfield":"THE SCHAEFER HOUSE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3f7fd1d8-f9c4-ee11-9079-001dd80a8b5d","Name":"MARTIN 435 LLC"
+      },"ultra_zipcode":"08865","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"19f1e409-c37b-ed11-81ad-001dd8070a7e","ultra_name":"WALCOTT HACKENSACK","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0223042669001","ultra_addressline1":"435 MAIN STREET","ultra_block":"410","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"b9fdd2fd-c27b-ed11-81ad-001dd8070a7e","Name":"THE WALCOTT HACKENSACK"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"THE WALCOTT HACKENSACK","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"HACKENSACK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a304caf7-c27b-ed11-81ad-001dd8070a7e","Name":"WAYPOINT HACKENSACK U RENEWAL OWNER LLC"
+      },"ultra_zipcode":"07601","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"af51b7ce-6def-44fd-a0e5-553c0ac0f875","ultra_name":"YOUTH HAVEN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"435 MAIN ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"974ab17a-e449-417d-946c-28624ffc3531","Name":"YOUTH HAVEN"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"07102","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}
