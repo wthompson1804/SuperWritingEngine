@@ -215,3 +215,12 @@ Effect: **Niche** (bars ClaudeBot and anthropic-ai; no Claude-User group; `*` al
 neighborhood lookups. **Yelp** stays off limits (its Claude-User group allows only `/article`). **Reddit** disallows
 everything: API key only. **ApartmentRatings, Apartments.com** remain behind bot walls. Bozzuto allows Claude-User
 on its pages (not `/api/`).
+
+## Voices pass addendum (2026-11-15, night): what the targeted neighborhood lookups found
+
+Details in `docs/harvest_notes/voices.md`. None of Trulia, Niche or City-Data has a `Claude-User` robots group, so `*` applied.
+- **Trulia neighborhood pages (`/n/...`)**: allowed by robots, but **PerimeterX CAPTCHA (403) on the second page requested**. Treat as blocked.
+  The "What Locals Say" survey shares are also embedded in listing pages already cached in `raw/trulia/` (`surroundings.localUGC`).
+- **Niche `/places-to-live/<slug>/reviews/`**: plain fetch works; newest 20 reviews only (`?page=2` repeats page 1). One 403 seen (New Brunswick).
+  NJ townships use `-township-` slugs; Connecticut uses planning-region slugs.
+- **City-Data**: forum index and thread pages fetch normally; threads must be found from index pages or a web search.

@@ -462,6 +462,11 @@ for k in [x for x in B if B[x]["state"] == "NY"]:
         I(k, "none_found", "", f"Openigloo page for the building has no review text. {NEWS}.", "Openigloo / search", (pages[0]["fetched"] if pages else EXTRA_PAGES.get(k, (U(k),))[0]), at=(pages[0]["retrieved_at"] if pages else ""))
 # hand-written additions for the two buildings with the most to say
 I("123 linden blvd|11226", "elevator", "2026-09-18", "Elevators - at least 1 is always out of use. Only 1 of 4 elevators in order at times. Very long lines.", "Openigloo", PG, at=ts(PG) or "")
+I("123 linden blvd|11226", "management", "2026-09-18", "Cockroaches - no pest control for approx 3 months this summer. Residents have to reserve pest control with management weekly.", "Openigloo", PG, at=ts(PG) or "")
+I("123 linden blvd|11226", "management", "2026-09-18", "Flooding - the basement flooded and my apartment flooded during winter storms.", "Openigloo", PG, at=ts(PG) or "")
+I("123 linden blvd|11226", "management", "2026-09-18", "Very slow response times from management.", "Openigloo", PG, at=ts(PG) or "")
+I("123 linden blvd|11226", "management", "2026-06-01", "Management doesn’t respond to emails and just make excuses.", "Openigloo", PG, at=ts(PG) or "")
+I("123 linden blvd|11226", "management", "2026-06-01", "Management doesn’t help with anything g. We are on our 4th management. The amenities never work.", "Openigloo", PG, at=ts(PG) or "")
 I("123 linden blvd|11226", "other", "2026-11-15", "Tenants rate it 2.8/5 across 28 reviews, with 15% recommending it and 18% approving of the owner. It records 53 evictions, 93 open violations, and 8 litigation cases.", "Openigloo (site summary)", PG, at=ts(PG) or "")
 I("8635 21st ave|11214", "other", "2026-11-11", "Tenants rate it 2.1/5 across 3 reviews, with 0% recommending it and 0% approving of the owner. It records 10 evictions, 32 open violations, and 8 litigation cases.", "Openigloo (site summary)", "https://www.openigloo.com/building/nyc/3166996-3063780019/brooklyn-bensonhurst-8635-21-avenue-11214")
 I("1429 shore pkwy|11214", "car_crime", "", "", "", "", "")  # placeholder removed below
