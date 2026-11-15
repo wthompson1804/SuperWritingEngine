@@ -280,7 +280,9 @@ def build_index() -> None:
 
     files = fetch_region()
     if not FILTERED.exists():
-        _osmium("tags-filter", "-O", "-o", str(FILTERED), str(REGION), *TAG_FILTER)
+        tmp = BIG / "region_filtered.tmp.osm.pbf"
+        _osmium("tags-filter", "-O", "-o", str(tmp), str(REGION), *TAG_FILTER)
+        tmp.rename(FILTERED)
     tr = pyproj.Transformer.from_crs(4326, 32618, always_xy=True)
 
     def proj(geoms):

@@ -1,7 +1,0 @@
-{
- "url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/NJ0160500/motor-vehicle-theft?from=01-2023&to=12-2025",
- "retrieved_at": "2026-11-15T18:36:28+00:00",
- "status": 200,
- "path": "raw/fbi_cde/837776eaac8dae4a.json",
- "source": "fbi_cde"
-}

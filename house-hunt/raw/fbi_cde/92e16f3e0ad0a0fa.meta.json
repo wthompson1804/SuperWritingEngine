@@ -1,7 +1,0 @@
-{
- "url": "https://api.usa.gov/crime/fbi/cde/agency/byStateAbbr/PA",
- "retrieved_at": "2026-11-15T18:13:53+00:00",
- "status": 200,
- "path": "raw/fbi_cde/92e16f3e0ad0a0fa.json",
- "source": "fbi_cde"
-}

@@ -7,3 +7,4 @@ raw/big/
 # blocks them). Keep HTML captures on disk only; _index.jsonl and meta files are still committed.
 raw/**/*.html
 raw/**/*.htm
+raw/fbi_cde/*.json

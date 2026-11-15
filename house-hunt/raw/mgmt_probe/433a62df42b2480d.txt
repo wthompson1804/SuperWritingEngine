@@ -1,0 +1,10 @@
+User-agent: *
+disallow: /refs/
+disallow: /runtimes/
+disallow: /wwwroot/ 
+disallow: /js/
+disallow: /lib/
+disallow: /dashboard/
+disallow: /*.ashx
+
+Sitemap: https://www.carnegiemews.com/sitemap.xml

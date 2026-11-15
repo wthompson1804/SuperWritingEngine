@@ -1,7 +1,0 @@
-{
- "url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/NY0350100/motor-vehicle-theft?from=01-2023&to=12-2025",
- "retrieved_at": "2026-11-15T18:40:55+00:00",
- "status": 200,
- "path": "raw/fbi_cde/ac25d5f58cc78e6e.json",
- "source": "fbi_cde"
-}

@@ -1,7 +1,0 @@
-{
- "url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/NY0136600/burglary?from=01-2023&to=12-2025",
- "retrieved_at": "2026-11-15T18:39:57+00:00",
- "status": 200,
- "path": "raw/fbi_cde/c6ff98ceae809075.json",
- "source": "fbi_cde"
-}

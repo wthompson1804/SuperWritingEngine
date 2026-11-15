@@ -1,7 +1,0 @@
-{
- "url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/NJ0132900/V?from=01-2023&to=12-2025",
- "retrieved_at": "2026-11-15T18:32:47+00:00",
- "status": 200,
- "path": "raw/fbi_cde/0a4684b5902474c0.json",
- "source": "fbi_cde"
-}

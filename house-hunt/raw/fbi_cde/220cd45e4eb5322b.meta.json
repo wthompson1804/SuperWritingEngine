@@ -1,7 +1,0 @@
-{
- "url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/NJ0201600/burglary?from=01-2023&to=12-2025",
- "retrieved_at": "2026-11-15T18:38:41+00:00",
- "status": 200,
- "path": "raw/fbi_cde/220cd45e4eb5322b.json",
- "source": "fbi_cde"
-}

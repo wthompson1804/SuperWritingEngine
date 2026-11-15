@@ -1,7 +1,0 @@
-{
- "url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/NJ0070600/larceny?from=01-2023&to=12-2025",
- "retrieved_at": "2026-11-15T18:28:38+00:00",
- "status": 200,
- "path": "raw/fbi_cde/ae36ee068dbd7f9d.json",
- "source": "fbi_cde"
-}

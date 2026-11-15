@@ -1,7 +1,7 @@
 {
  "started": "2026-11-15T18:21:08+00:00",
- "srp_pages": 135,
- "detail_pages": 470,
+ "srp_pages": 180,
+ "detail_pages": 672,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -188,14 +188,26 @@
    "drive_min": 28.3,
    "props": 4,
    "rows": 5
+  },
+  {
+   "city": "nj/fort-lee",
+   "drive_min": 28.5,
+   "props": 21,
+   "rows": 50
+  },
+  {
+   "city": "ny/new-york",
+   "drive_min": 28.6,
+   "props": 557,
+   "rows": 180
   }
  ],
  "cities_unmatched_far": [],
- "props_discovered": 720,
- "props_skipped_lowprice_gt_3000": 250,
+ "props_discovered": 1298,
+ "props_skipped_lowprice_gt_3000": 626,
  "reasons": {
-  "ok": 469,
-  "no_unit_le_3000": 1
+  "ok": 669,
+  "no_unit_le_3000": 3
  },
  "blocked": null,
  "dogs_no_rows": 0

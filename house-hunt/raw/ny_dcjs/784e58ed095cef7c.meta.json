@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ny.gov/resource/ca8h-8gjq.json?county=Nassau&agency=Long+Beach+City+PD&%24order=year+DESC&%24limit=8",
+ "retrieved_at": "2026-11-15T18:48:33+00:00",
+ "status": 200,
+ "path": "raw/ny_dcjs/784e58ed095cef7c.json",
+ "source": "ny_dcjs"
+}

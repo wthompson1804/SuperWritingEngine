@@ -1,0 +1,25 @@
+User-agent: Yahoo-MMCrawler
+Disallow: /
+
+User-agent: MSNBot-Media
+Disallow: /
+
+User-agent: Nutch
+Disallow: /
+
+User-agent: MJ12bot
+User-agent: Slurp
+Crawl-Delay: 10
+
+User-agent: *
+Disallow: /*_escaped_fragment_=DONOTCRAWL
+Disallow: /*_escaped_fragment_
+
+User-agent: *
+Allow: /schedule-a-visit/
+Disallow: /login
+
+User-agent: *
+Disallow:
+
+Sitemap: https://www.lefrakcity.com/sitemap.xml

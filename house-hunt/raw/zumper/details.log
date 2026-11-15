@@ -1,2 +1,5 @@
 cards: {'lines': 15943, 'zip_not_in_grid': 417, 'beds_gt1': 0, 'over_cap': 40} qualifying 3551
 detail urls 3454
+details 100/3454 elapsed 219s
+details 200/3454 elapsed 438s
+details 300/3454 elapsed 657s

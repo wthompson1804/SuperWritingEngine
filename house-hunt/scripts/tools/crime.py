@@ -460,12 +460,28 @@ def fbi_agency_years(ori: str, years: list[int]) -> tuple[dict, dict]:
         for y in years:
             months = {k: v for k, v in (series or {}).items() if k.endswith(f"-{y}") and v is not None}
             res[y][off] = sum(months.values()) if months else None
+            if off == "property":
+                res[y]["zero_property_months"] = sum(1 for v in months.values() if v == 0)
             res[y]["months"] = max(res[y].get("months", 0), len(months))
             if pser:
                 pv = [v for k, v in pser.items() if k.endswith(f"-{y}") and v]
                 if pv:
                     res[y]["population"] = int(pv[0])
     return res, meta_last
+
+
+def fbi_population(ori: str, year: int) -> int | None:
+    """Agency population the FBI CDE lists for one year (one summarized call)."""
+    try:
+        d, _ = get_json(f"{FBI}/summarized/agency/{ori}/burglary", "fbi_cde",
+                        params={"from": f"01-{year}", "to": f"12-{year}"})
+    except RuntimeError:
+        return None
+    act = (d.get("offenses") or {}).get("actuals") or {}
+    popd = ((d.get("populations") or {}).get("population") or {})
+    pser = next((v for k, v in popd.items() if (k + " Offenses") in act), None)
+    pv = [v for v in (pser or {}).values() if v]
+    return int(pv[0]) if pv else None
 
 
 def fbi_rows(agencies: list[dict], years: list[int], progress: bool = True) -> list[dict]:
@@ -479,7 +495,9 @@ def fbi_rows(agencies: list[dict], years: list[int], progress: bool = True) -> l
             months = r.get("months", 0)
             c = {o: r.get(o) for o in OFFENSES}
             have = any(v is not None for v in c.values())
-            ok_rate = bool(pop) and have and months == 12
+            all_zero = have and months == 12 and bool(pop) and pop > 3000 and all(v == 0 for v in c.values())
+            zpm = r.get("zero_property_months", 0)
+            ok_rate = bool(pop) and have and months == 12 and not all_zero
             note = ""
             if not have:
                 note = "No monthly data returned by the FBI CDE for this agency and year."
@@ -487,6 +505,12 @@ def fbi_rows(agencies: list[dict], years: list[int], progress: bool = True) -> l
                 note = f"Only {months} months of data in the FBI CDE for this year: counts are partial, no rate."
             elif not pop:
                 note = "FBI CDE lists no population for this agency (zero-population or overlapping agency)."
+            elif all_zero:
+                note = ("FBI CDE shows zero for every offence in all 12 months for a population of "
+                        f"{pop:,}: treated as not reported to the FBI, no rate.")
+            elif zpm >= 3 and pop > 10000:
+                note = (f"{zpm} of 12 months show zero property crimes for a population of {pop:,}: "
+                        "possibly incomplete reporting to the FBI for this year.")
             row = dict(agency_id=a["ori"], ori=a["ori"], state=a["state_abbr"], county=a["county_key"].title(),
                        agency_name=a["agency_name"], agency_type=a["agency_type_name"], geography="",
                        source="fbi_cde", year=y, months_reported=months,
@@ -723,6 +747,16 @@ def build_agencies(force_fetch: bool = False) -> None:
     print(f"FBI CDE: {len(want)} agencies x 5 offences, years {fyears} ...", flush=True)
     fbi = fbi_rows(sorted(want.values(), key=lambda a: a["ori"]), fyears)
 
+    # FBI year far below the same agency's prior year: flag as possibly incomplete (the API has no flag)
+    prev = {(r["ori"], r["year"]): r for r in fbi}
+    for r in fbi:
+        q = prev.get((r["ori"], r["year"] - 1))
+        if q and r["property"] != "" and q["property"] != "" and r["months_reported"] == 12 \
+                and q["months_reported"] == 12 and q["property"] >= 30 and r["property"] < 0.5 * q["property"] \
+                and "incomplete" not in r["notes"] and "not reported" not in r["notes"]:
+            r["notes"] = (r["notes"] + f" Property count {r['property']} is less than half of the prior year's "
+                          f"{q['property']}: possibly incomplete reporting to the FBI for this year.").strip()
+
     # geography text
     fbi_pop = {}
     for r in fbi:
@@ -752,6 +786,8 @@ def build_agencies(force_fetch: bool = False) -> None:
             continue
         f = fbi_by.get((r["ori"], r["year"]))
         pop = f["population"] if f and f["population"] else None
+        if pop is None and r["year"] not in fyears:
+            pop = fbi_population(r["ori"], r["year"])
         if pop and str(r["months_reported"]) == "12":
             r["population"] = pop
             r["population_source"] = f"FBI CDE agency population for ORI {r['ori']}, same year (DCJS publishes none)"
@@ -761,8 +797,14 @@ def build_agencies(force_fetch: bool = False) -> None:
             for o in OFFENSES:
                 r[f"{o}_per_1000"] = round(r[o] / pop * 1000, 2) if r[o] is not None else ""
         else:
-            r["notes"] = (r["notes"] + " No rate: " + ("fewer than 12 months reported." if pop else
-                          "no FBI CDE population for this agency and year.")).strip()
+            if pop:
+                r["population"] = pop
+                r["population_source"] = f"FBI CDE agency population for ORI {r['ori']}, same year"
+                r["population_value_type"] = "found"
+            r["notes"] = (r["notes"] + " No rate: " + (
+                f"DCJS lists {r['months_reported'] or 'no'} months reported for this year, so the count may be "
+                "partial or the months field may be wrong." if pop else
+                "no FBI CDE population for this agency and year.")).strip()
 
     REF.mkdir(parents=True, exist_ok=True)
     allrows = nypd + dcjs + fbi
@@ -824,7 +866,8 @@ def _years(rows: list[dict], n: int = 3) -> list[dict]:
              "counts_value_type": "found" if any(r[o] != "" for o in OFFENSES) else "not_found",
              "rates_value_type": r["rate_value_type"], "rate_method": r["rate_method"] or None,
              "source": r["source"], "source_url": r["source_url"], "retrieved_at": r["retrieved_at"],
-             "notes": r["notes"] or None}
+             "notes": r["notes"] or None,
+             "quality_flag": bool(re.search(r"incomplete|not reported|partial|No rate", r["notes"] or ""))}
         for o in OFFENSES:
             e[o] = _num(r[o])
             e[f"{o}_per_1000"] = float(r[f"{o}_per_1000"]) if r[f"{o}_per_1000"] != "" else None
@@ -869,6 +912,7 @@ def agency_rates(lat: float, lon: float) -> dict:
             "mapping": {"basis": "polygon", "note": "Point-in-polygon on NYPD precinct boundaries.",
                         "source_url": "https://data.cityofnewyork.us/d/y76i-bdw7"},
             "years": yrs,
+            "latest_year_with_rates": next((y["year"] for y in yrs if y["property_per_1000"] is not None), None),
             "context": {
                 "borough_dcjs": {"what": f"{_boro_of_precinct(p)}: DCJS county total (FBI UCR definitions), "
                                          "separate source, not comparable line by line with NYPD categories",
@@ -927,6 +971,9 @@ def agency_rates(lat: float, lon: float) -> dict:
                    "type": "county police" if is_county else "municipal police"},
         "geography": desc + (f", population {_fmt_pop(pop)}" if pop else ", population not published"),
         "years": primary,
+        "latest_year_with_rates": next((y["year"] for y in primary if y["property_per_1000"] is not None), None),
+        "latest_unflagged_year": next((y["year"] for y in primary
+                                       if y["property_per_1000"] is not None and not y["quality_flag"]), None),
     })
     if cross:
         out["cross_check"] = {"source": "fbi_cde", "what": "Same agency in the FBI Crime Data Explorer (separate "
@@ -936,6 +983,16 @@ def agency_rates(lat: float, lon: float) -> dict:
     caveats = []
     if m["mapping_basis"].startswith("inference") or m["mapping_basis"] == "name_match_base":
         caveats.append("The place-to-agency link is an inference: " + m["mapping_note"])
+    yr = next((y for y in primary if y["property_per_1000"] is not None), None)
+    if yr is None:
+        caveats.append("No year in the primary source has both a complete count and a population, so no rate: "
+                       "see the notes on each year and the cross-check.")
+    elif yr["population"] and yr["population"] > 15000 and yr["property_per_1000"] < 2:
+        caveats.append(f"Property crime of {yr['property_per_1000']} per 1,000 in {yr['year']} is unusually low for "
+                       "a place this size; it may reflect incomplete reporting by the agency rather than safety.")
+    for y in primary + cross:
+        if y["notes"] and ("incomplete" in y["notes"] or "not reported" in y["notes"]):
+            caveats.append(f"{y['source']} {y['year']}: {y['notes']}")
     if pop and pop < 10000:
         caveats.append("Small population: one or two incidents move the rate a lot.")
     if is_county:

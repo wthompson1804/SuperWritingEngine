@@ -419,6 +419,20 @@ def facts_from(entity: dict, vt: str, bld: dict | None, bvt: str):
         txt_parts.append(pol.replace("|", " | "))
     if chips_ok:
         txt_parts.append("amenity chip: Dogs OK")
+    # `pets` codes in the page data. Observed against the visible policy block: 1 = cats, 2 = dogs;
+    # 3 always appears with 2 (meaning not shown on the page, possibly large dogs).
+    codes = sorted(set(entity.get("pets") or []) | set((bld or {}).get("pets") or []))
+    if codes:
+        txt_parts.append(f"page data pets codes {codes} (1=cat, 2=dog, 3=unlabelled; mapping inferred from pages that show both)")
+        if dogs == "unknown" and (2 in codes or 3 in codes):
+            dogs = "yes"
+            txt_parts.append("dogs=yes rests on the code only; no visible policy block")
+        elif dogs == "no" and (2 in codes or 3 in codes):
+            notes.append("CONFLICT: policy block says dogs not allowed but page data pets codes include dogs")
+        elif dogs == "yes" and dm and 2 not in codes and 3 not in codes:
+            notes.append("policy block says dogs allowed; pets codes lack the dog code")
+    if dogs == "no" and (chips_ok or re.search(r"\|Dogs Ok\|", vt + (bvt or ""), re.I)):
+        notes.append("CONFLICT: 'Dogs OK' amenity shown but policy block says dogs not allowed")
     pp = entity.get("pet_policy") or (bld or {}).get("pet_policy")
     if pp:
         txt_parts.append("pet_policy: " + json.dumps(pp)[:600])
@@ -447,7 +461,8 @@ def facts_from(entity: dict, vt: str, bld: dict | None, bvt: str):
         name = (fe.get("name") or "").strip()
         lo, hi = fee_amount(fe)
         rec = {"name": name, "min": lo, "max": hi, "cadence": fe.get("cadence"), "type": fe.get("type"),
-               "required": fe.get("is_required"), "species": fe.get("species"), "desc": fe.get("description")}
+               "required": fe.get("is_required"), "species": fe.get("species"),
+               "desc": (fe.get("description") or "")[:140] or None}
         other.append({k: v for k, v in rec.items() if v is not None})
     f["_fees"] = other
     f["_pet_rent"], f["_park_fee"] = pet_rent, park_fee
@@ -500,7 +515,7 @@ def iso_avail(v, today):
     if not v:
         return "", ""
     try:
-        d = datetime.strptime(str(v)[:10], "%Y-%m-%d").date()
+        d = datetime.strptime(str(v)[:10].replace("/", "-"), "%Y-%m-%d").date()
     except ValueError:
         return str(v), ""
     return str(v), ("now" if d <= today else d.isoformat())
@@ -563,7 +578,7 @@ def build():
         loc = L.get("listing_location") or {}
         r = base_row(L["listing_id"], url, level, seen, raw_path)
         fill_common(r, f, block)
-        notes = []
+        notes = list(f.get("_notes") or [])
         r["building_name"] = (bld or {}).get("name") or L.get("building_name") or ""
         addr = loc.get("formatted_address") or L.get("address") or (bld or {}).get("formatted_address") or ""
         r["address"] = addr
@@ -678,6 +693,12 @@ def build():
             r["elevator"] = "yes" if any("elevator" in t.lower() for t in tags) else "unknown"
             r["manager"] = card.get("brokerage_name") or card.get("agent_name") or ""
             r["photo_url"] = photo(card.get("image_id0"))
+            if pets and (2 in pets or 3 in pets):
+                r["dogs"] = "yes"
+                r["dog_policy_text"] = (f"card data pets codes {sorted(pets)} (1=cat, 2=dog, 3=unlabelled; mapping "
+                                        "inferred from detail pages); detail page not read")
+            tl = [t for t in tags if any(w in t for w in PARK_WORDS)]
+            r["parking_type"] = "; ".join(sorted(tl))
             n = [f"card only; pets_codes={pets}"]
             if card.get("max_price") != card.get("min_price") or (card.get("floorplan_count") or 1) > 1:
                 n.append(f"card price range {card.get('min_price')}-{card.get('max_price')}, "
@@ -706,10 +727,7 @@ def build():
                 fu = facts_from(L, vt, ent, "")
                 for k in ("dogs", "dog_policy_text", "dog_weight_limit_lb", "elevator", "building_floors"):
                     fu[k] = f[k]
-                if L.get("fees") and not f["_fees"]:
-                    pass
-                else:
-                    fu["_fees"] = f["_fees"] or fu["_fees"]
+                fu["_notes"] = f["_notes"]
                 r = unit_row(L, url, "detail", seen, meta["path"], ent, fu, block, vt, "building")
                 if r["listing_id"] not in {f"zumper-{x}" for x in cards}:
                     counts["extra_units_from_building"] += 1

@@ -1,0 +1,19 @@
+# Default robots file version:2
+
+# Allow Googlebot (for both desktop and mobile crawling)
+User-agent: Googlebot
+Disallow:
+
+# Allow Googlebot-Image
+User-agent: Googlebot-Image
+Disallow:
+
+# Rules for all other bots
+User-agent: *
+Disallow: /calendar/action*
+Disallow: /events/action*
+Disallow: /cdn-cgi*
+Allow: /*.css
+Allow: /*.js
+Disallow: /*?
+Crawl-delay: 3
