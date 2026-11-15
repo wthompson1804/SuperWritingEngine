@@ -1,0 +1,36 @@
+User-Agent: AhrefsBot
+Disallow: /
+
+User-Agent: SemrushBot
+Disallow: /
+
+User-Agent: MJ12bot
+Disallow: /
+
+User-Agent: DotBot
+Disallow: /
+
+User-Agent: BLEXBot
+Disallow: /
+
+User-Agent: GPTBot
+Disallow: /
+
+User-Agent: ChatGPT-User
+Disallow: /
+
+User-Agent: ClaudeBot
+Disallow: /
+
+User-Agent: PerplexityBot
+Disallow: /
+
+User-Agent: Bytespider
+Disallow: /
+
+User-Agent: CCBot
+Disallow: /
+
+User-Agent: *
+Allow: /
+

@@ -133,3 +133,9 @@
 {"url": "https://www.themodernportchester.com/amenities", "retrieved_at": "2026-11-15T19:55:44+00:00", "status": 200, "path": "raw/region_westchester_rockland/0f60a6d183d2d8a4.html", "source": "region_westchester_rockland"}
 {"url": "https://themagnoliapc.com/robots.txt", "retrieved_at": "2026-11-15T19:55:45+00:00", "status": 200, "path": "raw/region_westchester_rockland/90d41602cc2fda14.txt", "source": "region_westchester_rockland"}
 {"url": "https://themagnoliapc.com/", "retrieved_at": "2026-11-15T19:55:47+00:00", "status": 200, "path": "raw/region_westchester_rockland/f0ff23619bd1f86f.html", "source": "region_westchester_rockland"}
+{"url": "https://themagnoliapc.com/floorplans/", "retrieved_at": "2026-11-15T19:55:50+00:00", "status": 200, "path": "raw/region_westchester_rockland/2a76fa335b1ca671.html", "source": "region_westchester_rockland"}
+{"url": "https://themagnoliapc.com/amenities/", "retrieved_at": "2026-11-15T19:55:52+00:00", "status": 200, "path": "raw/region_westchester_rockland/5b86883ab45db4ee.html", "source": "region_westchester_rockland"}
+{"url": "https://www.willettpoint.com/robots.txt", "retrieved_at": "2026-11-15T19:55:53+00:00", "status": 200, "path": "raw/region_westchester_rockland/73dee53f93876596.txt", "source": "region_westchester_rockland"}
+{"url": "https://www.willettpoint.com/", "retrieved_at": "2026-11-15T19:55:55+00:00", "status": 403, "path": "raw/region_westchester_rockland/b93718d9bb7ac7b0.html", "source": "region_westchester_rockland"}
+{"url": "https://thetarry.com/robots.txt", "retrieved_at": "2026-11-15T19:55:55+00:00", "status": 200, "path": "raw/region_westchester_rockland/0831ba1fe4014cc5.txt", "source": "region_westchester_rockland"}
+{"url": "https://thetarry.com/", "retrieved_at": "2026-11-15T19:55:58+00:00", "status": 200, "path": "raw/region_westchester_rockland/1f71e46247dd112e.html", "source": "region_westchester_rockland"}
