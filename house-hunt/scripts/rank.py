@@ -182,6 +182,7 @@ def main():
     u.to_csv(DATA / "ranked_units.csv", index=False)
 
     # ---- exchange rates against staying in Queens
+    home = u[u.hood_area.astype(str).eq("Queens")]
     meas = {"all_in": "all_in", "sqft": "sqft", "drive_min": "drive_min_to", "transit_min": "transit_sat_median",
             "toll_round_trip": "toll_rt_ezpass", "violent_per_1000": "violent", "property_per_1000": "property",
             "restaurants_800m": "restaurants_800m", "park_walk_min": "park_walk_min", "parking_rank": "parking_rank"}
