@@ -1,0 +1,33 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"b8f34c38-834d-41ef-bc5d-6f4dad961b58","ultra_name":"PROSPECT PLACE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0223024420001","ultra_addressline1":"300 PROSPECT AVE","ultra_block":"341","ultra_lot":"7.01","ultra_propertyinterest":{
+        "Id":"39f36f78-0714-437d-b6a3-8a8e097f7f15","Name":"PROSPECT PLACE DE LLC"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"PROSPECT PLACE DE LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2940d871-dbb8-eb11-8236-001dd8021a59","Name":"PROSPECT PLACE DE LLC"
+      },"ultra_zipcode":"07601","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"36555d6f-d72f-e811-8122-1458d04ece60","ultra_name":"PROSPECT TOWERS","ultra_registrationnumber":"0223-00320-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"300 PROSPECT AV","ultra_block":"341","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"857ae59f-9f2f-e811-8120-1458d04e2fb8","Name":"PROSPECT TOWERS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ccbfe2ae-b42f-e811-8122-1458d04ece60","Name":"300 PROSPECT PROPERTIES LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

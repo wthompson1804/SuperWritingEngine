@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /expert-time/
+Disallow: /first-dry/
+
+Sitemap: https://www.1strespondernews.com/sitemap.xml

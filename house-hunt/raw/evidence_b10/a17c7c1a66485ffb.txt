@@ -1,0 +1,22 @@
+User-agent: *
+Disallow: /wp-login.php
+Disallow: /wp-admin/
+Crawl-delay: 600
+
+User-agent: bingbot
+Crawl-delay: 600
+
+User-agent: Googlebot
+Crawl-delay: 180
+
+User-agent: meta-externalagent
+Crawl-delay: 600
+
+User-agent: facebookexternalhit
+Crawl-delay: 600
+
+User-agent: Applebot
+Crawl-delay: 600
+
+User-agent: ClaudeBot
+Crawl-delay: 600
