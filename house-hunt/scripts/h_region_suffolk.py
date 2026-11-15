@@ -4,11 +4,17 @@ Stages (each idempotent; all fetches go through lib.cached_get, >= 2 s per host,
   python3 scripts/h_region_suffolk.py trulia   # fetch the Trulia /building/ page of every Suffolk community that the
                                                # Trulia ZIP search already found (cards in data/listings_raw/trulia.csv)
                                                # -> raw/region_suffolk/trulia_buildings.jsonl (facts + unit rows)
-  python3 scripts/h_region_suffolk.py greystar # re-read the cached Greystar pages of the Suffolk communities
-                                               # -> raw/region_suffolk/greystar_buildings.jsonl
-  python3 scripts/h_region_suffolk.py build    # merge stage outputs with the hand-read facts in
-                                               # scripts/h_region_suffolk_facts.py -> data/listings_raw/region_suffolk.csv
-                                               #                                    data/reference/region_buildings_suffolk.csv
+  python3 scripts/h_region_suffolk.py build    # (h_region_suffolk_build.py) merge the Trulia stage output with the
+                                               # hand-read facts in scripts/h_region_suffolk_facts.py and rows other
+                                               # harvesters already read -> data/listings_raw/region_suffolk.csv,
+                                               #                            data/reference/region_buildings_suffolk.csv
+Helper scripts used to read pages by hand (all cached, robots-checked, >= 2 s per host):
+  h_region_suffolk_greystar.py  Greystar property pages of the 11 Suffolk communities -> raw/region_suffolk/greystar_buildings.jsonl
+  h_region_suffolk_al.py        Apartment List property pages -> raw/region_suffolk/al_buildings.jsonl
+  h_region_suffolk_alcity.py    Apartment List town pages (property enumeration) -> raw/region_suffolk/al_city_props.json
+  h_region_suffolk_zumper.py    Zumper building pages -> raw/region_suffolk/zumper_buildings.jsonl
+  h_region_suffolk_zcity.py     Zumper town pages (building enumeration) -> raw/region_suffolk/zumper_city_buildings.json
+  h_region_suffolk_probe.py     any leasing-site page: keyword contexts
 """
 from __future__ import annotations
 
