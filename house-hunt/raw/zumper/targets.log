@@ -1,1 +1,2 @@
 targets {'rows': 50, 'skipped_not_zumper': 0, 'building_pages': 0, 'listing_pages': 0, 'reused_cache': 50, 'non_200': 0}
+targets {'rows': 100, 'skipped_not_zumper': 0, 'building_pages': 0, 'listing_pages': 5, 'reused_cache': 95, 'non_200': 0}
