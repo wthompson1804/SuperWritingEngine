@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=11+US+Highway+1%2C+New+Brunswick%2C+NJ+08901&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:42+00:00",
+ "status": 200,
+ "path": "raw/independent_check/06336fcac636d6d8.json",
+ "source": "independent_check"
+}

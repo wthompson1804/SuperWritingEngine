@@ -1,0 +1,695 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"48","value":[
+    {
+      "ultra_buildingid":"38c9e324-de84-472f-b659-463c58c0c2a3","ultra_name":"10 MAIN AV","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"10 MAIN AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"48659c5b-97c0-43c6-bd37-0a918eae5135","Name":"10 MAIN AV"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"602e7521-162f-e811-8126-1458d04eb810","Name":"NEPTUNE TWP"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"000000000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f9cb71d6-2f30-ec11-b6e5-001dd8029240","ultra_name":"10 MAIN ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1909035536001","ultra_addressline1":"10 MAIN STREET","ultra_block":"7.01","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"eecb71d6-2f30-ec11-b6e5-001dd8029240","Name":"10 MAIN HAMBURG"
+      },"ultra_county":{
+        "Id":"18f4aaf2-63e4-e711-8125-1458d054d020","Name":"SUSSEX"
+      },"ultra_municipality":{
+        "Id":"902f7521-162f-e811-8126-1458d04eb810","Name":"HAMBURG BORO"
+      },"ultra_propertyportalsearchfield":"10 MAIN HAMBURG","ultra_countyportalsearchfield":"SUSSEX","ultra_municipalityportalsearchfield":"HAMBURG BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"84c10816-3130-ec11-b6e5-001dd8029240","Name":"SYDNEY & JOSEPH FERREIRA"
+      },"ultra_zipcode":"07419","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"78c36215-dc2f-44b6-9c89-386d0d789227","ultra_name":"10 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1005030103001","ultra_addressline1":"10 MAIN ST","ultra_block":"10","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"628e88dd-89ee-4d89-b7e1-7ac092f4fb35","Name":"10 MAIN ST"
+      },"ultra_county":{
+        "Id":"04f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUNTERDON"
+      },"ultra_municipality":{
+        "Id":"a42d7521-162f-e811-8126-1458d04eb810","Name":"CLINTON TOWN"
+      },"ultra_propertyportalsearchfield":"10 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"94e7ad6c-ebb5-4864-830a-2ed4ec5b1001","Name":"TIMOTHY DONOHUE"
+      },"ultra_zipcode":"08801","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a8bb5bfb-02e0-4a03-ac7c-688314c3b421","ultra_name":"10 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1523004536001","ultra_addressline1":"10 MAIN ST","ultra_block":"18","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"85729138-f808-4295-9c12-47caee28e14c","Name":"10 MAIN ST"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"022f7521-162f-e811-8126-1458d04eb810","Name":"PLUMSTED TWP"
+      },"ultra_propertyportalsearchfield":"10 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"842cdcfa-1a1c-4ba4-9276-7a7cb56738eb","Name":"10 MAIN ST NEW EGYPT LLC"
+      },"ultra_zipcode":"08533","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"47995e57-9ac1-ec11-983e-001dd8022954","ultra_name":"10 N MAIN ST","ultra_registrationnumber":"1439-00116-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"10 N MAIN ST","ultra_block":"1317","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"5f8d6151-9ac1-ec11-983e-001dd8022954","Name":"10 N MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"d42e7521-162f-e811-8126-1458d04eb810","Name":"WHARTON BORO"
+      },"ultra_propertyportalsearchfield":"10 N MAIN ST","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"WHARTON BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"638d6151-9ac1-ec11-983e-001dd8022954","Name":"WHARTON OPPPERTUNITY FUND LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4f42b833-bd7e-40a7-8eb4-078bd6c731e2","ultra_name":"10 N MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1023026258001","ultra_addressline1":"10 N MAIN ST","ultra_block":"4","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"f91aa2fc-cde7-43cf-8bf6-730c91666368","Name":"10 N MAIN ST"
+      },"ultra_county":{
+        "Id":"04f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUNTERDON"
+      },"ultra_municipality":{
+        "Id":"c82d7521-162f-e811-8126-1458d04eb810","Name":"STOCKTON BORO"
+      },"ultra_propertyportalsearchfield":"10 N MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2631c8d4-9f7e-47c5-98b0-263c9cf5c509","Name":"JAMES CURTIS"
+      },"ultra_zipcode":"08559","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"dbd3e9a3-2d38-4bae-822b-eea090c798f1","ultra_name":"10 N MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1702008281001","ultra_addressline1":"10 N MAIN ST","ultra_block":"15","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"1fea7d7e-19a9-4b37-92fd-7e1cf89417df","Name":"10 N MAIN ST"
+      },"ultra_county":{
+        "Id":"12f4aaf2-63e4-e711-8125-1458d054d020","Name":"SALEM"
+      },"ultra_municipality":{
+        "Id":"33208c61-182f-e811-8126-1458d04eb810","Name":"ELMER BORO"
+      },"ultra_propertyportalsearchfield":"10 N MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7daabdaf-54b0-ec11-983e-001dd80380ea","Name":"10 NORTH MAIN, LLC"
+      },"ultra_zipcode":"08318","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c88f8dd1-5a63-4aa4-af08-95fc8e194e35","ultra_name":"108-110 N MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608029294001","ultra_addressline1":"108-110 N MAIN ST","ultra_block":"215","ultra_lot":"11 & 12","ultra_propertyinterest":{
+        "Id":"17c48c12-5f00-42f1-82b1-32e7d7c2b8ed","Name":"108-110 N MAIN ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"108-110 N MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2f800fbb-c8d9-f011-8544-001dd8084346","Name":"HOUSING AUTHORITY OF PATERSON"
+      },"ultra_zipcode":"07522","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5bb321b7-d72f-e811-8122-1458d04ece60","ultra_name":"110 MAIN ST","ultra_registrationnumber":"1009-00132-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"110 MAIN ST","ultra_block":"23","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"b9ad3e2d-9a2f-e811-8122-1458d04ece60","Name":"110 MAIN ST"
+      },"ultra_county":{
+        "Id":"04f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUNTERDON"
+      },"ultra_municipality":{
+        "Id":"ac2d7521-162f-e811-8126-1458d04eb810","Name":"FLEMINGTON BORO"
+      },"ultra_propertyportalsearchfield":"110 MAIN ST","ultra_countyportalsearchfield":"HUNTERDON","ultra_municipalityportalsearchfield":"FLEMINGTON BORO","ultra_elsamaintenancecompany":{
+        "Id":"7f3732a0-919a-e811-8125-1458d0509d88","Name":"Independance Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"108aafd8-b42f-e811-8122-1458d04ece60","Name":"110 MAIN ST ASSOCIATES"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6a402ba2-97b7-4227-9cce-d359027cb4ab","ultra_name":"110 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1104010832001","ultra_addressline1":"110 MAIN ST","ultra_block":"33","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"8a654f8f-13f3-44d4-9985-e44195efc6b1","Name":"110 MAIN ST"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"d62d7521-162f-e811-8126-1458d04eb810","Name":"HIGHTSTOWN BORO"
+      },"ultra_propertyportalsearchfield":"110 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6693cede-03e7-4354-bd8b-843bb6543531","Name":"REGISTERED NEVER"
+      },"ultra_zipcode":"08520","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0191bda8-a891-4ce2-9e5f-430c32186d0c","ultra_name":"1110 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1306010319001","ultra_addressline1":"1110 MAIN ST","ultra_block":"115","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"c7c4cf37-0c6d-4880-8720-79aef9ff76a5","Name":"1110 MAIN ST"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"282e7521-162f-e811-8126-1458d04eb810","Name":"BELMAR BORO"
+      },"ultra_propertyportalsearchfield":"1110 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bf48c2d3-91a9-4cfd-b819-3e228fdc886a","Name":"IVETTE FERNICOLA"
+      },"ultra_zipcode":"07720","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"da7e43fb-99f5-4069-bad7-d5d8f270a9df","ultra_name":"206-210 S MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0811011795001","ultra_addressline1":"206-210 S MAIN ST","ultra_block":"3206","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"5d06e007-dc64-4650-ace9-7fd007a03e4b","Name":"206-210 S MAIN ST"
+      },"ultra_county":{
+        "Id":"00f4aaf2-63e4-e711-8125-1458d054d020","Name":"GLOUCESTER"
+      },"ultra_municipality":{
+        "Id":"682d7521-162f-e811-8126-1458d04eb810","Name":"MONROE TWP (G)"
+      },"ultra_propertyportalsearchfield":"206-210 S MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8a2b0fda-911d-ed11-b83c-001dd803ccea","Name":"206-210 S MAIN STREET LLC"
+      },"ultra_zipcode":"08094","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"738e50bc-d289-4161-802e-53138ea9408a","ultra_name":"210 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1403033261001","ultra_addressline1":"210 MAIN ST","ultra_block":"23","ultra_lot":"15","ultra_propertyinterest":{
+        "Id":"22b88c99-42c3-49dc-8a74-74beb3dda496","Name":"210 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"8c2e7521-162f-e811-8126-1458d04eb810","Name":"BUTLER BORO"
+      },"ultra_propertyportalsearchfield":"210 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"23e31064-cc6d-ee11-8def-001dd80bf47e","Name":"24 PARK ST LLC"
+      },"ultra_zipcode":"07405","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e642715a-95bd-415a-a23c-adb9989cef1b","ultra_name":"210 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1815021975001","ultra_addressline1":"210 MAIN ST","ultra_block":"5","ultra_lot":"21","ultra_propertyinterest":{
+        "Id":"9e5737a2-dd05-489d-971d-16a39a3b333f","Name":"210 MAIN ST"
+      },"ultra_county":{
+        "Id":"16f4aaf2-63e4-e711-8125-1458d054d020","Name":"SOMERSET"
+      },"ultra_municipality":{
+        "Id":"722f7521-162f-e811-8126-1458d04eb810","Name":"PEAPACK-GLADSTONE BORO"
+      },"ultra_propertyportalsearchfield":"210 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0187bee3-778c-445d-9922-1fcca6b86e13","Name":"CONOVER CORNERS LLC"
+      },"ultra_zipcode":"07934","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bebd0a2d-c620-46da-b443-cd9f94693087","ultra_name":"210 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0223042653001","ultra_addressline1":"210 MAIN ST","ultra_block":"311","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"3eb70eb9-ed71-4f44-9567-b157cd50948e","Name":"210 MAIN ST"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"210 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ef0c9f09-d698-4f2b-83ff-4e929774714f","Name":"210 MAIN URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07602","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5fc7e45c-cb2b-41be-8590-0bec397e2bd1","ultra_name":"210 S MAIN ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"210 S MAIN ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"ab4e56a1-372e-49ec-ab78-88a0a0257dc8","Name":"210 S MAIN ST"
+      },"ultra_county":{
+        "Id":"1cf4aaf2-63e4-e711-8125-1458d054d020","Name":"WARREN"
+      },"ultra_municipality":{
+        "Id":"fe2f7521-162f-e811-8126-1458d04eb810","Name":"PHILLIPSBURG TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"088650000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"ea7b059f-8dc8-4047-8aa0-a9b1e7087fdb","ultra_name":"308-310 MAIN ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"308-310 MAIN ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"47f936c8-8f4f-4164-92bd-c59a1c220e26","Name":"308-310 MAIN ST"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"882e7521-162f-e811-8126-1458d04eb810","Name":"BOONTON TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"070050000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"64c7feda-d72f-e811-8122-1458d04ece60","ultra_name":"310 MAIN ST","ultra_registrationnumber":"1507-00192-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"310 MAIN ST","ultra_block":"621","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"992f9443-9a2f-e811-8122-1458d04ece60","Name":"310 MAIN ST"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"e22e7521-162f-e811-8126-1458d04eb810","Name":"TOMS RIVER"
+      },"ultra_propertyportalsearchfield":"310 MAIN ST","ultra_countyportalsearchfield":"OCEAN","ultra_municipalityportalsearchfield":"TOMS RIVER","ultra_elsamaintenancecompany":{
+        "Id":"380c37ca-8136-e811-81fa-1458d04e1b18","Name":"Sharp Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"337497e8-b42f-e811-8122-1458d04ece60","Name":"FINLEY PROPERTIES LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"264acf63-dea1-4e3d-a4a8-3ea91dab436c","ultra_name":"310 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0608011255001","ultra_addressline1":"310 MAIN ST","ultra_block":"240","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"76589418-3b8e-4fd0-a53e-d3aa765a5193","Name":"310 MAIN ST"
+      },"ultra_county":{
+        "Id":"fcf3aaf2-63e4-e711-8125-1458d054d020","Name":"CUMBERLAND"
+      },"ultra_municipality":{
+        "Id":"1a2d7521-162f-e811-8126-1458d04eb810","Name":"LAWRENCE TWP (C)"
+      },"ultra_propertyportalsearchfield":"310 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b696f31a-82ac-4fe4-a65b-8208df1ccbf4","Name":"John Tisa"
+      },"ultra_zipcode":"08311","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"108bae0c-679f-4cb6-8798-bc20209d4276","ultra_name":"410 MAIN AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0269014064001","ultra_addressline1":"410 MAIN AVE","ultra_block":"238","ultra_lot":"3.01","ultra_propertyinterest":{
+        "Id":"cffc11e8-e892-400e-9736-a005c1986881","Name":"410 MAIN AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"4e2c7521-162f-e811-8126-1458d04eb810","Name":"WOOD-RIDGE BORO"
+      },"ultra_propertyportalsearchfield":"410 MAIN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"31eca348-95de-4233-ae61-d7c8335a6703","Name":"MICHAEL & DEBRA LOPRESTI"
+      },"ultra_zipcode":"07075","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"58be0122-1802-4803-bc77-02ca244ed4cb","ultra_name":"410 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0331007947001","ultra_addressline1":"410 MAIN ST","ultra_block":"801","ultra_lot":"21","ultra_propertyinterest":{
+        "Id":"1d096a0c-529e-4aa9-9d95-e83fe775073c","Name":"410 MAIN ST"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"8e2c7521-162f-e811-8126-1458d04eb810","Name":"RIVERTON BORO"
+      },"ultra_propertyportalsearchfield":"410 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fde063b7-615f-4c2a-89bf-989229659af7","Name":"ALICE VOGELMAN"
+      },"ultra_zipcode":"08077","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"085e977b-6783-4a21-95c9-05f6d77e2587","ultra_name":"610 S MAIN ST","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"610 S MAIN ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"3f3c1bbf-9549-4726-99d4-c0ee44b11824","Name":"610 S MAIN ST"
+      },"ultra_county":{
+        "Id":"1cf4aaf2-63e4-e711-8125-1458d054d020","Name":"WARREN"
+      },"ultra_municipality":{
+        "Id":"fe2f7521-162f-e811-8126-1458d04eb810","Name":"PHILLIPSBURG TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"088650000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b0d96185-a434-4444-a651-af940018d8df","ultra_name":"610 S MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0119010476001","ultra_addressline1":"610 S MAIN ST","ultra_block":"243","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"449b6b14-3f06-4fae-a059-909cb05d8636","Name":"610 S MAIN ST"
+      },"ultra_county":{
+        "Id":"f2f3aaf2-63e4-e711-8125-1458d054d020","Name":"ATLANTIC"
+      },"ultra_municipality":{
+        "Id":"bc2b7521-162f-e811-8126-1458d04eb810","Name":"PLEASANTVILLE CITY"
+      },"ultra_propertyportalsearchfield":"610 S MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b8711116-71c8-eb11-bacd-001dd802e7d2","Name":"TRIXIE LLC"
+      },"ultra_zipcode":"08232","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f5be37b1-086f-4579-9a4a-21abb98fae60","ultra_name":"8-10 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1322004825001","ultra_addressline1":"8-10 MAIN ST","ultra_block":"39","ultra_lot":"39","ultra_propertyinterest":{
+        "Id":"297df0b0-30cb-42df-9df6-ffb23dac8395","Name":"8-10 MAIN ST"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"482e7521-162f-e811-8126-1458d04eb810","Name":"KEYPORT BORO"
+      },"ultra_propertyportalsearchfield":"8-10 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"33aebc7e-2efa-ed11-8848-001dd8070e60","Name":"GENTALONI, LLC"
+      },"ultra_zipcode":"07735","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d1c785a0-6239-46f3-87fe-90f4c02cb1ff","ultra_name":"910 MAIN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608026662001","ultra_addressline1":"910 MAIN ST","ultra_block":"6801","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"5837f859-b756-452e-8eba-69abd5ac1a5b","Name":"910 MAIN ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"910 MAIN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2e6a5186-3f9c-4664-8cf9-194bd70fd858","Name":"910 MAIN ST LLC"
+      },"ultra_zipcode":"07503","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"53f9d265-48e7-ec11-bb3b-001dd8030ef7","ultra_name":"A (FOUR STORY)","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1439010415003","ultra_addressline1":"10 NORTH MAIN STREET","ultra_block":"1317","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"71e2a33b-1833-48f6-af28-1387d14a3578","Name":"10 NORTH MAIN"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"d42e7521-162f-e811-8126-1458d04eb810","Name":"WHARTON BORO"
+      },"ultra_propertyportalsearchfield":"10 NORTH MAIN","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"WHARTON BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a3430259-48e7-ec11-bb3b-001dd8030ef7","Name":"WHARTON CHA URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07885","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6feb595f-48e7-ec11-bb3b-001dd8030ef7","ultra_name":"B (TWO STORY)","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1439010415002","ultra_addressline1":"10 NORTH MAIN STREET","ultra_block":"1317","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"71e2a33b-1833-48f6-af28-1387d14a3578","Name":"10 NORTH MAIN"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"d42e7521-162f-e811-8126-1458d04eb810","Name":"WHARTON BORO"
+      },"ultra_propertyportalsearchfield":"10 NORTH MAIN","ultra_countyportalsearchfield":"MORRIS","ultra_municipalityportalsearchfield":"WHARTON BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a3430259-48e7-ec11-bb3b-001dd8030ef7","Name":"WHARTON CHA URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07885","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8f8fe396-5baf-43f1-b850-998aa176daee","ultra_name":"BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1303022768002","ultra_addressline1":"910 MAIN ST","ultra_block":"2706","ultra_lot":"14.01","ultra_propertyinterest":{
+        "Id":"40f13bd3-de97-4d20-a2ab-0c1be12432bf","Name":"ASBURY COMMONS CONDOS"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"222e7521-162f-e811-8126-1458d04eb810","Name":"ASBURY PARK CITY"
+      },"ultra_propertyportalsearchfield":"ASBURY COMMONS CONDOS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"908 MAIN ST","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1f7496f2-c0a8-4ee8-8e20-c2ef92b5a5e1","Name":"ASBURY COMMONS CONDO ASSN"
+      },"ultra_zipcode":"07740","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fdabfeda-d72f-e811-8122-1458d04ece60","ultra_name":"BUILDING A","ultra_registrationnumber":"1303-00169-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"910 MAIN ST","ultra_block":"154","ultra_lot":"5,8,9","ultra_propertyinterest":{
+        "Id":"2bc33e2d-9a2f-e811-8122-1458d04ece60","Name":"BUILDING A"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"222e7521-162f-e811-8126-1458d04eb810","Name":"ASBURY PARK CITY"
+      },"ultra_propertyportalsearchfield":"BUILDING A","ultra_countyportalsearchfield":"MONMOUTH","ultra_municipalityportalsearchfield":"ASBURY PARK CITY","ultra_elsamaintenancecompany":{
+        "Id":"0b9dd351-6254-e811-812c-1458d04ef938","Name":"Thyssen Krupp Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"949eafd8-b42f-e811-8122-1458d04ece60","Name":"ASBURY COMMONS CONDO ASSN INC C/O TOWNSMEN PROPERTIES LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"de78a767-77c6-41a6-b620-6af972269b7b","ultra_name":"CHEESEQUAKE VIL BLDG 74","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1209026126074","ultra_addressline1":"10 MAINE CT","ultra_block":"3500","ultra_lot":"13","ultra_propertyinterest":{
+        "Id":"3dc9d6ec-cbf2-433e-984a-d582e2394600","Name":"CHEESEQUAKE VILLAGE"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"fc2d7521-162f-e811-8126-1458d04eb810","Name":"OLD BRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"CHEESEQUAKE VILLAGE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6590c675-a4a9-4323-a55e-656ca8cea272","Name":"CHEESEQUAKE VIL ASSN"
+      },"ultra_zipcode":"07747","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b4a7feda-d72f-e811-8122-1458d04ece60","ultra_name":"D & J LEASING","ultra_registrationnumber":"1220-00110-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"110 MAIN ST","ultra_block":"207 & 208","ultra_lot":"152","ultra_propertyinterest":{
+        "Id":"a1bf3e2d-9a2f-e811-8122-1458d04ece60","Name":"D & J LEASING"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"122e7521-162f-e811-8126-1458d04eb810","Name":"SOUTH AMBOY CITY"
+      },"ultra_propertyportalsearchfield":"D & J LEASING","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"SOUTH AMBOY CITY","ultra_elsamaintenancecompany":{
+        "Id":"f5939484-4c2a-e911-a96c-001dd800b582","Name":"Otis Local 1"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"429bafd8-b42f-e811-8122-1458d04ece60","Name":"DARYL MUNCK"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a3473c99-d72f-e811-8122-1458d04ece60","ultra_name":"II INVESTORS","ultra_registrationnumber":"0717-00121-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"308-310 MAIN ST","ultra_block":"85","ultra_lot":"3","ultra_propertyinterest":{
+        "Id":"ce8dd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"II INVESTORS"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"482d7521-162f-e811-8126-1458d04eb810","Name":"ORANGE CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"56343dc7-b42f-e811-8122-1458d04ece60","Name":"JACK KATZ MANUEL MUNOZ"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c2de5575-d72f-e811-8122-1458d04ece60","ultra_name":"JOHN HOPKINS HOUSE","ultra_registrationnumber":"0322-00139-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"10 W MAIN ST","ultra_block":"4502","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"038ae59f-9f2f-e811-8120-1458d04e2fb8","Name":"10 W Main Street"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"7c2c7521-162f-e811-8126-1458d04eb810","Name":"MOORESTOWN TWP"
+      },"ultra_propertyportalsearchfield":"10 W Main Street","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"700e88e7-61f9-e811-8132-1458d0509d88","Name":"VERTICAL PLATFORM LIFT"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7c372c96-f327-ee11-9965-001dd8089a79","Name":"TRN REALTY LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bdbcfeda-d72f-e811-8122-1458d04ece60","ultra_name":"MEDICAL BLDG","ultra_registrationnumber":"1417-00133-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"210 MAIN ST","ultra_block":"4 & 5","ultra_lot":"2205","ultra_propertyinterest":{
+        "Id":"8f279443-9a2f-e811-8122-1458d04ece60","Name":"MEDICAL BLDG"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"a82e7521-162f-e811-8126-1458d04eb810","Name":"MADISON BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"c2ada89c-a1f9-e811-812e-1458d04e2f20","Name":"Morris County Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"46acafd8-b42f-e811-8122-1458d04ece60","Name":"210 MAIN ST. LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6e532c14-8807-ed11-bb3a-001dd8035063","ultra_name":"MODERA WOODBRIDGE","ultra_registrationnumber":"1225-00323-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"10 MAIN STREET","ultra_block":"542.01","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"dc422f0e-8807-ed11-bb3a-001dd8035063","Name":"MODERA WOODBRIDGE"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"MODERA WOODBRIDGE","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"WOODBRIDGE TWP","ultra_elsamaintenancecompany":{
+        "Id":"5c532c14-8807-ed11-bb3a-001dd8035063","Name":"KONE INC"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e6422f0e-8807-ed11-bb3a-001dd8035063","Name":"WOODBRIDGE 10 MAIN URBAN RENEWAL, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b012c3e7-810e-ed11-82e3-001dd8041f0f","ultra_name":"MODERA WOODBRIDGE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1225040828001","ultra_addressline1":"10 MAIN ST","ultra_block":"542.01","ultra_lot":"16","ultra_propertyinterest":{
+        "Id":"f3f397cf-810e-ed11-82e3-001dd8041f0f","Name":"MODERA WOODBRIDGE"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"MODERA WOODBRIDGE","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"WOODBRIDGE TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8de57bc9-810e-ed11-82e3-001dd8041f0f","Name":"WOODBRIDGE 10 MAIN URBAL RENEWAL LLC"
+      },"ultra_zipcode":"07095","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7bef0f9c-83ff-4255-8987-5da0c6a0a856","ultra_name":"Park Lane Apartments Building 13","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1605000358013","ultra_addressline1":"2-10 MAIN ST","ultra_block":"92","ultra_lot":"3","ultra_propertyinterest":{
+        "Id":"a6fb62ab-c9f9-45cb-8cb5-570095e2de9c","Name":"PARK LANE APTS"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"202f7521-162f-e811-8126-1458d04eb810","Name":"LITTLE FALLS TWP"
+      },"ultra_propertyportalsearchfield":"PARK LANE APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"2-10 MAIN","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6798d262-3c40-4c82-a0f3-8de7c7310f0e","Name":"PARK FALLS ASSOC & SEVEN PROPERTIES"
+      },"ultra_zipcode":"07424","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3ac1fec2-471c-4160-9fda-a2fd5942236f","ultra_name":"PARKVIEW","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1334008759001","ultra_addressline1":"110 MAIN AVE","ultra_block":"205","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"8232e57f-4cc5-4fde-9c86-c8ab938b0d4d","Name":"110 MAIN AVE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"602e7521-162f-e811-8126-1458d04eb810","Name":"NEPTUNE TWP"
+      },"ultra_propertyportalsearchfield":"110 MAIN AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2fefc55d-cea2-f011-b41c-001dd80a623a","Name":"PHYLLIS CANOVAS"
+      },"ultra_zipcode":"07756","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a6b71566-df30-4344-b4d9-0a0410ad12fa","ultra_name":"PINE TREE INN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1334003346001","ultra_addressline1":"10 MAIN AVE","ultra_block":"211","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"0d2ea8c2-0996-4768-a8f5-1e3a5765387b","Name":"PINE TREE INN"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"602e7521-162f-e811-8126-1458d04eb810","Name":"NEPTUNE TWP"
+      },"ultra_propertyportalsearchfield":"PINE TREE INN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a9261644-6db5-4259-b894-d771004197d6","Name":"KAREN & GOGER FRANCIS MASON"
+      },"ultra_zipcode":"07756","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"24545d6f-d72f-e811-8122-1458d04ece60","ultra_name":"SALVATORE FORCINA","ultra_registrationnumber":"0223-00201-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"810 MAIN ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"a179e59f-9f2f-e811-8120-1458d04e2fb8","Name":"SALVATORE FORCINA"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5cf60d8a-a33e-e811-8121-1458d04e2fb8","Name":"SALVATORE FORCINA"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"13b4a691-ec11-ee11-8f6c-001dd8040109","ultra_name":"SP21 LOFTS AT METUCHEN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1210040091001","ultra_addressline1":"410 MAIN ST","ultra_block":"121","ultra_lot":"9","ultra_propertyinterest":{
+        "Id":"d5b3a691-ec11-ee11-8f6c-001dd8040109","Name":"SP21 LOFTS AT METUCNEN"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"fe2d7521-162f-e811-8126-1458d04eb810","Name":"METUCHEN BORO"
+      },"ultra_propertyportalsearchfield":"SP21 LOFTS AT METUCNEN","ultra_countyportalsearchfield":"MIDDLESEX","ultra_municipalityportalsearchfield":"METUCHEN BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"21 STATION PL","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"79b3a691-ec11-ee11-8f6c-001dd8040109","Name":"PHOENIX 410 MAIN STREET, L.L.C."
+      },"ultra_zipcode":"08840","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"91de5575-d72f-e811-8122-1458d04ece60","ultra_name":"STOKES HALL","ultra_registrationnumber":"0322-00118-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"110 E MAIN ST","ultra_block":"4900","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"dd89e59f-9f2f-e811-8120-1458d04e2fb8","Name":"STOKES HALL"
+      },"ultra_county":{
+        "Id":"f6f3aaf2-63e4-e711-8125-1458d054d020","Name":"BURLINGTON"
+      },"ultra_municipality":{
+        "Id":"7c2c7521-162f-e811-8126-1458d04eb810","Name":"MOORESTOWN TWP"
+      },"ultra_propertyportalsearchfield":"STOKES HALL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"1af2296e-8536-e811-81fa-1458d04e1b18","Name":"Atlas"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a6cee2ae-b42f-e811-8122-1458d04ece60","Name":"MOORESTOWN FRIENDS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"71e4d400-1d18-4f0c-a968-df0ea92020b0","ultra_name":"STUBEN ARMS BLDG 7","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0252002141007","ultra_addressline1":"1210 MAIN ST","ultra_block":"89","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"829298d6-ba1f-4b92-907e-170b8fc884e8","Name":"STUBEN ARMS BLDG 1"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"2c2c7521-162f-e811-8126-1458d04eb810","Name":"RIVER EDGE BORO"
+      },"ultra_propertyportalsearchfield":"STUBEN ARMS BLDG 1","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7c7c69e4-ff87-493a-ab4b-92248ed93e79","Name":"HEKEMIAN CO"
+      },"ultra_zipcode":"07661","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3f535d6f-d72f-e811-8122-1458d04ece60","ultra_name":"UNITED JERSEY BANK","ultra_registrationnumber":"0223-00102-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"210 MAIN ST","ultra_block":"311","ultra_lot":"14","ultra_propertyinterest":{
+        "Id":"e578e59f-9f2f-e811-8120-1458d04e2fb8","Name":"UNITED JERSEY BANK"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"40bee2ae-b42f-e811-8122-1458d04ece60","Name":"UNITED JERSEY BANK"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2b7adafe-d72f-e811-8122-1458d04ece60","ultra_name":"VAN HOUTEN PLMBG & HTG SUPPLY","ultra_registrationnumber":"1607-00148-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"810 MAIN AV","ultra_block":"20A  11","ultra_lot":"4112","ultra_propertyinterest":{
+        "Id":"39369443-9a2f-e811-8122-1458d04ece60","Name":"VAN HOUTEN PLMBG & HTG SUPPLY"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"242f7521-162f-e811-8126-1458d04eb810","Name":"PASSAIC CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8f7a97e8-b42f-e811-8122-1458d04ece60","Name":"CHARLES SABAT"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"280b4a37-9e08-eb11-a813-001dd8018230","ultra_name":"W ORANGE FAMILY PHARMACY","ultra_registrationnumber":"0722-00218-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"310 MAIN ST","ultra_block":"113.02","ultra_lot":"104","ultra_propertyinterest":{
+        "Id":"b0034a37-9e08-eb11-a813-001dd8018230","Name":"W ORANGE FAMILY PHARMACY"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"522d7521-162f-e811-8126-1458d04eb810","Name":"WEST ORANGE TOWN"
+      },"ultra_propertyportalsearchfield":"W ORANGE FAMILY PHARMACY","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"WEST ORANGE TOWN","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"42044a37-9e08-eb11-a813-001dd8018230","Name":"BHURA PATEL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1a575d6f-d72f-e811-8122-1458d04ece60","ultra_name":"WASHINGTON ELEMENTARY SCHOOL","ultra_registrationnumber":"0231-00128-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"310 MAIN ST","ultra_block":"143.01","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"2f7ce59f-9f2f-e811-8120-1458d04e2fb8","Name":"WASHINGTON ELEMENTARY SCHOOL"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"022c7521-162f-e811-8126-1458d04eb810","Name":"LODI BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"3b5f3fec-0c34-eb11-a813-001dd8016c9d","Name":"Jersey Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8f3d8dfa-9a3e-e811-8123-1458d04ece60","Name":"LODI BD OF EDUCATION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6d3275ff-122f-49ef-a1b9-e966030382ef","ultra_name":"WHISTLING SWAN INN","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1919042537001","ultra_addressline1":"110 MAIN ST","ultra_block":"11302","ultra_lot":"7","ultra_propertyinterest":{
+        "Id":"9a352c80-a8dc-44bb-a675-af63e4bcd385","Name":"WHISTLING SWAN INN"
+      },"ultra_county":{
+        "Id":"18f4aaf2-63e4-e711-8125-1458d054d020","Name":"SUSSEX"
+      },"ultra_municipality":{
+        "Id":"a42f7521-162f-e811-8126-1458d04eb810","Name":"STANHOPE BORO"
+      },"ultra_propertyportalsearchfield":"WHISTLING SWAN INN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"482c6aef-0261-ed11-9562-001dd80726d6","Name":"HALF MOON PROPERTY LLC"
+      },"ultra_zipcode":"07874","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

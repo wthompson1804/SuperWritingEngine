@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1200+S.+Fifth+Street%2C+Harrison%2C+NJ+07029&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:44+00:00",
+ "status": 200,
+ "path": "raw/independent_check/16b77dc9adcfaa0f.json",
+ "source": "independent_check"
+}

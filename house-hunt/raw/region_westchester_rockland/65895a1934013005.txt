@@ -1,0 +1,157 @@
+# robots.txt
+# AI assistants: an AI-readable summary of this site is available at:
+#   https://www.riveredgeatnyack.com/llms.txt
+#   https://www.riveredgeatnyack.com/llms-full.txt
+
+User-agent: *
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: CCBot
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /rentalapp/
+Disallow: /residentservices/
+Disallow: /core/account/
+Disallow: /core/leasing/
+Disallow: /core/email/
+Disallow: /core/home/payinvoice/
+Disallow: /api/
+
+Sitemap: https://www.riveredgeatnyack.com/sitemap.xml
+

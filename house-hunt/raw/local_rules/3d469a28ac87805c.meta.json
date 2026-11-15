@@ -1,0 +1,7 @@
+{
+ "url": "https://api.us.socrata.com/api/catalog/v1?domains=data.cityofnewyork.us&q=dog+runs&limit=8",
+ "retrieved_at": "2026-11-15T21:54:33+00:00",
+ "status": 200,
+ "path": "raw/local_rules/3d469a28ac87805c.json",
+ "source": "local_rules"
+}

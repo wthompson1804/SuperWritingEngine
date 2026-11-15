@@ -80,8 +80,27 @@ def main():
     U["car250"] = pd.to_numeric(U.near_veh_theft_24m, errors="coerce") + pd.to_numeric(U.near_theft_from_veh_24m, errors="coerce").fillna(0)
     car_med = U.car250.median()
     car250 = U.set_index("addr_key").car250.dropna()
+    # outside NYC: Jersey City police incidents (about 10.5 months), NJ state housing inspections, rating screen
+    jc, jc_med, jc_period, jc_url, bhi, rating = {}, None, "", "", {}, {}
+    nn = DATA / "evidence" / "non_nyc_records.csv"
+    if nn.exists():
+        NN = pd.read_csv(nn, dtype=str, keep_default_na=False)
+        P = NN[NN.record_type == "police_incidents"]
+        for k, g in P.groupby("addr_key"):
+            t = g[g.metric == "vehicle_crime_250m_total"]
+            m = g[g.metric == "city_candidate_median_vehicle_crime_250m"]
+            if len(t):
+                jc[k] = float(t.value.iloc[0]); jc_period, jc_url = t.period.iloc[0], t.query_url.iloc[0]
+            if len(m):
+                jc_med = float(m.value.iloc[0])
+        Hh = NN[(NN.record_type == "housing_inspection") & (NN.metric == "bhi_latest_report_open_violations")]
+        bhi = {r.addr_key: (r.value, r.period, r.query_url) for r in Hh.itertuples()}
+    rs = DATA / "evidence" / "rating_standard.csv"
+    if rs.exists():
+        RS = pd.read_csv(rs, dtype=str, keep_default_na=False).drop_duplicates("addr_key")
+        rating = {r.addr_key: r for r in RS.itertuples()}
     rows = []
-    keys = sorted(set(I.addr_key) | set(N.addr_key) | set(L.addr_key) | set(car250.index))
+    keys = sorted(set(I.addr_key) | set(N.addr_key) | set(L.addr_key) | set(car250.index) | set(jc) | set(rating))
     for k in keys:
         r, n = R[R.addr_key == k], N[N.addr_key == k]
         flags = set(n.flag)
@@ -98,6 +117,8 @@ def main():
         c250 = car250.get(k)
         if c250 is not None and c250 >= 2 * car_med:
             reasons.append(f"car crime: {int(c250)} vehicle thefts and thefts from vehicles within 250 m in 24 months (police data), at least double the median of {car_med:.0f} for candidate buildings in New York City")
+        if k in jc and jc_med and jc[k] >= 2 * jc_med:
+            reasons.append(f"car crime: {int(jc[k])} vehicle thefts and thefts from vehicles within 250 m ({jc_period.split(' (')[0]}, about 10.5 months, Jersey City police data), at least double the median of {jc_med:.0f} for candidate buildings in Jersey City")
         if car24 >= 3: reasons.append(f"car crime: {car24} independent reports in 24 months")
         elif cnt("car_crime"): pause.append(f"car crime mentioned ({cnt('car_crime')} report(s), below the threshold or older)")
         if el24 >= 3: reasons.append(f"elevator: {el24} tenant reports of outages in 24 months")
@@ -108,6 +129,15 @@ def main():
         if not (mg6 >= 3 or len(nyc6) >= 2):
             if mg6 or len(nyc6) == 1: pause.append("recent management complaints, below the threshold")
             if mg_old: pause.append(f"{mg_old} older management complaint(s); management may have changed")
+        rt = rating.get(k)
+        verdict = getattr(rt, "rating_verdict", "") if rt is not None else ""
+        if rt is not None and getattr(rt, "has_nyc_records", "") not in ("True", "true", "yes", "1"):
+            if verdict == "avoid" and not reasons:
+                reasons.append("reviews: " + rt.rating_verdict_why)
+            elif verdict == "pause":
+                pause.append("reviews: " + rt.rating_verdict_why)
+        if k in bhi and bhi[k][0] not in ("", "0"):
+            pause.append(f"NJ state housing inspection: {bhi[k][0]} open violations at the latest report ({bhi[k][1]})")
         if cnt("safety_incident"): pause.append(f"{cnt('safety_incident')} safety incident report(s) at the address")
         ev = [{"category": x.category, "date": x.item_date, "excerpt": x.excerpt[:300], "url": x.source_url, "source": x.source_site}
               for x in r[r.category.isin(["car_crime", "elevator", "management", "safety_incident"])].sort_values("dt", ascending=False).head(8).itertuples()]
@@ -116,6 +146,7 @@ def main():
         pos = r[r.category == "positive"].sort_values("dt", ascending=False).head(3)
         rows.append({"addr_key": k, "avoid": "yes" if reasons else "no", "reasons": "; ".join(reasons), "pause_notes": "; ".join(pause),
                      "evidence_json": json.dumps(ev), "positive_json": json.dumps([{"date": x.item_date, "excerpt": x.excerpt[:300], "url": x.source_url} for x in pos.itertuples()]),
+                     "public_evidence": ("NYC records" if len(n) else ("rating screen: " + verdict if verdict else "none readable")),
                      "car_crime_250m_24m": c250 if c250 is not None else "", "nyc_candidate_median_car_crime": car_med,
                      "n_car24": car24, "n_elevator24": el24, "n_mgmt_6m": mg6, "n_mgmt_older": mg_old, "nyc_flags": ";".join(sorted(flags - {"none"}))})
     A = pd.DataFrame(rows); A.to_csv(DATA / "avoid_buildings.csv", index=False)

@@ -99,7 +99,10 @@ def report_date(url):
     m = re.search(r"bhi-printfile/(\d{4})%2F([A-Za-z]+)%2F(\d+)%2F", url)
     if not m:
         return ""
-    mon = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"].index(m.group(2).lower()) + 1
+    months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+    if m.group(2).lower() not in months:      # a few links carry an unfilled 'MMMM' placeholder: treat as undated
+        return ""
+    mon = months.index(m.group(2).lower()) + 1
     return f"{m.group(1)}-{mon:02d}-{int(m.group(3)):02d}"
 
 

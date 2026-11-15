@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/y76i-bdw7.json?%24select=precinct&%24where=intersects%28the_geom%2C%27POINT+%28-73.81387329101562+40.71366500854492%29%27%29",
+ "retrieved_at": "2026-11-15T21:53:35+00:00",
+ "status": 200,
+ "path": "raw/independent_check/089cb6f0c4a08e2f.json",
+ "source": "independent_check"
+}

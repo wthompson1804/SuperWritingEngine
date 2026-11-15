@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1100+South+5th+Street%2C+Harrison%2C+NJ+07029&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:48+00:00",
+ "status": 200,
+ "path": "raw/independent_check/4183ceefc186c5dc.json",
+ "source": "independent_check"
+}

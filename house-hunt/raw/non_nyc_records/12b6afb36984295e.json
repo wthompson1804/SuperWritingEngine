@@ -1,0 +1,91 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"6","value":[
+    {
+      "ultra_buildingid":"0ea12e26-a677-46fc-9ccb-ecf6f5ac836a","ultra_name":"900 PARK PL BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0508003220001","ultra_addressline1":"900 PARK PLACE ","ultra_block":"301","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"e31929a2-7bca-4203-81f3-175a9d3a7aea","Name":"900 PARK PL"
+      },"ultra_county":{
+        "Id":"faf3aaf2-63e4-e711-8125-1458d054d020","Name":"CAPE MAY"
+      },"ultra_municipality":{
+        "Id":"fa2c7521-162f-e811-8126-1458d04eb810","Name":"OCEAN CITY"
+      },"ultra_propertyportalsearchfield":"900 PARK PL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bbcbaf7a-25c0-4e57-b56f-12f3b4e6ce48","Name":"900 Park Place COA"
+      },"ultra_zipcode":"08226","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"12e35575-d72f-e811-8122-1458d04ece60","ultra_name":"BOYER HALL","ultra_registrationnumber":"0408-00250-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1900 PARK BLVD","ultra_block":"880","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"938de59f-9f2f-e811-8120-1458d04e2fb8","Name":"BOYER HALL"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b02c7521-162f-e811-8126-1458d04eb810","Name":"CAMDEN CITY"
+      },"ultra_propertyportalsearchfield":"BOYER HALL","ultra_countyportalsearchfield":"CAMDEN","ultra_municipalityportalsearchfield":"CAMDEN CITY","ultra_elsamaintenancecompany":{
+        "Id":"35a0010a-0753-e811-8229-1458d04e1b18","Name":"Excel Elevator"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"42d2e2ae-b42f-e811-8122-1458d04ece60","Name":"CAMDEN COUNTY HISTORICAL SOC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2110f889-8481-ef11-a670-001dd80621a3","ultra_name":"CC HISTORICAL SOCIETY","ultra_registrationnumber":"0408-00250-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1900 PARK BLVD","ultra_block":"1264","ultra_lot":"3","ultra_propertyinterest":{
+        "Id":"938de59f-9f2f-e811-8120-1458d04e2fb8","Name":"BOYER HALL"
+      },"ultra_county":{
+        "Id":"f8f3aaf2-63e4-e711-8125-1458d054d020","Name":"CAMDEN"
+      },"ultra_municipality":{
+        "Id":"b02c7521-162f-e811-8126-1458d04eb810","Name":"CAMDEN CITY"
+      },"ultra_propertyportalsearchfield":"BOYER HALL","ultra_countyportalsearchfield":"CAMDEN","ultra_municipalityportalsearchfield":"CAMDEN CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"42d2e2ae-b42f-e811-8122-1458d04ece60","Name":"CAMDEN COUNTY HISTORICAL SOC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"21b621b7-d72f-e811-8122-1458d04ece60","ultra_name":"EWING HIGH SCHOOL","ultra_registrationnumber":"1102-00150-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"900 PARKWAY AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"9baf3e2d-9a2f-e811-8122-1458d04ece60","Name":"EWING HIGH SCHOOL"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"d22d7521-162f-e811-8126-1458d04eb810","Name":"EWING TWP"
+      },"ultra_propertyportalsearchfield":"EWING HIGH SCHOOL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"55428dfa-9a3e-e811-8123-1458d04ece60","Name":"EWING TWP BD OF EDUCATION"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"e793dafe-d72f-e811-8122-1458d04ece60","ultra_name":"THE ANTIQUE CASTLE","ultra_registrationnumber":"2012-00153-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"900 PARK AV","ultra_block":"720","ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"d34a9443-9a2f-e811-8122-1458d04ece60","Name":"THE ANTIQUE CASTLE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"c62f7521-162f-e811-8126-1458d04eb810","Name":"PLAINFIELD CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fb8d97e8-b42f-e811-8122-1458d04ece60","Name":"ALIAN PROPERTIES LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"720dba79-e710-4065-b7d8-4bcb577b75dd","ultra_name":"THE HILLS BY LENAR CONDO BLDG 9","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1435030077009","ultra_addressline1":"900 PARKVIEW LN","ultra_block":"22401.09","ultra_lot":"1-8","ultra_propertyinterest":{
+        "Id":"94ecdd0a-7333-4262-8a48-dfc4cb08b002","Name":"THE HILLS BY LENAR CONDO"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"cc2e7521-162f-e811-8126-1458d04eb810","Name":"ROCKAWAY TWP"
+      },"ultra_propertyportalsearchfield":"THE HILLS BY LENAR CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1974e829-7d86-41c1-99a8-b821cb59a7e2","Name":"THE HILLS BY LENAR CONDO ASSN C/O INTEGRA MANAGEMENT"
+      },"ultra_zipcode":"07866","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

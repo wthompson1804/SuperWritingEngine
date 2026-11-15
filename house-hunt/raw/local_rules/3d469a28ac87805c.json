@@ -1,0 +1,1201 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "Dog Runs",
+            "id" : "hxx3-bwgv",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Dog runs are large, fenced-in areas for dogs to exercise unleashed during park hours. Each record in this dataset is an individual dog run. Planimetrics have ensured good GIS quality of the data. \r\n\r\nUser guide:  https://drive.google.com/open?id=1_LB-hb9eJ9Bph7K2Yf06_KOtra8qKppbPnfSyH1lRUg\r\nData Dictionary: https://drive.google.com/open?id=1a3vdtIHUTUl2wokZ1r3fot8wm-lrnKGXYL-6xU5Fj2A",
+            "attribution" : "Department of Parks and Recreation (DPR)",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-10-15T13:18:29.000Z",
+            "createdAt" : "2019-04-24T15:42:48.000Z",
+            "metadata_updated_at" : "2026-10-15T13:18:28.000Z",
+            "data_updated_at" : "2026-10-15T13:18:29.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 56,
+                "page_views_last_month" : 196,
+                "page_views_total" : 2272,
+                "page_views_last_week_log" : 5.832890014164742,
+                "page_views_last_month_log" : 7.622051819456376,
+                "page_views_total_log" : 11.150381968817848
+              },
+            "columns_name" :
+              [
+                "FEATURESTATUS",
+                "SURFACE",
+                "DOG_AREA_TYPE",
+                "NAME",
+                "COUNCILDISTRICT",
+                "GISPROPNUM",
+                "BOROUGH",
+                "PARENTID",
+                "COMMUNITYBOARD",
+                "SEATING",
+                "the_geom",
+                "ZIPCODE",
+                "DEPARTMENT",
+                "OBJECTID",
+                "PRECINCT",
+                "SYSTEM"
+              ],
+            "columns_field_name" :
+              [
+                "featurestatus",
+                "surface",
+                "dog_area_type",
+                "name",
+                "councildistrict",
+                "gispropnum",
+                "borough",
+                "parentid",
+                "communityboard",
+                "seating",
+                "the_geom",
+                "zipcode",
+                "department",
+                "objectid",
+                "precinct",
+                "system"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "MultiPolygon",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The current status of the feature. ",
+                "Type of surface the dog run has.",
+                "Type of dog area.",
+                "Name of the dog run.",
+                "Council district number that the dog run is within.",
+                "Unique identifier for the Parks Property that the dog run is within.",
+                "Borough that the dog run is within.",
+                "Unique identifier of the zone that the dog run is within. If the park is not zoned it will be equivalent to GISPROPNUM.",
+                "Community board number that the dog run is within. ",
+                "Indicates whether or not the dog run has seating.",
+                "The spatial information",
+                "Zip code that the dog run in within.",
+                "Parks District that the dog run is within.",
+                "Unique identifier for the record.",
+                "Precint that the dog run is within.",
+                "Unique identifier for the record."
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 2621,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-03-31T22:54:28.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Recreation",
+            "domain_tags" : [ "parks", "dog runs", "dog" ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "Yes" },
+                { "key" : "Update_Date-Made-Public", "value" : "4/29/2019" },
+                { "key" : "Update_Update-Frequency", "value" : "Monthly" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Department of Parks and Recreation (DPR)"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/hxx3-bwgv",
+        "link" : "https://data.cityofnewyork.us/Recreation/Dog-Runs/hxx3-bwgv",
+        "owner" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          },
+        "creator" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "NYC Parks Dog Runs",
+            "id" : "8nac-uner",
+            "resource_name" : null,
+            "parent_fxf" : [ "hxx3-bwgv" ],
+            "description" : "Dog runs are large, fenced-in areas for dogs to exercise unleashed during park hours. Each record in this dataset is an individual dog run. Planimetrics have ensured good GIS quality of the data. \r\n\r\nUser guide:  https://drive.google.com/open?id=1_LB-hb9eJ9Bph7K2Yf06_KOtra8qKppbPnfSyH1lRUg\r\nData Dictionary: https://drive.google.com/open?id=1a3vdtIHUTUl2wokZ1r3fot8wm-lrnKGXYL-6xU5Fj2A",
+            "attribution" : "Department of Parks and Recreation (DPR)",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "map",
+            "updatedAt" : "2026-10-15T13:18:29.000Z",
+            "createdAt" : "2019-04-24T15:42:47.000Z",
+            "metadata_updated_at" : "2024-02-02T18:45:27.000Z",
+            "data_updated_at" : "2026-10-15T13:18:29.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 35,
+                "page_views_last_month" : 130,
+                "page_views_total" : 5840,
+                "page_views_last_week_log" : 5.169925001442312,
+                "page_views_last_month_log" : 7.03342300153745,
+                "page_views_total_log" : 12.511999669441451
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 338,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "visualization_canvas_map",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2019-04-24T15:42:47.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Recreation",
+            "domain_tags" : [ "dog", "parks", "dog runs" ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "No" },
+                { "key" : "Update_Date-Made-Public", "value" : "4/29/2019" },
+                { "key" : "Update_Update-Frequency", "value" : "As needed" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Department of Parks and Recreation (DPR)"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/8nac-uner",
+        "link" : "https://data.cityofnewyork.us/Recreation/NYC-Parks-Dog-Runs/8nac-uner",
+        "owner" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          },
+        "creator" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Directory of Dog Runs and Off-Leash Areas",
+            "id" : "ipbu-mtcs",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Dog runs in New York City Department of Parks & Recreation properties and properties with off-leash hours for dogs.",
+            "attribution" : "Department of Parks and Recreation (DPR)",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "href",
+            "updatedAt" : "2024-10-30T14:28:10.000Z",
+            "createdAt" : "2011-08-16T18:40:22.000Z",
+            "metadata_updated_at" : "2024-10-30T14:28:10.000Z",
+            "data_updated_at" : "2011-08-16T18:40:22.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 66,
+                "page_views_last_month" : 221,
+                "page_views_total" : 6132,
+                "page_views_last_week_log" : 6.066089190457772,
+                "page_views_last_month_log" : 7.794415866350106,
+                "page_views_total_log" : 12.58237723564069
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 525,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "href",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2011-08-16T18:40:22.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Recreation",
+            "domain_tags" :
+              [
+                "directory of dog runs  and off-leash areas",
+                "dogs",
+                "dpr",
+                "healthy living",
+                "parks"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "N/A" },
+                { "key" : "Update_Date-Made-Public", "value" : "8/16/2011" },
+                { "key" : "Update_Update-Frequency", "value" : "As needed" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Department of Parks and Recreation (DPR)"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.cityofnewyork.us",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "xml" : "http://nycgovparks.org/bigapps/DPR_DogRuns_001.xml",
+                      "json" : "https://www.nycgovparks.org/bigapps/DPR_DogRuns_001.json"
+                    },
+                  "title" : "Directory of Dog Runs  and Off-Leash Areas",
+                  "described_by" : "https://www.nycgovparks.org/bigapps/desc/DPR_DogRuns_001.txt",
+                  "described_by_type" : "txt"
+                }
+              ],
+            "access_points" :
+              {
+                "xml" : "http://nycgovparks.org/bigapps/DPR_DogRuns_001.xml",
+                "json" : "https://www.nycgovparks.org/bigapps/DPR_DogRuns_001.json"
+              }
+          },
+        "permalink" : "https://data.cityofnewyork.us/d/ipbu-mtcs",
+        "link" : "https://data.cityofnewyork.us/Recreation/Directory-of-Dog-Runs-and-Off-Leash-Areas/ipbu-mtcs",
+        "owner" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          },
+        "creator" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Parks Closure Status Due to COVID-19: Dog Runs",
+            "id" : "wswf-9pts",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "In response to the COVID-19 pandemic, NYC Parks temporarily closed several amenities, including Dog Runs. This data collection contains the status of each Dog Run, and is subject to change. Although the data feed is refreshed daily, it may not reflect current conditions.\r\n\r\nData Dictionary:\r\n\r\nhttps://docs.google.com/spreadsheets/d/1aaYE82BS-SYh-xjI-t_oyJcNEPFWJNPfdI7T220-rv4/edit#gid=1499621902",
+            "attribution" : "Department of Parks and Recreation (DPR)",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-02-05T16:08:05.000Z",
+            "createdAt" : "2020-05-18T20:58:19.000Z",
+            "metadata_updated_at" : "2026-02-05T16:08:05.000Z",
+            "data_updated_at" : "2021-11-22T14:49:49.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 6,
+                "page_views_last_month" : 39,
+                "page_views_total" : 2015,
+                "page_views_last_week_log" : 2.807354922057604,
+                "page_views_last_month_log" : 5.321928094887363,
+                "page_views_total_log" : 10.977279923499918
+              },
+            "columns_name" :
+              [
+                "Approx Date Reopened",
+                "ClosureType",
+                "Borough",
+                "ParkDistrict",
+                "Red Sign Installed",
+                "GISPropNum",
+                "Name",
+                "OMPPropID",
+                "Status",
+                "System",
+                "Approx Date Closed",
+                "polygon",
+                "PropertyName",
+                "Yellow Sign Removed",
+                "SubPropertyName",
+                "EditDate"
+              ],
+            "columns_field_name" :
+              [
+                "approx_date_reopened",
+                "closuretype",
+                "borough",
+                "parkdistrict",
+                "red_sign_installed",
+                "gispropnum",
+                "name",
+                "omppropid",
+                "status",
+                "system",
+                "approx_date_closed",
+                "polygon",
+                "propertyname",
+                "yellow_sign_removed",
+                "subpropertyname",
+                "editdate"
+              ],
+            "columns_datatype" :
+              [
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Checkbox",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Polygon",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date"
+              ],
+            "columns_description" :
+              [
+                "Date dog run reopened from Covid closure",
+                "Indicates the type of closure",
+                "Borough in which the dog run is located.",
+                "Name of the Parks maintenance district that contains the Dog Run.",
+                "Indicates whether a red closed sign was installed",
+                "Unique identification number for the property the Dog Run is within",
+                "The name of the Dog Run",
+                "Unique identification number for a property or portion of a property. In some cases – a standalone, smaller park for example – this number will be equivalent to the GIS Property Number. In other cases – a zone, playground or other site within a larger park – an additional designation of letters and/or numbers will be added.",
+                "Indicates whether the playgrounds is still active and open to the public or has been closed to observe COVID-19 social distancing",
+                "The internal unique identifier of the Dog Run. Use System to join to NYC Parks Dog Runs dataset: https://data.cityofnewyork.us/Recreation/NYC-Parks-Dog-Runs/8nac-uner",
+                "Approximate date dog run closed because of Covid",
+                "Location (POLYGON) of dog run",
+                "The name of the property the Dog Run is within",
+                "Indicates whether a yellow sign dictating no group play was removed",
+                "The name of the subproperty (Zone or Playground) that the Dog Run falls within",
+                "Last edited date"
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 2336,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2020-08-26T19:24:06.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_tags" : [ "covid-19", "parks", "closure", "covid" ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "No" },
+                {
+                  "key" : "Update_Update-Frequency",
+                  "value" : "Historical data"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Department of Parks and Recreation (DPR)"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/wswf-9pts",
+        "link" : "https://data.cityofnewyork.us/dataset/Parks-Closure-Status-Due-to-COVID-19-Dog-Runs/wswf-9pts",
+        "owner" :
+          {
+            "id" : "yrqv-pmyz",
+            "user_type" : "interactive",
+            "display_name" : "NYC Parks Open Data Team"
+          },
+        "creator" :
+          {
+            "id" : "yrqv-pmyz",
+            "user_type" : "interactive",
+            "display_name" : "NYC Parks Open Data Team"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "2018 Central Park Squirrel Census - Squirrel Data",
+            "id" : "vfnx-vebw",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Squirrel Census (https://www.thesquirrelcensus.com/) is a multimedia science, design, and storytelling project focusing on the Eastern gray (Sciurus carolinensis). They count squirrels and present their findings to the public. This table contains squirrel data for each of the 3,023 sightings, including location coordinates, age, primary and secondary fur color, elevation, activities, communications, and interactions between squirrels and with humans.",
+            "attribution" : "The Squirrel Census",
+            "attribution_link" : "https://www.thesquirrelcensus.com/",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2023-04-18T19:29:57.000Z",
+            "createdAt" : "2019-10-13T21:31:44.000Z",
+            "metadata_updated_at" : "2023-04-18T19:29:57.000Z",
+            "data_updated_at" : "2019-10-18T17:54:51.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 949,
+                "page_views_last_month" : 2914,
+                "page_views_total" : 314040,
+                "page_views_last_week_log" : 9.89178370321831,
+                "page_views_last_month_log" : 11.509280168087859,
+                "page_views_total_log" : 18.260593398634214
+              },
+            "columns_name" :
+              [
+                "Eating",
+                "Chasing",
+                "Lat/Long",
+                "Highlight Fur Color",
+                "Moans",
+                "Color notes",
+                "Primary Fur Color",
+                "Foraging",
+                "Other Activities",
+                "Tail flags",
+                "Running",
+                "Quaas",
+                "Tail twitches",
+                "City Council Districts",
+                "Community Districts",
+                "Shift",
+                "Specific Location",
+                "Borough Boundaries",
+                "Climbing",
+                "Police Precincts",
+                "Other Interactions",
+                "Above Ground Sighter Measurement",
+                "Approaches",
+                "Unique Squirrel ID",
+                "Hectare",
+                "Y",
+                "X",
+                "Indifferent",
+                "Age",
+                "Combination of Primary and Highlight Color",
+                "Zip Codes",
+                "Date",
+                "Location",
+                "Kuks",
+                "Runs from",
+                "Hectare Squirrel Number"
+              ],
+            "columns_field_name" :
+              [
+                "eating",
+                "chasing",
+                "geocoded_column",
+                "highlight_fur_color",
+                "moans",
+                "color_notes",
+                "primary_fur_color",
+                "foraging",
+                "other_activities",
+                "tail_flags",
+                "running",
+                "quaas",
+                "tail_twitches",
+                ":@computed_region_92fq_4b7q",
+                ":@computed_region_f5dn_yrer",
+                "shift",
+                "specific_location",
+                ":@computed_region_yeji_bk3q",
+                "climbing",
+                ":@computed_region_sbqj_enih",
+                "other_interactions",
+                "above_ground_sighter",
+                "approaches",
+                "unique_squirrel_id",
+                "hectare",
+                "y",
+                "x",
+                "indifferent",
+                "age",
+                "combination_of_primary_and",
+                ":@computed_region_efsh_h5xi",
+                "date",
+                "location",
+                "kuks",
+                "runs_from",
+                "hectare_squirrel_number"
+              ],
+            "columns_datatype" :
+              [
+                "Checkbox",
+                "Checkbox",
+                "Point",
+                "Text",
+                "Checkbox",
+                "Text",
+                "Text",
+                "Checkbox",
+                "Text",
+                "Checkbox",
+                "Checkbox",
+                "Checkbox",
+                "Checkbox",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Checkbox",
+                "Number",
+                "Text",
+                "Text",
+                "Checkbox",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Checkbox",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Checkbox",
+                "Checkbox",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Squirrel was seen eating.",
+                "Squirrel was seen chasing another squirrel.",
+                "Latitude and longitude",
+                "Discrete value or string values comprised of \"Gray,\" \"Cinnamon\" or \"Black.\"",
+                "Squirrel was heard moaning, a high-pitched vocal communication which can indicate the presence of an air predator such as a hawk.",
+                "Sighters occasionally added commentary on the squirrel fur conditions. These notes are provided here.",
+                "Value is either \"Gray,\" \"Cinnamon\" or \"Black.\"",
+                "Squirrel was seen foraging for food.",
+                "",
+                "Squirrel was seen flagging its tail. Flagging is a whipping motion used to exaggerate squirrel's size and confuse rivals or predators. Looks as if the squirrel is scribbling with tail into the air.",
+                "Squirrel was seen running.",
+                "Squirrel was heard quaaing, an elongated vocal communication which can indicate the presence of a ground predator such as a dog.",
+                "Squirrel was seen twitching its tail. Looks like a wave running through the tail, like a breakdancer doing the arm wave. Often used to communicate interest, curiosity.",
+                "",
+                "",
+                "Value is either \"AM\" or \"PM,\" to communicate whether or not the sighting session occurred in the morning or late afternoon. ",
+                "Sighters occasionally added commentary on the squirrel location. These notes are provided here.",
+                "",
+                "Squirrel was seen climbing a tree or other environmental landmark.",
+                "",
+                "Sighter notes on other types of interactions between squirrels and humans.",
+                "For squirrel sightings on the ground plane, fields were populated with a value of “FALSE.”",
+                "Squirrel was seen approaching human, seeking food.",
+                "Identification tag for each squirrel sightings. The tag is comprised of \"Hectare ID\" + \"Shift\" + \"Date\" + \"Hectare Squirrel Number.\"",
+                "ID tag, which is derived from the hectare grid used to divide and count the park area. One axis that runs predominantly north-to-south is numerical (1-42), and the axis that runs predominantly east-to-west is roman characters (A-I). ",
+                "Latitude coordinate for squirrel sighting point",
+                "Longitude coordinate for squirrel sighting point",
+                "Squirrel was indifferent to human presence.",
+                "Value is either \"Adult\" or \"Juvenile.\"",
+                "A combination of the previous two columns; this column gives the total permutations of primary and highlight colors observed.",
+                "",
+                "Concatenation of the sighting session day and month.",
+                "Value is either \"Ground Plane\" or \"Above Ground.\" Sighters were instructed to indicate the location of where the squirrel was when first sighted.",
+                "Squirrel was heard kukking, a chirpy vocal communication used for a variety of reasons.",
+                "Squirrel was seen running from humans, seeing them as a threat.",
+                "Number within the chronological sequence of squirrel sightings for a discrete sighting session. "
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 129130,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2019-10-13T21:47:29.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment",
+            "domain_tags" : [ "squirrel census" ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "No" },
+                { "key" : "Update_Date-Made-Public", "value" : "10/15/2019" },
+                {
+                  "key" : "Update_Update-Frequency",
+                  "value" : "Historical data"
+                },
+                {
+                  "key" : "Data-Collection_Data-Collection",
+                  "value" : "2018 Central Park Squirrel Census"
+                },
+                { "key" : "Dataset-Information_Agency", "value" : "Other" }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/vfnx-vebw",
+        "link" : "https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw",
+        "owner" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          },
+        "creator" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Waterfront Public Access Areas (WPAAs)",
+            "id" : "388s-pnvc",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Waterfront Public Access Areas (WPAAs) are privately owned waterfront zoning lots where publicly accessible open space is provided to and along the shoreline for public enjoyment, as shown on the <a href=\"https://waterfrontaccess.planning.nyc.gov/\">Waterfront Access Map (WAM)</a>.",
+            "attribution" : "Department of City Planning (DCP)",
+            "attribution_link" : "https://www.nyc.gov/site/planning/data-maps/open-data/dwn-waterfront.page",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2024-08-08T18:14:57.000Z",
+            "createdAt" : "2023-10-25T19:09:54.000Z",
+            "metadata_updated_at" : "2024-08-08T18:14:57.000Z",
+            "data_updated_at" : "2023-11-01T19:43:38.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 83,
+                "page_views_last_month" : 213,
+                "page_views_total" : 8558,
+                "page_views_last_week_log" : 6.39231742277876,
+                "page_views_last_month_log" : 7.7414669864011465,
+                "page_views_total_log" : 13.063226532302876
+              },
+            "columns_name" :
+              [
+                "Shore Public Walkway Linear Feet",
+                "Summary of WPAA",
+                "Feature Pier",
+                "Feature Educational or Interpretive Signs",
+                "Feature Group Seating",
+                "the_geom",
+                "Zoning Application Portal (ZAP) Link",
+                "Feature Seating Lawn",
+                "CPC Report Link",
+                "Adjacent Waterway",
+                "Activity Fishing",
+                "Feature Outdoor Art",
+                "Restrictive Declaration Link",
+                "Feature Promenade",
+                "Activity Tot Playground",
+                "Activity Basketball Court",
+                "Activity Boating/In-Water Access",
+                "Activity Other Recreational",
+                "Feature Dog Run",
+                "Activity Splash Feature",
+                "Activity Volleyball Court",
+                "Feature Shade Structure",
+                "Name",
+                "Maintained By",
+                "WPAA_ID",
+                "Construction Status",
+                "Chair Certification Date",
+                "CPC Approval Date",
+                "Supplemental Public Access Area",
+                "Total WPAA Area",
+                "Hours of Operation",
+                "Feature Public Restroom",
+                "Shore Public Walkway Area",
+                "Activity Swimming",
+                "Feature Wetland/Natural Edge",
+                "Feature Food or Beverage Concessions",
+                "Shape_Length",
+                "Shape_Area"
+              ],
+            "columns_field_name" :
+              [
+                "shore_line",
+                "summary",
+                "f_pier",
+                "f_edu_intp",
+                "f_grpseat",
+                "the_geom",
+                "zap_link",
+                "f_seatlawn",
+                "cpc_report",
+                "waterway",
+                "a_fishing",
+                "f_art",
+                "res_dec",
+                "f_promenad",
+                "a_playgrnd",
+                "a_basketct",
+                "a_boating",
+                "a_otherrec",
+                "f_dogrun",
+                "a_splash",
+                "a_volleyct",
+                "f_shade",
+                "name",
+                "maintenanc",
+                "wpaa_id",
+                "status",
+                "chair_cert",
+                "cpc_approv",
+                "sup_area",
+                "wpaa_area",
+                "hours_open",
+                "f_restroom",
+                "shore_area",
+                "a_swimming",
+                "f_wetland",
+                "f_food_bev",
+                "shape_leng",
+                "shape_area"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "MultiPolygon",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Shore Public Walkway in linear feet",
+                "A general, 1-2 sentence descriptive overview of the Waterfront Public Access Area (WPAA) highlighting key features",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Pier, site feature. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians Educational or Interpretive signs, site feature. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Group Seating, site feature. 1=Yes, 0=No",
+                "Geometry type",
+                "The hyperlink to the project in the Zoning Application Portal (ZAP) associated with the Waterfront Public Access Area (WPAA), if applicable.",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Seating Lawn, site feature. 1=Yes, 0=No",
+                "The hyperlink to the City Planning Commission (CPC) Report associated with the creation of the Waterfront Public Access Area (WPAA), if applicable.",
+                "The name of the NYC waterbody that is adjacent to the Waterfront Public Access Area (WPAA).",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Fishing, active use amenity. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians an Outdoor Art, site feature. 1=Yes, 0=No",
+                "The hyperlink to or ID number of the restrictive declaration document on Dept. of Finanace's (DOF) Automated City Register Information System (ACRIS) webiste, associated with the creation of the Waterfront Public Access Area (WPAA), if applicable.",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Promenade/Esplanade, site feature. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Tot Playground, active use amenity. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Basketball Court, active use amenity. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Boating/In-Water Access, active use amenity. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Other Recreational (Bocce, Skate Park, etc), active use amenity. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Dog Run, site feature. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Splash Feature, active use amenity. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Volleyball Court, active use amenity. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Shade Structure, site feature. 1=Yes, 0=No",
+                "The name of the Waterfront Public Access Area (WPAA)",
+                "The entity responsible for the maintenance of the Waterfront Public Access Area (WPAA). It is typically: Private Property Owned, but may also be: NYC DPR or NYC EDC",
+                "A unique ID for each Waterfront Public Access Area (WPAA). FKA PAWS ID - Publicly Accessible Waterfront Spaces ID.",
+                "The construction status of the Waterfront Public Access Area (WPAA), it will be one of the following options: Approved (to be consutrcted), Open, Partially Open, Under Construction",
+                "The date of Chair Certification associated with the creation of the Waterfront Public Access Area (WPAA), if applicable.",
+                "The date of City Planning Commission (CPC) approval associated with the creation of the Waterfront Public Access Area (WPAA), if applicable.",
+                "Total supplemental public access area in square feet. Supplemental public access area is a public access area required in order to fulfill the minimum percentage of Waterfront Public Access Area (WPAA)required on a waterfront zoning lot, once a shore public walkway and upland connection have been provided.",
+                "Total Waterfront Public Access Area (WPAA) in square feet. WPAA area is the portion of a waterfront zoning lot where publicly accessible open space is provided to and along the shoreline.",
+                "Public hours of operation for Waterfront Public Access Areas (WPAAs). It is often Dawn to Dusk, but some WPAAs have seasonal differences in the times they are open.",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Public Restroom, site feature. 1=Yes, 0=No",
+                "Shore Public Walkway Area",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Swimming, active use amenity. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians a Wetland/Natural Edge, site feature. 1=Yes, 0=No",
+                "Flag to indicate whether the Waterfront Public Access Area (WPAA) contians Food or Beverage Concessions, site feature. 1=Yes, 0=No",
+                "Length of feature in internal units.",
+                "Area of feature in internal units squared."
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "view" : "date" },
+                { "view" : "date" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 3832,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-11-01T19:43:44.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Recreation",
+            "domain_tags" :
+              [
+                "department of city planning",
+                "wpaa",
+                "waterfront public access areas",
+                "waterfront access map",
+                "wam",
+                "shore public access",
+                "recreation",
+                "publicly accessible waterfront",
+                "parks",
+                "dcp",
+                "open space",
+                "nyc"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "No" },
+                { "key" : "Update_Date-Made-Public", "value" : "12/31/2019" },
+                { "key" : "Update_Update-Frequency", "value" : "As needed" },
+                {
+                  "key" : "Update_Data-Change-Frequency",
+                  "value" : "Every 2 months"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Department of City Planning (DCP)"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/388s-pnvc",
+        "link" : "https://data.cityofnewyork.us/Recreation/Waterfront-Public-Access-Areas-WPAAs-/388s-pnvc",
+        "owner" :
+          {
+            "id" : "iqqb-gm94",
+            "user_type" : "interactive",
+            "display_name" : "DCP Open Data"
+          },
+        "creator" :
+          {
+            "id" : "iqqb-gm94",
+            "user_type" : "interactive",
+            "display_name" : "DCP Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "2018 Central Park Squirrel Census - Stories",
+            "id" : "gfqj-f768",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Squirrel Census (https://www.thesquirrelcensus.com/) is a multimedia science, design, and storytelling project focusing on the Eastern gray (Sciurus carolinensis). They count squirrels and present their findings to the public. \r\n\r\nThis table contains stories, observations, and notes written on tally sheets by Squirrel Sighters during the Census. Individual stories have been tagged with common story themes, such as “squirrel experience,” “park experience,” “dogs,” “other animals,” “accidental poems,” and “squirrels acting odd.”",
+            "attribution" : "The Squirrel Census",
+            "attribution_link" : "https://www.thesquirrelcensus.com/",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2023-04-18T19:29:45.000Z",
+            "createdAt" : "2019-10-15T15:23:03.000Z",
+            "metadata_updated_at" : "2023-04-18T19:29:45.000Z",
+            "data_updated_at" : "2019-10-15T15:39:06.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 21,
+                "page_views_last_month" : 92,
+                "page_views_total" : 6906,
+                "page_views_last_week_log" : 4.459431618637297,
+                "page_views_last_month_log" : 6.539158811108032,
+                "page_views_total_log" : 12.753843508311636
+              },
+            "columns_name" :
+              [
+                "Story Topic: Other Animals",
+                "Story Topic: Squirrels Acting Odd",
+                "Story Topic: Other",
+                "Story Topic: Accidental Poems",
+                "Note Squirrel & Park Stories",
+                "Shift",
+                "Story Topic: Census Takers Recognized",
+                "Date",
+                "Story Topic: Dogs",
+                "Hectare",
+                "Story Topic: Squirrel Experience or Squirrel Story",
+                "Story Topic: Park Experience or Census Taker Story"
+              ],
+            "columns_field_name" :
+              [
+                "story_topic_other_animals",
+                "story_topic_squirrels_acting",
+                "story_topic_other",
+                "story_topic_accidental_poems",
+                "note_squirrel_park_stories",
+                "shift",
+                "story_topic_census_takers",
+                "date",
+                "story_topic_dogs",
+                "hectare",
+                "story_topic_squirrel",
+                "story_topic_park_experience"
+              ],
+            "columns_datatype" :
+              [
+                "Checkbox",
+                "Checkbox",
+                "Text",
+                "Checkbox",
+                "Text",
+                "Text",
+                "Checkbox",
+                "Text",
+                "Checkbox",
+                "Text",
+                "Checkbox",
+                "Checkbox"
+              ],
+            "columns_description" :
+              [
+                "This tag indicates sighter noted observations about other animals in the park.",
+                "This tag indicates a note from sighter about squirrels that read, to the Census team, as odd or unusual squirrel behavior.",
+                "Random, uncategorized stories were filed here.",
+                "This tag indicates a note from sighter that read, to the Census team, like short poems about the park.",
+                "Copy notated by sighter while observing hectare",
+                "Value is either \"AM\" or \"PM,\" to communicate whether the sighting session occurred in the morning or late afternoon.",
+                "This tag indicates a sighter (or “Census taker”) recorded a story about being recognized as part of the Central Park Squirrel Census by other park goer(s).",
+                "Concatenation of the sighting session month, day, and year (MMDDYYYY).",
+                "This tag indicates sighter noted story about dogs they observed.",
+                "ID tag, which is derived from the hectare grid used to divide and count the park area. One axis that runs predominantly north-to-south is numerical (1-42), and the axis that runs predominantly east-to-west ",
+                "This tag indicates sighter wrote down story that dealt primarily with squirrels and their experience of the park.",
+                "This tag indicates sighter (or “Census taker”) wrote down story about other park goer(s) or their own experience in the park."
+              ],
+            "columns_format" :
+              [ {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} ],
+            "download_count" : 4430,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2019-10-15T15:39:07.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment",
+            "domain_tags" : [ "squirrel census" ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "No" },
+                { "key" : "Update_Date-Made-Public", "value" : "10/15/2019" },
+                {
+                  "key" : "Update_Update-Frequency",
+                  "value" : "Historical data"
+                },
+                {
+                  "key" : "Data-Collection_Data-Collection",
+                  "value" : "2018 Central Park Squirrel Census"
+                },
+                { "key" : "Dataset-Information_Agency", "value" : "Other" }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/gfqj-f768",
+        "link" : "https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Stories/gfqj-f768",
+        "owner" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          },
+        "creator" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          }
+      }
+    ],
+  "resultSetSize" : 7,
+  "timings" : { "serviceMillis" : 20, "searchMillis" : [ 2, 5 ] },
+  "warnings" : []
+}

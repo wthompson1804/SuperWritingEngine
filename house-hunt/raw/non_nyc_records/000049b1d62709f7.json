@@ -1,0 +1,61 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"4","value":[
+    {
+      "ultra_buildingid":"98a3212c-ef76-4756-9dc8-d6f53e2a5784","ultra_name":"1142 KENNEDY BLVD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901023444001","ultra_addressline1":"1142 KENNEDY BLVD","ultra_block":"55","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"2c3b5bf0-9fb7-4b5f-abd7-31638b70961a","Name":"1142 KENNEDY BLVD"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"1142 KENNEDY BLVD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"5f6bcca7-3b27-ef11-840a-001dd80bfe58","Name":"1142 JF KENNEDY BLVD LLC"
+      },"ultra_zipcode":"07002","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5e93a364-a345-473a-9e57-537582f96504","ultra_name":"3142 KENNEDY BLVD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0906018810001","ultra_addressline1":"3142 KENNEDY BLVD","ultra_block":"5402","ultra_lot":"2","ultra_propertyinterest":{
+        "Id":"0c279fbf-079c-4ea0-934a-55878e5bcede","Name":"3142 KENNEDY BLVD"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8e2d7521-162f-e811-8126-1458d04eb810","Name":"JERSEY CITY"
+      },"ultra_propertyportalsearchfield":"3142 KENNEDY BLVD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6d60c8af-168e-43ea-b777-6f73bfcc23d5","Name":"GUISEPPI MAZZONE"
+      },"ultra_zipcode":"07307","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5220c956-ceaf-4e0e-9df6-b3f897885b66","ultra_name":"538-542 KENNEDY BLVD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901010620001","ultra_addressline1":"538-542 KENNEDY BLVD","ultra_block":"215","ultra_lot":"44","ultra_propertyinterest":{
+        "Id":"94f57764-5231-4d11-a6d0-d4d4d7cd4853","Name":"538-542 KENNEDY BLVD"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"538-542 KENNEDY BLVD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f9570707-5d9f-4aaf-a520-7e80be954df8","Name":"GEORGE BRATTOLE"
+      },"ultra_zipcode":"07002","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b6ea7e5e-d370-4c44-95b7-d175f7132bdc","ultra_name":"642 JF KENNEDY BLVD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0901042707001","ultra_addressline1":"642 JF KENNEDY BLVD","ultra_block":"188","ultra_lot":"42","ultra_propertyinterest":{
+        "Id":"a37409a9-64ab-40c6-be46-e5000e7f24a3","Name":"642 JF KENNEDY BLVD"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":"642 JF KENNEDY BLVD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b962bd43-6cac-ec11-b3fe-001dd80307ee","Name":"BORIS STISKIN"
+      },"ultra_zipcode":"07002","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

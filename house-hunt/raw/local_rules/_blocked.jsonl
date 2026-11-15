@@ -1,0 +1,11 @@
+{"muni": "nyc", "url": "https://www.nycgovparks.org/facilities/dogareas", "reason": "HTTP 403 bot wall", "at": "2026-11-15T21:54:06+00:00"}
+{"muni": "nyc", "url": "https://www.nycgovparks.org/rules/section-1-04", "reason": "robots: HTTP 403 bot wall", "at": "2026-11-15T21:54:06+00:00"}
+{"muni": "nyc", "url": "https://www.nycgovparks.org/facilities/beaches", "reason": "robots: HTTP 403 bot wall", "at": "2026-11-15T21:54:07+00:00"}
+{"muni": "nyc", "url": "https://www.nyc.gov/html/dot/html/about/faqs.shtml", "reason": "HTTP 404", "at": "2026-11-15T21:54:51+00:00"}
+{"muni": "yonkers", "url": "https://www.yonkersny.gov/", "reason": "robots: robots.txt HTTP 403 bot wall", "at": "2026-11-15T21:55:37+00:00"}
+{"muni": "valley-stream", "url": "https://www.vsvny.org/", "reason": "robots: claude group", "at": "2026-11-15T21:55:37+00:00"}
+{"muni": "yonkers", "url": "https://www.yonkersparkingauthority.com/", "reason": "robots: robots.txt HTTP 403 bot wall", "at": "2026-11-15T21:55:38+00:00"}
+{"muni": "white-plains", "url": "https://www.cityofwhiteplains.com/CivicAlerts.aspx?AID=2243", "reason": "robots: claude group", "at": "2026-11-15T21:55:42+00:00"}
+{"muni": "new-rochelle", "url": "https://www.newrochelleny.com/", "reason": "robots: RuntimeError('fetch failed after 2 tries: https://www.newrochelleny.com/robots.txt: ConnectionError(MaxRetryError(\\'HTTPConnectionPool(host=\\\\\\'www.newrochelleny.gov\\\\\\', port=80): Max retries exceede", "at": "2026-11-15T21:55:47+00:00"}
+{"muni": "white-plains", "url": "https://www.cityofwhiteplains.com/FAQ.aspx", "reason": "robots: claude group", "at": "2026-11-15T21:55:48+00:00"}
+{"muni": "jersey-city", "url": "https://www.jerseycitynj.gov/", "reason": "robots: RuntimeError('fetch failed after 2 tries: https://www.jerseycitynj.gov/robots.txt: ConnectionError(MaxRetryError(\\'HTTPConnectionPool(host=\\\\\\'www.jerseycitynj.gov\\\\\\', port=80): Max retries exceeded ", "at": "2026-11-15T21:55:56+00:00"}

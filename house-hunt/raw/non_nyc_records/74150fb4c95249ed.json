@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"33b121b7-d72f-e811-8122-1458d04ece60","ultra_name":"RIVERS EDGE @ PORT IMPERIAL","ultra_registrationnumber":"0911-00142-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1500 AVE @ PORT IMPERIAL","ultra_block":"64.01","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"f7ab3e2d-9a2f-e811-8122-1458d04ece60","Name":"RIVERS EDGE @ PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"RIVERS EDGE @ PORT IMPERIAL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"47c7a29a-f214-e911-812a-1458d04e0ca0","Name":"Otis Fairfield"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1a483dc7-b42f-e811-8122-1458d04ece60","Name":"PORT IMPERIAL SOUTH 15 LLC & RIVER EDGE @ PORT IMPERIAL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"042565ce-76d1-4a0c-a36e-439ce3dd9dbe","ultra_name":"RiversEdge at Port Imperial","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0911036100001","ultra_addressline1":"1500 Avenue at Port Imperial ","ultra_block":"64.01","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"d1c14328-960b-4b7f-8cfa-4f30be78b81d","Name":"RIVERSEDGE AT PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"982d7521-162f-e811-8126-1458d04eb810","Name":"WEEHAWKEN TWP"
+      },"ultra_propertyportalsearchfield":"RIVERSEDGE AT PORT IMPERIAL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"da1e1c85-bd5f-4e92-be3c-262005e84f98","Name":"Port Imperial South 15, L.L.C."
+      },"ultra_zipcode":"07086","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

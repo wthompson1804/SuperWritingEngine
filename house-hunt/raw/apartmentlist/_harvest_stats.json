@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 979,
- "detail_pages": 1722,
+ "srp_pages": 1036,
+ "detail_pages": 1763,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1595,6 +1595,120 @@
    "drive_min": 87.3,
    "props": 1,
    "rows": 1
+  },
+  {
+   "city": "nj/manville",
+   "drive_min": 87.4,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/budd-lake",
+   "drive_min": 87.5,
+   "props": 1,
+   "rows": 5
+  },
+  {
+   "city": "ny/east-moriches",
+   "drive_min": 87.8,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/jamesburg",
+   "drive_min": 87.9,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/lake-mohawk",
+   "drive_min": 87.9,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "nj/dayton",
+   "drive_min": 88.3,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ct/danbury",
+   "drive_min": 88.4,
+   "props": 11,
+   "rows": 45
+  },
+  {
+   "city": "nj/heathcote",
+   "drive_min": 88.6,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/franklin-park",
+   "drive_min": 88.7,
+   "props": 1,
+   "rows": 4
+  },
+  {
+   "city": "nj/red-bank",
+   "drive_min": 89.0,
+   "props": 14,
+   "rows": 18
+  },
+  {
+   "city": "nj/hamburg",
+   "drive_min": 89.4,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/chester",
+   "drive_min": 89.9,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/lincroft",
+   "drive_min": 91.5,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/vernon-center",
+   "drive_min": 92.2,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/atlantic-highlands",
+   "drive_min": 92.9,
+   "props": 5,
+   "rows": 9
+  },
+  {
+   "city": "nj/little-silver",
+   "drive_min": 92.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/highland-lakes",
+   "drive_min": 93.1,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/remsenburg-speonk",
+   "drive_min": 93.1,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/west-hampton-dunes",
+   "drive_min": 93.1,
+   "props": 0,
+   "rows": 0
   }
  ],
  "cities_unmatched_far": [
@@ -1619,10 +1733,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2592,
- "props_skipped_lowprice_gt_3000": 870,
+ "props_discovered": 2638,
+ "props_skipped_lowprice_gt_3000": 875,
  "reasons": {
-  "ok": 1713,
+  "ok": 1754,
   "no_unit_le_3000": 8,
   "no_listing_object": 1
  },

@@ -133,6 +133,44 @@ def al_rows() -> dict[str, list[dict]]:
     return g
 
 
+ALP = ROOT / "raw" / SRC / "al_props.jsonl"
+
+
+def load_al_props() -> list[dict]:
+    """Apartment List property pages read by h_region_westchester_rockland_al.py (one record per property)."""
+    out = []
+    if ALP.exists():
+        for l in ALP.read_text().splitlines():
+            d = json.loads(l)
+            if "name" not in d: continue
+            d["url"] = "https://www.apartmentlist.com" + d["slug"]
+            for r in d.get("rows") or []:
+                r["listing_id"] = "region_wr:" + r["listing_id"]
+                r["notes"] = "row from the Apartment List property page; " + re.sub(r"drive_min=[\d.]+; ", "", r["notes"])
+            d["key"] = norm_addr(d.get("address", ""), d.get("zip", ""))
+            out.append(d)
+    return out
+
+
+def al_facts(c: dict, a: dict) -> None:
+    """Add facts from an Apartment List property record to a building dict (never overrides hand-recorded facts)."""
+    u = a["url"]
+    if "Elevator" in a["amenities"] and not c.get("elevator"):
+        c["elevator"], c["elev_basis"] = "yes", f"Apartment List property page lists 'Elevator' among the amenities ({u})"
+    if a.get("dogs") == "yes":
+        c["al_dogs"] = a["policy"]
+    extra = [f"Apartment List property page {u}: " + "; ".join(x for x in [
+        f"year built {a['year_built']}" if a.get("year_built") else "", f"{a['units_total']} units" if a.get("units_total") else "",
+        f"manager {a['pmc']}" if a.get("pmc") else "", f"pet rent {a['pet_rent']}" if a.get("pet_rent") else "",
+        "utilities included: " + a["utilities"] if a.get("utilities") else "", "parking: " + a["parking_text"][:150] if a.get("parking_text") else "",
+        "amenities: " + ", ".join(x for x in a["amenities"] if re.search(r"(?i)pool|doorman|concierge|gym|dog|garage|gated|package|lobby|key fob", x)),
+        "own site " + re.sub(r"\?.*", "", a["website"]) if a.get("website") else ""] if x)]
+    if a.get("elev_sent"): extra.append("AL description: " + " ".join(a["elev_sent"])[:300])
+    c["notes"] = "; ".join(x for x in [c.get("notes", "")] + extra if x)
+    if a.get("pmc") and not c.get("manager"): c["manager"] = a["pmc"]
+    if a.get("website") and not c.get("site"): c["own_site"] = re.sub(r"\?.*", "", a["website"])
+
+
 POS_ELEV = re.compile(r"(?i)elevator (building|access)|elevator in (the )?building|(laundry|parking)[^.]{0,40}\belevator|accessible by elevator|high-speed elevator|^\s*elevator\s*$|\belevator\b")
 NEG_ELEV = re.compile(r"(?i)walk[- ]?up|no elevator")
 
@@ -149,6 +187,15 @@ def apply_building(rows: list[dict], c: dict, key: str) -> tuple[list[dict], dic
         policy = c["dog_text"] + " || listing page: " + first["dog_policy_text"]
     wl = str(c.get("wl") or first.get("dog_weight_limit_lb") or "")
     if c.get("dog_src"): notes_b.append(f"dog policy from {c['dog_src']}")
+    if c.get("al_dogs"):
+        if dogs == "no" and not c.get("dogs"):
+            dogs = "unknown"; c.setdefault("verdict_dog_conflict", True)
+            policy = "CONFLICT: Trulia pet card: " + policy + " || Apartment List property page: " + c["al_dogs"]
+        elif dogs != "no":
+            if dogs != "yes": dogs = "yes"
+            if c["al_dogs"] not in policy: policy = (policy + " || Apartment List property page: " if policy else "Apartment List property page: ") + c["al_dogs"]
+            m = re.search(r"(\d{2,3})\s*(?:lbs?\b|pounds)", c["al_dogs"])
+            if m and not wl: wl = m.group(1)
     sm_only = small_only(policy) and not c.get("large_ok")
     # ---- elevator
     ufo = bool(c.get("unit_floor_ok"))  # unit numbers encode the floor (checked by hand for this building)
@@ -200,6 +247,8 @@ def apply_building(rows: list[dict], c: dict, key: str) -> tuple[list[dict], dic
     elif rows and not win and not undated: fail = "nothing available by 2026-12-15"
     if c.get("verdict"):
         verdict = c["verdict"]
+    elif c.get("verdict_dog_conflict") and not fail:
+        verdict = "unconfirmed:dogs (contradictory policy)" + ("+elevator" if elev != "yes" else "")
     elif fail:
         verdict = "fails:" + fail
     elif not rows:
@@ -214,7 +263,7 @@ def apply_building(rows: list[dict], c: dict, key: str) -> tuple[list[dict], dic
         for r in rows: r["notes"] = "DOG SIZE UNCONFIRMED: listing pet card says 'Size allowed: Small' with no weight number; " + r.get("notes", "")
     out = rows
     if verdict.startswith("fails:") and rows:
-        best = sorted(win or rows, key=lambda r: float(r["listed_rent"]))[0]
+        best = sorted(win or rows, key=lambda r: float(r["listed_rent"] or 9e9))[0]
         best["notes"] = f"BUILDING_FAILS: {verdict[6:]}; one row kept for the record ({len(rows)} studio/1BR at or under $3,000 seen on the page). " + best.get("notes", "")
         out = [best]
     rents = [float(r["listed_rent"]) for r in rows if r.get("listed_rent")]
@@ -231,6 +280,18 @@ def main() -> None:
     tr = load_trulia()
     gdc = gdc_rows()
     al = al_rows()
+    alp = load_al_props()
+    for a in alp:
+        if a.get("rows"): al[a["name"]] = a["rows"]  # same property pages, read with the <= $3,000 threshold
+    al_by_key = {a["key"]: a for a in alp}
+    al_by_name = {a["name"].lower(): a for a in alp}
+    al_used: set[str] = set()
+
+    def al_match(name: str, addr: str, z: str):
+        a = al_by_name.get((name or "").lower()) or al_by_key.get(norm_addr(addr, z))
+        if a: al_used.add(a["slug"])
+        return a
+
     all_rows, buildings, used = [], [], set()
     slug = {re.sub(r"-\d+$", "", u): u for u in tr}
     for c in CURATED.values():  # curated Trulia references are slugs without the numeric id
@@ -272,6 +333,8 @@ def main() -> None:
                     if not r.get("lat"): r["lat"], r["lon"] = t[0]["lat"], t[0]["lon"]
                 if any(x["elevator"] == "yes" for x in t) and not c.get("elevator"):
                     c["elevator"], c["elev_basis"] = "yes", "Trulia building page lists an elevator (" + c["trulia"] + ")"
+        a = al_match(c.get("al") or c.get("name") or (rows[0].get("building_name") if rows else ""), c.get("address") or (rows[0].get("address") if rows else ""), c.get("zip") or (rows[0].get("zip") if rows else ""))
+        if a: al_facts(c, a)
         out, b = apply_building(rows, c, key)
         all_rows += out; buildings.append(b)
     # 2. every other Trulia detail page
@@ -291,6 +354,8 @@ def main() -> None:
                      "dogs": dogs, "dog_weight_limit_lb": wl, "dog_policy_text": (fx.get("dog_policy_text") or "")[:300], "verdict": "fails:" + why, "units_written": 0, "units_in_window": 0,
                      "min_rent_seen": pmin if pmin is not None else "", "source_url": url,
                      "notes": (NOROWS.get(url, "") + (f"; lowest studio/1BR price on the Trulia search card: {card.get('price_text') or pmin} ({card.get('beds')})" if pmin else "")).strip("; ")}
+                a = al_match(nm, b["address"], b["zip"])
+                if a and a.get("website"): b["notes"] += "; own site " + re.sub(r"\?.*", "", a["website"])
                 buildings.append(b)
                 if d.get("facts"):
                     all_rows.append(dict({k: "" for k in COLS}, listing_id="region_wr:bfail:" + url.rsplit("/", 1)[1], source_site="trulia", url=url, detail_level="card" if pmin else "building",
@@ -300,10 +365,42 @@ def main() -> None:
                                          pet_rent=fx.get("pet_rent") or "", listing_type="managed_building", building_url=url, raw_path=d.get("raw_path") or "",
                                          notes=f"BUILDING_FAILS: {why}; {b['notes']}"))
             continue
-        out, b = apply_building(rows, {}, url)
+        c = {}
+        a = al_match(rows[0].get("building_name"), rows[0].get("address"), rows[0].get("zip"))
+        if a:
+            al_facts(c, a)
+            have = {str(r.get("unit")).lstrip("0").upper() for r in rows if r.get("unit")}
+            rows += [dict(r) for r in a.get("rows") or [] if r.get("unit") and str(r["unit"]).lstrip("0").upper() not in have]
+        out, b = apply_building(rows, c, url)
         all_rows += out
-        if "/building/" in url or b["elevator"] == "yes":
+        if "/building/" in url or b["elevator"] == "yes" or a:
             buildings.append(b)
+    # 2b. Apartment List properties not matched to any building above
+    for a in alp:
+        if a["slug"] in al_used: continue
+        rows = [dict(r) for r in a.get("rows") or []]
+        c = {"name": a["name"], "address": a["address"], "city": a["city"], "zip": a["zip"], "source_url": a["url"]}
+        al_facts(c, a)
+        if a.get("dogs") in ("yes", "no"): c["dogs"] = a["dogs"]
+        c["dog_text"] = a.get("policy") or ""
+        if a.get("wl"): c["wl"] = a["wl"]
+        c.pop("al_dogs", None)
+        if not rows:
+            why = "no dogs" if a.get("dogs") == "no" else "nothing at or under $3,000 / no studio or 1BR listed"
+            c["fail"] = why; c["min_rent"] = a.get("min_price") or ""
+            rows_f = [dict({k: "" for k in COLS}, listing_id="region_wr:bfail:al:" + a["slug"].rsplit("/", 1)[1], source_site="apartmentlist.com", url=a["url"], detail_level="detail",
+                           first_seen=a["at"], last_seen=a["at"], building_name=a["name"], address=a["address"], city=a["city"], state="NY", zip=a["zip"], lat=a.get("lat") or "", lon=a.get("lon") or "",
+                           listed_rent=a.get("min_price") or "", price_basis="lowest studio/1BR price on the Apartment List property page" if a.get("min_price") else "",
+                           listing_type="managed_building" if a.get("units_total") else "unknown", building_url=a["url"], raw_path=a.get("path") or "", notes="")]
+            out, b = apply_building(rows_f, c, a["slug"])
+            b["verdict"] = "fails:" + why if not b["verdict"].startswith("fails:") else b["verdict"]
+            b["units_written"] = b["units_in_window"] = 0
+            if not out[0]["notes"].startswith("BUILDING_FAILS"): out[0]["notes"] = f"BUILDING_FAILS: {why}; " + out[0]["notes"]
+        else:
+            out, b = apply_building(rows, c, a["slug"])
+        b["url"] = b.get("url") or a["url"]
+        all_rows += out
+        if a.get("units_total") or b["elevator"] == "yes": buildings.append(b)
     # 3. buildings examined by hand with no unit rows
     for b in MANUAL_BUILDINGS:
         buildings.append({k: b.get(k, "") for k in BCOLS})
@@ -312,6 +409,11 @@ def main() -> None:
     for r in all_rows:
         for k in list(r):
             if k.startswith("_"): r.pop(k)
+    seen_ids, dedup = set(), []
+    for r in all_rows:  # the same unit can arrive from a property matched under two names; keep the first copy
+        if r["listing_id"] in seen_ids: continue
+        seen_ids.add(r["listing_id"]); dedup.append(r)
+    all_rows = dedup
     ids = [r["listing_id"] for r in all_rows]
     assert len(ids) == len(set(ids)), [i for i in ids if ids.count(i) > 1][:5]
     if OUT.exists(): OUT.unlink()  # rebuilt from cached pages each run; first_seen comes from the page fetch time

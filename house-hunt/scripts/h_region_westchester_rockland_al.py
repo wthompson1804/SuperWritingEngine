@@ -5,7 +5,7 @@ For each town slug: read the 1-bedroom and studio filter pages (discovery only),
 Pages already cached today under raw/apartmentlist/ are reused; new fetches are cached under
 raw/region_westchester_rockland/ (2.5 s per request; robots.txt: Allow / for *; no Claude-named group).
 Output: raw/region_westchester_rockland/al_props.jsonl (one line per property; resumable, keyed by slug).
-Usage: python3 scripts/h_region_westchester_rockland_al.py [town-slug ...]
+Usage: python3 scripts/h_region_westchester_rockland_al.py [town-slug | /ny/town/property-slug ...]
 """
 from __future__ import annotations
 import hashlib, json, re, sys, time
@@ -51,7 +51,7 @@ def main():
     stats = {"srp_pages": 0}
     for t in towns:
         try:
-            found = ha.discover_city("ny/" + t, stats)
+            found = {t: None} if t.startswith("/") else ha.discover_city("ny/" + t, stats)
         except ha.Blocked as e:
             print("BLOCKED", t, e); break
         new = [s for s in found if s not in done]

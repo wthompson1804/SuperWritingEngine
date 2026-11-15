@@ -1,0 +1,103 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"7","value":[
+    {
+      "ultra_buildingid":"21c777d8-5076-4fce-b627-da51c19a58b2","ultra_name":"785 GREEN ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1225007199001","ultra_addressline1":"785 GREEN ST","ultra_block":"381","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"ff3613e2-5837-4283-be96-d72e4395297e","Name":"785 GREEN ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"785 GREEN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7ac97e7f-69ab-46b0-b9d1-bf435ab4aa4e","Name":"GEORGIAN ARMS CONDO ASSN"
+      },"ultra_zipcode":"08830","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"32b75bf3-deb6-428d-abfd-2b69e862d3b3","ultra_name":"785 GREEN ST BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1225007199002","ultra_addressline1":"785 GREEN ST","ultra_block":"381","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"ff3613e2-5837-4283-be96-d72e4395297e","Name":"785 GREEN ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"785 GREEN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7ac97e7f-69ab-46b0-b9d1-bf435ab4aa4e","Name":"GEORGIAN ARMS CONDO ASSN"
+      },"ultra_zipcode":"08830","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"95423e30-99ae-41f8-ac2c-4f8c588e410c","ultra_name":"785 GREEN ST BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1225007199003","ultra_addressline1":"785 GREEN ST","ultra_block":"381","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"ff3613e2-5837-4283-be96-d72e4395297e","Name":"785 GREEN ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"785 GREEN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7ac97e7f-69ab-46b0-b9d1-bf435ab4aa4e","Name":"GEORGIAN ARMS CONDO ASSN"
+      },"ultra_zipcode":"08830","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"db7a85f3-b779-48d8-9ad8-00780ee3047b","ultra_name":"785 GREEN ST BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1225007199004","ultra_addressline1":"785 GREEN ST","ultra_block":"381","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"ff3613e2-5837-4283-be96-d72e4395297e","Name":"785 GREEN ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"785 GREEN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7ac97e7f-69ab-46b0-b9d1-bf435ab4aa4e","Name":"GEORGIAN ARMS CONDO ASSN"
+      },"ultra_zipcode":"08830","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8e212736-5b15-4f6a-8d1d-43dc1b0b9317","ultra_name":"785 GREEN ST BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1225007199005","ultra_addressline1":"785 GREEN ST","ultra_block":"381","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"ff3613e2-5837-4283-be96-d72e4395297e","Name":"785 GREEN ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"785 GREEN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7ac97e7f-69ab-46b0-b9d1-bf435ab4aa4e","Name":"GEORGIAN ARMS CONDO ASSN"
+      },"ultra_zipcode":"08830","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"40ede397-38f6-43e6-a104-ff06bcbdb7d0","ultra_name":"785 GREEN ST BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1225007199006","ultra_addressline1":"785 GREEN ST","ultra_block":"381","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"ff3613e2-5837-4283-be96-d72e4395297e","Name":"785 GREEN ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"785 GREEN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7ac97e7f-69ab-46b0-b9d1-bf435ab4aa4e","Name":"GEORGIAN ARMS CONDO ASSN"
+      },"ultra_zipcode":"08830","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"bd49cc54-da21-438c-bccf-136a888b0ecd","ultra_name":"785 GREEN ST BLDG 7","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1225007199007","ultra_addressline1":"785 GREEN ST","ultra_block":"381","ultra_lot":"1.03","ultra_propertyinterest":{
+        "Id":"ff3613e2-5837-4283-be96-d72e4395297e","Name":"785 GREEN ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"1c2e7521-162f-e811-8126-1458d04eb810","Name":"WOODBRIDGE TWP"
+      },"ultra_propertyportalsearchfield":"785 GREEN ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"7ac97e7f-69ab-46b0-b9d1-bf435ab4aa4e","Name":"GEORGIAN ARMS CONDO ASSN"
+      },"ultra_zipcode":"08830","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

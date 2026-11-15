@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=83-83+118th+St%2C+Queens%2C+NY+11415&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:58+00:00",
+ "status": 200,
+ "path": "raw/independent_check/096e965ef3f15d9c.json",
+ "source": "independent_check"
+}

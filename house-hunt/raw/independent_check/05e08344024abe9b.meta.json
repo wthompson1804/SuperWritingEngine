@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1880+Palmer+Ave%2C+Larchmont%2C+NY+10538&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:52+00:00",
+ "status": 200,
+ "path": "raw/independent_check/05e08344024abe9b.json",
+ "source": "independent_check"
+}

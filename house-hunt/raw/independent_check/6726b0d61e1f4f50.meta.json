@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/9nt8-h7nd.json?%24select=ntaname&%24where=intersects%28the_geom%2C%27POINT+%28-73.81387329101562+40.71366500854492%29%27%29",
+ "retrieved_at": "2026-11-15T21:53:38+00:00",
+ "status": 200,
+ "path": "raw/independent_check/6726b0d61e1f4f50.json",
+ "source": "independent_check"
+}

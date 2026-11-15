@@ -1,0 +1,313 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"22","value":[
+    {
+      "ultra_buildingid":"1d499e9b-9f51-418c-9037-e89f6082bcc0","ultra_name":"124 BILLINGSPORT RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0814010669001","ultra_addressline1":"124 BILLINGSPORT RD","ultra_block":"41","ultra_lot":"18","ultra_propertyinterest":{
+        "Id":"6ec7112f-2f6e-473e-85f3-9beb354077f7","Name":"124 BILLINGSPORT RD"
+      },"ultra_county":{
+        "Id":"00f4aaf2-63e4-e711-8125-1458d054d020","Name":"GLOUCESTER"
+      },"ultra_municipality":{
+        "Id":"6e2d7521-162f-e811-8126-1458d04eb810","Name":"PAULSBORO BORO"
+      },"ultra_propertyportalsearchfield":"124 BILLINGSPORT RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"875a6b63-c269-ee11-9ae6-001dd80bf47e","Name":"124 BILLINGSPORT LLC"
+      },"ultra_zipcode":"00000","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6fb3ca58-4017-4a5e-9a79-617cc43982cc","ultra_name":"134 BRANCHPORT AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1325006031001","ultra_addressline1":"134 BRANCHPORT AVE","ultra_block":"251.01","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"0c2494f4-5e10-4a4c-ac7a-7a6eea90a727","Name":"134 BRANCHPORT AVE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":"134 BRANCHPORT AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3ba9cfd0-72b2-43d1-ad4c-4679dffa3ba6","Name":"SILVIO M OLIVEIRA"
+      },"ultra_zipcode":"07740","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"fde0e5d0-29c6-4da3-aae7-d271f24ed80b","ultra_name":"24-26 AVENUE AT PORT IMPERIAL BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0912025135001","ultra_addressline1":"24 AVENUE AT PORT IMPERIAL ","ultra_block":"168.01","ultra_lot":"8.01","ultra_propertyinterest":{
+        "Id":"31c889e4-8ac7-4c86-9ab9-e6e5948769e3","Name":"HUDSON CLUB"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":"HUDSON CLUB","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6b06b740-7853-49e8-8fe8-e7589d1a5637","Name":"Hudson Club  "
+      },"ultra_zipcode":"07093","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cb20d254-b432-4278-8fa2-5f84b551f527","ultra_name":"314 PORTER AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1526010707001","ultra_addressline1":"314 PORTER AVE","ultra_block":"25","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"6ac86f04-59be-4485-ad79-c14cffe03527","Name":"314 PORTER AVE"
+      },"ultra_county":{
+        "Id":"0ef4aaf2-63e4-e711-8125-1458d054d020","Name":"OCEAN"
+      },"ultra_municipality":{
+        "Id":"082f7521-162f-e811-8126-1458d04eb810","Name":"SEASIDE HEIGHTS BORO"
+      },"ultra_propertyportalsearchfield":"314 PORTER AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"No Jurisdiction","Value":240000005
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c0080aa4-448b-4444-8ba0-2b7a49690710","Name":"KATHLEEN MCDONNELL"
+      },"ultra_zipcode":"00000","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cd6fd26a-c2cb-f111-a05c-001dd803dca7","ultra_name":"332-334 PORT AVE","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2004042781001","ultra_addressline1":"332-334 PORT AVE","ultra_block":"721","ultra_lot":"1.02","ultra_propertyinterest":{
+        "Id":"39dfd264-c2cb-f111-a05c-001dd803dca7","Name":"332-334 PORT AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"b62f7521-162f-e811-8126-1458d04eb810","Name":"ELIZABETH CITY"
+      },"ultra_propertyportalsearchfield":"332-334 PORT AVE","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"ELIZABETH CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"eeded264-c2cb-f111-a05c-001dd803dca7","Name":"GUSTAVO CORDOBA"
+      },"ultra_zipcode":"07206","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6e541aa4-5b70-4db3-929b-9ba57654c027","ultra_name":"44 BRANCHPORT AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1325003254001","ultra_addressline1":"44 BRANCHPORT AVE","ultra_block":"249","ultra_lot":"4","ultra_propertyinterest":{
+        "Id":"efcac177-6c82-496d-9de4-2199f1a29e9f","Name":"44 BRANCHPORT AVE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"4e2e7521-162f-e811-8126-1458d04eb810","Name":"LONG BRANCH CITY"
+      },"ultra_propertyportalsearchfield":"44 BRANCHPORT AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"3ff220ea-e61e-f111-8341-001dd802f839","Name":"ELY ASHKENAZI"
+      },"ultra_zipcode":"07740","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1aa67690-03ef-4fb0-9233-6c14e145b876","ultra_name":"54 DAVENPORT AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0714006072001","ultra_addressline1":"54 DAVENPORT AVE","ultra_block":"660","ultra_lot":"5","ultra_propertyinterest":{
+        "Id":"d3f62cb4-21e6-485b-9966-235cef6a3c84","Name":"54 DAVENPORT AVE"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"54 DAVENPORT AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2a411d10-a8f0-f011-8407-001dd80a67ab","Name":"54 DAVENPORT LLLC"
+      },"ultra_zipcode":"07107","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"cefb6c62-967d-4797-929c-8eedd0c6f36d","ultra_name":"784 PORT MONMOUTH RD BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1331021956001","ultra_addressline1":"784 PORT MONMOUTH RD","ultra_block":"26","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"1b1b06fb-0960-446d-b5df-615c281be6b2","Name":"784 PORT MONMOUTH RD"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"5a2e7521-162f-e811-8126-1458d04eb810","Name":"MIDDLETOWN TWP"
+      },"ultra_propertyportalsearchfield":"784 PORT MONMOUTH RD","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2b4d85c5-e9d0-490d-bef8-7a91b0e29d21","Name":"CASA 784 LLC"
+      },"ultra_zipcode":"07748","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f1ef8d43-3c0a-4dfc-9d65-824eb6985911","ultra_name":"BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0912029894001","ultra_addressline1":"4 AVENUE AT PORT IMPERIAL ","ultra_block":"168.01","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"685f9ff4-0912-4734-a5d3-24296f63ea85","Name":"THE LANDINGS AT PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":"THE LANDINGS AT PORT IMPERIAL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b67357f9-8eda-48fe-9837-49b8851c0f04","Name":"EQUITY RESIDENTIAL PROP"
+      },"ultra_zipcode":"07093","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"4ad05c11-52ef-407c-89b2-b4f1fcfad2d6","ultra_name":"BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0912029894002","ultra_addressline1":"4 AVENUE AT PORT IMPERIAL ","ultra_block":"168.01","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"685f9ff4-0912-4734-a5d3-24296f63ea85","Name":"THE LANDINGS AT PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":"THE LANDINGS AT PORT IMPERIAL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b67357f9-8eda-48fe-9837-49b8851c0f04","Name":"EQUITY RESIDENTIAL PROP"
+      },"ultra_zipcode":"07093","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"367154f1-d6a2-4795-985f-e3e09ffa3902","ultra_name":"BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0912029894004","ultra_addressline1":"4 AVENUE AT PORT IMPERIAL ","ultra_block":"168.01","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"685f9ff4-0912-4734-a5d3-24296f63ea85","Name":"THE LANDINGS AT PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":"THE LANDINGS AT PORT IMPERIAL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b67357f9-8eda-48fe-9837-49b8851c0f04","Name":"EQUITY RESIDENTIAL PROP"
+      },"ultra_zipcode":"07093","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c4ff7a20-4b12-482b-8197-19546e0669ec","ultra_name":"BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0912029894003","ultra_addressline1":"4 AVENUE AT PORT IMPERIAL ","ultra_block":"168.01","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"685f9ff4-0912-4734-a5d3-24296f63ea85","Name":"THE LANDINGS AT PORT IMPERIAL"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":"THE LANDINGS AT PORT IMPERIAL","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b67357f9-8eda-48fe-9837-49b8851c0f04","Name":"EQUITY RESIDENTIAL PROP"
+      },"ultra_zipcode":"07093","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8eca6843-7ccc-4b3e-bce0-03b5d9dd46eb","ultra_name":"EAST MANOR SQUARE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1317020336001","ultra_addressline1":"1-4 PORTLAND RD","ultra_block":"10","ultra_lot":"6&7","ultra_propertyinterest":{
+        "Id":"f40ad3cc-c31e-4862-8acd-66bf3aa27fe0","Name":"EAST MANOR SQUARE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"3e2e7521-162f-e811-8126-1458d04eb810","Name":"HIGHLANDS BORO"
+      },"ultra_propertyportalsearchfield":"EAST MANOR SQUARE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1675f4b7-d3e4-40ec-a79e-ae9c0c601198","Name":"EAST MANOR SQ CONDO ASSN"
+      },"ultra_zipcode":"07732","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"67f163ca-3294-497e-9d8f-489b772632db","ultra_name":"EAST MANOR SQUARE BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1317020336005","ultra_addressline1":"20-24 PORTLAND RD","ultra_block":"10","ultra_lot":"6&7","ultra_propertyinterest":{
+        "Id":"f40ad3cc-c31e-4862-8acd-66bf3aa27fe0","Name":"EAST MANOR SQUARE"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"3e2e7521-162f-e811-8126-1458d04eb810","Name":"HIGHLANDS BORO"
+      },"ultra_propertyportalsearchfield":"EAST MANOR SQUARE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1675f4b7-d3e4-40ec-a79e-ae9c0c601198","Name":"EAST MANOR SQ CONDO ASSN"
+      },"ultra_zipcode":"07732","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"28d5b3aa-4591-4b35-a05a-f51d5fecb46c","ultra_name":"FELIX CASTANEDA","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"424 PORTIA STREET","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"46309e0f-9ab9-46a7-95c2-5b32b9736fed","Name":"FELIX CASTANEDA"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"122e7521-162f-e811-8126-1458d04eb810","Name":"SOUTH AMBOY CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2d10e33c-75b5-4f86-9d24-75d42bf8b4c8","Name":"John Smith"
+      },"ultra_zipcode":"08879","ultra_propertyinterest-statuscode":{
+        "Name":"No Jurisdiction","Value":240000002
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8c0404c7-9eed-42b5-8b25-6cf33f9d64c4","ultra_name":"MONTVILLE CHASE RUN BLDG 20","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1421021874020","ultra_addressline1":"22-34 DAVENPORT RD","ultra_block":"76","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"cfcb5571-dda6-4c4e-bb0c-128e63e345f8","Name":"MONTVILLE CHASE RUN"
+      },"ultra_county":{
+        "Id":"0cf4aaf2-63e4-e711-8125-1458d054d020","Name":"MORRIS"
+      },"ultra_municipality":{
+        "Id":"b02e7521-162f-e811-8126-1458d04eb810","Name":"MONTVILLE TWP"
+      },"ultra_propertyportalsearchfield":"MONTVILLE CHASE RUN","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bb0e33fa-0ec8-4428-81de-cd3c3981cf95","Name":"MONTVILLE CHASE CONDO ASSN"
+      },"ultra_zipcode":"07045","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9f4f3c99-d72f-e811-8122-1458d04ece60","ultra_name":"PARKING GARAGE","ultra_registrationnumber":"0901-00264-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"4 PORT IMPERIAL BLVD","ultra_block":"105","ultra_lot":"20","ultra_propertyinterest":{
+        "Id":"1894d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"PARKING GARAGE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"842d7521-162f-e811-8126-1458d04eb810","Name":"BAYONNE CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"663a3dc7-b42f-e811-8122-1458d04ece60","Name":"ROYAL CARIBBEAN INT LTD CAPE LIBERTY CRUISE PORT LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"38b221b7-d72f-e811-8122-1458d04ece60","ultra_name":"RIVERSIDE W BLDG #4","ultra_registrationnumber":"0912-00180-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"24 AVENUE@ PORT IMPERIAL","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"bfac3e2d-9a2f-e811-8122-1458d04ece60","Name":"RIVERSIDE WEST CLUBHOUSE"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"1c89afd8-b42f-e811-8122-1458d04ece60","Name":"RIVERBEND URBAN RENEWAL LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"dd50a5bb-0edb-419e-a3ba-efea195b3a1a","ultra_name":"ROSSMOOR MUTUAL 4C LEISURE WORLD BLDG 20","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1213000276020","ultra_addressline1":"414 NEWPORT WAY","ultra_block":"56","ultra_lot":"57","ultra_propertyinterest":{
+        "Id":"a128fc1a-48d8-478a-9ff1-25397fef5db6","Name":"ROSSMOOR MUTUAL 4C"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"042e7521-162f-e811-8126-1458d04eb810","Name":"MONROE TWP (M)"
+      },"ultra_propertyportalsearchfield":"ROSSMOOR MUTUAL 4C","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"ROSSMOOR RETIREMENT COMMUNITY","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e6df13a4-2dee-4493-a3b1-ac937485cff9","Name":"ROSSMOOR COMMUNITY ASSN INC"
+      },"ultra_zipcode":"08831","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5fa906f2-841a-4d62-b0c8-c9565e2396ed","ultra_name":"ROSSMOOR MUTUAL 5 LEISURE WORLD BLDG 43","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1213000273043","ultra_addressline1":"174 PORTLAND LN","ultra_block":"56","ultra_lot":"33.1","ultra_propertyinterest":{
+        "Id":"b7affd3d-fb53-4bf3-a979-0fa1efd91d8c","Name":"ROSSMOOR MUTUAL 5"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"042e7521-162f-e811-8126-1458d04eb810","Name":"MONROE TWP (M)"
+      },"ultra_propertyportalsearchfield":"ROSSMOOR MUTUAL 5","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"ROSSMOOR RETIREMENT COMMUNITY","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"11d24e91-8075-4564-93e4-5f8bbdf02be6","Name":"ROSSMOOR COMMUNITY ASSN INC"
+      },"ultra_zipcode":"08831","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0db221b7-d72f-e811-8122-1458d04ece60","ultra_name":"THE LANDING","ultra_registrationnumber":"0912-00170-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"4 AVENUE OF PORT IMPERIAL","ultra_block":"168.01","ultra_lot":"6","ultra_propertyinterest":{
+        "Id":"adac3e2d-9a2f-e811-8122-1458d04ece60","Name":"THE LANDINGS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"9a2d7521-162f-e811-8126-1458d04eb810","Name":"WEST NEW YORK TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"fc88afd8-b42f-e811-8122-1458d04ece60","Name":"LANDINGS BUILDING LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d1ff9f09-8bba-e811-8127-1458d04e2f20","ultra_name":"TROOP D NEWARK STATION","ultra_registrationnumber":"0714-01152-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"14 PORT ST","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"c1ff9f09-8bba-e811-8127-1458d04e2f20","Name":"TROOP D NEWARK STATION"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"422d7521-162f-e811-8126-1458d04eb810","Name":"NEWARK CITY"
+      },"ultra_propertyportalsearchfield":"TROOP D NEWARK STATION","ultra_countyportalsearchfield":"ESSEX","ultra_municipalityportalsearchfield":"NEWARK CITY","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c5ff9f09-8bba-e811-8127-1458d04e2f20","Name":"JERSEY TURNPIKE AUTHORITY"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-# Run report (2026-11-15T21:45:29+00:00)
+# Run report (2026-11-15T21:55:58+00:00)
 
 ## Steps
 
@@ -16,18 +16,18 @@
 
 | Stage | Now | Previous run | Change |
 |---|---|---|---|
-| listings harvested (after dedupe) | 18290 |  |  |
-| pass every listing gate | 2027 |  |  |
-|   pending: a gate fact is unstated | 12069 |  |  |
-|   fail a gate | 4194 |  |  |
-| costed in the master table | 1524 |  |  |
-| within the $3,000 all-in cap | 1313 |  |  |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 961 |  |  |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 207 |  |  |
-| avoid cards | 24 |  |  |
-| held back for one confirmation | 201 |  |  |
-| neighborhoods with 3+ shown places | 26 |  |  |
-| buildings in the master table | 551 |  |  |
+| listings harvested (after dedupe) | 18290 | 18290 | +0 |
+| pass every listing gate | 2027 | 2027 | +0 |
+|   pending: a gate fact is unstated | 12069 | 12069 | +0 |
+|   fail a gate | 4194 | 4194 | +0 |
+| costed in the master table | 1524 | 1524 | +0 |
+| within the $3,000 all-in cap | 1313 | 1313 | +0 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 961 | 961 | +0 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 207 | 207 | +0 |
+| avoid cards | 27 | 24 | +3 |
+| held back for one confirmation | 200 | 201 | -1 |
+| neighborhoods with 3+ shown places | 26 | 26 | +0 |
+| buildings in the master table | 551 | 551 | +0 |
 
 ## Why units left
 
@@ -54,7 +54,7 @@
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
 | The Fresh-Start Year      |               5 |       50 |      15 |             0 |
-| The Little-City Year      |              26 |      460 |      77 |             2 |
+| The Little-City Year      |              26 |      460 |      77 |             5 |
 | The Old-Neighborhood Year |              46 |      163 |      62 |            20 |
 | The Quiet-Street Year     |              14 |       36 |       6 |             0 |
 | The Room-to-Breathe Year  |              46 |      242 |      42 |             0 |
@@ -79,18 +79,13 @@
 | near_violent_250m_24m | 26 |
 | live_status | 90 |
 | rent_first_full_payment_date | 80 |
-| ev_pause_notes | 18 |
+| ev_pause_notes | 31 |
 
 ## Last lines of each step
 
 **building amenities (cached pages)**
 ```
-  year_built                    106   18.4%
-  year_renovated                 15    2.6%
-  total_floors                   22    3.8%
-  unit_count                    143   24.8%
-  management_company             95   16.5%
-  fetched: 0
+passing buildings: 577; already in csv: 577; to process: 0
 ```
 
 **master tables**
@@ -133,7 +128,7 @@ units 1524; cost gate {'pass': 1313, 'fail': 211}; rent asterisk 518; rent terms
 
 **ranking and selection**
 ```
-evidence: 59 units excluded, shown 207, avoid cards 24, shown-but-not-yet-evidence-checked 21
+evidence: 59 units excluded, shown 207, avoid cards 27, shown-but-not-yet-evidence-checked 21
 stages: 1524 costed -> -211 over the all-in cap -> -129 Jamaica safety rule -> -35 failed a gate on confirmed facts -> -129 sketchy -> -59 evidence exclusions -> 961 ranked
 (kept 961 units; candidates 438; shown 407; pools: {'pool': 494, '': 448, 'indoor': 19}
 ```
