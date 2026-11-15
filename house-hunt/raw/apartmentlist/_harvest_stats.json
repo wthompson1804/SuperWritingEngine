@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1036,
- "detail_pages": 1763,
+ "srp_pages": 1042,
+ "detail_pages": 1764,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1709,6 +1709,18 @@
    "drive_min": 93.1,
    "props": 0,
    "rows": 0
+  },
+  {
+   "city": "ny/firthcliffe",
+   "drive_min": 94.1,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/westhampton",
+   "drive_min": 94.2,
+   "props": 1,
+   "rows": 0
   }
  ],
  "cities_unmatched_far": [
@@ -1733,10 +1745,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2638,
- "props_skipped_lowprice_gt_3000": 875,
+ "props_discovered": 2640,
+ "props_skipped_lowprice_gt_3000": 876,
  "reasons": {
-  "ok": 1754,
+  "ok": 1755,
   "no_unit_le_3000": 8,
   "no_listing_object": 1
  },

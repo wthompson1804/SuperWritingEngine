@@ -413,3 +413,5 @@
 {"url": "https://www.15bankapartments.com/", "retrieved_at": "2026-11-15T21:55:08+00:00", "status": 403, "path": "raw/region_westchester_rockland/af75d44be60b9662.html", "source": "region_westchester_rockland"}
 {"url": "https://www.thestandardnr.com/", "retrieved_at": "2026-11-15T21:55:27+00:00", "status": 403, "path": "raw/region_westchester_rockland/28cf9afef24fda6c.html", "source": "region_westchester_rockland"}
 {"url": "https://www.vistaattowngreen.com/robots.txt", "retrieved_at": "2026-11-15T21:55:47+00:00", "status": 403, "path": "raw/region_westchester_rockland/6838f2ef3b4317ba.txt", "source": "region_westchester_rockland"}
+{"url": "https://www.zumper.com/apartments-for-rent/tarrytown-ny", "retrieved_at": "2026-11-15T21:56:04+00:00", "status": 200, "path": "raw/region_westchester_rockland/218f33c8c5ed1af1.html", "source": "region_westchester_rockland"}
+{"url": "https://www.zumper.com/apartment-buildings/p121222/castle-port-chester-ny", "retrieved_at": "2026-11-15T21:56:07+00:00", "status": 200, "path": "raw/region_westchester_rockland/4293ff114b578881.html", "source": "region_westchester_rockland"}
