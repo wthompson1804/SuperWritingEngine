@@ -51,7 +51,7 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
 - Travel anchor: **Jamaica LIRR station**, GTFS LIRR stop_id 102 (40.699608, -73.808530).
 - Gates: studio or 1BR; listed rent ≤ $3,000 **and** all-in ≤ $3,000 (rent + required fees + pet rent + parking +
   estimated electric, gas, internet; estimates get an asterisk); available now through **Dec 15, 2026**; dogs explicitly
-  allowed with any weight limit ≥ 40 lb; **elevator building only, no ground-floor units**; under 2 h free-flow drive to
+  allowed with any weight limit ≥ 25 lb (lowered from 40 by Will); **elevator building only, no ground-floor units**; under 2 h free-flow drive to
   Jamaica; **Queens included**; live link with price and date read from the listing page.
 - Per neighborhood: up to 10 places plus up to 5 "looks good, but avoid" cards. Avoid thresholds are in the plan.
 - Years (5 or 6), their names, neighborhoods and all wording come from the data. Nothing from the mock's text carries over.

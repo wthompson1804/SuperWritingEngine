@@ -1,0 +1,48 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+
+User-Agent: GPTBot
+Allow: /
+
+User-Agent: OAI-SearchBot
+Allow: /
+
+User-Agent: ChatGPT-User
+Allow: /
+
+User-Agent: PerplexityBot
+Allow: /
+
+User-Agent: Perplexity-User
+Allow: /
+
+User-Agent: Google-Extended
+Allow: /
+
+User-Agent: ClaudeBot
+Allow: /
+
+User-Agent: Claude-User
+Allow: /
+
+User-Agent: Claude-SearchBot
+Allow: /
+
+User-Agent: Amazonbot
+Allow: /
+
+User-Agent: Applebot-Extended
+Allow: /
+
+User-Agent: CCBot
+Allow: /
+
+User-Agent: Bytespider
+Allow: /
+
+User-Agent: cohere-ai
+Allow: /
+
+Host: https://www.atlasjc.com
+Sitemap: https://www.atlasjc.com/sitemap.xml

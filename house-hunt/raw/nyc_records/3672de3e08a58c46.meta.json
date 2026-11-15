@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/64uk-42ks.json?%24select=bbl%2Cunitsres%2Cbldgclass%2Cnumfloors&%24where=unitsres%3E%3D20+AND+bldgclass+like+%27D%25%27&%24order=bbl&%24limit=50000&%24offset=0",
+ "retrieved_at": "2026-11-15T20:49:44+00:00",
+ "status": 200,
+ "path": "raw/nyc_records/3672de3e08a58c46.json",
+ "source": "nyc_records"
+}

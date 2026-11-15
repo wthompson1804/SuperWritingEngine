@@ -1,0 +1,85 @@
+User-Agent: BLEXBot
+Disallow: /
+
+User-Agent: OAI-SearchBot
+Allow: /
+Disallow: /wp-admin
+Disallow: /_nuxt
+Disallow: /api
+Disallow: /internal
+Disallow: /building/nyc/None
+Disallow: /contact/nyc/None
+
+User-Agent: ChatGPT-User
+Allow: /
+Disallow: /wp-admin
+Disallow: /_nuxt
+Disallow: /api
+Disallow: /internal
+Disallow: /building/nyc/None
+Disallow: /contact/nyc/None
+
+User-Agent: PerplexityBot
+Allow: /
+Disallow: /wp-admin
+Disallow: /_nuxt
+Disallow: /api
+Disallow: /internal
+Disallow: /building/nyc/None
+Disallow: /contact/nyc/None
+
+User-Agent: Claude-User
+Allow: /
+Disallow: /wp-admin
+Disallow: /_nuxt
+Disallow: /api
+Disallow: /internal
+Disallow: /building/nyc/None
+Disallow: /contact/nyc/None
+
+User-Agent: GPTBot
+Allow: /
+Disallow: /wp-admin
+Disallow: /_nuxt
+Disallow: /api
+Disallow: /internal
+Disallow: /building/nyc/None
+Disallow: /contact/nyc/None
+
+User-Agent: ClaudeBot
+Allow: /
+Disallow: /wp-admin
+Disallow: /_nuxt
+Disallow: /api
+Disallow: /internal
+Disallow: /building/nyc/None
+Disallow: /contact/nyc/None
+
+User-Agent: CCBot
+Allow: /
+Disallow: /wp-admin
+Disallow: /_nuxt
+Disallow: /api
+Disallow: /internal
+Disallow: /building/nyc/None
+Disallow: /contact/nyc/None
+
+User-Agent: Google-Extended
+Allow: /
+Disallow: /wp-admin
+Disallow: /_nuxt
+Disallow: /api
+Disallow: /internal
+Disallow: /building/nyc/None
+Disallow: /contact/nyc/None
+
+User-Agent: *
+Allow: /
+Disallow: /wp-admin
+Disallow: /_nuxt
+Disallow: /api
+Disallow: /internal
+Disallow: /building/nyc/None
+Disallow: /contact/nyc/None
+
+Sitemap: https://www.openigloo.com/sitemap.xml

@@ -1,0 +1,24 @@
+
+
+User-agent: *
+Sitemap: https://dailyvoice.com/sitemap.xml
+Crawl-delay: 1
+Disallow: */admin/
+Disallow: */login/
+Disallow: /user/
+Disallow: /users/
+Disallow: /places/
+Disallow: /email/subscribe/
+Disallow: /events/this-weekend
+Disallow: /events/tomorrow
+Disallow: /events/today
+Disallow: /events/by-date
+Disallow: /events/by-type
+Disallow: /favicon.ico
+
+User-agent: facebookexternalhit
+Crawl-delay: 0
+Disallow:
+Allow: /
+
+

@@ -15,17 +15,24 @@ for r in rows:
     if not bbl:
         out[r["addr_key"]] = {"error": "no BBL"}; continue
     u = EXTRA_BBL.get(r["addr_key"] + "#url") or f"https://www.openigloo.com/building/nyc/{bbl}-{bbl}/x"
-    if u.endswith("/x") and u not in RES:
+    cp = E / ("igloo_" + re.sub(r"\W+", "_", r["addr_key"]) + ".html"); mp = cp.with_suffix(".meta.json")
+    if not mp.exists():
         import requests, time
-        time.sleep(2.5)
-        rr = requests.head(u, headers={"User-Agent": lib.USER_AGENT}, allow_redirects=False, timeout=60)
-        RES[u] = {"status": rr.status_code, "location": rr.headers.get("location", "")}
-        (E / "_igloo_resolve.json").write_text(json.dumps(RES, indent=1))
-    if u in RES:
-        if not RES[u]["location"]:
-            out[r["addr_key"]] = {"status": RES[u]["status"], "fetched": u}; print(r["addr_key"], RES[u]); continue
-        u = "https://www.openigloo.com" + RES[u]["location"]
-    c, m = lib.cached_get(u, "evidence_b5", ext="html")
+        cur = u; m = None
+        for hop in range(6):  # the site 308s between slug spellings; follow by hand, throttled
+            time.sleep(2.5)
+            rr = requests.get(cur, headers={"User-Agent": lib.USER_AGENT}, allow_redirects=False, timeout=60)
+            if rr.status_code in (301, 302, 307, 308) and rr.headers.get("location"):
+                cur = "https://www.openigloo.com" + rr.headers["location"] if rr.headers["location"].startswith("/") else rr.headers["location"]
+                continue
+            break
+        m = {"url": cur, "status": rr.status_code, "retrieved_at": lib.now_iso(), "path": str(cp.relative_to(lib.ROOT)), "hops": hop}
+        if rr.status_code == 200: cp.write_bytes(rr.content)
+        mp.write_text(json.dumps(m))
+        with open(E / "_index.jsonl", "a") as f: f.write(json.dumps(m) + "\n")
+        if rr.status_code in (403, 429): print("BLOCKED", m); sys.exit(1)
+    m = json.loads(mp.read_text()); u = m["url"]
+    c = cp.read_bytes() if cp.exists() else b""
     t = c.decode(errors="replace")
     o = {"status": m["status"], "retrieved_at": m["retrieved_at"], "fetched": u}
     if m["status"] == 200:

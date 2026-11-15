@@ -1,0 +1,14 @@
+Sitemap: https://www.valleyandbloom.com/sitemap.xml
+
+User-agent: *
+Disallow: /forms/
+Disallow: /js/
+Disallow: /dmslivecafe/
+Disallow: /system/
+Disallow: /cms/
+Disallow: /bin/
+Disallow: /library/
+Disallow: /views/
+Disallow: /apartments/
+Disallow: /sitemanager/
+disallow: /*.ashx

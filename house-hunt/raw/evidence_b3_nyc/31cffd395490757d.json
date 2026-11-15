@@ -1,0 +1,23 @@
+[{"complaint_type":"Noise - Vehicle","descriptor":"Engine Idling","n":"187","last":"2026-11-13T13:00:05.000","first":"2026-02-13T18:48:12.000"}
+,{"complaint_type":"Noise - Residential","descriptor":"Loud Music/Party","n":"12","last":"2026-02-01T23:00:48.000","first":"2025-04-26T18:26:16.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"PESTS","n":"7","last":"2026-10-11T22:49:00.000","first":"2025-06-02T16:58:31.000"}
+,{"complaint_type":"HEAT/HOT WATER","descriptor":"APARTMENT ONLY","n":"5","last":"2025-11-03T15:33:19.000","first":"2025-03-22T13:38:56.000"}
+,{"complaint_type":"HEAT/HOT WATER","descriptor":"ENTIRE BUILDING","n":"4","last":"2026-11-07T11:11:53.000","first":"2025-01-03T06:03:54.000"}
+,{"complaint_type":"PLUMBING","descriptor":"WATER SUPPLY","n":"2","last":"2025-10-08T07:49:14.000","first":"2025-09-11T07:49:14.000"}
+,{"complaint_type":"PAINT/PLASTER","descriptor":"CEILING","n":"2","last":"2026-08-15T03:36:53.000","first":"2026-08-12T07:55:04.000"}
+,{"complaint_type":"PAINT/PLASTER","descriptor":"WALL","n":"2","last":"2026-08-15T03:36:53.000","first":"2025-06-02T16:58:31.000"}
+,{"complaint_type":"PLUMBING","descriptor":"BATHTUB/SHOWER","n":"2","last":"2026-10-11T22:49:00.000","first":"2025-11-03T15:33:19.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"MOLD","n":"1","last":"2026-08-15T03:36:53.000","first":"2026-08-15T03:36:53.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"SEWAGE","n":"1","last":"2026-08-15T03:36:53.000","first":"2026-08-15T03:36:53.000"}
+,{"complaint_type":"WATER LEAK","descriptor":"DAMP SPOT","n":"1","last":"2026-08-15T03:36:53.000","first":"2026-08-15T03:36:53.000"}
+,{"complaint_type":"Water System","descriptor":"Leak (Use Comments) (WA2)","n":"1","last":"2025-10-09T12:44:00.000","first":"2025-10-09T12:44:00.000"}
+,{"complaint_type":"Boilers","descriptor":"Boiler - Defective/Inoperative/No Permit","n":"1","last":"2026-03-10T20:00:39.000","first":"2026-03-10T20:00:39.000"}
+,{"complaint_type":"Water System","descriptor":"LOW WATER PRESSURE - WLWP","n":"1","last":"2025-09-10T08:46:00.000","first":"2025-09-10T08:46:00.000"}
+,{"complaint_type":"Building/Use","descriptor":"Illegal Conversion Of Residential Building/Space","n":"1","last":"2025-04-29T20:30:59.000","first":"2025-04-29T20:30:59.000"}
+,{"complaint_type":"Consumer Complaint","descriptor":"Laundromat","n":"1","last":"2026-03-15T06:36:38.000","first":"2026-03-15T06:36:38.000"}
+,{"complaint_type":"DOOR/WINDOW","descriptor":"DOOR","n":"1","last":"2026-08-15T03:36:53.000","first":"2026-08-15T03:36:53.000"}
+,{"complaint_type":"Noise","descriptor":"Construction Equipment","n":"1","last":"2026-09-25T14:02:09.000","first":"2026-09-25T14:02:09.000"}
+,{"complaint_type":"Noise - Vehicle","descriptor":"Car/Truck Horn","n":"1","last":"2026-10-02T21:49:48.000","first":"2026-10-02T21:49:48.000"}
+,{"complaint_type":"Noise - Vehicle","descriptor":"Car/Truck Music","n":"1","last":"2025-06-10T02:42:16.000","first":"2025-06-10T02:42:16.000"}
+,{"complaint_type":"PLUMBING","descriptor":"RADIATOR","n":"1","last":"2026-08-15T03:36:53.000","first":"2026-08-15T03:36:53.000"}
+,{"complaint_type":"PLUMBING","descriptor":"TOILET","n":"1","last":"2025-11-03T15:33:19.000","first":"2025-11-03T15:33:19.000"}]

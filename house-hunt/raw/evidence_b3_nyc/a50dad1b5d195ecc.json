@@ -1,0 +1,33 @@
+[{"complaint_type":"HEAT/HOT WATER","descriptor":"APARTMENT ONLY","n":"10","last":"2026-10-02T16:30:13.000","first":"2025-03-04T18:00:59.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"MOLD","n":"7","last":"2026-09-30T18:22:09.000","first":"2026-02-26T12:18:18.000"}
+,{"complaint_type":"PAINT/PLASTER","descriptor":"CEILING","n":"7","last":"2026-08-06T16:24:30.000","first":"2026-01-29T21:39:29.000"}
+,{"complaint_type":"ELECTRIC","descriptor":"LIGHTING","n":"5","last":"2026-03-12T19:06:49.000","first":"2026-01-29T21:39:29.000"}
+,{"complaint_type":"PLUMBING","descriptor":"WATER SUPPLY","n":"5","last":"2026-01-26T18:37:05.000","first":"2026-01-26T10:24:06.000"}
+,{"complaint_type":"WATER LEAK","descriptor":"HEAVY FLOW","n":"4","last":"2026-09-10T16:47:08.000","first":"2025-11-10T15:30:29.000"}
+,{"complaint_type":"Real Time Enforcement","descriptor":"Work Without A Permit - Occupied Multiple Dwelling","n":"4","last":"2026-02-19T14:18:36.000","first":"2024-12-02T11:06:04.000"}
+,{"complaint_type":"Noise - Residential","descriptor":"Banging/Pounding","n":"3","last":"2026-06-17T09:54:53.000","first":"2026-03-15T20:23:14.000"}
+,{"complaint_type":"Noise - Residential","descriptor":"Loud Music/Party","n":"3","last":"2026-06-14T17:01:24.000","first":"2025-01-12T21:47:44.000"}
+,{"complaint_type":"Elevator","descriptor":"Elevator - Single Device On Property/No Alternate Service","n":"3","last":"2026-02-02T12:32:28.000","first":"2025-10-25T17:24:42.000"}
+,{"complaint_type":"WATER LEAK","descriptor":"DAMP SPOT","n":"3","last":"2026-05-14T07:14:41.000","first":"2026-02-03T09:34:45.000"}
+,{"complaint_type":"GENERAL","descriptor":"BELL/BUZZER/INTERCOM","n":"3","last":"2026-10-17T19:22:55.000","first":"2026-06-25T19:50:51.000"}
+,{"complaint_type":"ELECTRIC","descriptor":"POWER OUTAGE","n":"2","last":"2026-10-02T16:30:13.000","first":"2025-05-27T10:24:47.000"}
+,{"complaint_type":"DOOR/WINDOW","descriptor":"DOOR","n":"2","last":"2026-09-13T12:41:28.000","first":"2026-03-12T19:06:49.000"}
+,{"complaint_type":"APPLIANCE","descriptor":"REFRIGERATOR","n":"2","last":"2026-05-14T07:14:41.000","first":"2026-02-03T09:34:45.000"}
+,{"complaint_type":"GENERAL","descriptor":"SIGNAGE MISSING","n":"2","last":"2026-09-13T12:50:56.000","first":"2026-05-25T10:44:39.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"GARBAGE/RECYCLING STORAGE","n":"2","last":"2026-05-25T10:44:39.000","first":"2026-03-18T21:08:41.000"}
+,{"complaint_type":"PAINT/PLASTER","descriptor":"WALL","n":"2","last":"2026-02-25T16:52:12.000","first":"2026-01-29T21:39:29.000"}
+,{"complaint_type":"WATER LEAK","descriptor":"SLOW LEAK","n":"1","last":"2026-05-24T18:52:31.000","first":"2026-05-24T18:52:31.000"}
+,{"complaint_type":"Dead/Dying Tree","descriptor":"Planted Less Than 2 Years Ago","n":"1","last":"2026-09-26T12:49:36.000","first":"2026-09-26T12:49:36.000"}
+,{"complaint_type":"DOOR/WINDOW","descriptor":"WINDOW FRAME","n":"1","last":"2026-09-10T16:47:07.000","first":"2026-09-10T16:47:07.000"}
+,{"complaint_type":"Electrical","descriptor":"Electrical Wiring Defective/Exposed","n":"1","last":"2025-01-29T11:57:36.000","first":"2025-01-29T11:57:36.000"}
+,{"complaint_type":"GENERAL","descriptor":"MAILBOX","n":"1","last":"2026-06-25T19:50:51.000","first":"2026-06-25T19:50:51.000"}
+,{"complaint_type":"GENERAL","descriptor":"VENTILATION SYSTEM","n":"1","last":"2026-09-10T16:47:08.000","first":"2026-09-10T16:47:08.000"}
+,{"complaint_type":"General Construction/Plumbing","descriptor":"Egress - Doors Locked/Blocked/Improper/No Secondary Means","n":"1","last":"2026-06-25T19:45:17.000","first":"2026-06-25T19:45:17.000"}
+,{"complaint_type":"General Construction/Plumbing","descriptor":"Failure to Comply with Vacate Order","n":"1","last":"2026-03-18T21:14:03.000","first":"2026-03-18T21:14:03.000"}
+,{"complaint_type":"HEAT/HOT WATER","descriptor":"ENTIRE BUILDING","n":"1","last":"2026-01-25T02:24:47.000","first":"2026-01-25T02:24:47.000"}
+,{"complaint_type":"Noise","descriptor":"Construction Equipment","n":"1","last":"2026-07-27T08:27:38.000","first":"2026-07-27T08:27:38.000"}
+,{"complaint_type":"Noise","descriptor":"Noise: Construction Equipment (NC1)","n":"1","last":"2025-11-07T09:20:00.000","first":"2025-11-07T09:20:00.000"}
+,{"complaint_type":"OUTSIDE BUILDING","descriptor":"ROOF DOOR/HATCH","n":"1","last":"2026-01-29T21:39:29.000","first":"2026-01-29T21:39:29.000"}
+,{"complaint_type":"OUTSIDE BUILDING","descriptor":"ROOFING","n":"1","last":"2026-01-29T21:39:29.000","first":"2026-01-29T21:39:29.000"}
+,{"complaint_type":"PLUMBING","descriptor":"BASIN/SINK","n":"1","last":"2026-08-06T16:24:30.000","first":"2026-08-06T16:24:30.000"}
+,{"complaint_type":"PLUMBING","descriptor":"RADIATOR","n":"1","last":"2026-08-06T16:24:30.000","first":"2026-08-06T16:24:30.000"}]

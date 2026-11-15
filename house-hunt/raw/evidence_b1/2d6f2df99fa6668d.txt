@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: */contact-us
+Disallow: */reset-password
+Disallow: */onlineapplication/*
+Disallow: */online-application/*
+Sitemap: https://www.avaloncommunities.com/arc/outboundfeeds/avb-sitemap/?outputType=xml&_website=avalon-communities

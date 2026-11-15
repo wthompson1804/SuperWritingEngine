@@ -1,0 +1,57 @@
+[{"complaint_type":"Noise - Residential","descriptor":"Loud Music/Party","n":"23","last":"2026-11-04T16:50:07.000","first":"2024-11-28T21:24:46.000"}
+,{"complaint_type":"Noise - Residential","descriptor":"Banging/Pounding","n":"20","last":"2026-05-10T13:20:15.000","first":"2025-03-14T23:48:41.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"PESTS","n":"11","last":"2026-06-03T19:21:26.000","first":"2025-08-25T11:45:40.000"}
+,{"complaint_type":"PLUMBING","descriptor":"WATER SUPPLY","n":"8","last":"2026-10-22T14:27:22.000","first":"2025-03-29T11:43:21.000"}
+,{"complaint_type":"Illegal Parking","descriptor":"Posted Parking Sign Violation","n":"7","last":"2025-09-10T09:20:08.000","first":"2025-03-31T08:19:22.000"}
+,{"complaint_type":"Elevator","descriptor":"Elevator - Multiple Devices On Property","n":"7","last":"2026-09-18T13:57:24.000","first":"2026-01-19T06:31:27.000"}
+,{"complaint_type":"Blocked Driveway","descriptor":"No Access","n":"6","last":"2026-10-11T10:34:48.000","first":"2025-07-19T09:48:05.000"}
+,{"complaint_type":"HEAT/HOT WATER","descriptor":"ENTIRE BUILDING","n":"5","last":"2026-01-19T17:26:36.000","first":"2025-12-17T20:22:38.000"}
+,{"complaint_type":"DOOR/WINDOW","descriptor":"DOOR","n":"5","last":"2026-08-12T04:37:12.000","first":"2025-06-13T13:52:15.000"}
+,{"complaint_type":"HEAT/HOT WATER","descriptor":"APARTMENT ONLY","n":"5","last":"2026-04-02T03:33:02.000","first":"2026-01-19T03:26:08.000"}
+,{"complaint_type":"GENERAL","descriptor":"VENTILATION SYSTEM","n":"4","last":"2026-05-12T07:24:23.000","first":"2025-03-15T16:42:58.000"}
+,{"complaint_type":"FLOORING/STAIRS","descriptor":"FLOOR","n":"4","last":"2025-11-04T08:30:01.000","first":"2025-05-29T09:33:54.000"}
+,{"complaint_type":"ELECTRIC","descriptor":"LIGHTING","n":"4","last":"2026-01-18T19:55:27.000","first":"2025-08-25T11:45:40.000"}
+,{"complaint_type":"PLUMBING","descriptor":"TOILET","n":"3","last":"2025-11-04T08:30:01.000","first":"2025-08-25T11:45:40.000"}
+,{"complaint_type":"ELECTRIC","descriptor":"POWER OUTAGE","n":"3","last":"2025-11-06T19:07:46.000","first":"2025-09-23T08:16:50.000"}
+,{"complaint_type":"Noise - Residential","descriptor":"Loud Talking","n":"3","last":"2026-11-13T22:56:33.000","first":"2025-07-21T15:24:20.000"}
+,{"complaint_type":"PLUMBING","descriptor":"BATHTUB/SHOWER","n":"3","last":"2026-04-05T00:54:09.000","first":"2026-02-09T14:27:01.000"}
+,{"complaint_type":"DOOR/WINDOW","descriptor":"WINDOW FRAME","n":"2","last":"2026-04-02T03:33:02.000","first":"2026-02-17T23:37:19.000"}
+,{"complaint_type":"Sidewalk Condition","descriptor":"Blocked - Construction","n":"2","last":"2025-09-04T18:36:44.000","first":"2025-07-22T14:47:53.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"GARBAGE/RECYCLING STORAGE","n":"2","last":"2026-08-21T20:57:30.000","first":"2026-06-04T22:57:53.000"}
+,{"complaint_type":"GENERAL","descriptor":"CABINET","n":"2","last":"2025-11-04T08:30:01.000","first":"2025-10-14T13:01:46.000"}
+,{"complaint_type":"WATER LEAK","descriptor":"HEAVY FLOW","n":"2","last":"2026-05-26T13:06:54.000","first":"2025-06-13T13:52:15.000"}
+,{"complaint_type":"Drug Activity","descriptor":"Use Indoor","n":"1","last":"2025-08-25T11:55:21.000","first":"2025-08-25T11:55:21.000"}
+,{"complaint_type":"Indoor Air Quality","descriptor":"Ventilation","n":"1","last":"2026-06-04T21:24:07.000","first":"2026-06-04T21:24:07.000"}
+,{"complaint_type":"Litter Basket Request","descriptor":"New Basket","n":"1","last":"2026-08-19T20:17:31.000","first":"2026-08-19T20:17:31.000"}
+,{"complaint_type":"Noise","descriptor":"Noise: Alarms (NR3)","n":"1","last":"2025-12-22T16:32:00.000","first":"2025-12-22T16:32:00.000"}
+,{"complaint_type":"Noise","descriptor":"Noise, Barking Dog (NR5)","n":"1","last":"2025-11-16T09:11:00.000","first":"2025-11-16T09:11:00.000"}
+,{"complaint_type":"Noise","descriptor":"Noise: Construction Before/After Hours (NM1)","n":"1","last":"2025-11-14T15:35:00.000","first":"2025-11-14T15:35:00.000"}
+,{"complaint_type":"DOOR/WINDOW","descriptor":"DOOR FRAME","n":"1","last":"2026-01-19T08:43:19.000","first":"2026-01-19T08:43:19.000"}
+,{"complaint_type":"Water System","descriptor":"Hydrant Running (WC3)","n":"1","last":"2026-06-17T09:50:00.000","first":"2026-06-17T09:50:00.000"}
+,{"complaint_type":"Noise - Residential","descriptor":"Loud Television","n":"1","last":"2026-10-10T02:39:49.000","first":"2026-10-10T02:39:49.000"}
+,{"complaint_type":"Noise - Street/Sidewalk","descriptor":"Loud Talking","n":"1","last":"2026-06-26T14:53:40.000","first":"2026-06-26T14:53:40.000"}
+,{"complaint_type":"PLUMBING","descriptor":"BASIN/SINK","n":"1","last":"2025-08-08T16:11:42.000","first":"2025-08-08T16:11:42.000"}
+,{"complaint_type":"Window Guard","descriptor":"Tenant Refusal","n":"1","last":"2026-03-09T10:32:07.000","first":"2026-03-09T10:32:07.000"}
+,{"complaint_type":"Dirty Condition","descriptor":"Trash","n":"1","last":"2025-08-13T09:13:29.000","first":"2025-08-13T09:13:29.000"}
+,{"complaint_type":"Dirty Condition","descriptor":"Broken Glass","n":"1","last":"2025-09-04T18:41:12.000","first":"2025-09-04T18:41:12.000"}
+,{"complaint_type":"Residential Disposal Complaint","descriptor":"Storage Area Not Provided","n":"1","last":"2026-09-29T16:27:34.000","first":"2026-09-29T16:27:34.000"}
+,{"complaint_type":"SAFETY","descriptor":"WINDOW GUARD BROKEN/MISSING","n":"1","last":"2026-07-16T05:19:00.000","first":"2026-07-16T05:19:00.000"}
+,{"complaint_type":"Sewer","descriptor":"Culvert Blocked/Needs Cleaning (SE)","n":"1","last":"2026-05-20T22:37:00.000","first":"2026-05-20T22:37:00.000"}
+,{"complaint_type":"Sewer","descriptor":"Street Flooding (SJ)","n":"1","last":"2026-06-23T16:42:00.000","first":"2026-06-23T16:42:00.000"}
+,{"complaint_type":"Sewer Maintenance","descriptor":"Culvert","n":"1","last":"2026-07-06T12:10:34.000","first":"2026-07-06T12:10:34.000"}
+,{"complaint_type":"Snow or Ice","descriptor":"Snow Tracking","n":"1","last":"2026-01-26T06:12:56.000","first":"2026-01-26T06:12:56.000"}
+,{"complaint_type":"Street Sign - Damaged","descriptor":"Construction","n":"1","last":"2026-10-13T15:51:07.000","first":"2026-10-13T15:51:07.000"}
+,{"complaint_type":"Street Sign - Dangling","descriptor":"Other/Unknown","n":"1","last":"2025-01-28T07:22:17.000","first":"2025-01-28T07:22:17.000"}
+,{"complaint_type":"Street Sign - Dangling","descriptor":"Street Cleaning - ASP","n":"1","last":"2026-08-21T17:36:56.000","first":"2026-08-21T17:36:56.000"}
+,{"complaint_type":"Derelict Vehicles","descriptor":"Derelict Vehicles","n":"1","last":"2026-09-11T02:01:00.000","first":"2026-09-11T02:01:00.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"SEWAGE","n":"1","last":"2026-04-05T00:54:09.000","first":"2026-04-05T00:54:09.000"}
+,{"complaint_type":"WATER LEAK","descriptor":"DAMP SPOT","n":"1","last":"2026-04-05T00:54:09.000","first":"2026-04-05T00:54:09.000"}
+,{"complaint_type":"WATER LEAK","descriptor":"SLOW LEAK","n":"1","last":"2026-06-04T23:00:31.000","first":"2026-06-04T23:00:31.000"}
+,{"complaint_type":"Water System","descriptor":"Fire Hydrant Emergency (FHE)","n":"1","last":"2025-06-25T23:02:00.000","first":"2025-06-25T23:02:00.000"}
+,{"complaint_type":"Water System","descriptor":"Hydrant Running Full (WA4)","n":"1","last":"2025-07-05T09:14:00.000","first":"2025-07-05T09:14:00.000"}
+,{"complaint_type":"Homeless Person Assistance","descriptor":"Non-Chronic","n":"1","last":"2025-07-26T14:27:05.000","first":"2025-07-26T14:27:05.000"}
+,{"complaint_type":"GENERAL","descriptor":"BELL/BUZZER/INTERCOM","n":"1","last":"2026-03-02T14:17:49.000","first":"2026-03-02T14:17:49.000"}
+,{"complaint_type":"Illegal Dumping","descriptor":"Chronic Dumping","n":"1","last":"2025-10-07T11:08:39.000","first":"2025-10-07T11:08:39.000"}
+,{"complaint_type":"Illegal Dumping","descriptor":"Removal Request","n":"1","last":"2026-02-28T11:56:42.000","first":"2026-02-28T11:56:42.000"}
+,{"complaint_type":"Illegal Parking","descriptor":"Blocked Hydrant","n":"1","last":"2026-03-25T16:34:49.000","first":"2026-03-25T16:34:49.000"}
+,{"complaint_type":"Illegal Parking","descriptor":"Blocked Sidewalk","n":"1","last":"2025-05-30T12:04:11.000","first":"2025-05-30T12:04:11.000"}]

@@ -1,0 +1,261 @@
+# As a condition of accessing this website, you agree to abide by the following
+# content signals:
+
+# (a)  If a Content-Signal = yes, you may collect content for the corresponding
+#      use.
+# (b)  If a Content-Signal = no, you may not collect content for the
+#      corresponding use.
+# (c)  If the website operator does not include a Content-Signal for a
+#      corresponding use, the website operator neither grants nor restricts
+#      permission via Content-Signal with respect to the corresponding use.
+
+# The content signals and their meanings are:
+
+# search:   building a search index and providing search results (e.g., returning
+#           hyperlinks and short excerpts from your website's contents). Search does not
+#           include providing AI-generated search summaries.
+# ai-input: inputting content into one or more AI models (e.g., retrieval
+#           augmented generation, grounding, or other real-time taking of content for
+#           generative AI search answers).
+# ai-train: training or fine-tuning AI models.
+# use:      how AI systems may consume the content (immediate, reference, or full).
+
+# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF
+# RIGHTS UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT
+# AND RELATED RIGHTS IN THE DIGITAL SINGLE MARKET.
+
+# BEGIN Cloudflare Managed content
+
+
+User-agent: *
+Content-Signal: search=yes,ai-train=no,use=reference
+Allow: /
+
+# Training crawlers
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: MistralAI-Training
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: GoogleOther
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: AwarioSmartBot
+User-agent: AwarioRssBot
+Disallow: /
+
+User-agent: Google-CloudVertexBot
+Disallow: /
+
+User-agent: QualifiedBot
+Disallow: /
+
+User-agent: Cotoyogi
+Disallow: /
+
+User-agent: ICC-Crawler
+Disallow: /
+
+User-agent: atlassian-bot
+Disallow: /
+
+User-agent: FishBot
+Disallow: /
+
+User-agent: BorderxBot
+Disallow: /
+
+User-agent: NavuBot
+Disallow: /
+
+User-agent: SemrushBot-SWA
+Disallow: /
+
+User-agent: WARDBot
+Disallow: /
+
+User-agent: magpie-crawler
+Disallow: /
+
+User-agent: KimiBot
+Disallow: /
+
+User-agent: CitibotSiteCrawler
+Disallow: /
+
+# END Cloudflare Managed Content
+
+# ============================================================
+# njbiz.com - robots.txt
+# BridgeTower Media standard, v2 (issued 2026-08-30)
+# Supersedes the file deployed 2026-08-06.
+# ------------------------------------------------------------
+# Policy (unchanged): BLOCK the AI model-training crawlers,
+# ALLOW the retrieval/answer crawlers, so BTM content stays
+# citable in AI answers but is not used for model training.
+#
+# Changes from the 2026-08-06 file:
+#   1. Removed four rules from the general block that were
+#      standardized in error from a pre-upgrade pattern: the
+#      wp-content uploads directory, and the extension-based
+#      rules for PHP, JavaScript and CSS files. Google needs
+#      JS and CSS to render pages and assess mobile usability,
+#      and the same render now feeds AI retrieval.
+#   2. Removed the 10-second crawl delay (ignored by Google;
+#      honored by Bing, capping crawl near 8,600 URLs/day).
+#   3. Added Claude-SearchBot to the allowed list (Anthropic's
+#      search crawler; previously unlisted).
+#   4. Added Meta-WebIndexer to the allowed list.
+#   5. Added meta-externalagent and Bytespider to the blocked
+#      list. Bytespider ignores robots.txt in practice and also
+#      needs a Cloudflare rule.
+#
+# All user-agent tokens verified against vendor documentation
+# (OpenAI, Anthropic, Google, Perplexity, Apple, Meta) on
+# 2026-08-30. Token matching is case-insensitive per RFC 9309.
+#
+# Deploy as /robots.txt at the site root.
+# Sitemap line verified live against this site on 2026-08-30.
+# ============================================================
+
+User-agent: *
+Allow: /wp-admin/admin-ajax.php
+Allow: /author/
+Allow: /author/*/feed/
+Disallow: /cgi-bin/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /feed/
+Disallow: /trackback/
+Disallow: /print/
+Disallow: /index.php
+Disallow: /*.inc$
+Disallow: */feed/
+Disallow: */trackback/
+Disallow: */print/
+Disallow: /*?utm_source=
+Disallow: /*?utm_medium=
+Disallow: /*?utm_campaign=
+Disallow: /*?utm_term=
+Disallow: /*?utm_content=
+
+# ---------- AI MODEL-TRAINING crawlers: BLOCK ----------
+# Per each vendor's documentation, blocking these does not
+# remove the site from any search product or affect ranking.
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# Legacy Anthropic tokens: absent from Anthropic's current
+# documentation and believed inert. Retained so that no older
+# configuration can silently regress.
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# ---------- AI RETRIEVAL / ANSWER crawlers: ALLOW ----------
+# These agents determine whether this site's content can be
+# cited in AI answers. They must stay allowed.
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Meta-WebIndexer
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Googlebot intentionally has NO group of its own, so it keeps
+# following the "User-agent: *" rules above. Giving Googlebot
+# its own "Allow: /" group would override every site-wide
+# restriction. Googlebot is also what makes pages eligible for
+# AI Overviews and AI Mode; those are governed by Search
+# eligibility plus the snippet controls (nosnippet /
+# max-snippet / data-nosnippet), NOT by Google-Extended.
+
+Sitemap: https://njbiz.com/sitemap_index.xml

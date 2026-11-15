@@ -23,7 +23,7 @@ from lib import DATA, ROOT  # noqa: E402
 
 WINDOW_END = date(2026, 12, 15)
 RENT_MAX = 3000
-MIN_DOG_LIMIT_LB = 40
+MIN_DOG_LIMIT_LB = 25  # Will, 2026-11-15: the dog will not exceed 25 lb (gate was 40, then 35)
 MAX_DRIVE_MIN = 120
 STALE_DAYS = 60
 

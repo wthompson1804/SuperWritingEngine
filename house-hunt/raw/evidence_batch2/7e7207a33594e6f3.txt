@@ -1,0 +1,59 @@
+# Added by Newspack Manager bot blocking
+User-agent: ClaudeBot
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: Claude-User
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: Claude-SearchBot
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: Baiduspider
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: Bytespider
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: CCBot
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: Google-Extended
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: GoogleOther
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: GPTBot
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: ChatGPT-User
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: OAI-SearchBot
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: PerplexityBot
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: YandexBot
+Disallow: /
+
+# Added by Newspack Manager bot blocking
+User-agent: __usage_ai-training
+Disallow: /

@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%274059580140%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60",
+ "retrieved_at": "2026-11-15T20:47:16+00:00",
+ "status": 200,
+ "path": "raw/evidence_b3_nyc/aaa42f1875521aae.json",
+ "source": "evidence_b3_nyc"
+}

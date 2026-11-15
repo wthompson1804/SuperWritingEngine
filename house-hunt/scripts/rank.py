@@ -167,7 +167,7 @@ def main():
     u["p_distance"] = blend((pct(u.drive_min_to, False), 60), (pct(u.transit_sat_median, False), 25), (pct(u.toll_rt_ezpass, False), 15))
     dog_small = dog_small.reindex(u.index).fillna(False)
     dogam = has("dog_amenities") | cm("dog_park_pet_spa")
-    weight_ok = pd.to_numeric(u.get("dog_weight_limit_lb"), errors="coerce") >= 40
+    weight_ok = pd.to_numeric(u.get("dog_weight_limit_lb"), errors="coerce") >= 25
     u["p_dog"] = blend((pct(u.park_walk_min, False), 25), (pct(u.park_ha_800m), 15), (pct(u.dog_park_m, False), 15),
                        (pct(n("woods_ha_within_800m")), 5), (pct(n("vet_count_1600m")), 10), (pct(n("pet_count_1600m")), 5),
                        (pd.Series(np.where(dogam, 100, UNKNOWN_PCT), index=u.index), 10), (pct(u.pet_rent, False), 5),

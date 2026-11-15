@@ -1,0 +1,57 @@
+#
+# JonahSystems robots.txt
+#
+# images, css, and js blocked below are for the CMS, not the website
+#
+# images, css, and js for the website are not blocked via these settings
+#
+#
+
+User-agent: SiteAuditBot
+Disallow: /
+User-agent: SemrushBot
+Disallow: /
+User-agent: SemrushBot-BA
+Disallow: /
+User-agent: SemrushBot-SI
+Disallow: /
+User-agent: SemrushBot-SWA
+Disallow: /
+User-agent: SemrushBot-CT
+Disallow: /
+User-agent: SplitSignalBot
+Disallow: /
+User-agent: SemrushBot-COUB
+Disallow: /
+User-agent: SemrushBot/7~bl
+Disallow: /
+User-agent: DataForSeoBot
+Disallow: /
+User-agent: AhrefsBot
+Disallow: /
+User-agent: dotbot
+Disallow: /
+User-agent: Amazonbot
+Disallow: /
+User-agent: Baiduspider
+User-agent: Baiduspider+
+Disallow: /
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /cms/
+Disallow: /assets/videos/
+Disallow: /assets/audio/
+Disallow: /css/
+Disallow: /frmxprt/
+Disallow: /images/
+Disallow: /js/
+Disallow: /share-this/
+
+User-agent: Baiduspider
+User-agent: Baiduspider+
+Disallow: /
+
+Sitemap: https://ingerman.com/sitemap.xml

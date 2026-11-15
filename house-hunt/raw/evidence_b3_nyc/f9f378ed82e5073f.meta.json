@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%274059580140%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+ "retrieved_at": "2026-11-15T20:47:15+00:00",
+ "status": 200,
+ "path": "raw/evidence_b3_nyc/f9f378ed82e5073f.json",
+ "source": "evidence_b3_nyc"
+}

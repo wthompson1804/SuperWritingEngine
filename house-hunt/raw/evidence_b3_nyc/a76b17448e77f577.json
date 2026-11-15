@@ -1,0 +1,35 @@
+[{"complaint_type":"Noise - Residential","descriptor":"Banging/Pounding","n":"41","last":"2026-10-17T16:05:16.000","first":"2025-01-12T12:16:18.000"}
+,{"complaint_type":"Noise - Residential","descriptor":"Loud Music/Party","n":"12","last":"2026-08-03T04:21:38.000","first":"2025-10-20T10:11:03.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"MOLD","n":"4","last":"2025-06-06T11:29:33.000","first":"2024-12-03T14:06:17.000"}
+,{"complaint_type":"PAINT/PLASTER","descriptor":"CEILING","n":"3","last":"2025-02-13T13:38:25.000","first":"2025-02-13T13:38:25.000"}
+,{"complaint_type":"PAINT/PLASTER","descriptor":"WALL","n":"3","last":"2026-04-09T07:23:36.000","first":"2025-06-06T11:29:33.000"}
+,{"complaint_type":"FLOORING/STAIRS","descriptor":"FLOOR","n":"3","last":"2026-04-09T07:23:36.000","first":"2025-10-13T13:31:31.000"}
+,{"complaint_type":"Abandoned Vehicle","descriptor":"With License Plate","n":"3","last":"2026-10-21T09:45:01.000","first":"2026-09-19T23:12:33.000"}
+,{"complaint_type":"HEAT/HOT WATER","descriptor":"APARTMENT ONLY","n":"3","last":"2025-03-25T12:18:27.000","first":"2025-01-22T09:35:21.000"}
+,{"complaint_type":"Noise","descriptor":"Noise: Construction Equipment (NC1)","n":"2","last":"2025-04-22T09:17:00.000","first":"2025-01-31T16:11:00.000"}
+,{"complaint_type":"Building/Use","descriptor":"Illegal. Commercial Use In Resident Zone","n":"2","last":"2025-02-22T18:16:25.000","first":"2025-01-19T17:00:07.000"}
+,{"complaint_type":"GENERAL","descriptor":"CABINET","n":"2","last":"2026-02-25T08:27:23.000","first":"2026-01-27T12:37:23.000"}
+,{"complaint_type":"Noise - Street/Sidewalk","descriptor":"Loud Music/Party","n":"2","last":"2025-11-01T15:37:05.000","first":"2025-09-28T14:15:13.000"}
+,{"complaint_type":"Obstruction","descriptor":"Cone","n":"2","last":"2026-10-25T22:23:49.000","first":"2026-10-20T16:40:14.000"}
+,{"complaint_type":"PLUMBING","descriptor":"BASIN/SINK","n":"2","last":"2026-02-25T08:27:23.000","first":"2026-01-27T12:37:23.000"}
+,{"complaint_type":"Street Condition","descriptor":"Blocked - Construction","n":"2","last":"2026-10-25T22:27:33.000","first":"2026-10-21T09:21:07.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"GARBAGE/RECYCLING STORAGE","n":"2","last":"2025-03-19T21:29:20.000","first":"2025-03-19T21:22:59.000"}
+,{"complaint_type":"Noise","descriptor":"Noise, Barking Dog (NR5)","n":"1","last":"2025-11-04T16:50:00.000","first":"2025-11-04T16:50:00.000"}
+,{"complaint_type":"GENERAL","descriptor":"VENTILATION SYSTEM","n":"1","last":"2025-03-03T17:04:25.000","first":"2025-03-03T17:04:25.000"}
+,{"complaint_type":"DOOR/WINDOW","descriptor":"WINDOW FRAME","n":"1","last":"2025-12-15T20:11:01.000","first":"2025-12-15T20:11:01.000"}
+,{"complaint_type":"Derelict Vehicles","descriptor":"Derelict Vehicles","n":"1","last":"2025-01-24T20:20:00.000","first":"2025-01-24T20:20:00.000"}
+,{"complaint_type":"Noise - Residential","descriptor":"Loud Talking","n":"1","last":"2025-06-06T11:42:44.000","first":"2025-06-06T11:42:44.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"PESTS","n":"1","last":"2025-06-06T11:29:33.000","first":"2025-06-06T11:29:33.000"}
+,{"complaint_type":"Noise - Street/Sidewalk","descriptor":"Loud Talking","n":"1","last":"2026-05-25T18:28:33.000","first":"2026-05-25T18:28:33.000"}
+,{"complaint_type":"WATER LEAK","descriptor":"SLOW LEAK","n":"1","last":"2026-06-05T11:25:15.000","first":"2026-06-05T11:25:15.000"}
+,{"complaint_type":"Curb Condition","descriptor":"Broken Curb","n":"1","last":"2026-11-09T17:00:08.000","first":"2026-11-09T17:00:08.000"}
+,{"complaint_type":"APPLIANCE","descriptor":"REFRIGERATOR","n":"1","last":"2025-06-06T11:29:33.000","first":"2025-06-06T11:29:33.000"}
+,{"complaint_type":"Animal-Abuse","descriptor":"Neglected","n":"1","last":"2025-03-27T20:26:40.000","first":"2025-03-27T20:26:40.000"}
+,{"complaint_type":"PLUMBING","descriptor":"BATHTUB/SHOWER","n":"1","last":"2025-10-13T13:31:31.000","first":"2025-10-13T13:31:31.000"}
+,{"complaint_type":"Real Time Enforcement","descriptor":"Work Without A Permit - Occupied Multiple Dwelling","n":"1","last":"2025-09-24T08:19:16.000","first":"2025-09-24T08:19:16.000"}
+,{"complaint_type":"Rodent","descriptor":"Signs of Rodents","n":"1","last":"2025-03-19T21:34:56.000","first":"2025-03-19T21:34:56.000"}
+,{"complaint_type":"Graffiti","descriptor":"Graffiti","n":"1","last":"2026-01-15T00:00:20.000","first":"2026-01-15T00:00:20.000"}
+,{"complaint_type":"Homeless Person Assistance","descriptor":"Non-Chronic","n":"1","last":"2026-06-16T09:39:42.000","first":"2026-06-16T09:39:42.000"}
+,{"complaint_type":"Illegal Parking","descriptor":"Parking Permit Improper Use","n":"1","last":"2025-09-22T19:52:59.000","first":"2025-09-22T19:52:59.000"}
+,{"complaint_type":"Illegal Parking","descriptor":"Posted Parking Sign Violation","n":"1","last":"2026-05-25T16:07:15.000","first":"2026-05-25T16:07:15.000"}
+,{"complaint_type":"Indoor Air Quality","descriptor":"Ventilation","n":"1","last":"2026-11-07T16:17:25.000","first":"2026-11-07T16:17:25.000"}]

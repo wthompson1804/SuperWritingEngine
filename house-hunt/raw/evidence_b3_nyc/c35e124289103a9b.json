@@ -1,0 +1,29 @@
+[{"complaint_type":"PAINT/PLASTER","descriptor":"CEILING","n":"4","last":"2026-08-05T03:37:45.000","first":"2024-11-24T19:53:32.000"}
+,{"complaint_type":"HEAT/HOT WATER","descriptor":"ENTIRE BUILDING","n":"4","last":"2026-05-03T16:58:34.000","first":"2026-04-09T20:58:10.000"}
+,{"complaint_type":"Noise - Residential","descriptor":"Loud Music/Party","n":"4","last":"2026-02-14T03:11:58.000","first":"2025-09-10T21:30:44.000"}
+,{"complaint_type":"WATER LEAK","descriptor":"HEAVY FLOW","n":"4","last":"2025-09-02T10:20:58.000","first":"2024-11-24T19:47:00.000"}
+,{"complaint_type":"HEAT/HOT WATER","descriptor":"APARTMENT ONLY","n":"3","last":"2026-05-04T20:12:45.000","first":"2026-01-16T13:50:47.000"}
+,{"complaint_type":"Elevator","descriptor":"Elevator - Single Device On Property/No Alternate Service","n":"3","last":"2026-02-09T20:19:33.000","first":"2024-12-28T21:22:52.000"}
+,{"complaint_type":"SAFETY","descriptor":"SMOKE DETECTOR","n":"3","last":"2026-08-05T03:37:45.000","first":"2025-09-02T10:20:58.000"}
+,{"complaint_type":"Noise - Vehicle","descriptor":"Car/Truck Music","n":"2","last":"2025-02-07T13:00:23.000","first":"2025-01-30T12:20:13.000"}
+,{"complaint_type":"PLUMBING","descriptor":"BASIN/SINK","n":"2","last":"2025-09-02T10:20:58.000","first":"2024-12-17T16:25:01.000"}
+,{"complaint_type":"PLUMBING","descriptor":"WATER SUPPLY","n":"2","last":"2026-04-17T11:16:30.000","first":"2024-12-24T08:57:13.000"}
+,{"complaint_type":"GENERAL","descriptor":"CABINET","n":"2","last":"2026-08-05T03:37:45.000","first":"2026-07-23T01:59:53.000"}
+,{"complaint_type":"WATER LEAK","descriptor":"SLOW LEAK","n":"2","last":"2026-08-05T03:37:45.000","first":"2026-07-13T15:43:10.000"}
+,{"complaint_type":"Noise - Residential","descriptor":"Loud Talking","n":"2","last":"2025-08-17T00:52:48.000","first":"2025-07-26T06:36:13.000"}
+,{"complaint_type":"Smoking or Vaping","descriptor":"Allowed in Smoke Free Area","n":"1","last":"2024-12-06T17:59:12.000","first":"2024-12-06T17:59:12.000"}
+,{"complaint_type":"UNSANITARY CONDITION","descriptor":"MOLD","n":"1","last":"2026-08-31T09:35:17.000","first":"2026-08-31T09:35:17.000"}
+,{"complaint_type":"APPLIANCE","descriptor":"REFRIGERATOR","n":"1","last":"2024-12-17T16:25:00.000","first":"2024-12-17T16:25:00.000"}
+,{"complaint_type":"Water System","descriptor":"Dirty Water (WE)","n":"1","last":"2026-04-17T11:16:00.000","first":"2026-04-17T11:16:00.000"}
+,{"complaint_type":"Blocked Driveway","descriptor":"No Access","n":"1","last":"2025-02-15T09:46:28.000","first":"2025-02-15T09:46:28.000"}
+,{"complaint_type":"DOOR/WINDOW","descriptor":"DOOR","n":"1","last":"2026-08-31T09:35:17.000","first":"2026-08-31T09:35:17.000"}
+,{"complaint_type":"ELECTRIC","descriptor":"POWER OUTAGE","n":"1","last":"2025-08-20T10:54:51.000","first":"2025-08-20T10:54:51.000"}
+,{"complaint_type":"FLOORING/STAIRS","descriptor":"FLOOR","n":"1","last":"2026-08-31T09:35:17.000","first":"2026-08-31T09:35:17.000"}
+,{"complaint_type":"GENERAL","descriptor":"VENTILATION SYSTEM","n":"1","last":"2026-05-18T14:19:59.000","first":"2026-05-18T14:19:59.000"}
+,{"complaint_type":"Illegal Dumping","descriptor":"Removal Request","n":"1","last":"2025-04-20T22:03:41.000","first":"2025-04-20T22:03:41.000"}
+,{"complaint_type":"Illegal Parking","descriptor":"Blocked Bike Lane","n":"1","last":"2026-08-19T19:44:50.000","first":"2026-08-19T19:44:50.000"}
+,{"complaint_type":"PLUMBING","descriptor":"BATHTUB/SHOWER","n":"1","last":"2025-09-02T10:20:58.000","first":"2025-09-02T10:20:58.000"}
+,{"complaint_type":"PLUMBING","descriptor":"STEAM PIPE/RISER","n":"1","last":"2024-12-17T16:25:00.000","first":"2024-12-17T16:25:00.000"}
+,{"complaint_type":"PLUMBING","descriptor":"TOILET","n":"1","last":"2024-12-17T16:25:00.000","first":"2024-12-17T16:25:00.000"}
+,{"complaint_type":"Rodent","descriptor":"Rat Sighting","n":"1","last":"2026-04-20T12:23:59.000","first":"2026-04-20T12:23:59.000"}
+,{"complaint_type":"SAFETY","descriptor":"CARBON MONOXIDE DETECTOR","n":"1","last":"2024-12-17T16:25:00.000","first":"2024-12-17T16:25:00.000"}]

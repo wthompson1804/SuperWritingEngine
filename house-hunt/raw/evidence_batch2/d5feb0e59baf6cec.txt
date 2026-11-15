@@ -1,0 +1,5 @@
+﻿User-agent: *
+Disallow: /roommates/profile
+Disallow: /roommates/matches
+Disallow: /guestcard
+Noindex: /guestcard

@@ -1,0 +1,4779 @@
+{
+ "4006060029": {
+  "311": [
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Single Device On Property/No Alternate Service",
+    "n": "8",
+    "last": "2025-04-23T12:50:46.000",
+    "first": "2025-04-11T07:49:20.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "MOLD",
+    "n": "8",
+    "last": "2026-09-03T16:05:01.000",
+    "first": "2025-01-17T19:56:54.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Television",
+    "n": "5",
+    "last": "2025-02-11T00:13:03.000",
+    "first": "2024-12-19T03:51:21.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "CEILING",
+    "n": "5",
+    "last": "2026-09-03T16:05:01.000",
+    "first": "2024-12-27T11:45:51.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "WALL",
+    "n": "4",
+    "last": "2025-11-08T09:01:36.000",
+    "first": "2025-04-28T09:46:20.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "3",
+    "last": "2026-01-07T16:32:50.000",
+    "first": "2025-01-05T23:14:46.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "DAMP SPOT",
+    "n": "3",
+    "last": "2026-09-03T16:05:01.000",
+    "first": "2025-04-28T09:16:04.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "SLOW LEAK",
+    "n": "3",
+    "last": "2026-08-11T12:50:20.000",
+    "first": "2025-01-17T19:56:54.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: air condition/ventilation equipment (NV1)",
+    "n": "3",
+    "last": "2025-02-20T08:59:00.000",
+    "first": "2025-02-07T09:38:00.000"
+   },
+   {
+    "complaint_type": "APPLIANCE",
+    "descriptor": "ELECTRIC/GAS RANGE",
+    "n": "2",
+    "last": "2025-11-13T21:59:04.000",
+    "first": "2025-11-08T09:01:36.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "WINDOW FRAME",
+    "n": "2",
+    "last": "2026-10-20T10:18:39.000",
+    "first": "2026-08-11T12:50:20.000"
+   },
+   {
+    "complaint_type": "FLOORING/STAIRS",
+    "descriptor": "FLOOR",
+    "n": "2",
+    "last": "2026-06-19T18:15:39.000",
+    "first": "2025-11-08T09:04:45.000"
+   },
+   {
+    "complaint_type": "Lead",
+    "descriptor": "Lead Kit Request (Residential) (L10)",
+    "n": "2",
+    "last": "2025-06-01T20:14:00.000",
+    "first": "2024-11-21T11:47:00.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Construction Before/After Hours (NM1)",
+    "n": "2",
+    "last": "2026-02-02T02:23:00.000",
+    "first": "2026-02-02T02:23:00.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Talking",
+    "n": "2",
+    "last": "2025-11-27T08:58:15.000",
+    "first": "2025-01-16T01:23:47.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "GARBAGE/RECYCLING STORAGE",
+    "n": "2",
+    "last": "2026-08-21T10:11:58.000",
+    "first": "2025-08-29T17:03:45.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "PESTS",
+    "n": "2",
+    "last": "2026-10-17T16:14:31.000",
+    "first": "2026-08-21T10:15:58.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "HEAVY FLOW",
+    "n": "2",
+    "last": "2026-10-20T10:18:39.000",
+    "first": "2025-10-30T15:50:18.000"
+   },
+   {
+    "complaint_type": "Water System",
+    "descriptor": "Leak (Use Comments) (WA2)",
+    "n": "2",
+    "last": "2026-01-16T07:11:00.000",
+    "first": "2026-01-08T06:53:00.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "1",
+    "last": "2025-04-29T15:50:05.000",
+    "first": "2025-04-29T15:50:05.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "1",
+    "last": "2025-03-25T23:36:48.000",
+    "first": "2025-03-25T23:36:48.000"
+   },
+   {
+    "complaint_type": "Building/Use",
+    "descriptor": "Illegal Conversion Of Residential Building/Space",
+    "n": "1",
+    "last": "2026-09-21T21:55:18.000",
+    "first": "2026-09-21T21:55:18.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR FRAME",
+    "n": "1",
+    "last": "2025-04-28T09:43:17.000",
+    "first": "2025-04-28T09:43:17.000"
+   },
+   {
+    "complaint_type": "Noise - Vehicle",
+    "descriptor": "Car/Truck Music",
+    "n": "1",
+    "last": "2025-10-07T06:05:38.000",
+    "first": "2025-10-07T06:05:38.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR",
+    "n": "1",
+    "last": "2025-03-05T13:30:23.000",
+    "first": "2025-03-05T13:30:23.000"
+   },
+   {
+    "complaint_type": "Damaged Tree",
+    "descriptor": "Tree Leaning/Uprooted",
+    "n": "1",
+    "last": "2026-03-25T06:47:27.000",
+    "first": "2026-03-25T06:47:27.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BASIN/SINK",
+    "n": "1",
+    "last": "2026-10-20T10:18:39.000",
+    "first": "2026-10-20T10:18:39.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BATHTUB/SHOWER",
+    "n": "1",
+    "last": "2025-04-28T09:16:04.000",
+    "first": "2025-04-28T09:16:04.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "TOILET",
+    "n": "1",
+    "last": "2026-06-19T18:15:39.000",
+    "first": "2026-06-19T18:15:39.000"
+   },
+   {
+    "complaint_type": "Sidewalk Condition",
+    "descriptor": "Broken Sidewalk",
+    "n": "1",
+    "last": "2025-05-07T08:13:31.000",
+    "first": "2025-05-07T08:13:31.000"
+   },
+   {
+    "complaint_type": "Smoking or Vaping",
+    "descriptor": "Allowed in Smoke Free Area",
+    "n": "1",
+    "last": "2025-04-23T13:00:30.000",
+    "first": "2025-04-23T13:00:30.000"
+   },
+   {
+    "complaint_type": "Water Quality",
+    "descriptor": "Clear With Particles",
+    "n": "1",
+    "last": "2026-07-13T17:19:59.000",
+    "first": "2026-07-13T17:19:59.000"
+   },
+   {
+    "complaint_type": "Damaged Tree",
+    "descriptor": "Branch Cracked and Will Fall",
+    "n": "1",
+    "last": "2026-09-28T02:28:32.000",
+    "first": "2026-09-28T02:28:32.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "VENTILATION SYSTEM",
+    "n": "1",
+    "last": "2026-06-19T18:15:39.000",
+    "first": "2026-06-19T18:15:39.000"
+   },
+   {
+    "complaint_type": "Food Poisoning",
+    "descriptor": "1 or 2",
+    "n": "1",
+    "last": "2026-06-23T13:29:52.000",
+    "first": "2026-06-23T13:29:52.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Crosswalk",
+    "n": "1",
+    "last": "2025-03-17T21:54:52.000",
+    "first": "2025-03-17T21:54:52.000"
+   },
+   {
+    "complaint_type": "Boilers",
+    "descriptor": "Boiler - Defective/Inoperative/No Permit",
+    "n": "1",
+    "last": "2025-02-03T10:04:32.000",
+    "first": "2025-02-03T10:04:32.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "WINDOW PANE",
+    "n": "1",
+    "last": "2026-10-20T10:18:39.000",
+    "first": "2026-10-20T10:18:39.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise, Barking Dog (NR5)",
+    "n": "1",
+    "last": "2025-02-03T09:20:00.000",
+    "first": "2025-02-03T09:20:00.000"
+   },
+   {
+    "complaint_type": "Unsanitary Pigeon Condition",
+    "descriptor": "Pigeon Waste",
+    "n": "1",
+    "last": "2026-09-20T07:09:12.000",
+    "first": "2026-09-20T07:09:12.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "19",
+    "last": "2026-10-30T00:00:00.000",
+    "open_n": "6"
+   },
+   {
+    "class": "B",
+    "n": "66",
+    "last": "2026-10-30T00:00:00.000",
+    "open_n": "12"
+   },
+   {
+    "class": "C",
+    "n": "43",
+    "last": "2026-10-30T00:00:00.000",
+    "open_n": "9"
+   },
+   {
+    "class": "I",
+    "n": "1",
+    "last": "2025-01-31T00:00:00.000",
+    "open_n": "1"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2026-05-30T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 2H, 2nd STORY, 2nd APARTMENT FROM SOUTH AT WEST , SECTION ''NORTH''",
+    "violationstatus": "Open",
+    "apartment": "2H"
+   },
+   {
+    "inspectiondate": "2025-08-18T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... AT WEST WALL IN THE BATHROOM LOCATED AT APT 3L, 3rd STORY, 2nd APARTMENT FROM NORTH AT EAST",
+    "violationstatus": "Close",
+    "apartment": "3L"
+   },
+   {
+    "inspectiondate": "2025-08-18T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... AT WEST WALL IN THE BATHROOM LOCATED AT APT 3L, 3rd STORY, 2nd APARTMENT FROM NORTH AT EAST ORIGINAL VIOLATION 18173456 ISSUED 18-AUG-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE 27-2017.3a(3)(a) or (b).",
+    "violationstatus": "Close",
+    "apartment": "3L"
+   },
+   {
+    "inspectiondate": "2025-05-09T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2005 ADM CODE PROPERLY REPAIR WITH SIMILAR MATERIAL THE BROKEN OR DEFECTIVE WOOD BASE MOLDING AT WEST WALL IN THE PRIVATE HALLWAY LOCATED AT APT 1H, 1st STORY, 2nd APARTMENT FROM SOUTH AT WEST , SECTION AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "1H"
+   },
+   {
+    "inspectiondate": "2025-04-16T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ.FT AT CEILING IN THE 1st ROOM FROM NORTH AT EAST LOCATED AT APT 2H, 2nd STORY, 2nd APARTMENT FROM WEST AT NORTH , SECTION ''EAST'' ORIGINAL VIOLATION 17830395 ISSUED 16-APR-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE \u00a727-2017.3a(3)(a) or (b).",
+    "violationstatus": "Open",
+    "apartment": "2H"
+   },
+   {
+    "inspectiondate": "2025-04-16T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 2H, 2nd STORY, 2nd APARTMENT FROM WEST AT NORTH , SECTION ''EAST''",
+    "violationstatus": "Close",
+    "apartment": "2H"
+   },
+   {
+    "inspectiondate": "2025-04-16T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ.FT AT CEILING IN THE 1st ROOM FROM NORTH AT EAST LOCATED AT APT 2H, 2nd STORY, 2nd APARTMENT FROM WEST AT NORTH , SECTION ''EAST''",
+    "violationstatus": "Close",
+    "apartment": "2H"
+   },
+   {
+    "inspectiondate": "2025-03-12T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT EAST WALL IN THE BATHROOM LOCATED AT APT 6B, 6th STORY, 4th APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Close",
+    "apartment": "6B"
+   },
+   {
+    "inspectiondate": "2025-01-18T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT SOUTH WALL IN THE BATHROOM LOCATED AT APT 6F, 6th STORY, 2nd APARTMENT FROM SOUTH AT WEST , SECTION ''SOUTH''",
+    "violationstatus": "Close",
+    "apartment": "6F"
+   },
+   {
+    "inspectiondate": "2025-01-18T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT NORTH WALL IN THE BATHROOM LOCATED AT APT 5B, 5th STORY, 1st APARTMENT FROM NORTH AT EAST , SECTION ''SOUTH ''",
+    "violationstatus": "Close",
+    "apartment": "5B"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%274006060029%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%274006060029%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%274006060029%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:10+00:00",
+  "addr": "3516 34th St #5E, Astoria, NY 11106, USA"
+ },
+ "4006120053": {
+  "311": [
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Talking",
+    "n": "14",
+    "last": "2026-10-21T03:44:26.000",
+    "first": "2025-05-18T10:49:39.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "PESTS",
+    "n": "12",
+    "last": "2026-08-28T09:55:26.000",
+    "first": "2025-04-01T18:08:44.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "MOLD",
+    "n": "8",
+    "last": "2026-03-24T17:48:33.000",
+    "first": "2025-03-18T07:15:17.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "WALL",
+    "n": "8",
+    "last": "2026-05-30T09:54:22.000",
+    "first": "2025-09-26T15:34:27.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "7",
+    "last": "2026-10-18T16:07:46.000",
+    "first": "2026-01-27T09:44:01.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "NO LIGHTING",
+    "n": "6",
+    "last": "2026-01-12T10:57:17.000",
+    "first": "2025-03-18T07:15:17.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "CEILING",
+    "n": "6",
+    "last": "2026-02-18T12:11:55.000",
+    "first": "2025-02-26T10:26:44.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "OUTLET/SWITCH",
+    "n": "6",
+    "last": "2026-05-30T09:54:22.000",
+    "first": "2025-12-15T12:06:50.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "WINDOW FRAME",
+    "n": "5",
+    "last": "2026-01-12T10:57:17.000",
+    "first": "2025-06-29T11:42:38.000"
+   },
+   {
+    "complaint_type": "APPLIANCE",
+    "descriptor": "REFRIGERATOR",
+    "n": "5",
+    "last": "2026-06-02T12:00:02.000",
+    "first": "2025-02-26T10:26:44.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "5",
+    "last": "2026-10-20T01:52:33.000",
+    "first": "2025-02-05T23:16:08.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "BELL/BUZZER/INTERCOM",
+    "n": "5",
+    "last": "2026-05-08T10:21:15.000",
+    "first": "2025-01-06T12:34:07.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "TOILET",
+    "n": "4",
+    "last": "2026-06-18T10:06:12.000",
+    "first": "2024-12-12T16:17:41.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "4",
+    "last": "2026-01-13T14:50:31.000",
+    "first": "2025-09-22T19:42:58.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BATHTUB/SHOWER",
+    "n": "3",
+    "last": "2026-05-04T10:50:20.000",
+    "first": "2025-12-15T14:05:29.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "RADIATOR",
+    "n": "3",
+    "last": "2026-02-18T12:11:55.000",
+    "first": "2025-12-15T14:05:29.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "POWER OUTAGE",
+    "n": "3",
+    "last": "2026-03-13T14:46:48.000",
+    "first": "2025-12-11T12:38:24.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR",
+    "n": "3",
+    "last": "2026-06-12T17:41:26.000",
+    "first": "2025-09-26T15:34:27.000"
+   },
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Single Device On Property/No Alternate Service",
+    "n": "3",
+    "last": "2025-09-01T18:35:26.000",
+    "first": "2025-06-27T15:00:29.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "3",
+    "last": "2026-03-24T17:48:33.000",
+    "first": "2025-06-29T11:42:39.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "SLOW LEAK",
+    "n": "2",
+    "last": "2025-12-15T14:05:29.000",
+    "first": "2025-02-26T10:26:44.000"
+   },
+   {
+    "complaint_type": "Asbestos",
+    "descriptor": "N/A",
+    "n": "2",
+    "last": "2026-07-19T13:33:31.000",
+    "first": "2026-07-18T11:57:59.000"
+   },
+   {
+    "complaint_type": "FLOORING/STAIRS",
+    "descriptor": "FLOOR",
+    "n": "2",
+    "last": "2025-12-11T12:38:24.000",
+    "first": "2025-05-31T13:50:41.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BASIN/SINK",
+    "n": "2",
+    "last": "2026-04-14T11:42:05.000",
+    "first": "2025-05-31T13:50:41.000"
+   },
+   {
+    "complaint_type": "Street Condition",
+    "descriptor": "Plate Condition - Noisy",
+    "n": "2",
+    "last": "2026-01-15T19:36:04.000",
+    "first": "2026-01-15T16:43:37.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Double Parked Blocking Vehicle",
+    "n": "1",
+    "last": "2026-07-19T19:30:17.000",
+    "first": "2026-07-19T19:30:17.000"
+   },
+   {
+    "complaint_type": "Noise - Street/Sidewalk",
+    "descriptor": "Loud Music/Party",
+    "n": "1",
+    "last": "2025-05-13T01:12:06.000",
+    "first": "2025-05-13T01:12:06.000"
+   },
+   {
+    "complaint_type": "Noise - Vehicle",
+    "descriptor": "Car/Truck Music",
+    "n": "1",
+    "last": "2026-05-02T09:20:16.000",
+    "first": "2026-05-02T09:20:16.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "VENTILATION SYSTEM",
+    "n": "1",
+    "last": "2026-02-18T12:11:55.000",
+    "first": "2026-02-18T12:11:55.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "CABINET",
+    "n": "1",
+    "last": "2025-06-29T11:42:39.000",
+    "first": "2025-06-29T11:42:39.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "No Access",
+    "n": "1",
+    "last": "2026-06-27T16:13:44.000",
+    "first": "2026-06-27T16:13:44.000"
+   },
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Multiple Devices On Property",
+    "n": "1",
+    "last": "2025-06-29T11:18:35.000",
+    "first": "2025-06-29T11:18:35.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "LIGHTING",
+    "n": "1",
+    "last": "2025-03-18T07:15:17.000",
+    "first": "2025-03-18T07:15:17.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "STEAM PIPE/RISER",
+    "n": "1",
+    "last": "2026-05-30T09:54:22.000",
+    "first": "2026-05-30T09:54:22.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "WINDOW PANE",
+    "n": "1",
+    "last": "2025-03-18T07:15:17.000",
+    "first": "2025-03-18T07:15:17.000"
+   },
+   {
+    "complaint_type": "SAFETY",
+    "descriptor": "FIRE ESCAPE",
+    "n": "1",
+    "last": "2026-10-17T22:51:15.000",
+    "first": "2026-10-17T22:51:15.000"
+   },
+   {
+    "complaint_type": "SAFETY",
+    "descriptor": "WINDOW GUARD BROKEN/MISSING",
+    "n": "1",
+    "last": "2026-03-24T17:48:33.000",
+    "first": "2026-03-24T17:48:33.000"
+   },
+   {
+    "complaint_type": "APPLIANCE",
+    "descriptor": "ELECTRIC/GAS RANGE",
+    "n": "1",
+    "last": "2026-01-31T11:04:26.000",
+    "first": "2026-01-31T11:04:26.000"
+   },
+   {
+    "complaint_type": "Street Condition",
+    "descriptor": "Pothole",
+    "n": "1",
+    "last": "2024-12-15T10:50:20.000",
+    "first": "2024-12-15T10:50:20.000"
+   },
+   {
+    "complaint_type": "Street Sweeping Complaint",
+    "descriptor": "Inadequate Sweeping",
+    "n": "1",
+    "last": "2026-11-02T09:17:54.000",
+    "first": "2026-11-02T09:17:54.000"
+   },
+   {
+    "complaint_type": "Consumer Complaint",
+    "descriptor": "Landlord or Real Estate Agent",
+    "n": "1",
+    "last": "2026-04-21T17:55:48.000",
+    "first": "2026-04-21T17:55:48.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Alarms (NR3)",
+    "n": "1",
+    "last": "2025-11-24T15:11:00.000",
+    "first": "2025-11-24T15:11:00.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Posted Parking Sign Violation",
+    "n": "1",
+    "last": "2026-08-31T09:26:05.000",
+    "first": "2026-08-31T09:26:05.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "5",
+    "last": "2026-05-30T00:00:00.000",
+    "open_n": "1"
+   },
+   {
+    "class": "B",
+    "n": "66",
+    "last": "2026-08-12T00:00:00.000",
+    "open_n": "10"
+   },
+   {
+    "class": "C",
+    "n": "29",
+    "last": "2026-11-09T00:00:00.000",
+    "open_n": "6"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2026-11-09T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT E8, 5th STORY, 3rd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "E8"
+   },
+   {
+    "inspectiondate": "2026-06-29T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF MICE IN THE ENTIRE APARTMENT LOCATED AT APT E1, 5th STORY, 1st APARTMENT FROM NORTH AT EAST",
+    "violationstatus": "Open",
+    "apartment": "E1"
+   },
+   {
+    "inspectiondate": "2026-05-30T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF MICE IN THE ENTIRE APARTMENT LOCATED AT APT C9, 3rd STORY, 2nd APARTMENT FROM SOUTH AT WEST , SECTION AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "C9"
+   },
+   {
+    "inspectiondate": "2026-05-30T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2005 ADM CODE PAINT METAL IN ACCORDANCE WITH DEPT. REGULATION HEAT RISER IN THE BATHROOM LOCATED AT APT C9, 3rd STORY, 2nd APARTMENT FROM SOUTH AT WEST , SECTION AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "C9"
+   },
+   {
+    "inspectiondate": "2026-03-22T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... GREATER THAN 10SQFT AT EAST WALL IN THE BATHROOM LOCATED AT APT B8, 2nd STORY, 3rd APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Open",
+    "apartment": "B8"
+   },
+   {
+    "inspectiondate": "2026-03-22T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF MICE IN THE ENTIRE APARTMENT LOCATED AT APT B8, 2nd STORY, 3rd APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Close",
+    "apartment": "B8"
+   },
+   {
+    "inspectiondate": "2026-03-22T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... GREATER THAN 10SQFT AT NORTH WALL IN THE BATHROOM LOCATED AT APT B8, 2nd STORY, 3rd APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Open",
+    "apartment": "B8"
+   },
+   {
+    "inspectiondate": "2026-03-22T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... GREATER THAN 10SQFT AT SOUTH WALL IN THE BATHROOM LOCATED AT APT B8, 2nd STORY, 3rd APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Open",
+    "apartment": "B8"
+   },
+   {
+    "inspectiondate": "2026-03-22T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... GREATER THAN 10SQFT AT WEST WALL IN THE BATHROOM LOCATED AT APT B8, 2nd STORY, 3rd APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Open",
+    "apartment": "B8"
+   },
+   {
+    "inspectiondate": "2026-03-22T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... GREATER THAN 10SQFT AT CEILING IN THE BATHROOM LOCATED AT APT B8, 2nd STORY, 3rd APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Open",
+    "apartment": "B8"
+   },
+   {
+    "inspectiondate": "2026-03-22T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT B8, 2nd STORY, 3rd APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Open",
+    "apartment": "B8"
+   },
+   {
+    "inspectiondate": "2026-02-13T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT E8, 5th STORY, 1st APARTMENT FROM WEST AT NORTH , SECTION ''EAST''",
+    "violationstatus": "Open",
+    "apartment": "E8"
+   },
+   {
+    "inspectiondate": "2026-02-05T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT E8, 5th STORY, 3rd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "E8"
+   },
+   {
+    "inspectiondate": "2025-12-11T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT E4, 5th STORY, 2nd APARTMENT FROM NORTH AT EAST , SECTION AT SOUTH",
+    "violationstatus": "Close",
+    "apartment": "E4"
+   },
+   {
+    "inspectiondate": "2025-09-26T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT B6, 2nd STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "B6"
+   },
+   {
+    "inspectiondate": "2025-09-26T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10SQ FEET AT CEILING IN THE BATHROOM LOCATED AT APT B6, 2nd STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "B6"
+   },
+   {
+    "inspectiondate": "2025-09-26T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10SQ FEET AT CEILING IN THE BATHROOM LOCATED AT APT B6, 2nd STORY, 1st APARTMENT FROM WEST AT NORTH ORIGINAL VIOLATION 18256393 ISSUED 26-SEP-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE 27-2017.3a(3)(a) or (b).",
+    "violationstatus": "Open",
+    "apartment": "B6"
+   },
+   {
+    "inspectiondate": "2025-04-09T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ.FT AT CEILING AND SOUTH WALL IN THE BATHROOM LOCATED AT APT B6, 2nd STORY, 1st APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Close",
+    "apartment": "B6"
+   },
+   {
+    "inspectiondate": "2025-04-09T00:00:00.000",
+    "class": "B",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF BEDBUGS IN THE ENTIRE APARTMENT LOCATED AT APT F3, 6th STORY, 3rd APARTMENT FROM NORTH AT EAST",
+    "violationstatus": "Close",
+    "apartment": "F3"
+   },
+   {
+    "inspectiondate": "2025-04-09T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT B6, 2nd STORY, 1st APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Close",
+    "apartment": "B6"
+   },
+   {
+    "inspectiondate": "2025-04-09T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ.FT AT CEILING AND SOUTH WALL IN THE BATHROOM LOCATED AT APT B6, 2nd STORY, 1st APARTMENT FROM SOUTH AT WEST ORIGINAL VIOLATION 17818490 ISSUED 09-APR-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE \u00a727-2017.3a(3)(a) or (b).",
+    "violationstatus": "Close",
+    "apartment": "B6"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%274006120053%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%274006120053%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%274006120053%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:11+00:00",
+  "addr": "3242 33rd St #D3, Astoria, NY 11106, USA"
+ },
+ "4011310017": {
+  "311": [
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "41",
+    "last": "2026-10-17T16:05:16.000",
+    "first": "2025-01-12T12:16:18.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "12",
+    "last": "2026-08-03T04:21:38.000",
+    "first": "2025-10-20T10:11:03.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "MOLD",
+    "n": "4",
+    "last": "2025-06-06T11:29:33.000",
+    "first": "2024-12-03T14:06:17.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "CEILING",
+    "n": "3",
+    "last": "2025-02-13T13:38:25.000",
+    "first": "2025-02-13T13:38:25.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "WALL",
+    "n": "3",
+    "last": "2026-04-09T07:23:36.000",
+    "first": "2025-06-06T11:29:33.000"
+   },
+   {
+    "complaint_type": "FLOORING/STAIRS",
+    "descriptor": "FLOOR",
+    "n": "3",
+    "last": "2026-04-09T07:23:36.000",
+    "first": "2025-10-13T13:31:31.000"
+   },
+   {
+    "complaint_type": "Abandoned Vehicle",
+    "descriptor": "With License Plate",
+    "n": "3",
+    "last": "2026-10-21T09:45:01.000",
+    "first": "2026-09-19T23:12:33.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "3",
+    "last": "2025-03-25T12:18:27.000",
+    "first": "2025-01-22T09:35:21.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Construction Equipment (NC1)",
+    "n": "2",
+    "last": "2025-04-22T09:17:00.000",
+    "first": "2025-01-31T16:11:00.000"
+   },
+   {
+    "complaint_type": "Building/Use",
+    "descriptor": "Illegal. Commercial Use In Resident Zone",
+    "n": "2",
+    "last": "2025-02-22T18:16:25.000",
+    "first": "2025-01-19T17:00:07.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "CABINET",
+    "n": "2",
+    "last": "2026-02-25T08:27:23.000",
+    "first": "2026-01-27T12:37:23.000"
+   },
+   {
+    "complaint_type": "Noise - Street/Sidewalk",
+    "descriptor": "Loud Music/Party",
+    "n": "2",
+    "last": "2025-11-01T15:37:05.000",
+    "first": "2025-09-28T14:15:13.000"
+   },
+   {
+    "complaint_type": "Obstruction",
+    "descriptor": "Cone",
+    "n": "2",
+    "last": "2026-10-25T22:23:49.000",
+    "first": "2026-10-20T16:40:14.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BASIN/SINK",
+    "n": "2",
+    "last": "2026-02-25T08:27:23.000",
+    "first": "2026-01-27T12:37:23.000"
+   },
+   {
+    "complaint_type": "Street Condition",
+    "descriptor": "Blocked - Construction",
+    "n": "2",
+    "last": "2026-10-25T22:27:33.000",
+    "first": "2026-10-21T09:21:07.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "GARBAGE/RECYCLING STORAGE",
+    "n": "2",
+    "last": "2025-03-19T21:29:20.000",
+    "first": "2025-03-19T21:22:59.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise, Barking Dog (NR5)",
+    "n": "1",
+    "last": "2025-11-04T16:50:00.000",
+    "first": "2025-11-04T16:50:00.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "VENTILATION SYSTEM",
+    "n": "1",
+    "last": "2025-03-03T17:04:25.000",
+    "first": "2025-03-03T17:04:25.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "WINDOW FRAME",
+    "n": "1",
+    "last": "2025-12-15T20:11:01.000",
+    "first": "2025-12-15T20:11:01.000"
+   },
+   {
+    "complaint_type": "Derelict Vehicles",
+    "descriptor": "Derelict Vehicles",
+    "n": "1",
+    "last": "2025-01-24T20:20:00.000",
+    "first": "2025-01-24T20:20:00.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Talking",
+    "n": "1",
+    "last": "2025-06-06T11:42:44.000",
+    "first": "2025-06-06T11:42:44.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "PESTS",
+    "n": "1",
+    "last": "2025-06-06T11:29:33.000",
+    "first": "2025-06-06T11:29:33.000"
+   },
+   {
+    "complaint_type": "Noise - Street/Sidewalk",
+    "descriptor": "Loud Talking",
+    "n": "1",
+    "last": "2026-05-25T18:28:33.000",
+    "first": "2026-05-25T18:28:33.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "SLOW LEAK",
+    "n": "1",
+    "last": "2026-06-05T11:25:15.000",
+    "first": "2026-06-05T11:25:15.000"
+   },
+   {
+    "complaint_type": "Curb Condition",
+    "descriptor": "Broken Curb",
+    "n": "1",
+    "last": "2026-11-09T17:00:08.000",
+    "first": "2026-11-09T17:00:08.000"
+   },
+   {
+    "complaint_type": "APPLIANCE",
+    "descriptor": "REFRIGERATOR",
+    "n": "1",
+    "last": "2025-06-06T11:29:33.000",
+    "first": "2025-06-06T11:29:33.000"
+   },
+   {
+    "complaint_type": "Animal-Abuse",
+    "descriptor": "Neglected",
+    "n": "1",
+    "last": "2025-03-27T20:26:40.000",
+    "first": "2025-03-27T20:26:40.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BATHTUB/SHOWER",
+    "n": "1",
+    "last": "2025-10-13T13:31:31.000",
+    "first": "2025-10-13T13:31:31.000"
+   },
+   {
+    "complaint_type": "Real Time Enforcement",
+    "descriptor": "Work Without A Permit - Occupied Multiple Dwelling",
+    "n": "1",
+    "last": "2025-09-24T08:19:16.000",
+    "first": "2025-09-24T08:19:16.000"
+   },
+   {
+    "complaint_type": "Rodent",
+    "descriptor": "Signs of Rodents",
+    "n": "1",
+    "last": "2025-03-19T21:34:56.000",
+    "first": "2025-03-19T21:34:56.000"
+   },
+   {
+    "complaint_type": "Graffiti",
+    "descriptor": "Graffiti",
+    "n": "1",
+    "last": "2026-01-15T00:00:20.000",
+    "first": "2026-01-15T00:00:20.000"
+   },
+   {
+    "complaint_type": "Homeless Person Assistance",
+    "descriptor": "Non-Chronic",
+    "n": "1",
+    "last": "2026-06-16T09:39:42.000",
+    "first": "2026-06-16T09:39:42.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Parking Permit Improper Use",
+    "n": "1",
+    "last": "2025-09-22T19:52:59.000",
+    "first": "2025-09-22T19:52:59.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Posted Parking Sign Violation",
+    "n": "1",
+    "last": "2026-05-25T16:07:15.000",
+    "first": "2026-05-25T16:07:15.000"
+   },
+   {
+    "complaint_type": "Indoor Air Quality",
+    "descriptor": "Ventilation",
+    "n": "1",
+    "last": "2026-11-07T16:17:25.000",
+    "first": "2026-11-07T16:17:25.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "5",
+    "last": "2025-06-19T00:00:00.000",
+    "open_n": "1"
+   },
+   {
+    "class": "B",
+    "n": "15",
+    "last": "2026-06-12T00:00:00.000",
+    "open_n": "6"
+   },
+   {
+    "class": "C",
+    "n": "2",
+    "last": "2025-06-19T00:00:00.000",
+    "open_n": "1"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2025-06-19T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 2E, 2nd STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "2E"
+   },
+   {
+    "inspectiondate": "2025-02-17T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... GREATER THAN 10 SQUARE FEET AT CEILING IN THE BATHROOM LOCATED AT APT 4D, 4th STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "4D"
+   },
+   {
+    "inspectiondate": "2025-02-16T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 8 SQ.FT AT CEILING IN THE BATHROOM LOCATED AT APT 4D, 4th STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "4D"
+   },
+   {
+    "inspectiondate": "2025-02-16T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 8 SQ.FT AT CEILING IN THE BATHROOM LOCATED AT APT 4D, 4th STORY, 1st APARTMENT FROM WEST AT NORTH ORIGINAL VIOLATION 17697325 ISSUED 16-FEB-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE \u00a727-2017.3a(3)(a) or (b).",
+    "violationstatus": "Close",
+    "apartment": "4D"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%274011310017%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%274011310017%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%274011310017%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:13+00:00",
+  "addr": "31-20 54th Street #2fl , 31-20 54th St, Flushing, NY 11377, US"
+ },
+ "4059580140": {
+  "311": [
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Hydrant",
+    "n": "19",
+    "last": "2025-11-30T22:56:06.000",
+    "first": "2025-02-17T17:42:13.000"
+   },
+   {
+    "complaint_type": "Abandoned Vehicle",
+    "descriptor": "With License Plate",
+    "n": "12",
+    "last": "2026-05-07T08:22:05.000",
+    "first": "2025-05-27T15:43:46.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Construction Before/After Hours (NM1)",
+    "n": "8",
+    "last": "2026-05-31T10:39:00.000",
+    "first": "2025-02-06T11:53:00.000"
+   },
+   {
+    "complaint_type": "General Construction/Plumbing",
+    "descriptor": "Building Shaking/Vibrating/Structural Stability",
+    "n": "3",
+    "last": "2025-08-15T13:31:11.000",
+    "first": "2025-02-07T12:14:18.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Construction Equipment (NC1)",
+    "n": "3",
+    "last": "2025-07-10T08:32:00.000",
+    "first": "2025-03-16T08:35:00.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "3",
+    "last": "2025-10-11T00:11:17.000",
+    "first": "2025-04-02T18:45:36.000"
+   },
+   {
+    "complaint_type": "Illegal Fireworks",
+    "descriptor": "N/A",
+    "n": "1",
+    "last": "2026-07-04T21:40:53.000",
+    "first": "2026-07-04T21:40:53.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Double Parked Blocking Traffic",
+    "n": "1",
+    "last": "2026-10-22T07:02:11.000",
+    "first": "2026-10-22T07:02:11.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Posted Parking Sign Violation",
+    "n": "1",
+    "last": "2025-07-08T16:43:58.000",
+    "first": "2025-07-08T16:43:58.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Alarm",
+    "n": "1",
+    "last": "2026-09-18T21:49:56.000",
+    "first": "2026-09-18T21:49:56.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "1",
+    "last": "2024-12-07T19:27:25.000",
+    "first": "2024-12-07T19:27:25.000"
+   },
+   {
+    "complaint_type": "Sanitation Worker or Vehicle Complaint",
+    "descriptor": "Idling or Blocking Traffic",
+    "n": "1",
+    "last": "2025-12-16T07:34:40.000",
+    "first": "2025-12-16T07:34:40.000"
+   },
+   {
+    "complaint_type": "School Maintenance",
+    "descriptor": "Snow/Ice",
+    "n": "1",
+    "last": "2025-02-10T10:00:59.000",
+    "first": "2025-02-10T10:00:59.000"
+   },
+   {
+    "complaint_type": "Sewer",
+    "descriptor": "Sewer Odor (SA2)",
+    "n": "1",
+    "last": "2025-07-04T13:23:00.000",
+    "first": "2025-07-04T13:23:00.000"
+   },
+   {
+    "complaint_type": "Street Condition",
+    "descriptor": "Blocked - Construction",
+    "n": "1",
+    "last": "2025-02-28T12:07:27.000",
+    "first": "2025-02-28T12:07:27.000"
+   },
+   {
+    "complaint_type": "Street Condition",
+    "descriptor": "Defective Hardware",
+    "n": "1",
+    "last": "2025-01-12T15:50:01.000",
+    "first": "2025-01-12T15:50:01.000"
+   },
+   {
+    "complaint_type": "Traffic",
+    "descriptor": "Chronic Stoplight Violation",
+    "n": "1",
+    "last": "2025-07-04T07:57:20.000",
+    "first": "2025-07-04T07:57:20.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "No Access",
+    "n": "1",
+    "last": "2026-11-04T09:02:25.000",
+    "first": "2026-11-04T09:02:25.000"
+   },
+   {
+    "complaint_type": "Derelict Vehicles",
+    "descriptor": "Derelict Vehicles",
+    "n": "1",
+    "last": "2025-10-28T10:12:00.000",
+    "first": "2025-10-28T10:12:00.000"
+   },
+   {
+    "complaint_type": "Dirty Condition",
+    "descriptor": "Trash",
+    "n": "1",
+    "last": "2026-03-17T13:59:43.000",
+    "first": "2026-03-17T13:59:43.000"
+   },
+   {
+    "complaint_type": "Emergency Response Team (ERT)",
+    "descriptor": "After Hours Work - Illegal",
+    "n": "1",
+    "last": "2025-02-08T07:28:36.000",
+    "first": "2025-02-08T07:28:36.000"
+   },
+   {
+    "complaint_type": "Food Establishment",
+    "descriptor": "Bare Hands in Contact w/ Food",
+    "n": "1",
+    "last": "2025-05-18T20:56:28.000",
+    "first": "2025-05-18T20:56:28.000"
+   }
+  ],
+  "hpd": [],
+  "hpd_detail": [],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%274059580140%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%274059580140%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%274059580140%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:14+00:00",
+  "addr": "23-50 Waters Edge Dr"
+ },
+ "4058650112": {
+  "311": [
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "41",
+    "last": "2026-10-18T10:30:49.000",
+    "first": "2024-12-22T21:31:48.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Television",
+    "n": "7",
+    "last": "2025-09-20T00:36:56.000",
+    "first": "2025-09-13T00:43:18.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "5",
+    "last": "2025-12-12T17:32:32.000",
+    "first": "2025-01-13T14:19:34.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "5",
+    "last": "2026-09-03T15:21:52.000",
+    "first": "2025-09-18T08:52:41.000"
+   },
+   {
+    "complaint_type": "Unsanitary Pigeon Condition",
+    "descriptor": "Pigeon Waste",
+    "n": "4",
+    "last": "2026-07-20T16:31:14.000",
+    "first": "2026-05-25T14:09:00.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "3",
+    "last": "2025-06-05T13:59:08.000",
+    "first": "2024-12-30T06:41:20.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Posted Parking Sign Violation",
+    "n": "2",
+    "last": "2025-05-23T15:40:42.000",
+    "first": "2024-12-30T15:16:15.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "NO LIGHTING",
+    "n": "2",
+    "last": "2026-04-17T13:57:44.000",
+    "first": "2026-04-16T10:18:39.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "VENTILATION SYSTEM",
+    "n": "2",
+    "last": "2025-07-07T21:15:53.000",
+    "first": "2025-02-04T12:46:21.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "WALL",
+    "n": "2",
+    "last": "2025-01-24T14:21:09.000",
+    "first": "2025-01-10T12:50:13.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "HEAVY FLOW",
+    "n": "2",
+    "last": "2026-09-27T03:39:48.000",
+    "first": "2026-07-05T11:22:24.000"
+   },
+   {
+    "complaint_type": "Snow or Ice",
+    "descriptor": "Sidewalk",
+    "n": "1",
+    "last": "2025-12-28T19:01:02.000",
+    "first": "2025-12-28T19:01:02.000"
+   },
+   {
+    "complaint_type": "Unsanitary Animal Pvt Property",
+    "descriptor": "Other Animal",
+    "n": "1",
+    "last": "2026-05-30T08:17:01.000",
+    "first": "2026-05-30T08:17:01.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "SLOW LEAK",
+    "n": "1",
+    "last": "2026-09-27T19:40:31.000",
+    "first": "2026-09-27T19:40:31.000"
+   },
+   {
+    "complaint_type": "Animal-Abuse",
+    "descriptor": "Neglected",
+    "n": "1",
+    "last": "2026-10-29T18:39:33.000",
+    "first": "2026-10-29T18:39:33.000"
+   },
+   {
+    "complaint_type": "Water System",
+    "descriptor": "Dirty Water (WE)",
+    "n": "1",
+    "last": "2025-01-13T14:23:00.000",
+    "first": "2025-01-13T14:23:00.000"
+   },
+   {
+    "complaint_type": "Curb Condition",
+    "descriptor": "Curb Defect-Metal Protruding",
+    "n": "1",
+    "last": "2026-04-09T19:36:58.000",
+    "first": "2026-04-09T19:36:58.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR",
+    "n": "1",
+    "last": "2025-01-24T14:36:25.000",
+    "first": "2025-01-24T14:36:25.000"
+   },
+   {
+    "complaint_type": "Illegal Dumping",
+    "descriptor": "Removal Request",
+    "n": "1",
+    "last": "2026-02-23T14:13:08.000",
+    "first": "2026-02-23T14:13:08.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Unauthorized Bus Layover",
+    "n": "1",
+    "last": "2024-11-17T19:51:52.000",
+    "first": "2024-11-17T19:51:52.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Alarm",
+    "n": "1",
+    "last": "2026-09-18T22:10:51.000",
+    "first": "2026-09-18T22:10:51.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise, Barking Dog (NR5)",
+    "n": "1",
+    "last": "2025-03-10T10:59:00.000",
+    "first": "2025-03-10T10:59:00.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "CEILING",
+    "n": "1",
+    "last": "2025-01-02T14:57:04.000",
+    "first": "2025-01-02T14:57:04.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BATHTUB/SHOWER",
+    "n": "1",
+    "last": "2026-07-05T11:50:53.000",
+    "first": "2026-07-05T11:50:53.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "TOILET",
+    "n": "1",
+    "last": "2026-07-05T11:50:53.000",
+    "first": "2026-07-05T11:50:53.000"
+   },
+   {
+    "complaint_type": "Residential Disposal Complaint",
+    "descriptor": "Waste Not Separated",
+    "n": "1",
+    "last": "2026-05-26T10:17:10.000",
+    "first": "2026-05-26T10:17:10.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "7",
+    "last": "2026-07-26T00:00:00.000",
+    "open_n": "0"
+   },
+   {
+    "class": "B",
+    "n": "7",
+    "last": "2025-11-09T00:00:00.000",
+    "open_n": "0"
+   },
+   {
+    "class": "C",
+    "n": "10",
+    "last": "2025-11-09T00:00:00.000",
+    "open_n": "0"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2025-08-19T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES AT COMPACTOR CLOSET, 2nd STORY",
+    "violationstatus": "Close"
+   },
+   {
+    "inspectiondate": "2025-01-15T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 216, 2nd STORY, 4th APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Close",
+    "apartment": "216"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%274058650112%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%274058650112%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%274058650112%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:17+00:00",
+  "addr": "16-70 Bell Boulevard #317, 16-70 Bell Blvd, Bayside, NY 11360, US"
+ },
+ "3017770058": {
+  "311": [
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "CEILING",
+    "n": "4",
+    "last": "2026-08-05T03:37:45.000",
+    "first": "2024-11-24T19:53:32.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "4",
+    "last": "2026-05-03T16:58:34.000",
+    "first": "2026-04-09T20:58:10.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "4",
+    "last": "2026-02-14T03:11:58.000",
+    "first": "2025-09-10T21:30:44.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "HEAVY FLOW",
+    "n": "4",
+    "last": "2025-09-02T10:20:58.000",
+    "first": "2024-11-24T19:47:00.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "3",
+    "last": "2026-05-04T20:12:45.000",
+    "first": "2026-01-16T13:50:47.000"
+   },
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Single Device On Property/No Alternate Service",
+    "n": "3",
+    "last": "2026-02-09T20:19:33.000",
+    "first": "2024-12-28T21:22:52.000"
+   },
+   {
+    "complaint_type": "SAFETY",
+    "descriptor": "SMOKE DETECTOR",
+    "n": "3",
+    "last": "2026-08-05T03:37:45.000",
+    "first": "2025-09-02T10:20:58.000"
+   },
+   {
+    "complaint_type": "Noise - Vehicle",
+    "descriptor": "Car/Truck Music",
+    "n": "2",
+    "last": "2025-02-07T13:00:23.000",
+    "first": "2025-01-30T12:20:13.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BASIN/SINK",
+    "n": "2",
+    "last": "2025-09-02T10:20:58.000",
+    "first": "2024-12-17T16:25:01.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "WATER SUPPLY",
+    "n": "2",
+    "last": "2026-04-17T11:16:30.000",
+    "first": "2024-12-24T08:57:13.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "CABINET",
+    "n": "2",
+    "last": "2026-08-05T03:37:45.000",
+    "first": "2026-07-23T01:59:53.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "SLOW LEAK",
+    "n": "2",
+    "last": "2026-08-05T03:37:45.000",
+    "first": "2026-07-13T15:43:10.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Talking",
+    "n": "2",
+    "last": "2025-08-17T00:52:48.000",
+    "first": "2025-07-26T06:36:13.000"
+   },
+   {
+    "complaint_type": "Smoking or Vaping",
+    "descriptor": "Allowed in Smoke Free Area",
+    "n": "1",
+    "last": "2024-12-06T17:59:12.000",
+    "first": "2024-12-06T17:59:12.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "MOLD",
+    "n": "1",
+    "last": "2026-08-31T09:35:17.000",
+    "first": "2026-08-31T09:35:17.000"
+   },
+   {
+    "complaint_type": "APPLIANCE",
+    "descriptor": "REFRIGERATOR",
+    "n": "1",
+    "last": "2024-12-17T16:25:00.000",
+    "first": "2024-12-17T16:25:00.000"
+   },
+   {
+    "complaint_type": "Water System",
+    "descriptor": "Dirty Water (WE)",
+    "n": "1",
+    "last": "2026-04-17T11:16:00.000",
+    "first": "2026-04-17T11:16:00.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "No Access",
+    "n": "1",
+    "last": "2025-02-15T09:46:28.000",
+    "first": "2025-02-15T09:46:28.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR",
+    "n": "1",
+    "last": "2026-08-31T09:35:17.000",
+    "first": "2026-08-31T09:35:17.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "POWER OUTAGE",
+    "n": "1",
+    "last": "2025-08-20T10:54:51.000",
+    "first": "2025-08-20T10:54:51.000"
+   },
+   {
+    "complaint_type": "FLOORING/STAIRS",
+    "descriptor": "FLOOR",
+    "n": "1",
+    "last": "2026-08-31T09:35:17.000",
+    "first": "2026-08-31T09:35:17.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "VENTILATION SYSTEM",
+    "n": "1",
+    "last": "2026-05-18T14:19:59.000",
+    "first": "2026-05-18T14:19:59.000"
+   },
+   {
+    "complaint_type": "Illegal Dumping",
+    "descriptor": "Removal Request",
+    "n": "1",
+    "last": "2025-04-20T22:03:41.000",
+    "first": "2025-04-20T22:03:41.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Bike Lane",
+    "n": "1",
+    "last": "2026-08-19T19:44:50.000",
+    "first": "2026-08-19T19:44:50.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BATHTUB/SHOWER",
+    "n": "1",
+    "last": "2025-09-02T10:20:58.000",
+    "first": "2025-09-02T10:20:58.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "STEAM PIPE/RISER",
+    "n": "1",
+    "last": "2024-12-17T16:25:00.000",
+    "first": "2024-12-17T16:25:00.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "TOILET",
+    "n": "1",
+    "last": "2024-12-17T16:25:00.000",
+    "first": "2024-12-17T16:25:00.000"
+   },
+   {
+    "complaint_type": "Rodent",
+    "descriptor": "Rat Sighting",
+    "n": "1",
+    "last": "2026-04-20T12:23:59.000",
+    "first": "2026-04-20T12:23:59.000"
+   },
+   {
+    "complaint_type": "SAFETY",
+    "descriptor": "CARBON MONOXIDE DETECTOR",
+    "n": "1",
+    "last": "2024-12-17T16:25:00.000",
+    "first": "2024-12-17T16:25:00.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "5",
+    "last": "2026-09-14T00:00:00.000",
+    "open_n": "2"
+   },
+   {
+    "class": "B",
+    "n": "16",
+    "last": "2026-09-14T00:00:00.000",
+    "open_n": "11"
+   },
+   {
+    "class": "C",
+    "n": "2",
+    "last": "2024-11-25T00:00:00.000",
+    "open_n": "0"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2026-09-14T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ.FT OBSERVED AT NORTH WALL IN THE BATHROOM LOCATED AT APT 2C, 2nd STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "2C"
+   },
+   {
+    "inspectiondate": "2026-09-04T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQUARE FEET OBSERVED AT NORTH AND EAST WALLS IN THE BATHROOM LOCATED AT APT 2C, 2nd STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "2C"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273017770058%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273017770058%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273017770058%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:18+00:00",
+  "addr": "867 Dekalb Ave"
+ },
+ "3017140030": {
+  "311": [
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "10",
+    "last": "2026-06-24T00:24:28.000",
+    "first": "2025-09-21T01:39:38.000"
+   },
+   {
+    "complaint_type": "Encampment",
+    "descriptor": "N/A",
+    "n": "1",
+    "last": "2025-06-21T10:34:59.000",
+    "first": "2025-06-21T10:34:59.000"
+   },
+   {
+    "complaint_type": "Illegal Dumping",
+    "descriptor": "Removal Request",
+    "n": "1",
+    "last": "2026-09-28T10:50:27.000",
+    "first": "2026-09-28T10:50:27.000"
+   },
+   {
+    "complaint_type": "Derelict Vehicles",
+    "descriptor": "Derelict Vehicles",
+    "n": "1",
+    "last": "2026-02-02T09:28:00.000",
+    "first": "2026-02-02T09:28:00.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Talking",
+    "n": "1",
+    "last": "2026-03-08T01:00:12.000",
+    "first": "2026-03-08T01:00:12.000"
+   },
+   {
+    "complaint_type": "Snow or Ice",
+    "descriptor": "Sidewalk",
+    "n": "1",
+    "last": "2025-12-15T15:28:31.000",
+    "first": "2025-12-15T15:28:31.000"
+   },
+   {
+    "complaint_type": "Street Condition",
+    "descriptor": "Plate Condition - Noisy",
+    "n": "1",
+    "last": "2025-04-24T12:55:33.000",
+    "first": "2025-04-24T12:55:33.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "1",
+    "last": "2025-06-16T00:00:00.000",
+    "open_n": "0"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2025-06-16T00:00:00.000",
+    "class": "A",
+    "novdescription": "(A) \u00a7 HMC:FILE ANNUAL BEDBUG REPORT IN ACCORDANCE WITH HPD RULE AS DESCRIBED ON THE BACK OF THIS NOTICE OF VIOLATION OR AS DESCRIBED ON HPD\u001aS WEBSITE, WWW.NYC.GOV\\HPD, SEARCH BED BUGS.",
+    "violationstatus": "Close"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273017140030%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273017140030%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273017140030%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:19+00:00",
+  "addr": "1875 Atlantic Ave"
+ },
+ "3017710016": {
+  "311": [
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "14",
+    "last": "2026-10-17T09:46:59.000",
+    "first": "2024-12-13T22:06:06.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "6",
+    "last": "2026-02-08T14:27:19.000",
+    "first": "2025-02-08T07:46:20.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "PESTS",
+    "n": "3",
+    "last": "2026-01-12T12:36:42.000",
+    "first": "2025-12-04T09:35:07.000"
+   },
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Single Device On Property/No Alternate Service",
+    "n": "3",
+    "last": "2026-09-02T16:21:46.000",
+    "first": "2025-12-20T13:34:57.000"
+   },
+   {
+    "complaint_type": "Rodent",
+    "descriptor": "Rat Sighting",
+    "n": "1",
+    "last": "2026-06-12T09:30:49.000",
+    "first": "2026-06-12T09:30:49.000"
+   },
+   {
+    "complaint_type": "Rodent",
+    "descriptor": "Signs of Rodents",
+    "n": "1",
+    "last": "2026-06-11T16:20:20.000",
+    "first": "2026-06-11T16:20:20.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "SLOW LEAK",
+    "n": "1",
+    "last": "2026-10-11T22:42:28.000",
+    "first": "2026-10-11T22:42:28.000"
+   },
+   {
+    "complaint_type": "Water System",
+    "descriptor": "Hydrant Leaking (WC1)",
+    "n": "1",
+    "last": "2025-08-17T17:34:00.000",
+    "first": "2025-08-17T17:34:00.000"
+   },
+   {
+    "complaint_type": "Lead",
+    "descriptor": "Lead Kit Request (Residential) (L10)",
+    "n": "1",
+    "last": "2026-05-07T13:52:00.000",
+    "first": "2026-05-07T13:52:00.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Television",
+    "n": "1",
+    "last": "2026-01-01T02:06:35.000",
+    "first": "2026-01-01T02:06:35.000"
+   },
+   {
+    "complaint_type": "Noise - Street/Sidewalk",
+    "descriptor": "Loud Music/Party",
+    "n": "1",
+    "last": "2026-10-24T02:36:09.000",
+    "first": "2026-10-24T02:36:09.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "1",
+    "last": "2025-12-11T00:00:00.000",
+    "open_n": "0"
+   },
+   {
+    "class": "B",
+    "n": "1",
+    "last": "2025-12-11T00:00:00.000",
+    "open_n": "0"
+   },
+   {
+    "class": "C",
+    "n": "7",
+    "last": "2025-12-31T00:00:00.000",
+    "open_n": "3"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2025-12-31T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2031 ADM CODE PROVIDE HOT WATER AT ALL HOT WATER FIXTURES IN THE ENTIRE APARTMENT LOCATED AT APT 1D, 1st STORY, 1st APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Close",
+    "apartment": "1D"
+   },
+   {
+    "inspectiondate": "2025-12-11T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2029 ADM CODE PROVIDE AN ADEQUATE SUPPLY OF HEAT FOR THE APARTMENT IN THE ENTIRE APARTMENT LOCATED AT APT 5B, 5th STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "5B"
+   },
+   {
+    "inspectiondate": "2025-12-11T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2031 ADM CODE PROVIDE HOT WATER AT ALL HOT WATER FIXTURES IN THE ENTIRE APARTMENT LOCATED AT APT 1D, 1st STORY, 2nd APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Open",
+    "apartment": "1D"
+   },
+   {
+    "inspectiondate": "2025-12-11T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQUARE FEET AT WINDOW STOOL IN THE KITCHEN LOCATED AT APT 5A, 5th STORY, 1st APARTMENT FROM WEST AT NORTH ORIGINAL VIOLATION 18497822 ISSUED 11-DEC-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE 27-2017.3a(3)(a) or (b).",
+    "violationstatus": "Close",
+    "apartment": "5A"
+   },
+   {
+    "inspectiondate": "2025-12-11T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2029 ADM CODE PROVIDE AN ADEQUATE SUPPLY OF HEAT FOR THE APARTMENT IN THE ENTIRE APARTMENT LOCATED AT APT 5A, 5th STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "5A"
+   },
+   {
+    "inspectiondate": "2025-12-11T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 5B, 5th STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "5B"
+   },
+   {
+    "inspectiondate": "2025-12-11T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2033 ADM CODE PROVIDE READY ACCESS TO BUILDINGS HEATING SYSTEM DOOR LOCKED AT CELLER AT BOILER ROOM",
+    "violationstatus": "Close"
+   },
+   {
+    "inspectiondate": "2025-12-11T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQUARE FEET AT WINDOW STOOL IN THE KITCHEN LOCATED AT APT 5A, 5th STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "5A"
+   },
+   {
+    "inspectiondate": "2025-12-08T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 5B, 5th STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "5B"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273017710016%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273017710016%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273017710016%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:28+00:00",
+  "addr": "96 Hart St"
+ },
+ "3088120137": {
+  "311": [
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Posted Parking Sign Violation",
+    "n": "21",
+    "last": "2025-08-14T12:11:52.000",
+    "first": "2025-07-14T06:56:14.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Hydrant",
+    "n": "4",
+    "last": "2025-07-26T21:54:42.000",
+    "first": "2025-07-16T23:46:12.000"
+   },
+   {
+    "complaint_type": "Encampment",
+    "descriptor": "N/A",
+    "n": "4",
+    "last": "2025-10-28T15:36:38.000",
+    "first": "2025-07-15T14:51:19.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Commercial Overnight Parking",
+    "n": "3",
+    "last": "2025-07-17T15:30:43.000",
+    "first": "2025-07-02T00:16:40.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "WATER SUPPLY",
+    "n": "2",
+    "last": "2026-02-22T13:40:11.000",
+    "first": "2026-02-22T13:30:11.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "2",
+    "last": "2026-02-17T22:59:35.000",
+    "first": "2026-02-17T22:53:34.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Crosswalk",
+    "n": "2",
+    "last": "2025-07-23T06:20:26.000",
+    "first": "2025-07-19T07:41:57.000"
+   },
+   {
+    "complaint_type": "Illegal Dumping",
+    "descriptor": "Removal Request",
+    "n": "1",
+    "last": "2026-10-06T12:44:18.000",
+    "first": "2026-10-06T12:44:18.000"
+   },
+   {
+    "complaint_type": "Illegal Dumping",
+    "descriptor": "Chronic Dumping",
+    "n": "1",
+    "last": "2026-10-01T16:11:04.000",
+    "first": "2026-10-01T16:11:04.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "License Plate Obscured",
+    "n": "1",
+    "last": "2025-07-12T07:31:15.000",
+    "first": "2025-07-12T07:31:15.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "1",
+    "last": "2026-03-30T05:59:56.000",
+    "first": "2026-03-30T05:59:56.000"
+   },
+   {
+    "complaint_type": "Maintenance or Facility",
+    "descriptor": "Garbage or Litter",
+    "n": "1",
+    "last": "2026-10-06T14:48:16.000",
+    "first": "2026-10-06T14:48:16.000"
+   },
+   {
+    "complaint_type": "Noise - Vehicle",
+    "descriptor": "Car/Truck Horn",
+    "n": "1",
+    "last": "2025-11-23T02:51:45.000",
+    "first": "2025-11-23T02:51:45.000"
+   },
+   {
+    "complaint_type": "Dirty Condition",
+    "descriptor": "Trash",
+    "n": "1",
+    "last": "2025-01-17T09:59:37.000",
+    "first": "2025-01-17T09:59:37.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "I",
+    "n": "1",
+    "last": "2025-11-20T00:00:00.000",
+    "open_n": "0"
+   }
+  ],
+  "hpd_detail": [],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273088120137%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273088120137%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273088120137%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:37+00:00",
+  "addr": "3440 Guider Ave"
+ },
+ "3086630260": {
+  "311": [
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "No Access",
+    "n": "4",
+    "last": "2026-07-08T10:19:05.000",
+    "first": "2025-05-29T15:23:46.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "Partial Access",
+    "n": "1",
+    "last": "2026-05-22T16:20:32.000",
+    "first": "2026-05-22T16:20:32.000"
+   },
+   {
+    "complaint_type": "Construction Safety Enforcement",
+    "descriptor": "CSC - Monitoring Tracking",
+    "n": "1",
+    "last": "2025-10-31T08:23:44.000",
+    "first": "2025-10-31T08:23:44.000"
+   },
+   {
+    "complaint_type": "Dirty Condition",
+    "descriptor": "Trash",
+    "n": "1",
+    "last": "2025-04-02T17:30:47.000",
+    "first": "2025-04-02T17:30:47.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Construction Before/After Hours (NM1)",
+    "n": "1",
+    "last": "2025-07-19T10:05:00.000",
+    "first": "2025-07-19T10:05:00.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "WATER SUPPLY",
+    "n": "1",
+    "last": "2026-10-30T17:18:15.000",
+    "first": "2026-10-30T17:18:15.000"
+   },
+   {
+    "complaint_type": "Street Condition",
+    "descriptor": "Rough, Pitted or Cracked Roads",
+    "n": "1",
+    "last": "2025-04-02T17:43:19.000",
+    "first": "2025-04-02T17:43:19.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "9",
+    "last": "2026-11-02T00:00:00.000",
+    "open_n": "7"
+   },
+   {
+    "class": "B",
+    "n": "3",
+    "last": "2026-11-02T00:00:00.000",
+    "open_n": "3"
+   },
+   {
+    "class": "C",
+    "n": "1",
+    "last": "2026-11-02T00:00:00.000",
+    "open_n": "1"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2026-11-02T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2033 ADM CODE POST NOTICE, IN FORM APPROVED BY THE DEPARTMENT, STATING THE NAME AND LOCATION OF THE PERSON DESIGNATED BY THE OWNER TO HAVE KEY TO BUILDINGS HEATING SYSTEM MISSING INFORMATION AT PUBLIC HALL, 1st STORY",
+    "violationstatus": "Open"
+   },
+   {
+    "inspectiondate": "2026-05-08T00:00:00.000",
+    "class": "A",
+    "novdescription": "(A) \u00a7 HMC:FILE ANNUAL BEDBUG REPORT IN ACCORDANCE WITH HPD RULE AS DESCRIBED ON THE BACK OF THIS NOTICE OF VIOLATION OR AS DESCRIBED ON HPD\u001aS WEBSITE, WWW.NYC.GOV\\HPD, SEARCH BED BUGS.",
+    "violationstatus": "Close"
+   },
+   {
+    "inspectiondate": "2025-06-16T00:00:00.000",
+    "class": "A",
+    "novdescription": "(A) \u00a7 HMC:FILE ANNUAL BEDBUG REPORT IN ACCORDANCE WITH HPD RULE AS DESCRIBED ON THE BACK OF THIS NOTICE OF VIOLATION OR AS DESCRIBED ON HPD\u001aS WEBSITE, WWW.NYC.GOV\\HPD, SEARCH BED BUGS.",
+    "violationstatus": "Close"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273086630260%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273086630260%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273086630260%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:44+00:00",
+  "addr": "2920 Brighton 4th St"
+ },
+ "3072740060": {
+  "311": [
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Hydrant",
+    "n": "129",
+    "last": "2026-11-09T05:32:23.000",
+    "first": "2024-11-15T12:12:31.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "22",
+    "last": "2026-11-12T14:13:57.000",
+    "first": "2024-12-16T13:33:32.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "22",
+    "last": "2026-11-01T15:34:51.000",
+    "first": "2026-01-22T18:20:34.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Posted Parking Sign Violation",
+    "n": "15",
+    "last": "2026-10-15T20:23:42.000",
+    "first": "2025-05-07T18:49:29.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "10",
+    "last": "2026-11-12T21:41:30.000",
+    "first": "2025-03-05T11:36:40.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "9",
+    "last": "2026-08-23T15:05:48.000",
+    "first": "2025-02-20T07:47:44.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "Partial Access",
+    "n": "5",
+    "last": "2025-11-20T09:41:34.000",
+    "first": "2024-12-02T12:21:01.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "MOLD",
+    "n": "3",
+    "last": "2025-10-26T14:45:56.000",
+    "first": "2025-09-15T14:00:30.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Parking Permit Improper Use",
+    "n": "3",
+    "last": "2026-01-20T03:36:15.000",
+    "first": "2026-01-11T16:03:11.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "No Access",
+    "n": "2",
+    "last": "2025-12-06T00:48:35.000",
+    "first": "2025-11-03T12:22:33.000"
+   },
+   {
+    "complaint_type": "FLOORING/STAIRS",
+    "descriptor": "FLOOR",
+    "n": "2",
+    "last": "2025-08-13T14:49:12.000",
+    "first": "2025-08-11T11:14:57.000"
+   },
+   {
+    "complaint_type": "Lead",
+    "descriptor": "Lead Kit Request (Residential) (L10)",
+    "n": "2",
+    "last": "2026-04-29T14:27:00.000",
+    "first": "2025-05-21T14:05:00.000"
+   },
+   {
+    "complaint_type": "Street Condition",
+    "descriptor": "Pothole",
+    "n": "2",
+    "last": "2026-06-09T14:11:57.000",
+    "first": "2026-06-09T14:11:20.000"
+   },
+   {
+    "complaint_type": "Derelict Vehicles",
+    "descriptor": "Derelict Vehicles",
+    "n": "2",
+    "last": "2026-06-29T10:47:00.000",
+    "first": "2025-06-09T21:06:00.000"
+   },
+   {
+    "complaint_type": "Special Projects Inspection Team (SPIT)",
+    "descriptor": "Sign/Awning/Marquee - Illegal/No Permit",
+    "n": "1",
+    "last": "2025-11-03T16:39:58.000",
+    "first": "2025-11-03T16:39:58.000"
+   },
+   {
+    "complaint_type": "Street Sweeping Complaint",
+    "descriptor": "Inadequate Sweeping",
+    "n": "1",
+    "last": "2026-05-26T12:36:27.000",
+    "first": "2026-05-26T12:36:27.000"
+   },
+   {
+    "complaint_type": "Abandoned Vehicle",
+    "descriptor": "With License Plate",
+    "n": "1",
+    "last": "2025-11-05T15:06:18.000",
+    "first": "2025-11-05T15:06:18.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "SLOW LEAK",
+    "n": "1",
+    "last": "2026-08-23T01:36:36.000",
+    "first": "2026-08-23T01:36:36.000"
+   },
+   {
+    "complaint_type": "Building/Use",
+    "descriptor": "Illegal Conversion Of Residential Building/Space",
+    "n": "1",
+    "last": "2025-09-11T09:50:32.000",
+    "first": "2025-09-11T09:50:32.000"
+   },
+   {
+    "complaint_type": "Building/Use",
+    "descriptor": "No Certificate Of Occupancy/Illegal/Contrary To CO",
+    "n": "1",
+    "last": "2025-09-11T09:47:31.000",
+    "first": "2025-09-11T09:47:31.000"
+   },
+   {
+    "complaint_type": "Consumer Complaint",
+    "descriptor": "Booting Company",
+    "n": "1",
+    "last": "2026-11-08T12:28:12.000",
+    "first": "2026-11-08T12:28:12.000"
+   },
+   {
+    "complaint_type": "Drug Activity",
+    "descriptor": "Use Outside",
+    "n": "1",
+    "last": "2025-08-22T15:17:47.000",
+    "first": "2025-08-22T15:17:47.000"
+   },
+   {
+    "complaint_type": "Hazardous Material",
+    "descriptor": "Oil Spill Large",
+    "n": "1",
+    "last": "2026-09-28T10:12:02.000",
+    "first": "2026-09-28T10:12:02.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Double Parked Blocking Traffic",
+    "n": "1",
+    "last": "2026-03-31T19:05:47.000",
+    "first": "2026-03-31T19:05:47.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise, Barking Dog (NR5)",
+    "n": "1",
+    "last": "2025-09-30T18:41:00.000",
+    "first": "2025-09-30T18:41:00.000"
+   },
+   {
+    "complaint_type": "Non-Emergency Police Matter",
+    "descriptor": "Other (complaint details)",
+    "n": "1",
+    "last": "2025-08-22T16:03:33.000",
+    "first": "2025-08-22T16:03:33.000"
+   },
+   {
+    "complaint_type": "Plumbing",
+    "descriptor": "Failure To Retain Water/Improper Drainage- (LL103/89)",
+    "n": "1",
+    "last": "2026-08-06T16:56:16.000",
+    "first": "2026-08-06T16:56:16.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "STEAM PIPE/RISER",
+    "n": "1",
+    "last": "2025-08-13T14:49:12.000",
+    "first": "2025-08-13T14:49:12.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "TOILET",
+    "n": "1",
+    "last": "2025-08-11T11:14:57.000",
+    "first": "2025-08-11T11:14:57.000"
+   },
+   {
+    "complaint_type": "Residential Disposal Complaint",
+    "descriptor": "Waste Not Separated",
+    "n": "1",
+    "last": "2025-07-07T10:16:16.000",
+    "first": "2025-07-07T10:16:16.000"
+   },
+   {
+    "complaint_type": "Smoking or Vaping",
+    "descriptor": "Allowed in Smoke Free Area",
+    "n": "1",
+    "last": "2025-10-30T14:34:10.000",
+    "first": "2025-10-30T14:34:10.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "1",
+    "last": "2025-09-19T00:00:00.000",
+    "open_n": "0"
+   },
+   {
+    "class": "B",
+    "n": "9",
+    "last": "2026-11-13T00:00:00.000",
+    "open_n": "7"
+   },
+   {
+    "class": "C",
+    "n": "2",
+    "last": "2026-10-22T00:00:00.000",
+    "open_n": "1"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2025-10-08T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 30 SQUARE FT AT NORTH WALL INSIDE BASE CABINETS IN THE KITCHEN LOCATED AT APT 7C, 7th STORY, 2nd APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Open",
+    "apartment": "7C"
+   },
+   {
+    "inspectiondate": "2025-09-19T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT UPPER CABINET AT NORTH WALL IN THE KITCHEN LOCATED AT APT 7C, 7th STORY, 2nd APARTMENT FROM EAST AT SOUTH , SECTION ''2925WEST5''",
+    "violationstatus": "Close",
+    "apartment": "7C"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273072740060%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273072740060%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273072740060%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:46+00:00",
+  "addr": "2925 West 5th Street"
+ },
+ "3050660031": {
+  "311": [
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "11",
+    "last": "2026-06-15T17:57:22.000",
+    "first": "2026-01-24T07:22:45.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Construction",
+    "n": "11",
+    "last": "2026-10-27T20:07:41.000",
+    "first": "2026-08-18T06:15:33.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "CEILING",
+    "n": "8",
+    "last": "2026-09-30T14:56:17.000",
+    "first": "2025-01-29T08:29:05.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "SLOW LEAK",
+    "n": "7",
+    "last": "2026-10-20T15:46:59.000",
+    "first": "2025-08-04T16:04:47.000"
+   },
+   {
+    "complaint_type": "FLOORING/STAIRS",
+    "descriptor": "FLOOR",
+    "n": "7",
+    "last": "2026-04-24T11:53:16.000",
+    "first": "2025-01-29T08:29:05.000"
+   },
+   {
+    "complaint_type": "Noise - Street/Sidewalk",
+    "descriptor": "Loud Music/Party",
+    "n": "6",
+    "last": "2026-09-18T23:29:33.000",
+    "first": "2025-07-21T21:56:44.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "MOLD",
+    "n": "6",
+    "last": "2026-09-30T14:56:17.000",
+    "first": "2025-08-04T16:04:47.000"
+   },
+   {
+    "complaint_type": "Abandoned Vehicle",
+    "descriptor": "With License Plate",
+    "n": "5",
+    "last": "2025-11-21T09:17:21.000",
+    "first": "2025-07-01T09:54:16.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Hydrant",
+    "n": "5",
+    "last": "2025-12-25T15:44:00.000",
+    "first": "2025-05-18T00:57:55.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "5",
+    "last": "2026-09-07T20:04:52.000",
+    "first": "2025-01-05T00:32:43.000"
+   },
+   {
+    "complaint_type": "Rodent",
+    "descriptor": "Rat Sighting",
+    "n": "4",
+    "last": "2026-01-29T17:15:08.000",
+    "first": "2025-02-26T08:29:52.000"
+   },
+   {
+    "complaint_type": "Dirty Condition",
+    "descriptor": "Trash",
+    "n": "4",
+    "last": "2026-10-01T18:45:05.000",
+    "first": "2025-01-02T21:35:56.000"
+   },
+   {
+    "complaint_type": "Noise - Street/Sidewalk",
+    "descriptor": "Loud Talking",
+    "n": "4",
+    "last": "2026-06-24T21:09:12.000",
+    "first": "2025-09-23T19:41:33.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "PESTS",
+    "n": "4",
+    "last": "2026-09-12T14:24:12.000",
+    "first": "2025-10-30T16:14:24.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "4",
+    "last": "2026-10-07T22:32:08.000",
+    "first": "2026-01-24T01:34:47.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "HEAVY FLOW",
+    "n": "4",
+    "last": "2026-07-24T12:18:15.000",
+    "first": "2025-01-29T08:29:05.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "WATER SUPPLY",
+    "n": "4",
+    "last": "2026-06-18T14:42:44.000",
+    "first": "2025-07-12T15:11:41.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "WALL",
+    "n": "4",
+    "last": "2026-07-24T12:18:15.000",
+    "first": "2025-09-16T14:43:38.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Construction Before/After Hours (NM1)",
+    "n": "3",
+    "last": "2026-05-27T07:26:00.000",
+    "first": "2026-04-22T10:08:00.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR",
+    "n": "3",
+    "last": "2026-07-07T08:15:11.000",
+    "first": "2025-01-29T17:01:19.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Construction Equipment (NC1)",
+    "n": "2",
+    "last": "2026-06-26T17:16:00.000",
+    "first": "2026-04-14T09:24:00.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "TOILET",
+    "n": "2",
+    "last": "2026-10-20T15:46:59.000",
+    "first": "2025-01-29T17:01:19.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "CABINET",
+    "n": "2",
+    "last": "2025-11-13T14:43:51.000",
+    "first": "2025-01-29T17:01:19.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "2",
+    "last": "2026-06-28T20:19:36.000",
+    "first": "2024-12-28T20:14:48.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Commercial Overnight Parking",
+    "n": "2",
+    "last": "2026-06-09T06:33:28.000",
+    "first": "2025-08-23T17:01:15.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BASIN/SINK",
+    "n": "2",
+    "last": "2026-06-18T14:42:44.000",
+    "first": "2025-01-29T17:01:19.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BATHTUB/SHOWER",
+    "n": "2",
+    "last": "2026-07-07T08:15:11.000",
+    "first": "2025-01-29T08:29:05.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "RADIATOR",
+    "n": "1",
+    "last": "2025-01-29T08:29:05.000",
+    "first": "2025-01-29T08:29:05.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "OUTLET/SWITCH",
+    "n": "1",
+    "last": "2026-08-25T15:19:06.000",
+    "first": "2026-08-25T15:19:06.000"
+   },
+   {
+    "complaint_type": "Rodent",
+    "descriptor": "Condition Attracting Rodents",
+    "n": "1",
+    "last": "2025-02-26T08:34:38.000",
+    "first": "2025-02-26T08:34:38.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "WINDOW FRAME",
+    "n": "1",
+    "last": "2026-08-25T15:19:06.000",
+    "first": "2026-08-25T15:19:06.000"
+   },
+   {
+    "complaint_type": "Sewer",
+    "descriptor": "Sewer Backup (Use Comments) (SA)",
+    "n": "1",
+    "last": "2025-10-30T16:05:00.000",
+    "first": "2025-10-30T16:05:00.000"
+   },
+   {
+    "complaint_type": "Snow or Ice",
+    "descriptor": "Sidewalk",
+    "n": "1",
+    "last": "2025-12-15T21:02:13.000",
+    "first": "2025-12-15T21:02:13.000"
+   },
+   {
+    "complaint_type": "Street Condition",
+    "descriptor": "Plate Condition - Shifted",
+    "n": "1",
+    "last": "2026-05-18T12:43:29.000",
+    "first": "2026-05-18T12:43:29.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "GARBAGE/RECYCLING STORAGE",
+    "n": "1",
+    "last": "2026-05-08T15:28:32.000",
+    "first": "2026-05-08T15:28:32.000"
+   },
+   {
+    "complaint_type": "Derelict Vehicles",
+    "descriptor": "Derelict Vehicles",
+    "n": "1",
+    "last": "2025-10-06T15:43:00.000",
+    "first": "2025-10-06T15:43:00.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "No Access",
+    "n": "1",
+    "last": "2025-12-14T06:04:48.000",
+    "first": "2025-12-14T06:04:48.000"
+   },
+   {
+    "complaint_type": "BEST/Site Safety",
+    "descriptor": "Demolition - Unsafe",
+    "n": "1",
+    "last": "2025-07-17T12:21:52.000",
+    "first": "2025-07-17T12:21:52.000"
+   },
+   {
+    "complaint_type": "APPLIANCE",
+    "descriptor": "ELECTRIC/GAS RANGE",
+    "n": "1",
+    "last": "2025-10-28T14:20:35.000",
+    "first": "2025-10-28T14:20:35.000"
+   },
+   {
+    "complaint_type": "Lead",
+    "descriptor": "Lead Kit Request (Residential) (L10)",
+    "n": "1",
+    "last": "2026-01-02T09:02:00.000",
+    "first": "2026-01-02T09:02:00.000"
+   },
+   {
+    "complaint_type": "Water System",
+    "descriptor": "Fire Hydrant Emergency (FHE)",
+    "n": "1",
+    "last": "2026-07-01T11:49:00.000",
+    "first": "2026-07-01T11:49:00.000"
+   },
+   {
+    "complaint_type": "Indoor Air Quality",
+    "descriptor": "Human Feces",
+    "n": "1",
+    "last": "2026-06-13T14:00:11.000",
+    "first": "2026-06-13T14:00:11.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise, Barking Dog (NR5)",
+    "n": "1",
+    "last": "2025-05-13T11:17:00.000",
+    "first": "2025-05-13T11:17:00.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Sidewalk",
+    "n": "1",
+    "last": "2025-12-31T19:44:05.000",
+    "first": "2025-12-31T19:44:05.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "VENTILATION SYSTEM",
+    "n": "1",
+    "last": "2026-07-07T08:15:12.000",
+    "first": "2026-07-07T08:15:12.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "BELL/BUZZER/INTERCOM",
+    "n": "1",
+    "last": "2025-01-29T17:01:19.000",
+    "first": "2025-01-29T17:01:19.000"
+   },
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Multiple Devices On Property",
+    "n": "1",
+    "last": "2025-11-08T17:35:51.000",
+    "first": "2025-11-08T17:35:51.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "23",
+    "last": "2026-08-27T00:00:00.000",
+    "open_n": "12"
+   },
+   {
+    "class": "B",
+    "n": "64",
+    "last": "2026-10-09T00:00:00.000",
+    "open_n": "28"
+   },
+   {
+    "class": "C",
+    "n": "34",
+    "last": "2026-10-09T00:00:00.000",
+    "open_n": "16"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2026-10-09T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... MORE THAN 30 SQUARE FEET OBSERVED AT CEILING AND WEST AND SOUTH AND NORTH WALLS IN THE BATHROOM LOCATED AT APT 327, 3rd STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "327"
+   },
+   {
+    "inspectiondate": "2026-10-03T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 127, 1st STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "127"
+   },
+   {
+    "inspectiondate": "2026-09-19T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 203, 2nd STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "203"
+   },
+   {
+    "inspectiondate": "2026-08-27T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQUARE FEET OBSERVED AT CEILING IN THE BATHROOM LOCATED AT APT 327, 3rd STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "327"
+   },
+   {
+    "inspectiondate": "2026-01-08T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF MICE IN THE ENTIRE APARTMENT LOCATED AT APT 127, 1st STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "127"
+   },
+   {
+    "inspectiondate": "2026-01-08T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 127, 1st STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "127"
+   },
+   {
+    "inspectiondate": "2025-11-26T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF MICE IN THE ENTIRE APARTMENT LOCATED AT APT 607, 5th STORY, 2nd APARTMENT FROM NORTH AT EAST , SECTION ''SOUTH''",
+    "violationstatus": "Open",
+    "apartment": "607"
+   },
+   {
+    "inspectiondate": "2025-11-03T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT APT125, 1st STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "APT125"
+   },
+   {
+    "inspectiondate": "2025-09-17T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ.FT. AT THE CLOSET CEILING IN THE 1st ROOM FROM NORTH AT WEST LOCATED AT APT 127, 1st STORY, 2nd APARTMENT FROM WEST AT NORTH ORIGINAL VIOLATION 18235542 ISSUED 17-SEP-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE 27-2017.3a(3)(a) or (b).",
+    "violationstatus": "Open",
+    "apartment": "127"
+   },
+   {
+    "inspectiondate": "2025-09-17T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ.FT. AT THE CLOSET CEILING IN THE 1st ROOM FROM NORTH AT WEST LOCATED AT APT 127, 1st STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "127"
+   },
+   {
+    "inspectiondate": "2025-09-17T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF MICE IN THE ENTIRE APARTMENT LOCATED AT APT 127, 1st STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "127"
+   },
+   {
+    "inspectiondate": "2025-09-17T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 127, 1st STORY, 2nd APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "127"
+   },
+   {
+    "inspectiondate": "2025-08-06T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT BSMT-APT 127, 2nd BSMT-APT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "127"
+   },
+   {
+    "inspectiondate": "2025-08-06T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF MICE IN THE ENTIRE APARTMENT LOCATED AT BSMT-APT 127, 2nd BSMT-APT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "127"
+   },
+   {
+    "inspectiondate": "2025-05-31T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 215, 2nd STORY, 2nd APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Open",
+    "apartment": "215"
+   },
+   {
+    "inspectiondate": "2025-01-30T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT WEST WINDOW FRAME WINDOW FRAME FROM SOUTH AT WEST WALL IN THE BATHROOM LOCATED AT APT 123, 1st STORY, 1st APARTMENT FROM SOUTH AT WEST ORIGINAL VIOLATION 17663080 ISSUED 30-JAN-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE \u00a727-2017.3a(3)(a) or (b).",
+    "violationstatus": "Open",
+    "apartment": "123"
+   },
+   {
+    "inspectiondate": "2025-01-30T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT NORTH WINDOW FRAME 1st WINDOW FRAME FROM WEST AT NORTH WALL IN THE 1st ROOM FROM NORTH AT EAST LOCATED AT APT 123, 1st STORY, 1st APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Close",
+    "apartment": "123"
+   },
+   {
+    "inspectiondate": "2025-01-30T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT WEST WALL WEST WALL IN THE BATHROOM LOCATED AT APT 123, 1st STORY, 1st APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Close",
+    "apartment": "123"
+   },
+   {
+    "inspectiondate": "2025-01-30T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT WEST WINDOW FRAME 1st WINDOW FRAME FROM SOUTH AT WEST WALL IN THE BATHROOM LOCATED AT APT 123, 1st STORY, 1st APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Close",
+    "apartment": "123"
+   },
+   {
+    "inspectiondate": "2025-01-30T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT WEST WALL WEST WALL IN THE BATHROOM LOCATED AT APT 123, 1st STORY, 1st APARTMENT FROM SOUTH AT WEST ORIGINAL VIOLATION 17663079 ISSUED 30-JAN-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE \u00a727-2017.3a(3)(a) or (b).",
+    "violationstatus": "Open",
+    "apartment": "123"
+   },
+   {
+    "inspectiondate": "2025-01-30T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT NORTH WINDOW FRAME WINDOW FRAME FROM WEST AT NORTH WALL IN THE 1st ROOM FROM NORTH AT EAST LOCATED AT APT 123, 1st STORY, 1st APARTMENT FROM SOUTH AT WEST ORIGINAL VIOLATION 17663077 ISSUED 30-JAN-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE \u00a727-2017.3a(3)(a) or (b).",
+    "violationstatus": "Open",
+    "apartment": "123"
+   },
+   {
+    "inspectiondate": "2025-01-30T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF MICE IN THE ENTIRE APARTMENT LOCATED AT APT 123, 1st STORY, 1st APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Close",
+    "apartment": "123"
+   },
+   {
+    "inspectiondate": "2025-01-30T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 123, 1st STORY, 1st APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Close",
+    "apartment": "123"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273050660031%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273050660031%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273050660031%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:54+00:00",
+  "addr": "250 Clarkson Ave"
+ },
+ "3050660091": {
+  "311": [
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "10",
+    "last": "2026-09-21T00:40:45.000",
+    "first": "2025-01-03T16:49:05.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Sidewalk",
+    "n": "9",
+    "last": "2026-11-07T15:38:40.000",
+    "first": "2026-03-27T11:44:00.000"
+   },
+   {
+    "complaint_type": "Unsanitary Animal Pvt Property",
+    "descriptor": "Dog",
+    "n": "5",
+    "last": "2026-08-10T11:02:28.000",
+    "first": "2025-08-22T12:34:54.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "PESTS",
+    "n": "3",
+    "last": "2026-06-04T22:57:46.000",
+    "first": "2025-07-02T19:37:53.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "3",
+    "last": "2026-09-26T00:31:43.000",
+    "first": "2024-11-25T00:26:48.000"
+   },
+   {
+    "complaint_type": "Dirty Condition",
+    "descriptor": "Trash",
+    "n": "2",
+    "last": "2026-06-29T08:30:27.000",
+    "first": "2025-06-10T10:05:50.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BATHTUB/SHOWER",
+    "n": "2",
+    "last": "2026-02-09T21:00:08.000",
+    "first": "2025-04-01T16:32:50.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "GARBAGE/RECYCLING STORAGE",
+    "n": "2",
+    "last": "2025-07-16T05:56:05.000",
+    "first": "2025-07-02T19:37:53.000"
+   },
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Single Device On Property/No Alternate Service",
+    "n": "2",
+    "last": "2026-04-03T08:00:39.000",
+    "first": "2026-03-27T11:35:16.000"
+   },
+   {
+    "complaint_type": "Non-Emergency Police Matter",
+    "descriptor": "Trespassing",
+    "n": "1",
+    "last": "2026-01-09T23:30:24.000",
+    "first": "2026-01-09T23:30:24.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "CEILING",
+    "n": "1",
+    "last": "2026-02-12T07:36:10.000",
+    "first": "2026-02-12T07:36:10.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "WATER SUPPLY",
+    "n": "1",
+    "last": "2026-02-12T07:36:10.000",
+    "first": "2026-02-12T07:36:10.000"
+   },
+   {
+    "complaint_type": "Sewer",
+    "descriptor": "Sewer Backup (Use Comments) (SA)",
+    "n": "1",
+    "last": "2025-08-24T10:28:00.000",
+    "first": "2025-08-24T10:28:00.000"
+   },
+   {
+    "complaint_type": "Animal-Abuse",
+    "descriptor": "Other (complaint details)",
+    "n": "1",
+    "last": "2025-08-20T22:03:16.000",
+    "first": "2025-08-20T22:03:16.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "HEAVY FLOW",
+    "n": "1",
+    "last": "2026-02-09T21:00:08.000",
+    "first": "2026-02-09T21:00:08.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "No Access",
+    "n": "1",
+    "last": "2026-04-28T22:01:55.000",
+    "first": "2026-04-28T22:01:55.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR",
+    "n": "1",
+    "last": "2025-04-01T16:32:50.000",
+    "first": "2025-04-01T16:32:50.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "MAILBOX",
+    "n": "1",
+    "last": "2025-04-01T16:35:35.000",
+    "first": "2025-04-01T16:35:35.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "1",
+    "last": "2025-12-28T12:58:03.000",
+    "first": "2025-12-28T12:58:03.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Posted Parking Sign Violation",
+    "n": "1",
+    "last": "2026-04-28T22:13:54.000",
+    "first": "2026-04-28T22:13:54.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Construction",
+    "n": "1",
+    "last": "2026-08-28T02:48:04.000",
+    "first": "2026-08-28T02:48:04.000"
+   },
+   {
+    "complaint_type": "Noise - Street/Sidewalk",
+    "descriptor": "Loud Music/Party",
+    "n": "1",
+    "last": "2026-01-08T22:12:45.000",
+    "first": "2026-01-08T22:12:45.000"
+   },
+   {
+    "complaint_type": "Non-Emergency Police Matter",
+    "descriptor": "Other (complaint details)",
+    "n": "1",
+    "last": "2026-04-01T22:11:27.000",
+    "first": "2026-04-01T22:11:27.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "1",
+    "last": "2026-06-11T00:00:00.000",
+    "open_n": "0"
+   },
+   {
+    "class": "B",
+    "n": "2",
+    "last": "2025-05-01T00:00:00.000",
+    "open_n": "0"
+   },
+   {
+    "class": "C",
+    "n": "2",
+    "last": "2026-06-11T00:00:00.000",
+    "open_n": "0"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2026-06-11T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 4H, 4th STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "4H"
+   },
+   {
+    "inspectiondate": "2025-05-01T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 4E, 4th STORY, 1st APARTMENT FROM EAST AT SOUTH , SECTION AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "4E"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273050660091%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273050660091%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273050660091%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:57+00:00",
+  "addr": "219 Lenox Rd #5G, Brooklyn, NY 11226, USA"
+ },
+ "3051370019": {
+  "311": [
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "GARBAGE/RECYCLING STORAGE",
+    "n": "6",
+    "last": "2025-08-10T03:41:54.000",
+    "first": "2025-03-01T12:38:44.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "PESTS",
+    "n": "5",
+    "last": "2025-12-09T22:49:48.000",
+    "first": "2024-12-19T18:46:11.000"
+   },
+   {
+    "complaint_type": "Noise - Street/Sidewalk",
+    "descriptor": "Loud Music/Party",
+    "n": "5",
+    "last": "2026-09-06T23:34:52.000",
+    "first": "2026-08-27T23:34:49.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "JANITOR/SUPER",
+    "n": "4",
+    "last": "2025-10-24T18:18:30.000",
+    "first": "2025-03-27T10:15:29.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "MOLD",
+    "n": "3",
+    "last": "2026-05-27T13:44:32.000",
+    "first": "2025-05-09T21:57:38.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "3",
+    "last": "2025-08-03T18:50:32.000",
+    "first": "2025-04-11T15:03:01.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Hydrant",
+    "n": "2",
+    "last": "2026-07-15T06:24:22.000",
+    "first": "2026-07-13T22:00:35.000"
+   },
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Single Device On Property/No Alternate Service",
+    "n": "2",
+    "last": "2026-09-18T17:45:11.000",
+    "first": "2025-12-15T16:01:43.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "WATER SUPPLY",
+    "n": "2",
+    "last": "2025-11-11T11:23:00.000",
+    "first": "2025-02-21T20:06:15.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "Partial Access",
+    "n": "2",
+    "last": "2026-07-15T18:41:35.000",
+    "first": "2026-07-15T06:21:48.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "2",
+    "last": "2025-03-05T18:46:34.000",
+    "first": "2025-02-27T20:31:18.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "HEAVY FLOW",
+    "n": "1",
+    "last": "2026-05-27T13:44:32.000",
+    "first": "2026-05-27T13:44:32.000"
+   },
+   {
+    "complaint_type": "Consumer Complaint",
+    "descriptor": "Residential Rental Agency",
+    "n": "1",
+    "last": "2026-01-12T19:45:09.000",
+    "first": "2026-01-12T19:45:09.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR FRAME",
+    "n": "1",
+    "last": "2025-12-09T22:49:48.000",
+    "first": "2025-12-09T22:49:48.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "POWER OUTAGE",
+    "n": "1",
+    "last": "2026-10-31T15:59:01.000",
+    "first": "2026-10-31T15:59:01.000"
+   },
+   {
+    "complaint_type": "Noise - Street/Sidewalk",
+    "descriptor": "Loud Talking",
+    "n": "1",
+    "last": "2026-09-19T23:51:38.000",
+    "first": "2026-09-19T23:51:38.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "WINDOW/FRAME",
+    "n": "1",
+    "last": "2026-05-27T13:44:32.000",
+    "first": "2026-05-27T13:44:32.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BASIN/SINK",
+    "n": "1",
+    "last": "2026-05-27T13:44:32.000",
+    "first": "2026-05-27T13:44:32.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "RADIATOR",
+    "n": "1",
+    "last": "2025-12-23T11:37:49.000",
+    "first": "2025-12-23T11:37:49.000"
+   },
+   {
+    "complaint_type": "SAFETY",
+    "descriptor": "SMOKE DETECTOR",
+    "n": "1",
+    "last": "2026-08-14T10:03:31.000",
+    "first": "2026-08-14T10:03:31.000"
+   },
+   {
+    "complaint_type": "APPLIANCE",
+    "descriptor": "REFRIGERATOR",
+    "n": "1",
+    "last": "2025-10-15T09:15:06.000",
+    "first": "2025-10-15T09:15:06.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "17",
+    "last": "2026-09-06T00:00:00.000",
+    "open_n": "6"
+   },
+   {
+    "class": "B",
+    "n": "2",
+    "last": "2025-10-04T00:00:00.000",
+    "open_n": "1"
+   },
+   {
+    "class": "C",
+    "n": "6",
+    "last": "2026-09-06T00:00:00.000",
+    "open_n": "2"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2026-09-06T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 2E, 2nd STORY, 1st APARTMENT FROM NORTH AT EAST",
+    "violationstatus": "Open",
+    "apartment": "2E"
+   },
+   {
+    "inspectiondate": "2025-10-22T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 2E, 2nd STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Open",
+    "apartment": "2E"
+   },
+   {
+    "inspectiondate": "2025-10-08T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2033 ADM CODE POST NOTICE, IN FORM APPROVED BY THE DEPARTMENT, STATING THE NAME AND LOCATION OF THE PERSON DESIGNATED BY THE OWNER TO HAVE KEY TO BUILDINGS HEATING SYSTEM MISSING AT PUBLIC HALL, 1st STORY",
+    "violationstatus": "Close"
+   },
+   {
+    "inspectiondate": "2025-05-17T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT NORTH WALL IN THE 2nd ROOM FROM EAST LOCATED AT APT 5A, 5th STORY, 1st APARTMENT FROM WEST AT NORTH",
+    "violationstatus": "Close",
+    "apartment": "5A"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273051370019%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273051370019%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273051370019%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:47:59+00:00",
+  "addr": "1010 Rogers Ave"
+ },
+ "3051900053": {
+  "311": [
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Double Parked Blocking Vehicle",
+    "n": "1",
+    "last": "2025-01-19T18:08:31.000",
+    "first": "2025-01-19T18:08:31.000"
+   }
+  ],
+  "hpd": [],
+  "hpd_detail": [],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273051900053%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273051900053%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273051900053%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:48:01+00:00",
+  "addr": "2561 Bedford Ave"
+ },
+ "3048860018": {
+  "311": [
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "2",
+    "last": "2025-10-11T01:41:45.000",
+    "first": "2025-10-08T11:48:28.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Talking",
+    "n": "2",
+    "last": "2026-02-28T00:21:44.000",
+    "first": "2026-02-25T20:29:40.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "1",
+    "last": "2025-07-02T01:18:52.000",
+    "first": "2025-07-02T01:18:52.000"
+   },
+   {
+    "complaint_type": "Noise - Vehicle",
+    "descriptor": "Car/Truck Music",
+    "n": "1",
+    "last": "2025-07-02T01:40:08.000",
+    "first": "2025-07-02T01:40:08.000"
+   },
+   {
+    "complaint_type": "Rodent",
+    "descriptor": "Condition Attracting Rodents",
+    "n": "1",
+    "last": "2025-04-21T08:10:29.000",
+    "first": "2025-04-21T08:10:29.000"
+   }
+  ],
+  "hpd": [],
+  "hpd_detail": [],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273048860018%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273048860018%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273048860018%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:48:08+00:00",
+  "addr": "948 New York Avenue #2, 948 New York Ave, Brooklyn, NY 11203, US"
+ },
+ "3049980004": {
+  "311": [
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "10",
+    "last": "2026-10-02T16:30:13.000",
+    "first": "2025-03-04T18:00:59.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "MOLD",
+    "n": "7",
+    "last": "2026-09-30T18:22:09.000",
+    "first": "2026-02-26T12:18:18.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "CEILING",
+    "n": "7",
+    "last": "2026-08-06T16:24:30.000",
+    "first": "2026-01-29T21:39:29.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "LIGHTING",
+    "n": "5",
+    "last": "2026-03-12T19:06:49.000",
+    "first": "2026-01-29T21:39:29.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "WATER SUPPLY",
+    "n": "5",
+    "last": "2026-01-26T18:37:05.000",
+    "first": "2026-01-26T10:24:06.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "HEAVY FLOW",
+    "n": "4",
+    "last": "2026-09-10T16:47:08.000",
+    "first": "2025-11-10T15:30:29.000"
+   },
+   {
+    "complaint_type": "Real Time Enforcement",
+    "descriptor": "Work Without A Permit - Occupied Multiple Dwelling",
+    "n": "4",
+    "last": "2026-02-19T14:18:36.000",
+    "first": "2024-12-02T11:06:04.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "3",
+    "last": "2026-06-17T09:54:53.000",
+    "first": "2026-03-15T20:23:14.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "3",
+    "last": "2026-06-14T17:01:24.000",
+    "first": "2025-01-12T21:47:44.000"
+   },
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Single Device On Property/No Alternate Service",
+    "n": "3",
+    "last": "2026-02-02T12:32:28.000",
+    "first": "2025-10-25T17:24:42.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "DAMP SPOT",
+    "n": "3",
+    "last": "2026-05-14T07:14:41.000",
+    "first": "2026-02-03T09:34:45.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "BELL/BUZZER/INTERCOM",
+    "n": "3",
+    "last": "2026-10-17T19:22:55.000",
+    "first": "2026-06-25T19:50:51.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "POWER OUTAGE",
+    "n": "2",
+    "last": "2026-10-02T16:30:13.000",
+    "first": "2025-05-27T10:24:47.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR",
+    "n": "2",
+    "last": "2026-09-13T12:41:28.000",
+    "first": "2026-03-12T19:06:49.000"
+   },
+   {
+    "complaint_type": "APPLIANCE",
+    "descriptor": "REFRIGERATOR",
+    "n": "2",
+    "last": "2026-05-14T07:14:41.000",
+    "first": "2026-02-03T09:34:45.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "SIGNAGE MISSING",
+    "n": "2",
+    "last": "2026-09-13T12:50:56.000",
+    "first": "2026-05-25T10:44:39.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "GARBAGE/RECYCLING STORAGE",
+    "n": "2",
+    "last": "2026-05-25T10:44:39.000",
+    "first": "2026-03-18T21:08:41.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "WALL",
+    "n": "2",
+    "last": "2026-02-25T16:52:12.000",
+    "first": "2026-01-29T21:39:29.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "SLOW LEAK",
+    "n": "1",
+    "last": "2026-05-24T18:52:31.000",
+    "first": "2026-05-24T18:52:31.000"
+   },
+   {
+    "complaint_type": "Dead/Dying Tree",
+    "descriptor": "Planted Less Than 2 Years Ago",
+    "n": "1",
+    "last": "2026-09-26T12:49:36.000",
+    "first": "2026-09-26T12:49:36.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "WINDOW FRAME",
+    "n": "1",
+    "last": "2026-09-10T16:47:07.000",
+    "first": "2026-09-10T16:47:07.000"
+   },
+   {
+    "complaint_type": "Electrical",
+    "descriptor": "Electrical Wiring Defective/Exposed",
+    "n": "1",
+    "last": "2025-01-29T11:57:36.000",
+    "first": "2025-01-29T11:57:36.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "MAILBOX",
+    "n": "1",
+    "last": "2026-06-25T19:50:51.000",
+    "first": "2026-06-25T19:50:51.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "VENTILATION SYSTEM",
+    "n": "1",
+    "last": "2026-09-10T16:47:08.000",
+    "first": "2026-09-10T16:47:08.000"
+   },
+   {
+    "complaint_type": "General Construction/Plumbing",
+    "descriptor": "Egress - Doors Locked/Blocked/Improper/No Secondary Means",
+    "n": "1",
+    "last": "2026-06-25T19:45:17.000",
+    "first": "2026-06-25T19:45:17.000"
+   },
+   {
+    "complaint_type": "General Construction/Plumbing",
+    "descriptor": "Failure to Comply with Vacate Order",
+    "n": "1",
+    "last": "2026-03-18T21:14:03.000",
+    "first": "2026-03-18T21:14:03.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "1",
+    "last": "2026-01-25T02:24:47.000",
+    "first": "2026-01-25T02:24:47.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Construction Equipment",
+    "n": "1",
+    "last": "2026-07-27T08:27:38.000",
+    "first": "2026-07-27T08:27:38.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Construction Equipment (NC1)",
+    "n": "1",
+    "last": "2025-11-07T09:20:00.000",
+    "first": "2025-11-07T09:20:00.000"
+   },
+   {
+    "complaint_type": "OUTSIDE BUILDING",
+    "descriptor": "ROOF DOOR/HATCH",
+    "n": "1",
+    "last": "2026-01-29T21:39:29.000",
+    "first": "2026-01-29T21:39:29.000"
+   },
+   {
+    "complaint_type": "OUTSIDE BUILDING",
+    "descriptor": "ROOFING",
+    "n": "1",
+    "last": "2026-01-29T21:39:29.000",
+    "first": "2026-01-29T21:39:29.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BASIN/SINK",
+    "n": "1",
+    "last": "2026-08-06T16:24:30.000",
+    "first": "2026-08-06T16:24:30.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "RADIATOR",
+    "n": "1",
+    "last": "2026-08-06T16:24:30.000",
+    "first": "2026-08-06T16:24:30.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "10",
+    "last": "2026-10-04T00:00:00.000",
+    "open_n": "10"
+   },
+   {
+    "class": "B",
+    "n": "14",
+    "last": "2026-09-16T00:00:00.000",
+    "open_n": "14"
+   },
+   {
+    "class": "C",
+    "n": "1",
+    "last": "2026-01-28T00:00:00.000",
+    "open_n": "1"
+   },
+   {
+    "class": "I",
+    "n": "1",
+    "last": "2025-11-18T00:00:00.000",
+    "open_n": "0"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2026-10-04T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 50 SQ FT AGGREGATE OBSERVED AT CEILING NEAR AIR VENTS AT PUBLIC HALL, 3rd STORY",
+    "violationstatus": "Open"
+   },
+   {
+    "inspectiondate": "2026-09-16T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQUARE FEET OBSERVED AT NORTH WALL IN THE 1st ROOM FROM NORTH LOCATED AT APT 3E, 3rd STORY, 1st APARTMENT FROM SOUTH AT WEST",
+    "violationstatus": "Open",
+    "apartment": "3E"
+   },
+   {
+    "inspectiondate": "2026-09-16T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQUARE FEET OBSERVED AT CEILING AT PUBLIC HALL, 3rd STORY",
+    "violationstatus": "Open"
+   },
+   {
+    "inspectiondate": "2026-01-28T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2024 ADM CODE PROVIDE ADEQUATE SUPPLY OF HOT WATER FOR THE FIXTURES AT SINK, LOW VOLUME IN THE KITCHEN LOCATED AT APT 5E, 5th STORY, 1st APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Open",
+    "apartment": "5E"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273049980004%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273049980004%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273049980004%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:48:09+00:00",
+  "addr": "3415 Farragut Rd"
+ },
+ "3049490021": {
+  "311": [
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "3",
+    "last": "2026-04-23T02:58:13.000",
+    "first": "2026-03-30T21:09:09.000"
+   }
+  ],
+  "hpd": [],
+  "hpd_detail": [],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273049490021%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273049490021%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273049490021%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:48:11+00:00",
+  "addr": "1244 New York Ave"
+ },
+ "3075600067": {
+  "311": [
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "No Access",
+    "n": "10",
+    "last": "2026-07-03T18:31:00.000",
+    "first": "2025-06-29T10:10:09.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "4",
+    "last": "2026-02-13T22:12:27.000",
+    "first": "2026-01-29T22:59:25.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "3",
+    "last": "2026-01-03T00:22:41.000",
+    "first": "2025-07-25T23:58:21.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "Partial Access",
+    "n": "2",
+    "last": "2026-11-07T13:48:24.000",
+    "first": "2026-01-08T17:53:29.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Sidewalk",
+    "n": "2",
+    "last": "2026-06-22T11:39:06.000",
+    "first": "2025-11-26T01:39:48.000"
+   },
+   {
+    "complaint_type": "Non-Emergency Police Matter",
+    "descriptor": "Other (complaint details)",
+    "n": "1",
+    "last": "2026-04-28T18:57:22.000",
+    "first": "2026-04-28T18:57:22.000"
+   },
+   {
+    "complaint_type": "Dead/Dying Tree",
+    "descriptor": "Planted More Than 2 Years Ago",
+    "n": "1",
+    "last": "2026-11-11T10:14:54.000",
+    "first": "2026-11-11T10:14:54.000"
+   },
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Single Device On Property/No Alternate Service",
+    "n": "1",
+    "last": "2025-11-19T16:15:31.000",
+    "first": "2025-11-19T16:15:31.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise, Barking Dog (NR5)",
+    "n": "1",
+    "last": "2026-01-02T12:29:00.000",
+    "first": "2026-01-02T12:29:00.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Talking",
+    "n": "1",
+    "last": "2025-07-28T00:56:20.000",
+    "first": "2025-07-28T00:56:20.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "1",
+    "last": "2025-06-16T00:00:00.000",
+    "open_n": "0"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2025-06-16T00:00:00.000",
+    "class": "A",
+    "novdescription": "(A) \u00a7 HMC:FILE ANNUAL BEDBUG REPORT IN ACCORDANCE WITH HPD RULE AS DESCRIBED ON THE BACK OF THIS NOTICE OF VIOLATION OR AS DESCRIBED ON HPD\u001aS WEBSITE, WWW.NYC.GOV\\HPD, SEARCH BED BUGS.",
+    "violationstatus": "Close"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273075600067%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273075600067%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273075600067%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:48:23+00:00",
+  "addr": "1644 New York Ave"
+ },
+ "3039647501": {
+  "311": [
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "23",
+    "last": "2026-11-04T16:50:07.000",
+    "first": "2024-11-28T21:24:46.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Banging/Pounding",
+    "n": "20",
+    "last": "2026-05-10T13:20:15.000",
+    "first": "2025-03-14T23:48:41.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "PESTS",
+    "n": "11",
+    "last": "2026-06-03T19:21:26.000",
+    "first": "2025-08-25T11:45:40.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "WATER SUPPLY",
+    "n": "8",
+    "last": "2026-10-22T14:27:22.000",
+    "first": "2025-03-29T11:43:21.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Posted Parking Sign Violation",
+    "n": "7",
+    "last": "2025-09-10T09:20:08.000",
+    "first": "2025-03-31T08:19:22.000"
+   },
+   {
+    "complaint_type": "Elevator",
+    "descriptor": "Elevator - Multiple Devices On Property",
+    "n": "7",
+    "last": "2026-09-18T13:57:24.000",
+    "first": "2026-01-19T06:31:27.000"
+   },
+   {
+    "complaint_type": "Blocked Driveway",
+    "descriptor": "No Access",
+    "n": "6",
+    "last": "2026-10-11T10:34:48.000",
+    "first": "2025-07-19T09:48:05.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "5",
+    "last": "2026-01-19T17:26:36.000",
+    "first": "2025-12-17T20:22:38.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR",
+    "n": "5",
+    "last": "2026-08-12T04:37:12.000",
+    "first": "2025-06-13T13:52:15.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "5",
+    "last": "2026-04-02T03:33:02.000",
+    "first": "2026-01-19T03:26:08.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "VENTILATION SYSTEM",
+    "n": "4",
+    "last": "2026-05-12T07:24:23.000",
+    "first": "2025-03-15T16:42:58.000"
+   },
+   {
+    "complaint_type": "FLOORING/STAIRS",
+    "descriptor": "FLOOR",
+    "n": "4",
+    "last": "2025-11-04T08:30:01.000",
+    "first": "2025-05-29T09:33:54.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "LIGHTING",
+    "n": "4",
+    "last": "2026-01-18T19:55:27.000",
+    "first": "2025-08-25T11:45:40.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "TOILET",
+    "n": "3",
+    "last": "2025-11-04T08:30:01.000",
+    "first": "2025-08-25T11:45:40.000"
+   },
+   {
+    "complaint_type": "ELECTRIC",
+    "descriptor": "POWER OUTAGE",
+    "n": "3",
+    "last": "2025-11-06T19:07:46.000",
+    "first": "2025-09-23T08:16:50.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Talking",
+    "n": "3",
+    "last": "2026-11-13T22:56:33.000",
+    "first": "2025-07-21T15:24:20.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BATHTUB/SHOWER",
+    "n": "3",
+    "last": "2026-04-05T00:54:09.000",
+    "first": "2026-02-09T14:27:01.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "WINDOW FRAME",
+    "n": "2",
+    "last": "2026-04-02T03:33:02.000",
+    "first": "2026-02-17T23:37:19.000"
+   },
+   {
+    "complaint_type": "Sidewalk Condition",
+    "descriptor": "Blocked - Construction",
+    "n": "2",
+    "last": "2025-09-04T18:36:44.000",
+    "first": "2025-07-22T14:47:53.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "GARBAGE/RECYCLING STORAGE",
+    "n": "2",
+    "last": "2026-08-21T20:57:30.000",
+    "first": "2026-06-04T22:57:53.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "CABINET",
+    "n": "2",
+    "last": "2025-11-04T08:30:01.000",
+    "first": "2025-10-14T13:01:46.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "HEAVY FLOW",
+    "n": "2",
+    "last": "2026-05-26T13:06:54.000",
+    "first": "2025-06-13T13:52:15.000"
+   },
+   {
+    "complaint_type": "Drug Activity",
+    "descriptor": "Use Indoor",
+    "n": "1",
+    "last": "2025-08-25T11:55:21.000",
+    "first": "2025-08-25T11:55:21.000"
+   },
+   {
+    "complaint_type": "Indoor Air Quality",
+    "descriptor": "Ventilation",
+    "n": "1",
+    "last": "2026-06-04T21:24:07.000",
+    "first": "2026-06-04T21:24:07.000"
+   },
+   {
+    "complaint_type": "Litter Basket Request",
+    "descriptor": "New Basket",
+    "n": "1",
+    "last": "2026-08-19T20:17:31.000",
+    "first": "2026-08-19T20:17:31.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Alarms (NR3)",
+    "n": "1",
+    "last": "2025-12-22T16:32:00.000",
+    "first": "2025-12-22T16:32:00.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise, Barking Dog (NR5)",
+    "n": "1",
+    "last": "2025-11-16T09:11:00.000",
+    "first": "2025-11-16T09:11:00.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Noise: Construction Before/After Hours (NM1)",
+    "n": "1",
+    "last": "2025-11-14T15:35:00.000",
+    "first": "2025-11-14T15:35:00.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR FRAME",
+    "n": "1",
+    "last": "2026-01-19T08:43:19.000",
+    "first": "2026-01-19T08:43:19.000"
+   },
+   {
+    "complaint_type": "Water System",
+    "descriptor": "Hydrant Running (WC3)",
+    "n": "1",
+    "last": "2026-06-17T09:50:00.000",
+    "first": "2026-06-17T09:50:00.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Television",
+    "n": "1",
+    "last": "2026-10-10T02:39:49.000",
+    "first": "2026-10-10T02:39:49.000"
+   },
+   {
+    "complaint_type": "Noise - Street/Sidewalk",
+    "descriptor": "Loud Talking",
+    "n": "1",
+    "last": "2026-06-26T14:53:40.000",
+    "first": "2026-06-26T14:53:40.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BASIN/SINK",
+    "n": "1",
+    "last": "2025-08-08T16:11:42.000",
+    "first": "2025-08-08T16:11:42.000"
+   },
+   {
+    "complaint_type": "Window Guard",
+    "descriptor": "Tenant Refusal",
+    "n": "1",
+    "last": "2026-03-09T10:32:07.000",
+    "first": "2026-03-09T10:32:07.000"
+   },
+   {
+    "complaint_type": "Dirty Condition",
+    "descriptor": "Trash",
+    "n": "1",
+    "last": "2025-08-13T09:13:29.000",
+    "first": "2025-08-13T09:13:29.000"
+   },
+   {
+    "complaint_type": "Dirty Condition",
+    "descriptor": "Broken Glass",
+    "n": "1",
+    "last": "2025-09-04T18:41:12.000",
+    "first": "2025-09-04T18:41:12.000"
+   },
+   {
+    "complaint_type": "Residential Disposal Complaint",
+    "descriptor": "Storage Area Not Provided",
+    "n": "1",
+    "last": "2026-09-29T16:27:34.000",
+    "first": "2026-09-29T16:27:34.000"
+   },
+   {
+    "complaint_type": "SAFETY",
+    "descriptor": "WINDOW GUARD BROKEN/MISSING",
+    "n": "1",
+    "last": "2026-07-16T05:19:00.000",
+    "first": "2026-07-16T05:19:00.000"
+   },
+   {
+    "complaint_type": "Sewer",
+    "descriptor": "Culvert Blocked/Needs Cleaning (SE)",
+    "n": "1",
+    "last": "2026-05-20T22:37:00.000",
+    "first": "2026-05-20T22:37:00.000"
+   },
+   {
+    "complaint_type": "Sewer",
+    "descriptor": "Street Flooding (SJ)",
+    "n": "1",
+    "last": "2026-06-23T16:42:00.000",
+    "first": "2026-06-23T16:42:00.000"
+   },
+   {
+    "complaint_type": "Sewer Maintenance",
+    "descriptor": "Culvert",
+    "n": "1",
+    "last": "2026-07-06T12:10:34.000",
+    "first": "2026-07-06T12:10:34.000"
+   },
+   {
+    "complaint_type": "Snow or Ice",
+    "descriptor": "Snow Tracking",
+    "n": "1",
+    "last": "2026-01-26T06:12:56.000",
+    "first": "2026-01-26T06:12:56.000"
+   },
+   {
+    "complaint_type": "Street Sign - Damaged",
+    "descriptor": "Construction",
+    "n": "1",
+    "last": "2026-10-13T15:51:07.000",
+    "first": "2026-10-13T15:51:07.000"
+   },
+   {
+    "complaint_type": "Street Sign - Dangling",
+    "descriptor": "Other/Unknown",
+    "n": "1",
+    "last": "2025-01-28T07:22:17.000",
+    "first": "2025-01-28T07:22:17.000"
+   },
+   {
+    "complaint_type": "Street Sign - Dangling",
+    "descriptor": "Street Cleaning - ASP",
+    "n": "1",
+    "last": "2026-08-21T17:36:56.000",
+    "first": "2026-08-21T17:36:56.000"
+   },
+   {
+    "complaint_type": "Derelict Vehicles",
+    "descriptor": "Derelict Vehicles",
+    "n": "1",
+    "last": "2026-09-11T02:01:00.000",
+    "first": "2026-09-11T02:01:00.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "SEWAGE",
+    "n": "1",
+    "last": "2026-04-05T00:54:09.000",
+    "first": "2026-04-05T00:54:09.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "DAMP SPOT",
+    "n": "1",
+    "last": "2026-04-05T00:54:09.000",
+    "first": "2026-04-05T00:54:09.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "SLOW LEAK",
+    "n": "1",
+    "last": "2026-06-04T23:00:31.000",
+    "first": "2026-06-04T23:00:31.000"
+   },
+   {
+    "complaint_type": "Water System",
+    "descriptor": "Fire Hydrant Emergency (FHE)",
+    "n": "1",
+    "last": "2025-06-25T23:02:00.000",
+    "first": "2025-06-25T23:02:00.000"
+   },
+   {
+    "complaint_type": "Water System",
+    "descriptor": "Hydrant Running Full (WA4)",
+    "n": "1",
+    "last": "2025-07-05T09:14:00.000",
+    "first": "2025-07-05T09:14:00.000"
+   },
+   {
+    "complaint_type": "Homeless Person Assistance",
+    "descriptor": "Non-Chronic",
+    "n": "1",
+    "last": "2025-07-26T14:27:05.000",
+    "first": "2025-07-26T14:27:05.000"
+   },
+   {
+    "complaint_type": "GENERAL",
+    "descriptor": "BELL/BUZZER/INTERCOM",
+    "n": "1",
+    "last": "2026-03-02T14:17:49.000",
+    "first": "2026-03-02T14:17:49.000"
+   },
+   {
+    "complaint_type": "Illegal Dumping",
+    "descriptor": "Chronic Dumping",
+    "n": "1",
+    "last": "2025-10-07T11:08:39.000",
+    "first": "2025-10-07T11:08:39.000"
+   },
+   {
+    "complaint_type": "Illegal Dumping",
+    "descriptor": "Removal Request",
+    "n": "1",
+    "last": "2026-02-28T11:56:42.000",
+    "first": "2026-02-28T11:56:42.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Hydrant",
+    "n": "1",
+    "last": "2026-03-25T16:34:49.000",
+    "first": "2026-03-25T16:34:49.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Blocked Sidewalk",
+    "n": "1",
+    "last": "2025-05-30T12:04:11.000",
+    "first": "2025-05-30T12:04:11.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "1",
+    "last": "2025-10-22T00:00:00.000",
+    "open_n": "0"
+   },
+   {
+    "class": "B",
+    "n": "8",
+    "last": "2026-06-24T00:00:00.000",
+    "open_n": "0"
+   },
+   {
+    "class": "C",
+    "n": "16",
+    "last": "2026-08-18T00:00:00.000",
+    "open_n": "3"
+   },
+   {
+    "class": "I",
+    "n": "1",
+    "last": "2024-11-26T00:00:00.000",
+    "open_n": "0"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2026-04-04T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2031 ADM CODE PROVIDE HOT WATER AT ALL HOT WATER FIXTURES IN THE ENTIRE APARTMENT LOCATED AT APT 913, 9th STORY, 5th APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Close",
+    "apartment": "913"
+   },
+   {
+    "inspectiondate": "2026-04-04T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 913, 9th STORY, 5th APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Open",
+    "apartment": "913"
+   },
+   {
+    "inspectiondate": "2026-01-21T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2031 ADM CODE PROVIDE HOT WATER AT ALL HOT WATER FIXTURES IN THE ENTIRE APARTMENT LOCATED AT APT 1106, 11th STORY, 1st APARTMENT FROM EAST AT SOUTH , SECTION ''EAST''",
+    "violationstatus": "Close",
+    "apartment": "1106"
+   },
+   {
+    "inspectiondate": "2026-01-21T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2033 ADM CODE PROVIDE READY ACCESS TO BUILDINGS HEATING SYSTEM DOOR LOCKED AT CELLAR AT BOILER ROOM",
+    "violationstatus": "Close"
+   },
+   {
+    "inspectiondate": "2026-01-21T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2033 ADM CODE PROVIDE READY ACCESS TO BUILDINGS HEATING SYSTEM DOOR LOCKED AT CELLAR AT BOILER ROOM",
+    "violationstatus": "Close"
+   },
+   {
+    "inspectiondate": "2026-01-21T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 913, 9th STORY, 5th APARTMENT FROM EAST AT SOUTH , SECTION ''EAST''",
+    "violationstatus": "Open",
+    "apartment": "913"
+   },
+   {
+    "inspectiondate": "2026-01-21T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2031 ADM CODE PROVIDE HOT WATER AT ALL HOT WATER FIXTURES IN THE ENTIRE APARTMENT LOCATED AT APT 913, 9th STORY, 5th APARTMENT FROM EAST AT SOUTH , SECTION ''EAST''",
+    "violationstatus": "Close",
+    "apartment": "913"
+   },
+   {
+    "inspectiondate": "2025-10-22T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 913, 9th STORY, 5th APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Close",
+    "apartment": "913"
+   },
+   {
+    "inspectiondate": "2025-09-23T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 913, 9th STORY, 5th APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Open",
+    "apartment": "913"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%273039647501%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%273039647501%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%273039647501%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:48:29+00:00",
+  "addr": "2840 Atlantic Avenue, New York, NY 11207, USA"
+ },
+ "4015600006": {
+  "311": [
+   {
+    "complaint_type": "Street Condition",
+    "descriptor": "Defective Hardware",
+    "n": "10",
+    "last": "2026-10-08T12:55:05.000",
+    "first": "2025-02-07T16:14:12.000"
+   },
+   {
+    "complaint_type": "Illegal Parking",
+    "descriptor": "Paper License Plates",
+    "n": "2",
+    "last": "2024-12-27T14:38:14.000",
+    "first": "2024-12-01T14:54:35.000"
+   },
+   {
+    "complaint_type": "Consumer Complaint",
+    "descriptor": "Laundromat",
+    "n": "1",
+    "last": "2026-06-30T10:56:13.000",
+    "first": "2026-06-30T10:56:13.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "CEILING",
+    "n": "1",
+    "last": "2025-11-15T16:02:34.000",
+    "first": "2025-11-15T16:02:34.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "1",
+    "last": "2025-06-12T00:00:00.000",
+    "open_n": "0"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2025-06-12T00:00:00.000",
+    "class": "A",
+    "novdescription": "(A) \u00a7 HMC:FILE ANNUAL BEDBUG REPORT IN ACCORDANCE WITH HPD RULE AS DESCRIBED ON THE BACK OF THIS NOTICE OF VIOLATION OR AS DESCRIBED ON HPD\u001aS WEBSITE, WWW.NYC.GOV\\HPD, SEARCH BED BUGS.",
+    "violationstatus": "Close"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%274015600006%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%274015600006%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%274015600006%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:48:40+00:00",
+  "addr": "44-10 Ketcham St"
+ },
+ "4015540023": {
+  "311": [
+   {
+    "complaint_type": "Noise - Vehicle",
+    "descriptor": "Engine Idling",
+    "n": "187",
+    "last": "2026-11-13T13:00:05.000",
+    "first": "2026-02-13T18:48:12.000"
+   },
+   {
+    "complaint_type": "Noise - Residential",
+    "descriptor": "Loud Music/Party",
+    "n": "12",
+    "last": "2026-02-01T23:00:48.000",
+    "first": "2025-04-26T18:26:16.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "PESTS",
+    "n": "7",
+    "last": "2026-10-11T22:49:00.000",
+    "first": "2025-06-02T16:58:31.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "APARTMENT ONLY",
+    "n": "5",
+    "last": "2025-11-03T15:33:19.000",
+    "first": "2025-03-22T13:38:56.000"
+   },
+   {
+    "complaint_type": "HEAT/HOT WATER",
+    "descriptor": "ENTIRE BUILDING",
+    "n": "4",
+    "last": "2026-11-07T11:11:53.000",
+    "first": "2025-01-03T06:03:54.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "WATER SUPPLY",
+    "n": "2",
+    "last": "2025-10-08T07:49:14.000",
+    "first": "2025-09-11T07:49:14.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "CEILING",
+    "n": "2",
+    "last": "2026-08-15T03:36:53.000",
+    "first": "2026-08-12T07:55:04.000"
+   },
+   {
+    "complaint_type": "PAINT/PLASTER",
+    "descriptor": "WALL",
+    "n": "2",
+    "last": "2026-08-15T03:36:53.000",
+    "first": "2025-06-02T16:58:31.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "BATHTUB/SHOWER",
+    "n": "2",
+    "last": "2026-10-11T22:49:00.000",
+    "first": "2025-11-03T15:33:19.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "MOLD",
+    "n": "1",
+    "last": "2026-08-15T03:36:53.000",
+    "first": "2026-08-15T03:36:53.000"
+   },
+   {
+    "complaint_type": "UNSANITARY CONDITION",
+    "descriptor": "SEWAGE",
+    "n": "1",
+    "last": "2026-08-15T03:36:53.000",
+    "first": "2026-08-15T03:36:53.000"
+   },
+   {
+    "complaint_type": "WATER LEAK",
+    "descriptor": "DAMP SPOT",
+    "n": "1",
+    "last": "2026-08-15T03:36:53.000",
+    "first": "2026-08-15T03:36:53.000"
+   },
+   {
+    "complaint_type": "Water System",
+    "descriptor": "Leak (Use Comments) (WA2)",
+    "n": "1",
+    "last": "2025-10-09T12:44:00.000",
+    "first": "2025-10-09T12:44:00.000"
+   },
+   {
+    "complaint_type": "Boilers",
+    "descriptor": "Boiler - Defective/Inoperative/No Permit",
+    "n": "1",
+    "last": "2026-03-10T20:00:39.000",
+    "first": "2026-03-10T20:00:39.000"
+   },
+   {
+    "complaint_type": "Water System",
+    "descriptor": "LOW WATER PRESSURE - WLWP",
+    "n": "1",
+    "last": "2025-09-10T08:46:00.000",
+    "first": "2025-09-10T08:46:00.000"
+   },
+   {
+    "complaint_type": "Building/Use",
+    "descriptor": "Illegal Conversion Of Residential Building/Space",
+    "n": "1",
+    "last": "2025-04-29T20:30:59.000",
+    "first": "2025-04-29T20:30:59.000"
+   },
+   {
+    "complaint_type": "Consumer Complaint",
+    "descriptor": "Laundromat",
+    "n": "1",
+    "last": "2026-03-15T06:36:38.000",
+    "first": "2026-03-15T06:36:38.000"
+   },
+   {
+    "complaint_type": "DOOR/WINDOW",
+    "descriptor": "DOOR",
+    "n": "1",
+    "last": "2026-08-15T03:36:53.000",
+    "first": "2026-08-15T03:36:53.000"
+   },
+   {
+    "complaint_type": "Noise",
+    "descriptor": "Construction Equipment",
+    "n": "1",
+    "last": "2026-09-25T14:02:09.000",
+    "first": "2026-09-25T14:02:09.000"
+   },
+   {
+    "complaint_type": "Noise - Vehicle",
+    "descriptor": "Car/Truck Horn",
+    "n": "1",
+    "last": "2026-10-02T21:49:48.000",
+    "first": "2026-10-02T21:49:48.000"
+   },
+   {
+    "complaint_type": "Noise - Vehicle",
+    "descriptor": "Car/Truck Music",
+    "n": "1",
+    "last": "2025-06-10T02:42:16.000",
+    "first": "2025-06-10T02:42:16.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "RADIATOR",
+    "n": "1",
+    "last": "2026-08-15T03:36:53.000",
+    "first": "2026-08-15T03:36:53.000"
+   },
+   {
+    "complaint_type": "PLUMBING",
+    "descriptor": "TOILET",
+    "n": "1",
+    "last": "2025-11-03T15:33:19.000",
+    "first": "2025-11-03T15:33:19.000"
+   }
+  ],
+  "hpd": [
+   {
+    "class": "A",
+    "n": "13",
+    "last": "2026-09-15T00:00:00.000",
+    "open_n": "5"
+   },
+   {
+    "class": "B",
+    "n": "26",
+    "last": "2026-09-15T00:00:00.000",
+    "open_n": "13"
+   },
+   {
+    "class": "C",
+    "n": "17",
+    "last": "2026-09-15T00:00:00.000",
+    "open_n": "4"
+   }
+  ],
+  "hpd_detail": [
+   {
+    "inspectiondate": "2026-09-15T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES IN THE ENTIRE APARTMENT LOCATED AT APT 201, 1st STORY, 1st APARTMENT FROM NORTH AT EAST",
+    "violationstatus": "Open",
+    "apartment": "201"
+   },
+   {
+    "inspectiondate": "2026-09-15T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF MICE IN THE ENTIRE APARTMENT LOCATED AT APT 201, 1st STORY, 1st APARTMENT FROM NORTH AT EAST",
+    "violationstatus": "Open",
+    "apartment": "201"
+   },
+   {
+    "inspectiondate": "2025-12-17T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES AT COMPACTOR CLOSET, 5th STORY, SECTION ''601-606'', AT EAST",
+    "violationstatus": "Close"
+   },
+   {
+    "inspectiondate": "2025-12-01T00:00:00.000",
+    "class": "A",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT CEILING IN THE 1st ROOM FROM NORTH AT WEST LOCATED AT APT 602, 6th STORY, 2nd APARTMENT FROM WEST AT NORTH , SECTION ''EAST''",
+    "violationstatus": "Close",
+    "apartment": "602"
+   },
+   {
+    "inspectiondate": "2025-12-01T00:00:00.000",
+    "class": "B",
+    "novdescription": "\u00a7 27-2017.3 HMC: TRACE AND REPAIR THE SOURCE AND ABATE THE VISIBLE MOLD CONDITION... LESS THAN 10 SQ FT AT CEILING IN THE 1st ROOM FROM NORTH AT WEST LOCATED AT APT 602, 6th STORY, 2nd APARTMENT FROM WEST AT NORTH , SECTION ''EAST'' ORIGINAL VIOLATION 18475207 ISSUED 01-DEC-25 HAS BEEN UPGRADED TO CLASS B PER ADMINISTRATIVE CODE 27-2017.3a(3)(a) or (b).",
+    "violationstatus": "Open",
+    "apartment": "602"
+   },
+   {
+    "inspectiondate": "2025-10-30T00:00:00.000",
+    "class": "C",
+    "novdescription": "\u00a7 27-2024 ADM CODE PROVIDE ADEQUATE SUPPLY OF HOT WATER FOR THE FIXTURES . IN THE ENTIRE APARTMENT LOCATED AT APT 409, 3rd STORY, 2nd APARTMENT FROM EAST AT SOUTH",
+    "violationstatus": "Close",
+    "apartment": "409"
+   },
+   {
+    "inspectiondate": "2025-10-17T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES AT PUBLIC HALL, 3rd STORY",
+    "violationstatus": "Close"
+   },
+   {
+    "inspectiondate": "2025-03-01T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES AT COMPACTOR CLOSET, 6th STORY",
+    "violationstatus": "Close"
+   },
+   {
+    "inspectiondate": "2025-01-04T00:00:00.000",
+    "class": "C",
+    "novdescription": "HMC ADM CODE: \u00a7 27-2017.4 ABATE THE INFESTATION CONSISTING OF ROACHES AT COMPACTOR CLOSET, 5th STORY, SECTION AT WEST",
+    "violationstatus": "Close"
+   }
+  ],
+  "urls": [
+   "https://data.cityofnewyork.us/resource/erm2-nwe9.json?%24select=complaint_type%2Cdescriptor%2Ccount%28%2A%29+as+n%2Cmax%28created_date%29+as+last%2Cmin%28created_date%29+as+first&%24where=bbl%3D%274015540023%27+AND+created_date%3E%272024-11-15T00%3A00%3A00%27&%24group=complaint_type%2Cdescriptor&%24order=n+DESC&%24limit=200",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=class%2Ccount%28%2A%29+as+n%2Cmax%28inspectiondate%29+as+last%2Csum%28case%28violationstatus%3D%27Open%27%2C1%2Ctrue%2C0%29%29+as+open_n&%24where=bbl%3D%274015540023%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27&%24group=class",
+   "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=inspectiondate%2Cclass%2Cnovdescription%2Cviolationstatus%2Capartment&%24where=bbl%3D%274015540023%27+AND+inspectiondate%3E%272024-11-15T00%3A00%3A00%27+AND+%28upper%28novdescription%29+like+%27%25ELEVATOR%25%27+OR+upper%28novdescription%29+like+%27%25ROACH%25%27+OR+upper%28novdescription%29+like+%27%25MICE%25%27+OR+upper%28novdescription%29+like+%27%25BEDBUG%25%27+OR+upper%28novdescription%29+like+%27%25MOLD%25%27+OR+upper%28novdescription%29+like+%27%25HEAT%25%27+OR+upper%28novdescription%29+like+%27%25HOT+WATER%25%27%29&%24order=inspectiondate+DESC&%24limit=60"
+  ],
+  "retrieved_at": "2026-11-15T20:48:42+00:00",
+  "addr": "41-42 Elbertson Street, 41-42 Elbertson St, Elmhurst, NY 11373, US"
+ }
+}

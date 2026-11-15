@@ -1,0 +1,141 @@
+addr_key,fact,value,quote,source_url,status
+2 kinderkamack rd|07601,elevator,yes; floor count not stated,Community amenities list: 'Elevators',https://www.gardencommunities.com/Properties/NJ/Bergen/The-Jefferson-Hackensack.aspx,confirmed
+2 kinderkamack rd|07601,floor,unknown,price is per floor plan (A-01 One Bedroom); no unit number or floor on the page,https://www.gardencommunities.com/Properties/NJ/Bergen/The-Jefferson-Hackensack.aspx,unconfirmed
+2 kinderkamack rd|07601,dogs_allowed,yes,"Community amenities: 'Dog Run', 'Dog Wash', 'Pet-Friendly'; fees sheet: 'Pet Rent: $50/month for 1 pet'",https://www.gardencommunities.com/Properties/NJ/Bergen/The-Jefferson-Hackensack.aspx,confirmed
+2 kinderkamack rd|07601,dog_weight_limit,100 lb combined (2 pets),2 pets with a combined weight of 100 pounds are allowed Breed restrictions apply,https://www.gardencommunities.com/CMSPages/GetFile.aspx?guid=92b3fa11-3aac-4f96-8b37-6d2cec922a51,confirmed
+300 prospect ave|07601,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator' (building site prospectplaceapts.com returned 403),https://www.apartmentlist.com/nj/hackensack/prospect-place--1,confirmed
+300 prospect ave|07601,floor,02-229: 2 (derived from unit number; '02' prefix = 'Mid' building); 02-122 is gone,"floor plan name 'Mid 1BR 1BA Den', unit '02-229'",https://www.apartmentlist.com/nj/hackensack/prospect-place--1,unconfirmed
+300 prospect ave|07601,dogs_allowed,yes,"allowed_pets: cats, dogs; amenity 'Dog park'",https://www.apartmentlist.com/nj/hackensack/prospect-place--1,confirmed
+300 prospect ave|07601,dog_weight_limit,under 40 lb,Weight: Under 40 lbs (Apartments) Breeds: Restrictions.,https://www.apartmentlist.com/nj/hackensack/prospect-place--1,confirmed
+345 prospect ave|07601,elevator,yes; 7 floors; 2 elevators,"this seven story mid-rise offers renovated Studio, One and Two Bedroom Apartments. ... new windows, two elevators, balconies (in selected apartments)",https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments,confirmed
+345 prospect ave|07601,floor,4K: 4; 3M: 3 (derived from unit number),"units '4K', '3M'",https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments,unconfirmed
+345 prospect ave|07601,dogs_allowed,yes,"allowed_pets: cats, dogs; dogs rent $50",https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments,confirmed
+345 prospect ave|07601,dog_weight_limit,"limit exists, pounds not published",Breed and Weight Restrictions,https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments,unconfirmed
+390 prospect ave|07601,elevator,yes; 6 floors,"this six story mid-rise offers renovated Studio, One and Two Bedroom Apartments. ... new windows, elevator, intercom service",https://www.apartmentlist.com/nj/hackensack/imperial-apartments,confirmed
+390 prospect ave|07601,floor,5F: 5 (derived from unit number),unit '5F',https://www.apartmentlist.com/nj/hackensack/imperial-apartments,unconfirmed
+390 prospect ave|07601,dogs_allowed,yes,"allowed_pets: cats, dogs; dogs rent $50, limit 2",https://www.apartmentlist.com/nj/hackensack/imperial-apartments,confirmed
+390 prospect ave|07601,dog_weight_limit,"limit exists, pounds not published",Breed and Weight Restrictions,https://www.apartmentlist.com/nj/hackensack/imperial-apartments,unconfirmed
+1100 s 5th st|07029,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator',https://www.apartmentlist.com/nj/harrison/the-wyldes,confirmed
+1100 s 5th st|07029,floor,439: 4; 477: 4 (derived from unit number),"units '439', '477'",https://www.apartmentlist.com/nj/harrison/the-wyldes,unconfirmed
+1100 s 5th st|07029,dogs_allowed,yes,"allowed_pets: dogs, cats; limit 2",https://www.apartmentlist.com/nj/harrison/the-wyldes,confirmed
+1100 s 5th st|07029,dog_weight_limit,not stated,no weight text on Apartment List or thewyldes.com/amenities ('Pet Spa'),https://www.apartmentlist.com/nj/harrison/the-wyldes,unconfirmed
+1200 s fifth st|07029,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator' (cobaltlofts.com robots.txt disallows Claude agents),https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2,confirmed
+1200 s fifth st|07029,floor,"2117: 2; 2113: 2 (derived: first digit looks like the floor, units listed run 1xxx-5xxx)","units '2117', '2113'",https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2,unconfirmed
+1200 s fifth st|07029,dogs_allowed,yes,"allowed_pets: dogs, cats; 'Breed Restrictions Apply'",https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2,confirmed
+1200 s fifth st|07029,dog_weight_limit,not stated,Breed Restrictions Apply,https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2,unconfirmed
+1200 frank e rodgers blvd s|07029,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator' (steelworksapts.com robots.txt disallows Claude agents),https://www.apartmentlist.com/nj/harrison/steel-works,confirmed
+1200 frank e rodgers blvd s|07029,floor,"1142: 1?; 1119: 1? (derived: first digit looks like the floor, units listed run 1xxx-5xxx; POSSIBLE GROUND FLOOR, ask)","units '1142', '1119'",https://www.apartmentlist.com/nj/harrison/steel-works,unconfirmed
+1200 frank e rodgers blvd s|07029,dogs_allowed,yes,"allowed_pets: dogs, cats; 'Restricted breeds list'",https://www.apartmentlist.com/nj/harrison/steel-works,confirmed
+1200 frank e rodgers blvd s|07029,dog_weight_limit,not stated,Restricted breeds list,https://www.apartmentlist.com/nj/harrison/steel-works,unconfirmed
+600 frank e rodgers blvd s|07029,elevator,yes; floor count not stated,Community Features: '... Onsite Market Elevator On-site maintenance',https://www.harrisonyards.com/amenities.aspx,confirmed
+600 frank e rodgers blvd s|07029,floor,H2-316: 3 (derived from unit number),unit 'H2-316',https://www.apartmentlist.com/nj/harrison/harrison-yards,unconfirmed
+600 frank e rodgers blvd s|07029,dogs_allowed,yes,"Pet Policy: Dogs and Cats allowed, $500 one-time fee per pet, $65 pet rent monthly per pet, no weight restrictions but breed restrictions apply.",https://www.harrisonyards.com/amenities.aspx,confirmed
+600 frank e rodgers blvd s|07029,dog_weight_limit,no limit,no weight restrictions but breed restrictions apply,https://www.harrisonyards.com/amenities.aspx,confirmed
+204 wagaraw rd|07506,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator' (hedgesathawthorne.com returned 403),https://www.apartmentlist.com/nj/hawthorne/hedges-at-hawthorne,confirmed
+204 wagaraw rd|07506,floor,409: 4 (derived from unit number),unit '409',https://www.apartmentlist.com/nj/hawthorne/hedges-at-hawthorne,unconfirmed
+204 wagaraw rd|07506,dogs_allowed,yes,"allowed_pets: cats, dogs; amenities 'Dog park', 'Dog grooming area'",https://www.apartmentlist.com/nj/hawthorne/hedges-at-hawthorne,confirmed
+204 wagaraw rd|07506,dog_weight_limit,not stated (breed list only),"With the exception for ESA or Service Animals, the following breeds will not be approved to accompany you to your new home: Doberman Pinscher, American Bulldog, Pitbull, Rottweiler, Chow, German Shepherd, Siberian Husky ... Great Dane, Mastiff",https://www.apartmentlist.com/nj/hawthorne/hedges-at-hawthorne,unconfirmed
+110 hoboken ave|07310,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator' (onetenjc.com returned 403),https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave,confirmed
+110 hoboken ave|07310,floor,430: 4 (derived from unit number),unit '430',https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave,unconfirmed
+110 hoboken ave|07310,dogs_allowed,yes,"allowed_pets: cats, dogs; rent '$50 Per Pet'; amenity 'Dog park'",https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave,confirmed
+110 hoboken ave|07310,dog_weight_limit,not stated,Breed Restrictions,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave,unconfirmed
+20 beacon way|07304,elevator,not stated in words; SightMap floor list for the Tower runs to floor 14 and unit P-1203 is on 12,"floor labels: 1-12, 14, A, B, G",https://bltliveworkplay.com/apartments/jersey-city/the-beacon/availability/,unconfirmed
+20 beacon way|07304,floor,O-0404: 4; P-1203: 12,"SightMap unit records: floor '4', floor '12'",https://bltliveworkplay.com/apartments/jersey-city/the-beacon/availability/,confirmed
+20 beacon way|07304,dogs_allowed,yes,"Enjoy state-of-the-art fitness centers, pet-friendly dog parks, a Bocce court, an indoor pool",https://bltliveworkplay.com/apartments/jersey-city/the-beacon/,confirmed
+20 beacon way|07304,dog_weight_limit,not stated,no weight or breed text on the building page,https://bltliveworkplay.com/apartments/jersey-city/the-beacon/,unconfirmed
+270 johnston ave|07304,elevator,yes; floor count not stated (units listed up to 17xx),Apartment List amenity list: 'Elevator',https://www.apartmentlist.com/nj/jersey-city/atlas--1,confirmed
+270 johnston ave|07304,floor,0308: 3 (derived from unit number),unit '0308',https://www.apartmentlist.com/nj/jersey-city/atlas--1,unconfirmed
+270 johnston ave|07304,dogs_allowed,yes,"allowed_pets: cats, dogs",https://www.apartmentlist.com/nj/jersey-city/atlas--1,confirmed
+270 johnston ave|07304,dog_weight_limit,not stated,no weight text on Apartment List or atlasjc.com,https://www.apartmentlist.com/nj/jersey-city/atlas--1,unconfirmed
+89 monitor st|07304,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator',https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city,confirmed
+89 monitor st|07304,floor,221: 2; 318: 3 (derived from unit number),"units '221', '318'",https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city,unconfirmed
+89 monitor st|07304,dogs_allowed,yes,"allowed_pets: cats, dogs; amenity 'Dog park'; thehazeljc.com amenities: 'Dog Run'",https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city,confirmed
+89 monitor st|07304,dog_weight_limit,not stated,no weight text on Apartment List or thehazeljc.com,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city,unconfirmed
+155 washington st|07302,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator' (equityapartments.com returned 403),https://www.apartmentlist.com/nj/jersey-city/portside-towers,confirmed
+155 washington st|07302,floor,311: 3 (derived from unit number),unit '311',https://www.apartmentlist.com/nj/jersey-city/portside-towers,unconfirmed
+155 washington st|07302,dogs_allowed,yes,"allowed_pets: dogs, cats; dogs rent 80.00, fee 450.00; limit 3",https://www.apartmentlist.com/nj/jersey-city/portside-towers,confirmed
+155 washington st|07302,dog_weight_limit,not stated,restrictions field is empty ('null'),https://www.apartmentlist.com/nj/jersey-city/portside-towers,unconfirmed
+2935 john f kennedy blvd|07306,elevator,yes; floor count not stated (unit 1005 implies 10+),Community amenities: '... Rentable Party Room Elevator Parking ...',https://www.threejournalsquare.com/features.aspx,confirmed
+2935 john f kennedy blvd|07306,floor,1005: 10 (derived from unit number),unit '1005',https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2,unconfirmed
+2935 john f kennedy blvd|07306,dogs_allowed,yes,We love your dogs! No Breed or Weight Restrictions! We welcome 2 pets per apartment home.,https://www.threejournalsquare.com/features.aspx,confirmed
+2935 john f kennedy blvd|07306,dog_weight_limit,no limit,We love your dogs! No Breed or Weight Restrictions!,https://www.threejournalsquare.com/features.aspx,confirmed
+49 fisk st|07305,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator',https://www.apartmentlist.com/nj/jersey-city/birch-house,confirmed
+49 fisk st|07305,floor,415: 4; 313: 3 (derived from unit number),"units '415', '313'",https://www.apartmentlist.com/nj/jersey-city/birch-house,unconfirmed
+49 fisk st|07305,dogs_allowed,yes,"Apartment List amenities 'Dogs allowed', 'Dog park'; birchhousejc.com/amenities: 'Private Outdoor Dog Run' (the Apartment List pet-policy block itself is empty)",https://www.apartmentlist.com/nj/jersey-city/birch-house,confirmed
+49 fisk st|07305,dog_weight_limit,not stated,no pet policy text on Apartment List or birchhousejc.com,https://www.apartmentlist.com/nj/jersey-city/birch-house,unconfirmed
+65 maple st|07304,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator',https://www.apartmentlist.com/nj/jersey-city/solaris-lofts--1,confirmed
+65 maple st|07304,floor,0511: 5 (derived from unit number),unit '0511',https://www.apartmentlist.com/nj/jersey-city/solaris-lofts--1,unconfirmed
+65 maple st|07304,dogs_allowed,yes,Pet limits ... include a maximum of 1 cat and a maximum of 2 dogs per apartment.,https://www.solarislofts.com/faq/,confirmed
+65 maple st|07304,dog_weight_limit,not stated,"Additional rules, fees, and any restricted breeds are outlined in the community's pet policy resources.",https://www.solarislofts.com/faq/,unconfirmed
+189 phillip st|07305,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator',https://www.apartmentlist.com/nj/jersey-city/aviva,confirmed
+189 phillip st|07305,floor,E0424: 4; E0521: 5 (derived from unit number),"units 'E0424', 'E0521'",https://www.apartmentlist.com/nj/jersey-city/aviva,unconfirmed
+189 phillip st|07305,dogs_allowed,yes,"allowed_pets: cats, dogs (Apartment List); avivajc.com/faq: 'We welcome up to two pets per apartment home and even offer a dedicated pet salon'",https://www.apartmentlist.com/nj/jersey-city/aviva,confirmed
+189 phillip st|07305,dog_weight_limit,not stated,"Breed restrictions apply, and all pets must complete a third-party pet screening process.",https://avivajc.com/faq,unconfirmed
+1075 w side ave|07306,elevator,not stated on Apartment List or westsidesquare.com; unit numbers run to 8xx,"amenities listed: Dog park, Pool, Garage (no 'Elevator' entry)",https://www.apartmentlist.com/nj/jersey-city/west-side-square,unconfirmed
+1075 w side ave|07306,floor,710: 7; 810: 8 (derived from unit number),"units '710', '810'",https://www.apartmentlist.com/nj/jersey-city/west-side-square,unconfirmed
+1075 w side ave|07306,dogs_allowed,yes,We welcome 2 pets per apartment home. There is a $500 pet deposit (non-refundable) per pet. There is no weight restriction.,https://www.apartmentlist.com/nj/jersey-city/west-side-square,confirmed
+1075 w side ave|07306,dog_weight_limit,no limit,There is no weight restriction.,https://www.apartmentlist.com/nj/jersey-city/west-side-square,confirmed
+200 boyden ave|07040,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator' (not in AvalonBay's own feature list),https://www.apartmentlist.com/nj/newark/avalon-maplewood,confirmed
+200 boyden ave|07040,floor,001-436: 4; 001-324: 3,"AvalonBay unit records: floorNumber '4' (unit 436), '3' (unit 324)",https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood,confirmed
+200 boyden ave|07040,dogs_allowed,yes,"Pet friendly community featuring WAG Pet Spa and outdoor WAG Pet Park; allowedPets: cats, dogs",https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood,confirmed
+200 boyden ave|07040,dog_weight_limit,none stated,maximumPetWeight field is 0; no weight sentence on the page,https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood,unconfirmed
+218-226 millburn ave|07041,elevator,not stated,"amenities listed: Garage, Dogs allowed (no 'Elevator' entry); goldberg-realty.com returned 403",https://www.apartmentlist.com/nj/newark/218-millburn-avenue,unconfirmed
+218-226 millburn ave|07041,floor,unknown (51C and 10C do not map clearly to a floor),"units '51C', '10C'",https://www.apartmentlist.com/nj/newark/218-millburn-avenue,unconfirmed
+218-226 millburn ave|07041,dogs_allowed,yes,"allowed_pets: cats, dogs; limit 2",https://www.apartmentlist.com/nj/newark/218-millburn-avenue,confirmed
+218-226 millburn ave|07041,dog_weight_limit,not stated,no weight text,https://www.apartmentlist.com/nj/newark/218-millburn-avenue,unconfirmed
+34 valley rd|07042,elevator,yes; floor count not stated,Apartment List amenity list: 'Elevator' (valleyandbloom.com returned 403),https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom,confirmed
+34 valley rd|07042,floor,36-305: 3 (derived from unit number; '36' = building 36 Valley Rd),unit '36-305',https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom,unconfirmed
+34 valley rd|07042,dogs_allowed,yes,"allowed_pets: cats, dogs; dogs rent $60",https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom,confirmed
+34 valley rd|07042,dog_weight_limit,"limit exists, pounds not published",Call for breed and weight restrictions.,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom,unconfirmed
+120 neilson st|08901,elevator,"not stated; Greystar building type 'Mid-Rise', available units up to floor 4+",buildingType: Mid-Rise,https://www.greystar.com/the-quincy-new-brunswick-nj/p_17425,unconfirmed
+120 neilson st|08901,floor,202: 2; 425: 4,"floorLabel 'Floor 2' (202), 'Floor 4' (425)",https://www.greystar.com/the-quincy-new-brunswick-nj/p_17425,confirmed
+120 neilson st|08901,dogs_allowed,yes,Amenities: 'Dog Park & Pet Spa'; fee 'Pet Rent' $65 monthly,https://www.greystar.com/the-quincy-new-brunswick-nj/p_17425,confirmed
+120 neilson st|08901,dog_weight_limit,not stated,no weight or breed text on the page,https://www.greystar.com/the-quincy-new-brunswick-nj/p_17425,unconfirmed
+30 clinton st newark nj 07102 usa|07102,elevator,yes; floor count not stated,Building amenities: '... Dogs OK Elevator Fitness Center ...',https://www.zumper.com/apartment-buildings/p1647219/clinton-flats-newark-central-business-district-newark-nj,confirmed
+30 clinton st newark nj 07102 usa|07102,floor,unknown,"floor-plan rows only (Lex II, Madison)",https://www.zumper.com/apartment-buildings/p1647219/clinton-flats-newark-central-business-district-newark-nj,unconfirmed
+30 clinton st newark nj 07102 usa|07102,dogs_allowed,yes,Dog Policy Allowed Limit 2 Breed restrictions Yes,https://www.zumper.com/apartment-buildings/p1647219/clinton-flats-newark-central-business-district-newark-nj,confirmed
+30 clinton st newark nj 07102 usa|07102,dog_weight_limit,40 lb,"Max of 2, 40 lbs. Weight Limit.",https://www.zumper.com/apartment-buildings/p1647219/clinton-flats-newark-central-business-district-newark-nj,confirmed
+10 commerce ct|07102,elevator,yes; floor count not stated (units listed up to 12x),Apartment List amenity list: 'Elevator',https://www.apartmentlist.com/nj/newark/the-mercer-10-commerce-court-newark-nj,confirmed
+10 commerce ct|07102,floor,6E: 6; 8F: 8 (derived from unit number),"units '6E', '8F'",https://www.apartmentlist.com/nj/newark/the-mercer-10-commerce-court-newark-nj,unconfirmed
+10 commerce ct|07102,dogs_allowed,yes,"allowed_pets: cats, dogs; limit 1",https://www.apartmentlist.com/nj/newark/the-mercer-10-commerce-court-newark-nj,confirmed
+10 commerce ct|07102,dog_weight_limit,not stated,no weight text,https://www.apartmentlist.com/nj/newark/the-mercer-10-commerce-court-newark-nj,unconfirmed
+80 freeman st|07105,elevator,not stated,"amenities listed: Concierge, Dogs allowed, Garage, Dog grooming area (no 'Elevator' entry); theballantine.com returned 403",https://www.apartmentlist.com/nj/newark/the-ballantine--1,unconfirmed
+80 freeman st|07105,floor,619: 6 (derived from unit number),unit '619',https://www.apartmentlist.com/nj/newark/the-ballantine--1,unconfirmed
+80 freeman st|07105,dogs_allowed,yes,"allowed_pets: cats, dogs; amenity 'Dog grooming area'",https://www.apartmentlist.com/nj/newark/the-ballantine--1,confirmed
+80 freeman st|07105,dog_weight_limit,not stated,no weight text,https://www.apartmentlist.com/nj/newark/the-ballantine--1,unconfirmed
+9060 palisade ave d710 n bergen nj 07047 usa|07047,elevator,yes; floor count not stated,"an outdoor swimming pool, fitness facilities, an elevator, and a community room",https://www.zumper.com/listings/30002373p/1-bedroom-north-bergen-nj,confirmed
+9060 palisade ave d710 n bergen nj 07047 usa|07047,floor,7,this seventh-floor residence features large windows that bring in natural light,https://www.zumper.com/listings/30002373p/1-bedroom-north-bergen-nj,confirmed
+9060 palisade ave d710 n bergen nj 07047 usa|07047,dogs_allowed,yes,Dog Policy Allowed Cat Policy Allowed Contact for more information on pet policy.,https://www.zumper.com/listings/30002373p/1-bedroom-north-bergen-nj,confirmed
+9060 palisade ave d710 n bergen nj 07047 usa|07047,dog_weight_limit,not stated,Contact for more information on pet policy.,https://www.zumper.com/listings/30002373p/1-bedroom-north-bergen-nj,unconfirmed
+508 51st st|07093,elevator,not stated; Greystar building type 'High-Rise',buildingType: High-Rise,https://www.greystar.com/the-grand-west-new-york-nj/p_22449,unconfirmed
+508 51st st|07093,floor,0206: 2; 0612: 6,"floorLabel 'Floor 2' (0206), 'Floor 6' (0612)",https://www.greystar.com/the-grand-west-new-york-nj/p_22449,confirmed
+508 51st st|07093,dogs_allowed,yes,Amenities: 'Outdoor Dog Park'; fee 'Pet Rent' $65 monthly,https://www.greystar.com/the-grand-west-new-york-nj/p_22449,confirmed
+508 51st st|07093,dog_weight_limit,not stated,no weight or breed text on the page,https://www.greystar.com/the-grand-west-new-york-nj/p_22449,unconfirmed
+900 forest park ln 9206|08857,elevator,"not stated; no elevator in AvalonBay's feature list, which mentions 'Select multi-level townhome units available with attached garages' (low-rise community: ASK, unit is on floor 2)",feature list has no elevator entry,https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge,unconfirmed
+900 forest park ln 9206|08857,floor,9206: 2,AvalonBay unit record: floorNumber '2',https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge,confirmed
+900 forest park ln 9206|08857,dogs_allowed,yes,Cats and dogs are welcome. Please check the dog breed and pet restrictions.,https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge,confirmed
+900 forest park ln 9206|08857,dog_weight_limit,none stated,maximumPetWeight field is 0; only a restricted-breed list is published,https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge,unconfirmed
+900 forest park ln 9204|08857,elevator,"not stated; no elevator in AvalonBay's feature list, which mentions 'Select multi-level townhome units available with attached garages' (low-rise community: ASK, unit is on floor 2)",feature list has no elevator entry,https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge,unconfirmed
+900 forest park ln 9204|08857,floor,9204: 2,AvalonBay unit record: floorNumber '2',https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge,confirmed
+900 forest park ln 9204|08857,dogs_allowed,yes,Cats and dogs are welcome. Please check the dog breed and pet restrictions.,https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge,confirmed
+900 forest park ln 9204|08857,dog_weight_limit,none stated,maximumPetWeight field is 0; only a restricted-breed list is published,https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge,unconfirmed
+500 parq ln|07054,elevator,not stated in words; 6 floors,Our six-story architectural design seamlessly combines contemporary elegance and urban convenience,https://www.greystar.com/500-parq-parisppany-nj/p_20984,unconfirmed
+500 parq ln|07054,floor,558: 5; 627: 6,"floorLabel 'Floor 5' (558), 'Floor 6' (627)",https://www.greystar.com/500-parq-parisppany-nj/p_20984,confirmed
+500 parq ln|07054,dogs_allowed,yes,Amenities: 'Multi-station dog groom facility'; fee 'Pet Rent' $65 monthly,https://www.greystar.com/500-parq-parisppany-nj/p_20984,confirmed
+500 parq ln|07054,dog_weight_limit,not stated,no weight or breed text on the page,https://www.greystar.com/500-parq-parisppany-nj/p_20984,unconfirmed
+263 franklin ave|07450,elevator,yes; 5 floors,"Situated in a historic, five story, elevator building near the center of town",https://www.apartmentlist.com/nj/ridgewood/263-franklin-avenue--1,confirmed
+263 franklin ave|07450,floor,unknown (unit '48' in a 48-unit building does not reveal the floor),unit '48',https://www.apartmentlist.com/nj/ridgewood/263-franklin-avenue--1,unconfirmed
+263 franklin ave|07450,dogs_allowed,yes,"allowed_pets: cats, dogs; limit 2",https://www.apartmentlist.com/nj/ridgewood/263-franklin-avenue--1,confirmed
+263 franklin ave|07450,dog_weight_limit,not stated,no weight text; goldberg-realty.com returned 403,https://www.apartmentlist.com/nj/ridgewood/263-franklin-avenue--1,unconfirmed
+100 julia dr|07885,elevator,not stated; page describes townhomes and 'two-story apartment residences' and lists no elevator (ASK: likely none),incredibly open and spacious two-story apartment residences,https://www.gardencommunities.com/Properties/NJ/Morris/Pondview-Estates.aspx,unconfirmed
+100 julia dr|07885,floor,unknown,price is per floor plan (One Bedroom); no unit number,https://www.gardencommunities.com/Properties/NJ/Morris/Pondview-Estates.aspx,unconfirmed
+100 julia dr|07885,dogs_allowed,yes,designated parks for small and large dogs; amenity 'Dog Run',https://www.gardencommunities.com/Properties/NJ/Morris/Pondview-Estates.aspx,confirmed
+100 julia dr|07885,dog_weight_limit,not stated,no weight text on the page (it names parks 'for small and large dogs'),https://www.gardencommunities.com/Properties/NJ/Morris/Pondview-Estates.aspx,unconfirmed
+101-616 goodmans crossing|07076,elevator,"not stated; 1952 garden complex, unit numbers look like building+unit (ASK: likely none)","amenities listed: Dogs allowed, Garage (no 'Elevator' entry); year_built 1952",https://www.apartmentlist.com/nj/clark/riverview-terrace,unconfirmed
+101-616 goodmans crossing|07076,floor,"unknown (613 is probably building 6, unit 13)",unit '613',https://www.apartmentlist.com/nj/clark/riverview-terrace,unconfirmed
+101-616 goodmans crossing|07076,dogs_allowed,"yes (dogs named in allowed pets, but only cat fees are listed)","allowed_pets: cats, dogs; cats rent $35, fee $250",https://www.apartmentlist.com/nj/clark/riverview-terrace,confirmed
+101-616 goodmans crossing|07076,dog_weight_limit,"limit exists, pounds not published",Breed and Weight Restrictions,https://www.apartmentlist.com/nj/clark/riverview-terrace,unconfirmed
+100 park plaza dr|07094,elevator,not stated on Apartment List or theharperapts.com,"amenities listed: Dog park, Pool, Garage (no 'Elevator' entry)",https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments,unconfirmed
+100 park plaza dr|07094,floor,"unknown (1414 may be building 1, floor 4)",unit '1414',https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments,unconfirmed
+100 park plaza dr|07094,dogs_allowed,yes,We love your dogs! No Breed or Weight Restrictions!. Please call our leasing office for complete pet policy information.,https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments,confirmed
+100 park plaza dr|07094,dog_weight_limit,no limit,We love your dogs! No Breed or Weight Restrictions!.,https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments,confirmed

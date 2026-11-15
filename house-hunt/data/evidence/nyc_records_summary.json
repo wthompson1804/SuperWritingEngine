@@ -1,0 +1,404 @@
+{
+ "as_of": "2026-11-15",
+ "built_at": "2026-11-15T20:50:19+00:00",
+ "candidates": 99,
+ "distinct_bbl": 89,
+ "requests_this_run": 26,
+ "periods": [
+  [
+   "last_6_months",
+   "2026-05-15",
+   "2026-11-15"
+  ],
+  [
+   "last_24_months",
+   "2024-11-15",
+   "2026-11-15"
+  ],
+  [
+   "2023",
+   "2023-01-01",
+   "2023-12-31"
+  ],
+  [
+   "2024",
+   "2024-01-01",
+   "2024-12-31"
+  ],
+  [
+   "2025",
+   "2025-01-01",
+   "2025-12-31"
+  ],
+  [
+   "2026_ytd",
+   "2026-01-01",
+   "2026-11-15"
+  ]
+ ],
+ "match_rates_by_bbl": {
+  "in_pluto": "89/89",
+  "in_hpd_buildings": "89/89",
+  "has_hpd_registration": "88/89",
+  "has_hpd_complaint_rows": "83/89",
+  "has_hpd_violation_rows": "87/89",
+  "has_311_rows": "88/89",
+  "has_dob_elevator_device": "86/89",
+  "has_bedbug_filing": "86/89",
+  "has_eviction_rows": "43/89"
+ },
+ "house_number_disagrees": [
+  {
+   "addr_key": "1875 atlantic ave|11233",
+   "bbl": "3017140030",
+   "pluto_address": "1885 ATLANTIC AVENUE"
+  },
+  {
+   "addr_key": "2925 w 5th st|11224",
+   "bbl": "3072740060",
+   "pluto_address": "2915 WEST 5 STREET"
+  },
+  {
+   "addr_key": "1010 rogers ave|11226",
+   "bbl": "3051370019",
+   "pluto_address": "1010-1012 ROGERS AVENUE"
+  },
+  {
+   "addr_key": "2165 clarendon rd|11226",
+   "bbl": "3051650059",
+   "pluto_address": "1127 FLATBUSH AVENUE"
+  },
+  {
+   "addr_key": "3420 ave h|11210",
+   "bbl": "3075790029",
+   "pluto_address": "3310 AVENUE H"
+  },
+  {
+   "addr_key": "142-38 37th ave|11354",
+   "bbl": "4050117504",
+   "pluto_address": "142-32 37 AVENUE"
+  },
+  {
+   "addr_key": "34-47 90th st h41 34-47 90th st jackson heights ny 11372 us|11372",
+   "bbl": "4014510047",
+   "pluto_address": "34-19 90 STREET"
+  },
+  {
+   "addr_key": "34-32 91st st e63 34-32 91st st jackson heights ny 11372 us|11372",
+   "bbl": "4014510012",
+   "pluto_address": "34-18 91 STREET"
+  },
+  {
+   "addr_key": "34-33 90th st e12 34-33 90th st jackson heights ny 11372 us|11372",
+   "bbl": "4014510047",
+   "pluto_address": "34-19 90 STREET"
+  },
+  {
+   "addr_key": "34-46 91st st h51 queens ny 11372 us|11372",
+   "bbl": "4014510012",
+   "pluto_address": "34-18 91 STREET"
+  },
+  {
+   "addr_key": "148-37 88th ave|11435",
+   "bbl": "4096940049",
+   "pluto_address": "148-33 88 AVENUE"
+  },
+  {
+   "addr_key": "148-33 90th ave|11435",
+   "bbl": "4096810095",
+   "pluto_address": "148-09 90 AVENUE"
+  },
+  {
+   "addr_key": "92-29 guy r brewer blvd|11433",
+   "bbl": "4101510075",
+   "pluto_address": "163-05 ARCHER AVENUE"
+  },
+  {
+   "addr_key": "138-28 queens blvd 5k new york ny 11435 usa|11435",
+   "bbl": "4096487501",
+   "pluto_address": "138-30 QUEENS BOULEVARD"
+  },
+  {
+   "addr_key": "147-14 84th rd|11435",
+   "bbl": "4097400142",
+   "pluto_address": "147-10 84 ROAD"
+  },
+  {
+   "addr_key": "84-18 143rd st|11435",
+   "bbl": "4097120186",
+   "pluto_address": "84-14 143 STREET"
+  },
+  {
+   "addr_key": "83-83 118th st|11415",
+   "bbl": "4033220156",
+   "pluto_address": "83-75 118 STREET"
+  },
+  {
+   "addr_key": "12333 83rd ave|11415",
+   "bbl": "4096310222",
+   "pluto_address": "123-10 83 AVENUE"
+  },
+  {
+   "addr_key": "3333 broadway new york ny 10031 us|10031",
+   "bbl": "1020010038",
+   "pluto_address": "614 WEST 135 STREET"
+  },
+  {
+   "addr_key": "61-57 84th st|11379",
+   "bbl": "4029450001",
+   "pluto_address": "61-88 DRY HARBOR ROAD"
+  },
+  {
+   "addr_key": "103-14 northern blvd|11368",
+   "bbl": "4017180005",
+   "pluto_address": "103-12 NORTHERN BLVD"
+  },
+  {
+   "addr_key": "1105 30th rd|11102",
+   "bbl": "4005060029",
+   "pluto_address": "30-15 VERNON BOULEVARD"
+  },
+  {
+   "addr_key": "1890 pelham pkwy s 4g 1890 pelham pkwy s bronx ny 10461 us|10461",
+   "bbl": "2042510030",
+   "pluto_address": "2135 COLONIAL AVENUE"
+  },
+  {
+   "addr_key": "2750 e 12th st|11235",
+   "bbl": "3087630013",
+   "pluto_address": "1133 BANNER AVENUE"
+  },
+  {
+   "addr_key": "255 e 61st st|10065",
+   "bbl": "1014160021",
+   "pluto_address": "1161 2 AVENUE"
+  },
+  {
+   "addr_key": "630 w 163rd st|10032",
+   "bbl": "1021370091",
+   "pluto_address": "86 FT WASHINGTON AVENUE"
+  }
+ ],
+ "bbl_without_bin": [],
+ "non_D_class": [
+  {
+   "bbl": "3039647501",
+   "pluto_address": "2840 ATLANTIC AVENUE",
+   "pluto_bldgclass": "RM",
+   "pluto_unitsres": "320"
+  },
+  {
+   "bbl": "4050117504",
+   "pluto_address": "142-32 37 AVENUE",
+   "pluto_bldgclass": "RM",
+   "pluto_unitsres": "88"
+  },
+  {
+   "bbl": "4031597501",
+   "pluto_address": "98-76 QUEENS BOULEVARD",
+   "pluto_bldgclass": "RM",
+   "pluto_unitsres": "66"
+  },
+  {
+   "bbl": "4030997501",
+   "pluto_address": "95-08 65 ROAD",
+   "pluto_bldgclass": "RM",
+   "pluto_unitsres": "22"
+  },
+  {
+   "bbl": "4021127501",
+   "pluto_address": "63-60 102 STREET",
+   "pluto_bldgclass": "R4",
+   "pluto_unitsres": "139"
+  },
+  {
+   "bbl": "4099987502",
+   "pluto_address": "147-25 94TH AVENUE",
+   "pluto_bldgclass": "RM",
+   "pluto_unitsres": "543"
+  },
+  {
+   "bbl": "4096810095",
+   "pluto_address": "148-09 90 AVENUE",
+   "pluto_bldgclass": "C1",
+   "pluto_unitsres": "10"
+  },
+  {
+   "bbl": "4096487501",
+   "pluto_address": "138-30 QUEENS BOULEVARD",
+   "pluto_bldgclass": "RM",
+   "pluto_unitsres": "64"
+  },
+  {
+   "bbl": "4096310222",
+   "pluto_address": "123-10 83 AVENUE",
+   "pluto_bldgclass": "C3",
+   "pluto_unitsres": "4"
+  },
+  {
+   "bbl": "1020010038",
+   "pluto_address": "614 WEST 135 STREET",
+   "pluto_bldgclass": "C1",
+   "pluto_unitsres": "187"
+  },
+  {
+   "bbl": "5004877501",
+   "pluto_address": "NAVY PIER COURT",
+   "pluto_bldgclass": "RM",
+   "pluto_unitsres": "467"
+  }
+ ],
+ "evictions_matched_by_address": {},
+ "dob_complaints_dataset": "eabe-havv as retrieved holds 866335 rows, latest date_entered year 2022",
+ "dob_complaints_years": {
+  "2022": 1224,
+  "2021": 673,
+  "2020": 555,
+  "2019": 8070,
+  "2018": 10433,
+  "2017": 33371,
+  "2016": 31613,
+  "2015": 13436
+ },
+ "baseline_population": 13370,
+ "baseline_all_20plus": {
+  "heat_hot_water_complaints|last_24_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.3045,
+   "median_per_100_units": 5.48,
+   "p80_per_100_units": 38.75,
+   "p90_per_100_units": 80.56,
+   "p95_per_100_units": 138.6
+  },
+  "heat_hot_water_complaints|last_6_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.6645,
+   "median_per_100_units": 0.0,
+   "p80_per_100_units": 2.7,
+   "p90_per_100_units": 6.82,
+   "p95_per_100_units": 13.64
+  },
+  "pest_complaints|last_24_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.5196,
+   "median_per_100_units": 0.0,
+   "p80_per_100_units": 8.16,
+   "p90_per_100_units": 17.86,
+   "p95_per_100_units": 31.46
+  },
+  "pest_complaints|last_6_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.6964,
+   "median_per_100_units": 0.0,
+   "p80_per_100_units": 2.27,
+   "p90_per_100_units": 5.66,
+   "p95_per_100_units": 10.43
+  },
+  "mold_complaints|last_24_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.5584,
+   "median_per_100_units": 0.0,
+   "p80_per_100_units": 4.76,
+   "p90_per_100_units": 10.1,
+   "p95_per_100_units": 16.67
+  },
+  "mold_complaints|last_6_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.7504,
+   "median_per_100_units": 0.0,
+   "p80_per_100_units": 1.28,
+   "p90_per_100_units": 3.12,
+   "p95_per_100_units": 5.46
+  },
+  "elevator_complaints|last_24_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.5944,
+   "median_per_100_units": 0.0,
+   "p80_per_100_units": 4.09,
+   "p90_per_100_units": 10.42,
+   "p95_per_100_units": 19.4
+  },
+  "elevator_complaints|last_6_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.7764,
+   "median_per_100_units": 0.0,
+   "p80_per_100_units": 0.62,
+   "p90_per_100_units": 2.9,
+   "p95_per_100_units": 6.25
+  },
+  "hpd_elevator_complaints|last_24_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.8902,
+   "median_per_100_units": 0.0,
+   "p80_per_100_units": 0.0,
+   "p90_per_100_units": 0.62,
+   "p95_per_100_units": 2.17
+  },
+  "hpd_elevator_complaints|last_6_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.9533,
+   "median_per_100_units": 0.0,
+   "p80_per_100_units": 0.0,
+   "p90_per_100_units": 0.0,
+   "p95_per_100_units": 0.0
+  },
+  "class_c_violations|last_24_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.3693,
+   "median_per_100_units": 4.23,
+   "p80_per_100_units": 32.98,
+   "p90_per_100_units": 67.19,
+   "p95_per_100_units": 111.11
+  },
+  "class_c_violations|last_6_months": {
+   "buildings_n": 13370,
+   "share_with_zero": 0.597,
+   "median_per_100_units": 0.0,
+   "p80_per_100_units": 6.45,
+   "p90_per_100_units": 15.79,
+   "p95_per_100_units": 28.26
+  }
+ },
+ "flag_counts_by_addr_key": {
+  "elevator_complaints_24m_ge_3": 30,
+  "elevator_complaints_6m_ge_1": 24,
+  "mold_complaints_24m_above_p90": 12,
+  "elevator_complaints_24m_above_p90": 12,
+  "pest_complaints_24m_above_p90": 9,
+  "mold_complaints_6m_above_p90": 9,
+  "class_c_violations_6m_above_p90": 9,
+  "pest_complaints_6m_above_p90": 8,
+  "heat_hot_water_complaints_24m_above_p90": 7,
+  "class_c_violations_24m_above_p90": 7,
+  "elevator_complaints_6m_above_p90": 6,
+  "heat_hot_water_complaints_6m_above_p90": 5
+ },
+ "addr_keys_with_flags": 44,
+ "bbls_with_flags": 38,
+ "retrieved_at_by_query": {
+  "baseline_class_c_violations": "2026-11-15T20:50:19+00:00",
+  "baseline_elevator_complaints": "2026-11-15T20:50:06+00:00",
+  "baseline_heat_hot_water_complaints": "2026-11-15T20:49:53+00:00",
+  "baseline_hpd_elevator_complaints": "2026-11-15T20:50:10+00:00",
+  "baseline_mold_complaints": "2026-11-15T20:50:03+00:00",
+  "baseline_pest_complaints": "2026-11-15T20:50:01+00:00",
+  "bedbug": "2026-11-15T20:49:20+00:00",
+  "dob_compl": "2026-11-15T20:49:41+00:00",
+  "dob_compl_years": "2026-11-15T20:49:42+00:00",
+  "dob_elev": "2026-11-15T20:49:18+00:00",
+  "dob_safety_viol": "2026-11-15T20:49:19+00:00",
+  "evictions": "2026-11-15T20:49:21+00:00",
+  "evictions_addr": "2026-11-15T20:49:22+00:00",
+  "hpd_bldg": "2026-11-15T20:49:27+00:00",
+  "hpd_compl": "2026-11-15T20:49:13+00:00",
+  "hpd_contacts": "2026-11-15T20:49:40+00:00",
+  "hpd_reg": "2026-11-15T20:49:28+00:00",
+  "hpd_viol": "2026-11-15T20:49:11+00:00",
+  "pluto": "2026-11-15T20:49:09+00:00",
+  "pluto_population": "2026-11-15T20:49:44+00:00",
+  "sr311": "2026-11-15T20:49:17+00:00"
+ },
+ "failures": [
+  "DOB Complaints Received (eabe-havv): eabe-havv as retrieved holds 866335 rows, latest date_entered year 2022; no rows in any reporting period, so DOB elevator complaints are taken from 311 (complaint_type 'Elevator', agency DOB) instead"
+ ]
+}

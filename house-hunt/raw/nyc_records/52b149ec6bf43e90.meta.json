@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/eabe-havv.json?%24select=substring%28date_entered%2C7%2C4%29+as+y%2Ccount%28%2A%29+as+n&%24group=y&%24order=y+DESC&%24limit=50000&%24offset=0",
+ "retrieved_at": "2026-11-15T20:49:42+00:00",
+ "status": 200,
+ "path": "raw/nyc_records/52b149ec6bf43e90.json",
+ "source": "nyc_records"
+}

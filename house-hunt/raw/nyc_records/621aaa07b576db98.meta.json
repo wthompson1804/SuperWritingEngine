@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/ygpa-z7cr.json?%24select=bbl%2Ccount%28%2A%29+as+n24%2Csum%28case%28received_date%3E%3D%272026-05-15%27%2C1%2Ctrue%2C0%29%29+as+n6&%24where=received_date%3E%3D%272024-11-15%27+AND+received_date%3C%272026-11-16%27+AND+major_category%3D%27ELEVATOR%27&%24group=bbl&%24order=bbl&%24limit=50000&%24offset=0",
+ "retrieved_at": "2026-11-15T20:50:10+00:00",
+ "status": 200,
+ "path": "raw/nyc_records/621aaa07b576db98.json",
+ "source": "nyc_records"
+}

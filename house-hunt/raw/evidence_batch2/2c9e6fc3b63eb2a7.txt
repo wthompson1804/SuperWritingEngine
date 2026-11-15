@@ -1,0 +1,9 @@
+Sitemap: https://www.solarislofts.com/sitemap.xml
+User-Agent: *
+Disallow: 
+Disallow: /floorplans/tour/
+Disallow: /interior_decorator_app/
+Disallow: /interior_decorator/
+Disallow: /newsletters/viewer/
+
+

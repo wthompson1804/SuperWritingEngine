@@ -1,0 +1,276 @@
+addr_key,fact,value,quote,source_url
+300 prospect ave|07601,year_built,1988,year_built: 1988,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,total_units,360,total_units_count: 360,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,management_company,Khosla Capital LLC,pmc_display_name: Khosla Capital LLC,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,parking,Parking Garage: $50/month Assigned Space,Parking Garage: $50/month Assigned Space,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,pet_rent (general),$50/month per pet,pet_policies.general.rent: $50/month per pet,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,pet_fee (general),$500 per pet (non refundable),pet_policies.general.fee: $500 per pet (non refundable),https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,pet_limit (general),2 pets per apartment,pet_policies.general.limit: 2 pets per apartment,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,additional_fees,Trash $2/month,Trash $2/month,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,storage,$35-$200/month (Depending on size),$35-$200/month (Depending on size),https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,pool,yes (indoor/outdoor not stated),amenity list: Pool,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,doorman,yes,amenity list: Doorman,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,concierge,yes,amenity list: Concierge,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,building_site,https://www.prospectplaceapts.com/,website_url,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+300 prospect ave|07601,lease_terms,6-15 months,6-15 months,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+345 prospect ave|07601,year_built,1978,year_built: 1978,https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments
+345 prospect ave|07601,total_units,74,total_units_count: 74,https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments
+345 prospect ave|07601,management_company,Goldberg Realty Associates,pmc_display_name: Goldberg Realty Associates,https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments
+345 prospect ave|07601,pet_rent (dogs),$50,pet_policies.dogs.rent: $50,https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments
+345 prospect ave|07601,pet_fee (general),$250,pet_policies.general.fee: $250,https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments
+345 prospect ave|07601,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments
+345 prospect ave|07601,utilities_included,"Cable, Hot Water, Sewer, Trash, Water","Cable, Hot Water, Sewer, Trash, Water",https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments
+345 prospect ave|07601,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments
+345 prospect ave|07601,building_site,https://www.goldberg-realty.com/nj/hackensack/grand-imperial-apts/index.aspx,website_url,https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments
+345 prospect ave|07601,lease_terms,12 months,12 months,https://www.apartmentlist.com/nj/hackensack/grand-imperial-apartments
+390 prospect ave|07601,year_built,1986,year_built: 1986,https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+390 prospect ave|07601,total_units,51,total_units_count: 51,https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+390 prospect ave|07601,management_company,Goldberg Realty Associates,pmc_display_name: Goldberg Realty Associates,https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+390 prospect ave|07601,pet_rent (dogs),$50,pet_policies.dogs.rent: $50,https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+390 prospect ave|07601,pet_limit (dogs),2,pet_policies.dogs.limit: 2,https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+390 prospect ave|07601,pet_fee (general),$250,pet_policies.general.fee: $250,https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+390 prospect ave|07601,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+390 prospect ave|07601,utilities_included,"Gas, Hot Water, Sewer, Trash, Water","Gas, Hot Water, Sewer, Trash, Water",https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+390 prospect ave|07601,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+390 prospect ave|07601,building_site,https://www.goldberg-realty.com/nj/hackensack/imperial-apts-0/index.aspx,website_url,https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+390 prospect ave|07601,lease_terms,12 months,12 months,https://www.apartmentlist.com/nj/hackensack/imperial-apartments
+1100 s 5th st|07029,year_built,2023,year_built: 2023,https://www.apartmentlist.com/nj/harrison/the-wyldes
+1100 s 5th st|07029,total_units,399,total_units_count: 399,https://www.apartmentlist.com/nj/harrison/the-wyldes
+1100 s 5th st|07029,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/harrison/the-wyldes
+1100 s 5th st|07029,pool,yes (indoor/outdoor not stated),amenity list: Pool,https://www.apartmentlist.com/nj/harrison/the-wyldes
+1100 s 5th st|07029,concierge,yes,amenity list: Concierge,https://www.apartmentlist.com/nj/harrison/the-wyldes
+1100 s 5th st|07029,building_site,https://www.thewyldes.com/,website_url,https://www.apartmentlist.com/nj/harrison/the-wyldes
+1200 s fifth st|07029,year_built,2018,year_built: 2018,https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
+1200 s fifth st|07029,total_units,280,total_units_count: 280,https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
+1200 s fifth st|07029,parking,Reserved indoor: $150/month,Reserved indoor: $150/month,https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
+1200 s fifth st|07029,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
+1200 s fifth st|07029,additional_fees,Renter's insurance required,Renter's insurance required,https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
+1200 s fifth st|07029,pool,yes (indoor/outdoor not stated),amenity list: Pool,https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
+1200 s fifth st|07029,concierge,yes,amenity list: Concierge,https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
+1200 s fifth st|07029,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
+1200 s fifth st|07029,building_site,https://www.cobaltlofts.com/,website_url,https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
+1200 s fifth st|07029,lease_terms,"13, 18, 26 months","13, 18, 26 months",https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
+1200 frank e rodgers blvd s|07029,total_units,286,total_units_count: 286,https://www.apartmentlist.com/nj/harrison/steel-works
+1200 frank e rodgers blvd s|07029,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/harrison/steel-works
+1200 frank e rodgers blvd s|07029,pool,yes (indoor/outdoor not stated),amenity list: Pool,https://www.apartmentlist.com/nj/harrison/steel-works
+1200 frank e rodgers blvd s|07029,concierge,yes,amenity list: Concierge,https://www.apartmentlist.com/nj/harrison/steel-works
+1200 frank e rodgers blvd s|07029,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/harrison/steel-works
+1200 frank e rodgers blvd s|07029,building_site,https://www.steelworksapts.com/,website_url,https://www.apartmentlist.com/nj/harrison/steel-works
+600 frank e rodgers blvd s|07029,year_built,2021,year_built: 2021,https://www.apartmentlist.com/nj/harrison/harrison-yards
+600 frank e rodgers blvd s|07029,total_units,205,total_units_count: 205,https://www.apartmentlist.com/nj/harrison/harrison-yards
+600 frank e rodgers blvd s|07029,concierge,yes,amenity list: Concierge,https://www.apartmentlist.com/nj/harrison/harrison-yards
+600 frank e rodgers blvd s|07029,building_site,https://www.harrisonyards.com/,website_url,https://www.apartmentlist.com/nj/harrison/harrison-yards
+204 wagaraw rd|07506,year_built,2023,year_built: 2023,https://www.apartmentlist.com/nj/hawthorne/hedges-at-hawthorne
+204 wagaraw rd|07506,total_units,118,total_units_count: 118,https://www.apartmentlist.com/nj/hawthorne/hedges-at-hawthorne
+204 wagaraw rd|07506,pet_rent (general),50.0,pet_policies.general.rent: 50.0,https://www.apartmentlist.com/nj/hawthorne/hedges-at-hawthorne
+204 wagaraw rd|07506,building_site,http://www.hedgesathawthorne.com,website_url,https://www.apartmentlist.com/nj/hawthorne/hedges-at-hawthorne
+110 hoboken ave|07310,year_built,2021,year_built: 2021,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,total_units,238,total_units_count: 238,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,management_company,BNE Real Estate Group,pmc_display_name: BNE Real Estate Group,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,parking,Garage Covered: $225/Month,Garage Covered: $225/Month,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,pet_rent (general),$50 Per Pet,pet_policies.general.rent: $50 Per Pet,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,pet_fee (general),$500 Per Pet,pet_policies.general.fee: $500 Per Pet,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,storage,$55-110/Month,$55-110/Month,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,pool,yes (indoor/outdoor not stated),amenity list: Pool,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,concierge,yes,amenity list: 24hr concierge,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,building_site,https://www.onetenjc.com/,website_url,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+110 hoboken ave|07310,lease_terms,9-26 months,9-26 months,https://www.apartmentlist.com/nj/jersey-city/one-ten-at-the-enclave
+270 johnston ave|07304,total_units,169,total_units_count: 169,https://www.apartmentlist.com/nj/jersey-city/atlas--1
+270 johnston ave|07304,additional_fees,"Unit Preparation Fee: $350, Amenity: $75, Water/Sewer: RUBS, Trash: $20, Internet: $65","Unit Preparation Fee: $350, Amenity: $75, Water/Sewer: RUBS, Trash: $20, Internet: $65",https://www.apartmentlist.com/nj/jersey-city/atlas--1
+270 johnston ave|07304,pool,yes (indoor/outdoor not stated),amenity list: Pool,https://www.apartmentlist.com/nj/jersey-city/atlas--1
+270 johnston ave|07304,doorman,yes,amenity list: Doorman,https://www.apartmentlist.com/nj/jersey-city/atlas--1
+270 johnston ave|07304,concierge,yes,amenity list: 24hr concierge,https://www.apartmentlist.com/nj/jersey-city/atlas--1
+270 johnston ave|07304,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/jersey-city/atlas--1
+270 johnston ave|07304,building_site,https://www.atlasjc.com/,website_url,https://www.apartmentlist.com/nj/jersey-city/atlas--1
+89 monitor st|07304,year_built,2022,year_built: 2022,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city
+89 monitor st|07304,total_units,114,total_units_count: 114,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city
+89 monitor st|07304,pet_rent (general),50.0,pet_policies.general.rent: 50.0,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city
+89 monitor st|07304,pet_fee (general),500.0,pet_policies.general.fee: 500.0,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city
+89 monitor st|07304,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city
+89 monitor st|07304,additional_fees,Unit Preparation Fee: $350,Unit Preparation Fee: $350,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city
+89 monitor st|07304,pool,yes (indoor/outdoor not stated),amenity list: Pool,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city
+89 monitor st|07304,concierge,yes,amenity list: Concierge,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city
+89 monitor st|07304,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city
+89 monitor st|07304,building_site,https://www.thehazeljc.com/,website_url,https://www.apartmentlist.com/nj/jersey-city/the-hazel-jersey-city
+155 washington st|07302,year_built,1992,year_built: 1992,https://www.apartmentlist.com/nj/jersey-city/portside-towers
+155 washington st|07302,total_units,527,total_units_count: 527,https://www.apartmentlist.com/nj/jersey-city/portside-towers
+155 washington st|07302,management_company,Equity Residential,pmc_display_name: Equity Residential,https://www.apartmentlist.com/nj/jersey-city/portside-towers
+155 washington st|07302,pet_rent (dogs),80.00,pet_policies.dogs.rent: 80.00,https://www.apartmentlist.com/nj/jersey-city/portside-towers
+155 washington st|07302,pet_fee (dogs),450.00,pet_policies.dogs.fee: 450.00,https://www.apartmentlist.com/nj/jersey-city/portside-towers
+155 washington st|07302,pet_limit (general),3,pet_policies.general.limit: 3,https://www.apartmentlist.com/nj/jersey-city/portside-towers
+155 washington st|07302,concierge,yes,amenity list: 24hr concierge,https://www.apartmentlist.com/nj/jersey-city/portside-towers
+155 washington st|07302,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/jersey-city/portside-towers
+155 washington st|07302,building_site,https://www.equityapartments.com/new-york-city/jersey-city/portside-towers-apartments,website_url,https://www.apartmentlist.com/nj/jersey-city/portside-towers
+2935 john f kennedy blvd|07306,year_built,2015,year_built: 2015,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,total_units,220,total_units_count: 220,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,parking,Garage parking: $200,Garage parking: $200,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,pet_rent (general),65.0,pet_policies.general.rent: 65.0,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,pet_fee (general),500,pet_policies.general.fee: 500,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,utilities_included,Hot Water,Hot Water,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,doorman,yes,amenity list: Doorman,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,concierge,yes,amenity list: 24hr concierge,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,building_site,https://www.threejournalsquare.com/,website_url,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+2935 john f kennedy blvd|07306,lease_terms,3-12 months,3-12 months,https://www.apartmentlist.com/nj/jersey-city/3-journal-square--2
+49 fisk st|07305,total_units,337,total_units_count: 337,https://www.apartmentlist.com/nj/jersey-city/birch-house
+49 fisk st|07305,concierge,yes,amenity list: Concierge,https://www.apartmentlist.com/nj/jersey-city/birch-house
+49 fisk st|07305,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/jersey-city/birch-house
+49 fisk st|07305,building_site,https://www.birchhousejc.com/,website_url,https://www.apartmentlist.com/nj/jersey-city/birch-house
+65 maple st|07304,year_built,2019,year_built: 2019,https://www.apartmentlist.com/nj/jersey-city/solaris-lofts--1
+65 maple st|07304,total_units,72,total_units_count: 72,https://www.apartmentlist.com/nj/jersey-city/solaris-lofts--1
+65 maple st|07304,pet_rent (general),50.0,pet_policies.general.rent: 50.0,https://www.apartmentlist.com/nj/jersey-city/solaris-lofts--1
+65 maple st|07304,pet_fee (general),500.0,pet_policies.general.fee: 500.0,https://www.apartmentlist.com/nj/jersey-city/solaris-lofts--1
+65 maple st|07304,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/jersey-city/solaris-lofts--1
+65 maple st|07304,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/jersey-city/solaris-lofts--1
+65 maple st|07304,building_site,https://www.solarislofts.com/,website_url,https://www.apartmentlist.com/nj/jersey-city/solaris-lofts--1
+189 phillip st|07305,total_units,500,total_units_count: 500,https://www.apartmentlist.com/nj/jersey-city/aviva
+189 phillip st|07305,pet_rent (general),55.0,pet_policies.general.rent: 55.0,https://www.apartmentlist.com/nj/jersey-city/aviva
+189 phillip st|07305,pet_fee (general),600.0,pet_policies.general.fee: 600.0,https://www.apartmentlist.com/nj/jersey-city/aviva
+189 phillip st|07305,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/jersey-city/aviva
+189 phillip st|07305,pool,yes (indoor/outdoor not stated),amenity list: Pool,https://www.apartmentlist.com/nj/jersey-city/aviva
+189 phillip st|07305,concierge,yes,amenity list: Concierge,https://www.apartmentlist.com/nj/jersey-city/aviva
+189 phillip st|07305,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/jersey-city/aviva
+189 phillip st|07305,building_site,https://avivajc.com/,website_url,https://www.apartmentlist.com/nj/jersey-city/aviva
+1075 w side ave|07306,total_units,477,total_units_count: 477,https://www.apartmentlist.com/nj/jersey-city/west-side-square
+1075 w side ave|07306,pet_rent (general),65.0,pet_policies.general.rent: 65.0,https://www.apartmentlist.com/nj/jersey-city/west-side-square
+1075 w side ave|07306,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/jersey-city/west-side-square
+1075 w side ave|07306,pool,yes (indoor/outdoor not stated),amenity list: Pool,https://www.apartmentlist.com/nj/jersey-city/west-side-square
+1075 w side ave|07306,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/jersey-city/west-side-square
+1075 w side ave|07306,building_site,https://www.westsidesquare.com/,website_url,https://www.apartmentlist.com/nj/jersey-city/west-side-square
+200 boyden ave|07040,year_built,2017,year_built: 2017,https://www.apartmentlist.com/nj/newark/avalon-maplewood
+200 boyden ave|07040,total_units,235,total_units_count: 235,https://www.apartmentlist.com/nj/newark/avalon-maplewood
+200 boyden ave|07040,management_company,AvalonBay,pmc_display_name: AvalonBay,https://www.apartmentlist.com/nj/newark/avalon-maplewood
+200 boyden ave|07040,parking,Parking garage: $75/month; Assigned garage parking: $125,Parking garage: $75/month; Assigned garage parking: $125,https://www.apartmentlist.com/nj/newark/avalon-maplewood
+200 boyden ave|07040,pet_rent (general),$55 per month,pet_policies.general.rent: $55 per month,https://www.apartmentlist.com/nj/newark/avalon-maplewood
+200 boyden ave|07040,pet_fee (general),$500,pet_policies.general.fee: $500,https://www.apartmentlist.com/nj/newark/avalon-maplewood
+200 boyden ave|07040,utilities_included,"Sewer, Trash, Water","Sewer, Trash, Water",https://www.apartmentlist.com/nj/newark/avalon-maplewood
+200 boyden ave|07040,storage,Storage units: $35-$175/month,Storage units: $35-$175/month,https://www.apartmentlist.com/nj/newark/avalon-maplewood
+200 boyden ave|07040,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/newark/avalon-maplewood
+200 boyden ave|07040,building_site,https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood,website_url,https://www.apartmentlist.com/nj/newark/avalon-maplewood
+200 boyden ave|07040,lease_terms,11-18 months,11-18 months,https://www.apartmentlist.com/nj/newark/avalon-maplewood
+218-226 millburn ave|07041,total_units,32,total_units_count: 32,https://www.apartmentlist.com/nj/newark/218-millburn-avenue
+218-226 millburn ave|07041,management_company,Goldberg Realty Associates,pmc_display_name: Goldberg Realty Associates,https://www.apartmentlist.com/nj/newark/218-millburn-avenue
+218-226 millburn ave|07041,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/newark/218-millburn-avenue
+218-226 millburn ave|07041,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/newark/218-millburn-avenue
+218-226 millburn ave|07041,building_site,https://www.goldberg-realty.com/nj/millburn/218-millburn-avenue,website_url,https://www.apartmentlist.com/nj/newark/218-millburn-avenue
+34 valley rd|07042,year_built,2015,year_built: 2015,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,total_units,258,total_units_count: 258,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,management_company,LCOR,pmc_display_name: LCOR,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,parking,Unassigned parking is in a covered garage for $130 per month per vehicle. Contact ProPark- Valley & Bloom location for details.,Unassigned parking is in a covered garage for $130 per month per vehicle. Contact ProPark- Valley & Bloom location for details.,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,pet_rent (dogs),$60,pet_policies.dogs.rent: $60,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,pet_fee (general),$500,pet_policies.general.fee: $500,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,additional_fees,"Renter's insurance required, water/sewer, gas, electric, & parking","Renter's insurance required, water/sewer, gas, electric, & parking",https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,utilities_included,Trash,Trash,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,storage,Storage is limited at $125-$150 per month,Storage is limited at $125-$150 per month,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,concierge,yes,amenity list: Concierge,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,building_site,https://www.valleyandbloom.com/,website_url,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+34 valley rd|07042,lease_terms,3-14 months,3-14 months,https://www.apartmentlist.com/nj/upper-montclair/valley-and-bloom
+10 commerce ct|07102,pet_limit (general),1,pet_policies.general.limit: 1,https://www.apartmentlist.com/nj/newark/the-mercer-10-commerce-court-newark-nj
+80 freeman st|07105,year_built,2025,year_built: 2025,https://www.apartmentlist.com/nj/newark/the-ballantine--1
+80 freeman st|07105,total_units,280,total_units_count: 280,https://www.apartmentlist.com/nj/newark/the-ballantine--1
+80 freeman st|07105,concierge,yes,amenity list: Concierge,https://www.apartmentlist.com/nj/newark/the-ballantine--1
+80 freeman st|07105,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/newark/the-ballantine--1
+80 freeman st|07105,building_site,https://www.theballantine.com/,website_url,https://www.apartmentlist.com/nj/newark/the-ballantine--1
+263 franklin ave|07450,total_units,48,total_units_count: 48,https://www.apartmentlist.com/nj/ridgewood/263-franklin-avenue--1
+263 franklin ave|07450,management_company,Goldberg Realty Associates,pmc_display_name: Goldberg Realty Associates,https://www.apartmentlist.com/nj/ridgewood/263-franklin-avenue--1
+263 franklin ave|07450,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/ridgewood/263-franklin-avenue--1
+263 franklin ave|07450,utilities_included,"Hot Water, Sewer, Trash, Water","Hot Water, Sewer, Trash, Water",https://www.apartmentlist.com/nj/ridgewood/263-franklin-avenue--1
+263 franklin ave|07450,building_site,https://www.goldberg-realty.com/nj/ridgewood/263-franklin-ave-apts/index.aspx,website_url,https://www.apartmentlist.com/nj/ridgewood/263-franklin-avenue--1
+101-616 goodmans crossing|07076,year_built,1952,year_built: 1952,https://www.apartmentlist.com/nj/clark/riverview-terrace
+101-616 goodmans crossing|07076,total_units,120,total_units_count: 120,https://www.apartmentlist.com/nj/clark/riverview-terrace
+101-616 goodmans crossing|07076,management_company,Goldberg Realty Associates,pmc_display_name: Goldberg Realty Associates,https://www.apartmentlist.com/nj/clark/riverview-terrace
+101-616 goodmans crossing|07076,utilities_included,"Hot Water, Sewer, Trash, Water","Hot Water, Sewer, Trash, Water",https://www.apartmentlist.com/nj/clark/riverview-terrace
+101-616 goodmans crossing|07076,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/clark/riverview-terrace
+101-616 goodmans crossing|07076,building_site,https://www.goldberg-realty.com/nj/clark/riverview-terrace/index.aspx,website_url,https://www.apartmentlist.com/nj/clark/riverview-terrace
+101-616 goodmans crossing|07076,lease_terms,12 months,12 months,https://www.apartmentlist.com/nj/clark/riverview-terrace
+100 park plaza dr|07094,total_units,469,total_units_count: 469,https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments
+100 park plaza dr|07094,parking,"Parking: $125 – not included, assigned, covered, and uncovered.","Parking: $125 – not included, assigned, covered, and uncovered.",https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments
+100 park plaza dr|07094,pet_rent (general),65.0,pet_policies.general.rent: 65.0,https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments
+100 park plaza dr|07094,pet_limit (general),2,pet_policies.general.limit: 2,https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments
+100 park plaza dr|07094,pool,yes (indoor/outdoor not stated),amenity list: Pool,https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments
+100 park plaza dr|07094,garage,yes,amenity list: Garage,https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments
+100 park plaza dr|07094,building_site,https://www.theharperapts.com/,website_url,https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments
+100 park plaza dr|07094,lease_terms,3-15 months,3-15 months,https://www.apartmentlist.com/nj/secaucus/the-harper-at-harmon-meadow-apartments
+2 kinderkamack rd|07601,parking,"indoor garage; $100/month first car, $75 second, $200 third","Parking: $100/month for first car, $75/month for second car, $200/month for third car, subject to availability",https://www.gardencommunities.com/CMSPages/GetFile.aspx?guid=92b3fa11-3aac-4f96-8b37-6d2cec922a51
+2 kinderkamack rd|07601,pet_rent,$50/month for 1 pet; $75 for 2,Pet Rent: $50/month for 1 pet $75/month for 2 pets,https://www.gardencommunities.com/CMSPages/GetFile.aspx?guid=92b3fa11-3aac-4f96-8b37-6d2cec922a51
+2 kinderkamack rd|07601,pet_fee,$500 one-time first pet; $750 second,Pet Fee: $500 one-time non-refundable for first pet,https://www.gardencommunities.com/CMSPages/GetFile.aspx?guid=92b3fa11-3aac-4f96-8b37-6d2cec922a51
+2 kinderkamack rd|07601,required_monthly_fees,no amenity fee,Amenity Fee: No amenity fees,https://www.gardencommunities.com/CMSPages/GetFile.aspx?guid=92b3fa11-3aac-4f96-8b37-6d2cec922a51
+2 kinderkamack rd|07601,utilities,gas/electric and water/sewer paid by resident,Water/Sewer: Conservice - monthly charge paid directly to service provider by resident,https://www.gardencommunities.com/CMSPages/GetFile.aspx?guid=92b3fa11-3aac-4f96-8b37-6d2cec922a51
+2 kinderkamack rd|07601,pool,"outdoor, heated","Heated Outdoor Pool & Sundecks with Outdoor Kitchen, BBQs & Outdoor Dining Areas",https://www.gardencommunities.com/Properties/NJ/Bergen/The-Jefferson-Hackensack.aspx
+2 kinderkamack rd|07601,concierge,yes,Concierge-Attended Lobby,https://www.gardencommunities.com/Properties/NJ/Bergen/The-Jefferson-Hackensack.aspx
+2 kinderkamack rd|07601,management_company,Garden Communities,listing is on gardencommunities.com,https://www.gardencommunities.com/Properties/NJ/Bergen/The-Jefferson-Hackensack.aspx
+2 kinderkamack rd|07601,concession,"up to 3 months free plus $1,000 credit on select apartments",Up to 3 months free plus a $1000 move-in credit. All offers are on select apartments and lease terms may vary.,https://www.gardencommunities.com/Properties/NJ/Bergen/The-Jefferson-Hackensack.aspx
+2 kinderkamack rd|07601,security_deposit,half a month's rent,Security Deposit: 1/2 month's rent,https://www.gardencommunities.com/CMSPages/GetFile.aspx?guid=92b3fa11-3aac-4f96-8b37-6d2cec922a51
+100 julia dr|07885,pool,outdoor (Olympic-size heated saltwater) and indoor saltwater,"there's an Olympic-size heated saltwater pool ... spa facilities that include an indoor saltwater pool, saunas, a yoga studio",https://www.gardencommunities.com/Properties/NJ/Morris/Pondview-Estates.aspx
+100 julia dr|07885,required_monthly_fees,no amenity fee,No Amenity Fees,https://www.gardencommunities.com/Properties/NJ/Morris/Pondview-Estates.aspx
+100 julia dr|07885,management_company,Garden Communities,listing is on gardencommunities.com,https://www.gardencommunities.com/Properties/NJ/Morris/Pondview-Estates.aspx
+100 julia dr|07885,concession,"up to two months free on a 26-month lease plus $1,500 credit, select apartments",Up to two months free on a new 26-month lease plus a $1500 move-in credit on select apartments for a limited time.,https://www.gardencommunities.com/Properties/NJ/Morris/Pondview-Estates.aspx
+20 beacon way|07304,pool,"indoor, with hot tub",Indoor Pool & Hot Tub,https://bltliveworkplay.com/apartments/jersey-city/the-beacon/
+20 beacon way|07304,management_company,Building and Land Technology (BLT),listing is on bltliveworkplay.com,https://bltliveworkplay.com/apartments/jersey-city/the-beacon/
+20 beacon way|07304,shuttle,free shuttle,Free Shuttle Service,https://bltliveworkplay.com/apartments/jersey-city/the-beacon/
+600 frank e rodgers blvd s|07029,parking,surface lot $225; covered lot $250; assigned,Parking Type: Surface Lot Parking Parking Fee: 225 ... Parking Type: Covered Lot Parking Parking Fee: 250,https://www.harrisonyards.com/amenities.aspx
+600 frank e rodgers blvd s|07029,pet_rent,$65 per pet,$65 pet rent monthly per pet,https://www.harrisonyards.com/amenities.aspx
+600 frank e rodgers blvd s|07029,pet_fee,$500 one-time per pet,$500 one-time fee per pet,https://www.harrisonyards.com/amenities.aspx
+600 frank e rodgers blvd s|07029,concierge,yes,Concierge services,https://www.harrisonyards.com/amenities.aspx
+600 frank e rodgers blvd s|07029,management_company,Greystar (site footer links to greystar.com),greystar.com links in site footer,https://www.harrisonyards.com/
+2935 john f kennedy blvd|07306,pet_rent,$65 monthly,Upfront $500 non-refundable pet fee and a $65 monthly dog rent and a $65 monthly cat rent.,https://www.threejournalsquare.com/features.aspx
+2935 john f kennedy blvd|07306,concession,"up to $2,000 off studios and 1BRs",3 Journal Square now offering up to $2000 off for studio and 1-bedroom units.,https://www.threejournalsquare.com/features.aspx
+2935 john f kennedy blvd|07306,management_company,Greystar (site footer links to greystar.com),greystar.com links in site footer,https://www.threejournalsquare.com/
+2935 john f kennedy blvd|07306,concierge,24/7,24/7 Concierge,https://www.threejournalsquare.com/features.aspx
+189 phillip st|07305,parking,"on-site garage, 150 spaces, $275/month",AVIVA offers an on-site parking garage with 150 parking spaces and EV charging stations. Parking is available for $275 per month,https://avivajc.com/faq
+189 phillip st|07305,pet_rent,$55 per pet,There is a one-time non-refundable pet fee of $600 per pet and monthly pet rent of $55 per pet.,https://avivajc.com/faq
+189 phillip st|07305,pool,rooftop (outdoor),"Our rooftop pool, sky lounge, communal kitchen, and outdoor gathering spaces",https://avivajc.com/faq
+189 phillip st|07305,concierge,24-hour,AVIVA offers 24-hour concierge service,https://avivajc.com/faq
+100 park plaza dr|07094,management_company,Greystar (site footer links to greystar.com),greystar.com links in site footer,https://www.theharperapts.com/
+100 park plaza dr|07094,pool,yes (outdoor implied: 'with Lounge Chairs'),Swimming Pool with Lounge Chairs,https://www.theharperapts.com/amenities/
+89 monitor st|07304,pool,rooftop (outdoor),Rooftop Terrace With Pool,https://thehazeljc.com/page/amenities.php
+270 johnston ave|07304,pool,rooftop (outdoor),Rooftop Pool,https://www.atlasjc.com/amenities
+270 johnston ave|07304,concession,2 months free on select homes; rents shown are net-effective,*2 Month Free on select apartment homes Specials vary based on the lease term. Rents reflect net-effective pricing.,https://www.atlasjc.com/amenities
+65 maple st|07304,price_basis,"rents shown are net-effective, including concessions",Rents reflect net-effective pricing inclusive of concessions.,https://www.solarislofts.com/faq/
+1100 s 5th st|07029,parking,on-site covered,On-Site Covered Parking,https://www.thewyldes.com/amenities
+1100 s 5th st|07029,pool,outdoor (courtyard infinity pool),"Resort Style, Infinity Edge Pool with In-water Chaise Lounges",https://www.thewyldes.com/amenities
+1100 s 5th st|07029,management_company,Bozzuto (site links to BozzutoResidents.com),BozzutoResidents.com link,https://www.thewyldes.com/
+49 fisk st|07305,parking,"indoor garage, extra fee",Indoor Parking Garage with Electric Vehicle Charging Available*,https://www.birchhousejc.com/amenities
+49 fisk st|07305,concierge,daytime only,Day Time Concierge,https://www.birchhousejc.com/amenities
+49 fisk st|07305,management_company,Bozzuto (site links to MyBozzuto.com),MyBozzuto.com link,https://www.birchhousejc.com/
+49 fisk st|07305,shuttle,to Journal Square PATH,Shuttle to Journal Square PATH Station,https://www.birchhousejc.com/amenities
+120 neilson st|08901,parking,Parking $195 monthly,fee table: Parking $195 monthly,https://www.greystar.com/the-quincy-new-brunswick-nj/p_17425
+120 neilson st|08901,required_monthly_fees,Trash Services - Doorstep $35 monthly (required),fee table: Trash Services - Doorstep $35 monthly (required),https://www.greystar.com/the-quincy-new-brunswick-nj/p_17425
+120 neilson st|08901,pet_rent,$65 monthly,fee table: Pet Rent 65 monthly,https://www.greystar.com/the-quincy-new-brunswick-nj/p_17425
+120 neilson st|08901,management_company,Greystar,listing is on greystar.com,https://www.greystar.com/the-quincy-new-brunswick-nj/p_17425
+508 51st st|07093,parking,Parking - Garage $200 monthly,fee table: Parking - Garage $200 monthly,https://www.greystar.com/the-grand-west-new-york-nj/p_22449
+508 51st st|07093,required_monthly_fees,Trash Services - Hauling $25 monthly (required),fee table: Trash Services - Hauling $25 monthly (required),https://www.greystar.com/the-grand-west-new-york-nj/p_22449
+508 51st st|07093,pet_rent,$65 monthly,fee table: Pet Rent 65 monthly,https://www.greystar.com/the-grand-west-new-york-nj/p_22449
+508 51st st|07093,management_company,Greystar,listing is on greystar.com,https://www.greystar.com/the-grand-west-new-york-nj/p_22449
+500 parq ln|07054,parking,Parking $150 monthly,fee table: Parking $150 monthly,https://www.greystar.com/500-parq-parisppany-nj/p_20984
+500 parq ln|07054,required_monthly_fees,Trash Services - Hauling $15 monthly (required),fee table: Trash Services - Hauling $15 monthly (required),https://www.greystar.com/500-parq-parisppany-nj/p_20984
+500 parq ln|07054,pet_rent,$65 monthly,fee table: Pet Rent 65 monthly,https://www.greystar.com/500-parq-parisppany-nj/p_20984
+500 parq ln|07054,management_company,Greystar,listing is on greystar.com,https://www.greystar.com/500-parq-parisppany-nj/p_20984
+120 neilson st|08901,pool,yes (cabanas: outdoor implied),Swimming Pool w/Cabanas,https://www.greystar.com/the-quincy-new-brunswick-nj/p_17425
+500 parq ln|07054,pool,outdoor,Sparkling pool & sun deck,https://www.greystar.com/500-parq-parisppany-nj/p_20984
+500 parq ln|07054,building_floors,6,Our six-story architectural design,https://www.greystar.com/500-parq-parisppany-nj/p_20984
+120 neilson st|08901,pet_fee,$500 one-time,fee table: Pet Fee 500 one_time,https://www.greystar.com/the-quincy-new-brunswick-nj/p_17425
+508 51st st|07093,pet_fee,$500 one-time,fee table: Pet Fee 500 one_time,https://www.greystar.com/the-grand-west-new-york-nj/p_22449
+500 parq ln|07054,pet_fee,$600 one-time,fee table: Pet Fee 600 one_time,https://www.greystar.com/500-parq-parisppany-nj/p_20984
+30 clinton st newark nj 07102 usa|07102,pet_rent,$50 monthly,Tenant will pay an additional $50.00 Pet Fee every month,https://www.zumper.com/apartment-buildings/p1647219/clinton-flats-newark-central-business-district-newark-nj
+30 clinton st newark nj 07102 usa|07102,pet_deposit,$500,An additional $50.00 monthly pet fee and an additional $500.00 pet deposit are required when applicable.,https://www.zumper.com/apartment-buildings/p1647219/clinton-flats-newark-central-business-district-newark-nj
+30 clinton st newark nj 07102 usa|07102,building_size,30 Clinton has 20 studio and one-bedroom apartments,30 Clinton offers 20 studio and one-bedroom apartments,https://www.zumper.com/apartment-buildings/p1647219/clinton-flats-newark-central-business-district-newark-nj
+9060 palisade ave d710 n bergen nj 07047 usa|07047,pool,outdoor,"an outdoor swimming pool, fitness facilities, an elevator, and a community room",https://www.zumper.com/listings/30002373p/1-bedroom-north-bergen-nj
+9060 palisade ave d710 n bergen nj 07047 usa|07047,doorman,yes,Services: Door Attendant,https://www.zumper.com/listings/30002373p/1-bedroom-north-bergen-nj
+9060 palisade ave d710 n bergen nj 07047 usa|07047,parking,garage; availability to be confirmed,Parking availability can be confirmed during the leasing process.,https://www.zumper.com/listings/30002373p/1-bedroom-north-bergen-nj
+9060 palisade ave d710 n bergen nj 07047 usa|07047,listing_type,condo unit,"1 Bedroom Condo for $1,699/month",https://www.zumper.com/listings/30002373p/1-bedroom-north-bergen-nj
+900 forest park ln 9206|08857,required_monthly_fees,Technology Connect $109 (internet + basic cable),"fee list: Technology Connect $109 Monthly, not optional; 'AvalonConnect ... high-speed internet and basic cable TV package ... bundled with your monthly rent'",https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge/apartment/NJ032-NJ032-009-9206
+900 forest park ln 9206|08857,pet_rent,$60 monthly per dog,fee list: Pet Dog Fee $60 Monthly,https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge/apartment/NJ032-NJ032-009-9206
+900 forest park ln 9206|08857,parking,$15 to $260 monthly (optional),"fee list: Parking $15-$260 Monthly, optional",https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge/apartment/NJ032-NJ032-009-9206
+900 forest park ln 9206|08857,management_company,AvalonBay Communities,listing is on avaloncommunities.com,https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge
+900 forest park ln 9204|08857,required_monthly_fees,Technology Connect $109 (internet + basic cable),"fee list: Technology Connect $109 Monthly, not optional; 'AvalonConnect ... high-speed internet and basic cable TV package ... bundled with your monthly rent'",https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge/apartment/NJ032-NJ032-009-9204
+900 forest park ln 9204|08857,pet_rent,$60 monthly per dog,fee list: Pet Dog Fee $60 Monthly,https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge/apartment/NJ032-NJ032-009-9204
+900 forest park ln 9204|08857,parking,$15 to $260 monthly (optional),"fee list: Parking $15-$260 Monthly, optional",https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge/apartment/NJ032-NJ032-009-9204
+900 forest park ln 9204|08857,management_company,AvalonBay Communities,listing is on avaloncommunities.com,https://www.avaloncommunities.com/new-jersey/old-bridge-apartments/avalon-old-bridge
+200 boyden ave|07040,required_monthly_fees,$89 (total price minus base rent),"unit 324: price 2590, totalPrice 2679; unit 436: price 2710, totalPrice 2799",https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood

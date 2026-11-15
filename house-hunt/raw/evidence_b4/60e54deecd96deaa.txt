@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+
+Sitemap: https://politicsny.com/wp-sitemap.xml
+
+Sitemap: https://politicsny.com/sitemap.xml
