@@ -1,0 +1,147 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"10","value":[
+    {
+      "ultra_buildingid":"4ff54832-07bf-4b05-a402-a0de5d1e9c9b","ultra_name":"113-115 LAWRENCE ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1608006344001","ultra_addressline1":"113-115 LAWRENCE ST","ultra_block":"3110","ultra_lot":"31","ultra_propertyinterest":{
+        "Id":"adb90d43-bef7-4402-8a1b-acc7526aba4a","Name":"113-115 LAWRENCE ST"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"262f7521-162f-e811-8126-1458d04eb810","Name":"PATERSON CITY"
+      },"ultra_propertyportalsearchfield":"113-115 LAWRENCE ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"dd8ca37f-1959-f111-bec6-001dd802f839","Name":"LAWRENCE PROPERTIES LLC"
+      },"ultra_zipcode":"07502","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3b1768a4-9b8f-48b4-8b64-4c714e7efbd4","ultra_name":"185 LAWRENCE STREET BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214003977001","ultra_addressline1":"185 LAWRENCE ST","ultra_block":"278","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"1aa05de9-4da8-4a32-8e62-71e123c6c02d","Name":"185 LAWRENCE STREET"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"185 LAWRENCE STREET","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"9db7fa6a-7790-ee11-8179-001dd8065b31","Name":"REVACH 185 LLC"
+      },"ultra_zipcode":"08901","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"69ac82ff-f43d-4edc-ac73-99a6ca15704d","ultra_name":"295 LAWRENCE ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214006065001","ultra_addressline1":"295 LAWRENCE ST","ultra_block":"281","ultra_lot":"11.01","ultra_propertyinterest":{
+        "Id":"393e32fe-de25-42b9-95e2-1e96da26ee50","Name":"295 LAWRENCE ST"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"295 LAWRENCE ST","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"28fb4712-3058-42b4-b439-f9a0c31ac4f8","Name":"ROBERT MAGLIES"
+      },"ultra_zipcode":"08901","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"1a221c86-b4b6-4404-95f8-fd956d6fb300","ultra_name":"5 LAWRENCE ST BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0705041376001","ultra_addressline1":"5 LAWRENCE ST","ultra_block":"61","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"7186726f-e57d-4e4a-a410-e94ffa2176a7","Name":"PARKWAY LOFTS"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"PARKWAY LOFTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2fd914c7-80d1-42db-8315-9401279f6ce9","Name":"Parkway Lofts Holdings LLC"
+      },"ultra_zipcode":"07003","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"a9ccf4a0-a0ae-4075-87d0-2453a7c836e7","ultra_name":"75 LAWRENCE AVE BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0231013200001","ultra_addressline1":"75 LAWRENCE AVE","ultra_block":"119","ultra_lot":"59","ultra_propertyinterest":{
+        "Id":"93537650-9397-4539-8f35-4a638e08d67b","Name":"75 LAWRENCE AVE"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"022c7521-162f-e811-8126-1458d04eb810","Name":"LODI BORO"
+      },"ultra_propertyportalsearchfield":"75 LAWRENCE AVE","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"ab2bb83c-e9ab-454f-8f50-ae20132222bc","Name":"HASAN GHABAR"
+      },"ultra_zipcode":"07644","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3169bc8f-b8d9-47db-83d3-4f95ca04df9b","ultra_name":"CRAIG TOWERS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0223003705001","ultra_addressline1":"125 LAWRENCE ST","ultra_block":"221","ultra_lot":"17","ultra_propertyinterest":{
+        "Id":"51e634a1-5e56-4926-9836-9a2bb21c78bd","Name":"CRAIG TOWERS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"CRAIG TOWERS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e15bcab2-546d-4834-abbc-3e227cff47c4","Name":"CRAIG TOWERS"
+      },"ultra_zipcode":"07601","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7421153f-bdf7-4e95-80d7-131790759a1e","ultra_name":"LAWRENCE APTS BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1110009399005","ultra_addressline1":"5 LAWRENCE DR","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"ea4d6ee5-7035-47c7-9acf-8603a9ac1288","Name":"LAWRENCE APTS"
+      },"ultra_county":{
+        "Id":"06f4aaf2-63e4-e711-8125-1458d054d020","Name":"MERCER"
+      },"ultra_municipality":{
+        "Id":"ea2d7521-162f-e811-8126-1458d04eb810","Name":"PRINCETON-CONSOLIDATED"
+      },"ultra_propertyportalsearchfield":"LAWRENCE APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"BLDG 5","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b7c01661-85f3-4173-82c6-0fddbdb4c106","Name":"TRUSTEES OF PRINCETON UNIV"
+      },"ultra_zipcode":"08544","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"52373c99-d72f-e811-8122-1458d04ece60","ultra_name":"PARKWAY LOFTS","ultra_registrationnumber":"0705-00339-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"5 LAWRENCE ST","ultra_block":"320","ultra_lot":"12","ultra_propertyinterest":{
+        "Id":"e480d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"PARKWAY LOFTS"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"302d7521-162f-e811-8126-1458d04eb810","Name":"EAST ORANGE CITY"
+      },"ultra_propertyportalsearchfield":"PARKWAY LOFTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":{
+        "Id":"89531580-45df-ef11-8eea-001dd803a96f","Name":"TKE Cranford"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f4ada6dc-3f7d-ec11-8d20-001dd8036a29","Name":"CLPF FAMILY LOFTS URBAN RENEWAL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"f2f24393-d72f-e811-8122-1458d04ece60","ultra_name":"PARKWAY LOFTS/PARKING GARAGE","ultra_registrationnumber":"0702-00102-003","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"5 LAWRENCE ST","ultra_block":"61","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"c67dd6c6-9f2f-e811-8120-1458d04e2fb8","Name":"5 LAWRENCE ST"
+      },"ultra_county":{
+        "Id":"fef3aaf2-63e4-e711-8125-1458d054d020","Name":"ESSEX"
+      },"ultra_municipality":{
+        "Id":"2a2d7521-162f-e811-8126-1458d04eb810","Name":"BLOOMFIELD TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"c4253dc7-b42f-e811-8122-1458d04ece60","Name":"GP BLOOMFIELD, LLC C/O LEE & KLATSKIN ASSOC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b9eb7967-e851-403b-9186-7136d9ac7de1","ultra_name":"Renaissance Station Condo BLDG 27","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1214023716027","ultra_addressline1":"89-95 LAWRENCE ST","ultra_block":"2.01","ultra_lot":"237","ultra_propertyinterest":{
+        "Id":"fdd733f7-947a-4e8e-bc9b-faace7be0179","Name":"RENAISSANCE STATION CONDO"
+      },"ultra_county":{
+        "Id":"08f4aaf2-63e4-e711-8125-1458d054d020","Name":"MIDDLESEX"
+      },"ultra_municipality":{
+        "Id":"062e7521-162f-e811-8126-1458d04eb810","Name":"NEW BRUNSWICK CITY"
+      },"ultra_propertyportalsearchfield":"RENAISSANCE STATION CONDO","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"4a2fc2aa-145a-4e29-9ee8-f83d21a09c93","Name":"RENAISSANCE STATION CONDO ASSN"
+      },"ultra_zipcode":"08901","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}
