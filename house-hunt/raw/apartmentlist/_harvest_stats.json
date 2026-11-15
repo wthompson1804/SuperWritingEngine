@@ -1,7 +1,7 @@
 {
  "started": "2026-11-15T18:21:08+00:00",
- "srp_pages": 296,
- "detail_pages": 858,
+ "srp_pages": 303,
+ "detail_pages": 865,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -410,13 +410,25 @@
    "drive_min": 37.1,
    "props": 24,
    "rows": 36
+  },
+  {
+   "city": "nj/east-rutherford",
+   "drive_min": 37.4,
+   "props": 5,
+   "rows": 19
+  },
+  {
+   "city": "nj/little-ferry",
+   "drive_min": 37.5,
+   "props": 2,
+   "rows": 2
   }
  ],
  "cities_unmatched_far": [],
- "props_discovered": 1523,
+ "props_discovered": 1530,
  "props_skipped_lowprice_gt_3000": 665,
  "reasons": {
-  "ok": 853,
+  "ok": 860,
   "no_unit_le_3000": 5
  },
  "blocked": null,
