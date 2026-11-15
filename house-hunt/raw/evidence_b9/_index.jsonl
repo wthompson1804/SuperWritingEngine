@@ -155,3 +155,5 @@
 {"url": "https://www.redfin.com/robots.txt", "retrieved_at": "2026-11-15T21:33:27+00:00", "status": 200, "path": "raw/evidence_b9/981e147ed094a6ca.txt", "source": "evidence_b9"}
 {"url": "https://www.redfin.com/NJ/Montvale/Woodland-Square/apartment/191050322", "retrieved_at": "2026-11-15T21:33:30+00:00", "status": 403, "path": "raw/evidence_b9/8a12a49527c1c976.html", "source": "evidence_b9"}
 {"url": "https://www.highlandsmorrisplains.com/robots.txt", "retrieved_at": "2026-11-15T21:33:33+00:00", "status": 200, "path": "raw/evidence_b9/a724fb7013cd1eb1.txt", "source": "evidence_b9"}
+{"url": "https://www.rentersvoice.com/reviews/nj/parsippany-troy-hills/halstead-parsippany", "retrieved_at": "2026-11-15T21:34:35+00:00", "status": 200, "path": "raw/evidence_b9/de5318e772662a7d.html", "source": "evidence_b9"}
+{"url": "https://www.rentersvoice.com/reviews/nj/new-brunswick/plaza-square-apartments-homes", "retrieved_at": "2026-11-15T21:34:38+00:00", "status": 200, "path": "raw/evidence_b9/63cb035e39d49a59.html", "source": "evidence_b9"}
