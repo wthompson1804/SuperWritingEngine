@@ -2,6 +2,7 @@
 
     from scripts.tools.places import near, area_profile
     near(40.7196, -73.8448)            # one building / address
+    color(40.7196, -73.8448)           # the kind of life around it (gyms, bookshops, parking, street pattern ...)
     area_profile(40.7196, -73.8448)    # counts for a neighbourhood centre (radius 1,200 m)
 
 Data: Geofabrik OpenStreetMap extract(s), cut to the bounding box of data/reference/search_grid.csv plus
@@ -813,6 +814,361 @@ def area_profile(lat: float, lon: float, radius_m: float = 1200) -> dict:
 
 
 # ----------------------------------------------------------------------------------------------------------
+# color(): the kind of life around a building (second index, built from the same regional cut)
+# ----------------------------------------------------------------------------------------------------------
+
+COLOR_FILTERED = BIG / "region_color.osm.pbf"
+COLOR_INDEX = BIG / "color_index.pkl"
+STREETS = {"residential", "living_street", "unclassified", "tertiary", "secondary", "primary", "trunk", "pedestrian"}
+BIG_BOX_M2 = 5000.0
+SEG_M = 25.0  # line features are cut into pieces no longer than this; lengths are summed over piece midpoints
+
+COLOR_FILTER = [
+    "nwr/leisure=fitness_centre,playground,pitch,sports_centre,garden", "nwr/sport",
+    "nwr/amenity=gym,library,cinema,theatre,arts_centre,marketplace,fast_food,ice_cream,fuel,parking",
+    "nwr/cuisine", "nwr/tourism=gallery,museum", "nwr/shop", "nwr/landuse=allotments,forest",
+    "nwr/natural=wood", "w/natural=tree_row", "nwr/drive_through=yes", "wr/building=retail",
+    "w/highway=footway,pedestrian,path,cycleway," + ",".join(sorted(STREETS)),
+    "w/cycleway=lane,track", "w/cycleway:left=lane,track", "w/cycleway:right=lane,track",
+    "w/cycleway:both=lane,track",
+]
+
+COLOR_DEFS = {
+    "gym": "leisure=fitness_centre, or amenity=gym, or sport including yoga or pilates",
+    "bookshop": "shop=books",
+    "library": "amenity=library",
+    "cinema_theatre": "amenity=cinema or amenity=theatre or amenity=arts_centre",
+    "gallery_museum": "tourism=gallery or tourism=museum",
+    "market": "amenity=marketplace",
+    "playground": "leisure=playground",
+    "pitch": "leisure=pitch or leisure=sports_centre (each mapped court or field counts once)",
+    "tennis": "leisure=pitch or leisure=sports_centre with sport including tennis (each mapped court counts once)",
+    "community_garden": "leisure=garden with garden:type=community, or landuse=allotments",
+    "fast_food": "amenity=fast_food",
+    "diner_ice_cream": "amenity=ice_cream, or cuisine including diner",
+    "pet": "shop=pet or shop=pet_grooming",
+    "vet": TAG_DEFS["vet"],
+    "hair_beauty": "shop=hairdresser or shop=beauty",
+    "shop_any": "shop=* (any value except no/vacant)",
+    "convenience": "shop=convenience",
+    "laundry": "shop=laundry",
+    "fuel": "amenity=fuel",
+    "drive_through": "drive_through=yes on any place",
+    "big_box": f"shop=department_store, wholesale or doityourself; or shop=mall or building=retail with an outline "
+               f"over {BIG_BOX_M2:,.0f} m2",
+    "parking": "amenity=parking mapped as an area, excluding parking=underground, multi-storey, rooftop, "
+               "street_side and lane",
+    "wood": "natural=wood or landuse=forest areas",
+    "tree_row": "natural=tree_row (ways)",
+    "footway": "highway=footway, highway=pedestrian or highway=path (ways; includes separately mapped sidewalks "
+               "and crossings)",
+    "cycleway": "highway=cycleway (ways)",
+    "bike_lane": "streets with cycleway, cycleway:left, cycleway:right or cycleway:both = lane or track",
+    "intersection": "nodes where 3 or more street segments meet; streets = highway in " + ", ".join(sorted(STREETS)),
+}
+COLOR_GROUPS = {
+    "culture": ["bookshop", "library", "cinema_theatre", "gallery_museum"],
+    "fitness_and_play": ["gym", "playground", "pitch", "tennis", "community_garden"],
+    "food": ["market", "fast_food", "diner_ice_cream"],
+    "pets": ["pet", "vet"],
+    "main_street": ["hair_beauty", "shop_any", "convenience", "laundry"],
+    "car_oriented": ["fuel", "drive_through", "big_box"],
+}
+
+
+def _color_cats(t: dict) -> list[str]:
+    c = []
+    a, s, l, sp = t.get("amenity"), t.get("shop"), t.get("leisure"), t.get("sport") or ""
+    sports = {x.strip() for x in sp.split(";")}
+    if l == "fitness_centre" or a == "gym" or sports & {"yoga", "pilates"}:
+        c.append("gym")
+    if l in ("pitch", "sports_centre"):
+        c.append("pitch")
+        if "tennis" in sports:
+            c.append("tennis")
+    elif l == "playground":
+        c.append("playground")
+    if (l == "garden" and t.get("garden:type") == "community") or t.get("landuse") == "allotments":
+        c.append("community_garden")
+    if a == "library":
+        c.append("library")
+    elif a in ("cinema", "theatre", "arts_centre"):
+        c.append("cinema_theatre")
+    elif a == "marketplace":
+        c.append("market")
+    elif a == "fast_food":
+        c.append("fast_food")
+    elif a == "fuel":
+        c.append("fuel")
+    if t.get("tourism") in ("gallery", "museum"):
+        c.append("gallery_museum")
+    if a == "ice_cream" or "diner" in {x.strip() for x in (t.get("cuisine") or "").split(";")}:
+        c.append("diner_ice_cream")
+    if s and s not in ("no", "vacant"):
+        c.append("shop_any")
+        if s == "books":
+            c.append("bookshop")
+        elif s in ("pet", "pet_grooming"):
+            c.append("pet")
+        elif s in ("hairdresser", "beauty"):
+            c.append("hair_beauty")
+        elif s == "convenience":
+            c.append("convenience")
+        elif s == "laundry":
+            c.append("laundry")
+        elif s in ("department_store", "wholesale", "doityourself"):
+            c.append("big_box")
+    if t.get("drive_through") == "yes":
+        c.append("drive_through")
+    return c
+
+
+def build_color_index() -> None:
+    import osmium
+    import pyproj
+    import shapely
+    from scipy.spatial import cKDTree
+
+    files = fetch_region()
+    if not COLOR_FILTERED.exists():
+        tmp = BIG / "region_color.tmp.osm.pbf"
+        _osmium("tags-filter", "-O", "-o", str(tmp), str(REGION), *COLOR_FILTER)
+        tmp.rename(COLOR_FILTERED)
+    tr = pyproj.Transformer.from_crs(4326, 32618, always_xy=True)
+
+    def proj(geoms):
+        return shapely.transform(geoms, lambda c: np.column_stack(tr.transform(c[:, 0], c[:, 1])))
+
+    wkbf = osmium.geom.WKBFactory()
+    pts = defaultdict(lambda: {"lon": [], "lat": [], "name": [], "ref": []})
+    area_pts, bigbox_cand = [], []
+    polys = {"parking": [], "wood": []}
+    line_kinds = ["footway", "cycleway", "bike_lane", "tree_row"]
+    l_lon, l_lat, l_n, l_kind = [], [], [], []
+    s_ref, s_lon, s_lat, s_n = [], [], [], []
+    bad = 0
+    t0 = time.time()
+    for o in osmium.FileProcessor(str(COLOR_FILTERED)).with_areas():
+        tags = o.tags
+        if o.is_node():
+            if not len(tags):
+                continue
+            t = {x.k: x.v for x in tags}
+            for c in _color_cats(t):
+                d = pts[c]
+                d["lon"].append(o.location.lon); d["lat"].append(o.location.lat)
+                d["name"].append(t.get("name")); d["ref"].append(f"node/{o.id}")
+        elif o.is_way():
+            hw = tags.get("highway")
+            kinds = []
+            if hw in ("footway", "pedestrian", "path"):
+                kinds.append(0)
+            elif hw == "cycleway":
+                kinds.append(1)
+            if hw != "cycleway" and any(tags.get(k) in ("lane", "track") for k in
+                                        ("cycleway", "cycleway:left", "cycleway:right", "cycleway:both")):
+                kinds.append(2)
+            if tags.get("natural") == "tree_row":
+                kinds.append(3)
+            street = hw in STREETS
+            if not kinds and not street:
+                continue
+            try:
+                lon = [n.lon for n in o.nodes]
+                lat = [n.lat for n in o.nodes]
+            except Exception:
+                bad += 1
+                continue
+            if len(lon) < 2:
+                continue
+            for k in kinds:
+                l_lon.append(lon); l_lat.append(lat); l_n.append(len(lon)); l_kind.append(k)
+            if street:
+                s_ref.append([n.ref for n in o.nodes]); s_lon.append(lon); s_lat.append(lat); s_n.append(len(lon))
+        elif o.is_area():
+            t = {x.k: x.v for x in tags}
+            cats = _color_cats(t)
+            is_parking = t.get("amenity") == "parking" and t.get("parking") not in (
+                "underground", "multi-storey", "rooftop", "street_side", "lane")
+            is_wood = t.get("natural") == "wood" or t.get("landuse") == "forest"
+            cand = "big_box" not in cats and (t.get("shop") == "mall" or t.get("building") == "retail")
+            if not (cats or is_parking or is_wood or cand):
+                continue
+            ref = f"{'way' if o.from_way() else 'relation'}/{o.orig_id()}"
+            try:
+                w = wkbf.create_multipolygon(o)
+            except Exception:
+                bad += 1
+                continue
+            if cats:
+                area_pts.append((w, cats, t.get("name"), ref))
+            if cand:
+                bigbox_cand.append((w, t.get("name"), ref))
+            if is_parking:
+                polys["parking"].append(w)
+            if is_wood:
+                polys["wood"].append(w)
+    print(f"color read done in {time.time() - t0:.0f}s; invalid skipped: {bad}", flush=True)
+
+    recs = [(a[0], a[1], a[2], a[3]) for a in area_pts]
+    if bigbox_cand:
+        g = proj(shapely.from_wkb(np.array([b[0] for b in bigbox_cand], dtype=object)))
+        for (w, name, ref), ar in zip(bigbox_cand, shapely.area(g)):
+            if ar >= BIG_BOX_M2:
+                recs.append((w, ["big_box"], name, ref))
+    cen = shapely.centroid(shapely.from_wkb(np.array([r[0] for r in recs], dtype=object)))
+    for (w, cats, name, ref), lon, lat in zip(recs, shapely.get_x(cen), shapely.get_y(cen)):
+        for c in cats:
+            d = pts[c]
+            d["lon"].append(lon); d["lat"].append(lat); d["name"].append(name); d["ref"].append(ref)
+    out_pts = {}
+    for c, d in pts.items():
+        x, y = tr.transform(np.array(d["lon"]), np.array(d["lat"]))
+        xy = np.column_stack([x, y])
+        keep = np.ones(len(xy), bool)
+        names = [_norm(nm) for nm in d["name"]]
+        for i, j in sorted(cKDTree(xy).query_pairs(60.0)):
+            if keep[i] and keep[j] and names[i] and names[i] == names[j]:
+                keep[j] = False
+        ix = np.flatnonzero(keep)
+        out_pts[c] = {"xy": xy[ix], "tree": cKDTree(xy[ix]), "name": [d["name"][i] for i in ix],
+                      "ref": [d["ref"][i] for i in ix], "extra": [None] * len(ix)}
+
+    # ---- lines: pieces of at most SEG_M, stored as midpoint + length ---------------------------------------
+    def flat(lists):
+        return np.fromiter((v for l in lists for v in l), dtype=np.float64)
+
+    n = np.array(l_n)
+    x, y = tr.transform(flat(l_lon), flat(l_lat))
+    way = np.repeat(np.arange(len(n)), n)
+    same = way[1:] == way[:-1]
+    x0, y0, x1, y1 = x[:-1][same], y[:-1][same], x[1:][same], y[1:][same]
+    kind = np.array(l_kind)[way[:-1][same]]
+    ln = np.hypot(x1 - x0, y1 - y0)
+    k = np.maximum(1, np.ceil(ln / SEG_M).astype(int))
+    rep = np.repeat(np.arange(len(ln)), k)
+    j = np.arange(len(rep)) - np.repeat(np.cumsum(k) - k, k)
+    f = (j + 0.5) / k[rep]
+    mx, my = x0[rep] + f * (x1 - x0)[rep], y0[rep] + f * (y1 - y0)[rep]
+    piece, pk = (ln / k)[rep], kind[rep]
+    out_lines = {}
+    for code, nm in enumerate(line_kinds):
+        m = pk == code
+        xy = np.column_stack([mx[m], my[m]])
+        out_lines[nm] = {"tree": cKDTree(xy), "len": piece[m].astype(np.float32), "total_km": float(piece[m].sum() / 1000)}
+
+    # ---- intersections: nodes where 3+ street segments meet -------------------------------------------------
+    sn = np.array(s_n)
+    refs = np.fromiter((v for l in s_ref for v in l), dtype=np.int64)
+    sx, sy = tr.transform(flat(s_lon), flat(s_lat))
+    ends = np.zeros(len(refs), bool)
+    st = np.cumsum(sn) - sn
+    ends[st] = True; ends[st + sn - 1] = True
+    u, first, inv = np.unique(refs, return_index=True, return_inverse=True)
+    deg = np.bincount(inv, weights=np.where(ends, 1, 2))
+    ii = first[deg >= 3]
+    ixy = np.column_stack([sx[ii], sy[ii]])
+    out_pts["intersection"] = {"xy": ixy, "tree": cKDTree(ixy)}
+
+    # ---- polygons -----------------------------------------------------------------------------------------
+    out_polys = {}
+    for nm, lst in polys.items():
+        g = shapely.make_valid(shapely.simplify(proj(shapely.from_wkb(np.array(lst, dtype=object))), 2.0))
+        out_polys[nm] = {"geom": g, "total_ha": float(shapely.area(g).sum() / 1e4)}
+
+    main = json.loads(META.read_text())
+    meta = {"built_at": lib.now_iso(), "bbox_wsen": list(bbox()), "files": files,
+            "source_url": main.get("source_url", files[0]["url"]),
+            "osm_data_timestamp": min(f["osm_data_timestamp"] for f in files),
+            "retrieved_at": max(f["retrieved_at"] for f in files),
+            "counts": {**{c: len(v["xy"]) for c, v in out_pts.items()},
+                       **{f"{k}_km": round(v["total_km"]) for k, v in out_lines.items()},
+                       **{f"{k}_polygons": len(v["geom"]) for k, v in out_polys.items()},
+                       **{f"{k}_ha": round(v["total_ha"]) for k, v in out_polys.items()}}}
+    with open(COLOR_INDEX, "wb") as fh:
+        pickle.dump({"meta": meta, "pts": out_pts, "lines": out_lines, "polys": out_polys}, fh,
+                    protocol=pickle.HIGHEST_PROTOCOL)
+    print(json.dumps(meta["counts"], indent=1))
+
+
+_CIDX = None
+
+
+def _load_color():
+    global _CIDX
+    if _CIDX is None:
+        if not COLOR_INDEX.exists():
+            build_color_index()
+        import shapely
+        with open(COLOR_INDEX, "rb") as f:
+            c = pickle.load(f)
+        for v in c["polys"].values():
+            v["tree"] = shapely.STRtree(v["geom"])
+        c["pts"]["vet"] = _load()["pts"]["vet"]
+        c["tr"] = _load()["tr"]
+        _CIDX = c
+    return _CIDX
+
+
+def _poly_area(c, kind, pt, radius) -> float:
+    import shapely
+    v = c["polys"][kind]
+    buf = pt.buffer(radius, 32)
+    hits = v["tree"].query(buf, predicate="intersects")
+    return shapely.union_all(shapely.intersection(v["geom"][hits], buf)).area if len(hits) else 0.0
+
+
+def color(lat: float, lon: float) -> dict:
+    """The kind of life around a point: counts within 800 m and 1,600 m plus up to 3 nearest named examples per
+    category, and car-oriented, street-pattern and tree-cover signals within 800 m. Same value format as near()."""
+    import shapely
+    c = _load_color()
+    if not _in_coverage(c, lat, lon):
+        return _outside(c, lat, lon)
+    xy = np.array(c["tr"].transform(lon, lat))
+    out = {"point": {"lat": lat, "lon": lon}}
+    for group, cats in COLOR_GROUPS.items():
+        g = out[group] = {}
+        for cat in cats:
+            for r in (800.0, 1600.0):
+                g[f"{cat}_count_{int(r)}m"] = _val(c, _count(c, cat, xy, r), "found",
+                                                   f"mapped places within {int(r)} m straight-line",
+                                                   osm_tags=COLOR_DEFS[cat])
+            if cat == "shop_any":
+                continue
+            ex = _nearest_pts(c, cat, xy, 3, 1600.0, named_only=True)
+            g[f"{cat}_examples"] = _val(c, ex, "found", "up to 3 nearest named places within 1,600 m, nearest first",
+                                        osm_tags=COLOR_DEFS[cat]) if ex else \
+                _missing(c, "no named place of this kind mapped within 1,600 m", osm_tags=COLOR_DEFS[cat])
+    pt = shapely.Point(xy)
+    circle_ha = math.pi * 800.0 ** 2 / 1e4
+    pa = _poly_area(c, "parking", pt, 800.0) / 1e4
+    out["car_oriented"]["surface_parking_ha_within_800m"] = _val(
+        c, round(pa, 2), "found", "area of mapped parking outlines inside an 800 m circle, overlaps counted once",
+        share_of_circle=round(pa / circle_ha, 3), osm_tags=COLOR_DEFS["parking"])
+    sp = out["street_pattern"] = {}
+    n_int = _count(c, "intersection", xy, 800.0)
+    sp["intersections_within_800m"] = _val(c, n_int, "found", "count of street nodes with 3 or more legs within 800 m",
+                                           per_km2=round(n_int / (circle_ha / 100), 1),
+                                           osm_tags=COLOR_DEFS["intersection"])
+    for kind, key in (("footway", "footway_km_within_800m"), ("cycleway", "cycleway_km_within_800m"),
+                      ("bike_lane", "bike_lane_street_km_within_800m"), ("tree_row", "tree_row_km_within_800m")):
+        d = c["lines"][kind]
+        ix = d["tree"].query_ball_point(xy, 800.0)
+        km = float(d["len"][ix].sum()) / 1000 if ix else 0.0
+        tgt = out.setdefault("trees", {}) if kind == "tree_row" else sp
+        tgt[key] = _val(c, round(km, 2), "estimate",
+                        f"mapped ways cut into pieces of at most {SEG_M:.0f} m; lengths of pieces whose midpoint is "
+                        "within 800 m are summed", osm_tags=COLOR_DEFS[kind])
+    wa = _poly_area(c, "wood", pt, 800.0) / 1e4
+    out["trees"]["woods_ha_within_800m"] = _val(
+        c, round(wa, 2), "found", "area of mapped wood and forest outlines inside an 800 m circle, overlaps counted once",
+        share_of_circle=round(wa / circle_ha, 3), osm_tags=COLOR_DEFS["wood"])
+    out["license"] = "(c) OpenStreetMap contributors, ODbL 1.0"
+    return out
+
+
+# ----------------------------------------------------------------------------------------------------------
 
 TEST_POINTS = [("Jamaica station", 40.699608, -73.808530), ("Forest Hills", 40.7196, -73.8448),
                ("Long Beach NY", 40.5890, -73.6649), ("Stamford CT", 41.0469, -73.5419),
@@ -841,6 +1197,10 @@ def _short(d, depth=0):
 if __name__ == "__main__":
     if "--build" in sys.argv:
         build_index()
+        build_color_index()
+        sys.exit()
+    if "--build-color" in sys.argv:
+        build_color_index()
         sys.exit()
     t = time.time()
     ix_ = _load()
@@ -860,3 +1220,10 @@ if __name__ == "__main__":
             print("-- area_profile(radius 1200) counts --")
             _short(prof["counts"], 1)
             _short({k: v for k, v in prof["green_space"].items() if k.startswith("park_area")}, 1)
+        t = time.time()
+        col = color(la_, lo_)
+        print(f"-- color() {(time.time() - t) * 1000:.0f} ms --")
+        if "--json" in sys.argv:
+            print(json.dumps(col, indent=1, default=str))
+        else:
+            _short({k: v for k, v in col.items() if k not in ("point", "license")}, 1)

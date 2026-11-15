@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://heatherwood.com/
+
+# Sitemaps
+Sitemap: https://heatherwood.com/sitemap.xml
