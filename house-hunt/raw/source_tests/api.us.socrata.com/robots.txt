@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Page Not Found – Data & Insights</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="https://cdn.forge.tylertech.com/v1/libs/@tylertech/forge@3.8.0/forge.css" />
+  <link rel="stylesheet" href="https://cdn.forge.tylertech.com/v1/libs/@tylertech/forge@3.8.0/button/forge-button.css" />
+</head>
+
+<body class="forge-typography" style="padding: 2rem; text-align: center;">
+  <main>
+    <forge-page-state>
+      <img src="https://cdn.forge.tylertech.com/v1/images/spot-hero/general-error-spot-hero.svg" slot="graphic" alt="Fallen robot" />
+      <div slot="title">Oops, page not found</div>
+      <p slot="message">
+        You seem to have followed a link to a page that doesn’t exist.
+      </p>
+
+      <forge-button variant="outlined" slot="action" onclick="window.history.back()">
+        Go Back
+      </forge-button>
+    </forge-page-state>
+  </main>
+
+  <script type="module" src="https://cdn.forge.tylertech.com/v1/libs/@tylertech/forge@3.8.0/page-state/index.js"></script>
+  <script type="module" src="https://cdn.forge.tylertech.com/v1/libs/@tylertech/forge@3.8.0/button/index.js"></script>
+</body>
+
+</html>

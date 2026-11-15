@@ -1,0 +1,196 @@
+[
+ {
+  "name": "nycod_nypd_current_5uac",
+  "url": "https://data.cityofnewyork.us/resource/5uac-w243.json?$limit=3&addr_pct_cd=112"
+ },
+ {
+  "name": "nycod_nypd_historic_qgea",
+  "url": "https://data.cityofnewyork.us/resource/qgea-i56i.json?$limit=3&addr_pct_cd=112"
+ },
+ {
+  "name": "nycod_hpd_violations_wvxf",
+  "url": "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?$limit=3&zip=11375"
+ },
+ {
+  "name": "nycod_311_erm2",
+  "url": "https://data.cityofnewyork.us/resource/erm2-nwe9.json?$limit=3&incident_zip=11375"
+ },
+ {
+  "name": "nycod_dob_complaints_eabe",
+  "url": "https://data.cityofnewyork.us/resource/eabe-havv.json?$limit=3"
+ },
+ {
+  "name": "nypd_compstat_page",
+  "url": "https://www.nyc.gov/site/nypd/stats/crime-statistics/compstat.page"
+ },
+ {
+  "name": "nyod_catalog_search",
+  "url": "https://api.us.socrata.com/api/catalog/v1?domains=data.ny.gov&q=index%20crimes%20county%20agency&limit=3"
+ },
+ {
+  "name": "nyod_ca8h_meta",
+  "url": "https://data.ny.gov/api/views/ca8h-8gjq.json"
+ },
+ {
+  "name": "nyod_ca8h_query",
+  "url": "https://data.ny.gov/resource/ca8h-8gjq.json?$limit=3&county=Queens"
+ },
+ {
+  "name": "njsp_ucr_njgov",
+  "url": "https://www.nj.gov/njsp/ucr/"
+ },
+ {
+  "name": "njsp_ucr_njspgov",
+  "url": "https://www.njsp.gov/ucr/"
+ },
+ {
+  "name": "ct_catalog_search",
+  "url": "https://api.us.socrata.com/api/catalog/v1?domains=data.ct.gov&q=crime&limit=5"
+ },
+ {
+  "name": "ct_portal_despp",
+  "url": "https://portal.ct.gov/despp"
+ },
+ {
+  "name": "ct_ctdata_home",
+  "url": "https://www.ctdata.org/"
+ },
+ {
+  "name": "fbi_cde_agencies_ct",
+  "url": "https://api.usa.gov/crime/fbi/cde/agency/byStateAbbr/CT?API_KEY=DEMO_KEY"
+ },
+ {
+  "name": "census_acs_nokey",
+  "url": "https://api.census.gov/data/2023/acs/acs5?get=NAME,B25064_001E&for=county:081&in=state:36"
+ },
+ {
+  "name": "census_acs_demokey",
+  "url": "https://api.census.gov/data/2023/acs/acs5?get=NAME,B25064_001E&for=county:081&in=state:36&key=DEMO_KEY"
+ },
+ {
+  "name": "census_variables_nokey",
+  "url": "https://api.census.gov/data/2023/acs/acs5/variables/B25064_001E.json"
+ },
+ {
+  "name": "census_www2_tablebased",
+  "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/"
+ },
+ {
+  "name": "hud_safmr_page",
+  "url": "https://www.huduser.gov/portal/datasets/fmr/smallarea/index.html"
+ },
+ {
+  "name": "zillow_research_page",
+  "url": "https://www.zillow.com/research/data/"
+ },
+ {
+  "name": "zillow_zori_zip_csv",
+  "url": "https://files.zillowstatic.com/research/public_csvs/zori/Zip_zori_uc_sfrcondomfr_sm_month.csv"
+ },
+ {
+  "name": "apartmentlist_research_rent_estimates",
+  "url": "https://www.apartmentlist.com/research/category/data-rent-estimates"
+ },
+ {
+  "name": "epa_sld_page",
+  "url": "https://www.epa.gov/smartgrowth/smart-location-mapping"
+ },
+ {
+  "name": "fema_nfhl_arcgis_root",
+  "url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer?f=json"
+ },
+ {
+  "name": "fema_nfhl_gis_root",
+  "url": "https://hazards.fema.gov/gis/nfhl/rest/services/public/NFHL/MapServer?f=json"
+ },
+ {
+  "name": "fcc_data_download",
+  "url": "https://broadbandmap.fcc.gov/data-download"
+ },
+ {
+  "name": "fcc_api_asof_nologin",
+  "url": "https://broadbandmap.fcc.gov/api/public/map/listAsOfDates"
+ },
+ {
+  "name": "bts_geo_dot_services",
+  "url": "https://geo.dot.gov/server/rest/services?f=json"
+ },
+ {
+  "name": "eia_demokey",
+  "url": "https://api.eia.gov/v2/electricity/retail-sales/data/?api_key=DEMO_KEY&frequency=monthly&data[0]=price&facets[stateid][]=NY&facets[sectorid][]=RES&sort[0][column]=period&sort[0][direction]=desc&length=3"
+ },
+ {
+  "name": "eia_nokey",
+  "url": "https://api.eia.gov/v2/electricity/retail-sales/data/?frequency=monthly&data[0]=price&facets[stateid][]=NY&length=3"
+ },
+ {
+  "name": "osrm_route",
+  "url": "https://router.project-osrm.org/route/v1/driving/-73.8448,40.7181;-73.8073,40.7023?overview=false"
+ },
+ {
+  "name": "walkscore_robots_only",
+  "url": "https://www.walkscore.com/score/forest-hills-queens-ny",
+  "robots_only": true
+ },
+ {
+  "name": "walkscore_api_robots_only",
+  "url": "https://api.walkscore.com/score?format=json&lat=40.7181&lon=-73.8448",
+  "robots_only": true
+ },
+ {
+  "name": "mta_fares",
+  "url": "https://new.mta.info/fares"
+ },
+ {
+  "name": "mta_tolls_cars",
+  "url": "https://new.mta.info/fares-and-tolls/bridges-and-tunnels/tolls-by-vehicle/cars"
+ },
+ {
+  "name": "panynj_tolls",
+  "url": "https://www.panynj.gov/bridges-tunnels/en/tolls.html"
+ },
+ {
+  "name": "njta_toll_calc",
+  "url": "https://www.njta.gov/toll-calculator/"
+ },
+ {
+  "name": "thruway_tolls",
+  "url": "https://www.thruway.ny.gov/tollcalculator/"
+ },
+ {
+  "name": "overpass_main_status",
+  "url": "https://overpass-api.de/api/status"
+ },
+ {
+  "name": "overpass_main_query",
+  "url": "https://overpass-api.de/api/interpreter",
+  "method": "POST",
+  "data": {
+   "data": "[out:json][timeout:10];node(40.7175,-73.8455,40.7190,-73.8440)[amenity];out 5;"
+  }
+ },
+ {
+  "name": "overpass_kumi_status",
+  "url": "https://overpass.kumi.systems/api/status"
+ },
+ {
+  "name": "overpass_kumi_query",
+  "url": "https://overpass.kumi.systems/api/interpreter",
+  "method": "POST",
+  "data": {
+   "data": "[out:json][timeout:10];node(40.7175,-73.8455,40.7190,-73.8440)[amenity];out 5;"
+  }
+ },
+ {
+  "name": "overpass_coffee_status",
+  "url": "https://overpass.private.coffee/api/status"
+ },
+ {
+  "name": "overpass_coffee_query",
+  "url": "https://overpass.private.coffee/api/interpreter",
+  "method": "POST",
+  "data": {
+   "data": "[out:json][timeout:10];node(40.7175,-73.8455,40.7190,-73.8440)[amenity];out 5;"
+  }
+ }
+]

@@ -1,0 +1,1358 @@
+{
+  "id" : "ca8h-8gjq",
+  "name" : "Index Crimes by County and Agency: Beginning 1990",
+  "assetType" : "dataset",
+  "attribution" : "New York State Division of Criminal Justice Services",
+  "attributionLink" : "http://www.criminaljustice.ny.gov/crimnet/ojsa/crimereporting/index.htm",
+  "averageRating" : 0,
+  "category" : "Public Safety",
+  "createdAt" : 1360958783,
+  "description" : "The Division of Criminal Justice Services (DCJS) collects crime reports from more than 500 New York State police and sheriffs' departments. DCJS compiles these reports as New York's official crime statistics and submits them to the FBI under the National Uniform Crime Reporting (UCR) Program. UCR uses standard offense definitions to count crime in localities across America regardless of variations in crime laws from state to state. In New York State, law enforcement agencies use the UCR system to report their monthly crime totals to DCJS. The UCR reporting system collects information on seven crimes classified as Index offenses which are most commonly used to gauge overall crime volume. These include the violent crimes of murder/non-negligent manslaughter, forcible rape, robbery, and aggravated assault; and the property crimes of burglary, larceny, and motor vehicle theft. Police agencies may experience reporting problems that preclude accurate or complete reporting. The counts represent only crimes reported to the police but not total crimes that occurred.  DCJS posts preliminary data in the spring and final data in the fall.",
+  "diciBackend" : false,
+  "displayType" : "table",
+  "downloadCount" : 19055,
+  "hideFromCatalog" : false,
+  "hideFromDataJson" : false,
+  "locked" : false,
+  "newBackend" : true,
+  "numberOfComments" : 0,
+  "oid" : 37376782,
+  "provenance" : "official",
+  "publicationAppendEnabled" : false,
+  "publicationDate" : 1624989950,
+  "publicationGroup" : 679970,
+  "publicationStage" : "published",
+  "rowClass" : "",
+  "rowsUpdatedAt" : 1764079638,
+  "rowsUpdatedBy" : "xzik-pf59",
+  "tableId" : 18370918,
+  "totalTimesRated" : 0,
+  "viewCount" : 165051,
+  "viewLastModified" : 1774471352,
+  "viewType" : "tabular",
+  "approvals" : [ {
+    "reviewedAt" : 1537913199,
+    "reviewedAutomatically" : true,
+    "state" : "approved",
+    "submissionId" : 3771793,
+    "submissionObject" : "public_audience_request",
+    "submissionOutcome" : "change_audience",
+    "submittedAt" : 1537913199,
+    "targetAudience" : "public",
+    "workflowId" : 2254,
+    "submissionDetails" : {
+      "permissionType" : "READ"
+    },
+    "submissionOutcomeApplication" : {
+      "failureCount" : 0,
+      "status" : "success"
+    },
+    "submitter" : {
+      "id" : "xzik-pf59",
+      "displayName" : "NY Open Data"
+    }
+  } ],
+  "clientContext" : {
+    "clientContextVariables" : [ ],
+    "inheritedVariables" : { }
+  },
+  "columns" : [ {
+    "id" : 543614924,
+    "name" : "County",
+    "dataTypeName" : "text",
+    "description" : "Location where the crime was reported.",
+    "fieldName" : "county",
+    "position" : 1,
+    "renderTypeName" : "text",
+    "tableColumnId" : 7887736,
+    "width" : 123,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "Yates",
+      "null" : "0",
+      "top" : [ {
+        "item" : "Westchester",
+        "count" : "1611"
+      }, {
+        "item" : "Orange",
+        "count" : "1225"
+      }, {
+        "item" : "Erie",
+        "count" : "950"
+      }, {
+        "item" : "Suffolk",
+        "count" : "916"
+      }, {
+        "item" : "Nassau",
+        "count" : "885"
+      }, {
+        "item" : "Onondaga",
+        "count" : "761"
+      }, {
+        "item" : "Ulster",
+        "count" : "697"
+      }, {
+        "item" : "Oneida",
+        "count" : "639"
+      }, {
+        "item" : "Dutchess",
+        "count" : "594"
+      }, {
+        "item" : "Albany",
+        "count" : "584"
+      }, {
+        "item" : "Monroe",
+        "count" : "535"
+      }, {
+        "item" : "Jefferson",
+        "count" : "529"
+      }, {
+        "item" : "Rockland",
+        "count" : "500"
+      }, {
+        "item" : "Chautauqua",
+        "count" : "445"
+      }, {
+        "item" : "Steuben",
+        "count" : "441"
+      }, {
+        "item" : "St Lawrence",
+        "count" : "439"
+      }, {
+        "item" : "Allegany",
+        "count" : "423"
+      }, {
+        "item" : "Rensselaer",
+        "count" : "423"
+      }, {
+        "item" : "Broome",
+        "count" : "401"
+      }, {
+        "item" : "Tompkins",
+        "count" : "396"
+      } ],
+      "smallest" : "Albany",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "displayStyle" : "plain",
+      "align" : "left"
+    }
+  }, {
+    "id" : 543614925,
+    "name" : "Agency",
+    "dataTypeName" : "text",
+    "description" : "Police Department that reported the crime.",
+    "fieldName" : "agency",
+    "position" : 2,
+    "renderTypeName" : "text",
+    "tableColumnId" : 7887737,
+    "width" : 185,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "Youngstown Vg PD",
+      "null" : "0",
+      "top" : [ {
+        "item" : "County Total",
+        "count" : "2170"
+      }, {
+        "item" : "Bronxville Vg PD",
+        "count" : "35"
+      }, {
+        "item" : "Amherst Town PD",
+        "count" : "35"
+      }, {
+        "item" : "Adams Vg PD",
+        "count" : "35"
+      }, {
+        "item" : "Canton Vg PD",
+        "count" : "35"
+      }, {
+        "item" : "Oswego County Park PD",
+        "count" : "35"
+      }, {
+        "item" : "Spring Valley Vg PD",
+        "count" : "35"
+      }, {
+        "item" : "Ontario County Sheriff",
+        "count" : "35"
+      }, {
+        "item" : "Cattaraugus County Sheriff",
+        "count" : "35"
+      }, {
+        "item" : "Cayuga Heights Vg PD",
+        "count" : "35"
+      }, {
+        "item" : "Menands Vg PD",
+        "count" : "35"
+      }, {
+        "item" : "Plattekill Town PD",
+        "count" : "35"
+      }, {
+        "item" : "Chester Town PD",
+        "count" : "35"
+      }, {
+        "item" : "Fort Plain Vg PD",
+        "count" : "35"
+      }, {
+        "item" : "Elmira City PD",
+        "count" : "35"
+      }, {
+        "item" : "Broome County State Police",
+        "count" : "35"
+      }, {
+        "item" : "New Rochelle City PD",
+        "count" : "35"
+      }, {
+        "item" : "Johnson City Vg PD",
+        "count" : "35"
+      }, {
+        "item" : "Columbia County Park PD",
+        "count" : "35"
+      }, {
+        "item" : "Liverpool Vg PD",
+        "count" : "35"
+      } ],
+      "smallest" : "Adams Vg PD",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "displayStyle" : "plain",
+      "align" : "left"
+    }
+  }, {
+    "id" : 543614926,
+    "name" : "Year",
+    "dataTypeName" : "number",
+    "description" : "Year the crime incident was reported.",
+    "fieldName" : "year",
+    "position" : 3,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887738,
+    "width" : 109,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "2024",
+      "null" : "0",
+      "top" : [ {
+        "item" : "1991",
+        "count" : "718"
+      }, {
+        "item" : "1994",
+        "count" : "718"
+      }, {
+        "item" : "1990",
+        "count" : "717"
+      }, {
+        "item" : "1995",
+        "count" : "714"
+      }, {
+        "item" : "1997",
+        "count" : "708"
+      }, {
+        "item" : "1996",
+        "count" : "704"
+      }, {
+        "item" : "1992",
+        "count" : "702"
+      }, {
+        "item" : "2017",
+        "count" : "691"
+      }, {
+        "item" : "2018",
+        "count" : "691"
+      }, {
+        "item" : "1993",
+        "count" : "689"
+      }, {
+        "item" : "2019",
+        "count" : "687"
+      }, {
+        "item" : "2016",
+        "count" : "685"
+      }, {
+        "item" : "2020",
+        "count" : "683"
+      }, {
+        "item" : "2015",
+        "count" : "683"
+      }, {
+        "item" : "1998",
+        "count" : "682"
+      }, {
+        "item" : "2014",
+        "count" : "682"
+      }, {
+        "item" : "2021",
+        "count" : "681"
+      }, {
+        "item" : "2022",
+        "count" : "680"
+      }, {
+        "item" : "2023",
+        "count" : "680"
+      }, {
+        "item" : "2008",
+        "count" : "679"
+      } ],
+      "smallest" : "1990",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "true",
+      "align" : "center"
+    }
+  }, {
+    "id" : 543614927,
+    "name" : "Months Reported",
+    "dataTypeName" : "number",
+    "description" : "Number of months an individual agency reported for the\nyear.",
+    "fieldName" : "months_reported",
+    "position" : 4,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887739,
+    "width" : 184,
+    "cachedContents" : {
+      "non_null" : "14136",
+      "largest" : "12",
+      "null" : "9696",
+      "top" : [ {
+        "item" : "12",
+        "count" : "13731"
+      }, {
+        "item" : "11",
+        "count" : "168"
+      }, {
+        "item" : "10",
+        "count" : "40"
+      }, {
+        "item" : "9",
+        "count" : "31"
+      }, {
+        "item" : "8",
+        "count" : "27"
+      }, {
+        "item" : "3",
+        "count" : "25"
+      }, {
+        "item" : "4",
+        "count" : "23"
+      }, {
+        "item" : "1",
+        "count" : "22"
+      }, {
+        "item" : "5",
+        "count" : "21"
+      }, {
+        "item" : "6",
+        "count" : "18"
+      }, {
+        "item" : "2",
+        "count" : "18"
+      }, {
+        "item" : "7",
+        "count" : "12"
+      } ],
+      "smallest" : "1",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614928,
+    "name" : "Index Total",
+    "dataTypeName" : "number",
+    "description" : "Includes sum of Murder, Rape, Robbery, Aggravated\nAssault, Burglary, Larceny and Motor Vehicle Theft.",
+    "fieldName" : "total_index_crimes",
+    "position" : 5,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887740,
+    "width" : 186,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "217786",
+      "null" : "0",
+      "top" : [ {
+        "item" : "1",
+        "count" : "564"
+      }, {
+        "item" : "0",
+        "count" : "547"
+      }, {
+        "item" : "2",
+        "count" : "392"
+      }, {
+        "item" : "3",
+        "count" : "358"
+      }, {
+        "item" : "5",
+        "count" : "290"
+      }, {
+        "item" : "4",
+        "count" : "277"
+      }, {
+        "item" : "7",
+        "count" : "254"
+      }, {
+        "item" : "6",
+        "count" : "243"
+      }, {
+        "item" : "8",
+        "count" : "224"
+      }, {
+        "item" : "10",
+        "count" : "205"
+      }, {
+        "item" : "12",
+        "count" : "201"
+      }, {
+        "item" : "9",
+        "count" : "198"
+      }, {
+        "item" : "11",
+        "count" : "182"
+      }, {
+        "item" : "14",
+        "count" : "167"
+      }, {
+        "item" : "13",
+        "count" : "160"
+      }, {
+        "item" : "15",
+        "count" : "159"
+      }, {
+        "item" : "17",
+        "count" : "154"
+      }, {
+        "item" : "18",
+        "count" : "147"
+      }, {
+        "item" : "16",
+        "count" : "139"
+      }, {
+        "item" : "23",
+        "count" : "134"
+      } ],
+      "smallest" : "0",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614929,
+    "name" : "Violent Total",
+    "dataTypeName" : "number",
+    "description" : "Subtotal includes Murder, Rape, Robbery and\nAggravated Assault.",
+    "fieldName" : "violent",
+    "position" : 6,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887741,
+    "width" : 162,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "63087",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "4524"
+      }, {
+        "item" : "1",
+        "count" : "1779"
+      }, {
+        "item" : "2",
+        "count" : "1305"
+      }, {
+        "item" : "3",
+        "count" : "999"
+      }, {
+        "item" : "4",
+        "count" : "775"
+      }, {
+        "item" : "5",
+        "count" : "675"
+      }, {
+        "item" : "6",
+        "count" : "630"
+      }, {
+        "item" : "7",
+        "count" : "525"
+      }, {
+        "item" : "8",
+        "count" : "468"
+      }, {
+        "item" : "9",
+        "count" : "422"
+      }, {
+        "item" : "11",
+        "count" : "395"
+      }, {
+        "item" : "10",
+        "count" : "380"
+      }, {
+        "item" : "13",
+        "count" : "357"
+      }, {
+        "item" : "12",
+        "count" : "341"
+      }, {
+        "item" : "14",
+        "count" : "309"
+      }, {
+        "item" : "15",
+        "count" : "281"
+      }, {
+        "item" : "16",
+        "count" : "268"
+      }, {
+        "item" : "17",
+        "count" : "261"
+      }, {
+        "item" : "18",
+        "count" : "232"
+      }, {
+        "item" : "19",
+        "count" : "227"
+      } ],
+      "smallest" : "0",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614930,
+    "name" : "Murder",
+    "dataTypeName" : "number",
+    "description" : "One count per victim. The willful killing of one human\nbeing by another. Excludes deaths caused by negligence,\nsuicide, or justifiable homicides, and attempts to murder,\nwhich are classified as assault.",
+    "fieldName" : "murder",
+    "position" : 7,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887742,
+    "width" : 123,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "786",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "19288"
+      }, {
+        "item" : "1",
+        "count" : "2223"
+      }, {
+        "item" : "2",
+        "count" : "735"
+      }, {
+        "item" : "3",
+        "count" : "337"
+      }, {
+        "item" : "4",
+        "count" : "181"
+      }, {
+        "item" : "5",
+        "count" : "131"
+      }, {
+        "item" : "6",
+        "count" : "86"
+      }, {
+        "item" : "7",
+        "count" : "77"
+      }, {
+        "item" : "8",
+        "count" : "56"
+      }, {
+        "item" : "9",
+        "count" : "49"
+      }, {
+        "item" : "10",
+        "count" : "33"
+      }, {
+        "item" : "11",
+        "count" : "32"
+      }, {
+        "item" : "13",
+        "count" : "29"
+      }, {
+        "item" : "12",
+        "count" : "23"
+      }, {
+        "item" : "14",
+        "count" : "23"
+      }, {
+        "item" : "15",
+        "count" : "20"
+      }, {
+        "item" : "16",
+        "count" : "20"
+      }, {
+        "item" : "21",
+        "count" : "17"
+      }, {
+        "item" : "17",
+        "count" : "16"
+      }, {
+        "item" : "28",
+        "count" : "16"
+      } ],
+      "smallest" : "0",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614931,
+    "name" : "Rape",
+    "dataTypeName" : "number",
+    "description" : "One count per victim. Penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, without the consent of the victim.",
+    "fieldName" : "forcible_rape",
+    "position" : 8,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887743,
+    "width" : 161,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "1159",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "11542"
+      }, {
+        "item" : "1",
+        "count" : "2870"
+      }, {
+        "item" : "2",
+        "count" : "1621"
+      }, {
+        "item" : "3",
+        "count" : "1082"
+      }, {
+        "item" : "4",
+        "count" : "792"
+      }, {
+        "item" : "5",
+        "count" : "635"
+      }, {
+        "item" : "6",
+        "count" : "476"
+      }, {
+        "item" : "7",
+        "count" : "394"
+      }, {
+        "item" : "8",
+        "count" : "329"
+      }, {
+        "item" : "9",
+        "count" : "295"
+      }, {
+        "item" : "11",
+        "count" : "243"
+      }, {
+        "item" : "10",
+        "count" : "219"
+      }, {
+        "item" : "12",
+        "count" : "193"
+      }, {
+        "item" : "13",
+        "count" : "176"
+      }, {
+        "item" : "14",
+        "count" : "141"
+      }, {
+        "item" : "15",
+        "count" : "133"
+      }, {
+        "item" : "16",
+        "count" : "122"
+      }, {
+        "item" : "18",
+        "count" : "107"
+      }, {
+        "item" : "19",
+        "count" : "100"
+      }, {
+        "item" : "17",
+        "count" : "94"
+      } ],
+      "smallest" : "0",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614932,
+    "name" : "Robbery",
+    "dataTypeName" : "number",
+    "description" : "One count per victim. The taking or attempting to take\nanything of value from the care, custody, or control of a\nperson or persons by force or threat of force or violence\nand/or by putting the victim in fear.",
+    "fieldName" : "robbery",
+    "position" : 9,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887744,
+    "width" : 127,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "36341",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "10850"
+      }, {
+        "item" : "1",
+        "count" : "3074"
+      }, {
+        "item" : "2",
+        "count" : "1764"
+      }, {
+        "item" : "3",
+        "count" : "1149"
+      }, {
+        "item" : "4",
+        "count" : "885"
+      }, {
+        "item" : "5",
+        "count" : "673"
+      }, {
+        "item" : "6",
+        "count" : "494"
+      }, {
+        "item" : "7",
+        "count" : "391"
+      }, {
+        "item" : "8",
+        "count" : "360"
+      }, {
+        "item" : "9",
+        "count" : "257"
+      }, {
+        "item" : "10",
+        "count" : "215"
+      }, {
+        "item" : "11",
+        "count" : "195"
+      }, {
+        "item" : "12",
+        "count" : "177"
+      }, {
+        "item" : "13",
+        "count" : "147"
+      }, {
+        "item" : "14",
+        "count" : "129"
+      }, {
+        "item" : "15",
+        "count" : "117"
+      }, {
+        "item" : "16",
+        "count" : "104"
+      }, {
+        "item" : "17",
+        "count" : "104"
+      }, {
+        "item" : "18",
+        "count" : "91"
+      }, {
+        "item" : "19",
+        "count" : "88"
+      } ],
+      "smallest" : "0",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614933,
+    "name" : "Aggravated Assault",
+    "dataTypeName" : "number",
+    "description" : "One count per victim. The unlawful attack by one person\nupon another for the purpose of inflicting severe or\naggravated bodily injury. This type of assault is usually\naccompanied by the use of a weapon or by means likely to\nproduce death or great bodily harm, and also includes\nattempts to commit murder.",
+    "fieldName" : "aggravated_assault",
+    "position" : 10,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887745,
+    "width" : 192,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "24828",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "5478"
+      }, {
+        "item" : "1",
+        "count" : "2012"
+      }, {
+        "item" : "2",
+        "count" : "1452"
+      }, {
+        "item" : "3",
+        "count" : "1048"
+      }, {
+        "item" : "4",
+        "count" : "882"
+      }, {
+        "item" : "5",
+        "count" : "751"
+      }, {
+        "item" : "6",
+        "count" : "650"
+      }, {
+        "item" : "7",
+        "count" : "582"
+      }, {
+        "item" : "8",
+        "count" : "498"
+      }, {
+        "item" : "9",
+        "count" : "485"
+      }, {
+        "item" : "10",
+        "count" : "414"
+      }, {
+        "item" : "11",
+        "count" : "390"
+      }, {
+        "item" : "12",
+        "count" : "339"
+      }, {
+        "item" : "13",
+        "count" : "329"
+      }, {
+        "item" : "14",
+        "count" : "321"
+      }, {
+        "item" : "16",
+        "count" : "266"
+      }, {
+        "item" : "15",
+        "count" : "253"
+      }, {
+        "item" : "17",
+        "count" : "249"
+      }, {
+        "item" : "18",
+        "count" : "244"
+      }, {
+        "item" : "19",
+        "count" : "212"
+      } ],
+      "smallest" : "0",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614934,
+    "name" : "Property Total",
+    "dataTypeName" : "number",
+    "description" : "Subtotal includes Burglary, Larceny and Motor\nVehicle Theft.",
+    "fieldName" : "property",
+    "position" : 11,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887746,
+    "width" : 168,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "173352",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "619"
+      }, {
+        "item" : "1",
+        "count" : "585"
+      }, {
+        "item" : "2",
+        "count" : "411"
+      }, {
+        "item" : "3",
+        "count" : "383"
+      }, {
+        "item" : "4",
+        "count" : "316"
+      }, {
+        "item" : "5",
+        "count" : "282"
+      }, {
+        "item" : "7",
+        "count" : "278"
+      }, {
+        "item" : "6",
+        "count" : "263"
+      }, {
+        "item" : "10",
+        "count" : "226"
+      }, {
+        "item" : "8",
+        "count" : "225"
+      }, {
+        "item" : "9",
+        "count" : "212"
+      }, {
+        "item" : "11",
+        "count" : "197"
+      }, {
+        "item" : "15",
+        "count" : "185"
+      }, {
+        "item" : "12",
+        "count" : "182"
+      }, {
+        "item" : "16",
+        "count" : "180"
+      }, {
+        "item" : "13",
+        "count" : "173"
+      }, {
+        "item" : "17",
+        "count" : "170"
+      }, {
+        "item" : "14",
+        "count" : "152"
+      }, {
+        "item" : "19",
+        "count" : "143"
+      }, {
+        "item" : "21",
+        "count" : "142"
+      } ],
+      "smallest" : "0",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614935,
+    "name" : "Burglary",
+    "dataTypeName" : "number",
+    "description" : "One count per victim. The unlawful entry of a structure to\ncommit a felony or theft. The use of force to gain entry is\nnot required to classify an offense as Burglary.",
+    "fieldName" : "burglary",
+    "position" : 12,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887747,
+    "width" : 126,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "39041",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "3025"
+      }, {
+        "item" : "1",
+        "count" : "1425"
+      }, {
+        "item" : "2",
+        "count" : "973"
+      }, {
+        "item" : "3",
+        "count" : "835"
+      }, {
+        "item" : "4",
+        "count" : "680"
+      }, {
+        "item" : "5",
+        "count" : "580"
+      }, {
+        "item" : "6",
+        "count" : "529"
+      }, {
+        "item" : "7",
+        "count" : "470"
+      }, {
+        "item" : "8",
+        "count" : "400"
+      }, {
+        "item" : "9",
+        "count" : "380"
+      }, {
+        "item" : "11",
+        "count" : "379"
+      }, {
+        "item" : "10",
+        "count" : "363"
+      }, {
+        "item" : "14",
+        "count" : "323"
+      }, {
+        "item" : "13",
+        "count" : "318"
+      }, {
+        "item" : "12",
+        "count" : "312"
+      }, {
+        "item" : "16",
+        "count" : "283"
+      }, {
+        "item" : "15",
+        "count" : "270"
+      }, {
+        "item" : "18",
+        "count" : "256"
+      }, {
+        "item" : "17",
+        "count" : "244"
+      }, {
+        "item" : "19",
+        "count" : "226"
+      } ],
+      "smallest" : "0",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614936,
+    "name" : "Larceny",
+    "dataTypeName" : "number",
+    "description" : "One count per victim. The unlawful taking, carrying,\nleading, or riding away of property from the possession or\nconstructive possession of another. It includes crimes such\nas shoplifting, purse snatching, bicycle thefts, etc., in which\nno use of force, violence, or fraud occurs. This offense\ncategory does not include offenses such as embezzlement,\nforgery, or bad checks.",
+    "fieldName" : "larceny",
+    "position" : 13,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887748,
+    "width" : 129,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "122704",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "776"
+      }, {
+        "item" : "1",
+        "count" : "636"
+      }, {
+        "item" : "2",
+        "count" : "521"
+      }, {
+        "item" : "3",
+        "count" : "397"
+      }, {
+        "item" : "4",
+        "count" : "371"
+      }, {
+        "item" : "5",
+        "count" : "339"
+      }, {
+        "item" : "6",
+        "count" : "322"
+      }, {
+        "item" : "7",
+        "count" : "295"
+      }, {
+        "item" : "8",
+        "count" : "250"
+      }, {
+        "item" : "9",
+        "count" : "241"
+      }, {
+        "item" : "10",
+        "count" : "227"
+      }, {
+        "item" : "12",
+        "count" : "226"
+      }, {
+        "item" : "11",
+        "count" : "218"
+      }, {
+        "item" : "13",
+        "count" : "205"
+      }, {
+        "item" : "15",
+        "count" : "186"
+      }, {
+        "item" : "16",
+        "count" : "185"
+      }, {
+        "item" : "14",
+        "count" : "180"
+      }, {
+        "item" : "17",
+        "count" : "180"
+      }, {
+        "item" : "18",
+        "count" : "167"
+      }, {
+        "item" : "22",
+        "count" : "160"
+      } ],
+      "smallest" : "0",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614937,
+    "name" : "Motor Vehicle Theft",
+    "dataTypeName" : "number",
+    "description" : "One count per victim. The theft or attempted theft of a\nmotor vehicle, including automobiles, trucks, buses,\nmotorcycles, and snowmobiles.",
+    "fieldName" : "motor_vehicle_theft",
+    "position" : 14,
+    "renderTypeName" : "number",
+    "tableColumnId" : 7887749,
+    "width" : 190,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "50300",
+      "null" : "0",
+      "top" : [ {
+        "item" : "0",
+        "count" : "6748"
+      }, {
+        "item" : "1",
+        "count" : "2369"
+      }, {
+        "item" : "2",
+        "count" : "1576"
+      }, {
+        "item" : "3",
+        "count" : "1126"
+      }, {
+        "item" : "4",
+        "count" : "1004"
+      }, {
+        "item" : "5",
+        "count" : "808"
+      }, {
+        "item" : "6",
+        "count" : "698"
+      }, {
+        "item" : "7",
+        "count" : "567"
+      }, {
+        "item" : "8",
+        "count" : "533"
+      }, {
+        "item" : "9",
+        "count" : "507"
+      }, {
+        "item" : "10",
+        "count" : "414"
+      }, {
+        "item" : "11",
+        "count" : "377"
+      }, {
+        "item" : "12",
+        "count" : "374"
+      }, {
+        "item" : "14",
+        "count" : "312"
+      }, {
+        "item" : "13",
+        "count" : "283"
+      }, {
+        "item" : "16",
+        "count" : "253"
+      }, {
+        "item" : "15",
+        "count" : "251"
+      }, {
+        "item" : "17",
+        "count" : "233"
+      }, {
+        "item" : "18",
+        "count" : "227"
+      }, {
+        "item" : "19",
+        "count" : "190"
+      } ],
+      "smallest" : "0",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "precisionStyle" : "standard",
+      "noCommas" : "false",
+      "align" : "right"
+    }
+  }, {
+    "id" : 543614938,
+    "name" : "Region",
+    "dataTypeName" : "text",
+    "description" : "Region where the crime was reported. Regions include\nNew York City (Bronx, Kings, New York, Queens, and\nRichmond counties) and Non-New York City (all other\ncounties).",
+    "fieldName" : "region",
+    "position" : 15,
+    "renderTypeName" : "text",
+    "tableColumnId" : 32105314,
+    "width" : 127,
+    "cachedContents" : {
+      "non_null" : "23832",
+      "largest" : "Non-New York City",
+      "null" : "0",
+      "top" : [ {
+        "item" : "Non-New York City",
+        "count" : "23657"
+      }, {
+        "item" : "New York City",
+        "count" : "175"
+      } ],
+      "smallest" : "New York City",
+      "count" : "23832",
+      "cardinality" : "23832"
+    },
+    "format" : {
+      "displayStyle" : "plain",
+      "align" : "center"
+    }
+  } ],
+  "grants" : [ {
+    "inherited" : false,
+    "type" : "viewer",
+    "flags" : [ "public" ]
+  } ],
+  "metadata" : {
+    "rdfSubject" : "0",
+    "rdfClass" : "",
+    "jsonQuery" : {
+      "order" : [ {
+        "columnFieldName" : "year",
+        "ascending" : false
+      }, {
+        "columnFieldName" : "county",
+        "ascending" : true
+      }, {
+        "columnFieldName" : "agency",
+        "ascending" : true
+      }, {
+        "columnFieldName" : "region",
+        "ascending" : true
+      } ]
+    },
+    "attachments" : [ {
+      "filename" : "DCJS_IndexCrimesByCountyAndAgency_Overview.pdf",
+      "assetId" : "70f7182f-e06c-4dd4-84e7-ab04fe970762",
+      "name" : "DCJS_IndexCrimesByCountyAndAgency_Overview.pdf"
+    }, {
+      "filename" : "DCJS_IndexCrimesByCountyAndAgency_DataDictionary.pdf",
+      "assetId" : "ad4d5543-71e4-4bbd-8c02-9cda59762dc1",
+      "name" : "DCJS_IndexCrimesByCountyAndAgency_DataDictionary.pdf"
+    } ],
+    "custom_fields" : {
+      "Dataset Summary" : {
+        "Posting Frequency" : "Annually",
+        "Organization" : "Office of Justice Research and Performance",
+        "Contact Information" : "dcjsstats@dcjs.ny.gov",
+        "Time Period" : "Beginning January 1990",
+        "Coverage" : "Statewide with exceptions",
+        "Granularity" : "Police Department",
+        "Units" : "Crime Incident or Victim",
+        "Dataset Owner" : "Office of Justice Research and Performance"
+      },
+      "Local Data" : {
+        "County_Column" : "county",
+        "County Filter" : "Yes"
+      },
+      "Additional Resources" : {
+        "See Also" : "http://www.criminaljustice.ny.gov/crimnet/ojsa/indexcrimes/county_totals.htm"
+      },
+      "Disclaimers" : {
+        "Limitations" : "Police agencies may experience reporting problems that preclude accurate or complete reporting. The counts represent only crimes reported to the police but not total crimes that occurred. "
+      },
+      "Notes" : {
+        "Notes" : "Not all agencies have complete reporting as indicated by the number of months reported (\"Months reported\" column). Due to a system conversion in 2002, number of months reported (\"Months reported\") is not available for any years prior to 2002. Some agencies became obsolete or were newly formed during the reporting period covered.  Agencies may also experience reporting problems that can account for unusual changes in counts over time. Agencies may not have entries for each year due to incomplete reporting, no incidences of index crimes for a particular year or they were not an active agency in that year.  DCJS posts preliminary data in the spring and final data in the fall."
+      },
+      "Dataset Information" : {
+        "Agency" : "Criminal Justice Services, Division of"
+      }
+    },
+    "rowIdentifier" : 543614939,
+    "rowLabel" : "Row",
+    "availableDisplayTypes" : [ "table", "fatrow", "page" ],
+    "renderTypeConfig" : {
+      "visible" : {
+        "table" : true
+      }
+    }
+  },
+  "owner" : {
+    "id" : "xzik-pf59",
+    "displayName" : "NY Open Data",
+    "profileImageUrlLarge" : "/api/users/xzik-pf59/profile_images/LARGE",
+    "profileImageUrlMedium" : "/api/users/xzik-pf59/profile_images/THUMB",
+    "profileImageUrlSmall" : "/api/users/xzik-pf59/profile_images/TINY",
+    "screenName" : "NY Open Data",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "query" : {
+    "orderBys" : [ {
+      "ascending" : false,
+      "expression" : {
+        "columnId" : 543614926,
+        "type" : "column"
+      }
+    }, {
+      "ascending" : true,
+      "expression" : {
+        "columnId" : 543614924,
+        "type" : "column"
+      }
+    }, {
+      "ascending" : true,
+      "expression" : {
+        "columnId" : 543614925,
+        "type" : "column"
+      }
+    }, {
+      "ascending" : true,
+      "expression" : {
+        "columnId" : 543614938,
+        "type" : "column"
+      }
+    } ]
+  },
+  "rights" : [ "read" ],
+  "tableAuthor" : {
+    "id" : "xzik-pf59",
+    "displayName" : "NY Open Data",
+    "profileImageUrlLarge" : "/api/users/xzik-pf59/profile_images/LARGE",
+    "profileImageUrlMedium" : "/api/users/xzik-pf59/profile_images/THUMB",
+    "profileImageUrlSmall" : "/api/users/xzik-pf59/profile_images/TINY",
+    "screenName" : "NY Open Data",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "tags" : [ "index crime", "public safety", "ucr" ],
+  "flags" : [ "default", "ownerMayBeContacted", "restorable", "restorePossibleForType" ]
+}

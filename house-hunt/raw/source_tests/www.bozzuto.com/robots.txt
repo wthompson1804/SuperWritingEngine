@@ -1,0 +1,97 @@
+# Googlebot inherits these wildcard rules (not listed as an AI bot).
+# Applebot inherits these wildcard rules for iOS organic search; Applebot-Extended is training-only.
+User-agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+Allow: /
+Disallow: /api/
+Disallow: /search
+
+# OpenAI — search
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+Disallow: /search
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /search
+
+# Anthropic — search
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /search
+
+User-agent: Claude-User
+Allow: /
+Disallow: /api/
+Disallow: /search
+
+# Perplexity — search
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /search
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+Disallow: /search
+
+# You.com — search
+
+User-agent: YouBot
+Allow: /
+Disallow: /api/
+Disallow: /search
+
+# OpenAI — training
+
+User-agent: GPTBot
+Disallow: /
+
+# Anthropic — training
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Google AI — training
+
+User-agent: Google-Extended
+Disallow: /
+
+# Apple Intelligence — training
+
+User-agent: Applebot-Extended
+Disallow: /
+
+# Amazon AI — training
+
+User-agent: Amazonbot
+Disallow: /
+
+# Cohere — training
+
+User-agent: cohere-ai
+Disallow: /
+
+# Meta — training
+
+User-agent: meta-externalagent
+Disallow: /
+
+# ByteDance — training
+
+User-agent: Bytespider
+Disallow: /
+
+Sitemap: https://www.bozzuto.com/sitemap.xml
+# AI discovery: https://www.bozzuto.com/llms.txt
+

@@ -1,0 +1,14 @@
+[
+ {"name":"trulia_search_zip","url":"https://www.trulia.com/for_rent/11375_zip/"},
+ {"name":"hotpads_search_zip","url":"https://hotpads.com/11375/apartments-for-rent"},
+ {"name":"hotpads_sitemap_building","url":"https://hotpads.com/sitemap-building-index.xml"},
+ {"name":"apartmentlist_stamford","url":"https://www.apartmentlist.com/ct/stamford"},
+ {"name":"apartmentlist_sitemap","url":"https://www.apartmentlist.com/sitemap.xml"},
+ {"name":"zillow_building","url":"https://www.zillow.com/b/104-40-queens-blvd-forest-hills-ny-CgH9Z2/"},
+ {"name":"zillow_homedetails","url":"https://www.zillow.com/homedetails/10025-Queens-Blvd-APT-5L-Forest-Hills-NY-11375/2074816545_zpid/"},
+ {"name":"craigslist_www_view","url":"https://www.craigslist.org/view/d/elmhurst-24oo-1bed-1bath/kdL1PBzDV5JW1LjDSmwnsL"},
+ {"name":"craigslist_www_rss","url":"https://www.craigslist.org/search/subarea/que?cat=apa&query=forest%20hills&format=rss"},
+ {"name":"zumper_stamford","url":"https://www.zumper.com/apartments-for-rent/stamford-ct"},
+ {"name":"zumper_building","url":"https://www.zumper.com/apartment-buildings/67606/71st-rd-forest-hills-ny"},
+ {"name":"streeteasy_neigh_sitemap","url":"https://streeteasy.com/neighborhoods/sitemap_index.xml"}
+]

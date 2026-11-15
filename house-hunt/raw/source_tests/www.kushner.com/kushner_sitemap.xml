@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="https://kushner.com/sitemaps_xsl.xsl"?>
+<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap>
+<loc>https://kushner.com/post-sitemap1.xml</loc>
+</sitemap>
+<sitemap>
+<loc>https://kushner.com/page-sitemap1.xml</loc>
+<lastmod>2026-11-09T15:06:06-05:00</lastmod>
+</sitemap>
+<sitemap>
+<loc>https://kushner.com/category-sitemap1.xml</loc>
+</sitemap>
+</sitemapindex>

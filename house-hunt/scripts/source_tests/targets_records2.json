@@ -1,0 +1,89 @@
+[
+ {
+  "name": "census_acs_nokey",
+  "url": "https://api.census.gov/data/2023/acs/acs5?get=NAME,B25064_001E&for=county:081&in=state:36",
+  "override": "robots.txt returned HTML 'Request Rejected'; documented public API, 1 test call"
+ },
+ {
+  "name": "census_acs_demokey",
+  "url": "https://api.census.gov/data/2023/acs/acs5?get=NAME,B25064_001E&for=county:081&in=state:36&key=DEMO_KEY",
+  "override": "same"
+ },
+ {
+  "name": "census_data_json",
+  "url": "https://api.census.gov/data/2023/acs/acs5.json",
+  "override": "same"
+ },
+ {
+  "name": "eia_demokey",
+  "url": "https://api.eia.gov/v2/electricity/retail-sales/data/?api_key=DEMO_KEY&frequency=monthly&data[0]=price&facets[stateid][]=NY&facets[sectorid][]=RES&sort[0][column]=period&sort[0][direction]=desc&length=3",
+  "override": "robots.txt path answered by the API itself (403 API_KEY_MISSING JSON)"
+ },
+ {
+  "name": "fcc_data_download",
+  "url": "https://broadbandmap.fcc.gov/data-download"
+ },
+ {
+  "name": "fcc_api_asof_nologin",
+  "url": "https://broadbandmap.fcc.gov/api/public/map/listAsOfDates"
+ },
+ {
+  "name": "hud_safmr_page",
+  "url": "https://www.huduser.gov/portal/datasets/fmr/smallarea/index.html"
+ },
+ {
+  "name": "hud_safmr_fy2026_xlsx_head",
+  "url": "https://www.huduser.gov/portal/datasets/fmr/fmr2026/fy2026_safmrs.xlsx",
+  "method": "HEAD"
+ },
+ {
+  "name": "epa_walkability_zip_head",
+  "url": "https://edg.epa.gov/EPADataCommons/public/OA/WalkabilityIndex.zip",
+  "method": "HEAD"
+ },
+ {
+  "name": "epa_walkability_mapserver",
+  "url": "https://geodata.epa.gov/arcgis/rest/services/OA/WalkabilityIndex/MapServer?f=json"
+ },
+ {
+  "name": "bts_folder",
+  "url": "https://geo.dot.gov/server/rest/services/BTS?f=json"
+ },
+ {
+  "name": "njta_toll_calc",
+  "url": "https://www.njta.gov/travel-resources/toll-calculator/"
+ },
+ {
+  "name": "thruway_apex_robots",
+  "url": "https://thruway.ny.gov/robots.txt"
+ },
+ {
+  "name": "nypd_precinct_pdf_112",
+  "url": "https://www.nyc.gov/assets/nypd/downloads/pdf/crime_statistics/cs-en-us-112pct.pdf"
+ },
+ {
+  "name": "nypd_compstat2",
+  "url": "https://compstat.nypdonline.org/"
+ },
+ {
+  "name": "nj_ucr_crime_reports",
+  "url": "https://www.nj.gov/njsp/ucr/crime-reports.shtml"
+ },
+ {
+  "name": "ct_nibrs_7t99_query",
+  "url": "https://data.ct.gov/resource/7t99-gbjg.json?$limit=3"
+ },
+ {
+  "name": "fbi_cde_summarized_stamford",
+  "url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/CT0013500/V?from=01-2023&to=12-2023&API_KEY=DEMO_KEY"
+ },
+ {
+  "name": "apartmentlist_national_rent_data",
+  "url": "https://www.apartmentlist.com/research/national-rent-data"
+ },
+ {
+  "name": "walkscore_robots_retry",
+  "url": "https://www.walkscore.com/score/forest-hills-queens-ny",
+  "robots_only": true
+ }
+]

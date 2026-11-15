@@ -1,0 +1,1230 @@
+"location_name","location_type","location_fips_code","population","state","county","metro","year","month","rent_change_mom","rent_change_yoy","rent_change_pandemic","price_overall","price_1br","price_2br"
+"United States","National",0,331097593,,,,2026,10,-0.0034,6e-04,0.1917,1384,1215,1369
+"Akron, OH","Metro",10420,700578,,,"Akron, OH",2026,10,-0.004,0.0408,0.4058,1129,870,1151
+"Albany-Schenectady-Troy, NY","Metro",10580,901729,,,"Albany-Schenectady-Troy, NY",2026,10,0.0018,0.038,0.3822,1416,1235,1506
+"Albuquerque, NM","Metro",10740,915968,,,"Albuquerque, NM",2026,10,-0.0048,-0.0034,0.4445,1236,990,1254
+"Allentown-Bethlehem-Easton, PA-NJ","Metro",10900,863166,,,"Allentown-Bethlehem-Easton, PA-NJ",2026,10,0.0042,0.015,0.3686,1449,1176,1509
+"Amarillo, TX","Metro",11100,269278,,,"Amarillo, TX",2026,10,0.0133,0.0641,0.3854,1266,1012,1256
+"Anchorage, AK","Metro",11260,399335,,,"Anchorage, AK",2026,10,0.0099,0.0436,0.5669,1775,1273,1739
+"Ann Arbor, MI","Metro",11460,370231,,,"Ann Arbor, MI",2026,10,-0.0022,0.0018,0.2442,1479,1275,1562
+"Asheville, NC","Metro",11700,469484,,,"Asheville, NC",2026,10,-0.0043,-0.0421,0.2277,1227,1114,1205
+"Athens-Clarke County, GA","Metro",12020,216194,,,"Athens-Clarke County, GA",2026,10,-0.008,0.004,0.3046,1220,1046,1198
+"Atlanta-Sandy Springs-Alpharetta, GA","Metro",12060,6094752,,,"Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0035,5e-04,0.1812,1451,1326,1395
+"Auburn-Opelika, AL","Metro",12220,175126,,,"Auburn-Opelika, AL",2026,10,-0.0156,0.0176,0.3007,1099,1005,1103
+"Augusta-Richmond County, GA-SC","Metro",12260,612898,,,"Augusta-Richmond County, GA-SC",2026,10,-8e-04,0.0166,0.264,1240,1039,1157
+"Austin-Round Rock-Georgetown, TX","Metro",12420,2296377,,,"Austin-Round Rock-Georgetown, TX",2026,10,-0.0023,-0.0115,0.0222,1296,1139,1367
+"Bakersfield, CA","Metro",12540,906883,,,"Bakersfield, CA",2026,10,0.0025,0.0606,0.6038,1652,1167,1532
+"Baltimore-Columbia-Towson, MD","Metro",12580,2840005,,,"Baltimore-Columbia-Towson, MD",2026,10,-0.0047,0.0172,0.2627,1789,1459,1859
+"Baton Rouge, LA","Metro",12940,869755,,,"Baton Rouge, LA",2026,10,-0.0055,0.0267,0.2566,1199,1002,1172
+"Beaumont-Port Arthur, TX","Metro",13140,396279,,,"Beaumont-Port Arthur, TX",2026,10,-0.0086,-0.0277,0.175,1147,924,1137
+"Bend, OR","Metro",13460,199352,,,"Bend, OR",2026,10,-0.0141,-0.0135,0.1531,1623,1222,1479
+"Billings, MT","Metro",13740,185147,,,"Billings, MT",2026,10,-0.0101,-0.0236,0.3619,1254,988,1216
+"Birmingham-Hoover, AL","Metro",13820,1114368,,,"Birmingham-Hoover, AL",2026,10,0.001,0.0192,0.2244,1223,1095,1191
+"Bloomington, IN","Metro",14020,161426,,,"Bloomington, IN",2026,10,-0.0161,-0.0115,0.2825,1214,1063,1209
+"Boise City, ID","Metro",14260,771602,,,"Boise City, ID",2026,10,0.001,0.0844,0.4308,1457,1175,1371
+"Boston-Cambridge-Newton, MA-NH","Metro",14460,4912449,,,"Boston-Cambridge-Newton, MA-NH",2026,10,-0.0105,0.0096,0.2121,2233,1898,2362
+"Boulder, CO","Metro",14500,328658,,,"Boulder, CO",2026,10,-0.0014,0.0253,0.1723,1837,1543,1842
+"Bowling Green, KY","Metro",14540,180624,,,"Bowling Green, KY",2026,10,-2e-04,-0.0066,0.2589,1043,857,1050
+"Bozeman, MT","Metro",14580,119685,,,"Bozeman, MT",2026,10,-0.0123,0.0351,,1418,984,1356
+"Bremerton-Silverdale-Port Orchard, WA","Metro",14740,275411,,,"Bremerton-Silverdale-Port Orchard, WA",2026,10,-0.0038,-0.0096,0.2346,1895,1373,1863
+"Bridgeport-Stamford-Norwalk, CT","Metro",14860,958371,,,"Bridgeport-Stamford-Norwalk, CT",2026,10,-0.0041,-0.0117,0.2836,2149,1832,2235
+"Burlington, NC","Metro",15500,171779,,,"Burlington, NC",2026,10,0.0122,-4e-04,0.3351,1118,1021,1077
+"California-Lexington Park, MD","Metro",15680,113814,,,"California-Lexington Park, MD",2026,10,3e-04,0.0462,0.3064,2152,1812,2054
+"Cape Coral-Fort Myers, FL","Metro",15980,772902,,,"Cape Coral-Fort Myers, FL",2026,10,-0.0061,-0.0416,0.1077,1250,1025,1178
+"Charleston-North Charleston, SC","Metro",16700,803398,,,"Charleston-North Charleston, SC",2026,10,-0.0012,0.0288,0.368,1632,1486,1578
+"Charlotte-Concord-Gastonia, NC-SC","Metro",16740,2668688,,,"Charlotte-Concord-Gastonia, NC-SC",2026,10,3e-04,-0.0176,0.1682,1311,1222,1248
+"Charlottesville, VA","Metro",16820,221648,,,"Charlottesville, VA",2026,10,-0.0226,-0.035,0.1864,1539,1349,1567
+"Chattanooga, TN-GA","Metro",16860,564466,,,"Chattanooga, TN-GA",2026,10,-0.0096,0.0066,0.2814,1113,1013,1090
+"Chicago-Naperville-Elgin, IL-IN-WI","Metro",16980,9566955,,,"Chicago-Naperville-Elgin, IL-IN-WI",2026,10,-0.0057,0.0287,0.2986,1729,1518,1741
+"Cincinnati, OH-KY-IN","Metro",17140,2253528,,,"Cincinnati, OH-KY-IN",2026,10,5e-04,0.0122,0.3406,1212,962,1258
+"Clarksville, TN-KY","Metro",17300,322949,,,"Clarksville, TN-KY",2026,10,-0.0079,0.0037,0.3725,1039,758,943
+"Cleveland-Elyria, OH","Metro",17460,2079759,,,"Cleveland-Elyria, OH",2026,10,-0.0072,0.0204,0.3007,1127,923,1156
+"Coeur d'Alene, ID","Metro",17660,173396,,,"Coeur d'Alene, ID",2026,10,2e-04,0.0035,0.3363,1347,1028,1206
+"College Station-Bryan, TX","Metro",17780,269418,,,"College Station-Bryan, TX",2026,10,-0.0071,-0.0066,0.2354,1282,1114,1207
+"Colorado Springs, CO","Metro",17820,755081,,,"Colorado Springs, CO",2026,10,-0.0014,0.0122,0.1348,1422,1137,1328
+"Columbia, SC","Metro",17900,831913,,,"Columbia, SC",2026,10,-0.0055,-0.0025,0.3524,1211,1061,1157
+"Columbus, GA-AL","Metro",17980,326159,,,"Columbus, GA-AL",2026,10,-0.0067,0.0734,0.3863,1311,1038,1223
+"Columbus, OH","Metro",18140,2137223,,,"Columbus, OH",2026,10,-0.0048,0.0044,0.2788,1322,1115,1358
+"Corpus Christi, TX","Metro",18580,422187,,,"Corpus Christi, TX",2026,10,-0.0111,-8e-04,0.0766,1251,1022,1261
+"Crestview-Fort Walton Beach-Destin, FL","Metro",18880,288639,,,"Crestview-Fort Walton Beach-Destin, FL",2026,10,-0.0077,-0.0217,0.1381,1309,1114,1142
+"Dallas-Fort Worth-Arlington, TX","Metro",19100,7673379,,,"Dallas-Fort Worth-Arlington, TX",2026,10,-0.0017,-0.0126,0.1552,1413,1220,1449
+"Daphne-Fairhope-Foley, AL","Metro",19300,233420,,,"Daphne-Fairhope-Foley, AL",2026,10,-0.0014,0.021,0.3023,1269,1064,1201
+"Davenport-Moline-Rock Island, IA-IL","Metro",19340,382983,,,"Davenport-Moline-Rock Island, IA-IL",2026,10,-0.0044,6e-04,0.1711,978,798,1015
+"Dayton-Kettering, OH","Metro",19430,812506,,,"Dayton-Kettering, OH",2026,10,-0.001,0.0209,0.423,1129,860,1124
+"Deltona-Daytona Beach-Ormond Beach, FL","Metro",19660,676035,,,"Deltona-Daytona Beach-Ormond Beach, FL",2026,10,-4e-04,-0.0241,0.2046,1385,1085,1324
+"Denver-Aurora-Lakewood, CO","Metro",19740,2959386,,,"Denver-Aurora-Lakewood, CO",2026,10,-0.0066,-0.0196,0.0927,1632,1414,1691
+"Des Moines-West Des Moines, IA","Metro",19780,711490,,,"Des Moines-West Des Moines, IA",2026,10,-0.01,0.0061,0.1395,1145,955,1165
+"Detroit-Warren-Dearborn, MI","Metro",19820,4375604,,,"Detroit-Warren-Dearborn, MI",2026,10,-0.0012,0.0375,0.2647,1267,1009,1308
+"Duluth, MN-WI","Metro",20260,291491,,,"Duluth, MN-WI",2026,10,-0.0036,0.0347,0.3003,1120,884,1207
+"Durham-Chapel Hill, NC","Metro",20500,648066,,,"Durham-Chapel Hill, NC",2026,10,-0.0023,0.0086,0.2139,1306,1172,1323
+"El Paso, TX","Metro",21340,867161,,,"El Paso, TX",2026,10,0.0038,0.0225,0.406,1179,935,1113
+"Eugene-Springfield, OR","Metro",21660,382218,,,"Eugene-Springfield, OR",2026,10,-0.0067,-0.0204,0.2663,1222,928,1240
+"Evansville, IN-KY","Metro",21780,313961,,,"Evansville, IN-KY",2026,10,0.0012,-4e-04,0.3177,1080,844,1124
+"Fargo, ND-MN","Metro",22020,251635,,,"Fargo, ND-MN",2026,10,0.0082,0.0278,0.249,1069,905,1086
+"Fayetteville, NC","Metro",22180,522537,,,"Fayetteville, NC",2026,10,0.0014,-0.0092,0.3848,1218,946,1080
+"Fayetteville-Springdale-Rogers, AR","Metro",22220,550596,,,"Fayetteville-Springdale-Rogers, AR",2026,10,-0.0011,-0.0181,0.3478,1142,885,1060
+"Flagstaff, AZ","Metro",22380,144705,,,"Flagstaff, AZ",2026,10,-0.017,-0.0243,0.3105,1464,1334,1458
+"Fort Collins, CO","Metro",22660,359363,,,"Fort Collins, CO",2026,10,-0.0115,0.0073,0.2448,1626,1393,1530
+"Fort Wayne, IN","Metro",23060,419715,,,"Fort Wayne, IN",2026,10,0.002,0.0498,0.4069,1135,938,1147
+"Fresno, CA","Metro",23420,1008280,,,"Fresno, CA",2026,10,-0.0102,0.0038,0.3535,1394,1081,1337
+"Gainesville, FL","Metro",23540,341067,,,"Gainesville, FL",2026,10,-0.0108,-0.0133,0.1533,1168,989,1217
+"Gainesville, GA","Metro",23580,204953,,,"Gainesville, GA",2026,10,-0.008,0.0056,0.2558,1260,1135,1218
+"Grand Forks, ND-MN","Metro",24220,104055,,,"Grand Forks, ND-MN",2026,10,0.007,0.0491,0.3747,1205,948,1214
+"Grand Rapids-Kentwood, MI","Metro",24340,1087068,,,"Grand Rapids-Kentwood, MI",2026,10,7e-04,0.023,0.3863,1295,1098,1326
+"Greeley, CO","Metro",24540,331466,,,"Greeley, CO",2026,10,-0.0093,0.0162,0.1456,1558,1095,1432
+"Greensboro-High Point, NC","Metro",24660,775169,,,"Greensboro-High Point, NC",2026,10,-0.0089,-0.0047,0.3866,1089,938,1058
+"Greenville, NC","Metro",24780,171196,,,"Greenville, NC",2026,10,0.0033,-0.0234,0.2977,1180,921,1162
+"Greenville-Anderson, SC","Metro",24860,931405,,,"Greenville-Anderson, SC",2026,10,-0.0013,0.0101,0.2747,1137,1029,1105
+"Gulfport-Biloxi, MS","Metro",25060,416839,,,"Gulfport-Biloxi, MS",2026,10,0.0073,0.0074,0.4437,1236,954,1143
+"Harrisburg-Carlisle, PA","Metro",25420,593318,,,"Harrisburg-Carlisle, PA",2026,10,0,0.0242,0.3542,1302,1080,1335
+"Hartford-East Hartford-Middletown, CT","Metro",25540,1215703,,,"Hartford-East Hartford-Middletown, CT",2026,10,-0.0073,0.0118,0.3985,1626,1340,1748
+"Hickory-Lenoir-Morganton, NC","Metro",25860,366031,,,"Hickory-Lenoir-Morganton, NC",2026,10,0.006,0.0438,0.4144,967,749,933
+"Hilton Head Island-Bluffton, SC","Metro",25940,218515,,,"Hilton Head Island-Bluffton, SC",2026,10,-0.0016,-0.0262,0.2871,1476,1394,1446
+"Houma-Thibodaux, LA","Metro",26380,206082,,,"Houma-Thibodaux, LA",2026,10,5e-04,0.0137,0.3132,1090,907,1129
+"Houston-The Woodlands-Sugar Land, TX","Metro",26420,7142603,,,"Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0029,-0.0191,0.097,1330,1132,1331
+"Huntsville, AL","Metro",26620,493980,,,"Huntsville, AL",2026,10,-0.0047,-0.0118,0.1134,1008,847,962
+"Indianapolis-Carmel-Anderson, IN","Metro",26900,2109957,,,"Indianapolis-Carmel-Anderson, IN",2026,10,7e-04,0.0149,0.3243,1275,1082,1266
+"Jackson, MS","Metro",27140,591397,,,"Jackson, MS",2026,10,-0.0024,0.0052,0.357,1249,1036,1259
+"Jackson, TN","Metro",27180,180446,,,"Jackson, TN",2026,10,-0.0038,0.0283,0.5185,1138,741,1072
+"Jacksonville, FL","Metro",27260,1613587,,,"Jacksonville, FL",2026,10,-0.0014,0.0051,0.2275,1361,1116,1330
+"Johnson City, TN","Metro",27740,207442,,,"Johnson City, TN",2026,10,0.0081,-0.0106,0.6134,1081,829,1084
+"Kalamazoo-Portage, MI","Metro",28020,261426,,,"Kalamazoo-Portage, MI",2026,10,-0.0017,0.0519,0.4019,1111,954,1163
+"Kansas City, MO-KS","Metro",28140,2190750,,,"Kansas City, MO-KS",2026,10,-0.0038,0.0279,0.3064,1369,1183,1354
+"Kennewick-Richland, WA","Metro",28420,304252,,,"Kennewick-Richland, WA",2026,10,-0.0113,-0.0337,0.2952,1324,1084,1325
+"Killeen-Temple, TX","Metro",28660,477577,,,"Killeen-Temple, TX",2026,10,-0.0036,0.0032,0.2767,1060,759,950
+"Kingsport-Bristol, TN-VA","Metro",28700,308386,,,"Kingsport-Bristol, TN-VA",2026,10,-0.009,-0.017,0.5087,954,717,943
+"Knoxville, TN","Metro",28940,884359,,,"Knoxville, TN",2026,10,-0.0058,-0.006,0.4855,1144,896,1127
+"Lafayette, LA","Metro",29180,479865,,,"Lafayette, LA",2026,10,-0.0069,-0.0182,0.2611,1005,809,985
+"Lafayette-West Lafayette, IN","Metro",29200,224515,,,"Lafayette-West Lafayette, IN",2026,10,-0.0017,0.0168,0.3771,1164,992,1216
+"LaGrange, GA-AL","Metro",29300,104139,,,"LaGrange, GA-AL",2026,10,-0.0063,0.0535,0.3111,1035,795,1027
+"Lake Charles, LA","Metro",29340,216217,,,"Lake Charles, LA",2026,10,-0.007,0.1776,0.364,1445,1048,1459
+"Lakeland-Winter Haven, FL","Metro",29460,736229,,,"Lakeland-Winter Haven, FL",2026,10,0.0024,-0.0368,0.1858,1171,894,1101
+"Lancaster, PA","Metro",29540,553202,,,"Lancaster, PA",2026,10,-0.0099,-0.0654,0.3568,1365,1102,1375
+"Lansing-East Lansing, MI","Metro",29620,538985,,,"Lansing-East Lansing, MI",2026,10,-0.0015,0.0556,0.5045,1298,1041,1351
+"Las Cruces, NM","Metro",29740,219870,,,"Las Cruces, NM",2026,10,-0.0023,0.0582,0.5791,914,789,850
+"Las Vegas-Henderson-Paradise, NV","Metro",29820,2265926,,,"Las Vegas-Henderson-Paradise, NV",2026,10,-6e-04,-0.0235,0.2129,1409,1124,1326
+"Lawton, OK","Metro",30020,127314,,,"Lawton, OK",2026,10,-0.0082,0.0657,0.3127,892,620,828
+"Lexington-Fayette, KY","Metro",30460,515954,,,"Lexington-Fayette, KY",2026,10,-0.0131,0.0185,0.4115,1176,962,1144
+"Lincoln, NE","Metro",30700,339707,,,"Lincoln, NE",2026,10,-0.0049,0.0251,0.3496,1171,986,1177
+"Little Rock-North Little Rock-Conway, AR","Metro",30780,749290,,,"Little Rock-North Little Rock-Conway, AR",2026,10,-0.0078,-0.0062,0.2304,1021,847,982
+"Longview, TX","Metro",30980,287359,,,"Longview, TX",2026,10,0.0081,-0.0401,0.1811,947,763,939
+"Los Angeles-Long Beach-Anaheim, CA","Metro",31080,13111917,,,"Los Angeles-Long Beach-Anaheim, CA",2026,10,-2e-04,-6e-04,0.1446,2208,1898,2365
+"Louisville/Jefferson County, KY-IN","Metro",31140,1282588,,,"Louisville/Jefferson County, KY-IN",2026,10,-0.0067,0.0037,0.2527,1211,995,1230
+"Lubbock, TX","Metro",31180,322285,,,"Lubbock, TX",2026,10,8e-04,0.0227,0.1951,1193,968,1166
+"Macon-Bibb County, GA","Metro",31420,233334,,,"Macon-Bibb County, GA",2026,10,0.0036,0.046,0.347,1173,977,1154
+"Madison, WI","Metro",31540,678995,,,"Madison, WI",2026,10,-0.0096,-0.0218,0.3183,1477,1359,1532
+"Manchester-Nashua, NH","Metro",31700,422733,,,"Manchester-Nashua, NH",2026,10,-0.0039,0.0073,0.4135,1763,1366,1879
+"McAllen-Edinburg-Mission, TX","Metro",32580,873167,,,"McAllen-Edinburg-Mission, TX",2026,10,-0.0026,-0.0276,0.1445,878,664,867
+"Memphis, TN-MS-AR","Metro",32820,1335804,,,"Memphis, TN-MS-AR",2026,10,-0.001,-0.0022,0.2172,1101,915,1025
+"Miami-Fort Lauderdale-Pompano Beach, FL","Metro",33100,6123949,,,"Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0024,0.0041,0.3378,1806,1489,1846
+"Midland, TX","Metro",33260,174621,,,"Midland, TX",2026,10,0,-0.0156,0.0023,1613,1415,1730
+"Milwaukee-Waukesha, WI","Metro",33340,1568940,,,"Milwaukee-Waukesha, WI",2026,10,-0.0055,0.0289,0.3018,1270,1058,1319
+"Minneapolis-St. Paul-Bloomington, MN-WI","Metro",33460,3678328,,,"Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0039,0.0188,0.1172,1532,1320,1641
+"Mobile, AL","Metro",33660,429312,,,"Mobile, AL",2026,10,-0.0076,0.0119,0.3523,1102,886,1072
+"Modesto, CA","Metro",33700,552063,,,"Modesto, CA",2026,10,-0.0032,0.0196,0.2393,1528,1113,1408
+"Montgomery, AL","Metro",33860,384740,,,"Montgomery, AL",2026,10,-0.0036,0.0169,0.4441,1258,1008,1181
+"Moses Lake, WA","Metro",34180,99145,,,"Moses Lake, WA",2026,10,-0.009,-0.0027,0.0983,1091,803,1082
+"Myrtle Beach-Conway-North Myrtle Beach, SC-NC","Metro",34820,496299,,,"Myrtle Beach-Conway-North Myrtle Beach, SC-NC",2026,10,-8e-04,-0.0016,0.2964,1149,969,1080
+"Napa, CA","Metro",34900,137384,,,"Napa, CA",2026,10,0.0064,0.0047,0.107,2276,1734,2398
+"Naples-Marco Island, FL","Metro",34940,380221,,,"Naples-Marco Island, FL",2026,10,-0.0018,-0.0112,0.2929,1553,1351,1477
+"Nashville-Davidson--Murfreesboro--Franklin, TN","Metro",34980,1990873,,,"Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,-0.0039,-0.011,0.1664,1364,1214,1343
+"New Haven-Milford, CT","Metro",35300,866377,,,"New Haven-Milford, CT",2026,10,0.0066,0.0157,0.3385,1647,1395,1714
+"New Orleans-Metairie, LA","Metro",35380,1264357,,,"New Orleans-Metairie, LA",2026,10,-0.0027,0.0176,0.1389,1179,978,1197
+"New York-Newark-Jersey City, NY-NJ-PA","Metro",35620,19908595,,,"New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.0017,0.0248,0.2609,2341,2143,2398
+"North Port-Sarasota-Bradenton, FL","Metro",35840,844461,,,"North Port-Sarasota-Bradenton, FL",2026,10,-0.0033,-0.0297,0.2239,1438,1237,1398
+"Norwich-New London, CT","Metro",35980,268448,,,"Norwich-New London, CT",2026,10,5e-04,0.0494,0.5521,1604,1312,1677
+"Odessa, TX","Metro",36220,162300,,,"Odessa, TX",2026,10,-0.0061,-0.0089,0.027,1640,1382,1702
+"Ogden-Clearfield, UT","Metro",36260,696650,,,"Ogden-Clearfield, UT",2026,10,-0.0053,0.0117,0.2325,1264,918,1183
+"Oklahoma City, OK","Metro",36420,1428923,,,"Oklahoma City, OK",2026,10,-0.0047,0.0114,0.2932,1112,892,1094
+"Olympia-Lacey-Tumwater, WA","Metro",36500,294272,,,"Olympia-Lacey-Tumwater, WA",2026,10,0.0011,0.0114,0.2303,1680,1413,1636
+"Omaha-Council Bluffs, NE-IA","Metro",36540,966688,,,"Omaha-Council Bluffs, NE-IA",2026,10,-0.0014,-0.003,0.2844,1268,1076,1296
+"Orlando-Kissimmee-Sanford, FL","Metro",36740,2679298,,,"Orlando-Kissimmee-Sanford, FL",2026,10,-0.0029,-0.0111,0.2047,1509,1278,1474
+"Oxnard-Thousand Oaks-Ventura, CA","Metro",37100,842009,,,"Oxnard-Thousand Oaks-Ventura, CA",2026,10,-0.0072,-0.0054,0.2602,2451,1983,2347
+"Palm Bay-Melbourne-Titusville, FL","Metro",37340,610723,,,"Palm Bay-Melbourne-Titusville, FL",2026,10,-0.004,-0.0191,0.2352,1398,1169,1313
+"Panama City, FL","Metro",37460,181055,,,"Panama City, FL",2026,10,-0.0052,-0.0457,0.0684,1306,1105,1259
+"Pensacola-Ferry Pass-Brent, FL","Metro",37860,510290,,,"Pensacola-Ferry Pass-Brent, FL",2026,10,-0.01,2e-04,0.2259,1365,1063,1276
+"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Metro",37980,6232894,,,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0061,0.0089,0.262,1577,1374,1668
+"Phoenix-Mesa-Chandler, AZ","Metro",38060,4864209,,,"Phoenix-Mesa-Chandler, AZ",2026,10,-0.0048,-0.0198,0.159,1342,1134,1312
+"Pittsburgh, PA","Metro",38300,2365501,,,"Pittsburgh, PA",2026,10,-0.0097,0.0137,0.2386,1242,1034,1287
+"Portland-South Portland, ME","Metro",38860,552916,,,"Portland-South Portland, ME",2026,10,0.0388,0.0143,0.3784,1603,1318,1739
+"Portland-Vancouver-Hillsboro, OR-WA","Metro",38900,2505312,,,"Portland-Vancouver-Hillsboro, OR-WA",2026,10,-0.0016,-0.0026,0.1265,1652,1437,1660
+"Port St. Lucie, FL","Metro",38940,494081,,,"Port St. Lucie, FL",2026,10,-0.0067,-0.0046,0.2709,1387,1094,1313
+"Prescott Valley-Prescott, AZ","Metro",39150,237830,,,"Prescott Valley-Prescott, AZ",2026,10,0.0044,-0.0157,0.1762,1394,1072,1417
+"Providence-Warwick, RI-MA","Metro",39300,1670949,,,"Providence-Warwick, RI-MA",2026,10,-0.0015,0.0155,0.4254,1519,1175,1598
+"Provo-Orem, UT","Metro",39340,677964,,,"Provo-Orem, UT",2026,10,4e-04,-0.029,0.2531,1315,983,1140
+"Pueblo, CO","Metro",39380,168135,,,"Pueblo, CO",2026,10,-0.0032,-0.0275,0.1459,1052,777,1081
+"Punta Gorda, FL","Metro",39460,189900,,,"Punta Gorda, FL",2026,10,-0.004,-0.0491,0.0611,1044,781,992
+"Raleigh-Cary, NC","Metro",39580,1420825,,,"Raleigh-Cary, NC",2026,10,-0.0023,-5e-04,0.1939,1394,1238,1363
+"Rapid City, SD","Metro",39660,140356,,,"Rapid City, SD",2026,10,8e-04,0.0346,0.3421,1010,754,1040
+"Reno, NV","Metro",39900,490769,,,"Reno, NV",2026,10,0.0041,0.0745,0.3151,1603,1308,1628
+"Richmond, VA","Metro",40060,1316145,,,"Richmond, VA",2026,10,1e-04,9e-04,0.3198,1463,1258,1430
+"Riverside-San Bernardino-Ontario, CA","Metro",40140,4610050,,,"Riverside-San Bernardino-Ontario, CA",2026,10,-6e-04,0.0211,0.3331,1880,1426,1761
+"Roanoke, VA","Metro",40220,314708,,,"Roanoke, VA",2026,10,-0.0027,0.0273,0.4607,1167,991,1125
+"Rochester, MN","Metro",40340,225911,,,"Rochester, MN",2026,10,-0.0062,0.0166,0.1787,1202,983,1197
+"Sacramento-Roseville-Folsom, CA","Metro",40900,2394673,,,"Sacramento-Roseville-Folsom, CA",2026,10,-0.0032,-0.0016,0.2229,1754,1389,1728
+"St. Cloud, MN","Metro",41060,199922,,,"St. Cloud, MN",2026,10,0.0025,0.0596,0.3572,1137,892,1198
+"St. George, UT","Metro",41100,183297,,,"St. George, UT",2026,10,-0.0099,-0.0124,,1430,989,1290
+"St. Louis, MO-IL","Metro",41180,2813523,,,"St. Louis, MO-IL",2026,10,-0.0021,0.0066,0.2571,1266,1033,1292
+"Salem, OR","Metro",41420,433415,,,"Salem, OR",2026,10,0.0065,-0.0029,0.2668,1344,1028,1337
+"Salisbury, MD-DE","Metro",41540,421982,,,"Salisbury, MD-DE",2026,10,-0.0095,-0.0291,0.446,1389,968,1315
+"Salt Lake City, UT","Metro",41620,1254675,,,"Salt Lake City, UT",2026,10,-0.0057,-0.0154,0.1916,1438,1190,1422
+"San Angelo, TX","Metro",41660,122229,,,"San Angelo, TX",2026,10,-0.0025,0.0642,0.2229,1238,956,1257
+"San Antonio-New Braunfels, TX","Metro",41700,2570862,,,"San Antonio-New Braunfels, TX",2026,10,-0.0058,-0.0384,0.0588,1140,963,1169
+"San Diego-Chula Vista-Carlsbad, CA","Metro",41740,3289701,,,"San Diego-Chula Vista-Carlsbad, CA",2026,10,5e-04,0.0082,0.2941,2292,1935,2357
+"San Francisco-Oakland-Berkeley, CA","Metro",41860,4692242,,,"San Francisco-Oakland-Berkeley, CA",2026,10,0.0013,0.1309,0.1314,3022,2722,3200
+"San Jose-Sunnyvale-Santa Clara, CA","Metro",41940,1981584,,,"San Jose-Sunnyvale-Santa Clara, CA",2026,10,-0.0021,0.0919,0.1875,3365,2981,3482
+"Santa Fe, NM","Metro",42140,154481,,,"Santa Fe, NM",2026,10,-0.0032,-0.0303,0.3116,1362,1147,1409
+"Santa Maria-Santa Barbara, CA","Metro",42200,445213,,,"Santa Maria-Santa Barbara, CA",2026,10,-9e-04,-0.0073,0.3009,1993,1731,2021
+"Santa Rosa-Petaluma, CA","Metro",42220,488436,,,"Santa Rosa-Petaluma, CA",2026,10,-0.0046,0.0179,0.1555,2135,1623,2184
+"Savannah, GA","Metro",42340,406575,,,"Savannah, GA",2026,10,-0.0114,-0.0561,0.2956,1393,1207,1329
+"Seattle-Tacoma-Bellevue, WA","Metro",42660,4001701,,,"Seattle-Tacoma-Bellevue, WA",2026,10,-0.0055,-0.0058,0.1326,2002,1774,2031
+"Sebastian-Vero Beach, FL","Metro",42680,160986,,,"Sebastian-Vero Beach, FL",2026,10,0.0133,0.0118,0.4601,1265,992,1281
+"Sherman-Denison, TX","Metro",43300,137008,,,"Sherman-Denison, TX",2026,10,-0.005,-0.0923,0.0424,1050,808,1039
+"Shreveport-Bossier City, LA","Metro",43340,391957,,,"Shreveport-Bossier City, LA",2026,10,0.0076,0.0568,0.3443,1158,966,1125
+"Sierra Vista-Douglas, AZ","Metro",43420,125504,,,"Sierra Vista-Douglas, AZ",2026,10,-0.0164,0.022,0.3895,1106,897,997
+"Sioux City, IA-NE-SD","Metro",43580,149113,,,"Sioux City, IA-NE-SD",2026,10,-0.0029,0.0159,0.2606,1133,956,1169
+"Sioux Falls, SD","Metro",43620,277944,,,"Sioux Falls, SD",2026,10,-5e-04,0.0321,0.2401,970,831,975
+"South Bend-Mishawaka, IN-MI","Metro",43780,323992,,,"South Bend-Mishawaka, IN-MI",2026,10,3e-04,-0.0108,0.4681,1134,961,1164
+"Spartanburg, SC","Metro",43900,330119,,,"Spartanburg, SC",2026,10,-0.0075,3e-04,0.2297,1176,1013,1131
+"Spokane-Spokane Valley, WA","Metro",44060,585485,,,"Spokane-Spokane Valley, WA",2026,10,-0.0152,0.0104,0.343,1218,955,1239
+"Springfield, MO","Metro",44180,477056,,,"Springfield, MO",2026,10,-0.0227,0.0291,0.4323,1233,991,1212
+"Stockton, CA","Metro",44700,779445,,,"Stockton, CA",2026,10,0.0059,-0.0011,0.2002,1634,1170,1476
+"Tallahassee, FL","Metro",45220,386064,,,"Tallahassee, FL",2026,10,-0.0022,-0.0019,0.2941,1256,1097,1250
+"Tampa-St. Petersburg-Clearwater, FL","Metro",45300,3194310,,,"Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0045,-0.0173,0.3004,1468,1235,1466
+"Toledo, OH","Metro",45780,644547,,,"Toledo, OH",2026,10,-0.0078,0.0151,0.4071,931,699,964
+"Trenton-Princeton, NJ","Metro",45940,383732,,,"Trenton-Princeton, NJ",2026,10,-0.0118,-0.0183,0.228,1663,1372,1800
+"Tucson, AZ","Metro",46060,1042393,,,"Tucson, AZ",2026,10,-0.0034,0.0064,0.3049,1139,917,1185
+"Tulsa, OK","Metro",46140,1017724,,,"Tulsa, OK",2026,10,-3e-04,0.0195,0.3428,1102,901,1104
+"Tuscaloosa, AL","Metro",46220,272931,,,"Tuscaloosa, AL",2026,10,-0.0083,0.0446,0.4495,1184,992,1181
+"Tyler, TX","Metro",46340,234667,,,"Tyler, TX",2026,10,0.0193,0.0504,0.3122,1162,909,1141
+"Urban Honolulu, HI","Metro",46520,1010100,,,"Urban Honolulu, HI",2026,10,-0.0046,0.0112,0.2611,2526,1911,2536
+"Vallejo, CA","Metro",46700,450995,,,"Vallejo, CA",2026,10,0.0014,0.0129,0.1799,2199,1713,2121
+"Victoria, TX","Metro",47020,98301,,,"Victoria, TX",2026,10,0.0026,-0.0416,0.0969,1131,956,1210
+"Virginia Beach-Norfolk-Newport News, VA-NC","Metro",47260,1798025,,,"Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,0.0025,0.079,0.4799,1749,1451,1636
+"Waco, TX","Metro",47380,278103,,,"Waco, TX",2026,10,-0.0102,0.0271,0.3147,1105,886,1107
+"Warner Robins, GA","Metro",47580,192171,,,"Warner Robins, GA",2026,10,-0.0111,0.0047,0.371,1211,1004,1107
+"Washington-Arlington-Alexandria, DC-VA-MD-WV","Metro",47900,6346083,,,"Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0027,-8e-04,0.1605,2165,1964,2171
+"Wenatchee, WA","Metro",48300,122265,,,"Wenatchee, WA",2026,10,-0.0121,-0.0351,0.1603,1218,936,1224
+"Wichita, KS","Metro",48620,646794,,,"Wichita, KS",2026,10,-0.004,4e-04,0.275,1047,810,1058
+"Wilmington, NC","Metro",48900,289726,,,"Wilmington, NC",2026,10,-0.009,0.0332,0.2981,1317,1203,1291
+"Winston-Salem, NC","Metro",49180,678243,,,"Winston-Salem, NC",2026,10,-0.0048,0.0142,0.3486,1058,891,1014
+"Worcester, MA-CT","Metro",49340,975551,,,"Worcester, MA-CT",2026,10,-0.0109,-0.0417,0.2511,1450,1091,1511
+"New Jersey","State",34,9249063,"New Jersey",,,2026,10,-0.0018,0.0122,0.2919,1982,1692,2101
+"Montana","State",30,1091840,"Montana",,,2026,10,-0.0088,0.0138,0.3282,1096,861,1103
+"Nebraska","State",31,1958939,"Nebraska",,,2026,10,-0.0022,0.0032,0.2949,1179,1010,1188
+"New Hampshire","State",33,1379610,"New Hampshire",,,2026,10,0.0011,-0.002,0.4035,1552,1212,1692
+"Maine","State",23,1366949,"Maine",,,2026,10,0.0365,0.0121,0.3754,1148,923,1243
+"California","State",6,39356104,"California",,,2026,10,6e-04,0.03,0.1866,2257,1959,2314
+"Arkansas","State",5,3018669,"Arkansas",,,2026,10,-0.0041,-0.0059,0.276,926,722,890
+"Alaska","State",2,734821,"Alaska",,,2026,10,0.0094,0.0507,0.5379,1724,1293,1738
+"Georgia","State",13,10722325,"Georgia",,,2026,10,-0.0041,-0.0011,0.195,1299,1220,1228
+"Alabama","State",1,5028092,"Alabama",,,2026,10,-0.002,0.0076,0.2158,998,814,953
+"North Carolina","State",37,10470214,"North Carolina",,,2026,10,-0.0021,-0.0072,0.2103,1193,1096,1120
+"Wisconsin","State",55,5882128,"Wisconsin",,,2026,10,-0.0059,0.0034,0.3045,1208,1001,1234
+"Minnesota","State",27,5695292,"Minnesota",,,2026,10,-0.0036,0.0197,0.1269,1369,1208,1448
+"Washington","State",53,7688549,"Washington",,,2026,10,-0.0054,-0.006,0.1549,1769,1550,1738
+"District of Columbia","State",11,670587,"District of Columbia",,,2026,10,-0.0029,8e-04,0.0386,2170,2145,2202
+"Delaware","State",10,993635,"Delaware",,,2026,10,1e-04,0.0023,0.4358,1534,1295,1527
+"Wyoming","State",56,577929,"Wyoming",,,2026,10,0.0063,0.0338,0.339,1116,841,1082
+"Arizona","State",4,7172282,"Arizona",,,2026,10,-0.0045,-0.017,0.1739,1288,1078,1267
+"Michigan","State",26,10057921,"Michigan",,,2026,10,-0.0031,0.0347,0.3034,1209,971,1246
+"Utah","State",49,3283809,"Utah",,,2026,10,-0.0052,-0.0135,0.204,1321,1077,1250
+"West Virginia","State",54,1792967,"West Virginia",,,2026,10,-0.0057,-0.0021,0.3395,982,740,998
+"Tennessee","State",47,6923772,"Tennessee",,,2026,10,-0.0045,-0.0088,0.2209,1135,993,1081
+"Mississippi","State",28,2958846,"Mississippi",,,2026,10,0.0053,0.0175,0.3791,1111,902,1062
+"Idaho","State",16,1854109,"Idaho",,,2026,10,5e-04,0.0515,0.3919,1173,881,1100
+"Ohio","State",39,11774683,"Ohio",,,2026,10,-0.0047,0.0096,0.3112,1112,881,1133
+"Virginia","State",51,8624511,"Virginia",,,2026,10,-0.0017,0.0125,0.2633,1784,1659,1660
+"Illinois","State",17,12757634,"Illinois",,,2026,10,-0.0052,0.0293,0.3023,1516,1324,1518
+"Florida","State",12,21634529,"Florida",,,2026,10,-0.0032,-0.0083,0.2651,1500,1266,1496
+"Iowa","State",19,3188836,"Iowa",,,2026,10,-0.0079,0.0045,0.1493,1003,788,1029
+"Indiana","State",18,6784403,"Indiana",,,2026,10,-5e-04,0.0158,0.3396,1127,935,1136
+"Massachusetts","State",25,6984205,"Massachusetts",,,2026,10,-0.0108,0.0077,0.2165,2016,1594,2144
+"Colorado","State",8,5770790,"Colorado",,,2026,10,-0.0057,-0.0116,0.1078,1556,1353,1570
+"New Mexico","State",35,2112463,"New Mexico",,,2026,10,-0.0043,-0.0038,0.4315,1096,906,1072
+"New York","State",36,19994379,"New York",,,2026,10,-5e-04,0.0423,0.3073,2016,1919,2030
+"South Carolina","State",45,5142750,"South Carolina",,,2026,10,-0.0033,0.0098,0.3152,1268,1154,1215
+"Maryland","State",24,6161707,"Maryland",,,2026,10,-0.0042,0.0032,0.2158,1827,1533,1872
+"Missouri","State",29,6154422,"Missouri",,,2026,10,-0.0032,0.0167,0.2689,1165,970,1157
+"Louisiana","State",22,4640546,"Louisiana",,,2026,10,-0.0033,0.0321,0.2419,1115,946,1113
+"North Dakota","State",38,776874,"North Dakota",,,2026,10,0.0056,0.0205,0.3136,1228,1029,1223
+"Connecticut","State",9,3611317,"Connecticut",,,2026,10,-0.0039,0.0052,0.3517,1715,1421,1799
+"Oklahoma","State",40,3970497,"Oklahoma",,,2026,10,-0.0029,0.0168,0.3083,1026,833,1010
+"Hawaii","State",15,1450589,"Hawaii",,,2026,10,-0.0061,0.0015,0.2392,2354,1798,2388
+"Oregon","State",41,4229374,"Oregon",,,2026,10,-0.0029,-0.0035,0.12,1455,1236,1439
+"Pennsylvania","State",42,12989208,"Pennsylvania",,,2026,10,-0.0063,0.0121,0.2418,1319,1110,1356
+"Kansas","State",20,2935922,"Kansas",,,2026,10,-0.0058,0.0319,0.368,1158,938,1133
+"Rhode Island","State",44,1094250,"Rhode Island",,,2026,10,-8e-04,0.0275,0.448,1558,1204,1636
+"Nevada","State",32,3104817,"Nevada",,,2026,10,0,-0.0091,0.2302,1413,1134,1346
+"South Dakota","State",46,890342,"South Dakota",,,2026,10,-9e-04,0.0312,0.2494,906,733,942
+"Kentucky","State",21,4502935,"Kentucky",,,2026,10,-0.005,0.0106,0.3146,1079,878,1073
+"Texas","State",48,29243342,"Texas",,,2026,10,-0.0023,-0.0154,0.1063,1226,1088,1218
+"Mesquite, TX","City",4847892,149439,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,9e-04,-0.022,0.1811,1240,1045,1243
+"Irving, TX","City",4837000,254962,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0019,0.0136,0.1906,1432,1260,1550
+"Farmers Branch, TX","City",4825452,35985,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,6e-04,0.007,0.0982,1708,1587,1887
+"DeSoto, TX","City",4820092,55882,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0131,-0.0097,0.2576,1419,1201,1445
+"Addison, TX","City",4801240,17026,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0025,-0.0066,0.1001,1550,1448,1807
+"Lewisville, TX","City",4842508,125028,"Texas","Denton County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0011,-0.0058,0.1647,1403,1224,1541
+"Grapevine, TX","City",4830644,50763,"Texas","Tarrant County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0019,-0.0064,0.1691,1778,1532,1865
+"Grand Prairie, TX","City",4830464,197279,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0015,-0.0085,0.1693,1382,1172,1409
+"Coppell, TX","City",4816612,42513,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,0.001,-0.0051,0.2257,1675,1294,1728
+"Richardson, TX","City",4861796,118063,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0098,-0.0149,0.1231,1608,1344,1718
+"Garland, TX","City",4829000,244026,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0033,-0.0343,0.168,1281,1051,1284
+"Dallas, TX","City",4819000,1300642,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0023,-0.0064,0.1559,1321,1207,1428
+"Carrollton, TX","City",4813024,132284,"Texas","Denton County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0033,-0.0148,0.1555,1478,1241,1556
+"San Angelo, TX","City",4864472,99422,"Texas","Tom Green County","San Angelo, TX",2026,10,-0.0036,0.0622,0.1892,1251,968,1265
+"Tyler, TX","City",4874144,106440,"Texas","Smith County","Tyler, TX",2026,10,0.0218,0.0596,0.3201,1156,928,1203
+"Boerne, TX","City",4809160,18475,"Texas","Kendall County","San Antonio-New Braunfels, TX",2026,10,-0.0071,-0.0894,0.074,1336,1111,1311
+"Kyle, TX","City",4839952,48484,"Texas","Hays County","Austin-Round Rock-Georgetown, TX",2026,10,-1e-04,-0.0778,-0.0082,1249,1077,1326
+"Mansfield, TX","City",4846452,73680,"Texas","Tarrant County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0055,-0.0276,0.1484,1639,1411,1651
+"Cleburne, TX","City",4815364,31849,"Texas","Johnson County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0208,0.0749,0.3132,1274,1074,1258
+"Weatherford, TX","City",4876864,32168,"Texas","Parker County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0033,0.0289,0.2523,1493,1237,1401
+"Webster, TX","City",4876948,12297,"Texas","Harris County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0026,5e-04,0.1727,1324,1222,1558
+"Pasadena, TX","City",4856000,150620,"Texas","Harris County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0068,-0.0168,0.152,1261,1052,1272
+"Jersey Village, TX","City",4837612,7763,"Texas","Harris County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0179,-0.0188,0.1432,1324,1270,1513
+"Humble, TX","City",4835348,16563,"Texas","Harris County","Houston-The Woodlands-Sugar Land, TX",2026,10,-9e-04,-0.0127,0.0818,1127,996,1164
+"Conroe, TX","City",4816432,92475,"Texas","Montgomery County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0036,-0.0216,0.1159,1242,1144,1289
+"Tomball, TX","City",4873316,12630,"Texas","Harris County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0085,0.0296,0.1976,1241,1017,1431
+"Houston, TX","City",4835000,2296253,"Texas","Harris County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0026,-0.022,0.0758,1265,1116,1323
+"College Station, TX","City",4815976,120451,"Texas","Brazos County","College Station-Bryan, TX",2026,10,-0.0089,-0.021,0.2053,1237,1077,1141
+"Bryan, TX","City",4810912,84820,"Texas","Brazos County","College Station-Bryan, TX",2026,10,-0.0043,0.0036,0.2652,1288,1107,1236
+"Round Rock, TX","City",4863500,120465,"Texas","Williamson County","Austin-Round Rock-Georgetown, TX",2026,10,-0.0064,0.007,0.0666,1318,1070,1295
+"Pflugerville, TX","City",4857176,64528,"Texas","Travis County","Austin-Round Rock-Georgetown, TX",2026,10,-0.0112,-0.0276,0.0018,1411,1172,1354
+"Leander, TX","City",4842016,62491,"Texas","Williamson County","Austin-Round Rock-Georgetown, TX",2026,10,0.0119,0.0042,0.0117,1494,1099,1162
+"Cedar Park, TX","City",4813552,76344,"Texas","Williamson County","Austin-Round Rock-Georgetown, TX",2026,10,0.0022,0.0084,0.0422,1452,1159,1489
+"Bee Cave, TX","City",4807156,8771,"Texas","Travis County","Austin-Round Rock-Georgetown, TX",2026,10,0.0028,-0.0354,0.0498,1587,1434,1687
+"Austin, TX","City",4805000,958202,"Texas","Travis County","Austin-Round Rock-Georgetown, TX",2026,10,-0.002,-0.0133,0.016,1323,1172,1426
+"Sherman, TX","City",4867496,44052,"Texas","Grayson County","Sherman-Denison, TX",2026,10,-0.0072,-0.1022,0.0604,1080,842,1073
+"Waxahachie, TX","City",4876816,41801,"Texas","Ellis County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0027,0.0092,0.2401,1586,1505,1478
+"Victoria, TX","City",4875428,65481,"Texas","Victoria County","Victoria, TX",2026,10,0.0026,-0.0416,0.0969,1145,963,1249
+"Universal City, TX","City",4874408,19798,"Texas","Bexar County","San Antonio-New Braunfels, TX",2026,10,-0.0326,-0.0735,0.0247,1013,906,1014
+"San Antonio, TX","City",4865000,1445662,"Texas","Bexar County","San Antonio-New Braunfels, TX",2026,10,-0.005,-0.0345,0.0601,1115,953,1173
+"North Richland Hills, TX","City",4852356,70114,"Texas","Tarrant County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0068,-0.008,0.1982,1502,1184,1567
+"Hurst, TX","City",4835576,40053,"Texas","Tarrant County","Dallas-Fort Worth-Arlington, TX",2026,10,0,0.0444,0.2379,1302,1181,1374
+"Haltom City, TX","City",4831928,45771,"Texas","Tarrant County","Dallas-Fort Worth-Arlington, TX",2026,10,3e-04,-0.0267,0.1676,1213,1081,1262
+"Euless, TX","City",4824768,60360,"Texas","Tarrant County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.002,-0.0135,0.2189,1535,1239,1691
+"Bedford, TX","City",4807132,49455,"Texas","Tarrant County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0109,-0.0122,0.2125,1331,1164,1503
+"Arlington, TX","City",4804000,393469,"Texas","Tarrant County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0029,-0.0279,0.1771,1249,1080,1272
+"Fort Worth, TX","City",4827000,924663,"Texas","Tarrant County","Dallas-Fort Worth-Arlington, TX",2026,10,7e-04,-0.0082,0.1409,1337,1141,1317
+"Flower Mound, TX","City",4826232,76630,"Texas","Denton County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.007,-0.0161,0.1844,1934,1584,1840
+"Forney, TX","City",4826604,25269,"Texas","Kaufman County","Dallas-Fort Worth-Arlington, TX",2026,10,1e-04,-0.0507,0.0998,1473,1280,1672
+"Midland, TX","City",4848072,132490,"Texas","Midland County","Midland, TX",2026,10,-0.001,-0.02,-6e-04,1668,1414,1754
+"League City, TX","City",4841980,113469,"Texas","Galveston County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0035,-0.0042,0.1976,1648,1349,1707
+"Galveston, TX","City",4828068,53265,"Texas","Galveston County","Houston-The Woodlands-Sugar Land, TX",2026,10,-6e-04,0.033,0.2312,1324,1156,1409
+"Texas City, TX","City",4872392,53084,"Texas","Galveston County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0035,-0.0136,0.1683,1253,1059,1236
+"Waco, TX","City",4876000,140545,"Texas","McLennan County","Waco, TX",2026,10,-0.0124,0.0297,0.3794,1127,933,1167
+"Lubbock, TX","City",4845000,258190,"Texas","Lubbock County","Lubbock, TX",2026,10,0.0013,0.0217,0.1955,1201,974,1174
+"Odessa, TX","City",4853388,113353,"Texas","Ector County","Odessa, TX",2026,10,-0.0037,-0.0026,0.0284,1615,1363,1633
+"El Paso, TX","City",4824000,677181,"Texas","El Paso County","El Paso, TX",2026,10,0.0038,0.0225,0.406,1183,942,1127
+"Georgetown, TX","City",4829336,71788,"Texas","Williamson County","Austin-Round Rock-Georgetown, TX",2026,10,-0.0064,0.0526,0.0815,1363,1122,1380
+"Amarillo, TX","City",4803000,200360,"Texas","Potter County","Amarillo, TX",2026,10,0.0105,0.0729,0.4133,1287,1032,1284
+"Baytown, TX","City",4806128,84449,"Texas","Harris County","Houston-The Woodlands-Sugar Land, TX",2026,10,0.0131,-0.0616,0.1178,1282,1054,1259
+"Plano, TX","City",4858016,284948,"Texas","Collin County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0061,-0.0232,0.1514,1609,1332,1685
+"McKinney, TX","City",4845744,196160,"Texas","Collin County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0077,-0.0421,0.131,1482,1140,1427
+"Frisco, TX","City",4827684,202075,"Texas","Collin County","Dallas-Fort Worth-Arlington, TX",2026,10,-8e-04,-0.0303,0.1075,1727,1381,1803
+"Allen, TX","City",4801924,105444,"Texas","Collin County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0034,-0.0126,0.1578,1665,1333,1693
+"Seguin, TX","City",4866644,30318,"Texas","Guadalupe County","San Antonio-New Braunfels, TX",2026,10,-0.0151,-0.0276,0.0333,881,697,921
+"San Marcos, TX","City",4865600,67143,"Texas","Hays County","Austin-Round Rock-Georgetown, TX",2026,10,-0.0106,-0.0606,0.0442,1056,957,1092
+"New Braunfels, TX","City",4850820,92993,"Texas","Comal County","San Antonio-New Braunfels, TX",2026,10,-0.0036,-0.072,0.0177,1215,1116,1207
+"Corpus Christi, TX","City",4817000,317804,"Texas","Nueces County","Corpus Christi, TX",2026,10,-0.0113,-0.0194,0.0703,1217,1009,1234
+"Temple, TX","City",4872176,83473,"Texas","Bell County","Killeen-Temple, TX",2026,10,0.0083,0.0235,0.2399,1003,819,981
+"Killeen, TX","City",4839148,153708,"Texas","Bell County","Killeen-Temple, TX",2026,10,-0.0103,-0.0175,0.3005,1075,723,951
+"Beaumont, TX","City",4807000,114573,"Texas","Jefferson County","Beaumont-Port Arthur, TX",2026,10,-0.01,-0.0107,0.143,1132,912,1167
+"Pearland, TX","City",4856348,124478,"Texas","Brazoria County","Houston-The Woodlands-Sugar Land, TX",2026,10,-7e-04,0.0016,0.189,1555,1342,1603
+"The Colony, TX","City",4872530,44323,"Texas","Denton County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0121,0.0119,0.2443,1717,1438,1747
+"Little Elm, TX","City",4843012,48241,"Texas","Denton County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0013,-0.0488,0.1303,1677,1218,1749
+"Denton, TX","City",4819972,142262,"Texas","Denton County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0011,-0.0345,0.1291,1207,1003,1252
+"Spring, TX","City",4869596,63930,"Texas","Harris County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0085,-0.0307,0.1123,1620,1321,1434
+"The Woodlands, TX","City",4872656,118402,"Texas","Montgomery County","Houston-The Woodlands-Sugar Land, TX",2026,10,-4e-04,0.0245,0.115,1705,1248,1662
+"Enterprise, NV","City",3223770,225461,"Nevada","Clark County","Las Vegas-Henderson-Paradise, NV",2026,10,-0.0039,0.0192,0.2384,1614,1284,1525
+"Henderson, NV","City",3231900,318063,"Nevada","Clark County","Las Vegas-Henderson-Paradise, NV",2026,10,-7e-04,-0.0051,0.1951,1624,1323,1565
+"Las Vegas, NV","City",3240000,644835,"Nevada","Clark County","Las Vegas-Henderson-Paradise, NV",2026,10,-0.0012,-0.0306,0.2044,1327,1043,1266
+"North Las Vegas, NV","City",3251800,264022,"Nevada","Clark County","Las Vegas-Henderson-Paradise, NV",2026,10,-0.0034,-0.0076,0.2944,1520,1072,1306
+"Paradise, NV","City",3254600,189733,"Nevada","Clark County","Las Vegas-Henderson-Paradise, NV",2026,10,-0.0036,-0.0719,0.2563,1214,1077,1246
+"Reno, NV","City",3260600,265196,"Nevada","Washoe County","Reno, NV",2026,10,0.002,0.0735,0.3121,1467,1212,1518
+"Sparks, NV","City",3268400,108025,"Nevada","Washoe County","Reno, NV",2026,10,0.0079,0.077,0.3434,1882,1497,1889
+"Spring Valley, NV","City",3268585,220114,"Nevada","Clark County","Las Vegas-Henderson-Paradise, NV",2026,10,-2e-04,-4e-04,0.2295,1460,1238,1392
+"Birmingham, AL","City",107000,200431,"Alabama","Jefferson County","Birmingham-Hoover, AL",2026,10,-0.0013,0.0027,0.1938,1152,1072,1123
+"Hoover, AL","City",135896,91995,"Alabama","Jefferson County","Birmingham-Hoover, AL",2026,10,0.0132,0.0475,0.2471,1549,1295,1539
+"Huntsville, AL","City",137000,215025,"Alabama","Madison County","Huntsville, AL",2026,10,-0.0032,-0.0068,0.1126,1002,843,998
+"Madison, AL","City",145784,56967,"Alabama","Madison County","Huntsville, AL",2026,10,-0.0075,-0.0207,0.1466,1170,1053,1064
+"Mobile, AL","City",150000,186316,"Alabama","Mobile County","Mobile, AL",2026,10,-0.0076,0.0147,0.334,1118,902,1125
+"Montgomery, AL","City",151000,199819,"Alabama","Montgomery County","Montgomery, AL",2026,10,0.0018,0.0227,0.4375,1230,957,1179
+"Tuscaloosa, AL","City",177256,105797,"Alabama","Tuscaloosa County","Tuscaloosa, AL",2026,10,-0.0027,0.0593,0.4608,1262,1031,1255
+"Alameda, CA","City",600562,77565,"California","Alameda County","San Francisco-Oakland-Berkeley, CA",2026,10,0.0037,0.0629,0.0627,2433,2120,2660
+"Anaheim, CA","City",602000,347111,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-1e-04,0.0164,0.2916,2326,1995,2461
+"Bakersfield, CA","City",603526,404321,"California","Kern County","Bakersfield, CA",2026,10,0.0052,0.0532,0.633,1712,1242,1561
+"Brea, CA","City",608100,47099,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0085,0.0436,0.2693,2651,2211,2774
+"Burbank, CA","City",608954,106389,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0083,-0.0199,0.0932,2043,1747,2352
+"Calabasas, CA","City",609598,23106,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0336,-0.0395,0.1464,3169,2824,3107
+"Camarillo, CA","City",610046,70622,"California","Ventura County","Oxnard-Thousand Oaks-Ventura, CA",2026,10,-0.0032,-0.0057,0.256,2594,2110,2539
+"Carlsbad, CA","City",611194,114745,"California","San Diego County","San Diego-Chula Vista-Carlsbad, CA",2026,10,0.0021,0.0295,0.3885,2333,1943,2302
+"Carmichael, CA","City",611390,78144,"California","Sacramento County","Sacramento-Roseville-Folsom, CA",2026,10,-0.0054,-0.0458,0.1656,1515,1319,1576
+"Chino, CA","City",613210,91008,"California","San Bernardino County","Riverside-San Bernardino-Ontario, CA",2026,10,-0.0028,0.0171,0.3826,2325,1673,2144
+"Chino Hills, CA","City",613214,78223,"California","San Bernardino County","Riverside-San Bernardino-Ontario, CA",2026,10,-0.0016,0.0394,0.3645,2953,2497,2720
+"Chula Vista, CA","City",613392,276103,"California","San Diego County","San Diego-Chula Vista-Carlsbad, CA",2026,10,0.0024,-0.0041,0.3283,2349,1726,2258
+"Citrus Heights, CA","City",613588,87127,"California","Sacramento County","Sacramento-Roseville-Folsom, CA",2026,10,-0.0162,-0.0074,0.2363,1656,1506,1658
+"Concord, CA","City",616000,125007,"California","Contra Costa County","San Francisco-Oakland-Berkeley, CA",2026,10,-0.0132,0.0589,0.1168,2417,2033,2393
+"Corona, CA","City",616350,158346,"California","Riverside County","Riverside-San Bernardino-Ontario, CA",2026,10,-0.0018,0.0114,0.3365,2379,1926,2285
+"Costa Mesa, CA","City",616532,111490,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0062,0.0108,0.2807,2613,2333,2692
+"Culver City, CA","City",617568,40357,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.0092,0.012,0.0963,2968,2686,3182
+"Daly City, CA","City",617918,103648,"California","San Mateo County","San Francisco-Oakland-Berkeley, CA",2026,10,0.0223,0.1529,0.1427,3370,3001,3695
+"Dublin, CA","City",620018,71068,"California","Alameda County","San Francisco-Oakland-Berkeley, CA",2026,10,-0.007,0.0978,0.1071,3285,2814,3258
+"El Cajon, CA","City",621712,105721,"California","San Diego County","San Diego-Chula Vista-Carlsbad, CA",2026,10,0.0044,0.0054,0.3567,1674,1424,1745
+"Emeryville, CA","City",622594,12840,"California","Alameda County","San Francisco-Oakland-Berkeley, CA",2026,10,0.0112,0.1323,0.0759,3411,3305,3991
+"Escondido, CA","City",622804,151114,"California","San Diego County","San Diego-Chula Vista-Carlsbad, CA",2026,10,0.0078,-0.004,0.3416,2097,1741,2139
+"Fairfield, CA","City",623182,119420,"California","Solano County","Vallejo, CA",2026,10,-0.0051,0.0133,0.1595,2194,1781,2040
+"Folsom, CA","City",624638,81077,"California","Sacramento County","Sacramento-Roseville-Folsom, CA",2026,10,-0.0047,0.0445,0.2597,2226,1784,2186
+"Fontana, CA","City",624680,209279,"California","San Bernardino County","Riverside-San Bernardino-Ontario, CA",2026,10,0.0109,0.0108,,1995,1268,1828
+"Fremont, CA","City",626000,228795,"California","Alameda County","San Francisco-Oakland-Berkeley, CA",2026,10,-0.0012,0.071,0.1575,2980,2476,3001
+"Fresno, CA","City",627000,541528,"California","Fresno County","Fresno, CA",2026,10,-0.0084,0.0052,0.3515,1397,1105,1364
+"Fullerton, CA","City",628000,142280,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.007,0.0308,0.3067,2426,2121,2540
+"Glendale, CA","City",630000,194512,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.003,-0.0216,0.1191,2143,1846,2374
+"Hayward, CA","City",633000,160602,"California","Alameda County","San Francisco-Oakland-Berkeley, CA",2026,10,-0.0032,2e-04,0.0776,2535,2280,2564
+"Huntington Beach, CA","City",636000,197481,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.007,0.0345,0.2731,2608,2283,2579
+"Inglewood, CA","City",636546,106806,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0039,-0.0069,,1680,1402,1817
+"Irvine, CA","City",636770,304527,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.0036,0.0139,0.3171,3144,2669,3271
+"Laguna Niguel, CA","City",639248,64259,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0017,0.0718,0.3597,3208,2787,3163
+"Lake Forest, CA","City",639496,85583,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.0033,0.0332,0.3782,3322,2854,3408
+"La Mesa, CA","City",640004,60888,"California","San Diego County","San Diego-Chula Vista-Carlsbad, CA",2026,10,0.0052,0.0032,0.3235,2079,1842,2208
+"Long Beach, CA","City",643000,462293,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.0043,0.0159,0.1537,1797,1606,1967
+"Los Angeles, CA","City",644000,3881041,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,7e-04,-0.0057,0.0306,2083,1864,2377
+"Milpitas, CA","City",647766,79092,"California","Santa Clara County","San Jose-Sunnyvale-Santa Clara, CA",2026,10,4e-04,0.1086,0.23,3379,3046,3376
+"Modesto, CA","City",648354,218308,"California","Stanislaus County","Modesto, CA",2026,10,-2e-04,0.0154,,1682,1316,1553
+"Monrovia, CA","City",648648,37656,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0111,-0.0654,2e-04,2078,1669,2196
+"Moreno Valley, CA","City",649270,209578,"California","Riverside County","Riverside-San Bernardino-Ontario, CA",2026,10,-7e-04,0.0379,0.3765,1982,1639,1864
+"Mountain View, CA","City",649670,82132,"California","Santa Clara County","San Jose-Sunnyvale-Santa Clara, CA",2026,10,-0.0015,0.1312,0.1871,3604,3304,4018
+"Murrieta, CA","City",650076,111899,"California","Riverside County","Riverside-San Bernardino-Ontario, CA",2026,10,0.0038,0.0129,0.3421,2108,1638,1974
+"Napa, CA","City",650258,79233,"California","Napa County","Napa, CA",2026,10,8e-04,-0.008,0.081,2277,1764,2361
+"Newport Beach, CA","City",651182,85159,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0018,0.0614,0.3021,3524,2938,3649
+"Oakland, CA","City",653000,437825,"California","Alameda County","San Francisco-Oakland-Berkeley, CA",2026,10,0.0018,0.1645,-0.0748,2369,2167,2602
+"Oceanside, CA","City",653322,173722,"California","San Diego County","San Diego-Chula Vista-Carlsbad, CA",2026,10,0.0068,0.0018,0.3456,2501,2022,2513
+"Ontario, CA","City",653896,176326,"California","San Bernardino County","Riverside-San Bernardino-Ontario, CA",2026,10,-0.0058,0.0185,0.3208,2069,1840,2030
+"Orange, CA","City",653980,138728,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-5e-04,0.0344,0.2968,2595,2166,2552
+"Oxnard, CA","City",654652,202279,"California","Ventura County","Oxnard-Thousand Oaks-Ventura, CA",2026,10,0.0036,-0.0124,0.3153,2231,1869,2108
+"Palmdale, CA","City",655156,166895,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.0021,0.0181,0.2606,1924,1377,1681
+"Palm Desert, CA","City",655184,51290,"California","Riverside County","Riverside-San Bernardino-Ontario, CA",2026,10,0.0073,0.0232,0.3403,1635,1241,1767
+"Pasadena, CA","City",656000,137554,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.0039,0.0136,0.2173,2556,2190,2818
+"Pleasanton, CA","City",657792,78691,"California","Alameda County","San Francisco-Oakland-Berkeley, CA",2026,10,-2e-04,0.0967,0.1122,2954,2319,2991
+"Pomona, CA","City",658072,149831,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0013,-0.0184,0.3098,1886,1509,1904
+"Rancho Cucamonga, CA","City",659451,174696,"California","San Bernardino County","Riverside-San Bernardino-Ontario, CA",2026,10,-0.0041,0.0221,0.3075,2139,1742,2151
+"Rancho Santa Margarita, CA","City",659587,47702,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.0063,0.0229,0.3437,2785,2440,2955
+"Redwood City, CA","City",660102,83077,"California","San Mateo County","San Francisco-Oakland-Berkeley, CA",2026,10,-0.0061,0.1165,0.1421,3677,3263,4132
+"Riverside, CA","City",662000,316076,"California","Riverside County","Riverside-San Bernardino-Ontario, CA",2026,10,-0.0022,0.0127,0.301,1821,1510,1815
+"Rocklin, CA","City",662364,71676,"California","Placer County","Sacramento-Roseville-Folsom, CA",2026,10,-4e-04,0.0021,0.2773,2488,1938,2474
+"Roseville, CA","City",662938,148879,"California","Placer County","Sacramento-Roseville-Folsom, CA",2026,10,0.0011,0.0081,0.297,2159,1762,2198
+"Sacramento, CA","City",664000,523600,"California","Sacramento County","Sacramento-Roseville-Folsom, CA",2026,10,7e-04,-0.0092,0.1815,1666,1367,1727
+"San Bruno, CA","City",665028,43218,"California","San Mateo County","San Francisco-Oakland-Berkeley, CA",2026,10,0.003,0.123,0.0914,3305,2821,3422
+"Ventura, CA","City",665042,110358,"California","Ventura County","Oxnard-Thousand Oaks-Ventura, CA",2026,10,-8e-04,0.0013,0.2686,2201,1851,2325
+"San Diego, CA","City",666000,1383987,"California","San Diego County","San Diego-Chula Vista-Carlsbad, CA",2026,10,-0.0013,0.0071,0.2441,2314,1972,2472
+"San Francisco, CA","City",667000,851036,"California","San Francisco County","San Francisco-Oakland-Berkeley, CA",2026,10,-0.0096,0.243,0.236,3842,3879,4597
+"San Jose, CA","City",668000,1001176,"California","Santa Clara County","San Jose-Sunnyvale-Santa Clara, CA",2026,10,-0.0025,0.0791,0.1717,3146,2738,3248
+"San Mateo, CA","City",668252,104165,"California","San Mateo County","San Francisco-Oakland-Berkeley, CA",2026,10,0.0114,0.1294,0.2245,3966,3512,4400
+"Santa Ana, CA","City",669000,311379,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.0062,-0.0195,0.2832,2243,1967,2319
+"Santa Clara, CA","City",669084,128058,"California","Santa Clara County","San Jose-Sunnyvale-Santa Clara, CA",2026,10,-0.0034,0.0801,0.2254,3511,3192,3658
+"Santa Clarita, CA","City",669088,225850,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.0011,-0.0117,0.2268,2447,1988,2419
+"Santa Monica, CA","City",670000,92168,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0075,-0.0523,-0.0734,2348,2223,2665
+"Santa Rosa, CA","City",670098,178221,"California","Sonoma County","Santa Rosa-Petaluma, CA",2026,10,-0.0086,0.0031,0.1399,1852,1423,1917
+"Simi Valley, CA","City",672016,126153,"California","Ventura County","Oxnard-Thousand Oaks-Ventura, CA",2026,10,-0.0062,-0.0177,0.2243,2711,2182,2609
+"Sunnyvale, CA","City",677000,154573,"California","Santa Clara County","San Jose-Sunnyvale-Santa Clara, CA",2026,10,-0.0033,0.1266,0.1875,3727,3371,3956
+"Temecula, CA","City",678120,110114,"California","Riverside County","Riverside-San Bernardino-Ontario, CA",2026,10,-0.0109,0.0273,0.2707,2257,1773,1968
+"Thousand Oaks, CA","City",678582,126532,"California","Ventura County","Oxnard-Thousand Oaks-Ventura, CA",2026,10,-0.0264,-0.0203,0.2395,2813,2460,2714
+"Union City, CA","City",681204,69502,"California","Alameda County","San Francisco-Oakland-Berkeley, CA",2026,10,-0.0065,0.064,0.1231,2887,2547,2835
+"Upland, CA","City",681344,78847,"California","San Bernardino County","Riverside-San Bernardino-Ontario, CA",2026,10,0.0025,0.0266,0.311,2135,1859,2165
+"Vacaville, CA","City",681554,101631,"California","Solano County","Vallejo, CA",2026,10,0.0088,0.0316,0.2172,2421,1878,2306
+"Vista, CA","City",682996,98392,"California","San Diego County","San Diego-Chula Vista-Carlsbad, CA",2026,10,-0.0026,0.0057,0.3828,2321,2054,2301
+"Walnut Creek, CA","City",683346,69809,"California","Contra Costa County","San Francisco-Oakland-Berkeley, CA",2026,10,0.0147,0.0792,0.0998,2892,2584,3170
+"West Covina, CA","City",684200,108173,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0042,-0.0085,0.2343,2146,1652,2220
+"West Hollywood, CA","City",684410,35358,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0185,0.0098,0.003,2187,2028,2634
+"Auburn, WA","City",5303180,85623,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0067,0.017,0.28,1568,1322,1628
+"Bellevue, WA","City",5305210,150606,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0172,0.0121,0.1596,2391,2162,2507
+"Bothell, WA","City",5307380,47917,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,0.0024,0.0113,0.2189,2361,2016,2389
+"Bremerton, WA","City",5307695,43983,"Washington","Kitsap County","Bremerton-Silverdale-Port Orchard, WA",2026,10,0.0106,-0.0022,0.2199,1631,1211,1721
+"Everett, WA","City",5322640,110847,"Washington","Snohomish County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0062,0.0228,0.2349,1696,1491,1723
+"Federal Way, WA","City",5323515,99614,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,0.0011,0.0073,0.2445,1781,1447,1831
+"Issaquah, WA","City",5333805,39400,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0072,0.0267,0.2497,2727,2294,2700
+"Kennewick, WA","City",5335275,83823,"Washington","Benton County","Kennewick-Richland, WA",2026,10,-0.0155,-0.0125,0.3288,1294,1091,1329
+"Kent, WA","City",5335415,135169,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0069,-0.0158,0.1792,1706,1405,1735
+"Kirkland, WA","City",5335940,92015,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0134,0.0075,0.1709,2419,2105,2483
+"Lacey, WA","City",5336745,56263,"Washington","Thurston County","Olympia-Lacey-Tumwater, WA",2026,10,0.0023,0.0088,0.1771,1791,1470,1688
+"Lakewood, WA","City",5338038,63142,"Washington","Pierce County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0037,0.0227,0.2718,1515,1331,1611
+"Lynnwood, WA","City",5340840,39867,"Washington","Snohomish County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.006,-0.0058,0.1897,1728,1483,1778
+"Mountlake Terrace, WA","City",5347490,21350,"Washington","Snohomish County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0103,-0.0245,0.1734,1959,1817,1959
+"Olympia, WA","City",5351300,55151,"Washington","Thurston County","Olympia-Lacey-Tumwater, WA",2026,10,4e-04,0.0114,0.2592,1657,1356,1687
+"Pasco, WA","City",5353545,77274,"Washington","Franklin County","Kennewick-Richland, WA",2026,10,-0.0136,-0.0336,0.3585,1355,990,1271
+"Puyallup, WA","City",5356695,42610,"Washington","Pierce County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0019,-0.0084,0.2645,1837,1618,1851
+"Redmond, WA","City",5357535,73728,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.01,0.0149,0.1242,2263,2097,2359
+"Renton, WA","City",5357745,105355,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0075,0.0027,0.2238,2042,1793,2139
+"Richland, WA","City",5358235,60867,"Washington","Benton County","Kennewick-Richland, WA",2026,10,-0.01,-0.0297,0.2693,1504,1254,1504
+"Seattle, WA","City",5363000,734603,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0069,-0.0212,0.0176,2073,1935,2415
+"Shoreline, WA","City",5363960,58673,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,0.004,-0.0249,0.1088,1899,1610,2015
+"Silverdale, WA","City",5364365,21774,"Washington","Kitsap County","Bremerton-Silverdale-Port Orchard, WA",2026,10,-0.0134,-0.018,0.2278,2308,1957,2226
+"Spokane, WA","City",5367000,227922,"Washington","Spokane County","Spokane-Spokane Valley, WA",2026,10,-0.0152,0.0195,0.3093,1173,934,1241
+"Spokane Valley, WA","City",5367167,103761,"Washington","Spokane County","Spokane-Spokane Valley, WA",2026,10,-0.0076,0.0065,0.3631,1263,1074,1231
+"Tacoma, WA","City",5370000,219234,"Washington","Pierce County","Seattle-Tacoma-Bellevue, WA",2026,10,0.0019,-0.0122,0.2305,1675,1430,1787
+"Tukwila, WA","City",5372625,21569,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0083,0.0013,0.0752,1809,1600,1880
+"Vancouver, WA","City",5374060,190700,"Washington","Clark County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,0.0029,-0.0053,0.2281,1678,1434,1664
+"Wenatchee, WA","City",5377105,35365,"Washington","Chelan County","Wenatchee, WA",2026,10,-0.0011,-0.0189,0.1846,1242,1057,1257
+"Woodinville, WA","City",5379590,13301,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0014,0.0399,0.2615,2535,2148,2956
+"Beaverton, OR","City",4105350,97554,"Oregon","Washington County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,-0.0012,-0.0181,0.1703,1629,1393,1672
+"Bend, OR","City",4105800,99442,"Oregon","Deschutes County","Bend, OR",2026,10,-0.0161,-0.0158,0.1385,1718,1274,1542
+"Eugene, OR","City",4123850,176755,"Oregon","Lane County","Eugene-Springfield, OR",2026,10,-0.0098,-0.0298,0.2486,1219,974,1275
+"Gresham, OR","City",4131250,113525,"Oregon","Multnomah County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,-0.0027,-0.0232,0.1795,1499,1279,1520
+"Hillsboro, OR","City",4134100,106612,"Oregon","Washington County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,-0.0036,-0.0168,0.1829,1682,1495,1651
+"Portland, OR","City",4159000,646101,"Oregon","Multnomah County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,-0.0038,0.0036,0.0049,1551,1409,1671
+"Salem, OR","City",4164900,175754,"Oregon","Marion County","Salem, OR",2026,10,0.0041,0.0099,0.2572,1287,997,1307
+"Springfield, OR","City",4169600,61740,"Oregon","Lane County","Eugene-Springfield, OR",2026,10,0.0028,0.0045,0.3313,1240,945,1258
+"Tigard, OR","City",4173650,55161,"Oregon","Washington County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,0.0016,-0.0231,0.1617,1720,1470,1708
+"Tualatin, OR","City",4174950,27804,"Oregon","Washington County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,-0.0041,0.0338,0.2204,1749,1656,1782
+"Wilsonville, OR","City",4182800,25992,"Oregon","Clackamas County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,-0.011,0.0196,0.2218,1727,1480,1741
+"Woodburn, OR","City",4183750,26222,"Oregon","Marion County","Salem, OR",2026,10,-0.0058,-0.0253,,1390,940,1422
+"Boise, ID","City",1608830,234192,"Idaho","Ada County","Boise City, ID",2026,10,-6e-04,0.1202,0.5006,1440,1244,1434
+"Avondale, AZ","City",404720,89214,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,0.0047,-0.003,0.1755,1312,1057,1241
+"Casa Grande, AZ","City",410530,55186,"Arizona","Pinal County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.0228,-0.0459,0.2761,1183,1006,1109
+"Chandler, AZ","City",412000,275618,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,0.0014,0.0074,0.2184,1586,1367,1541
+"Flagstaff, AZ","City",423620,76177,"Arizona","Coconino County","Flagstaff, AZ",2026,10,-0.017,-0.0249,0.309,1588,1408,1590
+"Gilbert, AZ","City",427400,267267,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.002,-0.004,0.1948,1696,1406,1535
+"Glendale, AZ","City",427820,248083,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.0028,-0.0205,0.1738,1209,1039,1161
+"Goodyear, AZ","City",428380,97542,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.0032,-0.0137,0.1799,1540,1259,1497
+"Mesa, AZ","City",446000,503390,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.0086,-0.0236,0.1769,1282,1117,1257
+"Peoria, AZ","City",454050,191292,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.0085,-0.0287,0.1359,1395,1151,1273
+"Phoenix, AZ","City",455000,1609456,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.0044,-0.0247,0.1416,1250,1071,1277
+"Prescott, AZ","City",457380,46054,"Arizona","Yavapai County","Prescott Valley-Prescott, AZ",2026,10,0.0013,-0.0046,0.2343,1424,1211,1445
+"Scottsdale, AZ","City",465000,240537,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,0.0012,0.0052,0.1658,1695,1442,1696
+"Sierra Vista, AZ","City",466820,45212,"Arizona","Cochise County","Sierra Vista-Douglas, AZ",2026,10,-0.0147,0.0239,0.3906,1338,947,1113
+"Surprise, AZ","City",471510,145591,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.0113,-0.0471,0.1523,1641,1224,1523
+"Tempe, AZ","City",473000,181005,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.0108,-0.0337,0.1417,1276,1161,1305
+"Tucson, AZ","City",477000,541033,"Arizona","Pima County","Tucson, AZ",2026,10,-0.0038,0.0045,0.3051,1041,869,1115
+"Billings, MT","City",3006550,117093,"Montana","Yellowstone County","Billings, MT",2026,10,-0.0101,-0.0236,0.3619,1249,1017,1230
+"Bozeman, MT","City",3008950,53500,"Montana","Gallatin County","Bozeman, MT",2026,10,-0.0122,0.0349,,1460,1066,1392
+"Draper, UT","City",4920120,50635,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,-0.029,-0.0067,0.2219,1847,1633,1792
+"Layton, UT","City",4943660,81726,"Utah","Davis County","Ogden-Clearfield, UT",2026,10,-0.0088,0.0509,0.3176,1350,1128,1321
+"Midvale, UT","City",4949710,35609,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,-0.0061,-0.0073,0.2437,1400,1337,1417
+"Millcreek, UT","City",4950150,63520,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,-0.0147,0.015,0.2926,1477,1237,1429
+"Murray, UT","City",4953230,50041,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,-0.0057,-0.0024,0.1956,1419,1187,1411
+"Ogden, UT","City",4955980,86754,"Utah","Weber County","Ogden-Clearfield, UT",2026,10,-0.0031,0.015,0.2669,1051,755,1065
+"Salt Lake City, UT","City",4967000,201269,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,-0.0129,-0.0412,0.1277,1234,1067,1349
+"Sandy, UT","City",4967440,95635,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,0.0115,-0.0088,0.1929,1744,1446,1696
+"South Jordan, UT","City",4970850,78118,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,-0.0043,-0.0164,0.2768,1869,1617,1942
+"South Salt Lake, UT","City",4971070,26315,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,0.0153,0.0096,0.1908,1217,1062,1281
+"Taylorsville, UT","City",4975360,59729,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,-0.0077,0.0015,0.2023,1397,1188,1366
+"West Jordan, UT","City",4982950,116383,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,-0.0051,2e-04,0.2107,1463,1120,1377
+"West Valley City, UT","City",4983470,138868,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,0.0031,0.0242,0.2252,1383,1077,1268
+"Arvada, CO","City",803455,123066,"Colorado","Jefferson County","Denver-Aurora-Lakewood, CO",2026,10,-0.013,-0.017,0.1611,1697,1421,1663
+"Aurora, CO","City",804000,387349,"Colorado","Arapahoe County","Denver-Aurora-Lakewood, CO",2026,10,-0.0038,-0.0201,0.1008,1517,1238,1566
+"Boulder, CO","City",807850,106598,"Colorado","Boulder County","Boulder, CO",2026,10,-0.0066,0.0157,0.1295,1888,1580,1971
+"Broomfield, CO","City",809280,73946,"Colorado","Broomfield County","Denver-Aurora-Lakewood, CO",2026,10,-0.0103,-0.0182,0.1466,1958,1771,2135
+"Castle Rock, CO","City",812415,74065,"Colorado","Douglas County","Denver-Aurora-Lakewood, CO",2026,10,-0.0171,-0.0221,0.1964,1634,1421,1534
+"Centennial, CO","City",812815,107702,"Colorado","Arapahoe County","Denver-Aurora-Lakewood, CO",2026,10,-0.0013,-0.0403,0.1516,1925,1691,1924
+"Colorado Springs, CO","City",816000,479612,"Colorado","El Paso County","Colorado Springs, CO",2026,10,-0.0016,0.0126,0.1356,1368,1131,1324
+"Commerce City, CO","City",816495,63050,"Colorado","Adams County","Denver-Aurora-Lakewood, CO",2026,10,-0.0023,-0.0109,0.1847,2430,1446,2244
+"Denver, CO","City",820000,710800,"Colorado","Denver County","Denver-Aurora-Lakewood, CO",2026,10,-0.007,-0.0243,0.0244,1598,1414,1761
+"Englewood, CO","City",824785,33634,"Colorado","Arapahoe County","Denver-Aurora-Lakewood, CO",2026,10,-0.0065,-0.0378,0.1239,1405,1138,1615
+"Fort Collins, CO","City",827425,168758,"Colorado","Larimer County","Fort Collins, CO",2026,10,-0.0053,0.0099,0.2604,1571,1337,1508
+"Golden, CO","City",830835,20461,"Colorado","Jefferson County","Denver-Aurora-Lakewood, CO",2026,10,-0.016,-0.0643,0.1191,1672,1337,1695
+"Greeley, CO","City",832155,107949,"Colorado","Weld County","Greeley, CO",2026,10,-0.006,-0.0105,0.1023,1398,1073,1382
+"Highlands Ranch, CO","City",836410,101514,"Colorado","Douglas County","Denver-Aurora-Lakewood, CO",2026,10,-0.0077,-0.031,0.2132,2270,1758,2187
+"Lakewood, CO","City",843000,156149,"Colorado","Jefferson County","Denver-Aurora-Lakewood, CO",2026,10,-0.0067,-0.0159,0.1304,1599,1440,1615
+"Littleton, CO","City",845255,45531,"Colorado","Arapahoe County","Denver-Aurora-Lakewood, CO",2026,10,-0.0112,-0.0024,0.2266,1559,1375,1689
+"Lone Tree, CO","City",845955,13993,"Colorado","Douglas County","Denver-Aurora-Lakewood, CO",2026,10,-0.0078,-0.0394,0.1844,1871,1733,2143
+"Longmont, CO","City",845970,98282,"Colorado","Boulder County","Boulder, CO",2026,10,0.0011,0.0146,0.1738,1619,1354,1589
+"Northglenn, CO","City",854330,37948,"Colorado","Adams County","Denver-Aurora-Lakewood, CO",2026,10,-0.0105,-0.0374,0.0962,1523,1280,1582
+"Parker, CO","City",857630,58733,"Colorado","Douglas County","Denver-Aurora-Lakewood, CO",2026,10,-0.015,-0.0323,0.1977,1859,1673,1892
+"Superior, CO","City",875640,13146,"Colorado","Boulder County","Boulder, CO",2026,10,-0.008,0.0565,0.2431,2327,1786,2331
+"Thornton, CO","City",877290,141799,"Colorado","Adams County","Denver-Aurora-Lakewood, CO",2026,10,0.0021,-0.0063,0.181,1752,1530,1780
+"Westminster, CO","City",883835,115502,"Colorado","Jefferson County","Denver-Aurora-Lakewood, CO",2026,10,-0.0025,0.0059,0.1737,1665,1540,1701
+"Wheat Ridge, CO","City",884440,32263,"Colorado","Jefferson County","Denver-Aurora-Lakewood, CO",2026,10,-0.0188,-0.0252,0.1599,1436,1162,1449
+"Albuquerque, NM","City",3502000,562551,"New Mexico","Bernalillo County","Albuquerque, NM",2026,10,-0.0049,-0.0034,0.4427,1214,998,1277
+"Las Cruces, NM","City",3539380,111273,"New Mexico","Doña Ana County","Las Cruces, NM",2026,10,0.0014,6e-04,0.5053,911,751,853
+"Santa Fe, NM","City",3570500,87617,"New Mexico","Santa Fe County","Santa Fe, NM",2026,10,-0.0032,-0.0303,0.3116,1430,1194,1495
+"Edmond, OK","City",4023200,94503,"Oklahoma","Oklahoma County","Oklahoma City, OK",2026,10,-0.0029,4e-04,0.315,1393,956,1302
+"Lawton, OK","City",4041850,91023,"Oklahoma","Comanche County","Lawton, OK",2026,10,-0.0082,0.0658,0.3127,891,623,824
+"Oklahoma City, OK","City",4055000,681088,"Oklahoma","Oklahoma County","Oklahoma City, OK",2026,10,-0.004,0.0132,0.2878,1110,916,1135
+"Tulsa, OK","City",4075000,411938,"Oklahoma","Tulsa County","Tulsa, OK",2026,10,-6e-04,0.0288,0.3535,1081,902,1123
+"Kansas City, KS","City",2036000,155438,"Kansas","Wyandotte County","Kansas City, MO-KS",2026,10,-0.0074,0.0473,0.2464,1170,884,1186
+"Lenexa, KS","City",2039350,57497,"Kansas","Johnson County","Kansas City, MO-KS",2026,10,0.0021,0.0401,0.3887,1593,1421,1565
+"Mission, KS","City",2047225,9894,"Kansas","Johnson County","Kansas City, MO-KS",2026,10,-0.0083,0.0171,0.2543,1261,1118,1410
+"Olathe, KS","City",2052575,142114,"Kansas","Johnson County","Kansas City, MO-KS",2026,10,-0.0087,0.0381,0.3424,1435,1218,1389
+"Overland Park, KS","City",2053775,196676,"Kansas","Johnson County","Kansas City, MO-KS",2026,10,-0.0055,0.0368,0.3593,1540,1325,1673
+"Shawnee, KS","City",2064500,67671,"Kansas","Johnson County","Kansas City, MO-KS",2026,10,-0.0119,0.0578,0.4403,1273,1083,1310
+"Wichita, KS","City",2079000,395951,"Kansas","Sedgwick County","Wichita, KS",2026,10,-0.0055,-0.0045,0.2685,1025,816,1052
+"Bellevue, NE","City",3103950,63336,"Nebraska","Sarpy County","Omaha-Council Bluffs, NE-IA",2026,10,0.0078,-0.0408,0.265,1242,1056,1224
+"Lincoln, NE","City",3128000,290531,"Nebraska","Lancaster County","Lincoln, NE",2026,10,-0.0048,0.0257,0.3519,1175,995,1193
+"Omaha, NE","City",3137000,489201,"Nebraska","Douglas County","Omaha-Council Bluffs, NE-IA",2026,10,-0.0036,-0.0043,0.275,1254,1073,1311
+"Papillion, NE","City",3138295,24016,"Nebraska","Sarpy County","Omaha-Council Bluffs, NE-IA",2026,10,0.0073,0.0342,0.2912,1371,1008,1372
+"Rapid City, SD","City",4652980,75632,"South Dakota","Pennington County","Rapid City, SD",2026,10,0.003,0.0381,0.343,972,774,1056
+"Sioux Falls, SD","City",4659020,193401,"South Dakota","Minnehaha County","Sioux Falls, SD",2026,10,6e-04,0.0328,0.2402,981,853,991
+"Fargo, ND","City",3825700,127319,"North Dakota","Cass County","Fargo, ND-MN",2026,10,0.0098,0.0324,0.2414,1008,884,1034
+"Grand Forks, ND","City",3832060,58935,"North Dakota","Grand Forks County","Grand Forks, ND-MN",2026,10,0.007,0.0472,0.3842,1217,992,1244
+"Baton Rouge, LA","City",2205000,225500,"Louisiana","East Baton Rouge Parish","Baton Rouge, LA",2026,10,-0.0044,0.028,0.2657,1141,942,1173
+"Lafayette, LA","City",2240735,121706,"Louisiana","Lafayette Parish","Lafayette, LA",2026,10,-0.0103,-0.0149,0.2773,1046,891,1060
+"Lake Charles, LA","City",2241155,82430,"Louisiana","Calcasieu Parish","Lake Charles, LA",2026,10,-0.0015,0.1671,0.3456,1303,999,1358
+"New Orleans, LA","City",2255000,380408,"Louisiana","Orleans Parish","New Orleans-Metairie, LA",2026,10,-0.0026,0.0333,0.0517,1227,1031,1277
+"Shreveport, LA","City",2270000,186183,"Louisiana","Caddo Parish","Shreveport-Bossier City, LA",2026,10,0.0091,0.0658,0.358,1174,1018,1177
+"Little Rock, AR","City",541000,202218,"Arkansas","Pulaski County","Little Rock-North Little Rock-Conway, AR",2026,10,-0.0078,0.0014,0.2326,1078,917,1099
+"North Little Rock, AR","City",550450,64454,"Arkansas","Pulaski County","Little Rock-North Little Rock-Conway, AR",2026,10,-0.0151,-0.0277,0.1678,1029,827,1046
+"Springdale, AR","City",566080,86705,"Arkansas","Washington County","Fayetteville-Springdale-Rogers, AR",2026,10,-0.006,-0.0142,0.3924,997,703,960
+"Independence, MO","City",2935000,122218,"Missouri","Jackson County","Kansas City, MO-KS",2026,10,0.0093,0.0259,0.4231,1262,1085,1253
+"Kansas City, MO","City",2938000,505958,"Missouri","Jackson County","Kansas City, MO-KS",2026,10,-0.0061,0.0207,0.2377,1358,1178,1390
+"Lee's Summit, MO","City",2941348,101728,"Missouri","Jackson County","Kansas City, MO-KS",2026,10,0.0032,0.0231,0.2975,1591,1373,1510
+"Maryland Heights, MO","City",2946586,28099,"Missouri","St. Louis County","St. Louis, MO-IL",2026,10,-0.0069,0.0365,0.2921,1461,1294,1540
+"St. Louis, MO","City",2965000,298018,"Missouri","St. Louis city","St. Louis, MO-IL",2026,10,-0.0103,0.005,0.1324,1136,1008,1290
+"Springfield, MO","City",2970000,168873,"Missouri","Greene County","Springfield, MO",2026,10,-0.0239,0.0273,0.4307,1227,1016,1241
+"Ankeny, IA","City",1902305,68392,"Iowa","Polk County","Des Moines-West Des Moines, IA",2026,10,-0.0012,0.0048,0.1663,1396,1039,1396
+"Des Moines, IA","City",1921000,213164,"Iowa","Polk County","Des Moines-West Des Moines, IA",2026,10,-0.0104,-0.0153,0.0725,1022,855,1068
+"Urbandale, IA","City",1979950,45591,"Iowa","Polk County","Des Moines-West Des Moines, IA",2026,10,-0.0112,0.0029,0.1647,1171,1023,1163
+"Waukee, IA","City",1982695,25045,"Iowa","Dallas County","Des Moines-West Des Moines, IA",2026,10,-0.0244,0.0016,0.1061,1304,1180,1400
+"West Des Moines, IA","City",1983910,68744,"Iowa","Polk County","Des Moines-West Des Moines, IA",2026,10,-0.0051,0.0296,0.2047,1202,1097,1210
+"Bloomington, MN","City",2706616,89244,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,0.0068,0.0313,0.1569,1545,1332,1651
+"Brooklyn Park, MN","City",2707966,84951,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0037,0.053,0.2343,1412,1273,1530
+"Burnsville, MN","City",2708794,64075,"Minnesota","Dakota County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,0.0076,0.0028,0.1425,1591,1418,1731
+"Eagan, MN","City",2717288,68262,"Minnesota","Dakota County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,6e-04,0.0165,0.1691,1677,1404,1754
+"Eden Prairie, MN","City",2718116,63623,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0088,0.0337,0.1574,1944,1692,1963
+"Hopkins, MN","City",2730140,18752,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,0.002,0.0397,0.2305,1558,1374,1745
+"Maple Grove, MN","City",2740166,70110,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0031,0.0292,0.1822,1943,1708,1923
+"Minneapolis, MN","City",2743000,426877,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0089,0.0239,0.0126,1454,1313,1699
+"Minnetonka, MN","City",2743252,53529,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.007,0.0125,0.135,1889,1721,1973
+"Plymouth, MN","City",2751730,79918,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.003,0.0298,0.1725,1746,1491,1831
+"Richfield, MN","City",2754214,36809,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,0.0127,0.0209,0.0681,1504,1409,1522
+"Rochester, MN","City",2754880,120848,"Minnesota","Olmsted County","Rochester, MN",2026,10,-0.0062,0.0165,0.1787,1281,1048,1255
+"St. Cloud, MN","City",2756896,68910,"Minnesota","Stearns County","St. Cloud, MN",2026,10,0.0122,0.0385,0.3226,1148,966,1182
+"St. Louis Park, MN","City",2757220,49500,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0036,0.0371,0.1667,1739,1530,2011
+"St. Paul, MN","City",2758000,308806,"Minnesota","Ramsey County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0086,0.0116,0.0956,1384,1251,1518
+"West St. Paul, MN","City",2769700,20820,"Minnesota","Dakota County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,0.0063,0.0138,0.1274,1385,1222,1560
+"Woodbury, MN","City",2771428,75549,"Minnesota","Washington County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0119,7e-04,0.201,1814,1666,1766
+"Bloomington, IN","City",1805860,79006,"Indiana","Monroe County","Bloomington, IN",2026,10,-0.0154,-0.011,0.2832,1240,1060,1243
+"Carmel, IN","City",1810342,99453,"Indiana","Hamilton County","Indianapolis-Carmel-Anderson, IN",2026,10,-8e-04,0.0535,0.3377,1616,1437,1615
+"Evansville, IN","City",1822000,116906,"Indiana","Vanderburgh County","Evansville, IN-KY",2026,10,0.0025,0.0064,0.3254,1079,861,1141
+"Fishers, IN","City",1823278,99041,"Indiana","Hamilton County","Indianapolis-Carmel-Anderson, IN",2026,10,-0.0033,-0.0041,0.2719,1649,1341,1622
+"Fort Wayne, IN","City",1825000,264514,"Indiana","Allen County","Fort Wayne, IN",2026,10,0.0016,0.0498,0.4067,1085,891,1107
+"Greenwood, IN","City",1829898,63579,"Indiana","Johnson County","Indianapolis-Carmel-Anderson, IN",2026,10,5e-04,0.0214,0.3505,1353,1070,1284
+"Indianapolis, IN","City",1836003,882006,"Indiana","Marion County","Indianapolis-Carmel-Anderson, IN",2026,10,0.002,0.0073,0.3034,1240,1067,1264
+"Jeffersonville, IN","City",1838358,49771,"Indiana","Clark County","Louisville/Jefferson County, KY-IN",2026,10,-0.0034,0.0028,0.255,1123,850,1157
+"Lafayette, IN","City",1840788,70828,"Indiana","Tippecanoe County","Lafayette-West Lafayette, IN",2026,10,-0.0011,0.0023,0.4344,1117,923,1187
+"Mishawaka, IN","City",1849932,50899,"Indiana","St. Joseph County","South Bend-Mishawaka, IN-MI",2026,10,-0.0012,-0.0252,0.5037,1119,1012,1181
+"Noblesville, IN","City",1854180,70442,"Indiana","Hamilton County","Indianapolis-Carmel-Anderson, IN",2026,10,-0.0059,0.0365,0.3895,1383,1251,1365
+"Chattanooga, TN","City",4714000,181288,"Tennessee","Hamilton County","Chattanooga, TN-GA",2026,10,-0.01,0.0033,0.2743,1205,1123,1191
+"Clarksville, TN","City",4715160,167882,"Tennessee","Montgomery County","Clarksville, TN-KY",2026,10,-0.0084,0.0028,0.372,1100,852,979
+"Collierville, TN","City",4716420,51170,"Tennessee","Shelby County","Memphis, TN-MS-AR",2026,10,-0.0182,0.0124,0.1805,1404,1259,1347
+"Columbia, TN","City",4716540,42474,"Tennessee","Maury County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,0.0059,0.003,0.2459,1088,794,1051
+"Franklin, TN","City",4727740,83630,"Tennessee","Williamson County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,-1e-04,-0.0025,0.23,1783,1660,1784
+"Hendersonville, TN","City",4733280,61589,"Tennessee","Sumner County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,0.0118,-0.0048,0.2752,1351,1133,1430
+"Knoxville, TN","City",4740000,191857,"Tennessee","Knox County","Knoxville, TN",2026,10,-0.007,-0.0083,0.481,1096,893,1126
+"Lebanon, TN","City",4741520,39562,"Tennessee","Wilson County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,-0.0084,0.0108,0.3946,1242,1155,1237
+"Memphis, TN","City",4748000,630027,"Tennessee","Shelby County","Memphis, TN-MS-AR",2026,10,-0.0012,-0.0041,0.2058,1063,888,1006
+"Murfreesboro, TN","City",4751560,153487,"Tennessee","Rutherford County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,-0.0011,0.0381,0.352,1400,1207,1368
+"Nashville, TN","City",4752006,684103,"Tennessee","Davidson County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,-0.0058,-0.0196,0.1084,1361,1219,1356
+"Smyrna, TN","City",4769420,53760,"Tennessee","Rutherford County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,-0.0031,0.0043,0.1783,1297,973,1257
+"Spring Hill, TN","City",4770580,51319,"Tennessee","Maury County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,-0.0176,-0.0443,0.205,1565,1071,1391
+"Bowling Green, KY","City",2108902,72385,"Kentucky","Warren County","Bowling Green, KY",2026,10,-2e-04,-0.0041,0.262,1067,890,1083
+"Lexington, KY","City",2146027,321276,"Kentucky","Fayette County","Lexington-Fayette, KY",2026,10,-0.0122,0.0218,0.4181,1211,983,1207
+"Louisville, KY","City",2148000,629176,"Kentucky","Jefferson County","Louisville/Jefferson County, KY-IN",2026,10,-0.0061,0.0051,0.2391,1193,975,1226
+"Akron, OH","City",3901000,190273,"Ohio","Summit County","Akron, OH",2026,10,-0.0035,0.0359,0.523,1014,769,1000
+"Beachwood, OH","City",3904500,13846,"Ohio","Cuyahoga County","Cleveland-Elyria, OH",2026,10,-0.0218,-0.0038,0.1851,2143,2003,2168
+"Centerville, OH","City",3913190,24510,"Ohio","Montgomery County","Dayton-Kettering, OH",2026,10,-0.0019,0.0392,0.3919,1291,1043,1319
+"Cincinnati, OH","City",3915000,308870,"Ohio","Hamilton County","Cincinnati, OH-KY-IN",2026,10,-0.0036,0.02,0.2971,1082,925,1170
+"Cleveland, OH","City",3916000,370365,"Ohio","Cuyahoga County","Cleveland-Elyria, OH",2026,10,-0.0096,-0.0072,0.0814,1018,831,1036
+"Columbus, OH","City",3918000,902449,"Ohio","Franklin County","Columbus, OH",2026,10,-0.0051,0.0043,0.2374,1294,1117,1338
+"Dayton, OH","City",3921000,137305,"Ohio","Montgomery County","Dayton-Kettering, OH",2026,10,0.0027,-0.0087,0.3318,1009,777,1031
+"Dublin, OH","City",3922694,48893,"Ohio","Franklin County","Columbus, OH",2026,10,-7e-04,-0.0123,0.3563,1752,1468,1834
+"Fairfield, OH","City",3925970,44602,"Ohio","Butler County","Cincinnati, OH-KY-IN",2026,10,-0.0098,-0.0158,0.3547,1291,1203,1285
+"Hilliard, OH","City",3935476,36103,"Ohio","Franklin County","Columbus, OH",2026,10,-0.0102,-0.0129,0.3018,1789,1422,1960
+"Reynoldsburg, OH","City",3966390,40926,"Ohio","Franklin County","Columbus, OH",2026,10,-0.0153,0.008,0.3142,1425,1158,1453
+"Toledo, OH","City",3977000,269962,"Ohio","Lucas County","Toledo, OH",2026,10,-0.0202,0.0189,0.414,895,664,920
+"Madison, WI","City",5548000,268516,"Wisconsin","Dane County","Madison, WI",2026,10,-0.0146,-0.037,0.3907,1526,1397,1606
+"Milwaukee, WI","City",5553000,573299,"Wisconsin","Milwaukee County","Milwaukee-Waukesha, WI",2026,10,-0.0075,0.0347,0.2397,1187,994,1186
+"Sun Prairie, WI","City",5578600,35847,"Wisconsin","Dane County","Madison, WI",2026,10,0.0072,0.0092,0.2159,1539,1378,1668
+"Ann Arbor, MI","City",2603000,122216,"Michigan","Washtenaw County","Ann Arbor, MI",2026,10,0.0063,-0.0042,0.2348,1600,1443,1757
+"Detroit, MI","City",2622000,636787,"Michigan","Wayne County","Detroit-Warren-Dearborn, MI",2026,10,0.0133,0.0384,0.1186,1076,778,1042
+"Farmington Hills, MI","City",2627440,83562,"Michigan","Oakland County","Detroit-Warren-Dearborn, MI",2026,10,-0.0228,0.0235,0.2321,1528,1268,1689
+"Grand Rapids, MI","City",2634000,198096,"Michigan","Kent County","Grand Rapids-Kentwood, MI",2026,10,-0.0062,0.0259,0.3577,1434,1175,1452
+"Kalamazoo, MI","City",2642160,73342,"Michigan","Kalamazoo County","Kalamazoo-Portage, MI",2026,10,-7e-04,0.0541,0.3932,1085,923,1137
+"Southfield, MI","City",2674900,76107,"Michigan","Oakland County","Detroit-Warren-Dearborn, MI",2026,10,0.0066,0.0291,0.2486,1570,1342,1647
+"Sterling Heights, MI","City",2676460,133744,"Michigan","Macomb County","Detroit-Warren-Dearborn, MI",2026,10,0.0126,0.0453,0.3923,1294,1050,1331
+"Wyoming, MI","City",2688940,76732,"Michigan","Kent County","Grand Rapids-Kentwood, MI",2026,10,0.0045,0.0135,0.4414,1266,1012,1349
+"Ypsilanti, MI","City",2689140,20204,"Michigan","Washtenaw County","Ann Arbor, MI",2026,10,-0.0221,0.0291,0.3003,1110,996,1256
+"Altamonte Springs, FL","City",1200950,45772,"Florida","Seminole County","Orlando-Kissimmee-Sanford, FL",2026,10,0.0141,-0.0165,0.2133,1433,1318,1538
+"Boca Raton, FL","City",1207300,97980,"Florida","Palm Beach County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0028,0.0126,0.3155,2423,2133,2366
+"Boynton Beach, FL","City",1207875,80068,"Florida","Palm Beach County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0023,0.0167,0.3545,1917,1729,1908
+"Bradenton, FL","City",1207950,55795,"Florida","Manatee County","North Port-Sarasota-Bradenton, FL",2026,10,-0.0077,-0.0114,0.2709,1328,1217,1341
+"Brandon, FL","City",1208150,114923,"Florida","Hillsborough County","Tampa-St. Petersburg-Clearwater, FL",2026,10,0.0076,-0.0358,0.2515,1563,1310,1543
+"Celebration, FL","City",1211285,12030,"Florida","Osceola County","Orlando-Kissimmee-Sanford, FL",2026,10,-0.0022,-0.0307,0.1967,1719,1396,1966
+"Clearwater, FL","City",1212875,116984,"Florida","Pinellas County","Tampa-St. Petersburg-Clearwater, FL",2026,10,0.0014,0.0249,0.3379,1457,1176,1544
+"Coconut Creek, FL","City",1213275,57574,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0026,-0.0096,0.3772,1970,1777,1922
+"Coral Springs, FL","City",1214400,133801,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0026,0.046,0.394,1966,1582,1891
+"Dania Beach, FL","City",1216335,31700,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0063,-0.0541,0.235,1634,1379,1646
+"Davie, FL","City",1216475,105821,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0023,0.0216,0.333,1970,1884,1893
+"Daytona Beach, FL","City",1216525,73329,"Florida","Volusia County","Deltona-Daytona Beach-Ormond Beach, FL",2026,10,-0.0016,-0.0369,0.1921,1268,1067,1330
+"DeLand, FL","City",1216875,38392,"Florida","Volusia County","Deltona-Daytona Beach-Ormond Beach, FL",2026,10,0.0012,0.0436,,1284,1057,1331
+"Doral, FL","City",1217935,74891,"Florida","Miami-Dade County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0011,-0.001,0.2724,2305,1956,2225
+"Fort Lauderdale, FL","City",1224000,182673,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0104,-0.0122,0.2124,1859,1615,2022
+"Fort Myers, FL","City",1224125,88699,"Florida","Lee County","Cape Coral-Fort Myers, FL",2026,10,-0.0044,-0.0412,0.0979,1145,999,1169
+"Gainesville, FL","City",1225175,142414,"Florida","Alachua County","Gainesville, FL",2026,10,-0.0108,-0.0198,0.1468,1136,968,1200
+"Hialeah, FL","City",1230000,222996,"Florida","Miami-Dade County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.006,-0.0058,0.41,1697,1323,1844
+"Hollywood, FL","City",1232000,152764,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0039,-0.0215,0.3204,1507,1284,1725
+"Jacksonville, FL","City",1235000,950203,"Florida","Duval County","Jacksonville, FL",2026,10,-0.0027,0.0076,0.2222,1318,1108,1304
+"Kissimmee, FL","City",1236950,78478,"Florida","Osceola County","Orlando-Kissimmee-Sanford, FL",2026,10,-0.0044,-0.0233,0.1552,1385,1073,1324
+"Lakeland, FL","City",1238250,114404,"Florida","Polk County","Lakeland-Winter Haven, FL",2026,10,-0.0049,-0.0102,0.189,1203,1023,1201
+"Largo, FL","City",1239425,82541,"Florida","Pinellas County","Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0293,-0.0497,0.361,1394,1234,1457
+"Lauderhill, FL","City",1239550,73987,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-6e-04,-0.0538,0.3645,1474,1290,1561
+"Maitland, FL","City",1242575,19266,"Florida","Orange County","Orlando-Kissimmee-Sanford, FL",2026,10,-0.0091,0.0751,0.2387,1892,1795,1955
+"Melbourne, FL","City",1243975,84982,"Florida","Brevard County","Palm Bay-Melbourne-Titusville, FL",2026,10,-0.0027,-0.0355,0.2351,1372,1199,1401
+"Miami, FL","City",1245000,443665,"Florida","Miami-Dade County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0068,8e-04,0.3319,1913,1599,2118
+"Miami Beach, FL","City",1245025,82400,"Florida","Miami-Dade County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0074,0.01,0.6368,1792,1768,2218
+"Miramar, FL","City",1245975,135158,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0017,0.0045,0.3519,1730,1420,1594
+"North Miami, FL","City",1249450,59854,"Florida","Miami-Dade County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0058,0.0418,0.307,1541,1368,1754
+"North Miami Beach, FL","City",1249475,43269,"Florida","Miami-Dade County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0055,-0.0064,0.3482,1728,1486,1974
+"North Port, FL","City",1249675,76975,"Florida","Sarasota County","North Port-Sarasota-Bradenton, FL",2026,10,-5e-04,-0.0025,0.1501,1502,837,1410
+"Ocala, FL","City",1250750,63504,"Florida","Marion County","Ocala, FL",2026,10,-0.0044,0.0058,0.2526,1168,977,1182
+"Orlando, FL","City",1253000,307738,"Florida","Orange County","Orlando-Kissimmee-Sanford, FL",2026,10,-0.0019,-0.0054,0.2029,1520,1295,1609
+"Palm Bay, FL","City",1254000,121513,"Florida","Brevard County","Palm Bay-Melbourne-Titusville, FL",2026,10,-0.0125,-0.0243,0.2602,1412,1147,1293
+"Palm Harbor, FL","City",1254350,61589,"Florida","Pinellas County","Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0012,-0.0114,0.3462,1523,1367,1467
+"Panama City, FL","City",1254700,34254,"Florida","Bay County","Panama City, FL",2026,10,-0.0052,-0.1048,0.223,1255,979,1317
+"Panama City Beach, FL","City",1254725,18281,"Florida","Bay County","Panama City, FL",2026,10,-0.0098,-0.0103,0.0493,1596,1357,1622
+"Pembroke Pines, FL","City",1255775,170472,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0032,0.0075,0.3481,1875,1458,1859
+"Pensacola, FL","City",1255925,54059,"Florida","Escambia County","Pensacola-Ferry Pass-Brent, FL",2026,10,-0.0114,-0.0014,0.2193,1306,1092,1361
+"Pinellas Park, FL","City",1256975,53352,"Florida","Pinellas County","Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0102,0.0307,0.3008,1466,1028,1491
+"Plantation, FL","City",1257425,93130,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,1e-04,0.0035,0.3257,2097,1805,2138
+"Pompano Beach, FL","City",1258050,111790,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0022,0.0037,0.2859,1680,1464,1783
+"St. Petersburg, FL","City",1263000,259343,"Florida","Pinellas County","Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0033,0.0204,0.3258,1420,1221,1538
+"Sanford, FL","City",1263650,61272,"Florida","Seminole County","Orlando-Kissimmee-Sanford, FL",2026,10,-0.0094,0.0049,0.2773,1374,1244,1314
+"Sarasota, FL","City",1264175,55508,"Florida","Sarasota County","North Port-Sarasota-Bradenton, FL",2026,10,0.0022,-0.0196,0.2023,1342,1292,1364
+"Sunrise, FL","City",1269700,96510,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0083,-6e-04,0.3159,1954,1522,1937
+"Tallahassee, FL","City",1270600,198259,"Florida","Leon County","Tallahassee, FL",2026,10,-0.0022,-0.0018,0.2942,1288,1093,1301
+"Tamarac, FL","City",1270675,71578,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0047,-0.0098,0.3511,1733,1515,1774
+"Tampa, FL","City",1271000,388768,"Florida","Hillsborough County","Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0027,-0.0218,0.3069,1516,1284,1603
+"Wesley Chapel, FL","City",1275875,68814,"Florida","Pasco County","Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0024,-0.0389,0.2107,1843,1453,1708
+"West Palm Beach, FL","City",1276600,117588,"Florida","Palm Beach County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0043,0.0347,0.4254,1809,1570,1872
+"Winter Haven, FL","City",1278275,50778,"Florida","Polk County","Lakeland-Winter Haven, FL",2026,10,-0.0042,-0.0354,0.263,1082,823,1055
+"Winter Springs, FL","City",1278325,38205,"Florida","Seminole County","Orlando-Kissimmee-Sanford, FL",2026,10,-0.0155,-0.017,0.2164,1502,1310,1498
+"Alpharetta, GA","City",1301696,65884,"Georgia","Fulton County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0117,-0.0169,0.221,1823,1583,1856
+"Athens, GA","City",1303440,126672,"Georgia","Clarke County","Athens-Clarke County, GA",2026,10,-0.0083,0.0033,0.3087,1240,1056,1230
+"Atlanta, GA","City",1304000,494838,"Georgia","Fulton County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0037,0.0034,0.1011,1535,1539,1540
+"Augusta, GA","City",1304204,201615,"Georgia","Richmond County","Augusta-Richmond County, GA-SC",2026,10,5e-04,0.0345,0.2569,1234,1024,1159
+"Chamblee, GA","City",1315172,29980,"Georgia","DeKalb County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0019,0.0396,0.1035,1656,1514,1690
+"Columbus, GA","City",1319000,204572,"Georgia","Muscogee County","Columbus, GA-AL",2026,10,-0.0076,0.0756,0.3905,1396,1115,1305
+"Conyers, GA","City",1319336,17415,"Georgia","Rockdale County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0091,-0.0081,0.3105,1171,1147,1137
+"Douglasville, GA","City",1323900,35252,"Georgia","Douglas County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0087,0.0449,0.2889,1435,1202,1459
+"Duluth, GA","City",1324600,31742,"Georgia","Gwinnett County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0069,-0.0055,0.2213,1610,1470,1594
+"Dunwoody, GA","City",1324768,51458,"Georgia","DeKalb County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0052,0.0019,0.155,1696,1607,1784
+"Gainesville, GA","City",1331908,42780,"Georgia","Hall County","Gainesville, GA",2026,10,-0.011,-0.0149,0.2854,1264,1124,1280
+"Johns Creek, GA","City",1342425,82230,"Georgia","Fulton County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0019,-0.0144,0.2688,2059,1803,1898
+"Kennesaw, GA","City",1343192,33360,"Georgia","Cobb County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0129,0.004,0.2444,1606,1341,1548
+"LaGrange, GA","City",1344340,31173,"Georgia","Troup County","LaGrange, GA-AL",2026,10,-0.0063,0.0535,0.3112,1068,840,1078
+"Lawrenceville, GA","City",1345488,30465,"Georgia","Gwinnett County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0053,0.0016,0.2221,1298,1048,1260
+"Lithia Springs, GA","City",1346832,16020,"Georgia","Douglas County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0098,0.0103,0.2614,1306,1245,1310
+"McDonough, GA","City",1348624,29134,"Georgia","Henry County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0058,0.0013,0.2959,1446,1246,1424
+"Marietta, GA","City",1349756,61387,"Georgia","Cobb County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-3e-04,0.0102,0.2338,1313,1147,1357
+"Norcross, GA","City",1355776,17530,"Georgia","Gwinnett County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0016,-9e-04,0.2304,1494,1061,1447
+"Oakwood, GA","City",1357260,5132,"Georgia","Hall County","Gainesville, GA",2026,10,-0.007,0.0296,0.1952,1282,1358,1250
+"Roswell, GA","City",1367284,92770,"Georgia","Fulton County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0032,-0.0148,0.2388,1605,1361,1624
+"Sandy Springs, GA","City",1368516,107221,"Georgia","Fulton County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0016,0.0152,0.1439,1567,1376,1658
+"Savannah, GA","City",1369000,147583,"Georgia","Chatham County","Savannah, GA",2026,10,-0.0113,-0.052,0.2835,1358,1139,1330
+"Smyrna, GA","City",1371492,55863,"Georgia","Cobb County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0012,3e-04,0.2043,1481,1280,1524
+"Stockbridge, GA","City",1373704,28858,"Georgia","Henry County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0058,0.0201,0.2739,1341,1156,1330
+"Stone Mountain, GA","City",1373816,6638,"Georgia","DeKalb County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0104,-0.0494,0.2632,1264,1008,1264
+"Suwanee, GA","City",1374936,21238,"Georgia","Gwinnett County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0046,-0.0096,0.1789,1836,1397,1934
+"Tucker, GA","City",1377652,36994,"Georgia","DeKalb County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0052,0.0134,0.3427,1394,1203,1447
+"Valdosta, GA","City",1378800,55266,"Georgia","Lowndes County","Valdosta, GA",2026,10,-0.01,-0.0036,0.3282,1069,709,1001
+"Woodstock, GA","City",1384176,35171,"Georgia","Cherokee County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0076,0.0148,0.294,1664,1453,1644
+"Aiken, SC","City",4500550,32014,"South Carolina","Aiken County","Augusta-Richmond County, GA-SC",2026,10,-0.0036,-0.0272,0.2893,1284,1124,1221
+"Charleston, SC","City",4513330,149960,"South Carolina","Charleston County","Charleston-North Charleston, SC",2026,10,-0.0034,0.0356,0.3869,1703,1512,1772
+"Columbia, SC","City",4516000,136754,"South Carolina","Richland County","Columbia, SC",2026,10,-0.0103,0.0047,0.3523,1230,1038,1251
+"Greenville, SC","City",4530850,70838,"South Carolina","Greenville County","Greenville-Anderson, SC",2026,10,-0.0042,0.0072,0.26,1427,1289,1494
+"Mount Pleasant, SC","City",4548535,90945,"South Carolina","Charleston County","Charleston-North Charleston, SC",2026,10,0.0043,0.0466,0.4942,2270,1961,2251
+"North Charleston, SC","City",4550875,115755,"South Carolina","Charleston County","Charleston-North Charleston, SC",2026,10,-1e-04,0.0052,0.3658,1491,1345,1483
+"Rock Hill, SC","City",4561405,74170,"South Carolina","York County","Charlotte-Concord-Gastonia, NC-SC",2026,10,-0.0064,-0.0055,0.3139,1258,1182,1241
+"Apex, NC","City",3701520,65541,"North Carolina","Wake County","Raleigh-Cary, NC",2026,10,-0.0096,-0.0588,0.2347,1734,1450,1672
+"Asheville, NC","City",3702140,93695,"North Carolina","Buncombe County","Asheville, NC",2026,10,-0.0102,-0.039,0.2307,1305,1152,1373
+"Burlington, NC","City",3709060,56951,"North Carolina","Alamance County","Burlington, NC",2026,10,0.0108,-4e-04,0.2521,1103,1001,1054
+"Cary, NC","City",3710740,174880,"North Carolina","Wake County","Raleigh-Cary, NC",2026,10,-0.0037,0.0127,0.2233,1504,1270,1459
+"Chapel Hill, NC","City",3711800,58919,"North Carolina","Orange County","Durham-Chapel Hill, NC",2026,10,0.0081,0.0105,0.277,1449,1246,1424
+"Charlotte, NC","City",3712000,875045,"North Carolina","Mecklenburg County","Charlotte-Concord-Gastonia, NC-SC",2026,10,0.0011,-0.0174,0.1529,1379,1254,1367
+"Cornelius, NC","City",3714700,31396,"North Carolina","Mecklenburg County","Charlotte-Concord-Gastonia, NC-SC",2026,10,0.008,-0.0182,0.2538,1435,1193,1428
+"Durham, NC","City",3719000,284094,"North Carolina","Durham County","Durham-Chapel Hill, NC",2026,10,-0.0061,0.0073,0.1986,1337,1175,1368
+"Fayetteville, NC","City",3722920,208697,"North Carolina","Cumberland County","Fayetteville, NC",2026,10,0.0037,-0.008,0.4156,1214,962,1117
+"Garner, NC","City",3725480,31684,"North Carolina","Wake County","Raleigh-Cary, NC",2026,10,6e-04,-0.0082,0.2543,1424,1203,1424
+"Gastonia, NC","City",3725580,80615,"North Carolina","Gaston County","Charlotte-Concord-Gastonia, NC-SC",2026,10,0.0099,0.0056,0.3368,1238,995,1231
+"Greensboro, NC","City",3728000,297202,"North Carolina","Guilford County","Greensboro-High Point, NC",2026,10,-0.0084,-0.0161,0.4035,1134,1002,1116
+"Greenville, NC","City",3728080,87894,"North Carolina","Pitt County","Greenville, NC",2026,10,0.0033,-0.0234,0.2978,1208,945,1217
+"Hickory, NC","City",3731060,43352,"North Carolina","Catawba County","Hickory-Lenoir-Morganton, NC",2026,10,0.004,0.0571,0.4504,1079,894,1080
+"High Point, NC","City",3731400,114120,"North Carolina","Guilford County","Greensboro-High Point, NC",2026,10,-0.0073,0.0306,0.3281,1070,944,1043
+"Huntersville, NC","City",3733120,61202,"North Carolina","Mecklenburg County","Charlotte-Concord-Gastonia, NC-SC",2026,10,-0.0026,-0.0513,0.2649,1621,1338,1558
+"Kannapolis, NC","City",3735200,53314,"North Carolina","Cabarrus County","Charlotte-Concord-Gastonia, NC-SC",2026,10,-0.0068,0.0302,0.1962,1227,1005,1173
+"Kernersville, NC","City",3735600,27177,"North Carolina","Forsyth County","Winston-Salem, NC",2026,10,-0.0299,-0.0225,0.2742,1083,1027,1094
+"Matthews, NC","City",3741960,29613,"North Carolina","Mecklenburg County","Charlotte-Concord-Gastonia, NC-SC",2026,10,-0.0069,-0.0174,0.2006,1543,1419,1598
+"Mooresville, NC","City",3744220,50025,"North Carolina","Iredell County","Charlotte-Concord-Gastonia, NC-SC",2026,10,-0.0141,-0.0423,0.1465,1434,1239,1379
+"Morrisville, NC","City",3744520,29756,"North Carolina","Wake County","Raleigh-Cary, NC",2026,10,-0.0018,0.0083,0.1868,1701,1395,1654
+"Raleigh, NC","City",3755000,465517,"North Carolina","Wake County","Raleigh-Cary, NC",2026,10,-0.0028,-0.0015,0.1781,1370,1207,1376
+"Wilmington, NC","City",3774440,116933,"North Carolina","New Hanover County","Wilmington, NC",2026,10,-0.0099,0.0335,0.2957,1297,1177,1324
+"Winston-Salem, NC","City",3775000,249571,"North Carolina","Forsyth County","Winston-Salem, NC",2026,10,-0.0017,0.0182,0.3425,1138,930,1103
+"Alexandria, VA","City",5101000,157594,"Virginia","Alexandria city","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0024,-0.009,0.1393,2189,2005,2463
+"Arlington, VA","City",5103000,235845,"Virginia","Arlington County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0023,0.0106,0.1658,2604,2452,2963
+"Ashburn, VA","City",5103320,45479,"Virginia","Loudoun County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0133,0.0038,0.3515,2599,2223,2630
+"Centreville, VA","City",5114440,72680,"Virginia","Fairfax County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,0.0024,-0.0011,0.3355,2446,2067,2402
+"Charlottesville, VA","City",5114968,46289,"Virginia","Charlottesville city","Charlottesville, VA",2026,10,-0.0256,-0.0306,0.1986,1444,1185,1509
+"Chesapeake, VA","City",5116000,249377,"Virginia","Chesapeake city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,-0.0074,0.0532,0.4551,1827,1589,1724
+"Fairfax, VA","City",5126496,24242,"Virginia","Fairfax city","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0089,-0.0114,0.2085,2266,1903,2177
+"Fair Oaks, VA","City",5126875,35130,"Virginia","Fairfax County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0037,-0.009,0.2122,2374,2165,2421
+"Fredericksburg, VA","City",5129744,28258,"Virginia","Fredericksburg city","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0032,0.0173,0.3779,1683,1488,1694
+"Glen Allen, VA","City",5131200,16246,"Virginia","Henrico County","Richmond, VA",2026,10,-0.0113,-0.0191,0.1827,1510,1198,1421
+"Hampton, VA","City",5135000,137217,"Virginia","Hampton city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,0.0024,0.0847,0.5384,1547,1284,1478
+"Herndon, VA","City",5136648,24456,"Virginia","Fairfax County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0168,-0.0082,0.2276,2189,1802,2162
+"Leesburg, VA","City",5144984,48465,"Virginia","Loudoun County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0241,0.0096,0.3181,2099,1722,2030
+"Lorton, VA","City",5147064,22049,"Virginia","Fairfax County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,0.0034,0.0471,0.3262,2756,2232,2707
+"Manassas, VA","City",5148952,42620,"Virginia","Manassas city","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,0.0025,0.0079,0.3678,2127,1771,2066
+"Newport News, VA","City",5156000,185118,"Virginia","Newport News city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,0.0094,0.0742,0.4853,1486,1260,1437
+"Norfolk, VA","City",5157000,236973,"Virginia","Norfolk city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,0.0017,0.079,0.4643,1665,1383,1617
+"Reston, VA","City",5166672,62339,"Virginia","Fairfax County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0054,-0.0044,0.2065,2382,2208,2338
+"Richmond, VA","City",5167000,227171,"Virginia","Richmond city","Richmond, VA",2026,10,-0.0035,9e-04,0.265,1407,1272,1450
+"Roanoke, VA","City",5168000,99213,"Virginia","Roanoke city","Roanoke, VA",2026,10,-0.0012,0.0297,0.4805,1046,881,1019
+"Suffolk, VA","City",5176432,94856,"Virginia","Suffolk city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,-0.0039,0.0648,0.4305,1804,1767,1590
+"Tysons Corner, VA","City",5179950,27617,"Virginia","Fairfax County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0042,0.0331,0.113,2642,2403,2881
+"Virginia Beach, VA","City",5182000,457900,"Virginia","Virginia Beach city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,-0.0018,0.0853,0.4761,1949,1615,1826
+"Woodbridge, VA","City",5187312,42619,"Virginia","Prince William County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0093,-0.012,0.2533,2066,1759,2048
+"Annapolis, MD","City",2401600,40719,"Maryland","Anne Arundel County","Baltimore-Columbia-Towson, MD",2026,10,-0.0188,0.015,0.2005,1805,1547,1884
+"Baltimore, MD","City",2404000,584548,"Maryland","Baltimore city","Baltimore-Columbia-Towson, MD",2026,10,-0.0053,0.0216,0.2352,1498,1268,1587
+"Bel Air South, MD","City",2405950,57109,"Maryland","Harford County","Baltimore-Columbia-Towson, MD",2026,10,0.006,-0.0082,0.2466,1591,1266,1614
+"Bethesda, MD","City",2407125,66316,"Maryland","Montgomery County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0045,-0.0039,0.0901,2165,1918,2312
+"Bowie, MD","City",2408775,57922,"Maryland","Prince George's County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0088,-0.004,0.2648,2425,1978,2267
+"Cockeysville, MD","City",2418250,23246,"Maryland","Baltimore County","Baltimore-Columbia-Towson, MD",2026,10,0.0045,0.0083,0.3001,1572,1460,1646
+"Columbia, MD","City",2419125,106600,"Maryland","Howard County","Baltimore-Columbia-Towson, MD",2026,10,-0.0054,0.0419,0.2707,2339,2079,2336
+"Elkridge, MD","City",2425750,25251,"Maryland","Howard County","Baltimore-Columbia-Towson, MD",2026,10,-0.0109,0.0392,0.2462,2229,1968,2186
+"Ellicott City, MD","City",2426000,73589,"Maryland","Howard County","Baltimore-Columbia-Towson, MD",2026,10,-0.0022,0.0177,0.345,2272,1945,2265
+"Forestville, MD","City",2429000,10291,"Maryland","Prince George's County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,0.0038,0.0552,0.2568,1747,1515,1808
+"Frederick, MD","City",2430325,78390,"Maryland","Frederick County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0023,0.0021,0.3588,1665,1381,1638
+"Gaithersburg, MD","City",2431175,69016,"Maryland","Montgomery County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.012,-0.0162,0.1884,1961,1714,1994
+"Germantown, MD","City",2432025,90210,"Maryland","Montgomery County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0182,-0.0071,0.234,1962,1723,1953
+"Glen Burnie, MD","City",2432650,71427,"Maryland","Anne Arundel County","Baltimore-Columbia-Towson, MD",2026,10,0.0018,0.0051,0.3339,1727,1527,1888
+"Greenbelt, MD","City",2434775,24646,"Maryland","Prince George's County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-3e-04,0.016,0.1844,2056,1820,2068
+"Hyattsville, MD","City",2441250,20851,"Maryland","Prince George's County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0047,-0.0104,0.0914,1882,1522,1961
+"Landover, MD","City",2445325,24430,"Maryland","Prince George's County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,0.0103,0.0484,0.2656,1926,1592,1999
+"Laurel, MD","City",2445900,29581,"Maryland","Prince George's County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-6e-04,0.0228,0.2171,1984,1709,2105
+"North Bethesda, MD","City",2456337,49763,"Maryland","Montgomery County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0023,-0.0048,0.1075,2236,1942,2523
+"Odenton, MD","City",2458300,45026,"Maryland","Anne Arundel County","Baltimore-Columbia-Towson, MD",2026,10,-0.0054,0.0228,0.2675,2531,2256,2574
+"Owings Mills, MD","City",2459425,34999,"Maryland","Baltimore County","Baltimore-Columbia-Towson, MD",2026,10,-0.0032,0.0129,0.2572,1898,1571,1933
+"Rockville, MD","City",2467675,67142,"Maryland","Montgomery County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0107,0.0153,0.1925,2498,2170,2639
+"Silver Spring, MD","City",2472450,81808,"Maryland","Montgomery County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,0.0033,-0.0196,0.1253,1961,1814,2101
+"Suitland, MD","City",2475725,25839,"Maryland","Prince George's County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0072,-0.01,0.0955,1797,1548,1812
+"Towson, MD","City",2478425,57617,"Maryland","Baltimore County","Baltimore-Columbia-Towson, MD",2026,10,-0.0088,0.0072,0.1757,1840,1574,1989
+"Waldorf, MD","City",2481175,81077,"Maryland","Charles County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0058,-0.0108,0.2181,2018,1724,1941
+"Allentown, PA","City",4202000,125292,"Pennsylvania","Lehigh County","Allentown-Bethlehem-Easton, PA-NJ",2026,10,0.0016,0.0017,0.3453,1390,1189,1414
+"King of Prussia, PA","City",4239736,24423,"Pennsylvania","Montgomery County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0077,0.0252,0.1808,2002,1918,2055
+"Philadelphia, PA","City",4260000,1593208,"Pennsylvania","Philadelphia County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0094,0.0105,0.1361,1423,1302,1505
+"Pittsburgh, PA","City",4261000,303843,"Pennsylvania","Allegheny County","Pittsburgh, PA",2026,10,-0.0145,0.0106,0.1807,1400,1220,1486
+"West Chester, PA","City",4282704,19016,"Pennsylvania","Chester County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0126,0.024,0.3347,1901,1719,2086
+"New Rochelle, NY","City",3650617,80828,"New York","Westchester County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,0.0114,0.0302,0.0673,2175,1960,2418
+"New York City, NY","City",3651000,8622467,"New York","New York County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.0035,0.0427,0.3028,2593,2475,2609
+"White Plains, NY","City",3681677,59421,"New York","Westchester County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.0013,0.0525,0.1037,2420,2235,2642
+"New Haven, CT","City",952000,135736,"Connecticut","New Haven County","New Haven-Milford, CT",2026,10,0.0068,0.0151,0.2111,1813,1566,1867
+"Norwalk, CT","City",955990,91050,"Connecticut","Fairfield County","Bridgeport-Stamford-Norwalk, CT",2026,10,-0.0027,0.0082,0.2843,2314,2107,2371
+"Stamford, CT","City",973000,135413,"Connecticut","Fairfield County","Bridgeport-Stamford-Norwalk, CT",2026,10,-0.0019,-0.008,0.2303,2656,2462,2782
+"Boston, MA","City",2507000,665945,"Massachusetts","Suffolk County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.016,0.0163,0.1417,2453,2359,2484
+"Cambridge, MA","City",2511000,117962,"Massachusetts","Middlesex County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0161,0.0317,0.1601,3122,2835,3435
+"Everett, MA","City",2521990,48685,"Massachusetts","Middlesex County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0083,0.0092,0.1362,2168,1764,2241
+"Framingham, MA","City",2524960,71805,"Massachusetts","Middlesex County","Boston-Cambridge-Newton, MA-NH",2026,10,0.0059,-0.0155,0.2013,1921,1622,2142
+"Lawrence, MA","City",2534550,88067,"Massachusetts","Essex County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0013,0.0104,0.4321,1963,1295,1970
+"Lowell, MA","City",2537000,114737,"Massachusetts","Middlesex County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.003,0.0058,0.33,1781,1356,1870
+"Norwood, MA","City",2550285,31343,"Massachusetts","Norfolk County","Boston-Cambridge-Newton, MA-NH",2026,10,5e-04,0.0249,0.259,2471,2149,2597
+"Peabody, MA","City",2552490,54204,"Massachusetts","Essex County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0031,0.0248,0.2914,2088,1884,2260
+"Quincy, MA","City",2555745,100981,"Massachusetts","Norfolk County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0052,0.0071,0.2097,2266,2087,2463
+"Somerville, MA","City",2562535,80464,"Massachusetts","Middlesex County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0144,0.0048,0.176,2670,2133,2822
+"Waltham, MA","City",2572600,64711,"Massachusetts","Middlesex County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0245,0.0026,0.2128,2382,1994,2542
+"Watertown Town, MA","City",2573440,35181,"Massachusetts","Middlesex County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0123,0.021,0.1884,2550,2114,2689
+"Weymouth Town, MA","City",2578972,57300,"Massachusetts","Norfolk County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0142,-0.0043,0.2272,2019,1859,2241
+"Worcester, MA","City",2582000,204191,"Massachusetts","Worcester County","Worcester, MA-CT",2026,10,-0.0159,-0.0863,0.2095,1490,1083,1541
+"Manchester, NH","City",3345140,115037,"New Hampshire","Hillsborough County","Manchester-Nashua, NH",2026,10,-0.002,0.0097,0.4425,1652,1316,1772
+"Anchorage, AK","City",203000,290674,"Alaska","Anchorage Municipality","Anchorage, AK",2026,10,0.0099,0.0455,0.566,1811,1296,1772
+"Washington, DC","City",1150000,670587,"District of Columbia","District of Columbia","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.003,9e-04,0.038,2169,2144,2201
+"Arlington Heights, IL","City",1702154,76794,"Illinois","Cook County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,0.0062,0.023,0.4113,1959,1642,2093
+"Aurora, IL","City",1703012,181405,"Illinois","Kane County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,-0.0012,0.0199,0.4211,1967,1481,1951
+"Chicago, IL","City",1714000,2721914,"Illinois","Cook County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,-0.0112,0.0337,0.2375,1858,1723,1875
+"Downers Grove, IL","City",1720591,49996,"Illinois","DuPage County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,0.0052,0.0446,0.3344,1918,1537,2056
+"Hoffman Estates, IL","City",1735411,51744,"Illinois","Cook County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,0.003,0.004,0.2742,2396,1709,2348
+"Naperville, IL","City",1751622,149089,"Illinois","DuPage County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,0.0018,0.0155,0.3648,2107,1787,2136
+"Schaumburg, IL","City",1768003,77571,"Illinois","Cook County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,0.0126,0.0259,0.3871,2062,1769,2174
+"Wheaton, IL","City",1781048,53673,"Illinois","DuPage County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,-0.033,-0.0257,0.3102,2077,1958,2061
+"Wheeling, IL","City",1781087,38823,"Illinois","Cook County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,2e-04,0.0112,0.3416,2029,1870,2115
+"Jackson, MS","City",2836000,153271,"Mississippi","Hinds County","Jackson, MS",2026,10,0.0115,0.0181,0.25,1186,939,1165
+"Southaven, MS","City",2869280,54908,"Mississippi","DeSoto County","Memphis, TN-MS-AR",2026,10,0.021,0.0517,0.3476,1313,1100,1253
+"Bayonne, NJ","City",3403580,70497,"New Jersey","Hudson County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,0.005,0.0434,0.2672,1962,1637,1975
+"Collingswood, NJ","City",3414260,14135,"New Jersey","Camden County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-7e-04,0.0127,0.3063,1616,1472,1948
+"Hackensack, NJ","City",3428680,45758,"New Jersey","Bergen County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.0079,0.0311,0.2634,2147,2081,2308
+"Harrison, NJ","City",3430210,19217,"New Jersey","Hudson County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.0032,0.0222,0.0767,2545,2738,2193
+"Hoboken, NJ","City",3432250,58754,"New Jersey","Hudson County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,0.0037,0.0507,0.2778,3773,3205,4410
+"Jersey City, NJ","City",3436000,287899,"New Jersey","Hudson County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-8e-04,0.0321,0.2635,2529,2474,2516
+"Newark, NJ","City",3451000,307355,"New Jersey","Essex County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,0.0031,-0.0189,0.2035,1673,1254,1726
+"West New York, NJ","City",3479610,52438,"New Jersey","Hudson County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,0.0035,0.03,0.2365,2002,1807,2040
+"Cochise County, AZ","County",4003,125504,"Arizona","Cochise County","Sierra Vista-Douglas, AZ",2026,10,-0.0164,0.022,0.3895,1106,897,997
+"Coconino County, AZ","County",4005,144705,"Arizona","Coconino County","Flagstaff, AZ",2026,10,-0.017,-0.0243,0.3105,1464,1334,1458
+"Pima County, AZ","County",4019,1042393,"Arizona","Pima County","Tucson, AZ",2026,10,-0.0034,0.0064,0.3049,1139,917,1185
+"Pinal County, AZ","County",4021,433338,"Arizona","Pinal County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.0153,-0.0346,0.2981,1293,737,990
+"Maricopa County, AZ","County",4013,4430871,"Arizona","Maricopa County","Phoenix-Mesa-Chandler, AZ",2026,10,-0.0046,-0.0194,0.1593,1344,1139,1323
+"Yavapai County, AZ","County",4025,237830,"Arizona","Yavapai County","Prescott Valley-Prescott, AZ",2026,10,0.0044,-0.0157,0.1762,1394,1072,1417
+"Pulaski County, AR","County",5119,398322,"Arkansas","Pulaski County","Little Rock-North Little Rock-Conway, AR",2026,10,-0.0074,-0.0033,0.2266,1080,901,1066
+"Benton County, AR","County",5007,286528,"Arkansas","Benton County","Fayetteville-Springdale-Rogers, AR",2026,10,0.0022,-0.0122,0.3256,1209,976,1064
+"Washington County, AR","County",5143,247331,"Arkansas","Washington County","Fayetteville-Springdale-Rogers, AR",2026,10,-0.0088,-0.0193,0.3994,1059,845,1034
+"Baldwin County, AL","County",1003,233420,"Alabama","Baldwin County","Daphne-Fairhope-Foley, AL",2026,10,-0.0014,0.021,0.3023,1269,1064,1201
+"Escambia County, AL","County",12033,321296,"Florida","Escambia County","Pensacola-Ferry Pass-Brent, FL",2026,10,-0.0108,-0.0048,0.2113,1336,1085,1284
+"Jefferson County, AL","County",1073,672265,"Alabama","Jefferson County","Birmingham-Hoover, AL",2026,10,2e-04,0.0151,0.2016,1199,1065,1178
+"Lee County, AL","County",1081,175126,"Alabama","Lee County","Auburn-Opelika, AL",2026,10,-0.0156,0.0176,0.3007,1099,1005,1103
+"Limestone County, AL","County",1083,104199,"Alabama","Limestone County","Huntsville, AL",2026,10,0.0018,-0.0141,,976,759,908
+"Madison County, AL","County",1089,389781,"Alabama","Madison County","Huntsville, AL",2026,10,-0.0051,-0.0114,0.1125,1018,846,976
+"Mobile County, AL","County",1097,413878,"Alabama","Mobile County","Mobile, AL",2026,10,-0.0076,0.0119,0.3523,1106,888,1075
+"Montgomery County, AL","County",1101,228132,"Alabama","Montgomery County","Montgomery, AL",2026,10,0.0018,0.0227,0.4389,1229,958,1177
+"Shelby County, AL","County",1117,223916,"Alabama","Shelby County","Birmingham-Hoover, AL",2026,10,0.0071,0.0298,0.2928,1430,1280,1392
+"Tuscaloosa County, AL","County",1125,231558,"Alabama","Tuscaloosa County","Tuscaloosa, AL",2026,10,-0.0083,0.0446,0.4495,1204,1002,1191
+"Adams County, CO","County",8001,520149,"Colorado","Adams County","Denver-Aurora-Lakewood, CO",2026,10,0.001,-0.0115,0.1404,1579,1339,1585
+"Arapahoe County, CO","County",8005,654453,"Colorado","Arapahoe County","Denver-Aurora-Lakewood, CO",2026,10,-0.0024,-0.0148,0.1199,1606,1331,1662
+"Boulder County, CO","County",8013,328658,"Colorado","Boulder County","Boulder, CO",2026,10,-0.0014,0.0253,0.1723,1837,1543,1842
+"Denver County, CO","County",8031,710800,"Colorado","Denver County","Denver-Aurora-Lakewood, CO",2026,10,-0.0082,-0.0241,0.0196,1597,1413,1760
+"Douglas County, CO","County",8035,360206,"Colorado","Douglas County","Denver-Aurora-Lakewood, CO",2026,10,-0.0133,-0.0343,0.1912,1925,1694,1955
+"El Paso County, CO","County",8041,730323,"Colorado","El Paso County","Colorado Springs, CO",2026,10,-0.0013,0.0119,0.1342,1417,1133,1329
+"Jefferson County, CO","County",8059,580519,"Colorado","Jefferson County","Denver-Aurora-Lakewood, CO",2026,10,-0.009,-0.0173,0.1546,1657,1434,1646
+"Larimer County, CO","County",8069,359363,"Colorado","Larimer County","Fort Collins, CO",2026,10,-0.0115,0.0073,0.2448,1626,1393,1530
+"Pueblo County, CO","County",8101,168135,"Colorado","Pueblo County","Pueblo, CO",2026,10,-0.0032,-0.0275,0.1459,1052,777,1081
+"Weld County, CO","County",8123,331466,"Colorado","Weld County","Greeley, CO",2026,10,-0.0093,0.0162,0.1456,1558,1095,1432
+"New Castle County, DE","County",10003,570567,"Delaware","New Castle County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,8e-04,0.0098,0.4452,1525,1303,1555
+"Fresno County, CA","County",6019,1008280,"California","Fresno County","Fresno, CA",2026,10,-0.0102,0.0038,0.3535,1394,1081,1337
+"Los Angeles County, CA","County",6037,9936690,"California","Los Angeles County","Los Angeles-Long Beach-Anaheim, CA",2026,10,-0.0014,-0.0087,0.0808,2063,1789,2227
+"Marin County, CA","County",6041,260485,"California","Marin County","San Francisco-Oakland-Berkeley, CA",2026,10,0.0032,0.1112,0.2349,3132,2584,3426
+"Napa County, CA","County",6055,137384,"California","Napa County","Napa, CA",2026,10,0.0064,0.0047,0.107,2276,1734,2398
+"Orange County, CA","County",6059,3175227,"California","Orange County","Los Angeles-Long Beach-Anaheim, CA",2026,10,0.0023,0.0226,0.3185,2626,2251,2639
+"Placer County, CA","County",6061,406608,"California","Placer County","Sacramento-Roseville-Folsom, CA",2026,10,-1e-04,0.0066,0.2896,2069,1636,2001
+"Riverside County, CA","County",6065,2429487,"California","Riverside County","Riverside-San Bernardino-Ontario, CA",2026,10,-8e-04,0.0164,0.3333,1952,1447,1834
+"Sacramento County, CA","County",6067,1579211,"California","Sacramento County","Sacramento-Roseville-Folsom, CA",2026,10,-0.0034,-0.0059,0.2111,1667,1345,1655
+"San Bernardino County, CA","County",6071,2180563,"California","San Bernardino County","Riverside-San Bernardino-Ontario, CA",2026,10,-4e-04,0.0256,0.3331,1816,1408,1703
+"San Diego County, CA","County",6073,3289701,"California","San Diego County","San Diego-Chula Vista-Carlsbad, CA",2026,10,5e-04,0.0082,0.2941,2292,1935,2357
+"San Francisco County, CA","County",6075,851036,"California","San Francisco County","San Francisco-Oakland-Berkeley, CA",2026,10,-0.0096,0.243,0.236,3842,3879,4597
+"San Joaquin County, CA","County",6077,779445,"California","San Joaquin County","Stockton, CA",2026,10,0.0059,-0.0011,0.2002,1634,1170,1476
+"San Mateo County, CA","County",6081,754250,"California","San Mateo County","San Francisco-Oakland-Berkeley, CA",2026,10,0.0087,0.1381,0.1809,3660,3163,4058
+"Santa Barbara County, CA","County",6083,445213,"California","Santa Barbara County","Santa Maria-Santa Barbara, CA",2026,10,-9e-04,-0.0073,0.3009,1993,1731,2021
+"Santa Clara County, CA","County",6085,1916831,"California","Santa Clara County","San Jose-Sunnyvale-Santa Clara, CA",2026,10,-0.0021,0.0919,0.1875,3375,2976,3497
+"Solano County, CA","County",6095,450995,"California","Solano County","Vallejo, CA",2026,10,0.0014,0.0129,0.1799,2199,1713,2121
+"Stanislaus County, CA","County",6099,552063,"California","Stanislaus County","Modesto, CA",2026,10,-0.0032,0.0196,0.2393,1528,1113,1408
+"Ventura County, CA","County",6111,842009,"California","Ventura County","Oxnard-Thousand Oaks-Ventura, CA",2026,10,-0.0072,-0.0054,0.2602,2451,1983,2347
+"Yolo County, CA","County",6113,217141,"California","Yolo County","Sacramento-Roseville-Folsom, CA",2026,10,-0.002,0.0048,0.0739,1785,1342,1755
+"Duval County, FL","County",12031,995708,"Florida","Duval County","Jacksonville, FL",2026,10,-0.0024,0.0079,0.2271,1330,1109,1321
+"Clay County, FL","County",12019,219650,"Florida","Clay County","Jacksonville, FL",2026,10,0.0072,0.0317,0.3,1442,1116,1351
+"Bay County, FL","County",12005,181055,"Florida","Bay County","Panama City, FL",2026,10,-0.0052,-0.0457,0.0684,1306,1105,1259
+"Pasco County, FL","County",12101,569211,"Florida","Pasco County","Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0079,-0.0416,0.2071,1403,1092,1304
+"Sarasota County, FL","County",12115,439392,"Florida","Sarasota County","North Port-Sarasota-Bradenton, FL",2026,10,0.0043,-0.0327,0.1854,1476,1286,1451
+"Charlotte County, FL","County",12015,189900,"Florida","Charlotte County","Punta Gorda, FL",2026,10,-0.004,-0.0491,0.0611,1044,781,992
+"Manatee County, FL","County",12081,405069,"Florida","Manatee County","North Port-Sarasota-Bradenton, FL",2026,10,-0.01,-0.0243,0.2577,1373,1154,1308
+"Pinellas County, FL","County",12103,959918,"Florida","Pinellas County","Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0039,0.0075,0.3324,1449,1216,1510
+"Polk County, FL","County",12105,736229,"Florida","Polk County","Lakeland-Winter Haven, FL",2026,10,0.0024,-0.0368,0.1858,1171,894,1101
+"Osceola County, FL","County",12097,393745,"Florida","Osceola County","Orlando-Kissimmee-Sanford, FL",2026,10,-0.0031,-0.027,0.1565,1491,1170,1390
+"Brevard County, FL","County",12009,610723,"Florida","Brevard County","Palm Bay-Melbourne-Titusville, FL",2026,10,-0.004,-0.0191,0.2352,1398,1169,1313
+"Orange County, FL","County",12095,1427403,"Florida","Orange County","Orlando-Kissimmee-Sanford, FL",2026,10,-0.0032,-0.0058,0.2042,1549,1309,1530
+"Hernando County, FL","County",12053,196621,"Florida","Hernando County","Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0015,-0.0158,0.4411,1207,932,1136
+"Broward County, FL","County",12011,1940907,"Florida","Broward County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.003,-0.0035,0.3044,1758,1442,1791
+"Collier County, FL","County",12021,380221,"Florida","Collier County","Naples-Marco Island, FL",2026,10,-0.0018,-0.0112,0.2929,1553,1351,1477
+"Miami-Dade County, FL","County",12086,2688237,"Florida","Miami-Dade County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,-0.0041,-8e-04,0.3434,1797,1483,1869
+"Hillsborough County, FL","County",12057,1468560,"Florida","Hillsborough County","Tampa-St. Petersburg-Clearwater, FL",2026,10,-0.0037,-0.0216,0.2991,1501,1252,1506
+"Lee County, FL","County",12071,772902,"Florida","Lee County","Cape Coral-Fort Myers, FL",2026,10,-0.0061,-0.0416,0.1077,1250,1025,1178
+"Palm Beach County, FL","County",12099,1494805,"Florida","Palm Beach County","Miami-Fort Lauderdale-Pompano Beach, FL",2026,10,0.0023,0.0275,0.3855,1898,1604,1863
+"Seminole County, FL","County",12117,471321,"Florida","Seminole County","Orlando-Kissimmee-Sanford, FL",2026,10,0.0011,-0.0032,0.2552,1506,1323,1463
+"Okaloosa County, FL","County",12091,212021,"Florida","Okaloosa County","Crestview-Fort Walton Beach-Destin, FL",2026,10,-0.0011,0.0205,0.2075,1358,1125,1211
+"Leon County, FL","County",12073,294128,"Florida","Leon County","Tallahassee, FL",2026,10,-0.0022,-0.0018,0.2942,1283,1100,1280
+"Volusia County, FL","County",12127,558520,"Florida","Volusia County","Deltona-Daytona Beach-Ormond Beach, FL",2026,10,-3e-04,-0.0221,0.2062,1366,1107,1345
+"Indian River County, FL","County",12061,160986,"Florida","Indian River County","Sebastian-Vero Beach, FL",2026,10,0.0133,0.0118,0.4601,1265,992,1281
+"St. Johns County, FL","County",12109,278722,"Florida","St. Johns County","Jacksonville, FL",2026,10,-0.0013,-0.013,0.1298,1581,1173,1403
+"St. Lucie County, FL","County",12111,334682,"Florida","St. Lucie County","Port St. Lucie, FL",2026,10,-0.0042,-6e-04,0.2716,1387,1092,1266
+"Alachua County, FL","County",12001,279729,"Florida","Alachua County","Gainesville, FL",2026,10,-0.011,-0.0138,0.1515,1182,982,1231
+"Martin County, FL","County",12085,159399,"Florida","Martin County","Port St. Lucie, FL",2026,10,-0.0123,-0.0103,0.2649,1588,1253,1645
+"Lake County, FL","County",12069,386829,"Florida","Lake County","Orlando-Kissimmee-Sanford, FL",2026,10,-0.0058,-0.0334,0.1736,1248,936,1202
+"Coweta County, GA","County",13077,147449,"Georgia","Coweta County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0044,0.0133,0.4109,1625,1216,1505
+"Columbia County, GA","County",13073,156921,"Georgia","Columbia County","Augusta-Richmond County, GA-SC",2026,10,0.0064,0.0164,0.3406,1595,1363,1406
+"Bartow County, GA","County",13015,109410,"Georgia","Bartow County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0052,0.0216,0.3851,1105,1020,1033
+"Barrow County, GA","County",13013,84399,"Georgia","Barrow County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0045,-0.0512,,1519,979,1283
+"Muscogee County, GA","County",13215,204572,"Georgia","Muscogee County","Columbus, GA-AL",2026,10,-0.0076,0.0756,0.3905,1396,1115,1305
+"Rockdale County, GA","County",13247,93641,"Georgia","Rockdale County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0078,-0.0276,0.3252,1249,1146,1176
+"Richmond County, GA","County",13245,206153,"Georgia","Richmond County","Augusta-Richmond County, GA-SC",2026,10,8e-04,0.0324,0.2565,1232,1022,1155
+"Honolulu County, HI","County",15003,1010100,"Hawaii","Honolulu County","Urban Honolulu, HI",2026,10,-0.0046,0.0112,0.2611,2526,1911,2536
+"Ada County, ID","County",16001,497494,"Idaho","Ada County","Boise City, ID",2026,10,6e-04,0.1019,0.4559,1563,1272,1465
+"Kootenai County, ID","County",16055,173396,"Idaho","Kootenai County","Coeur d'Alene, ID",2026,10,2e-04,0.0035,0.3363,1347,1028,1206
+"DuPage County, IL","County",17043,930559,"Illinois","DuPage County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,6e-04,0.0214,0.3628,1993,1706,2057
+"Kane County, IL","County",17089,517254,"Illinois","Kane County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,-0.0064,0.0346,0.3926,1638,1255,1647
+"Clark County, IN","County",18019,121484,"Indiana","Clark County","Louisville/Jefferson County, KY-IN",2026,10,-0.0063,-0.0063,0.2581,1128,878,1150
+"Hamilton County, IN","County",18057,349527,"Indiana","Hamilton County","Indianapolis-Carmel-Anderson, IN",2026,10,-0.0017,0.0271,0.331,1557,1316,1525
+"Hendricks County, IN","County",18063,175639,"Indiana","Hendricks County","Indianapolis-Carmel-Anderson, IN",2026,10,-0.0108,-0.0086,0.3737,1375,1158,1325
+"Johnson County, IN","County",18081,161952,"Indiana","Johnson County","Indianapolis-Carmel-Anderson, IN",2026,10,0.001,0.0167,0.3458,1298,1037,1210
+"Marion County, IN","County",18097,971737,"Indiana","Marion County","Indianapolis-Carmel-Anderson, IN",2026,10,0.0022,0.007,0.3077,1222,1057,1242
+"Porter County, IN","County",18127,173355,"Indiana","Porter County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,-2e-04,0.0286,0.3844,1421,1231,1413
+"Tippecanoe County, IN","County",18157,186955,"Indiana","Tippecanoe County","Lafayette-West Lafayette, IN",2026,10,-0.0017,0.0164,0.3766,1164,987,1213
+"Vanderburgh County, IN","County",18163,179900,"Indiana","Vanderburgh County","Evansville, IN-KY",2026,10,0.0023,0.0073,0.3319,1064,848,1114
+"Allen County, IN","County",18003,385456,"Indiana","Allen County","Fort Wayne, IN",2026,10,0.002,0.0498,0.4069,1125,926,1136
+"Lake County, IN","County",18089,497682,"Indiana","Lake County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,-0.0114,0.0388,0.5877,1336,1032,1346
+"Monroe County, IN","County",18105,140065,"Indiana","Monroe County","Bloomington, IN",2026,10,-0.0161,-0.0115,0.2825,1225,1068,1218
+"St. Joseph County, IN","County",18141,272388,"Indiana","St. Joseph County","South Bend-Mishawaka, IN-MI",2026,10,3e-04,-0.0107,0.4681,1142,976,1173
+"Dallas County, IA","County",19049,100367,"Iowa","Dallas County","Des Moines-West Des Moines, IA",2026,10,-0.0151,0.0124,0.162,1321,1183,1380
+"Polk County, IA","County",19153,493378,"Iowa","Polk County","Des Moines-West Des Moines, IA",2026,10,-0.0075,0.0043,0.1406,1134,961,1164
+"Scott County, IA","County",19163,174315,"Iowa","Scott County","Davenport-Moline-Rock Island, IA-IL",2026,10,-0.0069,-0.0057,0.1308,971,803,1003
+"Johnson County, KS","County",20091,610742,"Kansas","Johnson County","Kansas City, MO-KS",2026,10,-0.0052,0.0342,0.3671,1513,1324,1560
+"Sedgwick County, KS","County",20173,522700,"Kansas","Sedgwick County","Wichita, KS",2026,10,-0.0046,-0.0031,0.2715,1051,824,1065
+"Wyandotte County, KS","County",20209,167989,"Kansas","Wyandotte County","Kansas City, MO-KS",2026,10,-0.0083,0.022,0.2299,1168,882,1184
+"Boone County, KY","County",21015,136150,"Kentucky","Boone County","Cincinnati, OH-KY-IN",2026,10,0.0057,0.0088,0.3854,1426,1113,1458
+"Fayette County, KY","County",21067,321276,"Kentucky","Fayette County","Lexington-Fayette, KY",2026,10,-0.0122,0.0218,0.4181,1211,983,1207
+"Jefferson County, KY","County",21111,779232,"Kentucky","Jefferson County","Louisville/Jefferson County, KY-IN",2026,10,-0.0073,0.0048,0.2504,1236,1022,1262
+"Kenton County, KY","County",21117,169066,"Kentucky","Kenton County","Cincinnati, OH-KY-IN",2026,10,-4e-04,0.0507,0.4195,1215,983,1294
+"Warren County, KY","County",21227,135307,"Kentucky","Warren County","Bowling Green, KY",2026,10,-4e-04,-0.0066,0.2588,1077,882,1082
+"Jefferson County, LA","County",22051,436171,"Louisiana","Jefferson Parish","New Orleans-Metairie, LA",2026,10,-0.009,-0.0078,0.1157,1145,960,1184
+"Lafayette County, LA","County",22055,243175,"Louisiana","Lafayette Parish","Lafayette, LA",2026,10,-0.0076,-0.017,0.2669,1009,849,992
+"Orleans County, LA","County",22071,380408,"Louisiana","Orleans Parish","New Orleans-Metairie, LA",2026,10,-0.0026,0.0333,0.0517,1227,1031,1277
+"Bossier County, LA","County",22015,128877,"Louisiana","Bossier Parish","Shreveport-Bossier City, LA",2026,10,0.0021,0.0451,0.3457,1288,1011,1210
+"Caddo County, LA","County",22017,236259,"Louisiana","Caddo Parish","Shreveport-Bossier City, LA",2026,10,0.0091,0.0658,0.3543,1155,980,1150
+"Calcasieu County, LA","County",22019,210770,"Louisiana","Calcasieu Parish","Lake Charles, LA",2026,10,-0.007,0.1776,0.364,1445,1048,1459
+"East Baton Rouge County, LA","County",22033,454369,"Louisiana","East Baton Rouge Parish","Baton Rouge, LA",2026,10,-0.0045,0.0284,0.2635,1193,1005,1181
+"Cecil County, MD","County",24015,103876,"Maryland","Cecil County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0145,-0.0853,0.3806,1444,1011,1432
+"Bristol County, MA","County",25005,576699,"Massachusetts","Bristol County","Providence-Warwick, RI-MA",2026,10,6e-04,-0.0098,0.3841,1387,1050,1461
+"Essex County, MA","County",25009,806103,"Massachusetts","Essex County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0023,0.0161,0.3241,1905,1423,2055
+"Middlesex County, MA","County",25017,1623109,"Massachusetts","Middlesex County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0099,0.0137,0.2218,2373,1962,2562
+"Norfolk County, MA","County",25021,722112,"Massachusetts","Norfolk County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0107,0.0081,0.2346,2378,2102,2554
+"Plymouth County, MA","County",25023,529548,"Massachusetts","Plymouth County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0103,-0.0104,0.2686,1714,1204,1832
+"Suffolk County, MA","County",25025,785443,"Massachusetts","Suffolk County","Boston-Cambridge-Newton, MA-NH",2026,10,-0.0158,0.0102,0.1456,2409,2283,2443
+"Worcester County, MA","County",25027,858898,"Massachusetts","Worcester County","Worcester, MA-CT",2026,10,-0.0109,-0.042,0.2715,1483,1114,1547
+"Anoka County, MN","County",27003,363985,"Minnesota","Anoka County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,0.0022,0.0268,0.2351,1567,1270,1591
+"Carver County, MN","County",27019,107216,"Minnesota","Carver County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0058,0.0036,0.1692,1590,1167,1637
+"Dakota County, MN","County",27037,439179,"Minnesota","Dakota County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,0.0022,0.0044,0.1497,1576,1295,1655
+"Hennepin County, MN","County",27053,1270787,"Minnesota","Hennepin County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0061,0.0259,0.0966,1563,1352,1738
+"Olmsted County, MN","County",27109,162307,"Minnesota","Olmsted County","Rochester, MN",2026,10,-0.0062,0.0165,0.1787,1254,1025,1241
+"Ramsey County, MN","County",27123,547202,"Minnesota","Ramsey County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-6e-04,0.0183,0.1368,1450,1297,1590
+"Scott County, MN","County",27139,151347,"Minnesota","Scott County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,0.0023,0.0079,0.1823,1624,1313,1621
+"Stearns County, MN","County",27145,158622,"Minnesota","Stearns County","St. Cloud, MN",2026,10,0.0025,0.0629,0.3572,1158,886,1242
+"Washington County, MN","County",27163,268651,"Minnesota","Washington County","Minneapolis-St. Paul-Bloomington, MN-WI",2026,10,-0.0084,-0.0114,0.1842,1679,1306,1628
+"St. Louis County, MN","County",27137,200122,"Minnesota","St. Louis County","Duluth, MN-WI",2026,10,-0.0093,0.0179,0.3023,1126,881,1205
+"DeSoto County, MS","County",28033,186214,"Mississippi","DeSoto County","Memphis, TN-MS-AR",2026,10,0.0183,0.0468,0.3921,1342,1125,1238
+"Hinds County, MS","County",28049,226541,"Mississippi","Hinds County","Jackson, MS",2026,10,0.0082,0.0109,0.2797,1216,947,1209
+"Clay County, MO","County",29047,253085,"Missouri","Clay County","Kansas City, MO-KS",2026,10,-0.0107,0.0156,0.3669,1504,1240,1476
+"Greene County, MO","County",29077,299188,"Missouri","Greene County","Springfield, MO",2026,10,-0.025,0.0272,0.4304,1250,1017,1247
+"Jackson County, MO","County",29095,715526,"Missouri","Jackson County","Kansas City, MO-KS",2026,10,-7e-04,0.0225,0.2211,1315,1116,1303
+"Platte County, MO","County",29165,107033,"Missouri","Platte County","Kansas City, MO-KS",2026,10,-0.0109,0.0383,0.383,1381,1185,1385
+"St. Charles County, MO","County",29183,406262,"Missouri","St. Charles County","St. Louis, MO-IL",2026,10,0.0081,0.0407,0.3735,1483,1315,1466
+"St. Louis County, MO","County",29189,999703,"Missouri","St. Louis County","St. Louis, MO-IL",2026,10,-0.003,-0.0068,0.302,1366,1128,1379
+"Douglas County, NE","County",31055,582638,"Nebraska","Douglas County","Omaha-Council Bluffs, NE-IA",2026,10,-0.0039,-0.0036,0.2763,1258,1074,1309
+"Lancaster County, NE","County",31109,322063,"Nebraska","Lancaster County","Lincoln, NE",2026,10,-0.0049,0.0251,0.3496,1173,991,1186
+"Sarpy County, NE","County",31153,191272,"Nebraska","Sarpy County","Omaha-Council Bluffs, NE-IA",2026,10,0.0064,-0.0022,0.3034,1387,1159,1371
+"Washoe County, NV","County",32031,486674,"Nevada","Washoe County","Reno, NV",2026,10,0.0041,0.0745,0.3151,1604,1308,1630
+"Clark County, NV","County",32003,2265926,"Nevada","Clark County","Las Vegas-Henderson-Paradise, NV",2026,10,-6e-04,-0.0235,0.2129,1409,1124,1326
+"Hillsborough County, NH","County",33011,422733,"New Hampshire","Hillsborough County","Manchester-Nashua, NH",2026,10,-0.0039,0.0073,0.4135,1763,1366,1879
+"Rockingham County, NH","County",33015,315169,"New Hampshire","Rockingham County","Boston-Cambridge-Newton, MA-NH",2026,10,0.002,-0.0252,0.2513,1800,1415,1958
+"Mercer County, NJ","County",34021,383732,"New Jersey","Mercer County","Trenton-Princeton, NJ",2026,10,-0.0118,-0.0183,0.228,1663,1372,1800
+"Middlesex County, NJ","County",34023,860147,"New Jersey","Middlesex County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.0092,-0.0248,0.2965,1913,1638,2114
+"Morris County, NJ","County",34027,508816,"New Jersey","Morris County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-7e-04,0.003,0.2463,2033,1722,2242
+"Passaic County, NJ","County",34031,519986,"New Jersey","Passaic County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.006,-0.0477,0.2065,1787,1551,1810
+"Somerset County, NJ","County",34035,344978,"New Jersey","Somerset County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,0.0039,-0.0154,0.263,2271,1956,2413
+"Union County, NJ","County",34039,572079,"New Jersey","Union County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,0.0013,0.0078,0.2333,1951,1571,2043
+"Bergen County, NJ","County",34003,953243,"New Jersey","Bergen County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.0069,0.0279,0.2754,2161,1897,2277
+"Burlington County, NJ","County",34005,461853,"New Jersey","Burlington County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0076,-2e-04,0.3739,1845,1522,1936
+"Camden County, NJ","County",34007,522581,"New Jersey","Camden County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0016,0.004,0.396,1674,1450,1813
+"Essex County, NJ","County",34013,853374,"New Jersey","Essex County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,1e-04,-0.014,0.2466,1935,1626,2055
+"Gloucester County, NJ","County",34015,302621,"New Jersey","Gloucester County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0072,0.0026,0.4627,1751,1388,1843
+"Hudson County, NJ","County",34017,712029,"New Jersey","Hudson County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,1e-04,0.0349,0.239,2344,2098,2377
+"Monmouth County, NJ","County",34025,643064,"New Jersey","Monmouth County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,0.006,-0.0059,0.3902,1964,1626,2180
+"Doña Ana County, NM","County",35013,219870,"New Mexico","Doña Ana County","Las Cruces, NM",2026,10,-0.0023,0.0582,0.5791,914,789,850
+"Santa Fe County, NM","County",35049,154481,"New Mexico","Santa Fe County","Santa Fe, NM",2026,10,-0.0032,-0.0303,0.3116,1362,1147,1409
+"Albany County, NY","County",36001,315041,"New York","Albany County","Albany-Schenectady-Troy, NY",2026,10,0.0026,0.0433,0.3682,1565,1394,1681
+"Kings County, NY","County",36047,2679620,"New York","Kings County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,0.0057,0.0384,0.2818,2563,2405,2612
+"Nassau County, NY","County",36059,1389160,"New York","Nassau County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.0109,0.0462,0.2237,2580,2200,2562
+"New York County, NY","County",36061,1645867,"New York","New York County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.0055,0.045,0.3224,3285,3558,3003
+"Saratoga County, NY","County",36091,236328,"New York","Saratoga County","Albany-Schenectady-Troy, NY",2026,10,0.0168,0.0609,0.4407,1515,1265,1593
+"Suffolk County, NY","County",36103,1524486,"New York","Suffolk County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,-0.002,0.0617,0.2666,2540,2210,2600
+"Westchester County, NY","County",36119,997904,"New York","Westchester County","New York-Newark-Jersey City, NY-NJ-PA",2026,10,0.0012,0.0269,0.1355,2221,1974,2397
+"Alamance County, NC","County",37001,171779,"North Carolina","Alamance County","Burlington, NC",2026,10,0.0122,-4e-04,0.3351,1118,1021,1077
+"Buncombe County, NC","County",37021,269449,"North Carolina","Buncombe County","Asheville, NC",2026,10,-0.0055,-0.0425,0.2235,1257,1138,1273
+"Cabarrus County, NC","County",37025,226396,"North Carolina","Cabarrus County","Charlotte-Concord-Gastonia, NC-SC",2026,10,4e-04,-0.0211,0.1796,1240,956,1147
+"Durham County, NC","County",37063,325101,"North Carolina","Durham County","Durham-Chapel Hill, NC",2026,10,-0.0067,0.0103,0.2011,1335,1170,1359
+"Forsyth County, NC","County",37067,383739,"North Carolina","Forsyth County","Winston-Salem, NC",2026,10,-0.0049,0.0143,0.3422,1144,949,1106
+"Gaston County, NC","County",37071,228972,"North Carolina","Gaston County","Charlotte-Concord-Gastonia, NC-SC",2026,10,0.0074,3e-04,0.347,1159,949,1113
+"Guilford County, NC","County",37081,539557,"North Carolina","Guilford County","Greensboro-High Point, NC",2026,10,-0.0081,-0.0095,0.3851,1145,1004,1115
+"Mecklenburg County, NC","County",37119,1115403,"North Carolina","Mecklenburg County","Charlotte-Concord-Gastonia, NC-SC",2026,10,0.0012,-0.0187,0.1587,1391,1260,1379
+"Orange County, NC","County",37135,145919,"North Carolina","Orange County","Durham-Chapel Hill, NC",2026,10,0.0098,-0.0013,0.2582,1373,1185,1389
+"Pitt County, NC","County",37147,171196,"North Carolina","Pitt County","Greenville, NC",2026,10,0.0033,-0.0234,0.2977,1180,921,1162
+"Union County, NC","County",37179,240109,"North Carolina","Union County","Charlotte-Concord-Gastonia, NC-SC",2026,10,-0.0157,0.0133,0.2446,1458,1009,1173
+"Wake County, NC","County",37183,1132103,"North Carolina","Wake County","Raleigh-Cary, NC",2026,10,-0.0031,-0.0011,0.1916,1409,1228,1382
+"Cumberland County, NC","County",37051,335207,"North Carolina","Cumberland County","Fayetteville, NC",2026,10,0.0019,-0.0094,0.3939,1195,947,1080
+"New Hanover County, NC","County",37129,228134,"North Carolina","New Hanover County","Wilmington, NC",2026,10,-0.009,0.0323,0.2958,1314,1185,1301
+"Grand Forks County, ND","County",38035,72927,"North Dakota","Grand Forks County","Grand Forks, ND-MN",2026,10,0.007,0.0453,0.3823,1233,987,1244
+"Cass County, ND","County",38017,186328,"North Dakota","Cass County","Fargo, ND-MN",2026,10,0.0089,0.0282,0.2465,1029,895,1049
+"Ward County, ND","County",38101,69532,"North Dakota","Ward County","Minot, ND",2026,10,0.0118,0.0842,0.398,1313,984,1258
+"Butler County, OH","County",39017,388327,"Ohio","Butler County","Cincinnati, OH-KY-IN",2026,10,-0.0048,-0.0211,0.3181,1207,1017,1160
+"Clermont County, OH","County",39025,208851,"Ohio","Clermont County","Cincinnati, OH-KY-IN",2026,10,-0.0015,0.0161,0.4469,1265,980,1317
+"Cuyahoga County, OH","County",39035,1256620,"Ohio","Cuyahoga County","Cleveland-Elyria, OH",2026,10,-0.0093,0.0152,0.2728,1119,925,1156
+"Delaware County, OH","County",39041,216074,"Ohio","Delaware County","Columbus, OH",2026,10,-0.0021,0.0123,0.2911,1493,1291,1540
+"Franklin County, OH","County",39049,1318149,"Ohio","Franklin County","Columbus, OH",2026,10,-0.0053,0.0032,0.2715,1330,1135,1365
+"Greene County, OH","County",39057,167567,"Ohio","Greene County","Dayton-Kettering, OH",2026,10,-0.0048,0.0313,0.483,1199,913,1186
+"Hamilton County, OH","County",39061,827671,"Ohio","Hamilton County","Cincinnati, OH-KY-IN",2026,10,-0.0029,0.0172,0.2975,1177,958,1247
+"Lake County, OH","County",39085,232236,"Ohio","Lake County","Cleveland-Elyria, OH",2026,10,0.0055,0.0062,0.2846,1211,1001,1235
+"Licking County, OH","County",39089,178844,"Ohio","Licking County","Columbus, OH",2026,10,-0.0085,0.0475,0.5377,1097,740,1115
+"Lorain County, OH","County",39093,313101,"Ohio","Lorain County","Cleveland-Elyria, OH",2026,10,-0.0064,0.0426,0.5111,1066,810,1042
+"Lucas County, OH","County",39095,430014,"Ohio","Lucas County","Toledo, OH",2026,10,-0.0146,0.0164,0.4056,943,705,977
+"Medina County, OH","County",39103,182347,"Ohio","Medina County","Cleveland-Elyria, OH",2026,10,5e-04,0.0446,0.4323,1242,942,1282
+"Montgomery County, OH","County",39113,536121,"Ohio","Montgomery County","Dayton-Kettering, OH",2026,10,0.0027,0.0194,0.4017,1105,846,1108
+"Summit County, OH","County",39153,539361,"Ohio","Summit County","Akron, OH",2026,10,-0.0028,0.0442,0.4099,1098,831,1120
+"Warren County, OH","County",39165,243189,"Ohio","Warren County","Cincinnati, OH-KY-IN",2026,10,0.0051,0.0144,0.4231,1610,1342,1573
+"Wood County, OH","County",39173,131564,"Ohio","Wood County","Toledo, OH",2026,10,0.0046,0.0156,0.3858,998,761,1047
+"Cleveland County, OK","County",40027,295060,"Oklahoma","Cleveland County","Oklahoma City, OK",2026,10,-0.0067,0.0162,0.362,1159,919,1114
+"Comanche County, OK","County",40031,121777,"Oklahoma","Comanche County","Lawton, OK",2026,10,-0.0082,0.0657,0.3127,898,621,835
+"Oklahoma County, OK","County",40109,795822,"Oklahoma","Oklahoma County","Oklahoma City, OK",2026,10,-0.0048,0.0121,0.277,1118,900,1122
+"Tulsa County, OK","County",40143,668923,"Oklahoma","Tulsa County","Tulsa, OK",2026,10,-5e-04,0.0203,0.344,1118,916,1141
+"Lane County, OR","County",41039,382218,"Oregon","Lane County","Eugene-Springfield, OR",2026,10,-0.0067,-0.0204,0.2663,1222,928,1240
+"Marion County, OR","County",41047,345815,"Oregon","Marion County","Salem, OR",2026,10,0.0086,0.0029,0.3857,1381,1072,1388
+"Multnomah County, OR","County",41051,808098,"Oregon","Multnomah County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,-0.0025,0.0023,0.0203,1531,1385,1619
+"Clackamas County, OR","County",41005,420925,"Oregon","Clackamas County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,-0.0054,-0.0037,0.2258,1660,1427,1645
+"Deschutes County, OR","County",41017,199352,"Oregon","Deschutes County","Bend, OR",2026,10,-0.0141,-0.0135,0.1531,1623,1222,1479
+"Washington County, OR","County",41067,599541,"Oregon","Washington County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,-0.003,-0.0115,0.1874,1706,1461,1688
+"Bucks County, PA","County",42017,645163,"Pennsylvania","Bucks County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0035,0.0123,0.3745,1779,1493,1912
+"Chester County, PA","County",42029,536474,"Pennsylvania","Chester County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0142,0.0215,0.3248,1937,1732,1989
+"Delaware County, PA","County",42045,575312,"Pennsylvania","Delaware County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0054,0.0112,0.3745,1642,1408,1749
+"Lancaster County, PA","County",42071,553202,"Pennsylvania","Lancaster County","Lancaster, PA",2026,10,-0.0099,-0.0654,0.3568,1365,1102,1375
+"Lehigh County, PA","County",42077,374110,"Pennsylvania","Lehigh County","Allentown-Bethlehem-Easton, PA-NJ",2026,10,0.0029,0.0096,0.3671,1458,1187,1535
+"Northampton County, PA","County",42095,314299,"Pennsylvania","Northampton County","Allentown-Bethlehem-Easton, PA-NJ",2026,10,0.0085,0.0268,0.4153,1509,1170,1528
+"Philadelphia County, PA","County",42101,1593208,"Pennsylvania","Philadelphia County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0097,0.0099,0.132,1422,1300,1504
+"Allegheny County, PA","County",42003,1245310,"Pennsylvania","Allegheny County","Pittsburgh, PA",2026,10,-0.0104,0.0102,0.2365,1327,1115,1403
+"Dauphin County, PA","County",42043,286108,"Pennsylvania","Dauphin County","Harrisburg-Carlisle, PA",2026,10,0.0077,0.0169,0.385,1303,1106,1349
+"Montgomery County, PA","County",42091,856399,"Pennsylvania","Montgomery County","Philadelphia-Camden-Wilmington, PA-NJ-DE-MD",2026,10,-0.0045,0.0193,0.277,1629,1392,1740
+"Providence County, RI","County",44007,657984,"Rhode Island","Providence County","Providence-Warwick, RI-MA",2026,10,-0.002,0.02,0.4096,1537,1193,1603
+"Lexington County, SC","County",45063,295934,"South Carolina","Lexington County","Columbia, SC",2026,10,-2e-04,-0.0071,0.3519,1170,1085,1104
+"Greenville County, SC","County",45045,528251,"South Carolina","Greenville County","Greenville-Anderson, SC",2026,10,-0.0013,0.0113,0.2704,1307,1151,1306
+"Beaufort County, SC","County",45013,189071,"South Carolina","Beaufort County","Hilton Head Island-Bluffton, SC",2026,10,-0.0101,-0.0237,0.2702,1540,1452,1507
+"Berkeley County, SC","County",45015,231419,"South Carolina","Berkeley County","Charleston-North Charleston, SC",2026,10,-0.0015,0.0316,0.3248,1652,1575,1456
+"Dorchester County, SC","County",45035,162139,"South Carolina","Dorchester County","Charleston-North Charleston, SC",2026,10,7e-04,0.0385,0.3581,1469,1257,1353
+"Horry County, SC","County",45051,356578,"South Carolina","Horry County","Myrtle Beach-Conway-North Myrtle Beach, SC-NC",2026,10,0.0014,-0.01,0.3035,1121,926,1072
+"York County, SC","County",45091,282987,"South Carolina","York County","Charlotte-Concord-Gastonia, NC-SC",2026,10,-0.0016,0.0107,0.2904,1266,1189,1246
+"Spartanburg County, SC","County",45083,330119,"South Carolina","Spartanburg County","Spartanburg, SC",2026,10,-0.0075,3e-04,0.2297,1176,1013,1131
+"Richland County, SC","County",45079,416161,"South Carolina","Richland County","Columbia, SC",2026,10,-0.0077,0.0011,0.3533,1233,1045,1182
+"Charleston County, SC","County",45019,409840,"South Carolina","Charleston County","Charleston-North Charleston, SC",2026,10,-0.0015,0.0239,0.3822,1654,1492,1657
+"Lincoln County, SD","County",46083,65801,"South Dakota","Lincoln County","Sioux Falls, SD",2026,10,-0.0024,0.0473,0.2484,1226,1030,1235
+"Minnehaha County, SD","County",46099,197742,"South Dakota","Minnehaha County","Sioux Falls, SD",2026,10,1e-04,0.0242,0.2348,929,797,947
+"Pennington County, SD","County",46103,110386,"South Dakota","Pennington County","Rapid City, SD",2026,10,8e-04,0.0346,0.3421,992,784,1044
+"Bell County, TX","County",48027,372821,"Texas","Bell County","Killeen-Temple, TX",2026,10,-0.003,0.0017,0.2743,1066,783,967
+"Bexar County, TX","County",48029,2014059,"Texas","Bexar County","San Antonio-New Braunfels, TX",2026,10,-0.006,-0.0355,0.0614,1132,955,1174
+"Brazoria County, TX","County",48039,374600,"Texas","Brazoria County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0024,-0.0023,0.1325,1289,1143,1211
+"Brazos County, TX","County",48041,234548,"Texas","Brazos County","College Station-Bryan, TX",2026,10,-0.0073,-0.007,0.2351,1263,1098,1185
+"Collin County, TX","County",48085,1079153,"Texas","Collin County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0059,-0.029,0.1323,1555,1264,1628
+"Comal County, TX","County",48091,165201,"Texas","Comal County","San Antonio-New Braunfels, TX",2026,10,-0.0063,-0.0657,0.0212,1186,1104,1171
+"Dallas County, TX","County",48113,2604053,"Texas","Dallas County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0013,-0.0046,0.161,1394,1235,1449
+"Denton County, TX","County",48121,914870,"Texas","Denton County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0014,-0.0201,0.144,1391,1162,1479
+"Ector County, TX","County",48135,162300,"Texas","Ector County","Odessa, TX",2026,10,-0.0061,-0.0089,0.027,1640,1382,1702
+"El Paso County, TX","County",48141,863832,"Texas","El Paso County","El Paso, TX",2026,10,0.0038,0.0225,0.406,1181,937,1114
+"Ellis County, TX","County",48139,195509,"Texas","Ellis County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0024,0.0117,0.2455,1522,1329,1419
+"Fort Bend County, TX","County",48157,832607,"Texas","Fort Bend County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0038,-0.0214,0.1546,1751,1398,1670
+"Galveston County, TX","County",48167,350801,"Texas","Galveston County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0019,0.0115,0.2108,1376,1131,1381
+"Grayson County, TX","County",48181,137008,"Texas","Grayson County","Sherman-Denison, TX",2026,10,-0.005,-0.0923,0.0424,1050,808,1039
+"Guadalupe County, TX","County",48187,173828,"Texas","Guadalupe County","San Antonio-New Braunfels, TX",2026,10,9e-04,-0.0424,0.0611,1152,800,1029
+"Harris County, TX","County",48201,4726177,"Texas","Harris County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0027,-0.0216,0.0859,1293,1109,1314
+"Hays County, TX","County",48209,245351,"Texas","Hays County","Austin-Round Rock-Georgetown, TX",2026,10,-0.0054,-0.0517,0.0337,1117,1009,1115
+"Hidalgo County, TX","County",48215,873167,"Texas","Hidalgo County","McAllen-Edinburg-Mission, TX",2026,10,-0.0026,-0.0276,0.1445,878,664,867
+"Hunt County, TX","County",48231,101596,"Texas","Hunt County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0013,-0.0339,0.2678,1221,1050,1152
+"Jefferson County, TX","County",48245,254942,"Texas","Jefferson County","Beaumont-Port Arthur, TX",2026,10,-0.0102,-0.0294,0.1727,1158,921,1164
+"Johnson County, TX","County",48251,182690,"Texas","Johnson County","Dallas-Fort Worth-Arlington, TX",2026,10,0.0171,0.0344,0.227,1313,961,1228
+"Kaufman County, TX","County",48257,149773,"Texas","Kaufman County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0011,-0.0433,0.1735,1366,1175,1205
+"Lubbock County, TX","County",48303,311509,"Texas","Lubbock County","Lubbock, TX",2026,10,8e-04,0.0227,0.1951,1194,967,1166
+"McLennan County, TX","County",48309,261090,"Texas","McLennan County","Waco, TX",2026,10,-0.0102,0.0271,0.3147,1104,888,1105
+"Midland County, TX","County",48329,169393,"Texas","Midland County","Midland, TX",2026,10,0,-0.0156,0.0023,1622,1416,1735
+"Montgomery County, TX","County",48339,629989,"Texas","Montgomery County","Houston-The Woodlands-Sugar Land, TX",2026,10,-0.0049,-0.0115,0.1259,1413,1216,1406
+"Nueces County, TX","County",48355,353245,"Texas","Nueces County","Corpus Christi, TX",2026,10,-0.0113,-0.0197,0.0696,1216,1010,1234
+"Parker County, TX","County",48367,151188,"Texas","Parker County","Dallas-Fort Worth-Arlington, TX",2026,10,-0.0045,0.0199,0.17,1389,1170,1213
+"Smith County, TX","County",48423,234667,"Texas","Smith County","Tyler, TX",2026,10,0.0193,0.0504,0.3122,1162,909,1141
+"Tarrant County, TX","County",48439,2113854,"Texas","Tarrant County","Dallas-Fort Worth-Arlington, TX",2026,10,-4e-04,-0.0114,0.1668,1372,1164,1384
+"Tom Green County, TX","County",48451,119276,"Texas","Tom Green County","San Angelo, TX",2026,10,-0.0025,0.0642,0.2229,1238,955,1258
+"Travis County, TX","County",48453,1289054,"Texas","Travis County","Austin-Round Rock-Georgetown, TX",2026,10,-0.0023,-0.0155,0.0144,1327,1167,1420
+"Victoria County, TX","County",48469,91209,"Texas","Victoria County","Victoria, TX",2026,10,0.0026,-0.0416,0.0969,1135,960,1215
+"Williamson County, TX","County",48491,617396,"Texas","Williamson County","Austin-Round Rock-Georgetown, TX",2026,10,-0.0018,0.0121,0.0454,1336,1103,1333
+"Anchorage County, AK","County",2020,290674,"Alaska","Anchorage Municipality","Anchorage, AK",2026,10,0.0099,0.0455,0.566,1811,1296,1772
+"Davis County, UT","County",49011,363032,"Utah","Davis County","Ogden-Clearfield, UT",2026,10,-0.0053,0.0149,0.2387,1379,1098,1252
+"Salt Lake County, UT","County",49035,1180643,"Utah","Salt Lake County","Salt Lake City, UT",2026,10,-0.0058,-0.0155,0.1915,1442,1193,1427
+"Utah County, UT","County",49049,666021,"Utah","Utah County","Provo-Orem, UT",2026,10,4e-04,-0.029,0.2531,1320,985,1142
+"Washington County, UT","County",49053,183297,"Utah","Washington County","St. George, UT",2026,10,-0.0099,-0.0124,,1430,989,1290
+"Weber County, UT","County",49057,262960,"Utah","Weber County","Ogden-Clearfield, UT",2026,10,-0.0053,0.0103,0.221,1161,774,1126
+"Arlington County, VA","County",51013,235845,"Virginia","Arlington County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0022,0.0108,0.1659,2603,2451,2962
+"Chesterfield County, VA","County",51041,366019,"Virginia","Chesterfield County","Richmond, VA",2026,10,-5e-04,0.0166,0.3598,1688,1434,1628
+"Fairfax County, VA","County",51059,1145354,"Virginia","Fairfax County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0054,-1e-04,0.2082,2382,2041,2364
+"Henrico County, VA","County",51087,333120,"Virginia","Henrico County","Richmond, VA",2026,10,-0.0028,-0.0133,0.2946,1476,1257,1446
+"James City County, VA","County",51095,78818,"Virginia","James City County","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,0.0016,0.0784,0.4635,1794,1633,1623
+"Loudoun County, VA","County",51107,420773,"Virginia","Loudoun County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0148,0.0011,0.3072,2480,2003,2307
+"Prince William County, VA","County",51153,481114,"Virginia","Prince William County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0042,-0.0026,0.2944,2169,1783,2056
+"Spotsylvania County, VA","County",51177,141097,"Virginia","Spotsylvania County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0066,0.0273,0.3872,1840,1515,1779
+"Stafford County, VA","County",51179,157606,"Virginia","Stafford County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,0.0012,0.0225,0.3134,2121,1872,1886
+"York County, VA","County",51199,70238,"Virginia","York County","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,0.011,0.0705,0.5398,2343,1623,2042
+"Alexandria County, VA","County",51510,157594,"Virginia","Alexandria city","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-9e-04,-0.0182,0.1311,2174,1991,2446
+"Fredericksburg County, VA","County",51630,28258,"Virginia","Fredericksburg city","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,0.0019,0.0086,0.3922,1828,1615,1839
+"Hampton County, VA","County",51650,137217,"Virginia","Hampton city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,0.0022,0.0867,0.5342,1552,1289,1483
+"Newport News County, VA","County",51700,185118,"Virginia","Newport News city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,0.0094,0.0742,0.4853,1486,1260,1437
+"Norfolk County, VA","County",51710,236973,"Virginia","Norfolk city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,0.0017,0.079,0.4643,1665,1383,1617
+"Chesapeake County, VA","County",51550,249377,"Virginia","Chesapeake city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,-0.0074,0.0532,0.4551,1827,1589,1724
+"Virginia Beach County, VA","County",51810,457900,"Virginia","Virginia Beach city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,-0.0018,0.0853,0.4761,1949,1615,1826
+"Suffolk County, VA","County",51800,94856,"Virginia","Suffolk city","Virginia Beach-Norfolk-Newport News, VA-NC",2026,10,-0.0039,0.0648,0.4305,1804,1767,1590
+"Benton County, WA","County",53005,207560,"Washington","Benton County","Kennewick-Richland, WA",2026,10,-0.0103,-0.0192,0.2923,1341,1105,1358
+"Pierce County, WA","County",53053,918993,"Washington","Pierce County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0013,-0.0083,0.2493,1749,1408,1735
+"Snohomish County, WA","County",53061,828337,"Washington","Snohomish County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0049,0.0087,0.227,1937,1611,1897
+"Kitsap County, WA","County",53035,275411,"Washington","Kitsap County","Bremerton-Silverdale-Port Orchard, WA",2026,10,-0.0038,-0.0096,0.2346,1895,1373,1863
+"Spokane County, WA","County",53063,538711,"Washington","Spokane County","Spokane-Spokane Valley, WA",2026,10,-0.0153,0.0104,0.343,1227,961,1246
+"Thurston County, WA","County",53067,294272,"Washington","Thurston County","Olympia-Lacey-Tumwater, WA",2026,10,0.0011,0.0114,0.2303,1680,1413,1636
+"Clark County, WA","County",53011,504091,"Washington","Clark County","Portland-Vancouver-Hillsboro, OR-WA",2026,10,0.0015,-0.0072,0.2375,1721,1396,1628
+"Grant County, WA","County",53025,99145,"Washington","Grant County","Moses Lake, WA",2026,10,-0.009,-0.0027,0.0983,1091,803,1082
+"King County, WA","County",53033,2254371,"Washington","King County","Seattle-Tacoma-Bellevue, WA",2026,10,-0.0064,-0.0081,0.0982,2104,1890,2251
+"Dane County, WI","County",55025,559891,"Wisconsin","Dane County","Madison, WI",2026,10,-0.0096,-0.0219,0.3183,1514,1383,1587
+"Kenosha County, WI","County",55059,168693,"Wisconsin","Kenosha County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,1e-04,-0.0122,0.2569,1227,924,1224
+"Milwaukee County, WI","County",55079,933063,"Wisconsin","Milwaukee County","Milwaukee-Waukesha, WI",2026,10,-0.0042,0.0371,0.2986,1234,1043,1281
+"Waukesha County, WI","County",55133,407290,"Wisconsin","Waukesha County","Milwaukee-Waukesha, WI",2026,10,-0.0139,-0.0103,0.3203,1471,1276,1548
+"Ingham County, MI","County",26065,282540,"Michigan","Ingham County","Lansing-East Lansing, MI",2026,10,0.0018,0.0696,0.532,1301,1054,1359
+"Kalamazoo County, MI","County",26077,261426,"Michigan","Kalamazoo County","Kalamazoo-Portage, MI",2026,10,-0.0017,0.0519,0.4019,1111,954,1163
+"Kent County, MI","County",26081,657321,"Michigan","Kent County","Grand Rapids-Kentwood, MI",2026,10,8e-04,0.0238,0.365,1331,1116,1370
+"Macomb County, MI","County",26099,878453,"Michigan","Macomb County","Detroit-Warren-Dearborn, MI",2026,10,0.0017,0.0329,0.3233,1284,1049,1308
+"Oakland County, MI","County",26125,1272264,"Michigan","Oakland County","Detroit-Warren-Dearborn, MI",2026,10,-0.0065,0.0322,0.2652,1445,1158,1561
+"Ottawa County, MI","County",26139,296183,"Michigan","Ottawa County","Grand Rapids-Kentwood, MI",2026,10,0.0034,0.026,0.5341,1298,1134,1289
+"Washtenaw County, MI","County",26161,370231,"Michigan","Washtenaw County","Ann Arbor, MI",2026,10,-0.0022,0.0018,0.2442,1479,1275,1562
+"Wayne County, MI","County",26163,1781641,"Michigan","Wayne County","Detroit-Warren-Dearborn, MI",2026,10,0.0062,0.0461,0.2353,1191,893,1200
+"St. Tammany County, LA","County",22103,266168,"Louisiana","St. Tammany Parish","New Orleans-Metairie, LA",2026,10,0.0017,0.0026,0.2814,1249,1040,1185
+"Davidson County, TN","County",47037,709786,"Tennessee","Davidson County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,-0.0056,-0.0174,0.112,1368,1228,1361
+"Hamilton County, TN","County",47065,367193,"Tennessee","Hamilton County","Chattanooga, TN-GA",2026,10,-0.0101,0.0058,0.2788,1196,1076,1167
+"Knox County, TN","County",47093,481406,"Tennessee","Knox County","Knoxville, TN",2026,10,-0.007,-0.0095,0.4808,1184,957,1189
+"Montgomery County, TN","County",47125,222305,"Tennessee","Montgomery County","Clarksville, TN-KY",2026,10,-0.008,0.0028,0.372,1115,843,987
+"Rutherford County, TN","County",47149,343727,"Tennessee","Rutherford County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,-0.0012,0.0305,0.3359,1426,1157,1348
+"Shelby County, TN","County",47157,926440,"Tennessee","Shelby County","Memphis, TN-MS-AR",2026,10,-0.0023,-0.0064,0.2085,1123,937,1057
+"Sumner County, TN","County",47165,196845,"Tennessee","Sumner County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,0.0044,-0.0023,0.2854,1217,1046,1219
+"Williamson County, TN","County",47187,248897,"Tennessee","Williamson County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,2e-04,-0.0184,0.2189,1792,1619,1742
+"Wilson County, TN","County",47189,149096,"Tennessee","Wilson County","Nashville-Davidson--Murfreesboro--Franklin, TN",2026,10,0.0046,0.0152,0.3116,1327,1153,1222
+"Sonoma County, CA","County",6097,488436,"California","Sonoma County","Santa Rosa-Petaluma, CA",2026,10,-0.0046,0.0179,0.1555,2135,1623,2184
+"Wicomico County, MD","County",24045,103815,"Maryland","Wicomico County","Salisbury, MD-DE",2026,10,-0.0124,-0.029,0.443,1340,950,1301
+"Houston County, GA","County",13153,164117,"Georgia","Houston County","Warner Robins, GA",2026,10,-0.0112,0.0053,0.377,1264,1024,1164
+"Henry County, GA","County",13151,240853,"Georgia","Henry County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,0.0037,0.0077,0.2953,1418,1229,1305
+"Bibb County, GA","County",13021,156554,"Georgia","Bibb County","Macon-Bibb County, GA",2026,10,0.0032,0.0465,0.3492,1200,990,1184
+"Clayton County, GA","County",13063,296312,"Georgia","Clayton County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0035,0.0173,0.3314,1287,1075,1225
+"Clarke County, GA","County",13059,128864,"Georgia","Clarke County","Athens-Clarke County, GA",2026,10,-0.0083,0.0033,0.3087,1240,1056,1230
+"Troup County, GA","County",13285,69527,"Georgia","Troup County","LaGrange, GA-AL",2026,10,-0.0063,0.0535,0.3112,1062,820,1047
+"Forsyth County, GA","County",13117,253225,"Georgia","Forsyth County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0223,-0.0089,0.1922,1724,1343,1512
+"Newton County, GA","County",13217,113298,"Georgia","Newton County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0027,5e-04,0.2953,1379,1146,1163
+"Albemarle County, VA","County",51003,112513,"Virginia","Albemarle County","Charlottesville, VA",2026,10,-0.0229,-0.0261,0.1993,1672,1521,1680
+"Alameda County, CA","County",6001,1663823,"California","Alameda County","San Francisco-Oakland-Berkeley, CA",2026,10,0.0011,0.1029,0.0661,2563,2202,2715
+"Contra Costa County, CA","County",6013,1162648,"California","Contra Costa County","San Francisco-Oakland-Berkeley, CA",2026,10,-3e-04,0.053,0.1077,2524,2098,2473
+"Charles County, MD","County",24017,167035,"Maryland","Charles County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0079,-0.0092,0.2203,1987,1689,1838
+"Cherokee County, GA","County",13057,268567,"Georgia","Cherokee County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0107,-0.0221,0.2647,1562,1299,1423
+"Cobb County, GA","County",13067,765813,"Georgia","Cobb County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-9e-04,0.0066,0.2167,1471,1285,1461
+"Douglas County, GA","County",13097,144735,"Georgia","Douglas County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-7e-04,0.0275,0.2825,1401,1220,1367
+"Hall County, GA","County",13139,204953,"Georgia","Hall County","Gainesville, GA",2026,10,-0.008,0.0056,0.2558,1260,1135,1218
+"DeKalb County, GA","County",13089,761209,"Georgia","DeKalb County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0054,-0.0053,0.1595,1458,1331,1462
+"Gwinnett County, GA","County",13135,957977,"Georgia","Gwinnett County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0032,-0.0061,0.2191,1536,1255,1456
+"Chatham County, GA","County",13051,296266,"Georgia","Chatham County","Savannah, GA",2026,10,-0.0103,-0.0575,0.2904,1400,1197,1346
+"Fulton County, GA","County",13121,1061944,"Georgia","Fulton County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.003,0.0038,0.1236,1525,1443,1526
+"Baltimore County, MD","County",24005,850737,"Maryland","Baltimore County","Baltimore-Columbia-Towson, MD",2026,10,-0.0035,0.0073,0.2746,1625,1396,1681
+"St. Mary's County, MD","County",24037,113814,"Maryland","St. Mary's County","California-Lexington Park, MD",2026,10,3e-04,0.0462,0.3064,2152,1812,2054
+"Harford County, MD","County",24025,261059,"Maryland","Harford County","Baltimore-Columbia-Towson, MD",2026,10,3e-04,0.0115,0.3191,1740,1231,1668
+"Bernalillo County, NM","County",35001,674692,"New Mexico","Bernalillo County","Albuquerque, NM",2026,10,-0.005,-0.0032,0.4434,1225,998,1273
+"District of Columbia County, DC","County",11001,670587,"District of Columbia","District of Columbia","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0029,0.0011,0.0376,2169,2144,2201
+"Howard County, MD","County",24027,332011,"Maryland","Howard County","Baltimore-Columbia-Towson, MD",2026,10,-0.0047,0.0325,0.2708,2192,1924,2177
+"Anne Arundel County, MD","County",24003,588109,"Maryland","Anne Arundel County","Baltimore-Columbia-Towson, MD",2026,10,-0.0067,0.0116,0.2596,2161,1772,2116
+"Frederick County, MD","County",24021,273829,"Maryland","Frederick County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0024,0.001,0.3632,1815,1460,1723
+"Montgomery County, MD","County",24031,1056910,"Maryland","Montgomery County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,-0.0056,-0.0122,0.1466,2037,1808,2057
+"Prince George's County, MD","County",24033,957189,"Maryland","Prince George's County","Washington-Arlington-Alexandria, DC-VA-MD-WV",2026,10,0,1e-04,0.1503,1873,1561,1920
+"Yellowstone County, MT","County",30111,165524,"Montana","Yellowstone County","Billings, MT",2026,10,-0.0101,-0.0236,0.3619,1239,994,1196
+"Gallatin County, MT","County",30031,119685,"Montana","Gallatin County","Bozeman, MT",2026,10,-0.0123,0.0351,,1418,984,1356
+"Cook County, IL","County",17031,5225367,"Illinois","Cook County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,-0.0063,0.0323,0.2655,1794,1609,1816
+"Lake County, IL","County",17097,713159,"Illinois","Lake County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,-0.0133,0.0415,0.3919,1689,1288,1681
+"Will County, IL","County",17197,696774,"Illinois","Will County","Chicago-Naperville-Elgin, IL-IN-WI",2026,10,-0.0116,0.0015,0.3025,1421,1084,1378
+"Broomfield County, CO","County",8014,73946,"Colorado","Broomfield County","Denver-Aurora-Lakewood, CO",2026,10,-0.0103,-0.0182,0.1466,1958,1771,2135
+"Kern County, CA","County",6029,906883,"California","Kern County","Bakersfield, CA",2026,10,0.0025,0.0606,0.6038,1652,1167,1532
+"Campbell County, KY","County",21037,93122,"Kentucky","Campbell County","Cincinnati, OH-KY-IN",2026,10,0.0092,0.0238,0.3604,1146,894,1233
+"Brookhaven, GA","City",1310944,56848,"Georgia","DeKalb County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0306,-3e-04,0.1323,1692,1590,1782
+"Peachtree Corners, GA","City",1359735,42147,"Georgia","Gwinnett County","Atlanta-Sandy Springs-Alpharetta, GA",2026,10,-0.0043,3e-04,0.217,1332,1115,1381

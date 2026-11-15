@@ -1,0 +1,16 @@
+[
+ {"name":"openigloo_home","url":"https://www.openigloo.com/"},
+ {"name":"openigloo_sitemap","url":"https://www.openigloo.com/sitemap.xml"},
+ {"name":"apartmentratings_foresthills","url":"https://www.apartmentratings.com/ny/forest-hills/"},
+ {"name":"yelp_search","url":"https://www.yelp.com/search?find_desc=apartments&find_loc=Forest+Hills%2C+Queens%2C+NY"},
+ {"name":"google_maps_robots_only","url":"https://www.google.com/maps/search/apartments+forest+hills+queens","robots_only":true},
+ {"name":"niche_foresthills","url":"https://www.niche.com/places-to-live/n/forest-hills-new-york-city-ny/"},
+ {"name":"citydata_forum_nyc","url":"https://www.city-data.com/forum/new-york-city/"},
+ {"name":"citydata_neighborhood","url":"https://www.city-data.com/neighborhood/Forest-Hills-Queens-NY.html"},
+ {"name":"oldreddit_search_json","url":"https://old.reddit.com/r/Queens/search.json?q=forest+hills&restrict_sr=1&limit=5"},
+ {"name":"oldreddit_search_html","url":"https://old.reddit.com/r/Queens/search?q=forest+hills&restrict_sr=1"},
+ {"name":"reddit_search_json","url":"https://www.reddit.com/r/Queens/search.json?q=forest+hills&restrict_sr=1&limit=5"},
+ {"name":"reddit_sub_json","url":"https://www.reddit.com/r/Queens/top.json?t=year&limit=5"},
+ {"name":"nextdoor_neighborhood","url":"https://nextdoor.com/neighborhood/foresthills--queens--ny/"},
+ {"name":"youtube_search","url":"https://www.youtube.com/results?search_query=living+in+forest+hills+queens"}
+]

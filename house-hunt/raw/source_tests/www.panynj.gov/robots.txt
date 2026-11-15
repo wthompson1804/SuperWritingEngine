@@ -1,0 +1,80 @@
+User-agent: *
+
+Allow: /content/redevelopment
+Allow: /content/dam/redevelopment
+
+Disallow: /content/path-staging/
+Disallow: /content/path-staging
+Disallow: /path-staging/
+Disallow: /path-staging
+Disallow: /content/airports-staging/
+Disallow: /content/airports-staging
+Disallow: /airports-staging/
+Disallow: /airports-staging
+
+Disallow: /content/bridges-tunnels-staging/
+Disallow: /content/bridges-tunnels-staging
+Disallow: /bridges-tunnels-staging/
+Disallow: /bridges-tunnels-staging
+
+Disallow: /content/bus-terminals-staging/
+Disallow: /content/bus-terminals-staging
+Disallow: /bus-terminals-staging/
+Disallow: /bus-terminals-staging
+
+Disallow: /content/corporate-staging/
+Disallow: /content/corporate-staging
+Disallow: /corporate-staging/
+Disallow: /corporate-staging
+
+Disallow: /content/police-staging/
+Disallow: /content/police-staging
+Disallow: /police-staging/
+Disallow: /police-staging
+
+Disallow: /content/port-authority-staging/
+Disallow: /content/port-authority-staging
+Disallow: /port-authority-staging/
+Disallow: /port-authority-staging
+
+Disallow: /content/port-staging/
+Disallow: /content/port-staging
+Disallow: /port-staging/
+Disallow: /port-staging
+
+Disallow: /content/wellness/
+Disallow: /content/wellness
+Disallow: /wellness/
+Disallow: /wellness
+
+Disallow: /content/new-portal/
+Disallow: /content/new-portal
+Disallow: /new-portal/
+Disallow: /new-portal
+
+Disallow: /content/port-authority/en/logout.html
+Disallow: /port-authority/en/logout.html
+
+Disallow: /content/port-authority/en/mypaoutage.html
+
+Allow: /content/port-authority
+Allow: /content/path
+Allow: /content/airports
+Allow: /content/bridges-tunnels
+Allow: /content/bus-terminals
+Allow: /content/corporate
+Allow: /content/police
+Allow: /content/port
+Allow: /content/dam
+
+Allow: /port-authority
+Allow: /path
+Allow: /airports
+Allow: /bridges-tunnels
+Allow: /bus-terminals
+Allow: /corporate
+Allow: /police
+Allow: /port
+Allow: /dam
+
+Sitemap: https://www.panynj.gov/sitemap.xml

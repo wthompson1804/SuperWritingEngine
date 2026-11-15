@@ -1,0 +1,5 @@
+[
+ {"name":"bts_noise_2020_road_aviation_meta","url":"https://geo.dot.gov/server/rest/services/Hosted/NTAD_Noise_2020_CONUS_Aviation_Road/MapServer?f=json"},
+ {"name":"bts_noise_2020_identify_foresthills","url":"https://geo.dot.gov/server/rest/services/Hosted/NTAD_Noise_2020_CONUS_Aviation_Road/MapServer/identify?geometry=-73.8448,40.7181&geometryType=esriGeometryPoint&sr=4326&layers=all&tolerance=1&mapExtent=-73.85,40.71,-73.84,40.72&imageDisplay=400,400,96&returnGeometry=false&f=json"},
+ {"name":"thruway_home","url":"https://thruway.ny.gov/"}
+]

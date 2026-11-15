@@ -3,3 +3,7 @@
 __pycache__/
 raw/**/*.parquet
 raw/big/
+# Raw HTML pages from third-party sites embed their own API tokens (GitHub push protection
+# blocks them). Keep HTML captures on disk only; _index.jsonl and meta files are still committed.
+raw/**/*.html
+raw/**/*.htm

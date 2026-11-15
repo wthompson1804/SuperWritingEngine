@@ -1,0 +1,109 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "CT Crime Incidents: National Incident-Based Reporting System (NIBRS)",
+            "id" : "7t99-gbjg",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The CT Department of Emergency Services and Public Protection makes data on crime in Connecticut available at https://ct.beyond2020.com/. Crime data is continuously collected from all law enforcement agencies in the state, validated and made available for reporting. Reports on this site are updated nightly.\n\nAdditional data from DESPP is available here: https://portal.ct.gov/DESPP/Division-of-State-Police/Crimes-Analysis-Unit/Crimes-Analysis-Unit",
+            "attribution" : "Department of Emergency Services and Public Protection",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "href",
+            "updatedAt" : "2026-08-20T23:29:50.000Z",
+            "createdAt" : "2023-05-24T17:28:28.000Z",
+            "metadata_updated_at" : "2026-08-20T23:29:50.000Z",
+            "data_updated_at" : "2023-05-24T17:28:28.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 119,
+                "page_views_last_month" : 630,
+                "page_views_total" : 3992,
+                "page_views_last_week_log" : 6.906890595608519,
+                "page_views_last_month_log" : 9.30149619498255,
+                "page_views_total_log" : 11.963257356633049
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "href",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-05-24T17:35:25.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Public Safety",
+            "domain_tags" :
+              [
+                "offenses",
+                "arrests",
+                "despp",
+                "crime",
+                "department of emergency services and public protection",
+                "beyond 2020",
+                "nibrs",
+                "ucr"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Agency_Agency",
+                  "value" : "Department of Emergency Services and Public Protection"
+                },
+                {
+                  "key" : "Details_Geographic-Unit",
+                  "value" : "Not applicable"
+                },
+                { "key" : "Details_Update-Frequency", "value" : "Daily" }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "license" : "Public Domain",
+            "additional_access_points" :
+              [
+                {
+                  "urls" : {
+                             "Visit Beyond2020" : "https://ct.beyond2020.com/"
+                           },
+                  "description" : "The CT Department of Emergency Services and Public Protection makes data on crime in Connecticut available at https://ct.beyond2020.com/. Crime data is continuously collected from all law enforcement agencies in the state, validated and made available for reporting. Reports on this site are updated nightly.\n\n",
+                  "title" : "National Incident-Based Reporting System (NIBRS)"
+                }
+              ],
+            "access_points" :
+              { "Visit Beyond2020" : "https://ct.beyond2020.com/" }
+          },
+        "permalink" : "https://data.ct.gov/d/7t99-gbjg",
+        "link" : "https://data.ct.gov/Public-Safety/CT-Crime-Incidents-National-Incident-Based-Reporti/7t99-gbjg",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      }
+    ],
+  "resultSetSize" : 1,
+  "timings" : { "serviceMillis" : 14, "searchMillis" : [ 2, 4 ] },
+  "warnings" : []
+}

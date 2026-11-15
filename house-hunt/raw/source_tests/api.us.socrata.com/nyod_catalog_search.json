@@ -1,0 +1,652 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "Index Crimes by County and Agency: Beginning 1990",
+            "id" : "ca8h-8gjq",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Division of Criminal Justice Services (DCJS) collects crime reports from more than 500 New York State police and sheriffs' departments. DCJS compiles these reports as New York's official crime statistics and submits them to the FBI under the National Uniform Crime Reporting (UCR) Program. UCR uses standard offense definitions to count crime in localities across America regardless of variations in crime laws from state to state. In New York State, law enforcement agencies use the UCR system to report their monthly crime totals to DCJS. The UCR reporting system collects information on seven crimes classified as Index offenses which are most commonly used to gauge overall crime volume. These include the violent crimes of murder/non-negligent manslaughter, forcible rape, robbery, and aggravated assault; and the property crimes of burglary, larceny, and motor vehicle theft. Police agencies may experience reporting problems that preclude accurate or complete reporting. The counts represent only crimes reported to the police but not total crimes that occurred.  DCJS posts preliminary data in the spring and final data in the fall.",
+            "attribution" : "New York State Division of Criminal Justice Services",
+            "attribution_link" : "http://www.criminaljustice.ny.gov/crimnet/ojsa/crimereporting/index.htm",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-03-25T20:42:32.000Z",
+            "createdAt" : "2013-02-15T20:06:23.000Z",
+            "metadata_updated_at" : "2026-03-25T20:42:32.000Z",
+            "data_updated_at" : "2025-11-25T14:07:18.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 442,
+                "page_views_last_month" : 1747,
+                "page_views_total" : 165051,
+                "page_views_last_week_log" : 8.791162888555018,
+                "page_views_last_month_log" : 10.7714894695006,
+                "page_views_total_log" : 17.332561094806408
+              },
+            "columns_name" :
+              [
+                "Index Total",
+                "Larceny",
+                "Year",
+                "Agency",
+                "Motor Vehicle Theft",
+                "Property Total",
+                "Aggravated Assault",
+                "Violent Total",
+                "County",
+                "Region",
+                "Robbery",
+                "Burglary",
+                "Months Reported",
+                "Murder",
+                "Rape"
+              ],
+            "columns_field_name" :
+              [
+                "total_index_crimes",
+                "larceny",
+                "year",
+                "agency",
+                "motor_vehicle_theft",
+                "property",
+                "aggravated_assault",
+                "violent",
+                "county",
+                "region",
+                "robbery",
+                "burglary",
+                "months_reported",
+                "murder",
+                "forcible_rape"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Includes sum of Murder, Rape, Robbery, Aggravated\nAssault, Burglary, Larceny and Motor Vehicle Theft.",
+                "One count per victim. The unlawful taking, carrying,\nleading, or riding away of property from the possession or\nconstructive possession of another. It includes crimes such\nas shoplifting, purse snatching, bicycle thefts, etc., in which\nno use of force, violence, or fraud occurs. This offense\ncategory does not include offenses such as embezzlement,\nforgery, or bad checks.",
+                "Year the crime incident was reported.",
+                "Police Department that reported the crime.",
+                "One count per victim. The theft or attempted theft of a\nmotor vehicle, including automobiles, trucks, buses,\nmotorcycles, and snowmobiles.",
+                "Subtotal includes Burglary, Larceny and Motor\nVehicle Theft.",
+                "One count per victim. The unlawful attack by one person\nupon another for the purpose of inflicting severe or\naggravated bodily injury. This type of assault is usually\naccompanied by the use of a weapon or by means likely to\nproduce death or great bodily harm, and also includes\nattempts to commit murder.",
+                "Subtotal includes Murder, Rape, Robbery and\nAggravated Assault.",
+                "Location where the crime was reported.",
+                "Region where the crime was reported. Regions include\nNew York City (Bronx, Kings, New York, Queens, and\nRichmond counties) and Non-New York City (all other\ncounties).",
+                "One count per victim. The taking or attempting to take\nanything of value from the care, custody, or control of a\nperson or persons by force or threat of force or violence\nand/or by putting the victim in fear.",
+                "One count per victim. The unlawful entry of a structure to\ncommit a felony or theft. The use of force to gain entry is\nnot required to classify an offense as Burglary.",
+                "Number of months an individual agency reported for the\nyear.",
+                "One count per victim. The willful killing of one human\nbeing by another. Excludes deaths caused by negligence,\nsuicide, or justifiable homicides, and attempts to murder,\nwhich are classified as assault.",
+                "One count per victim. Penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, without the consent of the victim."
+              ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                },
+                { "displayStyle" : "plain", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "center" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                }
+              ],
+            "download_count" : 19055,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2021-06-29T18:05:50.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Public Safety",
+            "domain_tags" : [ "public safety", "ucr", "index crime" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.criminaljustice.ny.gov/crimnet/ojsa/indexcrimes/county_totals.htm"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Office of Justice Research and Performance"
+                },
+                {
+                  "key" : "Dataset-Summary_Units",
+                  "value" : "Crime Incident or Victim"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "dcjsstats@dcjs.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Police Department"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "Statewide with exceptions"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Office of Justice Research and Performance"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning January 1990"
+                },
+                { "key" : "Local-Data_County-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_County_Column", "value" : "county" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Criminal Justice Services, Division of"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "Not all agencies have complete reporting as indicated by the number of months reported (\"Months reported\" column). Due to a system conversion in 2002, number of months reported (\"Months reported\") is not available for any years prior to 2002. Some agencies became obsolete or were newly formed during the reporting period covered.  Agencies may also experience reporting problems that can account for unusual changes in counts over time. Agencies may not have entries for each year due to incomplete reporting, no incidences of index crimes for a particular year or they were not an active agency in that year.  DCJS posts preliminary data in the spring and final data in the fall."
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Police agencies may experience reporting problems that preclude accurate or complete reporting. The counts represent only crimes reported to the police but not total crimes that occurred. "
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/ca8h-8gjq",
+        "link" : "https://data.ny.gov/Public-Safety/Index-Crimes-by-County-and-Agency-Beginning-1990/ca8h-8gjq",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Index, Violent, Property, and Firearm Rates By County: Beginning 1990",
+            "id" : "34dd-6g2j",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Division of Criminal Justice Services (DCJS) collects crime reports from more than 500 New York State police and sheriffs’ departments. DCJS compiles these reports as New York’s official crime statistics and submits them to the FBI under the National Uniform Crime Reporting (UCR) Program. UCR uses standard offense definitions to count crime in localities across America regardless of variations in crime laws from state to state. In New York State, law enforcement agencies use the UCR system to report their monthly crime totals to DCJS. The UCR reporting system collects information on seven crimes classified as Index offenses which are most commonly used to gauge overall crime volume. These include the violent crimes of murder/non-negligent manslaughter, forcible rape, robbery, and aggravated assault; and the property crimes of burglary, larceny, and motor vehicle theft. Firearm counts are derived from taking the number of violent crimes which involve a firearm. Population data are provided every year by the FBI, based on US Census information. Police agencies may experience reporting problems that preclude accurate or complete reporting. The counts represent only crimes reported to the police but not total crimes that occurred.  DCJS posts preliminary data in the spring and final data in the fall.",
+            "attribution" : "New York State Division of Criminal Justice Services",
+            "attribution_link" : "http://www.criminaljustice.ny.gov/crimnet/ojsa/crimereporting/index.htm",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-03-25T20:45:39.000Z",
+            "createdAt" : "2013-02-15T19:55:20.000Z",
+            "metadata_updated_at" : "2026-03-25T20:45:39.000Z",
+            "data_updated_at" : "2025-11-25T14:07:35.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 171,
+                "page_views_last_month" : 823,
+                "page_views_total" : 69221,
+                "page_views_last_week_log" : 7.426264754702098,
+                "page_views_last_month_log" : 9.686500527183219,
+                "page_views_total_log" : 16.07894300479159
+              },
+            "columns_name" :
+              [
+                "Index Count",
+                "Index Rate",
+                "Population",
+                "Firearm Rate",
+                "Property Rate",
+                "Year",
+                "County",
+                "Firearm Count",
+                "Property Count",
+                "Violent Rate",
+                "Violent Count"
+              ],
+            "columns_field_name" :
+              [
+                "index_count",
+                "index_rate",
+                "population",
+                "firearm_rate",
+                "property_rate",
+                "year",
+                "county",
+                "firearm_count",
+                "property_count",
+                "violent_rate",
+                "violent_count"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [ "", "", "", "", "", "", "", "", "", "", "" ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "precision" : "1",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "precision" : "1",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "precision" : "1",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                },
+                { "displayStyle" : "plain", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "precision" : "1",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                }
+              ],
+            "download_count" : 19912,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2021-06-29T19:08:05.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Public Safety",
+            "domain_tags" :
+              [ "firearms", "ucr", "public safety", "index crime" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.criminaljustice.ny.gov/crimnet/ojsa/countycrimestats.htm"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "http://www.fbi.gov/about-us/cjis/ucr/ucr#ucr_cius"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "http://www.fbi.gov/about-us/cjis/ucr/frequently-asked-questions/ucr_faqs"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Office of Justice Research and Performance"
+                },
+                {
+                  "key" : "Dataset-Summary_Units",
+                  "value" : "Crime Incident or Victim"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "dcjsstats@dcjs.ny.gov"
+                },
+                { "key" : "Dataset-Summary_Granularity", "value" : "County" },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "Statewide Police Departments with exceptions"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Office of Justice Research and Performance"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "January 1990 — Present"
+                },
+                { "key" : "Local-Data_County-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_County_Column", "value" : "county" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Criminal Justice Services, Division of"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "The New York City Police Department did not report the number of violent crimes by firearm for the five counties that compromise New York City from 2002-2014. DCJS posts preliminary data in the spring and final data in the fall."
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Police agencies may experience reporting problems that preclude accurate or complete reporting. The counts represent only crimes reported to the police but not total crimes that occurred. "
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/34dd-6g2j",
+        "link" : "https://data.ny.gov/Public-Safety/Index-Violent-Property-and-Firearm-Rates-By-County/34dd-6g2j",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Local Data Index",
+            "id" : "mxu7-dpdx",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Discover the breadth of data collected by the state which is local in nature. Search by county and municipality and discover, explore, and download local data.  With a click, find local data across a broad range of categories from health to transportation, from recreation to economic development; find local farmer’s markets, child care regulated facilities, craft beverages, solar installations, food service establishment inspections, and much more.",
+            "attribution" : "Office of Information Technology Services",
+            "attribution_link" : "https://data.ny.gov",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-04-14T15:28:34.000Z",
+            "createdAt" : "2016-01-07T17:24:54.000Z",
+            "metadata_updated_at" : "2026-04-14T15:28:34.000Z",
+            "data_updated_at" : "2025-07-09T08:34:39.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 66,
+                "page_views_last_month" : 178,
+                "page_views_total" : 12849,
+                "page_views_last_week_log" : 6.066089190457772,
+                "page_views_last_month_log" : 7.483815777264256,
+                "page_views_total_log" : 13.649480738968602
+              },
+            "columns_name" :
+              [
+                "Longitude",
+                "Dataset Name",
+                "Latitude",
+                "Agency",
+                "Counties",
+                "New York Zip Codes",
+                "NYS Municipal Boundaries",
+                "URL",
+                "# Rows",
+                "Category",
+                "Georeference",
+                "Granularity",
+                "County/Municipality"
+              ],
+            "columns_field_name" :
+              [
+                "longitude",
+                "name",
+                "latitude",
+                "agency",
+                ":@computed_region_kjdx_g34t",
+                ":@computed_region_wbg7_3whc",
+                ":@computed_region_yamh_8v7k",
+                "url",
+                "rows",
+                "category",
+                "georeference",
+                "granularity",
+                "filter_value"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Text",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "URL",
+                "Number",
+                "Text",
+                "Point",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Longitude of a point in the center of the specific county or municipality",
+                "Name of the dataset as published on data.ny.gov",
+                "Latitude of a point in the center of the specific county or municipality",
+                "Agency responsible for publishing the dataset",
+                "",
+                "",
+                "",
+                "Link to the published dataset",
+                "Number of dataset rows having the specific county or municipality name",
+                "Category of the dataset, as listed on the data.ny.gov catalog",
+                "Open Data/Socrata-generated geocoding information from supplied address components.",
+                "Indicator of geographic granularity; “County” or “Municipality”",
+                "County or municipality name indexed"
+              ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "left"
+                },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "left"
+                },
+                { "align" : "left" },
+                {},
+                {},
+                {},
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                { "align" : "left" },
+                {},
+                { "align" : "left" },
+                { "align" : "left" }
+              ],
+            "download_count" : 13223,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2021-04-24T08:35:14.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Government & Finance",
+            "domain_tags" : [ "local", "municipality", "county" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Office of Information Technology Services"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@its.ny.gov"
+                },
+                { "key" : "Dataset-Summary_Granularity", "value" : "Dataset" },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Weekly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Open NY"
+                },
+                { "key" : "Dataset-Summary_Time-Period", "value" : "Current" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Information Technology Services, Office of"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/mxu7-dpdx",
+        "link" : "https://data.ny.gov/Government-Finance/Local-Data-Index/mxu7-dpdx",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      }
+    ],
+  "resultSetSize" : 200,
+  "timings" : { "serviceMillis" : 22, "searchMillis" : [ 2, 9 ] },
+  "warnings" : []
+}
