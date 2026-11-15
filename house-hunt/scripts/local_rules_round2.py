@@ -98,6 +98,10 @@ def robots_ok(url: str):
 
 
 F.robots_ok = robots_ok
+# Hosts whose /robots.txt is not a robots file (checked by hand): www.jerseycitynj.gov answers 301 -> plain-http
+# /robots.txt/ -> /robots.txt/Default.aspx -> 404 "Page Not Found", i.e. no robots rules; pages load over https.
+for _h in ("www.jerseycitynj.gov",):
+    F._robots[_h] = ("none", "")
 _orig_fetch = F.fetch
 
 
