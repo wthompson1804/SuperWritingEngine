@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1212,
- "detail_pages": 1953,
+ "srp_pages": 1216,
+ "detail_pages": 1962,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -2057,6 +2057,12 @@
    "drive_min": 107.2,
    "props": 2,
    "rows": 2
+  },
+  {
+   "city": "nj/newton",
+   "drive_min": 107.3,
+   "props": 9,
+   "rows": 25
   }
  ],
  "cities_unmatched_far": [
@@ -2081,10 +2087,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2854,
+ "props_discovered": 2863,
  "props_skipped_lowprice_gt_3000": 901,
  "reasons": {
-  "ok": 1941,
+  "ok": 1950,
   "no_unit_le_3000": 11,
   "no_listing_object": 1
  },
