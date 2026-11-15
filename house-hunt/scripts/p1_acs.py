@@ -184,7 +184,15 @@ class Writer:
         else:
             note = ""
             if m == -333333333:
-                note = "open-ended interval: true median is at or beyond this boundary (Census shows it with + or -)"
+                if unit == "usd_month" and e == 3501:
+                    e, note = 3500, ("TOP-CODED: Census publishes '3,500+' (file stores 3501); true median is "
+                                     "$3,500 or more; value is the boundary, not the median")
+                elif unit == "year" and e == 1938:
+                    e, note = 1939, ("BOTTOM-CODED: Census publishes '1939 or earlier' (file stores 1938); "
+                                     "value is the boundary, not the median")
+                else:
+                    note = (f"open-ended interval (file value {e}): true median is at or beyond this "
+                            "boundary; value is the boundary, not the median")
             self.add(b, metric, e, unit, "found", method=method, notes=note)
         if m is None or m in MOE_CODES or (e is None or e in EST_CODES):
             self.add(b, metric + "_moe", None, unit, "not_found",

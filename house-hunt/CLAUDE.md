@@ -17,6 +17,8 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
 3. **Respect terms and robots rules.** Do not get around logins, CAPTCHAs, 403s or bot walls.
    Throttle (see `scripts/lib.py`; default 1 request/second/host). Prefer official APIs, bulk
    downloads, sitemaps and RSS. Check `docs/SOURCES.md` before touching a source; record new findings there.
+   **robots.txt groups that name Claude (ClaudeBot, Claude-User, Claude-SearchBot, anthropic-ai) apply to us and
+   override `*`.** Honour `Crawl-delay`.
 4. **Cache raw responses** in `raw/<source>/` (use `scripts/lib.py: cached_get`) so normalization can
    be rerun without refetching. Raw captures above about 50 MB are not committed (see `.gitignore`);
    their download script must be able to recreate them.

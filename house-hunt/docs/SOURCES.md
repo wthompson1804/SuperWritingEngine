@@ -171,3 +171,20 @@ These were not used because they are blocked, disallowed, or need a login or key
 - **Resident voices:** Openigloo (sitemaps plus plain HTML), City-Data threads (browse; forum search is disallowed) and Niche are usable. Reddit, Nextdoor, Yelp and YouTube are not, unless we use their official APIs under their terms.
 - **Overpass was unavailable from here.** Plan for a local OSM extract, for example Geofabrik's New York and Connecticut files, rather than live Overpass queries.
 - **AI-specific robots rules.** Several robots.txt files have them: Niche and City-Data fully disallow ClaudeBot; Yelp and Bozzuto have explicit Claude-User rules; Zillow and Openigloo have Claude groups with the same effect as `*` for our paths. We followed the `*` group with our own UA as instructed. Re-check these groups if the pipeline's user agent or operator changes.
+
+## Coordinator addendum (2026-11-15): robots.txt groups that name Claude
+
+The access tests followed the generic `User-agent: *` rules. This pipeline is run by a Claude agent on a
+user's behalf, so **rules that name Claude agents (ClaudeBot, Claude-User, Claude-SearchBot, anthropic-ai,
+Claude-Web) apply to us and override the generic group.** Effect on the sources:
+
+| Source | Claude-specific rule | Status for this pipeline |
+|---|---|---|
+| Niche | ClaudeBot and anthropic-ai: `Disallow: /` | **Off limits** |
+| City-Data | ClaudeBot and Claude-Web: `Disallow: /` | **Off limits** |
+| Yelp | Claude-User and Claude-SearchBot: allowed only `/article` | **Off limits** for reviews |
+| Zillow | Claude-User, ClaudeBot and Claude-SearchBot: allow-list of 13 landing paths only (e.g. `/homes/for_rent/$`), no listing or building pages | **Effectively off limits** for inventory. ZORI CSVs on files.zillowstatic.com are unaffected |
+| Bozzuto | Claude-User: same as `*` (`/api/` and `/search` disallowed) | Prices are only at `/api/`, so **no prices** |
+| Openigloo | Claude-User: allowed except `/api`, `/_nuxt`, `/internal` | Usable for HTML pages |
+
+The test run made about 4 requests to Kushner 2.1 s apart, against its 10 s crawl-delay. Future harvests must honour `Crawl-delay`.
