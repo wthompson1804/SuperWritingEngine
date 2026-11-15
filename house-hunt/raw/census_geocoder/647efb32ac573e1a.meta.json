@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=40+Memorial+Hwy%2C+New+Rochelle%2C+NY+10801&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:18:17+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/647efb32ac573e1a.json",
+ "source": "census_geocoder"
+}

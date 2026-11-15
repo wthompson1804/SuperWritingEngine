@@ -20,6 +20,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent))
 from lib import DATA, ROOT  # noqa: E402
+import parsers  # noqa: E402
 
 WINDOW_END = date(2026, 12, 15)
 RENT_MAX = 3000
@@ -42,20 +43,17 @@ def norm_unit(u: str) -> str:
     return re.sub(r"[^a-z0-9]", "", str(u).lower())
 
 
-def floor_from_unit(unit: str):
-    """Infer floor from a unit label: '4F' -> 4, '1203' -> 12, '305' -> 3, 'PH2' -> None, 'G1'/'L3' -> 0."""
-    u = norm_unit(unit)
-    if not u:
-        return None
-    if re.match(r"^(g|gr|grd|lobby|l|b|bsmt|c)\d*$", u):
-        return 0
-    m = re.match(r"^(\d{1,2})[a-z]{1,2}$", u)          # 4f, 12b
-    if m:
-        return int(m.group(1))
-    m = re.match(r"^[a-z]?(\d{3,4})[a-z]?$", u)        # 305, 1203, a305
-    if m:
-        return int(m.group(1)[:-2])
-    return None
+def floor_from_unit(unit: str, building_floors=None):
+    """Guess a floor from a unit label (scripts/parsers.py: floor_from_label). Always an inference.
+
+    '4F' -> 4, '305' -> 3. Labels with a separator, a building prefix or four digits ('H2-316', '9114') give a floor
+    only when the building's floor count leaves one reading. 'B2', 'C4', 'L3' are lines or buildings, not a level
+    (independent check W11): only G, GR, LOBBY, BSMT read as ground (0)."""
+    return parsers.floor_from_label(unit, building_floors)[0]
+
+
+HARVESTER_INFERRED_ELEVATOR = re.compile(r"elevator: \d+\+ floors|elevator:? inferred|elevator inferred|elevator: implied", re.I)
+HARVESTER_DERIVED_FLOOR = re.compile(r"floor (?:derived|inferred|guessed|taken) from (?:the )?unit", re.I)
 
 
 def to_num(x):
@@ -102,12 +100,19 @@ INFER_ELEVATOR_FLOORS = 6  # Will, 2026-11-15: a building of 6+ floors is treate
 
 
 def gate_elevator(r):
-    """Returns (result, basis). basis is 'stated' or 'inferred_6plus_floors'."""
+    """Returns (result, basis). basis: 'stated' (the page lists an elevator), 'inferred_harvester' (the harvester wrote
+    yes from the building's height: its note says 'elevator: 6+ floors'; independent check W3), 'inferred_6plus_floors'
+    or 'inferred_high_rise_label'. Anything inferred stays an open gate fact until the evidence pass confirms it."""
     e = str(r.elevator).strip().lower()
-    if e in ("yes", "no"):
-        return {"yes": "pass", "no": "fail"}[e], "stated"
-    tallest = max([v for v in (to_num(r.building_floors), to_num(r.floor), floor_from_unit(r.unit)) if v is not None],
-                  default=None)
+    notes = str(getattr(r, "notes", ""))
+    if e == "no":
+        return "fail", "stated"
+    if e == "yes":
+        return "pass", ("inferred_harvester" if HARVESTER_INFERRED_ELEVATOR.search(notes) else "stated")
+    bf = to_num(r.building_floors)
+    stated_floor = None if HARVESTER_DERIVED_FLOOR.search(notes) else to_num(r.floor)
+    label_floor, kind = parsers.floor_from_label(r.unit, bf)
+    tallest = max([v for v in (bf, stated_floor, label_floor if kind == "simple" else None) if v is not None], default=None)
     if tallest is not None and tallest >= INFER_ELEVATOR_FLOORS:
         return "pass", "inferred_6plus_floors"
     if "high-rise" in str(getattr(r, "community_building_type", "")).lower().replace(" ", "-"):
@@ -116,12 +121,18 @@ def gate_elevator(r):
 
 
 def gate_floor(r):
+    """Returns (result, floor, basis, label kind). basis 'stated' only when the listing gives a floor and the
+    harvester's note does not say it was derived from the unit number; otherwise 'inferred' from the label
+    (independent check W1). A label that gives no safe reading is 'unknown' (an open fact), never a fail (W11)."""
+    notes = str(getattr(r, "notes", ""))
     f = to_num(r.floor)
-    if f is None:
-        f = floor_from_unit(r.unit)
-    if f is None:
-        return "unknown", ""
-    return ("pass" if f >= 2 else "fail"), int(f)
+    if f is not None and not HARVESTER_DERIVED_FLOOR.search(notes):
+        return ("pass" if f >= 2 else "fail"), int(f), "stated", ""
+    bf = to_num(r.building_floors) or to_num(getattr(r, "pluto_floors", ""))
+    g, kind = parsers.floor_from_label(r.unit, bf)
+    if g is None:
+        return "unknown", "", "", kind
+    return ("pass" if g >= 2 else "fail"), int(g), "inferred", kind
 
 
 def gate_proof(r):
@@ -195,10 +206,14 @@ def main():
         fill("parking_type", "parking_type")
         df["community_building_type"] = k.map(c["building_type"]).fillna("")
         df["community_required_fees"] = k.map(c["required_monthly_fees"]).fillna("")
+        df["community_parking_text"] = k.map(c["parking_fee_monthly"]).fillna("")       # text; parsed in build_master (W4)
+        df["community_utilities_included"] = k.map(c["utilities_included"]).fillna("")
+        df["community_utilities_resident_pays"] = k.map(c["utilities_resident_pays"]).fillna("")
         for col in ("pool", "dog_park_pet_spa", "gym", "controlled_access", "package_room"):
             df["community_" + col] = k.map(c[col]).fillna("")
     else:
-        df["community_building_type"] = ""
+        for col in ("community_building_type", "community_parking_text", "community_utilities_included", "community_utilities_resident_pays"):
+            df[col] = ""
 
     df["g_type"] = df.apply(gate_type, axis=1)
     df["g_rent"] = df.apply(gate_rent, axis=1)
@@ -223,6 +238,8 @@ def main():
     fl = df.apply(gate_floor, axis=1)
     df["g_floor"] = [x[0] for x in fl]
     df["floor_used"] = [x[1] for x in fl]
+    df["floor_basis"] = [x[2] for x in fl]
+    df["floor_label_kind"] = [x[3] for x in fl]
     df["g_place"] = df.drive_min_zip.map(lambda v: "unknown" if pd.isna(v) else ("pass" if v <= MAX_DRIVE_MIN else "fail"))
     df["g_proof"] = df.apply(gate_proof, axis=1)
     age = df.listing_age_days.map(to_num)

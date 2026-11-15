@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1251,
- "detail_pages": 2001,
+ "srp_pages": 1349,
+ "detail_pages": 2110,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -2141,6 +2141,198 @@
    "drive_min": 109.7,
    "props": 0,
    "rows": 0
+  },
+  {
+   "city": "ct/branford-center",
+   "drive_min": 110.0,
+   "props": 2,
+   "rows": 0
+  },
+  {
+   "city": "ct/east-haven",
+   "drive_min": 110.0,
+   "props": 4,
+   "rows": 25
+  },
+  {
+   "city": "ct/naugatuck",
+   "drive_min": 110.2,
+   "props": 3,
+   "rows": 5
+  },
+  {
+   "city": "nj/trenton",
+   "drive_min": 110.8,
+   "props": 14,
+   "rows": 85
+  },
+  {
+   "city": "pa/morrisville",
+   "drive_min": 110.8,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/phillipsburg",
+   "drive_min": 111.9,
+   "props": 7,
+   "rows": 12
+  },
+  {
+   "city": "pa/easton",
+   "drive_min": 111.9,
+   "props": 15,
+   "rows": 0
+  },
+  {
+   "city": "nj/bay-head",
+   "drive_min": 112.2,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/mantoloking",
+   "drive_min": 112.2,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/point-pleasant",
+   "drive_min": 112.2,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/point-pleasant-beach",
+   "drive_min": 112.2,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "nj/washington",
+   "drive_min": 112.3,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "ny/middletown",
+   "drive_min": 112.3,
+   "props": 5,
+   "rows": 6
+  },
+  {
+   "city": "ny/poughkeepsie",
+   "drive_min": 113.4,
+   "props": 15,
+   "rows": 1
+  },
+  {
+   "city": "ny/port-jervis",
+   "drive_min": 113.6,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "pa/matamoras",
+   "drive_min": 113.6,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/florence",
+   "drive_min": 114.7,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "pa/milford",
+   "drive_min": 115.4,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "pa/east-stroudsburg",
+   "drive_min": 116.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "pa/stroudsburg",
+   "drive_min": 116.0,
+   "props": 4,
+   "rows": 0
+  },
+  {
+   "city": "nj/dover-beaches-north",
+   "drive_min": 116.1,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/cutchogue",
+   "drive_min": 116.3,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/mattituck",
+   "drive_min": 116.3,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ct/oakville",
+   "drive_min": 117.5,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "pa/newtown-grant",
+   "drive_min": 117.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ct/waterbury",
+   "drive_min": 118.0,
+   "props": 14,
+   "rows": 6
+  },
+  {
+   "city": "pa/bristol",
+   "drive_min": 118.5,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "pa/newtown",
+   "drive_min": 118.9,
+   "props": 2,
+   "rows": 0
+  },
+  {
+   "city": "pa/yardley",
+   "drive_min": 118.9,
+   "props": 4,
+   "rows": 10
+  },
+  {
+   "city": "nj/burlington",
+   "drive_min": 119.4,
+   "props": 8,
+   "rows": 40
+  },
+  {
+   "city": "pa/fairless-hills",
+   "drive_min": 119.6,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "pa/levittown",
+   "drive_min": 119.6,
+   "props": 1,
+   "rows": 1
   }
  ],
  "cities_unmatched_far": [
@@ -2165,14 +2357,17 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2903,
- "props_skipped_lowprice_gt_3000": 902,
+ "props_discovered": 3015,
+ "props_skipped_lowprice_gt_3000": 905,
  "reasons": {
-  "ok": 1988,
+  "ok": 2049,
   "no_unit_le_3000": 11,
   "no_listing_object": 1,
-  "price_hidden": 1
+  "price_hidden": 1,
+  "outside_grid": 48
  },
  "blocked": null,
- "dogs_no_rows": 0
+ "dogs_no_rows": 0,
+ "finished": "2026-11-15T22:18:51+00:00",
+ "rows_total": 4944
 }
