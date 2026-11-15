@@ -46,7 +46,7 @@ Seven buildings (9 unit rows) could not be refetched from Trulia: 1224 Saint Nic
 
 - **Dog weight limit in pounds: one building.** Heatherwood House at Patchogue, 30 lb (passes 25). Its page gives two
   versions of the rest of the policy (1 pet and $75 a month, or 2 pets and $50).
-- **Size-only "Small" with no number: 21 buildings** (passes under the current rule; wording recorded). Patchogue
+- **Size-only "Small" with no number: 22 buildings** (passes under the current rule; wording recorded). Patchogue
   Village at Terry and The Metro say small and large dogs, no number. Reserve at Lakeside: dogs allowed, breed
   restrictions, no number. 66 Main: the MLS record says "Dogs OK Size Limit".
 - Dogs allowed: stated for all 26.
