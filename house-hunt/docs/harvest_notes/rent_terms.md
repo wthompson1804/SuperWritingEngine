@@ -5,7 +5,7 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 - Units checked: **2598** (one row each; `offer_type = none` for units with no such language).
 - Units with any concession, special-offer or price-basis language: **1776**.
 - Units whose price or offer is for a lease term other than 12 months: **586**.
-- Units that need a call (`needs_call = yes`): **1685** in 238 buildings.
+- Units that need a call (`needs_call = yes`): **1677** in 237 buildings.
 
 ## Counts by offer_type
 
@@ -23,17 +23,17 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 | listed_price_is | units |
 |---|---|
-| unknown | 1269 |
-| gross | 933 |
-| net_effective | 396 |
+| unknown | 1417 |
+| gross | 945 |
+| net_effective | 236 |
 
 ## Confidence
 
 | confidence | units |
 |---|---|
-| assumed_terms | 1651 |
-| stated_on_page | 907 |
-| computed_from_stated_terms | 40 |
+| assumed_terms | 1647 |
+| stated_on_page | 915 |
+| computed_from_stated_terms | 36 |
 
 ## Free-period timing
 
@@ -48,12 +48,10 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 ## Gross rent above the listed price (stated or computed from stated terms)
 
-**34** units have a determined gross rent above the listed price.
+**30** units have a determined gross rent above the listed price.
 
 | unit | listed | gross | gap | free months / lease | confidence |
 |---|---|---|---|---|---|
-| Kensington Place #1322 | 2554 | 3065 | 511 | 2 / 12 | computed_from_stated_terms |
-| Kensington Place #4222 | 2525 | 3030 | 505 | 2 / 12 | computed_from_stated_terms |
 | The Riverhouse | 2263 | 2716 | 453 | 3 / 18 | computed_from_stated_terms |
 | Alvista Rise #2410 | 2365 | 2800 | 435 | 2.5 / 18 | stated_on_page |
 | The Riverhouse | 2025 | 2430 | 405 | 3 / 18 | computed_from_stated_terms |
@@ -75,12 +73,14 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Arc House | 2875 | 3115 | 240 | 1 / 13 | computed_from_stated_terms |
 | Arc House | 2855 | 3093 | 238 | 1 / 13 | computed_from_stated_terms |
 | Arc House | 2830 | 3066 | 236 | 1 / 13 | computed_from_stated_terms |
-| 5545 Park #408 | 2700 | 2925 | 225 | 1 / 13 | computed_from_stated_terms |
 | Harmony West | 2562 | 2776 | 214 | 1 / 13 | computed_from_stated_terms |
+| Harmony West | 2492 | 2700 | 208 | 1 / 13 | computed_from_stated_terms |
+| Arc House | 2500 | 2708 | 208 | 1 / 13 | computed_from_stated_terms |
+| Harmony West | 2423 | 2625 | 202 | 1 / 13 | computed_from_stated_terms |
 
 ## Largest possible gaps where the basis is unknown (scenario: listed price is net-effective)
 
-1388 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
+1392 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
 
 | unit | listed | gross if listed is net | gap | free months / lease | basis |
 |---|---|---|---|---|---|
@@ -112,8 +112,8 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 ## Gross rent over $3,000 (rent only, all-in aside)
 
-- Determined gross over $3,000: **10** units: Harbor Pointe #B3-449 ($3121); Harbor Pointe #B9-113 ($3177); Harbor Pointe #B3-403 ($3126); Harbor Pointe #B9-433 ($3183); Harbor Pointe #B3-244 ($3206); Kensington Place #4222 ($3030); Kensington Place #1322 ($3065); Arc House ($3066); Arc House ($3093); Arc House ($3115)
-- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **653** units in 98 buildings.
+- Determined gross over $3,000: **8** units: Harbor Pointe #B3-449 ($3121); Harbor Pointe #B9-113 ($3177); Harbor Pointe #B3-403 ($3126); Harbor Pointe #B9-433 ($3183); Harbor Pointe #B3-244 ($3206); Arc House ($3066); Arc House ($3093); Arc House ($3115)
+- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **655** units in 99 buildings.
 
 | building | units | listed range | scenario gross (max) | free months / lease |
 |---|---|---|---|---|
@@ -205,6 +205,7 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | The Duchess | 1 | 2828-2828 | 3085 | 1 / 12 |
 | Pier Village | 1 | 2931-2931 | 3085 | 1 / 20 |
 | Encore | 1 | 2888-2888 | 3081 | 0.5-1 / 16 |
+| Kensington Place | 2 | 2525-2554 | 3065 | 2 / 12 |
 | Reserve at Riverdale | 1 | 2753-2753 | 3059 | 1 / 10 |
 | The Pointe at Neptune | 2 | 2801-2801 | 3056 | 1 / 12 |
 | The Liberty Building | 1 | 2477-2477 | 3049 | 2-3 / 12 assumed |

@@ -797,7 +797,8 @@ def main():
                 txt = re.sub(r"^\s*(\d{1,2}) months\b", r"price is for a \1-month lease", txt)
                 txt = re.sub(r"term (\d{1,2}): price (\d{4})", lambda m: f"{m.group(1)}-month price ${m.group(2)}" if m.group(1) == "12" else m.group(0), txt)
             if src_ == "listing":
-                txt = re.sub(r"lease term (\d{1,2}) Months", r"price is for a \1-month lease", str(txt))
+                txt = re.sub(r"lease term (\d{1,2}) Months|(?:per month, |lowest over lease terms \()(\d{1,2})-month(?: lease)?\)?",
+                             lambda m: f"price is for a {m.group(1) or m.group(2)}-month lease", str(txt))
             lt = parsers.lease_term_from_text(txt)
             if lt["months"] or lt["lowest_of_terms"]:
                 got = (lt, src_)

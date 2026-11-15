@@ -77,7 +77,11 @@ SELECT = re.compile(r"\bselect(?:ed)?\b|\bfew apartment|\bqualif|\bcertain\b|\bp
 RENEW = re.compile(r"\brenew|second year|2nd year", re.I)
 NET_STMT = re.compile(r"net[- ]?effective|price includes concessions|after (?:rent )?concessions|"
                       r"inclusive of concessions|reflects? net|net rent", re.I)
-NET_NEG = re.compile(r"not the net[- ]effective|based on the gross rent", re.I)
+# A sentence that says the page does NOT say whether the price is net-effective is not a net-effective statement
+# (independent check 2, D14: Beacon Mill Village, Arcade Apartments, Avalon Somerville were costed as net-effective).
+NET_NEG = re.compile(r"not the net[- ]effective|based on the gross rent|(?:does not|doesn't|neither page|no page|nor does it) says? whether|"
+                     r"whether (?:the |\$[\d,]+ |rent |price )?(?:is |are )?(?:gross or net|net[- ]effective or gross)|gross or net(?:[- ]effective)? not stated|"
+                     r"net[- ]effective equals price|not (?:a )?net[- ]effective|discount is on move-in costs", re.I)
 GROSS_AMT = re.compile(r"gross rent\s+(?:of|is)\s+\$\s?([\d,]+)|\$\s?([\d,]+)\s+gross\b", re.I)
 UNIT_GROSS = re.compile(r"\b(?:unit\s+)?#?(\w{1,6})\s+is\s+a\s+[^$]{0,60}?gross rent of\s+\$\s?([\d,]+)", re.I)
 DEPOSIT = re.compile(r"deposit|\bsecurity\b", re.I)
@@ -719,7 +723,7 @@ def build_row(u, facts, live):
             confidence = "computed_from_stated_terms"
         elif free_rent:
             confidence, needs_call = "assumed_terms", "yes"
-    elif net and not net_neg or (net and free_rent):
+    elif net and not net_neg:
         price_is, netv = "net_effective", listed
         if free_rent and definite and L and not lease_assumed:
             gross = listed * L / (L - fm_lo)

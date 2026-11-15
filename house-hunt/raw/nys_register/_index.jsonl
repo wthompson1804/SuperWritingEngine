@@ -15,3 +15,7 @@
 {"url": "https://dos.ny.gov/system/files/documents/2026/01/010726.pdf", "retrieved_at": "2026-11-15T18:18:13+00:00", "status": 200, "path": "raw/nys_register/3aa0e9ad2de98fcc.pdf", "source": "nys_register"}
 {"url": "https://dos.ny.gov/system/files/documents/2026/01/011426.pdf", "retrieved_at": "2026-11-15T18:18:15+00:00", "status": 200, "path": "raw/nys_register/ce75ed79b7bc16ed.pdf", "source": "nys_register"}
 {"url": "https://dos.ny.gov/system/files/documents/2026/01/012126.pdf", "retrieved_at": "2026-11-15T18:18:15+00:00", "status": 403, "path": "raw/nys_register/59db03a80c13eaa7.pdf", "source": "nys_register"}
+{"url": "https://dos.ny.gov/state-register", "retrieved_at": "2026-11-15T23:44:47+00:00", "status": 200, "path": "raw/nys_register/8ad4f2d8abca1522.html", "source": "nys_register"}
+{"url": "https://dos.ny.gov/state-register?f%5B0%5D=filter_term%3A3031&page=0", "retrieved_at": "2026-11-15T23:44:57+00:00", "status": 200, "path": "raw/nys_register/1b0932a8b6027705.html", "source": "nys_register"}
+{"url": "https://dos.ny.gov/state-register?f%5B0%5D=filter_term%3A3031&page=1", "retrieved_at": "2026-11-15T23:44:58+00:00", "status": 200, "path": "raw/nys_register/4b86561a869d5ab9.html", "source": "nys_register"}
+{"url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51", "retrieved_at": "2026-11-15T23:45:07+00:00", "status": 200, "path": "raw/nys_register/946d64549b18f37d.html", "source": "nys_register"}

@@ -58,3 +58,11 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
 - Tours start Nov 22. Three approval checkpoints with Will: (A) neighborhoods, year groupings, score thresholds;
   (B) avoid list; (C) draft page.
 - The earlier brief's tiers, the 98-area seed list as the scope, "no ranking / data only", and the $2,800 cap are superseded.
+
+## Standing instructions from Will (2026-11-15)
+
+- **Run everything that can run in parallel, at the same time, without being asked.** When only a couple of things are
+  in flight, look for more independent work and start it. The aim is to wrap up. (Parallel work must not edit files
+  another running agent owns; give each agent its own output files.)
+- The job is now the finished decision page, not data only: the "do not build UI, rank or recommend" line above is superseded.
+- One refusal (403, 429, CAPTCHA) from a host ends requests to that host for the session. Say so in every agent brief.

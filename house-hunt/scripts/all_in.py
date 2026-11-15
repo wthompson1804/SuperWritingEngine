@@ -58,7 +58,11 @@ def main():
     for r in U.to_dict("records"):
         lines, unknown = [], []
         listed_old = num(r["listed_rent"])
-        live = num(r.get("live_price")) if r.get("live_status") == "changed" and num(r.get("live_price")) else None
+        # the price read at the live check is the rent whenever the check saw the listing (independent check 2, D15:
+        # Avalon Maplewood's check read $2,590 with status "live" and the rent line stayed at $2,600)
+        live = num(r.get("live_price")) if r.get("live_status") in ("changed", "live") and num(r.get("live_price")) else None
+        if live and listed_old and abs(live - listed_old) <= 0.5:
+            live = None
         listed = live or listed_old
         t = RT.loc[r["listing_id"]].to_dict() if len(RT) and r["listing_id"] in RT.index else {}
         net, gross = num(t.get("net_effective_monthly")), num(t.get("gross_monthly_rent"))
@@ -76,7 +80,18 @@ def main():
         is_net = offer and net is not None and (abs(net - (listed or 0)) > 0.5 or t.get("listed_price_is") == "net_effective")
         rent_basis_val = net if is_net else listed
         rent_gross_val = (gross if offer and gross else None) or (gross_if_net if t.get("listed_price_is") == "net_effective" else None) or listed
-        lines.append({"line": "rent (net-effective)" if is_net else "rent (as listed)", "amount": rent_basis_val,
+        # D8: the listed price belongs to a lease longer than 13 months. Where the page gives the 12-month price, the
+        # cost (and so the $3,000 cap) is worked on the 12-month price; otherwise the listed price stands and the
+        # unit carries the lease-term asterisk (scripts/rank.py).
+        lease_m, p12 = num(r.get("price_lease_months")), num(r.get("price_12_month"))
+        long_lease = lease_m is not None and lease_m > 13
+        rent_line = "rent (net-effective)" if is_net else "rent (as listed)"
+        if long_lease and p12 and p12 >= (listed or 0):
+            price_note = "; ".join(x for x in [price_note, f"the listed ${listed:g} is the {lease_m:g}-month lease price; ${p12:g} is the 12-month price"] if x)
+            rent_basis_val, rent_gross_val, rent_line, is_net = p12, max(p12, rent_gross_val or 0), "rent (12-month lease price)", False
+        elif long_lease:
+            price_note = "; ".join(x for x in [price_note, f"this price is for a {lease_m:g}-month lease; the 12-month price is not published"] if x)
+        lines.append({"line": rent_line, "amount": rent_basis_val,
                       "basis": "computed from stated terms" if is_net else ("live check" if live else "stated"), "note": price_note})
         # required building fees: the listing's fee lines, and each fee sentence from the community page / evidence.
         # Sentences are alternatives (several sources describing the same fees), so the largest reading is used, never a sum.
@@ -97,8 +112,19 @@ def main():
             fee_notes.append("a monthly amenity fee exists (the special offer waives it for a period); amount not published")
         fee_notes = list(dict.fromkeys(fee_notes))
         open_note = next((n for n in fee_notes if "fee exists" in n or "not counted" in n), "")
+        total_price = bool(re.search(r"total monthly|isTotalMonthlyFeeIncluded", str(r.get("price_basis", ""))))
+        if total_price and not cands:
+            # D15 (Metrovue, Metro Point): the listed price is the page's "total price", which already contains the
+            # required monthly fees. The fee line is a known $0 on top of it, not an unknown.
+            cands.append((0.0, "the listed price is the page's total price, which already includes the required monthly fees", "stated"))
+            fee_notes = [n for n in fee_notes if "fee exists" not in n]
+            open_note = ""
+        fee_has_internet = False
         if cands:
             amt, note, basis = max(cands, key=lambda c: c[0])
+            # D13 (Atlas): a fee sentence that prices internet ("Internet: $65") covers it; no estimate on top
+            fee_src = " | ".join([str(r.get("required_fees_text", "")), str(r.get("other_monthly_fees_json", ""))])
+            fee_has_internet = amt > 0 and bool(re.search(r"internet[^,;|\"]{0,14}\$?\s?\d{2}|wi-?fi[^,;|\"]{0,14}\$\s?\d{2}", fee_src, re.I)) and not re.search(r"internet[^,;|]{0,20}optional", fee_src, re.I)
             lines.append({"line": "required building fees", "amount": round(amt), "basis": basis, "note": "; ".join(dict.fromkeys([note] + fee_notes))[:300]})
             if open_note and ("amenity fee exists" in open_note or amt == 0):
                 unknown.append("building fees (part)")
@@ -129,6 +155,8 @@ def main():
             amt = num(u.get(key))
             if key in inc:
                 lines.append({"line": name.replace(" (est.)", " (included in rent)"), "amount": 0, "basis": ub})
+            elif key == "internet" and fee_has_internet:
+                lines.append({"line": "internet (in the required building fees)", "amount": 0, "basis": "stated", "note": "the fee line above prices internet"})
             elif key == "gas" and "gas" in none_ and "gas" not in ten:
                 lines.append({"line": "gas (no gas service)", "amount": 0, "basis": ub})
             elif amt is not None:
@@ -145,6 +173,10 @@ def main():
                     "rent_free_months": t.get("free_months", ""), "rent_lease_months": t.get("lease_months", ""),
                     "rent_first_full_payment_date": t.get("first_full_payment_date", ""), "rent_first_full_payment_note": t.get("first_full_payment_note", ""),
                     "rent_needs_call": "yes" if has_offer and (not t or not offer) else t.get("needs_call", ""),
+                    # D12: how close to the cap, and how many of pet rent / parking / required fees are unknown (counted as $0)
+                    "cap_margin": CAP - all_in,
+                    "all_in_unknown_count": sum(1 for k in ("building fees", "pet rent", "parking fee") if any(x.startswith(k) for x in unknown)),
+                    "rent_lease_term_months": f"{lease_m:g}" if lease_m else "", "rent_12_month_price": f"{p12:g}" if p12 else "",
                     "all_in": all_in, "all_in_gross": round((rent_gross_val or 0) + extras), "all_in_lines": json.dumps(lines),
                     "all_in_unknown_lines": "; ".join(unknown), "all_in_estimated_lines": "; ".join(l["line"] for l in lines if l["basis"] == "estimate"),
                     "all_in_stated_line_count": sum(1 for l in lines[1:] if l["basis"] not in ("estimate", "unknown")),

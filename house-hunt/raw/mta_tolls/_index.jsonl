@@ -3,3 +3,4 @@
 {"url": "https://data.ny.gov/resource/srxy-5nxn.json?%24limit=50", "retrieved_at": "2026-11-15T18:19:38+00:00", "status": 200, "path": "raw/mta_tolls/8e632375ec409bcd.json", "source": "mta_tolls"}
 {"url": "https://api.us.socrata.com/api/catalog/v1?domains=data.ny.gov&q=MTA+Bridges+and+Tunnels+toll+rates&limit=20", "retrieved_at": "2026-11-15T23:44:05+00:00", "status": 200, "path": "raw/mta_tolls/3da7d109730d9878.json", "source": "mta_tolls"}
 {"url": "https://api.us.socrata.com/api/catalog/v1?domains=data.ny.gov&q=toll+rates+bridges+tunnels&limit=20", "retrieved_at": "2026-11-15T23:44:07+00:00", "status": 200, "path": "raw/mta_tolls/ab69fe1bf8eb7fd8.json", "source": "mta_tolls"}
+{"url": "https://www.nbcnewyork.com/robots.txt", "retrieved_at": "2026-11-15T23:46:05+00:00", "status": 200, "path": "raw/mta_tolls/10a5a7a54c2ccb26.txt", "source": "mta_tolls"}
