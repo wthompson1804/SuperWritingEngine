@@ -7,8 +7,8 @@
   "fetch_max_low": 2850.0,
   "minutes": 44.0
  },
- "srp_pages": 376,
- "detail_pages": 910,
+ "srp_pages": 380,
+ "detail_pages": 912,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -549,14 +549,20 @@
    "drive_min": 42.9,
    "props": 6,
    "rows": 18
+  },
+  {
+   "city": "ny/melville",
+   "drive_min": 42.9,
+   "props": 3,
+   "rows": 1
   }
  ],
  "cities_unmatched_far": [],
- "props_discovered": 1704,
- "props_skipped_lowprice_gt_3000": 794,
+ "props_discovered": 1707,
+ "props_skipped_lowprice_gt_3000": 795,
  "reasons": {
-  "ok": 903,
-  "no_unit_le_3000": 7
+  "ok": 904,
+  "no_unit_le_3000": 8
  },
  "blocked": null,
  "dogs_no_rows": 0

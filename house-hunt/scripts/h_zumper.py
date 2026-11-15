@@ -330,7 +330,7 @@ def to_path(u: str) -> str:
     return u if re.match(r"^/(listings|apartment-buildings)/[^/]+/[^/]+$", u) else ""
 
 
-def targets(csv_path: str, refresh: bool, max_age_h: float):
+def targets(csv_path: str, refresh: bool, max_age_h: float, follow: bool = True):
     """Fetch only the pages named in a CSV (column `url`, optional `building_url`), then rebuild the output CSV.
 
     One request per building: a row whose `url` or `building_url` is a Zumper building page costs one fetch of
@@ -395,7 +395,7 @@ def targets(csv_path: str, refresh: bool, max_age_h: float):
                 continue
             if u:
                 e = ent_of(get(u))
-                if e.get("pb_id") and e.get("pb_url"):
+                if follow and e.get("pb_id") and e.get("pb_url"):
                     get(f"/apartment-buildings/p{e['pb_id']}/{e['pb_url']}")
             else:
                 get(b)
@@ -966,6 +966,51 @@ def build():
         if n.isdigit() and int(n) in cards:
             cands.append(cards[int(n)].get("first_seen", cards[int(n)]["seen"]))
         r["first_seen"] = min(cands)
+    # ---- building facts settled on a detail page apply to every row at the same street address:
+    # dogs only from a building page (a unit page speaks for one landlord's unit), elevator from any detail page.
+    def akey(r):
+        a = re.split(r",", str(r["address"]))[0].lower()
+        a = re.sub(r"\s*(#|\b(?:apt|unit|apartment|ste|suite|fl|floor)\b\.?).*$", "", a)
+        a = re.sub(r"[^a-z0-9 ]", "", a)
+        a = re.sub(r"\s+", " ", a).strip()
+        return (a, str(r["zip"]).zfill(5)[:5]) if a and re.match(r"\d", a) else None
+    settled = {}
+    for r in rows.values():
+        k = akey(r)
+        if not k or r["detail_level"] != "detail":
+            continue
+        d = settled.setdefault(k, {})
+        is_bld = "/apartment-buildings/" in r["url"] or "/apartment-buildings/" in r["building_url"]
+        if is_bld and r["dogs"] in ("yes", "no") and "rests on the code only" not in r["dog_policy_text"]:
+            d.setdefault("dogs", (r["dogs"], r["dog_policy_text"], r["dog_weight_limit_lb"], r["url"]))
+        if r["elevator"] == "yes":
+            d.setdefault("elevator", r["url"])
+        if r["building_floors"] != "":
+            d.setdefault("floors", (r["building_floors"], r["url"]))
+    counts["propagated_dogs"] = counts["propagated_elevator"] = counts["propagated_floors"] = 0
+    for r in rows.values():
+        d = settled.get(akey(r) or ())
+        if not d:
+            continue
+        add = []
+        if "dogs" in d and d["dogs"][3] != r["url"] and (r["dogs"] == "unknown" or r["detail_level"] == "card"
+                                                         or "rests on the code only" in r["dog_policy_text"]):
+            if r["dogs"] != d["dogs"][0] or r["detail_level"] == "card":
+                prev = r["dogs"]
+                r["dogs"], r["dog_weight_limit_lb"] = d["dogs"][0], d["dogs"][2] or r["dog_weight_limit_lb"]
+                r["dog_policy_text"] = f"from building page {d['dogs'][3]}: {d['dogs'][1]}"[:1200]
+                add.append(f"dogs applied from building page at same address (was {prev})")
+                counts["propagated_dogs"] += 1
+        if "elevator" in d and r["elevator"] == "unknown":
+            r["elevator"] = "yes"
+            add.append(f"elevator=yes applied from {d['elevator']} (same address)")
+            counts["propagated_elevator"] += 1
+        if "floors" in d and r["building_floors"] == "":
+            r["building_floors"] = d["floors"][0]
+            add.append(f"building_floors applied from {d['floors'][1]}")
+            counts["propagated_floors"] += 1
+        if add:
+            r["notes"] = "; ".join(x for x in [r["notes"]] + add if x)
     # final grid check on detail rows (building units share the building ZIP)
     grid = {z for z, _, _, _ in load_grid()}
     out_rows = [r for r in rows.values() if str(r["zip"]).zfill(5)[:5] in grid]
@@ -1007,7 +1052,9 @@ def main():
         details(max_min, refresh)
     if stage == "targets":
         # python3 scripts/h_zumper.py targets <file.csv> [--refresh] [--max-age-h 12]
-        targets(a[1], refresh, float(a[a.index("--max-age-h") + 1]) if "--max-age-h" in a else 12.0)
+        # --no-follow: exactly one fetch per row (do not also read the building page of a /listings/ row)
+        targets(a[1], refresh, float(a[a.index("--max-age-h") + 1]) if "--max-age-h" in a else 12.0,
+                follow="--no-follow" not in a)
     if stage in ("build", "all", "targets"):
         build()
 
