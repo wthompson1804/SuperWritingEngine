@@ -9,7 +9,7 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1243,
+ "srp_pages": 1251,
  "detail_pages": 2001,
  "cities_done": [
   {
@@ -2117,6 +2117,30 @@
    "drive_min": 109.0,
    "props": 2,
    "rows": 4
+  },
+  {
+   "city": "nj/west-belmar",
+   "drive_min": 109.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/north-sea",
+   "drive_min": 109.7,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/shinnecock-hills",
+   "drive_min": 109.7,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/southampton",
+   "drive_min": 109.7,
+   "props": 0,
+   "rows": 0
   }
  ],
  "cities_unmatched_far": [
