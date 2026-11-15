@@ -620,7 +620,7 @@ def cf_value(col: str, v: str, snippet: str):
         return None
     if col == "pool":
         lv = v.lower()
-        return ("both" if "indoor" in lv and "outdoor" in lv else "indoor" if lv.startswith("indoor")
+        return ("yes_type_unknown" if "not stated" in lv else "both" if "indoor" in lv and "outdoor" in lv else "indoor" if lv.startswith("indoor")
                 else "outdoor" if lv.startswith("outdoor") else "yes_type_unknown")
     if col == "dog_amenities":
         names = [n for n, k in (("dog run", "dog_run"), ("dog park", "dog_park"), ("pet spa", "pet_spa"), ("dog wash", "dog_wash"))
