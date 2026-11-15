@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 973,
- "detail_pages": 1719,
+ "srp_pages": 979,
+ "detail_pages": 1722,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1583,6 +1583,18 @@
    "drive_min": 86.5,
    "props": 3,
    "rows": 3
+  },
+  {
+   "city": "ny/highland-falls",
+   "drive_min": 86.5,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "nj/north-middletown",
+   "drive_min": 87.3,
+   "props": 1,
+   "rows": 1
   }
  ],
  "cities_unmatched_far": [
@@ -1607,10 +1619,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2589,
+ "props_discovered": 2592,
  "props_skipped_lowprice_gt_3000": 870,
  "reasons": {
-  "ok": 1710,
+  "ok": 1713,
   "no_unit_le_3000": 8,
   "no_listing_object": 1
  },

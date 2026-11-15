@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=10+Commerce+Court%2C+Newark%2C+NJ+07102&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:26+00:00",
+ "status": 200,
+ "path": "raw/independent_check/07a43abe1696566e.json",
+ "source": "independent_check"
+}

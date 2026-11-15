@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=80+E+McFarlan+St%2C+Dover%2C+NJ+07801&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:38+00:00",
+ "status": 200,
+ "path": "raw/independent_check/3af7d6f0620a1c62.json",
+ "source": "independent_check"
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=2165+Clarendon+Rd%2C+Brooklyn%2C+NY+11226&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:16+00:00",
+ "status": 200,
+ "path": "raw/independent_check/4e960d8a8cd27623.json",
+ "source": "independent_check"
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=6500+K+Johnson+Blvd%2C+Bordentown%2C+NJ+08505&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:40+00:00",
+ "status": 200,
+ "path": "raw/independent_check/5283128519a18b8b.json",
+ "source": "independent_check"
+}

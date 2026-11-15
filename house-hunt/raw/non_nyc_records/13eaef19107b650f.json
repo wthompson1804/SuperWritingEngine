@@ -1,0 +1,49 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"3","value":[
+    {
+      "ultra_buildingid":"a0bb3ba7-d1dc-ef11-8eea-001dd80afdfc","ultra_name":"543 SPRINGFIELD AVE","ultra_registrationnumber":"2018-00247-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"548 SPRINGFIELD AVE","ultra_block":"1804","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"1c7743a1-d1dc-ef11-8eea-001dd80afdfc","Name":"543 SPRINGFIELD AVE"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d22f7521-162f-e811-8126-1458d04eb810","Name":"SUMMIT CITY"
+      },"ultra_propertyportalsearchfield":"543 SPRINGFIELD AVE","ultra_countyportalsearchfield":"UNION","ultra_municipalityportalsearchfield":"SUMMIT CITY","ultra_elsamaintenancecompany":{
+        "Id":"b9480c13-f0ac-eb11-b1ac-001dd801fce8","Name":"Mattis Elevator Services LLC"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"51bb3ba7-d1dc-ef11-8eea-001dd80afdfc","Name":"DOMINICAN NUNS - SISTER MARY VERONICA GESSNER"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"771ce46f-e7f7-4bdf-8019-684820de1285","ultra_name":"MANLEY COURT BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2018019095001","ultra_addressline1":"548 SPRINGFIELD AVE","ultra_block":"1801","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"95a69e42-99d0-42ac-9cb1-caa099ae34fa","Name":"MANLEY COURT"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d22f7521-162f-e811-8126-1458d04eb810","Name":"SUMMIT CITY"
+      },"ultra_propertyportalsearchfield":"MANLEY COURT","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e503b52d-66ea-4887-bf92-a6cf5c4c39f5","Name":"MANLEY COURT LLC"
+      },"ultra_zipcode":"07901","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"6d2f8c46-c3a0-44bf-8a62-1d518388b833","ultra_name":"MANLEY COURT BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"2018019095002","ultra_addressline1":"548 SPRINGFIELD AVE","ultra_block":"1801","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"95a69e42-99d0-42ac-9cb1-caa099ae34fa","Name":"MANLEY COURT"
+      },"ultra_county":{
+        "Id":"1af4aaf2-63e4-e711-8125-1458d054d020","Name":"UNION"
+      },"ultra_municipality":{
+        "Id":"d22f7521-162f-e811-8126-1458d04eb810","Name":"SUMMIT CITY"
+      },"ultra_propertyportalsearchfield":"MANLEY COURT","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"e503b52d-66ea-4887-bf92-a6cf5c4c39f5","Name":"MANLEY COURT LLC"
+      },"ultra_zipcode":"07901","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

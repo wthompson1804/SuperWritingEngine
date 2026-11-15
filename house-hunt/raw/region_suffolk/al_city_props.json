@@ -340,5 +340,25 @@
   "/ny/calverton/216-hill-rise": 3200,
   "/ny/calverton/305-edwards-avenue": 3600,
   "/ny/calverton/16-mastro-court": 7500
+ },
+ "wading-river": {
+  "/ny/wading-river/126-overhill-road": 18000
+ },
+ "lake-ronkonkoma": {
+  "/ny/lake-ronkonkoma/308-browns-road": 6500,
+  "/ny/lake-ronkonkoma/76-samuel-street": 3995,
+  "/ny/lake-ronkonkoma/4924-express-dr-s": 3950,
+  "/ny/lake-ronkonkoma/305-smithtown-boulevard": 2300,
+  "/ny/lake-ronkonkoma/427-browns-road": 3500
+ },
+ "north-amityville": {
+  "/ny/north-amityville/8-rosewood-avenue": 4250
+ },
+ "east-farmingdale": {
+  "/ny/east-farmingdale/5-denton-place": 3250,
+  "/ny/east-farmingdale/846-conklin-street": 3200,
+  "/ny/east-farmingdale/44-alexander-avenue": 2950,
+  "/ny/east-farmingdale/11-sexton-place": 3000,
+  "/ny/east-farmingdale/93-garfield-boulevard": 4500
  }
 }

@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=61-57+84th+St%2C+Middle+Village%2C+NY+11379&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:22+00:00",
+ "status": 200,
+ "path": "raw/independent_check/a3b54c2084721a26.json",
+ "source": "independent_check"
+}

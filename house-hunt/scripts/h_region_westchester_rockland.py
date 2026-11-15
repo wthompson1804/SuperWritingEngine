@@ -79,10 +79,12 @@ def load_trulia() -> dict[str, list[dict]]:
         if not d["rows"]:
             groups[d["url"]] = groups.get(d["url"], [])
             NOROWS[d["url"]] = d.get("why") or ""
+            NOFACTS[d["url"]] = d
     return groups
 
 
 NOROWS: dict[str, str] = {}
+NOFACTS: dict[str, dict] = {}
 
 
 def sightmap_rows(key: str, c: dict, refresh: bool) -> tuple[list[dict], dict]:
@@ -278,7 +280,25 @@ def main() -> None:
         rows = [dict(r) for r in rows]
         if not rows:
             if "/building/" in url:
-                buildings.append({"building_name": re.sub(r"-\d+$", "", url.rsplit("/", 1)[1]).replace("-", " "), "url": url, "state": "NY", "verdict": "fails:nothing at or under $3,000 / no listing" , "source_url": url, "notes": NOROWS.get(url, "")})
+                d = NOFACTS.get(url) or {}
+                fx, card = d.get("facts") or {}, d.get("card") or {}
+                nm = card.get("name") or re.sub(r"-\d+$", "", url.rsplit("/", 1)[1]).replace("-", " ")
+                pmin = card.get("price_min")
+                dogs = fx.get("dogs") or "unknown"; wl = str(fx.get("dog_weight_limit_lb") or "")
+                why = "no dogs" if dogs == "no" else (f"dog weight limit {wl} lb" if wl.isdigit() and int(wl) < MIN_WL else "nothing at or under $3,000 / no studio or 1BR listed")
+                b = {"building_name": nm, "address": fx.get("street") or "", "town": fx.get("city") or card.get("city") or "", "state": "NY", "zip": fx.get("zip") or card.get("zip") or "",
+                     "url": url, "floors": fx.get("building_floors") or "", "elevator": fx.get("elevator") or "unknown", "elevator_basis": "Trulia building page lists an elevator" if fx.get("elevator") == "yes" else "",
+                     "dogs": dogs, "dog_weight_limit_lb": wl, "dog_policy_text": (fx.get("dog_policy_text") or "")[:300], "verdict": "fails:" + why, "units_written": 0, "units_in_window": 0,
+                     "min_rent_seen": pmin if pmin is not None else "", "source_url": url,
+                     "notes": (NOROWS.get(url, "") + (f"; lowest studio/1BR price on the Trulia search card: {card.get('price_text') or pmin} ({card.get('beds')})" if pmin else "")).strip("; ")}
+                buildings.append(b)
+                if d.get("facts"):
+                    all_rows.append(dict({k: "" for k in COLS}, listing_id="region_wr:bfail:" + url.rsplit("/", 1)[1], source_site="trulia", url=url, detail_level="card" if pmin else "building",
+                                         first_seen=d.get("at") or "", last_seen=d.get("at") or "", building_name=nm, address=b["address"], city=b["town"], state="NY", zip=b["zip"],
+                                         listed_rent=pmin if pmin is not None else "", price_basis="lowest studio/1BR price on the Trulia search card (card only)" if pmin else "",
+                                         dogs=dogs, dog_policy_text=(fx.get("dog_policy_text") or "")[:900], dog_weight_limit_lb=wl, elevator=b["elevator"], building_floors=b["floors"],
+                                         pet_rent=fx.get("pet_rent") or "", listing_type="managed_building", building_url=url, raw_path=d.get("raw_path") or "",
+                                         notes=f"BUILDING_FAILS: {why}; {b['notes']}"))
             continue
         out, b = apply_building(rows, {}, url)
         all_rows += out

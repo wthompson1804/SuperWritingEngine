@@ -1,0 +1,21 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"1","value":[
+    {
+      "ultra_buildingid":"4ab3b638-bc23-f111-8342-001dd800c744","ultra_name":"BLDG A","ultra_registrationnumber":"1614-00304-002","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1453 VALLEY RD","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"8a92154e-6212-f111-8406-001dd80075a5","Name":"Avalon Bay"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"322f7521-162f-e811-8126-1458d04eb810","Name":"WAYNE TWP"
+      },"ultra_propertyportalsearchfield":"Avalon Bay","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"WAYNE TWP","ultra_elsamaintenancecompany":{
+        "Id":"f715ee57-8681-ef11-a670-001dd80621a3","Name":"Kone INC c/o Mildred Doherty"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"2293154e-6212-f111-8406-001dd80075a5","Name":"AVB WAYNE VALLEY LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

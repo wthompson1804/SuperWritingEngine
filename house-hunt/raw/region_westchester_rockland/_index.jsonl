@@ -360,3 +360,5 @@
 {"url": "https://sightmap.com/app/api/v1/d7p1mn58pkx/sightmaps/101774", "retrieved_at": "2026-11-15T21:52:02+00:00", "status": 200, "path": "raw/region_westchester_rockland/67cc05e02ecb7892.json", "source": "region_westchester_rockland"}
 {"url": "https://livetheduet.com/robots.txt", "retrieved_at": "2026-11-15T21:52:02+00:00", "status": 200, "path": "raw/region_westchester_rockland/ff67fad681e1df3e.txt", "source": "region_westchester_rockland"}
 {"url": "https://livetheduet.com/", "retrieved_at": "2026-11-15T21:52:13+00:00", "status": 200, "path": "raw/region_westchester_rockland/441f54be5f9e17af.html", "source": "region_westchester_rockland"}
+{"url": "https://livetheduet.com/floor-plans/", "retrieved_at": "2026-11-15T21:52:23+00:00", "status": 200, "path": "raw/region_westchester_rockland/a42eda2a1bb1fbd4.html", "source": "region_westchester_rockland"}
+{"url": "https://livetheduet.com/availability/", "retrieved_at": "2026-11-15T21:52:33+00:00", "status": 200, "path": "raw/region_westchester_rockland/1e2da92cd0d3a201.html", "source": "region_westchester_rockland"}

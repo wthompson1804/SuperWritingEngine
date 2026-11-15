@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1634+Flatbush+Ave%2C+Brooklyn%2C+NY+11210&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T21:52:18+00:00",
+ "status": 200,
+ "path": "raw/independent_check/f699f1d852f87594.json",
+ "source": "independent_check"
+}

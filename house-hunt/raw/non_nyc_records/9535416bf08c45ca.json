@@ -1,0 +1,145 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"10","value":[
+    {
+      "ultra_buildingid":"f94f0a23-1162-422b-86a3-7cf9b9ccbd09","ultra_name":"AVALON W LONG BRANCH BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1353022812001","ultra_addressline1":"10 AVALON CT","ultra_block":"70","ultra_lot":"28.02","ultra_propertyinterest":{
+        "Id":"fdc1d03f-ba29-4f65-a9e1-a67ce05efaa7","Name":"214 MONMOUTH OWNER LLC"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"862e7521-162f-e811-8126-1458d04eb810","Name":"WEST LONG BRANCH BORO"
+      },"ultra_propertyportalsearchfield":"214 MONMOUTH OWNER LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bfea236c-e760-f011-bec2-001dd80c2ab9","Name":"214 MONMOUTH OWNER, LLC"
+      },"ultra_zipcode":"07764","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"7e3dba4a-47e8-4d6e-bf84-e9403b893d6d","ultra_name":"AVALON W LONG BRANCH BLDG 2","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1353022812002","ultra_addressline1":"10 AVALON CT","ultra_block":"70","ultra_lot":"28.02","ultra_propertyinterest":{
+        "Id":"fdc1d03f-ba29-4f65-a9e1-a67ce05efaa7","Name":"214 MONMOUTH OWNER LLC"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"862e7521-162f-e811-8126-1458d04eb810","Name":"WEST LONG BRANCH BORO"
+      },"ultra_propertyportalsearchfield":"214 MONMOUTH OWNER LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bfea236c-e760-f011-bec2-001dd80c2ab9","Name":"214 MONMOUTH OWNER, LLC"
+      },"ultra_zipcode":"07764","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"5fdc5de9-5336-442c-aefe-3d54ae1b4cac","ultra_name":"AVALON W LONG BRANCH BLDG 3","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1353022812003","ultra_addressline1":"10 AVALON CT","ultra_block":"70","ultra_lot":"28.02","ultra_propertyinterest":{
+        "Id":"fdc1d03f-ba29-4f65-a9e1-a67ce05efaa7","Name":"214 MONMOUTH OWNER LLC"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"862e7521-162f-e811-8126-1458d04eb810","Name":"WEST LONG BRANCH BORO"
+      },"ultra_propertyportalsearchfield":"214 MONMOUTH OWNER LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bfea236c-e760-f011-bec2-001dd80c2ab9","Name":"214 MONMOUTH OWNER, LLC"
+      },"ultra_zipcode":"07764","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"57691861-e800-4ac6-9341-797cc225f2db","ultra_name":"AVALON W LONG BRANCH BLDG 4","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1353022812004","ultra_addressline1":"10 AVALON CT","ultra_block":"70","ultra_lot":"28.02","ultra_propertyinterest":{
+        "Id":"fdc1d03f-ba29-4f65-a9e1-a67ce05efaa7","Name":"214 MONMOUTH OWNER LLC"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"862e7521-162f-e811-8126-1458d04eb810","Name":"WEST LONG BRANCH BORO"
+      },"ultra_propertyportalsearchfield":"214 MONMOUTH OWNER LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bfea236c-e760-f011-bec2-001dd80c2ab9","Name":"214 MONMOUTH OWNER, LLC"
+      },"ultra_zipcode":"07764","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d398f555-64c1-45b7-bb5b-ab44abe656e0","ultra_name":"AVALON W LONG BRANCH BLDG 5","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1353022812005","ultra_addressline1":"10 AVALON CT","ultra_block":"70","ultra_lot":"28.02","ultra_propertyinterest":{
+        "Id":"fdc1d03f-ba29-4f65-a9e1-a67ce05efaa7","Name":"214 MONMOUTH OWNER LLC"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"862e7521-162f-e811-8126-1458d04eb810","Name":"WEST LONG BRANCH BORO"
+      },"ultra_propertyportalsearchfield":"214 MONMOUTH OWNER LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bfea236c-e760-f011-bec2-001dd80c2ab9","Name":"214 MONMOUTH OWNER, LLC"
+      },"ultra_zipcode":"07764","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"35cd576f-eb4f-4f8d-b661-6b7337f3d4e9","ultra_name":"AVALON W LONG BRANCH BLDG 6","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1353022812006","ultra_addressline1":"10 AVALON CT","ultra_block":"70","ultra_lot":"28.02","ultra_propertyinterest":{
+        "Id":"fdc1d03f-ba29-4f65-a9e1-a67ce05efaa7","Name":"214 MONMOUTH OWNER LLC"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"862e7521-162f-e811-8126-1458d04eb810","Name":"WEST LONG BRANCH BORO"
+      },"ultra_propertyportalsearchfield":"214 MONMOUTH OWNER LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bfea236c-e760-f011-bec2-001dd80c2ab9","Name":"214 MONMOUTH OWNER, LLC"
+      },"ultra_zipcode":"07764","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"9407549f-b8cb-4010-b7e4-db40ca111517","ultra_name":"AVALON W LONG BRANCH BLDG 7","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1353022812007","ultra_addressline1":"10 AVALON CT","ultra_block":"70","ultra_lot":"28.02","ultra_propertyinterest":{
+        "Id":"fdc1d03f-ba29-4f65-a9e1-a67ce05efaa7","Name":"214 MONMOUTH OWNER LLC"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"862e7521-162f-e811-8126-1458d04eb810","Name":"WEST LONG BRANCH BORO"
+      },"ultra_propertyportalsearchfield":"214 MONMOUTH OWNER LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bfea236c-e760-f011-bec2-001dd80c2ab9","Name":"214 MONMOUTH OWNER, LLC"
+      },"ultra_zipcode":"07764","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"0f6606ac-50ec-4f71-930e-2ceb2d58a24e","ultra_name":"AVALON W LONG BRANCH BLDG 8","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1353022812008","ultra_addressline1":"10 AVALON CT","ultra_block":"70","ultra_lot":"28.02","ultra_propertyinterest":{
+        "Id":"fdc1d03f-ba29-4f65-a9e1-a67ce05efaa7","Name":"214 MONMOUTH OWNER LLC"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"862e7521-162f-e811-8126-1458d04eb810","Name":"WEST LONG BRANCH BORO"
+      },"ultra_propertyportalsearchfield":"214 MONMOUTH OWNER LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bfea236c-e760-f011-bec2-001dd80c2ab9","Name":"214 MONMOUTH OWNER, LLC"
+      },"ultra_zipcode":"07764","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"09c27f2d-e4df-4d47-a30e-7106caabd3db","ultra_name":"AVALON W LONG BRANCH BLDG 9","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1353022812009","ultra_addressline1":"10 AVALON CT","ultra_block":"70","ultra_lot":"28.02","ultra_propertyinterest":{
+        "Id":"fdc1d03f-ba29-4f65-a9e1-a67ce05efaa7","Name":"214 MONMOUTH OWNER LLC"
+      },"ultra_county":{
+        "Id":"0af4aaf2-63e4-e711-8125-1458d054d020","Name":"MONMOUTH"
+      },"ultra_municipality":{
+        "Id":"862e7521-162f-e811-8126-1458d04eb810","Name":"WEST LONG BRANCH BORO"
+      },"ultra_propertyportalsearchfield":"214 MONMOUTH OWNER LLC","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"bfea236c-e760-f011-bec2-001dd80c2ab9","Name":"214 MONMOUTH OWNER, LLC"
+      },"ultra_zipcode":"07764","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"b89725d4-e268-f111-a824-001dd80db51f","ultra_name":"BLDG P","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1614042466015","ultra_addressline1":"202-210 AVALON CR","ultra_block":"3103","ultra_lot":"19","ultra_propertyinterest":{
+        "Id":"2fb581e0-5316-f111-8407-001dd800c744","Name":"AVALON WAYNE"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"322f7521-162f-e811-8126-1458d04eb810","Name":"WAYNE TWP"
+      },"ultra_propertyportalsearchfield":"AVALON WAYNE","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"WAYNE TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"1453 VALLEY RD","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"a5b481e0-5316-f111-8407-001dd800c744","Name":"AVB WAYNE VALLEY LLC"
+      },"ultra_zipcode":"07470","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}
