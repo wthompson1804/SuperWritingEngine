@@ -79,6 +79,9 @@ CURATED = {
     "modera_nr": dict(al="Modera New Rochelle", trulia=T + "modera-new-rochelle-111-centre-ave-new-rochelle-ny-10801", unit_floor_ok=True, site="https://www.moderanewrochelle.com/",
                       notes="own site moderanewrochelle.com answers 403 (Mill Creek); elevator, dog policy ($75/mo dog rent, limit 2, restricted breeds) from the Apartment List property page; unit numbers are floor + unit"),
     "gramercy_wp": dict(al="The Gramercy", trulia=T + "the-gramercy-2-canfield-ave-white-plains-ny-10601", unit_floor_ok=True, site="https://www.thegramercywhiteplains.com/",
+                        dogs="unknown", verdict="unconfirmed:dogs (contradictory policy)",
+                        dog_text="CONFLICT: the Trulia pet card says 'Dogs: Not allowed | Cats: Not allowed'; the Apartment List property page says allowed pets cats/dogs with amenities 'Dogs allowed', 'Dog park'. Own site answers 403.",
+                        dog_src="the Trulia building page and the Apartment List property page",
                         notes="own site thegramercywhiteplains.com answers 403; elevator and dogs from the Apartment List property page; unit 110 is on floor 1"),
     "rockwell_nr": dict(al="Rockwell", trulia=T + "rockwell-585-north-ave-new-rochelle-ny-10801", unit_floor_ok=True, site="https://www.liveatrockwell.com/",
                         notes="own site liveatrockwell.com returns an empty script shell to a plain fetch; unit numbers 2xx-5xx; no page read states an elevator"),
@@ -184,8 +187,4 @@ MANUAL_BUILDINGS = [
          source_url="https://www.eastpointonhudson.com/", notes="own site answers 403; no Trulia, Apartment List or Zumper building page found for it on 2026-11-15; name and address from a search result only, nothing else confirmed"),
     dict(building_name="Montclare Luxury Apartments", address="6 North Midland Avenue", town="Nyack", state="NY", zip="10960", url="", verdict="blocked",
          source_url="", notes="found by web search only (apartments.com and forrent.com pages, both blocked sources); not on the Trulia ZIP 10960 studio/1BR list, the Apartment List Nyack pages or the Zumper Nyack page on 2026-11-15; search text mentions an elevator, 1 pet per unit and 1BR rents from about $2,775, none of it read on an allowed page: MANUAL CHECK"),
-    dict(building_name="NorthLight (Edge-on-Hudson)", address="2 Maxwell Drive", town="Sleepy Hollow", state="NY", zip="10591", url="https://www.bozzuto.com/apartments-for-rent/ny/sleepy-hollow/northlight/",
-         elevator="yes", elevator_basis="Trulia building page lists an elevator", dogs="unknown", dog_policy_text="Trulia pet card: 'Dogs: Not allowed | Cats: Not allowed' (own site not readable: bozzuto.com robots.txt disallows the page for us)",
-         verdict="fails:nothing at or under $3,000 (studio/1BR from $3,783 on the Trulia card)", units_written=0, units_in_window=0, min_rent_seen="3783",
-         manager="Bozzuto", source_url="https://www.trulia.com/building/northlight-2-maxwell-dr-sleepy-hollow-ny-10591-2750788534", notes="second record for this building: the automatic Trulia record says fails:no dogs; the price alone already fails the cap"),
 ]

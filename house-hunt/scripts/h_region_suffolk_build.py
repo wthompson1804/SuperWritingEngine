@@ -50,6 +50,31 @@ def census_geo(addr: str):
     return "", ""
 
 
+def page_index() -> dict:
+    """url -> (retrieved_at, lat, lon) for pages already read by this pass or by the harvesters it reuses."""
+    idx: dict[str, list] = {}
+    for src in (SRC, "mgmt_greystar", "apartmentlist", "zumper"):
+        p = ROOT / "raw" / src / "_index.jsonl"
+        if p.exists():
+            for line in p.read_text().splitlines():
+                try:
+                    d = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if d.get("status") == 200:
+                    idx[d["url"].replace("//apartmentlist.com", "//www.apartmentlist.com")] = [d["retrieved_at"], "", ""]
+    for fn, key, pre in (("greystar_buildings.jsonl", "url", ""), ("al_buildings.jsonl", "path", "https://www.apartmentlist.com"),
+                         ("zumper_buildings.jsonl", "path", "https://www.zumper.com")):
+        p = ROOT / "raw" / SRC / fn
+        if p.exists():
+            for line in p.read_text().splitlines():
+                o = json.loads(line)
+                if o.get("lat"):
+                    e = idx.setdefault(pre + o[key], [o.get("retrieved_at", ""), "", ""])
+                    e[1], e[2] = o["lat"], o["lon"]
+    return idx
+
+
 def al_rows(url: str):
     import h_apartmentlist as A
     path = url.split("apartmentlist.com")[1]
@@ -99,7 +124,7 @@ def auto_record(o: dict) -> dict:
     return {"name": name, "address": o.get("address") or "", "town": o.get("city") or "", "zip": o.get("zip") or "",
             "url": "", "source_url": o["url"], "elevator": o.get("elevator") or "unknown", "dogs": o.get("dogs") or "unknown",
             "weight": w if w else ("small_only" if small else ""), "verdict": v, "note": note, "_t": o, "one_row": True,
-            "lat": o.get("lat") or "", "lon": o.get("lon") or "", "floors": o.get("building_floors") or ""}
+            "lat": o.get("lat") or "", "lon": o.get("lon") or "", "floors": o.get("building_floors") or "", "seen": o.get("retrieved_at", "")}
 
 
 def main() -> None:
@@ -110,6 +135,7 @@ def main() -> None:
             tj[o["url"]] = o
     used = set()
     blds = []
+    pidx = page_index()
     for b in BUILDINGS:
         b = dict(b)
         if b.get("trulia"):
@@ -121,6 +147,11 @@ def main() -> None:
             b.setdefault("source_url", hit[0]["url"])
             b.setdefault("lat", hit[0].get("lat") or "")
             b.setdefault("lon", hit[0].get("lon") or "")
+        pi = pidx.get(b.get("min_rent_url") or b.get("source_url") or "") or pidx.get(b.get("source_url") or "")
+        if pi:
+            b.setdefault("seen", pi[0])
+            if pi[1] and not b.get("lat"):
+                b["lat"], b["lon"] = pi[1], pi[2]
         blds.append(b)
     hand_n = len(blds)
     blds += [auto_record(o) for u, o in sorted(tj.items(), key=lambda kv: (kv[1].get("city") or "", kv[1].get("name") or "")) if u not in used]

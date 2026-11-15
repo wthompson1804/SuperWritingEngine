@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1148,
- "detail_pages": 1876,
+ "srp_pages": 1161,
+ "detail_pages": 1887,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1931,6 +1931,30 @@
    "drive_min": 102.2,
    "props": 0,
    "rows": 0
+  },
+  {
+   "city": "nj/deal",
+   "drive_min": 102.3,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "nj/sussex",
+   "drive_min": 103.1,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "nj/bradley-beach",
+   "drive_min": 103.5,
+   "props": 5,
+   "rows": 4
+  },
+  {
+   "city": "nj/neptune-city",
+   "drive_min": 103.5,
+   "props": 4,
+   "rows": 21
   }
  ],
  "cities_unmatched_far": [
@@ -1955,10 +1979,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2764,
- "props_skipped_lowprice_gt_3000": 888,
+ "props_discovered": 2777,
+ "props_skipped_lowprice_gt_3000": 890,
  "reasons": {
-  "ok": 1866,
+  "ok": 1877,
   "no_unit_le_3000": 9,
   "no_listing_object": 1
  },
