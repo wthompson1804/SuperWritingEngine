@@ -14,3 +14,4 @@ targets 300/1260 {'ok': 300} rows=10182 fetched=293
 targets 325/1260 {'ok': 325} rows=10182 fetched=318
 targets 350/1260 {'ok': 350} rows=10182 fetched=343
 targets 375/1260 {'ok': 375} rows=10185 fetched=368
+targets 400/1260 {'ok': 400} rows=10185 fetched=393

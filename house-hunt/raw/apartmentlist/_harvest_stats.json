@@ -7,8 +7,8 @@
   "fetch_max_low": 2850.0,
   "minutes": 44.0
  },
- "srp_pages": 550,
- "detail_pages": 1271,
+ "srp_pages": 556,
+ "detail_pages": 1290,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -807,6 +807,12 @@
    "drive_min": 52.1,
    "props": 11,
    "rows": 18
+  },
+  {
+   "city": "nj/north-bergen",
+   "drive_min": 35.0,
+   "props": 20,
+   "rows": 31
   }
  ],
  "cities_unmatched_far": [
@@ -835,10 +841,10 @@
    "km_to_grid": 0.1
   }
  ],
- "props_discovered": 2094,
- "props_skipped_lowprice_gt_3000": 823,
+ "props_discovered": 2114,
+ "props_skipped_lowprice_gt_3000": 824,
  "reasons": {
-  "ok": 1262,
+  "ok": 1281,
   "no_unit_le_3000": 8,
   "no_listing_object": 1
  },
