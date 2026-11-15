@@ -27,3 +27,5 @@
 {"muni": "ny-state", "url": "https://agriculture.ny.gov/animals/companion-animals", "reason": "HTTP 403 bot wall", "at": "2026-11-15T23:54:20+00:00"}
 {"muni": "ny-state", "url": "https://agriculture.ny.gov/animals/guidance-municipalities", "reason": "robots: host refused earlier: round 2 (2026-11-15T23:54:20+00:00): HTTP 403 bot wall", "at": "2026-11-15T23:54:20+00:00"}
 {"muni": "fort-lee", "url": "https://www.fortleenj.org/374/CatDog-Licenses-Animal-Welfare", "reason": "error RuntimeError(\"fetch failed after 2 tries: https://www.fortleenj.org/374/CatDog-Licenses-Animal-Welfare: ConnectionError(ProtocolError('Connection abor", "at": "2026-11-15T23:54:32+00:00"}
+{"muni": "ridgewood", "url": "https://laserfiche.ridgewoodnj.net/WebLink/", "reason": "robots: * group", "at": "2026-11-15T23:55:08+00:00"}
+{"muni": "ridgewood", "url": "https://www.ridgewoodnj.net/FAQ.aspx", "reason": "robots: claude group", "at": "2026-11-15T23:55:08+00:00"}
