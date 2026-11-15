@@ -2,17 +2,26 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-15)
+## Current state (2026-11-15, evening)
 
-| Phase | Status |
+**Authority: `docs/PLAN_V3_APPROVED_2026-11-15.md`** (gates, avoid rules, steps, checkpoints). It supersedes the
+handoff brief's phases, tiers, $2,800 cap, "no ranking" rule and the 98-area scope. UI spec: mock-up 4
+(artifact 45EsZ66YhUkf5fTWz3ZjU2; layout only, none of its text or data carries over) and `docs/UX_BRIEF_2026-11-15.md`.
+
+| Step | Status |
 |---|---|
-| 0 Setup | Done except merging the source-access test results into `docs/SOURCES.md` |
-| 1 Structured public data | Starting (subagents per source domain) |
-| 2 Inventory | Not started |
-| 3 Buildings | Not started |
-| 4 Voices | Not started |
-| 5 What is changing | Not started |
-| 6 QC and handback | Not started |
+| 1 Lookup tools (drive+tolls, transit, crime, places, utilities) | 5 agents running; outputs in `scripts/tools/`, notes in `docs/tools_notes/` |
+| 2 Broad-net harvest | Search grid done (`data/reference/search_grid.csv`, 1,048 ZIPs). 5 harvest agents running (Trulia, Zumper, Craigslist, Apartment List, management sites) → `data/listings_raw/` |
+| 2b Normalize, geocode, dedupe, gates (`scripts/gates.py`) | Not started |
+| 3 Neighborhoods and years → **checkpoint A with Will** | Not started |
+| 4 Depth on chosen places | Not started |
+| 5 Avoid list → **checkpoint B** | Not started |
+| 6 Synthesis (evidence table, rules, text) | Not started |
+| 7 Build page, publish as a NEW private artifact → **checkpoint C** | Not started |
+| 8 Final price and link re-check (Nov 21) | Not started |
+
+If agents were interrupted: re-launch with `docs/HARVEST_AGENT_BRIEF.md` / `docs/TOOLS_AGENT_BRIEF.md`; scripts resume from `raw/` caches.
+Old Phase 1 leftovers (`scripts/p1_*.py`, `data/metrics/`) are partial; only `acs.csv` is complete.
 
 ## Answers from Will (2026-11-15), which override the handoff brief
 
@@ -49,6 +58,14 @@ Read this first every session. Newest entries at the top of the log.
 2. Is weekly still the right visit frequency?
 
 ## Log
+
+### 2026-11-15, session 1 (later)
+- Will's later decisions: move-in window now through **Dec 15**; tours from **Nov 22**; all-in cap **$3,000** incl. estimated utilities;
+  dogs must be explicitly allowed (limit ≥ 40 lb); **elevator buildings only, no ground-floor units**; Queens first excluded, then **re-included**;
+  up to 10 places + up to 5 avoids per neighborhood; years and all wording data-driven; publish as a new private artifact;
+  keys: Will will get a **Reddit API app** only (no Google key → drive times stay free-flow estimates). "Get what you can, say what's missing."
+- Source-access results in `docs/SOURCES.md`; Claude-specific robots rules apply to us (Niche, City-Data, Yelp, Zillow listings off limits).
+- First round of Phase 1 agents was interrupted; ACS finished. Relaunched as lookup tools + harvest agents.
 
 ### 2026-11-15, session 1
 - Network: Default environment blocked all sources. Created a personal environment, moved the session onto it, set it to unrestricted (Will approved).
