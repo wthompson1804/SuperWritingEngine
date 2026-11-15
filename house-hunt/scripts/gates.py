@@ -162,9 +162,23 @@ def main():
     cf = DATA / "reference" / "community_facts.csv"
     if cf.exists():
         c = pd.read_csv(cf, dtype=str, keep_default_na=False)
-        c["_k"] = c.source_site + "|" + c.building_name.str.lower().str.strip()
-        c = c.drop_duplicates("_k").set_index("_k")
-        k = df.source_site + "|" + df.building_name.str.lower().str.strip()
+        # Join on normalized address + ZIP first (site + name matched only 14 of 271 communities), then on name.
+        c["_ka"] = c.address.map(norm_addr) + "|" + c.zip.str.extract(r"(\d{5})", expand=False).fillna("")
+        c["_kn"] = c.building_name.str.lower().str.strip()
+        ca = c[c._ka.str.len() > 6].drop_duplicates("_ka").set_index("_ka")
+        cn = c[c._kn != ""].drop_duplicates("_kn").set_index("_kn")
+        ka, kn = df.addr_key, df.building_name.str.lower().str.strip()
+
+        class _Both:
+            def __getitem__(self, col):
+                return (ca[col], cn[col])
+        c = _Both()
+
+        class _K:
+            def map(self, pair):
+                a, n = pair
+                return ka.map(a).where(lambda x: x.notna() & (x != ""), kn.map(n))
+        k = _K()
         blank = lambda col: df[col].astype(str).str.strip().str.lower().isin(["", "unknown", "nan"])
 
         def fill(col, src, ok=lambda v: v not in ("", "unknown")):

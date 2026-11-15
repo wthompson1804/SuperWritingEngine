@@ -1,0 +1,109 @@
+addr_key,fact,value,quote,source_url,status
+11 park pl|10801,elevator,yes,Elevator,https://www.trulia.com/building/the-lombardi-11-park-pl-new-rochelle-ny-10801-2750951745,confirmed
+11 park pl|10801,floor,unknown,floor-plan level listing; no unit number,https://www.trulia.com/building/the-lombardi-11-park-pl-new-rochelle-ny-10801-2750951745,unconfirmed
+11 park pl|10801,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/the-lombardi-11-park-pl-new-rochelle-ny-10801-2750951745,confirmed
+11 park pl|10801,dog_weight_limit,50,"Weight limit (lbs.): 50; Size allowed: Small, large",https://www.trulia.com/building/the-lombardi-11-park-pl-new-rochelle-ny-10801-2750951745,confirmed
+40 westchester pl|10801,elevator,yes,Elevator,https://www.trulia.com/building/the-atelier-at-westchester-place-40-westchester-pl-new-rochelle-ny-10801-2750910517,confirmed
+40 westchester pl|10801,floor,unknown,floor-plan level listing; no unit number,https://www.trulia.com/building/the-atelier-at-westchester-place-40-westchester-pl-new-rochelle-ny-10801-2750910517,unconfirmed
+40 westchester pl|10801,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/the-atelier-at-westchester-place-40-westchester-pl-new-rochelle-ny-10801-2750910517,confirmed
+40 westchester pl|10801,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/the-atelier-at-westchester-place-40-westchester-pl-new-rochelle-ny-10801-2750910517,unconfirmed
+1108 brown st|10566,elevator,yes,Elevator,https://www.trulia.com/building/park-place-towers-1108-brown-st-peekskill-ny-10566-2737454290,confirmed
+1108 brown st|10566,floor,unknown,floor-plan level listing; no unit number,https://www.trulia.com/building/park-place-towers-1108-brown-st-peekskill-ny-10566-2737454290,unconfirmed
+1108 brown st|10566,floor,6,inferred from unit number 6S only; the page does not state the floor,https://www.trulia.com/building/park-place-towers-1108-brown-st-peekskill-ny-10566-2737454290,unconfirmed
+1108 brown st|10566,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/park-place-towers-1108-brown-st-peekskill-ny-10566-2737454290,confirmed
+1108 brown st|10566,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/park-place-towers-1108-brown-st-peekskill-ny-10566-2737454290,unconfirmed
+1 saint marys convent|10566,elevator,yes,Elevator,https://www.trulia.com/building/fort-hill-peekskill-1-saint-marys-convent-peekskill-ny-10566-2776781308,confirmed
+1 saint marys convent|10566,floor,5,inferred from unit number A508 only; the page does not state the floor,https://www.trulia.com/building/fort-hill-peekskill-1-saint-marys-convent-peekskill-ny-10566-2776781308,unconfirmed
+1 saint marys convent|10566,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/fort-hill-peekskill-1-saint-marys-convent-peekskill-ny-10566-2776781308,confirmed
+1 saint marys convent|10566,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/fort-hill-peekskill-1-saint-marys-convent-peekskill-ny-10566-2776781308,unconfirmed
+305 chateau rive|10566,elevator,yes,Elevator,https://www.trulia.com/building/chateau-rive-305-chateau-rive-peekskill-ny-10566-2739941135,confirmed
+305 chateau rive|10566,floor,3,inferred from unit number 304 only; the page does not state the floor,https://www.trulia.com/building/chateau-rive-305-chateau-rive-peekskill-ny-10566-2739941135,unconfirmed
+305 chateau rive|10566,dogs_allowed,yes,"Cats, small dogs allowed",https://www.trulia.com/building/chateau-rive-305-chateau-rive-peekskill-ny-10566-2739941135,confirmed
+305 chateau rive|10566,dog_weight_limit,unconfirmed,"Size allowed: Small (no number given); ""small"" only suggests a low limit",https://www.trulia.com/building/chateau-rive-305-chateau-rive-peekskill-ny-10566-2739941135,unconfirmed
+1 n main st|10573,elevator,yes,Elevator,https://www.trulia.com/building/port-main-1-n-main-st-port-chester-ny-10573-2750798202,confirmed
+1 n main st|10573,floor,4,inferred from unit number 406 only; the page does not state the floor,https://www.trulia.com/building/port-main-1-n-main-st-port-chester-ny-10573-2750798202,unconfirmed
+1 n main st|10573,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/port-main-1-n-main-st-port-chester-ny-10573-2750798202,confirmed
+1 n main st|10573,dog_weight_limit,75,"Weight limit (lbs.): 75; Size allowed: Small, large",https://www.trulia.com/building/port-main-1-n-main-st-port-chester-ny-10573-2750798202,confirmed
+229 willett ave|10573,elevator,yes,Elevator,https://www.trulia.com/building/willett-point-229-willett-ave-port-chester-ny-10573-2792481957,confirmed
+229 willett ave|10573,floor,unknown,floor-plan level listing; no unit number,https://www.trulia.com/building/willett-point-229-willett-ave-port-chester-ny-10573-2792481957,unconfirmed
+229 willett ave|10573,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/willett-point-229-willett-ave-port-chester-ny-10573-2792481957,confirmed
+229 willett ave|10573,dog_weight_limit,50,"Weight limit (lbs.): 50; Size allowed: Small, large",https://www.trulia.com/building/willett-point-229-willett-ave-port-chester-ny-10573-2792481957,confirmed
+30 broad st|10573,elevator,yes,Elevator,https://www.trulia.com/building/30-broad-street-30-broad-st-port-chester-ny-10573-2785857715,confirmed
+30 broad st|10573,floor,7,inferred from unit number 705 only; the page does not state the floor,https://www.trulia.com/building/30-broad-street-30-broad-st-port-chester-ny-10573-2785857715,unconfirmed
+30 broad st|10573,dogs_allowed,yes,"Cats, small dogs allowed",https://www.trulia.com/building/30-broad-street-30-broad-st-port-chester-ny-10573-2785857715,confirmed
+30 broad st|10573,dog_weight_limit,unconfirmed,"Size allowed: Small (no number given); ""small"" only suggests a low limit",https://www.trulia.com/building/30-broad-street-30-broad-st-port-chester-ny-10573-2785857715,unconfirmed
+12 brooklyn ave valley stream ny 11581 usa|11581,elevator,yes,Building | Cats OK Dogs OK | Elevator Fitness Center,https://www.zumper.com/listings/20529380p/1-bedroom-valley-stream-ny,confirmed
+12 brooklyn ave valley stream ny 11581 usa|11581,floor,unknown,no unit number or floor on the page,https://www.zumper.com/listings/20529380p/1-bedroom-valley-stream-ny,unconfirmed
+12 brooklyn ave valley stream ny 11581 usa|11581,dogs_allowed,yes,Dog Policy | Allowed,https://www.zumper.com/listings/20529380p/1-bedroom-valley-stream-ny,confirmed
+12 brooklyn ave valley stream ny 11581 usa|11581,dog_weight_limit,unconfirmed,Contact for more information on pet policy.,https://www.zumper.com/listings/20529380p/1-bedroom-valley-stream-ny,unconfirmed
+12 brooklyn ave|11581,elevator,unconfirmed,"not listed on this Trulia page; the Zumper listing for the same address lists ""Elevator""",https://www.trulia.com/home/12-brooklyn-ave-501-valley-stream-ny-11581-2098736887,unconfirmed
+12 brooklyn ave|11581,floor,5,inferred from the unit number only; the page does not state the floor,https://www.trulia.com/home/12-brooklyn-ave-501-valley-stream-ny-11581-2098736887,unconfirmed
+12 brooklyn ave|11581,dogs_allowed,yes,"Cats, small dogs allowed",https://www.trulia.com/home/12-brooklyn-ave-501-valley-stream-ny-11581-2098736887,confirmed
+12 brooklyn ave|11581,dog_weight_limit,unconfirmed,"Cats, small dogs allowed (no number given)",https://www.trulia.com/home/12-brooklyn-ave-501-valley-stream-ny-11581-2098736887,unconfirmed
+430 e main st|10940,elevator,yes,Elevator,https://www.trulia.com/building/the-park-at-main-430-e-main-st-middletown-ny-10940-2088963592,confirmed
+430 e main st|10940,floor,unknown,unit number 63 does not show the floor (looks like a building or sequence number),https://www.trulia.com/building/the-park-at-main-430-e-main-st-middletown-ny-10940-2088963592,unconfirmed
+430 e main st|10940,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/the-park-at-main-430-e-main-st-middletown-ny-10940-2088963592,confirmed
+430 e main st|10940,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/the-park-at-main-430-e-main-st-middletown-ny-10940-2088963592,unconfirmed
+201 genung st|10940,elevator,unconfirmed,no elevator in the feature list on this page,https://www.trulia.com/building/boulder-pointe-apartments-201-genung-st-middletown-ny-10940-1002146015,unconfirmed
+201 genung st|10940,floor,unknown,unit number 0801 does not show the floor (looks like a building or sequence number),https://www.trulia.com/building/boulder-pointe-apartments-201-genung-st-middletown-ny-10940-1002146015,unconfirmed
+201 genung st|10940,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/boulder-pointe-apartments-201-genung-st-middletown-ny-10940-1002146015,confirmed
+201 genung st|10940,dog_weight_limit,30,Cats and Dogs (max 30 lbs.) Restrictions: Other restrictions may apply,https://www.trulia.com/building/boulder-pointe-apartments-201-genung-st-middletown-ny-10940-1002146015,confirmed
+1200 regency ct|10940,elevator,unconfirmed,no elevator in the feature list on this page,https://www.trulia.com/building/the-regency-club-1200-regency-ct-middletown-ny-10940-1001943070,unconfirmed
+1200 regency ct|10940,floor,unknown,unit number 0708 does not show the floor (looks like a building or sequence number),https://www.trulia.com/building/the-regency-club-1200-regency-ct-middletown-ny-10940-1001943070,unconfirmed
+1200 regency ct|10940,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/the-regency-club-1200-regency-ct-middletown-ny-10940-1001943070,confirmed
+1200 regency ct|10940,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/the-regency-club-1200-regency-ct-middletown-ny-10940-1001943070,unconfirmed
+1 kensington cir|10923,elevator,unconfirmed,no elevator in the feature list on this page,https://www.trulia.com/building/tor-view-village-apartments-1-kensington-cir-garnerville-ny-10923-1001440742,unconfirmed
+1 kensington cir|10923,floor,unknown,unit number 14D does not show the floor (looks like a building or sequence number),https://www.trulia.com/building/tor-view-village-apartments-1-kensington-cir-garnerville-ny-10923-1001440742,unconfirmed
+1 kensington cir|10923,floor,unknown,unit number 21H does not show the floor (looks like a building or sequence number),https://www.trulia.com/building/tor-view-village-apartments-1-kensington-cir-garnerville-ny-10923-1001440742,unconfirmed
+1 kensington cir|10923,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/tor-view-village-apartments-1-kensington-cir-garnerville-ny-10923-1001440742,confirmed
+1 kensington cir|10923,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/tor-view-village-apartments-1-kensington-cir-garnerville-ny-10923-1001440742,unconfirmed
+440 hamilton ave|10601,elevator,unconfirmed,no elevator in the feature list on this page,https://www.trulia.com/building/hamilton-crossing-440-hamilton-ave-white-plains-ny-10601-2747817576,unconfirmed
+440 hamilton ave|10601,floor,9,inferred from unit number 440-0915 only; the page does not state the floor,https://www.trulia.com/building/hamilton-crossing-440-hamilton-ave-white-plains-ny-10601-2747817576,unconfirmed
+440 hamilton ave|10601,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/hamilton-crossing-440-hamilton-ave-white-plains-ny-10601-2747817576,confirmed
+440 hamilton ave|10601,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/hamilton-crossing-440-hamilton-ave-white-plains-ny-10601-2747817576,unconfirmed
+1 dekalb ave|10605,elevator,yes,Elevator,https://www.trulia.com/building/one-dekalb-1-dekalb-ave-white-plains-ny-10605-2750789197,confirmed
+1 dekalb ave|10605,floor,3,inferred from unit number 307 only; the page does not state the floor,https://www.trulia.com/building/one-dekalb-1-dekalb-ave-white-plains-ny-10605-2750789197,unconfirmed
+1 dekalb ave|10605,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/one-dekalb-1-dekalb-ave-white-plains-ny-10605-2750789197,confirmed
+1 dekalb ave|10605,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/one-dekalb-1-dekalb-ave-white-plains-ny-10605-2750789197,unconfirmed
+7-11 s broadway|10601,elevator,yes,Elevator,https://www.trulia.com/building/the-azzure-7-11-s-broadway-white-plains-ny-10601-2748838571,confirmed
+7-11 s broadway|10601,floor,unknown,floor-plan level listing; no unit number,https://www.trulia.com/building/the-azzure-7-11-s-broadway-white-plains-ny-10601-2748838571,unconfirmed
+7-11 s broadway|10601,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/the-azzure-7-11-s-broadway-white-plains-ny-10601-2748838571,confirmed
+7-11 s broadway|10601,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/the-azzure-7-11-s-broadway-white-plains-ny-10601-2748838571,unconfirmed
+131 mamaroneck ave|10601,elevator,unconfirmed,no elevator in the feature list on this page,https://www.trulia.com/building/the-mitchell-131-mamaroneck-ave-white-plains-ny-10601-2750800357,unconfirmed
+131 mamaroneck ave|10601,floor,2,"floor_name ""2"" in the unit data on livethemitchell.com/floorplans/",https://livethemitchell.com/floorplans/,confirmed
+131 mamaroneck ave|10601,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/the-mitchell-131-mamaroneck-ave-white-plains-ny-10601-2750800357,confirmed
+131 mamaroneck ave|10601,dog_weight_limit,100 combined for up to 2 pets,Pet Weight Limit: Maximum 100 lbs. combined at mature weight,https://www.trulia.com/building/the-mitchell-131-mamaroneck-ave-white-plains-ny-10601-2750800357,confirmed
+1 martine ave|10606,elevator,yes,Elevator,https://www.trulia.com/building/1-martine-at-city-square-1-martine-ave-white-plains-ny-10606-2750788606,confirmed
+1 martine ave|10606,floor,6,inferred from unit number 617 only; the page does not state the floor,https://www.trulia.com/building/1-martine-at-city-square-1-martine-ave-white-plains-ny-10606-2750788606,unconfirmed
+1 martine ave|10606,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/1-martine-at-city-square-1-martine-ave-white-plains-ny-10606-2750788606,confirmed
+1 martine ave|10606,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/1-martine-at-city-square-1-martine-ave-white-plains-ny-10606-2750788606,unconfirmed
+44 hudson st|10701,elevator,yes,Elevator,https://www.trulia.com/building/hudson-44-44-hudson-st-yonkers-ny-10701-2775827441,confirmed
+44 hudson st|10701,floor,10,inferred from unit number 1013 only; the page does not state the floor,https://www.trulia.com/building/hudson-44-44-hudson-st-yonkers-ny-10701-2775827441,unconfirmed
+44 hudson st|10701,floor,14,inferred from unit number 1405 only; the page does not state the floor,https://www.trulia.com/building/hudson-44-44-hudson-st-yonkers-ny-10701-2775827441,unconfirmed
+44 hudson st|10701,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/hudson-44-44-hudson-st-yonkers-ny-10701-2775827441,confirmed
+44 hudson st|10701,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/hudson-44-44-hudson-st-yonkers-ny-10701-2775827441,unconfirmed
+1180 midland ave|10708,elevator,yes,Elevator,https://www.trulia.com/building/1180-midland-1180-midland-ave-bronxville-ny-10708-2750793263,confirmed
+1180 midland ave|10708,floor,unknown,floor-plan level listing; no unit number,https://www.trulia.com/building/1180-midland-1180-midland-ave-bronxville-ny-10708-2750793263,unconfirmed
+1180 midland ave|10708,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/1180-midland-1180-midland-ave-bronxville-ny-10708-2750793263,confirmed
+1180 midland ave|10708,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/1180-midland-1180-midland-ave-bronxville-ny-10708-2750793263,unconfirmed
+56 prospect st|10701,elevator,yes,Elevator,https://www.trulia.com/building/regency-on-hudson-56-prospect-st-yonkers-ny-10701-2774413543,confirmed
+56 prospect st|10701,floor,2,inferred from unit number 203 only; the page does not state the floor,https://www.trulia.com/building/regency-on-hudson-56-prospect-st-yonkers-ny-10701-2774413543,unconfirmed
+56 prospect st|10701,floor,5,inferred from unit number 512 only; the page does not state the floor,https://www.trulia.com/building/regency-on-hudson-56-prospect-st-yonkers-ny-10701-2774413543,unconfirmed
+56 prospect st|10701,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/regency-on-hudson-56-prospect-st-yonkers-ny-10701-2774413543,confirmed
+56 prospect st|10701,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/regency-on-hudson-56-prospect-st-yonkers-ny-10701-2774413543,unconfirmed
+1 alexander st|10701,elevator,yes,Elevator,https://www.trulia.com/building/hudson-park-community-1-alexander-st-yonkers-ny-10701-1001440943,confirmed
+1 alexander st|10701,floor,3,inferred from unit number 306F only; the page does not state the floor,https://www.trulia.com/building/hudson-park-community-1-alexander-st-yonkers-ny-10701-1001440943,unconfirmed
+1 alexander st|10701,floor,6,inferred from unit number 606F only; the page does not state the floor,https://www.trulia.com/building/hudson-park-community-1-alexander-st-yonkers-ny-10701-1001440943,unconfirmed
+1 alexander st|10701,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/hudson-park-community-1-alexander-st-yonkers-ny-10701-1001440943,confirmed
+1 alexander st|10701,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/hudson-park-community-1-alexander-st-yonkers-ny-10701-1001440943,unconfirmed
+135 wakefield ave|10704,elevator,yes,Elevator,https://www.trulia.com/building/wakefield-station-apartments-135-wakefield-ave-yonkers-ny-10704-2743593441,confirmed
+135 wakefield ave|10704,floor,4,inferred from unit number 401 only; the page does not state the floor,https://www.trulia.com/building/wakefield-station-apartments-135-wakefield-ave-yonkers-ny-10704-2743593441,unconfirmed
+135 wakefield ave|10704,dogs_allowed,yes,"Small dogs, large dogs allowed",https://www.trulia.com/building/wakefield-station-apartments-135-wakefield-ave-yonkers-ny-10704-2743593441,confirmed
+135 wakefield ave|10704,dog_weight_limit,unconfirmed,"Size allowed: Small, large (no number given)",https://www.trulia.com/building/wakefield-station-apartments-135-wakefield-ave-yonkers-ny-10704-2743593441,unconfirmed
+20 water grant st|10701,elevator,yes,Elevator,https://www.trulia.com/building/apex-hudson-riverfront-20-water-grant-st-yonkers-ny-10701-2740011249,confirmed
+20 water grant st|10701,floor,2,inferred from unit number 01-202 only; the page does not state the floor,https://www.trulia.com/building/apex-hudson-riverfront-20-water-grant-st-yonkers-ny-10701-2740011249,unconfirmed
+20 water grant st|10701,floor,4,inferred from unit number 01-468 only; the page does not state the floor,https://www.trulia.com/building/apex-hudson-riverfront-20-water-grant-st-yonkers-ny-10701-2740011249,unconfirmed
+20 water grant st|10701,dogs_allowed,yes,"Cats, small dogs, large dogs allowed",https://www.trulia.com/building/apex-hudson-riverfront-20-water-grant-st-yonkers-ny-10701-2740011249,confirmed
+20 water grant st|10701,dog_weight_limit,75,"Weight limit (lbs.): 75; Size allowed: Small, large",https://www.trulia.com/building/apex-hudson-riverfront-20-water-grant-st-yonkers-ny-10701-2740011249,confirmed
+430 e main st|10940,elevator,yes,Apartment Features | Stainless Steel Appliances | In-Unit Washer & Dryer | Dishwasher | Electric Heating | Elevator | Pet-Friendly,https://www.theparkatmain.com/amenities/,confirmed
+20 water grant st|10701,dog_weight_limit,75,Maximum Number of Pets: 2 ; Max Weight of Pets: 75 lbs.,https://www.zumper.com/apartment-buildings/p288235/modera-hudson-riverfront-downtown-yonkers-yonkers-ny,confirmed

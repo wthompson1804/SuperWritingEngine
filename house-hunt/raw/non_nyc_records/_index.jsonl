@@ -50,3 +50,5 @@
 {"url": "https://www.yonkersny.gov/robots.txt", "retrieved_at": "2026-11-15T21:22:48+00:00", "status": 403, "path": "raw/non_nyc_records/7e59b60b0020b625.txt", "source": "non_nyc_records"}
 {"url": "https://www.cityofwhiteplains.com/robots.txt", "retrieved_at": "2026-11-15T21:22:56+00:00", "status": 200, "path": "raw/non_nyc_records/a89b2f75e591e0ab.txt", "source": "non_nyc_records"}
 {"url": "https://www.stamfordct.gov/robots.txt", "retrieved_at": "2026-11-15T21:23:11+00:00", "status": 403, "path": "raw/non_nyc_records/a55e89cdb2bb788e.txt", "source": "non_nyc_records"}
+{"url": "https://serviceportal.dca.nj.gov/robots.txt", "retrieved_at": "2026-11-15T21:29:58+00:00", "status": 404, "path": "raw/non_nyc_records/270f2b333ed32339.txt", "source": "non_nyc_records"}
+{"url": "https://serviceportal.dca.nj.gov/ultra-bhi-home/ultra-bhi-propertysearch/", "retrieved_at": "2026-11-15T21:30:01+00:00", "status": 200, "path": "raw/non_nyc_records/43336803ac824172.html", "source": "non_nyc_records"}

@@ -4,9 +4,9 @@ Raw rows: 20721. After dedupe: 18290.
 
 | status | listings | buildings |
 |---|---|---|
-| fail | 4192 | 3207 |
-| pass | 1962 | 669 |
-| pending | 12136 | 9002 |
+| fail | 4194 | 3208 |
+| pass | 2027 | 670 |
+| pending | 12069 | 8997 |
 
 ## Each gate (after dedupe)
 
@@ -15,8 +15,8 @@ Raw rows: 20721. After dedupe: 18290.
 | type | 18267 | 23 | 0 |
 | rent | 18263 | 15 | 12 |
 | movein | 5972 | 689 | 11629 |
-| dog | 8547 | 970 | 8773 |
-| elevator | 5035 | 1306 | 11949 |
+| dog | 8556 | 972 | 8762 |
+| elevator | 5116 | 1306 | 11868 |
 | floor | 5944 | 1612 | 10734 |
 | place | 18263 | 0 | 27 |
 | proof | 8039 | 0 | 10251 |
@@ -26,7 +26,7 @@ Raw rows: 20721. After dedupe: 18290.
 | source_site                          |   fail |   pass |   pending |
 |:-------------------------------------|-------:|-------:|----------:|
 | anninlofts.com                       |      0 |      0 |         1 |
-| apartmentlist.com                    |    990 |    976 |      1493 |
+| apartmentlist.com                    |    990 |   1035 |      1434 |
 | avaloncommunities.com                |     86 |     49 |        41 |
 | bltliveworkplay.com (SightMap embed) |     28 |     23 |        26 |
 | bygomes.com                          |      4 |      0 |         0 |
@@ -42,7 +42,7 @@ Raw rows: 20721. After dedupe: 18290.
 | scenicbeaconproperties.com           |      1 |      0 |         2 |
 | solvermella.com                      |      2 |      0 |         3 |
 | thehalden.com                        |      1 |      0 |         2 |
-| trulia                               |   2570 |    775 |      6875 |
+| trulia                               |   2572 |    781 |      6867 |
 | trulia.com                           |      1 |      0 |         0 |
 | vermellacrossing.com                 |      1 |      0 |        12 |
 | vermellaharrison.com                 |      8 |      0 |         2 |
@@ -58,18 +58,18 @@ Raw rows: 20721. After dedupe: 18290.
 
 | pending_reasons           |   count |
 |:--------------------------|--------:|
-| movein;dog;elevator;proof |    4844 |
-| movein;elevator;proof     |    2618 |
-| elevator                  |     931 |
-| dog;elevator              |     691 |
+| movein;dog;elevator;proof |    4836 |
+| movein;elevator;proof     |    2616 |
+| elevator                  |     868 |
+| dog;elevator              |     689 |
 | dog                       |     544 |
-| movein                    |     399 |
-| movein;proof              |     391 |
-| movein;dog;elevator       |     361 |
-| movein;elevator           |     357 |
+| movein                    |     400 |
+| movein;proof              |     398 |
+| movein;dog;elevator       |     366 |
+| movein;elevator           |     351 |
 | movein;dog                |     251 |
 | dog;elevator;proof        |     244 |
-| movein;dog;proof          |     239 |
+| movein;dog;proof          |     240 |
 | elevator;proof            |     238 |
 | dog;elevator;place        |      18 |
 | dog;proof                 |       3 |
@@ -78,22 +78,22 @@ Raw rows: 20721. After dedupe: 18290.
 
 |                                 |   0 |
 |:--------------------------------|----:|
-| ('NJ', 'Jersey City')           | 293 |
+| ('NJ', 'Jersey City')           | 341 |
+| ('NJ', 'Parsippany-Troy Hills') | 107 |
 | ('CT', 'Stamford')              | 104 |
-| ('NJ', 'Parsippany-Troy Hills') |  98 |
 | ('CT', 'New Haven')             |  92 |
 | ('NY', 'New Rochelle')          |  82 |
 | ('NY', 'New York')              |  80 |
 | ('NJ', 'Newark')                |  71 |
 | ('NY', 'Yonkers')               |  63 |
-| ('NY', 'White Plains')          |  60 |
+| ('NY', 'White Plains')          |  61 |
 | ('NY', 'Brooklyn')              |  56 |
+| ('NJ', 'Bayonne')               |  55 |
 | ('CT', 'Norwalk')               |  54 |
-| ('NJ', 'Bayonne')               |  53 |
 | ('NJ', 'Harrison')              |  42 |
 | ('NJ', 'Dover')                 |  41 |
+| ('NJ', 'Hackensack')            |  41 |
 | ('NJ', 'West Windsor')          |  39 |
-| ('NJ', 'Hackensack')            |  37 |
 | ('NJ', 'New Brunswick')         |  32 |
 | ('NJ', 'Bogota')                |  31 |
 | ('NY', 'Bronx')                 |  29 |
