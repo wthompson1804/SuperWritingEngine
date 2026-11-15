@@ -183,3 +183,8 @@
 {"url": "https://skyelofts.com/north/residences", "retrieved_at": "2026-11-15T21:31:27+00:00", "status": 200, "path": "raw/evidence_b7/e548e7478e0b3d89.html", "source": "evidence_b7"}
 {"url": "https://www.bluebrookproperties.com/robots.txt", "retrieved_at": "2026-11-15T21:31:27+00:00", "status": 200, "path": "raw/evidence_b7/3a6581838a7af457.txt", "source": "evidence_b7"}
 {"url": "https://www.bluebrookproperties.com/franklin-school-lofts", "retrieved_at": "2026-11-15T21:31:30+00:00", "status": 200, "path": "raw/evidence_b7/d11d6b5fb20c4bf8.html", "source": "evidence_b7"}
+{"url": "https://parcatglenbrook.com/about/", "retrieved_at": "2026-11-15T21:32:06+00:00", "status": 200, "path": "raw/evidence_b7/c02a81dda0c0c74c.html", "source": "evidence_b7"}
+{"url": "https://skyelofts.com/robots.txt", "retrieved_at": "2026-11-15T21:32:06+00:00", "status": 404, "path": "raw/evidence_b7/b3e71318324a3077.txt", "source": "evidence_b7"}
+{"url": "https://skyelofts.com/north/", "retrieved_at": "2026-11-15T21:32:09+00:00", "status": 200, "path": "raw/evidence_b7/79df1e305d8c5a67.html", "source": "evidence_b7"}
+{"url": "https://skyelofts.com/north/amenities", "retrieved_at": "2026-11-15T21:32:11+00:00", "status": 200, "path": "raw/evidence_b7/b8f769ccb161b299.html", "source": "evidence_b7"}
+{"url": "https://skyelofts.com/north/availability", "retrieved_at": "2026-11-15T21:32:14+00:00", "status": 200, "path": "raw/evidence_b7/f9c78b330c4ee466.html", "source": "evidence_b7"}

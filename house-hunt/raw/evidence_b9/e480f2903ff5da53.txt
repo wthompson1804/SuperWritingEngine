@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /search
+Disallow: /search/
+Disallow: /community/*/widget/
+Sitemap: http://www.rentersvoice.com/sitemap.xml
