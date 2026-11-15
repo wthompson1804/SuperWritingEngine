@@ -46,12 +46,15 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
 - `scripts/`: fetchers and normalizers. `lib.py` holds the cached, throttled fetch.
 - `docs/`: `DATA_DICTIONARY.md`, `SOURCES.md`, the handoff brief, then later `COVERAGE.md`, `CONFLICTS.md` and `FINDINGS.md`.
 
-## Fixed parameters
+## Fixed parameters (plan v3, approved 2026-11-15: `docs/PLAN_V3_APPROVED_2026-11-15.md` is the authority)
 
-- Travel anchor: **Jamaica LIRR station** (Sutphin Blvd and Archer Ave), GTFS LIRR stop_id 102 (40.699608, -73.808530).
-- Budget cap: $2,800/month all-in. Tiers by listed rent: `comfortable` ≤ $2,400, `at_cap` $2,401–2,800,
-  `stretch` $2,801–**3,000**. Will set the $3,000 ceiling on 2026-11-15; the brief's $3,200 no longer applies. Collect nothing above $3,000.
-- Move-in: **December 1, 2026** (Will, 2026-11-15, replacing "December" and the brief's January). A unit must be
-  available on or before Dec 1. Tag `move_in_fit` (`ready_by_dec1`, `after_dec1`, `unknown`).
-- Studio or 1BR only. Elevator, or at most one flight of stairs. Small dog (under 40 lb).
-- Visits are weekend and evening trips, not commutes.
+- Travel anchor: **Jamaica LIRR station**, GTFS LIRR stop_id 102 (40.699608, -73.808530).
+- Gates: studio or 1BR; listed rent ≤ $3,000 **and** all-in ≤ $3,000 (rent + required fees + pet rent + parking +
+  estimated electric, gas, internet; estimates get an asterisk); available now through **Dec 15, 2026**; dogs explicitly
+  allowed with any weight limit ≥ 40 lb; **elevator building only, no ground-floor units**; under 2 h free-flow drive to
+  Jamaica; **Queens included**; live link with price and date read from the listing page.
+- Per neighborhood: up to 10 places plus up to 5 "looks good, but avoid" cards. Avoid thresholds are in the plan.
+- Years (5 or 6), their names, neighborhoods and all wording come from the data. Nothing from the mock's text carries over.
+- Tours start Nov 22. Three approval checkpoints with Will: (A) neighborhoods, year groupings, score thresholds;
+  (B) avoid list; (C) draft page.
+- The earlier brief's tiers, the 98-area seed list as the scope, "no ranking / data only", and the $2,800 cap are superseded.
