@@ -1,0 +1,1810 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "Elevation Benchmarks",
+            "id" : "zgvr-7yfd",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The following dataset includes \"Active Benchmarks,\" which are provided to facilitate the identification of City-managed standard benchmarks. Standard benchmarks are for public and private use in establishing a point in space. Note: The benchmarks are referenced to the Chicago City Datum = 0.00, (CCD = 579.88 feet above mean tide New York). The City of Chicago Department of Water Management’s (DWM) Topographic Benchmark is the source of the benchmark information contained in this online database. The information contained in the index card system was compiled by scanning the original cards, then transcribing some of this information to prepare a table and map. Over time, the DWM will contract services to field verify the data and update the index card system and this online database.This dataset was last updated September 2011. Coordinates are estimated. To view map, go to https://data.cityofchicago.org/Buildings/Elevation-Benchmarks-Map/kmt9-pg57 or for PDF map, go to http://cityofchicago.org/content/dam/city/depts/water/supp_info/Benchmarks/BMMap.pdf. Please read the Terms of Use: http://www.cityofchicago.org/city/en/narr/foia/data_disclaimer.html.",
+            "attribution" : "City of Chicago",
+            "attribution_link" : "http://www.cityofchicago.org",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2013-02-28T15:29:13.000Z",
+            "createdAt" : "2011-09-29T20:21:22.000Z",
+            "metadata_updated_at" : "2013-02-28T15:29:13.000Z",
+            "data_updated_at" : "2011-09-29T20:22:04.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 38,
+                "page_views_last_month" : 216,
+                "page_views_total" : 53873,
+                "page_views_last_week_log" : 5.285402218862249,
+                "page_views_last_month_log" : 7.7615512324444795,
+                "page_views_total_log" : 15.717301564940414
+              },
+            "columns_name" :
+              [
+                "NORTHING",
+                "ESTIMATED LOCATION (city)",
+                "YEAR BENCHMARK ELEVATION FIXED",
+                "BOOK NUMBER",
+                "EASTING",
+                "LATITUDE",
+                "ESTIMATED LOCATION (state)",
+                "LOCATION DESCRIPTION 2",
+                "LONGITUDE",
+                "ESTIMATED LOCATION",
+                "ESTIMATED LOCATION (address)",
+                "ESTIMATED LOCATION (zip)",
+                "Boundaries - ZIP Codes",
+                "Zip Codes",
+                "Community Areas",
+                "Census Tracts",
+                "Historical Wards 2003-2015",
+                "BENCHMARK NUMBER",
+                "MARK DESCRIPTION",
+                "LOCATION DESCRIPTION",
+                "Wards",
+                "ELEVATION"
+              ],
+            "columns_field_name" :
+              [
+                "northing",
+                "estimated_location_city",
+                "year_benchmark_elevation_fixed",
+                "book_number",
+                "easting",
+                "latitude",
+                "estimated_location_state",
+                "location_description_2",
+                "longitude",
+                "estimated_location",
+                "estimated_location_address",
+                "estimated_location_zip",
+                ":@computed_region_rpca_8um6",
+                ":@computed_region_6mkv_f3dw",
+                ":@computed_region_vrxf_vc4k",
+                ":@computed_region_bdys_3d7i",
+                ":@computed_region_awaf_s7ux",
+                "benchmark_number",
+                "mark_description",
+                "location_description",
+                ":@computed_region_43wa_7qmu",
+                "elevation"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Point",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "This column was automatically created in order to record in what polygon from the dataset 'Boundaries - ZIP Codes' (rpca-8um6) the point in column 'estimated_location' is located. This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'Zip Codes' (6mkv-f3dw) the point in column 'estimated_location' is located. This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'Community Areas' (vrxf-vc4k) the point in column 'estimated_location' is located. This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'Census Tracts' (bdys-3d7i) the point in column 'estimated_location' is located. This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'Historical Wards 2003-2015' (awaf-s7ux) the point in column 'estimated_location' is located. This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "",
+                "",
+                "",
+                "This column was automatically created in order to record in what polygon from the dataset 'Wards' (43wa-7qmu) the point in column 'estimated_location' is located. This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                ""
+              ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "align" : "right",
+                  "aggregate" : "count"
+                },
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 9929,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2011-09-29T20:22:10.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Buildings",
+            "domain_tags" : [ "gis", "benchmarks" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Metadata_Frequency",
+                  "value" : "Data is updated as needed"
+                },
+                {
+                  "key" : "Metadata_Data-Owner",
+                  "value" : "Water Management"
+                },
+                {
+                  "key" : "Metadata_Time-Period",
+                  "value" : "Current as of September 2011"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofchicago.org" },
+        "permalink" : "https://data.cityofchicago.org/d/zgvr-7yfd",
+        "link" : "https://data.cityofchicago.org/Buildings/Elevation-Benchmarks/zgvr-7yfd",
+        "owner" :
+          {
+            "id" : "scy9-9wg4",
+            "user_type" : "interactive",
+            "display_name" : "cocadmin"
+          },
+        "creator" :
+          {
+            "id" : "scy9-9wg4",
+            "user_type" : "interactive",
+            "display_name" : "cocadmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Elevation Benchmarks - Map - By Elevation Range",
+            "id" : "4x56-dvnp",
+            "resource_name" : null,
+            "parent_fxf" : [ "zgvr-7yfd" ],
+            "description" : "The following dataset includes \"Active Benchmarks,\" which are provided to facilitate the identification of City-managed standard benchmarks. Standard benchmarks are for public and private use in establishing a point in space. Note: The benchmarks are referenced to the Chicago City Datum = 0.00, (CCD = 579.88 feet above mean tide New York). The City of Chicago Department of Water Management’s (DWM) Topographic Benchmark is the source of the benchmark information contained in this online database. The information contained in the index card system was compiled by scanning the original cards, then transcribing some of this information to prepare a table and map. Over time, the DWM will contract services to field verify the data and update the index card system and this online database.This dataset was last updated September 2011. Coordinates are estimated. To view map, go to https://data.cityofchicago.org/Buildings/Elevation-Benchmarks-Map/kmt9-pg57 or for PDF map, go to http://cityofchicago.org/content/dam/city/depts/water/supp_info/Benchmarks/BMMap.pdf. Please read the Terms of Use: http://www.cityofchicago.org/city/en/narr/foia/data_disclaimer.html.",
+            "attribution" : "City of Chicago",
+            "attribution_link" : "http://www.cityofchicago.org",
+            "contact_email" : null,
+            "type" : "map",
+            "updatedAt" : "2025-02-20T15:00:58.000Z",
+            "createdAt" : "2025-02-11T19:45:42.000Z",
+            "metadata_updated_at" : "2025-02-20T15:00:58.000Z",
+            "data_updated_at" : "2011-09-29T20:22:04.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 30,
+                "page_views_last_month" : 153,
+                "page_views_total" : 8858,
+                "page_views_last_week_log" : 4.954196310386876,
+                "page_views_last_month_log" : 7.266786540694902,
+                "page_views_total_log" : 13.112928141855111
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 469,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "visualization_canvas_map",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-02-11T19:45:43.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Buildings",
+            "domain_tags" : [],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Metadata_Frequency",
+                  "value" : "Data is updated as needed"
+                },
+                {
+                  "key" : "Metadata_Data-Owner",
+                  "value" : "Water Management"
+                },
+                {
+                  "key" : "Metadata_Time-Period",
+                  "value" : "Current as of September 2011"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofchicago.org" },
+        "permalink" : "https://data.cityofchicago.org/d/4x56-dvnp",
+        "link" : "https://data.cityofchicago.org/Buildings/Elevation-Benchmarks-Map-By-Elevation-Range/4x56-dvnp",
+        "owner" :
+          {
+            "id" : "scy9-9wg4",
+            "user_type" : "interactive",
+            "display_name" : "cocadmin"
+          },
+        "creator" :
+          {
+            "id" : "scy9-9wg4",
+            "user_type" : "interactive",
+            "display_name" : "cocadmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Elevation Benchmarks - Map",
+            "id" : "kmt9-pg57",
+            "resource_name" : null,
+            "parent_fxf" : [ "zgvr-7yfd" ],
+            "description" : "The following dataset includes \"Active Benchmarks,\" which are provided to facilitate the identification of City-managed standard benchmarks. Standard benchmarks are for public and private use in establishing a point in space. Note: The benchmarks are referenced to the Chicago City Datum = 0.00, (CCD = 579.88 feet above mean tide New York). The City of Chicago Department of Water Management’s (DWM) Topographic Benchmark is the source of the benchmark information contained in this online database. The information contained in the index card system was compiled by scanning the original cards, then transcribing some of this information to prepare a table and map. Over time, the DWM will contract services to field verify the data and update the index card system and this online database.This dataset was last updated September 2011. Coordinates are estimated. To view map, go to http://cityofchicago.org/content/dam/city/depts/water/supp_info/Benchmarks/BMMap.pdf. Please read the Terms of Use: http://www.cityofchicago.org/city/en/narr/foia/data_disclaimer.html.",
+            "attribution" : "City of Chicago",
+            "attribution_link" : "http://www.cityofchicago.org",
+            "contact_email" : null,
+            "type" : "map",
+            "updatedAt" : "2025-02-20T15:33:05.000Z",
+            "createdAt" : "2025-02-11T20:06:54.000Z",
+            "metadata_updated_at" : "2025-02-20T15:33:05.000Z",
+            "data_updated_at" : "2011-09-29T20:22:04.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 133,
+                "page_views_last_month" : 532,
+                "page_views_total" : 45553,
+                "page_views_last_week_log" : 7.066089190457772,
+                "page_views_last_month_log" : 9.057991722759176,
+                "page_views_total_log" : 15.475290119126637
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 1553,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "visualization_canvas_map",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-02-11T20:06:55.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Buildings",
+            "domain_tags" : [],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Metadata_Frequency",
+                  "value" : "Data is updated as needed"
+                },
+                {
+                  "key" : "Metadata_Data-Owner",
+                  "value" : "Water Management"
+                },
+                {
+                  "key" : "Metadata_Time-Period",
+                  "value" : "Current as of September 2011"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofchicago.org" },
+        "permalink" : "https://data.cityofchicago.org/d/kmt9-pg57",
+        "link" : "https://data.cityofchicago.org/Buildings/Elevation-Benchmarks-Map/kmt9-pg57",
+        "owner" :
+          {
+            "id" : "scy9-9wg4",
+            "user_type" : "interactive",
+            "display_name" : "cocadmin"
+          },
+        "creator" :
+          {
+            "id" : "scy9-9wg4",
+            "user_type" : "interactive",
+            "display_name" : "cocadmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DOB NOW Elevator Safety Compliance",
+            "id" : "e5aq-a4j2",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This data set includes elevator inspection and report filing information through the New York City Department of Buildings' DOB NOW: Elevator Compliance Filings module. The data is collected because the Department of Buildings tracks elevator inspection information.This data include items such as device number, device status, report filing dates, inspetion dates, BIN, and other location information.",
+            "attribution" : "Department of Buildings (DOB)",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-14T21:32:41.000Z",
+            "createdAt" : "2023-01-27T20:04:44.000Z",
+            "metadata_updated_at" : "2026-11-14T21:31:47.000Z",
+            "data_updated_at" : "2026-11-14T21:32:41.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 7561,
+                "page_views_last_month" : 9105,
+                "page_views_total" : 21161,
+                "page_views_last_week_log" : 12.884552133987235,
+                "page_views_last_month_log" : 13.1526017440192,
+                "page_views_total_log" : 14.369188361147408
+              },
+            "columns_name" :
+              [
+                "Device Number",
+                "Block",
+                "Borough",
+                "Census Tract (2020)",
+                "Periodic Report Year",
+                "Device Type",
+                "Equipment Type",
+                "Council District",
+                "Latitude",
+                "BIN",
+                "Longitude",
+                "CAT1 Report Year",
+                "Community Board",
+                "Status Date",
+                "CAT5 Latest Report Filed Date",
+                "Street Name",
+                "Neighborhood Tabulation Area (NTA) (2020)",
+                "House Number",
+                "Device Status",
+                "Periodic Latest Inspection Date",
+                "Postcode",
+                "BBL",
+                "CAT1 Latest Report Filed Date",
+                "Lot"
+              ],
+            "columns_field_name" :
+              [
+                "device_number",
+                "block",
+                "borough",
+                "censustract",
+                "periodic_report_year",
+                "device_type",
+                "equipment_type",
+                "citycouncildistrict",
+                "latitude",
+                "bin",
+                "longitude",
+                "cat1_report_year",
+                "communitydistrict",
+                "status_date",
+                "cat5_latest_report_filed",
+                "street_name",
+                "ntaname",
+                "house_number",
+                "device_status",
+                "periodic_latest_inspection",
+                "zip_code",
+                "bbl",
+                "cat1_latest_report_filed",
+                "lot"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The devices identification number",
+                "Tax Block assigned to the location of the proposed work by the Department of Finance.",
+                "A name to indicate the NYC borough where the proposed work will take place",
+                "The Census Tract (Census 2020) field indicates the U.S. Census Tract where the building is located. Please note that as part of the geocoding process, leading and trailing zeros are dropped",
+                "The year of the periodic report filing",
+                "The type of device group",
+                "The specific type of elevator equipment",
+                "The Council District field indicates the New York City Council District where the building is located",
+                "Latitude of the building's location",
+                "Building Identification Number assigned by Department of City Planning",
+                "Longitude of the building's location",
+                "The reporting year for the Category 1 report",
+                "The Community Board field indicates the New York City Community District where the building is located",
+                "The date of the elevator device's current status",
+                "The latest filing date of the Category 5 report",
+                "The street name for the building owner's address.",
+                "The Neighborhood Tabulation Area (Census 2020) field indicates the New York City Neighborhood area where the building is located",
+                "The house number for the building owner's address.",
+                "The status of the device",
+                "The most recent date of inspection",
+                "The Zip Code for the filing representative's address.",
+                "The BBL (Borough, Block, and Lot) is a unique identifier for each tax lot in the City",
+                "The latest filing date of the Category 1 report",
+                "Tax Lot assigned to the location of the proposed work by the Department of Finance."
+              ],
+            "columns_format" :
+              [
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "view" : "date" },
+                { "view" : "date" },
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                { "view" : "date" },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "view" : "date" },
+                { "decimalSeparator" : ".", "groupSeparator" : "," }
+              ],
+            "download_count" : 8746,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-10-01T19:41:28.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Housing & Development",
+            "domain_tags" :
+              [ "safety", "compliance", "device", "dob", "elevator" ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "Yes" },
+                { "key" : "Update_Data-Change-Frequency", "value" : "Daily" },
+                {
+                  "key" : "Update_Update-Frequency-Details",
+                  "value" : "The underlying data changes second-to-second in the system of record."
+                },
+                { "key" : "Update_Date-Made-Public", "value" : "5/19/2023" },
+                { "key" : "Update_Update-Frequency", "value" : "Daily" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Department of Buildings (DOB)"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/e5aq-a4j2",
+        "link" : "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Elevator-Safety-Compliance/e5aq-a4j2",
+        "owner" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          },
+        "creator" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "NYC Planimetric Database: Elevation Points",
+            "id" : "szwg-xci6",
+            "resource_name" : null,
+            "parent_fxf" : [ "9uxf-ng6q" ],
+            "description" : "Elevation points were captured for all building footprint features.\t\t\t\r\nPlease see the following link for additional documentation- https://github.com/CityOfNewYork/nyc-planimetrics/blob/master/Capture_Rules.md.",
+            "attribution" : "Office of Technology and Innovation (OTI)",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "map",
+            "updatedAt" : "2024-04-25T19:41:01.000Z",
+            "createdAt" : "2016-03-14T21:37:15.000Z",
+            "metadata_updated_at" : "2024-04-25T19:41:01.000Z",
+            "data_updated_at" : "2024-04-24T20:50:47.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 189,
+                "page_views_last_month" : 844,
+                "page_views_total" : 47566,
+                "page_views_last_week_log" : 7.569855608330948,
+                "page_views_last_month_log" : 9.722807531169547,
+                "page_views_total_log" : 15.53767341848018
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 1610,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "visualization_canvas_map",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2024-04-25T19:41:01.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" : [ "elevation", "planimetrics" ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "No" },
+                { "key" : "Update_Date-Made-Public", "value" : "3/15/2016" },
+                { "key" : "Update_Update-Frequency", "value" : "As needed" },
+                {
+                  "key" : "Data-Collection_Data-Collection",
+                  "value" : "NYC Planimetric Database"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Office of Technology and Innovation (OTI)"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/szwg-xci6",
+        "link" : "https://data.cityofnewyork.us/Transportation/NYC-Planimetric-Database-Elevation-Points/szwg-xci6",
+        "owner" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          },
+        "creator" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Elevator-Licenses",
+            "id" : "797v-5fp2",
+            "resource_name" : null,
+            "parent_fxf" : [ "cy8e-89cz" ],
+            "description" : "Master list of all active licenses with the Division of Fire Safety.",
+            "attribution" : "Division of Fire Safety",
+            "attribution_link" : "http://firesafety.vermont.gov",
+            "contact_email" : null,
+            "type" : "filter",
+            "updatedAt" : "2026-11-13T21:00:24.000Z",
+            "createdAt" : "2020-08-21T16:09:11.000Z",
+            "metadata_updated_at" : "2024-10-02T00:58:10.000Z",
+            "data_updated_at" : "2026-11-13T21:00:24.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 35,
+                "page_views_last_month" : 187,
+                "page_views_total" : 4568,
+                "page_views_last_week_log" : 5.169925001442312,
+                "page_views_last_month_log" : 7.554588851677638,
+                "page_views_total_log" : 12.15766272720845
+              },
+            "columns_name" :
+              [
+                "Type Desc",
+                "Zip Code",
+                "License Exp Date",
+                "Level Desc",
+                "License Number",
+                "State",
+                "Street Address",
+                "City",
+                "Last Name",
+                "First Name"
+              ],
+            "columns_field_name" :
+              [
+                "type_desc",
+                "zip_code",
+                "license_exp_date",
+                "level_desc",
+                "license_number",
+                "state",
+                "street_address",
+                "city",
+                "last_name",
+                "first_name"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" : [ "", "", "", "", "", "", "", "", "", "" ],
+            "columns_format" :
+              [
+                {},
+                {},
+                { "view" : "date", "align" : "left" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 487,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2020-08-21T16:09:38.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Government",
+            "domain_tags" : [],
+            "domain_metadata" :
+              [
+                { "key" : "Data_Bytes", "value" : "" },
+                { "key" : "Data_Quality", "value" : "" },
+                { "key" : "Data_Granularity", "value" : "" }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.vermont.gov",
+            "license" : "Open Data Commons Open Database License"
+          },
+        "permalink" : "https://data.vermont.gov/d/797v-5fp2",
+        "link" : "https://data.vermont.gov/Government/Elevator-Licenses/797v-5fp2",
+        "owner" :
+          {
+            "id" : "8yew-ttc3",
+            "user_type" : "interactive",
+            "display_name" : "VBOWMAN"
+          },
+        "creator" :
+          {
+            "id" : "8yew-ttc3",
+            "user_type" : "interactive",
+            "display_name" : "VBOWMAN"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "LRT Elevator/Escalator Outages",
+            "id" : "snws-u3zx",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "A near-real-time (updated every 5 minutes) list of Elevators and/or Escalators, located in the LRT network, that have a current operational status of Out of Service.",
+            "attribution" : "City of Edmonton",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T21:17:25.000Z",
+            "createdAt" : "2016-11-09T23:08:53.000Z",
+            "metadata_updated_at" : "2024-10-18T16:10:36.000Z",
+            "data_updated_at" : "2026-11-15T21:17:25.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 24,
+                "page_views_last_month" : 94,
+                "page_views_total" : 6887,
+                "page_views_last_week_log" : 4.643856189774724,
+                "page_views_last_month_log" : 6.569855608330948,
+                "page_views_total_log" : 12.749869427396845
+              },
+            "columns_name" :
+              [
+                "Device Op Status",
+                "LRT Station ID",
+                "LRT Route",
+                "LRT Device Location",
+                "Polled Time Stamp",
+                "Device Op Status Code",
+                "LRT Stop",
+                "Device Type",
+                "LRT Station Name",
+                "Device ID",
+                "Since Time Stamp"
+              ],
+            "columns_field_name" :
+              [
+                "device_op_status",
+                "lrt_station_id",
+                "lrt_route",
+                "lrt_device_location",
+                "polled_time_stamp",
+                "device_op_status_code",
+                "lrt_stop",
+                "device_type",
+                "lrt_station_name",
+                "device_id",
+                "since_time_stamp"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Calendar date"
+              ],
+            "columns_description" :
+              [ "", "", "", "", "", "", "", "", "", "", "" ],
+            "columns_format" :
+              [
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "view" : "date_shortmonthdy_shorttime", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                { "view" : "date_shortmonthdy_shorttime", "align" : "left" }
+              ],
+            "download_count" : 926,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2016-11-10T17:33:46.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation Infrastructure",
+            "domain_tags" : [ "elevator", "outage", "escalator", "lrt" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Time-Frame_Date-Made-Public",
+                  "value" : "15-NOV-2016"
+                },
+                {
+                  "key" : "Time-Frame_Update-Frequency",
+                  "value" : "Near Real-Time"
+                },
+                {
+                  "key" : "Time-Frame_Automated-or-Manual",
+                  "value" : "Automated"
+                },
+                {
+                  "key" : "Administration_Job-Scheduling",
+                  "value" : "every 2 minutes"
+                },
+                {
+                  "key" : "Quality-Indicators_Duplicates-Removed",
+                  "value" : "Yes"
+                },
+                {
+                  "key" : "Quality-Indicators_Verified-for-Accuracy",
+                  "value" : "Yes"
+                },
+                {
+                  "key" : "General-Information_Primary-Dataset-or-View",
+                  "value" : "Primary"
+                },
+                {
+                  "key" : "General-Information_Internal-or-External",
+                  "value" : "Internally Sourced Data "
+                },
+                {
+                  "key" : "General-Information_Purpose",
+                  "value" : "To provide a list of Out of Service devices (elevators and escalators) that are found in the LRT network."
+                }
+              ]
+          },
+        "metadata" :
+          { "domain" : "data.edmonton.ca", "license" : "See Terms of Use" },
+        "permalink" : "https://data.edmonton.ca/d/snws-u3zx",
+        "link" : "https://data.edmonton.ca/Transportation-Infrastructure/LRT-Elevator-Escalator-Outages/snws-u3zx",
+        "owner" :
+          {
+            "id" : "dhgx-s4x9",
+            "user_type" : "interactive",
+            "display_name" : "opendata@edmonton.ca"
+          },
+        "creator" :
+          {
+            "id" : "dhgx-s4x9",
+            "user_type" : "interactive",
+            "display_name" : "opendata@edmonton.ca"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "1 foot Digital Elevation Model (DEM)",
+            "id" : "dpc8-z3jc",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "NYC 1foot Digital Elevation Model:\r\nA bare-earth, hydro-flattened, digital-elevation surface model derived from 2010 Light Detection and Ranging (LiDAR) data. Surface models are raster representations derived by interpolating the LiDAR point data to produce a seamless gridded elevation data set. A Digital Elevation Model (DEM) is a surface model generated from the LiDAR returns that correspond to the ground with all buildings, trees and other above ground features removed. The cell values represent the elevation of the ground relative to sea level. The DEM was generated by interpolating the LiDAR ground points to create a 1 foot resolution seamless surface. Cell values correspond to the ground elevation value (feet) above sea level. A proprietary approach to surface model generation was developed that reduced spurious elevation values in areas where there were no LiDAR returns, primarily beneath buildings and over water. This was combined with a detailed manual QA/QC process, with emphasis on accurate representation of docks and bare-earth within 2000ft of the water bodies surrounding each of the five boroughs.\r\n\r\nPlease see the following link for additional documentation- https://github.com/CityOfNewYork/nyc-geo-metadata/blob/master/Metadata/Metadata_DigitalElevationModel.md",
+            "attribution" : "Office of Technology and Innovation (OTI)",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "href",
+            "updatedAt" : "2024-10-30T14:28:24.000Z",
+            "createdAt" : "2013-08-09T23:09:58.000Z",
+            "metadata_updated_at" : "2024-10-30T14:28:24.000Z",
+            "data_updated_at" : "2013-08-09T23:09:58.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 289,
+                "page_views_last_month" : 1186,
+                "page_views_total" : 58788,
+                "page_views_last_week_log" : 8.179909090014934,
+                "page_views_last_month_log" : 10.213104219641908,
+                "page_views_total_log" : 15.843258617433529
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 6524,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "href",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2013-08-23T17:40:18.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "City Government",
+            "domain_tags" : [ "dem", "dep", "1ft" ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "N/A" },
+                { "key" : "Update_Date-Made-Public", "value" : "8/23/2013" },
+                { "key" : "Update_Update-Frequency", "value" : "As needed" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Office of Technology and Innovation (OTI)"
+                },
+                {
+                  "key" : "Legislative-Compliance_Geo-coding-Attached?",
+                  "value" : ""
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.cityofnewyork.us",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "zip" : "https://sa-static-customer-assets-us-east-1-fedramp-prod.s3.amazonaws.com/data.cityofnewyork.us/NYC_DEM_1ft_Float_2.zip"
+                    },
+                  "described_by" : "https://github.com/CityOfNewYork/nyc-geo-metadata/blob/master/Metadata/Metadata_DigitalElevationModel.md"
+                }
+              ],
+            "access_points" :
+              {
+                "zip" : "https://sa-static-customer-assets-us-east-1-fedramp-prod.s3.amazonaws.com/data.cityofnewyork.us/NYC_DEM_1ft_Float_2.zip"
+              }
+          },
+        "permalink" : "https://data.cityofnewyork.us/d/dpc8-z3jc",
+        "link" : "https://data.cityofnewyork.us/City-Government/1-foot-Digital-Elevation-Model-DEM-/dpc8-z3jc",
+        "owner" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          },
+        "creator" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DOB NOW: Build Elevator Permit Applications",
+            "id" : "kfp4-dz4h",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This collection contains applications submitted online via \"DOB NOW: BUILD\" portal by Design Professionals to get an authorization to begin work on an elevator project.\n</p>\nData in this collection is limited to applications (job filings) related to elevator applications only (also known as ELV1)  submitted on DOB NOW, and includes Initial (New), subsequent, and Post Approval Amendment (PAA) filing types.\n</br>\nDOB NOW: BUILD is an online portal that allows users to file for permit applications, check the status of an application, make payments, schedule appointments, and print permits.\n\nThis dataset contains general information about the job filing, including location, applicant, type of work and fee information. Each instance of elevator work might have one row/record for the Initial application, as well as one or more Post Approval Amendment. (See Filing_Type field.)",
+            "attribution" : "Department of Buildings (DOB)",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T17:31:54.000Z",
+            "createdAt" : "2019-10-03T18:49:55.000Z",
+            "metadata_updated_at" : "2026-11-15T17:31:07.000Z",
+            "data_updated_at" : "2026-11-15T17:31:54.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 313,
+                "page_views_last_month" : 1118,
+                "page_views_total" : 19966,
+                "page_views_last_week_log" : 8.294620748891626,
+                "page_views_last_month_log" : 10.127994320976393,
+                "page_views_total_log" : 14.285329966700425
+              },
+            "columns_name" :
+              [
+                "Job Filling Number",
+                "Job Number",
+                "Filing Number",
+                "Filing Date",
+                "Filing Type",
+                "Elevator Device Type",
+                "Filing Status",
+                "Filing Status or Filing Includes",
+                "Building Code",
+                "Electrical Permit Number",
+                "BIN",
+                "House Number",
+                "Street Name",
+                "ZIP",
+                "Borough",
+                "Block",
+                "Lot",
+                "BuildingType",
+                "Building Stories",
+                "Is In Conjunction",
+                "Associated BIS Job Number",
+                "Total Construction Floor Area",
+                "Plan Examiner Assigned Date",
+                "Incomplete Date",
+                "Last Incomplete Submission Date",
+                "1st Objection Date",
+                "Last Objection Date",
+                "Resubmission Date",
+                "Permit Entire Date",
+                "Signed Off Date",
+                "Applicant First Name",
+                "Applicant Last Name",
+                "Applicant Business Name",
+                "Applicant Address",
+                "Applicant City",
+                "Applicant State",
+                "Applicant Zip",
+                "Applicant License Number",
+                "Design Professional First Name",
+                "Design Professional Last Name",
+                "Design Professional Business Name",
+                "Design Professional Address",
+                "Design Professional City",
+                "Design Professional State",
+                "Design Professional  Zip",
+                "Design Professional License Number",
+                "Owner First Name",
+                "Owner Last Name",
+                "Owner Title",
+                "Owner Business Name",
+                "Owner Address",
+                "Owner City",
+                "Owner State",
+                "Owner Zip",
+                "Owner Type",
+                "Asbestos Abatement Complaince",
+                "DEP ACP-5 Control No",
+                "Scope of Work",
+                "General Liability",
+                "GL Certificate Policy No",
+                "GL Expiration Date",
+                "Workers Compensation",
+                "WC Certificate Policy No",
+                "WC Expiration Date",
+                "Disability",
+                "Disability Certificate Policy No",
+                "Disability Expiration Date",
+                "Estimated Cost",
+                "Filing Fee",
+                "No Good Check",
+                "Total Fee",
+                "Amount Paid",
+                "Amount Due",
+                "Review Type (PPN)",
+                "Permit Expiration Date",
+                "LATITUDE",
+                "LONGITUDE",
+                "COMMUNITY_DISTRICT_NUMBER",
+                "CITY_COUNCIL_DISTRICT",
+                "CENSUS_TRACT",
+                "BBL",
+                "NTA_NAME"
+              ],
+            "columns_field_name" :
+              [
+                "job_filing_number",
+                "job_number",
+                "filing_number",
+                "filing_date",
+                "filing_type",
+                "elevatordevicetype",
+                "filing_status",
+                "filingstatus_or_filingincludes",
+                "building_code",
+                "electrical_permit_number",
+                "bin",
+                "house_number",
+                "street_name",
+                "zip",
+                "borough",
+                "block",
+                "lot",
+                "building_type",
+                "buildingstories",
+                "is_in_conjunction",
+                "associatedjobnumber",
+                "total_construction_floor",
+                "plan_examiner_assigned_date",
+                "incomplete_date",
+                "last_incomplete_submission",
+                "first_objection_date",
+                "last_objection_date",
+                "resubmission_date",
+                "permit_entire_date",
+                "signedoff_date",
+                "applicant_firstname",
+                "applicant_lastname",
+                "applicant_businessname",
+                "applicant_address",
+                "applicant_city",
+                "applicant_state",
+                "applicant_zip",
+                "applicant_license_number",
+                "designprofessional_firstname",
+                "designprofessional_lastname",
+                "designprofessional",
+                "designprofessional_address",
+                "designprofessional_city",
+                "designprofessional_state",
+                "designprofessional_zip",
+                "designprofessional_license",
+                "owner_firstname",
+                "owner_lastname",
+                "owner_title",
+                "owner_businessname",
+                "owner_address",
+                "owner_city",
+                "owner_state",
+                "owner_zip",
+                "owner_type",
+                "asbestosabatementcompliance",
+                "depacp5controlno",
+                "descriptionofwork",
+                "gl_company",
+                "gl_policy",
+                "gl_expirationdate",
+                "worker_compensation_company",
+                "worker_compensation_policy",
+                "worker_compensation",
+                "disability_company",
+                "disability_policy",
+                "disability_expirationdate",
+                "estimated_cost",
+                "filing_fee",
+                "no_good_check",
+                "total_fee",
+                "amount_paid",
+                "amount_due",
+                "review_type_ppn",
+                "permit_expiration_date",
+                "latitude",
+                "longitude",
+                "community_district_number",
+                "city_council_district",
+                "census_tract",
+                "bbl",
+                "nta_name"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Checkbox",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Calendar date",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "A unique identifier assigned to a job filing. It consists of job number (a letter indicating the borough followed by an 8-digit number)  hyphenated with Filing Number (a 2-digit code identifying the filing type). Once the permit is issued, a suffix  \"-VT\" is added to the job filing number. (Example: B00016701-I1-VT)",
+                "A 9-digit identifier for the job. The first letter indicates the borough for which the filing is associated, followed by an 8-digit ID number",
+                "A 2-digit code identifying the filing type",
+                "Filing Date; Date and Time Format: '2018-04-25 21:52:00.000'",
+                "Indicates whether this filing is new, subsequent or Post Approval Amendment (PAA) filing",
+                "Expected Values: Accessibility Lift, Conveyor,  Dumbwaiter, Elevator, Escalator, Moving Walk, Personnel Hoist",
+                "Indicates status of the permit application. Example: Permit Issued",
+                "Indicates if the filing status includes any other filings",
+                "Building code which is single select value",
+                "Electrical Permit Number",
+                "Building Identification Number (BIN) of the job location. Assigned by Department of City Planning.",
+                "The house number of the job location",
+                "The Street Name of the job location",
+                "Zip code of the job location",
+                "Borough of job location",
+                "Tax block number of the job location. Assigned by the Department of Finance.",
+                "Tax lot number of the job location. Assigned by the Department of Finance.",
+                "Category of Building - used for Inconjunction fee. 1,2,3 family - 130$ or other - 225$",
+                "Number of Stories in the Building ",
+                "Flag: Yes or No",
+                "Associated BIS Job Number if applicable; ",
+                "",
+                "Plan Examiner Assigned Date",
+                "Incomplete Date",
+                "Last Incomplete Submission Date",
+                "First Objection Date",
+                "Last Objection date",
+                "Re-submission Date",
+                "Permit Entire Date",
+                "Signed Off Date",
+                "First name of the applicant",
+                "Last name of the applicant",
+                "Name of Applicant Business",
+                "Street address of the applicant's firm",
+                "City of the applicant's firm",
+                "State of the applicant's firm",
+                "ZIP code of the applicant's firm",
+                "Applicant's license number, DOB issues licenses  to qualified individuals working in the construction trades in New York City.",
+                "First Name of Design Professional",
+                "Last Name of Design Professional",
+                "Design Professional Business Name",
+                "Street address of the Design Professional",
+                "City of Design Professional's firm",
+                "State of Design Professional's State",
+                "Zip code of Design Professional's State",
+                "Design Professional License number, DOB issues licenses  to qualified design professionals working in the construction trades in New York City.",
+                "First Name of Owner",
+                "Last Name of Owner",
+                "Title information for Owner",
+                "Owner Information Business Name",
+                "Street Address of the Owner",
+                "City of the Owner",
+                "State of the Owner",
+                "Zip of the Owner",
+                "Owner Type",
+                "Asbestos Abatement Compliance",
+                "DEP ACP-5 Control No.",
+                "Scope of Work",
+                "Name of the company providing General Liability insurance to the applicant's firm",
+                "Policy number of the General Liability insurance covering the applicant's firm",
+                "Expiration date of the General Liability insurance policy covering the applicant's firm",
+                "Name of the company providing Workers Compensation insurance to the applicant's firm",
+                "Policy number of the Workers Compensation insurance covering the applicant's firm",
+                "Expiration date of the Workers Compensation  insurance policy covering the applicant's firm",
+                "Insurance Information Disability",
+                "Insurance Information Disability Certification/Policy No",
+                "Insurance Information Disability Expiration Date",
+                "Estimated Cost",
+                "Fee required for the job filing",
+                "A fee required if first check payment to DOB was rejected / returned",
+                "Indicates total fee amount (quantity * cost)",
+                "Amount paid by applicant",
+                "Balance remaining ",
+                "Whether filed as minor/ordinary repair work Policy and Procedure Notice and will be self-certified by the elevator company.\n",
+                "The date of the latest permit expiration",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                { "view" : "date" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "view" : "date" },
+                {},
+                {},
+                { "view" : "date" },
+                { "view" : "date" },
+                { "view" : "date" },
+                { "view" : "date" },
+                { "view" : "date" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "view" : "date" },
+                {},
+                {},
+                { "view" : "date" },
+                {},
+                {},
+                { "view" : "date" },
+                { "precisionStyle" : "currency" },
+                { "precisionStyle" : "currency" },
+                { "precisionStyle" : "currency" },
+                { "precisionStyle" : "currency" },
+                { "precisionStyle" : "currency" },
+                { "precisionStyle" : "currency" },
+                {},
+                { "view" : "date" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 48495,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-09-24T19:53:57.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Housing & Development",
+            "domain_tags" :
+              [
+                "permit",
+                "elevator",
+                "nyc",
+                "dob",
+                "buildings",
+                "elv1",
+                "device",
+                "code",
+                "work",
+                "job",
+                "filing"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Data-Collection_Data-Collection",
+                  "value" : "DOB NOW Elevator Permits Data"
+                },
+                { "key" : "Update_Automation", "value" : "Yes" },
+                { "key" : "Update_Date-Made-Public", "value" : "10/31/2019" },
+                { "key" : "Update_Update-Frequency", "value" : "Daily" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Department of Buildings (DOB)"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/kfp4-dz4h",
+        "link" : "https://data.cityofnewyork.us/Housing-Development/DOB-NOW-Build-Elevator-Permit-Applications/kfp4-dz4h",
+        "owner" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          },
+        "creator" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Building Elevation and Subgrade (BES)",
+            "id" : "bsin-59hv",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Building Elevation and Subgrade data contains New York City building centroids derived from the Department of Building's (DOB) February 26th, 2022 building footprint dataset. Each record contains a grade and first floor measurement for each building (recorded as feet above sea-level in the NADV88 vertical datum) and indicates if subgrade space exists. DCP contracted with an external data vendor to generate a single point, or centroid, that represented the location of the center of every building recorded in the DOB dataset. The dataset excluded the footprints of small accessory buildings such as sheds. Each row within the dataset represents one building centroid, and records the X and Y coordinates of that centroid in the NAD 1983 coordinate system.",
+            "attribution" : "Department of City Planning (DCP)",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2023-10-25T14:59:28.000Z",
+            "createdAt" : "2023-09-12T19:06:08.000Z",
+            "metadata_updated_at" : "2023-10-25T14:59:28.000Z",
+            "data_updated_at" : "2023-09-19T16:07:13.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 108,
+                "page_views_last_month" : 538,
+                "page_views_total" : 15131,
+                "page_views_last_week_log" : 6.768184324776926,
+                "page_views_last_month_log" : 9.074141462752506,
+                "page_views_total_log" : 13.885315061049376
+              },
+            "columns_name" :
+              [
+                "Council",
+                "subgrade",
+                "Community Districts",
+                "Borough Boundaries",
+                "Police Precincts",
+                "bbl",
+                "borough",
+                "block",
+                "pluto_bbl",
+                "CDTAName",
+                "longitude",
+                "y",
+                "lot",
+                "CDTA2020",
+                "z_grade",
+                "bin",
+                "x",
+                "the_geom",
+                "notes1",
+                "BoroCD",
+                "NTAName",
+                "notes3",
+                "BoroCT2020",
+                "CTLabel",
+                "notes2",
+                "NTA2020",
+                "City Council Districts",
+                "latitude",
+                "address",
+                "z_floor"
+              ],
+            "columns_field_name" :
+              [
+                "council",
+                "subgrade",
+                ":@computed_region_f5dn_yrer",
+                ":@computed_region_yeji_bk3q",
+                ":@computed_region_sbqj_enih",
+                "bbl",
+                "borough",
+                "block",
+                "pluto_bbl",
+                "cdtaname",
+                "longitude",
+                "y",
+                "lot",
+                "cdta2020",
+                "z_grade",
+                "bin",
+                "x",
+                "the_geom",
+                "notes1",
+                "borocd",
+                "ntaname",
+                "notes3",
+                "boroct2020",
+                "ctlabel",
+                "notes2",
+                "nta2020",
+                ":@computed_region_92fq_4b7q",
+                "latitude",
+                "address",
+                "z_floor"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Point",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "NYC City Council District code. This field contains a two-digit city council district number, which is preceded with a zero when the district number is one digit. There are currently 51 city council districts in the City, which serve as political districts for the legislative branch of city government.",
+                "Whether or not a subgrade space was observed.",
+                "This column was automatically created in order to record in what polygon from the dataset 'Community Districts' (f5dn-yrer) the point in column 'the_geom' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'Borough Boundaries' (yeji-bk3q) the point in column 'the_geom' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'Police Precincts' (sbqj-enih) the point in column 'the_geom' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "The borough, block, lot identifier based on the 22v1 DOB building footprint dataset. An identifier for the tax lot that the building centroid is located on.",
+                "The borough code for the borough where the building is located.",
+                "The block where the building is located.",
+                "The borough, block, lot from the MapPLUTO 22v2 release.  An identifier for the tax lot that the building centroid is located on",
+                "2020 Community District Tabulation Area Name",
+                "Longitude in WGS84 / SRID:4326",
+                "The Y coordinate of the building centroid in the NAD 1983 coordinate system",
+                "The lot where the building is located.",
+                "2020 Community District Tabulation Area Code",
+                "The elevation of the building at it's lowest adjacent grade - the lowest point where the building touches the ground (feet).",
+                "The building identification number - a unique identifier for every building in New York City, assigned by the Department of Buildings. First digit is the boro code, followed by six digit unique ID.",
+                "The X coordinate of the building centroid in the NAD 1983 coordinate system",
+                "Geometry type",
+                "Indicates if there were any obstacles to obtaining the z_grade or z_floor measurement.",
+                "NYC Community District code. 3 digit code, first digit is boro code, followed by two digit community district or joint interest area number. The city is divided into 59 community districts and 12 joint interest areas, which are large parks or airports that are not considered part of any community district.",
+                "2020 Neighborhood Tabulation Area Name",
+                "Indicates how flood water may enter a subgrade space.",
+                "Merged string of borough code and 2020 census tract number.",
+                "The census tract identifier for the polygon. Each census tract number is unique to its borough.",
+                "Indicates any present ground floor attributes of the building.",
+                "2020 Neighborhood Tabulation Area Code",
+                "This column was automatically created in order to record in what polygon from the dataset 'City Council Districts' (92fq-4b7q) the point in column 'the_geom' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "Latitude in WGS84 / SRID:4326",
+                "The street address of the building.",
+                "The elevation of what is estimated to be the lowest actively used floor (feet)"
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "noCommas" : "true" },
+                { "noCommas" : "true" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "noCommas" : "true" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 5172,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-09-19T16:15:13.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "City Government",
+            "domain_tags" :
+              [
+                "dcp",
+                "flood risk",
+                "building",
+                "bes",
+                "sustainability",
+                "flooding",
+                "elevation",
+                "department of city planning",
+                "climate change",
+                "resiliency",
+                "subgrade"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "No" },
+                {
+                  "key" : "Update_Data-Change-Frequency",
+                  "value" : "Historical data"
+                },
+                {
+                  "key" : "Update_Update-Frequency-Details",
+                  "value" : "This is a one time data capture with no planned updates"
+                },
+                { "key" : "Update_Date-Made-Public", "value" : "9/19/2023" },
+                {
+                  "key" : "Update_Update-Frequency",
+                  "value" : "Historical data"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Department of City Planning (DCP)"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/bsin-59hv",
+        "link" : "https://data.cityofnewyork.us/City-Government/Building-Elevation-and-Subgrade-BES-/bsin-59hv",
+        "owner" :
+          {
+            "id" : "iqqb-gm94",
+            "user_type" : "interactive",
+            "display_name" : "DCP Open Data"
+          },
+        "creator" :
+          {
+            "id" : "iqqb-gm94",
+            "user_type" : "interactive",
+            "display_name" : "DCP Open Data"
+          }
+      }
+    ],
+  "resultSetSize" : 1382,
+  "timings" : { "serviceMillis" : 40, "searchMillis" : [ 4, 10 ] },
+  "warnings" : []
+}

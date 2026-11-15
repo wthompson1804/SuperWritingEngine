@@ -1,0 +1,10 @@
+# JC IMPACT — Public Safety Dashboard
+# Allow search engines to find the main page
+# Block crawling of raw data files and report documents
+
+User-agent: *
+Allow: /
+Disallow: /*.json$
+Disallow: /*.pdf$
+
+Sitemap: https://impact.jcnj.org/sitemap.xml

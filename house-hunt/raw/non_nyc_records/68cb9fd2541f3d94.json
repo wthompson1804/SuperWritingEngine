@@ -1,0 +1,287 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "RBHS Facility List",
+            "id" : "sh9m-6wmk",
+            "resource_name" : null,
+            "parent_fxf" : [ "di2b-9hwr" ],
+            "description" : "Bureau of Rooming and Boarding House Standards - Licensed Facilities Inspection Reports",
+            "attribution" : "NJDCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "story",
+            "updatedAt" : "2025-11-21T19:09:31.932Z",
+            "createdAt" : "2025-06-16T14:35:48.000Z",
+            "metadata_updated_at" : "2025-11-21T19:09:32.000Z",
+            "data_updated_at" : "2025-11-21T19:09:31.932Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 217,
+                "page_views_last_month" : 953,
+                "page_views_total" : 10701,
+                "page_views_last_week_log" : 7.768184324776926,
+                "page_views_last_month_log" : 9.897845456005513,
+                "page_views_total_log" : 13.385592813601363
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "story",
+            "lens_display_type" : "story",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-06-16T14:42:55.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Education",
+            "domain_tags" :
+              [
+                "codes",
+                "rooming and boarding house",
+                "njdca",
+                "new jersey",
+                "inspection reports",
+                "division of codes and standards",
+                "dca"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "6/16/2025"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "On-Demand/As-Needed"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "State"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "On-Demand/As-Needed"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/stories/s/sh9m-6wmk",
+        "link" : "https://data.nj.gov/stories/s/sh9m-6wmk",
+        "owner" :
+          {
+            "id" : "u7rr-pxrd",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DataNJAdminSK"
+          },
+        "creator" :
+          {
+            "id" : "u7rr-pxrd",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DataNJAdminSK"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "RBHS Facility List",
+            "id" : "di2b-9hwr",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Bureau of Rooming and Boarding House Standards - Licensed Facilities Inspection Reports.",
+            "attribution" : "NJDCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "dataset",
+            "updatedAt" : "2025-11-05T19:17:41.000Z",
+            "createdAt" : "2025-06-13T17:07:15.000Z",
+            "metadata_updated_at" : "2025-11-05T19:17:40.000Z",
+            "data_updated_at" : "2025-11-05T19:17:41.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 41,
+                "page_views_last_month" : 169,
+                "page_views_total" : 1092,
+                "page_views_last_week_log" : 5.392317422778761,
+                "page_views_last_month_log" : 7.409390936137703,
+                "page_views_total_log" : 10.094077685671905
+              },
+            "columns_name" :
+              [
+                "ZIP",
+                "FACILITY ID",
+                "CITY",
+                "ADDRESS1",
+                "FACILITY NAME",
+                "COUNTY",
+                "MUNI NAME",
+                "MUNI CODE",
+                "STATE",
+                "FACILITY TYPE",
+                "PDF FILES"
+              ],
+            "columns_field_name" :
+              [
+                "zip",
+                "facility_id",
+                "city",
+                "address1",
+                "facility_name",
+                "county",
+                "muni_name",
+                "muni_code",
+                "state",
+                "facility_type",
+                "unnamed_unnamed"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "URL"
+              ],
+            "columns_description" :
+              [
+                "Zip Code",
+                "Facility ID",
+                "City",
+                "Address of the Facility",
+                "Facility Name",
+                "County Name",
+                "Municipal Name",
+                "Municipal Code",
+                "State",
+                "Facility Type",
+                "PDF files of the Inspection"
+              ],
+            "columns_format" :
+              [
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 1667,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-06-23T15:35:12.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Education",
+            "domain_tags" :
+              [
+                "division of codes and standards",
+                "dca",
+                "codes",
+                "new jersey",
+                "njdca",
+                "rooming and boarding",
+                "rooming and boarding house"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "06/13/2025"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "On-Demand/As-Needed"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "On-Demand/As-Needed"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/di2b-9hwr",
+        "link" : "https://data.nj.gov/Education/RBHS-Facility-List/di2b-9hwr",
+        "owner" :
+          {
+            "id" : "u7rr-pxrd",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DataNJAdminSK"
+          },
+        "creator" :
+          {
+            "id" : "u7rr-pxrd",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DataNJAdminSK"
+          }
+      }
+    ],
+  "resultSetSize" : 2,
+  "timings" : { "serviceMillis" : 27, "searchMillis" : [ 12, 6 ] },
+  "warnings" : []
+}

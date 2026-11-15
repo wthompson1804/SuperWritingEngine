@@ -1,0 +1,1782 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "MTA Subway Elevator and Escalator Asset Inventory",
+            "id" : "94fv-bak7",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Subway Elevator and Escalator Asset Inventory represents active subway elevator and escalator assets in MTA’s subway stations (excluding withdrawn and pending machines).",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T11:27:01.000Z",
+            "createdAt" : "2025-12-23T19:02:05.000Z",
+            "metadata_updated_at" : "2026-11-15T11:26:59.000Z",
+            "data_updated_at" : "2026-11-15T11:27:01.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 179,
+                "page_views_last_month" : 845,
+                "page_views_total" : 14256,
+                "page_views_last_week_log" : 7.491853096329675,
+                "page_views_last_month_log" : 9.72451385311995,
+                "page_views_total_log" : 13.799382817119824
+              },
+            "columns_name" :
+              [
+                "Installer",
+                "Notes",
+                "Station Complex Description",
+                "Station Complex MRN",
+                "Station Name",
+                "Escalator Step Width",
+                "Escalator Number of Steps",
+                "Latest Installation Date",
+                "Original Installation Date",
+                "X Coordinate",
+                "Redundant Elevator Platform Access",
+                "Redundant Elevator Access Between Mezzanines",
+                "Redundant Elevator Mezzanine Access",
+                "Redundant Elevator Street Access",
+                "Redundant Elevator",
+                "Elevator Mezzanine 2 Access",
+                "Elevator Mezzanine 1 Access",
+                "Elevator Direction Serviced",
+                "Elevator Capacity",
+                "Escalator Rise",
+                "Street Access",
+                "Revenue Machine",
+                "Maintained By",
+                "NYCT Owned",
+                "Service Status",
+                "Service Status Code",
+                "Y Coordinate",
+                "Subway Line",
+                "Station Description",
+                "Station MRN",
+                "Asset Class",
+                "Equipment Code",
+                "Elevator or Escalator",
+                "Exposed to Weather",
+                "Elevator Loading Class",
+                "Elevator Rise",
+                "Elevator Order",
+                "Alternative Route",
+                "Service Life",
+                "Borough",
+                "Georeference",
+                "Elevator Platform Access",
+                "Elevator Number of Landings",
+                "ADA Compliant",
+                "Counties",
+                "New York Zip Codes",
+                "NYS Municipal Boundaries"
+              ],
+            "columns_field_name" :
+              [
+                "installer",
+                "notes",
+                "station_complex_description",
+                "station_complex_mrn",
+                "station_name",
+                "escalator_step_width",
+                "escalator_number_of_steps",
+                "latest_installation_date",
+                "original_installation_date",
+                "x_coordinate",
+                "redundant_elevator_platform",
+                "redundant_elevator_access",
+                "redundant_elevator_mezzanine",
+                "redundant_elevator_street",
+                "redundant_elevator",
+                "elevator_mezzanine_2_access",
+                "elevator_mezzanine_1_access",
+                "elevator_direction_serviced",
+                "elevator_capacity",
+                "escalator_rise",
+                "street_access",
+                "revenue_machine",
+                "maintained_by",
+                "nyct_owned",
+                "service_status",
+                "service_status_code",
+                "y_coordinate",
+                "subway_line",
+                "station_description",
+                "station_mrn",
+                "asset_class",
+                "equipment_code",
+                "elevator_or_escalator",
+                "exposed_to_weather",
+                "elevator_loading_class",
+                "elevator_rise",
+                "elevator_order",
+                "alternative_route",
+                "service_life",
+                "borough",
+                "georeference",
+                "elevator_platform_access",
+                "elevator_number_of_landings",
+                "ada_compliant",
+                ":@computed_region_kjdx_g34t",
+                ":@computed_region_wbg7_3whc",
+                ":@computed_region_yamh_8v7k"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Point",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Contractor responsible for installing each subway elevator or escalator asset (not the same as the manufacturers or maintainers)",
+                "General notes on each subway elevator or escalator asset that may include the asset location in a subway station",
+                "Common names for each subway station including the trains servicing the station in parentheses. ",
+                "Represents unique Station Complex MRN for each subway station.",
+                "Kebab-case names for each subway station that may include the street the station is located on and the trains servicing the station.",
+                "Width of steps (in millimeters) for subway escalator assets",
+                "Number of steps in each subway escalator asset",
+                "Date when each subway elevator or escalator asset was last maintained or upgraded.",
+                "Date when each subway elevator or escalator asset opened for public use (not when construction started).",
+                "Longitude coordinate for describing the location of each subway elevator or escalator asset",
+                "The redundant subway elevator assets in the subway station that access the platform represented by a list of the unique characters following the “EL” in the equipment code of each redundant elevator",
+                "The redundant subway elevator assets in the subway station that allow access between the mezzanines represented by a list of the unique characters following the “EL” in the equipment code of each redundant elevator",
+                "The redundant subway elevator assets in the subway station that access the mezzanine represented by a list of the unique characters following the “EL” in the equipment code of each redundant elevator",
+                "The redundant subway elevator assets in the subway station that access the street level represented by a list of the unique characters following the “EL” in the equipment code of each redundant elevator",
+                "“+” or “-” value representing if there is a redundant subway elevator asset providing the same service for each elevator ",
+                "“+” or “-” value representing if each subway elevator asset has access to the second mezzanine in the subway station",
+                "“+” or “-” value representing if each subway elevator asset has access to the first mezzanine in the subway station",
+                "Travel direction of trains arriving at the subway station platform serviced by each subway elevator asset (i.e. northbound, southbound or both)",
+                "Carrying capacity (in pounds) of each subway elevator asset.",
+                "Rise of each subway escalator asset in feet (elevator travel is captured in a separate field)",
+                "\"YES” or “NO” value representing if each subway elevator or escalator asset provides access to the street level (even indoors, such as a lobby)",
+                "\"YES” or “NO” value representing if each subway asset is used to generate revenue as a machine used by the public rather than by employees",
+                "Represents if each subway elevator or escalator asset is maintained by NYCT, a private contractor, or a third-party contractor regardless of who owns it",
+                "\"YES” or “NO” value representing if each subway elevator or escalator asset is owned by NYCT",
+                "Represents standardized description of service status for each subway elevator or escalator asset.",
+                "Represents standardized code for service status for each subway elevator or escalator asset.",
+                "Latitude coordinate for describing the location of each subway elevator or escalator asset",
+                "The subway lines (physical tracks the subway trains run over) each station is located by.",
+                "Common names for each subway station followed by the “- Station” label.",
+                "Represents unique Station Master Reference Number (MRN) for each subway station.",
+                "Represents the general design of subway elevator or escalator assets (Escalator, Elevator Traction, or Elevator Hydraulic)",
+                "Represents unique equipment code of each subway elevator or escalator asset made up of an abbreviation for elevator or escalator followed by unique digits and characters.",
+                "Labels each subway elevator or escalator asset as “Elevator” or “Escalator”",
+                "\"YES” or “NO” value representing if each subway elevator or escalator asset is exposed to weather from the outdoors ",
+                "Loading class based on carrying capacity and intended use of subway elevator assets (all escalator assets are “Passenger” class)",
+                "Travel of each subway elevator asset in feet (escalator rise is captured in a separate field)",
+                "Numeric order of subway elevator assets from the street level downwards if there are multiple assets in one subway station",
+                "Alternative routes for customers to take to navigate through the subway station if the subway elevator asset is out of service",
+                "Operational lifespan (in years) for each subway elevator or escalator asset.",
+                "Location of the subway asset in one of the five boroughs of New York City (Bronx, Brooklyn, Manhattan, Queens, Staten Island).",
+                "",
+                "“+” or “-” value representing if each subway elevator asset has access to a platform inside the subway station",
+                "Number of landings or platforms serviced by each subway elevator asset ",
+                "\"YES” or “NO” value representing if the subway elevator can be used in a step-free/ADA path of travel within the station",
+                "This column was automatically created in order to record in what polygon from the dataset 'Counties' (kjdx-g34t) the point in column 'georeference' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'New York Zip Codes' (wbg7-3whc) the point in column 'georeference' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'NYS Municipal Boundaries' (yamh-8v7k) the point in column 'georeference' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens."
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "view" : "date", "align" : "center" },
+                { "view" : "date", "align" : "center" },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 4725,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-12-24T13:07:19.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "elevator/escalator asset",
+                "borough",
+                "month",
+                "subway station"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "One Subway Elevator or Escalator Asset"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Daily"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                { "key" : "Dataset-Summary_Time-Period", "value" : "Current" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/94fv-bak7",
+        "link" : "https://data.ny.gov/Transportation/MTA-Subway-Elevator-and-Escalator-Asset-Inventory/94fv-bak7",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Elevator Individual Licenses: New York State Department of Labor",
+            "id" : "cxfs-ya8e",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The dataset includes a comprehensive list of elevator licenses that have been issued to individuals for the purpose of elevator mechanics, inspection, accessibility and lift accessibility within New York State. The dataset includes the individual’s name and license information such as, license number, license type, issued date, and expiration date.",
+            "attribution" : "New York State Department of Labor",
+            "attribution_link" : "https://dol.ny.gov/elevator-licensing-information",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T10:41:19.000Z",
+            "createdAt" : "2023-09-12T19:54:45.000Z",
+            "metadata_updated_at" : "2026-11-15T10:41:15.000Z",
+            "data_updated_at" : "2026-11-15T10:41:19.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 343,
+                "page_views_last_month" : 1120,
+                "page_views_total" : 18307,
+                "page_views_last_week_log" : 8.426264754702098,
+                "page_views_last_month_log" : 10.130570562805428,
+                "page_views_total_log" : 14.160186576600662
+              },
+            "columns_name" :
+              [
+                "expiration_date",
+                "license_type",
+                "first_name",
+                "issued_date",
+                "license_number",
+                "license_status",
+                "last_name"
+              ],
+            "columns_field_name" :
+              [
+                "expiration_date",
+                "license_type",
+                "first_name",
+                "issued_date",
+                "license_number",
+                "license_status",
+                "last_name"
+              ],
+            "columns_datatype" :
+              [
+                "Calendar date",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The date when the license expires",
+                "License types are as follows: Elevator Mechanic License, Elevator Inspector, Elevator Accessibility Technician, Accessibility Lift Technician",
+                "First name of the license holder",
+                "The issued date is the date the license was approved for issuance",
+                "The unique identifier assigned to the individual by DOL",
+                "Current status of the license",
+                "Last name of the license holder"
+              ],
+            "columns_format" :
+              [
+                { "view" : "date", "align" : "center" },
+                {},
+                {},
+                { "view" : "date", "align" : "center" },
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 7793,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-09-13T13:43:16.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Government & Finance",
+            "domain_tags" :
+              [
+                "license",
+                "lift",
+                "mechanic",
+                "technician",
+                "accessibility",
+                "inspector",
+                "elevator"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Licenses that have expired more than two years ago will not be available in the dataset."
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "New York State Department of Labor"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "license&certificate@labor.ny.gov"
+                },
+                { "key" : "Dataset-Summary_Granularity", "value" : "State" },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide " },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Daily"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Division of Safety and Health"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "The data includes all active licenses and licenses that have expired within the last 2 years."
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Labor, Department of"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://dol.ny.gov"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/cxfs-ya8e",
+        "link" : "https://data.ny.gov/Government-Finance/Elevator-Individual-Licenses-New-York-State-Depart/cxfs-ya8e",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Elevator Contractor License: New York State Department of Labor",
+            "id" : "jrac-r9vc",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The dataset includes a comprehensive list of contractor licenses that have been issued to businesses for the purpose of elevator inspection and contracting within New York State.  The dataset includes contractor information such as name, address, phone and license information such as license number, license type, issued date and expiration date.",
+            "attribution" : "New York State Department of Labor",
+            "attribution_link" : "https://dol.ny.gov/elevator-licensing-information",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T10:41:10.000Z",
+            "createdAt" : "2023-09-12T18:48:34.000Z",
+            "metadata_updated_at" : "2026-11-15T10:41:10.000Z",
+            "data_updated_at" : "2026-11-15T10:41:10.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 215,
+                "page_views_last_month" : 813,
+                "page_views_total" : 11067,
+                "page_views_last_week_log" : 7.754887502163469,
+                "page_views_last_month_log" : 9.668884984266247,
+                "page_views_total_log" : 13.434106928609955
+              },
+            "columns_name" :
+              [
+                "issued_date",
+                "city",
+                "business_name",
+                "address",
+                "dba_name",
+                "expiration_date",
+                "phone",
+                "zip_code",
+                "state",
+                "address_2",
+                "license_type",
+                "license_number",
+                "license_status"
+              ],
+            "columns_field_name" :
+              [
+                "issued_date",
+                "city",
+                "business_name",
+                "address",
+                "dba_name",
+                "expiration_date",
+                "phone",
+                "zip_code",
+                "state",
+                "address_2",
+                "license_type",
+                "license_number",
+                "license_status"
+              ],
+            "columns_datatype" :
+              [
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The issued date is the date the license was approved for issuance",
+                "The city where the business is located",
+                "The legal name of the business that holds the Elevator Business License",
+                "The street address of where the business is located",
+                "The name that the business is commonly known as",
+                "The date when the license expires",
+                "The primary phone number for the business",
+                "The zip code where the business is located",
+                "The state abbreviation where the business is located",
+                "Continuation of street address (optional)",
+                "License types are as follows: Elevator Contractor and Elevator Inspection Contractor",
+                "The unique identifier assigned to the business by DOL",
+                "The current status of the license"
+              ],
+            "columns_format" :
+              [
+                { "view" : "date", "align" : "center" },
+                {},
+                {},
+                {},
+                {},
+                { "view" : "date", "align" : "center" },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 5687,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-09-13T13:39:44.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Government & Finance",
+            "domain_tags" :
+              [ "elevator", "inspection", "contractor", "license" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "New York State Department of Labor"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "license&certificate@labor.ny.gov"
+                },
+                { "key" : "Dataset-Summary_Granularity", "value" : "City" },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Daily"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Division of Safety and Health"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "The data includes all active licenses and licenses that have expired within the last 2 years"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Labor, Department of"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://dol.ny.gov/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/jrac-r9vc",
+        "link" : "https://data.ny.gov/Government-Finance/Elevator-Contractor-License-New-York-State-Departm/jrac-r9vc",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA NYCT Subway Elevator and Escalator Availability: Beginning 2015",
+            "id" : "rc78-7x78",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The percent of the time that elevators and escalators are operational systemwide.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-13T16:09:43.000Z",
+            "createdAt" : "2022-01-31T20:44:02.000Z",
+            "metadata_updated_at" : "2026-11-13T16:09:10.000Z",
+            "data_updated_at" : "2026-11-13T16:09:43.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 178,
+                "page_views_last_month" : 919,
+                "page_views_total" : 13902,
+                "page_views_last_week_log" : 7.483815777264256,
+                "page_views_last_month_log" : 9.845490050944376,
+                "page_views_total_log" : 13.763108601932068
+              },
+            "columns_name" :
+              [
+                "Managed By",
+                "Borough",
+                "Equipment Type",
+                "Equipment Code",
+                "Scheduled Outages",
+                "Unscheduled Outages",
+                "AM Peak Availability",
+                "AM Peak Total Hours",
+                "PM Peak Availability",
+                "PM Peak Hours Available",
+                "Station Name",
+                "Station Complex MRN",
+                "Time Since Major Improvement",
+                "AM Peak Hours Available",
+                "Entrapments",
+                "24-Hour Availability",
+                "PM Peak Total Hours",
+                "24-Hour Total Hours",
+                "Month",
+                "24-Hour Hours Available",
+                "Station Complex Name",
+                "Station MRN",
+                "Total Outages"
+              ],
+            "columns_field_name" :
+              [
+                "managed_by",
+                "borough",
+                "equipment_type",
+                "equipment_code",
+                "scheduled_outages",
+                "unscheduled_outages",
+                "am_peak_availability",
+                "am_peak_total_hours",
+                "pm_peak_availability",
+                "pm_peak_hours_available",
+                "station_name",
+                "station_complex_mrn",
+                "time_since_major_improvement",
+                "am_peak_hours_available",
+                "entrapments",
+                "_24_hour_availability",
+                "pm_peak_total_hours",
+                "_24_hour_total_hours",
+                "month",
+                "_24_hour_hours_available",
+                "station_complex_name",
+                "station_mrn",
+                "total_outages"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Whether the asset is managed by NYCT or a third party.",
+                "Represents one of the boroughs of New York City serviced by the subway system (Bronx, Brooklyn, Manhattan, Queens).",
+                "Whether the equipment is an elevator or an escalator.",
+                "The unique identification number used to reference and track individual elevators and escalators.",
+                "The number of outages where an elevator or escalator is taken out of service for scheduled maintenance.",
+                "The number of unplanned or unexpected interruptions of elevator or escalator service.",
+                "The percent of the time that the elevator or escalator was available during the AM Peak period (6 to 10 a.m.), per month. ",
+                "The number of hours during the AM Peak period (6 to 10 a.m.) for the entire month, excluding capital outages.",
+                "The percent of the time that the elevator or escalator was available during the PM Peak period (3 to 7 p.m.), per month. ",
+                "The total time (in hours) during the PM Peak period (3 to 7 p.m.), per month, that an elevator or escalator was available.",
+                "The name of the subway station.",
+                "The Master Reference Number (MRN) for the subway station complex.",
+                "Months since the last major improvement on the asset.",
+                "The total time (in hours) during the AM Peak period (6 to 10 a.m.), per month, that an elevator or escalator was available.",
+                "The number of entrapments.",
+                "The percent of the time that the elevator or escalator was available, per month.",
+                "The number of hours during the PM Peak period (3 to 7 p.m.) for the entire month, excluding capital outages.",
+                "The number of hours during the month, excluding capital outages",
+                "The month, formatted as the first day of the month in a mm/dd/yyyy format.",
+                "The total time (in hours) during the month that an elevator or escalator was available.",
+                "The name of the subway station complex.",
+                "The Master Reference Number (MRN) for the subway station.",
+                "The total number of equipment outages."
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                { "align" : "center" },
+                { "align" : "right" },
+                { "align" : "right" },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                {},
+                { "align" : "center" },
+                { "align" : "center" },
+                { "align" : "right" },
+                { "align" : "right" },
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "view" : "date", "align" : "center" },
+                { "align" : "right" },
+                {},
+                { "align" : "center" },
+                { "align" : "right" }
+              ],
+            "download_count" : 4244,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2026-11-05T20:56:09.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "outages",
+                "subway station",
+                "subway",
+                "step-free access",
+                "station",
+                "nyct",
+                "new york city transit",
+                "monthly",
+                "escalators",
+                "elevators",
+                "availability",
+                "accessibility"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Month, borough, subway station, elevator/escalator asset"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York City Transit"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2015"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/rc78-7x78",
+        "link" : "https://data.ny.gov/Transportation/MTA-NYCT-Subway-Elevator-and-Escalator-Availabilit/rc78-7x78",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Temporary Elevator Mechanics License",
+            "id" : "f2ea-9n3x",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The dataset includes a comprehensive list of temporary elevator mechanics licenses that have been issued to individuals for the purpose of performing elevator work during a verifiable shortage of licensed mechanics. The dataset includes the individual’s name and license information, such as license number, license type, issue date, expiration date, and status.",
+            "attribution" : "New York State Department of Labor",
+            "attribution_link" : "https://dol.ny.gov/elevator-licensing-information",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T10:42:24.000Z",
+            "createdAt" : "2026-10-09T20:42:57.000Z",
+            "metadata_updated_at" : "2026-11-15T10:42:23.000Z",
+            "data_updated_at" : "2026-11-15T10:42:24.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 108,
+                "page_views_last_month" : 660,
+                "page_views_total" : 776,
+                "page_views_last_week_log" : 6.768184324776926,
+                "page_views_last_month_log" : 9.36850646150769,
+                "page_views_total_log" : 9.60177078840771
+              },
+            "columns_name" :
+              [
+                "Licence Number",
+                "Issued Date",
+                "License Type",
+                "Status",
+                "Last Name",
+                "First Name",
+                "Expiration Date"
+              ],
+            "columns_field_name" :
+              [
+                "licence_number",
+                "issued_date",
+                "license_type",
+                "status",
+                "last_name",
+                "first_name",
+                "expiration_date"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date"
+              ],
+            "columns_description" :
+              [
+                "The unique identifier assigned to the individual by DOL",
+                "The issued date is the date the license was approved for issuance",
+                "The name of the license",
+                "Current status of the license",
+                "Last name of the license holder",
+                "First name of the license holder",
+                "The date when the license expires"
+              ],
+            "columns_format" :
+              [
+                {},
+                { "view" : "date", "align" : "center" },
+                {},
+                {},
+                {},
+                {},
+                { "view" : "date", "align" : "center" }
+              ],
+            "download_count" : 93,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2026-10-09T20:54:33.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Government & Finance",
+            "domain_tags" :
+              [
+                "technician",
+                "accessibility",
+                "elevator",
+                "inspector",
+                "lift",
+                "mechanic",
+                "temporary license"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Licenses that have expired over a year ago will not be available in the dataset."
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "New York State Department of Labor"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "license&certificate@labor.ny.gov"
+                },
+                { "key" : "Dataset-Summary_Granularity", "value" : "City" },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Daily"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Division of Safety and Health"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Current - The data includes all active licenses and licenses that have expired within the last year. The license is active for 90 days as long as the temporary elevator mechanic is employed by the licensed elevator contractor."
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Labor, Department of"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://dol.ny.gov/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/f2ea-9n3x",
+        "link" : "https://data.ny.gov/Government-Finance/Temporary-Elevator-Mechanics-License/f2ea-9n3x",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "High Resolution Digital Elevation Models (DEMs)",
+            "id" : "uzbc-b2qs",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "High resolution (1-2m spacing) digital elevation models (DEMs) covering portions of the state.  The DEMs are derived from LIDAR data and depict the bare earth terrain in raster format.   Multiple agencies (Federal, State, and County) provided the data.  The DEMs can be downloaded through the NYS Orthos Online app (http://orthos.dhses.ny.gov/).",
+            "attribution" : "Office of Information Technology Services",
+            "attribution_link" : "http://gis.ny.gov/elevation/",
+            "contact_email" : "opendata@its.ny.gov",
+            "type" : "href",
+            "updatedAt" : "2019-06-10T18:03:20.000Z",
+            "createdAt" : "2015-03-05T17:38:31.000Z",
+            "metadata_updated_at" : "2019-06-10T18:03:20.000Z",
+            "data_updated_at" : "2015-03-05T17:38:31.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 67,
+                "page_views_last_month" : 139,
+                "page_views_total" : 4977,
+                "page_views_last_week_log" : 6.08746284125034,
+                "page_views_last_month_log" : 7.129283016944966,
+                "page_views_total_log" : 12.281350514981035
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 62,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "href",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2015-03-05T17:38:56.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Public Safety",
+            "domain_tags" : [],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "State of New York"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Open Data NY"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "opendata@its.ny.gov"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://orthos.dhses.ny.gov/"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "nysgis@its.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "1-2 meters"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "Partial state"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Semi-annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "GIS Program Office"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2005"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Information Technology Services, Office of"
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "No limitations on use."
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ny.gov",
+            "access_points" : { "text/html" : "http://gis.ny.gov/elevation/" }
+          },
+        "permalink" : "https://data.ny.gov/d/uzbc-b2qs",
+        "link" : "https://data.ny.gov/Public-Safety/High-Resolution-Digital-Elevation-Models-DEMs-/uzbc-b2qs",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA LIRR Elevator and Escalator Availability: Beginning 2019",
+            "id" : "9hjt-526f",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The percent of the time that elevators and escalators are operational systemwide.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-13T16:04:25.000Z",
+            "createdAt" : "2022-03-16T02:47:21.000Z",
+            "metadata_updated_at" : "2026-11-13T16:04:24.000Z",
+            "data_updated_at" : "2026-11-13T16:04:25.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 13,
+                "page_views_last_month" : 109,
+                "page_views_total" : 3212,
+                "page_views_last_week_log" : 3.8073549220576037,
+                "page_views_last_month_log" : 6.78135971352466,
+                "page_views_total_log" : 11.649705265471411
+              },
+            "columns_name" : [
+                               "Availability",
+                               "Branch",
+                               "Asset Type",
+                               "Month"
+                             ],
+            "columns_field_name" :
+              [ "availability", "branch", "asset_type", "rundate" ],
+            "columns_datatype" : [ "Number", "Text", "Text", "Calendar date" ],
+            "columns_description" :
+              [
+                "The percent of the time that escalators are operational per time period",
+                "The name of the LIRR branch (Babylon, Far Rockaway, Hempstead, Long Beach, Port Jefferson, Port Washington, Ronkonkoma, or City Terminal).",
+                "Elevator or Escalator.",
+                "The time period in which the elevator and escalator availability is being calculated, rounded up to the first day of the month (mm/dd/yyyy).   "
+              ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "precision" : "1",
+                  "align" : "right"
+                },
+                {},
+                {
+                  "precisionStyle" : "percentage",
+                  "percentScale" : "1",
+                  "align" : "center"
+                },
+                { "view" : "date", "align" : "center" }
+              ],
+            "download_count" : 1608,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-21T19:29:22.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "elevators",
+                "step-free access",
+                "outages",
+                "monthly",
+                "long island rail road",
+                "lirr",
+                "line",
+                "escalators",
+                "commuter rail",
+                "availability",
+                "accessibility"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Month, branch"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City and Long Island"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Long Island Rail Road"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2019"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/9hjt-526f",
+        "link" : "https://data.ny.gov/Transportation/MTA-LIRR-Elevator-and-Escalator-Availability-Begin/9hjt-526f",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Metro-North Elevator and Escalator Availability: Beginning 2021",
+            "id" : "ax67-8386",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The percent of the time that elevators and escalators are operational systemwide.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-13T18:19:32.000Z",
+            "createdAt" : "2023-06-01T19:34:24.000Z",
+            "metadata_updated_at" : "2026-11-13T18:19:32.000Z",
+            "data_updated_at" : "2026-11-13T18:19:32.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 42,
+                "page_views_last_month" : 186,
+                "page_views_total" : 3015,
+                "page_views_last_week_log" : 5.426264754702098,
+                "page_views_last_month_log" : 7.546894459887637,
+                "page_views_total_log" : 11.558420713268665
+              },
+            "columns_name" :
+              [
+                "Escalator Availability",
+                "Branch",
+                "Month",
+                "Elevator Availability"
+              ],
+            "columns_field_name" :
+              [
+                "escalator_availability",
+                "branch",
+                "month",
+                "elevator_availability"
+              ],
+            "columns_datatype" : [
+                                   "Number",
+                                   "Text",
+                                   "Calendar date",
+                                   "Number"
+                                 ],
+            "columns_description" :
+              [
+                "The percent of the time that escalators are operational per time period. Blank fields indicate that no data was available either due to a technical issue or because there are no assets of that type on the given branch.",
+                "The name of the MNR branch (Grand Central, Terminal, Harlem, Hudson, New Haven, and East of Hudson). East of Hudson functions as the Systemwide Availability. Blank fields indicate that branch granularity is not available.",
+                "The time period in which the elevator and escalator availability is being calculated (month and year).   ",
+                "The percent of the time that elevators are operational per time period. "
+              ],
+            "columns_format" :
+              [
+                {
+                  "decimalSeparator" : ".",
+                  "align" : "right",
+                  "percentScale" : "1",
+                  "groupSeparator" : ",",
+                  "precisionStyle" : "percentage"
+                },
+                {},
+                { "view" : "date", "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "align" : "right",
+                  "percentScale" : "1",
+                  "groupSeparator" : ",",
+                  "precisionStyle" : "percentage"
+                }
+              ],
+            "download_count" : 1638,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-06-01T19:45:53.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "accessibility",
+                "availability",
+                "line",
+                "escalators",
+                "step-free access",
+                "rail line",
+                "outages",
+                "metro-north railroad",
+                "metro-north",
+                "monthly",
+                "elevators",
+                "commuter rail",
+                "mnr"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "Due to data collection and processing requirements, there may be a one-month lag between the data and month it is published (e.g. the update in April may only contain data through February)."
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Monthly, branch"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York and Connecticut"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Metro-North Railroad"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2021"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/ax67-8386",
+        "link" : "https://data.ny.gov/Transportation/MTA-Metro-North-Elevator-and-Escalator-Availabilit/ax67-8386",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Asbestos Individual Certificates: Two Year Window",
+            "id" : "95bk-87hc",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The dataset includes a comprehensive list of asbestos certificates that have been issued to individuals for the purpose of air sampling, handlers, inspectors, management planners, operations and maintenance, project designers, project monitors, restricted allied trades, and supervisors within New York State. The dataset includes the individual’s name and license information such as, certificate number, category certificate number, certificate type, issued date, and expiration date",
+            "attribution" : "New York State Department of Labor",
+            "attribution_link" : "https://dol.ny.gov/asbestos-control-bureau",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T09:03:08.000Z",
+            "createdAt" : "2023-12-14T16:40:01.000Z",
+            "metadata_updated_at" : "2026-11-15T09:03:05.000Z",
+            "data_updated_at" : "2026-11-15T09:03:08.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 112,
+                "page_views_last_month" : 431,
+                "page_views_total" : 5723,
+                "page_views_last_week_log" : 6.820178962415189,
+                "page_views_last_month_log" : 8.75488750216347,
+                "page_views_total_log" : 12.482807956726669
+              },
+            "columns_name" :
+              [
+                "first_name",
+                "certificate_number",
+                "certificate_status",
+                "endorsement_type",
+                "last_name",
+                "issued_date",
+                "expiration_date"
+              ],
+            "columns_field_name" :
+              [
+                "first_name",
+                "certificate_number",
+                "certificate_status",
+                "endorsement_type",
+                "last_name",
+                "issued_date",
+                "expiration_date"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date"
+              ],
+            "columns_description" :
+              [
+                "First name of the certificate holder",
+                "The unique identifier assigned an Individual by DOL",
+                "Current status of the certificate",
+                "License types are as follows: Elevator Mechanic License, Elevator Inspector, Elevator Accessibility Technician, Accessibility Lift Technician",
+                "Last name of the certificate holder",
+                "The issued date is the date the certificate was approved for issuance",
+                "The date when the certificate expires"
+              ],
+            "columns_format" :
+              [
+                {},
+                { "align" : "left" },
+                {},
+                {},
+                {},
+                { "view" : "date", "align" : "right" },
+                { "view" : "date", "align" : "right" }
+              ],
+            "download_count" : 2636,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-12-14T17:33:42.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Government & Finance",
+            "domain_tags" :
+              [
+                "project designer",
+                "certificate",
+                "management planner",
+                "inspector",
+                "air sampling technician",
+                "asbestos",
+                "operations and maintenance",
+                "project monitor",
+                "restricted allied trades",
+                "supervisor",
+                "handler"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Certificates that have expired more than two years ago will not be available in the dataset"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "New York State Department of Labor"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "license&certificate@labor.ny.gov"
+                },
+                { "key" : "Dataset-Summary_Granularity", "value" : "State" },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide " },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Daily"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Division of Safety and Health"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Two year window of active and expired licenses"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Labor, Department of"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://dol.ny.gov"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/95bk-87hc",
+        "link" : "https://data.ny.gov/Government-Finance/Asbestos-Individual-Certificates-Two-Year-Window/95bk-87hc",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "New York State Sea Level Rise and Future Floodplain Extent: Beginning 2000",
+            "id" : "f6bh-qbc3",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Sea Level Rise Viewer provides estimated projections of the extent of future sea-level rise and storm surge on inundation and coastal flooding that could occur in portions of New York State. The layers include all combinations of eight future sea level rise scenarios (0, 12, 18, 24, 36, 48, 60, and 72 inches) and four annual chance flood probabilities: 10% chance (10-year Mean Recurrence Interval (MRI)), 2% chance (50-year MRI), 1% chance (100-year MRI), and 0.2% chance (500-year MRI), across three geographies: Nassau County, Suffolk County, and the tidally influenced shoreline of the Hudson River (referred to as the “lower Hudson River” below) including portions of Albany, Columbia, Dutchess, Greene, Orange, Putnam Rensselaer, Rockland, Ulster, and Westchester counties. New York City is excluded, as it has its own sea level rise-influenced flood maps. \n\nBaseline flood water surface elevations corresponding to each annual flood probability were used from FEMA Flood Insurance Studies. High-resolution LiDAR-based digital elevation models were used to represent the land surface. The sea level rise scenarios were applied to the baseline flood elevations to develop future flood elevations. The future floodplains were then mapped by intersecting the new flood elevations with the LiDAR topography. While the analysis includes coastal storm surge via the flood recurrence intervals, it does not account for changes in storm climatology, dynamic coastal processes, landscapes, or hydraulic conditions under future conditions.\n\nThis mapping project chose to map future sea level rise in 6- to 12-inch increments, rather than mapping specific sea level rise projections. This choice was made due to resource constraints as well as to extend the utility of the maps even as the projections were revised as climate science improved.\n\nThis modeling effort was completed in 2016. \n\nThe New York State Energy Research and Development Authority (NYSERDA) offers objective information and analysis, innovative programs, technical expertise, and support to help New Yorkers increase energy efficiency, save money, use renewable energy, and reduce reliance on fossil fuels. To learn more about NYSERDA’s programs, visit https://nyserda.ny.gov or follow us on X, Facebook, YouTube, or Instagram.",
+            "attribution" : "New York State Energy Research and Development Authority (NYSERDA)",
+            "attribution_link" : "https://services.nyserda.ny.gov/SLR_Viewer/",
+            "contact_email" : null,
+            "type" : "file",
+            "updatedAt" : "2026-11-05T15:23:19.000Z",
+            "createdAt" : "2026-02-14T02:01:38.000Z",
+            "metadata_updated_at" : "2026-11-05T15:23:19.000Z",
+            "data_updated_at" : "2026-02-14T02:01:38.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 84,
+                "page_views_last_month" : 288,
+                "page_views_total" : 5549,
+                "page_views_last_week_log" : 6.409390936137703,
+                "page_views_last_month_log" : 8.17492568250068,
+                "page_views_total_log" : 12.43827205612483
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 715,
+            "provenance" : "official",
+            "lens_view_type" : "blobby",
+            "lens_display_type" : "blob",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : "application/x-zip-compressed",
+            "hide_from_data_json" : false,
+            "publication_date" : "2026-02-14T02:13:30.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Energy & Environment",
+            "domain_tags" :
+              [
+                "sea level rise viewer",
+                "slr",
+                "storm surge",
+                "tidal",
+                "flooding",
+                "floodplain"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://www.nyserda.ny.gov/-/media/Project/Nyserda/Files/Publications/Research/Environmental/16-18-Analysis-Future-Floodplains-NYS.pdf"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "New York State Energy Research and Development Authority (NYSERDA)"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "openny@nyserda.ny.gov"
+                },
+                { "key" : "Dataset-Summary_Granularity", "value" : "1 ft" },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "Albany, Putnam, Columbia, Rensselaer, Dutchess, Rockland, Greene, Suffolk, Orange, Ulster, Nassau, Westchester"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "NYSERDA – Strategy and Planning"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2000"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Energy Research and Development Authority"
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "The estimated projections of future sea level are based on the best available scientific information at the time of this modeling effort (2016) but have large uncertainties and are subject to change as the state of science evolves. The values do not reflect the likelihood of changes in climate or sea level. This data is intended to be used only as a screening-level dataset to consider potential policy responses to sea-level rise and coastal flooding. It is not intended for, nor suitable for, navigation, site-specific analysis for permitting or other legal purposes. The data are provided “as is,” without warranty to their performance, merchantable state, or fitness for any particular purpose. There is no warranty that access to content will be uninterrupted or error-free; that content will be virus-free; or that content will be complete, accurate, or timely. The entire risk associated with the results and use of these data is assumed by the user. Under no circumstances, including but not limited to negligence, shall the creators of this dataset be liable for any direct, indirect, incidental, special, or consequential damages. Where data are sourced from existing datasets, some information may be out-of-date as these datasets were compiled in the past and companies may have changed their focuses or undergone mergers/acquisitions."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/f6bh-qbc3",
+        "link" : "https://data.ny.gov/Energy-Environment/New-York-State-Sea-Level-Rise-and-Future-Floodplai/f6bh-qbc3",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      }
+    ],
+  "resultSetSize" : 29,
+  "timings" : { "serviceMillis" : 19, "searchMillis" : [ 2, 6 ] },
+  "warnings" : []
+}

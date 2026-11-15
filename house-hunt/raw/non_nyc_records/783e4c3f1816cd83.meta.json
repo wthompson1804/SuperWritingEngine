@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?domains=data.ct.gov&q=police%20incidents&limit=10",
+ "retrieved_at": "2026-11-15T21:21:15+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/783e4c3f1816cd83.json",
+ "source": "non_nyc_records"
+}

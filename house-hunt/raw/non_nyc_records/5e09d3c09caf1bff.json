@@ -1,0 +1,2139 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "Sandy DCA Master Data",
+            "id" : "j9i2-jh6f",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This is a report for all the relevant columns of DCA - Amount Allocated, Obligated, Paid- broken down by program, project, county and municipality.",
+            "attribution" : "DCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "dataset",
+            "updatedAt" : "2026-09-08T14:08:14.000Z",
+            "createdAt" : "2015-01-15T19:44:09.000Z",
+            "metadata_updated_at" : "2026-09-08T14:07:58.000Z",
+            "data_updated_at" : "2026-09-08T14:08:14.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 31,
+                "page_views_last_month" : 151,
+                "page_views_total" : 6507,
+                "page_views_last_week_log" : 5.0,
+                "page_views_last_month_log" : 7.247927513443586,
+                "page_views_total_log" : 12.66799853567253
+              },
+            "columns_name" :
+              [
+                "Pathway Selection",
+                "Applicant",
+                "Obligated Amount",
+                "Grants Approved",
+                "Project Type",
+                "Project Description",
+                "Project",
+                "Program Description",
+                "As Of Date",
+                "Disbursed Amount",
+                "Federal Agency",
+                "Funding Source",
+                "Disbursed Date",
+                "Municipality",
+                "Obligated Date",
+                "Payment Type",
+                "Vendor",
+                "County"
+              ],
+            "columns_field_name" :
+              [
+                "rrem_pathway_selection",
+                "applicant_name",
+                "obligated_amount",
+                "grants_approved",
+                "project_type",
+                "project_description",
+                "project_name",
+                "program_description",
+                "as_of_date",
+                "disbursed_amount",
+                "federal_agency",
+                "funding_source",
+                "disbursed_date",
+                "municipality",
+                "obligated_date",
+                "rrem_payment_type",
+                "rrem_contractor",
+                "county"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Pathway",
+                "Applicant/recipient of the funds.  Example: DCA Division of Codes and Standards, DCA Homeowner Housing, etc.",
+                "Funds committed to this project but not yet spent",
+                "Number of grants approved",
+                "The type of project that the funds are being used for (ZONE Program Delivery LMI, RREM UN, etc.)",
+                "A textual description of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI = Program delivery cost associated with this project.",
+                "The name of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI",
+                "Short Description of the CDBG-DR program or any new program",
+                "Agency data is up to date as of this date",
+                "Measureable quantity for which the funds were disbursed",
+                "Federal Agency corresponding to the State Agency. Valid value: US HUD.",
+                "Federal Agency that is the funding source for the state Agency, DCA. Valid value: CDBG-DR",
+                "Date on which the funds were disbursed",
+                "This is the Municipality name or names that pertain to a particular project detail. This column may contain either one Municipality Name, multiple Municipality Names separated by commas, 'statewide', etc.",
+                "The date that the funds were committed to this project",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Payment Type",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Contractor",
+                "This is the name of a county where a Superstorm Sandy related project was worked on. This column may have a single name of a county, a value of 'Statewide' for projects being worked on at a State level, or it will contain the value 'Multi County' for those projects that cross more than on County. A comma separated list of multiple counties relating to one project detail is in the column."
+              ],
+            "columns_format" :
+              [
+                { "displayStyle" : "plain", "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                {},
+                {},
+                { "align" : "left" },
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                { "align" : "left" },
+                { "view" : "date", "align" : "right" },
+                {},
+                { "view" : "date", "align" : "right" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                {}
+              ],
+            "download_count" : 1169,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2018-08-01T18:04:31.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" : [ "dca", "sandy-master", "sandy" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "12/29/14"
+                },
+                {
+                  "key" : "Asset-Details_Asset-End-Date",
+                  "value" : "Ongoing"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "Quarterly"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "County"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "Quarterly"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/j9i2-jh6f",
+        "link" : "https://data.nj.gov/Human-Services/Sandy-DCA-Master-Data/j9i2-jh6f",
+        "owner" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          },
+        "creator" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DCA - DCA Housing NEP Program Delivery LMI Project",
+            "id" : "wvyv-6byj",
+            "resource_name" : null,
+            "parent_fxf" : [ "j9i2-jh6f" ],
+            "description" : "This is a report for all the relevant columns of DCA - Amount Allocated, Obligated, Paid- broken down by program, project, county and municipality.",
+            "attribution" : "DCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "filter",
+            "updatedAt" : "2026-09-08T14:08:14.000Z",
+            "createdAt" : "2015-09-11T19:24:11.000Z",
+            "metadata_updated_at" : "2025-01-14T22:16:52.000Z",
+            "data_updated_at" : "2026-09-08T14:08:14.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 10,
+                "page_views_last_month" : 73,
+                "page_views_total" : 2519,
+                "page_views_last_week_log" : 3.4594316186372978,
+                "page_views_last_month_log" : 6.209453365628951,
+                "page_views_total_log" : 11.29920801838728
+              },
+            "columns_name" :
+              [
+                "Municipality",
+                "Project Type",
+                "Project Description",
+                "Payment Type",
+                "Funding Source",
+                "Pathway Selection",
+                "As Of Date",
+                "Disbursed Date",
+                "Obligated Date",
+                "Obligated Amount",
+                "Vendor",
+                "County",
+                "Project",
+                "Disbursed Amount",
+                "Federal Agency",
+                "Applicant",
+                "Program Description"
+              ],
+            "columns_field_name" :
+              [
+                "municipality",
+                "project_type",
+                "project_description",
+                "rrem_payment_type",
+                "funding_source",
+                "rrem_pathway_selection",
+                "as_of_date",
+                "disbursed_date",
+                "obligated_date",
+                "obligated_amount",
+                "rrem_contractor",
+                "county",
+                "project_name",
+                "disbursed_amount",
+                "federal_agency",
+                "applicant_name",
+                "program_description"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "This is the Municipality name or names that pertain to a particular project detail. This column may contain either one Municipality Name, multiple Municipality Names separated by commas, 'statewide', etc.",
+                "The type of project that the funds are being used for (ZONE Program Delivery LMI, RREM UN, etc.)",
+                "A textual description of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI = Program delivery cost associated with this project.",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Payment Type",
+                "Federal Agency that is the funding source for the state Agency, DCA. Valid value: CDBG-DR",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Pathway",
+                "Agency data is up to date as of this date",
+                "Date on which the funds were disbursed",
+                "The date that the funds were committed to this project",
+                "Funds committed to this project but not yet spent",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Contractor",
+                "This is the name of a county where a Superstorm Sandy related project was worked on. This column may have a single name of a county, a value of 'Statewide' for projects being worked on at a State level, or it will contain the value 'Multi County' for those projects that cross more than on County. A comma separated list of multiple counties relating to one project detail is in the column.",
+                "The name of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI",
+                "Measureable quantity for which the funds were disbursed",
+                "Federal Agency corresponding to the State Agency. Valid value: US HUD.",
+                "Applicant/recipient of the funds.  Example: DCA Division of Codes and Standards, DCA Homeowner Housing, etc.",
+                "Short Description of the CDBG-DR program or any new program"
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "view" : "date", "align" : "right" },
+                { "view" : "date", "align" : "right" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                {},
+                { "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                { "align" : "left" },
+                { "align" : "left" }
+              ],
+            "download_count" : 175,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2017-08-25T18:20:07.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" : [ "sandy", "dca", "sandy-master" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "12/29/14"
+                },
+                {
+                  "key" : "Asset-Details_Asset-End-Date",
+                  "value" : "Ongoing"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "County"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Internal-Tracking_Asset-Steward-Comment",
+                  "value" : "Alison Burt - Alison.Burt@icfi.com"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/wvyv-6byj",
+        "link" : "https://data.nj.gov/Human-Services/DCA-DCA-Housing-NEP-Program-Delivery-LMI-Project/wvyv-6byj",
+        "owner" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          },
+        "creator" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DCA - DCA RREM UN Project",
+            "id" : "xiv3-qpr8",
+            "resource_name" : null,
+            "parent_fxf" : [ "j9i2-jh6f" ],
+            "description" : "This is a report for all the relevant columns of DCA - Amount Allocated, Obligated, Paid- broken down by program, project, county and municipality.",
+            "attribution" : "DCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "filter",
+            "updatedAt" : "2026-09-08T14:08:14.000Z",
+            "createdAt" : "2015-08-06T13:27:04.000Z",
+            "metadata_updated_at" : "2025-01-14T22:17:35.000Z",
+            "data_updated_at" : "2026-09-08T14:08:14.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 7,
+                "page_views_last_month" : 32,
+                "page_views_total" : 2140,
+                "page_views_last_week_log" : 3.0,
+                "page_views_last_month_log" : 5.044394119358453,
+                "page_views_total_log" : 11.06406908038551
+              },
+            "columns_name" :
+              [
+                "Project Type",
+                "Disbursed Date",
+                "Disbursed Amount",
+                "Project Description",
+                "Program Description",
+                "As Of Date",
+                "Federal Agency",
+                "Payment Type",
+                "Applicant",
+                "Project",
+                "Vendor",
+                "Funding Source",
+                "Obligated Amount",
+                "Pathway Selection",
+                "Obligated Date",
+                "Municipality",
+                "County"
+              ],
+            "columns_field_name" :
+              [
+                "project_type",
+                "disbursed_date",
+                "disbursed_amount",
+                "project_description",
+                "program_description",
+                "as_of_date",
+                "federal_agency",
+                "rrem_payment_type",
+                "applicant_name",
+                "project_name",
+                "rrem_contractor",
+                "funding_source",
+                "obligated_amount",
+                "rrem_pathway_selection",
+                "obligated_date",
+                "municipality",
+                "county"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The type of project that the funds are being used for (ZONE Program Delivery LMI, RREM UN, etc.)",
+                "Date on which the funds were disbursed",
+                "Measureable quantity for which the funds were disbursed",
+                "A textual description of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI = Program delivery cost associated with this project.",
+                "Short Description of the CDBG-DR program or any new program",
+                "Agency data is up to date as of this date",
+                "Federal Agency corresponding to the State Agency. Valid value: US HUD.",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Payment Type",
+                "Applicant/recipient of the funds.  Example: DCA Division of Codes and Standards, DCA Homeowner Housing, etc.",
+                "The name of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Contractor",
+                "Federal Agency that is the funding source for the state Agency, DCA. Valid value: CDBG-DR",
+                "Funds committed to this project but not yet spent",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Pathway",
+                "The date that the funds were committed to this project",
+                "This is the Municipality name or names that pertain to a particular project detail. This column may contain either one Municipality Name, multiple Municipality Names separated by commas, 'statewide', etc.",
+                "This is the name of a county where a Superstorm Sandy related project was worked on. This column may have a single name of a county, a value of 'Statewide' for projects being worked on at a State level, or it will contain the value 'Multi County' for those projects that cross more than on County. A comma separated list of multiple counties relating to one project detail is in the column."
+              ],
+            "columns_format" :
+              [
+                {},
+                { "view" : "date", "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                {},
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {},
+                { "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                {},
+                {}
+              ],
+            "download_count" : 344,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2017-08-25T18:20:07.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" : [ "sandy-master", "dca", "sandy" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "12/29/14"
+                },
+                {
+                  "key" : "Asset-Details_Asset-End-Date",
+                  "value" : "Ongoing"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "County"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Internal-Tracking_Asset-Steward-Comment",
+                  "value" : "Alison Burt - Alison.Burt@icfi.com"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/xiv3-qpr8",
+        "link" : "https://data.nj.gov/Human-Services/DCA-DCA-RREM-UN-Project/xiv3-qpr8",
+        "owner" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          },
+        "creator" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DCA - DCA Resettlement UN Project",
+            "id" : "7rzp-zkts",
+            "resource_name" : null,
+            "parent_fxf" : [ "j9i2-jh6f" ],
+            "description" : "This is a report for all the relevant columns of DCA - Amount Allocated, Obligated, Paid- broken down by program, project, county and municipality.",
+            "attribution" : "DCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "filter",
+            "updatedAt" : "2026-09-08T14:08:14.000Z",
+            "createdAt" : "2015-08-06T13:19:43.000Z",
+            "metadata_updated_at" : "2025-01-14T22:00:04.000Z",
+            "data_updated_at" : "2026-09-08T14:08:14.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 6,
+                "page_views_last_month" : 102,
+                "page_views_total" : 1862,
+                "page_views_last_week_log" : 2.807354922057604,
+                "page_views_last_month_log" : 6.6865005271832185,
+                "page_views_total_log" : 10.863411958941638
+              },
+            "columns_name" :
+              [
+                "Program Description",
+                "Disbursed Date",
+                "Disbursed Amount",
+                "Obligated Date",
+                "Vendor",
+                "Applicant",
+                "Municipality",
+                "Project Description",
+                "Project",
+                "Federal Agency",
+                "As Of Date",
+                "Obligated Amount",
+                "County",
+                "Funding Source",
+                "Project Type",
+                "Pathway Selection",
+                "Payment Type"
+              ],
+            "columns_field_name" :
+              [
+                "program_description",
+                "disbursed_date",
+                "disbursed_amount",
+                "obligated_date",
+                "rrem_contractor",
+                "applicant_name",
+                "municipality",
+                "project_description",
+                "project_name",
+                "federal_agency",
+                "as_of_date",
+                "obligated_amount",
+                "county",
+                "funding_source",
+                "project_type",
+                "rrem_pathway_selection",
+                "rrem_payment_type"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Calendar date",
+                "Number",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Short Description of the CDBG-DR program or any new program",
+                "Date on which the funds were disbursed",
+                "Measureable quantity for which the funds were disbursed",
+                "The date that the funds were committed to this project",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Contractor",
+                "Applicant/recipient of the funds.  Example: DCA Division of Codes and Standards, DCA Homeowner Housing, etc.",
+                "This is the Municipality name or names that pertain to a particular project detail. This column may contain either one Municipality Name, multiple Municipality Names separated by commas, 'statewide', etc.",
+                "A textual description of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI = Program delivery cost associated with this project.",
+                "The name of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI",
+                "Federal Agency corresponding to the State Agency. Valid value: US HUD.",
+                "Agency data is up to date as of this date",
+                "Funds committed to this project but not yet spent",
+                "This is the name of a county where a Superstorm Sandy related project was worked on. This column may have a single name of a county, a value of 'Statewide' for projects being worked on at a State level, or it will contain the value 'Multi County' for those projects that cross more than on County. A comma separated list of multiple counties relating to one project detail is in the column.",
+                "Federal Agency that is the funding source for the state Agency, DCA. Valid value: CDBG-DR",
+                "The type of project that the funds are being used for (ZONE Program Delivery LMI, RREM UN, etc.)",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Pathway",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Payment Type"
+              ],
+            "columns_format" :
+              [
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                { "view" : "date", "align" : "left" },
+                {},
+                { "align" : "left" },
+                {},
+                {},
+                { "align" : "left" },
+                {},
+                { "view" : "date", "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                { "align" : "left" },
+                {},
+                { "align" : "left" },
+                { "align" : "left" }
+              ],
+            "download_count" : 389,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2017-08-25T18:20:07.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" : [ "dca", "sandy-master", "sandy" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "12/29/14"
+                },
+                {
+                  "key" : "Asset-Details_Asset-End-Date",
+                  "value" : "Ongoing"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "County"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Internal-Tracking_Asset-Steward-Comment",
+                  "value" : "Alison Burt - Alison.Burt@icfi.com"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/7rzp-zkts",
+        "link" : "https://data.nj.gov/Human-Services/DCA-DCA-Resettlement-UN-Project/7rzp-zkts",
+        "owner" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          },
+        "creator" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DCA - DCA Resettlement LMI Project",
+            "id" : "xkhu-wtjq",
+            "resource_name" : null,
+            "parent_fxf" : [ "j9i2-jh6f" ],
+            "description" : "This is a report for all the relevant columns of DCA - Amount Allocated, Obligated, Paid- broken down by program, project, county and municipality.",
+            "attribution" : "DCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "filter",
+            "updatedAt" : "2026-09-08T14:08:14.000Z",
+            "createdAt" : "2015-08-06T13:09:46.000Z",
+            "metadata_updated_at" : "2025-01-14T22:17:41.000Z",
+            "data_updated_at" : "2026-09-08T14:08:14.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 12,
+                "page_views_last_month" : 35,
+                "page_views_total" : 1710,
+                "page_views_last_week_log" : 3.700439718141092,
+                "page_views_last_month_log" : 5.169925001442312,
+                "page_views_total_log" : 10.740624044489413
+              },
+            "columns_name" :
+              [
+                "Vendor",
+                "Project Type",
+                "As Of Date",
+                "Federal Agency",
+                "Funding Source",
+                "Program Description",
+                "Project",
+                "Project Description",
+                "County",
+                "Municipality",
+                "Pathway Selection",
+                "Obligated Amount",
+                "Obligated Date",
+                "Disbursed Amount",
+                "Disbursed Date",
+                "Applicant",
+                "Payment Type"
+              ],
+            "columns_field_name" :
+              [
+                "rrem_contractor",
+                "project_type",
+                "as_of_date",
+                "federal_agency",
+                "funding_source",
+                "program_description",
+                "project_name",
+                "project_description",
+                "county",
+                "municipality",
+                "rrem_pathway_selection",
+                "obligated_amount",
+                "obligated_date",
+                "disbursed_amount",
+                "disbursed_date",
+                "applicant_name",
+                "rrem_payment_type"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Calendar date",
+                "Number",
+                "Calendar date",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Contractor",
+                "The type of project that the funds are being used for (ZONE Program Delivery LMI, RREM UN, etc.)",
+                "Agency data is up to date as of this date",
+                "Federal Agency corresponding to the State Agency. Valid value: US HUD.",
+                "Federal Agency that is the funding source for the state Agency, DCA. Valid value: CDBG-DR",
+                "Short Description of the CDBG-DR program or any new program",
+                "The name of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI",
+                "A textual description of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI = Program delivery cost associated with this project.",
+                "This is the name of a county where a Superstorm Sandy related project was worked on. This column may have a single name of a county, a value of 'Statewide' for projects being worked on at a State level, or it will contain the value 'Multi County' for those projects that cross more than on County. A comma separated list of multiple counties relating to one project detail is in the column.",
+                "This is the Municipality name or names that pertain to a particular project detail. This column may contain either one Municipality Name, multiple Municipality Names separated by commas, 'statewide', etc.",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Pathway",
+                "Funds committed to this project but not yet spent",
+                "The date that the funds were committed to this project",
+                "Measureable quantity for which the funds were disbursed",
+                "Date on which the funds were disbursed",
+                "Applicant/recipient of the funds.  Example: DCA Division of Codes and Standards, DCA Homeowner Housing, etc.",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Payment Type"
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                { "view" : "date", "align" : "left" },
+                {},
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {},
+                {},
+                {},
+                { "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                { "view" : "date", "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" }
+              ],
+            "download_count" : 320,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2017-08-25T18:20:07.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" : [ "sandy", "sandy-master", "dca" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "12/29/14"
+                },
+                {
+                  "key" : "Asset-Details_Asset-End-Date",
+                  "value" : "Ongoing"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "County"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Internal-Tracking_Asset-Steward-Comment",
+                  "value" : "Alison Burt - Alison.Burt@icfi.com"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/xkhu-wtjq",
+        "link" : "https://data.nj.gov/Human-Services/DCA-DCA-Resettlement-LMI-Project/xkhu-wtjq",
+        "owner" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          },
+        "creator" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DCA - DCA RREM Program Delivery UN Project",
+            "id" : "j55w-v6uv",
+            "resource_name" : null,
+            "parent_fxf" : [ "j9i2-jh6f" ],
+            "description" : "This is a report for all the relevant columns of DCA - Amount Allocated, Obligated, Paid- broken down by program, project, county and municipality.",
+            "attribution" : "DCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "filter",
+            "updatedAt" : "2026-09-08T14:08:14.000Z",
+            "createdAt" : "2015-08-06T13:26:43.000Z",
+            "metadata_updated_at" : "2025-01-14T22:08:57.000Z",
+            "data_updated_at" : "2026-09-08T14:08:14.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 9,
+                "page_views_last_month" : 165,
+                "page_views_total" : 1499,
+                "page_views_last_week_log" : 3.3219280948873626,
+                "page_views_last_month_log" : 7.375039431346925,
+                "page_views_total_log" : 10.550746785383243
+              },
+            "columns_name" :
+              [
+                "Project Type",
+                "Disbursed Date",
+                "Disbursed Amount",
+                "Obligated Amount",
+                "Vendor",
+                "Project Description",
+                "Project",
+                "Funding Source",
+                "Federal Agency",
+                "County",
+                "Program Description",
+                "As Of Date",
+                "Payment Type",
+                "Obligated Date",
+                "Pathway Selection",
+                "Applicant",
+                "Municipality"
+              ],
+            "columns_field_name" :
+              [
+                "project_type",
+                "disbursed_date",
+                "disbursed_amount",
+                "obligated_amount",
+                "rrem_contractor",
+                "project_description",
+                "project_name",
+                "funding_source",
+                "federal_agency",
+                "county",
+                "program_description",
+                "as_of_date",
+                "rrem_payment_type",
+                "obligated_date",
+                "rrem_pathway_selection",
+                "applicant_name",
+                "municipality"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Calendar date",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The type of project that the funds are being used for (ZONE Program Delivery LMI, RREM UN, etc.)",
+                "Date on which the funds were disbursed",
+                "Measureable quantity for which the funds were disbursed",
+                "Funds committed to this project but not yet spent",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Contractor",
+                "A textual description of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI = Program delivery cost associated with this project.",
+                "The name of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI",
+                "Federal Agency that is the funding source for the state Agency, DCA. Valid value: CDBG-DR",
+                "Federal Agency corresponding to the State Agency. Valid value: US HUD.",
+                "This is the name of a county where a Superstorm Sandy related project was worked on. This column may have a single name of a county, a value of 'Statewide' for projects being worked on at a State level, or it will contain the value 'Multi County' for those projects that cross more than on County. A comma separated list of multiple counties relating to one project detail is in the column.",
+                "Short Description of the CDBG-DR program or any new program",
+                "Agency data is up to date as of this date",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Payment Type",
+                "The date that the funds were committed to this project",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Pathway",
+                "Applicant/recipient of the funds.  Example: DCA Division of Codes and Standards, DCA Homeowner Housing, etc.",
+                "This is the Municipality name or names that pertain to a particular project detail. This column may contain either one Municipality Name, multiple Municipality Names separated by commas, 'statewide', etc."
+              ],
+            "columns_format" :
+              [
+                {},
+                { "view" : "date", "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                {},
+                { "align" : "left" },
+                { "align" : "left" },
+                {},
+                {},
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {}
+              ],
+            "download_count" : 195,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2017-08-25T18:20:07.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" : [ "sandy", "dca", "sandy-master" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "12/29/14"
+                },
+                {
+                  "key" : "Asset-Details_Asset-End-Date",
+                  "value" : "Ongoing"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "County"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Internal-Tracking_Asset-Steward-Comment",
+                  "value" : "Alison Burt - Alison.Burt@icfi.com"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/j55w-v6uv",
+        "link" : "https://data.nj.gov/Human-Services/DCA-DCA-RREM-Program-Delivery-UN-Project/j55w-v6uv",
+        "owner" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          },
+        "creator" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DCA - DCA RREM LMI Project",
+            "id" : "qwg6-jgte",
+            "resource_name" : null,
+            "parent_fxf" : [ "j9i2-jh6f" ],
+            "description" : "This is a report for all the relevant columns of DCA - Amount Allocated, Obligated, Paid- broken down by program, project, county and municipality.",
+            "attribution" : "DCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "filter",
+            "updatedAt" : "2026-09-08T14:08:14.000Z",
+            "createdAt" : "2015-08-06T13:25:48.000Z",
+            "metadata_updated_at" : "2025-01-14T22:12:16.000Z",
+            "data_updated_at" : "2026-09-08T14:08:14.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 7,
+                "page_views_last_month" : 30,
+                "page_views_total" : 1500,
+                "page_views_last_week_log" : 3.0,
+                "page_views_last_month_log" : 4.954196310386876,
+                "page_views_total_log" : 10.55170826162069
+              },
+            "columns_name" :
+              [
+                "Project",
+                "Disbursed Amount",
+                "Obligated Date",
+                "Obligated Amount",
+                "Vendor",
+                "Applicant",
+                "Municipality",
+                "Project Type",
+                "Project Description",
+                "Payment Type",
+                "County",
+                "As Of Date",
+                "Funding Source",
+                "Federal Agency",
+                "Pathway Selection",
+                "Disbursed Date",
+                "Program Description"
+              ],
+            "columns_field_name" :
+              [
+                "project_name",
+                "disbursed_amount",
+                "obligated_date",
+                "obligated_amount",
+                "rrem_contractor",
+                "applicant_name",
+                "municipality",
+                "project_type",
+                "project_description",
+                "rrem_payment_type",
+                "county",
+                "as_of_date",
+                "funding_source",
+                "federal_agency",
+                "rrem_pathway_selection",
+                "disbursed_date",
+                "program_description"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Number",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The name of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI",
+                "Measureable quantity for which the funds were disbursed",
+                "The date that the funds were committed to this project",
+                "Funds committed to this project but not yet spent",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Contractor",
+                "Applicant/recipient of the funds.  Example: DCA Division of Codes and Standards, DCA Homeowner Housing, etc.",
+                "This is the Municipality name or names that pertain to a particular project detail. This column may contain either one Municipality Name, multiple Municipality Names separated by commas, 'statewide', etc.",
+                "The type of project that the funds are being used for (ZONE Program Delivery LMI, RREM UN, etc.)",
+                "A textual description of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI = Program delivery cost associated with this project.",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Payment Type",
+                "This is the name of a county where a Superstorm Sandy related project was worked on. This column may have a single name of a county, a value of 'Statewide' for projects being worked on at a State level, or it will contain the value 'Multi County' for those projects that cross more than on County. A comma separated list of multiple counties relating to one project detail is in the column.",
+                "Agency data is up to date as of this date",
+                "Federal Agency that is the funding source for the state Agency, DCA. Valid value: CDBG-DR",
+                "Federal Agency corresponding to the State Agency. Valid value: US HUD.",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Pathway",
+                "Date on which the funds were disbursed",
+                "Short Description of the CDBG-DR program or any new program"
+              ],
+            "columns_format" :
+              [
+                { "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                { "view" : "date", "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                { "align" : "left" },
+                {},
+                {},
+                {},
+                { "align" : "left" },
+                {},
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                {},
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" }
+              ],
+            "download_count" : 298,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2017-08-25T18:20:07.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" : [ "sandy", "sandy-master", "dca" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "12/29/14"
+                },
+                {
+                  "key" : "Asset-Details_Asset-End-Date",
+                  "value" : "Ongoing"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "County"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Internal-Tracking_Asset-Steward-Comment",
+                  "value" : "Alison Burt - Alison.Burt@icfi.com"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/qwg6-jgte",
+        "link" : "https://data.nj.gov/Human-Services/DCA-DCA-RREM-LMI-Project/qwg6-jgte",
+        "owner" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          },
+        "creator" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DCA - DCA Tenant Based Rental Assistance (TBRA) Program Delivery Project",
+            "id" : "h3pk-phth",
+            "resource_name" : null,
+            "parent_fxf" : [ "j9i2-jh6f" ],
+            "description" : "This is a report for all the relevant columns of DCA - Amount Allocated, Obligated, Paid- broken down by program, project, county and municipality.",
+            "attribution" : "DCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "filter",
+            "updatedAt" : "2026-09-08T14:08:14.000Z",
+            "createdAt" : "2016-01-25T21:20:48.000Z",
+            "metadata_updated_at" : "2025-01-14T22:07:34.000Z",
+            "data_updated_at" : "2026-09-08T14:08:14.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 10,
+                "page_views_last_month" : 40,
+                "page_views_total" : 1456,
+                "page_views_last_week_log" : 3.4594316186372978,
+                "page_views_last_month_log" : 5.357552004618084,
+                "page_views_total_log" : 10.508785162064513
+              },
+            "columns_name" :
+              [
+                "Project Type",
+                "Disbursed Date",
+                "Applicant",
+                "Project Description",
+                "Program Description",
+                "As Of Date",
+                "Disbursed Amount",
+                "Vendor",
+                "County",
+                "Funding Source",
+                "Payment Type",
+                "Obligated Date",
+                "Federal Agency",
+                "Pathway Selection",
+                "Obligated Amount",
+                "Municipality",
+                "Project"
+              ],
+            "columns_field_name" :
+              [
+                "project_type",
+                "disbursed_date",
+                "applicant_name",
+                "project_description",
+                "program_description",
+                "as_of_date",
+                "disbursed_amount",
+                "rrem_contractor",
+                "county",
+                "funding_source",
+                "rrem_payment_type",
+                "obligated_date",
+                "federal_agency",
+                "rrem_pathway_selection",
+                "obligated_amount",
+                "municipality",
+                "project_name"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The type of project that the funds are being used for (ZONE Program Delivery LMI, RREM UN, etc.)",
+                "Date on which the funds were disbursed",
+                "Applicant/recipient of the funds.  Example: DCA Division of Codes and Standards, DCA Homeowner Housing, etc.",
+                "A textual description of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI = Program delivery cost associated with this project.",
+                "Short Description of the CDBG-DR program or any new program",
+                "Agency data is up to date as of this date",
+                "Measureable quantity for which the funds were disbursed",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Contractor",
+                "This is the name of a county where a Superstorm Sandy related project was worked on. This column may have a single name of a county, a value of 'Statewide' for projects being worked on at a State level, or it will contain the value 'Multi County' for those projects that cross more than on County. A comma separated list of multiple counties relating to one project detail is in the column.",
+                "Federal Agency that is the funding source for the state Agency, DCA. Valid value: CDBG-DR",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Payment Type",
+                "The date that the funds were committed to this project",
+                "Federal Agency corresponding to the State Agency. Valid value: US HUD.",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Pathway",
+                "Funds committed to this project but not yet spent",
+                "This is the Municipality name or names that pertain to a particular project detail. This column may contain either one Municipality Name, multiple Municipality Names separated by commas, 'statewide', etc.",
+                "The name of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI"
+              ],
+            "columns_format" :
+              [
+                {},
+                { "view" : "date", "align" : "right" },
+                { "align" : "left" },
+                {},
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                {},
+                { "align" : "left" },
+                { "align" : "left" },
+                { "view" : "date", "align" : "right" },
+                {},
+                { "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                { "align" : "left" }
+              ],
+            "download_count" : 255,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2017-08-25T18:20:07.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" : [ "sandy", "sandy-master", "dca" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "12/29/14"
+                },
+                {
+                  "key" : "Asset-Details_Asset-End-Date",
+                  "value" : "Ongoing"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "County"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Internal-Tracking_Asset-Steward-Comment",
+                  "value" : "Alison Burt - Alison.Burt@icfi.com"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/h3pk-phth",
+        "link" : "https://data.nj.gov/Human-Services/DCA-DCA-Tenant-Based-Rental-Assistance-TBRA-Progra/h3pk-phth",
+        "owner" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          },
+        "creator" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DCA - DCA LGS Support for Governmental Entities LMI Project",
+            "id" : "rj32-fwgh",
+            "resource_name" : null,
+            "parent_fxf" : [ "j9i2-jh6f" ],
+            "description" : "This is a report for all the relevant columns of DCA - Amount Allocated, Obligated, Paid- broken down by program, project, county and municipality.",
+            "attribution" : "DCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "filter",
+            "updatedAt" : "2026-09-08T14:08:14.000Z",
+            "createdAt" : "2015-08-06T12:53:42.000Z",
+            "metadata_updated_at" : "2025-01-14T22:12:45.000Z",
+            "data_updated_at" : "2026-09-08T14:08:14.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 9,
+                "page_views_last_month" : 21,
+                "page_views_total" : 1257,
+                "page_views_last_week_log" : 3.3219280948873626,
+                "page_views_last_month_log" : 4.459431618637297,
+                "page_views_total_log" : 10.296916206879288
+              },
+            "columns_name" :
+              [
+                "As Of Date",
+                "Disbursed Date",
+                "Disbursed Amount",
+                "Obligated Date",
+                "Applicant",
+                "Municipality",
+                "Project Description",
+                "Project",
+                "Program Description",
+                "Funding Source",
+                "Federal Agency",
+                "Project Type",
+                "Pathway Selection",
+                "Obligated Amount",
+                "Vendor",
+                "County",
+                "Payment Type"
+              ],
+            "columns_field_name" :
+              [
+                "as_of_date",
+                "disbursed_date",
+                "disbursed_amount",
+                "obligated_date",
+                "applicant_name",
+                "municipality",
+                "project_description",
+                "project_name",
+                "program_description",
+                "funding_source",
+                "federal_agency",
+                "project_type",
+                "rrem_pathway_selection",
+                "obligated_amount",
+                "rrem_contractor",
+                "county",
+                "rrem_payment_type"
+              ],
+            "columns_datatype" :
+              [
+                "Calendar date",
+                "Calendar date",
+                "Number",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Agency data is up to date as of this date",
+                "Date on which the funds were disbursed",
+                "Measureable quantity for which the funds were disbursed",
+                "The date that the funds were committed to this project",
+                "Applicant/recipient of the funds.  Example: DCA Division of Codes and Standards, DCA Homeowner Housing, etc.",
+                "This is the Municipality name or names that pertain to a particular project detail. This column may contain either one Municipality Name, multiple Municipality Names separated by commas, 'statewide', etc.",
+                "A textual description of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI = Program delivery cost associated with this project.",
+                "The name of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI",
+                "Short Description of the CDBG-DR program or any new program",
+                "Federal Agency that is the funding source for the state Agency, DCA. Valid value: CDBG-DR",
+                "Federal Agency corresponding to the State Agency. Valid value: US HUD.",
+                "The type of project that the funds are being used for (ZONE Program Delivery LMI, RREM UN, etc.)",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Pathway",
+                "Funds committed to this project but not yet spent",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Contractor",
+                "This is the name of a county where a Superstorm Sandy related project was worked on. This column may have a single name of a county, a value of 'Statewide' for projects being worked on at a State level, or it will contain the value 'Multi County' for those projects that cross more than on County. A comma separated list of multiple counties relating to one project detail is in the column.",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Payment Type"
+              ],
+            "columns_format" :
+              [
+                { "view" : "date", "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                {},
+                {},
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {},
+                {},
+                { "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                {},
+                {},
+                { "align" : "left" }
+              ],
+            "download_count" : 180,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2017-08-25T18:20:07.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" : [ "sandy-master", "dca", "sandy" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "12/29/14"
+                },
+                {
+                  "key" : "Asset-Details_Asset-End-Date",
+                  "value" : "Ongoing"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "County"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Internal-Tracking_Asset-Steward-Comment",
+                  "value" : "Alison Burt - Alison.Burt@icfi.com"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/rj32-fwgh",
+        "link" : "https://data.nj.gov/Human-Services/DCA-DCA-LGS-Support-for-Governmental-Entities-LMI-/rj32-fwgh",
+        "owner" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          },
+        "creator" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DCA - DCA Local Planning Services Project",
+            "id" : "yrbx-ztif",
+            "resource_name" : null,
+            "parent_fxf" : [ "j9i2-jh6f" ],
+            "description" : "This is a report for all the relevant columns of DCA - Amount Allocated, Obligated, Paid- broken down by program, project, county and municipality.",
+            "attribution" : "DCA",
+            "attribution_link" : null,
+            "contact_email" : "ContactDataNJ@tech.nj.gov",
+            "type" : "filter",
+            "updatedAt" : "2026-09-08T14:08:14.000Z",
+            "createdAt" : "2015-08-06T12:54:55.000Z",
+            "metadata_updated_at" : "2025-01-14T22:17:51.000Z",
+            "data_updated_at" : "2026-09-08T14:08:14.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 13,
+                "page_views_last_month" : 30,
+                "page_views_total" : 1237,
+                "page_views_last_week_log" : 3.8073549220576037,
+                "page_views_last_month_log" : 4.954196310386876,
+                "page_views_total_log" : 10.273795599214266
+              },
+            "columns_name" :
+              [
+                "Disbursed Date",
+                "Funding Source",
+                "Payment Type",
+                "Vendor",
+                "Federal Agency",
+                "As Of Date",
+                "Program Description",
+                "Project",
+                "Project Description",
+                "Project Type",
+                "County",
+                "Municipality",
+                "Applicant",
+                "Pathway Selection",
+                "Obligated Amount",
+                "Obligated Date",
+                "Disbursed Amount"
+              ],
+            "columns_field_name" :
+              [
+                "disbursed_date",
+                "funding_source",
+                "rrem_payment_type",
+                "rrem_contractor",
+                "federal_agency",
+                "as_of_date",
+                "program_description",
+                "project_name",
+                "project_description",
+                "project_type",
+                "county",
+                "municipality",
+                "applicant_name",
+                "rrem_pathway_selection",
+                "obligated_amount",
+                "obligated_date",
+                "disbursed_amount"
+              ],
+            "columns_datatype" :
+              [
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Calendar date",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Date on which the funds were disbursed",
+                "Federal Agency that is the funding source for the state Agency, DCA. Valid value: CDBG-DR",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Payment Type",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Contractor",
+                "Federal Agency corresponding to the State Agency. Valid value: US HUD.",
+                "Agency data is up to date as of this date",
+                "Short Description of the CDBG-DR program or any new program",
+                "The name of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI",
+                "A textual description of a DCA project related to Superstorm Sandy. For example: DCA Zoning Code Enforcement Program Delivery LMI = Program delivery cost associated with this project.",
+                "The type of project that the funds are being used for (ZONE Program Delivery LMI, RREM UN, etc.)",
+                "This is the name of a county where a Superstorm Sandy related project was worked on. This column may have a single name of a county, a value of 'Statewide' for projects being worked on at a State level, or it will contain the value 'Multi County' for those projects that cross more than on County. A comma separated list of multiple counties relating to one project detail is in the column.",
+                "This is the Municipality name or names that pertain to a particular project detail. This column may contain either one Municipality Name, multiple Municipality Names separated by commas, 'statewide', etc.",
+                "Applicant/recipient of the funds.  Example: DCA Division of Codes and Standards, DCA Homeowner Housing, etc.",
+                "Rehabilitation, Reconstruction, Elevation and Mitigation Pathway",
+                "Funds committed to this project but not yet spent",
+                "The date that the funds were committed to this project",
+                "Measureable quantity for which the funds were disbursed"
+              ],
+            "columns_format" :
+              [
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {},
+                {},
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {},
+                {},
+                {},
+                {},
+                { "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                },
+                { "view" : "date", "align" : "left" },
+                {
+                  "precision" : "2",
+                  "align" : "right",
+                  "currencyStyle" : "USD",
+                  "humane" : "false",
+                  "precisionStyle" : "currency"
+                }
+              ],
+            "download_count" : 245,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2017-08-25T18:20:07.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" : [ "dca", "sandy-master", "sandy" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "NJ OIT Open Data Center"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "Data NJ Team"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "ContactDataNJ@tech.nj.gov"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Provider-Organization",
+                  "value" : "Community Affairs"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Start-Date",
+                  "value" : "12/29/14"
+                },
+                {
+                  "key" : "Asset-Details_Asset-End-Date",
+                  "value" : "Ongoing"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Collection-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Asset-Details_Geographic-Coverage",
+                  "value" : "County"
+                },
+                {
+                  "key" : "Asset-Details_Asset-Posting-Frequency",
+                  "value" : "Monthly"
+                },
+                {
+                  "key" : "Internal-Tracking_Asset-Steward-Comment",
+                  "value" : "Alison Burt - Alison.Burt@icfi.com"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.nj.gov" },
+        "permalink" : "https://data.nj.gov/d/yrbx-ztif",
+        "link" : "https://data.nj.gov/Human-Services/DCA-DCA-Local-Planning-Services-Project/yrbx-ztif",
+        "owner" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          },
+        "creator" :
+          {
+            "id" : "e98h-xmn4",
+            "user_type" : "interactive",
+            "display_name" : "OIT-DATANJAdmin"
+          }
+      }
+    ],
+  "resultSetSize" : 62,
+  "timings" : { "serviceMillis" : 167, "searchMillis" : [ 2, 154 ] },
+  "warnings" : []
+}

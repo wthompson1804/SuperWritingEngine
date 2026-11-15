@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?q=Hackensack&limit=10",
+ "retrieved_at": "2026-11-15T21:21:31+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/0b96be90fd1b4f08.json",
+ "source": "non_nyc_records"
+}

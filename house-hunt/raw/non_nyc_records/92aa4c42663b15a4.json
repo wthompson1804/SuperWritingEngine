@@ -1,0 +1,287 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "Eastbound Tunnel and Bridge Traffic Monthly Volume, Port Authority of NY NJ:  Beginning 2011",
+            "id" : "5uvq-7ebw",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Port Authority collects eastbound vehicle traffic volumes from its toll plazas at the six Port Authority vehicular crossings (i.e., George Washington Bridge, Holland Tunnel, Lincoln Tunnel, Goethals Bridge, Outerbridge Crossing and Bayonne Bridge).  This dataset contains monthly eastbound traffic volumes for each crossing and for all Port Authority crossings combined, based on vehicles passing through Authority’s toll plazas, for each month starting in January 2011 through December 2012.  The dataset contains traffic volumes for three types of vehicles (autos, buses, trucks) for each month.",
+            "attribution" : "The Port Authority of NY & NJ",
+            "attribution_link" : "https://www.panynj.gov/port-authority/en/index.html",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-04-15T21:03:07.000Z",
+            "createdAt" : "2013-05-09T17:57:32.000Z",
+            "metadata_updated_at" : "2026-04-15T21:03:07.000Z",
+            "data_updated_at" : "2016-10-11T19:50:29.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 91,
+                "page_views_last_month" : 289,
+                "page_views_total" : 11737,
+                "page_views_last_week_log" : 6.523561956057013,
+                "page_views_last_month_log" : 8.179909090014934,
+                "page_views_total_log" : 13.518898992777313
+              },
+            "columns_name" :
+              [
+                "Vehicles Type",
+                "Bridge/Tunnel",
+                "Eastbound Volume",
+                "Year",
+                "Month"
+              ],
+            "columns_field_name" :
+              [
+                "vehicles_type",
+                "bridge_tunnel",
+                "eastbound_volume",
+                "year",
+                "month"
+              ],
+            "columns_datatype" : [
+                                   "Text",
+                                   "Text",
+                                   "Number",
+                                   "Number",
+                                   "Text"
+                                 ],
+            "columns_description" : [ "", "", "", "", "" ],
+            "columns_format" :
+              [
+                { "align" : "right" },
+                {},
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                {}
+              ],
+            "download_count" : 4808,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2016-10-11T19:51:12.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "vehicles",
+                "traffic",
+                "bridges",
+                "port authority",
+                "tunnels"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.panynj.gov/bridges-tunnels/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "The Port Authority of New York & New Jersey, Tunnels Bridges & Terminals Department, Transportation & Revenue Programs Division"
+                },
+                { "key" : "Dataset-Summary_Units", "value" : "Vehicles" },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "djacobs@panynj.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "By Facility and Vehicle Type"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "Interstate vehicular crossings between New York and New Jersey"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Tunnels, Bridges & Terminals Department"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2011"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Port Authority of New York and New Jersey"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "Because the Port Authority only collects tolls in the eastbound direction (towards NYC) on all of its crossings, the traffic volumes in this dataset represent only eastbound traffic for each time period."
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Eastbound (New York-bound) direction only. Revenue information cannot be extrapolated or calculated from this data."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/5uvq-7ebw",
+        "link" : "https://data.ny.gov/Transportation/Eastbound-Tunnel-and-Bridge-Traffic-Monthly-Volume/5uvq-7ebw",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Eastbound Tunnel and Bridge Traffic Annual Volume, Port Authority of NY NJ:  Beginning 2002",
+            "id" : "9ray-6dmy",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Port Authority collects eastbound vehicle traffic volumes from its toll plazas at the six Port Authority vehicular crossings (i.e., George Washington Bridge, Holland Tunnel, Lincoln Tunnel, Goethals Bridge, Outerbridge Crossing and Bayonne Bridge).  This dataset contains annual eastbound traffic volumes for each crossing and for all Port Authority crossings combined, based on vehicles passing through Authority’s toll plazas, for each year from 2002 through 2012.  The dataset contains traffic volumes for three types of vehicles (autos, buses, trucks) for each year.",
+            "attribution" : "The Port Authority of NY & NJ",
+            "attribution_link" : "https://www.panynj.gov/port-authority/en/index.html",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-04-15T21:03:51.000Z",
+            "createdAt" : "2013-05-09T16:01:29.000Z",
+            "metadata_updated_at" : "2026-04-15T21:03:51.000Z",
+            "data_updated_at" : "2016-10-11T19:46:24.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 91,
+                "page_views_last_month" : 327,
+                "page_views_total" : 11896,
+                "page_views_last_week_log" : 6.523561956057013,
+                "page_views_last_month_log" : 8.357552004618084,
+                "page_views_total_log" : 13.538310202597684
+              },
+            "columns_name" :
+              [ "Year", "Bridge/Tunnel", "Vehicle Type", "Eastbound Volume" ],
+            "columns_field_name" :
+              [ "year", "bridge_tunnel", "vehicle_type", "eastbound_volume" ],
+            "columns_datatype" : [ "Number", "Text", "Text", "Number" ],
+            "columns_description" : [ "", "", "", "" ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                },
+                {},
+                { "align" : "right" },
+                {}
+              ],
+            "download_count" : 4286,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2016-10-11T19:48:31.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "vehicles",
+                "bridges",
+                "port authority",
+                "traffic",
+                "tunnels"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.panynj.gov/bridges-tunnels/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "The Port Authority of New York & New Jersey, Tunnels Bridges & Terminals Department, Transportation & Revenue Programs Division"
+                },
+                { "key" : "Dataset-Summary_Units", "value" : "Vehicles" },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "djacobs@panynj.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "By Facility and Vehicle Type"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "Interstate vehicular crossings between New York and New Jersey "
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Tunnels, Bridges & Terminals Department"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2002"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Port Authority of New York and New Jersey"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "Because the Port Authority only collects tolls in the eastbound direction (towards NYC) on all of its crossings, the traffic volumes in this dataset represent only eastbound traffic for each time period."
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Eastbound (New York-bound) direction only.  Revenue information cannot be extrapolated or calculated from this data. "
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/9ray-6dmy",
+        "link" : "https://data.ny.gov/Transportation/Eastbound-Tunnel-and-Bridge-Traffic-Annual-Volume-/9ray-6dmy",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      }
+    ],
+  "resultSetSize" : 2,
+  "timings" : { "serviceMillis" : 36, "searchMillis" : [ 5, 8 ] },
+  "warnings" : []
+}

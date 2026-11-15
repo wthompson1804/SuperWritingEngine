@@ -1,0 +1,13 @@
+
+
+User-agent: *
+Disallow: /admin/
+Disallow: /docs/
+Disallow: /gallery/
+Disallow: /page_content/
+Disallow: /template/
+Disallow: /*.swf$
+Disallow: /common/
+Disallow: /includes/
+Disallow: /pages/popup_disclaimer.asp
+Disallow: /pages/popup_privacy-policy.asp

@@ -1,0 +1,25 @@
+# Allow-Crawling
+User-agent: *
+Allow: /
+
+# Disallow specific paths
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+
+Disallow: /wp-includes/
+Allow: /wp-includes/css/
+Allow: /wp-includes/js/
+Allow: /wp-includes/images/
+Allow: /wp-includes/assets/
+
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /trackback/
+Disallow: /wp-login.php
+Disallow: /wp-register.php
+Disallow: /?elementor_library
+Disallow: /?password-protected
+Disallow: /sample-page/
+Disallow: /hello-world/
+
+Sitemap: https://tgmanchorpoint.com/sitemap.xml

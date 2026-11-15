@@ -1,0 +1,12 @@
+# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+
+User-Agent: *
+Allow: *.js # global
+Allow: /assets/packs/*
+Disallow: /referral
+Disallow: /rewards
+Disallow: /privacy
+Disallow: /*/reviews
+Disallow: /saasagreementstandard
+
+Sitemap: https://modernmsg.com/sitemap.xml

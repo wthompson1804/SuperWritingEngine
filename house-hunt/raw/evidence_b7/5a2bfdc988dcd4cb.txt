@@ -1,0 +1,9 @@
+Sitemap: https://www.merionstratford.com/sitemap.xml
+User-agent: *
+disallow: /refs/
+disallow: /runtimes/
+disallow: /wwwroot/ 
+disallow: /js/
+disallow: /lib/
+disallow: /dashboard/
+Disallow: /*.ashx

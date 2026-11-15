@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /9417/news/disappearance-of-young-adult-a-mystery-to-his-family-and-friends/
+Disallow: /9279/news/forest-rangers-come-up-empty-handed-after-all-day-search/
+Disallow: /9256/news/forest-rangers-start-search-today-for-missing-young-adult/
+Disallow: /cgi-bin/
+Disallow: /?s=
+Disallow: /*?*
+User-agent: dotbot
+Disallow: /
+
+User-agent: *
+Crawl-delay: 6

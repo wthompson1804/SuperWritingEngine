@@ -8,3 +8,6 @@ raw/big/
 raw/**/*.html
 raw/**/*.htm
 raw/fbi_cde/*.json
+# third-party scripts and stylesheets cached by agents can embed the site's own tokens
+raw/**/*.js
+raw/**/*.css

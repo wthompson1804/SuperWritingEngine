@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?domains=data.ct.gov&q=code%20enforcement&limit=10",
+ "retrieved_at": "2026-11-15T21:21:18+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/0a96e9a8083c902b.json",
+ "source": "non_nyc_records"
+}

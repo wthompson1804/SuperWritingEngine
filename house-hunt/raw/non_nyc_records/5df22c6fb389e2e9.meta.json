@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?q=stamford%20police&limit=10",
+ "retrieved_at": "2026-11-15T21:20:59+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/5df22c6fb389e2e9.json",
+ "source": "non_nyc_records"
+}

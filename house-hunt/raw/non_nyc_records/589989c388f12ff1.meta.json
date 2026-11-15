@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?q=%22Jersey%20City%22%20police&limit=10",
+ "retrieved_at": "2026-11-15T21:21:36+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/589989c388f12ff1.json",
+ "source": "non_nyc_records"
+}

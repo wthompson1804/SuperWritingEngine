@@ -1,0 +1,651 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "Underground Storage Tanks (USTs) - Enforcement Summary",
+            "id" : "sfgx-68fy",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This list provides Underground Storage Tank (UST) site, tank, contact and Enforcement information for the approximately 45,000 commercial underground storage tanks (USTs) previously and currently registered in Connecticut, of which about 8,000 are still in use.\n(There are 3 other related data sets: 1-Facility and Tank Details, 2-Contacts, and \n3-Compliance Details.)\n\nAnnually, or when a UST is installed, removed, or altered, a notification form must be completed via EZFile and submitted to CT DEEP. Notification is required for non-residential underground storage tanks, including those for oil, petroleum and chemical liquids, as well as residential home heating oil tanks serving five or more units.  See online at:  https://www.ct.gov/deep/cwp/view.asp?q=322600\n\nThe underground storage tank regulations and the Connecticut underground storage tank enforcement program have been in effect since November 1985. This list is based on notification information submitted by the public since 1985, and is updated weekly. This list contains information on both active and on non-active USTs, as well as federally regulated and state regulated USTs.\n\nFactors to Consider When Using this data:\n\n-Not every required notification form is submitted to the DEEP. We can only enter the information we receive.\n\n-We know there are errors in the data although we strive to minimize them. Error examples may include: notification forms completed incorrectly by the owner/operator, data entry errors, duplicate site information, misspelled names and addresses and/or missing data.",
+            "attribution" : "CT Department of Energy & Environmental Protection",
+            "attribution_link" : "https://portal.ct.gov/DEEP/Underground-Storage-Tanks/UST-Registration-Compliance--Release-Prevention",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-10T17:01:09.000Z",
+            "createdAt" : "2018-06-11T15:17:42.000Z",
+            "metadata_updated_at" : "2023-08-04T20:20:02.000Z",
+            "data_updated_at" : "2026-11-10T17:01:09.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 47,
+                "page_views_last_month" : 161,
+                "page_views_total" : 5548,
+                "page_views_last_week_log" : 5.584962500721157,
+                "page_views_last_month_log" : 7.339850002884624,
+                "page_views_total_log" : 12.438012087651133
+              },
+            "columns_name" :
+              [
+                "Site State",
+                "Site Zip",
+                "Affiliation",
+                "Client Address Line 1",
+                "Site City",
+                "Site Name",
+                "Client Suffix",
+                "Client Zip",
+                "Status",
+                "Type",
+                "Site Address",
+                "Client Name (First)",
+                "Action Date",
+                "Resolution Date",
+                "UST Site ID Number",
+                "Client State",
+                "Number of Violations",
+                "Client Name (Last)",
+                "Client City",
+                "Client Zip4",
+                "Enforcement Action ID",
+                "Resolution Type"
+              ],
+            "columns_field_name" :
+              [
+                "site_state",
+                "site_zip",
+                "client_type",
+                "client_address_line_1",
+                "site_city",
+                "site_name",
+                "client_suffix",
+                "client_zip_code",
+                "status_type_desc",
+                "env_int_type_desc",
+                "site_address_line_1",
+                "client_first_name",
+                "start_date",
+                "end_date",
+                "relatedfacilityid",
+                "client_state",
+                "num_of_violation",
+                "client_last_name",
+                "client_city",
+                "client_zip4",
+                "enforcement_action_id",
+                "resolutiondesc"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The state of the facility (Connecticut)",
+                "The zip code related to the Site Address",
+                "The relationship of the entity to the related enforcement action",
+                "Address of the entity",
+                "The city/town/village of the related facility",
+                "The related facility name related to the enforcement",
+                "Suffix of the entity if an individual",
+                "Zip code related to the address of the entity",
+                "The phase of the enforcement action",
+                "The category of enforcement type",
+                "The physical street address of the related facility",
+                "The first name of the entity",
+                "Date the enforcement action was issued",
+                "Date the enforcement action was closed",
+                "The agency-assigned facility identifier",
+                "State related to the address of the entity",
+                "The count of violations from the related enforcement action",
+                "The entity's business or last name",
+                "City related to the address of the entity",
+                "ZIP+4 value related to the Client Zip",
+                "Agency assigned identifier to track enforcement",
+                "Further classification of the resolution"
+              ],
+            "columns_format" :
+              [
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "left"
+                },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" }
+              ],
+            "download_count" : 17643,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2018-12-14T16:36:50.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "ust",
+                "compliance",
+                "violation",
+                "enforcement",
+                "red tag",
+                "summary",
+                "storage",
+                "warning",
+                "underground",
+                "tank"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Agency_Agency",
+                  "value" : "Department of Energy and Environmental Protection"
+                },
+                {
+                  "key" : "Details_Geographic-Unit",
+                  "value" : "Not applicable"
+                },
+                { "key" : "Details_Update-Frequency", "value" : "Weekly" },
+                {
+                  "key" : "Details_Temporal-Coverage",
+                  "value" : "1994 to current year"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ct.gov", "license" : "Public Domain" },
+        "permalink" : "https://data.ct.gov/d/sfgx-68fy",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/Underground-Storage-Tanks-USTs-Enforcement-Summary/sfgx-68fy",
+        "owner" :
+          {
+            "id" : "ytdn-ejsm",
+            "user_type" : "interactive",
+            "display_name" : "DEEP Office of Information Management"
+          },
+        "creator" :
+          {
+            "id" : "ytdn-ejsm",
+            "user_type" : "interactive",
+            "display_name" : "DEEP Office of Information Management"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Underground Storage Tanks (USTs) - Contact Details",
+            "id" : "ikyf-f2iu",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This list provides Underground Storage Tank (UST) site, tank, contact and Enforcement information for the approximately 45,000 commercial underground storage tanks (USTs) previously and currently registered in Connecticut, of which about 8,000 are still in use. (There are 3 other related data sets:1- Facility and Tank Details, 2-Enforcement Summary, and 3-Compliance Details.)\n\nAnnually, or when a UST is installed, removed, or altered, a notification form must be completed via EZFile (see link) and submitted to CT DEEP.  Notification is required for non-residential underground storage tanks, including those for oil, petroleum and chemical liquids, as well as residential home heating oil tanks serving five or more units.  See online at: https://www.ct.gov/deep/cwp/view.asp?q=322600\n\nThe underground storage tank regulations (see link) and the Connecticut underground storage tank enforcement program have been in effect since November 1985.  This list is based on notification information submitted by the public since 1985, and is updated weekly.  This list contains information on both active and on non-active USTs, as well as federally regulated and state regulated USTs.\n\nFactors to Consider When Using this data:\n\n-Not every required notification form is submitted to the DEEP.  We can only enter the information we receive.\n\n-We know there are errors in the data although we strive to minimize them.  Error examples may include: notification forms completed incorrectly by the owner/operator, data entry errors, duplicate site information, misspelled names and addresses and/or missing data.",
+            "attribution" : "CT Department of Energy & Environmental Protection",
+            "attribution_link" : "https://portal.ct.gov/DEEP/Underground-Storage-Tanks/UST-Registration-Compliance--Release-Prevention",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-10T17:00:50.000Z",
+            "createdAt" : "2018-06-11T15:30:29.000Z",
+            "metadata_updated_at" : "2023-09-15T19:15:53.000Z",
+            "data_updated_at" : "2026-11-10T17:00:50.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 37,
+                "page_views_last_month" : 100,
+                "page_views_total" : 2766,
+                "page_views_last_week_log" : 5.247927513443585,
+                "page_views_last_month_log" : 6.6582114827517955,
+                "page_views_total_log" : 11.434106928609955
+              },
+            "columns_name" :
+              [
+                "Client State",
+                "Site Name",
+                "Client Affiliation",
+                "Client Zip4",
+                "Client Zip",
+                "Client City",
+                "Client Address Line 1",
+                "Client First Name",
+                "Site Zip4",
+                "Site City",
+                "Client Last Name",
+                "Site Zip",
+                "UST Site ID Number",
+                "Client Address Line 2",
+                "Contact",
+                "Site Address",
+                "Client Phone Extension",
+                "Client Phone Number"
+              ],
+            "columns_field_name" :
+              [
+                "companyorindivstate",
+                "facilitynm",
+                "affiliationtype",
+                "companyorindivzip4",
+                "companyorindivzip",
+                "companyorindivcity",
+                "companyorindivaddressline1",
+                "companyorindivfirstnm",
+                "facilityzip4",
+                "facilitycity",
+                "companyorindivlastname",
+                "facilityzip",
+                "agencyfacilityid",
+                "companyorindivaddressline2",
+                "contactname",
+                "facilityaddr",
+                "companyorindivext",
+                "companyorindivphone"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "State related to the client address",
+                "This is the Agency site name and may not reflect the exact current name especially of any commercial property.",
+                "How the client is related to the registration",
+                "The ZIP+4 Code is the 4-digit code appended to the standard ZIP for the client address",
+                "ZIP code related to the client address",
+                "City related to the  client address",
+                "Street address line 1 for the client",
+                "First name of the entity",
+                "The ZIP+4 Code is the 4-digit code appended to the standard ZIP for the facility location",
+                "The city associated with the street address of the facility",
+                "Business or last name of the entity",
+                "The ZIP code related to the site address and city",
+                "An Agency assigned unique facility number",
+                "Street address line 2 for the client",
+                "When \".\", same as client name, or an identified party in a business",
+                "The stree address of the facility",
+                "Phone entension, if any",
+                "Phone contact information"
+              ],
+            "columns_format" :
+              [
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" }
+              ],
+            "download_count" : 54085,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2018-12-14T16:36:10.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "underground",
+                "ust",
+                "client",
+                "contact",
+                "owner.operator",
+                "storage",
+                "tank"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Agency_Agency",
+                  "value" : "Department of Energy and Environmental Protection"
+                },
+                {
+                  "key" : "Details_Geographic-Unit",
+                  "value" : "Not applicable"
+                },
+                { "key" : "Details_Update-Frequency", "value" : "Weekly" },
+                {
+                  "key" : "Details_Temporal-Coverage",
+                  "value" : "Last registered data can range from current week to several decades old"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ct.gov", "license" : "Public Domain" },
+        "permalink" : "https://data.ct.gov/d/ikyf-f2iu",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/Underground-Storage-Tanks-USTs-Contact-Details/ikyf-f2iu",
+        "owner" :
+          {
+            "id" : "ytdn-ejsm",
+            "user_type" : "interactive",
+            "display_name" : "DEEP Office of Information Management"
+          },
+        "creator" :
+          {
+            "id" : "ytdn-ejsm",
+            "user_type" : "interactive",
+            "display_name" : "DEEP Office of Information Management"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Underground Storage Tanks (USTs) - Facility and Tank Details",
+            "id" : "utni-rddb",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This list provides Underground Storage Tank (UST) site, tank, contact and Enforcement information for the approximately 45,000 commercial underground storage tanks (USTs) previously and currently registered in Connecticut, of which about 8,000 are still in use. (There are 3 other related data sets: 1-Contact Details 2-Enforcement Summary, and 3-Compliance Details)\n\nAnnually, or when a UST is installed, removed, or altered, a notification form must be completed via EZFile (see link) and submitted to CT DEEP. Notification is required for non-residential underground storage tanks, including those for oil, petroleum and chemical liquids, as well as residential home heating oil tanks serving five or more units.  See online at: https://www.ct.gov/deep/cwp/view.asp?q=322600\n\nThe underground storage tank regulations and the Connecticut underground storage tank enforcement program have been in effect since November 1985. This list is based on notification information submitted by the public since 1985, and is updated weekly. This list contains information on both active and on non-active USTs, as well as federally regulated and state regulated USTs.\n\nFactors to Consider When Using this data:\n\n-Not every required notification form is submitted to the DEEP. We can only enter the information we receive.\n\n-We know there are errors in the data although we strive to minimize them. Error examples may include: notification forms completed incorrectly by the owner/operator, data entry errors, duplicate site information, misspelled names and addresses and/or missing data.",
+            "attribution" : "CT Department of Energy & Environmental Protection",
+            "attribution_link" : "https://portal.ct.gov/DEEP/Underground-Storage-Tanks/Underground-Storage-Tanks",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-10T17:00:29.000Z",
+            "createdAt" : "2018-06-11T14:40:42.000Z",
+            "metadata_updated_at" : "2023-08-04T19:02:00.000Z",
+            "data_updated_at" : "2026-11-10T17:00:29.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 273,
+                "page_views_last_month" : 1395,
+                "page_views_total" : 41657,
+                "page_views_last_week_log" : 8.098032082960527,
+                "page_views_last_month_log" : 10.447083226209653,
+                "page_views_total_log" : 15.346305956821805
+              },
+            "columns_name" :
+              [
+                "Last Used Date",
+                "Status of Tank",
+                "Spill Protection",
+                "Tank Collection Method",
+                "UST Site ID Number",
+                "UST Site Latitude",
+                "Site Collection Method",
+                "Tank Reference Point Type",
+                "Tank No.",
+                "Closure Type",
+                "Construction Type - Piping",
+                "Piping Details",
+                "Tank Latitude",
+                "Tank Longitude",
+                "Site Name",
+                "Site Zip",
+                "Tank Details",
+                "Site Address",
+                "Estimated Total Capacity (gallons)",
+                "Site City",
+                "Compartment",
+                "Site Reference Point Type",
+                "Substance Currently Stored",
+                "Construction Type - Tank",
+                "Installation Date",
+                "Overfill Protection",
+                "UST Site Longitude"
+              ],
+            "columns_field_name" :
+              [
+                "tanklastuseddt",
+                "tankstatuscd",
+                "spillinstalled",
+                "tankgpssourcecd",
+                "agencyfacilityid",
+                "ust_site_latitude",
+                "facilitygpssourcecd",
+                "tankgpsaccuracycd",
+                "agencytankid",
+                "closuretypecd",
+                "pipeconstructioncd",
+                "pipemoddesc",
+                "tanklat",
+                "tanklon",
+                "facilitynm",
+                "facilityzip",
+                "tankmodsdesc",
+                "facilityaddr",
+                "capacitygalsnum",
+                "facilitycity",
+                "compartmentnum",
+                "facilitygpsaccuracycd",
+                "substancecd",
+                "tankconstructioncd",
+                "installationdt",
+                "overfillinstalled",
+                "ust_site_longitude"
+              ],
+            "columns_datatype" :
+              [
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Estimated date the UST was last used for storing regulated substances",
+                "Indicates usage state of tank",
+                "Device(s) provding spill protection",
+                "Metadata for tank location method",
+                "A unique agency identifier for the facility in the form of \"town id - sequence number\"",
+                "Latitude of facility location",
+                "Metadata for site location method",
+                "Metadata for tank location accuracy",
+                "Tank identifier assigned by owner/operator which can be alphanumeric",
+                "Description of closure method",
+                "Piping construction material",
+                "Piping construction details",
+                "Latitude of tank location",
+                "Longitude of tank location",
+                "The name of the facility or location",
+                "Zip Code assigned to the street address of the facility",
+                "Tank construction details",
+                "The  physical street address of the facility",
+                "Quanity the tank can hold",
+                "The town/city/village where the facility is located",
+                "Compartment designation (a,b...) for multi-compartment tanks assigned by owner/operator",
+                "Metadata for site location accuracy",
+                "Product currently stored (or last stored in the case of closed compartments/tanks)",
+                "Tank construction material",
+                "Notified tank installation date",
+                "Device(s) providing overfill protection",
+                "Longitude of facility location"
+              ],
+            "columns_format" :
+              [
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {},
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "left"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "left"
+                },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "left"
+                },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                {}
+              ],
+            "download_count" : 15306,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2019-01-24T18:20:09.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" : [ "underground", "tank", "ust", "storage" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Agency_Agency",
+                  "value" : "Department of Energy and Environmental Protection"
+                },
+                {
+                  "key" : "Details_Geographic-Unit",
+                  "value" : "Not applicable"
+                },
+                { "key" : "Details_Update-Frequency", "value" : "Weekly" },
+                {
+                  "key" : "Details_Temporal-Coverage",
+                  "value" : "Current year data per inspections/notifications for active tanks , and static historical data from up to many decades past for permanenly closed tanks"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ct.gov", "license" : "Public Domain" },
+        "permalink" : "https://data.ct.gov/d/utni-rddb",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/Underground-Storage-Tanks-USTs-Facility-and-Tank-D/utni-rddb",
+        "owner" :
+          {
+            "id" : "ytdn-ejsm",
+            "user_type" : "interactive",
+            "display_name" : "DEEP Office of Information Management"
+          },
+        "creator" :
+          {
+            "id" : "ytdn-ejsm",
+            "user_type" : "interactive",
+            "display_name" : "DEEP Office of Information Management"
+          }
+      }
+    ],
+  "resultSetSize" : 3,
+  "timings" : { "serviceMillis" : 19, "searchMillis" : [ 3, 7 ] },
+  "warnings" : []
+}

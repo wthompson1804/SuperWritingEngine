@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?domains=data.ct.gov&q=elevator&limit=10",
+ "retrieved_at": "2026-11-15T21:21:13+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/7d79ae26cbcbfed7.json",
+ "source": "non_nyc_records"
+}

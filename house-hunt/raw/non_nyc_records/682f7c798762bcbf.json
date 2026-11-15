@@ -1,0 +1,1159 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "Coastal Area",
+            "id" : "9ctd-k8au",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Coastal Area layer is a 1:24,000-scale, polygon feature-based layer that includes the land and waters that lie within the Coastal Area as defined by Connecticut General Statute (C.G.S.) 22a-94(a). Activities and actions conducted within the coastal area by Federal and State Agencies (i.e., U.S. Army Corps of Engineers (USACOE), DEP regulatory programs, and state plans and actions) must be consistent with all of the applicable standards and criteria contained in the Connecticut Coastal Management Act (C.G.S. 22a-90 to 22a-113). A subset of the Coastal Area, the Coastal Boundary, represents an area within which activities regulated or conducted by coastal municipalities must be consistent with the Coastal Management Act.\nAs defined in this section of the statutes, the Coastal Area includes the land and water within the area delineated by the following: the westerly, southerly and easterly limits of the state's jurisdiction in Long Island Sound; the towns of Greenwich, Stamford, Darien, Norwalk, Westport, Fairfield, Bridgeport, Stratford, Shelton, Milford, Orange, West Haven, New Haven, Hamden, North Haven, East Haven, Branford, Guilford, Madison, Clinton, Westbrook, Deep River, Chester, Essex, Old Saybrook, Lyme, Old Lyme, East Lyme, Waterford, New London, Montville, Norwich, Preston, Ledyard, Groton and Stonington. This layer includes a single polygon feature defined by the boundaries described above. Attribute information is comprised of an Av_Legend to denote the coastal area. Data is compiled at 1:24,000 scale. This data is not updated.",
+            "attribution" : "Department of Energy and Environmental Protection",
+            "attribution_link" : null,
+            "contact_email" : "mailto:deep.helpdesk.footprints@ct.gov",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:22.000Z",
+            "createdAt" : "2025-01-29T19:04:05.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:22.000Z",
+            "data_updated_at" : "2025-01-29T19:04:05.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 15,
+                "page_views_last_month" : 82,
+                "page_views_total" : 897,
+                "page_views_last_week_log" : 4.0,
+                "page_views_last_month_log" : 6.375039431346925,
+                "page_views_total_log" : 9.810571634741148
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:04:05.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "ct",
+                "ctdeep",
+                "coastal area",
+                "coastal boundary",
+                "coastal regulations",
+                "connecticut",
+                "connecticut coastal management act",
+                "deep",
+                "environmental",
+                "long island sound",
+                "usa",
+                "united states of america",
+                "area",
+                "boundaries",
+                "coastal"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Agency_agency",
+                  "value" : "Department of Energy and Environmental Protection"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto:deep.helpdesk.footprints@ct.gov"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2018-12-21T20:25:34.138Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7255,40.9500,-71.8250,41.6065"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=dd5d43c4da084fc68c77e0af93970a33&sublayer=0"
+                },
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "Department of Energy & Environmental Protection"
+                },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-area"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2018-12-21T19:23:57.000Z"
+                },
+                { "key" : "Common-Core_Contact-Name", "value" : "deepgis" }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-area"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/Coastal_Area/FeatureServer/0"
+                    },
+                  "title" : "ArcGIS GeoService"
+                },
+                {
+                  "urls" :
+                    {
+                      "text/csv" : "https://geodata.ct.gov/api/download/v1/items/dd5d43c4da084fc68c77e0af93970a33/csv?layers=0"
+                    },
+                  "title" : "CSV"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/zip" : "https://geodata.ct.gov/api/download/v1/items/dd5d43c4da084fc68c77e0af93970a33/shapefile?layers=0"
+                    },
+                  "title" : "Shapefile"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.geo+json" : "https://geodata.ct.gov/api/download/v1/items/dd5d43c4da084fc68c77e0af93970a33/geojson?layers=0"
+                    },
+                  "title" : "GeoJSON"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.google-earth.kml+xml" : "https://geodata.ct.gov/api/download/v1/items/dd5d43c4da084fc68c77e0af93970a33/kml?layers=0"
+                    },
+                  "title" : "KML"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/zip" : "https://geodata.ct.gov/api/download/v1/items/dd5d43c4da084fc68c77e0af93970a33/filegdb?layers=0"
+                    },
+                  "title" : "File Geodatabase"
+                },
+                {
+                  "urls" :
+                    {
+                      "text/plain" : "https://geodata.ct.gov/api/download/v1/items/dd5d43c4da084fc68c77e0af93970a33/featureCollection?layers=0"
+                    },
+                  "title" : "Feature Collection"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.ms-excel" : "https://geodata.ct.gov/api/download/v1/items/dd5d43c4da084fc68c77e0af93970a33/excel?layers=0"
+                    },
+                  "title" : "Excel"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/geopackage+sqlite3" : "https://geodata.ct.gov/api/download/v1/items/dd5d43c4da084fc68c77e0af93970a33/geoPackage?layers=0"
+                    },
+                  "title" : "GeoPackage"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/geopackage+sqlite3" : "https://geodata.ct.gov/api/download/v1/items/dd5d43c4da084fc68c77e0af93970a33/sqlite?layers=0"
+                    },
+                  "title" : "SQLite Geodatabase"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-area"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/9ctd-k8au",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/Coastal-Area/9ctd-k8au",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Municipal Fiscal Indicators: Uniform Chart of Accounts, 2020-2023",
+            "id" : "e2qt-k238",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Municipal Fiscal Indicators is an annual compendium of information compiled by the Office of Policy and Management, Office of Finance, Municipal Finance Services Unit (MFS). Municipal Fiscal Indicators contains the most current financial data available for each of Connecticut's 169 municipalities.\nThe data contained in Indicators provides key financial and demographic information on municipalities in Connecticut. The data includes selected demographic and economic data relating to, or having an impact upon, a municipality’s financial condition.\n\nThe majority of this data was compiled from the audited financial statements that are filed annually with the State of Connecticut, Office of Policy and Management, Office of Finance. Unlike prior years' where the audited financial information was compiled by OPM, the FY 2021 information in this edition was based upon the self-reporting by municipalities of their own audited data.\n\nThe most recent edition is for the Fiscal Years Ended 2019-2023 published in September 2025.\n\nNote: \nFor 2020, this dataset does not include data for the following municipalities, which did not complete the UCOA reporting process in Ansonia, Bloomfield, Bozrah, Danbury, Derby, East Haven, East Lyme, Easton, Hamden, Hebron, Meriden, New Canaan, Norfolk, North Branford, North Canaan, North Haven, Prospect, Seymour, Southington, Stonington, West Haven, Westbrook, Wethersfield, Willington, and Wilton.\n\nFor 2021, this dataset does not include data for: Andover, Bolton, Bozrah, Bridgewater, Colebrook, Danbury, East Haven, East Lyme, Easton, Enfield, Mansfield, New Britain, New Haven, Norfolk, North Branford, North Canaan, North Haven, Seymour, Southington, Warren, West Hartford, West Haven, Willington, Wilton, and Woodbury.\n\nFor 2022, this dataset does not include data for: Andover, Colchester, Danbury, East Lyme, Marlborough, Norfolk, North Canaan, Prospect, Westbrook, and Wethersfield. \n\nFor 2023, this dataset does not include data for: Andover, Danbury, East Lyme, Marlborough, Middletown, New Haven, Stamford, Westbrook, and Wethersfield. \n\nThe most recent data on the Municipal Fiscal Indicators is included in the following datasets:\n\nMunicipal-Fiscal-Indicators: Financial Statement Information, 2020-2023\nhttps://data.ct.gov/d/d6pe-dw46\n\nMunicipal-Fiscal-Indicators: Uniform Chart of Accounts, 2020-2023\nhttps://data.ct.gov/d/e2qt-k238\n\nMunicipal Fiscal Indicators: Pension Funding Information for Defined Benefit Pension Plans, 2020-2023\nhttps://data.ct.gov/d/73q3-sgr8\n\nMunicipal Fiscal Indicators: Type and Number of Pension Plans, 2020-2023\nhttps://data.ct.gov/d/i84g-vvfb\n\nMunicipal Fiscal Indicators: Other Post-Employment Benefits (OPEB), 2020-2023\nhttps://data.ct.gov/d/ei7n-pnn9\n\nMunicipal Fiscal Indicators: Economic and Grand List Data, 2019-2025\nhttps://data.ct.gov/d/xgef-f6jp\n\nMunicipal Fiscal Indicators: Benchmark Labor Data, 2019-2024\nhttps://data.ct.gov/d/5ijb-j6bn\n\nMunicipal Fiscal Indicators: Bond Ratings, 2019-2023\nhttps://data.ct.gov/d/a65i-iag5\n\nMunicipal Fiscal Indicators: Individual Town Data, 2014-2023\nhttps://data.ct.gov/d/ej6f-y2wf\n\nMunicipal Fiscal Indicators: Totals and Averages, 2014-2023\nhttps://data.ct.gov/d/ryvc-y5rf",
+            "attribution" : "Office of Policy and Management",
+            "attribution_link" : "https://portal.ct.gov/opm/igp-munfins/municipal-financial-services/municipal-fiscal-indicators",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-07-17T22:03:51.000Z",
+            "createdAt" : "2024-11-13T15:41:10.000Z",
+            "metadata_updated_at" : "2026-07-17T22:03:51.000Z",
+            "data_updated_at" : "2026-03-03T04:38:27.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 27,
+                "page_views_last_month" : 145,
+                "page_views_total" : 1352,
+                "page_views_last_week_log" : 4.807354922057604,
+                "page_views_last_month_log" : 7.189824558880018,
+                "page_views_total_log" : 10.401946123976536
+              },
+            "columns_name" :
+              [
+                "Salaries Wages",
+                "Other",
+                "Total",
+                "Department Description",
+                "Function Code",
+                "Employee Benefits",
+                "Tax Code",
+                "Municipality FIPS",
+                "Municipality FIPS GEOID",
+                "Entity Name",
+                "Year",
+                "Function Description",
+                "Department Code"
+              ],
+            "columns_field_name" :
+              [
+                "salaries_wages",
+                "other",
+                "total",
+                "department_description",
+                "function_code",
+                "employee_benefits",
+                "tax_code",
+                "municipality_fips",
+                "municipality_fips_geoid",
+                "entity_name",
+                "year",
+                "function_description",
+                "department_code"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Salaries Wages",
+                "Other",
+                "Total",
+                "Department Description",
+                "Function Code",
+                "Employee Benefits",
+                "Tax Code",
+                "Municipality FIPS",
+                "Municipality FIPS GEOID",
+                "Entity Name",
+                "Year",
+                "Function Description",
+                "Department Code"
+              ],
+            "columns_format" :
+              [
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "noCommas" : "true" },
+                { "decimalSeparator" : ".", "noCommas" : "true" },
+                {},
+                { "decimalSeparator" : ".", "noCommas" : "true" },
+                {},
+                { "decimalSeparator" : ".", "noCommas" : "true" }
+              ],
+            "download_count" : 1616,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2026-02-06T21:20:06.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Local Government",
+            "domain_tags" :
+              [
+                "opm",
+                "2020 municipal fiscal indicators",
+                "2021 municipal fiscal indicators",
+                "2022 municipal fiscal indicators",
+                "2023 municipal fiscal indicators",
+                "municipal fiscal indicators",
+                "ucoa"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Agency_Agency",
+                  "value" : "Office of Policy and Management"
+                },
+                {
+                  "key" : "Details_Geographic-Unit",
+                  "value" : "Municipality"
+                },
+                { "key" : "Details_Update-Frequency", "value" : "Annually" },
+                { "key" : "Details_Temporal-Coverage", "value" : "2020-2023" }
+              ]
+          },
+        "metadata" : { "domain" : "data.ct.gov", "license" : "Public Domain" },
+        "permalink" : "https://data.ct.gov/d/e2qt-k238",
+        "link" : "https://data.ct.gov/Local-Government/Municipal-Fiscal-Indicators-Uniform-Chart-of-Accou/e2qt-k238",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Coastal Area and Boundary Polygon",
+            "id" : "cgve-kyfh",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Coastal Area & Boundary Polygon:\n\nThe Coastal Area layer is a 1:24,000-scale, polygon feature-based layer that includes the land and waters that lie within the Coastal Area as defined by Connecticut General Statute (C.G.S.) 22a-94(a). Activities and actions conducted within the coastal area by Federal and State Agencies (i.e., U.S. Army Corps of Engineers (USACOE), DEP regulatory programs, and state plans and actions) must be consistent with all of the applicable standards and criteria contained in the Connecticut Coastal Management Act (C.G.S. 22a-90 to 22a-113). A subset of the Coastal Area, the Coastal Boundary, represents an area within which activities regulated or conducted by coastal municipalities must be consistent with the Coastal Management Act.\nAs defined in this section of the statutes, the Coastal Area includes the land and water within the area delineated by the following: the westerly, southerly and easterly limits of the state's jurisdiction in Long Island Sound; the towns of Greenwich, Stamford, Darien, Norwalk, Westport, Fairfield, Bridgeport, Stratford, Shelton, Milford, Orange, West Haven, New Haven, Hamden, North Haven, East Haven, Branford, Guilford, Madison, Clinton, Westbrook, Deep River, Chester, Essex, Old Saybrook, Lyme, Old Lyme, East Lyme, Waterford, New London, Montville, Norwich, Preston, Ledyard, Groton and Stonington. This layer includes a single polygon feature defined by the boundaries described above. Attribute information is comprised of an Av_Legend to denote the coastal area. Data is compiled at 1:24,000 scale. This data is not updated.\n\nThe Coastal Boundary layer is a 1:24,000-scale, polygon feature-based layer of the legal mylar-based maps adopted by the Commissioner of the Department of Environmental Protection (DEP) (i.e., maps were adopted on a town by town basis) showing the extent of lands and coastal waters as defined by Connecticut General Statute (C.G.S.) 22a-93(5)) within Connecticut's coastal area (defined by C.G.S. 22a-94(c)). The coastal boundary is a hybrid of the original 1:24,000 version maps prepared by DEP consistent with C.G.S. 22a-94(d) (Coastal Area) and the revised boundary mapping undertaken by twenty-two coastal towns prepared pursuant to C.G.S. 22a-94(f). This layer therefore does not replace the legal maps and may not be used for legal determinations.\nThe Coastal Boundary layer includes a single polygon feature that represents the coastal boundary. No other features are included in this layer. Data is compiled at 1:24,000 scale. Attribute information is comprised of an Av_Legend attribute and a CoastB_Flg attribute to denote the coastal boundary. Other attributes include automatically calculated Shape_Length and Shape_Area fields. This data is not updated.\nAny regulated activity conducted within the coastal boundary by a municipal agency (i.e., plans of development, zoning regulations, municipal coastal programs and coastal site plan review (i.e., site plans submitted to zoning commission, subdivision or resubdivision plans submitted to planning commission, application for special permit or exception to the zoning or planning commissions or zoning board of appeals, variance submitted to zoning board of appeals and a referral of a municipal project)) must be conducted in a manner consistent with the requirements of the Connecticut Coastal Management Act (CMA; C.G.S. 22a-90 to 22a-113). As the Coastal Boundary is a hybrid of the Coastal Area, all state and federal agency activities must be consistent with the requirements of the CMA.\nAs defined in C.G.S. 22a-94(b) the coastal boundary is a \"continuous line delineated on the landward side by the interior contour elevation of the one hundred year frequency coastal flood zone, as defined and determined by the National Flood Insurance Act, as amended (USC 42 Section 4101, P.L. 93-234), or a one thousand foot linear setback measured from the mean high water mark in coastal waters, or a one thousand foot linear setback",
+            "attribution" : "Department of Energy and Environmental Protection",
+            "attribution_link" : null,
+            "contact_email" : "mailto:deep.helpdesk.footprints@ct.gov",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:45.000Z",
+            "createdAt" : "2025-01-29T19:04:10.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:45.000Z",
+            "data_updated_at" : "2025-01-29T19:04:10.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 16,
+                "page_views_last_month" : 81,
+                "page_views_total" : 678,
+                "page_views_last_week_log" : 4.08746284125034,
+                "page_views_last_month_log" : 6.357552004618085,
+                "page_views_total_log" : 9.407267764244732
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:04:10.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "ct",
+                "ctdeep",
+                "coastal area",
+                "coastal boundary",
+                "coastal regulations",
+                "connecticut",
+                "connecticut coastal management act",
+                "deep",
+                "environment",
+                "long island sound",
+                "area",
+                "boundary",
+                "coastal"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Agency_agency",
+                  "value" : "Department of Energy and Environmental Protection"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto:deep.helpdesk.footprints@ct.gov"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2023-07-03T18:49:08.000Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7255,40.9500,-71.8250,41.6065"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=7a2a7364bd5d47d696e82c3d1a8360e2"
+                },
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "Department of Energy & Environmental Protection"
+                },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/maps/CTDEEP::coastal-area-and-boundary-polygon"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2019-10-18T13:07:42.000Z"
+                },
+                { "key" : "Common-Core_Contact-Name", "value" : "deepgis" }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/maps/CTDEEP::coastal-area-and-boundary-polygon"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/Coastal_Area_Boundary_Polygon/FeatureServer"
+                    },
+                  "title" : "ArcGIS GeoService"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/maps/CTDEEP::coastal-area-and-boundary-polygon"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/cgve-kyfh",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/Coastal-Area-and-Boundary-Polygon/cgve-kyfh",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Coastal Boundary Polygon",
+            "id" : "6gxs-zrhe",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Coastal Area & Boundary Polygon:\n\nThe Coastal Area layer is a 1:24,000-scale, polygon feature-based layer that includes the land and waters that lie within the Coastal Area as defined by Connecticut General Statute (C.G.S.) 22a-94(a). Activities and actions conducted within the coastal area by Federal and State Agencies (i.e., U.S. Army Corps of Engineers (USACOE), DEP regulatory programs, and state plans and actions) must be consistent with all of the applicable standards and criteria contained in the Connecticut Coastal Management Act (C.G.S. 22a-90 to 22a-113). A subset of the Coastal Area, the Coastal Boundary, represents an area within which activities regulated or conducted by coastal municipalities must be consistent with the Coastal Management Act.\nAs defined in this section of the statutes, the Coastal Area includes the land and water within the area delineated by the following: the westerly, southerly and easterly limits of the state's jurisdiction in Long Island Sound; the towns of Greenwich, Stamford, Darien, Norwalk, Westport, Fairfield, Bridgeport, Stratford, Shelton, Milford, Orange, West Haven, New Haven, Hamden, North Haven, East Haven, Branford, Guilford, Madison, Clinton, Westbrook, Deep River, Chester, Essex, Old Saybrook, Lyme, Old Lyme, East Lyme, Waterford, New London, Montville, Norwich, Preston, Ledyard, Groton and Stonington. This layer includes a single polygon feature defined by the boundaries described above. Attribute information is comprised of an Av_Legend to denote the coastal area. Data is compiled at 1:24,000 scale. This data is not updated.\n\nThe Coastal Boundary layer is a 1:24,000-scale, polygon feature-based layer of the legal mylar-based maps adopted by the Commissioner of the Department of Environmental Protection (DEP) (i.e., maps were adopted on a town by town basis) showing the extent of lands and coastal waters as defined by Connecticut General Statute (C.G.S.) 22a-93(5)) within Connecticut's coastal area (defined by C.G.S. 22a-94(c)). The coastal boundary is a hybrid of the original 1:24,000 version maps prepared by DEP consistent with C.G.S. 22a-94(d) (Coastal Area) and the revised boundary mapping undertaken by twenty-two coastal towns prepared pursuant to C.G.S. 22a-94(f). This layer therefore does not replace the legal maps and may not be used for legal determinations.\nThe Coastal Boundary layer includes a single polygon feature that represents the coastal boundary. No other features are included in this layer. Data is compiled at 1:24,000 scale. Attribute information is comprised of an Av_Legend attribute and a CoastB_Flg attribute to denote the coastal boundary. Other attributes include automatically calculated Shape_Length and Shape_Area fields. This data is not updated.\nAny regulated activity conducted within the coastal boundary by a municipal agency (i.e., plans of development, zoning regulations, municipal coastal programs and coastal site plan review (i.e., site plans submitted to zoning commission, subdivision or resubdivision plans submitted to planning commission, application for special permit or exception to the zoning or planning commissions or zoning board of appeals, variance submitted to zoning board of appeals and a referral of a municipal project)) must be conducted in a manner consistent with the requirements of the Connecticut Coastal Management Act (CMA; C.G.S. 22a-90 to 22a-113). As the Coastal Boundary is a hybrid of the Coastal Area, all state and federal agency activities must be consistent with the requirements of the CMA.\nAs defined in C.G.S. 22a-94(b) the coastal boundary is a \"continuous line delineated on the landward side by the interior contour elevation of the one hundred year frequency coastal flood zone, as defined and determined by the National Flood Insurance Act, as amended (USC 42 Section 4101, P.L. 93-234), or a one thousand foot linear setback measured from the mean high water mark in coastal waters, or a one thousand foot linear setback",
+            "attribution" : "Department of Energy and Environmental Protection",
+            "attribution_link" : null,
+            "contact_email" : "mailto:deep.helpdesk.footprints@ct.gov",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:16.000Z",
+            "createdAt" : "2025-01-29T19:04:11.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:16.000Z",
+            "data_updated_at" : "2025-01-29T19:04:11.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 1,
+                "page_views_last_month" : 15,
+                "page_views_total" : 534,
+                "page_views_last_week_log" : 1.0,
+                "page_views_last_month_log" : 4.0,
+                "page_views_total_log" : 9.06339508128851
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:04:11.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "ct",
+                "ctdeep",
+                "coastal area",
+                "coastal boundary",
+                "coastal regulations",
+                "connecticut",
+                "connecticut coastal management act",
+                "deep",
+                "environment",
+                "long island sound",
+                "area",
+                "boundary",
+                "coastal"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Agency_agency",
+                  "value" : "Department of Energy and Environmental Protection"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto:deep.helpdesk.footprints@ct.gov"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2019-10-18T13:09:11.154Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.6595,40.9505,-71.8259,41.5402"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=7a2a7364bd5d47d696e82c3d1a8360e2&sublayer=1"
+                },
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "Department of Energy & Environmental Protection"
+                },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-boundary-polygon"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2019-10-18T13:07:42.000Z"
+                },
+                { "key" : "Common-Core_Contact-Name", "value" : "deepgis" }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-boundary-polygon"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/Coastal_Area_Boundary_Polygon/FeatureServer/1"
+                    },
+                  "title" : "ArcGIS GeoService"
+                },
+                {
+                  "urls" :
+                    {
+                      "text/csv" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/csv?layers=1"
+                    },
+                  "title" : "CSV"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/zip" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/shapefile?layers=1"
+                    },
+                  "title" : "Shapefile"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.geo+json" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/geojson?layers=1"
+                    },
+                  "title" : "GeoJSON"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.google-earth.kml+xml" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/kml?layers=1"
+                    },
+                  "title" : "KML"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/zip" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/filegdb?layers=1"
+                    },
+                  "title" : "File Geodatabase"
+                },
+                {
+                  "urls" :
+                    {
+                      "text/plain" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/featureCollection?layers=1"
+                    },
+                  "title" : "Feature Collection"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.ms-excel" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/excel?layers=1"
+                    },
+                  "title" : "Excel"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/geopackage+sqlite3" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/geoPackage?layers=1"
+                    },
+                  "title" : "GeoPackage"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/geopackage+sqlite3" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/sqlite?layers=1"
+                    },
+                  "title" : "SQLite Geodatabase"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-boundary-polygon"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/6gxs-zrhe",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/Coastal-Boundary-Polygon/6gxs-zrhe",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Coastal Boundary",
+            "id" : "3guj-z5jn",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Coastal Boundary layer is a 1:24,000-scale, polygon feature-based layer of the legal mylar-based maps adopted by the Commissioner of the Department of Environmental Protection (DEP) (i.e., maps were adopted on a town by town basis) showing the extent of lands and coastal waters as defined by Connecticut General Statute (C.G.S.) 22a-93(5)) within Connecticut's coastal area (defined by C.G.S. 22a-94(c)). The coastal boundary is a hybrid of the original 1:24,000 version maps prepared by DEP consistent with C.G.S. 22a-94(d) (Coastal Area) and the revised boundary mapping undertaken by twenty-two coastal towns prepared pursuant to C.G.S. 22a-94(f). This layer therefore does not replace the legal maps and may not be used for legal determinations.\nThe Coastal Boundary layer includes a single polygon feature that represents the coastal boundary. No other features are included in this layer. Data is compiled at 1:24,000 scale. Attribute information is comprised of an Av_Legend attribute and a CoastB_Flg attribute to denote the coastal boundary. Other attributes include automatically calculated Shape_Length and Shape_Area fields. This data is not updated.\nAny regulated activity conducted within the coastal boundary by a municipal agency (i.e., plans of development, zoning regulations, municipal coastal programs and coastal site plan review (i.e., site plans submitted to zoning commission, subdivision or resubdivision plans submitted to planning commission, application for special permit or exception to the zoning or planning commissions or zoning board of appeals, variance submitted to zoning board of appeals and a referral of a municipal project)) must be conducted in a manner consistent with the requirements of the Connecticut Coastal Management Act (CMA; C.G.S. 22a-90 to 22a-113). As the Coastal Boundary is a hybrid of the Coastal Area, all state and federal agency activities must be consistent with the requirements of the CMA.\nAs defined in C.G.S. 22a-94(b) the coastal boundary is a \"continuous line delineated on the landward side by the interior contour elevation of the one hundred year frequency coastal flood zone, as defined and determined by the National Flood Insurance Act, as amended (USC 42 Section 4101, P.L. 93-234), or a one thousand foot linear setback measured from the mean high water mark in coastal waters, or a one thousand foot linear setback measured from the inland boundary of tidal wetlands mapped under section 22a-20, whichever is farthest inland; and shall be delineated on the seaward side by the seaward extent of the jurisdiction of the state.\"\nThe original boundary maps were created in 1979 on stable mylar overlay using the 1:24,000-scale US Geological Survey topographic quadrangle maps (mylar film format). The source for tidal wetland maps were the legal 1:24,000 maps (mylar format) adopted by the Commissioner of DEP and transformed to 1:24,000 mylar-scale maps by the Office of Policy and Management (OPM) using an accurate pantograph. OPM similarly converted FEMA's flood insurance maps (various scales) to a 1:24,000 mylar overlay. The inland extent of coastal waters was plotted on 1:24,000 USGS topographic maps following the procedures and sources described in The Boundary Between Saltwater and Freshwater in Connecticut, December 1978 prepared by the State of Connecticut, Department of Environmental Protection, Coastal Area Management Program.\nThe following twenty-two towns have adopted municipal coastal boundaries: Chester, Clinton, Darien, Deep River, East Haven, Essex, Fairfield, Greenwich, Groton, Guilford, Hamden, Ledyard, Madison, Milford, New Haven, New London, North Haven, Norwalk, Old Lyme, Old Saybrook, Stamford and Waterford. The coastal boundary maps for these towns may be at different scales than the original DEP draft maps and may contain minor adjustments to the boundary as permitted in C.G.S. 22a-94(f).",
+            "attribution" : "Department of Energy and Environmental Protection",
+            "attribution_link" : null,
+            "contact_email" : "mailto:deep.helpdesk.footprints@ct.gov",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:36.000Z",
+            "createdAt" : "2025-01-29T19:04:05.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:36.000Z",
+            "data_updated_at" : "2025-01-29T19:04:05.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 25,
+                "page_views_last_month" : 83,
+                "page_views_total" : 431,
+                "page_views_last_week_log" : 4.700439718141093,
+                "page_views_last_month_log" : 6.39231742277876,
+                "page_views_total_log" : 8.75488750216347
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:04:05.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "ct",
+                "ctdeep",
+                "coastal area",
+                "coastal boundary",
+                "coastal regulations",
+                "connecticut",
+                "connecticut coastal management act",
+                "deep",
+                "environmental",
+                "long island sound",
+                "usa",
+                "united states of america",
+                "area",
+                "boundaries",
+                "coastal"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Agency_agency",
+                  "value" : "Department of Energy and Environmental Protection"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto:deep.helpdesk.footprints@ct.gov"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2025-11-20T19:35:34.814Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.6595,40.9505,-71.8259,41.5402"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=b5cdf26c7449400caa33b5ef58e4c086&sublayer=0"
+                },
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "Department of Energy & Environmental Protection"
+                },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-boundary"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2018-12-21T19:28:31.000Z"
+                },
+                { "key" : "Common-Core_Contact-Name", "value" : "deepgis" }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-boundary"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/Coastal_Boundary/FeatureServer/0"
+                    },
+                  "title" : "ArcGIS GeoService"
+                },
+                {
+                  "urls" :
+                    {
+                      "text/csv" : "https://geodata.ct.gov/api/download/v1/items/b5cdf26c7449400caa33b5ef58e4c086/csv?layers=0"
+                    },
+                  "title" : "CSV"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/zip" : "https://geodata.ct.gov/api/download/v1/items/b5cdf26c7449400caa33b5ef58e4c086/shapefile?layers=0"
+                    },
+                  "title" : "Shapefile"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.geo+json" : "https://geodata.ct.gov/api/download/v1/items/b5cdf26c7449400caa33b5ef58e4c086/geojson?layers=0"
+                    },
+                  "title" : "GeoJSON"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.google-earth.kml+xml" : "https://geodata.ct.gov/api/download/v1/items/b5cdf26c7449400caa33b5ef58e4c086/kml?layers=0"
+                    },
+                  "title" : "KML"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/zip" : "https://geodata.ct.gov/api/download/v1/items/b5cdf26c7449400caa33b5ef58e4c086/filegdb?layers=0"
+                    },
+                  "title" : "File Geodatabase"
+                },
+                {
+                  "urls" :
+                    {
+                      "text/plain" : "https://geodata.ct.gov/api/download/v1/items/b5cdf26c7449400caa33b5ef58e4c086/featureCollection?layers=0"
+                    },
+                  "title" : "Feature Collection"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.ms-excel" : "https://geodata.ct.gov/api/download/v1/items/b5cdf26c7449400caa33b5ef58e4c086/excel?layers=0"
+                    },
+                  "title" : "Excel"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/geopackage+sqlite3" : "https://geodata.ct.gov/api/download/v1/items/b5cdf26c7449400caa33b5ef58e4c086/geoPackage?layers=0"
+                    },
+                  "title" : "GeoPackage"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/geopackage+sqlite3" : "https://geodata.ct.gov/api/download/v1/items/b5cdf26c7449400caa33b5ef58e4c086/sqlite?layers=0"
+                    },
+                  "title" : "SQLite Geodatabase"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-boundary"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/3guj-z5jn",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/Coastal-Boundary/3guj-z5jn",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Coastal Area Polygon",
+            "id" : "b47u-inak",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Coastal Area & Boundary Polygon:\n\nThe Coastal Area layer is a 1:24,000-scale, polygon feature-based layer that includes the land and waters that lie within the Coastal Area as defined by Connecticut General Statute (C.G.S.) 22a-94(a). Activities and actions conducted within the coastal area by Federal and State Agencies (i.e., U.S. Army Corps of Engineers (USACOE), DEP regulatory programs, and state plans and actions) must be consistent with all of the applicable standards and criteria contained in the Connecticut Coastal Management Act (C.G.S. 22a-90 to 22a-113). A subset of the Coastal Area, the Coastal Boundary, represents an area within which activities regulated or conducted by coastal municipalities must be consistent with the Coastal Management Act.\nAs defined in this section of the statutes, the Coastal Area includes the land and water within the area delineated by the following: the westerly, southerly and easterly limits of the state's jurisdiction in Long Island Sound; the towns of Greenwich, Stamford, Darien, Norwalk, Westport, Fairfield, Bridgeport, Stratford, Shelton, Milford, Orange, West Haven, New Haven, Hamden, North Haven, East Haven, Branford, Guilford, Madison, Clinton, Westbrook, Deep River, Chester, Essex, Old Saybrook, Lyme, Old Lyme, East Lyme, Waterford, New London, Montville, Norwich, Preston, Ledyard, Groton and Stonington. This layer includes a single polygon feature defined by the boundaries described above. Attribute information is comprised of an Av_Legend to denote the coastal area. Data is compiled at 1:24,000 scale. This data is not updated.\n\nThe Coastal Boundary layer is a 1:24,000-scale, polygon feature-based layer of the legal mylar-based maps adopted by the Commissioner of the Department of Environmental Protection (DEP) (i.e., maps were adopted on a town by town basis) showing the extent of lands and coastal waters as defined by Connecticut General Statute (C.G.S.) 22a-93(5)) within Connecticut's coastal area (defined by C.G.S. 22a-94(c)). The coastal boundary is a hybrid of the original 1:24,000 version maps prepared by DEP consistent with C.G.S. 22a-94(d) (Coastal Area) and the revised boundary mapping undertaken by twenty-two coastal towns prepared pursuant to C.G.S. 22a-94(f). This layer therefore does not replace the legal maps and may not be used for legal determinations.\nThe Coastal Boundary layer includes a single polygon feature that represents the coastal boundary. No other features are included in this layer. Data is compiled at 1:24,000 scale. Attribute information is comprised of an Av_Legend attribute and a CoastB_Flg attribute to denote the coastal boundary. Other attributes include automatically calculated Shape_Length and Shape_Area fields. This data is not updated.\nAny regulated activity conducted within the coastal boundary by a municipal agency (i.e., plans of development, zoning regulations, municipal coastal programs and coastal site plan review (i.e., site plans submitted to zoning commission, subdivision or resubdivision plans submitted to planning commission, application for special permit or exception to the zoning or planning commissions or zoning board of appeals, variance submitted to zoning board of appeals and a referral of a municipal project)) must be conducted in a manner consistent with the requirements of the Connecticut Coastal Management Act (CMA; C.G.S. 22a-90 to 22a-113). As the Coastal Boundary is a hybrid of the Coastal Area, all state and federal agency activities must be consistent with the requirements of the CMA.\nAs defined in C.G.S. 22a-94(b) the coastal boundary is a \"continuous line delineated on the landward side by the interior contour elevation of the one hundred year frequency coastal flood zone, as defined and determined by the National Flood Insurance Act, as amended (USC 42 Section 4101, P.L. 93-234), or a one thousand foot linear setback measured from the mean high water mark in coastal waters, or a one thousand foot linear setback",
+            "attribution" : "Department of Energy and Environmental Protection",
+            "attribution_link" : null,
+            "contact_email" : "mailto:deep.helpdesk.footprints@ct.gov",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:45.000Z",
+            "createdAt" : "2025-01-29T19:04:10.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:45.000Z",
+            "data_updated_at" : "2025-01-29T19:04:10.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 3,
+                "page_views_last_month" : 11,
+                "page_views_total" : 253,
+                "page_views_last_week_log" : 2.0,
+                "page_views_last_month_log" : 3.5849625007211565,
+                "page_views_total_log" : 7.988684686772166
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:04:10.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "ct",
+                "ctdeep",
+                "coastal area",
+                "coastal boundary",
+                "coastal regulations",
+                "connecticut",
+                "connecticut coastal management act",
+                "deep",
+                "environment",
+                "long island sound",
+                "area",
+                "boundary",
+                "coastal"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Agency_agency",
+                  "value" : "Department of Energy and Environmental Protection"
+                },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto:deep.helpdesk.footprints@ct.gov"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2019-10-18T13:09:11.172Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7255,40.9500,-71.8250,41.6065"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=7a2a7364bd5d47d696e82c3d1a8360e2&sublayer=0"
+                },
+                {
+                  "key" : "Common-Core_Publisher",
+                  "value" : "Department of Energy & Environmental Protection"
+                },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-area-polygon"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2019-10-18T13:07:42.000Z"
+                },
+                { "key" : "Common-Core_Contact-Name", "value" : "deepgis" }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-area-polygon"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://services1.arcgis.com/FjPcSmEFuDYlIdKC/arcgis/rest/services/Coastal_Area_Boundary_Polygon/FeatureServer/0"
+                    },
+                  "title" : "ArcGIS GeoService"
+                },
+                {
+                  "urls" :
+                    {
+                      "text/csv" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/csv?layers=0"
+                    },
+                  "title" : "CSV"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/zip" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/shapefile?layers=0"
+                    },
+                  "title" : "Shapefile"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.geo+json" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/geojson?layers=0"
+                    },
+                  "title" : "GeoJSON"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.google-earth.kml+xml" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/kml?layers=0"
+                    },
+                  "title" : "KML"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/zip" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/filegdb?layers=0"
+                    },
+                  "title" : "File Geodatabase"
+                },
+                {
+                  "urls" :
+                    {
+                      "text/plain" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/featureCollection?layers=0"
+                    },
+                  "title" : "Feature Collection"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.ms-excel" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/excel?layers=0"
+                    },
+                  "title" : "Excel"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/geopackage+sqlite3" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/geoPackage?layers=0"
+                    },
+                  "title" : "GeoPackage"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/geopackage+sqlite3" : "https://geodata.ct.gov/api/download/v1/items/7a2a7364bd5d47d696e82c3d1a8360e2/sqlite?layers=0"
+                    },
+                  "title" : "SQLite Geodatabase"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTDEEP::coastal-area-polygon"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/b47u-inak",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/Coastal-Area-Polygon/b47u-inak",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      }
+    ],
+  "resultSetSize" : 6,
+  "timings" : { "serviceMillis" : 19, "searchMillis" : [ 3, 4 ] },
+  "warnings" : []
+}

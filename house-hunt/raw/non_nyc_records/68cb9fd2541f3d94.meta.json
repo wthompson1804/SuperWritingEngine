@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?domains=data.nj.gov&q=housing%20inspection&limit=10",
+ "retrieved_at": "2026-11-15T21:21:43+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/68cb9fd2541f3d94.json",
+ "source": "non_nyc_records"
+}

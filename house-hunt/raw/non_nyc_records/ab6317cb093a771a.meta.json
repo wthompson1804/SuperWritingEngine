@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?q=housing%20code%20violations&limit=10",
+ "retrieved_at": "2026-11-15T21:21:03+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/ab6317cb093a771a.json",
+ "source": "non_nyc_records"
+}

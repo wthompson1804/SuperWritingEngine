@@ -1,0 +1,2311 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "Traffic Tickets Issued: Four Year Window",
+            "id" : "q4hy-kbtf",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Data extracted from records of tickets on file with NYS DMV. The tickets were issued to motorists for violations of:  NYS Vehicle & Traffic Law (VTL), Thruway Rules and Regulations, Tax Law, Transportation Law, Parks and Recreation Regulations, Local New York City Traffic Ordinances, and NYS Penal Law pertaining to the involvement of a motor vehicle in acts of assault, homicide, manslaughter and criminal negligence resulting in injury or death.",
+            "attribution" : "NYS DMV",
+            "attribution_link" : "http://dmv.ny.gov/nav/tickets-points-penalties",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-08T07:29:50.000Z",
+            "createdAt" : "2014-06-12T15:58:51.000Z",
+            "metadata_updated_at" : "2026-11-08T07:07:15.000Z",
+            "data_updated_at" : "2026-11-08T07:29:50.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 291,
+                "page_views_last_month" : 1053,
+                "page_views_total" : 52089,
+                "page_views_last_week_log" : 8.189824558880018,
+                "page_views_last_month_log" : 10.041659151637216,
+                "page_views_total_log" : 15.668718816638066
+              },
+            "columns_name" :
+              [
+                "Court",
+                "Violation Year",
+                "Source",
+                "Gender",
+                "State of License",
+                "Violation Charged Code",
+                "Violation Description",
+                "Violation Month",
+                "Violation Day of Week",
+                "Age at Violation",
+                "Police Agency"
+              ],
+            "columns_field_name" :
+              [
+                "court",
+                "violation_year",
+                "source",
+                "gender",
+                "state_of_license",
+                "violation_charged_code",
+                "violation_description",
+                "violation_month",
+                "violation_dow",
+                "age_at_violation",
+                "police_agency"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Number",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Court where the ticket was answerable.",
+                "Calendar year in which the ticket was issued.",
+                "Processing system used by the courts to record and track tickets from issuance to disposition:\nTSLED = “Traffic Safety Law Enforcement & Disposition Program” used by local courts throughout most of NYS.\nTVB = used by NYSDMV Traffic Violation Bureaus in NYC, western Suffolk County, Rochester and Buffalo.",
+                "Gender of person to whom ticket was issued.\nM = Male ; F = Female; C = Organization; U = Unknown",
+                "Name of the state, district, territory, province or country that issued the driver license presented by the motorist at the time of ticket issuance.",
+                "Law code of the violation for which the ticket was issued.",
+                "Description of the violation for which the ticket was issued.",
+                "Month in which the ticket was issued.  1=January; 12=December.",
+                "Day of the week on which the ticket was issued.",
+                "Age, in years, of the person to whom the ticket was issued on the date of ticket issuance.",
+                "The name of the law enforcement agency that issued the ticket."
+              ],
+            "columns_format" :
+              [
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                },
+                { "align" : "left" },
+                { "align" : "center" },
+                { "align" : "center" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                },
+                { "align" : "center" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                { "align" : "left" }
+              ],
+            "download_count" : 10672,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2018-10-25T14:37:18.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "law",
+                "enforcement",
+                "driver",
+                "traffic",
+                "tickets",
+                "nysdmv",
+                "violations",
+                "vehicle"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "This data set reflects only the issuance of traffic tickets. The data cannot be used to determine convictions, dismissals or other aspects of ticket disposition. The data does not include tickets issued in the five Boroughs of New York City for misdemeanor or felony violations. Examples are: — DWI/DWAI and aggravated unlicensed operation; — Penal Law offenses involving the use of a motor vehicle in acts of assault, homicide, manslaughter and criminal negligence resulting in injury or death; and — Tickets for non-misdemeanor/felony offenses that were issued during an arrest for a misdemeanor or felony violation."
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "NYS DMV"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "DriverLicensingSupport@dmv.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Individual tickets"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "All tickets issued in NYS, less the limitations below"
+                },
+                {
+                  "key" : "Dataset-Summary_Data-Frequency",
+                  "value" : "Annual, by June of the following year"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "NYS DMV — Ticketing Systems"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "4 most recent complete years of data prior to current year"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Motor Vehicles, Department of"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://dmv.ny.gov/about-dmv/order-copy-nys-vehicle-and-traffic-law"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/q4hy-kbtf",
+        "link" : "https://data.ny.gov/Transportation/Traffic-Tickets-Issued-Four-Year-Window/q4hy-kbtf",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Motor Vehicle Crashes - Violation Information: Four Year Window",
+            "id" : "abfj-y7uq",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Attributes about each violation citation issued at the scene of the motor vehicle crash reported to NYS DMV",
+            "attribution" : "NYS Department of Motor Vehicles",
+            "attribution_link" : "http://www.dmv.ny.gov",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-01-22T19:39:17.000Z",
+            "createdAt" : "2013-05-28T19:25:14.000Z",
+            "metadata_updated_at" : "2026-01-22T19:39:17.000Z",
+            "data_updated_at" : "2026-01-21T21:47:40.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 83,
+                "page_views_last_month" : 254,
+                "page_views_total" : 12001,
+                "page_views_last_week_log" : 6.39231742277876,
+                "page_views_last_month_log" : 7.994353436858858,
+                "page_views_total_log" : 13.550987214521522
+              },
+            "columns_name" :
+              [
+                "Case Individual ID",
+                "Violation Code",
+                "Violation Description",
+                "Year"
+              ],
+            "columns_field_name" :
+              [
+                "case_individual_id",
+                "violation_code",
+                "violation_description",
+                "year"
+              ],
+            "columns_datatype" : [ "Number", "Text", "Text", "Number" ],
+            "columns_description" :
+              [
+                "ID assigned to the individual in the crash case. This is  strictly a database key and not a personal identifier such  as a driver license number.",
+                "Section of the Vehicle & Traffic, or other, law violation for which an individual in the crash was cited. Some values  are sections, some are sections and subsections. For  example, 5091 represents 509(1).",
+                "Description of violation code.",
+                "Calendar year of incident."
+              ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                },
+                { "displayStyle" : "plain", "align" : "center" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                }
+              ],
+            "download_count" : 8581,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2018-01-11T14:27:01.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "vehicle",
+                "fatalities",
+                "owner",
+                "driver",
+                "ticket",
+                "accident",
+                "violation",
+                "crash"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://dmv.ny.gov/records/file-a-motorist-crash-accident-report"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "NYS Department of Motor Vehicles"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "DriverLicensingSupport@dmv.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Crash Event"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Crash Records Center"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Most recent year’s available data + 3 additional prior years"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Motor Vehicles, Department of"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "The violations are what were cited. No information is available on whether a conviction resulted from the citation."
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "This dataset is best utilized in conjunction with the 3 other datasets posted: Crash Case, Crash Individual, and Crash Vehicle."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/abfj-y7uq",
+        "link" : "https://data.ny.gov/Transportation/Motor-Vehicle-Crashes-Violation-Information-Four-Y/abfj-y7uq",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Food Safety Inspections – Current Ratings",
+            "id" : "d6dy-3h7r",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Dataset includes all food safety inspections conducted in last 24 months.",
+            "attribution" : "Department of Agriculture and Markets",
+            "attribution_link" : "https://agriculture.ny.gov/food-safety",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-08-15T00:00:15.000Z",
+            "createdAt" : "2014-01-23T17:41:34.000Z",
+            "metadata_updated_at" : "2026-08-14T23:59:44.000Z",
+            "data_updated_at" : "2026-08-15T00:00:15.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 495,
+                "page_views_last_month" : 2485,
+                "page_views_total" : 112560,
+                "page_views_last_week_log" : 8.954196310386877,
+                "page_views_last_month_log" : 11.279610581052484,
+                "page_views_total_log" : 16.780347525187082
+              },
+            "columns_name" :
+              [
+                "Owner Name",
+                "Street",
+                "City",
+                "State Code",
+                "Zip Code",
+                "Deficiency Number",
+                "Georeference",
+                "Deficiency Description",
+                "County",
+                "Inspection Grade",
+                "Inspection Date",
+                "Establishment Types",
+                "Trade Name"
+              ],
+            "columns_field_name" :
+              [
+                "owner_name",
+                "street",
+                "city",
+                "statecode",
+                "zipcode",
+                "deficiency_number",
+                "georeference",
+                "deficiency_description",
+                "county",
+                "inspection_grade",
+                "inspection_date",
+                "establishment_type",
+                "trade_name"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Point",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Ownership name of selected entity",
+                "Physical street address of selected entity",
+                "Physical City location of selected entity",
+                "Two digit code for the physical State location of selected entity ",
+                "Zip Code for physical location of selected entity",
+                "Violation item; blank if no critical violations were noted.",
+                "\t Open Data platform-generated geocoding information from supplied address components. Point-type location is the centroid of the address components provided and does not reflect a specific address if the street address component is not provided. Point-type location is supplied in \"POINT (longitude latitude)\" format.",
+                "Violation description; blank if no critical violations were noted.",
+                "County",
+                "A: No critical deficiencies were found; B: Although critical deficiencies were found, they were corrected at time of inspection; C: Critical deficiencies were found but were not or could not be corrected.",
+                "Date(s) Inspection was conducted",
+                "Establishment can have one, two or many types depending on the type of business operations conducted at the geographic location.  A: Store; B: Bakery; C: Food Manufacturer; D: Food Warehouse; E: Beverage Plant; F: Feed Mill/Non-Medicated; G: Processing Plant; H: Wholesale Manufacturer; I: Refrigerated Warehouse; K: Vehicle; L: Produce Refrigerated Warehouse; N: Wholesale Produce Packer; O: Produce Grower/Packer/Broker, Storage; P: Controlled Atmosphere Room; Q: Feed Mill/Medicated; R: Pet Food Manufacturer; S: Feed Warehouse and/or Distributor; T: Disposal Plant; V: Slaughterhouse; W: Farm Winery.",
+                "Name that the selected entity is doing business as"
+              ],
+            "columns_format" :
+              [
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "displayStyle" : "plain", "align" : "center" },
+                { "displayStyle" : "plain", "align" : "center" },
+                { "displayStyle" : "plain", "align" : "center" },
+                {},
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "center" },
+                { "view" : "date", "align" : "center" },
+                {},
+                { "align" : "left" }
+              ],
+            "download_count" : 20473,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2021-10-12T16:30:47.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Economic Development",
+            "domain_tags" :
+              [ "inspections", "establishment types", "food safety" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://agriculture.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "NYS Department of Agriculture and Markets"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "FSIWebInquiries@agriculture.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Individual Establishment"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Quarterly"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Division of Food Safety and Inspection"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Last 24 month period for which data are available"
+                },
+                { "key" : "Local-Data_County-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_County_Column", "value" : "county" },
+                { "key" : "Local-Data_Municipality-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_Municipality_Column", "value" : "city" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Agriculture and Markets, Department of"
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Inspections for In-Business Establishments as of the date of publication.  General Deficiencies are not described."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/d6dy-3h7r",
+        "link" : "https://data.ny.gov/Economic-Development/Food-Safety-Inspections-Current-Ratings/d6dy-3h7r",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Traffic Tickets Issued, Number of Tickets Issued by Year, Month, Day of Week, and Violation",
+            "id" : "xg9t-n236",
+            "resource_name" : null,
+            "parent_fxf" : [ "q4hy-kbtf" ],
+            "description" : "Data extracted from records of tickets on file with NYS DMV. The tickets were issued to motorists for violations of:\r\n\uf0b7 NYS Vehicle & Traffic Law (VTL),\r\n\uf0b7 Thruway Rules and Regulations\r\n\uf0b7 Tax Law\r\n\uf0b7 Transportation Law\r\n\uf0b7 Parks and Recreation Regulations\r\n\uf0b7 Local New York City Traffic Ordinances and\r\n\uf0b7 NYS Penal Law pertaining to the involvement of a motor vehicle in acts of assault, homicide, manslaughter and criminal negligence resulting in injury or death.",
+            "attribution" : "NYS DMV",
+            "attribution_link" : "http://dmv.ny.gov/nav/tickets-points-penalties",
+            "contact_email" : null,
+            "type" : "filter",
+            "updatedAt" : "2026-11-08T07:29:50.000Z",
+            "createdAt" : "2015-07-28T16:13:28.000Z",
+            "metadata_updated_at" : "2026-04-20T21:28:26.000Z",
+            "data_updated_at" : "2026-11-08T07:29:50.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 115,
+                "page_views_last_month" : 325,
+                "page_views_total" : 9259,
+                "page_views_last_week_log" : 6.857980995127572,
+                "page_views_last_month_log" : 8.348728154231077,
+                "page_views_total_log" : 13.1767964781476
+              },
+            "columns_name" :
+              [
+                "Violation Day of Week",
+                "Violation Charged Code",
+                "Violation Year",
+                "Source",
+                "Violation Month",
+                "Violation Description"
+              ],
+            "columns_field_name" :
+              [
+                "violation_dow",
+                "violation_charged_code",
+                "violation_year",
+                "source",
+                "violation_month",
+                "violation_description"
+              ],
+            "columns_datatype" :
+              [ "Text", "Text", "Number", "Number", "Number", "Text" ],
+            "columns_description" :
+              [
+                "Day of the week on which the ticket was issued.",
+                "Law code of the violation for which the ticket was issued.",
+                "Calendar year in which the ticket was issued.",
+                "Processing system used by the courts to record and track tickets from issuance to disposition:\nTSLED = “Traffic Safety Law Enforcement & Disposition Program” used by local courts throughout most of NYS.\nTVB = used by NYSDMV Traffic Violation Bureaus in NYC, western Suffolk County, Rochester and Buffalo.",
+                "Month in which the ticket was issued.  1=January; 12=December.",
+                "Description of the violation for which the ticket was issued."
+              ],
+            "columns_format" :
+              [
+                { "align" : "center", "drill_down" : "true" },
+                { "align" : "left", "drill_down" : "true" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center",
+                  "drill_down" : "true"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right",
+                  "grouping_aggregate" : "count"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center",
+                  "drill_down" : "true"
+                },
+                { "align" : "left", "drill_down" : "true" }
+              ],
+            "download_count" : 6830,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2015-09-14T22:27:13.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "enforcement",
+                "tickets",
+                "vehicle",
+                "traffic",
+                "violations",
+                "driver",
+                "nysdmv",
+                "law"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "This data set reflects only the issuance of traffic tickets. The data cannot be used to determine convictions, dismissals or other aspects of ticket disposition. The data does not include tickets issued in the five Boroughs of New York City for misdemeanor or felony violations. Examples are: \uf0b7 DWI/DWAI and aggravated unlicensed operation; \uf0b7 Penal Law offenses involving the use of a motor vehicle in acts of assault, homicide, manslaughter and criminal negligence resulting in injury or death; and \uf0b7 Tickets for non-misdemeanor/felony offenses that were issued during an arrest for a misdemeanor or felony violation."
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "NYS DMV"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "datarequests@dmv.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Individual tickets"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "All tickets issued in NYS, less the limitations below"
+                },
+                {
+                  "key" : "Dataset-Summary_Data-Frequency",
+                  "value" : "Annual, by June of the following year"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "NYS DMV – Ticketing Systems"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Most recent year’s available data + 4 additional prior years"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Motor Vehicles, Department of"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://dmv.ny.gov/about-dmv/order-copy-nys-vehicle-and-traffic-law"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/xg9t-n236",
+        "link" : "https://data.ny.gov/Transportation/Traffic-Tickets-Issued-Number-of-Tickets-Issued-by/xg9t-n236",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Child Care Regulated Programs",
+            "id" : "cb42-qumz",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Information on OCFS regulated child care programs, which includes program overview information and violation history.",
+            "attribution" : "NYS Office of Children and Family Services",
+            "attribution_link" : "http://www.ocfs.state.ny.us/main/childcare/default.asp",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T05:15:56.000Z",
+            "createdAt" : "2013-02-25T23:50:07.000Z",
+            "metadata_updated_at" : "2026-11-15T05:15:49.000Z",
+            "data_updated_at" : "2026-11-15T05:15:56.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 586,
+                "page_views_last_month" : 2505,
+                "page_views_total" : 108066,
+                "page_views_last_week_log" : 9.197216693110052,
+                "page_views_last_month_log" : 11.291170699321862,
+                "page_views_total_log" : 16.721566514579795
+              },
+            "columns_name" :
+              [
+                "Additional Address",
+                "Street Name",
+                "Street Number",
+                "Latitude",
+                "City",
+                "License Expiration Date",
+                "Capacity Description",
+                "Infant Capacity",
+                "School Age Capacity",
+                "Georeference",
+                "License Issue Date",
+                "Program Profile",
+                "NYS Municipal Boundaries 2",
+                "New York Zip Codes 2",
+                "Counties 2",
+                "State",
+                "Program Type",
+                "Preschool Capacity",
+                "Region Code",
+                "County",
+                "Facility ID",
+                "Facility Status",
+                "Address Omitted",
+                "Floor",
+                "Apartment",
+                "Zip Code",
+                "Phone Number Omitted",
+                "Total Capacity",
+                "Provider Name",
+                "Facility Name",
+                "Longitude",
+                "Toddler Capacity",
+                "Phone Extension",
+                "Facility Opened Date",
+                "School District Name",
+                "Phone Number"
+              ],
+            "columns_field_name" :
+              [
+                "additional_address",
+                "street_name",
+                "street_number",
+                "latitude",
+                "city",
+                "license_expiration_date",
+                "capacity_description",
+                "infant_capacity",
+                "school_age_capacity",
+                "georeference",
+                "license_issue_date",
+                "additional_information",
+                ":@computed_region_yamh_8v7k",
+                ":@computed_region_wbg7_3whc",
+                ":@computed_region_kjdx_g34t",
+                "state",
+                "program_type",
+                "preschool_capacity",
+                "region_code",
+                "county",
+                "facility_id",
+                "facility_status",
+                "address_omitted",
+                "floor",
+                "apartment",
+                "zip_code",
+                "phone_number_omitted",
+                "total_capacity",
+                "provider_name",
+                "facility_name",
+                "longitude",
+                "toddler_capacity",
+                "phone_extension",
+                "facility_opened_date",
+                "school_district_name",
+                "phone_number"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Number",
+                "Number",
+                "Point",
+                "Calendar date",
+                "URL",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Additional address information for the program.  Excluded if provider has opted out or if it does not apply.",
+                "Street name of the address of the program.  Excluded if provider has opted out ",
+                "Street number portion of the address of the program.  Excluded if provider has opted out ",
+                "As a result of a bill signed into law (Chapter 354 of the Laws of 2009), the dataset omits addresses for those child care providers who have “opted out” from having their addresses and map included.",
+                "City the program is located in.",
+                "Date the license for the facility will expire.",
+                "This only applies if the Program Type is Family Day Care (FDC) or Group Family Day Care (GFDC).",
+                "For DCC, total number of   children up to 18 months of age",
+                "For DCC and SACC, total number of children who are under 13 years of age who are enrolled in kindergarten or a higher grade",
+                "Open Data/Socrata-generated geocoding information from supplied address components.",
+                "Date a license was issued for the facility",
+                "Overview information of the program and violation history.  This does not include the results of inspections where no violations are cited.",
+                "This column was automatically created in order to record in what polygon from the dataset 'NYS Municipal Boundaries' (yamh-8v7k) the point in column 'georeference' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'New York Zip Codes' (wbg7-3whc) the point in column 'georeference' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'Counties' (kjdx-g34t) the point in column 'georeference' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "State the program is located in.",
+                "FDC = Family Day Care;\nGFDC  = Group Family Day Care;\nSACC = School Age Child Care;\nDCC  = Day Care Center;\nSDCC = Small Day Care Center\n",
+                "For DCC, total number of  children at least 3 years of age who are not yet enrolled in kindergarten or a higher grade",
+                "ARO =Albany Regional Office;\nBRO =Buffalo Regional Office;\nLIRO = Long Island Regional Office;\nNYCDOHMH =NYC Department of Health and Mental Hygiene;\nRRO = Rochester Regional Office;\nSRO = Syracuse Regional Office;\nYRO = Spring Valley Regional Office\n",
+                "County in which the facility is located.",
+                "Unique number automatically generated at Children and Family Services to identify an individual facility.",
+                "License = GFDC or DCC;\nRegistration = FDC, SACC, SDCC;\nPending Revocation = recommended for revocation;\nPending Revocation & Denial = recommended for revocation/denial;\nPending Denial = recommended for denial;\nSuspended  = may not care for children",
+                "As a result of a bill signed into law (Chapter 354 of the Laws of 2009), the dataset omits addresses for those child care providers who have “opted out” from having their addresses and map included.  \"Y\" indicates they opted out, blank indicates they did not.",
+                "Floor detail of the address of the program.  Excluded if provider has opted out or if it does not apply.",
+                "Apartment info of the address of the program.  Excluded if provider has opted out or it does not apply.",
+                "Zip code of the city the program is located in.",
+                "Excluded for providers who have unlisted phone numbers.  \"Y\" indicates they opted out or have an unlisted number, blank indicates they did not.",
+                "Refer to the data dictionary found in the About tab for the definition of Total Capacity.",
+                "Name of On-Site Provider/Director  (Last name,  First name).  If not approved, “There is no approved Director/On-Site Provider at this site” appears\n",
+                "DBA (legal entity/doing business as) name or Legal Name (last name, first name)",
+                "As a result of a bill signed into law (Chapter 354 of the Laws of 2009), the dataset omits addresses for those child care providers who have “opted out” from having their addresses and map included.",
+                "For DCC, total number of   children ages 18 months to 36 months",
+                "Phone extension for the program phone number.  Excluded if provider has opted out, has unlisted phone number or if there is none.",
+                "Date the facility began operation.",
+                "Name of School District in which Program is located",
+                "Phone number of the program.  Excluded for providers who have unlisted phone numbers"
+              ],
+            "columns_format" :
+              [
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                {},
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                {},
+                {},
+                {},
+                { "align" : "center" },
+                { "align" : "center" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                { "align" : "center" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                },
+                { "align" : "left" },
+                { "align" : "center" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                { "align" : "center" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                { "align" : "center" }
+              ],
+            "download_count" : 51889,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2021-04-27T05:04:37.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Human Services",
+            "domain_tags" :
+              [ "day care", "programs", "child care", "violations" ],
+            "domain_metadata" :
+              [
+                { "key" : "Local-Data_County-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_County_Column", "value" : "county" },
+                { "key" : "Local-Data_Municipality-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_Municipality_Column", "value" : "city" },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "The data does not include any information regarding day care center programs in New York City, as those programs are regulated by the New York City Department of Health and Mental Hygiene.    The inspection data reflects only reflects inspections that were conducted where violations were cited.  It does not reflect inspections where no violations are cited."
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "OCFS Division of Child Care Services "
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "Melinda.Denham@ocfs.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Program level"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Daily"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Office of Children and Family Services, Division of Child Care Services"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Current and violation history for the prior 2 years."
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Children and Family Services, Office of"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/cb42-qumz",
+        "link" : "https://data.ny.gov/Human-Services/Child-Care-Regulated-Programs/cb42-qumz",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Tickets Issued by DEC’s Division of Forest Protection: 2002-2021",
+            "id" : "h2cu-nt33",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "A listing of the tickets issued by DEC’s Division of Forest Protection",
+            "attribution" : "NYS Department of Environmental Conservation",
+            "attribution_link" : "https://www.dec.ny.gov/regulatory",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-07-08T14:20:54.000Z",
+            "createdAt" : "2023-02-08T18:01:05.000Z",
+            "metadata_updated_at" : "2026-07-08T14:20:54.000Z",
+            "data_updated_at" : "2026-07-08T14:20:13.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 54,
+                "page_views_last_month" : 216,
+                "page_views_total" : 6848,
+                "page_views_last_week_log" : 5.78135971352466,
+                "page_views_last_month_log" : 7.7615512324444795,
+                "page_views_total_log" : 12.74167764494586
+              },
+            "columns_name" :
+              [
+                "Other",
+                "Arrests Turned over to Another Agency",
+                "Offenses Related to State Land Use",
+                "DEC Region",
+                "Zone",
+                "Year",
+                "Environmental  Conservation Law  Rules and  Regulations (ECAT)",
+                "NYS Vehicle & Traffic Offenses",
+                "Parks & Recreation Law",
+                "Offenses Related to Fire Laws",
+                "Offenses Related to Fish & Wildlife Laws",
+                "Offenses of High Peaks Rules and Regulations",
+                "Offenses related to All-  Terrain Vehicle  Operation",
+                "Offenses Related to Motor Vehicles on State Land",
+                "Offenses Related to DEC Campgrounds",
+                "Offenses Related to Air Pollution",
+                "Offenses Related to Under-age Drinking on State Land",
+                "Offenses Related to other ECL or R&R",
+                "Offenses related to Other Laws, rules or  regulations",
+                "Offenses Related to Snowmobile Operation"
+              ],
+            "columns_field_name" :
+              [
+                "other_appearance_tickets",
+                "arrests_turned_over_to_another",
+                "offenses_related_to_state",
+                "dec_region",
+                "zone",
+                "year",
+                "ecat",
+                "nys_vehicle_traffic_offenses",
+                "parks_recreation_law",
+                "offenses_related_to_fire",
+                "offenses_related_to_fish",
+                "offenses_of_high_peaks_rules",
+                "offenses_related_to_atv",
+                "offenses_related_to_motor",
+                "offenses_related_to_dec",
+                "offenses_related_to_air",
+                "offenses_related_to_under",
+                "offenses_related_to_other",
+                "offenses_related_to_other_1",
+                "offenses_related_to_snowmobile"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "The number of tickets written for other violations such as Tax Law, Agricultural & Markets Law, Transportation Law, and the remaining NYS Consolidated Laws.",
+                "The number of cases turned over to another police agency",
+                "The number of tickets written for violations related to state land use",
+                "NYS is divided into 9 geographical regions NYS DEC’s Regions • Region 1: (Long Island) Nassau and Suffolk counties; • Region 2: (New York City) Brooklyn, Bronx, Manhattan, Queens and Staten Island; • Region 3: (Lower Hudson Valley) Dutchess, Orange, Putnam, Rockland, Sullivan, Ulster and Westchester counties; • Region 4: (Capital Region/Northern Catskills) Albany, Columbia, Delaware, Greene, Montgomery, Otsego, Rensselaer, Schenectady and Schoharie counties; • Region 5: (Eastern Adirondacks/Lake Champlain) Clinton, Essex, Franklin, Fulton, Hamilton, Saratoga, Warren and Washington counties; • Region 6: (Western Adirondacks/Eastern Lake Ontario) Herkimer, Jefferson, Lewis, Oneida and St. Lawrence counties; • Region 7: (Central New York) Broome, Cayuga, Chenango, Cortland, Madison, Onondaga, Oswego, Tioga and Tompkins counties; • Region 8: (Western Finger Lakes) Chemung, Genesee, Livingston, Monroe, Ontario, Orleans, Schuyler, Seneca, Steuben, Wayne and Yates counties; • Region 9: (Western New York) Allegany, Chautauqua, Cattaraugus, Erie, Niagara and Wyoming counties. A map of NYSDEC regions can be found on NYSDEC’s website at http://www.dec.ny.gov/about/50230.html",
+                "DEC’s 9 geographical regions are further divided into 17 Zones within the Division of Forest Protection.  Region 1 Zone 1&2A: All Counties Regions 1&2; Region 3 Zone A: Ulster and Sullivan (Towns of Neversink and Rockland) Counties; Region 3 Zone B: Sullivan (All towns except Neversink and Rockland), Orange, Putnam and Dutchess Counties; Region 4 Zone A: Albany, Columbia, Greene, and Rensselaer Counties; Region 4 Zone B: Delaware, Montgomery, Otsego and Schoharie Counties; Region 5 Zone A: Clinton (Towns of Clinton, Dannemora and Ellenburg), Franklin (All towns except Harrietstown within the High Peaks Wilderness Area), Essex (Town of St. Armand outside of McKenzie Mtn. Wilderness Area), and Hamilton Counties (Towns of Long Lake and Arietta north of Tioga Point Campground east to Town of Indian Lake ; Region 5 Zone B: Clinton (all Towns except Clinton, Dannemora and Ellenburg), and Essex County (Towns of Chesterfield, Elizabethtown, Essex, Jay, Lewis, Moriah, Westport, Willsboro, Minerva (west of the Hudson River), Newcomb and North Hudson; Region 5 Zone C: Essex (Towns of St. Armand within the McKenzie Mtn. Wilderness Area, Keene, North Elba, and Wilmington and Franklin (Town of Harrietstown within the High Peaks Wilderness Area) Counties; Region 5 Zone D:  Hamilton County (Towns of Arietta, Benson, Hope, Indian Lake, Inlet, Lake Pleasant, Long Lake south of north point road, Morehouse, and Wells) and Fulton Counties; Region5  Zone E:  Essex (Towns of Crown Point, Minerva east of the Hudson River, North Hudson, Schroon, Ticonderoga), and Warren Counties; Region 5 Zone F: Saratoga and Washington Counties; Region 6 Zone A: St. Lawrence County; Region 6 Zone B: Jefferson, Lewis and Herkimer (Town of Webb north) Counties; Region 6 Zone C: Herkimer (All towns except Town of Webb north) and Oneida Counties; Region 7 Zone A: All Counties Region 7; Zone 8A: All Counties Region 8; and Region 9A: All Counties Region 9.    ",
+                "Year in which the action was taken.",
+                "The number of tickets issued for violations of the Environmental Conservation Law and/or violations of 6NYCRR (Title 6 NY Codes, Rules & Regulations). These violations of law consist of a violation, misdemeanor, or felony offense and are adjudicated in criminal court.",
+                "The number of tickets written for Vehicle and Traffic Law (V&Ts) violations and other associated rules and regulations. The number of tickets issued for violation of the Parks, Recreation and Historic Preservation Law and the Navigation Law",
+                "The number of tickets issued for violation of the Parks, Recreation and Historic Preservation Law and the Navigation Law",
+                "The number of tickets written for violations related to forest fire control",
+                "The number of tickets written for violations related to protection of fish and wildlife",
+                "The number of tickets written for violations related to protection of the Adirondack High Peaks Wilderness Area",
+                "The number of tickets written for violations related to All-Terrain Vehicles",
+                "The number of tickets for violations related to motor vehicle operation on state land other than All-Terrain Vehicles",
+                "The number of tickets for violations related to DEC campgrounds",
+                "The number of tickets for violations related to air pollution",
+                "The number of tickets for violations related to under-age drinking on DEC state land",
+                "The number of tickets for violations related to other ECL or R&R such as solid wastes, forest insect and disease control, and protection of other lands.",
+                "The number of tickets written for other violations such as Navigation Law, Tax Law, Agricultural & Markets Law, Transportation Law, and the remaining NYS Consolidated Laws.",
+                "The number of tickets written for violations related to Parks and Recreation snowmobile  laws."
+              ],
+            "columns_format" :
+              [
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                { "align" : "center" },
+                { "noCommas" : "true", "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                }
+              ],
+            "download_count" : 1486,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-02-15T15:14:14.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Energy & Environment",
+            "domain_tags" :
+              [
+                "violations",
+                "forest rangers",
+                "environmental conservation law",
+                "tickets"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://dec.ny.gov/environmental-protection/public-safety/forest-rangers"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "NYS Department of Environmental Conservation"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "Rangers@dec.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Individual DEC region/zone"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Data-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "NYS Department of Environmental Conservation"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2002"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Environmental Conservation, Department of"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/h2cu-nt33",
+        "link" : "https://data.ny.gov/Energy-Environment/Tickets-Issued-by-DEC-s-Division-of-Forest-Protect/h2cu-nt33",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "DEC Division of Law Enforcement Total Reportable Activity by Region: Beginning 2011",
+            "id" : "e7ig-ybbx",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This quantitative set of numeric values represents the total reportable activity as collected from the sworn Members of the Division of Law Enforcement from each of the 9 regions across New York State.",
+            "attribution" : "New York State Department of Environmental Conservation – Division of Law Enforcement",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2024-11-25T16:52:54.000Z",
+            "createdAt" : "2017-09-13T05:00:16.000Z",
+            "metadata_updated_at" : "2024-11-25T16:52:53.000Z",
+            "data_updated_at" : "2024-11-25T16:52:54.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 64,
+                "page_views_last_month" : 199,
+                "page_views_total" : 3523,
+                "page_views_last_week_log" : 6.022367813028454,
+                "page_views_last_month_log" : 7.643856189774724,
+                "page_views_total_log" : 11.782998208920414
+              },
+            "columns_name" :
+              [
+                "Month",
+                "Region",
+                "ECATs",
+                "ACATs",
+                "V&T",
+                "Warrants",
+                "Year",
+                "ATV ",
+                "Snowmobile",
+                "Nav. Law",
+                "Penal/Other",
+                "TOTs",
+                "CFS",
+                "Outreach",
+                "Warnings"
+              ],
+            "columns_field_name" :
+              [
+                "month",
+                "region",
+                "ecats",
+                "acats",
+                "v_t",
+                "warrants",
+                "year",
+                "atv",
+                "snowmobile",
+                "nav_law",
+                "penal_other",
+                "tots",
+                "cfs",
+                "outreach",
+                "warnings"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Numeric value of calendar month in which the\naction was taken.\n1 = January...12 = December",
+                "NYS is divided into 9 geographical regions NYS\nDEC’s Regions\n• Region 1: (Long Island) Nassau and Suffolk\ncounties;\n• Region 2: (New York City) Brooklyn, Bronx,\nManhattan, Queens and Staten Island;\n• Region 3: (Lower Hudson Valley) Dutchess,\nOrange, Putnam, Rockland, Sullivan, Ulster and\nWestchester counties;\n• Region 4: (Capital Region/Northern Catskills)\nAlbany, Columbia, Delaware, Greene,\nMontgomery, Otsego, Rensselaer, Schenectady\nand Schoharie counties;\n• Region 5: (Eastern Adirondacks/Lake Champlain)\nClinton, Essex, Franklin, Fulton, Hamilton,\nSaratoga, Warren and Washington counties;\n• Region 6: (Western Adirondacks/Eastern Lake\nOntario) Herkimer, Jefferson, Lewis, Oneida and\nSt. Lawrence counties;\n• Region 7: (Central New York) Broome, Cayuga,\nChenango, Cortland, Madison, Onondaga,\nOswego, Tioga and Tompkins counties;\n• Region 8: (Western Finger Lakes) Chemung,\nGenesee, Livingston, Monroe, Ontario, Orleans,\nSchuyler, Seneca, Steuben, Wayne and Yates\ncounties;\n• Region 9: (Western New York) Allegany,\nChautauqua, Cattaraugus, Erie, Niagara and\nWyoming counties.\nA map of NYSDEC regions can be found on\nNYSDEC’s website at\nhttp://www.dec.ny.gov/about/50230.html.",
+                "Criminal appearance tickets (ECATs) issued by\nEnvironmental Conservation Officers for\nviolations of the Environmental Conservation Law\nand/or violations of 6NYCRR (Title 6 NY Codes,\nRules & Regulations). These violations of law\nconsist of a violation, misdemeanor or felony\noffense and are adjudicated in criminal court.",
+                "Administrative notices of violation (ACATs) issued\nby Environmental Conservation Officers for\nviolations of the Environmental Conservation Law\nand/or violations of 6NYCRR (Title 6 NY Codes,\nRules & Regulations). These notices are handled\nvia Consent Order in conjunction with\ndepartment program staff for remedial action.",
+                "Number of tickets written for Vehicle and Traffic\nLaw (V&Ts) violations and other associated rules\nand regulations.",
+                "A search warrant or arrest warrant executed by an\nEnvironmental Conservation Officer.",
+                "Year in which the action was taken.  Four digit format.",
+                "Number of tickets written specifically for All-\nTerrain Vehicle (ATVs) law violations (found in the\nVehicle & Traffic Law).",
+                "Number of tickets written specifically for\nSnowmobile law violations (found in the Parks,\nRecreation & Historic Preservation Law).",
+                "Number of tickets written specifically for\nNavigation Law violations.",
+                "Number of tickets written for Penal Law or Other\nviolations such as Tax Law, Agricultural & Markets\nLaw, Transportation Law, and the remaining NYS\nConsolidated Laws.",
+                "Number of cases that Environmental Conservation\nOfficers have turned over to other agencies (TOTs)\nfor enforcement and further prosecution.",
+                "Request for an ECO to respond and handle or\ninvestigate a situation involving a member of the\npublic, another agency or a program within the\nDepartment. Calls for Service (CFSs) are recorded\nby our Dispatch Center and will have a tracking\nnumber. CFS may include, allegations of illegal\nactivity, nuisance wildlife complaints, request for\nassistance by another agency, spill responses, etc.",
+                "A public speaking engagement by an\nEnvironmental Conservation Officer such as: public\npresentation at an organized group meeting,\nSportsman’s Education course, or an official\nfunction where an officer participates in a\nmeaningful way. Part of the mission statement for\nthe Division of Law Enforcement is educating the\npublic. Outreach is a platform to educate people\non appropriate conduct during sportsmen’s\nactivities in the interest of preventing potential\nwrongdoing in the future.",
+                "Number of instances where warnings rather than\ntickets were issued in the interest of justice."
+              ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                }
+              ],
+            "download_count" : 4943,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2017-09-26T03:31:05.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Energy & Environment",
+            "domain_tags" : [ "law enforcement", "environmental enforcement" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "New York State Department of Environmental Conservation"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Ticket types, total tickets, warrants, outreach, warnings, Calls for Service"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Biennially"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Division of Law Enforcement"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2011"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Environmental Conservation, Department of"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/e7ig-ybbx",
+        "link" : "https://data.ny.gov/Energy-Environment/DEC-Division-of-Law-Enforcement-Total-Reportable-A/e7ig-ybbx",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Contractor Registry Certificate",
+            "id" : "i4jv-zkey",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The dataset includes a comprehensive list of contractor licenses that have been issued to businesses for the purpose of contractor registry assessment and remediation within New York State. Contractor Registry establishes a requirement that contractors register with the Bureau of Public Work and Prevailing Wage Enforcement prior to bidding on public work projects or commencing work on a private covered project that is subject to the prevailing wage.",
+            "attribution" : "New York State Department of Labor",
+            "attribution_link" : "https://dol.ny.gov/contractor-registry",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T10:42:07.000Z",
+            "createdAt" : "2024-11-13T21:01:58.000Z",
+            "metadata_updated_at" : "2026-11-15T10:41:11.000Z",
+            "data_updated_at" : "2026-11-15T10:42:07.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 457,
+                "page_views_last_month" : 2663,
+                "page_views_total" : 52485,
+                "page_views_last_week_log" : 8.839203788096945,
+                "page_views_last_month_log" : 11.379378367071263,
+                "page_views_total_log" : 15.679645032345695
+              },
+            "columns_name" :
+              [
+                "Zip Code",
+                "New York Zip Codes",
+                "Counties",
+                "NYS Municipal Boundaries",
+                "Business has Workers Compensation Insurance",
+                "Business has final determination safety standard violations",
+                "Business is Publicly Traded",
+                "Debarment State or Federal Law",
+                "Business has outstanding wage assessments",
+                "Business is sponsor of a program ",
+                "Business has a NYS DOL Employer Registration Number",
+                "Business has final determination for violation of Labor or Tax Law",
+                "State",
+                "Business is MWBE Owned",
+                "Status",
+                "Debarment State",
+                "Business is signatory to a group program",
+                "Business Name",
+                "Reason business does not have a NYS DOL Employer Registration Number ",
+                "Business has been debarred",
+                "Certificate Number",
+                "Phone",
+                "Issued Date",
+                "Business has a WCB Employer Number",
+                "Debarment Start Date",
+                "Debarment End Date",
+                "Business is exempt from Workers Compensation Insurance ",
+                "Address 2",
+                "Address",
+                "Business is associated with an apprenticeship program",
+                "Georeference",
+                "Business Type",
+                "Business Officers",
+                "DBA Name",
+                "City",
+                "Expiration Date"
+              ],
+            "columns_field_name" :
+              [
+                "zip_code",
+                ":@computed_region_wbg7_3whc",
+                ":@computed_region_kjdx_g34t",
+                ":@computed_region_yamh_8v7k",
+                "business_has_workers_compensation_insurance",
+                "business_has_final_determination_safety_standard_violations",
+                "business_is_publicly_traded",
+                "debarment_state_or_federal_law",
+                "business_has_outstanding_wage_assessments",
+                "business_is_sponsor_of_a_program_",
+                "business_has_a_nys_dol_employer_registration_number",
+                "business_has_final_determination_for_violation_of_labor_or_tax_law",
+                "state",
+                "business_is_mwbe_owned",
+                "status",
+                "debarment_state",
+                "business_is_signatory_to_a_group_program",
+                "business_name",
+                "reason_business_does_not_have_a_nys_dol_employer_registration_number_",
+                "business_has_been_debarred",
+                "certificate_number",
+                "phone",
+                "issued_date",
+                "business_has_a_wcb_employer_number",
+                "debarment_start_date",
+                "debarment_end_date",
+                "business_is_exempt_from_workers_compensation_insurance_",
+                "address_2",
+                "address",
+                "business_is_associated_with_an_apprenticeship_program",
+                "georeference",
+                "business_type",
+                "business_officers",
+                "dba_name",
+                "city",
+                "expiration_date"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Calendar date",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Point",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date"
+              ],
+            "columns_description" :
+              [
+                "The zip code where the business is located",
+                "This column was automatically created in order to record in what polygon from the dataset 'New York Zip Codes' (wbg7-3whc) the point in column 'georeference' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'Counties' (kjdx-g34t) the point in column 'georeference' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "This column was automatically created in order to record in what polygon from the dataset 'NYS Municipal Boundaries' (yamh-8v7k) the point in column 'georeference' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "Whether the business has Workers Compensation Insurance",
+                "Whether the business has final determination of violations of any workplace safety laws or standards, including federal Occupational Safety and Health Act (OSHA) standards",
+                "Whether the business is publicly traded",
+                "Whether the debarment within the last 8 years was under state or federal law",
+                "Whether the business has outstanding wage assessments",
+                "Whether the business is a Sponsor of a NYS Registered Apprenticeship Program",
+                "Whether the business has a NYS DOL Unemployment Insurance Employer Registration Number",
+                "Whether the business has final determination of violations of any labor laws or employment tax laws",
+                "The state abbreviation where the business is located",
+                "Whether the business is a NYS Certified Minority or Women-owned Business Enterprise (MWBE)",
+                "The current status of the certificate",
+                "State in which the debarment within the last 8 years occurred",
+                "Whether the business is Signatory to a Group NYS Registered Apprenticeship Program",
+                "The legal name of the business that holds the Contractor Registry License",
+                "Reason the business does not have a NYS DOL Unemployment Insurance Employer Registration Number",
+                "Whether the business has been debarred under state or federal law within the last 8 years ",
+                "The unique identifier assigned to the business by DOL",
+                "The primary phone number for the business",
+                "The issued date is the date the certificate was approved for issuance",
+                "Whether the business has a Worker’s Compensation Board Employer Number",
+                "Debarment Start Date",
+                "Debarment End Date",
+                "Whether the business is exempt from Workers Compensation Insurance",
+                "Continuation of street address (optional)",
+                "The street address of where the business is located",
+                "Whether the business is associated with a NYS Registered Apprenticeship Program",
+                "Open Data platform-generated geocoding information from supplied address components. Point-type location is the centroid of the address components provided and does not reflect a specific address if the street address component is not provided. Point-type location is supplied in \"POINT ( )\" format.",
+                "The business type is the legal structure of the business",
+                "Name of the Business Officers, only if the business is publicly traded (comma delimited)",
+                "The name that the business is commonly known as",
+                "The city where the business is located n ",
+                "The date when the certificate expires.  (licenses/certificate always expires at the end of a month)"
+              ],
+            "columns_format" :
+              [
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "align" : "center" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "noCommas" : "true",
+                  "precision" : "0",
+                  "align" : "center"
+                },
+                { "view" : "date", "align" : "center" },
+                {},
+                { "view" : "date", "align" : "center" },
+                { "view" : "date", "align" : "center" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "view" : "date", "align" : "center" }
+              ],
+            "download_count" : 59210,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:36:48.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Government & Finance",
+            "domain_tags" :
+              [
+                "license",
+                "assessment",
+                "contractor registry",
+                "remediation",
+                "work projects"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://dol.ny.gov/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "New York State Department of Labor"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "Ask.PWAsk@labor.ny.gov"
+                },
+                { "key" : "Dataset-Summary_Granularity", "value" : "City" },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Daily"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Public Work & Prevailing Wage Enforcement"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Four year window: The data includes all active licenses and licenses that have expired within the last 4 years."
+                },
+                { "key" : "Local-Data_Municipality-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_Municipality_Column", "value" : "city" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Labor, Department of"
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Attributes regarding a business' address may be inaccurate if New York State Department of Labor has not been notified of relevant changes. Licenses that have expired more than two years ago will not be available in the dataset."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/i4jv-zkey",
+        "link" : "https://data.ny.gov/Government-Finance/Contractor-Registry-Certificate/i4jv-zkey",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Prison Admissions: Beginning 2008",
+            "id" : "m2rg-xjan",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Represents inmate admissions to the NYS Department of Corrections and Community Supervision for a new offense or for a parole violation by month of admission.  Includes data about admission type, county, gender, age, and crime.",
+            "attribution" : "NYS Department of Corrections and Community Supervision",
+            "attribution_link" : "http://www.doccs.ny.gov",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-03-25T19:39:00.000Z",
+            "createdAt" : "2014-01-09T15:51:48.000Z",
+            "metadata_updated_at" : "2026-03-25T19:39:00.000Z",
+            "data_updated_at" : "2026-02-26T17:08:31.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 93,
+                "page_views_last_month" : 255,
+                "page_views_total" : 11648,
+                "page_views_last_week_log" : 6.554588851677638,
+                "page_views_last_month_log" : 8.0,
+                "page_views_total_log" : 13.507918492629633
+              },
+            "columns_name" :
+              [
+                "Admission Year",
+                "Month Code",
+                "County of Commitment",
+                "Gender",
+                "Admission Month",
+                "Last Known Residence County",
+                "Most Serious Crime",
+                "Admission Type",
+                "Age at Admission"
+              ],
+            "columns_field_name" :
+              [
+                "admission_year",
+                "month_code",
+                "county_of_commitment",
+                "gender",
+                "admission_month",
+                "last_known_residence_county",
+                "most_serious_crime",
+                "latest_admission_type",
+                "age_at_admission"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Year of admission to NYSDOCCS",
+                "Numeric Code for Admission Month:\nJanuary=1\nFebruary=2\nMarch=3\nApril=4\nMay=5\nJune=6\nJuly=7\nAugust=8\nSeptember=9\nOctober=10\nNovember=11\nDecember=12",
+                "County of commitment associated with most serious conviction offense\nCounty of Commitment is not reported for RPVs. Last Known Residence county is provided instead because it represents the county from which an RPV was most recently admitted to DOCCS.",
+                "Gender of offender",
+                "Month of admission to NYSDOCCS",
+                "Last known residence county at time of return to prison (provided for RPVs). Out-of-state refers to offenders who were supervised out of state through the Interstate Compact prior to their return to DOCCS.\nLast Known Residence County is not reported for New commitments because it is only relevant to RPVs.",
+                "Most serious conviction offense of offender, as defined by offense with the longest maximum sentence.  \nRefer to DOCCS Crime List document attached to this data set for more detailed crime descriptions and associated legal authority.",
+                "Type of Admission to NYSDOCCS:\nNew Court Commitment = new admission to prison on current offense;\nReturned Parole Violator (RPV) = return to prison for technical violation of parole conditions",
+                "Age of offender at admission to NYSDOCCS"
+              ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "center"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "center"
+                }
+              ],
+            "download_count" : 7259,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2021-04-27T22:13:36.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Public Safety",
+            "domain_tags" :
+              [
+                "age",
+                "prison admissions",
+                "gender",
+                "crime",
+                "county",
+                "admission type"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "http://www.doccs.ny.gov/Research/Reports/2011/Admissions_and_Releases_2010.pdf"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "http://www.doccs.ny.gov/Research/Reports/2013/Admissions_and_Releases_2012.pdf"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "http://www.doccs.ny.gov/Research/Reports/2012/Admissions_and_Releases_2011.pdf"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.doccs.ny.gov/Research/Reports/2009/Admissions_and_Releases_2008.pdf"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "http://www.doccs.ny.gov/Research/Reports/2010/Admissions_and_Releases_2009.pdf"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "NYS Department of Corrections and Community Supervision"
+                },
+                {
+                  "key" : "Dataset-Summary_Units",
+                  "value" : "Individual inmate admissions"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "OpenData@doccs.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Individual inmate admissions"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "Division of Program Planning, Research & Evaluation"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "2008 to current"
+                },
+                { "key" : "Local-Data_County-Filter", "value" : "Yes" },
+                {
+                  "key" : "Local-Data_County_Column",
+                  "value" : "county_of_commitment"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Corrections and Community Supervision, Department of"
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "The data presents county associated with the most serious offense only for new commitments.  Since the dataset reflects only the county associated with the most serious commitment offense for a particular offender, it should not be used as a proxy for the number of convictions resulting in state prison in a particular county."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/m2rg-xjan",
+        "link" : "https://data.ny.gov/Public-Safety/Prison-Admissions-Beginning-2008/m2rg-xjan",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Tickets Issued by DEC’s Division of Forest Protection: Beginning 2022",
+            "id" : "h4jz-yspd",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "A listing of the tickets issued by DEC’s Division of Forest Protection",
+            "attribution" : "NYS Department of Environmental Conservation",
+            "attribution_link" : "https://dec.ny.gov/environmental-protection/public-safety/forest-rangers",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-07-31T14:01:49.000Z",
+            "createdAt" : "2026-07-30T17:30:07.000Z",
+            "metadata_updated_at" : "2026-07-31T14:01:49.000Z",
+            "data_updated_at" : "2026-07-30T17:38:23.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 65,
+                "page_views_last_month" : 231,
+                "page_views_total" : 578,
+                "page_views_last_week_log" : 6.044394119358453,
+                "page_views_last_month_log" : 7.857980995127572,
+                "page_views_total_log" : 9.177419537989238
+              },
+            "columns_name" :
+              [
+                "Year",
+                "Region",
+                "Other Laws",
+                "Offenses Related to Other ECL or R&R",
+                "Offenses Related to DEC Campgrounds",
+                "Offenses Related to Motor Vehicles on State Lands",
+                "Navigation Law",
+                "Parks & Recreation Law",
+                "NYS Vehicle & Traffic Offenses",
+                "Environmental Conservation Law Rules and Regulations (ECAT)",
+                "Offenses Related to Other NYS State Land Use",
+                "Offenses Related to Under-age Drinking on State Land",
+                "Offenses Related to Other Laws, Rules or Regulations",
+                "Offenses Related to Fish & Wildlife Laws",
+                "Offenses Related to Fire Laws"
+              ],
+            "columns_field_name" :
+              [
+                "year",
+                "region",
+                "other_laws",
+                "offenses_related_to_other_1",
+                "offenses_related_to_dec",
+                "offenses_related_to_motor",
+                "navigation_law",
+                "parks_recreation_law",
+                "nys_vehicle_traffic_offenses",
+                "environmental_conservation",
+                "offenses_related_to_other",
+                "offenses_related_to_under",
+                "offenses_related_to_other_2",
+                "offenses_related_to_fish",
+                "offenses_related_to_fire"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Year in which the action was taken.",
+                "NYS is divided into 9 geographical regions NYS DEC’s Regions • Region 1: (Long Island) Nassau and Suffolk counties; • Region 2: (New York City) Brooklyn, Bronx, Manhattan, Queens and Staten Island; • Region 3: (Lower Hudson Valley) Dutchess, Orange, Putnam, Rockland, Sullivan, Ulster and Westchester counties; • Region 4: (Capital Region/Northern Catskills) Albany, Columbia, Delaware, Greene, Montgomery, Otsego, Rensselaer, Schenectady and Schoharie counties; • Region 5: (Eastern Adirondacks/Lake Champlain) Clinton, Essex, Franklin, Fulton, Hamilton, Saratoga, Warren and Washington counties; • Region 6: (Western Adirondacks/Eastern Lake Ontario) Herkimer, Jefferson, Lewis, Oneida and St. Lawrence counties; • Region 7: (Central New York) Broome, Cayuga, Chenango, Cortland, Madison, Onondaga, Oswego, Tioga and Tompkins counties; • Region 8: (Western Finger Lakes) Chemung, Genesee, Livingston, Monroe, Ontario, Orleans, Schuyler, Seneca, Steuben, Wayne and Yates counties; • Region 9: (Western New York) Allegany, Chautauqua, Cattaraugus, Erie, Niagara and Wyoming counties. A map of NYSDEC regions can be found on NYSDEC’s website at https://dec.ny.gov/about/contact-us/map-of-dec-offices  ",
+                "The number of tickets written for other violations such as Tax Law, Agricultural & Markets Law, Transportation Law, and the remaining NYS Consolidated Laws.",
+                "The number of tickets for violations related to other ECL or R&R such as solid waste, air pollution, forest insect and disease control, and protection of other lands. ",
+                "The number of tickets for violations related to DEC campgrounds",
+                "The number of tickets for violations related to motor vehicle operation on state land",
+                "The number of tickets issued for violation of the Navigation Law",
+                "The number of tickets issued for violation of the Parks, Recreation and Historic Preservation Law",
+                "The number of tickets written for Vehicle and Traffic Law (V&Ts) violations and other associated rules and regulations.",
+                "The number of tickets issued for violations of the Environmental Conservation Law and/or violations of 6NYCRR (Title 6 NY Codes, Rules & Regulations). These violations of law consist of a violation, misdemeanor, or felony offense and are adjudicated in criminal court.",
+                "The number of tickets written for other violations related to state land use",
+                "The number of tickets for violations related to under-age drinking on DEC state land",
+                "The number of tickets written for other violations such as Parks and Recreation Law, Navigation Law, Tax Law, Agricultural & Markets Law, Transportation Law, and the remaining NYS Consolidated Laws.",
+                "The number of tickets written for violations related to protection of fish and wildlife",
+                "The number of tickets written for violations related to forest fire control"
+              ],
+            "columns_format" :
+              [
+                {
+                  "decimalSeparator" : ".",
+                  "noCommas" : "true",
+                  "align" : "center"
+                },
+                { "align" : "center" },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                }
+              ],
+            "download_count" : 81,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2026-07-30T17:38:36.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Energy & Environment",
+            "domain_tags" :
+              [
+                "forest rangers",
+                "environmental conservation law",
+                "violations",
+                "tickets"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "NYS Department of Environmental Conservation"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "Rangers@dec.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Individual DEC region"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "NYS Department of Environmental Conservation"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2022"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Environmental Conservation, Department of"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://dec.ny.gov/regulatory"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/h4jz-yspd",
+        "link" : "https://data.ny.gov/Energy-Environment/Tickets-Issued-by-DEC-s-Division-of-Forest-Protect/h4jz-yspd",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      }
+    ],
+  "resultSetSize" : 17,
+  "timings" : { "serviceMillis" : 23, "searchMillis" : [ 2, 8 ] },
+  "warnings" : []
+}

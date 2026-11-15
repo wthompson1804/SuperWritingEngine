@@ -1,0 +1,2434 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "Thruway E-ZPass/Cash Hourly Usage by Plaza by Year: Beginning 2006",
+            "id" : "ct2e-fiq5",
+            "resource_name" : null,
+            "parent_fxf" : [ "2hz2-2s5g" ],
+            "description" : "This dataset contains E-ZPass and Cash vehicle count data by hour by toll plaza, beginning with 2006 data.  For each toll plaza, a row of data exists for each hour of each day and for each direction of travel, depending on the type of toll barrier.",
+            "attribution" : "New York State Thruway Authority",
+            "attribution_link" : "http://www.thruway.ny.gov/index.shtml",
+            "contact_email" : null,
+            "type" : "filter",
+            "updatedAt" : "2026-04-20T19:47:48.000Z",
+            "createdAt" : "2015-02-10T17:48:08.000Z",
+            "metadata_updated_at" : "2026-04-20T19:47:48.000Z",
+            "data_updated_at" : "2022-03-23T12:39:58.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 68,
+                "page_views_last_month" : 177,
+                "page_views_total" : 5043,
+                "page_views_last_week_log" : 6.10852445677817,
+                "page_views_last_month_log" : 7.475733430966398,
+                "page_views_total_log" : 12.30035256032822
+              },
+            "columns_name" :
+              [
+                "Cash Total Vehicle Count",
+                "E-ZPass Total Vehicle Count",
+                "Plaza",
+                "Start Time"
+              ],
+            "columns_field_name" :
+              [
+                "cash_total_vehicle_count",
+                "e_zpass_total_vehicle_count",
+                "plaza",
+                "start_time"
+              ],
+            "columns_datatype" : [
+                                   "Number",
+                                   "Number",
+                                   "Text",
+                                   "Calendar date"
+                                 ],
+            "columns_description" :
+              [
+                "NUMBER of vehicles, using cash, that passed the\ntoll plaza in the direction denoted in the Direction\nField that used Cash.\nFor example: 85 vehicles passed Plaza 6\n(Yonkers) in the northbound direction on\nJanuary 1, 2013 between 12:00am and\n1:00am and used Cash.",
+                "NUMBER of vehicles, using E-ZPass, that passed\nthe toll plaza in the direction denoted in the\nDirection Field that used E-ZPass.\nFor example: 196 vehicles passed the Plaza 6\n(Yonkers) in the northbound direction on January\n1, 2013 between 12:00am and 1:00am and used\nE-ZPass.",
+                "Thruway plaza number",
+                "Starting date and time (hour) of the usage count"
+              ],
+            "columns_format" :
+              [
+                { "grouping_aggregate" : "sum" },
+                { "grouping_aggregate" : "sum" },
+                { "align" : "center", "drill_down" : "true" },
+                {
+                  "view" : "date_y",
+                  "align" : "left",
+                  "drill_down" : "true",
+                  "group_function" : "date_y"
+                }
+              ],
+            "download_count" : 287,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2015-01-23T21:11:49.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" : [ "traffic counts", "e-zpass", "thruway" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "New York State Thruway Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "eric.herman@thruway.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Toll Plaza"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York State Thruway Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2006"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Thruway Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.thruway.ny.gov/ezpass/index.html"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "http://www.thruway.ny.gov/travelers/travelplazas/index.html"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/ct2e-fiq5",
+        "link" : "https://data.ny.gov/Transportation/Thruway-E-ZPass-Cash-Hourly-Usage-by-Plaza-by-Year/ct2e-fiq5",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Thruway E-ZPass/Cash Hourly Usage by Plaza by Month: Beginning 2006",
+            "id" : "2jw2-xynj",
+            "resource_name" : null,
+            "parent_fxf" : [ "2hz2-2s5g" ],
+            "description" : "This dataset contains E-ZPass and Cash vehicle count data by hour by toll plaza, beginning with 2006 data.  For each toll plaza, a row of data exists for each hour of each day and for each direction of travel, depending on the type of toll barrier.",
+            "attribution" : "New York State Thruway Authority",
+            "attribution_link" : "http://www.thruway.ny.gov/index.shtml",
+            "contact_email" : null,
+            "type" : "filter",
+            "updatedAt" : "2026-04-20T19:41:17.000Z",
+            "createdAt" : "2015-02-10T18:22:11.000Z",
+            "metadata_updated_at" : "2026-04-20T19:41:17.000Z",
+            "data_updated_at" : "2022-03-23T12:39:58.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 67,
+                "page_views_last_month" : 121,
+                "page_views_total" : 5801,
+                "page_views_last_week_log" : 6.08746284125034,
+                "page_views_last_month_log" : 6.930737337562887,
+                "page_views_total_log" : 12.502334580197997
+              },
+            "columns_name" :
+              [
+                "Start Time",
+                "E-ZPass Total Vehicle Count",
+                "Plaza",
+                "Cash Total Vehicle Count"
+              ],
+            "columns_field_name" :
+              [
+                "start_time",
+                "e_zpass_total_vehicle_count",
+                "plaza",
+                "cash_total_vehicle_count"
+              ],
+            "columns_datatype" : [
+                                   "Calendar date",
+                                   "Number",
+                                   "Text",
+                                   "Number"
+                                 ],
+            "columns_description" :
+              [
+                "Starting date and time (hour) of the usage count",
+                "NUMBER of vehicles, using E-ZPass, that passed\nthe toll plaza in the direction denoted in the\nDirection Field that used E-ZPass.\nFor example: 196 vehicles passed the Plaza 6\n(Yonkers) in the northbound direction on January\n1, 2013 between 12:00am and 1:00am and used\nE-ZPass.",
+                "Thruway plaza number",
+                "NUMBER of vehicles, using cash, that passed the\ntoll plaza in the direction denoted in the Direction\nField that used Cash.\nFor example: 85 vehicles passed Plaza 6\n(Yonkers) in the northbound direction on\nJanuary 1, 2013 between 12:00am and\n1:00am and used Cash."
+              ],
+            "columns_format" :
+              [
+                {
+                  "view" : "date_ym",
+                  "align" : "left",
+                  "drill_down" : "true",
+                  "group_function" : "date_ym"
+                },
+                { "grouping_aggregate" : "sum" },
+                { "align" : "center", "drill_down" : "true" },
+                { "grouping_aggregate" : "sum" }
+              ],
+            "download_count" : 397,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2015-01-23T21:11:49.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" : [ "traffic counts", "thruway", "e-zpass" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "New York State Thruway Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "eric.herman@thruway.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Toll Plaza"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York State Thruway Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2006"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Thruway Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.thruway.ny.gov/ezpass/index.html"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "http://www.thruway.ny.gov/travelers/travelplazas/index.html"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/2jw2-xynj",
+        "link" : "https://data.ny.gov/Transportation/Thruway-E-ZPass-Cash-Hourly-Usage-by-Plaza-by-Mont/2jw2-xynj",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Thruway E-ZPass/Cash Hourly Usage by Plaza: Beginning 2006",
+            "id" : "2hz2-2s5g",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset contains E-ZPass and Cash vehicle count data by hour by toll plaza, beginning with 2006 data.  For each toll plaza, a row of data exists for each hour of each day and for each direction of travel, depending on the type of toll barrier.",
+            "attribution" : "New York State Thruway Authority",
+            "attribution_link" : "http://www.thruway.ny.gov/index.shtml",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-04-20T19:46:27.000Z",
+            "createdAt" : "2014-12-30T21:33:27.000Z",
+            "metadata_updated_at" : "2026-04-20T19:46:27.000Z",
+            "data_updated_at" : "2022-03-23T12:39:58.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 62,
+                "page_views_last_month" : 179,
+                "page_views_total" : 5314,
+                "page_views_last_week_log" : 5.977279923499917,
+                "page_views_last_month_log" : 7.491853096329675,
+                "page_views_total_log" : 12.375853976418469
+              },
+            "columns_name" :
+              [
+                "Plaza",
+                "E-ZPass Total Vehicle Count",
+                "Cash Total Vehicle Count",
+                "Start Time",
+                "End Time",
+                "Direction"
+              ],
+            "columns_field_name" :
+              [
+                "plaza",
+                "e_zpass_total_vehicle_count",
+                "cash_total_vehicle_count",
+                "start_time",
+                "end_time",
+                "direction"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Number",
+                "Number",
+                "Calendar date",
+                "Calendar date",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Thruway plaza number",
+                "NUMBER of vehicles, using E-ZPass, that passed\nthe toll plaza in the direction denoted in the\nDirection Field that used E-ZPass.\nFor example: 196 vehicles passed the Plaza 6\n(Yonkers) in the northbound direction on January\n1, 2013 between 12:00am and 1:00am and used\nE-ZPass.",
+                "NUMBER of vehicles, using cash, that passed the\ntoll plaza in the direction denoted in the Direction\nField that used Cash.\nFor example: 85 vehicles passed Plaza 6\n(Yonkers) in the northbound direction on\nJanuary 1, 2013 between 12:00am and\n1:00am and used Cash.",
+                "Starting date and time (hour) of the usage count",
+                "Ending date and time (hour) of the usage count",
+                "The Thruway has two types of toll systems –\nBarrier and Controlled.\nBarrier toll systems (i.e., used on a bridge) charge\na fixed fee based on vehicle type for passing the\ntoll barrier. Some Barriers charge toll only in one\ndirection, others charge in both directions. For\nBarriers in this data set, the Direction Field is\neither N or S. If the Barrier collects tolls in both\ndirections, there will be data for both N and S. If\nthe Barrier collects tolls only in one direction, the\nDirection Field will be N or S.\nN – toll collected in the Northbound direction\nS - tolls are collected in the Southbound direction\nControlled toll systems collect tolls based on a\ndistance traveled and vehicle type. For\nControlled toll plazas, there will be data for\nvehicles entering the Thruway (E) and exiting the\nThruway (X). The only exceptions are exits 16H\nand 16W, which only have exit and entry lanes\nrespectively.\nE – vehicles entering the Thruway at this location\nX – vehicles exiting the Thruway at this location"
+              ],
+            "columns_format" :
+              [
+                { "align" : "center" },
+                {},
+                {},
+                { "view" : "date_time", "align" : "left" },
+                { "view" : "date_time", "align" : "left" },
+                { "align" : "center" }
+              ],
+            "download_count" : 3125,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2020-09-08T15:49:23.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" : [ "traffic counts", "e-zpass", "thruway" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.thruway.ny.gov/ezpass/index.html"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also-",
+                  "value" : "http://www.thruway.ny.gov/travelers/travelplazas/index.html"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "New York State Thruway Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "eric.herman@thruway.ny.gov"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Toll Plaza"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Annually"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York State Thruway Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2006"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Thruway Authority"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/2hz2-2s5g",
+        "link" : "https://data.ny.gov/Transportation/Thruway-E-ZPass-Cash-Hourly-Usage-by-Plaza-Beginni/2hz2-2s5g",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bus Schedules: 2026",
+            "id" : "4fnn-qsea",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset includes data for all bus schedules. It includes rows for each scheduled timepoint stop on a trip.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T20:18:30.000Z",
+            "createdAt" : "2026-01-27T19:18:09.000Z",
+            "metadata_updated_at" : "2026-11-15T20:09:51.000Z",
+            "data_updated_at" : "2026-11-15T20:18:30.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 205,
+                "page_views_last_month" : 1002,
+                "page_views_total" : 13844,
+                "page_views_last_week_log" : 7.6865005271832185,
+                "page_views_last_month_log" : 9.970105890612182,
+                "page_views_total_log" : 13.757077433254292
+              },
+            "columns_name" :
+              [
+                "Schedule Day",
+                "Day Type",
+                "Borough",
+                "Operator",
+                "Service ID",
+                "Direction",
+                "Shape ID",
+                "Trip Type",
+                "Route ID",
+                "Stop Sequence",
+                "Stop ID",
+                "Stop Name",
+                "Schedule Time",
+                "Origin",
+                "Destination",
+                "School",
+                "Revenue Stop",
+                "Timepoint",
+                "Boarding",
+                "Alighting",
+                "Distance from Start",
+                "Trip Headsign",
+                "Block ID",
+                "Depot Code",
+                "Bundle"
+              ],
+            "columns_field_name" :
+              [
+                "schedule_date",
+                "day_type",
+                "borough",
+                "operator",
+                "service_id",
+                "direction",
+                "shape_id",
+                "trip_type",
+                "route_id",
+                "stop_sequence",
+                "stop_id",
+                "stop_name",
+                "schedule_time",
+                "origin",
+                "destination",
+                "school",
+                "revenue_stop",
+                "timepoint",
+                "boarding",
+                "alighting",
+                "distance_from_start",
+                "trip_headsign",
+                "block_id",
+                "depot_code",
+                "bundle"
+              ],
+            "columns_datatype" :
+              [
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Represents the date for the beginning of schedule trips, in a MM/DD/YYYY format.",
+                "The day type for the schedule (Weekday, Saturday, Sunday).",
+                "Represents the five boroughs of New York City (Bronx, Brooklyn, Manhattan, Queens, Staten Island). ",
+                "Whether the bus route is operated by MTA Bus Company or NYCT. ",
+                "Name of service running for the day. The format of the codes varies between NYCT and MTA Bus routes. Both include the two-character depot code, the pick name, the last digit of the year, the type of day (Weekday/Saturday/Sunday), and if school is open, also SDon.",
+                "The N/S/E/W direction for the bus route. Many non-revenue trips have no defined direction.",
+                "The unique path for the bus trip. This consists of the bus route number followed by four digits.",
+                "The type of bus trip: 1 = Normal revenue trip;  2 = Pull-out from depot;  3 = Pull-in to depot;  4 = Deadhead;  10 = School service – Limited (School service is service on a variant path associated with a school.);  11 = School Service - Normal; 12 = Limited-stop service; 13 = Express service; 14 = Select Bus Service.",
+                "The name of the route.",
+                "The order of stops for the particular bus trip.  ",
+                "The six-digit ID for each stop along the route.",
+                "The name of each stop, typically consisting of the two streets the stop is at the intersection of. This value is blank for non-revenue stops.",
+                "The bus stop scheduled time, in a format of MM/DD/YYYY HH:MM:SS AM/PM.",
+                "Whether the stop is the origin (1) or the departure (0) terminal.",
+                "Whether the stop is the destination (1) or the arrival (0) terminal.",
+                "Whether the trip is made while school is open or closed. This value is blank for non-revenue and weekend and holiday trips.",
+                "Whether the stop is (1) or is not (0) a stop in revenue service. ",
+                "Whether the stop is (1) or is not (0) used for timepoint measures. Field will always be 1 since this dataset only contains timepoint records.",
+                " Whether the stop is (1) or is not (0) used for boarding.",
+                "Whether the stop is (1) or is not (0) used for alighting.",
+                "The distance from the start of the route, in feet.",
+                "The text shown on the bus route while in service.",
+                "The identifier for a set of trips made a bus between when it pulls out of the depot and when it returns.",
+                " The two-digit code for the depot where the route/bus belongs.     BP = Baisley Park;    CA = Castleton;    CH = Charleston;    CP = College Point;    CS = Casey Stengel;    EC = Eastchester;    EN = East New York;    FB = Flatbush;    FP = Fresh Pond;    FR = Far Rockaway;    GA = Grand Avenue;    GH = Gun Hill;    JA = Jamaica;    JG = Jackie Gleason;    JK = John F. Kennedy;    KB = Kingsbridge;    LG = LaGuardia;    MA = Meredith Av;    MQ = Michael J. Quill;    MV = Manhattanville;    OF = Manhattanville;    OH = Tuskegee Airmen;    OS = 126 St;    QV = Queens Village;    SC = Spring Creek;    UP = Ulmer Park;    WF = West Farms;    YO = Yonkers;    YU = Yukon.",
+                "Name of bundle in effect. "
+              ],
+            "columns_format" :
+              [
+                { "view" : "date", "align" : "center" },
+                {},
+                { "align" : "center" },
+                {},
+                {},
+                { "align" : "center" },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "view" : "date_time", "align" : "center" },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                {}
+              ],
+            "download_count" : 786,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2026-01-27T19:18:18.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "mta bus company",
+                "mta bus",
+                "nyct",
+                "new york city transit",
+                "bus",
+                "bus routes",
+                "routes",
+                "service",
+                "schedules",
+                "bus schedules"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Scheduled timepoint stop"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Daily"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York City Transit"
+                },
+                { "key" : "Dataset-Summary_Time-Period", "value" : "2026" },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/4fnn-qsea",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bus-Schedules-2026/4fnn-qsea",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Temporary Residences Map: Last Inspection",
+            "id" : "t4p2-bt68",
+            "resource_name" : null,
+            "parent_fxf" : [ "jcb4-hcyb" ],
+            "description" : "This dataset includes the name and location of active Temporary Residences operating in New York State. Active Temporary Residences include only facilities that were categorized as active (i.e., hotel, motel, or cabin colony occupied by or maintained for the occupancy by 11 people or more) on the date the data was downloaded from a Department of Health database. This data also includes the date of the last inspection and violations of Subpart 7-1 of the New York State Code of Rules and Regulations that were identified during that inspection. Additionally, the data includes the Temporary Residence owner-operator, building type, number of sleeping rooms within the facility, and whether a pool, beach, or food service establishment is operated as part of the facility. The location of the Temporary Residence includes its street address, city, state, zip code, municipality, and county.",
+            "attribution" : "Center for Environmental Health",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "map",
+            "updatedAt" : "2026-01-30T16:22:51.000Z",
+            "createdAt" : "2025-01-13T13:56:22.000Z",
+            "metadata_updated_at" : "2025-01-13T14:00:05.000Z",
+            "data_updated_at" : "2026-01-30T16:22:51.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 11,
+                "page_views_last_month" : 64,
+                "page_views_total" : 874,
+                "page_views_last_week_log" : 3.5849625007211565,
+                "page_views_last_month_log" : 6.022367813028454,
+                "page_views_total_log" : 9.77313920671969
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 272,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "visualization_canvas_map",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-13T13:59:51.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Health",
+            "domain_tags" : [],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.health.ny.gov/regulations/nycrr/title_10/subpart_7-1/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Bureau of Community Environmental Health and Food Protection"
+                },
+                {
+                  "key" : "Dataset-Summary_Units",
+                  "value" : "Temporary Residence"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Facility"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Office/Division",
+                  "value" : "Center for Environmental Health"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Yearly"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2016"
+                },
+                { "key" : "Local-Data_County-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_County_Column", "value" : "COUNTY" },
+                { "key" : "Local-Data_Municipality-Filter", "value" : "Yes" },
+                {
+                  "key" : "Local-Data_Municipality_Column",
+                  "value" : "MUNICIPALITY"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Health, Department of"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "Researchers agree to use the data for statistical reporting and analysis only. The author will include a disclaimer stating that any analysis, interpretations or conclusions were reached by the researcher and not the New York State Department of Health."
+                },
+                {
+                  "key" : "Disclaimers_Disclaimer",
+                  "value" : "Individual local departments of health may provide information pertaining to the facilities that they permit and inspect on their own websites, which may be updated more frequently. More detailed information may be obtained directly from these agencies or the New York State Department of Health through the FOIL process.  Inspection data reflects information gathered during an inspection. There may be a delay between the date of an inspection and the date that the inspection data is entered in the DOH database. Accordingly, inspection data included in a certain measurement period may reflect inspection data that occurred in a previous measurement period. "
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Subpart 7-1 of the New York State Code of Rules and Regulations does not apply to temporary residences located in cities with a population of 125,000 or more, including New York City, Yonkers, Syracuse, Rochester, and Buffalo, and this dataset does not include information pertaining to facilities located in these cities. Temporary residences in these cities are regulated by the local municipality. Information may be obtained from these municipalities through the Freedom of Information Law (FOIL) process."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "health.data.ny.gov" },
+        "permalink" : "https://health.data.ny.gov/d/t4p2-bt68",
+        "link" : "https://health.data.ny.gov/Health/Temporary-Residences-Map-Last-Inspection/t4p2-bt68",
+        "owner" :
+          {
+            "id" : "s9j2-nqmr",
+            "user_type" : "interactive",
+            "display_name" : "Open Data NY - DOH"
+          },
+        "creator" :
+          {
+            "id" : "s9j2-nqmr",
+            "user_type" : "interactive",
+            "display_name" : "Open Data NY - DOH"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Temporary Residences: Last Inspection",
+            "id" : "jcb4-hcyb",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset includes the name and location of active Temporary Residences operating in New York State. Active Temporary Residences include only facilities that were categorized as active (i.e., hotel, motel, or cabin colony occupied by or maintained for the occupancy by 11 people or more) on the date the data was downloaded from a Department of Health database. This data also includes the date of the last inspection and violations of Subpart 7-1 of the New York State Code of Rules and Regulations that were identified during that inspection. Additionally, the data includes the Temporary Residence owner-operator, building type, number of sleeping rooms within the facility, and whether a pool, beach, or food service establishment is operated as part of the facility. The location of the Temporary Residence includes its street address, city, state, zip code, municipality, and county.",
+            "attribution" : "Center for Environmental Health",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-01-30T16:22:51.000Z",
+            "createdAt" : "2018-01-10T16:51:39.000Z",
+            "metadata_updated_at" : "2026-01-30T16:22:46.000Z",
+            "data_updated_at" : "2026-01-30T16:22:51.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 44,
+                "page_views_last_month" : 238,
+                "page_views_total" : 13201,
+                "page_views_last_week_log" : 5.491853096329675,
+                "page_views_last_month_log" : 7.90086680798075,
+                "page_views_total_log" : 13.6884688827327
+              },
+            "columns_name" :
+              [
+                "School Districts 2016.shp",
+                "PERMITTED CORP NAME",
+                "BUILDING TYPE",
+                "NUMBER OF SLEEPING ROOMS",
+                "ZIP CODE",
+                "STATE",
+                "VIOLATIONS",
+                "MUNICIPALITY",
+                "NYS Senate Districts",
+                "New York Zip Codes",
+                "Local Waterfront Revitalization Program (LWRP) Communities",
+                "Counties",
+                "ON-SITE BEACH(ES)",
+                "Socrata Location (state)",
+                "Socrata Location (address)",
+                "Socrata Location (city)",
+                "Socrata Location (zip)",
+                "NUMBER CRITICAL NOT CORRECTED",
+                "NYS HEALTH OPERATION ID",
+                "ON-SITE POOL(S)",
+                "COUNTY",
+                "NUMBER NON-CRITICAL VIOLATIONS",
+                "CITY",
+                "NYS HEALTH GAZETTEER ",
+                "Location",
+                "FACILITY",
+                "LOCAL HEALTH DEPARTMENT",
+                "LAST INSPECTED",
+                "INSPECTION TYPE",
+                "NUMBER CRITICAL VIOLATIONS",
+                "INSPECTION COMMENTS",
+                "FACILITY ADDRESS",
+                "FOOD SERVICE ESTABLISHMENT(S)",
+                "PERMITTED OPERATOR NAME"
+              ],
+            "columns_field_name" :
+              [
+                ":@computed_region_5edz_4hdv",
+                "permitted_corp_name",
+                "building_type",
+                "number_of_sleeping_rooms",
+                "zip_code",
+                "state",
+                "violations",
+                "municipality",
+                ":@computed_region_assa_msit",
+                ":@computed_region_43an_4dx5",
+                ":@computed_region_8ire_itmf",
+                ":@computed_region_9yqb_tdyd",
+                "on_site_beach_es",
+                "socrata_location_state",
+                "socrata_location_address",
+                "socrata_location_city",
+                "socrata_location_zip",
+                "number_critical_not_corrected",
+                "nys_health_operation_id",
+                "on_site_pool_s",
+                "county",
+                "number_non_critical_violations",
+                "city",
+                "nys_health_gazetteer_1980",
+                "socrata_location",
+                "facility",
+                "local_health_department",
+                "last_inspected",
+                "inspection_type",
+                "number_critical_violations",
+                "inspection_comments",
+                "facility_address",
+                "food_service_establishment_s",
+                "permitted_owner_operator_name"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Number",
+                "Point",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "Municipality code for facility location is derived from the 1980 NYSDOH Gazetteer version. The municipality code identifies the county and the town, village, or city in which the facility is located",
+                "Latitude and longitude of where the facility is located.",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                { "view" : "coords", "align" : "left" },
+                {},
+                {},
+                { "view" : "date" },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {},
+                { "displayStyle" : "plain", "align" : "left" }
+              ],
+            "download_count" : 77810,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2019-03-27T15:29:26.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Health",
+            "domain_tags" :
+              [
+                "municipality",
+                "city",
+                "consumer resources",
+                "county",
+                "environmental health",
+                "facility name",
+                "inspection",
+                "oph",
+                "public health",
+                "temporary residences",
+                "violation"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "http://www.health.ny.gov/regulations/nycrr/title_10/subpart_7-1/"
+                },
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Bureau of Community Environmental Health and Food Protection"
+                },
+                {
+                  "key" : "Dataset-Summary_Units",
+                  "value" : "Temporary Residence"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Facility"
+                },
+                { "key" : "Dataset-Summary_Coverage", "value" : "Statewide" },
+                {
+                  "key" : "Dataset-Summary_Office/Division",
+                  "value" : "Center for Environmental Health"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Yearly"
+                },
+                {
+                  "key" : "Dataset-Summary_Time-Period",
+                  "value" : "Beginning 2016"
+                },
+                { "key" : "Local-Data_County-Filter", "value" : "Yes" },
+                { "key" : "Local-Data_County_Column", "value" : "COUNTY" },
+                { "key" : "Local-Data_Municipality-Filter", "value" : "Yes" },
+                {
+                  "key" : "Local-Data_Municipality_Column",
+                  "value" : "MUNICIPALITY"
+                },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Health, Department of"
+                },
+                {
+                  "key" : "Notes_Notes",
+                  "value" : "Researchers agree to use the data for statistical reporting and analysis only. The author will include a disclaimer stating that any analysis, interpretations or conclusions were reached by the researcher and not the New York State Department of Health."
+                },
+                {
+                  "key" : "Disclaimers_Disclaimer",
+                  "value" : "Individual local departments of health may provide information pertaining to the facilities that they permit and inspect on their own websites, which may be updated more frequently. More detailed information may be obtained directly from these agencies or the New York State Department of Health through the FOIL process.  Inspection data reflects information gathered during an inspection. There may be a delay between the date of an inspection and the date that the inspection data is entered in the DOH database. Accordingly, inspection data included in a certain measurement period may reflect inspection data that occurred in a previous measurement period. "
+                },
+                {
+                  "key" : "Disclaimers_Limitations",
+                  "value" : "Subpart 7-1 of the New York State Code of Rules and Regulations does not apply to temporary residences located in cities with a population of 125,000 or more, including New York City, Yonkers, Syracuse, Rochester, and Buffalo, and this dataset does not include information pertaining to facilities located in these cities. Temporary residences in these cities are regulated by the local municipality. Information may be obtained from these municipalities through the Freedom of Information Law (FOIL) process."
+                }
+              ]
+          },
+        "metadata" : { "domain" : "health.data.ny.gov" },
+        "permalink" : "https://health.data.ny.gov/d/jcb4-hcyb",
+        "link" : "https://health.data.ny.gov/Health/Temporary-Residences-Last-Inspection/jcb4-hcyb",
+        "owner" :
+          {
+            "id" : "s9j2-nqmr",
+            "user_type" : "interactive",
+            "display_name" : "Open Data NY - DOH"
+          },
+        "creator" :
+          {
+            "id" : "s9j2-nqmr",
+            "user_type" : "interactive",
+            "display_name" : "Open Data NY - DOH"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bus Schedules: 2025",
+            "id" : "t4bz-xqa9",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset includes data for all bus schedules. It includes rows for each scheduled timepoint stop on a trip.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-04-01T19:14:44.000Z",
+            "createdAt" : "2025-07-14T17:56:54.000Z",
+            "metadata_updated_at" : "2026-04-01T19:14:44.000Z",
+            "data_updated_at" : "2026-02-28T03:10:33.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 126,
+                "page_views_last_month" : 402,
+                "page_views_total" : 4899,
+                "page_views_last_week_log" : 6.988684686772166,
+                "page_views_last_month_log" : 8.654636028527968,
+                "page_views_total_log" : 12.258566033889934
+              },
+            "columns_name" :
+              [
+                "Stop Sequence",
+                "School",
+                "Origin",
+                "Revenue Stop",
+                "Boarding",
+                "Timepoint",
+                "Depot Code",
+                "Block ID",
+                "Trip Headsign",
+                "Alighting",
+                "Distance from Start",
+                "Shape ID",
+                "Day Type",
+                "Stop Name",
+                "Service ID",
+                "Schedule Day",
+                "Bundle",
+                "Direction",
+                "Trip Type",
+                "Route ID",
+                "Schedule Time",
+                "Destination",
+                "Operator",
+                "Stop ID",
+                "Borough"
+              ],
+            "columns_field_name" :
+              [
+                "stop_sequence",
+                "school",
+                "origin",
+                "revenue_stop",
+                "boarding",
+                "timepoint",
+                "depot_code",
+                "block_id",
+                "trip_headsign",
+                "alighting",
+                "distance_from_start",
+                "shape_id",
+                "day_type",
+                "stop_name",
+                "service_id",
+                "schedule_date",
+                "bundle",
+                "direction",
+                "trip_type",
+                "route_id",
+                "schedule_time",
+                "destination",
+                "operator",
+                "stop_id",
+                "borough"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The order of stops for the particular bus trip.  ",
+                "Whether the trip is made while school is open or closed. This value is blank for non-revenue and weekend and holiday trips.",
+                "Whether the stop is the origin (1) or the departure (0) terminal.",
+                "Whether the stop is (1) or is not (0) a stop in revenue service. ",
+                " Whether the stop is (1) or is not (0) used for boarding.",
+                "Whether the stop is (1) or is not (0) used for timepoint measures. Field will always be 1 since this dataset only contains timepoint records.",
+                " The two-digit code for the depot where the route/bus belongs.     BP = Baisley Park;    CA = Castleton;    CH = Charleston;    CP = College Point;    CS = Casey Stengel;    EC = Eastchester;    EN = East New York;    FB = Flatbush;    FP = Fresh Pond;    FR = Far Rockaway;    GA = Grand Avenue;    GH = Gun Hill;    JA = Jamaica;    JG = Jackie Gleason;    JK = John F. Kennedy;    KB = Kingsbridge;    LG = LaGuardia;    MA = Meredith Av;    MQ = Michael J. Quill;    MV = Manhattanville;    OF = Manhattanville;    OH = Tuskegee Airmen;    OS = 126 St;    QV = Queens Village;    SC = Spring Creek;    UP = Ulmer Park;    WF = West Farms;    YO = Yonkers;    YU = Yukon.",
+                "The identifier for a set of trips made a bus between when it pulls out of the depot and when it returns.",
+                "The text shown on the bus route while in service.",
+                "Whether the stop is (1) or is not (0) used for alighting.",
+                "The distance from the start of the route, in feet.",
+                "The unique path for the bus trip. This consists of the bus route number followed by four digits.",
+                "The day type for the schedule (Weekday, Saturday, Sunday).",
+                "The name of each stop, typically consisting of the two streets the stop is at the intersection of. This value is blank for non-revenue stops.",
+                "Name of service running for the day. The format of the codes varies between NYCT and MTA Bus routes. Both include the two-character depot code, the pick name, the last digit of the year, the type of day (Weekday/Saturday/Sunday), and if school is open, also SDon.",
+                "Represents the date for the beginning of schedule trips, in a MM/DD/YYYY format.",
+                "Name of bundle in effect. ",
+                "The N/S/E/W direction for the bus route. Many non-revenue trips have no defined direction.",
+                "The type of bus trip: 1 = Normal revenue trip;  2 = Pull-out from depot;  3 = Pull-in to depot;  4 = Deadhead;  10 = School service – Limited (School service is service on a variant path associated with a school.);  11 = School Service - Normal; 12 = Limited-stop service; 13 = Express service; 14 = Select Bus Service.",
+                "The name of the route.",
+                "The bus stop scheduled time, in a format of MM/DD/YYYY HH:MM:SS AM/PM.",
+                "Whether the stop is the destination (1) or the arrival (0) terminal.",
+                "Whether the bus route is operated by MTA Bus Company or NYCT. ",
+                "The six-digit ID for each stop along the route.",
+                "Represents the five boroughs of New York City (Bronx, Brooklyn, Manhattan, Queens, Staten Island). "
+              ],
+            "columns_format" :
+              [
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {},
+                {},
+                {},
+                {},
+                { "view" : "date", "align" : "center" },
+                {},
+                { "align" : "center" },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                { "view" : "date_time", "align" : "center" },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                { "align" : "center" }
+              ],
+            "download_count" : 2594,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-07-18T20:14:36.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "nyct",
+                "new york city transit",
+                "service",
+                "mta bus company",
+                "bus",
+                "mta bus",
+                "bus schedules",
+                "schedules",
+                "routes",
+                "bus routes"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Scheduled timepoint stop"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York City Transit"
+                },
+                { "key" : "Dataset-Summary_Time-Period", "value" : "2025" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/t4bz-xqa9",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bus-Schedules-2025/t4bz-xqa9",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bus Schedules: 2024",
+            "id" : "udt9-hvjq",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset includes data for all bus schedules. It includes rows for each scheduled timepoint stop on a trip.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-08-21T15:03:38.000Z",
+            "createdAt" : "2025-07-21T17:07:17.000Z",
+            "metadata_updated_at" : "2025-08-21T15:03:38.000Z",
+            "data_updated_at" : "2025-08-20T21:23:52.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 70,
+                "page_views_last_month" : 276,
+                "page_views_total" : 2784,
+                "page_views_last_week_log" : 6.149747119504682,
+                "page_views_last_month_log" : 8.113742166049189,
+                "page_views_total_log" : 11.443461612227395
+              },
+            "columns_name" :
+              [
+                "Distance from Start",
+                "Service ID",
+                "Direction",
+                "Shape ID",
+                "Trip Type",
+                "Route ID",
+                "Stop Sequence",
+                "Stop Name",
+                "Schedule Time",
+                "Timepoint",
+                "Boarding",
+                "Trip Headsign",
+                "Depot Code",
+                "Operator",
+                "Borough",
+                "Schedule Day",
+                "Bundle",
+                "Block ID",
+                "School",
+                "Day Type",
+                "Destination",
+                "Alighting",
+                "Revenue Stop",
+                "Origin",
+                "Stop ID"
+              ],
+            "columns_field_name" :
+              [
+                "distance_from_start",
+                "service_id",
+                "direction",
+                "shape_id",
+                "trip_type",
+                "route_id",
+                "stop_sequence",
+                "stop_name",
+                "schedule_time",
+                "timepoint",
+                "boarding",
+                "trip_headsign",
+                "depot_code",
+                "operator",
+                "borough",
+                "schedule_date",
+                "bundle",
+                "block_id",
+                "school",
+                "day_type",
+                "destination",
+                "alighting",
+                "revenue_stop",
+                "origin",
+                "stop_id"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "The distance from the start of the route, in feet.",
+                "Name of service running for the day. The format of the codes varies between NYCT and MTA Bus routes. Both include the two-character depot code, the pick name, the last digit of the year, the type of day (Weekday/Saturday/Sunday), and if school is open, also SDon.",
+                "The N/S/E/W direction for the bus route. Many non-revenue trips have no defined direction.",
+                "The unique path for the bus trip. This consists of the bus route number followed by four digits.",
+                "The type of bus trip: 1 = Normal revenue trip;  2 = Pull-out from depot;  3 = Pull-in to depot;  4 = Deadhead;  10 = School service – Limited (School service is service on a variant path associated with a school.);  11 = School Service - Normal; 12 = Limited-stop service; 13 = Express service; 14 = Select Bus Service.",
+                "The name of the route.",
+                "The order of stops for the particular bus trip.  ",
+                "The name of each stop, typically consisting of the two streets the stop is at the intersection of. This value is blank for non-revenue stops.",
+                "The bus stop scheduled time, in a format of MM/DD/YYYY HH:MM:SS AM/PM.",
+                "Whether the stop is (1) or is not (0) used for timepoint measures. Field will always be 1 since this dataset only contains timepoint records.",
+                " Whether the stop is (1) or is not (0) used for boarding.",
+                "The text shown on the bus route while in service.",
+                " The two-digit code for the depot where the route/bus belongs.     BP = Baisley Park;    CA = Castleton;    CH = Charleston;    CP = College Point;    CS = Casey Stengel;    EC = Eastchester;    EN = East New York;    FB = Flatbush;    FP = Fresh Pond;    FR = Far Rockaway;    GA = Grand Avenue;    GH = Gun Hill;    JA = Jamaica;    JG = Jackie Gleason;    JK = John F. Kennedy;    KB = Kingsbridge;    LG = LaGuardia;    MA = Meredith Av;    MQ = Michael J. Quill;    MV = Manhattanville;    OF = Manhattanville;    OH = Tuskegee Airmen;    OS = 126 St;    QV = Queens Village;    SC = Spring Creek;    UP = Ulmer Park;    WF = West Farms;    YO = Yonkers;    YU = Yukon.",
+                "Whether the bus route is operated by MTA Bus Company or NYCT. ",
+                "Represents the five boroughs of New York City (Bronx, Brooklyn, Manhattan, Queens, Staten Island). ",
+                "Represents the date for the beginning of schedule trips, in a MM/DD/YYYY format.",
+                "Name of bundle in effect. ",
+                "The identifier for a set of trips made a bus between when it pulls out of the depot and when it returns.",
+                "Whether the trip is made while school is open or closed. This value is blank for non-revenue and weekend and holiday trips.",
+                "The day type for the schedule (Weekday, Saturday, Sunday).",
+                "Whether the stop is the destination (1) or the arrival (0) terminal.",
+                "Whether the stop is (1) or is not (0) used for alighting.",
+                "Whether the stop is (1) or is not (0) a stop in revenue service. ",
+                "Whether the stop is the origin (1) or the departure (0) terminal.",
+                "The six-digit ID for each stop along the route."
+              ],
+            "columns_format" :
+              [
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {},
+                { "align" : "center" },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "view" : "date_time", "align" : "center" },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {},
+                { "align" : "center" },
+                { "view" : "date", "align" : "center" },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                }
+              ],
+            "download_count" : 3352,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-07-21T17:13:41.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "new york city transit",
+                "nyct",
+                "service",
+                "schedules",
+                "bus routes",
+                "bus schedules",
+                "mta bus",
+                "mta bus company",
+                "routes",
+                "bus"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Scheduled timepoint stop"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York City Transit"
+                },
+                { "key" : "Dataset-Summary_Time-Period", "value" : "2024" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/udt9-hvjq",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bus-Schedules-2024/udt9-hvjq",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bus Schedules: 2021",
+            "id" : "d6ix-pek4",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset includes data for all bus schedules. It includes rows for each scheduled timepoint stop on a trip.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-08-21T15:02:20.000Z",
+            "createdAt" : "2025-07-21T17:07:04.000Z",
+            "metadata_updated_at" : "2025-08-21T15:02:20.000Z",
+            "data_updated_at" : "2025-08-14T23:46:36.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 93,
+                "page_views_last_month" : 334,
+                "page_views_total" : 2567,
+                "page_views_last_week_log" : 6.554588851677638,
+                "page_views_last_month_log" : 8.388017285345136,
+                "page_views_total_log" : 11.326429487122304
+              },
+            "columns_name" :
+              [
+                "Boarding",
+                "Depot Code",
+                "Alighting",
+                "Revenue Stop",
+                "Block ID",
+                "Day Type",
+                "Borough",
+                "Operator",
+                "Service ID",
+                "Shape ID",
+                "Trip Type",
+                "Route ID",
+                "Stop Sequence",
+                "Stop ID",
+                "Stop Name",
+                "Schedule Time",
+                "School",
+                "Destination",
+                "Distance from Start",
+                "Trip Headsign",
+                "Direction",
+                "Schedule Day",
+                "Timepoint",
+                "Origin",
+                "Bundle"
+              ],
+            "columns_field_name" :
+              [
+                "boarding",
+                "depot_code",
+                "alighting",
+                "revenue_stop",
+                "block_id",
+                "day_type",
+                "borough",
+                "operator",
+                "service_id",
+                "shape_id",
+                "trip_type",
+                "route_id",
+                "stop_sequence",
+                "stop_id",
+                "stop_name",
+                "schedule_time",
+                "school",
+                "destination",
+                "distance_from_start",
+                "trip_headsign",
+                "direction",
+                "schedule_date",
+                "timepoint",
+                "origin",
+                "bundle"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                " Whether the stop is (1) or is not (0) used for boarding.",
+                " The two-digit code for the depot where the route/bus belongs.     BP = Baisley Park;    CA = Castleton;    CH = Charleston;    CP = College Point;    CS = Casey Stengel;    EC = Eastchester;    EN = East New York;    FB = Flatbush;    FP = Fresh Pond;    FR = Far Rockaway;    GA = Grand Avenue;    GH = Gun Hill;    JA = Jamaica;    JG = Jackie Gleason;    JK = John F. Kennedy;    KB = Kingsbridge;    LG = LaGuardia;    MA = Meredith Av;    MQ = Michael J. Quill;    MV = Manhattanville;    OF = Manhattanville;    OH = Tuskegee Airmen;    OS = 126 St;    QV = Queens Village;    SC = Spring Creek;    UP = Ulmer Park;    WF = West Farms;    YO = Yonkers;    YU = Yukon.",
+                "Whether the stop is (1) or is not (0) used for alighting.",
+                "Whether the stop is (1) or is not (0) a stop in revenue service. ",
+                "The identifier for a set of trips made a bus between when it pulls out of the depot and when it returns.",
+                "The day type for the schedule (Weekday, Saturday, Sunday).",
+                "Represents the five boroughs of New York City (Bronx, Brooklyn, Manhattan, Queens, Staten Island). ",
+                "Whether the bus route is operated by MTA Bus Company or NYCT. ",
+                "Name of service running for the day. The format of the codes varies between NYCT and MTA Bus routes. Both include the two-character depot code, the pick name, the last digit of the year, the type of day (Weekday/Saturday/Sunday), and if school is open, also SDon.",
+                "The unique path for the bus trip. This consists of the bus route number followed by four digits.",
+                "The type of bus trip: 1 = Normal revenue trip;  2 = Pull-out from depot;  3 = Pull-in to depot;  4 = Deadhead;  10 = School service – Limited (School service is service on a variant path associated with a school.);  11 = School Service - Normal; 12 = Limited-stop service; 13 = Express service; 14 = Select Bus Service.",
+                "The name of the route.",
+                "The order of stops for the particular bus trip.  ",
+                "The six-digit ID for each stop along the route.",
+                "The name of each stop, typically consisting of the two streets the stop is at the intersection of. This value is blank for non-revenue stops.",
+                "The bus stop scheduled time, in a format of MM/DD/YYYY HH:MM:SS AM/PM.",
+                "Whether the trip is made while school is open or closed. This value is blank for non-revenue and weekend and holiday trips.",
+                "Whether the stop is the destination (1) or the arrival (0) terminal.",
+                "The distance from the start of the route, in feet.",
+                "The text shown on the bus route while in service.",
+                "The N/S/E/W direction for the bus route. Many non-revenue trips have no defined direction.",
+                "Represents the date for the beginning of schedule trips, in a MM/DD/YYYY format.",
+                "Whether the stop is (1) or is not (0) used for timepoint measures. Field will always be 1 since this dataset only contains timepoint records.",
+                "Whether the stop is the origin (1) or the departure (0) terminal.",
+                "Name of bundle in effect. "
+              ],
+            "columns_format" :
+              [
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "align" : "center" },
+                {},
+                {},
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "view" : "date_time", "align" : "center" },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {},
+                { "align" : "center" },
+                { "view" : "date", "align" : "center" },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {}
+              ],
+            "download_count" : 1290,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-07-21T17:09:02.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "bus schedules",
+                "service",
+                "schedules",
+                "routes",
+                "nyct",
+                "new york city transit",
+                "mta bus company",
+                "mta bus",
+                "bus",
+                "bus routes"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Scheduled timepoint stop"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York City Transit"
+                },
+                { "key" : "Dataset-Summary_Time-Period", "value" : "2021" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/d6ix-pek4",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bus-Schedules-2021/d6ix-pek4",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bus Schedules: 2023",
+            "id" : "x5mx-4rfs",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset includes data for all bus schedules. It includes rows for each scheduled timepoint stop on a trip.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-08-21T15:03:04.000Z",
+            "createdAt" : "2025-07-21T17:06:22.000Z",
+            "metadata_updated_at" : "2025-08-21T15:03:04.000Z",
+            "data_updated_at" : "2025-08-19T23:33:06.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 82,
+                "page_views_last_month" : 264,
+                "page_views_total" : 1584,
+                "page_views_last_week_log" : 6.375039431346925,
+                "page_views_last_month_log" : 8.049848549450562,
+                "page_views_total_log" : 10.63026712502677
+              },
+            "columns_name" :
+              [
+                "Revenue Stop",
+                "School",
+                "Origin",
+                "Schedule Time",
+                "Stop Name",
+                "Stop ID",
+                "Stop Sequence",
+                "Route ID",
+                "Trip Type",
+                "Shape ID",
+                "Operator",
+                "Direction",
+                "Service ID",
+                "Borough",
+                "Day Type",
+                "Schedule Day",
+                "Destination",
+                "Boarding",
+                "Bundle",
+                "Depot Code",
+                "Block ID",
+                "Trip Headsign",
+                "Distance from Start",
+                "Alighting",
+                "Timepoint"
+              ],
+            "columns_field_name" :
+              [
+                "revenue_stop",
+                "school",
+                "origin",
+                "schedule_time",
+                "stop_name",
+                "stop_id",
+                "stop_sequence",
+                "route_id",
+                "trip_type",
+                "shape_id",
+                "operator",
+                "direction",
+                "service_id",
+                "borough",
+                "day_type",
+                "schedule_date",
+                "destination",
+                "boarding",
+                "bundle",
+                "depot_code",
+                "block_id",
+                "trip_headsign",
+                "distance_from_start",
+                "alighting",
+                "timepoint"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Whether the stop is (1) or is not (0) a stop in revenue service. ",
+                "Whether the trip is made while school is open or closed. This value is blank for non-revenue and weekend and holiday trips.",
+                "Whether the stop is the origin (1) or the departure (0) terminal.",
+                "The bus stop scheduled time, in a format of MM/DD/YYYY HH:MM:SS AM/PM.",
+                "The name of each stop, typically consisting of the two streets the stop is at the intersection of. This value is blank for non-revenue stops.",
+                "The six-digit ID for each stop along the route.",
+                "The order of stops for the particular bus trip.  ",
+                "The name of the route.",
+                "The type of bus trip: 1 = Normal revenue trip;  2 = Pull-out from depot;  3 = Pull-in to depot;  4 = Deadhead;  10 = School service – Limited (School service is service on a variant path associated with a school.);  11 = School Service - Normal; 12 = Limited-stop service; 13 = Express service; 14 = Select Bus Service.",
+                "The unique path for the bus trip. This consists of the bus route number followed by four digits.",
+                "Whether the bus route is operated by MTA Bus Company or NYCT. ",
+                "The N/S/E/W direction for the bus route. Many non-revenue trips have no defined direction.",
+                "Name of service running for the day. The format of the codes varies between NYCT and MTA Bus routes. Both include the two-character depot code, the pick name, the last digit of the year, the type of day (Weekday/Saturday/Sunday), and if school is open, also SDon.",
+                "Represents the five boroughs of New York City (Bronx, Brooklyn, Manhattan, Queens, Staten Island). ",
+                "The day type for the schedule (Weekday, Saturday, Sunday).",
+                "Represents the date for the beginning of schedule trips, in a MM/DD/YYYY format.",
+                "Whether the stop is the destination (1) or the arrival (0) terminal.",
+                " Whether the stop is (1) or is not (0) used for boarding.",
+                "Name of bundle in effect. ",
+                " The two-digit code for the depot where the route/bus belongs.     BP = Baisley Park;    CA = Castleton;    CH = Charleston;    CP = College Point;    CS = Casey Stengel;    EC = Eastchester;    EN = East New York;    FB = Flatbush;    FP = Fresh Pond;    FR = Far Rockaway;    GA = Grand Avenue;    GH = Gun Hill;    JA = Jamaica;    JG = Jackie Gleason;    JK = John F. Kennedy;    KB = Kingsbridge;    LG = LaGuardia;    MA = Meredith Av;    MQ = Michael J. Quill;    MV = Manhattanville;    OF = Manhattanville;    OH = Tuskegee Airmen;    OS = 126 St;    QV = Queens Village;    SC = Spring Creek;    UP = Ulmer Park;    WF = West Farms;    YO = Yonkers;    YU = Yukon.",
+                "The identifier for a set of trips made a bus between when it pulls out of the depot and when it returns.",
+                "The text shown on the bus route while in service.",
+                "The distance from the start of the route, in feet.",
+                "Whether the stop is (1) or is not (0) used for alighting.",
+                "Whether the stop is (1) or is not (0) used for timepoint measures. Field will always be 1 since this dataset only contains timepoint records."
+              ],
+            "columns_format" :
+              [
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "view" : "date_time", "align" : "center" },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                { "align" : "center" },
+                {},
+                { "align" : "center" },
+                {},
+                { "view" : "date", "align" : "center" },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," }
+              ],
+            "download_count" : 1233,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-07-21T17:12:18.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "nyct",
+                "routes",
+                "schedules",
+                "new york city transit",
+                "mta bus company",
+                "mta bus",
+                "bus schedules",
+                "bus routes",
+                "service",
+                "bus"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Scheduled timepoint stop"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York City Transit"
+                },
+                { "key" : "Dataset-Summary_Time-Period", "value" : "2023" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/x5mx-4rfs",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bus-Schedules-2023/x5mx-4rfs",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "MTA Bus Schedules: 2022",
+            "id" : "w6dm-6y5c",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This dataset includes data for all bus schedules. It includes rows for each scheduled timepoint stop on a trip.",
+            "attribution" : "Metropolitan Transportation Authority",
+            "attribution_link" : "https://www.mta.info/open-data",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-08-21T15:02:42.000Z",
+            "createdAt" : "2025-07-21T17:06:50.000Z",
+            "metadata_updated_at" : "2025-08-21T15:02:42.000Z",
+            "data_updated_at" : "2025-08-15T18:43:56.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 62,
+                "page_views_last_month" : 176,
+                "page_views_total" : 1206,
+                "page_views_last_week_log" : 5.977279923499917,
+                "page_views_last_month_log" : 7.467605550082998,
+                "page_views_total_log" : 10.237209960755022
+              },
+            "columns_name" :
+              [
+                "School",
+                "Stop ID",
+                "Stop Name",
+                "Schedule Time",
+                "Origin",
+                "Destination",
+                "Timepoint",
+                "Boarding",
+                "Alighting",
+                "Distance from Start",
+                "Trip Headsign",
+                "Bundle",
+                "Depot Code",
+                "Block ID",
+                "Day Type",
+                "Revenue Stop",
+                "Schedule Day",
+                "Borough",
+                "Operator",
+                "Service ID",
+                "Direction",
+                "Shape ID",
+                "Trip Type",
+                "Route ID",
+                "Stop Sequence"
+              ],
+            "columns_field_name" :
+              [
+                "school",
+                "stop_id",
+                "stop_name",
+                "schedule_time",
+                "origin",
+                "destination",
+                "timepoint",
+                "boarding",
+                "alighting",
+                "distance_from_start",
+                "trip_headsign",
+                "bundle",
+                "depot_code",
+                "block_id",
+                "day_type",
+                "revenue_stop",
+                "schedule_date",
+                "borough",
+                "operator",
+                "service_id",
+                "direction",
+                "shape_id",
+                "trip_type",
+                "route_id",
+                "stop_sequence"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Whether the trip is made while school is open or closed. This value is blank for non-revenue and weekend and holiday trips.",
+                "The six-digit ID for each stop along the route.",
+                "The name of each stop, typically consisting of the two streets the stop is at the intersection of. This value is blank for non-revenue stops.",
+                "The bus stop scheduled time, in a format of MM/DD/YYYY HH:MM:SS AM/PM.",
+                "Whether the stop is the origin (1) or the departure (0) terminal.",
+                "Whether the stop is the destination (1) or the arrival (0) terminal.",
+                "Whether the stop is (1) or is not (0) used for timepoint measures. Field will always be 1 since this dataset only contains timepoint records.",
+                " Whether the stop is (1) or is not (0) used for boarding.",
+                "Whether the stop is (1) or is not (0) used for alighting.",
+                "The distance from the start of the route, in feet.",
+                "The text shown on the bus route while in service.",
+                "Name of bundle in effect. ",
+                " The two-digit code for the depot where the route/bus belongs.     BP = Baisley Park;    CA = Castleton;    CH = Charleston;    CP = College Point;    CS = Casey Stengel;    EC = Eastchester;    EN = East New York;    FB = Flatbush;    FP = Fresh Pond;    FR = Far Rockaway;    GA = Grand Avenue;    GH = Gun Hill;    JA = Jamaica;    JG = Jackie Gleason;    JK = John F. Kennedy;    KB = Kingsbridge;    LG = LaGuardia;    MA = Meredith Av;    MQ = Michael J. Quill;    MV = Manhattanville;    OF = Manhattanville;    OH = Tuskegee Airmen;    OS = 126 St;    QV = Queens Village;    SC = Spring Creek;    UP = Ulmer Park;    WF = West Farms;    YO = Yonkers;    YU = Yukon.",
+                "The identifier for a set of trips made a bus between when it pulls out of the depot and when it returns.",
+                "The day type for the schedule (Weekday, Saturday, Sunday).",
+                "Whether the stop is (1) or is not (0) a stop in revenue service. ",
+                "Represents the date for the beginning of schedule trips, in a MM/DD/YYYY format.",
+                "Represents the five boroughs of New York City (Bronx, Brooklyn, Manhattan, Queens, Staten Island). ",
+                "Whether the bus route is operated by MTA Bus Company or NYCT. ",
+                "Name of service running for the day. The format of the codes varies between NYCT and MTA Bus routes. Both include the two-character depot code, the pick name, the last digit of the year, the type of day (Weekday/Saturday/Sunday), and if school is open, also SDon.",
+                "The N/S/E/W direction for the bus route. Many non-revenue trips have no defined direction.",
+                "The unique path for the bus trip. This consists of the bus route number followed by four digits.",
+                "The type of bus trip: 1 = Normal revenue trip;  2 = Pull-out from depot;  3 = Pull-in to depot;  4 = Deadhead;  10 = School service – Limited (School service is service on a variant path associated with a school.);  11 = School Service - Normal; 12 = Limited-stop service; 13 = Express service; 14 = Select Bus Service.",
+                "The name of the route.",
+                "The order of stops for the particular bus trip.  "
+              ],
+            "columns_format" :
+              [
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "view" : "date_time", "align" : "center" },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "right"
+                },
+                {},
+                {},
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                { "view" : "date", "align" : "center" },
+                { "align" : "center" },
+                {},
+                {},
+                { "align" : "center" },
+                {},
+                { "decimalSeparator" : ".", "groupSeparator" : "," },
+                {},
+                {
+                  "decimalSeparator" : ".",
+                  "groupSeparator" : ",",
+                  "align" : "center"
+                }
+              ],
+            "download_count" : 1329,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-07-21T17:10:06.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Transportation",
+            "domain_tags" :
+              [
+                "mta bus company",
+                "service",
+                "schedules",
+                "routes",
+                "nyct",
+                "new york city transit",
+                "mta bus",
+                "bus schedules",
+                "bus routes",
+                "bus"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Summary_Dataset-Owner",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Dataset-Summary_Contact-Information",
+                  "value" : "opendata@mtahq.org"
+                },
+                {
+                  "key" : "Dataset-Summary_Granularity",
+                  "value" : "Scheduled timepoint stop"
+                },
+                {
+                  "key" : "Dataset-Summary_Coverage",
+                  "value" : "New York City"
+                },
+                {
+                  "key" : "Dataset-Summary_Posting-Frequency",
+                  "value" : "Static - Not Updated"
+                },
+                {
+                  "key" : "Dataset-Summary_Organization",
+                  "value" : "New York City Transit"
+                },
+                { "key" : "Dataset-Summary_Time-Period", "value" : "2022" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Metropolitan Transportation Authority"
+                },
+                {
+                  "key" : "Additional-Resources_See-Also",
+                  "value" : "https://metrics.mta.info/"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.ny.gov" },
+        "permalink" : "https://data.ny.gov/d/w6dm-6y5c",
+        "link" : "https://data.ny.gov/Transportation/MTA-Bus-Schedules-2022/w6dm-6y5c",
+        "owner" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          },
+        "creator" :
+          {
+            "id" : "xzik-pf59",
+            "user_type" : "interactive",
+            "display_name" : "NY Open Data"
+          }
+      }
+    ],
+  "resultSetSize" : 11,
+  "timings" : { "serviceMillis" : 38, "searchMillis" : [ 4, 8 ] },
+  "warnings" : []
+}

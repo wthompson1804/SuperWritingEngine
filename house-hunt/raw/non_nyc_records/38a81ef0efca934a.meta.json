@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?q=%22New%20Rochelle%22&limit=15",
+ "retrieved_at": "2026-11-15T21:21:25+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/38a81ef0efca934a.json",
+ "source": "non_nyc_records"
+}

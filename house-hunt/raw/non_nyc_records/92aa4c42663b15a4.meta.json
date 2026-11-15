@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?q=Bayonne&limit=10",
+ "retrieved_at": "2026-11-15T21:21:34+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/92aa4c42663b15a4.json",
+ "source": "non_nyc_records"
+}

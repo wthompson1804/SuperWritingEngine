@@ -1,0 +1,1464 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "CT 2023 Elevation - Slope",
+            "id" : "jbg5-4ks6",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This image service is available through <a href='https://cteco.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>CTECO</a>, a partnership between <a href='https://clear.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>UConn CLEAR</a> and <a href='https://portal.ct.gov/DEEP/GIS-and-Maps/Data/GIS-DATA' target='_blank' rel='nofollow ugc noopener noreferrer'>CT DEEP</a>. The Slope service is created by applying the slope function to the bare earth <a href='https://cteco.maps.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d' target='_blank' rel='nofollow ugc noopener noreferrer'>Elevation service</a>. <div><br /><div><div><b>NOTE Service Changes</b></div><div>Although currently displaying 2023 elevation, this service previously displayed 2016 elevation and will be updated when new elevation is available. Visit the CT ECO <a href='https://maps.cteco.uconn.edu/map-services/#elevation' target='_blank' rel='nofollow ugc noopener noreferrer'>Map and Image Services </a>page for a complete list of available elevation services. </div><div><div><br /><div><div><font color='#104c9b'><b>2023 Statewide (Slope)</b></font><br /></div><div><div><b>Extent:</b> Connecticut</div><div><b>Dates:</b> 2023 (March 27 - April 13), between snow melt and leaf out</div><div><b>Data Info:</b> Slope function applied to the <a href='https://cteco.maps.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d' style='color:rgb(0, 121, 193); text-decoration-line:none;' rel='nofollow ugc'>Elevation service</a> which is a statewide DEM (Digital Elevation Model). The slope function shows elevation change where brighter pixels have a steeper slope. Slope is displayed in degrees ranging from 0 to 90.</div><div><b>Pixel Resolution: </b>2 foot DEM raster derived from Lidar point cloud </div><div><b>Projection: </b>CT State Plane NAD 83 (2011) Feet (EPSG 6434)<br /></div></div><div><b>Service Projection:</b> WGS 1984 Web Mercator Auxiliary Sphere (EPSG 3857)<br /></div><div><b><font color='#104C9B'><br /></font></b></div><div><b><font color='#104C9B'>More Information</font></b></div></div></div><div>- <a href='https://maps.cteco.uconn.edu/data/flight2023/' target='_blank' rel='nofollow ugc noopener noreferrer'>All About the 2023 Data Collection</a> (Imagery and Lidar)</div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/' target='_blank' rel='nofollow ugc noopener noreferrer'>All about Connecticut Lidar Elevation</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/elevation_explained/' target='_blank' rel='nofollow ugc noopener noreferrer'>Lidar Elevation on CT ECO Explained</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/under_the_hood/' target='_blank' rel='nofollow ugc noopener noreferrer'>More about Slope on CT ECO</a><br />- <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.htm' target='_blank' rel='nofollow ugc noopener noreferrer'>Metadata</a>  <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.xml' target='_blank' rel='nofollow ugc noopener noreferrer'>xml format</a></div><div>- <a href='https://maps.cteco.uconn.edu/download/' target='_blank' rel='nofollow ugc noopener noreferrer'>Download DEM and points</a></div><div><div><div><br /></div><div><div><b><font color='#104C9B'>Credit and Funding</font></b></div></div></div></div><div><b><font color='#104C9B'><br /></font></b></div><div><b><font color='#104C9B'><br /></font></b></div></div></div></div>",
+            "attribution" : "UConn",
+            "attribution_link" : null,
+            "contact_email" : "mailto: clear@uconn.edu",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:35.000Z",
+            "createdAt" : "2025-01-29T19:04:53.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:35.000Z",
+            "data_updated_at" : "2025-01-29T19:04:53.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 9,
+                "page_views_last_month" : 29,
+                "page_views_total" : 547,
+                "page_views_last_week_log" : 3.3219280948873626,
+                "page_views_last_month_log" : 4.906890595608519,
+                "page_views_total_log" : 9.098032082960527
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:04:53.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "aerial",
+                "clear",
+                "ct",
+                "ct deep",
+                "ct eco",
+                "cteco",
+                "connecticut",
+                "deep",
+                "elevation",
+                "imagery",
+                "lidar",
+                "uconn",
+                "uconn clear",
+                "university of connecticut"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Agency_agency", "value" : "UConn" },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto: clear@uconn.edu"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2025-04-05T00:50:26.000Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7389,40.9738,-71.7784,42.0598"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=4728fe2181184b14b5a0e7600f6b0b71"
+                },
+                { "key" : "Common-Core_Publisher", "value" : "CT ECO" },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-slope"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2022-11-02T17:38:21.000Z"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "UConnCTECO_EW"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-slope"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://cteco.uconn.edu/ctraster/rest/services/elevation/Slope/ImageServer"
+                    },
+                  "title" : "ArcGIS GeoService"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-slope"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/jbg5-4ks6",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/CT-2023-Elevation-Slope/jbg5-4ks6",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "CT 2023 Elevation (DEM) (updates)",
+            "id" : "7cdj-nhpk",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This image service is available through <a href='https://cteco.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>CTECO</a>, a partnership between <a href='https://clear.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>UConn CLEAR</a> and <a href='https://portal.ct.gov/DEEP/GIS-and-Maps/Data/GIS-DATA' target='_blank' rel='nofollow ugc noopener noreferrer'>CT DEEP</a>. This layer is a hydro-flattened bare earth digital elevation model (DEM) derived from the classified Lidar point cloud covering the state of Connecticut.<div><br /></div><div><div><b>NOTE Service Changes</b></div><div>Although currently displaying 2023 elevation, this service (called <a href='https://cteco.uconn.edu/ctraster/rest/services/elevation/Elevation/ImageServer' target='_blank' rel='nofollow ugc noopener noreferrer'>Elevation</a>) previously displayed 2016 elevation and will be updated when new elevation is available. Visit the CT ECO <a href='https://maps.cteco.uconn.edu/map-services/#elevation' target='_blank' rel='nofollow ugc noopener noreferrer'>Map and Image Services </a>page for a complete list of available elevation services. Connect to this service when you always want the latest and greatest service. Connect to <a href='https://cteco.maps.arcgis.com/home/item.html?id=ad332b05d61f4fb3b17d0070db940c2a' target='_blank' rel='nofollow ugc noopener noreferrer'>CT 2023 Elevation (DEM</a>) service for 2023 elevation that will not change. </div><div><br /><div><div><font color='#104c9b'><b>2023 Statewide </b></font><br /></div><div><div><b>Extent:</b> Connecticut</div><div><b>Dates:</b> 2023 (March 27 - April 13), between snow melt and leaf out</div><div><b>Data Info:</b> statewide Digital Elevation Model (DEM), which is a bare earth elevation raster with no functions applied </div><div><b>Pixel Resolution: </b>2 foot DEM raster derived from QL1+ Lidar point cloud with a minimum of 15 points per square meter inland and 20 points per square meter along the coast. The bare earth elevation from the points were averaged to get the elevation value for each pixel in the DEM. </div><div><b>Projection: </b>CT State Plane NAD 83 (2011) Feet (EPSG 6434)<br /></div></div><div><b>Service Projection:</b> WGS 1984 Web Mercator Auxiliary Sphere (EPSG 3857)<br /></div><div><br /></div><div><b><font color='#104C9B'>More Information</font></b></div><div>- <a href='https://maps.cteco.uconn.edu/data/flight2023/' target='_blank' rel='nofollow ugc noopener noreferrer'>All About the 2023 Data Collection</a> (Imagery and Lidar)</div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/' target='_blank' rel='nofollow ugc noopener noreferrer'>All about Connecticut Lidar Elevation</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/elevation_explained/' target='_blank' rel='nofollow ugc noopener noreferrer'>Lidar Elevation on CT ECO Explained</a></div><div>- <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.htm' target='_blank' rel='nofollow ugc noopener noreferrer'>Metadata</a>  <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.xml' target='_blank' rel='nofollow ugc noopener noreferrer'>xml format</a></div><div>- <a href='https://maps.cteco.uconn.edu/download/' target='_blank' rel='nofollow ugc noopener noreferrer'>Download DEM and points</a></div><div><br /></div><div><b><font color='#104C9B'>Tips</font></b><br /></div><div>- The elevation service contains <a href='https://maps.cteco.uconn.edu/data/lidar/functions/' target='_blank' rel='nofollow ugc noopener noreferrer'>processing templates</a> like hillshade, slope, and aspect, that can be applied to change the appearance of the layer. <br /></div><div>- Symbology is another useful and easy way to display the elevation differently. </div><div><br /></div><div><div><b><font color='#104C9B'>Credit and Funding</font></b></div></div></div></div><div><b><font color='#104C9B'><br /></font></b></div><div><b><font color='#104C9B'><br /></font><",
+            "attribution" : "UConn",
+            "attribution_link" : null,
+            "contact_email" : "mailto: clear@uconn.edu",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:19.000Z",
+            "createdAt" : "2025-01-29T19:04:54.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:19.000Z",
+            "data_updated_at" : "2025-01-29T19:04:54.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 12,
+                "page_views_last_month" : 59,
+                "page_views_total" : 676,
+                "page_views_last_week_log" : 3.700439718141092,
+                "page_views_last_month_log" : 5.906890595608519,
+                "page_views_total_log" : 9.403012023574997
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:04:54.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "aerial",
+                "clear",
+                "ct",
+                "ct deep",
+                "ct eco",
+                "cteco",
+                "connecticut",
+                "deep",
+                "elevation",
+                "imagery",
+                "lidar",
+                "uconn",
+                "uconn clear",
+                "university of connecticut"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Agency_agency", "value" : "UConn" },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto: clear@uconn.edu"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2025-04-05T00:48:10.000Z"
+                },
+                { "key" : "Common-Core_License", "value" : "C00" },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7389,40.9738,-71.7784,42.0598"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d"
+                },
+                { "key" : "Common-Core_Publisher", "value" : "CT ECO" },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-dem-updates"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2022-11-02T18:25:06.000Z"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "UConnCTECO_EW"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-dem-updates"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://cteco.uconn.edu/ctraster/rest/services/elevation/Elevation/ImageServer"
+                    },
+                  "title" : "ArcGIS GeoService"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-dem-updates"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/7cdj-nhpk",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/CT-2023-Elevation-DEM-updates-/7cdj-nhpk",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "CT 2023 Elevation - Shaded Relief",
+            "id" : "ypis-d3zj",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This image service is available through <a href='https://cteco.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>CTECO</a>, a partnership between <a href='https://clear.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>UConn CLEAR</a> and <a href='https://portal.ct.gov/DEEP/GIS-and-Maps/Data/GIS-DATA' target='_blank' rel='nofollow ugc noopener noreferrer'>CT DEEP</a>. The Shaded Relief service is created by applying the shaded relief function to the bare earth <a href='https://cteco.maps.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d' target='_blank' rel='nofollow ugc noopener noreferrer'>Elevation service</a>. <div><br /></div><div><div><b>NOTE Service Changes</b></div><div>Although currently displaying 2023 elevation, this service previously displayed 2016 elevation and will be updated when new elevation is available. Visit the CT ECO <a href='https://maps.cteco.uconn.edu/map-services/#elevation' target='_blank' rel='nofollow ugc noopener noreferrer'>Map and Image Services </a>page for a complete list of available elevation services. </div><div><br /><div><div><font color='#104c9b'><b>2023 Statewide (Shaded Relief)</b></font><br /></div><div><div><b>Extent:</b> Connecticut</div><div><b>Dates:</b> 2023 (March 27 - April 13), between snow melt and leaf out</div><div><b>Data Format:</b> Shaded Relief function applied to <a href='https://cteco.maps.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d' target='_blank' rel='nofollow ugc noopener noreferrer'>Elevation service</a> which is a statewide DEM (Digital Elevation Model). <br /></div><div><b>Pixel Resolution: </b>2 foot DEM raster derived from Lidar point cloud </div><div><b>Projection: </b>CT State Plane NAD 83 (2011) Feet (EPSG 6434)<br /></div></div><div><b>Service Projection:</b> WGS 1984 Web Mercator Auxiliary Sphere (EPSG 3857)<br /></div><div><br /></div></div></div>\n\n<div><b><font color='#104C9B'>More Information</font></b></div><div>- <a href='https://maps.cteco.uconn.edu/data/flight2023/' target='_blank' rel='nofollow ugc noopener noreferrer'>All About the 2023 Data Collection</a> (Imagery and Lidar)</div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/' target='_blank' rel='nofollow ugc noopener noreferrer'>All about Connecticut Lidar Elevation</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/elevation_explained/' target='_blank' rel='nofollow ugc noopener noreferrer'>Lidar Elevation on CT ECO Explained</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/under_the_hood/' target='_blank' rel='nofollow ugc noopener noreferrer'>More about Shaded Relief on CT ECO</a><br />- <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.htm' target='_blank' rel='nofollow ugc noopener noreferrer'>Metadata</a>  <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.xml' target='_blank' rel='nofollow ugc noopener noreferrer'>xml format</a></div><div>- <a href='https://maps.cteco.uconn.edu/download/' target='_blank' rel='nofollow ugc noopener noreferrer'>Download DEM and points</a></div><div><div><div><br /></div><div><div><b><font color='#104C9B'>Credit and Funding</font></b></div></div></div></div><div><b><font color='#104C9B'><br /></font></b></div><div><b><font color='#104C9B'><br /></font></b></div></div>",
+            "attribution" : "UConn",
+            "attribution_link" : null,
+            "contact_email" : "mailto: clear@uconn.edu",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:14.000Z",
+            "createdAt" : "2025-01-29T19:04:53.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:14.000Z",
+            "data_updated_at" : "2025-01-29T19:04:53.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 30,
+                "page_views_last_month" : 106,
+                "page_views_total" : 781,
+                "page_views_last_week_log" : 4.954196310386876,
+                "page_views_last_month_log" : 6.7414669864011465,
+                "page_views_total_log" : 9.611024797307353
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:04:53.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "aerial",
+                "clear",
+                "ct",
+                "ct deep",
+                "ct eco",
+                "cteco",
+                "connecticut",
+                "deep",
+                "elevation",
+                "lidar",
+                "uconn",
+                "uconn clear",
+                "university of connecticut"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Agency_agency", "value" : "UConn" },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto: clear@uconn.edu"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2025-04-05T00:49:59.000Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7389,40.9738,-71.7784,42.0598"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=05989c5be54e46128cc3f6466ef3637a"
+                },
+                { "key" : "Common-Core_Publisher", "value" : "CT ECO" },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-shaded-relief"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2022-11-02T17:06:44.000Z"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "UConnCTECO_EW"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-shaded-relief"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://cteco.uconn.edu/ctraster/rest/services/elevation/ShadedRelief_noDRA/ImageServer"
+                    },
+                  "title" : "ArcGIS GeoService"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-shaded-relief"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/ypis-d3zj",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/CT-2023-Elevation-Shaded-Relief/ypis-d3zj",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Aerial Imagery and Lidar Elevation Download Tile Grid",
+            "id" : "kwj2-q499",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This feature service is available through <a href='https://cteco.uconn.edu/' target='_blank' rel='nofollow ugc noopener noreferrer'>CT ECO</a>, a partnership between <a target='_blank' rel='noopener noreferrer'>UConn CLEAR</a> and <a href='https://ct-deep-gis-open-data-website-ctdeep.hub.arcgis.com/' target='_blank' rel='nofollow ugc noopener noreferrer'>CT DEEP</a>. The tile grid service is as an index for accessing aerial imagery and lidar elevation data files for Connecticut and is used in the <a href='https://s.uconn.edu/download' target='_blank' rel='nofollow ugc noopener noreferrer'>Download Tool</a>. <div><br /></div><div>There are 23,381 tiles in the grid, each representing a uniform geographic area. Attributes for each tile include file names with hyperlinks leading to zip files of imagery and elevation files for multiple data acquisitions (see list below). The file links provide direct access making it easy for users to retrieve data for specific locations in Connecticut. </div><div><br /></div><div><b><font color='#104C9B'>Dataset Information</font></b></div><div><div><b>Extent</b>: The tile grid has the extent of data acquisitions which cover Connecticut and beyond in some places.</div><div><b>Date</b>: The tile grid was originally created as part of the 2016 flight which further divided tiles collected in the 2012 flight.  </div></div><div><br /></div><div><b><font color='#104C9B'>More Information</font></b> </div><div>The datasets linked in the table of the tile grid, which are also available in the <a href='https://s.uconn.edu/download' target='_blank' rel='nofollow ugc noopener noreferrer'>Download Tool,</a> include</div><div><ul><li><a href='https://maps.cteco.uconn.edu/data/flight2023/' target='_blank' rel='nofollow ugc noopener noreferrer'>2023 Acquisition</a><b> </b>- aerial imagery (GeoTIFF, MrSID Gen 3, MrSID Gen 4), DEM elevation (GeoTIFF), lidar point cloud (LAZ)</li><li><a href='https://maps.cteco.uconn.edu/data/flight2019/' target='_blank' rel='nofollow ugc noopener noreferrer'>2019 Acquisition</a> - aerial imagery (GeoTIFF)</li><li><a href='https://maps.cteco.uconn.edu/data/flight2016/' target='_blank' rel='nofollow ugc noopener noreferrer'>2016 Acquisition</a> - aerial imagery (GeoTIFF, MrSID Gen 3, MrSID Gen 4), DEM elevation (GeoTIFF), lidar point cloud (LAS)</li></ul></div><div><br /></div><div>Also see the <a href='https://maps.cteco.uconn.edu/data/imagery/' target='_blank' rel='nofollow ugc noopener noreferrer'>CT Aerial Imagery</a> page and <a href='https://maps.cteco.uconn.edu/data/lidar/' target='_blank' rel='nofollow ugc noopener noreferrer'>CT Elevation</a> pages on CT ECO for more information. </div><div><br /></div><div><b><font color='#104C9B'>Credit and Funding</font></b></div><div>The tile grid with links was created for use in the Download Tool which was part of a project between the <a href='https://portal.ct.gov/datapolicy/gis-office?language=en_US' target='_blank' rel='nofollow ugc noopener noreferrer'>CT GIS Office</a> and <a href='https://clear.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>UConn CLEAR</a>/<a href='https://cteco.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>CT ECO</a>. Each data acquisition had different funders and partners. Please see the acquisition pages for that information. </div>",
+            "attribution" : "UConn",
+            "attribution_link" : null,
+            "contact_email" : "mailto: clear@uconn.edu",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:39.000Z",
+            "createdAt" : "2025-02-04T19:02:11.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:39.000Z",
+            "data_updated_at" : "2025-02-04T19:02:11.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 43,
+                "page_views_last_month" : 185,
+                "page_views_total" : 1675,
+                "page_views_last_week_log" : 5.459431618637297,
+                "page_views_last_month_log" : 7.539158811108032,
+                "page_views_total_log" : 10.710806433699352
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-02-04T19:02:11.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "aerial",
+                "ct",
+                "ct eco",
+                "connecticut",
+                "contours",
+                "download",
+                "elevation",
+                "imagery",
+                "lidar",
+                "uconn",
+                "uconn clear",
+                "aerials"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Agency_Agency", "value" : "UConn" },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto: clear@uconn.edu"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2025-02-03T23:23:33.000Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7368,40.9732,-71.7742,42.0573"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=3f063f680f274397b9dca87e0d540647&sublayer=1"
+                },
+                { "key" : "Common-Core_Publisher", "value" : "CT ECO" },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTECO::aerial-imagery-and-lidar-elevation-download-tile-grid"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2025-02-03T22:18:24.000Z"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "UConnCTECO_EW"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTECO::aerial-imagery-and-lidar-elevation-download-tile-grid"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://cteco.uconn.edu/ctraster/rest/services/maps/download_grids/MapServer/1"
+                    },
+                  "title" : "ArcGIS GeoService"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.ogc.wms_xml" : "https://cteco.uconn.edu/ctraster/services/maps/download_grids/MapServer/WMSServer?request=GetCapabilities&service=WMS"
+                    },
+                  "title" : "OGC WMS"
+                },
+                {
+                  "urls" :
+                    {
+                      "text/csv" : "https://geodata.ct.gov/api/download/v1/items/3f063f680f274397b9dca87e0d540647/csv?layers=1"
+                    },
+                  "title" : "CSV"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/zip" : "https://geodata.ct.gov/api/download/v1/items/3f063f680f274397b9dca87e0d540647/shapefile?layers=1"
+                    },
+                  "title" : "Shapefile"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.geo+json" : "https://geodata.ct.gov/api/download/v1/items/3f063f680f274397b9dca87e0d540647/geojson?layers=1"
+                    },
+                  "title" : "GeoJSON"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/vnd.google-earth.kml+xml" : "https://geodata.ct.gov/api/download/v1/items/3f063f680f274397b9dca87e0d540647/kml?layers=1"
+                    },
+                  "title" : "KML"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTECO::aerial-imagery-and-lidar-elevation-download-tile-grid"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/kwj2-q499",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/Aerial-Imagery-and-Lidar-Elevation-Download-Tile-G/kwj2-q499",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "CT Aerial Imagery and Lidar Elevation Download App",
+            "id" : "4tri-8347",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "The Download Tool is available through <a href='https://cteco.uconn.edu/' target='_blank' rel='nofollow ugc noopener noreferrer'>CT ECO</a>, a partnership between <a target='_blank' rel='noopener noreferrer'>UConn CLEAR</a> and <a href='https://ct-deep-gis-open-data-website-ctdeep.hub.arcgis.com/' target='_blank' rel='nofollow ugc noopener noreferrer'>CT DEEP</a>. The tool provides easy download access to aerial imagery and lidar elevation collected during multiple flights. <div><br /></div><div><div>The download tool is designed to help users locate tiles or files on the map and then provide clear links to download. The files are listed by geography and include town mosaics, tiles for recent flights, tiles for the 2012 flight (same grid but larger, combined areas), and contour blocks for the 2016 and 2023 flights. </div><div><br /></div><div><b><font color='#104C9B'>Tool Information</font></b></div><div><div><b>Extent</b>: Statewide</div><div><b>Date</b>: The tools was published in January 2025 and provides access to data captured as early as 2012.</div><div><b>Metadata</b>: The Metadata button links to metadata files for all datasets available in the Download Tool. </div></div><div><b>Files Types &amp; Sizes:</b> The File Types and Sizes button links to more information about the files accessible from the tool. </div><div><br /></div><div><b><font color='#104C9B'>More Information</font></b> </div><div>The datasets linked in the table of the tile grid, which are also available in the <a href='https://s.uconn.edu/download' target='_blank' rel='nofollow ugc noopener noreferrer'>Download Tool,</a> include</div><div><ul><li><a href='https://maps.cteco.uconn.edu/data/flight2023/' target='_blank' rel='nofollow ugc noopener noreferrer'>2023 Acquisition</a><b> </b>- aerial imagery tiles and town mosaics, DEM elevation tiles, lidar point cloud by tile, contour blocks</li><li><a href='https://maps.cteco.uconn.edu/data/flight2019/' target='_blank' rel='nofollow ugc noopener noreferrer'>2019 Acquisition</a> - aerial imagery tiles and town mosaics</li><li><a href='https://maps.cteco.uconn.edu/data/flight2016/' target='_blank' rel='nofollow ugc noopener noreferrer'>2016 Acquisition</a> - aerial imagery tiles and town mosaics, DEM elevation tiles, lidar point cloud by tile, contour blocks</li><li><a href='https://maps.cteco.uconn.edu/data/flight2012/' target='_blank' rel='nofollow ugc noopener noreferrer'>2012 Acquisition</a> - aerial imagery tiles and town mosaics</li></ul></div><div><br /></div><div>See the <a href='https://maps.cteco.uconn.edu/data/imagery/' target='_blank' rel='nofollow ugc noopener noreferrer'>CT Aerial Imagery</a> page and <a href='https://maps.cteco.uconn.edu/data/lidar/' target='_blank' rel='nofollow ugc noopener noreferrer'>CT Elevation</a> pages on CT ECO for more information.  </div><div><br /></div><div>The <a href='https://geodata.ct.gov/datasets/3f063f680f274397b9dca87e0d540647_1/explore' target='_blank' rel='nofollow ugc noopener noreferrer'>Tile Grid with download links</a> service is also available on the CT Geodata Portal through CT ECO. </div><div><br /></div><div><b><font color='#104C9B'>Credit and Funding</font></b></div><div>The Download Tool was created as part of a project between the <a href='https://portal.ct.gov/datapolicy/gis-office?language=en_US' target='_blank' rel='nofollow ugc noopener noreferrer'>CT GIS Office</a> and <a href='https://clear.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>UConn CLEAR</a>/<a href='https://cteco.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>CT ECO</a>. Each data acquisition had different funders and partners. Please see the acquisition pages for that information. </div></div>",
+            "attribution" : "UConn",
+            "attribution_link" : null,
+            "contact_email" : "mailto: clear@uconn.edu",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:11.000Z",
+            "createdAt" : "2025-02-07T19:02:28.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:11.000Z",
+            "data_updated_at" : "2025-02-07T19:02:28.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 68,
+                "page_views_last_month" : 231,
+                "page_views_total" : 1997,
+                "page_views_last_week_log" : 6.10852445677817,
+                "page_views_last_month_log" : 7.857980995127572,
+                "page_views_total_log" : 10.964340867792417
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-02-07T19:02:28.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "aerials",
+                "clear",
+                "ct eco",
+                "contours",
+                "dem",
+                "download",
+                "elevation",
+                "imagery",
+                "lidar",
+                "point cloud",
+                "uconn",
+                "university of connecticut"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Agency_Agency", "value" : "UConn" },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto: clear@uconn.edu"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2025-04-02T18:45:58.000Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7619,40.9733,-71.7525,42.0681"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=f884c9fd806b4a3e8f464f0c5991bb65"
+                },
+                { "key" : "Common-Core_Publisher", "value" : "CT ECO" },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/apps/CTECO::ct-aerial-imagery-and-lidar-elevation-download-app"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2024-11-22T14:45:42.000Z"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "UConnCTECO_EW"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/apps/CTECO::ct-aerial-imagery-and-lidar-elevation-download-app"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://experience.arcgis.com/experience/f884c9fd806b4a3e8f464f0c5991bb65"
+                    },
+                  "title" : "ArcGIS GeoService"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/apps/CTECO::ct-aerial-imagery-and-lidar-elevation-download-app"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/4tri-8347",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/CT-Aerial-Imagery-and-Lidar-Elevation-Download-App/4tri-8347",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "CT 2023 Elevation - Aspect",
+            "id" : "tyy9-yi44",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This image service is available through <a href='https://cteco.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>CTECO</a>, a partnership between <a href='https://clear.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>UConn CLEAR</a> and <a href='https://portal.ct.gov/DEEP/GIS-and-Maps/Data/GIS-DATA' target='_blank' rel='nofollow ugc noopener noreferrer'>CT DEEP</a>. The Apsect service is created by applying the aspect function to the bare earth <a href='https://cteco.maps.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d' target='_blank' rel='nofollow ugc noopener noreferrer'>Elevation service</a>. <div><br /></div><div><div><b>NOTE Service Changes</b></div><div>Although currently displaying 2023 elevation, this service previously displayed 2016 elevation and will be updated when new elevation is available. Visit the CT ECO <a href='https://maps.cteco.uconn.edu/map-services/#elevation' target='_blank' rel='nofollow ugc noopener noreferrer'>Map and Image Services </a>page for a complete list of available elevation services. </div><div><br /><div><div><font color='#104c9b'><b>Dataset Information</b></font><br /></div><div><div><b>Extent:</b> Connecticut</div><div><b>Dates:</b> 2023 (March 27 - April 13), between snow melt and leaf out</div><div><b>Data Info:</b> Aspect function applied to the <a href='https://cteco.maps.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d' target='_blank' rel='nofollow ugc noopener noreferrer'>Elevation service</a> which is a statewide DEM (Digital Elevation Model) of bare earth elevation. </div><div><b>Pixel Resolution: </b>2 foot DEM raster derived from Lidar point cloud </div><div><b>Projection: </b>CT State Plane NAD 83 (2011) Feet (EPSG 6434)<br /></div></div><div><b>Service Projection:</b> WGS 1984 Web Mercator Auxiliary Sphere (EPSG 3857)<br /></div><div><br /></div></div></div>\n\n<div><b><font color='#104C9B'>More Information</font></b></div><div>- <a href='https://maps.cteco.uconn.edu/data/flight2023/' target='_blank' rel='nofollow ugc noopener noreferrer'>All About the 2023 Data Collection</a> (Imagery and Lidar)</div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/' target='_blank' rel='nofollow ugc noopener noreferrer'>All about Connecticut Lidar Elevation</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/elevation_explained/' target='_blank' rel='nofollow ugc noopener noreferrer'>Lidar Elevation on CT ECO Explained</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/under_the_hood/' target='_blank' rel='nofollow ugc noopener noreferrer'>More about Aspect on CT ECO</a><br />- <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.htm' target='_blank' rel='nofollow ugc noopener noreferrer'>Metadata</a>  <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.xml' target='_blank' rel='nofollow ugc noopener noreferrer'>xml format</a></div><div>- <a href='https://maps.cteco.uconn.edu/download/' target='_blank' rel='nofollow ugc noopener noreferrer'>Download DEM and points</a></div><div><div><div><br /></div><div><div><b><font color='#104C9B'>Credit and Funding</font></b></div></div></div></div><div><b><font color='#104C9B'><br /></font></b></div><div><b><font color='#104C9B'><br /></font></b></div></div>",
+            "attribution" : "UConn",
+            "attribution_link" : null,
+            "contact_email" : "mailto: clear@uconn.edu",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:55.000Z",
+            "createdAt" : "2025-01-29T19:04:53.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:55.000Z",
+            "data_updated_at" : "2025-01-29T19:04:53.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 7,
+                "page_views_last_month" : 34,
+                "page_views_total" : 189,
+                "page_views_last_week_log" : 3.0,
+                "page_views_last_month_log" : 5.129283016944966,
+                "page_views_total_log" : 7.569855608330948
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:04:53.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "aerial",
+                "clear",
+                "ct",
+                "ct deep",
+                "ct eco",
+                "cteco",
+                "connecticut",
+                "deep",
+                "elevation",
+                "imagery",
+                "lidar",
+                "uconn",
+                "uconn clear",
+                "university of connecticut"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Agency_agency", "value" : "UConn" },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto: clear@uconn.edu"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2025-04-05T00:48:26.000Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7389,40.9738,-71.7784,42.0598"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=931834a42a8c4512a45beeea697f7d6f"
+                },
+                { "key" : "Common-Core_Publisher", "value" : "CT ECO" },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-aspect"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2022-11-02T15:00:12.000Z"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "UConnCTECO_EW"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-aspect"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://cteco.uconn.edu/ctraster/rest/services/elevation/Aspect/ImageServer"
+                    },
+                  "title" : "ArcGIS GeoService"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-aspect"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/tyy9-yi44",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/CT-2023-Elevation-Aspect/tyy9-yi44",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "CT 2023 Elevation - Shaded Relief (DRA)",
+            "id" : "a8ug-prq2",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This image service is available through <a href='https://cteco.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>CTECO</a>, a partnership between <a href='https://clear.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>UConn CLEAR</a> and <a href='https://portal.ct.gov/DEEP/GIS-and-Maps/Data/GIS-DATA' target='_blank' rel='nofollow ugc noopener noreferrer'>CT DEEP</a>. The Shaded Relief service is created by applying the shaded relief function to the bare earth <a href='https://cteco.maps.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d' target='_blank' rel='nofollow ugc noopener noreferrer'>Elevation service</a>. <div><br /></div><div><div><b>NOTE Service Changes</b></div><div>Although currently displaying 2023 elevation, this service previously displayed 2016 elevation and will be updated when new elevation is available. Visit the CT ECO <a href='https://maps.cteco.uconn.edu/map-services/#elevation' target='_blank' rel='nofollow ugc noopener noreferrer'>Map and Image Services </a>page for a complete list of available elevation services. </div></div><div><br /><div><div><font color='#104c9b'><b>Dataset Information</b></font><br /></div><div><div><b>Extent:</b> Connecticut</div><div><b>Dates:</b> 2023 (March 27 - April 13), between snow melt and leaf out</div><div><b>Data Format:</b> Shaded Relief function applied to <a href='https://cteco.maps.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d' target='_blank' rel='nofollow ugc noopener noreferrer'>Elevation service</a> which is a statewide DEM (Digital Elevation Model). </div><div><b>Pixel Resolution: </b>2 foot DEM raster derived from Lidar point cloud </div><div><b>Projection: </b>CT State Plane NAD 83 (2011) Feet (EPSG 6434)<br /></div></div><div><b>Service Projection:</b> WGS 1984 Web Mercator Auxiliary Sphere (EPSG 3857)<br /></div><div><br /></div></div></div>\n\n<div><b><font color='#104C9B'>More Information</font></b></div><div>- <a href='https://maps.cteco.uconn.edu/data/flight2023/' target='_blank' rel='nofollow ugc noopener noreferrer'>All About the 2023 Data Collection</a> (Imagery and Lidar)</div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/' target='_blank' rel='nofollow ugc noopener noreferrer'>All about Connecticut Lidar Elevation</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/elevation_explained/' target='_blank' rel='nofollow ugc noopener noreferrer'>Lidar Elevation on CT ECO Explained</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/under_the_hood/' target='_blank' rel='nofollow ugc noopener noreferrer'>More about Shaded Relief on CT ECO</a><br />- <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.htm' target='_blank' rel='nofollow ugc noopener noreferrer'>Metadata</a>  <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.xml' target='_blank' rel='nofollow ugc noopener noreferrer'>xml format</a></div><div>- <a href='https://maps.cteco.uconn.edu/download/' target='_blank' rel='nofollow ugc noopener noreferrer'>Download DEM and points</a></div><div><div><div><br /></div><div><div><b><font color='#104C9B'>Credit and Funding</font></b></div></div></div></div><div><b><font color='#104C9B'><br /></font></b></div><div><br /></div>",
+            "attribution" : "UConn",
+            "attribution_link" : null,
+            "contact_email" : "mailto: clear@uconn.edu",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:12.000Z",
+            "createdAt" : "2025-01-29T19:04:53.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:12.000Z",
+            "data_updated_at" : "2025-01-29T19:04:53.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 12,
+                "page_views_last_month" : 60,
+                "page_views_total" : 395,
+                "page_views_last_week_log" : 3.700439718141092,
+                "page_views_last_month_log" : 5.930737337562887,
+                "page_views_total_log" : 8.62935662007961
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-01-29T19:04:53.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "aerial",
+                "clear",
+                "ct",
+                "ct deep",
+                "ct eco",
+                "cteco",
+                "connecticut",
+                "deep",
+                "elevation",
+                "imagery",
+                "lidar",
+                "uconn",
+                "uconn clear",
+                "university of connecticut"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Agency_agency", "value" : "UConn" },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto: clear@uconn.edu"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2025-04-05T00:50:13.000Z"
+                },
+                {
+                  "key" : "Common-Core_License",
+                  "value" : "https://creativecommons.org/publicdomain/zero/1.0"
+                },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7389,40.9738,-71.7784,42.0598"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=f498fc6e8e1b4d2d874db7aef2974789"
+                },
+                { "key" : "Common-Core_Publisher", "value" : "CT ECO" },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-shaded-relief-dra"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2022-11-02T16:46:48.000Z"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "UConnCTECO_EW"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-shaded-relief-dra"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://cteco.uconn.edu/ctraster/rest/services/elevation/ShadedRelief/ImageServer"
+                    },
+                  "title" : "ArcGIS GeoService"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-shaded-relief-dra"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/a8ug-prq2",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/CT-2023-Elevation-Shaded-Relief-DRA-/a8ug-prq2",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "CT 2016 Elevation (DEM)",
+            "id" : "pikz-bxgy",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This image service is available through <a href='https://cteco.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>CTECO</a>, a partnership between <a href='https://clear.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>UConn CLEAR</a> and <a href='https://portal.ct.gov/DEEP/GIS-and-Maps/Data/GIS-DATA' target='_blank' rel='nofollow ugc noopener noreferrer'>CT DEEP</a>. This layer is a hydro-flattened bare earth digital elevation model (DEM) derived from the classified Lidar point cloud covering the state of Connecticut.<div><br /></div><div><div><b>This service (called </b><a href='https://cteco.uconn.edu/ctraster/rest/services/elevation/Statewide2016/ImageServerr' target='_blank' rel='nofollow ugc noopener noreferrer'>Statewide2016</a><b>) will persist even as other elevation dates become available. </b>Connect to the <a href='https://cteco.maps.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d' target='_blank' rel='nofollow ugc noopener noreferrer'>Elevation </a>service to always have the latest and greatest service without changing the connection. Visit the CT ECO <a href='https://maps.cteco.uconn.edu/map-services/#elevation' target='_blank' rel='nofollow ugc noopener noreferrer'>Map and Image Services </a>page for a complete list of available elevation services. </div><div><br /><div><div><font color='#104c9b'><b>2016 Statewide </b></font><br /></div><div><div><b>Extent:</b> Connecticut</div><div><b>Dates:</b> 2016 (March 11 - April 16), between snow melt and leaf out</div><div><b>Data Info:</b> statewide Digital Elevation Model (DEM), which is a bare earth elevation raster with no functions applied </div><div><b>Pixel Resolution: </b>2 foot DEM raster derived from QL2 Lidar point cloud with a minimum of 2 points per square meter. The bare earth elevation from the points were averaged to get the elevation value for each pixel in the DEM. </div><div><b>Projection: </b>CT State Plane NAD 83 (2011) Feet (EPSG 6434)<br /></div></div><div><b>Service Projection:</b> WGS 1984 Web Mercator Auxiliary Sphere (EPSG 3857)<br /></div><div><br /></div><div><b><font color='#104C9B'>More Information</font></b></div><div>- <a href='https://maps.cteco.uconn.edu/data/flight2016/' target='_blank' rel='nofollow ugc noopener noreferrer'>All About the 2016 Data Collection</a> (Imagery and Lidar)</div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/' target='_blank' rel='nofollow ugc noopener noreferrer'>All about Connecticut Lidar Elevation</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/elevation_explained/' target='_blank' rel='nofollow ugc noopener noreferrer'>Lidar Elevation on CT ECO Explained</a></div>\n<div>- <a href='https://cteco.uconn.edu/metadata/dep/document/lidarDEM_2016_fgdc_plus.htm' target='_blank' rel='nofollow ugc noopener noreferrer'>Metadata</a></div><div>- <a href='https://maps.cteco.uconn.edu/download/' target='_blank' rel='nofollow ugc noopener noreferrer'>Download DEM and Points</a></div>\n<div><br /></div><div><b><font color='#104C9B'>Tips</font></b><br /></div><div>- The elevation service contains <a href='https://maps.cteco.uconn.edu/data/lidar/functions/' target='_blank' rel='nofollow ugc noopener noreferrer'>processing templates</a> like hillshade, slope, and aspect, that can be applied to change the appearance of the layer. <br /></div><div>- Symbology is another useful and easy way to display the elevation differently. </div><div><br /></div><div><b><font color='#104C9B'>Credit and Funding</font></b></div></div></div><div><b><font color='#104C9B'><br /></font></b></div></div>",
+            "attribution" : null,
+            "attribution_link" : null,
+            "contact_email" : "mailto: clear@uconn.edu",
+            "type" : "federated_href",
+            "updatedAt" : "2026-07-17T22:22:06.000Z",
+            "createdAt" : "2025-05-07T19:02:16.000Z",
+            "metadata_updated_at" : "2026-07-17T22:22:06.000Z",
+            "data_updated_at" : "2025-05-07T19:02:16.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 5,
+                "page_views_last_month" : 15,
+                "page_views_total" : 165,
+                "page_views_last_week_log" : 2.584962500721156,
+                "page_views_last_month_log" : 4.0,
+                "page_views_total_log" : 7.375039431346925
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-05-07T19:02:16.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_tags" :
+              [
+                "uconn clear",
+                "lidar",
+                "connecticut",
+                "elevation",
+                "cteco",
+                "dem",
+                "ct eco",
+                "ct",
+                "aerial",
+                "clear",
+                "university of connecticut"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto: clear@uconn.edu"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2026-03-23T18:14:11.971Z"
+                },
+                { "key" : "Common-Core_License", "value" : "" },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7389,40.9738,-71.7784,42.0598"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=cdd1582817df47aa85bbb968e6860bfb"
+                },
+                { "key" : "Common-Core_Publisher", "value" : "CT ECO" },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTECO::ct-2016-elevation-dem"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2025-02-16T18:20:38.000Z"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "UConnCTECO_EW"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2016-elevation-dem"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://cteco.uconn.edu/ctraster/rest/services/elevation/Statewide2016/ImageServer"
+                    },
+                  "title" : "ArcGIS GeoService"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2016-elevation-dem"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/pikz-bxgy",
+        "link" : "https://data.ct.gov/dataset/CT-2016-Elevation-DEM-/pikz-bxgy",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "CT 2023 Elevation Lidar Intensity",
+            "id" : "hhvq-mv8z",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This image service is available through <a href='https://cteco.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>CTECO</a>, a partnership between <a href='https://clear.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>UConn CLEAR</a> and <a href='https://portal.ct.gov/DEEP/GIS-and-Maps/Data/GIS-DATA' target='_blank' rel='nofollow ugc noopener noreferrer'>CT DEEP</a>. This layer is lidar point intensity covering the state of Connecticut. <div><br /></div><div><b>Lidar intensity</b> is a measure of the return strength of each lidar point. Here, the points are converted to 1 foot pixels and values range from 1-256 where low numbers are low reflectivity and high numbers are high reflectivity. Intensity in influenced by reflectivity of the surface at the sensor wavelength (here, 1064nm which is near-infrared), view angle, range, surface composition, roughness, and moisture content and should therefore be used as a relative measure.  Intensity is not influenced by sunlight or shadows.   <div><br /></div><div>Visit the CT ECO <a href='https://maps.cteco.uconn.edu/map-services/#elevation' target='_blank' rel='nofollow ugc noopener noreferrer'>Map and Image Services </a>page for a complete list of available elevation services. </div><div><div><br /><div><div><font color='#104c9b'><b>Dataset Information</b></font><br /></div><div><div><b>Extent:</b> Connecticut</div><div><b>Dates:</b> 2023 (March 27 - April 13), between snow melt and leaf out</div><div><b>Data Info:</b> statewide raster of lidar point density</div><div><b>Pixel Resolution: </b>1 foot pixel raster derived from QL1+ Lidar point cloud with a minimum of 15 points per square meter inland and 20 points per square meter along the coast. </div><div><b>Projection: </b>CT State Plane NAD 83 (2011) Feet (EPSG 6434)<br /></div></div><div><b>Service Projection:</b> WGS 1984 Web Mercator Auxiliary Sphere (EPSG 3857)<br /></div><div><br /></div><div><b><font color='#104C9B'>More Information</font></b></div><div>- <a href='https://maps.cteco.uconn.edu/data/flight2023/' target='_blank' rel='nofollow ugc noopener noreferrer'>All About the 2023 Data Collection</a> (Imagery and Lidar)</div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/' target='_blank' rel='nofollow ugc noopener noreferrer'>All about Connecticut Lidar Elevation</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/elevation_explained/' target='_blank' rel='nofollow ugc noopener noreferrer'>Lidar Elevation on CT ECO Explained</a></div><div>- <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.htm' target='_blank' rel='nofollow ugc noopener noreferrer'>Metadata</a>  <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.xml' target='_blank' rel='nofollow ugc noopener noreferrer'>xml format</a></div><div>- <a href='https://maps.cteco.uconn.edu/download/' target='_blank' rel='nofollow ugc noopener noreferrer'>Download DEM and points</a></div><div><br /></div><div><b><font color='#104C9B'>Credit and Funding</font></b></div></div></div><div><b><font color='#104C9B'><br /></font></b></div></div></div>",
+            "attribution" : null,
+            "attribution_link" : null,
+            "contact_email" : "mailto: clear@uconn.edu",
+            "type" : "federated_href",
+            "updatedAt" : "2026-07-17T22:10:26.000Z",
+            "createdAt" : "2025-06-26T16:34:22.000Z",
+            "metadata_updated_at" : "2026-07-17T22:10:26.000Z",
+            "data_updated_at" : "2025-06-26T16:34:22.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 5,
+                "page_views_last_month" : 26,
+                "page_views_total" : 333,
+                "page_views_last_week_log" : 2.584962500721156,
+                "page_views_last_month_log" : 4.754887502163469,
+                "page_views_total_log" : 8.383704292474054
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-06-26T16:34:22.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_tags" :
+              [
+                "cteco",
+                "ct",
+                "connecitcut",
+                "uconn clear",
+                "uconn",
+                "lidar",
+                "clear",
+                "ct eco",
+                "intensity",
+                "elevation",
+                "university of connecticut"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto: clear@uconn.edu"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2026-03-23T19:42:49.889Z"
+                },
+                { "key" : "Common-Core_License", "value" : "c00" },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7389,40.9738,-71.7784,42.0598"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=430d3ab02d234221ada2308dbd2ebf97"
+                },
+                { "key" : "Common-Core_Publisher", "value" : "CT ECO" },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/430d3ab02d234221ada2308dbd2ebf97"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2025-06-25T20:11:33.000Z"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "UConnCTECO_EW"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/430d3ab02d234221ada2308dbd2ebf97"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://cteco.uconn.edu/ctraster/rest/services/elevation/Intensity2023/ImageServer"
+                    },
+                  "title" : "ArcGIS GeoService"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/430d3ab02d234221ada2308dbd2ebf97"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/hhvq-mv8z",
+        "link" : "https://data.ct.gov/dataset/CT-2023-Elevation-Lidar-Intensity/hhvq-mv8z",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "CT 2023 Elevation (DEM) (persists)",
+            "id" : "3mxg-4bdb",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "This image service is available through <a href='https://cteco.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>CTECO</a>, a partnership between <a href='https://clear.uconn.edu' target='_blank' rel='nofollow ugc noopener noreferrer'>UConn CLEAR</a> and <a href='https://portal.ct.gov/DEEP/GIS-and-Maps/Data/GIS-DATA' target='_blank' rel='nofollow ugc noopener noreferrer'>CT DEEP</a>. This layer is a hydro-flattened bare earth digital elevation model (DEM) derived from the classified Lidar point cloud covering the state of Connecticut.<div><br /></div><div><div><b>This service (called </b><a href='https://cteco.uconn.edu/ctraster/rest/services/elevation/Statewide2023/ImageServer' target='_blank' rel='nofollow ugc noopener noreferrer'>Statewide2023</a><b>) will persist as other elevation dates become available. </b>Connect to the <a href='https://cteco.maps.arcgis.com/home/item.html?id=f9bb656ee9f74544bcdac9c8831d122d' target='_blank' rel='nofollow ugc noopener noreferrer'>Elevation </a>service to always have the latest and greatest service without changing the connection. Visit the CT ECO <a href='https://maps.cteco.uconn.edu/map-services/#elevation' target='_blank' rel='nofollow ugc noopener noreferrer'>Map and Image Services </a>page for a complete list of available elevation services. </div><div><br /><div><div><font color='#104c9b'><b>2023 Statewide </b></font><br /></div><div><div><b>Extent:</b> Connecticut</div><div><b>Dates:</b> 2023 (March 27 - April 13), between snow melt and leaf out</div><div><b>Data Info:</b> statewide Digital Elevation Model (DEM), which is a bare earth elevation raster with no functions applied </div><div><b>Pixel Resolution: </b>2 foot DEM raster derived from QL1+ Lidar point cloud with a minimum of 15 points per square meter inland and 20 points per square meter along the coast. The bare earth elevation from the points were averaged to get the elevation value for each pixel in the DEM. </div><div><b>Projection: </b>CT State Plane NAD 83 (2011) Feet (EPSG 6434)<br /></div></div><div><b>Service Projection:</b> WGS 1984 Web Mercator Auxiliary Sphere (EPSG 3857)<br /></div><div><br /></div><div><b><font color='#104C9B'>More Information</font></b></div><div>- <a href='https://maps.cteco.uconn.edu/data/flight2023/' target='_blank' rel='nofollow ugc noopener noreferrer'>All About the 2023 Data Collection</a> (Imagery and Lidar)</div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/' target='_blank' rel='nofollow ugc noopener noreferrer'>All about Connecticut Lidar Elevation</a></div><div>- <a href='https://maps.cteco.uconn.edu/data/lidar/elevation_explained/' target='_blank' rel='nofollow ugc noopener noreferrer'>Lidar Elevation on CT ECO Explained</a></div><div>- <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.htm' target='_blank' rel='nofollow ugc noopener noreferrer'>Metadata</a>  <a href='https://cteco.uconn.edu/download/metadata/CT_DEM_2023_metadata.xml' target='_blank' rel='nofollow ugc noopener noreferrer'>xml format</a></div><div>- <a href='https://maps.cteco.uconn.edu/download/' target='_blank' rel='nofollow ugc noopener noreferrer'>Download DEM and points</a></div><div><br /></div><div><b><font color='#104C9B'>Tips</font></b><br /></div><div>- The elevation service contains <a href='https://maps.cteco.uconn.edu/data/lidar/functions/' target='_blank' rel='nofollow ugc noopener noreferrer'>processing templates</a> like hillshade, slope, and aspect, that can be applied to change the appearance of the layer. <br /></div><div>- Symbology is another useful and easy way to display the elevation differently. </div><div><br /></div><div><b><font color='#104C9B'>Credit and Funding</font></b></div></div></div><div><b><font color='#104C9B'><br /></font></b></div></div>",
+            "attribution" : "UConn",
+            "attribution_link" : null,
+            "contact_email" : "mailto: clear@uconn.edu",
+            "type" : "federated_href",
+            "updatedAt" : "2026-11-15T19:10:58.000Z",
+            "createdAt" : "2025-02-16T19:02:27.000Z",
+            "metadata_updated_at" : "2026-11-15T19:10:58.000Z",
+            "data_updated_at" : "2025-02-16T19:02:27.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 2,
+                "page_views_last_month" : 25,
+                "page_views_total" : 220,
+                "page_views_last_week_log" : 1.5849625007211563,
+                "page_views_last_month_log" : 4.700439718141093,
+                "page_views_total_log" : 7.787902559391432
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 0,
+            "provenance" : "official",
+            "lens_view_type" : "href",
+            "lens_display_type" : "federated",
+            "locked" : false,
+            "backend" : "not_a_dataset",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-02-16T19:02:27.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Environment and Natural Resources",
+            "domain_tags" :
+              [
+                "aerial",
+                "clear",
+                "ct",
+                "ct eco",
+                "cteco",
+                "connecticut",
+                "dem",
+                "elevation",
+                "hillshade",
+                "lidar",
+                "uconn clear",
+                "university of connecticut"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Agency_Agency", "value" : "UConn" },
+                {
+                  "key" : "Common-Core_Contact-Email",
+                  "value" : "mailto: clear@uconn.edu"
+                },
+                {
+                  "key" : "Common-Core_Last-Update",
+                  "value" : "2025-04-05T00:44:55.000Z"
+                },
+                { "key" : "Common-Core_License", "value" : "" },
+                {
+                  "key" : "Common-Core_Public-Access-Level",
+                  "value" : "public"
+                },
+                {
+                  "key" : "Common-Core_Geographic-Coverage",
+                  "value" : "-73.7368,40.9732,-71.7742,42.0573"
+                },
+                {
+                  "key" : "Common-Core_Unique-Identifier",
+                  "value" : "https://www.arcgis.com/home/item.html?id=ad332b05d61f4fb3b17d0070db940c2a"
+                },
+                { "key" : "Common-Core_Publisher", "value" : "CT ECO" },
+                {
+                  "key" : "Common-Core_Homepage",
+                  "value" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-dem-persists"
+                },
+                { "key" : "Common-Core_Theme", "value" : "geospatial" },
+                {
+                  "key" : "Common-Core_Issued",
+                  "value" : "2025-02-16T17:34:45.000Z"
+                },
+                {
+                  "key" : "Common-Core_Contact-Name",
+                  "value" : "UConnCTECO_EW"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.ct.gov",
+            "additional_access_points" :
+              [
+                {
+                  "urls" :
+                    {
+                      "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-dem-persists"
+                    },
+                  "title" : "ArcGIS Hub Dataset"
+                },
+                {
+                  "urls" :
+                    {
+                      "application/json" : "https://cteco.uconn.edu/ctraster/rest/services/elevation/Statewide2023/ImageServer"
+                    },
+                  "title" : "ArcGIS GeoService"
+                }
+              ],
+            "access_points" :
+              {
+                "text/html" : "https://geodata.ct.gov/datasets/CTECO::ct-2023-elevation-dem-persists"
+              }
+          },
+        "permalink" : "https://data.ct.gov/d/3mxg-4bdb",
+        "link" : "https://data.ct.gov/Environment-and-Natural-Resources/CT-2023-Elevation-DEM-persists-/3mxg-4bdb",
+        "owner" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          },
+        "creator" :
+          {
+            "id" : "muqj-8hcz",
+            "user_type" : "interactive",
+            "display_name" : "Open Data Admin"
+          }
+      }
+    ],
+  "resultSetSize" : 50,
+  "timings" : { "serviceMillis" : 21, "searchMillis" : [ 2, 6 ] },
+  "warnings" : []
+}

@@ -1,0 +1,2091 @@
+{
+  "results" :
+    [
+      {
+        "resource" :
+          {
+            "name" : "Housing Code Violations",
+            "id" : "k9nj-z35d",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Housing Code Enforcement data from 2013 to the present , including violations identified.\r\nUpdate Frequency: Weekly",
+            "attribution" : "Montgomery County, MD",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T06:00:26.000Z",
+            "createdAt" : "2015-06-17T00:31:59.000Z",
+            "metadata_updated_at" : "2023-06-27T17:19:23.000Z",
+            "data_updated_at" : "2026-11-15T06:00:26.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 122,
+                "page_views_last_month" : 655,
+                "page_views_total" : 42404,
+                "page_views_last_week_log" : 6.94251450533924,
+                "page_views_last_month_log" : 9.357552004618084,
+                "page_views_total_log" : 15.371946763439695
+              },
+            "columns_name" :
+              [
+                "Location Description",
+                "Council Districts",
+                "Councils",
+                "Communities",
+                "Zip Codes",
+                "Municipalities",
+                "Council Districts_from_i23j_3mj8",
+                "Service Regions",
+                "Council Districts 7",
+                "Location (address)",
+                "Location (state)",
+                "Service Request Number",
+                "Location",
+                "Location (zip)",
+                "Location (city)",
+                "Case Number",
+                "Street Address",
+                "Unit Number",
+                "Zip Code",
+                "Service Request Status",
+                "Inspection Date",
+                "Action",
+                "Item",
+                "Date Filed",
+                "Latitude",
+                "Date Assigned",
+                "Date Closed",
+                "Disposition",
+                "City",
+                "Service Request Created Date",
+                "Service Request Closed Time",
+                "Violation ID",
+                "Corrected",
+                "Code Reference",
+                "Condition",
+                "Longitude"
+              ],
+            "columns_field_name" :
+              [
+                "location_description",
+                ":@computed_region_vu5j_pcmz",
+                ":@computed_region_tx5f_5em3",
+                ":@computed_region_kbsp_ykn9",
+                ":@computed_region_d7bw_bq6x",
+                ":@computed_region_rbt8_3x7n",
+                ":@computed_region_a9cs_3ed7",
+                ":@computed_region_r648_kzwt",
+                ":@computed_region_6vgr_duib",
+                "geolocation_address",
+                "geolocation_state",
+                "service_request_number",
+                "geolocation",
+                "geolocation_zip",
+                "geolocation_city",
+                "case_number",
+                "street_address",
+                "unit_number",
+                "zip_code",
+                "service_request_status",
+                "inspection_date",
+                "action",
+                "item",
+                "date_filed",
+                "latitude",
+                "date_assigned",
+                "date_closed",
+                "disposition",
+                "city",
+                "service_request_created_date",
+                "service_request_closed_time",
+                "violation_id",
+                "corrected",
+                "code_reference",
+                "condition",
+                "longitude"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Point",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Number",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                " Location of violation\n",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "This column was automatically created in order to record in what polygon from the dataset 'Council Districts 7' (6vgr-duib) the point in column 'geolocation' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                "",
+                "",
+                " MC311  service request number\n",
+                "Location of the building\n",
+                "",
+                "",
+                " Case number created by DHCA\n",
+                " Complaint street number, Street name and Street type\n",
+                " Complaint unit number\n",
+                " complaint zip code\n",
+                " MC 311 service request service status\n",
+                " Date Inspected date by DHCA\n",
+                " Action required to correct violations\n",
+                " Violation items cited\n",
+                " Date filed with DHCA\n",
+                "Latitude of the building.\n",
+                " Date assigned to inspector\n",
+                " Date closed by inspector\n",
+                "Disposition is the case outcome.  Closed violations corrected 110 , No violations found 111, etc\n",
+                " Complaint city\n",
+                " MC 311 service request created date\n",
+                " MC 311 service request closed date\n",
+                " Housing Code Violation ID number\n",
+                " Date corrected entered by DHCA\n",
+                " Section of code that has been violated\n",
+                " Violation defining conditions to correct\n",
+                "Longitude of the building.\n"
+              ],
+            "columns_format" :
+              [
+                { "align" : "right" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "align" : "right" },
+                { "align" : "left" },
+                {},
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "view" : "date_ymd", "align" : "left" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "view" : "date_ymd", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                { "view" : "date_ymd", "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                }
+              ],
+            "download_count" : 10301,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-06-27T17:19:23.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Consumer/Housing",
+            "domain_tags" : [ "violation", "code", "enforcement", "housing" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Information_Departments",
+                  "value" : "Housing and Community Affairs"
+                },
+                {
+                  "key" : "Dataset-Information_Update-Frequency",
+                  "value" : "Weekly"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.montgomerycountymd.gov",
+            "license" : "Public Domain"
+          },
+        "permalink" : "https://data.montgomerycountymd.gov/d/k9nj-z35d",
+        "link" : "https://data.montgomerycountymd.gov/Consumer-Housing/Housing-Code-Violations/k9nj-z35d",
+        "owner" :
+          {
+            "id" : "uruq-macm",
+            "user_type" : "interactive",
+            "display_name" : "svc dmesb"
+          },
+        "creator" :
+          {
+            "id" : "uruq-macm",
+            "user_type" : "interactive",
+            "display_name" : "svc dmesb"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Housing Code Violations",
+            "id" : "f8su-kv88",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Violations cited (105 CMR 410.000) when inspected by Housing Inspector",
+            "attribution" : "Inspectional Services",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-09T14:50:50.000Z",
+            "createdAt" : "2023-05-16T14:15:02.000Z",
+            "metadata_updated_at" : "2026-11-09T14:50:46.000Z",
+            "data_updated_at" : "2026-11-09T14:50:50.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 131,
+                "page_views_last_month" : 468,
+                "page_views_total" : 3836,
+                "page_views_last_week_log" : 7.044394119358453,
+                "page_views_last_month_log" : 8.873444112515376,
+                "page_views_total_log" : 11.905763049602793
+              },
+            "columns_name" :
+              [
+                "Correction required by date",
+                "Violation Description",
+                "Violation Code",
+                "Full Address",
+                "ID",
+                "Case open date",
+                "Corrective Action",
+                "Coordinates",
+                "violation status",
+                "permit type",
+                "MBL",
+                "Latitude",
+                "Viewpoint ID",
+                "Issue Date",
+                "Applicant Submit Date",
+                "Status",
+                "Longitude"
+              ],
+            "columns_field_name" :
+              [
+                "correction_required_by",
+                "description",
+                "code",
+                "full_address",
+                "id",
+                "case_open_date",
+                "corrective_action",
+                "coordinates",
+                "violation_status",
+                "permit_type",
+                "mbl",
+                "latitude",
+                "viewpoint_id",
+                "issue_date",
+                "applicant_submit_date",
+                "status",
+                "longitude"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Point",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "Date by which the corrective action must be taken",
+                "Description of the code violation",
+                "The official code number for the violation.",
+                "The address where the inspection took place.",
+                "The ID for the housing inspection case. ",
+                "Date of the first inspection",
+                "Action taken to correct the violation",
+                "latitude/longitude",
+                "",
+                "",
+                "The parcel number of the land on which the inspection took place. ",
+                "",
+                "ID for use in the Viewpoint system",
+                "",
+                "",
+                "Status of the case",
+                ""
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "view" : "date_shortmonthdy" },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+              ],
+            "download_count" : 480,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2025-12-03T16:24:52.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Inspectional Services",
+            "domain_tags" :
+              [
+                "health and safety",
+                "housing code",
+                "violations",
+                "housing and development"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Maintenance-Plan_Estimated-Update-Frequency",
+                  "value" : "Weekly"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.cambridgema.gov",
+            "license" : "Open Data Commons Public Domain Dedication and License"
+          },
+        "permalink" : "https://data.cambridgema.gov/d/f8su-kv88",
+        "link" : "https://data.cambridgema.gov/Inspectional-Services/Housing-Code-Violations/f8su-kv88",
+        "owner" :
+          {
+            "id" : "2xd4-gjs2",
+            "user_type" : "interactive",
+            "display_name" : "aepstein"
+          },
+        "creator" :
+          {
+            "id" : "2xd4-gjs2",
+            "user_type" : "interactive",
+            "display_name" : "aepstein"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Active Housing Code Violations",
+            "id" : "8bbt-jrr6",
+            "resource_name" : null,
+            "parent_fxf" : [ "k9nj-z35d" ],
+            "description" : "Housing Code Enforcement data from 2013 to the present , including violations identified.\r\nUpdate Frequency : Quarterly",
+            "attribution" : "Montgomery County, MD",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "filter",
+            "updatedAt" : "2026-11-15T06:00:26.000Z",
+            "createdAt" : "2021-09-09T12:35:18.000Z",
+            "metadata_updated_at" : "2025-01-31T01:08:20.000Z",
+            "data_updated_at" : "2026-11-15T06:00:26.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 43,
+                "page_views_last_month" : 125,
+                "page_views_total" : 2088,
+                "page_views_last_week_log" : 5.459431618637297,
+                "page_views_last_month_log" : 6.977279923499917,
+                "page_views_total_log" : 11.028596777067108
+              },
+            "columns_name" :
+              [
+                "Action",
+                "Condition",
+                "Item",
+                "Inspection Date",
+                "Service Request Closed Time",
+                "Disposition",
+                "Street Address",
+                "Zip Code",
+                "Case Number",
+                "Corrected",
+                "Location",
+                "Service Request Status",
+                "Location Description",
+                "Longitude",
+                "Service Request Number",
+                "Latitude",
+                "Service Request Created Date",
+                "Violation ID",
+                "Code Reference",
+                "Date Filed",
+                "Date Assigned",
+                "Date Closed",
+                "Unit Number",
+                "City"
+              ],
+            "columns_field_name" :
+              [
+                "action",
+                "condition",
+                "item",
+                "inspection_date",
+                "service_request_closed_time",
+                "disposition",
+                "street_address",
+                "zip_code",
+                "case_number",
+                "corrected",
+                "geolocation",
+                "service_request_status",
+                "location_description",
+                "longitude",
+                "service_request_number",
+                "latitude",
+                "service_request_created_date",
+                "violation_id",
+                "code_reference",
+                "date_filed",
+                "date_assigned",
+                "date_closed",
+                "unit_number",
+                "city"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Calendar date",
+                "Point",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Number",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                " Action required to correct violations\n",
+                " Violation defining conditions to correct\n",
+                " Violation items cited\n",
+                " Date Inspected date by DHCA\n",
+                " MC 311 service request closed date\n",
+                "Disposition is the case outcome.  Closed violations corrected 110 , No violations found 111, etc\n",
+                " Complaint street number, Street name and Street type\n",
+                " complaint zip code\n",
+                " Case number created by DHCA\n",
+                " Date corrected entered by DHCA\n",
+                "Location of the building\n",
+                " MC 311 service request service status\n",
+                " Location of violation\n",
+                "Longitude of the building.\n",
+                " MC311  service request number\n",
+                "Latitude of the building.\n",
+                " MC 311 service request created date\n",
+                " Housing Code Violation ID number\n",
+                " Section of code that has been violated\n",
+                " Date filed with DHCA\n",
+                " Date assigned to inspector\n",
+                " Date closed by inspector\n",
+                " Complaint unit number\n",
+                " Complaint city\n"
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                {},
+                {},
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {},
+                { "view" : "address_coords", "align" : "left" },
+                {},
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                { "view" : "date_ymd", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {},
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                {},
+                {}
+              ],
+            "download_count" : 258,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2021-09-09T12:42:04.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Consumer/Housing",
+            "domain_tags" : [],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Information_Departments",
+                  "value" : "Housing and Community Affairs"
+                },
+                {
+                  "key" : "Dataset-Information_Update-Frequency",
+                  "value" : "Quarterly"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.montgomerycountymd.gov",
+            "license" : "Public Domain"
+          },
+        "permalink" : "https://data.montgomerycountymd.gov/d/8bbt-jrr6",
+        "link" : "https://data.montgomerycountymd.gov/Consumer-Housing/Active-Housing-Code-Violations/8bbt-jrr6",
+        "owner" :
+          {
+            "id" : "qzhb-tftn",
+            "user_type" : "interactive",
+            "display_name" : "Kathy Luh"
+          },
+        "creator" :
+          {
+            "id" : "qzhb-tftn",
+            "user_type" : "interactive",
+            "display_name" : "Kathy Luh"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Monthly House Code Violations",
+            "id" : "gn2n-fyng",
+            "resource_name" : null,
+            "parent_fxf" : [ "vu9p-a5f7" ],
+            "description" : "Complaints of potential code violations reported to and investigated by the Code Enforcement Department. Data is updated monthly and dates back to October 2011, or first quarter of fiscal year 2012.\r\nPlease note that addresses that are listed under the Location field as 0 W 1ST ST are null place-holders and are not accurate addresses.",
+            "attribution" : "Code Enforcement",
+            "attribution_link" : "https://data.cityofgainesville.org/Building-Development/Code-Complaints-Violations/vu9p-a5f7",
+            "contact_email" : null,
+            "type" : "map",
+            "updatedAt" : "2023-07-18T17:48:01.000Z",
+            "createdAt" : "2019-04-30T13:40:10.000Z",
+            "metadata_updated_at" : "2022-04-22T19:24:10.000Z",
+            "data_updated_at" : "2023-07-18T17:48:01.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 10,
+                "page_views_last_month" : 27,
+                "page_views_total" : 583,
+                "page_views_last_week_log" : 3.4594316186372978,
+                "page_views_last_month_log" : 4.807354922057604,
+                "page_views_total_log" : 9.189824558880018
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 12,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "visualization_canvas_map",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2020-02-06T17:30:50.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Geospatial (Maps)",
+            "domain_tags" : [],
+            "domain_metadata" : []
+          },
+        "metadata" :
+          {
+            "domain" : "data.cityofgainesville.org",
+            "license" : "Public Domain"
+          },
+        "permalink" : "https://data.cityofgainesville.org/d/gn2n-fyng",
+        "link" : "https://data.cityofgainesville.org/Geospatial-Maps-/Monthly-House-Code-Violations/gn2n-fyng",
+        "owner" :
+          {
+            "id" : "rz5q-7myg",
+            "user_type" : "interactive",
+            "display_name" : "Elin Philpot"
+          },
+        "creator" :
+          {
+            "id" : "rz5q-7myg",
+            "user_type" : "interactive",
+            "display_name" : "Elin Philpot"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Monthly Trends of Housing Code Violations",
+            "id" : "nid2-jqmg",
+            "resource_name" : null,
+            "parent_fxf" : [ "vu9p-a5f7" ],
+            "description" : "Complaints of potential code violations reported to and investigated by the Code Enforcement Department. Data is updated monthly and dates back to October 2011, or first quarter of fiscal year 2012.\r\nPlease note that addresses that are listed under the Location field as 0 W 1ST ST are null place-holders and are not accurate addresses.",
+            "attribution" : "Code Enforcement",
+            "attribution_link" : "https://data.cityofgainesville.org/Building-Development/Code-Complaints-Violations/vu9p-a5f7",
+            "contact_email" : null,
+            "type" : "chart",
+            "updatedAt" : "2023-07-18T17:48:01.000Z",
+            "createdAt" : "2019-05-03T00:14:55.000Z",
+            "metadata_updated_at" : "2020-02-06T16:59:47.000Z",
+            "data_updated_at" : "2023-07-18T17:48:01.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 8,
+                "page_views_last_month" : 18,
+                "page_views_total" : 544,
+                "page_views_last_week_log" : 3.1699250014423126,
+                "page_views_last_month_log" : 4.247927513443585,
+                "page_views_total_log" : 9.090112419664289
+              },
+            "columns_name" : [],
+            "columns_field_name" : [],
+            "columns_datatype" : [],
+            "columns_description" : [],
+            "columns_format" : [],
+            "download_count" : 10,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "visualization_canvas_chart",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2020-02-06T16:59:46.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Charts & Graphs",
+            "domain_tags" : [],
+            "domain_metadata" : []
+          },
+        "metadata" :
+          {
+            "domain" : "data.cityofgainesville.org",
+            "license" : "Public Domain"
+          },
+        "permalink" : "https://data.cityofgainesville.org/d/nid2-jqmg",
+        "link" : "https://data.cityofgainesville.org/Charts-Graphs/Monthly-Trends-of-Housing-Code-Violations/nid2-jqmg",
+        "owner" :
+          {
+            "id" : "vwbq-myrr",
+            "user_type" : "interactive",
+            "display_name" : "City of Gainesville"
+          },
+        "creator" :
+          {
+            "id" : "vwbq-myrr",
+            "user_type" : "interactive",
+            "display_name" : "City of Gainesville"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Standing Water",
+            "id" : "mx9q-5uj7",
+            "resource_name" : null,
+            "parent_fxf" : [ "k9nj-z35d" ],
+            "description" : "Housing Code Enforcement data from 2013 to the present , including violations identified.\r\nUpdate Frequency: Weekly",
+            "attribution" : "Montgomery County, MD",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "filter",
+            "updatedAt" : "2026-11-15T06:00:26.000Z",
+            "createdAt" : "2019-07-30T20:12:16.000Z",
+            "metadata_updated_at" : "2025-01-17T00:27:06.000Z",
+            "data_updated_at" : "2026-11-15T06:00:26.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 8,
+                "page_views_last_month" : 31,
+                "page_views_total" : 11862,
+                "page_views_last_week_log" : 3.1699250014423126,
+                "page_views_last_month_log" : 5.0,
+                "page_views_total_log" : 13.534181274578225
+              },
+            "columns_name" :
+              [
+                "Service Request Status",
+                "Zip Code",
+                "Street Address",
+                "Inspection Date",
+                "Longitude",
+                "Unit Number",
+                "Location",
+                "Corrected",
+                "Item",
+                "City",
+                "Latitude",
+                "Service Request Created Date",
+                "Service Request Closed Time",
+                "Condition",
+                "Action",
+                "Service Request Number",
+                "Date Filed",
+                "Location Description",
+                "Code Reference",
+                "Disposition",
+                "Date Closed",
+                "Date Assigned",
+                "Case Number",
+                "Violation ID"
+              ],
+            "columns_field_name" :
+              [
+                "service_request_status",
+                "zip_code",
+                "street_address",
+                "inspection_date",
+                "longitude",
+                "unit_number",
+                "geolocation",
+                "corrected",
+                "item",
+                "city",
+                "latitude",
+                "service_request_created_date",
+                "service_request_closed_time",
+                "condition",
+                "action",
+                "service_request_number",
+                "date_filed",
+                "location_description",
+                "code_reference",
+                "disposition",
+                "date_closed",
+                "date_assigned",
+                "case_number",
+                "violation_id"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Point",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Number",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                " MC 311 service request service status\n",
+                " complaint zip code\n",
+                " Complaint street number, Street name and Street type\n",
+                " Date Inspected date by DHCA\n",
+                "Longitude of the building.\n",
+                " Complaint unit number\n",
+                "Location of the building\n",
+                " Date corrected entered by DHCA\n",
+                " Violation items cited\n",
+                " Complaint city\n",
+                "Latitude of the building.\n",
+                " MC 311 service request created date\n",
+                " MC 311 service request closed date\n",
+                " Violation defining conditions to correct\n",
+                " Action required to correct violations\n",
+                " MC311  service request number\n",
+                " Date filed with DHCA\n",
+                " Location of violation\n",
+                " Section of code that has been violated\n",
+                "Disposition is the case outcome.  Closed violations corrected 110 , No violations found 111, etc\n",
+                " Date closed by inspector\n",
+                " Date assigned to inspector\n",
+                " Case number created by DHCA\n",
+                " Housing Code Violation ID number\n"
+              ],
+            "columns_format" :
+              [
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "view" : "date_ymd", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                { "align" : "right" },
+                { "align" : "left" },
+                { "view" : "date_ymd", "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "view" : "date_ymd", "align" : "left" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "align" : "right" },
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                }
+              ],
+            "download_count" : 1270,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2019-07-31T15:39:23.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Consumer/Housing",
+            "domain_tags" : [ "violation", "housing", "enforcement", "code" ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Information_Departments",
+                  "value" : "Housing and Community Affairs"
+                },
+                {
+                  "key" : "Dataset-Information_Update-Frequency",
+                  "value" : "Weekly"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.montgomerycountymd.gov",
+            "license" : "Public Domain"
+          },
+        "permalink" : "https://data.montgomerycountymd.gov/d/mx9q-5uj7",
+        "link" : "https://data.montgomerycountymd.gov/Consumer-Housing/Standing-Water/mx9q-5uj7",
+        "owner" :
+          {
+            "id" : "fnci-gphj",
+            "user_type" : "interactive",
+            "display_name" : "MC Open Data"
+          },
+        "creator" :
+          {
+            "id" : "fnci-gphj",
+            "user_type" : "interactive",
+            "display_name" : "MC Open Data"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Troubled Properties Analysis",
+            "id" : "bw2r-araf",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Montgomery County DHCA classifies properties as Troubled, At-Risk, and Compliant through scheduled property code inspections. In general, a “Troubled Property” is a multifamily rental property with numerous and or severe “health and safety” housing code violations. The full Fiscal Year Troubled Property report for properties inspected between July 1 of the current year and June 30 of the following year is available at\nhttps://www.montgomerycountymd.gov/dhca/director/TroubledProperties.html. \nThis report provides the results and classifications of the properties inspected and identifies the properties to be inspected in the following Fiscal Year. \nExecutive Regulation 05-17 provides a methodology for designating certain multifamily rental housing units as \"Troubled Properties.\" These \"Troubled Properties\" are subject to at least annual housing code inspections and must develop and implement a corrective action plan. This dataset provides housing code inspection results along with scores for both severity and quantity of violations. \nUpdated Annually.",
+            "attribution" : "Montgomery County, MD",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2025-09-30T15:34:52.000Z",
+            "createdAt" : "2019-02-06T01:36:13.000Z",
+            "metadata_updated_at" : "2025-09-30T15:34:52.000Z",
+            "data_updated_at" : "2025-09-30T14:36:10.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 57,
+                "page_views_last_month" : 274,
+                "page_views_total" : 27421,
+                "page_views_last_week_log" : 5.857980995127572,
+                "page_views_last_month_log" : 8.103287808412023,
+                "page_views_total_log" : 14.743046176226672
+              },
+            "columns_name" :
+              [
+                "Municipalities",
+                "Zip Codes",
+                "Communities",
+                "Councils",
+                "Location (address)",
+                "Location (city)",
+                "No Violations Observed",
+                "Council Districts",
+                "Next Inspection Date",
+                "Units Inspected",
+                "Location (state)",
+                "Severity Index",
+                "Inspection Frequency",
+                "Location (zip)",
+                "City",
+                "Location",
+                "Analysis Rating",
+                "Units with Mold",
+                "Infested Units Percentage",
+                "Unit Count",
+                "Average Violations Per Unit",
+                "Compliant",
+                "Longitude",
+                "Zip Code",
+                " Street Address",
+                "First Inspection Date",
+                "Latitude",
+                "Case Number",
+                "Community Name",
+                "License Number",
+                "Council Districts 7",
+                "Council Districts_from_i23j_3mj8"
+              ],
+            "columns_field_name" :
+              [
+                ":@computed_region_rbt8_3x7n",
+                ":@computed_region_d7bw_bq6x",
+                ":@computed_region_kbsp_ykn9",
+                ":@computed_region_tx5f_5em3",
+                "geolocation_address",
+                "geolocation_city",
+                "noviolationsobserved",
+                ":@computed_region_vu5j_pcmz",
+                "nextinspectiondate",
+                "unitsinspected",
+                "geolocation_state",
+                "severityindex",
+                "inspectionfrequency",
+                "geolocation_zip",
+                "city",
+                "geolocation",
+                "rating",
+                "units_with_mold",
+                "infestedunitspercentage",
+                "unitcount",
+                "averageviolationsperunit",
+                "compliantind",
+                "longitude",
+                "zipcode",
+                "streetaddress",
+                "firstinspectiondate",
+                "latitude",
+                "casenumber",
+                "communityname",
+                "hlrslicensenumber",
+                ":@computed_region_6vgr_duib",
+                ":@computed_region_a9cs_3ed7"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Point",
+                "Text",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Number",
+                "Text",
+                "Number",
+                "Number",
+                "Number"
+              ],
+            "columns_description" :
+              [
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "Number of dwelling  units without violation",
+                "",
+                "Next Inspection Date",
+                "Number of units Inspected",
+                "",
+                "The weighted average of violation severities. Violations are assigned a severity from 1 (low severity) to 5 (life/safety). ",
+                "Frequency of Inspections",
+                "",
+                "City of dwelling",
+                "Location",
+                "Rating of the severity analysis",
+                "Percentage of inspected units showing heavy molding\n",
+                "Percentage of dwelling units with infestation",
+                "Number of rental units in the facility",
+                "The average number of violations per dwelling unit",
+                "Indicates whether or not a property has been inspected within the prescribed inspection interval (1, 2, or 3 years)",
+                "Longitude coordinate for dwelling",
+                "Zip Code of dwelling",
+                "Street Address of dwelling",
+                "First Inspection Date",
+                "Latitude coordinate for dwelling",
+                "Code Enforcement case number of the inspection",
+                "Name of community",
+                "Rental license number (as assigned by DHCA’s Licensing and Registration Program)",
+                "This column was automatically created in order to record in what polygon from the dataset 'Council Districts 7' (6vgr-duib) the point in column 'geolocation' is located.  This enables the creation of region maps (choropleths) in the visualization canvas and data lens.",
+                ""
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { "noCommas" : "true" },
+                {},
+                { "view" : "date" },
+                { "noCommas" : "true" },
+                {},
+                { "noCommas" : "true", "precision" : "2" },
+                { "noCommas" : "true" },
+                {},
+                {},
+                {},
+                {},
+                { "noCommas" : "true", "precision" : "2" },
+                { "noCommas" : "true", "precision" : "2" },
+                { "noCommas" : "true" },
+                { "noCommas" : "true", "precision" : "2" },
+                {},
+                { "noCommas" : "true" },
+                {},
+                {},
+                { "view" : "date" },
+                { "noCommas" : "true" },
+                { "noCommas" : "true" },
+                {},
+                { "noCommas" : "true" },
+                {},
+                {}
+              ],
+            "download_count" : 5402,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2023-07-05T14:16:08.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Consumer/Housing",
+            "domain_tags" :
+              [
+                "analysis",
+                "violation",
+                "building",
+                "montgomery county",
+                "maryland",
+                "inspection",
+                "property",
+                "housing",
+                "distress",
+                "code",
+                "severity",
+                "troubled"
+              ],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Information_Departments",
+                  "value" : "Housing and Community Affairs"
+                },
+                {
+                  "key" : "Dataset-Information_Update-Frequency",
+                  "value" : "Annually"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.montgomerycountymd.gov",
+            "license" : "Public Domain"
+          },
+        "permalink" : "https://data.montgomerycountymd.gov/d/bw2r-araf",
+        "link" : "https://data.montgomerycountymd.gov/Consumer-Housing/Troubled-Properties-Analysis/bw2r-araf",
+        "owner" :
+          {
+            "id" : "uruq-macm",
+            "user_type" : "interactive",
+            "display_name" : "svc dmesb"
+          },
+        "creator" :
+          {
+            "id" : "uruq-macm",
+            "user_type" : "interactive",
+            "display_name" : "svc dmesb"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Housing Code Violatons",
+            "id" : "usij-rq8e",
+            "resource_name" : null,
+            "parent_fxf" : [ "k9nj-z35d" ],
+            "description" : "Housing Code Enforcement data from 2013 to the present , including violations identified.\r\nUpdate Frequency : Quarterly",
+            "attribution" : "Montgomery County, MD",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "filter",
+            "updatedAt" : "2026-11-15T06:00:26.000Z",
+            "createdAt" : "2015-06-27T18:19:00.000Z",
+            "metadata_updated_at" : "2025-01-31T01:09:37.000Z",
+            "data_updated_at" : "2026-11-15T06:00:26.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 11,
+                "page_views_last_month" : 34,
+                "page_views_total" : 4825,
+                "page_views_last_week_log" : 3.5849625007211565,
+                "page_views_last_month_log" : 5.129283016944966,
+                "page_views_total_log" : 12.23661220021575
+              },
+            "columns_name" :
+              [
+                "Service Request Created Date",
+                "Service Request Closed Time",
+                "Street Address",
+                "Service Request Number",
+                "Location Description",
+                "Code Reference",
+                "Inspection Date",
+                "Corrected",
+                "Action",
+                "Condition",
+                "Latitude",
+                "Item",
+                "Longitude",
+                "Service Request Status",
+                "Date Filed",
+                "Violation ID",
+                "Case Number",
+                "Date Assigned",
+                "Date Closed",
+                "Disposition",
+                "City",
+                "Unit Number",
+                "Zip Code",
+                "Location"
+              ],
+            "columns_field_name" :
+              [
+                "service_request_created_date",
+                "service_request_closed_time",
+                "street_address",
+                "service_request_number",
+                "location_description",
+                "code_reference",
+                "inspection_date",
+                "corrected",
+                "action",
+                "condition",
+                "latitude",
+                "item",
+                "longitude",
+                "service_request_status",
+                "date_filed",
+                "violation_id",
+                "case_number",
+                "date_assigned",
+                "date_closed",
+                "disposition",
+                "city",
+                "unit_number",
+                "zip_code",
+                "geolocation"
+              ],
+            "columns_datatype" :
+              [
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Number",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Number",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Point"
+              ],
+            "columns_description" :
+              [
+                " MC 311 service request created date\n",
+                " MC 311 service request closed date\n",
+                " Complaint street number, Street name and Street type\n",
+                " MC311  service request number\n",
+                " Location of violation\n",
+                " Section of code that has been violated\n",
+                " Date Inspected date by DHCA\n",
+                " Date corrected entered by DHCA\n",
+                " Action required to correct violations\n",
+                " Violation defining conditions to correct\n",
+                "Latitude of the building.\n",
+                " Violation items cited\n",
+                "Longitude of the building.\n",
+                " MC 311 service request service status\n",
+                " Date filed with DHCA\n",
+                " Housing Code Violation ID number\n",
+                " Case number created by DHCA\n",
+                " Date assigned to inspector\n",
+                " Date closed by inspector\n",
+                "Disposition is the case outcome.  Closed violations corrected 110 , No violations found 111, etc\n",
+                " Complaint city\n",
+                " Complaint unit number\n",
+                " complaint zip code\n",
+                "Location of the building\n"
+              ],
+            "columns_format" :
+              [
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                {},
+                {},
+                {},
+                {},
+                { "view" : "date_ymd", "align" : "left" },
+                {},
+                {},
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                {},
+                { "view" : "date_ymd", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                {},
+                {},
+                {},
+                {},
+                { "view" : "address_coords", "align" : "left" }
+              ],
+            "download_count" : 2122,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2015-07-22T15:46:15.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Consumer/Housing",
+            "domain_tags" : [],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Information_Departments",
+                  "value" : "Housing and Community Affairs"
+                },
+                {
+                  "key" : "Dataset-Information_Update-Frequency",
+                  "value" : "Quarterly"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.montgomerycountymd.gov",
+            "license" : "Public Domain"
+          },
+        "permalink" : "https://data.montgomerycountymd.gov/d/usij-rq8e",
+        "link" : "https://data.montgomerycountymd.gov/Consumer-Housing/Housing-Code-Violatons/usij-rq8e",
+        "owner" :
+          {
+            "id" : "qzhb-tftn",
+            "user_type" : "interactive",
+            "display_name" : "Kathy Luh"
+          },
+        "creator" :
+          {
+            "id" : "qzhb-tftn",
+            "user_type" : "interactive",
+            "display_name" : "Kathy Luh"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Housing Maintenance Code Violations",
+            "id" : "wvxf-dwi5",
+            "resource_name" : null,
+            "parent_fxf" : [],
+            "description" : "Pursuant to New York City’s Housing Maintenance Code, the Department of Housing Preservation and Development (HPD) issues violations against conditions, in rental dwelling units and buildings, that have been verified to violate the New York City Housing Maintenance Code (HMC) or the New York State Multiple Dwelling Law (MDL).\r\nEach row in this dataset contains discrete information about one violation of the New York City Housing Maintenance Code or New York State Multiple Dwelling Law. Each violation is identified using a unique Violation ID. These Laws are in place to provide requirements for the maintenance of residential dwelling units within New York City. \r\nViolations are issued by Housing Inspectors after a physical inspection is conducted (except for class I violations which are generally  administratively issued).  Violations are issued in four classes: Class A (non-hazardous), Class B (hazardous), Class C (immediately hazardous) and Class I (information orders).  For more information on violations, see https://www1.nyc.gov/site/hpd/owners/compliance-clear-violations.page  \r\nThe base data for this file is all violations open as of October 1, 2012.  Violation data is updated daily.  The daily update includes both new violations and updates to the status of previously issued violations. An open violation is a violation which is still active on the Department records. See the status table for determining how to filter for open violations versus closed violations, and within open violations for a more detailed current status. \r\nThe property owner may or may not have corrected the physical condition if the status is open. The violation status is closed when the violation is observed/verified as corrected by HPD or as certified by the landlord.   The processes for having violations dismissed are described at http://www1.nyc.gov/site/hpd/owners/compliance-clear-violations.page\r\nUsing other HPD datasets, such as the Building File or the Registration File, a user can link together violations issued for given buildings or for given owners.",
+            "attribution" : "Department of Housing Preservation and Development (HPD)",
+            "attribution_link" : "http://www.nyc.gov/html/hpd/html/pr/HPD-Open-Data.shtml",
+            "contact_email" : null,
+            "type" : "dataset",
+            "updatedAt" : "2026-11-15T15:57:46.000Z",
+            "createdAt" : "2013-11-18T19:49:47.000Z",
+            "metadata_updated_at" : "2026-05-20T16:46:52.000Z",
+            "data_updated_at" : "2026-11-15T15:57:46.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 14017,
+                "page_views_last_month" : 34097,
+                "page_views_total" : 299756,
+                "page_views_last_week_log" : 13.774992908933177,
+                "page_views_last_month_log" : 15.057399500772485,
+                "page_views_total_log" : 18.193433918643017
+              },
+            "columns_name" :
+              [
+                "Lot",
+                "StreetName",
+                "ApprovedDate",
+                "StreetCode",
+                "Class",
+                "InspectionDate",
+                "Postcode",
+                "Apartment",
+                "Story",
+                "Block",
+                "OriginalCorrectByDate",
+                "OriginalCertifyByDate",
+                "CurrentStatusID",
+                "CommunityBoard",
+                "CurrentStatusDate",
+                "BuildingID",
+                "NewCertifyByDate",
+                "CertifiedDate",
+                "NOVDescription",
+                "Longitude",
+                "CensusTract",
+                "ViolationID",
+                "NOVID",
+                "BIN",
+                "CouncilDistrict",
+                "NOVIssuedDate",
+                "NovType",
+                "RentImpairing",
+                "NewCorrectByDate",
+                "Latitude",
+                "OrderNumber",
+                "CurrentStatus",
+                "Borough",
+                "BoroID",
+                "RegistrationID",
+                "HighHouseNumber",
+                "HouseNumber",
+                "BBL",
+                "ViolationStatus",
+                "LowHouseNumber",
+                "NTA"
+              ],
+            "columns_field_name" :
+              [
+                "lot",
+                "streetname",
+                "approveddate",
+                "streetcode",
+                "class",
+                "inspectiondate",
+                "zip",
+                "apartment",
+                "story",
+                "block",
+                "originalcorrectbydate",
+                "originalcertifybydate",
+                "currentstatusid",
+                "communityboard",
+                "currentstatusdate",
+                "buildingid",
+                "newcertifybydate",
+                "certifieddate",
+                "novdescription",
+                "longitude",
+                "censustract",
+                "violationid",
+                "novid",
+                "bin",
+                "councildistrict",
+                "novissueddate",
+                "novtype",
+                "rentimpairing",
+                "newcorrectbydate",
+                "latitude",
+                "ordernumber",
+                "currentstatus",
+                "boro",
+                "boroid",
+                "registrationid",
+                "highhousenumber",
+                "housenumber",
+                "bbl",
+                "violationstatus",
+                "lowhousenumber",
+                "nta"
+              ],
+            "columns_datatype" :
+              [
+                "Number",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Calendar date",
+                "Calendar date",
+                "Number",
+                "Text",
+                "Calendar date",
+                "Number",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text",
+                "Text"
+              ],
+            "columns_description" :
+              [
+                "Tax lot for building\n",
+                "Address information for the building\n",
+                "Date when violation was approved",
+                "Address information for the building\n",
+                "Indicator of seriousness of the violations, where A is the least serious and C is the most serious\n",
+                "Date when the violation was observed\n",
+                "Address information for the building\n",
+                "Apartment with violation, if applicable\n",
+                "Floor of violation\n",
+                "Tax block for building\n",
+                "Original date by when the owner was to correct the violation\n",
+                "Original date by when the owner was to inform HPD that the violation as corrected\n",
+                "unique id to identify current status",
+                "The NYC community board associated with the provided entity location (numbered 1 – 59.",
+                "Date when the current status when into effect\n",
+                "Unique identifier of building\n",
+                "Modified date by when the owner was to inform HPD that the violation as corrected\n",
+                "Date when the violation was certified (if it was)\n",
+                "Description of the violation\n",
+                "The longitude associated with the provided entity location.",
+                "The US census tract associated with the provided entity location (in the format of up to four-digit integers, followed by an optional two-digit suffix; e.g., “15.02” or “319”).",
+                "Unique identifier of Violation\n",
+                "Unique identifier of the Notice of Violation sent to the owner\n",
+                "The Building Identification Number (BIN) associated with the provided entity location. It is formatted as a seven-digit numerical identifier, which is unique to each building in NYC.",
+                "The NYC council district associated with the provided entity location (numbered 1 – 51).",
+                "Date when the NOV was sent\n",
+                "Original / Reissued Notice of Violation. For more information on the Reissuance process, see http://www1.nyc.gov/site/hpd/owners/compliance-clear-violations.page .\n",
+                "A rent-impairing violation is a condition within a multiple dwelling which constitutes, or if not promptly corrected will constitute, a fire hazard or a serious threat to the life, health or safety of occupants thereof (New York State Multiple Dwelling Law Section 302).",
+                "Modified date by when the owner was to correct the violation\n",
+                "The latitude associated with the provided entity location.",
+                "Reference to the abstract description of the violation condition which cites a specific section of the law which is in violation\n",
+                "Violation status (see below for details)\n",
+                "Boro code (1 = Manhattan, 2 = Bronx, 3 = Brooklyn, 4 = Queens, 5 = Staten Island)\n",
+                "unique number to identify borough",
+                "Unique identifier of valid registration information\n",
+                "Address information for the building\n",
+                "Address information for the building\n",
+                "The Borough, Block, Lot (BBL) associated with the provided entity location. It is formatted as a ten-digit numerical identifier, which is unique to each parcel of real property in NYC.",
+                "Status of Violation(Open / Close)",
+                "Address information for the building\n",
+                "The Neighborhood Tabulation Area (NTA) associated with the provided entity location, which is formatted as a two-letter borough identifier followed by a two-digit numerical identifier (e.g., “BX31”)."
+              ],
+            "columns_format" :
+              [
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "false",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                { "view" : "date", "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                { "view" : "date", "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "view" : "date", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                {},
+                { "view" : "date", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                { "align" : "left" },
+                { "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" },
+                { "align" : "left" },
+                { "displayStyle" : "plain", "align" : "left" }
+              ],
+            "download_count" : 52590,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2020-11-07T00:15:19.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Housing & Development",
+            "domain_tags" :
+              [
+                "violation",
+                "department of housing preservation and development",
+                "housing",
+                "hpd"
+              ],
+            "domain_metadata" :
+              [
+                { "key" : "Update_Automation", "value" : "Yes" },
+                { "key" : "Update_Date-Made-Public", "value" : "2/14/2014" },
+                { "key" : "Update_Update-Frequency", "value" : "Daily" },
+                {
+                  "key" : "Dataset-Information_Agency",
+                  "value" : "Department of Housing Preservation and Development (HPD)"
+                }
+              ]
+          },
+        "metadata" : { "domain" : "data.cityofnewyork.us" },
+        "permalink" : "https://data.cityofnewyork.us/d/wvxf-dwi5",
+        "link" : "https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Violations/wvxf-dwi5",
+        "owner" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          },
+        "creator" :
+          {
+            "id" : "5fuc-pqz2",
+            "user_type" : "interactive",
+            "display_name" : "NYC OpenData"
+          }
+      },
+      {
+        "resource" :
+          {
+            "name" : "Housing Code Enforcement-API",
+            "id" : "rry5-yaa6",
+            "resource_name" : "housing-code-enforcement",
+            "parent_fxf" : [ "k9nj-z35d" ],
+            "description" : "Housing Code Enforcement data from 2013 to the present , including violations identified",
+            "attribution" : "Montgomery County, MD",
+            "attribution_link" : null,
+            "contact_email" : null,
+            "type" : "filter",
+            "updatedAt" : "2026-11-15T06:00:26.000Z",
+            "createdAt" : "2015-06-17T00:31:59.000Z",
+            "metadata_updated_at" : "2025-01-31T02:51:41.000Z",
+            "data_updated_at" : "2026-11-15T06:00:26.000Z",
+            "page_views" :
+              {
+                "page_views_last_week" : 22,
+                "page_views_last_month" : 70,
+                "page_views_total" : 2747,
+                "page_views_last_week_log" : 4.523561956057013,
+                "page_views_last_month_log" : 6.149747119504682,
+                "page_views_total_log" : 11.4241662888181
+              },
+            "columns_name" :
+              [
+                "Condition",
+                "Service Request Status",
+                "City",
+                "Violation ID",
+                "Location Description",
+                "Item",
+                "Latitude",
+                "Longitude",
+                "Service Request Number",
+                "Location",
+                "Date Assigned",
+                "Inspection Date",
+                "Action",
+                "Disposition",
+                "Date Closed",
+                "Street Address",
+                "Unit Number",
+                "Zip Code",
+                "Service Request Created Date",
+                "Service Request Closed Time",
+                "Case Number",
+                "Date Filed",
+                "Code Reference",
+                "Corrected"
+              ],
+            "columns_field_name" :
+              [
+                "condition",
+                "service_request_status",
+                "city",
+                "violation_id",
+                "location_description",
+                "item",
+                "latitude",
+                "longitude",
+                "service_request_number",
+                "geolocation",
+                "date_assigned",
+                "inspection_date",
+                "action",
+                "disposition",
+                "date_closed",
+                "street_address",
+                "unit_number",
+                "zip_code",
+                "service_request_created_date",
+                "service_request_closed_time",
+                "case_number",
+                "date_filed",
+                "code_reference",
+                "corrected"
+              ],
+            "columns_datatype" :
+              [
+                "Text",
+                "Text",
+                "Text",
+                "Number",
+                "Text",
+                "Text",
+                "Number",
+                "Number",
+                "Text",
+                "Point",
+                "Calendar date",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Text",
+                "Text",
+                "Text",
+                "Calendar date",
+                "Calendar date",
+                "Number",
+                "Calendar date",
+                "Text",
+                "Calendar date"
+              ],
+            "columns_description" :
+              [
+                " Violation defining conditions to correct\n",
+                " MC 311 service request service status\n",
+                " Complaint city\n",
+                " Housing Code Violation ID number\n",
+                " Location of violation\n",
+                " Violation items cited\n",
+                "Latitude of the building.\n",
+                "Longitude of the building.\n",
+                " MC311  service request number\n",
+                "Location of the building\n",
+                " Date assigned to inspector\n",
+                " Date Inspected date by DHCA\n",
+                " Action required to correct violations\n",
+                "Disposition is the case outcome.  Closed violations corrected 110 , No violations found 111, etc\n",
+                " Date closed by inspector\n",
+                " Complaint street number, Street name and Street type\n",
+                " Complaint unit number\n",
+                " complaint zip code\n",
+                " MC 311 service request created date\n",
+                " MC 311 service request closed date\n",
+                " Case number created by DHCA\n",
+                " Date filed with DHCA\n",
+                " Section of code that has been violated\n",
+                " Date corrected entered by DHCA\n"
+              ],
+            "columns_format" :
+              [
+                {},
+                {},
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                {},
+                {},
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "left"
+                },
+                {},
+                { "view" : "address_coords", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                {},
+                {},
+                { "view" : "date_ymd", "align" : "left" },
+                {},
+                {},
+                {},
+                { "view" : "date_ymd", "align" : "left" },
+                { "view" : "date_ymd", "align" : "left" },
+                {
+                  "precisionStyle" : "standard",
+                  "noCommas" : "true",
+                  "align" : "right"
+                },
+                { "view" : "date_ymd", "align" : "left" },
+                {},
+                {}
+              ],
+            "download_count" : 2110,
+            "provenance" : "official",
+            "lens_view_type" : "tabular",
+            "lens_display_type" : "table",
+            "locked" : false,
+            "backend" : "nbe",
+            "blob_mime_type" : null,
+            "hide_from_data_json" : false,
+            "publication_date" : "2015-07-22T15:46:15.000Z"
+          },
+        "classification" :
+          {
+            "categories" : [],
+            "tags" : [],
+            "domain_category" : "Consumer/Housing",
+            "domain_tags" : [],
+            "domain_metadata" :
+              [
+                {
+                  "key" : "Dataset-Information_Departments",
+                  "value" : "Housing and Community Affairs"
+                },
+                {
+                  "key" : "Dataset-Information_Update-Frequency",
+                  "value" : "Weekly"
+                }
+              ]
+          },
+        "metadata" :
+          {
+            "domain" : "data.montgomerycountymd.gov",
+            "license" : "Public Domain"
+          },
+        "permalink" : "https://data.montgomerycountymd.gov/d/rry5-yaa6",
+        "link" : "https://data.montgomerycountymd.gov/Consumer-Housing/Housing-Code-Enforcement-API/rry5-yaa6",
+        "owner" :
+          {
+            "id" : "uruq-macm",
+            "user_type" : "interactive",
+            "display_name" : "svc dmesb"
+          },
+        "creator" :
+          {
+            "id" : "uruq-macm",
+            "user_type" : "interactive",
+            "display_name" : "svc dmesb"
+          }
+      }
+    ],
+  "resultSetSize" : 111,
+  "timings" : { "serviceMillis" : 42, "searchMillis" : [ 5, 11 ] },
+  "warnings" : []
+}

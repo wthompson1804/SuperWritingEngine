@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/api/catalog/v1?domains=data.ny.gov&q=code%20violations&limit=10",
+ "retrieved_at": "2026-11-15T21:21:50+00:00",
+ "status": 200,
+ "path": "raw/non_nyc_records/207c1608471dbd40.json",
+ "source": "non_nyc_records"
+}
