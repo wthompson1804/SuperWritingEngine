@@ -57,9 +57,12 @@ NUMW = {"a": 1, "an": 1, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "
         "half a": 0.5, "1/2": 0.5, "one and a half": 1.5, "1 1/2": 1.5, "a half": 0.5, "one-half": 0.5}
 Q = r"(?:\d+(?:\.\d+)?|one and a half|1 1/2|one-half|one|two|three|four|five|six|half(?: a)?|1/2|an?)"
 FREE = re.compile(
-    r"(?P<upto>up\s+to\s+(?:a\s+)?)?(?P<q1>" + Q + r")(?:\s*(?:-|–|to|or)\s*(?P<q2>" + Q + r"))?\s*[- ]?\s*"
+    r"(?P<upto>up\s+to\s+(?:a\s+)?)?(?<![\d,.$])(?P<q1>" + Q + r")(?:\s*(?:-|–|to|or)\s*(?P<q2>" + Q + r"))?\s*[- ]?\s*"
     r"(?P<unit>month|week)s?(?:['’]s)?\s*[- ]?\s*(?:of\s+)?"
     r"(?:free\b|off\b|rent[- ]free|(?:base\s+)?rent\s+free|rent\s+concession|of\s+free)", re.I)
+FREE_SPECIAL = re.compile(r"\b(?P<q>one month and a half|" + Q + r")(?:\s*[- ]?months?)?\s+special\b", re.I)
+UNCLEAR = re.compile(r"months?\s+fee\s+rent|rent concession|months?\s+off\b|months?\s+special", re.I)
+EV_NET = re.compile(r"'\$\s?([\d,]+)\*?'\s*=\s*net effective", re.I)
 FREE_NOQ = re.compile(r"\b(?:first|1st)\s+(?:full\s+)?month(?:['’]s)?(?:\s+(?:of\s+)?(?:base\s+)?rent)?\s+(?:is\s+)?free|"
                       r"\bfree\s+(?:first\s+)?month\b(?!s)|\b13th\s+month\s+(?:rent\s+)?free", re.I)
 MONTHNAMES = "january february march april may june july august september october november december".split()
@@ -68,7 +71,7 @@ FREE_NAMED = re.compile(r"\b(" + MON + r")\.?[- ]?(20\d\d)?\s+(?:rent\s+)?free\b
 LEASE = re.compile(
     r"(?P<a>\d{1,2})\s*(?:(?:-|–|to)\s*(?P<b>\d{1,2}))?\s*(?P<p1>\+)?\s*[- ]?\s*months?\s*(?P<p2>\+)?"
     r"(?P<p3>\s*or\s*(?:longer|greater|more))?\s*(?:new\s+)?(?:lease|term|in length|mth)|"
-    r"(?:free\s+on|lease\s+of|for|lease)\s+(?P<c>\d{1,2})\s*months?(?P<p4>\s*or\s*(?:longer|greater|more))?(?!\s*free)|"
+    r"\b(?:on(?:\s+an?)?|lease\s+of|for|lease)\s+(?P<c>\d{1,2})\s*months?\b(?P<p4>\s*or\s*(?:longer|greater|more))?(?!\s*(?:of\s+)?(?:free|off|rent))|"
     r"(?P<d>\d{1,2})\s*MTH\b", re.I)
 SELECT = re.compile(r"\bselect(?:ed)?\b|\bfew apartment|\bqualif|\bcertain\b|\bparticipating\b", re.I)
 RENEW = re.compile(r"\brenew|second year|2nd year", re.I)
@@ -82,18 +85,20 @@ FEEWAIVE = re.compile(r"waive|no (?:application|amenity|broker|move[- ]in) fee|f
                       r"free amenit|parking incentive|free electric", re.I)
 CREDIT = re.compile(r"\$\s?\$?([\d,]{3,6})(?:\.00)?\s*(?:one[- ]time\s+)?(?:move[- ]in\s+(?:credit|bonus)|rent\s+credit|"
                     r"off\b|credit|gift\s*card)|(?:rent\s+credit|credit)\s+of\s+\$\s?([\d,]{3,6})", re.I)
-LOOKLEASE = re.compile(r"within\s+(?:24|48)\s*-?\s*(?:hours?|hrs?)|same[- ]day\s+appl|look\s*(?:and|&|n)\s*lease|"
-                       r"(?:24|48)\s*hours?\s+(?:post|of|after)", re.I)
+LOOKLEASE = re.compile(r"within\s+\d{2}\s*-?\s*(?:hours?|hrs?)|same[- ]day\s+appl|look\s*(?:and|&|n)\s*lease|"
+                       r"\d{2}\s*hours?\s+(?:post|of|after)", re.I)
+NOT_RENT = re.compile(r"\s*(?:of\s+)?(?:free\s+)?(?:garage\s+|indoor\s+|offsite\s+)?(?:parking|pet rent|amenit|electric|storage|gym|internet|wifi|cable)", re.I)
+UNIT_LIST = re.compile(r"\bApts?\.?\s+((?:[A-Z]?\d{3,4}\*?(?:\s*,\s*|\s+and\s+|\s*&\s*)?)+)")
 UPFRONT = re.compile(r"\bfirst\s+(?:full\s+)?month|1st\s+month|move[- ]in\s+month|up[- ]?front|month of move", re.I)
 ENDLEASE = re.compile(r"\b13th\s+month|last\s+month|final\s+month|end of (?:the |your )?lease", re.I)
 SPREAD = re.compile(r"\bspread\b|prorated over|amortiz|pay\s+\$\s?[\d,]+\s+net effective", re.I)
-SECOND_MONTH = re.compile(r"applied to (?:the |your )?(?:2nd|second)(?: full)? month", re.I)
+SECOND_MONTH = re.compile(r"(?:applied to|off) (?:the |your )?(?:2nd|second)(?: full)? month", re.I)
 DATE_NUM = re.compile(r"(?:by|before|thru|through|until|till|expires?|good thru|ends?)\s*:?\s*(?:on\s+)?"
                       r"(\d{1,2})\s*[/-]\s*(\d{1,2})(?:\s*[/-]\s*(\d{2,4}))?", re.I)
 DATE_NAME = re.compile(r"(?:by|before|thru|through|until|till|expires?|good thru|ends?)\s*:?\s*(?:on\s+)?(" + MON +
                        r")\.?\s+(\d{1,2})(?:st|nd|rd|th)?(?:,?\s*(20\d\d))?", re.I)
 OTHER_BEDS = re.compile(r"\b(2|two|3|three|4|four)[- ]?(?:bed(?:room)?s?|br)\b", re.I)
-VAGUE = re.compile(r"free rent|special offer|incentive|concession|net[- ]?effective|gross rent|months? free|"
+VAGUE = re.compile(r"promotions?|free rent|special offer|incentive|concession|net[- ]?effective|gross rent|months? free|"
                    r"move[- ]in special|leasing special|specials", re.I)
 
 
@@ -298,15 +303,15 @@ def parse_date(s):
 def own_beds_re(beds):
     if str(beds) in ("0", "0.0"):
         return re.compile(r"studio|all (?:available )?(?:units|apartments|homes)", re.I)
-    return re.compile(r"\b(?:1|one)[- ]?(?:bed|br)|\b1\s*(?:,|&|and)\s*2\s*bed|all (?:available )?(?:units|apartments|homes)", re.I)
+    return re.compile(r"\b(?:1|one)[- ]?(?:bed|br)|\b(?:1|one)\s*(?:,|&|and|or)\s*(?:2|two)\b|all (?:available )?(?:units|apartments|homes)", re.I)
 
 
-def parse_piece(text, beds):
+def parse_piece(text, beds, unit_no=""):
     """Offers found in one verbatim piece. Returns dict of findings for this piece."""
     own = own_beds_re(beds)
     out = {"offers": [], "credits": [], "deposit": False, "fee": False, "looklease": False, "net": False,
            "net_neg": False, "select": False, "not_for_unit": [], "renewal": False, "timing": "", "dates": [],
-           "gross": [], "unit_gross": {}}
+           "gross": [], "unit_gross": {}, "named_only": []}
     restricted = False
     for cl in sentences(text):
         ob = OTHER_BEDS.search(cl)
@@ -317,7 +322,7 @@ def parse_piece(text, beds):
         frees = []
         for m in FREE.finditer(cl):
             q1, q2 = num(m.group("q1")), num(m.group("q2")) if m.group("q2") else None
-            if q1 is None:
+            if q1 is None or NOT_RENT.match(cl[m.end():m.end() + 30]):
                 continue
             pre = cl[max(0, m.start() - 12):m.start()].lower()
             if re.search(r"and\s+a\s*$", pre):          # "one and a half months" split oddly
@@ -325,6 +330,11 @@ def parse_piece(text, beds):
             unit = m.group("unit").lower()
             frees.append({"s": m.start(), "e": m.end(), "lo": min(q1, q2) if q2 else q1, "hi": max(q1, q2) if q2 else q1,
                           "upto": bool(m.group("upto")) or bool(q2), "unit": unit, "named": ""})
+        if not frees and re.search(r"prorated", cl, re.I):
+            for m in FREE_SPECIAL.finditer(cl):
+                q = 1.5 if "and a half" in m.group("q").lower() else num(m.group("q"))
+                if q:
+                    frees.append({"s": m.start(), "e": m.end(), "lo": q, "hi": q, "upto": False, "unit": "month", "named": ""})
         if not frees:
             for m in FREE_NOQ.finditer(cl):
                 frees.append({"s": m.start(), "e": m.end(), "lo": 1, "hi": 1, "upto": False, "unit": "month",
@@ -333,6 +343,11 @@ def parse_piece(text, beds):
                 mo = next(n for n in MONTHNAMES if n.startswith(m.group(1).lower()[:3]))
                 frees.append({"s": m.start(), "e": m.end(), "lo": 1, "hi": 1, "upto": False, "unit": "month",
                               "named": f"{mo.title()} {m.group(2) or YEAR}"})
+        named_units = [x.strip("*") for m in UNIT_LIST.finditer(cl) for x in re.findall(r"[A-Z]?\d{3,4}", m.group(1))]
+        if named_units and unit_no not in named_units:
+            if frees:
+                out["named_only"].append(", ".join(named_units))
+            frees = []
         leases = [(m.start(), m) for m in LEASE.finditer(cl)]
         for i, f in enumerate(frees):
             nxt = frees[i + 1]["s"] if i + 1 < len(frees) else len(cl)
@@ -383,15 +398,17 @@ def parse_piece(text, beds):
             out["credits"].append({"amt": amt, "clause": cl, "upto": bool(re.search(r"up to\s*$", cl[:m.start()], re.I)),
                                    "select": bool(SELECT.search(cl)), "looklease": bool(LOOKLEASE.search(cl)),
                                    "recurring": bool(re.search(r"monthly|per month|/mo", cl[m.end() - 5:m.end() + 30], re.I))})
-        if dep and re.search(r"\$\s?\d+|reduc|special|50% off|0%|waiv|low", cl, re.I):
+        if dep and re.search(r"\$\s?\d+|reduc|special|50% off|0%|waiv|low|half month", cl, re.I):
             out["deposit"] = True
         if FEEWAIVE.search(cl):
             out["fee"] = True
         if LOOKLEASE.search(cl):
             out["looklease"] = True
         if frees and not out["timing"]:
-            if SPREAD.search(cl):
+            if SPREAD.search(cl) or re.search(r"special (?:which will be )?prorated within", cl, re.I):
                 out["timing"] = "spread_monthly"
+            elif SECOND_MONTH.search(cl):
+                out["timing"] = "specific_months: month 2"
             elif any(f["named"] == "month 13" for f in frees) or ENDLEASE.search(cl):
                 out["timing"] = "end_of_lease"
             elif any(f["named"] and f["named"] not in ("first month",) for f in frees):
@@ -446,7 +463,7 @@ def build_row(u, facts, live):
                                     r"total_units_count|year_built)=[^;]*", "", u.get("notes", ""))):
         pieces.append(("notes", s, u["url"]))
     ev_gross_confirmed = False
-    ev_gross = None
+    ev_gross = ev_net = None
     for r in facts.get(akey, []):
         t = clean(r.get("quote") or r.get("value") or "")
         if t:
@@ -464,21 +481,25 @@ def build_row(u, facts, live):
         mg = re.search(r"gross rent is \$\s?([\d,]+)", n, re.I)
         if mg:
             ev_gross = int(mg.group(1).replace(",", ""))
+        mn = EV_NET.search(n)
+        if mn:
+            ev_net = int(mn.group(1).replace(",", ""))
 
     # de-duplicate (stored text usually repeats the page's special)
     seen, uniq = [], []
     for origin, t, url in pieces:
         k = re.sub(r"\W+", "", t.lower())
-        if not k or any(k in s or (len(k) > 40 and s in k) for s in seen):
+        if not k or any(k in s or (len(k) > 40 and s in k) or (origin == "stored" and len(k) > 70 and k[20:60] in s)
+                        for s in seen):
             continue
         seen.append(k)
         uniq.append((origin, t, url))
     pieces = uniq
 
     # ---- parse
-    P = [(o, t, url, parse_piece(t, beds)) for o, t, url in pieces]
+    P = [(o, t, url, parse_piece(t, beds, unit_no)) for o, t, url in pieces]
     offers = [dict(f, origin=o) for o, t, url, p in P for f in p["offers"]]
-    credits = [c for o, t, url, p in P for c in p["credits"]]
+    credits = list({c["amt"]: c for o, t, url, p in P for c in p["credits"]}.values())
     piece_select = {id(f): p["select"] for o, t, url, p in P for f in p["offers"]}
     net = any(p["net"] for *_, p in P)
     net_neg = any(p["net_neg"] for *_, p in P)
@@ -499,6 +520,8 @@ def build_row(u, facts, live):
     week_offers = [f for f in offers if f["unit"] == "week"]
 
     # ---- choose the offer that applies to this unit's price
+    conv = (12 / 52) if (week_offers and not month_offers) else 1
+    options = []
     chosen, definite = None, False
     f_lo = f_hi = None
     l_lo = l_hi = None
@@ -507,6 +530,11 @@ def build_row(u, facts, live):
         def key(f):
             return (f["lo"], f["hi"], f["lease_lo"], f["lease_hi"])
         distinct = {key(f): f for f in pool}
+        for k0 in [k for k in distinct if k[2] is None]:      # same amount stated again without the lease term
+            if any(k[:2] == k0[:2] and k[2] is not None for k in distinct):
+                del distinct[k0]
+        options = [(f["lo"], f["hi"], f["lease_lo"] if f["lease_lo"] and f["lease_lo"] == f["lease_hi"] else None)
+                   for f in distinct.values()]
         match = [f for f in distinct.values() if lease_unit and f["lease_lo"] and f["lease_lo"] <= lease_unit <= f["lease_hi"]]
         netpair = [f for f in distinct.values() if NET_STMT.search(f["clause"]) and not NET_NEG.search(f["clause"])]
         if len(match) == 1:
@@ -562,7 +590,7 @@ def build_row(u, facts, live):
     if pool and lease is None:
         definite = False
         lease_assumed = True
-    if lease_unit and lease_unit != 12:
+    if lease_unit and lease_unit != 12 and not any(f"{lease_unit}-month lease" in c or f"for {lease_unit} months" in c for c in cond):
         cond.append(f"listed price is for a {lease_unit}-month lease")
 
     # ---- offer type
@@ -571,7 +599,7 @@ def build_row(u, facts, live):
         otype = "months_free"
     elif week_offers:
         otype = "weeks_free"
-    elif credits and any(c["looklease"] for c in credits):
+    elif credits and looklease:
         otype = "look_and_lease"
     elif credits:
         otype = "dollar_credit"
@@ -588,6 +616,9 @@ def build_row(u, facts, live):
         cond.append("page also offers a deposit reduction or fee/parking waiver (no change to rent)")
     if free_rent and credits:
         cond.append("plus dollar credit(s): " + ", ".join("$" + fnum(c["amt"]) for c in credits))
+    named_only = [x for *_, p in P for x in p["named_only"]]
+    if named_only:
+        cond.append("a free month on the page is for named units only (" + "; ".join(dict.fromkeys(named_only)) + "), not this unit")
     if renewal:
         cond.append("a further free month is offered on renewal (not part of this lease)")
     if not_for_unit:
@@ -605,7 +636,7 @@ def build_row(u, facts, live):
         cond.append(page_problem)
 
     # free months as months (weeks converted at 12/52)
-    conv = (12 / 52) if is_week else 1
+
     fm_lo = f_lo * conv if f_lo is not None else None
     fm_hi = f_hi * conv if f_hi is not None else None
     if not free_rent:
@@ -625,6 +656,21 @@ def build_row(u, facts, live):
     if the_gross is None and len(gross_stated) == 1 and not unit_gross and listed and gross_stated[0] >= listed:
         the_gross = gross_stated[0]
     L = lease or (12 if lease_assumed else None)
+
+    def scen(net_side):
+        """Scenario range over the page's options (each with its own lease term, else L)."""
+        vals = []
+        opts = options if (pool and not chosen) else [(f_lo, f_hi, None)]
+        for lo, hi, ol in opts:
+            ll = ol or L
+            for fq in {lo * conv, hi * conv}:
+                if ll and ll > fq:
+                    vals.append(listed * (ll - fq) / ll if net_side else listed * ll / (ll - fq))
+        if not vals:
+            return ""
+        a, b = round(min(vals)), round(max(vals))
+        return fnum(a) if a == b else f"{fnum(a)}-{fnum(b)}"
+    ev_stated = False
 
     if listed is None:
         price_is, confidence, needs_call = "unknown", "assumed_terms", "yes"
@@ -647,7 +693,11 @@ def build_row(u, facts, live):
     elif ev_gross_confirmed:
         price_is, gross = "gross", listed
         how.append("evidence: building's own table shows the stored price as the gross rent")
-        if free_rent and definite and L and not lease_assumed:
+        if ev_net and free_rent:
+            netv, ev_stated = float(ev_net), True
+            how.append(f"own site shows net-effective ${ev_net} for the same unit"
+                       + (f"; check: {fnum(gross)} x ({L} - {fnum(fm_lo)}) / {L} = {fnum(round(gross * (L - fm_lo) / L))}" if L and fm_lo == fm_hi else ""))
+        elif free_rent and definite and L and not lease_assumed:
             netv = gross * (L - fm_lo) / L
             how.append(f"net = {fnum(gross)} x ({L} - {fnum(fm_lo)}) / {L}")
             confidence = "computed_from_stated_terms"
@@ -663,16 +713,15 @@ def build_row(u, facts, live):
             confidence, needs_call = "assumed_terms", "yes"
             how.append("page says price is net-effective but the free months and/or lease term for this unit are not definite: gross not computed")
             if fm_hi and L:
-                g_if_net = (f"{fnum(round(listed * L / (L - fm_lo)))}-" if fm_lo != fm_hi else "") + fnum(round(listed * L / (L - fm_hi)))
-                how.append(f"scenario: listed x {L} / ({L} - free)" + (" with lease assumed 12 months" if lease_assumed else ""))
+                g_if_net = scen(False)
+                how.append("scenario: listed x lease / (lease - free)" + ("; 12-month lease assumed where the offer states none" if lease_assumed else f"; lease {L}"))
     elif free_rent:
         price_is, confidence, needs_call = "unknown", "assumed_terms", "yes"
         how.append("page does not say whether the listed price is gross or net of the free rent: gross not set")
         if fm_hi and L and L > fm_hi:
-            g_if_net = (f"{fnum(round(listed * L / (L - fm_lo)))}-" if fm_lo != fm_hi else "") + fnum(round(listed * L / (L - fm_hi)))
-            n_if_gross = (f"{fnum(round(listed * (L - fm_hi) / L))}-" if fm_lo != fm_hi else "") + fnum(round(listed * (L - fm_lo) / L))
-            how.append(f"scenarios: gross_if_listed_is_net = listed x {L} / ({L} - free); net_if_listed_is_gross = listed x ({L} - free) / {L}"
-                       + ("; lease term not stated, 12 assumed for the scenarios only" if lease_assumed else ""))
+            g_if_net, n_if_gross = scen(False), scen(True)
+            how.append("scenarios: gross_if_listed_is_net = listed x lease / (lease - free); net_if_listed_is_gross = listed x (lease - free) / lease"
+                       + ("; 12-month lease assumed where the offer states none (scenarios only)" if lease_assumed else f"; lease {L}"))
     elif otype in ("dollar_credit", "look_and_lease") and credits:
         price_is, gross = "gross", listed
         c = credits[0]
@@ -685,12 +734,15 @@ def build_row(u, facts, live):
         else:
             confidence, needs_call = "assumed_terms", "yes"
             how.append("monthly rent unchanged (gross = listed); credit amount, eligibility or lease term for this unit not definite, so net not computed")
-    elif otype == "reduced_deposit_or_fee":
+    elif otype == "reduced_deposit_or_fee" and not UNCLEAR.search(" ".join(t for _, t, _ in pieces)):
         price_is, gross, netv = "gross", listed, listed
         how.append("deposit / fee offer only: monthly rent unchanged, gross = listed")
-    elif otype == "other":
+    elif otype == "other" or (otype == "reduced_deposit_or_fee" and UNCLEAR.search(" ".join(t for _, t, _ in pieces))):
         txt = " ".join(t for _, t, _ in pieces)
-        if net_neg or VAGUE.search(txt):
+        if otype != "other":
+            otype = "other"
+            cond.append("wording of a possible rent concession is unclear on the page")
+        if net_neg or not_for_unit or VAGUE.search(txt) or UNCLEAR.search(txt):
             price_is, confidence, needs_call = "unknown", "assumed_terms", "yes"
             how.append("offer language without terms: cannot tell whether a rent concession is built into the listed price")
         else:
@@ -702,9 +754,7 @@ def build_row(u, facts, live):
 
     if free_rent and gross is not None and not timing:
         needs_call = "yes"
-    if free_rent and not definite and confidence != "assumed_terms" and price_is != "net_effective":
-        confidence, needs_call = "assumed_terms", "yes"
-    if free_rent and not definite and the_gross is None:
+    if free_rent and not definite and the_gross is None and not ev_stated:
         confidence, needs_call = "assumed_terms", "yes"
 
     # ---- first full payment
@@ -740,6 +790,9 @@ def build_row(u, facts, live):
                 ffp_note = f"{mi_note}; concession spread over the lease: net rent paid monthly, gross first charged at renewal after {lease} months"
             else:
                 ffp_note = "concession spread monthly; lease term not stated, so the renewal date is unknown"
+        elif timing == "specific_months: month 2":
+            ffp = (move_in if move_in.day == 1 else add_months(first_of_month_on_or_after(move_in), 1)).isoformat()
+            ffp_note = f"{mi_note}; free month is the second month of the lease; first month is paid in full (prorated first if move-in is mid-month)"
         elif timing.startswith("specific_months"):
             mm = re.findall(r"(" + "|".join(n.title() for n in MONTHNAMES) + r") (20\d\d)", timing)
             if mm:
@@ -806,7 +859,7 @@ def write_note(rows, units):
 
     def name(r):
         u = by[r["listing_id"]]
-        return f"{u.get('building_name') or u.get('address')} {('#' + u['unit']) if u.get('unit') else ''}".strip()
+        return f"{u.get('building_name') or u.get('address')} {('#' + u['unit']) if u.get('unit') else ''}".strip().replace("|", "/")
 
     L = ["# Rent terms (scripts/rent_terms.py -> data/rent_terms.csv)", "",
          "Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evidence/*.csv. No network "
@@ -848,7 +901,7 @@ def write_note(rows, units):
           f"in {len({r['addr_key'] for _, r in over_scen})} buildings.", ""]
     bl = defaultdict(list)
     for h, r in over_scen:
-        bl[by[r["listing_id"]].get("building_name") or by[r["listing_id"]].get("address")].append((h, r))
+        bl[(by[r["listing_id"]].get("building_name") or by[r["listing_id"]].get("address")).replace("|", "/")].append((h, r))
     if bl:
         L += ["| building | units | listed range | scenario gross (max) | free months / lease |", "|---|---|---|---|---|"]
         for b, xs in sorted(bl.items(), key=lambda kv: -max(h for h, _ in kv[1])):

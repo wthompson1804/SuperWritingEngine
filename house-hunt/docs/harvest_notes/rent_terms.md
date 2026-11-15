@@ -4,19 +4,19 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 - Units checked: **1524** (one row each; `offer_type = none` for units with no such language).
 - Units with any concession, special-offer or price-basis language: **516**.
-- Units whose price or offer is for a lease term other than 12 months: **310**.
-- Units that need a call (`needs_call = yes`): **487** in 86 buildings.
+- Units whose price or offer is for a lease term other than 12 months: **324**.
+- Units that need a call (`needs_call = yes`): **490** in 89 buildings.
 
 ## Counts by offer_type
 
 | offer_type | units |
 |---|---|
 | none | 1008 |
-| months_free | 437 |
-| other | 55 |
-| reduced_deposit_or_fee | 17 |
-| dollar_credit | 5 |
-| look_and_lease | 2 |
+| months_free | 438 |
+| other | 51 |
+| reduced_deposit_or_fee | 18 |
+| dollar_credit | 6 |
+| look_and_lease | 3 |
 
 ## Listed price basis
 
@@ -30,38 +30,47 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 | confidence | units |
 |---|---|
-| stated_on_page | 1039 |
-| assumed_terms | 485 |
+| stated_on_page | 1038 |
+| assumed_terms | 481 |
+| computed_from_stated_terms | 5 |
 
 ## Free-period timing
 
 | timing | units |
 |---|---|
-| (no free period) | 1087 |
-| unknown | 425 |
+| (no free period) | 1086 |
+| unknown | 427 |
 | end_of_lease | 7 |
-| specific_months | 3 |
 | upfront | 2 |
+| specific_months | 1 |
+| spread_monthly | 1 |
 
 ## Gross rent above the listed price (stated or computed from stated terms)
 
-**2** units have a determined gross rent above the listed price.
+**7** units have a determined gross rent above the listed price.
 
 | unit | listed | gross | gap | free months / lease | confidence |
 |---|---|---|---|---|---|
 | Alvista Rise #2410 | 2365 | 2800 | 435 | 2.5 / 18 | stated_on_page |
 | Alvista Rise #1922 | 2435 | 2825 | 390 | 2.5 / 18 | stated_on_page |
+| Harmony West | 2562 | 2776 | 214 | 1 / 13 | computed_from_stated_terms |
+| Harmony West | 2492 | 2700 | 208 | 1 / 13 | computed_from_stated_terms |
+| Harmony West | 2423 | 2625 | 202 | 1 / 13 | computed_from_stated_terms |
+| Harmony West | 2377 | 2575 | 198 | 1 / 13 | computed_from_stated_terms |
+| Harmony West | 2077 | 2250 | 173 | 1 / 13 | computed_from_stated_terms |
 
 ## Largest possible gaps where the basis is unknown (scenario: listed price is net-effective)
 
-433 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
+429 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
 
 | unit | listed | gross if listed is net | gap | free months / lease | basis |
 |---|---|---|---|---|---|
 | Aviva #E0809 | 2797 | 4040 | 1243 | 4 / 13 | net_effective |
+| Aviva #E0824 | 2780 | 4016 | 1236 | 4 / 13 | net_effective |
 | Aviva #E0710 | 2780 | 4016 | 1236 | 4 / 13 | net_effective |
 | Aviva #E0708 | 2772 | 4004 | 1232 | 4 / 13 | net_effective |
 | Aviva #E0808 | 2772 | 4004 | 1232 | 4 / 13 | net_effective |
+| Aviva #E0424 | 2760 | 3987 | 1227 | 4 / 13 | net_effective |
 | Aviva #E0410 | 2760 | 3987 | 1227 | 4 / 13 | net_effective |
 | Aviva #E0709 | 2756 | 3981 | 1225 | 4 / 13 | net_effective |
 | Aviva #E0510 | 2747 | 3968 | 1221 | 4 / 13 | net_effective |
@@ -81,17 +90,15 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Aviva #W0722 | 2677 | 3867 | 1190 | 4 / 13 | net_effective |
 | Aviva #W0709 | 2677 | 3867 | 1190 | 4 / 13 | net_effective |
 | Aviva #W0522 | 2644 | 3819 | 1175 | 4 / 13 | net_effective |
-| Aviva #W0509 | 2644 | 3819 | 1175 | 4 / 13 | net_effective |
-| Aviva #W1022 | 2616 | 3779 | 1163 | 4 / 13 | net_effective |
 
 ## Gross rent over $3,000 (rent only, all-in aside)
 
 - Determined gross over $3,000: **0** units.
-- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **201** units in 24 buildings.
+- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **188** units in 23 buildings.
 
 | building | units | listed range | scenario gross (max) | free months / lease |
 |---|---|---|---|---|
-| Aviva | 62 | 2348-2797 | 4040 | 4 / 13 |
+| Aviva | 64 | 2348-2797 | 4040 | 4 / 13 |
 | The Jefferson | 3 | 2740-2840 | 3787 | 3 / 12 assumed |
 | The Alary | 8 | 2538-2773 | 3697 | 3 / 12 assumed |
 | 360 State | 47 | 2257-2646 | 3528 | 3 / 12 assumed |
@@ -100,21 +107,20 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | The Current on River | 4 | 2595-2825 | 3390 | 2 / 12 |
 | Riello Edgewater | 1 | 2800-2800 | 3360 | 2 / 12 assumed |
 | Skyline New Rochelle | 7 | 2640-2795 | 3354 | 2 / 12 assumed |
-| The Atwater | 26 | 2538-2785 | 3342 | 1-2 / 12 assumed |
+| The Atwater | 13 | 2538-2785 | 3342 | 2 / 12 |
 | Arc House | 2 | 2300-2500 | 3333 | 3 / 12 assumed |
 | West Side Square | 1 | 2636-2636 | 3330 | 2.5 / 12 assumed |
-| The Liberty Building | 2 | 2277-2477 | 3303 | 2-3 / 12 assumed |
 | Hudson 44 | 3 | 2595-2750 | 3300 | 2 / 12 assumed |
 | Bedford Hall Apartments | 5 | 2635-2735 | 3282 | 2 / 12 assumed |
 | Carraway | 2 | 2700-2795 | 3194 | 1.5 / 12 |
 | Atlas | 2 | 2573-2651 | 3181 | 2 / 12 |
+| Parc at Glenbrook Apartments | 1 | 2598-2598 | 3118 | 1.5-2 / 12 assumed |
 | Metrovue | 4 | 2825-2825 | 3082 | 1 / 12 |
-| Fairfield Metro at Glen Cove | 1 | 2820-2820 | 3076 | 1 / 12 assumed |
-| Noble' | 1 | 2550-2550 | 3060 | 0-2 / 12 assumed |
+| The Liberty Building | 1 | 2477-2477 | 3049 | 2-3 / 12 assumed |
 | Admirals Cove | 1 | 2795-2795 | 3049 | 1 / 12 assumed |
 | The Mitchell | 1 | 2781-2781 | 3034 | 1 / 12 assumed |
 | 1 Martine at City Square | 1 | 2775-2775 | 3027 | 1 / 12 assumed |
-| 80East | Luxury Apartments | Dover, NJ | 2 | 2800-2800 | 3015 | 1 / 14 |
+| 80East / Luxury Apartments / Dover, NJ | 2 | 2800-2800 | 3015 | 1 / 14 |
 
 ## Method and limits
 

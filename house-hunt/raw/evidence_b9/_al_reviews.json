@@ -1,0 +1,239 @@
+{
+ "12 van riper rd|07645": {
+  "url": "https://www.apartmentlist.com/nj/montvale/woodland-square",
+  "at": "2026-11-15T21:13:36+00:00",
+  "agg": {
+   "@type": "AggregateRating",
+   "ratingValue": 4.5,
+   "ratingCount": 2,
+   "reviewCount": 2,
+   "bestRating": 5,
+   "worstRating": 1
+  },
+  "reviews": [
+   {
+    "propertyId": 82905455,
+    "propertyName": "Woodland Square",
+    "submitDate": "2025-04-24T19:53:29.000+00:00",
+    "detail": "Between the noise and parking needs to be on top of it as well the cleaning in the flooring in the common areas.",
+    "overallScore": 5,
+    "valueScore": 4,
+    "amenitiesScore": 4,
+    "locationScore": 5,
+    "managementScore": 5,
+    "maintenanceScore": 4,
+    "parkingScore": 1,
+    "noiseScore": 1,
+    "type": "email",
+    "moderated": "keep"
+   }
+  ]
+ },
+ "1 washington ave|07960": {
+  "url": "https://www.apartmentlist.com/nj/morristown/alister-morristown",
+  "at": "2026-11-15T21:13:39+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "100 fieldstone dr|07856": {
+  "url": "https://www.apartmentlist.com/nj/mount-arlington/woodmont-west",
+  "at": "2026-11-15T21:13:42+00:00",
+  "agg": {
+   "@type": "AggregateRating",
+   "ratingValue": 4.3,
+   "ratingCount": 4,
+   "reviewCount": 4,
+   "bestRating": 5,
+   "worstRating": 1
+  },
+  "reviews": [
+   {
+    "propertyId": 909378,
+    "propertyName": "Woodmont West",
+    "submitDate": "2024-08-16T18:36:29.000+00:00",
+    "authorName": "Mohamed",
+    "detail": "Moving in the apartment was not cleaned. We had to do our own cleaning. Parking is challenging as the day goes on. Gym always have broken equipment. The club house is very nice and maintenances request are quickly handled. I'm not a fan of the administrative fees that are added every month",
+    "overallScore": 4,
+    "valueScore": 3,
+    "amenitiesScore": 2,
+    "locationScore": 4,
+    "managementScore": 3,
+    "maintenanceScore": 4,
+    "parkingScore": 1,
+    "noiseScore": 2,
+    "type": "email",
+    "moderated": "keep"
+   },
+   {
+    "propertyId": 909378,
+    "propertyName": "Woodmont West",
+    "submitDate": "2024-08-15T11:47:33.000+00:00",
+    "authorName": "Beth",
+    "detail": "We love it here! The apartment is fabulous. Management is very responsive to even the smallest request. The amenities are numerous, beautiful & easily accessible. I hope to live here for a very long time!",
+    "overallScore": 5,
+    "valueScore": 4,
+    "amenitiesScore": 5,
+    "locationScore": 5,
+    "managementScore": 5,
+    "maintenanceScore": 5,
+    "parkingScore": 5,
+    "noiseScore": 5,
+    "type": "email",
+    "moderated": "keep"
+   }
+  ]
+ },
+ "11 us hwy 1|08901": {
+  "url": "https://www.apartmentlist.com/nj/new-brunswick/the-edge-at-raritan-heights--1",
+  "at": "2026-11-15T21:13:44+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "1 richmond st|08901": {
+  "url": "https://www.apartmentlist.com/nj/new-brunswick/renaissance-plaza-square",
+  "at": "2026-11-15T21:13:46+00:00",
+  "agg": {
+   "@type": "AggregateRating",
+   "ratingValue": 4,
+   "ratingCount": 1,
+   "reviewCount": 1,
+   "bestRating": 5,
+   "worstRating": 1
+  },
+  "reviews": [
+   {
+    "propertyId": 21159,
+    "propertyName": "Renaissance Plaza Square",
+    "submitDate": "2024-08-15T11:29:01.000+00:00",
+    "authorName": "Brielle",
+    "detail": "Right on the bridge so traffic is loud at night, maintenance is usually good but our AC has been broken for a month and management has been dragging their feet to fix it. Garage parking is $150 a month. Gym and pool are very nice, apartment unit is beautiful, management keeps changing apparently.",
+    "overallScore": 4,
+    "valueScore": 5,
+    "amenitiesScore": 5,
+    "locationScore": 2,
+    "managementScore": 2,
+    "maintenanceScore": 2,
+    "parkingScore": 4,
+    "noiseScore": 2,
+    "type": "email",
+    "moderated": "keep"
+   }
+  ]
+ },
+ "7 livingston ave|08901": {
+  "url": "https://www.apartmentlist.com/nj/new-brunswick/premiere-residences",
+  "at": "2026-11-15T21:13:50+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "one chester circle|08901": {
+  "url": "https://www.apartmentlist.com/nj/new-brunswick/the-gardens-at-raritan--1",
+  "at": "2026-11-15T21:13:52+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "1180 raymond blvd|07102": {
+  "url": "https://www.apartmentlist.com/nj/newark/eleven80",
+  "at": "2026-11-15T21:13:55+00:00",
+  "agg": {
+   "@type": "AggregateRating",
+   "ratingValue": 5,
+   "ratingCount": 1,
+   "reviewCount": 1,
+   "bestRating": 5,
+   "worstRating": 1
+  },
+  "reviews": []
+ },
+ "4828 tonnelle ave|07047": {
+  "url": "https://www.apartmentlist.com/nj/north-bergen/the-rail-at-north-bergen",
+  "at": "2026-11-15T21:14:02+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "920 belmont ave|07508": {
+  "url": "https://www.apartmentlist.com/nj/north-haledon/molly-brook-on-belmont",
+  "at": "2026-11-15T21:14:04+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "1715 us hwy 46|07054": {
+  "url": "https://www.apartmentlist.com/nj/parsippany-troy-hills/halstead-parsippany--1",
+  "at": "2026-11-15T21:14:06+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "1515 route 10|07054": {
+  "url": "https://www.apartmentlist.com/nj/parsippany-troy-hills/the-district-at-15fifteen--1",
+  "at": "2026-11-15T21:14:09+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "7000 avalon way|08854": {
+  "url": "https://www.apartmentlist.com/nj/dunellen/avalon-piscataway",
+  "at": "2026-11-15T21:14:11+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "1636 stelton rd|08854": {
+  "url": "https://www.apartmentlist.com/nj/piscataway/the-villas-at-fairway--1",
+  "at": "2026-11-15T21:14:14+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "1222 s ave|07062": {
+  "url": "https://www.apartmentlist.com/nj/plainfield/centurion-sleepy-hollow",
+  "at": "2026-11-15T21:14:17+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "81 monroe st|07065": {
+  "url": "https://www.apartmentlist.com/nj/rahway/the-mint",
+  "at": "2026-11-15T21:14:20+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "6000 riverdale rd|07457": {
+  "url": "https://www.apartmentlist.com/nj/riverdale/reserve-at-riverdale",
+  "at": "2026-11-15T21:14:23+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "417 raritan rd|07203": {
+  "url": "https://www.apartmentlist.com/nj/roselle/the-park",
+  "at": "2026-11-15T21:14:25+00:00",
+  "agg": null,
+  "reviews": []
+ },
+ "1101 klimek pl|08879": {
+  "url": "https://www.apartmentlist.com/nj/sayreville/morgan-s-bluff--1",
+  "at": "2026-11-15T21:14:28+00:00",
+  "agg": {
+   "@type": "AggregateRating",
+   "ratingValue": 5,
+   "ratingCount": 1,
+   "reviewCount": 1,
+   "bestRating": 5,
+   "worstRating": 1
+  },
+  "reviews": [
+   {
+    "propertyId": 59655470,
+    "propertyName": "Morgan's Bluff",
+    "submitDate": "2024-08-19T12:06:41.000+00:00",
+    "authorName": "Patrick",
+    "detail": "Morgans bluff is tremendous, might just continue my residency.",
+    "overallScore": 5,
+    "valueScore": 5,
+    "amenitiesScore": 5,
+    "locationScore": 5,
+    "managementScore": 5,
+    "maintenanceScore": 5,
+    "parkingScore": 5,
+    "noiseScore": 5,
+    "type": "email",
+    "moderated": "keep"
+   }
+  ]
+ }
+}

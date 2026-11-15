@@ -66,3 +66,14 @@
 {"url": "https://www.crimemapping.com/robots.txt", "retrieved_at": "2026-11-15T21:32:13+00:00", "status": 404, "path": "raw/non_nyc_records/00675ef0ac774943.txt", "source": "non_nyc_records"}
 {"url": "https://www.crimemapping.com/Home/TermsAndConditions", "retrieved_at": "2026-11-15T21:32:16+00:00", "status": 200, "path": "raw/non_nyc_records/ffcf7a8179a1f199.html", "source": "non_nyc_records"}
 {"url": "https://cityprotect.com/robots.txt", "retrieved_at": "2026-11-15T21:32:16+00:00", "status": 404, "path": "raw/non_nyc_records/9737a523b49c7631.txt", "source": "non_nyc_records"}
+{"url": "https://cityprotect.com/terms", "retrieved_at": "2026-11-15T21:32:19+00:00", "status": 200, "path": "raw/non_nyc_records/fe1e4e58614f3a04.html", "source": "non_nyc_records"}
+{"url": "https://www.cityofwhiteplains.com/", "retrieved_at": "2026-11-15T21:32:47+00:00", "status": 200, "path": "raw/non_nyc_records/64f5c457af08534c.html", "source": "non_nyc_records"}
+{"url": "https://www.yonkersny.gov/robots.txt", "retrieved_at": "2026-11-15T21:32:48+00:00", "status": 403, "path": "raw/non_nyc_records/7e59b60b0020b625.txt", "source": "non_nyc_records"}
+{"url": "https://www.stamfordct.gov/robots.txt", "retrieved_at": "2026-11-15T21:32:48+00:00", "status": 403, "path": "raw/non_nyc_records/a55e89cdb2bb788e.txt", "source": "non_nyc_records"}
+{"url": "https://www.hackensack.org/robots.txt", "retrieved_at": "2026-11-15T21:32:49+00:00", "status": 200, "path": "raw/non_nyc_records/10759342416dfad3.txt", "source": "non_nyc_records"}
+{"url": "https://www.hackensack.org/", "retrieved_at": "2026-11-15T21:33:09+00:00", "status": 200, "path": "raw/non_nyc_records/d5edeaf41530ca98.html", "source": "non_nyc_records"}
+{"url": "https://www.bayonnenj.org/robots.txt", "retrieved_at": "2026-11-15T21:33:09+00:00", "status": 200, "path": "raw/non_nyc_records/19df973f2da85329.txt", "source": "non_nyc_records"}
+{"url": "https://www.bayonnenj.org/", "retrieved_at": "2026-11-15T21:33:12+00:00", "status": 200, "path": "raw/non_nyc_records/ecfb029527adfd43.html", "source": "non_nyc_records"}
+{"url": "https://www.townofharrison.com/robots.txt", "retrieved_at": "2026-11-15T21:33:12+00:00", "status": 200, "path": "raw/non_nyc_records/256b50703348805b.txt", "source": "non_nyc_records"}
+{"url": "https://www.townofharrison.com/", "retrieved_at": "2026-11-15T21:33:15+00:00", "status": 200, "path": "raw/non_nyc_records/e1ec70be8ab256cd.html", "source": "non_nyc_records"}
+{"url": "https://www.newarknj.gov/robots.txt", "retrieved_at": "2026-11-15T21:33:16+00:00", "status": 403, "path": "raw/non_nyc_records/a4cb925a8b142efc.txt", "source": "non_nyc_records"}
