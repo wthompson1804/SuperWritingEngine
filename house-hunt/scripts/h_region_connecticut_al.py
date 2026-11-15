@@ -42,7 +42,8 @@ def main():
     cities = sys.argv[1:] or CITIES
     for c in cities:
         try:
-            found = discover(c)
+            # an argument starting with "/" is one property slug (found by web search), not a city page
+            found = {c: None} if c.startswith("/") else discover(c)
         except al.Blocked as e:
             print("BLOCKED discover", c, e); break
         n = 0

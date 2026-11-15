@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1115,
- "detail_pages": 1824,
+ "srp_pages": 1127,
+ "detail_pages": 1839,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1865,6 +1865,30 @@
    "drive_min": 98.7,
    "props": 2,
    "rows": 0
+  },
+  {
+   "city": "nj/rumson",
+   "drive_min": 98.8,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ct/ansonia",
+   "drive_min": 99.2,
+   "props": 4,
+   "rows": 4
+  },
+  {
+   "city": "nj/oakhurst",
+   "drive_min": 99.8,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ct/west-haven",
+   "drive_min": 99.9,
+   "props": 10,
+   "rows": 15
   }
  ],
  "cities_unmatched_far": [
@@ -1889,10 +1913,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2705,
+ "props_discovered": 2720,
  "props_skipped_lowprice_gt_3000": 881,
  "reasons": {
-  "ok": 1814,
+  "ok": 1829,
   "no_unit_le_3000": 9,
   "no_listing_object": 1
  },
