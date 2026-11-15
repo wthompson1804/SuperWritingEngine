@@ -1,4 +1,4 @@
-# Run report (2026-11-15T23:09:54+00:00)
+# Run report (2026-11-15T23:11:55+00:00)
 
 ## Steps
 
@@ -23,13 +23,13 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2575 | 2575 | +0 |
 | within the $3,000 all-in cap | 1653 | 1653 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 997 | 1069 | -72 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 346 | 360 | -14 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 995 | 997 | -2 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 344 | 346 | -2 |
 | avoid cards | 36 | 36 | +0 |
-|   shown with an asterisk (one thing to confirm) | 196 | 218 | -22 |
-| held back for one confirmation | 63 | 91 | -28 |
-| clean, waiting for a live check (not shown) | 61 | 93 | -32 |
-| neighborhoods with 3+ shown places | 41 | 42 | -1 |
+|   shown with an asterisk (one thing to confirm) | 194 | 196 | -2 |
+| held back for one confirmation | 63 | 63 | +0 |
+| clean, waiting for a live check (not shown) | 61 | 61 | +0 |
+| neighborhoods with 3+ shown places | 41 | 41 | +0 |
 | buildings in the master table | 665 | 665 | +0 |
 
 ## Why units left
@@ -64,7 +64,7 @@
 | The Little-City Year      |              32 |      467 |     119 |             8 |
 | The Old-Neighborhood Year |              46 |      161 |      93 |            25 |
 | The Quiet-Street Year     |               8 |       14 |       9 |             0 |
-| The Room-to-Breathe Year  |              37 |      285 |      91 |             0 |
+| The Room-to-Breathe Year  |              37 |      283 |      89 |             0 |
 | The Walk-Everywhere Year  |               8 |       13 |      10 |             3 |
 
 ## Fill rate among shown units (percent with a value)
@@ -76,7 +76,7 @@
 | elevator_basis | 100 |
 | dog_weight_limit_lb | 16 |
 | parking_type | 77 |
-| parking_fee | 21 |
+| parking_fee | 22 |
 | pet_rent | 43 |
 | pool | 30 |
 | doorman | 26 |
@@ -84,7 +84,7 @@
 | toll_rt_ezpass | 36 |
 | transit_sat_median | 91 |
 | near_violent_250m_24m | 27 |
-| live_status | 95 |
+| live_status | 96 |
 | rent_first_full_payment_date | 71 |
 | ev_pause_notes | 31 |
 
@@ -140,9 +140,9 @@ units 2575; cost gate {'pass': 1653, 'fail': 922}; rent asterisk 1765; rent term
 
 **ranking and selection**
 ```
-evidence: 43 units excluded, shown 346, avoid cards 36, of them with an asterisk 196 ({'floor': 159, 'live check': 31, 'elevator': 4, 'dogs allowed': 2}), held for a confirmation 63, waiting for a live check 61
-stages: 2575 costed -> -922 over the all-in cap -> -363 Jamaica safety rule -> -72 failed a gate on confirmed facts -> -178 sketchy -> -43 evidence exclusions -> 997 ranked
-(kept 997 units; candidates 442; shown 411; pools: {'': 564, 'pool': 414, 'indoor': 19}
+evidence: 45 units excluded, shown 344, avoid cards 36, of them with an asterisk 194 ({'floor': 158, 'live check': 30, 'elevator': 4, 'dogs allowed': 2}), held for a confirmation 63, waiting for a live check 61
+stages: 2575 costed -> -922 over the all-in cap -> -363 Jamaica safety rule -> -72 failed a gate on confirmed facts -> -178 sketchy -> -45 evidence exclusions -> 995 ranked
+(kept 995 units; candidates 442; shown 411; pools: {'': 564, 'pool': 412, 'indoor': 19}
 ```
 
 **field registry, wiring check and shown-list assertions**

@@ -119,6 +119,14 @@ def main():
             ex.append((r.addr_key, "", "not open to her: " + _around(r.value, m), r.source_url))
     MU = pd.read_csv(DATA / "master_units.csv", dtype=str, keep_default_na=False, usecols=["addr_key", "unit"], low_memory=False)
     units_at = MU.groupby("addr_key").unit.apply(lambda x: sorted(set(x))).to_dict()
+    # a floor the checker CONFIRMED as 1 / ground is a gate failure too, not only a "contradicts" row (batch 13: J Centra)
+    for r in C[(C.status == "confirmed") & C.fact.str.lower().str.startswith("floor")].itertuples():
+        pairs, _ = parsers.parse_floor_confirm(r.value)
+        qlab = re.findall(r"\bUnit ([\w-]+)", r.quote or "")
+        for lab, fl_ in pairs:
+            if fl_ <= 1:
+                lab_ = lab if lab != "*" else (qlab[0] if len(qlab) == 1 else "")
+                ex.append((r.addr_key, lab_, "ground-floor unit (confirmed): " + f"{r.value} | {r.quote}"[:140], r.source_url))
     for r in C[C.status != "confirmed"].itertuples():
         f, t = r.fact.lower(), f"{r.value} | {r.quote}"
         if f.startswith("elevator") and r.status != "contradicts":
