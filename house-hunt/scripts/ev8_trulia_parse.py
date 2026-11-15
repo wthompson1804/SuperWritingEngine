@@ -1,6 +1,6 @@
 """Evidence batch 8: parse refetched Trulia building pages -> scratch JSON + compact print."""
 import json, re, sys
-S='/tmp/claude-0/-home-user-SuperWritingEngine/8b31bcc0-2748-5d89-ba10-9e09ecbeef66/scratchpad/'
+S='/tmp/claude-0/-home-user-SuperWritingEngine/8b31bcc0-2748-5d89-ba10-9e09ecbeef66/scratchpad/b8/'
 def strip(o):
     if isinstance(o,dict): return {k:strip(v) for k,v in o.items() if k!='__typename' and 'Url' not in k and k not in('media','photos','image','images')}
     if isinstance(o,list): return [strip(x) for x in o]
