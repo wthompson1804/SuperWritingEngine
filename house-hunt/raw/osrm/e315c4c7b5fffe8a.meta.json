@@ -1,0 +1,7 @@
+{
+ "url": "https://router.project-osrm.org/route/v1/driving/-73.808530,40.699608;-75.213556,40.030650?overview=full&geometries=geojson&steps=true&alternatives=3",
+ "retrieved_at": "2026-11-15T16:04:32+00:00",
+ "status": 200,
+ "path": "raw/osrm/e315c4c7b5fffe8a.json",
+ "source": "osrm"
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://services.arcgis.com/VTyQ9soqVukalItT/arcgis/rest/services/HUD_PDR_Small_Area_Fair_Market_Rents/FeatureServer/1/query?where=ID+in+%28%2712550%27%2C%2712601%27%2C%2719004%27%2C%2719127%27%2C%2719128%27%2C%2719129%27%2C%2719131%27%29&outFields=HUD_CODE%2CFMR_NAME%2CSAFMR_0BR%2CSAFMR_1BR%2CID&returnGeometry=false&orderByFields=ID&resultRecordCount=2000&f=json",
+ "retrieved_at": "2026-11-15T16:03:58+00:00",
+ "status": 200,
+ "path": "raw/hud_arcgis/82fb3ccd706aa745.json",
+ "source": "hud_arcgis"
+}

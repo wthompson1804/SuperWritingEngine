@@ -1,0 +1,7 @@
+{
+ "url": "https://services.arcgis.com/VTyQ9soqVukalItT/arcgis/rest/services/Fair_Market_Rents/FeatureServer/0/query?geometry=-73.640361%2C40.723102&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=FMR_CODE%2CFMR_AREANAME%2CFMR_0BDR%2CFMR_1BDR&returnGeometry=false&f=json",
+ "retrieved_at": "2026-11-15T16:04:29+00:00",
+ "status": 200,
+ "path": "raw/hud_arcgis/d19997cbd8543828.json",
+ "source": "hud_arcgis"
+}

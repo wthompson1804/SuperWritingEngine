@@ -1,0 +1,178 @@
+{
+ "lirr": {
+  "system": "LIRR",
+  "url": "https://rrgtfsfeeds.s3.amazonaws.com/gtfslirr.zip",
+  "retrieved_at": "2026-11-15T16:02:52+00:00",
+  "raw_path": "raw/big/gtfs_transit/057ceef46c272bf2.zip",
+  "sha1": "a07c74f6cf3af0fc0f63b3f44354b127910ea179",
+  "bytes": 1828527,
+  "service_start": "20261110",
+  "service_end": "20270228",
+  "tried_before": []
+ },
+ "mnr": {
+  "system": "MNR",
+  "url": "https://rrgtfsfeeds.s3.amazonaws.com/gtfsmnr.zip",
+  "retrieved_at": "2026-11-15T16:02:53+00:00",
+  "raw_path": "raw/big/gtfs_transit/56064835092b86fb.zip",
+  "sha1": "7e88cc709b5a9dc6ff248f48fa3c975db4762609",
+  "bytes": 4406702,
+  "service_start": "20261110",
+  "service_end": "20270523",
+  "tried_before": []
+ },
+ "subway": {
+  "system": "NYCT subway/SIR",
+  "url": "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip",
+  "retrieved_at": "2026-11-15T16:02:55+00:00",
+  "raw_path": "raw/big/gtfs_transit/49d6e956a3685eb1.zip",
+  "sha1": "2f891138deba814d2d278360becd4d9e1fa15d00",
+  "bytes": 5606305,
+  "service_start": "20261101",
+  "service_end": "20270515",
+  "tried_before": []
+ },
+ "njt_rail": {
+  "system": "NJT rail/light rail",
+  "url": "https://www.njtransit.com/rail_data.zip",
+  "retrieved_at": "2026-11-15T16:02:56+00:00",
+  "raw_path": "raw/big/gtfs_transit/168130d65ac1da0d.zip",
+  "sha1": "5c905559ed82755d5f0424fbef9abc1f006414b7",
+  "bytes": 6380384,
+  "service_start": "20260915",
+  "service_end": "20270313",
+  "tried_before": []
+ },
+ "njt_bus": {
+  "system": "NJT bus",
+  "url": "https://www.njtransit.com/bus_data.zip",
+  "retrieved_at": "2026-11-15T16:02:59+00:00",
+  "raw_path": "raw/big/gtfs_transit/86adc0b044a4a8c2.zip",
+  "sha1": "32a932af0d71fe9769d81ef9a85681d90ee1a03a",
+  "bytes": 49838859,
+  "service_start": "20261020",
+  "service_end": "20270417",
+  "tried_before": []
+ },
+ "path": {
+  "system": "PATH",
+  "url": "https://data.trilliumtransit.com/gtfs/path-nj-us/path-nj-us.zip",
+  "retrieved_at": "2026-11-15T16:03:00+00:00",
+  "raw_path": "raw/big/gtfs_transit/1734d3aa7d3a774e.zip",
+  "sha1": "c6635a7563ec11f19eebc1aad0542b776ebf27c7",
+  "bytes": 1214919,
+  "service_start": "20250316",
+  "service_end": "20260601",
+  "tried_before": []
+ },
+ "septa_rail": {
+  "system": "SEPTA Regional Rail",
+  "url": "https://www3.septa.org/developer/google_rail.zip",
+  "retrieved_at": "2026-11-15T16:03:00+00:00",
+  "raw_path": "raw/big/gtfs_transit/6de73de513367d9c.zip",
+  "sha1": "d7e541bb6747bb3ca77a9195ff6f3db548ad0a0a",
+  "bytes": 785153,
+  "service_start": "20261101",
+  "service_end": "20270220",
+  "tried_before": []
+ },
+ "si_ferry": {
+  "system": "Staten Island Ferry",
+  "url": "https://www.nyc.gov/html/dot/downloads/misc/siferry-gtfs.zip",
+  "retrieved_at": "2026-11-15T16:03:01+00:00",
+  "raw_path": "raw/big/gtfs_transit/7bd1844d892c3bd0.zip",
+  "sha1": "34d6bc485d02631cce789ae8a8c27d8e6551fd43",
+  "bytes": 9609,
+  "service_start": null,
+  "service_end": null,
+  "tried_before": []
+ },
+ "nyc_ferry": {
+  "system": "NYC Ferry",
+  "url": "https://nycferry.connexionz.net/rtt/public/resource/gtfs.zip",
+  "retrieved_at": "2026-11-15T16:03:01+00:00",
+  "raw_path": "raw/big/gtfs_transit/d5d1463cda495b67.zip",
+  "sha1": "beecdaa11aec917306f54a6526d47642d7f5ed15",
+  "bytes": 55327,
+  "service_start": "20261102",
+  "service_end": "20271231",
+  "tried_before": []
+ },
+ "ny_waterway": {
+  "system": "NY Waterway",
+  "url": "https://nywaterway.connexionz.net/rtt/public/resource/gtfs.zip",
+  "retrieved_at": "2026-11-15T16:03:01+00:00",
+  "raw_path": "raw/big/gtfs_transit/0ad5a80135b383b4.zip",
+  "sha1": "671332c76053ffe4c9fd1c408c4f354c0910295c",
+  "bytes": 25942,
+  "service_start": "20261101",
+  "service_end": "20271231",
+  "tried_before": []
+ },
+ "bus_q": {
+  "system": "NYCT Queens bus",
+  "url": "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_q.zip",
+  "retrieved_at": "2026-11-15T16:03:02+00:00",
+  "raw_path": "raw/big/gtfs_transit/a312448285a6ac48.zip",
+  "sha1": "e187996c79232c9be7b988e5316e057ee7db81a6",
+  "bytes": 5983145,
+  "service_start": "20261008",
+  "service_end": "20270102",
+  "tried_before": []
+ },
+ "bus_busco": {
+  "system": "MTA Bus Co",
+  "url": "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_busco.zip",
+  "retrieved_at": "2026-11-15T16:03:03+00:00",
+  "raw_path": "raw/big/gtfs_transit/a2f06657502ea2bf.zip",
+  "sha1": "dcb27efe9221c3d65e44d74fc51645e47ada1f14",
+  "bytes": 8446523,
+  "service_start": "20261009",
+  "service_end": "20270102",
+  "tried_before": []
+ },
+ "hudson_link": {
+  "system": "Hudson Link",
+  "url": "https://data.trilliumtransit.com/gtfs/hudsonlink-ny-us/hudsonlink-ny-us.zip",
+  "retrieved_at": "2026-11-15T16:03:04+00:00",
+  "raw_path": "raw/big/gtfs_transit/d66c5402ee976e9a.zip",
+  "sha1": "ae3c864bc3aea9dae33f62d83fab2fe37f422466",
+  "bytes": 173379,
+  "service_start": "20261001",
+  "service_end": "20270401",
+  "tried_before": []
+ },
+ "beeline": {
+  "system": "Bee-Line",
+  "url": "https://planning.westchestergov.com/images/stories/zip/GTFS.zip",
+  "retrieved_at": "2026-11-15T16:03:05+00:00",
+  "raw_path": "raw/big/gtfs_transit/99b6141e6536c0ed.zip",
+  "sha1": "ef98f69b9fcd2919681c5720c9440bad80c4966f",
+  "bytes": 3569641,
+  "service_start": "20250616",
+  "service_end": "20250831",
+  "tried_before": []
+ },
+ "suffolk_bus": {
+  "system": "Suffolk County Transit",
+  "url": "https://tracksctbus.org/gtfs",
+  "retrieved_at": "2026-11-15T16:03:09+00:00",
+  "raw_path": "raw/big/gtfs_transit/81447773cccbdcd1.zip",
+  "sha1": "d7812e6c0d9ef4a229957e88f204c6e80e7ad33f",
+  "bytes": 1860889,
+  "service_start": "20261031",
+  "service_end": "20991231",
+  "tried_before": []
+ },
+ "leprechaun": {
+  "system": "Leprechaun Lines",
+  "url": "https://s3.amazonaws.com/datatools-511ny/public/Leprechaun_Connection.zip",
+  "retrieved_at": "2026-11-15T16:03:10+00:00",
+  "raw_path": "raw/big/gtfs_transit/58f15694674b828d.zip",
+  "sha1": "0b742a749644c3e69a5b480241bad228c7e14980",
+  "bytes": 63537,
+  "service_start": "20181126",
+  "service_end": "20261231",
+  "tried_before": []
+ }
+}

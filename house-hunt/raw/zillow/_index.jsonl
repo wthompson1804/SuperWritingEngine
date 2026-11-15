@@ -1,2 +1,3 @@
 {"url": "https://files.zillowstatic.com/research/public_csvs/zori/Metro_zori_uc_mfr_sm_month.csv", "retrieved_at": "2026-11-15T16:01:19+00:00", "status": 200, "path": "raw/zillow/0efc3b418d5fa269.csv", "source": "zillow"}
 {"url": "https://www.zillow.com/research/data/", "retrieved_at": "2026-11-15T16:01:20+00:00", "status": 200, "path": "raw/zillow/9692d6f0947df7e6.html", "source": "zillow"}
+{"url": "https://files.zillowstatic.com/research/public_csvs/zori/Zip_zori_uc_mfr_sm_month.csv", "retrieved_at": "2026-11-15T16:03:55+00:00", "status": 404, "path": "raw/zillow/1fa2f9d076a9c213.csv", "source": "zillow"}

@@ -1,0 +1,7 @@
+{
+ "url": "https://webapi.legistar.com/v1/newark/matters?%24filter=substringof%28%27broker%27%2CMatterTitle%29&%24top=20",
+ "retrieved_at": "2026-11-15T16:04:27+00:00",
+ "status": 200,
+ "path": "raw/renter_protection/0cdca6df99a2fd0b.json",
+ "source": "renter_protection"
+}

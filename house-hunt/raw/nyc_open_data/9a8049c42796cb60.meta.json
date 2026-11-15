@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/qgea-i56i.json?%24select=date_extract_y%28rpt_dt%29+as+y%2C+date_extract_m%28rpt_dt%29+as+m%2C+ky_cd%2C+pd_cd%2C+count%28%2A%29+as+n&%24where=within_circle%28lat_lon%2C+40.580903%2C+-73.835592%2C+804.67%29+and+rpt_dt+%3E%3D+%272023-01-01T00%3A00%3A00%27+and+rpt_dt+%3C%3D+%272025-12-31T23%3A59%3A59%27+and+%28ky_cd+in+%28%27101%27%2C%27104%27%2C%27105%27%2C%27106%27%2C%27107%27%2C%27109%27%2C%27110%27%29+or+pd_cd+in+%28%27321%27%2C%27357%27%2C%27421%27%29%29&%24group=y%2C+m%2C+ky_cd%2C+pd_cd&%24limit=50000",
+ "retrieved_at": "2026-11-15T16:03:35+00:00",
+ "status": 200,
+ "path": "raw/nyc_open_data/9a8049c42796cb60.json",
+ "source": "nyc_open_data"
+}

@@ -29,7 +29,11 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import lib  # noqa: E402
 from lib import DATA, RAW, ROOT, USER_AGENT, cached_get, get_json, now_iso  # noqa: E402
+
+# data.cityofnewyork.us robots.txt sets Crawl-delay: 1 (lib default for this host is 0.3 s).
+lib.HOST_DELAY["data.cityofnewyork.us"] = 1.0
 
 NYC_FIPS = {"36005", "36047", "36061", "36081", "36085"}
 RADIUS_M = 804.67
@@ -345,8 +349,12 @@ def main():
                 notes=note + ("" if v[2] is not None else "; PDF shows ***.* (prior-year base 0)"))
         hy = cs["hist_year"]
         for cat, v in cs["hist"].items():
-            add(a, f"compstat_{cat}_full_year", v, "count", geo, hy, "nypd_compstat", url, meta, "found",
-                "pdfplumber parse, 'Historical Perspective' table (complete calendar year)", notes=note)
+            add(a, f"compstat_{cat}_full_year", v, "count", geo, hy, "nypd_compstat", url, meta,
+                "found" if v is not None else "not_found",
+                "pdfplumber parse, 'Historical Perspective' table (complete calendar year)",
+                notes=note + ("" if v is not None else "; PDF shows ***.* for this cell"))
+            if v is None:
+                continue
             pp = ppops.get(p)
             if pp:
                 add(a, f"compstat_{cat}_per1000_precinct", round(v / pp * 1000, 2), "per_1000", geo, hy,
