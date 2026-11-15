@@ -1,0 +1,19 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"1","value":[
+    {
+      "ultra_buildingid":"022f8d2a-b60e-ee11-8f6c-001dd80a9aba","ultra_name":"THE WYLDES","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0904042736001","ultra_addressline1":"1100 SOUTH 5TH STREET","ultra_block":"138.04","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"78586620-b60e-ee11-8f6c-001dd8040109","Name":"THE WYLDES"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8a2d7521-162f-e811-8126-1458d04eb810","Name":"HARRISON TOWN"
+      },"ultra_propertyportalsearchfield":"THE WYLDES","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"HARRISON TOWN","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"8c394a1a-b60e-ee11-8f6c-001dd8040109","Name":"BLOCK D PARTNERS URBAN RENEWAL I LLC"
+      },"ultra_zipcode":"07029","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

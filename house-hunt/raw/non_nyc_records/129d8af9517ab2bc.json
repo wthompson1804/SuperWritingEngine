@@ -1,0 +1,47 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"3","value":[
+    {
+      "ultra_buildingid":"7af371ab-50ab-477b-b0d6-12b0c9111f49","ultra_name":"STEELWORKS","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0904042714001","ultra_addressline1":"1200 FRANK E. RODGERS BLVD SOUTH BLVD","ultra_block":"138.05","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"5e0039a6-a92c-4791-9760-e9354cd7cb0c","Name":"STEEL WORKS APTS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8a2d7521-162f-e811-8126-1458d04eb810","Name":"HARRISON TOWN"
+      },"ultra_propertyportalsearchfield":"STEEL WORKS APTS","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"6ba01697-e6f8-45c9-a56d-09e52836adfc","Name":"BLOCK E PARTNERS URBAN RENEWAL I LLC"
+      },"ultra_zipcode":"07029","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"03565d6f-d72f-e811-8122-1458d04ece60","ultra_name":"STEELWORKS","ultra_registrationnumber":"0224-00107-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1200 FRANK E RODGERS BLVD","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"397be59f-9f2f-e811-8120-1458d04e2fb8","Name":"STEELWORKS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f42b7521-162f-e811-8126-1458d04eb810","Name":"HARRINGTON PARK BORO"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"74c0e2ae-b42f-e811-8122-1458d04ece60","Name":"BLOCK E PARTNERS URBAN RENEWAL"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"8a503c99-d72f-e811-8122-1458d04ece60","ultra_name":"STEELWORKS","ultra_registrationnumber":"0904-00144-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"1200 FRANK E RODGERS BLVD S","ultra_block":"138.05","ultra_lot":"1","ultra_propertyinterest":{
+        "Id":"c494d6c6-9f2f-e811-8120-1458d04e2fb8","Name":"STEELWORKS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8a2d7521-162f-e811-8126-1458d04eb810","Name":"HARRISON TOWN"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"163b3dc7-b42f-e811-8122-1458d04ece60","Name":"BLOCK E PARTNERS URBAN RENEWAL I LLC NADINE GOINS"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

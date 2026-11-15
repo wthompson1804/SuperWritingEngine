@@ -333,9 +333,52 @@ def igloo_row(r, idx):
     return None, looked
 
 
+CAT_TAG = {"elevator": "elevator_outage", "car_crime": "car_break_in", "safety_incident": "safety_incident", "noise": "noise"}
+
+
+def widget_rows():
+    """Google-review widgets on a building's own site: the round-1 evidence agents read these and stored dated excerpts
+    in items_batch_*.csv. One review can yield several items, so items sharing a date and source label count once."""
+    out = {}
+    for f in sorted(glob.glob(str(lib.DATA / "evidence" / "items_batch_*.csv"))):
+        for it in csv.DictReader(open(f)):
+            if "widget" in (it.get("source_site") or "").lower():
+                out.setdefault(it["addr_key"], []).append(it)
+    res = {}
+    for k, its in out.items():
+        revs = {}
+        for it in its:
+            revs.setdefault((it["item_date"], it["source_site"]), []).append(it)
+        r6 = n6 = nold = 0; tags = []; rating = count = ""
+        for (d, src), g in revs.items():
+            m = re.match(r"(\d{4})-(\d{2})(?:-(\d{2}))?", d or "")
+            dt = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3) or 15), tzinfo=timezone.utc) if m else None
+            neg = any(x["category"] in ("management", "elevator", "car_crime", "safety_incident", "noise") for x in g)
+            mm = re.search(r"page shows ([\d.]+) from (\d+) reviews", src)
+            if mm:
+                rating, count = mm.group(1), mm.group(2)
+            if dt and dt >= M6:
+                r6 += 1
+                if neg:
+                    n6 += 1
+                    for x in g:
+                        tags += tags_of(x.get("excerpt") or "") or ([CAT_TAG[x["category"]]] if x["category"] in CAT_TAG and "not theft" not in x["source_site"] else
+                                                                    (["unresponsive_management"] if x["category"] == "management" else []))
+            elif neg:
+                nold += 1
+        res[k] = dict(rating_source="building's own site widget (Google reviews; from round-1 evidence items)", rating_value=rating, rating_scale=5,
+                      review_count=count, as_of_date=its[0]["retrieved_at"][:10], reviews_read=len(revs), reviews_last_6_months=r6,
+                      negative_last_6_months=n6, negative_older=nold, serious_issue_tags_last_6_months=";".join(sorted(set(tags))),
+                      source_url=its[0]["source_url"], retrieved_at=its[0]["retrieved_at"],
+                      notes="counts are distinct (date, widget label) pairs among the excerpts the round-1 agent stored, not every review in the widget"
+                            + ("" if rating else "; the stored items do not state the widget's star average"))
+    return res
+
+
 def main():
     rows = list(csv.DictReader(open(lib.DATA / "reference/evidence_batches/all_candidate_buildings.csv")))
     idx = load_index()
+    widgets = widget_rows()
     out = []
     for i, r in enumerate(rows):
         found, looked = [], []
@@ -346,6 +389,8 @@ def main():
                 found.append(row)
         ar, lk = al_rows(r, idx)
         found += ar; looked += lk
+        if r["addr_key"] in widgets:
+            found.append(widgets[r["addr_key"]])
         if not found:
             found = [dict(rating_source="none_found", rating_scale=5, source_url="", retrieved_at=lib.now_iso(),
                           notes="looked at: " + " | ".join(looked) + " | Trulia building pages show no rating")]

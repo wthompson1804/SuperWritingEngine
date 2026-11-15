@@ -8,6 +8,11 @@ addr_key,unit,reason,source
 53 w 72nd st 4c new york ny 10023 usa|10023,4C,"checker judged the listing not open-market, not genuine, stale or duplicate: Zumper: active, 'Listed 13 Hours Ago' via TurboTenant feed, contact phone area code 612 (not a NYC code). A second active listing at this address shows $2,800 (",https://www.zumper.com/listings/2562116p/studio-upper-west-side-new-york-ny
 2925 w 5th st|11224,7A,"checker judged the listing not open-market, not genuine, stale or duplicate: page updated_at 2026-11-14T15:54:02.595Z; no own leasing site found (single-owner listing via Tenant Turner); WARNING: likely not a real rental: source link is ",https://www.apartmentlist.com/ny/brooklyn/2925-w-5th-st--1
 300 prospect ave|07601,02-122,listing gone at live check,https://www.apartmentlist.com/nj/hackensack/prospect-place--1
+1101 schindler dr|07747,5102,listing gone at live check,https://www.apartmentlist.com/nj/matawan/the-link-at-aberdeen-station
+1101 schindler dr|07747,1213,listing gone at live check,https://www.apartmentlist.com/nj/matawan/the-link-at-aberdeen-station
+467 w ave|06850,,dog policy contradicted or conflicting between sources: no (Trulia),https://www.trulia.com/building/piper-467-west-ave-norwalk-ct-06850-2753811727
+8 norden pl|06855,,dog policy contradicted or conflicting between sources: no (Trulia),https://www.trulia.com/building/halstead-norwalk-8-norden-pl-norwalk-ct-06855-1001652613
+1455 washington blvd|06902,,dog policy contradicted or conflicting between sources: no (Trulia),https://www.trulia.com/building/stamford-corners-1455-washington-blvd-stamford-ct-06902-1001522631
 100 river mews ln|07020,,ground-floor unit: 1 (ground floor),https://www.avaloncommunities.com/new-jersey/edgewater-apartments/avalon-at-edgewater
 73 brownstone way|07631,56-118,ground-floor unit: 09-426: floor 4; 56-118: floor 1 (ground floor),https://www.greystar.com/the-brownstones-at-englewood-south-englewood-nj/p_13462
 100 ave g|07002,,dog policy contradicted or conflicting between sources: no (Trulia),https://www.trulia.com/building/edge-apartments-100-avenue-g-bayonne-nj-07002-2737139405
@@ -24,6 +29,7 @@ addr_key,unit,reason,source
 16-70 bell blvd 317 16-70 bell blvd bayside ny 11360 us|11360,,"dog policy contradicted or conflicting between sources: no, except service or emotional-support dogs: the listing's description contradicts its own 'dogs allowed' field",https://www.zumper.com/listings/27451938p/1-bedroom-bayside-new-york-ny
 71-82 parsons blvd|11365,,dog policy contradicted or conflicting between sources: no (Zumper copy of the same unit),https://www.zumper.com/listings/29679977p/studio-pomonok-new-york-ny
 79 alexander st|10701,002-2130,ground-floor unit: 003-3326: floor 3; 002-2130: floor 1 (ground floor),https://www.avaloncommunities.com/new-york/yonkers-apartments/avalon-yonkers
+1 avalon way|07005,,ground-floor unit: unit 1177: 1,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/
 139-81 35th ave 6d 139-81 35th ave flushing ny 11354 us|11354,,dog policy contradicted or conflicting between sources: NO: service or emotional-support dogs only,https://www.trulia.com/home/139-81-35th-ave-6d-flushing-ny-11354-2062165222
 139-81 35th ave|11354,,dog policy contradicted or conflicting between sources: NO: service or emotional-support dogs only,https://www.trulia.com/home/139-81-35th-ave-6d-flushing-ny-11354-2062165222
 139-81 35th ave 6d 139-81 35th ave flushing ny 11354 us|11354,,dog policy contradicted or conflicting between sources: NO: service or emotional-support dogs only,https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny
@@ -46,3 +52,4 @@ addr_key,unit,reason,source
 34-33 90th st e12 34-33 90th st jackson heights ny 11372 us|11372,,elevator contradicted: the manager's own listing for unit 451 says walk-up,https://www.trulia.com/home/34-19-90th-st-451-jackson-heights-ny-11372-466242622
 34-19 90th st|11372,,elevator contradicted: the manager's own listing for unit 451 says walk-up,https://www.trulia.com/home/34-19-90th-st-451-jackson-heights-ny-11372-466242622
 34-46 91st st h51 queens ny 11372 us|11372,,elevator contradicted: the manager's own listing for unit 451 says walk-up,https://www.trulia.com/home/34-19-90th-st-451-jackson-heights-ny-11372-466242622
+7000 avalon way|08854,unit,ground-floor unit: unit 5106: floor 1 (ground floor),https://www.avaloncommunities.com/new-jersey/piscataway-apartments/avalon-piscataway

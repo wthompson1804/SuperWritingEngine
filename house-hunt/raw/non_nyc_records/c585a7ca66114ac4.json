@@ -1,0 +1,75 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"5","value":[
+    {
+      "ultra_buildingid":"b83a3221-7e22-4431-ba3b-ff8987e4cf48","ultra_name":"600 FRANK E RODGERS BLVD NORTH BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0904042704001","ultra_addressline1":"600 FRANK E RODGERS BLVD N ","ultra_block":"24","ultra_lot":"8.01","ultra_propertyinterest":{
+        "Id":"625ba1fc-e72a-49d6-8af7-ef3181f9edb7","Name":"600 FRANK E RODGERS BLVD NORTH"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8a2d7521-162f-e811-8126-1458d04eb810","Name":"HARRISON TOWN"
+      },"ultra_propertyportalsearchfield":"600 FRANK E RODGERS BLVD NORTH","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b1f533a1-b416-ef11-9f89-001dd8029de0","Name":"CHAMESH CHALOM LLC"
+      },"ultra_zipcode":"07029","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"eace52e0-318b-eb11-a812-001dd80183d2","ultra_name":"600 FRANK RODGERS BLVD S","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0904042722001","ultra_addressline1":"600 FRANK RODGERS BLVD S","ultra_block":"133","ultra_lot":"1.06","ultra_propertyinterest":{
+        "Id":"e1ce52e0-318b-eb11-a812-001dd80183d2","Name":"600 FRANK RODGERS BLVD S"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8a2d7521-162f-e811-8126-1458d04eb810","Name":"HARRISON TOWN"
+      },"ultra_propertyportalsearchfield":"600 FRANK RODGERS BLVD S","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"HARRISON TOWN","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":"600 FRANK E RODGERS BLVD. S","ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"d8ce52e0-318b-eb11-a812-001dd80183d2","Name":"ACCORDIA HARRISON URBAN RENEWAL LLC"
+      },"ultra_zipcode":"07029","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"2294e321-f533-498b-a8a7-2b77a3c7e0ab","ultra_name":"600 FRANK W. BURR BLVD. BLDG 1","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0260033587001","ultra_addressline1":"600 FRANK W. BURR BLVD.","ultra_block":"3703","ultra_lot":"31","ultra_propertyinterest":{
+        "Id":"f366c3b5-bfe9-419a-967b-0bf887c4641d","Name":"600 FRANK W. BURR BLVD."
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"3c2c7521-162f-e811-8126-1458d04eb810","Name":"TEANECK TWP"
+      },"ultra_propertyportalsearchfield":"600 FRANK W. BURR BLVD.","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"b6533952-f47a-ec11-8940-001dd80234fe","Name":"SHP V TEANECK LLC"
+      },"ultra_zipcode":"07666","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"3125ce84-fa8c-f111-ab10-001dd80be1b8","ultra_name":"HARRISON YARDS","ultra_registrationnumber":"0904-00156-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"600 FRANK E RODGERS BLVD S","ultra_block":"144","ultra_lot":"1.07","ultra_propertyinterest":{
+        "Id":"389cd57e-fa8c-f111-ab10-001dd80be1b8","Name":"HARRISON YARDS"
+      },"ultra_county":{
+        "Id":"02f4aaf2-63e4-e711-8125-1458d054d020","Name":"HUDSON"
+      },"ultra_municipality":{
+        "Id":"8a2d7521-162f-e811-8126-1458d04eb810","Name":"HARRISON TOWN"
+      },"ultra_propertyportalsearchfield":"HARRISON YARDS","ultra_countyportalsearchfield":"HUDSON","ultra_municipalityportalsearchfield":"HARRISON TOWN","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"649cd57e-fa8c-f111-ab10-001dd80be1b8","Name":"ACCORDIA HARRISON URBAN RENEWAL, LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"c3d85575-d72f-e811-8122-1458d04ece60","ultra_name":"THE HIGHLANDS @ GLENPOINTE","ultra_registrationnumber":"0260-00164-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"600 FRANK W BURR BD","ultra_block":"3712","ultra_lot":"20","ultra_propertyinterest":{
+        "Id":"f384e59f-9f2f-e811-8120-1458d04e2fb8","Name":"ARBOR TERRACE @ TEANECK"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"3c2c7521-162f-e811-8126-1458d04eb810","Name":"TEANECK TWP"
+      },"ultra_propertyportalsearchfield":"ARBOR TERRACE @ TEANECK","ultra_countyportalsearchfield":"BERGEN","ultra_municipalityportalsearchfield":"TEANECK TWP","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"0dab0dc1-cd4f-e911-a96d-001dd8009f4b","Name":"SHP V TEANECK"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

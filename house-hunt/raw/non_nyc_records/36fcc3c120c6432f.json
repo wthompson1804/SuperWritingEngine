@@ -1,0 +1,35 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"031f396b-9bc2-ed11-83ff-001dd80726d6","ultra_name":"204 WAGARAW RD","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"1604040784001","ultra_addressline1":"204 WAGARAW RD","ultra_block":"12","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"80b08b56-9bc2-ed11-83ff-001dd807232c","Name":"THE HEDGES"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"1e2f7521-162f-e811-8126-1458d04eb810","Name":"HAWTHORNE BORO"
+      },"ultra_propertyportalsearchfield":"THE HEDGES","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"HAWTHORNE BORO","ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"57b08b56-9bc2-ed11-83ff-001dd807232c","Name":"Newco Wagaraw"
+      },"ultra_zipcode":"07506","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"d93f2f59-8a71-ed11-9562-001dd807232c","ultra_name":"204 WAGARAW ROAD","ultra_registrationnumber":"1604-00139-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"204 WAGARAW ROAD","ultra_block":"12","ultra_lot":"8","ultra_propertyinterest":{
+        "Id":"e5c6324d-8a71-ed11-9562-001dd807232c","Name":"204 WAGARAW ROAD"
+      },"ultra_county":{
+        "Id":"10f4aaf2-63e4-e711-8125-1458d054d020","Name":"PASSAIC"
+      },"ultra_municipality":{
+        "Id":"1e2f7521-162f-e811-8126-1458d04eb810","Name":"HAWTHORNE BORO"
+      },"ultra_propertyportalsearchfield":"204 WAGARAW ROAD","ultra_countyportalsearchfield":"PASSAIC","ultra_municipalityportalsearchfield":"HAWTHORNE BORO","ultra_elsamaintenancecompany":{
+        "Id":"3712f121-c475-ef11-a670-001dd80afdfc","Name":"Otis Elevator Co - Fairfield"
+      },"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"f9c6324d-8a71-ed11-9562-001dd807232c","Name":"NEWCO WAGARAW, LLC C/O THE BEDRIN ORG. LLC"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}

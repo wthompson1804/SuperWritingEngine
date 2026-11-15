@@ -257,6 +257,9 @@ def main():
     xt = xt.reset_index()
     usable = lambda m: int((m & rated & (P.review_count >= MIN_THIN)).sum())
 
+    zd = R[R.family == "google_via_zumper"].as_of.dropna()
+    zlo, zhi = (zd.min().date(), zd.max().date()) if len(zd) else ("n/a", "n/a")
+    both = int((R.groupby("addr_key").family.agg(lambda f: {"openigloo"} <= set(f) and bool({"google_via_zumper", "own_site_widget"} & set(f)))).sum())
     L = []
     A = L.append
     A("# Rating standard for buildings outside New York City\n")
@@ -268,7 +271,8 @@ def main():
       f"(AUC {fmt(main_row.auc)}, 95% interval {main_row.auc_95ci}; 0.5 means no relationship; {int(main_row.flagged)} flagged of {int(main_row.buildings)}).")
     A(f"- **The ratings are thin and old.** {int(comp.with_any_rating.sum())} of {int(comp.buildings_checked.sum())} checked buildings show any rating. "
       f"Outside NYC the usual source is the Google figure that Zumper displays, which Zumper last refreshed a median of "
-      f"{fmt(float(P[out & rated].rating_age_months.median()), 0)} months ago; "
+      f"{fmt(float(P[out & rated & P.best_source.eq('google_via_zumper')].rating_age_months.median()), 0)} months ago "
+      f"({int((out & rated & P.best_source.eq('google_via_zumper')).sum())} buildings; {int((out & rated & P.best_source.eq('own_site_widget')).sum())} more have a current Google figure from the building's own site); "
       f"{int(comp[comp.region == 'outside NYC'].with_recent_review_text.iloc[0])} outside-NYC buildings had a readable review from the last 6 months.")
     A("- **So the rule below is a screen, not a verdict.** It can raise a flag (\"pause\") and, rarely, an avoid. It cannot prove a suburban building clean: "
       "\"ok\" on an old rating says nothing about the last 6 months, and most buildings land in \"not enough data\".\n")
@@ -276,7 +280,7 @@ def main():
     A("One row per building per source: stars, review count, date of the figure, review texts read, how many are from the last 6 months "
       "(on or after 2026-05-15), how many of those are negative, and serious-issue tags. Negative = 1 or 2 stars, or (3 stars or no star value) text naming a serious issue.\n")
     A("| Source | What the page gives | Limits |\n|---|---|---|")
-    A("| Google rating shown on Zumper building pages | Google average and count, 8 review texts | Zumper pulled the figures between late 2024 and early 2025 and shows only the 8 *highest rated* texts, so recent and negative reviews are invisible |")
+    A(f"| Google rating shown on Zumper building pages | Google average and count, 8 review texts | Zumper pulled the figures between {zlo} and {zhi} and shows only the 8 *highest rated* texts, so recent and negative reviews are invisible |")
     A("| Apartment List | average, count and dated verified-renter reviews | 1 to 4 reviews per building; most pages have none |")
     A("| Openigloo (NYC only) | average, count, 2 review texts with relative ages | median 1 review per building; no per-review stars |")
     A("| Building's own site widget | Google average and count, a few recent texts | only a few sites embed one |")
@@ -318,7 +322,7 @@ def main():
       f"low = the percentile equal to the NYC record-based avoid base rate ({base_rate:.0%}), at least 0.3 below the pause line |")
     A("| Openigloo | 2.0 | 2.5 | lower quartile of NYC Openigloo ratings; not used outside NYC |")
     A("| Apartment List, other | 2.5 | 3.5 | judgment; these almost never reach the review minimum |\n")
-    A(f"**Why {MIN_FULL} and {MIN_THIN} reviews.** Star ratings within one building typically spread about 1.3 to 1.5 stars. The average of 5 reviews is then uncertain by more than a star "
+    A(f"**Why {MIN_FULL} and {MIN_THIN} reviews.** Assumption, not measured here: star ratings within one building spread about 1.3 to 1.5 stars (standard deviation), as is usual for 1-to-5 review scales. The average of 5 reviews is then uncertain by more than a star "
       f"either way (95%), which cannot tell a 3.5 building from a 4.5 one; at {MIN_FULL} reviews it is about 0.6 stars, enough to place a building below or above the pause line. "
       "Below 5, a rating is one or two people's experience and is reported, not judged.\n")
     A("**Why the last 6 months carry the avoid.** Will's management rule judges the last 6 months. An all-time star average cannot show a recent change of manager or a new outage problem, "
@@ -329,9 +333,9 @@ def main():
     A(md_table(xt) + "\n")
     A("## 5. Weaknesses\n")
     A("1. **Not validated.** The NYC calibration does not show that ratings predict record-based problems, so the lines are distribution-based (bottom quartile), not accuracy-based. Treat \"pause\" as \"ask on the tour\", not as evidence.")
-    A("2. **Stale Google figures.** Zumper's copies date from late 2024 to early 2025. A building can have changed manager since. Google itself is off limits to us (Google Maps robots rules), so the live figure and the newest reviews must be read by hand on a phone.")
+    A(f"2. **Stale Google figures.** Zumper's copies date from {zlo} to {zhi}. A building can have changed manager since. Google itself is off limits to us (Google Maps robots rules), so the live figure and the newest reviews must be read by hand on a phone.")
     A("3. **Selection in the texts.** Zumper shows the eight highest-rated reviews. Zero negatives among them means nothing; the rule therefore never counts them as \"recent, none negative\" unless they are actually dated in the last 6 months.")
-    A("4. **Different instruments inside and outside NYC.** No building has both an Openigloo and a meaningful Google rating, so the two scales cannot be cross-walked directly; the per-source quartile is the only link.")
+    A(f"4. **Different instruments inside and outside NYC.** {both} building(s) have both an Openigloo and a Google rating, so the two scales cannot be cross-walked directly; the per-source quartile is the only link.")
     A("5. **Car break-ins and elevator outages are not visible in ratings.** Reviews rarely mention them, and star averages do not move on them. Outside NYC these two deal-breakers rest on dated reports and, where they exist, official records (`data/evidence/non_nyc_records.csv`: NJ housing-inspection reports for New Jersey buildings, Jersey City police incidents).")
     A("6. **Small numbers.** Every figure here rests on tens of buildings. Rerun after round 2.")
     A("7. **Keyword tagging.** Serious-issue tags come from keyword matching with a simple negation guard; Openigloo has no per-review stars, so its \"negative\" count means a serious issue named under Cons.\n")

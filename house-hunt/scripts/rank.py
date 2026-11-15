@@ -94,8 +94,12 @@ def color_table(u):
 
 
 def main():
-    u = pd.read_csv(DATA / "units.csv", low_memory=False)
-    u = u[u.unit_status == "pass"].copy()
+    # Reads ONLY the master tables (scripts/build_master.py + scripts/all_in.py). No side files.
+    u = pd.read_csv(DATA / "master_units.csv", low_memory=False)
+    n_in = len(u)
+    u = u[u.cost_gate == "pass"].copy()
+    n_cost = n_in - len(u)
+    u = u.rename(columns={"parking_fee_monthly": "parking_fee", "pet_rent_monthly": "pet_rent"})
     G = pd.read_csv(DATA / "lifestyle_groups.csv").set_index("hood_id")
     gcols = ["group_key", "group_label", "group_subhead", "safety_cut", "safety_cut_reason", "newcomer_share", "age_25_34_share",
              "detached_house_share", "violent", "property", "motor_vehicle_theft", "violent_vs_jamaica", "property_vs_jamaica",
@@ -103,29 +107,48 @@ def main():
     u = u.join(G[gcols], on="hood_id")
     n_cut = int(u.safety_cut.fillna(False).sum())
     u = u[~u.safety_cut.fillna(False)].copy()
+    s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
+
+    # ---- gate facts re-applied on merged (confirmed-first) values
+    wl = pd.to_numeric(u.get("dog_weight_limit_lb"), errors="coerce")
+    fl = pd.to_numeric(u.get("unit_floor"), errors="coerce")
+    hard = pd.Series("", index=u.index)
+    for cond, why in [(s("elevator").str.lower().eq("no"), "no elevator (confirmed on the building's page)"),
+                      (s("dogs_allowed").str.lower().eq("no"), "dogs not allowed (confirmed)"),
+                      (wl < 25, "dog weight limit under 25 lb"), (fl < 2, "ground-floor unit"),
+                      (s("live_status").eq("gone"), "listing gone at live check"),
+                      (s("income_requirement").ne(""), "income-restricted unit"),
+                      (s("building_type").str.contains("senior|62\\+", case=False), "senior housing")]:
+        hard = pd.Series(np.where(cond & (hard == ""), why, hard), index=u.index)
+    u[hard != ""].assign(drop_reason=hard[hard != ""]).to_csv(DATA / "excluded_by_confirmed_facts.csv", index=False)
+    n_hard = int((hard != "").sum()); u = u[hard == ""].copy()
+    s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
 
     # ---- listing confidence
-    s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
     age = pd.to_numeric(u.get("listing_age_days"), errors="coerce")
     med = u.groupby("hood_id").all_in.transform("median")
     reasons = pd.Series("", index=u.index)
     for cond, why in [(age >= 60, "listing 60+ days old"), ((s("unit") == "") & (s("building_name") == ""), "no unit or building named"),
                       (s("notes").str.contains("listhub|propertyware", case=False), "thin syndicated feed"),
-                      (s("notes").str.contains("CONFLICT"), "conflicting dog policy"), (u.all_in < 0.6 * med, "price far below the neighborhood")]:
-        reasons = np.where(cond, reasons + why + "; ", reasons); reasons = pd.Series(reasons, index=u.index)
-    inf_e = s("elevator_basis").str.startswith("inferred")
-    inf_f = s("floor_asterisk").eq("yes")
-    dog_small = s("dog_policy_text").str.contains(r"Size allowed: Small\)", case=False) & pd.to_numeric(u.get("dog_weight_limit_lb"), errors="coerce").isna()
+                      (s("notes").str.contains("CONFLICT"), "conflicting dog policy"), (u.all_in < 0.6 * med, "price far below the neighborhood"),
+                      (s("live_notes").str.contains("not an open-market|far under market|not genuine|scam|listing looks stale|duplicate candidate|out-of-state phone", case=False), "live check judged the listing doubtful")]:
+        reasons = pd.Series(np.where(cond, reasons + why + "; ", reasons), index=u.index)
+    # open gate facts: anything not confirmed, stated on a page or in an official record
+    inf_e = s("elevator_basis").isin(["inferred", "", "unknown"])
+    inf_f = s("unit_floor_basis").isin(["unknown", ""])
+    dog_small = s("dog_policy_text").str.contains(r"Size allowed: Small\)", case=False) & wl.reindex(u.index).isna() & ~s("dogs_allowed_basis").eq("confirmed")
     n_inf = inf_e.astype(int) + inf_f.astype(int) + dog_small.astype(int)
-    u["to_confirm"] = (np.where(inf_e, "elevator (inferred from floor count); ", "") + pd.Series(np.where(inf_f, "which floor; ", ""), index=u.index)
-                       + pd.Series(np.where(dog_small, "dog weight limit (page says small dogs); ", ""), index=u.index))
+    u["to_confirm"] = (pd.Series(np.where(inf_e, "Does the building have an elevator? (so far inferred from its height); ", ""), index=u.index)
+                       + pd.Series(np.where(inf_f, "Which floor is the unit on?; ", ""), index=u.index)
+                       + pd.Series(np.where(dog_small, "What is the dog weight limit? (the page says small dogs); ", ""), index=u.index))
     u["confidence"] = np.where(reasons != "", "sketchy", np.where(n_inf == 0, "clean", np.where(n_inf == 1, "one_inferred", "sketchy")))
-    u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(n_inf >= 2, "two or more inferred gate facts", ""))
+    u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(n_inf >= 2, "two or more unconfirmed gate facts", ""))
     u[u.confidence == "sketchy"].to_csv(DATA / "excluded_sketchy.csv", index=False)
     n_sk = int((u.confidence == "sketchy").sum())
     u = u[u.confidence != "sketchy"].copy()
+    s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
 
-    # ---- evidence pass results (scripts/avoid.py): exclusions, avoid buildings, live verification
+    # ---- evidence rules (scripts/avoid.py writes these from the evidence families)
     xf, af = DATA / "unit_exclusions.csv", DATA / "avoid_buildings.csv"
     n_ex = 0
     if xf.exists():
@@ -136,25 +159,32 @@ def main():
         u[bad].assign(drop_reason="evidence pass").to_csv(DATA / "excluded_by_evidence.csv", index=False)
         n_ex = int(bad.sum()); u = u[~bad].copy()
     if af.exists():
-        AV = pd.read_csv(af, dtype=str, keep_default_na=False).drop_duplicates("addr_key").set_index("addr_key")
+        AV = pd.read_csv(af, dtype=str, keep_default_na=False)
+        xw = pd.read_csv(DATA / "reference" / "building_crosswalk.csv", dtype=str).set_index("addr_key").building_id
+        AV["building_id"] = AV.addr_key.map(xw)
+        AV = AV.dropna(subset=["building_id"]).sort_values("avoid", ascending=False).drop_duplicates("building_id").set_index("building_id")
         for c in ["avoid", "reasons", "pause_notes", "evidence_json", "positive_json"]:
-            u["ev_" + c] = u.addr_key.map(AV[c]).fillna("")
-        u["evidence_checked"] = u.addr_key.isin(AV.index)
+            u["ev_" + c] = u.building_id.map(AV[c]).fillna("")
+        u["evidence_checked"] = u.building_id.isin(AV.index) & s("live_status").ne("")
     else:
         u["ev_avoid"], u["evidence_checked"] = "", False
+    s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
 
-    am = DATA / "reference" / "building_amenities.csv"
-    A = pd.read_csv(am, dtype=str, keep_default_na=False).drop_duplicates("addr_key").set_index("addr_key") if am.exists() else pd.DataFrame()
-    a = lambda col: (u.addr_key.map(A[col]) if col in A else pd.Series("", index=u.index)).fillna("").astype(str).str.lower()
-    has = lambda col: ~a(col).isin(["", "no_mention", "nan", "unknown"])
-    cm = lambda col: s("community_" + col).str.lower().str.contains("yes")
+    # compatibility shims: old amenity / community column names -> master fields
+    AM = {"pool": "pool", "doorman_or_concierge": "doorman", "controlled_access": "controlled_access", "gym": "gym",
+          "package_room": "package_room", "in_unit_laundry": "in_unit_laundry", "roof_deck_or_outdoor_space": "outdoor_space",
+          "balcony_some_units": "balconies", "coworking_or_lounge": "lounge_or_coworking", "gated_or_garage_parking": "parking_type",
+          "year_built": "year_built", "dog_amenities": "dog_amenities", "elevator_stated": "elevator"}
+    a = lambda col: s(AM.get(col, col)).str.lower()
+    has = lambda col: ~a(col).isin(["", "no_mention", "nan", "unknown", "no", "none"])
+    cm = lambda col: pd.Series(False, index=u.index)
+    u["community_pool"] = ""
     C = color_table(u)
     u = u.join(C, on="addr_key", rsuffix="_color")
     n = lambda c: pd.to_numeric(u[c], errors="coerce") if c in u else pd.Series(np.nan, index=u.index)
 
     pool, cp = a("pool"), s("community_pool").str.lower()
-    u["pool"] = np.where(pool.isin(["indoor", "both"]) | cp.str.contains("indoor"), "indoor",
-                         np.where(pool.isin(["outdoor", "yes_type_unknown"]) | cp.str.contains("yes|outdoor"), "pool", ""))
+    u["pool"] = np.where((pool.str.contains(r"\bindoor\b|^both$") & ~pool.str.contains("not stated|indoor or outdoor|indoor/outdoor")) | pool.str.contains("and indoor|indoor and outdoor"), "indoor", np.where(has("pool"), "pool", ""))
     pr = u.parking_type.map(parking_rank).fillna(a("gated_or_garage_parking").map(parking_rank))
     u["parking_rank"] = pr
     doorman = a("doorman_or_concierge")
@@ -164,17 +194,25 @@ def main():
     # points for building features (unknown = a quarter of the points)
     def pts(yes, known, w):
         return np.where(yes, w, np.where(known, 0.0, 0.25 * w))
-    security = (pts(doorman.eq("24h"), has("doorman_or_concierge"), 3) + pts(doorman.isin(["yes", "part_time"]), has("doorman_or_concierge"), 2)
+    security = (pts(doorman.str.contains("24"), has("doorman_or_concierge"), 3) + pts((has("doorman_or_concierge") & ~doorman.str.contains("24")), has("doorman_or_concierge"), 2)
                 + pts(has("controlled_access") | cm("controlled_access"), False, 2.5) + pts(has("package_room") | cm("package_room"), False, 1))
     comfort = (pts(laundry.str.contains("in unit|in_unit|in-unit|yes"), laundry.str.strip().ne(""), 2.5)
                + pts(has("gym") | cm("gym"), False, 1) + pts(has("roof_deck_or_outdoor_space"), False, 1) + pts(has("balcony_some_units"), False, 0.5)
-               + pts(has("coworking_or_lounge"), False, 1.5) + pts(s("elevator_basis").eq("stated") | a("elevator_stated").eq("yes"), True, 1))
+               + pts(has("coworking_or_lounge"), False, 1.5) + pts(s("elevator_basis").isin(["confirmed", "amenities_page", "official_record", "stated"]), True, 1))
     year = pd.to_numeric(a("year_built").replace("", np.nan), errors="coerce").fillna(n("pluto_year"))
     u["building_security_pts"], u["building_comfort_pts"] = security, comfort
 
     # ---- parts
-    u["p_safety"] = blend((pct(u.violent, False), 35), (pct(u.property, False), 15), (pct(u.motor_vehicle_theft, False), 15),
-                          (pct(near_car, False), 15), (pct(pd.Series(security, index=u.index)), 20))
+    # police-located violent crime near the building and its evening share (NYC only; unknown elsewhere)
+    near_viol = n("near250_robbery_24m") + n("near250_felony_assault_24m").fillna(0) + n("near250_burglary_24m").fillna(0)
+    eve = (n("near250_robbery_24m") * n("near250_robbery_evening_share").fillna(0)
+           + n("near250_felony_assault_24m").fillna(0) * n("near250_felony_assault_evening_share").fillna(0))
+    # three-year direction of the area's violent rate (falling is better)
+    trend = n("agency_violent_per_1000_2025").fillna(n("agency_violent_per_1000_2024")) - n("agency_violent_per_1000_2023").fillna(n("agency_violent_per_1000_2022"))
+    u["near_violent_250m_24m"], u["near_violent_evening_250m_24m"], u["violent_trend"] = near_viol, eve.round(1), trend
+    u["p_safety"] = blend((pct(u.violent, False), 28), (pct(u.property, False), 12), (pct(u.motor_vehicle_theft, False), 10),
+                          (pct(near_viol, False), 10), (pct(eve, False), 8), (pct(near_car, False), 10), (pct(trend, False), 4),
+                          (pct(pd.Series(security, index=u.index)), 18))
     u["p_building"] = blend((pct(pd.Series(security, index=u.index)), 40), (pct(pd.Series(comfort, index=u.index)), 45), (pct(year), 15))
     lines_known = s("all_in_lines").str.count('"found"')
     u["p_cost"] = blend((pct(u.all_in, False), 85), (pct(lines_known), 15))
@@ -182,7 +220,12 @@ def main():
                        (pct(n("parking_fee"), False), 10), (pct(n("surface_parking_ha_within_800m")), 10))
     one_bed = (pd.to_numeric(u.beds, errors="coerce") >= 1).astype(float) * 100
     u["p_space"] = blend((pct(u.sqft), 75), (one_bed, 25))
-    u["p_distance"] = blend((pct(u.drive_min_to, False), 60), (pct(u.transit_sat_median, False), 25), (pct(u.toll_rt_ezpass, False), 15))
+    def clock(t):   # "23:41" or "24:15" -> minutes after noon; later last train home is better
+        m = __import__("re").match(r"(\d{1,2}):(\d{2})", str(t))
+        return (int(m.group(1)) * 60 + int(m.group(2)) - 720) if m else np.nan
+    last_train = u.get("transit_last_sat_departure_from_jamaica", pd.Series("", index=u.index)).map(clock)
+    u["p_distance"] = blend((pct(u.drive_min_to, False), 50), (pct(u.transit_sat_median, False), 20), (pct(u.toll_rt_ezpass, False), 12),
+                            (pct(n("transit_sat_transfers"), False), 8), (pct(last_train), 5), (pct(n("transit_sun_return_median"), False), 5))
     dog_small = dog_small.reindex(u.index).fillna(False)
     dogam = has("dog_amenities") | cm("dog_park_pet_spa")
     weight_ok = pd.to_numeric(u.get("dog_weight_limit_lb"), errors="coerce") >= 25
@@ -242,8 +285,13 @@ def main():
     u["candidate"] = u.hood_rank <= CANDIDATES
     u["shown_pre_evidence"] = u.hood_rank <= SHOWN
     # after evidence: avoid buildings leave the shown list and become avoid cards (up to 5 per neighborhood)
+    # Confirmed before shown: only units whose gate facts are all confirmed or stated can be shown. The rest go to
+    # data/needs_confirmation.csv with the question to ask.
     is_avoid = u.ev_avoid.eq("yes")
-    ok = elig & ~is_avoid
+    clean = u.confidence.eq("clean")
+    ok = elig & ~is_avoid & clean
+    nc = u[elig & ~is_avoid & ~clean & (u.hood_rank <= CANDIDATES)]
+    nc[["listing_id", "building_id", "building_name", "address", "unit", "hood", "group_label", "hood_rank", "rank_score", "all_in", "to_confirm", "url"]].to_csv(DATA / "needs_confirmation.csv", index=False)
     u["shown_rank"] = np.nan
     u.loc[ok, "shown_rank"] = u[ok].groupby("hood_id").cumcount() + 1
     u["shown"] = u.shown_rank <= SHOWN
@@ -295,7 +343,8 @@ def main():
         rows.append(r)
     pd.DataFrame(rows).to_csv(DATA / "group_exchange.csv", index=False)
     print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, shown-but-not-yet-evidence-checked {int((u.shown & ~u.evidence_checked).sum())}")
-    print(f"kept {len(u)} units ({n_cut} cut by the Jamaica safety rule, {n_sk} dropped as sketchy); candidates {int(u.candidate.sum())}; shown {int(u.shown_pre_evidence.sum())}; pools: {u.pool.value_counts().to_dict()}")
+    print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
+    print(f"(kept {len(u)} units; candidates {int(u.candidate.sum())}; shown {int(u.shown_pre_evidence.sum())}; pools: {u.pool.value_counts().to_dict()}")
 
 
 if __name__ == "__main__":

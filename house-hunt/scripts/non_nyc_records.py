@@ -182,7 +182,43 @@ def nj_rows(rows):
                             "match_note": mnote, "query_url": purl, "retrieved_at": m.get("retrieved_at", "")})
         print("NJ", r["addr_key"][:40], "records", len(pids), "reports parsed", nrep, flush=True)
         write(out_all + out)
-    return out
+    return out + nj_summary(out)
+
+
+def nj_summary(out):
+    """Per building: the most recent inspection report read, and how its first (cyclical) count compares with the
+    other New Jersey candidates (violations per 100 units at the cyclical inspection)."""
+    by = {}
+    for o in out:
+        if o["metric"] == "bhi_open_violations_at_inspection":
+            by.setdefault(o["addr_key"], []).append(o)
+    units = lambda o: int((re.search(r"units (\d+)", o["detail"]) or [0, 0])[1] or 0)
+    typ = lambda o: (re.search(r"inspection type: ([^;]+)", o["detail"]) or [0, ""])[1]
+    cyc = {}
+    for k, v in by.items():
+        c = [o for o in v if typ(o).startswith("Cyclical") and units(o)]
+        if c:
+            o = max(c, key=lambda o: o["period"])
+            cyc[k] = (int(o["value"]) / units(o) * 100, o)
+    med = statistics.median(x for x, _ in cyc.values()) if cyc else float("nan")
+    p75 = statistics.quantiles([x for x, _ in cyc.values()], n=4)[2] if len(cyc) >= 4 else float("nan")
+    res = []
+    for k, v in by.items():
+        last = max(v, key=lambda o: (o["period"], -int(o["value"])))
+        base = {c: last[c] for c in ("addr_key", "building_name", "municipality", "state", "source", "record_type", "match_note")}
+        life = (re.search(r"life-safety (\d+)", last["detail"]) or [0, "0"])[1]
+        kw = (re.search(r"keyword mentions in open violations: (.*)$", last["detail"]) or [0, ""])[1]
+        res.append({**base, "metric": "bhi_latest_report_open_violations", "period": last["period"], "value": last["value"],
+                    "detail": f"most recent inspection report read ({typ(last)}): {last['value']} violations open, {life} of them life-safety; keyword mentions: {kw}. "
+                              "Open at the inspection date; later abatement is only visible in a later report.",
+                    "query_url": last["query_url"], "retrieved_at": last["retrieved_at"]})
+        if k in cyc:
+            x, o = cyc[k]
+            res.append({**base, "metric": "bhi_cyclical_violations_per_100_units", "period": o["period"], "value": f"{x:.1f}",
+                        "detail": f"{o['value']} violations cited at the latest cyclical inspection / {units(o)} units x 100; median over {len(cyc)} New Jersey candidate "
+                                  f"buildings with a cyclical report since 2021-11-15 = {med:.1f}, 75th percentile = {p75:.1f}; at least double the median: {'yes' if x >= 2 * med else 'no'}",
+                        "query_url": o["query_url"], "retrieved_at": o["retrieved_at"]})
+    return res
 
 
 def jc_incidents():

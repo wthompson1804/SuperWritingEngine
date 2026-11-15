@@ -1,0 +1,33 @@
+{
+  "odata.metadata":"https://serviceportal.dca.nj.gov/_odata/$metadata#bhibuildings","odata.count":"2","value":[
+    {
+      "ultra_buildingid":"bf535d6f-d72f-e811-8122-1458d04ece60","ultra_name":"IMPERIAL APARTMENTS","ultra_registrationnumber":"0223-00152-001","ultra_bhibuildingregistrationnum":null,"ultra_addressline1":"390 PROSPECT AV","ultra_block":null,"ultra_lot":null,"ultra_propertyinterest":{
+        "Id":"4579e59f-9f2f-e811-8120-1458d04e2fb8","Name":"IMPERIAL APARTMENTS"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":null,"ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"54f60d8a-a33e-e811-8121-1458d04e2fb8","Name":"ANN FOSCHINI"
+      },"ultra_zipcode":null,"ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    },{
+      "ultra_buildingid":"471bba48-f63a-48db-94ea-aaab4138e5c4","ultra_name":"IMPERIAL APT","ultra_registrationnumber":null,"ultra_bhibuildingregistrationnum":"0223007391001","ultra_addressline1":"390 PROSPECT AVE","ultra_block":"445","ultra_lot":"11","ultra_propertyinterest":{
+        "Id":"e4151598-eb7e-4a2b-a27b-e5fb690e3c2f","Name":"IMPERIAL APT"
+      },"ultra_county":{
+        "Id":"f4f3aaf2-63e4-e711-8125-1458d054d020","Name":"BERGEN"
+      },"ultra_municipality":{
+        "Id":"f22b7521-162f-e811-8126-1458d04eb810","Name":"HACKENSACK CITY"
+      },"ultra_propertyportalsearchfield":"IMPERIAL APT","ultra_countyportalsearchfield":null,"ultra_municipalityportalsearchfield":null,"ultra_elsamaintenancecompany":null,"ultra_akaaddress1":null,"ultra_akaaddress2":null,"ultra_akaaddress3":null,"ultra_akaaddress4":null,"statuscode":{
+        "Name":"Active","Value":1
+      },"ultra_propertyinterest-ultra_propertyowner":{
+        "Id":"16549bf6-e013-44d6-8f19-900dfc1f93d0","Name":"390 PROSPECT-HACKENSACK LLC"
+      },"ultra_zipcode":"07601","ultra_propertyinterest-statuscode":{
+        "Name":"Active","Value":1
+      },"list-id":"4f95026c-246c-e911-a971-001dd800ba25","view-id":"a2c9881e-eb43-e811-8122-1458d04eaba0","entity-permissions-enabled":"true"
+    }
+  ]
+}
