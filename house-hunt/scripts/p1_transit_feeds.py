@@ -29,7 +29,8 @@ FEEDS = {
                   "https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-new-jersey-new-jersey-transit-nj-transit-gtfs-509.zip?alt=media"]),
     "njt_bus": ("NJT bus", ["https://www.njtransit.com/bus_data.zip",
                  "https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-new-jersey-new-jersey-transit-nj-transit-gtfs-508.zip?alt=media"]),
-    "path": ("PATH", ["https://data.trilliumtransit.com/gtfs/path-nj-us/path-nj-us.zip",
+    "path": ("PATH", ["https://www.panynj.gov/content/dam/path/gtfs/PATH_GTFS.zip",
+              "https://data.trilliumtransit.com/gtfs/path-nj-us/path-nj-us.zip",
               "https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-new-jersey-port-authority-trans-hudson-path-gtfs-517.zip?alt=media"]),
     "septa_rail": ("SEPTA Regional Rail", ["https://www3.septa.org/developer/google_rail.zip",
                     "https://storage.googleapis.com/storage/v1/b/mdb-latest/o/us-pennsylvania-southeastern-pennsylvania-transportation-authority-gtfs-503.zip?alt=media"]),
@@ -40,21 +41,25 @@ FEEDS = {
     "bus_q": ("NYCT Queens bus", ["https://rrgtfsfeeds.s3.amazonaws.com/gtfs_q.zip"]),
     "bus_busco": ("MTA Bus Co", ["https://rrgtfsfeeds.s3.amazonaws.com/gtfs_busco.zip"]),
     "hudson_link": ("Hudson Link", ["https://data.trilliumtransit.com/gtfs/hudsonlink-ny-us/hudsonlink-ny-us.zip"]),
-    "beeline": ("Bee-Line", ["https://planning.westchestergov.com/images/stories/zip/GTFS.zip"]),
     "suffolk_bus": ("Suffolk County Transit", ["https://tracksctbus.org/gtfs"]),
-    "leprechaun": ("Leprechaun Lines", ["https://s3.amazonaws.com/datatools-511ny/public/Leprechaun_Connection.zip"]),
 }
+
+
+def member_map(z: zipfile.ZipFile) -> dict[str, str]:
+    """Map bare GTFS file names to archive members (some feeds nest files in a folder)."""
+    return {n.rsplit("/", 1)[-1]: n for n in z.namelist() if n.endswith(".txt")}
 
 
 def service_range(zbytes: bytes) -> tuple[str | None, str | None]:
     z = zipfile.ZipFile(io.BytesIO(zbytes))
-    names = set(z.namelist())
+    mm = member_map(z)
+    names = set(mm)
     lo, hi = [], []
     if "calendar.txt" in names:
-        for r in csv.DictReader(io.TextIOWrapper(z.open("calendar.txt"), "utf-8-sig")):
+        for r in csv.DictReader(io.TextIOWrapper(z.open(mm["calendar.txt"]), "utf-8-sig")):
             lo.append(r["start_date"].strip()); hi.append(r["end_date"].strip())
     if "calendar_dates.txt" in names:
-        for r in csv.DictReader(io.TextIOWrapper(z.open("calendar_dates.txt"), "utf-8-sig")):
+        for r in csv.DictReader(io.TextIOWrapper(z.open(mm["calendar_dates.txt"]), "utf-8-sig")):
             if r["exception_type"].strip() == "1":
                 lo.append(r["date"].strip()); hi.append(r["date"].strip())
     return (min(lo) if lo else None, max(hi) if hi else None)
@@ -63,7 +68,7 @@ def service_range(zbytes: bytes) -> tuple[str | None, str | None]:
 def fetch_all(refresh: bool = False) -> dict:
     man = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
     for key, (label, urls) in FEEDS.items():
-        if key in man and not refresh and (ROOT / man[key]["raw_path"]).exists():
+        if key in man and man[key].get("raw_path") and not refresh and (ROOT / man[key]["raw_path"]).exists():
             continue
         tried = []
         for u in urls:

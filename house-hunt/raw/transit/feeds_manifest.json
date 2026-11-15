@@ -54,17 +54,6 @@
   "service_end": "20270417",
   "tried_before": []
  },
- "path": {
-  "system": "PATH",
-  "url": "https://data.trilliumtransit.com/gtfs/path-nj-us/path-nj-us.zip",
-  "retrieved_at": "2026-11-15T16:03:00+00:00",
-  "raw_path": "raw/big/gtfs_transit/1734d3aa7d3a774e.zip",
-  "sha1": "c6635a7563ec11f19eebc1aad0542b776ebf27c7",
-  "bytes": 1214919,
-  "service_start": "20250316",
-  "service_end": "20260601",
-  "tried_before": []
- },
  "septa_rail": {
   "system": "SEPTA Regional Rail",
   "url": "https://www3.septa.org/developer/google_rail.zip",
@@ -74,17 +63,6 @@
   "bytes": 785153,
   "service_start": "20261101",
   "service_end": "20270220",
-  "tried_before": []
- },
- "si_ferry": {
-  "system": "Staten Island Ferry",
-  "url": "https://www.nyc.gov/html/dot/downloads/misc/siferry-gtfs.zip",
-  "retrieved_at": "2026-11-15T16:03:01+00:00",
-  "raw_path": "raw/big/gtfs_transit/7bd1844d892c3bd0.zip",
-  "sha1": "34d6bc485d02631cce789ae8a8c27d8e6551fd43",
-  "bytes": 9609,
-  "service_start": null,
-  "service_end": null,
   "tried_before": []
  },
  "nyc_ferry": {
@@ -142,17 +120,6 @@
   "service_end": "20270401",
   "tried_before": []
  },
- "beeline": {
-  "system": "Bee-Line",
-  "url": "https://planning.westchestergov.com/images/stories/zip/GTFS.zip",
-  "retrieved_at": "2026-11-15T16:03:05+00:00",
-  "raw_path": "raw/big/gtfs_transit/99b6141e6536c0ed.zip",
-  "sha1": "ef98f69b9fcd2919681c5720c9440bad80c4966f",
-  "bytes": 3569641,
-  "service_start": "20250616",
-  "service_end": "20250831",
-  "tried_before": []
- },
  "suffolk_bus": {
   "system": "Suffolk County Transit",
   "url": "https://tracksctbus.org/gtfs",
@@ -164,15 +131,26 @@
   "service_end": "20991231",
   "tried_before": []
  },
- "leprechaun": {
-  "system": "Leprechaun Lines",
-  "url": "https://s3.amazonaws.com/datatools-511ny/public/Leprechaun_Connection.zip",
-  "retrieved_at": "2026-11-15T16:03:10+00:00",
-  "raw_path": "raw/big/gtfs_transit/58f15694674b828d.zip",
-  "sha1": "0b742a749644c3e69a5b480241bad228c7e14980",
-  "bytes": 63537,
-  "service_start": "20181126",
-  "service_end": "20261231",
+ "path": {
+  "system": "PATH",
+  "url": "https://www.panynj.gov/content/dam/path/gtfs/PATH_GTFS.zip",
+  "retrieved_at": "2026-11-15T16:05:23+00:00",
+  "raw_path": "raw/big/gtfs_transit/140888b351a7f48a.zip",
+  "sha1": "f020a794bb3951044168e2acbb3b9843af7176a3",
+  "bytes": 365690,
+  "service_start": "20261113",
+  "service_end": "20270101",
+  "tried_before": []
+ },
+ "si_ferry": {
+  "system": "Staten Island Ferry",
+  "url": "https://www.nyc.gov/html/dot/downloads/misc/siferry-gtfs.zip",
+  "retrieved_at": "2026-11-15T16:03:01+00:00",
+  "raw_path": "raw/big/gtfs_transit/7bd1844d892c3bd0.zip",
+  "sha1": "34d6bc485d02631cce789ae8a8c27d8e6551fd43",
+  "bytes": 9609,
+  "service_start": "20260101",
+  "service_end": "20280130",
   "tried_before": []
  }
 }

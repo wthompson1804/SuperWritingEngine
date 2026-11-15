@@ -1,0 +1,7 @@
+{
+ "url": "https://webapi.legistar.com/v1/hobokennj/matters?%24filter=MatterIntroDate+gt+datetime%272025-01-01%27+and+%28substringof%28%27roker%27%2CMatterTitle%29%29&%24top=50",
+ "retrieved_at": "2026-11-15T16:05:25+00:00",
+ "status": 200,
+ "path": "raw/renter_protection/d6bbab170c01c863.json",
+ "source": "renter_protection"
+}

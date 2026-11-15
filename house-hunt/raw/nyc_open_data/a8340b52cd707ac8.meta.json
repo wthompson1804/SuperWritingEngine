@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/5uac-w243.json?%24select=date_extract_y%28rpt_dt%29+as+y%2C+ky_cd%2C+count%28%2A%29+as+n&%24where=rpt_dt+%3E%3D+%272026-01-01T00%3A00%3A00%27+and+rpt_dt+%3C%3D+%272026-09-30T23%3A59%3A59%27+and+ky_cd+in+%28%27101%27%2C%27104%27%2C%27105%27%2C%27106%27%2C%27107%27%2C%27109%27%2C%27110%27%29&%24group=y%2C+ky_cd&%24limit=50000",
+ "retrieved_at": "2026-11-15T16:05:20+00:00",
+ "status": 200,
+ "path": "raw/nyc_open_data/a8340b52cd707ac8.json",
+ "source": "nyc_open_data"
+}
