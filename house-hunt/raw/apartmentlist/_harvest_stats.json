@@ -9,8 +9,8 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 1216,
- "detail_pages": 1962,
+ "srp_pages": 1243,
+ "detail_pages": 2001,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -2063,6 +2063,60 @@
    "drive_min": 107.3,
    "props": 9,
    "rows": 25
+  },
+  {
+   "city": "nj/brielle",
+   "drive_min": 107.6,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "ct/new-haven",
+   "drive_min": 107.8,
+   "props": 32,
+   "rows": 282
+  },
+  {
+   "city": "nj/white-horse",
+   "drive_min": 107.8,
+   "props": 1,
+   "rows": 5
+  },
+  {
+   "city": "nj/manasquan",
+   "drive_min": 108.3,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/jamesport",
+   "drive_min": 108.5,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/sea-girt",
+   "drive_min": 108.9,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/lake-como",
+   "drive_min": 109.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/spring-lake",
+   "drive_min": 109.0,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "nj/spring-lake-heights",
+   "drive_min": 109.0,
+   "props": 2,
+   "rows": 4
   }
  ],
  "cities_unmatched_far": [
@@ -2087,12 +2141,13 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2863,
- "props_skipped_lowprice_gt_3000": 901,
+ "props_discovered": 2903,
+ "props_skipped_lowprice_gt_3000": 902,
  "reasons": {
-  "ok": 1950,
+  "ok": 1988,
   "no_unit_le_3000": 11,
-  "no_listing_object": 1
+  "no_listing_object": 1,
+  "price_hidden": 1
  },
  "blocked": null,
  "dogs_no_rows": 0

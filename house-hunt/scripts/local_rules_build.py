@@ -54,6 +54,33 @@ def main() -> None:
                     "topic": r["t"], "rule": r["rule"], "summary": r["s"], "quote": r.get("quote", ""),
                     "source_url": r.get("url", ""), "source_type": r.get("st", "municipal page"),
                     "retrieved_at": when.get(r.get("url", ""), r.get("at", "")), "value_type": vt})
+    # not_found rows for core rules with nothing found, with where we looked or why the source was blocked
+    CORE = [("street_parking", "overnight_parking"), ("street_parking", "resident_permit"),
+            ("street_parking", "alternate_side"), ("street_parking", "snow_emergency"),
+            ("street_parking", "municipal_garage_monthly"), ("dogs", "dog_license"), ("dogs", "leash_law"),
+            ("dogs", "dog_park"), ("dogs", "parks_and_beaches"), ("dogs", "waste")]
+    BLOCK = json.loads((ROOT / "scripts/local_rules_blocks.json").read_text())
+    npages = {}
+    for l in PAGES.read_text().splitlines():
+        r = json.loads(l)
+        npages.setdefault(r["muni"], set()).add(r["url"])
+    have = {(o["municipality"], o["rule"]) for o in out}
+    for k, m in MUNIS.items():
+        if k.endswith("-state"):
+            continue
+        for t, rule in CORE:
+            if (m[0], rule) in have:
+                continue
+            if k in BLOCK:
+                why = BLOCK[k]
+            else:
+                hosts = sorted({u.split("/")[2] for u in npages.get(k, [])})
+                why = (f"Not stated on the {len(npages.get(k, []))} official pages read on {', '.join(hosts) or 'the municipal site'}"
+                       " (home page, sitemap pages matching parking / dog / snow keywords). The municipal code is hosted on"
+                       " ecode360 / Municode / American Legal, whose robots.txt disallows Claude agents, so it was not read.")
+            out.append({"municipality": m[0], "state": m[1], "applies_to_hood_ids": m[2], "topic": t, "rule": rule,
+                        "summary": why, "quote": "", "source_url": (m[3][0] if m[3] else ""),
+                        "source_type": "municipal page", "retrieved_at": lib.now_iso()[:10], "value_type": "not_found"})
     cols = ["municipality", "state", "applies_to_hood_ids", "topic", "rule", "summary", "quote", "source_url",
             "source_type", "retrieved_at", "value_type"]
     with open(ROOT / "data/reference/local_rules.csv", "w", newline="") as f:

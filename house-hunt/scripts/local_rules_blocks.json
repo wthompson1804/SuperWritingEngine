@@ -1,0 +1,12 @@
+{
+"yonkers":"Blocked: www.yonkersny.gov and www.yonkersparkingauthority.com returned HTTP 403 bot walls at robots.txt; nothing further was requested. Code host (ecode360) disallows Claude agents.",
+"newark":"Blocked: www.newarknj.gov returned an HTTP 403 bot wall at robots.txt; nothing further was requested. Code host disallows Claude agents.",
+"stamford":"Blocked: www.stamfordct.gov returned an HTTP 403 bot wall at robots.txt; nothing further was requested. Code host disallows Claude agents.",
+"westport":"Blocked: www.westportct.gov returned an HTTP 403 bot wall at robots.txt; nothing further was requested. Code host disallows Claude agents.",
+"montclair":"Blocked: www.montclairnjusa.org returned an HTTP 403 bot wall at robots.txt; nothing further was requested. Code host disallows Claude agents.",
+"morris-plains":"Blocked: www.morrisplainsboro.org returned an HTTP 403 bot wall at robots.txt; nothing further was requested. Code host disallows Claude agents.",
+"new-paltz-town":"Blocked: www.townofnewpaltz.org returned an HTTP 403 bot wall on the first request; nothing further was requested.",
+"valley-stream":"Blocked: www.vsvny.org robots.txt has a group naming Claude agents with Disallow: /, so the site was not read. Code host (ecode360) disallows Claude agents too.",
+"jersey-city":"Not reachable: www.jerseycitynj.gov redirects to plain http, which this environment cannot reach; not retried. Code host disallows Claude agents.",
+"haverstraw":"Not reachable: www.voh-ny.com failed to connect (redirect to plain http); not retried. See Haverstraw (Town) rows for licence and dog parks."
+}
