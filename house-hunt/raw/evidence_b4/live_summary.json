@@ -1,0 +1,93 @@
+{
+ "https://www.trulia.com/home/85-05-elmhurst-ave-3j-elmhurst-ny-11373-466548407": {
+  "addr_key": "85-05 elmhurst ave|11373",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:06+00:00",
+  "path": "raw/evidence_b4/43c946fdcc33790e.html",
+  "len": 345825,
+  "hd_file": "a_com_home_85_05_elmhurst_ave_3j_elmhurst_ny_11373_466548407.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2099,
+  "avail": "now",
+  "addr": "85-05 Elmhurst Ave #3J"
+ },
+ "https://www.trulia.com/home/2165-clarendon-rd-2e-brooklyn-ny-11226-466620083": {
+  "addr_key": "2165 clarendon rd|11226",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:09+00:00",
+  "path": "raw/evidence_b4/00e25c6c88c458e2.html",
+  "len": 323997,
+  "hd_file": "ia_com_home_2165_clarendon_rd_2e_brooklyn_ny_11226_466620083.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2395,
+  "avail": "now",
+  "addr": "2165 Clarendon Rd #2E"
+ },
+ "https://www.trulia.com/home/1634-flatbush-ave-667-brooklyn-ny-11210-466464245": {
+  "addr_key": "1634 flatbush ave|11210",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:12+00:00",
+  "path": "raw/evidence_b4/59e2863e437cbf65.html",
+  "len": 352024,
+  "hd_file": "a_com_home_1634_flatbush_ave_667_brooklyn_ny_11210_466464245.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2342,
+  "avail": "now",
+  "addr": "1634 Flatbush Ave #667"
+ },
+ "https://www.trulia.com/home/3420-avenue-h-4g-brooklyn-ny-11210-245055375": {
+  "addr_key": "3420 ave h|11210",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:15+00:00",
+  "path": "raw/evidence_b4/f5811e8a99bd1621.html",
+  "len": 333781,
+  "hd_file": "trulia_com_home_3420_avenue_h_4g_brooklyn_ny_11210_245055375.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 1749,
+  "avail": "now",
+  "addr": "3420 Avenue H #4G"
+ },
+ "https://www.zumper.com/listings/28902181p/1-bedroom-flushing-new-york-ny": {
+  "addr_key": "139-81 35th ave 6d 139-81 35th ave flushing ny 11354 us|11354",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:16+00:00",
+  "path": "raw/evidence_b4/1bcba9d909c4b544.html",
+  "len": 950269
+ }
+}

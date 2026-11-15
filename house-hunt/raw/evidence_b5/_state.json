@@ -1,0 +1,80 @@
+{
+ "https://www.trulia.com/home/13828-queens-blvd-6k-jamaica-ny-11435-2061738454": {
+  "status": 200,
+  "path": "raw/evidence_b5/a92c607735153e73.html",
+  "retrieved_at": "2026-11-15T20:39:54+00:00",
+  "len": 386270
+ },
+ "https://www.trulia.com/home/92-27-160th-st-2215-jamaica-ny-11433-2056424620": {
+  "status": 200,
+  "path": "raw/evidence_b5/5a65b4c77abefd40.html",
+  "retrieved_at": "2026-11-15T20:39:57+00:00",
+  "len": 438239
+ },
+ "https://www.trulia.com/home/148-33-90th-ave-404-jamaica-ny-11435-440011739": {
+  "status": 200,
+  "path": "raw/evidence_b5/9321e8e968ace238.html",
+  "retrieved_at": "2026-11-15T20:39:59+00:00",
+  "len": 367098
+ },
+ "https://www.trulia.com/home/92-29-guy-r-brewer-blvd-1307-jamaica-ny-11433-466228957": {
+  "status": 200,
+  "path": "raw/evidence_b5/d8eb3e51265e9926.html",
+  "retrieved_at": "2026-11-15T20:40:02+00:00",
+  "len": 413689
+ },
+ "https://www.trulia.com/home/89-25-162nd-st-1003-jamaica-ny-11432-466293483": {
+  "status": 200,
+  "path": "raw/evidence_b5/0bf418e63d3e521f.html",
+  "retrieved_at": "2026-11-15T20:40:05+00:00",
+  "len": 365469
+ },
+ "https://www.trulia.com/home/16420-highland-ave-6d-jamaica-ny-11432-245487668": {
+  "status": 200,
+  "path": "raw/evidence_b5/efd1b5c4c194b312.html",
+  "retrieved_at": "2026-11-15T20:40:07+00:00",
+  "len": 341724
+ },
+ "https://www.trulia.com/home/89-61-162nd-st-805-jamaica-ny-11432-466088710": {
+  "status": 200,
+  "path": "raw/evidence_b5/31d58a0f526d94e3.html",
+  "retrieved_at": "2026-11-15T20:40:09+00:00",
+  "len": 380211
+ },
+ "https://www.trulia.com/home/87-46-chelsea-st-7a-jamaica-ny-11432-331533758": {
+  "status": 200,
+  "path": "raw/evidence_b5/efdea38e47c4db92.html",
+  "retrieved_at": "2026-11-15T20:40:12+00:00",
+  "len": 365485
+ },
+ "https://www.zumper.com/listings/29559763p/1-bedroom-briarwood-new-york-ny": {
+  "status": 200,
+  "path": "raw/evidence_b5/78401f5e992d544d.html",
+  "retrieved_at": "2026-11-15T20:40:12+00:00",
+  "len": 942581
+ },
+ "https://www.apartmentlist.com/ny/queens/147-14-84th-rd": {
+  "status": 200,
+  "path": "raw/evidence_b5/67c6e4ec31497e7a.html",
+  "retrieved_at": "2026-11-15T20:40:13+00:00",
+  "len": 508309
+ },
+ "https://www.trulia.com/home/8625-van-wyck-expy-329-jamaica-ny-11435-465860392": {
+  "status": 200,
+  "path": "raw/evidence_b5/d7e439e687f719d0.html",
+  "retrieved_at": "2026-11-15T20:40:14+00:00",
+  "len": 338763
+ },
+ "https://www.zumper.com/listings/22466815p/studio-briarwood-new-york-ny": {
+  "status": 200,
+  "path": "raw/evidence_b5/6d656b46506a8c3f.html",
+  "retrieved_at": "2026-11-15T20:40:15+00:00",
+  "len": 944043
+ },
+ "https://www.trulia.com/home/84-18-143rd-st-3l-jamaica-ny-11435-466618948": {
+  "status": 200,
+  "path": "raw/evidence_b5/f3939daca767cda2.html",
+  "retrieved_at": "2026-11-15T20:40:17+00:00",
+  "len": 334728
+ }
+}
