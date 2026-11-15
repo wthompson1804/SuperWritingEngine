@@ -5,7 +5,7 @@ Returns `electric`, `gas`, `internet` and `total`, each with `amount`, `value_ty
 `method` and `sources` (`source_url` + `retrieved_at`). Also exported: `electric_utility(lat, lon)`, `locate(lat, lon)`.
 Every amount is an estimate for the page's asterisk; none is a quote for an address.
 
-Reference tables: `data/reference/utility_rates.csv` (93 rows; written by `--build`) and, secondary,
+Reference tables: `data/reference/utility_rates.csv` (107 rows; written by `--build`) and, secondary,
 `data/reference/taxes.csv` (39 rows; written by `scripts/tools/taxes_reference.py`).
 
 ## Run
@@ -23,9 +23,9 @@ Reference tables: `data/reference/utility_rates.csv` (93 rows; written by `--bui
 | Jamaica station | $95, Con Edison, 36.74 c/kWh | $24, National Grid NY | $44 | $75 | $194 |
 | Forest Hills | $95, Con Edison | $24, National Grid NY | $44 | $75 | $194 |
 | Long Beach NY | $68, PSEG Long Island, 26.17 c/kWh | $28, National Grid LI | $48 | $75 | $171 |
-| Stamford CT | $75, Eversource CT, 28.88 c/kWh | $3 (flagged too low) | $22 | $75 | $153 |
+| Stamford CT | $75, Eversource CT, 28.88 c/kWh | $29, Eversource CT gas | $48 | $75 | $179 |
 | Jersey City Grove St | $65, PSE&G, 25.03 c/kWh | $12, PSE&G | $28 | $75 | $152 |
-| Beacon NY | $72, Central Hudson, 27.67 c/kWh | $3 (flagged too low) | $23 | $75 | $150 |
+| Beacon NY | $72, Central Hudson, 27.67 c/kWh | not_found (Central Hudson gas tariff unreachable) | not_found | $75 | $147, `complete=False` |
 
 ## Electric
 
@@ -68,25 +68,40 @@ tenant pays electric heat.
 
 ## Gas
 
-- **Cooking only** (used when `heat_included` is True or None; None also sets `heat_may_be_extra`): RECS cooking use is tiny
-  (1 bedroom: 18.8 therms/year, 1.6 a month), so the bill is almost all fixed charge. Where the utility's own rate sheet is
-  held, the amount is its minimum monthly charge: Con Edison SC 1 $33.23 (first 3 therms or less, sheet for November 2026),
-  National Grid NY (KEDNY) SC 1A $23.50, National Grid Long Island (KEDLI) SC 1A $28.50 (both effective April 1, 2026),
-  PSE&G RSG $9.99 fixed + $1.1104/therm (a straight line through the 25- and 50-therm rows of the winter bill table in BPU
-  notice GR26060274). Gas supply for those therms, surcharges and taxes are not in the figure (a few dollars).
-- **No tariff held** (Connecticut utilities, Central Hudson, O&R, NYSEG, NJ Natural, Elizabethtown, South Jersey, PGW, PECO):
-  EIA state average residential price x cooking therms, which comes to $2-3 and is flagged `likely_understated` because the
-  fixed charge is missing. **Gap**: the Avangrid sites (NYSEG, CNG, SCG, UI) are not reachable from this session, and
-  Central Hudson's page returned no content.
-- **Cooking + heat** (`heat_included=False`): cooking-only figure + state price x RECS space-heating therms for gas-heated
-  apartments (1 bedroom 140 therms/year). It is an annual average; winter bills are several times higher. Water heating
-  is separate (`if_gas_water_heater_add`).
+A cooking-only bill is almost all fixed charge (RECS cooking use for a 1 bedroom is 18.8 therms/year, 1.6 a month), so the
+line is built from each utility's own residential minimum or customer charge. Where none could be read, gas is
+`not_found` with the reason (no $2-3 figure), and `total.complete` is False.
+
+| Gas utility | Fixed monthly | Per therm / Ccf | Source (read 2026-11-15) | 1 BR cooking-only |
+|---|---|---|---|---|
+| Con Edison (NYC part, Westchester) | $33.23, first 3 therms | n/a at this use | coned.com `allrates.pdf`, SC 1, sheet for Nov 2026 | $33 |
+| National Grid NY (KEDNY) | $23.50, first 3 therms | n/a | nationalgridus.com delivery charges, SC 1A, eff. 2026-04-01 | $24 |
+| National Grid Long Island (KEDLI) | $28.50, first 3 therms | n/a | same, SC 1A, eff. 2026-04-01 | $28 |
+| Orange & Rockland | $22.50, first 3 Ccf | n/a | oru.com gas tariff PSC No. 4, SC 1, leaf 114 eff. 2026-01-01 | $22 |
+| Eversource CT gas (Yankee) | $25.00 | $2.5443 delivery, supply extra | eversource.com Summary of Residential Gas Rates (CT), Rate 01, updated 2026-11-01 | $29 |
+| PSE&G | $9.99 (derived) | $1.1104 (derived) | BPU notice GR26060274, winter bill table | $12 |
+| New Jersey Natural Gas | $12.00 | $1.5431 (delivery + supply) | BPU order 2026-09-09 item 2B, Exhibit A, non-heating, eff. 2026-10-01 | $14 |
+| Elizabethtown Gas | $11.50 (derived) | $1.6395 (derived) | BPU notice GR26060277, heating bill table, 2026-07-01 | $14 |
+| South Jersey Gas | $10.51 (derived) | $1.9324 (derived) | BPU notice ER26060356 (SJG), heating bill table, 2026-07-01 | $14 |
+| Central Hudson, NYSEG, Southern Connecticut Gas, Connecticut Natural Gas, PGW, PECO | not_found | | hosts unreachable or bot wall (see below); PA not attempted | not_found |
+
+- "Derived" = a straight line through two rows of the utility's published bill table (it also fits the third row); those
+  figures include supply. Elizabethtown and South Jersey publish only a heating-class table, so the fixed part is the
+  heating class's. NJ Natural's own tariff PDFs are disallowed by its robots.txt, so the BPU order was used.
+- **Not reachable**: nyseg.com, cngcorp.com, soconngas.com (Avangrid hosts are outside this session's allowed network);
+  centralhudson.com / cenhud.com return an empty bot-check page; nothing on dps.ny.gov states either charge. To fill these,
+  allow those hosts or supply the four rate sheets.
+- **Cooking + heat** (`heat_included=False`): cooking-only figure + EIA state price x RECS space-heating therms for gas-heated
+  apartments (1 bedroom 140 therms/year). An annual average; winter bills are several times higher. Water heating is
+  separate (`if_gas_water_heater_add`). Where gas is not_found, `heating_component_if_tenant_pays` gives the heating part alone.
 - **State price**: EIA residential price, latest annual, converted with EIA's state heat content: NY $17.58/Mcf = $1.70/therm
   (2025); NJ $14.21 = $1.37 (2025); PA $15.04 = $1.45 (2025); CT $16.83 = $1.63 (2024; 2025 not yet published).
-- **Gas utility at the point**: an ArcGIS Online copy of HIFLD "Natural Gas Service Territories" (2016-2017 vintage, coarse).
-  It does not split National Grid's two New York companies or draw Con Edison's part of Queens, so: Nassau and Suffolk are
-  KEDLI; Brooklyn, Queens and Staten Island are KEDNY; a Queens point whose electric utility is LIPA (the Rockaways) is KEDLI;
-  every Queens result carries a note that northern Queens is Con Edison gas ($33.23).
+- **Gas utility at the point**: point-in-polygon on an ArcGIS Online copy of HIFLD "Natural Gas Service Territories"
+  (2016-17 vintage, built from EIA company territories; coarse), then by county where the layer is too coarse: Nassau and
+  Suffolk are KEDLI; Brooklyn, Queens and Staten Island are KEDNY; a Queens point whose electric utility is LIPA (the
+  Rockaways) is KEDLI; every Queens result notes that northern Queens is Con Edison gas ($33.23). Westchester falls in the
+  Con Edison polygon. In Connecticut the layer gives Stamford and Norwalk to Eversource, Greenwich to CNG, Bridgeport and
+  New Haven to SCG. Each result's `notes` states the mapping used.
 - The line assumes a gas stove. An all-electric unit has no gas bill; the tool cannot know.
 
 ## Internet

@@ -78,7 +78,39 @@ GAS_MIN_CHARGE = {
     "PSEG": dict(utility="PSE&G (gas)", state="NJ", price=9.99, included_therms=0, per_therm=1.1104,
                  period="rates in effect 2026-06-01 (winter bill table)", tariff="RSG Residential Service",
                  source_url="https://www.nj.gov/bpu/pdf/publicnotice/GR26060274%20PSEG%20BGSS%20Public%20Hearing%20Notice%209.3.26.pdf"),
+    "EVERSOURCE_CT": dict(utility="Eversource CT gas (Yankee Gas)", state="CT", price=25.00, included_therms=0, per_therm=2.5443,
+                          period="summary last updated 2026-11-01", tariff="Rate 01 Residential Non-Heating Service",
+                          rate_note="customer service charge $25.00 plus delivery charges totalling $2.5443 per Ccf (delivery 2.1255 + six riders); gas supply (PGA) is extra",
+                          source_url="https://www.eversource.com/content/docs/default-source/rates-tariffs/ct-gas/ct-residential-gas-rates.pdf"),
+    "ORU": dict(utility="Orange & Rockland (gas)", state="NY", price=22.50, included_therms=3,
+                period="leaf 114 effective 2026-01-01", tariff="SC 1 Residential and Space Heating (PSC No. 4 Gas)",
+                source_url="https://www.oru.com/-/media/files/oru/documents/rates/new-york/gas/gas-tariff.pdf"),
+    "NJNG": dict(utility="New Jersey Natural Gas", state="NJ", price=12.00, included_therms=0, per_therm=1.5431,
+                 period="rates effective 2026-10-01", tariff="Residential Non-Heating",
+                 rate_note="customer charge $12.00 plus $1.5431 per therm (delivery 1.1414 + BGSS supply 0.4017), from Exhibit A of the BPU order",
+                 source_url="https://www.nj.gov/bpu/pdf/boardorders/2026/20260909/2B%20ORDER%20NJNG%20BGSS%20CIP%20Provisional%20Rates.pdf"),
+    # Elizabethtown and South Jersey: the BPU notices give whole residential heating bills by usage. A straight line through
+    # the 10- and 50-therm rows (it also passes through the 100-therm row) gives the fixed part and the per-therm rate.
+    "ETG": dict(utility="Elizabethtown Gas", state="NJ", price=11.50, included_therms=0, per_therm=1.6395,
+                period="bills as of 2026-07-01", tariff="Residential (heating bill table; no non-heating table published)",
+                rate_note="fixed $11.50 plus $1.6395 per therm, both derived from the bill table (10 therms $27.89, 50 therms $93.47), supply included",
+                source_url="https://www.nj.gov/bpu/pdf/publicnotice/GR26060277%20ETG%20BGSS%20CIP%20Public%20Hearing%20Notice%208.26.26.pdf"),
+    "SJG": dict(utility="South Jersey Gas", state="NJ", price=10.51, included_therms=0, per_therm=1.9324,
+                period="bills as of 2026-07-01", tariff="Residential Service (heating bill table)",
+                rate_note="fixed $10.51 plus $1.9324 per therm, both derived from the bill table (10 therms $29.83, 50 therms $107.12), supply included",
+                source_url="https://www.nj.gov/bpu/pdf/publicnotice/ER26060356%20SJG%20USF%20%20Public%20Hearing%20Notice%208.25.26.pdf"),
 }
+GAS_MIN_CHARGE["PSEG"]["rate_note"] = ("fixed $9.99 plus $1.1104 per therm, both derived from the winter bill table "
+                                       "(25 therms $37.75, 50 therms $65.51), supply included")
+# Gas utilities whose rate pages could not be read from this session (host not reachable or bot wall); gas is not_found there.
+GAS_NO_TARIFF = {
+    "Central Hudson (gas)": "centralhudson.com / cenhud.com return an empty bot-check page; nothing on dps.ny.gov states the charge",
+    "NYSEG (gas)": "nyseg.com is not reachable from this session; the DPS rate-case summary does not state the charge",
+    "Southern Connecticut Gas": "soconngas.com is not reachable from this session",
+    "Connecticut Natural Gas": "cngcorp.com is not reachable from this session",
+}
+GAS_POLY_KEY = {"YANKEE GAS SERVICE CO.": "EVERSOURCE_CT", "ORANGE AND ROCKLAND UTILITIES": "ORU", "NEW JERSEY NATURAL GAS": "NJNG",
+                "ELIZABETHTOWN GAS CO.": "ETG", "SOUTH JERSEY GAS": "SJG"}
 GAS_TARIFF_SOURCE = "gas_tariffs"
 
 # Internet: flat published prices, read by hand from the cached pages on 2026-11-15.
@@ -302,8 +334,13 @@ def _write_rates_csv(idx: dict) -> None:
         rows.append([f"{st} statewide average", st, "gas_residential", v["usd_therm"], "$/therm",
                      f"{v['year']} annual price / {v['heat_year']} heat content {v['btu_cf']:.0f} Btu per cubic foot", NG_HEAT])
     for t in GAS_MIN_CHARGE.values():
-        unit = "$/month for the first 3 therms or less" if t["included_therms"] else "$/month fixed part (derived from bill table)"
+        unit = "$/month for the first 3 therms or less" if t["included_therms"] else "$/month fixed charge"
         rows.append([t["utility"], t["state"], "gas_min_monthly_charge", t["price"], unit, f"{t['tariff']}; {t['period']}", t["source_url"]])
+        if t.get("per_therm"):
+            rows.append([t["utility"], t["state"], "gas_per_therm_rate", t["per_therm"], "$/therm (or Ccf)",
+                         f"{t['tariff']}; {t['period']}; {t['rate_note']}", t["source_url"]])
+    for name, why in GAS_NO_TARIFF.items():
+        rows.append([name, "CT" if "Connecticut" in name else "NY", "gas_min_monthly_charge", "not_found", "", why, ""])
     d = INTERNET["default"]
     rows.append([f"{d['provider']} {d['plan']}", "all", "internet_flat_default", d["price"], "$/month", f"page read 2026-11-15; {d['note']}", d["source_url"]])
     for d in INTERNET["alternatives"]:
@@ -534,8 +571,13 @@ def _gas_utility(ix, pt: Point, loc: dict) -> dict:
         name = GAS_MIN_CHARGE[key]["utility"] if key else "National Grid"
     elif name.startswith("PUBLIC SERVICE"):
         name, key = "PSE&G (gas)", "PSEG"
+    elif name in GAS_POLY_KEY:
+        key = GAS_POLY_KEY[name]
+        name = GAS_MIN_CHARGE[key]["utility"]
     else:
         name = GAS_DISPLAY.get(name, name.title())
+    notes.append("gas utility from point-in-polygon on the HIFLD Natural Gas Service Territories layer (2016-17 vintage)"
+                 + (f", refined by county ({loc['county']})" if key in ("KEDNY", "KEDLI") else ""))
     return dict(name=name, key=key, notes=notes)
 
 
@@ -556,22 +598,26 @@ def _gas_line(ix, lat, lon, loc, b, heat_included, rockaways: bool = False) -> d
     notes = list(gu["notes"])
     srcs = _src(ix, "gas_territory", f"ng_price_{st}", "ng_heat", "recs_micro")
     t = GAS_MIN_CHARGE.get(gu["key"])
-    if t:
-        extra = max(0.0, cook_m - t["included_therms"]) * t.get("per_therm", 0.0) if t["included_therms"] == 0 else 0.0
-        cook_amt = round(t["price"] + extra)
-        cook_method = (f"{t['utility']} {t['tariff']}: ${t['price']:.2f}/month "
-                       + ("covers the first 3 therms or less" if t["included_therms"] else f"fixed part plus ${t['per_therm']:.4f}/therm, both derived from the utility's published bill table")
-                       + f" ({t['period']}); assumed cooking use {cook_m:.1f} therms/month (RECS 2020 microdata, Northeast apartments in 5+ unit "
-                       f"buildings with gas cooking, n={cook['n']}). "
-                       + ("Gas supply cost for those therms, surcharges and taxes are not included (a few dollars)." if t["included_therms"] else ""))
-        srcs = srcs + _src(ix, f"gas_tariff_{gu['key']}")
-        understated = False
+    if not t:
+        why = GAS_NO_TARIFF.get(gu["name"], "no official tariff or rate page was collected for this utility")
+        return dict(amount=None, value_type="not_found", gas_utility=gu["name"],
+                    reason=(f"no residential minimum monthly charge held for {gu['name'] or 'the gas utility at this point'}: {why}. "
+                            "A cooking-only bill is almost all fixed charge, so no figure is given rather than a misleading $2-3."),
+                    heat_may_be_extra=heat_included is not True,
+                    heating_component_if_tenant_pays=dict(
+                        amount=round(gp["usd_therm"] * heat_m), therms_per_month=round(heat_m, 1),
+                        note=f"{price_txt} x RECS space-heating therms; excludes the fixed monthly charge. Not a total."),
+                    notes=notes, sources=srcs)
+    if t["included_therms"]:
+        cook_amt = round(t["price"])
+        rate_txt = f"${t['price']:.2f}/month covers the first {t['included_therms']} therms (or Ccf) or less; gas supply for those therms, surcharges and taxes are extra (a few dollars)"
     else:
-        cook_amt = round(gp["usd_therm"] * cook_m)
-        cook_method = (f"{price_txt} x {cook_m:.1f} therms/month cooking use (RECS 2020 microdata, Northeast apartments in 5+ unit buildings "
-                       f"with gas cooking, n={cook['n']}). No tariff is held for {gu['name'] or 'the gas utility here'}, so the fixed monthly "
-                       "customer charge is missing and this figure is too low; utilities whose tariffs we hold charge $10 to $33 a month before any use.")
-        understated = True
+        cook_amt = round(t["price"] + cook_m * t["per_therm"])
+        rate_txt = t["rate_note"]
+    cook_method = (f"{t['utility']}, {t['tariff']}: {rate_txt} ({t['period']}); assumed cooking use {cook_m:.1f} therms/month "
+                   f"(RECS 2020 microdata, Northeast apartments in 5+ unit buildings with gas cooking, n={cook['n']}). Taxes not included.")
+    srcs = srcs + _src(ix, f"gas_tariff_{gu['key']}")
+    understated = False
     heat_amt = cook_amt + round(gp["usd_therm"] * heat_m)
     heat_method = (f"cooking-only figure (${cook_amt}) + {price_txt} x {heat_m:.1f} therms/month of space heating (annual use / 12; "
                    f"RECS 2020 microdata, Northeast apartments in 5+ unit buildings heated with gas, n={sph['n']}). "
@@ -590,8 +636,6 @@ def _gas_line(ix, lat, lon, loc, b, heat_included, rockaways: bool = False) -> d
         line.update(amount=cook_amt, basis="cooking_only", method=cook_method, heat_may_be_extra=heat_included is None)
         if heat_included is None:
             notes.append("whether heat is included is unknown: the cooking-only figure is shown; heat may be extra (see cooking_plus_heat)")
-    if understated:
-        notes.append("cooking-only figure excludes the utility's fixed monthly charge (no tariff held) and is too low")
     notes.append("assumes the unit has a gas stove; an all-electric unit has no gas bill")
     return line
 
@@ -623,7 +667,7 @@ if __name__ == "__main__":
         print(f"\n== {name} ({la}, {lo}) [{dt * 1000:.1f} ms] {r['location']}")
         print(f"  electric  ${e.get('amount')}* {e['value_type']}: {e.get('utility')} @ {e.get('price_cents_per_kwh')} c/kWh x {e.get('assumed_kwh_per_month')} kWh")
         print(f"  gas       ${g.get('amount')}* {g['value_type']} ({g.get('basis')}): {g.get('gas_utility')}; cooking+heat ${g.get('cooking_plus_heat', {}).get('amount')}"
-              f"{' [cooking-only understated]' if g.get('cooking_only', {}).get('likely_understated') else ''}")
+              f"{' reason: ' + g['reason'][:110] if g.get('reason') else ''}")
         print(f"  internet  ${i['amount']}* {i['value_type']}: {i['provider_basis']} {i['plan'][:8]}")
         print(f"  total     ${r['total']['amount']}* complete={r['total']['complete']}")
         for n in e.get("notes", []) + g.get("notes", []):

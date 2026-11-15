@@ -101,3 +101,14 @@
 {"url": "https://www.thepearlstationbay.com/", "retrieved_at": "2026-11-15T18:32:39+00:00", "status": 403, "path": "raw/mgmt_probe/29b6738182013f8f.html", "source": "mgmt_probe"}
 {"url": "https://www.deyandbergen.com/robots.txt", "retrieved_at": "2026-11-15T18:32:39+00:00", "status": 200, "path": "raw/mgmt_probe/524772e48fc39006.txt", "source": "mgmt_probe"}
 {"url": "https://www.deyandbergen.com/", "retrieved_at": "2026-11-15T18:32:41+00:00", "status": 403, "path": "raw/mgmt_probe/d208634de1c3d4e6.html", "source": "mgmt_probe"}
+{"url": "https://www.windsorcommunities.com/find-apartments/new-york", "retrieved_at": "2026-11-15T18:32:55+00:00", "status": 200, "path": "raw/mgmt_probe/af974f4e51212469.html", "source": "mgmt_probe"}
+{"url": "https://millcreekplaces.com/sitemap_index.xml", "retrieved_at": "2026-11-15T18:32:55+00:00", "status": 200, "path": "raw/mgmt_probe/bf30875790a810ab.xml", "source": "mgmt_probe"}
+{"url": "https://gdcrentals.com/robots.txt", "retrieved_at": "2026-11-15T18:32:56+00:00", "status": 200, "path": "raw/mgmt_probe/411d65a7fb6423bf.txt", "source": "mgmt_probe"}
+{"url": "https://gdcrentals.com/", "retrieved_at": "2026-11-15T18:33:06+00:00", "status": 200, "path": "raw/mgmt_probe/452b4a7bc1ecaf1d.html", "source": "mgmt_probe"}
+{"url": "https://www.newportrentals.com/apartments-jersey-city-for-rent/", "retrieved_at": "2026-11-15T18:33:06+00:00", "status": 200, "path": "raw/mgmt_probe/f7fcf952cb6970af.html", "source": "mgmt_probe"}
+{"url": "https://www.udr.com/new-york-city-apartments/", "retrieved_at": "2026-11-15T18:33:08+00:00", "status": 200, "path": "raw/mgmt_probe/44952e34db3438db.html", "source": "mgmt_probe"}
+{"url": "https://millcreekplaces.com/community-sitemap.xml", "retrieved_at": "2026-11-15T18:34:19+00:00", "status": 200, "path": "raw/mgmt_probe/ed8a71c1dcf38f5f.xml", "source": "mgmt_probe"}
+{"url": "https://www.windsorcommunities.com/sitemap_index.xml", "retrieved_at": "2026-11-15T18:34:19+00:00", "status": 200, "path": "raw/mgmt_probe/0277a1fb99177e5a.xml", "source": "mgmt_probe"}
+{"url": "https://www.russodevelopment.com/sitemap_index.xml", "retrieved_at": "2026-11-15T18:34:22+00:00", "status": 200, "path": "raw/mgmt_probe/2c50dee5e4c87af1.xml", "source": "mgmt_probe"}
+{"url": "https://rosenyc.com/robots.txt", "retrieved_at": "2026-11-15T18:34:22+00:00", "status": 200, "path": "raw/mgmt_probe/9f1bdea5c45d333f.txt", "source": "mgmt_probe"}
+{"url": "https://rosenyc.com/sitemap.xml", "retrieved_at": "2026-11-15T18:34:24+00:00", "status": 200, "path": "raw/mgmt_probe/8fcfd5e2c5295620.xml", "source": "mgmt_probe"}

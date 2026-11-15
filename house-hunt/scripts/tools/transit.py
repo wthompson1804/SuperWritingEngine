@@ -46,7 +46,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from lib import ROOT, cached_get  # noqa: E402
 
 # ----------------------------------------------------------------------------------------------- parameters
-NET_VERSION = 3
+NET_VERSION = 4
 BIG = ROOT / "raw" / "big" / "transit"
 NET_PATH = BIG / f"network_v{NET_VERSION}.pkl"
 MANIFEST = ROOT / "raw" / "transit" / "feeds_manifest.json"
@@ -73,6 +73,11 @@ HUB_MIN_TRANSFER_S = {
     ("lirr", "237"): 360,    # Penn Station (LIRR concourse <-> NJ Transit / subway)
     ("mnr", "1"): 300,       # Grand Central Terminal
 }
+
+# Station pairs linked on foot although they are a little over TRANSFER_MAX_M apart in the GTFS coordinates.
+# Only one: PATH 33rd Street <-> LIRR at Penn Station (about 480 m; NJ Transit's Penn Station stop is already
+# within 400 m of PATH, and LIRR shares that building). Without it the router rides a bus for one block.
+EXTRA_TRANSFER_PAIRS = [(("path", "781740"), ("lirr", "237")), (("path", "781742"), ("lirr", "237"))]
 
 # key -> (system label, source of the zip). "manifest" = downloaded by scripts/p1_transit_feeds.py.
 FEEDS = {
@@ -573,6 +578,12 @@ def build(verbose=True):
                         continue
                     dur = max(TRANSFER_MIN_S, _walk_s(m) + TRANSFER_BUFFER_S, hub.get(i, 0), hub.get(j, 0))
                     foot_d[i][j] = dur; foot_d[j][i] = dur
+    for ka, kb in EXTRA_TRANSFER_PAIRS:
+        if ka in node_idx and kb in node_idx:
+            i, j = node_idx[ka], node_idx[kb]
+            m = _hav_m(nodes[i][3], nodes[i][4], nodes[j][3], nodes[j][4])
+            dur = max(TRANSFER_MIN_S, _walk_s(m) + TRANSFER_BUFFER_S, hub.get(i, 0), hub.get(j, 0))
+            foot_d[i][j] = dur; foot_d[j][i] = dur
     for fk, fd in feeds.items():       # feed-stated station-to-station transfers override the distance rule
         for (a, b), sec in fd["pair"].items():
             if (fk, a) in node_idx and (fk, b) in node_idx:
@@ -848,7 +859,7 @@ def _fmt_legs(n, rides, first_walk, last_walk, door_first, day):
 
 
 def _label(system, line):
-    return system if line.lower() in system.lower() else f"{system} {line}"
+    return system if len(line) >= 4 and line.lower() in system.lower() else f"{system} {line}"
 
 
 def _summary(legs):
