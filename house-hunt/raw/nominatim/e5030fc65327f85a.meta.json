@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Nyack%2C+NY&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:50:15+00:00",
+ "status": 200,
+ "path": "raw/nominatim/e5030fc65327f85a.json",
+ "source": "nominatim"
+}

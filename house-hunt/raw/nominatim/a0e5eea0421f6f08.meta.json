@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Newburgh%2C+NY&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:50:25+00:00",
+ "status": 200,
+ "path": "raw/nominatim/a0e5eea0421f6f08.json",
+ "source": "nominatim"
+}

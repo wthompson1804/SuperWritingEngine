@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=New+York+Avenue+and+Main+Street%2C+Huntington%2C+NY&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:55:08+00:00",
+ "status": 200,
+ "path": "raw/nominatim/43ddbb541e1aad7d.json",
+ "source": "nominatim"
+}

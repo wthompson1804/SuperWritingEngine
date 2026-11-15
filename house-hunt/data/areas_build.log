@@ -1,0 +1,101 @@
+r1-jamaica                          New York city                Queens County        11435 11432 11433 11419 11418  NYPD Precinct 103
+r1-jamaica-estates                  New York city                Queens County        11432 11423 11433              NYPD Precinct 107
+r1-briarwood                        New York city                Queens County        11415 11435 11418 11424        NYPD Precinct 102
+r1-kew-gardens                      New York city                Queens County        11415 11375 11435 11418        NYPD Precinct 102
+r1-forest-hills                     New York city                Queens County        11375                          NYPD Precinct 112
+r1-rego-park                        New York city                Queens County        11374 11368 11375 11373        NYPD Precinct 112
+r1-fresh-meadows                    New York city                Queens County        11365 11366                    NYPD Precinct 107
+r1-bayside                          New York city                Queens County        11361                          NYPD Precinct 111
+r1-flushing                         New York city                Queens County        11354 11355 11368              NYPD Precinct 109
+r1-glen-oaks-bellerose              Bellerose village            Nassau County        11001 11426 11003              NYPD 105th Precinct
+r1-astoria                          New York city                Queens County        11102 11105 11103 11106        NYPD Precinct 114
+r1-sunnyside                        New York city                Queens County        11104 11101 11377              NYPD Precinct 108
+r1-long-island-city                 New York city                Queens County        11101 11222                    NYPD Precinct 108
+r1-rockaway-park                    New York city                Queens County        11694                          NYPD Precinct 100
+r2-bay-ridge                        New York city                Kings County         11209 11228                    NYPD Precinct 68
+r2-sheepshead-bay                   New York city                Kings County         11235 11229 11223              NYPD Precinct 61
+r2-downtown-brooklyn                New York city                Kings County         11201 11205 11217              NYPD Precinct 84
+r2-williamsburg-greenpoint          New York city                Kings County         11211 11249 11222              NYPD Precinct 94
+r2-riverdale                        New York city                Bronx County         10471                          NYPD Precinct 50
+r2-st-george-stapleton              New York city                Richmond County      10301                          NYPD Precinct 120
+r3-valley-stream                    Valley Stream village        Nassau County        11581 11580                    Nassau County PD
+r3-lynbrook                         Lynbrook village             Nassau County        11563                          Lynbrook Village PD
+r3-rockville-centre                 Rockville Centre village     Nassau County        11570                          Rockville Centre Village PD
+r3-oceanside-east-rockaway          Oceanside CDP                Nassau County        11572 11518                    Nassau County PD
+r3-island-park                      Island Park village          Nassau County        11558 11561                    Nassau County PD
+r3-long-beach                       Long Beach city              Nassau County        11561 11558                    Long Beach City PD
+r3-freeport                         Freeport village             Nassau County        11520                          Freeport Village PD
+r3-hewlett-five-towns               Hewlett CDP                  Nassau County        11557 11598                    Nassau County PD
+r3-floral-park                      Floral Park village          Nassau County        11001 11426                    Floral Park Village PD
+r3-mineola                          Mineola village              Nassau County        11501 11530                    Nassau County PD
+r3-garden-city                      Garden City village          Nassau County        11530                          Garden City Village PD
+r3-hempstead-west-hempstead         Hempstead village            Nassau County        11550 11530                    Hempstead Village PD / Nassau County PD
+r3-westbury                         Westbury village             Nassau County        11590 11554                    Nassau County PD
+r3-hicksville                       Hicksville CDP               Nassau County        11801                          Nassau County PD
+r3-farmingdale                      Farmingdale village          Nassau County        11735                          Nassau County PD
+r3-great-neck                       Great Neck Plaza village     Nassau County        11021                          Nassau County PD
+r3-port-washington                  Port Washington CDP          Nassau County        11050                          Port Washington Police District
+r3-glen-cove                        Glen Cove city               Nassau County        11542                          Glen Cove City PD
+r4-huntington                       Huntington CDP               Suffolk County       11743                          Suffolk County PD
+r4-amityville-copiague              Amityville village           Suffolk County       11701 11758                    Amityville Village PD / Suffolk County PD
+r4-lindenhurst                      Lindenhurst village          Suffolk County       11757                          Suffolk County PD
+r4-babylon                          Babylon village              Suffolk County       11702 11795                    Suffolk County PD
+r4-bay-shore                        Bay Shore CDP                Suffolk County       11706 11718                    Suffolk County PD
+r4-islip                            Islip CDP                    Suffolk County       11751 11730                    Suffolk County PD
+r4-sayville                         Sayville CDP                 Suffolk County       11782 11796                    Suffolk County PD
+r4-patchogue                        Patchogue village            Suffolk County       11772                          Suffolk County PD
+r4-ronkonkoma                       Ronkonkoma CDP               Suffolk County       11779                          Suffolk County PD
+r4-smithtown                        Smithtown CDP                Suffolk County       11787                          Suffolk County PD
+r4-port-jefferson                   Port Jefferson village       Suffolk County       11777 11776                    Suffolk County PD
+r4-riverhead                        Riverhead CDP                Suffolk County       11901                          Riverhead Town PD
+r5-yonkers                          Yonkers city                 Westchester County   10701 07620                    Yonkers PD
+r5-mount-vernon-fleetwood           Mount Vernon city            Westchester County   10550 10708 10552 10704        Mount Vernon PD
+r5-pelham                           Pelham village               Westchester County   10803 10801 10553 10552        Pelham Village PD
+r5-new-rochelle                     New Rochelle city            Westchester County   10801 10805                    New Rochelle PD
+r5-mamaroneck                       Mamaroneck village           Westchester County   10543                          Mamaroneck Village PD
+r5-port-chester                     Port Chester village         Westchester County   10573 06830                    Port Chester Village PD
+r5-white-plains                     White Plains city            Westchester County   10603 10601 10606              White Plains PD
+r5-tarrytown-sleepy-hollow          Tarrytown village            Westchester County   10591                          Tarrytown PD / Sleepy Hollow PD
+r5-ossining                         Ossining village             Westchester County   10562                          Ossining Village PD
+r5-peekskill                        Peekskill city               Westchester County   10566                          Peekskill PD
+r5-nyack                            Nyack village                Rockland County      10960                          Orangetown PD / Clarkstown PD
+r5-beacon                           Beacon city                  Dutchess County      12508                          Beacon PD
+r5-newburgh                         Newburgh city                Orange County        12550                          Newburgh City PD
+r5-poughkeepsie                     Poughkeepsie city            Dutchess County      12601                          City of Poughkeepsie PD
+r6-greenwich                        Greenwich town               Western Connecticut  06830                          Greenwich PD
+r6-stamford                         Stamford city                Western Connecticut  06902 06901                    Stamford PD
+r6-norwalk                          Norwalk city                 Western Connecticut  06854 06855                    Norwalk PD
+r6-fairfield                        Fairfield town               Greater Bridgeport P 06824                          Fairfield PD
+r6-bridgeport-black-rock            Bridgeport city              Greater Bridgeport P 06605 06825 06824              Bridgeport PD
+r6-bridgeport-downtown              Bridgeport city              Greater Bridgeport P 06604 06608                    Bridgeport PD
+r6-stratford                        Stratford town               Greater Bridgeport P 06615 06614                    Stratford PD
+r6-milford                          Milford city (balance)       South Central Connec 06460                          Milford PD
+r6-shelton                          Shelton city                 Naugatuck Valley Pla 06484 06418                    Shelton PD
+r6-danbury                          Danbury city                 Western Connecticut  06810                          Danbury PD
+r6-new-haven                        New Haven city               South Central Connec 06511 06510 06519              New Haven PD
+r7-fort-lee-edgewater               Fort Lee borough             Bergen County        07024 07020                    Fort Lee PD / Edgewater PD
+r7-hoboken                          Hoboken city                 Hudson County        07030 07310                    Hoboken PD
+r7-jersey-city-downtown             Jersey City city             Hudson County        07302 07310 07311              Jersey City PD
+r7-jersey-city-journal-square       Jersey City city             Hudson County        07306                          Jersey City PD
+r7-jersey-city-heights              Jersey City city             Hudson County        07307 07030 07306              Jersey City PD
+r7-bayonne                          Bayonne city                 Hudson County        07002                          Bayonne PD
+r7-harrison                         Harrison town                Hudson County        07029 07105 07102              Harrison PD
+r7-newark-ironbound                 Newark city                  Essex County         07105                          Newark Dept of Public Safety
+r7-newark-downtown                  Newark city                  Essex County         07104 07029 07102 07103        Newark Dept of Public Safety
+r7-hackensack                       Hackensack city              Bergen County        07601 07666                    Hackensack PD
+r7-montclair                        Montclair township           Essex County         07042 07028                    Montclair PD
+r7-bloomfield                       Bloomfield township          Essex County         07003 07028                    Bloomfield PD
+r7-cranford                         Cranford township            Union County         07016                          Cranford PD
+r7-rahway                           Rahway city                  Union County         07065                          Rahway PD
+r7-metuchen                         Metuchen borough             Middlesex County     08840                          Metuchen PD
+r7-new-brunswick                    New Brunswick city           Middlesex County     08901 08904                    New Brunswick PD
+r7-morristown                       Morristown town              Morris County        07960                          Morristown PD
+r7-red-bank                         Red Bank borough             Monmouth County      07701                          Red Bank PD
+r7-long-branch                      Long Branch city             Monmouth County      07740                          Long Branch PD
+r7-asbury-park                      Asbury Park city             Monmouth County      07712 07756 07720 07753        Asbury Park PD
+r8-roxborough                       Philadelphia city            Philadelphia County  19128 19127                    Philadelphia PD 5th District
+r8-manayunk                         Philadelphia city            Philadelphia County  19127 19128 19004              Philadelphia PD 5th District
+r8-east-falls                       Philadelphia city            Philadelphia County  19129 19131                    Philadelphia PD 39th District
+
+98 areas written; 0 problems
+

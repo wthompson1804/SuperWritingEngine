@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=The+Heights%2C+Jersey+City%2C+NJ&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:51:58+00:00",
+ "status": 200,
+ "path": "raw/nominatim/c71f92ec65c2bd39.json",
+ "source": "nominatim"
+}

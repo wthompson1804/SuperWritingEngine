@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+# Large raw captures that a script can re-download. Keep _index.jsonl and meta files.
+raw/**/*.parquet
+raw/big/

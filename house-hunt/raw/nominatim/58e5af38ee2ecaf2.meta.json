@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Ironbound%2C+Newark%2C+NJ&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:52:15+00:00",
+ "status": 200,
+ "path": "raw/nominatim/58e5af38ee2ecaf2.json",
+ "source": "nominatim"
+}

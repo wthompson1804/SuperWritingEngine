@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Fulton+Mall%2C+Brooklyn%2C+NY&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:55:13+00:00",
+ "status": 200,
+ "path": "raw/nominatim/29d764674a31a209.json",
+ "source": "nominatim"
+}

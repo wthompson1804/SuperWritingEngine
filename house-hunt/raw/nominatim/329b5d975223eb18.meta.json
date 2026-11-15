@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Fresh+Meadows%2C+Queens%2C+NY&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:43:26+00:00",
+ "status": 200,
+ "path": "raw/nominatim/329b5d975223eb18.json",
+ "source": "nominatim"
+}

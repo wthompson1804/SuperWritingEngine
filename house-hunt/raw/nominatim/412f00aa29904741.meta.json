@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Howe+Avenue%2C+Shelton%2C+CT&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:55:10+00:00",
+ "status": 200,
+ "path": "raw/nominatim/412f00aa29904741.json",
+ "source": "nominatim"
+}

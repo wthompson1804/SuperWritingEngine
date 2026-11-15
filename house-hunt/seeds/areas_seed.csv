@@ -1,0 +1,99 @@
+id,region,name,state,anchor_station,anchor_system,anchor_line,geocode_query,police_jurisdiction_seed,notes
+r1-jamaica,R1,Jamaica,NY,Jamaica,LIRR,Hub (all branches),,NYPD 103rd Precinct,Anchor area; parents live here
+r1-jamaica-estates,R1,Jamaica Estates,NY,Jamaica-179 St,NYCT,F,"Jamaica Estates, Queens, NY",NYPD 107th Precinct,
+r1-briarwood,R1,Briarwood,NY,Briarwood,NYCT,E F,,NYPD 107th Precinct,
+r1-kew-gardens,R1,Kew Gardens,NY,Kew Gardens,LIRR,Main Line (City Terminal Zone),,NYPD 102nd Precinct,
+r1-forest-hills,R1,Forest Hills,NY,Forest Hills,LIRR,Main Line (City Terminal Zone),,NYPD 112th Precinct,
+r1-rego-park,R1,Rego Park,NY,63 Dr-Rego Park,NYCT,M R,,NYPD 112th Precinct,
+r1-fresh-meadows,R1,Fresh Meadows,NY,,,,"Fresh Meadows, Queens, NY",NYPD 107th Precinct,No rail station; bus only
+r1-bayside,R1,Bayside,NY,Bayside,LIRR,Port Washington,,NYPD 111th Precinct,
+r1-flushing,R1,Flushing,NY,Flushing-Main Street,LIRR,Port Washington,,NYPD 109th Precinct,
+r1-glen-oaks-bellerose,R1,Glen Oaks/Bellerose,NY,Bellerose,LIRR,Hempstead,,NYPD 105th Precinct,LIRR Bellerose station sits at the Queens-Nassau line
+r1-astoria,R1,Astoria,NY,30 Av,NYCT,N W,,NYPD 114th Precinct,
+r1-sunnyside,R1,Sunnyside,NY,46 St-Bliss St,NYCT,7,,NYPD 108th Precinct,
+r1-long-island-city,R1,Long Island City,NY,Hunterspoint Avenue,LIRR,City Terminal Zone,,NYPD 108th Precinct,
+r1-rockaway-park,R1,Rockaway Park,NY,Rockaway Park-Beach 116 St,NYCT,A S,,NYPD 100th Precinct,
+r2-bay-ridge,R2,Bay Ridge,NY,stop_id:R44,NYCT,R,,NYPD 68th Precinct,
+r2-sheepshead-bay,R2,Sheepshead Bay,NY,Sheepshead Bay,NYCT,B Q,,NYPD 61st Precinct,
+r2-downtown-brooklyn,R2,Downtown Brooklyn,NY,Atlantic Terminal,LIRR,City Terminal Zone,"Downtown Brooklyn, Brooklyn, NY",NYPD 84th Precinct,Atlantic Terminal has direct LIRR service to Jamaica
+r2-williamsburg-greenpoint,R2,Williamsburg/Greenpoint,NY,Bedford Av,NYCT,L,,NYPD 94th / 90th Precinct,
+r2-riverdale,R2,Riverdale,NY,Riverdale,MNR,Hudson,,NYPD 50th Precinct,
+r2-st-george-stapleton,R2,St. George/Stapleton,NY,St George,NYCT,SIR,,NYPD 120th Precinct,
+r3-valley-stream,R3,Valley Stream,NY,Valley Stream,LIRR,Far Rockaway / Long Beach / West Hempstead,,Nassau County PD,
+r3-lynbrook,R3,Lynbrook,NY,Lynbrook,LIRR,Babylon / Long Beach,,Lynbrook Village PD,
+r3-rockville-centre,R3,Rockville Centre,NY,Rockville Centre,LIRR,Babylon,,Rockville Centre Village PD,
+r3-oceanside-east-rockaway,R3,Oceanside/East Rockaway,NY,Oceanside,LIRR,Long Beach,,Nassau County PD,East Rockaway village policing to verify
+r3-island-park,R3,Island Park,NY,Island Park,LIRR,Long Beach,,Nassau County PD,
+r3-long-beach,R3,Long Beach,NY,Long Beach,LIRR,Long Beach,,Long Beach City PD,
+r3-freeport,R3,Freeport,NY,Freeport,LIRR,Babylon,,Freeport Village PD,
+r3-hewlett-five-towns,R3,Hewlett/Five Towns,NY,Hewlett,LIRR,Far Rockaway,,Nassau County PD,
+r3-floral-park,R3,Floral Park,NY,Floral Park,LIRR,Hempstead / Main Line,,Floral Park Village PD,
+r3-mineola,R3,Mineola,NY,Mineola,LIRR,Main Line / Oyster Bay,,Nassau County PD,
+r3-garden-city,R3,Garden City,NY,Garden City,LIRR,Hempstead,,Garden City Village PD,
+r3-hempstead-west-hempstead,R3,Hempstead/West Hempstead,NY,Hempstead,LIRR,Hempstead,,Hempstead Village PD / Nassau County PD,Village vs hamlet split
+r3-westbury,R3,Westbury,NY,Westbury,LIRR,Main Line,,Nassau County PD,
+r3-hicksville,R3,Hicksville,NY,Hicksville,LIRR,Main Line,,Nassau County PD,
+r3-farmingdale,R3,Farmingdale,NY,Farmingdale,LIRR,Ronkonkoma,,Nassau County PD,
+r3-great-neck,R3,Great Neck/Great Neck Plaza,NY,Great Neck,LIRR,Port Washington,,Nassau County PD,Some Great Neck villages run their own PDs
+r3-port-washington,R3,Port Washington,NY,Port Washington,LIRR,Port Washington,,Port Washington Police District,
+r3-glen-cove,R3,Glen Cove,NY,Glen Cove,LIRR,Oyster Bay,,Glen Cove City PD,
+r4-huntington,R4,Huntington,NY,Huntington,LIRR,Port Jefferson,"Main Street, Huntington, NY 11743",Suffolk County PD,Station is in Huntington Station hamlet; centroid is downtown Main Street (Huntington CDP, not an incorporated village)
+r4-amityville-copiague,R4,Amityville/Copiague,NY,Amityville,LIRR,Babylon,,Amityville Village PD / Suffolk County PD,
+r4-lindenhurst,R4,Lindenhurst,NY,Lindenhurst,LIRR,Babylon,,Suffolk County PD,
+r4-babylon,R4,Babylon,NY,Babylon,LIRR,Babylon / Montauk,,Suffolk County PD,
+r4-bay-shore,R4,Bay Shore,NY,Bay Shore,LIRR,Montauk,,Suffolk County PD,
+r4-islip,R4,Islip,NY,Islip,LIRR,Montauk,,Suffolk County PD,
+r4-sayville,R4,Sayville,NY,Sayville,LIRR,Montauk,,Suffolk County PD,
+r4-patchogue,R4,Patchogue,NY,Patchogue,LIRR,Montauk,,Suffolk County PD,
+r4-ronkonkoma,R4,Ronkonkoma,NY,Ronkonkoma,LIRR,Ronkonkoma,,Suffolk County PD,
+r4-smithtown,R4,Smithtown,NY,Smithtown,LIRR,Port Jefferson,,Suffolk County PD,
+r4-port-jefferson,R4,Port Jefferson,NY,Port Jefferson,LIRR,Port Jefferson,,Suffolk County PD,
+r4-riverhead,R4,Riverhead,NY,Riverhead,LIRR,Ronkonkoma (Greenport extension),,Riverhead Town PD,Sparse rail service
+r5-yonkers,R5,Yonkers,NY,Yonkers,MNR,Hudson,,Yonkers PD,
+r5-mount-vernon-fleetwood,R5,Mount Vernon (Fleetwood),NY,Fleetwood,MNR,Harlem,,Mount Vernon PD,
+r5-pelham,R5,Pelham,NY,Pelham,MNR,New Haven,,Pelham Village PD,
+r5-new-rochelle,R5,New Rochelle,NY,New Rochelle,MNR,New Haven,,New Rochelle PD,
+r5-mamaroneck,R5,Mamaroneck,NY,Mamaroneck,MNR,New Haven,,Mamaroneck Village PD,
+r5-port-chester,R5,Port Chester,NY,Port Chester,MNR,New Haven,,Port Chester Village PD,
+r5-white-plains,R5,White Plains,NY,White Plains,MNR,Harlem,,White Plains PD,
+r5-tarrytown-sleepy-hollow,R5,Tarrytown/Sleepy Hollow,NY,Tarrytown,MNR,Hudson,,Tarrytown PD / Sleepy Hollow PD,
+r5-ossining,R5,Ossining,NY,Ossining,MNR,Hudson,,Ossining Village PD,
+r5-peekskill,R5,Peekskill,NY,Peekskill,MNR,Hudson,,Peekskill PD,
+r5-nyack,R5,Nyack,NY,,,,"Nyack, NY",Orangetown PD / Clarkstown PD,No rail station; nearest rail is across the river (Tarrytown) by bus
+r5-beacon,R5,Beacon,NY,Beacon,MNR,Hudson,,Beacon PD,
+r5-newburgh,R5,Newburgh,NY,,,,"Newburgh, NY",Newburgh City PD,No station; Beacon MNR across the river (ferry or bridge)
+r5-poughkeepsie,R5,Poughkeepsie,NY,Poughkeepsie,MNR,Hudson,,City of Poughkeepsie PD,
+r6-greenwich,R6,Greenwich,CT,Greenwich,MNR,New Haven,,Greenwich PD,
+r6-stamford,R6,Stamford,CT,Stamford,MNR,New Haven,,Stamford PD,
+r6-norwalk,R6,Norwalk,CT,South Norwalk,MNR,New Haven,,Norwalk PD,
+r6-fairfield,R6,Fairfield,CT,Fairfield,MNR,New Haven,,Fairfield PD,
+r6-bridgeport-black-rock,R6,Bridgeport (Black Rock),CT,Fairfield-Black Rock,MNR,New Haven,"Black Rock, Bridgeport, CT",Bridgeport PD,Fairfield-Black Rock (formerly Fairfield Metro) is the closest station to Black Rock
+r6-bridgeport-downtown,R6,Bridgeport (Downtown),CT,Bridgeport,MNR,New Haven,,Bridgeport PD,
+r6-stratford,R6,Stratford,CT,Stratford,MNR,New Haven,,Stratford PD,
+r6-milford,R6,Milford,CT,Milford,MNR,New Haven,,Milford PD,
+r6-shelton,R6,Shelton,CT,Derby-Shelton,MNR,Waterbury,"Howe Avenue, Shelton, CT",Shelton PD,Station is in Derby across the river
+r6-danbury,R6,Danbury,CT,Danbury,MNR,Danbury,,Danbury PD,
+r6-new-haven,R6,New Haven,CT,New Haven-State St,MNR,New Haven,,New Haven PD,
+r7-fort-lee-edgewater,R7,Fort Lee/Edgewater,NJ,,,,"Fort Lee, NJ",Fort Lee PD / Edgewater PD,No rail; bus and ferry
+r7-hoboken,R7,Hoboken,NJ,Hoboken,NJT,Hoboken Terminal (also PATH),,Hoboken PD,
+r7-jersey-city-downtown,R7,Jersey City (Downtown),NJ,Grove Street,PATH,PATH,,Jersey City PD,
+r7-jersey-city-journal-square,R7,Jersey City (Journal Square),NJ,Journal Square,PATH,PATH,,Jersey City PD,
+r7-jersey-city-heights,R7,Jersey City (The Heights),NJ,,,,"The Heights, Jersey City, NJ",Jersey City PD,Hudson-Bergen Light Rail at the base of the Palisades
+r7-bayonne,R7,Bayonne,NJ,,,,"Bayonne, NJ",Bayonne PD,Hudson-Bergen Light Rail
+r7-harrison,R7,Harrison,NJ,Harrison,PATH,PATH,,Harrison PD,
+r7-newark-ironbound,R7,Newark (Ironbound),NJ,Newark Penn Station,NJT,NEC / NJCL / Raritan Valley (also PATH),"Ironbound, Newark, NJ",Newark Dept of Public Safety,
+r7-newark-downtown,R7,Newark (Downtown),NJ,Newark Broad Street,NJT,Morris & Essex / Montclair-Boonton,,Newark Dept of Public Safety,
+r7-hackensack,R7,Hackensack,NJ,Anderson Street,NJT,Pascack Valley,,Hackensack PD,
+r7-montclair,R7,Montclair,NJ,Bay Street,NJT,Montclair-Boonton,,Montclair PD,
+r7-bloomfield,R7,Bloomfield,NJ,Bloomfield,NJT,Montclair-Boonton,,Bloomfield PD,
+r7-cranford,R7,Cranford,NJ,Cranford,NJT,Raritan Valley,,Cranford PD,
+r7-rahway,R7,Rahway,NJ,Rahway,NJT,Northeast Corridor / North Jersey Coast,,Rahway PD,
+r7-metuchen,R7,Metuchen,NJ,Metuchen,NJT,Northeast Corridor,,Metuchen PD,
+r7-new-brunswick,R7,New Brunswick,NJ,New Brunswick,NJT,Northeast Corridor,,New Brunswick PD,
+r7-morristown,R7,Morristown,NJ,Morristown,NJT,Morris & Essex,,Morristown PD,
+r7-red-bank,R7,Red Bank,NJ,Red Bank,NJT,North Jersey Coast,,Red Bank PD,
+r7-long-branch,R7,Long Branch,NJ,Long Branch,NJT,North Jersey Coast,,Long Branch PD,
+r7-asbury-park,R7,Asbury Park,NJ,Asbury Park,NJT,North Jersey Coast,,Asbury Park PD,
+r8-roxborough,R8,Roxborough (Philadelphia),PA,Ivy Ridge,SEPTA,Manayunk/Norristown,"Roxborough, Philadelphia, PA",Philadelphia PD 5th District,Benchmark only
+r8-manayunk,R8,Manayunk (Philadelphia),PA,Manayunk,SEPTA,Manayunk/Norristown,,Philadelphia PD 5th District,Benchmark only
+r8-east-falls,R8,East Falls (Philadelphia),PA,East Falls,SEPTA,Manayunk/Norristown,,Philadelphia PD 39th District,Benchmark only

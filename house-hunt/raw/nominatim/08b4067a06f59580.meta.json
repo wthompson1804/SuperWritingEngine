@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Fort+Lee%2C+NJ&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:51:36+00:00",
+ "status": 200,
+ "path": "raw/nominatim/08b4067a06f59580.json",
+ "source": "nominatim"
+}

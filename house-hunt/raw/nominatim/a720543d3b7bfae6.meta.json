@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Black+Rock%2C+Bridgeport%2C+CT&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:50:58+00:00",
+ "status": 200,
+ "path": "raw/nominatim/a720543d3b7bfae6.json",
+ "source": "nominatim"
+}

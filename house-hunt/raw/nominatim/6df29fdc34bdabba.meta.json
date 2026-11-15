@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Shelton%2C+CT&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:51:19+00:00",
+ "status": 200,
+ "path": "raw/nominatim/6df29fdc34bdabba.json",
+ "source": "nominatim"
+}

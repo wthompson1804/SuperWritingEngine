@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Jamaica+Estates%2C+Queens%2C+NY&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:42:58+00:00",
+ "status": 200,
+ "path": "raw/nominatim/2bcf61a8f35a7f30.json",
+ "source": "nominatim"
+}

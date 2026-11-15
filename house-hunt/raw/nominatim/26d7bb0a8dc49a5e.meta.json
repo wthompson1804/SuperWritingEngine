@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Roxborough%2C+Philadelphia%2C+PA&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:53:22+00:00",
+ "status": 200,
+ "path": "raw/nominatim/26d7bb0a8dc49a5e.json",
+ "source": "nominatim"
+}

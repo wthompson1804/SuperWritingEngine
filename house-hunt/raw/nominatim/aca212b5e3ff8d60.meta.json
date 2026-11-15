@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Bayonne%2C+NJ&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:52:04+00:00",
+ "status": 200,
+ "path": "raw/nominatim/aca212b5e3ff8d60.json",
+ "source": "nominatim"
+}

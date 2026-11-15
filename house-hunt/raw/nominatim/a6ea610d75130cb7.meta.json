@@ -1,0 +1,7 @@
+{
+ "url": "https://nominatim.openstreetmap.org/search?q=Huntington%2C+Town+of+Huntington%2C+Suffolk+County%2C+New+York&format=json&limit=1&countrycodes=us",
+ "retrieved_at": "2026-11-15T15:55:08+00:00",
+ "status": 200,
+ "path": "raw/nominatim/a6ea610d75130cb7.json",
+ "source": "nominatim"
+}
