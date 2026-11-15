@@ -89,5 +89,465 @@
   "retrieved_at": "2026-11-15T20:40:16+00:00",
   "path": "raw/evidence_b4/1bcba9d909c4b544.html",
   "len": 950269
+ },
+ "https://www.zumper.com/listings/29859034p/1-bedroom-flushing-new-york-ny": {
+  "addr_key": "140-16 34th ave 714 140-16 34th ave flushing ny 11354 us|11354",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:21+00:00",
+  "path": "raw/evidence_b4/0afebedeaeb662d6.html",
+  "len": 999407
+ },
+ "https://www.zumper.com/listings/65719910/1-bedroom-flushing-new-york-ny": {
+  "addr_key": "13324 sanford ave 6g flushing ny 11355 usa|11355",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:23+00:00",
+  "path": "raw/evidence_b4/eeb3f50a1085db3f.html",
+  "len": 828397
+ },
+ "https://www.trulia.com/home/142-38-37th-ave-8e-flushing-ny-11354-2068977818": {
+  "addr_key": "142-38 37th ave|11354",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:24+00:00",
+  "path": "raw/evidence_b4/d8df74b37d5a6be3.html",
+  "len": 385191,
+  "hd_file": "lia_com_home_142_38_37th_ave_8e_flushing_ny_11354_2068977818.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2600,
+  "avail": "now",
+  "addr": "142-38 37th Ave #8E"
+ },
+ "https://www.trulia.com/home/14016-34th-ave-404-flushing-ny-11354-465851197": {
+  "addr_key": "14016 34th ave|11354",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:27+00:00",
+  "path": "raw/evidence_b4/e2ac2a9988f434a6.html",
+  "len": 364983,
+  "hd_file": "ulia_com_home_14016_34th_ave_404_flushing_ny_11354_465851197.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2500,
+  "avail": "now",
+  "addr": "14016 34th Ave #404"
+ },
+ "https://www.zumper.com/listings/65719902/studio-flushing-new-york-ny": {
+  "addr_key": "13324 sanford ave 2d flushing ny 11355 usa|11355",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:28+00:00",
+  "path": "raw/evidence_b4/92e70efa0b595c34.html",
+  "len": 819011
+ },
+ "https://www.trulia.com/home/139-81-35th-ave-6d-flushing-ny-11354-2062165222": {
+  "addr_key": "139-81 35th ave|11354",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:31+00:00",
+  "path": "raw/evidence_b4/5c2e705e24dd4a68.html",
+  "len": 366112,
+  "hd_file": "lia_com_home_139_81_35th_ave_6d_flushing_ny_11354_2062165222.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2400,
+  "avail": "now",
+  "addr": "139-81 35th Ave #6D"
+ },
+ "https://www.zumper.com/listings/29783777p/studio-flushing-new-york-ny": {
+  "addr_key": "137-02 northern blvd 5c 137-02 northern blvd flushing ny 11354 us|11354",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:31+00:00",
+  "path": "raw/evidence_b4/d49de233536c1568.html",
+  "len": 967583
+ },
+ "https://www.trulia.com/home/136-35-maple-ave-4e-queens-ny-11355-89219296": {
+  "addr_key": "136-35 maple ave|11355",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:34+00:00",
+  "path": "raw/evidence_b4/1389b4b2dde024a8.html",
+  "len": 404053,
+  "hd_file": "trulia_com_home_136_35_maple_ave_4e_queens_ny_11355_89219296.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": true,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2200,
+  "avail": "now",
+  "addr": "136-35 Maple Ave #4E"
+ },
+ "https://www.trulia.com/home/4110-bowne-st-5w-flushing-ny-11355-466185521": {
+  "addr_key": "4110 bowne st|11355",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:37+00:00",
+  "path": "raw/evidence_b4/9aab9cb3bda62263.html",
+  "len": 341039,
+  "hd_file": "trulia_com_home_4110_bowne_st_5w_flushing_ny_11355_466185521.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 1925,
+  "avail": "now",
+  "addr": "4110 Bowne St #5W"
+ },
+ "https://www.trulia.com/home/14212-41st-ave-502-flushing-ny-11355-466588117": {
+  "addr_key": "14212 41st ave|11355",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:41+00:00",
+  "path": "raw/evidence_b4/aaf70bf6e4a8346f.html",
+  "len": 325542,
+  "hd_file": "ulia_com_home_14212_41st_ave_502_flushing_ny_11355_466588117.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2550,
+  "avail": "now",
+  "addr": "14212 41st Ave #502"
+ },
+ "https://www.trulia.com/home/14227-barclay-ave-316-flushing-ny-11355-466617922": {
+  "addr_key": "14227 barclay ave|11355",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:44+00:00",
+  "path": "raw/evidence_b4/26493d0bc109d16f.html",
+  "len": 320433,
+  "hd_file": "a_com_home_14227_barclay_ave_316_flushing_ny_11355_466617922.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2200,
+  "avail": "now",
+  "addr": "14227 Barclay Ave #316"
+ },
+ "https://www.trulia.com/home/13702-northern-blvd-5c-flushing-ny-11354-465602188": {
+  "addr_key": "13702 northern blvd|11354",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:47+00:00",
+  "path": "raw/evidence_b4/eb28a542198ccc85.html",
+  "len": 350301,
+  "hd_file": "_com_home_13702_northern_blvd_5c_flushing_ny_11354_465602188.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2150,
+  "avail": "now",
+  "addr": "13702 Northern Blvd #5C"
+ },
+ "https://www.trulia.com/home/14345-sanford-ave-602-flushing-ny-11355-2118604043": {
+  "addr_key": "14345 sanford ave|11355",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:50+00:00",
+  "path": "raw/evidence_b4/67c52147ffc70bbc.html",
+  "len": 341148,
+  "hd_file": "_com_home_14345_sanford_ave_602_flushing_ny_11355_2118604043.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 1900,
+  "avail": "now",
+  "addr": "14345 Sanford Ave #602"
+ },
+ "https://www.trulia.com/home/139-55-35th-ave-5mm-flushing-ny-11354-466537255": {
+  "addr_key": "139-55 35th ave|11354",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:53+00:00",
+  "path": "raw/evidence_b4/418e87f1d4a0bc01.html",
+  "len": 359717,
+  "hd_file": "lia_com_home_139_55_35th_ave_5mm_flushing_ny_11354_466537255.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2350,
+  "avail": "now",
+  "addr": "139-55 35th Ave #5MM"
+ },
+ "https://www.apartmentlist.com/ny/queens/98-76-queens-blvd--1": {
+  "addr_key": "98-76 queens blvd|11374",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:54+00:00",
+  "path": "raw/evidence_b4/8147954914a6ce40.html",
+  "len": 544435
+ },
+ "https://www.zumper.com/listings/30083571p/1-bedroom-rego-park-new-york-ny": {
+  "addr_key": "9508 65th rd a3 rego park ny 11374 usa|11374",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:55+00:00",
+  "path": "raw/evidence_b4/4e34c38062be77a2.html",
+  "len": 853006
+ },
+ "https://www.trulia.com/home/109-10-queens-blvd-12c-forest-hills-ny-11375-466311584": {
+  "addr_key": "109-10 queens blvd|11375",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:40:56+00:00",
+  "path": "raw/evidence_b4/940a689b85bdddc2.html",
+  "len": 348561,
+  "hd_file": "_home_109_10_queens_blvd_12c_forest_hills_ny_11375_466311584.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2795,
+  "avail": "now",
+  "addr": "109-10 Queens Blvd #12C"
+ },
+ "https://www.trulia.com/home/63-60-102nd-st-d-8-rego-park-ny-11374-31977450": {
+  "addr_key": "63-60 102nd st|11374",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:00+00:00",
+  "path": "raw/evidence_b4/ae5e807e4c5f1403.html",
+  "len": 354248,
+  "hd_file": "ulia_com_home_63_60_102nd_st_d_8_rego_park_ny_11374_31977450.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2750,
+  "avail": "Dec 1",
+  "addr": "63-60 102nd St #D-8"
+ },
+ "https://www.trulia.com/home/273-w-131st-st-4f-new-york-ny-10027-466557585": {
+  "addr_key": "273 w 131st st|10027",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:03+00:00",
+  "path": "raw/evidence_b4/548118f2f292d8c5.html",
+  "len": 311467,
+  "hd_file": "rulia_com_home_273_w_131st_st_4f_new_york_ny_10027_466557585.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2595,
+  "avail": "now",
+  "addr": "273 W  131st St #4F"
+ },
+ "https://www.apartmentlist.com/ny/harrison/carraway": {
+  "addr_key": "105 corporate park dr|10604",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:04+00:00",
+  "path": "raw/evidence_b4/523b90d2fb47efb2.html",
+  "len": 880486
+ },
+ "https://www.apartmentlist.com/ny/hempstead/479-front-street": {
+  "addr_key": "479 front st|11550",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:07+00:00",
+  "path": "raw/evidence_b4/026dc7769611da01.html",
+  "len": 461981
+ },
+ "https://www.zumper.com/listings/1103429p/1-bedroom-hempstead-ny": {
+  "addr_key": "479 front st 2f hempstead ny 11550 usa|11550",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:07+00:00",
+  "path": "raw/evidence_b4/93a685e8a27eaf08.html",
+  "len": 579815
+ },
+ "https://www.zumper.com/listings/28196958p/1-bedroom-jackson-heights-new-york-ny": {
+  "addr_key": "34-47 90th st h41 34-47 90th st jackson heights ny 11372 us|11372",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:10+00:00",
+  "path": "raw/evidence_b4/a724f24266098056.html",
+  "len": 909897
+ },
+ "https://www.zumper.com/listings/28794097p/1-bedroom-jackson-heights-new-york-ny": {
+  "addr_key": "34-32 91st st e63 34-32 91st st jackson heights ny 11372 us|11372",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:14+00:00",
+  "path": "raw/evidence_b4/886619b78f902975.html",
+  "len": 938526
+ },
+ "https://www.zumper.com/listings/29641750p/studio-jackson-heights-new-york-ny": {
+  "addr_key": "34-33 90th st e12 34-33 90th st jackson heights ny 11372 us|11372",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:17+00:00",
+  "path": "raw/evidence_b4/70d959680377b03b.html",
+  "len": 878399
+ },
+ "https://www.trulia.com/home/34-19-90th-st-451-jackson-heights-ny-11372-466242622": {
+  "addr_key": "34-19 90th st|11372",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:17+00:00",
+  "path": "raw/evidence_b4/3d4c40b59b48c29e.html",
+  "len": 319247,
+  "hd_file": "om_home_34_19_90th_st_451_jackson_heights_ny_11372_466242622.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2100,
+  "avail": "now",
+  "addr": "34-19 90th St #451"
+ },
+ "https://www.zumper.com/listings/22717917p/studio-jackson-heights-new-york-ny": {
+  "addr_key": "34-46 91st st h51 queens ny 11372 us|11372",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:20+00:00",
+  "path": "raw/evidence_b4/b7a414c46a458c2b.html",
+  "len": 883039
+ },
+ "https://www.trulia.com/building/alvista-rise-14725-94th-ave-jamaica-ny-11435-2751621369": {
+  "addr_key": "14725 94th ave|11435",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:21+00:00",
+  "path": "raw/evidence_b4/f9b11a129c5a566c.html",
+  "len": 434044,
+  "hd_file": "ding_alvista_rise_14725_94th_ave_jamaica_ny_11435_2751621369.hd.json",
+  "status_label": null,
+  "price": null,
+  "avail": null,
+  "addr": "14725 94th Ave"
+ },
+ "https://www.trulia.com/home/148-37-88th-ave-5g-jamaica-ny-11435-2066432661": {
+  "addr_key": "148-37 88th ave|11435",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:24+00:00",
+  "path": "raw/evidence_b4/f8c897145823c442.html",
+  "len": 396789,
+  "hd_file": "ulia_com_home_148_37_88th_ave_5g_jamaica_ny_11435_2066432661.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2425,
+  "avail": "now",
+  "addr": "148-37 88th Ave #5G"
+ },
+ "https://www.trulia.com/home/148-37-88th-ave-6a-jamaica-ny-11435-2066489615": {
+  "addr_key": "148-37 88th ave|11435",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:27+00:00",
+  "path": "raw/evidence_b4/9d8ac951f33e70a5.html",
+  "len": 379756,
+  "hd_file": "ulia_com_home_148_37_88th_ave_6a_jamaica_ny_11435_2066489615.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2450,
+  "avail": "now",
+  "addr": "148-37 88th Ave #6A"
+ },
+ "https://www.trulia.com/home/153-10-88th-ave-621-jamaica-ny-11432-466380287": {
+  "addr_key": "153-10 88th ave|11432",
+  "status": 200,
+  "retrieved_at": "2026-11-15T20:41:30+00:00",
+  "path": "raw/evidence_b4/ffd43954aacd6f0c.html",
+  "len": 383447,
+  "hd_file": "ulia_com_home_153_10_88th_ave_621_jamaica_ny_11432_466380287.hd.json",
+  "status_label": {
+   "isOffMarket": false,
+   "isRecentlySold": false,
+   "isForeclosure": false,
+   "isActiveForRent": true,
+   "isActiveForSale": false,
+   "isRecentlyRented": false,
+   "label": "For Rent",
+   "__typename": "HOME_CurrentStatus"
+  },
+  "price": 2550,
+  "avail": "now",
+  "addr": "153-10 88th Ave #621"
  }
 }

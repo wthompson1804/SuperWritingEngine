@@ -1,0 +1,16 @@
+{
+ "13828 queens blvd|11435": "same unit (Le Tour, 138-28 Queens Blvd #6K) is also listed on Zumper, see the 138-28 row",
+ "138-28 queens blvd 5k new york ny 11435 usa|11435": "addr_key says 5K but the Zumper page is for #6K at $2,595: same unit as the Trulia 13828 Queens Blvd 6K row (duplicate candidate)",
+ "135-23 82nd ave 3e queens ny 11435 us|11435": "same building as the 13523 82nd Ave row (unit 3F on Trulia)",
+ "13523 82nd ave|11435": "same building as the 135-23 82nd Avenue row (unit 3E on Zumper)",
+ "56-27 2nd st|11101": "ALARM: listing text says the unit is income restricted (max income $59,400 for 1 person, $67,850 for 2) and 'AT LEAST ONE MEMBER OF THE HOUSEHOLD MUST HAVE A MOBILITY IMPAIRMENT'; waitlist by log number. Not an open-market unit",
+ "600 n ave|10801": "listing looks stale: unit available_on 2026-01-10 and the Apartment List property record was last updated 2026-09-21 (unit record refreshed daily by feed)",
+ "12 church st|10801": "unit 2615 shows available_on 2025-07-30 (vacant or placeholder for 15 months); unit 1304 lease term shown is 24 months",
+ "3333 broadway new york ny 10031 us|10031": "availability date 2026/09/18 on the page, i.e. available now; no unit number so floor cannot be read",
+ "92-27 160th st|11433": "listing text says '6th Floor with Open Views' although the unit number is 2215",
+ "8267 austin st|11415": "available Nov 17 2026; listing text says income requirement $130,000 a year",
+ "147-14 84th rd|11435": "page description calls it a 'Corner Line One Bedroom Coop' with 'Indoor Parking (Wait List)'; $1,532 for a 700 sq ft 1BR is far under market: likely a co-op sublet or maintenance figure, verify before relying on it",
+ "10 commerce dr|10801": "both units become available after today: 705 on 2026-11-16, 703 on 2026-11-20 (inside the Dec 15 window)",
+ "50 clinton pl|10801": "unit 811 available 2026-12-14 (one day inside the Dec 15 window); 2311 on 2026-11-29",
+ "55 clinton pl|10801": "unit 2003 available 2026-12-08; 2309 now"
+}

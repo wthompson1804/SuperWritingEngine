@@ -76,5 +76,137 @@
   "path": "raw/evidence_b5/f3939daca767cda2.html",
   "retrieved_at": "2026-11-15T20:40:17+00:00",
   "len": 334728
+ },
+ "https://www.trulia.com/home/14202-84th-dr-6m-jamaica-ny-11435-2088284050": {
+  "status": 200,
+  "path": "raw/evidence_b5/8fce6bec71bbcde2.html",
+  "retrieved_at": "2026-11-15T20:40:20+00:00",
+  "len": 369269
+ },
+ "https://www.trulia.com/home/143-25-84th-ave-3j-jamaica-ny-11435-466623315": {
+  "status": 200,
+  "path": "raw/evidence_b5/ec58ae511c4cf6ac.html",
+  "retrieved_at": "2026-11-15T20:40:22+00:00",
+  "len": 330699
+ },
+ "https://www.trulia.com/home/13523-82nd-ave-3f-jamaica-ny-11435-2108233681": {
+  "status": 200,
+  "path": "raw/evidence_b5/97fda7a1ab26bbf0.html",
+  "retrieved_at": "2026-11-15T20:40:24+00:00",
+  "len": 394432
+ },
+ "https://www.trulia.com/home/141-24-84th-dr-4f-jamaica-ny-11435-466619402": {
+  "status": 200,
+  "path": "raw/evidence_b5/137d903368c0ca49.html",
+  "retrieved_at": "2026-11-15T20:40:27+00:00",
+  "len": 333432
+ },
+ "https://www.zumper.com/listings/29509171p/1-bedroom-kew-gardens-new-york-ny": {
+  "status": 200,
+  "path": "raw/evidence_b5/d6896bcda44284b8.html",
+  "retrieved_at": "2026-11-15T20:40:27+00:00",
+  "len": 905821
+ },
+ "https://www.trulia.com/home/8267-austin-st-916-kew-gardens-ny-11415-2098501053": {
+  "status": 200,
+  "path": "raw/evidence_b5/e8ab73bcaf754d20.html",
+  "retrieved_at": "2026-11-15T20:40:29+00:00",
+  "len": 371718
+ },
+ "https://www.trulia.com/home/83-83-118th-st-3f-queens-ny-11415-123185420": {
+  "status": 200,
+  "path": "raw/evidence_b5/f10f324cfc2ffbef.html",
+  "retrieved_at": "2026-11-15T20:40:32+00:00",
+  "len": 345008
+ },
+ "https://www.trulia.com/home/12333-83rd-ave-3203-kew-gardens-ny-11415-2086095362": {
+  "status": 200,
+  "path": "raw/evidence_b5/b7b22c1d958d7ef3.html",
+  "retrieved_at": "2026-11-15T20:40:34+00:00",
+  "len": 342907
+ },
+ "https://www.trulia.com/home/7525-153rd-st-315-flushing-ny-11367-2115752303": {
+  "status": 200,
+  "path": "raw/evidence_b5/70b99e7f6c0fc964.html",
+  "retrieved_at": "2026-11-15T20:40:37+00:00",
+  "len": 393109
+ },
+ "https://www.trulia.com/home/56-27-2nd-st-1710-long-island-city-ny-11101-466053967": {
+  "status": 200,
+  "path": "raw/evidence_b5/85cebd3cc08ccb1b.html",
+  "retrieved_at": "2026-11-15T20:40:39+00:00",
+  "len": 353704
+ },
+ "https://www.apartmentlist.com/ny/brooklyn/1775-e-18th-st": {
+  "status": 200,
+  "path": "raw/evidence_b5/23cd1f48ee5f2406.html",
+  "retrieved_at": "2026-11-15T20:40:40+00:00",
+  "len": 510416
+ },
+ "https://www.zumper.com/apartment-buildings/p1118865/3333-broadway-west-harlem-new-york-ny": {
+  "status": 200,
+  "path": "raw/evidence_b5/326631bf9ddb9f74.html",
+  "retrieved_at": "2026-11-15T20:40:40+00:00",
+  "len": 1008255
+ },
+ "https://www.trulia.com/home/61-57-84th-st-3c-middle-village-ny-11379-466623344": {
+  "status": 200,
+  "path": "raw/evidence_b5/2ca8c789d36f06b0.html",
+  "retrieved_at": "2026-11-15T20:40:42+00:00",
+  "len": 333374
+ },
+ "https://www.trulia.com/home/3625-parsons-blvd-5h-flushing-ny-11354-2100688723": {
+  "status": 200,
+  "path": "raw/evidence_b5/0f14163f2e649e48.html",
+  "retrieved_at": "2026-11-15T20:40:44+00:00",
+  "len": 349988
+ },
+ "https://www.apartmentlist.com/ny/new-rochelle/shearwood-station": {
+  "status": 200,
+  "path": "raw/evidence_b5/82fb7796ec888b40.html",
+  "retrieved_at": "2026-11-15T20:40:45+00:00",
+  "len": 859233
+ },
+ "https://www.apartmentlist.com/ny/new-rochelle/the-leaf": {
+  "status": 200,
+  "path": "raw/evidence_b5/e0fd6eaddbd2e957.html",
+  "retrieved_at": "2026-11-15T20:40:47+00:00",
+  "len": 917330
+ },
+ "https://www.apartmentlist.com/ny/new-rochelle/motif": {
+  "status": 200,
+  "path": "raw/evidence_b5/d7d8a092c8ef5ee6.html",
+  "retrieved_at": "2026-11-15T20:40:50+00:00",
+  "len": 756445
+ },
+ "https://www.apartmentlist.com/ny/new-rochelle/two-clinton-park": {
+  "status": 200,
+  "path": "raw/evidence_b5/5f68dbb38b4a5778.html",
+  "retrieved_at": "2026-11-15T20:40:52+00:00",
+  "len": 809364
+ },
+ "https://www.apartmentlist.com/ny/new-rochelle/stella": {
+  "status": 200,
+  "path": "raw/evidence_b5/7ea22e5269a9a7de.html",
+  "retrieved_at": "2026-11-15T20:40:54+00:00",
+  "len": 737073
+ },
+ "https://www.apartmentlist.com/ny/new-rochelle/illustrator": {
+  "status": 200,
+  "path": "raw/evidence_b5/ab397258a22aa2c2.html",
+  "retrieved_at": "2026-11-15T20:40:57+00:00",
+  "len": 681000
+ },
+ "https://www.apartmentlist.com/ny/new-rochelle/one-clinton-park": {
+  "status": 200,
+  "path": "raw/evidence_b5/816bd31d14287b08.html",
+  "retrieved_at": "2026-11-15T20:41:00+00:00",
+  "len": 838150
+ },
+ "https://www.apartmentlist.com/ny/new-rochelle/25-maple-avenue": {
+  "status": 200,
+  "path": "raw/evidence_b5/c4a378b962a4e8c9.html",
+  "retrieved_at": "2026-11-15T20:41:02+00:00",
+  "len": 702277
  }
 }

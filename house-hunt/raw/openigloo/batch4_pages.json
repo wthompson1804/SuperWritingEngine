@@ -1,0 +1,219 @@
+{
+ "https://www.openigloo.com/building/nyc/4037521-4015180050/queens-elmhurst-85-05-elmhurst-avenue-11373": {
+  "addr_keys": [
+   "85-05 elmhurst ave|11373"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/f108717671ee2129.html",
+  "retrieved_at": "2026-11-15T20:44:16+00:00",
+  "len": 474982
+ },
+ "https://www.openigloo.com/building/nyc/3337329-3075790029/brooklyn-flatlands-3310-avenue-h-11210": {
+  "addr_keys": [
+   "3420 ave h|11210"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/54e51a638d80182d.html",
+  "retrieved_at": "2026-11-15T20:44:19+00:00",
+  "len": 486070
+ },
+ "https://www.openigloo.com/building/nyc/3413638-3075790029/brooklyn-east-flatbush-3320-avenue-h-11210": {
+  "addr_keys": [
+   "3420 ave h|11210"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/5e3fefb517f43f44.html",
+  "retrieved_at": "2026-11-15T20:44:22+00:00",
+  "len": 464678
+ },
+ "https://www.openigloo.com/building/nyc/4112964-4049940070/queens-flushing-139-81-35-avenue-11354": {
+  "addr_keys": [
+   "139-81 35th ave 6d 139-81 35th ave flushing ny 11354 us|11354",
+   "139-81 35th ave|11354"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/5942d171357e27a4.html",
+  "retrieved_at": "2026-11-15T20:44:25+00:00",
+  "len": 459901
+ },
+ "https://www.openigloo.com/building/nyc/4112947-4049940017/queens-flushing-140-16-34-avenue-11354": {
+  "addr_keys": [
+   "140-16 34th ave 714 140-16 34th ave flushing ny 11354 us|11354",
+   "14016 34th ave|11354"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/04333ec476f06577.html",
+  "retrieved_at": "2026-11-15T20:44:28+00:00",
+  "len": 497867
+ },
+ "https://www.openigloo.com/building/nyc/4115368-4051210017/queens-flushing-133-24-sanford-avenue-11355": {
+  "addr_keys": [
+   "13324 sanford ave 6g flushing ny 11355 usa|11355",
+   "13324 sanford ave 2d flushing ny 11355 usa|11355"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/6cdce8af96929202.html",
+  "retrieved_at": "2026-11-15T20:44:31+00:00",
+  "len": 490445
+ },
+ "https://www.openigloo.com/building/nyc/4112343-4049770021/queens-flushing-137-02-northern-boulevard-11354": {
+  "addr_keys": [
+   "137-02 northern blvd 5c 137-02 northern blvd flushing ny 11354 us|11354",
+   "13702 northern blvd|11354"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/82175f7e6352d9fd.html",
+  "retrieved_at": "2026-11-15T20:44:34+00:00",
+  "len": 474308
+ },
+ "https://www.openigloo.com/building/nyc/4115672-4051340059/queens-flushing-136-35-maple-avenue-11355": {
+  "addr_keys": [
+   "136-35 maple ave|11355"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/f5677e7c90e9f1ec.html",
+  "retrieved_at": "2026-11-15T20:44:37+00:00",
+  "len": 446522
+ },
+ "https://www.openigloo.com/building/nyc/4114651-4050460006/queens-flushing-14212-41-avenue-11355": {
+  "addr_keys": [
+   "14212 41st ave|11355"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/e4f0fe28d9beea80.html",
+  "retrieved_at": "2026-11-15T20:44:40+00:00",
+  "len": 450164
+ },
+ "https://www.openigloo.com/building/nyc/4114654-4050460037/queens-flushing-142-27-barclay-avenue-11355": {
+  "addr_keys": [
+   "14227 barclay ave|11355"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/b4820cffc8903d27.html",
+  "retrieved_at": "2026-11-15T20:44:43+00:00",
+  "len": 470650
+ },
+ "https://www.openigloo.com/building/nyc/4112965-4049940078/queens-flushing-139-55-35-avenue-11354": {
+  "addr_keys": [
+   "139-55 35th ave|11354"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/92b6c27afb549187.html",
+  "retrieved_at": "2026-11-15T20:44:46+00:00",
+  "len": 456263
+ },
+ "https://www.openigloo.com/building/nyc/4074783-4031597501/queens-rego-park-98-76-queens-boulevard-11374": {
+  "addr_keys": [
+   "98-76 queens blvd|11374"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/67628601d1d57347.html",
+  "retrieved_at": "2026-11-15T20:44:49+00:00",
+  "len": 462823
+ },
+ "https://www.openigloo.com/building/nyc/4078024-4032580001/queens-forest-hills-10910-queens-blvd-11375": {
+  "addr_keys": [
+   "109-10 queens blvd|11375"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/d5b110ff706a576d.html",
+  "retrieved_at": "2026-11-15T20:44:51+00:00",
+  "len": 495799
+ },
+ "https://www.openigloo.com/building/nyc/4050659-4021127501/queens-rego-park-63-60-102-street-11374": {
+  "addr_keys": [
+   "63-60 102nd st|11374"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/372b3e99a32d49be.html",
+  "retrieved_at": "2026-11-15T20:44:54+00:00",
+  "len": 522989
+ },
+ "https://www.openigloo.com/building/nyc/1058687-1019370001/manhattan-harlem-273-west-131-street-10027": {
+  "addr_keys": [
+   "273 w 131st st|10027"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/77fdc0118c6d0bb7.html",
+  "retrieved_at": "2026-11-15T20:44:57+00:00",
+  "len": 473606
+ },
+ "https://www.openigloo.com/building/nyc/4431424-4014510047/queens-jackson-heights-34-19-90-street-11372": {
+  "addr_keys": [
+   "34-47 90th st h41 34-47 90th st jackson heights ny 11372 us|11372",
+   "34-33 90th st e12 34-33 90th st jackson heights ny 11372 us|11372",
+   "34-19 90th st|11372"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/dc844f487b2dbe77.html",
+  "retrieved_at": "2026-11-15T20:45:00+00:00",
+  "len": 547609
+ },
+ "https://www.openigloo.com/building/nyc/4431425-4014510047/queens-jackson-heights-34-33-90-street-11372": {
+  "addr_keys": [
+   "34-47 90th st h41 34-47 90th st jackson heights ny 11372 us|11372",
+   "34-33 90th st e12 34-33 90th st jackson heights ny 11372 us|11372",
+   "34-19 90th st|11372"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/df15208e5ea2303d.html",
+  "retrieved_at": "2026-11-15T20:45:03+00:00",
+  "len": 520893
+ },
+ "https://www.openigloo.com/building/nyc/4431358-4014510012/queens-jackson-heights-34-46-91-street-11372": {
+  "addr_keys": [
+   "34-32 91st st e63 34-32 91st st jackson heights ny 11372 us|11372",
+   "34-46 91st st h51 queens ny 11372 us|11372"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/d3cdadde96adf98d.html",
+  "retrieved_at": "2026-11-15T20:45:06+00:00",
+  "len": 577647
+ },
+ "https://www.openigloo.com/building/nyc/4431342-4014510012/queens-jackson-heights-34-18-91-st-11372": {
+  "addr_keys": [
+   "34-32 91st st e63 34-32 91st st jackson heights ny 11372 us|11372",
+   "34-46 91st st h51 queens ny 11372 us|11372"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/d266ea377dab857c.html",
+  "retrieved_at": "2026-11-15T20:45:09+00:00",
+  "len": 542158
+ },
+ "https://www.openigloo.com/building/nyc/4618544-4099987502/queens-jamaica-14725-94-ave-11435": {
+  "addr_keys": [
+   "14725 94th ave|11435"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/2cb3a55e66a32683.html",
+  "retrieved_at": "2026-11-15T20:45:12+00:00",
+  "len": 461418
+ },
+ "https://www.openigloo.com/building/nyc/4595994-4096940049/queens-jamaica-148-37-88-avenue-11435": {
+  "addr_keys": [
+   "148-37 88th ave|11435"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/7b3871227947822b.html",
+  "retrieved_at": "2026-11-15T20:45:15+00:00",
+  "len": 593011
+ },
+ "https://www.openigloo.com/building/nyc/4096940049-4096940049/queens-jamaica-hills-148-31-88-avenue-11435": {
+  "addr_keys": [
+   "148-37 88th ave|11435"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/214d9c38b5c15b42.html",
+  "retrieved_at": "2026-11-15T20:45:18+00:00",
+  "len": 455863
+ },
+ "https://www.openigloo.com/building/nyc/4097620010-4097620010/queens-briarwood-153-10-88-avenue-11432": {
+  "addr_keys": [
+   "153-10 88th ave|11432"
+  ],
+  "status": 200,
+  "path": "raw/openigloo/2e6cb574f3c2eea4.html",
+  "retrieved_at": "2026-11-15T20:45:21+00:00",
+  "len": 414589
+ }
+}

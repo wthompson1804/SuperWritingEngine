@@ -1,0 +1,17 @@
+addr_key,fact,value,quote,source_url,status
+58 norfolk st|07103,elevator,yes,"Levels, Entrance, & Accessibility Elevator Gated Entry",https://www.trulia.com/building/envy-by-gomes-58-norfolk-st-newark-nj-07103-2734055214,confirmed
+58 norfolk st|07103,elevator,implied,the design flows smoothly through hallways and elevators (Pedro Gomes on Gomes buildings generally),https://www.brilliant.tech/blogs/news/gomes-group-transforming-newark-with-community-and-smart-living,unconfirmed
+58 norfolk st|07103,building_floors,6 (Norfolk side) / 5 (Newark St side),The development is listed as being five stories tall on its Newark Street side and six stories tall on the Norfolk Street side.,https://jerseydigs.com/gomes-group-proposes-165-unit-mixed-use-project-in-university-heights-newark/,confirmed
+58 norfolk st|07103,dogs_allowed,yes,Dogs Allowed 2 pet max 35 lbs max weight $50 monthly pet fee $500 One-time pet fee,https://www.trulia.com/building/envy-by-gomes-58-norfolk-st-newark-nj-07103-2734055214,confirmed
+58 norfolk st|07103,dog_weight_limit,35,Weight limit (lbs.) 35,https://www.trulia.com/building/envy-by-gomes-58-norfolk-st-newark-nj-07103-2734055214,confirmed
+58 norfolk st|07103,dog_weight_limit,not stated on own site,"At Envy, even your pets enjoy the finer things.",https://bygomes.com/property/envy/,unconfirmed
+58 norfolk st|07103,floor,unit 127: 1 (from unit number),Unit 127,https://www.trulia.com/building/envy-by-gomes-58-norfolk-st-newark-nj-07103-2734055214,unconfirmed
+58 norfolk st|07103,floor,unit 209: 2 (from unit number),Unit 209,https://www.trulia.com/building/envy-by-gomes-58-norfolk-st-newark-nj-07103-2734055214,unconfirmed
+58 norfolk st|07103,floor,unit 220: 2 (from unit number),Unit 220,https://www.trulia.com/building/envy-by-gomes-58-norfolk-st-newark-nj-07103-2734055214,unconfirmed
+58 norfolk st|07103,floor,unit 231: 2nd Floor,floor = 2nd Floor (unit page data),https://bygomes.com/page-data/property/envy/231/page-data.json,confirmed
+58 norfolk st|07103,floor,unit 308: 3rd Floor,floor = 3rd Floor (unit page data),https://bygomes.com/page-data/property/envy/308/page-data.json,confirmed
+58 norfolk st|07103,floor,unit 309: 3rd Floor,floor = 3rd Floor (unit page data),https://bygomes.com/page-data/property/envy/309/page-data.json,confirmed
+58 norfolk st|07103,floor,unit 313: 3 (from unit number),Unit 313,https://www.trulia.com/building/envy-by-gomes-58-norfolk-st-newark-nj-07103-2734055214,unconfirmed
+58 norfolk st|07103,floor,unit 421: 4 (from unit number),Unit 421,https://www.trulia.com/building/envy-by-gomes-58-norfolk-st-newark-nj-07103-2734055214,unconfirmed
+58 norfolk st|07103,floor,unit 429: 4 (from unit number),Unit 429,https://www.trulia.com/building/envy-by-gomes-58-norfolk-st-newark-nj-07103-2734055214,unconfirmed
+58 norfolk st|07103,floor,unit G02: Ground Floor,floor = Ground Floor (unit page data),https://bygomes.com/page-data/property/envy/G02/page-data.json,confirmed

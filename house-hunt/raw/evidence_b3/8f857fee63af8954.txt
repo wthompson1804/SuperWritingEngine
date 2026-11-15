@@ -1,0 +1,11 @@
+User-agent: *
+Allow: *
+Disallow: /example-pages/*
+Disallow: /api/*
+Sitemap: https://www.greystar.com/sitemap-pdp.xml
+Sitemap: https://www.greystar.com/sitemap-pdp-images.xml
+Sitemap: https://www.greystar.com/sitemap-search.xml
+Sitemap: https://www.greystar.com/sitemap-greystar2.xml
+User-agent: Applebot
+Disallow: /
+Sitemap: https://www.greystar.com/sitemap.xml

@@ -1,0 +1,2108 @@
+{
+ "https://www.trulia.com/home/13828-queens-blvd-6k-jamaica-ny-11435-2061738454": {
+  "retrieved_at": "2026-11-15T20:39:54+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2595,
+  "avail": "now",
+  "street": "13828 Queens Blvd #6K",
+  "date_listed": "2026-11-09T17:13:20+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Parking": "Attached Garage",
+   "Pets": "Dogs & Cats",
+   "Dishwasher": "Included",
+   "Laundry": "See Home Details",
+   "Deposit": "$2,595",
+   "Climate Control": "Central Air"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "1 Year"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Deposit",
+    "$2,595"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Exterior Features",
+    "Parking & Garage",
+    "",
+    "Garage"
+   ],
+   [
+    "Exterior Features",
+    "Parking & Garage",
+    "Parking",
+    "Attached Garage, On Site"
+   ]
+  ],
+  "fees": [
+   {
+    "Required one-time fees": [
+     {
+      "title": "Security deposit",
+      "value": "$2,595"
+     }
+    ]
+   },
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Roger Mashihi",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Metro Garden Realty, Inc.",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "NO FEE Luxury 1BR at Le Tour - 1 Block to E/F Express | Briarwood\n\nExceptional boutique new construction 1-bedroom residence at Le Tour in prime Briarwood, just one block from the E/F express subway.\n\nThis bright apartment features floor-to-ceiling windows, open views, and high ceilings, creating a spacious and airy living environment.\n\nApartment Features:\n Floor-to-ceiling windows with excellent natural light\n Expansive living room ideal for home office setup\n Queen-size bedroom\n Generous closet space\n Open-concept chef's kitchen with quartz countertops\n Premium stainless steel appliances including dishwasher & microwave\n Refined modern cabinetry\n Designer bathroom with contemporary finishes\n High-efficiency central air & heat\n Pre-wired for Fios & cable\n\nLe Tour - Boutique Luxury Amenities:\n 24-hour virtual doorman\n Secure fob-access package room\n Fully equipped resident gym with WiFi\n Furnished roof deck\n Video intercom\n Keyless lobby entry\n Fob-controlled floor access\n 24-hour automated laundry\n On-site garage parking available\n EV charging stations\n Bike storage\n Advanced security camera system\n Tenant account portal\n\nPrime location just 1 block to the E/F express subway (approximately 40 minutes to Manhattan), near local and express buses, major highways, and neighborhood shops and dining.\n\nWalk Score: 92 (Walker's Paradise)\nTransit Score: 100 (Rider's Paradise)\n\nASAP occupancy.\nPet-friendly case by case.\nParking garage available.\n\n3D virtual tour and floor plan available."
+ },
+ "https://www.trulia.com/home/92-27-160th-st-2215-jamaica-ny-11433-2056424620": {
+  "retrieved_at": "2026-11-15T20:39:57+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2395,
+  "avail": "now",
+  "street": "92-27 160th St #2215",
+  "date_listed": "2026-10-28T14:33:28+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Dishwasher": "Included",
+   "Laundry": "Washer, Dryer",
+   "Climate Control": "Central Air"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Michael Jeneralczuk",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Living New York",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "**All Roads Lead to Home. Experience Connectivity, Convenience and an Elevated Living Experience at One Archer in the Heart of Downtown Jamaica**\n\n**Escape within this newly completed collection of studio, 1 Br, and 2 Br Residences featuring high-end finishes combined with carefully considered architectural details like high ceilings, expansive floor-to-ceiling windows, spacious room sizes as well as flexible floor plans for the option of a comfortable work-from-home experience. The result is a home of surpassing sophistication and a remarkable living experience.**\n\n**Residence #2215- Spacious Studio with Direct Manhattan Views**\n\n Roomy Studio Space Allowing for Living and Sleeping Area\n\n 6th Floor with Open Views\n\n Loft Like High Ceilings\n\n Sleek Stainless Steel Passthrough Kitchen\n\n Dishwasher and Microwave\n\n Washer/Dryer in Unit\n\n**Highlights include\n\n Building Services\n\n Attended Lobby with Package Room\n\n Resident's Exclusive Dog Run\n\n Indoor Onsite Parking Garage with Electric Car Charging Stations\n\n Latch Smart Lock Apartment Entry System\n\n**Building Amenities**\n\n State-of-the-art Fitness Center w/ dedicated Yoga / Movement Studio\n\n 23rd Floor Penthouse Amenity Club with Panoramic views featuring:\n\n The Skyline Art Gallery-Sunset Library Lounge\n\n Media & Movie Lounge\n\n Billiard and Gaming Room\n\n Resident's Party Room with Wet Bar / Kitchenette (Available for Private Events)\n\n Resident's Exclusive Co-Working Lounge featuring:\n\n Individual Work and Lounge Areas\n\n Private Conference Room\n\n Party Kitchenette\n\n Private Zoom Phone Booth\n\n**Outdoor Amenities**\n\n 3rd Floor Outdoor Fitness Terrace with Synthetic Turf Lawn Area\n\n Two 23rd Floor Landscaped Outdoor Rooftop Spaces featuring Multiple Seating options and BBQ Area\n\nPlease Email for All Showing Inquiries!"
+ },
+ "https://www.trulia.com/home/148-33-90th-ave-404-jamaica-ny-11435-440011739": {
+  "retrieved_at": "2026-11-15T20:39:59+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2575,
+  "avail": "now",
+  "street": "148-33 90th Ave #404",
+  "date_listed": "2026-10-26T07:02:23+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Dishwasher": "Included",
+   "Laundry": "Washer, Dryer",
+   "Climate Control": "Central Air"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Andover Property Management",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "ANDOVER PROPERTY MANAGEMENT INC",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Emails only please, No Calls or Texts\n\nSpacious & Bright 1-Bedroom, with a nook perfect for a working desk.\n\nThis beautifully designed 1-bedroom, 1-bathroom home. . Modern and thoughtful designed finishes throughout.\n\nApartment Features:\n* Open kitchen layout\n*In Unit Washer Dryer\n* Stainless steel appliances including Liebherr refrigerator, Samsung gas range with 4-burner cooktop, microwave, and full-sized GE dishwasher\n* Italian soft-close cabinetry, Modern white quartz countertops with under-mount sink and cabinet lighting\n* European white oak hardwood floors with sound-dampening acoustic underlayment (reduces noise)\n* Floor-to-ceiling, double-paned soundproof windows\n* Spa-inspired bathroom with full tile, soaking tub, and floating vanity with integrated lighting\n* Individually controlled heating and air conditioning in each room\n\nWelcome to Parkside Manor a luxury boutique 90-unit development in the heart of Jamaica, Queens. Residences are thoughtfully designed with expansive windows, high-end finishes, and select homes offering private outdoor space, including some of the largest terraces in the area.\n\nAmenities:\n* Fully equipped fitness center\n* Lounge\n* On-site parking\n* Amazon Hub package system for secure 24/7 deliveries\n* Pet-friendly community\n* Rooftop (under-construction)\n\nLocated right by Rufus King Park, Starbucks, Major groceries with easy access to multiple subway lines (F, E), bus routes, and major highways, commuting to Manhattan, Long Island, or anywhere in Queens is seamless. Both JFK and LaGuardia airports are just minutes away."
+ },
+ "https://www.trulia.com/home/92-29-guy-r-brewer-blvd-1307-jamaica-ny-11433-466228957": {
+  "retrieved_at": "2026-11-15T20:40:02+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2785,
+  "avail": "now",
+  "street": "92-29 Guy R Brewer Blvd #1307",
+  "date_listed": "2026-10-25T19:42:03+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Dishwasher": "Included",
+   "Laundry": "Washer, Dryer",
+   "Climate Control": "Central Air"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Exterior Features",
+    "Parking & Garage",
+    "Parking",
+    "Valet"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "The Monarch Leasing Team",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Good Company",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "The Monarch offers thoughtfully designed one- and two-bedroom apartments with expansive floor-to-ceiling windows, in-unit washer/dryers, walking closets, custom kitchen cabinetry, and state-of-the-art appliances. Enjoy stunning views of the NYC skyline from the comfort of your home, and step into a lifestyle where convenience, wellness, and community come together seamlessly.\n\nWith easy access to the E, J, Z subway lines and the LIRR, The Monarch offers exceptional connectivity to Manhattan, Brooklyn, and beyond. Explore nearby green spaces like Rufus King Park and enjoy Jamaica's rich arts and cultural sceneall just moments from your door.\n\nA Full Suite of Amenities:\n\nBasketball Court\nPickleball Court\nState-of-the-Art Fitness Center & Yoga Room\nIndoor Golf Simulator\nDog Spa + Outdoor Dog Run\nBridge Lounge with Bar & Cafe Seating\nRooftop Sky Lounge + Furnished Outdoor Terrace\nLandscaped Courtyard with BBQ Grills & Dining Areas\nMedia Room\nChildren's Playroom\nTwo Party Rooms\nConference Room and Coworking space\nTerrace Gaming Lounge\nAttended Lobby & Package Room\nOn-Site Parking & Bike Storage"
+ },
+ "https://www.trulia.com/home/89-25-162nd-st-1003-jamaica-ny-11432-466293483": {
+  "retrieved_at": "2026-11-15T20:40:05+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2595,
+  "avail": "now",
+  "street": "89-25 162nd St #1003",
+  "date_listed": "2026-10-28T18:43:55+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Climate Control": "Central Air",
+   "Laundry": "Washer, Dryer"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Michael Jeneralczuk",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Living New York",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Live Jamaica Central\n\nExperience being at center of it all- connectivity, convenience and an elevated lifestyle at the heart of Jamaica, Queens.\n\nJamaica's newest premier rental residence,Jamaica Central offers unparalleled access to all the neighborhood has to offer. Open Skyline Views, Unique Spacious Layouts ranging from 1 Bedrooms to 4 Bedrooms, and high-end condo finishes. Immerse yourself in an atmosphere of modern elegance. Light oak flooring, polished white Quartz countertops and Washer/Dryer in unit, complement the state of the art amenity spaces.\n\n**Residence 1003- Spacious and Bright 1 Bedroom with Private Balcony**\n- Extra Quiet Interior Facing, but with Open Views\n- Private Balcony\n- Queen Size Bedroom\n- Extensive Passthrough Kitchen with Stainless Steel Appliances\n- South Facing Living\n- Central Air\n\nAt Jamaica Central it starts with a grand, double-height marble lobby. Guest seating, co-working stations, and lounge right as you walk in the door. A fully equipped fitness center and Outdoor Spaces on the Roof Deck and 10th Floor Terrace, compliment the private balconies on each apartment.\n\nJamaica has evolved into a dynamic city center and transportation hub that features hospitals, universities, multiple shopping destinations, tranquil parks and the local charm of an authentic NYC neighborhood. Conveniently located offering residents' easy transportation to Manhattan via the E and J lines to the South or M and F lines to the North and throughout Queens via bus. Jamaica Central is also a quick commute to both JFK and LaGuardia airports by car (or AirTrain to JFK) or a reverse commute to Long Island's Nassau and Suffolk counties via the LIRR, Long Island and Van Wyck Expressways, Grand Central Parkway and the Northern and Southern State Parkways.\n\nBook Your Tour Today."
+ },
+ "https://www.trulia.com/home/16420-highland-ave-6d-jamaica-ny-11432-245487668": {
+  "retrieved_at": "2026-11-15T20:40:07+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 1800,
+  "avail": "now",
+  "street": "16420 Highland Ave #6D",
+  "date_listed": "2026-11-14T06:31:23+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Wanla C",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Green Brick Realty LLC",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "On-Site Parking ($225)\nOn-Site Laundry\nElevator\nStorage Available\nProfessionally Landscaped\nWell Lit Entrances and Walkways\nHardwood Floors\nMicrowaves Available\nHeat & Hot Water Included\nOnline Rent Payment\n\n2 blocks away from M train\n1 block away from Q43 and X68\nGrocery stores"
+ },
+ "https://www.trulia.com/home/89-61-162nd-st-805-jamaica-ny-11432-466088710": {
+  "retrieved_at": "2026-11-15T20:40:09+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2350,
+  "avail": "now",
+  "street": "89-61 162nd St #805",
+  "date_listed": "2026-10-18T14:16:09+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Climate Control": "Central Air",
+   "Dishwasher": "Included"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "moshe ashkenazi",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Mishkan Group",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "GRAND OPENING!\n \n\nBE THE FIRST TO LIVE\n\n162nd is the newest addition to Jamaica's vibrant community. This brand-new luxury building offers 89 meticulously designed homes across 12 floors, tailored for those who value both style and substance.\n\nLocated right off the buzzing corridor of Jamaica Avenue, residents enjoy immediate access to premium dining, diverse shopping, and exceptional transportation. Whether you're heading to Manhattan in just 20 minutes or staying local, the city is at your doorstep.\n\nThe Residences:\n\nBeautiful marble corridors lead you to your sanctuary. Our apartments offer an expansive open layout designed to maximize light and space.\n\nL-shaped open kitchens are a chef's delight, featuring sleek Quartz countertops, custom wooden cabinetry, and high-performance stainless steel appliances. Bathrooms are spacious retreats with granite tiling and premium finishes."
+ },
+ "https://www.trulia.com/home/87-46-chelsea-st-7a-jamaica-ny-11432-331533758": {
+  "retrieved_at": "2026-11-15T20:40:12+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2200,
+  "avail": "now",
+  "street": "87-46 Chelsea St #7A",
+  "date_listed": "2026-11-12T18:27:51+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Lydia Winn",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "RPM NY Gold",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Nestled in one of the most picturesque neighborhoods in Queens, this charming 1-bedroom home blends classic fixtures and modern updates.\n\nKey Features:\n\nBright & Airy Layout: Hardwood floors flow throughout the spacious living area and bedroom, offering serene views of hundred-year-old trees.\n\nRenovated Kitchen: Featuring deep blue cabinetry, ample counter space, and black cooking appliances.\n\nBuilding Amenities: Convenient on-site laundry room.\n\nUtilities: Gas and water are included in the rent (electric is tenant responsibility).\n\nTransit & Commute: Convenient access to local bus service just steps away, including the QM68 express bus, which provides direct service to Midtown Manhattan. The F train subway station is also just 0.4 miles away.\n\nNO BROKER FEE"
+ },
+ "https://www.trulia.com/home/8625-van-wyck-expy-329-jamaica-ny-11435-465860392": {
+  "retrieved_at": "2026-11-15T20:40:14+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2350,
+  "avail": "now",
+  "street": "8625 Van Wyck Expy #329",
+  "date_listed": "2026-10-07T21:57:11+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Dishwasher": "Included",
+   "Laundry": "See Home Details",
+   "Deposit": "$2,350"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "1 Year"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Deposit",
+    "$2,350"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {
+    "Required one-time fees": [
+     {
+      "title": "Security deposit",
+      "value": "$2,350"
+     },
+     {
+      "title": "Application fee",
+      "value": "$20"
+     }
+    ]
+   },
+   "",
+   "Decreased by $50 (2%) on Nov 3, 2026.\n\n \n\nPrice shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Dan T Gulino Group Realty - Real Estate Sales Person",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": null,
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "**Beautiful 1-Bedroom Apartment in Briarwood**\n\nWelcome to this well-maintained 1-bedroom apartment in the desirable Briarwood neighborhood. The apartment features a comfortable layout, a bright living space, and a spacious bedroom with excellent closet space. Conveniently located near public transportation, shopping, restaurants, parks, and major roadways.\n\n**Features\n\n* Spacious 1-bedroom layout\n* Bright living area\n* Good closet/storage space\n* Convenient Briarwood location\n* Close to subway and bus transportation\n* Near shops, restaurants, and everyday conveniences\n\nContact us today to schedule a showing!\n\nNo broker fee"
+ },
+ "https://www.trulia.com/home/84-18-143rd-st-3l-jamaica-ny-11435-466618948": {
+  "retrieved_at": "2026-11-15T20:40:17+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 1895,
+  "avail": "now",
+  "street": "84-18 143rd St #3L",
+  "date_listed": "2026-11-13T23:33:51+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Dishwasher": "Included"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Listings Tribro",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "TriBro NYC LLC",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "*Effortless Style Meets Everyday Comfort Spacious 1BR Apartment*\n\nStep into a beautifully designed 1-bedroom apartment where modern comfort, natural light, and a thoughtful layout come together to create a home that feels both refined and inviting. From the moment you enter, the bright open-concept living space offers a sense of warmth and versatility that suits any lifestyle.\n\nThe spacious living and dining area is perfect for entertaining, working from home, or simply unwinding after a long day. The well-appointed kitchen features generous cabinet and counter space, making everyday cooking easy and enjoyable. The bedroom provides a peaceful retreat with excellent closet space and room to create your own personal sanctuary.\n\nApartment Features:\n\nSpacious 1-bedroom layout\nBright, open living and dining area\nWell-appointed kitchen with ample storage\nExcellent closet space throughout\nThoughtfully designed floor plan with abundant natural light\n\nIdeally located near shopping, dining, parks, and public transportation, this apartment offers the perfect balance of neighborhood convenience and comfortable city living."
+ },
+ "https://www.trulia.com/home/14202-84th-dr-6m-jamaica-ny-11435-2088284050": {
+  "retrieved_at": "2026-11-15T20:40:20+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2295,
+  "avail": "now",
+  "street": "14202 84th Dr #6M",
+  "date_listed": "2026-11-06T21:20:49+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Decreased by $105 (4%) on Nov 11, 2026.\n\n \n\nPrice shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Dayana Zamora",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Zamora Listings LLC",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Large one bedroom apartment\nHardwood floors\nBright and Sunny\nL shaped living room\nKing size bedroom\nElevator and Laundry in Building\nPet friendly\nParking available for additional charge"
+ },
+ "https://www.trulia.com/home/143-25-84th-ave-3j-jamaica-ny-11435-466623315": {
+  "retrieved_at": "2026-11-15T20:40:22+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2050,
+  "avail": "now",
+  "street": "143-25 84th Ave #3J",
+  "date_listed": "2026-11-14T06:27:03+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Dishwasher": "Included"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Wanla C",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Green Brick Realty LLC",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Rent Stabilized\nHeat, water and cooking gas included\nLaundry in building\nSuper and maintenance staff available\n2-3 block away from E & F trains\n1 block away from Q6, Q41, Q24 & Q60"
+ },
+ "https://www.trulia.com/home/13523-82nd-ave-3f-jamaica-ny-11435-2108233681": {
+  "retrieved_at": "2026-11-15T20:40:24+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2395,
+  "avail": "now",
+  "street": "13523 82nd Ave #3F",
+  "date_listed": "2026-10-13T20:31:40+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Climate Control": "Central Air",
+   "Dishwasher": "Included"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Roger Mashihi",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Metro Garden Realty NYC",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Stunning Spacious Studio Gem with Terrace in Fine Modern Elevator Building Near Subway\n\n* no corners cut - very fine quality throughout\n\n* bright apartment, sunny with excellent exposure\n\n* deep living space, great for bedroom, living room, dining, and office furniture. Large double door closet, large private terrace!\n\n* open concept chef's kitchen with Granite Counters, stainless appliances, and dishwasher. ample cabinet and amazing storage space. huge breakfast bar ideal for stools/dining area\n\nexciting features: gorgeous modern marble bathroom with heat lamp. recessed lighting throughout, beautifully polished hardwood floors, central heat & ac unit, soundproof concrete building, high security building, video intercom, 24hr surveillance, 24hr laundry on site, indoor garage parking available\n\n* very short walk to E/F subway, LIRR (19min to penn station), Q10 to Jfk, Q46 to St John's, Q60, express buses, restaurants, and any and all shopping, just bordering 1 block east of forest hills, 4 blocks to Queens Blvd"
+ },
+ "https://www.trulia.com/home/141-24-84th-dr-4f-jamaica-ny-11435-466619402": {
+  "retrieved_at": "2026-11-15T20:40:27+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2100,
+  "avail": "now",
+  "street": "141-24 84th Dr #4F",
+  "date_listed": "2026-11-14T00:05:12+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "MQ Team",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "TriBro NYC LLC",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "*Modern Comfort in Every Corner Beautiful 1BR Apartment*\n\nStep into this inviting 1-bedroom apartment, where thoughtful design and everyday comfort come together to create a space you'll love calling home. Featuring a bright, open layout, this residence offers the perfect balance of style, functionality, and convenience.\n\nThe spacious living area is ideal for relaxing after a long day, entertaining guests, or creating the perfect work-from-home setup. The well-equipped kitchen provides everything you need for effortless meal preparation, while the generously sized bedroom offers a peaceful retreat with ample closet space for easy organization.\n\nIdeally located near shopping, dining, parks, and public transportation, this apartment keeps you connected to the neighborhood while providing a comfortable place to unwind.\n\nWhether you're searching for your first apartment or your next home, this charming 1-bedroom is ready to welcome you. Schedule your private tour today and experience everything it has to offer!"
+ },
+ "https://www.trulia.com/home/8267-austin-st-916-kew-gardens-ny-11415-2098501053": {
+  "retrieved_at": "2026-11-15T20:40:29+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2550,
+  "avail": "Nov 17",
+  "street": "8267 Austin St #916",
+  "date_listed": "2026-11-14T23:49:24+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Climate Control": "Fireplace Heating"
+  },
+  "feats": [
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "Nov 17th"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Igor Rachmanov",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Redox Group Corp",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Beautiful ONE Bedroom Apartment for Rent ONLY $2550 in the Heart of Kew Gardens, close to all, elevator building, laundry , pet friendly, gym extra fee, train half block away, with renovated kitchen, & bathroom All new Stainless Steel appliances\nKey with agent, the apartment can be showing ANY TIME,\n1- Requirement from management /\n2- W-2 / Income tax, last 3 paystub, picture ID, Income requirement for this apartment $130,000 yearly income.\n3- management requirement $20 for credit check per applicant\n4- no application fee/\n5 -Real estate NO FEE\nPlease Call Listing Agent\nWONT LAST LONG\n\nRequired Fees To Rent This Unit:\n\n$20 Application Fee per applicant\n\n1st Month's Rent\n\n1 Month's Security Deposit"
+ },
+ "https://www.trulia.com/home/83-83-118th-st-3f-queens-ny-11415-123185420": {
+  "retrieved_at": "2026-11-15T20:40:32+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2100,
+  "avail": "now",
+  "street": "83-83 118th St #3F",
+  "date_listed": "2026-11-14T06:35:03+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Wanla C",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Green Brick Realty LLC",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Heat and water included\nRenovated kitchen and bathroom\nRent stabilized\n3 blocks away from LIRR\n1 block away from Q54\n2 blocks from Forest Hills Park"
+ },
+ "https://www.trulia.com/home/12333-83rd-ave-3203-kew-gardens-ny-11415-2086095362": {
+  "retrieved_at": "2026-11-15T20:40:34+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2695,
+  "avail": "now",
+  "street": "12333 83rd Ave #3203",
+  "date_listed": "2026-11-09T18:11:06+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Exterior Features",
+    "Parking & Garage",
+    "Parking",
+    "Assigned"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Stellar Management Leasing",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Stellar Management",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Bright, high-floor studio with open city views and gleaming hardwood floors. Features a separate galley kitchen with granite countertops and stainless-steel appliances, including a dishwasher and microwave, plus a full tiled bath and two large closets."
+ },
+ "https://www.trulia.com/home/7525-153rd-st-315-flushing-ny-11367-2115752303": {
+  "retrieved_at": "2026-11-15T20:40:37+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 2199,
+  "avail": "now",
+  "street": "7525 153rd St #315",
+  "date_listed": "2026-10-26T17:22:12+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Climate Control": "Central Air",
+   "Dishwasher": "Included"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ],
+   [
+    "Exterior Features",
+    "Parking & Garage",
+    "Parking",
+    "Assigned"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Sitora Askarova",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Living New York",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Modern Studio Apartment at The Opal with Stunning Views\n\nThis bright and stylish one-bedroom offers a spacious open floor plan filled with natural light. The contemporary kitchen comes fully equipped with stainless steel appliances, including a refrigerator, stove, and dishwasherperfect for everyday living or entertaining.\n\nIn addition to its beautifully designed residences, The Opal offers an exceptional collection of amenities and a prime location, just steps from restaurants, cafes, shops, and public transportation.\n\nApartment Amenities:\n-Dishwasher\n-AC Units\n-Stainless Steel Appliances\n-Spacious Layout\n-Ample Closet Space\n-Breakfast Bar\n\nBuilding Amenities:\n-24/7 Doorman with package notifications via text/email\n-2 Expansive Roof Decks\n-Library w/ free wifi\n-Community/Game Room with Billiards\n-Two Outdoor Playgrounds\n-Picnic Tables with BBQ Grills\n-2 Dog Runs\n-Fitness Center\n-Children's Playroom\n-On-site Vending Machines & ATM\n-Laundry Room\n-Free Peak-hour Shuttle Service to Kew GardensUnion Turnpike (E/F trains)\n-Secure Underground Reserved Parking ($Fee)\n-Regular Storage Cages ($Fee)\n-Bike Storage ($Fee)\n-No Pet Fees\n\nFee Breakdown:\n-$20 application fees\n-Tenant pays electricity. Wifi and Cable on tenant\n-Bike Storage and Regular Storage Fees\n-Parking Garage Fees\n-1st Months Rent & 1 Month Security"
+ },
+ "https://www.trulia.com/home/56-27-2nd-st-1710-long-island-city-ny-11101-466053967": {
+  "retrieved_at": "2026-11-15T20:40:39+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 1389,
+  "avail": "now",
+  "street": "56-27 2nd St #1710",
+  "date_listed": "2026-10-15T23:11:08+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats",
+   "Climate Control": "Central Air",
+   "Dishwasher": "Included"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Gotham Leasing Office",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "44th Street Development LLC",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "THIS UNIT IS INCOME RESTRICTED AND RENT STABILIZED. ALL APPLICANTS MUST MEET INCOME GUIDELINES AND AT LEAST ONE MEMBER OF THE HOUSEHOLD MUST HAVE A MOBILITY IMPAIRMENT.\n\nMINIMUM INCOME: $50,914\nMAXIMUM INCOME (HOUSEHOLD SIZE OF 1): $59,400\nMAXIMUM INCOME (HOUSEHOLD SIZE OF 2): $67,850\n\nBY APPOINTMENT ONLY, NO WALK-INS\n\nWe are accepting applications for a Studio mobility impairment unit in the 50% AMI range in the affordable housing program. Units in the low-income program are income-restricted and rent stabilized. PLEASE NOTE THAT TO BE ELIGIBLE FOR THIS UNIT, AT LEAST ONE PERSON IN THE HOUSEHOLD MUST HAVE A MOBILITY IMPAIRMENT. Rents listed are subject to change. The compliance team will work down the waitlist in the order of applications received. Once your log number is reached, you will be contacted to submit income & asset documentation.\n\nLocated on the waterfront of Hunters Point South, Gotham Point South and North Tower's are full-service, rent-stabilized, luxury residential buildings offering homes at an accessible price. No application fee.\n\nDesigned by Handel Architects, the building features beautifully homes with modern design and custom elements: stainless steel appliances, plank wood floors, central air, granite countertops, and floor-to-ceiling windows.\n\nFull-service amenities include a state-of-the-art fitness club with an outdoor fitness area, outdoor terrace, rooftop terrace, barbecue area, and lounge area with pool & ping pong tables."
+ },
+ "https://www.trulia.com/home/61-57-84th-st-3c-middle-village-ny-11379-466623344": {
+  "retrieved_at": "2026-11-15T20:40:42+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 1800,
+  "avail": "now",
+  "street": "61-57 84th St #3C",
+  "date_listed": "2026-11-14T06:31:23+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "Floors",
+    "Hardwood"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "Wanla C",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Green Brick Realty LLC",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "No Board Approval\nRent Stabilized\nHeat and water included\nRenovated Kitchen and bathroom\nPets allowed\nParking $225\n3 blocks away from Subway station\n1 block away from Bus stops"
+ },
+ "https://www.trulia.com/home/3625-parsons-blvd-5h-flushing-ny-11354-2100688723": {
+  "retrieved_at": "2026-11-15T20:40:44+00:00",
+  "active": true,
+  "label": "For Rent",
+  "price": 1930,
+  "avail": "now",
+  "street": "3625 Parsons Blvd #5H",
+  "date_listed": "2026-11-10T17:41:51+00:00",
+  "pet": {
+   "additionalDetails": null,
+   "cards": [
+    {
+     "species": "DOGS",
+     "label": "Dogs",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "Small",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    },
+    {
+     "species": "CATS",
+     "label": "Cats",
+     "status": "ALLOWED",
+     "statusLabel": "Allowed",
+     "facts": [
+      {
+       "label": "Size allowed",
+       "value": "n/a",
+       "__typename": "HOME_PolicyFactLabelValue"
+      }
+     ],
+     "restrictions": null,
+     "__typename": "HOME_PetPolicyCard"
+    }
+   ],
+   "__typename": "HOME_RentalPetPolicy"
+  },
+  "hl": {
+   "Property Type": "Apartment",
+   "Pets": "Dogs & Cats"
+  },
+  "feats": [
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Lease Term",
+    "Contact For Details"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "Available",
+    "now"
+   ],
+   [
+    "Rental Terms, Policies & Fees",
+    "",
+    "",
+    "Cats, small dogs allowed"
+   ],
+   [
+    "Interior Features",
+    "Levels, Entrance, & Accessibility",
+    "",
+    "Elevator"
+   ]
+  ],
+  "fees": [
+   {},
+   "",
+   "Price shown is base rent. Additional costs and fees may apply."
+  ],
+  "provider": {
+   "listingAgent": {
+    "name": "David Kusayev",
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "broker": {
+    "name": "Hillel Realty Group",
+    "__typename": "HOME_ProviderEntity"
+   },
+   "__typename": "HOME_Provider"
+  },
+  "desc": "Spacious STUDIO 1 bathroom Flushing * Queens*\n\nDue to high volume interest please text/email all your information before scheduling an appointment.\n\nThis is a beautiful LARGE STUDIO 1 Bathroom apartment located in Flushing Queens fully renovated with a separte kitchen, with stainless steel appliances. Apartment features separate sleeping area. \n\n Beautiful hardwood floors. Heat, Hot Water, and Gas INCLUDED \n\n*Elevator Building *Live in Super\n\nFew minutes away from from the 7 train. Call/Text/Email Today to schedule a showing.\n\nRent Stabilized unit. First months rent and security deposit due at signing. $20 Application Fee per Person."
+ }
+}
