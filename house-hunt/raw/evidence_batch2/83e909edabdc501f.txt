@@ -1,0 +1,13 @@
+
+
+
+
+
+
+User-Agent: *
+Disallow: /CMSPages/GetResource.ashx?image=%5BImages.zip%5D%2F 
+
+Sitemap: https://www.harrisonyards.com/Googlesitemap.xml
+
+
+

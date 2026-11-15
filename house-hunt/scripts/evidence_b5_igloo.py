@@ -8,12 +8,23 @@ E = lib.RAW / "evidence_b5"
 rows = list(csv.DictReader(open(lib.DATA / "reference/evidence_batches/batch_5.csv")))
 EXTRA_BBL = json.loads((E / "_extra_bbl.json").read_text()) if (E / "_extra_bbl.json").exists() else {}
 out = {}
+RES = json.loads((E / "_igloo_resolve.json").read_text()) if (E / "_igloo_resolve.json").exists() else {}
 for r in rows:
     if r["zip"] == "10801": continue
     bbl = (r["pluto_bbl"] or "").split(".")[0] or EXTRA_BBL.get(r["addr_key"], "")
     if not bbl:
         out[r["addr_key"]] = {"error": "no BBL"}; continue
     u = EXTRA_BBL.get(r["addr_key"] + "#url") or f"https://www.openigloo.com/building/nyc/{bbl}-{bbl}/x"
+    if u.endswith("/x") and u not in RES:
+        import requests, time
+        time.sleep(2.5)
+        rr = requests.head(u, headers={"User-Agent": lib.USER_AGENT}, allow_redirects=False, timeout=60)
+        RES[u] = {"status": rr.status_code, "location": rr.headers.get("location", "")}
+        (E / "_igloo_resolve.json").write_text(json.dumps(RES, indent=1))
+    if u in RES:
+        if not RES[u]["location"]:
+            out[r["addr_key"]] = {"status": RES[u]["status"], "fetched": u}; print(r["addr_key"], RES[u]); continue
+        u = "https://www.openigloo.com" + RES[u]["location"]
     c, m = lib.cached_get(u, "evidence_b5", ext="html")
     t = c.decode(errors="replace")
     o = {"status": m["status"], "retrieved_at": m["retrieved_at"], "fetched": u}
