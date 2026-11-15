@@ -24,7 +24,7 @@ mp = lib.ROOT / "scripts/voices_manual.json"   # optional hand edits: {"drop": [
 if mp.exists(): MANUAL = json.load(open(mp))
 
 TH = collections.OrderedDict([
- ("car_crime", r"car (break|theft|thefts|thieves|jack)|cars? (was|were|got|get|gets|been|being|is|are) (broken|stolen|vandal)|broke into (my|our|the|his|her) car|broken into|stolen car|car stolen|catalytic|carjack|auto theft|vehicle theft|stole my car|vandaliz\w+ (my |our )?cars?|break-?ins"),
+ ("car_crime", r"car (break|theft|thefts|thieves|jack)|cars? (was|were|got|get|gets|been|being|is|are) (broken|stolen|vandal)|broke into (my|our|the|his|her) car|broken into|stolen car|car stolen|catalytic|car ?-?jack|cars? (can|could|might|will) (be|get) stolen|auto theft|vehicle theft|stole my car|vandaliz\w+ (my |our )?cars?|break-?ins"),
  ("safety", r"\bsafe\b|\bsafer\b|\bsafest\b|safety|unsafe|\bcrime|dangerous|at night|robber|mugg|police|shooting|sketchy|violen|gang|after dark|well[- ]lit|walk(ing)? alone|feel secure|drug"),
  ("parking", r"parking|\bpark (my|your|the|a) car|alternate side|find a spot|parking spot|garage"),
  ("dogs_green", r"\bdogs?\b|\bpets?\b|puppy|\bparks?\b(?!ing)|green space|greenery|\btrees?\b|tree-lined|trail|nature|garden|waterfront|\bbeach|hik(e|ing)|outdoor"),
@@ -38,9 +38,9 @@ REGRET = r"can'?t wait to (leave|move)|moved (out|away)|i left\b|we left\b|would
 SURPRISE = r"surpris|didn'?t expect|did not expect|hidden gem|underrated|pleasantly|to my surprise|never (thought|expected)"
 FROM_NYC = r"moved (here )?from (queens|brooklyn|the bronx|bronx|manhattan|nyc|new york city|the city|astoria|flushing|jamaica|harlem)|coming from (queens|brooklyn|the bronx|manhattan|nyc|the city)"
 POS = r"\blove|\bgreat|\bnice|beautiful|friendly|peaceful|\bclean\b|convenien|\bbest\b|\bgood\b|amazing|wonderful|enjoy|affordab|plenty|\beasy\b|vibrant|welcoming|excellent|perfect|favorite|well[- ]kept|well[- ]maintained|well[- ]lit|\bsafe\b|\bsafer\b|\bsafest\b|\bquiet\b|\bcalm\b|comfortable|lovely|charming|fantastic|awesome|pleasant|happy|recommend|walkable|lively|fun\b|gem\b"
-NEG = r"unsafe|\bcrimes?\b|dangerous|expensive|\bdirty|nois[ye]|\bloud|crowded|homeless|break-?ins?|broken into|stolen|theft|robber|hard to find|difficult|\black\b|lacks|lacking|worst|\bbad\b|terrible|trash|garbage|litter|sketchy|violen|shooting|gang|drugs?\b|overpriced|traffic|pricey|congest|\brude|nightmare|limited|no parking|struggle|impossible|problem|issues?\b|downside|\bpoor\b|horrible|awful|scary|afraid|vandal|rats?\b|nothing to do|boring|not recommend|decline|worse|unfortunately|disappoint|high (rent|taxes|cost|prices)|costly|run[- ]down|neglect|can'?t wait to leave|filthy|sirens"
+NEG = r"unsafe|\bcrimes?\b|dangerous|expensive|\bdirty|nois[ye]|\bloud|crowded|homeless|break-?ins?|broken into|stolen|theft|robber|hard to find|difficult|\black\b|lacks|lacking|worst|\bbad\b|terrible|trash|garbage|litter|sketchy|violen|shooting|gang|drugs?\b|overpriced|traffic|pricey|congest|\brude|nightmare|limited|challeng\w+|\btough|nonexistent|\btight\b|hassle|frustrat\w+|\bsucks?\b|ticket(ed|ing|s)?\b|forbids|denied|lucky if|concern\w*|worr(y|ied|ies|isome)|careful|cautio\w+|\bwary|\bavoid|not the safest|no parking|struggle|impossible|problem|issues?\b|downside|\bpoor\b|horrible|awful|scary|afraid|vandal|rats?\b|nothing to do|boring|not recommend|decline|worse|unfortunately|disappoint|high (rent|taxes|cost|prices)|costly|run[- ]down|neglect|can'?t wait to leave|filthy|sirens"
 NEGATE = r"(\bnot|n't|n’t|\bnever|\bno|\bisnt|\bdont|\bhardly|\bbarely|\blittle|\blow|\bless|\bfew|\bwithout|\bfree of|\brarely)\s+(\w+\s+){0,3}$"
-BLOCK = r"\b(white|black|blacks|whites|hispanic|latin[oax]s?|asian|jewish|jews?|muslims?|christian|catholic|chinese|korean|indian|russian|uzbek|italian|irish|greek|polish|caribbean|african|haitian|jamaican|dominican|mexican|puerto rican|bangladeshi|pakistani|arab|ethnic\w*|racial\w*|race|racis\w+|religio\w+|orthodox|hasid\w+|immigrants?|minorit\w+|synagogues?|mosques?)\b"
+BLOCK = r"\b(white|black|blacks|whites|hispanic|latin[oax]s?|asian|jewish|jews?|muslims?|christian|catholic|chinese|korean|indian|russian|uzbek|italian|irish|greek|polish|caribbean|african|haitian|jamaican|dominican|mexican|puerto rican|bangladeshi|pakistani|arab|ethnic\w*|racial\w*|race|racis\w+|religio\w+|orthodox|hasid\w+|dominicans?|bachata|bukharian|bengalis?|haitians?|brazilians?|jamaicans?|immigrants?|minorit\w+|synagogues?|mosques?)\b"
 
 def sentences(text):
     out = []
@@ -53,6 +53,7 @@ def sentences(text):
 
 def sentiment(x, rating):
     xl = x.lower(); p = n = 0
+    xl, k = re.subn(r"crimes?( rates?)? (is|are|was|has been|have been|stays?|remains?) (very |relatively |pretty |quite |fairly |generally )?(low|rare|minimal|down|not (a|an) (big |major )?(issue|problem))|(low|little to no|little|minimal|no|hardly any) crime", " ", xl); p += k
     for m in re.finditer(POS, xl):
         if re.search(NEGATE, xl[max(0, m.start() - 30):m.start()]): n += 1
         else: p += 1
@@ -92,23 +93,50 @@ def context(r, x, full):
     if r["source"] == "city-data" and not bits: bits.append("forum poster (relationship to the place not stated)")
     return "; ".join(dict.fromkeys(bits))
 
+CONTRAST = r"\b(but|however|although|though|except|could be better|wish|downside|unfortunately|yet)\b"
+def arealess(x, r):
+    """Blank the place name so that 'Rego Park' or 'Kew Gardens' does not count as a park or garden."""
+    names = {NAME.get(r["hood_id"], "")} | {re.sub(r" Reviews - Niche$| - Niche$", "", r.get("area") or "")}
+    for n in list(names):
+        for part in re.split(r"[-()]|, ", n): names.add(part.strip())
+    for n in sorted((n for n in names if len(n) > 4), key=len, reverse=True):
+        x = re.sub(re.escape(n), "PLACE", x, flags=re.I)
+    return x
+
+def cd_candidates(r):
+    out = []
+    norm = re.sub(r"\s+", " ", r["text"])
+    for k in MANUAL.get("citydata_keep", []):
+        if k["post_id"] != r["post_id"]: continue
+        if k["excerpt"] not in norm: print("WARN manual excerpt not in post", k["post_id"], k["excerpt"][:50]); continue
+        out.append(dict(ex=k["excerpt"], theme=k["theme"], sent=k["sentiment"], score=50, r=r, ctx=k["context"]))
+    return out
+
 def candidates(r, hood_id):
+    if r["source"] == "city-data": return cd_candidates(r)
     if r["source"] == "niche" and r.get("who") not in ("Current Resident", "Former Resident"): return []
     full = r["text"]; year = int(r["date"][:4]); out = []
     for para in sentences(full):
         for i in range(len(para)):
             for ex in (para[i], " ".join(para[i:i + 2]) if i + 1 < len(para) else None):
                 if not ex or not (55 <= len(ex) <= 330): continue
-                if re.search(BLOCK, ex, re.I) or "http" in ex or ex.endswith("?"): continue
+                if re.search(BLOCK, ex, re.I) or re.search(r"\bDR\b|[Ll]ittle [A-Z]", ex) or "http" in ex or ex.endswith("?"): continue
                 if r["source"] == "city-data":
                     multi = len(r.get("_hoods", [])) > 1 or r.get("_generic")
                     nm = NAME[hood_id].split("-")[0].split("(")[0].strip().lower()
                     if multi and nm not in ex.lower(): continue
                     if not multi and nm not in full.lower() and nm not in r["area"].lower(): continue
-                t, k = theme(ex)
+                exa = arealess(ex, r)
+                t, k = theme(exa)
                 if not t: continue
-                s = sentiment(ex, r.get("rating"))
+                s = sentiment(exa, r.get("rating"))
                 if not s: continue
+                st = r.get("rating")
+                if s == "positive" and re.search(CONTRAST, exa.lower()): s = "mixed"
+                if st and ((s == "negative" and st >= 4) or (s == "positive" and st <= 2)): s = "mixed"
+                pair = ex is not para[i]
+                if pair and (theme(arealess(para[i], r))[0] is None or theme(arealess(para[i + 1], r))[0] is None): k -= 2
+                elif pair: k -= 0.5
                 sc = k + (2 if year >= 2024 else 1 if year >= 2022 else -2 if year < 2019 else 0)
                 sc += 1 if re.search(r"\b(I|my|we|our|I've|I'm)\b", ex) else 0
                 sc += 1 if 90 <= len(ex) <= 260 else 0
@@ -237,11 +265,12 @@ with open(OUT / "coverage.csv", "w", newline="") as f:
         worked = []; skipped = []
         nq = collections.Counter(r["source_site"] for r in q)
         st = [s for s in status if s["hood_id"] == hid]
-        n_ok = [s for s in st if s["source"] == "niche" and s.get("status") == 200 and "/reviews/" in s["url"] and "Reviews" in (s.get("title") or "")]
+        n_ok = list({s["title"]: s for s in st if s["source"] == "niche" and s.get("status") == 200 and "/reviews/" in s["url"] and "?page" not in s["url"] and "Reviews" in (s.get("title") or "")}.values())
+        if any(s["source"] == "niche" and s.get("status") == 403 for s in st): skipped.append("niche: HTTP 403 on this place's review page, not retried")
         if n_ok: worked.append("niche (" + "; ".join(re.sub(r" Reviews - Niche$", "", s["title"]) + f": {s.get('reviews')} reviews read" for s in n_ok) + f"; {nq['niche.com']} quotes)")
         else:
             bad = [s["url"].split("/")[-3] for s in st if s["source"] == "niche" and s.get("status") == 404]
-            skipped.append("niche: no place page found (404 for " + ", ".join(bad) + ")" if bad else "niche: no page tried")
+            if not any("403" in x for x in skipped): skipped.append("niche: no place page found (404 for " + ", ".join(bad) + ")" if bad else "niche: no page tried")
         t_ok = [s for s in st if s["source"] == "trulia" and s.get("status") == 200]
         tsurv = sorted({r["source_area"] for r in srows.values() if r["hood_id"] == hid and r["source_site"] == "trulia.com"})
         if t_ok: worked.append(f"trulia neighborhood page ({nq['trulia.com']} quotes, survey)")

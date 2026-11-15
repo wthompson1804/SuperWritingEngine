@@ -1,0 +1,665 @@
+{
+ "https://www.trulia.com/home/123-linden-blvd-i19q-brooklyn-ny-11226-466546456": {
+  "url": "https://www.trulia.com/home/123-linden-blvd-i19q-brooklyn-ny-11226-466546456",
+  "ts": "2026-11-15T19:28:56+00:00",
+  "raw": "raw/trulia/8420d70483b5d7cc.html",
+  "price": "$2,599/mo",
+  "feats": [
+   "Days on Market: 4 days on Trulia",
+   "Property Type: Apartment",
+   "Lease Term: Contact For Details",
+   "Available: now",
+   "Cats, small dogs allowed",
+   "Dishwasher",
+   "Dryer",
+   "Washer",
+   "Air Conditioning",
+   "Elevator",
+   "Floors: Hardwood",
+   "Garden",
+   "Pool",
+   "Parking: Valet",
+   "Fitness Center",
+   "Pool",
+   "Smoke Free"
+  ],
+  "desc": "Welcome to 123 Linden in PLG\n\nLocated in the heart of Prospect Lefferts Gardens, 123 Linden offers a variety of spacious apartment optionsstudios, one, two, and three-bedroom unitsblending classic charm with modern comforts.\n\nPLG Apartment finishes include:\n\nCaesarstone quartz countertops\n\nStainless steel appliances\n\nIn-home washers and dryers\n\nSpacious bathrooms and generous closets\n\nSmart home technology, including keyless entry\n\nBuilding features:\n\nRooftop and indoor swimming pools\n\nOutdoor BBQ grills and half-basketball court\n\nResident lounge, media room, and fitness center\n\nEvent space, sauna, and TULU service\n\nWhether you're relaxing at home or enjoying the neighborhood, 123 Linden offers a true sense of community in PLG.\n\n*Apartment images shown may not represent the actual unit and or view of the apartment listed. Please inquire for more information.\n* 2924, 1.5 ON 13.5 , 2599",
+  "fees": [
+   [
+    "Base rent",
+    "$2,599/mo"
+   ],
+   [
+    "Security deposit",
+    "Contact for details"
+   ],
+   [
+    "Application fee",
+    "Contact for details"
+   ],
+   [
+    "Administrative fee",
+    "Contact for details"
+   ]
+  ],
+  "pet": [
+   [
+    "Dogs",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "Small",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ],
+   [
+    "Cats",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "n/a",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ]
+  ],
+  "modified": "2026-11-11T00:00:00+00:00",
+  "listed": "2026-11-11T01:21:43+00:00",
+  "agent": {
+   "fullTextSummary": [
+    "Listing by: Bushburg, 347-286-8976"
+   ],
+   "mlsListingTextSummary": [
+    "Listed by Bushburg, (347) 286-8976"
+   ],
+   "broker": {
+    "email": null,
+    "__typename": "HOME_ProviderEntity",
+    "name": "Bushburg",
+    "phone": "347-286-8976",
+    "url": null
+   },
+   "listingSource": {
+    "attribution": null,
+    "alternativeSources": [],
+    "logoUrl": null,
+    "formattedTimeLastChecked": null,
+    "__typename": "HOME_ProviderListingSource",
+    "disclaimer": {
+     "markdown": "",
+     "__typename": "HOME_RichText"
+    }
+   },
+   "__typename": "HOME_Provider",
+   "listingAgent": {
+    "name": "PLG 123 Leasing",
+    "phone": null,
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "builder": null
+  }
+ },
+ "https://www.trulia.com/home/3308-glenwood-rd-14-brooklyn-ny-11210-2056033666": {
+  "url": "https://www.trulia.com/home/3308-glenwood-rd-14-brooklyn-ny-11210-2056033666",
+  "ts": "2026-11-15T19:30:47+00:00",
+  "raw": "raw/trulia/b6ed82bc8b3fdf5a.html",
+  "price": "$2,600/mo",
+  "feats": [
+   "Days on Market: 5 days on Trulia",
+   "Property Type: Apartment",
+   "Lease Term: Contact For Details",
+   "Available: now",
+   "Cats, small dogs allowed",
+   "Dishwasher",
+   "Air Conditioning",
+   "Elevator",
+   "Floors: Hardwood",
+   "Fitness Center"
+  ],
+  "desc": "Spacious 1 bed / 1 bath at 3308 Glenwood Road in East Flatbush! Available for ASAP move-in.\n\nApartment:\n-Hardwood flooring\n-High ceilings\n-Oversized windows\n-Eat-in kitchen w/ stone countertops\n-Stainless steel appliances\n-Central air conditioning\n\nBuilding Amenities:\n-Laundry room + package room\n-Elevator & wheelchair accessible\n-Gym\n-Lounge, and coworking space w/ public Wi-Fi\n-Rooftop access\n-Bike storage\n-Private parking available\n\nAvailable ASAP.\nNo broker fee. Pets allowed!",
+  "fees": [
+   [
+    "Base rent",
+    "$2,600/mo"
+   ],
+   [
+    "Security deposit",
+    "Contact for details"
+   ],
+   [
+    "Application fee",
+    "Contact for details"
+   ],
+   [
+    "Administrative fee",
+    "Contact for details"
+   ]
+  ],
+  "pet": [
+   [
+    "Dogs",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "Small",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ],
+   [
+    "Cats",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "n/a",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ]
+  ],
+  "modified": "2026-11-10T00:00:00+00:00",
+  "listed": "2026-11-10T17:40:17+00:00",
+  "agent": {
+   "fullTextSummary": [
+    "Listing by: Brooklyn Group, 347-567-7080"
+   ],
+   "mlsListingTextSummary": [
+    "Listed by Brooklyn Group, (347) 567-7080"
+   ],
+   "broker": {
+    "email": null,
+    "__typename": "HOME_ProviderEntity",
+    "name": "Brooklyn Group",
+    "phone": "347-567-7080",
+    "url": null
+   },
+   "listingSource": {
+    "attribution": null,
+    "alternativeSources": [],
+    "logoUrl": null,
+    "formattedTimeLastChecked": null,
+    "__typename": "HOME_ProviderListingSource",
+    "disclaimer": {
+     "markdown": "",
+     "__typename": "HOME_RichText"
+    }
+   },
+   "__typename": "HOME_Provider",
+   "listingAgent": {
+    "name": "Nancy B",
+    "phone": null,
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "builder": null
+  }
+ },
+ "https://www.trulia.com/home/315-e-108th-st-6g-new-york-ny-10029-2092277752": {
+  "url": "https://www.trulia.com/home/315-e-108th-st-6g-new-york-ny-10029-2092277752",
+  "ts": "2026-11-15T19:33:53+00:00",
+  "raw": "raw/trulia/e661678831db32e9.html",
+  "price": "$2,375/mo",
+  "feats": [
+   "Days on Market: 13 days on Trulia",
+   "Property Type: Apartment",
+   "Lease Term: Contact For Details",
+   "Available: now",
+   "Cats, small dogs allowed",
+   "Elevator",
+   "Floors: Hardwood"
+  ],
+  "desc": "Spacious - One Bedroom w/ Elevator\n\nShowings by confirmed appointments. Access is limited\n\nThis apartment features:\n-A queen sized bedroom with natural lighting! + room for a home office setup and much more.\n-LARGE living room, perfect for entertaining.\n-Separate eat-in kitchen with all the necessary appliances!\n-Modern LED lights throughout the apartment\n-Polished hardwood floors throughout\n-Laundry and super on site\n-Elevator IN building\n\nThis apartment is conveniently located minutes away from the 6 train, coffee shops, restaurants and much more.\n\nTotal Payments: application payment of $20 (non-refundable) per applicant/guarantor. The payments due at lease signing will be the First month's rent and the Security Deposit (equal to 1 month's rent).",
+  "fees": [
+   [
+    "Base rent",
+    "$2,375/mo"
+   ],
+   [
+    "Security deposit",
+    "Contact for details"
+   ],
+   [
+    "Application fee",
+    "Contact for details"
+   ],
+   [
+    "Administrative fee",
+    "Contact for details"
+   ]
+  ],
+  "pet": [
+   [
+    "Dogs",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "Small",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ],
+   [
+    "Cats",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "n/a",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ]
+  ],
+  "modified": "2026-11-02T00:00:00+00:00",
+  "listed": "2026-11-02T17:08:28+00:00",
+  "agent": {
+   "fullTextSummary": [
+    "Listing by: Alpha Properties NYC I LLC, 212-674-1645"
+   ],
+   "mlsListingTextSummary": [
+    "Listed by Alpha Properties NYC I LLC, (212) 674-1645"
+   ],
+   "broker": {
+    "email": null,
+    "__typename": "HOME_ProviderEntity",
+    "name": "Alpha Properties NYC I LLC",
+    "phone": "212-674-1645",
+    "url": null
+   },
+   "listingSource": {
+    "attribution": null,
+    "alternativeSources": [],
+    "logoUrl": null,
+    "formattedTimeLastChecked": null,
+    "__typename": "HOME_ProviderListingSource",
+    "disclaimer": {
+     "markdown": "",
+     "__typename": "HOME_RichText"
+    }
+   },
+   "__typename": "HOME_Provider",
+   "listingAgent": {
+    "name": "Rachel Worknech",
+    "phone": null,
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "builder": null
+  }
+ },
+ "https://www.trulia.com/home/8100-bay-pkwy-211-brooklyn-ny-11214-466612983": {
+  "url": "https://www.trulia.com/home/8100-bay-pkwy-211-brooklyn-ny-11214-466612983",
+  "ts": "2026-11-15T19:37:41+00:00",
+  "raw": "raw/trulia/2a2aa57c8f93bb81.html",
+  "price": "$2,200/mo",
+  "feats": [
+   "Days on Market: 2 days on Trulia",
+   "Property Type: Apartment",
+   "Lease Term: Contact For Details",
+   "Available: now",
+   "Cats, small dogs allowed",
+   "Elevator",
+   "Floors: Hardwood"
+  ],
+  "desc": "Full of character and classic prewar charm, this spacious one-bedroom apartment offers a comfortable layout with beautiful architectural details throughout. Elegant archways, built-in bookshelf and French doors add warmth and character, while hardwood floors, high ceilings, and generous room proportions create an inviting living space.\n\nThe apartment features a spacious living room, a separate eat-in kitchen with ample cabinetry, and a generously sized bedroom with great closet space. Original details and thoughtful design elements give the home a timeless appeal.\n\nThe apartment is located on the second floor of a beautiful, well-maintained building, which has 2 elevators. There is also a shared laundry room in the lower level of the building.\n\nConveniently located in prime Bensonhurst near multiple restaurants along 86th St and Bay Parkway, all major banks, a 24hr Fitness as well as Planet Fitness, pharmacies, and other shopping. The building is also only a few short blocks away from the D train and walking distance to the express bus to Manhattan and Bensonhurst Park, known for its scenic waterfront views, peaceful walking paths, and spectacular sunsets.",
+  "fees": [
+   [
+    "Base rent",
+    "$2,200/mo"
+   ],
+   [
+    "Security deposit",
+    "Contact for details"
+   ],
+   [
+    "Application fee",
+    "Contact for details"
+   ],
+   [
+    "Administrative fee",
+    "Contact for details"
+   ]
+  ],
+  "pet": [
+   [
+    "Dogs",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "Small",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ],
+   [
+    "Cats",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "n/a",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ]
+  ],
+  "modified": "2026-11-13T00:00:00+00:00",
+  "listed": "2026-11-13T18:04:42+00:00",
+  "agent": {
+   "fullTextSummary": [
+    "Listing by: CITI CUBES INC, 917-300-1867"
+   ],
+   "mlsListingTextSummary": [
+    "Listed by CITI CUBES INC, (917) 300-1867"
+   ],
+   "broker": {
+    "email": null,
+    "__typename": "HOME_ProviderEntity",
+    "name": "CITI CUBES INC",
+    "phone": "917-300-1867",
+    "url": null
+   },
+   "listingSource": {
+    "attribution": null,
+    "alternativeSources": [],
+    "logoUrl": null,
+    "formattedTimeLastChecked": null,
+    "__typename": "HOME_ProviderListingSource",
+    "disclaimer": {
+     "markdown": "",
+     "__typename": "HOME_RichText"
+    }
+   },
+   "__typename": "HOME_Provider",
+   "listingAgent": {
+    "name": "Leasing Department",
+    "phone": null,
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "builder": null
+  }
+ },
+ "https://www.trulia.com/home/8635-21st-ave-4q-brooklyn-ny-11214-466488187": {
+  "url": "https://www.trulia.com/home/8635-21st-ave-4q-brooklyn-ny-11214-466488187",
+  "ts": "2026-11-15T19:37:15+00:00",
+  "raw": "raw/trulia/2ab0ce184c17b3c0.html",
+  "price": "$1,800/mo",
+  "feats": [
+   "Days on Market: 8 days on Trulia",
+   "Property Type: Apartment",
+   "Lease Term: Contact For Details",
+   "Available: now",
+   "Cats, small dogs allowed",
+   "Floors: Hardwood"
+  ],
+  "desc": "Bright Studio | Bath Beach / Bensonhurst**\n\nSpacious and bright studio apartment in the desirable Bath Beach/Bensonhurst area! This well-maintained unit features hardwood floors, oversized windows that bring in plenty of natural light, a functional open layout, and ample closet space. Conveniently located near shopping, supermarkets, restaurants, parks, and public transportation, making commuting and daily errands a breeze.\n\n**Apartment Features\n\n* Bright, open studio layout\n* Hardwood floors\n* Large windows with great natural light\n* Ample closet space\n* Heat & hot water included\n\n**Location Highlights\n\n* Convenient access to the D and N subway lines\n* Near Caesar's Bay Shopping Center\n* Close to Shore Parkway, parks, restaurants, and everyday essentials\n\nSome photos may be virtually staged.",
+  "fees": [
+   [
+    "Base rent",
+    "$1,800/mo"
+   ],
+   [
+    "Security deposit",
+    "Contact for details"
+   ],
+   [
+    "Application fee",
+    "Contact for details"
+   ],
+   [
+    "Administrative fee",
+    "Contact for details"
+   ]
+  ],
+  "pet": [
+   [
+    "Dogs",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "Small",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ],
+   [
+    "Cats",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "n/a",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ]
+  ],
+  "modified": "2026-11-06T00:00:00+00:00",
+  "listed": "2026-11-06T19:46:27+00:00",
+  "agent": {
+   "fullTextSummary": [
+    "Listing by: Smart NY Realty LLC, 718-869-9713"
+   ],
+   "mlsListingTextSummary": [
+    "Listed by Smart NY Realty LLC, (718) 869-9713"
+   ],
+   "broker": {
+    "email": null,
+    "__typename": "HOME_ProviderEntity",
+    "name": "Smart NY Realty LLC",
+    "phone": "718-869-9713",
+    "url": null
+   },
+   "listingSource": {
+    "attribution": null,
+    "alternativeSources": [],
+    "logoUrl": null,
+    "formattedTimeLastChecked": null,
+    "__typename": "HOME_ProviderListingSource",
+    "disclaimer": {
+     "markdown": "",
+     "__typename": "HOME_RichText"
+    }
+   },
+   "__typename": "HOME_Provider",
+   "listingAgent": {
+    "name": "Jake Weiss",
+    "phone": null,
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "builder": null
+  }
+ },
+ "https://www.trulia.com/home/310-94th-st-f7-brooklyn-ny-11209-465877171": {
+  "url": "https://www.trulia.com/home/310-94th-st-f7-brooklyn-ny-11209-465877171",
+  "ts": "2026-11-15T19:46:03+00:00",
+  "raw": "raw/trulia/674bfa9e4752ec45.html",
+  "price": "$1,660/mo",
+  "feats": [
+   "Days on Market: 38 days on Trulia",
+   "Property Type: Apartment",
+   "Lease Term: Contact For Details",
+   "Available: now",
+   "Cats, small dogs allowed",
+   "Elevator",
+   "Floors: Hardwood"
+  ],
+  "desc": "PRICE DROP FROM $1700 TO $1660 FOR A NOVEMBER 1ST MOVE IN. \nWelcome to 310 94th Street, a charming studio apartment located in the heart of Bay Ridge, Brooklyn!\n\nThis inviting studio offers a comfortable, functional living space with a versatile layout that makes it easy to create your own cozy home. Perfect for those seeking convenience and comfort in a great Brooklyn neighborhood.\n\nBay Ridge is known for its beautiful residential streets, strong community feel, and fantastic selection of local restaurants, cafes, shops, and neighborhood favorites. Enjoy nearby Shore Road Park and scenic waterfront views, along with the convenience of the R train just up the block, making commuting throughout Brooklyn and into Manhattan a breeze.\n\nApartment Highlights:\n\nStudio Apartment\n\nFunctional Living Space\n\nLaundry in Building\n\nElevator Building\n\nR Train Just Up the Block\n\nClose to Restaurants, Shopping & Transportation\n\nExperience the charm, convenience, and community feel of Bay Ridge living!",
+  "fees": [
+   [
+    "Base rent",
+    "$1,660/mo"
+   ],
+   [
+    "Security deposit",
+    "Contact for details"
+   ],
+   [
+    "Application fee",
+    "Contact for details"
+   ],
+   [
+    "Administrative fee",
+    "Contact for details"
+   ]
+  ],
+  "pet": [
+   [
+    "Dogs",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "Small",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ],
+   [
+    "Cats",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "n/a",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ]
+  ],
+  "modified": "2026-10-28T00:00:00+00:00",
+  "listed": "2026-10-08T18:14:56+00:00",
+  "agent": {
+   "fullTextSummary": [
+    "Listing by: AM Residential"
+   ],
+   "mlsListingTextSummary": [
+    "Listed by AM Residential"
+   ],
+   "broker": {
+    "email": null,
+    "__typename": "HOME_ProviderEntity",
+    "name": "AM Residential",
+    "phone": null,
+    "url": null
+   },
+   "listingSource": {
+    "attribution": null,
+    "alternativeSources": [],
+    "logoUrl": null,
+    "formattedTimeLastChecked": null,
+    "__typename": "HOME_ProviderListingSource",
+    "disclaimer": {
+     "markdown": "",
+     "__typename": "HOME_RichText"
+    }
+   },
+   "__typename": "HOME_Provider",
+   "listingAgent": {
+    "name": "Kosta Rosvoglou",
+    "phone": null,
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "builder": null
+  }
+ },
+ "https://www.trulia.com/home/9949-shore-rd-502-brooklyn-ny-11209-2100220346": {
+  "url": "https://www.trulia.com/home/9949-shore-rd-502-brooklyn-ny-11209-2100220346",
+  "ts": "2026-11-15T19:46:27+00:00",
+  "raw": "raw/trulia/01fd0bc9b8abee63.html",
+  "price": "$2,595/mo",
+  "feats": [
+   "Days on Market: 3 days on Trulia",
+   "Property Type: Apartment",
+   "Lease Term: Contact For Details",
+   "Available: now",
+   "Cats, small dogs allowed",
+   "Elevator",
+   "Floors: Hardwood"
+  ],
+  "desc": "Welcome to 9949 Shore Road. This recently renovated pre-war building has scenic river & bridge views. Amenities include a new fully equipped gym and a roof deck with a BBQ, outdoor kitchen & dining area, and lounge chairs. Laundry room in building. Live-in super.\n\nApartment Features:\nApprox 900-1000 SF * Direct Verrazzano Bridge Views* King Size Bedroom * Fully tiled bathroom with tub and shower* Eat in kitchen with room for a table* Spacious closets",
+  "fees": [
+   [
+    "Base rent",
+    "$2,595/mo"
+   ],
+   [
+    "Security deposit",
+    "Contact for details"
+   ],
+   [
+    "Application fee",
+    "Contact for details"
+   ],
+   [
+    "Administrative fee",
+    "Contact for details"
+   ]
+  ],
+  "pet": [
+   [
+    "Dogs",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "Small",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ],
+   [
+    "Cats",
+    "Allowed",
+    [
+     {
+      "label": "Size allowed",
+      "value": "n/a",
+      "__typename": "HOME_PolicyFactLabelValue"
+     }
+    ]
+   ]
+  ],
+  "modified": "2026-11-11T00:00:00+00:00",
+  "listed": "2026-11-11T21:30:21+00:00",
+  "agent": {
+   "fullTextSummary": [
+    "Listing by: Compass, 347-585-2065"
+   ],
+   "mlsListingTextSummary": [
+    "Listed by Compass, (347) 585-2065"
+   ],
+   "broker": {
+    "email": null,
+    "__typename": "HOME_ProviderEntity",
+    "name": "Compass",
+    "phone": "347-585-2065",
+    "url": null
+   },
+   "listingSource": {
+    "attribution": null,
+    "alternativeSources": [],
+    "logoUrl": null,
+    "formattedTimeLastChecked": null,
+    "__typename": "HOME_ProviderListingSource",
+    "disclaimer": {
+     "markdown": "",
+     "__typename": "HOME_RichText"
+    }
+   },
+   "__typename": "HOME_Provider",
+   "listingAgent": {
+    "name": "Marietta Niamonitakis",
+    "phone": null,
+    "__typename": "HOME_ProviderListingAgent"
+   },
+   "builder": null
+  }
+ }
+}

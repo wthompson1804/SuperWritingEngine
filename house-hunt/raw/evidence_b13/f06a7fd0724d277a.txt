@@ -1,0 +1,29 @@
+# START YOAST BLOCK
+# ---------------------------
+User-agent: *
+Disallow:
+
+Sitemap: http://rebusinessonline.com/sitemap_index.xml
+# ---------------------------
+# END YOAST BLOCK
+
+User-agent: CCBot
+Crawl-delay: 10
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: DotBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+User-agent: ShapBot
+Crawl-delay: 10
+
+User-agent: ExaSearchBot
+Crawl-delay: 5

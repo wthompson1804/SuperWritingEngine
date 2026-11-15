@@ -1,0 +1,18 @@
+User-agent: *
+
+Disallow: /feed
+Disallow: /feed?
+Disallow: /get-daily-news/
+Disallow: /faq/
+Disallow: /cdn-cgi/
+Disallow: /events/
+Disallow: /wp-admin/
+Disallow: /story-market/developers-of-the-year/
+Disallow: /story-market/transactions-of-the-year/
+Disallow: /story-market/texas/
+Disallow: /story-market/global/
+Allow: /wp-admin/admin-ajax.php
+
+Sitemap: https://www.connectcre.com/sitemap_index.xml
+
+

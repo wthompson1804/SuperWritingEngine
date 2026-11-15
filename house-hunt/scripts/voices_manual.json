@@ -1,0 +1,163 @@
+{
+ "drop": [
+  "But, I do think that now the neighborhood seems less diverse",
+  "If there was change that I would like to see, it would be for there to be new roads",
+  "I like how the schools district took criticism",
+  "Phony choir singer",
+  "We have some good local food places, but I would stay at night",
+  "The town is completely different from where I grew up",
+  "Why hasn't the police department actually done something",
+  "But it's hardly big enough for its already",
+  "I’d like to see improvements in more safe public spaces",
+  "As someone with family members who have celiac",
+  "My main concern with Stamford is the safety of the schools",
+  "Because Orange is a small town and many of the schools",
+  "I think that may be why so many kids from here",
+  "I am surrounded by lively people who light up the sky",
+  "The only thing about Parsippany I would want to see changed",
+  "I have gone to the public school here, Parsippany Hills",
+  "These newly instituted four-way stop signs",
+  "I would like to see more funds going toward advancing",
+  "I went to Suny New Paltz back in the mid 80s",
+  "A lot of lower income familes"
+ ],
+ "citydata_keep": [
+  {
+   "post_id": "65417623",
+   "theme": "value",
+   "sentiment": "positive",
+   "context": "forum poster (relationship to the place not stated)",
+   "excerpt": "The quality of housing and amenities you get on $ per sq. foot basis in New Rochelle cannot be matched anywhere else in and around NYC. New Rochelle is in ideal location and has a bright future."
+  },
+  {
+   "post_id": "65446162",
+   "theme": "travel",
+   "sentiment": "positive",
+   "context": "forum poster (relationship to the place not stated)",
+   "excerpt": "It could still be successful as a middle class commuter town -- cheaper than living in NYC and the commute to midtown isn't any longer from NewRo than it would be from lots of places in Queens or the Bronx or Hoboken."
+  },
+  {
+   "post_id": "65401756",
+   "theme": "safety",
+   "sentiment": "negative",
+   "context": "forum poster; says knows families who live there",
+   "excerpt": "The stabbing the last few years is a huge turnoff for families that want to move to the suburbs for safety and good schools."
+  },
+  {
+   "post_id": "67547430",
+   "theme": "value",
+   "sentiment": "mixed",
+   "context": "forum poster (relationship to the place not stated)",
+   "excerpt": "Best part of NR is it's a short commute to the city, but if you don't need that, consider other towns farther away and your budget will go farther."
+  },
+  {
+   "post_id": "65452435",
+   "theme": "value",
+   "sentiment": "mixed",
+   "context": "forum poster (relationship to the place not stated)",
+   "excerpt": "The new high-rise apartments in New Rochelle won't have yards, and we all agree the schools in NR can't compare to other suburbs, so the main attraction for New Rochelle will always be lower cost than the city."
+  },
+  {
+   "post_id": "68039600",
+   "theme": "safety",
+   "sentiment": "positive",
+   "context": "forum poster; says never lived there, lives relatively near",
+   "excerpt": "In terms of safety, I never feared for mine the multiple times I have been there. Never lived in White Plains, but live relatively near."
+  },
+  {
+   "post_id": "66736009",
+   "theme": "safety",
+   "sentiment": "mixed",
+   "context": "forum poster (relationship to the place not stated)",
+   "excerpt": "Mount Vernon has crime, both on its street and its schools, but even the \"worst\" parts of Mount Vernon, in the SW part of the city, are just fine a great majority of the time, if a bit \"gritty\""
+  },
+  {
+   "post_id": "66763213",
+   "theme": "value",
+   "sentiment": "positive",
+   "context": "forum poster; says grew up there and still lives nearby",
+   "excerpt": "The northern half is more suburban (especially the part bordering Bronxville), though there's neighborhoods like Fleetwood that are basically kind of \"upscale urban\" at a much lower cost than Manhattan and even a little cheaper than downtown White Plains or Stamford."
+  },
+  {
+   "post_id": "66733135",
+   "theme": "other",
+   "sentiment": "mixed",
+   "context": "forum poster; says knew the town through work many years ago",
+   "excerpt": "Many years ago I became acquainted with this town due to work and all I’m going to say is that southern Mt Vernon and northern Mt Vernon are two worlds apart. I like better northern Mt Vernon."
+  },
+  {
+   "post_id": "44066674",
+   "theme": "social_life",
+   "sentiment": "negative",
+   "context": "forum poster (relationship to the place not stated)",
+   "excerpt": "FH is not for the young and outgoing types. Its a neighborhood for ideal for seniors and families."
+  },
+  {
+   "post_id": "44066674",
+   "theme": "parking",
+   "sentiment": "negative",
+   "context": "forum poster (relationship to the place not stated)",
+   "excerpt": "Almost no night life to speak aside from a few places on Austin and horrendous parking if you drive."
+  },
+  {
+   "post_id": "44066757",
+   "theme": "social_life",
+   "sentiment": "mixed",
+   "context": "forum poster (relationship to the place not stated)",
+   "excerpt": "But probably has more bars than Jackson Heights, and pretty much every other Queens neighborhood aside from Astoria, LIC, and the remnants of the Irish pubs in Sunnyside."
+  },
+  {
+   "post_id": "44076015",
+   "theme": "regret",
+   "sentiment": "negative",
+   "context": "forum poster; says lived in Forest Hills 2008-12, then moved back to Astoria",
+   "excerpt": "With some exceptions, the restaurants were generally mediocre and overpriced."
+  },
+  {
+   "post_id": "44076015",
+   "theme": "other",
+   "sentiment": "mixed",
+   "context": "forum poster; says lived in Forest Hills 2008-12, then moved back to Astoria",
+   "excerpt": "FH is a nice enough neighborhood -- apartments are more \"human sized\" than Astoria and it's definitely prettier than Astoria if you overlook the Boulevard of Death."
+  }
+ ],
+ "sentiment": {
+  "I like that I can always just hop on the train to go anywhere": "negative",
+  "Cars get ticketed all the time": "negative",
+  "Overall, Kew Gardens is a nice safe neighborhood for a family. I live": "positive",
+  "As a native to NYC, I have truly never felt more safe": "positive",
+  "Bedford Stuyvesant has become a more community-involved area": "mixed",
+  "It's safe, schools are great and everyone is super friendly": "positive",
+  "It wasn't always a safe neighborhood, but because of gentrification": "mixed",
+  "I need the drug and the alcohol use to stop": "negative",
+  "The safety guidelines in Brighton Beach": "mixed",
+  "I really rarely ever see any violent crime": "positive",
+  "I have only lived in New Rochelle for a year now": "positive",
+  "I want to see better housing/ better looking houses": "negative",
+  "Although we don't own a car, finding parking at night": "negative",
+  "I’d also welcome a safe, vibrant nightlife": "mixed",
+  "While Yonkers offers a relatively safe environment": "mixed",
+  "I love Bayonne so much because it is a safe city": "positive",
+  "On top of this, there has been an uptick of attempted home invasions": "negative",
+  "The crime rate in Parsippany is very low": "positive",
+  "My neighbors are kind and caring as well as helpful if you need their assistance. The crime rate": "positive",
+  "I would like to see more sidewalks and bike lanes": "mixed",
+  "I would like to see continued improvements in public safety": "mixed",
+  "The city of Middletown is run down": "negative",
+  "Although nightlife is not major in ValleyStream": "positive",
+  "As a teenage girl, I do have some safety concerns": "negative",
+  "It's also very safe, I could go to sleep": "mixed",
+  "I've never felt unsafe walking home alone at night. Sometimes": "positive",
+  "Late at night, it can feel unsafe. However": "mixed",
+  "A countless number of parking lots, parks, and even schools": "negative",
+  "I been living in North Bergen since 2012": "negative",
+  "Similar to Hoboken, Jersey City in that street parking is tight": "negative"
+ },
+ "theme": {
+  "Although we don't own a car, finding parking at night": "parking",
+  "I’d also welcome a safe, vibrant nightlife": "social_life",
+  "The downtown is super lame and generic": "social_life",
+  "I would like to see more sidewalks and bike lanes": "travel",
+  "It's also very safe, I could go to sleep": "car_crime"
+ }
+}
