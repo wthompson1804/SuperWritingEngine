@@ -495,7 +495,7 @@ def main():
                 st = seen.setdefault((b, gate_fact), {"confirmed": 0, "unconfirmed": []})
                 if r.status == "unconfirmed":
                     st["unconfirmed"].append((txt[:260], r.source_url))
-            if gate_fact == "dogs_allowed" and r.status != "contradicts":
+            if (gate_fact == "dogs_allowed" or fact.startswith("dog_weight")) and r.status != "contradicts":
                 ne = parsers.dogs_not_explicit(txt)
                 if ne:                           # D3: "pets upon approval", "case by case", dogs not named: not explicit, any status
                     M.add(b, "dogs_evidence_open", f"dogs are not named as allowed ('{ne}'): {txt[:200]}", "confirmed", r.source_url)

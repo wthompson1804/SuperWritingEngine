@@ -1,17 +1,19 @@
-# Run report (2026-11-15T23:52:54+00:00)
+# Run report (2026-11-15T23:57:28+00:00)
 
 ## Steps
 
 | Step | Script | Result |
 |---|---|---|
 | parser tests (every example in docs/INDEPENDENT_CHECK.md) | `test_parsers.py` | ok |
+| rule tests (every defect in docs/INDEPENDENT_CHECK_2.md) | `test_rules.py` | ok |
 | building amenities (cached pages) | `building_amenities.py --no-fetch` | ok |
 | master tables | `build_master.py` | ok |
 | rent terms | `rent_terms.py` | ok |
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| field registry, wiring check and shown-list assertions | `check_registry.py` | FAILED |
+| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | FAILED |
+| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | FAILED |
 
 ## Stage counts
 
@@ -21,15 +23,16 @@
 | pass every listing gate | 2598 | 2598 | +0 |
 |   pending: a gate fact is unstated | 13595 | 13595 | +0 |
 |   fail a gate | 4271 | 4271 | +0 |
-| costed in the master table | 2573 | 2575 | -2 |
-| within the $3,000 all-in cap | 1655 | 1653 | +2 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 697 | 980 | -283 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 234 | 332 | -98 |
-| avoid cards | 34 | 35 | -1 |
-|   shown with an asterisk (one thing to confirm) | 142 | 190 | -48 |
-| held back for one confirmation | 52 | 61 | -9 |
-| clean, waiting for a live check (not shown) | 47 | 59 | -12 |
-| neighborhoods with 3+ shown places | 28 | 38 | -10 |
+| costed in the master table | 2573 | 2573 | +0 |
+| within the $3,000 all-in cap | 1655 | 1655 | +0 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 692 | 697 | -5 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 232 | 234 | -2 |
+| avoid cards | 32 | 34 | -2 |
+|   shown with an asterisk (one thing to confirm) | 144 | 142 | +2 |
+| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 36 | 36 | +0 |
+| held back for one confirmation | 51 | 52 | -1 |
+| clean, waiting for a live check (not shown) | 46 | 47 | -1 |
+| neighborhoods with 3+ shown places | 28 | 28 | +0 |
 | buildings in the master table | 665 | 665 | +0 |
 
 ## Why units left
@@ -47,14 +50,14 @@
 
 **excluded_sketchy.csv**
 
-- two or more things unconfirmed: floor: 219
+- two or more things unconfirmed: floor: 221
 - elevator not stated on any page and the building's height is not known (it was guessed from the unit label): 112
-- cost near the cap: 107
+- cost near the cap: 110
 - availability: 61
 - two or more things unconfirmed: elevator: 58
 - lease term: 57
 - floor: 51
-- dogs allowed: 34
+- dogs allowed: 37
 
 ## Shown units by year
 
@@ -62,10 +65,10 @@
 |:--------------------------|----------------:|---------:|--------:|--------------:|
 | The Fresh-Start Year      |               3 |       45 |      15 |             0 |
 | The Little-City Year      |              27 |      321 |      89 |             7 |
-| The Old-Neighborhood Year |              39 |      129 |      64 |            24 |
+| The Old-Neighborhood Year |              38 |      126 |      63 |            23 |
 | The Quiet-Street Year     |               6 |        8 |       6 |             0 |
-| The Room-to-Breathe Year  |              24 |      186 |      55 |             0 |
-| The Walk-Everywhere Year  |               6 |        8 |       5 |             3 |
+| The Room-to-Breathe Year  |              24 |      185 |      54 |             0 |
+| The Walk-Everywhere Year  |               5 |        7 |       5 |             2 |
 
 ## Fill rate among shown units (percent with a value)
 
@@ -76,14 +79,14 @@
 | elevator_basis | 100 |
 | dog_weight_limit_lb | 19 |
 | parking_type | 76 |
-| parking_fee | 21 |
+| parking_fee | 22 |
 | pet_rent | 44 |
-| pool | 27 |
+| pool | 28 |
 | doorman | 28 |
 | year_built | 53 |
 | toll_rt_ezpass | 36 |
 | transit_sat_median | 95 |
-| near_violent_250m_24m | 26 |
+| near_violent_250m_24m | 25 |
 | live_status | 95 |
 | rent_first_full_payment_date | 66 |
 | ev_pause_notes | 33 |
@@ -93,6 +96,11 @@
 **parser tests (every example in docs/INDEPENDENT_CHECK.md)**
 ```
 test_parsers: 259 assertions passed
+```
+
+**rule tests (every defect in docs/INDEPENDENT_CHECK_2.md)**
+```
+test_rules (rules): 78 checks, 0 failed
 ```
 
 **building amenities (cached pages)**
@@ -106,7 +114,7 @@ passing buildings: 692; already in csv: 750; to process: 0
   utilities_included     {'unknown': 517, 'confirmed': 109, 'community_page': 23, 'stated': 16}
   unit floor basis {'unknown': 1277, 'inferred': 1090, 'stated': 138, 'confirmed': 68} | label kind of inferred {'simple': 1076, 'complex': 14}
   confirmed floor values: 77 read, 9 matched no unit in the master (most are units that left the list), 3 not parseable (data/reference/floor_confirm_unmatched.csv)
-  live status {'not checked': 1941, 'live': 567, 'blocked': 47, 'changed': 16, 'gone': 2} | coordinates {'listing rows agree': 662, 'census_geocoder': 3}
+  live status {'not checked': 1941, 'live': 565, 'blocked': 47, 'changed': 18, 'gone': 2} | coordinates {'listing rows agree': 662, 'census_geocoder': 3}
   evidence facts not mapped to a field: {'building_size': 133, 'building_site': 59, 'listing_broker': 56, 'listing_last_modified': 37, 'deposit': 24, 'owner_of_record': 24, 'listing_date': 21, 'application_fee': 19, 'building': 16, 'openigloo_summary': 16, 'move_in_fees': 16, 'available_units_listed': 16, 'pet_count_limit': 14, 'building_name': 13, 'dog': 12, 'deposit_and_fees': 10, 'one_time_fees': 10, 'openigloo_summary_counts': 10, 'listing_agent': 9, 'building_size_openigloo': 9, 'broker_fee': 8, 'listing_updated_at': 8, 'own_site': 7, 'amenities': 6, 'ownership_change': 6}
 ```
 
@@ -140,12 +148,18 @@ units 2573; cost gate {'pass': 1655, 'fail': 918}; rent asterisk 1763; rent term
 
 **ranking and selection**
 ```
-evidence: 37 units excluded, shown 234, avoid cards 34, of them with an asterisk 142 ({'floor': 74, 'live check': 17, 'lease term': 15, 'cost near the cap': 14, 'elevator': 12, 'listing': 6, 'dogs allowed': 4}), held for a confirmation 52, waiting for a live check 47
-stages: 2573 costed -> -918 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -36 removed by a reviewed verdict -> -449 sketchy -> -37 evidence exclusions -> 697 ranked
-(kept 697 units; candidates 314; shown 296; pools: {'': 420, 'pool': 259, 'indoor': 18}
+evidence: 36 units excluded, shown 232, avoid cards 32, of them with an asterisk 144 ({'floor': 73, 'live check': 17, 'lease term': 15, 'cost near the cap': 13, 'elevator': 12, 'dogs allowed': 8, 'listing': 6}), held for a confirmation 51, waiting for a live check 46
+stages: 2573 costed -> -918 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -36 removed by a reviewed verdict -> -455 sketchy -> -36 evidence exclusions -> 692 ranked
+(kept 692 units; candidates 309; shown 291; pools: {'': 415, 'pool': 259, 'indoor': 18}
 ```
 
-**field registry, wiring check and shown-list assertions**
+**rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
+```
+test_rules (data): 77 checks, 1 failed
+  FAIL verdicts: a shown unit has no ok / asterisk verdict
+```
+
+**field registry, wiring check, shown-list assertions and the review rule**
 ```
    apartmentlist:p116789342-BBA1-529 (Rail at Bound Brook 529): no reviewed verdict: nobody has read this unit's evidence
    apartmentlist:p63921201-1A-430 (The Botanic 430): no reviewed verdict: nobody has read this unit's evidence

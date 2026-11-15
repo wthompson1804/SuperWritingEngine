@@ -29,3 +29,4 @@
 {"muni": "fort-lee", "url": "https://www.fortleenj.org/374/CatDog-Licenses-Animal-Welfare", "reason": "error RuntimeError(\"fetch failed after 2 tries: https://www.fortleenj.org/374/CatDog-Licenses-Animal-Welfare: ConnectionError(ProtocolError('Connection abor", "at": "2026-11-15T23:54:32+00:00"}
 {"muni": "ridgewood", "url": "https://laserfiche.ridgewoodnj.net/WebLink/", "reason": "robots: * group", "at": "2026-11-15T23:55:08+00:00"}
 {"muni": "ridgewood", "url": "https://www.ridgewoodnj.net/FAQ.aspx", "reason": "robots: claude group", "at": "2026-11-15T23:55:08+00:00"}
+{"muni": "bloomfield", "url": "https://www.bloomfieldtwpnj.com/faq.aspx?TID=24", "reason": "robots: claude group", "at": "2026-11-15T23:57:37+00:00"}

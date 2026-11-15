@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
+import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -112,6 +113,20 @@ def hood_lookup(C: pd.DataFrame) -> pd.DataFrame:
     zmap = U[U.hood_id != ""].groupby("zip5").hood_id.agg(lambda s: s.value_counts().index[0]).to_dict()
     cache_p = OUT / "hood_cache.json"
     cache = json.loads(cache_p.read_text()) if cache_p.exists() else {}
+    # Prefilter so the Census geocoder is asked about ~hundreds of buildings, not 2,700: a building is geocoded only
+    # if it lies within 10 km of a passing unit of a thin-year neighborhood or its listing city equals such a
+    # neighborhood's name. NYC needs no geocoder call: a point inside an NTA polygon is in New York city.
+    G = pd.read_csv(DATA / "lifestyle_groups.csv", dtype=str, keep_default_na=False)
+    thin_ids = set(G[G.group_label.isin(THIN)].hood_id)
+    thin_names = {h.split(":", 1)[1].replace("-", " ").strip() for h in thin_ids}
+    UU = pd.read_csv(DATA / "units.csv", dtype=str, keep_default_na=False, usecols=["hood_id", "lat", "lon"])
+    UU = UU[UU.hood_id.isin(thin_ids)]
+    pts = np.array([[float(a), float(b)] for a, b in zip(UU.lat, UU.lon) if a and b])
+
+    def near(lat, lon):
+        d = np.hypot((pts[:, 0] - lat) * 111.3, (pts[:, 1] - lon) * 111.3 * np.cos(np.radians(lat)))
+        return d.min() <= 10
+
     for i, (bk, g) in enumerate(C.groupby("bkey")):
         if bk in cache:
             continue
@@ -120,25 +135,31 @@ def hood_lookup(C: pd.DataFrame) -> pd.DataFrame:
             lat, lon = float(r.lat), float(r.lon)
         except ValueError:
             hid = zmap.get(r.zip5, "")
-            cache[bk] = [hid, "zip_fallback" if hid else "none"]
+            cache[bk] = [hid, "zip_fallback (no coordinates)" if hid else "none"]
+            continue
+        p = Point(lon, lat)
+        hit = [n for n, b, poly in ntas if poly.contains(p)]
+        if hit:
+            cache[bk] = [re.sub(r"[^a-z0-9:]+", "-", ("ny:" + hit[0]).lower()), "pipeline_method (NYC NTA polygon from coordinates)"]
+            continue
+        if not (near(lat, lon) or r.city.lower().strip() in thin_names):
+            cache[bk] = ["", "not geocoded: >10 km from any thin-year passing unit and city name differs"]
             continue
         try:
             geo, _ = census_geo(lat, lon)
-        except Exception as e:  # geocoder hiccup: fall back, say so
+        except Exception:  # geocoder hiccup: fall back, say so
             hid = zmap.get(r.zip5, "")
-            cache[bk] = [hid, "zip_fallback(geocoder error)" if hid else "none"]
+            cache[bk] = [hid, "zip_fallback (geocoder error)" if hid else "none"]
             continue
         if first(geo, "Incorporated Places") == "New York city":
-            p = Point(lon, lat)
-            hit = [n for n, b, poly in ntas if poly.contains(p)]
-            name = hit[0] if hit else "New York city (unmatched)"
+            name = "New York city (unmatched)"
         else:
             name = first(geo, "Incorporated Places") or first(geo, "County Subdivisions")
             for suf in (" city", " village", " town", " borough", " township", " CDP"):
                 name = name[:-len(suf)] if name.endswith(suf) else name
         st = first(geo, "States", "STUSAB") or r.state
         hid = re.sub(r"[^a-z0-9:]+", "-", (st + ":" + name).lower())
-        cache[bk] = [hid, "pipeline_method(census place / NYC NTA from coordinates)"]
+        cache[bk] = [hid, "pipeline_method (Census place from coordinates)"]
         if i % 50 == 0:
             cache_p.write_text(json.dumps(cache))
     cache_p.write_text(json.dumps(cache))

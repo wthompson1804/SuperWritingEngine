@@ -97,7 +97,14 @@ def resolve(alias, ctx):
 
 def render(raw, ctx, evidence):
     out = []
-    for sent in C.sentences(raw):
+    held = []                                         # tokens are set aside so a full stop inside one cannot split a sentence
+
+    def hold(m):
+        held.append(m.group(0))
+        return f"\x00{len(held) - 1}\x00"
+
+    for sent in C.sentences(TOKEN.sub(hold, raw)):
+        sent = re.sub(r"\x00(\d+)\x00", lambda m: held[int(m.group(1))], sent)
         pending = []
 
         def sub(m):

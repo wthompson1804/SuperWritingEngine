@@ -1,2 +1,3 @@
 {"url": "https://www2.census.gov/geo/tiger/TIGER2024/TRACT/tl_2024_34_tract.zip", "retrieved_at": "2026-11-15T23:53:31+00:00", "status": 200, "path": "raw/subcity_split/6ad749b6aa70a7a0.zip", "source": "subcity_split"}
 {"url": "https://www2.census.gov/geo/tiger/TIGER2020PL/LAYER/VTD/2020/tl_2020_34017_vtd20.zip", "retrieved_at": "2026-11-15T23:53:32+00:00", "status": 200, "path": "raw/subcity_split/96be8a77ec5d673b.zip", "source": "subcity_split"}
+{"url": "https://www2.census.gov/geo/tiger/TIGER2020PL/LAYER/VTD/2020/tl_2020_34013_vtd20.zip", "retrieved_at": "2026-11-15T23:56:50+00:00", "status": 200, "path": "raw/subcity_split/95f5b287227ca5ea.zip", "source": "subcity_split"}

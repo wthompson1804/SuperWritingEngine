@@ -12,14 +12,16 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent))
 from lib import DATA, ROOT
 
-TESTS = [("parser tests (every example in docs/INDEPENDENT_CHECK.md)", "test_parsers.py")]
+TESTS = [("parser tests (every example in docs/INDEPENDENT_CHECK.md)", "test_parsers.py"),
+         ("rule tests (every defect in docs/INDEPENDENT_CHECK_2.md)", "test_rules.py")]
 FULL = [("gates (merge, dedupe, gate each listing)", "gates.py"), ("NYC building class (PLUTO)", "enrich_nyc_pluto.py"), ("gates again with PLUTO", "gates.py"),
         ("lookup tools per building", "enrich_units.py"), ("neighborhood assignment", "build_neighborhoods.py"),
         ("lifestyle features", "lifestyle_features.py"), ("lifestyle colour", "lifestyle_color.py"), ("crime benchmarks", "crime_benchmarks.py"),
         ("lifestyle groups (saved centres)", "lifestyle_groups.py")]
 ALWAYS = [("building amenities (cached pages)", "building_amenities.py --no-fetch"), ("master tables", "build_master.py"), ("rent terms", "rent_terms.py"),
           ("all-in cost", "all_in.py"), ("evidence rules (avoid, exclusions)", "avoid.py"), ("ranking and selection", "rank.py"),
-          ("field registry, wiring check and shown-list assertions", "check_registry.py")]
+          ("rule tests on the output (docs/INDEPENDENT_CHECK_2.md)", "test_rules.py --data"),
+          ("field registry, wiring check, shown-list assertions and the review rule", "check_registry.py")]
 
 
 def run(label, cmd, log):
@@ -37,7 +39,7 @@ def main():
     for label, cmd in steps:
         rc = run(label, cmd, log)
         failed = failed or rc != 0
-        if rc != 0 and "check_registry" not in cmd:
+        if rc != 0 and "check_registry" not in cmd and "--data" not in cmd:
             break
     L = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False, low_memory=False)
     M = pd.read_csv(DATA / "master_units.csv", low_memory=False)
@@ -49,6 +51,7 @@ def main():
              ("shown (every gate fact confirmed or stated; top 10 per neighborhood)", int(R.shown.sum())),
              ("avoid cards", int(R.avoid_card.sum())),
              ("  shown with an asterisk (one thing to confirm)", int((R.shown & (R.confirm_asterisk == "yes")).sum()) if "confirm_asterisk" in R else 0),
+             ("removed by a reviewed verdict (data/evidence/review_verdicts.csv)", len(pd.read_csv(DATA / "excluded_by_review.csv", usecols=["listing_id"])) if (DATA / "excluded_by_review.csv").exists() else 0),
              ("held back for one confirmation", int(R.held_for_confirmation.sum()) if "held_for_confirmation" in R else 0),
              ("clean, waiting for a live check (not shown)", len(pd.read_csv(DATA / "needs_live_check.csv")) if (DATA / "needs_live_check.csv").exists() else 0),
              ("neighborhoods with 3+ shown places", int((R[R.shown].groupby("hood_id").size() >= 3).sum())),

@@ -139,3 +139,176 @@ scene: New Brunswick has a real downtown. About {rest} restaurants, {bars} bars 
 good: There is a lot to do on foot, with a dog park and a train station{!station<=1000} close by.
 watch: Violent crime is {viol} per 1,000, which is under Jamaica's {jv} but well above the rest of this year's towns{!viol>=4}, and many streets need a parking permit.
 rules: New Brunswick|resident_permit
+
+# ------------------------------------------------------------------ The Little-City Year
+
+=== hood: ny:kew-gardens-hills
+scene: Kew Gardens Hills is a renters' neighborhood{!renters>=0.8} of mid-century buildings{!yrbuilt<=1975}. About {rest} restaurants and {bars} bars are within a {w10}, and the supermarket is {super} miles away. A park is about {parkwalk} minutes on foot. Your parents are about {drive} minutes away by car, with no tolls{!b_toll==0}{!b_tollok==True}.
+good: Your parents are about {drive} minutes away, and violent crime is {viol} per 1,000 against Jamaica's {jv}.
+watch: The nearest dog run is {dogpark} miles away and there are no cafés within a {w10}{!cafes==0}.
+
+=== hood: ny:long-beach
+scene: Long Beach is a beach town: the sand is {beach} miles away. About {rest} restaurants, {bars} bar and {cafes} cafés sit within a {w10}, and the supermarket and train station are each {super} miles away{!station<=600}. Your parents are about {drive} minutes away by car, with about ${b_toll} in tolls for the round trip{!b_tollok==True}.
+good: The beach is your daily walk, crime is very low at {viol} violent and {prop} property per 1,000, and your parents stay close.
+watch: The nearest park is about {parkwalk} minutes on foot and the nearest dog park is {dogpark} miles away, so check where dogs are allowed on the beach.
+
+=== hood: ny:new-rochelle
+scene: New Rochelle's downtown has grown up around its train station, {station} miles away. About {rest} restaurants, {bars} bar and {cafes} café sit within a {w10} and {rest1600:int} restaurants within {mile}. The shore is {beach} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Violent crime is {viol} per 1,000 against Jamaica's {jv}, and residents on review sites describe pet-friendly buildings and parks by the water.
+watch: The nearest park is about {parkwalk} minutes on foot and the dog park is {dogpark} miles away, so the dog's daily walk needs thought.
+voices: dogs_green
+
+=== hood: ny:riverdale-spuyten-duyvil
+scene: Riverdale is hilltop apartment country: {bigbldg} percent of homes are in large buildings. A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away. About {rest} restaurants and {cafes} cafés are within a {w10}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Green space is generous{!parkha>=15} and close, with a dog run and a vet both within {vet} miles.
+watch: There are no bars within a {w10}{!bars==0}, and property crime is {prop} per 1,000 against Jamaica's {jp}.
+
+=== hood: nj:englewood
+scene: The buildings found here are in a newer part of Englewood: {post2010} percent of nearby homes were built since 2010. A dog run is {dogpark} miles away and a park about {parkwalk} minutes on foot. Nearly every household has a car{!nocar<=0.05}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Many neighbors are new, with {newcomers} percent having moved in within the last year, and a dog run is close.
+watch: Nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}{!cafes==0}, and the supermarket is {super} miles away, so every errand is a drive.
+
+=== hood: ny:glen-cove
+scene: Glen Cove is a small North Shore city. About {rest} restaurants, {bars} bar and {cafes} cafés sit within a {w10}. A park is about {parkwalk} minutes on foot and a dog park is {dogpark} miles away. Your parents are about {drive} minutes away by car, with no tolls{!b_toll==0}{!b_tollok==True}.
+good: Crime is low at {viol} violent and {prop} property per 1,000, the dog park is close, and the drive to your parents has no tolls.
+watch: The supermarket is {super} miles away, and the trip to your parents by transit takes about {transit:r5} minutes.
+
+=== hood: nj:hackensack
+scene: Hackensack is a county seat of apartment buildings{!bigbldg>=0.5}, where most people rent{!renters>=0.7}. About {rest} restaurants are within a {w10} and {rest1600} within {mile}. A park is about {parkwalk} minutes on foot and the supermarket is {super} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Violent crime is {viol} per 1,000 against Jamaica's {jv}, and residents on review sites like the parks and how close the shops are.
+watch: Many streets are resident-permit-only from 2 AM to 6 AM, and the nearest dog park is {dogpark} miles away.
+rules: Hackensack|overnight_parking
+voices: dogs_green
+
+=== hood: ny:yonkers
+scene: The buildings found in Yonkers sit by the Hudson, {water} miles from the water. A park is about {parkwalk} minutes on foot and the train station is {station} miles away. Only {rest} restaurants and {bars} bar are within a {w10}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: The riverfront gives you an easy daily walk, and residents on review sites describe trails, parks and water views.
+watch: Violent crime is {viol} per 1,000, under Jamaica's {jv} but above most suburbs, and the dog park is {dogpark} miles away.
+voices: dogs_green
+
+=== hood: nj:jersey-city
+scene: Jersey City is a big, young city: {young} percent of residents are 25 to 34 and most people rent{!renters>=0.7}. About {rest} restaurants are within a {w10} and {rest1600:r10} within {mile}. A dog run is {dogpark} miles away. Your parents are about {drive} minutes away by car, with about ${b_toll} in tolls for the round trip{!b_tollok==True}.
+good: There is a lot to eat within {mile}, dog runs are close, and residents on review sites call it very dog friendly.
+watch: Violent crime is {viol} per 1,000 against Jamaica's {jv}, vehicle theft is {mvt} per 1,000, and {nocar} percent of households skip the car, so parking deserves questions.
+voices: dogs_green
+
+=== hood: ny:port-chester
+scene: Port Chester is an old village{!pre1940>=0.4} on the water, with the train station {station} miles away. About {rest} restaurants sit within a {w10}. The shore is {beach} miles away. Most people rent{!renters>=0.7}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Violent crime is {viol} per 1,000 against Jamaica's {jv}, and dinner is a short walk.
+watch: The nearest park is about {parkwalk} minutes on foot, the dog park is {dogpark} miles away, and there are no bars or cafés within a {w10}{!bars==0}{!cafes==0}.
+
+=== hood: nj:east-rutherford
+scene: East Rutherford is a small borough with a main street nearby. About {rest} restaurants and {cafes} cafés sit within a {w10}, and {rest1600} restaurants within {mile}. The supermarket is {super} miles away and a dog park {dogpark} miles. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Crime is very low, at {viol} violent and {prop} property per 1,000, with places to eat on foot.
+watch: The nearest park is about {parkwalk} minutes on foot, which is a long way for a daily dog walk.
+
+=== hood: ny:white-plains
+scene: White Plains is a compact downtown of apartment towers{!bigbldg>=0.7}. About {rest} restaurants and {bars} bars sit within a {w10}. A park is about {parkwalk} minutes on foot, a dog park {dogpark} miles away and Trader Joe's {tj} miles. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Violent crime is {viol} per 1,000 against Jamaica's {jv}, and the city dog park has an area for small dogs.
+watch: Overnight street parking is banned citywide from 2 AM to 6 AM, and residents on review sites complain about it, so you need a garage or lot space.
+rules: White Plains|overnight_parking ; White Plains|dog_park
+voices: parking
+
+=== hood: ny:new-springville-willowbrook-bulls-head-travis
+scene: This part of Staten Island is built for cars, with shopping close. Trader Joe's and a vet are each {tj} miles away{!vet<=400}. About {rest} restaurants and {cafes} cafés sit within a {w10}. A very large park{!parkha>=50} is about {parkwalk} minutes on foot. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Errands are easy, a huge park is close for the dog, and violent crime is {viol} per 1,000 against Jamaica's {jv}.
+watch: There are no bars within a {w10}{!bars==0}, the nearest dog run is {dogpark} miles away, and the trip to your parents by transit is about {transit} minutes.
+
+=== hood: nj:ridgewood
+scene: Ridgewood has a busy village center. About {rest} restaurants and {cafes} cafés sit within a {w10}, with a park about {parkwalk} minutes on foot and the train station {station} miles away. The dog park is {dogpark} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Crime is very low, at {viol} violent and {prop} property per 1,000, and dinner and coffee are a walk away.
+watch: There are no bars within a {w10}{!bars==0}, so this is a dinner town more than a night-out town.
+
+=== hood: nj:elizabeth
+scene: The building found in Elizabeth stands near the water in an area with little around it on foot. No restaurants are within a {w10}{!rest==0}, and {rest1600} are within {mile}. The supermarket is {super} miles away. Your parents are about {drive} minutes away by car, with about ${b_toll} in tolls for the round trip{!b_tollok==True}.
+good: The nearest dog park, {dogpark} miles away, is a mini park for small dogs{!b_dogpark==The Sgt. Vincent J. Oliva Mini Dog Park (For Small Dogs)}.
+watch: Property crime is {prop} per 1,000, just under Jamaica's {jp}, vehicle theft is {mvt} per 1,000, and the nearest park is about {parkwalk} minutes on foot.
+
+=== hood: nj:bloomfield
+scene: Bloomfield is an older town with a center by the train. About {rest} restaurants, {bars} bar and {cafes} cafés sit within a {w10}. A park is about {parkwalk} minutes on foot, a dog park {dogpark} miles away and the station {station} miles. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Park, dog park, vet and supermarket are all within {dogpark} miles{!vet<=1000}{!super<=1000}, and violent crime is {viol} per 1,000.
+watch: Residents on review sites say nightlife is thin, and your parents are about {drive} minutes away.
+voices: social_life
+
+=== hood: ct:stamford
+scene: Stamford is a small city of apartment towers{!bigbldg>=0.7}, and {newcomers} percent of residents moved in within the last year. About {rest} restaurants, {bars} bars and {cafes} cafés sit within a {w10}. A park is about {parkwalk} minutes on foot and a dog park {dogpark} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: There are bars and dinner on foot, lots of other newcomers, and violent crime is {viol} per 1,000 against Jamaica's {jv}.
+watch: Residents on review sites say a car is necessary and nightlife is limited, and the trip to your parents by transit is about {transit:r5} minutes.
+voices: social_life
+
+=== hood: nj:montclair
+scene: Montclair has a long main street. About {rest} restaurants, {bars} bars and {cafes} cafés sit within a {w10}, and the vet is {vet} miles away. {wfh} percent of workers here work from home. The train station is {station} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: You would have plenty to walk to and plenty of other people working from home, with violent crime at {viol} per 1,000.
+watch: The dog park is {dogpark} miles away, and residents on review sites complain about parking and car theft.
+voices: parking, car_crime
+
+=== hood: nj:wayne
+scene: Wayne is a spread-out suburb with water close by, {water} miles away. A park is about {parkwalk} minutes on foot and Trader Joe's is {tj} miles away. About {rest} restaurants are within a {w10} and {rest1600} within {mile}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Violent crime is {viol} per 1,000 against Jamaica's {jv}, and a park is close for the dog.
+watch: Property crime is {prop} per 1,000 against Jamaica's {jp}, and almost nothing for a night out is within a {w10}{!bars<=1}.
+
+=== hood: nj:south-orange
+scene: South Orange is a village around its train station, {station} miles away. About {rest} restaurants and {cafes} cafés sit within a {w10}. A park is about {parkwalk} minutes on foot and the supermarket is {super} miles away. Your parents are about {drive} minutes away by car, with about ${b_toll} in tolls for the round trip{!b_tollok==True}.
+good: Park, coffee, dinner and groceries are all a short walk, and violent crime is {viol} per 1,000 against Jamaica's {jv}.
+watch: There are no bars within a {w10}{!bars==0}, the vet is {vet} miles away and the dog park {dogpark} miles.
+
+=== hood: nj:riverdale
+scene: This Riverdale is a small Morris County borough beside the highway. A park is about {parkwalk} minutes on foot and a dog park is {dogpark} miles away. Only {rest} restaurant is within a {w10}, and {rest1600} within {mile}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Violent crime is {viol} per 1,000 against Jamaica's {jv}, and the dog park and vet are both under {mile} away{!dogpark<=1600}{!vet<=1600}.
+watch: Property crime is {prop} per 1,000 against Jamaica's {jp}, and the supermarket is {super} miles away.
+
+=== hood: ny:patchogue
+scene: Patchogue is a South Shore village with a small bar scene: {brew} breweries sit within {mile}, and about {rest} restaurants within a {w10}. The water is {water} miles away and the train station {station} miles. Your parents are about {drive} minutes away by car, with no tolls{!b_toll==0}{!b_tollok==True}.
+good: The drive to your parents has no tolls, and violent crime is {viol} per 1,000 against Jamaica's {jv}.
+watch: The nearest park is about {parkwalk} minutes on foot and the nearest dog park is {dogpark} miles away.
+
+=== hood: nj:parsippany-troy-hills
+scene: Parsippany is a highway suburb. About {rest} restaurants are within a {w10} and {rest1600} within {mile}, and the supermarket is {super} miles away. Nearly everyone drives{!nocar<=0.1}. The dog park is {dogpark} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Crime is low, at {viol} violent and {prop} property per 1,000, and residents on review sites praise the parks and trails.
+watch: There are no bars or cafés within a {w10}{!bars==0}{!cafes==0}, and residents on review sites call the town boring.
+voices: dogs_green, social_life
+
+=== hood: ny:peekskill
+scene: Peekskill is a small Hudson River city with a lot of green: a large park{!parkha>=20} is about {parkwalk} minutes on foot and a dog park {dogpark} miles away. The train station is {station} miles away. Few places to eat are within a {w10}{!rest<=2}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: The dog gets a big park and a dog park close by, and residents on review sites like the casual local bars.
+watch: From December 1 to April 15 overnight street parking is not allowed unless a sign permits it, and the supermarket is {super} miles away.
+rules: Peekskill|overnight_parking
+voices: social_life
+
+=== hood: nj:franklin
+scene: Franklin's buildings sit beside a long canal park, about {parkwalk} minutes on foot, with a dog park {dogpark} miles away. Nearly every household has a car{!nocar<=0.05}. No restaurants are within a {w10}{!rest==0}, and about {rest1600} within {mile}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Crime is very low, at {viol} violent and {prop} property per 1,000, and the park is big{!parkha>=20} and close.
+watch: Everything else is a drive, including the supermarket at {super} miles and your parents at about {drive} minutes.
+
+=== hood: nj:somerville
+scene: Somerville is a county town with a lively main street. About {rest} restaurants, {bars} bars and {cafes} cafés sit within a {w10}. {young} percent of residents are 25 to 34. The supermarket and train station are each {super} miles away{!station<=600}. Your parents are about {drive} minutes away by car, with about ${b_toll} in tolls for the round trip{!b_tollok==True}.
+good: There is a real night out on foot here, with neighbors your age and violent crime at {viol} per 1,000.
+watch: Your parents are about {drive} minutes away by car and {transit:r5} by transit, and the dog park is {dogpark} miles away.
+
+=== hood: ct:danbury
+scene: The buildings found in Danbury are new{!post2010>=0.4} and near the train station, {station} miles away. About {bars} bars and {rest} restaurant are within a {w10}. Most neighbors rent{!renters>=0.8} and many live alone{!alone>=0.5}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Violent crime is {viol} per 1,000 against Jamaica's {jv}, and residents on review sites say it feels safe.
+watch: The nearest park is about {parkwalk} minutes on foot, the dog park is {dogpark} miles away, and transit to your parents takes about {transit:r5} minutes.
+voices: safety
+
+=== hood: nj:red-bank
+scene: Red Bank is a river town with a compact center. About {rest} restaurants, {bars} bar and {cafes} cafés sit within a {w10}. The water is {water} miles away and the train station {station} miles. Many neighbors live alone{!alone>=0.5}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Dinner and the river are a short walk, and a park is about {parkwalk} minutes on foot.
+watch: Your parents are about {drive} minutes away, the supermarket is {super} miles away and the dog park {dogpark} miles.
+
+=== hood: ct:milford-city-balance-
+scene: Milford is an old shoreline town{!pre1940>=0.4} with the beach {beach} miles away. About {rest} restaurants and {cafes} cafés sit within a {w10}. A park is about {parkwalk} minutes on foot and the train station is {station} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Violent crime is {viol} per 1,000 against Jamaica's {jv}, and residents on review sites praise the beaches and the downtown.
+watch: Property crime is {prop} per 1,000 against Jamaica's {jp}, there are no bars within a {w10}{!bars==0}, and your parents are about {drive} minutes away.
+voices: dogs_green, social_life
+
+=== hood: nj:long-branch
+scene: Long Branch is an oceanfront city: the beach is {beach} miles away. About {rest} restaurants and {bars} bars sit within a {w10}, and the supermarket is {super} miles away. A large park{!parkha>=20} is about {parkwalk} minutes on foot. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: The ocean and a big park are both walkable, and violent crime is {viol} per 1,000 against Jamaica's {jv}.
+watch: Your parents are about {drive} minutes away each way, and the vet and dog park are {vet} and {dogpark} miles away.
+
+=== hood: ny:new-paltz
+scene: New Paltz is a small college town far up the Hudson Valley. About {rest1600} restaurants are within {mile}, though only {rest} within a {w10}. A park is about {parkwalk} minutes on foot. The supermarket is {super} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+good: Residents on review sites describe hiking and trails all around, which suits long weekend walks with the dog.
+watch: Your parents are about {drive} minutes away, no dog park was found within {dogpark:int} miles, and crime figures for the local police were not found{!viol missing}.
+voices: dogs_green

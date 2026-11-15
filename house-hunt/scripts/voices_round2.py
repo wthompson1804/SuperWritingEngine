@@ -201,7 +201,16 @@ def fetch_niche():
 
 # ------------------------------------------------------------------ City-Data threads (hand-listed after web searches)
 # hood_id -> thread URLs. Forum search and member pages are never requested.
-CITYDATA_THREADS: dict[str, list[str]] = {}
+CITYDATA_THREADS: dict[str, list[str]] = {
+ "nj:new-brunswick": ["https://www.city-data.com/forum/new-jersey/3216900-living-new-brunswick.html",
+                      "https://www.city-data.com/forum/new-jersey/2589281-new-brunswick-nicest-areas-live-city-4.html"],
+ "ny:flatbush-west-ditmas-park-parkville": ["https://www.city-data.com/forum/new-york-city/2451372-parking-ditmas-park-kensington-brooklyn.html",
+                                            "https://www.city-data.com/forum/new-york-city/2113862-safety-flatbush-ditmas-park.html"],
+ "ny:manhattanville-west-harlem": ["https://www.city-data.com/forum/new-york-city/2127281-west-harlem-morningside-manhattanville.html",
+                                   "https://www.city-data.com/forum/new-york-city/1675040-135th-broadway-manhattanville-feedback.html"],
+ "ny:pomonok-electchester-hillcrest": ["https://www.city-data.com/forum/new-york-city/3308658-tell-us-your-stories-about-electchester.html",
+                                       "https://www.city-data.com/forum/new-york-city/2774633-electchester-not-what-use-3.html"],
+}
 # Hand-picked forum excerpts: dict(hood_id, url, post_id, date, excerpt, theme, sentiment, context)
 CITYDATA_KEEP: list[dict] = []
 
@@ -351,8 +360,20 @@ def pick(cands):
     return chosen[:MAXQ]
 
 # ------------------------------------------------------------------ hand edits made after reading the rows
-# (excerpt prefixes; safety / car_crime / parking rows were all read by hand, see docs/harvest_notes/voices_round2.md)
-DROP: list[str] = ['The Police Department consists of about 25% brass',
+# (DROP: any excerpt containing the text; THEME_FIX / SENT_FIX: excerpt prefixes; safety / car_crime / parking rows were all read by hand, see docs/harvest_notes/voices_round2.md)
+DROP: list[str] = ["Even though neighbors on my street don't like it",
+ 'The magnet schools are far',
+ 'After numerous attempts over the years',
+ 'It was difficult attending Ridgewood High School',
+ 'Better investment in infrastructure and more affordable housing',
+ 'it has guided me along throughout these 17 chapters',
+ 'At the time when St.',
+ 'Here is what makes Roxbury High School',
+ 'Special education and transportation issues',
+ "It's gone from a friendly place to one full of angry people",
+ 'There is mixture of taste',
+ 'I enjoy the community of my school',
+ 'The Police Department consists of about 25% brass',
  'If there was change that I would like to see, it would be for there to be new roads',
  'The public schools on the Upper West are very good',
  'Very quiet at night which can be a good thing. The highschool',
@@ -443,7 +464,8 @@ THEME_FIX: dict[str, str] = {'A countless number of parking lots': 'value',
  'So not safe I would not recommend': 'safety',
  'Taxes are high vs surrounding areas but the services': 'value',
  'That being said, I do wish there was a little more of a social crowd': 'social_life'}
-SENT_FIX: dict[str, str] = {'- Auto Insurance': 'negative',
+SENT_FIX: dict[str, str] = {'Only positive to EB is the safety': 'positive',
+ '- Auto Insurance': 'negative',
  'A countless number of parking lots': 'negative',
  'Affordable is the price we pay': 'negative',
  'Although parking is tough': 'negative',
@@ -555,7 +577,7 @@ def build():
                 srows.append(dict(hood_id=hid, neighborhood=h["name"], source_site="niche.com", measure="niche_overall_rating", value=rating, as_of=at[:10], source_url=url, source_area=area, note=note))
                 srows.append(dict(hood_id=hid, neighborhood=h["name"], source_site="niche.com", measure="niche_review_count", value=count, as_of=at[:10], source_url=url, source_area=area, note=note))
             worked.append(f"niche ({area}: {len(revs)} reviews read" + ("; page cached in round 1, no new request" if label else "") + ")")
-        cands = [c for c in cands if not any(c["ex"].startswith(d) for d in DROP)]
+        cands = [c for c in cands if not any(d in c["ex"] for d in DROP)]
         for c in cands:
             for k, v in THEME_FIX.items():
                 if c["ex"].startswith(k): c["theme"] = v

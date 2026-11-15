@@ -228,10 +228,16 @@ def sentences(text):
     return [s for s in re.split(r"(?<=[.!])\s+", text.strip()) if s]
 
 
+PLACE_NAMES = ["White Plains"]                    # place names that would trip the wording test
+
+
 def check_style(kind, col, text):
     out = []
+    bare = text
+    for name in PLACE_NAMES:
+        bare = bare.replace(name, "")
     for rx, what in BANNED:
-        m = rx.search(text)
+        m = rx.search(bare)
         if m:
             out.append(f"{col}: {what}: '{m.group(0)}'")
     m = NUMBER_WORDS.search(text)
