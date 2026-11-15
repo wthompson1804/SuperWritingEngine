@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=905+S+Oyster+Bay+Rd%2C+Bethpage%2C+NY+11714&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T19:58:15+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/78c9e352ee3ddd17.json",
+ "source": "region_nassau_geo"
+}

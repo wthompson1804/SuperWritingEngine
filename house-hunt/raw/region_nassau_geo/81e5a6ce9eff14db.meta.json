@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=240+East+Shore+Road%2C+Great+Neck%2C+NY+11023&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T19:58:14+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/81e5a6ce9eff14db.json",
+ "source": "region_nassau_geo"
+}

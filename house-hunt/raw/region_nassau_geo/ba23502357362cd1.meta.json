@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=303+Main+St%2C+Hempstead%2C+NY+11550&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T19:58:10+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/ba23502357362cd1.json",
+ "source": "region_nassau_geo"
+}

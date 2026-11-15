@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1+Langdon+Place%2C+Lynbrook%2C+NY+11563&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T19:58:05+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/a37573295451a09c.json",
+ "source": "region_nassau_geo"
+}

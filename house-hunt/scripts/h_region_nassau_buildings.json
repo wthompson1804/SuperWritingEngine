@@ -1,0 +1,451 @@
+[
+ {
+  "name": "The Promenade at Lynbrook",
+  "address": "5 Freer St",
+  "town": "Lynbrook",
+  "zip": "11563",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-promenade-at-lynbrook-5-freer-st-lynbrook-ny-11563-2750930060",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "pass",
+  "agg": [
+   "https://www.trulia.com/building/the-promenade-at-lynbrook-5-freer-st-lynbrook-ny-11563-2750930060"
+  ],
+  "note": "Trulia building page lists 'Elevator' and 'Dogs: Allowed, large dogs allowed'; no weight number stated. Rows are floor plans (no unit number, floor unknown). Garage parking fee $75-250 per Trulia. No leasing site of its own found."
+ },
+ {
+  "name": "The Vantage at Valley Stream",
+  "address": "50 Roosevelt Ave",
+  "town": "Valley Stream",
+  "zip": "11581",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-vantage-at-valley-stream-50-roosevelt-ave-valley-stream-ny-11581-2743702150",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "unconfirmed:elevator not stated on the Trulia page (17-unit building); ask",
+  "agg": [
+   "https://www.trulia.com/building/the-vantage-at-valley-stream-50-roosevelt-ave-valley-stream-ny-11581-2743702150"
+  ],
+  "note": "Trulia: dogs allowed incl. large, 1 pet max; no weight number. Elevator not stated. No leasing site found."
+ },
+ {
+  "name": "The Promenade at Valley Stream",
+  "address": "49 N Central Ave",
+  "town": "Valley Stream",
+  "zip": "11580",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-promenade-at-valley-stream-49-n-central-ave-valley-stream-ny-11580-2750787593",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "pass",
+  "agg": [
+   "https://www.trulia.com/building/the-promenade-at-valley-stream-49-n-central-ave-valley-stream-ny-11580-2750787593"
+  ],
+  "note": "Trulia building page lists 'Elevator' and 'large dogs allowed'; no weight number. Row is a floor plan (no unit number). Garage parking fee $125-250 per Trulia, so all-in with parking may exceed $3,000."
+ },
+ {
+  "name": "Fairfield Metro At Mineola",
+  "address": "119 Searing Ave",
+  "town": "Mineola",
+  "zip": "11501",
+  "url": "https://fairfieldproperties.com/fairfield-metro-at-mineola/",
+  "source_url": "https://www.trulia.com/building/fairfield-metro-at-mineola-119-searing-ave-mineola-ny-11501-2741805871",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Trulia lists small dogs only, no number; Fairfield page states no pet policy",
+  "agg": [
+   "https://www.trulia.com/building/fairfield-metro-at-mineola-119-searing-ave-mineola-ny-11501-2741805871"
+  ],
+  "note": "Trulia: Elevator; 'Dogs: Allowed (Size allowed: Small)'. Fairfield's own page lists 1BR from $3,350 and no studio price; the $2,955 studio is a Trulia floor-plan row."
+ },
+ {
+  "name": "Eagle Rock Apartments at Carle Place",
+  "address": "401 E Jericho Tpke",
+  "town": "Carle Place",
+  "zip": "11514",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/eagle-rock-apartments-at-carle-place-401-e-jericho-tpke-carle-place-ny-11514-1044972285",
+  "elevator": "unknown",
+  "dogs": "no",
+  "verdict": "fails:no dogs (cats only)",
+  "agg": [
+   "https://www.trulia.com/building/eagle-rock-apartments-at-carle-place-401-e-jericho-tpke-carle-place-ny-11514-1044972285"
+  ],
+  "note": "Trulia pet policy: 'Dogs: Not allowed. Cats Welcome.'"
+ },
+ {
+  "name": "Bedell Towers",
+  "address": "10 Bedell St",
+  "town": "Hempstead",
+  "zip": "11550",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/bedell-towers-10-bedell-st-hempstead-ny-11550-2778505518",
+  "elevator": "unknown",
+  "dogs": "no",
+  "verdict": "fails:no pets allowed",
+  "agg": [
+   "https://www.trulia.com/building/bedell-towers-10-bedell-st-hempstead-ny-11550-2778505518"
+  ],
+  "note": "Trulia: 'No pets allowed'."
+ },
+ {
+  "name": "159 Main",
+  "address": "159 Main St",
+  "town": "Hempstead",
+  "zip": "11550",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/159-main-159-main-st-hempstead-ny-11550-2747881332",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "fails:income-restricted lottery building with a waitlist (page says so), 0 units available; small dogs only",
+  "agg": [
+   "https://www.trulia.com/building/159-main-159-main-st-hempstead-ny-11550-2747881332"
+  ],
+  "note": "Trulia description: 'currently working off the lottery applications; any submitted after the lottery was conducted will be added to a waitlist'. Elevator listed. Dogs: small only."
+ },
+ {
+  "name": "Village Lofts",
+  "address": "479 Front St",
+  "town": "Hempstead",
+  "zip": "11550",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/village-lofts-479-front-st-hempstead-ny-11550-2757887713",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "pass",
+  "agg": [
+   "https://www.trulia.com/building/village-lofts-479-front-st-hempstead-ny-11550-2757887713"
+  ],
+  "note": "Trulia description: 'The elevator building also offers controlled access, a residents' lounge, and on-site parking'. Dogs allowed incl. large, 1 pet max; no weight number. Parking fee $75. Units 2F and 2A (second floor by unit number, not ground)."
+ },
+ {
+  "name": "The Carney",
+  "address": "200 Carney St",
+  "town": "Glen Cove",
+  "zip": "11542",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-carney-200-carney-st-glen-cove-ny-11542-2770052486",
+  "elevator": "yes",
+  "dogs": "no",
+  "verdict": "fails:no pets allowed",
+  "agg": [
+   "https://www.trulia.com/building/the-carney-200-carney-st-glen-cove-ny-11542-2770052486"
+  ],
+  "note": "Trulia: elevator; 'No pets allowed'."
+ },
+ {
+  "name": "Fairfield Metro at Glen Cove",
+  "address": "1100 Avalon Sq",
+  "town": "Glen Cove",
+  "zip": "11542",
+  "url": "https://fairfieldproperties.com/fairfield-metro-at-glen-cove/",
+  "source_url": "https://www.trulia.com/building/fairfield-metro-at-glen-cove-1100-avalon-sq-glen-cove-ny-11542-1045082049",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "small_only",
+  "verdict": "unconfirmed:dog weight limit. Trulia lists small dogs only ('Restrictions Apply'), no number",
+  "agg": [
+   "https://www.trulia.com/building/fairfield-metro-at-glen-cove-1100-avalon-sq-glen-cove-ny-11542-1045082049"
+  ],
+  "note": "Trulia: Elevator; 'Dogs: Allowed (Size allowed: Small)'; studios are floor-plan rows (no unit number). Fairfield's own page lists 1BR from $2,950."
+ },
+ {
+  "name": "The Breeze at Long Beach",
+  "address": "180 W Boardwalk",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "",
+  "source_url": "https://www.trulia.com/building/the-breeze-at-long-beach-180-w-boardwalk-long-beach-ny-11561-2716039563",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "50",
+  "verdict": "fails:nothing at or under $3,000 (21 units/plans on the Trulia page, none studio/1BR at or under $3,000)",
+  "agg": [
+   "https://www.trulia.com/building/the-breeze-at-long-beach-180-w-boardwalk-long-beach-ny-11561-2716039563"
+  ],
+  "note": "Oceanfront, on the boardwalk. Trulia: elevator; 'dogs up to 50 lbs (up to 2, $50/mo)'. Passes on policy, fails on price.",
+  "seen": "2026-11-15T19:47:06+00:00"
+ },
+ {
+  "name": "Boardwalk Apartments",
+  "address": "210 Shore Road",
+  "town": "Long Beach",
+  "zip": "11561",
+  "url": "https://www.eastgoldlongisland.com/apartments/ny/long-beach/boardwalk-apartments/",
+  "source_url": "https://www.apartmentlist.com/ny/long-beach/boardwalk-apartments",
+  "elevator": "unknown",
+  "dogs": "unknown",
+  "verdict": "unconfirmed:dog policy and elevator. Leasing site (eastgoldlongisland.com) returned HTTP 403; Apartment List page states neither",
+  "agg": [
+   "https://www.apartmentlist.com/ny/long-beach/boardwalk-apartments"
+  ],
+  "note": "East Gold building, 98 units. Apartment List (feed: spherexx) shows studio 05L $2,450 available 2026-12-07 and a 1BR at $3,295. Pet policy and elevator not on the page."
+ },
+ {
+  "name": "The Hawthorne",
+  "address": "125 S Cottage St",
+  "town": "Valley Stream",
+  "zip": "11580",
+  "url": "https://www.livethehawthorne.com/",
+  "source_url": "https://www.apartmentlist.com/ny/valley-stream/the-hawthorne",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,606)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/valley-stream/the-hawthorne"
+  ],
+  "min_rent": 3606,
+  "min_rent_url": "https://www.apartmentlist.com/ny/valley-stream/the-hawthorne",
+  "min_rent_seen": "2026-11-15T19:55:15+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Greystar. Own site: 'Elevator Access'; dogs allowed, 2 pets, $75/pet, aggressive breeds prohibited, no weight number."
+ },
+ {
+  "name": "The Langdon",
+  "address": "1 Langdon Place",
+  "town": "Lynbrook",
+  "zip": "11563",
+  "url": "https://www.thelangdonli.com/",
+  "source_url": "https://www.apartmentlist.com/ny/lynbrook/the-langdon",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,703)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/lynbrook/the-langdon"
+  ],
+  "min_rent": 3703,
+  "min_rent_url": "https://www.apartmentlist.com/ny/lynbrook/the-langdon",
+  "min_rent_seen": "2026-11-15T19:55:13+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Bozzuto, 201 units at Lynbrook LIRR. Own site disallows Claude agents in robots.txt (not fetched). Apartment List: elevator, dogs allowed, dog park; only 1BRs listed (24 units), lowest $3,703; no studio shown."
+ },
+ {
+  "name": "Metro 303",
+  "address": "303 Main St",
+  "town": "Hempstead",
+  "zip": "11550",
+  "url": "https://www.metro303.com/",
+  "source_url": "https://www.apartmentlist.com/ny/hempstead/metro-303--1",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "75",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,134)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/hempstead/metro-303--1"
+  ],
+  "min_rent": 3134,
+  "min_rent_url": "https://www.apartmentlist.com/ny/hempstead/metro-303--1",
+  "min_rent_seen": "2026-11-15T19:55:18+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Own site returned HTTP 403. Apartment List: elevator; dogs max 75 lb each, 2 pets, $50/mo."
+ },
+ {
+  "name": "West 130",
+  "address": "130 Hempstead Ave",
+  "town": "West Hempstead",
+  "zip": "11552",
+  "url": "https://www.west130.com/",
+  "source_url": "https://www.apartmentlist.com/ny/west-hempstead/west-130--1",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "75",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,475)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/west-hempstead/west-130--1"
+  ],
+  "min_rent": 3475,
+  "min_rent_url": "https://www.apartmentlist.com/ny/west-hempstead/west-130--1",
+  "min_rent_seen": "2026-11-15T19:55:20+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Own site returned HTTP 403. Apartment List: dogs max 75 lb each, $50/mo; elevator not listed there."
+ },
+ {
+  "name": "Avalon Harbor Isle",
+  "address": "100 Harbor Terrace",
+  "town": "Island Park",
+  "zip": "11558",
+  "url": "https://www.avaloncommunities.com/new-york/long-island-apartments/avalon-harbor-isle",
+  "source_url": "https://www.apartmentlist.com/ny/island-park/avalon-harbor-isle",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,410)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/island-park/avalon-harbor-isle"
+  ],
+  "min_rent": 3410,
+  "min_rent_url": "https://www.apartmentlist.com/ny/island-park/avalon-harbor-isle",
+  "min_rent_seen": "2026-11-15T19:55:23+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "AvalonBay waterfront community. Apartment List: dogs allowed, breed restrictions; elevator not listed there."
+ },
+ {
+  "name": "The Lisle",
+  "address": "100 Nelson Ave",
+  "town": "Hicksville",
+  "zip": "11801",
+  "url": "https://thelisle.com/",
+  "source_url": "https://www.apartmentlist.com/ny/hicksville/the-lisle",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,280)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/hicksville/the-lisle"
+  ],
+  "min_rent": 3280,
+  "min_rent_url": "https://www.apartmentlist.com/ny/hicksville/the-lisle",
+  "min_rent_seen": "2026-11-15T19:55:25+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "At Hicksville LIRR. Apartment List: elevator; dogs allowed, 2 pets, $60/mo, no weight number. Lowest studio $3,280, lowest 1BR $3,879."
+ },
+ {
+  "name": "Village Square",
+  "address": "100 Village Sq",
+  "town": "Glen Cove",
+  "zip": "11542",
+  "url": "https://www.villagesquareny.com/",
+  "source_url": "https://www.apartmentlist.com/ny/glen-cove/village-square--1",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,360)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/glen-cove/village-square--1"
+  ],
+  "min_rent": 3360,
+  "min_rent_url": "https://www.apartmentlist.com/ny/glen-cove/village-square--1",
+  "min_rent_seen": "2026-11-15T19:55:28+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Bozzuto-fed. Apartment List: elevator, doorman, dogs allowed. Lowest 1BR $3,360, studio $3,632."
+ },
+ {
+  "name": "Florent",
+  "address": "555 Stewart Ave",
+  "town": "Garden City",
+  "zip": "11530",
+  "url": "https://www.liveflorent.com/",
+  "source_url": "https://www.apartmentlist.com/ny/garden-city/florent",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $4,595)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/garden-city/florent"
+  ],
+  "min_rent": 4595,
+  "min_rent_url": "https://www.apartmentlist.com/ny/garden-city/florent",
+  "min_rent_seen": "2026-11-15T19:55:49+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Apartment List: dogs allowed, dog park; elevator not listed there."
+ },
+ {
+  "name": "Harbor Landing at Garvies Point",
+  "address": "350 Herb Hill Road",
+  "town": "Glen Cove",
+  "zip": "11542",
+  "url": "https://www.harborlandingny.com/",
+  "source_url": "https://www.apartmentlist.com/ny/glen-cove/harbor-landing",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,643)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/glen-cove/harbor-landing"
+  ],
+  "min_rent": 3643,
+  "min_rent_url": "https://www.apartmentlist.com/ny/glen-cove/harbor-landing",
+  "min_rent_seen": "2026-11-15T19:55:51+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Garvies Point waterfront (RXR). Apartment List: elevator, doorman; dogs allowed, 2 pets, $75/pet, no aggressive breeds, no weight number."
+ },
+ {
+  "name": "Avalon Great Neck",
+  "address": "240 East Shore Road",
+  "town": "Great Neck",
+  "zip": "11023",
+  "url": "https://www.avaloncommunities.com/new-york/great-neck-apartments/avalon-great-neck",
+  "source_url": "https://www.apartmentlist.com/ny/great-neck/avalon-great-neck",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,473)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/great-neck/avalon-great-neck"
+  ],
+  "min_rent": 3473,
+  "min_rent_url": "https://www.apartmentlist.com/ny/great-neck/avalon-great-neck",
+  "min_rent_seen": "2026-11-15T19:55:53+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Apartment List: elevator; dogs allowed, 2 pets, $60/pet, aggressive breeds restricted."
+ },
+ {
+  "name": "Royal Blue",
+  "address": "101 Searing Ave",
+  "town": "Mineola",
+  "zip": "11501",
+  "url": "",
+  "source_url": "https://www.apartmentlist.com/ny/mineola/royal-blue--1",
+  "elevator": "unknown",
+  "dogs": "unknown",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $4,200)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/mineola/royal-blue--1"
+  ],
+  "min_rent": 4200,
+  "min_rent_url": "https://www.apartmentlist.com/ny/mineola/royal-blue--1",
+  "min_rent_seen": "2026-11-15T19:55:56+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Apartment List page states no pet policy and no amenities."
+ },
+ {
+  "name": "The Allure Mineola",
+  "address": "140 Old Country Road",
+  "town": "Mineola",
+  "zip": "11501",
+  "url": "https://www.thealluremineola.com/",
+  "source_url": "https://www.apartmentlist.com/ny/mineola/the-allure-mineola",
+  "elevator": "yes",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,719)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/mineola/the-allure-mineola"
+  ],
+  "min_rent": 3719,
+  "min_rent_url": "https://www.apartmentlist.com/ny/mineola/the-allure-mineola",
+  "min_rent_seen": "2026-11-15T19:55:58+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Own site returned 403 in the earlier management-site pass. Apartment List: elevator; dogs allowed."
+ },
+ {
+  "name": "Long Island - Bethpage (905 S Oyster Bay Rd)",
+  "address": "905 S Oyster Bay Rd",
+  "town": "Bethpage",
+  "zip": "11714",
+  "url": "",
+  "source_url": "https://www.apartmentlist.com/ny/bethpage/long-island-bethpage--1",
+  "elevator": "unknown",
+  "dogs": "yes",
+  "weight": "",
+  "verdict": "fails:nothing at or under $3,000 (lowest studio/1BR $3,299)",
+  "agg": [
+   "https://www.apartmentlist.com/ny/bethpage/long-island-bethpage--1"
+  ],
+  "min_rent": 3299,
+  "min_rent_url": "https://www.apartmentlist.com/ny/bethpage/long-island-bethpage--1",
+  "min_rent_seen": "2026-11-15T19:56:01+00:00",
+  "min_rent_basis": "lowest studio/1BR price among available units on the Apartment List property page",
+  "note": "Apartment List page last updated 2026-09-22 (stale); one studio at $3,299; dogs allowed; elevator not stated."
+ }
+]

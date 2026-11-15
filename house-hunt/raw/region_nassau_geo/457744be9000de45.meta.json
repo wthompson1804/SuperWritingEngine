@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=125+S+Cottage+St%2C+Valley+Stream%2C+NY+11580&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T19:58:04+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/457744be9000de45.json",
+ "source": "region_nassau_geo"
+}

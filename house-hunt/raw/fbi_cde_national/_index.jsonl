@@ -1,0 +1,3 @@
+{"url": "https://api.usa.gov/crime/fbi/cde/summarized/national/V?from=01-2023&to=12-2025", "retrieved_at": "2026-11-15T19:58:55+00:00", "status": 200, "path": "raw/fbi_cde_national/25e317d738f88fc8.json", "source": "fbi_cde_national"}
+{"url": "https://api.usa.gov/crime/fbi/cde/summarized/national/P?from=01-2023&to=12-2025", "retrieved_at": "2026-11-15T19:58:55+00:00", "status": 200, "path": "raw/fbi_cde_national/bc422a1a6e555725.json", "source": "fbi_cde_national"}
+{"url": "https://api.usa.gov/crime/fbi/cde/summarized/national/motor-vehicle-theft?from=01-2023&to=12-2025", "retrieved_at": "2026-11-15T19:58:56+00:00", "status": 200, "path": "raw/fbi_cde_national/a2b57172f220f2b4.json", "source": "fbi_cde_national"}

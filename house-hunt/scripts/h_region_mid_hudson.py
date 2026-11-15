@@ -34,7 +34,8 @@ def fetch(url):
         cd = C.crawl_delay(host, SRC)
     except Exception:
         cd = 0
-    wait = hits.get(host, 0) + max(2.5, cd) - time.time()
+    cached = (lib.RAW / SRC / (hashlib.sha1(("GET " + url + " ").encode()).hexdigest()[:16] + ".meta.json")).exists()
+    wait = 0 if cached else hits.get(host, 0) + max(2.5, cd) - time.time()
     if wait > 0:
         time.sleep(wait)
     try:
@@ -226,8 +227,10 @@ def zj(url, write=None):
             prefix = "BUILDING_FAILS: income-restricted (affordable) housing; eligibility rules apply."
         elif dogs == "no":
             prefix = "BUILDING_FAILS: dogs not allowed."
-        elif (f["wl"].isdigit() and int(f["wl"]) < 40) or (f["large"] is False and not f["wl"].isdigit()):
-            prefix = "BUILDING_FAILS: large dogs not allowed / weight limit under 40 lb."
+        elif f["wl"].isdigit() and int(f["wl"]) < 40:
+            prefix = f"BUILDING_FAILS: dog weight limit {f['wl']} lb (under 40)."
+        elif f["large"] is False and not f["wl"].isdigit():
+            prefix = "BUILDING_FAILS: page allows small dogs only (large dogs not allowed; no weight number given, confirm the limit)."
         elif elev == "no":
             prefix = "BUILDING_FAILS: no elevator."
         elif not small:
@@ -239,6 +242,8 @@ def zj(url, write=None):
         elif elev == "unknown":
             prefix = f"ELEVATOR_UNKNOWN: no elevator listed on the page ({f['stories'] or '?'} stories); likely garden-style walk-up, confirm."
     one = bool(prefix)
+    if not prefix and dogs == "unknown":
+        prefix = "DOG_POLICY_UNKNOWN: elevator building with units in range, but the page states no dog policy; call to confirm."
     rows = (ok or small)[:1] if one else ok
     base = dict(source_site="zillow.com", url=url, detail_level="building_page", first_seen=m["retrieved_at"], last_seen=m["retrieved_at"],
                 building_name=name, address=b.get("streetAddress"), city=b.get("city"), state=b.get("state"), zip=b.get("zipcode"),

@@ -1,0 +1,343 @@
+scope,year,measure,per_1000,source,source_url
+United States,2023,violent,3.86,fbi_cde national,https://api.usa.gov/crime/fbi/cde/summarized/national/V?from=01-2023&to=12-2025
+United States,2024,violent,3.63,fbi_cde national,https://api.usa.gov/crime/fbi/cde/summarized/national/V?from=01-2023&to=12-2025
+United States,2025,violent,3.3,fbi_cde national,https://api.usa.gov/crime/fbi/cde/summarized/national/V?from=01-2023&to=12-2025
+United States,2023,property,19.5,fbi_cde national,https://api.usa.gov/crime/fbi/cde/summarized/national/P?from=01-2023&to=12-2025
+United States,2024,property,17.66,fbi_cde national,https://api.usa.gov/crime/fbi/cde/summarized/national/P?from=01-2023&to=12-2025
+United States,2025,property,15.52,fbi_cde national,https://api.usa.gov/crime/fbi/cde/summarized/national/P?from=01-2023&to=12-2025
+United States,2023,motor_vehicle_theft,3.26,fbi_cde national,https://api.usa.gov/crime/fbi/cde/summarized/national/motor-vehicle-theft?from=01-2023&to=12-2025
+United States,2024,motor_vehicle_theft,2.57,fbi_cde national,https://api.usa.gov/crime/fbi/cde/summarized/national/motor-vehicle-theft?from=01-2023&to=12-2025
+United States,2025,motor_vehicle_theft,2.0,fbi_cde national,https://api.usa.gov/crime/fbi/cde/summarized/national/motor-vehicle-theft?from=01-2023&to=12-2025
+NY metro (all FBI-reporting agencies in the 2-hour search area),2023,violent,3.54,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+NY metro (all FBI-reporting agencies in the 2-hour search area),2023,property,16.85,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+NY metro (all FBI-reporting agencies in the 2-hour search area),2023,motor_vehicle_theft,1.82,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Greater Bridgeport Planning Region, CT",2023,violent,2.16,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Greater Bridgeport Planning Region, CT",2023,property,15.88,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Greater Bridgeport Planning Region, CT",2023,motor_vehicle_theft,2.85,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Naugatuck Valley Planning Region, CT",2023,violent,1.56,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Naugatuck Valley Planning Region, CT",2023,property,16.4,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Naugatuck Valley Planning Region, CT",2023,motor_vehicle_theft,3.9,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northwest Hills Planning Region, CT",2023,violent,1.02,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northwest Hills Planning Region, CT",2023,property,12.36,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northwest Hills Planning Region, CT",2023,motor_vehicle_theft,1.53,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: South Central Connecticut Planning Region, CT",2023,violent,2.58,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: South Central Connecticut Planning Region, CT",2023,property,24.73,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: South Central Connecticut Planning Region, CT",2023,motor_vehicle_theft,5.46,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Western Connecticut Planning Region, CT",2023,violent,0.99,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Western Connecticut Planning Region, CT",2023,property,10.12,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Western Connecticut Planning Region, CT",2023,motor_vehicle_theft,1.28,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bergen, NJ",2023,violent,0.83,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bergen, NJ",2023,property,10.82,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bergen, NJ",2023,motor_vehicle_theft,0.88,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Burlington, NJ",2023,violent,1.96,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Burlington, NJ",2023,property,13.97,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Burlington, NJ",2023,motor_vehicle_theft,1.09,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Essex, NJ",2023,violent,3.13,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Essex, NJ",2023,property,18.09,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Essex, NJ",2023,motor_vehicle_theft,6.66,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hudson, NJ",2023,violent,3.31,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hudson, NJ",2023,property,17.48,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hudson, NJ",2023,motor_vehicle_theft,1.94,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hunterdon, NJ",2023,violent,0.24,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hunterdon, NJ",2023,property,4.61,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hunterdon, NJ",2023,motor_vehicle_theft,0.22,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Mercer, NJ",2023,violent,3.47,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Mercer, NJ",2023,property,17.51,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Mercer, NJ",2023,motor_vehicle_theft,1.67,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Middlesex, NJ",2023,violent,2.02,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Middlesex, NJ",2023,property,14.39,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Middlesex, NJ",2023,motor_vehicle_theft,1.09,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monmouth, NJ",2023,violent,1.26,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monmouth, NJ",2023,property,12.6,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monmouth, NJ",2023,motor_vehicle_theft,0.73,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Morris, NJ",2023,violent,0.41,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Morris, NJ",2023,property,7.01,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Morris, NJ",2023,motor_vehicle_theft,0.39,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ocean, NJ",2023,violent,1.06,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ocean, NJ",2023,property,8.63,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ocean, NJ",2023,motor_vehicle_theft,0.44,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Passaic, NJ",2023,violent,5.12,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Passaic, NJ",2023,property,18.4,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Passaic, NJ",2023,motor_vehicle_theft,2.71,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Somerset, NJ",2023,violent,0.69,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Somerset, NJ",2023,property,9.58,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Somerset, NJ",2023,motor_vehicle_theft,0.63,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sussex, NJ",2023,violent,0.63,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sussex, NJ",2023,property,3.01,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sussex, NJ",2023,motor_vehicle_theft,0.06,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Union, NJ",2023,violent,2.67,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Union, NJ",2023,property,19.47,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Union, NJ",2023,motor_vehicle_theft,2.85,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Warren, NJ",2023,violent,0.86,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Warren, NJ",2023,property,11.16,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Warren, NJ",2023,motor_vehicle_theft,0.46,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Dutchess, NY",2023,violent,1.29,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Dutchess, NY",2023,property,9.31,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Dutchess, NY",2023,motor_vehicle_theft,0.42,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Nassau, NY",2023,violent,1.72,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Nassau, NY",2023,property,12.24,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Nassau, NY",2023,motor_vehicle_theft,0.66,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Not Specified, NY",2023,violent,6.83,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Not Specified, NY",2023,property,24.45,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Not Specified, NY",2023,motor_vehicle_theft,2.27,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Orange, NY",2023,violent,2.17,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Orange, NY",2023,property,14.05,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Orange, NY",2023,motor_vehicle_theft,0.67,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Putnam, NY",2023,violent,0.38,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Putnam, NY",2023,property,3.38,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Putnam, NY",2023,motor_vehicle_theft,0.12,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Rockland, NY",2023,violent,1.23,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Rockland, NY",2023,property,10.77,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Rockland, NY",2023,motor_vehicle_theft,0.29,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Suffolk, NY",2023,violent,0.5,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Suffolk, NY",2023,property,6.23,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Suffolk, NY",2023,motor_vehicle_theft,0.39,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sullivan, NY",2023,violent,1.1,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sullivan, NY",2023,property,6.31,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sullivan, NY",2023,motor_vehicle_theft,0.15,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ulster, NY",2023,violent,0.66,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ulster, NY",2023,property,6.94,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ulster, NY",2023,motor_vehicle_theft,0.21,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Westchester, NY",2023,violent,1.65,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Westchester, NY",2023,property,10.11,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Westchester, NY",2023,motor_vehicle_theft,0.97,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, PA",2023,violent,0.63,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, PA",2023,property,10.58,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, PA",2023,motor_vehicle_theft,0.9,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, Montgomery, PA",2023,violent,0.41,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, Montgomery, PA",2023,property,9.0,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, Montgomery, PA",2023,motor_vehicle_theft,0.2,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Lehigh, Northampton, PA",2023,violent,1.78,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Lehigh, Northampton, PA",2023,property,15.98,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Lehigh, Northampton, PA",2023,motor_vehicle_theft,1.27,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monroe, PA",2023,violent,1.78,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monroe, PA",2023,property,17.54,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monroe, PA",2023,motor_vehicle_theft,0.46,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northampton, PA",2023,violent,1.08,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northampton, PA",2023,property,9.8,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northampton, PA",2023,motor_vehicle_theft,0.48,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+NY metro (all FBI-reporting agencies in the 2-hour search area),2024,violent,3.67,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+NY metro (all FBI-reporting agencies in the 2-hour search area),2024,property,16.51,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+NY metro (all FBI-reporting agencies in the 2-hour search area),2024,motor_vehicle_theft,1.64,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Greater Bridgeport Planning Region, CT",2024,violent,2.1,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Greater Bridgeport Planning Region, CT",2024,property,15.79,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Greater Bridgeport Planning Region, CT",2024,motor_vehicle_theft,3.04,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Naugatuck Valley Planning Region, CT",2024,violent,1.34,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Naugatuck Valley Planning Region, CT",2024,property,14.73,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Naugatuck Valley Planning Region, CT",2024,motor_vehicle_theft,3.22,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northwest Hills Planning Region, CT",2024,violent,0.79,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northwest Hills Planning Region, CT",2024,property,10.01,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northwest Hills Planning Region, CT",2024,motor_vehicle_theft,0.65,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: South Central Connecticut Planning Region, CT",2024,violent,2.29,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: South Central Connecticut Planning Region, CT",2024,property,22.14,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: South Central Connecticut Planning Region, CT",2024,motor_vehicle_theft,4.03,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Western Connecticut Planning Region, CT",2024,violent,0.96,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Western Connecticut Planning Region, CT",2024,property,10.12,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Western Connecticut Planning Region, CT",2024,motor_vehicle_theft,1.39,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bergen, NJ",2024,violent,0.82,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bergen, NJ",2024,property,10.09,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bergen, NJ",2024,motor_vehicle_theft,0.77,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Burlington, NJ",2024,violent,1.73,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Burlington, NJ",2024,property,13.34,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Burlington, NJ",2024,motor_vehicle_theft,1.1,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Essex, NJ",2024,violent,3.4,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Essex, NJ",2024,property,16.64,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Essex, NJ",2024,motor_vehicle_theft,5.16,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hudson, NJ",2024,violent,3.94,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hudson, NJ",2024,property,17.6,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hudson, NJ",2024,motor_vehicle_theft,2.1,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hunterdon, NJ",2024,violent,0.34,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hunterdon, NJ",2024,property,4.65,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hunterdon, NJ",2024,motor_vehicle_theft,0.2,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Mercer, NJ",2024,violent,3.57,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Mercer, NJ",2024,property,18.48,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Mercer, NJ",2024,motor_vehicle_theft,2.18,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Middlesex, NJ",2024,violent,1.88,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Middlesex, NJ",2024,property,12.35,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Middlesex, NJ",2024,motor_vehicle_theft,0.96,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monmouth, NJ",2024,violent,1.13,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monmouth, NJ",2024,property,12.12,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monmouth, NJ",2024,motor_vehicle_theft,0.51,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Morris, NJ",2024,violent,0.48,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Morris, NJ",2024,property,6.42,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Morris, NJ",2024,motor_vehicle_theft,0.31,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ocean, NJ",2024,violent,1.08,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ocean, NJ",2024,property,7.7,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ocean, NJ",2024,motor_vehicle_theft,0.3,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Passaic, NJ",2024,violent,4.72,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Passaic, NJ",2024,property,17.78,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Passaic, NJ",2024,motor_vehicle_theft,2.58,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Somerset, NJ",2024,violent,0.57,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Somerset, NJ",2024,property,8.38,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Somerset, NJ",2024,motor_vehicle_theft,0.53,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sussex, NJ",2024,violent,0.5,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sussex, NJ",2024,property,3.23,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sussex, NJ",2024,motor_vehicle_theft,0.1,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Union, NJ",2024,violent,2.0,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Union, NJ",2024,property,15.76,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Union, NJ",2024,motor_vehicle_theft,2.53,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Warren, NJ",2024,violent,0.63,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Warren, NJ",2024,property,11.39,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Warren, NJ",2024,motor_vehicle_theft,0.48,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Dutchess, NY",2024,violent,1.28,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Dutchess, NY",2024,property,8.48,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Dutchess, NY",2024,motor_vehicle_theft,0.4,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Nassau, NY",2024,violent,1.63,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Nassau, NY",2024,property,9.92,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Nassau, NY",2024,motor_vehicle_theft,0.38,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Not Specified, NY",2024,violent,6.94,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Not Specified, NY",2024,property,24.16,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Not Specified, NY",2024,motor_vehicle_theft,2.02,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Orange, NY",2024,violent,1.46,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Orange, NY",2024,property,7.59,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Orange, NY",2024,motor_vehicle_theft,0.32,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Putnam, NY",2024,violent,0.5,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Putnam, NY",2024,property,3.94,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Putnam, NY",2024,motor_vehicle_theft,0.15,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Rockland, NY",2024,violent,1.3,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Rockland, NY",2024,property,10.77,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Rockland, NY",2024,motor_vehicle_theft,0.3,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Suffolk, NY",2024,violent,0.86,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Suffolk, NY",2024,property,14.62,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Suffolk, NY",2024,motor_vehicle_theft,0.49,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sullivan, NY",2024,violent,1.02,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sullivan, NY",2024,property,6.95,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sullivan, NY",2024,motor_vehicle_theft,0.23,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ulster, NY",2024,violent,0.86,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ulster, NY",2024,property,6.52,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ulster, NY",2024,motor_vehicle_theft,0.2,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Westchester, NY",2024,violent,1.75,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Westchester, NY",2024,property,9.2,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Westchester, NY",2024,motor_vehicle_theft,0.84,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, PA",2024,violent,0.6,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, PA",2024,property,9.77,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, PA",2024,motor_vehicle_theft,0.99,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, Montgomery, PA",2024,violent,0.82,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, Montgomery, PA",2024,property,6.75,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, Montgomery, PA",2024,motor_vehicle_theft,0.41,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Lehigh, Northampton, PA",2024,violent,2.1,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Lehigh, Northampton, PA",2024,property,14.19,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Lehigh, Northampton, PA",2024,motor_vehicle_theft,1.46,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monroe, PA",2024,violent,1.71,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monroe, PA",2024,property,15.44,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monroe, PA",2024,motor_vehicle_theft,0.58,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northampton, PA",2024,violent,0.88,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northampton, PA",2024,property,9.16,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northampton, PA",2024,motor_vehicle_theft,0.58,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+NY metro (all FBI-reporting agencies in the 2-hour search area),2025,violent,3.43,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+NY metro (all FBI-reporting agencies in the 2-hour search area),2025,property,15.17,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+NY metro (all FBI-reporting agencies in the 2-hour search area),2025,motor_vehicle_theft,1.43,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Greater Bridgeport Planning Region, CT",2025,violent,1.32,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Greater Bridgeport Planning Region, CT",2025,property,12.36,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Greater Bridgeport Planning Region, CT",2025,motor_vehicle_theft,2.21,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Naugatuck Valley Planning Region, CT",2025,violent,1.2,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Naugatuck Valley Planning Region, CT",2025,property,12.22,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Naugatuck Valley Planning Region, CT",2025,motor_vehicle_theft,1.77,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northwest Hills Planning Region, CT",2025,violent,1.17,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northwest Hills Planning Region, CT",2025,property,11.33,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northwest Hills Planning Region, CT",2025,motor_vehicle_theft,0.54,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: South Central Connecticut Planning Region, CT",2025,violent,1.59,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: South Central Connecticut Planning Region, CT",2025,property,19.16,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: South Central Connecticut Planning Region, CT",2025,motor_vehicle_theft,3.0,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Western Connecticut Planning Region, CT",2025,violent,0.73,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Western Connecticut Planning Region, CT",2025,property,8.0,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Western Connecticut Planning Region, CT",2025,motor_vehicle_theft,0.97,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bergen, NJ",2025,violent,0.75,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bergen, NJ",2025,property,8.49,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bergen, NJ",2025,motor_vehicle_theft,0.57,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Burlington, NJ",2025,violent,1.84,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Burlington, NJ",2025,property,11.98,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Burlington, NJ",2025,motor_vehicle_theft,1.28,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Essex, NJ",2025,violent,3.03,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Essex, NJ",2025,property,15.18,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Essex, NJ",2025,motor_vehicle_theft,4.2,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hudson, NJ",2025,violent,3.23,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hudson, NJ",2025,property,15.66,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hudson, NJ",2025,motor_vehicle_theft,1.85,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hunterdon, NJ",2025,violent,0.42,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hunterdon, NJ",2025,property,3.48,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Hunterdon, NJ",2025,motor_vehicle_theft,0.16,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Mercer, NJ",2025,violent,2.68,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Mercer, NJ",2025,property,15.97,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Mercer, NJ",2025,motor_vehicle_theft,2.07,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Middlesex, NJ",2025,violent,1.66,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Middlesex, NJ",2025,property,10.48,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Middlesex, NJ",2025,motor_vehicle_theft,0.81,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monmouth, NJ",2025,violent,1.27,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monmouth, NJ",2025,property,11.13,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monmouth, NJ",2025,motor_vehicle_theft,0.4,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Morris, NJ",2025,violent,0.33,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Morris, NJ",2025,property,5.1,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Morris, NJ",2025,motor_vehicle_theft,0.24,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ocean, NJ",2025,violent,1.13,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ocean, NJ",2025,property,6.51,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ocean, NJ",2025,motor_vehicle_theft,0.24,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Passaic, NJ",2025,violent,4.02,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Passaic, NJ",2025,property,16.7,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Passaic, NJ",2025,motor_vehicle_theft,2.37,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Somerset, NJ",2025,violent,0.6,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Somerset, NJ",2025,property,5.66,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Somerset, NJ",2025,motor_vehicle_theft,0.38,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sussex, NJ",2025,violent,0.5,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sussex, NJ",2025,property,2.87,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sussex, NJ",2025,motor_vehicle_theft,0.09,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Union, NJ",2025,violent,1.53,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Union, NJ",2025,property,14.09,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Union, NJ",2025,motor_vehicle_theft,2.0,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Warren, NJ",2025,violent,0.8,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Warren, NJ",2025,property,8.99,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Warren, NJ",2025,motor_vehicle_theft,0.47,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Dutchess, NY",2025,violent,1.16,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Dutchess, NY",2025,property,6.06,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Dutchess, NY",2025,motor_vehicle_theft,0.33,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Nassau, NY",2025,violent,1.37,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Nassau, NY",2025,property,8.74,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Nassau, NY",2025,motor_vehicle_theft,0.28,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Not Specified, NY",2025,violent,6.61,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Not Specified, NY",2025,property,23.03,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Not Specified, NY",2025,motor_vehicle_theft,1.84,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Orange, NY",2025,violent,1.32,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Orange, NY",2025,property,7.67,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Orange, NY",2025,motor_vehicle_theft,0.28,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Putnam, NY",2025,violent,0.5,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Putnam, NY",2025,property,2.97,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Putnam, NY",2025,motor_vehicle_theft,0.11,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Rockland, NY",2025,violent,1.01,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Rockland, NY",2025,property,7.66,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Rockland, NY",2025,motor_vehicle_theft,0.21,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Suffolk, NY",2025,violent,0.59,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Suffolk, NY",2025,property,9.48,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Suffolk, NY",2025,motor_vehicle_theft,0.3,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sullivan, NY",2025,violent,1.2,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sullivan, NY",2025,property,12.34,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Sullivan, NY",2025,motor_vehicle_theft,6.34,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ulster, NY",2025,violent,1.01,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ulster, NY",2025,property,6.34,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Ulster, NY",2025,motor_vehicle_theft,0.2,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Westchester, NY",2025,violent,1.54,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Westchester, NY",2025,property,8.52,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Westchester, NY",2025,motor_vehicle_theft,0.65,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, PA",2025,violent,0.7,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, PA",2025,property,8.42,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, PA",2025,motor_vehicle_theft,0.79,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, Montgomery, PA",2025,violent,0.6,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, Montgomery, PA",2025,property,3.81,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Bucks, Montgomery, PA",2025,motor_vehicle_theft,0.4,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Lehigh, Northampton, PA",2025,violent,1.96,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Lehigh, Northampton, PA",2025,property,12.41,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Lehigh, Northampton, PA",2025,motor_vehicle_theft,1.22,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monroe, PA",2025,violent,1.42,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monroe, PA",2025,property,11.77,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Monroe, PA",2025,motor_vehicle_theft,0.39,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northampton, PA",2025,violent,0.8,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northampton, PA",2025,property,5.98,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"county: Northampton, PA",2025,motor_vehicle_theft,0.36,"fbi_cde agencies, population-weighted",data/reference/crime_agencies.csv
+"New York City (NYPD complaint categories, all precincts)",2023,violent,5.33,nypd_complaints,data/reference/crime_agencies.csv
+"New York City (NYPD complaint categories, all precincts)",2023,property,21.81,nypd_complaints,data/reference/crime_agencies.csv
+"New York City (NYPD complaint categories, all precincts)",2023,motor_vehicle_theft,1.81,nypd_complaints,data/reference/crime_agencies.csv
+"New York City (NYPD complaint categories, all precincts)",2024,violent,5.46,nypd_complaints,data/reference/crime_agencies.csv
+"New York City (NYPD complaint categories, all precincts)",2024,property,21.07,nypd_complaints,data/reference/crime_agencies.csv
+"New York City (NYPD complaint categories, all precincts)",2024,motor_vehicle_theft,1.61,nypd_complaints,data/reference/crime_agencies.csv
+"New York City (NYPD complaint categories, all precincts)",2025,violent,5.37,nypd_complaints,data/reference/crime_agencies.csv
+"New York City (NYPD complaint categories, all precincts)",2025,property,20.43,nypd_complaints,data/reference/crime_agencies.csv
+"New York City (NYPD complaint categories, all precincts)",2025,motor_vehicle_theft,1.54,nypd_complaints,data/reference/crime_agencies.csv

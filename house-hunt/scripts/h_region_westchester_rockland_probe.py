@@ -63,11 +63,12 @@ def probe(url, deep=True, quiet=False):
                 res["block"] += f" | {u}: error {repr(e)[:80]}"
     seen = set()
     def uniq(text, rx, n, w=120):
-        out = []
+        out = []; last = [-9999]
         for m in re.finditer(rx, text):
             s = text[max(0, m.start() - w):m.start() + w + 80].strip()
             key = re.sub(r"\W+", "", text[m.start():m.start() + 60].lower())
-            if key in seen: continue
+            if key in seen or m.start() - last[0] < 2 * w: continue
+            last[0] = m.start()
             seen.add(key); out.append(s)
             if len(out) >= n: break
         return out
@@ -82,7 +83,7 @@ def probe(url, deep=True, quiet=False):
         res["pages"][u] = {"status": mm["status"], "at": mm["retrieved_at"], "path": mm.get("path"), "len": len(h),
                            "title": (re.search(r"<title[^>]*>(.*?)</title>", h, re.S | re.I) or [None, ""])[1].strip()[:90],
                            "prices": sorted(set(re.findall(r"\$\s?[1-9],?\d{3}\b", t)))[:12],
-                           "pet": uniq(t, r"(?i)\bdogs?\b|\bbreeds?\b|\d+ ?(lbs?\b|pounds)|weight limit|\bpets? (policy|fee|rent|deposit)|no pets|pets (are )?(allowed|welcome|not)", 5),
+                           "pet": uniq(t, r"(?i)\bdogs?\b|\bbreeds?\b|\d+ ?(lbs?\b|pounds)|weight limit|\bpets? (policy|fee|rent|deposit)|no pets|pets (are )?(allowed|welcome|not)", 3, 160),
                            "elev": uniq(t, r"(?i)elevator|\b\d+[- ]stor(y|ies)|\bstories\b", 2, 80),
                            "park": uniq(t, r"(?i)parking|garage", 2, 70)}
     res["links"] = links[:40]
@@ -99,7 +100,7 @@ def probe(url, deep=True, quiet=False):
                 c = [x for x in us if x["beds"] in (0, 1) and x["price"] and x["price"] <= 3000]
                 w = [x for x in c if (x["available_on"] or "9") <= "2026-12-15"]
                 print("   SIGHTMAP:", info.get("asset_name"), info.get("address"), "units", len(us), "st/1br<=3000:", len(c), "in window:", len(w), "floors:", info.get("floor_labels"))
-                for x in w[:6]: print("     ", x["unit"], x["beds"], x["sqft"], x["price"], x["total_min"], x["available_on"], "fl", x["floor"], x["required_fees"])
+                for x in w[:3]: print("     ", x["unit"], x["beds"], x["sqft"], x["price"], x["total_min"], x["available_on"], "fl", x["floor"], x["required_fees"])
             except Exception as e:
                 print("   SIGHTMAP error", repr(e)[:200])
     return res

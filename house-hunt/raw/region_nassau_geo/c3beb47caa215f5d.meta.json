@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=130+Hempstead+Ave%2C+West+Hempstead%2C+NY+11552&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T19:58:11+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/c3beb47caa215f5d.json",
+ "source": "region_nassau_geo"
+}

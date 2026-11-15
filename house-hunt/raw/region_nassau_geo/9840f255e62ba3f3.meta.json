@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=100+Nelson+Ave%2C+Hicksville%2C+NY+11801&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T19:58:12+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/9840f255e62ba3f3.json",
+ "source": "region_nassau_geo"
+}

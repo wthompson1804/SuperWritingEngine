@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=350+Herb+Hill+Road%2C+Glen+Cove%2C+NY+11542&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T19:58:13+00:00",
+ "status": 200,
+ "path": "raw/region_nassau_geo/d3c511b2320c4c87.json",
+ "source": "region_nassau_geo"
+}

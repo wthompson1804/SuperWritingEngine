@@ -13,6 +13,8 @@ Record fields
   agg       list of Trulia building / Apartment List property URLs; unit rows are read from them with the
             existing parsers (h_trulia.parse_detail, h_apartmentlist.build_rows), so every price and date
             comes from that page, fetched through the shared cache
+  from_csv  optional [{"file": "mgmt_greystar.csv", "building_name": "..."}]: unit rows already harvested from
+            the manager's own site by another script are copied (their url, first_seen and raw_path are kept)
   units     optional list of hand-read unit rows (dicts of CSV columns) from a page with no parser; each
             carries its own url and first_seen
   row       optional dict of column overrides applied to every row of the building (facts confirmed on the
@@ -112,6 +114,9 @@ def main() -> None:
             if why:
                 whys.append(f"{u.split('/')[2]}: {why}")
             rows += [dict(r) for r in rr]
+        for fc in b.get("from_csv", []):  # rows another harvest script already read from the manager's own site
+            with open(ROOT / "data" / "listings_raw" / fc["file"], newline="") as f:
+                rows += [dict(r) for r in csv.DictReader(f) if r["building_name"] == fc["building_name"]]
         for u in b.get("units", []):
             r = {k: "" for k in COLS}
             r.update(u)
