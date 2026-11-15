@@ -207,7 +207,7 @@ def zj(url, write=None):
                 w.writeheader()
                 w.writerows(keep)
     print("   studio/1BR:", " | ".join(f"{u.get('unitNumber')} {u.get('beds')}bd ${u.get('price')} {u.get('sqft')}sf {u['_availtxt']} fee{u.get('totalRequiredMonthlyMinFee')}" for u in small[:14]),
-          f"(+{max(0, len(small) - 14)} more)", "| other beds:", sorted({u.get("beds") for u in f["units"] if u.get("beds") not in (0, 1)}))
+          f"(+{max(0, len(small) - 14)} more)", "| other beds:", sorted({str(u.get("beds")) for u in f["units"] if u.get("beds") not in (0, 1)}))
     desc = b.get("description") or ""
     for x in snippets(desc, r"(?i)elevator|walk-?up|\bdogs?\b|\bpets?\b|breed|\blbs?\b|pound|stor(y|ies)|floor\b|55|senior|income", 80, 6):
         print("   desc:", x)
@@ -220,7 +220,11 @@ def zj(url, write=None):
     policy = "; ".join(f["pets"]) or ("pets listed: " + ", ".join((b.get("amenityDetails") or {}).get("pets") or []))
     prefix = ov.get("prefix", "")
     if not prefix:
-        if dogs == "no":
+        if b.get("isSeniorHousing") or re.search(r"55\+|62\+|senior", name or "", re.I):
+            prefix = "BUILDING_FAILS: age-restricted (55+/senior) community" + ("; income-restricted" if b.get("isLowIncome") else "") + "."
+        elif b.get("isLowIncome"):
+            prefix = "BUILDING_FAILS: income-restricted (affordable) housing; eligibility rules apply."
+        elif dogs == "no":
             prefix = "BUILDING_FAILS: dogs not allowed."
         elif (f["wl"].isdigit() and int(f["wl"]) < 40) or (f["large"] is False and not f["wl"].isdigit()):
             prefix = "BUILDING_FAILS: large dogs not allowed / weight limit under 40 lb."
