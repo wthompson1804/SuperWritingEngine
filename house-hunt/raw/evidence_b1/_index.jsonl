@@ -145,3 +145,7 @@
 {"url": "https://ingerman.com/robots.txt", "retrieved_at": "2026-11-15T20:55:50+00:00", "status": 200, "path": "raw/evidence_b1/ee467733206bb592.txt", "source": "evidence_b1"}
 {"url": "https://ingerman.com/news/ingerman-announces-the-grand-opening-of-19-east/", "retrieved_at": "2026-11-15T20:55:53+00:00", "status": 200, "path": "raw/evidence_b1/e3d64f9713acae64.html", "source": "evidence_b1"}
 {"url": "https://www.zumper.com/apartment-buildings/p423034/the-current-on-river-hackensack-nj", "retrieved_at": "2026-11-15T20:56:36+00:00", "status": 200, "path": "raw/evidence_b1/5df1fb37321685e7.html", "source": "evidence_b1"}
+{"url": "https://www.zumper.com/apartment-buildings/p435779/allure-harbor-point-harbor-point-stamford-ct", "retrieved_at": "2026-11-15T20:58:03+00:00", "status": 200, "path": "raw/evidence_b1/99cc9d39273a7440.html", "source": "evidence_b1"}
+{"url": "https://www.zumper.com/address/1177-post-rd-east-westport-ct-06880-usa", "retrieved_at": "2026-11-15T20:58:05+00:00", "status": 404, "path": "raw/evidence_b1/c1f80babf50119e3.html", "source": "evidence_b1"}
+{"url": "https://www.zumper.com/address/793-post-rd-east-westport-ct-06880-usa", "retrieved_at": "2026-11-15T20:58:08+00:00", "status": 404, "path": "raw/evidence_b1/2338fbb3f5c8c93a.html", "source": "evidence_b1"}
+{"url": "https://www.zumper.com/address/100-ave-g-bayonne-nj-07002-usa", "retrieved_at": "2026-11-15T20:58:10+00:00", "status": 404, "path": "raw/evidence_b1/010cb80f4ee5d5a3.html", "source": "evidence_b1"}
