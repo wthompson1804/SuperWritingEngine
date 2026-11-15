@@ -6649,7 +6649,8 @@
 "grid_zcta": "06470",
 "drive_min": 101.7,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:34:47+00:00"
 },
 "ridgefield-ct": {
 "name": "Ridgefield",
@@ -6750,7 +6751,7 @@
 "grid_zcta": "06784",
 "drive_min": 102.1,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "heritage-hills-ny": {
 "name": "Heritage Hills",
@@ -6922,7 +6923,8 @@
 "grid_zcta": "12543",
 "drive_min": 102.8,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:35:00+00:00"
 },
 "montgomery-ny": {
 "name": "Montgomery",
@@ -7395,7 +7397,8 @@
 "grid_zcta": "06483",
 "drive_min": 102.7,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:34:53+00:00"
 },
 "wallingford-ct": {
 "name": "Wallingford",
@@ -7648,7 +7651,8 @@
 "grid_zcta": "12524",
 "drive_min": 102.8,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:34:58+00:00"
 },
 "tillson-ny": {
 "name": "Tillson",
@@ -7860,7 +7864,7 @@
 "grid_zcta": "11942",
 "drive_min": 101.9,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "quogue-ny": {
 "name": "Quogue",
@@ -8495,7 +8499,8 @@
 "grid_zcta": "08691",
 "drive_min": 102.2,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:34:49+00:00"
 },
 "florence-township-nj": {
 "name": "Florence Township",
@@ -8551,7 +8556,7 @@
 "grid_zcta": "08550",
 "drive_min": 102.3,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "penndel-pa": {
 "name": "Penndel",
@@ -8782,7 +8787,8 @@
 "grid_zcta": "10925",
 "drive_min": 101.6,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:34:42+00:00"
 },
 "southfields-ny": {
 "name": "Southfields",
@@ -10403,7 +10409,8 @@
 "grid_zcta": "07750",
 "drive_min": 101.0,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:34:36+00:00"
 },
 "pawling-ny": {
 "name": "Pawling",
@@ -10446,7 +10453,8 @@
 "grid_zcta": "12553",
 "drive_min": 101.3,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:34:38+00:00"
 },
 "cranbury-township-nj": {
 "name": "Cranbury Township",
@@ -10606,7 +10614,7 @@
 "grid_zcta": "07461",
 "drive_min": 103.1,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "sussex-nj": {
 "name": "Sussex",
@@ -10620,7 +10628,8 @@
 "grid_zcta": "07461",
 "drive_min": 103.1,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:35:04+00:00"
 },
 "lafayette-township-nj": {
 "name": "Lafayette Township",
@@ -10648,7 +10657,7 @@
 "grid_zcta": "07461",
 "drive_min": 103.1,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "branchville-nj": {
 "name": "Branchville",
@@ -10774,7 +10783,8 @@
 "grid_zcta": "07723",
 "drive_min": 102.3,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:34:51+00:00"
 },
 "interlaken-nj": {
 "name": "Interlaken",
@@ -10929,7 +10939,8 @@
 "grid_zcta": "08826",
 "drive_min": 103.4,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:35:07+00:00"
 },
 "belvidere-nj": {
 "name": "Belvidere",
@@ -11155,7 +11166,8 @@
 "grid_zcta": "07720",
 "drive_min": 103.5,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:35:09+00:00"
 },
 "avon-by-the-sea-nj": {
 "name": "Avon-by-the-Sea",
@@ -11280,6 +11292,118 @@
 "grid_km": 1.77,
 "grid_zcta": "08525",
 "drive_min": 112.3,
+"in_area": true,
+"status": "new"
+},
+"middlebury-ct": {
+"name": "Middlebury",
+"state": "CT",
+"lat": 41.5278742,
+"lng": -73.1276107,
+"listing_count": 0,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 0.52,
+"grid_zcta": "06762",
+"drive_min": 114.8,
+"in_area": true,
+"status": "new"
+},
+"mansfield-nj": {
+"name": "Mansfield",
+"state": "NJ",
+"lat": 40.0713106,
+"lng": -74.7220017,
+"listing_count": 0,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 1.44,
+"grid_zcta": "08022",
+"drive_min": 114.6,
+"in_area": true,
+"status": "new"
+},
+"waterbury-ct": {
+"name": "Waterbury",
+"state": "CT",
+"lat": 41.5581525,
+"lng": -73.0514965,
+"listing_count": 134,
+"studios": 4,
+"onebeds": 19,
+"grid_km": 0.5,
+"grid_zcta": "06702",
+"drive_min": 118.0,
+"in_area": true,
+"status": "new"
+},
+"milford-pa": {
+"name": "Milford",
+"state": "PA",
+"lat": 41.322316,
+"lng": -74.8023882,
+"listing_count": 14,
+"studios": 0,
+"onebeds": 1,
+"grid_km": 7.56,
+"grid_zcta": "07827",
+"drive_min": 115.4,
+"in_area": true,
+"status": "new"
+},
+"dingmans-ferry-pa": {
+"name": "Dingmans Ferry",
+"state": "PA",
+"lat": 41.2200946,
+"lng": -74.8712799,
+"listing_count": 2,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 13.58,
+"grid_zcta": "07827",
+"drive_min": 115.4,
+"in_area": false,
+"status": "new"
+},
+"easton-pa": {
+"name": "Easton",
+"state": "PA",
+"lat": 40.6893886115081,
+"lng": -75.2200137663135,
+"listing_count": 104,
+"studios": 5,
+"onebeds": 27,
+"grid_km": 6.5,
+"grid_zcta": "08865",
+"drive_min": 111.9,
+"in_area": true,
+"status": "new"
+},
+"west-easton-pa": {
+"name": "West Easton",
+"state": "PA",
+"lat": 40.6755345150001,
+"lng": -75.23631,
+"listing_count": 1,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 8.36,
+"grid_zcta": "08865",
+"drive_min": 111.9,
+"in_area": false,
+"status": "new"
+},
+"manasquan-nj": {
+"name": "Manasquan",
+"state": "NJ",
+"lat": 40.1151739950001,
+"lng": -74.03460552,
+"listing_count": 40,
+"studios": 0,
+"onebeds": 1,
+"grid_km": 1.67,
+"grid_zcta": "08736",
+"drive_min": 108.3,
 "in_area": true,
 "status": "new"
 }
