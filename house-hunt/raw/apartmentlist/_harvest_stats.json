@@ -7,8 +7,8 @@
   "fetch_max_low": 2850.0,
   "minutes": 44.0
  },
- "srp_pages": 556,
- "detail_pages": 1290,
+ "srp_pages": 667,
+ "detail_pages": 1381,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -813,6 +813,198 @@
    "drive_min": 35.0,
    "props": 20,
    "rows": 31
+  },
+  {
+   "city": "nj/north-brunswick",
+   "drive_min": 83.1,
+   "props": 1,
+   "rows": 2
+  },
+  {
+   "city": "nj/orange",
+   "drive_min": 51.1,
+   "props": 13,
+   "rows": 26
+  },
+  {
+   "city": "nj/parsippany-troy-hills",
+   "drive_min": 62.0,
+   "props": 13,
+   "rows": 183
+  },
+  {
+   "city": "nj/piscataway",
+   "drive_min": 79.7,
+   "props": 4,
+   "rows": 19
+  },
+  {
+   "city": "nj/south-orange",
+   "drive_min": 55.1,
+   "props": 4,
+   "rows": 8
+  },
+  {
+   "city": "nj/verona",
+   "drive_min": 55.4,
+   "props": 9,
+   "rows": 8
+  },
+  {
+   "city": "nj/west-orange",
+   "drive_min": 56.5,
+   "props": 3,
+   "rows": 5
+  },
+  {
+   "city": "nj/old-tappan",
+   "drive_min": 50.5,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "nj/north-haledon",
+   "drive_min": 51.6,
+   "props": 2,
+   "rows": 7
+  },
+  {
+   "city": "nj/prospect-park",
+   "drive_min": 51.6,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ct/cos-cob",
+   "drive_min": 51.7,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "ny/commack",
+   "drive_min": 51.8,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/tarrytown",
+   "drive_min": 51.9,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "nj/franklin-lakes",
+   "drive_min": 52.1,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/islip",
+   "drive_min": 52.3,
+   "props": 3,
+   "rows": 1
+  },
+  {
+   "city": "ny/huntington-station",
+   "drive_min": 52.6,
+   "props": 2,
+   "rows": 1
+  },
+  {
+   "city": "ny/north-bay-shore",
+   "drive_min": 52.6,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/linden",
+   "drive_min": 53.1,
+   "props": 5,
+   "rows": 12
+  },
+  {
+   "city": "nj/montvale",
+   "drive_min": 53.7,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "nj/oakland",
+   "drive_min": 54.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/hauppauge",
+   "drive_min": 54.0,
+   "props": 2,
+   "rows": 13
+  },
+  {
+   "city": "ny/nyack",
+   "drive_min": 54.1,
+   "props": 7,
+   "rows": 7
+  },
+  {
+   "city": "ny/east-northport",
+   "drive_min": 54.5,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "ny/nanuet",
+   "drive_min": 55.6,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/central-islip",
+   "drive_min": 55.7,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "nj/kenilworth",
+   "drive_min": 56.0,
+   "props": 3,
+   "rows": 5
+  },
+  {
+   "city": "ny/pearl-river",
+   "drive_min": 56.4,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "nj/roselle-park",
+   "drive_min": 56.5,
+   "props": 2,
+   "rows": 4
+  },
+  {
+   "city": "nj/carteret",
+   "drive_min": 57.0,
+   "props": 3,
+   "rows": 7
+  },
+  {
+   "city": "nj/roselle",
+   "drive_min": 57.3,
+   "props": 4,
+   "rows": 6
+  },
+  {
+   "city": "ny/ossining",
+   "drive_min": 57.5,
+   "props": 3,
+   "rows": 2
+  },
+  {
+   "city": "nj/lincoln-park",
+   "drive_min": 57.7,
+   "props": 1,
+   "rows": 3
   }
  ],
  "cities_unmatched_far": [
@@ -839,12 +1031,28 @@
   {
    "city": "nj/hamilton-township",
    "km_to_grid": 0.1
+  },
+  {
+   "city": "nj/riverside",
+   "km_to_grid": 10.9
+  },
+  {
+   "city": "pa/cranberry-township",
+   "km_to_grid": 418.0
+  },
+  {
+   "city": "pa/fernway",
+   "km_to_grid": 420.3
+  },
+  {
+   "city": "pa/fox-run",
+   "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2114,
- "props_skipped_lowprice_gt_3000": 824,
+ "props_discovered": 2215,
+ "props_skipped_lowprice_gt_3000": 834,
  "reasons": {
-  "ok": 1281,
+  "ok": 1372,
   "no_unit_le_3000": 8,
   "no_listing_object": 1
  },

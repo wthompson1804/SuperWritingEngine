@@ -15,3 +15,10 @@ targets 325/1260 {'ok': 325} rows=10182 fetched=318
 targets 350/1260 {'ok': 350} rows=10182 fetched=343
 targets 375/1260 {'ok': 375} rows=10185 fetched=368
 targets 400/1260 {'ok': 400} rows=10185 fetched=393
+targets 425/1260 {'ok': 425} rows=10185 fetched=418
+targets 450/1260 {'ok': 450} rows=10185 fetched=443
+targets 475/1260 {'ok': 475} rows=10229 fetched=468
+targets 500/1260 {'ok': 500} rows=10264 fetched=493
+targets 525/1260 {'ok': 525} rows=10264 fetched=518
+targets 550/1260 {'ok': 550} rows=10264 fetched=543
+targets 575/1260 {'ok': 575} rows=10268 fetched=568

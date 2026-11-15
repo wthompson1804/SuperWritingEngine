@@ -1,0 +1,8 @@
+User-agent: *
+      Crawl-delay: 10
+      Disallow: /cgi-bin/
+      Disallow: /tmp/
+      Disallow: *?source=
+      Disallow: *?mobileset=
+
+      sitemap: https://www.loftsatbeacon.com/sitemap.xml

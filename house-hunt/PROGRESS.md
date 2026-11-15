@@ -59,6 +59,19 @@ Old Phase 1 leftovers (`scripts/p1_*.py`, `data/metrics/`) are partial; only `ac
 
 ## Log
 
+### 2026-11-15, session 1 (night): checkpoint A feedback from Will
+- **Rejected** grouping years by drive band and setting. Years must group by **lifestyle, not location** ("places that rhyme").
+  Interim analysis in `docs/LIFESTYLE_ANALYSIS.md`; rerun after the regional agents finish, then bring names to Will.
+- **Anything that passes the gates stays** in the data. A separate **selection algorithm** must cut each neighborhood to the
+  best-value 10 (optimizing the trade-offs). Not written yet: design it, get Will's approval, implement.
+- **Thorough over fast**: pull Long Island, Hudson Valley and Connecticut inventory. Five building-first region agents launched
+  (`docs/REGION_AGENT_BRIEF.md`; outputs `data/listings_raw/region_*.csv`, `data/reference/region_buildings_*.csv`).
+- Elevator may be inferred for buildings of 6+ floors (asterisk). NYC elevator status comes from PLUTO building class.
+- Pipeline order to rerun after new listings: `gates.py` → `enrich_nyc_pluto.py` → `gates.py` → `enrich_units.py` →
+  `build_neighborhoods.py` → `lifestyle_features.py`.
+- State at this point: 610 units in 271 buildings pass every gate incl. all-in ≤ $3,000; 103 neighborhoods, 40 with 3+ places.
+- Still open: MTA toll rates (Will to paste), Reddit API key (Will), Craigslist is manual-only.
+
 ### 2026-11-15, session 1 (later)
 - Will's later decisions: move-in window now through **Dec 15**; tours from **Nov 22**; all-in cap **$3,000** incl. estimated utilities;
   dogs must be explicitly allowed (limit ≥ 40 lb); **elevator buildings only, no ground-floor units**; Queens first excluded, then **re-included**;
