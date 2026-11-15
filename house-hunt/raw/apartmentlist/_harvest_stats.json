@@ -7,8 +7,8 @@
   "fetch_max_low": 2850.0,
   "minutes": 44.0
  },
- "srp_pages": 372,
- "detail_pages": 905,
+ "srp_pages": 376,
+ "detail_pages": 910,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -543,13 +543,19 @@
    "drive_min": 42.8,
    "props": 1,
    "rows": 1
+  },
+  {
+   "city": "ny/harrison",
+   "drive_min": 42.9,
+   "props": 6,
+   "rows": 18
   }
  ],
  "cities_unmatched_far": [],
- "props_discovered": 1698,
- "props_skipped_lowprice_gt_3000": 793,
+ "props_discovered": 1704,
+ "props_skipped_lowprice_gt_3000": 794,
  "reasons": {
-  "ok": 898,
+  "ok": 903,
   "no_unit_le_3000": 7
  },
  "blocked": null,

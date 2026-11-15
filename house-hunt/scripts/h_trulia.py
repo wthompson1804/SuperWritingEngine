@@ -803,6 +803,46 @@ def do_detail(u: str, state, rows, a) -> None:
                            "rows": len(new)}
 
 
+def addr_key(r: dict) -> str:
+    a = re.sub(r"[^a-z0-9 ]", "", (r.get("address") or "").lower()).strip()
+    return f"{a}|{r.get('zip')}" if a and "not disclosed" not in a else ""
+
+
+def propagate_building_facts(rows: dict) -> int:
+    """Copy building-level facts to other rows at the same street address and ZIP, where they are still unknown.
+
+    elevator=yes comes from any fetched page at the address (it is a fact about the building).
+    dogs / weight limit / pet rent come only from a /building/ page (a community-wide policy), never from
+    another single unit's listing. Every copied value is flagged in notes with the page it came from.
+    """
+    elev, pets = {}, {}
+    for r in rows.values():
+        k = addr_key(r)
+        if not k or r["detail_level"] == "card":
+            continue
+        if r["elevator"] == "yes" and "elevator copied from" not in r["notes"]:
+            elev.setdefault(k, r["url"])
+        if r["detail_level"].startswith("building_") and r["dogs"] in ("yes", "no"):
+            pets.setdefault(k, r)
+    n = 0
+    for r in rows.values():
+        k = addr_key(r)
+        if not k:
+            continue
+        if r["elevator"] == "unknown" and k in elev and elev[k] != r["url"]:
+            r["elevator"] = "yes"
+            r["notes"] = (r["notes"] + "; " if r["notes"] else "") + f"elevator copied from {elev[k]}"
+            n += 1
+        b = pets.get(k)
+        if b and r["dogs"] == "unknown" and b["url"] != r["url"]:
+            for c in ("dogs", "dog_weight_limit_lb", "pet_rent"):
+                r[c] = b[c]
+            r["dog_policy_text"] = b["dog_policy_text"]
+            r["notes"] = (r["notes"] + "; " if r["notes"] else "") + f"dog policy copied from building page {b['url']}"
+            n += 1
+    return n
+
+
 TARGET_RE = re.compile(r"^https://www\.trulia\.com(/(?:home|building)/[A-Za-z0-9._~%-]+)/?$")
 
 
@@ -839,6 +879,7 @@ def run_targets(state, rows, a, deadline) -> None:
             save_state(state)
             save_rows(rows, order)
             print(f"targets {i}/{len(paths)} {tally} rows={len(rows)} fetched={N_FETCHED}", flush=True)
+    print(f"targets: building facts copied to {propagate_building_facts(rows)} same-address fields", flush=True)
     save_state(state)
     save_rows(rows, order)
 
