@@ -111,6 +111,24 @@ def main():
         pat = sys.argv[3] if len(sys.argv) > 3 else KEY
         for x in snippets(s, pat):
             print(" -", x)
+    elif cmd == "zb":  # compact view of a Zumper building/listing page
+        try:
+            t, m = fetch(sys.argv[2])
+        except (C.BotWall, RuntimeError) as e:
+            print("BLOCKED/ERR:", str(e)[:200])
+            return
+        s = C.strip_tags(t)
+        print("status", m["status"], "| retrieved", m["retrieved_at"], "| raw", m["path"])
+        i = s.find("Updated ")
+        print("HEAD:", s[i:i + 420] if i > 0 else s[:300])
+        a, b = s.find("Floor plans All"), s.find("Amenities for")
+        fp = s[a:b] if 0 < a < b else ""
+        fp = re.sub(r"Check availability .*?(?=(\S+ ){0,8}?(Studio|\d bed) \d)", "| ", fp)
+        print("PLANS:", fp[:1800])
+        c = s.find("Building details", b)
+        print("AMEN/POLICY:", s[b:c][:2200])
+        for x in snippets(s, r"(?i)elevator|\bdogs?\b|\bpets?\b|\blbs?\b|stories|floors\b|year built|available (now|\w+ \d)", 90, 14):
+            print(" -", x)
     elif cmd == "geo":
         print(geo(sys.argv[2]))
     elif cmd == "unit":

@@ -7,8 +7,8 @@
   "fetch_max_low": 2850.0,
   "minutes": 44.0
  },
- "srp_pages": 667,
- "detail_pages": 1381,
+ "srp_pages": 692,
+ "detail_pages": 1451,
  "cities_done": [
   {
    "city": "ny/queens",
@@ -1005,6 +1005,42 @@
    "drive_min": 57.7,
    "props": 1,
    "rows": 3
+  },
+  {
+   "city": "ct/stamford",
+   "drive_min": 57.9,
+   "props": 57,
+   "rows": 152
+  },
+  {
+   "city": "nj/cranford",
+   "drive_min": 58.4,
+   "props": 5,
+   "rows": 5
+  },
+  {
+   "city": "nj/pompton-lakes",
+   "drive_min": 58.4,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "nj/rahway",
+   "drive_min": 58.4,
+   "props": 3,
+   "rows": 8
+  },
+  {
+   "city": "nj/caldwell",
+   "drive_min": 58.9,
+   "props": 7,
+   "rows": 7
+  },
+  {
+   "city": "ny/congers",
+   "drive_min": 59.9,
+   "props": 3,
+   "rows": 3
   }
  ],
  "cities_unmatched_far": [
@@ -1049,10 +1085,10 @@
    "km_to_grid": 416.1
   }
  ],
- "props_discovered": 2215,
- "props_skipped_lowprice_gt_3000": 834,
+ "props_discovered": 2293,
+ "props_skipped_lowprice_gt_3000": 842,
  "reasons": {
-  "ok": 1372,
+  "ok": 1442,
   "no_unit_le_3000": 8,
   "no_listing_object": 1
  },

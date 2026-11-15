@@ -1,0 +1,19 @@
+User-Agent: *
+Disallow: /page42042023.html
+Disallow: /header
+Disallow: /page42075001.html
+Disallow: /footer
+Disallow: /tilda/form*
+Disallow: /tilda/rec*
+Disallow: /tilda/click*
+Disallow: /tilda/scroll*
+Disallow: /tilda/popup*
+Disallow: /tilda/cart*
+Disallow: /tilda/product*
+Disallow: /tilda/event*
+Disallow: /*_escaped_fragment_*
+Disallow:
+
+
+Sitemap: https://edgewater-beacon.com/sitemap.xml
+Host: https://edgewater-beacon.com

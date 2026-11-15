@@ -22,3 +22,5 @@ targets 500/1260 {'ok': 500} rows=10264 fetched=493
 targets 525/1260 {'ok': 525} rows=10264 fetched=518
 targets 550/1260 {'ok': 550} rows=10264 fetched=543
 targets 575/1260 {'ok': 575} rows=10268 fetched=568
+targets 600/1260 {'ok': 600} rows=10268 fetched=593
+targets 625/1260 {'ok': 625} rows=10300 fetched=618
