@@ -189,7 +189,7 @@ def digest(S: pd.DataFrame, numbered: dict, full=False) -> str:
             out.append(f"#{numbered[r.listing_id]} unit '{g(r, 'unit')}' {g(r, 'source_site')} rent {g(r, 'listed_rent')} all-in {g(r, 'all_in')} avail {g(r, 'available_date')} | rules: {g(r, 'confirm_what') or 'nothing open'} | "
                        f"elev={g(r, 'elevator')}({g(r, 'elevator_basis')}) floor={g(r, 'unit_floor')}({g(r, 'unit_floor_basis')}/{g(r, 'unit_floor_label_kind')}) dogs={g(r, 'dogs_allowed')}({g(r, 'dogs_allowed_basis')}) "
                        f"wl={g(r, 'dog_weight_limit_lb')} small={'y' if g(r, 'dog_size_only') else ''} live={g(r, 'live_status')} lease={g(r, 'price_lease_months')} age={g(r, 'listing_age_days')} "
-                       f"policy='{g(r, 'dog_policy_text')[:110]}' notes='{g(r, 'notes')[:160]}'")
+                       f"policy='{g(r, 'dog_policy_text')[:90]}' notes='{g(r, 'notes')[:110]}'")
         skipped = {"facts": 0, "items": 0}
         for tag, fam, file, text, r in rows:
             text = re.sub(r"\s+", " ", text)
@@ -199,7 +199,9 @@ def digest(S: pd.DataFrame, numbered: dict, full=False) -> str:
             if fam == "items" and not full and not ITEM_WORDS.search(text):
                 skipped["items"] += 1
                 continue
-            lim = {"live_check": 700, "confirm": 380, "facts": 300, "items": 220, "nyc": 260}[fam]
+            lim = {"live_check": 600, "confirm": 300, "facts": 230, "items": 170, "nyc": 200}[fam]
+            if fam == "confirm" and r.status == "confirmed" and r.fact.lower().startswith("dog_weight"):
+                lim = 110
             out.append(f"  {tag} {file.replace('_batch_', ':').replace('.csv', '')} {text[:lim]}")
         nn = evidence(b)["non_nyc"]
         out.append(f"  (not printed: {skipped['facts']} routine cost / amenity facts with no caution word, {skipped['items']} review items that do not mention an elevator, stairs, dogs, age, income, co-op or ground floor"
