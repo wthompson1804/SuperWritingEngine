@@ -5753,7 +5753,8 @@
 "grid_zcta": "06897",
 "drive_min": 77.4,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:30:53+00:00"
 },
 "weston-ct": {
 "name": "Weston",
@@ -5781,7 +5782,7 @@
 "grid_zcta": "06890",
 "drive_min": 75.9,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "fairfield-ct": {
 "name": "Fairfield",
@@ -5795,7 +5796,8 @@
 "grid_zcta": "06890",
 "drive_min": 75.9,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:30:45+00:00"
 },
 "bridgeport-stamford-ct": {
 "name": "Bridgeport-Stamford",
@@ -5809,7 +5811,7 @@
 "grid_zcta": "06824",
 "drive_min": 77.7,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "bedford-ny": {
 "name": "Bedford",
@@ -6663,7 +6665,7 @@
 "grid_zcta": "10509",
 "drive_min": 76.7,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "bridgewater-ct": {
 "name": "Bridgewater",
@@ -7287,7 +7289,7 @@
 "grid_zcta": "07803",
 "drive_min": 78.7,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "east-haven-ct": {
 "name": "East Haven",
@@ -8618,7 +8620,8 @@
 "grid_zcta": "07421",
 "drive_min": 77.0,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:30:47+00:00"
 },
 "stony-brook-university-ny": {
 "name": "Stony Brook University",
@@ -8705,7 +8708,8 @@
 "grid_zcta": "10547",
 "drive_min": 77.4,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:30:51+00:00"
 },
 "shrub-oak-ny": {
 "name": "Shrub Oak",
@@ -8820,7 +8824,7 @@
 "grid_zcta": "08872",
 "drive_min": 77.7,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "keyport-nj": {
 "name": "Keyport",
@@ -8905,7 +8909,8 @@
 "grid_zcta": "08882",
 "drive_min": 78.4,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:30:58+00:00"
 },
 "edison-nj": {
 "name": "Edison",
@@ -9080,7 +9085,7 @@
 "grid_zcta": "10922",
 "drive_min": 78.7,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "warren-nj": {
 "name": "Warren",
@@ -9194,7 +9199,7 @@
 "grid_zcta": "11719",
 "drive_min": 79.0,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "yaphank-ny": {
 "name": "Yaphank",
@@ -9310,7 +9315,8 @@
 "grid_zcta": "08846",
 "drive_min": 79.5,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:31:05+00:00"
 },
 "piscataway-township-nj": {
 "name": "Piscataway Township",
@@ -9381,7 +9387,8 @@
 "grid_zcta": "07856",
 "drive_min": 78.3,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:30:56+00:00"
 },
 "jefferson-nj": {
 "name": "Jefferson",
@@ -9466,7 +9473,8 @@
 "grid_zcta": "08850",
 "drive_min": 79.0,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:31:02+00:00"
 },
 "middle-island-ny": {
 "name": "Middle Island",
@@ -9494,7 +9502,7 @@
 "grid_zcta": "11766",
 "drive_min": 77.3,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "port-jefferson-ny": {
 "name": "Port Jefferson",
@@ -9564,7 +9572,8 @@
 "grid_zcta": "11950",
 "drive_min": 78.6,
 "in_area": true,
-"status": "new"
+"status": "done",
+"searched_at": "2026-11-15T18:31:00+00:00"
 },
 "miller-place-ny": {
 "name": "Miller Place",
@@ -9578,7 +9587,7 @@
 "grid_zcta": "11766",
 "drive_min": 77.3,
 "in_area": true,
-"status": "new"
+"status": "skipped_no_inventory"
 },
 "north-brunswick-township-nj": {
 "name": "North Brunswick Township",
@@ -9913,6 +9922,146 @@
 "grid_km": 1.89,
 "grid_zcta": "10524",
 "drive_min": 85.5,
+"in_area": true,
+"status": "new"
+},
+"vernon-township-nj": {
+"name": "Vernon Township",
+"state": "NJ",
+"lat": 41.1947018,
+"lng": -74.4937943,
+"listing_count": 0,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 0.44,
+"grid_zcta": "07462",
+"drive_min": 92.2,
+"in_area": true,
+"status": "new"
+},
+"hardyston-township-nj": {
+"name": "Hardyston Township",
+"state": "NJ",
+"lat": 41.1137037,
+"lng": -74.5540506,
+"listing_count": 0,
+"studios": null,
+"onebeds": null,
+"grid_km": 2.94,
+"grid_zcta": "07416",
+"drive_min": 83.8,
+"in_area": true,
+"status": "new"
+},
+"hamburg-nj": {
+"name": "Hamburg",
+"state": "NJ",
+"lat": 41.1534294,
+"lng": -74.5762713,
+"listing_count": 8,
+"studios": 0,
+"onebeds": 2,
+"grid_km": 0.53,
+"grid_zcta": "07419",
+"drive_min": 89.4,
+"in_area": true,
+"status": "new"
+},
+"ogdensburg-nj": {
+"name": "Ogdensburg",
+"state": "NJ",
+"lat": 41.0817636,
+"lng": -74.5923824,
+"listing_count": 1,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 0.48,
+"grid_zcta": "07439",
+"drive_min": 87.7,
+"in_area": true,
+"status": "new"
+},
+"sparta-township-nj": {
+"name": "Sparta Township",
+"state": "NJ",
+"lat": 41.0334562,
+"lng": -74.6363588,
+"listing_count": 0,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 1.63,
+"grid_zcta": "07871",
+"drive_min": 87.9,
+"in_area": true,
+"status": "new"
+},
+"chester-nj": {
+"name": "Chester",
+"state": "NJ",
+"lat": 40.7842667,
+"lng": -74.6968284,
+"listing_count": 3,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 1.16,
+"grid_zcta": "07930",
+"drive_min": 91.8,
+"in_area": true,
+"status": "new"
+},
+"jamesburg-nj": {
+"name": "Jamesburg",
+"state": "NJ",
+"lat": 40.3526079,
+"lng": -74.4401513,
+"listing_count": 6,
+"studios": 0,
+"onebeds": 2,
+"grid_km": 2.13,
+"grid_zcta": "08831",
+"drive_min": 87.9,
+"in_area": true,
+"status": "new"
+},
+"monroe-township-nj": {
+"name": "Monroe Township",
+"state": "NJ",
+"lat": 40.336419,
+"lng": -74.4330474,
+"listing_count": 2,
+"studios": 0,
+"onebeds": 0,
+"grid_km": 0.24,
+"grid_zcta": "08831",
+"drive_min": 87.9,
+"in_area": true,
+"status": "new"
+},
+"somerville-nj": {
+"name": "Somerville",
+"state": "NJ",
+"lat": 40.5742696,
+"lng": -74.60988,
+"listing_count": 127,
+"studios": 2,
+"onebeds": 12,
+"grid_km": 2.16,
+"grid_zcta": "08807",
+"drive_min": 81.8,
+"in_area": true,
+"status": "new"
+},
+"raritan-nj": {
+"name": "Raritan",
+"state": "NJ",
+"lat": 40.5695474,
+"lng": -74.6329363,
+"listing_count": 18,
+"studios": 0,
+"onebeds": 3,
+"grid_km": 1.12,
+"grid_zcta": "08869",
+"drive_min": 84.2,
 "in_area": true,
 "status": "new"
 }

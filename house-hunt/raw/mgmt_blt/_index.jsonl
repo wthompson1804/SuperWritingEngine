@@ -43,3 +43,7 @@
 {"url": "https://bltliveworkplay.com/apartments/stamford/opus/", "retrieved_at": "2026-11-15T18:30:40+00:00", "status": 200, "path": "raw/mgmt_blt/c56f22900be95d97.html", "source": "mgmt_blt"}
 {"url": "https://bltliveworkplay.com/apartments/stamford/opus/availability/", "retrieved_at": "2026-11-15T18:30:42+00:00", "status": 200, "path": "raw/mgmt_blt/6162f01bd02a31be.html", "source": "mgmt_blt"}
 {"url": "https://sightmap.com/embed/8epmy0z0p6d", "retrieved_at": "2026-11-15T18:30:43+00:00", "status": 200, "path": "raw/mgmt_blt/1b441a3eb70237ed.html", "source": "mgmt_blt"}
+{"url": "https://sightmap.com/app/api/v1/8epmyroep6d/sightmaps/25333", "retrieved_at": "2026-11-15T18:30:49+00:00", "status": 200, "path": "raw/mgmt_blt/bbad306332cbc441.json", "source": "mgmt_blt"}
+{"url": "https://bltliveworkplay.com/apartments/stamford/penthouse-suites/", "retrieved_at": "2026-11-15T18:30:50+00:00", "status": 200, "path": "raw/mgmt_blt/1ad2979dfb9e6557.html", "source": "mgmt_blt"}
+{"url": "https://bltliveworkplay.com/apartments/stamford/penthouse-suites/availability/", "retrieved_at": "2026-11-15T18:30:52+00:00", "status": 404, "path": "raw/mgmt_blt/5426d204b671a57e.html", "source": "mgmt_blt"}
+{"url": "https://bltliveworkplay.com/apartments/jersey-city/beaconjc/availability/", "retrieved_at": "2026-11-15T18:31:07+00:00", "status": 404, "path": "raw/mgmt_blt/499fe24bd836e882.html", "source": "mgmt_blt"}

@@ -48,7 +48,9 @@ def main() -> None:
         stats["communities"] += 1
         text = strip_tags(html)
         name = re.search(r"<title>\s*([^<|:]+)", html)
-        name = info.get("asset_name") or (name.group(1).strip() if name else url)
+        title = name.group(1).strip() if name else url
+        asset = info.get("asset_name") or ""
+        name = title if not asset or asset.lower() in title.lower() else f"{title} ({asset})"
         addr = info.get("address", {})
         z = (addr.get("zip") or "")[:5]
         if z and z not in g:
