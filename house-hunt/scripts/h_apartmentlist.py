@@ -280,7 +280,7 @@ def pet_facts(L):
             bits = [f"{k}: {txt(g.get(k))}" for k in ("limit", "restrictions", "rent", "fee", "deposit") if txt(g.get(k))]
             if bits:
                 parts.append(grp + " {" + "; ".join(bits) + "}")
-    pet_am = [a for a in dict.fromkeys(comm) if re.search(r"dog|cat|pet", a, re.I)]
+    pet_am = [a for a in dict.fromkeys(comm) if re.search(r"\b(dogs?|cats?|pets?)\b", a, re.I)]
     if pet_am:
         parts.append("amenities: " + ", ".join(pet_am))
     policy = " | ".join(parts)

@@ -1,0 +1,7 @@
+{
+ "url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/NY0355800/V?from=01-2023&to=12-2025",
+ "retrieved_at": "2026-11-15T18:41:33+00:00",
+ "status": 200,
+ "path": "raw/fbi_cde/e9e152c751b03f30.json",
+ "source": "fbi_cde"
+}
