@@ -166,7 +166,10 @@ def main():
         lines.append(json.dumps([{"line": a, "amount": round(b), "basis": c} for a, b, c in items]))
         allin.append(round(total)); star.append("yes" if s else "")
     P["all_in"] = allin; P["all_in_lines"] = lines; P["all_in_asterisk"] = star
-    P["unit_status"] = P.all_in.map(lambda x: "pass" if x <= CAP else "fail_all_in")
+    # The cost gate is decided later by scripts/all_in.py on the master tables (known fees, stated utilities,
+    # net-effective rent). Every gate-passing unit goes forward; the rough figure here is kept only as `all_in_rough`.
+    P["all_in_rough"] = P.all_in
+    P["unit_status"] = "pass"
     P.to_csv(DATA / "units.csv", index=False)
     print(P.unit_status.value_counts().to_dict(), "buildings:", P[P.unit_status == "pass"].addr_key.nunique())
     print(f"coordinates: {G.coord_basis.value_counts().to_dict()}; lookups redone at a corrected coordinate: {len(REDONE)} address keys")
