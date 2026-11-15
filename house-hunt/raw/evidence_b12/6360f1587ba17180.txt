@@ -1,0 +1,12 @@
+User-agent: * 
+Disallow:
+
+Sitemap: https://www.ctpublic.org/sitemap.xml
+Sitemap: https://www.ctpublic.org/sitemap-latest.xml
+Sitemap: https://www.ctpublic.org/news-sitemap-content.xml
+/login
+/all-tv-shows
+/live-tv
+/profile
+/auth**
+/shows/**
