@@ -41,3 +41,9 @@ Implemented in `scripts/lifestyle_groups.py` (`safety_cut`, `property_flag`, `vi
 First run: 6 neighborhoods cut (14 units): Mott Haven-Port Morris, Tremont, Ocean Hill, East Harlem (North), Mount Hope,
 Norwood. Property flag: Harlem (South), Morris Park, Pelham Parkway-Van Nest, Flemington.
 The US, metro and local ratios stay in the data for context on the page.
+
+## Final rule (Will, 2026-11-15, later the same night)
+
+**No crime higher than Jamaica, property or violent; preferably below.** A neighborhood is cut when its violent rate
+exceeds 9.8 per 1,000 **or** its property rate exceeds 25.0 per 1,000. Lower rates rank higher. The property "flag only"
+version above is superseded.

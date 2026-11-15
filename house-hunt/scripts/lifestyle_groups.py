@@ -52,14 +52,15 @@ def main(refit=False):
     S = pd.read_csv(DATA / "neighborhood_safety.csv").set_index("hood_id")
     H = H.join(S[["violent", "violent_vs_us", "violent_vs_metro", "violent_vs_local", "motor_vehicle_theft", "property", "property_vs_us",
                   "motor_vehicle_theft_vs_us", "motor_vehicle_theft_vs_local", "police", "geography", "crime_year"]], rsuffix="_s")
-    # Will's safety rule (2026-11-15, replaces the two US-multiple filters): Jamaica (NYPD 103rd Precinct, where her
-    # parents live) is the yardstick. Violent crime above Jamaica's rate = cut. Property crime above Jamaica's = flag only.
+    # Will's safety rule (2026-11-15, final): Jamaica (NYPD 103rd Precinct, where her parents live) is the yardstick.
+    # Violent OR property crime above Jamaica's rate = cut. Lower is preferred (used in ranking).
     jam = S[S.police.astype(str).str.contains("103")].iloc[0]
     H["jamaica_violent"] = jam.violent; H["jamaica_property"] = jam.property
     H["violent_vs_jamaica"] = (H.violent / jam.violent).round(2)
     H["property_vs_jamaica"] = (H.property / jam.property).round(2)
-    H["safety_cut"] = H.violent > jam.violent
-    H["property_flag"] = H.property > jam.property
+    H["safety_cut"] = (H.violent > jam.violent) | (H.property > jam.property)   # Will, final: neither may exceed Jamaica
+    H["safety_cut_reason"] = np.where(H.violent > jam.violent, "violent above Jamaica", np.where(H.property > jam.property, "property above Jamaica", ""))
+    H["property_flag"] = False
     H["crime_filter_a"] = H.violent_vs_us < 1.5   # kept only to hold the group fit stable; not a gate
     cf = DATA / "reference" / "lifestyle_group_centres.csv"
     rf = DATA / "reference" / "lifestyle_fit_reference.csv"
