@@ -1,0 +1,7 @@
+{
+ "url": "https://www.njta.gov/wp-json/njta/v1/partials?slug=map%2Ftrip-details&tab=parkway&vehicle-type=1&green-discount=false&senior-discount=false&direction=nb&entrance=105&exit=127",
+ "retrieved_at": "2026-11-15T20:58:47+00:00",
+ "status": 200,
+ "path": "raw/njta/0561d77e30b7260f.html",
+ "source": "njta"
+}
