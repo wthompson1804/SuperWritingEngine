@@ -85,6 +85,8 @@ def unit(r):
         "vs_queens_diff": {k[4:-5]: g(k) for k in r.index if k.startswith("vsq_") and k.endswith("_diff")},
         "evidence": {"checked": bool(r.get("evidence_checked")), "avoid": g("ev_avoid") == "yes", "avoid_reasons": g("ev_reasons"), "pause_notes": g("ev_pause_notes"),
                      "items": j(r.get("ev_evidence_json"), []), "positive": j(r.get("ev_positive_json"), [])},
+        "confirm": {"asterisk": g("confirm_asterisk") == "yes", "what": g("confirm_what") if g("confirm_asterisk") == "yes" else None,
+                    "why": g("confirm_why") if g("confirm_asterisk") == "yes" else None},
         "confidence": g("confidence"), "tour_questions": qs,
         "links": {"listing": g("url"), "building": g("building_url")}, "source_site": g("source_site"),
         "live": {"status": g("live_status"), "checked_at": g("live_checked_at")}, "price_seen_at": g("last_seen"),
@@ -96,8 +98,8 @@ def main():
     G = pd.read_csv(DATA / "lifestyle_groups.csv").set_index("hood_id")
     E = pd.read_csv(DATA / "group_exchange.csv")
     held_ids = set(pd.read_csv(DATA / "needs_confirmation.csv").listing_id) if (DATA / "needs_confirmation.csv").exists() else set()
-    shown, avoid, held = R[R.shown], R[R.avoid_card], R[R.listing_id.isin(held_ids)]
-    # clean candidates that the evidence pass has not seen live yet: listed for the evidence agents, never shown as places
+    shown, avoid, held = R[R.shown], R[R.avoid_card], R[R.listing_id.isin(held_ids) & ~R.shown]
+    # candidates with an open gate fact that the evidence pass has not seen live yet: listed for the evidence agents, not shown as places
     live_ids = set(pd.read_csv(DATA / "needs_live_check.csv").listing_id) if (DATA / "needs_live_check.csv").exists() else set()
     awaiting = R[R.listing_id.isin(live_ids)]
     hoods = []
@@ -109,7 +111,7 @@ def main():
         num = lambda c: v(pd.to_numeric(g[c], errors="coerce").median()) if c in g else None
         hoods.append({"id": hid, "name": g.hood.iloc[0], "area": v(g.hood_area.iloc[0]), "state": v(g.state.iloc[0]) if "state" in g else None, "year": g.group_key.iloc[0],
                       "lat": v(pd.to_numeric(g.lat, errors="coerce").mean()), "lon": v(pd.to_numeric(g.lon, errors="coerce").mean()),
-                      "counts": {"shown": int(len(s)), "avoid": int(g.avoid_card.sum()), "held": int(g.listing_id.isin(held_ids).sum()), "ranked": int(len(g))},
+                      "counts": {"shown": int(len(s)), "avoid": int(g.avoid_card.sum()), "held": int((g.listing_id.isin(held_ids) & ~g.shown).sum()), "ranked": int(len(g))},
                       "all_in_range": [v(s.all_in.min()), v(s.all_in.max())] if len(s) else None, "sqft_median": num("sqft"),
                       "drive_min": num("drive_min_to"), "transit_min": num("transit_sat_median"), "toll_round_trip": num("toll_rt_ezpass"),
                       "safety": {"violent_per_1000": v(h.get("violent")), "property_per_1000": v(h.get("property")), "vehicle_theft_per_1000": v(h.get("motor_vehicle_theft")),
@@ -139,10 +141,11 @@ def main():
                     "anchor": {"name": "Mom and Dad (Jamaica station)", "lat": 40.699608, "lon": -73.808530},
                     "jamaica_yardstick": {"violent_per_1000": v(G.jamaica_violent.iloc[0]), "property_per_1000": v(G.jamaica_property.iloc[0])},
                     "queens_spectrum": spec, "weights": {"safety": 22, "building": 16, "cost": 12, "car": 12, "space": 12, "distance": 10, "dog": 8, "daily": 8},
-                    "counts": {"shown": int(len(shown)), "avoid": int(len(avoid)), "held": int(len(held)), "awaiting_live_check": int(len(awaiting)), "ranked": int(len(R))},
+                    "counts": {"shown": int(len(shown)), "shown_with_asterisk": int((shown.confirm_asterisk == "yes").sum()), "avoid": int(len(avoid)), "held": int(len(held)),
+                               "awaiting_live_check": int(len(awaiting)), "ranked": int(len(R))},
                     "notes": ["Drive times are free-flow estimates without traffic.", "An asterisk on rent means a special offer applies; see the rent terms.",
                               "A floor marked 'read from the unit number' is not stated on the page; confirm it on the tour.",
-                              "A place is shown only after its listing was seen live in the evidence pass.",
+                              "A place with an asterisk has one thing still to confirm (elevator, floor, dog policy or a live re-check of the listing); the text beside it says what and why.",
                               "Unknown cost lines count as $0 and are named on each receipt."]},
            "years": years, "neighborhoods": hoods, "units": [unit(r) for _, r in shown.iterrows()],
            "avoid": [unit(r) for _, r in avoid.iterrows()], "held": [unit(r) for _, r in held.iterrows()],

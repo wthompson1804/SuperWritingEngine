@@ -166,6 +166,15 @@ def main():
                        + pd.Series(np.where(dog_open, "Are dogs allowed? (the sources disagree); ", ""), index=u.index))
     u["tour_confirm"] = (pd.Series(np.where(floor_from_label_ok, "Confirm the floor; ", ""), index=u.index)
                          + pd.Series(np.where(dog_small, "Confirm the dog weight limit in pounds; ", ""), index=u.index)).str.rstrip("; ")
+    # the one open fact, in plain words, for the asterisk on the page (owner, 2026-11-15: a unit with exactly one open
+    # gate fact is shown with an asterisk instead of being held back)
+    fnum = s("unit_floor").str.replace(r"\.0$", "", regex=True)
+    u["confirm_what"] = np.where(inf_e, "elevator", np.where(inf_f, "floor", np.where(dog_open, "dogs allowed", "")))
+    u["confirm_why"] = np.where(inf_e, "No page states an elevator; the building's height suggests one.",
+                       np.where(inf_f & fb.eq("inferred"), "No page states the floor; " + fnum + " is only read from the unit number " + s("unit") + ".",
+                       np.where(inf_f, "The listing does not give the floor, and the unit number does not show it.",
+                       np.where(dog_open, "Two listing sites disagree on whether dogs are allowed, and the building's own page does not settle it.", ""))))
+    u["open_gate_facts"] = n_inf
     u["confidence"] = np.where(reasons != "", "sketchy", np.where(n_inf == 0, "clean", np.where(n_inf == 1, "one_inferred", "sketchy")))
     u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(n_inf >= 2, "two or more unconfirmed gate facts", ""))
     u[u.confidence == "sketchy"].to_csv(DATA / "excluded_sketchy.csv", index=False)
@@ -325,31 +334,34 @@ def main():
     u.loc[elig, "hood_rank"] = u[elig].groupby("hood_id").cumcount() + 1
     u["candidate"] = u.hood_rank <= CANDIDATES
     u["shown_pre_evidence"] = u.hood_rank <= SHOWN
-    # Shown = every gate fact confirmed or stated (clean), not an avoid building, and seen live in the evidence pass.
-    #   not clean            -> data/needs_confirmation.csv, with the question to ask
-    #   clean, no live check -> data/needs_live_check.csv: ranked candidates waiting for the evidence pass (W12)
+    # Shown (owner, 2026-11-15): not an avoid building, and at most ONE thing still open, counting the three gate facts
+    # (elevator, floor, dogs) and a missing live check alike. A unit with one open item is shown with an asterisk:
+    # confirm_asterisk = yes, confirm_what, confirm_why. Two or more open gate facts were already dropped as sketchy.
+    #   one open gate fact AND no live check -> data/needs_live_check.csv, not shown (W12)
+    #   data/needs_confirmation.csv           the phone-call list: every candidate with one open gate fact, shown or not
     is_avoid = u.ev_avoid.eq("yes")
     clean = u.confidence.eq("clean")
-    cand = clean & ~is_avoid
-    u["nth_clean_in_building"] = np.nan
-    u.loc[cand, "nth_clean_in_building"] = u[cand].groupby("building_id").cumcount() + 1
-    cand2 = cand & (u.nth_clean_in_building <= MAX_PER_BUILDING)
-    u["clean_rank"] = np.nan
-    u.loc[cand2, "clean_rank"] = u[cand2].groupby("hood_id").cumcount() + 1
-    showable = cand & u.live_ok
+    no_live = ~u.live_ok
+    u["open_items"] = u.open_gate_facts + no_live.astype(int)
+    live_txt = np.where(u.live_status.fillna("").astype(str).eq("blocked"), "The listing page could not be opened in the evidence pass; price and availability are as first collected.",
+                        "The listing has not been seen live in the evidence pass yet; price and availability are as first collected.")
+    u["confirm_what"] = np.where(clean & no_live, "live check", u.confirm_what)
+    u["confirm_why"] = np.where(clean & no_live, live_txt, u.confirm_why)
+    showable = ~is_avoid & (u.open_items <= 1)
     u["nth_shown_in_building"] = np.nan
     u.loc[showable, "nth_shown_in_building"] = u[showable].groupby("building_id").cumcount() + 1
     ok = showable & (u.nth_shown_in_building <= MAX_PER_BUILDING)
-    cols = ["listing_id", "building_id", "building_name", "address", "unit", "hood", "group_label", "hood_rank", "rank_score", "all_in", "to_confirm", "url"]
-    nc = u[elig & ~is_avoid & ~clean & (u.hood_rank <= CANDIDATES)]
-    nc[cols].to_csv(DATA / "needs_confirmation.csv", index=False)
-    nl = u[cand2 & ~u.live_ok & (u.clean_rank <= CANDIDATES)]
-    nl.assign(live_status=nl.live_status.fillna("").replace("", "not checked"))[cols[:8] + ["clean_rank", "rank_score", "all_in", "live_status", "url"]].to_csv(DATA / "needs_live_check.csv", index=False)
     u["shown_rank"] = np.nan
     u.loc[ok, "shown_rank"] = u[ok].groupby("hood_id").cumcount() + 1
     u["shown"] = u.shown_rank <= SHOWN
+    u["confirm_asterisk"] = np.where(u.open_items >= 1, "yes", "")
+    cols = ["listing_id", "building_id", "building_name", "address", "unit", "hood", "group_label", "hood_rank", "rank_score", "all_in", "to_confirm", "url"]
+    nc = u[~is_avoid & ~clean & (u.shown | (elig & (u.hood_rank <= CANDIDATES)))]
+    nc.assign(shown_with_asterisk=nc.shown)[cols + ["shown_with_asterisk", "confirm_what", "confirm_why"]].to_csv(DATA / "needs_confirmation.csv", index=False)
+    nl = u[~is_avoid & no_live & ~u.shown & (u.open_items <= 2) & elig & (u.hood_rank <= CANDIDATES)]
+    nl.assign(live_status=nl.live_status.fillna("").replace("", "not checked"))[cols[:8] + ["rank_score", "all_in", "live_status", "open_gate_facts", "to_confirm", "url"]].to_csv(DATA / "needs_live_check.csv", index=False)
     u["needs_live_check"] = u.listing_id.isin(set(nl.listing_id))
-    u["held_for_confirmation"] = u.listing_id.isin(set(nc.listing_id))
+    u["held_for_confirmation"] = u.listing_id.isin(set(nc.listing_id)) & ~u.shown
     av = elig & is_avoid
     u["avoid_rank"] = np.nan
     u.loc[av, "avoid_rank"] = u[av].groupby("hood_id").cumcount() + 1
@@ -397,8 +409,9 @@ def main():
             r[name + "_vs_home"] = round(r[name] - pd.to_numeric(home[c], errors="coerce").median(), 1)
         rows.append(r)
     pd.DataFrame(rows).to_csv(DATA / "group_exchange.csv", index=False)
-    print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, held for a confirmation {int(u.held_for_confirmation.sum())}, "
-          f"clean but waiting for a live check {int(u.needs_live_check.sum())}, shown without a live check {int((u.shown & ~u.live_ok).sum())}")
+    print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, of them with an asterisk {int((u.shown & (u.confirm_asterisk == 'yes')).sum())} "
+          f"({u[u.shown & (u.confirm_asterisk == 'yes')].confirm_what.value_counts().to_dict()}), held for a confirmation {int(u.held_for_confirmation.sum())}, "
+          f"waiting for a live check {int(u.needs_live_check.sum())}")
     print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
     print(f"(kept {len(u)} units; candidates {int(u.candidate.sum())}; shown {int(u.shown_pre_evidence.sum())}; pools: {u.pool.value_counts().to_dict()}")
 

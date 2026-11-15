@@ -48,7 +48,8 @@ def main():
              ("ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions)", len(R)),
              ("shown (every gate fact confirmed or stated; top 10 per neighborhood)", int(R.shown.sum())),
              ("avoid cards", int(R.avoid_card.sum())),
-             ("held back for one confirmation", len(pd.read_csv(DATA / "needs_confirmation.csv")) if (DATA / "needs_confirmation.csv").exists() else 0),
+             ("  shown with an asterisk (one thing to confirm)", int((R.shown & (R.confirm_asterisk == "yes")).sum()) if "confirm_asterisk" in R else 0),
+             ("held back for one confirmation", int(R.held_for_confirmation.sum()) if "held_for_confirmation" in R else 0),
              ("clean, waiting for a live check (not shown)", len(pd.read_csv(DATA / "needs_live_check.csv")) if (DATA / "needs_live_check.csv").exists() else 0),
              ("neighborhoods with 3+ shown places", int((R[R.shown].groupby("hood_id").size() >= 3).sum())),
              ("buildings in the master table", M.building_id.nunique())]

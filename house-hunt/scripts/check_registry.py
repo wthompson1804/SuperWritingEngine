@@ -10,10 +10,11 @@ scripts that reference it and a status:
 It also fails if an analysis script reads a side file directly instead of the master tables.
 
 Shown-list assertions (added after docs/INDEPENDENT_CHECK.md): the run fails when any unit with shown = True in
-data/ranked_units.csv breaks one of Will's rules: elevator inferred or unknown; floor under 2, unknown, or inferred in a
-way the floor rule does not accept; dogs not explicitly allowed, or a weight limit under 25 lb (a size-only "small dogs" policy passes, by the owner's rule of
+data/ranked_units.csv breaks one of Will's rules: more than one open item (elevator only inferred; floor unknown or inferred
+in a way the floor rule does not accept; dogs conflicting; no live check), or one open item without the asterisk fields
+(confirm_asterisk, confirm_what, confirm_why); elevator contradicted; floor under 2; dogs not explicitly allowed, or a weight limit under 25 lb (a size-only "small dogs" policy passes, by the owner's rule of
 2026-11-15, but must carry its note and tour question);
-all-in over $3,000; available after 2026-12-15; no live check; a duplicate unit; more than 2 shown in one building;
+all-in over $3,000; available after 2026-12-15; a duplicate unit; more than 2 shown in one building;
 a neighborhood cut by the Jamaica safety rule; an avoid building; a harvest note that says BUILDING_FAILS for any reason
 other than "small dogs only".
 """
@@ -68,14 +69,27 @@ def shown_violations():
             out.append(f"{lid} ({name} {unit}): {why}")
     num = lambda c: pd.to_numeric(S[c], errors="coerce") if c in S else pd.Series(float("nan"), index=S.index)
     col = lambda c: S[c] if c in S else pd.Series("", index=S.index)
-    flag(col("elevator").str.lower() != "yes", "elevator is not a yes")
-    flag(~col("elevator_basis").isin(["confirmed", "stated", "official_record", "amenities_page", "community_page"]), "elevator inferred or unknown")
+    # Owner, 2026-11-15: a shown unit may have at most ONE open item (elevator only inferred; floor unknown or inferred
+    # in a way the floor rule does not accept; dogs conflicting; no live check) and must then carry the asterisk fields.
+    # A fact that fails outright (no elevator, floor under 2, dogs not allowed) is never shown.
+    el = col("elevator").str.lower()
+    flag(el.isin(["no", "conflicting"]), "elevator contradicted or conflicting")
+    open_e = (el != "yes") | ~col("elevator_basis").isin(["confirmed", "stated", "official_record", "amenities_page", "community_page"])
     fl, fb, fk = num("unit_floor"), col("unit_floor_basis"), col("unit_floor_label_kind")
-    flag(fl.isna(), "floor unknown")
     flag(fl < 2, "floor under 2")
-    flag(~(fb.isin(["confirmed", "stated"]) | ((fb == "inferred") & (fk == "simple") & (fl >= 3))), "floor basis not acceptable (inferred floor 2, or from a complex unit label)")
-    flag(col("dogs_allowed").str.lower() != "yes", "dogs not explicitly allowed")
-    flag(~col("dogs_allowed_basis").isin(["confirmed", "stated", "community_page", "amenities_page"]), "dogs-allowed basis is inferred or unknown")
+    open_f = ~(fb.isin(["confirmed", "stated"]) | ((fb == "inferred") & (fk == "simple") & (fl >= 3)))
+    dg = col("dogs_allowed").str.lower()
+    flag(dg == "no", "dogs not allowed")
+    flag((dg == "yes") & ~col("dogs_allowed_basis").isin(["confirmed", "stated", "community_page", "amenities_page"]), "dogs-allowed basis is inferred or unknown")
+    open_d = dg != "yes"
+    open_l = ~col("live_status").isin(["live", "changed"])
+    n_open = open_e.astype(int) + open_f.astype(int) + open_d.astype(int) + open_l.astype(int)
+    flag(n_open > 1, "more than one open item (gate facts to confirm plus a missing live check)")
+    has_star = (col("confirm_asterisk") == "yes") & (col("confirm_what") != "") & (col("confirm_why") != "")
+    flag((n_open == 1) & ~has_star, "one open item but no confirm_asterisk / confirm_what / confirm_why")
+    for m, what in [(open_e, "elevator"), (open_f, "floor"), (open_d, "dogs allowed"), (open_l, "live check")]:
+        flag((n_open == 1) & m & (col("confirm_what") != what), f"confirm_what does not name the open item ({what})")
+    flag((n_open == 0) & (col("confirm_asterisk") == "yes"), "asterisk on a unit with nothing open")
     wl = num("dog_weight_limit_lb")
     size_only = (col("dog_size_only") != "") & wl.isna()
     flag(size_only & ~(col("dog_size_note").ne("") & col("tour_confirm").str.contains("dog weight limit")), "size-only dog policy shown without its note and tour question")
@@ -83,7 +97,6 @@ def shown_violations():
     flag(~(num("all_in") <= CAP), f"all-in over ${CAP:,} or missing")
     av = col("available_date").str.strip().str.lower()
     flag(~(av.isin(["now", "available now", "immediately"]) | (av.str.match(r"\d{4}-\d{2}-\d{2}") & (av.str[:10] <= WINDOW_END))), f"available after {WINDOW_END} or date unknown")
-    flag(~col("live_status").isin(["live", "changed"]), "no live check")
     key = S.building_id + "|" + S.unit.map(parsers.unit_key)
     nolabel = S.unit.map(parsers.unit_key) == ""
     key = key.where(~nolabel, S.building_id + "|" + col("beds") + "|" + col("sqft") + "|" + col("listed_rent"))
