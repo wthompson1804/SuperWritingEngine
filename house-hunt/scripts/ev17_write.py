@@ -200,7 +200,7 @@ F(k, 'income_requirement', '3x rent', 'Must have 3x the rent in total household 
 F(k, 'management_change', 'reviewers mention new management in 2026', 'We are excited about the new management changes and hope to see more activities and an updated community calendar of events.', 'https://modernmsg.com/reserve-at-lakeside')
 
 # ---------- Trulia blocked on refetch (HTTP 403 from request 20 on): facts from the same day's harvest cache ----------
-BL = 'Trulia returned HTTP 403 (bot wall) on the refetch at {t} and again on one retry at 22:53 UTC; not rechecked. Last successful read {c} UTC today: {x}'
+BL = 'Trulia returned HTTP 403 (bot wall) on the refetch at {t} UTC (one Trulia URL retried at 22:53 UTC was also 403, so I stopped); not rechecked. Last successful read {c} UTC today: {x}'
 def blocked(k, unit, stored, t, x, site='', status='blocked', price='', avail='', match=''):
     c = C7[k]; L(k, c['url'], unit, status, price, avail, match, site, t, BL.format(t=t[11:16], c=c['ts'][:16].replace('T', ' '), x=x))
     return c['url'] + ' (read ' + c['ts'][:16] + 'Z; refetch blocked)', c
