@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ny.gov/resource/ca8h-8gjq.json?%24where=year+%3E%3D+2022+and+county+in+%28%27Bronx%27%2C%27Dutchess%27%2C%27Kings%27%2C%27Nassau%27%2C%27New+York%27%2C%27Orange%27%2C%27Putnam%27%2C%27Queens%27%2C%27Richmond%27%2C%27Rockland%27%2C%27Suffolk%27%2C%27Sullivan%27%2C%27Ulster%27%2C%27Westchester%27%29&%24limit=50000&%24order=county%2Cagency%2Cyear",
+ "retrieved_at": "2026-11-15T18:21:26+00:00",
+ "status": 200,
+ "path": "raw/ny_dcjs/2cdc44ca5740f0b6.json",
+ "source": "ny_dcjs"
+}

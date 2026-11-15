@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ny.gov/resource/ca8h-8gjq.json?%24select=max%28year%29+as+y",
+ "retrieved_at": "2026-11-15T18:21:25+00:00",
+ "status": 200,
+ "path": "raw/ny_dcjs/912a63a7fc4c6df9.json",
+ "source": "ny_dcjs"
+}

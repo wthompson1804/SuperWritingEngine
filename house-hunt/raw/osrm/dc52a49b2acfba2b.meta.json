@@ -1,0 +1,7 @@
+{
+ "url": "https://router.project-osrm.org/nearest/v1/driving/-73.739500,40.596000?number=3",
+ "retrieved_at": "2026-11-15T18:27:59+00:00",
+ "status": 200,
+ "path": "raw/osrm/dc52a49b2acfba2b.json",
+ "source": "osrm"
+}

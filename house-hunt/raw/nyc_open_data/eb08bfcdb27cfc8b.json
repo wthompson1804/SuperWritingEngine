@@ -1,0 +1,70 @@
+[{"ky_cd":"102","ofns_desc":"HOMICIDE-NEGLIGENT-VEHICLE","pd_cd":"122","pd_desc":"HOMICIDE, NEGLIGENT, VEHICLE,","n":"3"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"360","pd_desc":"ROBBERY,ATM LOCATION","n":"44"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"361","pd_desc":"ROBBERY,BANK","n":"28"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"363","pd_desc":"ROBBERY,BAR/RESTAURANT","n":"46"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"365","pd_desc":"ROBBERY,LIQUOR STORE","n":"10"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"366","pd_desc":"ROBBERY,BICYCLE","n":"164"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"367","pd_desc":"ROBBERY, CHAIN STORE","n":"35"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"371","pd_desc":"ROBBERY,CHECK CASHING BUSINESS","n":"2"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"373","pd_desc":"ROBBERY,DOCTOR/DENTIST OFFICE","n":"4"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"375","pd_desc":"ROBBERY,PHARMACY","n":"4"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"377","pd_desc":"ROBBERY,BODEGA/CONVENIENCE STORE","n":"122"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"379","pd_desc":"ROBBERY,GAS STATION","n":"18"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"380","pd_desc":"ROBBERY,CAR JACKING","n":"203"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"381","pd_desc":"ROBBERY,HIJACKING","n":"2"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"382","pd_desc":"ROBBERY,NECKCHAIN/JEWELRY","n":"1018"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"383","pd_desc":"ROBBERY,DELIVERY PERSON","n":"274"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"384","pd_desc":"ROBBERY,POCKETBOOK/CARRIED BAG","n":"403"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"385","pd_desc":"ROBBERY, PAYROLL","n":"3"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"386","pd_desc":"ROBBERY,PERSONAL ELECTRONIC DEVICE","n":"2184"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"387","pd_desc":"ROBBERY,CLOTHING","n":"252"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"388","pd_desc":"ROBBERY,RESIDENTIAL COMMON AREA","n":"455"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"389","pd_desc":"ROBBERY,DWELLING","n":"975"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"390","pd_desc":"ROBBERY,HOME INVASION","n":"207"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"391","pd_desc":"ROBBERY,LICENSED MEDALLION CAB","n":"34"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"392","pd_desc":"ROBBERY,UNLICENSED FOR HIRE VEHICLE","n":"20"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"393","pd_desc":"ROBBERY,OF TRUCK DRIVER","n":"2"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"394","pd_desc":"ROBBERY,LICENSED FOR HIRE VEHICLE","n":"108"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"395","pd_desc":"ROBBERY,ON BUS/ OR BUS DRIVER","n":"5"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"396","pd_desc":"ROBBERY,BEGIN AS SHOPLIFTING","n":"1151"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"397","pd_desc":"ROBBERY,OPEN AREA UNCLASSIFIED","n":"1851"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"398","pd_desc":"ROBBERY,PUBLIC PLACE INSIDE","n":"227"}
+,{"ky_cd":"105","ofns_desc":"ROBBERY","pd_cd":"399","pd_desc":"ROBBERY,COMMERCIAL UNCLASSIFIED","n":"229"}
+,{"ky_cd":"106","ofns_desc":"FELONY ASSAULT","pd_cd":"102","pd_desc":"ASSAULT SCHOOL SAFETY AGENT","n":"13"}
+,{"ky_cd":"106","ofns_desc":"FELONY ASSAULT","pd_cd":"103","pd_desc":"ASSAULT TRAFFIC AGENT","n":"19"}
+,{"ky_cd":"106","ofns_desc":"FELONY ASSAULT","pd_cd":"105","pd_desc":"STRANGULATION 1ST","n":"3699"}
+,{"ky_cd":"106","ofns_desc":"FELONY ASSAULT","pd_cd":"106","pd_desc":"ASSAULT POLICE/PEACE OFFICER","n":"1923"}
+,{"ky_cd":"106","ofns_desc":"FELONY ASSAULT","pd_cd":"108","pd_desc":"ASSAULT OTHER PUBLIC SERVICE EMPLOYEE","n":"534"}
+,{"ky_cd":"106","ofns_desc":"FELONY ASSAULT","pd_cd":"109","pd_desc":"ASSAULT 2,1,UNCLASSIFIED","n":"16608"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"211","pd_desc":"BURGLARY,COMMERCIAL,DAY","n":"1338"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"213","pd_desc":"BURGLARY,COMMERCIAL,NIGHT","n":"1659"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"214","pd_desc":"BURGLARY,COMMERCIAL,UNKNOWN TI","n":"112"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"221","pd_desc":"BURGLARY,RESIDENCE,DAY","n":"1725"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"223","pd_desc":"BURGLARY,RESIDENCE,NIGHT","n":"1984"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"224","pd_desc":"BURGLARY,RESIDENCE,UNKNOWN TIM","n":"430"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"231","pd_desc":"BURGLARY,TRUCK DAY","n":"274"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"233","pd_desc":"BURGLARY,TRUCK NIGHT","n":"368"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"234","pd_desc":"BURGLARY, TRUCK UNKNOWN TIME","n":"107"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"241","pd_desc":"BURGLARY,UNCLASSIFIED,DAY","n":"80"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"243","pd_desc":"BURGLARY,UNCLASSIFIED,NIGHT","n":"188"}
+,{"ky_cd":"107","ofns_desc":"BURGLARY","pd_cd":"244","pd_desc":"BURGLARY,UNCLASSIFIED,UNKNOWN","n":"61"}
+,{"ky_cd":"109","ofns_desc":"GRAND LARCENY","pd_cd":"421","pd_desc":"LARCENY,GRAND FROM VEHICLE/MOTORCYCLE","n":"2915"}
+,{"ky_cd":"109","ofns_desc":"GRAND LARCENY","pd_cd":"457","pd_desc":"LARCENY,GRAND OF VEHICULAR/MOTORCYCLE ACCESSORIES","n":"2249"}
+,{"ky_cd":"110","ofns_desc":"GRAND LARCENY OF MOTOR VEHICLE","pd_cd":"441","pd_desc":"LARCENY,GRAND OF AUTO","n":"6209"}
+,{"ky_cd":"110","ofns_desc":"GRAND LARCENY OF MOTOR VEHICLE","pd_cd":"442","pd_desc":"LARCENY, GRAND OF AUTO - ATTEM","n":"81"}
+,{"ky_cd":"110","ofns_desc":"GRAND LARCENY OF MOTOR VEHICLE","pd_cd":"450","pd_desc":"LARCENY, GRAND OF MOPED","n":"1634"}
+,{"ky_cd":"110","ofns_desc":"GRAND LARCENY OF MOTOR VEHICLE","pd_cd":"451","pd_desc":"LARCENY,GRAND OF MOTORCYCLE","n":"1123"}
+,{"ky_cd":"110","ofns_desc":"GRAND LARCENY OF MOTOR VEHICLE","pd_cd":"455","pd_desc":"LARCENY,GRAND OF TRUCK","n":"58"}
+,{"ky_cd":"111","ofns_desc":"POSSESSION OF STOLEN PROPERTY","pd_cd":"493","pd_desc":"STOLEN PROPERTY-MOTOR VEH 2ND,","n":"108"}
+,{"ky_cd":"114","ofns_desc":"ARSON","pd_cd":"264","pd_desc":"ARSON, MOTOR VEHICLE 1 2 3 & 4","n":"139"}
+,{"ky_cd":"121","ofns_desc":"CRIMINAL MISCHIEF & RELATED OF","pd_cd":"270","pd_desc":"INVOLVING PETIT LARC FRM AUTO","n":"398"}
+,{"ky_cd":"126","ofns_desc":"MISCELLANEOUS PENAL LAW","pd_cd":"461","pd_desc":"UNAUTHORIZED USE VEHICLE 2","n":"260"}
+,{"ky_cd":"232","ofns_desc":"POSSESSION OF STOLEN PROPERTY","pd_cd":"491","pd_desc":"STOLEN PROP-MOTOR VEHICLE 3RD,","n":"8"}
+,{"ky_cd":"341","ofns_desc":"PETIT LARCENY","pd_cd":"321","pd_desc":"LARCENY,PETIT FROM AUTO","n":"3877"}
+,{"ky_cd":"341","ofns_desc":"PETIT LARCENY","pd_cd":"357","pd_desc":"LARCENY,PETIT OF VEHICLE ACCES","n":"3264"}
+,{"ky_cd":"342","ofns_desc":"PETIT LARCENY OF MOTOR VEHICLE","pd_cd":"341","pd_desc":"LARCENY,PETIT OF AUTO","n":"71"}
+,{"ky_cd":"342","ofns_desc":"PETIT LARCENY OF MOTOR VEHICLE","pd_cd":"342","pd_desc":"LARCENY, PETIT OF AUTO - ATTEM","n":"2"}
+,{"ky_cd":"342","ofns_desc":"PETIT LARCENY OF MOTOR VEHICLE","pd_cd":"351","pd_desc":"LARCENY,PETIT OF MOTORCYCLE","n":"107"}
+,{"ky_cd":"351","ofns_desc":"CRIMINAL MISCHIEF & RELATED OF","pd_cd":"254","pd_desc":"MISCHIEF, CRIMINAL 4, OF MOTOR","n":"4137"}
+,{"ky_cd":"353","ofns_desc":"UNAUTHORIZED USE OF A VEHICLE","pd_cd":"462","pd_desc":"UNAUTHORIZED USE VEHICLE 3","n":"860"}
+,{"ky_cd":"677","ofns_desc":"OTHER STATE LAWS","pd_cd":"846","pd_desc":"CONFINING ANIMAL IN VEHICLE/SHELTER","n":"1"}]

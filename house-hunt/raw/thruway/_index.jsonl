@@ -4,3 +4,10 @@
 {"url": "https://thruway.ny.gov/sites/default/files/2025-07/gmmcb-toll-charts.pdf", "retrieved_at": "2026-11-15T16:04:42+00:00", "status": 200, "path": "raw/thruway/ccb1ea87ff2a8abb.pdf", "source": "thruway"}
 {"url": "https://thruway.ny.gov/sites/default/files/2025-07/2024-ny-e-zpass-cpm.pdf", "retrieved_at": "2026-11-15T16:04:43+00:00", "status": 200, "path": "raw/thruway/896fd6276d8ac677.pdf", "source": "thruway"}
 {"url": "https://thruway.ny.gov/sites/default/files/2025-07/2024-non-ny-tbm-cpm.pdf", "retrieved_at": "2026-11-15T16:04:43+00:00", "status": 200, "path": "raw/thruway/f661b514e582c481.pdf", "source": "thruway"}
+{"url": "https://thruway.ny.gov/cashless-tolling/about-cashless-tolling", "retrieved_at": "2026-11-15T18:18:46+00:00", "status": 200, "path": "raw/thruway/13c3c9b49f321886.html", "source": "thruway"}
+{"url": "https://thruway.ny.gov/the-bridge", "retrieved_at": "2026-11-15T18:18:47+00:00", "status": 200, "path": "raw/thruway/d1dd801d13486cc5.html", "source": "thruway"}
+{"url": "https://tollcalculator.thruway.ny.gov/", "retrieved_at": "2026-11-15T18:19:11+00:00", "status": 200, "path": "raw/thruway/b920424bfe51c2bd.html", "source": "thruway"}
+{"url": "https://thruway.ny.gov/the-bridge/toll-rates", "retrieved_at": "2026-11-15T18:19:27+00:00", "status": 404, "path": "raw/thruway/298af2884e61a45b.html", "source": "thruway"}
+{"url": "https://thruway.ny.gov/cashless-tolling/about-tolls-mail", "retrieved_at": "2026-11-15T18:19:27+00:00", "status": 200, "path": "raw/thruway/205c2bbd9c768716.html", "source": "thruway"}
+{"url": "https://thruway.ny.gov/about/frequently-asked-questions", "retrieved_at": "2026-11-15T18:19:37+00:00", "status": 200, "path": "raw/thruway/f5edde6c3ca527f8.html", "source": "thruway"}
+{"url": "https://data.ny.gov/resource/7jkf-259w.json?%24limit=2000", "retrieved_at": "2026-11-15T18:19:39+00:00", "status": 200, "path": "raw/thruway/6b326e8e99a0cc54.json", "source": "thruway"}

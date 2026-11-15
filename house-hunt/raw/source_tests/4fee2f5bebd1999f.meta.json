@@ -1,0 +1,7 @@
+{
+ "url": "https://api.us.socrata.com/api/catalog/v1?domains=data.ct.gov&q=police+crime+incidents&limit=8",
+ "retrieved_at": "2026-11-15T18:24:57+00:00",
+ "status": 200,
+ "path": "raw/source_tests/4fee2f5bebd1999f.json",
+ "source": "source_tests"
+}

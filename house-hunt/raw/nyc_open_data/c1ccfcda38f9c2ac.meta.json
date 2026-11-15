@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/qgea-i56i.json?%24select=ky_cd%2Cofns_desc%2Cpd_cd%2Cpd_desc%2Ccount%28%2A%29+as+n&%24where=rpt_dt+%3E%3D+%272023-01-01T00%3A00%3A00%27+and+%28upper%28pd_desc%29+like+%27%25AUTO%25%27+or+upper%28pd_desc%29+like+%27%25VEHICLE%25%27+or+upper%28pd_desc%29+like+%27%25MOTOR%25%27+or+ky_cd+in+%28%27105%27%2C%27106%27%2C%27107%27%2C%27110%27%29%29&%24group=ky_cd%2Cofns_desc%2Cpd_cd%2Cpd_desc&%24order=ky_cd%2Cpd_cd&%24limit=1000",
+ "retrieved_at": "2026-11-15T18:16:00+00:00",
+ "status": 200,
+ "path": "raw/nyc_open_data/c1ccfcda38f9c2ac.json",
+ "source": "nyc_open_data"
+}

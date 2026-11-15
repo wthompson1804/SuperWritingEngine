@@ -1,2 +1,3 @@
 {"url": "https://www.mta.info/fares-tolls/tolls", "retrieved_at": "2026-11-15T16:01:29+00:00", "status": 403, "path": "raw/mta_tolls/9b4a8d0dba19a229.html", "source": "mta_tolls"}
 {"url": "https://new.mta.info/fares-tolls/tolls", "retrieved_at": "2026-11-15T16:01:29+00:00", "status": 403, "path": "raw/mta_tolls/a61780fe28c6003c.html", "source": "mta_tolls"}
+{"url": "https://data.ny.gov/resource/srxy-5nxn.json?%24limit=50", "retrieved_at": "2026-11-15T18:19:38+00:00", "status": 200, "path": "raw/mta_tolls/8e632375ec409bcd.json", "source": "mta_tolls"}

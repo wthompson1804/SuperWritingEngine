@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/5uac-w243.json?%24limit=1&%24where=ky_cd%3D%27110%27",
+ "retrieved_at": "2026-11-15T18:16:39+00:00",
+ "status": 200,
+ "path": "raw/nyc_open_data/0220e7b0b1f3e10f.json",
+ "source": "nyc_open_data"
+}

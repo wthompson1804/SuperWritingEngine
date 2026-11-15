@@ -1,0 +1,7 @@
+{
+ "url": "https://api.usa.gov/crime/fbi/cde/summarized/agency/CT0006000/V?from=01-2023&to=12-2025",
+ "retrieved_at": "2026-11-15T18:23:13+00:00",
+ "status": 200,
+ "path": "raw/fbi_cde/7828db87300b73eb.json",
+ "source": "fbi_cde"
+}

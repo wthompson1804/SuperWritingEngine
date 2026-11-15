@@ -1,0 +1,7 @@
+{
+ "url": "https://www.njta.gov/wp-json/njta/v1/partials?slug=map%2Ftrip-details&tab=turnpike&vehicle-type=1&green-discount=false&senior-discount=false&entrance=12&exit=18E",
+ "retrieved_at": "2026-11-15T18:20:54+00:00",
+ "status": 200,
+ "path": "raw/njta/e06e300f0ffb8d29.html",
+ "source": "njta"
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ct.gov/resource/fvw8-89kt.json?%24select=municipality%2Cutility_company%2Ccount%28%2A%29+as+n&%24group=municipality%2Cutility_company&%24limit=1000",
+ "retrieved_at": "2026-11-15T18:26:30+00:00",
+ "status": 200,
+ "path": "raw/ct_utility_territory/99e9d90f048fa543.json",
+ "source": "ct_utility_territory"
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://data.ny.gov/resource/34dd-6g2j.json?%24limit=2&%24order=year+DESC&county=Dutchess",
+ "retrieved_at": "2026-11-15T18:14:51+00:00",
+ "status": 200,
+ "path": "raw/ny_dcjs/5c9e3289a52052c0.json",
+ "source": "ny_dcjs"
+}

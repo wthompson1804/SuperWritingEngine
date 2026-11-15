@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/5uac-w243.json?%24select=max%28rpt_dt%29+as+mx%2C+min%28rpt_dt%29+as+mn%2C+count%28%2A%29+as+n",
+ "retrieved_at": "2026-11-15T18:16:10+00:00",
+ "status": 200,
+ "path": "raw/nyc_open_data/b07ff696659152ff.json",
+ "source": "nyc_open_data"
+}

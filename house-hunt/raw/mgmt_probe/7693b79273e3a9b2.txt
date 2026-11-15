@@ -1,0 +1,555 @@
+# ===========================================================
+# robots.txt - Windsor Communities
+# https://www.windsorcommunities.com
+# Last updated: 2026-07-06
+# ===========================================================
+
+
+# -----------------------------------------------------------
+# SECTION 1 - ALL CRAWLERS (wildcard baseline)
+# Standard search engines are fully allowed by default.
+# Private/admin paths and WordPress crawl-budget noise are
+# blocked for every bot, no exceptions.
+# -----------------------------------------------------------
+
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /*?replytocom=
+Disallow: /?s=
+Disallow: /search/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /cgi-bin/
+
+# Note: /wp-content/uploads/ is intentionally NOT blocked here.
+# That's where property photos live, and Section 2 search engines
+# and Section 3 AI bots both need it for image indexing/citation.
+
+
+# -----------------------------------------------------------
+# SECTION 2 - STANDARD SEARCH ENGINE BOTS
+# Explicitly confirmed allowed to index all public content.
+# -----------------------------------------------------------
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+
+# -----------------------------------------------------------
+# SECTION 3 - AI CRAWLERS: PUBLIC PAGES ALLOWED
+#
+# Policy: Major AI crawlers may access Windsor's public
+# marketing, listing, and informational content only.
+# Private, resident-only, and WordPress internal paths
+# remain blocked for all AI crawlers.
+#
+# NOTE: this uses a blocklist model (Allow: / plus explicit
+# Disallow rules below) - so any NEW private path added to the
+# site later (e.g. /account/, /leasing-portal/) will be OPEN to
+# these AI crawlers by default until it's added to every group
+# below. Revisit this section whenever a new private area is
+# added to the site.
+#
+# Always blocked for all AI crawlers:
+#   /wp-admin/  /wp-login.php  /wp-includes/
+#   /wp-content/plugins/  /wp-content/themes/  /wp-content/cache/
+#   /wp-json/  /xmlrpc.php  /feed/  /comments/feed/
+#   /for-residents/   /favorites/   /admin/   /?s=   /search/
+#
+# Note: /wp-content/uploads/ (property photos) is left open to
+# AI crawlers by default, consistent with Section 1/2.
+# -----------------------------------------------------------
+
+# --- OpenAI ---
+User-agent: GPTBot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: OAI-AdsBot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+# --- Anthropic ---
+User-agent: ClaudeBot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+# --- Google AI ---
+User-agent: Google-Extended
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: GoogleOther
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+# --- Perplexity AI ---
+User-agent: PerplexityBot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+# --- Meta AI ---
+User-agent: FacebookBot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: Meta-WebIndexer
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+# --- Apple AI ---
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+# --- Amazon ---
+User-agent: Amazonbot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+# --- Optional but recommended ---
+User-agent: MistralAI-User
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-content/cache/
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /comments/feed/
+Disallow: /favorites/
+Disallow: /admin/
+Disallow: /windsor-admin/
+Disallow: /?s=
+Disallow: /search/
+Disallow: /*?replytocom=
+Disallow: /cgi-bin/
+
+# --- Remaining AI crawlers: fully blocked ---
+# (pure training/scraping pipelines with no user-facing AI product)
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+# -----------------------------------------------------------
+# SITEMAP
+# -----------------------------------------------------------
+
+Sitemap: https://www.windsorcommunities.com/sitemap_index.xml

@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/qgea-i56i.json?%24limit=1&%24where=rpt_dt+%3E%3D+%272025-06-01T00%3A00%3A00%27+and+ky_cd%3D%27110%27",
+ "retrieved_at": "2026-11-15T18:16:38+00:00",
+ "status": 200,
+ "path": "raw/nyc_open_data/d4002e90b8e8c82a.json",
+ "source": "nyc_open_data"
+}

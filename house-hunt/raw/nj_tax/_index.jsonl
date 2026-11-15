@@ -7,3 +7,8 @@
 {"url": "https://www.nj.gov/treasury/taxation/pdf/pubs/tgi-ee/git3w.pdf", "retrieved_at": "2026-11-15T16:02:38+00:00", "status": 200, "path": "raw/nj_tax/81fe63126e27d3c6.pdf", "source": "nj_tax"}
 {"url": "https://www.nj.gov/treasury/taxation/ratechange/su-urban.shtml", "retrieved_at": "2026-11-15T16:04:10+00:00", "status": 200, "path": "raw/nj_tax/65b3e9e456531f07.html", "source": "nj_tax"}
 {"url": "https://www.nj.gov/treasury/taxation/pdf/pubs/sales/anj10.pdf", "retrieved_at": "2026-11-15T16:04:11+00:00", "status": 200, "path": "raw/nj_tax/7e0019d44ae4ed04.pdf", "source": "nj_tax"}
+{"url": "https://www.nj.gov/treasury/taxation/su_over.shtml", "retrieved_at": "2026-11-15T18:28:22+00:00", "status": 404, "path": "raw/nj_tax/c1f2c9b42e83b553.html", "source": "nj_tax"}
+{"url": "https://www.nj.gov/treasury/taxation/businesses/salestax/index.shtml", "retrieved_at": "2026-11-15T18:28:31+00:00", "status": 200, "path": "raw/nj_tax/585ca73c90096c20.html", "source": "nj_tax"}
+{"url": "https://www.nj.gov/treasury/taxation/su.shtml", "retrieved_at": "2026-11-15T18:28:32+00:00", "status": 404, "path": "raw/nj_tax/2e56454ad8bbe9ae.html", "source": "nj_tax"}
+{"url": "https://www.nj.gov/treasury/taxation/ratechange/su-overview.shtml", "retrieved_at": "2026-11-15T18:28:33+00:00", "status": 404, "path": "raw/nj_tax/02229e3f3885ae40.html", "source": "nj_tax"}
+{"url": "https://www.nj.gov/treasury/taxation/ratechange/su-rate-change.shtml", "retrieved_at": "2026-11-15T18:28:34+00:00", "status": 404, "path": "raw/nj_tax/0b1a734e9d1af3ac.html", "source": "nj_tax"}

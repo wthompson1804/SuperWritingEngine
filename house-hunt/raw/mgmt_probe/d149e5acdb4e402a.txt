@@ -1,0 +1,12 @@
+User-agent: *
+crawl-delay: 10
+Disallow: /common/
+Allow: /common/dynamic.asp
+Allow: /common/uploads/
+Allow: /common/public/
+Disallow: /admin/
+Disallow: /includes/
+Allow: /includes/*.js
+Allow: /includes/*.css
+Disallow: /pages/bluemoon.asp
+Disallow: /*.swf

@@ -1,0 +1,130 @@
+{
+ "started": "2026-11-15T18:21:08+00:00",
+ "srp_pages": 72,
+ "detail_pages": 257,
+ "cities_done": [
+  {
+   "city": "ny/queens",
+   "drive_min": 4.5,
+   "props": 148,
+   "rows": 115
+  },
+  {
+   "city": "ny/floral-park",
+   "drive_min": 14.9,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/elmont",
+   "drive_min": 16.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/lynbrook",
+   "drive_min": 16.4,
+   "props": 3,
+   "rows": 1
+  },
+  {
+   "city": "ny/north-valley-stream",
+   "drive_min": 17.1,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ny/valley-stream",
+   "drive_min": 17.1,
+   "props": 3,
+   "rows": 1
+  },
+  {
+   "city": "ny/woodmere",
+   "drive_min": 18.3,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/great-neck-plaza",
+   "drive_min": 18.8,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/franklin-square",
+   "drive_min": 18.9,
+   "props": 2,
+   "rows": 2
+  },
+  {
+   "city": "ny/hewlett",
+   "drive_min": 19.3,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/mineola",
+   "drive_min": 20.0,
+   "props": 6,
+   "rows": 4
+  },
+  {
+   "city": "ny/rockville-centre",
+   "drive_min": 20.1,
+   "props": 3,
+   "rows": 3
+  },
+  {
+   "city": "ny/west-hempstead",
+   "drive_min": 20.7,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "ny/atlantic-beach",
+   "drive_min": 21.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/east-atlantic-beach",
+   "drive_min": 21.0,
+   "props": 0,
+   "rows": 0
+  },
+  {
+   "city": "ny/williston-park",
+   "drive_min": 21.4,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/great-neck",
+   "drive_min": 22.0,
+   "props": 1,
+   "rows": 0
+  },
+  {
+   "city": "ny/oceanside",
+   "drive_min": 22.0,
+   "props": 1,
+   "rows": 1
+  },
+  {
+   "city": "ny/bronx",
+   "drive_min": 22.3,
+   "props": 127,
+   "rows": 131
+  }
+ ],
+ "cities_unmatched_far": [],
+ "props_discovered": 301,
+ "props_skipped_lowprice_gt_3000": 44,
+ "reasons": {
+  "ok": 256,
+  "no_unit_le_3000": 1
+ },
+ "blocked": null,
+ "dogs_no_rows": 0
+}
