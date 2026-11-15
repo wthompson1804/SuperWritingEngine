@@ -1,0 +1,7 @@
+{
+ "url": "https://www.njta.gov/wp-json/njta/v1/partials?slug=map%2Ftrip-details&tab=parkway&vehicle-type=1&green-discount=false&senior-discount=false&direction=sb&entrance=127B&exit=100B",
+ "retrieved_at": "2026-11-15T22:26:41+00:00",
+ "status": 200,
+ "path": "raw/njta/32671793e4cfb559.html",
+ "source": "njta"
+}

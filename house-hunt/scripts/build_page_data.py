@@ -33,16 +33,19 @@ def j(x, default):
 def unit(r):
     g = lambda c: v(r.get(c))
     qs = [q for q in str(g("to_confirm") or "").split("; ") if q]
+    if g("tour_confirm"):
+        qs.append(str(g("tour_confirm")) + f" (floor {int(float(g('unit_floor')))} is read from the unit number {g('unit')})")
     if g("rent_needs_call") == "yes":
         qs.append("Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?")
     for line in str(g("all_in_unknown_lines") or "").split("; "):
         if line:
             qs.append({"parking fee": "What does a parking spot cost per month, and is one guaranteed in the lease?", "pet rent": "What is the monthly pet rent and any one-time pet fee?",
-                       "building fees": "What required monthly fees are added to the rent (amenity, trash, technology)?", "gas": "Who pays for heat and cooking gas?"}.get(line, f"What is the {line}?"))
+                       "building fees": "What required monthly fees are added to the rent (amenity, trash, technology)?",
+                       "building fees (part)": "Which required monthly fees have no published amount (for example an amenity fee), and how much are they?", "gas": "Who pays for heat and cooking gas?"}.get(line, f"What is the {line}?"))
     return {
         "id": g("listing_id"), "building_id": g("building_id"), "hood_id": g("hood_id"), "year": g("group_key"),
         "building": g("building_name"), "address": g("address"), "unit": g("unit"), "beds": g("beds"), "sqft": g("sqft"),
-        "floor": g("unit_floor"), "floor_basis": g("unit_floor_basis"), "lat": g("lat"), "lon": g("lon"),
+        "floor": g("unit_floor"), "floor_basis": g("unit_floor_basis"), "floor_basis_note": g("floor_basis_note"), "zip": g("zip5"), "lat": g("lat"), "lon": g("lon"),
         "available": g("available_date"), "listing_age_days": g("listing_age_days"),
         "rent": {"listed": g("listed_rent"), "basis": g("rent_basis"), "basis_kind": g("rent_basis_kind"), "gross": g("rent_gross"),
                  "asterisk": g("rent_asterisk") == "yes", "offer_text": g("rent_offer_text"), "free_months": g("rent_free_months"),
@@ -51,9 +54,9 @@ def unit(r):
         "all_in": g("all_in"), "all_in_gross": g("all_in_gross"), "all_in_lines": j(r.get("all_in_lines"), []),
         "all_in_unknown": [x for x in str(g("all_in_unknown_lines") or "").split("; ") if x],
         "elevator": {"value": g("elevator"), "basis": g("elevator_basis")},
-        "dog": {"allowed": g("dogs_allowed"), "basis": g("dogs_allowed_basis"), "weight_limit_lb": g("dog_weight_limit_lb"), "policy_text": g("dog_policy_text"), "pet_rent": g("pet_rent")},
-        "parking": {"type": g("parking_type"), "rank": g("parking_rank"), "fee": g("parking_fee")},
-        "amenities": {"pool": g("pool") or None, "pool_text": g("pool_color") if "pool_color" in r else None, "doorman": g("doorman"), "controlled_access": g("controlled_access"),
+        "dog": {"allowed": g("dogs_allowed"), "basis": g("dogs_allowed_basis"), "weight_limit_lb": g("dog_weight_limit_lb"), "size_only_note": g("dog_size_only"), "policy_text": g("dog_policy_text"), "pet_rent": g("pet_rent")},
+        "parking": {"type": g("parking_type"), "rank": g("parking_rank"), "fee": g("parking_fee"), "fee_note": g("parking_fee_note"), "options_text": g("parking_options")},
+        "amenities": {"pool": g("pool") or None, "pool_text": g("pool_text"), "doorman": g("doorman") or None, "doorman_text": g("doorman_text"), "controlled_access": g("controlled_access"),
                       "gym": g("gym"), "in_unit_laundry": g("in_unit_laundry"), "laundry": g("laundry"), "package_room": g("package_room"),
                       "outdoor_space": g("outdoor_space"), "lounge_or_coworking": g("lounge_or_coworking"), "dog_amenities": g("dog_amenities"),
                       "year_built": g("year_built"), "building_floors": g("building_floors"), "manager": g("manager")},
@@ -86,11 +89,14 @@ def unit(r):
 
 
 def main():
-    R = pd.read_csv(DATA / "ranked_units.csv", low_memory=False)
+    R = pd.read_csv(DATA / "ranked_units.csv", low_memory=False, dtype={"zip5": str})
     G = pd.read_csv(DATA / "lifestyle_groups.csv").set_index("hood_id")
     E = pd.read_csv(DATA / "group_exchange.csv")
     held_ids = set(pd.read_csv(DATA / "needs_confirmation.csv").listing_id) if (DATA / "needs_confirmation.csv").exists() else set()
     shown, avoid, held = R[R.shown], R[R.avoid_card], R[R.listing_id.isin(held_ids)]
+    # clean candidates that the evidence pass has not seen live yet: listed for the evidence agents, never shown as places
+    live_ids = set(pd.read_csv(DATA / "needs_live_check.csv").listing_id) if (DATA / "needs_live_check.csv").exists() else set()
+    awaiting = R[R.listing_id.isin(live_ids)]
     hoods = []
     for hid, g in R.groupby("hood_id"):
         s = g[g.shown]
@@ -130,11 +136,15 @@ def main():
                     "anchor": {"name": "Mom and Dad (Jamaica station)", "lat": 40.699608, "lon": -73.808530},
                     "jamaica_yardstick": {"violent_per_1000": v(G.jamaica_violent.iloc[0]), "property_per_1000": v(G.jamaica_property.iloc[0])},
                     "queens_spectrum": spec, "weights": {"safety": 22, "building": 16, "cost": 12, "car": 12, "space": 12, "distance": 10, "dog": 8, "daily": 8},
-                    "counts": {"shown": int(len(shown)), "avoid": int(len(avoid)), "held": int(len(held)), "ranked": int(len(R))},
+                    "counts": {"shown": int(len(shown)), "avoid": int(len(avoid)), "held": int(len(held)), "awaiting_live_check": int(len(awaiting)), "ranked": int(len(R))},
                     "notes": ["Drive times are free-flow estimates without traffic.", "An asterisk on rent means a special offer applies; see the rent terms.",
+                              "A floor marked 'read from the unit number' is not stated on the page; confirm it on the tour.",
+                              "A place is shown only after its listing was seen live in the evidence pass.",
                               "Unknown cost lines count as $0 and are named on each receipt."]},
            "years": years, "neighborhoods": hoods, "units": [unit(r) for _, r in shown.iterrows()],
-           "avoid": [unit(r) for _, r in avoid.iterrows()], "held": [unit(r) for _, r in held.iterrows()]}
+           "avoid": [unit(r) for _, r in avoid.iterrows()], "held": [unit(r) for _, r in held.iterrows()],
+           "awaiting_live_check": [{"id": r.listing_id, "building": v(r.building_name), "address": v(r.address), "unit": v(r.unit), "hood_id": r.hood_id,
+                                    "rank": v(r.rank_score), "all_in": v(r.all_in), "listing": v(r.url)} for r in awaiting.itertuples()]}
     (ROOT / "site").mkdir(exist_ok=True)
     (ROOT / "site" / "data.json").write_text(json.dumps(out, default=str, allow_nan=False))
     print(f"site/data.json: {len(out['years'])} years, {len(hoods)} neighborhoods, {len(out['units'])} shown, {len(out['avoid'])} avoid, {len(out['held'])} held; {(ROOT / 'site' / 'data.json').stat().st_size // 1024} KB")

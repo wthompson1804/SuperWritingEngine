@@ -1,0 +1,4 @@
+,lat,lon,coord_basis,coord_spread_m,coord_note
+b_27104c3bf3,40.670173737934,-74.100065293627,census_geocoder,317,"listing rows disagree by 317 m (apartmentlist.com: 40.66920,-74.09752; zumper: 40.67013,-74.10107); Census geocoder matched '145 GOLDSBOROUGH DR, BAYONNE, NJ, 07002'"
+b_a291f1c5c9,41.030057753079,-73.774437185082,census_geocoder,218,"listing rows disagree by 218 m (greystar.com: 41.02931,-73.77771; trulia: 41.02938,-73.77512); Census geocoder matched '55 BANK ST, WHITE PLAINS, NY, 10606'"
+b_c7dc5c431d,40.708102221765,-73.818186960808,census_geocoder,1023,"listing rows disagree by 1023 m (trulia: 40.70125,-73.80981; zumper: 40.70785,-73.81824); Census geocoder matched '138-28 QUEENS BLVD, JAMAICA, NY, 11435'"

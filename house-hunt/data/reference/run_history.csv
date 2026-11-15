@@ -1,3 +1,4 @@
-run_at,listings harvested (after dedupe),pass every listing gate,pending: a gate fact is unstated,fail a gate,costed in the master table,"within the $3,000 all-in cap","ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions)",shown (every gate fact confirmed or stated; top 10 per neighborhood),avoid cards,held back for one confirmation,neighborhoods with 3+ shown places,buildings in the master table
-2026-11-15T21:45:29+00:00,18290,2027,12069,4194,1524,1313,961,207,24,201,26,551
-2026-11-15T21:55:58+00:00,18290,2027,12069,4194,1524,1313,961,207,27,200,26,551
+run_at,listings harvested (after dedupe),pass every listing gate,pending: a gate fact is unstated,fail a gate,costed in the master table,"within the $3,000 all-in cap","ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions)",shown (every gate fact confirmed or stated; top 10 per neighborhood),avoid cards,held back for one confirmation,neighborhoods with 3+ shown places,buildings in the master table,"clean, waiting for a live check (not shown)"
+2026-11-15T21:45:29+00:00,18290,2027,12069,4194,1524,1313,961,207,24,201,26,551,
+2026-11-15T21:55:58+00:00,18290,2027,12069,4194,1524,1313,961,207,27,200,26,551,
+2026-11-15T22:36:50+00:00,20464,2598,13595,4271,2020,1664,1039,68,24,307,8,608,52.0

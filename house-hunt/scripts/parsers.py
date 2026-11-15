@@ -314,7 +314,22 @@ _SECOND = r"additional[\w/ -]{0,30}?(?:parking|spots?|spaces?|cars?|vehicles?)\b
 _OTHER_TOPIC = r"\bpets?\b|\bdogs?\b|\bcats?\b|water|sewer|trash|\bwst\b|amenity|application|\brent\b|internet|cable|insurance"
 _FIRST = r"\b1st\b|\bfirst (?:space|spot|car|vehicle)|\(1 space\)|\(1 spot\)|\bone space\b"
 _FREE = r"\bfree\b|\bincluded\b|no (?:extra |additional )?(?:charge|cost|fee)\b|complimentary|at no (?:cost|charge)|\bno fee\b"
-_PROMO = r"first year|1 year|one year|for \d+ months?|\d+ months? free|year free|months? of free|limited time|move[- ]in special"
+_PROMO = r"first year|1st year|1 year|one year|for \d+ months?|\d+ months? free|year free|months? of free|limited time|move[- ]in special|current offer"
+_NOUN = r"(?:parking|spots?|spaces?|lot|garage|cars?|vehicles?)"
+_FREE_NEAR = (r"(?:\bfree\b|complimentary|\bincluded\b|no (?:extra |additional )?(?:charge|cost|fee))[^,;.]{0,25}\b" + _NOUN + r"\b|\b" + _NOUN
+              + r"\b[^,;.]{0,45}(?:\bfree\b|\bincluded\b|no (?:extra |additional )?(?:charge|cost)|complimentary|at no (?:cost|charge))")
+
+
+def parking_kind(text) -> str:
+    """'garage', 'covered', 'lot', 'street' or '' from a parking sentence (the words rank.py scores)."""
+    t = str(text or "").lower()
+    if re.search(r"garage|gated|underground|indoor|\bdeck\b", t) and not re.search(r"no garage|garage_lot: fee", t):
+        return "garage"
+    if re.search(r"(?<!un)covered|carport", t):
+        return "covered"
+    if re.search(r"\blot\b|surface|off[- ]street|assigned|on[- ]site|outdoor|open parking|uncovered", t):
+        return "lot"
+    return "street" if "street" in t else ""
 
 
 def _park_class(label: str) -> str:
@@ -336,7 +351,7 @@ def parse_parking(text):
     lists every price found so the page can show the alternatives.
     """
     out = {"fee": None, "note": "", "options": "", "included": False}
-    t = str(text or "").strip()
+    t = re.sub(r"[ \t\xa0]+", " ", str(text or "")).strip()
     if is_blank(t):
         return out
     t = re.sub(r"\bincluded\s*=\s*true\b", "included in rent", t, flags=re.I)
@@ -356,7 +371,7 @@ def parse_parking(text):
             promo = True
             continue
         if not amts:
-            if re.search(_FREE, cl) and re.search(r"park|spot|space|\blot\b|garage", cl) and not re.search(r"not included|fee not|no free", cl):
+            if re.search(_FREE_NEAR, cl) and not re.search(r"not included|fee not|no free|^special features", cl):
                 included.append(c)
             continue
         consumed_until = 0
@@ -384,10 +399,10 @@ def parse_parking(text):
                 continue
             role = "second" if re.search(_SECOND, ll if len(amts) > 1 else cl) and not re.search(_FIRST, ll) else ("first" if re.search(_FIRST, ll if len(amts) > 1 else cl) else "")
             opts.append({"amt": lo, "hi": hi, "label": re.sub(r"\s+", " ", label)[:60], "cls": _park_class(label if _park_class(label) != "generic" or len(amts) > 1 else c), "role": role})
-        if re.search(_FREE, cl[:amts[0].start()]) and not re.search(r"not included|fee not|no free", cl):
+        if re.search(_FREE_NEAR, cl[:amts[0].start()]) and not re.search(r"not included|fee not|no free", cl):
             # a clause that also carries prices: the part before the first price says what is free
             head = c[:amts[0].start()]
-            if re.search(_FREE, head.lower()):
+            if True:
                 included.append(head.strip(" :,-."))
                 for o in opts:
                     if o["label"] and o["label"] in head:
@@ -400,7 +415,8 @@ def parse_parking(text):
     def show(o):
         rng = f"${o['amt']:g}" + (f"-${o['hi']:g}" if o["hi"] else "")
         return (o["label"] + " " if o["label"] else "") + rng
-    out["options"] = "; ".join([f"{i} (no charge)" for i in included] + [show(o) for o in opts])[:400]
+    included = list(dict.fromkeys(i for i in included if i))
+    out["options"] = "; ".join(dict.fromkeys([f"{i} (no charge)" for i in included] + [show(o) for o in opts]))[:400]
     if included:
         out.update(fee=0.0, included=True, note="a spot is included or free: " + included[0][:120])
         return out
@@ -444,7 +460,7 @@ def parking_from_fee_items(items):
 
 
 # ---------------------------------------------------------------------------------------------------------- fees
-_ONE_TIME = r"one[- ]?time|at move|move-?in|per year|a year|annual|yearly|deposit|application|(?<!billing )admin(?:istrative)? fee|holding|per lease|lease term|security|total shown|non-?refundable|background|per applicant|per adult|waived"
+_ONE_TIME = r"one[- ]?time|at move|move-?in|per year|a year|annual|yearly|deposit|application|(?<!billing )admin(?:istrative)? fee|holding|per lease|lease term|security|total shown|non-?refundable|background|per applicant|per adult|waived|preparation|prep fee|move-?out|redecorat|cleaning fee|key fee|reservation"
 _NOT_BUILDING = r"\bpets?\b|\bdogs?\b|\bcats?\b|parking|garage|carport|storage|optional|washer|dryer|furnish|\bev\b|locker|bike|\binterior\b|\bexterior\b|\bspots?\b|\bspaces?\b|surface lot|covered"
 
 
@@ -467,7 +483,7 @@ def monthly_fees_from_text(text, unit=""):
     if re.fullmatch(r"\$?\s*\d+(?:\.\d+)?(?:\s*/\s*mo(?:nth)?)?", tl):
         v = money(tl)
         return (v, "parsed from the fee text") if v <= 400 else (None, f"${v:g} not counted: no monthly wording")
-    tot, found, notes, per_unit = 0.0, False, [], {}
+    tot, found, notes, per_unit, counted = 0.0, False, [], {}, []
     lead = re.match(r"\s*" + AMT + r"\s*(?:/\s*mo(?:nth)?|a month|per month|monthly)?\s*:", t)          # '$182: A $90 + B $92'
     body = t[lead.end():] if lead else t
     for clause in re.split(r";|\||\+|\bplus\b|,(?!\d{3})|\.\s+(?=[A-Z])|\band\b(?=[^$]*\$)", body):
@@ -505,8 +521,14 @@ def monthly_fees_from_text(text, unit=""):
                 continue
             if a > 1000:
                 continue
-            tot += a
+            counted.append(a)
             found = True
+    # prices given as alternatives (two sources that differ, or one price per unit size) are never added together
+    alternatives = bool(re.search(r"sources differ|\bstudio\b.*\b(?:one|1)[- ]?(?:bed|br)|\b(?:one|1)[- ]?(?:bed|br).*\b(?:two|2)[- ]?(?:bed|br)", tl))
+    if counted:
+        tot = max(counted) if alternatives else sum(counted)
+        if alternatives and len(counted) > 1:
+            notes.append("the text gives alternative amounts (" + ", ".join(f"${v:g}" for v in counted) + "); the highest is used")
     if lead:
         lv = _f(lead.group(1), lead.group(2))
         if lv <= 1000:

@@ -63,3 +63,23 @@ gate fact stated on the page.
 - Quiet-Street: violent and property rates, distance from the motorway, parking, woods, detached-house share.
 
 `scripts/rank_v1_backup.py` keeps version 1.
+
+## After the independent check (2026-11-15) — see `docs/REPAIRS_AFTER_INDEPENDENT_CHECK.md`
+
+**Gate facts and what counts as settled.**
+- Elevator: confirmed in the evidence pass, stated on the listing or amenities page, or an official record. A harvester's or checker's
+  inference ("6+ floors") is `inferred` and is an open fact.
+- Floor: confirmed, or stated on the page. A floor read from a simple unit label ("4F", "305") that comes out at 3 or higher is accepted,
+  marked "read from the unit number", with the tour question "Confirm the floor". Any other inferred floor (floor 2, or a label with a
+  separator, a building prefix or four digits) and an unknown floor are open facts.
+- Dogs: allowed must be stated or confirmed. A size word ("small dogs") with no pound figure is an open fact. A policy that conflicts between
+  two aggregators is an open fact; the building's own site or its manager's page outranks an aggregator.
+- One open fact: ranked, held in `data/needs_confirmation.csv` with the question. Two or more: sketchy, excluded.
+
+**Shown.** Clean on every gate fact, not an avoid building, **seen live in the evidence pass** (live status `live` or `changed`), at most 2 per
+building (counted on `building_id`, duplicates of a unit removed first), best 10 per neighborhood. Clean candidates without a live check go to
+`data/needs_live_check.csv` and are not shown. `scripts/check_registry.py` fails the run if a shown unit breaks any of these rules.
+
+**Scoring changes.** Pool, doorman and the other amenity tests reject negatives and near-misses ("Pool table", "none listed", "no doorman
+stated"; a virtual doorman counts as controlled access only). A confirmed "no weight limit" scores as the best weight policy. The
+"cost lines stated" variable now counts the lines of the cost receipt that are stated rather than estimated or unknown.

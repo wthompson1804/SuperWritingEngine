@@ -12,13 +12,14 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent))
 from lib import DATA, ROOT
 
+TESTS = [("parser tests (every example in docs/INDEPENDENT_CHECK.md)", "test_parsers.py")]
 FULL = [("gates (merge, dedupe, gate each listing)", "gates.py"), ("NYC building class (PLUTO)", "enrich_nyc_pluto.py"), ("gates again with PLUTO", "gates.py"),
         ("lookup tools per building", "enrich_units.py"), ("neighborhood assignment", "build_neighborhoods.py"),
         ("lifestyle features", "lifestyle_features.py"), ("lifestyle colour", "lifestyle_color.py"), ("crime benchmarks", "crime_benchmarks.py"),
         ("lifestyle groups (saved centres)", "lifestyle_groups.py")]
 ALWAYS = [("building amenities (cached pages)", "building_amenities.py --no-fetch"), ("master tables", "build_master.py"), ("rent terms", "rent_terms.py"),
           ("all-in cost", "all_in.py"), ("evidence rules (avoid, exclusions)", "avoid.py"), ("ranking and selection", "rank.py"),
-          ("field registry and wiring check", "check_registry.py")]
+          ("field registry, wiring check and shown-list assertions", "check_registry.py")]
 
 
 def run(label, cmd, log):
@@ -31,9 +32,11 @@ def run(label, cmd, log):
 
 def main():
     log = []
-    steps = (FULL if "--fast" not in sys.argv else []) + ALWAYS
+    steps = TESTS + (FULL if "--fast" not in sys.argv else []) + ALWAYS
+    failed = False
     for label, cmd in steps:
         rc = run(label, cmd, log)
+        failed = failed or rc != 0
         if rc != 0 and "check_registry" not in cmd:
             break
     L = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False, low_memory=False)
@@ -46,6 +49,7 @@ def main():
              ("shown (every gate fact confirmed or stated; top 10 per neighborhood)", int(R.shown.sum())),
              ("avoid cards", int(R.avoid_card.sum())),
              ("held back for one confirmation", len(pd.read_csv(DATA / "needs_confirmation.csv")) if (DATA / "needs_confirmation.csv").exists() else 0),
+             ("clean, waiting for a live check (not shown)", len(pd.read_csv(DATA / "needs_live_check.csv")) if (DATA / "needs_live_check.csv").exists() else 0),
              ("neighborhoods with 3+ shown places", int((R[R.shown].groupby("hood_id").size() >= 3).sum())),
              ("buildings in the master table", M.building_id.nunique())]
     drops = []
@@ -68,6 +72,7 @@ def main():
     md += ["", "## Stage counts", "", "| Stage | Now | Previous run | Change |", "|---|---|---|---|"]
     for k, v in stage:
         p = prev.get(k.strip())
+        p = None if p is None or pd.isna(p) else p
         md.append(f"| {k} | {v} | {'' if p is None or pd.isna(p) else int(p)} | {'' if p is None or pd.isna(p) else f'{v - int(p):+d}'} |")
     md += ["", "## Why units left", ""]
     for f, d in drops:
@@ -79,6 +84,9 @@ def main():
         md += [f"**{l}**", "```"] + tail + ["```", ""]
     (ROOT / "docs" / "RUN_REPORT.md").write_text("\n".join(md) + "\n")
     print("\n".join(f"{k:85s} {v}" for k, v in stage))
+    if failed:
+        print("RUN FAILED: see docs/RUN_REPORT.md (a step returned an error, or a shown unit breaks a rule)")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

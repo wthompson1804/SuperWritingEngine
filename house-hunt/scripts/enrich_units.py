@@ -12,6 +12,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent)); sys.path.insert(0, str(Path(__file__).parent / "tools"))
 from lib import DATA
 import drive, transit, crime, places, utilities
+import build_master
 
 CAP = 3000
 OUT = DATA / "enriched"; OUT.mkdir(exist_ok=True)
@@ -34,10 +35,27 @@ def num(x):
         return None
 
 
+STALE_M = 150   # a cached lookup made more than this far from the building's settled coordinate is redone
+REDONE = []
+
+
 def enrich_building(key, lat, lon):
-    f = OUT / (hashlib.sha1(key.encode()).hexdigest()[:14] + ".json")
+    """Lookups at the building's coordinate (build_master.building_coords: independent check W7). A cached result
+    computed from a different point (the first listing row's, when rows disagreed) is deleted and redone, together
+    with its data/enriched_color/ file, which scripts/rank.py then recomputes."""
+    name = hashlib.sha1(key.encode()).hexdigest()[:14] + ".json"
+    f = OUT / name
     if f.exists():
-        return json.loads(f.read_text())
+        r = json.loads(f.read_text())
+        try:
+            far = build_master.dist_m(float(r["lat"]), float(r["lon"]), lat, lon) > STALE_M
+        except (TypeError, ValueError, KeyError):
+            far = True
+        if not far:
+            return r
+        f.unlink()
+        (DATA / "enriched_color" / name).unlink(missing_ok=True)
+        REDONE.append(key)
     r = {"addr_key": key, "lat": lat, "lon": lon}
     for name, fn in [("drive", lambda: drive.drive(lat, lon)),
                      ("transit_sat", lambda: transit.route(lat, lon, "sat_midday")),
@@ -105,6 +123,15 @@ def flat(r):
 def main():
     L = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False)
     P = L[(L.gate_status == "pass") & (L.lat != "")].copy()
+    # one coordinate per building: the listing's own point is kept in lat_listing / lon_listing
+    P["zip5"] = P.zip5.map(lambda z: z.zfill(5) if z.isdigit() else z)
+    P = build_master.assign_building_ids(P)
+    G = build_master.building_coords(P)
+    P["lat_listing"], P["lon_listing"] = P.lat, P.lon
+    for c in ("lat", "lon", "coord_basis", "coord_spread_m", "coord_note"):
+        P[c] = P.building_id.map(G[c])
+    P = P.drop(columns=["flat", "flon", "street_key"])
+    G[G.coord_basis != "listing rows agree"].to_csv(DATA / "reference" / "building_geocode_changes.csv")
     B = P.drop_duplicates("addr_key")
     rows = []
     for i, (_, r) in enumerate(B.iterrows()):
@@ -142,6 +169,7 @@ def main():
     P["unit_status"] = P.all_in.map(lambda x: "pass" if x <= CAP else "fail_all_in")
     P.to_csv(DATA / "units.csv", index=False)
     print(P.unit_status.value_counts().to_dict(), "buildings:", P[P.unit_status == "pass"].addr_key.nunique())
+    print(f"coordinates: {G.coord_basis.value_counts().to_dict()}; lookups redone at a corrected coordinate: {len(REDONE)} address keys")
 
 
 if __name__ == "__main__":

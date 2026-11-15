@@ -1,6 +1,6 @@
 table,field,status,referenced_by,note
 master_units,listing_id,used,build_master.py;all_in.py;rank.py;build_neighborhoods.py;lifestyle_features.py;rent_terms.py,
-master_units,building_id,used,build_master.py;all_in.py;rank.py,
+master_units,building_id,used,build_master.py;all_in.py;rank.py;avoid.py;enrich_units.py,
 master_units,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 master_units,source_site,used,gates.py;build_master.py;avoid.py,
 master_units,url,used,gates.py;build_master.py;rank.py;avoid.py;crime_benchmarks.py;rent_terms.py,
@@ -9,7 +9,7 @@ master_units,also_seen_at,used,gates.py;build_master.py,
 master_units,detail_level,used,gates.py;build_master.py,
 master_units,first_seen,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_units,last_seen,not_used,build_master.py,bookkeeping or already folded into a merged field
-master_units,unit,used,gates.py;build_master.py;rank.py;avoid.py;rent_terms.py,
+master_units,unit,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;rent_terms.py,
 master_units,beds,used,gates.py;build_master.py;all_in.py;rank.py;rent_terms.py;enrich_units.py,
 master_units,baths,display,build_master.py,label shown on the page
 master_units,sqft,used,gates.py;build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
@@ -20,15 +20,18 @@ master_units,available_date_text,display,build_master.py,text shown on the unit 
 master_units,available_date,used,gates.py;build_master.py;rent_terms.py,
 master_units,floor,used,gates.py;build_master.py;avoid.py,
 master_units,floor_used,used,gates.py;build_master.py,
+master_units,floor_basis,used,gates.py;build_master.py,
+master_units,floor_label_kind,used,gates.py;build_master.py,
 master_units,g_floor,used,gates.py;build_master.py,
 master_units,listing_age_days,used,gates.py;build_master.py;rank.py,
 master_units,stale_listing,used,gates.py;build_master.py,
 master_units,photo_url,display,build_master.py,link shown on the page
 master_units,raw_path,used,build_master.py;rent_terms.py,
-master_units,notes,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py,
+master_units,notes,used,gates.py;build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py,
 master_units,other_monthly_fees_json,used,build_master.py;all_in.py;enrich_units.py,
 master_units,listing_type,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_units,gate_status,used,gates.py;build_master.py;enrich_units.py,
+master_units,duplicate_listing_ids,display,build_master.py,"other listings of the same unit, merged into this row (their links are in also_seen_at)"
 master_units,live_status,used,build_master.py;all_in.py;rank.py,
 master_units,live_price,used,build_master.py;all_in.py,
 master_units,live_available_text,display,build_master.py,text shown on the unit card or cost receipt
@@ -37,12 +40,11 @@ master_units,live_notes,used,build_master.py;rank.py,
 master_units,unit_floor,used,build_master.py;rank.py,
 master_units,unit_floor_basis,used,build_master.py;rank.py,
 master_units,unit_floor_source,provenance,build_master.py,travels with unit_floor
+master_units,unit_floor_label_kind,used,build_master.py;rank.py,
 master_units,address,used,gates.py;build_master.py;rank.py;rent_terms.py,
 master_units,city,used,gates.py;build_master.py;rating_standard.py,
 master_units,state,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;crime_benchmarks.py;rating_standard.py,
-master_units,zip5,used,gates.py;build_master.py;rating_standard.py,
-master_units,lat,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
-master_units,lon,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,zip5,used,gates.py;build_master.py;rank.py;rating_standard.py;enrich_units.py,
 master_units,hood,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;crime_benchmarks.py,
 master_units,hood_id,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;lifestyle_groups.py;crime_benchmarks.py,
 master_units,hood_area,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;crime_benchmarks.py,
@@ -95,13 +97,18 @@ master_units,motorway_m,used,rank.py;lifestyle_features.py;enrich_units.py,
 master_units,util_1br,used,enrich_units.py,
 master_units,util_1br_complete,used,enrich_units.py,
 master_units,util_studio,used,enrich_units.py,
+master_units,lat,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,lon,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,coord_basis,used,build_master.py;enrich_units.py,
+master_units,coord_spread_m,used,build_master.py;enrich_units.py,
+master_units,coord_note,used,build_master.py;enrich_units.py,
 master_units,elevator,used,gates.py;build_master.py;rank.py;avoid.py,
 master_units,elevator_basis,used,gates.py;build_master.py;rank.py,
 master_units,elevator_source,provenance,,travels with elevator
 master_units,dogs_allowed,used,build_master.py;rank.py;avoid.py,
-master_units,dogs_allowed_basis,used,rank.py,
+master_units,dogs_allowed_basis,provenance,,travels with dogs_allowed
 master_units,dogs_allowed_source,provenance,,travels with dogs_allowed
-master_units,dog_policy_text,used,build_master.py;rank.py,
+master_units,dog_policy_text,display,build_master.py,text shown on the unit card or cost receipt
 master_units,dog_policy_text_basis,provenance,,travels with dog_policy_text
 master_units,dog_policy_text_source,provenance,,travels with dog_policy_text
 master_units,dog_weight_limit_lb,used,gates.py;build_master.py;rank.py,
@@ -114,7 +121,7 @@ master_units,parking_type,used,gates.py;build_master.py;all_in.py;rank.py;build_
 master_units,parking_type_basis,provenance,,travels with parking_type
 master_units,parking_type_source,provenance,,travels with parking_type
 master_units,building_floors,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
-master_units,building_floors_basis,provenance,,travels with building_floors
+master_units,building_floors_basis,provenance,build_master.py,travels with building_floors
 master_units,building_floors_source,provenance,,travels with building_floors
 master_units,laundry,used,build_master.py;rank.py,
 master_units,laundry_basis,provenance,,travels with laundry
@@ -122,7 +129,7 @@ master_units,laundry_source,provenance,,travels with laundry
 master_units,manager,display,build_master.py,label shown on the page
 master_units,manager_basis,provenance,,travels with manager
 master_units,manager_source,provenance,,travels with manager
-master_units,utilities_included,used,build_master.py;all_in.py,
+master_units,utilities_included,used,gates.py;build_master.py;all_in.py,
 master_units,utilities_included_basis,used,all_in.py,
 master_units,utilities_included_source,provenance,,travels with utilities_included
 master_units,building_name,used,gates.py;build_master.py;rank.py;rent_terms.py;rating_standard.py,
@@ -149,19 +156,25 @@ master_units,package_room_source,provenance,,travels with package_room
 master_units,lounge_or_coworking,used,build_master.py;rank.py,
 master_units,lounge_or_coworking_basis,provenance,,travels with lounge_or_coworking
 master_units,lounge_or_coworking_source,provenance,,travels with lounge_or_coworking
+master_units,dog_weight_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_units,dog_weight_text_basis,provenance,,travels with dog_weight_text
+master_units,dog_weight_text_source,provenance,,travels with dog_weight_text
 master_units,year_built,used,build_master.py;rank.py,
 master_units,year_built_basis,provenance,,travels with year_built
 master_units,year_built_source,provenance,,travels with year_built
 master_units,pet_one_time_fee_text,display,build_master.py,text shown on the unit card or cost receipt
 master_units,pet_one_time_fee_text_basis,provenance,,travels with pet_one_time_fee_text
 master_units,pet_one_time_fee_text_source,provenance,,travels with pet_one_time_fee_text
+master_units,parking_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_units,parking_text_basis,provenance,,travels with parking_text
+master_units,parking_text_source,provenance,,travels with parking_text
 master_units,required_fees_text,used,build_master.py;all_in.py,
 master_units,required_fees_text_basis,used,all_in.py,
 master_units,required_fees_text_source,provenance,,travels with required_fees_text
 master_units,lease_terms_text,used,build_master.py;rent_terms.py,
 master_units,lease_terms_text_basis,provenance,,travels with lease_terms_text
 master_units,lease_terms_text_source,provenance,,travels with lease_terms_text
-master_units,concession_text_evidence,display,build_master.py,text shown on the unit card or cost receipt
+master_units,concession_text_evidence,used,build_master.py;all_in.py,
 master_units,concession_text_evidence_basis,provenance,,travels with concession_text_evidence
 master_units,concession_text_evidence_source,provenance,,travels with concession_text_evidence
 master_units,pool,used,gates.py;build_master.py;rank.py;lifestyle_color.py,
@@ -173,15 +186,33 @@ master_units,doorman_source,provenance,,travels with doorman
 master_units,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_units,parking_fee_monthly_basis,used,all_in.py,
 master_units,parking_fee_monthly_source,provenance,,travels with parking_fee_monthly
+master_units,parking_fee_note,used,build_master.py;all_in.py,
+master_units,parking_fee_note_basis,provenance,,travels with parking_fee_note
+master_units,parking_fee_note_source,provenance,,travels with parking_fee_note
+master_units,parking_options,used,build_master.py;all_in.py,
+master_units,parking_options_basis,provenance,,travels with parking_options
+master_units,parking_options_source,provenance,,travels with parking_options
 master_units,balconies,used,build_master.py;rank.py,
 master_units,balconies_basis,provenance,,travels with balconies
 master_units,balconies_source,provenance,,travels with balconies
 master_units,unit_count,display,build_master.py,label shown on the page
 master_units,unit_count_basis,provenance,,travels with unit_count
 master_units,unit_count_source,provenance,,travels with unit_count
+master_units,dog_size_only,used,build_master.py;rank.py,
+master_units,dog_size_only_basis,provenance,,travels with dog_size_only
+master_units,dog_size_only_source,provenance,,travels with dog_size_only
 master_units,building_type,used,gates.py;build_master.py;rank.py,
 master_units,building_type_basis,provenance,,travels with building_type
 master_units,building_type_source,provenance,,travels with building_type
+master_units,pet_rent_note,used,build_master.py;all_in.py,
+master_units,pet_rent_note_basis,provenance,,travels with pet_rent_note
+master_units,pet_rent_note_source,provenance,,travels with pet_rent_note
+master_units,dogs_allowed_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_units,dogs_allowed_note_basis,provenance,,travels with dogs_allowed_note
+master_units,dogs_allowed_note_source,provenance,,travels with dogs_allowed_note
+master_units,optional_fees_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_units,optional_fees_text_basis,provenance,,travels with optional_fees_text
+master_units,optional_fees_text_source,provenance,,travels with optional_fees_text
 master_units,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
 master_units,rent_regulation_basis,provenance,,travels with rent_regulation
 master_units,rent_regulation_source,provenance,,travels with rent_regulation
@@ -191,6 +222,9 @@ master_units,income_requirement_source,provenance,,travels with income_requireme
 master_units,listing_warning,display,build_master.py,text shown on the unit card or cost receipt
 master_units,listing_warning_basis,provenance,,travels with listing_warning
 master_units,listing_warning_source,provenance,,travels with listing_warning
+master_units,elevator_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_units,elevator_note_basis,provenance,,travels with elevator_note
+master_units,elevator_note_source,provenance,,travels with elevator_note
 master_units,addr_keys,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_units,n_listed_units,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_units,transit_sat_transfers,used,build_master.py;rank.py,
@@ -394,17 +428,16 @@ master_units,rent_first_full_payment_note,used,all_in.py,
 master_units,rent_needs_call,used,all_in.py,
 master_units,all_in,used,all_in.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
 master_units,all_in_gross,used,all_in.py,
-master_units,all_in_lines,used,all_in.py;rank.py;enrich_units.py,
+master_units,all_in_lines,used,all_in.py;enrich_units.py,
 master_units,all_in_unknown_lines,used,all_in.py,
 master_units,all_in_estimated_lines,used,all_in.py,
+master_units,all_in_stated_line_count,used,all_in.py;rank.py,
 master_units,cost_gate,used,all_in.py;rank.py,
-master_buildings,building_id,used,build_master.py;all_in.py;rank.py,
+master_buildings,building_id,used,build_master.py;all_in.py;rank.py;avoid.py;enrich_units.py,
 master_buildings,address,used,gates.py;build_master.py;rank.py;rent_terms.py,
 master_buildings,city,used,gates.py;build_master.py;rating_standard.py,
 master_buildings,state,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;crime_benchmarks.py;rating_standard.py,
-master_buildings,zip5,used,gates.py;build_master.py;rating_standard.py,
-master_buildings,lat,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
-master_buildings,lon,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_buildings,zip5,used,gates.py;build_master.py;rank.py;rating_standard.py;enrich_units.py,
 master_buildings,hood,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;crime_benchmarks.py,
 master_buildings,hood_id,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;lifestyle_groups.py;crime_benchmarks.py,
 master_buildings,hood_area,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;crime_benchmarks.py,
@@ -457,13 +490,18 @@ master_buildings,motorway_m,used,rank.py;lifestyle_features.py;enrich_units.py,
 master_buildings,util_1br,used,enrich_units.py,
 master_buildings,util_1br_complete,used,enrich_units.py,
 master_buildings,util_studio,used,enrich_units.py,
+master_buildings,lat,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_buildings,lon,used,build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_buildings,coord_basis,used,build_master.py;enrich_units.py,
+master_buildings,coord_spread_m,used,build_master.py;enrich_units.py,
+master_buildings,coord_note,used,build_master.py;enrich_units.py,
 master_buildings,elevator,used,gates.py;build_master.py;rank.py;avoid.py,
 master_buildings,elevator_basis,used,gates.py;build_master.py;rank.py,
 master_buildings,elevator_source,provenance,,travels with elevator
 master_buildings,dogs_allowed,used,build_master.py;rank.py;avoid.py,
-master_buildings,dogs_allowed_basis,used,rank.py,
+master_buildings,dogs_allowed_basis,provenance,,travels with dogs_allowed
 master_buildings,dogs_allowed_source,provenance,,travels with dogs_allowed
-master_buildings,dog_policy_text,used,build_master.py;rank.py,
+master_buildings,dog_policy_text,display,build_master.py,text shown on the unit card or cost receipt
 master_buildings,dog_policy_text_basis,provenance,,travels with dog_policy_text
 master_buildings,dog_policy_text_source,provenance,,travels with dog_policy_text
 master_buildings,dog_weight_limit_lb,used,gates.py;build_master.py;rank.py,
@@ -476,7 +514,7 @@ master_buildings,parking_type,used,gates.py;build_master.py;all_in.py;rank.py;bu
 master_buildings,parking_type_basis,provenance,,travels with parking_type
 master_buildings,parking_type_source,provenance,,travels with parking_type
 master_buildings,building_floors,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
-master_buildings,building_floors_basis,provenance,,travels with building_floors
+master_buildings,building_floors_basis,provenance,build_master.py,travels with building_floors
 master_buildings,building_floors_source,provenance,,travels with building_floors
 master_buildings,laundry,used,build_master.py;rank.py,
 master_buildings,laundry_basis,provenance,,travels with laundry
@@ -484,7 +522,7 @@ master_buildings,laundry_source,provenance,,travels with laundry
 master_buildings,manager,display,build_master.py,label shown on the page
 master_buildings,manager_basis,provenance,,travels with manager
 master_buildings,manager_source,provenance,,travels with manager
-master_buildings,utilities_included,used,build_master.py;all_in.py,
+master_buildings,utilities_included,used,gates.py;build_master.py;all_in.py,
 master_buildings,utilities_included_basis,used,all_in.py,
 master_buildings,utilities_included_source,provenance,,travels with utilities_included
 master_buildings,building_name,used,gates.py;build_master.py;rank.py;rent_terms.py;rating_standard.py,
@@ -511,19 +549,25 @@ master_buildings,package_room_source,provenance,,travels with package_room
 master_buildings,lounge_or_coworking,used,build_master.py;rank.py,
 master_buildings,lounge_or_coworking_basis,provenance,,travels with lounge_or_coworking
 master_buildings,lounge_or_coworking_source,provenance,,travels with lounge_or_coworking
+master_buildings,dog_weight_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_buildings,dog_weight_text_basis,provenance,,travels with dog_weight_text
+master_buildings,dog_weight_text_source,provenance,,travels with dog_weight_text
 master_buildings,year_built,used,build_master.py;rank.py,
 master_buildings,year_built_basis,provenance,,travels with year_built
 master_buildings,year_built_source,provenance,,travels with year_built
 master_buildings,pet_one_time_fee_text,display,build_master.py,text shown on the unit card or cost receipt
 master_buildings,pet_one_time_fee_text_basis,provenance,,travels with pet_one_time_fee_text
 master_buildings,pet_one_time_fee_text_source,provenance,,travels with pet_one_time_fee_text
+master_buildings,parking_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_buildings,parking_text_basis,provenance,,travels with parking_text
+master_buildings,parking_text_source,provenance,,travels with parking_text
 master_buildings,required_fees_text,used,build_master.py;all_in.py,
 master_buildings,required_fees_text_basis,used,all_in.py,
 master_buildings,required_fees_text_source,provenance,,travels with required_fees_text
 master_buildings,lease_terms_text,used,build_master.py;rent_terms.py,
 master_buildings,lease_terms_text_basis,provenance,,travels with lease_terms_text
 master_buildings,lease_terms_text_source,provenance,,travels with lease_terms_text
-master_buildings,concession_text_evidence,display,build_master.py,text shown on the unit card or cost receipt
+master_buildings,concession_text_evidence,used,build_master.py;all_in.py,
 master_buildings,concession_text_evidence_basis,provenance,,travels with concession_text_evidence
 master_buildings,concession_text_evidence_source,provenance,,travels with concession_text_evidence
 master_buildings,pool,used,gates.py;build_master.py;rank.py;lifestyle_color.py,
@@ -535,15 +579,33 @@ master_buildings,doorman_source,provenance,,travels with doorman
 master_buildings,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_buildings,parking_fee_monthly_basis,used,all_in.py,
 master_buildings,parking_fee_monthly_source,provenance,,travels with parking_fee_monthly
+master_buildings,parking_fee_note,used,build_master.py;all_in.py,
+master_buildings,parking_fee_note_basis,provenance,,travels with parking_fee_note
+master_buildings,parking_fee_note_source,provenance,,travels with parking_fee_note
+master_buildings,parking_options,used,build_master.py;all_in.py,
+master_buildings,parking_options_basis,provenance,,travels with parking_options
+master_buildings,parking_options_source,provenance,,travels with parking_options
 master_buildings,balconies,used,build_master.py;rank.py,
 master_buildings,balconies_basis,provenance,,travels with balconies
 master_buildings,balconies_source,provenance,,travels with balconies
 master_buildings,unit_count,display,build_master.py,label shown on the page
 master_buildings,unit_count_basis,provenance,,travels with unit_count
 master_buildings,unit_count_source,provenance,,travels with unit_count
+master_buildings,dog_size_only,used,build_master.py;rank.py,
+master_buildings,dog_size_only_basis,provenance,,travels with dog_size_only
+master_buildings,dog_size_only_source,provenance,,travels with dog_size_only
 master_buildings,building_type,used,gates.py;build_master.py;rank.py,
 master_buildings,building_type_basis,provenance,,travels with building_type
 master_buildings,building_type_source,provenance,,travels with building_type
+master_buildings,pet_rent_note,used,build_master.py;all_in.py,
+master_buildings,pet_rent_note_basis,provenance,,travels with pet_rent_note
+master_buildings,pet_rent_note_source,provenance,,travels with pet_rent_note
+master_buildings,dogs_allowed_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_buildings,dogs_allowed_note_basis,provenance,,travels with dogs_allowed_note
+master_buildings,dogs_allowed_note_source,provenance,,travels with dogs_allowed_note
+master_buildings,optional_fees_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_buildings,optional_fees_text_basis,provenance,,travels with optional_fees_text
+master_buildings,optional_fees_text_source,provenance,,travels with optional_fees_text
 master_buildings,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
 master_buildings,rent_regulation_basis,provenance,,travels with rent_regulation
 master_buildings,rent_regulation_source,provenance,,travels with rent_regulation
@@ -553,6 +615,9 @@ master_buildings,income_requirement_source,provenance,,travels with income_requi
 master_buildings,listing_warning,display,build_master.py,text shown on the unit card or cost receipt
 master_buildings,listing_warning_basis,provenance,,travels with listing_warning
 master_buildings,listing_warning_source,provenance,,travels with listing_warning
+master_buildings,elevator_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_buildings,elevator_note_basis,provenance,,travels with elevator_note
+master_buildings,elevator_note_source,provenance,,travels with elevator_note
 master_buildings,addr_keys,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_buildings,n_listed_units,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_buildings,transit_sat_transfers,used,build_master.py;rank.py,
@@ -750,29 +815,29 @@ evidence:items,item_date,used,avoid.py,
 evidence:items,excerpt,used,avoid.py,
 evidence:items,source_site,used,gates.py;build_master.py;avoid.py,
 evidence:items,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
-evidence:items,about,used,rating_standard.py,
+evidence:items,about,used,avoid.py;rating_standard.py,
 evidence:items,retrieved_at,not_used,,bookkeeping or already folded into a merged field
 evidence:facts,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:facts,fact,used,build_master.py;avoid.py;rent_terms.py,
 evidence:facts,value,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;rent_terms.py;enrich_units.py,
-evidence:facts,quote,used,rent_terms.py,
+evidence:facts,quote,used,build_master.py;rent_terms.py,
 evidence:facts,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
 evidence:confirm,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:confirm,fact,used,build_master.py;avoid.py;rent_terms.py,
 evidence:confirm,value,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;rent_terms.py;enrich_units.py,
-evidence:confirm,quote,used,rent_terms.py,
+evidence:confirm,quote,used,build_master.py;rent_terms.py,
 evidence:confirm,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
 evidence:confirm,status,used,build_master.py;avoid.py;enrich_units.py,
 evidence:live_check,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:live_check,listing_url,used,avoid.py;rent_terms.py,
-evidence:live_check,unit,used,gates.py;build_master.py;rank.py;avoid.py;rent_terms.py,
+evidence:live_check,unit,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;rent_terms.py,
 evidence:live_check,status,used,build_master.py;avoid.py;enrich_units.py,
 evidence:live_check,price_now,used,build_master.py,
 evidence:live_check,available_now_text,used,build_master.py,
 evidence:live_check,matches_stored,not_used,,bookkeeping or already folded into a merged field
 evidence:live_check,building_site_url,used,rent_terms.py,
 evidence:live_check,checked_at,used,build_master.py,
-evidence:live_check,notes,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py,
+evidence:live_check,notes,used,gates.py;build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py,
 evidence:ratings,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:ratings,building_name,used,gates.py;build_master.py;rank.py;rent_terms.py;rating_standard.py,
 evidence:ratings,rating_source,used,rating_standard.py,
@@ -787,7 +852,7 @@ evidence:ratings,negative_older,used,rating_standard.py,
 evidence:ratings,serious_issue_tags_last_6_months,used,rating_standard.py,
 evidence:ratings,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
 evidence:ratings,retrieved_at,not_used,,bookkeeping or already folded into a merged field
-evidence:ratings,notes,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py,
+evidence:ratings,notes,used,gates.py;build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py,
 evidence:nyc_records_flags,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:nyc_records_flags,bbl,not_used,,NYC records detail behind the flags
 evidence:nyc_records_flags,address,used,gates.py;build_master.py;rank.py;rent_terms.py,
@@ -796,7 +861,7 @@ evidence:nyc_records_flags,caution,not_used,,NYC records detail behind the flags
 evidence:nyc_records_flags,flag,used,build_master.py;avoid.py;crime_benchmarks.py;rating_standard.py,
 evidence:nyc_records_flags,metric,used,avoid.py,
 evidence:nyc_records_flags,period,used,build_master.py;avoid.py,
-evidence:nyc_records_flags,count,used,build_master.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py,
+evidence:nyc_records_flags,count,used,build_master.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py,
 evidence:nyc_records_flags,per_100_units,used,avoid.py,
 evidence:nyc_records_flags,baseline_median,not_used,,NYC records detail behind the flags
 evidence:nyc_records_flags,baseline_p80,not_used,,NYC records detail behind the flags
@@ -810,7 +875,7 @@ evidence:rating_standard,addr_key,used,gates.py;build_master.py;all_in.py;rank.p
 evidence:rating_standard,building_name,used,gates.py;build_master.py;rank.py;rent_terms.py;rating_standard.py,
 evidence:rating_standard,city,used,gates.py;build_master.py;rating_standard.py,
 evidence:rating_standard,state,used,gates.py;build_master.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;crime_benchmarks.py;rating_standard.py,
-evidence:rating_standard,zip5,used,gates.py;build_master.py;rating_standard.py,
+evidence:rating_standard,zip5,used,gates.py;build_master.py;rank.py;rating_standard.py;enrich_units.py,
 evidence:rating_standard,region,used,rating_standard.py,
 evidence:rating_standard,round,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;lifestyle_groups.py;crime_benchmarks.py;rating_standard.py,
 evidence:rating_standard,ratings_checked,used,rating_standard.py,

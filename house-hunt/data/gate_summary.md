@@ -1,120 +1,157 @@
 # Gate summary
 
-Raw rows: 20721. After dedupe: 18290.
+Raw rows: 24311. After dedupe: 20464.
 
 | status | listings | buildings |
 |---|---|---|
-| fail | 4194 | 3208 |
-| pass | 2027 | 670 |
-| pending | 12069 | 8997 |
+| fail | 4271 | 3213 |
+| pass | 2598 | 692 |
+| pending | 13595 | 9444 |
 
 ## Each gate (after dedupe)
 
 | gate | pass | fail | unknown |
 |---|---|---|---|
-| type | 18267 | 23 | 0 |
-| rent | 18263 | 15 | 12 |
-| movein | 5972 | 689 | 11629 |
-| dog | 8556 | 972 | 8762 |
-| elevator | 5116 | 1306 | 11868 |
-| floor | 5944 | 1612 | 10734 |
-| place | 18263 | 0 | 27 |
-| proof | 8039 | 0 | 10251 |
+| type | 20241 | 223 | 0 |
+| rent | 20239 | 55 | 170 |
+| movein | 7842 | 932 | 11690 |
+| dog | 10245 | 1171 | 9048 |
+| elevator | 5780 | 1317 | 13367 |
+| floor | 5092 | 1076 | 14296 |
+| place | 20434 | 0 | 30 |
+| proof | 10376 | 7 | 10081 |
 
 ## By source
 
-| source_site                          |   fail |   pass |   pending |
-|:-------------------------------------|-------:|-------:|----------:|
-| anninlofts.com                       |      0 |      0 |         1 |
-| apartmentlist.com                    |    990 |   1035 |      1434 |
-| avaloncommunities.com                |     86 |     49 |        41 |
-| bltliveworkplay.com (SightMap embed) |     28 |     23 |        26 |
-| bygomes.com                          |      4 |      0 |         0 |
-| fairfieldproperties.com              |      8 |      0 |       291 |
-| gardencommunities.com                |      8 |      2 |       116 |
-| gardenhomesmanagement.com            |      4 |      0 |         8 |
-| gdcrentals.com                       |      2 |      0 |        13 |
-| greystar.com                         |     46 |     30 |       155 |
-| livethemitchell.com                  |      1 |      1 |         0 |
-| newportrentals.com                   |      3 |      0 |         2 |
-| onewebbave.com                       |      0 |     18 |         0 |
-| sawyerplaceny.com                    |      0 |      0 |         3 |
-| scenicbeaconproperties.com           |      1 |      0 |         2 |
-| solvermella.com                      |      2 |      0 |         3 |
-| thehalden.com                        |      1 |      0 |         2 |
-| trulia                               |   2572 |    781 |      6867 |
-| trulia.com                           |      1 |      0 |         0 |
-| vermellacrossing.com                 |      1 |      0 |        12 |
-| vermellaharrison.com                 |      8 |      0 |         2 |
-| vermellalyndhurst.com                |      1 |      1 |         0 |
-| vermellawest.com                     |      1 |      0 |         0 |
-| vermellawoodbridge.com               |      1 |      0 |         3 |
-| www.vermellaeast.com                 |      1 |      0 |         0 |
-| zillow.com                           |     23 |     15 |        30 |
-| zumper                               |    398 |     72 |      3051 |
-| zumper.com                           |      3 |      0 |         7 |
+| source_site                               |   fail |   pass |   pending |
+|:------------------------------------------|-------:|-------:|----------:|
+| 18dock.com (SightMap embed)               |      0 |      1 |         0 |
+| 1eastmainstreet.com                       |      1 |      0 |         0 |
+| 360huguenot.com                           |      1 |      4 |         0 |
+| anninlofts.com                            |      0 |      0 |         1 |
+| apartmentlist.com                         |   1166 |   1364 |      2303 |
+| arrivestamford.com                        |      1 |      0 |         0 |
+| avaloncommunities.com                     |     86 |      0 |        90 |
+| bltliveworkplay.com (SightMap embed)      |     28 |     23 |        26 |
+| bottiniproperties.com                     |      0 |      0 |         2 |
+| bygomes.com                               |      4 |      0 |         0 |
+| continuumwhiteplains.com                  |      3 |     10 |         0 |
+| eastdalevillage.com                       |      1 |      0 |         0 |
+| fairfieldproperties.com                   |     11 |      0 |       241 |
+| gardencommunities.com                     |      8 |      2 |       116 |
+| gardenhomesmanagement.com                 |      1 |      0 |         8 |
+| gdcrentals.com                            |      2 |      0 |        13 |
+| greystar.com                              |     49 |     25 |       154 |
+| livecarraway.com                          |      0 |      4 |         0 |
+| livemotifapts.com                         |      1 |      7 |         0 |
+| livethemitchell.com                       |      1 |      1 |         0 |
+| morganparc.com                            |      1 |      0 |         0 |
+| newportrentals.com                        |      3 |      0 |         2 |
+| none                                      |      7 |      0 |         0 |
+| one.clintonpark.com                       |      3 |      4 |         0 |
+| onewebbave.com                            |      0 |     18 |         0 |
+| paredimcommunities.com                    |      3 |      0 |         0 |
+| sawyerplaceny.com                         |      0 |      3 |         0 |
+| scenicbeaconproperties.com                |      1 |      0 |         2 |
+| scribenorwalk.com (SightMap embed)        |      0 |     25 |         0 |
+| solvermella.com                           |      2 |      0 |         3 |
+| soundviewlanding.com                      |      1 |      0 |         0 |
+| thebarnumhouse.com                        |      1 |      0 |         0 |
+| thebrookport.com                          |      1 |      0 |         0 |
+| thedanforthapts.com                       |      0 |      0 |         4 |
+| thehalden.com                             |      1 |      0 |         2 |
+| theleafnewrochelle.com                    |      0 |      9 |         0 |
+| thesheldonatsuffern.com                   |      1 |      0 |         0 |
+| theshipyardriverhead.com                  |      1 |      0 |         0 |
+| trademarkfairfield.com                    |      1 |      0 |         0 |
+| trulia                                    |   2315 |    999 |      7413 |
+| trulia.com                                |     16 |      0 |         0 |
+| vermellacrossing.com                      |      1 |      0 |        12 |
+| vermellaharrison.com                      |      7 |      0 |         3 |
+| vermellalyndhurst.com                     |      1 |      0 |         1 |
+| vermellawest.com                          |      1 |      0 |         0 |
+| vermellawoodbridge.com                    |      1 |      0 |         3 |
+| villageplaceatgoshen.com                  |      1 |      0 |         0 |
+| wallstreetplace.com                       |      1 |      0 |         0 |
+| www.101parkplace.com                      |      0 |      0 |         1 |
+| www.apartmentlist.com                     |     33 |      0 |         0 |
+| www.eastsidecommons.com                   |      1 |      0 |         0 |
+| www.infinityharborpoint.com               |      0 |      0 |         3 |
+| www.merrittriver.com                      |      0 |      0 |         1 |
+| www.metrostarproperties.com               |      7 |      0 |         0 |
+| www.shoregateli.com (SightMap embed)      |      0 |      2 |         0 |
+| www.theasherstamford.com (SightMap embed) |      1 |     15 |         0 |
+| www.thebeaconnorwalk.com (SightMap embed) |      5 |      0 |        10 |
+| www.thelafayettestamford.com              |      1 |      0 |         0 |
+| www.thewescottapts.com                    |      0 |      0 |         1 |
+| www.trulia.com                            |     70 |      0 |         0 |
+| www.vermellaeast.com                      |      1 |      0 |         0 |
+| www.zumper.com                            |      2 |      0 |         0 |
+| zillow.com                                |     22 |     12 |        30 |
+| zumper                                    |    389 |     70 |      3141 |
+| zumper.com                                |      4 |      0 |         9 |
 
 ## Pending reasons (what would need confirming)
 
 | pending_reasons           |   count |
 |:--------------------------|--------:|
-| movein;dog;elevator;proof |    4836 |
-| movein;elevator;proof     |    2616 |
-| elevator                  |     868 |
-| dog;elevator              |     689 |
-| dog                       |     544 |
-| movein                    |     400 |
-| movein;proof              |     398 |
-| movein;dog;elevator       |     366 |
-| movein;elevator           |     351 |
-| movein;dog                |     251 |
+| movein;dog;elevator;proof |    4996 |
+| movein;elevator;proof     |    2664 |
+| elevator                  |    1833 |
+| dog;elevator              |    1000 |
+| dog                       |     562 |
+| movein                    |     454 |
+| movein;proof              |     379 |
+| movein;dog;elevator       |     368 |
+| movein;elevator           |     348 |
+| movein;dog                |     253 |
 | dog;elevator;proof        |     244 |
-| movein;dog;proof          |     240 |
 | elevator;proof            |     238 |
-| dog;elevator;place        |      18 |
+| movein;dog;proof          |     226 |
+| dog;elevator;place        |      21 |
 | dog;proof                 |       3 |
 
 ## Passing listings by state and city (top 40)
 
 |                                 |   0 |
 |:--------------------------------|----:|
-| ('NJ', 'Jersey City')           | 341 |
+| ('NJ', 'Jersey City')           | 335 |
+| ('CT', 'New Haven')             | 330 |
+| ('CT', 'Stamford')              | 166 |
+| ('CT', 'Bridgeport')            | 108 |
 | ('NJ', 'Parsippany-Troy Hills') | 107 |
-| ('CT', 'Stamford')              | 104 |
-| ('CT', 'New Haven')             |  92 |
-| ('NY', 'New Rochelle')          |  82 |
-| ('NY', 'New York')              |  80 |
-| ('NJ', 'Newark')                |  71 |
-| ('NY', 'Yonkers')               |  63 |
-| ('NY', 'White Plains')          |  61 |
+| ('CT', 'Norwalk')               |  97 |
+| ('NY', 'New Rochelle')          |  93 |
+| ('NY', 'New York')              |  78 |
+| ('NY', 'Yonkers')               |  75 |
+| ('NJ', 'Newark')                |  68 |
+| ('NJ', 'Bayonne')               |  67 |
+| ('NY', 'White Plains')          |  66 |
+| ('NY', 'Port Chester')          |  59 |
 | ('NY', 'Brooklyn')              |  56 |
-| ('NJ', 'Bayonne')               |  55 |
-| ('CT', 'Norwalk')               |  54 |
+| ('NJ', 'Hackensack')            |  43 |
 | ('NJ', 'Harrison')              |  42 |
 | ('NJ', 'Dover')                 |  41 |
-| ('NJ', 'Hackensack')            |  41 |
-| ('NJ', 'West Windsor')          |  39 |
-| ('NJ', 'New Brunswick')         |  32 |
-| ('NJ', 'Bogota')                |  31 |
+| ('NJ', 'Burlington')            |  29 |
 | ('NY', 'Bronx')                 |  29 |
+| ('CT', 'Danbury')               |  24 |
+| ('NJ', 'East Orange')           |  23 |
 | ('NJ', 'Clifton')               |  22 |
 | ('NJ', 'West New York')         |  21 |
 | ('NY', 'Jamaica')               |  21 |
-| ('NJ', 'East Orange')           |  20 |
+| ('NJ', 'New Brunswick')         |  21 |
+| ('CT', 'Trumbull')              |  19 |
+| ('NJ', 'South River')           |  18 |
+| ('NJ', 'Flemington')            |  18 |
 | ('NY', 'Purchase')              |  18 |
+| ('NJ', 'Somerset')              |  17 |
+| ('NY', 'Haverstraw')            |  16 |
+| ('NY', 'Peekskill')             |  16 |
 | ('NJ', 'Bloomfield')            |  16 |
-| ('NJ', 'Englewood')             |  14 |
+| ('NJ', 'Bogota')                |  16 |
 | ('NY', 'Flushing')              |  14 |
-| ('NJ', 'Plainsboro')            |  14 |
-| ('CT', 'Trumbull')              |  12 |
-| ('NY', 'Peekskill')             |  12 |
+| ('NJ', 'Englewood')             |  14 |
+| ('CT', 'Shelton')               |  14 |
+| ('CT', 'Milford')               |  13 |
 | ('NJ', 'Orange')                |  12 |
-| ('NJ', 'Livingston')            |  11 |
-| ('NJ', 'Belleville')            |  11 |
-| ('NY', 'Port Chester')          |  11 |
-| ('NY', 'Middletown')            |  11 |
-| ('NJ', 'North Bergen')          |  10 |
-| ('NY', 'Haverstraw')            |  10 |
-| ('NJ', 'Fort Lee')              |  10 |
-| ('CT', 'Danbury')               |   9 |
-| ('CT', 'Milford city')          |   9 |
+| ('NJ', 'Long Branch')           |  11 |

@@ -23,6 +23,7 @@ from pathlib import Path
 import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent))
 from lib import DATA
+import parsers
 
 TODAY = pd.Timestamp("2026-11-15")
 M6, M24 = TODAY - pd.DateOffset(months=6), TODAY - pd.DateOffset(months=24)
@@ -36,11 +37,22 @@ def cat(kind):
 
 
 def when(s):
+    """Date of an item. A year-only date is placed at January 1 (the earliest it can mean), a month-only date at the
+    1st: an item is never counted as more recent than its date proves (independent check W19)."""
     s = str(s).strip()
     m = re.match(r"(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?", s)
     if not m:
         return pd.NaT
-    return pd.Timestamp(int(m.group(1)), int(m.group(2) or 6), int(m.group(3) or 15))
+    return pd.Timestamp(int(m.group(1)), int(m.group(2) or 1), int(m.group(3) or 1))
+
+
+def month_known(s):
+    return bool(re.match(r"\d{4}-\d{2}", str(s).strip()))
+
+
+OUTAGE = re.compile(r"out of (?:service|order)|broke|break|outage|not work|doesn.?t work|don.?t work|\bdown\b|stuck|inoperable|repair|fail|restore service|"
+                    r"shut|trapped|unreliable|malfunction|out for|wasn.?t working|weren.?t working|not functioning", re.I)
+AGGREGATOR = re.compile(r"trulia|zumper|apartmentlist|zillow|apartments\.com|rent\.com", re.I)
 
 
 def main():
@@ -51,16 +63,28 @@ def main():
             ex.append((r.addr_key, r.unit, "listing gone at live check", r.listing_url))
         elif NOT_REAL.search(r.notes or ""):
             ex.append((r.addr_key, r.unit, "checker judged the listing not open-market, not genuine, stale or duplicate: " + r.notes[:160], r.listing_url))
+    xwf = DATA / "reference" / "building_crosswalk.csv"
+    XW = pd.read_csv(xwf, dtype=str).set_index("addr_key").building_id.to_dict() if xwf.exists() else {}
+    bkey = lambda k: XW.get(k, k)
+    # dog policy: only a real "no" excludes. Where sources disagree, the building's own or its manager's page wins;
+    # aggregator against aggregator is left as an open fact for scripts/rank.py to hold back (independent check W20).
+    dog_rows = C[C.fact.str.lower().str.startswith("dogs_allowed")]
+    own_yes = {bkey(r.addr_key) for r in dog_rows[dog_rows.status == "confirmed"].itertuples() if not AGGREGATOR.search(r.source_url or "")}
+    for b_, g in dog_rows[dog_rows.status == "contradicts"].groupby(dog_rows.addr_key.map(bkey)):
+        verdict = parsers.dog_conflict("; ".join(dict.fromkeys(g.value)))
+        if verdict == "no" and not (b_ in own_yes and AGGREGATOR.search(" ".join(g.source_url)) and not re.search(r"service|emotional", " ".join(g.value), re.I)):
+            for k in sorted(set(g.addr_key)):
+                ex.append((k, "", "dogs not allowed: " + g.value.iloc[0][:120], g.source_url.iloc[0]))
     for r in C[C.status == "contradicts"].itertuples():
         f = r.fact.lower()
-        if f.startswith("dogs_allowed"):
-            ex.append((r.addr_key, "", "dog policy contradicted or conflicting between sources: " + r.value[:120], r.source_url))
-        elif f.startswith("elevator"):
+        if f.startswith("elevator"):
             ex.append((r.addr_key, "", "elevator contradicted: " + r.value[:120], r.source_url))
         elif f.startswith("floor"):
-            units = re.findall(r"([\w-]+):? ?(?:floor|is on floor)? ?1\b", r.value)
-            gf = re.findall(r"([A-Za-z0-9-]+)[^;,]*?(?:floor 1|ground floor)", r.value)
-            ex.append((r.addr_key, ";".join(gf) if len(gf) and ":" in r.value else "", "ground-floor unit: " + r.value[:120], r.source_url))
+            # "unit 5106: floor 1 (ground floor)" -> unit 5106 only; "1 (ground floor)" -> the listed unit (W18)
+            pairs, _ = parsers.parse_floor_confirm(r.value)
+            gf = [lab for lab, fl_ in pairs if fl_ <= 1 and lab != "*"]
+            if gf or any(lab == "*" and fl_ <= 1 for lab, fl_ in pairs):
+                ex.append((r.addr_key, ";".join(gf), "ground-floor unit: " + r.value[:120], r.source_url))
         elif f.startswith("dog_weight") and re.search(r"\b(1\d|2[0-4]) ?lb", r.value):
             ex.append((r.addr_key, "", "dog weight limit under 25 lb: " + r.value[:120], r.source_url))
     X = pd.DataFrame(ex, columns=["addr_key", "unit", "reason", "source"]).drop_duplicates()
@@ -68,7 +92,9 @@ def main():
 
     I = I[~I.category.isin(["none_found", ""])].copy()
     I["dt"] = I.item_date.map(when)
-    I = I.drop_duplicates(["addr_key", "category", "excerpt"])
+    # one incident reported under several address keys of the same building counts once (W19)
+    I["bkey"] = I.addr_key.map(bkey)
+    I = I.drop_duplicates(["bkey", "category", "excerpt"])
     is_count_summary = I.source_site.str.contains("311|HPD|NYC Open Data", case=False)   # counted via nyc_records_flags instead
     R = I[~is_count_summary]
     nf = DATA / "evidence" / "nyc_records_flags.csv"
@@ -102,15 +128,27 @@ def main():
     rows = []
     keys = sorted(set(I.addr_key) | set(N.addr_key) | set(L.addr_key) | set(car250.index) | set(jc) | set(rating))
     for k in keys:
-        r, n = R[R.addr_key == k], N[N.addr_key == k]
+        r, n = R[R.bkey == bkey(k)], N[N.addr_key == k]
         flags = set(n.flag)
-        def cnt(c, since=None):
+        def reports(x):
+            """Distinct dated reports: one per source page and date, however many excerpts were taken from it."""
+            return len(x[x.item_date.astype(str).str.strip() != ""].drop_duplicates(["source_url", "item_date"]))
+        def cnt(c, since=None, need_month=False):
             x = r[r.category == c]
+            if c == "elevator":
+                x = x[x.excerpt.map(lambda e: bool(OUTAGE.search(str(e)))).astype(bool)]          # an outage, not "no elevator here"
+            if c == "management":
+                x = x[x.about != "garage_or_lot"]                                    # parking prices are not management failures
             if since is not None:
                 x = x[x.dt >= since]
-            return x.source_url.nunique() if c == "car_crime" else len(x)
+            if need_month:
+                x = x[x.item_date.map(month_known).astype(bool)]
+            return reports(x)
         car24, el24 = cnt("car_crime", M24), cnt("elevator", M24)
-        mg6, mg_old = cnt("management", M6), len(r[(r.category == "management") & ~(r.dt >= M6)])
+        mg6 = cnt("management", M6, need_month=True)
+        mg_all = cnt("management")
+        mg_old = max(mg_all - mg6, 0)
+        mg6_pages = r[(r.category == "management") & (r.about != "garage_or_lot") & (r.dt >= M6) & r.item_date.map(month_known).astype(bool)].source_url.nunique()
         nyc6 = [f for f in flags if f.endswith("_6m_above_p90") and not f.startswith("elevator")]
         nyc_el = "elevator_complaints_24m_ge_3" in flags and "elevator_complaints_24m_above_p90" in flags
         reasons, pause = [], []
@@ -119,12 +157,12 @@ def main():
             reasons.append(f"car crime: {int(c250)} vehicle thefts and thefts from vehicles within 250 m in 24 months (police data), at least double the median of {car_med:.0f} for candidate buildings in New York City")
         if k in jc and jc_med and jc[k] >= 2 * jc_med:
             reasons.append(f"car crime: {int(jc[k])} vehicle thefts and thefts from vehicles within 250 m ({jc_period.split(' (')[0]}, about 10.5 months, Jersey City police data), at least double the median of {jc_med:.0f} for candidate buildings in Jersey City")
-        if car24 >= 3: reasons.append(f"car crime: {car24} independent reports in 24 months")
+        if car24 >= 3: reasons.append(f"car crime: {car24} separate dated reports in 24 months")
         elif cnt("car_crime"): pause.append(f"car crime mentioned ({cnt('car_crime')} report(s), below the threshold or older)")
-        if el24 >= 3: reasons.append(f"elevator: {el24} tenant reports of outages in 24 months")
+        if el24 >= 3: reasons.append(f"elevator: {el24} separate dated reports of outages in 24 months")
         if nyc_el: reasons.append("elevator: 3+ complaints to the city in 24 months, above the 90th percentile for similar buildings")
         if not (el24 >= 3 or nyc_el) and (el24 or "elevator_complaints_6m_ge_1" in flags): pause.append("some elevator complaints, below the threshold")
-        if mg6 >= 3: reasons.append(f"management: {mg6} tenant reports of serious problems in the last 6 months")
+        if mg6 >= 3: reasons.append(f"management: {mg6} separate dated tenant reports of problems in the last 6 months" + (" (all on one reviews page)" if mg6_pages == 1 else ""))
         if len(nyc6) >= 2: reasons.append("management: city records in the last 6 months above the 90th percentile on " + ", ".join(sorted(f.split('_6m')[0] for f in nyc6)))
         if not (mg6 >= 3 or len(nyc6) >= 2):
             if mg6 or len(nyc6) == 1: pause.append("recent management complaints, below the threshold")

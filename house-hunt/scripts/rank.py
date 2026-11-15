@@ -28,6 +28,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent))
 sys.path.insert(0, str(Path(__file__).parent / "tools"))
 from lib import DATA  # noqa: E402
+import parsers  # noqa: E402
 
 W = {"safety": 22, "building": 16, "cost": 12, "car": 12, "space": 12, "distance": 10, "dog": 8, "daily": 8}
 UNIVERSAL_SHARE, PROMISE_SHARE = 0.7, 0.3
@@ -95,7 +96,7 @@ def color_table(u):
 
 def main():
     # Reads ONLY the master tables (scripts/build_master.py + scripts/all_in.py). No side files.
-    u = pd.read_csv(DATA / "master_units.csv", low_memory=False)
+    u = pd.read_csv(DATA / "master_units.csv", low_memory=False, dtype={"zip5": str})
     n_in = len(u)
     u = u[u.cost_gate == "pass"].copy()
     n_cost = n_in - len(u)
@@ -113,12 +114,16 @@ def main():
     wl = pd.to_numeric(u.get("dog_weight_limit_lb"), errors="coerce")
     fl = pd.to_numeric(u.get("unit_floor"), errors="coerce")
     hard = pd.Series("", index=u.index)
-    for cond, why in [(s("elevator").str.lower().eq("no"), "no elevator (confirmed on the building's page)"),
+    el = s("elevator").str.lower()
+    for cond, why in [(el.eq("no"), "no elevator (contradicted in the evidence pass)"),
+                      (el.eq("conflicting"), "elevator not established: the sources conflict on which buildings have one"),
                       (s("dogs_allowed").str.lower().eq("no"), "dogs not allowed (confirmed)"),
                       (wl < 25, "dog weight limit under 25 lb"), (fl < 2, "ground-floor unit"),
                       (s("live_status").eq("gone"), "listing gone at live check"),
-                      (s("income_requirement").ne(""), "income-restricted unit"),
-                      (s("building_type").str.contains("senior|62\\+", case=False), "senior housing")]:
+                      # ordinary screening ("income 3x rent", "40x rent") is not income-restricted housing (W10)
+                      (s("income_requirement").map(parsers.income_restricted), "income-restricted unit"),
+                      (s("building_type").str.contains("senior|62\\+", case=False), "senior housing"),
+                      (s("notes").str.strip().str.startswith("BUILDING_FAILS"), "harvest note: " + s("notes").str.strip().str.slice(0, 110))]:
         hard = pd.Series(np.where(cond & (hard == ""), why, hard), index=u.index)
     u[hard != ""].assign(drop_reason=hard[hard != ""]).to_csv(DATA / "excluded_by_confirmed_facts.csv", index=False)
     n_hard = int((hard != "").sum()); u = u[hard == ""].copy()
@@ -133,14 +138,31 @@ def main():
                       (s("notes").str.contains("CONFLICT"), "conflicting dog policy"), (u.all_in < 0.6 * med, "price far below the neighborhood"),
                       (s("live_notes").str.contains("not an open-market|far under market|not genuine|scam|listing looks stale|duplicate candidate|out-of-state phone", case=False), "live check judged the listing doubtful")]:
         reasons = pd.Series(np.where(cond, reasons + why + "; ", reasons), index=u.index)
-    # open gate facts: anything not confirmed, stated on a page or in an official record
-    inf_e = s("elevator_basis").isin(["inferred", "", "unknown"])
-    inf_f = s("unit_floor_basis").isin(["unknown", ""])
-    dog_small = s("dog_policy_text").str.contains(r"Size allowed: Small\)", case=False) & wl.reindex(u.index).isna() & ~s("dogs_allowed_basis").eq("confirmed")
-    n_inf = inf_e.astype(int) + inf_f.astype(int) + dog_small.astype(int)
-    u["to_confirm"] = (pd.Series(np.where(inf_e, "Does the building have an elevator? (so far inferred from its height); ", ""), index=u.index)
-                       + pd.Series(np.where(inf_f, "Which floor is the unit on?; ", ""), index=u.index)
-                       + pd.Series(np.where(dog_small, "What is the dog weight limit? (the page says small dogs); ", ""), index=u.index))
+    # Open gate facts (plan Part 5; independent check W1-W3, W20). A unit with one is ranked but held back with the
+    # question to ask; with two or more it is sketchy.
+    #  elevator  anything not confirmed, stated on a page or in an official record
+    #  floor     confirmed or stated on the page is settled. A floor read from a simple unit label ("4F", "305") that
+    #            comes out at 3 or higher is accepted with a note and a tour question; any other inferred floor
+    #            (2, or from a label with a separator, a building prefix or four digits) and an unknown floor are open
+    #  dogs      a size word ("small dogs") with no pound figure is open whatever the basis of "dogs allowed";
+    #            a policy that conflicts between two aggregators is open
+    wl = wl.reindex(u.index); fl = fl.reindex(u.index)
+    inf_e = s("elevator_basis").isin(["inferred", "", "unknown"]) | s("elevator").str.lower().ne("yes")
+    fb, fk = s("unit_floor_basis"), s("unit_floor_label_kind")
+    floor_settled = fb.isin(["confirmed", "stated"])
+    floor_from_label_ok = fb.eq("inferred") & fk.eq("simple") & (fl >= 3)
+    inf_f = ~(floor_settled | floor_from_label_ok)
+    u["floor_basis_note"] = np.where(floor_from_label_ok, "read from the unit number", "")
+    dog_open = s("dogs_allowed").str.lower().ne("yes")
+    dog_small = s("dog_size_only").ne("") & wl.isna()
+    n_inf = inf_e.astype(int) + inf_f.astype(int) + dog_small.astype(int) + dog_open.astype(int)
+    floor_q = np.where(fb.eq("inferred"), "Which floor is the unit on? (" + s("unit_floor").str.replace(r"\.0$", "", regex=True) + " is only a guess from the unit number " + s("unit") + "); ",
+                       "Which floor is the unit on?; ")
+    u["to_confirm"] = (pd.Series(np.where(inf_e, "Does the building have an elevator? (so far only inferred from its height); ", ""), index=u.index)
+                       + pd.Series(np.where(inf_f, floor_q, ""), index=u.index)
+                       + pd.Series(np.where(dog_open, "Are dogs allowed? (the sources disagree); ", ""), index=u.index)
+                       + pd.Series(np.where(dog_small, "What is the dog weight limit in pounds?; ", ""), index=u.index))
+    u["tour_confirm"] = np.where(floor_from_label_ok, "Confirm the floor", "")
     u["confidence"] = np.where(reasons != "", "sketchy", np.where(n_inf == 0, "clean", np.where(n_inf == 1, "one_inferred", "sketchy")))
     u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(n_inf >= 2, "two or more unconfirmed gate facts", ""))
     u[u.confidence == "sketchy"].to_csv(DATA / "excluded_sketchy.csv", index=False)
@@ -150,54 +172,68 @@ def main():
 
     # ---- evidence rules (scripts/avoid.py writes these from the evidence families)
     xf, af = DATA / "unit_exclusions.csv", DATA / "avoid_buildings.csv"
+    xw = pd.read_csv(DATA / "reference" / "building_crosswalk.csv", dtype=str).set_index("addr_key").building_id
     n_ex = 0
     if xf.exists():
+        # exclusions apply to the building (every address key of it) and match unit labels the way the master does:
+        # "5106" excludes "005-5106" (independent check W17, W18)
         X = pd.read_csv(xf, dtype=str, keep_default_na=False)
-        whole = set(X[X.unit == ""].addr_key)
-        pairs = {(r.addr_key, uu.strip().lower()) for r in X[X.unit != ""].itertuples() for uu in r.unit.split(";")}
-        bad = u.addr_key.isin(whole) | pd.Series([(a_, str(b_).strip().lower()) in pairs for a_, b_ in zip(u.addr_key, u.unit)], index=u.index)
+        X["building_id"] = X.addr_key.map(xw).fillna("")
+        whole_k, whole_b = set(X[X.unit == ""].addr_key), set(X[(X.unit == "") & (X.building_id != "")].building_id)
+        pairs = {}
+        for r in X[X.unit != ""].itertuples():
+            for uu in r.unit.split(";"):
+                pairs.setdefault(r.building_id or r.addr_key, []).append(uu.strip())
+        hit = [any(parsers.units_match(x, str(un)) for x in pairs.get(b_, []) + pairs.get(a_, [])) for a_, b_, un in zip(u.addr_key, u.building_id, u.unit)]
+        bad = u.addr_key.isin(whole_k) | u.building_id.isin(whole_b) | pd.Series(hit, index=u.index)
         u[bad].assign(drop_reason="evidence pass").to_csv(DATA / "excluded_by_evidence.csv", index=False)
         n_ex = int(bad.sum()); u = u[~bad].copy()
+    s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
+    # a live check counts only when the evidence pass saw the listing itself: live, or live at a changed price (W12)
+    u["live_ok"] = s("live_status").isin(["live", "changed"])
     if af.exists():
         AV = pd.read_csv(af, dtype=str, keep_default_na=False)
-        xw = pd.read_csv(DATA / "reference" / "building_crosswalk.csv", dtype=str).set_index("addr_key").building_id
         AV["building_id"] = AV.addr_key.map(xw)
         AV = AV.dropna(subset=["building_id"]).sort_values("avoid", ascending=False).drop_duplicates("building_id").set_index("building_id")
         for c in ["avoid", "reasons", "pause_notes", "evidence_json", "positive_json"]:
             u["ev_" + c] = u.building_id.map(AV[c]).fillna("")
-        u["evidence_checked"] = u.building_id.isin(AV.index) & s("live_status").ne("")
+        u["evidence_checked"] = u.building_id.isin(AV.index) & u.live_ok
     else:
         u["ev_avoid"], u["evidence_checked"] = "", False
     s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
 
-    # compatibility shims: old amenity / community column names -> master fields
+    # amenity tests (scripts/parsers.py): negatives and near-misses are not a yes (W14): "Pool table", "none listed",
+    # "no doorman stated"; a virtual doorman is controlled access, not a doorman
     AM = {"pool": "pool", "doorman_or_concierge": "doorman", "controlled_access": "controlled_access", "gym": "gym",
           "package_room": "package_room", "in_unit_laundry": "in_unit_laundry", "roof_deck_or_outdoor_space": "outdoor_space",
           "balcony_some_units": "balconies", "coworking_or_lounge": "lounge_or_coworking", "gated_or_garage_parking": "parking_type",
           "year_built": "year_built", "dog_amenities": "dog_amenities", "elevator_stated": "elevator"}
     a = lambda col: s(AM.get(col, col)).str.lower()
-    has = lambda col: ~a(col).isin(["", "no_mention", "nan", "unknown", "no", "none"])
-    cm = lambda col: pd.Series(False, index=u.index)
-    u["community_pool"] = ""
+    has = lambda col: a(col).map(parsers.amenity_yes).astype(bool)
     C = color_table(u)
     u = u.join(C, on="addr_key", rsuffix="_color")
     n = lambda c: pd.to_numeric(u[c], errors="coerce") if c in u else pd.Series(np.nan, index=u.index)
 
-    pool, cp = a("pool"), s("community_pool").str.lower()
-    u["pool"] = np.where((pool.str.contains(r"\bindoor\b|^both$") & ~pool.str.contains("not stated|indoor or outdoor|indoor/outdoor")) | pool.str.contains("and indoor|indoor and outdoor"), "indoor", np.where(has("pool"), "pool", ""))
+    u["pool_text"] = s("pool")
+    u["pool"] = a("pool").map(parsers.pool_state)
     pr = u.parking_type.map(parking_rank).fillna(a("gated_or_garage_parking").map(parking_rank))
     u["parking_rank"] = pr
-    doorman = a("doorman_or_concierge")
+    doorman = a("doorman_or_concierge").map(parsers.doorman_state)
+    u["doorman_text"] = s("doorman")
+    u["doorman"] = doorman
+    has_doorman, doorman24 = doorman.ne(""), doorman.eq("24h")
+    doorman_known = s("doorman_text").str.strip().ne("")
+    controlled = has("controlled_access") | s("doorman_text").map(parsers.virtual_doorman).astype(bool)
     laundry = (s("laundry") + " " + a("in_unit_laundry")).str.lower()
     near_car = n("near_veh_theft_24m") + n("near_theft_from_veh_24m").fillna(0)
 
     # points for building features (unknown = a quarter of the points)
     def pts(yes, known, w):
         return np.where(yes, w, np.where(known, 0.0, 0.25 * w))
-    security = (pts(doorman.str.contains("24"), has("doorman_or_concierge"), 3) + pts((has("doorman_or_concierge") & ~doorman.str.contains("24")), has("doorman_or_concierge"), 2)
-                + pts(has("controlled_access") | cm("controlled_access"), False, 2.5) + pts(has("package_room") | cm("package_room"), False, 1))
+    security = (pts(doorman24, doorman_known, 3) + pts(has_doorman & ~doorman24, doorman_known, 2)
+                + pts(controlled, False, 2.5) + pts(has("package_room"), False, 1))
     comfort = (pts(laundry.str.contains("in unit|in_unit|in-unit|yes"), laundry.str.strip().ne(""), 2.5)
-               + pts(has("gym") | cm("gym"), False, 1) + pts(has("roof_deck_or_outdoor_space"), False, 1) + pts(has("balcony_some_units"), False, 0.5)
+               + pts(has("gym"), False, 1) + pts(has("roof_deck_or_outdoor_space"), False, 1) + pts(has("balcony_some_units"), False, 0.5)
                + pts(has("coworking_or_lounge"), False, 1.5) + pts(s("elevator_basis").isin(["confirmed", "amenities_page", "official_record", "stated"]), True, 1))
     year = pd.to_numeric(a("year_built").replace("", np.nan), errors="coerce").fillna(n("pluto_year"))
     u["building_security_pts"], u["building_comfort_pts"] = security, comfort
@@ -214,7 +250,7 @@ def main():
                           (pct(near_viol, False), 10), (pct(eve, False), 8), (pct(near_car, False), 10), (pct(trend, False), 4),
                           (pct(pd.Series(security, index=u.index)), 18))
     u["p_building"] = blend((pct(pd.Series(security, index=u.index)), 40), (pct(pd.Series(comfort, index=u.index)), 45), (pct(year), 15))
-    lines_known = s("all_in_lines").str.count('"found"')
+    lines_known = n("all_in_stated_line_count")     # cost lines stated on a page rather than estimated or unknown
     u["p_cost"] = blend((pct(u.all_in, False), 85), (pct(lines_known), 15))
     u["p_car"] = blend((pct(pr), 50), (pct(u.motor_vehicle_theft, False), 15), (pct(near_car, False), 15),
                        (pct(n("parking_fee"), False), 10), (pct(n("surface_parking_ha_within_800m")), 10))
@@ -227,8 +263,9 @@ def main():
     u["p_distance"] = blend((pct(u.drive_min_to, False), 50), (pct(u.transit_sat_median, False), 20), (pct(u.toll_rt_ezpass, False), 12),
                             (pct(n("transit_sat_transfers"), False), 8), (pct(last_train), 5), (pct(n("transit_sun_return_median"), False), 5))
     dog_small = dog_small.reindex(u.index).fillna(False)
-    dogam = has("dog_amenities") | cm("dog_park_pet_spa")
-    weight_ok = pd.to_numeric(u.get("dog_weight_limit_lb"), errors="coerce") >= 25
+    dogam = has("dog_amenities")
+    # a confirmed "no limit" is the best weight policy, not an unknown (W16)
+    weight_ok = (pd.to_numeric(u.get("dog_weight_limit_lb"), errors="coerce") >= 25) | s("dog_weight_limit_lb").str.lower().eq("no limit")
     u["p_dog"] = blend((pct(u.park_walk_min, False), 25), (pct(u.park_ha_800m), 15), (pct(u.dog_park_m, False), 15),
                        (pct(n("woods_ha_within_800m")), 5), (pct(n("vet_count_1600m")), 10), (pct(n("pet_count_1600m")), 5),
                        (pd.Series(np.where(dogam, 100, UNKNOWN_PCT), index=u.index), 10), (pct(u.pet_rent, False), 5),
@@ -278,23 +315,38 @@ def main():
             if d.any():
                 u.loc[g.index[i], "dominated"] = True
     u = u.sort_values(["hood_id", "dominated", "rank_score"], ascending=[True, True, False])
-    u["nth_in_building"] = u.groupby(["hood_id", "addr_key"]).cumcount() + 1
+    # at most 2 per building, counted on the building (not the address key: independent check W8)
+    u["nth_in_building"] = u.groupby("building_id").cumcount() + 1
     elig = u.nth_in_building <= MAX_PER_BUILDING
     u["hood_rank"] = np.nan
     u.loc[elig, "hood_rank"] = u[elig].groupby("hood_id").cumcount() + 1
     u["candidate"] = u.hood_rank <= CANDIDATES
     u["shown_pre_evidence"] = u.hood_rank <= SHOWN
-    # after evidence: avoid buildings leave the shown list and become avoid cards (up to 5 per neighborhood)
-    # Confirmed before shown: only units whose gate facts are all confirmed or stated can be shown. The rest go to
-    # data/needs_confirmation.csv with the question to ask.
+    # Shown = every gate fact confirmed or stated (clean), not an avoid building, and seen live in the evidence pass.
+    #   not clean            -> data/needs_confirmation.csv, with the question to ask
+    #   clean, no live check -> data/needs_live_check.csv: ranked candidates waiting for the evidence pass (W12)
     is_avoid = u.ev_avoid.eq("yes")
     clean = u.confidence.eq("clean")
-    ok = elig & ~is_avoid & clean
+    cand = clean & ~is_avoid
+    u["nth_clean_in_building"] = np.nan
+    u.loc[cand, "nth_clean_in_building"] = u[cand].groupby("building_id").cumcount() + 1
+    cand2 = cand & (u.nth_clean_in_building <= MAX_PER_BUILDING)
+    u["clean_rank"] = np.nan
+    u.loc[cand2, "clean_rank"] = u[cand2].groupby("hood_id").cumcount() + 1
+    showable = cand & u.live_ok
+    u["nth_shown_in_building"] = np.nan
+    u.loc[showable, "nth_shown_in_building"] = u[showable].groupby("building_id").cumcount() + 1
+    ok = showable & (u.nth_shown_in_building <= MAX_PER_BUILDING)
+    cols = ["listing_id", "building_id", "building_name", "address", "unit", "hood", "group_label", "hood_rank", "rank_score", "all_in", "to_confirm", "url"]
     nc = u[elig & ~is_avoid & ~clean & (u.hood_rank <= CANDIDATES)]
-    nc[["listing_id", "building_id", "building_name", "address", "unit", "hood", "group_label", "hood_rank", "rank_score", "all_in", "to_confirm", "url"]].to_csv(DATA / "needs_confirmation.csv", index=False)
+    nc[cols].to_csv(DATA / "needs_confirmation.csv", index=False)
+    nl = u[cand2 & ~u.live_ok & (u.clean_rank <= CANDIDATES)]
+    nl.assign(live_status=nl.live_status.fillna("").replace("", "not checked"))[cols[:8] + ["clean_rank", "rank_score", "all_in", "live_status", "url"]].to_csv(DATA / "needs_live_check.csv", index=False)
     u["shown_rank"] = np.nan
     u.loc[ok, "shown_rank"] = u[ok].groupby("hood_id").cumcount() + 1
     u["shown"] = u.shown_rank <= SHOWN
+    u["needs_live_check"] = u.listing_id.isin(set(nl.listing_id))
+    u["held_for_confirmation"] = u.listing_id.isin(set(nc.listing_id))
     av = elig & is_avoid
     u["avoid_rank"] = np.nan
     u.loc[av, "avoid_rank"] = u[av].groupby("hood_id").cumcount() + 1
@@ -342,7 +394,8 @@ def main():
             r[name + "_vs_home"] = round(r[name] - pd.to_numeric(home[c], errors="coerce").median(), 1)
         rows.append(r)
     pd.DataFrame(rows).to_csv(DATA / "group_exchange.csv", index=False)
-    print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, shown-but-not-yet-evidence-checked {int((u.shown & ~u.evidence_checked).sum())}")
+    print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, held for a confirmation {int(u.held_for_confirmation.sum())}, "
+          f"clean but waiting for a live check {int(u.needs_live_check.sum())}, shown without a live check {int((u.shown & ~u.live_ok).sum())}")
     print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
     print(f"(kept {len(u)} units; candidates {int(u.candidate.sum())}; shown {int(u.shown_pre_evidence.sum())}; pools: {u.pool.value_counts().to_dict()}")
 

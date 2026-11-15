@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=13828+Queens+Blvd%2C+Jamaica%2C+NY+11435&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-15T22:23:25+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/78ef10d16095db88.json",
+ "source": "census_geocoder"
+}
