@@ -219,3 +219,5 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
 - **Thin neighborhoods (Will, 2026-11-16):** a neighborhood that would show exactly one apartment is cut unless that
   apartment is well attested (seen live, nothing open) and promising (rank score at or above its experience's median).
   Implemented in `scripts/rank.py`; reason `thin_neighborhood`.
+- **Real apartments only (Will, 2026-11-16):** a floor plan, a "from $X" building offer, a row with no individual unit,
+  or a room in a shared suite is not an apartment and is never shown or counted (status `not_an_apartment`).

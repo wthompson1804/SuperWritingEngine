@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=55-57+Bank+Street%2C+White+Plains%2C+NY+10606&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T02:43:25+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/b6d06daec9448aa8.json",
+ "source": "census_geocoder"
+}
