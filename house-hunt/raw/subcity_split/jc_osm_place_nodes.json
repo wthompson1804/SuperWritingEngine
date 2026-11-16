@@ -1,0 +1,211 @@
+{
+ "source_url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf",
+ "osm_data_timestamp": "2026-11-14T21:20:41Z",
+ "retrieved_at": "2026-11-15T18:32:19Z",
+ "license": "ODbL 1.0, (c) OpenStreetMap contributors",
+ "nodes": [
+  {
+   "osm_id": 158809217,
+   "place": "hamlet",
+   "name": "Bergen Square",
+   "lat": 40.7292686,
+   "lon": -74.0656969
+  },
+  {
+   "osm_id": 158825200,
+   "place": "city",
+   "name": "Bayonne",
+   "lat": 40.6687141,
+   "lon": -74.1143091
+  },
+  {
+   "osm_id": 158826879,
+   "place": "village",
+   "name": "Communipaw",
+   "lat": 40.7087134,
+   "lon": -74.0609745
+  },
+  {
+   "osm_id": 158827461,
+   "place": "town",
+   "name": "Weehawken",
+   "lat": 40.7695457,
+   "lon": -74.0204177
+  },
+  {
+   "osm_id": 158835432,
+   "place": "hamlet",
+   "name": "West Bergen",
+   "lat": 40.7126022,
+   "lon": -74.0831973
+  },
+  {
+   "osm_id": 158838259,
+   "place": "hamlet",
+   "name": "Greenville",
+   "lat": 40.7003802,
+   "lon": -74.0943087
+  },
+  {
+   "osm_id": 158840157,
+   "place": "city",
+   "name": "Jersey City",
+   "lat": 40.7215682,
+   "lon": -74.047455
+  },
+  {
+   "osm_id": 158846013,
+   "place": "town",
+   "name": "Hoboken",
+   "lat": 40.7433066,
+   "lon": -74.0323752
+  },
+  {
+   "osm_id": 158892295,
+   "place": "hamlet",
+   "name": "Croxton",
+   "lat": 40.7398239,
+   "lon": -74.062919
+  },
+  {
+   "osm_id": 158917956,
+   "place": "hamlet",
+   "name": "Marion",
+   "lat": 40.7353795,
+   "lon": -74.0740304
+  },
+  {
+   "osm_id": 316973303,
+   "place": "county",
+   "name": "Hudson",
+   "lat": 40.7381635,
+   "lon": -74.0550731
+  },
+  {
+   "osm_id": 1105799395,
+   "place": "locality",
+   "name": "National Junction",
+   "lat": 40.726243,
+   "lon": -74.0544651
+  },
+  {
+   "osm_id": 1562497097,
+   "place": "locality",
+   "name": "Droyers Point",
+   "lat": 40.7110269,
+   "lon": -74.1061326
+  },
+  {
+   "osm_id": 1562808303,
+   "place": "locality",
+   "name": "Caven Point",
+   "lat": 40.6863705,
+   "lon": -74.0713654
+  },
+  {
+   "osm_id": 2651270418,
+   "place": "neighbourhood",
+   "name": "Colgate Center",
+   "lat": 40.713566,
+   "lon": -74.0348267
+  },
+  {
+   "osm_id": 2836081095,
+   "place": "neighbourhood",
+   "name": "Lincoln Harbor",
+   "lat": 40.760688,
+   "lon": -74.0227285
+  },
+  {
+   "osm_id": 4186480287,
+   "place": "locality",
+   "name": "Tonnelle Circle",
+   "lat": 40.7394252,
+   "lon": -74.0654069
+  },
+  {
+   "osm_id": 5967645372,
+   "place": "neighbourhood",
+   "name": "Newport",
+   "lat": 40.7254782,
+   "lon": -74.0360143
+  },
+  {
+   "osm_id": 5967645373,
+   "place": "neighbourhood",
+   "name": "Downtown Jersey City",
+   "lat": 40.7149793,
+   "lon": -74.0358754
+  },
+  {
+   "osm_id": 5977044388,
+   "place": "neighbourhood",
+   "name": "Indian Square",
+   "lat": 40.7356637,
+   "lon": -74.0650172
+  },
+  {
+   "osm_id": 7385560930,
+   "place": "neighbourhood",
+   "name": "The Shades",
+   "lat": 40.7594656,
+   "lon": -74.0301161
+  },
+  {
+   "osm_id": 11360351993,
+   "place": "locality",
+   "name": "Constable Junction",
+   "lat": 40.6880027,
+   "lon": -74.0896251
+  },
+  {
+   "osm_id": 11872487606,
+   "place": "neighbourhood",
+   "name": "The Heights",
+   "lat": 40.7457649,
+   "lon": -74.0494736
+  },
+  {
+   "osm_id": 11872487607,
+   "place": "neighbourhood",
+   "name": "Hamilton Park",
+   "lat": 40.7262558,
+   "lon": -74.0453249
+  },
+  {
+   "osm_id": 11872487608,
+   "place": "neighbourhood",
+   "name": "Downtown",
+   "lat": 40.7372436,
+   "lon": -74.0313804
+  },
+  {
+   "osm_id": 11872487609,
+   "place": "neighbourhood",
+   "name": "Uptown",
+   "lat": 40.7499672,
+   "lon": -74.0274781
+  },
+  {
+   "osm_id": 11872487610,
+   "place": "village",
+   "name": "Journal Square",
+   "lat": 40.7310076,
+   "lon": -74.0622946
+  },
+  {
+   "osm_id": 11872487611,
+   "place": "neighbourhood",
+   "name": "McGinley Square",
+   "lat": 40.7245509,
+   "lon": -74.0694456
+  },
+  {
+   "osm_id": 12512990274,
+   "place": "neighbourhood",
+   "name": "Hilltop",
+   "lat": 40.7291507,
+   "lon": -74.0576866
+  }
+ ]
+}

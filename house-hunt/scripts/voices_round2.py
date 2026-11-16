@@ -152,9 +152,17 @@ CACHED_R1 = {
  "ny:old-astoria-hallets-point": [("https://www.niche.com/places-to-live/n/astoria-new-york-city-ny/reviews/", "Astoria (enclosing area)")],
  "ny:murray-hill-broadway-flushing": [("https://www.niche.com/places-to-live/n/flushing-new-york-city-ny/reviews/", "Flushing (enclosing area)")],
  "ny:hamilton-heights-sugar-hill": [("https://www.niche.com/places-to-live/n/harlem-new-york-city-ny/reviews/", "Harlem (enclosing area)")],
+ "ny:manhattanville-west-harlem": [("https://www.niche.com/places-to-live/n/harlem-new-york-city-ny/reviews/", "Harlem (enclosing area)")],
+ "ny:flatbush-west-ditmas-park-parkville": [("https://www.niche.com/places-to-live/n/flatbush-new-york-city-ny/reviews/", "Flatbush (whole)")],
 }
 # Never requested in round 2: the one Niche URL that answered 403 in round 1.
 NICHE_NOT_RETRIED = {"nj:new-brunswick": "https://www.niche.com/places-to-live/new-brunswick-middlesex-nj/reviews/"}
+
+# Pages fetched but not used, with the reason (decided by reading the reviews).
+EXCLUDE_PAGES = {
+ "https://www.niche.com/places-to-live/wallkill-orange-ny/reviews/":
+   "reviews describe the hamlet of Wallkill near New Paltz and the Shawangunk ridge (Ulster County), not the Town of Wallkill by Middletown (Orange County) where the listing is: different municipality, dropped",
+}
 
 def niche_url(slug): return f"https://www.niche.com/places-to-live/{slug}/reviews/"
 
@@ -214,7 +222,101 @@ CITYDATA_THREADS: dict[str, list[str]] = {
                                        "https://www.city-data.com/forum/new-york-city/2774633-electchester-not-what-use-3.html"],
 }
 # Hand-picked forum excerpts: dict(hood_id, url, post_id, date, excerpt, theme, sentiment, context)
-CITYDATA_KEEP: list[dict] = []
+CITYDATA_KEEP: list[dict] = [{'hood_id': 'nj:new-brunswick',
+  'url': 'https://www.city-data.com/forum/new-jersey/3216900-living-new-brunswick.html',
+  'post_id': '59656916',
+  'date': '2020-11-11',
+  'theme': 'safety',
+  'sentiment': 'mixed',
+  'context': 'forum poster (relationship to the place not stated)',
+  'area': 'New Brunswick (thread: Living in New Brunswick)',
+  'excerpt': "Downtown New Brunswick is actually the closest neighborhood to Rutgers' New Brunswick campus, and is not really a dangerous area unless you choose to walk "
+             'unaccompanied in the wee hours of the morning.'},
+ {'hood_id': 'nj:new-brunswick',
+  'url': 'https://www.city-data.com/forum/new-jersey/3216900-living-new-brunswick.html',
+  'post_id': '59657280',
+  'date': '2020-11-11',
+  'theme': 'safety',
+  'sentiment': 'mixed',
+  'context': 'forum poster; says was a grad student there and lived across the river in Highland Park',
+  'area': 'New Brunswick (thread: Living in New Brunswick)',
+  'excerpt': "Downtown NB is great if you're studying on College Ave. If you are on Cook or Douglas, downtown NB is close by, but there are some sketchy areas you'd "
+             'have to pass through.'},
+ {'hood_id': 'nj:new-brunswick',
+  'url': 'https://www.city-data.com/forum/new-jersey/3216900-living-new-brunswick.html',
+  'post_id': '59658673',
+  'date': '2020-11-11',
+  'theme': 'people',
+  'sentiment': 'mixed',
+  'context': 'forum poster; says was a grad student there and lived across the river in Highland Park',
+  'area': 'New Brunswick (thread: Living in New Brunswick)',
+  'excerpt': 'That area is kind of a mix of professionals, some grad students, and I know a couple of professors who live there.'},
+ {'hood_id': 'nj:new-brunswick',
+  'url': 'https://www.city-data.com/forum/new-jersey/2589281-new-brunswick-nicest-areas-live-city-4.html',
+  'post_id': '44332746',
+  'date': '2016-06-07',
+  'theme': 'safety',
+  'sentiment': 'negative',
+  'context': 'forum poster; says is a Rutgers student',
+  'area': 'New Brunswick (thread: New Brunswick - nicest areas to live in the city?)',
+  'excerpt': 'However crime is a problem here and people have gotten mugged here while being threatened with a weapon. Students have had stuff stolen from their homes.'},
+ {'hood_id': 'nj:new-brunswick',
+  'url': 'https://www.city-data.com/forum/new-jersey/2589281-new-brunswick-nicest-areas-live-city-4.html',
+  'post_id': '44318212',
+  'date': '2016-06-06',
+  'theme': 'safety',
+  'sentiment': 'negative',
+  'context': 'forum poster; visitor who lives in Brooklyn and was weighing a move',
+  'area': 'New Brunswick (thread: New Brunswick - nicest areas to live in the city?)',
+  'excerpt': 'I think NB is a bit less safe than (most parts of) NYC and certainly my neighborhood in Brooklyn.'},
+ {'hood_id': 'nj:new-brunswick',
+  'url': 'https://www.city-data.com/forum/new-jersey/2589281-new-brunswick-nicest-areas-live-city-4.html',
+  'post_id': '44319147',
+  'date': '2016-06-06',
+  'theme': 'travel',
+  'sentiment': 'mixed',
+  'context': 'forum poster; says works at Rutgers and moved out of NYC (Manhattan) after commuting from there',
+  'area': 'New Brunswick (thread: New Brunswick - nicest areas to live in the city?)',
+  'excerpt': "I did the commute from the city for my first few months on the job and it's doable but insanely expensive, which was one of the deciding factors for a "
+             'move.'},
+ {'hood_id': 'ny:flatbush-west-ditmas-park-parkville',
+  'url': 'https://www.city-data.com/forum/new-york-city/2451372-parking-ditmas-park-kensington-brooklyn.html',
+  'post_id': '41371026',
+  'date': '2015-09-28',
+  'theme': 'car_crime',
+  'sentiment': 'negative',
+  'context': 'forum poster (relationship to the place not stated)',
+  'area': 'Ditmas Park (thread: Parking in Ditmas Park and/or Kensington, Brooklyn)',
+  'excerpt': 'get a good alarm system if you park in "ditmas" read the corner blog, jerks are always smashing windows around the neighborhood.'},
+ {'hood_id': 'ny:flatbush-west-ditmas-park-parkville',
+  'url': 'https://www.city-data.com/forum/new-york-city/2113862-safety-flatbush-ditmas-park.html',
+  'post_id': '34749973',
+  'date': '2014-05-11',
+  'theme': 'safety',
+  'sentiment': 'mixed',
+  'context': 'forum poster (relationship to the place not stated)',
+  'area': 'Flatbush-Ditmas Park (thread: Safety of Flatbush-Ditmas Park?)',
+  'excerpt': 'Ocean Avenue is pretty rough, it really starts getting better south of Foster Avenue.'},
+ {'hood_id': 'ny:flatbush-west-ditmas-park-parkville',
+  'url': 'https://www.city-data.com/forum/new-york-city/2113862-safety-flatbush-ditmas-park.html',
+  'post_id': '34755622',
+  'date': '2014-05-11',
+  'theme': 'safety',
+  'sentiment': 'positive',
+  'context': 'forum poster (relationship to the place not stated)',
+  'area': 'Flatbush-Ditmas Park (thread: Safety of Flatbush-Ditmas Park?)',
+  'excerpt': 'As long as you mind your own you will be fine , walk through there plenty of times'}]
+
+def scrub_names(s):
+    """Remove forum usernames from a cached thread page (working rule 6); same substitutions as round 1."""
+    names = set(re.findall(r'class="bigusername"[^>]*>(?:<!--.*?-->)?([^<]+)', s)) - {"[member]"}
+    s = re.sub(r'(class="bigusername"[^>]*>).*?</a>', r"\1[member]</a>", s, flags=re.S)
+    s = re.sub(r"(Originally Posted by <strong>).*?(</strong>)", r"\1[member]\2", s, flags=re.S)
+    s = re.sub(r"/forum/members/[^\"'\s>]+", "/forum/members/[member]", s)
+    s = re.sub(r"alt='[^']*won \$[^']*'", "alt=''", s, flags=re.S)
+    for n in names:                      # the same names elsewhere on the page (quote headers, link titles, alt text)
+        if len(n) > 3: s = s.replace(n, "[member]")
+    return s
 
 def fetch_citydata():
     seen = tried()
@@ -227,9 +329,7 @@ def fetch_citydata():
                 continue
             s = content.decode("utf8", "ignore")
             if meta["status"] == 200:    # strip usernames from the cached copy (working rule 6)
-                s2 = re.sub(r'(<a class="bigusername"[^>]*>).*?(</a>)', r"\1[member]\2", s, flags=re.S)
-                s2 = re.sub(r"(Originally Posted by <strong>).*?(</strong>)", r"\1[member]\2", s2, flags=re.S)
-                s2 = re.sub(r'(/forum/members/)[^"\']+', r"\1[member]", s2)
+                s2 = scrub_names(s)
                 (lib.ROOT / meta["path"]).write_text(s2, encoding="utf8")
             log(url=url, status=meta["status"], hood_id=hid, path=meta.get("path"), at=meta["retrieved_at"],
                 title=strip(re.search(r"<title[^>]*>(.*?)</title>", s, re.S).group(1)) if meta["status"] == 200 else None)
@@ -552,7 +652,8 @@ def build():
         for slug in NICHE.get(hid, []):
             s = st.get(niche_url(slug))
             if not s: continue
-            if s.get("status") == 200: pages.append((niche_url(slug), s["path"], s["at"], None))
+            if niche_url(slug) in EXCLUDE_PAGES: skipped.append("niche: " + EXCLUDE_PAGES[niche_url(slug)])
+            elif s.get("status") == 200: pages.append((niche_url(slug), s["path"], s["at"], None))
             elif s.get("status") == 404: skipped.append(f"niche: 404 for {slug}")
             else: skipped.append(f"niche: {s.get('note')} ({slug})")
         for url, label in CACHED_R1.get(hid, []):
@@ -603,7 +704,9 @@ def build():
         for q in mine:
             raw = (lib.ROOT / q["_path"]).read_text(encoding="utf8", errors="ignore")
             hit = norm(q["excerpt"]) in page_text(raw) and bool(q["post_date"])
-            if hit and q["_post"]: hit = f'id="post{q["_post"]}"' in raw or f'id="post_message_{q["_post"]}"' in raw
+            if q["_post"]:        # forum: the excerpt must sit inside that post's own message block
+                m = re.search(r'<div id="post_message_%s"[^>]*>(.*?)<!-- / message -->' % q["_post"], raw, re.S)
+                hit = bool(m) and norm(q["excerpt"]) in strip(m.group(1)) and bool(q["post_date"])
             if hit and re.search(BLOCK, q["excerpt"], re.I): hit = False
             if hit: q["verified"] = "yes"; kept.append(q)
             else: print("DROPPED (failed verification)", hid, q["excerpt"][:70])

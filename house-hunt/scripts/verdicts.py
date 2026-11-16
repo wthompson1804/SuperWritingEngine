@@ -189,23 +189,33 @@ def digest(S: pd.DataFrame, numbered: dict, full=False) -> str:
             out.append(f"#{numbered[r.listing_id]} unit '{g(r, 'unit')}' {g(r, 'source_site')} rent {g(r, 'listed_rent')} all-in {g(r, 'all_in')} avail {g(r, 'available_date')} | rules: {g(r, 'confirm_what') or 'nothing open'} | "
                        f"elev={g(r, 'elevator')}({g(r, 'elevator_basis')}) floor={g(r, 'unit_floor')}({g(r, 'unit_floor_basis')}/{g(r, 'unit_floor_label_kind')}) dogs={g(r, 'dogs_allowed')}({g(r, 'dogs_allowed_basis')}) "
                        f"wl={g(r, 'dog_weight_limit_lb')} small={'y' if g(r, 'dog_size_only') else ''} live={g(r, 'live_status')} lease={g(r, 'price_lease_months')} age={g(r, 'listing_age_days')} "
-                       f"policy='{g(r, 'dog_policy_text')[:90]}' notes='{g(r, 'notes')[:110]}'")
+                       f""
+                       + (f"notes='{g(r, 'notes')[:200]}'" if CAUTION.search(g(r, "notes")) else ""))
         skipped = {"facts": 0, "items": 0}
+        mine = [str(u) for u in grp.unit]
+        import parsers
+        seen_notes = {}
         for tag, fam, file, text, r in rows:
             text = re.sub(r"\s+", " ", text)
+            if fam == "live_check" and not full:
+                # another unit's check is printed short; a note repeated word for word is printed once
+                if r.notes in seen_notes and len(r.notes) > 80:
+                    text = text.split(" | ")[0] + f" | (same note as {seen_notes[r.notes]})"
+                seen_notes.setdefault(r.notes, tag)
+                if parsers.unit_label_key(r.unit) and not any(parsers.units_match(r.unit, u) or parsers.unit_key(r.unit) == parsers.unit_key(u) for u in mine):
+                    text = "(other unit) " + text[:230]
             if fam == "facts" and not full and BORING_FACT.search(r.fact) and not CAUTION.search(text):
                 skipped["facts"] += 1
                 continue
             if fam == "items" and not full and not ITEM_WORDS.search(text):
                 skipped["items"] += 1
                 continue
-            lim = {"live_check": 600, "confirm": 300, "facts": 230, "items": 170, "nyc": 200}[fam]
-            if fam == "confirm" and r.status == "confirmed" and r.fact.lower().startswith("dog_weight"):
-                lim = 110
+            lim = {"live_check": 560, "confirm": 280, "facts": 220, "items": 160, "nyc": 200}[fam]
+            if fam == "confirm" and r.status == "confirmed" and not full:
+                lim = 110 if r.fact.lower().startswith("dog_weight") else 170
             out.append(f"  {tag} {file.replace('_batch_', ':').replace('.csv', '')} {text[:lim]}")
         nn = evidence(b)["non_nyc"]
-        out.append(f"  (not printed: {skipped['facts']} routine cost / amenity facts with no caution word, {skipped['items']} review items that do not mention an elevator, stairs, dogs, age, income, co-op or ground floor"
-                   + (f", {len(nn)} non-NYC police / inspection record rows" if len(nn) else "") + ")")
+        out.append(f"  (not printed: {skipped['facts']} routine facts, {skipped['items']} review items" + (f", {len(nn)} non-NYC record rows" if len(nn) else "") + ")")
     return "\n".join(out)
 
 
@@ -277,7 +287,8 @@ def main():
             else:
                 print(txt)
     elif cmd == "add":
-        numbered = json.loads(num_file.read_text()) if num_file.exists() else {}
+        nf = Path(sys.argv[sys.argv.index("--numbers") + 1]) if "--numbers" in sys.argv else num_file
+        numbered = json.loads(nf.read_text()) if nf.exists() else {}
         add_lines(Path(sys.argv[2]).read_text().splitlines(), numbered)
     elif cmd == "restamp-check":
         V = load_verdicts()

@@ -1,0 +1,14 @@
+city,hood_id,hood_name,buildings,buildings_near_boundary,buildings_with_review_note,ranked_units,ranked_buildings,shown_now,avoid_cards_now,held_now,current_year,shown_if_split_upper_bound,as_of
+Jersey City,nj:jersey-city-bergen-lafayette,Bergen-Lafayette,10,4,2,17.0,7.0,2.0,0.0,2.0,The Little-City Year,10,2026-11-15T23:59:41+00:00
+Jersey City,nj:jersey-city-downtown,Downtown,5,2,1,2.0,2.0,1.0,0.0,1.0,The Little-City Year,2,2026-11-15T23:59:41+00:00
+Jersey City,nj:jersey-city-greenville,Greenville,4,1,0,0.0,0.0,0.0,0.0,0.0,,0,2026-11-15T23:59:41+00:00
+Jersey City,nj:jersey-city-journal-square,Journal Square,9,4,2,24.0,3.0,5.0,0.0,1.0,The Little-City Year,10,2026-11-15T23:59:41+00:00
+Jersey City,nj:jersey-city-mcginley-square,McGinley Square,3,3,3,18.0,1.0,0.0,2.0,0.0,The Little-City Year,10,2026-11-15T23:59:41+00:00
+Jersey City,nj:jersey-city-newport,Newport,1,0,1,0.0,0.0,0.0,0.0,0.0,,0,2026-11-15T23:59:41+00:00
+Jersey City,nj:jersey-city-the-heights,The Heights,2,1,2,0.0,0.0,0.0,0.0,0.0,,0,2026-11-15T23:59:41+00:00
+Jersey City,nj:jersey-city-west-side,West Side,4,1,0,33.0,4.0,2.0,2.0,0.0,The Little-City Year,10,2026-11-15T23:59:41+00:00
+Newark,nj:newark-central-ward,Central Ward,7,4,0,44.0,7.0,9.0,0.0,5.0,The Old-Neighborhood Year,10,2026-11-15T23:59:41+00:00
+Newark,nj:newark-east-ward,East Ward,2,0,0,0.0,0.0,0.0,0.0,0.0,,0,2026-11-15T23:59:41+00:00
+Newark,nj:newark-north-ward,North Ward,4,0,0,0.0,0.0,0.0,0.0,0.0,,0,2026-11-15T23:59:41+00:00
+Newark,nj:newark-south-ward,South Ward,2,0,0,1.0,1.0,1.0,0.0,0.0,The Old-Neighborhood Year,1,2026-11-15T23:59:41+00:00
+Newark,nj:newark-west-ward,West Ward,1,0,0,0.0,0.0,0.0,0.0,0.0,,0,2026-11-15T23:59:41+00:00

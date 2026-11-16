@@ -90,8 +90,8 @@ def resolve(alias, ctx):
                 return LG, f, row, agg, how
         if alias == "n_hoods":
             return LG, "hood_id", row, "count", "int"
-        if alias == "x_units":
-            return GX, "units", {"group": ctx["id"]}, None, "int"
+        if alias.startswith("x_") and alias[2:] in C.table(GX).columns:   # the page's own unit-weighted year figures
+            return GX, alias[2:], {"group": ctx["id"]}, None, "int"
     raise KeyError(f"{ctx['id']}: unknown token {{{alias}}}")
 
 
