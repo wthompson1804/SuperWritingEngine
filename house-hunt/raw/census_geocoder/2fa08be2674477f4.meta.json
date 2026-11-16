@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=7+Lakeside+Road%2C+Newburgh%2C+NY+12550&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T04:18:57+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/2fa08be2674477f4.json",
+ "source": "census_geocoder"
+}

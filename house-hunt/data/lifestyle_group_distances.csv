@@ -5,7 +5,7 @@ ct:brookfield,Brookfield,1,2.7844,2.7482,6.2153,6.5861,5.1737,4.2367,space,encla
 ct:danbury,Danbury,5,4.4298,3.1909,4.1924,4.9583,3.9844,2.9095,middle,space,0.9118,True,middle,,middle
 ct:fairfield,Fairfield,2,1.3869,1.6938,4.5946,4.8377,3.4953,2.0015,enclave,space,0.8188,False,enclave,,enclave
 ct:hamden,Hamden,2,4.2693,2.2765,5.1279,4.9933,3.9523,3.482,space,middle,0.6538,False,space,,space
-ct:milford-city-balance-,Milford city (balance),6,3.7986,2.5619,3.7233,3.6882,3.0421,1.8546,middle,space,0.7239,False,middle,,middle
+ct:milford-city-balance-,Milford,6,3.7986,2.5619,3.7233,3.6882,3.0421,1.8546,middle,space,0.7239,False,middle,,middle
 ct:new-haven,New Haven,26,6.654,5.7526,4.2993,2.6764,4.6838,4.3466,pre_car,new_water,0.6225,False,pre_car,,pre_car
 ct:newtown,Newtown,1,2.1943,2.1675,5.9073,6.2993,4.8949,3.5899,space,enclave,0.9878,True,space,,space
 ct:north-haven,North Haven,1,2.0402,1.679,4.8288,5.5533,3.7849,2.4373,space,enclave,0.823,False,space,,space
@@ -38,7 +38,6 @@ nj:east-brunswick,East Brunswick,2,3.4181,1.8758,4.8226,4.8583,3.8929,3.0829,spa
 nj:east-orange,East Orange,10,4.4246,2.0938,5.7803,4.8636,3.0425,3.3996,space,settled,0.6882,False,space,,space
 nj:east-rutherford,East Rutherford,2,2.9714,2.0551,4.0063,3.8766,2.601,1.1855,middle,space,0.5769,False,middle,,middle
 nj:edgewater,Edgewater,3,4.6861,4.0857,1.9412,3.9216,4.0422,2.5444,new_water,middle,0.7629,False,new_water,,new_water
-nj:elizabeth,Elizabeth,1,7.0553,5.9918,6.2782,6.6502,6.3027,5.6921,middle,space,0.95,True,middle,,middle
 nj:englewood,Englewood,3,3.8715,3.158,2.9624,5.1687,3.7824,2.2596,middle,new_water,0.7628,False,middle,,middle
 nj:flemington,Flemington,4,3.265,1.2048,5.3641,4.7385,3.2609,2.6731,space,middle,0.4507,False,space,,space
 nj:fort-lee,Fort Lee,3,4.927,4.6759,2.1322,4.6257,4.5109,3.1553,new_water,middle,0.6757,False,new_water,middle,middle
@@ -152,7 +151,6 @@ ny:middle-village,Middle Village,1,4.4167,2.8791,5.2396,4.2509,1.4401,2.8095,set
 ny:middletown,Middletown,2,3.7047,1.4737,5.2059,4.8392,2.9891,2.8908,space,middle,0.5098,False,space,,space
 ny:midwood,Midwood,4,4.0112,2.99,5.1387,4.0948,1.9352,2.4282,settled,middle,0.797,False,settled,,settled
 ny:mineola,Mineola,2,3.2856,2.667,3.8517,3.4178,2.5105,1.1876,middle,settled,0.4731,False,middle,,middle
-ny:montgomery,Montgomery,1,2.7825,2.8061,6.8871,6.961,5.2117,4.3603,enclave,space,0.9916,True,enclave,,enclave
 ny:morris-park,Morris Park,1,5.9429,3.9383,4.8673,4.4678,3.782,4.0067,settled,space,0.9603,True,settled,,settled
 ny:mott-haven-port-morris,Mott Haven-Port Morris,9,5.5158,3.8935,4.4873,4.602,2.0846,3.5782,settled,middle,0.5826,False,settled,,settled
 ny:mount-hope,Mount Hope,2,5.8616,3.7657,6.6263,4.7039,3.3538,4.7815,settled,space,0.8906,False,settled,,settled

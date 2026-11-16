@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=255+Nostrand+Ave%2C+New+York%2C+NY+11205&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T04:19:08+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/26ee6482331c64d6.json",
+ "source": "census_geocoder"
+}

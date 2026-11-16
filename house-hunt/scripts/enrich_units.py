@@ -154,11 +154,17 @@ def main():
     P["zip5"] = P.zip5.map(lambda z: z.zfill(5) if z.isdigit() else z)
     P = build_master.assign_building_ids(P)
     G = build_master.building_coords(P)
+    # independent check 4, D1 / D17: every building's point is compared with its own address (ZIP area, municipality)
+    G = build_master.check_coords_against_address(G, P)
     P["lat_listing"], P["lon_listing"] = P.lat, P.lon
-    for c in ("lat", "lon", "coord_basis", "coord_spread_m", "coord_note"):
+    for c in ("lat", "lon", "coord_basis", "coord_spread_m", "coord_note", "coord_check", "coord_check_note"):
         P[c] = P.building_id.map(G[c])
     P = P.drop(columns=["flat", "flon", "street_key"])
     G[G.coord_basis != "listing rows agree"].to_csv(DATA / "reference" / "building_geocode_changes.csv")
+    names = P.drop_duplicates("building_id").set_index("building_id")[["building_name", "address", "city", "state", "zip5"]]
+    G[~G.coord_check.isin(["ok", ""])].join(names)[["building_name", "address", "city", "state", "zip5", "lat", "lon", "coord_basis", "coord_check", "coord_check_note"]] \
+        .to_csv(DATA / "reference" / "building_coord_check.csv")
+    print("address check of every building's point:", G.coord_check.value_counts().to_dict())
     B = P.drop_duplicates("addr_key")
     rows = []
     for i, (_, r) in enumerate(B.iterrows()):

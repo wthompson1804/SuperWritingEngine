@@ -1509,3 +1509,46 @@ def park_name(name) -> str:
     page must say "a park", not a name that is not one."""
     n = str(name or "").strip()
     return n if n and n.lower() != "nan" and _PARK_WORDS.search(n) else ""
+
+
+# ---- independent check 4, D1 / D17: a building's point must lie where its address says
+COORD_AGREE_M = 150
+
+
+def coord_check(zip_agrees, geocode_dist_m=None, geocode_in_address_area=False, municipality_agrees=False):
+    """What to do with a building's listing coordinates, given the Census geography at that point.
+      zip_agrees               the point lies in a ZIP area (ZCTA) that a listing row of the building names
+      geocode_dist_m           metres from the point to the Census geocoder's match for the address (None: no match)
+      geocode_in_address_area  the geocoder's point lies in the address's ZIP or in the municipality the address names
+      municipality_agrees      the municipality at the listing point is the city the address names
+    Returns (action, why):
+      'keep'       the listing point is used
+      'regeocode'  the geocoder's point for the address replaces the listing point (Harbor Pointe, Bayonne: Apartment
+                   List's point was 6.9 km away in Elizabeth's port; Parkway Lofts, Bloomfield: 168 m away in East Orange)
+      'flag'       neither can be trusted: the building is flagged (an open 'listing' fact), never silently used
+    """
+    if zip_agrees:
+        return "keep", ""
+    if geocode_dist_m is not None and geocode_dist_m <= COORD_AGREE_M:
+        return "keep", f"the point is outside the address's ZIP area, but the address geocodes {geocode_dist_m:.0f} m from it (a ZIP boundary)"
+    if geocode_dist_m is not None and geocode_in_address_area:
+        return "regeocode", f"the listing's point is outside the address's ZIP area and {geocode_dist_m:.0f} m from where the address geocodes"
+    if municipality_agrees:
+        return "keep", "the point is outside the address's ZIP area but inside the municipality the address names; the address could not be geocoded"
+    return "flag", "the listing's point is outside the ZIP area and the municipality its address names, and the address could not be geocoded to check it"
+
+
+_MUNI_SUFFIX = re.compile(r"\s+(?:city|village|town|borough|township|CDP|municipality)(?:\s*\(balance\))?$", re.I)
+
+
+def municipality_name(place, county_subdivision="") -> str:
+    """The municipality's plain name from the Census geography at a point: the incorporated place, else the county
+    subdivision, without the legal suffix ('Bloomfield township' -> 'Bloomfield', 'Milford city (balance)' -> 'Milford')."""
+    n = str(place or "").strip() or str(county_subdivision or "").strip()
+    n = re.sub(r"\s*\(balance\)\s*$", "", n)
+    return _MUNI_SUFFIX.sub("", n).strip()
+
+
+def same_municipality(a, b) -> bool:
+    k = lambda s: re.sub(r"[^a-z]", "", municipality_name(re.sub(r"\b(?:city of|town of|village of|township of)\b", "", str(s), flags=re.I)).lower())
+    return bool(k(a)) and k(a) == k(b)

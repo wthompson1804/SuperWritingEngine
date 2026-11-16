@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1401+Kings+Hwy%2C+Fairfield%2C+CT+06824&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T04:19:00+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/e032d7419e68a29d.json",
+ "source": "census_geocoder"
+}

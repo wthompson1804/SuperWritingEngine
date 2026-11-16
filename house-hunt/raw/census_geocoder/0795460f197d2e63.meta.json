@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=78+Olive+St%2C+New+Haven%2C+CT+06510&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T04:19:04+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/0795460f197d2e63.json",
+ "source": "census_geocoder"
+}

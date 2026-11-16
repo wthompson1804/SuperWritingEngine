@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=110+Hoboken+Avenue%2C+Jersey+City%2C+NJ+07310&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T04:18:53+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/5fa788714d77aa90.json",
+ "source": "census_geocoder"
+}

@@ -203,6 +203,59 @@ def building_coords(U):
     return pd.DataFrame.from_dict(out, orient="index")
 
 
+def check_coords_against_address(G, U, geocode=None, geography=None):
+    """Independent check 4, D1 / D17: no building's point is used without comparing it with its own address.
+    For every building: the Census geography AT the chosen point (ZIP area, municipality) against the ZIP and city the
+    listing rows give. A point outside the address's ZIP area is checked against the Census geocoder's match for the
+    address (parsers.coord_check): kept on a ZIP boundary, replaced by the geocoder's point when that lies where the
+    address says, flagged otherwise. Adds coord_check (ok / zip boundary / regeocoded / flagged) and coord_check_note;
+    a replaced point gets coord_basis 'census_geocoder (address check)'. `geocode` and `geography` can be passed in tests."""
+    from build_areas import census_geo, first
+    geocode = geocode or census_address
+    if geography is None:
+        def geography(lat, lon):
+            g, _ = census_geo(lat, lon)
+            return (first(g, "2020 Census ZIP Code Tabulation Areas", "ZCTA5"), parsers.municipality_name(first(g, "Incorporated Places"), first(g, "County Subdivisions")))
+    G = G.copy()
+    G["coord_check"], G["coord_check_note"] = "", ""
+    for b, g in U.groupby("building_id"):
+        if b not in G.index or pd.isna(G.at[b, "lat"]):
+            continue
+        lat, lon = float(G.at[b, "lat"]), float(G.at[b, "lon"])
+        try:
+            zcta, muni = geography(lat, lon)
+        except Exception as e:                    # the geography could not be read: say so, never pass silently
+            G.at[b, "coord_check"], G.at[b, "coord_check_note"] = "flagged", f"the Census geography at the point could not be read ({repr(e)[:80]})"
+            continue
+        zips = {str(z).zfill(5)[:5] for z in g.zip5 if re.fullmatch(r"\d{3,5}", str(z))}
+        cities = [c for c in dict.fromkeys(g.city.astype(str)) if c and c != "nan"]
+        if zcta in zips or not zips:
+            G.at[b, "coord_check"] = "ok"
+            continue
+        r0 = g.iloc[0]
+        hit = geocode(r0.address, r0.city, r0.state, r0.zip5)
+        d = in_area = None
+        if hit:
+            d = dist_m(hit[0], hit[1], lat, lon)
+            if d > parsers.COORD_AGREE_M:
+                try:
+                    hz, hm = geography(hit[0], hit[1])
+                    in_area = hz in zips or any(parsers.same_municipality(hm, c) for c in cities)
+                except Exception:
+                    in_area = False
+        action, why = parsers.coord_check(False, d, bool(in_area), any(parsers.same_municipality(muni, c) for c in cities))
+        where = f"point {lat:.5f},{lon:.5f} is in ZIP area {zcta or 'none'}, {muni or 'no municipality'}; the address says {', '.join(cities)} {'/'.join(sorted(zips))}"
+        if action == "regeocode":
+            G.at[b, "lat"], G.at[b, "lon"] = hit[0], hit[1]
+            G.at[b, "coord_basis"] = "census_geocoder (address check)"
+            G.at[b, "coord_note"] = (f"{why} ({where}); Census geocoder matched '{hit[2]}'. " + str(G.at[b, "coord_note"] or "")).strip()[:600]
+            G.at[b, "coord_check"] = "regeocoded"
+        else:
+            G.at[b, "coord_check"] = "zip boundary" if action == "keep" else "flagged"
+        G.at[b, "coord_check_note"] = f"{why} ({where})"[:500]
+    return G
+
+
 def cat(pattern):
     fs = glob.glob(str(DATA / "evidence" / pattern))
     if not fs:
@@ -595,9 +648,9 @@ def main():
     xw = U[["addr_key", "building_id", "street_key"]].drop_duplicates("addr_key")
     A2B = dict(zip(xw.addr_key, xw.building_id))
     if "coord_basis" in U.columns:            # scripts/enrich_units.py already settled one coordinate per building
-        G = U.drop_duplicates("building_id").set_index("building_id")[["lat", "lon", "coord_basis", "coord_spread_m", "coord_note"]]
+        G = U.drop_duplicates("building_id").set_index("building_id")[["lat", "lon", "coord_basis", "coord_spread_m", "coord_note"] + [c for c in ("coord_check", "coord_check_note") if c in U.columns]]
     else:
-        G = building_coords(U)
+        G = check_coords_against_address(building_coords(U), U)
 
     def bid_of(addr_key):
         return A2B.get(addr_key)
@@ -921,7 +974,7 @@ def main():
 
     # ------------------------------------------------------------------ building table
     bfirst = U.drop_duplicates("building_id").set_index("building_id")
-    keep_from_units = ["address", "city", "state", "zip5", "hood", "hood_id", "hood_area"] + \
+    keep_from_units = ["address", "city", "city_listed", "city_basis", "state", "zip5", "hood", "hood_id", "hood_area"] + \
         [c for c in U.columns if c.startswith(("drive_", "toll_", "transit_", "police_", "crime_", "near_", "park_", "dog_park_", "restaurants_",
                                                "bars_", "cafes_", "music_", "supermarket", "coast_", "beach_", "open_water_", "train_station",
                                                "motorway_", "util_", "last_sat", "pluto_"))]

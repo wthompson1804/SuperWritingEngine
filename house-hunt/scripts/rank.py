@@ -373,7 +373,11 @@ def main():
     # D1 (98-76 Queens Blvd 2M): a checker's note that the price itself must be verified ("far below the area's other listings")
     price_open = s("live_notes").map(parsers.price_doubt) & ~phone_av
     sib_open = sib12 & ~phone_av
-    listing_open = (s("listing_warning").ne("") | vhas("unverified", "wrong_building") | stale_open | price_open | sib_open) & ~(phone_av & s("listing_warning").eq(""))
+    # independent check 4, D1: a building whose point lies outside the ZIP area and the municipality of its own address,
+    # and whose address could not be geocoded to settle it (build_master.check_coords_against_address: 'flagged'), is
+    # never silently used: everything measured from the point may describe another place. One open "listing" fact.
+    place_open = s("coord_check").eq("flagged") | s("coord_basis").str.contains("unverified")
+    listing_open = ((s("listing_warning").ne("") | vhas("unverified", "wrong_building") | stale_open | price_open | sib_open) & ~(phone_av & s("listing_warning").eq(""))) | place_open
     # eligibility: a reviewer's finding, or a listing site's income-restricted tag the manager's own page does not bear out
     # D8: a condo by RULE, not only by verdict: the city classes the listing's own lot as a condominium (class R*) and the
     # row is not a managed rental building, or the listing itself is typed condo / co-op
@@ -410,12 +414,13 @@ def main():
          + likely.fillna(0).round().astype(int).astype(str) + " if " + unknown_lines.str.replace(" / ", " and ") + " cost what they typically do (" + s("all_in_likely_note").str[:260] + "). Not published for this building.",
          "What do parking and the required monthly fees cost here?"),
         ("availability", avail_open, "availability", "This is a floor-plan price, not a named unit: no unit, floor or date could be checked.", "Which unit is available at this price, on which floor, and from when?"),
-        ("listing", listing_open, "listing", np.where(s("listing_warning").ne(""), "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160],
+        ("listing", listing_open, "listing", np.where(place_open, "The listing's map position and its address disagree, so the drive, the surroundings and the police figures here may describe another place: " + s("coord_check_note").str[:300],
+                                             np.where(s("listing_warning").ne(""), "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160],
                                                       np.where(price_open, "The evidence pass flagged the price: " + s("live_notes").str[:200],
-                                                               np.where(sib_open & ~stale_open, sib_listing_why, "The listing may be stale: " + s("listing_stale_why") + "."))),
-         np.where(s("listing_warning").ne(""), "Is this listing for this building, and is it genuine?",
+                                                               np.where(sib_open & ~stale_open, sib_listing_why, "The listing may be stale: " + s("listing_stale_why") + ".")))),
+         np.where(place_open, "What is the building's exact street address?", np.where(s("listing_warning").ne(""), "Is this listing for this building, and is it genuine?",
                   np.where(price_open, "Is this price real? Verify it by phone before touring.",
-                           np.where(sib_open & ~stale_open, "What is the rent on a 12-month lease? Ask before touring.", "Is this unit still available? The listing page has not changed in over two months.")))),
+                           np.where(sib_open & ~stale_open, "What is the rent on a 12-month lease? Ask before touring.", "Is this unit still available? The listing page has not changed in over two months."))))),
         ("eligibility", elig_open, "eligibility", np.where(s("eligibility_open").ne(""), "Eligibility is not settled: " + s("eligibility_open").str[:200], ""),
          "Is this unit open to any renter, or is there an income limit?"),
         ("condo", condo_open, "condo rules", np.where(s("listing_type").str.contains("condo", case=False), "The listing is typed as a condo or co-op unit, rented out by its owner rather than by a leasing office.",

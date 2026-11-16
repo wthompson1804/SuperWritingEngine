@@ -239,3 +239,6 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
   page gives one and it differs from the listed price, whatever lease the listed price is quoted on (this replaces any
   earlier wording about "a lease longer than 13 months"). Where a sibling apartment's 12-month price is more than 15%
   above its listed price and a unit has no 12-month price of its own, the unit carries one open "listing" fact.
+
+- **Publishing (Will, 2026-11-16):** "You can go ahead and overwrite what's already been published." Republishing the
+  shared page to the same link is approved; check the build loads cleanly first.

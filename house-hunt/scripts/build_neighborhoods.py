@@ -13,6 +13,7 @@ from shapely.geometry import Point, shape
 sys.path.insert(0, str(Path(__file__).parent))
 from lib import DATA, ROOT, get_json
 from build_areas import census_geo, first
+import parsers
 
 MIN_UNITS = 3
 
@@ -105,7 +106,7 @@ def main():
     u = u[u.unit_status == "pass"].copy()
     ntas = nta_polys()
     subs, overrides = subcity_polys(), subcity_overrides()
-    hood = {}
+    hood, muni = {}, {}
     for key, g in u.groupby("addr_key"):
         lat, lon = float(g.lat.iloc[0]), float(g.lon.iloc[0])
         geo, _ = census_geo(lat, lon)
@@ -115,9 +116,14 @@ def main():
             hit = [(n, b) for n, b, poly in ntas if poly.contains(p)]
             name, area = (hit[0][0], hit[0][1]) if hit else ("New York city (unmatched)", "")
         else:
+            # independent check 4, D25: "Milford city (balance)" is Milford (parsers.municipality_name cuts the legal suffix)
             name = first(geo, "Incorporated Places") or first(geo, "County Subdivisions")
             for suf in (" city", " village", " town", " borough", " township", " CDP"):
                 name = name[:-len(suf)] if name.endswith(suf) else name
+            # D17: the municipality comes from the geography at the building's point, never from a listing's mailing city
+            # (independent check 4, D25: "Milford city (balance)" is Milford; the hood_id keeps its old spelling, a key of
+            # the reviewed tables, and only the NAME is cleaned, below)
+            muni[key] = parsers.municipality_name(first(geo, "Incorporated Places"), first(geo, "County Subdivisions"))
             # a split city: the neighborhood by point-in-polygon; hood_area stays the county (crime_benchmarks.py reads it)
             name = subcity_name(name, g.state.iloc[0], lat, lon, subs, overrides,
                                 keys=(key,) + ((str(g.building_id.iloc[0]),) if "building_id" in g else ()))
@@ -125,6 +131,18 @@ def main():
         hood[key] = (name, area, g.state.iloc[0])
     u["hood"] = u.addr_key.map(lambda k: hood[k][0]); u["hood_area"] = u.addr_key.map(lambda k: hood[k][1])
     u["hood_id"] = (u.state + ":" + u.hood).str.lower().str.replace(r"[^a-z0-9:]+", "-", regex=True)
+    # D17 (Parkway Lofts, Avalon Maplewood "Newark", Third & Valley "East Orange", Avalon Wayne "Lincoln Park" ...): `city`
+    # is the municipality the building stands in (Census place or county subdivision at its point); the city a listing
+    # wrote (a mailing or market city) is kept in city_listed. Inside New York City the listed city (a borough or a
+    # postal neighborhood name) stays: the neighborhood there is the NTA.
+    u["hood"] = u.hood.map(lambda h: parsers.municipality_name(h) if str(h).endswith("(balance)") else h)
+    u["city_listed"] = u.city
+    m = u.addr_key.map(muni)
+    u["city_basis"] = np.where(m.notna() & (m != ""), "census geography at the building's point", "as listed")
+    u["city"] = m.where(m.notna() & (m != ""), u.city)
+    ch = u[(u.city_basis != "as listed") & ~np.array([parsers.same_municipality(a, b) for a, b in zip(u.city, u.city_listed.fillna(""))], dtype=bool)].drop_duplicates("addr_key")
+    ch[["addr_key", "building_name", "address", "city_listed", "city", "zip5", "hood_id"]].to_csv(DATA / "reference" / "municipality_changes.csv", index=False)
+    print(f"municipality from geography differs from the listed city for {len(ch)} address keys (data/reference/municipality_changes.csv)")
     u.to_csv(DATA / "units.csv", index=False)
 
     def crime(row, k):

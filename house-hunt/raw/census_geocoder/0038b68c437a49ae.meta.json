@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=575+Easton+Ave%2C+Somerset%2C+NJ+08904&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T04:19:03+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/0038b68c437a49ae.json",
+ "source": "census_geocoder"
+}

@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=675+Monmouth+Street%2C+Jersey+City%2C+NJ+07306&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T04:18:55+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/e7b997f6dd9825c7.json",
+ "source": "census_geocoder"
+}

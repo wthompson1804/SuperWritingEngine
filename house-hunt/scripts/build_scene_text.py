@@ -46,6 +46,7 @@ LG, MB, GX = "data/lifestyle_groups.csv", "data/master_buildings.csv", "data/gro
 RULES, QUOTES = "data/reference/local_rules.csv", "data/voices/neighborhood_quotes.csv"
 RULES2, QUOTES2 = "data/reference/local_rules_round2.csv", "data/voices/neighborhood_quotes_round2.csv"
 TOLLS, PAGE_Y, PAGE_H, PAGE_U = C.TOLLS, C.PAGE + "#years", C.PAGE + "#neighborhoods", C.PAGE + "#units"
+PAGE_B = C.PAGE + "#buildings"
 
 # alias: (field in lifestyle_groups.csv, usual rounding)
 HOOD = {
@@ -96,6 +97,12 @@ YEAR_PAGE = {
     "p_near": ("nearest_name", "str"), "p_near_drive": ("nearest_drive_min", "int"),
     "q_cost": ("vq_all_in", "int"), "q_sqft": ("vq_sqft", "int"), "q_drive": ("vq_drive_min", "int"),
     "q_food": ("vq_food_and_drink_nearby", "int"), "q_green": ("vq_walk_to_green", "int"),
+    # how the experience's apartments divide on the drive (D12), and its neighborhoods by name (D11)
+    "hood_names": ("hood_names", "str"), "by_hood": ("by_hood", "str"), "close_n": ("close_n", "int"),
+    "far_n": ("far_n", "int"), "close_share": ("close_share", "pct"), "close_areas": ("close_areas", "str"),
+    "far_names": ("far_names", "str"), "close_drive_hi": ("close_drive_hi", "int"), "far_drive": ("far_drive", "int"),
+    "far_toll": ("far_toll", "int"), "tollfree_share": ("tollfree_share", "pct"),
+    "tollfree_areas": ("tollfree_areas", "str"), "toll_areas": ("toll_areas", "str"), "close_toll": ("close_toll", "int"),
 }
 # alias: (column of site/data.json#units, aggregation over the year's shown units, usual rounding)
 YEAR_UNITS = {
@@ -121,15 +128,32 @@ HOOD_SHOWN = {
     "b_tollok": ("toll_complete", "all_true", "str"),
     "b_park": ("park", "mode", "str"), "b_dogpark": ("dog_park", "mode", "str"), "b_station": ("train_station", "mode", "str"),
     "s_open": ("open_gate", "mean", "pct"),               # share of them with a gate fact still to confirm
+    "sqft_lo": ("sqft", "min", "r10"), "sqft_hi": ("sqft", "max", "r10"),   # so a plural "the apartments are large"
+}                                                         # can be tested on the smallest one, not on the median
+# Door-distance facts (independent check 4, D16). In a neighborhood with apartments on the page these describe the
+# buildings SHOWN there: the median over the shown buildings, which is the building's own figure when one is shown.
+# They used to be the neighborhood's frozen area profile (traits), which is measured over a wider sample than the
+# apartments on the page (Fairfield "The supermarket is 0.9 miles away" for a building 0.3 miles from one).
+# alias: (column of site/data.json#buildings, aggregation over the neighborhood's shown buildings, usual rounding)
+HOOD_BLDGS = {
+    "rest": ("restaurants_800m", "median", "int"), "bars": ("bars_800m", "median", "int"),
+    "cafes": ("cafes_800m", "median", "int"), "rest1600": ("restaurants_1600m", "median", "int"),
+    "parkwalk": ("park_walk_min", "median", "int"), "dogpark": ("dog_park_m", "median", "mi"),
+    "super": ("supermarket_m", "median", "mi"), "station": ("train_station_m", "median", "mi"),
+    "water": ("open_water_m", "median", "mi"), "beach": ("beach_m", "median", "mi"),
+    "parkha": ("park_ha_800m", "median", "int"),
+    "b_park": ("park", "mode", "str"), "b_dogpark": ("dog_park", "mode", "str"),
+    "b_station": ("train_station", "mode", "str"),
+    # what the shown buildings supply themselves (D6): the share of them with a dog park or dog run on the property,
+    # with a garage or covered parking, with any parking of their own
+    "own_dog": ("own_dog_area", "mean", "pct"), "own_garage": ("own_garage", "mean", "pct"),
+    "own_parking": ("own_parking", "mean", "pct"),
+    "rest_lo": ("restaurants_800m", "min", "int"), "rest_hi": ("restaurants_800m", "max", "int"),
 }
 # ... and these are the neighborhood's figure strip, read from the fields the strip itself reads (never recomputed)
 HOOD_STRIP = {"drive": ("drive_min", "int"), "transit": ("transit_min", "int"), "b_toll": ("toll_round_trip", "int"),
               "sqft": ("sqft_median", "r10"), "s_n": ("shown", "int"), "s_bldgs": ("buildings", "int"),
-              # what "At a glance" prints on the neighborhood page (neighborhoods[].traits), so the prose beside it
-              # gives the same count of restaurants and the same walk to the park
-              "rest": ("t_restaurants_800m", "int"), "bars": ("t_bars_800m", "int"), "cafes": ("t_cafes_800m", "int"),
-              "parkwalk": ("t_park_walk_min", "int"), "parkha": ("t_park_ha_800m", "int"),
-              "dogpark": ("t_dog_park_m", "mi"), "super": ("t_supermarket_m_c", "mi"), "water": ("t_open_water_m", "mi")}
+              "in_queens": ("in_queens", "int")}
 # The same for an experience: figures over the units shown in it (m_ + alias used to be the median neighborhood).
 YEAR_SHOWN = {"bars": ("bars_800m", "int"), "cafes": ("cafes_800m", "int"),
               "rest1600": ("restaurants_1600m", "int"),
@@ -142,7 +166,25 @@ CONVENTION = {
 DEFINITION = {"built_before_1940_share": "before 1940", "built_since_2010_share": "since 2010",
               "age_25_34_share": "aged 25 to 34"}
 JAMAICA = {"jv": ("jamaica_violent", "1dp"), "jp": ("jamaica_property", "1dp")}
-TOKEN = re.compile(r"\{(!?)([a-z_0-9]+)(?::([a-z0-9]+))?\s*(?:(==|!=|<=|>=|<|>|missing|present)\s*([^}]*))?\}")
+TOKEN = re.compile(r"\{(!?)(?:@([a-z]{2}:[a-z0-9\-]+)\s+)?([a-z_0-9]+)(?::([a-z0-9]+))?\s*"
+                   r"(?:(==|!=|<=|>=|<|>|missing|present)\s*([^}]*))?\}")
+# Scope words (D16). A door-distance figure in a neighborhood with several shown buildings is the median building's,
+# so the text says whose door it is: {door} prints "from the door" where one building is shown and "from most
+# buildings here" where several are, and the first {w10} of a lead or a scene gains "of most buildings here".
+SCOPE_ONE, SCOPE_MANY = "from the door", "from most buildings here"
+W10_MANY = " of most buildings here"
+
+
+def n_buildings(ctx):
+    """Buildings shown in this neighborhood (0 when nothing is shown, or for an experience)."""
+    if ctx["kind"] != "hood" or ctx["id"] not in C.shown_hoods():
+        return 0
+    return int(C.lookup(PAGE_H, "buildings", {"hood_id": ctx["id"]}) or 0)
+
+
+def at_ctx(at, ctx):
+    """{@ny:kew-gardens drive} in an experience's text reads that neighborhood's own figure."""
+    return {"kind": "hood", "id": at} if at else ctx
 
 
 def resolve(alias, ctx):
@@ -151,6 +193,11 @@ def resolve(alias, ctx):
         f, how = JAMAICA[alias]
         return LG, f, {"hood_id": "ny:jamaica"}, None, how
     if ctx["kind"] == "hood":
+        if alias in HOOD_BLDGS and ctx["id"] in C.shown_hoods():
+            f, agg, how = HOOD_BLDGS[alias]
+            return PAGE_B, f, {"hood_id": ctx["id"]}, agg, how
+        if alias in ("own_dog", "own_garage", "own_parking"):
+            raise LookupError(f"{ctx['id']}: nothing is shown here, so {alias} has no value")
         if alias in HOOD_STRIP and (ctx["id"] in C.shown_hoods() or alias.startswith("s_")):
             f, how = HOOD_STRIP[alias]
             return PAGE_H, f, {"hood_id": ctx["id"]}, None, how
@@ -217,11 +264,11 @@ def drop_optional(raw, ctx):
     """[[ ... ]] stays only when every value inside it is present and every hidden test inside it holds."""
     def keep(m):
         for t in TOKEN.finditer(m.group(1)):
-            hidden, alias, _, op, operand = t.groups()
-            if alias in CONVENTION:
+            hidden, at, alias, _, op, operand = t.groups()
+            if alias in CONVENTION or alias == "door":
                 continue
             try:
-                src, field, row, agg, _ = resolve(alias, ctx)
+                src, field, row, agg, _ = resolve(alias, at_ctx(at, ctx))
                 value = C.lookup(src, field, row, agg)
             except LookupError:
                 return ""
@@ -234,9 +281,13 @@ def drop_optional(raw, ctx):
     return re.sub(r"\[\[(.*?)\]\]", keep, raw)
 
 
-def render(raw, ctx, evidence):
+def render(raw, ctx, evidence, scope=False):
+    """scope=True (a neighborhood's lead and scene): the first {w10} names whose walk it is when several buildings
+    are shown."""
     raw = drop_optional(raw, ctx)
     out = []
+    many = n_buildings(ctx) >= 2
+    state = {"w10_scoped": not (scope and many)}
     held = []                                         # tokens are set aside so a full stop inside one cannot split a sentence
 
     def hold(m):
@@ -248,13 +299,26 @@ def render(raw, ctx, evidence):
         pending = []
 
         def sub(m):
-            hidden, alias, how, op, operand = m.groups()
+            hidden, at, alias, how, op, operand = m.groups()
             if alias in CONVENTION:
                 words, field, note = CONVENTION[alias]
                 pending.append({"field": field, "value": note, "source_file": LG, "transform": "convention",
                                 "shown": [words]})
+                if alias == "w10" and not state["w10_scoped"]:
+                    state["w10_scoped"] = True
+                    pending.append({"field": "buildings", "value": n_buildings(ctx), "source_file": PAGE_H,
+                                    "row": {"hood_id": ctx["id"]}, "holds_if": [">=", "2"]})
+                    return words + W10_MANY
                 return words
-            src, field, row, agg, usual = resolve(alias, ctx)
+            if alias == "door":                           # whose door: the building's, or most buildings'
+                if ctx["kind"] != "hood":
+                    raise ValueError(f"{ctx['id']}: {{door}} is for neighborhood text")
+                if ctx["id"] in C.shown_hoods():
+                    pending.append({"field": "buildings", "value": n_buildings(ctx), "source_file": PAGE_H,
+                                    "row": {"hood_id": ctx["id"]}, "holds_if": [">=", "2"] if many else ["==", "1"]})
+                state["w10_scoped"] = state["w10_scoped"] or many
+                return SCOPE_MANY if many else SCOPE_ONE
+            src, field, row, agg, usual = resolve(alias, at_ctx(at, ctx))
             value = C.lookup(src, field, row, agg)
             ev = {"field": field, "value": value, "source_file": src, "row": row}
             extra = [DEFINITION[field]] if field in DEFINITION else []
@@ -382,12 +446,13 @@ def parse(path):
                 cur["rules"].append(([c.strip() for c in conds.split(",") if c.strip()],
                                      [v.strip() for v in variants.split("|") if v.strip()]))
                 continue
-        m = re.match(r"=== (year|hood): (.+)", line)
+        m = re.match(r"=== (year|hood): (.+?)(?:\s+@(small|full))?\s*$", line)
         if m:
             key = (m.group(1), m.group(2).strip())
-            cur = next((b for b in blocks if (b["kind"], b["id"]) == key), None)
+            variant = m.group(3) or ""
+            cur = next((b for b in blocks if (b["kind"], b["id"]) == key and b.get("variant", "") == variant), None)
             if cur is None:
-                cur = {"kind": key[0], "id": key[1], "f": {}}
+                cur = {"kind": key[0], "id": key[1], "f": {}, "variant": variant}
                 blocks.append(cur)
             continue
         k, _, v = line.partition(":")
@@ -597,8 +662,20 @@ def main():
     sub_cap = {"hood": int(n_hoods * C.SUB_SHARE), "year": None}
     point_cap = max(3, int(n_hoods * POINT_SHARE))
     closes = {}
+    # An experience may have two drafts: "@small" is used while it shows fewer than C.SMALL_EXPERIENCE apartments
+    # (written as what it is: a short note naming its neighborhoods), "@full" or the plain block otherwise.
+    def wanted(b):
+        if b["kind"] != "year":
+            return True
+        small = C.is_small_experience(b["id"])
+        mine = [x for x in blocks if x["kind"] == "year" and x["id"] == b["id"]]
+        has = {x.get("variant", "") for x in mine}
+        want = "small" if small and "small" in has else ("full" if "full" in has else "")
+        return b.get("variant", "") == want
     for b in blocks:
         if b["kind"] in ("sub", "points"):
+            continue
+        if not wanted(b):
             continue
         ctx, f, evidence = {"kind": b["kind"], "id": b["id"]}, b["f"], []
         cols = YEAR_COLS if b["kind"] == "year" else HOOD_COLS
@@ -609,7 +686,8 @@ def main():
             lacking = [k for k in list(cols) + (MOMENTS + ["points"] if b["kind"] == "year" else []) if not f.get(k)]
             if lacking:
                 raise ValueError(f"{b['id']}: no text for {lacking}")
-            texts = {out: render(f[src], ctx, evidence) for src, out in cols.items()}
+            texts = {out: render(f[src], ctx, evidence, scope=src in ("host_intro", "scene"))
+                     for src, out in cols.items()}
             if b["kind"] == "year":
                 texts["about_points_json"] = json.dumps(written_points(f["points"], ctx, evidence), ensure_ascii=False)
                 moments = written_moments(f, ctx, evidence)

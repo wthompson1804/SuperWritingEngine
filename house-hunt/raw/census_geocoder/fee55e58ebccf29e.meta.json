@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=5+Lawrence+St%2C+Bloomfield%2C+NJ+07003&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T04:19:02+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/fee55e58ebccf29e.json",
+ "source": "census_geocoder"
+}

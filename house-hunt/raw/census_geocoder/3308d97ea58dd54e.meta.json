@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=66+Saint+Nicholas+Pl%2C+New+York%2C+NY+10032&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T04:19:06+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/3308d97ea58dd54e.json",
+ "source": "census_geocoder"
+}

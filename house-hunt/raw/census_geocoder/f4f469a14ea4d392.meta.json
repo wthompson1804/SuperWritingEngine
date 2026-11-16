@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=743+Passaic+Ave%2C+Clifton%2C+NJ+07012&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T04:18:55+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/f4f469a14ea4d392.json",
+ "source": "census_geocoder"
+}

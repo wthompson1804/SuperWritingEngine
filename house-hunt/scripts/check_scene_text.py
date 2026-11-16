@@ -196,6 +196,7 @@ def _page_table(part):
             near = sorted((h for h in d["neighborhoods"] if h.get("year") == y["id"] and h.get("drive_min") is not None
                            and (h.get("counts") or {}).get("shown")), key=lambda h: h["drive_min"])
             r["nearest_name"], r["nearest_drive_min"] = (near[0]["name"], near[0]["drive_min"]) if near else (None, None)
+            r.update(_split_fields(d, y))
             rows.append(r)
         return pd.DataFrame(rows)
     if part == "neighborhoods":
@@ -210,7 +211,9 @@ def _page_table(part):
                          "buildings": (h.get("counts") or {}).get("buildings"),
                          "drive_min": h.get("drive_min"), "transit_min": h.get("transit_min"),
                          "toll_round_trip": h.get("toll_round_trip"),
-                         # what the page's "At a glance" row prints for the neighborhood (its traits)
+                         "in_queens": int(str(h.get("area") or "") == "Queens"),
+                         "name": h.get("name"), "area": h.get("area"), "year": h.get("year"),
+                         # the neighborhood's frozen area profile (its traits): area-wide facts only since D16
                          **{"t_" + k: (h.get("traits") or {}).get(k) for k in GLANCE_TRAITS},
                          "violent": (h.get("safety") or {}).get("violent_per_1000"),
                          **{"vq_" + k: v for k, v in (h.get("vs_queens") or {}).items()}})
@@ -248,9 +251,143 @@ def _page_table(part):
                 "parking_published": float(bool(kind)),
                 "pool": float(bool(am.get("pool"))), "doorman": float(bool(am.get("doorman"))),
                 "gym": float(bool(am.get("gym"))), "in_unit_laundry": float(am.get("in_unit_laundry") == "yes"),
+                "building_id": u.get("building_id"), "own_dog_area": float(own_dog_area(am)),
+                "own_parking": float(parking_head(pk) in ("garage", "covered", "lot", "onsite")),
+                "toll_own": (mo.get("sun") or {}).get("toll_round_trip"),
+                "year_built": am.get("year_built"),
             })
-        return pd.DataFrame(rows)
+        t = pd.DataFrame(rows)
+        bt = _building_table(d, labels)
+        if len(bt):                                   # the distance to open water is a building's, kept in master_buildings.csv
+            t["open_water_m"] = t["building_id"].map(bt.set_index("building_id")["open_water_m"])
+        else:
+            t["open_water_m"] = None
+        return t
+    if part == "buildings":
+        return _building_table(d, labels)
     raise KeyError(f"no page table '{part}'")
+
+
+# What a building supplies itself (2026-11-16, independent check 4, D6): twelve neighborhoods lamented the distance to
+# a public dog park while their only building had its own. The neighborhood text now reads these.
+def own_dog_area(amenities):
+    """True when the building's own amenity list names a dog park or a dog run on the property. A pet spa, a dog wash
+    or a bare "yes" is not a place to let a dog out, so it does not count."""
+    a = str((amenities or {}).get("dog_amenities") or "").lower()
+    a = re.sub(r"no dog (run|park)[^;]*", " ", a)
+    return bool(re.search(r"dog (park|run)|pet park|bark park", a))
+
+
+def parking_head(parking):
+    """'garage' | 'covered' | 'lot' | 'street' | 'onsite' | '' from the page's parking.type ("garage: ...")."""
+    t = str((parking or {}).get("type") or "").strip().lower()
+    if not t:
+        return ""
+    head = t.split(":")[0].strip()
+    return "garage" if head.startswith("garage") else "covered" if head.startswith("covered") else \
+        "lot" if head in ("lot", "open_lot", "open lot") else "street" if head.startswith("street") else "onsite"
+
+
+def _building_table(d, labels):
+    """One row per building SHOWN on the page (site/data.json buildings[]), with the door-distance figures of its own
+    apartments (every apartment of a building carries the same ones; the first that has a value is used), what the
+    building itself supplies (a dog area, a garage) and three distances the page data lacks, read from
+    data/master_buildings.csv by building id (open_water_m, beach_m, park_ha_800m). A neighborhood's door-distance
+    figure is the median over these rows: the building's own figure when one building is shown."""
+    units = {}
+    for u in d["units"]:
+        units.setdefault(u.get("building_id"), []).append(u)
+    try:
+        mb = pd.read_csv(ROOT / "data/master_buildings.csv", low_memory=False,
+                         usecols=lambda c: c in ("building_id", "open_water_m", "beach_m", "park_ha_800m"))
+        mb = mb.drop_duplicates("building_id").set_index("building_id")
+    except (OSError, ValueError):
+        mb = pd.DataFrame()
+    def first(us, a, b):
+        for u in us:
+            v = ((u.get("moments") or {}).get(a) or {}).get(b)
+            if not is_missing(v):
+                return v
+        return None
+    rows = []
+    for b in d.get("buildings") or []:
+        us = units.get(b["id"]) or []
+        if not us:
+            continue
+        head = parking_head(b.get("parking"))
+        r = {"building_id": b["id"], "hood_id": b.get("hood_id"), "year_label": labels.get(b.get("experience")),
+             "name": b.get("name"), "n_units": len(us),
+             "restaurants_800m": first(us, "after", "restaurants_800m"), "bars_800m": first(us, "after", "bars_800m"),
+             "cafes_800m": first(us, "after", "cafes_800m"), "restaurants_1600m": first(us, "sat", "restaurants_1600m"),
+             "bars_1600m": first(us, "sat", "bars_1600m"),
+             "park_walk_min": first(us, "wake", "park_walk_min"), "dog_park_m": first(us, "wake", "dog_park_m"),
+             "supermarket_m": first(us, "work", "supermarket_m"), "train_station_m": first(us, "sat", "train_station_m"),
+             "park": first(us, "wake", "park"), "dog_park": first(us, "wake", "dog_park"),
+             "train_station": first(us, "sat", "train_station"),
+             "drive_min": first(us, "sun", "drive_min"),
+             "own_dog_area": float(own_dog_area(b.get("amenities"))),
+             "own_garage": float(head in ("garage", "covered")),
+             "own_parking": float(head in ("garage", "covered", "lot", "onsite")),
+             "year_built": (b.get("amenities") or {}).get("year_built")}
+        for k in ("open_water_m", "beach_m", "park_ha_800m"):
+            r[k] = plain(mb.at[b["id"], k]) if (len(mb) and k in mb.columns and b["id"] in mb.index) else None
+        rows.append(r)
+    return pd.DataFrame(rows)
+
+
+CLOSE_DRIVE_MIN = 30          # "close to your parents": the page's own line for a strong Sunday (30 minutes or less)
+SMALL_EXPERIENCE = 8          # an experience showing fewer apartments than this is written as a short note (D11)
+
+
+def join_and(items):
+    items = [str(x) for x in items]
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1] if items else ""
+
+
+def _median(xs):
+    xs = sorted(x for x in xs if not is_missing(x))
+    if not xs:
+        return None
+    k = len(xs) // 2
+    return xs[k] if len(xs) % 2 else (xs[k - 1] + xs[k]) / 2
+
+
+def _split_fields(d, y):
+    """How an experience's shown apartments divide on the drive to her parents (D12: "close to your parents" was
+    written over an experience with 29 of 81 apartments in Newark, 47 minutes and a toll away). `close` = a drive of
+    CLOSE_DRIVE_MIN minutes or less. Names are joined in descending order of apartments, so a draft can test them
+    ({!far_names==Newark}) and then name them in plain words."""
+    from collections import Counter
+    hoods = {h["id"]: h for h in d["neighborhoods"]}
+    us = [u for u in d["units"] if u.get("year") == y["id"]]
+    sun = lambda u: (u.get("moments") or {}).get("sun") or {}
+    hd = lambda u: (hoods.get(u.get("hood_id")) or {}).get("drive_min")      # the neighborhood's own figure, as on its page
+    close = [u for u in us if not is_missing(hd(u)) and hd(u) <= CLOSE_DRIVE_MIN]
+    far = [u for u in us if not is_missing(hd(u)) and hd(u) > CLOSE_DRIVE_MIN]
+    free = [u for u in us if sun(u).get("toll_complete") and sun(u).get("toll_round_trip") == 0]
+    def names(group, key):
+        c = Counter((hoods.get(u.get("hood_id")) or {}).get(key) for u in group)
+        return join_and([k for k, _ in sorted(c.items(), key=lambda kv: (-kv[1], str(kv[0]))) if k])
+    per_hood = Counter(u.get("hood_id") for u in us)
+    return {
+        "hood_names": "; ".join(sorted((hoods.get(h) or {}).get("name") or h for h in per_hood)),
+        "by_hood": join_and([f"{n} in {(hoods.get(h) or {}).get('name') or h}" for h, n in
+                             sorted(per_hood.items(), key=lambda kv: (-kv[1], str(kv[0])))]),
+        "close_n": len(close), "far_n": len(far), "close_share": len(close) / len(us) if us else None,
+        "close_areas": names(close, "area"), "far_names": names(far, "name"),
+        "close_drive_hi": max((sun(u)["drive_min"] for u in close), default=None),
+        "far_drive": _median(sun(u).get("drive_min") for u in far),
+        "far_toll": _median(sun(u).get("toll_round_trip") for u in far),
+        "tollfree_share": len(free) / len(us) if us else None, "tollfree_areas": names(free, "area"),
+        "toll_areas": names([u for u in close if u not in free], "area"),
+        "close_toll": _median(sun(u).get("toll_round_trip") for u in close if u not in free),
+    }
+
+
+def is_small_experience(label):
+    t = table(PAGE + "#years")
+    r = t[t["year_label"].astype(str) == year_key(label)]
+    return bool(len(r)) and not is_missing(r.iloc[0]["shown"]) and int(r.iloc[0]["shown"]) < SMALL_EXPERIENCE
 
 
 RUN_WORDS_ROW = 6                                  # no run of 6 words shared by a row's lead, points and moments
