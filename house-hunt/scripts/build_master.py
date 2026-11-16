@@ -374,11 +374,69 @@ def overnight_parking_rules(path=None):
     return out
 
 
+def same_apartment_other_site(beds_a, sqft_a, rent_a, site_a, beds_b, sqft_b, rent_b, site_b) -> bool:
+    """D19: a row with a unit label and a row with none are the same apartment when they come from two different sites
+    and agree on bedrooms, on a published size, and on the rent to within 2 percent (sites round or lag each other)."""
+    try:
+        ra, rb, sa, sb = float(rent_a), float(rent_b), float(sqft_a), float(sqft_b)
+    except (TypeError, ValueError):
+        return False
+    if not (sa > 0 and sa == sb) or str(beds_a) != str(beds_b) or url_site(site_a) == url_site(site_b):
+        return False
+    return abs(ra - rb) <= 0.02 * max(ra, rb)
+
+
+def url_site(site) -> str:
+    s_ = str(site).lower()
+    return next((a for a in AGGREGATORS if a in s_), s_.strip())
+
+
 def elevator_only_from_listing_sites(cands) -> bool:
     """cands: Merge candidates (precedence, value, basis, source) for 'elevator'. True when at least one says yes on
     something better than an inference and every such source is a listing site (Apartment List, Trulia, Zumper ...)."""
     yes = [c for c in cands if c[1] == "yes" and c[2] != "inferred"]
     return bool(yes) and all(is_aggregator(c[3]) for c in yes)
+
+
+# ---------------------------------------------------------------------- independent check 3
+def url_host(u_) -> str:
+    return re.sub(r"^www\.", "", re.sub(r"^https?://([^/?#]+).*", r"\1", str(u_).strip().lower()))
+
+
+def second_site(url, also_seen_at, duplicate_urls="") -> bool:
+    """D11: a second SITE lists the unit only when one of the other links is on a different host from the unit's own
+    listing. `also_seen_at` often holds the very building page the row came from (the same Trulia or Apartment List
+    page), which is not a second source and must not switch the staleness rule off."""
+    own = url_host(url)
+    others = {url_host(x) for x in (str(also_seen_at) + " " + str(duplicate_urls)).split() if x.strip().startswith("http")}
+    return bool(others - {own, ""})
+
+
+def load_elevator_doubt(path=None) -> dict:
+    """building_id -> {name, why, source} from the reviewed table data/reference/elevator_doubt.csv (owner, 2026-11-16):
+    buildings whose elevator rests on a listing site's amenity list while the complex is low-rise, converted or
+    multi-building, so that 'an elevator' does not say an elevator serves this apartment. Open gate fact."""
+    f = Path(path) if path else DATA / "reference" / "elevator_doubt.csv"
+    if not f.exists():
+        return {}
+    return {r.building_id: {"name": r.name, "why": r.why, "source": r.source} for r in pd.read_csv(f, dtype=str, keep_default_na=False).itertuples()}
+
+
+def garden_style(unit_labels, heights) -> bool:
+    """General rule beside the table (owner, 2026-11-16): the data shows a multi-building garden-style complex when the
+    unit labels carry several building numbers AND no page or record gives any height of 4 floors or more.
+    heights: every floor count a page or record states for the building (building floors, the city's count, a stated or
+    confirmed unit floor); blanks and label readings are not heights."""
+    hs = [h for h in (pd.to_numeric(pd.Series(list(heights), dtype=object), errors="coerce").dropna().tolist())]
+    return parsers.multi_building_labels(unit_labels) and not any(h >= 4 for h in hs)
+
+
+def load_overrides(path=None):
+    """data/reference/address_overrides.csv: reviewed corrections to a building's name, address or city, or to one
+    unit's address (scope building -> key is an addr_key; scope unit -> key is a listing_id). Each row says where the
+    correction comes from. A building_name is entered only where the name is blank or just repeats the address."""
+    f = Path(path) if path else DATA / "reference" / "address_overrides.csv"
+    return pd.read_csv(f, dtype=str, keep_default_na=False) if f.exists() else pd.DataFrame(columns=["scope", "key", "field", "value", "basis", "source", "note"])
 
 
 # ---------------------------------------------------------------------- phone answers (highest precedence)
@@ -783,6 +841,29 @@ def main():
     for b, d in rows.items():
         # 4c: which elevators rest on a listing site's page alone (no own page, no record, no phone call)
         d["elevator_aggregator_only"] = "yes" if d.get("elevator") == "yes" and b in agg_only else ""
+    # owner, 2026-11-16 (independent check 3, part B): a tag-only elevator is still 'stated', EXCEPT
+    #  (1) buildings in the reviewed table data/reference/elevator_doubt.csv, and
+    #  (2) by rule, a tag-only elevator in a complex the data shows to be multi-building garden-style: several building
+    #      numbers in the unit labels and no height of 4+ floors on any page or record.
+    # For those the elevator is an open gate fact: "confirm an elevator serves this apartment". A phone answer settles it.
+    DOUBT = load_elevator_doubt()
+    labels_by_b = U.groupby("building_id").unit.apply(lambda x: [u for u in x if parsers.unit_label_key(u)]).to_dict()
+    stated_floor_by_b = U[U.floor_basis.eq("stated")].groupby("building_id").floor_used.apply(list).to_dict() if "floor_used" in U else {}
+    pluto_fl_by_b = U.groupby("building_id").pluto_floors.apply(list).to_dict() if "pluto_floors" in U else {}
+    for b, d in rows.items():
+        if d.get("elevator") != "yes" or d.get("elevator_basis") == PHONE:
+            continue
+        if b in DOUBT:
+            d["elevator_doubt"] = f"reviewed table: {DOUBT[b]['why']}"
+            d["elevator_doubt_source"] = "data/reference/elevator_doubt.csv (" + DOUBT[b]["source"] + ")"
+        elif d.get("elevator_aggregator_only") == "yes":
+            heights = [d.get("building_floors", "") if d.get("building_floors_basis") != "inferred" else ""] + pluto_fl_by_b.get(b, []) + stated_floor_by_b.get(b, []) \
+                + [f_ for (b_, lab, f_, basis, *_x) in floor_rows if b_ == b and basis == "confirmed"]
+            if garden_style(labels_by_b.get(b, []), heights):
+                prefs = sorted({parsers.building_prefix(u) for u in labels_by_b.get(b, []) if parsers.building_prefix(u)})
+                d["elevator_doubt"] = ("rule: the elevator is named only in a listing site's amenity list, the unit labels carry several building numbers ("
+                                       + ", ".join(prefs[:6]) + "), and no page or record gives a height of four floors or more")
+                d["elevator_doubt_source"] = "rule (scripts/build_master.py: garden_style)"
 
     # ------------------------------------------------------------------ building table
     bfirst = U.drop_duplicates("building_id").set_index("building_id")
@@ -794,6 +875,35 @@ def main():
     B = B.join(G)                                # one coordinate per building (W7)
     B = B.join(pd.DataFrame.from_dict(rows, orient="index"))
     B["addr_keys"] = U.groupby("building_id").addr_key.agg(lambda s: " || ".join(sorted(set(s))))
+    # D15 (Alexander Crossing): a floor count that only a listing row states, below what the building's own unit labels
+    # read as ("2 floors" with a unit 0405), is not a height: it is dropped and logged as a conflict.
+    if "building_floors" in B:
+        for b in B.index[B.building_floors_basis.isin(["stated", "amenities_page"]).fillna(False)]:
+            bf = parsers._bf(B.at[b, "building_floors"])
+            tops = []
+            for u_ in labels_by_b.get(b, []):
+                t_ = parsers.unit_tail(u_) or parsers.unit_key(u_)
+                m_ = re.fullmatch(r"0?([1-9])\d\d[a-z]?", t_) or re.fullmatch(r"([1-9]\d)\d\d[a-z]?", t_ if not parsers.building_prefix(u_) else "")
+                if m_:
+                    tops.append(int(m_.group(1)))
+            if bf and tops and max(tops) > bf:
+                conflicts.append({"building_id": b, "field": "building_floors", "chosen": "", "chosen_basis": "dropped",
+                                  "others": f"{B.at[b, 'building_floors']} ({B.at[b, 'building_floors_basis']}) is below a unit label that reads as floor {max(tops)}"})
+                B.at[b, "building_floors"], B.at[b, "building_floors_basis"] = "", ""
+    # reviewed corrections to names and addresses (docs/PENDING_FIXES.md, independent check 3 D17)
+    OV = load_overrides()
+    for r in OV[OV.scope == "building"].itertuples():
+        b = A2B.get(r.key)
+        if b is None or b not in B.index or r.field not in ("building_name", "address", "city"):
+            continue
+        if r.field == "building_name":
+            cur = str(B.at[b, "building_name"]) if "building_name" in B and not is_blank(B.at[b, "building_name"]) else ""
+            if cur and street_key(cur, "") != street_key(str(B.at[b, "address"]), "") and not re.match(r"\d", cur):
+                continue                             # a real name is already there
+            B.at[b, "building_name"], B.at[b, "building_name_basis"], B.at[b, "building_name_source"] = r.value, r.basis, r.source
+        else:
+            B.at[b, r.field] = r.value
+            B.at[b, r.field + "_override_source"] = r.source
     B["n_listed_units"] = U.groupby("building_id").listing_id.count()
     for b, g in G[G.coord_basis.astype(str).ne("listing rows agree") & G.coord_basis.astype(str).ne("none")].iterrows():
         conflicts.append({"building_id": b, "field": "lat_lon", "chosen": f"{float(g.lat):.6f},{float(g.lon):.6f}", "chosen_basis": g.coord_basis, "others": g.coord_note})
@@ -884,12 +994,14 @@ def main():
                         dup = k[0]
                 elif same_money:                            # at least one of the two has no unit label
                     dup = k[0]
+                elif same_apartment_other_site(k[3], k[4], k[5], k[6], r.beds, r.sqft, r.listed_rent, r.source_site):
+                    dup = k[0]                              # D19: 12 Brooklyn Ave 501 ($2,675, Trulia) and a Zumper row with no unit ($2,700)
                 if dup:
                     break
             if dup:
                 keep_of[r.listing_id] = dup
             else:
-                kept.append((r.listing_id, r.ukey_, r.utail_, r.beds, r.sqft, r.listed_rent))
+                kept.append((r.listing_id, r.ukey_, r.utail_, r.beds, r.sqft, r.listed_rent, r.source_site))
     dups = MU[MU.listing_id.isin(keep_of)]
     extra_links = dups.groupby(dups.listing_id.map(keep_of)).agg(url=("url", " ".join), ids=("listing_id", " ".join))
     MU = MU[~MU.listing_id.isin(keep_of)].copy()
@@ -900,7 +1012,8 @@ def main():
     MU = MU.drop(columns=["upri_"])
 
     # live check: status and price now. Unit labels are matched the same way on both sides (W17).
-    live_cols = [("status", "live_status"), ("price_now", "live_price"), ("available_now_text", "live_available_text"), ("checked_at", "live_checked_at"), ("notes", "live_notes")]
+    live_cols = [("status", "live_status"), ("price_now", "live_price"), ("available_now_text", "live_available_text"), ("checked_at", "live_checked_at"), ("notes", "live_notes"),
+                 ("listing_url", "live_url")]
     for _, new in live_cols:
         MU[new] = ""
     if len(L):
@@ -1015,6 +1128,11 @@ def main():
     MU = MU.drop(columns=["ukey_", "utail_"])
     bcols = [c for c in B.columns if c not in MU.columns]
     MU = MU.join(B[bcols], on="building_id")
+    for r in OV[OV.scope == "unit"].itertuples():      # D17: EDGE 408 and 410 are in the building at 170 Avenue F
+        hit = MU.listing_id == r.key
+        if hit.any() and r.field in ("address", "city"):
+            MU.loc[hit, r.field] = r.value
+            MU.loc[hit, "address_override_source"] = r.source
     # D8: the lease term the listed price belongs to, from the unit's own live-check note, else the building's
     # lease-term fact, else the listing's own price basis ('12-month lease', 'lease term 24 Months').
     ltm, lt12, ltq, ltsrc, ltlow = [], [], [], [], []
@@ -1045,19 +1163,38 @@ def main():
     MU = apply_call_answers_units(MU, CALLS)
     # 4b: staleness from modification dates where the data has them: the unit's own live-check note, else a
     # listing_last_modified / listing_updated_at fact read on the same site as the unit's listing
-    host = lambda u_: re.sub(r"^www\.", "", re.sub(r"^https?://([^/]+).*", r"\1", str(u_).strip().lower()))
+    host = url_host
+    # independent check 3, D3 (Residences at The Summit K3-02): the modification date of a building PAGE belongs to
+    # every unit listed on that page, not only to the unit whose live-check note happens to quote it. Dates are
+    # collected per (building, page host) from every live-check note of the building that speaks of the page itself.
+    page_dates = {}                                  # (building, host) -> latest "page last modified" date in any note of the building
+    if len(L):
+        for r in L.itertuples():
+            if re.search(r"building page|page last modified|\(last modified", str(r.notes), re.I):
+                d0 = parsers.page_modified_date(r.notes)
+                if d0:
+                    k0 = (r.building_id, host(r.listing_url))
+                    page_dates[k0] = max(page_dates.get(k0, ""), d0)
+    dup_urls = MU.duplicate_listing_ids.map(lambda ids: " ".join(dups[dups.listing_id.isin(ids.split())].url) if ids else "") if len(dups) else pd.Series("", index=MU.index)
     pm, pms, st_lvl, st_days, st_why = [], [], [], [], []
-    for b, url_, note, lc, ls, av, also, dup, called, lst in zip(MU.building_id, MU.url, MU.live_notes, MU.live_checked_at, MU.last_seen, MU.available_date, MU.also_seen_at,
-                                                              MU.duplicate_listing_ids, MU.call_called_at, MU.live_status):
+    for b, url_, note, lc, ls, av, also, dupu, called, lst, lurl in zip(MU.building_id, MU.url, MU.live_notes, MU.live_checked_at, MU.last_seen, MU.available_date, MU.also_seen_at,
+                                                                       dup_urls, MU.call_called_at, MU.live_status, MU.live_url):
         d_, src_ = parsers.page_modified_date(note), "live-check note"
         read_on = str(lc)[:10] or str(ls)[:10]
-        # a unit the evidence pass saw live (often on the manager's own page) is not judged by the age of another site's page
-        if not d_ and lst not in ("live", "changed"):
+        seen_live = lst in ("live", "changed")
+        # a unit the evidence pass saw live on ANOTHER site (often the manager's own page) is not judged by the age of the
+        # listing site's page. D11: but a unit seen "live" on that same listing-site page is (134 Baldwin Ave 301, 411).
+        same_page_check = (not seen_live) or (not str(lurl).strip()) or host(lurl) == host(url_)
+        if not d_ and same_page_check:
             same = [d for d, u_ in mod_facts.get(b, []) if host(u_) and host(u_) == host(url_)]
-            d_, src_, read_on = (max(same), "evidence fact (page data of the listing site)", str(ls)[:10] or str(lc)[:10]) if same else ("", "", read_on)
+            sib = page_dates.get((b, host(url_)), "") if "/building/" in str(url_) or not parsers.unit_label_key("") else ""
+            if same:
+                d_, src_, read_on = max(same), "evidence fact (page data of the listing site)", str(ls)[:10] or str(lc)[:10]
+            elif sib:
+                d_, src_, read_on = sib, "live-check note of another unit on the same building page", str(lc)[:10] or str(ls)[:10]
             if d_ and read_on < d_:
                 read_on = str(lc)[:10] or d_
-        lvl, days, why = parsers.staleness(d_, read_on, av, second_source=bool(str(also).strip() or str(dup).strip())) if not str(called).strip() else ("", None, "")
+        lvl, days, why = parsers.staleness(d_, read_on, av, second_source=second_site(url_, also, dupu)) if not str(called).strip() else ("", None, "")
         pm.append(d_); pms.append(src_ if d_ else ""); st_lvl.append(lvl); st_days.append("" if days is None else days); st_why.append(why)
     MU["page_modified_date"], MU["page_modified_source"], MU["listing_stale"], MU["listing_stale_days"], MU["listing_stale_why"] = pm, pms, st_lvl, st_days, st_why
     MU.to_csv(DATA / "master_units.csv", index=False)
