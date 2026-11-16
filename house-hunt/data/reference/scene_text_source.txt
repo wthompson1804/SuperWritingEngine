@@ -1534,99 +1534,101 @@ close: dinner
 # ================================================================== SECTION SUBHEADS (added 2026-11-16)
 # One short line in the host's voice under each section headline of the page. The headline carries the numbers, so a
 # subhead has none. Each line below is "conditions :: wording | another wording | ...". For a row, the FIRST line
-# whose conditions all hold is used (so put the most distinctive first); the wording is picked by a hash of the row's
-# id, so it is stable and varies across rows. No line matches -> the subhead stays empty, which is better than filler.
+# whose conditions all hold is used (so put the most distinctive first). Each condition has at least 5 wordings; the
+# wording is picked in an order seeded by the row's id, so it is stable and varies across rows, and a wording that is
+# already on 6% of the neighborhoods is passed over. No line matches, or every wording is used up -> the subhead stays
+# empty, which is better than filler or the same line again.
 # Conditions: any token alias with a test (drive<=30), v:theme:sentiment>=n (residents' comments), rule:name (a found
 # local rule applies; rule:name~words narrows it to summaries containing one of the words). At most 14 words, one sentence, no digits, no crime wording, no hedging.
 
 === sub: hood.cost
-pg_hi<=2400 :: Comfortably under your ceiling, with room left for the fees nobody lists. | Well inside your budget, which leaves room for a surprise or a sofa. | The monthly number here leaves breathing room.
-pg_lo>=2850 :: Close to your ceiling, so every unlisted fee matters. | Right near the top of your budget, so ask about every fee. | This is the top of your range, and extras would push it over.
-pg_lo<=2300, pg_hi>=2850 :: A wide spread, so the building you pick decides the bill. | Prices run the whole range here, so compare place by place.
+pg_hi<=2400 :: Comfortably under your ceiling, with room left for the fees nobody lists. | Well inside your budget, which leaves room for a surprise or a sofa. | The monthly number here leaves breathing room. | Every place we found here leaves money in your pocket. | The bills here stay low enough to absorb a surprise.
+pg_lo>=2850 :: Close to your ceiling, so every unlisted fee matters. | Right near the top of your budget, so ask about every fee. | This is the top of your range, and extras would push it over. | Nothing here comes cheap, so check each bill line by line. | Expect to spend nearly all of your budget in this neighborhood.
+pg_lo<=2300, pg_hi>=2850 :: A wide spread, so the building you pick decides the bill. | Prices run the whole range here, so compare place by place. | From modest to nearly your limit, the price depends on the building. | The cheapest and the priciest place here are far apart. | Shop by building here, because the monthly bills vary a lot.
 
 === sub: hood.to_parents
-drive<=12, b_toll==0 :: Close enough to drop by on a weeknight. | Sunday dinner could be Tuesday dinner too. | Your parents stay part of the week, not just the weekend.
-drive<=30, b_toll==0 :: Close enough for Sunday dinner without planning your week around it. | An easy drive home, with nothing to pay on the way. | Near enough that a visit never needs a calendar.
-drive<=30 :: A short drive, though every visit pays a toll. | Close on the clock, with a toll each time you go.
-drive<=60, b_toll==0 :: A real drive, and at least no toll to go with it. | Far enough to plan, with nothing to pay on the road.
-drive<=60 :: Visits become plans, and each of them pays a toll. | A real drive with a toll, so you will go on purpose. | Not a drop-by distance, so Sunday gets its own block of time.
-drive<=90 :: Sunday dinner takes the afternoon, there and back. | Far enough that you stay for the whole meal and then some. | This is a commitment each time, so weigh how often you would go.
-drive>90 :: Sunday dinner turns into a day trip. | This far out, a visit home is the whole day. | Be honest about how often you would make this drive.
+drive<=12, b_toll==0 :: Close enough to drop by on a weeknight. | Sunday dinner could be Tuesday dinner too. | Your parents stay part of the week, and the weekend too. | You could bring the dog over after work. | Near enough that your mother will expect you for dinner.
+drive<=30, b_toll==0 :: Close enough for Sunday dinner without planning your week around it. | An easy drive home, with nothing to pay on the way. | Near enough that a visit never needs a calendar. | A short toll-free drive, so visits can be spur of the moment. | Home is close, and the road there costs nothing.
+drive<=30 :: A short drive, though every visit pays a toll. | Close on the clock, with a toll each time you go. | Quick to reach, though the crossing charges you for it. | The miles are few, and the toll is the real cost of a visit. | You are near on the map, with a toll booth in between.
+drive<=60, b_toll==0 :: A real drive, and at least no toll to go with it. | Far enough to plan, with nothing to pay on the road. | A longer drive, softened by a toll-free road. | You will plan the trip, and at least the road is free. | Sunday takes some driving, with no toll on top.
+drive<=60 :: Visits become plans, and each of them pays a toll. | A real drive with a toll, so you will go on purpose. | Too far for dropping by, so Sunday gets its own block of time. | Dinner at home means a real drive and a toll. | Dropping by turns into scheduling, and the trip carries a toll. | Near enough for most Sundays, far enough to feel it. | The drive is long enough that you will batch your visits.
+drive<=90 :: Sunday dinner takes the afternoon, there and back. | Far enough that you stay for the whole meal and then some. | This is a commitment each time, so weigh how often you would go. | Going home is an afternoon, so pick the Sundays that matter. | A long drive each way, which changes how often you go.
+drive>90 :: Sunday dinner turns into a day trip. | This far out, a visit home is the whole day. | Be honest about how often you would make this drive. | Home is a long haul from here, so visits become occasions. | Expect to see your parents less often, and for longer each time.
 
 === sub: hood.parking
-rule:overnight_parking~banned|NO (overnight )?parking|No overnight parking|prohibited|needs a permit|must have an overnight|not allowed|resident-permit-only|closed to cars :: Overnight street parking is restricted, so get a space in writing. | The overnight rule limits the street, so the building has to park you. | The curb has overnight rules, so the building's own space is everything.
-nocar>=0.6 :: Most neighbors skip the car, so a guaranteed spot is everything. | Few people here own a car, and the curb shows why. | Parking is the hard part here, so settle it before the lease.
-v:parking:negative>=1 :: The people who live here complain about parking, so believe them. | Residents call parking a struggle, so ask for a reserved space.
-rule:resident_permit~zone-permit|permit streets|Permit Parking districts|citywide residential permit|need a Parking Authority permit|resident parking sticker|Resident permit parking on designated|Resident Parking Program|Restricted Parking Area|streets with restricted parking|Resident Permit Parking Program :: Street parking runs on permits, so ask what you would qualify for. | The curb belongs to permit holders, so learn the rules early.
-nocar<=0.08 :: Nearly everyone drives here, so buildings expect your car. | Almost every household has a car, so space for yours is normal.
+rule:overnight_parking~banned|NO (overnight )?parking|No overnight parking|prohibited|needs a permit|must have an overnight|not allowed|resident-permit-only|closed to cars :: Overnight street parking is restricted, so get a space in writing. | The overnight rule limits the street, so the building has to park you. | The curb has overnight rules, so the building's own space is everything. | No sleeping on the street here, so the building must provide a space. | Check the overnight rule first, then ask each building for a space.
+nocar>=0.6 :: Most neighbors skip the car, so a guaranteed spot is everything. | Few people here own a car, and the curb shows why. | Parking is the hard part here, so settle it before the lease. | Most households here go without a car, so ask where yours fits. | A car is the exception here, and the curb is built that way.
+v:parking:negative>=1 :: The people who live here complain about parking, so believe them. | Residents call parking a struggle, so ask for a reserved space. | Locals warn about parking, so make a reserved space a condition. | Parking draws complaints from the people who know it best. | Take the neighbors' word on parking and insist on your own space.
+rule:resident_permit~zone-permit|permit streets|Permit Parking districts|citywide residential permit|need a Parking Authority permit|resident parking sticker|Resident permit parking on designated|Resident Parking Program|Restricted Parking Area|streets with restricted parking|Resident Permit Parking Program :: Street parking runs on permits, so ask what you would qualify for. | The curb belongs to permit holders, so learn the rules early. | Permit rules govern the street, so the building's parking matters more. | Find out which permit you would need before you rely on the street. | Street parking here comes with paperwork.
+nocar<=0.08 :: Nearly everyone drives here, so buildings expect your car. | Almost every household has a car, so space for yours is normal. | This is car country, and buildings plan for it. | Driving is the norm here, so expect parking to be part of the offer. | Everyone drives here, so ask where your space is and move on.
 
 === sub: hood.dog
-dogpark<=500 :: The dog run is close enough for a weekday morning. | A quick lap at the dog run fits before your first meeting. | The dog gets a proper run without anyone touching the car keys.
-parkwalk<=3, parkha>=10 :: A big park is the dog's front yard. | The morning walk starts at a real park, not a sidewalk.
-dogpark>=4800 :: The dog park is a drive, so weekday exercise is on the sidewalk. | Off-leash time means the car, so plan for long walks instead. | No dog run nearby, so the leash does most of the work.
-dogpark>=2400, parkwalk>=12 :: Green is a trip here, so the dog needs a plan. | Neither a park nor a dog run is close, which a puppy will notice.
+dogpark<=500 :: The dog run is close enough for a weekday morning. | A quick lap at the dog run fits before your first meeting. | The dog gets a proper run without anyone touching the car keys. | Off-leash time is a short walk from the door. | A dog run is near enough to become a daily habit.
+parkwalk<=3, parkha>=10 :: A big park is the dog's front yard. | The morning walk starts at a real park, with grass instead of sidewalk. | A large park sits right outside for the daily loop. | The dog gets real grass, moments from the door. | Long walks start at the corner, in a park with room to roam.
+dogpark>=4800 :: The dog park is a drive, so weekday exercise is on the sidewalk. | Off-leash time means the car, so plan for long walks instead. | No dog run nearby, so the leash does most of the work. | The nearest dog park is a real trip, so save it for weekends. | Fetch happens on a long leash here, since the dog park is far.
+dogpark>=2400, parkwalk>=12 :: Green is a trip here, so the dog needs a plan. | Neither a park nor a dog run is close, which a puppy will notice. | Both the park and the dog run take a drive. | The dog's exercise needs planning, with green this far away. | Expect sidewalk walks on weekdays and park trips on weekends.
 
 === sub: hood.going_out
-rest>=52 :: You could eat somewhere new every week for a year. | Dinner is never the same place again unless you want it to be. | Saturday night starts at your front door.
-rest>=20, bars>=4 :: Dinner and a drink are both a walk, and so is the way home. | A real night out without the car. | Enough within walking reach to make a habit of going out.
-rest>=20, bars<=1 :: Plenty of dinner on foot, and the bar is somewhere else. | Good for eating out, thin for staying out.
-rest<=3, bars==0 :: Dinner out starts with the car keys. | Nights out happen somewhere else, so somebody drives. | Almost nothing is on foot, so going out is a trip.
-bars==0 :: No bar within walking reach, so the late night is elsewhere. | You can walk to dinner, and the nightcap takes a ride.
+rest>=52 :: You could eat somewhere new every week for a long time. | Dinner is never the same place again unless you want it to be. | Saturday night starts at your front door. | More restaurants within a walk than you could work through. | Dinner plans here start with too many choices.
+rest>=20, bars>=4 :: Dinner and a drink are both a walk, and so is the way home. | A real night out without the car. | Enough within walking reach to make a habit of going out. | Restaurants and bars are both within a walk. | You can have dinner, then a drink, and never move the car.
+rest>=20, bars<=1 :: Plenty of dinner on foot, and the bar is somewhere else. | Good for eating out, thin for staying out. | Lots of places to eat, and hardly a bar among them. | Dinner is easy here, and drinks afterward take a ride. | A strong dinner neighborhood that goes quiet after dessert.
+rest<=3, bars==0 :: Dinner out starts with the car keys. | Nights out happen somewhere else, so somebody drives. | Almost nothing is on foot, so going out is a trip. | Going out means driving out. | There is next to nothing to walk to at night.
+bars==0 :: No bar within walking reach, so the late night is elsewhere. | You can walk to dinner, and the nightcap takes a ride. | Dinner is nearby, and a drink afterward is a drive. | There are places to eat, and no bar to follow them. | Evenings end early here unless you drive.
 
 === sub: hood.green
-beach<=800 :: The beach is a walk, which changes an ordinary Tuesday. | Sand is close enough for a walk after work.
-parkha>=20, parkwalk<=5 :: A big park is practically your backyard. | Real green, and close enough to use every day. | The kind of park you can get lost in, a short walk away.
-water<=300, parkwalk<=6 :: Water and a park are both a short walk. | The evening walk can end at the water.
-parkwalk<=3 :: A park is just outside, which makes the early walk easy. | Green is around the corner.
-parkwalk>=15 :: Green takes effort here, so plan the dog's routine. | The nearest park is a hike, and that adds up every morning. | Trees are a drive away, not a walk.
+beach<=800 :: The beach is a walk, which changes an ordinary Tuesday. | Sand is close enough for a walk after work. | The shore is a short walk from the door. | Salt air is part of the daily walk here. | A beach within walking reach changes what a weekend looks like.
+parkha>=20, parkwalk<=5 :: A big park is practically your backyard. | Real green, and close enough to use every day. | The kind of park you can get lost in, a short walk away. | A park with real size, a few minutes away. | Serious green space is a short walk from the door.
+water<=300, parkwalk<=6 :: Water and a park are both a short walk. | The evening walk can end at the water. | A park nearby and the waterfront close behind it. | Morning walks here come with a view of the water. | The water is close, and so is a patch of green.
+parkwalk<=3 :: A park is just outside, which makes the early walk easy. | Green is around the corner. | The nearest park is a very short walk. | You are steps from a park. | A park this close makes the last walk of the night easy.
+parkwalk>=15 :: Green takes effort here, so plan the dog's routine. | The nearest park is a hike, and that adds up every morning. | Trees are a drive away, well beyond a walk. | A park is a long walk off, so most walks are on pavement. | Reaching green means the car or a long walk.
 
 === sub: hood.residents_say
-v:parking:negative>=1, v:dogs_green:positive>=1 :: Locals love the parks and grumble about parking. | People here praise the green and complain about the curb.
-v:parking:positive>=1, v:parking:negative==0 :: Neighbors say parking is manageable, which is rare praise. | The people who live here call parking workable.
-v:social_life:negative>=1 :: Residents say there is little to do at night. | Locals call the evenings quiet, and they would know. | The people who live here wish for more of a night out.
-v:dogs_green:positive>=1, v:dogs_green:negative==0, v:dogs_green:mixed==0 :: The people who live here brag about the parks. | Neighbors talk up the green space. | Residents point to the parks before anything else.
-v:social_life:positive>=1, v:social_life:negative==0, v:social_life:mixed==0 :: Locals like what there is to do close to home. | Residents speak well of the restaurants and shops nearby.
-v:dogs_green:negative>=1 :: Residents say the parks and sidewalks need more care. | Locals complain about upkeep outdoors.
+v:parking:negative>=1, v:dogs_green:positive>=1 :: Locals love the parks and grumble about parking. | People here praise the green and complain about the curb. | Residents like the green space and warn you about parking. | The parks get praise from neighbors, and the parking gets sighs. | Ask a local and you hear good parks, hard parking.
+v:parking:positive>=1, v:parking:negative==0 :: Neighbors say parking is manageable, which is rare praise. | The people who live here call parking workable. | Residents report that finding a spot is doable. | Locals say you can park here without a fight. | For once, the neighbors have kind words about parking.
+v:social_life:negative>=1 :: Residents say there is little to do at night. | Locals call the evenings quiet, and they would know. | The people who live here wish for more of a night out. | Neighbors say nightlife is thin. | People here admit it goes quiet after dark.
+v:dogs_green:positive>=1, v:dogs_green:negative==0, v:dogs_green:mixed==0 :: The people who live here brag about the parks. | Neighbors talk up the green space. | Residents point to the parks before anything else. | Locals rave about the green space. | Ask residents what they love and they name the parks. | People who live here are proud of their parks. | Green space earns the warmest reviews from residents.
+v:social_life:positive>=1, v:social_life:negative==0, v:social_life:mixed==0 :: Locals like what there is to do close to home. | Residents speak well of the restaurants and shops nearby. | Neighbors like having places to go nearby. | People who live here enjoy the local spots. | Residents have good things to say about going out locally.
+v:dogs_green:negative>=1 :: Residents say the parks and sidewalks need more care. | Locals complain about upkeep outdoors. | Neighbors wish the parks and streets were better kept. | People here say the outdoor spaces need attention. | Residents grumble about how the parks and sidewalks are maintained.
 
 === sub: hood.local_rules
-rule:overnight_parking~banned|NO (overnight )?parking|No overnight parking|prohibited|needs a permit|must have an overnight|not allowed|resident-permit-only|closed to cars :: Learn the overnight parking rule before you sign anything. | The overnight rule is the fine print that matters most here. | A parking rule decides which buildings work for you.
-rule:parks_and_beaches~does not allow dogs|not allowed|banned|beach ordinance :: The town has its own rules for where dogs can go. | Check where dogs are welcome before you plan the walks.
-rule:resident_permit~zone-permit|permit streets|Permit Parking districts|citywide residential permit|need a Parking Authority permit|resident parking sticker|Resident permit parking on designated|Resident Parking Program|Restricted Parking Area|streets with restricted parking|Resident Permit Parking Program :: A resident permit has paperwork, so start it the week you move. | Permits need the right documents, so ask what yours must show.
-rule:dog_park~by permit|needs a permit|residents only|small|Township dog park|list a dog run|Public dog park :: The local dog park has its own entry rules. | Ask what the dog park requires before the first visit.
+rule:overnight_parking~banned|NO (overnight )?parking|No overnight parking|prohibited|needs a permit|must have an overnight|not allowed|resident-permit-only|closed to cars :: Learn the overnight parking rule before you sign anything. | The overnight rule is the fine print that matters most here. | A parking rule decides which buildings work for you. | The town restricts overnight street parking, so read the rule first. | Overnight parking has rules here, so learn them before move-in day.
+rule:parks_and_beaches~does not allow dogs|not allowed|banned|beach ordinance :: The town has its own rules for where dogs can go. | Check where dogs are welcome before you plan the walks. | Dogs are restricted in some parks or beaches here, so read the rule. | Local rules limit where a dog can walk, so look them up. | Know the town's dog rules before you count on the park or the beach.
+rule:resident_permit~zone-permit|permit streets|Permit Parking districts|citywide residential permit|need a Parking Authority permit|resident parking sticker|Resident permit parking on designated|Resident Parking Program|Restricted Parking Area|streets with restricted parking|Resident Permit Parking Program :: A resident permit has paperwork, so start it the week you move. | Permits need the right documents, so ask what yours must show. | Street permits come with conditions, so read them before you rely on them. | The permit office will want documents, so gather them early. | Find out what a resident permit requires before you count on the curb.
+rule:dog_park~by permit|needs a permit|residents only|small|Township dog park|list a dog run|Public dog park :: The local dog park has its own entry rules. | Ask what the dog park requires before the first visit. | The dog park here comes with conditions. | Check the dog park's rules before you promise the puppy anything. | Entry to the local dog park has rules, so read them first.
 
 === sub: hood.compared_to_queens
-q_cost>=4, q_sqft>=4 :: More room for less money than the typical Queens place. | Cheaper and bigger than Queens, which is the whole argument.
-q_cost>=4, q_drive<=2 :: Cheaper than Queens, and you pay the difference in miles. | The savings over Queens are real, and so is the drive.
-q_sqft>=4, q_drive<=2 :: Bigger than what Queens offers, and farther from home. | You gain space over Queens and give back time on the road.
-q_food>=4 :: More to eat on foot than the typical Queens block. | Livelier at dinner time than most of Queens.
-q_green>=4, q_food<=2 :: Greener than Queens, and quieter at dinner time. | A shorter walk to a park than in Queens, and a longer one to dinner.
-q_cost<=2, q_drive<=2 :: Costs more than Queens and sits farther out, so it has to earn it. | Pricier than Queens and a longer drive, so look hard at what you get.
-q_cost<=2 :: You pay more here than for the typical Queens place. | This runs above the Queens price, so know what the extra buys.
+q_cost>=4, q_sqft>=4 :: More room for less money than the typical Queens place. | Cheaper and bigger than Queens, which is the whole argument. | You pay less and get more room than in Queens. | Queens would cost you more for a smaller place. | Compared to staying in Queens, the rent drops and the rooms grow.
+q_cost>=4, q_drive<=2 :: Cheaper than Queens, and you pay the difference in miles. | The savings over Queens are real, and so is the drive. | You save money compared to Queens and spend it in drive time. | Lower bills than Queens, longer Sundays on the road. | Compared to staying in Queens, this is cheaper and farther.
+q_sqft>=4, q_drive<=2 :: Bigger than what Queens offers, and farther from home. | You gain space over Queens and give back time on the road. | More space than a Queens apartment, more road to your parents. | Compared to staying in Queens, you trade minutes for square feet. | Roomier than Queens, and a longer way home. | The apartments beat Queens on size and lose on distance.
+q_food>=4 :: More to eat on foot than the typical Queens block. | Livelier at dinner time than most of Queens. | Compared to staying in Queens, you walk past more restaurants. | There is more within walking reach here than in most of Queens. | For eating out on foot, this beats the typical Queens address.
+q_green>=4, q_food<=2 :: Greener than Queens, and quieter at dinner time. | A shorter walk to a park than in Queens, and a longer walk to dinner. | Compared to staying in Queens, parks get closer and restaurants farther. | You gain green over Queens and lose places to eat. | More trees than Queens, fewer menus.
+q_cost<=2, q_drive<=2 :: Costs more than Queens and sits farther out, so it has to earn it. | Pricier than Queens and a longer drive, so look hard at what you get. | Compared to staying in Queens, you pay more and drive farther. | More money and more miles than Queens, so the place must justify both. | This asks more than Queens in rent and in road.
+q_cost<=2 :: You pay more here than for the typical Queens place. | This runs above the Queens price, so know what the extra buys. | Compared to staying in Queens, the monthly bill goes up. | Rents here run higher than the Queens norm. | Expect to pay a premium over a typical Queens apartment.
 
 === sub: year.cost
-p_allin<=2650 :: The typical bill leaves room under your ceiling. | Most places here leave some of your budget unspent.
-p_allin>=2800 :: The typical place sits near the top of your budget. | Expect to spend most of what you set aside.
+p_allin<=2650 :: The typical bill leaves room under your ceiling. | Most places here leave some of your budget unspent. | Bills here tend to sit below your limit. | You would usually have money left at the end of the month. | The typical place is comfortably inside your budget.
+p_allin>=2800 :: The typical place sits near the top of your budget. | Expect to spend most of what you set aside. | Most of your budget goes to the monthly bill here. | The typical bill runs close to your ceiling. | This way of living costs nearly everything you set aside.
 
 === sub: year.to_parents
-p_drive<=20 :: Close enough to drop by on a weeknight. | Sunday dinner needs no planning at all.
-p_drive<=35 :: Close enough for Sunday dinner without planning your week around it. | An easy drive home whenever you feel like it.
-p_drive<=60 :: Visits become plans, and most of them pay a toll. | Far enough that you go on purpose.
-p_drive>60 :: Sunday dinner takes the whole afternoon. | Going home is a trip, so you will choose your Sundays.
+p_drive<=20 :: Close enough to drop by on a weeknight. | Sunday dinner needs no planning at all. | Your parents stay part of the week. | Home is a quick drive whenever you want it. | You could stop by on a Tuesday without planning.
+p_drive<=35 :: Close enough for Sunday dinner without planning your week around it. | An easy drive home whenever you feel like it. | Sunday dinner is a short drive away. | Near enough that visits stay casual. | The drive home is short enough to make on a whim.
+p_drive<=60 :: Visits become plans, and most of them pay a toll. | Far enough that you go on purpose. | A real drive home, so visits get planned. | You will see your parents by appointment more than by chance. | Sunday dinner takes some driving.
+p_drive>60 :: Sunday dinner takes the whole afternoon. | Going home is a trip, so you will choose your Sundays. | Seeing your parents becomes an occasion. | The drive home is long enough to plan a day around. | Expect fewer visits, and longer ones.
 
 === sub: year.going_out
-p_rest>=20, u_bars>=4 :: Saturday night starts at your front door. | Dinner and a drink are both a walk.
-p_rest>=15 :: Plenty of dinner on foot, with the bars thinner. | You can walk to dinner most nights of the week.
-p_rest<=3 :: Dinner out starts with the car keys. | Going out means going somewhere else.
-p_rest<=14 :: A small downtown for weeknights, and a ride for the big night. | Enough for a regular spot, and the rest is a drive.
+p_rest>=20, u_bars>=4 :: Saturday night starts at your front door. | Dinner and a drink are both a walk. | A full night out, all of it on foot. | Restaurants and bars are both in walking reach. | The evening needs no car at all.
+p_rest>=15 :: Plenty of dinner on foot, with the bars thinner. | You can walk to dinner most nights of the week. | Dinner is close, and drinks take a bit more looking. | There is plenty to eat within a walk. | Good for a dinner habit, lighter on bars.
+p_rest<=3 :: Dinner out starts with the car keys. | Going out means going somewhere else. | Nights out begin with a drive. | Hardly anything to eat is within walking reach. | Restaurants are a car trip from the typical place.
+p_rest<=14 :: A small downtown for weeknights, and a ride for the big night. | Enough for a regular spot, and the rest is a drive. | Some places to eat nearby, and more by car. | You get a local spot or several, and you drive for variety. | Dinner on foot is possible, with limited choice.
 
 === sub: year.green
-p_parkwalk<=3 :: A park is right outside, which makes the early walk easy. | Green is around the corner from the typical place.
-p_parkwalk<=7 :: A park is a short walk for you and the dog. | The morning loop reaches a park without much effort.
-p_parkwalk>=12 :: Lawns everywhere, and a real park takes a drive. | The nearest park is a hike, so the dog walks the neighborhood.
-p_parkwalk>=8 :: A park is a longer walk here, so the dog's routine takes planning. | Green is close by car and a stretch on foot.
+p_parkwalk<=3 :: A park is right outside, which makes the early walk easy. | Green is around the corner from the typical place. | The typical place has a park almost at the door. | Morning walks begin at a park. | Green space is moments away.
+p_parkwalk<=7 :: A park is a short walk for you and the dog. | The morning loop reaches a park without much effort. | A park is close enough for daily walks. | You reach green in a few minutes on foot. | The dog's daily loop can include a park.
+p_parkwalk>=12 :: Lawns everywhere, and a real park takes a drive. | The nearest park is a hike, so the dog walks the neighborhood. | Parks are a drive, so daily walks stay on the street. | Plenty of quiet streets to walk, and few parks close by. | A proper park means getting in the car.
+p_parkwalk>=8 :: A park is a longer walk here, so the dog's routine takes planning. | Green is close by car and a stretch on foot. | The walk to a park is real and doable. | Parks are within reach, with some effort. | Getting to green takes a bit of a walk.
 
 === sub: year.compared_to_queens
-q_food>=3, q_green>=3 :: About what Queens gives you on foot, a little farther from home. | Queens-style living on foot, with a slightly longer drive back.
-q_sqft>=4, q_food<=1 :: More room than Queens gives you, and far less on foot. | You gain space over Queens and give up the walk to dinner.
-q_green>=4 :: A shorter walk to a park than in Queens, and a longer drive home.
-q_food<=2, q_drive<=1 :: Farther out than Queens, with less on foot. | Less to walk to than in Queens, and more road to get home.
+q_food>=3, q_green>=3 :: About what Queens gives you on foot, a little farther from home. | Queens-style living on foot, with a slightly longer drive back. | Compared to staying in Queens, daily life on foot feels familiar. | Much like Queens for walking to dinner and to a park. | You keep what Queens gives you on foot.
+q_sqft>=4, q_food<=1 :: More room than Queens gives you, and far less on foot. | You gain space over Queens and give up the walk to dinner. | Compared to staying in Queens, you get bigger rooms and emptier sidewalks. | Roomier than Queens, with almost nothing in walking reach. | The space beats Queens, and the walkability does the opposite.
+q_green>=4 :: A shorter walk to a park than in Queens, and a longer drive home. | Compared to staying in Queens, parks are closer and parents farther. | Greener than Queens, and a longer way from family. | You gain a nearer park over Queens and add minutes to the drive. | Parks beat Queens here, and the trip home does the reverse.
+q_food<=2, q_drive<=1 :: Farther out than Queens, with less on foot. | Less to walk to than in Queens, and more road to get home. | Compared to staying in Queens, there is less on foot and more driving. | Quieter streets than Queens, and a longer road home. | You give up Queens-style walking and add distance from family.

@@ -105,6 +105,18 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
       assert((await pg.textContent('.hhm-card .hhm-rank')).trim() === (H.rank_in_experience === 1 ? 'Top pick' : '#' + H.rank_in_experience + ' of ' + of), 'rank within its experience: ' + cardText); }
     assert(/Experience/.test(await pg.textContent('.hhm-card .hhm-yr')), 'the card names the experience');
     await noSideScroll(pg, tag + ' card');
+    // zoom and pan stay put when another mark is chosen, and when the page is drawn again (a limit moved)
+    { const view = () => pg.evaluate(() => { const v = window.__houseHunt.map().view(); return [v.k, v.cx, v.cy].map(x => +x.toFixed(3)).join(); });
+      await pg.waitForTimeout(o.reduced ? 50 : 350); const v1 = await view(); assert(+v1.split(',')[0] > 1.01, 'zoomed in: ' + v1);
+      const other = d.neighborhoods.find(h => h.id !== H.id && h.year === H.year && h.lat != null && d.years.some(y => y.hood_ids.includes(h.id)));
+      if (other) { await pg.evaluate(id => window.__houseHunt.map().select(id), other.id); assert.strictEqual((await pg.textContent('.hhm-card h3')).trim().indexOf(other.name), 0); assert.strictEqual(await view(), v1, 'another card: same zoom and pan'); await pg.evaluate(id => window.__houseHunt.map().select(id), H.id); }
+      await pg.evaluate(() => { const e = document.getElementById('lim-cost'), v = e.value; e.value = String(+e.max - +e.step); e.dispatchEvent(new Event('input', { bubbles: true })); e.value = v; e.dispatchEvent(new Event('input', { bubbles: true })); });
+      await pg.waitForSelector('#hhmap .hhm'); assert.strictEqual(await view(), v1, 'drawn again: same zoom and pan'); assert.strictEqual((await pg.textContent('.hhm-card h3')).trim(), name, 'and the same card');
+      // a tap on the Mom and Dad house zooms in on it instead of doing nothing
+      await pg.evaluate(() => window.__houseHunt.map().reset()); await pg.waitForTimeout(o.reduced ? 80 : 450);
+      const hb = await pg.evaluate(() => { const svg = document.querySelector('.hhm-svg'), tray = document.getElementById('tray').getBoundingClientRect(); const g = svg.querySelector('g[pointer-events="none"] g'); let r = g.getBoundingClientRect(); window.scrollBy(0, r.top - (tray.top / 2)); r = g.getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; });
+      if (o.touch) await pg.touchscreen.tap(hb.x, hb.y); else await pg.mouse.click(hb.x, hb.y); await pg.waitForTimeout(o.reduced ? 80 : 450);
+      const k2 = +(await view()).split(',')[0]; assert(k2 > 2.5, 'the house tap zoomed in: ' + k2); assert.strictEqual((await pg.textContent('.hhm-card h3')).trim(), name, 'and chose no mark under it'); }
     if (o.shot) { await pg.evaluate(() => { const r = document.querySelector('.hhm-stage').getBoundingClientRect(); window.scrollBy(0, r.top + r.height * 0.55); }); await o.shot('map-int-03-selected-card'); }
     await centre(pg, '.hhm-go'); const yBefore = await pg.evaluate(() => window.scrollY);
     await pg.click('.hhm-go'); await pg.waitForSelector('.ph1');
