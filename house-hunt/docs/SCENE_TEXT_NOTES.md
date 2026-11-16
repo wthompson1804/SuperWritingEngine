@@ -82,7 +82,12 @@ Neighborhood:
 4. Where the data gives nothing distinctive, the text is short. Two plain sentences are better than five padded ones.
 
 Vocabulary: "your parents" in sentences ("Mom and Dad" only in the page's labels), "apartment" for a unit,
-"building", "neighborhood", "experience". "All-in" is written "a month, everything included". Residents are
+"building", "neighborhood", "experience". Prices follow the page, which shows two labelled prices everywhere, "Rent"
+(what the listing asks) and "Total with utilities and fees": a monthly total is "about $X a month with utilities and
+fees" on first mention in a text and "about $X a month" after; a price the listing quotes is "rent", exact to the
+dollar for one apartment ("The rent is $2,345, about $2,670 a month with utilities and fees.") and "about" to $10
+for a typical figure; the limit is "your $3,000 limit" and applies to the total. "Everything included" and "all-in" /
+"all in" are not used (section "Rent and total" below). Residents are
 paraphrased as "Residents say / like / praise / call / wish …", never quoted, and the block then needs a `voices:`
 line naming the themes. A number quoted from a local rule needs a `rules:` line.
 
@@ -143,8 +148,9 @@ area are new"), the drive, the tolls and the transit time (the neighborhood's ow
     noun, "home" for her parents' house, "about 0", and the individual jokes that were cut. Add to it when a new one
     is cut.
   - Readability per text: sentences average at most 20 words, none over 32, at most one figure-of-speech marker.
-  - Vocabulary: no "Mom and Dad" in a sentence, no "unit", no "place" for an apartment, no "… Year", no bare "all-in",
-    no project terms (ranked, scorecard, verified, live check, net-effective, gate, asterisk, cap, ceiling), no "we",
+  - Vocabulary: no "Mom and Dad" in a sentence, no "unit", no "place" for an apartment, no "… Year", no "all-in" / "all in", no
+    "everything included", the first monthly price of $1,000 or more in a text says "with utilities and fees" and a
+    later one does not repeat it (`monthly_price`), no project terms (ranked, scorecard, verified, live check, net-effective, gate, asterisk, cap, ceiling), no "we",
     American spelling.
   - Headline fit: `promise` and `good_for_her` fit whole in 64 characters.
 - **Leads** (`check_leads`). A neighborhood's first sentence may not open on a statistic that more than a third of the
@@ -228,8 +234,12 @@ building", never "each building" or "look for a building with ..." (`{eachb}`, `
 in new buildings" may not rest on the area's census profile (say "much of the housing around here is new").
 
 `glance_json` is computed here from the shown BUILDINGS (one vote per building). The pipeline's
-`neighborhoods[].shown_figures` are medians over the shown APARTMENTS, and its `buildings_with_own_dog_area` also
-counts a pet spa, a dog wash and a bare "yes"; this text counts only a dog park or dog run as a dog area.
+`neighborhoods[].shown_figures` are now medians over the shown buildings too (`figures_over`: "shown buildings (the
+median building)"), so the two agree. A dog area in this text is a dog park or dog run only, read from the
+pipeline's structured field `amenities.dog_park_or_run` (`own_dog_area` in `check_scene_text.py`; it falls back to the
+words of `dog_amenities` only for page data written before the field existed). A pet spa or dog wash
+(`amenities.pet_spa_or_wash`) is not a dog area, but any dog amenity keeps the distance to a public dog park from
+being the catch (`dog_amenity_any`). The distances in `glance_json` carry the unit "meters".
 
 ### The conceit guard, and its limits
 
@@ -282,9 +292,10 @@ words and are not read.
 
 ### What the data still cannot support
 
-1. `dog_amenities` is the bare word "yes" for 11 shown buildings (Avalon Maplewood, Avalon Wayne, The Leaf, Continuum
-   and others). The text cannot say what the amenity is, so it says "The building lists a dog amenity, so ask what
-   it is" and does not complain about the distance to a dog park.
+1. Resolved: `dog_amenities` used to be the bare word "yes" for 11 shown buildings. The pipeline now derives dog
+   park / dog run / pet spa / dog wash from each source's words (`amenities.dog_park_or_run`, `pet_spa_or_wash`,
+   `dog_amenity_unspecified`), and no shown building is unspecified. The wording "The building lists a dog amenity,
+   so ask what it is" stays in the library for a building whose source names none of them, and is unused today.
 2. A building's own measures of water, beach and park area are not in `site/data.json`; they are read from
    `data/master_buildings.csv` by building id.
 3. "A newer building" (Fresh-Start) rests on the census median year built of the area, because `year_built` is
@@ -294,3 +305,25 @@ words and are not read.
 5. A doorman known only "per tenant reviews" (1 building) and a doorman flag whose source text is the bare word "yes"
    (11 buildings) are still called a doorman.
 6. Sizes are published for about half of the Old-Neighborhood apartments, so nothing there is claimed about size.
+
+## Rent and total (2026-11-16, after the page's "rent versus total" change)
+
+The page shows two labelled prices wherever a price appears: "Rent" (the rent line of an apartment's cost lines:
+what the listing asks) and "Total with utilities and fees" (`all_in`: rent plus required fees, pet rent, parking where
+known and estimated electricity, gas and internet). The text uses the same two names.
+
+- A total is "about $X a month with utilities and fees" on first mention in a text, "about $X a month" after.
+  Experience and neighborhood totals are the figure strip's (`{p_allin}`, `{pg_mid}`, `{pg_lo}`), to the nearest $10.
+- An apartment's line gives both prices in its price sentence where the rent is plainly what the listing asks
+  (`rent_asked` in `realtor_lines.py`: the rent line is the listed rent, not a 12-month or after-offer price, and no
+  offer, asterisk or call hangs on it): "The rent is $2,345, about $2,670 a month with utilities and fees." The rent
+  is exact to the dollar, as the page prints it. Otherwise the line gives the total alone, and the catch asks about
+  the rent.
+- "Everything included" and "all-in" / "all in" are banned in every published text (`VOCAB` in
+  `check_scene_text.py`, `EXTRA` in `test_realtor_lines.py`, and through them `check_published_text.py`, which also
+  applies them to the pipeline's own strings).
+- `check_published_text.py` adds a PRICE check on apartments: a total said in the text must be `all_in` rounded to
+  $10 with "about", and a rent said in the text must be the rent line to the dollar.
+- No neighborhood or experience text states a typical rent today: the page data has no rent median on those objects
+  (the page computes it in the browser). If one is added, word it "the typical rent is about $X".
+

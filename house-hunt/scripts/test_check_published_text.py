@@ -20,7 +20,9 @@ import check_scene_text as G  # noqa: E402
 
 CONCEIT = "The lawns keep their own counsel."
 JARGON = "This unit passed every gate, and the all-in is under the cap."
-FALSE_NUMBER = "It is about 1,400 square feet and costs about $1,200 a month, everything included."
+FALSE_NUMBER = "It is about 1,400 square feet and costs about $1,200 a month with utilities and fees."
+OLD_PRICE_WORDS = ("It costs about {price} a month, everything included.", "It costs about {price} a month all-in.",
+                   "It costs about {price} a month all in.", "It costs about {price} a month.")
 
 
 def page():
@@ -207,6 +209,28 @@ class PublishedData(unittest.TestCase):
             got = self.planted(edit)
             self.assertTrue(any("SOURCE" in f.problem for f in got), text)
             self.assertTrue(any(word in f.problem for f in got), f"{text}: {[f.problem for f in got]}")
+
+    def test_old_price_words_and_wrong_prices(self):
+        """The page shows "Rent" and "Total with utilities and fees"; the text may not use the old vocabulary, leave a
+        monthly price unnamed, or give a rent or a total that is not the page's."""
+        def plant(text):
+            def edit(d):
+                u = next(x for x in d["units"] if P.R.rent_asked(x) and x.get("all_in"))
+                price = "$" + format(P.R.round10(x_total(u)), ",")
+                u["host"]["line"] = text.format(price=price, rent="$" + format(P.R.rent_asked(u) + 7, ","),
+                                                off="$" + format(P.R.round10(x_total(u)) + 40, ","))
+                return "apartment", u["id"]
+            return [f.problem for f in self.planted(edit)]
+
+        def x_total(u):
+            return u["all_in"]
+        for text, word in zip(OLD_PRICE_WORDS, ("everything included", "all-in", "all-in", "does not say which")):
+            got = plant(text)
+            self.assertTrue(any(word in p for p in got), f"{text}: {got}")
+        got = plant("The rent is {rent}, about {price} a month with utilities and fees.")
+        self.assertTrue(any("PRICE" in p and "rent" in p for p in got), got)
+        got = plant("It costs about {off} a month with utilities and fees.")
+        self.assertTrue(any("PRICE" in p and "total" in p for p in got), got)
 
     def test_building_text(self):
         for text, word in ((CONCEIT, "intention"), ("Verified by a live check on the scorecard.", "internal term"),

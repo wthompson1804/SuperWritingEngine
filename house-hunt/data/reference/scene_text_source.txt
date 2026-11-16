@@ -7,8 +7,9 @@
 #  - Numbers are tokens, never typed (see the builder's docstring). A claim without a number carries a hidden test.
 #  - Counts, prices and minutes to her parents come from the page's figure strip ({pg_n}, {pg_mid}, {drive}, {p_places},
 #    {p_allin}, {p_drive} ...), so the sentence and the strip above it cannot disagree.
-#  - "your parents" in sentences; "apartment" for a unit; "building"; "neighborhood"; "experience". No "all-in" without
-#    its explanation: write "a month, everything included".
+#  - "your parents" in sentences; "apartment" for a unit; "building"; "neighborhood"; "experience". A monthly total is
+#    "about $X a month with utilities and fees" on first mention in a text and "about $X a month" after; a price the
+#    listing quotes is "rent". Never "everything included", never "all-in" / "all in". The limit is "your $3,000 limit".
 #  - Residents are paraphrased as "Residents say / like / praise / call / wish ..." and the block then needs a voices:
 #    line naming the themes. A number quoted from a local rule needs a rules: line.
 #  - A neighborhood block: host_intro (the "About <name>" lead: what is different about THIS place, then the catch;
@@ -174,7 +175,7 @@ rules: Jersey City|resident_permit
 host_intro: Downtown Jersey City suits going out, with about {rest} restaurants and {bars} bars within a {w10}{!rest>=25}. A park is about {parkwalk} minutes {door}. Parking is hard: on many streets a car without a resident permit may stay only 2 hours.
 scene: About {cafes} cafés are within a {w10}, and the supermarket is {super} miles away. [[A dog run is {dogpark} miles {door}{!own_dog<1}.]]
 good: [[Dinner, drinks, a park and a dog run are all a short walk{!own_dog<1}.]]
-watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
+watch: [[The cost is at the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2900}.]]
 rules: Jersey City|resident_permit
 
 === hood: nj:jersey-city-newport
@@ -315,7 +316,7 @@ voices: parking
 host_intro: [[The apartment in Riverdale is large, about {sqft} square feet{!sqft>=750}{!pg_n==1}.]][[The apartments in Riverdale are large, about {sqft} square feet{!sqft_lo>=700}{!pg_n>=2}.]] A dog park is {dogpark} miles away and a park about {parkwalk} minutes on foot. [[Almost nothing to eat or drink is within walking distance{!rest<=1}.]][[Only {rest} restaurants are within a {w10}{!rest>=2}{!rest<=3}.]]
 scene: The supermarket is {super} miles away, so groceries are a drive. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: [[You get a large apartment with a dog park close by{!own_dog<1}.]]
-watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
+watch: [[The cost is at the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2900}.]]
 
 === hood: nj:parsippany-troy-hills
 host_intro: Residents describe Parsippany as a fine place to live that is very boring. They like the parks and trails. The township dog park needs a permit.
@@ -425,7 +426,7 @@ voices: dogs_green, social_life, parking
 host_intro: Valley Stream offers more room without moving far: the apartment is about {sqft} square feet{!sqft>=750}, and your parents are about {drive} minutes away{!drive<=25}. It is a suburb of houses and driveways{!detached>=0.6}. Residents say it is not very walkable and has little for younger adults.
 scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. [[A dog park is {dogpark} miles {door} and the train station {station} miles{!own_dog<1}.]]
 good: You get a large apartment close to your parents{!drive<=25}.
-watch: [[The cost is near the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2850}.]]
+watch: [[The cost is near the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2850}.]]
 voices: social_life
 
 === hood: nj:belleville
@@ -475,7 +476,7 @@ rules: City of Orange|overnight_parking; City of Orange|municipal_garage_monthly
 host_intro: Residents call Maplewood very pet friendly. [[The apartment is large, about {sqft} square feet{!sqft>=800}{!pg_n==1}.]][[The apartments are large, about {sqft} square feet{!sqft_lo>=700}{!pg_n>=2}.]] [[The dog park is {dogpark} miles away, so you would drive the dog there{!dogpark>=2400}{!dog_any==0}.]][[The nearest public dog park is {dogpark} miles away{!dog_any>0}.]]
 scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. A park is about {parkwalk} minutes on foot. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: [[You get a large apartment in a pet-friendly town{!sqft_lo>=700}.]][[Residents call the town very pet friendly{!sqft_lo<700}.]]
-watch: [[The cost is near the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2850}.]]
+watch: [[The cost is near the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2850}.]]
 voices: dogs_green
 
 === hood: nj:rahway
@@ -504,7 +505,7 @@ rules: Springfield (Union County)|overnight_parking
 host_intro: The apartment in Garwood is very large, about {sqft} square feet{!sqft>=1000}. The supermarket is {super} miles {door} and the train station {station} miles. A park is about {parkwalk} minutes away.
 scene: {rest} restaurants and {bars} bars are within a {w10}. [[The dog park is {dogpark} miles away{!own_dog<1}.]] [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: A very large apartment, with groceries and the train close.
-watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
+watch: [[The cost is at the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2900}.]]
 
 === hood: ny:haverstraw
 host_intro: Haverstraw is on the river, {water} miles from the water{!water<=500}. A town park has separate dog areas for small and larger dogs. Residents say parking near the apartments is hard to find and tickets come quickly.
@@ -623,7 +624,7 @@ rules: Middletown|overnight_parking
 voices: social_life
 
 === hood: ct:seymour
-host_intro: [[The apartment in Seymour is very large, about {sqft} square feet{!sqft>=1000}, and costs about ${pg_mid} a month, everything included{!pg_mid<=2400}.]][[The apartment in Seymour is large, about {sqft} square feet{!sqft>=800}{!sqft<1000}.]] Residents describe antique shops, small diners and not much nightlife. Your parents are about {drive} minutes away{!drive>=90}.
+host_intro: [[The apartment in Seymour is very large, about {sqft} square feet{!sqft>=1000}, and costs about ${pg_mid} a month with utilities and fees{!pg_mid<=2400}.]][[The apartment in Seymour is large, about {sqft} square feet{!sqft>=800}{!sqft<1000}.]] Residents describe antique shops, small diners and not much nightlife. Your parents are about {drive} minutes away{!drive>=90}.
 scene: {rest} restaurants are within a {w10}, and the train station is {station} miles away. The supermarket is {super} miles {door}. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: You get a great deal of space[[ for the price{!pg_mid<=2400}]].
 watch: [[The nearest park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away{!dog_any==0}.]][[The nearest park is about {parkwalk} minutes on foot{!dog_any>0}.]]
@@ -637,7 +638,7 @@ watch: The nearest park is about {parkwalk} minutes on foot.
 voices: dogs_green, social_life
 
 === hood: ct:beacon-falls
-host_intro: Beacon Falls is a small town by the water with its own train station, {station} miles {door}{!station<=800}. Residents enjoy the walking paths and say there is not much to do in town. The apartments cost about ${pg_mid} a month, everything included{!pg_mid<=2400}.
+host_intro: Beacon Falls is a small town by the water with its own train station, {station} miles {door}{!station<=800}. Residents enjoy the walking paths and say there is not much to do in town. The apartments cost about ${pg_mid} a month with utilities and fees{!pg_mid<=2400}.
 scene: Little is within a {w10}: {rest} restaurants and {bars} bars. The supermarket is {super} miles away.
 good: The price is low and the train is close.
 watch: [[Your parents are about {drive} minutes away, and groceries and the dog park are both a drive{!dog_any==0}.]][[Your parents are about {drive} minutes away, and groceries are a drive{!dog_any>0}{!super>=1600}.]]
@@ -647,11 +648,11 @@ voices: dogs_green, social_life
 host_intro: Residents describe life in Oxford as slow living, in a town of houses{!detached>=0.7}. The apartment is large, about {sqft} square feet{!sqft>=800}. Your parents are about {drive} minutes away{!drive>=90}.
 scene: No restaurants are within a {w10}{!rest==0}. The supermarket is {super} miles away, and the nearest park is about {parkwalk} minutes on foot.
 good: You get a large apartment in a very quiet town.
-watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
+watch: [[The cost is at the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2900}.]]
 voices: social_life
 
 === hood: ct:hamden
-host_intro: Hamden is about {drive} minutes from your parents{!drive>=100}, so visits would be day trips. Residents like the parks and trails. The apartments cost about ${pg_mid} a month, everything included{!pg_mid<=2400}.
+host_intro: Hamden is about {drive} minutes from your parents{!drive>=100}, so visits would be day trips. Residents like the parks and trails. The apartments cost about ${pg_mid} a month with utilities and fees{!pg_mid<=2400}.
 scene: About {rest} restaurants are within a {w10}, and there are no bars{!bars==0}. [[The supermarket is {super} miles away and the dog park {dogpark} miles{!own_dog<1}.]]
 good: The price leaves room in your budget.
 watch: The drive to your parents is very long, and most errands need the car.
@@ -665,14 +666,14 @@ watch: Your parents are about {drive} minutes away, and no park nearby allows do
 rules: LaGrange (Town)|parks_and_beaches
 
 === hood: nj:bogota
-host_intro: In Bogota the water is {water} miles {door}{!water<=200} and a park about {parkwalk} minutes on foot{!parkwalk<=10}. Residents praise the parks and call the town peaceful. The {pg_n} apartments are in a single building{!pg_bldgs==1} and cost about ${pg_mid} a month, everything included{!pg_mid>=2850}.
+host_intro: In Bogota the water is {water} miles {door}{!water<=200} and a park about {parkwalk} minutes on foot{!parkwalk<=10}. Residents praise the parks and call the town peaceful. The {pg_n} apartments are in a single building{!pg_bldgs==1} and cost about ${pg_mid} a month with utilities and fees{!pg_mid>=2850}.
 scene: {rest} restaurants and {cafes} cafés are within a {w10}, and there are no bars{!bars==0}. The supermarket is {super} miles away and the train station {station} miles. [[Each apartment listed has a detail to confirm by phone before you tour{!s_open==1}.]] [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: The water, a park and the supermarket are all a short walk{!super<=500}.
-watch: The cheapest apartment is about ${pg_lo} a month, everything included, which is close to your limit{!pg_lo>=2850}.
+watch: The cheapest apartment is about ${pg_lo} a month with utilities and fees, which is close to your limit{!pg_lo>=2850}.
 voices: dogs_green, noise
 
 === hood: nj:burlington
-host_intro: The apartments in Burlington cost about ${pg_mid} a month, everything included, less than a typical Queens apartment{!q_cost>=4}. All {pg_n} are in a single building{!pg_bldgs==1}. Your parents are about {drive} minutes away each way{!drive>=110}, so a visit takes the whole day.
+host_intro: The apartments in Burlington cost about ${pg_mid} a month with utilities and fees, less than a typical Queens apartment{!q_cost>=4}. All {pg_n} are in a single building{!pg_bldgs==1}. Your parents are about {drive} minutes away each way{!drive>=110}, so a visit takes the whole day.
 scene: {rest} restaurants are within a {w10}, and there are no bars{!bars==0}. [[The supermarket is {super} miles away and the dog park {dogpark} miles, so both need the car{!super>=1600}{!dogpark>=4800}{!dog_any==0}.]][[The supermarket is {super} miles away, so groceries need the car{!super>=1600}{!dog_any>0}.]] By train and bus the trip to your parents takes about {transit} minutes. [[Each apartment listed has a detail to confirm by phone before you tour{!s_open==1}.]]
 good: You pay less here and get a good-sized apartment{!pg_hi<=2600}{!sqft>=700}.
 watch: The nearest park is about {parkwalk} minutes on foot{!parkwalk>=30}, which is too far for a daily dog walk.
@@ -729,7 +730,7 @@ watch: Most households have no car{!nocar>=0.5}, so ask about parking.
 === hood: ny:murray-hill-broadway-flushing
 host_intro: Murray Hill puts daily needs close: a park is about {parkwalk} minutes {door}, and about {rest} restaurants are within a {w10}{!rest>=30}. Residents say parking is almost nonexistent.
 scene: The supermarket is {super} miles away and the train station {station} miles. About {cafes} cafés are close too.
-good: [[The price is low, about ${pg_mid} a month with everything included{!pg_mid<=2400}.]]
+good: [[The price is low, about ${pg_mid} a month with utilities and fees{!pg_mid<=2400}.]]
 watch: [[The nearest dog run is {dogpark} miles away, and you would need a parking space from the building{!dog_any==0}.]][[You would need a parking space from the building{!dog_any>0}.]]
 voices: parking
 
@@ -750,7 +751,7 @@ watch: Few bars are nearby{!bars<=2}.
 host_intro: Residents of this part of Bedford-Stuyvesant like the coffee shops and say the parks could use upkeep. A park is about {parkwalk} minutes {door}. Most households have no car{!nocar>=0.6}, so settle parking before you sign a lease.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}. The supermarket is {super} miles away.
 good: Coffee, a park and groceries are all a short walk.
-watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
+watch: [[The cost is at the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2900}.]]
 voices: dogs_green, social_life
 
 === hood: ny:prospect-lefferts-gardens-wingate
@@ -778,7 +779,7 @@ voices: dogs_green
 host_intro: The Town of Hempstead runs enclosed dog parks with separate sections for small dogs. The Village is rewriting its overnight street-parking rules, so ask what applies in the month you move. The apartment is large, about {sqft} square feet{!sqft>=800}.
 scene: {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. A park is about {parkwalk} minutes on foot.
 good: You get a large apartment a short drive from your parents{!drive<=25}.
-watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
+watch: [[The cost is at the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2900}.]]
 rules: Hempstead (Town)|dog_park; Hempstead (Village)|overnight_parking
 
 === hood: ny:flatlands
@@ -822,7 +823,7 @@ watch: Visiting your parents costs about ${b_toll} round trip with a New York E-
 voices: dogs_green, social_life
 
 === hood: ny:sheepshead-bay-manhattan-beach-gerritsen-beach
-host_intro: The apartment in Sheepshead Bay costs about ${pg_mid} a month, everything included{!pg_mid<=2200}, far below your limit. Residents like the cafés and restaurants and the easy trip to the beach. The apartment is small, about {sqft} square feet{!sqft<=600}.
+host_intro: The apartment in Sheepshead Bay costs about ${pg_mid} a month with utilities and fees{!pg_mid<=2200}, far below your limit. Residents like the cafés and restaurants and the easy trip to the beach. The apartment is small, about {sqft} square feet{!sqft<=600}.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}. A park is about {parkwalk} minutes on foot.
 good: The price is low and there is plenty to eat nearby.
 watch: [[The nearest dog run is {dogpark} miles away{!dog_any==0}.]]
@@ -870,7 +871,7 @@ watch: Few restaurants are nearby{!rest<=5}.
 voices: dogs_green, social_life
 
 === hood: ny:gravesend-south-
-host_intro: A large waterfront park is about {parkwalk} minutes {door}{!parkha>=20}{!water<=500}, which suits daily dog walks. [[The apartment costs about ${pg_mid} a month, everything included{!pg_mid<=2400}.]] Few restaurants are within walking distance{!rest<=5}.
+host_intro: A large waterfront park is about {parkwalk} minutes {door}{!parkha>=20}{!water<=500}, which suits daily dog walks. [[The apartment costs about ${pg_mid} a month with utilities and fees{!pg_mid<=2400}.]] Few restaurants are within walking distance{!rest<=5}.
 scene: [[A dog run is {dogpark} miles away, and the supermarket is {super} miles {door}{!own_dog<1}.]] Few bars are nearby{!bars<=2}.
 good: A large park is very close[[ and the price is low{!pg_mid<=2400}]].
 watch: The apartment is small, about {sqft} square feet{!sqft<=600}, and you would travel for dinner out.
@@ -951,7 +952,7 @@ watch: The apartment is small, about {sqft} square feet{!sqft<=600}, and your pa
 host_intro: Residents talk about the skyline views and the bars where everybody knows everybody. [[The water is {water} miles {door} and a dog run {dogpark} miles{!own_dog<1}.]] The drive to your parents has a toll{!b_toll>0}.
 scene: About {rest} restaurants and {bars} bars are within a {w10}. A park is about {parkwalk} minutes on foot.
 good: [[The waterfront, a dog run and a park are close{!own_dog<1}.]]
-watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
+watch: [[The cost is at the top of your budget, about ${pg_mid} a month with utilities and fees{!pg_mid>=2900}.]]
 voices: social_life
 
 === hood: nj:newark
@@ -1071,7 +1072,7 @@ moment1: dog | The streets are quiet for dog walks, though the nearest park is a
 moment2: car | You drive to dinner: only about {u_rest1600} restaurants are within {mile}. Coming back is easy, because the street is quiet and most buildings have their own parking{!u_garage>=0.6}.
 moment3: heart | The drive to your parents is about {p_drive} minutes each way[[, and tolls run about ${u_toll} round trip with a New York E-ZPass{!u_toll>0}]]. The train and bus take about {p_transit} minutes, so you would drive.
 promise: Quiet streets, houses and lawns{!m_detached>=0.5}, and easy parking{!u_garage>=0.6}.
-catch: Almost nothing is within walking distance{!p_rest<=3}, so every outing starts in the car. [[The price is near your limit too, about ${p_allin} a month, everything included{!p_allin>=2850}.]]
+catch: Almost nothing is within walking distance{!p_rest<=3}, so every outing starts in the car. [[The price is near your limit too, about ${p_allin} a month with utilities and fees{!p_allin>=2850}.]]
 
 === year: The Room-to-Breathe Year
 display: The Room-to-Breathe Experience

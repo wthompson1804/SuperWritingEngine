@@ -14,7 +14,7 @@ TRUE
    local_rules*.csv with the numbers quoted from it, and a paraphrase of residents rests on the same counts;
 3. THE FIGURE STRIP (check_strip): counts, prices and minutes to her parents must be the ones the page prints in the
    strip above the text, recomputed here from site/data.json: apartments = counts.shown, buildings = counts.buildings,
-   neighborhoods = len(hood_ids), typical all-in = the median shown apartment, lowest / highest = all_in_range,
+   neighborhoods = len(hood_ids), typical total with utilities and fees = the median shown apartment, lowest / highest = all_in_range,
    minutes = medians.drive_min / transit_min (a neighborhood's own drive_min / transit_min). Any "$2,840", any
    "17 apartments", any "N minutes" in a sentence about her parents that is not the strip's figure fails; so does an
    evidence item that computes one of these from the unit list instead of reading the strip's field;
@@ -43,7 +43,8 @@ PLAIN (check_plain; the reason for the edit: lines that tried to be clever and r
    (FIGURE: "like a", "as if", "steps from", "around the corner" ...). What is NOT checked: a metaphor with no marker
    and an unclear pronoun both still need a human read;
 6. the page's vocabulary: "your parents" (never "Mom and Dad" in a sentence), "apartment" (never "unit" or "place"),
-   "experience" (never "... Year"), no bare "all-in", no project terms (ranked, scorecard, verified, live check,
+   "experience" (never "... Year"), no "all-in" / "all in" and no "everything included" (a monthly total is
+   "about $X a month with utilities and fees" on first mention, a quoted price is "rent"), no project terms (ranked, scorecard, verified, live check,
    net-effective, gate, asterisk, cap, ceiling), no "we", American spelling;
 7. a text the page uses as a row headline (promise, good_for_her) fits whole in 64 characters, because the page cuts a
    longer one at a comma;
@@ -230,7 +231,7 @@ def _page_table(part):
             mine = sorted(u["all_in"] for u in d["units"] if u.get("hood_id") == h["id"] and u.get("all_in") is not None)
             mid = None if not mine else (mine[len(mine) // 2] if len(mine) % 2 else (mine[len(mine) // 2 - 1] + mine[len(mine) // 2]) / 2)
             rows.append({"hood_id": h["id"], "all_in_lo": lo, "all_in_hi": hi, "sqft_median": h.get("sqft_median"),
-                         "all_in_median": mid,                    # the strip's "typical, all-in": the median shown unit
+                         "all_in_median": mid,                    # the strip's typical total: the median shown unit
                          "shown": (h.get("counts") or {}).get("shown"),
                          "buildings": (h.get("counts") or {}).get("buildings"),
                          "drive_min": h.get("drive_min"), "transit_min": h.get("transit_min"),
@@ -297,9 +298,22 @@ def _page_table(part):
 def own_dog_area(amenities):
     """True when the building's own amenity list names a dog park or a dog run on the property. A pet spa, a dog wash
     or a bare "yes" is not a place to let a dog out, so it does not count."""
-    a = str((amenities or {}).get("dog_amenities") or "").lower()
+    am = amenities or {}
+    if isinstance(am.get("dog_park_or_run"), bool):       # the pipeline's own reading of each source's words
+        return am["dog_park_or_run"]
+    a = str(am.get("dog_amenities") or "").lower()        # page data written before that field existed
     a = re.sub(r"no dog (run|park)[^;]*", " ", a)
     return bool(re.search(r"dog (park|run)|pet park|bark park", a))
+
+
+def dog_amenity_any(amenities):
+    """True when the building lists any dog amenity at all: a dog park or run, a pet spa or dog wash, or one whose
+    kind the source does not say."""
+    am = amenities or {}
+    flags = [am.get(k) for k in ("dog_park_or_run", "pet_spa_or_wash", "dog_amenity_unspecified")]
+    if all(isinstance(x, bool) for x in flags):
+        return any(flags)
+    return bool(str(am.get("dog_amenities") or "").strip())
 
 
 def parking_head(parking):
@@ -350,9 +364,9 @@ def _building_table(d, labels):
              "train_station": first(us, "sat", "train_station"),
              "drive_min": first(us, "sun", "drive_min"),
              "own_dog_area": float(own_dog_area(b.get("amenities"))),
-             # any dog amenity at all, also one whose kind the data does not say ("yes") or a pet spa or dog wash: not
-             # a dog area the text may claim, but enough that the distance to a public dog park is not the catch
-             "dog_amenity_any": float(bool(str((b.get("amenities") or {}).get("dog_amenities") or "").strip())),
+             # any dog amenity at all, also a pet spa or dog wash or one of unnamed kind: not a dog area the text may
+             # claim, but enough that the distance to a public dog park is not the catch
+             "dog_amenity_any": float(dog_amenity_any(b.get("amenities"))),
              "own_garage": float(head == "garage"),         # a garage, not covered parking or a lot
              "own_parking": float(head in ("garage", "covered", "lot", "onsite")),
              "year_built": (b.get("amenities") or {}).get("year_built")}
@@ -513,9 +527,9 @@ def transform(value, how):
         return f"{int(half_up(x, 10)):,}"
     if how == "pct":                                  # a share 0..1 -> whole percent
         return f"{int(half_up(x * 100))}"
-    if how == "mi0":                                  # metres -> whole miles (for far-away things)
+    if how == "mi0":                                  # meters -> whole miles (for far-away things)
         return f"{int(half_up(x / 1609.34))}"
-    if how == "mi":                                   # metres -> miles, one decimal, never below 0.1
+    if how == "mi":                                   # meters -> miles, one decimal, never below 0.1
         return f"{max(0.1, half_up(x / 1609.34, 0.1)):.1f}"
     raise ValueError(f"unknown transform {how}")
 
@@ -647,8 +661,10 @@ VOCAB = [
                 r"\b\d+ places?\b", re.I), "'place' for an apartment (say 'apartment')"),
     (re.compile(r"\b(Walk-Everywhere|Old-Neighborhood|Little-City|Fresh-Start|Quiet-Street|Room-to-Breathe) Year\b|"
                 r"\bthis year of\b|\ba year (here|like this)\b", re.I), "'year' for an experience"),
-    (re.compile(r"\ball[- ]in\b(?! \(rent plus fees, parking and utilities\))", re.I),
-     "'all-in' without its explanation (write 'everything included', or 'all-in (rent plus fees, parking and utilities)')"),
+    (re.compile(r"\ball[- ]in\b", re.I),
+     "'all-in' / 'all in' (the page says 'with utilities and fees' for the total, 'rent' for what the listing asks)"),
+    (re.compile(r"\beverything(?: is)? included\b", re.I),
+     "'everything included' (the page says 'with utilities and fees')"),
     (re.compile(r"\b(licence|theatre|programme|neighbour\w*|colour\w*|centre|favourite|kerb|storey|metres?|organis\w+|"
                 r"realis\w+|travell\w+|grey)\b", re.I), "British spelling"),
     (re.compile(r"\bwe (found|set|would|think|looked)\b|\bour (list|scorecard|search)\b", re.I),
@@ -737,13 +753,34 @@ def check_plain(col, text):
             out.append(f"{col}: a sentence of {max(lens)} words (limit {MAX_SENTENCE_WORDS})")
         if sum(lens) / len(lens) > AVG_SENTENCE_WORDS:
             out.append(f"{col}: sentences average {sum(lens) / len(lens):.0f} words (limit {AVG_SENTENCE_WORDS})")
+    out += [f"{col}: {p}" for p in monthly_price(text)]
+    return out
+
+
+# The page shows two labelled prices: "Rent" (what the listing asks) and "Total with utilities and fees". A sentence
+# says which one it gives: the first monthly figure of $1,000 or more in a text is "about $X a month with utilities and
+# fees" (later ones "about $X a month"), unless the sentence calls the figure rent.
+MONTHLY_PRICE = re.compile(r"\$\s?\d{1,3},\d{3}(?:\{[^}]*\})* a month\b(?P<uf> with utilities and fees\b)?", re.I)
+RENT_FIGURE = re.compile(r"\brent (?:is|of|starts at|from)(?: about)? \$\s?\d{1,3},\d{3}\b", re.I)
+
+
+def monthly_price(text):
+    """-> messages. The first monthly total of a text must say 'with utilities and fees'; a later one must not repeat it."""
+    out, seen = [], False
+    for m in MONTHLY_PRICE.finditer(text):
+        if m.group("uf") and seen:
+            out.append(f"'with utilities and fees' repeated: say 'about $X a month' after the first mention: '{m.group(0)}'")
+        elif not m.group("uf") and not seen:
+            out.append(f"a monthly price that does not say which: write '{m.group(0)} with utilities and fees' "
+                       f"(the total) or 'the rent is $X'")
+        seen = True
     return out
 
 
 # ---------------------------------------------------------------------------------------------------------------
 # The figure strip. Every count and money figure in the prose must be the one the strip above it shows, recomputed
 # here from site/data.json: apartments = counts.shown, buildings = counts.buildings, neighborhoods = len(hood_ids),
-# typical all-in = the median shown apartment (years[].medians.all_in; for a neighborhood the median of its units),
+# typical total with utilities and fees = the median shown apartment (years[].medians.all_in; for a neighborhood the median of its units),
 # its lowest and highest = all_in_range, minutes to her parents = medians.drive_min / transit_min (a neighborhood's
 # own drive_min / transit_min). Prices in sentences are rounded to the nearest $10, minutes to the whole minute.
 STRIP_SOURCE = {"year": PAGE + "#years", "hood": PAGE + "#neighborhoods"}
@@ -795,7 +832,7 @@ def check_strip(kind, key, texts, evidence):
     for col, text in texts:
         for m in BIG_MONEY.finditer(text):
             if m.group(1) not in strip.get("money", set()):
-                out.append(f"{col}: ${m.group(1)} is not a figure of the strip (typical, lowest or highest all-in: "
+                out.append(f"{col}: ${m.group(1)} is not a figure of the strip (typical, lowest or highest total with utilities and fees: "
                            f"{sorted(strip.get('money', []))})")
         for m in COUNTED_NOUN.finditer(text):
             noun = m.group(2).lower()
@@ -1279,7 +1316,7 @@ def glance(hood_id):
          icon     the page's icon name
          text     the bold words ("66 restaurants, 8 bars"), ready to print
          label    the small words after them, scope included ("within a 10-minute walk of most buildings here")
-         value    the number behind `text` (median over the shown buildings), unit: count | minutes | metres | share
+         value    the number behind `text` (median over the shown buildings), unit: count | minutes | meters | share
          scope    "this building" (1 building shown) | "most buildings here" (2 or more: the median building)
          buildings   how many shown buildings the figure rests on;  range [lowest, highest] over them
        Area-wide facts (the town's parking rule, the trip to her parents by train and bus) stay with the page: they
@@ -1316,20 +1353,20 @@ def glance(hood_id):
             own_dog_area="all", public_dog_park_m=plain(dg), public_dog_park_text=public)
     elif own > 0:
         add("dog", "dog", public or "Ask", "to the public dog park" + (" from most buildings here" if many else "")
-            + f"; {int(round(own * nb))} of the {nb} buildings here have their own dog area", dg, "metres", dr, k,
+            + f"; {int(round(own * nb))} of the {nb} buildings here have their own dog area", dg, "meters", dr, k,
             own_dog_area="some", own_dog_area_buildings=int(round(own * nb)), public_dog_park_m=plain(dg),
             public_dog_park_text=public)
     elif dg is not None:
-        add("dog", "dog", public, "to the dog park" + (" from most buildings here" if many else ""), dg, "metres", dr, k,
+        add("dog", "dog", public, "to the dog park" + (" from most buildings here" if many else ""), dg, "meters", dr, k,
             own_dog_area="none", public_dog_park_m=plain(dg), public_dog_park_text=public)
     sm, sr, k = med("supermarket_m")
     if sm is not None:
         add("supermarket", "bag", _dist_words(sm), "to a supermarket" + (" from most buildings here" if many else ""),
-            sm, "metres", sr, k)
+            sm, "meters", sr, k)
     tr, trr, k = med("train_station_m")
     if tr is not None:
         add("train_station", "train", _dist_words(tr), "to a train station" + (" from most buildings here" if many else ""),
-            tr, "metres", trr, k)
+            tr, "meters", trr, k)
     gar = float(b["own_garage"].mean())
     if gar > 0:
         ng = int(round(gar * nb))

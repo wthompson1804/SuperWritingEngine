@@ -8,7 +8,7 @@ the experience and neighborhood text, so the apartment and building text is held
 the page and the two cannot drift apart:
     check_plain   CONCEITS (the constructions the copy edit of 2026-11-16 removed: a thing acting on "you", "where the
                   car sleeps", template seams such as "then the practical side" / "count on about" / "then there is"),
-                  VOCAB ("unit", "place" for an apartment, bare "all-in", "Mom and Dad", British spelling, "we found"),
+                  VOCAB ("unit", "place" for an apartment, "all-in" / "all in", "everything included", "Mom and Dad", British spelling, "we found"),
                   INTERNAL (ranked, scorecard, verified, live check, net-effective, gate, asterisk, cap, ceiling),
                   FIGURE (at most one figure-of-speech marker per text) and the readability limits
                   (sentences average at most 20 words, none over 32)
@@ -24,7 +24,7 @@ subhead, About sentence and icon point for everything in site/data.json.
 Also covered: what sets an apartment apart inside its building; the catch (a reason is stated only when the
 apartment's own fields give it); "About the building"; unknowns never stated as fact; an open dog policy never yields
 "dogs are allowed"; no number that is not in the apartment's or building's fields (after the page's rounding);
-"a month, everything included" on the first monthly figure of a text; stability across reruns; length limits; and
+"a month with utilities and fees" on the first monthly total of a text, "rent" for what the listing asks; stability across reruns; length limits; and
 that the two CSVs on disk have exactly the page's apartments and buildings.
 
 REPETITION. Variety matters less than clarity, so the limit is deliberately loose: no lead wording, catch wording,
@@ -54,7 +54,8 @@ NUMBER = re.compile(r"\d[\d,]*(?:\.\d+)?")
 EXTRA = [
     (re.compile(r"\bunits?\b", re.I), "'unit' (say 'apartment')"),
     (re.compile(r"\b(we|we're|we've|our|ours|us)\b", re.I), "a narrator ('we', 'our')"),
-    (re.compile(r"\ball in\b|\ball-in\b", re.I), "'all in' (say 'everything included')"),
+    (re.compile(r"\ball in\b|\ball-in\b", re.I), "'all in' (say 'with utilities and fees')"),
+    (re.compile(r"\beverything(?: is)? included\b", re.I), "'everything included' (say 'with utilities and fees')"),
     (re.compile(r"\bheadroom\b|\bcushion\b|\bbudget pick\b|\bwallet\b", re.I), "budget jargon or a joke"),
     (re.compile(r"^(add|note|count|figure|expect|budget|call it|set aside|round it)\b|\bas well\.$|\bbesides\.$|"
                 r"\bthe practical side\b|\bthe rest of the story\b|\bon top of that\b|\bbeyond that\b|\bthe plain facts\b|"
@@ -163,6 +164,14 @@ def mask(text, u):
     return text
 
 
+def rent_line(u):
+    """The page's "Rent": the amount of the rent line of the cost lines (site/index.html rentOf), in whole dollars."""
+    for x in u.get("all_in_lines") or []:
+        if isinstance(x, dict) and re.match(r"rent\b", str(x.get("line") or ""), re.I) and R.num(x.get("amount")) is not None:
+            return int(round(R.num(x["amount"])))
+    return None
+
+
 def allowed_numbers(u, n_peers):
     """Every number a text about this apartment or its building may contain, worked out from the fields without
     using the generator's own templates: its figures as the page rounds them in a sentence (prices and sizes to the
@@ -179,6 +188,8 @@ def allowed_numbers(u, n_peers):
                 ok.add(f"{v:.1f}")
     for path in (("all_in",), ("sqft",), ("cost_check", "cap_margin")):
         put(R.get(u, *path), rounded=True)
+    if rent_line(u) is not None:
+        ok.add(str(rent_line(u)))                             # "The rent is $2,345": exact, as the page prints it
     if R.num(u.get("all_in")) is not None:
         ok.add(str(R.CAP - R.round10(u["all_in"])))           # "about $520 under your $3,000 limit"
     for path in (("floor",), ("parking", "fee"), ("rent", "free_months"), ("rent", "lease_months"),
@@ -204,7 +215,7 @@ def allowed_numbers(u, n_peers):
 
 
 FILL = {"n": 5, "low": "lowest", "big": "largest", "high": "highest", "least": "the least", "most": "the most",
-        "floor": 6, "date": "December 1", "sqft": "610", "price": "$2,780", "gap": "about $220 under your $3,000 limit",
+        "floor": 6, "date": "December 1", "sqft": "610", "price": "$2,780", "rent": "$2,455", "gap": "about $220 under your $3,000 limit",
         "limit": "$3,000", "free": "1 month", "this_kind": "this studio", "This_kind": "This studio",
         "Type_sentence": "This is a studio.", "months": 15, "names": "building fees and the parking fee",
         "Names": "Building fees and the parking fee", "are": "are", "them": "them", "amounts": "amounts",
@@ -222,6 +233,8 @@ def families():
         yield "lead:" + c, texts
     for name, texts in R.SECOND.items():
         yield "second:" + name, texts
+    for name, texts in R.SECOND_RENT.items():
+        yield "second_rent:" + name, texts
     for c, (_, _, texts) in R.BUILDING.items():
         yield "building:" + c, texts
     for kind, texts in R.CATCHES.items():
@@ -293,11 +306,38 @@ class Library(unittest.TestCase):
                     bare = bare.replace(fixed, "")
                 self.assertNotRegex(bare, r"\d", f"{name}: {t}")
 
-    def test_a_monthly_price_always_says_everything_included(self):
+    def test_a_monthly_total_always_says_with_utilities_and_fees(self):
         for name, texts in families():
             for t in texts:
+                self.assertNotRegex(t, r"(?i)everything included|\ball[- ]in\b", f"{name}: {t}")
                 if "{price}" in t:
-                    self.assertRegex(t, r"about \{price\} a month, everything included", f"{name}: {t}")
+                    self.assertRegex(t, r"about \{price\} a month with utilities and fees", f"{name}: {t}")
+                if "{rent}" in t:                         # what the listing asks is called rent, and is not "about"
+                    self.assertRegex(t, r"\b[Rr]ent is \{rent\}", f"{name}: {t}")
+
+    def test_the_line_gives_the_rent_and_the_total_where_the_rent_is_plain(self):
+        lines = [{"line": "rent (as listed)", "amount": 2345.0, "code": "rent_listed"}, {"line": "pet rent", "amount": 50}]
+        base = {"all_in": 2672, "all_in_lines": lines, "cost_check": {"cap_margin": 328}}
+        u = unit("a", **base)
+        line = run([u])["a"]["host_line"]
+        self.assertRegex(line, r"[Rr]ent is \$2,345[,;] about \$2,670 a month with utilities and fees")
+        self.assertEqual(guard(line), [])
+        # an offer, an open question on the rent, a 12-month or after-offer price: the total alone
+        for change in ({"rent": {"asterisk": True}}, {"rent": {"needs_call": True}}, {"rent": {"basis_kind": "net_effective"}},
+                       {"all_in_lines": [{"line": "rent (12-month lease)", "amount": 2345.0, "code": "rent_12_month"}]},
+                       {"disclosures": [{"what": "special offer"}]}, {"all_in_lines": []}):
+            line = run([unit("a", **{**base, **change})])["a"]["host_line"]
+            self.assertNotRegex(line, r"(?i)\brent is\b", change)
+            self.assertIn("about $2,670 a month with utilities and fees", line)
+
+    def test_the_guard_wants_each_monthly_price_named(self):
+        self.assertEqual(guard("It costs about $2,670 a month with utilities and fees."), [])
+        self.assertEqual(guard("The rent is $2,345, about $2,670 a month with utilities and fees."), [])
+        for bad in ("It costs about $2,670 a month.", "It costs about $2,670 a month, everything included.",
+                    "It costs about $2,670 a month all-in.", "About $2,670 a month all in, with parking.",
+                    "It costs about $2,670 a month with utilities and fees, or about $2,700 a month with utilities and fees."):
+            self.assertNotEqual(guard(bad), [], bad)
+        self.assertEqual(guard("It costs about $2,670 a month with utilities and fees, or about $2,700 a month with a space."), [])
 
     def test_unpriced_parking_sentences_say_the_fee_is_missing(self):
         for t in R.BUILDING["garage_unpriced"][2]:
@@ -348,12 +388,12 @@ class UnitLine(unittest.TestCase):
         alone = {c[1] for c in R.lead_conditions(R.facts(us[3]), [R.facts(us[3])])}
         self.assertFalse(alone & R.PEER_CONDITIONS)                 # alone in its building: no comparison at all
 
-    def test_the_line_gives_the_price_rounded_with_everything_included(self):
+    def test_the_line_gives_the_total_rounded_with_utilities_and_fees(self):
         us = [unit("a", building="B", all_in=2104, sqft=613.0, scores={"hood_rank": 2.0}),
               unit("b", building="B", all_in=2600, scores={"hood_rank": 1.0}),
               unit("c", building="B", all_in=2700, scores={"hood_rank": 3.0})]
         line = run(us)["a"]["host_line"]
-        self.assertIn("about $2,100 a month, everything included", line)
+        self.assertIn("about $2,100 a month with utilities and fees", line)
         self.assertIn("about 610 square feet", line)
         self.assertNotIn("2,104", line)
 
@@ -553,7 +593,7 @@ class Catch(unittest.TestCase):
                  scores={"hood_rank": 1.0, "parts": {"space": 80, "cost": 5}})
         row = run([u])["a"]
         self.assertEqual(catch_kind(row), "weak:cost")
-        self.assertIn("about $2,950 a month, everything included", row["host_catch"])
+        self.assertIn("about $2,950 a month with utilities and fees", row["host_catch"])
         self.assertIn("about $50 under your $3,000 limit", row["host_catch"])
 
     def test_every_catch_on_the_page_that_gives_a_reason_has_it_in_the_apartments_fields(self):
@@ -867,12 +907,17 @@ class OnThePage(unittest.TestCase):
                 for n in numbers(text):
                     self.assertIn(n, ok, f"{u['id']} {col}: '{n}' is not in the apartment's fields: {text}")
                 self.assertIn(len(sentences(text)), (1, 2), text)
-                # the first monthly figure of a text is "a month, everything included"; a price is always "about"
-                first = re.search(r"\$[\d,]+ a month(, everything included)?", text)
+                # the first monthly figure of a text is "a month with utilities and fees", never the old wording;
+                # a price is always "about", except the rent the listing asks, which is exact and called rent
+                self.assertNotRegex(text, r"(?i)everything included|\ball[- ]in\b", f"{u['id']} {col}")
+                first = re.search(r"\$[\d,]+ a month( with utilities and fees)?", text)
                 if first:
                     self.assertTrue(first.group(1), f"{u['id']} {col}: {text}")
+                asked = re.search(r"\b[Rr]ent is \$([\d,]+)", text)
+                if asked:
+                    self.assertEqual(int(asked.group(1).replace(",", "")), rent_line(u), f"{u['id']} {col}: {text}")
                 quoted = str(R.get(u, "conditions", "income_requirement") or "")      # the listing's own figure, quoted
-                for m in re.finditer(r"(about )?\$([\d,]+)", text):
+                for m in re.finditer(r"(about |[Rr]ent is )?\$([\d,]+)", text):
                     if int(m.group(2).replace(",", "")) != R.CAP and "$" + m.group(2) not in quoted:
                         self.assertTrue(m.group(1), f"{u['id']} {col}: a price without 'about': {text}")
                 for m in re.finditer(r"(about )?([\d,]+) square feet", text):

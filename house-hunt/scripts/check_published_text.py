@@ -46,7 +46,7 @@ THE CHECKS
              one, above a building text that says "its own dog park"; a neighborhood that says nothing to eat is
              within a walk above its only building's "N restaurants are within a 10-minute walk"; advice to look for
              a garage where every building text says it has one.
-  6 STALE    "not checked again", "year" for an experience, "unit", "all-in", "cap" and the other project terms, in
+  6 STALE    "not checked again", "year" for an experience, "unit", "all-in" / "all in", "everything included", "cap" and the other project terms, in
              every field above including the pipeline's strings.
 
 LIMITS. The claims audit sees only the patterns listed; a claim worded another way passes 4 and is left to 1 (it
@@ -249,7 +249,7 @@ PLACE_CLAIMS = [
      lambda u, us: R.desk_kind(_am(u)) in ("doorman24", "attended24", "attended"), "amenities.doorman + doorman_text"),
     ("its own dog area", r"\bits own dog (?:park|run|area)\b|\bdog (?:park|run) on (?:site|the property)\b|"
      r"\bdog area on the property\b|\bwithout leaving the property\b|\bown dog area\b", lambda u, us: _dog_area(u),
-     "amenities.dog_amenities"),
+     "amenities.dog_park_or_run"),
     ("a washer and dryer in the apartment", r"\bwasher\b|\bdryer\b", lambda u, us: R.laundry_kind(_am(u)) == "wd",
      "amenities.in_unit_laundry + laundry"),
     ("laundry in the apartment", r"\blaundry (?:is )?(?:in|inside) (?:the|your own) apartment\b|\bno shared laundry room\b",
@@ -340,6 +340,32 @@ DIST = [(re.compile(r"\b(?:dog park|dog run)\b[^.;]*?\b(\d+\.\d) miles", re.I), 
         (re.compile(r"\bBuilt in (\d{4})|built in (\d{4})|dates from (\d{4})", re.I), ("amenities", "year_built"), "year")]
 
 
+# The page shows two labelled prices on every apartment: "Rent" (the rent line of the cost lines, exact) and "Total
+# with utilities and fees" (all_in, said with "about" to $10). A sentence must name which one it gives, with the
+# page's figure. "everything included" and "all-in" / "all in" are gone from the page (G.VOCAB bans them everywhere).
+TOTAL_SAID = re.compile(r"(about )?\$([\d,]+) a month with utilities and fees", re.I)
+RENT_SAID = re.compile(r"\b(?:the )?rent is (about )?\$([\d,]+)", re.I)
+
+
+def price_claims(text, u):
+    """-> messages: a total or a rent in an apartment's text that is not the page's figure for it."""
+    out = []
+    total, rent = R.num(u.get("all_in")), T.rent_line(u)
+    for m in TOTAL_SAID.finditer(text):
+        n = int(m.group(2).replace(",", ""))
+        if total is None or n != R.round10(total) or not m.group(1):
+            out.append(f"'{m.group(0)}' but the page's total with utilities and fees is "
+                       f"{'not known' if total is None else 'about $' + format(R.round10(total), ',')}")
+    for m in RENT_SAID.finditer(text):
+        n = int(m.group(2).replace(",", ""))
+        if rent is None or n != rent or m.group(1):
+            out.append(f"'{m.group(0)}' but the page's rent is {'not published' if rent is None else '$' + format(rent, ',')} "
+                       f"(exact to the dollar)")
+        elif R.rent_asked(u) is None:
+            out.append(f"'{m.group(0)}' but an offer, an open question or a 12-month price hangs on this rent: give the total alone")
+    return out
+
+
 def audit_places(d, out):
     units = d.get("units") or []
     blds = {b["id"]: b for b in d.get("buildings") or []}
@@ -382,6 +408,8 @@ def audit_places(d, out):
             for n in T.numbers(T.mask(text, u)):
                 if n not in ok:
                     out.append(Fail("text", "apartment", uid, f, f"NUMBER: '{n}' is not a field of this apartment (after rounding)", text[:160]))
+            for p in price_claims(text, u):
+                out.append(Fail("text", "apartment", uid, f, "PRICE: " + p, text[:160]))
             place_claims(f, text, u, ctx, out, "apartment", uid)
     for bid, b in blds.items():
         us = by_b.get(bid) or []

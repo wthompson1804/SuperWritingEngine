@@ -30,7 +30,10 @@ scripts/check_scene_text.py and are run over every text by scripts/test_realtor_
   * vocabulary: apartment (never unit), building, "your $3,000 limit" (never cap or ceiling), no narrator (no "we",
     "our", "I"), no project terms (net-effective, scorecard, ranked, verified, live check, gate, asterisk);
   * numbers only when useful, with their units, rounded as the page rounds in sentences: prices to the nearest $10
-    with "about", sizes "about 610 square feet"; the first monthly figure in a text is "a month, everything included";
+    with "about", sizes "about 610 square feet"; the page shows two labelled prices and
+    the text names which one it gives: the total is "about $2,670 a month with utilities and fees" on the first
+    mention in a text ("about $2,670 a month" after), what the listing asks is "rent", exact to the dollar ("The rent
+    is $2,345, about $2,670 a month with utilities and fees."); never "everything included", never "all-in";
   * short is better. A line is the plain fact; a catch is the plain question.
 
 How the wording is spread. Variety matters less than clarity, so there are only a few wordings per fact, all plain:
@@ -71,7 +74,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "site" / "data.json"
 OUT = ROOT / "data" / "reference" / "realtor_lines.csv"
 OUT_BUILDINGS = ROOT / "data" / "reference" / "building_about.csv"
-CAP = 3000                                # her monthly limit, everything included (meta.cap_all_in in site/data.json)
+CAP = 3000                                # her monthly limit, on the total with utilities and fees (meta.cap_all_in in site/data.json)
 MAX_WORDS = 45                            # host_line
 CATCH_MAX_WORDS = 40                      # host_catch
 ABOUT_MAX_WORDS = 40                      # about_building
@@ -124,8 +127,8 @@ def about_sqft(x) -> str:
     return f"{round10(x):,}"
 
 
-def miles(metres) -> str:
-    return f"{max(0.1, round(float(metres) / 1609.34, 1)):.1f}"
+def miles(meters) -> str:
+    return f"{max(0.1, round(float(meters) / 1609.34, 1)):.1f}"
 
 
 def minutes(x) -> str:
@@ -199,7 +202,24 @@ def parking_kind(u):
     return kind, fee, included
 
 
+def rent_asked(u):
+    """The page's "Rent": the rent line of the cost lines, in whole dollars. Given only where it is plainly what the
+    listing asks every month: the line is the listed rent (not a 12-month or an after-offer price) and no offer or
+    open question hangs on it. None otherwise; the text then gives the total alone."""
+    rent = u.get("rent") or {}
+    if has_special(u) or rent.get("asterisk") or rent.get("needs_call") or rent.get("basis_kind") not in (None, "listed"):
+        return None
+    for x in u.get("all_in_lines") or []:
+        if isinstance(x, dict) and re.match(r"rent\b", str(x.get("line") or ""), re.I):
+            v = num(x.get("amount"))
+            if x.get("code") != "rent_listed" or v is None or v != int(v) or v <= 0:
+                return None
+            return int(v)
+    return None
+
+
 def dog_amenity(u):
+    # the kind (park, run, spa, wash) is in the source's words; amenities.dog_park_or_run is the same reading as a flag
     a = str(get(u, "amenities", "dog_amenities") or "").lower()
     if "no dog run" in a:
         a = a.split(";")[0]
@@ -370,7 +390,7 @@ def facts(u):
     return {
         "id": u["id"], "hood": u.get("hood_id"), "building": u.get("building_id") or u["id"],
         "beds": "studio" if u.get("beds") == 0 else "1-bedroom" if u.get("beds") == 1 else None,
-        "all_in": all_in, "sqft": sqft,
+        "all_in": all_in, "sqft": sqft, "rent": rent_asked(u),
         "per_sqft": all_in / sqft if all_in and sqft else None,
         "floor": int(floor) if floor and floor >= 2 else None,
         "floor_sure": sure,
@@ -488,9 +508,9 @@ LEADS = {
         "This is a large apartment, about {sqft} square feet, which helps when you work from home.",
         "At about {sqft} square feet, this apartment has room for a desk, a sofa and a dog."]),
     "margin": ("price", [
-        "This apartment costs about {price} a month, everything included, which is {gap}.",
-        "At about {price} a month, everything included, this apartment is {gap}.",
-        "You would pay about {price} a month, everything included, which is {gap}."]),
+        "This apartment costs about {price} a month with utilities and fees, which is {gap}.",
+        "At about {price} a month with utilities and fees, this apartment is {gap}.",
+        "You would pay about {price} a month with utilities and fees, which is {gap}."]),
     "high_floor": ("floor", [
         "This apartment is high up, on floor {floor}.",
         "This apartment is on floor {floor}, well above the street."]),
@@ -522,8 +542,8 @@ LEADS = {
         "The listing says this apartment is available now.",
         "You could move in right away, because the listing says available now."]),
     "basic": ("cost", [
-        "{This_kind} costs about {price} a month, everything included.",
-        "The cost of {this_kind} is about {price} a month, everything included."]),
+        "{This_kind} costs about {price} a month with utilities and fees.",
+        "The cost of {this_kind} is about {price} a month with utilities and fees."]),
     "basic_no_price": ("cost_open", [
         "The full monthly cost of {this_kind} is not known yet."]),
     "type": ("type", [
@@ -536,12 +556,20 @@ PEER_CONDITIONS = {"cheapest", "biggest", "value", "highest", "fewest_questions"
 # The second sentence: the price and the size, whichever the lead has not already given. Plain facts in fixed words;
 # these are not varied beyond the three orders below.
 SECOND = {
-    "price_size": ["It costs about {price} a month, everything included, and is about {sqft} square feet.",
-                   "It is about {sqft} square feet and costs about {price} a month, everything included.",
-                   "The cost is about {price} a month, everything included, for about {sqft} square feet."],
-    "price": ["It costs about {price} a month, everything included.",
-              "The cost is about {price} a month, everything included."],
+    "price_size": ["It costs about {price} a month with utilities and fees, and is about {sqft} square feet.",
+                   "It is about {sqft} square feet and costs about {price} a month with utilities and fees.",
+                   "The cost is about {price} a month with utilities and fees, for about {sqft} square feet."],
+    "price": ["It costs about {price} a month with utilities and fees.",
+              "The cost is about {price} a month with utilities and fees."],
     "size": ["It is about {sqft} square feet."],
+}
+# The same sentence where the rent the listing asks is plain (rent_asked): both of the page's prices, each named.
+SECOND_RENT = {
+    "price_size": ["The rent is {rent}, about {price} a month with utilities and fees, for about {sqft} square feet.",
+                   "It is about {sqft} square feet, and the rent is {rent}, about {price} a month with utilities and fees.",
+                   "Rent is {rent}; about {price} a month with utilities and fees, for about {sqft} square feet."],
+    "price": ["The rent is {rent}, about {price} a month with utilities and fees.",
+              "Rent is {rent}; about {price} a month with utilities and fees."],
 }
 
 # CATCHES[kind] = [texts]: one or two short sentences, the one thing to ask or watch. A kind that states a reason is
@@ -683,8 +711,8 @@ CATCHES = {
         "At about {sqft} square feet, this is a small apartment for working from home with a dog.",
         "This apartment is about {sqft} square feet, which is small for a home office and a dog."],
     "weak:cost": [
-        "At about {price} a month, everything included, this apartment is {gap}.",
-        "This apartment costs about {price} a month, everything included, which is {gap}."],
+        "At about {price} a month with utilities and fees, this apartment is {gap}.",
+        "This apartment costs about {price} a month with utilities and fees, which is {gap}."],
     "none": [
         "The listing leaves no open question. On the tour, check the light, the noise and the hallways.",
         "Nothing in the listing needs a call before the tour. Use the tour to check the light and the noise."],
@@ -1197,6 +1225,12 @@ def compose_line(f, peers, spread=None, siblings=(), catch_kind=None):
         k = seed(f["id"], "second") % len(SECOND[family])
         second = SECOND[family][k].format(price=price, sqft=about_sqft(f["sqft"]) if f["sqft"] else "")
         frame_id = f"{family}_{k + 1}"
+        if want_price and f.get("rent") and f["rent"] <= f["all_in"]:
+            both = SECOND_RENT[family][k].format(rent=usd(f["rent"]), price=price,
+                                                 sqft=about_sqft(f["sqft"]) if f["sqft"] else "")
+            if len((lead + " " + both).split()) <= MAX_WORDS:
+                second, frame_id = both, f"{family}_rent_{k + 1}"
+                used["rent"] = f["rent"]
         if want_price:
             used["all_in"] = f["all_in"]
         if want_size:
