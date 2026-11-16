@@ -123,5 +123,37 @@
   "status": "read",
   "len": 143292,
   "hits": []
+ },
+ "b_93660f3f95": {
+  "url": "https://theparkatmain.com/contact/",
+  "http": 200,
+  "at": "2026-11-16T01:07:20+00:00",
+  "status": "read",
+  "len": 89110,
+  "hits": []
+ },
+ "b_04e8293ccf": {
+  "url": "https://www.rosenyc.com/rentals/66-st-nicholas-place/",
+  "http": 200,
+  "at": "2026-11-16T01:07:24+00:00",
+  "status": "read",
+  "len": 403396,
+  "hits": []
+ },
+ "b_45b2ed056d": {
+  "url": "https://www.eaglerockproperties.com/apartments/ny/",
+  "http": 200,
+  "at": "2026-11-16T01:07:26+00:00",
+  "status": "read",
+  "len": 97412,
+  "hits": []
+ },
+ "b_ee2549a834": {
+  "url": "https://regencyhudson.com/contact/",
+  "http": 200,
+  "at": "2026-11-16T01:07:28+00:00",
+  "status": "read",
+  "len": 104913,
+  "hits": []
  }
 }
