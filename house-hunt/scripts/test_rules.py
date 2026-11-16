@@ -371,11 +371,15 @@ def pure_4():
         ok(not P.characterises_residents_by_group(t), f"IC3 D24: not screened: {t!r}")
     # ---- moments: the three-level rating
     import build_page_data as BP
-    m = {"wake": {"park_walk_min": 4}, "work": {"sqft": 700, "separate_bedroom": True}, "after": {"restaurants_800m": 5},
-         "night": {"violent_vs_jamaica": 0.4}, "sat": {"bars_1600m": 3, "restaurants_1600m": 30}}
-    eq(BP.moment_ratings(m, 4, 3), {"wake": "strong", "work": "strong", "after": "weak", "night": "strong", "sat": "mixed", "sun": "strong"}, "moments: ratings from the page's thresholds")
-    m2 = {"wake": {"park_walk_min": None}, "work": {"sqft": 500, "separate_bedroom": False}, "after": {"restaurants_800m": 12}, "night": {"violent_vs_jamaica": 0.9}, "sat": {"bars_1600m": None, "restaurants_1600m": 3}}
-    eq(BP.moment_ratings(m2, 1, None), {"wake": None, "work": "weak", "after": "mixed", "night": "weak", "sat": None, "sun": None}, "moments: null where the deciding number is unknown")
+    m = {"wake": {"park_walk_min": 2.5}, "work": {}, "after": {"restaurants_800m": 20, "bars_800m": 2}, "night": {}, "sat": {"bars_1600m": 3, "restaurants_1600m": 40}, "sun": {"drive_min": 28}}
+    eq(BP.moment_ratings(m, 4, False, True, False, 720, 1), {"wake": "strong", "work": "strong", "after": "strong", "night": "strong", "sat": "mixed", "sun": "strong"}, "moments: absolute thresholds, strong side")
+    m2 = {"wake": {"park_walk_min": 12}, "work": {}, "after": {"restaurants_800m": 2, "bars_800m": 0}, "night": {}, "sat": {"bars_1600m": 1, "restaurants_1600m": 9}, "sun": {"drive_min": 75}}
+    eq(BP.moment_ratings(m2, 1, False, True, False, 500, 0), {"wake": "weak", "work": "weak", "after": "weak", "night": "weak", "sat": "weak", "sun": "weak"}, "moments: absolute thresholds, weak side")
+    m3 = {"wake": {"park_walk_min": None}, "work": {}, "after": {"restaurants_800m": 8, "bars_800m": 0}, "night": {}, "sat": {"bars_1600m": None, "restaurants_1600m": 3}, "sun": {"drive_min": 45}}
+    eq(BP.moment_ratings(m3, None, False, False, False, None, 1), {"wake": None, "work": None, "after": "mixed", "night": "mixed", "sat": None, "sun": "mixed"}, "moments: null where the data cannot say; unknown parking is mixed")
+    eq(BP.moment_ratings(m, 4, False, False, False, 720, 1)["night"], "mixed", "moments: a garage with no stated front desk or controlled entry is mixed")
+    eq(BP.moment_ratings(m, 4, False, True, True, 720, 1)["night"], "weak", "moments: an overnight street-parking restriction with no confirmed space is weak")
+    eq(BP.moment_ratings(m, 4, True, True, False, 720, 1)["night"], "mixed", "moments: off-site parking is never strong")
 
 
 def data():
@@ -778,6 +782,10 @@ def page_3(J, M, R, S):
     for u in J["units"][:400]:
         ok("all_in_likely" in u and u["all_in_likely"] >= u["all_in"] and isinstance(u["unknown_cost_lines"], list) and "more_in_building" in u, f"step 6: {u['id']} carries all_in_likely, unknown_cost_lines, more_in_building")
         ok(all(u["moments"][k].get("rating") in ("strong", "mixed", "weak", None) for k in ("wake", "work", "after", "night", "sat", "sun")), f"step 6: {u['id']} moment ratings")
+    for k in ("wake", "work", "after", "night", "sat", "sun"):
+        vc = pd.Series([u["moments"][k].get("rating") for u in J["units"]]).value_counts(normalize=True)
+        ok(len(vc) == 0 or float(vc.max()) <= 0.62, f"step 6: no level of the '{k}' moment holds more than about 60% of the shown places (largest: {vc.index[0] if len(vc) else ''} {float(vc.max()) if len(vc) else 0:.0%})")
+    ok(all((u["moments"]["sun"]["rating"] == "strong") == (u["moments"]["sun"]["drive_min"] <= 30) for u in J["units"] if u["moments"]["sun"]["drive_min"] is not None), "step 6: Sunday is strong at 30 minutes or less, an absolute threshold")
     txt = json.dumps(J["meta"]["notes"]) + json.dumps([u["confirm"] for u in J["units"]])
     ok("counted as $0" not in txt and "count as $0" not in txt, "pending fix: neither meta.notes nor any confirm.why says 'counted as $0'")
     ok(not any(re.search(r"\[live check\]|\[evidence\]|totalPrice|not stated", (u["rent"]["offer_text"] or "")) for u in J["units"]), "pending fix: rent.offer_text holds clean text only")

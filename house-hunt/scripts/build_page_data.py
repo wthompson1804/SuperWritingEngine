@@ -35,34 +35,43 @@ def j(x, default):
         return default
 
 
-# Day moments: a three-level rating per moment, from the thresholds the page template already used for its chips
-# (site/index.html TINT, ported here so the data carries the rating). None where the deciding number is unknown.
+# Day moments: a three-level rating per moment (strong / mixed / weak; None = the data cannot say, no chip).
+# Owner, 2026-11-16: the levels are ABSOLUTE thresholds on each moment's own measure, not a scale against staying in
+# Queens (that scale made Sunday "weak" almost everywhere, which says nothing). They are set so that across the shown
+# places no level holds more than about 60 percent for any moment; scripts/test_rules.py --data checks that.
 MOMENT_THRESHOLDS = {
-    "wake": {"measure": "minutes on foot to green space (park_walk_min)", "strong": "<= 5", "weak": "> 10"},
-    "work": {"measure": "size and a separate bedroom", "strong": "a separate bedroom and >= 650 sq ft", "weak": "a studio under 650 sq ft"},
-    "after": {"measure": "restaurants within 800 m", "strong": ">= 20", "weak": "< 10"},
-    "night": {"measure": "violent crime against Jamaica and where the car sleeps (parking rank: garage 4, covered 3, lot or off-site 2, street 1)",
-              "strong": "violent rate <= 0.5 x Jamaica and parking rank >= 3", "weak": "parking rank known and under 2 (crime never makes it weak)"},
-    "sat": {"measure": "bars and restaurants within 1,600 m", "strong": ">= 5 bars and >= 25 restaurants", "weak": "< 2.5 bars and < 12.5 restaurants"},
-    "sun": {"measure": "five-point drive-time scale against Queens (vs_queens.drive_min)", "strong": ">= 3 (as close as the typical Queens place, or closer)", "weak": "<= 1"},
+    "wake": {"measure": "minutes on foot to the nearest green space (park_walk_min)", "strong": "3 minutes or less", "mixed": "over 3 and up to 10 minutes", "weak": "more than 10 minutes"},
+    "work": {"measure": "room for a work day at home: size and a separate bedroom", "strong": "a separate bedroom and 700 sq ft or more",
+             "mixed": "everything between", "weak": "under 550 sq ft, or a studio under 600 sq ft", "null": "size not published"},
+    "after": {"measure": "restaurants and bars within a 10-minute walk (800 m)", "strong": "15 or more restaurants and at least one bar", "mixed": "4 or more restaurants", "weak": "fewer than 4 restaurants"},
+    "night": {"measure": "where the car sleeps", "strong": "a garage or gated parking at the building AND a front desk or controlled entry is stated",
+              "mixed": "a garage with no stated front desk or controlled entry, covered parking, a lot, off-site parking, or parking not known",
+              "weak": "street parking only, or the town restricts overnight street parking and no space at the building is confirmed"},
+    "sat": {"measure": "bars and restaurants within 1,600 m", "strong": "5 or more bars and 30 or more restaurants", "mixed": "everything between", "weak": "at most 1 bar and fewer than 15 restaurants"},
+    "sun": {"measure": "drive to her parents, one way, free-flow estimate (drive_min)", "strong": "30 minutes or less", "mixed": "31 to 60 minutes", "weak": "more than 60 minutes"},
 }
 
 
-def moment_ratings(m, parking_rank, vsq_drive):
-    f = lambda x: None if x is None else float(x)
+def moment_ratings(m, parking_rank=None, offsite=False, secured=False, overnight_restricted=False, sqft=None, beds=None):
+    f = lambda x: None if x is None or x != x else float(x)
     out = {}
-    w = f(m["wake"]["park_walk_min"])
-    out["wake"] = None if w is None else ("strong" if w <= 5 else ("weak" if w > 10 else "mixed"))
-    sq, bed = f(m["work"]["sqft"]), bool(m["work"]["separate_bedroom"])
-    out["work"] = None if sq is None else ("strong" if bed and sq >= 650 else ("weak" if (not bed and sq < 650) else "mixed"))
-    r = f(m["after"]["restaurants_800m"])
-    out["after"] = None if r is None else ("strong" if r >= 20 else ("weak" if r < 10 else "mixed"))
-    vj, pr = f(m["night"]["violent_vs_jamaica"]), f(parking_rank)
-    out["night"] = None if vj is None else ("strong" if (vj <= 0.5 and pr is not None and pr >= 3) else ("weak" if (pr is not None and pr < 2) else "mixed"))
-    b, rs = f(m["sat"]["bars_1600m"]), f(m["sat"]["restaurants_1600m"])
-    out["sat"] = None if b is None or rs is None else ("strong" if (b >= 5 and rs >= 25) else ("weak" if (b < 2.5 and rs < 12.5) else "mixed"))
-    v_ = f(vsq_drive)
-    out["sun"] = None if v_ is None else ("strong" if v_ >= 3 else ("weak" if v_ <= 1 else "mixed"))
+    w = f(m["wake"].get("park_walk_min"))
+    out["wake"] = None if w is None else ("strong" if w <= 3 else ("weak" if w > 10 else "mixed"))
+    sq, bed = f(sqft), (f(beds) or 0) >= 1
+    out["work"] = None if sq is None else ("strong" if bed and sq >= 700 else ("weak" if (sq < 550 or (not bed and sq < 600)) else "mixed"))
+    r, b = f(m["after"].get("restaurants_800m")), f(m["after"].get("bars_800m"))
+    out["after"] = None if r is None else ("strong" if (r >= 15 and (b or 0) >= 1) else ("weak" if r < 4 else "mixed"))
+    pr = f(parking_rank)
+    if pr == 1 or overnight_restricted:
+        out["night"] = "weak"
+    elif pr == 4 and not offsite and secured:
+        out["night"] = "strong"
+    else:
+        out["night"] = "mixed"                    # parking unknown is "mixed" by the owner's rule, not null
+    bs, rs = f(m["sat"].get("bars_1600m")), f(m["sat"].get("restaurants_1600m"))
+    out["sat"] = None if bs is None or rs is None else ("strong" if (bs >= 5 and rs >= 30) else ("weak" if (bs <= 1 and rs < 15) else "mixed"))
+    d = f(m["sun"].get("drive_min")) if "sun" in m else None
+    out["sun"] = None if d is None else ("strong" if d <= 30 else ("weak" if d > 60 else "mixed"))
     return out
 
 
@@ -88,7 +97,10 @@ def unit(r):
         qs.append("What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)")
     qs = list(dict.fromkeys(qs))
     out = unit_core(r, g, qs)
-    mr = moment_ratings(out["moments"], g("parking_rank"), g("vsq_drive_min"))
+    am = out["amenities"]
+    mr = moment_ratings(out["moments"], g("parking_rank"), out["parking"]["offsite"],
+                        secured=bool(am["doorman"]) or str(am["controlled_access"] or "").strip().lower().startswith(("yes", "true")),
+                        overnight_restricted=any(d["what"] == "overnight street parking" for d in out["disclosures"]), sqft=g("sqft"), beds=g("beds"))
     for k, val in mr.items():
         out["moments"][k]["rating"] = val
     return out
