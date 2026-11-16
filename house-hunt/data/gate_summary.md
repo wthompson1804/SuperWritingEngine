@@ -4,9 +4,9 @@ Raw rows: 24311. After dedupe: 20464.
 
 | status | listings | buildings |
 |---|---|---|
-| fail | 4271 | 3213 |
-| pass | 2659 | 693 |
-| pending | 13534 | 9444 |
+| fail | 4281 | 3217 |
+| pass | 2503 | 607 |
+| pending | 13680 | 9464 |
 
 ## Each gate (after dedupe)
 
@@ -16,7 +16,7 @@ Raw rows: 24311. After dedupe: 20464.
 | rent | 20239 | 55 | 170 |
 | movein | 7842 | 932 | 11690 |
 | dog | 10298 | 1171 | 8995 |
-| elevator | 5811 | 1317 | 13336 |
+| elevator | 5291 | 1334 | 13839 |
 | floor | 5092 | 1076 | 14296 |
 | place | 20434 | 0 | 30 |
 | proof | 10376 | 7 | 10081 |
@@ -29,9 +29,9 @@ Raw rows: 24311. After dedupe: 20464.
 | 1eastmainstreet.com                       |      1 |      0 |         0 |
 | 360huguenot.com                           |      1 |      4 |         0 |
 | anninlofts.com                            |      0 |      0 |         1 |
-| apartmentlist.com                         |   1166 |   1370 |      2297 |
+| apartmentlist.com                         |   1166 |   1309 |      2358 |
 | arrivestamford.com                        |      1 |      0 |         0 |
-| avaloncommunities.com                     |     86 |      0 |        90 |
+| avaloncommunities.com                     |     86 |      4 |        86 |
 | bltliveworkplay.com (SightMap embed)      |     28 |     23 |        26 |
 | bottiniproperties.com                     |      0 |      0 |         2 |
 | bygomes.com                               |      4 |      0 |         0 |
@@ -41,7 +41,7 @@ Raw rows: 24311. After dedupe: 20464.
 | gardencommunities.com                     |      8 |      2 |       116 |
 | gardenhomesmanagement.com                 |      1 |      0 |         8 |
 | gdcrentals.com                            |      2 |      0 |        13 |
-| greystar.com                              |     49 |     78 |       101 |
+| greystar.com                              |     49 |     83 |        96 |
 | livecarraway.com                          |      0 |      4 |         0 |
 | livemotifapts.com                         |      1 |      7 |         0 |
 | livethemitchell.com                       |      1 |      1 |         0 |
@@ -64,10 +64,10 @@ Raw rows: 24311. After dedupe: 20464.
 | thesheldonatsuffern.com                   |      1 |      0 |         0 |
 | theshipyardriverhead.com                  |      1 |      0 |         0 |
 | trademarkfairfield.com                    |      1 |      0 |         0 |
-| trulia                                    |   2315 |    999 |      7413 |
+| trulia                                    |   2325 |    897 |      7505 |
 | trulia.com                                |     16 |      0 |         0 |
 | vermellacrossing.com                      |      1 |      0 |        12 |
-| vermellaharrison.com                      |      7 |      2 |         1 |
+| vermellaharrison.com                      |      7 |      3 |         0 |
 | vermellalyndhurst.com                     |      1 |      0 |         1 |
 | vermellawest.com                          |      1 |      0 |         0 |
 | vermellawoodbridge.com                    |      1 |      0 |         3 |
@@ -88,26 +88,26 @@ Raw rows: 24311. After dedupe: 20464.
 | www.vermellaeast.com                      |      1 |      0 |         0 |
 | www.zumper.com                            |      2 |      0 |         0 |
 | zillow.com                                |     22 |     12 |        30 |
-| zumper                                    |    389 |     70 |      3141 |
+| zumper                                    |    389 |     67 |      3144 |
 | zumper.com                                |      4 |      0 |         9 |
 
 ## Pending reasons (what would need confirming)
 
 | pending_reasons           |   count |
 |:--------------------------|--------:|
-| movein;dog;elevator;proof |    4996 |
-| movein;elevator;proof     |    2664 |
-| elevator                  |    1825 |
-| dog;elevator              |     977 |
-| dog                       |     532 |
-| movein                    |     454 |
-| movein;proof              |     379 |
-| movein;dog;elevator       |     368 |
-| movein;elevator           |     348 |
-| movein;dog                |     253 |
+| movein;dog;elevator;proof |    5076 |
+| movein;elevator;proof     |    2613 |
+| elevator                  |    1981 |
+| dog;elevator              |    1028 |
+| dog                       |     480 |
+| movein;proof              |     428 |
+| movein                    |     404 |
+| movein;dog;elevator       |     398 |
+| movein;elevator           |     397 |
 | dog;elevator;proof        |     244 |
 | elevator;proof            |     238 |
-| movein;dog;proof          |     226 |
+| movein;dog                |     223 |
+| movein;dog;proof          |     140 |
 | dog;elevator;place        |      21 |
 | dog;proof                 |       3 |
 
@@ -115,43 +115,43 @@ Raw rows: 24311. After dedupe: 20464.
 
 |                                 |   0 |
 |:--------------------------------|----:|
-| ('NJ', 'Jersey City')           | 335 |
-| ('CT', 'New Haven')             | 330 |
-| ('CT', 'Stamford')              | 166 |
+| ('NJ', 'Jersey City')           | 334 |
+| ('CT', 'New Haven')             | 303 |
+| ('CT', 'Stamford')              | 160 |
 | ('CT', 'Bridgeport')            | 108 |
 | ('NJ', 'Parsippany-Troy Hills') | 107 |
-| ('CT', 'Norwalk')               |  97 |
-| ('NY', 'New Rochelle')          |  93 |
-| ('NY', 'New York')              |  78 |
-| ('NY', 'Yonkers')               |  75 |
-| ('NJ', 'Newark')                |  68 |
-| ('NJ', 'Bayonne')               |  67 |
-| ('NY', 'White Plains')          |  66 |
+| ('CT', 'Norwalk')               |  96 |
+| ('NY', 'New Rochelle')          |  85 |
+| ('NY', 'New York')              |  73 |
+| ('NY', 'Yonkers')               |  68 |
+| ('NJ', 'Bayonne')               |  64 |
 | ('NY', 'Port Chester')          |  59 |
-| ('NY', 'Brooklyn')              |  56 |
+| ('NY', 'White Plains')          |  58 |
+| ('NJ', 'Newark')                |  57 |
 | ('NJ', 'Berkeley Heights')      |  54 |
-| ('NJ', 'Hackensack')            |  43 |
+| ('NY', 'Brooklyn')              |  52 |
 | ('NJ', 'Harrison')              |  42 |
 | ('NJ', 'Dover')                 |  41 |
-| ('NJ', 'Burlington')            |  29 |
+| ('NJ', 'Hackensack')            |  41 |
+| ('NJ', 'Bogota')                |  31 |
 | ('NY', 'Bronx')                 |  29 |
-| ('CT', 'Danbury')               |  24 |
-| ('NJ', 'East Orange')           |  23 |
+| ('CT', 'Danbury')               |  23 |
+| ('NJ', 'New Brunswick')         |  23 |
+| ('NJ', 'Burlington')            |  22 |
 | ('NJ', 'Clifton')               |  22 |
-| ('NJ', 'West New York')         |  21 |
 | ('NY', 'Jamaica')               |  21 |
-| ('NJ', 'New Brunswick')         |  21 |
 | ('CT', 'Trumbull')              |  19 |
+| ('NJ', 'East Orange')           |  19 |
+| ('NJ', 'Englewood')             |  19 |
 | ('NJ', 'South River')           |  18 |
 | ('NJ', 'Flemington')            |  18 |
 | ('NY', 'Purchase')              |  18 |
+| ('NJ', 'West New York')         |  17 |
 | ('NJ', 'Somerset')              |  17 |
-| ('NY', 'Haverstraw')            |  16 |
 | ('NY', 'Peekskill')             |  16 |
-| ('NJ', 'Bogota')                |  16 |
-| ('NJ', 'Bloomfield')            |  16 |
-| ('NY', 'Flushing')              |  14 |
-| ('NJ', 'Englewood')             |  14 |
+| ('NY', 'Haverstraw')            |  16 |
 | ('CT', 'Shelton')               |  14 |
+| ('NY', 'Flushing')              |  14 |
 | ('CT', 'Milford')               |  13 |
-| ('NJ', 'Orange')                |  12 |
+| ('NJ', 'Long Branch')           |  11 |
+| ('NJ', 'Orange')                |  11 |

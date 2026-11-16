@@ -88,6 +88,7 @@ or rule without a link is not attached.
 from __future__ import annotations
 
 import argparse
+import csv
 import io
 import json
 import math
@@ -242,9 +243,10 @@ class Table(list):
 def read_csv(path, need=(), wait=None):
     """(Table, None), or (None, reason) when the file is absent, half-written or lacks a required column.
 
-    Read as text, every cell cleaned (see clean). A file that fails to parse, is empty, or does not end with a line
-    break (the sign of a writer still at work) is read once more after `wait` seconds; it is accepted then only when it
-    parses and, if it still has no final line break, did not change in between."""
+    Read as text, every cell cleaned (see clean). A file that fails to parse, is empty, has a quoted field that never
+    closes, or does not end with a line break (the sign of a writer still at work) is read once more after `wait`
+    seconds; it is accepted then only when it parses, every quote closes, and, if it still has no final line break,
+    its last row is whole and it did not change in between."""
     path = Path(path)
     wait = RETRY_WAIT if wait is None else wait
     first, reason = None, "missing"
@@ -265,9 +267,15 @@ def read_csv(path, need=(), wait=None):
             reason = f"unreadable ({type(e).__name__}: {str(e)[:80]}), probably half-written"
             first = raw
             continue
-        if not text.endswith("\n") and (attempt == 1 or raw != first):
-            reason, first = "no final line break and still changing: half-written", raw
+        if text.count('"') % 2:
+            reason, first = "a quoted field never closes: half-written", raw
             continue
+        if not text.endswith("\n"):
+            last = text.rsplit("\n", 1)[-1]
+            short = last.count('"') % 2 == 0 and len(next(csv.reader([last]), [])) < len(df.columns)
+            if short or attempt == 1 or raw != first:
+                reason, first = ("the last row is cut short: half-written" if short else "no final line break and still changing: half-written"), raw
+                continue
         missing = [c for c in need if c not in df.columns]
         if missing:
             return None, "no column " + ", ".join(missing)
@@ -350,8 +358,8 @@ class Ctx:
                 named.append(k)
         if named:
             return [(k, None) for k in named]
-        left = letters(PART_FILLER.sub(" ", str(source_area or "")))
-        left = left.replace(city, "") if city else left
+        own_name = re.escape(str(kids[0].get("parent_name") or "\0"))
+        left = letters(PART_FILLER.sub(" ", re.sub(own_name, " ", str(source_area or ""), flags=re.I)))
         if left:
             return []                                     # about a part of the city that has no page of its own
         return [(k, f"{k.get('parent_name')} as a whole") for k in kids]
@@ -535,6 +543,8 @@ def round2_quotes(c):
         sa = r["source_area"]
         plain = re.sub(r"\s*\((?:enclosing area|whole)\)", "", sa)
         about = re.sub(r",\s*[A-Z]{2}$", "", plain) if sa and len(plain) <= 40 and area_key(plain) != area_key(r["neighborhood"]) else None
+        if r["hood_id"] not in c.hoods:
+            about = None                                  # routed to a child of a split city: it is that child's, or labelled as the city's
         for h, whole in tg:
             vs = local_of(h)["voices"]
             if not any(isinstance(v, dict) and squash(v.get("excerpt")) == squash(ex) for v in vs):
@@ -841,11 +851,14 @@ def photos(c):
     Rule, first that exists: the building's own site from the own-site file (high or medium confidence); the contact's
     site or the building link when it is not a listing site and the contact is not a broker's or an owner's; the
     listing page for the apartment; the building's listing page. kind is "own_site" for the first two (where: "the
-    building's own site"), else "listing" (where: the host name). A unit with no link at all has no photos field."""
-    O, _ = read_csv(c.P.contacts_own, need=("building_id",), wait=c.wait)
+    building's own site"), else "listing" (where: the host name). A unit with no link at all has no photos field.
+    While the own-site file is unreadable, an own-site link already on the page is kept."""
+    O, why = c.csv(c.P.contacts_own, need=("building_id",))
     own_site = {b: r["own_site_url"] for b, r in _good_own_rows(O).items() if r["own_site_url"]}
     unit_links = {u.get("id"): u.get("links") for u in c.units if isinstance(u.get("links"), dict)}
     for u in c.places:
+        if O is None and isinstance(u.get("photos"), dict) and u["photos"].get("kind") == "own_site":
+            continue                                                   # the own-site file is unreadable: keep the link it gave
         ln = dict(u.get("links")) if isinstance(u.get("links"), dict) else {}
         if "building_id" not in u:                                     # a buildings[] entry: borrow its best unit's listing page
             ln.setdefault("listing", (unit_links.get(u.get("best_unit_id")) or {}).get("listing"))
@@ -859,7 +872,7 @@ def photos(c):
         host = re.sub(r"^www\.", "", re.sub(r"^https?://", "", url).split("/")[0])
         u["photos"] = {"url": url, "where": "the building's own site" if site else host, "kind": "own_site" if site else "listing"}
     own = sum(1 for u in c.units if (u.get("photos") or {}).get("kind") == "own_site")
-    return counted(c, lambda o: o.get("photos")) + f" have a photos link ({own} places to the building's own site)"
+    return counted(c, lambda o: o.get("photos")) + f" have a photos link ({own} places to the building's own site)" + ("; " + why if O is None else "")
 
 
 # ----------------------------------------------------------------------------------------------------------------------

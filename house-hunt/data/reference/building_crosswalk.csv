@@ -10,8 +10,6 @@ addr_key,building_id,street_key
 45 main st|10701,b_4c962752d0,45 main st|10701
 360 huguenot st|10801,b_e478ea9fe4,360 huguenot st|10801
 40 memorial hwy|10801,b_e47702d4fd,40 memorial hwy|10801
-42 broad st w|10552,b_2c504c40fd,42 broad st w|10552
-440 hamilton ave|10601,b_8ce8d4e0f7,440 hamilton ave|10601
 1108 brown st|10566,b_4122082ecc,1108 brown st|10566
 56 prospect st|10701,b_ee2549a834,56 prospect st|10701
 1 alexander st|10701,b_4370d798d0,1 alexander st|10701
@@ -21,14 +19,11 @@ addr_key,building_id,street_key
 34 s lexington ave|10606,b_3d2423b7ea,34 s lexington ave|10606
 111 centre ave|10801,b_489356c5ef,111 centre ave|10801
 2 canfield ave|10601,b_1e00950185,2 canfield ave|10601
-325 huguenot st|10801,b_653ff5f04b,325 huguenot st|10801
 12 church st|10801,b_9ef71faae0,12 church st|10801
 10 commerce dr|10801,b_13d50af205,10 commerce dr|10801
 55-57 bank st|10606,b_144b021ca5,5557 bank st|10606
 105 corporate park dr|10604,b_46e40b788b,105 corporate park dr|10604
 27 barker ave|10601,b_46e1b0feda,27 barker ave|10601
-25 maple ave|10801,b_590bdd448d,25 maple ave|10801
-55 riverside dr|10701,b_e80dc26e3c,55 riverside dr|10701
 142-38 37th ave|11354,b_7edaa5c8f9,14238 37 ave|11354
 3440 guider ave|11235,b_0de5d2fecc,3440 guider ave|11235
 98-76 queens blvd|11374,b_95b26f1096,9876 queens blvd|11374
@@ -164,6 +159,10 @@ addr_key,building_id,street_key
 265 college st|06510,b_a471763ace,265 college st|06510
 64 regency dr|08060,b_de9c110ff5,64 regency dr|08060
 3000 emily ln|08016,b_b5e1e32afb,3000 emily ln|08016
+1775 windsor rd 215|07666,b_ed64a2ae75,1775 windsor rd|07666
+137 alexander st 2336|10701,b_060f0d5d4b,137 alexander st|10701
+79 alexander st 1555|10701,b_3f9fc0b756,79 alexander st|10701
+80 alexander st 3326|10701,b_05f5f16a9e,80 alexander st|10701
 2 kinderkamack rd|07601,b_c50c86f346,2 kinderkamack rd|07601
 100 julia dr|07885,b_7b23516660,100 julia dr|07885
 508 51st st|07093,b_36012bfe17,508 51 st|07093
@@ -251,7 +250,6 @@ addr_key,building_id,street_key
 44 hudson st|10701,b_78bfa7e9f6,44 hudson st|10701
 66 main st|10701,b_c8365848f7,66 main st|10701
 601 ridge hill blvd|10710,b_53d252c630,601 ridge hill blvd|10710
-1880 palmer ave|10538,b_78d7a47aa1,1880 palmer ave|10538
 1133 warburton ave|10701,b_1e46d43b31,1133 warburton ave|10701
 1 saint marys convent|10566,b_b344cdc054,1 saint marys convent|10566
 1100 admirals cove blvd|10927,b_57390dcb5d,1100 admirals cove blvd|10927
@@ -342,58 +340,37 @@ s 5th st 308 harrison nj 07029 usa|07029,b_4fd29fde13,s 5 st|07029
 110 washington st e orange nj 07017 usa|07017,b_3a9b3ed505,110 washington st|07017
 475 main st 404 city of orange nj 07050 usa|07050,b_56ce49fbe4,475 main st|07050
 127 talmage ave 307 bound brook nj 08805 us|08805,b_ebe49b24a3,127 talmage ave|08805
-147-14 84th rd|11435,b_8a8364e5f5,14714 84 rd|11435
-2925 w 5th st|11224,b_1f42ff0979,2925 w 5 st|11224
-2050 central rd|07024,b_d0621d4dbf,2050 central rd|07024
+90 furman st|11201,b_e5d7dfd6f0,90 furman st|11201
 3260 henry hudson pkwy|10463,b_07f83acc47,3260 henry hudson pkwy|10463
 500 central ave|07087,b_5dc72ae94a,500 central ave|07087
-691 anderson ave|07010,b_8e57a566d8,691 anderson ave|07010
 1775 windsor rd|07666,b_ed64a2ae75,1775 windsor rd|07666
 1075 w side ave|07306,b_bba4e91f2c,1075 w side ave|07306
 79 alexander st|10701,b_3f9fc0b756,79 alexander st|10701
-80 freeman st|07105,b_5c415287ea,80 freeman st|07105
+132 yale ave|07304,b_fd5b97710e,132 yale ave|07304
 10 commerce ct|07102,b_d1e8eb4f85,10 commerce ct|07102
 145 goldsborough dr|07002,b_27104c3bf3,145 goldsborough dr|07002
 190 w 54th st|07002,b_2eb7945a67,190 w 54 st|07002
-1710 devonshire rd|11788,b_8247e694d5,1710 devonshire rd|11788
-218-226 millburn ave|07041,b_de3818e972,218226 millburn ave|07041
-548 springfield ave|07901,b_4f6e4e8326,548 springfield ave|07901
 500 district dr|07922,b_f60305ba7b,500 district dr|07922
-555 new brunswick ave|08863,b_c36d2b46b2,555 new brunswick ave|08863
-2 river rd|07928,b_8df4f27675,2 river rd|07928
-540 main st 9f|07928,b_39afa55011,540 main st|07928
-101-616 goodmans crossing|07076,b_8ce980516b,101616 goodmans crossing|07076
-1300 cook ln|07080,b_7b7e701d4a,1300 cook ln|07080
+60 paterson st|08901,b_e5db6f016a,60 paterson st|08901
 575 easton ave|08904,b_a8d8cf1df6,575 easton ave|08904
-33 aberdeen rd|07747,b_4135534fff,33 aberdeen rd|07747
 55 e main st|06608,b_c703305174,55 e main st|06608
 991 main st|06604,b_b29a9ae0e3,991 main st|06604
 333 main st|06810,b_5204934871,333 main st|06810
-10 clapboard ridge rd|06811,b_a3555190a5,10 clapboard ridge rd|06811
-3425 w bangs ave|07753,b_d88b4359b8,3425 w bangs ave|07753
-300 waverly ave|07753,b_0a41b4b4e8,300 waverly ave|07753
 33 crown st|06510,b_2f9fedb973,33 crown st|06510
 38 crown st|06510,b_e624f3ffb0,38 crown st|06510
 900 chapel st|06510,b_0b58d6c3dd,900 chapel st|06510
 78 olive st|06510,b_5bd2e71f71,78 olive st|06510
-100 first montgomery dr|08060,b_958ef9248e,100 first montgomery dr|08060
 55 bank st|10606,b_a291f1c5c9,55 bank st|10606
 57 bank st|10606,b_fab3c8eb02,57 bank st|10606
 650 nj-23|07470,b_0284360938,650 nj-23|07470
 589 bedford st|06901,b_cf509a364e,589 bedford st|06901
 84 w park pl|06901,b_f6c77f554e,84 w park pl|06901
-1 atlantic st|06901,b_fbfe2a2843,1 atlantic st|06901
-111 towne st|06902,b_8348f12424,111 towne st|06902
-32 prospect ave|06850,b_52e97e0521,32 prospect ave|06850
 61 wall st|06850,b_ed492a0e67,61 wall st|06850
-64 danbury rd|06897,b_84a6dbca6e,64 danbury rd|06897
 333 state st|06604,b_5f84c933a2,333 state st|06604
 335 ferry blvd|06615,b_9b44b7b349,335 ferry blvd|06615
 7 station rd|06804,b_8b059f657b,7 station rd|06804
 222 canal st|06511,b_e14f456bec,222 canal st|06511
-367 orange st|06511,b_a0f917d390,367 orange st|06511
-20 fair st|06511,b_2b509de687,20 fair st|06511
-269 orange st|06510,b_d6c2bb093d,269 orange st|06510
+274 crown st|06511,b_a7a6d5359b,274 crown st|06511
 78 olive st|06511,b_5bd2e71f71,78 olive st|06511
 337 eastern st|06513,b_f3628da2f9,337 eastern st|06513
 67 sackett point rd|06473,b_c0fea56c00,67 sackett point rd|06473
@@ -414,9 +391,6 @@ s 5th st 308 harrison nj 07029 usa|07029,b_4fd29fde13,s 5 st|07029
 60 point st|10701,b_7dd0e6688e,60 point st|10701
 305 warburton ave|10701,b_1fd93a9d52,305 warburton ave|10701
 7-11 s broadway|10601,b_c56d2bc7d9,711 s broadway|10601
-260 w st|10549,b_ab56e67d27,260 w st|10549
-1 kensington cir|10923,b_b3fdc20788,1 kensington cir|10923
-701 ridge hill blvd|10710,b_7981a68819,701 ridge hill blvd|10710
 250 s central ave|10530,b_a14b339b28,250 s central ave|10530
 14202 84th dr|11435,b_b64ad8f2fa,14202 84 dr|11435
 12333 83rd ave|11415,b_3c6898b295,12333 83 ave|11415
@@ -463,35 +437,14 @@ s 5th st 308 harrison nj 07029 usa|07029,b_4fd29fde13,s 5 st|07029
 1941 coney island ave|11223,b_769c2e5583,1941 coney island ave|11223
 2611 w 2nd st|11223,b_70c1cba0d0,2611 w 2 st|11223
 1429 shore pkwy|11214,b_bfa351f6c8,1429 shore pkwy|11214
-1489 shore pkwy|11214,b_9247dbb2f8,1489 shore pkwy|11214
 204 sherman ave|10034,b_7bd07ee1c0,204 sherman ave|10034
 2600 netherland ave|10463,b_8733cfdf7a,2600 netherland ave|10463
-330 50th st|07093,b_1548e858cd,330 50 st|07093
-6122 monroe pl|07093,b_332cfd1a24,6122 monroe pl|07093
-14 regent st|07302,b_7d23a253bb,14 regent st|07302
 76 cottage st|07306,b_bf42e361a0,76 cottage st|07306
 5 linden st|07601,b_77ee25a0b4,5 linden st|07601
-132 yale ave|07304,b_fd5b97710e,132 yale ave|07304
 509 martin luther king jr dr|07304,b_cc5e558663,509 martin luther king jr dr|07304
-60 w madison ave|07628,b_d38b7dab64,60 w madison ave|07628
-166 sterling ave|07305,b_d622a5ca84,166 sterling ave|07305
-20 fulton ave|07305,b_3b41d15a7b,20 fulton ave|07305
 127 16th ave|07501,b_daaf117041,127 16 ave|07501
-1202 kennedy blvd|07002,b_4aa2b01c6d,1202 kennedy blvd|07002
-35 w 25th st|07002,b_1f4ab56d82,35 w 25 st|07002
-971 broadway|07002,b_872823ca71,971 broadway|07002
-5 beaumont pl|07104,b_0574ac1a01,5 beaumont pl|07104
-57 branch brook pl|07104,b_2cd3ac0ad0,57 branch brook pl|07104
-85 forest hill pkwy|07104,b_09b6a3b0dd,85 forest hill pkwy|07104
-800 s 14th st|07108,b_2a184be67b,800 s 14 st|07108
 50 washington st|07017,b_dbcb291def,50 washington st|07017
-720 park ave|07017,b_21a4bebd69,720 park ave|07017
 448 scotland rd|07050,b_55c25d9226,448 scotland rd|07050
-434 scotland rd|07050,b_d75453029e,434 scotland rd|07050
-99 pine st|07042,b_95c785b987,99 pine st|07042
-540 main st|07928,b_39afa55011,540 main st|07928
-9 lake ave|08816,b_ecf4531158,9 lake ave|08816
-500 adams ln|08902,b_9a3e1458ed,500 adams ln|08902
 83rd ave new york ny 11415 usa|11415,b_2004f43850,83 ave|11415
 83-33 118th st 6m 83-33 118th st kew gardens ny 11415 us|11415,b_cd7ba15e25,8333 118 st|11415
 139-81 35th ave 6d 139-81 35th ave flushing ny 11354 us|11354,b_4317e61e15,13981 35 ave|11354
@@ -516,18 +469,12 @@ william st & john st 6e new york ny 10038 usa|10038,b_4e18914e44,william st john
 6500 k johnson blvd 211 bordentown nj 08505 usa|08505,b_1d55a03272,6500 k johnson blvd|08505
 2404 cortelyou rd|11226,b_37918a8b58,2404 cortelyou rd|11226
 30 dongan pl|10040,b_371c778392,30 dongan pl|10040
-620 bloomfield ave|07003,b_76de98ab84,620 bloomfield ave|07003
 500 parq ln|07054,b_5682f2bdfa,500 parq ln|07054
-10 main st|07095,b_f65ff3375e,10 main st|07095
-785 green st|08830,b_62a64f87fd,785 green st|08830
-200 la bonne vie dr|11772,b_9bea5f5660,200 la bonne vie dr|11772
-36 main st|06401,b_262ef675c4,36 main st|06401
 23 bloomfield|08822,b_7efd7313e6,23 bloomfield|08822
 254 college st|06510,b_a6055f4608,254 college st|06510
 20 beacon way|07304,b_84739a68fb,20 beacon way|07304
 901 chapel st|06510,b_383ee6a134,901 chapel st|06510
 37 woodmere blvd|11598,b_0ddb4c49c4,37 woodmere blvd|11598
-99 waverly ave|11772,b_892ac330ad,99 waverly ave|11772
 525 riverdale ave|10705,b_c4831201c1,525 riverdale ave|10705
 13523 82nd ave|11435,b_687bc98c0f,13523 82 ave|11435
 139-05 85th dr|11435,b_03a57f0fab,13905 85 dr|11435
@@ -545,7 +492,6 @@ william st & john st 6e new york ny 10038 usa|10038,b_4e18914e44,william st john
 14227 barclay ave|11355,b_77093283c9,14227 barclay ave|11355
 14345 sanford ave|11355,b_5edffc6c22,14345 sanford ave|11355
 139-55 35th ave|11354,b_dbb042aeab,13955 35 ave|11354
-3250 93rd st|11369,b_08687030f7,3250 93 st|11369
 3625 parsons blvd|11354,b_1d1be12629,3625 parsons blvd|11354
 63-60 102nd st|11374,b_4e6dc7f820,6360 102 st|11374
 61-57 84th st|11379,b_653abe788c,6157 84 st|11379
@@ -567,7 +513,6 @@ william st & john st 6e new york ny 10038 usa|10038,b_4e18914e44,william st john
 2338 2nd ave|10035,b_0b5de0894c,2338 2 ave|10035
 340 e 117th st|10035,b_6459772155,340 e 117 st|10035
 2197 cruger ave|10462,b_ade8defdd4,2197 cruger ave|10462
-255 e 61st st|10065,b_6551e3cff2,255 e 61 st|10065
 109 bruckner blvd|10454,b_af9f6e7743,109 bruckner blvd|10454
 333 cypress ave|10454,b_daaae2724b,333 cypress ave|10454
 40 bruckner blvd|10454,b_8d071cc6d6,40 bruckner blvd|10454
@@ -626,67 +571,36 @@ william st & john st 6e new york ny 10038 usa|10038,b_4e18914e44,william st john
 101-19 rockaway beach blvd|11694,b_4c67386d57,10119 rockaway beach blvd|11694
 3660 waldo ave|10463,b_d07798aff2,3660 waldo ave|10463
 500 kappock st|10463,b_17a3181bf5,500 kappock st|10463
-5008 palisade ave|07093,b_31d135b158,5008 palisade ave|07093
-5801 palisade ave|07093,b_4dbdf1d91f,5801 palisade ave|07093
 5550 netherland ave|10471,b_c8c1c03aeb,5550 netherland ave|10471
 310 94th st|11209,b_2667ea0819,310 94 st|11209
 9949 shore rd|11209,b_5501c5080b,9949 shore rd|11209
 270 luis m marin blvd|07302,b_adb2958068,270 luis m marin blvd|07302
-280 luis m marin blvd|07302,b_f3150a3c5e,280 luis m marin blvd|07302
 55 jordan ave|07306,b_7ca633b7e0,55 jordan ave|07306
-51 1st st|07601,b_5dbb4393f6,51 1 st|07601
-5 elm ave|07601,b_c51cb765f9,5 elm ave|07601
-145 park ave|07073,b_bb5c0b6ee1,145 park ave|07073
 328 pacific ave|07304,b_5c74c9e542,328 pacific ave|07304
-104 clifton pl|07304,b_6cb774c8af,104 clifton pl|07304
+52 mcwhorter st|07105,b_a189a087b5,52 mcwhorter st|07105
 5 stuyvesant pl|10301,b_1a5b06c704,5 stuyvesant pl|10301
 80 richmond hill rd|10314,b_7f16c1c2ef,80 richmond hill rd|10314
-50 sussex ave|07103,b_c98802383c,50 sussex ave|07103
-479 roseville ave|07107,b_907642bd40,479 roseville ave|07107
-384 stuyvesant ave|07111,b_b498bbce17,384 stuyvesant ave|07111
-394 stuyvesant ave|07111,b_c7864faf41,394 stuyvesant ave|07111
-111 washington st|07017,b_7cfdd9d76e,111 washington st|07017
-140 n walnut st|07017,b_1aa6f87983,140 n walnut st|07017
-57 washington st|07017,b_2b10104409,57 washington st|07017
-10 columbia ave|07106,b_62ca4d5f02,10 columbia ave|07106
-90 lupton ln|07508,b_654b023662,90 lupton ln|07508
-10 ridgedale ave|07940,b_7591a11919,10 ridgedale ave|07940
+143 goldsborough dr|07002,b_ba434d8bf1,143 goldsborough dr|07002
 23 bloomfield ave|08822,b_7efd7313e6,23 bloomfield ave|08822
 13324 sanford ave 2d flushing ny 11355 usa|11355,b_0f0fcfc79c,13324 sanford ave|11355
 13324 sanford ave 6g flushing ny 11355 usa|11355,b_0f0fcfc79c,13324 sanford ave|11355
 140-16 34th ave 714 140-16 34th ave flushing ny 11354 us|11354,b_82cac2e795,14016 34 ave|11354
-34-46 91st st h51 queens ny 11372 us|11372,b_8e1e111ea4,3446 91 st|11372
-34-33 90th st e12 34-33 90th st jackson heights ny 11372 us|11372,b_27ace0b35e,3433 90 st|11372
 31-20 54th st 2fl 31-20 54th st flushing ny 11377 us|11377,b_e7f9e0227d,3120 54 st|11377
-3242 33rd st d3 astoria ny 11106 usa|11106,b_0a790d79c1,3242 33 st|11106
-3516 34th st 5e astoria ny 11106 usa|11106,b_1170c85e08,3516 34 st|11106
 255 nostrand ave 3b2 brooklyn ny 11205 usa|11205,b_5d870eb472,255 nostrand ave|11205
 53 w 72nd st 4c new york ny 10023 usa|10023,b_e948475fde,53 w 72 st|10023
 720 w 181st st|10033,b_c82499653d,720 w 181 st|10033
 630 w 163rd st|10032,b_8aaada74c2,630 w 163 st|10032
-157 white plains rd|10591,b_a862d51ebb,157 white plains rd|10591
 63-45 saunders st|11374,b_8ffc9f852c,6345 saunders st|11374
 34-19 90th st|11372,b_6a86a5dbf8,3419 90 st|11372
 96 hart st|11206,b_75fb8f1cdb,96 hart st|11206
 2180 bronx park e|10462,b_2e6e82bf8c,2180 bronx park e|10462
-2165 clarendon rd|11226,b_a38ada9f7b,2165 clarendon rd|11226
-815 flatbush ave|11226,b_f4cc3a0e44,815 flatbush ave|11226
-2750 e 12th st|11235,b_e582f5c626,2750 e 12 st|11235
 273 w 131st st|10027,b_396638662e,273 w 131 st|10027
 |10453,b_e5fae248dd,|10453
-245 w 115th st|10026,b_a2e346cd36,245 w 115 st|10026
 1256 ocean ave|11230,b_efae72f3ab,1256 ocean ave|11230
 8635 21st ave|11214,b_4b56376dd7,8635 21 ave|11214
 241 w 101st st|10025,b_88f22a09d9,241 w 101 st|10025
-137-148 36th st|07087,b_84041889c3,137148 36 st|07087
 4499 henry hudson pkwy w|10471,b_b8ffb99181,4499 henry hudson pkwy w|10471
-324 monroe st|07030,b_cd2e1948ae,324 monroe st|07030
-11 king st|07032,b_ac44a3beba,11 king st|07032
-232 bidwell ave|07305,b_e0477f0239,232 bidwell ave|07305
-1204 kennedy blvd|07002,b_9215e92a5f,1204 kennedy blvd|07002
-308 main st|06516,b_793a4380cf,308 main st|06516
 2840 atlantic ave new york ny 11207 usa|11207,b_60d8a7b488,2840 atlantic ave|11207
-1588 fulton st 2a brooklyn ny 11213 usa|11213,b_6b55ea93ca,1588 fulton st|11213
 1499 bedford ave 10b brooklyn ny 11216 usa|11216,b_90b8e5c692,1499 bedford ave|11216
 60 clarkson ave 4d brooklyn ny 11226 usa|11226,b_9a0af6b1c9,60 clarkson ave|11226
 270 clarkson ave 608 brooklyn ny 11226 usa|11226,b_c001b28184,270 clarkson ave|11226

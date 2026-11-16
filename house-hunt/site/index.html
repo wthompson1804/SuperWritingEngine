@@ -820,6 +820,78 @@ body{padding-bottom:calc(var(--tray-h,56px) + 20px)}
 .btn.off{background:var(--white);border-color:var(--line);color:var(--muted)}
 .cmp-head .colh a{align-items:flex-start}
 .cmp-head .colh a b{white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:11.5px;line-height:1.15;overflow-wrap:anywhere}
+/* ================= UI pass 5: experience and neighborhood pages =================
+   Three text sizes on these two pages (14 small, 16 body, 20 heading) plus the page title and 13px caps labels;
+   sections are separated by space, not by boxes. */
+.pg{--t-s:14px;--t-m:16px;--t-l:20px}
+#view .pg .sec{margin-top:26px}
+#view .pg .sec.head{margin-top:12px}
+#view .pg .sec.about{margin-top:24px}
+.pg .h2s{font-size:var(--t-l)!important;line-height:1.15}
+.pg .h2s .fig{font-size:var(--t-s);color:var(--muted);font-weight:700}
+.pg .psub{font-size:var(--t-m)}
+.pg .kick{font-size:13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.pg-exp>.illus.banner{height:100px;margin:10px 0 0;border:3px solid var(--ink);border-radius:20px}
+.kf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:var(--line);border:2px solid var(--line);border-radius:16px;overflow:hidden;margin-top:12px}
+.kfc{position:relative;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;width:100%;background:var(--white);padding:8px 5px 9px;min-width:0;text-align:center;border:0;border-radius:0;font:inherit;color:inherit;align-self:stretch}
+.kfc .info{position:absolute;top:6px;right:6px;margin:0}
+.kf b{display:block;font-family:var(--display);font-weight:800;font-size:var(--t-l);line-height:1.15;font-variant-numeric:tabular-nums}
+.kf .kft{display:block;font-style:normal;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;line-height:1.2;color:var(--berry-deep)}
+.kf span{display:block;font-size:var(--t-s);font-weight:700;line-height:1.25}
+.kf .rng{display:block;font-size:var(--t-s);font-weight:600;line-height:1.25;color:var(--muted);margin-top:2px;opacity:1}
+.kf.dark{background:#5A2C4C;border-color:var(--ink)}
+.kf.dark .kfc{background:var(--ink);color:#fff}
+.kf.dark .kft{color:#FF9EC0}
+.kf.dark .rng{color:#F3DDE8}
+.kf button.kfc:focus-visible{outline-offset:-4px;outline-color:var(--butter)}
+.kf:not(.dark) button.kfc:focus-visible{outline-color:var(--ink)}
+.info{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;border:1.5px solid currentColor;font-style:normal;font-family:var(--body);font-size:11px;font-weight:800;line-height:1;margin-left:4px;vertical-align:1px;text-transform:none}
+.seeb{margin-top:12px;min-height:52px;font-size:17px;padding:6px 16px}
+.seeb small{display:block;font-family:var(--body);font-size:14px;font-weight:700;line-height:1.2;margin-top:2px}
+.pg .lead2{font-size:var(--t-m);line-height:1.45;margin-top:8px}
+.pg .pts{margin-top:12px;gap:10px}
+.pg .pts li{font-size:var(--t-m);line-height:1.35}
+.pts b{font-family:var(--body);font-weight:800}
+.catchb{display:grid;grid-template-columns:24px minmax(0,1fr);gap:9px;margin-top:12px;padding:10px 12px 11px;border-radius:14px;background:#FFF3C9}
+.catchb .ctl{font-family:var(--body);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;line-height:1.3;color:#6B4A00}
+.catchb p{font-size:16px;line-height:1.35}
+.catchb p+p{margin-top:4px}
+.catchb .pi.warn{color:#6B4A00}
+.story{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:10px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;margin:10px calc(-1 * max(16px,env(safe-area-inset-left,0px))) 0;padding:0 16px 8px;scroll-padding-left:16px;-webkit-overflow-scrolling:touch}
+.scene{scroll-snap-align:start;min-width:0;background:var(--white);border:2px solid var(--ink);border-radius:18px;padding:12px 14px 14px;box-shadow:3px 3px 0 var(--yc,var(--berry))}
+.sct{display:flex;gap:10px;align-items:center}
+.sct>div{min-width:0}
+.sci{flex:0 0 auto;width:40px;height:40px;border-radius:50%;border:2.5px solid var(--yc,var(--berry));background:var(--paper);display:grid;place-items:center}
+.sct small{display:block;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;line-height:1.2;color:var(--muted)}
+.sct h3{font-weight:800;font-size:20px;line-height:1.1}
+.scap{font-family:var(--display);font-weight:800;margin-top:10px}
+.scene p{font-size:16px;line-height:1.4;margin-top:6px}
+.scene .scap{margin-top:10px}
+.glance{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px 12px}
+.glf{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;align-items:start;text-align:left;width:100%;min-width:0}
+button.glf{border:0;background:none;padding:0;min-height:44px;font:inherit;color:inherit}
+.glance b{display:block;font-family:var(--display);font-weight:800;font-size:16px;line-height:1.2}
+.glance small{display:block;font-size:14px;font-weight:600;line-height:1.25;color:var(--muted)}
+button.glf b{text-decoration:underline;text-decoration-color:var(--berry);text-underline-offset:3px}
+.pull{margin:26px 0 0;padding:2px 0 2px 16px;border-left:4px solid var(--berry)}
+.pull blockquote{margin:0;font-family:var(--display);font-weight:700;font-size:20px;line-height:1.25}
+.pull blockquote::before{content:"\201C"}
+.pull blockquote::after{content:"\201D"}
+.pull figcaption{font-size:14px;font-weight:700;color:var(--muted);margin-top:6px;line-height:1.4}
+.pg .rowstop{margin:-30px 0 -2px}
+.pg .rl{font-size:13px}
+.pg .rs{font-size:14px;line-height:1.35}
+.pg .bcard .l2.full{display:-webkit-box;-webkit-line-clamp:2;overflow:hidden}
+.pg .hood.card h3,.pg .cardl h3{font-size:20px;line-height:1.1}
+.pg .hood.card small,.pg .cardl small{font-size:14px}
+.pg .l2{font-size:16px}
+.pg .chip b{font-size:16px}
+.pg .chip small,.pg .hood.card .chip small{font-size:13px;line-height:1.25}
+.pg .cardl .confl{font-size:14px}
+.pg .morectl .facts{font-size:14px}
+.panel h3{font-weight:800;font-size:18px}
+#sec-voices .quote:first-of-type{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.3}
+#sec-voices .quote:first-of-type small{font-family:var(--body)}
 </style>
 </head>
 <body>
@@ -1441,7 +1513,7 @@ function seenShort(iso){if(!iso)return "date seen not known";
   try{return "seen "+new Date(iso).toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"America/New_York"})}catch(e){return "seen "+dayStr(iso)}}
 function seenLong(iso){if(!iso)return NK;
   try{return new Date(iso).toLocaleString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit",timeZone:"America/New_York"})+" New York time"}catch(e){return String(iso)}}
-function distWords(m){if(m==null)return NK;if(m<=1600)return "a "+Math.max(1,Math.round(m/WALK_M_PER_MIN))+"-minute walk";return (Math.round(m/1609.34*10)/10)+" miles away"}
+function distWords(m){if(m==null)return NK;if(m<=1600)return "a "+Math.max(1,Math.round(m/WALK_M_PER_MIN))+"-minute walk";var mi=m/1609.34;return (mi<3?Math.round(mi*10)/10:Math.round(mi))+(Math.round(mi*10)===10||(mi>=3&&Math.round(mi)===1)?" mile":" miles")+" away"}
 function ext(url,label){url=okUrl(url);return url?' <a class="srcl" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label||"source")+' ↗</a>':''}
 function hostOf(url){try{return new URL(url).hostname.replace(/^www\./,"")}catch(e){return "source"}}
 function humanize(k){k=String(k||"").replace(/_/g," ");return k.charAt(0).toUpperCase()+k.slice(1)}
@@ -2103,7 +2175,7 @@ var HL={
   voices:function(H){var vs=arr(H.local&&H.local.voices).filter(function(v){return v&&(typeof v==="string"||v.excerpt)}),p=0,n=0,th={},top=null;if(!vs.length)return "none found yet";
     vs.forEach(function(v){var s=String(v.sentiment||"");if(/^pos/i.test(s))p++;else if(/^neg/i.test(s))n++;var t=v.theme;if(t&&!CRIME_RE.test(String(t).replace(/_/g," "))&&!/safety/i.test(t))th[t]=(th[t]||0)+1});
     Object.keys(th).forEach(function(t){if(!top||th[t]>th[top])top=t});
-    return [p?p+" positive":"",n?n+" negative":"",!p&&!n?pl(vs.length,"comment"):""].filter(Boolean).join(", ")},
+    return [p?p+" positive":"",n?n+" negative":"",!p&&!n?pl(vs.length,"comment"):""].filter(Boolean).join(", ")+(top?" · mostly "+themeWord(top).toLowerCase():"")},
   /* what most of the comments are about: said inside the row, not in its headline */
   voicesTopic:function(H){var th={},top=null;arr(H.local&&H.local.voices).forEach(function(v){var t=v&&v.theme;if(t&&!CRIME_RE.test(String(t).replace(/_/g," "))&&!/safety/i.test(t))th[t]=(th[t]||0)+1});
     Object.keys(th).forEach(function(t){if(!top||th[t]>th[top])top=t});return top?themeWord(top):""},
@@ -2119,7 +2191,7 @@ var HL={
     return s.length<=HL_MAX?s:pl(a.length,"description")},
   here:function(H){var t=H.traits||{},o=[];if(t.restaurants_800m!=null)o.push(pl(r0(t.restaurants_800m),"restaurant")+" on foot");if(t.park_walk_min!=null)o.push("green "+Math.max(1,r0(t.park_walk_min))+" min");
     if(!o.length&&t.supermarket_m_c!=null)o.push("supermarket "+distWords(t.supermarket_m_c));return o.length?o.join(", "):"not known yet"},
-  yearCost:function(Y){var f=yearNums(Y);return f.cost==null?"not known yet":"about "+m0(f.cost)+" a month all-in"},
+  yearCost:function(Y){var f=yearNums(Y);return f.cost==null?"not known yet":m10(f.cost)+" a month all-in, typically"},
   yearTrip:function(Y){var f=yearNums(Y),M=Y.medians||{};return HL.trip({drive_min:f.drive,toll_round_trip:M.toll_round_trip})},
   places:function(H){var cf=costFig(H.units);return cf?(cf.n>1?"about "+m0(cf.m):m0(cf.m))+" a month":"nothing to tour"},
   count:function(n,w){return pl(n,w)},
@@ -2158,7 +2230,7 @@ function hoodStandout(H){var t=H.traits||{};
   if(H.transit_min!=null&&H.transit_min<=45)return chip(r0(H.transit_min)+" min","by train and bus");
   return ""}
 function hoodChips(H){var cf=costFig(H.units),N=H.units.length;
-  return '<div class="chips">'+(cf?chip((cf.n>1?"about ":"")+m0(cf.m),cf.n>1&&m0(cf.r[0])!==m0(cf.r[1])?m0(cf.r[0])+" to "+m0(cf.r[1]):"a month, all-in","wide"):chip(N?"Price not known":"Nothing to tour","","wide"))+
+  return '<div class="chips">'+(cf?chip(cf.n>1?m10(cf.m):m0(cf.m),cf.n>1?"typical all-in"+(m10(cf.r[0])!==m10(cf.r[1])?", from "+m10(cf.r[0])+" to "+m10(cf.r[1]):""):"a month, all-in","wide"):chip(N?"Price not known":"Nothing to tour","","wide"))+
     (H.drive_min!=null?chip(r0(H.drive_min)+" min","to Mom and Dad"):chip("Ask","drive time not known"))+hoodStandout(H)+'</div>'}
 function hoodCard(H,Y,pick){var k=H.units.filter(fits).length,N=H.units.length,none=!k,top=pick!=null&&pick>-1&&pick<3,line=hoodLine(H);if(top)line=leadText(line,70,170);
   return '<a class="hood card'+(none?' none':'')+(top?' pickc':'')+'" href="'+href("hood",H.id)+'"><div class="hd"><span class="pinl" style="background:'+(N?Y.color:"#fff")+'">'+H.n+'</span><div><h4>'+esc(hoodTitle(H))+'</h4><small>'+ymark(Y,13)+esc([hoodPart(H)?hoodWhere(H):H.state,N?(k===N?pl(N,"place"):k+" of "+N+" fit your limits"):"nothing to tour",H.avoid.length?H.avoid.length+" to avoid":""].filter(Boolean).join(" · "))+'</small></div>'+(top&&pick===0&&Y.ranked?'<span class="pick">Top pick</span>':'')+'</div>'+safeBadge(H)+(line?'<p class="l2'+(top?' full':'')+'">'+esc(line)+'</p>':'')+hoodChips(H)+'</a>'}
@@ -2206,6 +2278,7 @@ var PT_IC=(function(){var s=function(d){return '<svg viewBox="0 0 24 24" width="
     ruler:s('<rect x="2" y="8" width="20" height="8" rx="1.500"/><path d="M6 8v3M10 8v4M14 8v3M18 8v4"/>'),
     laundry:s('<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M7 6h2"/>'),
     pool:s('<path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 21c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M8 14V5a2 2 0 0 1 4 0M16 14V5a2 2 0 0 0-4 0M8 9h8"/>'),
+    bag:s('<path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>'),
     warning:s('<path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17v.500"/>'),
     camera:s('<path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.500"/>'),
     dot:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>'}})();
@@ -2218,14 +2291,22 @@ function sentences(t){t=textOf(t).replace(/\s+/g," ").trim();if(!t)return [];var
 /* the opening of a text: whole sentences until there is something to read (a bare "Okay." is not a lead) */
 function leadText(t,min,max){var s=sentences(calm(textOf(t))),o="",i=0;while(i<s.length&&o.length<min&&(o+" "+s[i]).trim().length<=max){o=(o+" "+s[i]).trim();i++}return o||s[0]||""}
 function leadCount(s,min,max){var o="",i=0;while(i<s.length&&o.length<min&&(o+" "+s[i]).trim().length<=max){o=(o+" "+s[i]).trim();i++}return Math.max(1,i)}
-function ptList(a){return '<ul class="pts">'+a.map(function(p){return '<li><span class="pi'+(p.warn?' warn':'')+'">'+ptIcon(p.icon)+'</span><span>'+(p.b?'<b>'+esc(p.b)+'</b> ':'')+esc(p.text)+'</span></li>'}).join("")+'</ul>'}
-function aboutPoints(o){return arr(o&&o.about_points).map(function(p){return typeof p==="string"?{text:p}:p}).filter(function(p){return p&&textOf(p.text)}).map(function(p){return {icon:p.icon,text:calm(textOf(p.text))}}).filter(function(p){return p.text})}
-function aboutBox(title,o,text,id,katch){var pts=aboutPoints(o),h="",c=calm(textOf(katch));
-  if(pts.length){var lead=sentences(calm(textOf(text))).join(" ");h=(lead?'<p class="lead2">'+esc(lead)+'</p>':'')+ptList(pts)} /* the written lead, then the points */
+function ptList(a){return '<ul class="pts">'+a.map(function(p){return '<li><span class="pi'+(p.warn?' warn':'')+'">'+ptIcon(p.icon)+'</span><span>'+(p.b?'<b>'+esc(p.b)+'</b> ':'')+ptBody(p)+'</span></li>'}).join("")+'</ul>'}
+function aboutPoints(o){return arr(o&&o.about_points).map(function(p){return typeof p==="string"?{text:p}:p}).filter(function(p){return p&&textOf(p.text)}).map(function(p){return {icon:p.icon,lead:textOf(p.lead||p.title),text:calm(textOf(p.text))}}).filter(function(p){return p.text})}
+/* One point, easy to scan: a written lead-in in bold when the data has one ("lead"), or the text's own "Lead: rest"; otherwise its first figure in bold. */
+var QTY_RE=/\$\d[\d,]*(?:\.\d+)?(?:\s+(?:a month|round trip))?|\b\d[\d,]*(?:\.\d+)?\s*(?:percent|minutes?|miles?|square feet|sq ft|restaurants?|bars?|cafés?|places?|buildings?|apartments?|blocks?|hours?)\b/i;
+function ptBody(p){var t=String(p.text),lead=p.lead?String(p.lead):"",m;
+  if(!lead&&(m=/^([^:.]{3,28}):\s+(\S[\s\S]*)$/.exec(t))){lead=m[1]+":";t=m[2]}
+  if(lead)return '<b>'+esc(lead)+'</b> '+esc(t);
+  m=QTY_RE.exec(t);return m?esc(t.slice(0,m.index))+'<b>'+esc(m[0])+'</b>'+esc(t.slice(m.index+m[0].length)):esc(t)}
+function catchBox(a){return a.length?'<div class="catchb"><span class="pi warn">'+PT_IC.warning+'</span><div><h3 class="ctl">The catch</h3>'+a.map(function(t){return '<p>'+ptBody({text:t})+'</p>'}).join("")+'</div></div>':''}
+function aboutBox(title,o,text,id,katch){var all=aboutPoints(o),pts=all.filter(function(p){return String(p.icon).toLowerCase()!=="warning"}),warn=all.filter(function(p){return String(p.icon).toLowerCase()==="warning"}).map(function(p){return p.text}),h="",c=calm(textOf(katch));
+  if(all.length){var lead=sentences(calm(textOf(text))).join(" ");h=(lead?'<p class="lead2">'+esc(lead)+'</p>':'')+(pts.length?ptList(pts):'')} /* the written lead, then the points */
   else{var s=sentences(calm(textOf(text)));if(!s.length&&!c)return "";
     var nl=s.length?Math.max(2,leadCount(s,110,260)):0;
     h=(s.length?'<p class="lead2">'+esc(s.slice(0,nl).join(" "))+'</p>':'')+(s.length>nl?ptList(s.slice(nl).map(function(x){return {text:x}})):'')}
-  if(c)h+=ptList([{icon:"warning",b:"The catch:",text:c,warn:true}]);
+  if(c)warn.push(c);
+  h+=catchBox(warn);
   return '<section class="sec about" id="'+id+'"><h2 class="h2s">'+esc(title)+'</h2>'+h+'</section>'}
 /* The three moments of an experience's day: day_moments [{icon, title, text}] when the data has them, else the walkthrough's three paragraphs. */
 var DAY_TITLES=[["sun","A weekday"],["cocktail","Saturday night"],["heart","Sunday with Mom and Dad"]];
@@ -2233,7 +2314,6 @@ function dayMoments(Y){var dm=arr(Y.day_moments).filter(function(m){return m&&te
   if(dm.length)return dm;
   return paras(hostOfRec(Y,"walkthrough")).map(function(t,i){var d=DAY_TITLES[i]||["dot","And then"];return {icon:d[0],title:d[1],text:calm(t)}}).filter(function(m){return m.text})}
 function momentsHtml(a){return '<div class="dmoms">'+a.map(function(m){return '<div class="dmom"><h4><span class="pi">'+ptIcon(m.icon)+'</span>'+esc(m.title)+'</h4><p>'+esc(m.text)+'</p></div>'}).join("")+'</div>'}
-function seeBtn(label,to,id){return '<button type="button" class="btn main wide seeb" id="'+id+'" data-act="scrollto" data-to="'+to+'">'+esc(label)+' ↓</button>'}
 /* Illustrations (site/illustrations.json, drawn by hand elsewhere): {<experience id or label>: {svg, alt}}. Nothing is shown without one. */
 function illus(Y,kind){var I=ILLUS,x=null;if(!I||typeof I!=="object")return "";
   [Y.raw_label,Y.display_label,Y.id,Y.label].some(function(k){var e=k!=null?I[k]:null;if(typeof e==="string")e=I[e];if(e&&typeof e==="object"){x=e;return true}return false});
@@ -2241,30 +2321,66 @@ function illus(Y,kind){var I=ILLUS,x=null;if(!I||typeof I!=="object")return "";
   svg=svg.replace(/<script[\s\S]*?<\/script\s*>/gi,"").replace(/<foreignObject[\s\S]*?<\/foreignObject\s*>/gi,"").replace(/\son[a-z]+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi,"").replace(/(href\s*=\s*["']?)\s*javascript:[^"'\s>]*/gi,"$1#");
   return '<div class="illus '+kind+'">'+svg+'</div>'}
 
+/* ---- pass 5: the key facts of an experience or a neighborhood: three cells, the typical figure big, its range small beneath.
+   A cell that explains itself on tap is a real button. ---- */
+function m10(v){return money(Math.round(v/10)*10)}
+function tollMoney(t){t=Number(t);return t>0&&t<1?"under $1":money(Math.round(t))}
+function rngFrom(r,f,unit){return r&&f(r[0])!==f(r[1])?'<small class="rng">from '+f(r[0])+' to '+f(r[1])+(unit||"")+'</small>':''}
+var INFO_I='<i class="info" aria-hidden="true">i</i>';
+function kfacts(cells,dark){cells=cells.filter(Boolean);var anyT=cells.some(function(c){return c.t});
+  return '<div class="kf'+(dark?' dark':'')+'" id="keyfacts">'+cells.map(function(c){var inner=(anyT?'<i class="kft"'+(c.t?'':' aria-hidden="true"')+'>'+(c.t||'&nbsp;')+'</i> ':'')+'<b>'+c.b+'</b> <span>'+c.s+'</span>'+(c.r?' '+c.r:'')+(c.act?INFO_I:'');
+    return c.act?'<button type="button" class="kfc" data-act="'+c.act+'"'+(c.attr||'')+' aria-haspopup="dialog">'+inner+'</button>':'<div class="kfc">'+inner+'</div>'}).join("")+'</div>'}
+function tollFact(o,typ,kind,id){var t=o&&o.toll_round_trip;if(t==null)return {b:"Ask",s:"tolls not fully known"};if(Number(t)===0)return {t:typ?"typical":"",b:"No tolls",s:"on the drive"};
+  return {t:typ?"typical":"",b:tollMoney(t),s:"tolls, round trip",r:'<small class="rng">with NY E-ZPass</small>',act:"toll-info",attr:' data-kind="'+kind+'" data-id="'+esc(id)+'"'}}
+function tollSheet(o,name,typ){var t=o.toll_round_trip,m=tollMail(o);
+  return shTop("Tolls, round trip",esc(name))+'<p>'+(typ?"A typical drive":"The drive")+' to Mom and Dad and back costs '+money(t)+' in tolls with a New York E-ZPass: the small tag on the windshield that pays each toll at the lower rate.</p>'+(m!=null&&m>0?'<p style="margin-top:8px">Without the tag the bill comes by mail'+(typ?', typically ':': ')+money(m)+' a round trip.</p>':'')+how("tolls from "+SOURCES.tolls)}
+function allInSheet(us,name){return shTop("All-in, a month",esc(name))+allInLine(us)}
+function costFact(us,cost,r,typ,kind,id){return cost!=null?{t:typ?"typical":"",b:typ?m10(cost):m0(cost),s:"a month, all-in",r:typ?rngFrom(r,m10):"",act:"allin-info",attr:' data-kind="'+kind+'" data-id="'+esc(id)+'"'}:null}
+/* the short street-parking answer: the rule that changes what she does, in two or three words */
+var PARK_SHORT=[["overnight_parking","Overnight limits"],["resident_permit","Permit zones"],["alternate_side","Street-cleaning days"],["snow_emergency","Snow-day bans"],["meter_hours","Metered streets"]];
+function parkShort(H){var a=rulesOf(H,"parking_rules"),i;if(!a.length)return null;
+  for(i=0;i<RULE_FLAG.length;i++){var F=RULE_FLAG[i];if(a.some(function(r){return r.rule===F.rule&&F.re.test(r.summary||"")}))return F.rule==="overnight_parking"?"No overnight parking":"Permit by registration"}
+  for(i=0;i<PARK_SHORT.length;i++){if(a.some(function(r){return r.rule===PARK_SHORT[i][0]}))return PARK_SHORT[i][1]}
+  return pl(a.length,"rule")+" on record"}
+function distShort(m){if(m==null)return null;if(m<=1600)return Math.max(1,Math.round(m/WALK_M_PER_MIN))+" min walk";var mi=m/1609.34;return (mi<3?Math.round(mi*10)/10:Math.round(mi))+" miles"}
+/* "At a glance": what is around, as icon facts. Always the same facts in the same places; one that the data lacks is left out. */
+function glance(H){var t=H.traits||{},o=[],ps=parkShort(H);
+  if(t.restaurants_800m!=null)o.push(["fork",pl(r0(t.restaurants_800m),"restaurant")+(t.bars_800m!=null?", "+pl(r0(t.bars_800m),"bar"):""),"within a 10-minute walk"]);
+  if(t.park_walk_min!=null)o.push(["park",Math.max(1,r0(t.park_walk_min))+" min walk","to a park"]);
+  if(t.dog_park_m!=null)o.push(["dog",distShort(t.dog_park_m),"to the dog park"]);
+  if(t.supermarket_m_c!=null)o.push(["bag",distShort(t.supermarket_m_c),"to a supermarket"]);
+  if(H.transit_min!=null)o.push(["train",r0(H.transit_min)+" min","to Mom and Dad by train and bus"]);
+  o.push(["parking",ps||"Ask the building","street parking","r-rules"]);
+  if(o.length<2)return "";
+  return '<section class="sec" id="sec-glance"><h2 class="h2s">At a glance</h2><ul class="glance">'+o.map(function(x){var inner='<span class="pi">'+ptIcon(x[0])+'</span><span><b>'+esc(x[1])+'</b> <small>'+esc(x[2])+'</small></span>';
+    return '<li>'+(x[3]?'<button type="button" class="glf" data-act="goto-row" data-to="'+x[3]+'">'+inner+'</button>':'<div class="glf">'+inner+'</div>')+'</li>'}).join("")+'</ul></section>'}
+/* The three moments of an experience's day as a storyboard: three cards side by side, one in view and the next peeking in. */
+function storyHtml(a,Y){var n=a.length,col=Y&&Y.mark?Y.mark.color:"var(--berry-deep)";
+  return '<section class="sec" id="sec-day"><h2 class="h2s">A day in this experience</h2><div class="story" role="group" aria-label="'+n+' moments, side by side" tabindex="0">'+a.map(function(m,i){var s=sentences(m.text),cap=s.length>1&&s[0].length<=48?s[0]:"",rest=cap?s.slice(1).join(" "):m.text;
+    return '<article class="scene" style="--yc:'+col+'"><div class="sct"><span class="sci">'+ptIcon(m.icon)+'</span><div><small>'+(i+1)+' of '+n+'</small><h3>'+esc(m.title)+'</h3></div></div>'+(cap?'<p class="scap">'+esc(cap)+'</p>':'')+'<p>'+esc(rest)+'</p></article>'}).join("")+'</div></section>'}
+function seeBtn(label,to,id,sub){return '<button type="button" class="btn main wide seeb" id="'+id+'" data-act="scrollto" data-to="'+to+'"><span>'+esc(label)+' ↓'+(sub?' <small>'+esc(sub)+'</small>':'')+'</span></button>'}
+/* an outside description as a pull quote; the source stays a link */
+function descSrc(d){var u=okUrl(d.url),src=d.source?String(d.source):(u?hostOf(u):"");return (u?'<a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(src)+' ↗</a>':esc(src||"Source not recorded")+' · no link in the data')+(d.date?' · '+esc(dayStr(d.date,true)||String(d.date)):'')}
+function descText(d){return scrub(d.quote||d.text||d.excerpt).replace(/\s+/g," ").trim()}
+function pullPick(desc){var ok=desc.filter(function(d){return !CRIME_RE.test(descText(d))}),best=null;
+  ok.forEach(function(d){if(!best&&(d.featured||d.best)&&descText(d).length<=240)best=d}); /* the data may name the one to feature */
+  ok.forEach(function(d){var n=descText(d).length;if(n>=40&&n<=200&&!best)best=d});
+  if(!best)ok.forEach(function(d){var n=descText(d).length;if(n>=40&&(!best||n<descText(best).length))best=d});
+  return best&&descText(best).length<=240?best:null}
+function pullQuote(d){return d?'<figure class="pull" id="pull"><blockquote>'+esc(descText(d))+'</blockquote><figcaption>'+descSrc(d)+'</figcaption></figure>':''}
+
 /* ---- an experience ---- */
 var SCALE_KEY='<div class="scalekey">'+pips(3)+howHtml('<p>The middle mark is a typical Queens place. Left is worse for you, right is better. Tap a line to see how it was reached.</p>',"How to read this")+'</div>';
-function tollCell(o,typ){var t=o&&o.toll_round_trip;return t==null?{b:"Ask",s:"tolls not fully known"}:Number(t)===0?{b:"No tolls",s:typ?"typically":"round trip"}:{b:money(t),s:(typ?"typical ":"")+(tollMail(o)!=null?"tolls, NY E-ZPass":"tolls a visit")}}
+function tollCell(o,typ){var t=o&&o.toll_round_trip;return t==null?{b:"Ask",s:"tolls not fully known"}:Number(t)===0?{b:"No tolls",s:typ?"typically":"round trip"}:{b:tollMoney(t),s:(typ?"typical ":"")+"tolls, round trip"}}
 function vYear(Y){
   var us=Y.units,c=Y.all_in_range,M=Y.medians||{},nx=YEARS[YEARS.indexOf(Y)+1],hs=Y.hoods,line=calmClause(Y.tagline)||calmClause(Y.subhead),f=yearNums(Y);
-  var h='<div class="wrap">'+illus(Y,"tall")+'<section class="sec head"><h1 class="ph1">'+ymark(Y,24)+esc(Y.label)+'</h1>'+(line?'<p class="psub">'+esc(line)+'</p>':'')+
-    strip([f.cost!=null?{b:m0(f.cost),s:"typical, all-in",r:rng(f.cr,m0)}:{b:"Ask",s:"cost not known"},f.drive!=null?{b:r0(f.drive)+" min",s:"typical drive to Mom and Dad",r:rng(f.dr,r0," min")}:{b:"Ask",s:"drive not known"},tollCell(M,true),{b:String(us.length),s:us.length===1?"place":"places",to:"sec-hoods"}],true)+
-    (hs.length?seeBtn("See the "+pl(hs.length,"neighborhood"),"sec-hoods","see-hoods"):'')+'</section>';
+  var h='<div class="wrap pg pg-exp">'+illus(Y,"banner")+'<section class="sec head"><h1 class="ph1">'+ymark(Y,24)+' '+esc(Y.label)+'</h1>'+(line?'<p class="psub">'+esc(line)+'</p>':'')+
+    kfacts([costFact(us,f.cost,f.cr,true,"year",Y.id)||{b:"Ask",s:"cost not known"},f.drive!=null?{t:"typical",b:r0(f.drive)+" min",s:"drive to Mom and Dad",r:rngFrom(f.dr,r0," min")}:{b:"Ask",s:"drive not known"},tollFact(M,true,"year",Y.id)],true)+
+    (hs.length?seeBtn("See the "+pl(hs.length,"neighborhood"),"sec-hoods","see-hoods",pl(us.length,"place")+" to see"):'')+'</section>';
   var prom=calm(pr(Y,"promise")),kat=calm(pr(Y,"catch")),yf=yearFacts(Y),dm=dayMoments(Y),scenes=dm.length?"":slotText(calmV(pr(Y,"scene")||Y.scenes));
   h+=aboutBox("About this experience",Y,hostOfRec(Y,"intro"),"about");
-  var near=null,far=null;hs.forEach(function(H){if(H.drive_min==null)return;if(!near||H.drive_min<near.drive_min)near=H;if(!far||H.drive_min>far.drive_min)far=H});
-  var costHow=[];
-  if(us.length)costHow.push("The big figure is the median of the "+pl(us.length,"place")+" here: half cost more, half less. The small one is the lowest and the highest.");
-  if(c)costHow.push("All-in runs from "+money(c[0])+" to "+money(c[1])+" a month"+(seenRange(us)?" (prices "+seenRange(us)+")":"")+".");
-  if(near&&far&&near!==far)costHow.push("The nearest neighborhood is "+near.name+", "+r0(near.drive_min)+" minutes by car; the farthest is "+far.name+", "+r0(far.drive_min)+".");
-  if(M.toll_round_trip!=null&&tollMail(M)!=null)costHow.push("Tolls are the New York E-ZPass figure. By mail they are typically "+money(tollMail(M))+" a visit.");
-  costHow.push(capFirst(["prices from "+SOURCES.listing,"drive times, without traffic, from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"train and bus from "+SOURCES.transit,"restaurant counts and walks to green space from "+SOURCES.map].join("; "))+".");
-  h+='<section class="sec rows" id="sec-rows">'+rowsTop();
-  if(scenes||dm.length||prom||kat)h+=row("r-scene","A day in this experience",dm.length?HL.first(dm[0].text):HL.first(pr(Y,"scene")||Y.scenes||prom||kat),scenes+(dm.length?momentsHtml(dm):'')+(prom||kat?'<div class="two" style="margin-top:10px">'+(prom?'<div class="panel love"><h4>The promise</h4><p>'+esc(prom)+'</p></div>':'')+(kat?'<div class="panel pause"><h4>The catch</h4><p>'+esc(kat)+'</p></div>':'')+'</div>':''),{sub:hlSub(Y,"day","scene")});
-  if(us.length)h+=row("r-cost","What it costs you",HL.yearCost(Y),allInLine(us)+'<div class="figs" style="margin-top:8px"><div>'+(f.cost!=null?'<b>about '+m0(f.cost)+'</b><span>a month, all-in</span>'+rng(f.cr,m0):'<b>'+NK+'</b>')+'</div><div>'+(f.drive!=null?'<b>about '+r0(f.drive)+' min</b><span>to Mom and Dad</span>'+rng(f.dr,r0," min"):'<b>'+NK+'</b>')+'</div></div>'+(M.transit_min!=null?'<p style="margin-top:8px">About '+r0(M.transit_min)+' minutes by train and bus.</p>':'')+(M.sqft!=null?'<p>A typical place is '+r0(M.sqft)+' sq ft.</p>':'')+howHtml('<p>'+costHow.map(esc).join('</p><p>')+'</p>'),{sub:hlSub(Y,"cost","to_parents")});
-  if(M.restaurants_800m!=null||M.park_walk_min!=null)h+=row("r-out","Going out and green space",HL.out(M),'<ul>'+lis(yf.slice(2).concat(hlSub(Y,"green")&&hlSub(Y,"going_out")?[hlSub(Y,"green")]:[]))+'</ul>'+how("restaurant counts and walks to green space from "+SOURCES.map),{sub:hlSub(Y,"going_out","green")});
-  if(SPEC_OPEN.length&&Y.vs_queens&&SPEC_OPEN.some(function(s){return Y.vs_queens[s.measure]!=null}))h+=row("r-queens","Compared to staying in Queens",HL.queens(Y.vs_queens),SCALE_KEY+'<div class="ylist">'+SPEC_OPEN.map(function(s){var p=Y.vs_queens[s.measure],dk=YEAR_DIFF_KEY[s.measure],d=dk&&Y.vs_queens_diff?Y.vs_queens_diff[dk]:null;p=p==null?null:Math.round(p);
-      return pointBtn("year",Y.id,s.measure,p,d==null?(p===3?"same":"difference not in the data"):fmtDiff(s.measure,d),true)}).join("")+'</div>',{sub:hlSub(Y,"compared_to_queens","queens")});
-  h+='</section><section class="sec" id="sec-hoods"><h2 class="h2s">'+(hs.length?pl(hs.length,"neighborhood"):"Neighborhoods")+'</h2>';
+  if(dm.length)h+=storyHtml(dm,Y);
+  h+='<section class="sec" id="sec-hoods"><h2 class="h2s">'+(hs.length?pl(hs.length,"neighborhood"):"Neighborhoods")+(us.length?' <span class="fig">'+pl(us.length,"place")+'</span>':'')+'</h2>';
   if(!hs.length)h+='<div class="empty" style="margin-top:12px"><p><b>Nothing to tour in this experience yet.</b></p><a class="btn main" href="#lives">Back to the experiences</a></div>';
   var asMap=HOODVIEW==="map"&&hs.length>0;
   if(hs.length)h+='<div class="viewsw" role="group" aria-label="Show the neighborhoods as a list or on a map"><button type="button" data-act="hoodview" data-v="list" aria-pressed="'+(!asMap)+'">'+IC_LIST+'List</button><button type="button" data-act="hoodview" data-v="map" aria-pressed="'+asMap+'">'+IC_MAP+'Map</button></div>';
@@ -2274,24 +2390,44 @@ function vYear(Y){
     hs.slice(0,nH).forEach(function(H,i){h+=hoodCard(H,Y,i)});
     h+='</div>'+moreCtl("y:"+Y.id,nH,hs.length,6,"neighborhoods")}
   h+='</section>';
-  if(Y.avoidOnly.length||Y.heldElsewhere.length||Y.waitElsewhere.length){h+='<section class="sec rows">';
-    if(Y.avoidOnly.length)h+=row("r-warn","Only warnings here",pl(Y.avoidOnly.length,"neighborhood")+" with nothing to tour",'<div class="stack tight">'+Y.avoidOnly.map(function(H){return hoodCard(H,Y)}).join("")+'</div>');
-    if(Y.heldElsewhere.length)h+=row("r-call","Worth a phone call, in other towns",pl(Y.heldElsewhere.length,"place")+", two or more things each",'<div class="stack tight">'+Y.heldElsewhere.map(function(U){return callItem(U,slugName(U.hood_id))}).join("")+'</div>');
-    if(Y.waitElsewhere.length)h+=row("r-wait","Not re-checked yet, in other towns",pl(Y.waitElsewhere.length,"place"),'<div class="stack tight">'+Y.waitElsewhere.map(function(A){return waitItem(A,slugName(A.hood_id))}).join("")+'</div>');
-    h+='</section>'}
+  var near=null,far=null;hs.forEach(function(H){if(H.drive_min==null)return;if(!near||H.drive_min<near.drive_min)near=H;if(!far||H.drive_min>far.drive_min)far=H});
+  var costHow=[];
+  if(us.length)costHow.push("The big figure is the median of the "+pl(us.length,"place")+" here: half cost more, half less. The small one is the lowest and the highest.");
+  if(c)costHow.push("All-in runs from "+money(c[0])+" to "+money(c[1])+" a month"+(seenRange(us)?" (prices "+seenRange(us)+")":"")+".");
+  if(near&&far&&near!==far)costHow.push("The nearest neighborhood is "+near.name+", "+r0(near.drive_min)+" minutes by car; the farthest is "+far.name+", "+r0(far.drive_min)+".");
+  if(M.toll_round_trip!=null&&tollMail(M)!=null)costHow.push(tollMail(M)>0?"Tolls are the New York E-ZPass figure. By mail they are typically "+money(tollMail(M))+" a round trip.":"No tolls either way.");
+  costHow.push(capFirst(["prices from "+SOURCES.listing,"drive times, with clear roads, from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"train and bus from "+SOURCES.transit,"restaurant counts and walks to green space from "+SOURCES.map].join("; "))+".");
+  h+='<section class="sec rows" id="sec-rows"><h2 class="h2s">More about this experience</h2>'+rowsTop();
+  if(scenes||prom||kat)h+=row("r-scene","The promise and the catch",HL.first(prom||kat||pr(Y,"scene")||Y.scenes),scenes+(prom||kat?'<div class="two"'+(scenes?' style="margin-top:10px"':'')+'>'+(prom?'<div class="panel love"><h3>The promise</h3><p>'+esc(prom)+'</p></div>':'')+(kat?'<div class="panel pause"><h3>The catch</h3><p>'+esc(kat)+'</p></div>':'')+'</div>':''),{sub:dm.length?"":hlSub(Y,"day","scene")});
+  if(us.length)h+=row("r-cost","What it costs you",HL.yearCost(Y),allInLine(us)+'<div class="figs" style="margin-top:8px"><div>'+(f.cost!=null?'<b>'+m0(f.cost)+'</b><span>a month, all-in, typical</span>'+rngFrom(f.cr,m0):'<b>'+NK+'</b>')+'</div><div>'+(f.drive!=null?'<b>'+r0(f.drive)+' min</b><span>to Mom and Dad, typical</span>'+rngFrom(f.dr,r0," min"):'<b>'+NK+'</b>')+'</div></div>'+(M.transit_min!=null?'<p style="margin-top:8px">'+r0(M.transit_min)+' minutes by train and bus, typically.</p>':'')+(M.sqft!=null?'<p>A typical place is '+r0(M.sqft)+' sq ft.</p>':'')+howHtml('<p>'+costHow.map(esc).join('</p><p>')+'</p>'),{sub:hlSub(Y,"cost","to_parents")});
+  if(M.restaurants_800m!=null||M.park_walk_min!=null)h+=row("r-out","Going out and green space",HL.out(M),'<ul>'+lis(yf.slice(2).concat(hlSub(Y,"green")&&hlSub(Y,"going_out")?[hlSub(Y,"green")]:[]))+'</ul>'+how("restaurant counts and walks to green space from "+SOURCES.map),{sub:hlSub(Y,"going_out","green")});
+  if(SPEC_OPEN.length&&Y.vs_queens&&SPEC_OPEN.some(function(s){return Y.vs_queens[s.measure]!=null}))h+=row("r-queens","Compared to staying in Queens",HL.queens(Y.vs_queens),SCALE_KEY+'<div class="ylist">'+SPEC_OPEN.map(function(s){var p=Y.vs_queens[s.measure],dk=YEAR_DIFF_KEY[s.measure],d=dk&&Y.vs_queens_diff?Y.vs_queens_diff[dk]:null;p=p==null?null:Math.round(p);
+      return pointBtn("year",Y.id,s.measure,p,d==null?(p===3?"same":"difference not in the data"):fmtDiff(s.measure,d),true)}).join("")+'</div>',{sub:hlSub(Y,"compared_to_queens","queens")});
+  if(Y.avoidOnly.length)h+=row("r-warn","Looked good, skipped",pl(Y.avoidOnly.length,"neighborhood")+" with nothing to tour",'<div class="stack tight">'+Y.avoidOnly.map(function(H){return hoodCard(H,Y)}).join("")+'</div>');
+  if(Y.heldElsewhere.length)h+=row("r-call","Worth a phone call, in other towns",pl(Y.heldElsewhere.length,"more place")+", if a call clears up two questions",'<div class="stack tight">'+Y.heldElsewhere.map(function(U){return callItem(U,slugName(U.hood_id))}).join("")+'</div>');
+  if(Y.waitElsewhere.length)h+=row("r-wait","Not re-checked yet, in other towns",pl(Y.waitElsewhere.length,"place"),'<div class="stack tight">'+Y.waitElsewhere.map(function(A){return waitItem(A,slugName(A.hood_id))}).join("")+'</div>');
+  h+='</section>';
   h+=nx?nextLink("Next experience",href("year",nx.id),nx.label):nextLink("That was the last one","#lives","All "+YEARS.length+" experiences");
   return h+'</div>'}
 
 /* ---- a neighborhood: its buildings, best first ---- */
+function hoodReviews(H){var rated=H.bldgs.map(function(B){return [B,ratingRows(B.best.ratings)]}).filter(function(x){return x[1].length&&B_OK(x[0])});
+  if(!rated.length)return null;
+  return {head:rated.length+" of "+pl(H.bldgs.length,"building")+" reviewed online",body:'<ul class="rules" id="hood-reviews">'+rated.map(function(x){return '<li><a class="link" href="'+href("bldg",x[0].id)+'">'+esc(bName(x[0]))+'</a>: '+esc(HL.reviews(x[0].best.ratings))+'</li>'}).join("")+'</ul>'}}
+function B_OK(B){return !(B.best.ratings&&B.best.ratings.found_any===false)}
 function vHood(H){
   var Y=Y_BY[H.year],hs=Y.hoods,ix=hs.indexOf(H),nx=ix>-1?hs[ix+1]:null,nxY=YEARS[YEARS.indexOf(Y)+1],N=H.units.length,NB=H.bldgs.length,t=H.traits||{},s=H.safety||{},loc=H.local||{},cf=costFig(H.units);
-  var h='<div class="wrap"><section class="sec head">'+(H.rank_in_experience!=null&&ix>-1?'<p class="kick" id="hood-rank">'+(ix===0?'Top pick':'Number '+(ix+1)+' of '+hs.length)+' in this experience</p>':'')+'<h1 class="ph1">'+esc(hoodTitle(H))+'</h1><p class="psub facts" id="hood-where">'+esc(hoodWhere(H))+(SAFEST[H.id]?' · <span class="safest">Among the safest on the list</span>':'')+'</p>'+
-    strip([cf?{b:m0(cf.m),s:cf.n>1?"typical, all-in":"a month, all-in",r:cf.n>1?rng(cf.r,m0):""}:{b:N?"Ask":"None",s:N?"price not known":"to tour"},H.drive_min!=null?{b:r0(H.drive_min)+" min",s:"to Mom and Dad"}:{b:"Ask",s:"drive not known"},tollCell(H,false),{b:String(N),s:N===1?"place":"places",to:"sec-places"}])+
-    (N?seeBtn("See the "+pl(N,"place"),"sec-places","see-places"):'')+'</section>';
+  var h='<div class="wrap pg pg-hood"><section class="sec head"><p class="kick" id="hood-rank">'+ymark(Y,14)+' '+(H.rank_in_experience!=null&&ix>-1?(ix===0?'Top pick':'Number '+(ix+1)+' of '+hs.length)+' in ':'')+esc(Y.label)+'</p><h1 class="ph1">'+esc(hoodTitle(H))+'</h1><p class="psub facts" id="hood-where">'+esc(hoodWhere(H))+(SAFEST[H.id]?' · <span class="safest">Among the safest on the list</span>':'')+'</p>'+
+    kfacts([cf?costFact(H.units,cf.m,cf.r,cf.n>1,"hood",H.id):{b:N?"Ask":"None",s:N?"price not known":"to tour"},H.drive_min!=null?{b:r0(H.drive_min)+" min",s:"drive to Mom and Dad"}:{b:"Ask",s:"drive not known"},tollFact(H,false,"hood",H.id)])+
+    (N?seeBtn("See the "+pl(N,"place"),"sec-places","see-places",NB!==N?"in "+pl(NB,"building"):""):'')+'</section>';
   var hScene=slotText(calmV(pr(H,"scene")||loc.scene)),good=slotText(calmV(pr(H,"good_for_her")||loc.good_for_her)),watch=slotText(calmV(pr(H,"watch_for")||loc.watch_for));
   h+=aboutBox("About "+hoodTitle(H),H,hostOfRec(H,"intro"),"about");
-  var desc=arr(H.described).map(function(d){return typeof d==="string"?{quote:d}:d}).filter(function(d){return d&&(d.quote||d.text||d.excerpt)});
-  var descQ=function(d){var u=okUrl(d.url),src=d.source?String(d.source):(u?hostOf(u):"");return '<p class="quote desc">“'+esc(scrub(d.quote||d.text||d.excerpt))+'”<small>'+(u?'<a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(src)+' ↗</a>':esc(src||"Source not recorded")+' · no link in the data')+(d.date?' · '+esc(dayStr(d.date,true)||String(d.date)):'')+'</small></p>'};
+  h+=glance(H);
+  var desc=arr(H.described).map(function(d){return typeof d==="string"?{quote:d}:d}).filter(function(d){return d&&(d.quote||d.text||d.excerpt)}),pulled=pullPick(desc),descRest=desc.filter(function(d){return d!==pulled});
+  h+=pullQuote(pulled);
+  var descQ=function(d){return '<p class="quote desc">“'+esc(scrub(d.quote||d.text||d.excerpt))+'”<small>'+descSrc(d)+'</small></p>'};
+  if(N){var nB=nShown("h:"+H.id,NB);h+='<section class="sec" id="sec-places"><h2 class="h2s">'+pl(N,"place")+(NB!==N?' <span class="fig">in '+pl(NB,"building")+'</span>':'')+'</h2><div class="stack tight" style="margin-top:10px">'+H.bldgs.slice(0,nB).map(function(B,i){return bldgCard(B,i)}).join("")+'</div>'+moreCtl("h:"+H.id,nB,NB,3,"buildings")+'</section>'}
+  else h+='<section class="sec" id="sec-places"><div class="empty"><p><b>Nothing to tour here yet.</b></p></div></section>';
   var pRules=rulesOf(H,"parking_rules"),carBits=[],kinds={},dogBits=[],foodBits=[],errBits=[],whoBits=[];
   H.units.forEach(function(U){var w=parkWord(U);kinds[w]=(kinds[w]||0)+1});
   Object.keys(kinds).forEach(function(w){carBits.push(kinds[w]+" of "+N+": "+w.toLowerCase())});
@@ -2315,28 +2451,25 @@ function vHood(H){
   if(s.vehicle_theft_per_1000!=null)sf.push(r1(s.vehicle_theft_per_1000)+" car thefts per 1,000 residents a year.");
   if(sf.length&&s.geography)sf.push("These numbers describe the police area, not the block: "+s.geography+".");
   var hw=[];
-  if(H.rank_in_experience!=null&&H.experience_score_basis)hw.push("<p><b>Its place in the experience:</b> "+esc(String(H.experience_score_basis))+".</p>");
-  hw.push("<p>"+esc(capFirst(["parks, dog parks, food, shops and water from "+SOURCES.map,SOURCES.walk,"who lives here from the "+SOURCES.census,"local rules from the town pages linked beside each one","drive time, without traffic, from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"train and bus time from "+SOURCES.transit].join("; ")))+".</p>");
+  hw.push("<p>"+esc(capFirst(["parks, dog parks, food, shops and water from "+SOURCES.map,SOURCES.walk,"who lives here from the "+SOURCES.census,"local rules from the town pages linked beside each one","drive time, with clear roads, from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"train and bus time from "+SOURCES.transit].join("; ")))+".</p>");
   hw.push('<div id="hood-crime"><p><b>Crime, for the record</b> (every neighborhood shown passed the safety rule):</p>'+(sf.length?'<ul>'+lis(sf)+'</ul>':'<p>Rates '+NK.toLowerCase()+'.</p>')+'<p>'+esc(capFirst(crimeSrc(s.police,s.year)))+'.</p></div>');
   var flagN=0;RULE_FLAG.forEach(function(F){if(pRules.some(function(r){return r.rule===F.rule&&F.re.test(r.summary||"")}))flagN++});
-  h+='<section class="sec rows" id="sec-rows">'+rowsTop();
-  if(good||watch||hScene)h+=row("r-good","Good for you, watch for",HL.first(pr(H,"good_for_her")||loc.good_for_her||pr(H,"watch_for")||pr(H,"scene")),(hScene?'<div style="margin-bottom:10px">'+hScene+'</div>':'')+'<div class="two">'+(good?'<div class="panel love"><h4>Good for you</h4>'+good+'</div>':'')+(watch?'<div class="panel pause"><h4>Watch for</h4>'+watch+'</div>':'')+'</div>',{sub:hlSub(H,"good","cost")});
-  h+=row("r-here","What's here",HL.here(H),amenList([[IC.after,"Food and coffee",food],[IC.pup,"For the dog",dogBits.length?dogBits.join("; ")+".":NK+"."],[IC.bag,"Errands",errBits.length?errBits.join("; ")+".":NK+"."],[IC.sun,"To Mom and Dad",HL.trip(H)+(H.transit_min!=null?"; "+r0(H.transit_min)+" min by train and bus":"")+"."],[IC.ppl,"Who lives here (census)",whoBits.length?whoBits.join("; ")+".":NK+"."]])+'<div id="sec-how">'+howHtml(hw.join(""))+'</div>',{sub:hlSub(H,"going_out","green","to_parents","dog")});
-  h+=row("r-voices","What residents say",HL.voices(H),(HL.voicesTopic(H)?'<p class="helper" id="voices-topic" style="margin-bottom:6px">Most often about: '+esc(HL.voicesTopic(H).toLowerCase())+'.</p>':'')+voicesSection(H),{sub:hlSub(H,"residents_say","residents")});
-  if(desc.length)h+=row("sec-described","How others describe it",HL.described(H),desc.map(descQ).join(""),{sub:hlSub(H,"described")});
+  var rev=hoodReviews(H),held=HELD_BY_HOOD[H.id]||[],wait=WAIT_BY_HOOD[H.id]||[];
+  h+='<section class="sec rows" id="sec-rows"><h2 class="h2s">More about '+esc(hoodTitle(H))+'</h2>'+rowsTop();
+  h+=row("r-voices","What residents say",HL.voices(H),voicesSection(H),{sub:hlSub(H,"residents_say","residents")});
+  if(descRest.length)h+=row("sec-described","How others describe it",HL.described({described:descRest}),descRest.map(descQ).join(""),{sub:hlSub(H,"described")});
+  if(good||watch||hScene)h+=row("r-good","The good and the catch",HL.first(pr(H,"good_for_her")||loc.good_for_her||pr(H,"watch_for")||pr(H,"scene")),(hScene?'<div style="margin-bottom:10px">'+hScene+'</div>':'')+'<div class="two">'+(good?'<div class="panel love"><h3>Good for you</h3>'+good+'</div>':'')+(watch?'<div class="panel pause"><h3>Watch for</h3>'+watch+'</div>':'')+'</div>',{sub:hlSub(H,"good","cost")});
+  h+=row("r-here","The area in detail",HL.here(H),amenList([[IC.after,"Food and coffee",food],[IC.pup,"For the dog",dogBits.length?dogBits.join("; ")+".":NK+"."],[IC.bag,"Errands",errBits.length?errBits.join("; ")+".":NK+"."],[IC.sun,"To Mom and Dad",HL.trip(H)+(H.transit_min!=null?"; "+r0(H.transit_min)+" min by train and bus":"")+"."],[IC.ppl,"Who lives here (census)",whoBits.length?whoBits.join("; ")+".":NK+"."]])+'<div id="sec-how">'+howHtml(hw.join(""))+'</div>',{sub:hlSub(H,"going_out","green","to_parents","dog")});
   h+=row("r-rules","Local rules",HL.hoodRules(H),rulesBody(H,carBits.length?"Places here: "+carBits.join("; ")+".":""),{sub:hlSub(H,"local_rules","parking","rules"),chip:flagN?flagN+" to know":(!pRules.length?"Ask":""),chipKind:"ask"});
+  if(rev)h+=row("r-hreviews","Reviews of the buildings",rev.head,rev.body);
   if(SPEC_OPEN.length&&H.vs_queens&&SPEC_OPEN.some(function(q){return H.vs_queens[q.measure]!=null}))h+=row("r-queens","Compared to staying in Queens",HL.queens(H.vs_queens),staticScale(H.vs_queens)+how(SOURCES.queens),{sub:hlSub(H,"compared_to_queens","queens")});
+  if(H.avoid.length)h+=row("sec-avoid","Looks good, but avoid",avoidHead(H),'<div class="stack tight">'+H.avoid.map(avoidCard).join("")+'</div>',{sub:hlSub(H,"avoid")});
+  if(held.length)h+=row("sec-call","Worth a phone call",pl(held.length,"more place")+", if a call clears up two questions",callBox(held,HELD_INTRO,null));
+  if(wait.length)h+=row("sec-wait","Not re-checked yet",pl(wait.length,"place"),callBox(wait,WAIT_INTRO,null,"Not re-checked yet","wait-box",waitItem));
   h+='</section>';
-  if(N){var nB=nShown("h:"+H.id,NB);h+='<section class="sec" id="sec-places"><h2 class="h2s">'+pl(N,"place")+(NB!==N?'<span class="fig">in '+pl(NB,"building")+'</span>':'')+'</h2><div class="stack tight" style="margin-top:10px">'+H.bldgs.slice(0,nB).map(function(B,i){return bldgCard(B,i)}).join("")+'</div>'+moreCtl("h:"+H.id,nB,NB,3,"buildings")+'</section>'}
-  else h+='<section class="sec" id="sec-places"><div class="empty"><p><b>Nothing to tour here yet.</b></p></div></section>';
-  var held=HELD_BY_HOOD[H.id]||[],wait=WAIT_BY_HOOD[H.id]||[];
-  if(H.avoid.length||held.length||wait.length){h+='<section class="sec rows">';
-    if(H.avoid.length)h+=row("sec-avoid","Looks good, but avoid",pl(H.avoid.length,"place")+" we would skip, and why",'<div class="stack tight">'+H.avoid.map(avoidCard).join("")+'</div>',{sub:hlSub(H,"avoid")});
-    if(held.length)h+=row("sec-call","Worth a phone call",pl(held.length,"place")+", two or more things to confirm",callBox(held,HELD_INTRO,null));
-    if(wait.length)h+=row("sec-wait","Not re-checked yet",pl(wait.length,"place"),callBox(wait,WAIT_INTRO,null,"Not re-checked yet","wait-box",waitItem));
-    h+='</section>'}
   h+=nx?nextLink("Next in this experience",href("hood",nx.id),nx.name):nxY?nextLink("Next experience",href("year",nxY.id),nxY.label):nextLink("You have seen them all","#lives","All "+YEARS.length+" experiences");
   return h+'</div>'}
+function avoidHead(H){return pl(H.avoid.length,"place")+" we would skip, and why"}
 function amenList(items){return '<ul class="amen">'+items.map(function(a){return '<li><span class="ai">'+a[0]+'</span><div><b>'+a[1]+'</b>'+(a[3]?a[2]:'<span>'+esc(a[2])+'</span>')+'</div></li>'}).join("")+'</ul>'}
 /* The town's parking and dog rules: on the neighborhood page and on each of its buildings. */
 function rulesBody(H,lead){var pRules=rulesOf(H,"parking_rules"),dRules=rulesOf(H,"dog_rules");
@@ -2617,6 +2750,8 @@ document.addEventListener("click",function(e){
   else if(act==="tile"){openSheet(tileSheet(id,t.getAttribute("data-k")))}
   else if(act==="scale"){openSheet(scaleSheet(t.getAttribute("data-kind"),id,t.getAttribute("data-m")))}
   else if(act==="how-open"){openLimits(false);openSheet(howSheet())}
+  else if(act==="toll-info"||act==="allin-info"){var io=t.getAttribute("data-kind")==="year"?Y_BY[id]:H_BY[id];if(io){var iy=t.getAttribute("data-kind")==="year";
+      openSheet(act==="toll-info"?tollSheet(iy?(io.medians||{}):io,iy?io.label:hoodTitle(io),iy):allInSheet(io.units,iy?io.label:hoodTitle(io)))}}
   else if(act==="goto-row"){var gr=document.getElementById(t.getAttribute("data-to"));if(gr){gr.open=true;(OPENED[current]=OPENED[current]||{})[gr.id]=true;gr.scrollIntoView({block:"start"})}}
   else if(act==="save"){var sids=(t.getAttribute("data-ids")||"").split("\u0001").filter(function(x){return U_BY[x]}),allOn=sids.length&&sids.every(function(x){return savedIx(x)>-1}),y=window.scrollY,pos=t.getAttribute("data-pos"),sel=t.classList.contains("heartb")?'.heartb[data-ids="'+(t.getAttribute("data-ids")||"").replace(/["\\]/g,"\\$&")+'"]':pos?'.savb[data-pos="'+pos+'"]':null;
     if(allOn){sids.forEach(function(x){dropSaved(x)});toast(sids.length>1?"Taken off your list.":"Taken off your list.")}

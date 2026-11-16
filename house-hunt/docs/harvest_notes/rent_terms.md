@@ -2,45 +2,45 @@
 
 Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evidence/*.csv. No network requests. Every passing unit was checked and has one row.
 
-- Units checked: **2659** (one row each; `offer_type = none` for units with no such language).
-- Units with any concession, special-offer or price-basis language: **1768**.
-- Units whose price or offer is for a lease term other than 12 months: **592**.
-- Units that need a call (`needs_call = yes`): **1660** in 235 buildings.
+- Units checked: **2503** (one row each; `offer_type = none` for units with no such language).
+- Units with any concession, special-offer or price-basis language: **1687**.
+- Units whose price or offer is for a lease term other than 12 months: **575**.
+- Units that need a call (`needs_call = yes`): **1586** in 209 buildings.
 
 ## Counts by offer_type
 
 | offer_type | units |
 |---|---|
-| months_free | 1393 |
-| none | 891 |
-| other | 218 |
-| reduced_deposit_or_fee | 72 |
+| months_free | 1328 |
+| none | 816 |
+| other | 211 |
+| reduced_deposit_or_fee | 69 |
 | weeks_free | 35 |
-| dollar_credit | 30 |
-| look_and_lease | 20 |
+| dollar_credit | 29 |
+| look_and_lease | 15 |
 
 ## Listed price basis
 
 | listed_price_is | units |
 |---|---|
-| unknown | 1475 |
-| gross | 1032 |
+| unknown | 1403 |
+| gross | 948 |
 | net_effective | 152 |
 
 ## Confidence
 
 | confidence | units |
 |---|---|
-| assumed_terms | 1645 |
-| stated_on_page | 984 |
-| computed_from_stated_terms | 30 |
+| assumed_terms | 1569 |
+| stated_on_page | 906 |
+| computed_from_stated_terms | 28 |
 
 ## Free-period timing
 
 | timing | units |
 |---|---|
-| unknown | 1368 |
-| (no free period) | 1231 |
+| unknown | 1303 |
+| (no free period) | 1140 |
 | upfront | 42 |
 | end_of_lease | 12 |
 | specific_months | 5 |
@@ -70,7 +70,7 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 ## Largest possible gaps where the basis is unknown (scenario: listed price is net-effective)
 
-1413 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
+1346 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
 
 | unit | listed | gross if listed is net | gap | free months / lease | basis |
 |---|---|---|---|---|---|
@@ -103,22 +103,19 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 ## Gross rent over $3,000 (rent only, all-in aside)
 
 - Determined gross over $3,000: **3** units: Arc House ($3066); Arc House ($3093); Arc House ($3115)
-- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **660** units in 100 buildings.
+- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **630** units in 92 buildings.
 
 | building | units | listed range | scenario gross (max) | free months / lease |
 |---|---|---|---|---|
 | Axis 201 | 46 | 1805-2856 | 5712 | 3 / 6 |
 | Halstead Parsippany | 23 | 2384-2999 | 3999 | 3 / 12 |
 | The Jefferson | 6 | 2740-2990 | 3987 | 3 / 12 assumed |
-| Brookside Wilton | 8 | 2650-2650 | 3975 | 2 / 6 |
 | The Alary | 9 | 2538-2975 | 3967 | 3 / 12 assumed |
-| Twenty Fair | 6 | 2400-2925 | 3900 | 1-3 / 12 assumed |
 | The Winston | 26 | 2350-2850 | 3800 | 3 / 12 |
 | Piper | 34 | 2499-3000 | 3789 | 2.5 / 12 |
 | West Side Square | 72 | 2439-2998 | 3787 | 2.5 / 12 |
 | Berkeley House | 1 | 2838-2838 | 3784 | 3 / 12 assumed |
 | The Taft Apartments | 3 | 2160-2435 | 3652 | 3 / 9 |
-| Twenty50 | 5 | 2850-3000 | 3600 | 1 / 6 |
 | EDGE | 16 | 2513-2995 | 3594 | 2 / 12 |
 | 1 Lyon Place | 2 | 2830-2995 | 3594 | 1-2 / 12 assumed |
 | Clifton & Co. | 18 | 2533-2978 | 3574 | 2 / 12 |
@@ -132,7 +129,6 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Aura 240 | 1 | 2595-2595 | 3460 | 3 / 12 assumed |
 | The Current on River | 6 | 2595-2875 | 3450 | 2 / 12 |
 | Port & Main | 5 | 2750-2850 | 3420 | 2 / 12 assumed |
-| 42 Broad | 2 | 2873-2964 | 3387 | 1.5 / 12 assumed |
 | Noble' | 1 | 2900-2900 | 3383 | 1-2 / 12 assumed |
 | Summer House | 13 | 2575-2921 | 3370 | 2 / 13 |
 | Riello Edgewater | 1 | 2800-2800 | 3360 | 2 / 12 assumed |
@@ -167,7 +163,6 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Harbor Pointe | 5 | 2774-2850 | 3206 | 2 / 18 |
 | The Enclave | 2 | 2975-2990 | 3204 | 1 / 15 |
 | Sawyer | 1 | 2999-2999 | 3199 | 1 / 16 |
-| The Audubon New Haven | 6 | 2640-2797 | 3197 | 1.5 / 12 assumed |
 | Atlantic Station | 2 | 2881-2931 | 3197 | 1 / 12 |
 | The Arbor | 2 | 2818-2928 | 3194 | 1 / 12 |
 | Solaris Lofts | 1 | 2948-2948 | 3194 | 1 / 13 |
@@ -175,7 +170,6 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Modera New Rochelle | 2 | 2855-2924 | 3190 | 1 / 12 |
 | City Crossing | 2 | 2892-2917 | 3182 | 1 / 12 assumed |
 | Atlas | 2 | 2573-2651 | 3181 | 2 / 12 |
-| 111 Harbor Point | 2 | 2752-2914 | 3179 | 1 / 12 assumed |
 | The Hazel Jersey City | 2 | 2776-2898 | 3178 | 1-1.5 / 17 |
 | Avalon Wayne | 1 | 2645-2645 | 3174 | 2 / 12 |
 | Woodmont Station at Cranford | 1 | 2955-2955 | 3166 | 1 / 15 |
@@ -195,16 +189,14 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Harbor Landing Apartments | 1 | 2958-2958 | 3087 | 0.5 / 12 |
 | The Duchess | 1 | 2828-2828 | 3085 | 1 / 12 |
 | Pier Village | 1 | 2931-2931 | 3085 | 1 / 20 |
-| Encore | 1 | 2888-2888 | 3081 | 0.5-1 / 16 |
 | Kensington Place | 2 | 2525-2554 | 3065 | 2 / 12 |
 | Reserve at Riverdale | 1 | 2753-2753 | 3059 | 1 / 10 |
-| The Pointe at Neptune | 2 | 2801-2801 | 3056 | 1 / 12 |
 | The Liberty Building | 1 | 2477-2477 | 3049 | 2-3 / 12 assumed |
 | Riverside | 1 | 2795-2795 | 3049 | 1 / 12 assumed |
 | 1177 Greens Farms | 1 | 2735-2735 | 3039 | 1 / 10 |
 | The Mitchell | 1 | 2781-2781 | 3034 | 1 / 12 assumed |
 | Avalon Teaneck | 2 | 2760-2780 | 3033 | 1 / 12 |
-| The Atwater | 2 | 2785-2800 | 3033 | 1-2 / 12 assumed |
+| The Atwater | 4 | 2785-2800 | 3033 | 1-2 / 12 assumed |
 | 30 Broad Street | 1 | 2775-2775 | 3027 | 1 / 12 assumed |
 | 80East / Luxury Apartments / Dover, NJ | 2 | 2800-2800 | 3015 | 1 / 14 |
 

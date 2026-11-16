@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=%2C+Long+Beach%2C+NY+11561&benchmark=Public_AR_Current&format=json",
+ "retrieved_at": "2026-11-16T02:10:01+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/bf483b1048bc1b2d.json",
+ "source": "census_geocoder"
+}

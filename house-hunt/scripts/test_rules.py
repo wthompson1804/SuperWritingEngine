@@ -389,6 +389,57 @@ def pure_4():
     eq(BP.moment_ratings(m, 4, False, False, False, 720, 1)["night"], "mixed", "moments: a garage with no stated front desk or controlled entry is mixed")
     eq(BP.moment_ratings(m, 4, False, True, True, 720, 1)["night"], "weak", "moments: an overnight street-parking restriction with no confirmed space is weak")
     eq(BP.moment_ratings(m, 4, True, True, False, 720, 1)["night"], "mixed", "moments: off-site parking is never strong")
+    pure_5()
+
+
+def pure_5():
+    """The elevator gate never rests on a floor read from a unit label (docs/harvest_notes/zumper_open_pending.md)."""
+    import tempfile
+    import pandas as pd
+    import gates
+    base = {"elevator": "unknown", "notes": "", "building_floors": "", "floor": "", "unit": "", "community_building_type": ""}
+    row = lambda **k: pd.Series({**base, **k})
+    eq(gates.gate_elevator(row(unit="42M")), ("unknown", ""), "elevator: '42M' (1204 John F Kennedy Blvd, Bayonne) is a landlord's numbering, not floor 42 -> unknown")
+    eq(gates.gate_elevator(row(unit="69B")), ("unknown", ""), "elevator: '69B' at 69 N Broadway repeats the house number -> unknown")
+    eq(gates.gate_elevator(row(unit="6C")), ("unknown", ""), "elevator: '6C' at 6 Duer St -> unknown")
+    eq(gates.gate_elevator(row(unit="601")), ("unknown", ""), "elevator: '601' in a building with no height from a page or record -> unknown")
+    eq(gates.gate_elevator(row(unit="19D", building_floors="20")), ("pass", "inferred_6plus_floors"), "elevator: '19D' in a building whose page states 20 floors passes on the height")
+    eq(gates.gate_elevator(row(unit="19D", building_floors="5")), ("unknown", ""), "elevator: '19D' in a building stated as 5 floors does not pass on the label")
+    eq(gates.gate_elevator(row(unit="2A", floor="9")), ("pass", "inferred_6plus_floors"), "elevator: a floor the page states for the unit (9) is a real height")
+    eq(gates.gate_elevator(row(unit="901", floor="9", notes="floor derived from unit number")), ("unknown", ""), "elevator: a floor the harvester derived from the unit number is not a height")
+    eq(gates.gate_elevator(row(unit="42M", elevator="yes")), ("pass", "stated"), "elevator: stated on the page passes whatever the label")
+    eq(gates.gate_elevator(row(unit="42M", elevator="no")), ("fail", "stated"), "elevator: a stated walk-up fails")
+    eq(gates.gate_elevator(row(unit="14N", elevator="yes", floor="14", notes="floor derived from unit number; elevator: 6+ floors (unit numbers on the page reach floor 37)")), ("unknown", ""),
+       "elevator: a harvester's yes from 'unit numbers on the page reach floor 37' is a label reading -> unknown")
+    eq(gates.gate_elevator(row(unit="1203", elevator="yes", building_floors="12+", notes="elevator: 11+ floors: unit numbers on the listing page run to floor 12 (1201 ... 1215)")), ("unknown", ""),
+       "elevator: 'unit numbers on the listing page run to floor 12' -> unknown")
+    eq(gates.gate_elevator(row(unit="523", elevator="yes", building_floors="7", floor="5", notes="elevator: 6+ floors (the SightMap floor list on livemotifapts.com runs from 1 to 7)")), ("pass", "inferred_harvester"),
+       "elevator: a harvester's yes from a page's floor list is a real height (an inference, still open)")
+    eq(gates.gate_elevator(row(unit="3", community_building_type="High-Rise")), ("pass", "inferred_high_rise_label"), "elevator: the management page's 'high-rise' still passes as an inference")
+    # the floor gate keeps reading labels (owner: an unpublished floor is a tour question)
+    eq(gates.gate_floor(row(unit="42M"))[:3], ("pass", 42, "inferred"), "floor: the floor gate still reads '42M' as an inferred floor")
+    eq(gates.gate_floor(row(unit="601"))[:3], ("pass", 6, "inferred"), "floor: the floor gate still reads '601'")
+    # the city's record: 6+ floors only on the listing's own lot
+    eq(gates.elevator_from_pluto_floors("7", "house_number+location", "unknown"), True, "elevator: PLUTO gives 7 floors on the listing's own lot -> real height")
+    eq(gates.elevator_from_pluto_floors("13", "nearest_lot", "unknown"), False, "elevator: a neighbouring lot's 13 floors is not this building's height")
+    eq(gates.elevator_from_pluto_floors("5", "house_number+location", ""), False, "elevator: 5 floors on record is under the threshold")
+    eq(gates.elevator_from_pluto_floors("", "", ""), False, "elevator: no record")
+    # evidence rows and amenities pages (addr_key -> basis)
+    with tempfile.TemporaryDirectory() as td:
+        A, O = "https://www.apartmentlist.com/nj/x/y", "https://www.ownsite.com/amenities"
+        pd.DataFrame([{"addr_key": "k1", "fact": "elevator", "value": "yes", "quote": "Elevator access to all floors", "source_url": O, "status": "confirmed"},
+                      {"addr_key": "k2", "fact": "elevator", "value": "yes", "quote": "Apartment List community amenity: Elevator", "source_url": A, "status": "confirmed"},
+                      {"addr_key": "k3", "fact": "elevator", "value": "yes (inferred from height)", "quote": "unit 1003 is on floor 10", "source_url": A, "status": "confirmed"},
+                      {"addr_key": "k4", "fact": "elevator", "value": "yes", "quote": "amenity: Elevator", "source_url": A, "status": "confirmed"},
+                      {"addr_key": "k4", "fact": "elevator", "value": "no", "quote": "walk-up per the manager", "source_url": O, "status": "contradicts"},
+                      {"addr_key": "k5", "fact": "elevator", "value": "unconfirmed", "quote": "no elevator in the feature list on this page", "source_url": A, "status": "unconfirmed"},
+                      {"addr_key": "k6", "fact": "elevator", "value": "yes", "quote": "PLUTO building class D1", "source_url": "https://data.cityofnewyork.us/x", "status": "confirmed"},
+                      {"addr_key": "k7", "fact": "dogs_allowed", "value": "yes", "quote": "dogs ok", "source_url": O, "status": "confirmed"}]).to_csv(Path(td) / "confirm_batch_99.csv", index=False)
+        pd.DataFrame([{"addr_key": "k8", "elevator_stated": "yes", "source_url": A}, {"addr_key": "k9", "elevator_stated": "no_mention", "source_url": A},
+                      {"addr_key": "k4", "elevator_stated": "yes", "source_url": A}]).to_csv(Path(td) / "amen.csv", index=False)
+        ev = gates.elevator_evidence(folder=Path(td), amenities=Path(td) / "amen.csv")
+        eq({k: v[0] for k, v in sorted(ev.items())}, {"k1": "evidence_confirmed", "k2": "evidence_stated", "k8": "amenities_page"},
+           "elevator: evidence passes only on a page that states it (own page, listing-site amenity list, amenities page); not an inference, a contradicted building, a not-found row or a class-only row")
 
 
 def data():
@@ -728,6 +779,17 @@ def data_4(M, R, S):
     ok((S.groupby("building_id").size() <= 8).all(), "step 5: at most 8 shown per building")
     o = S.assign(rs=num(S, "rank_score"), n=num(S, "nth_shown_in_building")).sort_values(["building_id", "n"])
     ok(all((g.n.values == range(1, len(g) + 1)).all() for _, g in o.groupby("building_id")), "step 5: nth_shown_in_building runs 1..n inside each building")
+    # ---- the elevator gate never rests on a unit label (docs/harvest_notes/zumper_open_pending.md)
+    import gates
+    L_ = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False, low_memory=False)
+    I_ = L_[(L_.g_elevator == "pass") & (L_.elevator_basis == "inferred_6plus_floors")]
+    bad = [r.listing_id for r in I_.itertuples() if not ((gates.page_height(r) or 0) >= 6 or gates.elevator_from_pluto_floors(r.pluto_floors, r.match_basis, r.elevator_from_class))]
+    ok(not bad, f"elevator gate: every 'inferred_6plus_floors' pass has a height of 6+ from a page or record, never a unit label ({len(bad)} do not: {bad[:5]})")
+    ok(not L_[(L_.g_elevator == "pass") & L_.notes.str.contains(gates.HARVESTER_LABEL_HEIGHT) & (L_.elevator_basis == "inferred_harvester")].shape[0],
+       "elevator gate: a harvester's yes read from unit numbers never passes as 'inferred_harvester'")
+    ok(set(L_[L_.g_elevator == "pass"].elevator_basis) <= {"stated", "inferred_harvester", "inferred_6plus_floors", "inferred_high_rise_label", "nyc_pluto_building_class",
+                                                          "evidence_confirmed", "evidence_stated", "amenities_page"}, "elevator gate: every pass carries a known basis")
+    ok((L_[L_.elevator_basis == "nyc_pluto_building_class"].query("g_elevator == 'pass'").match_basis == gates.EXACT_LOT).all(), "elevator gate: the city's elevator class passes only on the listing's own lot")
 
 
 def data_units_unique(S):
