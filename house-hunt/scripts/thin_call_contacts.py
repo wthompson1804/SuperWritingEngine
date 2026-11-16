@@ -186,7 +186,10 @@ def parse(path: str, url: str):
                                      "poster's, not a published office line, and is not recorded")]
             return [bc.cand(95, url, kind="individual owner",
                             note="single unit posted on Apartment List with no brokerage or manager named; number not recorded")]
-    return bc.parse_page(path, url)
+    try:
+        return bc.parse_page(path, url)
+    except (AttributeError, TypeError, ValueError, KeyError):   # a page shape the parser does not expect
+        return []
 
 
 def build_slug_index(idx):
@@ -228,10 +231,11 @@ def candidates_for(b, idx, spages, sites, slugs):
                 urls.append(url)
             elif bc.is_own(url) and "?" not in url:
                 named_own.append((path, url, when))
+    mine = {bc.norm_url(x["url"]) for x in b["rows"]}
     for u in dict.fromkeys(urls):               # newest cached copy of the same URL (the resolve pass re-read them)
         hit = idx.get(bc.norm_url(u))
         if hit:
-            add(hit[0], u, hit[2])
+            add(hit[0], u, hit[2], own_row=bc.norm_url(u) in mine)
     cands = []
     for path, url, when, own_row in pages:
         for c in parse(path, url):
@@ -291,7 +295,7 @@ def build_row(b, cands, own):
         row.update(leasing_phone=best["phone"], phone_kind=kind_of(best), source_url=best["src"], retrieved_at=best["when"])
     else:
         first = cands[0] if cands else None
-        if managed or own:
+        if managed:
             row["phone_kind"] = "none"
         elif any(c["kind"] == "broker" for c in cands):
             row["phone_kind"] = "broker"

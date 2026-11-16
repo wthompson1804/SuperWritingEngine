@@ -5,7 +5,7 @@ Source: `data/evidence_pending/open_questions_by_building.csv` (set-aside listin
 
 How to read the phone: **office** = the building's own site; **supplied** = the number the property gave the listing site; **tracking** = a listing-site forwarding number that may stop working when the listing ends (check the building's site first); **brokerage** = the listing brokerage's office, not the building. Owner-listed units carry no phone by design: use the listing link.
 
-## The Fresh-Start Experience (48 buildings, 143 units; 27 with a real office number)
+## The Fresh-Start Experience (48 buildings, 143 units; 22 with a real office number)
 
 - [ ] **Raritan Heights Phase III , LLC**, New Brunswick: 11 unit(s) from $2460. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p446109/the-edge-at-raritan-h](https://www.zumper.com/apartment-buildings/p446109/the-edge-at-raritan-heights-new-brunswick-nj)
   - Phone (office): (848) 260-4746. Hours: Mon-Sun 9:30am-6pm. Site: [theedgeatraritanheights.com/](https://www.theedgeatraritanheights.com/).
@@ -18,6 +18,9 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
   - Answer: ____________________
 - [ ] **330 Harrison Station**, Harrison: 8 unit(s) from $2505. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/harrison/330-harrison-station](https://www.apartmentlist.com/nj/harrison/330-harrison-station)
   - Phone (supplied): (866) 485-9533. Hours: Mon 10am-6pm; Tue 11am-7pm; Wed 10am-6pm; Thu 11am-7pm; Fri 10am-6pm; Sat-Sun 10am-4pm. Site: [ironstate.com/property/330-angelo-cifelli/index.aspx](https://ironstate.com/property/330-angelo-cifelli/index.aspx).
+  - Answer: ____________________
+- [ ] **Harbourside SoNo**, Norwalk: 8 unit(s) from $2490. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p502359/harbourside-sono-norw](https://www.zumper.com/apartment-buildings/p502359/harbourside-sono-norwalk-ct)
+  - Phone (office): (475) 241-7784. Hours: Mon-Fri 10am-6pm; Sat 10am-5pm. Site: [livebh.com/apartments/harbourside-sono/](https://livebh.com/apartments/harbourside-sono/).
   - Answer: ____________________
 - [ ] **Harrison Station**, Harrison: 6 unit(s) from $2460. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/harrison/harrison-station--2](https://www.apartmentlist.com/nj/harrison/harrison-station--2)
   - Phone (supplied): (833) 545-9820. Hours: Mon 10am-6pm; Tue 11am-7pm; Wed 10am-6pm; Thu 11am-7pm; Fri 10am-6pm; Sat-Sun 10am-4pm. Site: [ironstate.com/property/harrison-station/index.aspx](https://ironstate.com/property/harrison-station/index.aspx).
@@ -43,9 +46,6 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
 - [ ] **The Flats at 289 Main**, Norwalk: 3 unit(s) from $1650. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/ct/norwalk/the-flats-at-289-main](https://www.apartmentlist.com/ct/norwalk/the-flats-at-289-main)
   - Phone (supplied): (475) 250-1539 ext. 4.
   - Answer: ____________________
-- [ ] **5201 City Place**, Edgewater: 2 unit(s) from $2795. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/edgewater/5201-city-place](https://www.apartmentlist.com/nj/edgewater/5201-city-place)
-  - Phone (supplied): (409) 330-3946.
-  - Answer: ____________________
 - [ ] **Palisades Gardens Apartments**, Fort Lee: 2 unit(s) from $2005. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/fort-lee/palisades-gardens-apartments](https://www.apartmentlist.com/nj/fort-lee/palisades-gardens-apartments)
   - Phone (supplied): (877) 875-0526. Hours: Mon-Wed 9am-5pm; Thu 10am-6pm; Fri 9am-5pm. Site: [goldberg-realty.com/nj/fort-lee/palisades-gardens-apts/index](https://www.goldberg-realty.com/nj/fort-lee/palisades-gardens-apts/index.aspx).
   - Answer: ____________________
@@ -64,35 +64,17 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
 - [ ] **Avalon North Bergen**, North Bergen: 2 unit(s) from $2650. Ask: Is there a passenger elevator that serves this unit's floor? [avaloncommunities.com/new-jersey/north-bergen-apartments/ava](https://www.avaloncommunities.com/new-jersey/north-bergen-apartments/avalon-north-bergen/apartment/NJ015-NJ015-001-523)
   - Phone (office): (551) 231-1413. Hours: Mon-Sun 9am-7pm. Site: [avaloncommunities.com/new-jersey/north-bergen-apartments/ava](https://www.avaloncommunities.com/new-jersey/north-bergen-apartments/avalon-north-bergen).
   - Answer: ____________________
-- [ ] **1055 47th Ave Apt 3H**, Long Island City-Hunters Point: 1 unit(s) from $1800. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/1055-47th-ave-apt-3h--1](https://www.apartmentlist.com/ny/queens/1055-47th-ave-apt-3h--1)
-  - Phone (supplied): (917) 495-0321.
-  - Answer: ____________________
-- [ ] **240 51st Ave**, Long Island City-Hunters Point: 1 unit(s) from $1050. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/240-51st-ave--8](https://www.apartmentlist.com/ny/queens/240-51st-ave--8)
-  - Phone (supplied): (917) 437-9273.
-  - Answer: ____________________
 - [ ] **The George New Brunswick**, New Brunswick: 1 unit(s) from $2334. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p32449/the-george-new-brunswi](https://www.zumper.com/apartment-buildings/p32449/the-george-new-brunswick-new-brunswick-nj)
   - Phone (office): (848) 200-9044. Hours: Mon-Fri 09:00-18:00; Sat 10:00-17:00. Site: [thegeorgenewbrunswick.com/](https://www.thegeorgenewbrunswick.com/).
   - Answer: ____________________
-- [ ] **7427 BLVD E**, North Bergen: 1 unit(s) from $1900. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/nj/north-bergen/7427-blvd-e](https://www.apartmentlist.com/nj/north-bergen/7427-blvd-e)
-  - Phone (supplied): (201) 866-6500.
-  - Answer: ____________________
-- [ ] **8600 1st Avenue - C1**, North Bergen: 1 unit(s) from $2200. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/north-bergen/8600-1st-avenue-c1](https://www.apartmentlist.com/nj/north-bergen/8600-1st-avenue-c1)
-  - Phone (supplied): (908) 808-5523.
-  - Answer: ____________________
 - [ ] **Plaza 53**, North Bergen: 1 unit(s) from $2300. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/north-bergen/plaza-53](https://www.apartmentlist.com/nj/north-bergen/plaza-53)
   - Phone (supplied): (201) 348-0207. Hours: Mon-Thu 10am-7pm; Fri 10am-3pm; Sun 10am-6pm. Site: [oxfordrealtygroup.com/communities/plaza-53/](https://www.oxfordrealtygroup.com/communities/plaza-53/).
-  - Answer: ____________________
-- [ ] **34 Glenwood Ave**, Norwalk: 1 unit(s) from $1875. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/ct/norwalk/34-glenwood-ave--1](https://www.apartmentlist.com/ct/norwalk/34-glenwood-ave--1)
-  - Phone (supplied): (203) 524-5083.
   - Answer: ____________________
 - [ ] **Merritt River**, Norwalk: 1 unit(s) from $2275. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [merrittriver.com/floorplans/](https://www.merrittriver.com/floorplans/)
   - Phone (office): (203) 884-6366. Hours: Mon-Fri 9:00am-5:00pm. Site: [merrittriver.com/](https://www.merrittriver.com/).
   - Answer: ____________________
 - [ ] **Brim and Crown**, Norwalk: 10 unit(s) from $2192. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p499811/brim-and-crown-east-n](https://www.zumper.com/apartment-buildings/p499811/brim-and-crown-east-norwalk-norwalk-ct)
   - Phone (tracking): (844) 325-6407 ext. 8055. Hours: Mon-Thu 9am-6pm; Fri 9am-5pm; Sat 10am-5pm.
-  - Answer: ____________________
-- [ ] **Harbourside SoNo**, Norwalk: 8 unit(s) from $2490. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p502359/harbourside-sono-norw](https://www.zumper.com/apartment-buildings/p502359/harbourside-sono-norwalk-ct)
-  - Phone (tracking): (860) 792-5002. Hours: Mon-Fri 10am-6pm; Sat 10am-5pm.
   - Answer: ____________________
 - [ ] **The Vue**, New Brunswick: 3 unit(s) from $2320. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p12567/the-vue-new-brunswick-](https://www.zumper.com/apartment-buildings/p12567/the-vue-new-brunswick-nj)
   - Phone (tracking): (844) 326-3860 ext. 4210. Hours: Mon-Fri 8:30am-5pm.
@@ -121,38 +103,56 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
 - [ ] **Iron Works Sono**, Norwalk: 4 unit(s) from $2041. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p264472/ironworks-norwalk-ct](https://www.zumper.com/apartment-buildings/p264472/ironworks-norwalk-ct)
   - Phone: not found on any saved page. Hours: Mon-Fri 10am-5:30pm.
   - Answer: ____________________
+- [ ] **5201 City Place**, Edgewater: 2 unit(s) from $2795. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/edgewater/5201-city-place](https://www.apartmentlist.com/nj/edgewater/5201-city-place)
+  - Phone: none (listed by an individual owner; contact through the listing).
+  - Answer: ____________________
 - [ ] **1 Horizon Road**, Fort Lee: 1 unit(s) from $2600. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/nj/fort-lee/1-horizon-road](https://www.apartmentlist.com/nj/fort-lee/1-horizon-road)
-  - Phone: not found on any saved page.
+  - Phone: none on the listing (broker-listed; contact through the listing).
   - Answer: ____________________
 - [ ] **2077 Center Avenue**, Fort Lee: 1 unit(s) from $2500. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/nj/fort-lee/2077-center-avenue--1](https://www.apartmentlist.com/nj/fort-lee/2077-center-avenue--1)
-  - Phone: not found on any saved page.
+  - Phone: none on the listing (broker-listed; contact through the listing).
   - Answer: ____________________
 - [ ] **2348 Linwood Avenue**, Fort Lee: 1 unit(s) from $2250. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/nj/fort-lee/2348-linwood-avenue](https://www.apartmentlist.com/nj/fort-lee/2348-linwood-avenue)
-  - Phone: not found on any saved page.
+  - Phone: none on the listing (broker-listed; contact through the listing).
   - Answer: ____________________
 - [ ] **4 Horizon Road**, Fort Lee: 1 unit(s) from $2300. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/nj/fort-lee/4-horizon-road--1](https://www.apartmentlist.com/nj/fort-lee/4-horizon-road--1)
-  - Phone: not found on any saved page.
+  - Phone: none on the listing (broker-listed; contact through the listing).
   - Answer: ____________________
 - [ ] **823 Anderson Ave #3, Fort Lee, NJ 07024, USA**, Fort Lee: 1 unit(s) from $1950. Ask: Is there a passenger elevator that serves this unit's floor? [zumper.com/listings/22661998p/studio-fort-lee-nj](https://www.zumper.com/listings/22661998p/studio-fort-lee-nj)
   - Phone: none (listed by an individual owner; contact through the listing).
   - Answer: ____________________
+- [ ] **1055 47th Ave Apt 3H**, Long Island City-Hunters Point: 1 unit(s) from $1800. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/1055-47th-ave-apt-3h--1](https://www.apartmentlist.com/ny/queens/1055-47th-ave-apt-3h--1)
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
+- [ ] **240 51st Ave**, Long Island City-Hunters Point: 1 unit(s) from $1050. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/240-51st-ave--8](https://www.apartmentlist.com/ny/queens/240-51st-ave--8)
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
 - [ ] **549 Borden Ave Apt 2N**, Long Island City-Hunters Point: 1 unit(s) from $1400. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/549-borden-ave-apt-2n](https://www.apartmentlist.com/ny/queens/549-borden-ave-apt-2n)
-  - Phone: not found on any saved page. Site: [bigapplehome.propertyware.com/rentals.html](https://bigapplehome.propertyware.com/rentals.html).
+  - Phone: none on the listing (broker-listed; contact through the listing).
   - Answer: ____________________
 - [ ] **7328 Kennedy Blvd**, North Bergen: 1 unit(s) from $1795. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [trulia.com/home/7328-kennedy-blvd-32a-north-bergen-nj-07047-](https://www.trulia.com/home/7328-kennedy-blvd-32a-north-bergen-nj-07047-456624655)
   - Phone: none (listed by an individual owner; contact through the listing).
   - Answer: ____________________
+- [ ] **7427 BLVD E**, North Bergen: 1 unit(s) from $1900. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/nj/north-bergen/7427-blvd-e](https://www.apartmentlist.com/nj/north-bergen/7427-blvd-e)
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
 - [ ] **7505 Palisade Avenue**, North Bergen: 1 unit(s) from $1950. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/north-bergen/7505-palisade-avenue--1](https://www.apartmentlist.com/nj/north-bergen/7505-palisade-avenue--1)
-  - Phone: not found on any saved page.
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
+- [ ] **8600 1st Avenue - C1**, North Bergen: 1 unit(s) from $2200. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/north-bergen/8600-1st-avenue-c1](https://www.apartmentlist.com/nj/north-bergen/8600-1st-avenue-c1)
+  - Phone: none on the listing (broker-listed; contact through the listing).
   - Answer: ____________________
 - [ ] **9201-9207 John F Kennedy Blvd**, North Bergen: 1 unit(s) from $2250. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [trulia.com/home/9201-9207-john-f-kennedy-blvd-12r-north-berg](https://www.trulia.com/home/9201-9207-john-f-kennedy-blvd-12r-north-bergen-nj-07047-466490918)
   - Phone: none (listed by an individual owner; contact through the listing).
+  - Answer: ____________________
+- [ ] **34 Glenwood Ave**, Norwalk: 1 unit(s) from $1875. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/ct/norwalk/34-glenwood-ave--1](https://www.apartmentlist.com/ct/norwalk/34-glenwood-ave--1)
+  - Phone: none on the listing (broker-listed; contact through the listing).
   - Answer: ____________________
 - [ ] **65 Winfield St #12**, Norwalk: 1 unit(s) from $2150. Ask: Is there a passenger elevator that serves this unit's floor? [zumper.com/listings/29991580p/1-bedroom-east-norwalk-norwalk](https://www.zumper.com/listings/29991580p/1-bedroom-east-norwalk-norwalk-ct)
   - Phone: none (listed by an individual owner; contact through the listing).
   - Answer: ____________________
 
-## The Quiet-Street Experience (13 buildings, 97 units; 9 with a real office number)
+## The Quiet-Street Experience (13 buildings, 97 units; 8 with a real office number)
 
 - [ ] **Avalon W Squared At Princeton Junction**, Princeton: 65 unit(s) from $2395. Ask: Is there a passenger elevator that serves this unit's floor? [avaloncommunities.com/new-jersey/west-windsor-apartments/ava](https://www.avaloncommunities.com/new-jersey/west-windsor-apartments/avalon-w-squared-at-princeton-junction/apartment/NJ034-NJ034-500-3085)
   - Phone (office): (833) 853-6223. Hours: Mon-Thu 9:30am-6:30pm; Fri-Sat 8:30am-5:30pm; Sun 9:30am-5:30pm. Site: [avaloncommunities.com/new-jersey/west-windsor-apartments/ava](https://www.avaloncommunities.com/new-jersey/west-windsor-apartments/avalon-w-squared-at-princeton-junction/).
@@ -173,79 +173,79 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
   - Phone (office): (609) 831-4684. Hours: Mon-Sun 9am-7pm. Site: [avaloncommunities.com/new-jersey/princeton-apartments/avalon](https://www.avaloncommunities.com/new-jersey/princeton-apartments/avalon-princeton).
   - Answer: ____________________
 - [ ] **Modera Berkeley Heights**, Berkeley Heights: 2 unit(s) from $2408. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/new-providence/modera-berkeley-heights](https://www.apartmentlist.com/nj/new-providence/modera-berkeley-heights)
-  - Phone (supplied): (908) 944-9200. Hours: Mon-Thu 10am-6pm; Fri-Sat 10am-5pm. Site: [moderaberkeleyheights.com/](https://www.moderaberkeleyheights.com/).
+  - Phone (office): (561) 998-4465. Hours: Mon-Thu 10am-6pm; Fri-Sat 10am-5pm. Site: [moderaberkeleyheights.com/](https://www.moderaberkeleyheights.com/).
   - Answer: ____________________
 - [ ] **Creekline at Fairfield**, Fairfield: 2 unit(s) from $2471. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/ct/bridgeport/creekline-at-fairfield](https://www.apartmentlist.com/ct/bridgeport/creekline-at-fairfield)
   - Phone (supplied): (475) 265-6245. Hours: Tue-Wed 9am-5:30pm; Thu 10am-6:30pm; Fri-Sat 9am-5:30pm. Site: [livecreeklineapts.com/](https://www.livecreeklineapts.com/).
-  - Answer: ____________________
-- [ ] **Studio Apartment in Palmer Square**, Princeton: 1 unit(s) from $1950. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/nj/princeton/studio-apartment-in-palmer-sq](https://www.apartmentlist.com/nj/princeton/studio-apartment-in-palmer-square)
-  - Phone (supplied): (609) 285-3088.
   - Answer: ____________________
 - [ ] **Fairchild Apartments**, Fairfield: 2 unit(s) from $1550. Ask: Is there a passenger elevator that serves this unit's floor? [trulia.com/building/fairchild-apartments-130-fairchild-ave-f](https://www.trulia.com/building/fairchild-apartments-130-fairchild-ave-fairfield-ct-06825-2737390441)
   - Phone (tracking): (267) 668-2938.
   - Answer: ____________________
 - [ ] **Fairfield At Hauppauge**, Smithtown: 1 unit(s) from $2235. Ask: Is there a passenger elevator that serves this unit's floor? [trulia.com/building/fairfield-at-hauppauge-660-veterans-hwy-](https://www.trulia.com/building/fairfield-at-hauppauge-660-veterans-hwy-hauppauge-ny-11788-1004557526)
-  - Phone (tracking): (631) 938-2584. Hours: Mon-Sun 10:00am-5:00pm. Site: [fairfieldproperties.com/listing-detail/](https://fairfieldproperties.com/listing-detail/).
+  - Phone (tracking): (631) 938-2584. Hours: Mon-Sun 10:00am-5:00pm. Site: [fairfieldproperties.com/fairfield-at-hauppauge/](https://fairfieldproperties.com/fairfield-at-hauppauge/).
   - Answer: ____________________
 - [ ] **Fairfield at Smithtown**, Smithtown: 1 unit(s) from $2155. Ask: Is there a passenger elevator that serves this unit's floor? [trulia.com/building/fairfield-at-smithtown-35-elliott-pl-smi](https://www.trulia.com/building/fairfield-at-smithtown-35-elliott-pl-smithtown-ny-11787-2750789499)
-  - Phone (tracking): (631) 519-8225. Hours: Mon-Sun 10:00am-5:00pm. Site: [fairfieldproperties.com/listing-detail/](https://fairfieldproperties.com/listing-detail/).
+  - Phone (tracking): (631) 519-8225. Hours: Mon-Sun 10:00am-5:00pm. Site: [fairfieldproperties.com/fairfield-at-smithtown/](https://fairfieldproperties.com/fairfield-at-smithtown/).
   - Answer: ____________________
 - [ ] **Three Hubbard Rd LLC**, Wilton: 1 unit(s) from $1950. Ask: Is there a passenger elevator that serves this unit's floor? [trulia.com/building/three-hubbard-rd-llc-3-hubbard-rd-wilton](https://www.trulia.com/building/three-hubbard-rd-llc-3-hubbard-rd-wilton-ct-06897-2757884237)
   - Phone (tracking): (203) 900-4467.
   - Answer: ____________________
+- [ ] **Studio Apartment in Palmer Square**, Princeton: 1 unit(s) from $1950. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/nj/princeton/studio-apartment-in-palmer-sq](https://www.apartmentlist.com/nj/princeton/studio-apartment-in-palmer-square)
+  - Phone: none (listed by an individual owner; contact through the listing).
+  - Answer: ____________________
 
-## The Walk-Everywhere Experience (17 buildings, 18 units; 12 with a real office number)
+## The Walk-Everywhere Experience (17 buildings, 18 units; 0 with a real office number)
 
-- [ ] **2540 31st St # 5L**, Astoria (Central): 1 unit(s) from $1200. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/2540-31st-st-5l](https://www.apartmentlist.com/ny/queens/2540-31st-st-5l)
-  - Phone (supplied): (213) 581-7581.
-  - Answer: ____________________
-- [ ] **191 73rd Street**, Bay Ridge: 1 unit(s) from $2400. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/brooklyn/191-73rd-street--1](https://www.apartmentlist.com/ny/brooklyn/191-73rd-street--1)
-  - Phone (supplied): (718) 979-3400.
-  - Answer: ____________________
-- [ ] **310 94th St**, Bay Ridge: 1 unit(s) from $1800. Ask: Another unit's listing in this building says "Dogs: Allowed (Size allowed: Small) | Cats: Allowed (Size allowed: n/a) | Summar" (https://www.trulia.com/home/310-94th-st-f7-brooklyn-ny-11209-465877171); does that hold for this unit? Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/brooklyn/310-94th-st](https://www.apartmentlist.com/ny/brooklyn/310-94th-st)
-  - Phone (supplied): (678) 224-3723. Site: [azhomes.propertyware.com/rentals.html](https://azhomes.propertyware.com/rentals.html).
-  - Answer: ____________________
-- [ ] **7119 Shore Rd # 8765**, Bay Ridge: 1 unit(s) from $1500. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/brooklyn/7119-shore-rd-8765](https://www.apartmentlist.com/ny/brooklyn/7119-shore-rd-8765)
-  - Phone (supplied): (646) 754-2143. Site: [bigapplehome.propertyware.com/rentals.html](https://bigapplehome.propertyware.com/rentals.html).
-  - Answer: ____________________
-- [ ] **248 E 48th St Apt 5J**, East Midtown-Turtle Bay: 1 unit(s) from $2270. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/248-e-48th-st-apt-5j](https://www.apartmentlist.com/ny/new-york/248-e-48th-st-apt-5j)
-  - Phone (supplied): (917) 268-4684. Site: [whlcarchitectures.propertyware.com/rentals.html](https://whlcarchitectures.propertyware.com/rentals.html).
-  - Answer: ____________________
-- [ ] **300 E 54th St**, East Midtown-Turtle Bay: 1 unit(s) from $1200. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/300-e-54th-st](https://www.apartmentlist.com/ny/new-york/300-e-54th-st)
-  - Phone (supplied): (347) 333-1324. Site: [azhomes.propertyware.com/rentals.html](https://azhomes.propertyware.com/rentals.html).
-  - Answer: ____________________
-- [ ] **333 E 53rd St # 1109**, East Midtown-Turtle Bay: 1 unit(s) from $1600. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/333-e-53rd-st-1109](https://www.apartmentlist.com/ny/new-york/333-e-53rd-st-1109)
-  - Phone (supplied): (646) 232-8964. Site: [bigapplehome.propertyware.com/rentals.html](https://bigapplehome.propertyware.com/rentals.html).
-  - Answer: ____________________
-- [ ] **2 Constitution Ct Apt 1115**, Hoboken: 1 unit(s) from $1600. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/nj/hoboken/2-constitution-ct-apt-1115](https://www.apartmentlist.com/nj/hoboken/2-constitution-ct-apt-1115)
-  - Phone (supplied): (203) 660-9943. Site: [hagarrealty.propertyware.com/rentals.html](https://hagarrealty.propertyware.com/rentals.html).
-  - Answer: ____________________
-- [ ] **4107 42nd St**, Sunnyside: 1 unit(s) from $1850. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/4107-42nd-st--1](https://www.apartmentlist.com/ny/queens/4107-42nd-st--1)
-  - Phone (supplied): (310) 565-1362. Site: [hagarrealty.propertyware.com/rentals.html](https://hagarrealty.propertyware.com/rentals.html).
-  - Answer: ____________________
-- [ ] **235 E 73rd St Apt 1A**, Upper East Side-Lenox Hill-Roosevelt Island: 1 unit(s) from $1700. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/235-e-73rd-st-apt-1a](https://www.apartmentlist.com/ny/new-york/235-e-73rd-st-apt-1a)
-  - Phone (supplied): (607) 233-5603. Site: [azhomes.propertyware.com/rentals.html](https://azhomes.propertyware.com/rentals.html).
-  - Answer: ____________________
-- [ ] **353 E 72nd St Apt 18C**, Upper East Side-Lenox Hill-Roosevelt Island: 1 unit(s) from $2000. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/353-e-72nd-st-apt-18c](https://www.apartmentlist.com/ny/new-york/353-e-72nd-st-apt-18c)
-  - Phone (supplied): (838) 234-0637.
-  - Answer: ____________________
-- [ ] **936 West End Avenue**, Upper West Side-Manhattan Valley: 1 unit(s) from $2800. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/936-west-end-avenue](https://www.apartmentlist.com/ny/new-york/936-west-end-avenue)
-  - Phone (supplied): (646) 559-9001.
-  - Answer: ____________________
 - [ ] **805 St. Marks Avenue**, Crown Heights (North): 2 unit(s) from $2300. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p216219/805-st-marks-avenue-c](https://www.zumper.com/apartment-buildings/p216219/805-st-marks-avenue-crown-heights-new-york-ny)
   - Phone (tracking): (844) 325-6407 ext. 3778. Hours: Mon-Sun 9:30am-4:30pm.
   - Answer: ____________________
 - [ ] **415 E  54th St**, East Midtown-Turtle Bay: 1 unit(s) from $2000. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [trulia.com/home/415-e-54th-st-14e-new-york-ny-10022-44821484](https://www.trulia.com/home/415-e-54th-st-14e-new-york-ny-10022-448214849)
   - Phone (brokerage): (646) 988-5355.
   - Answer: ____________________
-- [ ] **8352 Talbot St Apt 4H**, Kew Gardens: 1 unit(s) from $1300. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/8352-talbot-st-apt-4h](https://www.apartmentlist.com/ny/queens/8352-talbot-st-apt-4h)
-  - Phone (brokerage): (347) 906-0871.
+- [ ] **2540 31st St # 5L**, Astoria (Central): 1 unit(s) from $1200. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/2540-31st-st-5l](https://www.apartmentlist.com/ny/queens/2540-31st-st-5l)
+  - Phone: none (listed by an individual owner; contact through the listing).
+  - Answer: ____________________
+- [ ] **191 73rd Street**, Bay Ridge: 1 unit(s) from $2400. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/brooklyn/191-73rd-street--1](https://www.apartmentlist.com/ny/brooklyn/191-73rd-street--1)
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
+- [ ] **310 94th St**, Bay Ridge: 1 unit(s) from $1800. Ask: Another unit's listing in this building says "Dogs: Allowed (Size allowed: Small) | Cats: Allowed (Size allowed: n/a) | Summar" (https://www.trulia.com/home/310-94th-st-f7-brooklyn-ny-11209-465877171); does that hold for this unit? Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/brooklyn/310-94th-st](https://www.apartmentlist.com/ny/brooklyn/310-94th-st)
+  - Phone: none (listed by an individual owner; contact through the listing).
+  - Answer: ____________________
+- [ ] **7119 Shore Rd # 8765**, Bay Ridge: 1 unit(s) from $1500. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/brooklyn/7119-shore-rd-8765](https://www.apartmentlist.com/ny/brooklyn/7119-shore-rd-8765)
+  - Phone: none (listed by an individual owner; contact through the listing).
   - Answer: ____________________
 - [ ] **220 E 57th St Apt 14J**, East Midtown-Turtle Bay: 1 unit(s) from $2000. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/220-e-57th-st-apt-14j](https://www.apartmentlist.com/ny/new-york/220-e-57th-st-apt-14j)
-  - Phone: not found on any saved page.
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
+- [ ] **248 E 48th St Apt 5J**, East Midtown-Turtle Bay: 1 unit(s) from $2270. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/248-e-48th-st-apt-5j](https://www.apartmentlist.com/ny/new-york/248-e-48th-st-apt-5j)
+  - Phone: none (listed by an individual owner; contact through the listing).
+  - Answer: ____________________
+- [ ] **300 E 54th St**, East Midtown-Turtle Bay: 1 unit(s) from $1200. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/300-e-54th-st](https://www.apartmentlist.com/ny/new-york/300-e-54th-st)
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
+- [ ] **333 E 53rd St # 1109**, East Midtown-Turtle Bay: 1 unit(s) from $1600. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/333-e-53rd-st-1109](https://www.apartmentlist.com/ny/new-york/333-e-53rd-st-1109)
+  - Phone: none (listed by an individual owner; contact through the listing).
+  - Answer: ____________________
+- [ ] **2 Constitution Ct Apt 1115**, Hoboken: 1 unit(s) from $1600. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/nj/hoboken/2-constitution-ct-apt-1115](https://www.apartmentlist.com/nj/hoboken/2-constitution-ct-apt-1115)
+  - Phone: none on the listing (broker-listed; contact through the listing).
   - Answer: ____________________
 - [ ] **600 Hudson St Apt 1E**, Hoboken: 1 unit(s) from $1500. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [zumper.com/address/600-hudson-st-hoboken-nj-07030-usa](https://www.zumper.com/address/600-hudson-st-hoboken-nj-07030-usa)
-  - Phone: not found on any saved page.
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
+- [ ] **8352 Talbot St Apt 4H**, Kew Gardens: 1 unit(s) from $1300. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/8352-talbot-st-apt-4h](https://www.apartmentlist.com/ny/queens/8352-talbot-st-apt-4h)
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
+- [ ] **4107 42nd St**, Sunnyside: 1 unit(s) from $1850. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/queens/4107-42nd-st--1](https://www.apartmentlist.com/ny/queens/4107-42nd-st--1)
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
+- [ ] **235 E 73rd St Apt 1A**, Upper East Side-Lenox Hill-Roosevelt Island: 1 unit(s) from $1700. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/235-e-73rd-st-apt-1a](https://www.apartmentlist.com/ny/new-york/235-e-73rd-st-apt-1a)
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
+- [ ] **353 E 72nd St Apt 18C**, Upper East Side-Lenox Hill-Roosevelt Island: 1 unit(s) from $2000. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/353-e-72nd-st-apt-18c](https://www.apartmentlist.com/ny/new-york/353-e-72nd-st-apt-18c)
+  - Phone: none on the listing (broker-listed; contact through the listing).
+  - Answer: ____________________
+- [ ] **936 West End Avenue**, Upper West Side-Manhattan Valley: 1 unit(s) from $2800. Ask: Are dogs allowed, and is there a weight limit (must be 25 lb or more)? [apartmentlist.com/ny/new-york/936-west-end-avenue](https://www.apartmentlist.com/ny/new-york/936-west-end-avenue)
+  - Phone: none (listed by an individual owner; contact through the listing).
   - Answer: ____________________
 
 Left out (4, likely to fail the all-in cap): The Waypointe Apartments (Norwalk), The Confluence at Norwalk (Norwalk), Avalon Teaneck (Teaneck), Brookside Wilton (Wilton).

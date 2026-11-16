@@ -260,3 +260,139 @@ does not carry yet. The "before" set was taken on the earlier data build.)
 - The "Typical figures", tile captions and other template sentences listed above are still generated in the template.
 - With storage blocked, the first-run "How this works" card shows on every load.
 - Evidence quotes whose source gives only "4 weeks ago" show "date not known" beside the source's own words.
+
+## Map integration
+
+(2026-11-16. The map component of `docs/MAP_COMPONENT.md` is now part of `site/index.html`.)
+
+### What changed
+
+- **Build.** `scripts/build_site.py` fills a second marker, `<!--HOUSE_HUNT_MAP_BASE_SLOT-->`, with
+  `window.HOUSE_HUNT_MAP_BASE` (`site/map_base.json`, 53 KB). Opened beside its files, the page fetches `map_base.json`
+  once instead. If the base or the component is missing, the map's place shows "The map could not be drawn here".
+- **Component.** The style and script between the two markers of `site/map_component.html` are pasted in. Lines that
+  differ from the prototype carry a `page:` comment: a label hook (`yearLabels {id: {label, short}}`), short chip text on
+  a phone and the full name from 520 px, three chips to a row (two rows of three at 390 px; three rows of two under
+  360 px), `onSelect(id)`, the rank pill and "k of N fit your limits" on the card, the E-ZPass note, a "More" fold for
+  the crime bars, and one short hint. The page also restates the font size of four buttons, because the component's own
+  `.hhm button{font:inherit}` outranks them. `site/map_component.html` itself was not edited, so it and the page differ.
+- **First screen.** The mile-ring `mapSvg` is gone. The six experience cards stay the way in; "See them on a map" jumps
+  to the map under them, started with `year: null`.
+- **Inside an experience.** A List / Map switch above the neighborhoods. List is the default and still shows three,
+  then more. Map starts on that experience (other experiences faint) and zooms to its neighborhoods and Mom and Dad's.
+  The choice is kept in `localStorage` (`lamia-house-hunt-v1-hoodview`) inside try/catch, and in memory when storage
+  throws.
+- **Life cycle.** One instance at a time. `renderView()` calls `destroy()` before it replaces the view and mounts after,
+  only when the container has a width. "See places" goes to `#hood-<slug>`. Browser Back returns to the same scroll
+  position with the same card open (the selection is remembered per page for the visit; the zoom is not).
+- **One identity per experience.** `YEAR_MARKS` (the map's six colours and shapes, in `years[]` order) is passed to the
+  map as `yearStyle` and drawn by `ymark()` on the experience cards, page titles, breadcrumbs, neighborhood cards and
+  the limits strip. The pastel `YEAR_COLORS` remain only as fills for the drawings and the number pins.
+- **Counts.** Marks are sized by the places that fit the viewer's limits; a hollow mark has none. Only neighborhoods a
+  list shows are on the map, so chip counts match the lists.
+- **Coordinates.** The page no longer replaces a neighborhood's `lat` / `lon` with the mean of its places (that was a
+  workaround for two-decimal coordinates). The component's fan-out for marks that share a pixel is unchanged.
+- **Card.** Experience, rank within it ("Top pick" / "#4 of 22", from `rank_in_experience` and the length of the
+  experience's list), places shown, minutes by car, tolls, "See places" (or "See this neighborhood" when it has none).
+
+### What is weak
+
+- **The built page is over 4 MB.** `site/data.json` alone is 4.86 MB at the last build (it was 3.1 MB when this work
+  started); the template is 244 KB and the map base 53 KB. The walkthrough prints the three figures and a warning. The
+  fix is in the data (`neighborhoods[].local` is over 1 MB; `units[].scores` is never read by the page).
+- A re-render (a limit moved, Back) rebuilds the map, so zoom and pan are lost; the open card is kept.
+- A mark under the house or its label cannot be tapped until zoomed in. At 320 px the six chips take three rows.
+- While zoomed, a one-finger drag pans the map, so the page cannot be scrolled from inside it.
+- Tested in headless Chromium only (touch and mouse, 390, 1280 and 320 px, reduced motion, storage throwing, the built
+  file re-wrapped). No Safari, no real phone, no screen reader.
+- In strips and chips the toll note is shortened to "NY E-ZPass"; sentences say "with a New York E-ZPass".
+
+## UI pass 3: headlines first
+
+(2026-11-16, after Will walked the preview: "a consumer experience, not B2B software… everything should be collapsible
+with the headline conclusion visible". Structure follows `docs/NAV_PATTERNS.md` except where noted.)
+
+### The building blocks
+
+- **Row** (`row()`): a native `<details>` with a small caps label, a headline built by a function in `HL` from the data,
+  an optional written subhead (`<record>.headlines.<section>.subhead`, lighter, two lines at most), at most one chip
+  ("Ask", "Offer", "Near the cap", "Lease term", "Street rules", "2 to know") and a caret. No row starts open. Rows are
+  independent; "Open all / Close all" sits above them. What is open, and whether the host text is expanded, is
+  remembered per page for the visit (`OPENED`), never stored.
+- **Headline builders** (`HL.cost`, `trip`, `parking`, `dog`, `building`, `confirm`, `day`, `queens`, `voices`, `rules`,
+  `hoodRules`, `described`, `here`, `out`, `yearCost`, `yearTrip`, `first`): pure functions, reachable for tests as
+  `window.__houseHunt.HL`. Unknown reads "not published, ask" / "not stated, ask" / "tolls not fully known".
+- **Key-facts strip**: four cells above the rows; the typical figure is the median, with the range small beneath.
+- **Host voice**: `host.intro` / `host.line` + `host.catch`, clamped to two lines with "More".
+- **Cards**: a neighborhood card is name, rank, one line, up to three facts and the "safest" badge; a place card is
+  name, rank, one host line, three facts and one asterisk line. The whole place card is the link; Hold is on the page.
+- **"See how we got this"**: every source and method note is a closed link (`howHtml()`), also inside sheets and the
+  money box. The footer is one row of links; the gates, counts, build time and sources open under it.
+
+### Collapsed heights at 390 × 844 (under the sticky top line, to the end of the footer)
+
+| Page | Example | px | Screens |
+|---|---|---|---|
+| Experience | six of six | 1,609 to 1,688 | 1.91 to 2.00 |
+| Neighborhood | rich (Stamford) | 1,778 | 2.11 |
+| Neighborhood | sparse (Riverdale) | 1,371 | 1.62 |
+| Neighborhood | with avoid cards (Jamaica) | 1,573 | 1.86 |
+| Neighborhood | with asterisks (Danbury) | 1,660 | 1.97 |
+| Neighborhood | tallest of all | 1,814 | 2.15 |
+| Place | rich / sparse / asterisk / rent asterisk | 1,285 / 1,167 / 1,183 / 1,240 | 1.38 to 1.52 |
+| Place | tallest of all | 1,321 | 1.57 |
+| Compare | three places | 1,386 | 1.64 |
+| First screen | six cards of 213 to 250 px, then the map | 2,787 | 3.3 |
+
+The walkthrough asserts 2.2 screens (1,857 px) for every experience, neighborhood and place in the data, and for the
+compare view of three.
+
+### Removed from the open
+
+- First screen: the gates paragraph, "A snapshot, not a live feed…", the asterisk count box, "6 ways your first 12
+  months…", the "Tap an experience" tip, the drawings on the cards, price and drive ranges as the main figure, the
+  limits sentence.
+- Experience: the drawing, "Typical figures" list, the Safety tile, the two crime lines of the scale, the ranking and
+  "first three are shown" sentences, the map note, the "Only warnings" lead.
+- Neighborhood: the drawing, the rank's scoring basis, the "Feeling safe" section, car thefts, "typical of the places
+  here", the places lead with its price span and dates, the asterisk count box, the "Tap Look inside" tip, the avoid
+  lead, the long phone-call and not-re-checked introductions, the notes about how quotes were chosen.
+- Place card: the size sentence, parking and move-in line, the why of the asterisk, the three-sentence rent line, the
+  disclosure line, both buttons.
+- Place: the drawing (now nowhere on the page), "The picture is a drawing…", the hold helper, the generated summary
+  paragraph, the crime sentence, crime in "You'll love / Gives us pause", the crime figure on the Night tile.
+- Compare: both tips, the "Feeling safe" row, crime in the plain-words trade, the why under each thing to confirm, the
+  "finish line" sentence. "Against" is "compared to" everywhere, and pairs are "1 and 2".
+- Footer: everything but the lease line (first screen only) and three links.
+
+### Moved behind a tap
+
+- Sources and methods everywhere; the scale's "how to read this"; the range's nearest and farthest neighborhood; the
+  mail-rate toll; a neighborhood's scoring basis and its crime figures (under "What's here", then "See how we got
+  this"); the map card's crime bars ("More"); the why of an asterisk ("See why"); the basis of each cost line.
+- Rows: the day in an experience with the host's walkthrough, promise and catch in full; costs; going out and green
+  space; the Queens comparison; good for you / watch for; what's here; what residents say; how others describe it;
+  local rules; avoid cards; the phone-call and not-re-checked lists; still to confirm with the disclosures and tour
+  questions; the money box and rent terms; the day tiles; the trip; the car; the dog; the building; in compare, the
+  parts of the day, "what that feels like" and the Queens table.
+- Sheet: the leasing office (phone and hours).
+
+### Where this differs from docs/NAV_PATTERNS.md
+
+- A place has eight rows when something is to confirm (the trip to Mom and Dad and the car are separate), not seven.
+- Strip cells do not open sheets, except the count, which jumps to the list. "How we got this" opens in place.
+- The place page keeps the price on its sign beside the name; the strip carries size, drive, parking and dogs.
+- No sticky jump chips. The shared sheet is the existing one, not a `<dialog>`.
+- Rows come before the list on experience and neighborhood pages, as the document draws them.
+
+### Weak
+
+- The crime filter drops whole sentences (clauses in a subhead) that match a word list; a sentence that mixes crime
+  with something useful is lost, and wording outside the list would pass.
+- The limits sheet still has a Safety slider, and "Outside your limits" can name the crime rate when she sets it.
+- Resident quotes inside "What residents say" can mention crime; the row's headline skips the safety theme.
+- `rent.offer_text` on some places is pipeline text ("term 12: price 2805, totalPrice…"); it shows in Rent terms.
+- "Among the safest" is the lowest fifth by violent rate of neighborhoods with places: 21 of 108.
+- Headlines longer than the row are cut with an ellipsis until the row is opened.
+- The first-run "How this works" card still opens on the first visit.
+- Old screenshots from earlier passes remain in `site/screens/`; this pass wrote `ux-*`, `map-int-*` and the numbered ones.
