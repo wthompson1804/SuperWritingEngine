@@ -1,6 +1,6 @@
 # Ratings census, part 2 (98 buildings) - harvest notes
 
-Run 2026-11-16, about 00:55 to 01:20 UTC. Output: `data/evidence/ratings_census_part2.csv` (985 rows, 98 buildings).
+Run 2026-11-16, about 00:55 to 01:20 UTC. Output: `data/evidence/ratings_census_part2.csv` (987 rows, 98 buildings).
 Brief: `docs/RATINGS_CENSUS_BRIEF.md`. No review text or names collected.
 
 ## The main limit: only 57 of 98 buildings got a web search
@@ -18,8 +18,10 @@ second search the brief allows. The limit was not worked around.
 1. Offline. `data/evidence/ratings_batch_*.csv` and `ratings_round1.csv` matched by addr_key (39 found rows: 25 Openigloo,
    9 Google-as-shown-on-Zumper, 5 Apartment List). Cached Apartment List and Zumper pages for each building re-read for
    `aggregateRating` / `buildingReviews` (1 further Apartment List figure). All cached non-aggregator HTML under `raw/` scanned
-   for Google-widget text ("Rating: x out of 5 ... Based on n reviews") and JSON-LD `aggregateRating`: two part-2 hits,
-   The Beacon (Google widget 3.8 from 1,111, whole complex) and The George New Brunswick (own-site JSON-LD 4 from 1).
+   for Google-widget text ("Rating: x out of 5 ... Based on n reviews") and JSON-LD `aggregateRating`: four part-2 hits:
+   The Beacon (Google widget 3.8 from 1,111, whole complex) and own-site JSON-LD figures for The George New Brunswick
+   (4 from 1), Avalon Somerville Station (4.4 from 149) and Harbourside SoNo (4.9 from 11). The cached Avalon Wayne and
+   Avalon Princeton on Harrison pages carry no such markup.
 2. Allowed pages. No new HTTP requests were made: the earlier evidence batches had already fetched the Apartment List page,
    the Zumper building/address page and the building's own site (where one exists) for these buildings, and those cached
    copies were what step 1 read. The earlier "looked at" trail is copied into the `note` of the not_seen rows.
@@ -62,7 +64,8 @@ their figures are recorded only as displayed by search, basis `search_result_dis
 | birdeye | 6 | 28 |
 | rentable | 3 | 5 |
 | zillow | 2 | 2 |
-| yelp, uhomes, own_site, apartmentiq | 1 each | 3, 1, 1, 4 |
+| own_site | 3 | 11 |
+| yelp, uhomes, apartmentiq | 1 each | 3, 1, 4 |
 
 67 buildings have a rating on at least one platform; 31 have none visible (1 of those has a bare review count: City Line East,
 RentCafe "38 reviews"). Of the 67, the largest review count on any platform is 25 or more for 16, 10 or more for 27, under 5 for 26.

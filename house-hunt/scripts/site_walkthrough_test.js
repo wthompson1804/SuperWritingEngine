@@ -95,6 +95,7 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
     if (o.shot) { await pg.evaluate(() => { const r = document.getElementById('sec-map').getBoundingClientRect(); window.scrollBy(0, r.top - 8); }); await o.shot('map-int-01-first-screen-map'); }
     await centre(pg, '[data-region=nyc]'); await pg.click('[data-region=nyc]'); await pg.waitForTimeout(o.reduced ? 80 : 450);
     assert(await pg.isVisible('.hhm-reset'), 'zoomed: "Whole map" is offered');
+    if (!o.reduced) await pg.waitForTimeout(350);
     const m = await tapMark(pg, o.touch);
     const name = (await pg.textContent('.hhm-card h3')).trim(), cardText = await pg.textContent('.hhm-card');
     const H = d.neighborhoods.find(h => m.label.indexOf(h.name + (h.state ? ', ' + h.state : '') + '. ') === 0 && name.indexOf(h.name) === 0);
@@ -482,19 +483,39 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   // ---------- every view renders, collapsed: no side scroll, within 2.2 screens, no crime in the open ----------
   await page.reload(); await page.waitForSelector('#view .ph1, #view .life'); // a fresh visit: no row is remembered as open
   const t0 = Date.now();
-  const res = await page.evaluate(async ([ids, LIMIT]) => { let worst = 0, n = 0, tall = [], crime = [], maxH = {}, unresolved = []; const RE = /\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000/i;
+  const res = await page.evaluate(async ([ids, LIMIT]) => { let worst = 0, n = 0, tall = [], crime = [], maxH = {}, unresolved = [], cutHeads = [], longHeads = 0, heads = 0, dumps = []; const RE = /\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000/i;
     for (const h of ids) { const t = performance.now(); location.hash = h; await new Promise(r => setTimeout(r, 0)); worst = Math.max(worst, performance.now() - t); n++;
       if (location.hash !== '#' + h) { unresolved.push(h); continue; } // two ids that give the same plain hash: the page numbers the second one
       if (document.documentElement.scrollWidth > document.documentElement.clientWidth) return 'overflow at ' + h;
       const kind = h.split('-')[0], f = document.getElementById('foot').getBoundingClientRect(), tr = document.getElementById('trail'), ht = Math.round(f.bottom + window.scrollY - (tr.hidden ? 0 : tr.offsetHeight));
       maxH[kind] = Math.max(maxH[kind] || 0, ht); if (ht > LIMIT) tall.push(h + ' ' + ht);
       if (document.querySelectorAll('#view details.rowd[open]').length) return 'a row is open by default at ' + h;
+      // a headline is readable in full while its row is closed: never clipped, never ending in an ellipsis, 64 characters at most
+      document.querySelectorAll('#view details.rowd > summary .rh').forEach(e => { if (!e.getClientRects().length) return; const s = e.textContent, cs = getComputedStyle(e); heads++; if (s.length > 44) longHeads++;
+        if (/…|\.\.\.$/.test(s) || e.scrollWidth > e.clientWidth + 1 || e.scrollHeight > e.clientHeight + 1 || cs.textOverflow === 'ellipsis' || cs.whiteSpace === 'nowrap' || s.length > 64) cutHeads.push(h + ' ' + e.closest('details').id + ': ' + s); });
+      // text from a listing is never shown as a dump of fields
+      { const dv = document.getElementById('view').textContent, dm = /totalPrice|\bterm \d+:/.exec(dv); if (dm) dumps.push(h + ': ' + dv.slice(Math.max(0, dm.index - 30), dm.index + 50)); }
       const m = RE.exec(document.getElementById('view').innerText); if (m) crime.push(h + ': ' + document.getElementById('view').innerText.slice(Math.max(0, m.index - 40), m.index + 40).replace(/\s+/g, ' ')); }
-    return { n, worst: Math.round(worst), maxH, tall, crime, unresolved }; },
+    return { n, worst: Math.round(worst), maxH, tall, crime, unresolved, cutHeads, longHeads, heads, dumps }; },
     [[...data.years.map(y => 'exp-' + slug(y.id)), ...data.neighborhoods.filter(h => yearBy[h.year]).map(h => 'hood-' + slug(h.id)), ...data.units.filter(u => hoodBy[u.hood_id]).map(u => 'unit-' + slug(u.id))], LIMIT]);
   console.log('all views:', JSON.stringify(res).slice(0, 1500), 'in', Date.now() - t0, 'ms');
   assert(typeof res === 'object', String(res)); assert(res.unresolved.length <= 3, 'hashes the page did not open: ' + res.unresolved);
   if (W === 390) assert.strictEqual(res.tall.length, 0, 'pages over 2.2 screens collapsed: ' + res.tall.slice(0, 8));
+  assert.strictEqual(res.cutHeads.length, 0, 'row headlines that are cut or too long: ' + res.cutHeads.slice(0, 6).join(' | '));
+  assert.strictEqual(res.dumps.length, 0, 'pipeline text on a page: ' + res.dumps.slice(0, 3).join(' | '));
+  console.log('row headlines:', res.heads, 'on', res.n, 'pages, none cut;', res.longHeads, 'longer than 44 characters (two lines)');
+  { const bad = await page.evaluate(us => us.map(u => [u.id, window.__houseHunt.cleanText(u.t)]).filter(x => /totalPrice|term \d+:|_|\bUTC\b|gross or net/.test(x[1]) || window.__houseHunt.looksDump(x[1])), data.units.concat(data.avoid, data.held).filter(u => u.rent && u.rent.offer_text).map(u => ({ id: u.id, t: u.rent.offer_text })));
+    assert.strictEqual(bad.length, 0, 'an offer text that still reads like pipeline text: ' + JSON.stringify(bad.slice(0, 3))); }
+  // where a neighborhood is: the state for Connecticut, the borough for New York City, the county elsewhere; a part of Jersey City by its short name
+  { const where = await page.evaluate(hs => hs.map(h => [window.__houseHunt.hoodTitle(h), window.__houseHunt.hoodWhere(h)]), data.neighborhoods.map(h => ({ name: h.name, area: h.area, state: h.state, parent_name: h.parent_name, short_name: h.short_name })));
+    data.neighborhoods.forEach((h, i) => { const [ti, wh] = where[i];
+      assert(!/Planning Region/i.test(wh), 'no planning region under a name: ' + wh);
+      if (h.parent_name && h.short_name) { assert.strictEqual(ti, h.short_name); assert.strictEqual(wh, h.parent_name + ', ' + h.state); }
+      else { assert.strictEqual(ti, h.name); if (h.state === 'CT') assert.strictEqual(wh, 'Connecticut'); else if (h.state === 'NY' && /^(Brooklyn|Queens|Manhattan|Bronx|Staten Island)$/.test(h.area)) assert.strictEqual(wh, h.area + ', New York City'); else assert.strictEqual(wh, [h.area, h.state].filter(Boolean).join(', ')); } });
+    const ct = shownHoods.find(h => h.state === 'CT'), jc = shownHoods.find(h => h.parent_name && h.short_name), nyc = shownHoods.find(h => h.state === 'NY' && h.area === 'Queens');
+    if (ct) { await go('#hood-' + slug(ct.id)); assert.strictEqual((await page.textContent('#hood-where')).split(' · ')[0].trim(), 'Connecticut'); }
+    if (nyc) { await go('#hood-' + slug(nyc.id)); assert.strictEqual((await page.textContent('#hood-where')).split(' · ')[0].trim(), 'Queens, New York City'); }
+    if (jc) { await go('#hood-' + slug(jc.id)); assert.strictEqual((await page.textContent('.ph1')).trim(), jc.short_name); assert.strictEqual((await page.textContent('#hood-where')).split(' · ')[0].trim(), 'Jersey City, NJ'); await shot('ux-03e-jersey-city-part'); } }
   assert.strictEqual(res.crime.length, 0, 'crime wording in the open: ' + res.crime.slice(0, 5).join(' | '));
   console.log('collapsed heights (px, screens of ' + SCREEN + '):'); heights.forEach(x => console.log('  ' + x.kind.padEnd(13) + String(x.h).padStart(5) + '  ' + x.screens.toFixed(2) + (x.h > AIM ? '  over 2 screens' : '') + '  ' + x.tag));
 
