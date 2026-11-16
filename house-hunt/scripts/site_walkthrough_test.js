@@ -672,7 +672,7 @@ const LIMITS = { experience: 3.6, neighborhood: 3.4, building: 2.6, compare: 2.2
     y.host = { intro: 'TEST experience host intro.', walkthrough: ['TEST walkthrough one.', 'TEST walkthrough two.'] };
     u.host = { line: 'TEST host line for the place.', catch: 'TEST host catch.' }; u.headlines = { parking: { subhead: 'TEST parking subhead.' } };
     // fields the writing agent will send: icon points, the day's moments, a text about the building
-    const y2 = d.years.find(x => x.id !== vh.year), h2 = d.neighborhoods.find(x => x.id === h2id), u2 = d.units.find(x => x.id === u2id);
+    const y2 = d.years.find(x => x.id === h2o.year), h2 = d.neighborhoods.find(x => x.id === h2id), u2 = d.units.find(x => x.id === u2id);
     y2.about_points = [{ icon: 'dog', text: 'TEST point one, with a dog.' }, { icon: 'no-such-icon', text: 'TEST point two, unknown icon.' }, { icon: 'moon', text: 'TEST point about violent crime that must not show.' }, 'TEST point three, a plain string.'];
     y2.day_moments = [{ icon: 'coffee', title: 'TEST morning', text: 'TEST moment one.' }, { icon: 'train', title: 'TEST commute', text: 'TEST moment two.' }];
     h2.about_points = [{ icon: 'park', text: 'TEST hood point.' }]; u2.about_building = 'TEST about the building. It has a second sentence. And a third one.';
