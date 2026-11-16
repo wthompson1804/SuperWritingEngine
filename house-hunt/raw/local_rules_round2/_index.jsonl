@@ -506,3 +506,4 @@
 {"url": "https://cdn.townweb.com/robots.txt", "retrieved_at": "2026-11-16T00:00:43+00:00", "status": 200, "path": "raw/local_rules_round2/278ac7e3395e0b13.txt", "source": "local_rules_round2"}
 {"url": "https://cdn.townweb.com/glencoveny.gov/wp-content/uploads/2020/12/Dog-Park-Sign-Posted_FINAL-15Nov16.pdf", "retrieved_at": "2026-11-16T00:00:45+00:00", "status": 200, "path": "raw/local_rules_round2/a692e86bc13b5185.pdf", "source": "local_rules_round2"}
 {"url": "https://cdn.townweb.com/glencoveny.gov/wp-content/uploads/2022/01/Dog-License-Packet-Updated.pdf", "retrieved_at": "2026-11-16T00:00:47+00:00", "status": 200, "path": "raw/local_rules_round2/304df2b44fe89d24.pdf", "source": "local_rules_round2"}
+{"url": "https://www.ahnj.com/robots.txt", "retrieved_at": "2026-11-16T00:02:10+00:00", "status": 404, "path": "raw/local_rules_round2/0b3e3708ea6803a7.txt", "source": "local_rules_round2"}

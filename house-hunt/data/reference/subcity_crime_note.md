@@ -69,7 +69,7 @@ tracts; incidents counted by point-in-polygon.
 2. **Small areas, one partial year.** 319 days, preliminary. Bergen-Lafayette sits 6% under the violent line and West
    Side 4% under the property line; a second year or a boundary moved by one tract could put either across.
 3. **Block geocoding.** Points sit at the "hundred block", so an incident on a boundary street can fall on either side.
-   Twenty of the 38 Jersey City buildings are within 150 m of a boundary (`subcity_assignment.csv`).
+   Sixteen of the 38 Jersey City buildings are within 150 m of a boundary (`subcity_assignment.csv`).
 4. **Unequal yardsticks.** NYC neighborhoods are judged on a full-year precinct rate from NYPD complaints; the rest of
    the region on a whole-agency FBI rate. A scaled 10-month estimate for eight Jersey City areas would be a third
    method. Rule 8 (keep sources separate) argues for showing it beside the agency rate, not replacing it.

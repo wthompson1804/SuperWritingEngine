@@ -30,3 +30,7 @@
 {"muni": "ridgewood", "url": "https://laserfiche.ridgewoodnj.net/WebLink/", "reason": "robots: * group", "at": "2026-11-15T23:55:08+00:00"}
 {"muni": "ridgewood", "url": "https://www.ridgewoodnj.net/FAQ.aspx", "reason": "robots: claude group", "at": "2026-11-15T23:55:08+00:00"}
 {"muni": "bloomfield", "url": "https://www.bloomfieldtwpnj.com/faq.aspx?TID=24", "reason": "robots: claude group", "at": "2026-11-15T23:57:37+00:00"}
+{"muni": "garwood", "url": "https://www.garwood.org/", "reason": "robots: claude group", "at": "2026-11-16T00:02:10+00:00"}
+{"muni": "long-beach", "url": "https://www.longbeachny.gov/", "reason": "robots: claude group", "at": "2026-11-16T00:02:10+00:00"}
+{"muni": "wallkill", "url": "https://www.townofwallkill.com/", "reason": "robots: host refused earlier: round 2 (2026-11-15T23:54:19+00:00): HTTP 403", "at": "2026-11-16T00:02:10+00:00"}
+{"muni": "patchogue", "url": "https://patchoguevillage.org/", "reason": "robots: RuntimeError('fetch failed after 2 tries: https://patchoguevillage.org/robots.txt: SSLError(MaxRetryError(\\'HTTPSConnectionPool(host=\\\\\\'patchoguevillage.org\\\\\\', port=443): Max retries exceeded with ", "at": "2026-11-16T00:02:19+00:00"}

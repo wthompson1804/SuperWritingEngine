@@ -476,6 +476,7 @@ def main():
     # independent check 2, D2: a fact the evidence pass looked for and could NOT confirm is open, whatever the
     # harvester stored. seen[(building, fact)] = {"confirmed": n, "unconfirmed": [text, ...]}
     seen = {}
+    contact_only, dogs_named, floor_unknown = {}, set(), []
     PLUTO_ONLY = re.compile(r"pluto|bldgclass|building class|public record|class D\d|nyc_records_match|cityofnewyork", re.I)
     PAGE_WORDS = re.compile(r"listing (?:says|states|lists)|on the listing|amenit|description|own site|building(?:'s)? (?:site|page)|floor ?plans? page", re.I)
     if len(C):
@@ -497,8 +498,15 @@ def main():
                     st["unconfirmed"].append((txt[:260], r.source_url))
             if (gate_fact == "dogs_allowed" or fact.startswith("dog_weight")) and r.status != "contradicts":
                 ne = parsers.dogs_not_explicit(txt)
-                if ne:                           # D3: "pets upon approval", "case by case", dogs not named: not explicit, any status
+                if ne and re.search(r"contact for more information", ne, re.I):
+                    # an aggregator's policy block that only says "contact for more information on pet policy": open unless
+                    # another page for the building names dogs as allowed (settled after the loop)
+                    contact_only.setdefault(b, (txt[:200], r.source_url))
+                elif ne:                         # D3: "pets upon approval", "case by case", dogs not named: not explicit, any status
                     M.add(b, "dogs_evidence_open", f"dogs are not named as allowed ('{ne}'): {txt[:200]}", "confirmed", r.source_url)
+            if gate_fact == "dogs_allowed" and r.status == "confirmed" and not re.search(r"zumper", r.source_url, re.I) \
+                    and re.search(r"dogs? (?:are )?(?:allowed|ok|welcome)|small dogs|dogs: allowed|cats (?:and|&|,) (?:small )?dogs", txt, re.I):
+                dogs_named.add(b)
             if r.status == "unconfirmed":        # an unconfirmed row never upgrades a basis (W3)
                 continue
             if fact.startswith("elevator"):
@@ -544,8 +552,13 @@ def main():
                 for lab, fl_ in pairs:
                     # a floor the checker read off the unit number is an inference, whatever the row's status (W1)
                     floor_rows.append((b, lab, fl_, "inferred" if inferred else "confirmed", r.source_url, val[:120], r.quote or ""))
+                if r.status == "unconfirmed" and re.match(r"\s*(?:unknown|unclear|cannot|not (?:stated|known))", val, re.I):
+                    floor_unknown.append((b, f"{val} | {r.quote}"))      # e.g. "Unit 27A cannot be floor 27: the building has 6 floors"
                 if not pairs and not re.search(r"unknown|unconfirmed", val, re.I):
                     floor_rows.append((b, "?", None, "unparsed", r.source_url, val[:120], r.quote or ""))
+    for b, (t_, src_) in contact_only.items():
+        if b not in dogs_named:
+            M.add(b, "dogs_evidence_open", f"dogs are not named as allowed (the only policy text is 'contact for more information on pet policy'): {t_}", "confirmed", src_)
     for (b, gate_fact), st in seen.items():
         if st["unconfirmed"] and not st["confirmed"]:
             for t_, src_ in st["unconfirmed"][:3]:
@@ -767,6 +780,10 @@ def main():
                 break
         label_floor, kind = parsers.floor_from_label(un, bf_good.get(b))
         cap = parsers._bf(bf_any.get(b))
+        if parsers.unit_label_key(un) and any(b_ == b and re.search(r"(?<![\w-])" + re.escape(un) + r"(?![\w-])", t_, re.I) for b_, t_ in floor_unknown) \
+                and not (got and got[1] == "confirmed") and gbasis != "stated":
+            # the evidence pass looked at this unit and said its floor is unknown: a label reading does not stand
+            label_floor, kind, got = None, "complex", None
         if got and got[1] == "confirmed":
             fl.append(got[0]); flb.append("confirmed"); fls.append(got[2]); flk.append("")
         elif gbasis == "stated" and re.fullmatch(r"[\d.]+", str(stated)):

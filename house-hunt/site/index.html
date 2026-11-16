@@ -231,6 +231,7 @@ details.receipt .fn{font-size:13px;font-weight:700;color:var(--muted);padding:2p
 .confl+.confl{margin-top:-4px}
 .rentl{font-size:14.5px;line-height:1.35;font-weight:600;border-left:4px solid var(--butter-deep);padding:2px 0 2px 10px}
 .rentl b{font-weight:800}
+.callitem .confl b,.callitem .rentl b{font-size:inherit;line-height:inherit}
 .copybox{width:100%;min-height:180px;font:inherit;font-size:14px;line-height:1.35;border:2px solid var(--ink);border-radius:12px;padding:8px 10px;background:var(--paper);color:var(--ink)}
 .cstar{font-family:var(--display);font-weight:800;color:var(--berry-deep);margin-left:2px}
 .confnote{font-size:15px;font-weight:700;margin-top:10px;background:var(--white);border:2px dashed var(--ink);border-radius:14px;padding:8px 12px;line-height:1.35}
@@ -259,7 +260,7 @@ details.receipt .fn{font-size:13px;font-weight:700;color:var(--muted);padding:2p
 .upnext em{font-style:normal;justify-self:end;font-family:var(--display);font-weight:800;font-size:17px;color:var(--berry-deep)}
 .quote{background:var(--paper);border-radius:14px;padding:10px 12px;font-size:15px;margin-top:10px;overflow-wrap:anywhere}
 .quote small{display:block;color:var(--muted);font-weight:700;margin-top:4px;line-height:1.5}
-.srcl{font-weight:800;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:3px;white-space:nowrap;display:inline;padding:13px 4px}
+.srcl{font-weight:800;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:3px;white-space:nowrap;display:inline;padding:16px 4px}
 
 /* ---------- The decision ---------- */
 .names{display:grid;gap:8px}
@@ -397,7 +398,7 @@ body.hl-tray .tray{z-index:56;box-shadow:0 0 0 5px var(--butter);pointer-events:
 .trail .bk{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:var(--white);display:grid;place-items:center}
 .trail .path{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:5px;font-family:var(--display);font-weight:800;font-stretch:85%;font-size:14.5px;white-space:nowrap;overflow:hidden}
 .trail .path a{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;padding:13px 1px;text-decoration:underline;text-decoration-color:var(--berry);text-decoration-thickness:2px;text-underline-offset:4px}
-.trail .path a:first-child{flex:0 0 auto;min-width:44px}
+.trail .path a:first-child{flex:0 0 auto;min-width:44px;text-align:center}
 .trail .path a:nth-of-type(2):not(:last-of-type){flex-shrink:6}
 .trail .path span{flex:0 0 auto;color:var(--muted)}
 
@@ -1366,11 +1367,11 @@ function renderTrail(){var p=parse(current),v=p.v,h='<div class="wrap">',c=[];
   trailEl.hidden=v==="lives";
   if(v!=="lives"){
     if(v==="compare")c.push([lastTour?"Back to the tour":"Back to the years",lastTour||"lives"]);
-    else{var Y=v==="year"?p.o:Y_BY[p.o.year];c.push(["Years","lives"]);
+    else{var Y=v==="year"?p.o:Y_BY[p.o.year];if(v!=="unit")c.push(["Years","lives"]); /* a place shows its year and neighborhood; the years are one step up from the year */
       if(v!=="year")c.push([Y.short,href("year",Y.id).slice(1)]);
       if(v==="unit")c.push([hoodOf(p.o).name,href("hood",p.o.hood_id).slice(1)])}
     var up=c[c.length-1];
-    h+='<a class="bk" href="#'+up[1]+'" aria-label="Back: '+esc(up[0])+'">'+arrow+'</a><div class="path">'+c.map(function(x,i){return (i?'<span aria-hidden="true">›</span>':'')+'<a href="#'+x[1]+'">'+esc(x[0])+'</a>'}).join("")+'</div>'}
+    h+='<a class="bk" href="#'+up[1]+'" aria-label="Back: '+esc(up[0])+'">'+arrow+'</a><div class="path">'+c.map(function(x,i){return (i?'<span aria-hidden="true">›</span>':'')+'<a href="#'+x[1]+'" title="'+esc(x[0])+'">'+esc(x[0])+'</a>'}).join("")+'</div>'}
   trailEl.innerHTML=h+'</div>'}
 function renderView(){var p=parse(current);
   view.innerHTML=p.v==="year"?vYear(p.o):p.v==="hood"?vHood(p.o):p.v==="unit"?vUnit(p.o):p.v==="compare"?vCompare():vLives();

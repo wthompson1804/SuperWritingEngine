@@ -70,6 +70,8 @@ BUSINESS = re.compile(r"\b(llc|l\.l\.c|inc|corp|co\b|company|realty|management|m
                       r"capital|equities|trust|lp|living|homes|rentals|real estate|enterprises|urby|"
                       r"bozzuto|greystar|avalon|windsor|veris|lefrak)\b", re.I)
 TRACK = "listing-site tracking number"
+LOCAL_CODES = set("212 315 332 347 363 516 518 585 607 631 646 680 716 718 838 845 914 917 929 934 "
+                  "201 551 609 640 732 848 856 862 908 973 203 475 860 959".split())
 DEC = json.JSONDecoder()
 
 
@@ -818,6 +820,22 @@ def main(argv=None) -> int:
         row = build_row(e, cands, own, fact_mgr, fetch_note)
         rows.append(row)
         stats["phone" if row["leasing_phone"] else ("url only" if row["leasing_url"] else "nothing"), row["basis"] or "none"] += 1
+
+    # Second pass over the finished rows: flags that need the whole table.
+    by_phone = Counter(r["leasing_phone"] for r in rows if r["leasing_phone"] and r["note"].startswith("building / manager site"))
+    for r in rows:
+        p = r["leasing_phone"]
+        if not p:
+            continue
+        extra = []
+        if by_phone.get(p, 0) > 1:
+            r["contact_kind"] = "management company"
+            extra.append(f"same number on {by_phone[p]} buildings' pages: the manager's shared leasing line, not one building's office")
+        if p[1:4] not in LOCAL_CODES and not is_tollfree(p):
+            extra.append(f"area code {p[1:4]} is outside NY/NJ/CT; may be a call-tracking line placed by the site's marketing vendor")
+        if extra:
+            head, sep, tail = r["note"].partition("; also seen")
+            r["note"] = "; ".join([head] + extra) + sep + tail
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     tmp = OUT.with_suffix(".csv.tmp")
