@@ -939,4 +939,5 @@ def toll_known(value, complete):
 TOLL_NOTE = ("Tolls are round trip at New York E-ZPass rates (a tag issued by the New York E-ZPass service centre), weekend off-peak. "
              "An E-ZPass tag from New Jersey, Connecticut or any other state pays the higher Tolls by Mail rate at MTA bridges and tunnels "
              "(for example $12.03 instead of $7.46 at the Whitestone, Throgs Neck, RFK and Verrazzano bridges); that figure is given beside "
-             "each toll as the mail rate. Resident discounts are not applied.")
+             "each toll as the mail rate. Where a route enters the Manhattan congestion zone, no mail rate for the zone was found on a page we could "
+             "read, so the mail figure there is given as 'at least' the sum of the other crossings. Resident discounts are not applied.")

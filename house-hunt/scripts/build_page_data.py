@@ -83,6 +83,8 @@ def unit(r):
                     # null when a crossing on the route has no rate (never 0 for unknown); NY E-ZPass, with the mail rate beside it
                     "toll_round_trip": parsers.toll_known(g("toll_rt_ezpass"), g("toll_complete")),
                     "toll_round_trip_mail": parsers.toll_known(g("toll_rt_mail"), g("toll_complete")), "toll_basis": "New York E-ZPass, weekend off-peak",
+                    # where one crossing has no published mail rate the mail figure is null: the sum of the known crossings is a floor
+                    "toll_round_trip_mail_at_least": g("toll_rt_mail_subtotal") if g("toll_rt_mail") is None else None, "toll_mail_note": g("toll_rt_mail_note"),
                     "toll_complete": str(g("toll_complete")) == "True", "toll_items": g("toll_items"), "transit_min": g("transit_sat_median"), "transit_transfers": g("transit_sat_transfers"),
                     "transit_summary": g("transit_sat_summary"), "last_train_home_sat": g("transit_last_sat_departure_from_jamaica"), "sunday_return_min": g("transit_sun_return_median")}},
         "scores": {"rank": g("rank_score"), "universal": g("universal"), "promise": g("promise"), "pool_bump": g("pool_bump"), "hood_rank": g("shown_rank") or g("hood_rank"),
@@ -177,7 +179,9 @@ def main():
                       "counts": {"shown": int(len(s)), "avoid": int(g.avoid_card.sum()), "held": int((g.listing_id.isin(held_ids) & ~g.shown).sum()), "ranked": int(len(g))},
                       "all_in_range": [v(s.all_in.min()), v(s.all_in.max())] if len(s) else None, "sqft_median": num("sqft"),
                       "drive_min": num("drive_min_to"), "transit_min": num("transit_sat_median"),
-                      "toll_round_trip": tollmed("toll_rt_ezpass"), "toll_round_trip_mail": tollmed("toll_rt_mail"), "toll_basis": "New York E-ZPass, weekend off-peak",
+                      "toll_round_trip": tollmed("toll_rt_ezpass"),
+                      "toll_round_trip_mail": tollmed("toll_rt_mail") if "toll_rt_mail" in g and pd.to_numeric(g.toll_rt_mail, errors="coerce").notna().all() else None,
+                      "toll_round_trip_mail_at_least": (v(pd.to_numeric(g.toll_rt_mail_subtotal, errors="coerce").median()) if "toll_rt_mail_subtotal" in g and not pd.to_numeric(g.toll_rt_mail, errors="coerce").notna().all() else None), "toll_basis": "New York E-ZPass, weekend off-peak",
                       "toll_complete": bool(g.toll_complete.astype(str).str.lower().eq("true").all()),
                       "safety": {"violent_per_1000": v(h.get("violent")), "property_per_1000": v(h.get("property")), "vehicle_theft_per_1000": v(h.get("motor_vehicle_theft")),
                                  "vs_jamaica": v(h.get("violent_vs_jamaica")), "property_vs_jamaica": v(h.get("property_vs_jamaica")), "vs_us": v(h.get("violent_vs_us")),

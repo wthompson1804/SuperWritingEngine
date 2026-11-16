@@ -88,7 +88,10 @@ def flat(r):
         "toll_known_subtotal": tr.get("known_subtotal"),
         # the same crossings at the Tolls by Mail rate, which is also what an E-ZPass tag issued outside New York pays
         # at MTA bridges and tunnels (docs/tools_notes/mta_tolls.md)
+        # (null where a crossing has no published mail rate: then the subtotal of the known ones and the reason are kept)
         "toll_rt_mail": (d.get("toll_round_trip_mail") or {}).get("value"),
+        "toll_rt_mail_subtotal": (d.get("toll_round_trip_mail") or {}).get("known_subtotal"),
+        "toll_rt_mail_note": (d.get("toll_round_trip_mail") or {}).get("reason") or "",
         "toll_items": "; ".join(str(i.get("facility", i)) for i in (tr.get("items") or [])),
         "transit_sat_fastest": v(r.get("transit_sat", {}), "fastest_minutes"),
         "transit_sat_median": v(r.get("transit_sat", {}), "median_minutes"),

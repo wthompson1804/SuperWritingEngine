@@ -1,0 +1,47 @@
+{
+ "listings_csv_rows": 20464,
+ "zumper_rows": 3600,
+ "unopened (g_proof unknown, gate_status pending)": 2236,
+ "studio_or_1br": 2236,
+ "card_rent_le_2800": 2130,
+ "no_gate_failing": 2130,
+ "robots_allowed_detail_url": 2130,
+ "  buildings (address+ZIP)": 1909,
+ "  in_safety_cut_neighborhood": {
+  "ct:new-haven": 65,
+  "nj:irvington": 21,
+  "nj:neptune": 18,
+  "ny:newburgh": 17,
+  "nj:kearny": 3,
+  "nj:flemington": 1,
+  "nj:watchung": 1
+ },
+ "not_in_safety_cut_neighborhood": 2004,
+ "  hood_basis": {
+  "not geocoded": 1206,
+  "pipeline_method (Census place from coordinates)": 754,
+  "pipeline_method (NYC NTA polygon from coordinates)": 44
+ },
+ "distinct_detail_urls": 1961,
+ "  building_pages": 426,
+ "  listing_pages": 1535,
+ "  already_cached_under_raw": 49,
+ "urls_to_request": 1912,
+ "  to_request_by_state": {
+  "NJ": 1285,
+  "NY": 393,
+  "CT": 224,
+  "PA": 10
+ },
+ "request_cap": 900,
+ "  within_cap_by_state": {
+  "NJ": 612,
+  "NY": 176,
+  "CT": 107,
+  "PA": 5
+ },
+ "  within_cap_page_kind": {
+  "listing": 657,
+  "building": 243
+ }
+}

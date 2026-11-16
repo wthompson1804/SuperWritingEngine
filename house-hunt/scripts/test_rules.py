@@ -227,8 +227,9 @@ def data():
     ok(t.listing_id.str.contains("plan-103").any(), "62 Treat St plan 103 (reads as floor 1) is excluded by its listing id")
     # tolls (MTA rates filled): complete everywhere, the mail-rate figure beside the NY E-ZPass figure
     ok((M.toll_complete == "True").all(), f"tolls: toll_complete must be true on every unit ({(M.toll_complete != 'True').sum()} are not)")
-    ok("toll_rt_mail" in M.columns and (pd.to_numeric(M.toll_rt_mail, errors="coerce") >= pd.to_numeric(M.toll_rt_ezpass, errors="coerce")).all(),
-       "tolls: every unit has a mail-rate figure at or above the NY E-ZPass figure")
+    mail_, ez_ = pd.to_numeric(M.toll_rt_mail, errors="coerce"), pd.to_numeric(M.toll_rt_ezpass, errors="coerce")
+    ok((mail_.isna() | (mail_ >= ez_)).all(), "tolls: a mail-rate figure is never below the NY E-ZPass figure")
+    ok((mail_.notna() | ((M.toll_rt_mail_note != "") & (M.toll_rt_mail_subtotal != ""))).all(), "tolls: a missing mail-rate figure carries the reason and the subtotal of the known crossings")
     ok(pd.to_numeric(R.toll_rt_known, errors="coerce").notna().all(), "tolls: every ranked unit's toll is known to the distance score")
     data_more(M, R, S)
     # D20 (only when the page data is newer than the ranking)
@@ -239,7 +240,8 @@ def data():
         for u_ in J["units"]:
             sun = u_["moments"]["sun"]
             ok(sun["toll_complete"] or sun["toll_round_trip"] is None, f"tolls: {u_['id']} shows a toll figure for an incomplete route")
-            ok(not sun["toll_complete"] or (sun["toll_round_trip"] is not None and sun["toll_round_trip_mail"] is not None), f"tolls: {u_['id']} lacks the E-ZPass or mail figure")
+            ok(not sun["toll_complete"] or (sun["toll_round_trip"] is not None and (sun["toll_round_trip_mail"] is not None or sun["toll_round_trip_mail_at_least"] is not None)), f"tolls: {u_['id']} lacks the E-ZPass or mail figure")
+            ok(sun["toll_round_trip_mail"] != 0 or sun["toll_round_trip"] == 0, f"tolls: {u_['id']} mail figure 0 while the E-ZPass figure is not")
         for h_ in J["neighborhoods"]:
             ok(h_["toll_complete"] or h_["toll_round_trip"] is None, f"tolls: neighborhood {h_['id']} shows a toll figure though a route is incomplete")
         page_more(J, M, R, S)

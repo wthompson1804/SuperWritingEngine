@@ -45,7 +45,7 @@ DISPLAY = {  # pattern -> why it is kept but not scored
     r"^nycrec_": "NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule",
     r"^near250_.*_(2023|2025|borough_median|above_borough_p80)$": "context for the nearby-crime figures",
     r"^agency_(property|burglary)_per_1000_": "area context shown beside the violent-crime trend",
-    r"^(toll_known_subtotal|toll_complete|drive_min_from|drive_miles|transit_sat_fastest|transit_status|transit_sun_return_fastest|last_sat_departure|util_1br|util_studio|util_1br_complete|coast_m|beach_m|park_ha_800m)$": "figure shown in a scene or receipt",
+    r"^(toll_known_subtotal|toll_rt_mail_subtotal|toll_rt_mail_note|toll_complete|drive_min_from|drive_miles|transit_sat_fastest|transit_status|transit_sun_return_fastest|last_sat_departure|util_1br|util_studio|util_1br_complete|coast_m|beach_m|park_ha_800m)$": "figure shown in a scene or receipt",
 }
 NOT_USED = {
     r"^(first_seen|last_seen|detail_level|raw_path|notes|listing_type|price_basis|gate_status|g_floor|floor|floor_used|stale_listing|addr_key|addr_keys|street_key|n_listed_units|other_monthly_fees_json|live_checked_at|checked_at|retrieved_at|matches_stored|_file|batch|status|fact|value|unit_floor_source|pluto_.*|lat|lon|live_price)$": "bookkeeping or already folded into a merged field",

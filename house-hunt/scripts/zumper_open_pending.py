@@ -268,7 +268,8 @@ def select():
     cards = {f"zumper-{k}": v["card"] for k, v in cards.items()}
     P["page_kind"] = P.path.map(lambda p: "building" if p.startswith("/apartment-buildings/") else "listing")
     P["floorplans"] = [int((cards.get(i.split(":")[-1]) or {}).get("floorplan_count") or 1) for i in P.listing_id]
-    P["card_unknowns"] = (P.g_dog != "pass").astype(int) + (P.g_elevator != "pass").astype(int)
+    P["card_unknowns"] = ((P.g_dog != "pass").astype(int) + (P.g_elevator != "pass").astype(int)
+                          + (P.g_movein != "pass").astype(int))
     fun["distinct_detail_urls"] = int(P.path.nunique())
     fun["  building_pages"] = int(P[P.page_kind == "building"].path.nunique())
     fun["  listing_pages"] = int(P[P.page_kind == "listing"].path.nunique())
@@ -284,8 +285,10 @@ def select():
     fun["  already_cached_under_raw"] = int(U.cached.sum())
     fun["urls_to_request"] = int((~U.cached).sum())
     fun["  to_request_by_state"] = {k: int(v) for k, v in U[~U.cached].state.value_counts().items()}
-    # expected value: most candidate units first, then fewest gate facts the card leaves open (dogs, elevator), then rent
-    U = U.sort_values(["units_est", "card_unknowns", "min_rent", "path"], ascending=[False, True, True, True])
+    # expected value: most candidate units first, then fewest gate facts the card leaves open (move-in, dogs,
+    # elevator), then building pages (they carry the policy block) before single listings, then lower rent
+    U["is_listing"] = (U.page_kind == "listing").astype(int)
+    U = U.sort_values(["units_est", "card_unknowns", "is_listing", "min_rent", "path"], ascending=[False, True, True, True, True])
     U["rank_in_state"] = U.groupby("state").cumcount()
     U["frac"] = (U.rank_in_state + 0.5) / U.groupby("state").path.transform("size")
     U = U.sort_values(["frac", "state"]).reset_index(drop=True)      # every state advances at the same share

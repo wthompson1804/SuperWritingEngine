@@ -1261,7 +1261,7 @@ function discs(U){if(U._discs)return U._discs;var o=[],seen={};confs(U).forEach(
   return U._discs=o}
 function capFirst(t){t=String(t||"");return t.charAt(0).toUpperCase()+t.slice(1)}
 function discLine(U){var d=discs(U);return d.length?'<p class="gtk"><b>Good to know before you call:</b> '+esc(d.map(function(x){return x.what}).join("; "))+'.</p>':''}
-function discBox(U){var d=discs(U);return d.length?'<div class="gtk box" id="good-to-know"><h4>Good to know before you call</h4><p class="helper">Things to ask, not problems. None of them takes this place off the list.</p><ul>'+d.map(function(x){return '<li><b>'+esc(capFirst(x.what))+'.</b>'+(x.why?' '+esc(x.why):'')+(x.ask?' <span class="ask">Ask: '+esc(x.ask)+'</span>':'')+'</li>'}).join("")+'</ul></div>':''}
+function discBox(U){var d=discs(U);return d.length?'<div class="gtk box" id="good-to-know"><h4>Good to know before you call</h4><p class="helper">Things to ask, not problems. None of them takes this place off the list.</p><ul>'+d.map(function(x){return '<li><b>'+esc(capFirst(x.what))+'.</b>'+(x.why?' '+esc(x.why):'')+(x.ask?' <span class="ask">Ask: '+esc(capFirst(x.ask.toLowerCase().indexOf(x.what.toLowerCase()+":")===0?x.ask.slice(x.what.length+1).trim():x.ask))+'</span>':'')+'</li>'}).join("")+'</ul></div>':''}
 /* Tolls: the figure shown is the New York E-ZPass one. When the data also carries a mail-rate figure, say which one this is. */
 function tollMail(o){if(!o||typeof o!=="object")return null;var k,t;
   for(k in o){if(/toll/i.test(k)&&/mail|cash|no_?pass/i.test(k)&&numOf(o[k])!=null)return numOf(o[k])}
@@ -1469,7 +1469,7 @@ var MAPBASE=window.HOUSE_HUNT_MAP_BASE||null,MAPBASE_ASKED=false,HHMAP=null,MAPS
 var HOODVIEW="list";try{if(localStorage.getItem(KEY+"-hoodview")==="map")HOODVIEW="map"}catch(e){}
 function mapData(){
   return {meta:META,years:YEARS.map(function(Y){return {id:Y.id,label:Y.label}}),
-    neighborhoods:HOODS.filter(function(H){return Y_BY[H.year]&&H.lat!=null&&H.lon!=null}).map(function(H){var Y=Y_BY[H.year];
+    neighborhoods:HOODS.filter(function(H){var Y=Y_BY[H.year];return Y&&H.lat!=null&&H.lon!=null&&(Y.hoods.indexOf(H)>-1||Y.avoidOnly.indexOf(H)>-1)}) /* the ones the lists show */.map(function(H){var Y=Y_BY[H.year];
       return {id:H.id,name:H.name,state:H.state,year:H.year,lat:H.lat,lon:H.lon,counts:{shown:H.units.filter(fits).length},places_all:H.units.length,
         drive_min:H.drive_min,toll_round_trip:H.toll_round_trip,toll_note:tollMail(H)!=null?"with a New York E-ZPass":"",safety:H.safety,rank_in_experience:Y.hoods.indexOf(H)>-1?H.rank_in_experience:null,rank_of:Y.hoods.length}})}}
 function unmountMap(){if(HHMAP){try{HHMAP.destroy()}catch(e){}HHMAP=null}}
@@ -1490,7 +1490,7 @@ function mountMap(){
       onSelect:function(id){if(current===route)MAPSEL[route]=id},
       onSelectHood:function(id){if(H_BY[id])go(href("hood",id))}});
     if(yr&&Y_BY[yr]){ /* inside an experience the map opens on that experience's neighborhoods and Mom and Dad's */
-      var hs=HOODS.filter(function(H){return H.year===yr&&H.lat!=null&&H.lon!=null});
+      var hs=Y_BY[yr].hoods.concat(Y_BY[yr].avoidOnly).filter(function(H){return H.lat!=null&&H.lon!=null});
       if(hs.length){var b={w:ANCHOR.lon,e:ANCHOR.lon,s:ANCHOR.lat,n:ANCHOR.lat};
         hs.forEach(function(H){b.w=Math.min(b.w,H.lon);b.e=Math.max(b.e,H.lon);b.s=Math.min(b.s,H.lat);b.n=Math.max(b.n,H.lat)});
         var px=Math.max(0.04,(b.e-b.w)*0.12),py=Math.max(0.03,(b.n-b.s)*0.12);b.w-=px;b.e+=px;b.s-=py;b.n+=py;
