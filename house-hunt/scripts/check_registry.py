@@ -11,7 +11,7 @@ It also fails if an analysis script reads a side file directly instead of the ma
 
 Shown-list assertions (added after docs/INDEPENDENT_CHECK.md): the run fails when any unit with shown = True in
 data/ranked_units.csv breaks one of Will's rules: more than one open item (elevator open by parsers.elevator_rule; dogs not
-settled; the listing's reality or availability in doubt; eligibility; no live check), or one open item without the asterisk fields
+settled; the listing's reality or availability in doubt; eligibility; a listing never re-read is NOT one, owner 2026-11-16), or one open item without the asterisk fields
 (confirm_asterisk, confirm_what, confirm_why); elevator contradicted; floor under 2; dogs not explicitly allowed, or a weight limit under 25 lb (a size-only "small dogs" policy passes, by the owner's rule of
 2026-11-15, but must carry its note and tour question);
 all-in over $3,000; available after 2026-12-15; a duplicate unit; more than 8 shown in one building; a row that is not a real
@@ -79,7 +79,7 @@ def shown_violations():
     num = lambda c: pd.to_numeric(S[c], errors="coerce") if c in S else pd.Series(float("nan"), index=S.index)
     col = lambda c: S[c] if c in S else pd.Series("", index=S.index)
     # Owner, 2026-11-15: a shown unit may have at most ONE open item (elevator only inferred; floor unknown or inferred
-    # in a way the floor rule does not accept; dogs conflicting; no live check) and must then carry the asterisk fields.
+    # in a way the floor rule does not accept; dogs conflicting) and must then carry the asterisk fields.
     # A fact that fails outright (no elevator, floor under 2, dogs not allowed) is never shown.
     el = col("elevator").str.lower()
     flag(el.isin(["no", "conflicting"]), "elevator contradicted or conflicting")
@@ -101,7 +101,6 @@ def shown_violations():
     flag(dg == "no", "dogs not allowed")
     flag((dg == "yes") & ~col("dogs_allowed_basis").isin(["confirmed_by_phone", "confirmed", "stated", "community_page", "amenities_page"]), "dogs-allowed basis is inferred or unknown")
     open_d = (dg != "yes") | (col("dogs_evidence_open") != "")
-    open_l = ~col("live_status").isin(["live", "changed"])
     # independent check 2: lease term over 13 months (D8), cost near the cap with an unknown line (D12), a floor-plan
     # row (D1), an evidence warning about the listing (D6), and whatever a reviewer's asterisk verdict names
     open_lease = (num("price_lease_months") > 13) | (col("price_lowest_of_terms") == "yes")
@@ -172,9 +171,11 @@ def shown_violations():
     flag(need_p & ~disc.str.contains('"what": "overnight street parking"', regex=False), "overnight street parking is restricted in this town and the unit's parking is not confirmed, but the disclosure is missing")
     flag((col("dog_weight_unstated") != "") & num("dog_weight_limit_lb").isna() & (col("dog_weight_limit_lb").str.lower() != "no limit") & ~col("tour_confirm").str.contains("dog weight limit"),
          "a dog weight limit with no number is stated, but the tour question is missing")
-    opens["live check"] = open_l
+    # owner, 2026-11-16 ("Forget call check"): a listing that was never re-read is not an open item and must not be written up as one
+    flag(col("confirm_what").str.contains("live check") | col("confirm_why").str.contains("has not been seen live|could not be opened in the evidence pass"),
+         "a 'live check' open item is still written on the unit (the not-re-checked flag was dropped)")
     n_open = sum(m.astype(int) for m in opens.values())
-    flag(n_open > 1, "more than one open item (things to confirm plus a missing live check)")
+    flag(n_open > 1, "more than one open item (open gate facts)")
     has_star = (col("confirm_asterisk") == "yes") & (col("confirm_what") != "") & (col("confirm_why") != "")
     flag((n_open == 1) & ~has_star, "one open item but no confirm_asterisk / confirm_what / confirm_why")
     for what, m in opens.items():

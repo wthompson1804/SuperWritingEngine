@@ -58,7 +58,6 @@ def main():
              ("  shown with an asterisk (one thing to confirm)", int((R.shown & (R.confirm_asterisk == "yes")).sum()) if "confirm_asterisk" in R else 0),
              ("removed by a reviewed verdict (data/evidence/review_verdicts.csv)", len(pd.read_csv(DATA / "excluded_by_review.csv", usecols=["listing_id"])) if (DATA / "excluded_by_review.csv").exists() else 0),
              ("held back for one confirmation", int(R.held_for_confirmation.sum()) if "held_for_confirmation" in R else 0),
-             ("clean, waiting for a live check (not shown)", len(pd.read_csv(DATA / "needs_live_check.csv")) if (DATA / "needs_live_check.csv").exists() else 0),
              ("neighborhoods with 3+ shown places", int((R[R.shown].groupby("hood_id").size() >= 3).sum())),
              ("buildings in the master table", M.building_id.nunique())]
     drops = []

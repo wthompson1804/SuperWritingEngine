@@ -165,7 +165,7 @@ def unit_core(r, g, qs):
         "confirm": {"asterisk": g("confirm_asterisk") == "yes", "what": g("confirm_what") if g("confirm_asterisk") == "yes" else None,
                     "why": g("confirm_why") if g("confirm_asterisk") == "yes" else None,
                     # the question to ask, in the reviewer's or the rule's words (independent check 2)
-                    "question": (qs[0] if qs and g("confirm_what") != "live check" else None) if g("confirm_asterisk") == "yes" else None,
+                    "question": (qs[0] if qs else None) if g("confirm_asterisk") == "yes" else None,
                     "reviewed": g("review_verdict")},
         # conditions to know that are not open gate facts (owner, 2026-11-16): lease term, cost near the cap, condo rented by
         # its owner, net-effective rent. Any number may sit beside at most one open gate fact (confirm).
@@ -225,9 +225,9 @@ def main():
             PUBLIC_EVIDENCE.update({b: (e or None) for b, e in zip(AV.building_id, AV.public_evidence)})
     held_ids = set(pd.read_csv(DATA / "needs_confirmation.csv").listing_id) if (DATA / "needs_confirmation.csv").exists() else set()
     shown, avoid, held = R[R.shown], R[R.avoid_card], R[R.listing_id.isin(held_ids) & ~R.shown]
-    # candidates with an open gate fact that the evidence pass has not seen live yet: listed for the evidence agents, not shown as places
-    live_ids = set(pd.read_csv(DATA / "needs_live_check.csv").listing_id) if (DATA / "needs_live_check.csv").exists() else set()
-    awaiting = R[R.listing_id.isin(live_ids)]
+    # Owner, 2026-11-16 ("Forget call check"): a listing never re-read is not an open item, so there is no "awaiting a live
+    # check" list any more. The key stays in the page data as an EMPTY array (and the count as 0) so the page does not break.
+    awaiting = R.iloc[0:0]
     # local rules (street parking, dogs) and resident voices, keyed by neighborhood
     local, voices, survey = {}, {}, {}
     lr = DATA / "reference" / "local_rules.csv"
@@ -360,12 +360,13 @@ def main():
                     "toll_basis": {"assumes": "New York E-ZPass", "rate_time": "weekend off-peak", "mail_rate_field": "toll_round_trip_mail", "note": parsers.TOLL_NOTE},
                     "notes": ["Drive times are free-flow estimates without traffic.", parsers.TOLL_NOTE, "An asterisk on rent means a special offer applies; see the rent terms.",
                               "A floor marked 'read from the unit number' is not stated on the page; confirm it on the tour.",
-                              "A place with an asterisk has one thing still to confirm (elevator, dogs allowed, whether the listing is real and available, or a live re-check of the listing); the text beside it says what and why.",
+                              "A place with an asterisk has one thing still to confirm (elevator, dogs allowed, or whether the listing is real and available); the text beside it says what and why.",
                               "Disclosures are things to know that never remove a place: floor not published, lease term, a cost that could pass $3,000 once parking and fees are known, net-effective rent (only where the listing says the price is net-effective), a special offer (ask what a normal month costs), condo rented by its owner, a dog weight limit with no number, and a town rule restricting overnight street parking where the building's parking is not confirmed.",
                               "Pet rent is always counted: where a building does not publish it, the cost uses an estimate (the median of the known pet rents in the same state), marked as an estimate.",
                               "all_in_likely adds the median known parking fee and required fees for the lines a building does not publish; it is shown beside the all-in figure and is never used for the $3,000 limit.",
                               "Experience and neighborhood figures (medians and ranges) are computed over the places shown on the page.",
                               "An elevator marked 'listing_site_only' is stated in a listing site's amenity list or text and has not been confirmed on the building's own page.",
+                              "Each place carries the date its price was read (price_seen_at). A listing that was not read again since is not marked for that.",
                               "Cost lines that are not published add nothing to the all-in figure and are named on each receipt as not published."],
                     "moment_thresholds": MOMENT_THRESHOLDS, "max_units_per_building": 8},
            "years": years, "neighborhoods": hoods, "buildings": BUILDINGS, "units": [unit(r) for _, r in shown.iterrows()],

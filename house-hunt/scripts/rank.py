@@ -11,11 +11,14 @@ Reads only the master tables (build_master.py, all_in.py) and data/lifestyle_gro
   7. scores: universal value 0-100 (safety 22, building 16, cost 12, car 12, space 12, distance 10, dog 8, daily life 8;
      percentiles across all ranked units, an unknown variable at the 25th percentile), the experience's promise,
      rank score = (0.7 x universal + 0.3 x promise + pool bump) x certainty
-  8. selection per neighborhood in rank order: shown = not an avoid building, at most ONE open item (open gate facts
-     plus a missing live check), the building has evidence rows; up to 8 per building; no cap per neighborhood
-  9. thin neighborhoods: a neighborhood whose shown list is one apartment keeps it only if nothing is open and its
-     score is at or above its experience's median (thin_neighborhood_cut)
-Candidate and phone-call lists (hood_rank, needs_confirmation.csv, needs_live_check.csv) take two per building.
+  8. selection per neighborhood in rank order: shown = not an avoid building, at most ONE open item (an open gate
+     fact), the building has evidence rows; up to 8 per building; no cap per neighborhood
+  9. thin neighborhoods: a neighborhood whose shown list is one apartment keeps it only if no gate fact is open and
+     its score is at or above its experience's median (thin_neighborhood_cut)
+Owner, 2026-11-16 ("Forget call check"): a listing that was simply never re-read (live status blank, not checked,
+blocked) is NOT an open item and counts in no rule. A re-read that FOUND a problem still counts (gone, price changed,
+stale page, a checker's warning or price doubt: the existing listing / availability facts).
+Candidate and phone-call lists (hood_rank, needs_confirmation.csv) take two per building.
 Outputs: data/ranked_units.csv, data/group_exchange.csv, data/reference/queens_spectrum_definition.csv, the excluded_*.csv files
 """
 from __future__ import annotations
@@ -46,7 +49,7 @@ NO_ELEVATOR_DOUBT = os.environ.get("HH_NO_ELEVATOR_DOUBT") == "1"
 NO_THIN_RULE = os.environ.get("HH_NO_THIN_RULE") == "1"          # measurement only: the shown set before the thin-neighborhood rule
 # MAX_PER_BUILDING (owner, 2026-11-16): the page now groups apartments under their building, so up to 8 units of a
 # building are shown (it was 2), in rank order inside the building by the same score. CAND_PER_BUILDING keeps the
-# candidate / phone-call lists (hood_rank, needs_confirmation, needs_live_check) at two per building, as before.
+# candidate / phone-call lists (hood_rank, needs_confirmation) at two per building, as before.
 CAND_PER_BUILDING = 2
 # SHOWN (owner, 2026-11-16): the page shows the top three first and the rest on "show more", so the old cap of 10 per
 # neighborhood no longer hides a reviewed, showable unit. Order is still by rank; at most MAX_PER_BUILDING per building,
@@ -103,8 +106,9 @@ def parking_rank(t):
 
 
 def thin_neighborhood_cut(hood_id, group_key, shown, rank_score, open_items):
-    """True for the single shown apartment of a neighborhood that is NOT both well attested (open_items == 0) and
-    promising (rank score at or above the median of the shown apartments of its experience). All arguments are
+    """True for the single shown apartment of a neighborhood that is NOT both well attested (open_items == 0, where
+    open_items counts open GATE facts only: elevator, dogs, eligibility, listing is real; a listing that was never
+    re-read is not one, owner 2026-11-16) and promising (rank score at or above the median of the shown apartments of its experience). All arguments are
     aligned Series; the medians are taken over `shown` as given (before the rule)."""
     shown = shown.astype(bool)
     n = hood_id[shown].value_counts()
@@ -112,6 +116,20 @@ def thin_neighborhood_cut(hood_id, group_key, shown, rank_score, open_items):
     med = rank_score[shown].groupby(group_key[shown]).median()
     keep = (open_items == 0) & (rank_score >= group_key.map(med))
     return single & ~keep
+
+
+def open_item_count(open_gate_facts, live_status=None):
+    """The number of open items of a unit: its open GATE facts (elevator, dogs allowed, eligibility, whether the
+    listing is real and available) and nothing else. Owner, 2026-11-16 ("Forget call check"): `live_status` is accepted
+    and deliberately ignored. A listing that was never re-read (blank, 'not checked', 'blocked') is not an open item.
+    What a re-read FOUND is counted where it always was, among the gate facts: a stale page, a checker's warning or a
+    price doubt is the fact 'listing' (parsers.staleness, parsers.price_doubt); 'gone' removes the unit before this."""
+    return open_gate_facts
+
+
+def showable_by_open_items(open_items):
+    """Shown with at most one open item (owner, 2026-11-15); two or more open gate facts hide the unit."""
+    return open_items <= 1
 
 
 def in_unit_laundry(laundry_text, in_unit_col):
@@ -614,8 +632,9 @@ def main():
             d = (v >= v[i]).all(axis=1) & (v > v[i]).any(axis=1)
             if d.any():
                 u.loc[g.index[i], "dominated"] = True
-    # D19: selection must not depend on file order. Equal scores: a unit seen live in the evidence pass first, then listing_id.
-    u = u.sort_values(["hood_id", "dominated", "rank_score", "live_ok", "listing_id"], ascending=[True, True, False, False, True], kind="mergesort")
+    # D19: selection must not depend on file order. Equal scores: by listing_id. (Until 2026-11-16 a unit seen live in
+    # the evidence pass came first among equals; the owner's "no not-re-checked flag" rule ended that too.)
+    u = u.sort_values(["hood_id", "dominated", "rank_score", "listing_id"], ascending=[True, True, False, True], kind="mergesort")
     # candidates: at most 2 per building, counted on the building (not the address key: independent check W8)
     u["nth_in_building"] = u.groupby("building_id").cumcount() + 1
     elig = u.nth_in_building <= CAND_PER_BUILDING
@@ -623,23 +642,20 @@ def main():
     u.loc[elig, "hood_rank"] = u[elig].groupby("hood_id").cumcount() + 1
     u["candidate"] = u.hood_rank <= CANDIDATES
     u["shown_pre_evidence"] = u.hood_rank <= SHOWN
-    # Shown (owner, 2026-11-15): not an avoid building, and at most ONE thing still open, counting the three gate facts
-    # (elevator, floor, dogs) and a missing live check alike. A unit with one open item is shown with an asterisk:
-    # confirm_asterisk = yes, confirm_what, confirm_why. Two or more open gate facts were already dropped as sketchy.
-    #   one open gate fact AND no live check -> data/needs_live_check.csv, not shown (W12)
+    # Shown (owner, 2026-11-15): not an avoid building, and at most ONE open gate fact. A unit with one open gate fact
+    # is shown with an asterisk: confirm_asterisk = yes, confirm_what, confirm_why. Two or more were dropped as sketchy.
+    # Owner, 2026-11-16 ("Forget call check"): a listing that was never re-read in an evidence pass (live status blank,
+    # not checked, blocked) is NOT an open item: no asterisk, and it counts in no rule (not here, not in the thin rule,
+    # not as the "second open item" beside an elevator doubt). What a re-read FOUND still counts through the existing
+    # facts: gone -> removed, a changed price -> the price, a stale page / a warning / a price doubt -> "listing".
+    # live_ok stays in the file as information only (was the listing itself seen in the evidence pass).
     #   data/needs_confirmation.csv           the phone-call list: every candidate with one open gate fact, shown or not
     is_avoid = u.ev_avoid.eq("yes")
     clean = u.confidence.eq("clean")
-    no_live = ~u.live_ok
-    u["open_items"] = u.open_gate_facts + no_live.astype(int)
-    live_txt = np.where(u.live_status.fillna("").astype(str).eq("blocked"), "The listing page could not be opened in the evidence pass; price and availability are as first collected.",
-                        "The listing has not been seen live in the evidence pass yet; price and availability are as first collected.")
-    # D3: a unit that was never seen live on a building page whose date is stale has two things open (rule, not only verdict)
-    u["confirm_what"] = np.where(clean & no_live, "live check", u.confirm_what)
-    u["confirm_why"] = np.where(clean & no_live, live_txt, u.confirm_why)
+    u["open_items"] = open_item_count(u.open_gate_facts, u.live_status)
     # a building the evidence pass never touched has nothing a reviewer could read: its units wait, they are not shown
     u["no_evidence"] = pd.to_numeric(u.get("evidence_rows"), errors="coerce").fillna(0) <= 0
-    showable = ~is_avoid & (u.open_items <= 1) & ~u.no_evidence
+    showable = ~is_avoid & showable_by_open_items(u.open_items) & ~u.no_evidence
     u["nth_shown_in_building"] = np.nan
     u.loc[showable, "nth_shown_in_building"] = u[showable].groupby("building_id").cumcount() + 1
     ok = showable & (u.nth_shown_in_building <= MAX_PER_BUILDING)
@@ -649,8 +665,8 @@ def main():
     # ---- THIN NEIGHBORHOODS (owner, 2026-11-16): "if 46 of the 104 neighborhoods show one apartment and you don't have
     # sufficient data on those, cut them, unless one is really promising and well attested". A neighborhood whose shown
     # list is exactly ONE apartment keeps it only if the apartment is
-    #   (a) well attested: nothing open at all (no open gate fact and seen live in the evidence pass: open_items == 0);
-    #       disclosures do not count against it; and
+    #   (a) well attested: no open GATE fact (elevator, dogs, eligibility, listing is real: open_items == 0) and a real
+    #       apartment (only real apartments are ranked); disclosures and a listing never re-read do not count; and
     #   (b) promising: its rank score is at or above the median rank score of the apartments shown in its experience,
     #       the median being taken BEFORE this rule so the rule does not feed back on itself.
     # Applied once: a neighborhood with two shown apartments is not touched. The cut apartment stays in this file with
@@ -667,9 +683,9 @@ def main():
     cols = ["listing_id", "building_id", "building_name", "address", "unit", "hood", "group_label", "hood_rank", "rank_score", "all_in", "to_confirm", "url"]
     nc = u[~is_avoid & ~clean & (u.shown | (elig & (u.hood_rank <= CANDIDATES)))]
     nc.assign(shown_with_asterisk=nc.shown)[cols + ["shown_with_asterisk", "confirm_what", "confirm_why"]].to_csv(DATA / "needs_confirmation.csv", index=False)
-    nl = u[~is_avoid & no_live & ~u.shown & (u.open_items <= 2) & elig & (u.hood_rank <= CANDIDATES)]
-    nl.assign(live_status=nl.live_status.fillna("").replace("", "not checked"))[cols[:8] + ["rank_score", "all_in", "live_status", "open_gate_facts", "to_confirm", "url"]].to_csv(DATA / "needs_live_check.csv", index=False)
-    u["needs_live_check"] = u.listing_id.isin(set(nl.listing_id))
+    # the "waiting for a live check" list ended with the owner's rule of 2026-11-16: the file is no longer written
+    (DATA / "needs_live_check.csv").unlink(missing_ok=True)
+    u["needs_live_check"] = False
     u["held_for_confirmation"] = u.listing_id.isin(set(nc.listing_id)) & ~u.shown
     av = elig & is_avoid
     u["avoid_rank"] = np.nan
@@ -719,8 +735,8 @@ def main():
         rows.append(r)
     pd.DataFrame(rows).to_csv(DATA / "group_exchange.csv", index=False)
     print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, of them with an asterisk {int((u.shown & (u.confirm_asterisk == 'yes')).sum())} "
-          f"({u[u.shown & (u.confirm_asterisk == 'yes')].confirm_what.value_counts().to_dict()}), held for a confirmation {int(u.held_for_confirmation.sum())}, "
-          f"waiting for a live check {int(u.needs_live_check.sum())}")
+          f"({u[u.shown & (u.confirm_asterisk == 'yes')].confirm_what.value_counts().to_dict()}), held for a confirmation {int(u.held_for_confirmation.sum())}; "
+          f"shown and never re-read (information only, not an open item) {int((u.shown & ~u.live_ok).sum())}")
     print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_na} not an apartment (floor plan, building price, co-living room) -> -{n_rev} removed by a reviewed verdict -> -{n_sib} sibling floor rule -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
     print(f"shown buildings {u[u.shown].building_id.nunique()}; disclosures: " + str(pd.Series([d['what'] for x in u[u.shown].disclosures if x for d in json.loads(x)]).value_counts().to_dict()))
     print(f"(kept {len(u)} units; candidates {int(u.candidate.sum())}; shown {int(u.shown_pre_evidence.sum())}; pools: {u.pool.value_counts().to_dict()}")

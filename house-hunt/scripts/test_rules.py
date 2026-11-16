@@ -538,14 +538,11 @@ def data():
     D = pd.read_csv(DATA / "duplicate_units.csv", dtype=str, keep_default_na=False)
     ok("apartmentlist:p7630984-8dc0ef5a-1dcf-425e-8486-1d575c05d1dc" in set(D.listing_id) or "apartmentlist:p7630984-4bec8063-f064-11ee-8ab6-12de4bf481cd" in set(D.listing_id),
        "D17: Arcade Apartments 302 and its unnamed twin are merged")
-    # D19: ties in the selection order are broken by live check, then listing_id
+    # D19: ties in the selection order are broken by listing_id (owner, 2026-11-16: no longer "seen live first")
     Rr = R.reset_index()
-    Rr["live_ok_"] = Rr.live_status.isin(["live", "changed"])
-    exp = Rr.sort_values(["hood_id", "dominated", "rank_score_num", "live_ok_", "listing_id"], ascending=[True, True, False, False, True], kind="mergesort") \
-        if "rank_score_num" in Rr else None
     Rr["rank_score_num"] = pd.to_numeric(Rr.rank_score)
-    exp = Rr.sort_values(["hood_id", "dominated", "rank_score_num", "live_ok_", "listing_id"], ascending=[True, True, False, False, True], kind="mergesort")
-    ok(list(exp.listing_id) == list(Rr.listing_id), "D19: ranked_units.csv is not in the deterministic order (hood, dominated, score, live-checked first, listing_id)")
+    exp = Rr.sort_values(["hood_id", "dominated", "rank_score_num", "listing_id"], ascending=[True, True, False, True], kind="mergesort")
+    ok(list(exp.listing_id) == list(Rr.listing_id), "D19: ranked_units.csv is not in the deterministic order (hood, dominated, score, listing_id)")
     # verdict table is applied
     import verdicts as VD
     V = VD.load_verdicts()
@@ -668,8 +665,11 @@ def data_4(M, R, S):
     k3 = "rc:trulia:b2751605456:Unit_K3-02:351211069"
     if k3 in M.index:
         ok(M.at[k3, "page_modified_date"] == "2026-08-22" and M.at[k3, "listing_stale"] == "open", "IC3 D3: K3-02 takes the page date its sibling's note gives for the same building page")
-    # D3 as a rule: no shown unit is both unseen live and on a page known to be over 60 days unchanged
-    ok(not (~S.live_status.isin(["live", "changed"]) & (num(S, "listing_stale_days") > 60) & (S.listing_stale != "")).any(), "IC3 D3: a unit never seen live on a stale page is not shown")
+    # D3 as a rule, after the owner's rule of 2026-11-16 (a listing never re-read is not an open item): a shown unit on a
+    # page known to be stale carries exactly that as its ONE open item, "listing" (or the reviewer's "availability"), whether
+    # or not it was re-read; with a second open gate fact it is not shown
+    st_ = S[S.listing_stale == "open"]
+    ok((st_.confirm_asterisk == "yes").all() and st_.confirm_what.isin(["listing", "availability"]).all(), "IC3 D3: a shown unit on a stale page carries the listing (or availability) asterisk: a found problem still counts")
     # ---- D5 / D16: net-effective only where the evidence says so; no invented gross
     for pat, unit in [("1 Kennedy Flats", "2303"), ("1 Kennedy Flats", "1315"), ("Harbourside SoNo", "225"), ("Kensington Place", "1236"), ("Harbor Pointe", "B9-309"), ("Harbor Pointe", "B9-258"),
                       ("The Grove Somerset", "2205"), ("Pier Village", "4-408"), ("Pier Village", "1-347"), ("Spinnaker Wharf", "5-02E"), ("The Botanic", "430"), ("The Botanic", "444")]:
@@ -753,7 +753,7 @@ def data_4(M, R, S):
     ds = S[S.elevator_doubt != ""]
     ok((ds.confirm_what == "elevator").all() and (ds.confirm_asterisk == "yes").all(), "step 3: a shown unit under elevator doubt carries the elevator asterisk as its one open item")
     ok(ds[(ds.elevator_evidence_open == "")].to_confirm.str.contains("Confirm an elevator serves this apartment", regex=False).all(), "step 3: ... with the question 'confirm an elevator serves this apartment'")
-    ok(not (S.elevator_doubt != "").values[~S.live_status.isin(["live", "changed"]).values].any(), "step 3: with a second open item (no live check) a doubted unit is not shown")
+    ok((pd.to_numeric(ds.open_gate_facts) == 1).all(), "step 3: a doubted unit is shown only when the elevator is its single open gate fact (a listing never re-read is not a second one)")
     # ---- step 4: pet rent estimated, all_in_likely, the new disclosure
     ok(not M.all_in_unknown_lines.str.contains("pet rent").any(), "step 4a: pet rent is never unknown-and-nothing")
     est = M[M.all_in_estimated_lines.str.contains("pet rent")]
@@ -909,9 +909,25 @@ def pure_6():
     s_ = pd.Series
     cut = rank.thin_neighborhood_cut(s_(["a", "b", "c", "c", "d", "e"]), s_(["g"] * 6), s_([True] * 5 + [False]), s_([70.0, 39.0, 30.0, 20.0, 60.0, 90.0]), s_([0, 0, 1, 1, 1, 0]))
     eq(list(cut), [False, False, False, False, True, False], "thin: a lone apartment AT the median with nothing open stays (b); one with something open is cut (d); two-apartment neighborhoods are untouched (c); two-apartment neighborhoods are untouched")
-    # ---- laundry and conflicting dog policy
     cut2 = rank.thin_neighborhood_cut(s_(["a", "b", "c", "c", "d"]), s_(["g"] * 5), s_([True] * 5), s_([70.0, 25.0, 30.0, 20.0, 60.0]), s_([0, 0, 1, 1, 0]))
     eq(list(cut2), [False, True, False, False, False], "thin: a lone apartment below its experience's median (30) is cut even with nothing open")
+    # ---- owner, 2026-11-16 ("Forget call check"): a listing that was never re-read is not an open item
+    gate0, gate1, gate2 = s_([0, 0, 0, 0, 0]), s_([1, 1, 1]), s_([2, 2])
+    eq(list(rank.open_item_count(gate0, s_(["", "not checked", "blocked", "live", "changed"]))), [0, 0, 0, 0, 0],
+       "no live flag: a unit never re-read (blank, not checked, blocked) has NO open item, exactly like one seen live")
+    eq(list(rank.showable_by_open_items(rank.open_item_count(gate1, s_(["", "blocked", "live"])))), [True, True, True],
+       "no live flag: one open gate fact and never re-read is ONE open item (shown with its asterisk), not two")
+    eq(list(rank.showable_by_open_items(rank.open_item_count(gate2, s_(["live", ""])))), [False, False],
+       "no live flag: two real open gate facts still hide a unit, seen live or not")
+    # a found problem still counts: these are what a re-read FINDS, and each is still the open fact 'listing' (or removes)
+    ok(P.price_doubt("Price far below the area's other listings; verify the price by phone before touring"), "no live flag: a checker's 'verify the price' note is still the open item 'listing'")
+    eq(P.staleness("2026-08-22", "2026-11-15", available_date="now")[0], "open", "no live flag: a page unchanged 85 days is still one open item")
+    eq(P.staleness("2026-04-01", "2026-11-15", available_date="now")[0], "remove", "no live flag: a page unchanged more than six months still removes the unit")
+    # the thin rule's "well attested" test is on open GATE facts only: the fifth argument is the open-gate-fact count
+    cut3 = rank.thin_neighborhood_cut(s_(["a", "b", "c", "c"]), s_(["g"] * 4), s_([True] * 4), s_([70.0, 60.0, 30.0, 20.0]),
+                                      rank.open_item_count(s_([0, 1, 0, 0]), s_(["", "live", "", ""])))
+    eq(list(cut3), [False, True, False, False], "thin: a lone apartment never re-read with no open gate fact stays (a); one seen live with an open gate fact is cut (b)")
+    # ---- laundry and conflicting dog policy
     eq(list(rank.in_unit_laundry(s_(["yes", "washer, dryer", "laundry room (not in unit)", "In unit", ""]), s_(["on_site_only", "yes", "yes", "", ""]))), [False, True, False, True, False],
        "laundry: 'yes' with on_site_only is a shared laundry room, not a washer in the apartment")
 
@@ -972,7 +988,19 @@ def data_6(L_):
     S_ = R[R.shown == "True"]
     n_h = S_.groupby("hood_id").size()
     lone = S_[S_.hood_id.map(n_h) == 1]
-    ok((lone.confirm_asterisk == "").all(), "thin: a neighborhood shown with one apartment shows a well-attested one (nothing open)")
+    ok((lone.confirm_asterisk == "").all() and (pd.to_numeric(lone.open_gate_facts) == 0).all(), "thin: a neighborhood shown with one apartment shows a well-attested one (no open gate fact)")
+    # ---- owner, 2026-11-16 ("Forget call check"): no 'not re-checked' flag anywhere in the output
+    ok(not R.confirm_what.str.contains("live check").any() and not R.confirm_why.str.contains("has not been seen live|could not be opened in the evidence pass").any(),
+       "no live flag: no ranked unit carries a 'live check' open item or its sentence")
+    ok((pd.to_numeric(R.open_items) == pd.to_numeric(R.open_gate_facts)).all(), "no live flag: open_items is the number of open gate facts, nothing more")
+    never = S_[~S_.live_status.isin(["live", "changed"])]
+    ok(len(never) > 0 and (never[pd.to_numeric(never.open_gate_facts) == 0].confirm_asterisk == "").all(), "no live flag: a shown unit never re-read with no open gate fact has no asterisk")
+    ok(((S_.confirm_asterisk == "yes") == (pd.to_numeric(S_.open_gate_facts) == 1)).all() and S_.confirm_what[S_.confirm_asterisk == "yes"].isin(["elevator", "dogs allowed", "availability", "listing", "eligibility"]).all(),
+       "no live flag: every asterisk on a shown unit names one open gate fact")
+    ok((pd.to_numeric(S_.open_gate_facts) <= 1).all(), "no live flag: two real open gate facts still hide a unit")
+    ok(not (R.live_status == "gone").any(), "no live flag: a unit found gone at a re-read is still removed")
+    ok(S_.last_seen.ne("").all(), "no live flag: every shown unit keeps the date its price was read")
+    ok(not (DATA / "needs_live_check.csv").exists(), "no live flag: the 'waiting for a live check' list is no longer written")
     T_ = R[R.not_shown_reason == "thin_neighborhood"]
     ok((T_.shown == "False").all() and (T_.shown_before_thin_rule == "True").all() and T_.hood_id.map(lambda h: h not in set(S_.hood_id)).all(), "thin: a cut neighborhood shows nothing and its apartment stays in the file with the reason")
     import itertools
@@ -1062,6 +1090,13 @@ def page_3(J, M, R, S):
         vc = pd.Series([u["moments"][k].get("rating") for u in J["units"]]).value_counts(normalize=True)
         ok(len(vc) == 0 or float(vc.max()) <= 0.62, f"step 6: no level of the '{k}' moment holds more than about 60% of the shown places (largest: {vc.index[0] if len(vc) else ''} {float(vc.max()) if len(vc) else 0:.0%})")
     ok(all((u["moments"]["sun"]["rating"] == "strong") == (u["moments"]["sun"]["drive_min"] <= 30) for u in J["units"] if u["moments"]["sun"]["drive_min"] is not None), "step 6: Sunday is strong at 30 minutes or less, an absolute threshold")
+    # owner, 2026-11-16 ("Forget call check"): the page data
+    ok(J.get("awaiting_live_check") == [] and J["meta"]["counts"]["awaiting_live_check"] == 0, "no live flag: awaiting_live_check is an empty array in the page data")
+    ok(all(u["confirm"]["what"] != "live check" for u in J["units"] + J["held"] + J["avoid"]) and all("live check" not in b["open_items"] for b in J["buildings"]),
+       "no live flag: no unit or building in the page data carries the open item 'live check'")
+    ok(all(u.get("price_seen_at") for u in J["units"]), "no live flag: every shown unit carries price_seen_at")
+    ok(not re.search(r"not been seen live|could not be opened in the evidence pass|live re-check", json.dumps([u["confirm"] for u in J["units"]]) + json.dumps(J["meta"]["notes"])),
+       "no live flag: no sentence says a listing has not been checked again")
     txt = json.dumps(J["meta"]["notes"]) + json.dumps([u["confirm"] for u in J["units"]])
     ok("counted as $0" not in txt and "count as $0" not in txt, "pending fix: neither meta.notes nor any confirm.why says 'counted as $0'")
     ok(not any(re.search(r"\[live check\]|\[evidence\]|totalPrice|not stated", (u["rent"]["offer_text"] or "")) for u in J["units"]), "pending fix: rent.offer_text holds clean text only")
