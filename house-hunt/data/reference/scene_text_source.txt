@@ -339,9 +339,9 @@ rules: Peekskill|overnight_parking
 voices: social_life
 
 === hood: nj:franklin
-host_intro: In Franklin a large state park is about {parkwalk} minutes from the door{!parkha>=20}, which is ideal for long dog walks. The apartments are large, about {sqft} square feet{!sqft>=800}. You would drive for everything else, starting with dinner{!rest<=3}.
+host_intro: In Franklin a large state park is about {parkwalk} minutes from the door{!parkha>=20}, which is ideal for long dog walks. [[The apartments are large, about {sqft} square feet{!sqft>=800}.]][[The apartments are a good size, about {sqft} square feet{!sqft>=700}{!sqft<800}.]] You would drive for everything else, starting with dinner{!rest<=3}.
 scene: No restaurants are within a {w10}{!rest==0}, and the supermarket is {super} miles away. The dog park is {dogpark} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
-good: You get a big park close by and a large apartment.
+good: You get a big park close by[[ and a large apartment{!sqft>=800}]].
 watch: Your parents are about {drive} minutes away, and everything except the park is a drive.
 
 === hood: nj:somerville
@@ -628,9 +628,9 @@ rules: Middletown|overnight_parking
 voices: social_life
 
 === hood: ct:seymour
-host_intro: The apartment in Seymour is very large, about {sqft} square feet{!sqft>=1000}, and costs about ${pg_mid} a month, everything included{!pg_mid<=2400}. Residents describe antique shops, small diners and not much nightlife. Your parents are about {drive} minutes away{!drive>=90}.
+host_intro: [[The apartment in Seymour is very large, about {sqft} square feet{!sqft>=1000}, and costs about ${pg_mid} a month, everything included{!pg_mid<=2400}.]][[The apartment in Seymour is large, about {sqft} square feet{!sqft>=800}{!sqft<1000}.]] Residents describe antique shops, small diners and not much nightlife. Your parents are about {drive} minutes away{!drive>=90}.
 scene: {rest} restaurants are within a {w10}, and the train station is {station} miles away. The supermarket is {super} miles from the door. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
-good: You get a great deal of space for the price.
+good: You get a great deal of space[[ for the price{!pg_mid<=2400}]].
 watch: The nearest park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away.
 voices: social_life
 
@@ -668,6 +668,19 @@ scene: Nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}. The superm
 good: The apartment here is large, about {sqft} square feet{!sqft>=800}.
 watch: Your parents are about {drive} minutes away, and no park nearby allows dogs.
 rules: LaGrange (Town)|parks_and_beaches
+
+=== hood: nj:bogota
+host_intro: In Bogota the water is {water} miles from the door{!water<=200} and a park about {parkwalk} minutes on foot{!parkwalk<=10}. Residents praise the parks and call the town peaceful. The {pg_n} apartments are in a single building{!pg_bldgs==1} and cost about ${pg_mid} a month, everything included{!pg_mid>=2850}.
+scene: {rest} restaurants and {cafes} cafés are within a {w10}, and there are no bars{!bars==0}. The supermarket is {super} miles away and the train station {station} miles. [[Each apartment listed has a detail to confirm by phone before you tour{!s_open==1}.]] [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+good: The water, a park and the supermarket are all a short walk{!super<=500}.
+watch: The cheapest apartment is about ${pg_lo} a month, everything included, which is close to your limit{!pg_lo>=2850}.
+voices: dogs_green, noise
+
+=== hood: nj:burlington
+host_intro: The apartments in Burlington cost about ${pg_mid} a month, everything included, less than a typical Queens apartment{!q_cost>=4}. All {pg_n} are in a single building{!pg_bldgs==1}. Your parents are about {drive} minutes away each way{!drive>=110}, so a visit takes the whole day.
+scene: {rest} restaurants are within a {w10}, and there are no bars{!bars==0}. The supermarket is {super} miles away and the dog park {dogpark} miles, so both need the car{!super>=1600}{!dogpark>=4800}. By train and bus the trip to your parents takes about {transit} minutes. [[Each apartment listed has a detail to confirm by phone before you tour{!s_open==1}.]]
+good: You pay less here and get a good-sized apartment{!pg_hi<=2600}{!sqft>=700}.
+watch: The nearest park is about {parkwalk} minutes on foot{!parkwalk>=30}, which is too far for a daily dog walk.
 
 # ------------------------------------------------------------------ The Old-Neighborhood Experience
 
@@ -862,9 +875,9 @@ watch: Few restaurants are nearby{!rest<=5}.
 voices: dogs_green, social_life
 
 === hood: ny:gravesend-south-
-host_intro: A large waterfront park is about {parkwalk} minutes from the door{!parkha>=20}{!water<=500}, which suits daily dog walks. The apartment costs about ${pg_mid} a month, everything included{!pg_mid<=2400}. Few restaurants are within walking distance{!rest<=5}.
+host_intro: A large waterfront park is about {parkwalk} minutes from the door{!parkha>=20}{!water<=500}, which suits daily dog walks. [[The apartment costs about ${pg_mid} a month, everything included{!pg_mid<=2400}.]] Few restaurants are within walking distance{!rest<=5}.
 scene: A dog run is {dogpark} miles away, and the supermarket is {super} miles from the door. Few bars are nearby{!bars<=2}.
-good: A large park is very close and the price is low.
+good: A large park is very close[[ and the price is low{!pg_mid<=2400}]].
 watch: The apartment is small, about {sqft} square feet{!sqft<=600}, and you would travel for dinner out.
 
 === hood: ny:windsor-terrace-south-slope
