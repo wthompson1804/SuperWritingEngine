@@ -186,7 +186,8 @@ a.link{display:inline-flex;align-items:center}
 .unit.avoid h4{font-size:20px}
 .badge{display:inline-block;font-family:var(--display);font-weight:800;font-size:13px;border-radius:999px;padding:2px 10px;background:var(--coral-ink);color:#fff}
 .why{font-size:14px;font-weight:700;color:var(--coral-ink);background:#FFE9E7;border-radius:12px;padding:7px 10px}
-.sign{flex:0 0 auto;text-align:center;position:relative;padding-top:14px}
+.sign{flex:0 0 auto;max-width:48%;text-align:center;position:relative;padding-top:14px}
+.sign strong.nk{font-size:17px;line-height:1.1}
 .sign::before{content:"";position:absolute;top:0;left:50%;width:4px;height:16px;background:var(--ink);transform:translateX(-50%)}
 .sign .board{background:var(--butter);border:3px solid var(--ink);border-radius:14px;padding:6px 10px;min-width:104px;transform:rotate(2deg)}
 .sign small{display:block;font-weight:800;font-size:11px;color:var(--ink)}
@@ -224,9 +225,9 @@ details.receipt .fn{font-size:13px;font-weight:700;color:var(--muted);padding:2p
 .amen .fold summary{font-size:15px}
 .notfound{font-size:15px;font-weight:700;color:var(--muted);margin-top:4px}
 /* one thing still to confirm */
-.conf{display:inline-block;font-family:var(--display);font-weight:800;font-size:13px;line-height:1.2;border-radius:12px;padding:3px 10px;background:var(--butter);border:2px solid var(--ink);margin-top:6px}
+.conf{display:inline-block;font-family:var(--display);font-weight:800;font-size:13px;line-height:1.2;border-radius:12px;padding:3px 10px;background:var(--butter);border:2px solid var(--ink);margin-top:6px;max-width:100%;overflow-wrap:anywhere}
 /* the full asterisk text on a card: what is still to confirm, and why */
-.confl{font-size:14.5px;line-height:1.35;background:#FFF3C9;border:2px solid var(--ink);border-radius:14px;padding:7px 10px}
+.confl{overflow-wrap:anywhere;font-size:14.5px;line-height:1.35;background:#FFF3C9;border:2px solid var(--ink);border-radius:14px;padding:7px 10px}
 .confl b{font-family:var(--display);font-weight:800}
 .confl+.confl{margin-top:-4px}
 .rentl{font-size:14.5px;line-height:1.35;font-weight:600;border-left:4px solid var(--butter-deep);padding:2px 0 2px 10px}
@@ -287,7 +288,7 @@ details.receipt .fn{font-size:13px;font-weight:700;color:var(--muted);padding:2p
 .cols.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .cols.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .colh{display:flex;align-items:center;gap:6px;background:var(--butter);border:2px solid var(--ink);border-radius:14px;padding:5px 8px;min-width:0}
-.colh .pr{font-family:var(--display);font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+.colh .pr{font-family:var(--display);font-weight:800;font-size:17px;line-height:1.1;font-variant-numeric:tabular-nums;min-width:0}
 .rowc{background:var(--white);border:2px solid var(--line);border-radius:18px;padding:10px;display:grid;gap:8px}
 .rowc h4{font-size:16px;font-weight:800;display:flex;gap:8px;align-items:center;line-height:1.15}
 .rowc h4 svg{width:20px;height:20px;flex:0 0 auto}
@@ -1008,7 +1009,7 @@ function scaleSheet(kind,id,m){
 /* ================= Shared pieces ================= */
 function tip(text){return '<p class="tip">'+IC.pup+'<span>'+text+'</span><i class="arr" aria-hidden="true">↓</i></p>'}
 function star(U){return rentStar(U)?'<span aria-label="special offer applies, see the rent terms">*</span>':''}
-function sign(U,plain){return '<div class="sign'+(plain?' plain':'')+'"><div class="board"><small>All-in monthly</small><strong>'+money(U.all_in)+star(U)+'</strong><em>'+esc(seenShort(U.price_seen_at))+'</em></div></div>'}
+function sign(U,plain){return '<div class="sign'+(plain?' plain':'')+'"><div class="board"><small>All-in monthly</small><strong'+(U.all_in==null?' class="nk"':'')+'>'+money(U.all_in)+star(U)+'</strong><em>'+esc(seenShort(U.price_seen_at))+'</em></div></div>'}
 function holdBtn(U,wide,quiet){var i=heldIx(U.id);
   return '<button type="button" class="btn '+(i>-1?'held':quiet?'':'main')+(wide?' wide':'')+'" data-act="hold" data-id="'+esc(U.id)+'" aria-pressed="'+(i>-1)+'">'+(i>-1?'<span>Held as House '+(i+1)+'<small>Tap to let go</small></span>':'Hold this place')+'</button>'}
 function legend(d){var seen={};d.forEach(function(x){seen[x.tint]=1});
@@ -1129,7 +1130,7 @@ function vYear(Y){
     (scenes||promise||katch?(yf.length?'<details class="fold" style="margin-top:12px"><summary>Typical figures in this year</summary><ul>'+lis(yf)+'</ul></details>':''):(us.length?'<p class="lead">What is typical here, from the '+pl(us.length,"place")+' on show:</p><div style="margin-top:8px">'+pullList(yf)+'</div>':'<p class="lead">'+NK+'.</p>'))+'</section>';
   h+='<section class="sec"><h2><span class="s">What</span>it costs you</h2><div class="tiles3" style="margin-top:10px"><div class="t3"><small>Money</small><b>'+(c?money(c[0])+' to '+money(c[1]):NK)+'</b><span>a month, all-in'+(M.all_in!=null?'; typical '+money(Math.round(M.all_in)):'')+(seenRange(us)?'; prices '+seenRange(us):'')+'</span></div><div class="t3"><small>Distance</small><b>'+(m?r0(m[0])+' to '+r0(m[1])+' minutes':NK)+'</b><span>by car to Mom and Dad, without traffic; '+(M.toll_round_trip==null?'tolls not known yet':M.toll_round_trip===0?'typically no tolls':'typically '+money(M.toll_round_trip)+' in tolls a visit')+'</span></div>'+
     '<div class="t3"><small>Safety</small><b>'+(M.violent_per_1000!=null?M.violent_per_1000+' per 1,000':NK)+'</b><span>violent crimes per 1,000 residents a year, typically'+(JAM.violent_per_1000!=null?'; '+JAM.violent_per_1000+' around Mom and Dad\'s':'')+'</span></div></div>'+how("prices from "+SOURCES.listing,"drive times from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"crime rates from "+SOURCES.crime,"restaurant counts and walks to green space from "+SOURCES.map)+'</section>';
-  if(SPEC.length&&Y.vs_queens){h+='<section class="sec"><h2><span class="s">Against</span>staying in Queens</h2><p class="scalekey">'+pips(3)+'<span>The middle mark is a typical Queens place. Left is worse for you, right is better. Tap a line to see how it was reached.</span></p><div class="ylist">'+SPEC.map(function(s){var p=Y.vs_queens[s.measure],dk=YEAR_DIFF_KEY[s.measure],d=dk&&Y.vs_queens_diff?Y.vs_queens_diff[dk]:null;p=p==null?null:Math.round(p);
+  if(SPEC.length&&Y.vs_queens&&SPEC.some(function(s){return Y.vs_queens[s.measure]!=null})){h+='<section class="sec"><h2><span class="s">Against</span>staying in Queens</h2><p class="scalekey">'+pips(3)+'<span>The middle mark is a typical Queens place. Left is worse for you, right is better. Tap a line to see how it was reached.</span></p><div class="ylist">'+SPEC.map(function(s){var p=Y.vs_queens[s.measure],dk=YEAR_DIFF_KEY[s.measure],d=dk&&Y.vs_queens_diff?Y.vs_queens_diff[dk]:null;p=p==null?null:Math.round(p);
       return pointBtn("year",Y.id,s.measure,p,d==null?(p===3?"same":"difference not in the data"):fmtDiff(s.measure,d),true)}).join("")+'</div></section>'}
   h+='<section class="sec" id="sec-hoods"><h2><span class="s">Tour</span>a neighborhood</h2>'+(hs.length?'<p class="lead">'+pl(hs.length,"neighborhood")+', nearest to Mom and Dad first.</p>'+tip("<b>Tap a neighborhood</b> to tour it.")+'<div class="map" style="margin-top:12px">'+yearMap(Y,null)+'<p class="mapnote">The house is Mom and Dad\'s. Numbers match the list below. Rings are miles in a straight line, not driving time.</p></div>'+confNote(us,"in this year")+limLine(us.filter(fits).length,us.length,"places in this year"):'<div class="empty" style="margin-top:12px"><p><b>Nothing to tour in this year yet.</b></p><p>No neighborhood in it has a place that passed every check.</p><a class="btn main" href="#lives">Back to the years</a></div>')+'<div class="stack tight">';
   hs.forEach(function(H){h+=hoodCard(H,Y)});
@@ -1381,7 +1382,7 @@ function renderTray(){var n=S.held.length;
   var msg=n===0?"Tap Hold this place on one you like. It waits here.":n===1?"One held. Hold one more to compare.":n===2?"Two held. Ready to compare, or hold a third.":"Three held. Time to compare.";
   var h='<div class="wrap"><div class="tr-text"><b>My top three</b><span id="trayMsg">'+msg+'</span></div><div class="tr-row">';
   for(var i=0;i<3;i++){var U=U_BY[S.held[i]];
-    h+=U?'<a class="slot full" href="'+href("unit",U.id)+'" aria-label="House '+(i+1)+', '+esc(uName(U))+', '+money(U.all_in)+', '+esc(seenShort(U.price_seen_at))+'"><span>House '+(i+1)+'</span><b>'+money(U.all_in)+(rentStar(U)?'*':'')+'</b><em>'+esc(seenShort(U.price_seen_at))+'</em></a>':'<div class="slot" aria-hidden="true"><span>House '+(i+1)+'</span><span>empty</span></div>'}
+    h+=U?'<a class="slot full" href="'+href("unit",U.id)+'" aria-label="House '+(i+1)+', '+esc(uName(U))+', '+money(U.all_in)+', '+esc(seenShort(U.price_seen_at))+'"><span>House '+(i+1)+'</span><b'+(U.all_in==null?' style="font-size:11px"':'')+'>'+(U.all_in==null?"Price not known":money(U.all_in)+(rentStar(U)?'*':''))+'</b><em>'+esc(seenShort(U.price_seen_at))+'</em></a>':'<div class="slot" aria-hidden="true"><span>House '+(i+1)+'</span><span>empty</span></div>'}
   h+='<a class="go'+(n>=2?' live':'')+'" id="goBtn" href="#compare">Compare'+(n>=2?' '+n:'')+'</a></div></div>';
   tray.innerHTML=h;fitTray()}
 /* The bar is fixed to the bottom; the page keeps that much room under its last line, whatever the bar's height. */
@@ -1432,7 +1433,9 @@ function tourText(){var H=S.held.map(function(id){return U_BY[id]}).filter(Boole
     return "House "+(i+1)+". "+uName(U)+(U.unit?", unit "+U.unit:"")+"\n   "+(U.address||"Address not known yet")+" · "+hoodOf(U).name+" ("+yearOf(U).label+")\n   "+money(U.all_in)+(R.asterisk?"*":"")+" all-in a month, "+seenShort(U.price_seen_at)+" · "+bedsWord(U)+", "+(U.sqft!=null?r0(U.sqft)+" sq ft":"size not known yet")+" · "+parkWord(U)+
       (R.asterisk?"\n   * Rent offer: "+(R.offer_text||NK)+(R.gross!=null?" A paying month is "+money(R.gross)+" rent"+(U.all_in_gross!=null?", "+money(U.all_in_gross)+" all-in":"")+".":"")+(R.needs_call?" Needs a call.":""):"")+
       confs(U).map(function(c){return "\n   * Still to confirm: "+cWhat(c)+"."+(c.why?" "+c.why:"")}).join("")+
-      ((U.all_in_unknown||[]).length?"\n   Not counted in the price yet: "+list(U.all_in_unknown)+".":"")+
+      (netEff(U)&&R.first_full_payment_date?"\n   First full payment due "+(dayStr(R.first_full_payment_date,true)||R.first_full_payment_date)+".":"")+
+      (leaseBits(U).length?"\n   "+leaseBits(U).join(" "):"")+
+      ((U.all_in_unknown||[]).length?"\n   Not published, so not in the price: "+list(U.all_in_unknown)+".":"")+
       "\n   "+dayOfUnit(U).map(function(d){return d.t+": "+d.cap}).join("\n   ")+
       "\n   Ask:"+(q.length?"\n"+q.map(function(x){return "   - "+x}).join("\n"):" nothing is flagged for this place.")+
       (okUrl(U.links&&U.links.listing)?"\n   Listing: "+U.links.listing:"")}).join("\n\n")+"\n\nA lease is 12 months. You are choosing a year to try, not forever."}

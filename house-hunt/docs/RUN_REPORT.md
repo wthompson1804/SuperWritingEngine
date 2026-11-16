@@ -1,4 +1,4 @@
-# Run report (2026-11-16T00:02:25+00:00)
+# Run report (2026-11-16T00:03:10+00:00)
 
 ## Steps
 
@@ -25,14 +25,14 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2573 | 2573 | +0 |
 | within the $3,000 all-in cap | 1655 | 1655 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 674 | 692 | -18 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 218 | 232 | -14 |
-| avoid cards | 33 | 32 | +1 |
-|   shown with an asterisk (one thing to confirm) | 138 | 144 | -6 |
-| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 54 | 36 | +18 |
-| held back for one confirmation | 54 | 51 | +3 |
-| clean, waiting for a live check (not shown) | 52 | 46 | +6 |
-| neighborhoods with 3+ shown places | 27 | 28 | -1 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 667 | 674 | -7 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 216 | 218 | -2 |
+| avoid cards | 33 | 33 | +0 |
+|   shown with an asterisk (one thing to confirm) | 136 | 138 | -2 |
+| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 61 | 54 | +7 |
+| held back for one confirmation | 54 | 54 | +0 |
+| clean, waiting for a live check (not shown) | 53 | 52 | +1 |
+| neighborhoods with 3+ shown places | 27 | 27 | +0 |
 | buildings in the master table | 665 | 665 | +0 |
 
 ## Why units left
@@ -63,11 +63,11 @@
 
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
-| The Fresh-Start Year      |               3 |       45 |      15 |             0 |
-| The Little-City Year      |              26 |      312 |      82 |             7 |
-| The Old-Neighborhood Year |              36 |      120 |      59 |            24 |
+| The Fresh-Start Year      |               3 |       44 |      15 |             0 |
+| The Little-City Year      |              26 |      310 |      81 |             7 |
+| The Old-Neighborhood Year |              36 |      119 |      59 |            24 |
 | The Quiet-Street Year     |               6 |        8 |       6 |             0 |
-| The Room-to-Breathe Year  |              23 |      182 |      51 |             0 |
+| The Room-to-Breathe Year  |              23 |      179 |      50 |             0 |
 | The Walk-Everywhere Year  |               5 |        7 |       5 |             2 |
 
 ## Fill rate among shown units (percent with a value)
@@ -75,7 +75,7 @@
 | Field | % |
 |---|---|
 | sqft | 82 |
-| unit_floor | 75 |
+| unit_floor | 76 |
 | elevator_basis | 100 |
 | dog_weight_limit_lb | 19 |
 | parking_type | 77 |
@@ -83,11 +83,11 @@
 | pet_rent | 44 |
 | pool | 26 |
 | doorman | 28 |
-| year_built | 50 |
+| year_built | 51 |
 | toll_rt_ezpass | 37 |
 | transit_sat_median | 96 |
 | near_violent_250m_24m | 25 |
-| live_status | 93 |
+| live_status | 94 |
 | rent_first_full_payment_date | 67 |
 | ev_pause_notes | 32 |
 
@@ -148,24 +148,24 @@ units 2573; cost gate {'pass': 1655, 'fail': 918}; rent asterisk 1763; rent term
 
 **ranking and selection**
 ```
-evidence: 36 units excluded, shown 218, avoid cards 33, of them with an asterisk 138 ({'floor': 63, 'live check': 20, 'lease term': 15, 'cost near the cap': 13, 'elevator': 10, 'listing': 8, 'dogs allowed': 7, 'other': 2}), held for a confirmation 54, waiting for a live check 52
-stages: 2573 costed -> -918 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -54 removed by a reviewed verdict -> -455 sketchy -> -36 evidence exclusions -> 674 ranked
-(kept 674 units; candidates 299; shown 284; pools: {'': 405, 'pool': 251, 'indoor': 18}
+evidence: 36 units excluded, shown 216, avoid cards 33, of them with an asterisk 136 ({'floor': 62, 'live check': 19, 'lease term': 15, 'cost near the cap': 12, 'elevator': 10, 'listing': 9, 'dogs allowed': 7, 'other': 2}), held for a confirmation 54, waiting for a live check 53
+stages: 2573 costed -> -918 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -61 removed by a reviewed verdict -> -455 sketchy -> -36 evidence exclusions -> 667 ranked
+(kept 667 units; candidates 297; shown 283; pools: {'': 399, 'pool': 250, 'indoor': 18}
 ```
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 84 checks, 1 failed
+test_rules (data): 85 checks, 1 failed
   FAIL verdicts: a shown unit has no ok / asterisk verdict
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
-   trulia:b2753374875:Unit_155-1001:2059596072 (Newark Urby 155-1001): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2753374875:Unit_155-1412:2061612527 (Newark Urby 155-1412): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2594867367:Unit_206E:466174041 (Symphony 206E): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2737454290:Unit_4L:348549526 (Park Place Towers 4L): no reviewed verdict: nobody has read this unit's evidence
-   rn:12-brooklyn-ave-valley-stream:zumper-43894935 (12 Brooklyn Ave ): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2775827441:Unit_1013:462208558 (Hudson 44 1013): no reviewed verdict: nobody has read this unit's evidence
+   trulia:b2746633852:Unit_502:466166385 (Ethos Kelsey 502): no reviewed verdict: nobody has read this unit's evidence
+   trulia:b2792782357:Unit_517:463832791 (80East | Luxury Apartments | Dover, NJ 517): no reviewed verdict: nobody has read this unit's evidence
+   trulia:b2792782357:Unit_613:463832823 (80East | Luxury Apartments | Dover, NJ 613): no reviewed verdict: nobody has read this unit's evidence
+   manual:envy:220 (Envy by Gomes 220): no reviewed verdict: nobody has read this unit's evidence
+   trulia:b2594867367:Unit_207E:466174042 (Symphony 207E): no reviewed verdict: nobody has read this unit's evidence
+   trulia:b2737454290:Unit_8V:452657834 (Park Place Towers 8V): no reviewed verdict: nobody has read this unit's evidence
 ```
 
