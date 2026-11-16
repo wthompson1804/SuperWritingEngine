@@ -162,9 +162,16 @@ def data():
         if lid in M.index:
             ok(m(lid, "elevator_evidence_open") != "", f"D2: {lid} elevator must be open (evidence row unconfirmed)")
     # D7 / D9: "select buildings", "amenity tag only"
-    for lid in ["apartmentlist:p72935-A2839-5-02E", "apartmentlist:p372060-50-123", "apartmentlist:p98932510-00B-308", "apartmentlist:p90606231-431"]:
+    for lid in ["apartmentlist:p72935-A2839-5-02E", "apartmentlist:p372060-50-123"]:
         if lid in M.index:
-            ok(m(lid, "elevator_evidence_open") != "", f"D7/D9: {lid} elevator must be open")
+            ok(m(lid, "elevator_evidence_open") != "", f"D7/D9: {lid} elevator must be open (elevators in select buildings only)")
+    # 4c (owner, after the repair report): an elevator on a listing site's amenity tag alone is stated, not confirmed, and
+    # settles the fact by rule; the reviewer's asterisk (townhomes; the owner's own list omits it) still keeps these two open
+    for lid in ["apartmentlist:p98932510-00B-308", "apartmentlist:p90606231-431"]:
+        if lid in M.index:
+            ok(m(lid, "elevator_basis") in ("stated", "amenities_page") and m(lid, "elevator_aggregator_only") == "yes", f"4c: {lid} elevator is stated on a listing site only")
+        if lid in R.index:
+            ok("elevator" in R.at[lid, "confirm_what"], f"4c: {lid} keeps the reviewer's elevator asterisk")
     # D3
     for lid in ["trulia:2056687577", "trulia:466197377", "trulia:31977450", "trulia:2068977818"]:
         if lid in M.index:

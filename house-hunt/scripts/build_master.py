@@ -371,6 +371,13 @@ def overnight_parking_rules(path=None):
     return out
 
 
+def elevator_only_from_listing_sites(cands) -> bool:
+    """cands: Merge candidates (precedence, value, basis, source) for 'elevator'. True when at least one says yes on
+    something better than an inference and every such source is a listing site (Apartment List, Trulia, Zumper ...)."""
+    yes = [c for c in cands if c[1] == "yes" and c[2] != "inferred"]
+    return bool(yes) and all(is_aggregator(c[3]) for c in yes)
+
+
 # ---------------------------------------------------------------------- phone answers (highest precedence)
 CALL_ANSWERS = DATA / "evidence" / "call_answers.csv"
 PHONE = "confirmed_by_phone"
@@ -751,13 +758,16 @@ def main():
     CALLS = load_call_answers()
     called_b = apply_call_answers_building(M, CALLS, dict(zip(U.listing_id, U.building_id))) if CALLS else {}
 
+    # 4c: which elevators rest on listing sites alone: every source that says "yes" (other than an inference) is a
+    # listing site's page; no own or manager's page, no city record, no phone call says so
+    agg_only = {b for (b, f), cands in M.c.items() if f == "elevator" and elevator_only_from_listing_sites(cands)}
     rows, conflicts = M.resolve()
     rows = phone_overrides_building(rows)
     for b, when in called_b.items():
         rows.setdefault(b, {})["call_building_called_at"] = when
     for b, d in rows.items():
         # 4c: which elevators rest on a listing site's page alone (no own page, no record, no phone call)
-        d["elevator_aggregator_only"] = "yes" if d.get("elevator") == "yes" and d.get("elevator_basis") in ("stated", "amenities_page") and is_aggregator(d.get("elevator_source", "")) else ""
+        d["elevator_aggregator_only"] = "yes" if d.get("elevator") == "yes" and b in agg_only else ""
 
     # ------------------------------------------------------------------ building table
     bfirst = U.drop_duplicates("building_id").set_index("building_id")
