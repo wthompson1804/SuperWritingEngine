@@ -37,13 +37,13 @@ HOODS = ROOT / "data/reference/scene_text_neighborhoods.csv"
 TOLLS = "data/enriched/*.json"                     # virtual table: one row per building, see _toll_table()
 PAGE = "site/data.json"                            # virtual tables "site/data.json#years|neighborhoods|units"
 
-LIMITS = {"year": {"scene": (60, 90), "host_intro": (110, 160), "tagline": (4, 14)},
+LIMITS = {"year": {"scene": (60, 90), "host_intro": (110, 160), "tagline": (4, 14), "subhead": (6, 22)},
           "hood": {"scene": (35, 68), "host_intro": (60, 90)}}
 PARAGRAPHS = {"year": {"host_walkthrough": (3, 40, 60)}, "hood": {}}      # column: (paragraphs, min words, max words) each
-ONE_SENTENCE = {"year": ["promise", "tagline"], "hood": ["good_for_her", "watch_for"]}
+ONE_SENTENCE = {"year": ["promise", "tagline", "subhead"], "hood": ["good_for_her", "watch_for"]}
 ONE_OR_TWO = {"year": ["catch"], "hood": []}
-HOST_COLS = {"host_intro", "host_walkthrough", "tagline", "display_label"}   # the host voice may state all-in dollars
-COLUMNS = {"year": ["display_label", "tagline", "scene", "promise", "catch", "host_intro", "host_walkthrough"],
+HOST_COLS = {"host_intro", "host_walkthrough", "tagline", "display_label", "subhead"}   # the host voice may state all-in dollars
+COLUMNS = {"year": ["display_label", "tagline", "subhead", "scene", "promise", "catch", "host_intro", "host_walkthrough"],
            "hood": ["scene", "good_for_her", "watch_for", "host_intro"]}
 VOICE_PHRASE = re.compile(r"review sites|people who live (here|in )|residents (also |here )?(say|like|praise)", re.I)
 
@@ -63,6 +63,15 @@ BANNED = [
                 r"must-see|something for everyone|best of both worlds|up-and-coming|coveted|sought-after)\b", re.I),
      "listing-ad hype word"),
 ]
+# The owner's rule (2026-11-16): everything shown already passed the safety rule, so the open prose is about living
+# there, not about crime. No rates, no "per 1,000", no comparison with Jamaica's line, no "low crime" selling point.
+CRIME = re.compile(r"\bcrimes?\b|\bviolent\b|burglar\w*|\bthefts?\b|\bstolen\b|break-ins?|carjack\w*|per 1,000|"
+                   r"safer than|\bunsafe\b|\bsafe\b|\bsafely\b|\bpolice\b|\brobber\w*", re.I)
+# Two wordings are allowed, each tied to a test the checker re-runs:
+SAFEST = "one of the safest spots on the whole list"      # only where the neighborhood is in the lowest fifth by violent
+SAFEST_FIELD, SAFEST_MAX = "violent_pctile", 0.2          # rate among the neighborhoods shown on the page; one clause
+AT_LIMIT = "safety limit we set"                          # watch_for only, only where the violent rate is right at the
+AT_LIMIT_FIELD, AT_LIMIT_MIN = "violent", 8.0             # limit (Jamaica's rate is the limit, 9.8)
 DOLLARS = (re.compile(r"\$\s?\d{1,3},?\d{3}"), "a dollar amount of 1,000 or more (no rents or prices in scene text)")
 
 
@@ -113,6 +122,9 @@ def _page_table(part):
                 r[k + "_lo"], r[k + "_hi"] = lo, hi
             r["neighborhoods"] = (y.get("counts") or {}).get("neighborhoods")
             r["shown"] = (y.get("counts") or {}).get("shown")
+            near = sorted((h for h in d["neighborhoods"] if h.get("year") == y["id"] and h.get("drive_min") is not None
+                           and (h.get("counts") or {}).get("shown")), key=lambda h: h["drive_min"])
+            r["nearest_name"], r["nearest_drive_min"] = (near[0]["name"], near[0]["drive_min"]) if near else (None, None)
             rows.append(r)
         return pd.DataFrame(rows)
     if part == "neighborhoods":
@@ -120,8 +132,12 @@ def _page_table(part):
         for h in d["neighborhoods"]:
             lo, hi = (h.get("all_in_range") or [None, None])[:2]
             rows.append({"hood_id": h["id"], "all_in_lo": lo, "all_in_hi": hi, "sqft_median": h.get("sqft_median"),
-                         "shown": (h.get("counts") or {}).get("shown")})
-        return pd.DataFrame(rows)
+                         "shown": (h.get("counts") or {}).get("shown"),
+                         "violent": (h.get("safety") or {}).get("violent_per_1000")})
+        t = pd.DataFrame(rows)
+        # share of the page's neighborhoods (those with a rate) whose violent rate is at or below this one: 0.2 = lowest fifth
+        t["violent_pctile"] = t["violent"].rank(pct=True, method="max")
+        return t.drop(columns=["violent"])
     if part == "units":
         toll = table(TOLLS).drop_duplicates("building_id").set_index("building_id")["toll_round_trip_ezpass"]
         rows = []
@@ -336,6 +352,14 @@ def check_style(kind, col, text):
         m = rx.search(bare)
         if m:
             out.append(f"{col}: {what}: '{m.group(0)}'")
+    open_text = bare.replace(SAFEST, "").replace(AT_LIMIT, "")
+    m = CRIME.search(open_text) or re.search(r"\bsafe\w*", open_text, re.I)
+    if m:
+        out.append(f"{col}: crime or safety wording '{m.group(0)}' (the open prose is about living there)")
+    if text.count(SAFEST) > 1:
+        out.append(f"{col}: the 'safest' clause appears more than once")
+    if AT_LIMIT in text and col != "watch_for":
+        out.append(f"{col}: the safety-limit clause is allowed in watch_for only")
     m = NUMBER_WORDS.search(text)
     if m:
         out.append(f"{col}: spelled-out quantity '{m.group(0)}' (write digits and cite them)")
@@ -368,6 +392,25 @@ def check_row(kind, key, texts, evidence):
         problems += p
         drift += d
         allowed |= set(shown)
+    def backed(field, op, bound):
+        """True when an evidence item tests `field` with `op` at least as strictly as `bound`."""
+        for ev in evidence:
+            test = ev.get("holds_if") or []
+            if ev.get("field") == field and len(test) == 2 and test[0] in op:
+                try:
+                    v = float(test[1])
+                except ValueError:
+                    continue
+                if (v <= bound) if "<" in test[0] else (v >= bound):
+                    return True
+        return False
+    joined = " ".join(texts.values())
+    if SAFEST in joined and not backed(SAFEST_FIELD, ("<=", "<"), SAFEST_MAX):
+        problems.append(f"'{SAFEST}' needs a test that the neighborhood is in the lowest fifth by violent rate")
+    if joined.count(SAFEST) > 1:
+        problems.append(f"'{SAFEST}' is used in more than one field")
+    if AT_LIMIT in joined and not backed(AT_LIMIT_FIELD, (">=", ">"), AT_LIMIT_MIN):
+        problems.append(f"'{AT_LIMIT}' needs a test that the violent rate is at least {AT_LIMIT_MIN}")
     for col, text in texts.items():
         if not text.strip():
             problems.append(f"{col}: empty")

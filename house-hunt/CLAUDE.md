@@ -80,3 +80,6 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
   only a brief "among the safest on the list" for the few that earn it. Promises say what life is like. Experience-level
   figures are medians, never ranges or averages. "Compared to staying in Queens", not "against". Under "What it costs
   you", one plain line saying what all-in includes.
+- **Collapse to headlines (Will, 2026-11-16):** every section collapses to a headline that states its conclusion; expanding
+  is the reader's choice. Target: any one place, neighborhood or experience fits in about 1.5 phone screens when collapsed.
+  At experience level show the median as the headline figure with the range in small text beneath it.

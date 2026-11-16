@@ -72,7 +72,7 @@ BLDG = {
 FROM_TOLLS = {"b_toll", "b_tollmax", "b_tollok"}       # read from data/enriched, not master_buildings.csv
 # alias: (column of site/data.json#neighborhoods, usual rounding)
 HOOD_PAGE = {"pg_lo": ("all_in_lo", "usd50"), "pg_hi": ("all_in_hi", "usd50"), "pg_n": ("shown", "int"),
-             "pg_sqft": ("sqft_median", "r10")}
+             "pg_sqft": ("sqft_median", "r10"), "pg_safe": ("violent_pctile", "pct")}
 # alias: (column of site/data.json#years, usual rounding)   the page's own tile figures
 YEAR_PAGE = {
     "p_allin": ("all_in", "usd50"), "p_allin_lo": ("all_in_lo", "usd50"), "p_allin_hi": ("all_in_hi", "usd50"),
@@ -81,6 +81,7 @@ YEAR_PAGE = {
     "p_viol": ("violent_per_1000", "1dp"), "p_prop": ("property_per_1000", "1dp"),
     "p_rest": ("restaurants_800m", "int"), "p_parkwalk": ("park_walk_min", "int"),
     "p_hoods": ("neighborhoods", "int"), "p_places": ("shown", "int"),
+    "p_near": ("nearest_name", "str"), "p_near_drive": ("nearest_drive_min", "int"),
 }
 # alias: (column of site/data.json#units, aggregation over the year's shown units, usual rounding)
 YEAR_UNITS = {
@@ -293,7 +294,7 @@ def parse(path):
     return blocks
 
 
-YEAR_COLS = {"display": "display_label", "tagline": "tagline", "scene": "scene", "promise": "promise", "catch": "catch",
+YEAR_COLS = {"display": "display_label", "tagline": "tagline", "subhead": "subhead", "scene": "scene", "promise": "promise", "catch": "catch",
              "host_intro": "host_intro"}
 HOOD_COLS = {"scene": "scene", "good": "good_for_her", "watch": "watch_for", "host_intro": "host_intro"}
 WALK = ["walk1", "walk2", "walk3"]                    # a weekday, a Saturday night, a Sunday with her parents
