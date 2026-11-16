@@ -26,8 +26,11 @@ renderers in site/index.html):
 THE CHECKS
   1 SOURCE   the published text is exactly what the checked source says today:
              experiences and neighborhoods = their row in data/reference/scene_text_*.csv;
-             apartments and buildings = what scripts/realtor_lines.py writes from THIS data, regenerated here (so a line
-             edited in realtor_lines.csv, building_about.csv or site/data.json itself is caught).
+             apartments and buildings = what scripts/realtor_lines.py writes from THIS data, regenerated here through
+             realtor_lines.build() and build_buildings(), and compared with BOTH the page and the two tables on disk
+             (data/reference/realtor_lines.csv, building_about.csv). Independent check 5 planted five edits in those
+             two tables and all slipped through, because only the page was compared: an edited, missing or extra row
+             in either table now fails, whether or not the page has picked it up yet.
   2 PLAIN    the banned constructions, vocabulary, stale wording and readability rules of check_scene_text.py
              (imported: CONCEITS, the noun x verb conceit guard, VOCAB, INTERNAL, STALE, FIGURE, sentence length,
              BANNED, CRIME, NUMBER_WORDS), applied to the published text.
@@ -36,8 +39,13 @@ THE CHECKS
              figure strip. Apartments and buildings: the object's own fields (test_realtor_lines.allowed_numbers).
              An unmatched number is reported.
   4 CLAIMS   a fixed list of checkable claims, each a pattern compared with a field (CLAIMS below): has a pool / gym /
-             garage / covered parking / doorman / concierge / dog area / washer and dryer / lounge / elevator; dogs
-             allowed; "no bars", "no restaurants"; "the only building of N with ..."; "the lowest-priced / largest /
+             doorman / concierge / dog area / lounge / elevator; dogs allowed; and, against the STRUCTURED fields
+             (independent check 5): the KIND of parking, whether it is included, its fee and the other kind offered at
+             a cost (parking.kind / included_kind / fee / optional_kinds: "garage" only for a garage, never a fee of
+             another kind); the KIND of station (train_station_kind: train station / subway station / PATH station /
+             light rail stop); washer and dryer wording (in_unit_appliances: a washer is not "a washer and dryer";
+             in_unit_laundry_basis: a listing site's tag is "the listing shows", never a flat assertion); a dog weight
+             limit in pounds (dog.weight_limit_lb, set only where a page states it); "no bars", "no restaurants"; "the only building of N with ..."; "the lowest-priced / largest /
              highest of the N apartments"; "N apartments are listed"; the distance to the dog park, a park, the
              supermarket and the station; minutes to her parents; tolls; "its own dog area / garage" for a
              neighborhood. For experiences, check_scene_text.check_experience (75% of the apartments, every
@@ -236,11 +244,6 @@ def _elevator_settled(us):
 PLACE_CLAIMS = [
     ("a pool", r"\bpool\b(?! table)", lambda u, us: bool(_am(u).get("pool")), "amenities.pool"),
     ("a gym", r"\bgym\b|\bexercise without leaving\b", lambda u, us: _am(u).get("gym") == "yes", "amenities.gym"),
-    ("a garage", r"\bgarage\b|\bpark indoors\b", lambda u, us: _pk(u) == "garage", "parking.type"),
-    ("covered parking", r"\bcovered parking\b|\bunder cover\b", lambda u, us: _pk(u) in ("covered", "garage"), "parking.type"),
-    ("a parking lot", r"\bbuilding's lot\b|\bparking lot\b|\bits own parking lot\b", lambda u, us: _pk(u) == "lot", "parking.type"),
-    ("parking included", r"\b(?:parking space|space) is included\b|\bparking is included\b|\bincludes a parking space\b|"
-     r"\bnot pay extra to park\b", lambda u, us: R.parking_kind(u)[2], "parking.fee + fee_note"),
     ("a doorman", r"\bdoorman\b|\bat the front door\b", lambda u, us: R.desk_kind(_am(u)) in ("doorman", "doorman24"),
      "amenities.doorman + doorman_text"),
     ("a concierge", r"\bconcierge\b", lambda u, us: R.desk_kind(_am(u)) in ("concierge", "concierge24"),
@@ -250,10 +253,6 @@ PLACE_CLAIMS = [
     ("its own dog area", r"\bits own dog (?:park|run|area)\b|\bdog (?:park|run) on (?:site|the property)\b|"
      r"\bdog area on the property\b|\bwithout leaving the property\b|\bown dog area\b", lambda u, us: _dog_area(u),
      "amenities.dog_park_or_run"),
-    ("a washer and dryer in the apartment", r"\bwasher\b|\bdryer\b", lambda u, us: R.laundry_kind(_am(u)) == "wd",
-     "amenities.in_unit_laundry + laundry"),
-    ("laundry in the apartment", r"\blaundry (?:is )?(?:in|inside) (?:the|your own) apartment\b|\bno shared laundry room\b",
-     lambda u, us: R.laundry_kind(_am(u)) is not None, "amenities.in_unit_laundry + laundry"),
     ("a lounge or coworking room", r"\blounge or coworking\b", lambda u, us: _am(u).get("lounge_or_coworking") == "yes",
      "amenities.lounge_or_coworking"),
     ("dogs are allowed", r"\b[Dd]ogs are allowed\b|\bdog policy sets no weight limit\b", lambda u, us: _dogs_settled(us),
@@ -265,6 +264,131 @@ NOT_A_CLAIM = re.compile(r"^ask\b|\bwhether\b|\bdisagree\b|\bdo not agree\b|\bas
                          r"mentioned|known|say|give)\b|\bdoes not (?:mention|say|give|publish)\b|\bis not confirmed\b|"
                          r"\bconfirm\b|\bno other (?:building|apartment)\b|\bthe only (?:building|garage)\b|\bnot explained\b",
                          re.I)
+# ---- parking, against the structured fields (independent check 5, N1). Every sentence that speaks of parking is
+# read clause by clause: the other kinds offered at a cost first ("; garage spaces are $125 a month", "garage spaces
+# cost extra"), then the kind of the space she would park in, whether it is included, and its fee.
+PARK_EXTRA = re.compile(r"\b(garage|covered|open-lot|assigned outdoor|off-street|other) spaces (?:are \$([\d,]+) a month|cost extra)|"
+                        r"\b(spaces in the gated lot) (?:are \$([\d,]+) a month|cost extra)|"
+                        r"\ba (garage) space (?:costs extra|is an added cost)", re.I)
+PARK_EXTRA_KIND = {"garage": "garage", "covered": "covered", "open-lot": "open_lot", "assigned outdoor": "assigned_lot",
+                   "off-street": "off_street", "spaces in the gated lot": "gated_lot"}
+PARK_ASK = re.compile(r"\b(?:whether it is|is in) a garage or a lot\b", re.I)      # an assigned space, kind not stated
+PARK_KIND_SAYS = [
+    ("a garage", re.compile(r"\bgarages?\b|\bpark indoors\b", re.I), lambda P: P["kind"] == "garage"),
+    ("covered parking", re.compile(r"\bcovered parking\b|\bunder cover\b", re.I), lambda P: P["kind"] in ("covered", "garage")),
+    ("a parking lot", re.compile(r"\b(?:open|building's|parking|gated) lot\b|\blot fee\b", re.I), lambda P: P["kind"] == "lot"),
+    ("off-street parking", re.compile(r"\boff-street\b", re.I), lambda P: P["kind"] == "off_street"),
+    ("off-site parking", re.compile(r"\boff-site\b|\bno parking at the building\b", re.I), lambda P: P["kind"] == "offsite"),
+    ("an off-site deck", re.compile(r"\bdeck\b", re.I), lambda P: P["kind"] == "offsite" and P["deck"]),
+    ("an assigned space", re.compile(r"\bassigned (?:parking )?space\b|\bspace is assigned\b", re.I), lambda P: P["assigned"]),
+    ("street parking only", re.compile(r"\bparking named is on the street\b|\bnames street parking only\b", re.I),
+     lambda P: P["kind"] == "street"),
+    ("parking of an unnamed kind", re.compile(r"\bwithout saying what kind\b|\bdoes not say what kind\b|\bkind is not stated\b|"
+                                              r"\bwithout a type\b|\bunnamed kind\b|\bwhat kind of parking\b", re.I),
+     lambda P: P["kind"] == "unspecified"),
+    ("no parking mentioned", re.compile(r"\bdoes not mention parking\b|\bparking is not mentioned\b|"
+                                        r"\bwhether the building has parking\b", re.I), lambda P: P["kind"] is None),
+]
+PARKISH = re.compile(r"\bparking\b|\bpark (?:free|indoors|in the|off-site|here)\b|\bgarages?\b|\b(?:open|building's|gated) lot\b|"
+                     r"\blot fee\b|\b(?:parking|assigned|garage) space\b|\ba space in\b|\bspace is (?:included|assigned)\b|"
+                     r"\bunder cover\b|\boff-site\b", re.I)
+PARK_FREE = re.compile(r"\bfree\b|\bno (?:monthly )?charge\b|\bis included\b|\bincluded in the rent\b|\brent includes\b|\bnot pay extra\b|\bat no charge\b|"
+                       r"\badds nothing\b|\bcomes with the (?:rent|apartment)\b|\bincluded assigned space\b", re.I)
+PARK_PRICED = re.compile(r"\b(?:fee|price) (?:is )?published\b|\bpublished (?:monthly )?fee\b|\ba published fee\b", re.I)
+PARK_UNPRICED = re.compile(r"\bfee (?:is )?not published\b|\bdoes not (?:give|publish) (?:its price|what it costs|the fee)\b|"
+                           r"\bwithout a price\b|\bfee not published\b|\bor a price\b", re.I)
+PARK_FEE = re.compile(r"\$([\d,]+) a month\b(?! with utilities)")
+
+
+def parking_claims(sent, u):
+    """-> messages: what a sentence says about parking that the structured parking fields do not carry."""
+    if not PARKISH.search(sent) or re.search(r"\bwith utilities and fees\b|\bthe parking fee\b|\bparking fee (?:is|are)\b|"
+                                             r"\bovernight street parking\b|\b(?:and|or|for) parking\b", sent):
+        return []                                         # a cost sentence that names "the parking fee" among unpublished lines
+    out, P = [], R.parking_facts(u)
+    extras = {k: f for k, f in P["extras"]}
+    rest = sent
+    for m in PARK_EXTRA.finditer(sent):
+        word = (m.group(1) or m.group(3) or m.group(5) or "").lower()
+        fee = m.group(2) or m.group(4)
+        kind = P["detail"] if word == "other" else PARK_EXTRA_KIND.get(word)
+        if kind not in extras:
+            out.append(f"\"{m.group(0)}\", and parking.optional_kinds names no such space")
+        elif fee and (extras[kind] is None or R.usd(extras[kind]) != "$" + fee):
+            out.append(f"\"{m.group(0)}\", and parking.optional_kinds gives that kind "
+                       f"{'no published fee' if extras[kind] is None else R.usd(extras[kind])}")
+        rest = rest.replace(m.group(0), " ")
+    rest = PARK_ASK.sub(" ", rest)
+    for name, rx, test in PARK_KIND_SAYS:
+        if rx.search(rest) and not test(P):
+            out.append(f"says \"{name}\", and the structured parking fields say {P['detail'] or 'nothing about parking'}"
+                       f"{' (included)' if P['included'] else ''}")
+    if PARK_FREE.search(rest) and not P["included"]:
+        out.append("says parking is free or included, and parking.included_kind / fee do not carry it")
+    if PARK_PRICED.search(rest) and not P["fee"]:
+        out.append("says the parking fee is published, and no fee is published for the space she would park in")
+    if PARK_UNPRICED.search(rest) and (P["fee"] or P["included"]):
+        out.append("says the parking fee is not published, and the structured fields give it"
+                   + (" as included" if P["included"] else f": {R.usd(P['fee'])}"))
+    for m in PARK_FEE.finditer(rest):
+        if not P["fee"] or R.usd(P["fee"]) != "$" + m.group(1):
+            out.append(f"\"{m.group(0)}\" is not the published fee of the space she would park in "
+                       f"({R.usd(P['fee']) if P['fee'] else 'none published'})")
+    return out
+
+
+# ---- the station by its kind (N3), the washer and dryer wording (N6), the dog weight limit (N5)
+STATION_SAID = [(re.compile(r"\btrain station\b", re.I), "train"), (re.compile(r"\bsubway station\b", re.I), "subway"),
+                (re.compile(r"\bPATH station\b"), "PATH"), (re.compile(r"\blight rail stop\b", re.I), "light rail")]
+WD_SAID = re.compile(r"\bwashers? and (?:a )?dryers?\b|\bwasher-dryer\b", re.I)
+WASHER_SAID = re.compile(r"\bwasher\b", re.I)
+LAUNDRY_SAID = re.compile(r"\blaundry (?:is )?(?:in|inside) (?:the|your own) apartment\b|\bno shared laundry room\b|"
+                          r"\bdo laundry (?:in|inside)\b", re.I)
+ATTRIBUTED = re.compile(r"\blisting(?:'s)?\b|\blisted\b", re.I)
+POUNDS = re.compile(r"\b(\d+) pounds\b")
+
+
+def station_claims(sent, u):
+    kind = str(R.get(u, "moments", "sat", "train_station_kind") or "train")
+    return [f"says \"{m.group(0)}\", and moments.sat.train_station_kind is {kind}"
+            for rx, says in STATION_SAID for m in [rx.search(sent)] if m and says != kind]
+
+
+def laundry_claims(sent, u):
+    """A washer AND a dryer only where a source names both; a washer where it names a washer; "the listing shows ..."
+    where the only source is a listing site's appliance list."""
+    out, am = [], _am(u)
+    mode = R.laundry_mode(am)                              # None | wd | in_unit | washer | listed_wd | listed_washer | listed
+    wd, washer, laundry = WD_SAID.search(sent), WASHER_SAID.search(sent), LAUNDRY_SAID.search(sent)
+    if not (wd or washer or laundry):
+        return out
+    basis = f"in_unit_appliances = {am.get('in_unit_appliances')!r}, in_unit_laundry_basis = {am.get('in_unit_laundry_basis')!r}"
+    if wd and mode not in ("wd", "listed_wd"):
+        out.append(f"says \"a washer and dryer\", and the fields do not name both in the apartment ({basis})")
+    elif washer and not wd and mode not in ("washer", "listed_washer"):
+        out.append(f"says \"a washer\", and the fields do not name a washer alone ({basis})")
+    elif washer and not wd and not re.search(r"\bno dryer\b|\babout a dryer\b", sent):
+        out.append("names a washer without saying that no dryer is named")
+    if laundry and not (wd or washer) and mode is None:
+        out.append(f"says laundry is in the apartment, and the fields do not carry it ({basis})")
+    if mode and mode.startswith("listed") and not ATTRIBUTED.search(sent):
+        out.append("states laundry in the apartment flatly, and the only source is a listing site's appliance list: "
+                   "say \"The listing shows ...\"")
+    return out
+
+
+def dog_weight_claims(sent, us):
+    """"up to N pounds" only where dog.weight_limit_lb is N (the page data keeps a limit only where a page states it)."""
+    out = []
+    limits = {str((u.get("dog") or {}).get("weight_limit_lb") or "").strip().lower() for u in us}
+    for m in POUNDS.finditer(sent):
+        if limits != {m.group(1)} and not {str(R.num(x) and int(R.num(x))) for x in limits} == {m.group(1)}:
+            out.append(f"\"{m.group(0)}\", and dog.weight_limit_lb reads {sorted(limits) if limits != {''} else 'nothing'}")
+    if re.search(r"\bno weight limit\b", sent, re.I) and limits != {"no limit"}:
+        out.append(f"\"no weight limit\", and dog.weight_limit_lb reads {sorted(limits) if limits != {''} else 'nothing'}")
+    return out
+
+
 ONLY_BUILDING = re.compile(r"only building of the (\d+) listed in this neighborhood with (.+?)[.,]|"
                            r"No other building listed in this neighborhood has (.+?)[.,]|"
                            r"The only (garage) among the (\d+) buildings listed in this neighborhood is here", re.I)
@@ -287,6 +411,10 @@ def place_claims(field, text, u, ctx, out, kind, oid):
         for name, rx, test, basis in PLACE_CLAIMS:
             if rx.search(sent) and not NOT_A_CLAIM.search(sent) and not test(u, us):
                 out.append(Fail("text", kind, oid, field, f"CLAIM: says \"{name}\", and {basis} does not carry it", sent))
+        for p in parking_claims(sent, u):
+            out.append(Fail("text", kind, oid, field, "CLAIM (parking): " + p, sent))
+        for p in station_claims(sent, u) + laundry_claims(sent, u) + dog_weight_claims(sent, us if kind == "building" else [u]):
+            out.append(Fail("text", kind, oid, field, "CLAIM: " + p, sent))
         m = ONLY_BUILDING.search(sent)
         if m:
             n = m.group(1) or m.group(5)
@@ -366,7 +494,39 @@ def price_claims(text, u):
     return out
 
 
-def audit_places(d, out):
+def read_csv(path, key):
+    with open(path, newline="", encoding="utf-8") as f:
+        return {r[key]: r for r in csv.DictReader(f)}
+
+
+def audit_tables(want_u, want_b, out, lines_csv, about_csv):
+    """The two tables on disk must hold exactly what realtor_lines.py writes from this page data: the same rows, the
+    same words (independent check 5: five edits planted in the tables slipped through, because the page was the only
+    thing compared with the generator)."""
+    for path, want, key, cols, kind in ((lines_csv, want_u, "listing_id", ["host_line", "host_catch"] + list(R.SUB_COLS), "apartment"),
+                                        (about_csv, want_b, "building_id", ["about_building", "about_points_json"], "building")):
+        name = Path(path).name
+        if not Path(path).exists():
+            out.append(Fail("text", "table", name, "*", f"SOURCE: {path} is missing (run realtor_lines.py)"))
+            continue
+        have = read_csv(path, key)
+        for oid in sorted(set(want) - set(have)):
+            out.append(Fail("text", kind, oid, name, f"SOURCE: no row in {name} (rerun realtor_lines.py)"))
+        for oid in sorted(set(have) - set(want)):
+            out.append(Fail("text", kind, oid, name, f"SOURCE: {name} has a row for something that is not on the page"))
+        for oid, w in want.items():
+            h = have.get(oid)
+            if h is None:
+                continue
+            for c in cols:
+                same = same_json(h.get(c), w[c]) if c.endswith("_json") else (h.get(c) or "") == (w[c] or "")
+                if not same:
+                    out.append(Fail("text", kind, oid, f"{name}:{c}", f"SOURCE: {name} is not what realtor_lines.py writes from "
+                                    "this data (the table was edited by hand or is stale: rerun realtor_lines.py)",
+                                    str(h.get(c) or "")[:160]))
+
+
+def audit_places(d, out, lines_csv=None, about_csv=None):
     units = d.get("units") or []
     blds = {b["id"]: b for b in d.get("buildings") or []}
     by_b = defaultdict(list)
@@ -384,6 +544,8 @@ def audit_places(d, out):
     except Exception as e:                                # noqa: BLE001
         out.append(Fail("text", "page", "-", "*", f"realtor_lines.py cannot compose from this data: {type(e).__name__}: {e}"))
         want_u, want_b = {}, {}
+    if want_u or want_b:
+        audit_tables(want_u, want_b, out, lines_csv or R.OUT, about_csv or R.OUT_BUILDINGS)
     for u in units:
         uid = u.get("id")
         w = want_u.get(uid)
@@ -450,7 +612,8 @@ def audit_places(d, out):
 
 HOOD_DIST = [(re.compile(r"\b(?:dog park|dog run)\b[^.;,]*?\b(\d+\.\d) miles", re.I), "dog_park_m", "mi"),
              (re.compile(r"\bsupermarket\b(?: is)?(?: at)? (\d+\.\d) miles", re.I), "supermarket_m", "mi"),
-             (re.compile(r"\btrain station\b(?: is)? (\d+\.\d) miles", re.I), "train_station_m", "mi"),
+             (re.compile(r"\b(?:train station|subway station|subway|PATH station|PATH|light rail stop|nearest station|station)\b"
+                         r"(?: is)?(?: about)? (\d+\.\d) miles", re.I), "train_station_m", "mi"),
              (re.compile(r"\b[Pp]ark\b(?: is)? about (\d+) minutes", re.I), "park_walk_min", "int"),
              (re.compile(r"\b[Aa]bout (\d+) restaurants\b", re.I), "restaurants_800m", "int")]
 EVERY_HAS = [(re.compile(r"\bevery building (?:shown )?here has (?:a |its own )?(doorman|pool|gym|garage|dog area)", re.I))]
@@ -467,6 +630,42 @@ def hood_fields(h):
     return [(f, str(t)) for f, t in out if t]
 
 
+def audit_glance(h, firsts, out):
+    """"At a glance" against the structured fields: the garage count is the buildings whose space is a garage (and the
+    pipeline's own count, where the page data has it), the station item names the kind every building shares, and
+    "N of the M ... has / have" agrees."""
+    hid, sf = h["id"], h.get("shown_figures") or {}
+    for g in h.get("at_a_glance") or []:
+        if not isinstance(g, dict):
+            continue
+        for p in G.agreement(f"{g.get('text')} {g.get('label')}"):
+            out.append(Fail("text", "neighborhood", hid, f"at_a_glance[{g.get('key')}]", "GRAMMAR: " + p, str(g.get("label"))))
+        if g.get("key") == "garage":
+            n = sum(_pk(u) == "garage" for u in firsts)
+            said = g.get("own_garage_buildings")
+            if said != n:
+                out.append(Fail("text", "neighborhood", hid, "at_a_glance[garage]", f"CLAIM: a garage at {said} buildings, and "
+                                f"{n} of the {len(firsts)} shown park in a garage (parking.kind)"))
+            if sf.get("buildings_with_garage") is not None and sf["buildings_with_garage"] != n:
+                out.append(Fail("text", "neighborhood", hid, "at_a_glance[garage]", f"ACROSS: the text counts {n} garages and "
+                                f"shown_figures.buildings_with_garage is {sf['buildings_with_garage']}"))
+        if g.get("key") == "train_station":
+            kinds = {str(R.get(u, "moments", "sat", "train_station_kind") or "train") for u in firsts
+                     if R.get(u, "moments", "sat", "train_station")}
+            kind = next(iter(kinds)) if len(kinds) == 1 else "mixed"
+            if g.get("kind") != kind:
+                out.append(Fail("text", "neighborhood", hid, "at_a_glance[train_station]", f"CLAIM: kind \"{g.get('kind')}\", and "
+                                f"the buildings shown measure to: {sorted(kinds)}"))
+            if re.search(r"\btrain\b", str(g.get("label"))) and kind != "train":
+                out.append(Fail("text", "neighborhood", hid, "at_a_glance[train_station]", "CLAIM: the label says \"train\", and "
+                                f"the nearest station is {kind}", str(g.get("label"))))
+    if not any(isinstance(g, dict) and g.get("key") == "garage" for g in h.get("at_a_glance") or []) and h.get("at_a_glance"):
+        n = sum(_pk(u) == "garage" for u in firsts)
+        if n:
+            out.append(Fail("text", "neighborhood", hid, "at_a_glance[garage]", f"CLAIM: no garage item, and {n} buildings shown "
+                            "park in a garage"))
+
+
 def audit_hood_claims(d, ctx, out):
     bt = G.table(G.DOOR_SOURCE)
     for h in d.get("neighborhoods") or []:
@@ -474,6 +673,7 @@ def audit_hood_claims(d, ctx, out):
         blds = ctx["buildings_in_hood"].get(hid) or []
         if not blds or (h.get("prose") or {}).get("inherited_from"):
             continue
+        audit_glance(h, [ctx["first_unit"][b["id"]] for b in blds], out)
         mine = bt[bt["hood_id"].astype(str) == hid]
         firsts = [ctx["first_unit"][b["id"]] for b in blds]
         n_units = sum(len(ctx["by_building"][b["id"]]) for b in blds)
@@ -508,6 +708,15 @@ def audit_hood_claims(d, ctx, out):
                 if m and G.transform(h.get("toll_round_trip"), "int") != m.group(1):
                     out.append(Fail("text", "neighborhood", hid, f, f"CLAIM: a toll of ${m.group(1)}, and toll_round_trip reads "
                                     f"{h.get('toll_round_trip')}", sent))
+                rng = [x for x in (h.get("toll_round_trip_range") or []) if x is not None]
+                wide = len(rng) == 2 and rng[1] - rng[0] > G.TOLL_SPREAD
+                if m and wide:                            # N9: one figure where the buildings' tolls differ
+                    out.append(Fail("text", "neighborhood", hid, f, f"CLAIM: one toll figure, and toll_round_trip_range is "
+                                    f"${rng[0]:.0f} to ${rng[1]:.0f}: say the range", sent))
+                m = re.search(r"about \$(\d+) to \$(\d+) round trip with a New York E-ZPass", sent)
+                if m and (len(rng) != 2 or [G.transform(x, "int") for x in rng] != [m.group(1), m.group(2)]):
+                    out.append(Fail("text", "neighborhood", hid, f, f"CLAIM: a toll of ${m.group(1)} to ${m.group(2)}, and "
+                                    f"toll_round_trip_range reads {h.get('toll_round_trip_range')}", sent))
                 if re.search(r"\bno tolls?\b", sent, re.I) and (h.get("toll_round_trip") or 0) > 0:
                     out.append(Fail("text", "neighborhood", hid, f, "CLAIM: \"no tolls\", and toll_round_trip is above 0", sent))
                 for rx in EVERY_HAS:
@@ -621,12 +830,13 @@ def audit_template(out, path=TEMPLATE):
 
 # ---------------------------------------------------------------------------------------------------------------
 
-def audit(d, template=False):
-    """-> [Fail]. Every check on this page data."""
+def audit(d, template=False, lines_csv=None, about_csv=None):
+    """-> [Fail]. Every check on this page data. `lines_csv` / `about_csv`: the two realtor tables to compare with the
+    generator (default: the ones on disk)."""
     use_page(d)
     out = []
     audit_scene(d, out)
-    ctx = audit_places(d, out)
+    ctx = audit_places(d, out, lines_csv, about_csv)
     audit_hood_claims(d, ctx, out)
     audit_pipeline(d, out)
     if template:

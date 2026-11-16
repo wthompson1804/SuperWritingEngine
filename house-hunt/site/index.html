@@ -1983,11 +1983,11 @@ function parkInfo(U){if(U&&U._pk)return U._pk;var P=obj(U&&U.parking),fee=P.fee!
   o.fee=inc?(fees[inc]!=null&&fees[inc]>0?fees[inc]:0):incAny?0:main&&fees[main]!=null?fees[main]:feeAny; /* what the space she would use costs: 0 is included, null is not published */
   /* the data's own reading, when it sends one: parking.kind is the space she would use (the included one, else the main one), kind_words its name, fee_kind the kind the fee belongs to, summary the whole answer as a sentence */
   var rk=typeof P.kind==="string"?P.kind.toLowerCase().replace(/[ -]+/g,"_"):null;
-  if(rk){o.raw=rk;o.words=typeof P.kind_words==="string"?P.kind_words:"";var c=pkNorm(rk);if(c){o.main=main=c;if(o.state!=="ok")o.state="ok"}else{o.main=main=null;o.state=P.included_kind!=null&&P.included_kind!==""?"some":rk==="unspecified"?"some":o.state;if(P.included_kind!=null&&P.included_kind!=="")o.incAny=true}
+  if(rk){o.raw=rk;o.words=typeof P.kind_words==="string"?P.kind_words:"";var c=pkNorm(rk);if(c){o.main=main=c;if(o.state!=="ok")o.state="ok"}else{o.main=main=null;o.state="some"; /* a kind the data names but does not place: "unspecified", "parking" */if(P.included_kind!=null&&P.included_kind!=="")o.incAny=true}
     o.fee=P.included_kind!=null&&P.included_kind!==""?0:fee!=null&&(P.fee_kind==null||String(P.fee_kind).toLowerCase().replace(/[ -]+/g,"_")===rk)?fee:null}
   o.summary=typeof P.summary==="string"?pub(P.summary).replace(/\s*\.\s*$/,"").trim():"";
   o.rank=o.state==="unknown"?null:main?PK_RANK[main]:1.5;
-  o.cov=kinds.some(function(x){return PK_RANK[x]>=3}); /* a garage, gated or covered space is included or can be had */
+  o.cov=!!main&&PK_RANK[main]>=3; /* the space she would use (parking.kind) is a garage, a gated lot or covered: what the "Garage or covered" filter tests */
   o.at=(o.state==="some"||kinds.some(function(x){return x!=="street"&&x!=="offsite"}))&&rk!=="offsite";
   if(U)U._pk=o;return o}
 function parkKind(U){var I=parkInfo(U);return I.state!=="ok"?I.state:I.main}
@@ -1996,7 +1996,7 @@ var PARK_WORD={garage:"Garage",gated:"Gated lot",covered:"Covered parking",lot:"
 var PARK_PHRASE={garage:"a garage",gated:"a gated lot",covered:"covered parking",lot:"an open lot",offsite:"off-site parking",street:"street parking"};
 var PK_NOUN={garage:"garage",gated:"gated lot",covered:"covered parking",lot:"open lot",offsite:"off-site parking",street:"street parking"},PK_SPACES={garage:"garage spaces",gated:"gated spaces",covered:"covered spaces",lot:"open-lot spaces",offsite:"off-site spaces",street:"street parking"};
 /* the short word for the kind the data names as hers (parking.kind): a chip, a card, a compare cell */
-var PK_SHORT={garage:"Garage",gated_lot:"Gated lot",covered:"Covered",open_lot:"Open lot",assigned_lot:"Assigned space",off_street:"Off-street",assigned:"Assigned space",offsite:"Off-site",street:"Street",unspecified:"Parking unclear"};
+var PK_SHORT={garage:"Garage",gated_lot:"Gated lot",covered:"Covered",open_lot:"Open lot",assigned_lot:"Assigned space",off_street:"Off-street",assigned:"Assigned space",offsite:"Off-site",street:"Street",unspecified:"Parking unclear",parking:"Parking unclear"};
 function parkWord(U){var I=parkInfo(U);return I.words?capFirst(I.words):PARK_WORD[parkKind(U)]}
 function pkFeeW(f){return f==null?"price "+NOT_PUB:Number(f)===0?"included":money(f)+" a month"}
 /* the extra kinds, in a clause: "garage spaces are $150 a month", "covered and garage spaces are extra, price not published" */
@@ -2402,16 +2402,18 @@ function legend(d){var seen={};d.forEach(function(x){seen[x.tint]=1});
 function slotText(v){if(!v)return "";var a=Array.isArray(v)?v:typeof v==="object"&&!v.text?Object.keys(v).map(function(k){return v[k]}):[v];
   return a.filter(Boolean).map(function(x){return typeof x==="string"?'<p class="slot-text">'+esc(x)+'</p>':'<p class="slot-text">'+esc(x.text||x.excerpt||"")+(x.date?' <small class="facts">'+esc(dayStr(x.date,true)||x.date)+'</small>':'')+ext(x.url,"source")+'</p>'}).join("")}
 var CAT_WORD={management:"Management",safety_incident:"Safety incident at the address",mold_complaints:"Mold complaints",elevator_complaints:"Elevator complaints",elevator:"Elevator",pest_complaints:"Pest complaints",class_c_violations:"Serious housing violations (class C)",heat_hot_water_complaints:"Heat and hot water complaints"};
-function quote(it){var bits=[];if(it.category)bits.push(CAT_WORD[it.category]||humanize(it.category));bits.push(dayStr(it.date,true)||"date not known");
+function quote(it){var bits=[],rec=isRecord(it);if(it.category)bits.push(CAT_WORD[it.category]||humanize(it.category));
+  if(rec){if(it.window_words)bits.push(String(it.window_words))}else{var dm=/^(\d{4})-(\d{2})$/.exec(String(it.date||""));bits.push(dayStr(it.date,true)||(dm&&MON[+dm[2]-1]?MON[+dm[2]-1]+" "+dm[1]:"date not known"))} /* a month with no day reads "Oct 2026" */ /* a record is our own sentence over a window of time: no quotation marks, and its window in words or nothing */
   var u=okUrl(it.url);
-  var tx=scrub(it.excerpt||it.text||""),rec=/^\d/.test(tx);
+  var tx=scrub(it.excerpt||it.text||"");
   return '<p class="quote">'+(rec?"On record: ":"“")+esc(tx)+(rec?"":"”")+'<small>'+esc(bits.join(" · "))+(u?' · <a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(hostOf(u))+' ↗</a>':' · no link in the data')+(it.source?'<br>'+esc(it.source):'')+'</small></p>'}
 /* (N19) A record's raw figure ("23 (34.33 per 100 units; citywide 90th percentile 2.9)") is never printed: the reader sentence in avoid_points / pause_points says it.
    Residents' own words stay as quotes; a record keeps only the link to where it was read. */
-function isRecord(it){return /^\s*\d/.test(String(it&&(it.excerpt||it.text)||""))}
-function evQuotes(items){var a=arr(items).filter(function(x){return x&&typeof x==="object"}),recs=a.filter(isRecord),seen={},links=[];
+function isRecord(it){return !!it&&(it.kind==="record"||(it.kind==null&&/^\s*\d/.test(String(it.excerpt||it.text||""))))}
+function isRawRecord(it){return isRecord(it)&&(it.kind!=="record"||/per 100 units|percentile/i.test(String(it.excerpt||it.text||"")))} /* the old raw figure, or a record with no sentence */
+function evQuotes(items){var a=arr(items).filter(function(x){return x&&typeof x==="object"}),recs=a.filter(isRawRecord),seen={},links=[];
   recs.forEach(function(it){var u=okUrl(it.url),k=(it.source||"")+"|"+(u?hostOf(u):"");if(seen[k])return;seen[k]=1;links.push(u?'<a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(it.source||hostOf(u))+' ↗</a>':esc(it.source||""))});
-  return a.filter(function(x){return !isRecord(x)}).map(quote).join("")+(links.filter(Boolean).length?'<p class="recsrc facts">Public records: '+links.filter(Boolean).join(" · ")+'</p>':'')}
+  return a.filter(function(x){return !isRawRecord(x)}).map(quote).join("")+(links.filter(Boolean).length?'<p class="recsrc facts">Public records: '+links.filter(Boolean).join(" · ")+'</p>':'')}
 function plainCats(x){return String(x).replace(/\b[a-z]+(?:_[a-z]+)+\b/g,function(k){return (CAT_WORD[k]||k.replace(/_/g," ")).toLowerCase()})}
 function splitNotes(s){return String(s||"").split(/;\s*/).filter(Boolean).map(function(x){x=plainCats(x);return x.charAt(0).toUpperCase()+x.slice(1)})}
 
@@ -2489,7 +2491,7 @@ UNITS.forEach(function(U){var a=U.amenities||{},pk=parkInfo(U),B=B_OF[U.id],r=B?
   U._f={rent:rentOf(U),total:U.all_in!=null&&isFinite(+U.all_in)?+U.all_in:null,beds:U.beds,sqft:U.sqft!=null&&isFinite(+U.sqft)?+U.sqft:null,mins:U.moments.sun.drive_min!=null?+U.moments.sun.drive_min:null,
     move:availNow(U)?"":/^\d{4}-\d\d-\d\d/.test(av)?av.slice(0,10):null, /* "" is available now (said so, or dated on or before the day the data was built: N10); null is a date the listing does not give */
     park:pk.rank,pkAt:pk.at,pkCov:pk.cov, /* the kind she would park in (4 garage or gated, 3 covered, 2 open lot, 1.5 a kind not named, 1 street); whether any space is at the building; whether a garage or covered space is included or can be had */
-    wd:a.in_unit_laundry==="yes",wdTag:wdTagOnly(U),star:!!conf(U),rev:!!(r&&r.found_any!==false&&ratingRows(r).length),year:U.year};U._ok=true});
+    wd:a.in_unit_laundry==="yes"&&wdBoth(U),wdTag:wdBoth(U)&&wdTagOnly(U),star:!!conf(U),rev:!!(r&&r.found_any!==false&&ratingRows(r).length),year:U.year};U._ok=true});
 var RNG=(function(){var f=function(k){return function(u){return u._f[k]}},lo=function(k,d){var v=minOf(UNITS,f(k));return v==null?d:v},hi=function(k,d){var v=maxOf(UNITS,f(k));return v==null?d:v};
   var o={rent:{min:stepDown(lo("rent",1500),50),max:stepUp(hi("rent",CAP),50),step:50},total:{min:stepDown(lo("total",1500),50),max:Math.max(CAP,stepUp(hi("total",CAP),50)),step:50},
     mins:{min:Math.max(5,stepUp(lo("mins",5),5)),max:stepUp(hi("mins",120),5),step:5},sqft:{min:stepDown(lo("sqft",350),50),max:stepDown(hi("sqft",900),50),step:50}};
@@ -2500,7 +2502,7 @@ var MOVE_OPTS=(function(){var ds=UNITS.map(function(u){return u._f.move}).filter
   if(keep("now"))o.push(["now","Available now"]);
   if(last){[last.slice(0,8)+"01",last.slice(0,8)+"15"].forEach(function(c){if(keep(c))o.push([c,"By "+dayStr(c)])})}
   return o})();
-var PARK_OPTS=[["any","Any"],["at","Parking at the building"],["covered","A garage or covered space"]],BED_OPTS=[["any","Either"],["0","Studio"],["1","1 bedroom"]];
+var PARK_OPTS=[["any","Any"],["at","Parking at the building"],["covered","Garage or covered"]],BED_OPTS=[["any","Either"],["0","Studio"],["1","1 bedroom"]];
 var FDEF={rent:RNG.rent.max,total:RNG.total.max,beds:"any",sqft:RNG.sqft.min,nosize:false,mins:RNG.mins.max,move:"any",park:"any",wd:false,clear:false,rev:false,exps:[],mine:false};
 function fClone(f){var o={},k;for(k in FDEF)o[k]=Array.isArray(FDEF[k])?arr(f[k]).slice():f[k];return o}
 /* a stored filter is kept only when it is one the page can still offer with today's data */
@@ -2628,7 +2630,7 @@ function rentTerms(U){var R=U.rent||{},lm=leaseMonths(U),p12=price12(U),lt=lease
   return '<div class="rentfold">'+howHtml(h+'</div>',st?"The offer in full":"The lease terms")+'</div>'}
 function loveList(U){var o=[],a=U.amenities||{},L=okUrl(U.links&&U.links.listing);
   SPEC_OPEN.forEach(function(s){var p=U.vs_queens&&U.vs_queens[s.measure],d=U.vs_queens_diff&&U.vs_queens_diff[s.measure];if(p!=null&&p>=4&&s.measure!=="parking")o.push({t:mLabel(s.measure)+": "+POINT_WORD[Math.round(p)].toLowerCase()+" than "+qWord(U)+" ("+fmtDiff(s.measure,d)+")"})});
-  if(a.in_unit_laundry==="yes")o.push({t:wdTagOnly(U)?"A washer and dryer are on the listing site's feature list: confirm they are in the apartment":"Washer and dryer in the apartment",url:L,l:"listing"});
+  if(a.in_unit_laundry==="yes")o.push({t:!wdBoth(U)?"A "+wdWord(U)+" in the apartment (the listing names no "+(wdWord(U)==="washer"?"dryer":"washer")+")":wdTagOnly(U)?"A washer and dryer are on the listing site's feature list: confirm they are in the apartment":"Washer and dryer in the apartment",url:L,l:"listing"});
   if(deskOf(a))o.push({t:"A "+deskOf(a),url:L,l:"listing"});
   if(a.pool)o.push({t:"A pool",url:L,l:"listing"});
   if(a.dog_amenities&&a.dog_amenities!=="yes")o.push({t:"For the dog, in the building: "+a.dog_amenities.replace(/;\s*/g,", "),url:L,l:"listing"});
@@ -2645,6 +2647,10 @@ function pauseList(U){var o=[];
   return o}
 /* (N6) A washer and dryer named only in a listing site's feature list is said as that, to confirm, the way an elevator is.
    Read from the laundry basis when the data sends one (amenities.in_unit_laundry_basis / laundry_basis / in_unit_laundry_listing_site_only), or from a disclosure about it. */
+/* what is in the apartment, as the data names it (amenities.in_unit_appliances): "washer and dryer", or only one of them */
+function wdWord(U){var a=obj(U&&U.amenities),x=String(a.in_unit_appliances||"").toLowerCase().trim();if(a.in_unit_laundry!=="yes")return "";
+  return /washer/.test(x)&&!/dryer/.test(x)?"washer":/dryer/.test(x)&&!/washer/.test(x)?"dryer":"washer and dryer"}
+function wdBoth(U){return wdWord(U)==="washer and dryer"}
 function wdTagOnly(U){var a=obj(U&&U.amenities),b=String(first(a,["in_unit_laundry_basis","laundry_basis","washer_dryer_basis","in_unit_laundry_source"])||"");
   return a.in_unit_laundry==="yes"&&(a.in_unit_laundry_listing_site_only===true||a.laundry_listing_site_only===true||/listing[ _-]?site|aggregator|feature[ _]list|appliance|tag/i.test(b)||discs(U).some(function(d){return /laundry|washer/i.test(d.code+" "+d.key)&&/listing site|feature list|confirm/i.test(d.what+" "+d.why)}))}
 function buildingFacts(U){var a=U.amenities||{},o=[],L=okUrl(U.links&&U.links.listing),B=okUrl(U.links&&U.links.building);
@@ -2652,7 +2658,7 @@ function buildingFacts(U){var a=U.amenities||{},o=[],L=okUrl(U.links&&U.links.li
   o.push({t:SAY.available(U)});
   o.push({t:openFact(U,OPEN_ELEV)?"Elevator: not confirmed for this apartment. See “Still to confirm”.":"Elevator: "+(U.elevator&&U.elevator.value||NOT_PUB)+(U.elevator&&U.elevator.basis?" ("+(BASIS_WORD[U.elevator.basis]||U.elevator.basis)+")":"")+".",url:B||L,l:B?"building page":"listing"});
   o.push({t:"Dogs: "+(openFact(U,OPEN_DOG)?"the policy is not confirmed, ask":(U.dog&&U.dog.allowed||NOT_PUB)+(U.dog&&U.dog.basis?" ("+(BASIS_WORD[U.dog.basis]||U.dog.basis)+")":""))+"; "+(U.dog&&U.dog.weight_limit_lb!=null?"weight limit "+(U.dog.weight_limit_lb==="no limit"?"none":U.dog.weight_limit_lb+" lb"):smallDog(U)?SMALL_DOG.charAt(0).toLowerCase()+SMALL_DOG.slice(1):"weight limit "+NOT_PUB)+"; pet rent "+(U.dog&&U.dog.pet_rent!=null?(Number(U.dog.pet_rent)===0?"none":money(U.dog.pet_rent)+" a month"):NOT_PUB)+".",url:L,l:"listing"});
-  o.push({t:"Laundry: "+(a.in_unit_laundry==="yes"?(wdTagOnly(U)?"a washer and dryer are on the listing site's feature list; confirm they are in the apartment":"in the apartment"):a.in_unit_laundry==="on_site_only"?"in the building, not in the apartment":NK.toLowerCase())+"."});
+  o.push({t:"Laundry: "+(a.in_unit_laundry==="yes"?(!wdBoth(U)?"a "+wdWord(U)+" in the apartment; the listing names no "+(wdWord(U)==="washer"?"dryer":"washer"):wdTagOnly(U)?"a washer and dryer are on the listing site's feature list; confirm they are in the apartment":"in the apartment"):a.in_unit_laundry==="on_site_only"?"in the building, not in the apartment":NK.toLowerCase())+"."});
   o.push({t:"Gym: "+(a.gym?"listed":NK.toLowerCase())+". Package room: "+(a.package_room?"listed":NK.toLowerCase())+". Lounge or co-working: "+(a.lounge_or_coworking?"listed":NK.toLowerCase())+"."});
   o.push({t:"Built: "+(a.year_built!=null?Math.round(a.year_built):NK.toLowerCase())+". Floors in the building: "+(a.building_floors!=null?(a.building_floors_at_least===true?"at least ":"")+Math.round(a.building_floors):NOT_PUB)+"."});
   o.push({t:"Managed by: "+(a.manager_name||NOT_PUB)+".",url:B&&B!==L?B:null,l:"building page"});
@@ -2710,7 +2716,7 @@ var HL={
   dog:function(U){var d=U.dog||{},w=d.weight_limit_lb;if(openFact(U,OPEN_DOG))return "dog policy not confirmed, ask";if(d.allowed!=="yes")return "not stated, ask";
     return "allowed, "+(w==="no limit"?"no weight limit":w!=null&&isFinite(+w)?"up to "+r0(+w)+" lb":smallDog(U)?"small dogs, no weight given":"weight limit not stated")},
   building:function(U){var a=U.amenities||{},o=[];
-    if(openFact(U,OPEN_ELEV))o.push("elevator not confirmed");else if(U.elevator&&U.elevator.value==="yes")o.push("elevator");if(a.in_unit_laundry==="yes")o.push(wdTagOnly(U)?"washer-dryer listed, to confirm":"washer-dryer in the apartment");if(a.gym)o.push("gym");if(a.pool)o.push("pool");
+    if(openFact(U,OPEN_ELEV))o.push("elevator not confirmed");else if(U.elevator&&U.elevator.value==="yes")o.push("elevator");if(a.in_unit_laundry==="yes")o.push(!wdBoth(U)?wdWord(U)+" in the apartment":wdTagOnly(U)?"washer-dryer listed, to confirm":"washer-dryer in the apartment");if(a.gym)o.push("gym");if(a.pool)o.push("pool");
     if(deskOf(a))o.push(deskOf(a));if(a.outdoor_space)o.push("outdoor space");
     return o.length?o.slice(0,3).join(", "):"details not published"},
   /* the count behind the star: open gate facts only (N2); then the things to ask */
@@ -2921,7 +2927,7 @@ function glance(H){var t=H.traits||{},o=[],ps=parkShort(H),g=arr(H.at_a_glance).
   /* until at_a_glance arrives: figures measured from the buildings shown (shown_figures) before the neighborhood's own (traits); a dog area in every shown building is said in place of the distance to a public dog park */
   var sf=obj(H.shown_figures),v=function(k,k2){return sf[k]!=null?sf[k]:t[k2||k]},own=sf.buildings_with_own_dog_area,nb=sf.buildings,tm=H.transit_min;
   if(g.length){g.forEach(function(x){var tx=pub(x.text),lb=agree(tx?pub(x.label):[x.label,x.scope].filter(Boolean).join(", ")),isSt=/station|train|transit/.test(String(x.key||"")),hasSys=!!sysWord(first(x,ST_SYS_KEYS)),sfSt=isSt&&!hasSys&&sysWord(first(sf,["train_station_kind","train_station_system"]))&&sf.train_station_m!=null,
-        st=isSt?stationLabel(sfSt?{key:x.key,system:first(sf,["train_station_kind","train_station_system"]),station:sf.train_station}:x,lb):null;
+        st=isSt&&!hasSys?stationLabel(sfSt?{key:x.key,system:first(sf,["train_station_kind","train_station_system"]),station:sf.train_station}:x,lb):null; /* an item that names its kind is printed as the data words it */
       o.push([x.icon||glanceIcon(x.key||x.label),sfSt?distShort(+sf.train_station_m):tx||String(x.value)+(x.unit?" "+x.unit:""),st||lb])}); /* at_a_glance: the bold words, then the small words, as the data gives them */
     if(tm!=null)o.push(["train",r0(tm)+" min","to Mom and Dad by train and bus"])}
   else{

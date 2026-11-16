@@ -76,6 +76,9 @@ from pathlib import Path
 
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import realtor_lines as _RL  # noqa: E402   parking_facts(): the one reading of the structured parking fields
+
 ROOT = Path(__file__).resolve().parent.parent
 YEARS = ROOT / "data/reference/scene_text_years.csv"
 HOODS = ROOT / "data/reference/scene_text_neighborhoods.csv"
@@ -135,8 +138,12 @@ BANNED = [
 CRIME = re.compile(r"\bcrimes?\b|\bviolent\b|burglar\w*|\bthefts?\b|\bstolen\b|break-ins?|carjack\w*|per 1,000|"
                    r"safer than|\bunsafe\b|\bsafe\b|\bsafely\b|\bpolice\b|\brobber\w*", re.I)
 # Two wordings are allowed, each tied to a test the checker re-runs:
-SAFEST = "one of the safest spots on the whole list"      # only where the neighborhood is in the lowest fifth by violent
-SAFEST_FIELD, SAFEST_MAX = "violent_pctile", 0.2          # rate among the neighborhoods shown on the page; one clause
+# Independent check 5 (D27, N13) tightened it: the wording is now an icon point of its own, never a sentence tacked
+# on to a paragraph about restaurants; only for the lowest TENTH by violent rate among the neighborhoods shown (it was
+# the lowest fifth, 15 neighborhoods); and never where no rate is published (safety.status = not_published).
+SAFEST = "Among the safest places on the list"            # the whole icon point, as written
+SAFEST_OLD = re.compile(r"safest (?:spots?|places?|neighborhoods?) on the (?:whole )?list", re.I)
+SAFEST_FIELD, SAFEST_MAX = "violent_pctile", 0.1          # share of the page's neighborhoods at or below its violent rate
 # (A second wording, "the safety limit we set", was removed on the owner's instruction, 2026-11-16: safety is not a
 # recurring theme, and a neighborhood near the limit simply gets no safety remark. It now fails like any crime wording.)
 # Figures that describe the places SHOWN on the page: in a neighborhood that has shown units, these must be computed
@@ -192,6 +199,20 @@ def _toll_table():
     return e.merge(cw, on="addr_key").merge(mb, on="building_id")
 
 
+def _range_fields(name, rng, single=None):
+    """{name_lo, name_hi, name_spread} from a [low, high] pair; a single figure stands for both where there is no pair."""
+    lo, hi = (list(rng) + [None, None])[:2] if isinstance(rng, (list, tuple)) else (None, None)
+    lo = single if is_missing(lo) else lo
+    hi = single if is_missing(hi) else hi
+    return {name + "_lo": lo, name + "_hi": hi,
+            name + "_spread": None if is_missing(lo) or is_missing(hi) else float(hi) - float(lo)}
+
+
+def _span(xs):
+    xs = [float(x) for x in xs if not is_missing(x)]
+    return [min(xs), max(xs)] if xs else None
+
+
 def year_key(label):
     """The internal key stays '... Year' whatever the page calls it."""
     return re.sub(r"\bExperience$", "Year", str(label).strip())
@@ -236,6 +257,10 @@ def _page_table(part):
                          "buildings": (h.get("counts") or {}).get("buildings"),
                          "drive_min": h.get("drive_min"), "transit_min": h.get("transit_min"),
                          "toll_round_trip": h.get("toll_round_trip"),
+                         # the lowest and highest toll among the buildings shown (independent check 5, N9)
+                         **_range_fields("toll", h.get("toll_round_trip_range"), h.get("toll_round_trip")),
+                         "safety_published": int((h.get("safety") or {}).get("status") != "not_published"
+                                                 and (h.get("safety") or {}).get("violent_per_1000") is not None),
                          "in_queens": int(str(h.get("area") or "") == "Queens"),
                          "name": h.get("name"), "area": h.get("area"), "year": h.get("year"),
                          # the neighborhood's frozen area profile (its traits): area-wide facts only since D16
@@ -252,7 +277,7 @@ def _page_table(part):
         rows = []
         for u in d["units"]:
             mo, am, pk = u.get("moments") or {}, u.get("amenities") or {}, u.get("parking") or {}
-            kind = str(pk.get("type") or "").lower()
+            kind = parking_head(pk)
             rows.append({
                 "listing_id": u["id"], "hood_id": u.get("hood_id"), "year_label": labels.get(u.get("year")),
                 "all_in": u.get("all_in"), "sqft": u.get("sqft"),
@@ -272,12 +297,14 @@ def _page_table(part):
                 "restaurants_800m": (mo.get("after") or {}).get("restaurants_800m"),
                 "restaurants_1600m": (mo.get("sat") or {}).get("restaurants_1600m"),
                 "bars_1600m": (mo.get("sat") or {}).get("bars_1600m"),
-                "garage_or_covered": float(kind.startswith(("garage", "covered"))),
+                "garage_or_covered": float(kind in ("garage", "covered")),
+                "station_is_train": (None if not (mo.get("sat") or {}).get("train_station_kind") else
+                                     float((mo.get("sat") or {}).get("train_station_kind") == "train")),
                 "parking_published": float(bool(kind)),
                 "pool": float(bool(am.get("pool"))), "doorman": float(bool(am.get("doorman"))),
                 "gym": float(bool(am.get("gym"))), "in_unit_laundry": float(am.get("in_unit_laundry") == "yes"),
                 "building_id": u.get("building_id"), "own_dog_area": float(own_dog_area(am)),
-                "own_parking": float(parking_head(pk) in ("garage", "covered", "lot", "onsite")),
+                "own_parking": float(kind in OWN_PARKING),
                 "toll_own": (mo.get("sun") or {}).get("toll_round_trip"),
                 "year_built": am.get("year_built"),
             })
@@ -316,14 +343,16 @@ def dog_amenity_any(amenities):
     return bool(str(am.get("dog_amenities") or "").strip())
 
 
+OWN_PARKING = ("garage", "covered", "lot", "off_street", "assigned", "unspecified")   # a space at the building
+
+
 def parking_head(parking):
-    """'garage' | 'covered' | 'lot' | 'street' | 'onsite' | '' from the page's parking.type ("garage: ...")."""
-    t = str((parking or {}).get("type") or "").strip().lower()
-    if not t:
-        return ""
-    head = t.split(":")[0].strip()
-    return "garage" if head.startswith("garage") else "covered" if head.startswith("covered") else \
-        "lot" if head in ("lot", "open_lot", "open lot") else "street" if head.startswith("street") else "onsite"
+    """The space she would park in -> 'garage' | 'covered' | 'lot' | 'off_street' | 'assigned' | 'offsite' | 'street' |
+    'unspecified' | '' (nothing published). Read from the page's STRUCTURED parking fields (parking.kind,
+    included_kind) through realtor_lines.parking_facts, so the neighborhood text, the building text and "At a glance"
+    cannot disagree about what a garage is (independent check 5, N1 and N8: an open lot with a garage as a paid
+    extra is not a garage; an off-site deck is not parking at the building)."""
+    return _RL.parking_facts({"parking": parking or {}})["kind"] or ""
 
 
 def _building_table(d, labels):
@@ -353,6 +382,7 @@ def _building_table(d, labels):
         if not us:
             continue
         head = parking_head(b.get("parking"))
+        am = b.get("amenities") or {}
         r = {"building_id": b["id"], "hood_id": b.get("hood_id"), "year_label": labels.get(b.get("experience")),
              "name": b.get("name"), "n_units": len(us),
              "restaurants_800m": first(us, "after", "restaurants_800m"), "bars_800m": first(us, "after", "bars_800m"),
@@ -362,13 +392,19 @@ def _building_table(d, labels):
              "supermarket_m": first(us, "work", "supermarket_m"), "train_station_m": first(us, "sat", "train_station_m"),
              "park": first(us, "wake", "park"), "dog_park": first(us, "wake", "dog_park"),
              "train_station": first(us, "sat", "train_station"),
+             # the nearest station is of any kind since independent check 5 (N3): train / subway / PATH / light rail
+             "train_station_kind": first(us, "sat", "train_station_kind") or ("train" if first(us, "sat", "train_station") else None),
+             "train_station_system": first(us, "sat", "train_station_system"),
+             "commuter_station_m": first(us, "sat", "commuter_station_m"),
+             "commuter_station": first(us, "sat", "commuter_station"),
+             "pet_spa": float(bool(am.get("pet_spa_or_wash"))),
              "drive_min": first(us, "sun", "drive_min"),
              "own_dog_area": float(own_dog_area(b.get("amenities"))),
              # any dog amenity at all, also a pet spa or dog wash or one of unnamed kind: not a dog area the text may
              # claim, but enough that the distance to a public dog park is not the catch
              "dog_amenity_any": float(dog_amenity_any(b.get("amenities"))),
              "own_garage": float(head == "garage"),         # a garage, not covered parking or a lot
-             "own_parking": float(head in ("garage", "covered", "lot", "onsite")),
+             "own_parking": float(head in OWN_PARKING),
              "year_built": (b.get("amenities") or {}).get("year_built")}
         for k in ("open_water_m", "beach_m", "park_ha_800m"):
             r[k] = plain(mb.at[b["id"], k]) if (len(mb) and k in mb.columns and b["id"] in mb.index) else None
@@ -419,6 +455,11 @@ def _split_fields(d, y):
         "close_drive_hi": max((sun(u)["drive_min"] for u in close), default=None),
         "far_drive": _median(sun(u).get("drive_min") for u in far),
         "far_toll": _median(sun(u).get("toll_round_trip") for u in far),
+        # the lowest and highest toll of each group a sentence may speak of (independent check 5, N9: "From Newark
+        # each visit costs about $24" was wrong for 7 of 21 apartments, up to $43)
+        **_range_fields("toll", _span(sun(u).get("toll_round_trip") for u in us)),
+        **_range_fields("far_toll", _span(sun(u).get("toll_round_trip") for u in far)),
+        **_range_fields("close_toll", _span(sun(u).get("toll_round_trip") for u in close if u not in free)),
         "tollfree_share": len(free) / len(us) if us else None, "tollfree_areas": names(free, "area"),
         "toll_areas": names([u for u in close if u not in free], "area"),
         "close_toll": _median(sun(u).get("toll_round_trip") for u in close if u not in free),
@@ -476,6 +517,9 @@ def lookup(source_file, field, row, agg=None):
         return plain(float(num.mean())) if len(num) else 0.0
     if agg == "nunique":
         return int(s.dropna().astype(str).nunique())
+    if agg == "uniform":            # the one value every row shares, "mixed" where they differ, None where none has one
+        vals = sorted(set(s.dropna().astype(str)))
+        return vals[0] if len(vals) == 1 else "mixed" if vals else None
     if agg == "sentiment_counts":
         vc = s.astype(str).str.lower().value_counts()
         return ";".join(f"{k}={int(vc.get(k, 0))}" for k in ("positive", "mixed", "negative"))
@@ -734,8 +778,9 @@ AVG_SENTENCE_WORDS, MAX_SENTENCE_WORDS = 20, 32          # per text: the average
 def check_plain(col, text):
     """Clarity guards for one text: removed conceits, internal terms, page vocabulary, sentence length, figures."""
     out = []
+    plain_text = text.replace(SAFEST, "Among them")       # the one fixed wording about safety (its "places" are neighborhoods)
     for rx, what in CONCEITS + VOCAB + STALE:
-        m = rx.search(text)
+        m = rx.search(plain_text)
         if m:
             out.append(f"{col}: {what}: '{m.group(0)}'")
     hit = agency(text)
@@ -902,6 +947,36 @@ def check_leads(rows):
     return out
 
 
+# A text may not begin with a sentence that leans on one that is not there (independent check 5, N16: Ridgewood's
+# paragraph opened "9 cafés are close too, and the supermarket is 0.1 miles away."). Every field is shown on its own,
+# so its first sentence must stand alone: no "too", "also", "as well", "either" (unless "either ... or"), no opening
+# "And" / "But". The builder refuses the same thing after an optional sentence that dropped.
+DANGLING = re.compile(r"\btoo(?=[,.;!]|$)|\b(?:also|as well)\b|\beither\b(?![^.]*\bor\b)|^(?:And|But)\b")   # not "too far"
+
+
+def dangling(text):
+    first = (sentences(text.replace("St. ", "St ")) or [""])[0]
+    m = DANGLING.search(first)
+    return [f"the text opens with a sentence that leans on an earlier one ('{m.group(0)}'): it must stand alone: "
+            f"{first[:80]}"] if m else []
+
+
+# "N of the M buildings here has / have ..." (N17: "1 of the 4 buildings here have their own dog area").
+N_OF_M = re.compile(r"\b(\d+) of the (\d+) ([a-z ]+?) (has|have|is|are|lists|list|offers|offer)\b(?: (its|their)\b)?", re.I)
+SINGULAR_VERBS = {"has", "is", "lists", "offers"}
+
+
+def agreement(text):
+    """Singular / plural agreement of every "N of the M ... has/have" -> messages."""
+    out = []
+    for m in N_OF_M.finditer(str(text or "")):
+        one = int(m.group(1)) == 1
+        verb, poss = m.group(4).lower(), (m.group(5) or "").lower()
+        if (verb in SINGULAR_VERBS) != one or (poss and (poss == "its") != one):
+            out.append(f"'{m.group(0)}': {'1 ... has its' if one else str(m.group(1)) + ' ... have their'} (agreement)")
+    return out
+
+
 def check_style(kind, col, text):
     out = check_plain(col, text)
     bare = text
@@ -911,13 +986,13 @@ def check_style(kind, col, text):
         m = rx.search(bare)
         if m:
             out.append(f"{col}: {what}: '{m.group(0)}'")
-    open_text = bare.replace(SAFEST, "")
+    # the one safety wording allowed is a whole icon point of a neighborhood, exactly as written (check_row tests it)
+    open_text = "" if (kind == "hood" and col == "point" and text.strip() == SAFEST + ".") else bare
     m = CRIME.search(open_text) or re.search(r"\bsafe\w*", open_text, re.I)
     if m:
-        out.append(f"{col}: crime or safety wording '{m.group(0)}' (the open prose is about living there)")
-    if text.count(SAFEST) > 1:
-        out.append(f"{col}: the 'safest' clause appears more than once")
-    m = NUMBER_WORDS.search(text.replace(SAFEST, ""))
+        out.append(f"{col}: crime or safety wording '{m.group(0)}' (the open prose is about living there; the one "
+                   f"allowed wording is the icon point \"{SAFEST}.\")")
+    m = NUMBER_WORDS.search(text)
     if m:
         out.append(f"{col}: spelled-out quantity '{m.group(0)}' (write digits and cite them)")
     words = len(text.split())
@@ -1045,6 +1120,123 @@ TYPICAL_MIN = 3                       # "typical" needs at least this many apart
 SCOPE_MANY_RX = re.compile(r"\bmost buildings here\b", re.I)
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# INDEPENDENT CHECK 5: three rules on what a neighborhood says, each computed from the SAME field for every sentence.
+# (a) QUANTITIES (N15). No two sentences of one neighborhood may give incompatible amounts of the same thing: "There
+#     are no bars within a 10-minute walk" beside "Few bars are within a 10-minute walk"; "nothing here is within
+#     walking distance" beside "2 cafés are within a 10-minute walk". Each wording is tested against the median of the
+#     buildings shown (the figure every count in the text already is): "no X" needs 0, "almost no X" 0 or 1, "few X"
+#     1 to 5, "nothing is within walking distance" and "nothing to eat or drink" need no restaurants, bars or cafés.
+QTY_THINGS = {"restaurant": "restaurants_800m", "bar": "bars_800m", "café": "cafes_800m", "cafe": "cafes_800m"}
+_T = r"(restaurants?|bars?|caf[ée]s?)"
+QTY_MILE = re.compile(r"(?:,? and)?(?: only| about)? (?:\d+|no|few) (?:restaurants?|bars?|caf[ée]s? )?(?:are |is )?within 1 mile|"
+                      r"[^,;]*\bwithin 1 mile\b[^,;]*", re.I)
+QTY_NONE = re.compile(rf"(?<!almost )\bno {_T}(?: or {_T})?\b", re.I)
+QTY_ALMOST = re.compile(rf"\balmost no {_T}(?: or {_T})?\b", re.I)
+QTY_FEW = re.compile(rf"\bfew {_T}\b", re.I)
+QTY_N = re.compile(rf"\b(\d+) {_T}\b", re.I)
+QTY_NOTHING = re.compile(r"(?<!almost )\bnothing (?:here |else )?is within (?:walking distance|a 10-minute walk)|"
+                         r"(?<!almost )\bnothing to eat or drink is within", re.I)
+FEW_MAX = 5
+
+
+def _thing(word):
+    w = word.lower().rstrip("s")
+    return QTY_THINGS.get(w)
+
+
+def quantity_claims(sent):
+    """-> [(field, class, words)] with class none | almost | few | some, for restaurants, bars and cafés within a walk."""
+    s = QTY_MILE.sub(" ", sent)                           # a count "within 1 mile" is another figure
+    out = []
+    for rx, cls in ((QTY_NONE, "none"), (QTY_ALMOST, "almost"), (QTY_FEW, "few")):
+        for m in rx.finditer(s):
+            for g in m.groups():
+                if g and _thing(g):
+                    out.append((_thing(g), cls, m.group(0)))
+    for m in QTY_N.finditer(s):
+        out.append((_thing(m.group(2)), "none" if int(m.group(1)) == 0 else "some", m.group(0)))
+    m = QTY_NOTHING.search(s)
+    if m:
+        out += [(f, "none", m.group(0)) for f in ("restaurants_800m", "bars_800m", "cafes_800m")]
+    return out
+
+
+def check_quantities(b, cols):
+    out, said = [], {}
+    for col, text in cols:
+        for sent in sentences(text):
+            for field, cls, words in quantity_claims(sent):
+                v = _median(b[field].tolist())
+                if v is None:
+                    continue
+                n = int(half_up(v))
+                ok = {"none": n == 0, "almost": n <= 1, "few": 1 <= n <= FEW_MAX, "some": n > 0}[cls]
+                thing = field.split("_")[0]
+                if not ok:
+                    out.append(f"{col}: \"{words}\" but the buildings shown have {n} {thing} within a 10-minute walk "
+                               f"({'say there are none' if n == 0 else 'give the number'}): {sent[:90]}")
+                group = "none" if cls == "none" else "some" if cls in ("few", "some") else None
+                if group:
+                    other = said.setdefault(field, {}).setdefault(group, (col, sent))
+                    clash = said[field].get("some" if group == "none" else "none")
+                    if clash and clash[1] != sent:
+                        out.append(f"{col}: two sentences give incompatible amounts of {thing}: \"{sent[:70]}\" and "
+                                   f"({clash[0]}) \"{clash[1][:70]}\"")
+    return list(dict.fromkeys(out))
+
+
+# (b) THE STATION BY ITS KIND (N3). The nearest station is of any kind now. "train station" and "the train" may be
+#     said only where every shown building's nearest station is commuter rail; "subway", "PATH" and "light rail" only
+#     where it is that. Where the buildings differ, the words are neutral ("the nearest station").
+STATION_SAYS = [("train", re.compile(r"\btrain station\b|\bthe train\b(?! and bus)", re.I)),
+                ("subway", re.compile(r"\bsubway\b", re.I)), ("PATH", re.compile(r"\bPATH\b")),
+                ("light rail", re.compile(r"\blight rail\b", re.I))]
+
+
+def station_kind(b):
+    vals = sorted(set(str(x) for x in b["train_station_kind"].tolist() if not is_missing(x)))
+    return vals[0] if len(vals) == 1 else "mixed" if vals else None
+
+
+def check_station_words(b, cols):
+    out, kind = [], station_kind(b)
+    for col, text in cols:
+        for sent in sentences(text):
+            for says, rx in STATION_SAYS:
+                m = rx.search(sent)
+                if m and says != kind:
+                    out.append(f"{col}: says \"{m.group(0)}\", but the nearest station of the buildings shown is "
+                               f"{'of different kinds' if kind == 'mixed' else kind or 'not known'}: name it by its kind: {sent[:90]}")
+    return out
+
+
+# (c) TOLLS THAT DIFFER BY BUILDING (N9). Where the tolls of the buildings shown differ by more than TOLL_SPREAD
+#     dollars, a toll sentence gives the range ("about $24 to $43 round trip with a New York E-ZPass").
+TOLL_SPREAD = 5
+TOLL_ONE = re.compile(r"about \$(\d+) round trip with a New York E-ZPass")
+TOLL_RANGE = re.compile(r"about \$(\d+) to \$(\d+) round trip with a New York E-ZPass|up to about \$(\d+) round trip with a New York E-ZPass")
+
+
+def check_toll_range(key, cols):
+    out = []
+    try:
+        spread = lookup(PAGE + "#neighborhoods", "toll_spread", {"hood_id": key})
+        lo, hi = (lookup(PAGE + "#neighborhoods", f, {"hood_id": key}) for f in ("toll_lo", "toll_hi"))
+    except LookupError:
+        return out
+    for col, text in cols:
+        for sent in sentences(text):
+            wide = not is_missing(spread) and spread > TOLL_SPREAD
+            if TOLL_ONE.search(sent) and not TOLL_RANGE.search(sent) and wide:
+                out.append(f"{col}: one toll figure, but the tolls of the buildings shown run from ${transform(lo, 'int')} "
+                           f"to ${transform(hi, 'int')}: say the range: {sent[:90]}")
+            m = TOLL_RANGE.search(sent)
+            if m and not wide:
+                out.append(f"{col}: a toll range, but the tolls of the buildings shown differ by ${spread}: {sent[:90]}")
+    return out
+
+
 def shown_buildings(hood_id):
     t = table(DOOR_SOURCE)
     return t[t["hood_id"].astype(str) == str(hood_id)]
@@ -1107,6 +1299,7 @@ def check_shown(key, cols, evidence):
     if gar == 1 and STREET_CATCH.search(every) and not GARAGE_SOLVES.search(every):
         out.append("every building shown here has a garage: the text raises street parking and never says the "
                    "building's garage solves it")
+    out += check_quantities(b, cols) + check_station_words(b, cols) + check_toll_range(key, cols)
     lead_scene = " ".join(t for c, t in cols if c in ("host_intro", "scene"))
     door_numbers = any(ev.get("source_file") == DOOR_SOURCE and ev.get("shown") and ev.get("claim") in
                        sentences(lead_scene.replace("St. ", "St ")) for ev in evidence)
@@ -1153,6 +1346,8 @@ EXP_CLAIMS = [
     ("houses and lawns", r"houses and lawns|town of houses", "hood_detached", (">=", 0.5)),
     # tested on the buildings that publish a year (about half do); the others are left out of the share
     ("a newer building", r"\bnewer buildings?\b", "year_built", (">=", 2000)),
+    # the nearest station is of any kind (N3): "train station" needs commuter rail to be the nearest
+    ("a train station", r"\btrain station\b", "station_is_train", ("==", 1)),
 ]
 EXP_CLAIMS = [(n, re.compile(rx, re.I), f, t) for n, rx, f, t in EXP_CLAIMS]
 CLAIM_SHARE = 0.75                    # a claim about the experience must hold for this share of its apartments
@@ -1265,6 +1460,28 @@ def check_experience(key, cols, evidence):
                 elif failing:
                     out.append(f"{col}: \"{m.group(0)}\" ({name}) is contradicted by the neighborhood card(s) shown "
                                f"under this experience: {failing[:8]}; say \"except ...\" or drop the claim: {where}")
+    # tolls (N9): one figure for a group whose tolls differ by more than TOLL_SPREAD dollars must be a range
+    yt = table(PAGE + "#years")
+    yt = yt[yt["year_label"].astype(str) == str(key)]
+    spreads = {"toll_round_trip": "toll_spread", "far_toll": "far_toll_spread", "close_toll": "close_toll_spread"}
+    for col, text in cols:
+        for sent in sentences(text):
+            if not TOLL_ONE.search(sent) or TOLL_RANGE.search(sent) or not len(yt):
+                continue
+            for ev in evidence:
+                if ev.get("claim") != sent or not ev.get("shown"):
+                    continue
+                f = spreads.get(ev.get("field")) if str(ev.get("source_file")) == PAGE + "#years" else None
+                sp = yt.iloc[0][f] if f else None
+                if str(ev.get("source_file")) == PAGE + "#neighborhoods" and ev.get("field") == "toll_round_trip":
+                    try:
+                        sp = lookup(PAGE + "#neighborhoods", "toll_spread", ev.get("row", {}))
+                    except LookupError:
+                        sp = None
+                if not is_missing(sp) and sp > TOLL_SPREAD:
+                    out.append(f"{col}: one toll figure for apartments whose tolls differ by ${sp:.0f}: say the range "
+                               f"(\"about $A to $B round trip with a New York E-ZPass\"): {sent[:90]}")
+                    break
     # pairs
     for col, text in cols:
         sents = sentences(text)
@@ -1305,6 +1522,16 @@ def _dist_words(m):
     return f"{half_up(mi, 0.1):.1f} miles" if mi < 3 else f"{int(half_up(mi))} miles"
 
 
+def _miles_words(m):
+    """A distance in miles as measured: one decimal under 3 miles (never below 0.1), whole miles beyond."""
+    mi = m / 1609.34
+    return f"{max(0.1, half_up(mi, 0.1)):.1f} miles" if mi < 3 else f"{int(half_up(mi))} miles"
+
+
+STATION_LABEL = {"train": "to the train", "subway": "to the subway", "PATH": "to PATH", "light rail": "to light rail",
+                 "mixed": "to the nearest station"}
+
+
 def _count_words(n, one):
     n = int(half_up(n))
     return f"{n} {one if n == 1 else one + 's'}"
@@ -1313,6 +1540,9 @@ def _count_words(n, one):
 def glance(hood_id):
     """-> the "At a glance" facts of a neighborhood with apartments on the page ([] otherwise). Each fact:
          key      food | park | dog | supermarket | train_station | garage
+                  (train_station also carries kind = train | subway | PATH | light rail | mixed, kinds {kind: buildings},
+                  station (the name, where the shown buildings share one), stations [names], and, where the nearest
+                  station is not commuter rail, commuter_station_m / _text / _label)
          icon     the page's icon name
          text     the bold words ("66 restaurants, 8 bars"), ready to print
          label    the small words after them, scope included ("within a 10-minute walk of most buildings here")
@@ -1353,7 +1583,8 @@ def glance(hood_id):
             own_dog_area="all", public_dog_park_m=plain(dg), public_dog_park_text=public)
     elif own > 0:
         add("dog", "dog", public or "Ask", "to the public dog park" + (" from most buildings here" if many else "")
-            + f"; {int(round(own * nb))} of the {nb} buildings here have their own dog area", dg, "meters", dr, k,
+            + f"; {int(round(own * nb))} of the {nb} buildings here "
+            + ("has its" if int(round(own * nb)) == 1 else "have their") + " own dog area", dg, "meters", dr, k,
             own_dog_area="some", own_dog_area_buildings=int(round(own * nb)), public_dog_park_m=plain(dg),
             public_dog_park_text=public)
     elif dg is not None:
@@ -1365,8 +1596,21 @@ def glance(hood_id):
             sm, "meters", sr, k)
     tr, trr, k = med("train_station_m")
     if tr is not None:
-        add("train_station", "train", _dist_words(tr), "to a train station" + (" from most buildings here" if many else ""),
-            tr, "meters", trr, k)
+        # The nearest station, named by its kind (N3). `kind` is the one every shown building shares, "mixed" where
+        # they differ; `station` is the name where they share one. The distance is in miles as measured: no walking
+        # time to a station is in the data.
+        kind = station_kind(b) or "mixed"
+        names = sorted(set(str(x) for x in b["train_station"].tolist() if not is_missing(x)))
+        station = names[0] if len(names) == 1 else None
+        kinds = {str(kk): int(v) for kk, v in b["train_station_kind"].dropna().astype(str).value_counts().sort_index().items()}
+        label = STATION_LABEL.get(kind, "to the nearest station") + (f" ({station})" if station and kind != "mixed" else "")
+        more = {"kind": kind, "kinds": kinds, "station": station, "stations": names}
+        cm, cr, ck = med("commuter_station_m")
+        if kind != "train" and cm is not None:            # the nearest commuter-rail station, where that is another one
+            more.update({"commuter_station_m": plain(cm), "commuter_station_text": _miles_words(cm),
+                         "commuter_station_label": "to the nearest commuter train station"})
+        add("train_station", "train", _miles_words(tr), label + (" from most buildings here" if many else ""),
+            tr, "meters", trr, k, **more)
     gar = float(b["own_garage"].mean())
     if gar > 0:
         ng = int(round(gar * nb))
@@ -1400,11 +1644,27 @@ def check_row(kind, key, texts, evidence):
                 if (v <= bound) if "<" in test[0] else (v >= bound):
                     return True
         return False
-    joined = " ".join(texts.values())
-    if SAFEST in joined and not backed(SAFEST_FIELD, ("<=", "<"), SAFEST_MAX):
-        problems.append(f"'{SAFEST}' needs a test that the neighborhood is in the lowest fifth by violent rate")
-    if joined.count(SAFEST) > 1:
-        problems.append(f"'{SAFEST}' is used in more than one field")
+    joined = " ".join(list(texts.values()) + [t for _, t in extra])
+    if SAFEST_OLD.search(joined):
+        # D27 / N13: at most the lowest tenth by violent rate, as an icon point of its own, never without a rate
+        if kind != "hood":
+            problems.append(f"'{SAFEST}' is a neighborhood's icon point; an experience does not say it")
+        elif not backed(SAFEST_FIELD, ("<=", "<"), SAFEST_MAX):
+            problems.append(f"'{SAFEST}' needs a test that the neighborhood is in the lowest tenth by violent rate "
+                            f"({SAFEST_FIELD} <= {SAFEST_MAX})")
+        if len(SAFEST_OLD.findall(joined)) > 1:
+            problems.append(f"'{SAFEST}' is said more than once")
+        if kind == "hood":
+            try:
+                if not lookup(PAGE + "#neighborhoods", "safety_published", {"hood_id": key}):
+                    problems.append(f"'{SAFEST}' where no crime rate is published for the neighborhood (safety.status "
+                                    f"is not_published): nothing may be said about safety here")
+                pct = lookup(PAGE + "#neighborhoods", SAFEST_FIELD, {"hood_id": key})
+                if is_missing(pct) or pct > SAFEST_MAX:
+                    problems.append(f"'{SAFEST}' but the neighborhood is not in the lowest tenth by violent rate "
+                                    f"among those shown ({SAFEST_FIELD} = {pct})")
+            except LookupError:
+                problems.append(f"'{SAFEST}' on a neighborhood that is not on the page")
     if kind == "year" or key in shown_hoods():
         for ev in evidence:
             if ev.get("transform") != "convention" and ev.get("field") in SHOWN_ONLY_FIELDS \
@@ -1417,6 +1677,7 @@ def check_row(kind, key, texts, evidence):
                 problems.append(f"{col}: empty")
             continue
         problems += check_style(kind, col, text)
+        problems += [f"{col}: {p}" for p in dangling(text) + agreement(text)]
         for n in numbers_in(text):
             if n not in allowed:
                 problems.append(f"{col}: number '{n}' has no evidence item: {text[:60]}")
@@ -1438,7 +1699,8 @@ def check_row(kind, key, texts, evidence):
 
 
 # Fixed wordings that every text may use: the toll sentence and the units of the crime figures.
-REQUIRED_PHRASE = re.compile(r"about \$?# round trip with a new york e-zpass|per # residents|per #|against jamaica's #")
+REQUIRED_PHRASE = re.compile(r"about \$?# to \$?# round trip with a new york e-zpass(?:, depending on the building)?|"
+                             r"about \$?# round trip with a new york e-zpass|per # residents|per #|against jamaica's #")
 OPENING_WORDS, OPENING_MAX = 3, 8        # at most 8 texts may start with the same 3 words
 RUN_WORDS, RUN_SHARE, RUN_FLOOR = 6, 0.25, 8   # no run of 6 words in more than a quarter of the texts (never fewer than 8)
 
@@ -1568,6 +1830,8 @@ def main():
                     if have != want:
                         problems.append("glance_json is missing or no longer equals the figures of the buildings "
                                         "shown (rebuild: python3 scripts/build_scene_text.py)")
+                    for g in want or []:
+                        problems += [f"glance_json [{g.get('key')}]: {p}" for p in agreement(f"{g.get('text')} {g.get('label')}")]
                 for p in problems:
                     print(f"FAIL {r[key]}: {p}")
                 for d in drift:

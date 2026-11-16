@@ -46,6 +46,9 @@ UNIT_DROP = [
     "ratings.most_reviews", "ratings.platforms[].seen_via",
     # internal notes (independent check 4, D24): never rendered, so never shipped in the page
     "confirm.why_internal", "disclosures[].why_internal", "all_in_lines[].note_internal",
+    # UI pass 9 (repairs after check 5): raw words and working notes behind the new reader fields
+    "evidence.items[].excerpt_internal", "parking.included_words_internal", "parking.kinds_basis", "parking.reviewed_note",
+    "parking.included_basis",
 ]
 # Avoid cards and "worth a phone call" items are short cards: name, price, what to confirm, the evidence, the questions.
 # all_in_lines stays (UI pass 8): the rent line's name says which price the rent figure is (as listed, 12-month lease, after an offer).

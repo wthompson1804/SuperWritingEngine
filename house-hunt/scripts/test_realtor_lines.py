@@ -211,6 +211,9 @@ def allowed_numbers(u, n_peers):
         ok.update(numbers(str(R.get(u, "conditions", k) or "")))
     for text in names(u):                                     # a name quoted from the data
         ok.update(numbers(str(text or "")))
+    for o in R.get(u, "parking", "optional_kinds") or []:     # "garage spaces are $125 a month": the other kind's own fee
+        if isinstance(o, dict):
+            put(o.get("fee"))
     return ok
 
 
@@ -224,7 +227,10 @@ FILL = {"n": 5, "low": "lowest", "big": "largest", "high": "highest", "least": "
         "park_mins": "4 minutes", "rest": "31", "w10": R.WALK_RADIUS, "station": "NAME", "Station": "NAME",
         "station_mi": "0.4", "market": "NAME", "market_mi": "0.2", "Rest_few": "6 restaurants are",
         "Rest_count": "About 31 restaurants are", "Apts_listed": "5 apartments are listed", "lb": "50",
-        "parking": "garage", "income": "3x the rent in household income", "credit": "700+"}
+        "parking": "garage", "income": "3x the rent in household income", "credit": "700+",
+        "Incl": "A garage space", "incl": "a garage space", "Lot_space": "A space in the open lot",
+        "lot_space": "a space in the open lot", "extra": "; garage spaces cost extra", "where": "in an off-site deck",
+        "parking_point": "A free open lot; garage spaces cost extra."}
 
 
 def families():
@@ -343,9 +349,13 @@ class Library(unittest.TestCase):
         for t in R.BUILDING["garage_unpriced"][2]:
             self.assertRegex(t, R.UNPRICED, t)
             self.assertNotRegex(t.lower(), r"free|included")
-        for key in ("garage_unpriced", "covered_unpriced", "lot_unpriced", "onsite_unpriced"):
-            self.assertRegex(R.POINTS[key][2].lower(), r"not published|no type or price", key)
-        self.assertRegex(R.WARNINGS["parking_fee"][1], r"not published")
+        for head in ("garage: x", "covered: x", "lot: x", "assigned: x", "offsite: x"):
+            pt = R.parking_point(R.parking_facts({"parking": {"type": head, "fee": None}}))
+            self.assertRegex(pt.lower(), r"not published", head)
+            self.assertNotRegex(pt.lower(), r"free|included", head)
+        self.assertRegex(R.parking_point(R.parking_facts({"parking": {"type": "parking", "fee": None}})), r"without saying what kind")
+        for key in ("parking_fee", "parking_assigned"):
+            self.assertRegex(R.WARNINGS[key][1], r"not published")
 
     def test_icons_are_from_the_fixed_set(self):
         for key, (icon, _, _) in R.POINTS.items():
@@ -643,7 +653,7 @@ class Subheads(unittest.TestCase):
     def test_priced_garage_included_space_and_street(self):
         self.assertEqual(meta(run([unit("a")])["a"])["subs"]["parking"], "garage_priced")
         inc = unit("a", parking={"type": "lot: assigned", "fee": 0.0, "fee_note": "a spot is included or free: assigned"})
-        self.assertEqual(meta(run([inc])["a"])["subs"]["parking"], "included")
+        self.assertEqual(meta(run([inc])["a"])["subs"]["parking"], "included_lot")   # the included space, by its kind
         street = unit("a", parking={"type": "street_only", "fee": None, "fee_note": ""})
         self.assertEqual(meta(run([street])["a"])["subs"]["parking"], "street")       # never "on-site parking"
         b = buildings([street])["b-a"]
@@ -717,7 +727,7 @@ class Building(unittest.TestCase):
                 self.assertNotRegex(mask(text, top).lower(), r"garage|parking|\blot\b")
                 self.assertFalse([p for p in pts if p["icon"] == "parking"], pts)
             if kind in ("garage", "covered", "lot") and not fee and not included and \
-                    re.search(r"garage|covered parking|parking lot|building's lot", everything):
+                    re.search(r"garage(?! spaces)|covered parking|parking lot|building's lot", everything):
                 self.assertRegex(everything, r"not published|does not publish", f"{bid}: a fee that is not published must be called that")
                 self.assertNotRegex(everything, r"\bfree\b|included in the rent", bid)
             if any(R.dog_open(u) for u in group):                    # an open dog policy never yields "dogs are allowed"
@@ -844,6 +854,105 @@ class AmenityFields(unittest.TestCase):
         self.assertNotRegex(self.all_text(in_unit_laundry="yes", laundry="On-site laundry"), r"(?i)laundry|washer")
         self.assertNotRegex(self.all_text(in_unit_laundry="on_site_only", laundry="Yes"), r"(?i)laundry|washer")
         self.assertRegex(self.all_text(in_unit_laundry="yes", laundry="Washer, Dryer"), r"(?i)washer and dryer")
+
+    def test_parking_is_read_from_the_structured_fields(self):
+        """Independent check 5, N1: the kind, the fee and what is included come from parking.kind / included_kind /
+        optional_kinds, never from the head of the type string. The sentences are the ones the owner asked for."""
+        def text(p):
+            u = unit("a1", parking=p)
+            r, b = run([u])["a1"], buildings([u])["b-a1"]
+            return " ".join([r["sub_parking"], b["about_building"]] + [x["text"] for x in json.loads(b["about_points_json"])])
+        pt = lambda p: R.parking_point(R.parking_facts({"parking": p}))
+        lot = {"type": "garage: Open parking: included in lease; Garage: $125 month", "fee": 0.0, "fee_basis": "published",
+               "kind": "open_lot", "included_kind": "open_lot", "fee_kind": "open_lot", "garage_is_optional_extra": True,
+               "optional_kinds": [{"kind": "garage", "fee": 125.0, "fee_basis": "published"}]}
+        # the type string still begins "garage:", as the six buildings of the check did: the structured kind wins
+        self.assertEqual(R.parking_kind({"parking": lot}), ("lot", 0.0, True))
+        self.assertEqual(pt(lot), "A free open lot; garage spaces are $125 a month.")
+        self.assertEqual(pt({**lot, "optional_kinds": [{"kind": "garage", "fee": None}]}), "A free open lot; garage spaces cost extra.")
+        t = text(lot)
+        self.assertNotRegex(t, r"(?i)garage parking|park indoors|has a garage|building's garage|garage fee", t)
+        self.assertRegex(t, r"(?i)open lot")
+        deck = {"type": "offsite: no on-site parking: permit at a nearby deck $185/month", "fee": 185.0, "fee_basis": "published",
+                "kind": "offsite", "fee_kind": "offsite", "offsite": True,
+                "optional_kinds": [{"kind": "offsite", "fee": 100.0, "fee_basis": "published"}]}
+        self.assertEqual(R.parking_kind({"parking": deck})[0], "offsite")
+        self.assertEqual(pt(deck), "Parking is in an off-site deck, $185 a month.")
+        t = text(deck)
+        self.assertIn("Parking is in an off-site deck, $185 a month.", t)
+        self.assertNotRegex(t, r"(?i)building's lot|parking lot|garage|\$100", t)       # the failing subhead of The George
+        self.assertEqual(meta(run([unit("a1", parking=deck)])["a1"])["subs"]["parking"], "offsite_priced")
+        assigned = {"type": "assigned: one assigned space included per unit; garage and outdoor parking", "fee": 0.0,
+                    "fee_basis": "published", "kind": "assigned", "included_kind": "assigned", "fee_kind": "assigned", "assigned": True}
+        self.assertEqual(pt(assigned), "An assigned space is included; the listing does not say where.")
+        self.assertEqual(R.parking_point(R.parking_facts({"parking": assigned}), long=True),
+                         "An assigned space is included; the listing does not say whether it is a garage or a lot.")
+        self.assertIn("An assigned space is included; the listing does not say whether it is a garage or a lot.", text(assigned))
+        self.assertEqual(pt({"type": "lot: off-street parking included", "fee": 0.0, "fee_basis": "published", "kind": "off_street",
+                             "included_kind": "off_street", "fee_kind": "off_street"}), "Free off-street parking.")
+        unnamed = {"type": "parking", "fee": None, "kind": "unspecified"}
+        self.assertEqual(pt(unnamed), "The listing mentions parking without saying what kind: ask.")
+        self.assertNotRegex(text(unnamed), r"(?i)garage|\blot\b|covered|free|included")
+        # an included space whose kind the listing does not name, filed as an open lot for the score
+        self.assertEqual(pt({"type": "lot", "fee": 0.0, "fee_basis": "published", "kind": "open_lot", "included_kind": "unspecified",
+                             "fee_kind": "unspecified"}), "A parking space is included; the listing does not say what kind.")
+        # never a fee attached to the wrong kind: the fee is the garage's, the space she would park in is the lot
+        wrong = {"type": "lot: surface parking", "fee": 150.0, "fee_basis": "published", "kind": "open_lot", "fee_kind": "garage"}
+        self.assertEqual(R.parking_kind({"parking": wrong}), ("lot", None, False))
+        self.assertNotIn("$150", text(wrong))
+        # a resident's estimate is not the building's price
+        self.assertIsNone(R.parking_kind({"parking": {"type": "garage: x", "kind": "garage", "fee": 90.0, "fee_basis": "estimate from a review"}})[1])
+
+    def test_every_parking_text_on_the_page_matches_the_structured_fields(self):
+        """All shown buildings: no text says "garage" unless the kind is a garage (or names it as the paid extra), and
+        every parking fee printed is the fee of the space she would park in or of the extra it names."""
+        units = page_units()
+        if units is None:
+            self.skipTest("site/data.json is not here")
+        rows, brows = run(units), buildings(units)
+        for u in units:
+            P = R.parking_facts(u)
+            b = brows[u.get("building_id") or u["id"]]
+            texts = [rows[u["id"]]["sub_parking"], b["about_building"]] + [x["text"] for x in json.loads(b["about_points_json"])]
+            for t in texts:
+                t = mask(t, u)
+                bare = re.sub(r"garage spaces? (?:are \$[\d,]+ a month|cost extra)|a garage space (?:costs extra|is an added cost)|"
+                              r"whether it is a garage or a lot|is in a garage or a lot", "", t)
+                if re.search(r"(?i)\bgarage\b|park indoors", bare):
+                    self.assertEqual(P["kind"], "garage", f"{u['id']}: {t}")
+                if re.search(r"(?i)building's lot|parking lot|open lot", bare):
+                    self.assertEqual(P["kind"], "lot", f"{u['id']}: {t}")
+                if re.search(r"(?i)\bfree\b|included in the rent|rent includes|is included", bare) and re.search(r"(?i)park|space|lot", bare):
+                    self.assertTrue(P["included"], f"{u['id']}: {t}")
+                if re.search(r"(?i)off-site", bare):
+                    self.assertEqual(P["kind"], "offsite", f"{u['id']}: {t}")
+
+    def test_washer_only_and_listing_tag_laundry(self):
+        washer = dict(in_unit_laundry="yes", laundry="In-unit washer (no dryer named)", in_unit_appliances="washer",
+                      in_unit_laundry_basis="listing_site_appliance_list")
+        self.assertEqual(R.laundry_kind(washer), "washer")
+        t = self.all_text(**washer)
+        self.assertNotRegex(t, r"(?i)washer and dryer", t)
+        self.assertRegex(t, r"(?i)washer in the apartment|names a washer|washer is on the listing", t)
+        tag = dict(in_unit_laundry="yes", laundry="In-unit washer and dryer", in_unit_appliances="washer and dryer",
+                   in_unit_laundry_basis="listing_site_appliance_list")
+        t = self.all_text(**tag)
+        for sent in sentences(t):
+            if re.search(r"(?i)washer|laundry", sent):
+                self.assertRegex(sent, r"(?i)listing", sent)                      # "The listing shows ...", never flat
+        own = dict(in_unit_laundry="yes", laundry="In-unit washer and dryer", in_unit_appliances="washer and dryer",
+                   in_unit_laundry_basis="page_says_in_apartment")
+        self.assertRegex(self.all_text(**own), r"(?i)washer and dryer")
+
+    def test_the_station_is_named_by_its_kind(self):
+        self.assertEqual(R.station_words("Journal Square", "PATH"), "the Journal Square PATH station")
+        self.assertEqual(R.station_words("Elmhurst Av", "subway"), "the Elmhurst Av subway station")
+        self.assertEqual(R.station_words("Port Imperial", "light rail"), "the Port Imperial light rail stop")
+        self.assertEqual(R.station_words("Kew Gardens", "train"), "the Kew Gardens train station")
+        u = unit("a1", moments={"sat": {"train_station": "Journal Square", "train_station_m": 300, "train_station_kind": "PATH"}})
+        b = buildings([u])["b-a1"]
+        t = " ".join([b["about_building"]] + [x["text"] for x in json.loads(b["about_points_json"])])
+        self.assertNotIn("train station", t)
 
     def test_a_garage_beside_a_lot_is_not_where_she_would_park(self):
         u = unit("a1", parking={"type": "garage: surface lot; garage $50/month", "fee": 50.0})

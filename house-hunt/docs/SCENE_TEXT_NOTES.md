@@ -2,8 +2,9 @@
 
 The words on the experience pages and the neighborhood pages: how they are written, built and checked.
 Rewritten 2026-11-16 after the copy edit, and extended the same day after independent check 4
-(`docs/INDEPENDENT_CHECK_4.md`; the section "After independent check 4" below says what changed and why). It
-describes the system as it stands; the earlier history is in git (`git log -- docs/SCENE_TEXT_NOTES.md`).
+(`docs/INDEPENDENT_CHECK_4.md`) and independent check 5 (`docs/INDEPENDENT_CHECK_5.md`; the sections "After
+independent check 4" and "After independent check 5" below say what changed and why). It describes the system as
+it stands; the earlier history is in git (`git log -- docs/SCENE_TEXT_NOTES.md`).
 
 ## Why the copy edit happened
 
@@ -30,13 +31,15 @@ The rule now: **say the plain thing, and quote the page's own number.**
 `scripts/realtor_lines.py`, `data/reference/realtor_lines.csv` and `data/reference/building_about.csv` (the building
 and apartment lines) are a separate system. They were not part of this copy edit, and have since been rewritten to the
 same plain standard by `scripts/realtor_lines.py`: the guards are the ones in `check_scene_text.py`, imported by
-`scripts/test_realtor_lines.py` and run over every building and apartment text.
+`scripts/test_realtor_lines.py` and run over every building and apartment text. `check_scene_text.py` in turn imports
+`realtor_lines.parking_facts`, so the neighborhood text, the building text and "At a glance" read parking one way.
 
 After any data rerun (the order matters: the text is built from the page data, attached to it, then audited there):
 
     python3 scripts/page_data_extras.py && python3 scripts/build_scene_text.py && python3 scripts/check_scene_text.py \
       && python3 scripts/realtor_lines.py && python3 scripts/test_realtor_lines.py \
-      && python3 scripts/page_data_extras.py && python3 scripts/check_published_text.py
+      && python3 scripts/page_data_extras.py && python3 scripts/check_published_text.py \
+      && python3 scripts/test_check_published_text.py
 
 The builder refills every number. It stops on a row when a sentence's hidden test no longer holds; edit that block and
 build again. It lists (and leaves out) a sentence about the shown apartments that stopped being true; rewrite those
@@ -99,6 +102,15 @@ line naming the themes. A number quoted from a local rule needs a `rules:` line.
 - `[[ … ]]` is optional text, dropped whole when a value inside is missing or a test inside fails. Two in a row give
   either/or wording.
 - `{w10}` and `{mile}` are the fixed wordings for the 800 m and 1,600 m radii.
+- Word tokens (independent check 5) print fixed words chosen by a field and record the test they rest on:
+  `{thestation}` / `{astation}` / `{thetrain}` name the nearest station by its kind ("the train station", "the
+  subway", "PATH", "the light rail stop"; "the nearest station" where the shown buildings differ);
+  `{fewbars}` / `{fewcafes}` / `{fewrest}` print "few bars" or, where there are none, "no bars";
+  `{tollcost}` prints "about $24 round trip with a New York E-ZPass" or, where the tolls of the buildings shown
+  differ by more than $5, "about $24 to $43 round trip with a New York E-ZPass, depending on the building"
+  (`{tollshort}` leaves the last clause off, for an icon point).
+- A sentence that leans on the one before it ("too", "also", "as well", an opening "And" / "But") may not open a
+  text, and may not follow an optional sentence that dropped: the builder stops and the draft is rewritten.
 - `=== points: hood`: `topic | icon | conditions :: wording | wording`. The first `warning` line whose conditions hold
   is the catch; then the first matching line of each other topic, at most 5. A point is skipped when the lead already
   gives the same figure. Points are plain facts in the same words on every page; they are not varied for variety's sake.
@@ -119,7 +131,9 @@ line naming the themes. A number quoted from a local rule needs a `rules:` line.
 | `{@nj:teaneck drive}` (experience) | that neighborhood's own figure | a small experience gives each neighborhood's figure, never a typical one (D11) |
 | `{u_garage}` `{u_laundry}` `{u_pool}` `{u_gym}` `{u_bars}` `{u_cafes}` `{u_rest1600}` `{u_dogpark}` `{u_super}` | medians or shares over the experience's shown units | nothing else on the page states these |
 | census shares, `{station}`, `{beach}`, `{tj}`, `{vet}` | `data/lifestyle_groups.csv` or the shown units | not on the strip |
-| tolls | always worded "about $N round trip with a New York E-ZPass" | fixed wording |
+| tolls | always worded "about $N round trip with a New York E-ZPass", or "about $A to $B round trip with a New York E-ZPass" where the tolls of the group spoken of differ by more than $5 (`toll_round_trip_range` for a neighborhood; the lowest and highest toll of the experience's apartments, or of each half of a split) | fixed wording |
+| `{b_toll_lo}` `{b_toll_hi}` `{toll_spread}`, `{u_toll_lo}` `{u_toll_hi}` `{u_toll_spread}`, `{far_toll_lo}` ... `{close_toll_spread}` | `neighborhoods[].toll_round_trip_range`; the apartments of the experience | N9 |
+| `{stationkind}`, `{pet_spa}` | the shown buildings: `moments.sat.train_station_kind` (the one kind they share, else "mixed"), `amenities.pet_spa_or_wash` | N3, N16 |
 
 Prices in sentences are rounded to the nearest $10 with "about"; minutes are whole. For a neighborhood with nothing
 shown, every token falls back to `data/lifestyle_groups.csv`.
@@ -157,7 +171,8 @@ area are new"), the drive, the tolls and the transit time (the neighborhood's ow
   neighborhoods in its experience also open on.
 - **House style, unchanged.** Word limits, one-sentence fields, no question marks, no dashes, no "not … but", no
   spelled-out quantities, nothing about race, ethnicity or religion, no listing-ad hype words, and no crime wording
-  except "one of the safest spots on the whole list", which needs a test (lowest fifth by violent rate on the page).
+  except the icon point "Among the safest places on the list." (lowest tenth by violent rate among the neighborhoods
+  shown, never in a paragraph, never where no rate is published; see "After independent check 5").
 
 ### What is not machine-checked
 
@@ -327,3 +342,68 @@ known and estimated electricity, gas and internet). The text uses the same two n
 - No neighborhood or experience text states a typical rent today: the page data has no rent median on those objects
   (the page computes it in the browser). If one is added, word it "the typical rent is about $X".
 
+## After independent check 5 (2026-11-16)
+
+The check (`docs/INDEPENDENT_CHECK_5.md`) found every number right and a small set of statements resting on a field
+that was wrong or narrower than the words. The pipeline corrected the fields (`docs/REPAIRS_AFTER_INDEPENDENT_CHECK_5.md`);
+this is what the text system changed so that the words follow them, and the rule that now stops each fault.
+
+| Finding | Cause | What changed | The guard |
+|---|---|---|---|
+| N1, D18: "garage" for an open lot; The George's off-site deck written as "the building's lot" | the text read the head of `parking.type` and knew four kinds | `realtor_lines.parking_facts` reads `parking.kind`, `included_kind`, `fee`, `fee_kind`, `optional_kinds`: the kind of the space she would park in (garage, covered, lot, off-street, assigned, off-site, street, unnamed), whether it is included, its own fee, and the other kind offered at a cost. `parking_point` writes the one sentence: "A free open lot; garage spaces are $125 a month.", "Parking is in an off-site deck, $185 a month.", "An assigned space is included; the listing does not say whether it is a garage or a lot.", "Free off-street parking.", "The listing mentions parking without saying what kind: ask." Subheads, About sentences, icon points and warnings each have a case per kind. A fee whose `fee_kind` is another kind is never attached | `check_published_text.parking_claims` reads every parking sentence clause by clause against the structured fields (kind, included, fee, the extra and its fee), also in sentences that say "not published"; `test_realtor_lines` reads every shown building |
+| N8: garage counts | the same head | `check_scene_text.parking_head` calls `parking_facts`; "At a glance" counts the buildings whose space is a garage | `audit_glance` compares the count with the buildings and with `shown_figures.buildings_with_garage` |
+| N3: "miles to a train station" beside a PATH, subway or light rail stop | one word for every station | `{thestation}`, `{astation}`, `{thetrain}`; building text "the Journal Square PATH station", "the Elmhurst Av subway station", "the Port Imperial light rail stop"; `glance_json` `train_station` carries `kind`, `kinds`, `station`, `stations`, the distance in miles, and the label "to PATH (Journal Square)" | `check_station_words` (neighborhoods), `station_claims` (buildings), `EXP_CLAIMS` "a train station" (experiences), `audit_glance` |
+| N9: one toll figure where the buildings differ (Newark $24 to $43) | the median | `{tollcost}`, `{tollshort}`, the range tokens | `check_toll_range`, the toll rule of `check_experience`, the range check of `audit_hood_claims` |
+| N15: "no bars" beside "few bars"; "nothing here is within walking distance" beside "2 cafés" | two wordings with different tests | `{fewbars}`; Westport's catch rewritten | `check_quantities`: "no X" needs 0, "almost no X" 0 or 1, "few X" 1 to 5, "nothing is within walking distance" no restaurants, bars or cafés, each against the median of the buildings shown; two sentences that disagree are named |
+| N16: "9 cafés are close too, ..." opening a paragraph; "The building lists a dog amenity, so ask what it is." for a pet spa; "The listing could not be fully confirmed." | a sentence written to follow another field; the kind of amenity not read; a catch with no reason | rewritten; `{pet_spa}` points and subheads ("The building has a pet spa or dog wash, and no dog area."); catch family `confirm:listing permit` | `dangling()` in the checker and `CONTINUES` in the builder (also after a dropped optional sentence) |
+| N17: "1 of the 4 buildings here have their own dog area" | a fixed plural | the label follows the count | `agreement()` on every text and every "At a glance" label |
+| N6: "washer and dryer" on a listing site's tag, or where only a washer is named | `laundry_kind` read the label | `laundry_mode`: `in_unit_appliances` = washer gives "a washer in the apartment ... no dryer named"; `in_unit_laundry_basis` = listing_site_appliance_list gives "The listing shows a washer and dryer in the apartment." Experience points say "N percent list laundry in the apartment" | `laundry_claims` |
+| N5: a dog weight limit no page states | field | the pipeline removed it; the text prints `dog.weight_limit_lb` only | `dog_weight_claims` |
+| D27, N13: "This is also one of the safest spots on the whole list." in 15 paragraphs | lowest fifth, appended to the daily-life paragraph | the sentence is gone from every paragraph; the icon point "Among the safest places on the list." for `violent_pctile <= 0.1` (6 neighborhoods today) | `check_row`: the wording only as that icon point, only with the test, only where `safety.status` is published and the neighborhood is in the lowest tenth; any other "safe" wording fails as before |
+| Guard gap: five edits planted in `realtor_lines.csv` and `building_about.csv` passed | the audit compared the generator with the page only | `audit_tables`: the two tables on disk must hold exactly the rows and words `realtor_lines.build()` / `build_buildings()` write from `site/data.json` | `test_check_published_text.RealtorTables` plants the five edits, an edited icon point, a missing row and an extra row |
+
+### Parking wording, by what the fields say
+
+| `parking.kind` (the included kind where a space is included) | included | fee published | fee not published |
+|---|---|---|---|
+| garage | A garage space is included in the rent. | Garage parking costs $150 a month. | Garage parking, with the fee not published. |
+| covered | A covered parking space is included in the rent. | Covered parking costs $75 a month. | Covered parking, with the fee not published. |
+| open_lot | A free open lot. | A space in the building's lot costs $75 a month. | A parking lot, with the fee not published. |
+| assigned_lot, gated_lot | An assigned space in an open lot is included. | ... costs $65 a month. | ..., with the fee not published. |
+| off_street | Free off-street parking. | Off-street parking costs $N a month. | Off-street parking, with the fee not published. |
+| assigned | An assigned space is included; the listing does not say whether it is a garage or a lot. | An assigned space costs $N a month; the listing does not say where. | An assigned space, with its kind and fee not published. |
+| offsite | | Parking is in an off-site deck, $185 a month. ("off-site, not at the building" where the source names no deck) | Parking is off-site, not at the building, with the fee not published. |
+| street | The only parking named is on the street. | | |
+| unspecified | A parking space is included; the listing does not say what kind. | Parking of an unnamed kind costs $N a month. | The listing mentions parking without saying what kind: ask. |
+
+One other kind is named after a semicolon, a garage before covered parking before the lots: "; garage spaces are
+$125 a month", or "; garage spaces cost extra" where its fee is not published (a subhead, which carries no numbers,
+always says "cost extra"). The clause is left off when the point would pass 14 words. Off-site and street parking
+name no other kind.
+
+### What the page must do to print these fields
+
+- `at_a_glance[]` item `train_station`: `kind` (train, subway, PATH, light rail, or mixed), `station` (null where
+  the shown buildings measure to different stations), `text` in miles, `label` ready to print. The template's
+  `stationLabel` already builds "to PATH (Journal Square)" from `kind` and `station`; for `kind: "mixed"` it must
+  print the label as given ("to the nearest station ..."). Where the nearest station is not commuter rail the item
+  also has `commuter_station_m`, `commuter_station_text`, `commuter_station_label`.
+- The safety point is an ordinary icon point (`icon: "heart"`). The template's `calm()` removes any text that
+  contains "safest", and its badge still marks the lowest fifth: the badge rule must become the lowest tenth (or
+  the badge must give way to the point), and the point must be let through.
+- A building's parking: the About sentence, the icon point and `headlines.parking.subhead` now say the kind. The
+  template's own line ("Garage parking, no monthly charge") must come from `parking.summary` or the same fields.
+
+### What the data still cannot support (independent check 5)
+
+1. Whether an "assigned space", or parking of unnamed kind, is a garage or a lot (10 buildings): the text asks.
+2. A walking time to a station. Only the distance is in the data, so the station is given in miles.
+3. Which station matters for reaching her parents. The text names the nearest station of any kind; the commuter
+   station's distance is in `glance_json` and is not put in a sentence.
+4. Where the shown buildings of one neighborhood measure to stations of different kinds (Newark, Englewood,
+   Flushing-Willets Point) the text says "the nearest station".
+5. N27, the beach 0.3 miles from 9949 Shore Rd in Bay Ridge: `beach_m` is the map's nearest beach and no source
+   confirms a usable beach there. The sentence is unchanged.
+6. A dryer where only a washer is named, and any machine named only on a listing site's appliance list.
+7. The toll range of an experience is the lowest and highest toll among its apartments; the text does not say how
+   many apartments sit at each end.

@@ -184,22 +184,151 @@ def words(text):
 
 # ------------------------------------------------------------------ what the fields say
 
-def parking_kind(u):
-    """-> (kind, fee, included). kind is None when the listing publishes nothing about parking."""
+# How the page data files a parking space (parking.kind / included_kind / optional_kinds[].kind, and the head of the
+# older parking.type string) -> the kind the sentences speak of. A lot is a lot whether open, gated or assigned.
+PARK_KIND = {"garage": "garage", "covered": "covered", "gated_lot": "lot", "assigned_lot": "lot", "open_lot": "lot",
+             "open lot": "lot", "lot": "lot", "off_street": "off_street", "assigned": "assigned", "offsite": "offsite",
+             "street": "street", "street_only": "street", "unspecified": "unspecified", "parking": "unspecified"}
+
+
+def parking_facts(u):
+    """What the listing says about parking, read from the STRUCTURED fields (independent check 5, N1: "garage" was
+    written for an open lot because the text read the head of parking.type, and an off-site deck became "the
+    building's lot"). -> {kind, detail, fee, included, extras, deck, assigned}
+      kind      the space she would park in: None (nothing published) | garage | covered | lot | off_street | assigned
+                (an assigned space, the listing does not say where) | offsite | street | unspecified (parking of a
+                kind the listing does not name). Where a space is included, this is the INCLUDED kind.
+      detail    the page data's own word for it (open_lot, gated_lot, assigned_lot, ...)
+      fee       the published monthly fee of THAT kind (never a resident's estimate, never the fee of another kind);
+                0.0 where a space is included; None where it is not published
+      included  a space of this kind comes with the rent (parking.fee is 0 and parking.included_kind is set)
+      extras    [(detail kind, published fee or None)]: the other spaces offered at an added cost
+      deck      the off-site parking is a parking deck (the source's own word)
+    Page data written before the structured fields existed (and the tests' short records) is read from the head of
+    parking.type and from fee_note, as before."""
     p = u.get("parking") or {}
-    t = str(p.get("type") or "").strip().lower()
-    if not t:
-        return None, None, False
-    head = t.split(":")[0].strip()
-    kind = "garage" if head.startswith("garage") else "covered" if head.startswith("covered") else \
-        "lot" if head in ("lot", "open_lot", "open lot") else "street" if head.startswith("street") else "onsite"
+    t = str(p.get("type") or "").strip()
+    head, _, tail = t.partition(":")
+    head = head.strip().lower()
+    raw = str(p.get("kind") or "").strip().lower()
+    none = {"kind": None, "detail": None, "fee": None, "included": False, "extras": [], "deck": False, "assigned": False}
+    if not t and not raw:
+        return none
     fee = num(p.get("fee"))
     if str(p.get("fee_basis") or "").lower().startswith("estimate"):
         fee = None                                   # a figure from a resident's review is not the building's published price (D18)
-    included = fee == 0 and "included or free" in str(p.get("fee_note") or "")
+    if raw:
+        inc_kind = str(p.get("included_kind") or "").strip().lower()
+        included = fee == 0 and bool(inc_kind)
+        detail = inc_kind if included else raw
+    else:
+        detail = "garage" if head.startswith("garage") else "covered" if head.startswith("covered") else \
+            "open_lot" if head in ("lot", "open_lot", "open lot") else "street" if head.startswith("street") else \
+            "assigned" if head == "assigned" else "offsite" if head.startswith("offsite") or head.startswith("off-site") \
+            else "unspecified"
+        included = fee == 0 and "included or free" in str(p.get("fee_note") or "")
+    if detail not in PARK_KIND:
+        detail = "unspecified"
     if fee == 0 and not included:
         fee = None                                   # a zero with no "included" note is not a published price
-    return kind, fee, included
+    fee_kind = str(p.get("fee_kind") or "").strip().lower()
+    if fee and fee_kind and PARK_KIND.get(fee_kind) != PARK_KIND[detail]:
+        fee = None                                   # the fee belongs to another kind of space: never attach it to this one
+    extras = []
+    for o in p.get("optional_kinds") or []:
+        if isinstance(o, dict) and str(o.get("kind") or "").lower() in PARK_KIND:
+            f = num(o.get("fee"))
+            if str(o.get("fee_basis") or "").lower().startswith("estimate") or not f:
+                f = None
+            extras.append((str(o["kind"]).lower(), f))
+    return {"kind": PARK_KIND[detail], "detail": detail, "fee": fee, "included": included, "extras": extras,
+            "deck": PARK_KIND[detail] == "offsite" and bool(re.search(r"\bdeck\b", tail, re.I)),
+            "assigned": bool(p.get("assigned")) or detail in ("assigned", "assigned_lot")}
+
+
+def parking_kind(u):
+    """-> (kind, fee, included): the first three of parking_facts(). kind is None when the listing publishes nothing
+    about parking."""
+    P = parking_facts(u)
+    return P["kind"], P["fee"], P["included"]
+
+
+EXTRA_RANK = ["garage", "covered", "gated_lot", "assigned_lot", "open_lot", "off_street"]
+EXTRA_WORDS = {"garage": "garage spaces", "covered": "covered spaces", "gated_lot": "spaces in the gated lot",
+               "assigned_lot": "assigned outdoor spaces", "open_lot": "open-lot spaces", "off_street": "off-street spaces"}
+
+
+def parking_extra(P):
+    """The one other kind of space worth naming beside the space she would park in -> (detail kind, fee) or None.
+    A garage first, then covered parking, then the lots; a second price for the SAME kind is named last ("other
+    spaces"). Off-site and street parking name no extra."""
+    if P["kind"] in (None, "offsite", "street") or not P["extras"]:
+        return None
+    rank = lambda e: (e[0] == P["detail"], EXTRA_RANK.index(e[0]) if e[0] in EXTRA_RANK else 99)
+    ex = sorted((e for e in P["extras"] if e[0] in EXTRA_RANK), key=rank)
+    return ex[0] if ex else None
+
+
+def extra_words(P):
+    """-> "; garage spaces are $125 a month" | "; garage spaces cost extra" | "" """
+    e = parking_extra(P)
+    if not e:
+        return ""
+    what = "other spaces" if e[0] == P["detail"] else EXTRA_WORDS[e[0]]
+    return f"; {what} are {usd(e[1])} a month" if e[1] else f"; {what} cost extra"
+
+
+def lot_space(P):
+    return {"assigned_lot": "an assigned space in an open lot", "gated_lot": "a space in the gated lot"}.get(
+        P["detail"], "a space in the open lot")
+
+
+def offsite_where(P):
+    return "in an off-site deck" if P["deck"] else "off-site, not at the building"
+
+
+def parking_point(P, long=False):
+    """The one plain sentence that says exactly what the structured parking fields carry: the kind of space, whether
+    it is included or what it costs, and the other kind offered at a cost. Never "garage" unless the kind is a
+    garage; never a fee that belongs to another kind. `long` allows the fuller wording of an assigned space."""
+    k, fee, inc = P["kind"], P["fee"], P["included"]
+    if k is None:
+        return ""
+    x = extra_words(P)
+    money = usd(fee) if fee else None
+    if k == "garage":
+        s = "A garage space is included in the rent" if inc else f"Garage parking costs {money} a month" if fee else \
+            "Garage parking, with the fee not published"
+    elif k == "covered":
+        s = "A covered parking space is included in the rent" if inc else f"Covered parking costs {money} a month" if fee \
+            else "Covered parking, with the fee not published"
+    elif k == "lot":
+        if P["detail"] == "open_lot":
+            s = "A free open lot" if inc else f"A space in the building's lot costs {money} a month" if fee else \
+                "A parking lot, with the fee not published"
+        else:
+            sp = cap_first(lot_space(P))
+            s = f"{sp} is included" if inc else f"{sp} costs {money} a month" if fee else f"{sp}, with the fee not published"
+    elif k == "off_street":
+        s = "Free off-street parking" if inc else f"Off-street parking costs {money} a month" if fee else \
+            "Off-street parking, with the fee not published"
+    elif k == "assigned":
+        s = ("An assigned space is included; the listing does not say " + ("whether it is a garage or a lot" if long else "where")) \
+            if inc else f"An assigned space costs {money} a month; the listing does not say where" if fee else \
+            "An assigned space, with its kind and fee not published"
+        x = ""
+    elif k == "offsite":
+        s = f"Parking is {offsite_where(P)}, {money} a month" if fee else f"Parking is {offsite_where(P)}, with the fee not published"
+    elif k == "street":
+        s = "The only parking named is on the street"
+    else:
+        s = "A parking space is included; the listing does not say what kind" if inc else \
+            f"Parking of an unnamed kind costs {money} a month" if fee else \
+            "The listing mentions parking without saying what kind: ask"
+        x = ""
+    if x and len((s + x).split()) > POINT_MAX_WORDS:
+        x = ""
+    return s + x + "."
 
 
 def rent_asked(u):
@@ -283,9 +412,11 @@ def desk_kind(am):
 
 
 def laundry_kind(am):
-    """-> 'wd' (a washer AND a dryer are named in the apartment) | 'in_unit' (laundry in the apartment, machines not
-    named) | None. The in-unit flag alone is not enough when the source text beside it says something else
-    ("On-site laundry", "W/D hookup", "not in unit"): then nothing is claimed."""
+    """-> 'wd' (a washer AND a dryer are named in the apartment) | 'washer' (a washer only: the source names no
+    dryer; independent check 5, N6) | 'in_unit' (laundry in the apartment, machines not named) | None. The in-unit
+    flag alone is not enough when the source text beside it says something else ("On-site laundry", "W/D hookup",
+    "not in unit"): then nothing is claimed. amenities.in_unit_appliances, where the page data has it, says which
+    machines a source names: 'washer' is never written as "washer and dryer"."""
     am = am or {}
     if am.get("in_unit_laundry") != "yes":
         return None
@@ -295,19 +426,44 @@ def laundry_kind(am):
     says_in = bool(re.search(r"in[ _-]?unit|washer|dryer|^yes$", t))
     if t and not says_in:                                  # "On-site laundry", "W/D hookup; On-site laundry"
         return None
+    app = str(am.get("in_unit_appliances") or "").strip().lower()
+    if app == "washer" or re.search(r"\bno dryer\b", t):
+        return "washer"
+    if app == "dryer" or re.search(r"\bno washer\b", t):
+        return "in_unit"
     if re.search(r"washer", t) and re.search(r"dryer", t):
         return "wd"
     return "in_unit"
 
 
+def laundry_listed(am):
+    """True when the only source for laundry in the apartment is a listing site's appliance list (a tag "Washer,
+    Dryer"), which no page's own words confirm: the text then says "The listing shows ...", never a flat assertion."""
+    return str((am or {}).get("in_unit_laundry_basis") or "") == "listing_site_appliance_list"
+
+
+def laundry_mode(am):
+    """-> None | 'wd' | 'in_unit' (a page says so) | 'washer' | 'listed_wd' | 'listed_washer' | 'listed' (a listing
+    site's appliance list only)."""
+    k = laundry_kind(am)
+    if k is None:
+        return None
+    if k == "washer":
+        return "listed_washer" if laundry_listed(am) else "washer"
+    if laundry_listed(am):
+        return "listed_wd" if k == "wd" else "listed"
+    return k
+
+
 def garage_mixed(u):
-    """The parking is filed as a garage, and its own text also names a surface lot or outdoor spaces: "a garage" is
-    true, "you would park in the garage" is more than the field says (D18)."""
-    t = str((u.get("parking") or {}).get("type") or "").lower()
-    if (u.get("parking") or {}).get("garage_is_optional_extra"):
-        return True
-    if not t.startswith("garage"):
+    """She would park in a garage, and the listing also names a surface lot or outdoor spaces: "a garage" is true,
+    "you would park in the garage" is more than the field says (D18)."""
+    P = parking_facts(u)
+    if P["kind"] != "garage":
         return False
+    if any(PARK_KIND.get(k) in ("lot", "off_street") for k, _ in P["extras"]):
+        return True
+    t = str((u.get("parking") or {}).get("type") or "").lower()
     rest = t.split(":", 1)[1] if ":" in t else ""
     return bool(re.search(r"surface|\blot\b|outdoor|outside|uncovered|open parking|off-street|carport", rest))
 
@@ -320,7 +476,8 @@ OVERCLAIM = {                                           # a wording is skipped w
 
 def fits(text, f):
     """May this wording be used for an apartment or building with these facts?"""
-    if f.get("laundry") and not f.get("laundry_wd") and OVERCLAIM["laundry_plain"].search(text):
+    if f.get("laundry") and f.get("laundry_mode", "in_unit") == "in_unit" and not f.get("laundry_wd") and \
+            OVERCLAIM["laundry_plain"].search(text):
         return False
     if f.get("garage_mixed") and OVERCLAIM["garage_mixed"].search(text):
         return False
@@ -374,7 +531,8 @@ def dog_open(u):
 def facts(u):
     """Everything the sentences may use, read straight from the apartment. Missing stays None."""
     am = u.get("amenities") or {}
-    kind, fee, included = parking_kind(u)
+    park = parking_facts(u)
+    kind, fee, included = park["kind"], park["fee"], park["included"]
     floor = num(u.get("floor"))
     label, day = when(u.get("available"))
     free = str(get(u, "rent", "free_months") or "")
@@ -395,12 +553,12 @@ def facts(u):
         "floor": int(floor) if floor and floor >= 2 else None,
         "floor_sure": sure,
         "margin": margin,
-        "park_kind": kind, "park_fee": fee, "park_included": included,
+        "parking": park, "park_kind": kind, "park_fee": fee, "park_included": included,
         "pool": bool(am.get("pool")), "gym": am.get("gym") == "yes",
         # the front door: "doorman" only where the doorman amenity itself is set (desk_kind); a concierge is a concierge
         "desk": desk,
         "doorman": "24-hour" if desk in ("doorman24", "attended24") else "yes" if desk == "doorman" else None,
-        "laundry": wash is not None, "laundry_wd": wash == "wd",
+        "laundry": wash is not None, "laundry_wd": wash == "wd", "laundry_mode": laundry_mode(am),
         "garage_mixed": garage_mixed(u),
         "lounge": am.get("lounge_or_coworking") == "yes",
         "built": int(built) if built else None,
@@ -409,6 +567,7 @@ def facts(u):
         "park": get(u, "moments", "wake", "park"), "park_walk": num(get(u, "moments", "wake", "park_walk_min")),
         "restaurants": num(get(u, "moments", "after", "restaurants_800m")),
         "station": get(u, "moments", "sat", "train_station"), "station_m": num(get(u, "moments", "sat", "train_station_m")),
+        "station_kind": get(u, "moments", "sat", "train_station_kind"),
         "market": get(u, "moments", "work", "supermarket"), "market_m": num(get(u, "moments", "work", "supermarket_m")),
         "avail": label, "avail_date": day,
         "open_questions": len(questions) if isinstance(questions, list) else None,
@@ -608,6 +767,11 @@ CATCHES = {
     "confirm:listing lease price": [
         "The price shown is for a longer lease. Ask for the price on a 12-month lease before you compare.",
         "Ask for the price on a 12-month lease. The price shown is for a longer lease."],
+    "confirm:listing permit": [                             # N16: say the reason, which the open item itself gives
+        "A review claims apartments here were advertised without an occupancy permit, and that is not confirmed. Ask to "
+        "see the certificate of occupancy.",
+        "Ask to see the building's certificate of occupancy. A review claims apartments here were advertised without "
+        "a permit, and that is not confirmed."],
     "confirm:listing": [
         "Part of this listing could not be confirmed. Ask whether the apartment is still available, and at what price.",
         "Ask whether this apartment is still available, and at what price. The listing could not be fully confirmed."],
@@ -755,6 +919,26 @@ SUBS = {
             "A parking space is included, so the car adds nothing to the monthly cost.",
             "Parking is included in the rent.",
             "You would not pay extra to park here."]),
+        ("included_lot", [
+            "You would park free in the building's open lot.",
+            "A space in the open lot is included in the rent.",
+            "Parking in the open lot is free."]),
+        ("included_lot_garage", [
+            "A free open lot; garage spaces cost extra.",
+            "Parking in the open lot is free, and a garage space costs extra.",
+            "The open lot is included, and a garage space is an added cost."]),
+        ("included_off_street", [
+            "Free off-street parking.",
+            "Off-street parking is included in the rent.",
+            "You would not pay extra for off-street parking."]),
+        ("included_assigned", [
+            "An assigned space is included, and the listing does not say where.",
+            "A space is assigned to you at no charge, so ask where it is.",
+            "Ask whether the included assigned space is in a garage or a lot."]),
+        ("included_unspecified", [
+            "A parking space is included; the listing does not say what kind.",
+            "Ask what kind of parking space the rent includes.",
+            "A parking space comes with the rent, and its kind is not stated."]),
         ("garage_priced", [
             "You would park indoors, and the price is published.",
             "The garage fee is published, so you can budget for it now.",
@@ -782,8 +966,26 @@ SUBS = {
             "You would park in the building's lot, so ask what a space costs.",
             "The lot fee is not published, so ask for it.",
             "Ask what a space in the building's lot costs each month."]),
-        ("onsite_unpriced", [
-            "The listing mentions parking with no details, so ask what kind and what cost.",
+        ("off_street_priced", [
+            "Off-street parking is offered, and the fee is published."]),
+        ("off_street_unpriced", [
+            "Off-street parking is offered, so ask what it costs each month."]),
+        ("assigned_priced", [
+            "The assigned space has a published fee, so ask where the space is."]),
+        ("assigned_unpriced", [
+            "An assigned space is listed, so ask where it is and what it costs.",
+            "Ask whether the assigned space is in a garage or a lot.",
+            "The listing names an assigned space without a kind or a price."]),
+        ("offsite_priced", [
+            "Parking is off-site, not at the building, and the fee is published.",
+            "There is no parking at the building, and the off-site fee is published.",
+            "You would park off-site, at a published monthly fee."]),
+        ("offsite_unpriced", [
+            "Parking is off-site, so ask where it is and what it costs."]),
+        ("unspecified_priced", [
+            "A parking fee is published without the kind of space, so ask."]),
+        ("unspecified_unpriced", [
+            "The listing mentions parking without saying what kind: ask.",
             "Ask what kind of parking the building has and what it costs.",
             "Parking is mentioned without a type or a price, so ask."]),
         ("street", [
@@ -852,6 +1054,18 @@ SUBS = {
             "You get a pool and your own washer and dryer.",
             "Laundry is in the apartment, and the building has a pool.",
             "The building has a pool, and laundry is in the apartment."]),
+        ("laundry_listed_wd", [
+            "The listing shows a washer and dryer in the apartment.",
+            "The listing's appliance list names a washer and dryer.",
+            "A washer and dryer are on the listing's appliance list: check on the tour."]),
+        ("laundry_listed_washer", [
+            "The listing shows a washer in the apartment and names no dryer.",
+            "The listing's appliance list names a washer and no dryer.",
+            "A washer is on the listing's appliance list, so ask about a dryer."]),
+        ("laundry_washer", [
+            "A washer is in the apartment, and no dryer is named."]),
+        ("laundry_listed", [
+            "The listing shows laundry in the apartment."]),
         ("laundry", [
             "The washer and dryer are inside the apartment.",
             "You would do laundry in your own apartment.",
@@ -889,10 +1103,28 @@ BUILDING = {
     "only_dogspot": ("dog", "inside", [
         "This is the only building of the {n} listed in this neighborhood with its own {dogthing}.",
         "No other building listed in this neighborhood has its own {dogthing}."]),
-    "parking_included": ("parking", "inside", [
-        "A parking space is included in the rent.",
-        "The rent includes a parking space.",
-        "You would not pay extra to park here, because a space is included in the rent."]),
+    "parking_included": ("parking", "inside", [             # a garage or covered space, named as what it is
+        "{Incl} is included in the rent.",
+        "The rent includes {incl}.",
+        "You would not pay extra to park here, because {incl} is included in the rent."]),
+    "lot_included": ("parking", "inside", [
+        "{Lot_space} is included in the rent{extra}.",
+        "The rent includes {lot_space}{extra}."]),
+    "off_street_included": ("parking", "inside", [
+        "Off-street parking is free{extra}.",
+        "Free off-street parking comes with the apartment{extra}."]),
+    "assigned_included": ("parking", "inside", [
+        "An assigned space is included; the listing does not say whether it is a garage or a lot."]),
+    "unspecified_included": ("parking", "inside", [
+        "A parking space is included; the listing does not say what kind."]),
+    "offsite": ("parking", "inside", [
+        "Parking is {where}, {fee} a month."]),
+    "offsite_unpriced": ("parking", "inside", [
+        "Parking is {where}, and the fee is not published."]),
+    "off_street": ("parking", "inside", [
+        "The building has off-street parking{ptail}{extra}."]),
+    "assigned": ("parking", "inside", [
+        "The listing names an assigned parking space and does not say whether it is a garage or a lot."]),
     "dog_onsite": ("dog", "inside", [
         "The building has its own {dogthing}.",
         "There is a {dogthing} on the property.",
@@ -932,6 +1164,15 @@ BUILDING = {
     "attended": ("doorman", "inside", [
         "The lobby is attended.",
         "The listing says the lobby is attended."]),
+    "laundry_listed_wd": ("laundry", "inside", [
+        "The listing shows a washer and dryer in the apartment.",
+        "The listing's appliance list names a washer and dryer."]),
+    "laundry_listed_washer": ("laundry", "inside", [
+        "The listing shows a washer in the apartment and names no dryer."]),
+    "laundry_washer": ("laundry", "inside", [
+        "A washer is in the apartment, and the listing names no dryer."]),
+    "laundry_listed": ("laundry", "inside", [
+        "The listing shows laundry in the apartment."]),
     "laundry": ("laundry", "inside", [
         "Laundry is inside the apartment.",
         "You would do laundry inside the apartment.",
@@ -948,8 +1189,8 @@ BUILDING = {
         "This is a newer building, built in {built}.",
         "The building is recent, built in {built}."]),
     "lot": ("parking", "inside", [
-        "The building has its own parking lot{ptail}.",
-        "You would park in the building's lot{ptail}."]),
+        "The building has its own parking lot{ptail}{extra}.",
+        "You would park in the building's lot{ptail}{extra}."]),
     "lounge": ("work", "inside", [
         "The building has a lounge or coworking room, which is useful when you work from home.",
         "There is a lounge or coworking room for days when you want to work outside the apartment."]),
@@ -961,8 +1202,8 @@ BUILDING = {
         "The building dates from {built}."]),
     "street_parking": ("parking", "inside", [
         "The only parking named in the listing is on the street."]),
-    "onsite_parking": ("parking", "inside", [
-        "The listing mentions parking and gives no type or price."]),
+    "unspecified_parking": ("parking", "inside", [
+        "The listing mentions parking without saying what kind."]),
     "plain": ("plain", "inside", [
         "The listing gives few details about the building itself.",
         "Few details about the building itself are published."]),
@@ -1006,15 +1247,7 @@ BUILDING_PEER_CONDITIONS = {"only_pool", "only_garage", "only_doorman", "only_la
 # The icon points of "About the building": POINTS[key] = (icon, topic, text). Plain facts, one wording each, the same
 # words wherever the fact is the same (as on the neighborhood pages). The warning is the main thing to ask.
 POINTS = {
-    "parking_included": ("parking", "parking", "A parking space is included in the rent."),
-    "garage_priced": ("parking", "parking", "Garage parking costs {fee} a month."),
-    "garage_unpriced": ("parking", "parking", "Garage parking, with the fee not published."),
-    "covered_priced": ("parking", "parking", "Covered parking costs {fee} a month."),
-    "covered_unpriced": ("parking", "parking", "Covered parking, with the fee not published."),
-    "lot_priced": ("parking", "parking", "A space in the building's lot costs {fee} a month."),
-    "lot_unpriced": ("parking", "parking", "A parking lot, with the fee not published."),
-    "onsite_unpriced": ("parking", "parking", "Parking is mentioned, with no type or price published."),
-    "street": ("parking", "parking", "The only parking named is on the street."),
+    "parking": ("parking", "parking", "{parking_point}"),   # parking_point(): exactly what the structured fields carry
     "dog_onsite": ("dog", "dogspot", "The building has its own {dogthing}."),
     "dog_no_limit": ("dog", "dog", "Dogs are allowed, with no weight limit."),
     "dog_limit": ("dog", "dog", "Dogs are allowed up to {lb} pounds."),
@@ -1023,6 +1256,10 @@ POINTS = {
     "pool": ("pool", "pool", "The building has a pool."),
     "laundry": ("laundry", "laundry", "Washer and dryer in the apartment."),
     "laundry_plain": ("laundry", "laundry", "Laundry in the apartment."),
+    "laundry_listed_wd": ("laundry", "laundry", "The listing shows a washer and dryer in the apartment."),
+    "laundry_listed_washer": ("laundry", "laundry", "The listing shows a washer in the apartment, with no dryer named."),
+    "laundry_washer": ("laundry", "laundry", "A washer in the apartment, with no dryer named."),
+    "laundry_listed": ("laundry", "laundry", "The listing shows laundry in the apartment."),
     "front_desk": ("key", "doorman", "The front desk is staffed 24 hours a day."),
     "doorman": ("key", "doorman", "The building has a doorman."),
     "concierge24": ("key", "doorman", "A concierge is available 24 hours a day."),
@@ -1043,6 +1280,8 @@ WARNINGS = {                                           # key: (topic, text); the
     "elevator_open": ("elevator", "An elevator is not confirmed for every apartment here, so ask before you tour."),
     "parking_unknown": ("parking", "The listing does not mention parking, so ask where you would park."),
     "parking_street": ("parking", "The only parking named is on the street, so ask about overnight rules."),
+    "parking_kind": ("parking", "The listing mentions parking without saying what kind or what it costs: ask."),
+    "parking_assigned": ("parking", "An assigned space is listed, with its kind and fee not published, so ask."),
     "parking_fee": ("parking", "The {parking} fee is not published, so ask what it costs each month."),
     "pet_rent": ("dogcost", "Pet rent is not published, so ask what a dog adds each month."),
     "fees": ("fees", "Building fees are not published, so ask what is added to the rent."),
@@ -1050,7 +1289,8 @@ WARNINGS = {                                           # key: (topic, text); the
     "overnight": ("street", "The town restricts overnight street parking, so get a parking space in writing."),
     "tour": ("tour", "On the tour, look at the hallways, the elevator and the mail room."),
 }
-PARKING_NAMES = {"garage": "garage", "covered": "covered parking", "lot": "parking lot", "onsite": "parking"}
+PARKING_NAMES = {"garage": "garage", "covered": "covered parking", "lot": "parking lot", "off_street": "off-street parking",
+                 "offsite": "off-site parking", "assigned": "assigned parking", "unspecified": "parking"}
 ANGLE_TOPIC = {"parking": "parking", "pool": "pool", "doorman": "doorman", "laundry": "laundry", "gym": "gym", "work": "lounge",
                "newer": "built", "food": "food", "train": "train", "green": "park"}   # a sentence's angle -> the point it replaces
 
@@ -1265,6 +1505,7 @@ CATCH_BASIS = {
     "confirm:elevator named": lambda u: _what(u) == "elevator" and (_code(u) in ("complex", "select_buildings") or bool(
         re.search(r"elevator is named for (?:this|the) property|select buildings|some (?:of its )?buildings", _why(u), re.I))),
     "confirm:listing": lambda u: _what(u) == "listing",
+    "confirm:listing permit": lambda u: _what(u) == "listing" and bool(re.search(r"occupancy permit|certificate of occupancy", _why(u), re.I)),
     "confirm:listing stale": lambda u: _what(u) == "listing" and (_code(u) == "stale_page" or bool(
         re.search(r"last changed|last updated|last refreshed|stale|months old|availability date is", _why(u), re.I))),
     "confirm:listing lease price": lambda u: _what(u) == "listing" and (_code(u) == "sibling_12" or "12-month price" in str(
@@ -1304,7 +1545,7 @@ CATCH_BASIS = {
 CONFIRM_ORDER = {                                       # the open item -> its families, the most specific first
     "live check": ["confirm:live check"],
     "elevator": ["confirm:elevator named", "confirm:elevator"],
-    "listing": ["confirm:listing lease price", "confirm:listing which building", "confirm:listing one site",
+    "listing": ["confirm:listing permit", "confirm:listing lease price", "confirm:listing which building", "confirm:listing one site",
                 "confirm:listing stale", "confirm:listing"],
     "availability": ["confirm:availability plan", "confirm:availability"],
     "eligibility": ["confirm:eligibility income", "confirm:eligibility age", "confirm:eligibility"],
@@ -1427,17 +1668,23 @@ def sub_keys(u, f):
         cost = "roomy"
     else:
         cost = None
-    k = f["park_kind"]
+    P = f["parking"]
+    k = P["kind"]
+    priced = "priced" if P["fee"] else "unpriced"
     if k is None:
         parking = "unknown"
-    elif f["park_included"]:
-        parking = "included"
+    elif P["included"]:                                  # the included space, named as the kind it is
+        extra = parking_extra(P)
+        if k == "lot" and P["detail"] != "gated_lot":
+            parking = "included_lot_garage" if extra and extra[0] == "garage" else "included_lot"
+        elif k in ("off_street", "assigned", "unspecified"):
+            parking = "included_" + k
+        else:
+            parking = "included"
     elif k == "street":
         parking = "street"
-    elif k == "onsite":
-        parking = "onsite_unpriced" if not f["park_fee"] else "lot_priced"
-    else:
-        parking = f"{k}_{'priced' if f['park_fee'] else 'unpriced'}"
+    else:                                                # garage, covered, lot, off_street, assigned, offsite, unspecified
+        parking = f"{k}_{priced}"
     dog_field = u.get("dog") or {}
     limit = str(dog_field.get("weight_limit_lb") or "").strip().lower()
     if f["dog_open"] == "conflict" or str(dog_field.get("allowed") or "").lower() == "conflicting":
@@ -1464,10 +1711,10 @@ def sub_keys(u, f):
         building = "doorman"
     elif f["desk"] in ("concierge24", "concierge", "attended"):
         building = f["desk"]
-    elif f["pool"] and f["laundry"]:
+    elif f["pool"] and f["laundry_mode"] in ("wd", "in_unit"):
         building = "pool_laundry"
-    elif f["laundry"]:
-        building = "laundry"
+    elif f["laundry"]:                                   # a listing site's appliance list is "the listing shows", a washer a washer
+        building = "laundry" if f["laundry_mode"] in ("wd", "in_unit") else "laundry_" + str(f["laundry_mode"])
     elif f["pool"]:
         building = "pool"
     elif f["gym"]:
@@ -1524,9 +1771,20 @@ def dog_park_words(name):
     return f"the nearest dog park, {name},"
 
 
-def station_words(name):
+STATION_NOUN = {"train": "train station", "subway": "subway station", "PATH": "PATH station", "light rail": "light rail stop"}
+
+
+def station_words(name, kind=None):
+    """How a sentence names the nearest station, by its kind (independent check 5, N3: the nearest station is now of
+    any kind, moments.sat.train_station_kind = train / subway / PATH / light rail): "Newark Penn Station", "the Kew
+    Gardens train station", "the Elmhurst Av subway station", "the Journal Square PATH station", "the Port Imperial
+    light rail stop". A kind the data does not give is a train station, as before."""
     name = str(name).strip()
-    return name if re.search(r"\bstation\b", name, re.I) else f"the {name} train station"
+    kind = str(kind or "train").strip()
+    kind = {"path": "PATH"}.get(kind.lower(), kind.lower())
+    if kind == "train" and re.search(r"\bstation\b", name, re.I):
+        return name
+    return f"the {name} {STATION_NOUN.get(kind, 'station')}"
 
 
 def restaurants_words(n):
@@ -1546,7 +1804,7 @@ def building_warning(b):
     if b["park_kind"] == "street":
         return "parking_street"
     if not b["park_included"] and not b["park_fee"]:
-        return "parking_fee"
+        return {"unspecified": "parking_kind", "assigned": "parking_assigned"}.get(b["park_kind"], "parking_fee")
     if not b["pet_rent_known"] or "pet rent" in b["unknown"]:
         return "pet_rent"
     if "building fees" in b["unknown"]:
@@ -1564,7 +1822,7 @@ def building_conditions(b, peers):
     n = len(peers)
     small = -25 if n == 2 else 0
     out = []
-    fee_asked = building_warning(b) == "parking_fee"    # the warning will say the fee is not published, and to ask
+    fee_asked = building_warning(b) in ("parking_fee", "parking_kind", "parking_assigned")   # the warning will say the fee is not published, and to ask
 
     def add(score, cond, vals=None, **used):
         out.append((score, cond, {"n": n, "w10": WALK_RADIUS, **(vals or {})}, used))
@@ -1586,13 +1844,26 @@ def building_conditions(b, peers):
         add(88 + small, "only_garage", {"gtail": gtail}, peers=n, parking="garage", parking_fee=b["park_fee"])
     if only(b, peers, lambda p: p["desk"] in ("doorman", "doorman24")):     # "a doorman" only where the amenity is one
         add(72 + small, "only_doorman", peers=n, doorman=b["doorman"])
-    if only(b, peers, lambda p: p["laundry"]):
+    if b["laundry_mode"] in ("wd", "in_unit") and only(b, peers, lambda p: p["laundry"]):
         add(68 + small, "only_laundry", peers=n, in_unit_laundry=True)
     if onsite and only(b, peers, lambda p: bool(p["dog_amenity"]) and "on site" in p["dog_amenity"]):
         add(67 + small, "only_dogspot", {"dogthing": onsite}, peers=n, dog_amenities=b["dog_amenity"])
     # ---- inside: on its own
+    P = b["parking"]
+    extra = extra_words(P)
+    xused = {"parking_extra": parking_extra(P)} if extra else {}
     if b["park_included"]:
-        add(65, "parking_included", parking="included")
+        k = b["park_kind"]
+        if k == "lot":
+            add(65, "lot_included", {"lot_space": lot_space(P), "Lot_space": cap_first(lot_space(P)), "extra": extra},
+                parking="included", parking_kind=P["detail"], **xused)
+        elif k == "off_street":
+            add(65, "off_street_included", {"extra": extra}, parking="included", parking_kind=k, **xused)
+        elif k in ("assigned", "unspecified"):
+            add(65, k + "_included", parking="included", parking_kind=k)
+        else:
+            incl = {"garage": "a garage space", "covered": "a covered parking space"}.get(k, "a parking space")
+            add(65, "parking_included", {"incl": incl, "Incl": cap_first(incl)}, parking="included", parking_kind=k)
     if onsite:
         add(58, "dog_onsite", {"dogthing": onsite}, dog_amenities=b["dog_amenity"])
     if b["park_kind"] == "garage" and not b["park_included"]:
@@ -1607,7 +1878,8 @@ def building_conditions(b, peers):
     elif b["desk"] in ("concierge24", "concierge", "attended"):
         add(42, b["desk"], desk=b["desk"])
     if b["laundry"]:
-        add(40, "laundry", in_unit_laundry=True)
+        mode = b["laundry_mode"]                         # "the listing shows" where a listing site's tag is the only source
+        add(40, "laundry" if mode in ("wd", "in_unit") else "laundry_" + str(mode), in_unit_laundry=True, laundry_mode=mode)
     if b["park_kind"] == "covered" and not b["park_included"]:
         add(40, "covered", {"ptail": tail}, parking="covered", parking_fee=b["park_fee"])
     if b["no_weight_limit"] and not b["dog_open"]:
@@ -1615,7 +1887,16 @@ def building_conditions(b, peers):
     if b["built"] and b["built"] >= 2015:
         add(32, "newer", {"built": b["built"]}, year_built=b["built"])
     if b["park_kind"] == "lot" and not b["park_included"]:
-        add(30, "lot", {"ptail": tail}, parking="lot", parking_fee=b["park_fee"])
+        add(30, "lot", {"ptail": tail, "extra": extra}, parking="lot", parking_fee=b["park_fee"], **xused)
+    if b["park_kind"] == "off_street" and not b["park_included"]:
+        add(30, "off_street", {"ptail": tail, "extra": extra}, parking="off_street", parking_fee=b["park_fee"], **xused)
+    if b["park_kind"] == "offsite":                      # no parking at the building: the first thing to know about it
+        if b["park_fee"]:
+            add(60, "offsite", {"where": offsite_where(P), "fee": usd(b["park_fee"])}, parking="offsite", parking_fee=b["park_fee"])
+        elif not fee_asked:
+            add(60, "offsite_unpriced", {"where": offsite_where(P)}, parking="offsite", parking_fee=None)
+    if b["park_kind"] == "assigned" and not b["park_included"] and not fee_asked:
+        add(30, "assigned", parking="assigned")
     if b["lounge"]:
         add(28, "lounge", lounge_or_coworking=True)
     if b["gym"]:
@@ -1624,8 +1905,8 @@ def building_conditions(b, peers):
         add(15, "dated", {"built": b["built"]}, year_built=b["built"])
     if b["park_kind"] == "street":
         add(12, "street_parking", parking="street")
-    if b["park_kind"] == "onsite" and not b["park_included"] and not fee_asked:
-        add(8, "onsite_parking", parking="onsite")
+    if b["park_kind"] == "unspecified" and not b["park_included"] and not fee_asked:
+        add(8, "unspecified_parking", parking="unspecified")
     add(1, "plain")
     # ---- near the building
     if run and b["dog_park_m"] <= 1600 and extreme(b, peers, "dog_park_m", min):
@@ -1639,9 +1920,9 @@ def building_conditions(b, peers):
     if park and b["park_walk"] <= 5:
         add(35, "park", park, park=b["park"], park_walk_min=park["park_mins"].split()[0])
     if b["station"] and b["station_m"] is not None and b["station_m"] <= 800:
-        add(26, "station", {"station": station_words(b["station"]), "Station": cap_first(station_words(b["station"])),
-                            "station_mi": miles(b["station_m"])},
-            train_station=b["station"], train_station_miles=miles(b["station_m"]))
+        st = station_words(b["station"], b["station_kind"])
+        add(26, "station", {"station": st, "Station": cap_first(st), "station_mi": miles(b["station_m"])},
+            train_station=b["station"], train_station_kind=b["station_kind"], train_station_miles=miles(b["station_m"]))
     if b["market"] and b["market_m"] is not None and b["market_m"] <= 500:
         add(24, "errands", {"market": b["market"], "market_mi": miles(b["market_m"])},
             supermarket=b["market"], supermarket_miles=miles(b["market_m"]))
@@ -1663,16 +1944,11 @@ def building_points(b):
     def add(key, vals=None, **used):
         out.append((key, {"w10": WALK_RADIUS, **(vals or {})}, used))
 
-    k = b["park_kind"]
-    if b["park_included"]:
-        add("parking_included", parking="included")
-    elif k == "street":
-        add("street", parking="street")
-    elif k == "onsite":
-        add("onsite_unpriced", parking="onsite")
-    elif k:
-        add(f"{k}_{'priced' if b['park_fee'] else 'unpriced'}", {"fee": usd(b["park_fee"])} if b["park_fee"] else None,
-            parking=k, parking_fee=b["park_fee"])
+    P = b["parking"]
+    if P["kind"]:                                        # one sentence, composed from the structured fields
+        e = parking_extra(P)
+        add("parking", {"parking_point": parking_point(P)}, parking=P["kind"], parking_detail=P["detail"],
+            parking_fee=P["fee"], parking_included=P["included"], **({"parking_extra": list(e)} if e else {}))
     if b["dog_amenity"] and "on site" in b["dog_amenity"]:
         add("dog_onsite", {"dogthing": b["dog_amenity"][2:-8]}, dog_amenities=b["dog_amenity"])
     if not b["dog_open"]:                                # an unsettled dog policy is never stated as a yes
@@ -1690,7 +1966,8 @@ def building_points(b):
         rest.append((key, {"w10": WALK_RADIUS, **(vals or {})}, used))
 
     if b["laundry"]:
-        more("laundry" if b["laundry_wd"] else "laundry_plain", in_unit_laundry=True)
+        mode = b["laundry_mode"]
+        more({"wd": "laundry", "in_unit": "laundry_plain"}.get(mode, "laundry_" + str(mode)), in_unit_laundry=True, laundry_mode=mode)
     if b["pool"]:
         more("pool", pool=True)
     if b["doorman"]:
@@ -1710,8 +1987,8 @@ def building_points(b):
     if b["restaurants"] is not None and b["restaurants"] >= 4:
         more("food", {"Rest_count": restaurants_words(b["restaurants"])}, restaurants_800m=int(b["restaurants"]))
     if b["station"] and b["station_m"] is not None and b["station_m"] <= 1200:
-        more("train", {"Station": cap_first(station_words(b["station"])), "station_mi": miles(b["station_m"])}, train_station=b["station"],
-             train_station_miles=miles(b["station_m"]))
+        more("train", {"Station": cap_first(station_words(b["station"], b["station_kind"])), "station_mi": miles(b["station_m"])},
+             train_station=b["station"], train_station_kind=b["station_kind"], train_station_miles=miles(b["station_m"]))
     if b["built"]:
         more("built", {"built": b["built"]}, year_built=b["built"])
     last = []

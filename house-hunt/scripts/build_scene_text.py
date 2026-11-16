@@ -113,6 +113,11 @@ YEAR_PAGE = {
     "far_names": ("far_names", "str"), "close_drive_hi": ("close_drive_hi", "int"), "far_drive": ("far_drive", "int"),
     "far_toll": ("far_toll", "int"), "tollfree_share": ("tollfree_share", "pct"),
     "tollfree_areas": ("tollfree_areas", "str"), "toll_areas": ("toll_areas", "str"), "close_toll": ("close_toll", "int"),
+    # the lowest and highest toll over the experience's apartments, and over each half of a split (N9)
+    "u_toll_lo": ("toll_lo", "int"), "u_toll_hi": ("toll_hi", "int"), "u_toll_spread": ("toll_spread", "int"),
+    "far_toll_lo": ("far_toll_lo", "int"), "far_toll_hi": ("far_toll_hi", "int"), "far_toll_spread": ("far_toll_spread", "int"),
+    "close_toll_lo": ("close_toll_lo", "int"), "close_toll_hi": ("close_toll_hi", "int"),
+    "close_toll_spread": ("close_toll_spread", "int"),
 }
 # alias: (column of site/data.json#units, aggregation over the year's shown units, usual rounding)
 YEAR_UNITS = {
@@ -161,9 +166,14 @@ HOOD_BLDGS = {
     "own_parking": ("own_parking", "share", "pct"), "dog_any": ("dog_amenity_any", "share", "pct"),
     "rest_lo": ("restaurants_800m", "min", "int"), "rest_hi": ("restaurants_800m", "max", "int"),
     "nb": ("building_id", "count", "int"),                # buildings shown here: 0 where nothing is shown
+    # the kind of the nearest station (train / subway / PATH / light rail; "mixed" where the shown buildings differ),
+    # and the share of the shown buildings with a pet spa or dog wash (independent check 5: N3, N16)
+    "stationkind": ("train_station_kind", "uniform", "str"), "pet_spa": ("pet_spa", "share", "pct"),
 }
 # ... and these are the neighborhood's figure strip, read from the fields the strip itself reads (never recomputed)
 HOOD_STRIP = {"drive": ("drive_min", "int"), "transit": ("transit_min", "int"), "b_toll": ("toll_round_trip", "int"),
+              # the lowest and highest toll among the buildings shown, and the gap between them (N9)
+              "b_toll_lo": ("toll_lo", "int"), "b_toll_hi": ("toll_hi", "int"), "toll_spread": ("toll_spread", "int"),
               "sqft": ("sqft_median", "r10"), "s_n": ("shown", "int"), "s_bldgs": ("buildings", "int"),
               "in_queens": ("in_queens", "int")}
 # The same for an experience: figures over the units shown in it (m_ + alias used to be the median neighborhood).
@@ -183,7 +193,7 @@ TOKEN = re.compile(r"\{(!?)(?:@([a-z]{2}:[a-z0-9\-]+)\s+)?([a-z_0-9]+)(?::([a-z0
 # Scope words (D16). A door-distance figure in a neighborhood with several shown buildings is the median building's,
 # so the text says whose door it is: {door} prints "from the door" where one building is shown and "from most
 # buildings here" where several are, and the first {w10} of a lead or a scene gains "of most buildings here".
-OWN_ALIASES = ("own_dog", "own_garage", "own_parking", "dog_any", "nb")
+OWN_ALIASES = ("own_dog", "own_garage", "own_parking", "dog_any", "nb", "pet_spa")
 # {owndog} and {owngarage}: what the shown buildings supply themselves (D6), in fixed words that follow the count of
 # buildings. They print nothing-and-fail (so sit inside [[ ]]) when no shown building has it.
 OWN_WORDS = {
@@ -194,6 +204,29 @@ OWN_WORDS = {
 # {eachb} / {everyb}: "each building" / "every building" where several are shown (or none: the text is then about
 # the area), "the building" where one is: advice to "ask each building" above a single building reads as an error.
 BUILDING_WORDS = {"eachb": "each building", "everyb": "every building"}
+# WORD TOKENS (independent check 5). Each prints fixed words chosen by a field, and records the test it rests on.
+# {thestation} {astation} {thetrain}: the nearest station named by its kind (N3). The kind is the one every shown
+#   building shares; where they differ the words are neutral ("the nearest station"). A neighborhood with nothing
+#   shown measures commuter rail (lifestyle_groups.csv), so it is a train station.
+STATION_TOKENS = {
+    "thestation": {"train": "the train station", "subway": "the subway", "PATH": "PATH", "light rail": "the light rail stop",
+                   "mixed": "the nearest station"},
+    "astation": {"train": "a train station", "subway": "a subway station", "PATH": "a PATH station",
+                 "light rail": "a light rail stop", "mixed": "a station"},
+    "thetrain": {"train": "the train", "subway": "the subway", "PATH": "PATH", "light rail": "the light rail",
+                 "mixed": "a station"},
+}
+# {fewbars} {fewcafes} {fewrest}: "few bars" where there are some and "no bars" where there are none (N15: "Few bars
+#   are within a 10-minute walk" stood beside "There are no bars within a 10-minute walk" on Jamaica's page).
+FEW_TOKENS = {"fewbars": ("bars", "bars"), "fewcafes": ("cafes", "cafés"), "fewrest": ("rest", "restaurants")}
+# {tollcost} {tollshort}: "about $24 round trip with a New York E-ZPass", or, where the tolls of the buildings shown
+#   differ by more than TOLL_SPREAD dollars, "about $24 to $43 round trip with a New York E-ZPass, depending on the
+#   building" (N9). {tollshort} leaves the last clause off, for an icon point.
+TOLL_TOKENS = ("tollcost", "tollshort")
+TOLL_WORDS = "round trip with a New York E-ZPass"
+WORD_TOKENS = set(STATION_TOKENS) | set(FEW_TOKENS) | set(TOLL_TOKENS)
+CONTINUES = re.compile(r"\btoo(?=[,.;!]|$)|\b(?:also|as well)\b|^(?:And|But)\b")   # a sentence that leans on the one before it
+DROP_MARK = "\x01"                                     # left where an optional sentence was dropped
 SCOPE_ONE, SCOPE_MANY = "from the door", "from most buildings here"
 W10_MANY = " of most buildings here"
 
@@ -224,6 +257,61 @@ def own_words(alias, ctx):
         evs.append({"field": f, "value": share, "source_file": PAGE_B, "row": {"hood_id": ctx["id"]}, "agg": agg,
                     "holds_if": ["<", "1"]})
     return words[key], evs
+
+
+def word_token(alias, ctx):
+    """-> (words or None, evidence items) for a WORD_TOKENS alias in a neighborhood's text. None = nothing to say
+    (the value is missing): inside [[ ]] the stretch is then dropped."""
+    if ctx["kind"] != "hood":
+        raise ValueError(f"{ctx['id']}: {{{alias}}} is for neighborhood text")
+    row, shown = {"hood_id": ctx["id"]}, ctx["id"] in C.shown_hoods()
+    if alias in STATION_TOKENS:
+        if not shown:
+            return STATION_TOKENS[alias]["train"], []
+        kind = C.lookup(PAGE_B, "train_station_kind", row, "uniform")
+        if kind is None:
+            return None, []
+        return STATION_TOKENS[alias][kind], [{"field": "train_station_kind", "value": kind, "source_file": PAGE_B, "row": row,
+                                              "agg": "uniform", "holds_if": ["==", kind]}]
+    if alias in FEW_TOKENS:
+        src_alias, noun = FEW_TOKENS[alias]
+        src, field, r, agg, _ = resolve(src_alias, ctx)
+        value = C.lookup(src, field, r, agg)
+        if C.is_missing(value):
+            return None, []
+        none = C.half_up(float(value)) == 0
+        ev = {"field": field, "value": value, "source_file": src, "row": r, "holds_if": ["<", "0.5"] if none else [">=", "0.5"]}
+        if agg:
+            ev["agg"] = agg
+        return ("no " if none else "few ") + noun, [ev]
+    if alias in TOLL_TOKENS:
+        def item(a):
+            src, field, r, agg, how = resolve(a, ctx)
+            value = C.lookup(src, field, r, agg)
+            ev = {"field": field, "value": value, "source_file": src, "row": r}
+            if agg:
+                ev["agg"] = agg
+            return value, ev, how
+        mid, ev, how = item("b_toll")
+        if C.is_missing(mid):
+            return None, []
+        spread = C.lookup(PAGE_H, "toll_spread", row) if shown else None
+        if not C.is_missing(spread) and spread > C.TOLL_SPREAD:
+            (lo, elo, hlo), (hi, ehi, hhi) = item("b_toll_lo"), item("b_toll_hi")
+            a, b = C.transform(lo, hlo), C.transform(hi, hhi)
+            elo.update({"transform": hlo, "shown": [a]})
+            ehi.update({"transform": hhi, "shown": [b]})
+            test = {"field": "toll_spread", "value": spread, "source_file": PAGE_H, "row": row, "holds_if": [">", str(C.TOLL_SPREAD)]}
+            words = (f"up to about ${b} {TOLL_WORDS}" if a == "0" else f"about ${a} to ${b} {TOLL_WORDS}") + \
+                (", depending on the building" if alias == "tollcost" else "")
+            return words, [elo, ehi, test]
+        ev.update({"transform": how, "shown": [C.transform(mid, how)]})
+        evs = [ev]
+        if shown:
+            evs.append({"field": "toll_spread", "value": spread, "source_file": PAGE_H, "row": row,
+                        "holds_if": ["<=", str(C.TOLL_SPREAD)]})
+        return f"about ${C.transform(mid, how)} {TOLL_WORDS}", evs
+    raise KeyError(alias)
 
 
 def at_ctx(at, ctx):
@@ -307,6 +395,8 @@ DROPPED = []
 
 def drop_optional(raw, ctx):
     """[[ ... ]] stays only when every value inside it is present and every hidden test inside it holds."""
+    gone = ""
+
     def keep(m):
         for t in TOKEN.finditer(m.group(1)):
             hidden, at, alias, _, op, operand = t.groups()
@@ -314,20 +404,33 @@ def drop_optional(raw, ctx):
                 continue
             if alias in OWN_WORDS:
                 if own_words(alias, ctx)[0] is None:
-                    return ""
+                    return gone
+                continue
+            if alias in WORD_TOKENS:
+                if word_token(alias, ctx)[0] is None:
+                    return gone
                 continue
             try:
                 src, field, row, agg, _ = resolve(alias, at_ctx(at, ctx))
                 value = C.lookup(src, field, row, agg)
             except LookupError:
-                return ""
+                return gone
             if hidden and op:
                 if not C.holds(value, [op] if op in ("missing", "present") else [op, operand.strip()]):
-                    return ""
+                    return gone
             elif C.is_missing(value):
-                return ""
+                return gone
         return m.group(1)
-    return re.sub(r"\[\[(.*?)\]\]", keep, raw)
+    out, pos = [], 0
+    for m in re.finditer(r"\[\[(.*?)\]\]", raw):
+        # A dropped stretch that was a whole sentence of its own (it ends on a full stop and is not one half of an
+        # either/or pair) leaves a mark, so render() can refuse a following sentence that leans on it ("... too").
+        alone = m.group(1).rstrip().endswith((".", "!")) and not raw[m.end():].startswith("[[") and \
+            not raw[:m.start()].endswith("]]")
+        gone = DROP_MARK if alone else ""
+        out.append(raw[pos:m.start()] + keep(m))
+        pos = m.end()
+    return "".join(out) + raw[pos:]
 
 
 def render(raw, ctx, evidence, scope=False):
@@ -343,8 +446,14 @@ def render(raw, ctx, evidence, scope=False):
         held.append(m.group(0))
         return f"\x00{len(held) - 1}\x00"
 
+    after_drop = False                                # the sentence before this one was dropped
     for sent in C.sentences(TOKEN.sub(hold, raw)):
         sent = re.sub(r"\x00(\d+)\x00", lambda m: held[int(m.group(1))], sent)
+        if DROP_MARK in sent:
+            after_drop = True
+            sent = sent.replace(DROP_MARK, "").strip()
+            if not sent:
+                continue
         pending = []
 
         def sub(m):
@@ -369,6 +478,12 @@ def render(raw, ctx, evidence, scope=False):
                 words, evs = own_words(alias, ctx)
                 if words is None:
                     raise ValueError(f"{ctx['id']}: {{{alias}}} has nothing to say here; put it inside [[ ]]")
+                pending.extend(evs)
+                return words
+            if alias in WORD_TOKENS:
+                words, evs = word_token(alias, ctx)
+                if words is None:
+                    raise ValueError(f"{ctx['id']}: {{{alias}}} has no value here; put it inside [[ ]]")
                 pending.extend(evs)
                 return words
             if alias == "door":                           # whose door: the building's, or most buildings'
@@ -410,11 +525,19 @@ def render(raw, ctx, evidence, scope=False):
             text = TOKEN.sub(sub, sent)
         except Dropped as e:                              # the sentence is no longer true of the shown places:
             DROPPED.append(str(e))                        # it is left out (and listed), not printed
+            after_drop = True
             continue
         if "{" in text or "}" in text:
             raise ValueError(f"{ctx['id']}: unparsed token in: {text}")
         text = re.sub(r"\s+([.,;])", r"\1", re.sub(r"\s{2,}", " ", text)).strip()
         text = agree(text)
+        # When an optional sentence drops, the one after it must still stand alone (N16: "9 cafés are close too, ..."
+        # opened a paragraph). A sentence that leans on a dropped one stops the build: rewrite it.
+        if (after_drop or not out) and text and CONTINUES.search(text):
+            raise ValueError(f"{ctx['id']}: a sentence that leans on the one before it (\"too\", \"also\", \"as well\", "
+                             f"\"And\", \"But\") {'follows a dropped sentence' if after_drop else 'opens the text'}; "
+                             f"it must stand alone: {text[:90]}")
+        after_drop = False
         for ev in pending:
             evidence.append({"claim": text, **ev})
         out.append(text)

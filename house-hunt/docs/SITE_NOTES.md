@@ -736,3 +736,102 @@ no sideways scroll; the check-4 items above.
 - `check_published_text.py --template` still lists one line: the constant that holds "staying in Queens" (used only
   for places outside Queens).
 - The first-screen tiles are about 60 px taller (two prices): 360 to 395 px at 390.
+
+## UI pass 9: fixes after independent check 5
+
+(2026-11-16. Template side of `docs/INDEPENDENT_CHECK_5.md` (N1 to N29, the D items re-tested there) and of "What the page
+agent must do" in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_5.md`. Files: `site/index.html`, `scripts/build_site.py`,
+`scripts/site_walkthrough_test.js`, `site/screens/p9-*.png`.)
+
+### One star, one meaning (N2)
+
+- **The star (\*) means only "one thing to confirm before you sign"**: an open gate fact (`confirm.asterisk`: elevator,
+  dogs, listing, availability, eligibility). `nToConfirm(U)` and `HL.confirm` count `confs(U)` and nothing else. The line
+  at the top of a building ("See the 8 apartments · 1 with something to confirm"), the star on a building card (only when
+  every apartment there has an open item), the star on an apartment row, "N\* to confirm" in My list, the sort "Fewest
+  things to confirm", the compare row and the filter "Nothing left to confirm · no star (\*)" all use that count.
+- **A rent with a special offer carries a small "offer" tag** (`offerTag`, class `otag`: a blue-grey outlined pill beside
+  the rent figure, never a star). It appears wherever the rent does: building header and cards, apartment rows, My list,
+  compare (head and cell), avoid cards, "worth a call". In running text the rent reads "Rent $1,650 (offer)". A rent
+  already worded "with the current offer" (a price after free months) has no second mark. The line under a card or a
+  row that says what the offer means starts "Offer:" (`.offl`), not "\*".
+- A price for a lease that is not 12 months keeps its words beside the rent ("on a 15-month lease"), as before.
+- Compare: the row is "\* Still to confirm" only when one of the apartments has an open item; with only things to ask it
+  is "Good to know before you call", with no star, and a cell reads "Nothing to confirm".
+- The tutorial's fifth card says both: "A star (\*) means one thing is still to confirm before you sign. … An offer tag
+  just means a special offer.", and its drawing shows a real rent with the tag. The footer says the same; the data note
+  "An asterisk on the rent means a special offer applies" is no longer printed (`renderFoot`).
+- Screenshots: `p9-390-62-city-trust-star-and-offer.png`, `p9-390-63-city-trust-apartments.png` (and the `1280` pair),
+  `p9-390-02-tutorial-star-and-offer.png`, `p9-390-40-my-list.png`, `p9-390-42-compare-three.png`.
+
+### Lease wording (N7)
+
+- Two lease lengths are kept apart: the lease the listed price is quoted for (`cost_check.lease_term_months`, or
+  `rent.price_lease_months` if the data ever sends it: `leaseMonths`) and the lease an offer asks for
+  (`rent.lease_months`: `offerLeaseMonths`, shown only in "The offer in full"). The words beside a rent read the first.
+- Which price the rent is comes from the rent line's `code` (`rent_12_month`, `rent_net_effective`, `rent_listed`); the
+  line's name is read only when there is no code. Nothing is worked out by arithmetic.
+- Where the data gives no lease for the price (an offer "on an 18-month lease" and nothing about the price), the rent
+  carries no lease words; the offer's own words are in "The offer in full".
+
+### Parking (N1, D18)
+
+- `parkInfo(U)` reads `parking.kind` (the space she would use), `kind_words`, `included_kind`, `optional_kinds[]`
+  (`kind`, `fee`), `fee_kind`, `kinds` and `summary`. The rank and the stored type string never name a kind.
+- The sentence (car row, "Night", "Coming home") is `parking.summary` as the data words it. Without a summary it is built
+  from the fields: "Free open lot; garage spaces are extra, price not published", "Garage, $150 a month", "Open lot,
+  included", "Street parking only", "Parking not published, ask". With only the old fields (`kinds`, `fee`,
+  `garage_is_optional_extra`, `fee_note`) the same builder runs; "garage" needs a garage among the kinds.
+- Chip, card, compare cell: the short word of `parking.kind` (`PK_SHORT`: Garage, Covered, Open lot, Off-street, Assigned
+  space, Off-site, Street, Parking unclear) and "included" / "$100 a month" / "price: ask", plus "; garage extra".
+- The night rating, the compare order and the filters use the kind she would use (`parkRank`). "Garage or covered" keeps
+  an apartment whose `parking.kind` is a garage, a gated lot or covered; "Parking at the building" leaves out the street
+  and an off-site deck.
+- "The listing says: …" prints `parking.type` without our own "kind:" head, and not at all when it reads like a note of ours.
+
+### The other items
+
+| Item | What changed |
+|---|---|
+| N10 | "Available now" is a listing that says so or one dated on or before the day the data was built (`AS_OF` from `meta.as_of` or the date of `meta.built_at`; `availNow`). Filter, row, My list, sort and the building facts use it |
+| N12 | The Queens scale said "All in" because the label map was built before the name existed. `mLabel` now returns "Total with utilities and fees". No "all in" label is left in the template |
+| N3 | "At a glance": an item that names its kind is printed as sent; otherwise the nearest station comes from `shown_figures.train_station_kind` / `train_station` / `train_station_m` ("8 min walk · to PATH (Journal Square) from most buildings here"); with neither, the words are "a commuter train station". Building rows: "PATH (Journal Square) is a 2-minute walk away." (`SAY.train`) |
+| N17 | `nOf()` and `agree()`: "1 of the 4 buildings here has its own dog area". Used for the template's own count sentences and applied to at-a-glance labels |
+| N19 | Evidence: a record (`kind: "record"`) is printed as our sentence ("On record: 23 elevator complaints …"), without quotation marks, with `window_words`; a raw figure ("per 100 units", "percentile") is never printed (only the link stays). "Why to avoid it" prints `avoid_points` only, never `avoid_reasons`; "Gives us pause" prints `pause_points` only. A quote dated to a month reads "Oct 2026" |
+| N4, N6, one-time costs | They arrive as disclosures and are listed under "Good to know before you call" like the others. A washer and dryer known only from a listing site's feature list (`in_unit_laundry_basis`) read "washer-dryer listed, to confirm"; a washer with no dryer named reads "washer in the apartment". The filter "A washer and dryer in the apartment" needs both and says how many rest on a listing site |
+| Toll range | `toll_round_trip_range` sits small beneath a neighborhood's toll; an experience shows the range of its apartments |
+| N14 | A floor read from the apartment number is "likely floor 7" on the row and "likely on floor 7 (read from the apartment number)" in the sentence |
+| N18 | "(see Connecticut statewide row)" is cut from a rule's text |
+| N20 | A question followed by a short remark is the same question: it is listed once |
+| N21 | Compare, three columns on a phone: "Apartment" sits whole on its own line above the number; names wrap at spaces |
+| N22 | "A lease is usually a year. Where a rent is for a longer or shorter lease, it says so." (first screen, tour list) |
+| N23 | A rating read on another site names the review site in plain text and links "as shown on apartmenthomeliving.com" |
+| D25 | "none on record for this town: ask the building" in place of "not found, ask" |
+| D27 | Prose sentences with "safest" are left out of the open text: the badge "Among the safest on the list" says it once |
+| D28 | A card's sentence is shown whole (up to six lines) and no longer cut after two |
+| Tolls | A crossing used both ways is listed once: "Bronx-Whitestone Bridge (both ways)" |
+
+`scripts/build_site.py`: `parking.fee_note` is kept (read by the fallback); `evidence.items[].excerpt_internal`,
+`parking.included_words_internal`, `parking.kinds_basis`, `parking.included_basis` and `parking.reviewed_note` are left out
+of the built page; `HOUSE_HUNT_SITE_DIR` builds from a frozen copy of `site/` (used while the pipeline rewrote `data.json`).
+
+### Tests added (`scripts/site_walkthrough_test.js`, at 390, 320 and 1280)
+
+All 202 building pages: the header count, each row's star, "To confirm" line, "Still to confirm" box and offer tag against
+`confirm.asterisk` and the rent fields; no star on any price; "likely floor"; "available now" against the build date;
+"Garage" in the header only when `parking.kind` is a garage; the car row equals `parking.summary`; the Queens scale names
+the total. All 83 neighborhood and experience pages: building-card stars and offer lines, at-a-glance grammar and station,
+avoid cards and records, toll ranges, the footer. Lease wording on every apartment against `code` and
+`cost_check.lease_term_months`, and the four apartments of N7. The filters "Nothing left to confirm", "Available now",
+"Garage or covered" and "washer and dryer" against the test's own reading. My list and compare counts. Parking sentences
+for the new and the old field shapes; toll range, station wording, agreement, laundry basis; no question twice in any
+tour list.
+
+### Left
+
+- Text that comes from the data and still reads wrong is the text agent's: N9 (Newark tolls), N15, N16, N27, the "Car
+  crime: …" sentences in `avoid_points` (N13), and the two lines `check_published_text.py` lists.
+- The `train_station` item of `at_a_glance` had no kind when this pass ended; the page fills it from `shown_figures`.
+- `pause_points` about a safety incident or car crime sit in "Gives us pause", inside the closed row "Compared to …".
+- "What that feels like" in compare still multiplies a monthly difference by 12 whatever the lease length.
+- N24, N25, N26, N28, N29, D29 are data.
