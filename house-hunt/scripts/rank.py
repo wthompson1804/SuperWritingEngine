@@ -132,14 +132,12 @@ def showable_by_open_items(open_items):
     return open_items <= 1
 
 
-def in_unit_laundry(laundry_text, in_unit_col):
-    """In-unit laundry: the amenities column says yes, or the listing's laundry text says in unit. The old test looked for
-    the word "yes" anywhere in the two fields joined, so "laundry: yes" with the amenities column saying on_site_only
-    (a shared laundry room) scored as a washer in the apartment, as did "... (not in unit)"."""
-    txt, col = laundry_text.fillna("").astype(str).str.lower(), in_unit_col.fillna("").astype(str).str.lower().str.strip()
-    yes = col.str.startswith("yes") | txt.str.contains(r"in[ _-]unit|washer(?: and |/|, | & )dryer in")
-    no = col.str.contains(r"on_site_only|^no\b") | txt.str.contains(r"not in[ _-]unit|no in[ _-]unit")
-    return yes & ~no
+def in_unit_laundry(in_unit_col):
+    """In-unit laundry scores only where the master says `in_unit_laundry = yes`: a source says the washer / dryer or
+    the laundry is IN the apartment and none says it is not (parsers.laundry_facts, applied to every source's words in
+    scripts/build_master.py). 'on_site_only' (a shared room), 'select_apartments' (only some apartments have it), and
+    hookups alone do not score. The ranking used to re-read the two text fields itself."""
+    return in_unit_col.fillna("").astype(str).str.strip().str.lower().eq("yes")
 
 
 SETTLED_BY_PHONE = "confirmed_by_phone"
@@ -642,7 +640,7 @@ def main():
     has_doorman, doorman24 = doorman.ne(""), doorman.eq("24h")
     doorman_known = s("doorman_text").str.strip().ne("")
     controlled = has("controlled_access") | s("doorman_text").map(parsers.virtual_doorman).astype(bool)
-    laundry = (s("laundry") + " " + a("in_unit_laundry")).str.lower()
+    laundry = (s("laundry") + " " + s("laundry_all_sources") + " " + a("in_unit_laundry")).str.lower()      # any source at all: laundry is "known"
     near_car = n("near_veh_theft_24m") + n("near_theft_from_veh_24m").fillna(0)
 
     # points for building features (unknown = a quarter of the points)
@@ -650,7 +648,7 @@ def main():
         return np.where(yes, w, np.where(known, 0.0, 0.25 * w))
     security = (pts(doorman24, doorman_known, 3) + pts(has_doorman & ~doorman24, doorman_known, 2)
                 + pts(controlled, False, 2.5) + pts(has("package_room"), False, 1))
-    comfort = (pts(in_unit_laundry(s("laundry"), s("in_unit_laundry")), laundry.str.strip().ne(""), 2.5)
+    comfort = (pts(in_unit_laundry(s("in_unit_laundry")), laundry.str.strip().ne(""), 2.5)
                + pts(has("gym"), False, 1) + pts(has("roof_deck_or_outdoor_space"), False, 1) + pts(has("balcony_some_units"), False, 0.5)
                + pts(has("coworking_or_lounge"), False, 1.5) + pts(s("elevator_basis").isin([SETTLED_BY_PHONE, "confirmed", "amenities_page", "official_record", "stated"]), True, 1))
     year = pd.to_numeric(a("year_built").replace("", np.nan), errors="coerce").fillna(n("pluto_year"))

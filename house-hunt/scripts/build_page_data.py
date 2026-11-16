@@ -40,16 +40,65 @@ def j(x, default):
 # Queens (that scale made Sunday "weak" almost everywhere, which says nothing). They are set so that across the shown
 # places no level holds more than about 60 percent for any moment; scripts/test_rules.py --data checks that.
 MOMENT_THRESHOLDS = {
-    "wake": {"measure": "minutes on foot to the nearest green space (park_walk_min)", "strong": "3 minutes or less", "mixed": "over 3 and up to 10 minutes", "weak": "more than 10 minutes"},
+    "wake": {"measure": "minutes on foot to the nearest green space", "strong": "3 minutes or less", "mixed": "over 3 and up to 10 minutes", "weak": "more than 10 minutes"},
     "work": {"measure": "room for a work day at home: size and a separate bedroom", "strong": "a separate bedroom and 700 sq ft or more",
              "mixed": "everything between", "weak": "under 550 sq ft, or a studio under 600 sq ft", "null": "size not published"},
     "after": {"measure": "restaurants and bars within a 10-minute walk (800 m)", "strong": "15 or more restaurants and at least one bar", "mixed": "4 or more restaurants", "weak": "fewer than 4 restaurants"},
-    "night": {"measure": "where the car sleeps", "strong": "a garage or gated parking at the building AND a front desk or controlled entry is stated",
+    "night": {"measure": "where you would park overnight", "strong": "a garage or gated parking at the building, and a front desk or controlled entry is stated",
               "mixed": "a garage with no stated front desk or controlled entry, covered parking, a lot, off-site parking, or parking not known",
               "weak": "street parking only, or the town restricts overnight street parking and no space at the building is confirmed"},
     "sat": {"measure": "bars and restaurants within 1,600 m", "strong": "5 or more bars and 30 or more restaurants", "mixed": "everything between", "weak": "at most 1 bar and fewer than 15 restaurants"},
-    "sun": {"measure": "drive to her parents, one way, free-flow estimate (drive_min)", "strong": "30 minutes or less", "mixed": "31 to 60 minutes", "weak": "more than 60 minutes"},
+    "sun": {"measure": "the drive to her parents, one way, with no traffic", "strong": "30 minutes or less", "mixed": "31 to 60 minutes", "weak": "more than 60 minutes"},
 }
+
+
+# Notes for the reader (they may be shown behind "See how we got this"): plain sentences, no field names, no working
+# vocabulary. "Total with utilities and fees" is the page's name for the all-in figure. scripts/test_rules.py checks them.
+META_NOTES = [
+    "Drive times are estimates with no traffic.",
+    parsers.TOLL_NOTE,
+    "An asterisk on the rent means a special offer applies. The rent terms say what it is.",
+    "Where a floor was read from the apartment number, the listing page does not state it. Confirm it on the tour.",
+    "For a few towns no police agency publishes a crime rate for the town alone. There, the rule that nothing shown has more crime than Jamaica could not be tested, and the page says so.",
+    "A parking fee counts as published only when the building's own page or a listing states it. A figure from a resident's review is an estimate and is labelled as one.",
+    "An apartment with an asterisk has one thing still to confirm: the elevator, whether dogs are allowed, or whether the listing is real and available. The text beside it says what and why.",
+    "Some things are worth knowing and never remove an apartment: a floor that is not published, a price quoted for a lease that is not 12 months, a cost that could pass $3,000 once parking and fees are known, a price that already has free months averaged in (only where the listing says so), a special offer (ask what a normal month costs), a condo rented by its owner, a dog weight limit with no number, and a town rule that restricts overnight street parking where the building's parking is not confirmed.",
+    "Pet rent is always counted. Where a building does not publish it, the cost uses an estimate, the median of the known pet rents in the same state, and it is marked as an estimate.",
+    "Where a building does not publish its parking fee or its required fees, a second figure adds the median of the known ones. It is shown beside the total with utilities and fees and is never used for the $3,000 limit.",
+    "Experience and neighborhood figures (medians and ranges) are computed over the apartments shown on the page. A neighborhood's distances from the door are those of its median building.",
+    "Where an elevator is named only on a listing site, in its amenity list or its text, it has not been confirmed on the building's own page.",
+    "Each apartment carries the date its price was read.",
+    "Cost lines that are not published add nothing to the total with utilities and fees. Each receipt names them as not published.",
+]
+
+SHOWN_FIGURE_KEYS = ["restaurants_800m", "bars_800m", "cafes_800m", "park_ha_800m", "park_walk_min", "open_water_m", "dog_park_m", "supermarket_m",
+                     "train_station_m", "motorway_m", "restaurants_1600m", "bars_1600m"]
+
+
+def shown_figures(s, bl):
+    """A neighborhood's door-distance figures over the BUILDINGS shown in it: one vote per building (the first shown
+    apartment of the building that has the figure), then the median over the buildings. The written text and "At a
+    glance" are computed the same way (scripts/check_scene_text.py: _building_table, glance), so the two agree. They
+    used to be medians over the shown APARTMENTS, which let one building with eight apartments outvote seven buildings
+    with one each. `s`: the shown rows of the neighborhood; `bl`: its buildings as the page data carries them.
+
+    buildings_with_own_dog_area counts only a dog park or dog run on the property (amenities.dog_park_or_run). A pet
+    spa or dog wash, and a dog amenity of unnamed kind, are counted apart."""
+    order = s.sort_values("shown_rank") if "shown_rank" in s else s
+    out = {}
+    for k in SHOWN_FIGURE_KEYS:
+        if k not in order:
+            out[k] = None
+            continue
+        per_building = pd.to_numeric(order[k], errors="coerce").groupby(order.building_id).first().dropna()
+        out[k] = v(float(per_building.median())) if len(per_building) else None
+    am = [(b_.get("amenities") or {}) for b_ in bl]
+    out.update({"figures_over": "shown buildings (the median building)",
+                "buildings_with_own_dog_area": int(sum(1 for a in am if a.get("dog_park_or_run"))),
+                "buildings_with_pet_spa_or_wash": int(sum(1 for a in am if a.get("pet_spa_or_wash"))),
+                "buildings_with_unspecified_dog_amenity": int(sum(1 for a in am if a.get("dog_amenity_unspecified"))),
+                "buildings": len(bl)})
+    return out
 
 
 def moment_ratings(m, parking_rank=None, offsite=False, secured=False, overnight_restricted=False, sqft=None, beds=None):
@@ -609,6 +658,16 @@ def unit_core(r, g, qs):
                       "doorman_text": g("doorman_text"), "controlled_access": g("controlled_access"),
                       "gym": g("gym"), "in_unit_laundry": g("in_unit_laundry"), "laundry": g("laundry"), "package_room": g("package_room"),
                       "outdoor_space": g("outdoor_space"), "lounge_or_coworking": g("lounge_or_coworking"), "dog_amenities": g("dog_amenities"),
+                      # 2026-11-16: laundry and dog amenities as structured facts, each from every source's own words
+                      # (parsers.laundry_facts, parsers.dog_amenity_facts). in_unit_laundry is 'yes' only where a source says
+                      # the washer / dryer is IN the apartment ('on_site_only' and 'select_apartments' are not yes); hookups
+                      # and a shared laundry room are their own flags; `laundry` is a plain label that agrees with them.
+                      # dog_park_or_run: a dog park, dog run, bark park or fenced dog area ON the property. A pet spa or
+                      # dog wash is pet_spa_or_wash. dog_amenity_unspecified: a source says "yes" and none says what.
+                      # `dog_amenities` stays as the label 'dog run; dog park; pet spa; dog wash' (or 'yes' when unspecified).
+                      "washer_dryer_hookups": g("washer_dryer_hookups") == "yes", "on_site_laundry": g("on_site_laundry") == "yes",
+                      "dog_park_or_run": g("dog_park_or_run") == "yes", "pet_spa_or_wash": g("pet_spa_or_wash") == "yes",
+                      "dog_amenity_unspecified": g("dog_amenity_unspecified") == "yes",
                       "year_built": g("year_built"), "building_floors": g("building_floors"),
                       # D19: 'at_least' = no page gives the whole building's height; this is the highest floor a page states for an apartment here
                       "building_floors_at_least": g("building_floors_basis") == "at_least",
@@ -801,13 +860,11 @@ def main():
                                  "subcity_estimate": sub_crime.get(hid) if hid in PARENTS else None},
                       "parent_id": PARENTS[hid]["parent_id"] if hid in PARENTS else None, "parent_name": PARENTS[hid]["parent_name"] if hid in PARENTS else None,
                       "short_name": PARENTS[hid]["name"] if hid in PARENTS else None,
-                      # independent check 4, D16 / D6: the same measures over the apartments SHOWN here (medians; the
-                      # `traits` below describe the wider area profile the experiences were fitted on), and how many of
-                      # the shown buildings have a dog park or dog run of their own
-                      "shown_figures": {**{k: num(k) for k in ["restaurants_800m", "bars_800m", "cafes_800m", "park_ha_800m", "park_walk_min", "open_water_m", "dog_park_m", "supermarket_m",
-                                                                "train_station_m", "motorway_m", "restaurants_1600m", "bars_1600m"]},
-                                        "buildings_with_own_dog_area": int(sum(1 for b_ in bl if parsers.amenity_yes(str((b_["amenities"] or {}).get("dog_amenities") or "").lower()))),
-                                        "buildings": len(bl)} if len(s) else None,
+                      # independent check 4, D16 / D6: the same measures over the BUILDINGS shown here (the median
+                      # building, one vote per building: see shown_figures; the `traits` below describe the wider area
+                      # profile the experiences were fitted on), and how many of the shown buildings have a dog park or
+                      # dog run of their own
+                      "shown_figures": shown_figures(s, bl) if len(s) else None,
                       "traits": {k: v(h.get(k)) for k in ["no_car_share", "age_25_34_share", "living_alone_share", "households_with_kids_share", "college_degree_share", "newcomer_share",
                                                           "wfh_share", "median_hh_income", "detached_house_share", "built_since_2010_share", "built_before_1940_share", "restaurants_800m",
                                                           "bars_800m", "cafes_800m", "park_ha_800m", "park_walk_min", "open_water_m", "dog_park_m", "supermarket_m_c"]},
@@ -858,18 +915,7 @@ def main():
                                "neighborhoods": len(hoods), "neighborhoods_avoid_only": len(avoid_only),
                                "neighborhoods_safety_not_published": sum(1 for h in hoods if h["safety"]["status"] != "published")},
                     "toll_basis": {"assumes": "New York E-ZPass", "rate_time": "weekend off-peak", "mail_rate_field": "toll_round_trip_mail", "note": parsers.TOLL_NOTE},
-                    "notes": ["Drive times are free-flow estimates without traffic.", parsers.TOLL_NOTE, "An asterisk on rent means a special offer applies; see the rent terms.",
-                              "A floor marked 'read from the apartment number' is not stated on the page; confirm it on the tour.",
-                              "Where a neighborhood's safety status is 'not_published', no police agency publishes a crime rate for the town alone, so the rule that nothing shown has more crime than Jamaica could not be tested there; the page says so.",
-                              "A parking fee is 'published' only when the building's own page or a listing states it; a figure from a resident's review is an estimate and is labelled so.",
-                              "A place with an asterisk has one thing still to confirm (elevator, dogs allowed, or whether the listing is real and available); the text beside it says what and why.",
-                              "Disclosures are things to know that never remove a place: floor not published, lease term, a cost that could pass $3,000 once parking and fees are known, net-effective rent (only where the listing says the price is net-effective), a special offer (ask what a normal month costs), condo rented by its owner, a dog weight limit with no number, and a town rule restricting overnight street parking where the building's parking is not confirmed.",
-                              "Pet rent is always counted: where a building does not publish it, the cost uses an estimate (the median of the known pet rents in the same state), marked as an estimate.",
-                              "all_in_likely adds the median known parking fee and required fees for the lines a building does not publish; it is shown beside the all-in figure and is never used for the $3,000 limit.",
-                              "Experience and neighborhood figures (medians and ranges) are computed over the places shown on the page.",
-                              "An elevator marked 'listing_site_only' is stated in a listing site's amenity list or text and has not been confirmed on the building's own page.",
-                              "Each place carries the date its price was read (price_seen_at). A listing that was not read again since is not marked for that.",
-                              "Cost lines that are not published add nothing to the all-in figure and are named on each receipt as not published."],
+                    "notes": META_NOTES,
                     "moment_thresholds": MOMENT_THRESHOLDS, "max_units_per_building": 8},
            "years": years, "neighborhoods": hoods, "neighborhoods_avoid_only": avoid_only, "buildings": BUILDINGS, "units": [unit(r) for _, r in shown.iterrows()],
            "avoid": [unit(r) for _, r in avoid.iterrows()], "held": [unit(r) for _, r in held.iterrows()],

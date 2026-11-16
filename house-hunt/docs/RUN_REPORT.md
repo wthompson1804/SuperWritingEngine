@@ -1,4 +1,4 @@
-# Run report (2026-11-16T05:03:42+00:00)
+# Run report (2026-11-16T05:39:25+00:00)
 
 ## Steps
 
@@ -112,7 +112,7 @@ test_parsers: 259 assertions passed
 
 **rule tests (every repaired defect and rule, pure)**
 ```
-test_rules (rules): 617 checks, 0 failed
+test_rules (rules): 793 checks, 0 failed
 ```
 
 **gates (merge, dedupe, gate each listing)**
@@ -247,7 +247,7 @@ test_rules (data): 423 checks, 0 failed
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
-field registry: {'used': 536, 'display': 306, 'provenance': 201, 'not_used': 17}
+field registry: {'used': 538, 'display': 318, 'provenance': 201, 'not_used': 17}
 shown-list assertions: all pass
 ```
 

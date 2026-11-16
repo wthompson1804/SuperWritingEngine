@@ -634,3 +634,105 @@ Files: `site/index.html`, `scripts/site_walkthrough_test.js`, `site/screens/p7-t
   324 px with the current data, with the committed template as well.
 - **Left as is:** the star on a price is the rent offer, a different mark from "* To confirm"; the tutorial describes
   only the second, in the footer's words. At 320 px the key-facts sample breaks "E-ZPass" over two lines, as the page does.
+
+## UI pass 8: rent versus total, filters
+
+(2026-11-16. Owner: "point out what the base rent is versus the base rent plus the estimated utilities … everywhere" and
+"we used to have filters … restore them". The same pass took in the template items of independent check 4 and of
+`docs/REPAIRS_AFTER_INDEPENDENT_CHECK_4.md`. Files: `site/index.html`, `scripts/build_site.py`,
+`scripts/site_walkthrough_test.js`, `site/screens/p8-*.png`.)
+
+### The two prices
+
+- **Names, defined once** (`L_RENT`, `L_TOTAL`, `S_RENT`, `S_TOTAL`, `WITH_UF`, `PRICE_SENT`): "Rent" and "Total with
+  utilities and fees"; short forms "rent" and "total"; the phrase "with utilities and fees"; and the one sentence "Rent
+  is what the listing asks. The total adds fees, parking, pet rent and our estimate of electricity, gas and internet."
+  "Everything included" and "a month" on a bare figure are gone from the template (data prose still says "everything
+  included" in some About text and apartment lines).
+- **Rent** is `rentOf(U)`: the amount of the rent line of `all_in_lines` (so the breakdown always starts with the figure
+  shown), else `rent.basis`, else `rent.listed`. It is exact to the dollar wherever it is one apartment's rent (rows,
+  building cards, the building header, My list, compare). **Total** is `all_in`, said with "about" and rounded to $10
+  outside the breakdown, exact in it. Typical (median) rents and totals are to $10. The filters' "total", the budget and
+  the ranking still use `all_in`.
+- **Which rent** (`rentKind`, `rentTerm`, `rentNotes`), read from the rent line's name: "on a 12-month lease" when the
+  page uses the 12-month price (with "The listing shows $X for a 24-month lease." beneath), "with the current offer"
+  after an offer, "on a 15-month lease" when the listing's price is for another length, nothing otherwise. Where a lease
+  disclosure says the 12-month price in the building can be much higher, that sentence sits under the rent on the row.
+- **The pair** (`pp`, `ppUnit`, `ppTyp`, `ppFew`, `pairLine`): rent first and larger, the total beside it with "about"
+  and "with utilities and fees". Where it is used: first-screen tiles; the key facts of an experience and a neighborhood
+  (`kfacts`, now four cells in two rows: rent, total, drive, tolls; four in a row from 700 px); neighborhood cards;
+  building cards and the building header ("Rent from", with a line saying both figures are one apartment's, the one
+  with the lowest total: `bFromU`); apartment rows; the "What it costs" headline and breakdown; My list; compare (two
+  rows, both in "only show what differs"; the column heads carry the rent, named); the map card; avoid cards and "worth
+  a call" items; the tour list text; the tutorial step; the "What it costs you" row; the sheet behind the total.
+- **Breakdown** (`receipt`): each line is marked "estimate" or "not published" as its basis says; a cost that is not
+  published is never $0; the total line is named; "The total could pass $3,000 once … are known" (`couldPass`) sits
+  under it and on the row. The offer star is on the rent, never on the total.
+- **Medians** (`figsOf`, `yearNums`): the typical rent and total, their ranges, the drive and tolls of an experience are
+  worked out from the apartments shown (those that pass the filters); stored medians are no longer read for them.
+- **Under eight apartments** (`FEW = 8`) an experience has no "typical" figure: tile and strip give the lowest and the
+  highest, and say how few there are.
+
+### Filters
+
+- **One sheet** (`#limsheet`, built by `buildFilterSheet`), opened by a "Filter" button (`fBtn`) on the first screen
+  (beside "Pick an experience"), on every experience and neighborhood page (beside "See the N …" and again at the list),
+  at "Apartments here" on a building, beside Sort on My list, and from the footer. Same dialog behaviour as before: page
+  behind inert, focus in and back, Escape, scrim.
+- **What can be filtered:** rent at most ($50 steps); total with utilities and fees at most (to the $3,000 limit);
+  bedrooms; size at least (an unpublished size stays in unless "Hide when the size is not published" is ticked); drive
+  to Mom and Dad at most; move-in (available now / by the 1st of the last month; a choice that would hide nothing or
+  everything is not offered); parking (at the building / garage or covered); washer and dryer in the apartment; nothing
+  left to confirm; reviews online; experience (on the first screen and My list). Every range comes from the data (`RNG`,
+  `MOVE_OPTS`). **Dropped:** dog weight limit (no number published for 412 of 523 apartments; every apartment shown
+  already takes her dog) and the Safety slider (owner's earlier decision).
+- **How it applies** (`applyF`, `fits`, `shown`, `yHoods`, `hBldgs`): each apartment's filter fields are worked out once
+  (`U._f`). While a slider moves only the sheet changes (its words and the live count, `role="status"`); the page is drawn
+  again once, when the control is let go. Lists, counts, cards, strips, the map and Next links then show only what
+  passes; a building shows when one of its apartments passes, with the count and "from" figures of those; a strip says
+  "Typical figures are of the N of M apartments that match your filters"; a neighborhood or experience with nothing left
+  keeps its page and says "Nothing here matches your filters" with "Clear filters"; hidden neighborhoods, buildings and
+  apartments are counted in one line ("3 more apartments here do not match your filters. Show them"). An apartment
+  opened by its own link is always shown.
+- **The bar** (`#fbar`, `renderFbar`): pinned under the top line whenever a filter is on: "N of M", one removable chip
+  per filter, "Clear all". `--top-h` keeps sticky things and jumps clear of it.
+- **My list** is not filtered unless "Also apply these filters to My list" is on; a saved apartment outside the filters
+  says why. Compare is never filtered.
+- **Storage:** `f` in `lamia-house-hunt-v1` (try/catch; works for the visit without it); the old `lim` is read as
+  filters once. Nothing goes in the address.
+
+### From the independent check and the repairs note
+
+- A fact that is the open question is not stated (`openFact`): "elevator not confirmed" in the building row and facts,
+  "dog policy not confirmed, ask" in the dog row, "Ask" for dogs in the header, "availability to confirm" on the row.
+- Avoid-only neighborhoods (`neighborhoods_avoid_only`, or any neighborhood left with no apartment) have no page, no map
+  mark and no count; their avoid cards are under "Looked good, skipped".
+- Only reader-facing text is printed: `label`, `why`, `question`; never `why_internal` / `note_internal` (also left out
+  of the built page), and never a string naming our files or steps (`pub`, `ruleText`).
+- `safety.status = "not_published"`: the note behind "See how we got this", no badge. Doorman / concierge desk / front
+  desk (`deskOf`). `free_text` for offers. `pause_points` / `avoid_points`. "at least N floors". `manager_name`.
+- "At a glance" prints `at_a_glance` (text, then label), then the train-and-bus time and the street-parking rule; cards
+  and headlines take restaurants and the park walk from it (`glv`).
+- "Compared to a typical Queens apartment" where the neighborhood is in Queens (`qWord`).
+- Sentences: "A one-bedroom", "Garage parking; the fee is not published.", "No woods within a 10-minute walk."; the
+  tutorial's first card no longer says every apartment fits; a seventh card names the Filter button.
+
+### Tests added (`scripts/site_walkthrough_test.js`, at 390, 320 and 1280)
+
+Both prices on tiles, strips, neighborhood and building cards, the building header, apartment rows, My list, compare
+and the map card, each named, rent first and larger, "with utilities and fees" in two lines at most, nothing under
+12.5 px; every apartment's breakdown adds up to its total, lines marked as the data marks them, no $0 for a cost not
+published; the rent's basis and its notes; the filter sheet (labels, 44 px, live region, no re-render while a slider
+moves, keyboard); each filter alone against the test's own reading of the data; counts on the first screen, an
+experience, a neighborhood, a building with only some apartments passing; the empty state; chips and "Clear all";
+persistence across pages and a reload; the old limits carried over; My list untouched by default; storage that throws;
+no sideways scroll; the check-4 items above.
+
+### Left
+
+- Data prose still says "everything included" / "all-in" in places (About text, apartment lines); that is the text
+  agent's.
+- The compare column heads still break "Apartment" mid-word at three columns on a phone (as before this pass).
+- `check_published_text.py --template` still lists one line: the constant that holds "staying in Queens" (used only
+  for places outside Queens).
+- The first-screen tiles are about 60 px taller (two prices): 360 to 395 px at 390.

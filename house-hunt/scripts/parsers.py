@@ -1074,10 +1074,10 @@ def toll_known(value, complete):
     return None if v != v else v
 
 
-TOLL_NOTE = ("Tolls are round trip at New York E-ZPass rates (a tag issued by the New York E-ZPass service centre), weekend off-peak. "
+TOLL_NOTE = ("Tolls are round trip at New York E-ZPass rates (a tag issued by the New York E-ZPass service center), weekend off-peak. "
              "An E-ZPass tag from New Jersey, Connecticut or any other state pays the higher Tolls by Mail rate at MTA bridges and tunnels "
-             "(for example $12.03 instead of $7.46 at the Whitestone, Throgs Neck, RFK and Verrazzano bridges); that figure is given beside "
-             "each toll as the mail rate. Where a route enters the Manhattan congestion zone, no mail rate for the zone was found on a page we could "
+             "(for example $12.03 instead of $7.46 at the Whitestone, Throgs Neck, RFK and Verrazzano bridges). That figure is given beside "
+             "each toll as the mail rate. Where a route enters the Manhattan congestion zone, no mail rate for the zone was found on a page that could be "
              "read, so the mail figure there is given as 'at least' the sum of the other crossings. Resident discounts are not applied.")
 
 
@@ -1840,3 +1840,153 @@ def title_unit(building_name) -> str:
     """'312' from a property title that names its apartment ('416 Highland Ave - 312', '20 Main St #4B'), else ''."""
     m = re.search(r"\s(?:-|#)\s*#?(\d{1,4}[a-z]?)\s*$", str(building_name or ""), re.I)
     return m.group(1).upper() if m and _TITLE_UNIT.search(str(building_name or "")) else ""
+
+
+# ---------------------------------------------------------------------------- dog amenities and laundry, structured
+# 2026-11-16 (pipeline clean-up). `dog_amenities` was whichever source ranked highest, so a management page's bare
+# "yes" hid the listing site's "Dog park", and the page counted a pet spa, a dog wash and that bare "yes" as a dog area.
+# `in_unit_laundry = yes` could sit beside a laundry text from another source that said "On-site laundry". Both are
+# now derived from EVERY source's own words.
+_DOG_NEG = re.compile(r"\bno (?:dog |pet )?(?:run|park|area|amenit\w+)\b[^;|.]*|\bno_mention\b|\bnone (?:listed|stated)\b", re.I)
+_DOG_RUN = re.compile(r"\b(?:dog|pet|puppy|pup)[- ]?runs?\b(?! (?:off|free|around|loose)\b)", re.I)      # not "let your dog run off leash"
+_DOG_PARK = re.compile(r"\b(?:dog|bark|pet|pooch|paw|puppy|pup|canine)[- ]?(?:parks?|yards?)\b|\boff[- ]leash (?:dog |pet )?(?:area|park|space|yard|run)\b|"
+                       r"\bfenced(?:[- ]in)? (?:dog|pet) (?:area|yard|space)\b|\b(?:dog|pet) (?:play|exercise) ?(?:area|yard|space|ground)s?\b", re.I)
+_DOG_SPA = re.compile(r"\b(?:pet|dog|paw|puppy)[- ]?(?:spa|salon)s?\b|\bgroom\w*", re.I)
+_DOG_WASH = re.compile(r"\b(?:dog|pet|paw|puppy)[- ]?(?:wash\w*|bath\w*|shower\w*)\b|\bwash(?:ing)? station\b", re.I)
+# a dog park the sentence places OUTSIDE the property ("steps from the dog park", "the city's dog park") is not the building's
+_DOG_ELSEWHERE = re.compile(r"\b(?:near(?:by|est)?|close to|steps? (?:from|to)|minutes? (?:from|to|away)|walk(?:ing)?(?: distance)? to|across (?:the street )?from|"
+                            r"next to|adjacent to|blocks? (?:from|to|away)|public|city|county|municipal|town|neighbou?rhood|local)\b[^.;|]{0,40}$", re.I)
+_DOG_ELSEWHERE_AFTER = re.compile(r"\W*(?:is |are )?(?:close by|nearby|near\b|around the corner|down the (?:street|block|road)|across the|a short|within walking|just (?:steps|minutes|blocks))", re.I)
+
+
+def dog_amenity_facts(texts) -> dict:
+    """What a building's own dog amenities are, from every source's words (a string or a list of strings: the amenity
+    value and the sentence or tag it was read from).
+
+      dog_park_or_run   a source names a dog park, dog run, bark park, pet park or fenced / off-leash dog area ON the property
+      pet_spa_or_wash   a source names a pet spa, grooming room, dog wash or washing station
+      unspecified       a source says there is a dog amenity ("yes", "pet amenities") and none says what it is
+      label             'dog run; dog park; pet spa; dog wash' in that order, or 'yes' when unspecified, or ''
+
+    'pet washing station; no dog run listed' is a dog wash only. A dog park "steps from" the building is not its own."""
+    if isinstance(texts, str) or texts is None:
+        texts = [texts]
+    run = park = spa = wash = said = False
+    for raw in texts:
+        t = str(raw or "").strip()
+        if is_blank(t):
+            continue
+        t = _DOG_NEG.sub(" ", t)
+        if not t.strip(" ;|."):
+            continue
+        for seg in re.split(r"\s*(?:\|\||;)\s*", t):
+            if not seg.strip() or re.match(_NEG, seg.strip().lower()):
+                continue
+            # "there is one" with no kind: a bare yes, or "pet amenities"; a long sentence that names nothing is not a claim
+            said = said or bool(re.match(r"\s*(?:yes|true|y)\b", seg, re.I) or re.search(r"\b(?:pet|dog)[- ](?:friendly )?amenit", seg, re.I))
+            for rx, kind in ((_DOG_RUN, "run"), (_DOG_PARK, "park")):
+                for m in rx.finditer(seg):
+                    if _DOG_ELSEWHERE.search(seg[:m.start()]) or _DOG_ELSEWHERE_AFTER.match(seg[m.end():]):
+                        continue
+                    if kind == "run":
+                        run = True
+                    else:
+                        park = True
+            spa = spa or bool(_DOG_SPA.search(seg))
+            wash = wash or bool(_DOG_WASH.search(seg))
+    names = [n for n, on in (("dog run", run), ("dog park", park), ("pet spa", spa), ("dog wash", wash)) if on]
+    unspecified = said and not names
+    return {"dog_park_or_run": run or park, "pet_spa_or_wash": spa or wash, "unspecified": unspecified,
+            "label": "; ".join(names) if names else ("yes" if unspecified else "")}
+
+
+_L_HOOKUP = re.compile(r"hook-?ups?|connections?\b", re.I)
+_L_NOT_IN = re.compile(r"\bnot in[ -]?(?:the |an? )?(?:unit|apartment|building)\b|\bno in[ -]?unit\b|\bnone in (?:the )?(?:unit|building)\b|"
+                       r"\bin[- ]unit only in\b|\bnot in[- ]unit\b", re.I)
+_L_IN = re.compile(r"\bin[ _-]?(?:unit|home|suite|apartment|residence)\b|\bin (?:each|every|your|the|all) (?:unit|home|apartment|residence|suite)s?\b|"
+                   r"^\W*(?:washer|dryer)\b|\bwasher ?(?:/|&|and|,) ?dryer\b|\bwashers? (?:&|and) dryers?\b|\bw/d\b|\bfull[- ]?size(?:d)? (?:\w+ )?(?:washer|laundry)|"
+                   r"\bstack(?:ed|able) (?:washer|laundry)|\bprivate (?:laundry|washer)|\b(?:your|their) own (?:washer|laundry)|\bpersonal washer", re.I)
+_L_SHARED = re.compile(r"\bon[ _-]?site\b|\bshared?\b|\bcommon\b|\bcommunity laundry\b|\blaundry (?:room|facilit\w+|cent(?:er|re)|lounge)s?\b|\bin (?:the )?building\b|"
+                       r"\bat (?:the )?building\b|\bbasement\b|\b(?:every|each) floor\b|\b24 ?hr laundry\b|\bcoin\b|\bcard[- ]operated\b|\blaundromat\b", re.I)
+_L_SELECT = re.compile(r"\bselect\b|\b(?:in|for|on) some\b|\bsome (?:units|apartments|homes|residences|plans|floor ?plans)\b|\boptional\b|"
+                       r"\bavailable (?:in|for|upon)\b|\bfor rent\b|\bper plan\b", re.I)
+_L_WORD = re.compile(r"\bwashers?\b|\bdryers?\b|\blaundry\b|\bw/?d\b", re.I)
+
+
+def laundry_source_flags(text, amenity_value="") -> set:
+    """What ONE source says about laundry: a subset of {'in', 'select', 'not_in', 'hookups', 'shared'}.
+    `amenity_value` is the parsed column that came with the words ('yes' = the amenities parser read the words as
+    in-unit; 'on_site_only' = it read them as a shared room)."""
+    t = str(text or "").strip()
+    out = set()
+    if is_blank(t) and is_blank(amenity_value):
+        return out
+    t = re.sub(r"^\[[^\]]*\]\s*", "", t)                           # the amenities parser's label: "[unit amenity] In unit laundry"
+    t = re.sub(r"(?i)\bdish ?washers?\b", " ", t)                   # "Dishwasher In Every Unit" is not a washer
+    from_page = not is_blank(amenity_value)                        # a sentence of a page: it must name laundry itself
+    for seg in re.split(r"\s*(?:\|\||;)\s*", t):
+        s = seg.strip()
+        if not s:
+            continue
+        if _L_NOT_IN.search(s):
+            out.add("not_in")
+            if _L_SHARED.search(_L_NOT_IN.sub(" ", s)):
+                out.add("shared")
+            continue
+        if _L_HOOKUP.search(s):
+            out.add("hookups")
+            s = re.sub(r"(?:washer|w/?d)[^,;]{0,20}hook-?ups?|hook-?ups?[^,;]{0,25}", " ", s, flags=re.I)
+        shared = bool(_L_SHARED.search(s))
+        if shared:
+            out.add("shared")
+        m = _L_IN.search(s)
+        # "washer and dryer at building", "on-site laundry center": machines named, but in a shared room
+        if m and not (shared and not re.search(r"\bin[ _-]?(?:unit|home|suite|apartment|residence)\b|\bin (?:each|every|your|the|all) (?:unit|home|apartment|residence|suite)", s, re.I)):
+            if not from_page or _L_WORD.search(s):
+                out.add("select" if _L_SELECT.search(s) else "in")
+    v = str(amenity_value or "").strip().lower()
+    if v == "yes" and not out & {"in", "select", "not_in"} and _L_WORD.search(t):
+        out.add("in")                                              # the parser's reading stands where the words give no more
+    if v == "on_site_only":
+        out.add("shared")
+    return out
+
+
+def laundry_facts(sources) -> dict:
+    """The building's laundry, from every source: `sources` is a list of (text, basis, amenity_value).
+
+      in_unit   'yes'                 a source says the washer / dryer or the laundry is IN the apartment, and no source says it is not
+                'select_apartments'   only "select apartments" have it
+                'on_site_only'        a shared laundry room and nothing in the apartment
+                ''                    not known
+      hookups   a source names washer / dryer hookups (hookups alone are not a washer)
+      on_site   a source names a shared laundry room in the building
+      names_both  an in-apartment source names a washer AND a dryer
+      label     the plain words the page data carries beside the flag
+
+    A source that says "not in unit" settles it against a listing site's tag, unless a source of better basis (a
+    phone call, a checker's reading: 'confirmed') says in the apartment."""
+    best = {"confirmed_by_phone": 0, "confirmed": 1}
+    said_in, said_not, select, hook, shared, both = [], [], False, False, False, False
+    for text, basis, val in sources:
+        f = laundry_source_flags(text, val)
+        rank_ = best.get(str(basis), 5)
+        if "in" in f:
+            said_in.append(rank_)
+            t = str(text or "").lower()
+            both = both or bool(re.search(r"washer|\bw/d\b", t) and re.search(r"dryer|\bw/d\b", t))
+        if "not_in" in f:
+            said_not.append(rank_)
+        select = select or "select" in f
+        hook = hook or "hookups" in f
+        shared = shared or "shared" in f
+    yes = bool(said_in) and (not said_not or min(said_in) < min(said_not))
+    in_unit = "yes" if yes else "select_apartments" if (select and not said_not) else "on_site_only" if shared else ""
+    parts = [("In-unit washer and dryer" if both else "In-unit laundry")] if yes else ["In-unit laundry in select apartments"] if in_unit == "select_apartments" else []
+    if shared:
+        parts.append("on-site laundry room" if parts else ("On-site laundry room, not in the apartment" if said_not else "On-site laundry room"))
+    elif said_not and not yes:
+        parts.append("No laundry in the apartment")
+    if hook:
+        parts.append("W/D hookups" if parts else "W/D hookups only")
+    return {"in_unit": in_unit, "hookups": hook, "on_site": shared, "names_both": both and yes, "label": "; ".join(parts)}

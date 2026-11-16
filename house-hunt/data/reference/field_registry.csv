@@ -209,6 +209,13 @@ master_units,doorman,used,build_master.py;rank.py,
 master_units,doorman_basis,provenance,,travels with doorman
 master_units,doorman_source,provenance,,travels with doorman
 master_units,doorman_all_sources,used,build_master.py;rank.py,
+master_units,dog_park_or_run,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_units,pet_spa_or_wash,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_units,dog_amenity_unspecified,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_units,dog_amenities_all_sources,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_units,washer_dryer_hookups,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_units,on_site_laundry,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_units,laundry_all_sources,used,build_master.py;rank.py,
 master_units,elevator_aggregator_only,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_units,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_units,parking_fee_monthly_basis,used,all_in.py,
@@ -679,6 +686,13 @@ master_buildings,doorman,used,build_master.py;rank.py,
 master_buildings,doorman_basis,provenance,,travels with doorman
 master_buildings,doorman_source,provenance,,travels with doorman
 master_buildings,doorman_all_sources,used,build_master.py;rank.py,
+master_buildings,dog_park_or_run,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_buildings,pet_spa_or_wash,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_buildings,dog_amenity_unspecified,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_buildings,dog_amenities_all_sources,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_buildings,washer_dryer_hookups,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_buildings,on_site_laundry,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_buildings,laundry_all_sources,used,build_master.py;rank.py,
 master_buildings,elevator_aggregator_only,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_buildings,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_buildings,parking_fee_monthly_basis,used,all_in.py,

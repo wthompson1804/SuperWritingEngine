@@ -46,6 +46,7 @@ DISPLAY = {  # pattern -> why it is kept but not scored
     r"^(resolved_by)$": "which later evidence batch settled a pending listing's missing gate fact, and how (gates.py: apply_resolved_pending)",
     r"^(disclosures|more_in_building)$": "shown on the unit card: conditions to know (never an open gate fact), and further showable units in the building",
     r"^(address_override_source|city_override_source|live_url|all_in_likely_note|rent_offer_type|rent_offer_kind|offer_text_page|unknown_cost_lines)$": "independent check 3: where a corrected address comes from, the page a live check read, the note behind all_in_likely, and the offer in the page's own words",
+    r"^(dog_park_or_run|pet_spa_or_wash|dog_amenity_unspecified|dog_amenities_all_sources|washer_dryer_hookups|on_site_laundry)$": "2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry",
     r"^(duplicate_listing_ids)$": "other listings of the same unit, merged into this row (their links are in also_seen_at)",
     r"^(near_vs_baseline|crime_latest|crime_source|crime_year|nyc_record_flags)$": "context shown when she asks how a score was reached",
     r"^nycrec_": "NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule",

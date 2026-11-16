@@ -191,7 +191,7 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
   { const av = new Set(data.avoid.map(u => u.id)); data.neighborhoods.forEach(h => { h.counts = Object.assign({}, h.counts, { shown: h.unit_ids.length, avoid: (h.avoid_ids || []).filter(id => av.has(id)).length, held: data.held.filter(u => u.hood_id === h.id).length }); }); }
   // the experiences are listed by how much there is to see, most first (the page sorts them the same way); FEW: below this a tile says so
   { const n = y => (y.hood_ids || []).reduce((s, id) => { const h = data.neighborhoods.find(x => x.id === id); return s + (h ? h.unit_ids.length : 0); }, 0); data.years.forEach((y, i) => { y.data_ix = i; y.n_shown = n(y); }); data.years.sort((a, b) => (b.n_shown - a.n_shown) || (a.data_ix - b.data_ix)); }
-  const FEW = 5;
+  const FEW = 8; // (repairs after check 4) under eight apartments an experience has no "typical" figure
   // a building name as the page shows it (cleanName in site/index.html)
   const cleanName = t => { t = String(t == null ? '' : t).split(/\s+[|~]\s+/)[0].trim(); t = t.replace(/\s+[–—-]\s+\d.*$/, ''); if (/,\s*[A-Z]{2}\b(?:\s+\d{5}(?:-\d{4})?)?\s*(?:,|$)|,\s*(?:USA?|United States)\s*$/.test(t)) t = t.split(',')[0]; return t.replace(/\s*#\s*\S+\s*$/, '').trim(); };
   const m10 = v => '$' + (Math.round(v / 10) * 10).toLocaleString('en-US');
@@ -343,23 +343,25 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
   tiles.forEach((t, i) => { const y = data.years[i];
     assert.strictEqual(t.label, String(y.display_label || y.label).replace(/ Year$/, ' Experience'));
     // (pass 8) both prices on the tile: the typical rent first and larger, the typical total beside it with "about" and "with utilities and fees"; each to $10, each with its range
-    { const us = unitsOfYear(y), f = figsOf(us), one = us.length === 1; assert(t.pp, 'the tile carries the pair of prices');
-      assert.strictEqual(t.pp.rl, one ? L_RENT : 'Typical rent'); assert.strictEqual(t.pp.r, one ? moneyX(f.rent) : m10(f.rent), 'the typical rent is the median rent of the apartments shown, to $10');
-      assert.strictEqual(t.pp.tl, one ? 'Total' : 'Typical total'); assert.strictEqual(t.pp.t, 'about ' + m10(f.total), 'the typical total is the median total, to $10, said with "about"'); assert.strictEqual(t.pp.uf, WITH_UF);
-      if (y.medians && y.medians.all_in != null) assert.strictEqual(m10(f.total), m10(y.medians.all_in), 'and it is the stored median');
-      assert(t.pp.rentFirst && t.pp.fsR > t.pp.fsT, 'rent comes first and is the larger figure'); assert(t.pp.small >= 12.5, 'nothing in the pair is under 12.5 px: ' + t.pp.small); assert(t.pp.ufLines <= 2, '"with utilities and fees" takes two lines at most: ' + t.pp.ufLines);
-      if (us.length >= FEW) { if (m10(f.rr[0]) !== m10(f.rr[1])) assert.strictEqual(t.pp.rr, m10(f.rr[0]) + ' to –' + m10(f.rr[1]), 'the rent range sits beneath'); if (m10(f.tr[0]) !== m10(f.tr[1])) assert.strictEqual(t.pp.tr, m10(f.tr[0]) + ' to –' + m10(f.tr[1]), 'the total range sits beneath'); } else assert(!t.pp.rr && !t.pp.tr, 'no ranges over a handful'); }
-    if (y.medians && y.medians.drive_min != null) assert.strictEqual(t.figs[0], Math.round(y.medians.drive_min) + ' min', 'the tile shows the median drive');
+    { const us = unitsOfYear(y), f = figsOf(us), fewT = us.length < FEW, rgT = r => m10(r[0]) === m10(r[1]) ? m10(r[0]) : m10(r[0]) + '–' + m10(r[1]); assert(t.pp, 'the tile carries the pair of prices');
+      // under eight apartments there is no "typical" figure: the tile gives the lowest and the highest rent and total of its apartments
+      if (fewT) { assert.strictEqual(t.pp.rl, L_RENT); assert.strictEqual(t.pp.r, rgT(f.rr), 'a small experience shows the range of its rents, not a median: ' + t.pp.r); assert.strictEqual(t.pp.tl, 'Total'); assert.strictEqual(t.pp.t, 'about ' + rgT(f.tr)); assert(!t.pp.rr && !t.pp.tr && !/typical/i.test(t.text), 'and never the word "typical": ' + t.text.replace(/\s+/g, ' ')); }
+      else { assert.strictEqual(t.pp.rl, 'Typical rent'); assert.strictEqual(t.pp.r, m10(f.rent), 'the typical rent is the median rent of the apartments shown, to $10');
+        assert.strictEqual(t.pp.tl, 'Typical total'); assert.strictEqual(t.pp.t, 'about ' + m10(f.total), 'the typical total is the median total, to $10, said with "about"');
+        if (y.medians && y.medians.all_in != null) assert.strictEqual(m10(f.total), m10(y.medians.all_in), 'and it is the stored median');
+        if (m10(f.rr[0]) !== m10(f.rr[1])) assert.strictEqual(t.pp.rr, m10(f.rr[0]) + ' to –' + m10(f.rr[1]), 'the rent range sits beneath'); if (m10(f.tr[0]) !== m10(f.tr[1])) assert.strictEqual(t.pp.tr, m10(f.tr[0]) + ' to –' + m10(f.tr[1]), 'the total range sits beneath'); }
+      assert.strictEqual(t.pp.uf, WITH_UF); assert(t.pp.rentFirst && t.pp.fsR > t.pp.fsT, 'rent comes first and is the larger figure'); assert(t.pp.small >= 12.5, 'nothing in the pair is under 12.5 px: ' + t.pp.small); assert(t.pp.ufLines <= 2, '"with utilities and fees" takes two lines at most: ' + t.pp.ufLines); }
+    if (y.n_shown >= FEW && y.medians && y.medians.drive_min != null) assert.strictEqual(t.figs[0], Math.round(y.medians.drive_min) + ' min', 'the tile shows the median drive');
     const few = y.n_shown < FEW; if (i) assert(data.years[i - 1].n_shown >= y.n_shown, 'the tiles run from the most apartments to the fewest');
     if (few) { assert.strictEqual(t.rng.length, 0, 'a tile with a handful of apartments shows no range'); assert(t.text.includes('Only ' + y.n_shown + (y.n_shown === 1 ? ' apartment' : ' apartments') + ' right now'), 'it says how few there are: ' + t.text.replace(/\s+/g, ' ')); }
     // a tile is its marker, the label, the tagline, two numbers with their ranges, and the count of places: nothing else
-    assert.deepStrictEqual(t.kids, [illus ? 'DIV.illus banner' : null, 'H3', y.tagline ? 'P.l2' : null, 'DIV.pp tile', 'DIV.figs xt', few ? 'P.tnote' : null].filter(Boolean), 'a tile has nothing else: ' + t.kids);
+    assert.deepStrictEqual(t.kids, [illus ? 'DIV.illus banner' : null, 'H3', y.tagline ? 'P.l2' : null, few ? 'DIV.pp ptile few' : 'DIV.pp ptile', 'DIV.figs xt', few ? 'P.tnote' : null].filter(Boolean), 'a tile has nothing else: ' + t.kids);
     if (illus) { assert(t.art.h >= 100 && t.art.h <= 132, 'the drawing is a banner of about 110 to 130 px: ' + t.art.h); assert(t.art.svg === 1 && t.art.w >= t.w - 8, 'edge to edge on the tile'); }
     assert.strictEqual(t.mark, 1, 'the marker is on the tile'); if (y.tagline && !CRIME.test(y.tagline)) assert.strictEqual(t.tag, y.tagline, 'the tagline is shown whole');
     assert.strictEqual(t.figs.length, 2); assert.strictEqual(t.figs[1], String(listed(y).reduce((n, h) => n + (h.unit_ids || []).filter(id => unitIds.has(id)).length, 0)), 'the count of places');
-    assert.deepStrictEqual(t.labels, [(y.hood_ids.length <= 1 ? '' : 'typical ') + 'to Mom and Dad', t.figs[1] === '1' ? 'apartment' : 'apartments']);
-    // (pass 8) the tile is taller by the second price: 400 px with the drawing (it was 336 with one figure)
-    if (W === 390) assert(t.h <= (illus ? 400 : 280), 'an experience tile is a short card: ' + t.h + 'px'); });
+    assert.deepStrictEqual(t.labels, [(y.hood_ids.length <= 1 || y.n_shown < FEW ? '' : 'typical ') + 'to Mom and Dad', t.figs[1] === '1' ? 'apartment' : 'apartments']);
+    // (pass 8) the tile is taller by the second price: up to 420 px with the drawing, a two-line name and a two-line tagline (it was 336 with one figure)
+    if (W === 390) assert(t.h <= (illus ? 420 : 300), 'an experience tile is a short card: ' + t.h + 'px'); });
   assert.deepStrictEqual(await barePrices('a.life'), [], 'no price on a tile without its name');
   { const pn = (await page.textContent('#price-note')).trim(); assert(/Rent is what the listing asks\. The total adds fees, parking, pet rent and our estimate of electricity, gas and internet\./.test(pn), 'the first screen says once what the two prices are: ' + pn); assert(!/everything included/i.test(await page.evaluate(() => document.getElementById('view').innerText)), 'no "everything included" on the first screen'); }
   { const end = await page.evaluate(() => Math.round(document.getElementById('see-map').getBoundingClientRect().bottom + window.scrollY));
@@ -504,7 +506,9 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
     const sizes = await page.evaluate(() => [...new Set([...document.querySelectorAll('#view .pg p, #view .pg li, #view .pg small, #view .pg b, #view .pg span, #view .pg h2, #view .pg h3')].filter(e => e.getClientRects().length && e.textContent.trim() && !e.closest('svg') && !e.closest('.rb') && !e.closest('.hhmap')).map(e => parseFloat(getComputedStyle(e).fontSize)))].sort((a, b) => a - b)); assert(sizes[0] >= 12.5, 'nothing on the page is under 12.5 px: ' + sizes); console.log('experience: text sizes in the open', sizes.join(', ')); }
   assert.strictEqual(await page.locator('#view details.rowd[open]').count(), 0, 'no row starts open');
   const nRows = await page.locator('#sec-rows details.rowd').count(); assert(nRows >= 3 && nRows <= 7, 'three to seven rows on an experience: ' + nRows);
-  assert((await page.textContent('#r-queens .rl')).trim() === 'Compared to staying in Queens');
+  // the yardstick is a typical Queens apartment: "staying in Queens" for places outside Queens, "a typical Queens apartment" where a neighborhood is itself in Queens
+  const inQ = h => !!h && h.state === 'NY' && /^queens$/i.test(String(h.area || '')), qW = q => q ? 'a typical Queens apartment' : 'staying in Queens', capQ = t => t.charAt(0).toUpperCase() + t.slice(1);
+  assert.strictEqual((await page.textContent('#r-queens .rl')).trim(), 'Compared to ' + qW(listed(Y1).some(inQ)));
   assert.strictEqual(await page.locator('#r-queens button.pt').count(), data.meta.queens_spectrum.filter(s => !/crime/.test(s.measure)).length, 'the scale leaves crime out');
   assert.strictEqual(await headOf('r-cost'), await page.evaluate(id => window.__houseHunt.headline('year', id, 'yearCost'), y1));
   // a neighborhood card: name, rank, one line, three facts
@@ -530,7 +534,7 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
   await page.evaluate(() => document.getElementById('r-cost').scrollIntoView({ block: 'center' })); await shot('ux-02b-experience-costs-open');
   // the open row is remembered for the visit: away and Back
   await openRow('r-queens'); await page.click('#r-queens button.pt >> nth=0'); await page.waitForSelector('#sheet.open');
-  assert((await page.textContent('#sheetBody')).includes('Staying in Queens')); assert(!/against/i.test(await page.textContent('#sheetBody')), '"compared to", never "against"'); await page.click('#shClose');
+  assert((await page.textContent('#sheetBody')).includes(capQ(qW(listed(Y1).some(inQ))) + ':')); assert(!/against/i.test(await page.textContent('#sheetBody')), '"compared to", never "against"'); await page.click('#shClose');
   await page.click('#sec-hoods a.hood >> nth=0'); await page.waitForFunction(() => location.hash.indexOf('#hood-') === 0); await page.goBack(); await page.waitForSelector('#r-queens');
   assert(await page.evaluate(() => document.getElementById('r-queens').open && document.getElementById('r-cost').open), 'Back returns to the page with the same rows open');
   // every experience, collapsed: height, one thing open, no crime, the subhead never about crime
@@ -889,10 +893,10 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
   console.log('compare rows differing/all:', rows1, rows2, '|', await page.textContent('#tiesNote')); await page.click('#ties');
   assert.strictEqual(await page.locator('#cmp-rows .rowc .cell').count(), 3 * rows1, 'the label sits above three equal cells');
   if ([star, two, three].some(u => (u.disclosures || []).length)) assert((await page.textContent('#cmp-rows')).includes('Also ask:'), 'disclosures sit in the Still to confirm row');
-  assert.strictEqual((await page.textContent('#c-queens .rl')).trim(), 'Compared to staying in Queens'); assert(!/against/i.test(await page.evaluate(() => document.getElementById('view').textContent)), 'no "against" on the compare page');
+  assert.strictEqual((await page.textContent('#c-queens .rl')).trim(), 'Compared to ' + qW([star, two, three].some(u => inQ(hoodBy[u.hood_id])))); assert(!/against/i.test(await page.evaluate(() => document.getElementById('view').textContent)), 'no "against" on the compare page');
   await openRow('c-day'); assert(await page.locator('#day-rows .rowc').count() <= 5);
   await openRow('c-queens'); assert.strictEqual(await page.locator('#sec-scale button.pt').count(), 3 * data.meta.queens_spectrum.filter(s => !/crime/.test(s.measure)).length);
-  await page.click('#sec-scale button.pt >> nth=0'); await page.waitForSelector('#sheet.open'); const st = await page.textContent('#sheetBody'); assert(st.includes('Staying in Queens') && st.includes('The bands'));
+  await page.click('#sec-scale button.pt >> nth=0'); await page.waitForSelector('#sheet.open'); const st = await page.textContent('#sheetBody'); assert(/Staying in Queens:|A typical Queens apartment:/.test(st) && st.includes('The bands'));
   await page.waitForTimeout(300); await shot('06b-five-point-explanation'); await page.click('#shClose');
   await page.evaluate(() => document.getElementById('c-queens').scrollIntoView({ block: 'start' })); await page.evaluate(() => window.scrollBy(0, -130)); await shot('ux-06b-compare-queens-open');
   await page.evaluate(() => window.scrollTo(0, 0)); await page.click('[data-act=pair][data-p="0-2"]'); assert.strictEqual(await page.getAttribute('[data-act=pair][data-p="0-2"]', 'aria-pressed'), 'true');
@@ -971,12 +975,12 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
     data.years.forEach((y, i) => { const us = unitsOfYear(y), ok = us.filter(u => passes(fR, u)), t = ts[i];
       if (!ok.length) { assert(t.none && /Nothing here matches your filters/.test(t.zero), 'an experience with nothing left says so: ' + y.id); return; }
       assert.strictEqual(t.cnt, String(ok.length), 'the tile counts what matches: ' + y.id); assert.strictEqual(t.lab, ok.length === us.length ? (us.length === 1 ? 'apartment' : 'apartments') : 'of ' + us.length + ' match');
-      const f = figsOf(ok); assert.strictEqual(t.rent, ok.length === 1 ? moneyX(f.rent) : m10(f.rent), 'the typical rent is of the apartments that match: ' + y.id); assert.strictEqual(t.total, 'about ' + m10(f.total)); });
+      const f = figsOf(ok), rgT = r => m10(r[0]) === m10(r[1]) ? m10(r[0]) : m10(r[0]) + '–' + m10(r[1]); assert.strictEqual(t.rent, ok.length < FEW ? rgT(f.rr) : m10(f.rent), 'the rent on the tile is of the apartments that match (their range when fewer than eight match): ' + y.id); assert.strictEqual(t.total, 'about ' + (ok.length < FEW ? rgT(f.tr) : m10(f.total))); });
     await overflow('first screen, filtered'); await shot('p8-first-screen-filtered'); }
   // the map: a mark counts only what matches, and its card says "N of M apartments match your filters"
   assert.strictEqual(await page.evaluate(() => window.__houseHunt.mapHoods()), data.neighborhoods.filter(h => h.unit_ids.length && yearBy[h.year] && yearBy[h.year].hood_ids.includes(h.id)).length, 'the map still holds every neighborhood');
   // an experience: the strip is recomputed over what matches and says so; only neighborhoods with a match are listed; the rest are counted in one line
-  const yF = data.years.map(y => ({ y, us: unitsOfYear(y), ok: unitsOfYear(y).filter(u => passes(fR, u)) })).filter(x => x.ok.length && x.ok.length < x.us.length).sort((a, b) => b.ok.length - a.ok.length)[0];
+  const yF = data.years.map(y => ({ y, us: unitsOfYear(y), ok: unitsOfYear(y).filter(u => passes(fR, u)) })).filter(x => x.ok.length >= FEW && x.ok.length < x.us.length).sort((a, b) => b.ok.length - a.ok.length)[0];
   if (yF) { await go('#exp-' + slug(yF.y.id)); if (await page.getAttribute('.viewsw [data-v=list]', 'aria-pressed') !== 'true') await page.click('.viewsw [data-v=list]'); await showAll();
     const f = figsOf(yF.ok), hsAll = listed(yF.y), hsOk = hsAll.filter(h => unitsOfHood(h).some(u => passes(fR, u)));
     const e = await page.evaluate(() => ({ cells: [...document.querySelectorAll('.sec.head #keyfacts > .kfc')].map(c => (c.querySelector('.kft').textContent + '|' + c.querySelector('b').textContent).replace(/\s+/g, ' ').trim()), note: (document.querySelector('.sec.head .fnote') || {}).textContent || '', see: document.getElementById('see-hoods').textContent.replace(/\s+/g, ' ').trim(), hoods: [...document.querySelectorAll('#sec-hoods a.hood')].map(a => a.getAttribute('href')), subs: [...document.querySelectorAll('#sec-hoods a.hood .hsub')].map(s => s.textContent), hid: (document.querySelector('#sec-hoods .fhid span') || {}).textContent || '', head: document.querySelector('#sec-hoods h2').textContent.replace(/\s+/g, ' ').trim(), barTop: Math.round(document.getElementById('fbar').getBoundingClientRect().top), trailH: document.getElementById('trail').offsetHeight, fb: document.querySelectorAll('#view .fbtn').length }));
@@ -1130,6 +1134,17 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
     // an offer is worded as the data words it ("up to 2 months free"): never without its "up to"
     { const uUp = data.units.find(u => u.rent && u.rent.offer_up_to && u.rent.free_text && hoodBy[u.hood_id]); if (uUp) { await go('#unit-' + slug(uUp.id), '.bpage'); const t = await page.textContent(aptSel(uUp) + ' .terms'); assert(t.includes(uUp.rent.free_text + ' free'), 'the offer keeps "up to": ' + uUp.rent.free_text); } }
     const say = await page.evaluate(() => { const x = window.__houseHunt; return x.say ? x.say() : null; }); if (say) assert.deepStrictEqual(say, { one: 'A one-bedroom of 784 sq ft on floor 3.', studio: 'A studio of 500 sq ft, floor not published.', garage: 'Garage parking; the fee is not published.', garageFee: 'Garage parking, $150 a month.', lot: 'Parking in an open lot, no monthly charge.', none: 'Parking is not published.' }); }
+  // (text agent's audit) a neighborhood in Queens is never compared with "staying in Queens"; an experience with fewer than eight apartments shows no "typical" figure
+  { const hQ = shownHoods.find(inQ), hN = shownHoods.find(h => !inQ(h) && h.vs_queens && Object.values(h.vs_queens).some(v => v != null));
+    if (hQ && await (async () => { await go('#hood-' + slug(hQ.id)); return page.locator('#r-queens').count(); })()) { assert.strictEqual((await page.textContent('#r-queens .rl')).trim(), 'Compared to a typical Queens apartment'); const uQ = best.find(u => u.hood_id === hQ.id); await go('#bldg-' + bSlug(uQ), '.bpage'); const t = await page.evaluate(() => document.getElementById('view').textContent); assert(!/staying in Queens/i.test(t), 'a building in Queens is not compared with "staying in Queens"'); }
+    if (hN) { await go('#hood-' + slug(hN.id)); assert.strictEqual((await page.textContent('#r-queens .rl')).trim(), 'Compared to staying in Queens'); }
+    const yS = data.years.find(y => y.n_shown > 0 && y.n_shown < FEW); if (yS) { await go('#exp-' + slug(yS.id)); const us = unitsOfYear(yS), f = figsOf(us), rgT = r => m10(r[0]) === m10(r[1]) ? m10(r[0]) : m10(r[0]) + '–' + m10(r[1]);
+      const s8 = await page.evaluate(() => ({ cells: [...document.querySelectorAll('.sec.head #keyfacts > .kfc')].map(c => ((c.querySelector('.kft') || {}).textContent || '').trim() + '|' + c.querySelector('b').textContent.replace(/\s+/g, ' ').trim()), head: document.querySelector('.sec.head').innerText, note: (document.getElementById('few-note') || {}).textContent || '', ov: document.documentElement.scrollWidth > document.documentElement.clientWidth }));
+      assert.strictEqual(s8.cells[0], 'rent|' + rgT(f.rr), 'a small experience shows the lowest and highest rent: ' + s8.cells[0]); assert.strictEqual(s8.cells[1], 'total|about ' + rgT(f.tr)); assert(!/typical/i.test(s8.head), 'and no "typical" anywhere in its header: ' + s8.head.replace(/\s+/g, ' ').slice(0, 200));
+      assert.strictEqual(s8.note, 'Only ' + us.length + (us.length === 1 ? ' apartment' : ' apartments') + ' right now: these are the lowest and the highest.'); assert(!s8.ov, 'no sideways scroll'); assert(!/^typical/.test(await headOf('r-cost')), 'nor in the cost row'); await shotEl('p8-small-experience-strip', '.sec.head'); }
+    // "At a glance" prints at_a_glance as the data words it (the bold words, then the small words), then the train-and-bus time and the street-parking rule
+    const hG = shownHoods.find(h => (h.at_a_glance || []).length); if (hG) { await go('#hood-' + slug(hG.id)); const gl = await page.evaluate(() => [...document.querySelectorAll('#sec-glance .glance li')].map(li => [li.querySelector('b').textContent, li.querySelector('small').textContent]));
+      const items = hG.at_a_glance.filter(x => x && x.text && x.label); assert.deepStrictEqual(gl.slice(0, items.length), items.map(x => [x.text, x.label]), 'at_a_glance, in its order'); assert.strictEqual(gl[gl.length - 1][1], 'street parking'); if (hG.transit_min != null) assert.strictEqual(gl[gl.length - 2][1], 'to Mom and Dad by train and bus'); await overflow('at a glance'); await shotEl('p8-at-a-glance', '#sec-glance'); } }
   // ---------- every view renders, collapsed: no side scroll, within 2.2 screens, no crime in the open ----------
   await page.reload(); await page.waitForSelector('#view .ph1, #view .life'); // a fresh visit: no row is remembered as open
   const t0 = Date.now();

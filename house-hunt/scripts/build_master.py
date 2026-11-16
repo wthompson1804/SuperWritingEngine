@@ -274,6 +274,20 @@ class Merge:
 
     def __init__(self):
         self.c: dict[tuple[str, str], list[tuple[int, str, str, str]]] = {}
+        # every source's own words about dog amenities and laundry (2026-11-16): the structured fields are derived from
+        # all of them after the merge (structured_dog_and_laundry), not from the one source that ranks highest
+        self.dog_words: dict[str, list[str]] = {}
+        self.laundry_words: dict[str, list[tuple[str, str, str]]] = {}
+
+    def note_dog(self, bid, *texts):
+        t = " || ".join(str(x).strip() for x in texts if not is_blank(x))
+        if bid is not None and t and t not in self.dog_words.setdefault(bid, []):
+            self.dog_words[bid].append(t)
+
+    def note_laundry(self, bid, text, basis, amenity_value=""):
+        item = ("" if is_blank(text) else str(text).strip(), basis, "" if is_blank(amenity_value) else str(amenity_value).strip())
+        if bid is not None and (item[0] or item[2]) and item not in self.laundry_words.setdefault(bid, []):
+            self.laundry_words[bid].append(item)
 
     def add(self, bid, field, value, basis, source):
         if bid is None or is_blank(value):
@@ -404,6 +418,7 @@ def apply_fact(M, b, fact, value, quote, url):
         M.add(b, "manager", v, C, url)
     elif f.startswith("laundry"):
         M.add(b, "laundry", v, C, url)
+        M.note_laundry(b, f"{v} | {quote}" if not is_blank(quote) and str(quote) != str(v) else v, C)
     elif f.startswith(("concession", "special")):
         M.add(b, "concession_text_evidence", v, C, url)
     elif f.startswith("lease_terms"):
@@ -426,6 +441,7 @@ def apply_fact(M, b, fact, value, quote, url):
         M.add(b, "building_type", v, C, url)
     elif f.startswith(("dog_amenit", "dog_park", "dog_run")):
         M.add(b, "dog_amenities", v, C, url)
+        M.note_dog(b, v, quote)
     elif f.startswith(("dog_weight_limit_lb", "pet_limit", "pet_restrictions")):
         kind, lb = parsers.parse_dog_weight(v)
         if kind == "limit" and f.startswith("dog_weight_limit_lb"):
@@ -445,6 +461,51 @@ KNOWN_FACT_PREFIXES = ("parking", "garage", "pet_rent", "dog", "pet_fee", "fee:"
 
 
 # ---------------------------------------------------------------------- overnight street-parking rules (reviewed table)
+def community_dog_snippets(path=None):
+    """(by address key, by lower-case name) -> the sentence behind community_facts.csv's `dog_park_pet_spa = yes`.
+    The listing gate joins the value alone (scripts/gates.py, on the normalized address + ZIP, then the name); the
+    words say WHAT the amenity is ("Pet Grooming || Dog Run", "WAG Pet Park and Pet Spa")."""
+    f = Path(path) if path else DATA / "reference" / "community_facts.csv"
+    import gates                                   # the same address key the listing gate joins on
+    by_addr, by_name = {}, {}
+    if not f.exists():
+        return by_addr, by_name
+    c = pd.read_csv(f, dtype=str, keep_default_na=False)
+    for r in c.itertuples():
+        if is_blank(r.dog_park_pet_spa_snippet):
+            continue
+        z = re.search(r"\d{5}", str(r.zip))
+        ka = gates.norm_addr(r.address) + "|" + (z.group(0) if z else "")
+        if len(ka) > 6:
+            by_addr.setdefault(ka, r.dog_park_pet_spa_snippet)
+        if str(r.building_name).strip():
+            by_name.setdefault(str(r.building_name).lower().strip(), r.dog_park_pet_spa_snippet)
+    return by_addr, by_name
+
+
+def structured_dog_and_laundry(rows, M):
+    """Writes the structured dog-amenity and laundry fields of every building from ALL its sources' words
+    (parsers.dog_amenity_facts, parsers.laundry_facts). `dog_amenities` and `laundry` stay, as plain labels that agree
+    with the flags: 'dog run; dog park; pet spa; dog wash' (or 'yes' when no source says what the amenity is), and
+    'In-unit washer and dryer; on-site laundry room; W/D hookups'."""
+    for b, words in M.dog_words.items():
+        f = parsers.dog_amenity_facts(words)
+        d = rows.setdefault(b, {})
+        d["dog_amenities"] = f["label"]
+        d["dog_park_or_run"] = "yes" if f["dog_park_or_run"] else ""
+        d["pet_spa_or_wash"] = "yes" if f["pet_spa_or_wash"] else ""
+        d["dog_amenity_unspecified"] = "yes" if f["unspecified"] else ""
+        d["dog_amenities_all_sources"] = " ## ".join(words)[:1200]
+    for b, items in M.laundry_words.items():
+        f = parsers.laundry_facts(items)
+        d = rows.setdefault(b, {})
+        d["in_unit_laundry"] = f["in_unit"]
+        d["washer_dryer_hookups"] = "yes" if f["hookups"] else ""
+        d["on_site_laundry"] = "yes" if f["on_site"] else ""
+        d["laundry"] = f["label"]
+        d["laundry_all_sources"] = " ## ".join(f"{t or v} ({bs})" for t, bs, v in items)[:1200]
+
+
 def overnight_parking_rules(path=None):
     """hood_id -> {severity, town, rule, url} from data/reference/overnight_parking_towns.csv, a table filled by READING
     the local-rule rows (no free text is parsed at run time). Where two rows cover a neighborhood the stricter wins
@@ -699,6 +760,8 @@ def main():
         return lot_ok.get(addr_key, False) and dob_el.get(addr_key, (1, ""))[0] > 0
 
     M = Merge()
+    cf_dog_addr, cf_dog_name = community_dog_snippets()
+    community_dog_words = lambda addr_key, name: cf_dog_addr.get(str(addr_key)) or cf_dog_name.get(str(name).lower().strip(), "")
     # ------------------------------------------------------------------ 5/6. listing rows + inference
     for r in U.itertuples():
         b, src = r.building_id, r.url
@@ -755,6 +818,7 @@ def main():
         add_parking(M, b, r.community_parking_text, "community_page", "data/reference/community_facts.csv")
         M.add(b, "building_floors", r.building_floors if re.fullmatch(r"[\d.]+", r.building_floors or "") else "", "stated", src)
         M.add(b, "laundry", r.laundry, "stated", src)
+        M.note_laundry(b, r.laundry, "stated")
         M.add(b, "manager", r.manager, "stated", src)
         M.add(b, "utilities_included", r.utilities_included if r.utilities_included.lower() != "none listed as included" else "", "stated", src)
         cu = "; ".join(x for x in [("included: " + r.community_utilities_included) if not is_blank(r.community_utilities_included) else "",
@@ -770,6 +834,9 @@ def main():
                          ("community_package_room", "package_room"), ("community_dog_park_pet_spa", "dog_amenities"),
                          ("community_required_fees", "required_fees_text"), ("community_building_type", "building_type")]:
             M.add(b, fld, getattr(r, col, ""), "community_page", "data/reference/community_facts.csv")
+        # the management page's bare "yes" for a dog park / pet spa, with the sentence it was read from
+        if not is_blank(getattr(r, "community_dog_park_pet_spa", "")):
+            M.note_dog(b, r.community_dog_park_pet_spa, community_dog_words(r.addr_key, r.building_name))
 
     # ------------------------------------------------------------------ 3. amenities parsed from cached pages
     af = DATA / "reference" / "building_amenities.csv"
@@ -789,6 +856,10 @@ def main():
                 if col == "doorman_or_concierge" and v not in ("", "no_mention"):
                     v = f"{v}: {r.get('doorman_or_concierge_evidence', '')[:160]}"      # D9: the page's own words say doorman or concierge
                 M.add(b, fld, v, "amenities_page", r.get("source_url", ""))
+            if r.get("dog_amenities", "") not in ("", "no_mention"):
+                M.note_dog(b, r["dog_amenities"], r.get("dog_amenities_evidence", ""))
+            if r.get("in_unit_laundry", "") not in ("", "no_mention"):
+                M.note_laundry(b, r.get("in_unit_laundry_evidence", ""), "amenities_page", r["in_unit_laundry"])
             # the stored number was "the first dollar figure in the sentence" (A16): re-read the sentence itself
             num = r.get("parking_fee_monthly", "")
             add_parking(M, b, r.get("parking_fee_monthly_evidence", ""), "amenities_page", r.get("source_url", ""),
@@ -967,6 +1038,7 @@ def main():
     rows, conflicts = M.resolve()
     for b, txt in staff_all.items():           # D9: every source's sentence about the front desk, for parsers.staff_from_sources
         rows.setdefault(b, {})["doorman_all_sources"] = txt
+    structured_dog_and_laundry(rows, M)
     rows = phone_overrides_building(rows)
     for b, when in called_b.items():
         rows.setdefault(b, {})["call_building_called_at"] = when

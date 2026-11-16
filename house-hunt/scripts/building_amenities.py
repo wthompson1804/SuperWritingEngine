@@ -340,7 +340,7 @@ RX = {
     "dog_park": r"(?i)\b(dog|bark|pet|pooch|paw)[- ]?park\b|off[- ]leash|pet (play )?area|dog (play )?area|pet relief|dog relief",
     "pet_spa": r"(?i)\b(pet|dog|paw)[- ]?(spa|salon)\b|grooming",
     "dog_wash": r"(?i)\b(dog|pet|paw)[- ]?wash|washing station|pet bath|dog bath",
-    "laundry_in": r"(?i)in[- ]?(unit|home|suite|apartment) (laundry|washer|w/?d)|(washer|w/?d|laundry)[^.;|]{0,30}\bin[- ](every |each |the |your )?(unit|home|apartment|suite|residence)|in[- ]unit w/?d|"
+    "laundry_in": r"(?i)in[- ]?(unit|home|suite|apartment) (laundry|washer|w/?d)|(?<![a-z])(washer|w/?d|laundry)[^.;|]{0,30}\bin[- ](every |each |the |your )?(unit|home|apartment|suite|residence)|in[- ]unit w/?d|"
                   r"washer ?(/|&|and) ?dryer in|full[- ]size(d)? washer|private (laundry|washer)|own (washer|laundry)|personal washer",
     "laundry_wd_list": r"(?i)^(washer|dryer|washer ?[/&,] ?dryer|washer and dryer|washer: |dryer: |stack(ed|able) washer.*|full[- ]size(d)? washer.*|front[- ]load.*washer.*)\s*$",
     "laundry_site": r"(?i)on[- ]?site laundry|laundry (room|facilit|cent(er|re)|lounge)|laundry in (the )?(building|basement)|shared laundry|common laundry|community laundry|coin[- ]?(op|laundry)|card[- ]operated laundry|"

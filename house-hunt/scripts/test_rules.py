@@ -1005,8 +1005,8 @@ def pure_6():
                                       rank.open_item_count(s_([0, 1, 0, 0]), s_(["", "live", "", ""])))
     eq(list(cut3), [False, True, False, False], "thin: a lone apartment never re-read with no open gate fact stays (a); one seen live with an open gate fact is cut (b)")
     # ---- laundry and conflicting dog policy
-    eq(list(rank.in_unit_laundry(s_(["yes", "washer, dryer", "laundry room (not in unit)", "In unit", ""]), s_(["on_site_only", "yes", "yes", "", ""]))), [False, True, False, True, False],
-       "laundry: 'yes' with on_site_only is a shared laundry room, not a washer in the apartment")
+    eq(list(rank.in_unit_laundry(s_(["yes", "on_site_only", "select_apartments", "", "Yes "]))), [True, False, False, False, True],
+       "laundry: only the master's in_unit_laundry = yes scores; a shared room, 'select apartments' and unknown do not")
 
 
 def lifestyle_assignment_checks():
@@ -1136,6 +1136,7 @@ def page_3(J, M, R, S):
     if set(units) != set(S.index):
         return                                          # data.json is from an earlier run: build_page_data.py has not run since rank.py
     page_ic4(J, M, R, S)
+    page_cleanup(J, M, R, S)
     # D12: experience and neighborhood figures are computed over the shown units
     for y in J["years"]:
         us = [u for u in J["units"] if u["year"] == y["id"]]
@@ -1481,10 +1482,160 @@ def data_ic4(M, R, S):
         ok(lid not in R.index, f"IC4 D4: {lid} is not a real above-ground apartment and is not ranked")
 
 
+def pure_cleanup():
+    """Pipeline clean-up of 2026-11-16: dog amenities and laundry as structured facts, the notes for the reader, American
+    spelling in our own summaries, neighborhood figures over buildings."""
+    import pandas as pd
+    import build_master as BM
+    import build_page_data as BP
+    import rank
+    D = P.dog_amenity_facts
+    # ---- item 2: what a dog amenity is
+    eq(D("yes"), {"dog_park_or_run": False, "pet_spa_or_wash": False, "unspecified": True, "label": "yes"}, "dogs: a bare 'yes' is an amenity of unnamed kind, not a dog area")
+    eq(D(["yes", "Pet Friendly: Pet friendly community featuring WAG Pet Spa and outdoor WAG Pet Park"])["label"], "dog park; pet spa", "dogs: Avalon Maplewood's 'yes' is read from its own sentence")
+    eq(D(["yes", "Yes, Continuum 55 & 57 is a pet-friendly community with a pet park and dog wash on-site.", "pet spa || [community amenity] Dog grooming area"])["label"],
+       "dog park; pet spa; dog wash", "dogs: Continuum, every source's words together")
+    eq(D(["yes || Pet Grooming || Dog Run"])["label"], "dog run; pet spa", "dogs: The Leaf")
+    for t in ("pet spa", "dog wash", "Dog Wash Room", "pet washing station; no dog run listed", "[community amenity] Dog grooming area", "PET GROOMING STATION",
+              "Residents also have access to a multi-station dog grooming facility on site."):
+        f = D(t)
+        ok(f["pet_spa_or_wash"] and not f["dog_park_or_run"] and not f["unspecified"], f"dogs: {t!r} is a pet spa or wash, never a dog area: {f}")
+    for t in ("Dog Park", "[features: Community] Pet Park", "Pet-friendly bark park and pet spa", "08. Rooftop Dog Run", "Spacious fenced in dog run.", "Pet Play Area/Dog Park",
+              "a fenced-in dog area", "an on-site dog park with an agility course", "Resident's Exclusive Dog Run"):
+        ok(D(t)["dog_park_or_run"], f"dogs: {t!r} names a dog park or run on the property")
+    for t in ("Dog trails at your doorstep & Bark Park close by.", "steps from the dog park", "a short walk to the city dog park", "During fall/winter they even let your dog run off leash.",
+              "no_mention", "", "none listed", "garage parking", "pet friendly"):
+        ok(not D(t)["dog_park_or_run"], f"dogs: {t!r} is not a dog area of the building")
+    ok(not D("steps from the dog park")["unspecified"] and D("") == {"dog_park_or_run": False, "pet_spa_or_wash": False, "unspecified": False, "label": ""}, "dogs: nothing said is nothing")
+    # the old field keeps the words the written text tests ('dog park', 'dog run', 'pet spa', 'wash')
+    ok(all(re.fullmatch(r"(?:(?:dog run|dog park|pet spa|dog wash)(?:; |$))+|yes|", D(t)["label"]) for t in ("yes", "Dog Park || Pet Washing Station", "bark park", "pet salon", "")), "dogs: the label uses the four known names or 'yes'")
+    # ---- item 3: laundry
+    L = lambda *src: P.laundry_facts([(t, b, v) for t, b, v in src])
+    eq(L(("On-site laundry", "stated", ""))["in_unit"], "on_site_only", "laundry: 'On-site laundry' is a shared room")
+    eq((L(("W/D hookup; On-site laundry", "stated", ""))["in_unit"], L(("W/D hookup; On-site laundry", "stated", ""))["hookups"]), ("on_site_only", True), "laundry: hookups and a shared room are not a washer in the apartment")
+    eq((L(("W/D hookup", "stated", ""))["in_unit"], L(("W/D hookup", "stated", ""))["hookups"]), ("", True), "laundry: hookups only")
+    f = L(("Washer, Dryer", "stated", ""), ("[features: Interior Features > Appliances & Utilities] Dryer", "amenities_page", "yes"), ("laundry room, additional fees may apply (not in unit) | LAUNDRY ROOM*", "confirmed", ""))
+    eq((f["in_unit"], f["on_site"]), ("on_site_only", True), "laundry: 153-10 88th Ave, a checker's 'not in unit' settles it against a listing site's appliance tags")
+    f = L(("On-site laundry", "stated", ""), ("[description] each individual residence comes packed with a gourmet kitchen, in-unit laundry, and energy star-rated fixtures.", "amenities_page", "yes"))
+    eq((f["in_unit"], f["on_site"], f["label"]), ("yes", True, "In-unit laundry; on-site laundry room"), "laundry: Bay One, the page says in-unit and the label beside the flag agrees")
+    f = L(("W/D hookup; On-site laundry", "stated", ""), ("in_unit", "stated", ""), ("[unit feature] In-Home Washer and Dryer", "amenities_page", "yes"))
+    eq((f["in_unit"], f["hookups"], f["names_both"]), ("yes", True, True), "laundry: West Side Square")
+    eq(L(("Yes", "stated", ""), ("[description] Select apartments also have loft-style layouts, hardwood floors, in-unit washer and dryer, walk-in closets", "amenities_page", "yes"))["in_unit"],
+       "select_apartments", "laundry: Beacon Mill Village, 'select apartments' is not every apartment")
+    eq(L(("[features: Additional Information > Special Features] Special Features: Balcony, Digital Thermostat, Dishwasher In Every Unit, Electric Vehicle", "amenities_page", "yes"))["in_unit"], "",
+       "laundry: 'Dishwasher In Every Unit' is not a washer")
+    eq(L(("Yes", "stated", ""))["in_unit"], "", "laundry: a bare 'Yes' does not say where")
+    eq(L(("shared laundry in the building, not in the unit | washer and dryer at building", "confirmed", ""), ("Washer, Dryer", "stated", ""))["in_unit"], "on_site_only", "laundry: 29 Maple St")
+    eq(L(("In unit laundry; On-site laundry", "stated", ""))["label"], "In-unit laundry; on-site laundry room", "laundry: both kinds are both said")
+    for t in ("[description] Enjoy in-unit washers and dryers, a state-of-the-art fitness center, and many more.", "[description] * In-unit washer & dryer", "[description] W/D IN EACH UNIT.",
+              "[page line] Full-size washer and dryer", "[description] upgraded kitchens, expansive closets, charming balconies, and in-unit washers and dryers."):
+        eq(L((t, "amenities_page", "yes"))["in_unit"], "yes", f"laundry: {t!r} says in the apartment")
+    import building_amenities as BA
+    ok(not re.search(BA.RX["laundry_in"], "Dishwasher In Every Unit") and re.search(BA.RX["laundry_in"], "Washer in every unit"), "laundry: the amenities parser does not read 'Dishwasher In Every Unit' as a washer")
+    # the merge writes the structured fields from all sources
+    M_ = BM.Merge()
+    M_.note_dog("b1", "yes", "Pet-friendly community with WAG Pet Park and Pet Spa")
+    M_.note_dog("b1", "dog park; pet spa", "[community amenity] Dog park || [community amenity] Dog grooming area")
+    M_.note_dog("b2", "pet spa", "[community amenity] Dog grooming area")
+    M_.note_dog("b3", "yes", "")
+    M_.note_laundry("b1", "On-site laundry", "stated")
+    M_.note_laundry("b1", "[description] in-unit laundry", "amenities_page", "yes")
+    M_.note_laundry("b2", "W/D hookup; On-site laundry", "stated")
+    rows = {"b1": {"dog_amenities": "yes", "in_unit_laundry": "yes", "laundry": "On-site laundry"}}
+    BM.structured_dog_and_laundry(rows, M_)
+    eq((rows["b1"]["dog_amenities"], rows["b1"]["dog_park_or_run"], rows["b1"]["pet_spa_or_wash"], rows["b1"]["dog_amenity_unspecified"]), ("dog park; pet spa", "yes", "yes", ""), "merge: dog fields of b1")
+    eq((rows["b2"]["dog_park_or_run"], rows["b2"]["pet_spa_or_wash"]), ("", "yes"), "merge: a pet spa alone")
+    eq((rows["b3"]["dog_amenities"], rows["b3"]["dog_park_or_run"], rows["b3"]["dog_amenity_unspecified"]), ("yes", "", "yes"), "merge: a bare yes stays 'yes' and is unspecified")
+    eq((rows["b1"]["in_unit_laundry"], rows["b1"]["on_site_laundry"], rows["b1"]["laundry"]), ("yes", "yes", "In-unit laundry; on-site laundry room"), "merge: laundry of b1")
+    eq((rows["b2"]["in_unit_laundry"], rows["b2"]["washer_dryer_hookups"], rows["b2"]["on_site_laundry"]), ("on_site_only", "yes", "yes"), "merge: laundry of b2")
+    # ---- item 1: the notes for the reader
+    texts = [("notes", n) for n in BP.META_NOTES] + [(f"moment_thresholds.{k}.{kk}", vv) for k, d_ in BP.MOMENT_THRESHOLDS.items() for kk, vv in d_.items()]
+    for where, t in texts:
+        ok(not re.search(r"\b[a-z]+_[a-z_]+\b", t), f"notes: {where} carries a field name: {t[:80]!r}")
+        ok(not re.search(r"(?i)\ball[- ]in\b|not (?:read|checked) again|car sleeps|net-effective|\bunits?\b|\bplaces?\b|\bwe\b", t), f"notes: {where} uses working vocabulary or a conceit: {t[:80]!r}")
+        ok(not BRITISH.search(t), f"notes: {where} has a British spelling: {t[:80]!r}")
+    ok(any("total with utilities and fees" in n for n in BP.META_NOTES), "notes: the all-in figure is called 'total with utilities and fees'")
+    ok("center" in P.TOLL_NOTE and "centre" not in P.TOLL_NOTE and "New York E-ZPass" in P.TOLL_NOTE, "notes: the toll note in American spelling")
+    # our own rule summaries: American spelling; a verbatim quote is never touched
+    import csv
+    for f_, col in (("local_rules.csv", "summary"), ("local_rules_round2.csv", "summary"), ("overnight_parking_towns.csv", "rule_summary")):
+        rows_ = list(csv.DictReader(open(DATA / "reference" / f_, newline="", encoding="utf-8")))
+        bad = [(r_["municipality"], BRITISH.search(r_[col]).group(0)) for r_ in rows_ if BRITISH.search(r_[col])]
+        ok(not bad, f"spelling: {len(bad)} summaries in data/reference/{f_} have a British spelling, e.g. {bad[:3]}")
+    # ---- item 4: a neighborhood's figures are the median BUILDING's
+    s_ = pd.DataFrame({"building_id": ["a"] * 8 + ["b", "c"], "shown_rank": range(1, 11), "restaurants_800m": [2] * 8 + [30, 40], "park_walk_min": [None] * 8 + [5, 7]})
+    bl = [{"amenities": {"dog_park_or_run": True}}, {"amenities": {"pet_spa_or_wash": True, "dog_amenities": "pet spa"}}, {"amenities": {"dog_amenity_unspecified": True, "dog_amenities": "yes"}}]
+    sf = BP.shown_figures(s_, bl)
+    eq((sf["restaurants_800m"], sf["park_walk_min"], sf["buildings_with_own_dog_area"], sf["buildings_with_pet_spa_or_wash"], sf["buildings_with_unspecified_dog_amenity"], sf["buildings"]),
+       (30.0, 6.0, 1, 1, 1, 3), "shown_figures: one vote per building (the apartment median would be 2), and only a dog park or run is a dog area")
+
+
+# British spellings that must not appear in a text the pipeline writes itself ("flat" only as a noun for an apartment)
+BRITISH = re.compile(r"\b(?:licen[c]e[sd]?|colou?r(?<=colour)\w*|neighbour\w*|centres?|storeys?|metres?|kilometres?|programmes?|kerbs?|cheques?|authoris\w+|organis\w+|recognis\w+|"
+                     r"favour\w*|harbour\w*|behaviour\w*|whilst|per cent|(?:a|the|this|her|each|every|one-bedroom|studio) flats?)\b", re.I)
+
+
+def page_cleanup(J, M, R, S):
+    """The clean-up of 2026-11-16 on site/data.json. Skipped while the page data is older than the ranking (run
+    scripts/build_page_data.py, then this suite again: scripts/verify_all.py does)."""
+    import statistics
+    if (ROOT / "site" / "data.json").stat().st_mtime < (DATA / "ranked_units.csv").stat().st_mtime:
+        return
+    B = {b["id"]: b for b in J["buildings"]}
+    # item 2: structured dog amenities; the old field agrees with them
+    for b in J["buildings"]:
+        a = b["amenities"]
+        f = P.dog_amenity_facts(a.get("dog_amenities"))
+        ok((a.get("dog_park_or_run"), a.get("pet_spa_or_wash"), a.get("dog_amenity_unspecified")) == (f["dog_park_or_run"], f["pet_spa_or_wash"], f["unspecified"]),
+           f"page: {b['id']} dog flags disagree with dog_amenities {a.get('dog_amenities')!r}")
+        ok(not (a.get("dog_amenity_unspecified") and (a.get("dog_park_or_run") or a.get("pet_spa_or_wash"))), f"page: {b['id']} dog amenity both named and unspecified")
+        # item 3: in-unit laundry never beside words that say otherwise
+        t = str(a.get("laundry") or "")
+        if a.get("in_unit_laundry") == "yes":
+            ok(re.match(r"In-unit ", t) and "not in" not in t.lower() and "select" not in t.lower(), f"page: {b['id']} in_unit_laundry = yes beside {t!r}")
+        else:
+            ok(not re.match(r"In-unit (?:laundry|washer and dryer)(?:;|$)", t), f"page: {b['id']} in_unit_laundry = {a.get('in_unit_laundry')!r} beside {t!r}")
+        ok(a.get("in_unit_laundry") in ("yes", "on_site_only", "select_apartments", None), f"page: {b['id']} in_unit_laundry = {a.get('in_unit_laundry')!r}")
+        ok(not a.get("on_site_laundry") or "on-site laundry room" in t.lower(), f"page: {b['id']} on_site_laundry without its words: {t!r}")
+        ok(not a.get("washer_dryer_hookups") or "hookups" in t.lower(), f"page: {b['id']} hookups without the word: {t!r}")
+    # item 4: shown_figures are the median building's, and the dog-area count is the strict one
+    by_b = {}
+    for u in J["units"]:
+        by_b.setdefault(u["building_id"], []).append(u)
+    where = {"restaurants_800m": ("after", "restaurants_800m"), "bars_800m": ("after", "bars_800m"), "cafes_800m": ("after", "cafes_800m"), "park_walk_min": ("wake", "park_walk_min"),
+             "dog_park_m": ("wake", "dog_park_m"), "supermarket_m": ("work", "supermarket_m"), "train_station_m": ("sat", "train_station_m"), "restaurants_1600m": ("sat", "restaurants_1600m"),
+             "bars_1600m": ("sat", "bars_1600m")}
+    wrong = []
+    for h in J["neighborhoods"]:
+        sf = h["shown_figures"]
+        bl = [B[i] for i in h["building_ids"]]
+        if sf["buildings_with_own_dog_area"] != sum(1 for b in bl if b["amenities"]["dog_park_or_run"]):
+            wrong.append((h["id"], "buildings_with_own_dog_area"))
+        for k, (mo, kk) in where.items():
+            vals = []
+            for b in bl:
+                x = next((u["moments"][mo][kk] for u in by_b.get(b["id"], []) if u["moments"][mo].get(kk) is not None), None)
+                if x is not None:
+                    vals.append(float(x))
+            want = statistics.median(vals) if vals else None
+            if (sf[k] is None) != (want is None) or (want is not None and abs(float(sf[k]) - want) > 1e-6):
+                wrong.append((h["id"], k, sf[k], want))
+    ok(not wrong, f"page: {len(wrong)} shown_figures are not the median over the shown buildings, e.g. {wrong[:3]}")
+    # item 1: no British spelling in any text the pipeline writes for the reader, summaries of local rules included
+    bad = [(p_, BRITISH.search(t).group(0)) for p_, t in page_text_fields(J) if BRITISH.search(t)]
+    bad += [(f"{h['id']}.local.{k}", BRITISH.search(str(r_.get("summary") or "")).group(0)) for h in J["neighborhoods"] for k in ("parking_rules", "dog_rules")
+            for r_ in ((h.get("local") or {}).get(k) or []) if isinstance(r_, dict) and BRITISH.search(str(r_.get("summary") or ""))]
+    bad += [(f"meta.notes[{i}]", BRITISH.search(n).group(0)) for i, n in enumerate(J["meta"]["notes"]) if BRITISH.search(n)]
+    ok(not bad, f"page: {len(bad)} reader texts have a British spelling, e.g. {bad[:4]}")
+    ok(not re.search(r"\b[a-z]+_[a-z_]+\b|(?i:\ball[- ]in\b|car sleeps|not read again)", json.dumps(J["meta"]["notes"]) + json.dumps([list(d_.values()) for d_ in J["meta"]["moment_thresholds"].values()])),
+       "page: meta.notes and meta.moment_thresholds are plain sentences (no field names, no 'all-in', no conceit)")
+
+
 if __name__ == "__main__":
     if "--data" not in sys.argv:
         pure_ic4()
         pure_ic4_text()
+        pure_cleanup()
     (data if "--data" in sys.argv else pure)()
     print(f"test_rules {'(data)' if '--data' in sys.argv else '(rules)'}: {N[0]} checks, {len(FAILS)} failed")
     for f in FAILS:
