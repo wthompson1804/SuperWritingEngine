@@ -2,7 +2,7 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-15, end of day)
+## Current state (2026-11-16, 01:00 UTC)
 
 **Authorities, newest first:** `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` → `docs/RANKING.md` (v2) → `docs/SAFETY_BASIS.md`
 → `docs/PLAN_V3_APPROVED_2026-11-15.md` (gates; dog limit 25 lb; size-only "small dogs" passes) → UX brief and mock-up 4 (layout only).
@@ -11,12 +11,35 @@ The "data only, no UI, no ranking" lines in `CLAUDE.md` and the handoff brief ar
 **Run everything:** `python3 scripts/run_all.py` (`--fast` after evidence-only changes) → `scripts/build_page_data.py` →
 `scripts/page_data_extras.py` (prose, round 2 quotes and rules, contacts) → `scripts/build_site.py` → `site/dist/index.html`. Publish as a NEW private artifact (never replace the mock).
 
-**Latest run (2026-11-16, after the second independent check and the owner's three rule changes):** 20,464 listings →
-2,598 pass listing gates → 1,655 within the all-in cap → 855 ranked → **326 shown** in 233 buildings, 107 neighborhoods
-(118 with one open item: live check 42, listing 27, dogs 17, elevator 16, availability 14, eligibility 2; disclosures:
-floor not published 295, cost near the cap 50, lease term 39, net-effective rent 26, condo 4), 35 avoid cards, 26 held,
-28 waiting for a live check. By year: Little-City 132, Room-to-Breathe 76, Old-Neighborhood 75, Fresh-Start 27,
-Quiet-Street 10, Walk-Everywhere 6. By state: NJ 137, NY 111, CT 78. No cap of 10 per neighborhood any more.
+**Latest run (2026-11-16, 01:00 UTC; tolls, Jersey City split, rule items, evidence batches 18 and 19):** 20,464 listings →
+2,659 pass listing gates (61 pending listings settled by batch 18) → 1,653 within the all-in cap → 821 ranked → **347 shown** in
+246 buildings, 110 neighborhoods (37 with three or more; Stamford has 38). 133 with one open item: live check 46, listing 29,
+elevator 19, dogs 19, availability 15, eligibility 5. Disclosures: floor not published 313, cost near the cap 51, lease term 41,
+net-effective rent 26, dog weight limit not published 19, overnight street parking 12, condo 4. 36 avoid cards, 28 held, 28 waiting
+for a live check. By experience: Little-City 143, Room-to-Breathe 76, Old-Neighborhood 75, Fresh-Start 38, Quiet-Street 9,
+Walk-Everywhere 6. By state: NJ 145, NY 111, CT 91. 539 reviewed verdicts (ok 287, asterisk 85, remove 167).
+
+**Done in this pass** (`docs/RANKING.md`, last section; tests in `scripts/test_rules.py`: 199 rule checks, about 1,450 on the output):
+- **Tolls complete** for all 792 buildings (MTA rates). New York E-ZPass figure plus the mail-rate figure (what an out-of-state tag pays
+  at MTA crossings); the mail figure is "at least" for the 187 buildings whose route enters the Manhattan congestion zone (no mail rate found).
+- **Jersey City split** into its neighborhoods (Jersey City only; `data/reference/subcity_overrides.csv` holds four boundary overrides).
+  Shown: Bergen-Lafayette 8 (Fresh-Start), West Side 7 and Journal Square 6 (Little-City), Downtown 1 (Fresh-Start), McGinley Square 0
+  (Old-Neighborhood; 4 avoid cards). Safety stays on the citywide police rate; the sub-city figure is a labelled 10-month estimate.
+- **Overnight street-parking disclosure** from the reviewed table `data/reference/overnight_parking_towns.csv` (26 towns: 6 ban, 12 permit, 8 seasonal).
+- **Staleness is a rule** (over 60 days: one open item; over six months: removed), **dog weight limit with no number** carries the tour
+  question, **an elevator on a listing site's amenity list is `stated`** in every batch.
+- **Phone answers**: `data/evidence/call_answers.csv` (absent today) is wired in as the highest-precedence source (`confirmed_by_phone`).
+- **Evidence batch 18** (pending listings in the thin experiences) and **batch 19** (buildings that had no evidence) are in.
+
+**Weak, plainly:** 257 of the 347 shown units (173 buildings) have their elevator from listing sites only (Apartment List, Trulia, Zumper),
+never from the building's own page or a record. 313 shown floors are not published. 179 shown units are Trulia rows that cannot be re-read
+(Trulia is refusing us); 46 shown units were never seen live. Page modification dates exist for only about 350 of 2,634 units, so the
+staleness rule is silent on most building-page rows. `scripts/check_scene_text.py` fails on 5 rows whose counts moved (Little-City,
+Fresh-Start, Harrison, Yonkers, Stamford): the writing agent owns those.
+
+**Open:** the Zumper opened-listings harvest (`data/listings_pending/zumper_opened.csv`) was not finished when this pass ended and is not
+merged; Avalon W Squared (West Windsor, 65 pending units) must not be filed under Princeton if it ever passes; the Manhattan congestion-zone
+mail rate; photos; Reddit key.
 
 **The review rule (new):** a unit is shown only if `data/evidence/review_verdicts.csv` holds an `ok` or `asterisk` verdict for
 it, written against the evidence as it stands (`scripts/verdicts.py`; `check_registry.py` fails the run otherwise). When
@@ -34,7 +57,8 @@ evidence is added or a new unit is promoted: `python3 scripts/verdicts.py digest
 | Neighborhood voices: 890 verified quotes, 79 neighborhoods, 873 from Niche | Done; 53 later neighborhoods have none |
 | Local rules (parking, dogs) for 34 of 56 municipalities | Done |
 | Trulia | Blocking us (403/CAPTCHA) since the evening of Nov 15. No Trulia requests until a single test on Nov 16. About 100 NYC shown units cannot be re-checked until then |
-| Jersey City split into neighborhoods; written scene text; photos; MTA toll rates (Will); Reddit key (Will) | Open |
+| Jersey City split into neighborhoods; MTA toll rates | Done 2026-11-16 |
+| Photos; Reddit key (Will); Zumper opened-listings merge | Open |
 
 **Robots lapses to remember (told to Will):** the voices agent restarted after a Niche 403 (21 neighborhoods; quotes kept pending Will's call);
 evidence batch 13 sent six more Trulia requests after the first refusals. Agent briefs must say: one refusal ends that host for the session.

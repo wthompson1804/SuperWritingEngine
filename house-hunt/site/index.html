@@ -547,6 +547,7 @@ small.gtkc{display:block;margin-top:6px;padding-top:5px;border-top:1.5px dashed 
 .psub .safest{font-size:12px;padding:1px 8px}
 .sec.pc{display:grid;gap:4px}
 .sec.pc .l2 b{font-family:var(--display)}
+.sec.pc .l2{-webkit-line-clamp:1}
 .clamp.c2{max-height:calc(2 * 1.45em)}
 .host .clamp.c2{max-height:calc(2 * 1.4 * 15.5px)}
 .host.sm{padding:8px 12px 6px;gap:2px}
@@ -2013,7 +2014,7 @@ function vYear(Y){
   if(M.toll_round_trip!=null&&tollMail(M)!=null)costHow.push("Tolls are the New York E-ZPass figure. By mail they are typically "+money(tollMail(M))+" a visit.");
   costHow.push(capFirst(["prices from "+SOURCES.listing,"drive times, without traffic, from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"train and bus from "+SOURCES.transit,"restaurant counts and walks to green space from "+SOURCES.map].join("; "))+".");
   h+='<section class="sec rows" id="sec-rows">'+rowsTop();
-  if(scenes||walk.length)h+=row("r-scene","A day in this experience",HL.first(walk.length?walk[0]:pr(Y,"scene")||Y.scenes,60),scenes+(walk.length?hostBox(walk,null,true,"host-walk"):''),{sub:hlSub(Y,"day","scene")});
+  if(scenes||walk.length||prom||kat)h+=row("r-scene","A day in this experience",HL.first(walk.length?walk[0]:pr(Y,"scene")||Y.scenes||prom||kat,60),scenes+(walk.length?hostBox(walk,null,true,"host-walk"):'')+(prom||kat?'<div class="two" style="margin-top:10px">'+(prom?'<div class="panel love"><h4>The promise</h4><p>'+esc(prom)+'</p></div>':'')+(kat?'<div class="panel pause"><h4>The catch</h4><p>'+esc(kat)+'</p></div>':'')+'</div>':''),{sub:hlSub(Y,"day","scene")});
   if(us.length)h+=row("r-cost","What it costs you",HL.yearCost(Y),allInLine(us)+'<div class="figs" style="margin-top:8px"><div>'+(f.cost!=null?'<b>about '+m0(f.cost)+'</b><span>a month, all-in</span>'+rng(f.cr,m0):'<b>'+NK+'</b>')+'</div><div>'+(f.drive!=null?'<b>about '+r0(f.drive)+' min</b><span>to Mom and Dad</span>'+rng(f.dr,r0," min"):'<b>'+NK+'</b>')+'</div></div>'+(M.transit_min!=null?'<p style="margin-top:8px">About '+r0(M.transit_min)+' minutes by train and bus.</p>':'')+(M.sqft!=null?'<p>A typical place is '+r0(M.sqft)+' sq ft.</p>':'')+howHtml('<p>'+costHow.map(esc).join('</p><p>')+'</p>'),{sub:hlSub(Y,"cost","to_parents")});
   if(M.restaurants_800m!=null||M.park_walk_min!=null)h+=row("r-out","Going out and green space",HL.out(M),'<ul>'+lis(yf.slice(2).concat(hlSub(Y,"green")&&hlSub(Y,"going_out")?[hlSub(Y,"green")]:[]))+'</ul>'+how("restaurant counts and walks to green space from "+SOURCES.map),{sub:hlSub(Y,"going_out","green")});
   if(SPEC_OPEN.length&&Y.vs_queens&&SPEC_OPEN.some(function(s){return Y.vs_queens[s.measure]!=null}))h+=row("r-queens","Compared to staying in Queens",HL.queens(Y.vs_queens),SCALE_KEY+'<div class="ylist">'+SPEC_OPEN.map(function(s){var p=Y.vs_queens[s.measure],dk=YEAR_DIFF_KEY[s.measure],d=dk&&Y.vs_queens_diff?Y.vs_queens_diff[dk]:null;p=p==null?null:Math.round(p);
