@@ -106,7 +106,7 @@ addr_key,listing_url,unit,status,price_now,available_now_text,matches_stored,bui
 310 94th st|11209,https://www.apartmentlist.com/ny/brooklyn/310-94th-st,1 Bed,live,1800,available now (available_on 2026-11-14),yes,,2026-11-16T00:13:00+00:00,
 191 73rd st|11209,https://www.apartmentlist.com/ny/brooklyn/191-73rd-street--1,219A,live,2400,available now (available_on 2026-10-27),yes,,2026-11-16T00:13:03+00:00,
 191 73rd st 219a brooklyn ny 11209 usa|11209,https://www.zumper.com/listings/65649529/1-bedroom-bay-ridge-new-york-ny,219A,live,2400,not stated on the Zumper page,yes,,2026-11-16T00:18:20+00:00,
-1122 53rd st|07047,https://www.apartmentlist.com/nj/north-bergen/plaza-53,1 Bed - 1 Bath,gone,,,no,,2026-11-16T00:13:06+00:00,unit id not on the re-read Apartment List page
+1122 53rd st|07047,https://www.apartmentlist.com/nj/north-bergen/plaza-53,1 Bed - 1 Bath,live,2300,available now (available_on 2024-03-05),yes,,2026-11-16T00:13:06+00:00,
 5665 john f kennedy blvd|07047,https://www.apartmentlist.com/nj/north-bergen/avalon-north-bergen,232,live,2570, (available_on 2026-11-20),yes,,2026-11-16T00:13:09+00:00,
 5665 john f kennedy blvd|07047,https://www.apartmentlist.com/nj/north-bergen/avalon-north-bergen,426,live,2695, (available_on 2026-12-03),yes,,2026-11-16T00:13:09+00:00,
 5665 john f kennedy blvd|07047,https://www.apartmentlist.com/nj/north-bergen/avalon-north-bergen,523,live,2650, (available_on 2026-12-10),yes,,2026-11-16T00:13:09+00:00,
@@ -226,8 +226,8 @@ one chester circle|08901,https://www.apartmentlist.com/nj/new-brunswick/the-gard
 1 richmond st|08901,https://www.apartmentlist.com/nj/new-brunswick/renaissance-plaza-square,2017,live,2603, (available_on 2026-11-18),yes,,2026-11-16T00:13:51+00:00,
 1 richmond st|08901,https://www.apartmentlist.com/nj/new-brunswick/renaissance-plaza-square,2065,live,2628,available now (available_on 2026-11-15),yes,,2026-11-16T00:13:51+00:00,
 1 richmond st|08901,https://www.zumper.com/apartment-buildings/p8642/plaza-square-apartments-new-brunswick-nj,,live,2603,2026/11/15,yes,,2026-11-16T00:19:29+00:00,"Zumper floor-plan row (a 'from' price for a plan), not a numbered unit"
-60 paterson st|08901,https://www.apartmentlist.com/nj/new-brunswick/skyline-tower--1,1 Bed - 1 Bath,gone,,,no,,2026-11-16T00:13:54+00:00,unit id not on the re-read Apartment List page
-60 paterson st|08901,https://www.apartmentlist.com/nj/new-brunswick/skyline-tower--1,1 Bedroom Large,gone,,,no,,2026-11-16T00:13:54+00:00,unit id not on the re-read Apartment List page
+60 paterson st|08901,https://www.apartmentlist.com/nj/new-brunswick/skyline-tower--1,1 Bed - 1 Bath,live,2075,available now (available_on 2024-03-14),yes,,2026-11-16T00:13:54+00:00,
+60 paterson st|08901,https://www.apartmentlist.com/nj/new-brunswick/skyline-tower--1,1 Bedroom Large,live,2150,available now (available_on 2024-03-14),yes,,2026-11-16T00:13:54+00:00,
 123 water st|06854,https://www.zumper.com/apartment-buildings/p502359/harbourside-sono-norwalk-ct,,live,2525,not stated on the Zumper page,yes,,2026-11-16T00:14:02+00:00,"Zumper floor-plan row (a 'from' price for a plan), not a numbered unit"
 123 water st|06854,https://www.zumper.com/apartment-buildings/p502359/harbourside-sono-norwalk-ct,,live,2490,not stated on the Zumper page,yes,,2026-11-16T00:14:02+00:00,"Zumper floor-plan row (a 'from' price for a plan), not a numbered unit"
 123 water st|06854,https://www.zumper.com/apartment-buildings/p502359/harbourside-sono-norwalk-ct,,live,2509,not stated on the Zumper page,yes,,2026-11-16T00:14:02+00:00,"Zumper floor-plan row (a 'from' price for a plan), not a numbered unit"
@@ -273,16 +273,16 @@ one chester circle|08901,https://www.apartmentlist.com/nj/new-brunswick/the-gard
 230 e ave norwalk ct 06855 usa|06855,https://www.zumper.com/apartment-buildings/p499811/brim-and-crown-east-norwalk-norwalk-ct,,live,2352,not stated on the Zumper page,yes,,2026-11-16T00:14:15+00:00,"Zumper floor-plan row (a 'from' price for a plan), not a numbered unit"
 230 e ave norwalk ct 06855 usa|06855,https://www.zumper.com/apartment-buildings/p499811/brim-and-crown-east-norwalk-norwalk-ct,,live,2340,not stated on the Zumper page,yes,,2026-11-16T00:14:15+00:00,"Zumper floor-plan row (a 'from' price for a plan), not a numbered unit"
 230 e ave norwalk ct 06855 usa|06855,https://www.zumper.com/apartment-buildings/p499811/brim-and-crown-east-norwalk-norwalk-ct,,live,2236,not stated on the Zumper page,yes,,2026-11-16T00:14:15+00:00,"Zumper floor-plan row (a 'from' price for a plan), not a numbered unit"
-64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,301,gone,,,no,,2026-11-16T00:14:15+00:00,unit id not on the re-read Apartment List page
-64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,501,gone,,,no,,2026-11-16T00:14:15+00:00,unit id not on the re-read Apartment List page
-64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,212,gone,,,no,,2026-11-16T00:14:15+00:00,unit id not on the re-read Apartment List page
-64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,306,gone,,,no,,2026-11-16T00:14:15+00:00,unit id not on the re-read Apartment List page
-64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,506,gone,,,no,,2026-11-16T00:14:15+00:00,unit id not on the re-read Apartment List page
-64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,507,gone,,,no,,2026-11-16T00:14:15+00:00,unit id not on the re-read Apartment List page
-64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,406,gone,,,no,,2026-11-16T00:14:15+00:00,unit id not on the re-read Apartment List page
-64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,307,gone,,,no,,2026-11-16T00:14:15+00:00,unit id not on the re-read Apartment List page
-64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,512,gone,,,no,,2026-11-16T00:14:15+00:00,unit id not on the re-read Apartment List page
-64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,312,gone,,,no,,2026-11-16T00:14:15+00:00,unit id not on the re-read Apartment List page
+64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,301,live,2650,available now (available_on 2026-08-13),yes,,2026-11-16T00:14:15+00:00,
+64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,501,live,2650,available now (available_on 2026-10-26),yes,,2026-11-16T00:14:15+00:00,
+64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,212,live,2650,available now (available_on 2026-08-13),yes,,2026-11-16T00:14:15+00:00,
+64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,306,live,2650,available now (available_on 2026-08-13),yes,,2026-11-16T00:14:15+00:00,
+64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,506,live,2650,available now (available_on 2026-10-26),yes,,2026-11-16T00:14:15+00:00,
+64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,507,live,2650,available now (available_on 2026-10-26),yes,,2026-11-16T00:14:15+00:00,
+64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,406,live,2650,available now (available_on 2026-10-26),yes,,2026-11-16T00:14:15+00:00,
+64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,307,live,2650,available now (available_on 2026-08-13),yes,,2026-11-16T00:14:15+00:00,
+64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,512,live,2650,available now (available_on 2026-10-26),yes,,2026-11-16T00:14:15+00:00,
+64 danbury rd|06897,https://www.apartmentlist.com/ct/wilton/brookside-wilton,312,live,2650,available now (available_on 2026-08-13),yes,,2026-11-16T00:14:15+00:00,
 130 fairchild ave|06825,https://www.trulia.com/building/fairchild-apartments-130-fairchild-ave-fairfield-ct-06825-2737390441,203,blocked,1550,Available Now,no,,2026-11-15T21:49:37+00:00,Trulia not requested (blocking us); price and date as on the cached page of 2026-11-15T21:49:37+00:00
 130 fairchild ave|06825,https://www.trulia.com/building/fairchild-apartments-130-fairchild-ave-fairfield-ct-06825-2737390441,218,blocked,1650,Available Now,no,,2026-11-15T21:49:37+00:00,Trulia not requested (blocking us); price and date as on the cached page of 2026-11-15T21:49:37+00:00
 805 saint marks ave brooklyn ny 11213 usa|11213,https://www.zumper.com/apartment-buildings/p216219/805-st-marks-avenue-crown-heights-new-york-ny,,live,2500,not stated on the Zumper page,yes,,2026-11-16T00:14:18+00:00,"Zumper floor-plan row (a 'from' price for a plan), not a numbered unit"

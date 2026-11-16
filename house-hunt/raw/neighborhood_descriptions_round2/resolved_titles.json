@@ -878,12 +878,14 @@
  "Downtown Yonkers": {
   "offset": 15809432685,
   "end": 15809545487,
-  "page_id": 42854504
+  "page_id": 42854504,
+  "redirect_to": "Getty Square"
  },
  "Ironbound": {
   "offset": 19482298275,
   "end": 19482393063,
-  "page_id": 57329302
+  "page_id": 57329302,
+  "redirect_to": "The Ironbound"
  },
  "India Square": {
   "offset": 5465495158,

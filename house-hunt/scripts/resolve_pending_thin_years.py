@@ -747,6 +747,8 @@ def write():
                     opens.append("Dog policy conflicts between pages (" + dog[2][:150] + "): which is right?")
                 else:
                     opens.append(DOG_Q)
+            if "dog" not in reasons and dog and dog[0] == "conflict":
+                opens.append("Dog policy conflicts between pages (" + dog[2][:150] + "): which is right?")
             if "movein" in reasons:
                 if avail_iso == "now" or (re.match(r"\d{4}-\d\d-\d\d", avail_iso) and avail_iso <= WINDOW_END):
                     how.append(f"availability: {avail_txt} (read from the listing page)")

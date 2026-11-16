@@ -1,13 +1,13 @@
 {
  "verdicts": {
-  "still_open": 371,
+  "still_open": 390,
   "now_passes": 68,
-  "fails": 24
+  "fails": 5
  },
  "now_passes_new_units": 64,
  "now_passes_duplicates_of_passing_units": 4,
- "still_open_single_question": 278,
- "still_open_single_question_buildings": 80,
+ "still_open_single_question": 289,
+ "still_open_single_question_buildings": 82,
  "refused_hosts": {
   "goldberg-realty.com": {
    "why": "HTTP 403",
