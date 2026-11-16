@@ -224,3 +224,119 @@ Details in `docs/harvest_notes/voices.md`. None of Trulia, Niche or City-Data ha
 - **Niche `/places-to-live/<slug>/reviews/`**: plain fetch works; newest 20 reviews only (`?page=2` repeats page 1). One 403 seen (New Brunswick).
   NJ townships use `-township-` slugs; Connecticut uses planning-region slugs.
 - **City-Data**: forum index and thread pages fetch normally; threads must be found from index pages or a web search.
+
+## Collected addendum (2026-11-16): findings other agents recorded in their notes
+
+Copied here from `docs/harvest_notes/*.md`, `docs/tools_notes/*.md`, `docs/MAP_COMPONENT.md` and
+`docs/SUBCITY_SPLIT_PLAN.md`, whose authors could not edit this shared file. Earlier sections are unchanged. Each line
+names the note that holds the detail. Dates are 2026-11-15 or 2026-11-16 unless stated.
+
+**Standing state**
+
+- **Trulia** refuses us: 403 "Access to this page has been denied" (PerimeterX) from the evening of 2026-11-15, first on
+  neighborhood pages, then on listing and building pages during evidence batch 13 (which wrongly sent six more requests
+  after the first refusals). No Trulia requests since. `harvest_notes/evidence_batch_13.md`, `voices.md`.
+- **One refusal ends a host**, and the refusal is persisted so a restart does not retry it: `raw/_host_kill_shared.json`
+  (shared), `data/evidence_pending/refused_hosts.json`, `raw/building_contacts_own_site/_refused_hosts.json`,
+  `raw/local_rules_round2/_blocked_hosts.json`.
+- Zumper (about 1,410 requests), Apartment List (4,698 logged responses), AvalonBay, Greystar, Fairfield, Garden
+  Communities and Propertyware never refused. `harvest_notes/zumper.md`, `apartmentlist.md`, `resolve_pending_thin_years.md`.
+
+**Corrections to earlier sections**
+
+- **Greystar needs no browser.** The unit table is in the plain HTML inside the `self.__next_f.push` chunks
+  (`property`, `propertyUnits`, `fees`), as bare numbers. Section 2 and "Implications" above say a browser is needed;
+  that was a test artefact. `harvest_notes/mgmt.md`.
+- **Craigslist** stays off limits for scripts (terms of use), as the evening addendum says; the earlier "Implications"
+  line that calls its HTML "practical" is superseded. `harvest_notes/craigslist.md`.
+
+**Tolls and travel**
+
+| Source | Result | Note |
+|---|---|---|
+| New York State Register, 2025-12-24, Vol. XLVII, Issue 51 (`https://dos.ny.gov/december-24-2025vol-xlvii-issue-51`, serves the PDF) | **Works.** Official source for the nine MTA Bridges and Tunnels rates (21 NYCRR 1021.1, effective 2025-12-08). The rate tables are page images: rendered with `pdftoppm` and read by eye, entered as `found_manual` in `data/reference/tolls.csv`. Schedule b (Tolls by Mail) is also what an out-of-state E-ZPass pays. The usual `/system/files/documents/2025/12/122425.pdf` path is 404 | `tools_notes/mta_tolls.md` |
+| mta.info, e-zpassny.com, the NYCRR site | Bot walls (Akamai, Incapsula, Cloudflare). Not requested again | `tools_notes/mta_tolls.md`, `drive.md` |
+| Manhattan congestion-zone mail rate | Not found; routes entering the zone carry an "at least" mail figure | `PROGRESS.md` |
+| Norwalk Transit District GTFS | 403 on the feed URL; left out | `tools_notes/transit.md` |
+| Central Hudson, NYSEG, Southern Connecticut Gas, Connecticut Natural Gas tariffs | Hosts unreachable or bot wall; gas is `not_found` there | `tools_notes/utilities.md` |
+| Spectrum, Xfinity, fcc.gov survey pages | 403 | `tools_notes/utilities.md` |
+| data.ct.gov `7t99-gbjg` (CT crime incidents) | A link record, not a table (403 on `/resource/`) | `tools_notes/crime.md` |
+
+**Census geography (www2.census.gov: no robots rule for us, every request 200)**
+
+| Product | URL | Used for | Note |
+|---|---|---|---|
+| Cartographic boundary counties 2023, 1:500k | `https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_county_500k.zip` | Land, borough and county lines of the page map. Clipped only to the ocean shoreline | `MAP_COMPONENT.md` |
+| TIGER/Line 2023 AREAWATER, one file per county (39 counties) | `https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_<FIPS>_areawater.zip` | Cutting the Hudson, the East River and the bays out of the land | `MAP_COMPONENT.md` |
+| TIGER 2024 tracts, New Jersey | `https://www2.census.gov/geo/tiger/TIGER2024/TRACT/tl_2024_34_tract.zip` (7.1 MB) | Tract polygons for the Jersey City split | `SUBCITY_SPLIT_PLAN.md` |
+| 2020 voting districts, Hudson and Essex | `https://www2.census.gov/geo/tiger/TIGER2020PL/LAYER/VTD/2020/tl_2020_34017_vtd20.zip`, `…_34013_vtd20.zip` | Ward lines (district names carry the ward) | `SUBCITY_SPLIT_PLAN.md` |
+
+Raw downloads (12 MB + 19 MB for the map, 7 MB for the split) are under `raw/` and can be re-created by
+`scripts/build_map_base.py` and `scripts/build_subcity_neighborhoods.py`.
+
+**Records**
+
+| Source | Result | Note |
+|---|---|---|
+| NYC Open Data (Socrata), `Crawl-delay: 1`, no Claude group | **Works.** Datasets used beyond section 4: `wvxf-dwi5` HPD violations, `ygpa-z7cr` HPD complaints and problems, `kj4p-ruqc` buildings under HPD, `tesw-yqqr` + `feu5-w2e2` registrations and contacts, `wz6d-d3jb` bedbug filings, `erm2-nwe9` 311 requests, `e5aq-a4j2` DOB NOW elevator devices, `855j-jady` DOB safety violations, `6z8x-wfk4` evictions, `64uk-42ks` PLUTO, `hxx3-bwgv` dog runs. `eabe-havv` DOB complaints has no usable data after 2022 | `harvest_notes/nyc_records.md`, `local_rules.md` |
+| NJ DCA Bureau of Housing Inspection, `serviceportal.dca.nj.gov` | **Works**, no login, no robots.txt: property search, details page, inspection report PDFs. Inspections are about every five years | `harvest_notes/non_nyc_records.md` |
+| JC IMPACT (`impact.jcnj.org`, Jersey City police) | **Works** for block-level incidents read from the page's own script bundle (robots allows it; the disallowed `.json` and `.pdf` files were not fetched). Use approved by Will. Window about 10.5 months | `harvest_notes/non_nyc_records.md` |
+| `data.jerseycitynj.gov` | robots disallows `/api/` and downloads. Off limits | same |
+| NJ DCA elevator safety portal | Sign-in required | same |
+| Newark (open data 503; city and police sites 403 at robots.txt), Yonkers (403), Stamford (403), New Rochelle (unreachable) | No records | same |
+| CrimeMapping.com (terms prohibit harvesting), CityProtect, Community Crime Map (script-only) | Not used | same |
+| NY outside NYC, and Connecticut | No usable building-level record source found for violations, elevators or police incidents | same |
+
+**Municipal rules and codes**
+
+| Source | Result | Note |
+|---|---|---|
+| `ecode360.com`, `library.municode.com`, `codelibrary.amlegal.com` | robots groups for ClaudeBot, anthropic-ai and Claude-Web with `Disallow: /`. **No municipal code was read on any of them**, including the NYC Administrative Code | `harvest_notes/local_rules.md` |
+| `www.nycgovparks.org` | 403 bot wall on the first request | `local_rules.md`, `neighborhood_descriptions_round2.md` |
+| `portal.311.nyc.gov` | robots disallows `/knowledgebase/article/` | `local_rules.md` |
+| `www.nysenate.gov` | 403 (Cloudflare) at robots.txt; no state statute rows. `www.cga.ct.gov`: TLS failure from here | `local_rules.md`, `local_rules_round2.md` |
+| 403 or bot wall at robots.txt or first page | yonkersny.gov, yonkersparkingauthority.com, newarknj.gov, stamfordct.gov, westportct.gov, montclairnjusa.org, morrisplainsboro.org, townofnewpaltz.org, franklintwpnj.org, waynetownship.com, weehawken-nj.us, brookfieldct.gov, maplewoodnj.gov, townofwallkill.com, agriculture.ny.gov, jcparking.cmrpay.com | `local_rules.md`, `local_rules_round2.md` |
+| robots group naming Claude disallows the whole site | vsvny.org (Valley Stream), longbeachny.gov, garwood.org | same |
+| CivicPlus municipal sites | Usually plain HTML and allowed. A Claude group often disallows `FAQ.aspx` and `CivicAlerts.aspx` (White Plains, Clifton, Norwalk, Bloomfield, East Rutherford, Elizabeth, Hempstead village); other pages were read. One Bloomfield FAQ URL spelled `Faq.aspx` passed the case-sensitive check, was fetched and was not used | `local_rules.md`, `local_rules_round2.md`, `neighborhood_descriptions.md` |
+| `www.jerseycitynj.gov` | `/robots.txt` redirects to a 404 page; treated as no robots file, pages read over https. Some municipal sites redirect https to plain http, which this environment cannot reach | `local_rules_round2.md`, `local_rules.md` |
+
+**Neighborhood descriptions and voices**
+
+| Source | Result | Note |
+|---|---|---|
+| `en.wikipedia.org` REST and MediaWiki API | **Refused on the first request of the session** (429, "too many requests"). Ended for the session. Likely cause: shared outbound address and a User-Agent with no contact address; adding one is Will's decision | `harvest_notes/neighborhood_descriptions.md` |
+| Wikimedia database dump, `dumps.wikimedia.org` (enwiki 2026-11-01, multistream file with its index, HTTP Range requests) | **Works**; no robots.txt (404), never refused. It is the channel Wikimedia offers for bulk use, and a different host from the one that refused. Text is CC BY-SA 4.0; each quote records its revision. The note flags this for Will: if he reads the one-refusal rule as covering every Wikimedia host, the two descriptions CSVs go | same |
+| DBpedia | Reachable; the current release has no English abstracts. Nothing used | same |
+| `ctvisit.com/listings/city-<name>` or `town-<name>` | Allowed, plain HTML, one page per Connecticut town | `neighborhood_descriptions_round2.md` |
+| `www.nyctourism.com/new-york/<borough>/<neighborhood>/` | Allowed; about half the neighborhoods tried have a page | same |
+| `www.visitwestchesterny.com`, `www.visithudson.org/neighborhoods/<town>/`, `www.essexcountyparks.org/parks/<park>` | Allowed, plain HTML | same |
+| `visitnj.org`, `www.yonkersny.gov`, `www.mta.info` | Refuse us. `parks.ny.gov` disallows Claude by name | same |
+| Niche review pages (targeted lookups) | Round 2: 56 more requests at 4 s spacing, no refusal; NYC sub-neighborhood slugs often 404. Round 1 saw one 403 (New Brunswick), after which the agent restarted: a lapse, reported to Will | `harvest_notes/voices_round2.md`, `voices.md`, `PROGRESS.md` |
+| City-Data | Connection reset on the fifth thread page of round 2 (one reset in round 1 too). Treated as a stop for the host | `voices_round2.md` |
+| Patch, QNS | robots disallow Claude. Not fetched | `EVIDENCE_AGENT_BRIEF.md` |
+
+**Building and management sites**
+
+- **403 on the first request, not asked again**: 1harrison.com, akelius-properties.us, brimcrown.com, chathamhillnj.com,
+  confluencenorwalk.com, deyandbergen.com, goldberg-realty.com, harboursidesono.com, ironstate.com, ironworkssono.com,
+  livecreeklineapts.com, moderaberkeleyheights.com, therailnorthbergen.com, vermellaharrison.com (from its `tours.`
+  subdomain), www.10oceanapts.com, www.750summer.com, www.504glenbrook.com, vanderbiltpm.com, www.5545park.com,
+  www.loftsat335.com, www.163franklin.com, merionriverwalk.com, therailboundbrook.com, eastgoldlongisland.com,
+  metro303.com, west130.com, thealluremineola.com, wyandanchvillage.com, stationyardsli.com. Most are RentCafe /
+  Yardi-hosted sites behind Cloudflare. 111harborpoint.com and thepointstamford.com: 403 or robots disallow (the note
+  does not say which).
+  `harvest_notes/resolve_pending_thin_years.md`, `building_contacts_own_site.md`, `evidence_batch_13.md`,
+  `region_nassau.md`, `region_suffolk.md`, `region_connecticut.md`, `ratings_census_part3.md`.
+- **robots.txt disallows ClaudeBot**: sonopearl.com, highlandsmorrisplains.com, www.harborgroupmanagement.com,
+  hudson44.com, www.jolionguider.com. `building_contacts_own_site.md`.
+- **Windsor Communities**: robots.txt has groups naming Claude. `scripts/h_mgmt_windsor.py` docstring.
+- **GDC** (gdcrentals.com): `Crawl-delay: 10`, honoured. `harvest_notes/mgmt.md`.
+- **BLT**: harborpt.com redirects to bltliveworkplay.com; availability is a SightMap embed. `harvest_notes/mgmt.md`.
+- Not reachable, not a refusal: rentashton.com (expired TLS certificate; verification was not disabled),
+  www.metrovuejsq.com (502), oxfordrealtygroup.com, sonometroliving.com, pavionnyack.com.
+
+**Ratings census**
+
+- Figures come from what a web search displayed, from earlier evidence, or from pages already cached. Apartments.com,
+  ApartmentRatings, Yelp, Zillow, Facebook and Rent.com pages were not fetched. There is no Google Places key.
+  `docs/RATINGS_CENSUS_BRIEF.md`, `harvest_notes/ratings_census_part*.md`.

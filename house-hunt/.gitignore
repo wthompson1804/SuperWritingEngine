@@ -12,3 +12,19 @@ raw/fbi_cde/*.json
 raw/**/*.js
 raw/**/*.css
 data/reference/review_pending_numbers.json
+
+# --- added 2026-11-16 (clean-up pass; see docs/CLEANUP_REPORT.md) ---
+# These patterns only keep NEW files out. Files already tracked stay tracked until someone runs `git rm --cached`.
+# Optional convenience database, rebuilt by scripts/build_sqlite.py
+data/house_hunt.sqlite
+# Superseded review screenshots (moved here by hand; regenerate with the walkthrough tests if ever needed)
+site/screens/archive/
+# Census boundary and water downloads: re-created by scripts/build_map_base.py
+raw/census_cb/*.zip
+raw/census_areawater/*.zip
+# Editor, OS and tool scratch
+.DS_Store
+*.swp
+*.tmp
+.pytest_cache/
+node_modules/

@@ -133,7 +133,8 @@ the last screen for quotes that single out a named group. Its report is stored i
 
 **12. Site** (`scripts/build_site.py`). Inlines a slimmed copy of the data, `site/map_base.json` and
 `site/illustrations.json` into `site/index.html` at three marker comments and writes `site/dist/index.html`.
-`build_artifact.py` (in progress on 2026-11-16) prepares `site/dist/artifact.html` for publishing.
+`scripts/build_artifact.py` then takes the outer document shell off the built page, because the artifact host wraps
+the file in its own document, and writes `site/dist/artifact.html` (title within the first 8 KB, under 16 MB).
 
 ## The evidence-batch method
 
@@ -223,6 +224,7 @@ All prose is tied to data (`docs/SCENE_TEXT_NOTES.md`).
 | Stage counts and their change from the last run | `docs/RUN_REPORT.md`, `data/reference/run_history.csv` | yes |
 | Scene text against the data | `scripts/check_scene_text.py` | no |
 | Composed building and unit text | `scripts/test_realtor_lines.py` | no |
+| The extras step and the publish step | `scripts/test_page_data_extras.py` | no |
 | Quotes are verbatim on their cached page | `scripts/verify_quotes.py`, `local_rules_build.py` | no |
 | Page behaviour, heights, built file equals served file | `scripts/site_walkthrough_test.js` | no |
 | Map demo | `scripts/map_component_test.js` | no |

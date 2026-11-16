@@ -84,7 +84,8 @@ def script_files():
 def doc_files():
     docs = sorted((ROOT / "docs").rglob("*.md")) if (ROOT / "docs").exists() else []
     extra = [ROOT / n for n in ("README.md", "CLAUDE.md", "PROGRESS.md", "scripts/README.md")]
-    return docs + [p for p in extra if p.exists()]
+    # the clean-up report quotes old and missing paths on purpose
+    return [p for p in docs if p.name != "CLEANUP_REPORT.md"] + [p for p in extra if p.exists()]
 
 
 def check_big(files):

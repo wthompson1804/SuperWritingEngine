@@ -1,11 +1,12 @@
 # scripts/
 
-Inventory of every script in this folder as of 2026-11-16 (266 Python and JavaScript files, plus this README).
+Inventory of every script in this folder as of 2026-11-16 (268 Python and JavaScript files, plus this README;
+the hidden `.p5_*.js` files are scratch screenshot helpers of a page agent that was still working, and are not counted).
 How the stages fit together is in `docs/ARCHITECTURE.md`; the rules they enforce are in `docs/RANKING.md` and the plan documents.
 
 ## How to read the tables
 
-- **Run by `run_all`**: `scripts/run_all.py` runs the tests, then (full run only) gates → PLUTO → gates → lookup tools → neighborhoods → lifestyle → crime benchmarks → groups, then always amenities → master → rent terms → all-in → evidence rules → rank → output tests → registry check. `--fast` skips the full-run block. The three page steps (`build_page_data.py`, `page_data_extras.py`, `build_site.py`) are run by hand after it. `build_artifact.py` (the publish step, which writes `site/dist/artifact.html`) was being written by another agent when this inventory was made and is not in the tables.
+- **Run by `run_all`**: `scripts/run_all.py` runs the tests, then (full run only) gates → PLUTO → gates → lookup tools → neighborhoods → lifestyle → crime benchmarks → groups, then always amenities → master → rent terms → all-in → evidence rules → rank → output tests → registry check. `--fast` skips the full-run block. The three page steps (`build_page_data.py`, `page_data_extras.py`, `build_site.py`) are run by hand after it. `build_artifact.py` is the publish step (`site/dist/artifact.html`).
 - **Status**
   - **active**: part of the pipeline, a library it imports, a test, or a tool meant to be rerun.
   - **one-off harvest (done)**: fetched or assembled a data file once. The data file is the product. Most need the network; check `docs/SOURCES.md` and the one-refusal rule before rerunning any of them.
@@ -21,11 +22,13 @@ python3 scripts/run_all.py --fast       # after evidence-only changes
 python3 scripts/build_page_data.py      # site/data.json
 python3 scripts/page_data_extras.py     # adds text, contacts, ratings, links
 python3 scripts/build_site.py           # site/dist/index.html
+python3 scripts/build_artifact.py       # site/dist/artifact.html, the file that is published
 
 python3 scripts/test_parsers.py
 python3 scripts/test_rules.py           # add --data to check the pipeline's output
 python3 scripts/test_realtor_lines.py
 python3 scripts/test_shortlist_tools.py
+python3 scripts/test_page_data_extras.py
 python3 scripts/check_scene_text.py
 python3 scripts/check_repo.py           # read-only hygiene report
 ```
@@ -43,7 +46,7 @@ Page tests need Node Playwright; see the header of `site_walkthrough_test.js` an
 | `build_sqlite.py` | Dormant: `data/house_hunt.sqlite` does not exist and nothing reads it. |
 | `tools/taxes_reference.py` | One-off; `data/reference/taxes.csv` is read by no script. |
 | `h_mgmt_windsor.py` | Left no harvest file (`data/listings_raw/mgmt_windsor.csv` does not exist). |
-| 22 evidence-batch helpers and 8 region helpers | Scratch helpers named nowhere (marked "referenced by nothing" in the tables below). Their batches' CSVs exist, so they are finished, not broken. |
+| 19 evidence-batch helpers and 8 region helpers | Scratch helpers named nowhere (marked "referenced by nothing" in the tables below). Their batches' CSVs exist, so they are finished, not broken. |
 | `zumper_open_pending.py` | Not dead: unfinished. Its output under `data/listings_pending/` is not merged (see `PROGRESS.md`). |
 
 Not scripts, but they live here: `ev_b3_live_notes.json`, `h_mgmt_sightmap_sites_seeds.txt`, `h_region_connecticut_manual.json`, `h_region_nassau_buildings.json`, `local_rules_*.json` / `*.jsonl`, `voices_manual.json`, `source_tests/targets_*.json` are hand-entered inputs to the script of the same prefix. Do not delete them: the harvest scripts cannot be rerun without them.
@@ -62,7 +65,7 @@ Not scripts, but they live here: `ev_b3_live_notes.json`, `h_mgmt_sightmap_sites
 | `enrich_units.py` | Run every lookup tool per passing building; first all-in pass | 2 enrich | `data/listings.csv`, `scripts/tools/*` | `data/enriched/*.json`, `data/buildings_enriched.csv`, `data/units.csv` | yes (full) | none | active |
 | `build_neighborhoods.py` | Assign buildings to neighborhoods (incl. the Jersey City split), profile them, propose groupings | 3 neighborhoods | `data/units.csv`, `data/buildings_enriched.csv`, `data/reference/subcity_*` | `data/neighborhoods.csv`, hood columns on `data/units.csv`, `docs/CHECKPOINT_A.md` | yes (full) | none | active |
 | `lifestyle_features.py` | ACS and OpenStreetMap lifestyle features per neighborhood (no location features) | 3 neighborhoods | `data/neighborhoods.csv`, ACS (Census key), `tools/places.py` | `data/lifestyle_features.csv` | yes (full) | none | active |
-| `lifestyle_color.py` | Extra descriptive variables per neighborhood, beyond the clustering ones | 3 neighborhoods | `data/lifestyle_features.csv`, ACS, places | `data/lifestyle_color.csv`, `data/enriched_color/*.json` | yes (full) | none | active |
+| `lifestyle_color.py` | Extra descriptive variables per neighborhood, beyond the clustering ones | 3 neighborhoods | `data/lifestyle_features.csv`, ACS, places | `data/lifestyle_color.csv` | yes (full) | none | active |
 | `crime_benchmarks.py` | Crime yardsticks (US, metro, county) and the per-neighborhood safety table | 3 neighborhoods | FBI CDE (cached), `data/reference/crime_agencies.csv` | `data/reference/crime_benchmarks.csv`, `data/neighborhood_safety.csv` | yes (full) | none | active |
 | `lifestyle_groups.py` | Assign each neighborhood to one of the six experiences from saved centres (`--refit` only on purpose) | 3 neighborhoods | `data/lifestyle_color.csv`, `data/neighborhood_safety.csv`, `data/reference/lifestyle_group_centres.csv` | `data/lifestyle_groups.csv` (on `--refit` also the saved centres, scale and fit reference under `data/reference/`) | yes (full) | none | active |
 | `building_amenities.py` | Amenities per building parsed from cached pages (run_all passes `--no-fetch`) | 4 master inputs | `data/units.csv`, cached pages under `raw/` | `data/reference/building_amenities.csv` | yes (always, offline) | none | active |
@@ -74,8 +77,9 @@ Not scripts, but they live here: `ev_b3_live_notes.json`, `h_mgmt_sightmap_sites
 | `rank.py` | Ranking v2, open-item and disclosure rules, selection of shown units, Queens spectrum | 9 rank | master tables, `lifestyle_groups.csv`, `unit_exclusions.csv`, `avoid_buildings.csv`, `rent_terms.csv`, `review_verdicts.csv` | `data/ranked_units.csv`, `data/group_exchange.csv`, `data/excluded_*.csv`, `data/needs_confirmation.csv`, `data/needs_live_check.csv`, `data/reference/queens_spectrum_definition.csv` | yes | `test_rules.py --data`, `check_registry.py` | active |
 | `check_registry.py` | Field registry, wiring check, shown-list assertions, review rule | 10 check | master tables, `ranked_units.csv`, scripts (by grep) | `data/reference/field_registry.csv` | yes (last) | is a check | active |
 | `build_page_data.py` | Export the page data contract | 11 page data | `data/ranked_units.csv`, `lifestyle_groups.csv`, `group_exchange.csv`, `avoid_buildings.csv`, `needs_*.csv`, `local_rules.csv`, `data/voices/*`, `subcity_crime_jersey_city.csv` | `site/data.json` | no (run after) | `test_rules.py --data` (page checks) | active |
-| `page_data_extras.py` | Add prose, round-2 quotes and rules, contacts, About text, ratings, descriptions, photo links, neighborhood order | 12 extras | `site/data.json`, `data/reference/scene_text_*.csv`, `building_about.csv`, `realtor_lines.csv`, `building_contacts*.csv`, `neighborhood_descriptions*.csv`, `local_rules_round2.csv`, `data/voices/*_round2.csv`, `data/evidence/ratings_census.csv` | `site/data.json` (in place) | no (run after) | `site_walkthrough_test.js` | active |
+| `page_data_extras.py` | Add prose, round-2 quotes and rules, contacts, About text, ratings, descriptions, photo links, neighborhood order | 12 extras | `site/data.json`, `data/reference/scene_text_*.csv`, `building_about.csv`, `realtor_lines.csv`, `building_contacts*.csv`, `neighborhood_descriptions*.csv`, `local_rules_round2.csv`, `data/voices/*_round2.csv`, `data/evidence/ratings_census.csv` | `site/data.json` (in place) | no (run after) | `test_page_data_extras.py`, `site_walkthrough_test.js` | active |
 | `build_site.py` | Inline the data, map base and illustrations into the single-file page | 13 site | `site/index.html`, `site/data.json`, `site/map_base.json`, `site/illustrations.json` | `site/dist/index.html` | no (run after) | `site_walkthrough_test.js` | active |
+| `build_artifact.py` | Strip the outer document shell from the built page so the artifact host can wrap it; optional banner; size and title checks | 14 publish | `site/dist/index.html` | `site/dist/artifact.html` | no (run after) | `test_page_data_extras.py` | active |
 
 ### Text, page assets and page tests
 
@@ -98,6 +102,7 @@ Not scripts, but they live here: `ev_b3_live_notes.json`, `h_mgmt_sightmap_sites
 | `test_realtor_lines.py` | Tests for `realtor_lines.py` | test | synthetic rows, `site/data.json` when present | exit code | no | is a test | active |
 | `test_rules.py` | Rule tests for every defect of checks 2 and 3; `--data` checks the output | test | none; `--data`: `data/`, `site/data.json` | exit code | yes (first, and `--data` after rank) | is a test | active |
 | `test_shortlist_tools.py` | Tests for the three shortlist tools; synthetic rows, no network | test | none | exit code | no | is a test | active |
+| `test_page_data_extras.py` | Tests for `page_data_extras.py` and `build_artifact.py`: each block on a made-up page, idempotence, the quote screen, contacts, ratings; one run on the real data | test | temp folder; `site/data.json` copy | exit code | no | is a test | active |
 | `check_repo.py` | Read-only repository hygiene check (big files, orphan CSVs and scripts, broken doc references, key-like strings) | hygiene | the working tree | report on stdout | no | none | active |
 
 ### Shortlist tools and contacts

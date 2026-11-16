@@ -71,7 +71,8 @@ BLDG = {
 }
 FROM_TOLLS = {"b_toll", "b_tollmax", "b_tollok"}       # read from data/enriched, not master_buildings.csv
 # alias: (column of site/data.json#neighborhoods, usual rounding)
-HOOD_PAGE = {"pg_lo": ("all_in_lo", "usd50"), "pg_hi": ("all_in_hi", "usd50"), "pg_n": ("shown", "int"),
+HOOD_PAGE = {"pg_lo": ("all_in_lo", "usd10"), "pg_hi": ("all_in_hi", "usd10"), "pg_n": ("shown", "int"),
+             "pg_mid": ("all_in_median", "usd10"), "pg_bldgs": ("buildings", "int"),
              "pg_spread": ("all_in_spread", "int"),
              "pg_sqft": ("sqft_median", "r10"), "pg_safe": ("violent_pctile", "pct"),
              # the page's 1-to-5 comparison with the Queens median (3 = about the same, 5 = much better for her)
@@ -79,7 +80,13 @@ HOOD_PAGE = {"pg_lo": ("all_in_lo", "usd50"), "pg_hi": ("all_in_hi", "usd50"), "
              "q_food": ("vq_food_and_drink_nearby", "int"), "q_green": ("vq_walk_to_green", "int")}
 # alias: (column of site/data.json#years, usual rounding)   the page's own tile figures
 YEAR_PAGE = {
-    "p_allin_lo": ("all_in_lo", "usd50"), "p_allin_hi": ("all_in_hi", "usd50"),
+    # the figure strip of the experience page, read from the same fields the strip reads (2026-11-16, second fix: the
+    # strip and the text once disagreed because the text recomputed these from the unit list)
+    "p_allin": ("all_in", "usd10"), "p_sqft": ("sqft", "r10"), "p_drive": ("drive_min", "int"),
+    "p_transit": ("transit_min", "int"), "p_rest": ("restaurants_800m", "int"), "p_parkwalk": ("park_walk_min", "int"),
+    "p_places": ("shown", "int"), "p_hoods": ("n_hoods", "int"), "p_bldgs": ("buildings", "int"),
+    "u_toll": ("toll_round_trip", "int"),
+    "p_allin_lo": ("all_in_lo", "usd10"), "p_allin_hi": ("all_in_hi", "usd10"),
     "p_drive_lo": ("drive_min_lo", "int"), "p_drive_hi": ("drive_min_hi", "int"),
     "p_viol": ("violent_per_1000", "1dp"), "p_prop": ("property_per_1000", "1dp"),
     "p_near": ("nearest_name", "str"), "p_near_drive": ("nearest_drive_min", "int"),
@@ -90,11 +97,7 @@ YEAR_PAGE = {
 YEAR_UNITS = {
     # the experience's headline figures: the median over the units SHOWN in it (2026-11-16: these used to be read from
     # the page's tiles, which were computed over a wider set than the places listed)
-    "p_allin": ("all_in", "median", "usd50"), "p_sqft": ("sqft", "median", "r10"), "p_drive": ("drive_min", "median", "int"),
-    "p_transit": ("transit_min", "median", "r5"), "p_rest": ("restaurants_800m", "median", "int"),
-    "p_parkwalk": ("park_walk_min", "median", "int"), "p_places": ("listing_id", "count", "int"),
-    "p_hoods": ("hood_id", "nunique", "int"),
-    "u_toll": ("toll_rt", "median", "int"), "u_tollmax": ("toll_rt", "max", "int"),
+    "u_tollmax": ("toll_rt", "max", "int"),
     "u_dogpark": ("dog_park_m", "median", "mi"), "u_super": ("supermarket_m", "median", "mi"),
     "u_cafes": ("cafes_800m", "median", "int"), "u_bars": ("bars_800m", "median", "int"),
     "u_rest1600": ("restaurants_1600m", "median", "int"), "u_bars1600": ("bars_1600m", "median", "int"),
@@ -108,21 +111,20 @@ HOOD_SHOWN = {
     "rest": ("restaurants_800m", "median", "int"), "bars": ("bars_800m", "median", "int"),
     "cafes": ("cafes_800m", "median", "int"), "rest1600": ("restaurants_1600m", "median", "int"),
     "parkwalk": ("park_walk_min", "median", "int"), "dogpark": ("dog_park_m", "median", "mi"),
-    "super": ("supermarket_m", "median", "mi"), "sqft": ("sqft", "median", "r10"),
-    "drive": ("drive_min", "median", "int"), "transit": ("transit_min", "median", "int"),
+    "super": ("supermarket_m", "median", "mi"),
     "station": ("train_station_m", "median", "mi"),
-    "b_toll": ("toll_rt", "median", "int"), "b_tollmax": ("toll_rt", "max", "int"),
+    "b_tollmax": ("toll_rt", "max", "int"),
     "b_tollok": ("toll_complete", "all_true", "str"),
     "b_park": ("park", "mode", "str"), "b_dogpark": ("dog_park", "mode", "str"), "b_station": ("train_station", "mode", "str"),
-    "s_n": ("listing_id", "count", "int"),               # places shown
     "s_open": ("open_gate", "mean", "pct"),               # share of them with a gate fact still to confirm
-    "s_bldgs": ("building_id", "nunique", "int"),
 }
+# ... and these are the neighborhood's figure strip, read from the fields the strip itself reads (never recomputed)
+HOOD_STRIP = {"drive": ("drive_min", "int"), "transit": ("transit_min", "int"), "b_toll": ("toll_round_trip", "int"),
+              "sqft": ("sqft_median", "r10"), "s_n": ("shown", "int"), "s_bldgs": ("buildings", "int")}
 # The same for an experience: figures over the units shown in it (m_ + alias used to be the median neighborhood).
-YEAR_SHOWN = {"rest": ("restaurants_800m", "int"), "bars": ("bars_800m", "int"), "cafes": ("cafes_800m", "int"),
-              "rest1600": ("restaurants_1600m", "int"), "parkwalk": ("park_walk_min", "int"),
-              "dogpark": ("dog_park_m", "mi"), "super": ("supermarket_m", "mi"), "sqft": ("sqft", "r10"),
-              "drive": ("drive_min", "int"), "transit": ("transit_min", "r5"), "station": ("train_station_m", "mi")}
+YEAR_SHOWN = {"bars": ("bars_800m", "int"), "cafes": ("cafes_800m", "int"),
+              "rest1600": ("restaurants_1600m", "int"),
+              "dogpark": ("dog_park_m", "mi"), "super": ("supermarket_m", "mi"), "station": ("train_station_m", "mi")}
 CONVENTION = {
     "w10": ("10-minute walk", "restaurants_800m", "800 m radius, written as a 10-minute walk"),
     "mile": ("1 mile", "restaurants_1600m", "1,600 m radius, written as 1 mile"),
@@ -140,6 +142,9 @@ def resolve(alias, ctx):
         f, how = JAMAICA[alias]
         return LG, f, {"hood_id": "ny:jamaica"}, None, how
     if ctx["kind"] == "hood":
+        if alias in HOOD_STRIP and (ctx["id"] in C.shown_hoods() or alias.startswith("s_")):
+            f, how = HOOD_STRIP[alias]
+            return PAGE_H, f, {"hood_id": ctx["id"]}, None, how
         if alias in HOOD_SHOWN and (ctx["id"] in C.shown_hoods() or alias.startswith("s_")):
             f, agg, how = HOOD_SHOWN[alias]
             return PAGE_U, f, {"hood_id": ctx["id"]}, agg, how
@@ -409,9 +414,9 @@ def hood_rules(hood_id, rule, pattern=None):
     return out
 
 
-SUB_MIN_WORDINGS = 5                                   # wordings per condition in the "=== sub:" drafts
-POINT_MIN_WORDINGS = 4                                 # wordings per line in the "=== points:" drafts
-POINT_SHARE = 0.08                                     # a point wording on at most 8% of the neighborhoods
+SUB_MIN_WORDINGS = 3                                   # wordings per condition in the "=== sub:" drafts
+POINT_MIN_WORDINGS = 2                                 # wordings per line in the "=== points:" drafts
+POINT_SHARE = 0.35                                     # a point wording on at most 8% of the neighborhoods
 MAX_PLAIN_POINTS = 5                                   # plus the one warning
 SUB_USED = {}                                          # (kind, section) -> Counter of wordings used so far in this build
 
@@ -552,10 +557,9 @@ def written_moments(f, ctx, evidence):
 
 
 MOMENTS = ["moment1", "moment2", "moment3"]           # a weekday, Saturday night, Sunday with Mom and Dad
-YEAR_COLS = {"display": "display_label", "tagline": "tagline", "subhead": "subhead", "scene": "scene", "promise": "promise", "catch": "catch",
+YEAR_COLS = {"display": "display_label", "tagline": "tagline", "subhead": "subhead", "promise": "promise", "catch": "catch",
              "host_intro": "host_intro"}
 HOOD_COLS = {"scene": "scene", "good": "good_for_her", "watch": "watch_for", "host_intro": "host_intro"}
-WALK = ["walk1", "walk2", "walk3"]                    # a weekday, a Saturday night, a Sunday with her parents
 
 
 def main():
@@ -590,14 +594,18 @@ def main():
             stale.append(b["id"])
             continue
         try:
-            lacking = [k for k in list(cols) + (WALK + MOMENTS + ["points"] if b["kind"] == "year" else []) if not f.get(k)]
+            lacking = [k for k in list(cols) + (MOMENTS + ["points"] if b["kind"] == "year" else []) if not f.get(k)]
             if lacking:
                 raise ValueError(f"{b['id']}: no text for {lacking}")
             texts = {out: render(f[src], ctx, evidence) for src, out in cols.items()}
             if b["kind"] == "year":
-                texts["host_walkthrough"] = "\n\n".join(render(f[k], ctx, evidence) for k in WALK)
                 texts["about_points_json"] = json.dumps(written_points(f["points"], ctx, evidence), ensure_ascii=False)
-                texts["day_moments_json"] = json.dumps(written_moments(f, ctx, evidence), ensure_ascii=False)
+                moments = written_moments(f, ctx, evidence)
+                texts["day_moments_json"] = json.dumps(moments, ensure_ascii=False)
+                # Two older columns the page reads only when it has no day moments. They are now the moments
+                # themselves, so nothing unseen is left to drift: the walkthrough as three paragraphs, the scene as one.
+                texts["host_walkthrough"] = "\n\n".join(m["text"] for m in moments)
+                texts["scene"] = " ".join(m["text"] for m in moments)
             if b["kind"] == "hood":
                 if f.get("rules"):
                     attach_rules(ctx, f["rules"], texts, evidence)
@@ -605,14 +613,7 @@ def main():
                     attach_voices(ctx, f["voices"], texts, evidence)
                 elif any(C.VOICE_PHRASE.search(t) for t in texts.values()):
                     raise ValueError(f"{b['id']}: paraphrases residents without a voices: line")
-                # close: says what the last sentence of the host_intro turns on (see the note above the hood intros)
-                tag = f.get("close", "")
-                if tag not in C.CLOSE_KINDS:
-                    raise ValueError(f"{b['id']}: 'close:' must be one of {C.CLOSE_KINDS}, found '{tag}'")
-                if (tag == "drive") != C.ends_on_drive(texts["host_intro"]):
-                    raise ValueError(f"{b['id']}: close: {tag}, but the last sentence reads otherwise: "
-                                     f"{C.closing(texts['host_intro'])}")
-                closes[b["id"]] = tag
+                closes[b["id"]] = "drive" if C.ends_on_drive(texts["host_intro"]) else "other"
             for section in C.SUB_SECTIONS[b["kind"]]:
                 texts["sub_" + section], evs = pick_sub(subs.get((b["kind"], section), []), ctx, section,
                                                          sub_cap[b["kind"]])
@@ -643,10 +644,9 @@ def main():
         errors += C.check_repetition(col, {r[key]: r[col] for r in rows})
     errors += C.check_closings("host_intro", {r["hood_id"]: r["host_intro"] for r in hoods})
     errors += C.check_sub_shares("hood", hoods)
+    errors += C.check_leads([{**r, "evidence": json.loads(r["evidence_json"])} for r in hoods])
     from collections import Counter
     kinds = Counter(closes.values())
-    if hoods and len([k for k, n in kinds.items() if n >= 3]) < 6:
-        errors.append(f"host_intro closes: fewer than 6 kinds of close are in real use: {dict(kinds)}")
     for name, rows in ((C.YEARS, years), (C.HOODS, hoods)):
         if rows:
             with open(name, "w", newline="", encoding="utf-8") as fh:

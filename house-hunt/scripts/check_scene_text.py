@@ -410,8 +410,198 @@ def sentences(text):
 PLACE_NAMES = ["White Plains"]                    # place names that would trip the wording test
 
 
-def check_style(kind, col, text):
+# ---------------------------------------------------------------------------------------------------------------
+# Plain-language guards (copy edit of 2026-11-16). The owner's complaint was lines that try to be clever and end up
+# unclear ("the dog walks you toward the water"). Each pattern below is a construction that was removed from the
+# drafts; it fails wherever it comes back. Add to the list when a new one is cut.
+CONCEITS = [
+    # an inanimate subject doing something to "you"
+    (r"\b(walks|sends|feeds|rewards|pays) you\b", "a thing acting on 'you' (say what she would do or find)"),
+    (r"\b(the|a|your|this|its) (dog|street|block|park|town|city|neighborhood|building|garage|downtown|drive|road|curb|"
+     r"car|water|beach|list|map|price|rent|toll|experience|apartment|place|morning|evening|day)s? (takes|tells|sells|"
+     r"wants|asks|hands|owes) you\b", "a thing acting on 'you'"),
+    (r"\bhas (a bedtime|wheels|your back|its own bedtime)\b", "personification"),
+    (r"\b(car|cars|it) (sleeps?|lives?|would live|would sleep)\b|\bwhere (the|your|a) car (sleeps|lives|goes to sleep)",
+     "'where the car sleeps' (say 'where you would park')"),
+    (r"\bthe (cost|price|trade|upside|downside|rub|gap|catch|weak spot|soft spot|headline|answer) is (the |a |green|"
+     r"distance|space|choice|miles)", "a noun phrase standing in for a claim ('the cost is the map')"),
+    (r"\bthe upside is\b|\bthe rest of the story\b|\bcount on about\b|\bthen there is\b|\bon the table\b|"
+     r"\bthen the practical side\b|\bnow the catch(es)?\b|\bknow the limits\b|\bboth are true\b|\bthe rest is\b|"
+     r"\bhonest note\b|\bhard truth\b|\bthe honest\b|\bby the numbers\b|\bin the (best|kindest) sense\b",
+     "a template seam or filler phrase"),
+    (r"\bthe curb\b|\bshort straw\b|\brides? (shotgun|along)\b|\bhomework\b|\bdoes the talking\b|\bspeed dial\b|"
+     r"\bfamily orbit\b|\bpoint of comedy\b|\bsalt air\b|\bcar keys\b|\bwalls close in\b|\bstay for seconds\b|"
+     r"\bfiling complaints\b|\bzoomies\b|\bcaution label\b|\bsensible cousin\b|\bquiet surprise\b|\bthe lottery\b|"
+     r"\bmembers-only\b|\bnot invited\b|\bbrag\b|\bsighs?\b|\bnightcap\b|\bfront yard\b|\bbackyard\b|\bmenus\b|"
+     r"\bthe whole (game|case|pitch|answer|argument|evening|story)\b|\b(dog|dog's) (vote|whole case|whole life)\b|"
+     r"\bwould pick this\b|\bis the neighbor\b|\bsquare feet with miles\b|\bpays? (for it )?in (distance|miles)\b|"
+     r"\bsorted\b|\bfor once\b|\bpracticall?y (at|your)\b|\bcar country\b|\bapartment country\b|\bpark country\b",
+     "a joke or figure of speech that needs decoding"),
+    (r"\b(green|sand|trees) (is|are|takes|starts|sits|gets)\b|\bgain green\b|\breal green\b",
+     "'green' / 'sand' used as a noun for parks or the beach (name the park or the beach)"),
+    (r"\b(drive|trip|way|road|visit|visits|haul) home\b|\bhome is (close|near|about|a |far)|\bgoing home is\b",
+     "'home' used for her parents' house (say 'to your parents')"),
+    (r"\babout (0|no|zero)\b|\bonly no\b", "'about 0' (say there are none)"),
+]
+CONCEITS = [(re.compile(rx, re.I), what) for rx, what in CONCEITS]
+# Words from inside the project that mean nothing to the reader, and wording the page does not use.
+INTERNAL = re.compile(r"\b(ranked|ranks|ranking|scorecard|verified|live check|net-effective|net effective|gates?|asterisks?|"
+                      r"cap|ceiling|shortlist|shown units?|listing ids?|unit-weighted|medians?)\b", re.I)
+VOCAB = [
+    (re.compile(r"\bMom and Dad\b"), "'Mom and Dad' in a sentence (labels use it; sentences say 'your parents')"),
+    (re.compile(r"\b(the|a|an|each|every|this) unit\b|\bunits\b|\bin the unit\b", re.I), "'unit' (say 'apartment')"),
+    (re.compile(r"\b(typical|only|lone|the) place\b|\bplaces? (here|found|we found|on the list|of this kind|turned up)\b|"
+                r"\b\d+ places?\b", re.I), "'place' for an apartment (say 'apartment')"),
+    (re.compile(r"\b(Walk-Everywhere|Old-Neighborhood|Little-City|Fresh-Start|Quiet-Street|Room-to-Breathe) Year\b|"
+                r"\bthis year of\b|\ba year (here|like this)\b", re.I), "'year' for an experience"),
+    (re.compile(r"\ball[- ]in\b(?! \(rent plus fees, parking and utilities\))", re.I),
+     "'all-in' without its explanation (write 'everything included', or 'all-in (rent plus fees, parking and utilities)')"),
+    (re.compile(r"\b(licence|theatre|programme|neighbour\w*|colour\w*|centre|favourite|kerb|storey|metres?|organis\w+|"
+                r"realis\w+|travell\w+|grey)\b", re.I), "British spelling"),
+    (re.compile(r"\bwe (found|set|would|think|looked)\b|\bour (list|scorecard|search)\b", re.I),
+     "'we' / 'our' (no narrator on the page)"),
+]
+# Markers of a figure of speech. One per text is tolerated when its meaning is unmistakable; two is decoration.
+FIGURE = re.compile(r"\blike a\b|\bas if\b|\bas though\b|\bfeels like\b|\bkind of\b|\bsort of\b|\bso to speak\b|"
+                    r"\bthe heart of\b|\ba world away\b|\bat your door(step)?\b|\bon your doorstep\b|\bstone's throw\b|"
+                    r"\bsteps (from|away)\b|\baround the corner\b|\bdownstairs\b", re.I)
+MAX_FIGURES = 1
+AVG_SENTENCE_WORDS, MAX_SENTENCE_WORDS = 20, 32          # per text: the average sentence, and the longest allowed
+
+
+def check_plain(col, text):
+    """Clarity guards for one text: removed conceits, internal terms, page vocabulary, sentence length, figures."""
     out = []
+    for rx, what in CONCEITS + VOCAB:
+        m = rx.search(text)
+        if m:
+            out.append(f"{col}: {what}: '{m.group(0)}'")
+    m = INTERNAL.search(text)
+    if m:
+        out.append(f"{col}: internal term '{m.group(0)}'")
+    figs = FIGURE.findall(text)
+    if len(figs) > MAX_FIGURES:
+        out.append(f"{col}: {len(figs)} figures of speech in one text ({', '.join(figs)}); at most {MAX_FIGURES}")
+    lens = [len(x.split()) for x in sentences(text.replace("St. ", "St "))]
+    if lens:
+        if max(lens) > MAX_SENTENCE_WORDS:
+            out.append(f"{col}: a sentence of {max(lens)} words (limit {MAX_SENTENCE_WORDS})")
+        if sum(lens) / len(lens) > AVG_SENTENCE_WORDS:
+            out.append(f"{col}: sentences average {sum(lens) / len(lens):.0f} words (limit {AVG_SENTENCE_WORDS})")
+    return out
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# The figure strip. Every count and money figure in the prose must be the one the strip above it shows, recomputed
+# here from site/data.json: apartments = counts.shown, buildings = counts.buildings, neighborhoods = len(hood_ids),
+# typical all-in = the median shown apartment (years[].medians.all_in; for a neighborhood the median of its units),
+# its lowest and highest = all_in_range, minutes to her parents = medians.drive_min / transit_min (a neighborhood's
+# own drive_min / transit_min). Prices in sentences are rounded to the nearest $10, minutes to the whole minute.
+STRIP_SOURCE = {"year": PAGE + "#years", "hood": PAGE + "#neighborhoods"}
+STRIP_KEY = {"year": "year_label", "hood": "hood_id"}
+STRIP_FIELDS = {"year": {"all_in", "all_in_lo", "all_in_hi", "shown", "buildings", "n_hoods", "drive_min", "transit_min",
+                         "toll_round_trip", "sqft"},
+                "hood": {"all_in_median", "all_in_lo", "all_in_hi", "shown", "buildings", "drive_min", "transit_min",
+                         "toll_round_trip", "sqft_median"}}
+# the same quantities under the names they had when they were computed here from the unit list: no longer accepted
+STRIP_OLD = {("listing_id", "count"), ("hood_id", "nunique"), ("building_id", "nunique"), ("all_in", "median"),
+             ("drive_min", "median"), ("transit_min", "median"), ("toll_rt", "median"), ("sqft", "median")}
+COUNTED_NOUN = re.compile(r"\b(\d[\d,]*) (apartments?|places?|listings?|buildings?|neighborhoods?|towns?|cities)\b", re.I)
+BIG_MONEY = re.compile(r"\$\s?(\d{1,3},\d{3})")
+PARENT_MIN = re.compile(r"(\d+) minutes")
+
+
+def strip_values(kind, key):
+    """What the page's figure strip shows for this row -> dict (empty when the row is not on the page)."""
+    t = table(STRIP_SOURCE[kind])
+    r = t[t[STRIP_KEY[kind]].astype(str) == str(key)]
+    if len(r) != 1:
+        return {}
+    r = {k: plain(v) for k, v in r.iloc[0].to_dict().items()}
+    if kind == "hood" and not r.get("shown"):
+        return {}
+    mid = r.get("all_in") if kind == "year" else r.get("all_in_median")
+    v = {"money": {transform(x, "usd10") for x in (mid, r.get("all_in_lo"), r.get("all_in_hi")) if not is_missing(x)},
+         "apartments": r.get("shown"), "buildings": r.get("buildings"),
+         "neighborhoods": r.get("n_hoods") if kind == "year" else None,
+         "minutes": {transform(x, "int") for x in (r.get("drive_min"), r.get("transit_min"), r.get("nearest_drive_min"))
+                     if not is_missing(x)}}
+    return v
+
+
+def check_strip(kind, key, texts, evidence):
+    """texts: [(column, prose)]. Counts, prices and minutes to her parents must be the figure strip's own."""
+    out, strip = [], strip_values(kind, key)
+    on_page = bool(strip)
+    for ev in evidence:
+        src, field, agg = str(ev.get("source_file", "")), ev.get("field"), ev.get("agg")
+        if src == PAGE + "#units" and (field, agg) in STRIP_OLD and on_page:
+            out.append(f"{field} ({agg}) is computed from the unit list; take it from the figure strip "
+                       f"({STRIP_SOURCE[kind]}) so the text and the strip cannot differ ({ev.get('claim', '')[:50]})")
+    want = {"apartment": "apartments", "place": "apartments", "listing": "apartments", "building": "buildings",
+            "neighborhood": "neighborhoods", "town": "neighborhoods", "cities": "neighborhoods", "city": "neighborhoods"}
+    for col, text in texts:
+        for m in BIG_MONEY.finditer(text):
+            if m.group(1) not in strip.get("money", set()):
+                out.append(f"{col}: ${m.group(1)} is not a figure of the strip (typical, lowest or highest all-in: "
+                           f"{sorted(strip.get('money', []))})")
+        for m in COUNTED_NOUN.finditer(text):
+            noun = m.group(2).lower()
+            k = want.get(noun.rstrip("s"), want.get(noun))
+            have = strip.get(k)
+            if is_missing(have) or int(m.group(1).replace(",", "")) != int(have):
+                out.append(f"{col}: '{m.group(0)}' but the strip counts {have} {k}")
+        if on_page:
+            for sent in sentences(text):
+                if re.search(r"\bparents\b", sent) and not re.search(r"\b(park|dog run|on foot|walk)\b", sent):
+                    for n in PARENT_MIN.findall(sent):
+                        if n not in strip["minutes"]:
+                            out.append(f"{col}: '{n} minutes' to her parents, but the strip has {sorted(strip['minutes'])}")
+    return out
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# A neighborhood's lead (the first sentence of its host_intro, which is also its line on the experience page) must say
+# what sets the place apart. It may not open on a statistic that more than a third of the neighborhoods in the same
+# experience also open on.
+LEAD_SHARE, LEAD_MIN_ROWS = 1 / 3, 4
+
+
+def lead_fields(text, evidence):
+    """Measured fields quoted as a number in the first sentence of a lead."""
+    first = (sentences(text.replace("St. ", "St ")) or [""])[0].replace("St ", "St. ")
+    out = set()
+    for ev in evidence:
+        if ev.get("claim") == first and ev.get("shown") and ev.get("transform") not in ("convention", "in_text"):
+            if any(n in numbers_in(first) for n in numbers_in(" ".join(ev["shown"]))):
+                out.add(ev["field"])
+    return out
+
+
+def check_leads(rows):
+    """rows: [{hood_id, year_label, host_intro, evidence (list)}] -> problems."""
+    from collections import defaultdict
+    by = defaultdict(list)
+    for r in rows:
+        if r.get("host_intro", "").strip():
+            by[r["year_label"]].append(r)
+    out = []
+    for label, rs in by.items():
+        if len(rs) < LEAD_MIN_ROWS:
+            continue
+        use = defaultdict(list)
+        for r in rs:
+            for f in lead_fields(r["host_intro"], r["evidence"]):
+                use[f].append(r["hood_id"])
+        for f, ids in use.items():
+            if len(ids) > len(rs) * LEAD_SHARE:
+                out.append(f"host_intro: {len(ids)} of the {len(rs)} neighborhoods in {label} open on the same "
+                           f"statistic ({f}); a lead says what is different about the place: {sorted(ids)[:6]}")
+    return out
+
+
+def check_style(kind, col, text):
+    out = check_plain(col, text)
     bare = text
     for name in PLACE_NAMES:
         bare = bare.replace(name, "")
@@ -558,8 +748,12 @@ def check_row(kind, key, texts, evidence):
         for n in numbers_in(text):
             if n not in allowed:
                 problems.append(f"{col}: number '{n}' has no evidence item: {text[:60]}")
+    shown_cols = [(c, t) for c, t in list(texts.items()) + extra
+                  if not (kind == "year" and c in ("scene", "host_walkthrough"))]     # those two repeat the moments
+    problems += check_strip(kind, key, shown_cols, evidence)
     for run in shared_runs({"lead": [texts.get("host_intro", "")], "points": [p.get("text", "") for p in points],
-                            "moments": [m.get("text", "") for m in moments]}):
+                            "moments": [m.get("text", "") for m in moments],
+                            "promise": [texts.get("promise", "")], "catch": [texts.get("catch", "")]}):
         problems.append(f"the lead, the points and the moments repeat each other: '{run}'")
     return problems, drift
 
@@ -694,9 +888,10 @@ def main():
                 drifts += bool(drift)
                 host[r[key]] = r["host_intro"]
                 seen.append(r)
+                r["evidence"] = evidence
         across = check_repetition("host_intro", host) + check_sub_shares(kind, seen)
         if kind == "hood":
-            across += check_closings("host_intro", host)
+            across += check_closings("host_intro", host) + check_leads(seen)
             n_drive = sum(ends_on_drive(t) for t in host.values())
             print(f"host_intro closes: {n_drive} of {len(host)} end on the drive, the toll or transit")
         for p in across:

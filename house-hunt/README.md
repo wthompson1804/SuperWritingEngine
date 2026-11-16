@@ -22,7 +22,7 @@ python3 scripts/run_all.py            # tests, gates, lookups, master tables, co
 python3 scripts/build_page_data.py    # data/ranked_units.csv and friends -> site/data.json
 python3 scripts/page_data_extras.py   # adds text, quotes, local rules, contacts, ratings, photo links to site/data.json
 python3 scripts/build_site.py         # site/index.html + data -> site/dist/index.html (one file, opens from disk)
-python3 scripts/build_artifact.py     # publish step: site/dist/artifact.html (being written by another agent on 2026-11-16)
+python3 scripts/build_artifact.py     # publish step: site/dist/index.html -> site/dist/artifact.html (the file that is published)
 ```
 
 `run_all.py` writes `docs/RUN_REPORT.md` (counts in and out of every stage, with reasons) and exits non-zero if a step
@@ -44,6 +44,7 @@ When evidence is added or a unit is newly promoted, the review rule applies befo
 | `python3 scripts/check_registry.py` | Every field accounted for; every shown unit obeys the gates and has a reviewed verdict. Last step of `run_all.py`. |
 | `python3 scripts/check_scene_text.py` | Every number and claim in the written scene text still matches the data. Run by hand. |
 | `python3 scripts/test_realtor_lines.py` | The composed "About the building" and per-unit lines. |
+| `python3 scripts/test_page_data_extras.py` | The extras step and the publish step: each block, idempotence, the quote screen, contacts, ratings. |
 | `python3 scripts/test_shortlist_tools.py` | Call sheet, tour days and re-check tools (synthetic rows, no network). |
 | `node scripts/site_walkthrough_test.js` | The page itself at 390, 1280 and 320 px (usage in the file header; needs `site/` served locally). |
 | `node scripts/map_component_test.js` | The standalone map demo. |
