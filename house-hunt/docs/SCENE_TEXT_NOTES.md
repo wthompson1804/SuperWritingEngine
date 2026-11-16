@@ -396,7 +396,7 @@ name no other kind.
 
 ### What the data still cannot support (independent check 5)
 
-1. Whether an "assigned space", or parking of unnamed kind, is a garage or a lot (10 buildings): the text asks.
+1. Whether an "assigned space", or parking of unnamed kind, is a garage or a lot (11 buildings): the text asks.
 2. A walking time to a station. Only the distance is in the data, so the station is given in miles.
 3. Which station matters for reaching her parents. The text names the nearest station of any kind; the commuter
    station's distance is in `glance_json` and is not put in a sentence.

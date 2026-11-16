@@ -49,6 +49,13 @@ Rules the code keeps (scripts/test_realtor_lines.py checks them):
     data gives the same text;
   * an unknown is never stated as a fact: parking that is not published is an "ask"; a garage with no price is "fee
     not published", never "free"; a dog policy that is not settled is never "dogs are allowed";
+  * parking is read from the STRUCTURED fields (parking_facts: parking.kind, included_kind, fee, fee_kind,
+    optional_kinds; independent check 5, N1): "garage" only where the space she would park in is a garage, a fee only
+    for the kind it belongs to, the other kind named as what it is ("A free open lot; garage spaces are $125 a
+    month."), off-site parking called off-site, an assigned or unnamed space said to be that;
+  * the nearest station is named by its kind (station_words: train station / subway station / PATH station / light
+    rail stop); "washer and dryer" only where a source names both, "the listing shows ..." where the only source is
+    a listing site's appliance list (laundry_mode);
   * a catch states a reason only when the apartment's own fields give it (CATCH_BASIS): "listing sites disagree about
     dogs" only where the open item says so; "the price shown includes a special offer" only where the rent block says
     the price is the average after an offer; otherwise "the listing does not say whether the price includes it";

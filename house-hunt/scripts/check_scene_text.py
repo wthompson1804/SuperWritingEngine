@@ -51,8 +51,17 @@ PLAIN (check_plain; the reason for the edit: lines that tried to be clever and r
 HOUSE STYLE (unchanged)
 8. word limits, one-sentence fields, no question marks, no em or en dashes, no "not ... but", no spelled-out
    quantities, no wording about race, ethnicity or religion, no listing-ad hype words;
-9. no crime wording in any open field. One fixed wording is allowed, only with a test in the evidence:
-   "one of the safest spots on the whole list" (lowest fifth by violent rate among the page's neighborhoods);
+9. no crime wording in any open field. One fixed wording is allowed, only as an icon point of a neighborhood and only
+   with a test in the evidence: "Among the safest places on the list." (lowest TENTH by violent rate among the page's
+   neighborhoods, never where no rate is published; independent check 5, D27);
+9b. INDEPENDENT CHECK 5 (each rule computed from the same field for every sentence; see the functions named):
+   check_quantities    no two sentences of a neighborhood give incompatible amounts of restaurants, bars or cafés
+                       ("no bars" beside "few bars"; "nothing is within walking distance" beside "2 cafés");
+   dangling            no text opens on a sentence that leans on another ("too", "also", "as well", "And", "But");
+   agreement           "N of the M buildings here has / have ..." agrees with N, in every text and glance label;
+   check_station_words the nearest station is named by its kind (train station / subway / PATH / light rail);
+   check_toll_range    a toll that differs by more than $5 between the buildings shown is given as a range;
+   parking             what a garage is comes from the structured parking fields (realtor_lines.parking_facts);
 ACROSS ROWS
 10. a neighborhood's lead (the first sentence of host_intro, also its line on the experience page) may not open on a
     statistic that more than a third of the neighborhoods in the same experience also open on (check_leads);
