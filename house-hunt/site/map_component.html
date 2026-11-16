@@ -29,11 +29,11 @@ h1,h2,h3{font-family:var(--display);margin:0}
   <h1 class="demo-h">Map component demo</h1>
   <p class="demo-p">Two instances of one component. Data: a trimmed copy of site/data.json and site/map_base.json, embedded by scripts/build_map_demo.py so this file opens offline.</p>
 
-  <h2 class="demo-h">1. Overview, all years</h2>
+  <h2 class="demo-h">1. Overview, every experience</h2>
   <div id="map-overview"></div>
   <p class="demo-log" id="log-overview" role="status">onSelectHood has not been called yet.</p>
 
-  <h2 class="demo-h">2. Inside one year</h2>
+  <h2 class="demo-h">2. Inside one experience</h2>
   <p class="demo-p" id="year-note"></p>
   <div id="map-year"></div>
   <p class="demo-log" id="log-year" role="status">onSelectHood has not been called yet.</p>
@@ -131,7 +131,7 @@ h1,h2,h3{font-family:var(--display);margin:0}
 /* initHouseHuntMap(container, data, base, {onSelectHood, year})
    container: an empty element. data: site/data.json (or the page's own copy). base: site/map_base.json.
    Options: onSelectHood(id) is called by "See places"; year is a year id to start filtered on (null = all).
-   Also: mode ("year" | "drive"), anchorLabel, yearStyle {yearId:{color,shape}}, onYearChange(idOrNull).
+   Also: mode ("year" | "drive"), anchorLabel, groupWord (default "experience": the word for a year in the interface), yearStyle {yearId:{color,shape}}, onYearChange(idOrNull).
    Returns {setYear, setMode, select, zoomTo, reset, destroy}. No dependencies. */
 function initHouseHuntMap(container,data,base,opts){
   "use strict";
@@ -170,7 +170,7 @@ function initHouseHuntMap(container,data,base,opts){
   /* ---------- data ---------- */
   var anchor=(data.meta&&data.meta.anchor)||{lat:40.699608,lon:-73.80853};
   var yard=(data.meta&&data.meta.jamaica_yardstick)||{};
-  var anchorLabel=opts.anchorLabel||"Mom and Dad";
+  var anchorLabel=opts.anchorLabel||"Mom and Dad",word=opts.groupWord||"experience"; /* the page calls a year an "experience" */
   var years=(data.years||[]).map(function(y,i){var o=(opts.yearStyle&&opts.yearStyle[y.id])||{},s=STYLES[i%STYLES.length];
     return {id:y.id,label:y.label||y.id,color:o.color||s.color,shape:o.shape||s.shape,n:0}});
   var Y_BY={};years.forEach(function(y){Y_BY[y.id]=y});
@@ -192,8 +192,8 @@ function initHouseHuntMap(container,data,base,opts){
   container.innerHTML=
     '<div class="hhm mode-'+state.mode+'">'+
     '<div class="hhm-seg" role="group" aria-label="Colour the marks by">'+
-      '<button type="button" data-mode="year">Colour by year</button><button type="button" data-mode="drive">Colour by drive time</button></div>'+
-    '<div class="hhm-chips" role="group" aria-label="Show one year">'+
+      '<button type="button" data-mode="year">Colour by '+esc(word)+'</button><button type="button" data-mode="drive">Colour by drive time</button></div>'+
+    '<div class="hhm-chips" role="group" aria-label="Show one '+esc(word)+'">'+
       years.map(function(y){return '<button type="button" class="hhm-chip" data-year="'+esc(y.id)+'" aria-pressed="false">'+swatch(y)+'<span>'+esc(y.label)+' <small>'+y.n+'</small></span></button>'}).join("")+'</div>'+
     '<div class="hhm-stage">'+
       '<svg class="hhm-svg" tabindex="-1" focusable="false" role="group" aria-label="Map: '+dots.length+' neighborhoods around '+esc(anchorLabel)+' in Jamaica, Queens. Arrow keys move between marks, Enter opens one, plus and minus zoom."></svg>'+
@@ -354,7 +354,7 @@ function initHouseHuntMap(container,data,base,opts){
         return '<span class="k"><i style="background:'+b.color+'"></i>'+b.label+' ('+act.filter(function(d){return d.band===i}).length+')</span>'}).join("")+
         (hasOver?'<span class="k"><i style="background:'+OVER.color+'"></i>'+OVER.label+'</span>':"")+
         (hasUnk?'<span class="k"><i style="background:#fff"></i>Not known</span>':"")+sizeKey;
-    }else legend.innerHTML='<b>Shape and colour show the year.</b>'+sizeKey;
+    }else legend.innerHTML='<b>Shape and colour show the '+esc(word)+'.</b>'+sizeKey;
     roving();render();
   }
   function roving(){
@@ -492,7 +492,7 @@ function initHouseHuntMap(container,data,base,opts){
   function log(id){return function(hood){document.getElementById(id).textContent='onSelectHood("'+hood+'") was called. The page would go to #hood-'+hood+'.'}}
   window.demoMaps=[initHouseHuntMap(document.getElementById("map-overview"),data,base,{onSelectHood:log("log-overview"),year:null})];
   var y=data.years[1]||data.years[0];
-  document.getElementById("year-note").textContent='Started with year: "'+y.id+'" ('+y.label+'), in drive-time colours.';
+  document.getElementById("year-note").textContent='Started with the option year: "'+y.id+'" ('+y.label+'), in drive-time colours.';
   window.demoMaps.push(initHouseHuntMap(document.getElementById("map-year"),data,base,{onSelectHood:log("log-year"),year:y.id,mode:"drive"}));
 })();
 </script>
