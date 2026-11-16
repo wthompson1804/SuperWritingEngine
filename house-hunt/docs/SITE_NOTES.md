@@ -597,3 +597,40 @@ evening. Files: `site/index.html`, `scripts/build_site.py`, `scripts/site_walkth
 - Stored medians and ranges (`years[].medians`, `all_in_range`) are still read for the experience strip and tiles; only
   counts are recomputed.
 - The map's own chips keep the data's order of experiences, not the first screen's order by size.
+
+## UI pass 7: tutorial
+
+(2026-11-16. Owner: "restore the tutorial at the front of it, and make it descriptive enough that it makes sense."
+Files: `site/index.html`, `scripts/site_walkthrough_test.js`, `site/screens/p7-tutorial-*.png`.)
+
+- **What it is.** A six-step card, "How this works" (`#tut`, `TUT`, `openTut` / `closeTut` / `tutStep` / `tutDraw`), in
+  the old first-run card's style: white card, ink border, berry shadow, the dog, dots. Each step has a drawing, "2 of 6",
+  a title and one or two sentences (28 words at most). The steps: the six experiences; experience → neighborhood →
+  building → apartment, with "Show more" and List / Map; the three numbers at the top of a page and the range beneath;
+  rows open when tapped, and "See how we got this"; the star (*) and "Still to confirm"; Save, My list, Compare and
+  "See photos".
+- **Words and samples.** The sentences are written in the template (the one place the page explains itself). Nothing in
+  them is a count of apartments; "six" is `YEARS.length` in words. The drawings are copies of the page's own parts
+  filled from the data when the step is drawn: the experiences' markers and names, the first experience's key facts
+  (`kfacts`, with the buttons turned into plain boxes), two of its row headlines, the first apartment with one thing to
+  confirm and its question, and the bottom bar with the real saved count. They are `aria-hidden` and hold no control.
+- **When it opens.** By itself once, on a first visit that lands on the first screen; never on a link to an experience,
+  neighborhood, building or the list (and not later in that visit). Closing it any way (Skip, Done, Escape, a tap
+  outside) stores `lamia-house-hunt-v1-tutorial = 1`. When storage throws it shows on each load and still closes at once.
+  "How this works" under the title (`#how-top`) and in the footer reopen it from step 1; the three-line sheet is gone.
+- **Controls.** Skip on every step; Back / Next, Done on the last; left / right arrows, Escape; a swipe left or right on
+  the card (44 px or more, mostly sideways). Focus goes to Next on opening and back to where it was (the page's h1 on a
+  first visit) on closing. The page behind is inert through the sheet's own `hold()`. The card's entrance animation is
+  off with reduced motion (the page's global rule).
+- **Layout.** A centered card, 552 px tall at 390×844 and 566 px at 320×640, the same height on every step so the
+  buttons do not move; no scrolling inside it at either size. One h2 (the title); the step is an `aria-live="polite"`
+  region; text is 14 px or more; buttons are 44 px or more.
+- **Tests** (`tutorialTests()` in the walk-through, at every width, in fresh browser contexts): first visit opens it over
+  the first screen; every step is measured (words, sizes, contrast, fit, drawing) and photographed at 390; Back, Done,
+  no reopening on reload; the top button and the footer link; Skip; arrows and Escape; a tap outside; swipes; links to
+  inner pages; storage that throws; reduced motion; no console errors. The main walk-through seeds the stored flag; the
+  built-page runs dismiss the tutorial with Skip first.
+- **Also changed in the test:** the ceiling for an experience tile's height at 390 px is 336 px, not 320: one tile is
+  324 px with the current data, with the committed template as well.
+- **Left as is:** the star on a price is the rent offer, a different mark from "* To confirm"; the tutorial describes
+  only the second, in the footer's words. At 320 px the key-facts sample breaks "E-ZPass" over two lines, as the page does.

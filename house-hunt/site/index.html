@@ -718,8 +718,76 @@ body{padding-bottom:calc(var(--tray-h,56px) + 20px)}
 .starline b{font-family:var(--display);font-size:20px;line-height:1;color:var(--berry-deep)}
 .starline span{flex:1 1 auto;min-width:0}
 .starline .chev{flex:0 0 auto;margin:-4px 2px 0 0;width:9px;height:9px}
-.howl{margin:14px 0 6px;padding-left:22px;display:grid;gap:10px;font-size:17px;line-height:1.4}
-.howl b{font-family:var(--display);font-weight:800}
+/* ---- the tutorial ("How this works"): a card over the first screen on a first visit; the same card from the two "How this works" buttons ---- */
+.tutscrim{position:fixed;inset:0;background:rgba(58,22,48,.6);z-index:60;touch-action:none}
+.tutscrim[hidden],.tut[hidden]{display:none}
+.tut{position:fixed;inset:0;z-index:61;display:grid;place-items:center;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));pointer-events:none}
+.tutcard{pointer-events:auto;width:100%;max-width:430px;max-height:100%;grid-template-rows:auto 1fr auto auto;overflow:auto;overscroll-behavior:contain;background:var(--white);border:3px solid var(--ink);border-radius:26px;box-shadow:6px 6px 0 var(--berry);padding:12px 14px 14px;display:grid;gap:10px;animation:tutin .22s ease-out}
+@keyframes tutin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tut-top{display:flex;align-items:center;gap:8px}
+.tut-top svg{width:38px;height:38px;flex:0 0 auto}
+.tut-top h2{flex:1 1 auto;min-width:0;font-family:var(--script);font-weight:400;font-size:28px;line-height:1;color:var(--berry-deep)}
+.tut-top .btn{flex:0 0 auto}
+.tut-step{display:grid;gap:6px;align-content:start}
+.tut-art{--t-s:14px;--t-m:16px;--t-l:19px;background:var(--blush);border:2px solid var(--line);border-radius:18px;min-height:176px;padding:12px 10px;display:grid;align-content:center;justify-items:center;gap:8px;overflow:hidden;font-size:14px;line-height:1.25}
+.tut-art>*{max-width:100%;min-width:0}
+.tut-count{font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--berry-deep);margin-top:4px}
+.tut-step h3{font-weight:800;font-stretch:82%;font-size:24px;line-height:1.05}
+.tut-step .tut-p{font-size:16px;line-height:1.4;min-height:5.6em}
+.tut-step .tut-p b{font-family:var(--display);font-weight:800}
+.tut-dots{display:flex;justify-content:center;gap:7px}
+.tut-dots i{width:10px;height:10px;border-radius:50%;background:#E9B9CC}
+.tut-dots i.on{background:var(--berry-deep);width:22px;border-radius:999px}
+.tut-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tut-acts .btn{min-height:48px;width:100%}
+.tut-acts .btn[hidden]{display:none}
+.tut-acts .btn[hidden]+.btn{grid-column:1 / -1}
+/* the small drawings inside the card: copies of the page's own parts, not controls */
+.tut-pills{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%}
+.tut-pill{display:flex;align-items:center;gap:5px;min-width:0;min-height:34px;background:var(--white);border:2px solid var(--ink);border-radius:999px;padding:3px 9px;font-family:var(--display);font-weight:800;font-stretch:88%;font-size:14px;line-height:1.1}
+.tut-pair{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.tut-pill svg{flex:0 0 auto}
+.tut-pill .pinl{min-width:24px;height:24px;font-size:14px;border-width:2px;background:var(--butter)}
+.tut-chain{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 4px}
+.tut-chain i{font-style:normal;font-weight:800;font-size:18px;color:var(--berry-deep)}
+.tut-sw{display:inline-grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink);border-radius:999px;background:var(--white);padding:2px}
+.tut-sw span{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:2px 14px;border-radius:999px;font-family:var(--display);font-weight:800;font-size:14px}
+.tut-sw span.on{background:var(--ink);color:#fff}
+.tut-sw svg{width:16px;height:16px}
+.tut-more{display:inline-flex;align-items:center;min-height:32px;padding:2px 14px;border:2px solid var(--ink);border-radius:999px;background:var(--white);font-family:var(--display);font-weight:800;font-size:14px}
+.tut-rowx{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px}
+.tut-art .kf{margin-top:0;width:100%}
+.tut-art .kf .kft{font-size:14px;letter-spacing:.02em}
+.tut-note{font-size:14px;font-weight:700;color:var(--ink)}
+.tut-note b{color:var(--berry-deep)}
+.tut-row{display:grid;grid-template-columns:minmax(0,1fr) 20px;align-items:center;column-gap:8px;width:100%;background:var(--white);border:2px solid #B58CA5;border-radius:16px;padding:6px 12px 7px;text-align:left}
+.tut-row.open{border-color:var(--ink)}
+.tut-row .rl{font-size:14px}
+.tut-row .rh{font-size:15px;white-space:normal}
+.tut-row .tut-det{grid-column:1 / -1;font-size:14px;margin-top:6px;padding-top:6px;border-top:2px solid var(--line)}
+.tut-row.open .chev{transform:rotate(225deg);margin-top:4px}
+.tut-row .tut-how{grid-column:1 / -1;font-size:14px;font-weight:700;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);text-decoration-thickness:2px;text-underline-offset:4px;margin-top:4px}
+.tut-apt{width:100%;background:var(--white);border:2px solid var(--ink);border-radius:16px;padding:8px 10px;display:grid;gap:6px;text-align:left}
+.tut-apt{gap:4px}
+.tut-apt .nm{font-family:var(--display);font-weight:800;font-size:16px;line-height:1.15}
+.tut-apt .ap{font-size:14px;font-weight:700;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tut-apt .confl{font-size:14px}
+.tut-apt .ask{font-size:14px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.tut-heart{display:inline-flex;align-items:center;gap:5px;min-height:36px;border:2px solid var(--ink);border-radius:999px;background:var(--white);font-weight:800;font-size:14px;padding:0 12px}
+.tut-heart .hrt{color:var(--berry);width:17px;height:17px}
+.tut-heart svg{flex:0 0 auto}
+.tut-tray{display:flex;align-items:center;gap:8px;width:100%;min-height:40px;background:var(--ink);color:#fff;border-radius:14px 14px 0 0;padding:0 12px}
+.tut-tray .hrt{color:#FF9EC0;flex:0 0 auto}
+.tut-tray b{font-family:var(--script);font-weight:400;font-size:21px;color:#FF9EC0;line-height:1}
+.tut-tray span{font-size:14px;font-weight:800;color:#F3DDE8}
+.tut-tray em{margin-left:auto;font-style:normal;font-size:14px;font-weight:800;text-decoration:underline;text-decoration-color:#FF9EC0;text-underline-offset:3px}
+.tut-cmp{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:2px 16px;border-radius:999px;background:var(--berry-deep);color:#fff;font-family:var(--display);font-weight:800;font-size:14px}
+/* the way back to the tutorial, under the title on the first screen */
+.howbtn{display:inline-flex;align-items:center;gap:7px;min-height:44px;margin-top:8px;padding:4px 16px 4px 8px;border:2px solid var(--ink);border-radius:999px;background:var(--white);font-family:var(--display);font-weight:800;font-size:15px;color:var(--ink);cursor:pointer}
+.howbtn svg{width:28px;height:28px;flex:0 0 auto}
+@media (min-height:701px){.tutcard{min-height:552px}}
+@media (max-height:700px){.tutcard{gap:8px;min-height:min(566px,100%)}.tut-art{min-height:0;padding:8px;gap:6px}.tut-step{gap:4px}.tut-step .tut-p{min-height:0;line-height:1.35}.tut-top h2{font-size:25px}.tut-step h3{font-size:21px}.tut-chain{gap:4px 3px}.tut-pill{min-height:30px}.tut-sw span,.tut-more{min-height:28px}}
+@media (max-width:350px){.tutcard{padding:10px 12px 12px}.tut-pill{padding:3px 6px;gap:4px;font-stretch:75%}.tut-art{padding-left:6px;padding-right:6px}.tut-art .kfc{padding-left:1px;padding-right:1px}.tut-art .kf span{letter-spacing:-.2px}}
 .life.slim{gap:6px;padding:11px 14px 12px}
 .life.slim .l2{display:block;-webkit-line-clamp:unset;overflow:visible}
 .chip small,.hood.card .chip small{white-space:normal;overflow:visible;font-size:11px}
@@ -1036,6 +1104,16 @@ h1:focus,h2:focus{outline:none}
 
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="tutscrim" id="tutscrim" data-act="tut-close" hidden></div>
+<div class="tut" id="tut" role="dialog" aria-modal="true" aria-labelledby="tutTitle" aria-describedby="tutStep" hidden>
+  <div class="tutcard" id="tutCard">
+    <div class="tut-top"><span id="tutPup" aria-hidden="true"></span><h2 id="tutTitle">How this works</h2><button type="button" class="btn sm" data-act="tut-close" id="tutSkip" aria-label="Skip the tutorial">Skip</button></div>
+    <div class="tut-step" id="tutStep" aria-live="polite" aria-atomic="true"></div>
+    <div class="tut-dots" id="tutDots" aria-hidden="true"></div>
+    <div class="tut-acts"><button type="button" class="btn" data-act="tut-back" id="tutBack" aria-label="Back to the step before">Back</button><button type="button" class="btn main" data-act="tut-next" id="tutNext">Next</button></div>
+  </div>
+</div>
 
 <!--HOUSE_HUNT_DATA_SLOT-->
 <!--HOUSE_HUNT_MAP_BASE_SLOT-->
@@ -2316,7 +2394,7 @@ var HL={
 
 /* ---- first screen: six short cards ---- */
 function vLives(){
-  var h='<header class="title-card"><h1 class="logo" aria-label="Lamia\'s House Hunt"><svg viewBox="0 0 360 70" aria-hidden="true"><path d="M30 66 180 8 330 66" fill="none" stroke="#3A1630" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="262" y="16" width="20" height="34" rx="3" fill="#3A1630"/><path d="M180 30c-5-9-19-6-17 4 1 6 9 11 17 17 8-6 16-11 17-17 2-10-12-13-17-4z" fill="#E0457B"/></svg><span class="name">Lamia\'s</span><span class="show">House Hunt</span></h1><p class="tagline">'+pl(UNITS.length,"apartment")+' to see, in '+pl(HOODS.filter(function(H){return H.units.length}).length,"neighborhood")+', across '+pl(YEARS.length,"experience")+'.</p></header>';
+  var h='<header class="title-card"><h1 class="logo" aria-label="Lamia\'s House Hunt"><svg viewBox="0 0 360 70" aria-hidden="true"><path d="M30 66 180 8 330 66" fill="none" stroke="#3A1630" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="262" y="16" width="20" height="34" rx="3" fill="#3A1630"/><path d="M180 30c-5-9-19-6-17 4 1 6 9 11 17 17 8-6 16-11 17-17 2-10-12-13-17-4z" fill="#E0457B"/></svg><span class="name">Lamia\'s</span><span class="show">House Hunt</span></h1><p class="tagline">'+pl(UNITS.length,"apartment")+' to see, in '+pl(HOODS.filter(function(H){return H.units.length}).length,"neighborhood")+', across '+pl(YEARS.length,"experience")+'.</p><button type="button" class="howbtn" id="how-top" data-act="how-open" aria-haspopup="dialog">'+IC.pup+'How this works</button></header>';
   h+='<div class="wrap"><section class="sec" id="sec-experiences" style="margin-top:16px"><h2><span class="s">Pick</span> an experience</h2><p class="facts" id="price-note" style="margin-top:4px">Prices are for a month, everything included.</p><div class="stack tight" style="margin-top:8px">';
   YEARS.forEach(function(Y){var us=Y.units,n=us.filter(fits).length,none=!n,line=calmClause(Y.tagline)||calmClause(Y.subhead)||HL.first(pr(Y,"promise"),110);
     h+='<a class="life slim'+(none?' none':'')+'" href="'+href("year",Y.id)+'">'+illus(Y,"banner")+'<h3>'+ymark(Y,22)+esc(Y.label)+'</h3>'+(line?'<p class="l2">'+esc(line)+'</p>':'')+tileFigs(Y,n,us.length)+(us.length&&us.length<FEW?'<p class="tnote">Only '+pl(us.length,"apartment")+' right now</p>':'')+'</a>'});
@@ -2758,9 +2836,60 @@ function tileSheet(id,k){
   return h+how.apply(null,src)}
 
 /* ================= How it works ================= */
-/* Nothing opens by itself on a first visit. The footer's "How this works" link opens these three lines in the sheet. */
-var HOW_STEPS=[["Pick","an experience, then a neighborhood, then a building and its apartments."],["Save","the ones you like. They wait in My list, at the bottom."],["Compare","any two or three from your list, then copy your tour list."]];
-function howSheet(){return shTop("How this works","")+'<ol class="howl">'+HOW_STEPS.map(function(s){return '<li><b>'+s[0]+'</b> '+s[1]+'</li>'}).join("")+'</ol>'}
+/* The tutorial. It opens by itself the first time the first screen is seen (never on a link to an inner page), and again
+   from "How this works" under the title and in the footer. The words are written here: this is the one place the page
+   explains itself. Every count and every sample in the drawings is read from the data when the step is drawn. */
+var NUMW=["no","one","two","three","four","five","six","seven","eight","nine","ten"];
+function numW(n){return NUMW[n]||String(n)}
+var TUT_KEY=KEY+"-tutorial";
+var TUT_BLD='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="19" rx="2" fill="#3A1630"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2" stroke="#FFD86B" stroke-width="2.2"/></svg>',
+    TUT_DOOR='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.500" width="12" height="19.500" rx="2" fill="#E0457B" stroke="#3A1630" stroke-width="2"/><circle cx="14.500" cy="12.500" r="1.500" fill="#3A1630"/></svg>';
+function tutPill(ic,t){return '<span class="tut-pill">'+ic+'<span>'+esc(t)+'</span></span>'}
+function tutRow(label,head,open){return '<div class="tut-row'+(open?' open':'')+'"><span class="rl">'+esc(label)+'</span><span class="rh">'+esc(head)+'</span><i class="chev"></i>'+(open?'<span class="tut-det">The detail opens here.</span><span class="tut-how">See how we got this</span>':'')+'</div>'}
+var TUT=[
+ {t:function(){return capFirst(numW(YEARS.length))+" different kinds of life"},
+  p:function(){return "Every apartment here fits what you need. They come as "+numW(YEARS.length)+" experiences, from walking everywhere to more room farther out. Start with the one that sounds like you."},
+  art:function(){return '<div class="tut-pills">'+YEARS.map(function(Y){return tutPill(ymark(Y,18),Y.short)}).join("")+'</div>'}},
+ {t:function(){return "From experience down to apartment"},
+  p:function(){return "Tap an experience for its neighborhoods, best first; <b>Show more</b> has the rest. Then a neighborhood for its buildings, a building for its apartments. Or switch to <b>Map</b>."},
+  art:function(){var Y=YEARS[0];return '<div class="tut-chain">'+'<span class="tut-pair">'+tutPill(Y?ymark(Y,18):"","Experience")+'<i>›</i></span><span class="tut-pair">'+tutPill('<span class="pinl">1</span>',"Neighborhood")+'<i>›</i></span><span class="tut-pair">'+tutPill(TUT_BLD,"Building")+'<i>›</i></span>'+tutPill(TUT_DOOR,"Apartment")+'</div>'+
+    '<div class="tut-rowx"><span class="tut-more">Show more</span><span class="tut-sw"><span class="on">'+IC_LIST+'List</span><span>'+IC_MAP+'Map</span></span></div>'}},
+ {t:function(){return "Three numbers on every page"},
+  p:function(){return "Up top: the typical monthly cost, everything included (rent, fees, parking, utilities), the drive to Mom and Dad, and tolls. The small line beneath is the range."},
+  art:function(){var Y=YEARS[0],h="";
+    if(Y){var us=Y.units,hs=Y.hoods,f=yearNums(Y);
+      h=kfacts([costFact(us,f.cost,f.cr,us.length>1,"year",Y.id)||{b:"Ask",s:"cost not known"},f.drive!=null?{t:hs.length>1?"typical":"",b:r0(f.drive)+" min",s:"drive to Mom and Dad",r:hs.length>1?rngFrom(f.dr,r0," min"):""}:{b:"Ask",s:"drive not known"},tollFact(Y.medians||{},hs.length>1,"year",Y.id)],true)
+        .replace(' id="keyfacts"','').replace(/<button type="button" class="kfc"[^>]*>/g,'<div class="kfc">').replace(/<\/button>/g,'</div>').split(INFO_I).join("")}
+    return h+(Y?'<p class="tut-note">Shown: '+esc(Y.label)+'</p>':'')}},
+ {t:function(){return "Tap a row to open it"},
+  p:function(){return "Each row's headline gives you the answer. Tap the row for the detail. <b>See how we got this</b> shows where a number came from."},
+  art:function(){var Y=YEARS[0],a="",b="";try{a=HL.yearCost(Y);b=HL.out(Y.medians||{})}catch(e){}
+    return tutRow("What it costs you",a||"the monthly cost, in a line",false)+tutRow("Going out and green space",b||"what is close by, in a line",true)}},
+ {t:function(){return "A star means ask first"},
+  p:function(){return "A star (*) on an apartment means one thing is still to confirm before you sign. Open the apartment: <b>Still to confirm</b> says what to ask."},
+  art:function(){var U=UNITS.filter(function(u){return confs(u).length===1&&confQ(confs(u)[0],u)})[0]||UNITS.filter(function(u){return confs(u).length})[0],c=U?confs(U):[],q=U?confQ(c[0],U):"";
+    return '<div class="tut-apt"><span class="nm">'+(U?esc(uName(U)):'An apartment')+'</span>'+(U&&U.unit?'<span class="ap">Apartment '+esc(U.unit)+'</span>':'')+'<p class="confl"><b>* To confirm: '+esc(U?c.map(cWhat).join("; "):CONFIRM_WORD.floor)+'.</b></p>'+(q?'<p class="ask"><b>What to ask:</b> '+esc(q)+'</p>':'')+'</div>'}},
+ {t:function(){return "Save, then compare"},
+  p:function(){return "Tap <b>Save</b> (the heart) on any apartment. <b>My list</b>, at the bottom, holds them; sort it, tick two or three, tap <b>Compare</b>. <b>See photos</b> opens the listing's photos."},
+  art:function(){return '<div class="tut-rowx"><span class="tut-heart">'+HEART+'Save</span><span class="tut-heart">'+PT_IC.camera+'See photos</span></div><span class="tut-cmp">Compare selected (2)</span><div class="tut-tray">'+HEART+'<b>Saved</b><span>· '+S.saved.length+'</span><em>My list</em></div>'}}
+];
+var TUT_AT=-1,tutFocus=null;
+function tutSeen(){try{return localStorage.getItem(TUT_KEY)==="1"}catch(e){return false}}
+function tutMark(){try{localStorage.setItem(TUT_KEY,"1")}catch(e){}}
+function tutDraw(i){var T=TUT[i],n=TUT.length,back=document.getElementById("tutBack"),next=document.getElementById("tutNext"),last=i===n-1,art="";TUT_AT=i;
+  try{art=T.art()}catch(e){art=""}
+  document.getElementById("tutStep").innerHTML=(art?'<div class="tut-art" aria-hidden="true">'+art+'</div>':'')+'<p class="tut-count" id="tutCount">'+(i+1)+' of '+n+'</p><h3>'+esc(T.t())+'</h3><p class="tut-p">'+T.p()+'</p>';
+  document.getElementById("tutDots").innerHTML=TUT.map(function(_,j){return '<i'+(j===i?' class="on"':'')+'></i>'}).join("");
+  if(i===0&&document.activeElement===back){try{next.focus({preventScroll:true})}catch(e){}}
+  back.hidden=i===0;next.textContent=last?"Done":"Next";next.setAttribute("aria-label",last?"Done. Close the tutorial":"Next step");
+  document.getElementById("tutCard").scrollTop=0}
+function openTut(){var tut=document.getElementById("tut");
+  if(tut.hidden){openLimits(false);closeSheet();tutFocus=document.activeElement;document.getElementById("tutPup").innerHTML=IC.pup;tut.hidden=false;document.getElementById("tutscrim").hidden=false;hold(true)}
+  tutDraw(0);try{document.getElementById("tutNext").focus({preventScroll:true})}catch(e){}}
+function closeTut(){var tut=document.getElementById("tut");if(tut.hidden)return;
+  tut.hidden=true;document.getElementById("tutscrim").hidden=true;TUT_AT=-1;hold(false);tutMark();
+  var f=tutFocus&&tutFocus.focus&&tutFocus!==document.body&&document.body.contains(tutFocus)?tutFocus:view.querySelector("h1")||view;tutFocus=null;if(f.tabIndex<0&&!f.hasAttribute("tabindex"))f.tabIndex=-1;try{f.focus({preventScroll:true})}catch(e){}}
+function tutStep(d){if(TUT_AT<0)return;var i=TUT_AT+d;if(i<0)return;if(i>=TUT.length){closeTut();return}tutDraw(i)}
 
 /* ================= Shell ================= */
 var tray=document.getElementById("tray"),trailEl=document.getElementById("trail"),sheet=document.getElementById("sheet"),sheetBody=document.getElementById("sheetBody"),scrim=document.getElementById("scrim"),limsheet=document.getElementById("limsheet"),toastEl=document.getElementById("toast");
@@ -2888,7 +3017,10 @@ document.addEventListener("click",function(e){
     var hb=document.querySelector('.viewsw [data-v="'+hv+'"]');if(hb){try{hb.focus({preventScroll:true})}catch(err){}}}
   else if(act==="tile"){openSheet(tileSheet(id,t.getAttribute("data-k")))}
   else if(act==="scale"){openSheet(scaleSheet(t.getAttribute("data-kind"),id,t.getAttribute("data-m")))}
-  else if(act==="how-open"){openLimits(false);openSheet(howSheet())}
+  else if(act==="how-open"){openTut()}
+  else if(act==="tut-close"){closeTut()}
+  else if(act==="tut-next"){tutStep(1)}
+  else if(act==="tut-back"){tutStep(-1)}
   else if(act==="toll-info"||act==="allin-info"){var io=t.getAttribute("data-kind")==="year"?Y_BY[id]:H_BY[id];if(io){var iy=t.getAttribute("data-kind")==="year";
       openSheet(act==="toll-info"?tollSheet(iy?(io.medians||{}):io,iy?io.label:hoodTitle(io),iy):allInSheet(io.units,iy?io.label:hoodTitle(io)))}}
   else if(act==="goto-row"){var gr=document.getElementById(t.getAttribute("data-to"));if(gr){gr.open=true;(OPENED[current]=OPENED[current]||{})[gr.id]=true;gr.scrollIntoView({block:"start"})}}
@@ -2922,17 +3054,27 @@ document.addEventListener("change",function(e){var el0=e.target;
 limsheet.addEventListener("input",function(e){var k=e.target&&e.target.getAttribute("data-k");
   if(e.target&&e.target.id==="lim-clear")S.lim.clear=e.target.checked;else if(!k)return;else S.lim[k]=+e.target.value;
   save();renderCounts();var y=window.scrollY;renderView();window.scrollTo(0,y)});
-document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;
+document.addEventListener("keydown",function(e){
+  if(TUT_AT>-1){if(e.key==="Escape"){e.preventDefault();closeTut()}else if(e.key==="ArrowRight"){e.preventDefault();if(TUT_AT<TUT.length-1)tutStep(1)}else if(e.key==="ArrowLeft"){e.preventDefault();tutStep(-1)}return}
+  if(e.key!=="Escape")return;
   if(sheet.classList.contains("open"))closeSheet();else if(limsheet.classList.contains("open"))openLimits(false)});
+/* a swipe on the tutorial card: left is the next step, right is the one before */
+(function(){var card=document.getElementById("tutCard"),x0=null,y0=0;
+  card.addEventListener("touchstart",function(e){var t=e.touches&&e.touches[0];if(t&&e.touches.length===1){x0=t.clientX;y0=t.clientY}else x0=null},{passive:true});
+  card.addEventListener("touchend",function(e){if(x0==null)return;var t=e.changedTouches&&e.changedTouches[0];if(!t)return;var dx=t.clientX-x0,dy=t.clientY-y0;x0=null;
+    if(Math.abs(dx)>=44&&Math.abs(dx)>1.5*Math.abs(dy)){if(dx<0){if(TUT_AT<TUT.length-1)tutStep(1)}else tutStep(-1)}},{passive:true});
+  card.addEventListener("touchcancel",function(){x0=null},{passive:true})})();
 window.addEventListener("resize",fitTray);
 /* which rows are open, per page, for this visit only */
 document.addEventListener("toggle",function(e){var d=e.target,id=d&&d.getAttribute&&d.getAttribute("data-row");if(id&&view.contains(d))(OPENED[current]=OPENED[current]||{})[id]=d.open},true);
-window.addEventListener("hashchange",function(){var r=location.hash.replace(/^#/,"")||"lives";if(routeOf(parse(r))!==current){closeSheet();go(r)}});
+window.addEventListener("hashchange",function(){var r=location.hash.replace(/^#/,"")||"lives";if(routeOf(parse(r))!==current){closeTut();closeSheet();go(r)}});
 
 window.__houseHunt={bldgs:function(){return BLDGS.map(function(B){return {id:B.id,slug:SLUG.bldg[B.id],hood:B.hood.id,units:B.units.map(function(u){return u.id})}})},state:function(){return {saved:S.saved.slice(),pick:S.pick.slice(),sort:S.sort}},tint:function(id,k){return U_BY[id]?tintOf(U_BY[id],k):null},sentences:sentences,cleanName:cleanName,offerLine:function(id){return U_BY[id]?offerLine(U_BY[id]):null},aboutShown:function(kind,id,mode){var o=kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;var all=aboutPoints(o);return {all:all.length,stale:all.filter(function(p){return staleCount(p.text,o)}).map(function(p){return p.text}).concat(sentences(calm(textOf(hostOfRec(o,"intro")))).filter(function(s){return staleCount(s,o)})),restated:all.filter(function(p){return !staleCount(p.text,o)&&ptRestates(p,mode,o)}).map(function(p){return p.text})}},aWalk:aWalk,payNote:payNote,ptBody:ptBody,parkShort:parkShort,distShort:distShort,HL:HL,HL_MAX:HL_MAX,cleanText:cleanText,looksDump:looksDump,hoodWhere:hoodWhere,hoodTitle:hoodTitle,headline:function(kind,id,key){var o=kind==="unit"?U_BY[id]:kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;
     return key==="trip"?HL.trip(kind==="unit"?o.moments.sun:o):key==="queens"?HL.queens(o.vs_queens):key==="reviews"?HL.reviews(o.ratings):HL[key](o)},map:function(){return HHMAP},marks:function(){return YEARS.map(function(Y){return Y.mark})},mapHoods:function(id){return mapData().neighborhoods.filter(function(h){return !id||h.year===id}).length},tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
 syncSliders();renderCounts();renderTray();renderFoot();
 go((function(){try{return location.hash.replace(/^#/,"")}catch(e){return ""}})()||"lives");
+/* first visit, first screen: the tutorial opens once. A link straight to an inner page is left alone. */
+if(current==="lives"&&YEARS.length&&!tutSeen())openTut();
 }
 })();
 </script>
