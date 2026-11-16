@@ -240,3 +240,12 @@
 {"url": "https://www.confluencenorwalk.com/robots.txt", "why": "robots", "status": 200, "path": "raw/resolve_pending_b18/04a139ec6519a053.html", "retrieved_at": "2026-11-16T00:23:53+00:00", "bytes": 126}
 {"url": "https://www.confluencenorwalk.com", "why": "own site home", "status": "refused_403", "path": "", "retrieved_at": "2026-11-16T00:23:57+00:00", "bytes": 0}
 {"url": "https://www.thewaypointe.com/robots.txt", "why": "robots", "status": 200, "path": "raw/resolve_pending_b18/0f3f57f638569160.html", "retrieved_at": "2026-11-16T00:23:57+00:00", "bytes": 202}
+{"url": "https://www.thewaypointe.com", "why": "own site home", "status": 200, "path": "raw/resolve_pending_b18/8228ff534d2cb187.html", "retrieved_at": "2026-11-16T00:24:00+00:00", "bytes": 251806}
+{"url": "https://www.thewaypointe.com/amenities/", "why": "own site page", "status": 200, "path": "raw/resolve_pending_b18/d95e52450437cdf6.html", "retrieved_at": "2026-11-16T00:24:03+00:00", "bytes": 239965}
+{"url": "https://www.thewaypointe.com/faq/", "why": "own site page", "status": 200, "path": "raw/resolve_pending_b18/501104c9c72ec466.html", "retrieved_at": "2026-11-16T00:24:06+00:00", "bytes": 211913}
+{"url": "https://www.thewaypointe.com/floorplans/", "why": "own site page", "status": 200, "path": "raw/resolve_pending_b18/0d2c90da1e518ba3.html", "retrieved_at": "2026-11-16T00:24:09+00:00", "bytes": 259595}
+{"url": "https://www.thewaypointe.com/screen-reader/", "why": "own site page", "status": 200, "path": "raw/resolve_pending_b18/d57fe0792d70337b.html", "retrieved_at": "2026-11-16T00:24:12+00:00", "bytes": 791995}
+{"url": "https://www.merrittriver.com/robots.txt", "why": "robots", "status": 200, "path": "raw/resolve_pending_b18/6d8bb7cc64a27059.html", "retrieved_at": "2026-11-16T00:24:13+00:00", "bytes": 227}
+{"url": "https://www.merrittriver.com/amenities/", "why": "own site page", "status": 200, "path": "raw/resolve_pending_b18/33f876d3f32b1ad8.html", "retrieved_at": "2026-11-16T00:24:16+00:00", "bytes": 76370}
+{"url": "https://www.brimcrown.com/robots.txt", "why": "robots", "status": 200, "path": "raw/resolve_pending_b18/3af924fef0475f28.html", "retrieved_at": "2026-11-16T00:24:17+00:00", "bytes": 203}
+{"url": "https://www.brimcrown.com", "why": "own site home", "status": "refused_403", "path": "", "retrieved_at": "2026-11-16T00:24:20+00:00", "bytes": 0}
