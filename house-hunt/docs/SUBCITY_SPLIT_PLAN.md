@@ -1,5 +1,9 @@
 # Splitting Jersey City (and Newark) into neighborhoods: prepared, not wired in
 
+**Adopted for Jersey City only on 2026-11-16** (Newark stays whole): `scripts/build_neighborhoods.py` (`subcity_polys`, `subcity_name`,
+`route_to_children`), four boundary overrides in `data/reference/subcity_overrides.csv`, parent fallback in `scripts/build_page_data.py` and
+`scripts/page_data_extras.py`, safety on the citywide rate with the sub-city estimate as labelled context. The text below is the plan as prepared.
+
 Prepared 2026-11-15/16 while the pipeline repair was running. **No existing script or data file was changed, the
 pipeline was not run, nothing was committed.** Everything is in new files:
 
