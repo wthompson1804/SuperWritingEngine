@@ -13,7 +13,7 @@ master_units,unit,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;rent_
 master_units,beds,used,gates.py;build_master.py;all_in.py;rank.py;rent_terms.py;enrich_units.py,
 master_units,baths,display,build_master.py,label shown on the page
 master_units,sqft,used,gates.py;build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
-master_units,listed_rent,used,gates.py;build_master.py;all_in.py;rent_terms.py;enrich_units.py,
+master_units,listed_rent,used,gates.py;build_master.py;all_in.py;rank.py;rent_terms.py;enrich_units.py,
 master_units,price_basis,used,build_master.py;all_in.py;rent_terms.py,
 master_units,concession_text,used,build_master.py;all_in.py;rent_terms.py,
 master_units,available_date_text,display,build_master.py,text shown on the unit card or cost receipt
@@ -37,11 +37,12 @@ master_units,unit_basis,used,gates.py;build_master.py,
 master_units,address_as_listed,used,gates.py;build_master.py,
 master_units,duplicate_listing_ids,display,build_master.py,"other listings of the same unit, merged into this row (their links are in also_seen_at)"
 master_units,live_status,used,build_master.py;all_in.py;rank.py,
-master_units,live_price,used,build_master.py;all_in.py,
+master_units,live_price,used,build_master.py;all_in.py;rank.py,
 master_units,live_available_text,display,build_master.py,text shown on the unit card or cost receipt
 master_units,live_checked_at,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_units,live_notes,used,build_master.py;rank.py,
 master_units,live_url,display,build_master.py,"independent check 3: where a corrected address comes from, the page a live check read, the note behind all_in_likely, and the offer in the page's own words"
+master_units,live_page_gone,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_units,unit_floor,used,build_master.py;rank.py,
 master_units,unit_floor_basis,used,build_master.py;rank.py,
 master_units,unit_floor_source,provenance,build_master.py,travels with unit_floor
@@ -468,6 +469,8 @@ master_units,price_lease_source,provenance,build_master.py,travels with price_le
 master_units,price_lowest_of_terms,used,build_master.py;rank.py,
 master_units,call_called_at,display,build_master.py,phone answers (data/evidence/call_answers.csv): notes and when the call was made; the fee total is read by all_in.py
 master_units,call_available,used,build_master.py;rank.py,
+master_units,price_12_sibling_gap,used,build_master.py;rank.py,
+master_units,price_12_sibling_why,used,build_master.py;rank.py,
 master_units,page_modified_date,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_units,page_modified_source,provenance,build_master.py,travels with page_modified
 master_units,listing_stale,used,build_master.py;rank.py,
@@ -492,6 +495,7 @@ master_units,cap_margin,used,all_in.py,
 master_units,all_in_unknown_count,used,all_in.py,
 master_units,rent_lease_term_months,used,all_in.py,
 master_units,rent_12_month_price,used,all_in.py,
+master_units,rent_12_month_used,used,all_in.py;rank.py,
 master_units,all_in,used,all_in.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
 master_units,all_in_gross,used,all_in.py,
 master_units,all_in_lines,used,all_in.py;enrich_units.py,
@@ -1009,7 +1013,7 @@ evidence:rating_standard,reasons,used,rank.py;avoid.py;rating_standard.py,
 evidence:rating_standard,nyc_record_flags,used,build_master.py;rating_standard.py,
 rent_terms,listing_id,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;rent_terms.py;enrich_units.py,
 rent_terms,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
-rent_terms,listed_rent,used,gates.py;build_master.py;all_in.py;rent_terms.py;enrich_units.py,
+rent_terms,listed_rent,used,gates.py;build_master.py;all_in.py;rank.py;rent_terms.py;enrich_units.py,
 rent_terms,listed_price_is,used,all_in.py;rent_terms.py,
 rent_terms,offer_text,used,all_in.py;rent_terms.py,
 rent_terms,offer_text_page,used,all_in.py;rent_terms.py,

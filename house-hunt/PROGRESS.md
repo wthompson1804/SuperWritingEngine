@@ -2,7 +2,7 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-16, after the owner's "no not-re-checked flag" rule)
+## Current state (2026-11-16, after evidence batch 20: the live re-read of 190 shown apartments)
 
 **Authorities, newest first:** `CLAUDE.md` (rules and decision log) → `docs/RANKING.md` (rewritten as ONE current statement of the gates, the elevator rule,
 duplicates, score and selection, with a change log) → `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` → `docs/SAFETY_BASIS.md` → `docs/PLAN_V3_APPROVED_2026-11-15.md` → UX brief and mock-up 4 (layout only).
@@ -13,14 +13,50 @@ The job is the finished decision page.
 `scripts/page_data_extras.py` → `scripts/build_site.py` → `site/dist/index.html`. **The text check (`check_scene_text.py`) is a separate step after
 `page_data_extras.py`; `run_all.py` does not run it.** Publish as a NEW private artifact (never replace the mock).
 
-**Counts now**: 20,468 listings → 2,505 pass the listing gates → 2,451 costed → 1,480 within the all-in cap → 733 ranked →
-**568 apartments shown in 212 buildings, 78 neighborhoods** (52 with three or more). Before the rule below it was 446 / 191 / 68.
-By experience (apartments / buildings / neighborhoods): Little-City 248 / 83 / 23, Room-to-Breathe 155 / 39 / 23, Old-Neighborhood 81 / 57 / 21,
-Fresh-Start 75 / 27 / 6, Quiet-Street 6 / 3 / 3, Walk-Everywhere 3 / 3 / 2. **209 shown apartments carry one open item, every one a gate fact**
-(elevator 96, listing 65, dogs allowed 31, eligibility 11, availability 6); 359 carry none. 71 rows are `not_an_apartment`; 28 single-apartment
-neighborhoods are cut by the thin-neighborhood rule and 10 kept. Verdicts: 916 rows for 915 units (ok 536, asterisk 161, disclose 21, remove 198).
-Two consecutive runs give an identical `data/ranked_units.csv`; `check_registry.py` and all tests pass (`test_rules.py`: 428 pure checks; `--data` on the
-output: 3,868 with the page data; `test_parsers.py`: 259).
+**Counts now**: 20,468 listings → 2,505 pass the listing gates → 2,451 costed → 1,469 within the all-in cap → 692 ranked →
+**542 apartments shown in 209 buildings, 78 neighborhoods** (52 with three or more). Before batch 20 it was 568 / 212 / 78.
+By experience (apartments / buildings / neighborhoods): Little-City 232 / 81 / 23, Room-to-Breathe 153 / 39 / 23, Old-Neighborhood 73 / 56 / 21,
+Fresh-Start 75 / 27 / 6, Quiet-Street 6 / 3 / 3, Walk-Everywhere 3 / 3 / 2. **207 shown apartments carry one open item, every one a gate fact**
+(elevator 87, listing 72, dogs allowed 31, eligibility 11, availability 6); 335 carry none. 71 rows are `not_an_apartment`; 28 single-apartment
+neighborhoods are cut by the thin-neighborhood rule and 10 kept. Verdicts: 922 rows for 920 units (ok 526, asterisk 167, disclose 31, remove 198).
+Two consecutive full runs give an identical `data/ranked_units.csv` and `data/master_units.csv`; `check_registry.py` and all tests pass (`test_rules.py`:
+449 pure checks; `--data` on the output: 3,831 with the page data; `test_parsers.py`: 259). `verify_all.py`: 18 passed, 0 failed, 1 warning (`site/dist` is
+older than `site/data.json`: `build_site.py` was not run in this pass, on purpose), 1 skipped (browser walk-through).
+
+**Evidence batch 20 (2026-11-16; `docs/harvest_notes/evidence_batch_20.md`)**: 190 shown apartments re-read on Apartment List and the buildings' own
+pages: 173 live, 8 small price decreases, 9 gone, and eleven own-site apartments whose listed price is a long-lease price with a far higher 12-month price.
+What the pipeline now does with it:
+- **32 apartments left the page, 6 entered** (net 568 → 542; no neighborhood entered or left; the buildings The Mercer, Motif and Harbor Landing left).
+  - Gone (11): The Mercer 6E, 8F, 8H, 9E, 10E, 11E, 12F, 12E (the building's listing page is gone, so every unit on it is: all 19 Mercer rows of the
+    master are `gone`, none is ranked, shown, held or on an avoid card); LIA by Vermella 307; Kensington Place 1315; Harbor Pointe B9-457.
+  - Over $3,000 on the 12-month price (11): The Leaf 2318, 2418, 2505, 2518 (total about $4,336 to $4,367); The Asher 308, 610, 730, 830 ($3,461 to
+    $3,572); Scribe 425 ($3,539); Motif 523 ($3,378); Harbor Landing 452 ($3,454; quoted on 13 months, $3,040 on 12).
+  - Sibling long-lease rule plus an elevator already open, so two open facts (5): Motif 205, 632; Harbor Landing 208, 341, 404.
+  - An availability date more than six months old read at the re-read, plus a fact already open (3): Piper 3059 (2026-02-10; dogs), J Centra Burlington
+    9307 (2026-03-19; elevator), Kensington Place 1331 (2026-05-01; elevator).
+  - Ninth in their building after the order changed (2): Clifton & Co. CCO-475 (now carries "listing"), Aviva E0918.
+  - Entered as siblings moved up: Piper 6008, Scribe 540, Clifton & Co. CCO-571, Kensington Place 2319 and 2339, Aviva E0721 (verdicts written from
+    their evidence: all `ok`; the rules already mark what is open).
+- **The 12-month price rule is wider** (owner's intent, `docs/RANKING.md` section 1): used wherever the page gives one and it differs from the listed price,
+  whatever the quoted term. Scribe 502, 507, 542, 544, 546 now show rent $2,395 (was $2,379) and total $2,711 (was $2,695), and say so in the lease-term
+  disclosure. Eight small decreases applied: Avalon Maplewood 002-215, 002-347, 001-337, 001-243; The Walcott Hackensack 353, 417, 333, 631A.
+- **Sibling long-lease rule** (new, `docs/RANKING.md` section 3): shown with the asterisk "listing" and "the 12-month price in this building is much higher
+  than the price shown: ask for it": Scribe 446, 508, 540; The Asher 530, 536; The Leaf 1304. Ranked but not shown: Scribe 307.
+- **Grandville Towers** 5F, 7C, 9C (and 7F, not ranked) are treated alike: page date 2026-07-30 from the reviewed table
+  `data/evidence/page_date_corrections.csv`, 109 days, one open "listing" item each, all three still shown with the asterisk.
+- **Reviewer's additions from reading batch 20** (251 verdict rows written against the new evidence for the 250 shown units of the 51 buildings whose
+  evidence changed, three of them newly shown): `disclose | lease_term` for ten apartments priced on a lease under 12 months with no 12-month price (1177 Greens Farms 235, 220; Rail
+  at Bound Brook 422, 605 on 6 months; Pier Village 1-412; Reserve at Riverdale 3-329; Shearwood Station 1603, 1803, 2202, 0302); `asterisk | unverified`
+  for six availability dates over six months old (the three above that left, and Clifton & Co. CCO-577, CCO-475, Shearwood Station 0302), as earlier
+  reviewers did for 110 Washington A413 and RiversEdge RSE-347.
+- **Two bugs found and fixed on the way**: a 12-month price was being copied to other units of a building (Scribe 616 took unit 425's $3,210 because
+  "$2,616" in the fact read as unit 616; Avalon Somerville 022-415 took 022-265's $2,430); both units were over the cap anyway.
+- **Text**: `build_scene_text.py` and `check_scene_text.py` pass (0 problems, 0 failing). Two sentences are newly left out because the shown list no longer
+  supports them: Old-Neighborhood "most of these buildings do not list a garage" (52 percent now do) and one "the apartment is large" line.
+- **For the owner**: `CLAUDE.md` still words the money rule as "a lease longer than 13 months" (not edited here); 104 shown apartments are quoted on a
+  13-to-24-month lease with no 12-month price read (Apartment List gives one term per unit): the 85 over 13 months carry the lease-term disclosure
+  (6 of them the sibling asterisk); the 19 on exactly 13 months carry nothing, although Harbor Landing shows a 13-month price can sit 22 percent
+  under the 12-month one; the page labels the rent used "as listed" even where it is the 12-month price (`site/index.html`).
 
 **Owner's rule, 2026-11-16 ("Forget call check"): no "not re-checked" flag.** A listing that was simply never re-read in an evidence pass (live status
 blank, not checked, blocked: for example the Trulia rows that cannot be re-read) is not an open item: no asterisk, and it counts in no rule (not in "two or
@@ -31,11 +67,9 @@ item beside one gate fact: elevator 57, listing 30, dogs 16, eligibility 6, avai
 up inside its building), 2 left (The Lofts at Garwood: its experience's median rose; Aviva E0721: now ninth in its building). 108 verdicts were written by
 reading the evidence (79 ok, 4 asterisk, 25 remove: all 25 are unit numbers that read as first-floor units). `data/needs_live_check.csv` is no longer written;
 `site/data.json` keeps `awaiting_live_check` as an empty array and `meta.counts.awaiting_live_check` = 0; each unit keeps `price_seen_at` and `live`
-(status, checked_at) as information. 292 shown apartments were never re-read (266 blank, 26 blocked); nothing on them says so.
+(status, checked_at) as information. At that time 292 shown apartments had never been re-read (266 blank, 26 blocked); after batch 20 it is 108.
 
-**Open after this run:** `scripts/build_scene_text.py` still exits 1 on three neighborhoods that are not on the page (Franklin, Seymour, Gravesend South;
-it was six before); `verify_all.py --quick` fails one check: the two newly shown neighborhoods **Bogota and Burlington have no scene text** in
-`data/reference/scene_text_source.txt`. `site/dist` is older than `site/data.json` (rebuild with `build_site.py`).
+**Open after this run:** `site/dist` is older than `site/data.json` (rebuild with `build_site.py`, then publish with the owner's go-ahead).
 
 **What the consistency pass changed (2026-11-16):** one elevator rule for every stage (`parsers.elevator_rule`; a near-miss tax lot neither passes nor fails);
 experiences assigned from frozen area profiles and saved parameters (East Rutherford and Patchogue are back in Little-City; four other neighborhoods are held
@@ -44,7 +78,7 @@ where they were by `data/reference/lifestyle_group_overrides.csv`, for the owner
 policy is one open fact, not "sketchy"; in-unit laundry no longer counts a shared laundry room; building names cleaned of listing titles; park names that are not
 parks blanked; a third party's API key stripped from `photo_url` everywhere.
 
-**Weak, plainly:** 292 of 568 shown apartments were never re-read after the first reading (by the owner's rule that is no longer flagged); 209 have a gate
+**Weak, plainly:** 108 of 542 shown apartments were never re-read after the first reading (82 blank, 26 blocked; by the owner's rule that is no longer flagged); 207 have a gate
 fact open. Most shown elevators rest on listing sites only. Most shown floors are not published. Parking and required fees are unpublished for most shown units.
 The experience profile of a neighborhood is the median over the buildings sampled there (frozen at the largest sample on record), not a census of the whole
 area; 33 of 197 neighborhoods sit within 10 percent of a second experience (`data/lifestyle_group_distances.csv`). `scripts/h_trulia.py` now refuses to fetch while `trulia.com` is in `raw/_host_kill_shared.json` (it is) or without `--i-know`.
@@ -70,6 +104,7 @@ it stands (`scripts/verdicts.py pending / digest / add`; `check_registry.py` fai
 | Pipeline consistency pass (`docs/PIPELINE_CONSISTENCY_PASS.md`) | Done 2026-11-16 |
 | Only real apartments; thin-neighborhood rule (owner, 2026-11-16) | Done |
 | No "not re-checked" flag (owner, 2026-11-16) | Done: 568 shown in 212 buildings, 78 neighborhoods |
+| Evidence batch 20 applied (live re-read of 190 shown apartments) | Done: 542 shown in 209 buildings, 78 neighborhoods |
 | Neighborhood voices, local rules, Jersey City split, MTA tolls | Done |
 | Trulia | Blocked; no requests. About 100 NYC shown units cannot be re-checked |
 | Photos; Reddit key; Zumper opened-listings merge | Open |

@@ -42,7 +42,7 @@ DISPLAY = {  # pattern -> why it is kept but not scored
     r"^(price_term_text|price_lease_quote|price_lease_source|pluto_lot_address|review_kind)$": "source sentence or record behind the lease-term asterisk and the NYC lot check (independent check 2)",
     r"^(dob_active_elevators)$": "the city's count of active passenger elevators on the lot: gate input in build_master.py, asserted in this script",
     r"^(call_notes|call_income_multiple|call_called_at|call_building_called_at|call_available|required_fees_phone)$": "phone answers (data/evidence/call_answers.csv): notes and when the call was made; the fee total is read by all_in.py",
-    r"^(page_modified_date|page_modified_source|listing_stale_days|listing_stale_why|elevator_aggregator_only|street_overnight_town|street_overnight_rule|street_overnight_url)$": "the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure",
+    r"^(live_page_gone|page_modified_date|page_modified_source|listing_stale_days|listing_stale_why|elevator_aggregator_only|street_overnight_town|street_overnight_rule|street_overnight_url)$": "the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure",
     r"^(resolved_by)$": "which later evidence batch settled a pending listing's missing gate fact, and how (gates.py: apply_resolved_pending)",
     r"^(disclosures|more_in_building)$": "shown on the unit card: conditions to know (never an open gate fact), and further showable units in the building",
     r"^(address_override_source|city_override_source|live_url|all_in_likely_note|rent_offer_type|rent_offer_kind|offer_text_page|unknown_cost_lines)$": "independent check 3: where a corrected address comes from, the page a live check read, the note behind all_in_likely, and the offer in the page's own words",
@@ -103,7 +103,14 @@ def shown_violations():
     open_d = (dg != "yes") | (col("dogs_evidence_open") != "")
     # independent check 2: lease term over 13 months (D8), cost near the cap with an unknown line (D12), a floor-plan
     # row (D1), an evidence warning about the listing (D6), and whatever a reviewer's asterisk verdict names
-    open_lease = (num("price_lease_months") > 13) | (col("price_lowest_of_terms") == "yes")
+    used12 = col("rent_12_month_used") == "yes"
+    sib12 = (col("price_12_sibling_gap") == "yes") & ~used12
+    open_lease = (num("price_lease_months") > 13) | (col("price_lowest_of_terms") == "yes") | used12 | sib12
+    # owner, 2026-11-16 (evidence batch 20): the 12-month price wherever the page gives one, whatever the quoted term
+    cur_ = num("live_price").where(col("live_status").isin(["live", "changed"]) & num("live_price").notna(), num("listed_rent"))
+    flag(num("price_12_month").notna() & ((num("price_12_month") - cur_).abs() > 0.5) & (num("rent_basis") != num("price_12_month")),
+         "a 12-month price is known and differs from the listed price, but the rent used is not the 12-month price")
+    flag(col("live_page_gone") == "yes", "the building's listing page is gone, but the unit is shown")
     open_cost = (num("all_in") <= CAP) & (num("all_in_likely") > CAP)        # owner, 2026-11-16: replaces "cost near the cap"
     # floor-plan rows are no longer shown at all (flagged above as "not a real apartment"), so no shown row is open on that ground
     open_avail = pd.Series(False, index=S.index)
@@ -111,7 +118,9 @@ def shown_violations():
     by_phone = lambda lab: phone.str.split(";").map(lambda xs: lab in xs)
     open_avail = open_avail & ~by_phone("availability")
     stale_rule = (col("listing_stale") == "open") & ~by_phone("listing")
-    open_listing = ((col("listing_warning") != "") | stale_rule | (col("live_notes").map(parsers.price_doubt) & ~by_phone("listing")))
+    open_listing = ((col("listing_warning") != "") | stale_rule | (col("live_notes").map(parsers.price_doubt) & ~by_phone("listing")) | (sib12 & ~by_phone("listing")))
+    flag(sib12 & ~by_phone("listing") & ~col("confirm_what").str.contains("listing"), "sibling long-lease rule: the unit's own 12-month price is unknown and a sibling's is far higher, but the open item 'listing' is missing")
+    flag(sib12 & ~col("disclosures").str.contains(parsers.SIBLING_12_MONTH_TEXT.split(":")[0][4:], regex=False), "sibling long-lease rule: the lease-term disclosure does not say the building's 12-month price is much higher")
     # GATE facts count toward "at most one open"; DISCLOSURES (lease term, cost near the cap, condo rented by its owner,
     # net-effective rent) never do, but must be listed on the unit (owner, 2026-11-16)
     # (a floor that is not published is a disclosure too: owner, 2026-11-16; a floor under 2 is still flagged above)

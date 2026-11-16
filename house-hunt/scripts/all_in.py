@@ -161,15 +161,18 @@ def cost_unit(r, util, RT, MED):
         is_net = offer and t.get("listed_price_is") == "net_effective"
         rent_basis_val = listed
         rent_gross_val = ((gross if gross and gross >= (listed or 0) else None) or gross_if_net or listed) if is_net else listed
-        # D8: the listed price belongs to a lease longer than 13 months. Where the page gives the 12-month price, the
-        # cost (and so the $3,000 cap) is worked on the 12-month price; otherwise the listed price stands and the
-        # unit carries the lease-term asterisk (scripts/rank.py).
+        # D8, widened by the owner on 2026-11-16 (evidence batch 20): the $3,000 total is tested on the 12-month price
+        # wherever the page gives one and it differs from the listed price, whatever term the listed price is quoted
+        # for (Harbor Landing 452: $2,487 on 13 months, $3,040 on 12). Where no 12-month price was read, the listed
+        # price stands and the unit carries the lease-term disclosure (scripts/rank.py).
         lease_m, p12 = num(r.get("price_lease_months")), num(r.get("price_12_month"))
         long_lease = lease_m is not None and lease_m > 13
         rent_line = "rent (net-effective)" if is_net else "rent (as listed)"
-        if long_lease and p12 and p12 >= (listed or 0):
-            price_note = "; ".join(x for x in [price_note, f"the listed ${listed:g} is the {lease_m:g}-month lease price; ${p12:g} is the 12-month price"] if x)
-            rent_basis_val, rent_gross_val, rent_line, is_net = p12, max(p12, rent_gross_val or 0), "rent (12-month lease price)", False
+        use_p12 = parsers.use_12_month_price(listed, p12)
+        if use_p12:
+            term_txt = f"the {lease_m:g}-month lease price" if lease_m else "not the 12-month price"
+            price_note = "; ".join(x for x in [price_note, f"the listed ${listed:g} is {term_txt}; ${p12:g} is the 12-month price"] if x)
+            rent_basis_val, rent_gross_val, rent_line, is_net = p12, p12, "rent (12-month lease price)", False
         elif long_lease:
             price_note = "; ".join(x for x in [price_note, f"this price is for a {lease_m:g}-month lease; the 12-month price is not published"] if x)
         lines.append({"line": rent_line, "amount": rent_basis_val,
@@ -299,6 +302,7 @@ def cost_unit(r, util, RT, MED):
                     "cap_margin": CAP - all_in,
                     "all_in_unknown_count": sum(1 for k in ("building fees", "pet rent", "parking fee") if any(x.startswith(k) for x in unknown)),
                     "rent_lease_term_months": f"{lease_m:g}" if lease_m else "", "rent_12_month_price": f"{p12:g}" if p12 else "",
+                    "rent_12_month_used": "yes" if use_p12 else "",
                     "all_in": all_in, "all_in_gross": round((rent_gross_val or 0) + extras), "all_in_lines": json.dumps(lines),
                     "all_in_unknown_lines": "; ".join(unknown), "all_in_estimated_lines": "; ".join(l["line"] for l in lines if l["basis"] == "estimate"),
                     "all_in_stated_line_count": sum(1 for l in lines[1:] if l["basis"] not in ("estimate", "unknown")),

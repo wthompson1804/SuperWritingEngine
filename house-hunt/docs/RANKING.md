@@ -16,12 +16,17 @@ A listing goes through these steps in order. Counts of each step are in `docs/RU
    `pending`, and it stays in `data/listings.csv`.
 2. **Cost** (`all_in.py`). All-in = rent + required fees + pet rent + parking + estimated utilities, at most $3,000
    (tested on the unrounded sum). Pet rent is always counted (the state's median where unpublished). Unpublished parking
-   and fees add nothing; `all_in_likely` adds their medians and is never used for the cap. A lease longer than 13 months
-   is costed at its 12-month price where the page gives one. A price is net-effective only where the evidence says so.
+   and fees add nothing; `all_in_likely` adds their medians and is never used for the cap. **The 12-month price is used
+   wherever the page gives one and it differs from the listed price, whatever lease term the listed price is quoted for**
+   (`parsers.use_12_month_price`; owner, 2026-11-16: Harbor Landing 452 is $2,487 on 13 months and $3,040 on 12). Rent,
+   total and the $3,000 test then all use the 12-month price, and the receipt's rent line reads "rent (12-month lease
+   price)". A 12-month price belongs to the unit it was read on: a building-level fact that names another unit, or no
+   unit, is not applied to its neighbours. A price is net-effective only where the evidence says so.
 3. **Safety.** A neighborhood whose violent or property crime rate is above Jamaica's precinct is cut.
 4. **Confirmed facts** (`rank.py`). Removed: no elevator or conflicting elevator sources; dogs not allowed on the
-   building's own page; a weight limit under 25 lb; floor 1 or ground; gone at the live check; a page unchanged more
-   than six months; available after the window; income-restricted or senior housing; a harvester's BUILDING_FAILS note.
+   building's own page; a weight limit under 25 lb; floor 1 or ground; gone at the live check (where the check found the
+   building's whole listing page gone, "page could not be found", every unit listed on that page is gone, not only the
+   units the check asked about: `parsers.listing_page_gone`, The Mercer); a page unchanged more than six months; available after the window; income-restricted or senior housing; a harvester's BUILDING_FAILS note.
 5. **Only real apartments** (owner, 2026-11-16). `parsers.listing_kind` classifies every row from the source's
    structure first and the label's shape second:
    - `unit`: its own identifier for one specific home (`5D`, `PH2`, `B9-309`, `022-265`, `T526`), or a single-home
@@ -83,8 +88,23 @@ multi-building low complex, and no page or record gives four floors or more.
   a clear "no dogs" there removes. "Small dogs" or "weight restrictions apply" with no number passes with the tour
   question "Confirm the dog weight limit in pounds".
 - **Staleness.** A page unchanged more than 60 days with no second site (a different host), or an availability date
-  more than 183 days old: the open item "listing". Unchanged more than 183 days: removed.
-- **Disclosures** never count and never remove: floor not published; lease term over 13 months; could pass $3,000 once
+  more than 183 days old: the open item "listing". Unchanged more than 183 days: removed. The page date comes from the
+  unit's own live-check note, a page fact, or a sibling's note about the same page; where a later batch establishes the
+  date for the whole page and an earlier note gives a newer building-level date, the reviewed table
+  `data/evidence/page_date_corrections.csv` sets it for every unit on that page (Grandville Towers: 2026-07-30 for 5F,
+  7C, 9C and 7F alike; 109 days, one open item, not removed). An old availability date that only the live check read
+  (`available_on` in the live text, the stored date being "now") is written up by the reviewer as `asterisk |
+  unverified`, the same open item.
+- **Long-lease prices with no 12-month price read (sibling rule; owner, 2026-11-16).** A unit whose listed price is
+  quoted for a lease over 12 months (or is "the lowest over the lease terms"), whose own 12-month price was not read,
+  in a building where another unit's 12-month price is more than 15 percent above that unit's listed price
+  (`parsers.sibling_12_month_gap`, `price_12_sibling_gap`): no price is guessed. The unit keeps its listed price and its
+  lease-term disclosure, the disclosure adds "the 12-month price in this building is much higher than the price shown:
+  ask for it" with the sibling's two prices, and the unit carries **one open "listing" fact** (asterisk; with another
+  open gate fact it is not shown). A sibling that is only slightly dearer on 12 months (Scribe 502: $2,379 against
+  $2,395) does not trigger it.
+- **Disclosures** never count and never remove: floor not published; lease term (the listed price is for a lease over
+  13 months, or the 12-month price is used in its place, or a reviewer read a term under 12 months); could pass $3,000 once
   parking and fees are known; special offer; net-effective rent; condo rented by its owner; dog weight limit not
   published; overnight street parking restricted (`data/reference/overnight_parking_towns.csv`).
 
@@ -202,9 +222,10 @@ then rank score, then `listing_id`.
 | 2026-11-16 | Elevator gate never rests on a unit label |
 | 2026-11-16 | Consistency pass: one elevator rule for every stage (a near-miss lot neither passes nor fails; "high-rise" on the manager's page and a page-stated unit floor count as real height everywhere); frozen area profiles for the experiences; unit moved out of the address; duplicate rule across label spellings; a ranged address is one building; conflicting dog policy is one open fact, not "sketchy"; the dog part rewards a limit of 25 lb or more (the text said 40); in-unit laundry no longer counts a shared laundry room; cap tested on the unrounded sum |
 | 2026-11-16 | Owner: only real apartments (floor plans, building prices and co-living rooms are `not_an_apartment`); thin-neighborhood rule |
+| 2026-11-16 | Evidence batch 20 (190 shown apartments re-read): the 12-month price is used wherever the page gives one and it differs, whatever the quoted term (was: only for leases over 13 months, and only when higher); a 12-month price is never taken from a fact about another unit (a dollar amount such as "$2,616" no longer reads as unit 616); sibling long-lease rule (one open "listing" fact, nothing guessed); a listing page that is gone takes every unit on it; reviewed page-date corrections (Grandville Towers) |
 | 2026-11-16 | Owner ("Forget call check"): the "not re-checked live" flag is dropped. A listing never re-read is not an open item in any rule; the thin rule's "well attested" is "no open gate fact"; ties are broken by `listing_id` only; `needs_live_check.csv` and the "awaiting live check" list are gone. A problem a re-read found still counts |
 
-Superseded and no longer true anywhere: "at most 2 per building" for the shown list, "best 10 per neighborhood", "top 15
+Superseded and no longer true anywhere: "the 12-month price only for leases longer than 13 months", "at most 2 per building" for the shown list, "best 10 per neighborhood", "top 15
 candidates then the best 10", a floor-plan row shown with an availability asterisk, "weight limit stated ≥ 40 lb",
 conflicting dog policy as sketchy or as a drop, "a missing live check is its own open item", "units seen live first"
 among equal scores, the "waiting for a live check" list. `scripts/rank_v1_backup.py` keeps version 1.

@@ -797,13 +797,85 @@ def data_4(M, R, S):
                                                           "evidence_confirmed", "evidence_stated", "amenities_page"}, "elevator gate: every pass carries a known basis")
     ok(all(exact(r) for r in L_[L_.elevator_basis == "nyc_pluto_building_class"].itertuples()), "elevator gate: the city's class (elevator or walk-up) decides only on the listing's own lot (parsers.lot_is_exact)")
     data_6(L_)
+    data_b20(M, R, S)
 
 
 def data_units_unique(S):
     pass
 
 
+def pure_b20():
+    """Evidence batch 20 (2026-11-16): the 12-month price wherever the page gives one; the sibling long-lease rule; a
+    listing page that is gone; the dollar amount that looked like a unit number."""
+    # the 12-month price is used whenever it is known and differs from the listed price, whatever the quoted term
+    ok(P.use_12_month_price(2487, 3040), "b20: Harbor Landing 452, $2,487 on 13 months and $3,040 on 12: the 12-month price is used")
+    ok(P.use_12_month_price(2563, 3973) and P.use_12_month_price(2379, 2395), "b20: The Leaf 2318 and Scribe 502 use the 12-month price")
+    ok(P.use_12_month_price(2700, 2600), "b20: a 12-month price below the listed price is used too (it differs)")
+    ok(not P.use_12_month_price(2500, 2500) and not P.use_12_month_price(2500, None) and not P.use_12_month_price(2500, "") and not P.use_12_month_price(2500, float("nan")),
+       "b20: an equal or unknown 12-month price changes nothing")
+    r = P.lease_term_from_text("Price is for a 13-month lease; 12-month price $3,040 in the page's rent table for a move-in from 2026-11-15.")
+    eq((r["months"], r["price_12"]), (13, 3040.0), "b20: Harbor Landing 452 note")
+    r = P.lease_term_from_text("Price is for a 24-month lease (the map's price calculator gives this same price for terms of 14 to 18, 20 to 24 months); 12-month price $3,973 ($4,098 with required monthly fees); the 13-month figure is $2,694.")
+    eq((r["months"], r["price_12"]), (24, 3973.0), "b20: The Leaf 2318 note")
+    r = P.lease_term_from_text("Price is for a 15-month lease; the page shows no 12-month price for this unit. Same price as stored.")
+    eq((r["months"], r["price_12"]), (15, None), "b20: 'the page shows no 12-month price' gives no price")
+    # sibling long-lease rule
+    leaf = [("2318", 2563, 24, 3973), ("2505", 2583, 24, 4004)]
+    f, why = P.sibling_12_month_gap(24, "", False, leaf)
+    ok(f and "2318" in why or "2505" in why, "b20: The Leaf 1304 (24-month price, no 12-month price read) is flagged by its siblings")
+    scribe = [("425", 2606, 24, 3210), ("502", 2379, 24, 2395)]
+    ok(P.sibling_12_month_gap(24, "", False, scribe)[0], "b20: Scribe 508 is flagged: sibling 425 is 23 percent dearer on 12 months")
+    ok(not P.sibling_12_month_gap(24, "", False, [("502", 2379, 24, 2395)])[0], "b20: a sibling 0.7 percent dearer does not flag")
+    ok(not P.sibling_12_month_gap(15, "", False, [("3326", 2675, 15, 2975)])[0], "b20: Avalon Yonkers, 11 percent, does not flag (the line is 15 percent)")
+    ok(not P.sibling_12_month_gap(24, 2395, False, scribe)[0], "b20: a unit whose own 12-month price is known is never flagged")
+    ok(not P.sibling_12_month_gap(12, "", False, leaf)[0] and not P.sibling_12_month_gap("", "", False, leaf)[0], "b20: a unit priced on 12 months, or with no term stated, is not flagged")
+    ok(P.sibling_12_month_gap(13, "", False, [("452", 2487, 13, 3040)])[0], "b20: Harbor Landing 208 (13-month price) is flagged by 452 (22 percent)")
+    ok(P.sibling_12_month_gap("", "", True, leaf)[0], "b20: 'lowest over the lease terms' counts as a long-lease price")
+    ok("ask for it" in P.SIBLING_12_MONTH_TEXT, "b20: the disclosure says to ask")
+    # a listing page that is gone
+    ok(P.listing_page_gone("gone", "listing page no longer exists", "the building's page now shows the site's 'This page could not be found' message"), "b20: The Mercer's page is gone")
+    ok(not P.listing_page_gone("gone", "not in the unit list", "unit 307 is no longer in the building's unit list (16 units listed tonight)"), "b20: one unit leaving the list is not the page")
+    ok(not P.listing_page_gone("live", "available now", "page could not be found yesterday"), "b20: only a 'gone' row counts")
+    # staleness of Grandville Towers with the page date 2026-07-30
+    eq(P.staleness("2026-07-30", "2026-11-16")[:2], ("open", 109), "b20: Grandville Towers, page of 2026-07-30 read 2026-11-16: 109 days, one open item, not removed")
+    eq(P.page_modified_date("unit record updated 2026-07-30): unit 9C ... STALE PAGE 2026-07-30: the unit's own record on the page was last updated 2026-07-30"), "2026-07-30", "b20: 9C note date")
+
+
+def data_b20(M, R, S):
+    import pandas as pd
+    num = lambda v: pd.to_numeric(v, errors="coerce")
+    ok(not M[M.building_name.eq("The Mercer")].live_status.ne("gone").any(), "b20: every Mercer unit in the master is gone (the building's listing page is gone)")
+    ok(not R.building_name.eq("The Mercer").any(), "b20: no Mercer unit is ranked, shown, or on an avoid or held card")
+    for b, un in [("LIA by Vermella", "307"), ("Kensington Place", "1315"), ("Harbor Pointe", "B9-457")]:
+        ok(not (R.building_name.str.contains(b, regex=False) & R.unit.eq(un)).any(), f"b20: {b} {un} is gone and not ranked")
+    for b, units_, in [("The Leaf", ["2318", "2418", "2505", "2518"]), ("The Asher", ["308", "610", "730", "830"]), ("Scribe", ["425"]), ("Motif", ["523"]), ("Harbor Landing Apartments", ["452"])]:
+        x = M[M.building_name.eq(b) & M.unit.isin(units_)]
+        ok(len(x) == len(units_) and (x.cost_gate == "fail").all() and (num(x.rent_basis) == num(x.price_12_month)).all(), f"b20: {b} {units_} are costed on the 12-month price and are over $3,000")
+        ok(not (R.building_name.eq(b) & R.unit.isin(units_)).any(), f"b20: {b} {units_} are not ranked")
+    x = M[M.building_name.eq("Scribe") & M.unit.isin(["502", "507", "542", "544", "546"])]
+    ok(len(x) == 5 and (num(x.rent_basis) == 2395).all() and (x.cost_gate == "pass").all(), "b20: Scribe 502/507/542/544/546 use $2,395 and stay under")
+    x = M[M.building_name.eq("Scribe") & M.unit.eq("616")]
+    ok(len(x) == 0 or (x.price_12_month == "").all(), "b20: Scribe 616 does not take unit 425's 12-month price ('14 months $2,616' is not unit 616)")
+    x = M[M.building_name.eq("Avalon Somerville Station") & M.unit.eq("022-415")]
+    ok(len(x) == 0 or (x.price_12_month == "").all(), "b20: Avalon Somerville 022-415 does not take 022-265's 12-month price")
+    ok(not (num(M.price_12_month).notna() & ((num(M.price_12_month) - num(M.live_price.where(M.live_status.isin(["live", "changed"]) & M.live_price.ne(""), M.listed_rent))).abs() > 0.5)
+            & (num(M.rent_basis) != num(M.price_12_month))).any(), "b20: wherever a 12-month price is known and differs, the rent used is the 12-month price")
+    sib = M[M.price_12_sibling_gap == "yes"]
+    ok(set(sib.building_name) <= {"The Leaf", "The Asher", "Scribe", "Motif", "Harbor Landing Apartments"}, f"b20: the sibling rule touches only the five buildings (got {sorted(set(sib.building_name))})")
+    for lid in S.index:
+        if S.at[lid, "price_12_sibling_gap"] == "yes" and S.at[lid, "rent_12_month_used"] != "yes":
+            ok(S.at[lid, "confirm_what"] == "listing" and S.at[lid, "confirm_asterisk"] == "yes", f"b20: {lid} is shown with exactly the open item 'listing' (sibling long-lease rule)")
+            ok("much higher than the price shown: ask for it" in S.at[lid, "disclosures"], f"b20: {lid} lease-term disclosure says to ask for the 12-month price")
+        if S.at[lid, "rent_12_month_used"] == "yes":
+            ok('"what": "lease term"' in S.at[lid, "disclosures"] and "12-month price is $" in S.at[lid, "disclosures"], f"b20: {lid} uses the 12-month price and says so in the lease-term disclosure")
+    g = M[M.building_name.eq("Grandville Towers")]
+    ok(len(g) and (g.page_modified_date == "2026-07-30").all() and (g.listing_stale == "open").all(), "b20: every Grandville Towers unit carries the page date 2026-07-30 and the open staleness item")
+    gs = S[S.building_name.eq("Grandville Towers")]
+    ok((gs.confirm_what == "listing").all(), "b20: shown Grandville Towers units carry the open item 'listing' alike")
+
+
 def pure_6():
+    pure_b20()
     """Pipeline consistency pass (docs/PIPELINE_CONSISTENCY_PASS.md)."""
     import gates
     import pandas as pd

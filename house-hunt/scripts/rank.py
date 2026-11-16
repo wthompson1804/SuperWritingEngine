@@ -352,7 +352,14 @@ def main():
     # leases", rent_terms lease_months) although the price field gives no term
     olm = pd.to_numeric(s("rent_lease_months"), errors="coerce").where(s("rent_basis_kind").eq("net_effective"))
     lm = lm.where(lm.notna(), olm.where(olm > 13))
-    lease_open = (lm > 13) | s("price_lowest_of_terms").eq("yes") | vhas("lease_term")
+    # owner, 2026-11-16 (evidence batch 20): the 12-month price is used wherever the page gives one and it differs from
+    # the listed price, whatever the quoted term (all_in.py: rent_12_month_used); and the sibling long-lease rule
+    # (build_master.py: price_12_sibling_gap): this unit's own 12-month price was not read, its listed price is a
+    # long-lease price, and another unit of the building is more than 15 percent dearer on 12 months. No price is
+    # guessed: the unit keeps the lease-term disclosure and gets ONE open "listing" fact that says to ask.
+    used12 = s("rent_12_month_used").eq("yes")
+    sib12 = s("price_12_sibling_gap").eq("yes") & ~used12
+    lease_open = (lm > 13) | s("price_lowest_of_terms").eq("yes") | vhas("lease_term") | used12 | sib12
     # owner, 2026-11-16: within the cap on what is known, over it once the unknown parking and fee lines take their medians
     likely = pd.to_numeric(s("all_in_likely"), errors="coerce")
     cost_open = (u.all_in <= CAP) & (likely > CAP)
@@ -365,7 +372,8 @@ def main():
     stale_open = s("listing_stale").eq("open") & ~vhas("not_available") & ~phone_av
     # D1 (98-76 Queens Blvd 2M): a checker's note that the price itself must be verified ("far below the area's other listings")
     price_open = s("live_notes").map(parsers.price_doubt) & ~phone_av
-    listing_open = (s("listing_warning").ne("") | vhas("unverified", "wrong_building") | stale_open | price_open) & ~(phone_av & s("listing_warning").eq(""))
+    sib_open = sib12 & ~phone_av
+    listing_open = (s("listing_warning").ne("") | vhas("unverified", "wrong_building") | stale_open | price_open | sib_open) & ~(phone_av & s("listing_warning").eq(""))
     # eligibility: a reviewer's finding, or a listing site's income-restricted tag the manager's own page does not bear out
     # D8: a condo by RULE, not only by verdict: the city classes the listing's own lot as a condominium (class R*) and the
     # row is not a managed rental building, or the listing itself is typed condo / co-op
@@ -373,10 +381,17 @@ def main():
     elig_open, condo_open, other_open = vhas("restricted") | s("eligibility_open").ne(""), vhas("coop_condo") | condo_rule, vhas("other")
     unknown_lines = s("all_in_unknown_lines").str.replace("building fees (part)", "some required fees", regex=False).str.replace("building fees", "required fees").str.replace("parking fee", "parking") \
         .map(lambda t: " / ".join(x for x in t.split("; ") if x in ("pet rent", "parking", "required fees", "some required fees")))
-    lease_why = np.where(lm > 13, "The listed price is for a " + lm.fillna(0).astype(int).astype(str) + "-month lease."
-                         + pd.Series(np.where(p12.notna(), " The 12-month price is $" + p12.fillna(0).astype(int).astype(str) + ", which is what the cost here uses.", " The 12-month price is not published."), index=u.index),
+    cur_price = pd.to_numeric(s("live_price").where(s("live_status").isin(["live", "changed"]) & s("live_price").ne(""), s("listed_rent")), errors="coerce")
+    money = lambda v: "$" + v.fillna(0).round().astype(int).map("{:,}".format)
+    term_txt = pd.Series(np.where(lm.notna(), "is for a " + lm.fillna(0).astype(int).astype(str) + "-month lease", "is not the 12-month price"), index=u.index)
+    sib_txt = " " + parsers.SIBLING_12_MONTH_TEXT[0].upper() + parsers.SIBLING_12_MONTH_TEXT[1:] + " (" + s("price_12_sibling_why") + ")."
+    lease_why = np.where(used12, "The listed price (" + money(cur_price) + ") " + term_txt + ". The 12-month price is " + money(p12) + ", which is what the rent and the total here use.",
+                np.where((lm > 13) | sib12, "The listed price " + term_txt.where(lm.notna(), "is a long-lease price") + "."
+                         + pd.Series(np.where(p12.notna(), " The 12-month price is $" + p12.fillna(0).astype(int).astype(str) + ", which is what the cost here uses.", " The 12-month price is not published."), index=u.index)
+                         + pd.Series(np.where(sib12, sib_txt, ""), index=u.index),
                          np.where(s("price_lowest_of_terms").eq("yes"), "The listed price is the lowest over the lease terms offered; the term it belongs to and the 12-month price are not published.",
-                                  "The listing's own terms tie this price to a lease longer than 13 months."))
+                                  "The listing's own terms tie this price to a lease longer than 13 months.")))
+    sib_listing_why = "The price shown " + term_txt.where(lm.notna(), "is a long-lease price") + ", and " + parsers.SIBLING_12_MONTH_TEXT.split(":")[0] + ": " + s("price_12_sibling_why") + ". This apartment's own 12-month price was not read, so the price shown is kept and nothing is guessed."
     OPEN = [  # key, flag, label on the page, why, question
         ("elevator", inf_e, "elevator",
          np.where(base_e, "No page states an elevator; the building's height suggests one.",
@@ -396,9 +411,11 @@ def main():
          "What do parking and the required monthly fees cost here?"),
         ("availability", avail_open, "availability", "This is a floor-plan price, not a named unit: no unit, floor or date could be checked.", "Which unit is available at this price, on which floor, and from when?"),
         ("listing", listing_open, "listing", np.where(s("listing_warning").ne(""), "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160],
-                                                      np.where(price_open, "The evidence pass flagged the price: " + s("live_notes").str[:200], "The listing may be stale: " + s("listing_stale_why") + ".")),
+                                                      np.where(price_open, "The evidence pass flagged the price: " + s("live_notes").str[:200],
+                                                               np.where(sib_open & ~stale_open, sib_listing_why, "The listing may be stale: " + s("listing_stale_why") + "."))),
          np.where(s("listing_warning").ne(""), "Is this listing for this building, and is it genuine?",
-                  np.where(price_open, "Is this price real? Verify it by phone before touring.", "Is this unit still available? The listing page has not changed in over two months."))),
+                  np.where(price_open, "Is this price real? Verify it by phone before touring.",
+                           np.where(sib_open & ~stale_open, "What is the rent on a 12-month lease? Ask before touring.", "Is this unit still available? The listing page has not changed in over two months.")))),
         ("eligibility", elig_open, "eligibility", np.where(s("eligibility_open").ne(""), "Eligibility is not settled: " + s("eligibility_open").str[:200], ""),
          "Is this unit open to any renter, or is there an income limit?"),
         ("condo", condo_open, "condo rules", np.where(s("listing_type").str.contains("condo", case=False), "The listing is typed as a condo or co-op unit, rented out by its owner rather than by a leasing office.",
@@ -432,13 +449,19 @@ def main():
     po_town, po_rule, po_url, po_sev = s("street_overnight_town").values, s("street_overnight_rule").values, s("street_overnight_url").values, s("street_overnight_severity").values
     wl_un, wl_txt = dog_wl_unstated.values, s("dog_weight_unstated").str.replace(r"^yes: ", "", regex=True).str.split(" || ", regex=False).str[0].str[:140].values
     fq = pd.Series(floor_q, index=u.index).str.rstrip("; ").values
+    used12_v, sib12_v, sib_listing_why_v = used12.values, sib_open.values, np.asarray(sib_listing_why)
     for i in range(len(u)):
         whats, whys, qs, keys, disc = [], [], [], [], []
         for k, f, lab, w, q in cols_:
             if f[i]:
                 rv = v_text[i].get(k)
+                if k == "lease" and (used12_v[i] or sib12_v[i]):
+                    rv = None                # the 12-month price read at the live check outranks a reviewer's older sentence about the lease term
                 why_ = rv[0] if rv and rv[0] else str(w[i])
                 q_ = rv[1] if rv and rv[1] else (fq[i] if k == "floor" else (q if isinstance(q, str) else str(q[i])))
+                if k == "listing" and sib12_v[i] and rv and parsers.SIBLING_12_MONTH_TEXT.split(":")[0] not in why_:
+                    why_ = why_.rstrip() + " Also: " + str(sib_listing_why_v[i])
+                    q_ = (q_ + "; " if q_ else "") + "What is the rent on a 12-month lease?"
                 if k in DISCLOSURE_KEYS:
                     is_condo = k == "condo" or (k == "other" and "condo" in why_.lower())
                     disc.append({"what": "condo rented by its owner" if is_condo else ("floor not published" if k == "floor" else ("something else to know" if k == "other" else lab)),

@@ -1074,6 +1074,63 @@ def dog_weight_unstated(text) -> bool:
     return bool(_WEIGHT_LIMIT_EXISTS.search(_NO_WEIGHT_LIMIT.sub(" ", t)))
 
 
+# ---- the 12-month price (owner, 2026-11-16, evidence batch 20): the $3,000 total is tested on the 12-month price
+# wherever the page gives one, whatever lease term the listed price is quoted for
+SIBLING_12_MONTH_GAP = 0.15
+SIBLING_12_MONTH_TEXT = "the 12-month price in this building is much higher than the price shown: ask for it"
+_PAGE_GONE = re.compile(r"page could not be found|listing page (?:has been taken down|no longer exists)|building'?s? page (?:is gone|no longer exists|has been removed)", re.I)
+
+
+def use_12_month_price(listed, price_12) -> bool:
+    """True when the 12-month price is known and differs from the listed price: cost and cap then use it. The quoted
+    term does not matter (Harbor Landing 452: $2,487 on 13 months, $3,040 on 12)."""
+    try:
+        l_, p_ = float(listed), float(price_12)
+    except (TypeError, ValueError):
+        return False
+    return p_ == p_ and l_ == l_ and p_ > 0 and abs(p_ - l_) > 0.5
+
+
+def sibling_12_month_gap(months, price_12, lowest_of_terms, siblings):
+    """(flag, why) for a unit whose own 12-month price was NOT read. siblings: [(unit, listed, months, price_12)] of
+    the other units of the same building. The flag is set when this unit's listed price is a long-lease price (a
+    quoted term over 12 months, or 'the lowest over the lease terms') and a sibling's own 12-month price exceeded its
+    listed price by more than 15 percent. No price is guessed: the unit keeps its listed price, and the open item
+    'listing' says to ask."""
+    num = lambda v: (float(v) if str(v).strip() not in ("", "nan", "None") else None)
+    try:
+        m_, own = num(months), num(price_12)
+    except ValueError:
+        return False, ""
+    if own or not ((m_ is not None and m_ > 12) or lowest_of_terms):
+        return False, ""
+    worst = None
+    for un, listed, sm, sp in siblings:
+        try:
+            l_, p_ = num(listed), num(sp)
+        except ValueError:
+            continue
+        if not l_ or not p_ or p_ <= l_ * (1 + SIBLING_12_MONTH_GAP):
+            continue
+        gap = p_ / l_ - 1
+        if worst is None or gap > worst[0]:
+            worst = (gap, un, l_, sm, p_)
+    if worst is None:
+        return False, ""
+    gap, un, l_, sm, p_ = worst
+    try:
+        term = f"{float(sm):g}-month" if str(sm).strip() not in ("", "nan") else "long-lease"
+    except ValueError:
+        term = "long-lease"
+    return True, f"unit {un} of this building is ${l_:,.0f} on its {term} price and ${p_:,.0f} on a 12-month lease ({gap * 100:.0f} percent more)"
+
+
+def listing_page_gone(status, available_text, notes) -> bool:
+    """A live-check row that says the building's whole listing page is gone (not only one unit left the unit list):
+    every unit listed on that page is then gone (The Mercer, batch 20)."""
+    return str(status).strip() == "gone" and bool(_PAGE_GONE.search(str(available_text) + " | " + str(notes)))
+
+
 # ---- step 4b: staleness of a listing page, from modification dates where the data has them
 STALE_OPEN_DAYS, STALE_REMOVE_DAYS, AVAIL_OLD_DAYS = 60, 183, 183
 _PAGE_MODIFIED = re.compile(r"(?:last[- ]?modified|lastDateModified|lastmod|date ?modified|\bmodified|updated_at|last updated|"

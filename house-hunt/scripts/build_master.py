@@ -1138,6 +1138,29 @@ def main():
                 if not parsers.unit_label_key(un) and str(hit.iloc[-1]["price_now"]).split(".")[0] != str(MU.at[i, "listed_rent"]).split(".")[0] \
                         and hit.iloc[-1]["status"] != "changed":
                     MU.at[i, "live_price"] = ""
+        # evidence batch 20 (The Mercer): where a live check found the building's whole listing PAGE gone ("page could
+        # not be found"), every unit listed on that page is gone, not only the units the check was asked about. A unit
+        # seen live on that same page at a LATER time, or listed on another page, is left alone.
+        pk_ = lambda u_: re.sub(r"[?#].*$", "", str(u_).strip().lower()).rstrip("/")
+        gone_pages = {}
+        for r in L.itertuples():
+            if parsers.listing_page_gone(r.status, r.available_now_text, r.notes):
+                k = (r.building_id, pk_(r.listing_url))
+                if k not in gone_pages or r.checked_at > gone_pages[k][0]:
+                    gone_pages[k] = (r.checked_at, r.listing_url, r.unit)
+        MU["live_page_gone"] = ""
+        for i, b, url_, lc, lst in zip(MU.index, MU.building_id, MU.url, MU.live_checked_at, MU.live_status):
+            gp = gone_pages.get((b, pk_(url_)))
+            if gp and lst != "gone" and str(lc) < gp[0]:
+                MU.at[i, "live_status"], MU.at[i, "live_checked_at"], MU.at[i, "live_url"], MU.at[i, "live_price"] = "gone", gp[0], gp[1], ""
+                MU.at[i, "live_available_text"] = "listing page no longer exists"
+                MU.at[i, "live_notes"] = (f"The building's listing page was gone when it was re-read on {gp[0][:10]} (live check of unit {gp[2]}: the site answers that the page "
+                                          "could not be found), so every unit listed on that page is gone, this one included.")
+                MU.at[i, "live_page_gone"] = "yes"
+            elif gp and lst == "gone":
+                MU.at[i, "live_page_gone"] = "yes"
+    if "live_page_gone" not in MU:
+        MU["live_page_gone"] = ""
 
     # floor: confirmed per unit > stated on the listing > inferred from the unit label (W1, W17)
     bf_good = {b: v for b, v, bs in zip(B.index, B.get("building_floors", pd.Series(dtype=str)), B.get("building_floors_basis", pd.Series(dtype=str))) if bs in GOOD_FLOORCOUNT}
@@ -1217,19 +1240,30 @@ def main():
     # D8: the lease term the listed price belongs to, from the unit's own live-check note, else the building's
     # lease-term fact, else the listing's own price basis ('12-month lease', 'lease term 24 Months').
     ltm, lt12, ltq, ltsrc, ltlow = [], [], [], [], []
-    for note, fact_txt, pb, un in zip(MU.live_notes, MU.get("price_term_text", pd.Series("", index=MU.index)).fillna(""), MU.price_basis, MU.unit):
-        got = None
+    for note, fact_txt, pb, un, listed_p, live_p in zip(MU.live_notes, MU.get("price_term_text", pd.Series("", index=MU.index)).fillna(""), MU.price_basis, MU.unit, MU.listed_rent, MU.live_price):
+        got, fact_names_unit = None, False
         for src_, txt in (("live check", note), ("evidence fact", fact_txt), ("listing", pb)):
             if src_ == "evidence fact":
                 # a building-level fact names its units when it is not about all of them
                 parts = [x for x in str(txt).split(" || ") if x.strip()]
-                txt = " ; ".join(x for x in parts if not re.search(r"\bunit\b", x, re.I) or (parsers.unit_label_key(un) and re.search(r"(?<![\w-])" + re.escape(parsers.unit_tail(un) or un) + r"(?![\w-])", x)))
+                # (dollar amounts are taken out before the unit is looked for: "14 months $2,616" is not unit 616, batch 20)
+                names_me = lambda x: bool(parsers.unit_label_key(un)) and re.search(r"(?<![\w-])" + re.escape(parsers.unit_tail(un) or un) + r"(?![\w-])", re.sub(r"\$\s?[\d,]+(?:\.\d+)?", " ", x)) is not None
+                mine_ = [x for x in parts if re.search(r"\bunits?\b", x, re.I) and names_me(x)]
+                generic_ = [x for x in parts if not re.search(r"\bunit\b", x, re.I)]
+                txt = " ; ".join(x for x in parts if x in mine_ or x in generic_)
+                fact_names_unit = bool(mine_)
                 txt = re.sub(r"^\s*(\d{1,2}) months\b", r"price is for a \1-month lease", txt)
                 txt = re.sub(r"term (\d{1,2}): price (\d{4})", lambda m: f"{m.group(1)}-month price ${m.group(2)}" if m.group(1) == "12" else m.group(0), txt)
             if src_ == "listing":
                 txt = re.sub(r"lease term (\d{1,2}) Months|(?:per month, |lowest over lease terms \()(\d{1,2})-month(?: lease)?\)?",
                              lambda m: f"price is for a {m.group(1) or m.group(2)}-month lease", str(txt))
             lt = parsers.lease_term_from_text(txt)
+            if src_ == "evidence fact" and lt["price_12"] and not fact_names_unit:
+                # a building-level fact that names no unit gives the 12-month price of the unit it was read on; it is this
+                # unit's only where the fact quotes this unit's own listed price (Avalon Somerville 022-415 is not 022-265)
+                own_price = str(live_p if str(live_p).strip() else listed_p).split(".")[0]
+                if not (own_price and re.search(r"\$\s?" + re.escape(own_price[:-3] + "," + own_price[-3:] if len(own_price) > 3 else own_price) + r"(?!\d)|\$\s?" + re.escape(own_price) + r"(?!\d)", txt)):
+                    lt = dict(lt, price_12=None)
             if lt["months"] or lt["lowest_of_terms"]:
                 got = (lt, src_)
                 break
@@ -1242,6 +1276,17 @@ def main():
     for c in ("unit_floor", "price_lease_months", "price_12_month"):
         MU[c] = MU[c].astype(object)
     MU = apply_call_answers_units(MU, CALLS)
+    # evidence batch 20, sibling long-lease rule: a unit whose listed price is a long-lease price and whose own 12-month
+    # price was not read, in a building where another unit's 12-month price is more than 15 percent above its listed
+    # price. No price is guessed; scripts/rank.py makes it one open "listing" fact and says to ask.
+    cur_price = [lv if str(lv).strip() and st in ("live", "changed") else lr for lv, st, lr in zip(MU.live_price, MU.live_status, MU.listed_rent)]
+    sib_rows = {}
+    for b, un, cp, m_, p_, st in zip(MU.building_id, MU.unit, cur_price, MU.price_lease_months, MU.price_12_month, MU.live_status):
+        if str(p_).strip() not in ("", "nan"):
+            sib_rows.setdefault(b, []).append((un, cp, m_, p_))
+    sg = [parsers.sibling_12_month_gap(m_, p_, low == "yes", [x for x in sib_rows.get(b, []) if x[0] != un]) if b in sib_rows else (False, "")
+          for b, un, m_, p_, low in zip(MU.building_id, MU.unit, MU.price_lease_months, MU.price_12_month, MU.price_lowest_of_terms)]
+    MU["price_12_sibling_gap"], MU["price_12_sibling_why"] = ["yes" if f else "" for f, _ in sg], [w for _, w in sg]
     # 4b: staleness from modification dates where the data has them: the unit's own live-check note, else a
     # listing_last_modified / listing_updated_at fact read on the same site as the unit's listing
     host = url_host
@@ -1258,9 +1303,20 @@ def main():
                     k0 = (r.building_id, page_key(r.listing_url))
                     page_dates[k0] = max(page_dates.get(k0, ""), d0)
     dup_urls = MU.duplicate_listing_ids.map(lambda ids: " ".join(dups[dups.listing_id.isin(ids.split())].url) if ids else "") if len(dups) else pd.Series("", index=MU.index)
+    # reviewed corrections (data/evidence/page_date_corrections.csv): the date a listing page's unit rows were last
+    # changed, where a later evidence batch established it for the whole page and an earlier batch's note for a sibling
+    # unit gives a newer building-level date (Grandville Towers 5F / 7C against 9C, batch 20). A blank unit = every unit
+    # of the building listed on that page. The agents' batch files are not edited.
+    pd_corr = {}
+    pc_file = DATA / "evidence" / "page_date_corrections.csv"
+    if pc_file.exists():
+        for r in pd.read_csv(pc_file, dtype=str, keep_default_na=False).itertuples():
+            b0 = A2B.get(r.addr_key)
+            if b0:
+                pd_corr[(b0, page_key(r.listing_url), parsers.unit_key(r.unit) if r.unit.strip() else "")] = (r.page_modified_date, r.read_on, r.evidence_file)
     pm, pms, st_lvl, st_days, st_why = [], [], [], [], []
-    for b, url_, note, lc, ls, av, also, dupu, called, lst, lurl in zip(MU.building_id, MU.url, MU.live_notes, MU.live_checked_at, MU.last_seen, MU.available_date, MU.also_seen_at,
-                                                                       dup_urls, MU.call_called_at, MU.live_status, MU.live_url):
+    for b, url_, note, lc, ls, av, also, dupu, called, lst, lurl, un_ in zip(MU.building_id, MU.url, MU.live_notes, MU.live_checked_at, MU.last_seen, MU.available_date, MU.also_seen_at,
+                                                                            dup_urls, MU.call_called_at, MU.live_status, MU.live_url, MU.unit):
         d_, src_ = parsers.page_modified_date(note), "live-check note"
         read_on = str(lc)[:10] or str(ls)[:10]
         seen_live = lst in ("live", "changed")
@@ -1276,6 +1332,10 @@ def main():
                 d_, src_, read_on = sib, "live-check note of another unit on the same building page", str(lc)[:10] or str(ls)[:10]
             if d_ and read_on < d_:
                 read_on = str(lc)[:10] or d_
+        corr = pd_corr.get((b, page_key(url_), parsers.unit_key(un_))) or pd_corr.get((b, page_key(url_), ""))
+        if corr:
+            d_, src_ = corr[0], f"reviewed correction ({corr[2]})"
+            read_on = max(read_on, corr[1][:10])
         lvl, days, why = parsers.staleness(d_, read_on, av, second_source=second_site(url_, also, dupu)) if not str(called).strip() else ("", None, "")
         pm.append(d_); pms.append(src_ if d_ else ""); st_lvl.append(lvl); st_days.append("" if days is None else days); st_why.append(why)
     MU["page_modified_date"], MU["page_modified_source"], MU["listing_stale"], MU["listing_stale_days"], MU["listing_stale_why"] = pm, pms, st_lvl, st_days, st_why
