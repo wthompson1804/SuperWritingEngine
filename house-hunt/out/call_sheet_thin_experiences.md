@@ -20,13 +20,13 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
   - Phone (supplied): (866) 485-9533. Hours: Mon 10am-6pm; Tue 11am-7pm; Wed 10am-6pm; Thu 11am-7pm; Fri 10am-6pm; Sat-Sun 10am-4pm. Site: [ironstate.com/property/330-angelo-cifelli/index.aspx](https://ironstate.com/property/330-angelo-cifelli/index.aspx).
   - Answer: ____________________
 - [ ] **Harbourside SoNo**, Norwalk: 8 unit(s) from $2490. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p502359/harbourside-sono-norw](https://www.zumper.com/apartment-buildings/p502359/harbourside-sono-norwalk-ct)
-  - Phone (office): (475) 241-7784. Hours: Mon-Fri 10am-6pm; Sat 10am-5pm. Site: [livebh.com/apartments/harbourside-sono/](https://livebh.com/apartments/harbourside-sono/).
+  - Phone (office): (475) 241-7784. Hours: Mon-Fri 10am-6pm; Sat 10am-5pm. Site: [harboursidesono.com/](https://www.harboursidesono.com/).
   - Answer: ____________________
 - [ ] **Harrison Station**, Harrison: 6 unit(s) from $2460. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/harrison/harrison-station--2](https://www.apartmentlist.com/nj/harrison/harrison-station--2)
   - Phone (supplied): (833) 545-9820. Hours: Mon 10am-6pm; Tue 11am-7pm; Wed 10am-6pm; Thu 11am-7pm; Fri 10am-6pm; Sat-Sun 10am-4pm. Site: [ironstate.com/property/harrison-station/index.aspx](https://ironstate.com/property/harrison-station/index.aspx).
   - Answer: ____________________
 - [ ] **Vermella Harrison**, Harrison: 6 unit(s) from $2229. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p17724/vermella-harrison-harr](https://www.zumper.com/apartment-buildings/p17724/vermella-harrison-harrison-nj)
-  - Phone (office): (833) 840-5273. Hours: Mon-Tue 9am-5pm; Wed 1pm-5pm; Thu-Sat 9am-5pm. Site: [vermellaharrison.com/floorplans](https://vermellaharrison.com/floorplans).
+  - Phone (office): (833) 840-5273. Hours: Mon-Tue 9am-5pm; Wed 1pm-5pm; Thu-Sat 9am-5pm. Site: [tours.vermellaharrison.com/](https://tours.vermellaharrison.com/).
   - Answer: ____________________
 - [ ] **The Brunswick**, New Brunswick: 6 unit(s) from $2169. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p121274/riverwatch-commons-ne](https://www.zumper.com/apartment-buildings/p121274/riverwatch-commons-new-brunswick-nj)
   - Phone (office): (732) 435-0151. Hours: Mon-Fri 09:00-18:00; Sat 10:00-17:00. Site: [livethebrunswick.com/](https://www.livethebrunswick.com/).
@@ -74,10 +74,10 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
   - Phone (office): (203) 884-6366. Hours: Mon-Fri 9:00am-5:00pm. Site: [merrittriver.com/](https://www.merrittriver.com/).
   - Answer: ____________________
 - [ ] **Brim and Crown**, Norwalk: 10 unit(s) from $2192. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p499811/brim-and-crown-east-n](https://www.zumper.com/apartment-buildings/p499811/brim-and-crown-east-norwalk-norwalk-ct)
-  - Phone (tracking): (844) 325-6407 ext. 8055. Hours: Mon-Thu 9am-6pm; Fri 9am-5pm; Sat 10am-5pm.
+  - Phone (tracking): (844) 325-6407 ext. 8055. Hours: Mon-Thu 9am-6pm; Fri 9am-5pm; Sat 10am-5pm. Site: [brimcrown.com/](https://www.brimcrown.com/).
   - Answer: ____________________
 - [ ] **The Vue**, New Brunswick: 3 unit(s) from $2320. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p12567/the-vue-new-brunswick-](https://www.zumper.com/apartment-buildings/p12567/the-vue-new-brunswick-nj)
-  - Phone (tracking): (844) 326-3860 ext. 4210. Hours: Mon-Fri 8:30am-5pm.
+  - Phone (tracking): (844) 326-3860 ext. 4210. Hours: Mon-Fri 8:30am-5pm. Site: [the-vue-9.rentcafewebsite.com/](https://the-vue-9.rentcafewebsite.com/).
   - Answer: ____________________
 - [ ] **8 Union Ave LLC**, Norwalk: 3 unit(s) from $1795. Ask: Is there a passenger elevator that serves this unit's floor? [trulia.com/building/8-union-ave-llc-8-union-ave-norwalk-ct-0](https://www.trulia.com/building/8-union-ave-llc-8-union-ave-norwalk-ct-06851-2734512999)
   - Phone (tracking): (203) 900-4467.
@@ -101,7 +101,7 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
   - Phone (tracking): (475) 335-8352.
   - Answer: ____________________
 - [ ] **Iron Works Sono**, Norwalk: 4 unit(s) from $2041. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p264472/ironworks-norwalk-ct](https://www.zumper.com/apartment-buildings/p264472/ironworks-norwalk-ct)
-  - Phone: not found on any saved page. Hours: Mon-Fri 10am-5:30pm.
+  - Phone: not found on any saved page. Hours: Mon-Fri 10am-5:30pm. Site: [ironworkssono.com/](https://www.ironworkssono.com/).
   - Answer: ____________________
 - [ ] **5201 City Place**, Edgewater: 2 unit(s) from $2795. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/edgewater/5201-city-place](https://www.apartmentlist.com/nj/edgewater/5201-city-place)
   - Phone: none (listed by an individual owner; contact through the listing).

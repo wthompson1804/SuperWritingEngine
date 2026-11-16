@@ -133,8 +133,11 @@ def site_pages():
     portfolio site is left out: its number is the head office's, not the building's)."""
     out, sites = defaultdict(list), {}
     for x in bc.read_csv(PEND / "building_sites.csv"):
-        if x.get("site") and bc.is_own(x["site"]):
-            sites[x["bkey"]] = bc.clean_url(x["site"])
+        site = (x.get("site") or "").strip()
+        if site and not re.match(r"https?://", site):
+            site = "https://" + site             # Zumper `homepage` is sometimes stored without a scheme
+        if site and bc.is_own(site) and bc.clean_url(site):
+            sites[x["bkey"]] = bc.clean_url(site)
     p = PEND / "site_pages.jsonl"
     if p.exists():
         for line in p.read_text(errors="replace").splitlines():
