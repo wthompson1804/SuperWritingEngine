@@ -172,3 +172,91 @@ not, a red line says a paying month costs more than the cap.
 - Fonts load from Google Fonts, as in the mock; offline the page falls back to system fonts.
 - The wish-list chips from the mock were dropped (the UX brief drops them, and their thresholds were invented).
 - Compare hides a day-part row when the tints match, as in the mock, even if the captions differ; the toggle shows all ten rows.
+
+## UI pass 2
+
+(2026-11-16. Scripted Playwright walk at 390×844, then 1280×900, 320×640 with reduced motion, and the built file with
+its outer doctype/html/head/body tags stripped and re-wrapped, as publishing does. Before and after phone screenshots are
+`site/screens/before-*.png` and `after-*.png`; `after-1x-test-data-*.png` use made-up test values for fields the data
+does not carry yet. The "before" set was taken on the earlier data build.)
+
+### Changed
+
+- **Words.** "Years" are "experiences" in every interface string. The shown label is `display_label` when the data has
+  it, else `label` with a trailing " Year" swapped for " Experience"; keys are untouched. Routes are `#lives`,
+  `#exp-<slug>`, `#hood-<slug>`, `#unit-<slug>`, `#compare`, where a slug is the id in lower case with every run of
+  other characters turned into a hyphen. The old forms (`#year-<id>`, `#unit-<encoded id>`) are still read.
+- **Top three, then more.** An experience lists its first three neighborhoods (by `rank_in_experience` when present,
+  else the given order), then "Show more neighborhoods" (six at a time) and "Show all N", with "3 of 22 neighborhoods
+  shown". A neighborhood lists its first three places (the order of `unit_ids`), then "Show more places" (three at a
+  time). The first card carries "Top pick", the next two "2" and "3" (neighborhoods say "Top pick" only when the data
+  ranks them; the pin number serves for 2 and 3). The opened count is kept while the page is open, so Back returns to the
+  same list. The map still shows every neighborhood. Avoid cards follow the places.
+- **Host voice.** One speech style ("Your host says", rose bubble with a microphone) for `host.intro` and
+  `host.walkthrough` on an experience, `host.intro` on a neighborhood, and `host.line` plus `host.catch` on a place (on
+  its page, and on its card when it is one of the top three). Nothing in that bubble is written in the template.
+- **Prose.** `prose.scene / promise / catch` on an experience and `prose.scene / good_for_her / watch_for` on a
+  neighborhood are shown when present (flat fields of the same names are read too). With prose, the generated typical
+  figures move into a fold; without it the page shows what it showed before. `described[]` on a neighborhood is shown
+  under "How others describe it" as quoted lines with the source named and linked (three, then a fold).
+- **Contact.** `contact` on a place gives a "Phone and hours" box: the number as selectable text with a "Copy number"
+  button, hours, note, site link and where the number was found. No `tel:` link. It also appears on "Worth a phone call"
+  items and in the copied tour list.
+- **Asterisks.** Any `confirm.what` / `confirm.why` text is shown as given; `CONFIRM_WORD` only tidies the kinds it
+  knows. `confirm` may be one object or a list; `confirms[]`, `asterisks[]` and flat `confirm_what` / `confirm_why` /
+  `what_to_confirm` are read as well, and `question` is used for "What to ask". Every card that carries an asterisk now
+  prints what is to confirm and why (place cards, avoid cards, phone-call items, a "Still to confirm" row in compare).
+- **Rent.** A net-effective rent always shows its asterisk, the rent in a paying month and the first full payment date
+  (or says each is not known) on the card, the place page, phone-call items and compare. Lease term and 12-month price
+  show when present (`rent.lease_months`, `cost_check.lease_term_months`, `rent.price_12mo`, `cost_check.price_12_month`
+  and a few spellings of each); a lease longer than 12 months with no 12-month price says "The 12-month price is not
+  published". The rent terms box opens for any of these, not only for `rent.asterisk`.
+- **Unknown is never zero.** Receipt lines with basis `unknown` (or a null amount) read "not published" and are named as
+  left out of the total; a true zero reads "no charge" / "no monthly charge". The footer drops any `meta.notes` line
+  that says "$0" and adds its own sentence; "(counted as $0)" is removed from `confirm.why` when shown.
+- **Dates on prices.** Added to the bottom bar, the experience cards and tiles, neighborhood cards and leads, and the
+  five-point sheet. Signs, receipts, compare and phone-call items already had them.
+- **Navigation.** The page sets `history.scrollRestoration = "manual"`, so browser Back from a place returns to the
+  same spot in the neighborhood (it used to land at the top). The breadcrumb on a place is experience › neighborhood.
+- **Bottom bar.** The page measures the bar and keeps that much room under its last line (`--tray-h`), so the bar no
+  longer depends on a fixed 150 px; toast and first-run card sit above it. Safe-area padding on the bar and the sheets.
+- **Layout fixes.** Source links no longer stretch their line to 44 px (the tap area is kept with padding); survey
+  figures drop repeats and fold after four; the limits strip has two columns on a phone so "Old-Neighborhood" is not
+  broken mid-word; neighborhood card footers line up; long unbroken text wraps inside pills and boxes; the price sign and
+  bar cope with an unknown price; "Unit 403" does not split across lines.
+- **Empty and missing.** Records are normalised on load, so a place with a missing block renders as "Not known yet"
+  instead of failing. An experience with no neighborhoods, an experience with no figures, a neighborhood with nothing,
+  a place whose neighborhood is absent (not openable), no listing link, no price date and quotes with no date or source
+  all render. Quotes strip `u/name` and `@name` handles.
+- **Accessibility.** Focus ring is ink on light surfaces and butter on dark ones (the old butter ring was faint on
+  white). Reduced motion turns off every animation and transition. "Show more" keeps focus on the control.
+- **Copying.** When the clipboard is blocked the tour list appears in a read-only text box to select by hand.
+- **Publishing.** `<meta name="claude:viewport-fit-sides" content="cover">` after the title; side gutters are
+  `max(16px, env(safe-area-inset-left/right, 0px))`; no dialogs, print, downloads, `tel:` or `mailto:`; storage only
+  in try/catch (the page was walked with storage throwing); fonts from Google Fonts only; no external scripts; the built
+  file is about 3.2 MB.
+
+### Fields the template now reads (beyond those listed above in this file)
+
+- experience (`years[]`): `display_label`, `prose.scene`, `prose.promise`, `prose.catch`, `host.intro`,
+  `host.walkthrough[]` (also flat `scene`, `scenes`, `promise`, `catch`).
+- neighborhood: `rank_in_experience`, `experience_score_basis`, `prose.scene`, `prose.good_for_her`, `prose.watch_for`,
+  `host.intro`, `described[] {quote, source, url, date}`.
+- place: `confirm {asterisk, what, why, question}` (or a list), `host.line`, `host.catch`,
+  `contact {phone, hours, site, kind, note, source}`, `rent.lease_months`, `rent.price_12mo`,
+  `cost_check.lease_term_months`, `cost_check.price_12_month`, `rent.lease_term_text`.
+- voices: `about` (added by another agent during this pass).
+
+### Not fixed
+
+- `meta.notes` still carries "Unknown cost lines count as $0 …" and twelve `confirm.why` texts say "(counted as $0)".
+  The page hides both wordings; the builder should stop writing them.
+- Neighborhoods without `rank_in_experience` are listed in the given order and the first is not called "Top pick".
+- A very long neighborhood name is cut with an ellipsis in the breadcrumb (the full name is the page heading).
+- Map pins are smaller than 44 px; the list under the map is the full-size way in. Checkboxes are 22 px inside a
+  44 px label.
+- `scripts/site_walkthrough_test.js` was not run or updated (not mine to edit). It will need the new routes, the
+  "Show more" step and the new asterisk wording.
+- The "Typical figures", tile captions and other template sentences listed above are still generated in the template.
+- With storage blocked, the first-run "How this works" card shows on every load.
+- Evidence quotes whose source gives only "4 weeks ago" show "date not known" beside the source's own words.

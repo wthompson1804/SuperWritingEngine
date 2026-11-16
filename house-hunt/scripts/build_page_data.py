@@ -48,6 +48,7 @@ def unit(r):
             qs.append({"parking fee": "What does a parking spot cost per month, and is one guaranteed in the lease?", "pet rent": "What is the monthly pet rent and any one-time pet fee?",
                        "building fees": "What required monthly fees are added to the rent (amenity, trash, technology)?",
                        "building fees (part)": "Which required monthly fees have no published amount (for example an amenity fee), and how much are they?", "gas": "Who pays for heat and cooking gas?"}.get(line, f"What is the {line}?"))
+    qs = list(dict.fromkeys(qs))
     return {
         "id": g("listing_id"), "building_id": g("building_id"), "hood_id": g("hood_id"), "year": g("group_key"),
         "building": g("building_name"), "address": g("address"), "unit": g("unit"), "beds": g("beds"), "sqft": g("sqft"),

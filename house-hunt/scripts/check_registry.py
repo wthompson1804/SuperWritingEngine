@@ -94,15 +94,19 @@ def shown_violations():
     open_listing = col("listing_warning") != ""
     # GATE facts count toward "at most one open"; DISCLOSURES (lease term, cost near the cap, condo rented by its owner,
     # net-effective rent) never do, but must be listed on the unit (owner, 2026-11-16)
-    opens = {"elevator": open_e, "floor": open_f, "dogs allowed": open_d, "availability": open_avail, "listing": open_listing, "eligibility": open_e & False}
+    # (a floor that is not published is a disclosure too: owner, 2026-11-16; a floor under 2 is still flagged above)
+    opens = {"elevator": open_e, "dogs allowed": open_d, "availability": open_avail, "listing": open_listing, "eligibility": open_e & False}
+    not_published = ~fb.isin(["confirmed", "stated"])
+    flag(not_published & ~col("disclosures").str.contains('"what": "floor not published"', regex=False), "floor not published but the disclosure is missing")
+    flag(not_published & ~col("tour_confirm").str.contains("confirm it is above the ground floor"), "floor not published but the tour question is missing")
     disc = col("disclosures")
     flag(open_lease & ~disc.str.contains('"what": "lease term"', regex=False), "price is for a lease over 13 months but the disclosure 'lease term' is missing")
     flag(open_cost & ~disc.str.contains('"what": "cost near the cap"', regex=False), "cost near the cap with an unknown line but the disclosure is missing")
     flag((col("rent_basis_kind") == "net_effective") & ~disc.str.contains('"what": "net-effective rent"', regex=False), "net-effective rent without its disclosure")
-    flag(disc.str.contains('"what": "(?:elevator|floor|dogs allowed|availability|listing|eligibility)"'), "a gate fact is listed as a disclosure")
+    flag(disc.str.contains('"what": "(?:elevator|dogs allowed|availability|listing|eligibility)"'), "a gate fact is listed as a disclosure")
     import verdicts
     V = verdicts.load_verdicts().drop_duplicates("listing_id", keep="last").set_index("listing_id")
-    KIND_LABEL = {"elevator": "elevator", "floor": "floor", "dogs": "dogs allowed", "not_available": "availability", "unverified": "listing",
+    KIND_LABEL = {"elevator": "elevator", "dogs": "dogs allowed", "not_available": "availability", "unverified": "listing",
                   "wrong_building": "listing", "restricted": "eligibility"}
     vdisc = S.listing_id.map(lambda l: V.at[l, "kind"] if l in V.index and V.at[l, "verdict"] == "asterisk" else "")
     flag(vdisc.isin(["coop_condo", "other"]) & ~disc.str.contains('"what": "condo rented by its owner"', regex=False), "a reviewer's condo verdict is not among the disclosures")

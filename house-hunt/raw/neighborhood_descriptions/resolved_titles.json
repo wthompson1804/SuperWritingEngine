@@ -133,7 +133,8 @@
  "Willets Point, Queens": {
   "offset": 25278758310,
   "end": 25279236642,
-  "page_id": 78504682
+  "page_id": 78504682,
+  "redirect_to": "Willets Point"
  },
  "Seymour, Connecticut": {
   "offset": 584570697,
@@ -173,7 +174,8 @@
  "Olinville, Bronx": {
   "offset": 2431556988,
   "end": 2431733655,
-  "page_id": 1188825
+  "page_id": 1188825,
+  "redirect_to": "Williamsbridge, Bronx"
  },
  "Milford, Connecticut": {
   "offset": 711117981,
@@ -248,7 +250,8 @@
  "Hillcrest, Queens": {
   "offset": 4381387904,
   "end": 4381604860,
-  "page_id": 3779119
+  "page_id": 3779119,
+  "redirect_to": "Fresh Meadows, Queens"
  },
  "Peekskill, New York": {
   "offset": 634867066,
@@ -308,7 +311,8 @@
  "Flatbush, Brooklyn": {
   "offset": 24424905864,
   "end": 24425109814,
-  "page_id": 75506853
+  "page_id": 75506853,
+  "redirect_to": "Flatbush"
  },
  "Mount Arlington, New Jersey": {
   "offset": 626813314,
@@ -403,7 +407,8 @@
  "Roxbury Township, New Jersey": {
   "offset": 20465144061,
   "end": 20465224307,
-  "page_id": 61091951
+  "page_id": 61091951,
+  "redirect_to": "Roxbury, New Jersey"
  },
  "Long Beach, New York": {
   "offset": 632142457,
@@ -468,7 +473,8 @@
  "Electchester": {
   "offset": 7137593532,
   "end": 7137687527,
-  "page_id": 11556741
+  "page_id": 11556741,
+  "redirect_to": "Pomonok, Queens"
  },
  "Prospect Lefferts Gardens": {
   "offset": 6077278954,
@@ -538,7 +544,8 @@
  "Middletown, Orange County, New York": {
   "offset": 24751702740,
   "end": 24751723014,
-  "page_id": 76718568
+  "page_id": 76718568,
+  "redirect_to": "Middletown, New York"
  },
  "New Paltz, New York": {
   "offset": 1366962481,
@@ -648,7 +655,8 @@
  "Madison, Brooklyn": {
   "offset": 9150157002,
   "end": 9150288802,
-  "page_id": 18716619
+  "page_id": 18716619,
+  "redirect_to": "Sheepshead Bay, Brooklyn"
  },
  "Corona, Queens": {
   "offset": 1089809706,
@@ -708,12 +716,14 @@
  "Parkville, Brooklyn": {
   "offset": 20745700440,
   "end": 20745765415,
-  "page_id": 62111498
+  "page_id": 62111498,
+  "redirect_to": "Kensington, Brooklyn"
  },
  "East New York, Brooklyn": {
   "offset": 23398373281,
   "end": 23398437257,
-  "page_id": 71652482
+  "page_id": 71652482,
+  "redirect_to": "East New York"
  },
  "Forest Hills, Queens": {
   "offset": 1687595641,
@@ -728,7 +738,8 @@
  "Farragut, Brooklyn": {
   "offset": 8216004352,
   "end": 8216074933,
-  "page_id": 15105656
+  "page_id": 15105656,
+  "redirect_to": "East Flatbush, Brooklyn"
  },
  "Hamilton Heights, Manhattan": {
   "offset": 3864596170,
@@ -758,12 +769,14 @@
  "Hallets Point": {
   "offset": 19770372000,
   "end": 19770461750,
-  "page_id": 58361222
+  "page_id": 58361222,
+  "redirect_to": "Astoria, Queens"
  },
  "Murray Hill, Queens": {
   "offset": 5428215013,
   "end": 5428330635,
-  "page_id": 6048493
+  "page_id": 6048493,
+  "redirect_to": "Flushing, Queens"
  },
  "Morris Plains, New Jersey": {
   "offset": 626813314,

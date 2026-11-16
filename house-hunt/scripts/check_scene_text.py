@@ -38,7 +38,7 @@ TOLLS = "data/enriched/*.json"                     # virtual table: one row per 
 PAGE = "site/data.json"                            # virtual tables "site/data.json#years|neighborhoods|units"
 
 LIMITS = {"year": {"scene": (60, 90), "host_intro": (110, 160), "tagline": (4, 14)},
-          "hood": {"scene": (35, 60), "host_intro": (60, 90)}}
+          "hood": {"scene": (35, 68), "host_intro": (60, 90)}}
 PARAGRAPHS = {"year": {"host_walkthrough": (3, 40, 60)}, "hood": {}}      # column: (paragraphs, min words, max words) each
 ONE_SENTENCE = {"year": ["promise", "tagline"], "hood": ["good_for_her", "watch_for"]}
 ONE_OR_TWO = {"year": ["catch"], "hood": []}

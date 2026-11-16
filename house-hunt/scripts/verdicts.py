@@ -230,7 +230,8 @@ def add_lines(lines, numbered=None):
         raw = raw.strip()
         if not raw or raw.startswith("//"):
             continue
-        p = [x.strip() for x in raw.split(" | ")]
+        # an empty field is written "| |": keep it as a field (it used to swallow the next one)
+        p = [x.strip() for x in re.sub(r" \|(?= \|)", " | ", raw.replace(" | | ", " |  | ")).split(" | ")]
         lid = p[0]
         if lid.startswith("#") and numbered:
             lid = numbered.get(lid[1:], lid)

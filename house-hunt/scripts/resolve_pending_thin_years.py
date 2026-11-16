@@ -287,6 +287,151 @@ def fetch_urls(path: str):
     print("refused hosts:", refused())
 
 
+# ---------------------------------------------------------------- own sites
+def next_data(path: str) -> dict:
+    """homeDetails from a cached Trulia page (never fetched here)."""
+    try:
+        h = (ROOT / path).read_text(errors="replace")
+        m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', h, re.S)
+        return json.loads(m.group(1))["props"].get("homeDetails") or {}
+    except Exception:
+        return {}
+
+
+def al_listing(url: str):
+    import h_apartmentlist as A
+    r = fetched().get(url)
+    if not r or not r["path"]:
+        return None, r
+    return A.parse_listing((ROOT / r["path"]).read_text(errors="replace")), r
+
+
+def zumper_entity(url: str):
+    import h_zumper as Z
+    r = fetched().get(url.split("?")[0])
+    if not r or not r["path"]:
+        return None, None, r
+    t = (ROOT / r["path"]).read_text(errors="replace")
+    st = Z.parse_state(t) or {}
+    return (((st.get("detail") or {}).get("entity") or {}).get("data") or {}), t, r
+
+
+def sites():
+    """Per building: its own website (Apartment List `website_url`, Zumper `homepage`, the link on the cached Trulia
+    page, or the management site we harvested from) and how many units of the same building already pass."""
+    C = pd.read_csv(OUT / "candidates.csv", dtype=str, keep_default_na=False)
+    L = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False)
+    L = L[L.gate_status == "pass"].copy()
+    L["bkey"] = L.apply(building_key, axis=1)
+    pb = L.groupby("bkey").size().to_dict()
+    nk = lambda s: re.sub(r"[^a-z0-9]", "", str(s).lower())
+    pn = L[L.building_name != ""].groupby([L.building_name.map(nk), "zip5"]).size().to_dict()
+    rows = []
+    for bk, g in C.groupby("bkey", sort=False):
+        site = ""
+        for u in dict.fromkeys(g.url):
+            if "apartmentlist.com" in u:
+                Ld, _ = al_listing(u)
+                site = site or ((Ld or {}).get("website_url") or "")
+            elif "zumper.com" in u:
+                d, _, _ = zumper_entity(u)
+                site = site or ((d or {}).get("homepage") or "")
+        for r in g.itertuples():
+            if r.source_site == "trulia" and not site:
+                hd = next_data(r.raw_path)
+                site = ((hd.get("description") or {}).get("additionalInfoHyperlink") or {}).get("url") or ""
+            if not site and r.building_url and not re.search(r"trulia|zumper|apartmentlist", r.building_url):
+                site = r.building_url
+        r0 = g.iloc[0]
+        rows.append(dict(bkey=bk, name=r0.building_name, hood_id=r0.hood_id, year=r0.year, n=len(g),
+                         sources=";".join(sorted(set(g.source_site))),
+                         reasons=";".join(sorted(set(";".join(g.pending_reasons).split(";")))), site=site,
+                         pass_same_addr=pb.get(bk, 0),
+                         pass_same_name=pn.get((nk(r0.building_name), r0.zip5), 0) if r0.building_name else 0))
+    pd.DataFrame(rows).to_csv(OUT / "building_sites.csv", index=False)
+    print(len(rows), "buildings;", sum(1 for r in rows if r["site"]), "with an own site")
+
+
+_robots = {}
+
+
+def robots_ok(url: str) -> bool:
+    """robots.txt of the host; the Claude-User group if there is one, else `*` (docs/SOURCES.md, targeted lookups).
+    A refused robots.txt ends the host (polite_get marks it); a missing one (404) means no rules."""
+    from urllib import robotparser
+    pu = urlparse(url)
+    host = pu.netloc.lower()
+    if host not in _robots:
+        rec = get_logged(f"{pu.scheme}://{host}/robots.txt", "robots", refresh=False)
+        rp = robotparser.RobotFileParser()
+        if rec["path"]:
+            rp.parse((ROOT / rec["path"]).read_text(errors="replace").splitlines())
+        elif str(rec["status"]) in ("404", "410"):
+            rp.parse([])
+        else:
+            rp = None      # refused, or unreachable: do not go on
+        _robots[host] = rp
+        if rp:
+            cd = rp.crawl_delay("Claude-User") or rp.crawl_delay("*")
+            if cd:
+                lib.HOST_DELAY[host] = max(float(cd), 3.0)
+    rp = _robots[host]
+    return bool(rp) and all(rp.can_fetch(ua, url) for ua in ("Claude-User", "ClaudeBot"))
+
+
+TRACK = re.compile(r"[?&](rcstdid|utm_[a-z]+|built_in|switch_cls\[id\])=[^&#]*", re.I)
+LINK_WANT = [r"amenit", r"pet", r"faq", r"feature", r"floor-?plans?", r"availab"]
+
+
+def clean_site(u: str) -> str:
+    u = u.strip()
+    if not u.startswith("http"):
+        u = "https://" + u
+    u = TRACK.sub("", u).split("#")[0]
+    return re.sub(r"/\?$|\?$", "/", u) if u.endswith("?") else u
+
+
+def crawl_sites(max_links: int = 4):
+    """Home page of each building's own site plus up to four same-host pages whose link names amenities, pets, FAQ,
+    features or floor plans. Result: site_pages.jsonl (bkey, url, path, status)."""
+    from urllib.parse import urljoin
+    B = pd.read_csv(OUT / "building_sites.csv", dtype=str, keep_default_na=False)
+    out = OUT / "site_pages.jsonl"
+    done = {json.loads(l)["bkey"] for l in open(out)} if out.exists() else set()
+    for b in B[B.site != ""].itertuples():
+        if b.bkey in done:
+            continue
+        home = clean_site(b.site)
+        pages = []
+        if "securecafe.com" in home or "rentcafe.com" in home:
+            pages.append({"url": home, "status": "off_limits (RentCafe)", "path": ""})
+        elif not robots_ok(home):
+            pages.append({"url": home, "status": "robots_disallow_or_refused", "path": ""})
+        else:
+            rec = get_logged(home, "own site home")
+            pages.append(rec)
+            if rec["path"] and "propertyware.com" not in home:
+                t = (ROOT / rec["path"]).read_text(errors="replace")
+                host = urlparse(home).netloc
+                links = {}
+                for m in re.finditer(r'<a\b[^>]*href="([^"#]+)"[^>]*>(.*?)</a>', t, re.S | re.I):
+                    u = urljoin(home, m.group(1)).split("#")[0]
+                    label = re.sub(r"<[^>]+>|\s+", " ", m.group(2)).strip().lower()
+                    if urlparse(u).netloc != host or re.search(r"\.(pdf|jpg|png|webp)$", u, re.I) or u.rstrip("/") == home.rstrip("/"):
+                        continue
+                    for rank, w in enumerate(LINK_WANT):
+                        if re.search(w, urlparse(u).path.lower()) or re.search(w, label):
+                            links.setdefault(u, rank)
+                            break
+                for u in [u for u, _ in sorted(links.items(), key=lambda kv: kv[1])][:max_links]:
+                    if robots_ok(u):
+                        pages.append(get_logged(u, "own site page"))
+        with open(out, "a") as f:
+            f.write(json.dumps({"bkey": b.bkey, "name": b.name, "pages": pages}) + "\n")
+        print(b.name[:40], [(str(p["status"]), p["url"][-50:]) for p in pages][:5], flush=True)
+    print("refused hosts:", refused())
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "select"
     if cmd == "select":
@@ -295,5 +440,7 @@ if __name__ == "__main__":
         fetch_primary()
     elif cmd == "fetch-urls":
         fetch_urls(sys.argv[2])
-    elif cmd == "write":
-        import resolve_pending_write  # placeholder, replaced below
+    elif cmd == "sites":
+        sites()
+    elif cmd == "crawl-sites":
+        crawl_sites()

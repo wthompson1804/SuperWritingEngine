@@ -42,8 +42,13 @@ MAX_PER_BUILDING, SHOWN, CANDIDATES = 2, 10 ** 6, 15
 # GATE facts count toward "two or more open -> not shown". DISCLOSURES never do, and never remove a unit by themselves
 # (owner, 2026-11-16): a long-lease price, a cost near the cap with an unknown line, a condo rented by its owner, a
 # net-effective rent. A unit may carry any number of disclosures plus at most one open gate fact.
-GATE_KEYS = {"elevator", "floor", "dogs", "availability", "listing", "eligibility"}
-DISCLOSURE_KEYS = {"lease", "cost", "condo", "other"}
+# Owner, 2026-11-16 (later the same day): a floor that is simply not published (unknown, or only read from the unit
+# number) is no longer an open gate fact. It is a standing disclosure and tour question, "Floor not published: confirm
+# it is above the ground floor". Still excluded: a floor confirmed or stated as ground / 1, a checker's reading that the
+# unit is probably or possibly on the ground floor (scripts/avoid.py), and a reviewer's verdict saying so.
+GATE_KEYS = {"elevator", "dogs", "availability", "listing", "eligibility"}
+DISCLOSURE_KEYS = {"floor", "lease", "cost", "condo", "other"}
+FLOOR_DISCLOSURE = "Floor not published: confirm it is above the ground floor"
 CAP, NEAR_CAP = 3000, 100          # D12: within $100 of the cap with an unknown cost line -> asterisk "cost near the cap"
 COLOR_DIR = DATA / "enriched_color"
 
@@ -181,7 +186,7 @@ def main():
     fb, fk = s("unit_floor_basis"), s("unit_floor_label_kind")
     floor_settled = fb.isin(["confirmed", "stated"])
     floor_from_label_ok = fb.eq("inferred") & fk.eq("simple") & (fl >= 3)
-    inf_f = ~(floor_settled | floor_from_label_ok) | vk.eq("floor")
+    inf_f = ~floor_settled | vk.eq("floor")          # not published: unknown, or only read from the unit number
     u["floor_basis_note"] = np.where(floor_from_label_ok, "read from the unit number", "")
     # dogs: allowed must be stated or confirmed, and dogs must be NAMED as allowed (D2, D3): an unconfirmed evidence
     # row, "pets upon approval", "case by case" or small pets with dogs unnamed leave the fact open
@@ -257,7 +262,8 @@ def main():
                 why_ = v_why.iloc[i] if reviewed and v_why.iloc[i] else str(w[i])
                 q_ = v_q.iloc[i] if reviewed and v_q.iloc[i] else (fq[i] if k == "floor" else q)
                 if k in DISCLOSURE_KEYS:
-                    disc.append({"what": "condo rented by its owner" if k in ("condo", "other") else lab, "why": why_, "question": q_ or ""})
+                    disc.append({"what": "condo rented by its owner" if k in ("condo", "other") else ("floor not published" if k == "floor" else lab),
+                                 "why": why_, "question": FLOOR_DISCLOSURE if k == "floor" else (q_ or "")})
                     continue
                 keys.append(k); whats.append(lab); whys.append(why_); qs.append(q_)
         if net_eff[i]:
@@ -269,7 +275,7 @@ def main():
     u["open_keys"] = keys_l
     u["disclosures"] = disc_l
     u["to_confirm"] = [q + "; " if q else "" for q in q_l]
-    u["tour_confirm"] = (pd.Series(np.where(floor_from_label_ok, "Confirm the floor; ", ""), index=u.index)
+    u["tour_confirm"] = (pd.Series(np.where(inf_f, FLOOR_DISCLOSURE + "; ", ""), index=u.index)
                          + pd.Series(np.where(dog_small, "Confirm the dog weight limit in pounds; ", ""), index=u.index)).str.rstrip("; ")
     # the one open fact, in plain words, for the asterisk on the page (owner, 2026-11-15: a unit with exactly one open
     # gate fact is shown with an asterisk instead of being held back)

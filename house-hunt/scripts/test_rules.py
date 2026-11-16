@@ -162,10 +162,14 @@ def data():
     ok((pd.to_numeric(M.cap_margin) == 3000 - pd.to_numeric(M.all_in)).all(), "D12: cap_margin = 3000 - all_in")
     near = S[(pd.to_numeric(S.all_in) >= 2900) & (pd.to_numeric(S.all_in_unknown_count) >= 1)]
     ok(near.disclosures.str.contains('"what": "cost near the cap"', regex=False).all(), "D12: every shown unit at $2,900+ with an unknown cost line carries the disclosure")
-    ok(not S.confirm_what.str.contains("cost near the cap|lease term|condo").any(), "disclosures never count as the open gate fact")
+    ok(not S.confirm_what.str.contains("cost near the cap|lease term|condo|floor").any(), "disclosures never count as the open gate fact")
+    npub = S[~S.unit_floor_basis.isin(["confirmed", "stated"])]
+    ok(npub.disclosures.str.contains('"what": "floor not published"', regex=False).all() and npub.tour_confirm.str.contains("above the ground floor").all(),
+       "a shown unit whose floor is not published carries the disclosure and the tour question")
+    ok(not (pd.to_numeric(S.unit_floor, errors="coerce") < 2).any(), "no shown unit on floor 1 or the ground floor")
     ok((S.open_gate_facts.astype(float) <= 1).all(), "a shown unit has at most one open gate fact")
     sk_ = pd.read_csv(DATA / "excluded_sketchy.csv", dtype=str, keep_default_na=False, low_memory=False)
-    ok(not sk_.sketchy_reason.str.contains("cost near the cap|lease term").any(), "no unit is dropped as sketchy because of a disclosure")
+    ok(not sk_.sketchy_reason.str.contains("cost near the cap|lease term|floor(?! plan)").any() or not sk_.sketchy_reason.str.contains("unconfirmed: [^;]*floor").any(), "no unit is dropped as sketchy because of a disclosure")
     ok("more_in_building" in S.columns and (S.groupby("building_id").size() <= 2).all(), "at most 2 shown per building, with more_in_building recorded")
     # D13 / D14 / D15
     for lid, c, want in [("rc:sightmap:scribe:508", "required building fees\", \"amount\": 100", True), ("rc:sightmap:the-asher:530", "required building fees\", \"amount\": 100", True)]:
@@ -199,7 +203,7 @@ def data():
     ok(not set(V[V.verdict == "remove"].listing_id) & set(R.index), "verdicts: a unit with verdict remove is still ranked")
     for r in V[V.verdict == "asterisk"].itertuples():
         if r.listing_id in S.index:
-            ok(S.at[r.listing_id, "confirm_asterisk"] == "yes" or (r.kind in ("lease_term", "coop_condo", "other") and S.at[r.listing_id, "disclosures"] != ""),
+            ok(S.at[r.listing_id, "confirm_asterisk"] == "yes" or (r.kind in ("lease_term", "coop_condo", "other", "floor") and S.at[r.listing_id, "disclosures"] != ""),
                f"verdicts: {r.listing_id} has an asterisk verdict but is shown without an asterisk or a disclosure")
     ok(set(S.index) <= set(V[V.verdict.isin(["ok", "asterisk"])].listing_id), "verdicts: a shown unit has no ok / asterisk verdict")
     # 62 Treat St: plan "103" reads as floor 1; plan "208" must not be excluded with it
