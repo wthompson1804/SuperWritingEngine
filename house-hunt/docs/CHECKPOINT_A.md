@@ -1,6 +1,6 @@
 # Checkpoint A: neighborhoods and proposed years
 
-Passing units: 2657 in 692 buildings, across 221 neighborhoods; 114 neighborhoods have 3+ passing places.
+Passing units: 2659 in 693 buildings, across 221 neighborhoods; 114 neighborhoods have 3+ passing places.
 
 Cluster quality (silhouette; higher is cleaner): {5: 0.141, 6: 0.145}. Using k=6.
 
@@ -108,7 +108,7 @@ Distinguishing traits (standard deviations from the average): bfloors +6.5, wate
 | New Rochelle | Westchester County |      93 |          18 |        28.9 |           101 |       2921   |      648   |                  7 |           1 |            13.9 |       844 |        26 |                1.6 |            0.7 |
 | Yonkers      | Westchester County |      76 |          19 |        37.9 |           100 |       2882.5 |      671.5 |                  2 |           1 |             5   |        75 |        25 |                3.9 |            1.5 |
 
-## Group 5: 24 neighborhoods, 582 places
+## Group 5: 24 neighborhoods, 584 places
 
 Distinguishing traits (standard deviations from the average): water_m -0.8, bars_800m -0.5, all_in_med +0.5, park_ha_800m +0.5
 
@@ -132,7 +132,7 @@ Distinguishing traits (standard deviations from the average): water_m -0.8, bars
 | Belleville                     | Essex County                        |       9 |           2 |        44.1 |         100   |       2402   |      791   |                5   |           1 |             6.6 |     450   |       nan |                2.4 |            2.9 |
 | White Plains                   | Westchester County                  |      66 |          17 |        44.5 |         115   |       3000.5 |      632   |               10   |           0 |             3.1 |     240   |        15 |                1.1 |            0.5 |
 | Hawthorne                      | Passaic County                      |       3 |           1 |        46.4 |         122   |       3002   |      815   |                3   |           0 |             9.3 |     237   |       nan |                0.1 |            0.6 |
-| Harrison                       | Hudson County                       |      42 |          10 |        46.9 |          77   |       2755.5 |      612   |                9   |           1 |             2.4 |     182   |       nan |                2.1 |            1.1 |
+| Harrison                       | Hudson County                       |      44 |          11 |        46.9 |          77   |       2746.5 |      603   |               10   |           1 |             2.4 |     180   |       nan |                2.1 |            1.1 |
 | Elizabeth                      | Union County                        |      13 |           1 |        50.4 |         116   |       2766   |      772   |                0   |           0 |            34.2 |      16   |       nan |                3.4 |            4.8 |
 | Wayne                          | Passaic County                      |       4 |           2 |        54.5 |         107   |       2712   |      600   |                8   |           1 |             3.6 |     180   |       nan |                1   |            0.5 |
 | South Orange                   | Essex County                        |      10 |           1 |        57.3 |         107   |       2862.5 |      669   |               16   |           0 |             3.1 |    2676   |       nan |                1   |            1.2 |

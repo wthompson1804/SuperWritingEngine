@@ -126,8 +126,27 @@ def flat(r):
     }
 
 
+def borrow_coordinates(L):
+    """A gate-passing listing whose own page gave no coordinates (Vermella Harrison's own-site rows) takes the
+    coordinates another listing of the same building gives: same building name and ZIP, a real source coordinate.
+    Without one the listing still cannot be placed and stays out; the count is printed."""
+    need = L[(L.gate_status == "pass") & (L.lat == "")]
+    have = L[(L.lat != "") & (L.building_name != "")]
+    key = lambda d: d.building_name.str.lower().str.strip() + "|" + d.zip.str.extract(r"(\d{5})", expand=False).fillna("")
+    first = have.assign(k=key(have)).drop_duplicates("k").set_index("k")
+    n = 0
+    for i, k in zip(need.index, key(need)):
+        if k in first.index and not k.startswith("|"):
+            L.at[i, "lat"], L.at[i, "lon"] = first.at[k, "lat"], first.at[k, "lon"]
+            L.at[i, "notes"] = (str(L.at[i, "notes"]) + f" | coordinates taken from another listing of the same building ({first.at[k, 'listing_id']})").strip(" |")
+            n += 1
+    print(f"gate-passing listings with no coordinates: {len(need)}; placed from another listing of the same building: {n}")
+    return L
+
+
 def main():
     L = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False)
+    L = borrow_coordinates(L)
     P = L[(L.gate_status == "pass") & (L.lat != "")].copy()
     # one coordinate per building: the listing's own point is kept in lat_listing / lon_listing
     P["zip5"] = P.zip5.map(lambda z: z.zfill(5) if z.isdigit() else z)
