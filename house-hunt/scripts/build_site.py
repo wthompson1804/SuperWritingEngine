@@ -1,9 +1,10 @@
-"""Build the single-file page: site/dist/index.html = site/index.html with site/data.json inlined.
+"""Build the single-file page: site/dist/index.html = site/index.html with site/data.json and site/map_base.json inlined.
 
 site/index.html reads `window.HOUSE_HUNT_DATA` when it exists and otherwise fetches data.json from its own folder.
 This script fills the `<!--HOUSE_HUNT_DATA_SLOT-->` marker with a script tag that sets that variable, so the built
-file opens straight from disk or from any static host with no second request. Idempotent: rerun after
-build_page_data.py.
+file opens straight from disk or from any static host with no second request. A second marker,
+`<!--HOUSE_HUNT_MAP_BASE_SLOT-->`, is filled the same way with `window.HOUSE_HUNT_MAP_BASE` (the map's land and
+borough outlines, built by build_map_base.py). Idempotent: rerun after build_page_data.py.
 
 Usage: python3 scripts/build_site.py
 """
@@ -14,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 SLOT = "<!--HOUSE_HUNT_DATA_SLOT-->"
+MAP_SLOT = "<!--HOUSE_HUNT_MAP_BASE_SLOT-->"
 
 
 def main():
@@ -26,9 +28,18 @@ def main():
             sys.exit(f"site/data.json has no '{key}'")
     # Compact JSON is valid JavaScript once "</" (which could end the script tag) and the two line separators
     # that old engines reject inside string literals are escaped.
-    blob = json.dumps(data, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
-    blob = blob.replace("</", "<\\/").replace("<!--", "<\\!--").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
-    out = page.replace(SLOT, "<script>window.HOUSE_HUNT_DATA=" + blob + ";</script>")
+    def js(obj):
+        blob = json.dumps(obj, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
+        return blob.replace("</", "<\\/").replace("<!--", "<\\!--").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
+
+    out = page.replace(SLOT, "<script>window.HOUSE_HUNT_DATA=" + js(data) + ";</script>")
+    if page.count(MAP_SLOT) != 1:
+        sys.exit(f"site/index.html must contain {MAP_SLOT} exactly once (found {page.count(MAP_SLOT)})")
+    base = json.loads((SITE / "map_base.json").read_text(encoding="utf-8"))
+    for key in ("proj", "land"):
+        if key not in base:
+            sys.exit(f"site/map_base.json has no '{key}'")
+    out = out.replace(MAP_SLOT, "<script>window.HOUSE_HUNT_MAP_BASE=" + js(base) + ";</script>")
     dist = SITE / "dist"
     dist.mkdir(exist_ok=True)
     (dist / "index.html").write_text(out, encoding="utf-8")

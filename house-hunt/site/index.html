@@ -132,12 +132,6 @@ a.link{display:inline-flex;align-items:center}
 .t3 small{display:block;color:#F3DDE8;font-weight:700;font-size:13px}
 .t3 b{display:block;font-family:var(--display);font-weight:800;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums}
 .t3 span{display:block;color:#F3DDE8;font-size:14px;margin-top:2px}
-.map{background:var(--white);border:2px solid var(--line);border-radius:22px;padding:8px}
-.map svg{display:block;width:100%;height:auto;max-width:420px;margin:0 auto}
-.map text{font-family:var(--body);font-weight:800}
-.maplegend{display:flex;flex-wrap:wrap;gap:4px 6px;justify-content:center;padding:6px 4px 2px}
-.maplegend a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 10px;border-radius:999px;border:2px solid var(--line);font-size:13px;font-weight:800;text-decoration:none;background:var(--paper)}
-.maplegend i{width:14px;height:14px;border-radius:50%;border:2px solid var(--ink);flex:0 0 auto}
 .hood{display:grid;gap:7px;text-decoration:none;background:var(--white);border:2px solid var(--ink);border-radius:20px;padding:12px 14px}
 .hood .hd{display:flex;align-items:center;gap:10px}
 .hood .hd>div{min-width:0}
@@ -437,6 +431,115 @@ body.hl-tray .tray{z-index:56;box-shadow:0 0 0 5px var(--butter);pointer-events:
 .foot ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:3px}
 .foot .link{color:var(--muted)}
 .loading{padding:40px 16px;text-align:center;font-weight:800}
+
+/* ---- Experience marker: the map's shape and colour, used wherever an experience is named ---- */
+.ymk{display:inline-block;flex:0 0 auto;vertical-align:-.12em;margin-right:.3em;overflow:visible}
+h1 .ymk,h3 .ymk{vertical-align:-.04em}
+.trail .path a .ymk{vertical-align:-2px;margin-right:4px}
+.lstrip div span .ymk{margin-right:3px}
+.viewsw{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink);border-radius:999px;background:var(--white);padding:2px;margin-top:12px}
+.viewsw button{min-height:44px;border:0;border-radius:999px;background:transparent;font-family:var(--display);font-weight:800;font-size:16px;line-height:1.1;padding:4px 8px;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.viewsw button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.viewsw svg{width:18px;height:18px;flex:0 0 auto}
+.hhmap{margin-top:12px;min-width:0}
+.hhmap:empty{min-height:120px}
+/* ---- Map component (docs/MAP_COMPONENT.md), pasted from site/map_component.html ---- */
+.hhm{--hhm-ink:var(--ink,#3A1630);--hhm-muted:var(--muted,#7A5670);--hhm-line:var(--line,#F3CADA);--hhm-paper:var(--paper,#FFF4F7);--hhm-white:var(--white,#fff);
+  --hhm-water:#D7E4EA;--hhm-water-ink:#5B7C8C;--hhm-land:#FFFAF6;--hhm-coast:#C9B4BF;
+  font-family:var(--body,"Figtree","Segoe UI",system-ui,sans-serif);color:var(--hhm-ink);display:grid;gap:8px;min-width:0}
+.hhm *{box-sizing:border-box}
+.hhm button{font:inherit;color:inherit;cursor:pointer}
+.hhm :focus-visible{outline:3px solid var(--hhm-ink);outline-offset:2px;border-radius:10px}
+.hhm-seg{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--hhm-ink);border-radius:999px;background:var(--hhm-white);padding:2px}
+.hhm-seg button{min-height:44px;border:0;border-radius:999px;background:transparent;font-weight:800;font-size:14px;line-height:1.1;padding:4px 8px}
+.hhm-seg button[aria-pressed="true"]{background:var(--hhm-ink);color:#fff}
+.hhm-chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.hhm-chip{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:5px;min-height:44px;min-width:0;padding:4px 6px 4px 5px;border-radius:16px;border:2px solid var(--hhm-line);background:var(--hhm-white);font-weight:800;font-size:12.5px;line-height:1.15;text-align:left}
+.hhm-chip svg{flex:0 0 auto;width:18px;height:18px;overflow:visible}
+.hhm-chip small{font-weight:700;font-size:12px;color:var(--hhm-muted)}
+.hhm-chip[aria-pressed="true"]{border-color:var(--hhm-ink);background:var(--hhm-ink);color:#fff}
+.hhm-chip[aria-pressed="true"] small{color:#F3DDE8}
+.hhm-chip[aria-pressed="true"] svg path{stroke:#fff}
+.hhm-chips.has-on .hhm-chip[aria-pressed="false"]{opacity:.62}
+.hhm-stage{position:relative;border:2px solid var(--hhm-line);border-radius:22px;overflow:hidden;background:var(--hhm-water)}
+.hhm-svg{display:block;width:100%;touch-action:pan-y;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;cursor:grab}
+.hhm-svg.zoomed{touch-action:none}
+.hhm-svg.dragging{cursor:grabbing}
+.hhm-svg.over-dot{cursor:pointer}
+.hhm-svg:focus{outline:0}
+.hhm-land{fill:var(--hhm-land);stroke:var(--hhm-coast);stroke-width:1;stroke-linejoin:round}
+.hhm-boro{stroke:none}
+.hhm-cline{fill:none;stroke:#E6D6DC;stroke-width:1}
+.hhm-sline{fill:none;stroke:#B79FAB;stroke-width:1.5;stroke-dasharray:5 4}
+.hhm-geo path{vector-effect:non-scaling-stroke}
+.hhm-lab{font-weight:800;paint-order:stroke;stroke-linejoin:round;pointer-events:none}
+.hhm-lab.water{fill:var(--hhm-water-ink);stroke:none;font-style:italic;font-weight:600;font-size:11px;letter-spacing:.04em}
+.hhm-lab.state{fill:#A58E9B;stroke:var(--hhm-land);stroke-width:3px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.hhm-lab.boro{fill:#8C7483;stroke:var(--hhm-land);stroke-width:3px;font-size:11px}
+.hhm-lab.name{fill:var(--hhm-ink);stroke:#fff;stroke-width:3.5px;font-size:11.5px}
+.hhm-lab.name.sel{font-size:13px}
+.hhm-lab.home{fill:var(--hhm-ink);stroke:#fff;stroke-width:4px;font-size:13px}
+.hhm-dot{cursor:pointer;outline:0;transition:opacity .18s}
+.hhm-dot .m{stroke:#fff;stroke-width:1.5;stroke-linejoin:round}
+.hhm-dot.none .m{fill:#fff!important;stroke-width:2.2}
+.hhm.mode-drive .hhm-dot .m{stroke:var(--hhm-ink);stroke-width:1.1}
+.hhm.mode-drive .hhm-dot.none .m{stroke-dasharray:2.5 2}
+.hhm-dot.dim{opacity:.16}
+.hhm-dot.sel .m{stroke:var(--hhm-ink);stroke-width:2.6}
+.hhm-ring{fill:none;stroke:var(--hhm-ink);stroke-width:3;pointer-events:none}
+.hhm-ring.w{stroke:#fff;stroke-width:6}
+.hhm-zoom{position:absolute;top:8px;right:8px;display:grid;gap:6px}
+.hhm-zoom button{width:44px;height:44px;border-radius:14px;border:2px solid var(--hhm-ink);background:var(--hhm-white);font-weight:800;font-size:22px;line-height:1;display:grid;place-items:center;padding:0}
+.hhm-zoom button[disabled]{opacity:.4;cursor:default}
+.hhm-reset{position:absolute;left:8px;top:8px;min-height:44px;padding:0 14px;border-radius:999px;border:2px solid var(--hhm-ink);background:var(--hhm-ink);color:#fff!important;font-weight:800;font-size:14px}
+.hhm-reset[hidden]{display:none}
+.hhm-regions{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;font-weight:800}
+.hhm-regions span{color:var(--hhm-muted)}
+.hhm-regions button{min-height:44px;padding:0 12px;border-radius:999px;border:2px solid var(--hhm-line);background:var(--hhm-paper);font-weight:800;font-size:13px}
+.hhm-legend{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;font-size:13px;font-weight:700;color:var(--hhm-muted)}
+.hhm-legend b{color:var(--hhm-ink);font-weight:800}
+.hhm-legend .k{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.hhm-legend i{width:14px;height:14px;border-radius:50%;border:1.2px solid var(--hhm-ink);flex:0 0 auto;display:inline-block}
+.hhm-legend svg{width:30px;height:22px;flex:0 0 auto;overflow:visible}
+.hhm-hint{font-size:13px;font-weight:700;color:var(--hhm-muted);margin:0}
+.hhm-card{position:relative;background:var(--hhm-white);border:2px solid var(--hhm-ink);border-radius:22px;padding:12px 14px 14px;min-height:64px}
+.hhm-card.empty{border-color:var(--hhm-line);border-style:dashed;display:grid;align-items:center}
+.hhm-card h3{font-family:var(--display,"Bricolage Grotesque",system-ui,sans-serif);font-weight:800;font-size:22px;line-height:1.1;margin:2px 52px 0 0}
+.hhm-card h3 span{font-family:var(--body,system-ui,sans-serif);font-size:13px;font-weight:800;color:var(--hhm-muted);margin-left:4px}
+.hhm-yr{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:800;margin:0 52px 0 0}
+.hhm-yr svg{width:16px;height:16px;flex:0 0 auto;overflow:visible}
+.hhm-x{position:absolute;top:6px;right:6px;width:44px;height:44px;border:0;background:transparent;font-size:24px;font-weight:800;line-height:1;border-radius:50%}
+.hhm-facts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:10px 0 0;padding:0;list-style:none}
+.hhm-facts li{background:var(--hhm-paper);border-radius:14px;padding:8px 10px;min-width:0}
+.hhm-facts b{display:block;font-family:var(--display,system-ui,sans-serif);font-weight:800;font-size:19px;line-height:1.1;font-variant-numeric:tabular-nums}
+.hhm-facts b.words{font-size:14px;line-height:1.2}
+.hhm-facts small{display:block;font-size:12px;font-weight:700;color:var(--hhm-muted);line-height:1.25;margin-top:2px}
+.hhm-crime{margin:10px 0 0;display:grid;gap:8px}
+.hhm-crime p{margin:0;font-size:13px;font-weight:700;display:flex;justify-content:space-between;gap:8px}
+.hhm-crime p b{font-weight:800;font-variant-numeric:tabular-nums}
+.hhm-crime p span{color:var(--hhm-muted);white-space:nowrap}
+.hhm-bar{position:relative;height:10px;border-radius:5px;background:#F1E4EA;margin-top:3px}
+.hhm-bar u{position:absolute;left:0;top:0;bottom:0;border-radius:5px;background:var(--hhm-ink);text-decoration:none}
+.hhm-bar s{position:absolute;top:-4px;bottom:-4px;width:3px;margin-left:-1.5px;background:var(--berry-deep,#C12C62);border-radius:2px;text-decoration:none}
+.hhm-none{font-size:13px;font-weight:700;color:var(--hhm-muted);margin:10px 0 0}
+.hhm-go{margin-top:12px;width:100%;min-height:48px;border-radius:999px;border:2px solid var(--hhm-ink);background:var(--berry-deep,#C12C62);color:#fff!important;font-family:var(--display,system-ui,sans-serif);font-weight:800;font-size:17px}
+.hhm-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+/* page: chips say "Walk-Everywhere" on a phone and the whole name where there is room; rank pill on the card */
+.hhm .hhm-chip{grid-template-columns:18px minmax(0,1fr);grid-template-rows:auto auto;column-gap:4px;row-gap:0;padding:4px 4px;font-weight:800;font-size:clamp(11px,3.1vw,12.5px);line-height:1.15}
+.hhm-chip svg{grid-column:1;grid-row:1;align-self:end}
+.hhm-chip>span{grid-column:2;grid-row:1/3;min-width:0}
+.hhm .hhm-chip small{grid-column:1;grid-row:2;align-self:start;text-align:center;font-size:11px;line-height:1.1}
+.hhm-chip .hhm-full{display:none}
+.hhm .hhm-reset{font-weight:800;font-size:14px}
+.hhm .hhm-x{font-size:24px;font-weight:800;line-height:1}
+.hhm .hhm-go{font-family:var(--display,system-ui,sans-serif);font-weight:800;font-size:17px}
+.hhm-rank{margin-left:auto;flex:0 0 auto;font-size:12.5px;font-weight:800;border:2px solid var(--hhm-ink);border-radius:999px;padding:2px 9px;white-space:nowrap;background:var(--hhm-white)}
+.hhm-rank.top{background:var(--butter,#FFD86B)}
+.hhm-yr>span:first-of-type{min-width:0}
+@media (max-width:359px){.hhm-chips{grid-template-columns:1fr 1fr}}
+@media (min-width:520px){.hhm .hhm-chip{padding:4px 8px;column-gap:6px;font-size:12.5px}.hhm-chip .hhm-full{display:inline}.hhm-chip .hhm-short{display:none}}
+@media (max-width:359px){.hhm-facts{grid-template-columns:1fr 1fr}.hhm-facts li:first-child{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){.hhm-dot{transition:none}}
 </style>
 </head>
 <body>
@@ -472,6 +575,371 @@ body.hl-tray .tray{z-index:56;box-shadow:0 0 0 5px var(--butter);pointer-events:
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!--HOUSE_HUNT_DATA_SLOT-->
+<!--HOUSE_HUNT_MAP_BASE_SLOT-->
+<script>
+/* ===== Map component, from site/map_component.html (docs/MAP_COMPONENT.md). Lines marked "page:" differ from the prototype. ===== */
+/* initHouseHuntMap(container, data, base, {onSelectHood, year})
+   container: an empty element. data: site/data.json (or the page's own copy). base: site/map_base.json.
+   Options: onSelectHood(id) is called by "See places"; year is a year id to start filtered on (null = all).
+   Also: mode ("year" | "drive"), anchorLabel, groupWord (default "experience": the word for a year in the interface), yearStyle {yearId:{color,shape}}, onYearChange(idOrNull).
+   Returns {setYear, setMode, select, zoomTo, reset, destroy}. No dependencies. */
+function initHouseHuntMap(container,data,base,opts){
+  "use strict";
+  opts=opts||{};
+  var NS="http://www.w3.org/2000/svg",P=base.proj,BW=P.width,BH=P.height;
+  /* Six year styles, in the order of data.years. Colours pass an all-pairs colour-blind check (worst pair
+     delta-E 10) and 3:1 against the land; each year also has its own shape, so hue is never the only cue. */
+  var STYLES=[{color:"#4192C8",shape:"diamond"},{color:"#AA0E0E",shape:"square"},{color:"#F04288",shape:"down"},
+              {color:"#AA42F0",shape:"plus"},{color:"#324BAE",shape:"circle"},{color:"#AA8B0E",shape:"up"}];
+  var BANDS=[{max:30,label:"30 min or less",color:"#FBE3EC"},{max:60,label:"31 to 60",color:"#EE9BBB"},
+             {max:90,label:"61 to 90",color:"#BE4279"},{max:120,label:"91 to 120",color:"#5E1740"}];
+  var OVER={label:"Over 120",color:"#1E0A18"};
+  var REGIONS={all:null,nyc:{w:-74.27,e:-73.69,s:40.49,n:40.92},hudson:{w:-74.125,e:-73.93,s:40.665,n:40.835}};
+  var MAXK=16,TAP_R=22,reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var uid="hhm"+Math.random().toString(36).slice(2,8);
+
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function el(n,a,parent){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(parent)parent.appendChild(e);return e}
+  function bx(lon){return (lon-P.west)*P.kx*P.scale}
+  function by(lat){return (P.north-lat)*P.scale}
+  function f1(v){return (Math.round(v*10)/10).toString()}
+  function shapeD(shape,r){
+    var a,b;
+    if(shape==="square"){a=r*0.89;return "M"+f1(-a)+" "+f1(-a)+"H"+f1(a)+"V"+f1(a)+"H"+f1(-a)+"z"}
+    if(shape==="diamond"){a=r*1.28;return "M0 "+f1(-a)+"L"+f1(a)+" 0L0 "+f1(a)+"L"+f1(-a)+" 0z"}
+    if(shape==="up"){a=r*1.38;b=a*0.866;return "M0 "+f1(-a)+"L"+f1(b)+" "+f1(a*0.6)+"H"+f1(-b)+"z"}
+    if(shape==="down"){a=r*1.38;b=a*0.866;return "M0 "+f1(a)+"L"+f1(b)+" "+f1(-a*0.6)+"H"+f1(-b)+"z"}
+    if(shape==="plus"){a=r*1.18;b=r*0.44;return "M"+f1(-b)+" "+f1(-a)+"H"+f1(b)+"V"+f1(-b)+"H"+f1(a)+"V"+f1(b)+"H"+f1(b)+"V"+f1(a)+"H"+f1(-b)+"V"+f1(b)+"H"+f1(-a)+"V"+f1(-b)+"H"+f1(-b)+"z"}
+    return "M"+f1(-r)+" 0a"+f1(r)+" "+f1(r)+" 0 1 0 "+f1(2*r)+" 0a"+f1(r)+" "+f1(r)+" 0 1 0 "+f1(-2*r)+" 0z";
+  }
+  function swatch(st,fill){return '<svg viewBox="-9 -9 18 18" aria-hidden="true"><path d="'+shapeD(st.shape,6)+'" fill="'+(fill||st.color)+'" stroke="#fff" stroke-width="1.2"/></svg>'}
+  function money(v){return "$"+(Math.round(v*100)%100===0?Math.round(v).toString():v.toFixed(2))}
+  function bandOf(min){if(min==null||isNaN(min))return -1;var m=Math.round(min);for(var i=0;i<BANDS.length;i++)if(m<=BANDS[i].max)return i;return BANDS.length}
+  function bandColor(i){return i<0?"#fff":i>=BANDS.length?OVER.color:BANDS[i].color}
+
+  /* ---------- data ---------- */
+  var anchor=(data.meta&&data.meta.anchor)||{lat:40.699608,lon:-73.80853};
+  var yard=(data.meta&&data.meta.jamaica_yardstick)||{};
+  var anchorLabel=opts.anchorLabel||"Mom and Dad",word=opts.groupWord||"experience"; /* the page calls a year an "experience" */
+  var years=(data.years||[]).map(function(y,i){var o=(opts.yearStyle&&opts.yearStyle[y.id])||{},s=STYLES[i%STYLES.length];
+    var L=(opts.yearLabels&&opts.yearLabels[y.id])||{},lab=L.label||y.display_label||y.label||y.id; /* page: label hook, {yearId:{label,short}} */
+    return {id:y.id,label:lab,short:L.short||lab,color:o.color||s.color,shape:o.shape||s.shape,n:0}});
+  var Y_BY={};years.forEach(function(y){Y_BY[y.id]=y});
+  var OTHER={id:"",label:"",color:"#7A5670",shape:"circle",n:0};
+  var dots=[];
+  (data.neighborhoods||[]).forEach(function(h){
+    var lat=h.lat!=null?h.lat:h.clat,lon=h.lon!=null?h.lon:h.clon;if(lat==null||lon==null)return;
+    var n=(h.counts&&h.counts.shown)||0,y=Y_BY[h.year]||OTHER;y.n++;
+    dots.push({h:h,id:h.id,y:y,n:n,r:n?Math.min(4.6+1.75*Math.sqrt(n-1),11):4.2,bx:bx(lon),by:by(lat),ox:0,oy:0,band:bandOf(h.drive_min),sx:0,sy:0,dim:false})});
+  /* Neighborhoods that share one coordinate are fanned out a few pixels so each can be tapped. */
+  var same={};dots.forEach(function(d){var k=Math.round(d.bx)+","+Math.round(d.by);(same[k]=same[k]||[]).push(d)});
+  Object.keys(same).forEach(function(k){var g=same[k];if(g.length<2)return;g.forEach(function(d,i){var a=2*Math.PI*i/g.length;d.ox=Math.cos(a)*9;d.oy=Math.sin(a)*9})});
+  dots.sort(function(a,b){return b.r-a.r||a.by-b.by});
+  var AX=bx(anchor.lon),AY=by(anchor.lat);
+  var state={k:1,cx:BW/2,cy:BH/2,year:opts.year&&Y_BY[opts.year]?opts.year:null,mode:opts.mode==="drive"?"drive":"year",sel:null,focus:null,W:0,H:0,s0:1};
+  var hasOver=dots.some(function(d){return d.band>=BANDS.length}),hasUnk=dots.some(function(d){return d.band<0});
+
+  /* ---------- markup ---------- */
+  container.innerHTML=
+    '<div class="hhm mode-'+state.mode+'">'+
+    '<div class="hhm-seg" role="group" aria-label="Colour the marks by">'+
+      '<button type="button" data-mode="year">Colour by '+esc(word)+'</button><button type="button" data-mode="drive">Colour by drive time</button></div>'+
+    '<div class="hhm-chips" role="group" aria-label="Show one '+esc(word)+'">'+
+      years.map(function(y){return '<button type="button" class="hhm-chip" data-year="'+esc(y.id)+'" aria-pressed="false">'+swatch(y)+'<span><span class="hhm-full">'+esc(y.label)+'</span><span class="hhm-short">'+esc(y.short)+'</span></span><small aria-label="'+y.n+' neighborhoods">'+y.n+'</small></button>'}).join("")+'</div>'+
+    '<div class="hhm-stage">'+
+      '<svg class="hhm-svg" tabindex="-1" focusable="false" role="group" aria-label="Map: '+dots.length+' neighborhoods around '+esc(anchorLabel)+' in Jamaica, Queens. Arrow keys move between marks, Enter opens one, plus and minus zoom."></svg>'+
+      '<button type="button" class="hhm-reset" hidden>Whole map</button>'+
+      '<div class="hhm-zoom"><button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">&minus;</button></div>'+
+    '</div>'+
+    '<div class="hhm-regions"><span>Zoom to</span><button type="button" data-region="nyc">New York City</button><button type="button" data-region="hudson">Hudson waterfront</button></div>'+
+    '<div class="hhm-legend"></div>'+
+    '<p class="hhm-hint">Tap a mark to open it. Tap a crowded spot to zoom in. Drive times are without traffic.</p>'+
+    '<div class="hhm-card empty" role="region" aria-label="Selected neighborhood" aria-live="polite"></div>'+
+    '</div>';
+  var root=container.firstChild,svg=root.querySelector(".hhm-svg"),stage=root.querySelector(".hhm-stage"),card=root.querySelector(".hhm-card"),
+      legend=root.querySelector(".hhm-legend"),chips=root.querySelector(".hhm-chips"),resetBtn=root.querySelector(".hhm-reset"),
+      zin=root.querySelector('[data-z="in"]'),zout=root.querySelector('[data-z="out"]');
+
+  var gGeo=el("g",{"class":"hhm-geo"},svg);
+  el("path",{"class":"hhm-land",d:base.land,"fill-rule":"evenodd"},gGeo);
+  var BORO_TINT={"36005":"#FBE3EA","36047":"#F8F0D6","36061":"#FDE6D2","36081":"#ECE8F8","36085":"#E6F1EA"},BORO_ALT=["#FBE3EA","#F8F0D6","#FDE6D2","#ECE8F8","#E6F1EA"];
+  (base.boroughs||[]).forEach(function(b,i){el("path",{"class":"hhm-boro",d:b.d,"fill-rule":"evenodd",fill:BORO_TINT[b.id]||BORO_ALT[i%5]},gGeo)});
+  (base.boroughs||[]).forEach(function(b){el("path",{d:b.d,"fill-rule":"evenodd",fill:"none",stroke:"#D9C3CD","stroke-width":1},gGeo)});
+  (base.county_lines||[]).forEach(function(d){el("path",{"class":"hhm-cline",d:d},gGeo)});
+  (base.state_lines||[]).forEach(function(d){el("path",{"class":"hhm-sline",d:d},gGeo)});
+  var gLab=el("g",{"aria-hidden":"true"},svg);
+  var baseLabs=(base.labels||[]).map(function(l){var t=el("text",{"class":"hhm-lab "+l.kind,"text-anchor":"middle"},gLab);t.textContent=l.t;return {l:l,t:t}});
+  var gDots=el("g",{},svg),gHome=el("g",{"aria-hidden":"true","pointer-events":"none"},svg),gNames=el("g",{"aria-hidden":"true"},svg);
+  var ringW=el("circle",{"class":"hhm-ring w",r:0,visibility:"hidden"},gDots),ring=el("circle",{"class":"hhm-ring",r:0,visibility:"hidden"},gDots);
+  dots.forEach(function(d,i){
+    d.i=i;
+    var h=d.h,dm=h.drive_min!=null?Math.round(h.drive_min)+" minutes by car":"drive time not known";
+    d.g=el("g",{"class":"hhm-dot"+(d.n?"":" none"),role:"button",tabindex:"-1","data-i":i,
+      "aria-label":h.name+(h.state?", "+h.state:"")+". "+(d.y.label?d.y.label+". ":"")+(d.n===1?"1 place":d.n+" places")+". "+dm+"."},gDots);
+    d.m=el("path",{"class":"m",d:shapeD(d.y.shape,d.r)},d.g)});
+  gDots.appendChild(ringW);gDots.appendChild(ring);
+  /* Mom and Dad: a house on a short stem, so marks at the same spot stay visible under it. */
+  gHome.innerHTML='<path d="M0 0V-7" stroke="#3A1630" stroke-width="2.5"/><circle r="2.6" fill="#3A1630" stroke="#fff" stroke-width="1.2"/>'+
+    '<g transform="translate(-13,-31)"><path d="M2 12 13 2l11 10v13H2z" fill="#3A1630" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 13.5c-1.4-2.6-5.4-1.6-4.8 1.2.4 1.7 2.6 3.1 4.8 4.8 2.2-1.7 4.4-3.1 4.8-4.8.6-2.8-3.4-3.8-4.8-1.2z" fill="#FF9EC0"/></g>'+
+    '<path class="hhm-lead" d="M0 0" fill="none" stroke="#3A1630" stroke-width="1.5" stroke-dasharray="2 3"/><text class="hhm-lab home" x="15" y="-12">'+esc(anchorLabel)+'</text>';
+  var homeText=gHome.querySelector("text"),homeLead=gHome.querySelector(".hhm-lead"),homeBox=[0,0,0,0];
+  var selName=el("text",{"class":"hhm-lab name sel"},gNames),hovName=el("text",{"class":"hhm-lab name"},gNames),autoNames=[];
+
+  /* ---------- view ---------- */
+  function clampView(){
+    state.k=Math.max(1,Math.min(MAXK,state.k));
+    var hw=state.W/(2*state.s0*state.k),hh=state.H/(2*state.s0*state.k);
+    state.cx=hw>=BW/2?BW/2:Math.max(hw,Math.min(BW-hw,state.cx));
+    state.cy=hh>=BH/2?BH/2:Math.max(hh,Math.min(BH-hh,state.cy));
+  }
+  function sx(x){return (x-state.cx)*state.s0*state.k+state.W/2}
+  function sy(y){return (y-state.cy)*state.s0*state.k+state.H/2}
+  function layout(){
+    var W=stage.clientWidth||container.clientWidth||358;
+    var H=Math.round(Math.min(W*BH/BW,Math.max(320,(window.innerHeight||800)*0.74)));
+    state.W=W;state.H=H;state.s0=Math.min(W/BW,H/BH);
+    svg.setAttribute("viewBox","0 0 "+W+" "+H);svg.setAttribute("height",H);
+    render();
+  }
+  function render(){
+    clampView();
+    var s=state.s0*state.k,W=state.W,H=state.H;
+    gGeo.setAttribute("transform","translate("+f1(W/2-state.cx*s)+","+f1(H/2-state.cy*s)+") scale("+s.toFixed(4)+")");
+    for(var i=0;i<dots.length;i++){var d=dots[i];d.sx=sx(d.bx)+d.ox*Math.min(1,state.k/4+0.25);d.sy=sy(d.by)+d.oy*Math.min(1,state.k/4+0.25);
+      d.g.setAttribute("transform","translate("+f1(d.sx)+","+f1(d.sy)+")")}
+    var hx=sx(AX),hy=sy(AY),tw=anchorLabel.length*7.6;
+    gHome.setAttribute("transform","translate("+f1(hx)+","+f1(hy)+")");
+    if(state.k<2.5){ /* wide view: the name sits out in the open water to the south-east, tied by a dotted line */
+      var lx=Math.min(26,W-hx-tw-6),ly=Math.min(64*Math.sqrt(state.k),H-hy-8);
+      homeText.setAttribute("x",f1(lx));homeText.setAttribute("y",f1(ly));homeLead.setAttribute("d","M4 5L"+f1(lx+14)+" "+f1(ly-13));
+      homeBox=[hx+lx-2,hy+ly-13,hx+lx+tw,hy+ly+4];
+    }else{var left=hx+18+tw>W-4;homeText.setAttribute("x",left?f1(-21-tw):"17");homeText.setAttribute("y","-12");homeLead.setAttribute("d","M0 0");
+      homeBox=left?[hx-21-tw,hy-26,hx-14,hy-6]:[hx+14,hy-26,hx+16+tw,hy-6]}
+    baseLabs.forEach(function(b){var x=sx(b.l.x),y=sy(b.l.y),hw=b.l.t.length*3.9+4,on=state.k>=b.l.min_zoom&&x>hw&&x<W-hw&&y>12&&y<H-6;
+      /* a place name gives way when a mark, the house or its label would sit on it */
+      if(on){var bx0=x-hw,bx1=x+hw,by0=y-11,by1=y+4;
+        if(bx0<homeBox[2]&&bx1>homeBox[0]&&by0<homeBox[3]&&by1>homeBox[1])on=false;
+        if(on&&bx0<hx+14&&bx1>hx-14&&by0<hy+3&&by1>hy-33)on=false;
+        for(var j=0;on&&j<dots.length;j++){var q=dots[j];if(q.sx+q.r>bx0&&q.sx-q.r<bx1&&q.sy+q.r>by0&&q.sy-q.r<by1)on=false}}
+      b.t.setAttribute("visibility",on?"visible":"hidden");if(on){b.t.setAttribute("x",f1(x));b.t.setAttribute("y",f1(y))}});
+    names();marks();
+    svg.classList.toggle("zoomed",state.k>1.01);
+    resetBtn.hidden=!(state.k>1.01);zin.disabled=state.k>=MAXK-0.01;zout.disabled=state.k<=1.01;
+  }
+  function inView(d,pad){return d.sx>pad&&d.sx<state.W-pad&&d.sy>pad&&d.sy<state.H-pad}
+  function names(){
+    var i,d,boxes=[];
+    for(i=0;i<autoNames.length;i++)autoNames[i].setAttribute("visibility","hidden");
+    var hx=sx(AX),hy=sy(AY);boxes.push([hx-14,hy-34,hx+14,hy+3]);boxes.push(homeBox);boxes.push([state.W-62,0,state.W,112]);if(state.k>1.01)boxes.push([0,0,132,58]); /* the zoom and reset buttons */
+    function place(t,d,size){
+      var w=d.h.name.length*size*0.56+6,x=d.sx+d.r+5,anchorEnd=false;
+      if(x+w>state.W-4){x=d.sx-d.r-5;anchorEnd=true}
+      var x0=anchorEnd?x-w:x,box=[x0,d.sy-size*0.7,x0+w,d.sy+size*0.5];
+      t.setAttribute("x",f1(x));t.setAttribute("y",f1(d.sy+size*0.34));t.setAttribute("text-anchor",anchorEnd?"end":"start");t.textContent=d.h.name;
+      return box}
+    function hit(b){for(var j=0;j<boxes.length;j++){var c=boxes[j];if(b[0]<c[2]&&b[2]>c[0]&&b[1]<c[3]&&b[3]>c[1])return true}return false}
+    if(state.sel&&inView(state.sel,0)){boxes.push(place(selName,state.sel,13));selName.setAttribute("visibility","visible")}else selName.setAttribute("visibility","hidden");
+    if(state.k>=4.5){
+      var vis=dots.filter(function(d){return !d.dim&&d!==state.sel&&inView(d,2)});
+      vis.forEach(function(d){boxes.push([d.sx-d.r-2,d.sy-d.r-2,d.sx+d.r+2,d.sy+d.r+2])});
+      var n=0;
+      vis.sort(function(a,b){return b.n-a.n}).forEach(function(d){
+        var t=autoNames[n]||(autoNames[n]=el("text",{"class":"hhm-lab name"},gNames));
+        var self=[d.sx-d.r-2,d.sy-d.r-2,d.sx+d.r+2,d.sy+d.r+2],k=boxes.indexOf(boxes.filter(function(c){return c[0]===self[0]&&c[1]===self[1]&&c[2]===self[2]})[0]);
+        var saved=boxes[k];boxes[k]=[0,0,-1,-1];
+        var b=place(t,d,11.5);
+        if(hit(b)||b[0]<2||b[2]>state.W-2){boxes[k]=saved;return}
+        boxes[k]=saved;boxes.push(b);t.setAttribute("visibility","visible");n++});
+    }
+    hovName.setAttribute("visibility","hidden");
+  }
+  function marks(){
+    var d=state.focus;
+    if(d&&d.g.matches&&d.g.matches(":focus-visible")){[ringW,ring].forEach(function(c){c.setAttribute("cx",f1(d.sx));c.setAttribute("cy",f1(d.sy));c.setAttribute("r",f1(d.r+6));c.setAttribute("visibility","visible")})}
+    else{ring.setAttribute("visibility","hidden");ringW.setAttribute("visibility","hidden")}
+  }
+  var anim=0;
+  function go(k,cx,cy,instant){
+    cancelAnimationFrame(anim);
+    var a={k:state.k,cx:state.cx,cy:state.cy},b={k:Math.max(1,Math.min(MAXK,k)),cx:cx,cy:cy};
+    if(instant||reduce){state.k=b.k;state.cx=b.cx;state.cy=b.cy;render();return}
+    var t0=null,dur=260;
+    function step(ts){if(t0==null)t0=ts;var t=Math.min(1,(ts-t0)/dur),e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+      state.k=Math.exp(Math.log(a.k)+(Math.log(b.k)-Math.log(a.k))*e);state.cx=a.cx+(b.cx-a.cx)*e;state.cy=a.cy+(b.cy-a.cy)*e;render();
+      if(t<1)anim=requestAnimationFrame(step)}
+    anim=requestAnimationFrame(step);
+  }
+  function zoomAt(px,py,k,instant){ /* keep the map point under screen point (px,py) fixed */
+    k=Math.max(1,Math.min(MAXK,k));
+    var mx=state.cx+(px-state.W/2)/(state.s0*state.k),my=state.cy+(py-state.H/2)/(state.s0*state.k);
+    go(k,mx-(px-state.W/2)/(state.s0*k),my-(py-state.H/2)/(state.s0*k),instant);
+  }
+  function zoomTo(name){
+    var r=typeof name==="string"?REGIONS[name]:name;
+    if(!r){go(1,BW/2,BH/2);return}
+    var x0=bx(r.w),x1=bx(r.e),y0=by(r.n),y1=by(r.s);
+    go(Math.min((state.W-24)/((x1-x0)*state.s0),(state.H-24)/((y1-y0)*state.s0)),(x0+x1)/2,(y0+y1)/2);
+  }
+
+  /* ---------- state changes ---------- */
+  function paint(){
+    root.classList.toggle("mode-drive",state.mode==="drive");root.classList.toggle("mode-year",state.mode==="year");
+    [].forEach.call(root.querySelectorAll(".hhm-seg button"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-mode")===state.mode?"true":"false")});
+    [].forEach.call(chips.querySelectorAll(".hhm-chip"),function(b){var y=Y_BY[b.getAttribute("data-year")];
+      b.setAttribute("aria-pressed",state.year===y.id?"true":"false");
+      b.querySelector("path").setAttribute("fill",state.mode==="drive"?"#7A5670":y.color)});
+    chips.classList.toggle("has-on",!!state.year);
+    dots.forEach(function(d){d.dim=!!state.year&&d.y.id!==state.year;d.g.classList.toggle("dim",d.dim);d.g.classList.toggle("sel",d===state.sel);
+      d.m.setAttribute("fill",state.mode==="drive"?bandColor(d.band):d.y.color);
+      d.m.style.stroke=!d.n&&state.mode==="year"?d.y.color:"";
+      if(d.dim)d.g.setAttribute("aria-hidden","true");else d.g.removeAttribute("aria-hidden")});
+    /* dimmed marks go underneath */
+    dots.forEach(function(d){if(!d.dim)gDots.appendChild(d.g)});
+    if(state.sel)gDots.appendChild(state.sel.g);
+    gDots.appendChild(ringW);gDots.appendChild(ring);
+    var sizeKey='<span class="k"><svg viewBox="0 0 30 22" aria-hidden="true"><circle cx="6" cy="11" r="4.6" fill="#7A5670"/><circle cx="20" cy="11" r="9" fill="#7A5670"/></svg>Bigger mark, more places</span>'+
+      (dots.some(function(d){return !d.n})?'<span class="k"><svg viewBox="0 0 22 22" style="width:16px" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="#fff" stroke="#7A5670" stroke-width="2.4"'+(state.mode==="drive"?' stroke-dasharray="3 2.4"':'')+'/></svg>'+(state.mode==="drive"?'Dashed outline':'Hollow')+': no places shown</span>':'');
+    if(state.mode==="drive"){
+      var act=dots.filter(function(d){return !d.dim});
+      legend.innerHTML='<b>By car to '+esc(anchorLabel)+', minutes</b>'+BANDS.map(function(b,i){
+        return '<span class="k"><i style="background:'+b.color+'"></i>'+b.label+' ('+act.filter(function(d){return d.band===i}).length+')</span>'}).join("")+
+        (hasOver?'<span class="k"><i style="background:'+OVER.color+'"></i>'+OVER.label+'</span>':"")+
+        (hasUnk?'<span class="k"><i style="background:#fff"></i>Not known</span>':"")+sizeKey;
+    }else legend.innerHTML='<b>Shape and colour show the '+esc(word)+'.</b>'+sizeKey;
+    roving();render();
+  }
+  function roving(){
+    var cur=state.focus&&!state.focus.dim?state.focus:state.sel&&!state.sel.dim?state.sel:null;
+    if(!cur){var best=1e18;dots.forEach(function(d){if(d.dim)return;var q=(d.bx-AX)*(d.bx-AX)+(d.by-AY)*(d.by-AY);if(q<best){best=q;cur=d}})}
+    dots.forEach(function(d){d.g.setAttribute("tabindex",d===cur?"0":"-1")});
+  }
+  function setYear(id,silent){state.year=id&&Y_BY[id]&&state.year!==id?id:null;if(state.sel&&state.year&&state.sel.y.id!==state.year)select(null);paint();if(!silent&&opts.onYearChange)opts.onYearChange(state.year)}
+  function setMode(m){state.mode=m==="drive"?"drive":"year";paint()}
+  function select(d){
+    if(typeof d==="string"){var id=d;d=null;dots.forEach(function(x){if(x.id===id)d=x})}
+    state.sel=d||null;
+    if(typeof opts.onSelect==="function")opts.onSelect(state.sel?state.sel.id:null); /* page: lets the page remember the open card */
+    if(!state.sel){card.className="hhm-card empty";card.innerHTML='<p class="hhm-hint">No neighborhood selected. Tap a mark on the map.</p>';paint();return}
+    var h=d.h,y=d.y,S=h.safety||{},dm=h.drive_min,t=h.toll_round_trip;
+    var toll=t==null||isNaN(t)?'<b class="words">Tolls not fully known</b><small>round trip</small>':t===0?'<b class="words">No tolls</b><small>round trip</small>':'<b>'+money(t)+'</b><small>round-trip tolls</small>';
+    function crime(label,v,ref){
+      if(v==null||isNaN(v))return "";
+      var max=Math.max(v,ref||0)*1.25||1;
+      return '<div><p><b>'+label+': '+f1(v)+' per 1,000</b>'+(ref!=null?'<span>Jamaica '+f1(ref)+'</span>':'')+'</p>'+
+        '<div class="hhm-bar" aria-hidden="true"><u style="width:'+Math.max(1.5,v/max*100).toFixed(1)+'%"></u>'+(ref!=null?'<s style="left:'+(ref/max*100).toFixed(1)+'%"></s>':'')+'</div></div>'}
+    /* page: rank within its experience, and the count against the viewer's limits when the page passes places_all */
+    var rk=h.rank_in_experience!=null&&isFinite(+h.rank_in_experience)?Math.round(+h.rank_in_experience):null,rof=h.rank_of||0;
+    if(rk!=null&&!rof)dots.forEach(function(o){if(o.y===y&&o.h.rank_in_experience!=null)rof++});
+    var rank=rk==null?"":'<span class="hhm-rank'+(rk===1?" top":"")+'">'+(rk===1?"Top pick":"#"+rk+(rof>=rk?" of "+rof:""))+'</span>';
+    var all=h.places_all!=null?+h.places_all:d.n,lim=all!==d.n;
+    var cr=crime("Violent crime",S.violent_per_1000,yard.violent_per_1000)+crime("Property crime",S.property_per_1000,yard.property_per_1000);
+    card.className="hhm-card";
+    card.innerHTML='<button type="button" class="hhm-x" aria-label="Close">&times;</button>'+
+      (y.label||rank?'<p class="hhm-yr">'+(y.label?swatch(y)+'<span>'+esc(y.label)+'</span>':'')+rank+'</p>':'')+
+      '<h3>'+esc(h.name)+(h.state?'<span>'+esc(h.state)+'</span>':'')+'</h3>'+
+      '<ul class="hhm-facts"><li><b>'+(lim?d.n+' of '+all:d.n)+'</b><small>'+(lim?'places fit your limits':d.n===1?'place shown':'places shown')+'</small></li>'+
+      '<li>'+(dm!=null?'<b>'+Math.round(dm)+' min</b><small>by car to '+esc(anchorLabel)+'</small>':'<b class="words">Drive time not known</b>')+'</li>'+
+      '<li>'+toll+'</li></ul>'+
+      (cr?'<div class="hhm-crime">'+cr+'</div>'+(S.year?'<p class="hhm-none" style="margin-top:6px">Reported crimes per 1,000 residents, '+esc(Math.round(S.year))+'. The mark on each bar is Jamaica.</p>':''):'<p class="hhm-none">Crime rates not known yet.</p>')+
+      '<button type="button" class="hhm-go">'+(all?'See places':'See this neighborhood')+'</button>';
+    paint();
+  }
+
+  /* ---------- pointer: drag, pinch, tap ---------- */
+  var ptrs={},drag=null,moved=false,lastEmpty=0;
+  function local(e){var r=svg.getBoundingClientRect();return {x:(e.clientX-r.left)*state.W/r.width,y:(e.clientY-r.top)*state.H/r.height}}
+  function near(p,R){var out=[];dots.forEach(function(d){if(d.dim)return;var q=Math.hypot(d.sx-p.x,d.sy-p.y);if(q<=R+Math.max(0,d.r-8))out.push({d:d,q:q})});out.sort(function(a,b){return a.q-b.q});return out}
+  function tap(p){
+    var c=near(p,TAP_R);
+    if(!c.length){var now=Date.now();if(now-lastEmpty<350&&state.k<MAXK)zoomAt(p.x,p.y,state.k*2);lastEmpty=now;return}
+    var d=c[0].d,crowd=0;
+    dots.forEach(function(o){if(o!==d&&!o.dim&&Math.hypot(o.sx-d.sx,o.sy-d.sy)<13)crowd++});
+    if(crowd>=1&&state.k<MAXK-0.01&&c.length>1&&c[1].q-c[0].q<9){zoomAt(p.x,p.y,state.k*3);return}
+    select(d);
+  }
+  svg.addEventListener("pointerdown",function(e){
+    if(e.pointerType==="mouse"&&e.button!==0)return;
+    ptrs[e.pointerId]=local(e);var ids=Object.keys(ptrs);cancelAnimationFrame(anim);
+    if(ids.length===1){drag={x:ptrs[ids[0]].x,y:ptrs[ids[0]].y,cx:state.cx,cy:state.cy};moved=false}
+    else if(ids.length===2){var a=ptrs[ids[0]],b=ptrs[ids[1]];drag={pinch:true,d:Math.hypot(a.x-b.x,a.y-b.y)||1,k:state.k,mx:(a.x+b.x)/2,my:(a.y+b.y)/2,cx:state.cx,cy:state.cy};moved=true}
+    try{svg.setPointerCapture(e.pointerId)}catch(_){}
+  });
+  svg.addEventListener("pointermove",function(e){
+    var p=local(e);
+    if(!ptrs[e.pointerId]){ /* hover (mouse): name the nearest mark */
+      if(e.pointerType==="mouse"){var c=near(p,TAP_R),d=c.length?c[0].d:null;svg.classList.toggle("over-dot",!!d);
+        if(d&&d!==state.sel){hovName.textContent=d.h.name;var end=d.sx+d.r+6+d.h.name.length*6.5>state.W;hovName.setAttribute("x",f1(end?d.sx-d.r-5:d.sx+d.r+5));hovName.setAttribute("y",f1(d.sy+4));hovName.setAttribute("text-anchor",end?"end":"start");hovName.setAttribute("visibility","visible");gNames.appendChild(hovName)}
+        else hovName.setAttribute("visibility","hidden")}
+      return}
+    ptrs[e.pointerId]=p;var ids=Object.keys(ptrs);if(!drag)return;
+    if(drag.pinch&&ids.length>=2){
+      var a=ptrs[ids[0]],b=ptrs[ids[1]],dist=Math.hypot(a.x-b.x,a.y-b.y)||1,k=Math.max(1,Math.min(MAXK,drag.k*dist/drag.d)),mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+      var gx=drag.cx+(drag.mx-state.W/2)/(state.s0*drag.k),gy=drag.cy+(drag.my-state.H/2)/(state.s0*drag.k);
+      state.k=k;state.cx=gx-(mx-state.W/2)/(state.s0*k);state.cy=gy-(my-state.H/2)/(state.s0*k);render();
+    }else if(!drag.pinch){
+      var dx=p.x-drag.x,dy=p.y-drag.y;if(!moved&&Math.hypot(dx,dy)<7)return;moved=true;
+      if(state.k<=1.01)return; /* at the widest view a one-finger drag is left to the page */
+      svg.classList.add("dragging");state.cx=drag.cx-dx/(state.s0*state.k);state.cy=drag.cy-dy/(state.s0*state.k);render();
+    }
+  });
+  function up(e,cancel){
+    var had=ptrs[e.pointerId];delete ptrs[e.pointerId];svg.classList.remove("dragging");
+    var ids=Object.keys(ptrs);
+    if(ids.length===1){drag={x:ptrs[ids[0]].x,y:ptrs[ids[0]].y,cx:state.cx,cy:state.cy};moved=true;return}
+    if(ids.length===0){if(had&&!moved&&!cancel&&drag&&!drag.pinch)tap(had);drag=null}
+  }
+  svg.addEventListener("pointerup",function(e){up(e,false)});
+  svg.addEventListener("pointercancel",function(e){up(e,true)});
+  svg.addEventListener("pointerleave",function(){hovName.setAttribute("visibility","hidden");svg.classList.remove("over-dot")});
+  svg.addEventListener("wheel",function(e){ /* trackpad pinch and Ctrl/Cmd + wheel zoom; a plain wheel scrolls the page */
+    if(!(e.ctrlKey||e.metaKey))return;e.preventDefault();var p=local(e);zoomAt(p.x,p.y,state.k*Math.exp(-e.deltaY*0.01),true)},{passive:false});
+
+  /* ---------- keyboard ---------- */
+  function ensure(d){ /* bring a focused mark into view, and zoom in when it sits in a crowd */
+    var k=state.k,crowd=dots.some(function(o){return o!==d&&!o.dim&&Math.hypot(o.sx-d.sx,o.sy-d.sy)<13});
+    if(crowd&&k<8)k=Math.min(8,k*3);
+    if(k!==state.k||!inView(d,24))go(k,d.bx,d.by,true);
+  }
+  svg.addEventListener("focusin",function(e){var g=e.target.closest&&e.target.closest(".hhm-dot");if(!g)return;state.focus=dots[+g.getAttribute("data-i")];
+    if(g.matches(":focus-visible"))ensure(state.focus);roving();marks()});
+  svg.addEventListener("focusout",function(){state.focus=null;marks()});
+  svg.addEventListener("keydown",function(e){
+    var d=state.focus,key=e.key;if(!d)return;
+    var dir=key==="ArrowRight"?[1,0]:key==="ArrowLeft"?[-1,0]:key==="ArrowDown"?[0,1]:key==="ArrowUp"?[0,-1]:null;
+    if(dir){e.preventDefault();var best=null,bs=1e18;
+      dots.forEach(function(o){if(o===d||o.dim)return;var dx=o.bx-d.bx+(o.ox-d.ox)*0.01,dy=o.by-d.by+(o.oy-d.oy)*0.01,al=dx*dir[0]+dy*dir[1],pe=Math.abs(dx*dir[1])+Math.abs(dy*dir[0]);
+        if(al<=0)return;var sc=al+pe*2.2;if(pe>al*2.5)sc+=1e6;if(sc<bs){bs=sc;best=o}});
+      if(best)best.g.focus();return}
+    if(key==="Enter"||key===" "){e.preventDefault();select(d);var goB=card.querySelector(".hhm-go");if(goB)goB.focus({preventScroll:false});return} /* focus moves to See places; Escape there comes back */
+    if(key==="Escape"&&state.sel){e.preventDefault();select(null);return}
+    if(key==="+"||key==="="){e.preventDefault();go(state.k*2,d.bx,d.by);return}
+    if(key==="-"||key==="_"){e.preventDefault();go(state.k/2,d.bx,d.by);return}
+    if(key==="0"){e.preventDefault();go(1,BW/2,BH/2);return}
+    if(key==="Home"||key==="End"){e.preventDefault();var act=dots.filter(function(o){return !o.dim}).sort(function(a,b){return (a.h.drive_min||0)-(b.h.drive_min||0)});if(act.length)act[key==="Home"?0:act.length-1].g.focus()}
+  });
+
+  /* ---------- controls ---------- */
+  function onClick(e){
+    var t=e.target.closest("button");if(!t||!root.contains(t))return;
+    if(t.hasAttribute("data-mode"))setMode(t.getAttribute("data-mode"));
+    else if(t.hasAttribute("data-year"))setYear(t.getAttribute("data-year"));
+    else if(t.hasAttribute("data-region"))zoomTo(t.getAttribute("data-region"));
+    else if(t===resetBtn){go(1,BW/2,BH/2);zin.focus({preventScroll:true})}
+    else if(t.hasAttribute("data-z"))go(t.getAttribute("data-z")==="in"?state.k*2:state.k/2,state.cx,state.cy);
+    else if(t.classList.contains("hhm-x")){var s=state.sel;select(null);if(s)s.g.focus({preventScroll:true})}
+    else if(t.classList.contains("hhm-go")&&state.sel&&typeof opts.onSelectHood==="function")opts.onSelectHood(state.sel.id);
+  }
+  root.addEventListener("click",onClick);
+  card.addEventListener("keydown",function(e){if(e.key==="Escape"&&state.sel){e.preventDefault();var s=state.sel;select(null);s.g.focus()}});
+  var ro=null;
+  if(window.ResizeObserver){ro=new ResizeObserver(function(){if(Math.abs((stage.clientWidth||0)-state.W)>1)layout()});ro.observe(stage)}
+  else window.addEventListener("resize",layout);
+
+  layout();select(null);
+  return {setYear:function(id){state.year=null;setYear(id,true)},setMode:setMode,select:select,zoomTo:zoomTo,reset:function(){go(1,BW/2,BH/2)},
+    destroy:function(){if(ro)ro.disconnect();else window.removeEventListener("resize",layout);cancelAnimationFrame(anim);container.innerHTML=""}};
+}
+</script>
 <script>
 (function(){
 "use strict";
@@ -512,9 +980,22 @@ var TINT={
 var TINT_WORD={s:"Strong",m:"Mixed",y:"Your call",u:"Not known yet"};
 var NK="Not known yet";
 var KEY="lamia-house-hunt-v1";
+var IC_MAP='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z M9 4v13.5 M15 6.5V20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>',
+    IC_LIST='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h12M9 12h12M9 18h12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="4" cy="6" r="1.8" fill="currentColor"/><circle cx="4" cy="12" r="1.8" fill="currentColor"/><circle cx="4" cy="18" r="1.8" fill="currentColor"/></svg>';
 /* Safety limit steps: violent crime relative to Jamaica (unit.moments.night.violent_vs_jamaica). */
 var SAFE_STEPS=[null,{max:1,t:"no higher than Jamaica's rate",w:"no higher than Jamaica's"},{max:0.75,t:"under 75% of Jamaica's rate",w:"under 75%"},{max:0.5,t:"under half of Jamaica's rate",w:"under half"},{max:0.25,t:"under a quarter of Jamaica's rate",w:"under a quarter"}];
-var YEAR_COLORS=["#9AD9A8","#6FA8DC","#B79CD9","#F2A2B8","#FFD86B","#C8553D"];
+var YEAR_COLORS=["#9AD9A8","#6FA8DC","#B79CD9","#F2A2B8","#FFD86B","#C8553D"]; /* pastel fills for the drawings only */
+/* One identity per experience, in the order of years[]: the map's six colours and shapes (they separate under colour-blind
+   simulation; the pastels above do not as small marks). Passed to the map as yearStyle, and drawn by ymark() everywhere else. */
+var YEAR_MARKS=[{color:"#4192C8",shape:"diamond"},{color:"#AA0E0E",shape:"square"},{color:"#F04288",shape:"down"},{color:"#AA42F0",shape:"plus"},{color:"#324BAE",shape:"circle"},{color:"#AA8B0E",shape:"up"}];
+function markPath(shape,r){var a,b,f=function(v){return (Math.round(v*10)/10).toString()}; /* same outlines as shapeD() in the map component */
+  if(shape==="square"){a=r*0.89;return "M"+f(-a)+" "+f(-a)+"H"+f(a)+"V"+f(a)+"H"+f(-a)+"z"}
+  if(shape==="diamond"){a=r*1.28;return "M0 "+f(-a)+"L"+f(a)+" 0L0 "+f(a)+"L"+f(-a)+" 0z"}
+  if(shape==="up"){a=r*1.38;b=a*0.866;return "M0 "+f(-a)+"L"+f(b)+" "+f(a*0.6)+"H"+f(-b)+"z"}
+  if(shape==="down"){a=r*1.38;b=a*0.866;return "M0 "+f(a)+"L"+f(b)+" "+f(-a*0.6)+"H"+f(-b)+"z"}
+  if(shape==="plus"){a=r*1.18;b=r*0.44;return "M"+f(-b)+" "+f(-a)+"H"+f(b)+"V"+f(-b)+"H"+f(a)+"V"+f(b)+"H"+f(b)+"V"+f(a)+"H"+f(-b)+"V"+f(b)+"H"+f(-a)+"V"+f(-b)+"H"+f(-b)+"z"}
+  return "M"+f(-r)+" 0a"+f(r)+" "+f(r)+" 0 1 0 "+f(2*r)+" 0a"+f(r)+" "+f(r)+" 0 1 0 "+f(-2*r)+" 0z"}
+function ymark(Y,px){if(!Y||!Y.mark)return "";px=px||16;return '<svg class="ymk" width="'+px+'" height="'+px+'" viewBox="-9 -9 18 18" aria-hidden="true" data-shape="'+Y.mark.shape+'"><path d="'+markPath(Y.mark.shape,6.4)+'" fill="'+Y.mark.color+'" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>'}
 var WALK_M_PER_MIN=80; /* 800 m is called "a 10-minute walk" throughout */
 
 /* =====================================================================================================
@@ -596,7 +1077,7 @@ HOODS.forEach(function(H){H.units=(H.unit_ids||[]).map(function(id){return U_BY[
 var WAIT_ONLY=(D.awaiting_live_check||[]).filter(function(a){AWAIT_BY[a.id]=a;return !HELD_BY[a.id]&&!U_BY[a.id]&&!A_BY[a.id]});
 WAIT_ONLY.forEach(function(a){(WAIT_BY_HOOD[a.hood_id]=WAIT_BY_HOOD[a.hood_id]||[]).push(a)});
 YEARS.forEach(function(Y,i){
-  Y_BY[Y.id]=Y;Y.color=YEAR_COLORS[i%YEAR_COLORS.length];
+  Y_BY[Y.id]=Y;Y.color=YEAR_COLORS[i%YEAR_COLORS.length];Y.mark=YEAR_MARKS[i%YEAR_MARKS.length];
   /* The data calls these "years"; the page calls them experiences. Only the shown label changes, never a key. */
   Y.label=String(Y.display_label||Y.label||Y.id).replace(/ Year$/," Experience");
   Y.short=Y.label.replace(/^The\s+/,"").replace(/\s+Experience$/,"");
@@ -609,11 +1090,6 @@ YEARS.forEach(function(Y,i){
   Y.avoidOnly.forEach(function(H,j){H.n=Y.hoods.length+j+1});
   Y.heldElsewhere=(D.held||[]).filter(function(u){return u.year===Y.id&&!H_BY[u.hood_id]});
   Y.waitElsewhere=WAIT_ONLY.filter(function(a){return a.year===Y.id&&!H_BY[a.hood_id]});
-});
-HOODS.forEach(function(H){ /* a sharper centre than the rounded hood lat/lon: the mean of its own places */
-  var pts=H.units.concat(H.avoid).filter(function(u){return u.lat!=null&&u.lon!=null});
-  if(pts.length){H.clat=pts.reduce(function(a,u){return a+u.lat},0)/pts.length;H.clon=pts.reduce(function(a,u){return a+u.lon},0)/pts.length}
-  else{H.clat=H.lat;H.clon=H.lon}
 });
 var SPEC=arr(META.queens_spectrum),SPEC_BY={};SPEC.forEach(function(s){SPEC_BY[s.measure]=s});
 /* Plain hashes: #unit-<letters, digits and hyphens>. The old form (#unit-<encoded id>) is still read. */
@@ -960,50 +1436,42 @@ function yearArt(Y){return rowArt(Y.units,Y.color,null,"Decoration for "+Y.label
 function hoodArt(H){var us=H.units.length?H.units:H.avoid,Y=Y_BY[H.year];return rowArt(us,Y?Y.color:"#F2A2B8",us[0],"Decoration for "+H.name+(us[0]?": "+parkWord(us[0]).toLowerCase()+" at the first place listed":""))}
 function unitArt(U){var g=150,Y=yearOf(U),f=floorsKnown(U);return '<svg viewBox="0 0 600 200" role="img" aria-label="Drawing, not a photo: '+esc(uName(U))+(f!=null?", "+f+" floors":", height not known yet")+", "+esc(parkWord(U).toLowerCase())+'">'+skyBits()+ground(g)+bldFor(U,70,g,f!=null&&f<=3?220:150,Y?Y.color:"#F2A2B8")+parkScene(parkKind(U),328,g)+tree(500,g)+dog(540,g+18)+'</svg>'}
 
-/* ================= Map: real latitude and longitude, drawn inline. Rings are miles in a straight line. ================= */
-function mapSvg(pts,opt){
-  var W=340,Hh=opt.h||300,pad=opt.numbered?26:18,kx=69.17*Math.cos(ANCHOR.lat*Math.PI/180),ky=69.05;
-  var P=pts.filter(function(p){return p.lat!=null&&p.lon!=null}).map(function(p){return {p:p,mx:(p.lon-ANCHOR.lon)*kx,my:(p.lat-ANCHOR.lat)*ky}});
-  var minx=0,maxx=0,miny=0,maxy=0,far=1;
-  P.forEach(function(q){minx=Math.min(minx,q.mx);maxx=Math.max(maxx,q.mx);miny=Math.min(miny,q.my);maxy=Math.max(maxy,q.my);far=Math.max(far,Math.sqrt(q.mx*q.mx+q.my*q.my))});
-  var sc=Math.min((W-2*pad)/Math.max(maxx-minx,1),(Hh-2*pad)/Math.max(maxy-miny,1),14);
-  var cxm=(minx+maxx)/2,cym=(miny+maxy)/2;
-  function X(mx){return W/2+(mx-cxm)*sc}function Y(my){return Hh/2-(my-cym)*sc}
-  var ax=X(0),ay=Y(0),steps=[1,2,5,10,25,50],step=50;
-  for(var i=0;i<steps.length;i++){if(far/steps[i]<=4.2){step=steps[i];break}}
-  var labs="",o='<svg viewBox="0 0 '+W+' '+Hh+'" role="img" aria-label="'+esc(opt.label)+'">';
-  var la=Math.atan2(Hh/2-ay,W/2-ax);if(Math.abs(W/2-ax)<8&&Math.abs(Hh/2-ay)<8)la=112*Math.PI/180;
-  for(var m=step;m<=far+step*0.99;m+=step){var r=m*sc;
-    o+='<circle cx="'+ax.toFixed(1)+'" cy="'+ay.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="none" stroke="#F3CADA" stroke-width="2" stroke-dasharray="4 5"/>';
-    var lx=ax+r*Math.cos(la+0.5),ly=ay+r*Math.sin(la+0.5);
-    if(lx>20&&lx<W-20&&ly>10&&ly<Hh-6)labs+='<text x="'+lx.toFixed(1)+'" y="'+(ly+4).toFixed(1)+'" text-anchor="middle" font-size="10" fill="#7A5670" stroke="#fff" stroke-width="4" paint-order="stroke">'+m+(m===1?" mile":" miles")+'</text>'}
-  o+='<text x="'+(W-14)+'" y="18" text-anchor="middle" font-size="11" fill="#7A5670">N</text><path d="M'+(W-14)+' 22v14m-4-10 4-5 4 5" stroke="#7A5670" stroke-width="2" fill="none" stroke-linecap="round"/>';
-  var R=opt.numbered?12:6.5;
-  P.forEach(function(q){q.tx=X(q.mx);q.ty=Y(q.my);q.x=q.tx;q.y=q.ty});
-  if(opt.numbered){ /* nudge overlapping pins apart; a thin line ties a moved pin to its true spot */
-    for(var it=0;it<60;it++){
-      for(var a=0;a<P.length;a++){
-        for(var b=a+1;b<P.length;b++){var dx=P[b].x-P[a].x,dy=P[b].y-P[a].y,d=Math.sqrt(dx*dx+dy*dy)||0.01,need=2*R+2;
-          if(d<need){var push=(need-d)/2;if(d<0.02){dx=Math.cos(a+b);dy=Math.sin(a+b);d=1}P[a].x-=dx/d*push;P[a].y-=dy/d*push;P[b].x+=dx/d*push;P[b].y+=dy/d*push}}
-        var hx=P[a].x-ax,hy=P[a].y-ay,hd=Math.sqrt(hx*hx+hy*hy)||0.01,hn=R+15;
-        if(hd<hn){if(hd<0.02){hx=1;hy=-1;hd=1.414}P[a].x=ax+hx/hd*hn;P[a].y=ay+hy/hd*hn}
-        P[a].x=Math.max(R+2,Math.min(W-R-2,P[a].x));P[a].y=Math.max(R+2,Math.min(Hh-R-2,P[a].y))}}}
-  o+='<g transform="translate('+(ax-13).toFixed(1)+','+(ay-14).toFixed(1)+')"><path d="M2 12 13 2l11 10v13H2z" fill="#3A1630"/><path d="M13 13.5c-1.4-2.6-5.4-1.6-4.8 1.2.4 1.7 2.6 3.1 4.8 4.8 2.2-1.7 4.4-3.1 4.8-4.8.6-2.8-3.4-3.8-4.8-1.2z" fill="#FF9EC0"/></g>';
-  P.forEach(function(q){var p=q.p,moved=Math.abs(q.x-q.tx)+Math.abs(q.y-q.ty)>6;
-    o+='<a href="'+esc(p.href)+'" aria-label="'+esc(p.name)+'">';
-    if(moved)o+='<line x1="'+q.tx.toFixed(1)+'" y1="'+q.ty.toFixed(1)+'" x2="'+q.x.toFixed(1)+'" y2="'+q.y.toFixed(1)+'" stroke="#3A1630" stroke-width="1.5"/><circle cx="'+q.tx.toFixed(1)+'" cy="'+q.ty.toFixed(1)+'" r="2.5" fill="#3A1630"/>';
-    if(p.hi)o+='<circle cx="'+q.x.toFixed(1)+'" cy="'+q.y.toFixed(1)+'" r="'+(R+5)+'" fill="none" stroke="#E0457B" stroke-width="3"/>';
-    o+='<circle cx="'+q.x.toFixed(1)+'" cy="'+q.y.toFixed(1)+'" r="'+R+'" fill="'+p.color+'" stroke="#3A1630" stroke-width="'+(opt.numbered?2.5:1.5)+'"'+(p.dim?' opacity=".45"':'')+'/>';
-    if(opt.numbered)o+='<text x="'+q.x.toFixed(1)+'" y="'+(q.y+4.5).toFixed(1)+'" text-anchor="middle" font-size="'+(String(p.label).length>1?11:13)+'" fill="#3A1630">'+esc(p.label)+'</text>';
-    o+='</a>'});
-  o+=labs;
-  if(opt.names){P.forEach(function(q){var right=q.x<W*0.6;o+='<text x="'+(q.x+(right?R+4:-R-4)).toFixed(1)+'" y="'+(q.y+4).toFixed(1)+'" text-anchor="'+(right?"start":"end")+'" font-size="11" fill="#3A1630" stroke="#fff" stroke-width="4" paint-order="stroke">'+esc(q.p.short||q.p.name)+'</text>'})}
-  return o+'</svg>'}
-function yearMap(Y,hi){var hs=Y.hoods.concat(Y.avoidOnly);
-  return mapSvg(hs.map(function(H){return {lat:H.clat,lon:H.clon,label:H.n,name:H.n+". "+H.name+(H.drive_min!=null?", "+r0(H.drive_min)+" minutes by car":""),short:H.name,href:href("hood",H.id),color:H.units.length?Y.color:"#fff",hi:H.id===hi}}),
-    {numbered:true,names:hs.length<=5,h:300,label:"Map of "+Y.label+": "+hs.length+" neighborhoods around Mom and Dad's, with rings marking miles in a straight line"})}
-function overviewMap(){var pts=[];YEARS.forEach(function(Y){Y.hoods.forEach(function(H){pts.push({lat:H.clat,lon:H.clon,name:H.name+", "+Y.label,href:href("hood",H.id),color:Y.color,dim:!H.units.some(fits)})})});
-  return mapSvg(pts,{numbered:false,h:330,label:"Map of all "+pts.length+" neighborhoods around Mom and Dad's, coloured by experience, with rings marking miles in a straight line"})}
+/* ================= Map: the tap-and-zoom component, one instance at a time =================
+   The view holds at most one <div id="hhmap" data-year="…">. renderView() destroys the old instance before it replaces
+   the view and mounts a new one after, when the container is on screen with a width. Marks are sized by the places
+   that fit the viewer's limits; places_all carries the full count so the card can say "2 of 5". */
+var MAPBASE=window.HOUSE_HUNT_MAP_BASE||null,MAPBASE_ASKED=false,HHMAP=null,MAPSEL={};
+var HOODVIEW="list";try{if(localStorage.getItem(KEY+"-hoodview")==="map")HOODVIEW="map"}catch(e){}
+function mapData(){
+  return {meta:META,years:YEARS.map(function(Y){return {id:Y.id,label:Y.label}}),
+    neighborhoods:HOODS.filter(function(H){return Y_BY[H.year]&&H.lat!=null&&H.lon!=null}).map(function(H){var Y=Y_BY[H.year];
+      return {id:H.id,name:H.name,state:H.state,year:H.year,lat:H.lat,lon:H.lon,counts:{shown:H.units.filter(fits).length},places_all:H.units.length,
+        drive_min:H.drive_min,toll_round_trip:H.toll_round_trip,safety:H.safety,rank_in_experience:Y.hoods.indexOf(H)>-1?H.rank_in_experience:null,rank_of:Y.hoods.length}})}}
+function unmountMap(){if(HHMAP){try{HHMAP.destroy()}catch(e){}HHMAP=null}}
+function mapFail(el){el.innerHTML='<div class="empty"><p><b>The map could not be drawn here.</b></p><p>Every neighborhood is in the lists.</p></div>'}
+function mountMap(){
+  var el=document.getElementById("hhmap");if(!el)return;
+  if(typeof initHouseHuntMap!=="function"){mapFail(el);return}
+  if(!MAPBASE){ /* the built page carries the base map; beside its files the page fetches map_base.json once */
+    if(!MAPBASE_ASKED&&window.fetch){MAPBASE_ASKED=true;
+      fetch("map_base.json").then(function(r){if(!r.ok)throw new Error(String(r.status));return r.json()}).then(function(b){MAPBASE=b;unmountMap();mountMap()}).catch(function(){var e2=document.getElementById("hhmap");if(e2)mapFail(e2)})}
+    else if(MAPBASE_ASKED&&!window.fetch)mapFail(el);
+    return}
+  if(!el.offsetWidth)return;
+  var yr=el.getAttribute("data-year")||null,route=current,keep=MAPSEL[route],styles={},labels={};
+  YEARS.forEach(function(Y){styles[Y.id]=Y.mark;labels[Y.id]={label:Y.label,short:Y.short}});
+  try{
+    HHMAP=initHouseHuntMap(el,mapData(),MAPBASE,{year:yr,groupWord:"experience",anchorLabel:"Mom and Dad",yearStyle:styles,yearLabels:labels,
+      onSelect:function(id){if(current===route)MAPSEL[route]=id},
+      onSelectHood:function(id){if(H_BY[id])go(href("hood",id))}});
+    if(yr&&Y_BY[yr]){ /* inside an experience the map opens on that experience's neighborhoods and Mom and Dad's */
+      var hs=HOODS.filter(function(H){return H.year===yr&&H.lat!=null&&H.lon!=null});
+      if(hs.length){var b={w:ANCHOR.lon,e:ANCHOR.lon,s:ANCHOR.lat,n:ANCHOR.lat};
+        hs.forEach(function(H){b.w=Math.min(b.w,H.lon);b.e=Math.max(b.e,H.lon);b.s=Math.min(b.s,H.lat);b.n=Math.max(b.n,H.lat)});
+        var px=Math.max(0.04,(b.e-b.w)*0.12),py=Math.max(0.03,(b.n-b.s)*0.12);b.w-=px;b.e+=px;b.s-=py;b.n+=py;
+        if(b.e-b.w<1.3&&b.n-b.s<1.1)HHMAP.zoomTo(b)}}
+    if(keep&&H_BY[keep])HHMAP.select(keep);
+  }catch(e){unmountMap();mapFail(el)}}
 
 /* ================= Five-point scale against staying in Queens ================= */
 var MEASURE_LABEL={all_in:"Monthly cost, all-in",sqft:"Space",drive_min:"Drive to Mom and Dad",transit_min:"Train and bus to Mom and Dad",violent_crime:"Violent crime",property_crime:"Property crime",food_and_drink_nearby:"Food and drink on foot",walk_to_green:"Walk to green space",parking:"Parking"};
@@ -1165,21 +1633,21 @@ function vLives(){
   var all=UNITS.filter(fits).length,C=META.counts||{};
   var h='<header class="title-card"><div class="logo" role="img" aria-label="Lamia\'s House Hunt"><svg viewBox="0 0 360 70" aria-hidden="true"><path d="M30 66 180 8 330 66" fill="none" stroke="#3A1630" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="262" y="16" width="20" height="34" rx="3" fill="#3A1630"/><path d="M180 30c-5-9-19-6-17 4 1 6 9 11 17 17 8-6 16-11 17-17 2-10-12-13-17-4z" fill="#E0457B"/></svg><span class="name">Lamia\'s</span><span class="show">House Hunt</span></div><p class="tagline">'+pl(UNITS.length,"place")+' to see, in '+pl(HOODS.filter(function(H){return H.units.length}).length,"neighborhood")+', across '+pl(YEARS.length,"experience")+'.</p><p class="coldopen">'+esc(gatesLine())+(META.move_in_window?' Move-in window: '+esc(String(META.move_in_window).replace(/(\d{4}-\d{2}-\d{2})/,function(d){return dayStr(d,true)}))+'.':'')+'</p></header>';
   h+='<div class="wrap"><p class="mock">A snapshot, not a live feed. Every price shows the day it was seen.</p>'+confNote(UNITS,"shown");
-  h+='<section class="sec" id="sec-experiences" style="margin-top:18px"><h2><span class="s">Pick</span>an experience</h2><p class="lead">'+pl(YEARS.length,"way")+' your first 12 months on your own could go.</p>'+tip("<b>Tap an experience</b> to step into it.")+'<div class="stack" style="margin-top:14px">';
+  h+='<section class="sec" id="sec-experiences" style="margin-top:18px"><h2><span class="s">Pick</span>an experience</h2><p class="lead">'+pl(YEARS.length,"way")+' your first 12 months on your own could go.</p>'+tip("<b>Tap an experience</b> to step into it.")+(HOODS.length?'<button type="button" class="btn sm wide" style="margin-top:10px" data-act="scrollto" data-to="sec-map">'+IC_MAP+'See them on a map ↓</button>':'')+'<div class="stack" style="margin-top:14px">';
   YEARS.forEach(function(Y){var us=Y.units,n=us.filter(fits).length,c=Y.all_in_range,m=Y.drive_min_range,none=!n;
-    h+='<a class="life'+(none?' none':'')+'" href="'+href("year",Y.id)+'"><div class="art">'+yearArt(Y)+'</div><div class="body"><p class="tag">'+pl(Y.hoods.length,"neighborhood")+' · '+pl(us.length,"place")+'</p><h3>'+esc(Y.label)+'</h3><p>'+esc(Y.subhead||"")+'</p>'+(textOf(pr(Y,"promise"))?'<p class="snag"><b>The promise:</b> '+esc(textOf(pr(Y,"promise")))+'</p>':pullList(yearFacts(Y)))+(textOf(pr(Y,"catch"))?'<p class="snag"><b>The catch:</b> '+esc(textOf(pr(Y,"catch")))+'</p>':'')+'<p class="facts">'+(c?money(c[0])+' to '+money(c[1])+' a month'+(seenRange(us)?', '+seenRange(us):''):'Prices '+NK.toLowerCase())+' · '+(m?r0(m[0])+' to '+r0(m[1])+' min drive to Mom and Dad':'drive '+NK.toLowerCase())+'</p><div class="foot"><span class="facts">'+fitText(n,us.length,"place")+'</span><span class="enter">Step in ›</span></div></div></a>'});
+    h+='<a class="life'+(none?' none':'')+'" href="'+href("year",Y.id)+'"><div class="art">'+yearArt(Y)+'</div><div class="body"><p class="tag">'+pl(Y.hoods.length,"neighborhood")+' · '+pl(us.length,"place")+'</p><h3>'+ymark(Y,24)+esc(Y.label)+'</h3><p>'+esc(Y.subhead||"")+'</p>'+(textOf(pr(Y,"promise"))?'<p class="snag"><b>The promise:</b> '+esc(textOf(pr(Y,"promise")))+'</p>':pullList(yearFacts(Y)))+(textOf(pr(Y,"catch"))?'<p class="snag"><b>The catch:</b> '+esc(textOf(pr(Y,"catch")))+'</p>':'')+'<p class="facts">'+(c?money(c[0])+' to '+money(c[1])+' a month'+(seenRange(us)?', '+seenRange(us):''):'Prices '+NK.toLowerCase())+' · '+(m?r0(m[0])+' to '+r0(m[1])+' min drive to Mom and Dad':'drive '+NK.toLowerCase())+'</p><div class="foot"><span class="facts">'+fitText(n,us.length,"place")+'</span><span class="enter">Step in ›</span></div></div></a>'});
   if(!YEARS.length)h+='<div class="empty"><p><b>Nothing to show yet.</b></p><p>The data has no experiences in it.</p></div>';
   h+='</div>'+limLine(all,UNITS.length,"places")+'</section>';
-  h+='<section class="sec"><h2><span class="s">The</span>whole map</h2><div class="map" style="margin-top:12px">'+overviewMap()+'<div class="maplegend">'+YEARS.map(function(Y){return '<a href="'+href("year",Y.id)+'"><i style="background:'+Y.color+'"></i>'+esc(Y.short)+'</a>'}).join("")+'</div><p class="mapnote">The house is Mom and Dad\'s. Each dot is a neighborhood, coloured by its experience; faded dots have nothing inside your limits. Rings are miles in a straight line, not driving time.</p></div>'+how("on the experience cards, typical figures are medians of the places shown","prices from "+SOURCES.listing,"drive times from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"crime rates from "+SOURCES.crime,"restaurant counts and walks to green space from "+SOURCES.map)+'</section>';
+  if(HOODS.length)h+='<section class="sec" id="sec-map"><h2><span class="s">The</span>whole map</h2><p class="lead">Every neighborhood around Mom and Dad\'s. Tap a mark to see what is there, then “See places”.'+(all<UNITS.length?' A hollow mark has nothing inside your limits.':'')+'</p><div class="hhmap" id="hhmap" data-year=""></div>'+how("on the experience cards, typical figures are medians of the places shown","prices from "+SOURCES.listing,"drive times from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"crime rates from "+SOURCES.crime,"restaurant counts and walks to green space from "+SOURCES.map)+'</section>';
   return h+'</div>'}
 
 function hoodCard(H,Y,pick){var k=H.units.filter(fits).length,N=H.units.length,r=H.all_in_range,none=!k,good=textOf(pr(H,"good_for_her")),watch=textOf(pr(H,"watch_for")),top=pick!=null&&pick>-1&&pick<3;
-  return '<a class="hood'+(none?' none':'')+(top?' pickc':'')+'" href="'+href("hood",H.id)+'">'+(top&&pick===0&&Y.ranked?'<span class="pick">Top pick</span>':'')+'<div class="hd"><span class="pinl" style="background:'+(N?Y.color:"#fff")+'">'+H.n+'</span><div><h4>'+esc(H.name)+'</h4><small>'+esc(hoodWhere(H))+' · '+esc(hoodDrive(H))+'</small></div></div>'+(good||watch?(good?'<p class="snag"><b>Good for you:</b> '+esc(good)+'</p>':'')+(watch?'<p class="snag"><b>Watch for:</b> '+esc(watch)+'</p>':''):pullList(hoodFacts(H)))+
+  return '<a class="hood'+(none?' none':'')+(top?' pickc':'')+'" href="'+href("hood",H.id)+'">'+(top&&pick===0&&Y.ranked?'<span class="pick">Top pick</span>':'')+'<div class="hd"><span class="pinl" style="background:'+(N?Y.color:"#fff")+'">'+H.n+'</span><div><h4>'+esc(H.name)+'</h4><small>'+ymark(Y,14)+esc(hoodWhere(H))+' · '+esc(hoodDrive(H))+'</small></div></div>'+(good||watch?(good?'<p class="snag"><b>Good for you:</b> '+esc(good)+'</p>':'')+(watch?'<p class="snag"><b>Watch for:</b> '+esc(watch)+'</p>':''):pullList(hoodFacts(H)))+
     '<div class="foot"><span class="facts">'+(N?(k===N?pl(N,"place")+(r?", from "+money(r[0])+(seenRange(H.units)?", "+seenRange(H.units):""):""):fitText(k,N,"place")):"Nothing to tour")+(H.avoid.length?" · "+H.avoid.length+" to avoid":"")+((HELD_BY_HOOD[H.id]||[]).length?" · "+HELD_BY_HOOD[H.id].length+" worth a call":"")+'</span><span class="enter">'+(N?"Tour it ›":"See why ›")+'</span></div></a>'}
 function vYear(Y){
   var us=Y.units,c=Y.all_in_range,m=Y.drive_min_range,M=Y.medians||{},nx=YEARS[YEARS.indexOf(Y)+1],hs=Y.hoods;
   var h='<div class="wrap">';
-  h+='<section class="sec" style="margin-top:14px"><div class="hero"><div class="art">'+yearArt(Y)+'</div><div class="body"><p class="kicker">Step into</p><h1>'+esc(Y.label)+'</h1><p>'+esc(Y.subhead||"")+'</p>'+(hs.length?'<button type="button" class="btn main wide" data-act="scrollto" data-to="sec-hoods">Meet its '+pl(hs.length,"neighborhood")+' ↓</button>':'')+'</div></div></section>';
+  h+='<section class="sec" style="margin-top:14px"><div class="hero"><div class="art">'+yearArt(Y)+'</div><div class="body"><p class="kicker">Step into</p><h1>'+ymark(Y,26)+esc(Y.label)+'</h1><p>'+esc(Y.subhead||"")+'</p>'+(hs.length?'<button type="button" class="btn main wide" data-act="scrollto" data-to="sec-hoods">Meet its '+pl(hs.length,"neighborhood")+' ↓</button>':'')+'</div></div></section>';
   var scenes=slotText(pr(Y,"scene")||Y.scenes),promise=slotText(pr(Y,"promise")),katch=slotText(pr(Y,"catch")),yf=yearFacts(Y),hIntro=hostBox(hostOfRec(Y,"intro"),null,false,"host-intro"),hWalk=hostBox(hostOfRec(Y,"walkthrough"),null,false,"host-walk");
   if(hIntro)h+='<section class="sec">'+hIntro+'</section>';
   h+='<section class="sec" id="sec-scene"><h2><span class="s">A day</span>in this experience</h2>'+(scenes?'<div style="margin-top:8px">'+scenes+'</div>':'')+(hWalk?'<div style="margin-top:12px">'+hWalk+'</div>':'')+
@@ -1189,10 +1657,15 @@ function vYear(Y){
     '<div class="t3"><small>Safety</small><b>'+(M.violent_per_1000!=null?M.violent_per_1000+' per 1,000':NK)+'</b><span>violent crimes per 1,000 residents a year, typically'+(JAM.violent_per_1000!=null?'; '+JAM.violent_per_1000+' around Mom and Dad\'s':'')+'</span></div></div>'+how("prices from "+SOURCES.listing,"drive times from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"crime rates from "+SOURCES.crime,"restaurant counts and walks to green space from "+SOURCES.map)+'</section>';
   if(SPEC.length&&Y.vs_queens&&SPEC.some(function(s){return Y.vs_queens[s.measure]!=null})){h+='<section class="sec"><h2><span class="s">Against</span>staying in Queens</h2><p class="scalekey">'+pips(3)+'<span>The middle mark is a typical Queens place. Left is worse for you, right is better. Tap a line to see how it was reached.</span></p><div class="ylist">'+SPEC.map(function(s){var p=Y.vs_queens[s.measure],dk=YEAR_DIFF_KEY[s.measure],d=dk&&Y.vs_queens_diff?Y.vs_queens_diff[dk]:null;p=p==null?null:Math.round(p);
       return pointBtn("year",Y.id,s.measure,p,d==null?(p===3?"same":"difference not in the data"):fmtDiff(s.measure,d),true)}).join("")+'</div></section>'}
-  h+='<section class="sec" id="sec-hoods"><h2><span class="s">Tour</span>a neighborhood</h2>'+(hs.length?'<p class="lead">'+pl(hs.length,"neighborhood")+(Y.ranked?', the top three first.':', nearest to Mom and Dad first.')+(hs.length>3?' The first three are shown; the rest open below.':'')+'</p>'+tip("<b>Tap a neighborhood</b> to tour it.")+'<div class="map" style="margin-top:12px">'+yearMap(Y,null)+'<p class="mapnote">The house is Mom and Dad\'s. Numbers match the list below'+(hs.length>3?', with every neighborhood on the map':'')+'. Rings are miles in a straight line, not driving time.</p></div>'+confNote(us,"in this experience")+limLine(us.filter(fits).length,us.length,"places in this experience"):'<div class="empty" style="margin-top:12px"><p><b>Nothing to tour in this experience yet.</b></p><p>No neighborhood in it has a place that passed every check.</p><a class="btn main" href="#lives">Back to the experiences</a></div>')+'<div class="stack tight">';
-  var nH=nShown("y:"+Y.id,hs.length);
-  hs.slice(0,nH).forEach(function(H,i){h+=(i===3?'<p class="listhd">More neighborhoods</p>':'')+hoodCard(H,Y,i)});
-  h+='</div>'+moreCtl("y:"+Y.id,nH,hs.length,6,"neighborhoods")+'</section>';
+  h+='<section class="sec" id="sec-hoods"><h2><span class="s">Tour</span>a neighborhood</h2>'+(hs.length?'<p class="lead">'+pl(hs.length,"neighborhood")+(Y.ranked?', the top three first.':', nearest to Mom and Dad first.')+(hs.length>3?' The first three are shown; the rest open below.':'')+'</p>'+confNote(us,"in this experience")+limLine(us.filter(fits).length,us.length,"places in this experience"):'<div class="empty" style="margin-top:12px"><p><b>Nothing to tour in this experience yet.</b></p><p>No neighborhood in it has a place that passed every check.</p><a class="btn main" href="#lives">Back to the experiences</a></div>');
+  var asMap=HOODVIEW==="map"&&hs.length>0;
+  if(hs.length)h+='<div class="viewsw" role="group" aria-label="Show the neighborhoods as a list or on a map"><button type="button" data-act="hoodview" data-v="list" aria-pressed="'+(!asMap)+'">'+IC_LIST+'List</button><button type="button" data-act="hoodview" data-v="map" aria-pressed="'+asMap+'">'+IC_MAP+'Map</button></div>';
+  if(asMap)h+='<div class="hhmap" id="hhmap" data-year="'+esc(Y.id)+'"></div><p class="mapnote">'+(hs.length===1?'Its one neighborhood is':'All '+hs.length+' of its neighborhoods are')+' on the map in full colour; the other experiences are faint. Switch to List for '+(Y.ranked?'the ranked order':'the list')+'.</p>';
+  else{h+=(hs.length?tip("<b>Tap a neighborhood</b> to tour it."):'')+'<div class="stack tight">';
+    var nH=nShown("y:"+Y.id,hs.length);
+    hs.slice(0,nH).forEach(function(H,i){h+=(i===3?'<p class="listhd">More neighborhoods</p>':'')+hoodCard(H,Y,i)});
+    h+='</div>'+moreCtl("y:"+Y.id,nH,hs.length,6,"neighborhoods")}
+  h+='</section>';
   if(Y.avoidOnly.length){h+='<section class="sec"><h2><span class="s">Only</span>warnings here</h2><p class="lead">Nothing to tour in these, but each has a place that looks good and should be avoided.</p><div class="stack tight" style="margin-top:12px">'+Y.avoidOnly.map(function(H){return hoodCard(H,Y)}).join("")+'</div></section>'}
   if(Y.heldElsewhere.length){h+='<section class="sec"><details class="fold"><summary>Worth a phone call, in other towns ('+Y.heldElsewhere.length+')</summary><p class="helper">These fit this experience but sit in neighborhoods with nothing ready to tour. Two or more things about each are still to confirm, so they cannot be held for compare. Town names here are read from the listing\'s area code.</p><div class="stack tight" style="margin:10px 0">'+Y.heldElsewhere.map(function(U){return callItem(U,slugName(U.hood_id))}).join("")+'</div></details></section>'}
   if(Y.waitElsewhere.length){h+='<section class="sec"><details class="fold"><summary>Not re-checked yet, in other towns ('+Y.waitElsewhere.length+')</summary><p class="helper">'+WAIT_INTRO+'</p><div class="stack tight" style="margin:10px 0">'+Y.waitElsewhere.map(function(A){return waitItem(A,slugName(A.hood_id))}).join("")+'</div></details></section>'}
@@ -1202,7 +1675,7 @@ function vYear(Y){
 function vHood(H){
   var Y=Y_BY[H.year],hs=Y.hoods,ix=hs.indexOf(H),nx=ix>-1?hs[ix+1]:null,nxY=YEARS[YEARS.indexOf(Y)+1],N=H.units.length,k=H.units.filter(fits).length,r=H.all_in_range,t=H.traits||{},s=H.safety||{},loc=H.local||{};
   var h='<div class="wrap">';
-  h+='<section class="sec" style="margin-top:14px"><div class="hero"><div class="art">'+hoodArt(H)+'</div><div class="body"><p class="kicker">'+esc(Y.label)+'</p><h1>'+esc(H.name)+'</h1><p class="facts">'+esc(hoodWhere(H))+' · '+esc(hoodDrive(H))+' · '+(H.toll_round_trip==null?'tolls not known yet':H.toll_round_trip===0?'no tolls':money(H.toll_round_trip)+' in tolls a visit')+(H.transit_min!=null?' · '+r0(H.transit_min)+' min by train and bus':'')+'</p>'+(H.rank_in_experience!=null&&ix>-1?'<p class="facts" id="hood-rank">Number '+(ix+1)+' of '+hs.length+' in this experience'+(H.experience_score_basis?' ('+esc(String(H.experience_score_basis))+')':'')+'</p>':'')+(N?'<button type="button" class="btn main wide" data-act="scrollto" data-to="sec-places">See its '+pl(N,"place")+' ↓</button>':'')+'</div></div></section>';
+  h+='<section class="sec" style="margin-top:14px"><div class="hero"><div class="art">'+hoodArt(H)+'</div><div class="body"><p class="kicker">'+ymark(Y,18)+esc(Y.label)+'</p><h1>'+esc(H.name)+'</h1><p class="facts">'+esc(hoodWhere(H))+' · '+esc(hoodDrive(H))+' · '+(H.toll_round_trip==null?'tolls not known yet':H.toll_round_trip===0?'no tolls':money(H.toll_round_trip)+' in tolls a visit')+(H.transit_min!=null?' · '+r0(H.transit_min)+' min by train and bus':'')+'</p>'+(H.rank_in_experience!=null&&ix>-1?'<p class="facts" id="hood-rank">Number '+(ix+1)+' of '+hs.length+' in this experience'+(H.experience_score_basis?' ('+esc(String(H.experience_score_basis))+')':'')+'</p>':'')+(N?'<button type="button" class="btn main wide" data-act="scrollto" data-to="sec-places">See its '+pl(N,"place")+' ↓</button>':'')+'</div></div></section>';
   var hScene=slotText(pr(H,"scene")||loc.scene),good=slotText(pr(H,"good_for_her")||loc.good_for_her),watch=slotText(pr(H,"watch_for")||loc.watch_for),hIntro=hostBox(hostOfRec(H,"intro"),null,false,"host-intro");
   if(hIntro)h+='<section class="sec">'+hIntro+'</section>';
   if(hScene||good||watch)h+='<section class="sec" id="sec-scene">'+hScene+(good||watch?'<div class="two"'+(hScene?' style="margin-top:12px"':'')+'>'+(good?'<div class="panel love"><h4>Good for you</h4>'+good+'</div>':'')+(watch?'<div class="panel pause"><h4>Watch for</h4>'+watch+'</div>':'')+'</div>':'')+'</section>';
@@ -1433,15 +1906,17 @@ function renderTrail(){var p=parse(current),v=p.v,h='<div class="wrap">',c=[];
   if(v!=="lives"){
     if(v==="compare")c.push([lastTour?"Back to the tour":"Back to the experiences",lastTour||"lives"]);
     else{var Y=v==="year"?p.o:Y_BY[p.o.year];if(v!=="unit")c.push(["Experiences","lives"]); /* a place shows its experience and neighborhood; the full list is one step up */
-      if(v!=="year")c.push([Y.short,href("year",Y.id).slice(1)]);
+      if(v!=="year")c.push([Y.short,href("year",Y.id).slice(1),ymark(Y,14)]);
       if(v==="unit")c.push([hoodOf(p.o).name,href("hood",p.o.hood_id).slice(1)])}
     var up=c[c.length-1];
-    h+='<a class="bk" href="#'+up[1]+'" aria-label="Back: '+esc(up[0])+'">'+arrow+'</a><div class="path">'+c.map(function(x,i){return (i?'<span aria-hidden="true">›</span>':'')+'<a href="#'+x[1]+'" title="'+esc(x[0])+'">'+esc(x[0])+'</a>'}).join("")+'</div>'}
+    h+='<a class="bk" href="#'+up[1]+'" aria-label="Back: '+esc(up[0])+'">'+arrow+'</a><div class="path">'+c.map(function(x,i){return (i?'<span aria-hidden="true">›</span>':'')+'<a href="#'+x[1]+'" title="'+esc(x[0])+'">'+(x[2]||"")+esc(x[0])+'</a>'}).join("")+'</div>'}
   trailEl.innerHTML=h+'</div>'}
 function renderView(){var p=parse(current);
+  unmountMap();
   view.innerHTML=p.v==="year"?vYear(p.o):p.v==="hood"?vHood(p.o):p.v==="unit"?vUnit(p.o):p.v==="compare"?vCompare():vLives();
   renderTrail();
-  document.title=(p.v==="lives"?"":p.v==="compare"?"The decision · ":(p.v==="unit"?uName(p.o):p.o.label||p.o.name)+" · ")+"Lamia's House Hunt"}
+  document.title=(p.v==="lives"?"":p.v==="compare"?"The decision · ":(p.v==="unit"?uName(p.o):p.o.label||p.o.name)+" · ")+"Lamia's House Hunt";
+  mountMap()}
 function renderTray(){var n=S.held.length;
   var msg=n===0?"Tap Hold this place on one you like. It waits here.":n===1?"One held. Hold one more to compare.":n===2?"Two held. Ready to compare, or hold a third.":"Three held. Time to compare.";
   var h='<div class="wrap"><div class="tr-text"><b>My top three</b><span id="trayMsg">'+msg+'</span></div><div class="tr-row">';
@@ -1454,7 +1929,7 @@ function fitTray(){try{document.documentElement.style.setProperty("--tray-h",tra
 function renderCounts(){
   var n=UNITS.filter(fits).length;
   document.getElementById("fitline").textContent=n+" of "+UNITS.length+" places fit your limits";
-  document.getElementById("lstrip").innerHTML=YEARS.map(function(Y){var c=Y.units.filter(fits).length;return '<div'+(c?'':' class="zero"')+'><span>'+esc(Y.short)+'</span><i>'+c+'</i></div>'}).join("");
+  document.getElementById("lstrip").innerHTML=YEARS.map(function(Y){var c=Y.units.filter(fits).length;return '<div'+(c?'':' class="zero"')+'><span>'+ymark(Y,12)+esc(Y.short)+'</span><i>'+c+'</i></div>'}).join("");
   var L=S.lim;
   document.getElementById("out-cost").textContent="Up to "+money(L.cost)+" a month, all-in"+(L.cost>=CAP?", your cap":"");
   document.getElementById("out-mins").textContent=L.mins>=LIM.mins.max?"Anywhere within two hours by car":"Within "+L.mins+" minutes by car, without traffic";
@@ -1515,6 +1990,9 @@ document.addEventListener("click",function(e){
   else if(act==="limits-reset"){S.lim={cost:DEF.cost,mins:DEF.mins,safe:DEF.safe,sqft:DEF.sqft,clear:false};syncSliders();save();renderCounts();renderView()}
   else if(act==="close-sheet"){closeSheet()}
   else if(act==="scrollto"){var sec=document.getElementById(t.getAttribute("data-to"));if(sec)sec.scrollIntoView({block:"start"})}
+  else if(act==="hoodview"){var hv=t.getAttribute("data-v")==="map"?"map":"list",y4=window.scrollY;
+    if(hv!==HOODVIEW){HOODVIEW=hv;try{localStorage.setItem(KEY+"-hoodview",hv)}catch(err){}renderView();window.scrollTo(0,y4)}
+    var hb=document.querySelector('.viewsw [data-v="'+hv+'"]');if(hb){try{hb.focus({preventScroll:true})}catch(err){}}}
   else if(act==="tile"){openSheet(tileSheet(id,t.getAttribute("data-k")))}
   else if(act==="scale"){openSheet(scaleSheet(t.getAttribute("data-kind"),id,t.getAttribute("data-m")))}
   else if(act==="tour-open"){openLimits(false);closeSheet();showTour(0)}
@@ -1550,7 +2028,7 @@ document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;
 window.addEventListener("resize",fitTray);
 window.addEventListener("hashchange",function(){var r=location.hash.replace(/^#/,"")||"lives";if(routeOf(parse(r))!==current){closeSheet();go(r)}});
 
-window.__houseHunt={tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
+window.__houseHunt={map:function(){return HHMAP},tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
 syncSliders();renderCounts();renderTray();renderFoot();
 go((function(){try{return location.hash.replace(/^#/,"")}catch(e){return ""}})()||"lives");
 if(!S.seenTour)showTour(0);

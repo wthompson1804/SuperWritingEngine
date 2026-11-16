@@ -152,7 +152,7 @@ HOODS: dict[str, list[tuple[str, str, str]]] = {
     "ny:hempstead": town("Hempstead (village)", NY, "Hempstead (village), New York"),
     "ny:valley-stream": town("Valley Stream", NY),
     "ny:haverstraw": [("Haverstraw (village), New York", "Haverstraw (village)", "exact"),
-                      ("Haverstraw, New York", "Haverstraw (town)", "exact")],
+                      ("Haverstraw, New York", "Haverstraw (town)", "enclosing")],
     "ny:patchogue": town("Patchogue", NY), "ny:new-rochelle": town("New Rochelle", NY),
     "ny:peekskill": town("Peekskill", NY), "ny:port-chester": town("Port Chester", NY),
     "ny:white-plains": town("White Plains", NY), "ny:yonkers": town("Yonkers", NY),
@@ -431,8 +431,8 @@ SILENT_TPL = re.compile(r"^(short description|use mdy dates|use dmy dates|use am
                         r"unreferenced|original research|lead too|expand|cleanup|efn|sfn|r\b|rp\b|"
                         r"clarify|when|by whom|dubious|better source|failed verification|which|"
                         r"see also|main|pp|good article|featured article|italic title|"
-                        r"new york city|nrhp|wide image|multiple image|toc|clear|-|portal|update inline|"
-                        r"citation|cite|dead link|webarchive|page needed|full citation|nyc|"
+                        r"nrhp|wide image|multiple image|toc|clear|-|portal|update inline|"
+                        r"citation|cite|dead link|webarchive|page needed|full citation|"
                         r"additional citations|more footnotes|no footnotes|primary sources|tone|"
                         r"advert|peacock|weasel|globalize|short desc|defaultsort|authority control|"
                         r"external media|image frame|location map|maplink|commons|wiktionary)", re.I)
@@ -562,6 +562,34 @@ def verify(quote: str, article: str) -> bool:
     return False
 
 
+WEB_SRC = "neighborhood_descriptions_web"
+
+
+def page_text(raw: bytes) -> str:
+    t = raw.decode("utf-8", "replace")
+    t = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", t, flags=re.S | re.I)
+    return norm(html.unescape(re.sub(r"<[^>]+>", " ", t)).replace("\u00a0", " "))
+
+
+def web_row(hid: str, name: str, pick: dict) -> dict:
+    """A quote from an official page (tier 2). The page is fetched once with lib.cached_get after
+    its robots.txt was read by hand (see the harvest notes); here it is re-read from the cache."""
+    host = requests.utils.urlparse(pick["web_url"]).netloc
+    check_host(host)
+    raw, meta = lib.cached_get(pick["web_url"], WEB_SRC, ext="html", retries=1, timeout=40)
+    if meta["status"] in (401, 403, 429):
+        kill_host(host, f"HTTP {meta['status']}")
+        raise SystemExit(f"refused by {host}")
+    q = norm(pick["quote"])
+    ok = meta["status"] == 200 and q in page_text(raw)
+    if len(q.split()) > MAX_WORDS or BAN.search(q):
+        raise SystemExit(f"{hid}: web quote not usable")
+    return {"hood_id": hid, "hood_name": name, "quote": q, "source_name": pick["source_name"],
+            "source_url": pick["web_url"], "about_area": pick["about_area"], "scope": pick["scope"],
+            "licence_note": pick["licence_note"], "retrieved_at": meta["retrieved_at"],
+            "verified": "yes" if ok else "no"}
+
+
 def stage_write() -> None:
     res = json.loads(RESOLVED.read_text())
     cand = json.loads(CAND.read_text())
@@ -572,6 +600,9 @@ def stage_write() -> None:
         c = cur.get(hid, {})
         n_before = len(rows)
         for pick in c.get("quotes", []):
+            if "web_url" in pick:
+                rows.append(web_row(hid, name, pick))
+                continue
             title, idx = pick["title"], pick["i"]
             entry = next((e for e in HOODS.get(hid, []) if e[0] == title), None)
             if entry is None:
@@ -580,7 +611,10 @@ def stage_write() -> None:
             idxs = idx if isinstance(idx, list) else [idx]
             ss = [cd["sentences"][i] for i in idxs]
             quote = " ".join(s["text"] for s in ss)
-            bad = [s["flag"] for s in ss if s["flag"] in ("template", "banned_topic")]
+            # "force": a human read the sentence and the topic filter was a false positive
+            # (e.g. "White Plains Road", "bicycle race"). Template-damaged sentences are never used.
+            banned = ("template",) if pick.get("force") else ("template", "banned_topic")
+            bad = [s["flag"] for s in ss if s["flag"] in banned]
             if bad or len(quote.split()) > MAX_WORDS or MARK in quote:
                 raise SystemExit(f"{hid}: pick {title}#{idx} not usable ({bad}, {len(quote.split())} words)")
             art = cd["article"]
@@ -589,7 +623,7 @@ def stage_write() -> None:
             rows.append({
                 "hood_id": hid, "hood_name": name, "quote": quote, "source_name": "Wikipedia",
                 "source_url": "https://en.wikipedia.org/wiki/" + urlquote(art.replace(" ", "_"), safe=",()_-.'"),
-                "about_area": entry[1], "scope": entry[2],
+                "about_area": pick.get("about_area", entry[1]), "scope": pick.get("scope", entry[2]),
                 "licence_note": LICENCE.format(rev=lead["revision_id"], ts=lead["revision_timestamp"]),
                 "retrieved_at": lead["retrieved_at"], "verified": "yes" if ok else "no"})
         if len(rows) == n_before:
@@ -597,8 +631,15 @@ def stage_write() -> None:
         if c.get("plain_summary"):
             if len(c["plain_summary"].split()) > 25:
                 raise SystemExit(f"{hid}: plain_summary over 25 words")
+            marks = []
+            mine = rows[n_before:]
+            for lm in c.get("landmarks", [])[:4]:
+                src = next((r for r in mine if lm.lower() in r["quote"].lower()), None)
+                if src is None:
+                    raise SystemExit(f"{hid}: landmark {lm!r} is not named in any of its quotes")
+                marks.append({"name": lm, "named_by": src["source_name"], "source_url": src["source_url"]})
             srows.append({"hood_id": hid, "plain_summary": c["plain_summary"],
-                          "landmarks_json": json.dumps(c.get("landmarks", [])[:4], ensure_ascii=False)})
+                          "landmarks_json": json.dumps(marks, ensure_ascii=False)})
     unverified = [r for r in rows if r["verified"] != "yes"]
     if unverified:
         raise SystemExit(f"unverified quotes: {[(r['hood_id'], r['quote'][:40]) for r in unverified]}")
