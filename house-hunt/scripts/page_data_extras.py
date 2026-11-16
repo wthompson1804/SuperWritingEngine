@@ -219,6 +219,36 @@ def main():
         y["hood_ids"] = [h["id"] for h in ranked]
     rep["neighborhoods ranked within experiences"] = sum(1 for h in hoods.values() if h.get("rank_in_experience"))
 
+    # ratings census (docs/RATINGS_CENSUS_BRIEF.md): aggregate rating and review count per platform, as information only.
+    # Shown: 5-star-scale figures matched with high or medium confidence; ForRent and ApartmentFinder repeat the
+    # Apartments.com reviews and are left out. "searched" says whether a web search was run for the building at all.
+    RC = rd(DATA / "evidence" / "ratings_census.csv")
+    if RC is not None:
+        NAMES = {"google": "Google", "apartments_com": "Apartments.com", "rentcafe": "RentCafe", "openigloo": "Openigloo", "birdeye": "Birdeye",
+                 "apartment_list": "Apartment List", "yelp": "Yelp", "zillow": "Zillow", "apartmentratings": "ApartmentRatings", "facebook": "Facebook", "rentable": "Rentable"}
+        by = {}
+        unsearched = set(RC[RC.note.str.contains("NO WEB SEARCH RUN|WEB SEARCH NOT RUN", case=False)].building_id)
+        for r in RC[(RC.status == "found") & RC.match_confidence.isin(["high", "medium"])].itertuples():
+            try:
+                rating, scale = float(r.rating), float(r.rating_scale or 5)
+            except ValueError:
+                continue
+            if scale != 5 or r.platform not in NAMES:
+                continue
+            cnt = int(float(r.review_count)) if str(r.review_count).replace(".", "", 1).isdigit() else None
+            cur = by.setdefault(r.building_id, {})
+            if r.platform not in cur or (cnt or 0) > (cur[r.platform]["count"] or 0):
+                cur[r.platform] = {"platform": NAMES[r.platform], "rating": round(rating, 1), "count": cnt, "seen_via": r.basis.replace("_", " "),
+                                   "url": r.source_url or None, "as_of": r.retrieved_at[:10]}
+        n = 0
+        for u in d["units"]:
+            b = u.get("building_id")
+            rows = sorted(by.get(b, {}).values(), key=lambda x: -(x["count"] or 0))
+            u["ratings"] = {"platforms": rows[:4], "most_reviews": max([x["count"] or 0 for x in rows], default=0),
+                            "searched": b not in unsearched, "found_any": bool(rows)}
+            n += bool(rows)
+        rep["places with a rating on some platform"] = f"{n} of {len(d['units'])}"
+
     # the host's line and honest catch for each place, and its section subheads (scripts/realtor_lines.py)
     RL = rd(DATA / "reference" / "realtor_lines.csv")
     if RL is not None:
