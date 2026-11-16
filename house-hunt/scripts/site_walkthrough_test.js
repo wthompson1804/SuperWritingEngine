@@ -13,7 +13,7 @@ const assert = require('assert');
 const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390), VH = W === 320 ? 640 : W >= 1000 ? 900 : 844;
 const SCREEN = 844, AIM = 2 * SCREEN; // collapsed pages: aim for two phone screens
 // The "About" text is now shown whole, so a page is taller than two screens; what must hold is how soon the way on is reached (the "See the …" button) and these ceilings.
-const LIMITS = { experience: 3.6, neighborhood: 3.6, building: 2.6, 'building, many': 3.5, compare: 2.2, list: 2.2 }, LIMIT = Math.round(3.6 * SCREEN), limitOf = kind => Math.round((LIMITS[kind] || 3.6) * SCREEN);
+const LIMITS = { experience: 2.95, neighborhood: 2.9, building: 2.6, 'building, many': 3.5, compare: 2.2, list: 2.2 }, LIMIT = Math.round(3.6 * SCREEN), limitOf = kind => Math.round((LIMITS[kind] || 3.6) * SCREEN);
 (async () => {
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: W, height: VH }, deviceScaleFactor: 1 });
@@ -731,7 +731,7 @@ const LIMITS = { experience: 3.6, neighborhood: 3.6, building: 2.6, 'building, m
       if (location.hash !== '#' + h) { unresolved.push(h); continue; } // two ids that give the same plain hash: the page numbers the second one
       if (document.documentElement.scrollWidth > document.documentElement.clientWidth) return 'overflow at ' + h;
       const kind = h.split('-')[0], f = document.getElementById('foot').getBoundingClientRect(), tr = document.getElementById('trail'), ht = Math.round(f.bottom + window.scrollY - (tr.hidden ? 0 : tr.offsetHeight));
-      maxH[kind] = Math.max(maxH[kind] || 0, ht); if (ht > (kind === 'bldg' ? Math.round((2.3 + 0.13 * document.querySelectorAll('#sec-apts .apt').length) * 844) : LIMS[kind])) tall.push(h + ' ' + ht); // a building: 2.3 screens and 0.13 for each apartment row
+      maxH[kind] = Math.max(maxH[kind] || 0, ht); if (ht > (kind === 'bldg' ? Math.round((2.3 + 0.15 * document.querySelectorAll('#sec-apts .apt').length) * 844) : LIMS[kind])) tall.push(h + ' ' + ht); // a building: 2.3 screens and 0.15 for each apartment row (a row carries one line on the rent offer since pass 6)
       if (document.querySelectorAll('#view .host, #view .who, #view .clampw').length || /your host/i.test(document.getElementById('view').textContent)) return 'a host box at ' + h;
       if (kind === 'unit' && !(document.querySelector('.bpage') && document.querySelectorAll('#sec-apts details.aptd[open]').length === 1)) return 'a place link that does not open its building with one apartment open: ' + h;
       if (kind === 'bldg' && document.querySelectorAll('#sec-apts details[open]').length) return 'an apartment open by default at ' + h;
