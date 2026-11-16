@@ -1050,23 +1050,52 @@ def price_doubt(note) -> bool:
     return bool(PRICE_DOUBT.search(str(note or "")))
 
 
-def building_prefix(unit) -> str:
-    """The building part of a unit label in a multi-building complex, or ''.
-      '09-326', '3-329', 'B9-309', 'PA-405', 'K3-02', 'PA 112'  -> the part before the separator ('09', '3', 'B9', 'PA', 'K3')
-      '5201', '2303', '4234' (four digits whose second digit is 1-4: building, floor, two-digit unit) -> the first digit
-    A plain label ('305', '4F', '12B', '1205' read as floor 12 is NOT excluded here: see multi_building_labels)."""
+def label_reading(unit):
+    """(building, floor, unit-on-floor) read from a unit label of a multi-building complex, or None when the label has
+    no building part. Only the shapes that name a building are read:
+      '09-326', '3-329', 'PA-405', 'B9-309'   X-FUU   -> building X, floor F, unit UU
+      '005-5306'                              X-BFUU  -> building B, floor F
+      'K3-02', 'M4-22'                        LF-UU   -> building L (a letter), floor F
+      '5201', '2303', '4234'                  BFUU    -> building B, floor F (second digit 1-9), unit UU
+    A plain label ('305', '4F', '12B', '0705') has no building part."""
     u = clean_unit(unit).strip()
-    m = re.fullmatch(r"([a-z]{0,2}\d{0,3}|[a-z]{1,3})[\s-]+[a-z]?\d{2,4}[a-z]?", u)
-    if m and m.group(1):
-        return m.group(1).lstrip("0") or "0"
-    m = re.fullmatch(r"([1-9])([1-4])\d\d", u)
-    return m.group(1) if m else ""
+    m = re.fullmatch(r"([a-z])([1-9])[\s-]+(\d{2})", u)
+    if m:
+        return m.group(1), int(m.group(2)), int(m.group(3))
+    m = re.fullmatch(r"([a-z]{1,3}\d{0,2}|\d{1,3})[\s-]+([1-9])(\d{2})[a-z]?", u)
+    if m:
+        return m.group(1).lstrip("0") or "0", int(m.group(2)), int(m.group(3))
+    m = re.fullmatch(r"\d{1,3}[\s-]+([1-9])([1-9])(\d{2})", u)
+    if m:
+        return m.group(1), int(m.group(2)), int(m.group(3))
+    m = re.fullmatch(r"([1-9])([1-9])(\d{2})", u)
+    if m:
+        return m.group(1), int(m.group(2)), int(m.group(3))
+    return None
+
+
+def building_prefix(unit) -> str:
+    r = label_reading(unit)
+    return r[0] if r else ""
 
 
 def multi_building_labels(units) -> bool:
-    """True when the unit labels of one complex carry two or more different building numbers (building_prefix).
-    Used with 'no height of 4+ floors on any page or record' for the garden-style rule (owner, 2026-11-16)."""
-    return len({building_prefix(u) for u in units if building_prefix(u)}) >= 2
+    """True when the unit labels of one complex read as a multi-building, LOW complex (garden-style rule, owner 2026-11-16):
+      - every labelled unit has a building part (label_reading), and two or more different buildings appear;
+      - no label reads above floor 3;
+      - for the bare four-digit shape (BFUU), which could also be floor + three-digit unit ('5158' = floor 5, unit 158)
+        or a tower ('1206' = floor 12): the floor digit must vary across the labels and no unit-on-floor number may
+        exceed 40 (a floor of a garden building does not hold 86 apartments; The Grove Somerset 4186 is floor 4)."""
+    labs = [u for u in units if unit_label_key(u)]
+    rs = [label_reading(u) for u in labs]
+    if len(labs) < 2 or any(r is None for r in rs):
+        return False
+    if len({r[0] for r in rs}) < 2 or max(r[1] for r in rs) > 3:
+        return False
+    bare = [r for u, r in zip(labs, rs) if re.fullmatch(r"\d{4}", clean_unit(u).strip())]
+    if bare and (len({r[1] for r in bare}) < 2 or max(r[2] for r in bare) > 40):
+        return False
+    return True
 
 
 def ground_digit_positions(removed_labels):
@@ -1080,9 +1109,8 @@ def ground_digit_positions(removed_labels):
         return 0, []
     n = len(tails[0])
     pos = [i for i in range(n - 2) if all(t[i] == "1" for t in tails)]      # the last two characters are the unit on the floor
-    # where every label ALSO shares its leading digit (building 2 in '2153', '2158' ...), that digit is the building, not the floor
-    if len(pos) > 1:
-        pos = pos[-1:]
+    # Where the removed labels share '1' in two places ('1119', '1127', '1142': floor 1, units 119-142, or building 1,
+    # floor 1?) the reading is ambiguous: a sibling must then carry '1' in BOTH places to be read the same way.
     return (n, pos) if pos else (0, [])
 
 
@@ -1092,4 +1120,4 @@ def reads_as_ground_like_siblings(unit, removed_labels) -> bool:
     if not n:
         return False
     t = unit_tail(unit) if re.search(r"[^a-z0-9]", clean_unit(unit)) else unit_key(unit)
-    return len(t) == n and t.isdigit() == all(x.isdigit() for x in [t]) and all(t[i] == "1" for i in pos)
+    return len(t) == n and all(t[i] == "1" for i in pos)

@@ -1,0 +1,15 @@
+building_id,name,why,source
+b_35d0f28e17,Woodmont West,"Unit labels 5201, 2303 read as buildings 1 to 7 with floors 1 to 3: a garden-style complex of low buildings, and the elevator is named only in a listing site's amenity list.",docs/INDEPENDENT_CHECK_3.md part B
+b_8f7ec4f0f6,The Royce at Trumbull,"Unit labels 4234, 4211 read as buildings 1, 4, 6, 9 with floors 1 to 3; elevator only in a listing site's amenity list.",docs/INDEPENDENT_CHECK_3.md part B
+b_8b059f657b,Brookfield Village Apartments,"Unit labels 5204, 6207 read as buildings 5 and 6 with floors 1 and 2 only; elevator only in a listing site's amenity list.",docs/INDEPENDENT_CHECK_3.md part B
+b_27056882d3,The Brownstones at Englewood South,"Unit labels carry building numbers 09, 41, 56; a fourth-floor unit (09-426) rests on an amenity tag alone.",docs/INDEPENDENT_CHECK_3.md part B
+b_a74b0e921a,Reserve at Riverdale,"Building-floor-unit numbering (3-329, 4-412): several buildings, and the elevator is named only in a listing site's amenity list.",docs/INDEPENDENT_CHECK_3.md part B
+b_15bd92512c,Kensington Place,"Building-floor-unit numbering (4222, 1236) in a multi-building complex; the complex's own page says 'elevator access' without saying which buildings.",docs/INDEPENDENT_CHECK_3.md part B
+b_b8bb8fc759,The Highlands (Morris Plains),A low-rise complex; unit 1200; elevator only in a listing site's amenity list.,docs/INDEPENDENT_CHECK_3.md part B
+b_a72ba2ad8c,Woodland Square (Montvale),A low-rise complex; unit 217; elevator only in a listing site's amenity list.,docs/INDEPENDENT_CHECK_3.md part B
+b_1d55a03272,6500 K Johnson Blvd (Bordentown),A low-rise complex; unit 211; elevator only in a listing site's amenity list.,docs/INDEPENDENT_CHECK_3.md part B
+b_ba72863b95,The Residences at the Kestrel (Seymour),A low-rise building; unit 208; elevator only in a listing site's amenity list.,docs/INDEPENDENT_CHECK_3.md part B
+b_8cb8bf6346,Beacon Mill Village,"Four converted mill buildings (unit prefixes BM, PA, PU, SH); elevator only in a listing site's amenity list, with no word on which buildings have one.",docs/INDEPENDENT_CHECK_3.md part B
+b_4d77efaaab,Lopresti School Apartments (Seymour),A converted school; the manager's page lists an elevator for the property without saying it serves unit M306's wing.,docs/INDEPENDENT_CHECK_3.md part B
+b_5c4193202c,Harbor Pointe (Bayonne),"Several buildings (unit prefixes B3, B9), floors 1 to 4; elevator only in a listing site's amenity list.",docs/INDEPENDENT_CHECK_3.md part B
+b_80ba75dc8e,TGM Anchor Point (Stamford),"Several buildings (1xxx, 2xxx), floors 1 to 4 by the labels; elevator only on listing sites' amenity lists.",docs/INDEPENDENT_CHECK_3.md part B

@@ -3,17 +3,17 @@
 Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evidence/*.csv. No network requests. Every passing unit was checked and has one row.
 
 - Units checked: **2659** (one row each; `offer_type = none` for units with no such language).
-- Units with any concession, special-offer or price-basis language: **1784**.
+- Units with any concession, special-offer or price-basis language: **1768**.
 - Units whose price or offer is for a lease term other than 12 months: **592**.
-- Units that need a call (`needs_call = yes`): **1685** in 238 buildings.
+- Units that need a call (`needs_call = yes`): **1660** in 235 buildings.
 
 ## Counts by offer_type
 
 | offer_type | units |
 |---|---|
 | months_free | 1393 |
-| none | 875 |
-| other | 234 |
+| none | 891 |
+| other | 218 |
 | reduced_deposit_or_fee | 72 |
 | weeks_free | 35 |
 | dollar_credit | 30 |
@@ -23,17 +23,17 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 | listed_price_is | units |
 |---|---|
-| unknown | 1423 |
-| gross | 1000 |
-| net_effective | 236 |
+| unknown | 1475 |
+| gross | 1032 |
+| net_effective | 152 |
 
 ## Confidence
 
 | confidence | units |
 |---|---|
-| assumed_terms | 1655 |
-| stated_on_page | 968 |
-| computed_from_stated_terms | 36 |
+| assumed_terms | 1645 |
+| stated_on_page | 984 |
+| computed_from_stated_terms | 30 |
 
 ## Free-period timing
 
@@ -48,28 +48,15 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 ## Gross rent above the listed price (stated or computed from stated terms)
 
-**30** units have a determined gross rent above the listed price.
+**15** units have a determined gross rent above the listed price.
 
 | unit | listed | gross | gap | free months / lease | confidence |
 |---|---|---|---|---|---|
 | The Riverhouse | 2263 | 2716 | 453 | 3 / 18 | computed_from_stated_terms |
 | Alvista Rise #2410 | 2365 | 2800 | 435 | 2.5 / 18 | stated_on_page |
 | The Riverhouse | 2025 | 2430 | 405 | 3 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B9-309 | 2223 | 2627 | 404 | 2 / 13 | computed_from_stated_terms |
 | The Riverhouse | 1975 | 2370 | 395 | 3 / 18 | computed_from_stated_terms |
 | Alvista Rise #1922 | 2435 | 2825 | 390 | 2.5 / 18 | stated_on_page |
-| Harbor Pointe #B3-244 | 2850 | 3206 | 356 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B9-433 | 2829 | 3183 | 354 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B9-113 | 2824 | 3177 | 353 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B3-449 | 2774 | 3121 | 347 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B3-403 | 2779 | 3126 | 347 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B9-457 | 2650 | 2981 | 331 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B9-449 | 2612 | 2938 | 326 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B3-348 | 2495 | 2807 | 312 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B3-127 | 2352 | 2646 | 294 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B9-258 | 2314 | 2603 | 289 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B9-334 | 2292 | 2578 | 286 | 2 / 18 | computed_from_stated_terms |
-| Harbor Pointe #B9-240 | 2195 | 2469 | 274 | 2 / 18 | computed_from_stated_terms |
 | Arc House | 2875 | 3115 | 240 | 1 / 13 | computed_from_stated_terms |
 | Arc House | 2855 | 3093 | 238 | 1 / 13 | computed_from_stated_terms |
 | Arc House | 2830 | 3066 | 236 | 1 / 13 | computed_from_stated_terms |
@@ -77,10 +64,13 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Harmony West | 2492 | 2700 | 208 | 1 / 13 | computed_from_stated_terms |
 | Arc House | 2500 | 2708 | 208 | 1 / 13 | computed_from_stated_terms |
 | Harmony West | 2423 | 2625 | 202 | 1 / 13 | computed_from_stated_terms |
+| Harmony West | 2377 | 2575 | 198 | 1 / 13 | computed_from_stated_terms |
+| Arc House | 2300 | 2492 | 192 | 1 / 13 | computed_from_stated_terms |
+| Harmony West | 2077 | 2250 | 173 | 1 / 13 | computed_from_stated_terms |
 
 ## Largest possible gaps where the basis is unknown (scenario: listed price is net-effective)
 
-1398 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
+1413 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
 
 | unit | listed | gross if listed is net | gap | free months / lease | basis |
 |---|---|---|---|---|---|
@@ -112,8 +102,8 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 ## Gross rent over $3,000 (rent only, all-in aside)
 
-- Determined gross over $3,000: **8** units: Harbor Pointe #B3-449 ($3121); Harbor Pointe #B9-113 ($3177); Harbor Pointe #B3-403 ($3126); Harbor Pointe #B9-433 ($3183); Harbor Pointe #B3-244 ($3206); Arc House ($3066); Arc House ($3093); Arc House ($3115)
-- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **655** units in 99 buildings.
+- Determined gross over $3,000: **3** units: Arc House ($3066); Arc House ($3093); Arc House ($3115)
+- Scenario gross over $3,000 (upper end, if the listed price is net-effective): **660** units in 100 buildings.
 
 | building | units | listed range | scenario gross (max) | free months / lease |
 |---|---|---|---|---|
@@ -174,6 +164,7 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | Overlook Flats | 1 | 2950-2950 | 3218 | 1 / 12 assumed |
 | J Centra Burlington | 3 | 2699-2844 | 3215 | 1.38 / 12 |
 | Newport Rentals | 4 | 2912-2942 | 3209 | 0.5-1 / 12 |
+| Harbor Pointe | 5 | 2774-2850 | 3206 | 2 / 18 |
 | The Enclave | 2 | 2975-2990 | 3204 | 1 / 15 |
 | Sawyer | 1 | 2999-2999 | 3199 | 1 / 16 |
 | The Audubon New Haven | 6 | 2640-2797 | 3197 | 1.5 / 12 assumed |

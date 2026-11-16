@@ -4,7 +4,8 @@ site/index.html reads `window.HOUSE_HUNT_DATA` when it exists and otherwise fetc
 This script fills the `<!--HOUSE_HUNT_DATA_SLOT-->` marker with a script tag that sets that variable, so the built
 file opens straight from disk or from any static host with no second request. A second marker,
 `<!--HOUSE_HUNT_MAP_BASE_SLOT-->`, is filled the same way with `window.HOUSE_HUNT_MAP_BASE` (the map's land and
-borough outlines, built by build_map_base.py). Idempotent: rerun after build_page_data.py.
+borough outlines, built by build_map_base.py). A third, `<!--HOUSE_HUNT_ILLUS_SLOT-->`, takes `window.HOUSE_HUNT_ILLUS`
+from site/illustrations.json when that file exists (the six experience drawings); without it the slot is left empty. Idempotent: rerun after build_page_data.py.
 
 The data is slimmed on the way in (site/data.json itself is never changed): fields the template does not read are left
 out, see DROP below. The page opened beside its files (site/index.html) still fetches the whole data.json.
@@ -19,6 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 SLOT = "<!--HOUSE_HUNT_DATA_SLOT-->"
 MAP_SLOT = "<!--HOUSE_HUNT_MAP_BASE_SLOT-->"
+ILLUS_SLOT = "<!--HOUSE_HUNT_ILLUS_SLOT-->"
 
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -40,7 +42,7 @@ UNIT_DROP = [
     "ratings.most_reviews", "ratings.platforms[].seen_via",
 ]
 # Avoid cards and "worth a phone call" items are short cards: name, price, what to confirm, the evidence, the questions.
-SHORT_CARD_DROP = UNIT_DROP + ["moments", "vs_queens", "vs_queens_diff", "amenities", "all_in_lines", "host", "headlines", "ratings"]
+SHORT_CARD_DROP = UNIT_DROP + ["moments", "vs_queens", "vs_queens_diff", "amenities", "all_in_lines", "host", "headlines", "ratings", "photos"]
 DROP = {
     "units[]": UNIT_DROP,
     "avoid[]": SHORT_CARD_DROP,
@@ -134,6 +136,20 @@ def main():
         if key not in base:
             sys.exit(f"site/map_base.json has no '{key}'")
     out = out.replace(MAP_SLOT, "<script>window.HOUSE_HUNT_MAP_BASE=" + js(base) + ";</script>")
+    # The drawings (site/illustrations.json, built by build_illustrations.py) are optional: without the file the slot is
+    # emptied and the page shows no art.
+    illus_path = SITE / "illustrations.json"
+    if page.count(ILLUS_SLOT) != 1:
+        sys.exit(f"site/index.html must contain {ILLUS_SLOT} exactly once (found {page.count(ILLUS_SLOT)})")
+    illus = None
+    if illus_path.exists():
+        try:
+            illus = json.loads(illus_path.read_text(encoding="utf-8"))
+        except ValueError as e:
+            print(f"site/illustrations.json could not be read ({e}); the page is built without drawings")
+    if not isinstance(illus, dict) or not illus:
+        illus = None
+    out = out.replace(ILLUS_SLOT, "<script>window.HOUSE_HUNT_ILLUS=" + js(illus) + ";</script>" if illus else "")
     dist = SITE / "dist"
     dist.mkdir(exist_ok=True)
     (dist / "index.html").write_text(out, encoding="utf-8")

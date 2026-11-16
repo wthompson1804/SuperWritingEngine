@@ -180,6 +180,7 @@ def _page_table(part):
                          "violent": (h.get("safety") or {}).get("violent_per_1000"),
                          **{"vq_" + k: v for k, v in (h.get("vs_queens") or {}).items()}})
         t = pd.DataFrame(rows)
+        t["all_in_spread"] = t["all_in_hi"] - t["all_in_lo"]
         # share of the page's neighborhoods (those with a rate) whose violent rate is at or below this one: 0.2 = lowest fifth
         t["violent_pctile"] = t["violent"].rank(pct=True, method="max")
         return t.drop(columns=["violent"])

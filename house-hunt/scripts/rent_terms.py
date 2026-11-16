@@ -37,7 +37,7 @@ EVID = ROOT / "data" / "evidence"
 DEFAULT_MOVE_IN = date(2026, 12, 1)       # used when the unit is "available now"
 YEAR = 2026
 
-COLS = ["listing_id", "addr_key", "listed_rent", "listed_price_is", "offer_text", "offer_type", "free_months",
+COLS = ["listing_id", "addr_key", "listed_rent", "listed_price_is", "offer_text", "offer_text_page", "offer_type", "free_months",
         "free_period_timing", "lease_months", "gross_monthly_rent", "net_effective_monthly",
         "first_full_payment_date", "first_full_payment_note", "offer_expires", "conditions", "computed_how",
         "confidence", "source_url", "needs_call", "gross_if_listed_is_net", "net_if_listed_is_gross"]
@@ -81,7 +81,17 @@ NET_STMT = re.compile(r"net[- ]?effective|price includes concessions|after (?:re
 # (independent check 2, D14: Beacon Mill Village, Arcade Apartments, Avalon Somerville were costed as net-effective).
 NET_NEG = re.compile(r"not the net[- ]effective|based on the gross rent|(?:does not|doesn't|neither page|no page|nor does it) says? whether|"
                      r"whether (?:the |\$[\d,]+ |rent |price )?(?:is |are )?(?:gross or net|net[- ]effective or gross)|gross or net(?:[- ]effective)? not stated|"
-                     r"net[- ]effective equals price|not (?:a )?net[- ]effective|discount is on move-in costs", re.I)
+                     r"net[- ]effective equals price|not (?:a )?net[- ]effective|discount is on move-in costs|"
+                     # independent check 3, D5: the checker's own "the page does not say" sentences, in every wording seen:
+                     # "Gross or net-effective: not stated", "not stated as net-effective", "not stated whether the listed
+                     # price is gross or net-effective", "gross or net-effective listing price: not stated"
+                     r"(?:gross or net|net[- ]effective)[^.;|]{0,60}(?:not stated|unstated|not said|not given|not published|unknown|unclear)|"
+                     r"(?:not stated|not said|unstated|does not (?:say|state)|doesn't (?:say|state)|unclear|unknown)[^.;|]{0,60}(?:gross or net|net[- ]effective)|"
+                     r"(?:is|are|shows?) (?:the )?base rent\b[^.;|]{0,40}(?:not|no) [^.;|]{0,20}net", re.I)
+# Text a checker or harvester wrote ABOUT the page, or raw page data: never shown as the offer's own words (docs/PENDING_FIXES.md)
+NOT_PAGE_WORDS = re.compile(r"\[evidence\]|\[live check\]|not stated|not said|capture \d|\bUTC\b|base_price|total_?price|netEffective|price_basis|page data|"
+                            r"\bper (?:Trulia|Zumper|Apartment List)\b|unit data|own site|\(.{0,30}field\)|stored price|\bterm \d+: price|^\s*\w+[:=]\s*[\w$.,-]+\s*[;,]\s*\w+[:=]|"
+                            r"\bgross unknown\b|so likely|refreshed 20\d\d", re.I)
 GROSS_AMT = re.compile(r"gross rent\s+(?:of|is)\s+\$\s?([\d,]+)|\$\s?([\d,]+)\s+gross\b", re.I)
 UNIT_GROSS = re.compile(r"\b(?:unit\s+)?#?(\w{1,6})\s+is\s+a\s+[^$]{0,60}?gross rent of\s+\$\s?([\d,]+)", re.I)
 DEPOSIT = re.compile(r"deposit|\bsecurity\b", re.I)
@@ -515,6 +525,11 @@ def build_row(u, facts, live):
         seen.append(k)
         uniq.append((origin, t, url))
     pieces = uniq
+    # D5: a piece that is ONLY the checker saying "the page does not say whether the price is net-effective" is not offer
+    # language. It still sets net_neg (so nothing is read as net-effective) but does not make an "offer" out of no offer.
+    neg_only = [(o, t, url) for o, t, url in pieces if all(NET_NEG.search(c) for c in sentences(re.sub(r"^\[(?:evidence|live check)\]\s*", "", t)))]
+    if neg_only:
+        pieces = [x for x in pieces if x not in neg_only]
 
     # ---- parse
     P = [(o, t, url, parse_piece(t, beds, unit_no)) for o, t, url in pieces]
@@ -522,7 +537,7 @@ def build_row(u, facts, live):
     credits = list({c["amt"]: c for o, t, url, p in P for c in p["credits"]}.values())
     piece_select = {id(f): p["select"] for o, t, url, p in P for f in p["offers"]}
     net = any(p["net"] for *_, p in P)
-    net_neg = any(p["net_neg"] for *_, p in P)
+    net_neg = any(p["net_neg"] for *_, p in P) or bool(neg_only)
     deposit = any(p["deposit"] for *_, p in P)
     fee = any(p["fee"] for *_, p in P)
     looklease = any(p["looklease"] for *_, p in P)
@@ -828,13 +843,18 @@ def build_row(u, facts, live):
     offer_text = " | ".join(re.sub(r"\s*\n\s*", " / ", t) for _, (o, t, url) in ordered)
     if len(offer_text) > 400:
         offer_text = offer_text[:397] + "..."
+    # the offer in the page's own words only (special banner, stored concession text, description): no checker notes, no raw page data
+    page_txt = [re.sub(r"\s*\n\s*", " / ", t) for _, (o, t, url) in ordered if o in ("special", "stored", "description") and not NOT_PAGE_WORDS.search(t)]
+    offer_text_page = " | ".join(dict.fromkeys(page_txt))
+    if len(offer_text_page) > 300:
+        offer_text_page = offer_text_page[:297].rsplit(" ", 1)[0] + "..."
     urls = list(dict.fromkeys([u["url"]] + [url for o, t, url in pieces if url]))
 
     if otype == "none":
         confidence = "stated_on_page"
     return {
         "listing_id": lid, "addr_key": akey, "listed_rent": u["listed_rent"], "listed_price_is": price_is,
-        "offer_text": offer_text, "offer_type": otype, "free_months": free_txt,
+        "offer_text": offer_text, "offer_text_page": offer_text_page, "offer_type": otype, "free_months": free_txt,
         "free_period_timing": timing_out, "lease_months": lease or "",
         "gross_monthly_rent": fnum(round(gross)) if gross is not None else "",
         "net_effective_monthly": fnum(round(netv)) if netv is not None else "",

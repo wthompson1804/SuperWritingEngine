@@ -72,6 +72,7 @@ BLDG = {
 FROM_TOLLS = {"b_toll", "b_tollmax", "b_tollok"}       # read from data/enriched, not master_buildings.csv
 # alias: (column of site/data.json#neighborhoods, usual rounding)
 HOOD_PAGE = {"pg_lo": ("all_in_lo", "usd50"), "pg_hi": ("all_in_hi", "usd50"), "pg_n": ("shown", "int"),
+             "pg_spread": ("all_in_spread", "int"),
              "pg_sqft": ("sqft_median", "r10"), "pg_safe": ("violent_pctile", "pct"),
              # the page's 1-to-5 comparison with the Queens median (3 = about the same, 5 = much better for her)
              "q_cost": ("vq_all_in", "int"), "q_sqft": ("vq_sqft", "int"), "q_drive": ("vq_drive_min", "int"),
@@ -173,6 +174,30 @@ def resolve(alias, ctx):
     raise KeyError(f"{ctx['id']}: unknown token {{{alias}}}")
 
 
+PLURAL = {"restaurant": "restaurants", "bar": "bars", "café": "cafés", "brewery": "breweries", "minute": "minutes",
+          "place": "places"}
+COUNTED = re.compile(r"\b(?<![.,])(\d+) (restaurants?|bars?|cafés?|brewer(?:y|ies)|minutes?|places?)\b( is| are)?")
+
+
+def agree(text):
+    """The drafts type a noun after a number token, and the number moves with the data: make the noun (and an `is` /
+    `are` right after it) agree, and write "no bars" for a count of 0."""
+    def fix(m):
+        n, noun, verb = int(m.group(1)), m.group(2), m.group(3)
+        one = next(k for k, v in PLURAL.items() if noun in (k, v))
+        if n == 0 and one not in ("minute", "place"):
+            return f"no {PLURAL[one]}" + (" are" if verb else "")
+        return f"{n} {one if n == 1 else PLURAL[one]}" + ((" is" if n == 1 else " are") if verb else "")
+    return COUNTED.sub(fix, text)
+
+
+class Dropped(Exception):
+    """A sentence whose hidden test on the page's shown units no longer holds."""
+
+
+DROPPED = []
+
+
 def drop_optional(raw, ctx):
     """[[ ... ]] stays only when every value inside it is present and every hidden test inside it holds."""
     def keep(m):
@@ -226,6 +251,8 @@ def render(raw, ctx, evidence):
                 operand = operand.strip()
                 test = [op] if op in ("missing", "present") else [op, operand]
                 if not C.holds(value, test):
+                    if src.startswith(C.PAGE):            # a claim about the places shown: the unit list moves with
+                        raise Dropped(f"{ctx['id']}: {alias} is {value}, which fails {test}: {sent[:90]}")   # every rerun
                     raise ValueError(f"{ctx['id']}: {alias} is {value}, which fails {test}: {sent[:80]}")
                 ev["holds_if"] = test
                 if extra:
@@ -239,10 +266,15 @@ def render(raw, ctx, evidence):
             pending.append(ev)
             return shown
 
-        text = TOKEN.sub(sub, sent)
+        try:
+            text = TOKEN.sub(sub, sent)
+        except Dropped as e:                              # the sentence is no longer true of the shown places:
+            DROPPED.append(str(e))                        # it is left out (and listed), not printed
+            continue
         if "{" in text or "}" in text:
             raise ValueError(f"{ctx['id']}: unparsed token in: {text}")
         text = re.sub(r"\s+([.,;])", r"\1", re.sub(r"\s{2,}", " ", text)).strip()
+        text = agree(text)
         for ev in pending:
             evidence.append({"claim": text, **ev})
         out.append(text)
@@ -539,6 +571,7 @@ def main():
             errors.append(f"points [{topic} | {icon} | {', '.join(conds)}]: {len(set(variants))} wordings, wanted at "
                           f"least {POINT_MIN_WORDINGS}")
     SUB_USED.clear()
+    DROPPED.clear()
     for (kind, section), rules in subs.items():
         for conds, variants in rules:
             if len(variants) < SUB_MIN_WORDINGS or len(set(variants)) < len(variants):
@@ -623,6 +656,11 @@ def main():
                   f"({n / len(hoods):.1%}): {text[:50]}")
     for e in errors:
         print("  ", e)
+    if DROPPED:
+        print(f"{len(DROPPED)} sentences left out because the places now shown no longer support them "
+              f"(rewrite them in the drafts when the unit list settles):")
+        for d in DROPPED:
+            print("   ", d)
     if stale:
         print(f"skipped {len(stale)} drafts whose neighborhood is no longer in {LG}: {stale}")
     return 1 if errors else 0

@@ -849,7 +849,6 @@ def main():
     DOUBT = load_elevator_doubt()
     labels_by_b = U.groupby("building_id").unit.apply(lambda x: [u for u in x if parsers.unit_label_key(u)]).to_dict()
     stated_floor_by_b = U[U.floor_basis.eq("stated")].groupby("building_id").floor_used.apply(list).to_dict() if "floor_used" in U else {}
-    pluto_fl_by_b = U.groupby("building_id").pluto_floors.apply(list).to_dict() if "pluto_floors" in U else {}
     for b, d in rows.items():
         if d.get("elevator") != "yes" or d.get("elevator_basis") == PHONE:
             continue
@@ -857,7 +856,7 @@ def main():
             d["elevator_doubt"] = f"reviewed table: {DOUBT[b]['why']}"
             d["elevator_doubt_source"] = "data/reference/elevator_doubt.csv (" + DOUBT[b]["source"] + ")"
         elif d.get("elevator_aggregator_only") == "yes":
-            heights = [d.get("building_floors", "") if d.get("building_floors_basis") != "inferred" else ""] + pluto_fl_by_b.get(b, []) + stated_floor_by_b.get(b, []) \
+            heights = [d.get("building_floors", "") if d.get("building_floors_basis") != "inferred" else ""] + stated_floor_by_b.get(b, []) \
                 + [f_ for (b_, lab, f_, basis, *_x) in floor_rows if b_ == b and basis == "confirmed"]
             if garden_style(labels_by_b.get(b, []), heights):
                 prefs = sorted({parsers.building_prefix(u) for u in labels_by_b.get(b, []) if parsers.building_prefix(u)})
@@ -1164,6 +1163,7 @@ def main():
     # 4b: staleness from modification dates where the data has them: the unit's own live-check note, else a
     # listing_last_modified / listing_updated_at fact read on the same site as the unit's listing
     host = url_host
+    page_key = lambda u_: re.sub(r"[?#].*$", "", str(u_).strip().lower()).rstrip("/")
     # independent check 3, D3 (Residences at The Summit K3-02): the modification date of a building PAGE belongs to
     # every unit listed on that page, not only to the unit whose live-check note happens to quote it. Dates are
     # collected per (building, page host) from every live-check note of the building that speaks of the page itself.
@@ -1173,7 +1173,7 @@ def main():
             if re.search(r"building page|page last modified|\(last modified", str(r.notes), re.I):
                 d0 = parsers.page_modified_date(r.notes)
                 if d0:
-                    k0 = (r.building_id, host(r.listing_url))
+                    k0 = (r.building_id, page_key(r.listing_url))
                     page_dates[k0] = max(page_dates.get(k0, ""), d0)
     dup_urls = MU.duplicate_listing_ids.map(lambda ids: " ".join(dups[dups.listing_id.isin(ids.split())].url) if ids else "") if len(dups) else pd.Series("", index=MU.index)
     pm, pms, st_lvl, st_days, st_why = [], [], [], [], []
@@ -1187,7 +1187,7 @@ def main():
         same_page_check = (not seen_live) or (not str(lurl).strip()) or host(lurl) == host(url_)
         if not d_ and same_page_check:
             same = [d for d, u_ in mod_facts.get(b, []) if host(u_) and host(u_) == host(url_)]
-            sib = page_dates.get((b, host(url_)), "") if "/building/" in str(url_) or not parsers.unit_label_key("") else ""
+            sib = page_dates.get((b, page_key(url_)), "")      # only where this unit is listed on that very page
             if same:
                 d_, src_, read_on = max(same), "evidence fact (page data of the listing site)", str(ls)[:10] or str(lc)[:10]
             elif sib:

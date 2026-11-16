@@ -35,7 +35,11 @@ UNIVERSAL_SHARE, PROMISE_SHARE = 0.7, 0.3
 POOL_BUMP, INDOOR_POOL_BUMP = 3, 6
 UNKNOWN_PCT = 25
 CERTAINTY = {"clean": 1.0, "one_inferred": 0.97}
-MAX_PER_BUILDING, SHOWN, CANDIDATES = 2, 10 ** 6, 15
+MAX_PER_BUILDING, SHOWN, CANDIDATES = 8, 10 ** 6, 15
+# MAX_PER_BUILDING (owner, 2026-11-16): the page now groups apartments under their building, so up to 8 units of a
+# building are shown (it was 2), in rank order inside the building by the same score. CAND_PER_BUILDING keeps the
+# candidate / phone-call lists (hood_rank, needs_confirmation, needs_live_check) at two per building, as before.
+CAND_PER_BUILDING = 2
 # SHOWN (owner, 2026-11-16): the page shows the top three first and the rest on "show more", so the old cap of 10 per
 # neighborhood no longer hides a reviewed, showable unit. Order is still by rank; at most MAX_PER_BUILDING per building,
 # and each shown unit records how many further showable units its building has (more_in_building).
@@ -48,6 +52,11 @@ MAX_PER_BUILDING, SHOWN, CANDIDATES = 2, 10 ** 6, 15
 # unit is probably or possibly on the ground floor (scripts/avoid.py), and a reviewer's verdict saying so.
 GATE_KEYS = {"elevator", "dogs", "availability", "listing", "eligibility"}
 DISCLOSURE_KEYS = {"floor", "lease", "cost", "condo", "other"}
+ELEVATOR_DOUBT_Q = "Confirm an elevator serves this apartment"
+COST_DISCLOSURE = "could pass $3,000"          # replaces "cost near the cap" (owner, 2026-11-16)
+COST_DISCLOSURE_TEXT = "Could pass $3,000 once parking and fees are known"
+OFFER_DISCLOSURE = "special offer"
+OFFER_QUESTION = "Special offer: ask what a normal month costs"
 FLOOR_DISCLOSURE = "Floor not published: confirm it is above the ground floor"
 CAP, NEAR_CAP = 3000, 100          # D12: within $100 of the cap with an unknown cost line -> asterisk "cost near the cap"
 COLOR_DIR = DATA / "enriched_color"
@@ -72,6 +81,8 @@ def parking_rank(t):
     t = str(t).lower()
     if not t or t in ("nan", "unknown", "?", "no_mention", "parking_type_unknown"):
         return np.nan
+    if parsers.OFFSITE_PARKING.search(t):
+        return 2                       # D10: off-site parking ("2 blocks away, covered") is off the street but not at the building
     if "garage" in t or "gated" in t:
         return 4
     if "covered" in t or "carport" in t:
@@ -173,15 +184,36 @@ def main():
     # evidence a reviewer has read. remove -> excluded here, before ranking, with the reviewer's reason.
     # asterisk -> the unit counts as having that open fact (below). ok -> nothing added. A verdict never closes a fact
     # the rules leave open; scripts/check_registry.py fails the run if a shown unit has no current ok / asterisk verdict.
-    vf = DATA / "evidence" / "review_verdicts.csv"
-    V = pd.read_csv(vf, dtype=str, keep_default_na=False).drop_duplicates("listing_id", keep="last").set_index("listing_id") if vf.exists() else \
-        pd.DataFrame(columns=["verdict", "kind", "what_to_confirm", "why"])
-    vd = lambda c: u.listing_id.map(V[c]).fillna("") if len(V) else pd.Series("", index=u.index)
+    # Independent check 3, D22: the table holds SEVERAL rows per unit, one per kind (scripts/verdicts.py). Gate kinds
+    # (verdict asterisk) each count as an open gate fact; disclosure kinds (verdict disclose) are all listed.
+    import verdicts as VD
+    VU = VD.by_unit()                    # reads data/evidence/review_verdicts.csv
+    def vd(c):
+        if c == "verdict":
+            return u.listing_id.map(lambda l: VU[l]["verdict"] if l in VU else "")
+        if c == "kind":
+            return u.listing_id.map(lambda l: ";".join(r["kind"] for r in VU[l]["rows"] if r["kind"]) if l in VU else "")
+        return u.listing_id.map(lambda l: next((r[c] for r in VU[l]["rows"] if r["verdict"] == VU[l]["verdict"]), "") if l in VU else "")
     rm = vd("verdict").eq("remove")
-    u[rm].assign(drop_reason="reviewed: " + vd("why")[rm], review_kind=vd("kind")[rm]).to_csv(DATA / "excluded_by_review.csv", index=False)
+    u[rm].assign(drop_reason="reviewed: " + vd("why")[rm], review_kind=u.listing_id[rm].map(lambda l: ";".join(r["kind"] for r in VU[l]["rows"] if r["verdict"] == "remove"))) \
+        .to_csv(DATA / "excluded_by_review.csv", index=False)
     n_rev = int(rm.sum()); u = u[~rm].copy()
+    # D2 (Halstead Parsippany 2182): SIBLING CONSISTENCY. Where a reviewer removed units of a building because "the unit
+    # number reads as floor 1", every other unit of that building whose label has the same shape and the same digit in
+    # the place the reviewer read as the floor is removed too. The pattern is taken from the removed labels themselves.
+    removed_floor = {}
+    for l, d in VU.items():
+        for r in d["rows"]:
+            if r["verdict"] == "remove" and r["kind"] == "floor" and parsers.unit_label_key(r["unit"]) \
+                    and __import__("re").search(r"first[- ]floor|floor 1\b|ground", r["why"], __import__("re").I):
+                removed_floor.setdefault(r["building_id"], []).append(r["unit"])
+    sib = pd.Series([b in removed_floor and parsers.reads_as_ground_like_siblings(un, removed_floor[b]) for b, un in zip(u.building_id, u.unit.fillna("").astype(str))], index=u.index)
+    u[sib].assign(drop_reason=["sibling rule: the unit number has the same shape as units " + ", ".join(sorted(removed_floor[b])[:5])
+                               + " of this building, which a reviewer removed because their numbers read as first-floor units" for b in u.building_id[sib]],
+                  review_kind="floor").to_csv(DATA / "excluded_by_sibling_rule.csv", index=False)
+    n_sib = int(sib.sum()); u = u[~sib].copy()
     s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
-    vd = lambda c: u.listing_id.map(V[c]).fillna("") if len(V) else pd.Series("", index=u.index)
+    vhas = lambda *kinds: u.listing_id.map(lambda l: l in VU and any(r["kind"] in kinds and r["verdict"] in ("asterisk", "disclose") for r in VU[l]["rows"])).astype(bool)
 
     # ---- listing confidence
     age = pd.to_numeric(u.get("listing_age_days"), errors="coerce")
@@ -202,24 +234,25 @@ def main():
     #            size field) with no pound figure PASSES (owner, 2026-11-15: her dog is at most 25 lb): the unit can be
     #            shown, with the note "page says small dogs; no weight number" and a tour question
     wl = wl.reindex(u.index); fl = fl.reindex(u.index)
-    v_ast = vd("verdict").eq("asterisk")
-    vk = vd("kind").where(v_ast, "")
     # elevator: no page or record states one (base), or the evidence pass looked and could not confirm it (D2, D7, D9),
     # or the reviewer's verdict says it is not established for this building
     # a fact answered on the phone is settled: neither an older evidence row nor an earlier reviewer's asterisk reopens it
     phone_e, phone_d = s("elevator_basis").eq(SETTLED_BY_PHONE), s("dogs_allowed_basis").eq(SETTLED_BY_PHONE)
     phone_av = s("call_available").ne("")
     base_e = s("elevator_basis").isin(["inferred", "", "unknown"]) | s("elevator").str.lower().ne("yes")
-    inf_e = base_e | ((s("elevator_evidence_open").ne("") | vk.eq("elevator")) & ~phone_e)
+    # owner, 2026-11-16: a building in the reviewed doubt table, or a tag-only elevator in a complex the data shows to be
+    # multi-building garden-style (build_master.py: elevator_doubt), is an open gate fact: "confirm an elevator serves this apartment"
+    doubt_e = s("elevator_doubt").ne("") & ~phone_e
+    inf_e = base_e | ((s("elevator_evidence_open").ne("") | vhas("elevator")) & ~phone_e) | doubt_e
     fb, fk = s("unit_floor_basis"), s("unit_floor_label_kind")
     floor_settled = fb.isin(["confirmed", "stated", SETTLED_BY_PHONE])
     floor_from_label_ok = fb.eq("inferred") & fk.eq("simple") & (fl >= 3)
-    inf_f = ~floor_settled | vk.eq("floor")          # not published: unknown, or only read from the unit number
+    inf_f = ~floor_settled | vhas("floor")          # not published: unknown, or only read from the unit number
     u["floor_basis_note"] = np.where(floor_from_label_ok, "read from the unit number", "")
     # dogs: allowed must be stated or confirmed, and dogs must be NAMED as allowed (D2, D3): an unconfirmed evidence
     # row, "pets upon approval", "case by case" or small pets with dogs unnamed leave the fact open
     base_d = s("dogs_allowed").str.lower().ne("yes")
-    dog_open = base_d | ((s("dogs_evidence_open").ne("") | vk.eq("dogs")) & ~phone_d)
+    dog_open = base_d | ((s("dogs_evidence_open").ne("") | vhas("dogs")) & ~phone_d)
     no_limit = s("dog_weight_limit_lb").str.lower().eq("no limit")
     dog_small = s("dog_size_only").ne("") & wl.isna() & ~no_limit
     # 4a: "weight restrictions apply" / a weight limit with no number passes like "small dogs", with the same tour question
@@ -238,40 +271,59 @@ def main():
     #  plus whatever a reviewer's asterisk verdict names (availability, listing, eligibility, condo, other)
     lm = pd.to_numeric(s("price_lease_months"), errors="coerce")
     p12 = pd.to_numeric(s("price_12_month"), errors="coerce")
-    lease_open = (lm > 13) | s("price_lowest_of_terms").eq("yes") | vk.eq("lease_term")
-    cost_open = (u.all_in >= CAP - NEAR_CAP) & (pd.to_numeric(s("all_in_unknown_count"), errors="coerce").fillna(0) >= 1)
+    # D9 (The Riverhouse): the offer itself says the advertised price is for a longer lease ("3 months free on 18 month
+    # leases", rent_terms lease_months) although the price field gives no term
+    olm = pd.to_numeric(s("rent_lease_months"), errors="coerce").where(s("rent_basis_kind").eq("net_effective"))
+    lm = lm.where(lm.notna(), olm.where(olm > 13))
+    lease_open = (lm > 13) | s("price_lowest_of_terms").eq("yes") | vhas("lease_term")
+    # owner, 2026-11-16: within the cap on what is known, over it once the unknown parking and fee lines take their medians
+    likely = pd.to_numeric(s("all_in_likely"), errors="coerce")
+    cost_open = (u.all_in <= CAP) & (likely > CAP)
     plan_only = s("unit").map(parsers.unit_label_key).eq("") & (s("detail_level").eq("building_floorplan") | s("listing_id").str.contains(":plan-") | s("unit").str.strip().ne(""))
-    avail_open = (plan_only | vk.isin(["not_available"])) & ~phone_av
+    avail_open = (plan_only | vhas("not_available")) & ~phone_av
     # 4b: a page last changed more than 60 days before it was read (no second site), or an availability date over six
     # months old, is the open item "listing" by rule; it is not counted twice when a reviewer already wrote it up as availability
-    stale_open = s("listing_stale").eq("open") & ~vk.isin(["not_available"]) & ~phone_av
-    listing_open = (s("listing_warning").ne("") | vk.isin(["unverified", "wrong_building"]) | stale_open) & ~(phone_av & s("listing_warning").eq(""))
+    stale_open = s("listing_stale").eq("open") & ~vhas("not_available") & ~phone_av
+    # D1 (98-76 Queens Blvd 2M): a checker's note that the price itself must be verified ("far below the area's other listings")
+    price_open = s("live_notes").map(parsers.price_doubt) & ~phone_av
+    listing_open = (s("listing_warning").ne("") | vhas("unverified", "wrong_building") | stale_open | price_open) & ~(phone_av & s("listing_warning").eq(""))
     # eligibility: a reviewer's finding, or a listing site's income-restricted tag the manager's own page does not bear out
-    elig_open, condo_open, other_open = vk.eq("restricted") | s("eligibility_open").ne(""), vk.eq("coop_condo"), vk.eq("other")
+    # D8: a condo by RULE, not only by verdict: the city classes the listing's own lot as a condominium (class R*) and the
+    # row is not a managed rental building, or the listing itself is typed condo / co-op
+    condo_rule = (s("pluto_class").str.upper().str.startswith("R") & s("pluto_lot_ok").eq("yes") & s("listing_type").ne("managed_building")) | s("listing_type").str.contains("condo", case=False)
+    elig_open, condo_open, other_open = vhas("restricted") | s("eligibility_open").ne(""), vhas("coop_condo") | condo_rule, vhas("other")
     unknown_lines = s("all_in_unknown_lines").str.replace("building fees (part)", "some required fees", regex=False).str.replace("building fees", "required fees").str.replace("parking fee", "parking") \
         .map(lambda t: " / ".join(x for x in t.split("; ") if x in ("pet rent", "parking", "required fees", "some required fees")))
     lease_why = np.where(lm > 13, "The listed price is for a " + lm.fillna(0).astype(int).astype(str) + "-month lease."
                          + pd.Series(np.where(p12.notna(), " The 12-month price is $" + p12.fillna(0).astype(int).astype(str) + ", which is what the cost here uses.", " The 12-month price is not published."), index=u.index),
-                         "The listed price is the lowest over the lease terms offered; the term it belongs to and the 12-month price are not published.")
+                         np.where(s("price_lowest_of_terms").eq("yes"), "The listed price is the lowest over the lease terms offered; the term it belongs to and the 12-month price are not published.",
+                                  "The listing's own terms tie this price to a lease longer than 13 months."))
     OPEN = [  # key, flag, label on the page, why, question
         ("elevator", inf_e, "elevator",
-         np.where(base_e, "No page states an elevator; the building's height suggests one.", "The evidence pass could not confirm an elevator for this building: " + s("elevator_evidence_open").str.replace("the evidence pass could not confirm it: ", "", regex=False).str[:140]),
-         "Does this building have an elevator?"),
+         np.where(base_e, "No page states an elevator; the building's height suggests one.",
+                  np.where(s("elevator_evidence_open").ne(""), "The evidence pass could not confirm an elevator for this building: " + s("elevator_evidence_open").str.replace("the evidence pass could not confirm it: ", "", regex=False).str[:140],
+                           "An elevator is named for this property, but it is a low-rise or multi-building complex, so that does not say an elevator serves this apartment: "
+                           + s("elevator_doubt").str.replace(r"^(?:reviewed table|rule): ", "", regex=True).str[:220])),
+         np.where(doubt_e & ~base_e & s("elevator_evidence_open").eq(""), ELEVATOR_DOUBT_Q + " (this building of the complex, this floor)", "Does this building have an elevator?")),
         ("floor", inf_f, "floor", None, None),
         ("dogs", dog_open, "dogs allowed",
          np.where(base_d, "Two listing sites disagree on whether dogs are allowed, and the building's own page does not settle it.",
                   "Dogs are not confirmed as allowed here: " + s("dogs_evidence_open").str.replace("the evidence pass could not confirm it: ", "", regex=False).str[:140]),
          "Are dogs allowed? (dogs must be named as allowed, not 'pets on approval')"),
         ("lease", lease_open, "lease term", lease_why, "What is the rent on a 12-month lease?"),
-        ("cost", cost_open, "cost near the cap", "Cost near the cap: " + unknown_lines + " not published (counted as $0), and the all-in figure is within $" + str(NEAR_CAP) + " of $3,000.",
-         "What are the pet rent, parking and required monthly fees?"),
+        ("cost", cost_open, COST_DISCLOSURE, COST_DISCLOSURE_TEXT + ": $" + u.all_in.round().astype(int).astype(str) + " a month on what is published; about $"
+         + likely.fillna(0).round().astype(int).astype(str) + " if " + unknown_lines.str.replace(" / ", " and ") + " cost what they typically do (" + s("all_in_likely_note").str[:260] + "). Not published for this building.",
+         "What do parking and the required monthly fees cost here?"),
         ("availability", avail_open, "availability", "This is a floor-plan price, not a named unit: no unit, floor or date could be checked.", "Which unit is available at this price, on which floor, and from when?"),
         ("listing", listing_open, "listing", np.where(s("listing_warning").ne(""), "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160],
-                                                      "The listing may be stale: " + s("listing_stale_why") + "."),
-         np.where(s("listing_warning").ne(""), "Is this listing for this building, and is it genuine?", "Is this unit still available? The listing page has not changed in over two months.")),
+                                                      np.where(price_open, "The evidence pass flagged the price: " + s("live_notes").str[:200], "The listing may be stale: " + s("listing_stale_why") + ".")),
+         np.where(s("listing_warning").ne(""), "Is this listing for this building, and is it genuine?",
+                  np.where(price_open, "Is this price real? Verify it by phone before touring.", "Is this unit still available? The listing page has not changed in over two months."))),
         ("eligibility", elig_open, "eligibility", np.where(s("eligibility_open").ne(""), "Eligibility is not settled: " + s("eligibility_open").str[:200], ""),
          "Is this unit open to any renter, or is there an income limit?"),
-        ("condo", condo_open, "condo rules", "", "What are the building's rules for renting this unit?"),
+        ("condo", condo_open, "condo rules", np.where(s("listing_type").str.contains("condo", case=False), "The listing is typed as a condo or co-op unit, rented out by its owner rather than by a leasing office.",
+                                                      "The city records this building as a condominium (building class " + s("pluto_class") + "): the unit is rented out by its owner, not by a leasing office."),
+         "What are the condominium's rules for renting this unit (application, fees, pets)?"),
         ("other", other_open, "other", "", ""),
     ]
     KIND_KEY = {"elevator": "elevator", "floor": "floor", "dogs": "dogs", "lease_term": "lease", "not_available": "availability", "unverified": "listing",
@@ -286,10 +338,13 @@ def main():
     fnum = s("unit_floor").str.replace(r"\.0$", "", regex=True)
     floor_why = np.where(inf_f & fb.eq("inferred"), "No page states the floor; " + fnum + " is only read from the unit number " + s("unit") + ".",
                          "The listing does not give the floor, and the unit number does not show it.")
-    v_why, v_q, v_key = vd("why").where(v_ast, ""), vd("what_to_confirm").where(v_ast, ""), vk.map(KIND_KEY).fillna("")
+    # the reviewer's own words per key: {key: (why, question)} for each unit
+    v_text = [{KIND_KEY.get(r["kind"], ""): (r["why"], r["what_to_confirm"]) for r in VU[l]["rows"] if r["verdict"] in ("asterisk", "disclose")} if l in VU else {} for l in u.listing_id]
     what_l, why_l, q_l, keys_l, disc_l = [], [], [], [], []
     net_eff = s("rent_basis_kind").eq("net_effective").values
     offer_txt = s("rent_offer_text").str[:160].values
+    special = (s("rent_offer_kind").eq("special_offer") & ~s("rent_basis_kind").eq("net_effective")).values
+    offer_type = s("rent_offer_type").values
     cols_ = [(k, f.values, lab, np.asarray(floor_why if k == "floor" else (w if not isinstance(w, str) else np.full(len(u), w, dtype=object))),
               (None if k == "floor" else (q if isinstance(q, str) else np.asarray(q)))) for k, f, lab, w, q in OPEN]
     # step 3: overnight street-parking rule of the town, where the unit's parking is not confirmed at the building
@@ -301,17 +356,24 @@ def main():
         whats, whys, qs, keys, disc = [], [], [], [], []
         for k, f, lab, w, q in cols_:
             if f[i]:
-                reviewed = v_key.iloc[i] == k
-                why_ = v_why.iloc[i] if reviewed and v_why.iloc[i] else str(w[i])
-                q_ = v_q.iloc[i] if reviewed and v_q.iloc[i] else (fq[i] if k == "floor" else (q if isinstance(q, str) else str(q[i])))
+                rv = v_text[i].get(k)
+                why_ = rv[0] if rv and rv[0] else str(w[i])
+                q_ = rv[1] if rv and rv[1] else (fq[i] if k == "floor" else (q if isinstance(q, str) else str(q[i])))
                 if k in DISCLOSURE_KEYS:
-                    disc.append({"what": "condo rented by its owner" if k in ("condo", "other") else ("floor not published" if k == "floor" else lab),
+                    is_condo = k == "condo" or (k == "other" and "condo" in why_.lower())
+                    disc.append({"what": "condo rented by its owner" if is_condo else ("floor not published" if k == "floor" else ("something else to know" if k == "other" else lab)),
                                  "why": why_, "question": FLOOR_DISCLOSURE if k == "floor" else (q_ or "")})
                     continue
                 keys.append(k); whats.append(lab); whys.append(why_); qs.append(q_)
         if net_eff[i]:
             disc.append({"what": "net-effective rent", "why": "The rent shown is the average after a special offer, not the monthly payment." + (" Offer: " + offer_txt[i] if offer_txt[i] else ""),
                          "question": "What is the full monthly rent, and when is the first full payment due?"})
+        elif special[i]:
+            # D5 / D16: an offer the page does not tie to the listed price is disclosed as an offer, never as "net-effective"
+            kind_txt = {"dollar_credit": "a one-time credit or gift", "look_and_lease": "a one-time credit for applying quickly", "months_free": "free rent",
+                        "weeks_free": "free rent"}.get(offer_type[i], "a special")
+            disc.append({"what": OFFER_DISCLOSURE, "why": "The listing advertises " + kind_txt + ". The page does not say the price shown already includes it, so the price is treated as the normal monthly rent."
+                         + (" Offer: " + offer_txt[i] if offer_txt[i] else ""), "question": OFFER_QUESTION})
         if wl_un[i]:
             disc.append({"what": "dog weight limit not published", "why": "The page says a weight limit or weight restrictions apply and gives no number: \"" + wl_txt[i] + "\".",
                          "question": parsers.DOG_WEIGHT_QUESTION})
@@ -330,6 +392,7 @@ def main():
     # gate fact is shown with an asterisk instead of being held back)
     u["confirm_what"], u["confirm_why"] = what_l, why_l
     u["review_verdict"], u["review_kind"] = vd("verdict"), vd("kind")
+    u["unknown_cost_lines"] = unknown_lines.str.replace(" / ", "; ")
     u["open_gate_facts"] = n_inf
     u["confidence"] = np.where(reasons != "", "sketchy", np.where(n_inf == 0, "clean", np.where(n_inf == 1, "one_inferred", "sketchy")))
     u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(weak_e, "elevator not stated on any page and the building's height is not known (it was guessed from the unit label)", np.where(n_inf >= 2, "two or more things unconfirmed: " + u.confirm_what, "")))
@@ -491,9 +554,9 @@ def main():
                 u.loc[g.index[i], "dominated"] = True
     # D19: selection must not depend on file order. Equal scores: a unit seen live in the evidence pass first, then listing_id.
     u = u.sort_values(["hood_id", "dominated", "rank_score", "live_ok", "listing_id"], ascending=[True, True, False, False, True], kind="mergesort")
-    # at most 2 per building, counted on the building (not the address key: independent check W8)
+    # candidates: at most 2 per building, counted on the building (not the address key: independent check W8)
     u["nth_in_building"] = u.groupby("building_id").cumcount() + 1
-    elig = u.nth_in_building <= MAX_PER_BUILDING
+    elig = u.nth_in_building <= CAND_PER_BUILDING
     u["hood_rank"] = np.nan
     u.loc[elig, "hood_rank"] = u[elig].groupby("hood_id").cumcount() + 1
     u["candidate"] = u.hood_rank <= CANDIDATES
@@ -509,6 +572,7 @@ def main():
     u["open_items"] = u.open_gate_facts + no_live.astype(int)
     live_txt = np.where(u.live_status.fillna("").astype(str).eq("blocked"), "The listing page could not be opened in the evidence pass; price and availability are as first collected.",
                         "The listing has not been seen live in the evidence pass yet; price and availability are as first collected.")
+    # D3: a unit that was never seen live on a building page whose date is stale has two things open (rule, not only verdict)
     u["confirm_what"] = np.where(clean & no_live, "live check", u.confirm_what)
     u["confirm_why"] = np.where(clean & no_live, live_txt, u.confirm_why)
     # a building the evidence pass never touched has nothing a reviewer could read: its units wait, they are not shown
@@ -580,7 +644,8 @@ def main():
     print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, of them with an asterisk {int((u.shown & (u.confirm_asterisk == 'yes')).sum())} "
           f"({u[u.shown & (u.confirm_asterisk == 'yes')].confirm_what.value_counts().to_dict()}), held for a confirmation {int(u.held_for_confirmation.sum())}, "
           f"waiting for a live check {int(u.needs_live_check.sum())}")
-    print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_rev} removed by a reviewed verdict -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
+    print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_rev} removed by a reviewed verdict -> -{n_sib} sibling floor rule -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
+    print(f"shown buildings {u[u.shown].building_id.nunique()}; disclosures: " + str(pd.Series([d['what'] for x in u[u.shown].disclosures if x for d in json.loads(x)]).value_counts().to_dict()))
     print(f"(kept {len(u)} units; candidates {int(u.candidate.sum())}; shown {int(u.shown_pre_evidence.sum())}; pools: {u.pool.value_counts().to_dict()}")
 
 

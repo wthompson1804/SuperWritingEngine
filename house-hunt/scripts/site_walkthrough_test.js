@@ -8,7 +8,9 @@
 const { chromium } = require('playwright');
 const assert = require('assert');
 const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390), VH = W === 320 ? 640 : W >= 1000 ? 900 : 844;
-const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // collapsed pages: aim for two phone screens, never more than 2.2
+const SCREEN = 844, AIM = 2 * SCREEN; // collapsed pages: aim for two phone screens
+// The "About" text is now shown whole, so a page is taller than two screens; what must hold is how soon the way on is reached (the "See the …" button) and these ceilings.
+const LIMITS = { experience: 3.6, neighborhood: 3.4, building: 2.6, compare: 2.2, list: 2.2 }, LIMIT = Math.round(3.6 * SCREEN), limitOf = kind => Math.round((LIMITS[kind] || 3.6) * SCREEN);
 (async () => {
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: W, height: VH }, deviceScaleFactor: 1 });
@@ -44,7 +46,7 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   const heights = [];
   const fits = async (kind, tag) => { const h = await pageHeight(), open = await page.evaluate(() => [...document.querySelectorAll('#view details.rowd[open]')].map(d => d.id));
     heights.push({ kind, tag, h, screens: +(h / SCREEN).toFixed(2) });
-    if (W === 390) { assert(h <= LIMIT, `${kind} ${tag} is ${h}px collapsed, over ${LIMIT}px (2.2 screens)`); assert.strictEqual(open.length, 0, `${kind} ${tag} has a row open by default: ${open}`); }
+    if (W === 390) { assert(h <= limitOf(kind), `${kind} ${tag} is ${h}px collapsed, over ${limitOf(kind)}px`); assert.strictEqual(open.length, 0, `${kind} ${tag} has a row open by default: ${open}`); }
     return h; };
   // crime is not shown in the open: nothing visible on a page in its default state names it
   const CRIME = /\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000/i;
@@ -170,38 +172,40 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
 
   await page.goto(BASE + '/index.html');
   await page.waitForSelector('.life');
+  // the drawings are optional: with site/illustrations.json each tile carries its banner, without it nothing is shown
+  const illusRes = await page.request.get(BASE + '/illustrations.json'), illus = illusRes.ok();
+  if (illus) await page.waitForSelector('a.life .illus svg'); else await page.waitForTimeout(200);
+  console.log('illustrations:', illus ? 'present' : 'absent (no art is shown)');
   // nothing opens by itself on a first visit; "How this works" is a footer link that opens three lines in the sheet
   assert.strictEqual(await page.locator('#tour, #tourscrim, .tour').count(), 0, 'no first-run card');
   assert(!(await page.evaluate(() => document.getElementById('sheet').classList.contains('open'))), 'no sheet is open on arrival');
   await page.click('#foot [data-act=how-open]'); await page.waitForSelector('#sheet.open .howl');
   assert.strictEqual(await page.locator('#sheet .howl li').count(), 3); await shot('ux-00-how-this-works-sheet');
   await page.click('#shClose'); assert(!(await page.evaluate(() => document.getElementById('sheet').classList.contains('open'))));
-  // ---------- the bottom bar: one slim line until something is held ----------
-  { const tr = await page.evaluate(() => { const e = document.getElementById('tray'); return { h: e.offsetHeight, text: e.innerText.replace(/\s+/g, ' ').trim(), open: e.classList.contains('open'), slots: e.querySelectorAll('.slot').length - e.querySelectorAll('.tr-row[hidden] .slot').length, go: !!document.getElementById('goBtn'), pad: parseFloat(getComputedStyle(document.body).paddingBottom) }; });
-    assert(tr.h >= 50 && tr.h <= 58, 'nothing held: the bar is slim, ' + tr.h + 'px'); assert.strictEqual(tr.text, 'My top three 0 of 3'); assert(!tr.open && tr.slots === 0 && !tr.go, 'no slots and no Compare while it is closed and empty');
-    assert(Math.abs(tr.pad - tr.h - 20) < 1.5, 'the page keeps room for the bar: ' + tr.pad);
-    console.log('bottom bar, nothing held:', tr.h, 'px');
-    await page.click('#tray .tr-tog'); const o = await page.evaluate(() => ({ h: document.getElementById('tray').offsetHeight, slots: document.querySelectorAll('#tray .slot').length, exp: document.querySelector('#tray .tr-tog').getAttribute('aria-expanded'), go: document.getElementById('goBtn').className, dis: document.getElementById('goBtn').getAttribute('aria-disabled') }));
-    assert(o.slots === 3 && o.exp === 'true' && !/live/.test(o.go) && o.dis === 'true', 'tapped: three empty slots, Compare not yet live'); console.log('bottom bar, opened:', o.h, 'px'); await shot('ux-00b-bar-opened-empty');
-    await page.click('#tray .tr-tog'); assert.strictEqual(await page.evaluate(() => document.getElementById('tray').offsetHeight), tr.h, 'tapped again: slim'); }
-
+  // ---------- the bottom bar: one slim line, "Saved · N", that opens My list ----------
+  { const tr = await page.evaluate(() => { const e = document.getElementById('tray'); return { h: e.offsetHeight, text: e.innerText.replace(/\s+/g, ' ').trim(), href: e.querySelector('a').getAttribute('href'), pad: parseFloat(getComputedStyle(document.body).paddingBottom) }; });
+    assert(tr.h >= 50 && tr.h <= 58, 'the bar is slim: ' + tr.h + 'px'); assert.strictEqual(tr.text, 'Saved · 0 My list'); assert.strictEqual(tr.href, '#list');
+    assert(Math.abs(tr.pad - tr.h - 20) < 1.5, 'the page keeps room for the bar: ' + tr.pad); console.log('bottom bar:', tr.h, 'px');
+    await page.click('#tray a'); await page.waitForSelector('.ph1'); assert.strictEqual((await page.textContent('.ph1')).trim(), 'My list'); assert((await page.textContent('#view .empty')).includes('Nothing saved yet')); await shot('ux-00b-my-list-empty');
+    await page.goBack(); await page.waitForSelector('.life'); }
   // ---------- first screen: six short cards, the median with the range small beneath, nothing explained ----------
   assert.strictEqual(await page.locator('a.life').count(), data.years.length);
-  const tiles = await page.evaluate(() => [...document.querySelectorAll('a.life')].map(a => ({ h: Math.round(a.getBoundingClientRect().height), label: a.querySelector('h3').textContent.trim(), figs: [...a.querySelectorAll('.figs b')].map(b => b.textContent), labels: [...a.querySelectorAll('.figs span')].map(b => b.textContent), kids: [...a.children].map(c => c.tagName + (c.className ? '.' + c.className : '')), mark: a.querySelectorAll('h3 .ymk').length, tag: (a.querySelector('.l2') || {}).textContent, rng: [...a.querySelectorAll('.figs .rng')].map(b => b.textContent), text: a.innerText })));
+  const tiles = await page.evaluate(() => [...document.querySelectorAll('a.life')].map(a => ({ h: Math.round(a.getBoundingClientRect().height), label: a.querySelector('h3').textContent.trim(), figs: [...a.querySelectorAll('.figs b')].map(b => b.textContent), labels: [...a.querySelectorAll('.figs span')].map(b => b.textContent), kids: [...a.children].map(c => c.tagName + (c.className ? '.' + c.className : '')), mark: a.querySelectorAll('h3 .ymk').length, w: a.clientWidth, art: (i => i ? { h: Math.round(i.getBoundingClientRect().height), w: Math.round(i.getBoundingClientRect().width), svg: i.querySelectorAll('svg').length } : null)(a.querySelector('.illus')), tag: (a.querySelector('.l2') || {}).textContent, rng: [...a.querySelectorAll('.figs .rng')].map(b => b.textContent), text: a.innerText })));
   tiles.forEach((t, i) => { const y = data.years[i];
     assert.strictEqual(t.label, String(y.display_label || y.label).replace(/ Year$/, ' Experience'));
     if (y.medians && y.medians.all_in != null) assert.strictEqual(t.figs[0], money0(y.medians.all_in), 'the tile shows the median cost');
     if (y.medians && y.medians.drive_min != null) assert.strictEqual(t.figs[1], Math.round(y.medians.drive_min) + ' min', 'the tile shows the median drive');
     if (y.all_in_range && money0(y.all_in_range[0]) !== money0(y.all_in_range[1])) assert(t.rng.includes(money0(y.all_in_range[0]) + ' to ' + money0(y.all_in_range[1])), 'the range sits under the median: ' + t.rng);
     // a tile is its marker, the label, the tagline, two numbers with their ranges, and the count of places: nothing else
-    assert.deepStrictEqual(t.kids, ['H3', y.tagline ? 'P.l2' : null, 'DIV.figs xt'].filter(Boolean), 'a tile has nothing else: ' + t.kids);
+    assert.deepStrictEqual(t.kids, [illus ? 'DIV.illus banner' : null, 'H3', y.tagline ? 'P.l2' : null, 'DIV.figs xt'].filter(Boolean), 'a tile has nothing else: ' + t.kids);
+    if (illus) { assert(t.art.h >= 100 && t.art.h <= 132, 'the drawing is a banner of about 110 to 130 px: ' + t.art.h); assert(t.art.svg === 1 && t.art.w >= t.w - 8, 'edge to edge on the tile'); }
     assert.strictEqual(t.mark, 1, 'the marker is on the tile'); if (y.tagline && !CRIME.test(y.tagline)) assert.strictEqual(t.tag, y.tagline, 'the tagline is shown whole');
     assert.strictEqual(t.figs.length, 3); assert.strictEqual(t.figs[2], String(listed(y).reduce((n, h) => n + (h.unit_ids || []).filter(id => unitIds.has(id)).length, 0)), 'the count of places');
     assert.deepStrictEqual(t.labels, ['typical all-in', 'typical to Mom and Dad', t.figs[2] === '1' ? 'place' : 'places']);
-    if (W === 390) assert(t.h <= 200, 'an experience tile is a short card: ' + t.h + 'px'); });
+    if (W === 390) assert(t.h <= (illus ? 320 : 200), 'an experience tile is a short card: ' + t.h + 'px'); });
   { const end = await page.evaluate(() => Math.round(document.getElementById('see-map').getBoundingClientRect().bottom + window.scrollY));
     console.log('first screen: the six tiles and "See them on a map" end at', end, 'px =', (end / SCREEN).toFixed(2), 'screens');
-    if (W === 390) assert(end <= 2.5 * SCREEN, 'tiles and the map button fit in 2.5 screens: ' + end);
+    if (W === 390) assert(end <= (illus ? 3.3 : 2.5) * SCREEN, 'tiles and the map button fit in ' + (illus ? '3.3 screens with the drawings' : '2.5 screens') + ': ' + end);
     assert(await page.evaluate(() => document.getElementById('see-map').getBoundingClientRect().top > [...document.querySelectorAll('a.life')].pop().getBoundingClientRect().bottom), 'the map button follows the tiles'); }
   console.log('first screen: tile heights', tiles.map(t => t.h).join(', '), '| page', await pageHeight(), 'px with the map');
   assert.strictEqual(await page.locator('#view .mock, #view .coldopen, #view .confnote, #view .tip').count(), 0, 'no explaining lines on the first screen');
@@ -263,7 +267,26 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   assert.strictEqual(strip.length, 4, 'a four-cell strip');
   if (Y1.medians.all_in != null) assert.strictEqual(strip[0].b, money0(Y1.medians.all_in), 'the strip shows the median, not a range');
   if (Y1.all_in_range && money0(Y1.all_in_range[0]) !== money0(Y1.all_in_range[1])) assert.strictEqual(strip[0].r, money0(Y1.all_in_range[0]) + ' to ' + money0(Y1.all_in_range[1]), 'with the range small beneath');
-  if (Y1.host && Y1.host.intro) { assert(await page.isVisible('#host-intro'), 'the host voice is in view'); assert(await page.evaluate(() => document.querySelector('#host-intro .clamp').clientHeight) <= 2 * 1.4 * 15.5 + 2, 'clamped to two lines'); assert(await page.isVisible('#host-intro [data-act=unclamp]')); }
+  // "About this experience": the text whole, a lead and a short list, under its own title; no host label, no clamp, no "more"
+  assert.strictEqual(await page.locator('#view .host, #view .who, #view .clampw, #view [data-act=unclamp]').count(), 0, 'no host box and nothing clamped'); assert(!/your host/i.test(await page.evaluate(() => document.getElementById('view').textContent)), 'no "Your host says"');
+  if (Y1.host && Y1.host.intro) { const ab = await page.evaluate(() => { const s = document.getElementById('about'); return { h2: s.querySelector('h2').textContent, lead: (s.querySelector('.lead2') || {}).textContent || '', pts: [...s.querySelectorAll('.pts li')].map(li => li.textContent), icons: s.querySelectorAll('.pts li svg').length, cut: [...s.querySelectorAll('*')].filter(e => e.scrollHeight > e.clientHeight + 2 && getComputedStyle(e).overflow !== 'visible').length }; });
+    assert.strictEqual(ab.h2, 'About this experience'); assert.strictEqual(ab.cut, 0, 'nothing in it is cut');
+    const want = await page.evaluate(x => window.__houseHunt.sentences(x), Y1.host.intro), got = [ab.lead].concat(ab.pts).join(' ').replace(/\s+/g, ' ').trim();
+    if (!want.some(s => CRIME.test(s))) assert.strictEqual(got, want.join(' '), 'the whole text is there, once');
+    assert(ab.pts.length >= 1 && ab.icons === ab.pts.length, 'the rest is a short list, each line with its mark: ' + ab.pts.length); assert(ab.lead.length >= 60, 'the lead is something to read: ' + ab.lead); }
+  // the way on sits right under the key facts, above the About text
+  { const b = await page.evaluate(() => { const e = document.getElementById('see-hoods'), k = document.querySelector('.sec.head .kstrip'), a = document.getElementById('about'), tr = document.getElementById('trail'); return { text: e.textContent.trim(), top: e.getBoundingClientRect().top, bottom: Math.round(e.getBoundingClientRect().bottom + window.scrollY - tr.offsetHeight), strip: k.getBoundingClientRect().bottom, about: a ? a.getBoundingClientRect().top : 1e9 }; });
+    assert.strictEqual(b.text, 'See the ' + listed(Y1).length + (listed(Y1).length === 1 ? ' neighborhood' : ' neighborhoods') + ' ↓'); assert(b.strip <= b.top && b.top < b.about, 'under the strip, above About');
+    if (W === 390) assert(b.bottom <= SCREEN, 'and within the first screen: ' + b.bottom); console.log('experience: "See the neighborhoods" ends at', b.bottom, 'px');
+    await page.click('#see-hoods'); const y = await page.evaluate(() => document.getElementById('sec-hoods').getBoundingClientRect().top); assert(y >= 0 && y < 160, 'it scrolls to the list: ' + Math.round(y)); await page.evaluate(() => window.scrollTo(0, 0)); }
+  if (illus) assert(await page.evaluate(() => { const i = document.querySelector('#view .illus.tall'), h = document.querySelector('.ph1'); return !!i && i.querySelectorAll('svg').length === 1 && i.getBoundingClientRect().bottom <= h.getBoundingClientRect().top; }), 'the drawing sits at the top of the experience page'); else assert.strictEqual(await page.locator('#view .illus').count(), 0);
+  // a day in this experience: three titled moments from the walkthrough, and nothing that the About text already said
+  if (Y1.host && (Y1.host.walkthrough || []).length) { await openRow('r-scene'); const dm = await page.evaluate(() => [...document.querySelectorAll('#r-scene .dmom')].map(d => ({ t: d.querySelector('h4').textContent.trim(), p: d.querySelector('p').textContent })));
+    assert.deepStrictEqual(dm.map(d => d.t), (Y1.day_moments || []).length ? Y1.day_moments.map(m => m.title) : ['A weekday', 'Saturday night', 'Sunday with Mom and Dad'].slice(0, Y1.host.walkthrough.length));
+    const about = await page.textContent('#about'), sents = await page.evaluate(x => window.__houseHunt.sentences(x), Y1.host.intro || '');
+    for (const s of sents) if (s.length > 30) assert(!(await page.textContent('#r-scene')).includes(s), 'the day row repeats nothing from the About text: ' + s);
+    const all = await page.evaluate(() => document.getElementById('view').textContent); for (const d of dm) { const s = d.p.slice(0, 60); assert.strictEqual(all.split(s).length - 1, 1, 'each passage appears once on the page: ' + s); }
+    await page.click('#r-scene > summary'); }
   assert.strictEqual(await page.locator('#view details.rowd[open]').count(), 0, 'no row starts open');
   const nRows = await page.locator('#sec-rows details.rowd').count(); assert(nRows >= 3 && nRows <= 7, 'three to seven rows on an experience: ' + nRows);
   assert((await page.textContent('#r-queens .rl')).trim() === 'Compared to staying in Queens');
@@ -271,7 +294,9 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   assert.strictEqual(await headOf('r-cost'), await page.evaluate(id => window.__houseHunt.headline('year', id, 'yearCost'), y1));
   // a neighborhood card: name, rank, one line, three facts
   const card = await page.evaluate(() => { const a = document.querySelector('#sec-hoods a.hood'); return { chips: a.querySelectorAll('.chip').length, kids: [...a.children].map(c => c.className), h: Math.round(a.getBoundingClientRect().height) }; });
-  assert(card.chips >= 2 && card.chips <= 3, 'a neighborhood card has two or three facts: ' + card.chips); assert(card.kids.every(k => /^(hd|l2|chips|safest)$/.test(k)), 'and nothing else: ' + card.kids);
+  assert(card.chips >= 2 && card.chips <= 3, 'a neighborhood card has two or three facts: ' + card.chips); assert(card.kids.every(k => /^(hd|l2 full|chips|safest)$/.test(k)), 'and nothing else: ' + card.kids);
+  { const c3 = await page.evaluate(() => [...document.querySelectorAll('#sec-hoods a.hood')].slice(0, 3).map(a => ({ name: a.querySelector('h4').textContent, pick: (a.querySelector('.pick') || {}).textContent || '', line: (a.querySelector('.l2') || {}).textContent || '', cut: a.querySelector('.l2') ? a.querySelector('.l2').scrollHeight > a.querySelector('.l2').clientHeight + 1 : false, small: [...a.querySelectorAll('.chip small')].filter(e => e.scrollWidth > e.clientWidth + 1).length })));
+    assert.strictEqual(c3[0].pick, 'Top pick', 'the first card carries the badge'); c3.forEach(c => { assert(c.line.length >= 40 && !c.cut && !/…$/.test(c.line), 'a top-three card has a whole line to read: ' + c.name + ': ' + c.line); assert.strictEqual(c.small, 0, 'no fact label is cut: ' + c.name); }); }
   await noCrime('experience ' + y1); await overflow('year'); await small('year');
   await shot('02-year', true); await shot('ux-02-experience-collapsed');
   await openRow('r-cost'); assert((await page.textContent('#r-cost .allin')).startsWith('All-in: rent'), 'one plain line says what all-in includes');
@@ -292,25 +317,38 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
     await fits('experience', y.id); await noCrime('experience ' + y.id); await overflow('experience ' + y.id); }
 
   // ---------- neighborhoods ----------
+  const shownHoodsAll = data.neighborhoods.filter(h => (h.unit_ids || []).some(id => data.units.some(u => u.id === id)));
   const shownHoods = data.neighborhoods.filter(h => h.counts.shown > 0 && yearBy[h.year] && yearBy[h.year].hood_ids.includes(h.id));
   const richness = h => h.counts.shown + (h.local.voices || []).length + (h.local.parking_rules || []).length + (h.described || []).length + 5 * h.counts.avoid + 5 * h.counts.held;
+  // buildings: a neighborhood's places grouped by building_id, in the order of each building's best-ranked place
+  const unitBy = Object.fromEntries(data.units.map(u => [u.id, u]));
+  const bOf = hid => { const out = [], by = {}; for (const id of hoodBy[hid].unit_ids || []) { const u = unitBy[id]; if (!u) continue; const k = String(u.building_id || u.building || u.id); if (!by[k]) { by[k] = { key: k, units: [] }; out.push(by[k]); } by[k].units.push(u); } return out; };
+  const pageBldgs = await page.evaluate(() => window.__houseHunt.bldgs()), bSlug = u => pageBldgs.find(b => b.units.includes(u.id)).slug, bUnits = u => pageBldgs.find(b => b.units.includes(u.id)).units.map(id => unitBy[id]);
+  assert.strictEqual(pageBldgs.length, shownHoodsAll.reduce((n, h) => n + bOf(h.id).length, 0), 'one building per building_id in each neighborhood'); assert.strictEqual(pageBldgs.reduce((n, b) => n + b.units.length, 0), data.units.filter(u => hoodBy[u.hood_id]).length, 'every place sits in one building');
+  console.log('buildings:', pageBldgs.length, '| with one apartment:', pageBldgs.filter(b => b.units.length === 1).length, '| most apartments in one building:', Math.max(...pageBldgs.map(b => b.units.length)));
   const hRich = shownHoods.slice().sort((a, b) => richness(b) - richness(a))[0], hSparse = shownHoods.slice().sort((a, b) => richness(a) - richness(b))[0];
   const hAvoid = shownHoods.find(h => h.counts.avoid > 0 && h.name === 'Jamaica') || shownHoods.find(h => h.counts.avoid > 0);
   const hStar = shownHoods.find(h => data.units.filter(u => u.hood_id === h.id && u.confirm.asterisk).length >= 2) || hoodBy[star.hood_id];
   for (const [tag, h] of [['rich', hRich], ['sparse', hSparse], ['with avoid cards', hAvoid], ['with asterisks', hStar]]) { if (!h) continue;
     await go('#hood-' + slug(h.id)); await fits('neighborhood', tag + ' (' + h.name + ')'); await noCrime('neighborhood ' + h.name); await overflow('hood ' + tag);
-    assert.strictEqual(await page.locator('#sec-places article.unit').count(), Math.min(3, h.counts.shown), 'a neighborhood opens on its top three places');
-    if (h.counts.shown > 3) assert((await page.textContent('#sec-places .morectl')).includes('3 of ' + h.counts.shown + ' places shown')); }
+    const nb = bOf(h.id).length;
+    assert.strictEqual(await page.locator('#sec-places article.bcard').count(), Math.min(3, nb), 'a neighborhood opens on its top three buildings');
+    if (nb > 3) assert((await page.textContent('#sec-places .morectl')).includes('3 of ' + nb + ' buildings shown'));
+    assert.strictEqual((await page.textContent('#about h2')).trim(), 'About ' + (h.parent_name && h.short_name ? h.short_name : h.name)); assert.strictEqual(await page.locator('#view .host, #view .clampw').count(), 0);
+    const sb = await page.evaluate(() => { const e = document.getElementById('see-places'), tr = document.getElementById('trail'); return { t: e.textContent.trim(), bottom: Math.round(e.getBoundingClientRect().bottom + window.scrollY - tr.offsetHeight), above: e.getBoundingClientRect().top < document.getElementById('about').getBoundingClientRect().top }; });
+    assert.strictEqual(sb.t, 'See the ' + h.counts.shown + (h.counts.shown === 1 ? ' place' : ' places') + ' ↓'); assert(sb.above, '"See the places" is above the About text'); if (W === 390) assert(sb.bottom <= SCREEN, 'and in the first screen: ' + sb.bottom); }
   await go('#hood-' + slug(hRich.id)); await small('hood'); await shot('03-neighborhood', true); await shot('ux-03-neighborhood-collapsed');
   await openRow('r-voices'); await page.evaluate(() => document.getElementById('r-voices').scrollIntoView({ block: 'start' })); await page.evaluate(() => window.scrollBy(0, -70)); await shot('ux-03b-neighborhood-residents-open');
-  // a place card: name, rank, one line, three facts, the asterisk; the whole card opens the place
+  // a building card: name, from-price, how many apartments, one line, three facts, and the asterisk only when every apartment there shares it
   await go('#hood-' + slug(hStar.id)); await showAll();
-  const hsUnits = data.units.filter(u => u.hood_id === hStar.id);
-  assert.strictEqual(await page.locator('#sec-places article.unit').count(), hsUnits.length);
-  assert.strictEqual(await page.locator('#sec-places article.unit:has(.confl:not(.rent))').count(), hsUnits.filter(u => u.confirm.asterisk).length, 'each asterisk place shows it on its card');
-  assert.strictEqual(await page.locator('#sec-places article.unit .chip').count(), 3 * hsUnits.length, 'three facts on every place card');
-  assert.strictEqual(await page.locator('#sec-places article.unit button, #sec-places article.unit .gtk, #sec-places article.unit .rentl').count(), 0, 'nothing else on a place card');
-  { const cu = hsUnits.find(u => u.confirm.asterisk), t = await page.locator(`a.cardl[href="#unit-${slug(cu.id)}"] .confl:not(.rent)`).first().textContent(); assert(t.startsWith('* To confirm:') && !t.includes(cu.confirm.why), 'the card names what to confirm; the why is behind a tap: ' + t); }
+  { const bs = bOf(hStar.id), cards = await page.evaluate(() => [...document.querySelectorAll('#sec-places article.bcard')].map(a => ({ href: a.querySelector('a').getAttribute('href'), name: a.querySelector('h4').textContent, sub: (a.querySelector('.hd small') || {}).textContent || '', chips: [...a.querySelectorAll('.chip b')].map(b => b.textContent), cutChips: [...a.querySelectorAll('.chip b, .chip small')].filter(e => e.scrollWidth > e.clientWidth + 1).length, star: a.querySelectorAll('.confl').length, other: a.querySelectorAll('button, .gtk, .rentl, .host').length })));
+    assert.strictEqual(cards.length, bs.length, 'one card per building');
+    cards.forEach((c, i) => { const us = bs[i].units, from = Math.min(...us.map(u => u.all_in)), rs = u => u.rent.asterisk || u.rent.basis_kind === 'net_effective';
+      assert.strictEqual(c.href, '#bldg-' + bSlug(us[0])); assert.strictEqual(c.chips.length, 3, 'three facts'); assert.strictEqual(c.cutChips, 0, 'no fact is cut on ' + c.name); assert.strictEqual(c.other, 0, 'nothing else on the card');
+      assert.strictEqual(c.chips[0], (us.length > 1 ? 'from ' : '') + money0(from) + (us.some(rs) ? '*' : ''), 'the best all-in price: ' + c.chips[0]);
+      if (us.length > 1) assert(c.sub.includes(us.length + ' apartments'), 'how many apartments made the list: ' + c.sub);
+      const sig = u => (u.confirm.asterisk ? String(u.confirm.what) : '') + '|' + (rs(u) ? 'r' + (u.rent.basis_kind === 'net_effective') + !!u.rent.needs_call : ''), shared = us.every(u => sig(u) === sig(us[0])) && sig(us[0]) !== '|';
+      assert.strictEqual(c.star, shared ? 1 : 0, 'one asterisk line when every apartment shares it, none otherwise: ' + c.name); }); }
   // the avoid cards, the phone-call list and the not-re-checked list sit in their own rows
   await go('#hood-' + slug(hAvoid.id)); assert((await headOf('sec-avoid')).startsWith(hAvoid.counts.avoid + (hAvoid.counts.avoid === 1 ? ' place ' : ' places ')));
   assert(await page.isHidden('.unit.avoid'), 'avoid cards start closed'); await openRow('sec-avoid');
@@ -318,7 +356,7 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   await page.evaluate(() => document.getElementById('sec-avoid').scrollIntoView()); await page.evaluate(() => window.scrollBy(0, -70)); await shot('03b-neighborhood-avoid-card');
   const hHeld = shownHoods.find(h => h.counts.held > 0);
   if (hHeld) { await go('#hood-' + slug(hHeld.id)); await openRow('sec-call');
-    assert.strictEqual(await page.locator('#sec-call .callitem').count(), hHeld.counts.held); assert.strictEqual(await page.locator('#sec-call [data-act=hold]').count(), 0);
+    assert.strictEqual(await page.locator('#sec-call .callitem').count(), hHeld.counts.held); assert.strictEqual(await page.locator('#sec-call [data-act=save]').count(), 0);
     assert((await page.textContent('#sec-call > summary')).includes('two or more things')); await overflow('hood-held');
     await page.evaluate(() => document.getElementById('sec-call').scrollIntoView()); await page.evaluate(() => window.scrollBy(0, -70)); await shot('03c-worth-a-phone-call'); }
   const known = new Set([...data.held, ...data.units, ...data.avoid].map(u => u.id)), hoodIds = new Set(data.neighborhoods.map(h => h.id));
@@ -347,106 +385,182 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
     if (not) { await go('#hood-' + slug(not.id)); assert.strictEqual(await page.locator('.safest').count(), 0); }
     console.log('safest badge:', n, 'of', rated.length, 'rated neighborhoods'); }
 
-  // ---------- places ----------
-  const uRich = data.units.filter(u => u.confirm.asterisk && u.rent.asterisk && (u.disclosures || []).length && hoodBy[u.hood_id]).sort((a, b) => (b.evidence.items.length + b.tour_questions.length) - (a.evidence.items.length + a.tour_questions.length))[0] || star;
-  const uSparse = data.units.filter(u => !u.confirm.asterisk && !u.rent.asterisk && !u.contact).sort((a, b) => (a.evidence.items.length + a.tour_questions.length) - (b.evidence.items.length + b.tour_questions.length))[0] || data.units[0];
-  const whatsOf = u => [...new Set((u.disclosures || []).map(x => String(x.what || '').trim()).filter(w => w && w.toLowerCase() !== String(u.confirm.what || '').toLowerCase()))];
-  const conf = data.units.find(u => u.confirm.asterisk && !u.rent.asterisk) || data.units.find(u => u.confirm.asterisk);
-  for (const [tag, u] of [['rich', uRich], ['sparse', uSparse], ['with an asterisk', conf], ['rent asterisk', star]]) {
-    await go('#unit-' + slug(u.id)); await fits('place', tag + ' (' + (u.building || u.address) + ')'); await noCrime('place ' + tag); await overflow('unit ' + tag);
-    for (const [id, key] of [['r-cost', 'cost'], ['r-trip', 'trip'], ['r-parking', 'parking'], ['r-dog', 'dog'], ['r-building', 'reviews'], ['r-confirm', 'confirm']]) assert.strictEqual(await headOf(id), await page.evaluate(([i, k]) => window.__houseHunt.headline('unit', i, k), [u.id, key]), 'the row headline is the builder\'s: ' + id);
+  // ---------- buildings ----------
+  const whatsOf = u => [...new Set((u.disclosures || []).map(x => String(x.what || '').trim()).filter(w => w && w.toLowerCase() !== String(u.confirm.what || '').toLowerCase()))], whats = whatsOf;
+  const rs = u => !!(u.rent.asterisk || u.rent.basis_kind === 'net_effective'), isBest = u => hoodBy[u.hood_id] && bUnits(u)[0].id === u.id, best = data.units.filter(isBest);
+  const aptSel = u => '#apt-' + slug(u.id), openApt = async u => { await page.waitForSelector(aptSel(u), { state: 'attached' }); if (!(await page.evaluate(s => document.querySelector(s).open, aptSel(u)))) await page.click(aptSel(u) + ' > summary'); };
+  const uRich = best.filter(u => u.confirm.asterisk && u.rent.asterisk && (u.disclosures || []).length).sort((a, b) => (b.evidence.items.length + b.tour_questions.length) - (a.evidence.items.length + a.tour_questions.length))[0] || best.find(u => u.confirm.asterisk) || best[0];
+  const uSparse = best.filter(u => !u.confirm.asterisk && !u.rent.asterisk && !u.contact && bUnits(u).length === 1).sort((a, b) => (a.evidence.items.length + a.tour_questions.length) - (b.evidence.items.length + b.tour_questions.length))[0] || best[0];
+  const conf = best.find(u => u.confirm.asterisk && !u.rent.asterisk) || best.find(u => u.confirm.asterisk);
+  const bOne = best.find(u => bUnits(u).length === 1), bMost = best.slice().sort((a, b) => bUnits(b).length - bUnits(a).length)[0];
+  for (const [tag, u] of [['rich', uRich], ['sparse', uSparse], ['with an asterisk', conf], ['one apartment', bOne], [bUnits(bMost).length + ' apartments (the most in the data)', bMost]]) {
+    await go('#bldg-' + bSlug(u), '.bpage'); await fits('building', tag + ' (' + (u.building || u.address) + ')'); await noCrime('building ' + tag); await overflow('building ' + tag);
+    for (const [id, key] of [['r-parking', 'parking'], ['r-dog', 'dog'], ['r-building', 'building'], ['r-reviews', 'reviews'], ['r-day', 'day']]) assert.strictEqual(await headOf(id), await page.evaluate(([i, k]) => window.__houseHunt.headline('unit', i, k), [u.id, key]), 'the row headline is the builder\'s: ' + id);
     // reviews of the building: what the sites show, most reviews first, each linked; never a judgement of ours
     { const r = u.ratings || {}, ps = (r.platforms || []).filter(x => x && x.platform && x.rating != null), exp = !ps.length || r.found_any === false ? (r.searched ? 'No reviews found online' : 'Not looked up yet') : null;
-      const head = await headOf('r-building'); if (exp) assert.strictEqual(head, exp); else { const top = ps.slice().sort((a, b) => (b.count == null ? -1 : b.count) - (a.count == null ? -1 : a.count))[0]; assert(head.startsWith(Number(top.rating).toFixed(1) + ' on ' + top.platform), 'the site with the most reviews leads: ' + head); assert.strictEqual(/and (\d+) more sites?$/.test(head) ? +RegExp.$1 : 0, ps.length - 1); }
-      assert(head.length <= 64, 'the headline fits: ' + head);
+      const head = await headOf('r-reviews'); if (exp) assert.strictEqual(head, exp); else { const top = ps.slice().sort((a, b) => (b.count == null ? -1 : b.count) - (a.count == null ? -1 : a.count))[0]; assert(head.startsWith(Number(top.rating).toFixed(1) + ' on ' + top.platform), 'the site with the most reviews leads: ' + head); assert.strictEqual(/and (\d+) more sites?$/.test(head) ? +RegExp.$1 : 0, ps.length - 1); }
+      assert(head.length <= 64, 'the headline fits: ' + head); assert.strictEqual((await page.textContent('#r-reviews .rl')).trim(), 'Reviews of the building');
       const body = await page.evaluate(() => ({ lis: [...document.querySelectorAll('#bld-reviews li')].map(li => li.textContent), links: [...document.querySelectorAll('#bld-reviews li a')].map(a => a.target + '|' + a.rel), facts: document.querySelectorAll('#bld-facts li').length, text: document.getElementById('bld-reviews').textContent }));
-      assert.strictEqual(body.lis.length, exp ? 0 : ps.length); assert(body.facts >= 5, 'the building facts are still in the row'); assert(!/★|we think|our rating|recommend/i.test(body.text));
+      assert.strictEqual(body.lis.length, exp ? 0 : ps.length); assert(body.facts >= 5, 'the building facts are in their row'); assert(!/★|we think|our rating|recommend/i.test(body.text));
       if (!exp) { assert(body.lis.every(x => /out of 5/.test(x)), 'each line: rating out of 5: ' + body.lis[0]); assert(body.links.every(x => x === '_blank|noopener noreferrer')); } } }
-  await go('#unit-' + slug(uRich.id)); await small('unit'); await shot('04-place', true); await shot('ux-04-place-collapsed');
-  { const n = await page.locator('#sec-rows details.rowd').count(); assert(n >= 5 && n <= 8, 'five to eight rows on a place: ' + n);
-    assert.strictEqual(await page.locator('.unit.page .kstrip > div').count(), 4); assert((await page.textContent('#r-confirm .st')).trim() === 'Ask', 'what she must not miss is on the row itself');
-    assert(await page.isVisible('#host-line') && await page.isVisible('.unit.page [data-act=hold]') && await page.isVisible('.unit.page .sign'), 'the price, the host line and Hold are in view'); }
-  if (await page.locator('.plinks [data-act=contact]').count()) { await page.click('.plinks [data-act=contact]'); await page.waitForSelector('#sheet.open'); assert((await page.textContent('#sheetBody')).includes('Leasing office')); await page.waitForTimeout(300); await shot('ux-04c-leasing-office-sheet'); await page.keyboard.press('Escape'); await page.waitForSelector('#sheet:not(.open)'); await page.waitForTimeout(400); }
-  // the money box: closed, then open; the basis of each line stays behind "See how we got this"
-  await openRow('r-cost');
-  assert.strictEqual(await page.locator('#r-cost .receipt .ln:not(.tot)').count(), uRich.all_in_lines.length, 'every cost line is in the box');
-  assert((await page.textContent('#r-cost .allin')).startsWith('All-in: '));
-  assert.strictEqual(await page.locator('#r-cost .receipt .ln small').count(), 0, 'no basis notes on the lines'); assert(await page.isHidden('#r-cost .receipt .howb'));
-  assert(uRich.all_in_unknown.length === 0 || (await page.textContent('#r-cost .receipt')).toLowerCase().includes('not published'), 'an unknown cost reads "not published", never $0');
-  await page.evaluate(() => document.getElementById('r-cost').scrollIntoView()); await page.evaluate(() => window.scrollBy(0, -70)); await shot('ux-05-money-box-open'); await overflow('receipt');
-  await page.click('#r-cost .receipt details.howd > summary'); assert(await page.isVisible('#r-cost .receipt .howb')); await shot('05-receipt-how-open');
-  // the asterisk: what to confirm on the page, the why behind a tap; disclosures as "Good to know before you call"
-  await go('#unit-' + slug(conf.id));
-  assert((await page.textContent('.ph1')).includes('*')); 
-  // one compact line carries the asterisk and the count; it sits after the host voice, which follows the key facts; a tap opens "Still to confirm"
-  { const top = await page.evaluate(() => { const pg = document.querySelector('.unit.page'), y = s => { const e = pg.querySelector(s); return e ? e.getBoundingClientRect().top : null; }; return { boxes: pg.querySelectorAll('.confl').length, lines: pg.querySelectorAll('.starline').length, text: (pg.querySelector('.starline') || {}).innerText, strip: y('.kstrip'), host: y('#host-line'), star: y('.starline'), hold: y('[data-act=hold]'), between: [...pg.children].map(c => c.className.split(' ')[0]).join('>'), h: pg.querySelector('.starline').offsetHeight }; });
-    assert.strictEqual(top.boxes, 0, 'no separate "To confirm" and "Rent" boxes at the top'); assert.strictEqual(top.lines, 1);
-    const nc = 1 + (conf.rent.asterisk || conf.rent.basis_kind === 'net_effective' ? 1 : 0), nd = whatsOf(conf).length;
-    assert.strictEqual(top.text.replace(/\s+/g, ' ').trim(), '* ' + (nc === 1 ? '1 thing' : nc + ' things') + ' to confirm' + (nd ? ' · ' + nd + ' to ask' : ''), 'the asterisk line: ' + top.text);
-    assert(top.strip < top.host && top.host < top.star && top.star < top.hold, 'key facts, then the host, then the asterisk line, then Hold'); assert(top.h <= 48, 'one compact line: ' + top.h + 'px');
-    if (conf.host && (conf.host.line || conf.host.catch)) assert(/kstrip>host/.test(top.between), 'the host voice comes right after the key facts: ' + top.between);
-    await page.click('.unit.page .starline'); assert(await page.evaluate(() => document.getElementById('r-confirm').open), 'the line opens the row');
-    const rt = await page.evaluate(() => document.getElementById('r-confirm').getBoundingClientRect().top); assert(rt >= 0 && rt < 200, 'and scrolls to it: ' + Math.round(rt)); await shot('ux-08b-asterisk-line-opens-row'); }
-  await openRow('r-confirm'); assert((await page.textContent('#confirm-box h4')).includes('Still to confirm'));
-  assert((await page.textContent('#confirm-box')).includes(conf.confirm.why.replace(/\s*\((?:and )?count(?:ed|s)? as \$0\)/gi, '').slice(0, 40)), 'the why is on the page'); assert(await page.isHidden('#confirm-box blockquote'), 'but behind "See why"');
-  if (await page.locator('#confirm-box p:has-text("What to ask:")').count()) { const q = (await page.locator('#confirm-box p:has-text("What to ask:")').first().textContent()).replace('What to ask: ', ''); assert((await page.textContent('#tour-qs')).includes(q), 'the confirmation question is also in the tour questions'); }
+  // the page of a building: title, key facts, Save and photos, About the building, the building's rows, its apartments, Save again, the next building
+  await go('#bldg-' + bSlug(uRich), '.bpage'); await small('building'); await shot('04-building', true); await shot('ux-04-building-collapsed');
+  { const us = bUnits(uRich), pg = await page.evaluate(() => { const y = s => { const e = document.querySelector(s); return e ? Math.round(e.getBoundingClientRect().top + window.scrollY) : null; };
+      return { h1: document.querySelector('.ph1').textContent.trim(), strip: [...document.querySelectorAll('.bpage .kstrip > div')].map(c => c.textContent), rows: [...document.querySelectorAll('#sec-rows > details.rowd')].map(d => d.id), labels: [...document.querySelectorAll('#sec-rows > details.rowd > summary .rl')].map(e => e.firstChild.textContent.trim()),
+        y: { strip: y('.bpage .kstrip'), save: y('.savb[data-pos=top]'), photos: y('#see-photos'), about: y('#about'), rows: y('#sec-rows'), apts: y('#sec-apts'), save2: y('.savb[data-pos=bottom]'), next: y('.prevnext') }, about: document.getElementById('about') ? { h2: document.querySelector('#about h2').textContent, text: document.getElementById('about').textContent } : null,
+        saves: [...document.querySelectorAll('.savb')].map(b => b.textContent.trim()), host: document.querySelectorAll('#view .host, #view .who, #view .clampw').length, sign: document.querySelectorAll('.bpage .sign').length }; });
+    assert.strictEqual(pg.h1, uRich.building || String(uRich.address).split(',')[0]); assert.strictEqual(pg.strip.length, 4);
+    assert(pg.strip[0].startsWith((us.length > 1 ? 'from ' : '').slice(0, 0) + money0(Math.min(...us.map(u => u.all_in)))) && /all-in/.test(pg.strip[0]), 'the from-price leads the strip: ' + pg.strip[0]); assert(/to Mom and Dad|drive/.test(pg.strip[1]) && /parking/.test(pg.strip[2]) && /dogs/.test(pg.strip[3]), 'then minutes, parking, dogs');
+    assert.deepStrictEqual(pg.rows.filter(r => r !== 'r-queens'), ['r-day', 'r-parking', 'r-dog', 'r-building', 'r-reviews', 'r-rules'], 'the building\'s rows, A day here first: ' + pg.rows);
+    assert.deepStrictEqual(pg.labels.slice(0, 6), ['A day here', 'The car', 'For the dog', 'The building', 'Reviews of the building', 'Local rules']); if (pg.rows.includes('r-queens')) assert.strictEqual(pg.rows[pg.rows.length - 1], 'r-queens');
+    assert(pg.rows.length <= 8, 'at most eight rows: ' + pg.rows.length); assert.strictEqual(pg.host, 0, 'no host box'); assert.strictEqual(pg.sign, 0);
+    assert(pg.y.strip < pg.y.save && pg.y.save < pg.y.about && pg.y.about < pg.y.rows && pg.y.rows < pg.y.apts && pg.y.apts < pg.y.save2 && pg.y.save2 < pg.y.next, 'in that order: ' + JSON.stringify(pg.y));
+    assert.strictEqual(pg.saves.length, 2, '"Save this place" at the top and at the bottom'); assert(pg.saves.every(s => s.startsWith('Save this place')), pg.saves.join(' | '));
+    assert.strictEqual(pg.about.h2, 'About the building'); if (uRich.host && uRich.host.line && !CRIME.test(uRich.host.line)) { const s0 = uRich.host.line.slice(0, 50); assert(pg.about.text.includes(s0), 'the text is shown'); assert.strictEqual((await page.evaluate(() => document.getElementById('view').textContent)).split(s0).length - 1, 1, 'and only once on the page'); }
+    // photos: one clear tap near the top, to the building's own site when one of its apartments has it, else to the listing
+    const ph = us.map(u => u.photos).filter(p => p && p.url), want = ph.find(p => p.kind === 'own_site') || ph[0] || null;
+    if (want) { const b = await page.evaluate(() => { const a = document.getElementById('see-photos'); return { href: a.getAttribute('href'), target: a.target, rel: a.rel, text: a.textContent.replace(/\s+/g, ' ').trim(), svg: a.querySelectorAll('svg').length }; });
+      assert.strictEqual(b.href, want.url); assert.strictEqual(b.target + '|' + b.rel, '_blank|noopener noreferrer'); assert.strictEqual(b.text, 'See photos' + 'opens ' + (want.where || new URL(want.url).hostname.replace(/^www\./, ''))); assert.strictEqual(b.svg, 1); assert(pg.y.photos < pg.y.about, 'before About the building'); }
+    else if (!us.some(u => u.links && (u.links.building || u.links.listing))) assert.strictEqual(await page.locator('#see-photos').count(), 0, 'no link, no button'); }
+  { const noPh = best.find(u => bUnits(u).every(x => !(x.photos && x.photos.url) && !(x.links && (x.links.listing || x.links.building)))); if (noPh) { await go('#bldg-' + bSlug(noPh), '.bpage'); assert.strictEqual(await page.locator('#see-photos').count(), 0); }
+    console.log('buildings with a photos link:', best.filter(u => bUnits(u).some(x => x.photos && x.photos.url)).length, 'of', best.length, '| own site:', best.filter(u => bUnits(u).some(x => x.photos && x.photos.kind === 'own_site')).length); }
+  if (await page.locator('#r-building [data-act=contact]').count()) { await go('#bldg-' + bSlug(uRich), '.bpage'); }
+  { const withC = best.find(u => u.contact && u.contact.phone); if (withC) { await go('#bldg-' + bSlug(withC), '.bpage'); await openRow('r-building'); await page.click('#r-building [data-act=contact]'); await page.waitForSelector('#sheet.open'); assert((await page.textContent('#sheetBody')).includes('Leasing office')); await page.waitForTimeout(300); await shot('ux-04c-leasing-office-sheet'); await page.keyboard.press('Escape'); await page.waitForSelector('#sheet:not(.open)'); await page.waitForTimeout(300); } }
+  // "A day here": a stack of closed rows, one per moment: icon, title, one-line takeaway, and a chip in three levels where the data can say
+  await go('#bldg-' + bSlug(star), '.bpage'); await openRow('r-day');
+  { const B0 = bUnits(star)[0], KS = ['wake', 'work', 'after', 'night', 'sat', 'sun'], ms = await page.evaluate(() => [...document.querySelectorAll('#r-day details.mom')].map(d => ({ id: d.id, open: d.open, icon: d.querySelectorAll('summary .mi svg').length, title: d.querySelector('summary .rl').firstChild.textContent.trim(), take: d.querySelector('summary .rh').textContent, chip: (d.querySelector('summary .lvl') || {}).textContent || '', chev: d.querySelectorAll('summary .chev').length })));
+    assert.deepStrictEqual(ms.map(m => m.id), KS.map(k => 'm-' + k)); assert.strictEqual((await page.textContent('#mom-count')).trim(), '6 moments', 'it says how many are below');
+    const tints = await page.evaluate(([id, ks]) => ks.map(k => window.__houseHunt.tint(id, k)), [B0.id, KS]);
+    ms.forEach((m, i) => { assert(!m.open && m.icon === 1 && m.chev === 1 && m.title && m.take, 'closed, with icon, title, takeaway and caret: ' + JSON.stringify(m)); assert.strictEqual(m.chip, { s: 'Strong', m: 'Mixed', w: 'Weak' }[tints[i]] || '', 'the chip is the level, and absent where the data cannot say: ' + m.id); });
+    assert(!CRIME.test(await page.evaluate(() => document.getElementById('r-day').innerText)), 'no crime figure on a moment row');
+    for (const k of KS) { await page.click('#m-' + k + ' > summary'); assert((await page.locator('#m-' + k + ' .rb li').count()) >= 3, 'a moment opens to its facts: ' + k); assert.strictEqual(await page.locator('#m-' + k + ' details.howd[open]').count(), 0, 'sources start closed'); }
+    await page.evaluate(() => document.getElementById('r-day').scrollIntoView({ block: 'start' })); await page.evaluate(() => window.scrollBy(0, -70)); await shot('ux-04b-day-moments-open');
+    for (const k of KS) await page.click('#m-' + k + ' > summary'); await shot('ux-04b2-day-moments-closed');
+    // three levels, three colours; Weak is the same numbers on the far side of a second line (twice or half the Strong line)
+    const exp = { wake: u => { const v = u.moments.wake.park_walk_min; return v == null ? 'u' : v <= 5 ? 's' : v > 10 ? 'w' : 'm'; }, after: u => { const v = u.moments.after.restaurants_800m; return v == null ? 'u' : v >= 20 ? 's' : v < 10 ? 'w' : 'm'; },
+      sat: u => { const b = u.moments.sat.bars_1600m, r = u.moments.sat.restaurants_1600m; return b == null || r == null ? 'u' : b >= 5 && r >= 25 ? 's' : b < 2.5 && r < 12.5 ? 'w' : 'm'; }, sun: u => { const v = u.vs_queens && u.vs_queens.drive_min; return v == null ? 'u' : v >= 3 ? 's' : v <= 1 ? 'w' : 'm'; } };
+    const got = await page.evaluate(([ids, ks]) => ids.map(id => ks.map(k => window.__houseHunt.tint(id, k)).join('')), [data.units.map(u => u.id), Object.keys(exp)]), dist = {};
+    data.units.forEach((u, i) => { const e = Object.keys(exp).map(k => exp[k](u)).join(''); assert.strictEqual(got[i], e, 'levels of ' + u.id); });
+    const all6 = await page.evaluate(([ids, ks]) => ids.map(id => ks.map(k => window.__houseHunt.tint(id, k))), [data.units.map(u => u.id), KS]); all6.forEach(a => a.forEach((x, i) => { dist[KS[i]] = dist[KS[i]] || {}; dist[KS[i]][x] = (dist[KS[i]][x] || 0) + 1; }));
+    console.log('moment levels (s strong, m mixed, w weak, u no chip):', JSON.stringify(dist));
+    const col = await page.evaluate(() => { const o = {}; for (const c of ['strong', 'mixed', 'weak']) { const e = document.createElement('em'); e.className = 'lvl ' + c; document.body.appendChild(e); o[c] = getComputedStyle(e).backgroundColor; e.remove(); } return o; });
+    assert(new Set(Object.values(col)).size === 3, 'three colours: ' + JSON.stringify(col)); const rgb = s => s.match(/\d+/g).map(Number), g = rgb(col.strong), yl = rgb(col.mixed), rd = rgb(col.weak);
+    assert(g[1] > g[0] && yl[0] > 240 && yl[2] < 215 && rd[0] > rd[1] && rd[1] > 200, 'green, yellow and a soft (not harsh) red: ' + JSON.stringify(col)); }
+  // "Apartments here": one compact row per apartment, closed, each with its own Save; it opens in place to its costs, what to confirm and its listing
+  const multi = best.filter(u => bUnits(u).length > 1), bTwo = multi.find(u => bUnits(u).some(x => x.confirm.asterisk) && bUnits(u).some(x => rs(x))) || multi[0] || uRich;
+  await go('#bldg-' + bSlug(bTwo), '.bpage');
+  { const us = bUnits(bTwo), rows = await page.evaluate(() => [...document.querySelectorAll('#sec-apts .apt')].map(a => ({ id: a.querySelector('details').id, open: a.querySelector('details').open, name: a.querySelector('.an').textContent, price: a.querySelector('.ap').textContent, meta: a.querySelector('.am').textContent, conf: (a.querySelector('summary .ac:not(.out)') || {}).textContent || '', heart: a.querySelectorAll(':scope > .heartb').length, h: Math.round(a.getBoundingClientRect().height) })));
+    assert.strictEqual((await page.textContent('#sec-apts h2')).replace(/\d+$/, '').trim(), us.length > 1 ? 'Apartments here' : 'The apartment'); assert.deepStrictEqual(rows.map(r => r.id), us.map(u => 'apt-' + slug(u.id)), 'its apartments, best first');
+    rows.forEach((r, i) => { const u = us[i]; assert(!r.open, 'closed to start'); assert.strictEqual(r.heart, 1, 'its own Save'); if (u.unit) assert(r.name.includes(u.unit)); assert(r.price.startsWith(money0(u.all_in)), 'all-in: ' + r.price);
+      assert(r.meta.includes(u.sqft != null ? Math.round(u.sqft) + ' sq ft' : 'size: ask') && r.meta.includes(u.floor != null ? 'floor ' + Math.round(u.floor) : 'floor not published') && r.meta.includes(u.available === 'now' ? 'available now' : /^\d{4}-\d\d-\d\d/.test(u.available || '') ? 'from ' : 'move-in date: ask'), 'size, floor and date: ' + r.meta);
+      assert.strictEqual(!!r.conf, !!(u.confirm.asterisk || rs(u)), 'its own thing to confirm: ' + r.conf); if (u.confirm.asterisk) assert(r.conf.startsWith('* To confirm:')); if (W === 390) assert(r.h <= 130, 'a compact row: ' + r.h + 'px'); });
+    await shot('ux-05-apartments-here');
+    const u = us.find(x => x.confirm.asterisk) || us[0]; await openApt(u); const S0 = aptSel(u);
+    assert.strictEqual(await page.locator(S0 + ' .receipt .ln:not(.tot)').count(), u.all_in_lines.length, 'every cost line is in the box'); assert((await page.textContent(S0 + ' .allin')).startsWith('All-in: '));
+    assert.strictEqual(await page.locator(S0 + ' .receipt .ln small').count(), 0, 'no basis notes on the lines'); assert(await page.isHidden(S0 + ' .receipt .howb'));
+    assert(u.all_in_unknown.length === 0 || (await page.textContent(S0 + ' .receipt')).toLowerCase().includes('not published'), 'an unknown cost reads "not published", never $0');
+    assert((await page.textContent(S0 + ' .tour-qs')).includes(u.tour_questions[0] || 'to ask on the tour')); if (u.links && u.links.listing) assert.strictEqual(await page.getAttribute(S0 + ' .plinks a >> nth=0', 'href'), u.links.listing);
+    assert.strictEqual(await page.evaluate(ss => ss.filter(s => document.querySelector(s).open).length, us.map(aptSel)), 1, 'only the one tapped is open');
+    await page.evaluate(s => document.querySelector(s).scrollIntoView(), S0); await page.evaluate(() => window.scrollBy(0, -70)); await shot('ux-05b-apartment-open'); await overflow('apartment open');
+    await page.click(S0 + ' .receipt details.howd > summary'); assert(await page.isVisible(S0 + ' .receipt .howb')); await shot('05-receipt-how-open');
+    // "Photos of this apartment" only when its own page differs from the building's
+    for (const x of us) { const bp = (us.map(y => y.photos).filter(p => p && p.url).find(p => p.kind === 'own_site') || us.map(y => y.photos).filter(p => p && p.url)[0] || {}).url, own = x.photos && x.photos.url, n = await page.locator(aptSel(x) + ' .aphoto').count(); assert.strictEqual(n, own && own !== bp && own !== (x.links && x.links.listing) ? 1 : 0, 'the apartment photo link: ' + x.id); } }
+  // the asterisk: what to confirm on the apartment's line, the why behind a tap; disclosures as "Good to know before you call"
+  await go('#bldg-' + bSlug(conf), '.bpage');
+  { const us = bUnits(conf), nStar = us.filter(u => u.confirm.asterisk || rs(u)).length, t = (await page.textContent('#see-apts')).replace(/\s+/g, ' ').trim();
+    assert(t.startsWith('* ' + (us.length > 1 ? 'See the ' + us.length + ' apartments' : 'See the apartment')), 'the asterisk rides on the line that leads to the apartments: ' + t); assert.strictEqual(await page.locator('.bpage .confl').count(), 0, 'no separate boxes at the top');
+    assert(t.includes(us.length > 1 ? nStar + ' with something to confirm' : 'to confirm'), t);
+    await page.click('#see-apts'); const y = await page.evaluate(() => ({ top: document.getElementById('sec-apts').getBoundingClientRect().top, end: window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2 })); assert(y.top >= 0 && (y.top < 200 || y.end), 'it scrolls to the apartments: ' + Math.round(y.top)); }
+  await openApt(conf); assert((await page.textContent(aptSel(conf) + ' .confirm-box h4')).includes('Still to confirm'));
+  assert((await page.textContent(aptSel(conf) + ' .confirm-box')).includes(conf.confirm.why.replace(/\s*\((?:and )?count(?:ed|s)? as \$0\)/gi, '').slice(0, 40)), 'the why is on the page'); assert(await page.isHidden(aptSel(conf) + ' .confirm-box blockquote'), 'but behind "See why"');
+  if (await page.locator(aptSel(conf) + ' .confirm-box p:has-text("What to ask:")').count()) { const q = (await page.locator(aptSel(conf) + ' .confirm-box p:has-text("What to ask:")').first().textContent()).replace('What to ask: ', ''); assert((await page.textContent(aptSel(conf) + ' .tour-qs')).includes(q), 'the confirmation question is also in the tour questions'); }
   await overflow('unit-confirm'); await shot('08-unit-confirm-asterisk', true);
-  const whats = whatsOf;
-  const whats0 = u => [...new Set((u.disclosures || []).map(x => String(x.what || '').trim()).filter(w => w && w.toLowerCase() !== String(u.confirm.what || '').toLowerCase()))];
-  const dU = data.units.find(u => whats(u).length >= 2 && !u.confirm.asterisk) || data.units.find(u => whats(u).length);
+  const dU = data.units.find(u => whats(u).length >= 2 && !u.confirm.asterisk && hoodBy[u.hood_id]) || data.units.find(u => whats(u).length);
   console.log('places with a disclosure:', data.units.filter(u => whats(u).length).length, 'of', data.units.length);
-  if (dU) { await go('#unit-' + slug(dU.id)); assert((await headOf('r-confirm')).startsWith(await page.evaluate(id => window.__houseHunt.headline('unit', id, 'confirm'), dU.id)));
-    await openRow('r-confirm'); assert.strictEqual(await page.locator('#good-to-know > ul > li').count(), whats(dU).length, 'every disclosure is listed once');
-    const gtk = await page.textContent('#good-to-know'), tqs = await page.textContent('#tour-qs'); assert(gtk.includes('Good to know before you call'));
+  if (dU) { await go('#unit-' + slug(dU.id), '.bpage'); const S1 = aptSel(dU); assert(await page.evaluate(s => document.querySelector(s).open, S1), 'a link to a place opens its building with that apartment open');
+    assert.strictEqual(await page.locator(S1 + ' .good-to-know > ul > li').count(), whats(dU).length, 'every disclosure is listed once');
+    const gtk = await page.textContent(S1 + ' .good-to-know'), tqs = await page.textContent(S1 + ' .tour-qs'); assert(gtk.includes('Good to know before you call'));
     for (const w of whats(dU)) assert(gtk.toLowerCase().includes(w.toLowerCase()), 'disclosure shown: ' + w);
     for (const x of dU.disclosures) if (x.question) assert(tqs.includes(x.question), 'the disclosure question is in the tour questions: ' + x.question);
-    if (!dU.confirm.asterisk) assert.strictEqual(await page.locator('#confirm-box, .cstar').count(), 0, 'a disclosure is not an asterisk');
-    await page.evaluate(() => document.getElementById('r-confirm').scrollIntoView()); await page.evaluate(() => window.scrollBy(0, -70)); await shot('12-unit-good-to-know'); await overflow('unit-disclosures'); }
-  const noConf = data.units.find(u => !u.confirm.asterisk && !whats(u).length);
-  if (noConf) { await go('#unit-' + slug(noConf.id)); assert.strictEqual(await page.locator('#confirm-box, #good-to-know, .unit .confl:not(.rent), .cstar').count(), 0); assert.strictEqual(await page.locator('.starline').count(), noConf.rent.asterisk || noConf.rent.basis_kind === 'net_effective' ? 1 : 0, 'no asterisk line when nothing is to confirm'); assert.strictEqual(await page.locator('#r-confirm .st').count(), noConf.rent.asterisk || noConf.rent.basis_kind === 'net_effective' ? 1 : 0, 'no "Ask" chip when nothing is to confirm'); }
-  // rent with an asterisk: the short line in the open, the terms in the Costs row
-  await go('#unit-' + slug(star.id)); assert((await page.textContent('.sign strong')).includes('*')); assert.strictEqual(await page.locator('.unit.page .confl').count(), 0); assert((await page.textContent('.unit.page .starline')).includes('to confirm'), 'the rent offer is counted on the asterisk line');
-  await openRow('r-confirm'); assert((await page.textContent('#r-confirm .confl.rent')).startsWith('* Rent:'), 'and said in the row');
-  await openRow('r-cost'); { const co = await page.evaluate(x => window.__houseHunt.cleanText(x), star.rent.offer_text), rt = await page.textContent('#rent-terms'); if (co) assert(rt.includes(co.slice(0, 30)), 'the offer, in the listing\'s words'); else assert(!rt.includes('in the listing\'s words')); } await shot('04-unit-rent-asterisk', true);
-  // parking rules that matter for a car on the street, in the Parking row
+    if (!dU.confirm.asterisk) assert.strictEqual(await page.locator(S1 + ' .confirm-box, ' + S1 + ' .cstar').count(), 0, 'a disclosure is not an asterisk');
+    await page.evaluate(s => document.querySelector(s + ' .good-to-know').scrollIntoView(), S1); await page.evaluate(() => window.scrollBy(0, -70)); await shot('12-unit-good-to-know'); await overflow('unit-disclosures'); }
+  const noConf = best.find(u => bUnits(u).every(x => !x.confirm.asterisk && !rs(x)));
+  if (noConf) { await go('#bldg-' + bSlug(noConf), '.bpage'); assert.strictEqual(await page.locator('.confirm-box, .cstar, .aptd summary .ac:not(.out)').count(), 0, 'nothing to confirm: no asterisk anywhere'); assert(!(await page.textContent('#see-apts')).includes('*')); }
+  // rent with an asterisk: on the price, on the apartment's line, and the terms inside it
+  await go('#unit-' + slug(star.id), '.bpage'); { const S2 = aptSel(star); assert((await page.textContent(S2 + ' .ap')).includes('*')); assert((await page.textContent(S2 + ' .confl.rent')).startsWith('* Rent:'));
+    const co = await page.evaluate(x => window.__houseHunt.cleanText(x), star.rent.offer_text), rt = await page.textContent(S2 + ' .terms'); if (co) assert(rt.includes(co.slice(0, 30)), 'the offer, in the listing\'s words'); else assert(!rt.includes('in the listing\'s words')); await shot('04-unit-rent-asterisk', true); }
+  // an old link to a place: the building's page, that apartment open and in view, the others closed
+  { const u2 = data.units.find(u => hoodBy[u.hood_id] && bUnits(u).length > 1 && bUnits(u)[0].id !== u.id); if (u2) { await page.evaluate(() => { location.hash = '#lives'; }); await page.waitForSelector('.life'); await page.evaluate(h => { location.hash = h; }, '#unit-' + slug(u2.id)); await page.waitForSelector('.bpage');
+      const r = await page.evaluate(([s, all]) => ({ open: all.map(x => document.querySelector(x).open), top: Math.round(document.querySelector(s).getBoundingClientRect().top), h1: document.querySelector('.ph1').textContent.trim(), hash: location.hash }), [aptSel(u2), bUnits(u2).map(aptSel)]);
+      assert.deepStrictEqual(r.open, bUnits(u2).map(x => x.id === u2.id), 'only that apartment is open'); assert(r.top >= 0 && r.top < 844 * 0.6, 'and it is in view: ' + r.top); assert.strictEqual(r.h1, bUnits(u2)[0].building || String(u2.address).split(',')[0]); assert.strictEqual(r.hash, '#unit-' + slug(u2.id)); } }
+  // Next and Previous move between buildings, never between the apartments of one building
+  { const h3 = shownHoods.find(h => bOf(h.id).length >= 3 && bOf(h.id)[1].units.length > 1) || shownHoods.find(h => bOf(h.id).length >= 3); if (h3) { const bs = bOf(h3.id);
+      await go('#bldg-' + bSlug(bs[1].units[0]), '.bpage'); const ln = await page.evaluate(() => [...document.querySelectorAll('.prevnext a')].map(a => a.querySelector('small').textContent + '|' + a.getAttribute('href')));
+      assert.deepStrictEqual(ln, ['Previous building|#bldg-' + bSlug(bs[0].units[0]), 'Next building|#bldg-' + bSlug(bs[2].units[0])]); assert.strictEqual(await page.locator('#view a[href^="#unit-"]').count(), 0, 'no link from a building to one of its own apartments');
+      await page.click('.prevnext a >> nth=1'); await page.waitForFunction(h => location.hash === h, '#bldg-' + bSlug(bs[2].units[0])); assert.strictEqual(await page.evaluate(() => window.scrollY), 0, 'the next building opens at its top');
+      await go('#bldg-' + bSlug(bs[0].units[0]), '.bpage'); assert.strictEqual(await page.locator('.prevnext a.prev').count(), 0, 'the first building has no Previous');
+      await go('#bldg-' + bSlug(bs[bs.length - 1].units[0]), '.bpage'); assert(/Next neighborhood|Back to/.test(await page.textContent('.prevnext a:not(.prev) small')), 'after the last building: the next neighborhood'); } }
+  // parking rules that matter for a car on the street, in "The car" and in "Local rules"
   const flagRe = [['overnight_parking', /\bbanned\b|not allowed|needs (a|the) permit|permit-only|may not park|overnight (parking )?permit|all-night parking restrictions/i], ['resident_permit', /out-of-state|out-of-town|registered in|registration[^.]{0,60}(show|address|same)|(licen[cs]e and|valid vehicle|motor vehicle|permanent vehicle) registration/i]];
   const flagged = h => (h.local.parking_rules || []).filter(r => flagRe.some(([k, re]) => r.rule === k && re.test(r.summary)));
-  const uStreet = data.units.filter(u => (u.parking.rank == null || u.parking.rank < 2) && hoodBy[u.hood_id] && flagged(hoodBy[u.hood_id]).length), uGarage = data.units.find(u => u.parking.rank >= 2 && hoodBy[u.hood_id] && flagged(hoodBy[u.hood_id]).length);
-  console.log('units with street or unknown parking under a flagged parking rule:', uStreet.length);
-  if (uStreet.length) { await go('#unit-' + slug(uStreet[0].id)); await openRow('r-parking'); assert.strictEqual(await page.locator('#park-rules li').count(), flagged(hoodBy[uStreet[0].hood_id]).length); assert(await page.locator('#park-rules a.srcl').count() >= 1); await overflow('unit-park-rules'); await shot('10-unit-street-parking-rules'); }
-  if (uGarage) { await go('#unit-' + slug(uGarage.id)); assert.strictEqual(await page.locator('#park-rules').count(), 0); }
-  const sd = data.units.find(u => u.dog.weight_limit_lb == null && u.dog.size_note);
-  if (sd) { await go('#unit-' + slug(sd.id)); assert.strictEqual(await headOf('r-dog'), 'allowed, small dogs, no weight given'); assert((await page.textContent('#dog-note')).includes('The page says small dogs; no weight number given')); }
-  const noEv = data.units.find(u => ['none readable', 'rating screen: not_enough_data'].includes(u.evidence.public_evidence) && !u.evidence.items.length && !u.evidence.positive.length && !u.evidence.pause_notes);
-  if (noEv) { await go('#unit-' + slug(noEv.id)); assert((await page.textContent('#r-love .panel.pause')).includes('No public records or readable reviews for this building; ask on the tour')); }
-  // the day: six tiles in their row, each opening its sheet; no crime figure on a tile
-  await go('#unit-' + slug(star.id)); await openRow('r-day');
-  assert(!CRIME.test(await page.evaluate(() => document.getElementById('r-day').innerText)), 'no crime figure on a day tile');
-  for (const k of ['wake', 'work', 'after', 'night', 'sat', 'sun']) { await page.click(`.tile[data-k=${k}]`); await page.waitForSelector('#sheet.open'); assert((await page.locator('#sheetBody li').count()) >= 3);
-    assert.strictEqual(await page.locator('#sheetBody details.howd[open]').count(), 0, 'sources in a sheet start closed');
-    if (k === 'night') { await page.waitForTimeout(300); await shot('04b-tile-sheet-night'); }
-    await page.keyboard.press('Escape'); await page.waitForSelector('#sheet:not(.open)'); }
+  const uStreet = best.filter(u => (u.parking.rank == null || u.parking.rank < 2) && flagged(hoodBy[u.hood_id]).length), uGarage = best.find(u => u.parking.rank >= 2 && flagged(hoodBy[u.hood_id]).length);
+  console.log('buildings with street or unknown parking under a flagged parking rule:', uStreet.length);
+  if (uStreet.length) { await go('#bldg-' + bSlug(uStreet[0]), '.bpage'); await openRow('r-parking'); assert.strictEqual(await page.locator('#park-rules li').count(), flagged(hoodBy[uStreet[0].hood_id]).length); assert(await page.locator('#park-rules a.srcl').count() >= 1);
+    const H0 = hoodBy[uStreet[0].hood_id]; await openRow('r-rules'); assert.strictEqual(await page.locator('#r-rules .rules li').count(), (H0.local.parking_rules || []).length + (H0.local.dog_rules || []).length, 'the town\'s rules are on the building page too'); await overflow('unit-park-rules'); await shot('10-unit-street-parking-rules'); }
+  if (uGarage) { await go('#bldg-' + bSlug(uGarage), '.bpage'); assert.strictEqual(await page.locator('#park-rules').count(), 0); }
+  const sd = best.find(u => u.dog.weight_limit_lb == null && u.dog.size_note);
+  if (sd) { await go('#bldg-' + bSlug(sd), '.bpage'); assert.strictEqual(await headOf('r-dog'), 'allowed, small dogs, no weight given'); assert((await page.textContent('#dog-note')).includes('The page says small dogs; no weight number given')); }
+  const noEv = best.find(u => ['none readable', 'rating screen: not_enough_data'].includes(u.evidence.public_evidence) && !u.evidence.items.length && !u.evidence.positive.length && !u.evidence.pause_notes);
+  if (noEv) { await go('#bldg-' + bSlug(noEv), '.bpage'); assert((await page.textContent('#r-love .panel.pause')).includes('No public records or readable reviews for this building; ask on the tour')); }
   // keyboard: a row opens with Enter and says so
-  await page.focus('#r-building > summary'); await page.keyboard.press('Enter'); assert(await page.evaluate(() => document.getElementById('r-building').open), 'a row opens from the keyboard');
+  { const was = await page.evaluate(() => document.getElementById('r-building').open); await page.focus('#r-building > summary'); await page.keyboard.press('Enter'); assert.strictEqual(await page.evaluate(() => document.getElementById('r-building').open), !was, 'a row opens and closes from the keyboard'); }
 
-  // ---------- via the interface: experience -> neighborhood -> place, hold three, compare ----------
+  // ---------- via the interface: experience -> neighborhood -> building; save any number; My list; tick two or three; compare ----------
   await page.evaluate(() => { location.hash = '#lives'; }); await page.waitForSelector('.life');
   await page.click(`a.life[href="#exp-${slug(y1)}"]`); await page.waitForSelector('.viewsw'); await showAll();
   await page.click(`a.hood[href="#hood-${slug(star.hood_id)}"]`); await page.waitForSelector('#sec-places'); await showAll();
-  await page.click(`a.cardl[href="#unit-${slug(star.id)}"]`); await page.waitForSelector('.unit.page');
-  await page.click('.unit.page [data-act=hold]');
-  const two = data.units.find(u => u.year !== y1 && u.evidence.items.length && u.evidence.positive.length && hoodBy[u.hood_id]) || data.units.find(u => u.year !== y1);
-  await go('#unit-' + slug(two.id), '.unit.page'); await openRow('r-queens'); assert(await page.locator('#r-love .panel.pause .quote a.srcl').count() >= 1); await overflow('unit2'); await shot('04c-unit-with-evidence', true);
-  await page.click('.unit.page [data-act=hold]');
-  const three = data.units.find(u => u.year !== y1 && u.year !== two.year && hoodBy[u.hood_id]) || data.units.find(u => u.id !== star.id && u.id !== two.id);
-  await go('#unit-' + slug(three.id), '.unit.page'); await page.click('.unit.page [data-act=hold]');
-  assert.strictEqual(await page.locator('.slot.full').count(), 3);
-  await page.click('#goBtn'); await page.waitForSelector('.pairbox');
+  await page.click(`a.cardl[href="#bldg-${bSlug(star)}"]`); await page.waitForSelector('.bpage');
+  const heart = async u => { await page.click('#w-apt-' + slug(u.id) + ' > .heartb'); }, saved = async () => (await page.evaluate(() => window.__houseHunt.state())).saved;
+  await heart(star); assert.deepStrictEqual(await saved(), [star.id]); assert.strictEqual(await page.getAttribute('#w-apt-' + slug(star.id) + ' > .heartb', 'aria-pressed'), 'true');
+  assert.strictEqual((await page.evaluate(() => document.getElementById('tray').innerText)).replace(/\s+/g, ' ').trim(), 'Saved · 1 My list'); await shot('04c-saved-toast-and-bar');
+  assert.strictEqual(await page.getAttribute('.savb[data-pos=top]', 'aria-pressed'), String(bUnits(star).length === 1), 'the building counts as saved only when all its apartments are');
+  const two = data.units.find(u => u.year !== y1 && u.evidence.items.length && u.evidence.positive.length && isBest(u)) || data.units.find(u => u.year !== y1 && isBest(u));
+  await go('#bldg-' + bSlug(two), '.bpage'); await openRow('r-queens'); assert(await page.locator('#r-love .panel.pause .quote a.srcl').count() >= 1); await overflow('unit2'); await shot('04c-building-with-evidence', true);
+  // "Save this place" at the top saves the building's apartments; the one at the bottom shows the same state and takes them off again
+  await page.click('.savb[data-pos=top]'); { const want = [star.id].concat(bUnits(two).map(u => u.id)); assert.deepStrictEqual(await saved(), want);
+    assert.deepStrictEqual(await page.evaluate(() => [...document.querySelectorAll('.savb')].map(b => b.getAttribute('aria-pressed') + '|' + b.textContent.trim().slice(0, 5))), ['true|Saved', 'true|Saved'], 'both Save buttons say Saved');
+    await page.click('.savb[data-pos=bottom]'); assert.deepStrictEqual(await saved(), [star.id], 'the bottom one takes them off'); await page.click('.savb[data-pos=bottom]'); assert.deepStrictEqual(await saved(), want); }
+  const three = data.units.find(u => u.year !== y1 && u.year !== two.year && isBest(u)) || data.units.find(u => u.id !== star.id && u.id !== two.id && isBest(u));
+  await go('#bldg-' + bSlug(three), '.bpage'); await heart(three);
+  // any number: two more, from other buildings
+  const more = best.filter(u => ![star, two, three].some(x => bSlug(x) === bSlug(u))).slice(0, 2); for (const u of more) { await go('#bldg-' + bSlug(u), '.bpage'); await heart(u); }
+  const all = await saved(); assert(all.length >= 5, 'more than three can be saved: ' + all.length); assert.strictEqual((await page.evaluate(() => document.getElementById('tray').innerText)).replace(/\s+/g, ' ').trim(), 'Saved · ' + all.length + ' My list');
+  await page.click('#tray a'); await page.waitForSelector('#mylist');
+  const listIds = () => page.evaluate(() => [...document.querySelectorAll('#mylist .lrow')].map(r => r.getAttribute('data-id')));
+  assert.deepStrictEqual(await listIds(), all, 'My list: everything saved, in the order saved, not ranked'); assert.strictEqual((await page.textContent('#list-count')).trim(), all.length + ' places saved');
+  await fits('list', all.length + ' places saved'); await overflow('list'); await small('list'); await noCrime('list'); await shot('06-my-list', true); await shot('ux-06-my-list');
+  // sorting is hers: all-in, minutes, size, move-in date, things to confirm, experience
+  { const U = id => unitBy[id], mk = u => u.available === 'now' ? '0000' : /^\d{4}-\d\d-\d\d/.test(u.available || '') ? u.available : '9999', nc = u => (u.confirm.asterisk ? 1 : 0) + (rs(u) ? 1 : 0) + whats(u).length, yi = u => data.years.findIndex(y => y.id === u.year);
+    const ord = { all_in: (a, b) => a.all_in - b.all_in, mins: (a, b) => a.moments.sun.drive_min - b.moments.sun.drive_min, sqft: (a, b) => (b.sqft == null ? -1e18 : b.sqft) - (a.sqft == null ? -1e18 : a.sqft), movein: (a, b) => mk(a) < mk(b) ? -1 : mk(a) > mk(b) ? 1 : 0, confirm: (a, b) => nc(a) - nc(b), exp: (a, b) => yi(a) - yi(b) };
+    assert.deepStrictEqual(await page.evaluate(() => [...document.querySelectorAll('#listSort option')].map(o => o.value)), ['saved', 'all_in', 'mins', 'sqft', 'movein', 'confirm', 'exp']);
+    for (const k of Object.keys(ord)) { await page.selectOption('#listSort', k); const want = all.map((id, i) => [U(id), i]).sort((x, y) => ord[k](x[0], y[0]) || x[1] - y[1]).map(x => x[0].id); assert.deepStrictEqual(await listIds(), want, 'sorted by ' + k); }
+    await page.selectOption('#listSort', 'all_in'); await shot('ux-06a-my-list-sorted-by-all-in'); await page.selectOption('#listSort', 'saved'); }
+  // tick any two or three, then compare; a fourth tick is refused; un-tick to swap
+  assert.strictEqual(await page.getAttribute('#cmpBtn', 'aria-disabled'), 'true'); assert.strictEqual((await page.textContent('#cmpBtn')).trim(), 'Tick two or three to compare'); await page.click('#cmpBtn', { force: true }); assert.strictEqual(await page.evaluate(() => location.hash), '#list', 'nothing to compare yet');
+  const tick = async u => { await page.click(`#mylist .lrow[data-id="${u.id}"] input[type=checkbox]`); };
+  await tick(star); assert.strictEqual(await page.getAttribute('#cmpBtn', 'aria-disabled'), 'true', 'one is not enough'); await tick(two); assert.strictEqual((await page.textContent('#cmpBtn')).trim(), 'Compare selected (2)'); await tick(three); assert.strictEqual((await page.textContent('#cmpBtn')).trim(), 'Compare selected (3)');
+  await tick(more[0]); assert.strictEqual(await page.isChecked(`#mylist .lrow[data-id="${more[0].id}"] input`), false, 'a fourth tick is refused'); assert.deepStrictEqual((await page.evaluate(() => window.__houseHunt.state())).pick, [star.id, two.id, three.id]);
+  await shot('ux-06b-my-list-three-ticked');
+  // one tap takes a place off the list, with an undo
+  await page.click(`#mylist .lrow[data-id="${more[1].id}"] .lx`); assert.deepStrictEqual(await listIds(), all.filter(id => id !== more[1].id)); assert((await page.textContent('#undo')).includes('Undo')); await shot('ux-06c-my-list-undo');
+  await page.click('#undo button'); assert.deepStrictEqual(await listIds(), all, 'Undo puts it back where it was'); assert.strictEqual(await page.locator('#undo').count(), 0);
+  await page.reload(); await page.waitForSelector('#mylist'); assert.deepStrictEqual(await listIds(), all, 'the list is kept'); assert.strictEqual((await page.textContent('#cmpBtn')).trim(), 'Compare selected (3)', 'and so are the ticks');
+  await page.click('#cmpBtn'); await page.waitForSelector('.pairbox');
   await fits('compare', 'three places'); await overflow('compare'); await small('compare'); await noCrime('compare');
   await shot('06-compare', true); await shot('ux-06-compare-collapsed');
-  // the trade in plain words is in view; names and prices stay pinned; only what differs is shown, until asked
+  // the trade in plain words is in view; names and prices stay pinned; only what differs is shown, until asked; the Queens comparison starts closed
   assert(await page.isVisible('.pairbox p')); assert.strictEqual(await page.evaluate(() => getComputedStyle(document.querySelector('.cmp-head')).position), 'sticky');
-  assert.strictEqual(await page.locator('.cmp-head .colh').count(), 3); assert(await page.isChecked('#ties'), '"Only show what differs" is on by default');
+  assert.strictEqual(await page.locator('.cmp-head .colh').count(), 3); assert(await page.isChecked('#ties'), '"Only show what differs" is on by default'); assert(!(await page.evaluate(() => document.getElementById('c-queens').open)), 'the Queens comparison is collapsed');
   const rows1 = await page.locator('#cmp-rows .rowc').count(); await page.click('#ties'); const rows2 = await page.locator('#cmp-rows .rowc').count();
   assert.strictEqual(rows2, 4 + ([star, two, three].some(u => u.confirm.asterisk || (u.disclosures || []).length) ? 1 : 0), 'money, space, the car, the trip and what is to confirm, got ' + rows2); assert(rows1 <= rows2);
   console.log('compare rows differing/all:', rows1, rows2, '|', await page.textContent('#tiesNote')); await page.click('#ties');
@@ -459,6 +573,9 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   await page.waitForTimeout(300); await shot('06b-five-point-explanation'); await page.click('#shClose');
   await page.evaluate(() => document.getElementById('c-queens').scrollIntoView({ block: 'start' })); await page.evaluate(() => window.scrollBy(0, -130)); await shot('ux-06b-compare-queens-open');
   await page.evaluate(() => window.scrollTo(0, 0)); await page.click('[data-act=pair][data-p="0-2"]'); assert.strictEqual(await page.getAttribute('[data-act=pair][data-p="0-2"]', 'aria-pressed'), 'true');
+  // un-tick one from the comparison: two stay side by side, and it is still on the list to swap back in
+  await page.click('.cmp-head .colh .x >> nth=2'); assert.strictEqual(await page.locator('.cmp-head .colh').count(), 2); assert.deepStrictEqual(await saved(), all, 'still saved'); await shot('06d-compare-two');
+  await page.click('#view a[href="#list"]'); await page.waitForSelector('#mylist'); await tick(three); assert.strictEqual((await page.textContent('#cmpBtn')).trim(), 'Compare selected (3)');
 
   // ---------- limits ----------
   await page.evaluate(() => { location.hash = '#lives'; }); await page.waitForSelector('.life');
@@ -479,28 +596,32 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   assert((await page.textContent('#fitline')).startsWith(clearN + ' of '), 'toggle count ' + (await page.textContent('#fitline')) + ' vs ' + clearN);
   await page.click('[data-act=limits-close]');
   await go('#hood-' + slug(conf.hood_id)); await showAll();
-  assert.strictEqual(await page.locator('#sec-places .unit.out').count(), data.units.filter(u => u.hood_id === conf.hood_id && u.confirm.asterisk).length);
-  assert((await page.textContent('#sec-places .unit.out .why')).includes('Still to confirm'));
+  assert.strictEqual(await page.locator('#sec-places .bcard.out').count(), bOf(conf.hood_id).filter(b => b.units.every(u => u.confirm.asterisk)).length, 'a building is greyed when none of its apartments fits');
+  assert((await page.textContent('#sec-places .bcard.out .why')).includes('Still to confirm'));
   await page.reload(); await page.waitForSelector('#sec-places'); assert(await page.isChecked('#lim-clear'), 'the toggle is remembered');
   await page.evaluate(() => { location.hash = '#lives'; }); await page.waitForSelector('.life');
   await page.click('[data-act=limits-open]'); await page.click('[data-act=limits-reset]'); await page.click('[data-act=limits-close]');
   assert.strictEqual(await page.locator('.life.none').count(), 0);
-  // copy the tour list
-  await page.click('#goBtn'); await page.waitForSelector('[data-act=copy]'); await page.click('[data-act=copy]');
+  // copy the tour list: it comes from My list, every saved place
+  await page.click('#tray a'); await page.waitForSelector('[data-act=copy]'); await page.click('[data-act=copy]');
   await page.waitForFunction(() => document.getElementById('copyStatus').textContent.length > 0); console.log('copy status:', await page.textContent('#copyStatus'));
-  const txt = await page.evaluate(() => window.__houseHunt.tourText()); assert(txt.includes(star.tour_questions[0]) && txt.includes('House 2'));
+  const txt = await page.evaluate(() => window.__houseHunt.tourText()); assert(txt.includes(star.tour_questions[0])); for (const id of all) assert(txt.includes(unitBy[id].building || String(unitBy[id].address).split(',')[0]), 'every saved place is in the tour list');
+  assert.strictEqual((txt.match(/^\d+\. /gm) || []).length, all.length);
   if ((star.disclosures || []).length) assert(txt.includes('Good to know before you call:'));
   let clip = null; try { clip = await page.evaluate(() => navigator.clipboard.readText()); } catch (e) {} if (clip !== null) assert.strictEqual(clip, txt);
 
   // ---------- every view renders, collapsed: no side scroll, within 2.2 screens, no crime in the open ----------
   await page.reload(); await page.waitForSelector('#view .ph1, #view .life'); // a fresh visit: no row is remembered as open
   const t0 = Date.now();
-  const res = await page.evaluate(async ([ids, LIMIT]) => { let worst = 0, n = 0, tall = [], crime = [], maxH = {}, unresolved = [], cutHeads = [], longHeads = 0, heads = 0, dumps = []; const RE = /\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000/i;
+  const res = await page.evaluate(async ([ids, LIMS]) => { let worst = 0, n = 0, tall = [], crime = [], maxH = {}, unresolved = [], cutHeads = [], longHeads = 0, heads = 0, dumps = []; const RE = /\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000/i;
     for (const h of ids) { const t = performance.now(); location.hash = h; await new Promise(r => setTimeout(r, 0)); worst = Math.max(worst, performance.now() - t); n++;
       if (location.hash !== '#' + h) { unresolved.push(h); continue; } // two ids that give the same plain hash: the page numbers the second one
       if (document.documentElement.scrollWidth > document.documentElement.clientWidth) return 'overflow at ' + h;
       const kind = h.split('-')[0], f = document.getElementById('foot').getBoundingClientRect(), tr = document.getElementById('trail'), ht = Math.round(f.bottom + window.scrollY - (tr.hidden ? 0 : tr.offsetHeight));
-      maxH[kind] = Math.max(maxH[kind] || 0, ht); if (ht > LIMIT) tall.push(h + ' ' + ht);
+      maxH[kind] = Math.max(maxH[kind] || 0, ht); if (ht > LIMS[kind]) tall.push(h + ' ' + ht);
+      if (document.querySelectorAll('#view .host, #view .who, #view .clampw').length || /your host/i.test(document.getElementById('view').textContent)) return 'a host box at ' + h;
+      if (kind === 'unit' && !(document.querySelector('.bpage') && document.querySelectorAll('#sec-apts details.aptd[open]').length === 1)) return 'a place link that does not open its building with one apartment open: ' + h;
+      if (kind === 'bldg' && document.querySelectorAll('#sec-apts details[open]').length) return 'an apartment open by default at ' + h;
       if (document.querySelectorAll('#view details.rowd[open]').length) return 'a row is open by default at ' + h;
       // a headline is readable in full while its row is closed: never clipped, never ending in an ellipsis, 64 characters at most
       document.querySelectorAll('#view details.rowd > summary .rh').forEach(e => { if (!e.getClientRects().length) return; const s = e.textContent, cs = getComputedStyle(e); heads++; if (s.length > 44) longHeads++;
@@ -509,10 +630,10 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
       { const dv = document.getElementById('view').textContent, dm = /totalPrice|\bterm \d+:/.exec(dv); if (dm) dumps.push(h + ': ' + dv.slice(Math.max(0, dm.index - 30), dm.index + 50)); }
       const m = RE.exec(document.getElementById('view').innerText); if (m) crime.push(h + ': ' + document.getElementById('view').innerText.slice(Math.max(0, m.index - 40), m.index + 40).replace(/\s+/g, ' ')); }
     return { n, worst: Math.round(worst), maxH, tall, crime, unresolved, cutHeads, longHeads, heads, dumps }; },
-    [[...data.years.map(y => 'exp-' + slug(y.id)), ...data.neighborhoods.filter(h => yearBy[h.year]).map(h => 'hood-' + slug(h.id)), ...data.units.filter(u => hoodBy[u.hood_id]).map(u => 'unit-' + slug(u.id))], LIMIT]);
+    [[...data.years.map(y => 'exp-' + slug(y.id)), ...data.neighborhoods.filter(h => yearBy[h.year]).map(h => 'hood-' + slug(h.id)), ...pageBldgs.map(b => 'bldg-' + b.slug), ...data.units.filter(u => hoodBy[u.hood_id]).map(u => 'unit-' + slug(u.id))], { exp: limitOf('experience'), hood: limitOf('neighborhood'), bldg: limitOf('building'), unit: 1e9 }]);
   console.log('all views:', JSON.stringify(res).slice(0, 1500), 'in', Date.now() - t0, 'ms');
   assert(typeof res === 'object', String(res)); assert(res.unresolved.length <= 3, 'hashes the page did not open: ' + res.unresolved);
-  if (W === 390) assert.strictEqual(res.tall.length, 0, 'pages over 2.2 screens collapsed: ' + res.tall.slice(0, 8));
+  if (W === 390) assert.strictEqual(res.tall.length, 0, 'pages over their ceiling, collapsed: ' + res.tall.slice(0, 8));
   assert.strictEqual(res.cutHeads.length, 0, 'row headlines that are cut or too long: ' + res.cutHeads.slice(0, 6).join(' | '));
   assert.strictEqual(res.dumps.length, 0, 'pipeline text on a page: ' + res.dumps.slice(0, 3).join(' | '));
   console.log('row headlines:', res.heads, 'on', res.n, 'pages, none cut;', res.longHeads, 'longer than 44 characters (two lines)');
@@ -534,7 +655,8 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   // ---------- made-up test values (in this test only) for fields the data does not carry yet ----------
   const page2 = await ctx.newPage(); page2.setDefaultTimeout(10000);
   page2.on('console', m => { if (m.type() === 'error') errors.push('test-data page: ' + m.text()); }); page2.on('pageerror', e => errors.push('test-data PAGEERROR ' + e.message));
-  const vh = shownHoods.find(h => h.counts.shown > 0), vu = data.units.find(u => u.hood_id === vh.id);
+  const vh = shownHoods.find(h => h.counts.shown > 0), vu = bUnits(data.units.find(u => u.hood_id === vh.id))[0];
+  const h2o = shownHoods.find(h => h.year !== vh.year), h2id = h2o.id, u2o = best.find(u => u.hood_id === h2id), u2id = u2o.id;
   await page2.route('**/data.json', async route => { const d = JSON.parse(JSON.stringify(data)); const h = d.neighborhoods.find(x => x.id === vh.id), y = d.years.find(x => x.id === vh.year), u = d.units.find(x => x.id === vu.id);
     h.local.voices = [
       { excerpt: 'TEST quote, positive, noise.', theme: 'noise', sentiment: 'positive', context: 'renter', source: 'example forum', date: '2026-05-02', url: 'https://example.com/a' },
@@ -548,14 +670,18 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
     h.headlines = { local_rules: { subhead: 'TEST subhead written by hand: ask the building about the overnight permit before you bring the car, and ask again in writing.' }, residents_say: { subhead: 'TEST subhead about violent crime that must not show.' } };
     y.tagline = 'TEST subhead: a quiet town, the lowest crime on the list and a train to the city.'; y.subhead = y.tagline; y.prose = Object.assign({}, y.prose, { promise: 'TEST promise about very low crime, 0.3 violent per 1,000.' });
     y.host = { intro: 'TEST experience host intro.', walkthrough: ['TEST walkthrough one.', 'TEST walkthrough two.'] };
-    u.host = { line: 'TEST host line for the place.', catch: 'TEST host catch.' }; u.headlines = { cost: { subhead: 'TEST cost subhead.' } };
+    u.host = { line: 'TEST host line for the place.', catch: 'TEST host catch.' }; u.headlines = { parking: { subhead: 'TEST parking subhead.' } };
+    // fields the writing agent will send: icon points, the day's moments, a text about the building
+    const y2 = d.years.find(x => x.id !== vh.year), h2 = d.neighborhoods.find(x => x.id === h2id), u2 = d.units.find(x => x.id === u2id);
+    y2.about_points = [{ icon: 'dog', text: 'TEST point one, with a dog.' }, { icon: 'no-such-icon', text: 'TEST point two, unknown icon.' }, { icon: 'moon', text: 'TEST point about violent crime that must not show.' }, 'TEST point three, a plain string.'];
+    y2.day_moments = [{ icon: 'coffee', title: 'TEST morning', text: 'TEST moment one.' }, { icon: 'train', title: 'TEST commute', text: 'TEST moment two.' }];
+    h2.about_points = [{ icon: 'park', text: 'TEST hood point.' }]; u2.about_building = 'TEST about the building. It has a second sentence. And a third one.';
     await route.fulfill({ contentType: 'application/json', body: JSON.stringify(d) }); });
   await page2.goto(BASE + '/index.html#hood-' + slug(vh.id)); await page2.waitForSelector('.ph1');
   
-  // host voice: the one thing open, clamped to about four lines with "more"
-  assert(await page2.isVisible('#host-intro')); const clampH = await page2.evaluate(() => document.querySelector('#host-intro .clamp').clientHeight);
-  assert(clampH <= 2 * 1.4 * 15.5 + 2, 'the host intro is clamped to two lines: ' + clampH + 'px'); assert(await page2.isVisible('#host-intro [data-act=unclamp]'));
-  await page2.click('#host-intro [data-act=unclamp]'); assert(await page2.evaluate(() => document.querySelector('#host-intro .clamp').clientHeight) > clampH + 20); assert.strictEqual(await page2.getAttribute('#host-intro [data-act=unclamp]', 'aria-expanded'), 'true'); await page2.click('#host-intro [data-act=unclamp]');
+  // "About <name>": the made-up intro whole, no host box, nothing clamped
+  { const ab = await page2.evaluate(() => ({ h2: document.querySelector('#about h2').textContent, text: document.getElementById('about').textContent, host: document.querySelectorAll('#view .host, #view .clampw, #view [data-act=unclamp]').length }));
+    assert.strictEqual(ab.h2, 'About ' + (vh.parent_name && vh.short_name ? vh.short_name : vh.name)); assert.strictEqual(ab.host, 0); assert.strictEqual(ab.text.split('This is a long made-up paragraph').length - 1, 3, 'all of it is shown'); }
   // a written subhead under the built headline, lighter and clamped to two lines; a subhead about crime is not shown
   assert((await page2.textContent('#r-rules > summary .rs')).startsWith('TEST subhead written by hand')); assert.strictEqual(await page2.locator('#r-voices > summary .rs').count(), 0, 'a subhead about crime is dropped');
   const subStyle = await page2.evaluate(() => { const rs = document.querySelector('#r-rules .rs'), rh = document.querySelector('#r-rules .rh'), a = getComputedStyle(rs), b = getComputedStyle(rh); return { subW: +a.fontWeight, headW: +b.fontWeight, lines: Math.round(rs.clientHeight / parseFloat(a.lineHeight)) }; });
@@ -570,13 +696,24 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   assert((await page2.textContent('#sec-voices')).includes('Would recommend share: 71%.'));
   if (W === 390 && OUT) { await page2.evaluate(() => window.scrollTo(0, 0)); await page2.screenshot({ path: `${OUT}/ux-07-test-data-host-voice-and-subhead.png` }); }
   // experience: a subhead or promise about crime is not rendered; the host walks her through in a row
-  await page2.evaluate(h => { location.hash = h; }, '#exp-' + slug(vh.year)); await page2.waitForSelector('#host-intro');
+  await page2.evaluate(h => { location.hash = h; }, '#exp-' + slug(vh.year)); await page2.waitForSelector('#about');
   { const t = await page2.evaluate(() => document.getElementById('view').innerText); assert(!CRIME.test(t), 'no crime clause from the subhead or the promise'); assert(t.includes('TEST subhead: a quiet town and a train to the city.'), 'the rest of the subhead stays: ' + t.slice(0, 200)); }
   assert(!(await page2.locator('#sec-promise').count()) || !(await page2.textContent('#sec-promise')).includes('TEST promise'), 'a promise about crime is not shown'); assert.strictEqual(await headOf('r-scene', page2), 'TEST walkthrough one.');
   await page2.evaluate(() => { location.hash = '#lives'; }); await page2.waitForSelector('.life'); assert(!CRIME.test(await page2.evaluate(() => document.getElementById('view').innerText)));
-  // place: the host line open, a written subhead on the Costs row
-  await page2.evaluate(h => { location.hash = h; }, '#unit-' + slug(vu.id)); await page2.waitForSelector('#host-line');
-  assert((await page2.textContent('#host-line')).includes('TEST host line for the place.') && (await page2.textContent('#host-line')).includes('TEST host catch.')); assert.strictEqual((await page2.textContent('#r-cost .rs')).trim(), 'TEST cost subhead.');
+  // building: the text under "About the building", the catch as its own marked line, a written subhead on a row
+  await page2.evaluate(h => { location.hash = h; }, '#bldg-' + bSlug(vu)); await page2.waitForSelector('.bpage');
+  { const a = await page2.evaluate(() => ({ t: document.getElementById('about').textContent, warn: document.querySelectorAll('#about .pi.warn').length })); assert(a.t.includes('TEST host line for the place.') && a.t.includes('The catch: TEST host catch.') && a.warn === 1, a.t); }
+  assert.strictEqual((await page2.textContent('#r-parking .rs')).trim(), 'TEST parking subhead.');
+  // about_points: an icon list, a dot for an unknown key, a point about crime left out; day_moments: its own titles; about_building in place of the host line
+  await page2.evaluate(h => { location.hash = h; }, '#exp-' + slug(h2o.year)); await page2.waitForSelector('#about .pts');
+  { const pts = await page2.evaluate(() => [...document.querySelectorAll('#about .pts li')].map(li => ({ t: li.textContent, stroke: li.querySelectorAll('svg path, svg rect').length, dot: li.querySelectorAll('svg circle[fill=currentColor]').length })));
+    assert.deepStrictEqual(pts.map(p => p.t), ['TEST point one, with a dog.', 'TEST point two, unknown icon.', 'TEST point three, a plain string.'], 'the points, the crime one left out'); assert(pts[0].stroke >= 1 && pts[0].dot === 0, 'a drawn icon for a known key'); assert(pts[1].dot === 1 && pts[2].dot === 1, 'a dot for an unknown or missing key');
+    assert.strictEqual(await page2.locator('#about .lead2').count(), 0, 'points replace the split text'); await openRow('r-scene', page2);
+    assert.deepStrictEqual(await page2.evaluate(() => [...document.querySelectorAll('#r-scene .dmom h4')].map(h => h.textContent.trim())), ['TEST morning', 'TEST commute']); assert.strictEqual(await headOf('r-scene', page2), 'TEST moment one.');
+    if (W === 390 && OUT) { await page2.evaluate(() => window.scrollTo(0, 0)); await page2.screenshot({ path: `${OUT}/ux-07b-test-data-about-points.png` }); } }
+  await page2.evaluate(h => { location.hash = h; }, '#hood-' + slug(h2id)); await page2.waitForSelector('#about .pts'); assert.strictEqual((await page2.textContent('#about .pts')).trim(), 'TEST hood point.');
+  await page2.evaluate(h => { location.hash = h; }, '#bldg-' + bSlug(u2o)); await page2.waitForSelector('.bpage');
+  { const a = await page2.textContent('#about'); assert(a.includes('TEST about the building. It has a second sentence.') && a.includes('And a third one.'), a); if (u2o.host && u2o.host.line) assert(!a.includes(u2o.host.line.slice(0, 40)), 'about_building replaces the host line'); }
   const vo = await page2.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); assert(vo <= 0, 'test-data overflow ' + vo);
   await page2.close();
   console.log('console errors:', errors.length ? errors : 'none');

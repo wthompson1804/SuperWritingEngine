@@ -1,0 +1,13 @@
+scope,key,field,value,basis,source,note
+building,475 main st 404 city of orange nj 07050 usa|07050,building_name,The Elks,search_result,"docs/PENDING_FIXES.md (ratings census, search-result summary)",medium confidence
+building,270 luis m marin blvd|07302,building_name,Metropolis Towers,search_result,"docs/PENDING_FIXES.md (ratings census, search-result summary)",medium confidence
+building,26-25 4th st|11102,building_name,The Winslow,search_result,"docs/PENDING_FIXES.md (ratings census, search-result summary)",medium confidence
+building,187 culver ave|07305,building_name,The Tetris,search_result,"docs/PENDING_FIXES.md (ratings census, search-result summary)",medium confidence
+building,479 front st|11550,building_name,Village Lofts,search_result,"docs/PENDING_FIXES.md (ratings census, search-result summary)",medium confidence
+building,12 brooklyn ave|11581,building_name,Sun Valley Towers,search_result,"docs/PENDING_FIXES.md (ratings census, search-result summary)",medium confidence
+building,5 linden st|07601,building_name,The Hampton,search_result,"docs/PENDING_FIXES.md (ratings census, search-result summary)",medium confidence
+building,1100 frank|07029,address,1100 Frank E Rodgers Blvd S,targets_file_split,docs/PENDING_FIXES.md: the management targets file split the address across the address and city columns,the other listing rows of the building give the full street
+building,1100 frank|07029,city,Harrison,targets_file_split,docs/PENDING_FIXES.md: the management targets file split the address across the address and city columns,
+building,527 old bridge tpke|08816,city,East Brunswick,postal_address,"docs/PENDING_FIXES.md: 527 Old Bridge Turnpike, ZIP 08816, is an East Brunswick address (the listing site files it under South River)",the neighborhood was already East Brunswick
+unit,apartmentlist:p44503265-408,address,170 Avenue F,evidence,"data/evidence/facts_batch_1.csv address_note: units 408 and 410 are in the EDGE Avenue F building (170 Avenue F), per the building's own unit map (edgebayonne.com)",independent check 3 D17
+unit,apartmentlist:p44503265-410,address,170 Avenue F,evidence,"data/evidence/facts_batch_1.csv address_note: units 408 and 410 are in the EDGE Avenue F building (170 Avenue F), per the building's own unit map (edgebayonne.com)",independent check 3 D17
