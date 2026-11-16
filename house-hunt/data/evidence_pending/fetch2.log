@@ -64,3 +64,27 @@
 404 0 https://www.zumper.com/address/8-union-ave-norwalk-ct-06851-usa
 404 0 https://www.zumper.com/address/660-veterans-hwy-hauppauge-ny-11788-usa
 200 101984 https://www.apartmentlist.com/ny/hauppauge/fairfield-at-hauppauge
+200 542575 https://www.zumper.com/address/35-elliott-pl-smithtown-ny-11787-usa
+200 101978 https://www.apartmentlist.com/ny/smithtown/fairfield-at-smithtown
+404 0 https://www.zumper.com/address/100-crucible-dr-harrison-nj-07029-usa
+404 0 https://www.zumper.com/address/5-49-borden-ave-queens-ny-11101-usa
+404 0 https://www.zumper.com/address/71-park-ave-new-york-city-ny-10016-usa
+404 0 https://www.zumper.com/address/301-e-65th-st-new-york-city-ny-10065-usa
+200 677914 https://www.zumper.com/address/4-horizon-rd-fort-lee-nj-07024-usa
+404 0 https://www.zumper.com/address/7119-shore-rd-brooklyn-ny-11209-usa
+404 0 https://www.zumper.com/address/501-u-s-46-kenvil-nj-07847-usa
+404 0 https://www.zumper.com/address/156-u-s-46-rockaway-nj-07866-usa
+404 0 https://www.zumper.com/address/116-smithtown-blvd-nesconset-ny-11787-usa
+200 101993 https://www.apartmentlist.com/ny/nesconset/fairfield-manor-at-nesconset
+404 0 https://www.zumper.com/address/333-spruce-mill-ln-scotch-plains-nj-07076-usa
+200 103022 https://www.apartmentlist.com/nj/scotch-plains/lamberts-mill-village
+200 713157 https://www.zumper.com/address/3-bedford-ave-norwalk-ct-06850-usa
+404 0 https://www.zumper.com/address/9201-9207-john-f-kennedy-blvd-north-bergen-nj-07047-usa
+200 860652 https://www.zumper.com/address/13-jefferson-st-brooklyn-ny-11206-usa
+404 0 https://www.zumper.com/address/333-e-53rd-st-new-york-city-ny-10022-usa
+404 0 https://www.zumper.com/address/165-w-95th-st-new-york-city-ny-10025-usa
+404 0 https://www.zumper.com/address/35-smithtown-ny-11787-usa
+200 565231 https://www.zumper.com/address/553-undercliff-ave-edgewater-nj-07020-usa
+404 0 https://www.zumper.com/address/4612-park-ave-weehawken-nj-07086-usa
+200 102631 https://www.apartmentlist.com/nj/new-brunswick/gardens-at-raritan
+refused hosts: {'goldberg-realty.com': {'why': 'HTTP 403', 'url': 'https://www.goldberg-realty.com/nj/fort-lee/palisades-gardens-apts/index.aspx', 'at': '2026-11-16T00:22:38+00:00'}, 'therailnorthbergen.com': {'why': 'HTTP 403', 'url': 'https://www.therailnorthbergen.com/', 'at': '2026-11-16T00:22:49+00:00'}, '1harrison.com': {'why': 'HTTP 403', 'url': 'https://www.1harrison.com/', 'at': '2026-11-16T00:22:52+00:00'}, 'ironstate.com': {'why': 'HTTP 403', 'url': 'https://ironstate.com/property/harrison-station/index.aspx', 'at': '2026-11-16T00:23:03+00:00'}, 'deyandbergen.com': {'why': 'HTTP 403', 'url': 'https://www.deyandbergen.com/', 'at': '2026-11-16T00:23:06+00:00'}, 'moderaberkeleyheights.com': {'why': 'HTTP 403', 'url': 'https://www.moderaberkeleyheights.com/robots.txt', 'at': '2026-11-16T00:23:20+00:00'}, 'chathamhillnj.com': {'why': 'HTTP 403', 'url': 'https://www.chathamhillnj.com/', 'at': '2026-11-16T00:23:23+00:00'}, 'harboursidesono.com': {'why': 'HTTP 403', 'url': 'https://www.harboursidesono.com', 'at': '2026-11-16T00:23:50+00:00'}, 'ironworkssono.com': {'why': 'HTTP 403', 'url': 'https://www.ironworkssono.com', 'at': '2026-11-16T00:23:53+00:00'}, 'confluencenorwalk.com': {'why': 'HTTP 403', 'url': 'https://www.confluencenorwalk.com', 'at': '2026-11-16T00:23:57+00:00'}, 'brimcrown.com': {'why': 'HTTP 403', 'url': 'https://www.brimcrown.com', 'at': '2026-11-16T00:24:20+00:00'}, 'akelius-properties.us': {'why': 'HTTP 403', 'url': 'https://www.akelius-properties.us/805-st-marks-avenue/index.aspx', 'at': '2026-11-16T00:24:36+00:00'}, 'vermellaharrison.com': {'why': 'HTTP 403', 'url': 'https://tours.vermellaharrison.com', 'at': '2026-11-16T00:24:40+00:00'}, 'livecreeklineapts.com': {'why': 'HTTP 403', 'url': 'https://www.livecreeklineapts.com/', 'at': '2026-11-16T00:25:50+00:00'}}

@@ -1,4 +1,4 @@
-# Run report (2026-11-16T00:30:27+00:00)
+# Run report (2026-11-16T00:31:51+00:00)
 
 ## Steps
 
@@ -21,7 +21,7 @@
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | FAILED |
+| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | ok |
 | field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
 
 ## Stage counts
@@ -237,13 +237,12 @@ stages: 2573 costed -> -921 over the all-in cap -> -363 Jamaica safety rule -> -
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 137 checks, 1 failed
-  FAIL tolls: every unit has a mail-rate figure at or above the NY E-ZPass figure
+test_rules (data): 138 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
-field registry: {'used': 466, 'display': 309, 'provenance': 178, 'not_used': 18}
+field registry: {'used': 470, 'display': 309, 'provenance': 178, 'not_used': 18}
 shown-list assertions: all pass
 ```
 

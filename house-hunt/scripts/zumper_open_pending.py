@@ -65,7 +65,7 @@ OTHER_LEDGER = lib.DATA / "evidence_pending" / "refused_hosts.json"
 BOT_WALL = re.compile(r"captcha|px-captcha|perimeterx|just a moment\.\.\.|cf-challenge|challenge-platform|access denied|"
                       r"are you a robot|unusual traffic|incapsula|attention required|verify you are human", re.I)
 EXTRA = ["leasing_phone", "listing_updated", "listed_on", "office_hours", "building_year_built", "building_units",
-         "card_listed_rent", "page_kind", "selected_card_row", "hood_id", "hood_basis"]
+         "card_listed_rent", "page_kind", "selected_card_row", "hood_id", "hood_basis", "listings_csv_id"]
 COLS = list(hz.COLS) + EXTRA
 
 
@@ -602,10 +602,11 @@ def build(quiet=False):
         log[rec["url"]] = rec
     L = {r["listing_id"]: r for r in csv.DictReader(open(lib.DATA / "listings.csv"))
          if r["source_site"] == "zumper" and r["detail_level"] == "card"}
-    rows, summ = {}, {}
+    rows, summ, sel_id = {}, {}, {}
     for s in sel:
         url = hz.BASE + s["path"]
         ids = s["listing_ids"].split()
+        tail = {i.split(":")[-1]: i for i in ids}     # region-harvester rows carry ids like rs:<slug>:zumper-<n>
         path, meta = cached_anywhere(url)
         rec = log.get(url)
 
@@ -656,33 +657,36 @@ def build(quiet=False):
                     if p is None or p > hz.MAX_RENT:
                         why = ("opened", f"page price {p} is over $3,000 (or absent); not written to zumper_opened.csv")
                 if why:
-                    if lid in summ and summ[lid]["url"] == url:
-                        summ[lid].update(status=why[0], note=why[1])
+                    sid = tail.get(lid)
+                    if sid:
+                        summ[sid].update(status=why[0], note=why[1])
                         if why[0] == "opened":
-                            summ[lid].update(g_type="fail" if "bedrooms" in why[1] else "pass",
-                                             g_rent="fail" if "price" in why[1] else "")
+                            g = "type" if "bedrooms" in why[1] else "rent"
+                            summ[sid].update(preview_status="fail", fail_gates=g, **{"g_" + g: "fail"})
                     continue
                 fu = hz.facts_from(U, vt, ent, "")
                 for k in ("dogs", "dog_policy_text", "dog_weight_limit_lb", "elevator", "building_floors"):
                     fu[k] = f[k]
                 fu["_notes"] = f["_notes"]
                 r = unit_row(U, s["path"], seen, rawp, ent, fu, block, "building", cards, seen_day)
-                r["selected_card_row"] = "yes" if lid in ids else ("no (other card row)" if lid in card_ids else "no (unit found on the building page)")
+                if lid in tail:
+                    sel_id[lid] = tail[lid]
+                r["selected_card_row"] = "yes" if lid in tail else ("no (other card row)" if lid in card_ids else "no (unit found on the building page)")
                 r["hood_id"], r["hood_basis"] = s["hood_id"], s["hood_basis"]
                 rows[lid] = r
         else:
             lid = f"zumper-{ent.get('listing_id')}"
-            target = lid if lid in ids else ids[0]
+            target = tail.get(lid) or ids[0]
             if ent.get("listing_status") not in (1, None):
                 summ[target].update(status="gone", note=f"listing_status={ent.get('listing_status')} (inactive) on its page")
                 continue
             p = ent.get("min_price") if ent.get("min_price") is not None else ent.get("price")
             if ent.get("bedrooms") is None or ent["bedrooms"] > 1:
-                summ[target].update(status="opened", g_type="fail",
+                summ[target].update(status="opened", g_type="fail", preview_status="fail", fail_gates="type",
                                     note="page shows 2+ bedrooms (or none stated); not written to zumper_opened.csv")
                 continue
             if p is None or p > hz.MAX_RENT:
-                summ[target].update(status="opened", g_rent="fail",
+                summ[target].update(status="opened", g_rent="fail", preview_status="fail", fail_gates="rent",
                                     note=f"page price {p} is over $3,000 (or absent); not written to zumper_opened.csv")
                 continue
             bld, bvt, bblock = None, "", ""
@@ -696,12 +700,12 @@ def build(quiet=False):
                         bblock = hz.fees_block(bvt)
             f = hz.facts_from(ent, vt, bld, bvt)
             r = unit_row(ent, s["path"], seen, rawp, bld, f, hz.fees_block(vt) or bblock, "listing", cards, seen_day)
-            if lid != target:
-                r["notes"] = (r["notes"] + f"; page listing_id differs from the card row {target}").strip("; ")
-                r["listing_id"] = target
+            if lid != target.split(":")[-1]:
+                r["notes"] = (r["notes"] + f"; page listing_id {lid} differs from the card row {target}").strip("; ")
+            sel_id[lid] = target
             r["selected_card_row"] = "yes"
             r["hood_id"], r["hood_basis"] = s["hood_id"], s["hood_basis"]
-            rows[target] = r
+            rows[lid] = r
 
     # building facts settled on a detail page apply to the other opened rows at the same street address
     # (same rule as h_zumper.build: dogs only from a building page with a visible policy, elevator from any page)
@@ -740,7 +744,9 @@ def build(quiet=False):
     grid = set(drive)
     out_rows = []
     first_seen = {i: r["first_seen"] for i, r in L.items()}
-    for lid, r in rows.items():
+    for zid, r in rows.items():
+        lid = sel_id.get(zid, zid)                    # the id this row has in data/listings.csv, when it has one
+        r["listings_csv_id"] = lid if lid in L else ""
         r["card_listed_rent"] = (L.get(lid) or {}).get("listed_rent", "")
         if first_seen.get(lid):
             r["first_seen"] = min(first_seen[lid], r["first_seen"])
@@ -804,7 +810,11 @@ def report():
         print(" ", g, O[g].value_counts().to_dict())
     # lifestyle group for rows that pass or are one fact away: geocode those buildings (pipeline method)
     need = O[(O.preview_status == "pass") | ((O.preview_status == "pending") & (O.n_unknown == "1"))]
-    R = {r["listing_id"]: r for r in csv.DictReader(open(OPENED_F))}
+    R = {}
+    for r in csv.DictReader(open(OPENED_F)):
+        R[r["listing_id"]] = r
+        if r["listings_csv_id"]:
+            R[r["listings_csv_id"]] = r
     recs, seen = [], set()
     for i in need.listing_id:
         r = R.get(i)
