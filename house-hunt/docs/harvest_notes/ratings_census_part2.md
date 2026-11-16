@@ -1,6 +1,6 @@
 # Ratings census, part 2 (98 buildings) - harvest notes
 
-Run 2026-11-16, about 00:55 to 01:45 UTC. Output: `data/evidence/ratings_census_part2.csv` (985 rows, 98 buildings).
+Run 2026-11-16, about 00:55 to 01:20 UTC. Output: `data/evidence/ratings_census_part2.csv` (985 rows, 98 buildings).
 Brief: `docs/RATINGS_CENSUS_BRIEF.md`. No review text or names collected.
 
 ## The main limit: only 57 of 98 buildings got a web search

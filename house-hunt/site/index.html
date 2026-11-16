@@ -1993,7 +1993,7 @@ var HL={
   /* a quote is shown whole or not at all: the first description with a sentence short enough, else a count */
   described:function(H){var a=arr(H.described).map(function(d){return d&&(typeof d==="string"?d:(d.quote||d.text||d.excerpt))}).filter(Boolean),i,s;
     for(i=0;i<a.length;i++){s=firstSentence(scrub(a[i])).replace(/\s+/g," ");if(s.length<=HL_MAX-2&&s.length===scrub(a[i]).replace(/\s+/g," ").trim().length)return "“"+s+"”"}
-    for(i=0;i<a.length;i++){s=firstSentence(scrub(a[i])).replace(/\s+/g," ");if(s.length<=HL_MAX-2)return "“"+s+"”"}
+    for(i=0;i<a.length;i++){s=firstSentence(scrub(a[i])).replace(/\s+/g," ");if(s.length<=HL_MAX-2&&s.length>=24&&!/(?:\b[A-Z]\.|\b(?:St|Mt|Dr|Mr|Mrs|Ms|Ave|Rd|Blvd|vs|etc|No|Inc|Co)\.)$/.test(s))return "“"+s+"”"}
     return a.length?pl(a.length,"outside description"):""},
   here:function(H){var t=H.traits||{},o=[];if(t.restaurants_800m!=null)o.push(pl(r0(t.restaurants_800m),"restaurant")+" on foot");if(t.park_walk_min!=null)o.push("green space "+Math.max(1,r0(t.park_walk_min))+" min");
     if(!o.length&&t.supermarket_m_c!=null)o.push("supermarket "+distWords(t.supermarket_m_c));return o.length?o.join(", "):"not known yet"},
