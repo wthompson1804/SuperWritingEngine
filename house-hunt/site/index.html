@@ -1786,9 +1786,8 @@ YEARS.forEach(function(Y,i){
 YEARS=YEARS.map(function(Y,i){return [Y,i]}).sort(function(a,b){return (b[0].units.length-a[0].units.length)||(a[1]-b[1])}).map(function(x){return x[0]});
 var SPEC=arr(META.queens_spectrum),SPEC_BY={};SPEC.forEach(function(s){SPEC_BY[s.measure]=s});
 var SPEC_OPEN=SPEC.filter(function(s){return !/crime/i.test(String(s.measure))}); /* crime is not compared in the open */
-/* The one thing said about safety in the open: a badge on the lowest fifth, by violent-crime rate, of the neighborhoods with places. */
-var SAFEST={};(function(){var a=HOODS.filter(function(H){return H.units.length&&H.safety&&H.safety.status!=="not_published"&&H.safety.violent_per_1000!=null}).sort(function(x,y){return x.safety.violent_per_1000-y.safety.violent_per_1000});
-  a.slice(0,Math.floor(a.length/5)).forEach(function(H){SAFEST[H.id]=1})})();
+/* The one thing said about safety in the open: a badge on the neighborhoods the data marks (lowest tenth by violent-crime rate). */
+var SAFEST={};HOODS.forEach(function(H){if(H.units.length&&arr(H.about_points).some(function(p){return /among the safest/i.test(String(p&&typeof p==="object"?(p.text||p.lead||""):p))}))SAFEST[H.id]=1}); /* the data marks the lowest tenth with an icon point; the page says it once, as this badge */
 function safeBadge(H){return SAFEST[H.id]?'<span class="safest">Among the safest on the list</span>':''}
 /* Plain hashes: #unit-<letters, digits and hyphens>. The old form (#unit-<encoded id>) is still read. */
 function bare(){return Object.create(null)}
