@@ -652,11 +652,15 @@ CATCHES = {
         "Ask for the dog weight limit in pounds. The listing says there is a limit and does not give it."],
     # conditions the renter must meet or know (independent check 4, D8): the figure itself is on the disclosure
     "conditions:income": [
-        "The listing sets an income requirement. Check that you meet it, or ask whether a guarantor counts.",
-        "This apartment has an income requirement. Ask what it is and whether a guarantor counts."],
+        "The listing sets an income requirement: {income}. Check that you meet it, or ask whether a guarantor counts.",
+        "This apartment has an income requirement: {income}. Ask whether a guarantor counts."],
+    "conditions:income_plain": [
+        "The listing sets an income requirement. Check that you meet it, or ask whether a guarantor counts."],
     "conditions:credit": [
-        "The listing asks for a minimum credit score. Ask what score the application needs.",
-        "A minimum credit score applies here. Check yours against it before you apply."],
+        "The listing asks for a credit score of {credit}. Check yours against it before you apply.",
+        "A credit score of {credit} is required here. Check yours before you apply."],
+    "conditions:credit_plain": [
+        "The listing asks for a minimum credit score. Ask what score the application needs."],
     "conditions:furnished": [
         "The listing says this apartment is furnished. Ask whether the furniture is optional and whether the lease is a "
         "standard 12-month lease.",
@@ -1255,6 +1259,8 @@ CATCH_BASIS = {
     "condo": lambda u: "condo rented by its owner" in disclosed(u),
     "conditions:income": lambda u: "income requirement" in disclosed(u),
     "conditions:credit": lambda u: "credit score requirement" in disclosed(u),
+    "conditions:income_plain": lambda u: "income requirement" in disclosed(u),
+    "conditions:credit_plain": lambda u: "credit score requirement" in disclosed(u),
     "conditions:furnished": lambda u: "furnished apartment" in disclosed(u),
     "floor:unpublished": lambda u: num(u.get("floor")) is None,
     "floor:inferred": lambda u: num(u.get("floor")) is not None and u.get("floor_basis") not in ("confirmed", "stated"),
@@ -1288,6 +1294,16 @@ def catch_options(u, f):
     open item comes before everything (said with its own reason where the open item gives one); then a price that
     includes an offer; costs that could pass her limit; an offer whose effect is not stated; the lease term; an
     unpublished dog weight limit; a condo rented by its owner; the floor; else its weakest own fact."""
+    # a condition she must meet comes first, with the listing's own figure (independent check 4, D8)
+    income = str(get(u, "conditions", "income_requirement") or "").strip().rstrip(".")
+    income = re.sub(r"\b(?:a|per|each) year\b", "yearly", income)      # the page keeps "year" for a building's age
+    credit = str(get(u, "conditions", "credit_score_requirement") or "").strip().rstrip(".")
+    if "income requirement" in f["disclosures"]:
+        return [("conditions:income", {"income": income}, {"income_requirement": income}) if income else
+                ("conditions:income_plain", {}, {"disclosure": "income requirement"})]
+    if "credit score requirement" in f["disclosures"]:
+        return [("conditions:credit", {"credit": credit}, {"credit_score_requirement": credit}) if credit else
+                ("conditions:credit_plain", {}, {"disclosure": "credit score requirement"})]
     c = u.get("confirm") or {}
     if c.get("asterisk") and c.get("what"):
         what = str(c["what"])
@@ -1301,10 +1317,8 @@ def catch_options(u, f):
         return [("confirm:other", {}, used)]
     out = []
     rent = u.get("rent") or {}
-    for kind, what in (("conditions:income", "income requirement"), ("conditions:credit", "credit score requirement"),
-                       ("conditions:furnished", "furnished apartment")):
-        if what in f["disclosures"]:
-            out.append((kind, {}, {"disclosure": what}))
+    if "furnished apartment" in f["disclosures"]:
+        out.append(("conditions:furnished", {}, {"disclosure": "furnished apartment"}))
     if net_effective(u):
         out.append(("rent:net_effective", {}, {"rent_basis_kind": "net_effective"}))
     names = f["unknown"]

@@ -32,7 +32,7 @@ ILLUS_SLOT = "<!--HOUSE_HUNT_ILLUS_SLOT-->"
 # the lease and 12-month price keys (LEASE_KEYS, P12_KEYS), headlines.* (hlSub()).
 UNIT_DROP = [
     "scores",                       # the ranking's working figures; the page shows only the order
-    "confidence", "listing_age_days", "more_in_building", "zip", "floor_basis_note",
+    "confidence", "listing_age_days", "more_in_building", "zip",   # floor_basis_note is read since UI pass 8 ("read from the apartment number")
     "moments.sat.parking_type", "moments.night.parking_type",   # copies of parking.type
     "moments.sun.toll_basis", "moments.sun.toll_mail_note", "moments.sun.drive_basis",
     "dog.size_only_source", "parking.options_text", "parking.fee_note",
@@ -41,7 +41,7 @@ UNIT_DROP = [
     "cost_check.unknown_count", "cost_check.cap_margin", "confirm.reviewed",
     "ratings.most_reviews", "ratings.platforms[].seen_via",
     # internal notes (independent check 4, D24): never rendered, so never shipped in the page
-    "confirm.why_internal", "disclosures[].why_internal",
+    "confirm.why_internal", "disclosures[].why_internal", "all_in_lines[].note_internal",
 ]
 # Avoid cards and "worth a phone call" items are short cards: name, price, what to confirm, the evidence, the questions.
 # all_in_lines stays (UI pass 8): the rent line's name says which price the rent figure is (as listed, 12-month lease, after an offer).

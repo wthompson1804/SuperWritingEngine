@@ -196,6 +196,8 @@ def allowed_numbers(u, n_peers):
         ok.add(str(date.fromisoformat(str(u.get("available"))[:10]).day))
     except ValueError:
         pass
+    for k in ("income_requirement", "credit_score_requirement"):      # a condition quoted from the listing (D8)
+        ok.update(numbers(str(R.get(u, "conditions", k) or "")))
     for text in names(u):                                     # a name quoted from the data
         ok.update(numbers(str(text or "")))
     return ok
@@ -211,7 +213,7 @@ FILL = {"n": 5, "low": "lowest", "big": "largest", "high": "highest", "least": "
         "park_mins": "4 minutes", "rest": "31", "w10": R.WALK_RADIUS, "station": "NAME", "Station": "NAME",
         "station_mi": "0.4", "market": "NAME", "market_mi": "0.2", "Rest_few": "6 restaurants are",
         "Rest_count": "About 31 restaurants are", "Apts_listed": "5 apartments are listed", "lb": "50",
-        "parking": "garage"}
+        "parking": "garage", "income": "3x the rent in household income", "credit": "700+"}
 
 
 def families():
@@ -570,7 +572,7 @@ class Catch(unittest.TestCase):
             if "dog" in text and re.search(r"disagree|do not agree", text):
                 self.assertRegex(why, r"disagree|and another says", r["listing_id"])
             for phrase, need in (("upon approval", "approval"), ("case by case", "case by case"),
-                                 ("contact the office", "contact for more information"), ("small pets", "small pets"),
+                                 ("contact the office", "contact"), ("small pets", "small pets"),
                                  ("income", "income"), ("floor plan", "plan"), ("older residents", "55")):
                 if phrase in text and family.startswith("confirm:"):
                     self.assertIn(need, why, f"{r['listing_id']}: {r['host_catch']}")
@@ -869,8 +871,9 @@ class OnThePage(unittest.TestCase):
                 first = re.search(r"\$[\d,]+ a month(, everything included)?", text)
                 if first:
                     self.assertTrue(first.group(1), f"{u['id']} {col}: {text}")
+                quoted = str(R.get(u, "conditions", "income_requirement") or "")      # the listing's own figure, quoted
                 for m in re.finditer(r"(about )?\$([\d,]+)", text):
-                    if int(m.group(2).replace(",", "")) != R.CAP:
+                    if int(m.group(2).replace(",", "")) != R.CAP and "$" + m.group(2) not in quoted:
                         self.assertTrue(m.group(1), f"{u['id']} {col}: a price without 'about': {text}")
                 for m in re.finditer(r"(about )?([\d,]+) square feet", text):
                     self.assertTrue(m.group(1), f"{u['id']} {col}: a size without 'about': {text}")

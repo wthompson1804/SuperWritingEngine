@@ -272,12 +272,7 @@ watch: There are no bars within a {w10}{!bars==0}, so evenings end with dinner.
 rules: Ridgewood|overnight_parking
 voices: social_life
 
-=== hood: nj:elizabeth
-host_intro: In Elizabeth you would drive for everything: nothing to eat is within a {w10}{!rest==0}, and the supermarket is {super} miles away. Residents say the streets are congested and parking is scarce. So the building's own parking matters most.
-scene: The nearest park is about {parkwalk} minutes on foot. [[The nearest dog park is {dogpark} miles away, and it is a small park meant for small dogs{!b_dogpark==The Sgt. Vincent J. Oliva Mini Dog Park (For Small Dogs)}{!own_dog<1}.]]
-good: The apartments are a good size, about {sqft} square feet{!sqft>=700}.
-watch: Nothing is within walking distance, including a park.
-voices: parking
+# (nj:elizabeth was removed 2026-11-16: its one building, Harbor Pointe, is in Bayonne and is described there.)
 
 === hood: nj:bloomfield
 host_intro: [[In Bloomfield the daily things are close: a dog park, the supermarket and the train are all within {dogpark} miles{!super<=800}{!station<=800}{!own_dog<1}.]] Residents wish there were more nightlife. The town has an overnight permit-parking rule, so ask the leasing office for the hours.

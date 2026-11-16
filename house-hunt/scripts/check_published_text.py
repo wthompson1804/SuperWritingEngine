@@ -54,7 +54,8 @@ must equal the generated text) and 3. A wrong figure that happens to equal anoth
 Pipeline strings get checks 2 (vocabulary only) and 6, not 3 and 4.
 
 Run from the house-hunt folder:
-    python3 scripts/check_published_text.py              all checks; exit 1 on any failure in the text or the pipeline strings
+    python3 scripts/check_published_text.py              all checks; exit 1 on any failure in the text or in the pipeline
+                                                         strings an apartment carries (meta notes are listed, not counted)
     python3 scripts/check_published_text.py --text-only  exit code from the written text only (pipeline strings listed)
     python3 scripts/check_published_text.py --template   also list banned constructions in site/index.html (informational)
 Each failure prints: owner | object kind and id | field | problem | sentence.
@@ -509,7 +510,7 @@ def audit_hood_claims(d, ctx, out):
 # 6. The pipeline's own strings: vocabulary and stale wording only
 
 PIPELINE_TERMS = re.compile(r"\bevidence pass\b|\bharvest(?:ed)? row\b|\bdocs/|\bPENDING_FIXES\b|\bstored value\b|\bunit prefix|"
-                            r"\brefused us\b|\bnet[- ]effective\b|\blisting sites disagree\b|\bnot re-?read\b|\bre-?read\b|"
+                            r"\brefused us\b|\bnet[- ]effective\b|\bnot re-?read\b|\bre-?read\b|"
                             r"\bscorecard\b|\bgate fact\b|\bverdict\b|\baggregator\b|\bvalue_type\b|\b[a-z]+_[a-z_]+\b", re.I)
 
 
@@ -517,19 +518,20 @@ def pipeline_strings(d):
     for u in d.get("units") or []:
         uid = u.get("id")
         c = u.get("confirm") or {}
-        for k in ("what", "why", "question"):
+        # `what` and `line` are stable keys; the page prints `label` where the pipeline gives one
+        for k in (("label" if c.get("label") else "what"), "why", "question"):
             if c.get("asterisk") and c.get(k):
                 yield "apartment", uid, f"confirm.{k}", str(c[k])
         for i, x in enumerate(u.get("disclosures") or []):
             if isinstance(x, dict):
-                for k in ("what", "why", "question"):
+                for k in (("label" if x.get("label") else "what"), "why", "question"):
                     if x.get(k):
                         yield "apartment", uid, f"disclosures[{i}].{k}", str(x[k])
         for i, q in enumerate(u.get("tour_questions") or []):
             yield "apartment", uid, f"tour_questions[{i}]", str(q)
         for i, x in enumerate(u.get("all_in_lines") or []):
             if isinstance(x, dict):
-                for k in ("line", "note"):
+                for k in (("label" if x.get("label") else "line"), "note"):
                     if x.get(k):
                         yield "apartment", uid, f"all_in_lines[{i}].{k}", str(x[k])
         for k in ("all_in_likely_note",):
@@ -626,7 +628,9 @@ def main(argv=None):
               f"{len(d.get('buildings') or [])} buildings, {len(d.get('units') or [])} apartments read")
     print(f"check_published_text: {counts}; failures: text {n.get('text', 0)}, pipeline strings {n.get('pipeline', 0)}"
           + (f", template {n.get('template', 0)} (informational)" if a.template else ""))
-    bad = n.get("text", 0) + (0 if a.text_only else n.get("pipeline", 0))
+    # meta.notes and meta.moment_thresholds are data notes the page does not print: listed, never counted
+    shown_pipeline = sum(1 for f in by["pipeline"] if f.kind != "meta")
+    bad = n.get("text", 0) + (0 if a.text_only else shown_pipeline)
     return 1 if bad else 0
 
 

@@ -223,6 +223,14 @@ What the check found in this text, the cause, and the rule that now stops it. Ea
 | D26: "Compared to staying in Queens" on Queens neighborhoods | subhead wordings compared with a place | every wording now compares with "a typical Queens apartment" | `STALE` |
 | D15: an unlisted conceit, "not checked again" and "No building here has a dog park" passed | the conceit guard was a list of cut phrases; nothing read the published text | `AGENCY`; `STALE`; `scripts/check_published_text.py` | `scripts/test_check_published_text.py` plants each example |
 
+Two more rules of `check_shown`, added while the final data was read: with one building shown the text says "the
+building", never "each building" or "look for a building with ..." (`{eachb}`, `{everyb}`); and "the apartments are
+in new buildings" may not rest on the area's census profile (say "much of the housing around here is new").
+
+`glance_json` is computed here from the shown BUILDINGS (one vote per building). The pipeline's
+`neighborhoods[].shown_figures` are medians over the shown APARTMENTS, and its `buildings_with_own_dog_area` also
+counts a pet spa, a dog wash and a bare "yes"; this text counts only a dog park or dog run as a dog area.
+
 ### The conceit guard, and its limits
 
 `AGENCY` flags a sentence in which a thing is the grammatical subject of a verb of intention or speech. It is a
@@ -265,7 +273,11 @@ words and are not read.
   where the in-unit flag sits beside a text that says "On-site laundry", "W/D hookup" or "not in unit".
 - `garage_mixed`: where a garage's own text also names a surface lot or outdoor spaces, the building "has a garage"
   and the text does not say "you would park in the garage".
-- "up to 2 months free" stays "up to" (D20). "Before you choose a puppy" and "choose the breed with care" are gone
+- The catch leads with an income or credit-score requirement where the listing sets one, in the listing's own figure
+  ("The listing sets an income requirement: $130,000 yearly."); a furnished apartment is a catch too (D8).
+- The open item's reason is read from `confirm.code` where the page data has it.
+- A parking fee whose basis is a resident's review is not stated as the building's price.
+- "up to 2 months free" stays "up to" (D20; `rent.free_text`). "Before you choose a puppy" and "choose the breed with care" are gone
   (D25).
 
 ### What the data still cannot support

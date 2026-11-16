@@ -1186,6 +1186,8 @@ h1:focus,h2:focus{outline:none}
 .headacts{flex:0 1 auto;max-width:100%;min-width:0}
 @media (max-width:359px){.headacts{gap:6px}.headacts .fbtn{padding:6px 10px}.hoodhead .headacts .viewsw button{padding:4px 9px;font-size:14.5px;gap:5px}}
 .othn{font-family:var(--display);font-weight:800;font-size:17px;margin-top:6px}
+.fsheet #fbody>.lim:first-child{border-top:0}
+.fmine{border-bottom:0}
 </style>
 </head>
 <body>
@@ -2036,7 +2038,7 @@ function tourQs(U){var q=(U.tour_questions||[]).slice(),add=[];
    approved year text (label, subhead) or interface copy is built here from data fields. ================= */
 var SAY={
   size:function(U){var s=(bedsNoun(U)==="apartment"?"An ":"A ")+bedsNoun(U)+(U.sqft!=null?" of "+r0(U.sqft)+" sq ft":", size not published");
-    if(U.floor!=null)s+=" on floor "+r0(U.floor)+(U.floor_basis==="inferred"?" (floor worked out from the apartment number)":"");
+    if(U.floor!=null)s+=" on floor "+r0(U.floor)+(U.floor_basis==="inferred"?" ("+(pub(U.floor_basis_note)||"read from the apartment number")+")":"");
     else s+=", floor not published";return s+"."},
   park:function(w){return w.park&&w.park_walk_min!=null?w.park+" is "+aWalk(w.park_walk_min)+" away.":w.park_walk_min!=null?"A park is "+aWalk(w.park_walk_min)+" away.":"Walk to green space: "+NK+"."},
   dogpark:function(w){return w.dog_park_m==null?"Nearest dog park: "+NK+".":(w.dog_park?w.dog_park:"The nearest dog park")+" is "+distWords(w.dog_park_m)+"."},
@@ -2080,6 +2082,8 @@ function parkWordShort(U){var k=parkKind(U);return {garage:"Garage",gated:"Gated
 function dayOfUnit(U){return SLOTS.map(function(sl){return {k:sl.k,t:sl.t,s:sl.s,cap:capOf(U,sl.k),tint:tintOf(U,sl.k)}})}
 
 /* Facts behind each tile: {t: sentence, url: source link when the data carries one, l: link label}. */
+/* (repairs after check 4) who is at the door, in the listing's own kind: a doorman only where the data says doorman; otherwise a concierge desk or a front desk */
+function deskOf(a){a=a||{};var on=function(v){return v!=null&&v!==false&&v!==""&&!/^(none|no\b)/i.test(String(v))};return on(a.doorman)?"doorman":on(a.concierge)?"concierge desk":on(a.front_desk)?"front desk":""}
 function factsOf(U,k){var m=U.moments,L=okUrl(U.links&&U.links.listing),o=[],a=U.amenities||{};
   function f(t,url,l){o.push({t:t,url:url,l:l})}
   if(k==="wake"){f(SAY.park(m.wake));f(SAY.dogpark(m.wake));
@@ -2103,7 +2107,7 @@ function factsOf(U,k){var m=U.moments,L=okUrl(U.links&&U.links.listing),o=[],a=U
     f(m.after.markets_1600m==null?"Farmers' markets: "+NK+".":pl(m.after.markets_1600m,"farmers' market")+" within a mile.")}
   else if(k==="night"){var n=m.night;f(SAY.parking(U),parkKind(U)!=="unknown"?L:null,"listing");
     if(U.parking&&U.parking.type&&String(U.parking.type).length>12&&String(U.parking.type).length<180)f("The listing's own words on parking: “"+U.parking.type+"”.",L,"listing");
-    f(a.doorman?(a.doorman==="yes"?"The building lists a doorman or front desk.":"Front desk, in the listing's words: “"+a.doorman+"”."):"Doorman or front desk: "+NOT_PUB+".",a.doorman?L:null,"listing");
+    f(deskOf(a)?"The building lists a "+deskOf(a)+(/24/.test(String(a.doorman||a.concierge||a.front_desk))?", around the clock":"")+".":"Doorman, concierge or front desk: "+NOT_PUB+".",deskOf(a)?L:null,"listing");
     f(a.controlled_access?"The building lists controlled entry.":"Controlled entry: "+NOT_PUB+".",a.controlled_access?L:null,"listing");
     f(SAY.crime(n));
     f(n.violent_per_1000==null?"Violent crime rate: "+NK+".":r1(n.violent_per_1000)+" violent crimes per 1,000 residents a year here; "+(JAM.violent_per_1000!=null?JAM.violent_per_1000+" around Mom and Dad's.":""));
@@ -2346,7 +2350,7 @@ function hoodWhere(H){
 
 function avoidCard(U){var ev=U.evidence||{},L=okUrl(U.links&&U.links.listing);
   return '<article class="unit avoid"><div class="row"><div><span class="badge">Avoid</span><h4 style="margin-top:6px">'+esc(uName(U))+'</h4>'+(uSub(U)?'<small>'+esc(uSub(U))+'</small>':'')+'<p style="margin-top:4px">'+esc(SAY.size(U))+'</p></div>'+sign(U,true)+'</div>'+confLines(U)+rentLines(U)+
-    '<div class="panel pause"><h4>Why to avoid it</h4><ul>'+lis(splitNotes(ev.avoid_reasons||"Reason not recorded"))+'</ul>'+(ev.items||[]).map(quote).join("")+'</div>'+
+    '<div class="panel pause"><h4>Why to avoid it</h4><ul>'+lis(arr(ev.avoid_points).map(pub).filter(Boolean).length?arr(ev.avoid_points).map(pub).filter(Boolean):splitNotes(ev.avoid_reasons||"Reason not recorded"))+'</ul>'+(ev.items||[]).map(quote).join("")+'</div>'+
     (L?'<a class="link" href="'+esc(L)+'" target="_blank" rel="noopener noreferrer">See the listing anyway ↗</a>':'')+'</article>'}
 function callItem(U,where){var L=okUrl(U.links&&U.links.listing),c=conf(U),q=tourQs(U);
   return '<div class="callitem"><b>'+esc(uName(U))+'</b><span class="facts">'+esc([where,uSub(U),bedsWord(U)+(U.sqft!=null?", "+r0(U.sqft)+" sq ft":"")].filter(Boolean).join(" · "))+'</span><span class="cprice"><b style="font-size:16px">'+L_RENT+' '+money(rentOf(U))+star(U)+'</b>'+(rentTerm(U)?' '+esc(rentTerm(U)):'')+' · '+(U.all_in==null?S_TOTAL+' not known':'about '+pm(U.all_in)+' '+WITH_UF)+', '+esc(seenShort(U.price_seen_at))+'</span>'+
@@ -2481,7 +2485,7 @@ function tileFigs(Y){var f=yearNums(Y),n=f.n,total=Y.units.length,few=n<FEW,one=
   return ppTyp(f,!one,{norange:few,cls:"tile"})+'<div class="figs xt"><div>'+(f.drive!=null?'<b>'+r0(f.drive)+' min</b><span>'+(oneH?'':'typical ')+'to Mom and Dad</span>'+(few?'':rng(f.dr,r0," min")):'<b>Ask</b><span>drive not known</span>')+'</div><div class="cnt"><b>'+n+'</b><span>'+(n===total?(total===1?"apartment":"apartments"):"of "+total+" match")+'</span></div></div>'}
 var BASIS_WORD={stated:"stated on the listing",confirmed:"confirmed",inferred:"not stated on any page; worked out from the building's height",amenities_page:"from the building's amenities page",community_page:"from the building's own page",official_record:"from an official record","computed from stated terms":"worked out from the stated offer",estimate:"an estimate, not a quote",unknown:"not published, so not in the total"};
 /* a cost line's name in plain words: the pipeline's "net-effective" is "with the offer" */
-function lineName(l){return humanize(l.line).replace(/net[- ]effective/gi,"with the offer").replace(/\ball[- ]in\b/gi,"everything included")}
+function lineName(l){return humanize(pub(l.label)||l.line).replace(/net[- ]effective/gi,"with the offer").replace(/\ball[- ]in\b/gi,"everything included")}
 function receipt(U){var lines=U.all_in_lines||[],anySoft=false,basis=[],cp=couldPass(U);
   var h='<div class="receipt">';
   lines.forEach(function(l){var unk=l.basis==="unknown"||l.amount==null,est=!unk&&l.basis==="estimate",nm=lineName(l).replace(/\s*\(est\.?\)/i,"");if(unk||est)anySoft=true;
@@ -2503,7 +2507,7 @@ function rentTerms(U){var R=U.rent||{},lm=leaseMonths(U),p12=price12(U),lt=lease
   if(offerText(U))h+='<dt>The offer, in the building\'s words</dt><dd><blockquote>'+esc(offerText(U))+'</blockquote></dd>';
   h+='<dt>Rent shown on this page</dt><dd>'+money(R.basis!=null?R.basis:R.listed)+' a month ('+(rentKind(U)==="12"?"the 12-month lease price":R.basis_kind==="net_effective"?"the average after the free months":"as listed")+')</dd>';
   h+='<dt>Rent in a month you pay</dt><dd>'+(R.gross!=null?money(R.gross)+' a month before any free months':NK)+'</dd>';
-  h+='<dt>Free months and lease length</dt><dd>'+(R.free_months!=null?esc(String(R.free_months))+' free':"Free months "+NK.toLowerCase())+', '+(lm!=null?'on a '+r1(lm)+'-month lease'+(rentKind(U)==="12"?' for the listing\'s price':''):'lease length '+NK.toLowerCase())+'</dd>';
+  h+='<dt>Free months and lease length</dt><dd>'+(R.free_text?esc(String(R.free_text))+' free':R.free_months!=null?esc((R.offer_up_to?"up to ":"")+String(R.free_months))+' free':"Free months "+NOT_PUB)+', '+(lm!=null?'on a '+r1(lm)+'-month lease'+(rentKind(U)==="12"?' for the listing\'s price':''):'lease length '+NK.toLowerCase())+'</dd>';
   if(rentKind(U)==="12"&&R.listed!=null)h+='<dt>The listing\'s own price</dt><dd>'+money(R.listed)+' a month'+(lm!=null&&Math.round(lm)!==12?' on a '+r1(lm)+'-month lease':'')+'</dd>';
   if(p12!=null||(lm!=null&&Math.round(lm)!==12))h+='<dt>Price on a 12-month lease</dt><dd>'+(p12!=null?money(p12)+' a month':NOT_PUB.charAt(0).toUpperCase()+NOT_PUB.slice(1))+'</dd>';
   if(lt)h+='<dt>The lease term, in the building\'s words</dt><dd><blockquote>'+esc(lt)+'</blockquote></dd>';
@@ -2512,13 +2516,13 @@ function rentTerms(U){var R=U.rent||{},lm=leaseMonths(U),p12=price12(U),lt=lease
 function loveList(U){var o=[],a=U.amenities||{},L=okUrl(U.links&&U.links.listing);
   SPEC_OPEN.forEach(function(s){var p=U.vs_queens&&U.vs_queens[s.measure],d=U.vs_queens_diff&&U.vs_queens_diff[s.measure];if(p!=null&&p>=4&&s.measure!=="parking")o.push({t:mLabel(s.measure)+": "+POINT_WORD[Math.round(p)].toLowerCase()+" than staying in Queens ("+fmtDiff(s.measure,d)+")"})});
   if(a.in_unit_laundry==="yes")o.push({t:"Washer and dryer in the apartment",url:L,l:"listing"});
-  if(a.doorman&&!/^none|no doorman/i.test(a.doorman))o.push({t:a.doorman==="yes"?"A doorman or front desk":"Front desk: "+a.doorman,url:L,l:"listing"});
+  if(deskOf(a))o.push({t:"A "+deskOf(a),url:L,l:"listing"});
   if(a.pool)o.push({t:"A pool",url:L,l:"listing"});
   if(a.dog_amenities&&a.dog_amenities!=="yes")o.push({t:"For the dog, in the building: "+a.dog_amenities.replace(/;\s*/g,", "),url:L,l:"listing"});
   if(a.outdoor_space)o.push({t:"Outdoor space listed",url:L,l:"listing"});
   return o}
 function pauseList(U){var o=[];
-  splitNotes(U.evidence&&U.evidence.pause_notes).forEach(function(x){o.push({t:x})});
+  var pp0=arr(U.evidence&&U.evidence.pause_points).map(pub).filter(Boolean);(pp0.length?pp0:splitNotes(U.evidence&&U.evidence.pause_notes)).forEach(function(x){o.push({t:x})});
   SPEC_OPEN.forEach(function(s){var p=U.vs_queens&&U.vs_queens[s.measure],d=U.vs_queens_diff&&U.vs_queens_diff[s.measure];if(p!=null&&p<=2)o.push({t:mLabel(s.measure)+": "+POINT_WORD[Math.round(p)].toLowerCase()+" than staying in Queens ("+(s.measure==="parking"?parkWord(U).toLowerCase():fmtDiff(s.measure,d))+")"})});
   if((U.all_in_unknown||[]).length)o.push({t:"Not in the price yet: "+list(U.all_in_unknown)});
   if(U.rent&&U.rent.needs_call)o.push({t:"The rent offer needs a call before the price can be trusted"});
@@ -2533,8 +2537,8 @@ function buildingFacts(U){var a=U.amenities||{},o=[],L=okUrl(U.links&&U.links.li
   o.push({t:"Dogs: "+(openFact(U,OPEN_DOG)?"the policy is not confirmed, ask":(U.dog&&U.dog.allowed||NOT_PUB)+(U.dog&&U.dog.basis?" ("+(BASIS_WORD[U.dog.basis]||U.dog.basis)+")":""))+"; "+(U.dog&&U.dog.weight_limit_lb!=null?"weight limit "+(U.dog.weight_limit_lb==="no limit"?"none":U.dog.weight_limit_lb+" lb"):smallDog(U)?SMALL_DOG.charAt(0).toLowerCase()+SMALL_DOG.slice(1):"weight limit "+NOT_PUB)+"; pet rent "+(U.dog&&U.dog.pet_rent!=null?(Number(U.dog.pet_rent)===0?"none":money(U.dog.pet_rent)+" a month"):NOT_PUB)+".",url:L,l:"listing"});
   o.push({t:"Laundry: "+(a.in_unit_laundry==="yes"?"in the apartment":a.in_unit_laundry==="on_site_only"?"in the building, not in the apartment":NK.toLowerCase())+"."});
   o.push({t:"Gym: "+(a.gym?"listed":NK.toLowerCase())+". Package room: "+(a.package_room?"listed":NK.toLowerCase())+". Lounge or co-working: "+(a.lounge_or_coworking?"listed":NK.toLowerCase())+"."});
-  o.push({t:"Built: "+(a.year_built!=null?Math.round(a.year_built):NK.toLowerCase())+". Floors in the building: "+(a.building_floors!=null?Math.round(a.building_floors):NK.toLowerCase())+"."});
-  o.push({t:"Managed by: "+(a.manager||NK.toLowerCase())+".",url:B&&B!==L?B:null,l:"building page"});
+  o.push({t:"Built: "+(a.year_built!=null?Math.round(a.year_built):NK.toLowerCase())+". Floors in the building: "+(a.building_floors!=null?(a.building_floors_at_least===true?"at least ":"")+Math.round(a.building_floors):NOT_PUB)+"."});
+  o.push({t:"Managed by: "+(a.manager_name||NOT_PUB)+".",url:B&&B!==L?B:null,l:"building page"});
   var pe=U.evidence&&U.evidence.public_evidence;
   if(pe!==undefined)o.push({t:"Public records and reviews read for this building: "+(pe==null?"not checked yet":EVIDENCE_WORD[pe]||pe)+"."});
   o.push({t:"Found on "+(U.source_site||NK.toLowerCase())+". Price seen "+seenLong(U.price_seen_at)+".",url:L,l:"listing"});
@@ -2587,7 +2591,7 @@ var HL={
     return "allowed, "+(w==="no limit"?"no weight limit":w!=null&&isFinite(+w)?"up to "+r0(+w)+" lb":smallDog(U)?"small dogs, no weight given":"weight limit not stated")},
   building:function(U){var a=U.amenities||{},o=[];
     if(openFact(U,OPEN_ELEV))o.push("elevator not confirmed");else if(U.elevator&&U.elevator.value==="yes")o.push("elevator");if(a.in_unit_laundry==="yes")o.push("washer-dryer in the apartment");if(a.gym)o.push("gym");if(a.pool)o.push("pool");
-    if(a.doorman&&!/^none|no doorman/i.test(a.doorman))o.push("front desk");if(a.outdoor_space)o.push("outdoor space");
+    if(deskOf(a))o.push(deskOf(a));if(a.outdoor_space)o.push("outdoor space");
     return o.length?o.slice(0,3).join(", "):"details not published"},
   /* the count behind the asterisk: open gate facts plus a rent offer that needs a word with the office; then the things to ask */
   confirm:function(U){var c=confs(U).length+(rentStar(U)?1:0),d=discsShown(U).length;return [c?pl(c,"thing")+" to confirm":"",d?d+" to ask":""].filter(Boolean).join(" · ")||"nothing"},
@@ -2782,12 +2786,16 @@ function distShort(m){if(m==null)return null;if(m<=1600)return Math.max(1,Math.r
 /* "At a glance" reads neighborhoods[].at_a_glance when the data has it (figures measured from the buildings shown: label, value, unit, scope); otherwise the neighborhood's traits. */
 function glanceIcon(l){l=String(l||"").toLowerCase();return /restaurant|\bbars?\b|food|eat/.test(l)?"fork":/dog/.test(l)?"dog":/parking|\bcar\b/.test(l)?"parking":/park|green|woods/.test(l)?"park":/supermarket|grocer/.test(l)?"bag":/train|bus|transit|station/.test(l)?"train":/coffee|caf/.test(l)?"coffee":/water|beach/.test(l)?"water":"dot"}
 function glance(H){var t=H.traits||{},o=[],ps=parkShort(H),g=arr(H.at_a_glance).filter(function(x){return x&&typeof x==="object"&&x.value!=null&&String(x.value)!==""&&pub(x.label)!==""});
-  if(g.length){g.forEach(function(x){o.push([x.icon||glanceIcon(x.label),String(x.value)+(x.unit?" "+x.unit:""),[x.label,x.scope].filter(Boolean).join(", ")])});t={};H={transit_min:null,local:H.local}}
-  if(t.restaurants_800m!=null)o.push(["fork",pl(r0(t.restaurants_800m),"restaurant")+(r0(t.bars_800m)>0?", "+pl(r0(t.bars_800m),"bar"):""),"within a 10-minute walk"]);
-  if(t.park_walk_min!=null)o.push(["park",Math.max(1,r0(t.park_walk_min))+" min walk","to a park"]);
-  if(t.dog_park_m!=null)o.push(["dog",distShort(t.dog_park_m),"to the dog park"]);
-  if(t.supermarket_m_c!=null)o.push(["bag",distShort(t.supermarket_m_c),"to a supermarket"]);
-  if(H.transit_min!=null)o.push(["train",r0(H.transit_min)+" min","to Mom and Dad by train and bus"]);
+  /* until at_a_glance arrives: figures measured from the buildings shown (shown_figures) before the neighborhood's own (traits); a dog area in every shown building is said in place of the distance to a public dog park */
+  var sf=obj(H.shown_figures),v=function(k,k2){return sf[k]!=null?sf[k]:t[k2||k]},own=sf.buildings_with_own_dog_area,nb=sf.buildings,tm=H.transit_min;
+  if(g.length){g.forEach(function(x){o.push([x.icon||glanceIcon(x.label),String(x.value)+(x.unit?" "+x.unit:""),[x.label,x.scope].filter(Boolean).join(", ")])})}
+  else{
+    if(v("restaurants_800m")!=null)o.push(["fork",pl(r0(v("restaurants_800m")),"restaurant")+(r0(v("bars_800m"))>0?", "+pl(r0(v("bars_800m")),"bar"):""),"within a 10-minute walk"]);
+    if(v("park_walk_min")!=null)o.push(["park",Math.max(1,r0(v("park_walk_min")))+" min walk","to a park"]);
+    if(own>0&&nb>0&&own>=nb)o.push(["dog","Dog area",nb>1?"in every building here":"in the building"]);
+    else if(v("dog_park_m")!=null)o.push(["dog",distShort(v("dog_park_m")),"to the dog park"+(own>0&&nb>0?"; "+own+" of "+nb+" buildings have their own dog area":"")]);
+    if(v("supermarket_m","supermarket_m_c")!=null)o.push(["bag",distShort(v("supermarket_m","supermarket_m_c")),"to a supermarket"]);
+    if(tm!=null)o.push(["train",r0(tm)+" min","to Mom and Dad by train and bus"])}
   o.push(["parking",ps||"Ask the building","street parking","r-rules"]);
   if(o.length<2)return "";
   return '<section class="sec" id="sec-glance"><h2 class="h2s">At a glance</h2><ul class="glance">'+o.map(function(x){var inner='<span class="pi">'+ptIcon(x[0])+'</span><span><b>'+esc(x[1])+'</b> <small>'+esc(x[2])+'</small></span>';
@@ -2908,7 +2916,7 @@ function vHood(H){
   if(sf.length&&s.geography)sf.push("These numbers describe the police area, not the block: "+s.geography+".");
   var hw=[];
   hw.push("<p>"+esc(capFirst(["parks, dog parks, food, shops and water from "+SOURCES.map,SOURCES.walk,"who lives here from the "+SOURCES.census,"local rules from the town pages linked beside each one","drive time, with clear roads, from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"train and bus time from "+SOURCES.transit].join("; ")))+".</p>");
-  hw.push(s.status==="not_published"?'<div id="hood-crime"><p><b>Crime, for the record:</b> Crime figures are not published for this town.</p></div>':'<div id="hood-crime"><p><b>Crime, for the record</b> (every neighborhood shown passed the safety rule):</p>'+(sf.length?'<ul>'+lis(sf)+'</ul>':'<p>Rates not published.</p>')+'<p>'+esc(capFirst(crimeSrc(s.police,s.year)))+'.</p></div>');
+  hw.push(s.status==="not_published"?'<div id="hood-crime"><p><b>Crime, for the record:</b> '+esc(pub(s.status_note)||"Crime figures are not published for this town.")+'</p></div>':'<div id="hood-crime"><p><b>Crime, for the record</b> (every neighborhood shown passed the safety rule):</p>'+(sf.length?'<ul>'+lis(sf)+'</ul>':'<p>Rates not published.</p>')+'<p>'+esc(capFirst(crimeSrc(s.police,s.year)))+'.</p></div>');
   var flagN=0;RULE_FLAG.forEach(function(F){if(pRules.some(function(r){return r.rule===F.rule&&F.re.test(r.summary||"")}))flagN++});
   var rev=hoodReviews(H);
   h+='<section class="sec rows" id="sec-rows"><h2 class="h2s">More about '+esc(hoodTitle(H))+'</h2>'+rowsTop();
@@ -3033,7 +3041,7 @@ function vList(){var ptk=S.saved.join("\u0001");if(ptk!==PRETICK){PRETICK=ptk;if
 function pairText(A,B,a,b){
   var s=[],d=A.all_in!=null&&B.all_in!=null?B.all_in-A.all_in:null,gain=[],lose=[],ra=rentOf(A),rb=rentOf(B),dr=ra!=null&&rb!=null?rb-ra:null;
   s.push(dr==null?"The "+S_RENT+" of one of them is not known yet.":Math.abs(dr)<25?"Same "+S_RENT+", within $25 a month.":b+" asks "+money(Math.abs(Math.round(dr)))+(dr>0?" more":" less")+" "+S_RENT+" a month than "+a+".");
-  s.push(d==null?"The "+S_TOTAL+" of one of them is not known yet.":Math.abs(d)<25?capFirst(WITH_UF)+", the "+S_TOTAL+" is the same within $25 a month.":capFirst(WITH_UF)+", it comes to "+money(Math.abs(Math.round(d)))+(d>0?" more":" less")+" a month in "+S_TOTAL+".");
+  s.push(d==null?"The "+S_TOTAL+" of one of them is not known yet.":Math.abs(d)<25?capFirst(WITH_UF)+", the "+S_TOTAL+" is the same within $25 a month.":capFirst(WITH_UF)+", "+b+" comes to "+money(Math.abs(Math.round(d)))+(d>0?" more":" less")+" a month in "+S_TOTAL+".");
   if(A.sqft!=null&&B.sqft!=null){var q=Math.round(B.sqft-A.sqft);if(q>=50)gain.push(q+" more square feet");else if(q<=-50)lose.push((-q)+" square feet")}
   var pa=A.parking&&A.parking.rank,pb=B.parking&&B.parking.rank;
   if(pa!=null&&pb!=null){if(pb>pa)gain.push(PARK_PHRASE[parkKind(B)]+" where "+a+" has "+PARK_PHRASE[parkKind(A)]);else if(pb<pa)lose.push(PARK_PHRASE[parkKind(A)]+" for "+PARK_PHRASE[parkKind(B)])}

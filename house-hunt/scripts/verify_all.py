@@ -330,6 +330,9 @@ def main(argv=None) -> int:
     step("check_registry.py", [py, "-c", REGISTRY_WRAPPER])
     step("check_scene_text.py", [py, "scripts/check_scene_text.py"])
     step("page_data_extras.py --dry-run --strict", [py, "scripts/page_data_extras.py", "--dry-run", "--strict"])
+    # the text as published in site/data.json: equals its source, plain-language rules, numbers, claims, contradictions.
+    # --text-only until the pipeline's own strings pass too (a British spelling in a rule summary, 2026-11-16).
+    step("check_published_text.py --text-only", [py, "scripts/check_published_text.py", "--text-only"])
     artefact_checks(rep)
     if a.with_browser and not a.quick:
         walkthrough(rep)

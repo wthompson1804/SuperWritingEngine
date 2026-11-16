@@ -106,6 +106,7 @@ import parsers  # noqa: E402  (plain regex rules, no network; shared with build_
 ROOT = Path(__file__).resolve().parent.parent
 RETRY_WAIT = 0.5          # seconds before the second and last attempt at an input that is absent or half-written
 YES = {"yes", "true", "1"}
+PRINTED_MISSING = {"nan", "NaN", "NAN", "None", "null", "NULL", "NaT", "<NA>"}
 NAN_LIKE = {"nan", "none", "null", "nat", "<na>", "n/a", "#n/a"}
 
 
@@ -200,7 +201,9 @@ def json_safe(o):
             n += 1
             return None
         if isinstance(v, str):
-            if v.strip().lower() in NAN_LIKE - {"n/a", "#n/a"}:
+            # a printed missing value: "nan", "NaN", "None", "null", "NaT", "<NA>". The lower-case word "none" is a
+            # real value in some fields (at_a_glance own_dog_area: all / some / none) and is kept.
+            if v.strip() in PRINTED_MISSING:
                 n += 1
                 return None
             return v
@@ -418,7 +421,7 @@ def apply_text_fields(obj, r):
         host["walkthrough"] = paras
     if host:
         obj["host"] = host
-    for col, key in (("about_points_json", "about_points"), ("day_moments_json", "day_moments")):
+    for col, key in (("about_points_json", "about_points"), ("day_moments_json", "day_moments"), ("glance_json", "at_a_glance")):
         v = json_cell(r[col], list)
         if v:
             obj[key] = v
@@ -1176,7 +1179,7 @@ def _nan_like(o, path=""):
     elif isinstance(o, list):
         for v in o:
             found += _nan_like(v, path + "[]")
-    elif (isinstance(o, float) and not math.isfinite(o)) or (isinstance(o, str) and o.strip().lower() in ("nan", "none", "null", "nat", "<na>")):
+    elif (isinstance(o, float) and not math.isfinite(o)) or (isinstance(o, str) and o.strip() in PRINTED_MISSING):
         found.append(path.lstrip("."))
     return found
 
@@ -1192,7 +1195,7 @@ BLOCKS = [experience_text, neighborhood_text, round2_quotes, round2_survey, roun
 # place, such as subhead, lat, lon, hood_ids and local, keep the builder's position).
 OWNED = {
     "years": ("prose", "host", "about_points", "day_moments", "tagline", "subhead_original", "headlines", "display_label"),
-    "neighborhoods": ("prose", "host", "about_points", "tagline", "subhead_original", "headlines", "described",
+    "neighborhoods": ("prose", "host", "about_points", "at_a_glance", "tagline", "subhead_original", "headlines", "described",
                       "experience_score", "experience_score_basis", "rank_in_experience", "single_building"),
     "units": ("contact", "about_building", "about_points", "host", "headlines", "ratings", "photos"),
     "buildings": ("contact", "about_building", "about_points", "ratings", "photos"),
