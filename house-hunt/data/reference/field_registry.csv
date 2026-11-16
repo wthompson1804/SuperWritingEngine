@@ -47,6 +47,8 @@ master_units,unit_floor,used,build_master.py;rank.py,
 master_units,unit_floor_basis,used,build_master.py;rank.py,
 master_units,unit_floor_source,provenance,build_master.py,travels with unit_floor
 master_units,unit_floor_label_kind,used,build_master.py;rank.py,
+master_units,unit_floor_reading,used,build_master.py;rank.py,
+master_units,unit_floor_reading_basis,used,build_master.py;rank.py,
 master_units,address,used,gates.py;build_master.py;rank.py;build_neighborhoods.py;rent_terms.py;enrich_units.py,
 master_units,city,used,gates.py;build_master.py;build_neighborhoods.py;rating_standard.py;enrich_units.py,
 master_units,city_listed,used,build_master.py;build_neighborhoods.py,
@@ -266,9 +268,15 @@ master_units,optional_fees_text_source,provenance,,travels with optional_fees_te
 master_units,eligibility_open,used,build_master.py;rank.py,
 master_units,eligibility_open_basis,provenance,,travels with eligibility_open
 master_units,eligibility_open_source,provenance,,travels with eligibility_open
+master_units,furnished,used,build_master.py;rank.py,
+master_units,furnished_basis,provenance,,travels with furnished
+master_units,furnished_source,provenance,,travels with furnished
 master_units,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
 master_units,rent_regulation_basis,provenance,,travels with rent_regulation
 master_units,rent_regulation_source,provenance,,travels with rent_regulation
+master_units,credit_requirement,used,build_master.py;rank.py,
+master_units,credit_requirement_basis,provenance,,travels with credit_requirement
+master_units,credit_requirement_source,provenance,,travels with credit_requirement
 master_units,addr_keys,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_units,address_override_source,provenance,build_master.py,travels with address_override
 master_units,city_override_source,provenance,,travels with city_override
@@ -727,9 +735,15 @@ master_buildings,optional_fees_text_source,provenance,,travels with optional_fee
 master_buildings,eligibility_open,used,build_master.py;rank.py,
 master_buildings,eligibility_open_basis,provenance,,travels with eligibility_open
 master_buildings,eligibility_open_source,provenance,,travels with eligibility_open
+master_buildings,furnished,used,build_master.py;rank.py,
+master_buildings,furnished_basis,provenance,,travels with furnished
+master_buildings,furnished_source,provenance,,travels with furnished
 master_buildings,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
 master_buildings,rent_regulation_basis,provenance,,travels with rent_regulation
 master_buildings,rent_regulation_source,provenance,,travels with rent_regulation
+master_buildings,credit_requirement,used,build_master.py;rank.py,
+master_buildings,credit_requirement_basis,provenance,,travels with credit_requirement
+master_buildings,credit_requirement_source,provenance,,travels with credit_requirement
 master_buildings,addr_keys,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_buildings,address_override_source,provenance,build_master.py,travels with address_override
 master_buildings,city_override_source,provenance,,travels with city_override

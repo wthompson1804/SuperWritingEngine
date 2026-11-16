@@ -520,6 +520,16 @@ def garden_style(unit_labels, heights) -> bool:
     return parsers.multi_building_labels(unit_labels) and not any(h >= 4 for h in hs)
 
 
+def load_numbering_conventions(path=None) -> dict:
+    """building_id -> convention ('floor_first' / 'building_floor_unit') from the reviewed table
+    data/reference/unit_numbering_conventions.csv (each row says how the convention was established)."""
+    f = Path(path) if path else DATA / "reference" / "unit_numbering_conventions.csv"
+    if not f.exists():
+        return {}
+    T = pd.read_csv(f, dtype=str, keep_default_na=False)
+    return {r.building_id: r.convention for r in T.itertuples() if r.convention in parsers.NUMBERING_CONVENTIONS}
+
+
 def load_overrides(path=None):
     """data/reference/address_overrides.csv: reviewed corrections to a building's name, address or city, or to one
     unit's address (scope building -> key is an addr_key; scope unit -> key is a listing_id). Each row says where the
@@ -922,6 +932,17 @@ def main():
                 continue
             if fl_.startswith(("dog_weight", "pet_limit", "pet_restrictions", "dog_restrictions", "pet_policy", "dog_policy")) and parsers.dog_weight_unstated(f"{r.value} | {getattr(r, 'quote', '')}"):
                 M.add(b, "dog_weight_unstated", "yes: " + str(r.value)[:160], "confirmed", r.source_url)
+            # independent check 4, D8: conditions a renter must know, read from every fact sentence (parsers.renter_conditions)
+            cond = parsers.renter_conditions(f"{r.value} | {getattr(r, 'quote', '')}", r.fact)
+            src_txt = (str(getattr(r, "quote", "")) or str(r.value)).strip()[:200]
+            if cond.get("furnished"):
+                M.add(b, "furnished", "yes: " + src_txt, "confirmed", r.source_url)
+            if cond.get("credit"):
+                M.add(b, "credit_requirement", cond["credit"], "confirmed", r.source_url)
+            if cond.get("not_normal_lease"):
+                M.add(b, "not_normal_lease", cond["not_normal_lease"] + ": " + src_txt, "confirmed", r.source_url)
+            if r.fact.lower().startswith("furnished"):
+                continue
             if not apply_fact(M, b, r.fact, r.value, getattr(r, "quote", ""), r.source_url):
                 k = re.sub(r"[:(].*", "", r.fact.lower()).strip()
                 unmapped[k] = unmapped.get(k, 0) + 1
@@ -1280,6 +1301,14 @@ def main():
         else:
             fl.append(""); flb.append("unknown"); fls.append(""); flk.append(kind)
     MU["unit_floor"], MU["unit_floor_basis"], MU["unit_floor_source"], MU["unit_floor_label_kind"] = fl, flb, fls, flk
+    # independent check 4, D22: the floor a label reads as under its complex's REVIEWED numbering convention
+    # (data/reference/unit_numbering_conventions.csv), or as a tower label ('01-16C' = floor 16). A reading, never a
+    # stated floor: rank.py removes a unit that reads as floor 1 and uses it for nothing else.
+    CONV = load_numbering_conventions()
+    rd = [parsers.floor_by_convention(un, CONV[b]) if b in CONV else parsers.tower_label_floor(un) for b, un in zip(MU.building_id, MU.unit)]
+    MU["unit_floor_reading"] = ["" if x is None else x for x in rd]
+    MU["unit_floor_reading_basis"] = [("numbering convention of this complex: " + CONV[b]) if (x is not None and b in CONV) else ("tower label: building, then floor, then line" if x is not None else "")
+                                      for x, b in zip(rd, MU.building_id)]
     unmatched = [fr[:6] for j, fr in enumerate(floor_rows) if j not in used and fr[3] in ("confirmed", "unparsed")]
     pd.DataFrame(unmatched, columns=["building_id", "unit_label", "floor", "basis", "source_url", "value"]).to_csv(DATA / "reference" / "floor_confirm_unmatched.csv", index=False)
     MU = MU.drop(columns=["ukey_"])

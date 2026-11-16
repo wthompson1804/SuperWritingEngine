@@ -1614,3 +1614,98 @@ def sequential_number_reads_ground(unit, units_total, floors) -> bool:
     if not re.fullmatch(r"\d{1,2}", u) or not (tot == tot and fl == fl) or fl < 2 or tot < fl:
         return False
     return 1 <= n <= int(tot // fl)
+
+
+# ---- independent check 4, D22: one numbering convention per complex, established once and applied to every label
+NUMBERING_CONVENTIONS = ("floor_first", "building_floor_unit")
+
+
+def floor_by_convention(unit, convention):
+    """The floor a bare numeric label reads as under its complex's reviewed numbering convention
+    (data/reference/unit_numbering_conventions.csv), or None when the label has another shape:
+      'floor_first'          '4186' -> 4   (floor, then a three-digit number: The Grove Somerset, Steel Works, Piper)
+      'building_floor_unit'  '3104' -> 1, '11102' -> 1   (building, floor, two-digit number: Kensington Place, J Centra)
+    A reading is still a reading, never a stated floor: it removes a unit that reads as floor 1 and is otherwise only a
+    tour question. Labels with a separator ('09-326', 'B9-309') name their floor after the separator and need no table."""
+    u = clean_unit(unit).strip()
+    if convention == "floor_first" and re.fullmatch(r"[1-9]\d{3}", u):
+        return int(u[0])
+    if convention == "building_floor_unit" and re.fullmatch(r"[1-9]\d{3,4}", u):
+        return int(u[-3])
+    return None
+
+
+def tower_label_floor(unit):
+    """'01-16C' -> 16: tower 01, floor 16, line C (Prospect Place, beside '02-229' = tower 02, floor 2). None for any
+    other shape. Independent check 4, D22: this label was removed as a first-floor unit; it reads as floor 16."""
+    m = re.fullmatch(r"\d{1,2}[\s-]+(\d{1,2})([a-z])", clean_unit(unit).strip())
+    return int(m.group(1)) if m else None
+
+
+# ---- independent check 4, D8: conditions a renter must know that sit in the evidence text
+_FURNISHED = re.compile(r"tags the building furnished|(?:^|[;.:]\s*)furnished(?=\s*(?:[;.]|$))|\b(?:fully|comes|is|are|rented) furnished\b|\bfurnished (?:apartment|unit|studio|rental)\b(?! from)", re.I)
+_NOT_FURNISHED = re.compile(r"\bunfurnished|not furnished|furnished (?:roof|lounge|lobby|terrace|deck|model|corporate|guest suite|clubroom|courtyard)", re.I)
+# a credit SCORE, never a money credit ('$500 credit', '$1,500 move-in credit'): the number-first form needs the '+' or the word 'score'
+_CREDIT = re.compile(r"(?:minimum credit score|credit score(?: of| over| above)?|credit (?:over|above|of))[^\d$]{0,6}([5-8]\d0)\b\+?|(?<![$\d,.])([5-8]\d0)(?:\+\s*credit(?: score)?|\s*credit score)", re.I)
+_NOT_NORMAL_LEASE = re.compile(r"short[- ]term (?:rental|lease|stay)s? only|\bcorporate (?:housing|rental|lease)s? only|\bstudent housing\b|\bstudents only\b|\bfor students\b|"
+                               r"\bsublet\b|\bsublease\b|\blease takeover\b|\bextended[- ]stay\b|month[- ]to[- ]month (?:only|lease only)|\bshort[- ]term only\b", re.I)
+
+
+def renter_conditions(text, fact="") -> dict:
+    """Conditions stated in one evidence sentence, as {kind: value}:
+      'furnished'         True   the apartment or building is let furnished (a 'Furnished' tag, '; furnished;' in a
+                                 checker's note); a furnished roof deck or another site's 'furnished corporate unit' is not
+      'credit'            '700+' a credit score REQUIREMENT ('700+ credit', 'minimum credit score 700'); a deposit that
+                                 depends on the score ('$1,000 security for credit over 700') is not a requirement
+      'not_normal_lease'  words  short-term only, corporate or student housing, a sublet or lease takeover: not a normal lease
+    Income is a structured fact of its own (income_requirement) and is not parsed here."""
+    t = str(text or "")
+    out = {}
+    f = str(fact or "").strip().lower()
+    if (f.startswith("furnished") and re.match(r"\s*(?:yes|true|furnished)", t, re.I)) or (_FURNISHED.search(t) and not _NOT_FURNISHED.search(t)):
+        out["furnished"] = True
+    for m in _CREDIT.finditer(t):
+        before = t[max(0, m.start() - 60):m.start()].lower()
+        if "deposit" in before or "security" in before:
+            continue                               # the DEPOSIT depends on the score: not a requirement to rent
+        out["credit"] = (m.group(1) or m.group(2)) + "+"
+        break
+    m = _NOT_NORMAL_LEASE.search(t)
+    if m:
+        out["not_normal_lease"] = m.group(0).lower()
+    return out
+
+
+# ---- independent check 4, D24: WHY a fact is open, as a short code the page turns into a plain sentence
+def elevator_open_code(evidence_text) -> str:
+    """Sub-code of an elevator the evidence pass could not confirm, from its own sentence:
+    select_buildings / city_record / low_rise / height_implied / listing_site_only / not_confirmed."""
+    t = str(evidence_text or "").lower()
+    if re.search(r"select buildings|some buildings|only in some|which buildings", t):
+        return "select_buildings"
+    if re.search(r"city's record|walk-?up apartments|building class", t):
+        return "city_record"
+    if re.search(r"townhome|town home|garden[- ]style|low-rise", t):
+        return "low_rise"
+    if re.search(r"amenity tag only|feature list|does not mention an elevator|no 'elevator' entry|not in the owner", t):
+        return "listing_site_only"
+    if re.search(r"high-rise|implied|\d+ floors|six-story|th[- ]floor|floors \d", t):
+        return "height_implied"
+    return "not_confirmed"
+
+
+def dogs_open_code(evidence_text) -> str:
+    """Sub-code of a dog policy that is not confirmed: case_by_case / ask_policy / dogs_not_named / not_reread /
+    listing_site_only / not_confirmed."""
+    t = str(evidence_text or "").lower()
+    if re.search(r"upon approval|case by case|on approval", t):
+        return "case_by_case"
+    if re.search(r"contact for more information|contact for the pet policy", t):
+        return "ask_policy"
+    if re.search(r"dogs not named|dogs are not named|small pets", t):
+        return "dogs_not_named"
+    if re.search(r"blocked|not re-read|could not be read again", t):
+        return "not_reread"
+    if re.search(r"trulia pet field|zumper|listing site", t):
+        return "listing_site_only"
+    return "not_confirmed"

@@ -213,6 +213,9 @@ def main():
                       (el.eq("conflicting"), "elevator not established: the sources conflict on which buildings have one"),
                       (s("dogs_allowed").str.lower().eq("no"), "dogs not allowed (confirmed)"),
                       (wl < 25, "dog weight limit under 25 lb"), (fl < 2, "ground-floor unit"),
+                      # independent check 4, D22: reads as floor 1 under the complex's reviewed numbering convention
+                      ((pd.to_numeric(s("unit_floor_reading"), errors="coerce") == 1) & ~s("unit_floor_basis").isin(["confirmed", "stated", "confirmed_by_phone"]),
+                       "ground-floor unit: the unit number reads as floor 1 under this complex's numbering (" + s("unit_floor_reading_basis") + ")"),
                       # independent check 4, D4 (630 West 163rd Street 10): a bare apartment number in a building numbered in
                       # sequence, at most the average number of apartments per floor, reads as the first floor
                       (pd.Series([s("unit_floor_basis").iloc[i] not in ("confirmed", "stated", "confirmed_by_phone") and parsers.sequential_number_reads_ground(un, uc, bf)
@@ -274,7 +277,11 @@ def main():
             if r["verdict"] == "remove" and r["kind"] == "floor" and parsers.unit_label_key(r["unit"]) \
                     and __import__("re").search(r"first[- ]floor|floor 1\b|ground", r["why"], __import__("re").I):
                 removed_floor.setdefault(r["building_id"], []).append(r["unit"])
-    sib = pd.Series([b in removed_floor and parsers.reads_as_ground_like_siblings(un, removed_floor[b]) for b, un in zip(u.building_id, u.unit.fillna("").astype(str))], index=u.index)
+    # independent check 4, D22: where the complex's numbering convention is reviewed (unit_floor_reading), the floor is
+    # read from the convention (above), and the shape of removed siblings is not used: The Grove Somerset 2141, 3172,
+    # 4149 and 4171 read as floors 2 to 4, not as "the same shape as 1118"
+    has_reading = pd.to_numeric(u.get("unit_floor_reading"), errors="coerce").notna() if "unit_floor_reading" in u else pd.Series(False, index=u.index)
+    sib = pd.Series([b in removed_floor and parsers.reads_as_ground_like_siblings(un, removed_floor[b]) for b, un in zip(u.building_id, u.unit.fillna("").astype(str))], index=u.index) & ~has_reading
     u[sib].assign(drop_reason=["sibling rule: the unit number has the same shape as units " + ", ".join(sorted(removed_floor[b])[:5])
                                + " of this building, which a reviewer removed because their numbers read as first-floor units" for b in u.building_id[sib]],
                   review_kind="floor").to_csv(DATA / "excluded_by_sibling_rule.csv", index=False)
@@ -365,7 +372,11 @@ def main():
     # guessed: the unit keeps the lease-term disclosure and gets ONE open "listing" fact that says to ask.
     used12 = s("rent_12_month_used").eq("yes")
     sib12 = s("price_12_sibling_gap").eq("yes") & ~used12
-    lease_open = (lm > 13) | s("price_lowest_of_terms").eq("yes") | vhas("lease_term") | used12 | sib12
+    # the lease-term gap (independent check 4): ANY listed price quoted for a lease that is not 12 months, with no
+    # 12-month price read, carries the disclosure (it used to start above 13 months: 19 shown apartments priced on
+    # exactly 13 months said nothing, although Harbor Landing shows a 13-month price can sit 22 percent under the 12-month one)
+    not_12 = lm.notna() & (lm != 12) & p12.isna()
+    lease_open = (lm > 13) | not_12 | s("price_lowest_of_terms").eq("yes") | vhas("lease_term") | used12 | sib12
     # owner, 2026-11-16: within the cap on what is known, over it once the unknown parking and fee lines take their medians
     likely = pd.to_numeric(s("all_in_likely"), errors="coerce")
     cost_open = (u.all_in <= CAP) & (likely > CAP)
@@ -395,7 +406,16 @@ def main():
     # D8: a condo by RULE, not only by verdict: the city classes the listing's own lot as a condominium (class R*) and the
     # row is not a managed rental building, or the listing itself is typed condo / co-op
     condo_rule = (s("pluto_class").str.upper().str.startswith("R") & s("pluto_lot_ok").eq("yes") & s("listing_type").ne("managed_building")) | s("listing_type").str.contains("condo", case=False)
-    elig_open, condo_open, other_open = vhas("restricted") | s("eligibility_open").ne(""), vhas("coop_condo") | condo_rule, vhas("other")
+    # independent check 4, D8: conditions in the evidence that never reached the page. Furnished, a credit-score
+    # requirement and an ordinary income requirement are DISCLOSURES; anything that makes the apartment not a normal
+    # lease (short-term only, corporate or student housing, a sublet) is the open fact "eligibility".
+    cond_note = [parsers.renter_conditions(n_) for n_ in s("live_notes")]
+    furnished = s("furnished").ne("") | pd.Series([bool(c.get("furnished")) for c in cond_note], index=u.index)
+    credit_req = s("credit_requirement").where(s("credit_requirement").ne(""), pd.Series([c.get("credit", "") for c in cond_note], index=u.index))
+    credit_req = credit_req.where(credit_req.ne(""), s("income_requirement").map(lambda t: parsers.renter_conditions(t).get("credit", "")))
+    not_normal = s("not_normal_lease").where(s("not_normal_lease").ne(""), pd.Series([c.get("not_normal_lease", "") for c in cond_note], index=u.index))
+    income_req = s("income_requirement").where(~s("income_requirement").map(parsers.income_restricted), "")
+    elig_open, condo_open, other_open = vhas("restricted") | s("eligibility_open").ne("") | not_normal.ne(""), vhas("coop_condo") | condo_rule, vhas("other")
     unknown_lines = s("all_in_unknown_lines").str.replace("building fees (part)", "some required fees", regex=False).str.replace("building fees", "required fees").str.replace("parking fee", "parking") \
         .map(lambda t: " / ".join(x for x in t.split("; ") if x in ("pet rent", "parking", "required fees", "some required fees")))
     cur_price = pd.to_numeric(s("live_price").where(s("live_status").isin(["live", "changed"]) & s("live_price").ne(""), s("listed_rent")), errors="coerce")
@@ -403,7 +423,7 @@ def main():
     term_txt = pd.Series(np.where(lm.notna(), "is for a " + lm.fillna(0).astype(int).astype(str) + "-month lease", "is not the 12-month price"), index=u.index)
     sib_txt = " " + parsers.SIBLING_12_MONTH_TEXT[0].upper() + parsers.SIBLING_12_MONTH_TEXT[1:] + " (" + s("price_12_sibling_why") + ")."
     lease_why = np.where(used12, "The listed price (" + money(cur_price) + ") " + term_txt + ". The 12-month price is " + money(p12) + ", which is what the rent and the total here use.",
-                np.where((lm > 13) | sib12, "The listed price " + term_txt.where(lm.notna(), "is a long-lease price") + "."
+                np.where((lm > 13) | sib12 | not_12, "The listed price " + term_txt.where(lm.notna(), "is a long-lease price") + "."
                          + pd.Series(np.where(p12.notna(), " The 12-month price is $" + p12.fillna(0).astype(int).astype(str) + ", which is what the cost here uses.", " The 12-month price is not published."), index=u.index)
                          + pd.Series(np.where(sib12, sib_txt, ""), index=u.index),
                          np.where(s("price_lowest_of_terms").eq("yes"), "The listed price is the lowest over the lease terms offered; the term it belongs to and the 12-month price are not published.",
@@ -435,13 +455,32 @@ def main():
          np.where(place_open, "What is the building's exact street address?", np.where(warn, "Is this listing for this building, and is it genuine?",
                   np.where(price_open, "Is this price real? Verify it by phone before touring.",
                            np.where(sib_open & ~stale_open, "What is the rent on a 12-month lease? Ask before touring.", "Is this unit still available? The listing page has not changed in over two months."))))),
-        ("eligibility", elig_open, "eligibility", np.where(s("eligibility_open").ne(""), "Eligibility is not settled: " + s("eligibility_open").str[:200], ""),
+        ("eligibility", elig_open, "eligibility", np.where(not_normal.ne(""), "This may not be a normal lease: " + not_normal.str[:200], np.where(s("eligibility_open").ne(""), "Eligibility is not settled: " + s("eligibility_open").str[:200], "")),
          "Is this unit open to any renter, or is there an income limit?"),
         ("condo", condo_open, "condo rules", np.where(s("listing_type").str.contains("condo", case=False), "The listing is typed as a condo or co-op unit, rented out by its owner rather than by a leasing office.",
                                                       "The city records this building as a condominium (building class " + s("pluto_class") + "): the unit is rented out by its owner, not by a leasing office."),
          "What are the condominium's rules for renting this unit (application, fees, pets)?"),
         ("other", other_open, "other", "", ""),
     ]
+    # independent check 4, D24: WHY each item is open, as a short code (scripts/build_page_data.py turns code + the
+    # structured columns into a plain sentence; the sentences above are internal notes and are not printed)
+    sel = lambda pairs, default: pd.Series(np.select([c.values for c, _ in pairs], [v for _, v in pairs], default=default), index=u.index)
+    e_code = s("elevator_evidence_open").map(parsers.elevator_open_code)
+    d_code = s("dogs_evidence_open").map(parsers.dogs_open_code)
+    stale_kind = np.where(s("listing_stale_why").str.contains("availability date"), "stale_date", "stale_page")
+    CODE = {
+        "elevator": sel([(base_e, "height_only"), (s("elevator_evidence_open").ne(""), "x"), (doubt_e, "complex")], "reviewer").where(lambda c: c != "x", e_code),
+        "floor": pd.Series(np.where(fb.eq("inferred"), "floor_read_from_number", "floor_not_published"), index=u.index),
+        "dogs": sel([(s("dogs_evidence_open").ne(""), "x"), (base_d | dog_conflict_open, "sources_disagree")], "reviewer").where(lambda c: c != "x", d_code),
+        "lease": sel([(used12, "uses_12_month"), (sib12, "sibling_12"), (lm.notna() & (lm != 12), "term"), (s("price_lowest_of_terms").eq("yes"), "lowest_of_terms")], "reviewer"),
+        "cost": pd.Series("could_pass", index=u.index),
+        "availability": sel([(second_omit, "second_site")], "reviewer"),
+        "listing": sel([(place_open, "place"), (warn & s("listing_warning").str.match(r"\s*address"), "address_mismatch"), (warn & s("listing_warning").str.match(r"\s*STALE PAGE"), "stale_page"),
+                        (warn, "warning"), (price_open, "price_doubt"), (sib_open & ~stale_open, "sibling_12"), (stale_open, "x")], "reviewer").where(lambda c: c != "x", pd.Series(stale_kind, index=u.index)),
+        "eligibility": sel([(not_normal.ne(""), "not_normal_lease"), (s("eligibility_open").str.contains("income", case=False), "income_tag"), (s("eligibility_open").ne(""), "eligibility")], "reviewer"),
+        "condo": sel([(s("listing_type").str.contains("condo", case=False), "listed_as_condo"), (condo_rule, "city_record")], "reviewer"),
+        "other": pd.Series("reviewer", index=u.index),
+    }
     KIND_KEY = {"elevator": "elevator", "floor": "floor", "dogs": "dogs", "lease_term": "lease", "not_available": "availability", "unverified": "listing",
                 "wrong_building": "listing", "restricted": "eligibility", "coop_condo": "condo", "other": "other"}
     n_inf = weak_e.astype(int)
@@ -456,7 +495,9 @@ def main():
                          "The listing does not give the floor, and the unit number does not show it.")
     # the reviewer's own words per key: {key: (why, question)} for each unit
     v_text = [{KIND_KEY.get(r["kind"], ""): (r["why"], r["what_to_confirm"]) for r in VU[l]["rows"] if r["verdict"] in ("asterisk", "disclose")} if l in VU else {} for l in u.listing_id]
-    what_l, why_l, q_l, keys_l, disc_l = [], [], [], [], []
+    what_l, why_l, q_l, keys_l, disc_l, code_l, rwhy_l, rq_l = [], [], [], [], [], [], [], []
+    code_v = {k: v.values for k, v in CODE.items()}
+    furn_v, credit_v, income_v, notnormal_v = furnished.values, credit_req.values, income_req.values, not_normal.values
     net_eff = s("rent_basis_kind").eq("net_effective").values
     offer_txt = s("rent_offer_text").str[:160].values
     special = (s("rent_offer_kind").eq("special_offer") & ~s("rent_basis_kind").eq("net_effective")).values
@@ -470,7 +511,7 @@ def main():
     fq = pd.Series(floor_q, index=u.index).str.rstrip("; ").values
     used12_v, sib12_v, sib_listing_why_v = used12.values, sib_open.values, np.asarray(sib_listing_why)
     for i in range(len(u)):
-        whats, whys, qs, keys, disc = [], [], [], [], []
+        whats, whys, qs, keys, disc, codes, rwhys, rqs = [], [], [], [], [], [], [], []
         for k, f, lab, w, q in cols_:
             if f[i]:
                 rv = v_text[i].get(k)
@@ -484,27 +525,39 @@ def main():
                 if k in DISCLOSURE_KEYS:
                     is_condo = k == "condo" or (k == "other" and "condo" in why_.lower())
                     disc.append({"what": "condo rented by its owner" if is_condo else ("floor not published" if k == "floor" else ("something else to know" if k == "other" else lab)),
-                                 "why": why_, "question": FLOOR_DISCLOSURE if k == "floor" else (q_ or "")})
+                                 "why": why_, "question": FLOOR_DISCLOSURE if k == "floor" else (q_ or ""), "code": ("condo:" if is_condo and k == "other" else k + ":") + str(code_v[k][i]),
+                                 "review_why": rv[0] if rv and rv[0] and k != "floor" else "", "review_question": rv[1] if rv and rv[1] and k != "floor" else ""})
                     continue
                 keys.append(k); whats.append(lab); whys.append(why_); qs.append(q_)
+                codes.append(str(code_v[k][i])); rwhys.append(rv[0] if rv and rv[0] else ""); rqs.append(rv[1] if rv and rv[1] else "")
         if net_eff[i]:
             disc.append({"what": "net-effective rent", "why": "The rent shown is the average after a special offer, not the monthly payment." + (" Offer: " + offer_txt[i] if offer_txt[i] else ""),
-                         "question": "What is the full monthly rent, and when is the first full payment due?"})
+                         "question": "What is the full monthly rent, and when is the first full payment due?", "code": "net_effective"})
         elif special[i]:
             # D5 / D16: an offer the page does not tie to the listed price is disclosed as an offer, never as "net-effective"
             kind_txt = {"dollar_credit": "a one-time credit or gift", "look_and_lease": "a one-time credit for applying quickly", "months_free": "free rent",
                         "weeks_free": "free rent"}.get(offer_type[i], "a special")
             disc.append({"what": OFFER_DISCLOSURE, "why": "The listing advertises " + kind_txt + ". The page does not say the price shown already includes it, so the price is treated as the normal monthly rent."
-                         + (" Offer: " + offer_txt[i] if offer_txt[i] else ""), "question": OFFER_QUESTION})
+                         + (" Offer: " + offer_txt[i] if offer_txt[i] else ""), "question": OFFER_QUESTION, "code": "offer:" + str(offer_type[i] or "other")})
         if wl_un[i]:
             disc.append({"what": "dog weight limit not published", "why": "The page says a weight limit or weight restrictions apply and gives no number: \"" + wl_txt[i] + "\".",
-                         "question": parsers.DOG_WEIGHT_QUESTION})
+                         "question": parsers.DOG_WEIGHT_QUESTION, "code": "dog_weight"})
         if park_d[i]:
-            disc.append({"what": "overnight street parking", "why": f"{po_town[i]}: {po_rule[i]}", "question": PARKING_DISCLOSURE, "url": po_url[i], "severity": po_sev[i]})
+            disc.append({"what": "overnight street parking", "why": f"{po_town[i]}: {po_rule[i]}", "question": PARKING_DISCLOSURE, "url": po_url[i], "severity": po_sev[i], "code": "overnight_parking"})
+        # independent check 4, D8: conditions from the evidence (income requirement, credit score, furnished)
+        if income_v[i]:
+            disc.append({"what": "income requirement", "why": "Income requirement: " + str(income_v[i]), "question": "Do you meet the income requirement, and does a guarantor count?", "code": "income_requirement"})
+        if credit_v[i]:
+            disc.append({"what": "credit score requirement", "why": "Credit score requirement: " + str(credit_v[i]), "question": "What credit score does the application need?", "code": "credit_requirement"})
+        if furn_v[i]:
+            disc.append({"what": "furnished apartment", "why": "Furnished apartment", "question": "Is the furniture optional, and is this a standard 12-month lease?", "code": "furnished"})
         qs += [d["question"] for d in disc]
         disc_l.append(json.dumps(disc) if disc else "")
         what_l.append("; ".join(whats)); why_l.append(" ".join(whys)); q_l.append("; ".join(x for x in qs if x)); keys_l.append(";".join(keys))
+        code_l.append(";".join(codes)); rwhy_l.append(" ".join(x for x in rwhys if x)); rq_l.append("; ".join(x for x in rqs if x))
     u["open_keys"] = keys_l
+    u["open_codes"], u["open_review_why"], u["open_review_question"] = code_l, rwhy_l, rq_l
+    u["cond_furnished"], u["cond_credit"], u["cond_income"], u["cond_not_normal_lease"] = np.where(furnished, "yes", ""), credit_req, income_req, not_normal
     u["disclosures"] = disc_l
     u["to_confirm"] = [q + "; " if q else "" for q in q_l]
     u["tour_confirm"] = (pd.Series(np.where(inf_f, FLOOR_DISCLOSURE + "; ", ""), index=u.index)

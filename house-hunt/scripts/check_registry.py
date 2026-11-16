@@ -105,7 +105,9 @@ def shown_violations():
     # row (D1), an evidence warning about the listing (D6), and whatever a reviewer's asterisk verdict names
     used12 = col("rent_12_month_used") == "yes"
     sib12 = (col("price_12_sibling_gap") == "yes") & ~used12
-    open_lease = (num("price_lease_months") > 13) | (col("price_lowest_of_terms") == "yes") | used12 | sib12
+    # independent check 4: any listed price quoted for a lease that is not 12 months, with no 12-month price read
+    not_12 = num("price_lease_months").notna() & (num("price_lease_months") != 12) & num("price_12_month").isna()
+    open_lease = (num("price_lease_months") > 13) | not_12 | (col("price_lowest_of_terms") == "yes") | used12 | sib12
     # owner, 2026-11-16 (evidence batch 20): the 12-month price wherever the page gives one, whatever the quoted term
     cur_ = num("live_price").where(col("live_status").isin(["live", "changed"]) & num("live_price").notna(), num("listed_rent"))
     flag(num("price_12_month").notna() & ((num("price_12_month") - cur_).abs() > 0.5) & (num("rent_basis") != num("price_12_month")),
@@ -131,12 +133,19 @@ def shown_violations():
     # GATE facts count toward "at most one open"; DISCLOSURES (lease term, cost near the cap, condo rented by its owner,
     # net-effective rent) never do, but must be listed on the unit (owner, 2026-11-16)
     # (a floor that is not published is a disclosure too: owner, 2026-11-16; a floor under 2 is still flagged above)
-    opens = {"elevator": open_e, "dogs allowed": open_d, "availability": open_avail, "listing": open_listing, "eligibility": col("eligibility_open") != ""}
+    opens = {"elevator": open_e, "dogs allowed": open_d, "availability": open_avail, "listing": open_listing, "eligibility": (col("eligibility_open") != "") | (col("cond_not_normal_lease") != "")}
     not_published = ~fb.isin(["confirmed_by_phone", "confirmed", "stated"])
     flag(not_published & ~col("disclosures").str.contains('"what": "floor not published"', regex=False), "floor not published but the disclosure is missing")
     flag(not_published & ~col("tour_confirm").str.contains("confirm it is above the ground floor"), "floor not published but the tour question is missing")
     disc = col("disclosures")
-    flag(open_lease & ~disc.str.contains('"what": "lease term"', regex=False), "price is for a lease over 13 months but the disclosure 'lease term' is missing")
+    flag(open_lease & ~disc.str.contains('"what": "lease term"', regex=False), "the price is for a lease that is not 12 months (and no 12-month price was read) but the disclosure 'lease term' is missing")
+    # independent check 4, D8: conditions in the evidence reach the page as disclosures
+    inc = col("income_requirement")
+    flag((inc != "") & ~inc.map(parsers.income_restricted) & ~disc.str.contains('"what": "income requirement"', regex=False), "an income requirement is in the evidence but not among the disclosures")
+    flag((col("furnished") != "") & ~disc.str.contains('"what": "furnished apartment"', regex=False), "the evidence says the apartment is furnished but the disclosure is missing")
+    flag((col("credit_requirement") != "") & ~disc.str.contains('"what": "credit score requirement"', regex=False), "a credit-score requirement is in the evidence but not among the disclosures")
+    flag(pd.Series([bool(parsers.renter_conditions(n_).get("furnished")) for n_ in col("live_notes")], index=S.index) & ~disc.str.contains('"what": "furnished apartment"', regex=False),
+         "a checker's note says the apartment is furnished but the disclosure is missing")
     flag(open_cost & ~disc.str.contains('"what": "could pass $3,000"', regex=False), "all-in within the cap but likely over it once parking and fees are known, and the disclosure is missing")
     flag(~open_cost & disc.str.contains('"what": "could pass $3,000"', regex=False), "the 'could pass $3,000' disclosure sits on a unit it does not apply to")
     flag(disc.str.contains('"what": "cost near the cap"', regex=False), "the old 'cost near the cap' disclosure is still present")
@@ -174,8 +183,14 @@ def shown_violations():
         for r in d["rows"]:
             if r["verdict"] == "remove" and r["kind"] == "floor" and parsers.unit_label_key(r["unit"]) and re.search(r"first[- ]floor|floor 1\b|ground", r["why"], re.I):
                 rem.setdefault(r["building_id"], []).append(r["unit"])
-    flag(pd.Series([b in rem and parsers.reads_as_ground_like_siblings(un, rem[b]) for b, un in zip(S.building_id, S.unit)], index=S.index),
+    # independent check 4, D22: where the complex's numbering convention is reviewed, the convention reads the floor
+    reading = num("unit_floor_reading")
+    flag(pd.Series([b in rem and parsers.reads_as_ground_like_siblings(un, rem[b]) for b, un in zip(S.building_id, S.unit)], index=S.index) & reading.isna(),
          "the unit number has the same shape as siblings a reviewer removed as first-floor units")
+    flag((reading == 1) & ~fb.isin(["confirmed_by_phone", "confirmed", "stated"]), "the unit number reads as floor 1 under its complex's reviewed numbering convention")
+    flag(pd.Series([fb_ not in ("confirmed_by_phone", "confirmed", "stated") and parsers.sequential_number_reads_ground(un, uc if uc == uc else pu, bf if bf == bf else pf)
+                    for fb_, un, uc, pu, bf, pf in zip(fb, S.unit, num("unit_count"), num("pluto_units"), num("building_floors"), num("pluto_floors"))], index=S.index),
+         "a bare apartment number in a building numbered in sequence reads as the first floor")
     # D3 / D11: a stale page is never switched off by a 'second site' that is the same site
     import build_master as _bm
     flag((num("listing_stale_days") > 60) & (col("listing_stale") == "") & (col("call_called_at") == "")
