@@ -348,7 +348,7 @@ LEADS = {'cheapest': ('price',
              ['The {big} of the {n} apartments we found in this building, at {sqft} square feet.',
               '{sqft} square feet, more than any other apartment we found in the building.',
               'For space, nothing else in the building tops this unit: {sqft} square feet.',
-              'The desk, the sofa and the dog bed all fit in {sqft} square feet, the most of the {n} here.',
+              'The desk, the sofa and the dog bed all fit in {sqft} square feet, more than in any other listing here.',
               "You work from home, so notice this: {sqft} square feet, the most room in the building's listings.",
               'No other listing in this building gives you this much floor, {sqft} square feet of it.',
               'Of the {n} apartments here, this has the most room to spread out, {sqft} square feet.',
@@ -1553,8 +1553,6 @@ def support_phrases(f, covered):
         add(40, "floor", f"a spot on floor {f['floor']}", floor=f["floor"])
     if f["avail"] and f["avail"] != "now":
         add(38, "date", f"a {f['avail']} move-in date", available=f["avail"])
-    elif f["avail"] == "now":
-        add(20, "date", "a move-in date of today", available="now")
     return sorted(out, key=lambda x: -x[0])
 
 

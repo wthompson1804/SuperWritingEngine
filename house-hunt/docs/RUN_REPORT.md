@@ -1,4 +1,4 @@
-# Run report (2026-11-16T01:50:32+00:00)
+# Run report (2026-11-16T01:51:15+00:00)
 
 ## Steps
 
@@ -25,10 +25,10 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2632 | 2632 | +0 |
 | within the $3,000 all-in cap | 1613 | 1613 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 763 | 761 | +2 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 489 | 487 | +2 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 763 | 763 | +0 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 489 | 489 | +0 |
 | avoid cards | 34 | 34 | +0 |
-|   shown with an asterisk (one thing to confirm) | 292 | 294 | -2 |
+|   shown with an asterisk (one thing to confirm) | 293 | 292 | +1 |
 | removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 121 | 121 | +0 |
 | held back for one confirmation | 35 | 35 | +0 |
 | clean, waiting for a live check (not shown) | 35 | 35 | +0 |
@@ -148,7 +148,7 @@ needs_call: {'yes': 1660, 'no': 999}
 
 **ranking and selection**
 ```
-evidence: 47 units excluded, shown 489, avoid cards 34, of them with an asterisk 292 ({'live check': 178, 'elevator': 40, 'listing': 37, 'dogs allowed': 16, 'availability': 16, 'eligibility': 5}), held for a confirmation 35, waiting for a live check 35
+evidence: 47 units excluded, shown 489, avoid cards 34, of them with an asterisk 293 ({'live check': 178, 'elevator': 41, 'listing': 37, 'dogs allowed': 16, 'availability': 16, 'eligibility': 5}), held for a confirmation 35, waiting for a live check 35
 stages: 2632 costed -> -1019 over the all-in cap -> -361 Jamaica safety rule -> -114 failed a gate on confirmed facts -> -121 removed by a reviewed verdict -> -1 sibling floor rule -> -206 sketchy -> -47 evidence exclusions -> 763 ranked
 shown buildings 232; disclosures: {'floor not published': 440, 'special offer': 253, 'lease term': 98, 'could pass $3,000': 97, 'dog weight limit not published': 22, 'overnight street parking': 19, 'net-effective rent': 18, 'condo rented by its owner': 9}
 (kept 763 units; candidates 364; shown 397; pools: {'': 407, 'pool': 356}

@@ -532,12 +532,12 @@ def check_row(kind, key, texts, evidence):
         problems.append(f"'{SAFEST}' needs a test that the neighborhood is in the lowest fifth by violent rate")
     if joined.count(SAFEST) > 1:
         problems.append(f"'{SAFEST}' is used in more than one field")
-    if kind == "hood" and key in shown_hoods():
+    if kind == "year" or key in shown_hoods():
         for ev in evidence:
             if ev.get("transform") != "convention" and ev.get("field") in SHOWN_ONLY_FIELDS \
                     and not str(ev.get("source_file", "")).startswith(PAGE):
-                problems.append(f"{ev['field']} is quoted from {ev['source_file']}, but this neighborhood has places on "
-                                f"the page: the figure must come from the shown units ({ev.get('claim', '')[:50]})")
+                problems.append(f"{ev['field']} is quoted from {ev['source_file']}, but there are places on the page "
+                                f"here: the figure must come from the shown units ({ev.get('claim', '')[:50]})")
     for col, text in list(texts.items()) + extra:
         if not text.strip():
             if not col.startswith("sub_"):                # an empty section subhead is allowed: better than filler
