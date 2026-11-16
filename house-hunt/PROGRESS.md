@@ -2,7 +2,107 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-16, after the third independent check)
+## Current state (2026-11-16, after the pipeline consistency pass)
+
+**Authorities, newest first:** `CLAUDE.md` (rules and decision log) → `docs/RANKING.md` (rewritten as ONE current statement of the gates, the elevator rule,
+duplicates, score and selection, with a change log) → `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` → `docs/SAFETY_BASIS.md` → `docs/PLAN_V3_APPROVED_2026-11-15.md` → UX brief and mock-up 4 (layout only).
+The job is the finished decision page.
+
+**Run everything:** `python3 scripts/run_all.py` (`--fast` after evidence-only changes; tests first, `check_registry.py` last) → `scripts/build_page_data.py` →
+`scripts/page_data_extras.py` → `scripts/build_scene_text.py` → `scripts/check_scene_text.py` → `scripts/realtor_lines.py` → `scripts/test_realtor_lines.py` →
+`scripts/page_data_extras.py` → `scripts/build_site.py` → `site/dist/index.html`. **The text check (`check_scene_text.py`) is a separate step after
+`page_data_extras.py`; `run_all.py` does not run it.** Publish as a NEW private artifact (never replace the mock).
+
+**Counts now** (details and the full shown-set diff: `docs/PIPELINE_CONSISTENCY_PASS.md`): 20,468 listings → 2,505 pass the listing gates → 2,451 costed →
+1,480 within the all-in cap → 760 ranked → **446 apartments shown in 191 buildings, 68 neighborhoods** (41 with three or more). It was 491 / 233 / 104.
+By experience (apartments / buildings / neighborhoods): Little-City 195 / 78 / 22, Room-to-Breathe 108 / 33 / 17, Old-Neighborhood 73 / 52 / 20,
+Fresh-Start 62 / 23 / 5, Quiet-Street 6 / 3 / 3, Walk-Everywhere 2 / 2 / 1. 265 shown apartments carry one open item. 71 rows are `not_an_apartment`
+(63 floor plans, 5 building-page prices, 3 co-living rooms; 16 of them were shown before); 35 single-apartment neighborhoods were cut by the
+thin-neighborhood rule and 11 kept. Verdicts: 808 rows for 807 units. Two consecutive runs give an identical `data/ranked_units.csv`;
+`check_registry.py` and all tests pass (`test_rules.py`: 421 pure checks; `--data` on the output; `test_parsers.py`: 259).
+
+**What the consistency pass changed (2026-11-16):** one elevator rule for every stage (`parsers.elevator_rule`; a near-miss tax lot neither passes nor fails);
+experiences assigned from frozen area profiles and saved parameters (East Rutherford and Patchogue are back in Little-City; four other neighborhoods are held
+where they were by `data/reference/lifestyle_group_overrides.csv`, for the owner to decide); units moved out of addresses; duplicates across label spellings
+(`215` = `001-215`); the Continuum is one building, not three; only real apartments (owner's rule); the thin-neighborhood rule (owner's rule); a conflicting dog
+policy is one open fact, not "sketchy"; in-unit laundry no longer counts a shared laundry room; building names cleaned of listing titles; park names that are not
+parks blanked; a third party's API key stripped from `photo_url` everywhere.
+
+**Weak, plainly:** 265 of 446 shown apartments have something open (most often no live check: the third to eighth unit of a building whose first two were
+checked). Most shown elevators rest on listing sites only. Most shown floors are not published. Parking and required fees are unpublished for most shown units.
+The experience profile of a neighborhood is the median over the buildings sampled there (frozen at the largest sample on record), not a census of the whole
+area; 33 of 197 neighborhoods sit within 10 percent of a second experience (`data/lifestyle_group_distances.csv`). `scripts/h_trulia.py` now refuses to fetch while `trulia.com` is in `raw/_host_kill_shared.json` (it is) or without `--i-know`.
+
+**Trulia:** blocking us (403 / CAPTCHA) since the evening of 2026-11-15. The single test on 2026-11-16 ran and Trulia still returned a CAPTCHA. **No Trulia
+requests are to be sent.** Rows harvested before the block stay and cannot be re-read.
+
+**Zumper opened pages (not merged, on purpose):** 900 pages opened; on stated facts no unit passes every gate; 168 are one fact short, 164 on the elevator
+(`data/listings_pending/zumper_opened*.csv`, `docs/harvest_notes/zumper_open_pending.md`).
+
+**Open, for the owner:** the four experience overrides (Fort Lee, West New York, Harlem South, Jersey City – McGinley Square); whether a single-home listing page
+with no unit number counts as a real apartment (it does today; none is shown); Avalon W Squared (West Windsor) must not be filed under Princeton if it ever
+passes; the Manhattan congestion-zone mail rate; photos; Reddit key.
+
+**The review rule:** a unit is shown only if `data/evidence/review_verdicts.csv` holds an `ok`, `asterisk` or `disclose` verdict written against its evidence as
+it stands (`scripts/verdicts.py pending / digest / add`; `check_registry.py` fails the run otherwise).
+
+| Piece | Status |
+|---|---|
+| Master tables, rent terms, all-in cost, ranking v2, avoid rules, registry check | Done; rules in one statement in `docs/RANKING.md` |
+| Evidence rounds 1–3 (batches 1–19), NYC and non-NYC records, rating standard | Done |
+| Independent checks 1–3 and their repairs | Done (`docs/REPAIRS_AFTER_INDEPENDENT_CHECK*.md`) |
+| Pipeline consistency pass (`docs/PIPELINE_CONSISTENCY_PASS.md`) | Done 2026-11-16 |
+| Only real apartments; thin-neighborhood rule (owner, 2026-11-16) | Done: 446 shown in 68 neighborhoods |
+| Neighborhood voices, local rules, Jersey City split, MTA tolls | Done |
+| Trulia | Blocked; no requests. About 100 NYC shown units cannot be re-checked |
+| Photos; Reddit key; Zumper opened-listings merge | Open |
+
+**Robots lapses to remember (told to Will):** the voices agent restarted after a Niche 403; evidence batch 13 sent six more Trulia requests after the first
+refusals. Agent briefs must say: one refusal ends that host for the session.
+
+## Environment
+
+- This work lives in `house-hunt/` inside the `wthompson1804/SuperWritingEngine` repo, on branch
+  `claude/lamia-house-hunt-data-fdrkrs` (the session's assigned branch; there was no separate data repo).
+- Cloud environment **"SuperWritingEngine house-hunt data"** (personal) with **unrestricted network**,
+  created 2026-11-15 because the Default environment blocked every data source. The Default environment was left unchanged.
+- Python 3.13 with pandas, requests, bs4, lxml, pdfplumber; `shapely` and `pyproj` were pip-installed (no setup
+  script yet; re-run `pip install shapely pyproj` in a fresh container). Playwright Chromium is preinstalled.
+
+## Known gaps and caveats
+
+- `si-inventory.csv`, referenced in the brief, is **not in the repo**. The Staten Island seed facts exist
+  only as text in `docs/HANDOFF_2026-11-15.md` §10. Ask Will to upload the CSV.
+- NJ Transit rail GTFS: the official feed needs a developer login, so we use the MobilityData mirror, whose calendar
+  **ended 2026-11-08**. Its station coordinates are fine; its schedules are stale and must be labelled as such or replaced.
+- Police jurisdiction outside NYC is an analyst assignment marked UNVERIFIED in `areas.csv`.
+- CT rows: Census now uses planning regions instead of counties (for example "Western Connecticut").
+
+## Open questions for Will
+
+1. Upload `si-inventory.csv` (the Staten Island inventory verified Nov 15).
+2. Is weekly still the right visit frequency?
+
+## History: superseded answers and earlier states
+
+Kept for the record; none of this is current. The decision log in `CLAUDE.md` says what replaced what.
+
+### Answers from Will on 2026-11-15, as first recorded (several since replaced)
+
+Superseded: the tiers (`comfortable` / `at_cap` / `stretch`) are gone (cap and ceiling are both $3,000); "move-in by December 1" became "now through
+December 15, 2026". Still true: browser automation allowed within robots rules; Philadelphia is a benchmark only; the api.data.gov key is an environment secret.
+
+| Question | Answer | Effect |
+|---|---|---|
+| Stretch ceiling | **$3,000 listed rent** (the brief had $3,200) | Tiers: `comfortable` ≤ 2,400; `at_cap` 2,401–2,800; `stretch` 2,801–3,000. Collect nothing above $3,000. |
+| Move-in | **December 1, 2026** (Will, 2026-11-15, second answer; it replaced "December only", which replaced the brief's "Dec preferred, Jan latest") | Inventory must be available on or before Dec 1. `move_in_fit` = `ready_by_dec1` / `after_dec1` / `unknown`. |
+| Browser automation | **Allowed** (Playwright, headless) within robots rules, throttled, no getting around logins or CAPTCHAs | |
+| Philadelphia | **Benchmark only** | R8 gets area metrics only; no inventory or quotes unless Will says otherwise. |
+| API keys | Will didn't know how to get them and said to get them if I could. I can't sign up on his behalf, so he signed up for an **api.data.gov key**, which is saved as an environment network secret for `api.usa.gov` (FBI Crime Data Explorer; header injected by the proxy, never in code or env vars). Will then pasted a **Census API key** in chat. It's stored outside the repo at `/root/.config/house-hunt/census_api_key` (re-create it in a new container; ask Will), read via `lib.census_key()`, and `lib.redact()` strips it from every logged URL. | Routing with traffic, Reddit, YouTube and Walk Score: **no keys**. Drive times are OSRM free-flow, labelled `estimate`. Reddit's JSON API returns 403 without auth; see SOURCES.md. |
+| Visit frequency | Not asked; still **assumed weekly** | Only matters for travel-cost rollups. |
+
+
+### State before the consistency pass (2026-11-16, after the third independent check and the elevator gate fix)
 
 **Authorities, newest first:** `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` → `docs/RANKING.md` (v2, with the sections added after each check; the last one is current) → `docs/SAFETY_BASIS.md`
 → `docs/PLAN_V3_APPROVED_2026-11-15.md` (gates; dog limit 25 lb; size-only "small dogs" passes) → UX brief and mock-up 4 (layout only).
@@ -73,40 +173,6 @@ evidence is added or a new unit is promoted: `python3 scripts/verdicts.py digest
 
 **Robots lapses to remember (told to Will):** the voices agent restarted after a Niche 403 (21 neighborhoods; quotes kept pending Will's call);
 evidence batch 13 sent six more Trulia requests after the first refusals. Agent briefs must say: one refusal ends that host for the session.
-
-## Answers from Will (2026-11-15), which override the handoff brief
-
-| Question | Answer | Effect |
-|---|---|---|
-| Stretch ceiling | **$3,000 listed rent** (the brief had $3,200) | Tiers: `comfortable` ≤ 2,400; `at_cap` 2,401–2,800; `stretch` 2,801–3,000. Collect nothing above $3,000. |
-| Move-in | **December 1, 2026** (Will, 2026-11-15, second answer; it replaced "December only", which replaced the brief's "Dec preferred, Jan latest") | Inventory must be available on or before Dec 1. `move_in_fit` = `ready_by_dec1` / `after_dec1` / `unknown`. |
-| Browser automation | **Allowed** (Playwright, headless) within robots rules, throttled, no getting around logins or CAPTCHAs | |
-| Philadelphia | **Benchmark only** | R8 gets area metrics only; no inventory or quotes unless Will says otherwise. |
-| API keys | Will didn't know how to get them and said to get them if I could. I can't sign up on his behalf, so he signed up for an **api.data.gov key**, which is saved as an environment network secret for `api.usa.gov` (FBI Crime Data Explorer; header injected by the proxy, never in code or env vars). Will then pasted a **Census API key** in chat. It's stored outside the repo at `/root/.config/house-hunt/census_api_key` (re-create it in a new container; ask Will), read via `lib.census_key()`, and `lib.redact()` strips it from every logged URL. | Routing with traffic, Reddit, YouTube and Walk Score: **no keys**. Drive times are OSRM free-flow, labelled `estimate`. Reddit's JSON API returns 403 without auth; see SOURCES.md. |
-| Visit frequency | Not asked; still **assumed weekly** | Only matters for travel-cost rollups. |
-
-## Environment
-
-- This work lives in `house-hunt/` inside the `wthompson1804/SuperWritingEngine` repo, on branch
-  `claude/lamia-house-hunt-data-fdrkrs` (the session's assigned branch; there was no separate data repo).
-- Cloud environment **"SuperWritingEngine house-hunt data"** (personal) with **unrestricted network**,
-  created 2026-11-15 because the Default environment blocked every data source. The Default environment was left unchanged.
-- Python 3.13 with pandas, requests, bs4, lxml, pdfplumber; `shapely` and `pyproj` were pip-installed (no setup
-  script yet; re-run `pip install shapely pyproj` in a fresh container). Playwright Chromium is preinstalled.
-
-## Known gaps and caveats
-
-- `si-inventory.csv`, referenced in the brief, is **not in the repo**. The Staten Island seed facts exist
-  only as text in `docs/HANDOFF_2026-11-15.md` §10. Ask Will to upload the CSV.
-- NJ Transit rail GTFS: the official feed needs a developer login, so we use the MobilityData mirror, whose calendar
-  **ended 2026-11-08**. Its station coordinates are fine; its schedules are stale and must be labelled as such or replaced.
-- Police jurisdiction outside NYC is an analyst assignment marked UNVERIFIED in `areas.csv`.
-- CT rows: Census now uses planning regions instead of counties (for example "Western Connecticut").
-
-## Open questions for Will
-
-1. Upload `si-inventory.csv` (the Staten Island inventory verified Nov 15).
-2. Is weekly still the right visit frequency?
 
 ## Log
 

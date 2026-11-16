@@ -1,5 +1,17 @@
 listing_id,kept_listing_id,building_id,unit,beds,sqft,listed_rent,source_site,url
 zumper-65719902,trulia:2084734385,b_0f0fcfc79c,2D,0,600.0,1850,zumper,https://www.zumper.com/listings/65719902/studio-flushing-new-york-ny
+greystar:22789:3121236,region_wr:continuum_wp:N0910,b_144b021ca5,N0910,1,713.0,2937,greystar.com,https://www.greystar.com/continuum-55-white-plains-ny/p_22789
+greystar:22789:3121284,region_wr:continuum_wp:N1119,b_144b021ca5,N1119,0,528.0,2455,greystar.com,https://www.greystar.com/continuum-55-white-plains-ny/p_22789
+greystar:22789:3121263,region_wr:continuum_wp:N1018,b_144b021ca5,N1018,1,723.0,2962,greystar.com,https://www.greystar.com/continuum-55-white-plains-ny/p_22789
+greystar:22789:3121144,region_wr:continuum_wp:N0419,b_144b021ca5,N0419,0,528.0,2335,greystar.com,https://www.greystar.com/continuum-55-white-plains-ny/p_22789
+greystar:22789:3121117,region_wr:continuum_wp:N0311,b_144b021ca5,N0311,0,557.0,2294,greystar.com,https://www.greystar.com/continuum-55-white-plains-ny/p_22789
+greystar:22790:3121653,region_wr:continuum_wp:S1617,b_144b021ca5,S1617,0,422.0,2407,greystar.com,https://www.greystar.com/continuum-57-white-plains-ny/p_22790
+greystar:22790:3121645,region_wr:continuum_wp:S1609,b_144b021ca5,S1609,1,596.0,2830,greystar.com,https://www.greystar.com/continuum-57-white-plains-ny/p_22790
+greystar:22790:3121451,region_wr:continuum_wp:S0515,b_144b021ca5,S0515,0,424.0,2222,greystar.com,https://www.greystar.com/continuum-57-white-plains-ny/p_22790
+greystar:22790:3121552,region_wr:continuum_wp:S1016,b_144b021ca5,S1016,1,625.0,2628,greystar.com,https://www.greystar.com/continuum-57-white-plains-ny/p_22790
+greystar:22790:3121520,region_wr:continuum_wp:S0904,b_144b021ca5,S0904,1,632.0,2600,greystar.com,https://www.greystar.com/continuum-57-white-plains-ny/p_22790
+trulia:b2734175071:Unit_S0515:456728064,region_wr:continuum_wp:S0515,b_144b021ca5,S0515,0,424.0,2348,trulia,https://www.trulia.com/building/continuum-55-bank-st-white-plains-ny-10606-2734175071
+trulia:b2734175071:Unit_S0904:457236545,region_wr:continuum_wp:S0904,b_144b021ca5,S0904,1,632.0,2726,trulia,https://www.trulia.com/building/continuum-55-bank-st-white-plains-ny-10606-2734175071
 zumper-57136966,apartmentlist:p75976018-1-1,b_27104c3bf3,1-1,1,,2795,zumper,https://www.zumper.com/listings/26999984p/1-bedroom-bayonne-nj
 apartmentlist:p8968813-001-1555,avalon:AVB-NY047-001-1555,b_3f9fc0b756,001-1555,0,490.0,2475,apartmentlist.com,https://www.apartmentlist.com/ny/yonkers/avalon-yonkers
 zumper-65335189,trulia:2083737834,b_403d0ca679,5A,0,600.0,2150,zumper,https://www.zumper.com/listings/29569994p/studio-flushing-new-york-ny
@@ -40,3 +52,4 @@ rc:trulia:b1002416797:plan-:463389282,apartmentlist:p7630984-4bec8063-f064-11ee-
 zumper-60557027,trulia:b2740011249:Unit_01-328:2081849536,b_c1467fc815,,1,718.0,2669,zumper,https://www.zumper.com/apartment-buildings/p288235/modera-hudson-riverfront-downtown-yonkers-yonkers-ny
 trulia:2061738454,zumper-62505591,b_c7dc5c431d,6K,1,,2595,trulia,https://www.trulia.com/home/13828-queens-blvd-6k-jamaica-ny-11435-2061738454
 apartmentlist:p33489-u36308196,apartmentlist:p33489-ignore-me-i-am-fake-4259777,b_db5afd9d03,1 Bed - 1 Bath,1,920.0,2575,apartmentlist.com,https://www.apartmentlist.com/nj/westfield/the-cove
+apartmentlist:p11978175-001-215,avalon:AVB-NJ030-001-215,b_ed64a2ae75,001-215,1,702.0,2516,apartmentlist.com,https://www.apartmentlist.com/nj/bergenfield/avalon-teaneck

@@ -109,7 +109,7 @@ def unit(r):
 def unit_core(r, g, qs):
     return {
         "id": g("listing_id"), "building_id": g("building_id"), "hood_id": g("hood_id"), "year": g("group_key"),
-        "building": g("building_name"), "address": g("address"), "unit": g("unit"), "beds": g("beds"), "sqft": g("sqft"),
+        "building": g("building_name"), "address": g("address"), "unit": g("unit"), "kind": g("listing_kind") or "unit", "beds": g("beds"), "sqft": g("sqft"),
         "floor": g("unit_floor"), "floor_basis": g("unit_floor_basis"), "floor_basis_note": g("floor_basis_note"), "zip": g("zip5"), "lat": g("lat"), "lon": g("lon"),
         "available": g("available_date"), "listing_age_days": g("listing_age_days"),
         "rent": {"listed": g("listed_rent"), "basis": g("rent_basis"), "basis_kind": g("rent_basis_kind"), "gross": g("rent_gross"),
@@ -286,6 +286,8 @@ def main():
         s = g[g.shown]
         if not len(s) and not len(g[g.avoid_card]):
             continue
+        if not len(s) and "thin_neighborhood" in g and g.thin_neighborhood.astype(str).eq("True").any():
+            continue            # owner, 2026-11-16: a neighborhood cut by the thin-neighborhood rule does not appear on the page
         h = G.loc[hid] if hid in G.index else {}
         # independent check 3, D12: figures describe the SHOWN places (a neighborhood with only avoid cards uses its ranked units)
         g_all, g = g, (s if len(s) else g)

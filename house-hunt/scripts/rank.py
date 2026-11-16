@@ -1,19 +1,22 @@
-"""Ranking v2 (Will, 2026-11-15: "use many more variables; drop anything sketchy"). See docs/RANKING.md.
+"""Ranking v2 and selection. The rules, in one current statement, are in docs/RANKING.md.
 
-Listing confidence (before ranking):
-  sketchy       -> excluded: stale 60+ days, no unit and no building name, thin syndicated feed, conflicting dog policy,
-                   all-in under 60% of the neighborhood median, or two or more inferred gate facts
-  one_inferred  -> kept, lower certainty; the open fact (elevator inferred from 6+ floors, floor not stated, or dog
-                   size given only as "small") must be confirmed in the evidence pass before the unit is shown
-  clean         -> every gate fact stated on the page
-Universal value, 0-100 (weights sum to 100): safety 22, building 16, cost 12, car 12, space 12, distance 10,
-dog 8, daily life 8. Each part blends several variables as percentiles across all kept units; an unknown variable
-scores at the 25th percentile.
-Rank score = 0.7 x universal + 0.3 x the year's promise + pool bump (+3 pool, +6 indoor), times a certainty factor
-(1.00 clean, 0.97 one inferred fact).
-Selection per neighborhood: top by rank score, at most 2 per building, dominated units last; top 15 are candidates
-for the evidence pass, the best 10 that survive are shown.
-Outputs: data/ranked_units.csv, data/group_exchange.csv, data/reference/queens_spectrum_definition.csv
+Reads only the master tables (build_master.py, all_in.py) and data/lifestyle_groups.csv. In order:
+  1. within the all-in cap; neighborhood not cut by the Jamaica safety rule
+  2. removed on confirmed facts (no elevator, dogs not allowed, limit under 25 lb, ground floor, gone, stale 6+ months ...)
+  3. not a real apartment (floor plan, building-page price, co-living room) -> data/excluded_not_an_apartment.csv
+  4. removed by a reviewed verdict; sibling floor rule
+  5. open gate facts counted (elevator by parsers.elevator_rule, dogs, listing / availability / eligibility):
+     two or more -> "sketchy", excluded; one -> kept with certainty 0.97
+  6. evidence exclusions and avoid buildings (avoid.py)
+  7. scores: universal value 0-100 (safety 22, building 16, cost 12, car 12, space 12, distance 10, dog 8, daily life 8;
+     percentiles across all ranked units, an unknown variable at the 25th percentile), the experience's promise,
+     rank score = (0.7 x universal + 0.3 x promise + pool bump) x certainty
+  8. selection per neighborhood in rank order: shown = not an avoid building, at most ONE open item (open gate facts
+     plus a missing live check), the building has evidence rows; up to 8 per building; no cap per neighborhood
+  9. thin neighborhoods: a neighborhood whose shown list is one apartment keeps it only if nothing is open and its
+     score is at or above its experience's median (thin_neighborhood_cut)
+Candidate and phone-call lists (hood_rank, needs_confirmation.csv, needs_live_check.csv) take two per building.
+Outputs: data/ranked_units.csv, data/group_exchange.csv, data/reference/queens_spectrum_definition.csv, the excluded_*.csv files
 """
 from __future__ import annotations
 
@@ -40,6 +43,7 @@ import os  # noqa: E402
 # never set in a normal run; scripts/check_registry.py asserts the shipped values on the output.
 MAX_PER_BUILDING, SHOWN, CANDIDATES = int(os.environ.get("HH_MAX_PER_BUILDING", 8)), 10 ** 6, 15
 NO_ELEVATOR_DOUBT = os.environ.get("HH_NO_ELEVATOR_DOUBT") == "1"
+NO_THIN_RULE = os.environ.get("HH_NO_THIN_RULE") == "1"          # measurement only: the shown set before the thin-neighborhood rule
 # MAX_PER_BUILDING (owner, 2026-11-16): the page now groups apartments under their building, so up to 8 units of a
 # building are shown (it was 2), in rank order inside the building by the same score. CAND_PER_BUILDING keeps the
 # candidate / phone-call lists (hood_rank, needs_confirmation, needs_live_check) at two per building, as before.
@@ -96,6 +100,28 @@ def parking_rank(t):
     if "street" in t:
         return 1
     return np.nan
+
+
+def thin_neighborhood_cut(hood_id, group_key, shown, rank_score, open_items):
+    """True for the single shown apartment of a neighborhood that is NOT both well attested (open_items == 0) and
+    promising (rank score at or above the median of the shown apartments of its experience). All arguments are
+    aligned Series; the medians are taken over `shown` as given (before the rule)."""
+    shown = shown.astype(bool)
+    n = hood_id[shown].value_counts()
+    single = shown & hood_id.map(n).eq(1)
+    med = rank_score[shown].groupby(group_key[shown]).median()
+    keep = (open_items == 0) & (rank_score >= group_key.map(med))
+    return single & ~keep
+
+
+def in_unit_laundry(laundry_text, in_unit_col):
+    """In-unit laundry: the amenities column says yes, or the listing's laundry text says in unit. The old test looked for
+    the word "yes" anywhere in the two fields joined, so "laundry: yes" with the amenities column saying on_site_only
+    (a shared laundry room) scored as a washer in the apartment, as did "... (not in unit)"."""
+    txt, col = laundry_text.fillna("").astype(str).str.lower(), in_unit_col.fillna("").astype(str).str.lower().str.strip()
+    yes = col.str.startswith("yes") | txt.str.contains(r"in[ _-]unit|washer(?: and |/|, | & )dryer in")
+    no = col.str.contains(r"on_site_only|^no\b") | txt.str.contains(r"not in[ _-]unit|no in[ _-]unit")
+    return yes & ~no
 
 
 SETTLED_BY_PHONE = "confirmed_by_phone"
@@ -184,6 +210,19 @@ def main():
     n_hard = int((hard != "").sum()); u = u[hard == ""].copy()
     s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
 
+    # ---- owner, 2026-11-16: "if there's anything that's not a real apartment and just a floor plan, it shouldn't be in any
+    # of this". Only rows that ARE an apartment go on (parsers.listing_kind: from the source's structure, then the label's
+    # shape). Floor plans, building-page prices with no unit and co-living rooms stay in the data with the status
+    # not_an_apartment (data/excluded_not_an_apartment.csv): never ranked, shown, counted or put on a card.
+    # the kind was decided at the listing gate on the listing's own fields (gates.py); recomputed only for a table without it
+    kind = s("listing_kind") if "listing_kind" in u and s("listing_kind").ne("").all() else \
+        pd.Series([parsers.listing_kind(a_, b_, c_, d_, e_) for a_, b_, c_, d_, e_ in zip(s("unit"), s("detail_level"), s("listing_id"), s("listing_type"), s("building_name"))], index=u.index)
+    u["listing_kind"] = kind
+    na = kind.ne("unit")
+    u[na].assign(status="not_an_apartment", drop_reason=kind[na].map(parsers.NOT_AN_APARTMENT_WHY)).to_csv(DATA / "excluded_not_an_apartment.csv", index=False)
+    n_na = int(na.sum()); u = u[~na].copy()
+    s = lambda c: u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)
+
     # ---- reviewed verdicts (independent check 2): data/evidence/review_verdicts.csv holds one row per unit whose
     # evidence a reviewer has read. remove -> excluded here, before ranking, with the reviewer's reason.
     # asterisk -> the unit counts as having that open fact (below). ok -> nothing added. A verdict never closes a fact
@@ -225,7 +264,7 @@ def main():
     reasons = pd.Series("", index=u.index)
     for cond, why in [(age >= 60, "listing 60+ days old"), ((s("unit") == "") & (s("building_name") == ""), "no unit or building named"),
                       (s("notes").str.contains("listhub|propertyware", case=False), "thin syndicated feed"),
-                      (s("notes").str.contains("CONFLICT"), "conflicting dog policy"), (u.all_in < 0.6 * med, "price far below the neighborhood"),
+                      (u.all_in < 0.6 * med, "price far below the neighborhood"),
                       (s("live_notes").str.contains("not an open-market|far under market|not genuine|scam|listing looks stale|duplicate candidate|out-of-state phone", case=False), "live check judged the listing doubtful")]:
         reasons = pd.Series(np.where(cond, reasons + why + "; ", reasons), index=u.index)
     # Open gate facts (plan Part 5; independent check W1-W3, W20). A unit with one is ranked but held back with the
@@ -243,11 +282,22 @@ def main():
     # a fact answered on the phone is settled: neither an older evidence row nor an earlier reviewer's asterisk reopens it
     phone_e, phone_d = s("elevator_basis").eq(SETTLED_BY_PHONE), s("dogs_allowed_basis").eq(SETTLED_BY_PHONE)
     phone_av = s("call_available").ne("")
-    base_e = s("elevator_basis").isin(["inferred", "", "unknown"]) | s("elevator").str.lower().ne("yes")
-    # owner, 2026-11-16: a building in the reviewed doubt table, or a tag-only elevator in a complex the data shows to be
-    # multi-building garden-style (build_master.py: elevator_doubt), is an open gate fact: "confirm an elevator serves this apartment"
+    # ONE ELEVATOR RULE (parsers.elevator_rule, the truth table the listing gate uses): established -> settled; open ->
+    # one open gate fact; unknown -> not shown. A reviewer's elevator asterisk and the doubt table open it; a phone
+    # answer settles it. owner, 2026-11-16: a building in the reviewed doubt table, or a tag-only elevator in a complex
+    # the data shows to be multi-building garden-style (build_master.py), is "confirm an elevator serves this apartment".
+    v_el = vhas("elevator")
+    cols_e = ["elevator", "elevator_basis", "elevator_height_basis", "pluto_floors", "pluto_lot_ok", "elevator_evidence_open", "elevator_doubt",
+              "building_floors", "building_floors_basis", "unit_floor", "unit_floor_basis", "building_type", "building_type_basis"]
+    E_ = pd.DataFrame({c: s(c) for c in cols_e})
+    E_["unit_floor"] = E_.unit_floor.str.replace(r"\.0$", "", regex=True)
+    res_e = [parsers.elevator_rule_master(lambda c, r=r: r[c], reviewer_open=bool(v), use_doubt=not NO_ELEVATOR_DOUBT) for r, v in zip(E_.to_dict("records"), v_el)]
+    st_e = pd.Series([x[0] for x in res_e], index=u.index)
+    bs_e = pd.Series([x[1] for x in res_e], index=u.index)
+    u["elevator_rule_status"], u["elevator_rule_basis"] = st_e, bs_e
+    base_e = st_e.isin(["unknown", "no"]) | (st_e.eq("open") & bs_e.str.startswith("inferred"))    # no page or record states one
     doubt_e = s("elevator_doubt").ne("") & ~phone_e & (not NO_ELEVATOR_DOUBT)
-    inf_e = base_e | ((s("elevator_evidence_open").ne("") | vhas("elevator")) & ~phone_e) | doubt_e
+    inf_e = st_e.ne("established")
     fb, fk = s("unit_floor_basis"), s("unit_floor_label_kind")
     floor_settled = fb.isin(["confirmed", "stated", SETTLED_BY_PHONE])
     floor_from_label_ok = fb.eq("inferred") & fk.eq("simple") & (fl >= 3)
@@ -256,17 +306,22 @@ def main():
     # dogs: allowed must be stated or confirmed, and dogs must be NAMED as allowed (D2, D3): an unconfirmed evidence
     # row, "pets upon approval", "case by case" or small pets with dogs unnamed leave the fact open
     base_d = s("dogs_allowed").str.lower().ne("yes")
-    dog_open = base_d | ((s("dogs_evidence_open").ne("") | vhas("dogs")) & ~phone_d)
+    # A dog policy that CONFLICTS between sources is ONE open gate fact (dogs), not a removal and not "sketchy" (owner's
+    # latest rule; the harvester's "CONFLICT ..." note used to drop the unit as sketchy). It is settled where the
+    # building's own or its manager's page, or a phone call, says dogs are allowed. Only a clear "no dogs" on the
+    # building's own page removes (dogs_allowed = no, above). A conflict about the SIZE of dog only ("Size allowed:
+    # Small") is not about whether dogs are allowed: it passes like "small dogs", with the weight question.
+    note_conflict = s("notes").str.contains("CONFLICT")
+    size_conflict = s("notes").str.contains("CONFLICT on dog size")
+    dog_conflict_open = note_conflict & ~size_conflict & ~s("dogs_allowed_basis").isin([SETTLED_BY_PHONE, "confirmed", "community_page"])
+    dog_open = base_d | ((s("dogs_evidence_open").ne("") | vhas("dogs") | dog_conflict_open) & ~phone_d)
     no_limit = s("dog_weight_limit_lb").str.lower().eq("no limit")
-    dog_small = s("dog_size_only").ne("") & wl.isna() & ~no_limit
+    dog_small = (s("dog_size_only").ne("") | size_conflict) & wl.isna() & ~no_limit
     # 4a: "weight restrictions apply" / a weight limit with no number passes like "small dogs", with the same tour question
     dog_wl_unstated = s("dog_weight_unstated").ne("") & wl.isna() & ~no_limit & ~dog_small
-    # An elevator "inferred from height" only counts as one open fact when a page or record gives the building 6+ floors.
-    # Where the height itself was read off a unit label ("36D", "801"), the elevator is simply unknown: not shown.
-    bfl = pd.to_numeric(s("building_floors"), errors="coerce").where(~s("building_floors_basis").isin(["inferred", ""]))
-    # the city's floor count is used only when the tax lot is the listing's own address (D16)
-    tall = (bfl.fillna(0) >= 6) | ((pd.to_numeric(s("pluto_floors"), errors="coerce").fillna(0) >= 6) & s("pluto_lot_ok").eq("yes"))
-    weak_e = base_e & ~tall
+    # An elevator "inferred from height" counts as ONE open fact only when a page or record gives a real height (the rule's
+    # status "open"). Where nothing but a unit label ("36D", "801") suggests the height, the status is "unknown": not shown.
+    weak_e = st_e.isin(["unknown", "no"])
     # ---- the other things a renter must not find out later (independent check 2)
     #  lease      the listed price belongs to a lease longer than 13 months, or is only "the lowest over the lease terms" (D8)
     #  cost       all-in within $100 of the cap while pet rent, parking or required fees is unknown and counted as $0 (D12)
@@ -283,7 +338,9 @@ def main():
     # owner, 2026-11-16: within the cap on what is known, over it once the unknown parking and fee lines take their medians
     likely = pd.to_numeric(s("all_in_likely"), errors="coerce")
     cost_open = (u.all_in <= CAP) & (likely > CAP)
-    plan_only = s("unit").map(parsers.unit_label_key).eq("") & (s("detail_level").eq("building_floorplan") | s("listing_id").str.contains(":plan-") | s("unit").str.strip().ne(""))
+    # D26: a floor-plan row (parsers.listing_kind, from the source's structure and the label's shape), not a named apartment
+    # (floor-plan rows were removed above as not_an_apartment; nothing here is a plan any more)
+    plan_only = pd.Series(False, index=u.index)
     avail_open = (plan_only | vhas("not_available")) & ~phone_av
     # 4b: a page last changed more than 60 days before it was read (no second site), or an availability date over six
     # months old, is the open item "listing" by rule; it is not counted twice when a reviewer already wrote it up as availability
@@ -312,7 +369,8 @@ def main():
         ("floor", inf_f, "floor", None, None),
         ("dogs", dog_open, "dogs allowed",
          np.where(base_d, "Two listing sites disagree on whether dogs are allowed, and the building's own page does not settle it.",
-                  "Dogs are not confirmed as allowed here: " + s("dogs_evidence_open").str.replace("the evidence pass could not confirm it: ", "", regex=False).str[:140]),
+                  np.where(s("dogs_evidence_open").ne(""), "Dogs are not confirmed as allowed here: " + s("dogs_evidence_open").str.replace("the evidence pass could not confirm it: ", "", regex=False).str[:140],
+                           "Two sources disagree on whether dogs are allowed here, and no page of the building's own settles it.")),
          "Are dogs allowed? (dogs must be named as allowed, not 'pets on approval')"),
         ("lease", lease_open, "lease term", lease_why, "What is the rent on a 12-month lease?"),
         ("cost", cost_open, COST_DISCLOSURE, COST_DISCLOSURE_TEXT + ": $" + u.all_in.round().astype(int).astype(str) + " a month on what is published; about $"
@@ -471,7 +529,7 @@ def main():
         return np.where(yes, w, np.where(known, 0.0, 0.25 * w))
     security = (pts(doorman24, doorman_known, 3) + pts(has_doorman & ~doorman24, doorman_known, 2)
                 + pts(controlled, False, 2.5) + pts(has("package_room"), False, 1))
-    comfort = (pts(laundry.str.contains("in unit|in_unit|in-unit|yes"), laundry.str.strip().ne(""), 2.5)
+    comfort = (pts(in_unit_laundry(s("laundry"), s("in_unit_laundry")), laundry.str.strip().ne(""), 2.5)
                + pts(has("gym"), False, 1) + pts(has("roof_deck_or_outdoor_space"), False, 1) + pts(has("balcony_some_units"), False, 0.5)
                + pts(has("coworking_or_lounge"), False, 1.5) + pts(s("elevator_basis").isin([SETTLED_BY_PHONE, "confirmed", "amenities_page", "official_record", "stated"]), True, 1))
     year = pd.to_numeric(a("year_built").replace("", np.nan), errors="coerce").fillna(n("pluto_year"))
@@ -588,6 +646,21 @@ def main():
     u["shown_rank"] = np.nan
     u.loc[ok, "shown_rank"] = u[ok].groupby("hood_id").cumcount() + 1
     u["shown"] = u.shown_rank <= SHOWN
+    # ---- THIN NEIGHBORHOODS (owner, 2026-11-16): "if 46 of the 104 neighborhoods show one apartment and you don't have
+    # sufficient data on those, cut them, unless one is really promising and well attested". A neighborhood whose shown
+    # list is exactly ONE apartment keeps it only if the apartment is
+    #   (a) well attested: nothing open at all (no open gate fact and seen live in the evidence pass: open_items == 0);
+    #       disclosures do not count against it; and
+    #   (b) promising: its rank score is at or above the median rank score of the apartments shown in its experience,
+    #       the median being taken BEFORE this rule so the rule does not feed back on itself.
+    # Applied once: a neighborhood with two shown apartments is not touched. The cut apartment stays in this file with
+    # shown = False and not_shown_reason = thin_neighborhood.
+    u["shown_before_thin_rule"] = u.shown
+    thin = thin_neighborhood_cut(u.hood_id, u.group_key, u.shown, u.rank_score, u.open_items) if not NO_THIN_RULE else pd.Series(False, index=u.index)
+    u["thin_neighborhood"] = thin
+    u["not_shown_reason"] = np.where(thin, "thin_neighborhood", "")
+    u.loc[thin, "shown"] = False
+    u.loc[thin, "shown_rank"] = np.nan
     n_showable_b = u[showable].groupby("building_id").size()
     u["more_in_building"] = np.where(u.shown, (u.building_id.map(n_showable_b).fillna(0) - MAX_PER_BUILDING).clip(lower=0), np.nan)
     u["confirm_asterisk"] = np.where(u.open_items >= 1, "yes", "")
@@ -648,7 +721,7 @@ def main():
     print(f"evidence: {n_ex} units excluded, shown {int(u.shown.sum())}, avoid cards {int(u.avoid_card.sum())}, of them with an asterisk {int((u.shown & (u.confirm_asterisk == 'yes')).sum())} "
           f"({u[u.shown & (u.confirm_asterisk == 'yes')].confirm_what.value_counts().to_dict()}), held for a confirmation {int(u.held_for_confirmation.sum())}, "
           f"waiting for a live check {int(u.needs_live_check.sum())}")
-    print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_rev} removed by a reviewed verdict -> -{n_sib} sibling floor rule -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
+    print(f"stages: {n_in} costed -> -{n_cost} over the all-in cap -> -{n_cut} Jamaica safety rule -> -{n_hard} failed a gate on confirmed facts -> -{n_na} not an apartment (floor plan, building price, co-living room) -> -{n_rev} removed by a reviewed verdict -> -{n_sib} sibling floor rule -> -{n_sk} sketchy -> -{n_ex} evidence exclusions -> {len(u)} ranked")
     print(f"shown buildings {u[u.shown].building_id.nunique()}; disclosures: " + str(pd.Series([d['what'] for x in u[u.shown].disclosures if x for d in json.loads(x)]).value_counts().to_dict()))
     print(f"(kept {len(u)} units; candidates {int(u.candidate.sum())}; shown {int(u.shown_pre_evidence.sum())}; pools: {u.pool.value_counts().to_dict()}")
 

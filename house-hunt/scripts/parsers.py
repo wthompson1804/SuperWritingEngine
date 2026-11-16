@@ -59,12 +59,115 @@ def unit_key(unit) -> str:
 
 
 _PLAN_LABEL = re.compile(r"\bbeds?\b|\bbaths?\b|\$|\bstudio\b|floor ?plan|^plan\b|\bbedroom", re.I)
+# Apartment List names a floor plan by the unit LINES that share it: 'B, H, K, R - Small-1', 'C, J, L, P, S - Large-1',
+# 'A - Renovated-1', 'G - Small-1' (independent check 3, D26). A list of lines, or one line, then ' - <plan name>-<n>'.
+_PLAN_LINES = re.compile(r"^\s*[a-z0-9]{1,3}(?:\s*,\s*[a-z0-9]{1,3})+\s+-\s+\S|^\s*[a-z0-9]{1,3}\s+-\s+[a-z][a-z ]*-\d+\s*$", re.I)
+
+
+def is_plan_label(unit) -> bool:
+    """True when a unit label describes a floor plan instead of naming one apartment: '1 bed, 1 bath, $1675',
+    '1 Bed - 1 Bath', '1 Bedroom Large', '907 (floor plan)', 'B, H, K, R - Small-1', 'A - Large-1'.
+    'Lincoln House at Hamilton Park - 107' (a building name, then a unit) and '206-A' are units."""
+    u = str(unit or "")
+    return bool(_PLAN_LABEL.search(u) or _PLAN_LINES.search(u))
 
 
 def unit_label_key(unit) -> str:
-    """unit_key, but '' for a label that describes a floor plan instead of naming a unit ('1 bed, 1 bath, $1675',
-    '1 Bed - 1 Bath', '907 (floor plan)'): such a row is not a named unit (independent check 2, D1, D17)."""
-    return "" if _PLAN_LABEL.search(str(unit or "")) else unit_key(unit)
+    """unit_key, but '' for a label that describes a floor plan instead of naming a unit (is_plan_label): such a row is
+    not a named unit (independent check 2, D1, D17; check 3, D26)."""
+    return "" if is_plan_label(unit) else unit_key(unit)
+
+
+LISTING_KINDS = ("unit", "floor_plan", "building_offer", "private_room")
+NOT_AN_APARTMENT_WHY = {
+    "floor_plan": "a floor plan, not an apartment: the source gives a plan's price, with no unit number for one specific home",
+    "building_offer": "a building page's price with no unit number: no specific apartment is named",
+    "private_room": "a private room in a co-living suite (shared apartment), not an apartment of her own",
+}
+_COLIVING = re.compile(r"co-?living", re.I)
+_TITLE_UNIT = re.compile(r"^\s*\d+[\w-]*\s+\S.*\s(?:-|#)\s*#?\d{1,4}[a-z]?\s*$", re.I)      # '<house number> <street> - <unit>'
+
+
+
+def listing_kind(unit, detail_level="", listing_id="", listing_type="", building_name="") -> str:
+    """What a listing row IS, from the source's structure first and the label's shape second (owner, 2026-11-16: "if
+    there's anything that's not a real apartment and just a floor plan, it shouldn't be in any of this").
+      'floor_plan'      a floor-plan row of a building page (detail_level building_floorplan, or ':plan-' in the id:
+                        Trulia's plan rows carry no unit number), or a label that names a plan (is_plan_label)
+      'building_offer'  a managed building's page price with no unit number at all (a "from $X" row; Zumper building
+                        pages, a manager's "one-bedroom" row)
+      'private_room'    a room of a shared suite in a co-living building ('448-3' = room 3 of suite 448)
+      'unit'            a real apartment: its own identifier for one specific home ('5D', 'PH2', 'B9-309', '022-265',
+                        'T526', 'Lincoln House at Hamilton Park - 107'), or a single-home listing page of its own
+                        (one address, one price) whose page gives no unit number
+    Only 'unit' rows are apartments. The others stay in the data with status not_an_apartment and are never ranked,
+    shown, counted or put on a card (rank.py). A unit is never merged into a floor plan (build_master.py)."""
+    dl = str(detail_level or "").strip().lower()
+    if dl == "building_floorplan" or ":plan-" in str(listing_id or ""):
+        return "floor_plan"
+    if is_plan_label(unit):
+        # One exception, from the source's structure: a property whose own title names the unit ('416 Highland Ave - 312',
+        # an owner's single apartment on Apartment List) is that one home, although its only row is labelled '1 Bed'.
+        return "unit" if _TITLE_UNIT.search(str(building_name or "")) else "floor_plan"
+    if not unit_key(unit):
+        return "building_offer" if dl == "building_page" or str(listing_type or "").strip().lower() == "managed_building" else "unit"
+    if _COLIVING.search(str(building_name or "")) and re.fullmatch(r"\d{2,4}-\d", clean_unit(unit)):
+        return "private_room"
+    return "unit"
+
+
+_ADDR_UNIT = re.compile(r"^(.*?[^\s,])\s*,?\s*(?:#\s*|\b(?:apt|apartment|unit|ste|suite)\b\.?\s*#?\s*)([a-z0-9][\w-]*)\s*((?:,.*)?)$", re.I)
+
+
+def split_address_unit(address):
+    """('1775 Windsor Road', '215') from '1775 Windsor Road #215'; ('20 Gill Lane', '1E') from '20 Gill Lane, Apt. 1E';
+    ('138-28 Queens Boulevard, New York, NY 11435, USA', '5K') from '138-28 Queens Boulevard #5K, New York, NY 11435, USA'.
+    An address with no unit part comes back unchanged with ''. The unit belongs in the unit field, not in the address:
+    left in the address it hides the unit from the floor gate and from the duplicate check (Avalon Teaneck 215)."""
+    a = str(address or "").strip()
+    m = _ADDR_UNIT.match(a)
+    if not m or re.fullmatch(r"[\d\s-]+", m.group(1)):    # a street must remain ('1 Apt Rd' is not split)
+        return a, ""
+    return (m.group(1).rstrip(" #,") + m.group(3)).strip(), m.group(2)
+
+
+def sizes_agree(a, b, tol=0.03) -> bool:
+    """Two published sizes describe the same apartment: equal, within 3 percent (716 and 702 sq ft for Avalon Teaneck
+    215 on two sites), or one of them not published."""
+    x, y = _num_or_none(a), _num_or_none(b)
+    if x is None or y is None or x <= 0 or y <= 0:
+        return True
+    return abs(x - y) <= tol * max(x, y)
+
+
+def _num_or_none(v):
+    try:
+        x = float(str(v).replace(",", ""))
+        return x if math.isfinite(x) else None
+    except (TypeError, ValueError):
+        return None
+
+
+def rents_agree(a, b, tol=0.02) -> bool:
+    x, y = _num_or_none(a), _num_or_none(b)
+    return x is not None and y is not None and abs(x - y) <= tol * max(x, y)
+
+
+def same_listed_unit(unit_a, beds_a, sqft_a, rent_a, unit_b, beds_b, sqft_b, rent_b) -> bool:
+    """Two LABELLED unit rows of one building are the same apartment: the labels are equal, or one is the other with a
+    building prefix ('215' and '001-215': units_match) AND bedrooms are equal, the rents agree within 2 percent and the
+    sizes agree (sizes_agree). '001-215' and '002-215' are two apartments; a floor plan is never passed here."""
+    ka, kb = unit_key(unit_a), unit_key(unit_b)
+    if not ka or not kb:
+        return False
+    if ka == kb:
+        return True
+    return units_match(unit_a, unit_b) and _beds(beds_a) == _beds(beds_b) and rents_agree(rent_a, rent_b) and sizes_agree(sqft_a, sqft_b)
+
+
+def _beds(b):
+    x = _num_or_none(b)
+    return str(b).strip().lower() if x is None else x
 
 
 def unit_tail(unit) -> str:
@@ -1139,3 +1242,213 @@ RESIDENTS_BY_GROUP = re.compile(
 
 def characterises_residents_by_group(text) -> bool:
     return bool(RESIDENTS_BY_GROUP.search(str(text or "")))
+
+
+# ============================================================================================ THE ELEVATOR RULE
+# One rule for every stage (gates.py, build_master.py, rank.py). Before the consistency pass each stage decided "is the
+# elevator established" by itself and they disagreed: a management page's "high-rise" label passed the listing gate but
+# not the ranking; a page-stated unit floor of 6+ counted as height at the gate but not in the ranking; the city's
+# walk-up class on a neighbouring lot failed listings although neighbouring lots are not to be used.
+#
+# TRUTH TABLE (first matching row wins)
+#   1  a phone answer                                                             -> established / no   (confirmed_by_phone)
+#   2  a page of the listing or the building says there is no elevator (walk-up)  -> no
+#   3  a positive source exists:
+#        S1 stated on a page (the listing, a listing site's amenity list, the building's or manager's own page)
+#        S2 the city's elevator class on the listing's OWN lot, the device list not showing zero active elevators
+#        S3 an evidence row graded confirmed or stated; a parsed amenities page
+#      3a ... and something speaks against it: an evidence row contradicts, the city classes the listing's own lot as
+#             walk-up, the building is in data/reference/elevator_doubt.csv (or the garden-style rule), or a reviewer's
+#             verdict opens it                                                    -> open
+#      3b ... and nothing speaks against it                                       -> established
+#   4  no positive source, and the city classes the listing's OWN lot as walk-up,
+#      with no height of 6+ floors on a page                                      -> no
+#   5  no positive source, a REAL height of 6+ floors: a page's floor count or floor list, a floor a page states for a
+#      unit, the city's floor count on the listing's own lot, a harvester's or checker's "6+ floors" read from a page's
+#      floor list or floor field, or "high-rise" on the building's own / manager's page (the wording on any other page
+#      counts only with a floor count of 6+ beside it, which is already a height)  -> open ("inferred from height")
+#   6  anything else                                                              -> unknown
+# NEVER used, to pass or to fail: a floor read from a unit label ("42M", "1804"); a neighbouring ("nearest") tax lot.
+# What the stages do with the result:
+#   listing gate (gates.py)   established, open -> pass;  no -> fail;  unknown -> pending
+#   ranking (rank.py)         established -> settled;  open -> ONE open gate fact (asterisk);  unknown -> not shown;
+#                             no -> removed
+ELEVATOR_MIN_FLOORS = 6          # owner, 2026-11-15: a building of 6+ floors is treated as having an elevator (asterisk)
+EXACT_LOT = "house_number+location"
+_LOT_MATCHES = (EXACT_LOT, "nearest_lot")
+
+
+def lot_is_exact(match_basis, listing_address, lot_address) -> bool:
+    """The tax lot IS the listing's address (independent check 2, D16): the lot lookup found one (by house number and
+    location, or as the nearest lot) AND the lot's address agrees with the listing's (lot_address_agrees). A nearest
+    lot at another address ('142-38' matched to '142-32') is a near miss and is never used."""
+    return str(match_basis) in _LOT_MATCHES and lot_address_agrees(listing_address, lot_address)
+
+
+def _num(v):
+    try:
+        x = float(str(v).replace(",", ""))
+        return x if math.isfinite(x) else None
+    except (TypeError, ValueError):
+        return None
+
+
+def real_height(page_building_floors=None, page_unit_floor=None):
+    """The building's height in floors as a PAGE gives it, or None: a page's floor count or floor list, or a floor a
+    page STATES for a unit (the building is at least that tall). Callers must not pass a floor read from a unit label:
+    it is not a height. The city's floor count goes to elevator_rule separately (record_floors), because it counts only
+    on the listing's own lot."""
+    vals = [v for v in (_num(page_building_floors), _num(page_unit_floor)) if v is not None and v > 0]
+    return max(vals) if vals else None
+
+
+def is_high_rise(text) -> bool:
+    return "high-rise" in str(text or "").lower().replace(" ", "-")
+
+
+def elevator_rule(*, phone="", page_no=False, stated=False, record_class="", record_floors=None, lot_exact=False,
+                  active_devices=None, evidence="", contradicted=False, doubt=False, height=None, page_height_claim=False,
+                  high_rise_own_page=False):
+    """The one elevator rule (truth table above). Returns (status, basis):
+      status  'established' | 'open' | 'no' | 'unknown'
+      basis   'confirmed_by_phone', 'stated', 'nyc_pluto_building_class', 'evidence_confirmed', 'evidence_stated',
+              'amenities_page', 'inferred_6plus_floors', 'inferred_harvester', 'inferred_high_rise_label' or ''
+    Arguments (every one optional; what a stage does not know it leaves out):
+      phone               'yes' / 'no': the answer of a phone call
+      page_no             a page says there is no elevator
+      stated              a page states an elevator (listing page, a listing site's amenity list, own page)
+      record_class        'yes' / 'no' from the city's building class; used ONLY when lot_exact is true
+      record_floors       the city's floor count; used ONLY when lot_exact is true and the class is not walk-up
+      lot_exact           the tax lot is the listing's own address (lot_is_exact)
+      active_devices      the city's count of active passenger elevators on that lot (0 cancels the class)
+      evidence            'evidence_confirmed' / 'evidence_stated' / 'amenities_page': an evidence row or parsed page
+      contradicted        an evidence row, a reviewer or the building's own site speaks against the elevator
+      doubt               the building is in the reviewed doubt table, or caught by the garden-style rule
+      height              real_height(...), from a page: never a unit label
+      page_height_claim   a harvester or checker read 6+ floors from a page's floor list or floor field
+      high_rise_own_page  the building's own or its manager's page calls it a high-rise
+    """
+    phone = str(phone or "").strip().lower()
+    if phone in ("yes", "no"):
+        return ("established" if phone == "yes" else "no"), "confirmed_by_phone"
+    if page_no:
+        return "no", "stated"
+    rc = str(record_class or "").strip().lower() if lot_exact else ""        # a near-miss lot says nothing, either way
+    record_yes = rc == "yes" and not (active_devices is not None and active_devices <= 0)
+    basis = "stated" if stated else ("nyc_pluto_building_class" if record_yes else (evidence if evidence in ("evidence_confirmed", "evidence_stated", "amenities_page") else ""))
+    if basis:
+        against = contradicted or doubt or (rc == "no" and basis != "nyc_pluto_building_class")
+        return ("open" if against else "established"), basis
+    page_h, rec_h = _num(height), (_num(record_floors) if lot_exact and rc != "no" else None)
+    tall = max([v for v in (page_h, rec_h) if v is not None], default=0) >= ELEVATOR_MIN_FLOORS
+    page_tall = page_height_claim or (page_h is not None and page_h >= ELEVATOR_MIN_FLOORS) or high_rise_own_page
+    if rc == "no" and not page_tall:
+        return "no", "nyc_pluto_building_class"
+    if page_height_claim:
+        return "open", "inferred_harvester"
+    if tall:
+        return "open", "inferred_6plus_floors"
+    if high_rise_own_page:
+        return "open", "inferred_high_rise_label"
+    return "unknown", ""
+
+
+_MASTER_STATED = ("confirmed", "community_page", "amenities_page", "stated")
+_FLOOR_FROM_PAGE = ("confirmed_by_phone", "confirmed", "stated")
+
+
+def elevator_rule_master(get, reviewer_open=False, use_doubt=True):
+    """elevator_rule on a row of the master / ranked tables (rank.py, check_registry.py). `get(column)` returns the
+    row's value as a string ('' when missing). The merged elevator basis maps onto the rule's inputs:
+      confirmed_by_phone -> phone;  confirmed / community_page / amenities_page / stated -> stated on a page;
+      official_record -> the city's class on the listing's own lot (build_master.py enters it only there);
+      inferred / blank -> no positive source: only a real height can leave it open.
+    Height: the building's floor count unless it is itself inferred, a floor a page states for the unit, the city's
+    count on the listing's own lot, and the height finding the listing gate carried (elevator_height_basis)."""
+    el, basis = get("elevator").strip().lower(), get("elevator_basis").strip()
+    if basis == "confirmed_by_phone":
+        return elevator_rule(phone=el if el in ("yes", "no") else "")
+    hb = get("elevator_height_basis")
+    return elevator_rule(
+        page_no=el in ("no", "conflicting"),
+        stated=el == "yes" and basis in _MASTER_STATED,
+        record_class="yes" if el == "yes" and basis == "official_record" else "",
+        record_floors=get("pluto_floors"),
+        lot_exact=(el == "yes" and basis == "official_record") or get("pluto_lot_ok") == "yes",
+        contradicted=bool(get("elevator_evidence_open")) or reviewer_open,
+        doubt=use_doubt and bool(get("elevator_doubt")),
+        height=real_height(get("building_floors") if get("building_floors_basis") not in ("inferred", "") else None,
+                           get("unit_floor") if get("unit_floor_basis") in _FLOOR_FROM_PAGE else None),
+        page_height_claim="inferred_harvester" in hb,
+        high_rise_own_page="inferred_high_rise_label" in hb or (is_high_rise(get("building_type")) and get("building_type_basis") == "community_page"))
+
+
+# ---- secrets in URLs: a third party's API key must never sit in a data file (Trulia's Street View links carried one)
+_URL_SECRET = re.compile(r"(?<=[?&])(?:key|api_key|apikey|token|signature|sig|access_token)=[^&\s\"',]*&?", re.I)
+
+
+def strip_url_secrets(text) -> str:
+    """Remove key / token / signature query parameters from every URL in a text: '...&center=1,2&key=ABC&signature=XYZ'
+    -> '...&center=1,2'. Only the URLs are touched; everything else is left byte for byte."""
+    def fix(m):
+        u = _URL_SECRET.sub("", m.group(0))
+        return re.sub(r"[?&](?=,|$)", "", u) if u != m.group(0) else u
+    return re.sub(r"https?://[^\s\"'<>]+", fix, str(text))
+
+
+# ---- names shown on the page: a building's name is its NAME, not a listing title; a park's name must be a park's
+_ADDR_TAIL = re.compile(r",\s*[^,]+,\s*[A-Z]{2}\s+\d{5}(?:-\d{4})?(?:,\s*(?:USA?|United States))?\s*$")
+_STREET_WORD = (r"(?:st|street|ave|avenue|blvd|boulevard|rd|road|dr|drive|pl|place|ct|court|ln|lane|ter|terrace|pkwy|parkway|hwy|highway|way|sq|square|"
+                r"plz|plaza|tpke|turnpike|broadway|row|walk|loop|cir|circle)")
+_IS_ADDRESS = re.compile(r"^\s*\d+[\w-]*\s+(?:[\w.'-]+\s+){0,5}" + _STREET_WORD + r"\b\.?(?:\s+(?:n|s|e|w|north|south|east|west))?\s*$|"
+                         r"^\s*(?:[\w.'-]+\s+){1,4}" + _STREET_WORD + r"\s*(?:&|and|at)\s+(?:[\w.'-]+\s+){1,4}" + _STREET_WORD + r"\s*$", re.I)
+_MARKETING_TAIL = re.compile(r"\s+(?:\||~|–|—)\s+.*$|\s+-\s+(?:luxury|resort|apartments? (?:for rent|in)|brand new|now leasing|new construction)\b.*$", re.I)
+
+
+def street_address(address) -> str:
+    """The street part of an address that carries its city, state and ZIP: '219 Lenox Rd, Brooklyn, NY 11226, USA' ->
+    '219 Lenox Rd'; '31-20 54th Street, 31-20 54th St, Flushing, NY 11377, US' -> '31-20 54th Street'. An address
+    with no such tail is unchanged. (City, state and ZIP have their own fields.)"""
+    a = str(address or "").strip()
+    if not _ADDR_TAIL.search(a):
+        return a
+    return a.split(",")[0].strip()
+
+
+def clean_building_name(name, address="") -> str:
+    """A building's name for the page, or '' when the listing gave none. A listing TITLE is not a name:
+      '80East | Luxury Apartments | Dover, NJ'                         -> '80East'
+      'The Mark, Fairfield County ~ Resort-Inspired Luxury Living'     -> 'The Mark, Fairfield County'
+      '219 Lenox Rd #5G, Brooklyn, NY 11226, USA'                      -> ''   (it is the address; the page shows the address)
+      '31-20 54th Street #2fl , 31-20 54th St, Flushing, NY 11377, US' -> ''
+      'Kew Gardens Rd & 83rd Ave, New York, NY 11415, USA'             -> ''
+    A unit is never kept inside a name ('#5G' goes to the unit field: split_address_unit)."""
+    n = re.sub(r"\s+", " ", str(name or "")).strip()
+    if is_blank(n):
+        return ""
+    n = _MARKETING_TAIL.sub("", n).strip(" ,|~-")
+    bare, unit = split_address_unit(n)
+    street = street_address(bare)
+    listing_title = bool(unit) or street != bare or bool(re.search(r",\s*(?:USA?|United States)\s*$", n))     # a unit, or city / state / ZIP / country
+    if listing_title and (_IS_ADDRESS.match(street) or street != bare):
+        return ""                                  # the "name" is the listing's address line
+    if address and _norm_addr_words(street) == _norm_addr_words(street_address(split_address_unit(address)[0])):
+        return ""                                  # the name only repeats the building's own address
+    return bare if unit else n
+
+
+def _norm_addr_words(a) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", str(a).lower()).strip()
+
+
+_PARK_WORDS = re.compile(r"park|playground|green|garden|field|preserve|woods?\b|forest|reservation|commons?\b|beach|memorial|trail|reserve|sanctuary|arboretum|"
+                         r"meadow|pond|lake|recreation|conservation|refuge|grove|wildlife|nature|open space|lawn|ramble|glen\b|esplanade|promenade|"
+                         r"waterfront|boardwalk|riverwalk|marsh|island|triangle|oval|square", re.I)
+
+
+def park_name(name) -> str:
+    """The nearest green space's name when it reads as a park, else ''. OpenStreetMap tags many things leisure=park
+    ('Leif Ericson Drive', 'Baldwin Plaza', 'Orange County Fair', 'Old Campus'): the distance is still right, but the
+    page must say "a park", not a name that is not one."""
+    n = str(name or "").strip()
+    return n if n and n.lower() != "nan" and _PARK_WORDS.search(n) else ""

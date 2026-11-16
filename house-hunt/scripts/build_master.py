@@ -108,8 +108,37 @@ def assign_building_ids(U):
                     continue
                 if dist_m(la, lo, la2, lo2) <= 30:
                     parent[find(k2)] = find(k)
+    # A complex listed under a RANGE of house numbers ('55-57 Bank Street', the Continuum's own site) is the same building as
+    # the listings filed under either end of the range ('55 Bank Street', '57 Bank Street' on Greystar and Trulia): the
+    # same street and ZIP, the house number equal to one end, coordinates within RANGE_JOIN_M. The range's key stays the
+    # root, so its building_id does not change. Queens-style numbers ('83-33') are not ranges.
+    for key_r, a, b, street in {(k, *house_range(ad, z)) for k, ad, z in zip(U.street_key, U.address, U.zip5) if house_range(ad, z)}:
+        p_r = pts[pts.street_key == key_r]
+        for k2 in U.street_key.unique():
+            if k2 == key_r or not house_no(k2) or house_no(k2) not in (a, b) or k2.split(" ", 1)[1:] != [street]:
+                continue
+            p_2 = pts[pts.street_key == k2]
+            if len(p_r) and len(p_2) and dist_m(p_r.flat.iloc[0], p_r.flon.iloc[0], p_2.flat.iloc[0], p_2.flon.iloc[0]) <= RANGE_JOIN_M:
+                root = find(key_r)
+                parent[find(k2)] = root
     U["building_id"] = ["b_" + hashlib.sha1(find(k).encode()).hexdigest()[:10] for k in U.street_key]
     return U
+
+
+RANGE_JOIN_M = 400
+_QUEENS_ZIP = ("110", "111", "113", "114", "116")
+
+
+def house_range(address, zip5):
+    """('55', '57', 'bank st|10606') for '55-57 Bank Street' (a small ascending range of house numbers outside Queens),
+    else None. The third part is the street_key of the address without its house number."""
+    m = re.match(r"\s*(\d+)\s*-\s*(\d+)\s+(\S.*)$", str(address))
+    if not m or str(zip5)[:3] in _QUEENS_ZIP:
+        return None
+    a, b = int(m.group(1)), int(m.group(2))
+    if not (a < b and b - a <= 20 and len(m.group(1)) == len(m.group(2))):
+        return None
+    return m.group(1), m.group(2), street_key("0 " + m.group(3), zip5).split(" ", 1)[1]
 
 
 COORD_DISAGREE_M = 150
@@ -219,7 +248,7 @@ class Merge:
 CONFLICT_FIELDS = {"elevator", "dogs_allowed", "dog_weight_limit_lb", "parking_fee_monthly", "pet_rent_monthly",
                    "building_floors", "year_built"}
 TEXT_APPEND = {"dog_weight_unstated", "required_fees_text", "utilities_included", "concession_text_evidence", "optional_fees_text", "parking_text",
-               "listing_warning", "price_term_text", "elevator_evidence_open", "dogs_evidence_open"}
+               "listing_warning", "price_term_text", "elevator_evidence_open", "dogs_evidence_open", "elevator_height_basis"}
 GOOD_FLOORCOUNT = ("confirmed", "official_record", "community_page")     # floor counts trusted to bound a unit-label reading
 
 
@@ -384,6 +413,13 @@ def same_apartment_other_site(beds_a, sqft_a, rent_a, site_a, beds_b, sqft_b, re
     if not (sa > 0 and sa == sb) or str(beds_a) != str(beds_b) or url_site(site_a) == url_site(site_b):
         return False
     return abs(ra - rb) <= 0.02 * max(ra, rb)
+
+
+def prefixed_label(unit) -> str:
+    """The whole key of a label that carries a building prefix before the unit ('001-215' -> '001215'); '' for a plain
+    label ('215'). Two different prefixed labels with one tail are two apartments."""
+    key, tail = parsers.unit_key(unit), parsers.unit_tail(unit)
+    return key if tail and key.lstrip("0") != tail else ""
 
 
 def url_site(site) -> str:
@@ -577,7 +613,7 @@ def main():
         for r in PF.itertuples():
             if r.match_basis in ("house_number+location", "nearest_lot"):
                 lot_addr[r.addr_key] = r.pluto_address
-                lot_ok[r.addr_key] = parsers.lot_address_agrees(a_of.get(r.addr_key, r.addr_key.split("|")[0]), r.pluto_address)
+                lot_ok[r.addr_key] = parsers.lot_is_exact(r.match_basis, a_of.get(r.addr_key, r.addr_key.split("|")[0]), r.pluto_address)
     nrf = DATA / "evidence" / "nyc_records.csv"
     if nrf.exists():
         NR = pd.read_csv(nrf, dtype=str, keep_default_na=False)
@@ -596,14 +632,20 @@ def main():
     # ------------------------------------------------------------------ 5/6. listing rows + inference
     for r in U.itertuples():
         b, src = r.building_id, r.url
-        el_basis = getattr(r, "elevator_basis", "")
-        # a gate pass that rests on an evidence row or an amenities page (gates.elevator_evidence) is not a statement of
-        # this listing's own page: that evidence enters below from its own file, with its own source
-        if r.g_elevator == "pass" and not (el_basis.startswith("nyc") and not official_elevator_ok(r.addr_key)) \
-                and el_basis not in ("evidence_confirmed", "evidence_stated", "amenities_page"):
-            # 'stated' only when the page lists an elevator; a harvester's "6+ floors" note is an inference (W3)
-            M.add(b, "elevator", "yes", "inferred" if el_basis.startswith("inferred") else ("official_record" if el_basis.startswith("nyc") else "stated"),
-                  src if not el_basis.startswith("nyc") else "NYC PLUTO building class " + getattr(r, "pluto_class", ""))
+        el_basis, el_status = getattr(r, "elevator_basis", ""), getattr(r, "elevator_rule_status", "")
+        # The listing gate decided with parsers.elevator_rule; its basis is entered here. A basis that rests on an evidence
+        # row or an amenities page is not a statement of this listing's own page: that evidence enters below from its own
+        # file, with its own source.
+        if el_status in ("established", "open") and el_basis == "stated":
+            M.add(b, "elevator", "yes", "stated", src)
+        elif el_status in ("established", "open") and el_basis.startswith("nyc"):
+            M.add(b, "elevator", "yes", "official_record", "NYC PLUTO building class " + getattr(r, "pluto_class", ""))
+        # the height finding (a page's floor count, a floor a page states for a unit, the city's count on the listing's own
+        # lot, "high-rise" on the manager's page): an inference, and the fact that a REAL height exists, for rank.py
+        hb = getattr(r, "elevator_height_basis", "")
+        if hb:
+            M.add(b, "elevator", "yes", "inferred", src)
+            M.add(b, "elevator_height_basis", hb, "inferred", src)
         if str(getattr(r, "pluto_class", "")).upper().startswith("C") and lot_ok.get(r.addr_key, False) and r.g_elevator == "pass":
             # the city classes this lot (an exact address match) as walk-up apartments while a listing names an elevator:
             # the official record contradicts the listing, so the elevator stays open (357 Grove St, 1512 Park Pl, Brooklyn)
@@ -648,7 +690,8 @@ def main():
         cu = "; ".join(x for x in [("included: " + r.community_utilities_included) if not is_blank(r.community_utilities_included) else "",
                                    ("resident pays " + r.community_utilities_resident_pays) if not is_blank(r.community_utilities_resident_pays) else ""] if x)
         M.add(b, "utilities_included", cu, "community_page", "data/reference/community_facts.csv")
-        M.add(b, "building_name", r.building_name, "stated", src)
+        # a listing TITLE is not a name: marketing tails cut, an address-as-name dropped (the page shows the address)
+        M.add(b, "building_name", parsers.clean_building_name(r.building_name, r.address), "stated", src)
         for col, fld in [("pluto_floors", "building_floors"), ("pluto_year", "year_built"), ("pluto_units", "unit_count")]:
             v = getattr(r, col, "")
             if re.fullmatch(r"[\d.]+", v or "") and float(v) > 0 and lot_ok.get(r.addr_key, False):
@@ -984,35 +1027,62 @@ def main():
     unit_cols = ["listing_id", "building_id", "addr_key", "source_site", "url", "building_url", "also_seen_at", "detail_level", "first_seen",
                  "last_seen", "unit", "beds", "baths", "sqft", "listed_rent", "price_basis", "concession_text", "available_date_text",
                  "available_date", "floor", "floor_used", "floor_basis", "floor_label_kind", "g_floor", "listing_age_days", "stale_listing", "photo_url", "raw_path", "notes",
-                 "other_monthly_fees_json", "listing_type", "gate_status", "resolved_by"]
+                 "other_monthly_fees_json", "listing_type", "gate_status", "resolved_by", "listing_kind", "unit_basis", "address_as_listed"]
     MU = U[[c for c in unit_cols if c in U.columns]].copy()
 
     # the same unit listed twice inside one building (W8): same normalized label, or - with no label - the same beds,
     # sq ft and rent. Keep the building's own site over an aggregator, then the fuller row; remember the other links.
+    # Pipeline consistency pass (docs/PIPELINE_CONSISTENCY_PASS.md), by KIND of row (parsers.listing_kind):
+    #   unit vs unit, both labelled   the same label, or one label is the other with a building prefix ('215' and
+    #                                 '001-215') and bedrooms, rent (2 percent) and size (3 percent, or one not published)
+    #                                 agree (parsers.same_listed_unit). Avalon Teaneck 215 was shown twice because the two
+    #                                 sites publish 716 and 702 sq ft. '001-215' and '002-215' stay two apartments.
+    #   unit vs unit, one unlabelled  the same beds, rent and size; or two sites agreeing on beds, size and rent within 2 percent (D19)
+    #   floor plan vs floor plan      the same plan label, or the same beds, rent and size
+    #   floor plan vs unit            a unit is NEVER merged into a floor plan (units are placed first). A plan row that only
+    #                                 repeats a named unit's beds, rent and size is redundant and dropped; no label matching
+    #                                 is ever done between a plan and a unit
+    if "listing_kind" not in MU:
+        MU["listing_kind"] = [parsers.listing_kind(u_, d_, l_, t_) for u_, d_, l_, t_ in zip(MU.unit, MU.detail_level, MU.listing_id, MU.listing_type)]
     MU["ukey_"] = MU.unit.map(parsers.unit_label_key)       # '1 bed, 1 bath, $1675' is a plan description, not a unit (D17)
-    MU["utail_"] = MU.unit.map(parsers.unit_tail)
+    MU["pkey_"] = [parsers.unit_key(u_) if k_ == "floor_plan" else "" for u_, k_ in zip(MU.unit, MU.listing_kind)]
     MU["upri_"] = (~MU.source_site.map(is_aggregator)).astype(int) * 4 + (MU.detail_level.str.lower() != "card").astype(int) * 2 + (MU.ukey_ != "").astype(int)
-    MU = MU.sort_values(["building_id", "upri_"], ascending=[True, False], kind="stable")
+    MU["kpri_"] = (MU.listing_kind != "floor_plan").astype(int)          # units and building offers before floor plans
+    MU = MU.sort_values(["building_id", "kpri_", "upri_"], ascending=[True, False, False], kind="stable")
     keep_of = {}
     for b, g in MU.groupby("building_id", sort=False):
-        kept = []                                           # (listing_id, key, tail, beds, sqft, rent)
+        kept = []                                           # dicts: id, kind, unit, key, plan key, beds, sqft, rent, site, absorbed labels
         for r in g.itertuples():
             dup = None
             for k in kept:
-                same_money = (k[3], k[5]) == (r.beds, r.listed_rent) and (k[4] == r.sqft or "" in (k[4], r.sqft))
-                if r.ukey_ and k[1]:
-                    if r.ukey_ == k[1] or (same_money and r.utail_ and r.utail_ == k[2]):
-                        dup = k[0]
+                same_money = (k["beds"], k["rent"]) == (r.beds, r.listed_rent) and (k["sqft"] == r.sqft or "" in (k["sqft"], r.sqft))
+                plan_a, plan_b = k["kind"] == "floor_plan", r.listing_kind == "floor_plan"
+                if plan_a != plan_b:
+                    # A unit is never merged into a floor plan (units sort first, so the kept row here is the unit). A plan
+                    # row that only repeats a named unit's beds, rent and size ("1 bed, 1 bath, $1675" beside unit 302 of
+                    # the Arcade, independent check 2 D17) is redundant and is dropped: it must not be shown as a second place.
+                    if plan_b and same_money:
+                        dup = k["id"]
+                elif plan_a:
+                    if (r.pkey_ and r.pkey_ == k["pkey"]) or same_money:
+                        dup = k["id"]
+                elif r.ukey_ and k["key"]:
+                    # a second prefixed label with the same tail ('002-215' after '001-215' was merged into '215') is another apartment
+                    other_prefix = bool(prefixed_label(r.unit)) and any(prefixed_label(lab) not in ("", prefixed_label(r.unit)) for _, lab in k["labels"])
+                    if r.ukey_ == k["key"] or (not other_prefix and parsers.same_listed_unit(k["unit"], k["beds"], k["sqft"], k["rent"], r.unit, r.beds, r.sqft, r.listed_rent)):
+                        dup = k["id"]
                 elif same_money:                            # at least one of the two has no unit label
-                    dup = k[0]
-                elif same_apartment_other_site(k[3], k[4], k[5], k[6], r.beds, r.sqft, r.listed_rent, r.source_site):
-                    dup = k[0]                              # D19: 12 Brooklyn Ave 501 ($2,675, Trulia) and a Zumper row with no unit ($2,700)
+                    dup = k["id"]
+                elif same_apartment_other_site(k["beds"], k["sqft"], k["rent"], k["site"], r.beds, r.sqft, r.listed_rent, r.source_site):
+                    dup = k["id"]                           # D19: 12 Brooklyn Ave 501 ($2,675, Trulia) and a Zumper row with no unit ($2,700)
                 if dup:
+                    k["labels"].append((r.ukey_, r.unit))
                     break
             if dup:
                 keep_of[r.listing_id] = dup
             else:
-                kept.append((r.listing_id, r.ukey_, r.utail_, r.beds, r.sqft, r.listed_rent, r.source_site))
+                kept.append({"id": r.listing_id, "kind": r.listing_kind, "unit": r.unit, "key": r.ukey_, "pkey": r.pkey_, "beds": r.beds, "sqft": r.sqft,
+                             "rent": r.listed_rent, "site": r.source_site, "labels": [(r.ukey_, r.unit)]})
     dups = MU[MU.listing_id.isin(keep_of)]
     extra_links = dups.groupby(dups.listing_id.map(keep_of)).agg(url=("url", " ".join), ids=("listing_id", " ".join))
     MU = MU[~MU.listing_id.isin(keep_of)].copy()
@@ -1020,7 +1090,7 @@ def main():
     MU["duplicate_listing_ids"] = MU.listing_id.map(extra_links.ids).fillna("")
     dups.assign(kept_listing_id=dups.listing_id.map(keep_of))[["listing_id", "kept_listing_id", "building_id", "unit", "beds", "sqft", "listed_rent", "source_site", "url"]] \
         .to_csv(DATA / "duplicate_units.csv", index=False)
-    MU = MU.drop(columns=["upri_"])
+    MU = MU.drop(columns=["upri_", "pkey_", "kpri_"])
 
     # live check: status and price now. Unit labels are matched the same way on both sides (W17).
     live_cols = [("status", "live_status"), ("price_now", "live_price"), ("available_now_text", "live_available_text"), ("checked_at", "live_checked_at"), ("notes", "live_notes"),
@@ -1136,7 +1206,7 @@ def main():
     MU["unit_floor"], MU["unit_floor_basis"], MU["unit_floor_source"], MU["unit_floor_label_kind"] = fl, flb, fls, flk
     unmatched = [fr[:6] for j, fr in enumerate(floor_rows) if j not in used and fr[3] in ("confirmed", "unparsed")]
     pd.DataFrame(unmatched, columns=["building_id", "unit_label", "floor", "basis", "source_url", "value"]).to_csv(DATA / "reference" / "floor_confirm_unmatched.csv", index=False)
-    MU = MU.drop(columns=["ukey_", "utail_"])
+    MU = MU.drop(columns=["ukey_"])
     bcols = [c for c in B.columns if c not in MU.columns]
     MU = MU.join(B[bcols], on="building_id")
     for r in OV[OV.scope == "unit"].itertuples():      # D17: EDGE 408 and 410 are in the building at 170 Avenue F

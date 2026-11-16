@@ -360,8 +360,8 @@ s 5th st 308 harrison nj 07029 usa|07029,b_4fd29fde13,s 5 st|07029
 38 crown st|06510,b_e624f3ffb0,38 crown st|06510
 900 chapel st|06510,b_0b58d6c3dd,900 chapel st|06510
 78 olive st|06510,b_5bd2e71f71,78 olive st|06510
-55 bank st|10606,b_a291f1c5c9,55 bank st|10606
-57 bank st|10606,b_fab3c8eb02,57 bank st|10606
+55 bank st|10606,b_144b021ca5,55 bank st|10606
+57 bank st|10606,b_144b021ca5,57 bank st|10606
 650 nj-23|07470,b_0284360938,650 nj-23|07470
 589 bedford st|06901,b_cf509a364e,589 bedford st|06901
 84 w park pl|06901,b_f6c77f554e,84 w park pl|06901
@@ -519,7 +519,6 @@ william st & john st 6e new york ny 10038 usa|10038,b_4e18914e44,william st john
 1010 rogers ave|11226,b_fefa6b0d9b,1010 rogers ave|11226
 1710 newkirk ave|11226,b_477dd98886,1710 newkirk ave|11226
 250 clarkson ave|11226,b_e03951c019,250 clarkson ave|11226
-2561 bedford ave|11226,b_b72dca5695,2561 bedford ave|11226
 290 linden blvd|11226,b_d19c276bb4,290 linden blvd|11226
 61 clarkson ave|11226,b_1e55665226,61 clarkson ave|11226
 2920 brighton 4th st|11235,b_54acdfff28,2920 brighton 4 st|11235
@@ -586,6 +585,8 @@ william st & john st 6e new york ny 10038 usa|10038,b_4e18914e44,william st john
 13324 sanford ave 6g flushing ny 11355 usa|11355,b_0f0fcfc79c,13324 sanford ave|11355
 140-16 34th ave 714 140-16 34th ave flushing ny 11354 us|11354,b_82cac2e795,14016 34 ave|11354
 31-20 54th st 2fl 31-20 54th st flushing ny 11377 us|11377,b_e7f9e0227d,3120 54 st|11377
+3242 33rd st d3 astoria ny 11106 usa|11106,b_0a790d79c1,3242 33 st|11106
+3516 34th st 5e astoria ny 11106 usa|11106,b_1170c85e08,3516 34 st|11106
 255 nostrand ave 3b2 brooklyn ny 11205 usa|11205,b_5d870eb472,255 nostrand ave|11205
 53 w 72nd st 4c new york ny 10023 usa|10023,b_e948475fde,53 w 72 st|10023
 720 w 181st st|10033,b_c82499653d,720 w 181 st|10033

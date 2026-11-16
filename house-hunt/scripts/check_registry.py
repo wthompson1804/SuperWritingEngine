@@ -1,4 +1,4 @@
-"""Field registry and wiring check (plan v4, Part 2). Runs first in scripts/run_all.py.
+"""Field registry and wiring check (plan v4, Part 2). Runs LAST in scripts/run_all.py, on the finished output.
 
 Builds data/reference/field_registry.csv: every column of the master tables and every evidence family, with the
 scripts that reference it and a status:
@@ -10,11 +10,12 @@ scripts that reference it and a status:
 It also fails if an analysis script reads a side file directly instead of the master tables.
 
 Shown-list assertions (added after docs/INDEPENDENT_CHECK.md): the run fails when any unit with shown = True in
-data/ranked_units.csv breaks one of Will's rules: more than one open item (elevator only inferred; floor unknown or inferred
-in a way the floor rule does not accept; dogs conflicting; no live check), or one open item without the asterisk fields
+data/ranked_units.csv breaks one of Will's rules: more than one open item (elevator open by parsers.elevator_rule; dogs not
+settled; the listing's reality or availability in doubt; eligibility; no live check), or one open item without the asterisk fields
 (confirm_asterisk, confirm_what, confirm_why); elevator contradicted; floor under 2; dogs not explicitly allowed, or a weight limit under 25 lb (a size-only "small dogs" policy passes, by the owner's rule of
 2026-11-15, but must carry its note and tour question);
-all-in over $3,000; available after 2026-12-15; a duplicate unit; more than 8 shown in one building;
+all-in over $3,000; available after 2026-12-15; a duplicate unit; more than 8 shown in one building; a row that is not a real
+apartment (floor plan, building price, co-living room); the only apartment of a neighborhood shown with something open;
 a neighborhood cut by the Jamaica safety rule; an avoid building; a harvest note that says BUILDING_FAILS for any reason
 other than "small dogs only".
 """
@@ -23,6 +24,7 @@ from pathlib import Path
 import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent))
 from lib import DATA, ROOT
+import parsers
 
 ANALYSIS = ["all_in.py", "rank.py"]                      # must read only the master tables (+ group / evidence-rule outputs)
 ALLOWED_INPUTS = {"master_units.csv", "master_buildings.csv", "lifestyle_groups.csv", "unit_exclusions.csv", "avoid_buildings.csv",
@@ -81,8 +83,17 @@ def shown_violations():
     # A fact that fails outright (no elevator, floor under 2, dogs not allowed) is never shown.
     el = col("elevator").str.lower()
     flag(el.isin(["no", "conflicting"]), "elevator contradicted or conflicting")
-    open_e = (el != "yes") | ~col("elevator_basis").isin(["confirmed_by_phone", "confirmed", "stated", "official_record", "amenities_page", "community_page"]) | (col("elevator_evidence_open") != "") \
-        | ((col("elevator_doubt") != "") & (col("elevator_basis") != "confirmed_by_phone"))       # the reviewed doubt table and the garden-style rule (owner, 2026-11-16)
+    # the one elevator rule (parsers.elevator_rule), recomputed here from the shown row; the reviewer's asterisk is in open_keys
+    def _g(r):
+        return lambda c: "" if c not in r or pd.isna(r[c]) else (str(r[c])[:-2] if c == "unit_floor" and str(r[c]).endswith(".0") else str(r[c]))
+    st_el = pd.Series([parsers.elevator_rule_master(_g(r))[0] for r in S.to_dict("records")], index=S.index, dtype=object)
+    flag(st_el.isin(["unknown", "no"]), "elevator not established by the elevator rule (no page, record or real height)")
+    # owner, 2026-11-16: only a real apartment is shown (not a floor plan, a building page's price or a co-living room)
+    flag(col("listing_kind") != "unit", "not a real apartment (floor plan, building price or co-living room)")
+    # owner, 2026-11-16: a neighborhood shown with ONE apartment shows it only when nothing about it is open
+    lone = S.hood_id.map(S.groupby("hood_id").size()) == 1
+    flag(lone & (col("confirm_asterisk") == "yes"), "the only apartment shown in its neighborhood has something open (thin-neighborhood rule)")
+    open_e = st_el != "established"
     fl, fb, fk = num("unit_floor"), col("unit_floor_basis"), col("unit_floor_label_kind")
     flag(fl < 2, "floor under 2")
     open_f = ~(fb.isin(["confirmed_by_phone", "confirmed", "stated"]) | ((fb == "inferred") & (fk == "simple") & (fl >= 3)))
@@ -95,7 +106,8 @@ def shown_violations():
     # row (D1), an evidence warning about the listing (D6), and whatever a reviewer's asterisk verdict names
     open_lease = (num("price_lease_months") > 13) | (col("price_lowest_of_terms") == "yes")
     open_cost = (num("all_in") <= CAP) & (num("all_in_likely") > CAP)        # owner, 2026-11-16: replaces "cost near the cap"
-    open_avail = (S.unit.map(parsers.unit_label_key) == "") & ((col("detail_level") == "building_floorplan") | col("listing_id").str.contains(":plan-") | (S.unit.str.strip() != ""))
+    # floor-plan rows are no longer shown at all (flagged above as "not a real apartment"), so no shown row is open on that ground
+    open_avail = pd.Series(False, index=S.index)
     phone = col("phone_settled")                   # facts answered on the phone (rank.py): no longer open, whatever an older row or verdict says
     by_phone = lambda lab: phone.str.split(";").map(lambda xs: lab in xs)
     open_avail = open_avail & ~by_phone("availability")

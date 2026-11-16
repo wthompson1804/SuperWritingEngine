@@ -82,6 +82,24 @@ def log_block(url: str, what: str) -> None:
         f.write(json.dumps({"at": now_iso(), "url": url, "what": what}) + "\n")
 
 
+def refuse_if_host_killed(argv=None, kill_file=None) -> None:
+    """Guard on the fetch path (CLAUDE.md: one refusal ends a host). Trulia has answered 403 / CAPTCHA since 2026-11-15
+    and again at the single test on 2026-11-16, so no request may be sent: the run stops when trulia.com is in
+    raw/_host_kill_shared.json, and also when --i-know is absent (an operator must mean it). Cached pages still parse."""
+    argv = sys.argv if argv is None else argv
+    f = Path(kill_file) if kill_file else RAW / "_host_kill_shared.json"
+    killed = {}
+    if f.exists():
+        try:
+            killed = json.loads(f.read_text())
+        except ValueError:
+            killed = {"unreadable kill file": {}}
+    hosts = [h for h in killed if "trulia.com" in h or h == "unreadable kill file"]
+    if hosts or "--i-know" not in argv:
+        raise SystemExit("h_trulia: refusing to send a request to trulia.com: "
+                         + (f"{hosts[0]} is in {f.name} (one refusal ends a host)" if hosts else "pass --i-know to confirm Trulia may be fetched; it has refused us since 2026-11-15"))
+
+
 def fetch(url: str, refresh_hours: float, offline: bool = False):
     """Return (next_data_dict | None, meta). None with status 404/410 means the page is gone."""
     global _last_request, N_FETCHED
@@ -97,6 +115,7 @@ def fetch(url: str, refresh_hours: float, offline: bool = False):
         refresh = True
     if offline:
         return None, {"status": 0, "url": url, "retrieved_at": "", "path": ""}
+    refuse_if_host_killed()     # one refusal ends a host: no request while trulia.com is in the kill file, or without --i-know
     for attempt in range(3):
         wait = _last_request + DELAY - time.time()
         if wait > 0:

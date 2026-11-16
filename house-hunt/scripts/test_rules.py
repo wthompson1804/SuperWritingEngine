@@ -390,6 +390,7 @@ def pure_4():
     eq(BP.moment_ratings(m, 4, False, True, True, 720, 1)["night"], "weak", "moments: an overnight street-parking restriction with no confirmed space is weak")
     eq(BP.moment_ratings(m, 4, True, True, False, 720, 1)["night"], "mixed", "moments: off-site parking is never strong")
     pure_5()
+    pure_6()
 
 
 def pure_5():
@@ -783,17 +784,221 @@ def data_4(M, R, S):
     import gates
     L_ = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False, low_memory=False)
     I_ = L_[(L_.g_elevator == "pass") & (L_.elevator_basis == "inferred_6plus_floors")]
-    bad = [r.listing_id for r in I_.itertuples() if not ((gates.page_height(r) or 0) >= 6 or gates.elevator_from_pluto_floors(r.pluto_floors, r.match_basis, r.elevator_from_class))]
+    exact = lambda r: P.lot_is_exact(r.match_basis, r.address, r.pluto_address)
+    bad = [r.listing_id for r in I_.itertuples() if not ((gates.page_height(r) or 0) >= 6 or gates.elevator_from_pluto_floors(r.pluto_floors, exact(r), r.elevator_from_class))]
     ok(not bad, f"elevator gate: every 'inferred_6plus_floors' pass has a height of 6+ from a page or record, never a unit label ({len(bad)} do not: {bad[:5]})")
     ok(not L_[(L_.g_elevator == "pass") & L_.notes.str.contains(gates.HARVESTER_LABEL_HEIGHT) & (L_.elevator_basis == "inferred_harvester")].shape[0],
        "elevator gate: a harvester's yes read from unit numbers never passes as 'inferred_harvester'")
     ok(set(L_[L_.g_elevator == "pass"].elevator_basis) <= {"stated", "inferred_harvester", "inferred_6plus_floors", "inferred_high_rise_label", "nyc_pluto_building_class",
                                                           "evidence_confirmed", "evidence_stated", "amenities_page"}, "elevator gate: every pass carries a known basis")
-    ok((L_[L_.elevator_basis == "nyc_pluto_building_class"].query("g_elevator == 'pass'").match_basis == gates.EXACT_LOT).all(), "elevator gate: the city's elevator class passes only on the listing's own lot")
+    ok(all(exact(r) for r in L_[L_.elevator_basis == "nyc_pluto_building_class"].itertuples()), "elevator gate: the city's class (elevator or walk-up) decides only on the listing's own lot (parsers.lot_is_exact)")
+    data_6(L_)
 
 
 def data_units_unique(S):
     pass
+
+
+def pure_6():
+    """Pipeline consistency pass (docs/PIPELINE_CONSISTENCY_PASS.md)."""
+    import gates
+    import pandas as pd
+    base = {"elevator": "unknown", "notes": "", "building_floors": "", "floor": "", "unit": "", "community_building_type": ""}
+    row = lambda **k: pd.Series({**base, **k})
+    R = P.elevator_rule
+    # ---- step 1: ONE elevator rule, its truth table row by row
+    eq(R(phone="yes", page_no=True), ("established", "confirmed_by_phone"), "elevator rule 1: a phone answer wins")
+    eq(R(phone="no", stated=True), ("no", "confirmed_by_phone"), "elevator rule 1: a phone 'no' removes")
+    eq(R(page_no=True, height=20), ("no", "stated"), "elevator rule 2: a page saying walk-up is 'no' whatever the height")
+    eq(R(stated=True), ("established", "stated"), "elevator rule 3b: stated on a page (a listing site's amenity list counts)")
+    eq(R(record_class="yes", lot_exact=True), ("established", "nyc_pluto_building_class"), "elevator rule 3b: the city's class on the listing's own lot")
+    eq(R(record_class="yes", lot_exact=False), ("unknown", ""), "elevator rule: a near-miss lot does not PASS")
+    eq(R(record_class="no", lot_exact=False), ("unknown", ""), "elevator rule: a near-miss lot does not FAIL either")
+    eq(R(record_class="yes", lot_exact=True, active_devices=0), ("unknown", ""), "elevator rule: zero active elevators on the device list cancels the class")
+    eq(R(evidence="evidence_stated"), ("established", "evidence_stated"), "elevator rule 3b: a stated evidence row, not contradicted")
+    eq(R(evidence="evidence_confirmed", contradicted=True), ("open", "evidence_confirmed"), "elevator rule 3a: contradicted evidence is OPEN, not unknown")
+    eq(R(stated=True, doubt=True), ("open", "stated"), "elevator rule 3a: the doubt table opens a stated elevator")
+    eq(R(stated=True, record_class="no", lot_exact=True), ("open", "stated"), "elevator rule 3a: the city's walk-up class on the own lot against a page's elevator is open")
+    eq(R(record_class="no", lot_exact=True), ("no", "nyc_pluto_building_class"), "elevator rule 4: walk-up class on the own lot, nothing else")
+    eq(R(record_class="no", record_floors=7, lot_exact=True), ("no", "nyc_pluto_building_class"), "elevator rule 4: the same record's floor count does not outweigh its walk-up class")
+    eq(R(height=6), ("open", "inferred_6plus_floors"), "elevator rule 5: a page height of 6 is open")
+    eq(R(height=5), ("unknown", ""), "elevator rule 6: five floors is not enough")
+    eq(R(record_floors=9, lot_exact=True), ("open", "inferred_6plus_floors"), "elevator rule 5: the city's floor count on the own lot")
+    eq(R(record_floors=9, lot_exact=False), ("unknown", ""), "elevator rule: a neighbouring lot's floors are not a height")
+    eq(R(page_height_claim=True), ("open", "inferred_harvester"), "elevator rule 5: 6+ floors read from a page's floor list")
+    eq(R(high_rise_own_page=True), ("open", "inferred_high_rise_label"), "elevator rule 5: 'high-rise' on the building's own page")
+    eq(R(), ("unknown", ""), "elevator rule 6: nothing known")
+    eq(P.real_height("14", "18"), 18.0, "real_height: the tallest of the page's floor count and a floor a page states for a unit")
+    eq(P.real_height("", ""), None, "real_height: nothing")
+    ok(P.lot_is_exact("nearest_lot", "35-16 34th St", "35-16 34 STREET") and not P.lot_is_exact("nearest_lot", "142-38 37th Ave", "142-32 37 AVENUE")
+       and not P.lot_is_exact("no_lot_within_40m", "1 A St", "1 A STREET"), "lot_is_exact: the address must agree; a near miss never counts")
+    # the three stages answer alike on the same facts: gate (listing row) and ranking (master row)
+    m = lambda **k: P.elevator_rule_master(lambda c: str(k.get(c, "")))
+    eq(gates.gate_elevator(row(unit="3", community_building_type="High-Rise")), ("pass", "inferred_high_rise_label"), "stages: high-rise on the manager's page passes the gate ...")
+    eq(m(elevator="yes", elevator_basis="inferred", elevator_height_basis="inferred_high_rise_label")[0], "open", "... and is ONE open fact in the ranking (it used to be 'not shown')")
+    eq(gates.gate_elevator(row(unit="2A", floor="9")), ("pass", "inferred_6plus_floors"), "stages: a page-stated unit floor of 9 passes the gate ...")
+    eq(m(elevator="yes", elevator_basis="inferred", unit_floor="9", unit_floor_basis="stated")[0], "open", "... and is one open fact in the ranking")
+    eq(m(elevator="yes", elevator_basis="inferred", unit_floor="9", unit_floor_basis="inferred")[0], "unknown", "stages: a floor read from the unit label is not a height in the ranking either")
+    eq(m(elevator="yes", elevator_basis="amenities_page")[0], "established", "stages: stated on a page is settled in the ranking")
+    eq(m(elevator="yes", elevator_basis="amenities_page", elevator_doubt="reviewed table: x")[0], "open", "stages: the doubt table opens it")
+    eq(m(elevator="yes", elevator_basis="confirmed_by_phone", elevator_doubt="x", elevator_evidence_open="y")[0], "established", "stages: a phone answer settles it")
+    eq(m(elevator="yes", elevator_basis="inferred", pluto_floors="7", pluto_lot_ok="no")[0], "unknown", "stages: the city's floors on another lot are not used")
+    eq(gates.gate_elevator(row(elevator_from_class="no", match_basis="nearest_lot", address="142-38 37th Ave", pluto_address="142-32 37 AVENUE")), ("unknown", ""),
+       "gate: the walk-up class of a NEIGHBOURING lot no longer fails a listing (493 listings did)")
+    eq(gates.gate_elevator(row(elevator_from_class="no", match_basis="house_number+location", address="10 Main St", pluto_address="10 MAIN STREET")), ("fail", "nyc_pluto_building_class"),
+       "gate: the walk-up class on the listing's own lot still fails")
+    lifestyle_assignment_checks()
+    # ---- step 3: the unit belongs in the unit field, not in the address; duplicates across spellings
+    eq(P.split_address_unit("1775 Windsor Road #215"), ("1775 Windsor Road", "215"), "address: Avalon Teaneck's own-site row carries the unit in the address")
+    eq(P.split_address_unit("20 Gill Lane, Apt. 1E"), ("20 Gill Lane", "1E"), "address: 'Apt. 1E'")
+    eq(P.split_address_unit("138-28 Queens Boulevard #5K, New York, NY 11435, USA"), ("138-28 Queens Boulevard, New York, NY 11435, USA", "5K"), "address: unit before the city")
+    eq(P.split_address_unit("304 4th Ave Unit 212"), ("304 4th Ave", "212"), "address: 'Unit 212'")
+    eq(P.split_address_unit("12 Brooklyn Ave"), ("12 Brooklyn Ave", ""), "address: nothing to split")
+    eq(P.split_address_unit("100 Unity St"), ("100 Unity St", ""), "address: 'Unity' is not 'Unit'")
+    ok(P.same_listed_unit("215", "1", "716", "2516", "001-215", "1", "702", "2516"), "dedupe: '215' and '001-215' at the same rent, 716 and 702 sq ft, are one apartment (Avalon Teaneck)")
+    ok(not P.same_listed_unit("001-215", "1", "700", "2500", "002-215", "1", "700", "2500"), "dedupe: '001-215' and '002-215' are two apartments")
+    ok(not P.same_listed_unit("215", "1", "716", "2516", "001-215", "1", "900", "2516"), "dedupe: the sizes must agree")
+    ok(not P.same_listed_unit("215", "1", "716", "2516", "001-215", "1", "716", "2900"), "dedupe: the rents must agree")
+    ok(not P.same_listed_unit("215", "0", "716", "2516", "001-215", "1", "716", "2516"), "dedupe: the bedrooms must agree")
+    import build_master as BM
+    eq(BM.house_range("55-57 Bank Street", "10606"), ("55", "57", "bank st|10606"), "buildings: '55-57 Bank Street' is a range (the Continuum was three buildings)")
+    eq(BM.house_range("83-33 118th St", "11415"), None, "buildings: a Queens house number is not a range")
+    eq(BM.house_range("142-38 37th Ave", "11354"), None, "buildings: Queens again")
+    eq(BM.prefixed_label("001-215"), "001215", "dedupe: a prefixed label"); eq(BM.prefixed_label("215"), "", "dedupe: a plain label has no prefix")
+    # ---- step 4 (owner, 2026-11-16): only real apartments. Real examples of both kinds
+    K = P.listing_kind
+    for lab in ("PH2", "B9-309", "022-265", "5D", "T526", "00B-224", "206-A", "BAY-B508", "GAR2R-08", "N/A-0508", "Duplex701", "PA 112", "C-C02", "3B2", "1000-1210",
+                "Lincoln House at Hamilton Park - 107", "K3-02", "2fl"):
+        eq(K(lab, "detail", "apartmentlist:p1-x", "managed_building"), "unit", f"kind: {lab!r} is a real unit label")
+    for lab in ("B, H, K, R - Small-1", "C, J, L, P, S - Large-1", "A - Large-1", "A - Renovated-1", "G - Small-1", "1 Bed", "1 Bed - 1 Bath", "1 Bedroom Large", "1 bed, 1 bath, $2575"):
+        eq(K(lab, "detail", "apartmentlist:p263791-u49220319", "managed_building"), "floor_plan", f"kind: {lab!r} is a floor plan, not an apartment")
+    eq(K("", "building_floorplan", "rc:trulia:b2734028645:plan-Bryce:456056389", "managed_building"), "floor_plan", "kind: a Trulia floor-plan row (no unit number) by the source's structure")
+    eq(K("", "detail", "zumper-65278838", "managed_building"), "building_offer", "kind: a Zumper building page's price with no unit (Clinton Flats)")
+    eq(K("", "detail", "gardencommunities:nj-morris-pondview-estates-one-bedroom", "managed_building"), "building_offer", "kind: a manager's 'one-bedroom' row with no unit")
+    eq(K("", "detail", "zumper-64993702", "unknown"), "unit", "kind: a single-home listing page of its own with no unit number is still one specific home")
+    eq(K("448-3", "detail", "apartmentlist:p116944794-207cSB.E-448-3", "managed_building", "The Agnes Co-Living"), "private_room", "kind: a room of a co-living suite")
+    eq(K("203", "building_unit", "trulia:b2748217177:Unit_203:351142317", "managed_building", "The Agnes Co-Living"), "unit", "kind: a whole studio in the same building stays")
+    eq(K("448-3", "detail", "x", "managed_building", "Avalon Somewhere"), "unit", "kind: '448-3' elsewhere is a unit")
+    eq(K("1 Bed", "detail", "apartmentlist:p75198491-1_bed_1.0_bath_695_sqft", "unknown", "416 Highland Ave - 312"), "unit", "kind: a property titled with its own unit ('416 Highland Ave - 312') is one real apartment although its row is labelled '1 Bed'")
+    eq(K("1 Bed", "detail", "x", "managed_building", "Skyline Tower"), "floor_plan", "kind: '1 Bed' at a managed building is a floor plan")
+    eq(K("1 Bed", "detail", "x", "managed_building", "The Mark - Fairfield County"), "floor_plan", "kind: a dash in a building's name is not a unit")
+    ok(P.unit_label_key("B, H, K, R - Small-1") == "" and P.unit_label_key("022-265") == "022265", "kind: a plan label has no unit key")
+    # ---- no API key in a URL we carry
+    eq(P.strip_url_secrets("https://maps.x/api?size=640x480&center=40.7%2C-73.8&key=AIzaNOTAKEY&signature=abc="), "https://maps.x/api?size=640x480&center=40.7%2C-73.8", "secrets: key and signature are stripped from a URL")
+    eq(P.strip_url_secrets("https://x/y?token=zz&a=1"), "https://x/y?a=1", "secrets: a leading token")
+    eq(P.strip_url_secrets("Lock & key=brass, monkey=1"), "Lock & key=brass, monkey=1", "secrets: text that is not a URL is left alone")
+    # ---- names: a listing title is not a building's name; a park's name must be a park's
+    C = P.clean_building_name
+    eq(C("80East | Luxury Apartments | Dover, NJ"), "80East", "name: marketing tail after ' | '")
+    eq(C("The Mark, Fairfield County ~ Resort-Inspired Luxury Living"), "The Mark, Fairfield County", "name: marketing tail after ' ~ '")
+    eq(C("219 Lenox Rd #5G, Brooklyn, NY 11226, USA"), "", "name: an address with unit, city, state, ZIP and country is not a name")
+    eq(C("31-20 54th Street #2fl , 31-20 54th St, Flushing, NY 11377, US"), "", "name: the doubled address line")
+    eq(C("Kew Gardens Rd & 83rd Ave, New York, NY 11415, USA"), "", "name: an intersection with a city tail")
+    eq(C("1775 E 18th St", "1775 E 18th St"), "", "name: a name that only repeats the building's address")
+    eq(C("3 Journal Square", "2935 Kennedy Blvd"), "3 Journal Square", "name: an address-like NAME at another address is the building's name")
+    eq(C("Avalon Teaneck", "1775 Windsor Road"), "Avalon Teaneck", "name: a real name is untouched")
+    eq(C("The Mercer – 10 Commerce Court, Newark, NJ"), "The Mercer", "name: an address tail after a dash")
+    eq(P.street_address("219 Lenox Rd, Brooklyn, NY 11226, USA"), "219 Lenox Rd", "address: city, state, ZIP and country are cut from the street address")
+    eq(P.street_address("55-57 Bank Street"), "55-57 Bank Street", "address: nothing to cut")
+    for bad in ("Leif Ericson Drive", "Baldwin Plaza", "Orange County Fair", "Old Campus"):
+        eq(P.park_name(bad), "", f"park: {bad!r} is not a park's name (the distance is kept, the name is not)")
+    for good in ("Veterans Memorial Park", "Harrison Riverfront Park", "Kissena Corridor Park", "Flushing Meadows", "Mill Pond Preserve"):
+        eq(P.park_name(good), good, f"park: {good!r} stays")
+    # ---- the thin-neighborhood rule
+    import rank
+    s_ = pd.Series
+    cut = rank.thin_neighborhood_cut(s_(["a", "b", "c", "c", "d", "e"]), s_(["g"] * 6), s_([True] * 5 + [False]), s_([70.0, 39.0, 30.0, 20.0, 60.0, 90.0]), s_([0, 0, 1, 1, 1, 0]))
+    eq(list(cut), [False, False, False, False, True, False], "thin: a lone apartment AT the median with nothing open stays (b); one with something open is cut (d); two-apartment neighborhoods are untouched (c); two-apartment neighborhoods are untouched")
+    # ---- laundry and conflicting dog policy
+    cut2 = rank.thin_neighborhood_cut(s_(["a", "b", "c", "c", "d"]), s_(["g"] * 5), s_([True] * 5), s_([70.0, 25.0, 30.0, 20.0, 60.0]), s_([0, 0, 1, 1, 0]))
+    eq(list(cut2), [False, True, False, False, False], "thin: a lone apartment below its experience's median (30) is cut even with nothing open")
+    eq(list(rank.in_unit_laundry(s_(["yes", "washer, dryer", "laundry room (not in unit)", "In unit", ""]), s_(["on_site_only", "yes", "yes", "", ""]))), [False, True, False, True, False],
+       "laundry: 'yes' with on_site_only is a shared laundry room, not a washer in the apartment")
+
+
+def lifestyle_assignment_checks():
+    """Step 2: a neighborhood's experience is a pure function of its frozen area profile and the saved parameters."""
+    import tempfile
+    import numpy as np
+    import pandas as pd
+    import lifestyle_groups as LG
+    ref = DATA / "reference"
+    area = pd.read_csv(ref / "lifestyle_area_features.csv").set_index("hood_id")
+    scaling = pd.read_csv(ref / "lifestyle_scaling.csv").set_index("feature")
+    scale = pd.read_csv(ref / "lifestyle_index_scale.csv", index_col=0).iloc[:, 0]
+    C = pd.read_csv(ref / "lifestyle_group_centres.csv", index_col=0)
+    full, _ = LG.assign(area, scaling, scale, C)
+    # removing neighborhoods (or units: the profile is frozen) changes nobody else's assignment or distances
+    half = area.iloc[::2]
+    sub, _ = LG.assign(half, scaling, scale, C)
+    ok(sub.group_key.equals(full.group_key.loc[half.index]) and np.allclose(sub.ratio.values, full.ratio.loc[half.index].values), "groups: assigning half the neighborhoods gives each the same group and distances as assigning all")
+    one, _ = LG.assign(area.loc[["nj:east-rutherford"]], scaling, scale, C)
+    eq(one.group_key.iloc[0], full.group_key.loc["nj:east-rutherford"], "groups: a neighborhood assigned alone gets the same group")
+    # the frozen profile does not follow the units: a run whose passing buildings changed leaves saved rows untouched
+    with tempfile.TemporaryDirectory() as td:
+        f = Path(td) / "area.csv"
+        area.loc[["nj:east-rutherford", "ny:patchogue"]].to_csv(f)
+        H = area.loc[["nj:east-rutherford", "ny:patchogue", "ct:norwalk"]].copy()
+        H["buildings"] = 1
+        H.loc["nj:east-rutherford", "restaurants_800m"] = 3            # what happened on 2026-11-16: one passing building left
+        H.loc["nj:east-rutherford", "sqft_per_1000usd"] = 270.0
+        got, new = LG.freeze_area(H, path=f, today="2026-11-16")
+        eq(new, ["ct:norwalk"], "groups: only a neighborhood seen for the first time is profiled")
+        eq(float(got.at["nj:east-rutherford", "restaurants_800m"]), float(area.at["nj:east-rutherford", "restaurants_800m"]), "groups: a saved profile is not recomputed when the passing units change")
+        again, new2 = LG.freeze_area(H.drop(index="ct:norwalk"), path=f, today="2026-11-17")
+        ok(new2 == [] and "ct:norwalk" in again.index, "groups: a neighborhood that loses all its units keeps its saved profile")
+    eq(full.group_key.loc["nj:east-rutherford"], "middle", "groups: East Rutherford is Little-City under the frozen profile (nearest by a wide margin)")
+    eq(full.group_key.loc["ny:patchogue"], "middle", "groups: Patchogue is Little-City under the frozen profile (a boundary case, listed)")
+    ov = LG.load_overrides()
+    D, _ = LG.assign(area, scaling, scale, C, ov)
+    ok(all(D.group_key.loc[h] == g for h, g in ov.items() if h in D.index), "groups: a reviewed override decides the group")
+    ok(set(scaling.index) == set(LG.RAW) and (scaling.sd > 0).all(), "groups: scaling parameters are saved for every raw feature")
+    return D
+
+
+def data_6(L_):
+    """Pipeline consistency pass, on the output."""
+    import pandas as pd
+    D = lifestyle_assignment_checks()
+    R = pd.read_csv(DATA / "ranked_units.csv", dtype=str, keep_default_na=False, low_memory=False)
+    G = pd.read_csv(DATA / "lifestyle_groups.csv").set_index("hood_id")
+    ok(G.group_key.equals(D.group_key.loc[G.index].rename("group_key")), "groups: data/lifestyle_groups.csv holds exactly the assignment computed from the saved files")
+    # only real apartments are ranked; thin neighborhoods; no duplicate; no secret in a URL
+    ok(set(R.listing_kind) == {"unit"}, "kinds: every ranked row is a real apartment (no floor plan, building price or co-living room)")
+    NA = pd.read_csv(DATA / "excluded_not_an_apartment.csv", dtype=str, keep_default_na=False, low_memory=False)
+    ok(len(NA) > 0 and (NA.status == "not_an_apartment").all() and not set(NA.listing_id) & set(R.listing_id), "kinds: the others are kept with status not_an_apartment and are not ranked")
+    for lab in ("B, H, K, R - Small-1", "G - Small-1", "1 Bed - 1 Bath"):
+        ok(lab not in set(R.unit), f"kinds: the plan row {lab!r} is not ranked")
+    S_ = R[R.shown == "True"]
+    n_h = S_.groupby("hood_id").size()
+    lone = S_[S_.hood_id.map(n_h) == 1]
+    ok((lone.confirm_asterisk == "").all(), "thin: a neighborhood shown with one apartment shows a well-attested one (nothing open)")
+    T_ = R[R.not_shown_reason == "thin_neighborhood"]
+    ok((T_.shown == "False").all() and (T_.shown_before_thin_rule == "True").all() and T_.hood_id.map(lambda h: h not in set(S_.hood_id)).all(), "thin: a cut neighborhood shows nothing and its apartment stays in the file with the reason")
+    import itertools
+    dup = [(a["listing_id"], b["listing_id"]) for _, g in R.groupby("building_id") for a, b in itertools.combinations(g.to_dict("records"), 2)
+           if P.same_listed_unit(a["unit"], a["beds"], a["sqft"], a["listed_rent"], b["unit"], b["beds"], b["sqft"], b["listed_rent"])]
+    ok(not dup, f"dedupe: no apartment is ranked twice under two spellings of its unit ({dup[:3]})")
+    ok(R[R.building_name.str.contains("Continuum")].building_id.nunique() <= 1 and not R[R.building_name.str.contains("Continuum")].unit.duplicated().any(), "dedupe: the Continuum is one building and no unit of it appears twice")
+    ok(not ((R.building_name == "Avalon Teaneck") & R.unit.map(lambda u: P.unit_tail(u) == "215")).sum() > 1, "dedupe: Avalon Teaneck 215 appears once")
+    import glob
+    leak = [f for f in glob.glob(str(DATA / "*.csv")) + glob.glob(str(DATA / "listings_raw" / "*.csv")) + [str(ROOT / "site" / "data.json")]
+            if Path(f).exists() and re.search(r"key=AIza|https?://[^\s\"',]*[?&](?:key|api_key|token|signature)=", Path(f).read_text(errors="replace"))]
+    ok(not leak, f"secrets: no data file holds an API key, token or signature in a URL ({[Path(f).name for f in leak]})")
+    ok(not L_[L_.address_as_listed.str.count("#") < 2].address.str.contains(r"#\s*\w+\s*$").any(), "address: no listing address still ends in '#unit'")
+    X = pd.read_csv(DATA / "lifestyle_group_distances.csv").set_index("hood_id")
+    ok(set(X.index) == set(G.index) and (X.boundary == (X.ratio >= 0.9)).all(), "groups: the distance file covers every neighborhood and flags the boundary cases")
+    R = pd.read_csv(DATA / "ranked_units.csv", dtype=str, keep_default_na=False, low_memory=False)
+    # step 1: the listing gate and the ranking agree on every ranked unit
+    st = R.elevator_rule_status
+    ok(st.isin(["established", "open"]).all(), "elevator rule: no ranked unit has an 'unknown' or 'no' elevator")
+    ok((R[R.shown == "True"].open_keys.str.split(";").map(lambda k: "elevator" in k) == (R[R.shown == "True"].elevator_rule_status == "open")).all(),
+       "elevator rule: a shown unit carries the elevator asterisk exactly when the rule says 'open'")
+    g = L_.set_index("listing_id").elevator_rule_status
+    ok(set(L_[L_.g_elevator == "pass"].elevator_rule_status) <= {"established", "open"} and set(L_[L_.g_elevator == "fail"].elevator_rule_status) == {"no"}
+       and set(L_[L_.g_elevator == "unknown"].elevator_rule_status) == {"unknown"}, "elevator rule: gate result follows the rule's status")
+    ok(not ((L_.g_elevator == "fail") & (L_.elevator_basis == "nyc_pluto_building_class") & ~pd.Series([P.lot_is_exact(a, b, c) for a, b, c in zip(L_.match_basis, L_.address, L_.pluto_address)], index=L_.index)).any(),
+       "elevator rule: no listing fails on the walk-up class of a neighbouring lot")
 
 
 def page_more(J, M, R, S):

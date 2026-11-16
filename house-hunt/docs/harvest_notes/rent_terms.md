@@ -2,17 +2,17 @@
 
 Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evidence/*.csv. No network requests. Every passing unit was checked and has one row.
 
-- Units checked: **2503** (one row each; `offer_type = none` for units with no such language).
-- Units with any concession, special-offer or price-basis language: **1687**.
-- Units whose price or offer is for a lease term other than 12 months: **575**.
-- Units that need a call (`needs_call = yes`): **1586** in 209 buildings.
+- Units checked: **2505** (one row each; `offer_type = none` for units with no such language).
+- Units with any concession, special-offer or price-basis language: **1688**.
+- Units whose price or offer is for a lease term other than 12 months: **576**.
+- Units that need a call (`needs_call = yes`): **1587** in 209 buildings.
 
 ## Counts by offer_type
 
 | offer_type | units |
 |---|---|
-| months_free | 1328 |
-| none | 816 |
+| months_free | 1329 |
+| none | 817 |
 | other | 211 |
 | reduced_deposit_or_fee | 69 |
 | weeks_free | 35 |
@@ -23,24 +23,24 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 | listed_price_is | units |
 |---|---|
-| unknown | 1403 |
-| gross | 948 |
+| unknown | 1404 |
+| gross | 949 |
 | net_effective | 152 |
 
 ## Confidence
 
 | confidence | units |
 |---|---|
-| assumed_terms | 1569 |
-| stated_on_page | 906 |
+| assumed_terms | 1570 |
+| stated_on_page | 907 |
 | computed_from_stated_terms | 28 |
 
 ## Free-period timing
 
 | timing | units |
 |---|---|
-| unknown | 1303 |
-| (no free period) | 1140 |
+| unknown | 1304 |
+| (no free period) | 1141 |
 | upfront | 42 |
 | end_of_lease | 12 |
 | specific_months | 5 |
@@ -70,7 +70,7 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 
 ## Largest possible gaps where the basis is unknown (scenario: listed price is net-effective)
 
-1346 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
+1347 units carry a scenario figure. These are **not** stated rents: they show what the monthly rent would be if the advertised price already has the free months spread in. Top 25:
 
 | unit | listed | gross if listed is net | gap | free months / lease | basis |
 |---|---|---|---|---|---|

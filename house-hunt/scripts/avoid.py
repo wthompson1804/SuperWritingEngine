@@ -4,10 +4,12 @@ Inputs: data/evidence/{live_check,confirm,items,facts}_batch_*.csv, data/evidenc
 Outputs:
   data/unit_exclusions.csv    addr_key, unit ("" = whole building), reason, source   -> removed before ranking
   data/avoid_buildings.csv    addr_key, avoid (yes/no), reasons, evidence_json, pause_notes  -> shown as avoid cards
-  data/evidence_summary.csv   one row per building: counts by category and period, confirmed facts
+  data/reference/ground_reading_unassigned.csv   checker's ground-floor readings that could not be tied to a unit
 Rules (Will, docs/PLAN_V3_APPROVED_2026-11-15.md, later amendments):
-  DROP   listing gone; dogs not allowed or elevator contradicted on the building's page; ground-floor unit; listing the
-         checker judged not open-market, not genuine, stale or a duplicate; dog policy conflicting between sources.
+  DROP   listing gone; dogs clearly not allowed, or the elevator contradicted, on the building's page; ground-floor unit;
+         listing the checker judged not open-market, not genuine, stale or a duplicate.
+         NOT a drop: a dog policy that CONFLICTS between sources. That is one open gate fact (dogs), raised in
+         scripts/rank.py; the building's own or its manager's page settles it.
   AVOID  car crime: 3+ independent reports at the building or its parking in 24 months, or (NYC, police-located
          incidents) vehicle theft + theft from vehicles within 250 m in 24 months at least double the median for
          candidate buildings in the city

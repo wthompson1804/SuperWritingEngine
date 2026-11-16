@@ -4,7 +4,7 @@ master_units,building_id,used,build_master.py;all_in.py;rank.py;avoid.py;build_n
 master_units,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 master_units,source_site,used,gates.py;build_master.py;avoid.py,
 master_units,url,used,gates.py;build_master.py;rank.py;avoid.py;crime_benchmarks.py;rent_terms.py,
-master_units,building_url,display,build_master.py,link shown on the page
+master_units,building_url,used,gates.py;build_master.py,
 master_units,also_seen_at,used,gates.py;build_master.py,
 master_units,detail_level,used,gates.py;build_master.py;rank.py,
 master_units,first_seen,not_used,build_master.py,bookkeeping or already folded into a merged field
@@ -25,13 +25,16 @@ master_units,floor_label_kind,used,gates.py;build_master.py,
 master_units,g_floor,used,gates.py;build_master.py,
 master_units,listing_age_days,used,gates.py;build_master.py;rank.py,
 master_units,stale_listing,used,gates.py;build_master.py,
-master_units,photo_url,display,build_master.py,link shown on the page
+master_units,photo_url,used,gates.py;build_master.py,
 master_units,raw_path,used,build_master.py;rent_terms.py,
 master_units,notes,used,gates.py;build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py;enrich_units.py,
 master_units,other_monthly_fees_json,used,build_master.py;all_in.py;enrich_units.py,
-master_units,listing_type,used,build_master.py;rank.py,
+master_units,listing_type,used,gates.py;build_master.py;rank.py,
 master_units,gate_status,used,gates.py;build_master.py;enrich_units.py,
 master_units,resolved_by,used,gates.py;build_master.py,
+master_units,listing_kind,used,gates.py;build_master.py;rank.py,
+master_units,unit_basis,used,gates.py;build_master.py,
+master_units,address_as_listed,used,gates.py;build_master.py,
 master_units,duplicate_listing_ids,display,build_master.py,"other listings of the same unit, merged into this row (their links are in also_seen_at)"
 master_units,live_status,used,build_master.py;all_in.py;rank.py,
 master_units,live_price,used,build_master.py;all_in.py,
@@ -56,6 +59,7 @@ master_units,pluto_floors,used,gates.py;build_master.py;rank.py;build_neighborho
 master_units,pluto_units,used,gates.py;build_master.py,
 master_units,pluto_year,used,gates.py;build_master.py;rank.py;lifestyle_color.py,
 master_units,pluto_bbl,used,gates.py;rating_standard.py,
+master_units,pluto_address,used,gates.py;build_master.py,
 master_units,drive_min_to,used,rank.py;build_neighborhoods.py;lifestyle_features.py;enrich_units.py,
 master_units,drive_min_from,used,enrich_units.py,
 master_units,drive_miles,used,enrich_units.py,
@@ -110,6 +114,9 @@ master_units,coord_note,used,build_master.py;enrich_units.py,
 master_units,elevator,used,gates.py;build_master.py;rank.py;avoid.py,
 master_units,elevator_basis,used,gates.py;build_master.py;rank.py,
 master_units,elevator_source,provenance,,travels with elevator
+master_units,elevator_height_basis,used,gates.py;build_master.py;rank.py,
+master_units,elevator_height_basis_basis,provenance,,travels with elevator_height_basis
+master_units,elevator_height_basis_source,provenance,,travels with elevator_height_basis
 master_units,dogs_allowed,used,build_master.py;rank.py;avoid.py,
 master_units,dogs_allowed_basis,used,build_master.py;rank.py,
 master_units,dogs_allowed_source,provenance,,travels with dogs_allowed
@@ -226,7 +233,7 @@ master_units,dogs_evidence_open,used,build_master.py;rank.py,
 master_units,dogs_evidence_open_basis,provenance,,travels with dogs_evidence_open
 master_units,dogs_evidence_open_source,provenance,,travels with dogs_evidence_open
 master_units,building_type,used,gates.py;build_master.py;rank.py;avoid.py,
-master_units,building_type_basis,provenance,,travels with building_type
+master_units,building_type_basis,used,rank.py,
 master_units,building_type_source,provenance,,travels with building_type
 master_units,pet_rent_note,used,build_master.py;all_in.py,
 master_units,pet_rent_note_basis,provenance,,travels with pet_rent_note
@@ -506,6 +513,7 @@ master_buildings,pluto_floors,used,gates.py;build_master.py;rank.py;build_neighb
 master_buildings,pluto_units,used,gates.py;build_master.py,
 master_buildings,pluto_year,used,gates.py;build_master.py;rank.py;lifestyle_color.py,
 master_buildings,pluto_bbl,used,gates.py;rating_standard.py,
+master_buildings,pluto_address,used,gates.py;build_master.py,
 master_buildings,drive_min_to,used,rank.py;build_neighborhoods.py;lifestyle_features.py;enrich_units.py,
 master_buildings,drive_min_from,used,enrich_units.py,
 master_buildings,drive_miles,used,enrich_units.py,
@@ -560,6 +568,9 @@ master_buildings,coord_note,used,build_master.py;enrich_units.py,
 master_buildings,elevator,used,gates.py;build_master.py;rank.py;avoid.py,
 master_buildings,elevator_basis,used,gates.py;build_master.py;rank.py,
 master_buildings,elevator_source,provenance,,travels with elevator
+master_buildings,elevator_height_basis,used,gates.py;build_master.py;rank.py,
+master_buildings,elevator_height_basis_basis,provenance,,travels with elevator_height_basis
+master_buildings,elevator_height_basis_source,provenance,,travels with elevator_height_basis
 master_buildings,dogs_allowed,used,build_master.py;rank.py;avoid.py,
 master_buildings,dogs_allowed_basis,used,build_master.py;rank.py,
 master_buildings,dogs_allowed_source,provenance,,travels with dogs_allowed
@@ -676,7 +687,7 @@ master_buildings,dogs_evidence_open,used,build_master.py;rank.py,
 master_buildings,dogs_evidence_open_basis,provenance,,travels with dogs_evidence_open
 master_buildings,dogs_evidence_open_source,provenance,,travels with dogs_evidence_open
 master_buildings,building_type,used,gates.py;build_master.py;rank.py;avoid.py,
-master_buildings,building_type_basis,provenance,,travels with building_type
+master_buildings,building_type_basis,used,rank.py,
 master_buildings,building_type_source,provenance,,travels with building_type
 master_buildings,pet_rent_note,used,build_master.py;all_in.py,
 master_buildings,pet_rent_note_basis,provenance,,travels with pet_rent_note
@@ -957,7 +968,7 @@ evidence:nyc_records_flags,caution,not_used,,NYC records detail behind the flags
 evidence:nyc_records_flags,flag,used,build_master.py;avoid.py;crime_benchmarks.py;rating_standard.py,
 evidence:nyc_records_flags,metric,used,avoid.py,
 evidence:nyc_records_flags,period,used,build_master.py;avoid.py,
-evidence:nyc_records_flags,count,used,build_master.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py,
+evidence:nyc_records_flags,count,used,gates.py;build_master.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py,
 evidence:nyc_records_flags,per_100_units,used,avoid.py,
 evidence:nyc_records_flags,baseline_median,not_used,,NYC records detail behind the flags
 evidence:nyc_records_flags,baseline_p80,not_used,,NYC records detail behind the flags

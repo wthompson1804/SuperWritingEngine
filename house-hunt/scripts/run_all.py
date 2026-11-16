@@ -2,6 +2,8 @@
 
   python3 scripts/run_all.py            full run (lookup tools are cached; new buildings take about 2 s each)
   python3 scripts/run_all.py --fast     skip the neighborhood / lifestyle rebuild (use after evidence-only changes)
+Tests run first, the registry and shown-list assertions last. The text check (scripts/check_scene_text.py) is NOT part of
+this run: it is a separate step after scripts/page_data_extras.py.
 Writes docs/RUN_REPORT.md: counts in and out of every stage with the reasons, fill rates among shown units, and the
 change from the previous run (data/reference/run_history.csv).
 """
@@ -13,14 +15,14 @@ sys.path.insert(0, str(Path(__file__).parent))
 from lib import DATA, ROOT
 
 TESTS = [("parser tests (every example in docs/INDEPENDENT_CHECK.md)", "test_parsers.py"),
-         ("rule tests (every defect in docs/INDEPENDENT_CHECK_2.md)", "test_rules.py")]
+         ("rule tests (every repaired defect and rule, pure)", "test_rules.py")]
 FULL = [("gates (merge, dedupe, gate each listing)", "gates.py"), ("NYC building class (PLUTO)", "enrich_nyc_pluto.py"), ("gates again with PLUTO", "gates.py"),
         ("lookup tools per building", "enrich_units.py"), ("neighborhood assignment", "build_neighborhoods.py"),
         ("lifestyle features", "lifestyle_features.py"), ("lifestyle colour", "lifestyle_color.py"), ("crime benchmarks", "crime_benchmarks.py"),
         ("lifestyle groups (saved centres)", "lifestyle_groups.py")]
 ALWAYS = [("building amenities (cached pages)", "building_amenities.py --no-fetch"), ("master tables", "build_master.py"), ("rent terms", "rent_terms.py"),
           ("all-in cost", "all_in.py"), ("evidence rules (avoid, exclusions)", "avoid.py"), ("ranking and selection", "rank.py"),
-          ("rule tests on the output (docs/INDEPENDENT_CHECK_2.md)", "test_rules.py --data"),
+          ("rule tests on the output", "test_rules.py --data"),
           ("field registry, wiring check, shown-list assertions and the review rule", "check_registry.py")]
 
 
@@ -48,7 +50,10 @@ def main():
              ("  pending: a gate fact is unstated", int((L.gate_status == "pending").sum())), ("  fail a gate", int((L.gate_status == "fail").sum())),
              ("costed in the master table", len(M)), ("within the $3,000 all-in cap", int((M.cost_gate == "pass").sum())),
              ("ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions)", len(R)),
-             ("shown (every gate fact confirmed or stated; top 10 per neighborhood)", int(R.shown.sum())),
+             ("shown (real apartments, at most one open item, up to 8 per building, after the thin-neighborhood rule)", int(R.shown.sum())),
+             ("  neighborhoods shown", int(R[R.shown].hood_id.nunique())), ("  buildings shown", int(R[R.shown].building_id.nunique())),
+             ("not an apartment: floor plan, building price or co-living room (data/excluded_not_an_apartment.csv)", len(pd.read_csv(DATA / "excluded_not_an_apartment.csv", usecols=["listing_id"])) if (DATA / "excluded_not_an_apartment.csv").exists() else 0),
+             ("thin neighborhoods cut (one apartment, not both well attested and promising)", int(R.thin_neighborhood.sum()) if "thin_neighborhood" in R else 0),
              ("avoid cards", int(R.avoid_card.sum())),
              ("  shown with an asterisk (one thing to confirm)", int((R.shown & (R.confirm_asterisk == "yes")).sum()) if "confirm_asterisk" in R else 0),
              ("removed by a reviewed verdict (data/evidence/review_verdicts.csv)", len(pd.read_csv(DATA / "excluded_by_review.csv", usecols=["listing_id"])) if (DATA / "excluded_by_review.csv").exists() else 0),

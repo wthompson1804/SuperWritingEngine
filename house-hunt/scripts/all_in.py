@@ -262,7 +262,8 @@ def cost_unit(r, util, RT, MED):
             else:
                 lines.append({"line": name, "amount": 0, "basis": "unknown"}); unknown.append(key)
         extras = sum(l["amount"] or 0 for l in lines[1:])
-        all_in = round((rent_basis_val or 0) + extras)
+        all_in_exact = (rent_basis_val or 0) + extras
+        all_in = round(all_in_exact)
         # (b) what the bill would likely be once the unknown parking and fee lines are known (never part of all_in)
         likely_add, likely_notes = 0.0, []
         if "parking fee" in unknown:
@@ -301,7 +302,7 @@ def cost_unit(r, util, RT, MED):
                     "all_in": all_in, "all_in_gross": round((rent_gross_val or 0) + extras), "all_in_lines": json.dumps(lines),
                     "all_in_unknown_lines": "; ".join(unknown), "all_in_estimated_lines": "; ".join(l["line"] for l in lines if l["basis"] == "estimate"),
                     "all_in_stated_line_count": sum(1 for l in lines[1:] if l["basis"] not in ("estimate", "unknown")),
-                    "cost_gate": "pass" if all_in <= CAP else "fail"})
+                    "cost_gate": "pass" if all_in_exact <= CAP else "fail"})     # on the unrounded sum: round() takes $3,000.50 down to $3,000
 
 
 def finish(U, out, RT):

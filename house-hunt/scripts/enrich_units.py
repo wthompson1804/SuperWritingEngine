@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).parent)); sys.path.insert(0, str(Path(__fi
 from lib import DATA
 import drive, transit, crime, places, utilities
 import build_master
+import parsers
 
 CAP = 3000
 OUT = DATA / "enriched"; OUT.mkdir(exist_ok=True)
@@ -106,7 +107,8 @@ def flat(r):
         "near_veh_theft_24m": v(cn, "grand_larceny_motor_vehicle", "last_24_months"),
         "near_theft_from_veh_24m": v(cn, "theft_from_vehicle", "last_24_months"),
         "near_vs_baseline": json.dumps(c.get("vs_baseline"), default=str) if isinstance(c, dict) else "",
-        "park_name": (g.get("nearest_named_park") or {}).get("name") or (g.get("nearest_park") or {}).get("name"),
+        # the distance stands whatever the feature is called; the NAME is kept only when it reads as a park (parsers.park_name)
+        "park_name": parsers.park_name((g.get("nearest_named_park") or {}).get("name") or (g.get("nearest_park") or {}).get("name")),
         "park_walk_min": v(g, "nearest_named_park_walk_min") or v(g, "nearest_park_walk_min"),
         "park_ha_800m": v(g, "park_area_ha_within_800m"),
         "dog_park_name": (g.get("nearest_dog_park") or {}).get("name"),

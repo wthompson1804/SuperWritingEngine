@@ -99,11 +99,11 @@ def gate_dog(r):
     return "pass"
 
 
-INFER_ELEVATOR_FLOORS = 6  # Will, 2026-11-15: a building of 6+ floors is treated as having an elevator (asterisk)
+INFER_ELEVATOR_FLOORS = parsers.ELEVATOR_MIN_FLOORS  # Will, 2026-11-15: a building of 6+ floors is treated as having an elevator (asterisk)
 # The harvester wrote elevator "yes" from unit labels on the page ("elevator: 6+ floors (unit numbers on the page reach
 # floor 37)"): a height guessed from labels, which does not support an elevator.
 HARVESTER_LABEL_HEIGHT = re.compile(r"elevator: \d+\+ floors\W{0,3}unit numbers", re.I)
-EXACT_LOT = "house_number+location"   # nyc_building_facts.match_basis when the tax lot is the listing's own address
+EXACT_LOT = parsers.EXACT_LOT           # nyc_building_facts.match_basis; the lot counts only when its address agrees too (parsers.lot_is_exact)
 AGGREGATORS = ("trulia", "zumper", "apartmentlist", "zillow", "craigslist", "apartments.com", "rent.com")   # as build_master.py
 _EV_INFERRED = re.compile(r"inferred|implied|treated as|plan rule", re.I)
 _EV_PLUTO_ONLY = re.compile(r"pluto|bldgclass|building class|public record|class D\d|nyc_records_match|cityofnewyork", re.I)
@@ -123,44 +123,56 @@ def page_height(r):
     return max([v for v in (bf, stated_floor) if v is not None], default=None)
 
 
-def gate_elevator(r):
-    """Returns (result, basis). The elevator gate passes only on:
-      'stated'                   a page lists an elevator (a listing site's amenity list counts)
-      'inferred_harvester'       the harvester wrote yes from a height a page gives (a SightMap floor list, the floor
-                                 field of a page; independent check W3)
-      'inferred_6plus_floors'    a page or record gives the building 6+ floors (page_height; PLUTO floors in main())
-      'inferred_high_rise_label' the management's own page calls the building a high-rise
-    plus, in main(): 'nyc_pluto_building_class' (the city's elevator class on the listing's own lot) and
-    'evidence_confirmed' / 'evidence_stated' / 'amenities_page' (elevator_evidence). Anything inferred stays an open
-    gate fact until the evidence pass confirms it. A floor read from a unit label NEVER supports the elevator
-    (owner's rule, CLAUDE.md): such a listing is 'unknown' (pending). The floor gate still reads labels (gate_floor)."""
+def elevator_facts(r, evidence="", contradicted=False, active_devices=None) -> dict:
+    """What a listing row says about the elevator, as the arguments of parsers.elevator_rule (the one rule every stage
+    uses). `evidence`, `contradicted` and `active_devices` come from the evidence files (main() looks them up by address);
+    a caller that has only the row (scripts/zumper_open_pending.py) leaves them out."""
     e = str(r.elevator).strip().lower()
     notes = str(getattr(r, "notes", ""))
-    if e == "no":
-        return "fail", "stated"
-    if e == "yes":
-        if not HARVESTER_INFERRED_ELEVATOR.search(notes):
-            return "pass", "stated"
-        if not HARVESTER_LABEL_HEIGHT.search(notes):
-            return "pass", "inferred_harvester"
-        # the harvester's yes rests on unit labels: it counts only if a page or record gives the height (below)
-    tallest = page_height(r)
-    if tallest is not None and tallest >= INFER_ELEVATOR_FLOORS:
-        return "pass", "inferred_6plus_floors"
-    if "high-rise" in str(getattr(r, "community_building_type", "")).lower().replace(" ", "-"):
-        return "pass", "inferred_high_rise_label"
-    return "unknown", ""
+    harvester = e == "yes" and bool(HARVESTER_INFERRED_ELEVATOR.search(notes))
+    return dict(
+        page_no=e == "no",
+        stated=e == "yes" and not harvester,
+        # the harvester's yes read from a page's floor list or floor field; one read from unit labels counts for nothing
+        page_height_claim=harvester and not HARVESTER_LABEL_HEIGHT.search(notes),
+        height=page_height(r),
+        high_rise_own_page=parsers.is_high_rise(getattr(r, "community_building_type", "")),   # community_facts.csv: management pages
+        record_class=str(getattr(r, "elevator_from_class", "")),
+        record_floors=getattr(r, "pluto_floors", ""),
+        lot_exact=parsers.lot_is_exact(getattr(r, "match_basis", ""), getattr(r, "address", ""), getattr(r, "pluto_address", "")),
+        active_devices=active_devices, evidence=evidence, contradicted=contradicted)
 
 
-def elevator_from_pluto_floors(pluto_floors, match_basis, elevator_from_class=""):
-    """True when the city's record gives 6+ floors for the listing's own lot (an exact lot match) and its building
-    class does not say walk-up. A neighbouring lot's height says nothing about this building."""
-    v = to_num(pluto_floors)
-    return v is not None and v >= INFER_ELEVATOR_FLOORS and match_basis == EXACT_LOT and elevator_from_class != "no"
+_GATE_OF = {"established": "pass", "open": "pass", "no": "fail", "unknown": "unknown"}
+
+
+def gate_elevator(r, evidence="", contradicted=False, active_devices=None):
+    """Returns (result, basis). The decision is parsers.elevator_rule (truth table in scripts/parsers.py):
+    established or open -> pass, no -> fail, unknown -> pending. Bases: 'stated', 'nyc_pluto_building_class' (the
+    listing's own lot only), 'evidence_confirmed' / 'evidence_stated' / 'amenities_page', and the open ones
+    'inferred_harvester', 'inferred_6plus_floors', 'inferred_high_rise_label'. A floor read from a unit label and a
+    neighbouring tax lot never count, to pass or to fail. The floor gate still reads labels (gate_floor)."""
+    status, basis = parsers.elevator_rule(**elevator_facts(r, evidence, contradicted, active_devices))
+    return _GATE_OF[status], basis
+
+
+def elevator_from_pluto_floors(pluto_floors, lot_exact, elevator_from_class=""):
+    """True when the city's record gives 6+ floors for the listing's own lot and its building class does not say
+    walk-up (parsers.elevator_rule). A neighbouring lot's height says nothing about this building."""
+    if lot_exact == EXACT_LOT:                     # older callers passed the match basis
+        lot_exact = True
+    return parsers.elevator_rule(record_class=elevator_from_class, record_floors=pluto_floors, lot_exact=lot_exact is True)[0] == "open"
 
 
 def elevator_evidence(folder=None, amenities=None) -> dict:
-    """addr_key -> (basis, source): buildings where a page that was read states an elevator although the listing row
+    """addr_key -> (basis, source) for the buildings whose evidence states an elevator and nothing speaks against it
+    (elevator_evidence_rows without the contradicted buildings)."""
+    out, against = elevator_evidence_rows(folder, amenities)
+    return {k: v for k, v in out.items() if k not in against}
+
+
+def elevator_evidence_rows(folder=None, amenities=None):
+    """({addr_key: (basis, source)}, {addr_key spoken against}): buildings where a page that was read states an elevator although the listing row
     does not. Rows of the evidence pass (data/evidence/confirm_batch_*.csv), graded as build_master.py grades them:
     'evidence_confirmed' (the building's own or another non-listing-site page), 'evidence_stated' (a listing site's
     amenity list or text); then 'amenities_page' (data/reference/building_amenities.csv, elevator_stated = yes).
@@ -192,7 +204,7 @@ def elevator_evidence(folder=None, amenities=None) -> dict:
         A = pd.read_csv(af, dtype=str, keep_default_na=False)
         for r in A[A.elevator_stated.str.lower() == "yes"].itertuples():
             out.setdefault(r.addr_key, ("amenities_page", r.source_url))
-    return {k: v for k, v in out.items() if k not in against}
+    return out, against
 
 
 def gate_floor(r):
@@ -254,14 +266,30 @@ def main():
         return
     df = pd.concat([pd.read_csv(f, dtype=str, keep_default_na=False) for f in files], ignore_index=True)
     n_raw = len(df)
+    # no API key, token or signature in any URL we carry (Trulia's Street View photo links held Trulia's own Google key)
+    for col in ("photo_url", "url", "building_url"):
+        if col in df:
+            df[col] = df[col].map(parsers.strip_url_secrets)
 
     grid = pd.read_csv(DATA / "reference" / "search_grid.csv", dtype={"zcta": str})
     drive = dict(zip(grid.zcta, grid.drive_min))
     df["zip5"] = df.zip.str.extract(r"(\d{5})", expand=False).fillna("")
     df["drive_min_zip"] = df.zip5.map(drive)
 
-    df["addr_key"] = df.address.map(norm_addr) + "|" + df.zip5
+    # A unit written into the address ('1775 Windsor Road #215', '20 Gill Lane, Apt. 1E') belongs in the unit field: left in
+    # the address it hides the unit from the floor gate and from the duplicate check. The address column is cleaned and
+    # a blank unit field is filled from it. addr_key is still built from the address AS LISTED: it is the key every
+    # evidence file is filed under, so it must not change.
+    sp = df.address.map(parsers.split_address_unit)
+    df["address_as_listed"] = df.address
+    df["unit_in_address"] = [x[1] for x in sp]
+    from_addr = (df.unit_in_address != "") & (df.unit.str.strip() == "")
+    df.loc[from_addr, "unit"] = df.loc[from_addr, "unit_in_address"]
+    df["unit_basis"] = from_addr.map({True: "from_address", False: ""})
+    df["address"] = [parsers.street_address(x[0]) for x in sp]      # '219 Lenox Rd, Brooklyn, NY 11226, USA' -> '219 Lenox Rd'
+    df["addr_key"] = df.address_as_listed.map(norm_addr) + "|" + df.zip5
     df["unit_key"] = df.unit.map(norm_unit)
+    df["listing_kind"] = [parsers.listing_kind(u, d, l, lt, bn) for u, d, l, lt, bn in zip(df.unit, df.detail_level, df.listing_id, df.listing_type, df.building_name)]
     df["dedupe_key"] = df.addr_key + "|" + df.unit_key + "|" + df.beds.astype(str)
     # units with no unit label can't be told apart; keep one per source+rent to avoid over-merging
     blank = df.unit_key == ""
@@ -327,33 +355,34 @@ def main():
     df["g_rent"] = df.apply(gate_rent, axis=1)
     df["g_movein"] = df.apply(gate_movein, axis=1)
     df["g_dog"] = df.apply(gate_dog, axis=1)
-    el = df.apply(gate_elevator, axis=1)
-    df["g_elevator"] = [x[0] for x in el]
-    df["elevator_basis"] = [x[1] for x in el]
-    # a page that was read states an elevator where the listing row leaves it open (evidence pass, amenities pages)
-    ev = elevator_evidence()
-    hit = (df.g_elevator == "unknown") & df.addr_key.isin(ev.keys())
-    df["elevator_evidence_source"] = ""
-    df.loc[hit, "g_elevator"] = "pass"
-    df.loc[hit, "elevator_basis"] = df.loc[hit, "addr_key"].map(lambda k: ev[k][0])
-    df.loc[hit, "elevator_evidence_source"] = df.loc[hit, "addr_key"].map(lambda k: ev[k][1])
-    # NYC: official building class from PLUTO (scripts/enrich_nyc_pluto.py) settles what the listing leaves unstated
+    # NYC: the city's building class and floor count from PLUTO (scripts/enrich_nyc_pluto.py), used only on the listing's own lot
+    pcols = ["elevator_from_class", "pluto_class", "pluto_floors", "pluto_units", "pluto_year", "pluto_bbl", "match_basis", "pluto_address"]
     pf = DATA / "reference" / "nyc_building_facts.csv"
-    if pf.exists():
-        pl = pd.read_csv(pf, dtype=str, keep_default_na=False).set_index("addr_key")
-        for col in ("elevator_from_class", "pluto_class", "pluto_floors", "pluto_units", "pluto_year", "pluto_bbl", "match_basis"):
-            df[col] = df.addr_key.map(pl[col]) if col in pl else ""
-        df[["elevator_from_class", "pluto_class", "pluto_floors", "pluto_units", "pluto_year", "pluto_bbl", "match_basis"]] = \
-            df[["elevator_from_class", "pluto_class", "pluto_floors", "pluto_units", "pluto_year", "pluto_bbl", "match_basis"]].fillna("")
-        unstated = df.elevator_basis != "stated"
-        # the city's elevator class passes the gate only on the listing's own lot (build_master.py applies the same test)
-        yes = unstated & (df.elevator_from_class == "yes") & (df.match_basis == EXACT_LOT)
-        no = unstated & (df.elevator_from_class == "no") & (df.elevator_basis == "")
-        df.loc[yes, ["g_elevator", "elevator_basis"]] = ["pass", "nyc_pluto_building_class"]
-        df.loc[no, ["g_elevator", "elevator_basis"]] = ["fail", "nyc_pluto_building_class"]
-        # a real height from the city's record: 6+ floors on the listing's own lot
-        tall = (df.g_elevator == "unknown") & pd.Series([elevator_from_pluto_floors(a, b, c) for a, b, c in zip(df.pluto_floors, df.match_basis, df.elevator_from_class)], index=df.index)
-        df.loc[tall, ["g_elevator", "elevator_basis"]] = ["pass", "inferred_6plus_floors"]
+    pl = pd.read_csv(pf, dtype=str, keep_default_na=False).drop_duplicates("addr_key").set_index("addr_key") if pf.exists() else pd.DataFrame()
+    for col in pcols:
+        df[col] = df.addr_key.map(pl[col]).fillna("") if col in pl else ""
+    # the city's device list: zero active passenger elevators on the lot cancels the elevator class
+    devices = {}
+    nrf = DATA / "evidence" / "nyc_records.csv"
+    if nrf.exists():
+        NR = pd.read_csv(nrf, dtype=str, keep_default_na=False)
+        for r in NR[NR.record_type == "dob_elevator_devices_active"].itertuples():
+            v = to_num(r.count)
+            if v is not None:
+                devices[r.addr_key] = int(v)
+    # a page that was read states an elevator where the listing row leaves it open (evidence pass, amenities pages)
+    ev, against = elevator_evidence_rows()
+    el = [parsers.elevator_rule(**elevator_facts(r, ev.get(r.addr_key, ("", ""))[0], r.addr_key in against, devices.get(r.addr_key))) for r in df.itertuples()]
+    df["g_elevator"] = [_GATE_OF[x[0]] for x in el]
+    df["elevator_basis"] = [x[1] for x in el]
+    df["elevator_rule_status"] = [x[0] for x in el]          # established / open / no / unknown (parsers.elevator_rule)
+    by_ev = df.elevator_basis.isin(["evidence_confirmed", "evidence_stated", "amenities_page"])
+    df["elevator_evidence_source"] = ""
+    df.loc[by_ev, "elevator_evidence_source"] = df.loc[by_ev, "addr_key"].map(lambda k: ev[k][1])
+    # the height finding by itself (whatever better basis the row also has): build_master.py and rank.py read it, so
+    # "a real height of 6+ floors" means the same at every stage
+    hb = [parsers.elevator_rule(**{**elevator_facts(r), "stated": False, "record_class": ""}) for r in df.itertuples()]
+    df["elevator_height_basis"] = [b if s_ == "open" else "" for s_, b in hb]
     fl = df.apply(gate_floor, axis=1)
     df["g_floor"] = [x[0] for x in fl]
     df["floor_used"] = [x[1] for x in fl]

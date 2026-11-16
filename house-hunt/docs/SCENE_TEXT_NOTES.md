@@ -24,8 +24,10 @@ The rule now: **say the plain thing, and quote the page's own number.**
 | `data/reference/scene_text_years.csv` | 6 rows, one per experience (the key column is still `year_label`, "... Year"). |
 | `data/reference/scene_text_neighborhoods.csv` | One row per neighborhood drafted that is still in `data/lifestyle_groups.csv` (133 today; 115 are in `site/data.json`, 104 of them with apartments shown). |
 
-`scripts/realtor_lines.py` and `data/reference/realtor_lines.csv` (the building and apartment lines) are a separate
-system with a separate owner. They were not touched by the copy edit; see "Out of scope" below.
+`scripts/realtor_lines.py`, `data/reference/realtor_lines.csv` and `data/reference/building_about.csv` (the building
+and apartment lines) are a separate system. They were not part of this copy edit, and have since been rewritten to the
+same plain standard by `scripts/realtor_lines.py`: the guards are the ones in `check_scene_text.py`, imported by
+`scripts/test_realtor_lines.py` and run over every building and apartment text.
 
 After any data rerun:
 
@@ -177,10 +179,11 @@ drive to a third.
 
 ## Out of scope, reported to the owner (not edited)
 
-- `data/reference/realtor_lines.csv` (building and apartment lines) still carries what this edit removed here: "under
-  your cap", "all in" unexplained, "net-effective", "we" as narrator, "unit", "Where the car sleeps", and template
-  seams ("Then the practical side:", "Then there is 554 square feet.", "Count on about …"). It also had 489 rows
-  against 491 apartments on the page at the time of writing.
+- Since fixed: `data/reference/realtor_lines.csv` (building and apartment lines) carried what this edit removed here
+  ("under your cap", "all in" unexplained, "net-effective", "we" as narrator, "unit", "Where the car sleeps", template
+  seams such as "Then the practical side:"). `scripts/realtor_lines.py` now composes those lines to the same standard,
+  with the guards of `check_scene_text.py` (run by `scripts/test_realtor_lines.py`); `scripts/verify_all.py` checks that its two tables hold exactly the
+  page's apartments and buildings.
 - Page template wording: "green space a 8-minute walk", "A typical place is 788 sq ft", "1 car thefts per 1,000",
   "A studio, size not known yet,, floor not known yet."
 - "By mail they are typically $27.10 a round trip" is the same figure on three experiences because
