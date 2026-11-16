@@ -25,6 +25,9 @@ python3 scripts/build_site.py         # site/index.html + data -> site/dist/inde
 python3 scripts/build_artifact.py     # publish step: site/dist/index.html -> site/dist/artifact.html (the file that is published)
 ```
 
+Before publishing: `python3 scripts/verify_all.py` (read-only; every test and check, then cross-file checks of the
+built page; exit code 0 only when all pass; `--quick` skips the slow suites, `--with-browser` adds the walk-through).
+
 `run_all.py` writes `docs/RUN_REPORT.md` (counts in and out of every stage, with reasons) and exits non-zero if a step
 fails or a shown unit breaks a rule. Publish the built page as a **new private artifact**; never replace the mock.
 
@@ -48,6 +51,8 @@ When evidence is added or a unit is newly promoted, the review rule applies befo
 | `python3 scripts/test_shortlist_tools.py` | Call sheet, tour days and re-check tools (synthetic rows, no network). |
 | `node scripts/site_walkthrough_test.js` | The page itself at 390, 1280 and 320 px (usage in the file header; needs `site/` served locally). |
 | `node scripts/map_component_test.js` | The standalone map demo. |
+| `python3 scripts/test_lib_guard.py` | The refused-host guard in `scripts/lib.py` (no network). |
+| `python3 scripts/verify_all.py` | All of the above in one read-only command, plus cross-file checks; `scripts/test_verify_all.py` tests its helpers. |
 | `python3 scripts/check_repo.py` | Read-only hygiene report: big files, orphan CSVs and scripts, broken document references, key-like strings. |
 
 ## Where things live

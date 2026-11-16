@@ -185,10 +185,20 @@ All prose is tied to data (`docs/SCENE_TEXT_NOTES.md`).
   `scene_text_years.csv` and `scene_text_neighborhoods.csv`, each row with an `evidence_json` that says where every
   number and claim comes from. `scripts/check_scene_text.py` re-tests each item against the current data and enforces
   house style, including no crime wording in open fields. A row whose numbers moved fails until the draft is rebuilt.
-- **Buildings and units.** `scripts/realtor_lines.py` composes "About the building" and each unit's line, catch and
-  section subheads from sentence libraries and the unit's own fields in `site/data.json`
-  (`data/reference/building_about.csv`, `realtor_lines.csv`, each with `facts_used_json`).
-  `scripts/test_realtor_lines.py` re-checks every unit on the page.
+- **Buildings and apartments.** `scripts/realtor_lines.py` composes, from a few plain hand-written wordings per fact
+  and the fields in `site/data.json`, never per apartment by hand:
+  - per building (`data/reference/building_about.csv`): the About text (one or two sentences, at most 40 words: the
+    building's most distinctive feature, then the most useful thing near it) and three to five icon points, exactly
+    one of them the main thing to ask about;
+  - per apartment (`data/reference/realtor_lines.csv`): a line (what sets this apartment apart inside its building,
+    then its price and size), a catch (the one thing to ask or watch, from its open item, else its disclosures) and
+    optional subheads under the cost, parking, dog and building sections.
+
+  Each row has a `facts_used_json` tracing every word and number to a field. No lead, catch, building sentence or
+  subhead wording is on more than 8% of the rows (a subhead that has reached its share is left empty); plain facts
+  such as the price-and-size sentence are worded the same wherever the fact is the same. Choices are seeded by id, so
+  a rerun on the same data gives the same text. The plain-language guards are shared with the scene text: they live
+  in `check_scene_text.py` and `scripts/test_realtor_lines.py` imports them and runs them over every text on the page.
 - **Outside voices.** Attributed quotes are stored verbatim with a permalink and checked against the cached page
   (`scripts/verify_quotes.py`; the local-rules builders do the same for rule quotes).
 - Order after a data rerun: `build_page_data.py` → `build_scene_text.py` → `check_scene_text.py` →

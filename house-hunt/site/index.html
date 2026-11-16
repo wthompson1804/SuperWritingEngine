@@ -1137,7 +1137,7 @@ function initHouseHuntMap(container,data,base,opts){
     d.i=i;
     var h=d.h,dm=h.drive_min!=null?Math.round(h.drive_min)+" minutes by car":"drive time not known";
     d.g=el("g",{"class":"hhm-dot"+(d.n?"":" none"),role:"button",tabindex:"-1","data-i":i,
-      "aria-label":h.name+(h.state?", "+h.state:"")+". "+(d.y.label?d.y.label+". ":"")+(d.n===1?"1 place":d.n+" places")+". "+dm+"."},gDots);
+      "aria-label":h.name+(h.state?", "+h.state:"")+". "+(d.y.label?d.y.label+". ":"")+(d.n===1?"1 apartment":d.n+" apartments")+". "+dm+"."},gDots);
     d.m=el("path",{"class":"m",d:shapeD(d.y.shape,d.r)},d.g)});
   gDots.appendChild(ringW);gDots.appendChild(ring);
   /* Mom and Dad: a house on a short stem, so marks at the same spot stay visible under it. */
@@ -1259,8 +1259,8 @@ function initHouseHuntMap(container,data,base,opts){
     dots.forEach(function(d){if(!d.dim)gDots.appendChild(d.g)});
     if(state.sel)gDots.appendChild(state.sel.g);
     gDots.appendChild(ringW);gDots.appendChild(ring);
-    var sizeKey='<span class="k"><svg viewBox="0 0 30 22" aria-hidden="true"><circle cx="6" cy="11" r="4.6" fill="#7A5670"/><circle cx="20" cy="11" r="9" fill="#7A5670"/></svg>Bigger mark, more places</span>'+
-      (dots.some(function(d){return !d.n})?'<span class="k"><svg viewBox="0 0 22 22" style="width:16px" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="#fff" stroke="#7A5670" stroke-width="2.4"'+(state.mode==="drive"?' stroke-dasharray="3 2.4"':'')+'/></svg>'+(state.mode==="drive"?'Dashed outline':'Hollow')+': no places shown</span>':'');
+    var sizeKey='<span class="k"><svg viewBox="0 0 30 22" aria-hidden="true"><circle cx="6" cy="11" r="4.6" fill="#7A5670"/><circle cx="20" cy="11" r="9" fill="#7A5670"/></svg>Bigger mark, more apartments</span>'+
+      (dots.some(function(d){return !d.n})?'<span class="k"><svg viewBox="0 0 22 22" style="width:16px" aria-hidden="true"><circle cx="11" cy="11" r="6" fill="#fff" stroke="#7A5670" stroke-width="2.4"'+(state.mode==="drive"?' stroke-dasharray="3 2.4"':'')+'/></svg>'+(state.mode==="drive"?'Dashed outline':'Hollow')+': no apartments shown</span>':'');
     if(state.mode==="drive"){
       var act=dots.filter(function(d){return !d.dim});
       legend.innerHTML='<b>By car to '+esc(anchorLabel)+', minutes</b>'+BANDS.map(function(b,i){
@@ -1299,12 +1299,12 @@ function initHouseHuntMap(container,data,base,opts){
     card.innerHTML='<button type="button" class="hhm-x" aria-label="Close">&times;</button>'+
       (y.label||rank?'<p class="hhm-yr">'+(y.label?swatch(y)+'<span>'+esc(y.label)+'</span>':'')+rank+'</p>':'')+
       '<h3>'+esc(h.name)+(h.state?'<span>'+esc(h.state)+'</span>':'')+'</h3>'+
-      '<ul class="hhm-facts"><li><b>'+(lim?d.n+' of '+all:d.n)+'</b><small>'+(lim?'places fit your limits':d.n===1?'place shown':'places shown')+'</small></li>'+
+      '<ul class="hhm-facts"><li><b>'+(lim?d.n+' of '+all:d.n)+'</b><small>'+(lim?'apartments fit your limits':d.n===1?'apartment shown':'apartments shown')+'</small></li>'+
       '<li>'+(dm!=null?'<b>'+Math.round(dm)+' min</b><small>by car to '+esc(anchorLabel)+'</small>':'<b class="words">Drive time not known</b>')+'</li>'+
       '<li>'+toll+'</li></ul>'+
       (h.badge?'<p class="hhm-badge">'+esc(h.badge)+'</p>':'')+ /* page: crime sits behind "More"; the one open word on it is the page's badge */
       (cr?'<details class="hhm-more"><summary>More</summary><div class="hhm-crime">'+cr+'</div>'+(S.year?'<p class="hhm-none" style="margin-top:6px">Reported crimes per 1,000 residents, '+esc(Math.round(S.year))+'. The mark on each bar is Jamaica.</p>':'')+'</details>':'')+
-      '<button type="button" class="hhm-go">'+(all?'See places':'See this neighborhood')+'</button>';
+      '<button type="button" class="hhm-go">'+(all?'See the apartments':'See this neighborhood')+'</button>';
     paint();
   }
 
@@ -1680,6 +1680,9 @@ var RENT_OFFER_RE=/special offer|net-effective|free months?\b/i,RENT_Q_RE=/norma
 function discsShown(U){return rentStar(U)?discs(U).filter(function(d){return !RENT_OFFER_RE.test(d.what)}):discs(U)}
 function oneRentQ(q){var hits=q.filter(function(x){return RENT_Q_RE.test(x)});if(hits.length<2)return q;var keep=hits.filter(function(x){return /\?\s*$/.test(x)})[0]||hits[0],done=false;
   return q.map(function(x){if(!RENT_Q_RE.test(x))return x;if(done)return null;done=true;return keep}).filter(function(x){return x!=null})}
+/* the same question twice, once with a note in brackets: the longer one stays */
+function noTwins(q){var k=function(x){return String(x).toLowerCase().replace(/\s*\([^)]*\)\s*$/,"").replace(/[^a-z0-9]+/g," ").trim()};
+  return q.filter(function(x,i){return !q.some(function(y,j){return j!==i&&k(y)===k(x)&&(String(y).length>String(x).length||(String(y).length===String(x).length&&j<i))})})}
 function rentLines(U){var o=[];
   if(rentStar(U))o.push("<b>*</b> "+esc(offerLine(U)));
   leaseBits(U).forEach(function(x){o.push(esc(x))});
@@ -1826,7 +1829,7 @@ function tourQs(U){var q=(U.tour_questions||[]).slice(),add=[];
   discs(U).forEach(function(d){var x=d.ask||("Ask about: "+d.what+"."+(d.why?" ("+d.why+")":""));if(q.indexOf(x)<0)q.push(x)});
   if(!rulesOf(H_BY[U.hood_id],"parking_rules").length)q.push(Q_PARKING);
   if(evState(U)==="none")q.push(Q_EVIDENCE);
-  return oneRentQ(q)}
+  return noTwins(oneRentQ(q))}
 
 /* ================= Template sentences. Every sentence on the page that is not quoted evidence,
    approved year text (label, subhead) or interface copy is built here from data fields. ================= */
@@ -2164,13 +2167,15 @@ function yearNums(Y){var M=Y.medians||{},us=Y.units,hs=Y.hoods,cf=costFig(us);
   return {cost:M.all_in!=null?M.all_in:cf?cf.m:null,cr:Y.all_in_range||(cf?cf.r:null),drive:M.drive_min!=null?M.drive_min:med(hs.map(function(H){return H.drive_min})),dr:Y.drive_min_range||span(hs.map(function(H){return H.drive_min}))}}
 /* A first-screen tile: typical all-in, typical minutes to Mom and Dad (each with its range small beneath) and the count of places. */
 function tileFigs(Y,n,total){var f=yearNums(Y);
-  return '<div class="figs xt"><div>'+(f.cost!=null?'<b>'+m0(f.cost)+'</b><span>typical month, everything included</span>'+rng(f.cr,m0):'<b>Ask</b><span>cost not known</span>')+'</div><div>'+(f.drive!=null?'<b>'+r0(f.drive)+' min</b><span>typical to Mom and Dad</span>'+rng(f.dr,r0," min"):'<b>Ask</b><span>drive not known</span>')+'</div><div class="cnt"><b>'+n+'</b><span>'+(n===total?(total===1?"apartment":"apartments"):"of "+total+" fit")+'</span></div></div>'}
+  return '<div class="figs xt"><div>'+(f.cost!=null?'<b>'+m0(f.cost)+'</b><span>typical month</span>'+rng(f.cr,m0):'<b>Ask</b><span>cost not known</span>')+'</div><div>'+(f.drive!=null?'<b>'+r0(f.drive)+' min</b><span>typical to Mom and Dad</span>'+rng(f.dr,r0," min"):'<b>Ask</b><span>drive not known</span>')+'</div><div class="cnt"><b>'+n+'</b><span>'+(n===total?(total===1?"apartment":"apartments"):"of "+total+" fit")+'</span></div></div>'}
 var BASIS_WORD={stated:"stated on the listing",confirmed:"confirmed",inferred:"not stated on any page; worked out from the building's height",amenities_page:"from the building's amenities page",community_page:"from the building's own page",official_record:"from an official record","computed from stated terms":"worked out from the stated offer",estimate:"an estimate, not a quote",unknown:"not published, so not in the total"};
+/* a cost line's name in plain words: the pipeline's "net-effective" is "with the offer" */
+function lineName(l){return humanize(l.line).replace(/net[- ]effective/gi,"with the offer").replace(/\ball[- ]in\b/gi,"everything included")}
 function receipt(U){var lines=U.all_in_lines||[],anyStar=false,basis=[];
   var h='<div class="receipt">';
   lines.forEach(function(l){var unk=l.basis==="unknown"||l.amount==null,soft=unk||l.basis==="estimate";if(soft)anyStar=true;
-    basis.push('<li><b>'+esc(capFirst(humanize(l.line)))+':</b> '+esc(unk?BASIS_WORD.unknown:(BASIS_WORD[l.basis]||l.basis||"basis not recorded"))+(l.note?'; '+esc(l.note):'')+'</li>');
-    h+='<div class="ln"><span>'+esc(humanize(l.line))+(soft?'*':'')+'</span><span>'+(unk?NOT_PUB:Number(l.amount)===0?'no charge':money(l.amount))+'</span></div>'});
+    basis.push('<li><b>'+esc(capFirst(lineName(l)))+':</b> '+esc(unk?BASIS_WORD.unknown:(BASIS_WORD[l.basis]||l.basis||"basis not recorded"))+(l.note?'; '+esc(l.note):'')+'</li>');
+    h+='<div class="ln"><span>'+esc(lineName(l))+(soft?'*':'')+'</span><span>'+(unk?NOT_PUB:Number(l.amount)===0?'no charge':money(l.amount))+'</span></div>'});
   h+='<div class="ln tot"><span>A month, everything included</span><span>'+money(U.all_in)+'</span></div>';
   if((U.all_in_unknown||[]).length)h+='<p class="fn"><b>Not published, so not in the total:</b> '+esc(list(U.all_in_unknown))+'.</p>';
   h+=howHtml((basis.length?'<ul>'+basis.join("")+'</ul>':'')+(anyStar?'<p>* An estimate, or a cost the building has not published. Estimates are in the total. Costs that are not published are left out of it; they are not zero.</p>':'')+
@@ -2320,7 +2325,7 @@ var HL={
 /* ---- first screen: six short cards ---- */
 function vLives(){
   var h='<header class="title-card"><h1 class="logo" aria-label="Lamia\'s House Hunt"><svg viewBox="0 0 360 70" aria-hidden="true"><path d="M30 66 180 8 330 66" fill="none" stroke="#3A1630" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="262" y="16" width="20" height="34" rx="3" fill="#3A1630"/><path d="M180 30c-5-9-19-6-17 4 1 6 9 11 17 17 8-6 16-11 17-17 2-10-12-13-17-4z" fill="#E0457B"/></svg><span class="name">Lamia\'s</span><span class="show">House Hunt</span></h1><p class="tagline">'+pl(UNITS.length,"apartment")+' to see, in '+pl(HOODS.filter(function(H){return H.units.length}).length,"neighborhood")+', across '+pl(YEARS.length,"experience")+'.</p></header>';
-  h+='<div class="wrap"><section class="sec" id="sec-experiences" style="margin-top:16px"><h2><span class="s">Pick</span> an experience</h2><div class="stack tight" style="margin-top:10px">';
+  h+='<div class="wrap"><section class="sec" id="sec-experiences" style="margin-top:16px"><h2><span class="s">Pick</span> an experience</h2><p class="facts" id="price-note" style="margin-top:4px">Prices are for a month, everything included.</p><div class="stack tight" style="margin-top:8px">';
   YEARS.forEach(function(Y){var us=Y.units,n=us.filter(fits).length,none=!n,line=calmClause(Y.tagline)||calmClause(Y.subhead)||HL.first(pr(Y,"promise"),110);
     h+='<a class="life slim'+(none?' none':'')+'" href="'+href("year",Y.id)+'">'+illus(Y,"banner")+'<h3>'+ymark(Y,22)+esc(Y.label)+'</h3>'+(line?'<p class="l2">'+esc(line)+'</p>':'')+tileFigs(Y,n,us.length)+'</a>'});
   if(!YEARS.length)h+='<div class="empty"><p><b>Nothing to show yet.</b></p><p>The data has no experiences in it.</p></div>';
@@ -2932,7 +2937,7 @@ window.addEventListener("resize",fitTray);
 document.addEventListener("toggle",function(e){var d=e.target,id=d&&d.getAttribute&&d.getAttribute("data-row");if(id&&view.contains(d))(OPENED[current]=OPENED[current]||{})[id]=d.open},true);
 window.addEventListener("hashchange",function(){var r=location.hash.replace(/^#/,"")||"lives";if(routeOf(parse(r))!==current){closeSheet();go(r)}});
 
-window.__houseHunt={bldgs:function(){return BLDGS.map(function(B){return {id:B.id,slug:SLUG.bldg[B.id],hood:B.hood.id,units:B.units.map(function(u){return u.id})}})},state:function(){return {saved:S.saved.slice(),pick:S.pick.slice(),sort:S.sort}},tint:function(id,k){return U_BY[id]?tintOf(U_BY[id],k):null},sentences:sentences,aWalk:aWalk,payNote:payNote,ptBody:ptBody,parkShort:parkShort,distShort:distShort,HL:HL,HL_MAX:HL_MAX,cleanText:cleanText,looksDump:looksDump,hoodWhere:hoodWhere,hoodTitle:hoodTitle,headline:function(kind,id,key){var o=kind==="unit"?U_BY[id]:kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;
+window.__houseHunt={bldgs:function(){return BLDGS.map(function(B){return {id:B.id,slug:SLUG.bldg[B.id],hood:B.hood.id,units:B.units.map(function(u){return u.id})}})},state:function(){return {saved:S.saved.slice(),pick:S.pick.slice(),sort:S.sort}},tint:function(id,k){return U_BY[id]?tintOf(U_BY[id],k):null},sentences:sentences,cleanName:cleanName,offerLine:function(id){return U_BY[id]?offerLine(U_BY[id]):null},aboutShown:function(kind,id,mode){var o=kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;var all=aboutPoints(o);return {all:all.length,stale:all.filter(function(p){return staleCount(p.text,o)}).map(function(p){return p.text}).concat(sentences(calm(textOf(hostOfRec(o,"intro")))).filter(function(s){return staleCount(s,o)})),restated:all.filter(function(p){return !staleCount(p.text,o)&&ptRestates(p,mode,o)}).map(function(p){return p.text})}},aWalk:aWalk,payNote:payNote,ptBody:ptBody,parkShort:parkShort,distShort:distShort,HL:HL,HL_MAX:HL_MAX,cleanText:cleanText,looksDump:looksDump,hoodWhere:hoodWhere,hoodTitle:hoodTitle,headline:function(kind,id,key){var o=kind==="unit"?U_BY[id]:kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;
     return key==="trip"?HL.trip(kind==="unit"?o.moments.sun:o):key==="queens"?HL.queens(o.vs_queens):key==="reviews"?HL.reviews(o.ratings):HL[key](o)},map:function(){return HHMAP},marks:function(){return YEARS.map(function(Y){return Y.mark})},mapHoods:function(id){return mapData().neighborhoods.filter(function(h){return !id||h.year===id}).length},tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
 syncSliders();renderCounts();renderTray();renderFoot();
 go((function(){try{return location.hash.replace(/^#/,"")}catch(e){return ""}})()||"lives");

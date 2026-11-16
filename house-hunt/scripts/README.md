@@ -31,6 +31,9 @@ python3 scripts/test_shortlist_tools.py
 python3 scripts/test_page_data_extras.py
 python3 scripts/check_scene_text.py
 python3 scripts/check_repo.py           # read-only hygiene report
+
+python3 scripts/verify_all.py           # before publishing: every test and check above plus cross-file checks, read-only
+                                        #   --quick skips the slow suites; --with-browser adds the page walk-through
 ```
 
 Page tests need Node Playwright; see the header of `site_walkthrough_test.js` and `map_component_test.js`.
@@ -58,7 +61,7 @@ Not scripts, but they live here: `ev_b3_live_notes.json`, `h_mgmt_sightmap_sites
 | Script | Purpose | Stage | Inputs | Outputs | Run by `run_all` | Tests | Status |
 |---|---|---|---|---|---|---|---|
 | `run_all.py` | Runs the pipeline in a fixed order and writes the stage report | driver | all of `data/` | `docs/RUN_REPORT.md`, `data/reference/run_history.csv` | is the driver | runs the tests first | active |
-| `lib.py` | Shared helpers: cached, throttled fetch with a provenance log; paths; `census_key()`; `redact()` | all | network | `raw/<source>/` + `_index.jsonl` | imported | none | active |
+| `lib.py` | Shared helpers: cached, throttled fetch with a provenance log; paths; `census_key()`; `redact()`; the refused-host guard (`HostRefused`: no request to a host in `raw/_host_kill_shared.json` or on `OFF_LIMITS`; a cache hit is still served; `HOUSE_HUNT_ALLOW_HOST=<host>` lets one host through) | all | network, `raw/_host_kill_shared.json` | `raw/<source>/` + `_index.jsonl` | imported | `test_lib_guard.py` | active |
 | `parsers.py` | Every text parser used by the rules (floors, dogs, fees, offers, staleness, tolls); pure functions | all rule stages | strings | values | imported | `test_parsers.py`, `test_rules.py` | active |
 | `gates.py` | Merge the harvest files, dedupe, apply the listing gates | 1 gates | `data/listings_raw/*.csv`, `data/reference/nyc_building_facts.csv`, `community_facts.csv`, `data/evidence/resolved_pending_batch_*.csv` | `data/listings.csv`, `data/gate_summary.md` | yes (full, twice) | `test_rules.py` | active |
 | `enrich_nyc_pluto.py` | NYC lot facts (class, floors, units, year) matched to listings by location | 2 enrich | `data/listings.csv`, NYC Open Data PLUTO (cached) | `data/reference/nyc_building_facts.csv` | yes (full) | none | active |
@@ -103,6 +106,9 @@ Not scripts, but they live here: `ev_b3_live_notes.json`, `h_mgmt_sightmap_sites
 | `test_rules.py` | Rule tests for every defect of checks 2 and 3; `--data` checks the output | test | none; `--data`: `data/`, `site/data.json` | exit code | yes (first, and `--data` after rank) | is a test | active |
 | `test_shortlist_tools.py` | Tests for the three shortlist tools; synthetic rows, no network | test | none | exit code | no | is a test | active |
 | `test_page_data_extras.py` | Tests for `page_data_extras.py` and `build_artifact.py`: each block on a made-up page, idempotence, the quote screen, contacts, ratings; one run on the real data | test | temp folder; `site/data.json` copy | exit code | no | is a test | active |
+| `verify_all.py` | One read-only command before publishing: runs every `test_*.py`, `check_registry.py` (its table write switched off), `check_scene_text.py`, `page_data_extras.py --dry-run --strict`, then its own checks (shown ids = page ids, current verdicts, `realtor_lines.csv` / `building_about.csv` ids = page ids, scene text for every neighborhood, no floor-plan rows, no `key=` values, `site/dist` fresh); `--quick`, `--with-browser` | publish check | `data/`, `site/`, the tests and checkers | report and table on stdout, exit code; writes nothing | no | `test_verify_all.py` | active |
+| `test_verify_all.py` | Tests for the consistency helpers of `verify_all.py`; synthetic inputs | test | none | exit code | no | is a test | active |
+| `test_lib_guard.py` | Tests for the refused-host guard in `lib.py` (`HostRefused`): cache hit still served, killed and off-limits hosts stopped before a request, one-host override, malformed kill file; temp raw folder, fake network | test | none | exit code | no | is a test | active |
 | `check_repo.py` | Read-only repository hygiene check (big files, orphan CSVs and scripts, broken doc references, key-like strings) | hygiene | the working tree | report on stdout | no | none | active |
 
 ### Shortlist tools and contacts

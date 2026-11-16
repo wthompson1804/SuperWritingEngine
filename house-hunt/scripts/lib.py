@@ -63,6 +63,66 @@ def _throttle(host: str) -> None:
     _last_hit[host] = time.time()
 
 
+# ---- refused and off-limits hosts (CLAUDE.md, "Robots and source rules") -------------------------------------------
+# Checked before a network request only; a cache hit is always served. Hosts that refused us are in
+# raw/_host_kill_shared.json (may be absent). OFF_LIMITS is never fetched by script. One host can be let through for
+# one run with HOUSE_HUNT_ALLOW_HOST=<host>.
+OFF_LIMITS = ("zillow.com", "streeteasy.com", "apartments.com", "apartmentratings.com", "yelp.com", "reddit.com",
+              "nextdoor.com", "craigslist.org", "patch.com", "qns.com")
+KILL_FILE_NAME = "_host_kill_shared.json"
+
+
+class HostRefused(RuntimeError):
+    """A request to a host that refused us, or that is off limits, was stopped before it was sent."""
+
+
+def _bare_host(host: str) -> str:
+    host = (host or "").strip().lower().rstrip(".")
+    if "@" in host:
+        host = host.rsplit("@", 1)[1]
+    host = host.split(":")[0]
+    return host[4:] if host.startswith("www.") else host
+
+
+def _covers(entry: str, host: str) -> bool:
+    """True when host is entry or one of its subdomains ("www." ignored on both sides)."""
+    entry, host = _bare_host(entry), _bare_host(host)
+    return bool(entry) and (host == entry or host.endswith("." + entry))
+
+
+def host_refusal(host: str) -> str | None:
+    """Why a request to host must not be sent, or None. Never raises: a missing or malformed kill file blocks nothing."""
+    if not _bare_host(host):
+        return None
+    allow = os.environ.get("HOUSE_HUNT_ALLOW_HOST", "")
+    if allow.strip() and _covers(allow, host):
+        return None
+    for dom in OFF_LIMITS:
+        if _covers(dom, host):
+            return f"{dom} is off limits (CLAUDE.md, robots and source rules)"
+    try:
+        kill = json.loads((RAW / KILL_FILE_NAME).read_text())
+    except (OSError, ValueError):
+        return None
+    if not isinstance(kill, dict):
+        return None
+    for entry, rec in kill.items():
+        if isinstance(entry, str) and _covers(entry, host):
+            rec = rec if isinstance(rec, dict) else {}
+            why = rec.get("reason") or rec.get("status") or "refused"
+            return f"{entry} refused us ({why}; raw/{KILL_FILE_NAME})"
+    return None
+
+
+def check_host(url_or_host: str) -> None:
+    """Raise HostRefused when the host of this URL (or bare host) must not be requested."""
+    host = urlparse(url_or_host).netloc if "://" in url_or_host else url_or_host
+    why = host_refusal(host)
+    if why:
+        raise HostRefused(f"not requesting {_bare_host(host)}: {why}. "
+                          f"Override for one host only: HOUSE_HUNT_ALLOW_HOST={_bare_host(host)}")
+
+
 def cached_get(url: str, source: str, *, params: dict | None = None, ext: str = "json",
                refresh: bool = False, timeout: int = 60, retries: int = 3,
                headers: dict | None = None, method: str = "GET", data=None) -> tuple[bytes, dict]:
@@ -78,6 +138,7 @@ def cached_get(url: str, source: str, *, params: dict | None = None, ext: str = 
         return path.read_bytes(), json.loads(meta_path.read_text())
 
     host = urlparse(full_url).netloc
+    check_host(host)  # raises HostRefused; only reached when the cache did not answer
     h = {"User-Agent": USER_AGENT}
     if headers:
         h.update(headers)

@@ -54,5 +54,13 @@
   "url": "https://www.loftsat335.com/contactus",
   "at": "2026-11-16T01:07:03+00:00",
   "by": "ratings_census_part3"
+ },
+ "trulia.com": {
+  "reason": "403/CAPTCHA, tested 2026-11-16",
+  "status": "403/CAPTCHA, tested 2026-11-16",
+  "at": "2026-11-16T03:06:03+00:00",
+  "time": "2026-11-16T03:06:03+00:00",
+  "url": "https://www.trulia.com/",
+  "by": "scripts/lib.py harvest guard (hygiene task)"
  }
 }
