@@ -27,6 +27,106 @@ const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390
   const shot = async (name, full) => { if (W !== 390) return; await page.waitForFunction(() => !document.getElementById('toast').classList.contains('on'), null, { timeout: 5000 }).catch(() => {});
     if (full) { const y = await page.evaluate(() => window.scrollY); const h = await page.evaluate(() => document.documentElement.scrollHeight); await page.setViewportSize({ width: W, height: h }); await page.waitForTimeout(150); await page.screenshot({ path: `${OUT}/${name}.png` }); await page.setViewportSize({ width: W, height: 844 }); await page.evaluate(y => window.scrollTo(0, y), y); }
     else await page.screenshot({ path: `${OUT}/${name}.png` }); };
+  // ================= Map (docs/MAP_COMPONENT.md, "Map integration" in docs/SITE_NOTES.md) =================
+  // The most isolated tappable mark that is on screen, clear of the map's own buttons, the sticky trail and the bottom bar.
+  const pickMark = async (pg) => pg.evaluate(() => {
+    const svg = document.querySelector('.hhm-svg'), tray = document.getElementById('tray').getBoundingClientRect(), trail = document.getElementById('trail').getBoundingClientRect();
+    const top0 = trail.height ? trail.bottom + 6 : 6; window.scrollBy(0, svg.getBoundingClientRect().top - top0);
+    const r = svg.getBoundingClientRect(), bottom = Math.min(r.bottom, tray.top) - 12;
+    const all = [...svg.querySelectorAll('.hhm-dot:not(.dim)')].map(g => { const q = g.getBoundingClientRect(); return { x: q.x + q.width / 2, y: q.y + q.height / 2, label: g.getAttribute('aria-label') }; });
+    const home = svg.querySelector('g[pointer-events="none"]').getBoundingClientRect();
+    const ok = all.filter(a => a.y > r.top + 64 && a.y < bottom && a.x > r.left + 14 && a.x < r.right - 66 && !(a.x > home.left - 8 && a.x < home.right + 8 && a.y > home.top - 8 && a.y < home.bottom + 8));
+    ok.forEach(a => { a.gap = Math.min(...all.filter(o => o !== a).map(o => Math.hypot(o.x - a.x, o.y - a.y)), 999); });
+    ok.sort((a, b) => b.gap - a.gap); return ok[0] || null; });
+  const tapMark = async (pg, touch) => { let m = null;
+    for (let i = 0; i < 4; i++) { m = await pickMark(pg); assert(m, 'a mark is on screen to tap');
+      if (touch) await pg.touchscreen.tap(m.x, m.y); else await pg.mouse.click(m.x, m.y);
+      try { await pg.waitForSelector('.hhm-card .hhm-go', { timeout: 1500 }); return m; } catch (e) { await pg.waitForTimeout(400); } }
+    throw new Error('no card opened after tapping a mark: ' + JSON.stringify(m)); };
+  const noSideScroll = async (pg, tag) => { const o = await pg.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]); assert(o[0] <= o[1], `horizontal page scroll on ${tag}: ${o[0]} > ${o[1]}`); };
+  const centre = async (pg, sel) => pg.evaluate(s => { const e = document.querySelector(s), r = e.getBoundingClientRect(), tray = document.getElementById('tray').getBoundingClientRect(); window.scrollBy(0, r.top + r.height / 2 - tray.top / 2); }, sel);
+  // First screen map -> New York City -> a mark -> card -> "See places" -> the neighborhood -> Back; then an experience: List -> Map -> a mark -> Back -> List.
+  const mapFlow = async (pg, d, tag, o) => { o = o || {};
+    const w = pg.viewportSize().width, hoodByName = n => d.neighborhoods.filter(h => (h.name + (h.state ? ', ' + h.state : '')) === n);
+    await pg.waitForSelector('.life'); if (await pg.isVisible('#tour')) await pg.click('[data-act=tour-skip]');
+    await pg.evaluate(() => { location.hash = '#lives'; }); await pg.waitForSelector('#hhmap .hhm');
+    // tiles stay the way in; the map sits below them behind a jump control
+    assert(await pg.evaluate(() => document.querySelector('.life').getBoundingClientRect().top < document.getElementById('sec-map').getBoundingClientRect().top), 'the experience tiles come before the map');
+    await pg.click('[data-act=scrollto][data-to=sec-map]');
+    assert.strictEqual(await pg.locator('.hhm-chip').count(), d.years.length);
+    assert.strictEqual(await pg.locator('.hhm-chip[aria-pressed=true]').count(), 0, 'the overview starts with every experience shown');
+    const chips = await pg.evaluate(() => [...document.querySelectorAll('.hhm-chip')].map(c => { const r = c.getBoundingClientRect(), t = [...c.querySelectorAll('.hhm-full,.hhm-short')].find(e => e.offsetParent !== null), p = c.querySelector('path'), tr = t.getBoundingClientRect();
+      return { top: Math.round(r.top), text: t.textContent, fill: p.getAttribute('fill'), d: p.getAttribute('d'), clipped: tr.right > r.right + 0.5 || tr.left < r.left - 0.5 || c.scrollWidth > c.clientWidth + 1 }; }));
+    const rows = new Set(chips.map(c => c.top)).size;
+    if (w >= 360) assert(rows <= 2, `${tag}: six chips take ${rows} rows`); else console.log(`${tag}: chips take ${rows} rows at ${w}px`);
+    chips.forEach((c, i) => { const y = d.years[i], full = String(y.display_label || y.label).replace(/ Year$/, ' Experience'), short = full.replace(/^The\s+/, '').replace(/\s+Experience$/, '');
+      assert(!/Year\b/.test(c.text), 'chip says experience, not year: ' + c.text);
+      assert.strictEqual(c.text, w < 520 ? short : full, 'chip label'); assert(!c.clipped, `${tag}: chip text is clipped: ${c.text}`); });
+    // one colour and shape per experience: the tile marker is the chip's (and so the map's)
+    const tiles = await pg.evaluate(() => [...document.querySelectorAll('a.life h3 .ymk path')].map(p => ({ fill: p.getAttribute('fill') })));
+    assert.strictEqual(tiles.length, d.years.length, 'every experience tile carries its marker');
+    tiles.forEach((t, i) => assert.strictEqual(t.fill, chips[i].fill, 'tile marker colour matches the map legend'));
+    assert.strictEqual(new Set(chips.map(c => c.fill)).size, d.years.length); assert.strictEqual(new Set(chips.map(c => c.d)).size, d.years.length, 'six different shapes');
+    assert.strictEqual(await pg.evaluate(() => [...document.querySelectorAll('a.life h3 .ymk')].map(s => s.getAttribute('data-shape')).join()), await pg.evaluate(() => window.__houseHunt.marks().map(m => m.shape).join()));
+    assert.strictEqual(await pg.locator('.hhm-dot').count(), await pg.evaluate(() => window.__houseHunt.mapHoods()), 'one mark per listed neighborhood');
+    await noSideScroll(pg, tag + ' first screen');
+    if (o.shot) { await pg.evaluate(() => { const r = document.getElementById('sec-map').getBoundingClientRect(); window.scrollBy(0, r.top - 8); }); await o.shot('map-int-01-first-screen-map'); }
+    await centre(pg, '[data-region=nyc]'); await pg.click('[data-region=nyc]'); await pg.waitForTimeout(o.reduced ? 80 : 450);
+    assert(await pg.isVisible('.hhm-reset'), 'zoomed: "Whole map" is offered');
+    const m = await tapMark(pg, o.touch);
+    const name = (await pg.textContent('.hhm-card h3')).trim(), cardText = await pg.textContent('.hhm-card');
+    const H = d.neighborhoods.find(h => m.label.indexOf(h.name + (h.state ? ', ' + h.state : '') + '. ') === 0 && name.indexOf(h.name) === 0);
+    assert(H, `${tag}: the card (${name}) is the mark that was tapped (${m.label})`);
+    assert(/\d+\s*places? shown|\d+ of \d+\s*places fit your limits/.test(cardText), 'the card gives the unit count: ' + cardText);
+    if (H.rank_in_experience != null) { const of = d.years.find(y => y.id === H.year).hood_ids.length;
+      assert((await pg.textContent('.hhm-card .hhm-rank')).trim() === (H.rank_in_experience === 1 ? 'Top pick' : '#' + H.rank_in_experience + ' of ' + of), 'rank within its experience: ' + cardText); }
+    assert(/Experience/.test(await pg.textContent('.hhm-card .hhm-yr')), 'the card names the experience');
+    await noSideScroll(pg, tag + ' card');
+    if (o.shot) { await pg.evaluate(() => { const r = document.querySelector('.hhm-stage').getBoundingClientRect(); window.scrollBy(0, r.top + r.height * 0.55); }); await o.shot('map-int-03-selected-card'); }
+    await centre(pg, '.hhm-go'); const yBefore = await pg.evaluate(() => window.scrollY);
+    await pg.click('.hhm-go'); await pg.waitForSelector('#sec-places, .hero h1');
+    assert.strictEqual(await pg.evaluate(() => location.hash), '#hood-' + slug(H.id), '"See places" lands on the neighborhood');
+    assert.strictEqual((await pg.textContent('.hero h1')).trim(), H.name);
+    assert.strictEqual(await pg.locator('.hhm').count(), 0, 'the map is gone with its view'); assert.strictEqual(await pg.evaluate(() => window.__houseHunt.map()), null, 'and was destroyed');
+    assert(await pg.locator('#trail .path .ymk').count() >= 1, 'the breadcrumb carries the experience marker');
+    // Back: the first screen again, at the same spot, with the same card open
+    await pg.goBack(); await pg.waitForSelector('#hhmap .hhm');
+    assert.strictEqual(await pg.evaluate(() => location.hash), '#lives');
+    assert.strictEqual((await pg.textContent('.hhm-card h3')).trim(), name, 'Back reopens the card that was open');
+    assert(Math.abs((await pg.evaluate(() => window.scrollY)) - yBefore) < 4, 'Back returns to the same scroll position');
+    // inside an experience: list by default, top three then more; Map is the switch beside it
+    const Y = d.years.find(y => y.id === H.year) || d.years[0], nH = Y.hood_ids.length;
+    await pg.evaluate(h => { location.hash = h; }, '#exp-' + slug(Y.id)); await pg.waitForSelector('.viewsw');
+    if (!o.keepPref) assert.strictEqual(await pg.getAttribute('.viewsw [data-v=list]', 'aria-pressed'), 'true', 'the list is the default');
+    else if (await pg.getAttribute('.viewsw [data-v=list]', 'aria-pressed') !== 'true') await pg.click('.viewsw [data-v=list]');
+    assert.strictEqual(await pg.locator('#sec-hoods a.hood').count(), Math.min(3, nH), 'top three neighborhoods first');
+    if (nH > 3) assert((await pg.textContent('#sec-hoods .morectl')).includes('3 of ' + nH + ' neighborhoods shown'));
+    assert.strictEqual(await pg.locator('#sec-hoods a.hood small .ymk').count(), Math.min(3, nH), 'each neighborhood card carries the experience marker');
+    assert.strictEqual(await pg.locator('#hhmap').count(), 0);
+    await centre(pg, '.viewsw'); await pg.click('.viewsw [data-v=map]'); await pg.waitForSelector('#hhmap .hhm'); await pg.waitForTimeout(o.reduced ? 80 : 450);
+    assert.strictEqual(await pg.getAttribute('.viewsw [data-v=map]', 'aria-pressed'), 'true');
+    assert.strictEqual(await pg.locator('#sec-hoods a.hood').count(), 0);
+    assert.strictEqual(await pg.getAttribute('.hhm-chip[aria-pressed=true]', 'data-year'), Y.id, 'the map opens filtered on this experience');
+    assert.strictEqual(await pg.locator('.hhm-dot:not(.dim)').count(), await pg.evaluate(id => window.__houseHunt.mapHoods(id), Y.id), 'every neighborhood of the experience is a live mark');
+    await noSideScroll(pg, tag + ' experience map');
+    if (o.shot) { await pg.evaluate(() => { const r = document.querySelector('.viewsw').getBoundingClientRect(); window.scrollBy(0, r.top - 66); }); await o.shot('map-int-02-experience-map'); }
+    const m2 = await tapMark(pg, o.touch), H2 = d.neighborhoods.find(h => h.year === Y.id && m2.label.indexOf(h.name + (h.state ? ', ' + h.state : '') + '. ') === 0);
+    assert(H2, 'the tapped mark belongs to this experience: ' + m2.label);
+    await centre(pg, '.hhm-go'); await pg.click('.hhm-go'); await pg.waitForSelector('.hero h1');
+    assert.strictEqual(await pg.evaluate(() => location.hash), '#hood-' + slug(H2.id));
+    await pg.goBack(); await pg.waitForSelector('.viewsw');
+    assert.strictEqual(await pg.evaluate(() => location.hash), '#exp-' + slug(Y.id), 'Back from the neighborhood returns to the experience');
+    assert.strictEqual(await pg.getAttribute('.viewsw [data-v=map]', 'aria-pressed'), 'true', 'still on Map after Back');
+    assert.strictEqual((await pg.textContent('.hhm-card h3')).trim().indexOf(H2.name), 0, 'with the same card open');
+    if (o.storage !== false) { await pg.reload(); await pg.waitForSelector('#hhmap .hhm'); assert.strictEqual(await pg.getAttribute('.viewsw [data-v=map]', 'aria-pressed'), 'true', 'Map is remembered after a reload'); }
+    await centre(pg, '.viewsw'); await pg.click('.viewsw [data-v=list]');
+    assert.strictEqual(await pg.locator('#sec-hoods a.hood').count(), Math.min(3, nH), 'back to the list: top three again');
+    assert.strictEqual(await pg.locator('.hhm').count(), 0); assert.strictEqual(await pg.evaluate(() => window.__houseHunt.map()), null);
+    if (o.shot) { await pg.evaluate(() => { const r = document.querySelector('.viewsw').getBoundingClientRect(); window.scrollBy(0, r.top - 66); }); await o.shot('map-int-04-experience-list'); }
+    await pg.goBack(); await pg.waitForSelector('.life'); assert.strictEqual(await pg.evaluate(() => location.hash), '#lives', 'Back from the experience is the first screen');
+    await noSideScroll(pg, tag + ' end');
+    console.log(`map flow OK: ${tag} (${w}px) | ${name} -> #hood-${slug(H.id)} | ${Y.id}: ${H2.name}`);
+  };
   const data = await (await page.request.get(BASE + '/data.json')).json();
 
   await page.goto(BASE + '/index.html');
@@ -43,6 +143,7 @@ const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390
   assert((await page.textContent('#sources')).includes('OpenStreetMap data of 14 Nov 2026'));
   await overflow('home'); await small('home');
   await shot('01-home', true);
+  await mapFlow(page, data, 'served page', { shot });
 
   // a year: the one holding Bogota (asterisk unit)
   const star = data.units.find(u => u.rent.asterisk && u.all_in_gross > u.all_in);
@@ -159,6 +260,26 @@ const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390
     assert((await page.textContent('#tour-qs')).includes(confQ), 'the confirmation question is also in the tour questions'); }
   await overflow('unit-confirm'); await small('unit-confirm');
   await shot('08-unit-confirm-asterisk', true);
+  // disclosures: "Good to know before you call" on the card and the place page, lighter than the asterisk, and in the tour questions
+  const whats = u => [...new Set((u.disclosures || []).map(x => String(x.what || '').trim()).filter(w => w && w.toLowerCase() !== String(u.confirm.what || '').toLowerCase()))];
+  const dU = data.units.find(u => whats(u).length >= 2 && !u.confirm.asterisk) || data.units.find(u => whats(u).length);
+  console.log('places with a disclosure:', data.units.filter(u => whats(u).length).length, 'of', data.units.length);
+  if (dU) {
+    await page.goto(BASE + '/index.html#unit-' + slug(dU.id)); await page.waitForSelector('#good-to-know');
+    assert.strictEqual(await page.locator('#good-to-know li').count(), whats(dU).length, 'every disclosure is listed once');
+    const gtk = await page.textContent('#good-to-know'), tqs = await page.textContent('#tour-qs');
+    assert(gtk.includes('Good to know before you call') && gtk.includes('Things to ask, not problems'));
+    for (const w of whats(dU)) assert(gtk.toLowerCase().includes(w.toLowerCase()), 'disclosure shown: ' + w);
+    for (const x of dU.disclosures) if (x.question) assert(tqs.includes(x.question), 'the disclosure question is in the tour questions: ' + x.question);
+    if (!dU.confirm.asterisk) assert.strictEqual(await page.locator('#confirm-box, .cstar').count(), 0, 'a disclosure is not an asterisk');
+    assert(await page.evaluate(() => { const b = getComputedStyle(document.getElementById('good-to-know')); return b.borderTopStyle === 'solid' && b.backgroundColor === 'rgb(255, 255, 255)'; }), 'the box is plain, not a warning');
+    await overflow('unit-disclosures');
+    await page.evaluate(() => { const r = document.getElementById('good-to-know').getBoundingClientRect(); window.scrollBy(0, r.top - 120); });
+    await shot('12-unit-good-to-know');
+    await page.goto(BASE + '/index.html#hood-' + slug(dU.hood_id)); await page.waitForSelector('#sec-places'); await showAll();
+    const cardGtk = await page.locator(`#sec-places article.unit:has(a[href="#unit-${slug(dU.id)}"]) .gtk`).textContent();
+    assert(cardGtk.startsWith('Good to know before you call:') && cardGtk.includes(whats(dU)[0]), 'the card carries the compact line: ' + cardGtk);
+  }
   const noConf = data.units.find(u => !u.confirm.asterisk);
   if (noConf) { await page.goto(BASE + '/index.html#unit-' + slug(noConf.id)); await page.waitForSelector('#tour-qs'); assert.strictEqual(await page.locator('#confirm-box, .unit .confl, .cstar').count(), 0); }
   // small dogs with no weight number: a plain note, not in "Gives us pause"
@@ -190,7 +311,7 @@ const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390
   await overflow('unit'); await small('unit');
   await shot('04-unit-rent-asterisk', true);
   await page.click('details.receipt summary');
-  assert((await page.textContent('details.receipt')).includes('Not counted yet') || star.all_in_unknown.length === 0);
+  assert((await page.textContent('details.receipt')).toLowerCase().includes('not published') || star.all_in_unknown.length === 0, 'an unknown cost line reads "not published", never $0');
   await page.locator('details.receipt').scrollIntoViewIfNeeded();
   await page.evaluate(() => { const r = document.querySelector('details.receipt').getBoundingClientRect(); window.scrollBy(0, r.top - 70); });
   await shot('05-receipt-open');
@@ -220,7 +341,10 @@ const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390
   const rows1 = await page.locator('#cmp-rows .rowc').count();
   await page.click('#ties');
   const rows2 = await page.locator('#cmp-rows .rowc').count();
-  assert.strictEqual(rows2, 10, 'all ten rows when ties shown, got ' + rows2);
+  // ten day-part rows, plus "Still to confirm" when either place has an asterisk or a disclosure
+  const hasDisc = u => (u.disclosures || []).length > 0, extra = [star, two].some(u => u.confirm.asterisk || hasDisc(u)) ? 1 : 0;
+  assert.strictEqual(rows2, 10 + extra, 'ten rows plus the confirm row when ties shown, got ' + rows2);
+  if ([star, two].some(hasDisc)) { const t = await page.textContent('#cmp-rows'); assert(t.includes('Still to confirm') && t.includes('Good to know before you call'), 'disclosures sit in the Still to confirm row'); }
   assert(rows1 <= rows2);
   console.log('compare rows hidden-ties/all:', rows1, rows2, await page.textContent('#tiesNote'));
   await page.click('#ties');
@@ -287,10 +411,13 @@ const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390
       { excerpt: 'TEST quote, positive three, noise.', theme: 'noise', sentiment: 'positive', context: '', source: 'example forum', date: '2025-01-11', url: 'https://example.com/c' },
       { excerpt: 'TEST quote, negative, noise.', theme: 'noise', sentiment: 'negative', context: 'owner', source: 'example forum', date: '2026-03-09', url: 'https://example.com/d' },
       { excerpt: 'TEST quote, negative, parking, with a very long unbroken address https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.', theme: 'parking', sentiment: 'negative', context: '', source: 'example forum', date: '', url: '' }];
+    h.toll_round_trip = 13.5; h.toll_round_trip_mail = 21.25; // made-up: both an E-ZPass and a mail-rate figure
     h.local.survey = [{ measure: 'would_recommend_share', value: '71%', source: 'example survey', as_of: '2026-06-30', url: 'https://example.com/s' }];
     await route.fulfill({ contentType: 'application/json', body: JSON.stringify(d) }); });
   await page2.goto(BASE + '/index.html#hood-' + slug(vh.id)); await page2.waitForSelector('#sec-voices .quote');
   assert.strictEqual(await page2.locator('#no-voices').count(), 0);
+  { const facts = await page2.textContent('.hero .facts'); assert(facts.includes('$13.50 in tolls a visit with a New York E-ZPass') && !facts.includes('21.25'), 'E-ZPass figure with its note when a mail rate is also present: ' + facts); }
+  { const real = await page.evaluate(() => document.body.textContent.includes('with a New York E-ZPass')); if (real) console.log('note: the current data already carries a mail-rate toll'); }
   assert.strictEqual(await page2.locator('#sec-voices .vtheme').count(), 3, 'two themes and the survey heading');
   assert.strictEqual(await page2.locator('#sec-voices > .quote.pos').count(), 1, 'one positive shown against the one negative');
   assert.strictEqual(await page2.locator('#sec-voices > .quote.neg').count(), 2);
@@ -301,6 +428,45 @@ const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390
   await page2.close();
   console.log('console errors:', errors.length ? errors : 'none');
   assert.strictEqual(errors.length, 0);
+  // ---- the built single file (scripts/build_site.py), as it is published: phone, desktop, small phone with reduced motion,
+  //      storage that throws, and the page with its outer doctype/html/head/body stripped and re-wrapped ----
+  if (W === 390 && !process.env.NO_BUILT) {
+    const fs = require('fs'), path = require('path'), os = require('os'), { pathToFileURL } = require('url');
+    const built = process.env.BUILT || path.join(__dirname, '..', 'site', 'dist', 'index.html');
+    const html = fs.readFileSync(built, 'utf8'), bytes = Buffer.byteLength(html);
+    const part = re => { const m = html.match(re); return m ? Buffer.byteLength(m[0]) : 0; };
+    const dataBytes = part(/<script>window\.HOUSE_HUNT_DATA=[\s\S]*?<\/script>/), baseBytes = part(/<script>window\.HOUSE_HUNT_MAP_BASE=[\s\S]*?<\/script>/);
+    console.log(`built page: ${bytes} bytes (${(bytes / 1048576).toFixed(2)} MB) = data ${dataBytes} + map base ${baseBytes} + template ${bytes - dataBytes - baseBytes}`);
+    assert(baseBytes > 1000, 'the built page carries the map base');
+    if (bytes >= 4 * 1000 * 1000) console.log('WARN built page is over 4 MB');
+    const wrapped = path.join(os.tmpdir(), 'house-hunt-rewrapped.html');
+    fs.writeFileSync(wrapped, '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>skeleton</title></head><body>' +
+      html.replace(/<!doctype[^>]*>/i, '').replace(/<\/?(html|head|body)\b[^>]*>/gi, '') + '</body></html>');
+    const throwing = () => { const bad = () => { throw new Error('storage blocked'); }; try { Object.defineProperty(window, 'localStorage', { get: bad, configurable: true }); Object.defineProperty(window, 'sessionStorage', { get: bad, configurable: true }); } catch (e) {} };
+    const configs = [
+      { tag: 'built, phone touch', file: built, ctx: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true }, o: { touch: true } },
+      { tag: 'built, desktop', file: built, ctx: { viewport: { width: 1280, height: 900 } }, o: {} },
+      { tag: 'built, small phone, reduced motion', file: built, ctx: { viewport: { width: 320, height: 640 }, hasTouch: true, isMobile: true, reducedMotion: 'reduce' }, o: { touch: true, reduced: true } },
+      { tag: 'built, storage throws', file: built, ctx: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true }, init: throwing, o: { touch: true, storage: false } },
+      { tag: 'built, stripped and re-wrapped', file: wrapped, ctx: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true }, o: { touch: true } },
+      { tag: 'built, stripped and re-wrapped, desktop', file: wrapped, ctx: { viewport: { width: 1280, height: 900 } }, o: {} }];
+    for (const c of configs) {
+      const cx = await browser.newContext(c.ctx), pg = await cx.newPage(), errs = []; pg.setDefaultTimeout(10000);
+      pg.on('console', m => { if (m.type() === 'error') errs.push(m.text()); }); pg.on('pageerror', e => errs.push('PAGEERROR ' + e.message));
+      if (c.init) await pg.addInitScript(c.init);
+      await pg.goto(pathToFileURL(c.file).href); await pg.waitForSelector('.life');
+      if (c.init) assert(await pg.evaluate(() => { try { window.localStorage.getItem('x'); return false; } catch (e) { return true; } }), 'storage really throws in this run');
+      const d = await pg.evaluate(() => window.HOUSE_HUNT_DATA);
+      await mapFlow(pg, d, c.tag, c.o);
+      // every experience opens as a map without error
+      await pg.evaluate(() => { location.hash = '#exp-' + location.hash.length; });
+      for (const y of d.years) { await pg.evaluate(h => { location.hash = h; }, '#exp-' + slug(y.id)); await pg.waitForSelector('.viewsw'); if (await pg.getAttribute('.viewsw [data-v=map]', 'aria-pressed') !== 'true') await pg.click('.viewsw [data-v=map]'); await pg.waitForSelector('#hhmap .hhm-chip[aria-pressed=true]'); await noSideScroll(pg, c.tag + ' ' + y.id); }
+      await pg.click('.viewsw [data-v=list]');
+      assert.strictEqual(errs.length, 0, c.tag + ' console errors: ' + errs.join(' | '));
+      await cx.close();
+    }
+    fs.unlinkSync(wrapped);
+  }
   await browser.close();
   console.log('OK width', W);
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

@@ -52,14 +52,33 @@ def main():
 
     H = rd(DATA / "reference" / "scene_text_neighborhoods.csv")
     hoods = {h["id"]: h for h in d["neighborhoods"]}
+    # a split city (Jersey City): content keyed on the city's old id attaches to each of its neighborhoods on the page,
+    # labelled as about the city as a whole; content that names one neighborhood goes to that one only
+    kids = {}
+    for h in hoods.values():
+        if h.get("parent_id"):
+            kids.setdefault(h["parent_id"], []).append(h)
+
+    def targets(hid, source_area=""):
+        """[(neighborhood, about)] for content keyed on hid."""
+        if hid in hoods:
+            return [(hoods[hid], None)]
+        ks = kids.get(hid, [])
+        letters = lambda t: re.sub(r"[^a-z]", "", str(t).lower())
+        named = [k for k in ks if letters(k.get("short_name")) and letters(k.get("short_name")) in letters(source_area)]
+        return [(k, None) for k in named] if named else [(k, f"{k.get('parent_name')} as a whole") for k in ks]
     if H is not None:
-        n = 0
+        n = inherited = 0
+        own = set(H.hood_id)
         for r in H.itertuples():
-            h = hoods.get(r.hood_id)
-            if h is not None and r.scene.strip():
-                h["prose"] = {"scene": r.scene, "good_for_her": r.good_for_her, "watch_for": r.watch_for}
-                n += 1
-        rep["neighborhood prose"] = f"{n} of {len(hoods)}"
+            for h, about in targets(r.hood_id):
+                if r.scene.strip() and not (about and h["id"] in own):
+                    h["prose"] = {"scene": r.scene, "good_for_her": r.good_for_her, "watch_for": r.watch_for}
+                    if about:           # written for the whole city before the split: its figures are the city's, not this neighborhood's
+                        h["prose"].update({"about": about, "inherited_from": r.hood_id})
+                        inherited += 1
+                    n += 1
+        rep["neighborhood prose"] = f"{n} of {len(hoods)}" + (f" ({inherited} inherited from the city's text, labelled)" if inherited else "")
 
     Q = rd(DATA / "voices" / "neighborhood_quotes_round2.csv")
     if Q is not None:
@@ -69,30 +88,29 @@ def main():
         QX = [(r.hood_id, r.excerpt_starts_with) for r in qx.itertuples()] if qx is not None else []
         n = 0
         for r in Q.itertuples():
-            h = hoods.get(r.hood_id)
-            if h is None or any(r.hood_id == a and r.excerpt.startswith(b) for a, b in QX):
+            if any(r.hood_id == a and r.excerpt.startswith(b) for a, b in QX):
                 continue
-            vs = h.setdefault("local", {}).setdefault("voices", [])
-            if any(v.get("excerpt") == r.excerpt for v in vs):
-                continue
-            sa = r.source_area
-            plain = re.sub(r"\s*\((?:enclosing area|whole)\)", "", sa)
-            about = re.sub(r",\s*[A-Z]{2}$", "", plain) if sa and len(plain) <= 40 and area_key(plain) != area_key(r.neighborhood) else None
-            vs.append({"excerpt": r.excerpt, "theme": r.theme, "sentiment": r.sentiment, "context": r.speaker_context, "source": r.source_site,
-                       "date": r.post_date, "url": r.permalink, "source_area": sa or None, "about": about})
-            n += 1
+            for h, whole in targets(r.hood_id, r.source_area):
+                vs = h.setdefault("local", {}).setdefault("voices", [])
+                if any(v.get("excerpt") == r.excerpt for v in vs):
+                    continue
+                sa = r.source_area
+                plain = re.sub(r"\s*\((?:enclosing area|whole)\)", "", sa)
+                about = re.sub(r",\s*[A-Z]{2}$", "", plain) if sa and len(plain) <= 40 and area_key(plain) != area_key(r.neighborhood) else None
+                vs.append({"excerpt": r.excerpt, "theme": r.theme, "sentiment": r.sentiment, "context": r.speaker_context, "source": r.source_site,
+                           "date": r.post_date, "url": r.permalink, "source_area": sa or None, "about": whole or about})
+                n += 1
         rep["round 2 quotes added"] = n
     S = rd(DATA / "voices" / "neighborhood_survey_round2.csv")
     if S is not None:
         n = 0
         for r in S.itertuples():
-            h = hoods.get(r.hood_id)
-            if h is None:
-                continue
-            sv = h.setdefault("local", {}).setdefault("survey", [])
-            row = {"measure": r.measure, "value": r.value, "source": r.source_site, "as_of": r.as_of, "url": r.source_url}
-            if row not in sv:
-                sv.append(row); n += 1
+            for h, whole in targets(r.hood_id, getattr(r, "source_area", "")):
+                sv = h.setdefault("local", {}).setdefault("survey", [])
+                row = {"measure": r.measure, "value": r.value, "source": r.source_site, "as_of": r.as_of, "url": r.source_url,
+                       "source_area": getattr(r, "source_area", "") or None, "about": whole}
+                if row not in sv:
+                    sv.append(row); n += 1
         rep["round 2 survey rows added"] = n
 
     L = rd(DATA / "reference" / "local_rules_round2.csv")
@@ -102,15 +120,13 @@ def main():
             key = {"street_parking": "parking_rules", "dogs": "dog_rules"}.get(r.topic)
             if not key:
                 continue
-            row = {"rule": r.rule, "summary": r.summary, "quote": r.quote, "url": r.source_url, "municipality": r.municipality}
             for hid in [x.strip() for x in r.applies_to_hood_ids.split(";") if x.strip()]:
-                h = hoods.get(hid)
-                if h is None:
-                    continue
-                lst = h.setdefault("local", {}).get(key) or []
-                if row not in lst:
-                    lst.append(row); n += 1
-                h["local"][key] = lst
+                for h, whole in targets(hid):
+                    row = {"rule": r.rule, "summary": r.summary, "quote": r.quote, "url": r.source_url, "municipality": r.municipality, "about": whole}
+                    lst = h.setdefault("local", {}).get(key) or []
+                    if row not in lst:
+                        lst.append(row); n += 1
+                    h["local"][key] = lst
         rep["round 2 local rules added"] = n
 
     # New York City's rules apply to every NYC neighborhood, including ones added to the page after round 1

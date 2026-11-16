@@ -1,0 +1,1166 @@
+{
+ "Fort Lee, New Jersey": {
+  "offset": 657999327,
+  "end": 658734433,
+  "page_id": 136882
+ },
+ "Danbury, Connecticut": {
+  "offset": 700228507,
+  "end": 700828982,
+  "page_id": 149527
+ },
+ "Haverstraw, New York": {
+  "offset": 1032263484,
+  "end": 1032549171,
+  "page_id": 260008
+ },
+ "Beacon Falls, Connecticut": {
+  "offset": 584570697,
+  "end": 584993709,
+  "page_id": 108790
+ },
+ "Gerritsen Beach, Brooklyn": {
+  "offset": 2123113160,
+  "end": 2123250618,
+  "page_id": 924920
+ },
+ "Brighton Beach": {
+  "offset": 2116293776,
+  "end": 2116537891,
+  "page_id": 919757
+ },
+ "Sugar Hill, Manhattan": {
+  "offset": 5422139749,
+  "end": 5422279095,
+  "page_id": 6034707
+ },
+ "New Paltz (village), New York": {
+  "offset": 11750551156,
+  "end": 11750662093,
+  "page_id": 28079057
+ },
+ "Stamford, Connecticut": {
+  "offset": 1027848624,
+  "end": 1028336428,
+  "page_id": 256925
+ },
+ "Clifton, Staten Island": {
+  "offset": 1771338698,
+  "end": 1771636504,
+  "page_id": 639963
+ },
+ "Wingate, Brooklyn": {
+  "offset": 8188674401,
+  "end": 8188728940,
+  "page_id": 15011556
+ },
+ "New Brighton, Staten Island": {
+  "offset": 1835098713,
+  "end": 1835336692,
+  "page_id": 684224
+ },
+ "Edgewater, New Jersey": {
+  "offset": 657999327,
+  "end": 658734433,
+  "page_id": 136879
+ },
+ "City Island, Bronx": {
+  "offset": 1378545971,
+  "end": 1378837537,
+  "page_id": 415200
+ },
+ "Arverne, Queens": {
+  "offset": 4894912476,
+  "end": 4895018134,
+  "page_id": 4843473
+ },
+ "Shelton, Connecticut": {
+  "offset": 1027848624,
+  "end": 1028336428,
+  "page_id": 256924
+ },
+ "Riverdale, New Jersey": {
+  "offset": 627988998,
+  "end": 628925384,
+  "page_id": 125579
+ },
+ "Dover, New Jersey": {
+  "offset": 626813314,
+  "end": 627988998,
+  "page_id": 125568
+ },
+ "Bound Brook, New Jersey": {
+  "offset": 628925384,
+  "end": 629962942,
+  "page_id": 125708
+ },
+ "Red Bank, New Jersey": {
+  "offset": 626813314,
+  "end": 627988998,
+  "page_id": 125505
+ },
+ "Pomonok, Queens": {
+  "offset": 4693986341,
+  "end": 4694209371,
+  "page_id": 4405520
+ },
+ "White Plains, New York": {
+  "offset": 635373052,
+  "end": 635703336,
+  "page_id": 127596
+ },
+ "South Slope, Brooklyn": {
+  "offset": 8725770609,
+  "end": 8725862634,
+  "page_id": 17086064,
+  "redirect_to": "Park Slope"
+ },
+ "Valley Stream, New York": {
+  "offset": 632615606,
+  "end": 633033431,
+  "page_id": 126805
+ },
+ "Yonkers, New York": {
+  "offset": 533837666,
+  "end": 534490379,
+  "page_id": 93557
+ },
+ "Plainfield, New Jersey": {
+  "offset": 425646954,
+  "end": 426297907,
+  "page_id": 64360
+ },
+ "Willets Point, Queens": {
+  "offset": 25278758310,
+  "end": 25279236642,
+  "page_id": 78504682,
+  "redirect_to": "Willets Point"
+ },
+ "Seymour, Connecticut": {
+  "offset": 584570697,
+  "end": 584993709,
+  "page_id": 108804
+ },
+ "Van Cortlandt Village": {
+  "offset": 6472515161,
+  "end": 6472642133,
+  "page_id": 9131673
+ },
+ "Wallkill, Orange County, New York": {
+  "offset": 633326458,
+  "end": 633641971,
+  "page_id": 126961
+ },
+ "Pelham Bay (neighborhood), Bronx": {
+  "offset": 2062716173,
+  "end": 2062924916,
+  "page_id": 879646
+ },
+ "Inwood, Manhattan": {
+  "offset": 669844114,
+  "end": 669931375,
+  "page_id": 141575
+ },
+ "Harlem": {
+  "offset": 375839974,
+  "end": 376351240,
+  "page_id": 54861
+ },
+ "Newark, New Jersey": {
+  "offset": 439031005,
+  "end": 439826589,
+  "page_id": 67234
+ },
+ "Olinville, Bronx": {
+  "offset": 2431556988,
+  "end": 2431733655,
+  "page_id": 1188825,
+  "redirect_to": "Williamsbridge, Bronx"
+ },
+ "Milford, Connecticut": {
+  "offset": 711117981,
+  "end": 711540661,
+  "page_id": 152159
+ },
+ "Haverstraw (village), New York": {
+  "offset": 1032263484,
+  "end": 1032549171,
+  "page_id": 260007
+ },
+ "Rahway, New Jersey": {
+  "offset": 628925384,
+  "end": 629962942,
+  "page_id": 125787
+ },
+ "Elizabeth, New Jersey": {
+  "offset": 628925384,
+  "end": 629962942,
+  "page_id": 125778
+ },
+ "Norwalk, Connecticut": {
+  "offset": 1153350127,
+  "end": 1153868594,
+  "page_id": 314046
+ },
+ "Wayne, New Jersey": {
+  "offset": 627988998,
+  "end": 628925384,
+  "page_id": 125671
+ },
+ "Long Branch, New Jersey": {
+  "offset": 626813314,
+  "end": 627988998,
+  "page_id": 125481
+ },
+ "New Brunswick, New Jersey": {
+  "offset": 625782840,
+  "end": 626813314,
+  "page_id": 125433
+ },
+ "Bordentown, New Jersey": {
+  "offset": 622574680,
+  "end": 623501744,
+  "page_id": 125018
+ },
+ "Ridgewood, New Jersey": {
+  "offset": 621715525,
+  "end": 622574680,
+  "page_id": 125001
+ },
+ "Belleville, New Jersey": {
+  "offset": 623501744,
+  "end": 624449943,
+  "page_id": 125154
+ },
+ "West Haven, Connecticut": {
+  "offset": 1028336428,
+  "end": 1028516668,
+  "page_id": 256966
+ },
+ "Upper East Side": {
+  "offset": 1185998644,
+  "end": 1186306083,
+  "page_id": 327270
+ },
+ "Fairfield, Connecticut": {
+  "offset": 584191789,
+  "end": 584570697,
+  "page_id": 108691
+ },
+ "Hillcrest, Queens": {
+  "offset": 4381387904,
+  "end": 4381604860,
+  "page_id": 3779119,
+  "redirect_to": "Fresh Meadows, Queens"
+ },
+ "Peekskill, New York": {
+  "offset": 634867066,
+  "end": 635373052,
+  "page_id": 127579
+ },
+ "New Rochelle, New York": {
+  "offset": 634867066,
+  "end": 635373052,
+  "page_id": 127575
+ },
+ "Trumbull, Connecticut": {
+  "offset": 1027848624,
+  "end": 1028336428,
+  "page_id": 256927
+ },
+ "Maplewood, New Jersey": {
+  "offset": 623501744,
+  "end": 624449943,
+  "page_id": 125173
+ },
+ "Hawthorne, New Jersey": {
+  "offset": 627988998,
+  "end": 628925384,
+  "page_id": 125657
+ },
+ "Flushing, Queens": {
+  "offset": 1052725263,
+  "end": 1053347910,
+  "page_id": 267693
+ },
+ "Elmhurst, Queens": {
+  "offset": 1089809706,
+  "end": 1090047302,
+  "page_id": 288674
+ },
+ "St. George, Staten Island": {
+  "offset": 1679578312,
+  "end": 1679958200,
+  "page_id": 585029
+ },
+ "New Springville, Staten Island": {
+  "offset": 2678460736,
+  "end": 2678744988,
+  "page_id": 1436955
+ },
+ "Gravesend, Brooklyn": {
+  "offset": 1461508870,
+  "end": 1461955445,
+  "page_id": 455346
+ },
+ "Franklin Township, Somerset County, New Jersey": {
+  "offset": 628925384,
+  "end": 629962942,
+  "page_id": 125712
+ },
+ "Flatbush, Brooklyn": {
+  "offset": 24424905864,
+  "end": 24425109814,
+  "page_id": 75506853,
+  "redirect_to": "Flatbush"
+ },
+ "Mount Arlington, New Jersey": {
+  "offset": 626813314,
+  "end": 627988998,
+  "page_id": 125570
+ },
+ "Broadway–Flushing, Queens": {
+  "offset": 8818513890,
+  "end": 8818603075,
+  "page_id": 17451626
+ },
+ "Teaneck, New Jersey": {
+  "offset": 622574680,
+  "end": 623501744,
+  "page_id": 125011
+ },
+ "LaGrange, New York": {
+  "offset": 631323636,
+  "end": 631607655,
+  "page_id": 126378
+ },
+ "Roosevelt Island": {
+  "offset": 358466417,
+  "end": 359376675,
+  "page_id": 51946
+ },
+ "Patchogue, New York": {
+  "offset": 634297988,
+  "end": 634627317,
+  "page_id": 127354
+ },
+ "Windsor Terrace, Brooklyn": {
+  "offset": 2099645526,
+  "end": 2099972257,
+  "page_id": 907016
+ },
+ "Bath Beach, Brooklyn": {
+  "offset": 2400212064,
+  "end": 2400526644,
+  "page_id": 1160563
+ },
+ "Brookfield, Connecticut": {
+  "offset": 501445759,
+  "end": 501972910,
+  "page_id": 84080
+ },
+ "Bloomfield, New Jersey": {
+  "offset": 623501744,
+  "end": 624449943,
+  "page_id": 125156
+ },
+ "Washington Heights, Manhattan": {
+  "offset": 823143913,
+  "end": 823699343,
+  "page_id": 182694
+ },
+ "Jersey City, New Jersey": {
+  "offset": 624449943,
+  "end": 625782840,
+  "page_id": 125237
+ },
+ "North Bergen, New Jersey": {
+  "offset": 624449943,
+  "end": 625782840,
+  "page_id": 125240
+ },
+ "Bulls Head, Staten Island": {
+  "offset": 2668123347,
+  "end": 2668275263,
+  "page_id": 1426962
+ },
+ "Hempstead (village), New York": {
+  "offset": 1031902336,
+  "end": 1032263484,
+  "page_id": 259896
+ },
+ "Bensonhurst, Brooklyn": {
+  "offset": 1486972157,
+  "end": 1487207535,
+  "page_id": 468929
+ },
+ "Bayonne, New Jersey": {
+  "offset": 624449943,
+  "end": 625782840,
+  "page_id": 125230
+ },
+ "Hackensack, New Jersey": {
+  "offset": 657999327,
+  "end": 658734433,
+  "page_id": 136885
+ },
+ "Roxbury Township, New Jersey": {
+  "offset": 20465144061,
+  "end": 20465224307,
+  "page_id": 61091951,
+  "redirect_to": "Roxbury, New Jersey"
+ },
+ "Long Beach, New York": {
+  "offset": 632142457,
+  "end": 632615606,
+  "page_id": 126740
+ },
+ "Riverdale, Bronx": {
+  "offset": 1073766296,
+  "end": 1074295791,
+  "page_id": 278008
+ },
+ "Williamsbridge, Bronx": {
+  "offset": 2516274717,
+  "end": 2516534128,
+  "page_id": 1264185
+ },
+ "East Orange, New Jersey": {
+  "offset": 623501744,
+  "end": 624449943,
+  "page_id": 125163
+ },
+ "Carteret, New Jersey": {
+  "offset": 625782840,
+  "end": 626813314,
+  "page_id": 125403
+ },
+ "Parsippany–Troy Hills, New Jersey": {
+  "offset": 627988998,
+  "end": 628925384,
+  "page_id": 125576
+ },
+ "Clifton, New Jersey": {
+  "offset": 627988998,
+  "end": 628925384,
+  "page_id": 125655
+ },
+ "Stratford, Connecticut": {
+  "offset": 1301864503,
+  "end": 1302238645,
+  "page_id": 380061
+ },
+ "Bedford–Stuyvesant, Brooklyn": {
+  "offset": 2636612234,
+  "end": 2636995602,
+  "page_id": 1393738
+ },
+ "Tompkinsville, Staten Island": {
+  "offset": 1768156644,
+  "end": 1768526683,
+  "page_id": 637927
+ },
+ "Flatlands, Brooklyn": {
+  "offset": 1456701183,
+  "end": 1456987046,
+  "page_id": 452551
+ },
+ "Montvale, New Jersey": {
+  "offset": 621715525,
+  "end": 622574680,
+  "page_id": 124992
+ },
+ "Electchester": {
+  "offset": 7137593532,
+  "end": 7137687527,
+  "page_id": 11556741,
+  "redirect_to": "Pomonok, Queens"
+ },
+ "Prospect Lefferts Gardens": {
+  "offset": 6077278954,
+  "end": 6077409787,
+  "page_id": 7911830
+ },
+ "Manhattan Valley": {
+  "offset": 2860660463,
+  "end": 2860846096,
+  "page_id": 1633430
+ },
+ "Lenox Hill": {
+  "offset": 6890555489,
+  "end": 6890639957,
+  "page_id": 10684275
+ },
+ "East Rutherford, New Jersey": {
+  "offset": 657999327,
+  "end": 658734433,
+  "page_id": 136878
+ },
+ "East Brunswick, New Jersey": {
+  "offset": 625782840,
+  "end": 626813314,
+  "page_id": 125412
+ },
+ "Stapleton, Staten Island": {
+  "offset": 1711965903,
+  "end": 1712305212,
+  "page_id": 605476
+ },
+ "Bordentown Township, New Jersey": {
+  "offset": 657999327,
+  "end": 658734433,
+  "page_id": 136906
+ },
+ "Old Bridge Township, New Jersey": {
+  "offset": 625782840,
+  "end": 626813314,
+  "page_id": 125435
+ },
+ "East Flatbush, Brooklyn": {
+  "offset": 2052423012,
+  "end": 2052703397,
+  "page_id": 872235
+ },
+ "Jamaica Hills, Queens": {
+  "offset": 2398020324,
+  "end": 2398412784,
+  "page_id": 1158898
+ },
+ "Manhattanville, Manhattan": {
+  "offset": 4335088333,
+  "end": 4335251323,
+  "page_id": 3692648
+ },
+ "Oxford, Connecticut": {
+  "offset": 584570697,
+  "end": 584993709,
+  "page_id": 108802
+ },
+ "Sunnyside, Queens": {
+  "offset": 3007452685,
+  "end": 3007727026,
+  "page_id": 1796865
+ },
+ "Middletown, Orange County, New York": {
+  "offset": 24751702740,
+  "end": 24751723014,
+  "page_id": 76718568,
+  "redirect_to": "Middletown, New York"
+ },
+ "New Paltz, New York": {
+  "offset": 1366962481,
+  "end": 1367362936,
+  "page_id": 410872
+ },
+ "Weehawken, New Jersey": {
+  "offset": 624449943,
+  "end": 625782840,
+  "page_id": 125244
+ },
+ "Homecrest, Brooklyn": {
+  "offset": 5203843750,
+  "end": 5203945843,
+  "page_id": 5563593
+ },
+ "Montclair, New Jersey": {
+  "offset": 623501744,
+  "end": 624449943,
+  "page_id": 125176
+ },
+ "Kingsbridge Heights, Bronx": {
+  "offset": 3786971704,
+  "end": 3787148353,
+  "page_id": 2795002
+ },
+ "Hudson Heights, Manhattan": {
+  "offset": 4323284120,
+  "end": 4323419749,
+  "page_id": 3670332
+ },
+ "Briarwood, Queens": {
+  "offset": 1683286700,
+  "end": 1683462053,
+  "page_id": 587752
+ },
+ "Springfield Township, Union County, New Jersey": {
+  "offset": 628925384,
+  "end": 629962942,
+  "page_id": 125792
+ },
+ "Somerville, New Jersey": {
+  "offset": 628925384,
+  "end": 629962942,
+  "page_id": 125723
+ },
+ "Hamden, Connecticut": {
+  "offset": 584570697,
+  "end": 584993709,
+  "page_id": 108796
+ },
+ "Astoria, Queens": {
+  "offset": 1089809706,
+  "end": 1090047302,
+  "page_id": 288692
+ },
+ "Princeton, New Jersey": {
+  "offset": 503676925,
+  "end": 504320839,
+  "page_id": 84658
+ },
+ "Midwood, Brooklyn": {
+  "offset": 1647108106,
+  "end": 1647393223,
+  "page_id": 564739
+ },
+ "Port Chester, New York": {
+  "offset": 634867066,
+  "end": 635373052,
+  "page_id": 127582
+ },
+ "Garwood, New Jersey": {
+  "offset": 628925384,
+  "end": 629962942,
+  "page_id": 125780
+ },
+ "Willowbrook, Staten Island": {
+  "offset": 2678460736,
+  "end": 2678744988,
+  "page_id": 1436939
+ },
+ "Glen Cove, New York": {
+  "offset": 632142457,
+  "end": 632615606,
+  "page_id": 126708
+ },
+ "Ditmas Park, Brooklyn": {
+  "offset": 4035158246,
+  "end": 4035280303,
+  "page_id": 3180605
+ },
+ "Englewood, New Jersey": {
+  "offset": 621715525,
+  "end": 622574680,
+  "page_id": 124980
+ },
+ "Country Club, Bronx": {
+  "offset": 3229348656,
+  "end": 3229447165,
+  "page_id": 2048862
+ },
+ "Sheepshead Bay, Brooklyn": {
+  "offset": 2168349696,
+  "end": 2168659477,
+  "page_id": 963504
+ },
+ "Madison, Brooklyn": {
+  "offset": 9150157002,
+  "end": 9150288802,
+  "page_id": 18716619,
+  "redirect_to": "Sheepshead Bay, Brooklyn"
+ },
+ "Corona, Queens": {
+  "offset": 1089809706,
+  "end": 1090047302,
+  "page_id": 288655
+ },
+ "Westport, Connecticut": {
+  "offset": 1027848624,
+  "end": 1028336428,
+  "page_id": 256928
+ },
+ "Orange, New Jersey": {
+  "offset": 623501744,
+  "end": 624449943,
+  "page_id": 125181
+ },
+ "Harrison, New Jersey": {
+  "offset": 624449943,
+  "end": 625782840,
+  "page_id": 125234
+ },
+ "Atlantic Highlands, New Jersey": {
+  "offset": 658734433,
+  "end": 659103713,
+  "page_id": 136974
+ },
+ "Manhattan Beach, Brooklyn": {
+  "offset": 2168349696,
+  "end": 2168659477,
+  "page_id": 963506
+ },
+ "Kew Gardens, Queens": {
+  "offset": 1991123678,
+  "end": 1991195723,
+  "page_id": 819324
+ },
+ "East Harlem": {
+  "offset": 1482570989,
+  "end": 1483028216,
+  "page_id": 466538
+ },
+ "Bay Ridge, Brooklyn": {
+  "offset": 1188448929,
+  "end": 1188868345,
+  "page_id": 328372
+ },
+ "Bridgeport, Connecticut": {
+  "offset": 10540683887,
+  "end": 10540895902,
+  "page_id": 23747575
+ },
+ "Upper West Side": {
+  "offset": 1185677963,
+  "end": 1185998644,
+  "page_id": 327244
+ },
+ "Parkville, Brooklyn": {
+  "offset": 20745700440,
+  "end": 20745765415,
+  "page_id": 62111498,
+  "redirect_to": "Kensington, Brooklyn"
+ },
+ "East New York, Brooklyn": {
+  "offset": 23398373281,
+  "end": 23398437257,
+  "page_id": 71652482,
+  "redirect_to": "East New York"
+ },
+ "Forest Hills, Queens": {
+  "offset": 1687595641,
+  "end": 1687910428,
+  "page_id": 590828
+ },
+ "South Orange, New Jersey": {
+  "offset": 623501744,
+  "end": 624449943,
+  "page_id": 125183
+ },
+ "Farragut, Brooklyn": {
+  "offset": 8216004352,
+  "end": 8216074933,
+  "page_id": 15105656,
+  "redirect_to": "East Flatbush, Brooklyn"
+ },
+ "Hamilton Heights, Manhattan": {
+  "offset": 3864596170,
+  "end": 3864793783,
+  "page_id": 2910087
+ },
+ "Edgemere, Queens": {
+  "offset": 4894912476,
+  "end": 4895018134,
+  "page_id": 4843472
+ },
+ "Kew Gardens Hills, Queens": {
+  "offset": 4401755067,
+  "end": 4401883149,
+  "page_id": 3821174
+ },
+ "Rockaway Beach, Queens": {
+  "offset": 2594304330,
+  "end": 2594563022,
+  "page_id": 1346739
+ },
+ "Spuyten Duyvil, Bronx": {
+  "offset": 2317192939,
+  "end": 2317521977,
+  "page_id": 1088411
+ },
+ "Hallets Point": {
+  "offset": 19770372000,
+  "end": 19770461750,
+  "page_id": 58361222,
+  "redirect_to": "Astoria, Queens"
+ },
+ "Murray Hill, Queens": {
+  "offset": 5428215013,
+  "end": 5428330635,
+  "page_id": 6048493,
+  "redirect_to": "Flushing, Queens"
+ },
+ "Morris Plains, New Jersey": {
+  "offset": 626813314,
+  "end": 627988998,
+  "page_id": 125560
+ },
+ "Woodside, Queens": {
+  "offset": 2592556757,
+  "end": 2592993049,
+  "page_id": 1345125
+ },
+ "Travis, Staten Island": {
+  "offset": 2667820893,
+  "end": 2667978890,
+  "page_id": 1426611
+ },
+ "Jamaica, Queens": {
+  "offset": 1135236644,
+  "end": 1135631496,
+  "page_id": 306906
+ },
+ "Roxbury, New Jersey": {
+  "offset": 627988998,
+  "end": 628925384,
+  "page_id": 125582
+ },
+ "Park Slope": {
+  "offset": 1939110030,
+  "end": 1939360393,
+  "page_id": 765341
+ },
+ "Willets Point": {
+  "offset": 3095777384,
+  "end": 3095989607,
+  "page_id": 1892204
+ },
+ "Flatbush": {
+  "offset": 1748587061,
+  "end": 1748725069,
+  "page_id": 626242
+ },
+ "East New York": {
+  "offset": 2344844651,
+  "end": 2345033513,
+  "page_id": 1112478
+ },
+ "Middletown, New York": {
+  "offset": 633033431,
+  "end": 633326458,
+  "page_id": 126946
+ },
+ "Kensington, Brooklyn": {
+  "offset": 1954435219,
+  "end": 1954465879,
+  "page_id": 776986
+ },
+ "Fresh Meadows, Queens": {
+  "offset": 2601945427,
+  "end": 2602238806,
+  "page_id": 1354213
+ },
+ "The Heights, Jersey City": {
+  "offset": 5465656686,
+  "end": 5465829856,
+  "page_id": 6135916
+ },
+ "West Side, Jersey City": {
+  "offset": 10018032638,
+  "end": 10018130132,
+  "page_id": 21935929
+ },
+ "Greenville (Jersey City)": {
+  "missing": true
+ },
+ "Paulus Hook": {
+  "offset": 2915591060,
+  "end": 2915758139,
+  "page_id": 1693240
+ },
+ "Downtown White Plains": {
+  "missing": true
+ },
+ "Mill River Park": {
+  "offset": 14892184114,
+  "end": 14892241655,
+  "page_id": 39629625
+ },
+ "Riverview-Fisk Park": {
+  "missing": true
+ },
+ "Downtown Bridgeport": {
+  "missing": true
+ },
+ "Upper Montclair, New Jersey": {
+  "offset": 3864596170,
+  "end": 3864793783,
+  "page_id": 2909881
+ },
+ "Downtown Yonkers": {
+  "offset": 15809432685,
+  "end": 15809545487,
+  "page_id": 42854504
+ },
+ "Ironbound": {
+  "offset": 19482298275,
+  "end": 19482393063,
+  "page_id": 57329302
+ },
+ "India Square": {
+  "offset": 5465495158,
+  "end": 5465656686,
+  "page_id": 6135509
+ },
+ "McGinley Square, Jersey City": {
+  "missing": true
+ },
+ "Main Street Historic District (Danbury, Connecticut)": {
+  "offset": 8558337727,
+  "end": 8558374154,
+  "page_id": 16411325
+ },
+ "Silver Sands State Park": {
+  "offset": 5623616931,
+  "end": 5623758862,
+  "page_id": 6595991
+ },
+ "Inwood Hill Park": {
+  "offset": 872650007,
+  "end": 873208891,
+  "page_id": 199188
+ },
+ "Forest Hills Gardens, Queens": {
+  "offset": 2847682986,
+  "end": 2847910520,
+  "page_id": 1619554
+ },
+ "Capitol Theatre (Port Chester, New York)": {
+  "offset": 12276674157,
+  "end": 12276765082,
+  "page_id": 30258905
+ },
+ "Branch Brook Park": {
+  "offset": 1534127067,
+  "end": 1534450329,
+  "page_id": 493989
+ },
+ "Berry Lane Park": {
+  "offset": 15783142673,
+  "end": 15783288430,
+  "page_id": 42750984
+ },
+ "Loew's Jersey Theatre": {
+  "offset": 3473351517,
+  "end": 3473576047,
+  "page_id": 2345815
+ },
+ "Downtown New Rochelle": {
+  "missing": true
+ },
+ "Greenville, Jersey City": {
+  "offset": 4610520350,
+  "end": 4610664618,
+  "page_id": 4240893
+ },
+ "Downtown Jersey City": {
+  "offset": 5577468881,
+  "end": 5577558991,
+  "page_id": 6444143
+ },
+ "Newport, Jersey City": {
+  "offset": 3610205056,
+  "end": 3610318759,
+  "page_id": 2529921
+ },
+ "Hamilton Park, Jersey City": {
+  "offset": 9925783232,
+  "end": 9925879154,
+  "page_id": 21587182
+ },
+ "Bergen Point": {
+  "offset": 5737331232,
+  "end": 5737559278,
+  "page_id": 6913280
+ },
+ "Bergen-Lafayette": {
+  "missing": true
+ },
+ "Fort Tryon Park": {
+  "offset": 2238286700,
+  "end": 2238441636,
+  "page_id": 1019809
+ },
+ "Erasmus, Brooklyn": {
+  "offset": 20590873159,
+  "end": 20591147530,
+  "page_id": 61516271
+ },
+ "Downtown Newark": {
+  "offset": 2589773964,
+  "end": 2589899056,
+  "page_id": 1342563
+ },
+ "Downtown Danbury": {
+  "offset": 10195953708,
+  "end": 10196062271,
+  "page_id": 22583216
+ },
+ "Liberty State Park": {
+  "offset": 1773620322,
+  "end": 1773907035,
+  "page_id": 641662
+ },
+ "Long Beach Boardwalk": {
+  "missing": true
+ },
+ "Lincoln Park (Jersey City)": {
+  "offset": 11132196154,
+  "end": 11132288903,
+  "page_id": 25768266
+ },
+ "Newport (Jersey City)": {
+  "missing": true
+ },
+ "Downtown Shelton": {
+  "missing": true
+ },
+ "Downtown New Brunswick": {
+  "offset": 23331190887,
+  "end": 23331315632,
+  "page_id": 71431948
+ },
+ "Orange station (NJ Transit)": {
+  "offset": 5321911775,
+  "end": 5322003976,
+  "page_id": 5815277
+ },
+ "Astoria Park": {
+  "offset": 5382923918,
+  "end": 5383082833,
+  "page_id": 5947616
+ },
+ "Downtown Stamford": {
+  "offset": 5648855939,
+  "end": 5648983582,
+  "page_id": 6691340
+ },
+ "Downtown Jamaica": {
+  "missing": true
+ },
+ "Harrison station (PATH)": {
+  "offset": 2778650254,
+  "end": 2778859360,
+  "page_id": 1549565
+ },
+ "Walnut Beach": {
+  "offset": 18449186976,
+  "end": 18449745460,
+  "page_id": 53393848
+ },
+ "Hudson River Waterfront Walkway": {
+  "offset": 6546906899,
+  "end": 6547101193,
+  "page_id": 9402526
+ },
+ "Haverstraw Bay": {
+  "offset": 3760146400,
+  "end": 3760312746,
+  "page_id": 2749570
+ },
+ "Downtown Flushing": {
+  "offset": 18797361858,
+  "end": 18797469618,
+  "page_id": 54654806
+ },
+ "Bergen Square": {
+  "offset": 7376607329,
+  "end": 7376746215,
+  "page_id": 12320713
+ },
+ "Bergen-Lafayette, Jersey City": {
+  "offset": 9999759824,
+  "end": 9999842142,
+  "page_id": 21864183
+ },
+ "Pershing Field": {
+  "offset": 10533157063,
+  "end": 10533269658,
+  "page_id": 23723050
+ },
+ "Jamaica Hills": {
+  "offset": 6469617013,
+  "end": 6469711907,
+  "page_id": 9122990
+ },
+ "Seaside Park (Connecticut)": {
+  "offset": 11784019278,
+  "end": 11784151249,
+  "page_id": 28194206
+ },
+ "Van Vorst Park": {
+  "offset": 9925879154,
+  "end": 9926017010,
+  "page_id": 21587308
+ },
+ "Central Avenue (Hudson Palisades)": {
+  "offset": 10510958527,
+  "end": 10511035853,
+  "page_id": 23648850
+ },
+ "West Side (Jersey City)": {
+  "missing": true
+ },
+ "Paramount Hudson Valley Theater": {
+  "missing": true
+ },
+ "McGinley Square": {
+  "offset": 9926121443,
+  "end": 9926261403,
+  "page_id": 21588106
+ },
+ "Black Rock, Bridgeport": {
+  "offset": 4853152918,
+  "end": 4853322596,
+  "page_id": 4742093
+ },
+ "Harbor Point (Stamford)": {
+  "offset": 12401113467,
+  "end": 12401175999,
+  "page_id": 30750302
+ },
+ "Highbridge Park": {
+  "offset": 5146253528,
+  "end": 5146363010,
+  "page_id": 5427208
+ },
+ "Exchange Place (Jersey City)": {
+  "offset": 10935408967,
+  "end": 10935474318,
+  "page_id": 25073857
+ },
+ "Jersey City Heights": {
+  "offset": 6513107806,
+  "end": 6513187052,
+  "page_id": 9281703
+ },
+ "South Norwalk": {
+  "offset": 21729577889,
+  "end": 21729737263,
+  "page_id": 65731391
+ },
+ "St. George Terminal": {
+  "offset": 6335067467,
+  "end": 6335214552,
+  "page_id": 8700512
+ },
+ "Getty Square": {
+  "offset": 3436525457,
+  "end": 3436731380,
+  "page_id": 2299426
+ },
+ "Bensonhurst Park": {
+  "offset": 18834815424,
+  "end": 18834899301,
+  "page_id": 54842931
+ },
+ "Grove Street (Jersey City)": {
+  "missing": true
+ },
+ "Main Street (Hackensack, New Jersey)": {
+  "missing": true
+ },
+ "Journal Square": {
+  "offset": 5121726567,
+  "end": 5121839855,
+  "page_id": 5368110
+ },
+ "West Side Avenue": {
+  "offset": 10692192961,
+  "end": 10692306481,
+  "page_id": 24214727
+ },
+ "Prospect Park (Brooklyn)": {
+  "offset": 1127421524,
+  "end": 1128015174,
+  "page_id": 303857
+ }
+}

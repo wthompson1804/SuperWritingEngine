@@ -74,3 +74,9 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
 - **Presentation (Will, 2026-11-16):** "years" are called "experiences". Show the top three of everything first (top three
   neighborhoods in an experience, top three places in a neighborhood) with "show more" in descending rank. Voice: an HGTV
   show, a great realtor walking her through. Each neighborhood carries short attributed outside descriptions. Co-op rentals are out.
+- **Page voice (Will, 2026-11-16, after walking through the preview):** a consumer experience, not B2B software. Do not
+  explain the logic in running text; anything explanatory sits behind a tap ("See how we got this", collapsed by default).
+  Crime is not a selling point: everything shown is already safe, so no crime rates or "low crime" wording in the open;
+  only a brief "among the safest on the list" for the few that earn it. Promises say what life is like. Experience-level
+  figures are medians, never ranges or averages. "Compared to staying in Queens", not "against". Under "What it costs
+  you", one plain line saying what all-in includes.

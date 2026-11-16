@@ -2056,7 +2056,7 @@ document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;
 window.addEventListener("resize",fitTray);
 window.addEventListener("hashchange",function(){var r=location.hash.replace(/^#/,"")||"lives";if(routeOf(parse(r))!==current){closeSheet();go(r)}});
 
-window.__houseHunt={map:function(){return HHMAP},tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
+window.__houseHunt={map:function(){return HHMAP},marks:function(){return YEARS.map(function(Y){return Y.mark})},mapHoods:function(id){return mapData().neighborhoods.filter(function(h){return !id||h.year===id}).length},tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
 syncSliders();renderCounts();renderTray();renderFoot();
 go((function(){try{return location.hash.replace(/^#/,"")}catch(e){return ""}})()||"lives");
 if(!S.seenTour)showTour(0);

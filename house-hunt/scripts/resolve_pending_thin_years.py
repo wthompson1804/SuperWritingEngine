@@ -432,6 +432,404 @@ def crawl_sites(max_links: int = 4):
     print("refused hosts:", refused())
 
 
+# ---------------------------------------------------------------- evidence -> verdicts
+WINDOW_END = "2026-12-15"
+ELEV_Q = "Is there a passenger elevator that serves this unit's floor?"
+DOG_Q = "Are dogs allowed, and is there a weight limit (must be 25 lb or more)?"
+DATE_Q = "Which unit is this and when is it available (must be on or before Dec 15)?"
+
+
+def vis(t: str) -> str:
+    import html as H
+    t = re.sub(r"(?is)<(script|style|noscript)[^>]*>.*?</\1>", " ", t)
+    t = H.unescape(re.sub(r"<[^>]+>", "|", t))
+    return re.sub(r"(\s*\|\s*)+", " | ", re.sub(r"\s+", " ", t))
+
+
+def around(t: str, m, w: int = 80) -> str:
+    return t[max(0, m.start() - w):m.end() + w].strip(" |")
+
+
+def desc_elevator(desc: str, where: str):
+    """A listing's own description text: 'walk-up' / 'no elevator' is a negative, 'elevator' a positive."""
+    m = re.search(r"\b(no elevator|walk[- ]?up)\b", desc, re.I)
+    if m:
+        return (f"{where}: \"{around(desc, m, 70)}\"", "no")
+    for m in re.finditer(r"\belevators?\b", desc, re.I):
+        c = around(desc, m, 70)
+        if not re.search(r"wheelchair|lift|freight|no elevator", c, re.I):
+            return (f"{where}: \"{c}\"", "yes")
+    return None
+
+
+def page_elevator(path: str, url: str):
+    """Elevator named on a cached page we were allowed to read: (quote, kind) or None. An accessibility or
+    wheelchair lift is not an elevator; 'no elevator' / 'walk-up' is returned as a negative."""
+    import h_apartmentlist as A
+    import h_zumper as Z
+    import h_trulia as T
+    try:
+        raw = (ROOT / path).read_text(errors="replace")
+    except Exception:
+        return None
+    if "apartmentlist.com" in url:
+        L = A.parse_listing(raw) or {}
+        am = A.amen_names(L, "community_amenities") + A.amen_names(L, "unit_amenities") + A.amen_names(L, "top_amenities")
+        hit = [a for a in am if re.fullmatch(r"elevators?", a.strip(), re.I)]
+        if hit:
+            return (f"Apartment List amenity list: {hit[0]}", "yes")
+        return desc_elevator(str(L.get("description") or ""), "Apartment List listing description")
+    if "zumper.com" in url:
+        st = Z.parse_state(raw) or {}
+        d = ((st.get("detail") or {}).get("entity") or {}).get("data") or {}
+        tags = (d.get("amenity_tags") or []) + (d.get("building_amenity_tags") or [])
+        hit = [a for a in tags if re.search(r"\belevator", a, re.I)]
+        if hit:
+            return (f"Zumper amenity tag: {hit[0]}", "yes")
+        return desc_elevator(str(d.get("description") or ""), "Zumper listing description")
+    if "trulia.com" in url:
+        m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', raw, re.S)
+        try:
+            hd = json.loads(m.group(1))["props"].get("homeDetails") or {}
+            feats = T.flat_features(hd.get("features"))
+        except Exception:
+            return None
+        hit = [f for f in feats if re.search(r"\belevator", str(f[-1]), re.I)]
+        if hit:
+            return (f"Trulia page feature ({hit[0][0]} / {hit[0][1]}): {hit[0][-1]}"[:200], "yes")
+        return desc_elevator(str((hd.get("description") or {}).get("value") or ""), "cached Trulia listing description")
+    t = vis(raw)
+    m = re.search(r"\b(no elevator|walk[- ]?up)\b", t, re.I)
+    if m:
+        return (around(t, m), "no")
+    for m in re.finditer(r"\belevators?\b", t, re.I):
+        c = around(t, m)
+        if not re.search(r"wheelchair|accessib\w* lift|freight", c, re.I):
+            return (c, "yes")
+    return None
+
+
+def page_dogs(path: str):
+    """Own-site wording about dogs: (value, weight, quote). value: yes / conditional / ''."""
+    try:
+        t = vis((ROOT / path).read_text(errors="replace"))
+    except Exception:
+        return None
+    m = re.search(r"(cats?\s*(and|&|/)\s*dogs?[^|.]{0,40}(welcome|allowed|accepted|friendly)|dogs?\s*(are\s*)?(welcome|allowed|accepted)|"
+                  r"(welcome|allow|accept)s?[^|.]{0,30}\bdogs?\b|dog[- ]friendly)", t, re.I)
+    if not m:
+        return None
+    q = around(t, m, 110)
+    w = re.search(r"(\d{2,3})\s*(?:-\s*)?(?:lbs?\b|pounds?\b)", q, re.I)
+    cond = re.search(r"case[- ]by[- ]case|upon approval|with (management |owner )?approval|subject to approval", q, re.I)
+    return ("conditional" if cond else "yes", w.group(1) if w else "", q)
+
+
+def write():
+    import csv
+    import h_apartmentlist as A
+    import parsers
+    C = pd.read_csv(OUT / "candidates.csv", dtype=str, keep_default_na=False)
+    L = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False)
+    L["bkey"] = L.apply(building_key, axis=1)
+    nk = lambda s: re.sub(r"[^a-z0-9]", "", str(s).lower())
+    L["nkey"] = L.building_name.map(nk) + "|" + L.zip5
+    C["nkey"] = C.building_name.map(nk) + "|" + C.zip5
+    F = fetched()
+    site_pages = {}
+    if (OUT / "site_pages.jsonl").exists():
+        for line in open(OUT / "site_pages.jsonl"):
+            b = json.loads(line)
+            site_pages[b["bkey"]] = [p for p in b["pages"] if p.get("path")]
+    sec = {}
+    if (OUT / "secondary_urls.csv").exists():
+        for r in pd.read_csv(OUT / "secondary_urls.csv", dtype=str, keep_default_na=False).itertuples():
+            sec.setdefault(r.why.split("|", 1)[1], []).append(r.url)
+    blocked_sites = {}
+    for line in (open(OUT / "site_pages.jsonl") if (OUT / "site_pages.jsonl").exists() else []):
+        b = json.loads(line)
+        bad = [p for p in b["pages"] if not p.get("path")]
+        if bad and not [p for p in b["pages"] if p.get("path")]:
+            blocked_sites[b["bkey"]] = f"{bad[0]['url']} -> {bad[0]['status']}"
+
+    confirm, facts, live, resolved = [], [], [], []
+    for bk, g in C.groupby("bkey", sort=False):
+        nks = set(g.nkey[g.building_name != ""])
+        X = L[(L.bkey == bk) | L.nkey.isin(nks)]
+        r0 = g.iloc[0]
+        bname = r0.building_name or r0.address
+        akeys = list(dict.fromkeys(g.addr_key))
+        looked = []                      # where we looked, for unconfirmed rows
+
+        # ---------- elevator (building level)
+        elev = None                      # (value, quote, url, at, how)
+        for x in X[(X.elevator.str.lower() == "yes") & (X.elevator_basis == "stated")].itertuples():
+            if x.raw_path.endswith((".html", ".htm")):
+                pe = page_elevator(x.raw_path, x.url)
+                if pe and pe[1] == "yes":
+                    elev = ("yes", pe[0], x.url, x.last_seen, f"stated on the {x.source_site} page of the same building (cached harvest page)")
+                    break
+        if not elev:
+            for p in site_pages.get(bk, []):
+                pe = page_elevator(p["path"], p["url"])
+                if pe:
+                    elev = (pe[1], pe[0], p["url"], p["retrieved_at"], "building's own site")
+                    break
+            looked += [p["url"] for p in site_pages.get(bk, [])]
+        if not elev:
+            for u in list(dict.fromkeys(g.url)) + sec.get(bk, []):
+                f = F.get(u.split("?")[0] if "zumper.com" in u else u)
+                if f and f["path"]:
+                    looked.append(f["url"])
+                    pe = page_elevator(f["path"], f["url"])
+                    if pe and (pe[1] == "yes" or f["url"] in set(g.url)):
+                        elev = (pe[1], pe[0], f["url"], f["retrieved_at"], "listing / aggregator page of the same address, re-read")
+                        break
+        if not elev:                    # cached Trulia pages of the candidates themselves (never re-requested)
+            for x in g[g.source_site == "trulia"].itertuples():
+                pe = page_elevator(x.raw_path, x.url)
+                if pe:
+                    elev = (pe[1], pe[0], x.url, x.last_seen, "cached Trulia page")
+                    break
+        if not elev:
+            hi = X[(X.floor_basis == "stated") & (pd.to_numeric(X.floor, errors="coerce") >= 6)]
+            hi = hi[hi.bkey == bk] if (hi.bkey == bk).any() else hi
+            if len(hi):
+                x = hi.sort_values("floor", key=lambda s: pd.to_numeric(s)).iloc[-1]
+                elev = ("inferred_6plus_floors", f"unit {x.unit} is listed on floor {x.floor} (floor field on the page, not a unit-label guess)",
+                        x.url, x.last_seen, "plan rule: a building of 6+ floors is treated as having an elevator, with an asterisk")
+        pluto_note = ""
+        if r0.elevator_from_class and r0.match_basis != "house_number+location":
+            pluto_note = f"PLUTO class {r0.pluto_class} ({r0.elevator_from_class}) rests on a {r0.match_basis} match, not an exact address match"
+        if r0.elevator_from_class == "no" and r0.g_elevator == "pass":
+            pluto_note = f"CONFLICT: listing page names an elevator but PLUTO class {r0.pluto_class} is a walk-up class ({r0.match_basis})"
+
+        # ---------- dogs (building level)
+        dog = None                       # (value, weight, quote, url, at, how)
+        yes = X[X.dogs.str.lower() == "yes"]
+        no = X[X.dogs.str.lower() == "no"]
+        if len(yes) and len(no):
+            y, n = yes.iloc[0], no.iloc[0]
+            dog = ("conflict", "", f"{y.source_site}: {y.dog_policy_text[:90]} / {n.source_site}: {n.dog_policy_text[:90] or 'dogs not allowed'}",
+                   n.url, n.last_seen, "pages for the same building disagree")
+        elif len(yes):
+            wl = pd.to_numeric(yes.dog_weight_limit_lb, errors="coerce").dropna()
+            y = yes[yes.source_site != "trulia"].iloc[0] if (yes.source_site != "trulia").any() else yes.iloc[0]
+            # A managed community has one pet policy; a co-op/condo or small building listed unit by unit does not.
+            # Another unit's listing counts only for a community (5+ listings of it, or a building-level page).
+            community = len(X) >= 5 or yes.detail_level.str.startswith("building").any() or y.listing_id in set(g.listing_id)
+            dog = ("yes" if community else "other_unit_only", str(int(wl.min())) if len(wl) else "", y.dog_policy_text[:220], y.url, y.last_seen,
+                   f"dog policy on the {y.source_site} page of the same building" + ("" if y.listing_id in set(g.listing_id) else " (another listing of this building)"))
+        if not dog:
+            for p in site_pages.get(bk, []):
+                pdg = page_dogs(p["path"])
+                if pdg:
+                    dog = (pdg[0], pdg[1], pdg[2], p["url"], p["retrieved_at"], "building's own site")
+                    break
+
+        for k in akeys[:1]:
+            if "elevator" in ";".join(g.pending_reasons):
+                if elev:
+                    confirm.append([k, "elevator", elev[0], elev[1], elev[2], "confirmed" if elev[0] in ("yes", "no") else "unconfirmed"])
+                else:
+                    confirm.append([k, "elevator", "not stated", "looked at: " + " ; ".join(dict.fromkeys(looked))[:400]
+                                    + (f" ; own site blocked: {blocked_sites[bk]}" if bk in blocked_sites else ""), r0.url, "unconfirmed"])
+            if "dog" in ";".join(g.pending_reasons):
+                if dog:
+                    confirm.append([k, "dogs_allowed", dog[0], dog[2], dog[3], {"yes": "confirmed", "conflict": "contradicts"}.get(dog[0], "unconfirmed")])
+                    confirm.append([k, "dog_weight_limit", dog[1] or "none stated", dog[2], dog[3], "confirmed" if dog[1] else "unconfirmed"])
+                else:
+                    confirm.append([k, "dogs_allowed", "not stated", "page says only 'pet friendly' or nothing about dogs", r0.url, "unconfirmed"])
+            if pluto_note:
+                facts.append([k, "nyc_pluto_note", pluto_note, "", "https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks"])
+
+        # ---------- per unit
+        passing = L[(L.gate_status == "pass") & ((L.bkey == bk) | L.nkey.isin(nks))]
+        unit_tail = lambda u: re.sub(r"^.*[^0-9a-z]", "", str(u).lower()) if re.search(r"\d", str(u)) else ""
+        pass_tails = {unit_tail(u): lid for u, lid in zip(passing.unit, passing.listing_id) if unit_tail(u)}
+        seen_tails = {}
+        for r in g.itertuples():
+            reasons = [x for x in r.pending_reasons.split(";") if x]
+            opens, fails, how, notes = [], [], [], []
+            src_url, checked = r.url, r.last_seen
+            # live check: price and date from the listing page itself
+            status, price_now, avail_txt, avail_iso = "", "", "", ""
+            host = urlparse(r.url).netloc.lower()
+            if "trulia.com" in host:
+                status = "blocked"
+                notes.append("Trulia not requested (blocking us); price and date as on the cached page of " + r.last_seen)
+                price_now, avail_txt, avail_iso = r.listed_rent, r.available_date_text or r.available_date, r.available_date
+            elif "apartmentlist.com" in host:
+                Ld, f = al_listing(r.url)
+                checked = (f or {}).get("retrieved_at", checked)
+                uid = r.listing_id.rsplit(":", 1)[1]          # "p<rental>-<unit_rental_id tail>" or "p<rental>-u<unit id>"
+                hit = None
+                for fp in (Ld or {}).get("available_units") or []:
+                    for u in fp.get("units") or []:
+                        if u.get("unit_rental_id") == uid or uid.endswith(f"-u{u.get('id')}"):
+                            hit = u
+                if hit is None:
+                    status = "gone"
+                    notes.append("unit id not on the re-read Apartment List page" if Ld else "re-read page carries no listing")
+                else:
+                    price_now = str(hit.get("price") or "")
+                    avail_iso = "now" if hit.get("available_now") else str(hit.get("available_on") or "")
+                    avail_txt = ("available now" if hit.get("available_now") else "") + (f" (available_on {hit.get('available_on')})" if hit.get("available_on") else "")
+                    status = "live" if price_now == str(int(float(r.listed_rent))) else "changed"
+                    desc = str((Ld or {}).get("description") or "")
+                    if len([u for fp in Ld.get("available_units") or [] for u in fp.get("units") or []]) == 1:
+                        m = re.search(r"\b(first|ground|1st)[- ]floor (apartment|apt|unit|condo|co-op|home|residence|studio|one|1)|"
+                                      r"(located|situated|apartment|unit|condo) (is )?on the (first|ground|1st) floor|"
+                                      r"\b(garden|basement)[- ]level (apartment|unit|studio)|\bbasement apartment", desc, re.I)
+                        if m:
+                            fails.append(f"ground floor: page says \"{around(desc, m, 60)}\"")
+            elif "zumper.com" in host:
+                d, t, f = zumper_entity(r.url)
+                checked = (f or {}).get("retrieved_at", checked)
+                lid = re.search(r"(\d+)$", r.listing_id).group(1)
+                fps = {str(x.get("listing_id")): x for x in (d or {}).get("floorplan_listings") or []}
+                hit = fps.get(lid) or (d if d and str(d.get("listing_id")) == lid else None)
+                if hit is None:
+                    status = "gone" if d else "blocked"
+                    notes.append("floor plan id not on the re-read Zumper page" if d else "Zumper page not parsed")
+                else:
+                    price_now = str(hit.get("min_price") or hit.get("price") or "")
+                    status = "live" if price_now == str(int(float(r.listed_rent))) else "changed"
+                    da = hit.get("date_available")
+                    avail_iso = str(da)[:10] if da else ""
+                    avail_txt = avail_iso or "not stated on the Zumper page"
+                    notes.append("Zumper floor-plan row (a 'from' price for a plan), not a numbered unit" if not r.unit else "")
+            else:
+                f = F.get(r.url) or {}
+                raw = (ROOT / f["path"]).read_text(errors="replace") if f.get("path") else ""
+                checked_page = f.get("retrieved_at", "")
+                p = str(int(float(r.listed_rent)))
+                has_price = p in raw or f"{int(p):,}" in raw
+                has_unit = bool(r.unit) and r.unit in raw
+                price_now, avail_txt, avail_iso = r.listed_rent, r.available_date_text or r.available_date, r.available_date
+                if raw and has_price and (has_unit or not r.unit):
+                    status, checked = "live", checked_page
+                    notes.append("re-read page still shows this price" + (" and unit" if has_unit else " (floor-plan 'from' price)"))
+                else:
+                    status = "live"
+                    notes.append(f"unit list of this site loads from a script feed that was not re-requested; price and date are the "
+                                 f"harvester's reading of the site's own unit feed at {r.last_seen}")
+            if status == "gone":
+                fails.append("no longer listed on the page it came from")
+            if price_now and float(price_now) > 3000:
+                fails.append(f"price now ${price_now}")
+
+            # facts
+            if "elevator" in reasons:
+                if elev and elev[0] == "yes":
+                    how.append(f"elevator: {elev[1]} [{elev[4]}]")
+                    src_url = elev[2]
+                elif elev and elev[0] == "inferred_6plus_floors":
+                    how.append(f"elevator (asterisk, inferred): {elev[1]} [{elev[4]}]")
+                    src_url = elev[2]
+                    notes.append("tour question: confirm the elevator")
+                elif elev and elev[0] == "no":
+                    fails.append(f"no elevator: \"{elev[1][:120]}\"")
+                    src_url = elev[2]
+                else:
+                    opens.append(ELEV_Q)
+            if "dog" in reasons:
+                if dog and dog[0] == "yes" and (not dog[1] or float(dog[1]) >= 25):
+                    how.append(f"dogs: {dog[2][:140]} [{dog[5]}]" + (f"; limit {dog[1]} lb" if dog[1] else "; no weight limit stated"))
+                    if re.search(r"small", dog[2], re.I) and not dog[1]:
+                        notes.append("size-only 'small dogs' policy: passes per Will, tour question to confirm the limit")
+                    src_url = dog[3] if "elevator" not in reasons else src_url
+                elif dog and dog[0] == "yes":
+                    fails.append(f"dog weight limit {dog[1]} lb (< 25)")
+                elif dog and dog[0] == "other_unit_only":
+                    opens.append(f"Another unit's listing in this building says \"{dog[2][:80]}\" ({dog[3]}); does that hold for this unit? " + DOG_Q)
+                elif dog and dog[0] == "conflict":
+                    opens.append("Dog policy conflicts between pages (" + dog[2][:150] + "): which is right?")
+                else:
+                    opens.append(DOG_Q)
+            if "movein" in reasons:
+                if avail_iso == "now" or (re.match(r"\d{4}-\d\d-\d\d", avail_iso) and avail_iso <= WINDOW_END):
+                    how.append(f"availability: {avail_txt} (read from the listing page)")
+                elif re.match(r"\d{4}-\d\d-\d\d", avail_iso):
+                    fails.append(f"available {avail_iso}, after Dec 15")
+                else:
+                    opens.append(DATE_Q)
+            if "proof" in reasons:
+                if status == "live" and "trulia.com" not in host:
+                    how.append("listing page re-read")
+                else:
+                    opens.append("Search-card listing only: the listing page itself has not been read (price, date).")
+            # ground floor, from the unit label the same way gates.py reads it
+            lab = r.unit or (re.search(r"(?:apt|unit|#)\s*#?\s*([\w-]+)\s*$", r.building_name, re.I) or [None, ""])[1]
+            if lab and r.g_floor != "pass":
+                fl, kind = parsers.floor_from_label(lab, None)
+                if fl is not None and fl < 2:
+                    fails.append(f"ground floor (unit label '{lab}', read as gates.py reads labels)")
+            if re.search(r"first floor", r.notes, re.I) and not r.unit:
+                fails.append("floor plan is described as first floor on the site")
+            if pluto_note.startswith("CONFLICT"):
+                opens.append(pluto_note + ": " + ELEV_Q)
+            elif pluto_note and r.g_elevator == "pass" and r.elevator_basis == "nyc_pluto_building_class":
+                opens.append(pluto_note + ": " + ELEV_Q)
+            if status == "blocked" and not opens and not fails:
+                opens.append("Listing page could not be re-read (Trulia is blocking us): is it still listed at this price and date?")
+            if status == "changed":
+                notes.append(f"price changed: stored {r.listed_rent}, now {price_now}")
+            dup = pass_tails.get(unit_tail(r.unit), "") or seen_tails.get(unit_tail(r.unit), "") if unit_tail(r.unit) else ""
+            if unit_tail(r.unit):
+                seen_tails.setdefault(unit_tail(r.unit), r.listing_id)
+            if fails:
+                verdict = "fails (" + "; ".join(fails) + ")"
+            elif opens:
+                verdict = "still_open (" + " | ".join(opens) + ")"
+            else:
+                verdict = "now_passes"
+            live.append([r.addr_key, r.url, r.unit, status, price_now, avail_txt, "yes" if status == "live" else "no",
+                         "", checked, "; ".join(n for n in notes if n)])
+            resolved.append([r.listing_id, r.addr_key, bname, r.unit, r.hood, r.year, r.listed_rent, ";".join(reasons),
+                             " ; ".join(how), verdict, src_url, checked, dup, len(opens) if not fails else 0,
+                             "; ".join(n for n in notes if n), len(passing)])
+        if len(g):
+            Ld = None
+            for u in dict.fromkeys(g.url):
+                if "apartmentlist.com" in u:
+                    Ld, f = al_listing(u)
+                    if Ld:
+                        for key, lab in (("year_built", "year_built"), ("total_units_count", "building_size"), ("pmc_display_name", "management_company"),
+                                         ("rental_type", "listing_type"), ("website_url", "building_site_url")):
+                            if Ld.get(key):
+                                facts.append([akeys[0], lab, str(Ld.get(key)), f"Apartment List page data field {key}", u])
+                        break
+
+    def dump(name, cols, rows):
+        with open(OUT / name, "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(cols)
+            w.writerows(rows)
+    dump("confirm_batch_18.csv", ["addr_key", "fact", "value", "quote", "source_url", "status"], confirm)
+    dump("facts_batch_18.csv", ["addr_key", "fact", "value", "quote", "source_url"], facts)
+    dump("live_check_batch_18.csv", ["addr_key", "listing_url", "unit", "status", "price_now", "available_now_text", "matches_stored",
+                                     "building_site_url", "checked_at", "notes"], live)
+    dump("items_batch_18.csv", ["addr_key", "building_name", "category", "item_date", "excerpt", "source_site", "source_url", "about",
+                                "retrieved_at"], [])
+    dump("resolved_candidates.csv", ["listing_id", "addr_key", "building", "unit", "hood", "year", "rent", "missing_fact", "how_settled",
+                                     "verdict", "source_url", "checked_at", "duplicate_of", "open_questions", "notes",
+                                     "units_of_building_already_passing"], resolved)
+    R = pd.DataFrame(resolved, columns=["listing_id", "addr_key", "building", "unit", "hood", "year", "rent", "missing", "how", "verdict",
+                                        "src", "at", "dup", "nq", "notes", "npass"])
+    R["v"] = R.verdict.str.split(" ").str[0]
+    R["bkey"] = C.set_index("listing_id").bkey.reindex(R.listing_id).values
+    print(R.v.value_counts().to_dict())
+    print(R.groupby(["year", "v"]).agg(units=("listing_id", "size"), buildings=("bkey", "nunique")).to_string())
+    summary = {"verdicts": R.v.value_counts().to_dict(),
+               "now_passes_new_units": int(((R.v == "now_passes") & (R.dup == "")).sum()),
+               "now_passes_duplicates_of_passing_units": int(((R.v == "now_passes") & (R.dup != "")).sum()),
+               "still_open_single_question": int(((R.v == "still_open") & (R.nq == 1)).sum()),
+               "still_open_single_question_buildings": int(R[(R.v == "still_open") & (R.nq == 1)].bkey.nunique()),
+               "refused_hosts": refused()}
+    (OUT / "summary.json").write_text(json.dumps(summary, indent=1))
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "select"
     if cmd == "select":
@@ -440,6 +838,8 @@ if __name__ == "__main__":
         fetch_primary()
     elif cmd == "fetch-urls":
         fetch_urls(sys.argv[2])
+    elif cmd == "write":
+        write()
     elif cmd == "sites":
         sites()
     elif cmd == "crawl-sites":

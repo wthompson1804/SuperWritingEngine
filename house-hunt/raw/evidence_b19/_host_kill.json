@@ -1,0 +1,14 @@
+{
+ "www.stamfordcommons.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.stamfordcommons.com/robots.txt",
+  "at": "2026-11-16T00:32:50+00:00",
+  "by": "evidence_batch_19"
+ },
+ "www.citylineeast.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.citylineeast.com/",
+  "at": "2026-11-16T00:33:22+00:00",
+  "by": "evidence_batch_19"
+ }
+}

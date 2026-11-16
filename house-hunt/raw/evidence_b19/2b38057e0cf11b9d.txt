@@ -1,0 +1,6 @@
+Disallow: /resources/changelog
+Disallow: /resources/instructions
+Disallow: /resources/licensing
+Disallow: /resources/style-guide
+
+Sitemap: https://www.lafayettestamford.com/sitemap.xml

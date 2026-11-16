@@ -113,6 +113,40 @@ def pure():
 
 
 def pure_more():
+    # ---- Jersey City split (docs/SUBCITY_SPLIT_PLAN.md): Jersey City only, point-in-polygon, overrides, parent fallback
+    import tempfile
+    import build_neighborhoods as BN
+    subs = BN.subcity_polys()
+    eq({c for c, *_ in subs}, {"Jersey City"}, "split: only Jersey City is adopted (not Newark)")
+    eq(len(subs), 8, "split: eight Jersey City neighborhoods")
+    eq(BN.subcity_name("Jersey City", "NJ", 40.7220882, -74.0648094, subs), "Jersey City – McGinley Square", "split: 20 Beacon Way is McGinley Square")
+    eq(BN.subcity_name("Jersey City", "NJ", 40.7358924, -74.0475323, subs), "Jersey City – The Heights", "split: 110 Hoboken Ave falls in the Heights polygon before the override")
+    eq(BN.subcity_name("Newark", "NJ", 40.7357, -74.1724, subs), "Newark", "split: Newark stays whole")
+    eq(BN.subcity_name("Hoboken", "NJ", 40.744, -74.032, subs), "Hoboken", "split: other towns are untouched")
+    eq(BN.subcity_name("Jersey City", "NY", 40.72, -74.06, subs), "Jersey City", "split: the state must match")
+    ov = BN.subcity_overrides()
+    for key, lat, lon, want in [("110 hoboken ave|07310", 40.7358924, -74.0475323, "Jersey City – Downtown"), ("15 carbon pl|07305", 40.7124275, -74.0934336, "Jersey City – West Side"),
+                                ("176 w side ave|07305", 40.7100727, -74.0939888, "Jersey City – West Side"), ("104 clifton pl|07304", 40.7209244, -74.064888, "Jersey City – McGinley Square")]:
+        eq(BN.subcity_name("Jersey City", "NJ", lat, lon, subs, ov, keys=(key,)), want, f"split: override for {key}")
+    with tempfile.TemporaryDirectory() as td:
+        f = Path(td) / "o.csv"
+        f.write_text("addr_key,building_id,hood_label,reason\n1 test st|07302,b_x,Jersey City – Newport,test\n")
+        o2 = BN.subcity_overrides(f)
+        eq(BN.subcity_name("Jersey City", "NJ", 40.7220882, -74.0648094, subs, o2, keys=("zzz", "b_x")), "Jersey City – Newport", "split: an override may be keyed on the building id")
+        eq(BN.subcity_overrides(Path(td) / "missing.csv"), {}, "split: a missing override file is no overrides")
+    eq(BN.hood_id_of("NJ", "Jersey City – Journal Square"), "nj:jersey-city-journal-square", "split: hood_id from the label")
+    par = BN.subcity_parents()
+    eq(par["nj:jersey-city-west-side"]["parent_id"], "nj:jersey-city", "split: parent id")
+    eq(BN.route_to_children("nj:hoboken", "", par), [("nj:hoboken", None)], "fallback: a town that is not split keeps its id")
+    eq(BN.route_to_children("nj:newark", "", par), [("nj:newark", None)], "fallback: Newark is not split")
+    eq(BN.route_to_children("nj:jersey-city", "Journal Square, Jersey City", par), [("nj:jersey-city-journal-square", None)], "fallback: a Journal Square survey row goes to Journal Square only")
+    eq(BN.route_to_children("nj:jersey-city", "McGinley Square, Jersey City", par), [("nj:jersey-city-mcginley-square", None)], "fallback: McGinley Square row")
+    r = BN.route_to_children("nj:jersey-city", "Jersey City, NJ", par)
+    eq((len(r), {a for _, a in r}), (8, {"Jersey City as a whole"}), "fallback: citywide content goes to all eight, labelled as about Jersey City as a whole")
+    pure_3()
+
+
+def pure_3():
     pass
 
 
@@ -254,10 +288,52 @@ def data():
 
 
 def data_more(M, R, S):
+    import pandas as pd
+    # ---- Jersey City split
+    jc = M[(M.city.str.lower() == "jersey city") & (M.state == "NJ")]
+    ok(len(jc) > 0 and not (M.hood_id == "nj:jersey-city").any(), "split: no unit is left under the old id nj:jersey-city")
+    ok(jc.hood_id.str.startswith("nj:jersey-city-").all() and jc.hood.str.startswith("Jersey City – ").all(), "split: every Jersey City unit has a neighborhood")
+    ok((jc.hood_area == "Hudson County").all(), "split: hood_area stays the county")
+    ok((M.hood_id == "nj:newark").any() and not M.hood_id.str.startswith("nj:newark-").any(), "split: Newark is not split")
+    for key, want in [("110 hoboken ave|07310", "nj:jersey-city-downtown"), ("15 carbon pl|07305", "nj:jersey-city-west-side"),
+                      ("176 w side ave|07305", "nj:jersey-city-west-side"), ("104 clifton pl|07304", "nj:jersey-city-mcginley-square")]:
+        x = M[M.addr_key == key]
+        ok(len(x) == 0 or (x.hood_id == want).all(), f"split: override {key} -> {want}")
+    G = pd.read_csv(DATA / "lifestyle_groups.csv", dtype=str, keep_default_na=False)
+    gj = G[G.hood_id.str.startswith("nj:jersey-city")]
+    ok(len(gj) >= 5 and gj.violent.nunique() == 1 and gj.property.nunique() == 1, "split: every Jersey City neighborhood carries the one citywide police rate")
+    ok((gj.safety_cut.str.lower() == "false").all(), "split: the safety rule uses the citywide rate (Jersey City passes), never the sub-city estimate")
+    ok((gj.group_key != "").all(), "split: each Jersey City neighborhood is assigned to a lifestyle group")
+    ref = pd.read_csv(DATA / "reference" / "lifestyle_fit_reference.csv", dtype=str, keep_default_na=False)
+    ok((ref.hood_id == "nj:jersey-city").any() and not ref.hood_id.str.startswith("nj:jersey-city-").any(), "split: the lifestyle groups were not refitted (the fit reference still holds the one Jersey City row)")
+    data_3(M, R, S)
+
+
+def data_3(M, R, S):
     pass
 
 
 def page_more(J, M, R, S):
+    hs = [h for h in J["neighborhoods"] if h["id"].startswith("nj:jersey-city")]
+    ok(hs and all(h.get("parent_id") == "nj:jersey-city" and h["area"] == "Hudson County" for h in hs), "split: Jersey City neighborhoods carry parent_id and the county")
+    for h in hs:
+        sf = h["safety"]
+        ok("citywide police rate" in (sf.get("basis") or ""), f"split: {h['id']} safety must say it is the citywide rate")
+        est = sf.get("subcity_estimate")
+        ok(est is not None and est["used_for_safety_rule"] is False and "estimate" in est["label"] and est["value_type"] == "estimate", f"split: {h['id']} sub-city crime is a labelled estimate, context only")
+        vs = (h.get("local") or {}).get("voices") or []
+        ok(all(v_.get("about") for v_ in vs if "Jersey City" in (v_.get("source_area") or "") and h["short_name"] not in (v_.get("source_area") or "")), f"split: citywide quotes on {h['id']} are labelled")
+        ok((h.get("local") or {}).get("parking_rules"), f"split: {h['id']} inherits Jersey City's parking rules")
+        ok(all(r_.get("about") == "Jersey City as a whole" for r_ in h["local"]["parking_rules"] if r_.get("municipality") == "Jersey City"), f"split: inherited rules on {h['id']} are labelled")
+        for sv in (h.get("local") or {}).get("survey") or []:
+            sa = sv.get("source_area") or ""
+            ok(not ("Square" in sa and h["short_name"] not in sa), f"split: a survey row for {sa} must not sit on {h['id']}")
+        if h.get("prose") and h["prose"].get("inherited_from"):
+            ok(h["prose"].get("about") == "Jersey City as a whole", f"split: inherited scene text on {h['id']} is labelled")
+    page_3(J, M, R, S)
+
+
+def page_3(J, M, R, S):
     pass
 
 

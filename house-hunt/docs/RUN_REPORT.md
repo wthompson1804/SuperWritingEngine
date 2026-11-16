@@ -1,4 +1,4 @@
-# Run report (2026-11-16T00:31:51+00:00)
+# Run report (2026-11-16T00:35:16+00:00)
 
 ## Steps
 
@@ -21,7 +21,7 @@
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | ok |
+| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | FAILED |
 | field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
 
 ## Stage counts
@@ -36,12 +36,12 @@
 | within the $3,000 all-in cap | 1652 | 1652 | +0 |
 | ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 855 | 855 | +0 |
 | shown (every gate fact confirmed or stated; top 10 per neighborhood) | 326 | 326 | +0 |
-| avoid cards | 35 | 35 | +0 |
+| avoid cards | 36 | 35 | +1 |
 |   shown with an asterisk (one thing to confirm) | 118 | 118 | +0 |
 | removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 141 | 141 | +0 |
-| held back for one confirmation | 26 | 26 | +0 |
-| clean, waiting for a live check (not shown) | 28 | 28 | +0 |
-| neighborhoods with 3+ shown places | 36 | 36 | +0 |
+| held back for one confirmation | 29 | 26 | +3 |
+| clean, waiting for a live check (not shown) | 39 | 28 | +11 |
+| neighborhoods with 3+ shown places | 37 | 36 | +1 |
 | buildings in the master table | 665 | 665 | +0 |
 
 ## Why units left
@@ -72,9 +72,9 @@
 
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
-| The Fresh-Start Year      |               5 |       64 |      27 |             0 |
-| The Little-City Year      |              30 |      422 |     132 |             8 |
-| The Old-Neighborhood Year |              42 |      140 |      75 |            25 |
+| The Fresh-Start Year      |               7 |       97 |      35 |             0 |
+| The Little-City Year      |              31 |      365 |     124 |             5 |
+| The Old-Neighborhood Year |              43 |      164 |      75 |            29 |
 | The Quiet-Street Year     |               7 |       12 |      10 |             0 |
 | The Room-to-Breathe Year  |              32 |      209 |      76 |             0 |
 | The Walk-Everywhere Year  |               6 |        8 |       6 |             2 |
@@ -109,7 +109,7 @@ test_parsers: 259 assertions passed
 
 **rule tests (every defect in docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (rules): 85 checks, 0 failed
+test_rules (rules): 105 checks, 0 failed
 ```
 
 **gates (merge, dedupe, gate each listing)**
@@ -151,38 +151,38 @@ coordinates: {'listing rows agree': 662, 'census_geocoder': 3}; lookups redone a
 **neighborhood assignment**
 ```
 # Checkpoint A: neighborhoods and proposed years
-Passing units: 2598 in 692 buildings, across 214 neighborhoods; 109 neighborhoods have 3+ passing places.
-Cluster quality (silhouette; higher is cleaner): {5: 0.152, 6: 0.157}. Using k=6.
+Passing units: 2598 in 692 buildings, across 221 neighborhoods; 114 neighborhoods have 3+ passing places.
+Cluster quality (silhouette; higher is cleaner): {5: 0.141, 6: 0.144}. Using k=6.
 ```
 
 **lifestyle features**
 ```
-214 neighborhoods; {'people_per_km2': 0.0, 'age_25_34_share': 0.0, 'median_age': 0.0, 'living_alone_share': 0.0, 'renter_share': 0.0, 'big_building_share': 0.0, 'detached_house_share': 0.0, 'median_year_built': 0.0, 'no_car_share': 0.0, 'transit_commute_share': 0.0, 'walk_commute_share': 0.0, 'wfh_share': 0.0, 'median_hh_income': 0.0, 'newcomer_share': 0.0, 'restaurants_800m': 0.0, 'bars_800m': 0.0, 'cafes_800m': 0.0, 'music_1600m': 0.0, 'park_ha_800m': 0.0, 'park_walk_min': 0.0, 'open_water_m': 0.0, 'beach_m': 0.0, 'supermarket_m': 0.0, 'train_station_m': 0.07, 'motorway_m': 0.0, 'violent_per_1000': 0.02, 'vehicle_theft_per_1000': 0.02, 'sqft': 0.21, 'bfloors': 0.93, 'garage': 0.0, 'sqft_per_1000usd': 0.21}
+221 neighborhoods; {'people_per_km2': 0.0, 'age_25_34_share': 0.0, 'median_age': 0.0, 'living_alone_share': 0.0, 'renter_share': 0.0, 'big_building_share': 0.0, 'detached_house_share': 0.0, 'median_year_built': 0.0, 'no_car_share': 0.0, 'transit_commute_share': 0.0, 'walk_commute_share': 0.0, 'wfh_share': 0.0, 'median_hh_income': 0.0, 'newcomer_share': 0.0, 'restaurants_800m': 0.0, 'bars_800m': 0.0, 'cafes_800m': 0.0, 'music_1600m': 0.0, 'park_ha_800m': 0.0, 'park_walk_min': 0.0, 'open_water_m': 0.0, 'beach_m': 0.0, 'supermarket_m': 0.0, 'train_station_m': 0.07, 'motorway_m': 0.0, 'violent_per_1000': 0.02, 'vehicle_theft_per_1000': 0.02, 'sqft': 0.2, 'bfloors': 0.94, 'garage': 0.0, 'sqft_per_1000usd': 0.2}
 ```
 
 **lifestyle colour**
 ```
-214 {'college_degree_share': 0.0, 'households_with_kids_share': 0.0, 'age_65plus_share': 0.0, 'commute_60min_plus_share': 0.0, 'built_since_2010_share': 0.0, 'built_before_1940_share': 0.0, 'tract_median_rent': 0.01, 'rent_burden_pct': 0.0, 'supermarket_m': 0.0, 'trader_joes_m': 0.2, 'whole_foods_m': 0.25, 'target_m': 0.04, 'vet_m': 0.0, 'dog_park_m': 0.0, 'train_station_m': 0.07, 'breweries_1600m': 0.0, 'restaurants_1600m': 0.0, 'transit_to_parents_min': 0.12, 'pool': 0.0, 'garage_or_gated': 0.0, 'street_parking': 0.0, 'building_floors': 0.58, 'building_year': 0.64, 'unit_sqft': 0.21, 'all_in': 0.0}
+221 {'college_degree_share': 0.0, 'households_with_kids_share': 0.0, 'age_65plus_share': 0.0, 'commute_60min_plus_share': 0.0, 'built_since_2010_share': 0.0, 'built_before_1940_share': 0.0, 'tract_median_rent': 0.01, 'rent_burden_pct': 0.0, 'supermarket_m': 0.0, 'trader_joes_m': 0.19, 'whole_foods_m': 0.24, 'target_m': 0.04, 'vet_m': 0.0, 'dog_park_m': 0.0, 'train_station_m': 0.07, 'breweries_1600m': 0.0, 'restaurants_1600m': 0.0, 'transit_to_parents_min': 0.11, 'pool': 0.0, 'garage_or_gated': 0.0, 'street_parking': 0.0, 'building_floors': 0.59, 'building_year': 0.65, 'unit_sqft': 0.2, 'all_in': 0.0}
 ```
 
 **crime benchmarks**
 ```
-std       3.05           0.92              0.89              0.97                       0.63
+std       3.02           0.91              0.88              0.95                       0.63
 min       0.00           0.00              0.00              0.00                       0.00
-25%       0.78           0.23              0.22              0.42                       0.23
-50%       1.99           0.60              0.57              0.73                       0.50
-75%       4.00           1.20              1.15              1.45                       0.85
+25%       0.81           0.25              0.24              0.43                       0.24
+50%       2.09           0.63              0.60              0.76                       0.53
+75%       4.13           1.25              1.20              1.51                       0.88
 max      17.21           5.22              5.02              7.26                       4.56
 ```
 
 **lifestyle groups (saved centres)**
 ```
 enclave :: Harrison[23]; Wilton[8]; Teaneck[7]; Westport[5]; Berkeley Heights[4]; Montgomery[4]; Millburn[3]; Chatham[3]; Watchung[2]; Fairfield[2]
-middle :: Jersey City[335]; Stamford[166]; Parsippany-Troy Hills[114]; New Rochelle[93]; Yonkers[76]; White Plains[66]; Port Chester[59]; Hackensack[43]; Danbury[24]; Franklin[17]
-new_water :: Norwalk[97]; Harrison[42]; New Brunswick[21]; North Bergen[12]; Fort Lee[9]; Weehawken[6]; Edgewater[2]; Long Island City-Hunters Point[1]
+middle :: Stamford[166]; Parsippany-Troy Hills[114]; Jersey City – Journal Square[112]; New Rochelle[93]; Yonkers[76]; White Plains[66]; Port Chester[59]; Jersey City – West Side[45]; Hackensack[43]; Danbury[24]
+new_water :: Jersey City – Bergen-Lafayette[136]; Norwalk[97]; Harrison[42]; New Brunswick[21]; North Bergen[12]; Jersey City – Downtown[9]; Fort Lee[9]; Weehawken[6]; Jersey City – Newport[4]; Edgewater[2]
 pre_car :: New Haven[330]; Kew Gardens[6]; Astoria (Central)[2]; Bedford-Stuyvesant (West)[2]; Bay Ridge[2]; Sunnyside[2]; Upper West Side-Manhattan Valley[2]; Astoria (East)-Woodside (North)[1]; Hoboken[1]; East Midtown-Turtle Bay[1]
-settled :: Newark[54]; Flushing-Willets Point[19]; Jamaica Hills-Briarwood[12]; Jamaica[11]; Hempstead[11]; East Flatbush-Erasmus[9]; Mott Haven-Port Morris[9]; Jackson Heights[8]; West New York[8]; Mount Vernon[8]
-space :: Bridgeport[108]; Bayonne[54]; Dover[41]; Clifton[22]; Burlington[21]; Trumbull[19]; East Brunswick[19]; Flemington[18]; East Orange[17]; Bogota[16]
+settled :: Newark[54]; Jersey City – McGinley Square[26]; Flushing-Willets Point[19]; Jamaica Hills-Briarwood[12]; Jamaica[11]; Hempstead[11]; East Flatbush-Erasmus[9]; Mott Haven-Port Morris[9]; Jackson Heights[8]; West New York[8]
+space :: Bridgeport[108]; Bayonne[54]; Dover[41]; Clifton[22]; Burlington[21]; Trumbull[19]; East Brunswick[19]; Flemington[18]; East Orange[17]; Haverstraw[16]
 ```
 
 **building amenities (cached pages)**
@@ -230,14 +230,15 @@ units 2573; cost gate {'pass': 1652, 'fail': 921}; rent asterisk 1763; rent term
 
 **ranking and selection**
 ```
-evidence: 46 units excluded, shown 326, avoid cards 35, of them with an asterisk 118 ({'live check': 42, 'listing': 27, 'dogs allowed': 17, 'elevator': 16, 'availability': 14, 'eligibility': 2}), held for a confirmation 26, waiting for a live check 28
+evidence: 46 units excluded, shown 326, avoid cards 36, of them with an asterisk 118 ({'live check': 42, 'listing': 27, 'dogs allowed': 17, 'elevator': 16, 'availability': 14, 'eligibility': 2}), held for a confirmation 29, waiting for a live check 39
 stages: 2573 costed -> -921 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -141 removed by a reviewed verdict -> -174 sketchy -> -46 evidence exclusions -> 855 ranked
-(kept 855 units; candidates 372; shown 428; pools: {'': 453, 'pool': 381, 'indoor': 21}
+(kept 855 units; candidates 391; shown 428; pools: {'': 453, 'pool': 381, 'indoor': 21}
 ```
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 138 checks, 0 failed
+test_rules (data): 150 checks, 1 failed
+  FAIL split: Newark is not split
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**

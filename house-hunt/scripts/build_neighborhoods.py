@@ -6,7 +6,7 @@ Clustering: standardized traits -> agglomerative (Ward) into k=5 and k=6; silhou
 assigned here; the script prints each cluster's distinguishing traits so names can be written from them.
 Outputs: data/neighborhoods.csv, docs/CHECKPOINT_A.md
 """
-import json, sys
+import json, re, sys
 from pathlib import Path
 import numpy as np, pandas as pd
 from shapely.geometry import Point, shape
@@ -22,10 +22,89 @@ def nta_polys():
     return [(f["properties"].get("ntaname"), f["properties"].get("boroname"), shape(f["geometry"])) for f in js["features"]]
 
 
+# Cities split into their neighborhoods (docs/SUBCITY_SPLIT_PLAN.md). Jersey City only: Newark's wards are prepared in
+# the same file but not adopted (44 of its 45 ranked units are in one ward, and ward names are not how people describe it).
+SUBCITY_ADOPT = {"Jersey City"}
+SUBCITY_FILE = DATA / "reference" / "subcity_neighborhoods.geojson"
+SUBCITY_OVERRIDES = DATA / "reference" / "subcity_overrides.csv"
+
+
+def subcity_features(path=None):
+    f = Path(path) if path else SUBCITY_FILE
+    if not f.exists():
+        return []
+    return [ft for ft in json.loads(f.read_text())["features"] if ft["properties"]["city"] in SUBCITY_ADOPT]
+
+
+def subcity_polys(path=None):
+    """(city, state, hood_label, polygon) for every neighborhood of an adopted city."""
+    return [(p["city"], p["state"], p["hood_label"], shape(ft["geometry"])) for ft in subcity_features(path) for p in [ft["properties"]]]
+
+
+def subcity_parents(path=None):
+    """child hood_id -> {"parent_id", "parent_name", "name", "label"} for the adopted cities. Content keyed on the parent
+    (citywide quotes, survey rows, local rules, scene text) falls back to it, labelled as about the city as a whole."""
+    return {p["hood_id"]: {"parent_id": p["parent_hood_id"], "parent_name": p["city"], "name": p["hood_name"], "label": p["hood_label"]}
+            for ft in subcity_features(path) for p in [ft["properties"]]}
+
+
+def subcity_overrides(path=None):
+    """Hand decisions for buildings on a boundary whose polygon label a resident would dispute: addr_key or building_id
+    -> hood_label. Each row carries its reason (data/reference/subcity_overrides.csv)."""
+    f = Path(path) if path else SUBCITY_OVERRIDES
+    if not f.exists():
+        return {}
+    O = pd.read_csv(f, dtype=str, keep_default_na=False)
+    out = {}
+    for r in O.itertuples():
+        for k in (r.addr_key, r.building_id):
+            if k:
+                out[k] = r.hood_label
+    return out
+
+
+def subcity_name(name, state, lat, lon, subs, overrides=None, keys=()):
+    """The neighborhood label inside a split city, or `name` unchanged elsewhere. An override wins; otherwise the
+    polygon that contains the point, or the nearest polygon of that city when the point is just outside all of them."""
+    mine = [(lab, poly) for c, st, lab, poly in subs if c == name and st == state]
+    if not mine:
+        return name
+    for k in keys:
+        if overrides and k in overrides:
+            return overrides[k]
+    p = Point(lon, lat)
+    hit = [lab for lab, poly in mine if poly.contains(p)]
+    return hit[0] if hit else min((poly.distance(p), lab) for lab, poly in mine)[1]
+
+
+def _letters(t):
+    return re.sub(r"[^a-z]", "", str(t).lower())
+
+
+def route_to_children(hood_id, source_area="", parents=None):
+    """Where content keyed on `hood_id` belongs once a city is split: [(target hood_id, about)].
+    Not a split city's id: [(hood_id, None)]. A split city's id: the one child the source names ("Journal Square,
+    Jersey City" -> Journal Square, about None), else every child, labelled "<City> as a whole"."""
+    parents = subcity_parents() if parents is None else parents
+    kids = [(c, v) for c, v in parents.items() if v["parent_id"] == hood_id]
+    if not kids:
+        return [(hood_id, None)]
+    sa = _letters(source_area)
+    named = [c for c, v in kids if _letters(v["name"]) in sa or (v["name"].lower().startswith("the ") and _letters(v["name"][4:]) in sa.replace(_letters(v["parent_name"]), ""))]
+    if named:
+        return [(c, None) for c in named]
+    return [(c, f"{v['parent_name']} as a whole") for c, v in kids]
+
+
+def hood_id_of(state, hood):
+    return re.sub(r"[^a-z0-9:]+", "-", f"{state}:{hood}".lower())
+
+
 def main():
     u = pd.read_csv(DATA / "units.csv", low_memory=False)
     u = u[u.unit_status == "pass"].copy()
     ntas = nta_polys()
+    subs, overrides = subcity_polys(), subcity_overrides()
     hood = {}
     for key, g in u.groupby("addr_key"):
         lat, lon = float(g.lat.iloc[0]), float(g.lon.iloc[0])
@@ -39,6 +118,9 @@ def main():
             name = first(geo, "Incorporated Places") or first(geo, "County Subdivisions")
             for suf in (" city", " village", " town", " borough", " township", " CDP"):
                 name = name[:-len(suf)] if name.endswith(suf) else name
+            # a split city: the neighborhood by point-in-polygon; hood_area stays the county (crime_benchmarks.py reads it)
+            name = subcity_name(name, g.state.iloc[0], lat, lon, subs, overrides,
+                                keys=(key,) + ((str(g.building_id.iloc[0]),) if "building_id" in g else ()))
             area = county
         hood[key] = (name, area, g.state.iloc[0])
     u["hood"] = u.addr_key.map(lambda k: hood[k][0]); u["hood_area"] = u.addr_key.map(lambda k: hood[k][1])

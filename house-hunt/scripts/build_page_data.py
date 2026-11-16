@@ -11,6 +11,10 @@ import numpy as np, pandas as pd
 sys.path.insert(0, str(Path(__file__).parent))
 from lib import DATA, ROOT
 import parsers
+import build_neighborhoods as BN
+
+PARENTS = BN.subcity_parents()          # child hood_id -> its city (Jersey City is split into neighborhoods)
+ROUTE = lambda hid, source_area="": BN.route_to_children(hid, source_area, PARENTS)
 
 
 def v(x):
@@ -136,9 +140,10 @@ def main():
     if lr.exists():
         LR = pd.read_csv(lr, dtype=str, keep_default_na=False)
         for r in LR[LR.value_type == "found"].itertuples():
-            for hid in [h.strip() for h in r.applies_to_hood_ids.split(";") if h.strip()]:
-                local.setdefault(hid, {"street_parking": [], "dogs": []}).setdefault(r.topic, []).append(
-                    {"rule": r.rule, "summary": r.summary, "quote": r.quote, "url": r.source_url, "municipality": r.municipality})
+            for hid0 in [h.strip() for h in r.applies_to_hood_ids.split(";") if h.strip()]:
+                for hid, about in ROUTE(hid0):         # a city's law applies in each of its neighborhoods; it says so
+                    local.setdefault(hid, {"street_parking": [], "dogs": []}).setdefault(r.topic, []).append(
+                        {"rule": r.rule, "summary": r.summary, "quote": r.quote, "url": r.source_url, "municipality": r.municipality, "about": about})
     vq = DATA / "voices" / "neighborhood_quotes.csv"
     if vq.exists():
         VQ = pd.read_csv(vq, dtype=str, keep_default_na=False)
@@ -158,12 +163,24 @@ def main():
             # says so ("about Corona" under North Corona). Thread titles used as an area name are not shown.
             sa = getattr(r, "source_area", "")
             about = re.sub(r",\s*[A-Z]{2}$", "", sa) if sa and len(sa) <= 40 and area_key(sa) != area_key(r.neighborhood) else None
-            voices.setdefault(r.hood_id, []).append({"excerpt": r.excerpt, "theme": r.theme, "sentiment": r.sentiment, "context": r.speaker_context,
-                                                     "source": r.source_site, "date": r.post_date, "url": r.permalink, "source_area": sa or None, "about": about})
+            for hid, whole in ROUTE(r.hood_id, sa):    # a citywide quote is shown on each neighborhood of a split city, labelled
+                voices.setdefault(hid, []).append({"excerpt": r.excerpt, "theme": r.theme, "sentiment": r.sentiment, "context": r.speaker_context,
+                                                   "source": r.source_site, "date": r.post_date, "url": r.permalink, "source_area": sa or None, "about": whole or about})
     vs = DATA / "voices" / "neighborhood_survey.csv"
     if vs.exists():
         for r in pd.read_csv(vs, dtype=str, keep_default_na=False).itertuples():
-            survey.setdefault(r.hood_id, []).append({"measure": r.measure, "value": r.value, "source": r.source_site, "as_of": r.as_of, "url": r.source_url})
+            for hid, whole in ROUTE(r.hood_id, getattr(r, "source_area", "")):   # "Journal Square, Jersey City" rows go to Journal Square only
+                survey.setdefault(hid, []).append({"measure": r.measure, "value": r.value, "source": r.source_site, "as_of": r.as_of, "url": r.source_url,
+                                                   "source_area": getattr(r, "source_area", "") or None, "about": whole})
+    # sub-city crime context for a split city: a labelled estimate, shown beside the citywide police rate, never used by the safety rule
+    sub_crime = {}
+    scf = DATA / "reference" / "subcity_crime_jersey_city.csv"
+    if scf.exists():
+        for r in pd.read_csv(scf).itertuples():
+            sub_crime[r.hood_id] = {"label": "10-month estimate from the city's incident portal, not an official rate", "value_type": "estimate", "used_for_safety_rule": False,
+                                    "violent_per_1000_scaled": v(r.violent_per_1000_scaled_to_fbi_2025), "property_per_1000_scaled": v(r.property_per_1000_scaled_to_fbi_2025),
+                                    "violent_ratio_to_city": v(r.violent_ratio_to_city_portal), "property_ratio_to_city": v(r.property_ratio_to_city_portal),
+                                    "window": r.window, "method": r.method, "source_url": r.source_url}
     hoods = []
     for hid, g in R.groupby("hood_id"):
         s = g[g.shown]
@@ -185,7 +202,12 @@ def main():
                       "toll_complete": bool(g.toll_complete.astype(str).str.lower().eq("true").all()),
                       "safety": {"violent_per_1000": v(h.get("violent")), "property_per_1000": v(h.get("property")), "vehicle_theft_per_1000": v(h.get("motor_vehicle_theft")),
                                  "vs_jamaica": v(h.get("violent_vs_jamaica")), "property_vs_jamaica": v(h.get("property_vs_jamaica")), "vs_us": v(h.get("violent_vs_us")),
-                                 "vs_metro": v(h.get("violent_vs_metro")), "vs_local": v(h.get("violent_vs_local")), "police": v(h.get("police")), "geography": v(h.get("geography")), "year": v(h.get("crime_year"))},
+                                 "vs_metro": v(h.get("violent_vs_metro")), "vs_local": v(h.get("violent_vs_local")), "police": v(h.get("police")), "geography": v(h.get("geography")), "year": v(h.get("crime_year")),
+                                 # inside a split city every neighborhood carries the same citywide police rate: say so, and give the estimate as context
+                                 "basis": (f"citywide police rate for {PARENTS[hid]['parent_name']}: the same figure for every {PARENTS[hid]['parent_name']} neighborhood, not a rate for {PARENTS[hid]['name']}" if hid in PARENTS else None),
+                                 "subcity_estimate": sub_crime.get(hid) if hid in PARENTS else None},
+                      "parent_id": PARENTS[hid]["parent_id"] if hid in PARENTS else None, "parent_name": PARENTS[hid]["parent_name"] if hid in PARENTS else None,
+                      "short_name": PARENTS[hid]["name"] if hid in PARENTS else None,
                       "traits": {k: v(h.get(k)) for k in ["no_car_share", "age_25_34_share", "living_alone_share", "households_with_kids_share", "college_degree_share", "newcomer_share",
                                                           "wfh_share", "median_hh_income", "detached_house_share", "built_since_2010_share", "built_before_1940_share", "restaurants_800m",
                                                           "bars_800m", "cafes_800m", "park_ha_800m", "park_walk_min", "open_water_m", "dog_park_m", "supermarket_m_c"]},
