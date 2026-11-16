@@ -1687,7 +1687,7 @@ function paras(v){if(v==null||v==="")return [];if(Array.isArray(v))return v.map(
 var MORE={};
 function nShown(key,total){return Math.min(total,Math.max(3,MORE[key]||3))}
 function moreCtl(key,n,total,step,word){if(total<=3)return "";var next=Math.min(total,n+step),k=' data-act="more" data-key="'+esc(key)+'"';
-  return '<div class="morectl" data-more="'+esc(key)+'"><p class="facts">'+n+' of '+total+' '+word+' shown</p><div class="morebtns">'+
+  return '<div class="morectl" data-more="'+esc(key)+'"><p class="facts">'+n+' of '+total+' <span class="sr">'+word+' </span>shown</p><div class="morebtns">'+
     (n<total?'<button type="button" class="btn sm"'+k+' data-n="'+next+'">Show more</button>'+(next<total?'<button type="button" class="btn sm"'+k+' data-all="1" data-n="'+total+'">Show all '+total+'</button>':'')
       :'<button type="button" class="btn sm"'+k+' data-n="3">Show only the first three</button>')+'</div></div>'}
 function pickTag(i,top){return i===0&&top?'<span class="pick">Top pick</span>':i>0&&i<3&&top?'<span class="pick n">'+(i+1)+'</span>':''}
