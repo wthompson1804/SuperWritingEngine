@@ -28,3 +28,4 @@ raw/census_areawater/*.zip
 *.tmp
 .pytest_cache/
 node_modules/
+site/dist/
