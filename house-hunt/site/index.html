@@ -1175,6 +1175,10 @@ h1:focus,h2:focus{outline:none}
 .fsheet fieldset.lim>legend+*{clear:both}
 .fsheet fieldset.lim::after{content:"";display:block;clear:both}
 .fdone{padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+.aptd .apr .rt,.pp .rt{font-size:12.5px;font-weight:700;color:var(--ink);text-transform:none;letter-spacing:0;white-space:normal}
+.aptd .apr{white-space:normal}
+.aptd .ac.rn{background:none;padding:0;color:var(--ink)}
+.aptd .ac.rn.warn,.costsub.rn{color:var(--coral-ink)}
 </style>
 </head>
 <body>
@@ -1821,7 +1825,18 @@ function noDump(t){t=String(t==null?"":t);return t.indexOf(" | ")<0?(/totalPrice
 function offerText(U){return cleanText(U&&U.rent&&U.rent.offer_text)}
 function netEff(U){return U.rent.basis_kind==="net_effective"}
 function rentStar(U){return !!(U.rent.asterisk||netEff(U))}
+/* Which price the rent figure is, read from the name of the rent line in the cost breakdown: the 12-month lease price ("12"),
+   a price after an offer ("offer"), or the listing's own price ("listed", for the lease length the listing gives). */
+function rentLine(U){var ls=arr(U&&U.all_in_lines),i;for(i=0;i<ls.length;i++)if(ls[i]&&/^rent\b/i.test(String(ls[i].line||"")))return ls[i];return null}
+function rentKind(U){var l=rentLine(U),n=String(l&&l.line||"");return /12[- ]month/i.test(n)?"12":(/net[- ]effective|offer/i.test(n)||netEff(U))?"offer":"listed"}
+function rentTerm(U){var k=rentKind(U),lm=leaseMonths(U);return k==="12"?"on a 12-month lease":k==="offer"?"with the current offer":lm!=null&&Math.round(lm)!==12?"on "+(/^(8|11|18)/.test(String(r1(lm)))?"an ":"a ")+r1(lm)+"-month lease":""}
+/* what must be read with the rent: the listing's own headline price when the page uses the 12-month one, and the warning that the 12-month price in the building runs much higher */
+function rentNotes(U){var o=[],R=U.rent||{},r=rentOf(U),lm=leaseMonths(U);
+  if(rentKind(U)==="12"&&R.listed!=null&&isFinite(+R.listed)&&+R.listed!==r)o.push("The listing shows "+money(R.listed)+(lm!=null&&Math.round(lm)!==12?" for a "+r1(lm)+"-month lease":"")+".");
+  discs(U).forEach(function(d){var m=/the (\d+)-month price in this building is much higher than the price shown/i.exec(String(d.why||""));if(m&&!o.warned){o.warned=1;o.push("The "+m[1]+"-month price in this building is much higher than the price shown: ask for it.")}});
+  return o}
 function leaseBits(U){var lm=leaseMonths(U),p=price12(U),o=[];
+  if(rentKind(U)==="12"){o.push("The rent shown is the 12-month lease price.");return o.concat(rentNotes(U).slice(0,1))}
   if(lm!=null&&Math.round(lm)!==12)o.push("The price is for a "+r1(lm)+"-month lease.");
   if(p!=null)o.push("On a 12-month lease: "+money(p)+" a month.");
   else if(lm!=null&&lm>12.5)o.push("The 12-month price is "+NOT_PUB+".");
@@ -2232,15 +2247,15 @@ function star(U){return rentStar(U)?'<span class="pstar" aria-label="special off
 function ab(v,f){return '<i class="ab">about</i> '+(f||pm)(v)}
 function pp(o){return '<div class="pp'+(o.cls?' '+o.cls:'')+'"><div class="pp-c pp-r"><span class="pp-l">'+o.rl+'</span><b>'+o.r+'</b>'+(o.rs||'')+'</div><div class="pp-c pp-t"><span class="pp-l">'+o.tl+'</span><b>'+o.t+'</b><small class="uf">'+WITH_UF+'</small>'+(o.ts||'')+'</div>'+(o.note?'<p class="pp-n">'+o.note+'</p>':'')+'</div>'}
 /* one apartment: the rent exact, the total rounded to $10 and said with "about" */
-function ppUnit(U,o){o=o||{};var r=rentOf(U);return pp({rl:o.from?L_RENT+" from":L_RENT,r:(r==null?"Ask":money(r))+star(U),tl:capFirst(S_TOTAL),t:U.all_in==null?"Ask":ab(U.all_in),note:o.note,cls:o.cls})}
+function ppUnit(U,o){o=o||{};var r=rentOf(U),rt=rentTerm(U);return pp({rl:o.from?L_RENT+" from":L_RENT,r:(r==null?"Ask":money(r))+star(U),rs:rt?'<small class="rt">'+esc(rt)+'</small>':'',tl:capFirst(S_TOTAL),t:U.all_in==null?"Ask":ab(U.all_in),note:o.note,cls:o.cls})}
 /* a set of apartments: the typical (median) rent and total, both to $10, each range small beneath */
 function ppTyp(f,typ,o){o=o||{};return pp({rl:typ?"Typical "+S_RENT:L_RENT,r:f.rent==null?"Ask":typ?m10(f.rent):money(f.rent),rs:typ&&!o.norange?rngFrom(f.rr,m10):"",tl:typ?"Typical "+S_TOTAL:capFirst(S_TOTAL),t:f.total==null?"Ask":ab(f.total,m10),ts:typ&&!o.norange?rngFrom(f.tr,m10):"",cls:o.cls})}
 /* both in one line of text */
-function pairLine(U){var r=rentOf(U);return L_RENT+" "+(r==null?"not published":money(r))+(rentStar(U)?"*":"")+" · "+(U.all_in==null?S_TOTAL+" not known":"about "+pm(U.all_in)+" "+WITH_UF)}
+function pairLine(U){var r=rentOf(U),rt=rentTerm(U);return L_RENT+" "+(r==null?"not published":money(r))+(rentStar(U)?"*":"")+(rt?" "+rt:"")+" · "+(U.all_in==null?S_TOTAL+" not known":"about "+pm(U.all_in)+" "+WITH_UF)}
 /* a cost the building does not publish could carry the total past the limit: the note belongs to the total */
 function couldPass(U){var un=arr(U.all_in_unknown);if(!un.length)return "";
   return discs(U).some(function(d){return /could pass/i.test(d.what)})||(U.all_in_likely!=null&&U.all_in_likely>CAP&&U.all_in<=CAP)?"could pass "+money(CAP)+" once "+list(un.map(function(x){return /fee/i.test(x)&&!/^building/i.test(x)?"the "+x:x}))+" "+(un.length>1||/s$/.test(un[0])?"are":"is")+" known":""}
-function sign(U,plain){var r=rentOf(U);return '<div class="sign'+(plain?' plain':'')+'"><div class="board"><small>'+L_RENT+'</small><strong'+(r==null?' class="nk"':'')+'>'+money(r)+star(U)+'</strong><small class="tot">'+(U.all_in==null?capFirst(S_TOTAL)+" not known":'about '+pm(U.all_in)+' '+WITH_UF)+'</small><em>'+esc(seenShort(U.price_seen_at))+'</em></div></div>'}
+function sign(U,plain){var r=rentOf(U);return '<div class="sign'+(plain?' plain':'')+'"><div class="board"><small>'+L_RENT+'</small><strong'+(r==null?' class="nk"':'')+'>'+money(r)+star(U)+'</strong>'+(rentTerm(U)?'<small class="tot">'+esc(rentTerm(U))+'</small>':'')+'<small class="tot">'+(U.all_in==null?capFirst(S_TOTAL)+" not known":'about '+pm(U.all_in)+' '+WITH_UF)+'</small><em>'+esc(seenShort(U.price_seen_at))+'</em></div></div>'}
 /* ---- filters: the button, the "nothing matches" box, the small line under a strip ---- */
 var IC_FILTER='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
 function fBtn(id){return '<button type="button" class="btn sm fbtn'+(FON?' on':'')+'"'+(id?' id="'+id+'"':'')+' data-act="filter-open" aria-haspopup="dialog" aria-label="Filter'+(FON?", "+FON+" on":"")+'">'+IC_FILTER+'<span>Filter'+(FON?' · '+FON:'')+'</span></button>'}
@@ -2309,7 +2324,7 @@ function avoidCard(U){var ev=U.evidence||{},L=okUrl(U.links&&U.links.listing);
     '<div class="panel pause"><h4>Why to avoid it</h4><ul>'+lis(splitNotes(ev.avoid_reasons||"Reason not recorded"))+'</ul>'+(ev.items||[]).map(quote).join("")+'</div>'+
     (L?'<a class="link" href="'+esc(L)+'" target="_blank" rel="noopener noreferrer">See the listing anyway ↗</a>':'')+'</article>'}
 function callItem(U,where){var L=okUrl(U.links&&U.links.listing),c=conf(U),q=tourQs(U);
-  return '<div class="callitem"><b>'+esc(uName(U))+'</b><span class="facts">'+esc([where,uSub(U),bedsWord(U)+(U.sqft!=null?", "+r0(U.sqft)+" sq ft":"")].filter(Boolean).join(" · "))+'</span><span class="cprice"><b style="font-size:16px">'+L_RENT+' '+money(rentOf(U))+star(U)+'</b> · '+(U.all_in==null?S_TOTAL+' not known':'about '+pm(U.all_in)+' '+WITH_UF)+', '+esc(seenShort(U.price_seen_at))+'</span>'+
+  return '<div class="callitem"><b>'+esc(uName(U))+'</b><span class="facts">'+esc([where,uSub(U),bedsWord(U)+(U.sqft!=null?", "+r0(U.sqft)+" sq ft":"")].filter(Boolean).join(" · "))+'</span><span class="cprice"><b style="font-size:16px">'+L_RENT+' '+money(rentOf(U))+star(U)+'</b>'+(rentTerm(U)?' '+esc(rentTerm(U)):'')+' · '+(U.all_in==null?S_TOTAL+' not known':'about '+pm(U.all_in)+' '+WITH_UF)+', '+esc(seenShort(U.price_seen_at))+'</span>'+
     confLines(U)+rentLines(U)+discLine(U)+
     (q.length?'<ul>'+lis(q)+'</ul>':'<span class="facts">The question to ask is not recorded yet.</span>')+contactBox(U)+
     (L?'<a class="link" href="'+esc(L)+'" target="_blank" rel="noopener noreferrer">Open the listing ↗</a>':'')+'</div>'}
@@ -2461,9 +2476,10 @@ function payNote(n){n=textOf(n).trim();if(!n)return "";var o=[],m=/move-in (\d{4
 function rentTerms(U){var R=U.rent||{},lm=leaseMonths(U),p12=price12(U),lt=leaseText(U),st=rentStar(U);if(!st&&!leaseBits(U).length&&!lt)return "";
   var h='<div class="terms rent-terms"><dl>';
   if(offerText(U))h+='<dt>The offer, in the building\'s words</dt><dd><blockquote>'+esc(offerText(U))+'</blockquote></dd>';
-  h+='<dt>Rent shown on this page</dt><dd>'+money(R.basis!=null?R.basis:R.listed)+' a month ('+(R.basis_kind==="net_effective"?"the average after the free months":"as listed")+')</dd>';
+  h+='<dt>Rent shown on this page</dt><dd>'+money(R.basis!=null?R.basis:R.listed)+' a month ('+(rentKind(U)==="12"?"the 12-month lease price":R.basis_kind==="net_effective"?"the average after the free months":"as listed")+')</dd>';
   h+='<dt>Rent in a month you pay</dt><dd>'+(R.gross!=null?money(R.gross)+' a month before any free months':NK)+'</dd>';
-  h+='<dt>Free months and lease length</dt><dd>'+(R.free_months!=null?esc(String(R.free_months))+' free':"Free months "+NK.toLowerCase())+', '+(lm!=null?'on a '+r1(lm)+'-month lease':'lease length '+NK.toLowerCase())+'</dd>';
+  h+='<dt>Free months and lease length</dt><dd>'+(R.free_months!=null?esc(String(R.free_months))+' free':"Free months "+NK.toLowerCase())+', '+(lm!=null?'on a '+r1(lm)+'-month lease'+(rentKind(U)==="12"?' for the listing\'s price':''):'lease length '+NK.toLowerCase())+'</dd>';
+  if(rentKind(U)==="12"&&R.listed!=null)h+='<dt>The listing\'s own price</dt><dd>'+money(R.listed)+' a month'+(lm!=null&&Math.round(lm)!==12?' on a '+r1(lm)+'-month lease':'')+'</dd>';
   if(p12!=null||(lm!=null&&Math.round(lm)!==12))h+='<dt>Price on a 12-month lease</dt><dd>'+(p12!=null?money(p12)+' a month':NOT_PUB.charAt(0).toUpperCase()+NOT_PUB.slice(1))+'</dd>';
   if(lt)h+='<dt>The lease term, in the building\'s words</dt><dd><blockquote>'+esc(lt)+'</blockquote></dd>';
   h+='<dt>First full payment due</dt><dd>'+(R.first_full_payment_date?esc(dayStr(R.first_full_payment_date,true)||R.first_full_payment_date):NK)+payNote(R.first_full_payment_note)+'</dd></dl>';
@@ -2835,7 +2851,7 @@ function vHood(H){
   h+=pullQuote(pulled);
   var descQ=function(d){return '<p class="quote desc">“'+esc(scrub(d.quote||d.text||d.excerpt))+'”<small>'+descSrc(d)+'</small></p>'};
   if(n){var nB=nShown("h:"+H.id,NB);h+='<section class="sec" id="sec-places"><div class="hoodhead"><h2 class="h2s">'+pl(NB,"building")+' <span class="fig">'+pl(n,"apartment")+'</span></h2><div class="headacts">'+fBtn()+'</div></div><div class="stack tight" style="margin-top:10px">'+bs.slice(0,nB).map(function(B){return bldgCard(B,allB.indexOf(B),allB.length===1)}).join("")+'</div>'+moreCtl("h:"+H.id,nB,NB,3,"buildings")+fHid(allB.length-NB,"building",["has","have"])+'</section>'}
-  else h+='<section class="sec" id="sec-places">'+(N?emptyF(N):'<div class="empty"><p><b>Nothing to tour here yet.</b></p></div>')+'</section>';
+  else h+='<section class="sec" id="sec-places">'+(N?'':'<div class="empty"><p><b>Nothing to tour here yet.</b></p></div>')+'</section>'; /* under filters the box at the top of the page already says nothing matches */
   var held=HELD_BY_HOOD[H.id]||[];
   var others="";
   if(H.avoid.length)others+=row("sec-avoid","Looks good, but avoid",avoidHead(H),'<div class="stack tight">'+H.avoid.map(avoidCard).join("")+'</div>',{sub:hlSub(H,"avoid")});
@@ -2918,10 +2934,11 @@ function heartBtn(U){var on=savedIx(U.id)>-1;return '<button type="button" class
 function aptRow(U,B,open,bp){var id="apt-"+SLUG.unit[U.id],o=rowOpen(id,open),cf=conf(U),tq=tourQs(U),L=okUrl(U.links&&U.links.listing),w=why(U),n=nToConfirm(U),ph=U.photos&&okUrl(U.photos.url),r=rentOf(U),cp=couldPass(U);
   var aln=sentences(calm(textOf(hostOfRec(U,"line")))).slice(0,2).join(" "),akt=calm(textOf(hostOfRec(U,"catch"))),acs=calm(hlSub(U,"cost"));if(acs&&acs===offerLine(U))acs="";
   return '<div class="apt'+(w.length?' out':'')+'" id="w-'+id+'"><details class="aptd" id="'+id+'" data-row="'+id+'"'+(o?' open':'')+'><summary><span class="an"><b>'+esc(aptName(U))+'</b>'+(cf?'<span class="cstar" aria-hidden="true">*</span>':'')+'</span>'+
-    '<span class="apx"><span class="apr"><small>'+L_RENT+'</small> <b>'+(r==null?"ask":money(r))+star(U)+'</b></span> <span class="apw">'+(U.all_in==null?capFirst(S_TOTAL)+" not known":'about <b>'+pm(U.all_in)+'</b> '+WITH_UF)+'</span></span>'+
+    '<span class="apx"><span class="apr"><small>'+L_RENT+'</small> <b>'+(r==null?"ask":money(r))+star(U)+'</b>'+(rentTerm(U)?' <small class="rt">'+esc(rentTerm(U))+'</small>':'')+'</span> <span class="apw">'+(U.all_in==null?capFirst(S_TOTAL)+" not known":'about <b>'+pm(U.all_in)+'</b> '+WITH_UF)+'</span></span>'+
     '<span class="am">'+esc([U.unit?bedsWord(U):"",U.sqft!=null?r0(U.sqft)+" sq ft":"size not published",floorWord(U),availWord(U)].filter(Boolean).join(" · "))+'</span>'+
+    rentNotes(U).map(function(x){return '<span class="ac rn'+(/much higher/.test(x)?' warn':'')+'">'+esc(x)+'</span>'}).join("")+
     (cf?'<span class="ac">* '+esc("To confirm: "+confWhat(U))+'</span>':'')+(rentStar(U)?'<span class="ac offer">'+esc(offerLine(U))+'</span>':'')+(cp?'<span class="ac cp">'+esc(capFirst(S_TOTAL)+" "+cp)+'</span>':'')+(w.length?'<span class="ac out"><b>Outside your filters:</b> '+esc(w.join("; "))+'.</span>':'')+'<i class="chev" aria-hidden="true"></i></summary>'+
-    '<div class="rb">'+(aln?'<p class="aline">'+esc(aln)+'</p>':'')+(akt?'<p class="acatch"><b>To ask:</b> '+esc(akt)+'</p>':'')+'<h4 class="costh">What it costs</h4><p class="costhl">'+esc(pairLine(U))+'</p>'+(acs?'<p class="costsub">'+esc(acs)+'</p>':'')+'<div class="sec-cost"><p class="allin psent">'+esc(PRICE_SENT)+'</p>'+receipt(U)+'</div>'+rentTerms(U)+
+    '<div class="rb">'+(aln?'<p class="aline">'+esc(aln)+'</p>':'')+(akt?'<p class="acatch"><b>To ask:</b> '+esc(akt)+'</p>':'')+'<h4 class="costh">What it costs</h4><p class="costhl">'+esc(pairLine(U))+'</p>'+rentNotes(U).map(function(x){return '<p class="costsub rn">'+esc(x)+'</p>'}).join("")+(acs?'<p class="costsub">'+esc(acs)+'</p>':'')+'<div class="sec-cost"><p class="allin psent">'+esc(PRICE_SENT)+'</p>'+receipt(U)+'</div>'+rentTerms(U)+
       (cf?'<h4 class="costh" style="margin-top:12px">* Still to confirm</h4><div class="confbox confirm-box">'+confs(U).map(function(c){var q=confQ(c,U),cw=cWhat(c);return '<p><b>'+esc(capFirst(cw))+'</b></p>'+(q?'<p><b>What to ask:</b> '+esc(q)+'</p>':'')+(c.why?howHtml('<blockquote>'+esc(c.why)+'</blockquote>',"See why"):'')}).join("")+'</div>':'')+discBox(U)+
       '<div class="tour-qs"><h4 class="costh" style="margin-top:10px">'+(tq.length?pl(tq.length,"question"):"Questions")+' to ask on the tour</h4>'+(tq.length?'<ul>'+lis(tq)+'</ul>':'<p class="helper">Nothing is flagged for this apartment.</p>')+'</div>'+
       '<p class="plinks">'+(L?'<a class="link" href="'+esc(L)+'" target="_blank" rel="noopener noreferrer">The listing ↗</a>':'')+(ph&&(!bp||ph!==okUrl(bp.url))&&ph!==L?'<a class="link aphoto" href="'+esc(ph)+'" target="_blank" rel="noopener noreferrer">Photos of this apartment ↗</a>':'')+'</p></div></details>'+heartBtn(U)+'</div>'}
@@ -3014,7 +3031,7 @@ function vCompare(){
   var A=H[S.pair[0]],B=H[S.pair[1]],an=cmpName(A,H),bn=cmpName(B,H),pt=pairText(A,B,an,bn),f=feelIt(A,B,an,bn);
   h+='<div class="pairbox">'+(n===3?'<div class="seg" role="group" aria-label="Which two to weigh">'+pairs.map(function(p){var on=p[0]===S.pair[0]&&p[1]===S.pair[1];return '<button type="button" data-act="pair" data-p="'+p[0]+"-"+p[1]+'" aria-pressed="'+on+'">'+(p[0]+1)+' and '+(p[1]+1)+'</button>'}).join("")+'</div>':'')+'<p>'+esc(pt.join(" "))+'</p></div></section>';
   var rows=[
-   {icon:IC.money,label:L_RENT,cells:H.map(function(U){var r=rentOf(U);return {html:(r==null?"Ask":money(r)+star(U))+'<small>a month, '+esc(seenShort(U.price_seen_at))+(U.rent&&U.rent.gross!=null&&r!=null&&+U.rent.gross>r?'; '+money(U.rent.gross)+' in a normal month':'')+(leaseMonths(U)!=null&&Math.round(leaseMonths(U))!==12?'; '+r1(leaseMonths(U))+'-month lease':'')+'</small>',cls:r==null?"t-u":""}}),nums:H.map(rentOf),tol:24,best:"low"},
+   {icon:IC.money,label:L_RENT,cells:H.map(function(U){var r=rentOf(U);return {html:(r==null?"Ask":money(r)+star(U))+'<small>a month, '+esc(seenShort(U.price_seen_at))+(U.rent&&U.rent.gross!=null&&r!=null&&+U.rent.gross>r?'; '+money(U.rent.gross)+' in a normal month':'')+(rentTerm(U)?'; '+esc(rentTerm(U)):'')+(rentNotes(U).length?'<br>'+esc(rentNotes(U).join(" ")):'')+'</small>',cls:r==null?"t-u":""}}),nums:H.map(rentOf),tol:24,best:"low"},
    {icon:IC.money,label:L_TOTAL,cells:H.map(function(U){var cp=couldPass(U);return {html:(U.all_in==null?"Ask":"about "+pm(U.all_in))+'<small>a month'+(U.all_in_gross>U.all_in?'; about '+pm(U.all_in_gross)+' in a normal month':'')+(cp?'; '+esc(cp):'')+'</small>',cls:U.all_in==null?"t-u":""}}),nums:H.map(function(U){return U.all_in}),tol:24,best:"low"},
    {icon:IC.space,label:"Space",cells:H.map(function(U){return {html:(U.sqft!=null?r0(U.sqft)+" sq ft":"Ask")+'<small>'+esc(bedsWord(U))+'</small>',cls:U.sqft==null?"t-u":""}}),nums:H.map(function(U){return U.sqft}),tol:20,best:"high"},
    {icon:IC.car,label:"Where the car sleeps",cells:H.map(function(U){var fee=U.parking&&U.parking.fee;return {html:esc(parkWordShort(U))+'<small>'+(fee!=null?(Number(fee)===0?'no monthly charge':money(fee)+' a month'):'fee: ask')+'</small>',cls:U.parking&&U.parking.rank!=null?"":"t-u"}}),nums:H.map(function(U){return U.parking&&U.parking.rank}),tol:0,best:"high"},
@@ -3244,7 +3261,7 @@ function openLimits(on){var was=limsheet.classList.contains("open");if(on===was)
   else{var f=lastFocus&&lastFocus.focus&&document.contains(lastFocus)?lastFocus:(F_FROM==="bar"&&fbar.querySelector(".fb-n"))||(F_FROM==="foot"&&document.getElementById("foot-filter"))||view.querySelector(".fbtn")||document.getElementById("foot-filter");lastFocus=null;if(f){try{f.focus({preventScroll:true})}catch(e){}}}}
 function tourText(){var H=listSorted();
   return "LAMIA'S TOUR LIST\nData built "+seenLong(META.built_at)+". Prices are as seen on the dates shown.\n\n"+H.map(function(U,i){var R=U.rent||{},q=tourQs(U),c=conf(U);
-    return (i+1)+". "+uName(U)+(U.unit?", apartment "+U.unit:"")+"\n   "+(U.address||"Address not known yet")+" · "+hoodOf(U).name+" ("+yearOf(U).label+")\n   "+L_RENT+" "+money(rentOf(U))+(R.asterisk?"*":"")+" a month · about "+money(U.all_in)+" "+WITH_UF+", "+seenShort(U.price_seen_at)+"\n   "+bedsWord(U)+", "+(U.sqft!=null?r0(U.sqft)+" sq ft":"size not published")+" · "+parkWord(U)+
+    return (i+1)+". "+uName(U)+(U.unit?", apartment "+U.unit:"")+"\n   "+(U.address||"Address not known yet")+" · "+hoodOf(U).name+" ("+yearOf(U).label+")\n   "+L_RENT+" "+money(rentOf(U))+(R.asterisk?"*":"")+" a month"+(rentTerm(U)?" "+rentTerm(U):"")+" · about "+money(U.all_in)+" "+WITH_UF+", "+seenShort(U.price_seen_at)+"\n   "+bedsWord(U)+", "+(U.sqft!=null?r0(U.sqft)+" sq ft":"size not published")+" · "+parkWord(U)+
       (R.asterisk?"\n   * Rent offer: "+(offerText(U)||"a special offer applies.")+(R.gross!=null?" A paying month is "+money(R.gross)+" rent"+(U.all_in_gross!=null?", "+money(U.all_in_gross)+" "+WITH_UF:"")+".":"")+(R.needs_call?" Needs a call.":""):"")+
       confs(U).map(function(c){return "\n   * Still to confirm: "+cWhat(c)+"."+(c.why?" "+c.why:"")}).join("")+
       (discs(U).length?"\n   Good to know before you call: "+discs(U).map(function(d){return d.what}).join("; ")+".":"")+
