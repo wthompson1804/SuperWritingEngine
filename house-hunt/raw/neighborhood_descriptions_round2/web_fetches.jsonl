@@ -101,3 +101,4 @@
 {"kind": "page", "sent": true, "hood_id": "ny:flatlands", "url": "https://www.nyctourism.com/new-york/brooklyn/flatlands/", "status": 404, "at": "2026-11-16T00:51:40+00:00", "robots": "group *"}
 {"kind": "page", "sent": true, "hood_id": "ny:manhattanville-west-harlem", "url": "https://www.nyctourism.com/new-york/manhattan/west-harlem/", "status": 404, "at": "2026-11-16T00:51:41+00:00", "robots": "group *"}
 {"kind": "page", "sent": true, "hood_id": "ny:kew-gardens-hills", "url": "https://www.nyctourism.com/new-york/queens/kew-gardens-hills/", "status": 404, "at": "2026-11-16T00:51:42+00:00", "robots": "group *"}
+{"kind": "page", "sent": false, "hood_id": "ny:hamilton-heights-sugar-hill", "url": "https://parks.ny.gov/parks/93/details.aspx", "why": "robots: groups naming ClaudeBot,anthropic-ai", "at": "2026-11-16T00:56:55+00:00"}

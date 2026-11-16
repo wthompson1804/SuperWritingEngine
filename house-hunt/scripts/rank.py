@@ -246,7 +246,8 @@ def main():
     # months old, is the open item "listing" by rule; it is not counted twice when a reviewer already wrote it up as availability
     stale_open = s("listing_stale").eq("open") & ~vk.isin(["not_available"]) & ~phone_av
     listing_open = (s("listing_warning").ne("") | vk.isin(["unverified", "wrong_building"]) | stale_open) & ~(phone_av & s("listing_warning").eq(""))
-    elig_open, condo_open, other_open = vk.eq("restricted"), vk.eq("coop_condo"), vk.eq("other")
+    # eligibility: a reviewer's finding, or a listing site's income-restricted tag the manager's own page does not bear out
+    elig_open, condo_open, other_open = vk.eq("restricted") | s("eligibility_open").ne(""), vk.eq("coop_condo"), vk.eq("other")
     unknown_lines = s("all_in_unknown_lines").str.replace("building fees (part)", "some required fees", regex=False).str.replace("building fees", "required fees").str.replace("parking fee", "parking") \
         .map(lambda t: " / ".join(x for x in t.split("; ") if x in ("pet rent", "parking", "required fees", "some required fees")))
     lease_why = np.where(lm > 13, "The listed price is for a " + lm.fillna(0).astype(int).astype(str) + "-month lease."
@@ -268,7 +269,8 @@ def main():
         ("listing", listing_open, "listing", np.where(s("listing_warning").ne(""), "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160],
                                                       "The listing may be stale: " + s("listing_stale_why") + "."),
          np.where(s("listing_warning").ne(""), "Is this listing for this building, and is it genuine?", "Is this unit still available? The listing page has not changed in over two months.")),
-        ("eligibility", elig_open, "eligibility", "", "Is this unit open to any renter?"),
+        ("eligibility", elig_open, "eligibility", np.where(s("eligibility_open").ne(""), "Eligibility is not settled: " + s("eligibility_open").str[:200], ""),
+         "Is this unit open to any renter, or is there an income limit?"),
         ("condo", condo_open, "condo rules", "", "What are the building's rules for renting this unit?"),
         ("other", other_open, "other", "", ""),
     ]

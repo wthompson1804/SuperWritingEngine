@@ -577,7 +577,8 @@ def tried_urls() -> set[str]:
     if not WEB_LOG.exists():
         return set()
     return {r["url"] for r in map(json.loads, WEB_LOG.read_text().splitlines())
-            if r.get("kind") == "page" and (r.get("sent") or r.get("attempted"))}
+            if r.get("kind") == "page" and (r.get("sent") or r.get("attempted")
+                                            or str(r.get("why", "")).startswith("robots"))}
 
 
 def fetch_page(hid: str, url: str) -> str:
@@ -649,7 +650,7 @@ def stage_web(only: list[str] | None = None) -> None:
 
 # ---------------------------------------------------------------- stage: compile (hand files -> curation.json)
 # Hand inputs, all in raw/neighborhood_descriptions_round2/:
-#   picks_wiki.txt   hood_id|article title|sentence index (a+b = two consecutive)|character|topic[|force]
+#   picks_wiki.txt   hood_id|article title|sentence index (a+b = two consecutive)|character|topic[|force][|about=..][|scope=..]
 #   picks_web.json   [{hood_id, web_url, quote, source_name, about_area, scope, character, topic}]
 #   landmarks.txt    hood_id|name|kind
 #   summaries.txt    hood_id|plain summary (25 words or fewer, restating only what the quotes say)
@@ -664,8 +665,13 @@ def stage_compile() -> None:
         hid, title, idx, ch, topic = f[:5]
         ss = [cand[title]["sentences"][int(i)] for i in idx.split("+")]
         pick = {"title": title, "quote": " ".join(x["text"] for x in ss), "character": int(ch), "topic": topic}
-        if len(f) > 5 and f[5] == "force":
-            pick["force"] = True
+        for extra in f[5:]:  # force | about=<area the sentence is about> | scope=<exact|enclosing|part>
+            if extra == "force":
+                pick["force"] = True
+            elif extra.startswith("about="):
+                pick["about_area"] = extra[6:]
+            elif extra.startswith("scope="):
+                pick["scope"] = extra[6:]
         cur.setdefault(hid, {"quotes": [], "landmarks": []})["quotes"].append(pick)
     wp = D / "picks_web.json"
     for pick in (json.loads(wp.read_text()) if wp.exists() else []):
@@ -783,9 +789,11 @@ def stage_write() -> None:
         rows += mine
         marks = []
         for lm in c.get("landmarks", []):
-            src = next((r for r in mine if lm["name"].lower() in r["quote"].lower()), None)
+            src = next((r for r in mine if lm["name"].lower() in r["quote"].lower()
+                        or lm["name"].lower() == r["about_area"].lower()), None)
             if src is None:
-                errs.append(f"{hid}: landmark {lm['name']!r} is not named in any of its quotes")
+                errs.append(f"{hid}: landmark {lm['name']!r} is neither named in one of its quotes nor "
+                            f"the stated subject (about_area) of one")
                 continue
             marks.append({"name": lm["name"], "kind": lm["kind"], "named_by": src["source_name"],
                           "source_url": src["source_url"]})

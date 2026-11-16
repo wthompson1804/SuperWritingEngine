@@ -238,21 +238,41 @@ def main():
 
     # short attributed outside descriptions of each place (scripts/neighborhood_descriptions.py). A bare location
     # sentence ("X is a borough in Y County") says nothing about the place, so it is kept only when it is all there is.
-    ND = rd(DATA / "reference" / "neighborhood_descriptions.csv")
-    if ND is not None:
-        BLAND = re.compile(r"^[^.]{0,60}\bis an? [^.]{0,60}\b(borough|town|township|city|village|hamlet|census-designated place|neighborhood|community|section)\b[^.]{0,120}\b(County|borough of|New York City|New York|New Jersey|Connecticut)\b[^.]*\.?$")
+    BLAND = re.compile(r"^[^.]{0,60}\bis an? [^.]{0,60}\b(borough|town|township|city|village|hamlet|census-designated place|neighborhood|community|section)\b[^.]{0,120}\b(County|borough of|New York City|New York|New Jersey|Connecticut)\b[^.]*\.?$")
+    # round 1's topic filter missed some word forms ("immigrants", "segregation"); screen every row again here
+    COMPOSITION = re.compile(r"immigra|segregat|demograph|ethnic|racial|\brace\b(?! ?(?:track|course))|religio|\b(?:white|black|hispanic|latino|asian|jewish|catholic|muslim)\b (?:resident|population|communit|famil|neighbo)", re.I)
+    pool = {}
+    for fn, rnd in (("neighborhood_descriptions_round2.csv", 2), ("neighborhood_descriptions.csv", 1)):
+        ND = rd(DATA / "reference" / fn)
+        if ND is None:
+            continue
         if "verified" in ND:
             ND = ND[ND.verified.str.lower().isin(["yes", "true", "1"])]
-        n = 0
-        for hid, g in ND.groupby("hood_id"):
-            h = hoods.get(hid) or next((x for k, x in hoods.items() if k.startswith("nj:jersey-city") and hid == "nj:jersey-city"), None)
-            targets = [x for k, x in hoods.items() if k == hid or (hid == "nj:jersey-city" and k.startswith("nj:jersey-city-"))]
-            rows = [{"quote": r.quote, "source": r.source_name, "url": r.source_url, "about": r.about_area if r.scope != "exact" else None,
-                     "licence": r.licence_note, "bland": bool(BLAND.match(r.quote)) and len(r.quote.split()) <= 22} for r in g.itertuples()]
-            good = [r for r in rows if not r["bland"]] or rows[:1]
-            for t in targets:
-                t["described"] = [{k: v for k, v in r.items() if k != "bland"} | ({"about": r["about"] or "Jersey City"} if t["id"] != hid else {}) for r in good[:3]]
-                n += 1
+        for r in ND.itertuples():
+            if COMPOSITION.search(r.quote):
+                continue
+            bland = bool(BLAND.match(r.quote)) and len(r.quote.split()) <= 22
+            ch = int(getattr(r, "character", "") or 0) if rnd == 2 and str(getattr(r, "character", "")).isdigit() else (1 if bland else 2)
+            pool.setdefault(r.hood_id, []).append({"quote": r.quote, "source": r.source_name, "url": r.source_url,
+                                                   "about": r.about_area if r.scope != "exact" and r.about_area != r.hood_name else None,
+                                                   "topic": getattr(r, "topic", "") or None, "licence": r.licence_note, "_c": ch, "_r": rnd})
+    n = 0
+    for hid, rows in pool.items():
+        rows = sorted(rows, key=lambda x: (-x["_c"], -x["_r"]))
+        seen, picked, topics = set(), [], set()
+        for x in rows:                                   # best first, one per topic where there is a choice, no repeats
+            if x["quote"] in seen or (x["topic"] and x["topic"] in topics and len(rows) > 3):
+                continue
+            seen.add(x["quote"]); topics.add(x["topic"]); picked.append(x)
+            if len(picked) == 3:
+                break
+        picked = [x for x in picked if x["_c"] >= 2] or picked[:1]
+        for t, about in targets(hid):
+            if about and t.get("described"):
+                continue                                 # the neighborhood's own quotes win over the whole city's
+            t["described"] = [{k: v for k, v in x.items() if not k.startswith("_")} | ({"about": x["about"] or about} if about else {}) for x in picked]
+            n += 1
+    if pool:
         rep["neighborhoods with outside descriptions"] = n
 
     # finer neighborhood coordinates for the map (the page builder rounds to two decimals, about 1 km)

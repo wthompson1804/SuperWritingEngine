@@ -198,6 +198,11 @@ def pure_3():
     eq(P.elevator_row_kind("my reading: probably a walk-up", "", True, "unconfirmed"), "contra", "4c: a checker's reading against it -> stays open")
     eq(P.elevator_row_kind("select buildings only", "an elevator. Additional features vary by building", True, "unconfirmed"), "contra", "4c: select buildings only -> stays open")
     eq(P.elevator_row_kind("unconfirmed", "no elevator in the feature list on this page", True, "unconfirmed"), "none", "4c: no elevator listed -> stays open")
+    eq(P.elevator_row_kind("listing-site amenity tag only", "Trulia feature list: 'Elevator' (cached page of 2026-11-15).", True, "unconfirmed"), "stated", "4c: batch 19's wording ('listing-site amenity tag only') -> stated")
+    eq(P.elevator_row_kind("listing-site amenity tag only", "Apartment List amenity list: 'Elevator'. The building's own site (citylineeast.com) returned HTTP 403 and was not read.", True, "unconfirmed"), "stated", "4c: an own site that could not be read is not a contradiction")
+    eq(P.elevator_row_kind("listing-site amenity tag only", "Trulia feature list: 'Elevator'. The manager's page for The Stanley lists 'Fitness Center, Laundry Care Centers' and no elevator", True, "unconfirmed"), "contra", "4c: the manager's own page omits it (The Stanley) -> stays open")
+    eq(P.elevator_row_kind("listing-site amenity tag only", "Apartment List amenity list: 'Elevator'. Greystar's page for the building lists amenities but does not mention an elevator.", True, "unconfirmed"), "contra", "4c: Harbor Landing -> stays open")
+    eq(P.elevator_row_kind("listing-site amenity tag only", "Trulia feature list: 'Elevator'. The building's own site (home, amenities, building, residences) does not mention an elevator.", True, "unconfirmed"), "contra", "4c: 3 Acres -> stays open")
     A, O = "https://www.apartmentlist.com/nj/x/y", "https://www.thebuilding.com/amenities"
     eq(BM.elevator_only_from_listing_sites([(5, "yes", "stated", A), (3, "yes", "amenities_page", "https://www.trulia.com/b/1")]), True, "4c: only listing sites say yes")
     eq(BM.elevator_only_from_listing_sites([(5, "yes", "stated", A), (1, "yes", "confirmed", O)]), False, "4c: the building's own page also says yes")
@@ -241,6 +246,13 @@ def pure_3():
         eq((MU.at["x:439", "live_status"], MU.at["x:439", "available_date"], MU.at["x:477", "live_status"]), ("live", "2026-12-01", "gone"), "calls: move-in date offered, and 'gone'")
         eq((MU.at["q:9", "unit_floor_basis"], MU.at["q:9", "call_called_at"]), ("stated", ""), "calls: a unit nobody called about is untouched")
     ok(BM.PREC[0] == "confirmed_by_phone", "calls: confirmed_by_phone is first in the precedence order")
+    # ---- batch 19: an income-restricted tag from a listing site only is one open eligibility fact, not a removal
+    import avoid
+    note = "Manager's site (Garden Homes) lists Apt #206 at $1,675. INCOME-RESTRICTED: Trulia tags this building 'INCOME RESTRICTED'; the manager's page does not say so and gives no income limit. Confirm eligibility by phone."
+    ok(avoid.TAG_ONLY.search(note) and avoid.INCOME_WORDS.search(note), "eligibility: the tag-only wording is recognised")
+    ok(not avoid.TAG_ONLY.search("INCOME-RESTRICTED lottery building with a waitlist (page says so)"), "eligibility: a building whose own page says income-restricted is still excluded")
+    M2 = BM.Merge()
+    ok(BM.apply_fact(M2, "b", "eligibility", "INCOME-RESTRICTED per the Trulia tag; the manager's own page states no income limit", "", "u") and M2.resolve()[0]["b"]["eligibility_open"], "eligibility: the fact reaches eligibility_open")
     # ---- step 6: a pending listing settled by a later evidence batch is gated on the settled fact
     import gates
     with tempfile.TemporaryDirectory() as td:
@@ -460,6 +472,12 @@ def data_3(M, R, S):
     if not BM.CALL_ANSWERS.exists():
         ok(not M.elevator_basis.eq("confirmed_by_phone").any() and not M.unit_floor_basis.eq("confirmed_by_phone").any() and (M.call_called_at == "").all(),
            "calls: no call file, so no fact may claim a phone basis")
+    for key in ("111 prospect st|06901", "25 3rd st|06905"):
+        x = R[R.addr_key == key]
+        ok(len(x) == 0 or x.confirm_what.str.contains("eligibility").all(), f"eligibility: {key} units carry the open eligibility fact (listing-site tag only), not a removal")
+        ok(not (pd.read_csv(DATA / "unit_exclusions.csv", dtype=str, keep_default_na=False).query("addr_key == @key").reason.str.contains("not open to her|not open-market").any()), f"eligibility: {key} is not excluded for the tag alone")
+    X_ = pd.read_csv(DATA / "unit_exclusions.csv", dtype=str, keep_default_na=False)
+    ok(not ((X_.addr_key == "111 prospect st|06901") & (X_.unit == "") & (X_.listing_id == "")).any(), "111 Prospect St: a floor-plan row that left the page must not exclude the units seen live on the manager's page")
     data_4(M, R, S)
 
 

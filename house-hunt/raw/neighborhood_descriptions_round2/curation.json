@@ -26,7 +26,21 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Columbus Park",
+    "kind": "park"
+   },
+   {
+    "name": "Bedford Street",
+    "kind": "street"
+   },
+   {
+    "name": "Mill River Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Bars, clubs and restaurants cluster around Columbus Park and Bedford Street; Mill River Park sits in the heart of downtown, with shoreline and trails beyond."
  },
  "nj:newark": {
   "quotes": [
@@ -49,7 +63,21 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Ironbound",
+    "kind": "district"
+   },
+   {
+    "name": "Branch Brook Park",
+    "kind": "park"
+   },
+   {
+    "name": "Newark Penn Station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "The Ironbound is for shopping, dining and nightlife; Branch Brook Park has thousands of cherry trees; Newark Penn Station sits just east of downtown."
  },
  "ct:norwalk": {
   "quotes": [
@@ -78,7 +106,17 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "South Norwalk",
+    "kind": "district"
+   },
+   {
+    "name": "SoNo Arts Festival",
+    "kind": "event"
+   }
+  ],
+  "plain_summary": "South Norwalk (SoNo) brings shopping, restaurants, nightlife and an annual arts festival; the shoreline offers boating, public beaches, lighthouses, islands and marinas."
  },
  "nj:bayonne": {
   "quotes": [
@@ -104,7 +142,21 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Bayonne Town Center",
+    "kind": "district"
+   },
+   {
+    "name": "Richard A. Rutkowski Park",
+    "kind": "park"
+   },
+   {
+    "name": "Hudson-Bergen Light Rail",
+    "kind": "transit"
+   }
+  ],
+  "plain_summary": "A Broadway shopping district, four light rail stops, and Rutkowski Park with fishing spots and a quarter-mile wooden pathway over the water."
  },
  "nj:hackensack": {
   "quotes": [
@@ -130,7 +182,25 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Main Street",
+    "kind": "street"
+   },
+   {
+    "name": "Hackensack Performing Arts Center",
+    "kind": "venue"
+   },
+   {
+    "name": "Anderson Street station",
+    "kind": "station"
+   },
+   {
+    "name": "Essex Street station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Main Street is devoted to shopping, a performing arts center shows theater, music and visual arts, and two train stations serve the city."
  },
  "ny:new-rochelle": {
   "quotes": [
@@ -153,7 +223,21 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Five Islands Park",
+    "kind": "park"
+   },
+   {
+    "name": "Ward Acres",
+    "kind": "park"
+   },
+   {
+    "name": "Davenport Neck",
+    "kind": "waterfront"
+   }
+  ],
+  "plain_summary": "Yacht, sailing and beach clubs line the Sound; Five Islands Park links islands by footbridge; Ward Acres offers forest, meadows and trails."
  },
  "ny:yonkers": {
   "quotes": [
@@ -179,7 +263,25 @@
     "topic": "event"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Getty Square",
+    "kind": "district"
+   },
+   {
+    "name": "Untermyer Park and Gardens",
+    "kind": "park"
+   },
+   {
+    "name": "Hudson River Museum",
+    "kind": "museum"
+   },
+   {
+    "name": "Tibbetts Brook Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Downtown centers on Getty Square; attractions include Untermyer Park and Gardens and the Hudson River Museum; weekly outdoor concerts run in summer."
  },
  "ct:danbury": {
   "quotes": [
@@ -208,7 +310,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Candlewood Lake",
+    "kind": "waterfront"
+   },
+   {
+    "name": "Ives Trail",
+    "kind": "trail"
+   }
+  ],
+  "plain_summary": "Downtown has dining, day spas and boutique shops; over a dozen parks and trails, Candlewood Lake, and the 20-mile Ives Trail."
  },
  "ct:milford-city-balance-": {
   "quotes": [
@@ -237,7 +349,17 @@
     "topic": "food and nightlife"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Charles Island",
+    "kind": "waterfront"
+   },
+   {
+    "name": "Silver Sands Beach",
+    "kind": "beach"
+   }
+  ],
+  "plain_summary": "A long, well-kept town green, more than 20 downtown restaurants, and a sandbar you can walk at low tide to Charles Island."
  },
  "nj:harrison": {
   "quotes": [
@@ -251,7 +373,9 @@
     "title": "Harrison, New Jersey",
     "quote": "The stadium sits alongside the Passaic River with a view of the New York and Newark skyline, and is accessible via public transportation at the PATH train station in Harrison.",
     "character": 3,
-    "topic": "landmark"
+    "topic": "landmark",
+    "about_area": "Sports Illustrated Stadium",
+    "scope": "part"
    },
    {
     "web_url": "https://www.visithudson.org/neighborhoods/harrison/",
@@ -263,7 +387,25 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Harrison station",
+    "kind": "station"
+   },
+   {
+    "name": "West Hudson Park",
+    "kind": "park"
+   },
+   {
+    "name": "Passaic River",
+    "kind": "waterfront"
+   },
+   {
+    "name": "Sports Illustrated Stadium",
+    "kind": "venue"
+   }
+  ],
+  "plain_summary": "PATH trains to Newark, Jersey City, Hoboken and New York; a riverside soccer stadium with skyline views; West Hudson Park on the Kearny border."
  },
  "nj:jersey-city-bergen-lafayette": {
   "quotes": [
@@ -286,7 +428,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Monticello Avenue",
+    "kind": "street"
+   },
+   {
+    "name": "Berry Lane Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Monticello Avenue is a shopping district of turn-of-the-century buildings; light rail stations ring the area; Berry Lane Park has courts, fields and a splash pad."
  },
  "ct:bridgeport": {
   "quotes": [
@@ -309,7 +461,13 @@
     "topic": "food and nightlife"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Seaside Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Nicknamed \"Park City\" for its 35 public parks; Seaside Park has a bathing beach and trails; downtown has restaurants, a comedy club and theatres."
  },
  "nj:city-of-orange": {
   "quotes": [
@@ -338,7 +496,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Monte Irvin Orange Park",
+    "kind": "park"
+   },
+   {
+    "name": "Highland Avenue",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Monte Irvin Orange Park, an Olmsted-designed landscape, has walking paths and free summer concerts; two NJ Transit stations serve the city."
  },
  "nj:jersey-city-journal-square": {
   "quotes": [
@@ -361,7 +529,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Loew's Jersey Theatre",
+    "kind": "venue"
+   },
+   {
+    "name": "Journal Square Transportation Center",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "A business district, residential area and transport hub with PATH and buses, and the Loew's Jersey Theatre, a 3,500-seat historic movie palace."
  },
  "nj:new-brunswick": {
   "quotes": [
@@ -378,7 +556,8 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "A long-running live music scene for alternative, indie and hardcore, and a downtown skyline filling with new high-rise towers."
  },
  "nj:parsippany-troy-hills": {
   "quotes": [
@@ -395,7 +574,13 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Mount Tabor station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "A suburban community of residential neighborhoods, about one-third open space; the nearest train is Mount Tabor station in neighboring Denville."
  },
  "ny:flushing-willets-point": {
   "quotes": [
@@ -424,7 +609,17 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Main Street",
+    "kind": "street"
+   },
+   {
+    "name": "Flushing Meadows Corona Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Downtown Flushing is a major commercial area around Main Street and Roosevelt Avenue; the botanical garden and Flushing Meadows Corona Park add greenery."
  },
  "ny:haverstraw": {
   "quotes": [
@@ -447,7 +642,17 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Haverstraw Brick Museum",
+    "kind": "museum"
+   },
+   {
+    "name": "Haverstraw Bay",
+    "kind": "waterfront"
+   }
+  ],
+  "plain_summary": "A commuter ferry crosses to Ossining for trains; a brick museum recalls the village's brick-making past; Haverstraw Bay is the Hudson's widest part."
  },
  "ny:jamaica": {
   "quotes": [
@@ -473,7 +678,21 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Jamaica Avenue",
+    "kind": "street"
+   },
+   {
+    "name": "Jamaica station",
+    "kind": "station"
+   },
+   {
+    "name": "King Manor Museum",
+    "kind": "museum"
+   }
+  ],
+  "plain_summary": "Jamaica Avenue is a major commercial center, Jamaica station is a central LIRR transfer point, and the King Manor Museum is a 200-year-old landmark."
  },
  "ny:white-plains": {
   "quotes": [
@@ -503,7 +722,17 @@
     "force": true
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Bronx River Parkway",
+    "kind": "trail"
+   },
+   {
+    "name": "Westchester County Center",
+    "kind": "venue"
+   }
+  ],
+  "plain_summary": "Vibrant nightlife and dining in the area, a summer tradition of biking, walking or jogging the Bronx River Parkway, and express trains to Midtown."
  },
  "nj:bloomfield": {
   "quotes": [
@@ -529,7 +758,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Bloomfield Avenue",
+    "kind": "street"
+   },
+   {
+    "name": "Brookdale Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "The train station sits off Bloomfield Avenue downtown, a college is near the town green, and Brookdale Park offers recreation and picturesque vistas."
  },
  "nj:east-orange": {
   "quotes": [
@@ -537,7 +776,9 @@
     "title": "East Orange, New Jersey",
     "quote": "There are many large well kept homes situated on streets lined with very old, very large shade trees in this neighborhood that are characteristic of the northern section of the city.",
     "character": 3,
-    "topic": "housing feel"
+    "topic": "housing feel",
+    "about_area": "Presidential Estates",
+    "scope": "part"
    },
    {
     "title": "East Orange, New Jersey",
@@ -552,7 +793,17 @@
     "topic": "event"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Paul Robeson Stadium",
+    "kind": "venue"
+   },
+   {
+    "name": "Elmwood Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Large well-kept homes on streets lined with old shade trees in the north; five parks; a stadium that hosts July Fourth fireworks."
  },
  "nj:englewood": {
   "quotes": [
@@ -569,7 +820,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Flat Rock Brook Nature Center",
+    "kind": "park"
+   },
+   {
+    "name": "MacKay Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Flat Rock Brook Nature Center preserves remnants of the Palisades Forest; MacKay Park has a rink, a pool, a walking path and fields."
  },
  "ny:east-flatbush-erasmus": {
   "quotes": [
@@ -580,7 +841,8 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "East Flatbush is described simply as a residential neighborhood of Brooklyn."
  },
  "ny:jamaica-hills-briarwood": {
   "quotes": [
@@ -597,7 +859,8 @@
     "topic": "history"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "Briarwood holds one of the highest points in Queens and has Colonial and old English-style homes built from 1936."
  },
  "ny:old-astoria-hallets-point": {
   "quotes": [
@@ -620,7 +883,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Shore Boulevard",
+    "kind": "street"
+   },
+   {
+    "name": "Astoria Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Shore Boulevard beside Astoria Park is closed to cars; the park has a track, courts and a skate park; NYC Ferry serves Astoria."
  },
  "ct:westport": {
   "quotes": [
@@ -649,7 +922,21 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Levitt Pavilion",
+    "kind": "venue"
+   },
+   {
+    "name": "Westport Country Playhouse",
+    "kind": "venue"
+   },
+   {
+    "name": "MoCA Westport",
+    "kind": "museum"
+   }
+  ],
+  "plain_summary": "Walkable streets lined with shops and restaurants, a sandy beach, Levitt Pavilion and the Country Playhouse, and two Metro-North stations."
  },
  "nj:clifton": {
   "quotes": [
@@ -666,7 +953,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Morris Canal Park",
+    "kind": "park"
+   },
+   {
+    "name": "Clifton station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Morris Canal Park keeps a water-filled stretch of the historic canal; trains run from Clifton and Delawanna stations to Hoboken."
  },
  "nj:franklin": {
   "quotes": [
@@ -674,7 +971,9 @@
     "title": "Franklin Township, Somerset County, New Jersey",
     "quote": "The canal and adjacent tow path offer many recreational activities, from hiking and biking to fishing and boating.",
     "character": 3,
-    "topic": "parks"
+    "topic": "parks",
+    "about_area": "Delaware and Raritan Canal State Park",
+    "scope": "part"
    },
    {
     "title": "Franklin Township, Somerset County, New Jersey",
@@ -683,7 +982,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Bunker Hill Natural Area",
+    "kind": "park"
+   },
+   {
+    "name": "Delaware and Raritan Canal State Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "The canal and towpath offer hiking, biking, fishing and boating; Bunker Hill Natural Area has trails through mature forest and meadows."
  },
  "nj:montclair": {
   "quotes": [
@@ -706,7 +1015,17 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Bloomfield Avenue",
+    "kind": "street"
+   },
+   {
+    "name": "Upper Montclair Business District",
+    "kind": "district"
+   }
+  ],
+  "plain_summary": "Art galleries cluster in the Bloomfield Avenue downtown; Upper Montclair has restaurants and shops; the town is noted for historic architecture."
  },
  "ny:bath-beach": {
   "quotes": [
@@ -723,7 +1042,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Bensonhurst Park",
+    "kind": "park"
+   },
+   {
+    "name": "Gravesend Bay",
+    "kind": "waterfront"
+   }
+  ],
+  "plain_summary": "Despite its name there is no longer a beach; Bensonhurst Park runs from Cropsey Avenue down to Gravesend Bay."
  },
  "ny:east-flatbush-farragut": {
   "quotes": [
@@ -734,7 +1063,8 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "East Flatbush is described simply as a residential neighborhood of Brooklyn."
  },
  "ny:peekskill": {
   "quotes": [
@@ -745,7 +1075,13 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Hudson Valley Museum of Contemporary Art",
+    "kind": "museum"
+   }
+  ],
+  "plain_summary": "Home to the Hudson Valley Museum of Contemporary Art, with a large exhibition space and an artist-in-residence program."
  },
  "ny:port-chester": {
   "quotes": [
@@ -765,7 +1101,13 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Capitol Theatre",
+    "kind": "venue"
+   }
+  ],
+  "plain_summary": "The Capitol Theatre is a historic theater in the village, which has six parks for picnicking and sports."
  },
  "ny:prospect-lefferts-gardens-wingate": {
   "quotes": [
@@ -782,7 +1124,13 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Prospect Lefferts Gardens Historic District",
+    "kind": "district"
+   }
+  ],
+  "plain_summary": "A landmark historic district with a mix of single-family and multi-family homes and larger apartment houses."
  },
  "ny:washington-heights-south-": {
   "quotes": [
@@ -799,7 +1147,21 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Fort Washington Park",
+    "kind": "park"
+   },
+   {
+    "name": "Highbridge Park",
+    "kind": "park"
+   },
+   {
+    "name": "High Bridge",
+    "kind": "landmark"
+   }
+  ],
+  "plain_summary": "Fort Washington Park runs along the Hudson; Highbridge Park holds the High Bridge, its water tower and a play center."
  },
  "ct:beacon-falls": {
   "quotes": [
@@ -825,7 +1187,17 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Naugatuck River",
+    "kind": "waterfront"
+   },
+   {
+    "name": "Beacon Falls train station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Canoeing, kayaking and fishing on the Naugatuck River, a Metro-North station, and brick factory buildings on North Main Street from its manufacturing past."
  },
  "ct:brookfield": {
   "quotes": [
@@ -845,7 +1217,21 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Brookfield Town Center",
+    "kind": "district"
+   },
+   {
+    "name": "Candlewood Lake",
+    "kind": "waterfront"
+   },
+   {
+    "name": "Lake Lillinonah",
+    "kind": "waterfront"
+   }
+  ],
+  "plain_summary": "Four Corners is the downtown shopping district; the town lies between Candlewood Lake and Lake Lillinonah."
  },
  "ct:fairfield": {
   "quotes": [
@@ -871,7 +1257,17 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Lake Mohegan",
+    "kind": "park"
+   },
+   {
+    "name": "Sherman Town Green",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "A historic downtown with boutiques, concerts on the Green and theater; Lake Mohegan and its cascades are popular for hiking."
  },
  "ct:hamden": {
   "quotes": [
@@ -900,7 +1296,13 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Sleeping Giant State Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Sleeping Giant State Park has a hike to a stone tower; the old canal is a walking and biking trail; shops, restaurants and gardens."
  },
  "ct:seymour": {
   "quotes": [
@@ -929,7 +1331,13 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Seymour train station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "A walkable historic downtown with antiques, boutiques and river views, small family farms on the hillsides, and a Metro-North station."
  },
  "ct:stratford": {
   "quotes": [
@@ -943,7 +1351,9 @@
     "title": "Stratford, Connecticut",
     "quote": "The forest includes campsites with cooking pits, picnic tables, and walking trails.",
     "character": 2,
-    "topic": "parks"
+    "topic": "parks",
+    "about_area": "Roosevelt Forest",
+    "scope": "part"
    },
    {
     "web_url": "https://ctvisit.com/listings/town-stratford",
@@ -955,7 +1365,17 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Roosevelt Forest",
+    "kind": "park"
+   },
+   {
+    "name": "Housatonic River",
+    "kind": "waterfront"
+   }
+  ],
+  "plain_summary": "Eighteen miles of coastline with two public beaches and five marinas; Roosevelt Forest has campsites and trails; a legacy in aviation and theater."
  },
  "ct:trumbull": {
   "quotes": [
@@ -984,7 +1404,21 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Pequonnock River Trail",
+    "kind": "trail"
+   },
+   {
+    "name": "Old Mine Park",
+    "kind": "park"
+   },
+   {
+    "name": "Trumbull Nature & Arts Center",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Over 1,400 acres of parks including the Pequonnock River Trail, a nature and arts center, and beaches five miles away."
  },
  "nj:belleville": {
   "quotes": [
@@ -1010,7 +1444,17 @@
     "topic": "event"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Branch Brook Park",
+    "kind": "park"
+   },
+   {
+    "name": "Silver Lake station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "The Second River runs through Branch Brook Park, where the symphony plays an annual outdoor concert; light rail runs from Silver Lake station."
  },
  "nj:bound-brook": {
   "quotes": [
@@ -1027,7 +1471,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Raritan River",
+    "kind": "waterfront"
+   },
+   {
+    "name": "Bound Brook station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Paved and dirt trails for walkers and cyclists run along the Raritan River; trains stop at Bound Brook station."
  },
  "nj:carteret": {
   "quotes": [
@@ -1044,7 +1498,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Joseph Medwick Park",
+    "kind": "park"
+   },
+   {
+    "name": "Waterfront Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Joseph Medwick Park is a greenway along the river; a ferry to Lower Manhattan is planned from Waterfront Park."
  },
  "nj:dover": {
   "quotes": [
@@ -1067,7 +1531,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "JFK Park",
+    "kind": "park"
+   },
+   {
+    "name": "Water Works Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Described as a walking town with most streets near downtown; JFK Park hosts holiday events and summer concerts; a riverside park."
  },
  "nj:east-brunswick": {
   "quotes": [
@@ -1084,7 +1558,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Heavenly Farms",
+    "kind": "park"
+   },
+   {
+    "name": "Harvest Fest",
+    "kind": "event"
+   }
+  ],
+  "plain_summary": "An annual Harvest Fest in the historic district; Heavenly Farms is the largest township park."
  },
  "nj:east-rutherford": {
   "quotes": [
@@ -1101,7 +1585,21 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Meadowlands Sports Complex",
+    "kind": "venue"
+   },
+   {
+    "name": "MetLife Stadium",
+    "kind": "venue"
+   },
+   {
+    "name": "Rutherford station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Home of the Meadowlands Sports Complex and MetLife Stadium; trains stop at Rutherford station on the border."
  },
  "nj:elizabeth": {
   "quotes": [
@@ -1109,7 +1607,9 @@
     "title": "Elizabeth, New Jersey",
     "quote": "The main thoroughfare, Elmora Avenue, offers restaurants, shops and boutiques.",
     "character": 3,
-    "topic": "main street"
+    "topic": "main street",
+    "about_area": "Elmora",
+    "scope": "part"
    },
    {
     "title": "Elizabeth, New Jersey",
@@ -1121,10 +1621,26 @@
     "title": "Elizabeth, New Jersey",
     "quote": "Several high-rise building complexes, affording views of the New York City skyline, dot the edge of this neighborhood and are accessible to the Elizabeth station.",
     "character": 2,
-    "topic": "housing feel"
+    "topic": "housing feel",
+    "about_area": "Elmora",
+    "scope": "part"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Elmora Avenue",
+    "kind": "street"
+   },
+   {
+    "name": "Elizabeth station",
+    "kind": "station"
+   },
+   {
+    "name": "Elmora",
+    "kind": "district"
+   }
+  ],
+  "plain_summary": "Elmora Avenue offers restaurants, shops and boutiques; Midtown is the main commercial district; high-rises with skyline views sit near the station."
  },
  "nj:jersey-city-west-side": {
   "quotes": [
@@ -1147,7 +1663,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Lincoln Park",
+    "kind": "park"
+   },
+   {
+    "name": "West Side Avenue Station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Lincoln Park is among the county's largest parks; nearby streets mix Victorian mansions and Art Deco apartment buildings; light rail ends at West Side Avenue."
  },
  "nj:long-branch": {
   "quotes": [
@@ -1158,7 +1684,13 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Long Branch station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "The train station is three blocks from the beach."
  },
  "nj:mount-arlington": {
   "quotes": [
@@ -1175,7 +1707,13 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Lake Hopatcong",
+    "kind": "waterfront"
+   }
+  ],
+  "plain_summary": "On the shore of Lake Hopatcong, the state's largest lake; now mostly a suburban residential community, once a resort."
  },
  "nj:rahway": {
   "quotes": [
@@ -1198,7 +1736,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Rahway Theatre",
+    "kind": "venue"
+   },
+   {
+    "name": "Rahway River Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Downtown has become a regional hub for performing and visual arts, anchored by the landmarked Rahway Theatre; Rahway River Park is the best-known park."
  },
  "nj:riverdale": {
   "quotes": [
@@ -1209,7 +1757,8 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "In the northeast corner of Morris County, along the Pequannock and Pompton rivers."
  },
  "nj:south-orange": {
   "quotes": [
@@ -1232,7 +1781,17 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "South Orange Performing Arts Center",
+    "kind": "venue"
+   },
+   {
+    "name": "South Mountain Reservation",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "A central business district with restaurants, a performing arts center beside the station, and South Mountain Reservation along the western edge."
  },
  "nj:wayne": {
   "quotes": [
@@ -1249,7 +1808,17 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "High Mountain Park Preserve",
+    "kind": "park"
+   },
+   {
+    "name": "Dey Mansion",
+    "kind": "landmark"
+   }
+  ],
+  "plain_summary": "A number of lakes with distinct communities around them; points of interest include High Mountain Park Preserve and Dey Mansion."
  },
  "nj:weehawken": {
   "quotes": [
@@ -1275,7 +1844,13 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Park Avenue",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "Park Avenue is lined with locally owned stores, eateries and bars; waterfront walkway and clifftop Palisades views; bus, ferry and light rail."
  },
  "ny:brighton-beach": {
   "quotes": [
@@ -1292,7 +1867,13 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Brighton Beach Avenue",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "A popular summer weekend destination by beach and subway; Brighton Beach Avenue runs parallel to the beach and boardwalk."
  },
  "ny:elmhurst": {
   "quotes": [
@@ -1303,7 +1884,13 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Elmhurst Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Elmhurst Park has a playground, walking paths and a lawn atop a hill."
  },
  "ny:forest-hills": {
   "quotes": [
@@ -1326,7 +1913,17 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Austin Street",
+    "kind": "street"
+   },
+   {
+    "name": "Forest Hills Stadium",
+    "kind": "venue"
+   }
+  ],
+  "plain_summary": "Austin Street is the busy center with shops, cafes and restaurants; a long association with tennis; an LIRR station on Continental Avenue."
  },
  "ny:inwood": {
   "quotes": [
@@ -1349,7 +1946,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Dyckman Street",
+    "kind": "street"
+   },
+   {
+    "name": "Inwood Hill Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Dyckman Street has many restaurants and lounges; Inwood Hill Park is a large, wooded, old-growth park on the Hudson."
  },
  "ny:kew-gardens": {
   "quotes": [
@@ -1372,7 +1979,21 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Lefferts Boulevard",
+    "kind": "street"
+   },
+   {
+    "name": "Forest Park",
+    "kind": "park"
+   },
+   {
+    "name": "Kew Gardens station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Locally owned businesses and restaurants along Lefferts Boulevard; Forest Park lies to the west; the LIRR stops at Kew Gardens."
  },
  "ny:patchogue": {
   "quotes": [
@@ -1389,7 +2010,13 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Patchogue LIRR station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "A natural riverfront and harbor, and an LIRR station on the Montauk Branch."
  },
  "ny:valley-stream": {
   "quotes": [
@@ -1400,7 +2027,8 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "A village on the Queens border served by three LIRR stations."
  },
  "ct:oxford": {
   "quotes": [
@@ -1429,7 +2057,13 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Southford Falls State Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "A rural town with New England character, two breweries, shops and dining, and parks including Southford Falls State Park."
  },
  "nj:atlantic-highlands": {
   "quotes": [
@@ -1452,7 +2086,13 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "SeaStreak Ferry",
+    "kind": "ferry"
+   }
+  ],
+  "plain_summary": "A yacht club, marina and charter boats; gift shops, galleries and dining; a ferry to Manhattan."
  },
  "nj:bordentown": {
   "quotes": [
@@ -1475,7 +2115,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Bordentown station",
+    "kind": "station"
+   },
+   {
+    "name": "Cranberry Festival",
+    "kind": "event"
+   }
+  ],
+  "plain_summary": "A destination for weekend dining, book and record stores and galleries, with annual iris, street and cranberry festivals; River Line light rail."
  },
  "nj:edgewater": {
   "quotes": [
@@ -1498,7 +2148,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Hudson River Waterfront Walkway",
+    "kind": "trail"
+   },
+   {
+    "name": "Edgewater Landing",
+    "kind": "ferry"
+   }
+  ],
+  "plain_summary": "The Palisades cliff rises along the western side; a Hudson promenade is part of the Waterfront Walkway; a ferry runs to Midtown."
  },
  "nj:garwood": {
   "quotes": [
@@ -1515,7 +2175,13 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Raritan Valley Line",
+    "kind": "transit"
+   }
+  ],
+  "plain_summary": "North of the railroad the streets are numbered; south of it they are named after trees; the Raritan Valley Line bisects the borough."
  },
  "nj:hawthorne": {
   "quotes": [
@@ -1526,7 +2192,13 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Hawthorne station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "NJ Transit trains run from Hawthorne station to Secaucus Junction and Hoboken."
  },
  "nj:jersey-city-downtown": {
   "quotes": [
@@ -1549,7 +2221,25 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Van Vorst Park",
+    "kind": "park"
+   },
+   {
+    "name": "Hamilton Park",
+    "kind": "park"
+   },
+   {
+    "name": "Grove Street",
+    "kind": "street"
+   },
+   {
+    "name": "Hudson River Waterfront Walkway",
+    "kind": "trail"
+   }
+  ],
+  "plain_summary": "Square parks surrounded by brownstones, a Grove Street area rich with stores and restaurants, and the Hudson River Waterfront Walkway at Exchange Place."
  },
  "nj:maplewood": {
   "quotes": [
@@ -1572,7 +2262,21 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Memorial Park",
+    "kind": "park"
+   },
+   {
+    "name": "South Mountain Reservation",
+    "kind": "park"
+   },
+   {
+    "name": "Maplewood Center",
+    "kind": "district"
+   }
+  ],
+  "plain_summary": "Memorial Park, an Olmsted Brothers design, dominates the center; the downtown \"village\" is largely unchanged since the 1950s; South Mountain Reservation is nearby."
  },
  "nj:montvale": {
   "quotes": [
@@ -1589,7 +2293,8 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "A summer Day in the Park with rides, food, live music and fireworks; several corporate headquarters."
  },
  "nj:morris-plains": {
   "quotes": [
@@ -1606,7 +2311,8 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "A bedroom community with direct Morristown Line trains to New York Penn Station and Hoboken."
  },
  "nj:old-bridge": {
   "quotes": [
@@ -1617,7 +2323,8 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "A bedroom suburb across Raritan Bay from Staten Island."
  },
  "nj:plainfield": {
   "quotes": [
@@ -1640,7 +2347,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Green Brook Park",
+    "kind": "park"
+   },
+   {
+    "name": "Plainfield Civic District",
+    "kind": "district"
+   }
+  ],
+  "plain_summary": "A civic district in City Beautiful style, Green Brook Park for hiking and picnics, and two train stations."
  },
  "nj:princeton": {
   "quotes": [
@@ -1651,7 +2368,8 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "Roughly equidistant from New York City and Philadelphia."
  },
  "nj:ridgewood": {
   "quotes": [
@@ -1668,7 +2386,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Veterans Field",
+    "kind": "park"
+   },
+   {
+    "name": "Ridgewood Wild Duck Pond",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Veterans Field has a bandshell with free concerts; the Wild Duck Pond is part of Saddle River County Park."
  },
  "nj:roxbury": {
   "quotes": [
@@ -1679,7 +2407,8 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "Lakeland buses run from the Landing section to the Port Authority Bus Terminal."
  },
  "nj:somerville": {
   "quotes": [
@@ -1702,7 +2431,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Main Street",
+    "kind": "street"
+   },
+   {
+    "name": "Somerville train station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "A destination for boutique retail and dining, with Victorian architecture along Main Street and trains on the Raritan Valley Line."
  },
  "nj:teaneck": {
   "quotes": [
@@ -1725,7 +2464,17 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Votee Park Bandshell",
+    "kind": "venue"
+   },
+   {
+    "name": "Cedar Lane",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "Summer band concerts at the Votee Park bandshell, 24 municipal parks, and four main shopping areas including Cedar Lane."
  },
  "ny:astoria-east-woodside-north-": {
   "quotes": [
@@ -1751,7 +2500,17 @@
     "topic": "food and nightlife"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Roosevelt Avenue",
+    "kind": "street"
+   },
+   {
+    "name": "Museum of the Moving Image",
+    "kind": "museum"
+   }
+  ],
+  "plain_summary": "Parts of Woodside are quiet and residential, busier near Roosevelt Avenue; Astoria offers international food, lively streets and film heritage."
  },
  "ny:bay-ridge": {
   "quotes": [
@@ -1774,7 +2533,17 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "American Veterans Memorial Pier",
+    "kind": "waterfront"
+   },
+   {
+    "name": "Doctors' Row",
+    "kind": "landmark"
+   }
+  ],
+  "plain_summary": "The 69th Street Pier is the key seaside recreation spot, with ferry service to Wall Street; Doctors' Row is a run of early-1900s rowhouses."
  },
  "ny:bedford-stuyvesant-east-": {
   "quotes": [
@@ -1800,7 +2569,13 @@
     "topic": "food and nightlife"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Fulton Street",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "A large collection of intact Victorian architecture, Fulton Street for shopping, and nightlife with jazz shows and local bars."
  },
  "ny:bedford-stuyvesant-west-": {
   "quotes": [
@@ -1826,7 +2601,13 @@
     "topic": "food and nightlife"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Fulton Street",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "A large collection of intact Victorian architecture, Fulton Street for shopping, and nightlife with jazz shows and local bars."
  },
  "ny:east-harlem-south-": {
   "quotes": [
@@ -1846,7 +2627,8 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "Numerous parks and public art, and a Metro-North station at Harlem-125th Street."
  },
  "ny:flatbush-west-ditmas-park-parkville": {
   "quotes": [
@@ -1869,7 +2651,13 @@
     "topic": "food and nightlife"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Cortelyou",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "Victorian houses with a suburban feel that draw film crews; music venues on Cortelyou; Parkville has a slightly diagonal street grid."
  },
  "ny:flatlands": {
   "quotes": [
@@ -1892,7 +2680,13 @@
     "topic": "history"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Utica Avenue",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "Shopping on Utica, Flatbush and Ralph Avenues and Avenue N; no subway service; some 18th-century homes survive."
  },
  "ny:gravesend-east-homecrest": {
   "quotes": [
@@ -1915,7 +2709,13 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "William E. Kelly Memorial Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "One-story bungalows and brick homes with shared backyards south of Avenue V; Kelly Memorial Park on Avenue S; three subway corridors."
  },
  "ny:gravesend-south-": {
   "quotes": [
@@ -1932,7 +2732,13 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Calvert Vaux Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Served by three subway corridors, with Calvert Vaux Park to the southwest."
  },
  "ny:gravesend-west-": {
   "quotes": [
@@ -1949,7 +2755,13 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Calvert Vaux Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Served by three subway corridors, with Calvert Vaux Park to the southwest."
  },
  "ny:hempstead": {
   "quotes": [
@@ -1966,7 +2778,13 @@
     "topic": "history"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Rosa Parks Hempstead Transit Center",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "A large transit hub, and historically the center of commercial activity for eastern Long Island."
  },
  "ny:long-beach": {
   "quotes": [
@@ -1989,7 +2807,13 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Park Avenue",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "The West End has many small bungalows; Park Avenue is the main commercial strip; apartment buildings and condos line the boardwalk."
  },
  "ny:madison": {
   "quotes": [
@@ -2000,7 +2824,13 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Emmons Avenue",
+    "kind": "waterfront"
+   }
+  ],
+  "plain_summary": "Emmons Avenue in Sheepshead Bay is a waterfront road with piers for fishing and day-trip boats."
  },
  "ny:midwood": {
   "quotes": [
@@ -2023,7 +2853,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Ocean Parkway",
+    "kind": "street"
+   },
+   {
+    "name": "Midwood Mardi Gras Street Fair",
+    "kind": "event"
+   }
+  ],
+  "plain_summary": "Ocean Parkway is a tree-lined boulevard of apartment houses; a Mardi Gras street fair runs each June; parks and playing fields."
  },
  "ny:murray-hill-broadway-flushing": {
   "quotes": [
@@ -2046,7 +2886,17 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Voelker Orth Museum, Bird Sanctuary and Victorian Garden",
+    "kind": "museum"
+   },
+   {
+    "name": "Broadway station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Broadway-Flushing has Colonial, Tudor and other Revival-style houses on large properties, an LIRR station in walking distance, and a Victorian garden museum."
  },
  "ny:new-springville-willowbrook-bulls-head-travis": {
   "quotes": [
@@ -2069,7 +2919,13 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Willowbrook Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Travis is noted for its Independence Day parade, Willowbrook Park is a large city park, and New Springville is a commercial core."
  },
  "ny:pomonok-electchester-hillcrest": {
   "quotes": [
@@ -2092,7 +2948,13 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Long Island Motor Parkway",
+    "kind": "trail"
+   }
+  ],
+  "plain_summary": "Two large housing developments along Jewel Avenue, a bowling alley and shopping center, and the old Motor Parkway as a biking and walking trail."
  },
  "ny:riverdale-spuyten-duyvil": {
   "quotes": [
@@ -2115,7 +2977,17 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Wave Hill",
+    "kind": "park"
+   },
+   {
+    "name": "Spuyten Duyvil train station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Noted for parks, greenery and original forest on a hilly landscape; Wave Hill is a botanical garden; Metro-North runs from Spuyten Duyvil."
  },
  "ny:rockaway-beach-arverne-edgemere": {
   "quotes": [
@@ -2138,7 +3010,13 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Rockaway Beach and Boardwalk",
+    "kind": "beach"
+   }
+  ],
+  "plain_summary": "Named for a very large urban beach and boardwalk; NYC Ferry service; rows of small bungalows survive in Edgemere."
  },
  "ny:sheepshead-bay-manhattan-beach-gerritsen-beach": {
   "quotes": [
@@ -2161,7 +3039,13 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Emmons Avenue",
+    "kind": "waterfront"
+   }
+  ],
+  "plain_summary": "Emmons Avenue is a waterfront road with piers and boats; Manhattan Beach is bounded by ocean; Gerritsen Beach has brick houses and wide sidewalks."
  },
  "ny:st-george-new-brighton": {
   "quotes": [
@@ -2181,10 +3065,26 @@
     "title": "St. George, Staten Island",
     "quote": "The renovated terminal has panoramic views of the harbor and incoming ferries.",
     "character": 3,
-    "topic": "transit"
+    "topic": "transit",
+    "about_area": "St. George Terminal",
+    "scope": "part"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Snug Harbor Cultural Center and Botanical Gardens",
+    "kind": "venue"
+   },
+   {
+    "name": "Fort Hill",
+    "kind": "district"
+   },
+   {
+    "name": "St. George Terminal",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Fort Hill has Victorian, Tudor and Art Deco homes; Snug Harbor has gardens, museums and theaters; the ferry terminal has harbor views."
  },
  "ny:sunnyside": {
   "quotes": [
@@ -2210,7 +3110,17 @@
     "topic": "food and nightlife"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Sunnyside Gardens",
+    "kind": "district"
+   },
+   {
+    "name": "Sunnyside Gardens Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Sunnyside Gardens is a planned community of brick rowhouses with a private park; international food, drinks and live music."
  },
  "ny:tompkinsville-stapleton-clifton-fox-hills": {
   "quotes": [
@@ -2233,7 +3143,13 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Staten Island Railway",
+    "kind": "transit"
+   }
+  ],
+  "plain_summary": "More urban than most of Staten Island, with tall brick buildings, stores and eateries; Victorian houses in Clifton; a railway station at Stapleton."
  },
  "ny:upper-west-side-manhattan-valley": {
   "quotes": [
@@ -2262,7 +3178,25 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Central Park",
+    "kind": "park"
+   },
+   {
+    "name": "Riverside Park",
+    "kind": "park"
+   },
+   {
+    "name": "Lincoln Center",
+    "kind": "venue"
+   },
+   {
+    "name": "American Museum of Natural History",
+    "kind": "museum"
+   }
+  ],
+  "plain_summary": "Between Central Park and Riverside Park, with familiar residential buildings, Lincoln Center and the natural history museum."
  },
  "ny:wallkill": {
   "quotes": [
@@ -2279,7 +3213,13 @@
     "topic": "event"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Orange County Fair",
+    "kind": "event"
+   }
+  ],
+  "plain_summary": "Stores, shopping centers and restaurants along Route 211; the Orange County Fair each summer."
  },
  "ny:washington-heights-north-": {
   "quotes": [
@@ -2302,7 +3242,25 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "The Cloisters",
+    "kind": "museum"
+   },
+   {
+    "name": "Fort Tryon Park",
+    "kind": "park"
+   },
+   {
+    "name": "Bennett Park",
+    "kind": "park"
+   },
+   {
+    "name": "Medieval Festival",
+    "kind": "event"
+   }
+  ],
+  "plain_summary": "The Cloisters and a September Medieval Festival in Fort Tryon Park; Bennett Park holds Manhattan's highest natural point."
  },
  "ct:west-haven": {
   "quotes": [
@@ -2331,7 +3289,17 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Sandy Point Bird Sanctuary",
+    "kind": "park"
+   },
+   {
+    "name": "Savin Rock",
+    "kind": "landmark"
+   }
+  ],
+  "plain_summary": "Connecticut's longest publicly accessible shoreline, a former \"Coney Island\" amusement park at Savin Rock, and full Metro-North service."
  },
  "nj:fort-lee": {
   "quotes": [
@@ -2354,7 +3322,17 @@
     "topic": "event"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Monument Park",
+    "kind": "park"
+   },
+   {
+    "name": "The Palisades",
+    "kind": "landmark"
+   }
+  ],
+  "plain_summary": "Atop the Palisades along the Hudson, with residential high-rises and summer Shakespeare in Monument Park."
  },
  "nj:jersey-city": {
   "quotes": [
@@ -2380,7 +3358,25 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Van Vorst Park",
+    "kind": "park"
+   },
+   {
+    "name": "Hamilton Park",
+    "kind": "park"
+   },
+   {
+    "name": "Liberty State Park",
+    "kind": "park"
+   },
+   {
+    "name": "Grove Street",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "Square parks surrounded by brownstones, stores and restaurants along Newark Avenue and Grove Street, and Liberty State Park's skyline views."
  },
  "nj:jersey-city-greenville": {
   "quotes": [
@@ -2403,7 +3399,13 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Liberty State Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Mostly one- and two-family homes and low-rise apartment buildings; Port Liberté and part of Liberty State Park lie to the east."
  },
  "nj:jersey-city-mcginley-square": {
   "quotes": [
@@ -2420,7 +3422,13 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "McGinley Square Partnership",
+    "kind": "district"
+   }
+  ],
+  "plain_summary": "Close to Journal Square and considered an extension of it, with a business improvement district for the commercial area."
  },
  "nj:jersey-city-newport": {
   "quotes": [
@@ -2446,7 +3454,13 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Newport station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Neighborhood restaurants and stores, light rail and PATH stations, and a waterfront walkway for biking, jogging, walking and fishing."
  },
  "nj:jersey-city-the-heights": {
   "quotes": [
@@ -2469,7 +3483,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Summit Avenue",
+    "kind": "street"
+   },
+   {
+    "name": "Jersey City Reservoir No. 3",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Stately Victorian and Edwardian homes, shops along Central Avenue in three- and four-story buildings, and a reservoir preserved as a park."
  },
  "nj:north-bergen": {
   "quotes": [
@@ -2492,7 +3516,21 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Bergenline Avenue",
+    "kind": "street"
+   },
+   {
+    "name": "North Hudson Park",
+    "kind": "park"
+   },
+   {
+    "name": "Tonnelle Avenue station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Bergenline Avenue is a long commercial avenue with over 300 stores and restaurants; the Palisades rise from the waterfront; light rail at Tonnelle Avenue."
  },
  "nj:red-bank": {
   "quotes": [
@@ -2509,7 +3547,13 @@
     "topic": "event"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Red Bank Jazz & Blues Festival",
+    "kind": "event"
+   }
+  ],
+  "plain_summary": "A center of artistic activity with galleries, and host of a jazz and blues festival."
  },
  "nj:springfield": {
   "quotes": [
@@ -2526,7 +3570,13 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Rahway River Parkway",
+    "kind": "trail"
+   }
+  ],
+  "plain_summary": "The Rahway River Parkway greenway runs through; no train station, though Millburn and Short Hills stations are nearby."
  },
  "ny:bensonhurst": {
   "quotes": [
@@ -2543,7 +3593,8 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "Mostly attached or semidetached houses, and well served by the subway."
  },
  "ny:east-new-york-north-": {
   "quotes": [
@@ -2560,7 +3611,13 @@
     "topic": "food and nightlife"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Highland Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Highland Park lies to the north; the City Line section has many restaurants, stores and food markets."
  },
  "ny:flatbush": {
   "quotes": [
@@ -2577,7 +3634,13 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Kings Theatre",
+    "kind": "venue"
+   }
+  ],
+  "plain_summary": "The Kings Theatre reopened as a live venue in 2015; a bustling business district supported by community organizations."
  },
  "ny:glen-cove": {
   "quotes": [
@@ -2600,7 +3663,13 @@
     "topic": "waterfront"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Morgan Memorial Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Morgan Memorial Park has harbor views and free summer concerts; the city sits on the North Shore along Long Island Sound."
  },
  "ny:hamilton-heights-sugar-hill": {
   "quotes": [
@@ -2617,7 +3686,13 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Hamilton Grange National Memorial",
+    "kind": "landmark"
+   }
+  ],
+  "plain_summary": "Named for Alexander Hamilton, whose home is now a national memorial; most housing dates from around 1900."
  },
  "ny:kingsbridge-heights-van-cortlandt-village": {
   "quotes": [
@@ -2640,7 +3715,17 @@
     "topic": "landmark"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Fort Independence Park",
+    "kind": "park"
+   },
+   {
+    "name": "Jerome Park Reservoir",
+    "kind": "landmark"
+   }
+  ],
+  "plain_summary": "Twisting hilly streets with elegant brick homes, Fort Independence Park along Sedgwick Avenue, and the Jerome Park Reservoir as the dominant landmark."
  },
  "ny:lagrange": {
   "quotes": [
@@ -2657,7 +3742,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "James Baird State Park",
+    "kind": "park"
+   },
+   {
+    "name": "Freedom Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "James Baird State Park has a golf course, fields and trails; Freedom Park has a bandstand and pavilion."
  },
  "ny:manhattanville-west-harlem": {
   "quotes": [
@@ -2668,7 +3763,13 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "125th Street",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "The city has a plan to build on 125th Street's strengths as an arts and cultural corridor."
  },
  "ny:middletown": {
   "quotes": [
@@ -2685,7 +3786,17 @@
     "topic": "event"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Highland Avenue",
+    "kind": "street"
+   },
+   {
+    "name": "Fancher Davidge Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Highland Avenue is lined with large Victorian houses; a horse show is held at Fancher Davidge Park each fall."
  },
  "ny:new-paltz": {
   "quotes": [
@@ -2708,7 +3819,21 @@
     "topic": "event"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Wallkill Valley Rail Trail",
+    "kind": "trail"
+   },
+   {
+    "name": "Mohonk Preserve",
+    "kind": "park"
+   },
+   {
+    "name": "Minnewaska State Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Biking and hiking at Mohonk and Minnewaska, the Wallkill Valley Rail Trail through town, and a Halloween night parade."
  },
  "ny:pelham-bay-country-club-city-island": {
   "quotes": [
@@ -2731,7 +3856,13 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Pelham Bay Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "City Island is famous for seafood restaurants and antique stores; stores and eateries line Pelham Bay's streets, next to the city's largest park."
  },
  "ny:upper-east-side-lenox-hill-roosevelt-island": {
   "quotes": [
@@ -2754,7 +3885,17 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Museum Mile",
+    "kind": "landmark"
+   },
+   {
+    "name": "Four Freedoms Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Museum Mile along Fifth Avenue, boutiques and galleries on Park and Lexington, and a promenade around Roosevelt Island."
  },
  "ny:williamsbridge-olinville": {
   "quotes": [
@@ -2777,7 +3918,13 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Williams Bridge station",
+    "kind": "station"
+   }
+  ],
+  "plain_summary": "Multi-family homes and moderate-size buildings, a Metro-North stop at Williams Bridge, and a revived monument park."
  },
  "ny:windsor-terrace-south-slope": {
   "quotes": [
@@ -2800,7 +3947,13 @@
     "topic": "housing feel"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Prospect Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Three traffic circles frame Prospect Park entrances; mostly residential with some commerce; Park Slope's side streets are lined with brownstones."
  },
  "ny:astoria-central-": {
   "quotes": [
@@ -2826,7 +3979,21 @@
     "topic": "food and nightlife"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Museum of the Moving Image",
+    "kind": "museum"
+   },
+   {
+    "name": "Astoria Park",
+    "kind": "park"
+   },
+   {
+    "name": "Shore Boulevard",
+    "kind": "street"
+   }
+  ],
+  "plain_summary": "Film heritage at the Museum of the Moving Image, a car-free Shore Boulevard by Astoria Park, international food and lively streets."
  },
  "ny:north-corona": {
   "quotes": [
@@ -2852,7 +4019,21 @@
     "topic": "parks"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Louis Armstrong House",
+    "kind": "museum"
+   },
+   {
+    "name": "Corona Plaza",
+    "kind": "district"
+   },
+   {
+    "name": "Flushing Meadows Corona Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "The Louis Armstrong House, Corona Plaza as a community space, and Flushing Meadows Corona Park with its zoo, museum and science hall."
  },
  "ny:kew-gardens-hills": {
   "quotes": [
@@ -2863,7 +4044,8 @@
     "topic": "main street"
    }
   ],
-  "landmarks": []
+  "landmarks": [],
+  "plain_summary": "Commercial areas run along Main Street, Union Turnpike, Parsons Boulevard and Kissena Boulevard."
  },
  "ny:harlem-north-": {
   "quotes": [
@@ -2886,7 +4068,21 @@
     "topic": "transit"
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Apollo Theater",
+    "kind": "venue"
+   },
+   {
+    "name": "St. Nicholas Park",
+    "kind": "park"
+   },
+   {
+    "name": "Jackie Robinson Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "A chain of large linear parks, the Apollo Theater on 125th Street since 1934, and a Metro-North station at Harlem-125th Street."
  },
  "ct:shelton": {
   "quotes": [
@@ -2907,6 +4103,12 @@
     "force": true
    }
   ],
-  "landmarks": []
+  "landmarks": [
+   {
+    "name": "Indian Wells State Park",
+    "kind": "park"
+   }
+  ],
+  "plain_summary": "Indian Wells State Park is a named draw, and the city's open space offers fishing, boating, hiking, walking and biking, with leashed dogs welcome."
  }
 }

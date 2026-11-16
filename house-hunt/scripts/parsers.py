@@ -997,6 +997,7 @@ def staleness(modified, read_on, available_date="", second_source=False):
 
 # ---- step 4c: an elevator known only from a listing site's amenity list
 _ELEV_CONTRA = re.compile(r"own (?:site|pages?|feature list|features? (?:list|page)|amenit\w+ page)[^.;|]{0,40}(?:never mention|not mention|(?:does|do) not (?:list|mention|state)|omits?|lists? no|no elevator|none either|did not state)|"
+                          r"(?:own site|manager'?s? (?:own )?page|building'?s? (?:own )?(?:site|page)|\w+'s page for the building|page for the building)[^.|]{0,140}(?:does not mention|do not mention|and no elevator|no elevator)|"
                           r"own pages never mention|omits? it|select buildings|walk-?up|my reading: (?:unlikely|no elevator|probably (?:a walk|no|not))|"
                           r"which buildings have|not established|only in (?:some|select|certain)", re.I)
 _ELEV_NEG = re.compile(r"\bno elevator|not (?:listed|stated|mentioned)|none listed|no ['\"]?elevator|unknown|does not mention|lists no|has no elevator|"
@@ -1018,7 +1019,7 @@ def elevator_row_kind(value, quote, source_is_aggregator, status):
     v = str(value).strip().lower()
     positive = v.startswith(("yes", "true")) or (status == "confirmed" and not _ELEV_NEG.search(v))
     if status == "unconfirmed":
-        positive = v.startswith("yes") or bool(re.search(r"tags? ['\"]?elevator|elevator['\"]? (?:tag|amenity|in the amenit)|amenit[^.;|]{0,30}(?:lists?|has|shows|includes) (?:an )?['\"]?elevator", txt, re.I)
+        positive = v.startswith("yes") or bool(re.search(r"amenity tag only|tag only|(?:feature|amenity|amenities) list: ['\"]?elevator|tags? ['\"]?elevator|elevator['\"]? (?:tag|amenity|in the amenit)|amenit[^.;|]{0,30}(?:lists?|has|shows|includes) (?:an )?['\"]?elevator", txt, re.I)
                                                and not _ELEV_NEG.search(v))
     if not positive:
         return "none"

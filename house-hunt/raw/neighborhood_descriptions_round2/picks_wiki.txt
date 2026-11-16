@@ -15,7 +15,7 @@ ny:yonkers|Yonkers, New York|7|2|landmark
 ct:danbury|Danbury, Connecticut|197|2|parks
 ct:milford-city-balance-|Milford, Connecticut|152|3|waterfront
 nj:harrison|Harrison, New Jersey|148|2|transit
-nj:harrison|Harrison, New Jersey|163|3|landmark
+nj:harrison|Harrison, New Jersey|163|3|landmark|about=Sports Illustrated Stadium|scope=part
 nj:jersey-city-bergen-lafayette|Bergen-Lafayette, Jersey City|12|3|main street
 nj:jersey-city-bergen-lafayette|Bergen-Lafayette, Jersey City|40|2|transit
 nj:jersey-city-bergen-lafayette|Berry Lane Park|6|3|parks
@@ -38,7 +38,7 @@ ny:jamaica|Jamaica, Queens|11|2|main street
 ny:jamaica|Jamaica, Queens|208|2|transit
 ny:white-plains|White Plains, New York|54|2|transit
 nj:bloomfield|Bloomfield, New Jersey|146|2|transit
-nj:east-orange|East Orange, New Jersey|33|3|housing feel
+nj:east-orange|East Orange, New Jersey|33|3|housing feel|about=Presidential Estates|scope=part
 nj:east-orange|East Orange, New Jersey|99|2|parks
 nj:east-orange|East Orange, New Jersey|101|2|event
 nj:englewood|Englewood, New Jersey|81|2|parks
@@ -50,7 +50,7 @@ ny:old-astoria-hallets-point|Astoria Park|3|2|parks
 ct:westport|Westport, Connecticut|115|2|transit
 nj:clifton|Clifton, New Jersey|100|2|parks
 nj:clifton|Clifton, New Jersey|173|2|transit
-nj:franklin|Franklin Township, Somerset County, New Jersey|93|3|parks
+nj:franklin|Franklin Township, Somerset County, New Jersey|93|3|parks|about=Delaware and Raritan Canal State Park|scope=part
 nj:franklin|Franklin Township, Somerset County, New Jersey|103|2|parks
 nj:montclair|Montclair, New Jersey|109|2|main street
 nj:montclair|Montclair, New Jersey|69|2|food and nightlife
@@ -75,7 +75,7 @@ ct:fairfield|Fairfield, Connecticut|115|3|event
 ct:hamden|Hamden, Connecticut|20|3|parks
 ct:seymour|Seymour, Connecticut|75|2|transit
 ct:stratford|Stratford, Connecticut|6|2|history
-ct:stratford|Stratford, Connecticut|72|2|parks
+ct:stratford|Stratford, Connecticut|72|2|parks|about=Roosevelt Forest|scope=part
 ct:trumbull|Trumbull, Connecticut|185|2|parks
 nj:belleville|Belleville, New Jersey|16|2|parks
 nj:belleville|Belleville, New Jersey|85|2|transit
@@ -90,9 +90,9 @@ nj:east-brunswick|East Brunswick, New Jersey|79|2|event
 nj:east-brunswick|East Brunswick, New Jersey|87|1|parks
 nj:east-rutherford|East Rutherford, New Jersey|9|2|landmark
 nj:east-rutherford|East Rutherford, New Jersey|132|2|transit
-nj:elizabeth|Elizabeth, New Jersey|59|3|main street
+nj:elizabeth|Elizabeth, New Jersey|59|3|main street|about=Elmora|scope=part
 nj:elizabeth|Elizabeth, New Jersey|23|2|main street
-nj:elizabeth|Elizabeth, New Jersey|60|2|housing feel
+nj:elizabeth|Elizabeth, New Jersey|60|2|housing feel|about=Elmora|scope=part
 nj:jersey-city-west-side|West Side, Jersey City|4|3|parks
 nj:jersey-city-west-side|West Side, Jersey City|6|3|housing feel
 nj:jersey-city-west-side|West Side, Jersey City|11|2|transit
@@ -206,7 +206,7 @@ ny:sheepshead-bay-manhattan-beach-gerritsen-beach|Gerritsen Beach, Brooklyn|25|2
 ny:sheepshead-bay-manhattan-beach-gerritsen-beach|Manhattan Beach, Brooklyn|1|2|waterfront
 ny:st-george-new-brighton|St. George, Staten Island|181|3|housing feel
 ny:st-george-new-brighton|New Brighton, Staten Island|120|3|landmark
-ny:st-george-new-brighton|St. George, Staten Island|253|3|transit
+ny:st-george-new-brighton|St. George, Staten Island|253|3|transit|about=St. George Terminal|scope=part
 ny:sunnyside|Sunnyside, Queens|15|3|housing feel
 ny:sunnyside|Sunnyside, Queens|212|2|parks
 ny:tompkinsville-stapleton-clifton-fox-hills|Tompkinsville, Staten Island|27|3|main street

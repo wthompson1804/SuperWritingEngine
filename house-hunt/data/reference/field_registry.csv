@@ -130,7 +130,7 @@ master_units,building_floors_source,provenance,,travels with building_floors
 master_units,laundry,used,build_master.py;rank.py,
 master_units,laundry_basis,provenance,,travels with laundry
 master_units,laundry_source,provenance,,travels with laundry
-master_units,manager,display,build_master.py,label shown on the page
+master_units,manager,used,build_master.py;avoid.py,
 master_units,manager_basis,provenance,,travels with manager
 master_units,manager_source,provenance,,travels with manager
 master_units,utilities_included,used,gates.py;build_master.py;all_in.py,
@@ -248,6 +248,9 @@ master_units,income_requirement_source,provenance,,travels with income_requireme
 master_units,optional_fees_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
 master_units,optional_fees_text_basis,provenance,,travels with optional_fees_text
 master_units,optional_fees_text_source,provenance,,travels with optional_fees_text
+master_units,eligibility_open,used,build_master.py;rank.py,
+master_units,eligibility_open_basis,provenance,,travels with eligibility_open
+master_units,eligibility_open_source,provenance,,travels with eligibility_open
 master_units,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
 master_units,rent_regulation_basis,provenance,,travels with rent_regulation
 master_units,rent_regulation_source,provenance,,travels with rent_regulation
@@ -569,7 +572,7 @@ master_buildings,building_floors_source,provenance,,travels with building_floors
 master_buildings,laundry,used,build_master.py;rank.py,
 master_buildings,laundry_basis,provenance,,travels with laundry
 master_buildings,laundry_source,provenance,,travels with laundry
-master_buildings,manager,display,build_master.py,label shown on the page
+master_buildings,manager,used,build_master.py;avoid.py,
 master_buildings,manager_basis,provenance,,travels with manager
 master_buildings,manager_source,provenance,,travels with manager
 master_buildings,utilities_included,used,gates.py;build_master.py;all_in.py,
@@ -687,6 +690,9 @@ master_buildings,income_requirement_source,provenance,,travels with income_requi
 master_buildings,optional_fees_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
 master_buildings,optional_fees_text_basis,provenance,,travels with optional_fees_text
 master_buildings,optional_fees_text_source,provenance,,travels with optional_fees_text
+master_buildings,eligibility_open,used,build_master.py;rank.py,
+master_buildings,eligibility_open_basis,provenance,,travels with eligibility_open
+master_buildings,eligibility_open_source,provenance,,travels with eligibility_open
 master_buildings,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
 master_buildings,rent_regulation_basis,provenance,,travels with rent_regulation
 master_buildings,rent_regulation_source,provenance,,travels with rent_regulation

@@ -1,0 +1,233 @@
+# hood_id|name exactly as it appears in one of the neighborhood's quotes|kind
+ct:stamford|Columbus Park|park
+ct:stamford|Bedford Street|street
+ct:stamford|Mill River Park|park
+nj:newark|Ironbound|district
+nj:newark|Branch Brook Park|park
+nj:newark|Newark Penn Station|station
+ct:norwalk|South Norwalk|district
+ct:norwalk|SoNo Arts Festival|event
+nj:bayonne|Bayonne Town Center|district
+nj:bayonne|Richard A. Rutkowski Park|park
+nj:bayonne|Hudson-Bergen Light Rail|transit
+nj:hackensack|Main Street|street
+nj:hackensack|Hackensack Performing Arts Center|venue
+nj:hackensack|Anderson Street station|station
+nj:hackensack|Essex Street station|station
+ny:new-rochelle|Five Islands Park|park
+ny:new-rochelle|Ward Acres|park
+ny:new-rochelle|Davenport Neck|waterfront
+ny:yonkers|Getty Square|district
+ny:yonkers|Untermyer Park and Gardens|park
+ny:yonkers|Hudson River Museum|museum
+ny:yonkers|Tibbetts Brook Park|park
+ct:danbury|Candlewood Lake|waterfront
+ct:danbury|Ives Trail|trail
+ct:milford-city-balance-|Charles Island|waterfront
+ct:milford-city-balance-|Silver Sands Beach|beach
+nj:harrison|Harrison station|station
+nj:harrison|West Hudson Park|park
+nj:harrison|Passaic River|waterfront
+nj:jersey-city-bergen-lafayette|Monticello Avenue|street
+nj:jersey-city-bergen-lafayette|Berry Lane Park|park
+ct:bridgeport|Seaside Park|park
+nj:city-of-orange|Monte Irvin Orange Park|park
+nj:city-of-orange|Highland Avenue|station
+nj:jersey-city-journal-square|Loew's Jersey Theatre|venue
+nj:jersey-city-journal-square|Journal Square Transportation Center|station
+ct:shelton|Indian Wells State Park|park
+nj:parsippany-troy-hills|Mount Tabor station|station
+ny:flushing-willets-point|Main Street|street
+ny:flushing-willets-point|Flushing Meadows Corona Park|park
+ny:haverstraw|Haverstraw Brick Museum|museum
+ny:haverstraw|Haverstraw Bay|waterfront
+ny:jamaica|Jamaica Avenue|street
+ny:jamaica|Jamaica station|station
+ny:jamaica|King Manor Museum|museum
+ny:white-plains|Bronx River Parkway|trail
+ny:white-plains|Westchester County Center|venue
+nj:bloomfield|Bloomfield Avenue|street
+nj:bloomfield|Brookdale Park|park
+nj:east-orange|Paul Robeson Stadium|venue
+nj:east-orange|Elmwood Park|park
+nj:englewood|Flat Rock Brook Nature Center|park
+nj:englewood|MacKay Park|park
+ny:old-astoria-hallets-point|Shore Boulevard|street
+ny:old-astoria-hallets-point|Astoria Park|park
+ct:westport|Levitt Pavilion|venue
+ct:westport|Westport Country Playhouse|venue
+ct:westport|MoCA Westport|museum
+nj:clifton|Morris Canal Park|park
+nj:clifton|Clifton station|station
+nj:franklin|Bunker Hill Natural Area|park
+nj:montclair|Bloomfield Avenue|street
+nj:montclair|Upper Montclair Business District|district
+ny:bath-beach|Bensonhurst Park|park
+ny:bath-beach|Gravesend Bay|waterfront
+ny:peekskill|Hudson Valley Museum of Contemporary Art|museum
+ny:port-chester|Capitol Theatre|venue
+ny:prospect-lefferts-gardens-wingate|Prospect Lefferts Gardens Historic District|district
+ny:washington-heights-south-|Fort Washington Park|park
+ny:washington-heights-south-|Highbridge Park|park
+ny:washington-heights-south-|High Bridge|landmark
+ct:beacon-falls|Naugatuck River|waterfront
+ct:beacon-falls|Beacon Falls train station|station
+ct:brookfield|Brookfield Town Center|district
+ct:brookfield|Candlewood Lake|waterfront
+ct:brookfield|Lake Lillinonah|waterfront
+ct:fairfield|Lake Mohegan|park
+ct:fairfield|Sherman Town Green|park
+ct:hamden|Sleeping Giant State Park|park
+ct:seymour|Seymour train station|station
+ct:stratford|Roosevelt Forest|park
+ct:stratford|Housatonic River|waterfront
+ct:trumbull|Pequonnock River Trail|trail
+ct:trumbull|Old Mine Park|park
+ct:trumbull|Trumbull Nature & Arts Center|park
+nj:belleville|Branch Brook Park|park
+nj:belleville|Silver Lake station|station
+nj:bound-brook|Raritan River|waterfront
+nj:bound-brook|Bound Brook station|station
+nj:carteret|Joseph Medwick Park|park
+nj:carteret|Waterfront Park|park
+nj:dover|JFK Park|park
+nj:dover|Water Works Park|park
+nj:east-brunswick|Heavenly Farms|park
+nj:east-brunswick|Harvest Fest|event
+nj:east-rutherford|Meadowlands Sports Complex|venue
+nj:east-rutherford|MetLife Stadium|venue
+nj:east-rutherford|Rutherford station|station
+nj:elizabeth|Elmora Avenue|street
+nj:elizabeth|Elizabeth station|station
+nj:jersey-city-west-side|Lincoln Park|park
+nj:jersey-city-west-side|West Side Avenue Station|station
+nj:long-branch|Long Branch station|station
+nj:mount-arlington|Lake Hopatcong|waterfront
+nj:rahway|Rahway Theatre|venue
+nj:rahway|Rahway River Park|park
+nj:south-orange|South Orange Performing Arts Center|venue
+nj:south-orange|South Mountain Reservation|park
+nj:wayne|High Mountain Park Preserve|park
+nj:wayne|Dey Mansion|landmark
+nj:weehawken|Park Avenue|street
+ny:brighton-beach|Brighton Beach Avenue|street
+ny:elmhurst|Elmhurst Park|park
+ny:forest-hills|Austin Street|street
+ny:forest-hills|Forest Hills Stadium|venue
+ny:harlem-north-|Apollo Theater|venue
+ny:harlem-north-|St. Nicholas Park|park
+ny:harlem-north-|Jackie Robinson Park|park
+ny:inwood|Dyckman Street|street
+ny:inwood|Inwood Hill Park|park
+ny:kew-gardens|Lefferts Boulevard|street
+ny:kew-gardens|Forest Park|park
+ny:kew-gardens|Kew Gardens station|station
+ny:patchogue|Patchogue LIRR station|station
+ct:oxford|Southford Falls State Park|park
+nj:bordentown|Bordentown station|station
+nj:bordentown|Cranberry Festival|event
+nj:edgewater|Hudson River Waterfront Walkway|trail
+nj:edgewater|Edgewater Landing|ferry
+nj:garwood|Raritan Valley Line|transit
+nj:hawthorne|Hawthorne station|station
+nj:jersey-city-downtown|Van Vorst Park|park
+nj:jersey-city-downtown|Hamilton Park|park
+nj:jersey-city-downtown|Grove Street|street
+nj:jersey-city-downtown|Hudson River Waterfront Walkway|trail
+nj:maplewood|Memorial Park|park
+nj:maplewood|South Mountain Reservation|park
+nj:maplewood|Maplewood Center|district
+nj:plainfield|Green Brook Park|park
+nj:plainfield|Plainfield Civic District|district
+nj:ridgewood|Veterans Field|park
+nj:ridgewood|Ridgewood Wild Duck Pond|park
+nj:somerville|Main Street|street
+nj:somerville|Somerville train station|station
+nj:teaneck|Votee Park Bandshell|venue
+nj:teaneck|Cedar Lane|street
+ny:astoria-east-woodside-north-|Roosevelt Avenue|street
+ny:astoria-east-woodside-north-|Museum of the Moving Image|museum
+ny:bay-ridge|American Veterans Memorial Pier|waterfront
+ny:bay-ridge|Doctors' Row|landmark
+ny:bedford-stuyvesant-east-|Fulton Street|street
+ny:bedford-stuyvesant-west-|Fulton Street|street
+ny:flatbush-west-ditmas-park-parkville|Cortelyou|street
+ny:flatlands|Utica Avenue|street
+ny:gravesend-east-homecrest|William E. Kelly Memorial Park|park
+ny:gravesend-south-|Calvert Vaux Park|park
+ny:gravesend-west-|Calvert Vaux Park|park
+ny:hempstead|Rosa Parks Hempstead Transit Center|station
+ny:long-beach|Park Avenue|street
+ny:madison|Emmons Avenue|waterfront
+ny:midwood|Ocean Parkway|street
+ny:midwood|Midwood Mardi Gras Street Fair|event
+ny:murray-hill-broadway-flushing|Voelker Orth Museum, Bird Sanctuary and Victorian Garden|museum
+ny:murray-hill-broadway-flushing|Broadway station|station
+ny:new-springville-willowbrook-bulls-head-travis|Willowbrook Park|park
+ny:north-corona|Louis Armstrong House|museum
+ny:north-corona|Corona Plaza|district
+ny:north-corona|Flushing Meadows Corona Park|park
+ny:pomonok-electchester-hillcrest|Long Island Motor Parkway|trail
+ny:riverdale-spuyten-duyvil|Wave Hill|park
+ny:riverdale-spuyten-duyvil|Spuyten Duyvil train station|station
+ny:rockaway-beach-arverne-edgemere|Rockaway Beach and Boardwalk|beach
+ny:sheepshead-bay-manhattan-beach-gerritsen-beach|Emmons Avenue|waterfront
+ny:st-george-new-brighton|Snug Harbor Cultural Center and Botanical Gardens|venue
+ny:st-george-new-brighton|Fort Hill|district
+ny:sunnyside|Sunnyside Gardens|district
+ny:sunnyside|Sunnyside Gardens Park|park
+ny:upper-west-side-manhattan-valley|Central Park|park
+ny:upper-west-side-manhattan-valley|Riverside Park|park
+ny:upper-west-side-manhattan-valley|Lincoln Center|venue
+ny:upper-west-side-manhattan-valley|American Museum of Natural History|museum
+ny:wallkill|Orange County Fair|event
+ny:washington-heights-north-|The Cloisters|museum
+ny:washington-heights-north-|Fort Tryon Park|park
+ny:washington-heights-north-|Bennett Park|park
+ny:washington-heights-north-|Medieval Festival|event
+ct:west-haven|Sandy Point Bird Sanctuary|park
+ct:west-haven|Savin Rock|landmark
+nj:fort-lee|Monument Park|park
+nj:fort-lee|The Palisades|landmark
+nj:jersey-city|Van Vorst Park|park
+nj:jersey-city|Hamilton Park|park
+nj:jersey-city|Liberty State Park|park
+nj:jersey-city|Grove Street|street
+nj:jersey-city-greenville|Liberty State Park|park
+nj:jersey-city-mcginley-square|McGinley Square Partnership|district
+nj:jersey-city-newport|Newport station|station
+nj:jersey-city-the-heights|Summit Avenue|street
+nj:jersey-city-the-heights|Jersey City Reservoir No. 3|park
+nj:north-bergen|Bergenline Avenue|street
+nj:north-bergen|North Hudson Park|park
+nj:north-bergen|Tonnelle Avenue station|station
+nj:red-bank|Red Bank Jazz & Blues Festival|event
+nj:springfield|Rahway River Parkway|trail
+ny:astoria-central-|Museum of the Moving Image|museum
+ny:astoria-central-|Astoria Park|park
+ny:astoria-central-|Shore Boulevard|street
+ny:east-new-york-north-|Highland Park|park
+ny:flatbush|Kings Theatre|venue
+ny:glen-cove|Morgan Memorial Park|park
+ny:hamilton-heights-sugar-hill|Hamilton Grange National Memorial|landmark
+ny:kingsbridge-heights-van-cortlandt-village|Fort Independence Park|park
+ny:kingsbridge-heights-van-cortlandt-village|Jerome Park Reservoir|landmark
+ny:lagrange|James Baird State Park|park
+ny:lagrange|Freedom Park|park
+ny:manhattanville-west-harlem|125th Street|street
+ny:middletown|Highland Avenue|street
+ny:middletown|Fancher Davidge Park|park
+ny:new-paltz|Wallkill Valley Rail Trail|trail
+ny:new-paltz|Mohonk Preserve|park
+ny:new-paltz|Minnewaska State Park|park
+ny:pelham-bay-country-club-city-island|Pelham Bay Park|park
+ny:upper-east-side-lenox-hill-roosevelt-island|Museum Mile|landmark
+ny:upper-east-side-lenox-hill-roosevelt-island|Four Freedoms Park|park
+ny:williamsbridge-olinville|Williams Bridge station|station
+ny:windsor-terrace-south-slope|Prospect Park|park
+ny:tompkinsville-stapleton-clifton-fox-hills|Staten Island Railway|transit
+nj:atlantic-highlands|SeaStreak Ferry|ferry
+nj:harrison|Sports Illustrated Stadium|venue
+nj:franklin|Delaware and Raritan Canal State Park|park
+ny:st-george-new-brighton|St. George Terminal|station
+nj:elizabeth|Elmora|district

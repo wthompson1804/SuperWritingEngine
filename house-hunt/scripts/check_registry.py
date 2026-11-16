@@ -102,7 +102,7 @@ def shown_violations():
     # GATE facts count toward "at most one open"; DISCLOSURES (lease term, cost near the cap, condo rented by its owner,
     # net-effective rent) never do, but must be listed on the unit (owner, 2026-11-16)
     # (a floor that is not published is a disclosure too: owner, 2026-11-16; a floor under 2 is still flagged above)
-    opens = {"elevator": open_e, "dogs allowed": open_d, "availability": open_avail, "listing": open_listing, "eligibility": open_e & False}
+    opens = {"elevator": open_e, "dogs allowed": open_d, "availability": open_avail, "listing": open_listing, "eligibility": col("eligibility_open") != ""}
     not_published = ~fb.isin(["confirmed_by_phone", "confirmed", "stated"])
     flag(not_published & ~col("disclosures").str.contains('"what": "floor not published"', regex=False), "floor not published but the disclosure is missing")
     flag(not_published & ~col("tour_confirm").str.contains("confirm it is above the ground floor"), "floor not published but the tour question is missing")

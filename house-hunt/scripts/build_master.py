@@ -324,6 +324,9 @@ def apply_fact(M, b, fact, value, quote, url):
         M.add(b, "price_term_text", f"{v} | {quote}" if not is_blank(quote) and str(quote) != str(v) else v, C, url)
     elif f.startswith(("address_mismatch", "listing_address_mismatch", "address_note")):
         M.add(b, "listing_warning", "address: " + str(v), C, url)          # D6: was not mapped
+    elif f.startswith("eligibility"):
+        # batch 19: a listing site's INCOME RESTRICTED tag that the manager's own page does not bear out: one open fact
+        M.add(b, "eligibility_open", v, C, url)
     elif f.startswith("rent_regulation"):
         M.add(b, "rent_regulation", v, C, url)
     elif f.startswith(("income_requirement", "income_restrict")):
@@ -349,7 +352,7 @@ KNOWN_FACT_PREFIXES = ("parking", "garage", "pet_rent", "dog", "pet_fee", "fee:"
                        "optional_monthly_fee", "utilities", "pool", "doorman", "concierge", "year_built", "total_units", "units", "building_floors",
                        "management_company", "registered_manager", "laundry", "concession", "special", "lease_terms", "rent_regulation",
                        "income", "listing_warning", "building_type", "pet_limit", "pet_restrictions", "lease_term", "price_basis", "lease_and",
-                       "address_mismatch", "listing_address_mismatch", "address_note")
+                       "address_mismatch", "listing_address_mismatch", "address_note", "eligibility")
 
 
 # ---------------------------------------------------------------------- overnight street-parking rules (reviewed table)
@@ -754,7 +757,7 @@ def main():
             if b is None:
                 continue
             fl_ = r.fact.lower()
-            if fl_.startswith(("listing_last_modified", "listing_updated_at")) and re.match(r"20\d\d-\d\d-\d\d", r.value.strip()):
+            if fl_.startswith(("listing_last_modified", "listing_updated_at", "listing_page_last_modified")) and re.match(r"20\d\d-\d\d-\d\d", r.value.strip()):
                 mod_facts.setdefault(b, []).append((r.value.strip()[:10], r.source_url))
                 continue
             if fl_.startswith(("dog_weight", "pet_limit", "pet_restrictions", "dog_restrictions", "pet_policy", "dog_policy")) and parsers.dog_weight_unstated(f"{r.value} | {getattr(r, 'quote', '')}"):
@@ -1041,11 +1044,12 @@ def main():
     # listing_last_modified / listing_updated_at fact read on the same site as the unit's listing
     host = lambda u_: re.sub(r"^www\.", "", re.sub(r"^https?://([^/]+).*", r"\1", str(u_).strip().lower()))
     pm, pms, st_lvl, st_days, st_why = [], [], [], [], []
-    for b, url_, note, lc, ls, av, also, dup, called in zip(MU.building_id, MU.url, MU.live_notes, MU.live_checked_at, MU.last_seen, MU.available_date, MU.also_seen_at,
-                                                         MU.duplicate_listing_ids, MU.call_called_at):
+    for b, url_, note, lc, ls, av, also, dup, called, lst in zip(MU.building_id, MU.url, MU.live_notes, MU.live_checked_at, MU.last_seen, MU.available_date, MU.also_seen_at,
+                                                              MU.duplicate_listing_ids, MU.call_called_at, MU.live_status):
         d_, src_ = parsers.page_modified_date(note), "live-check note"
         read_on = str(lc)[:10] or str(ls)[:10]
-        if not d_:
+        # a unit the evidence pass saw live (often on the manager's own page) is not judged by the age of another site's page
+        if not d_ and lst not in ("live", "changed"):
             same = [d for d, u_ in mod_facts.get(b, []) if host(u_) and host(u_) == host(url_)]
             d_, src_, read_on = (max(same), "evidence fact (page data of the listing site)", str(ls)[:10] or str(lc)[:10]) if same else ("", "", read_on)
             if d_ and read_on < d_:

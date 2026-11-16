@@ -79,16 +79,31 @@ def month_known(s):
 
 OUTAGE = re.compile(r"out of (?:service|order)|broke|break|outage|not work|doesn.?t work|don.?t work|\bdown\b|stuck|inoperable|repair|fail|restore service|"
                     r"shut|trapped|unreliable|malfunction|out for|wasn.?t working|weren.?t working|not functioning", re.I)
+# An income-restricted TAG that only a listing site shows, where the checker read the manager's own page and found no income
+# limit, is not a finding that the unit is closed to her: it is one open "eligibility" fact (scripts/build_master.py reads the
+# evidence fact 'eligibility'; scripts/rank.py counts it). Batch 19: 111 Prospect St and 25 Third Street, Stamford.
+TAG_ONLY = re.compile(r"manager's (?:own )?page (?:does not say so|states no income limit)|states no income limit|gives no income limit", re.I)
+INCOME_WORDS = re.compile(r"income[- ]restricted|income limits", re.I)
 AGGREGATOR = re.compile(r"trulia|zumper|apartmentlist|zillow|apartments\.com|rent\.com", re.I)
 
 
 def main():
     L, C, I = cat("live_check"), cat("confirm"), cat("items")
+    F0 = cat("facts")
+    tag_only = {r.addr_key for r in L.itertuples() if TAG_ONLY.search(r.notes or "") and INCOME_WORDS.search(r.notes or "")} | \
+               ({r.addr_key for r in F0.itertuples() if TAG_ONLY.search(r.value or "") and INCOME_WORDS.search(r.value or "")} if len(F0) else set())
+    income_tag_only = lambda key, text: key in tag_only and not NOT_REAL.search(INCOME_WORDS.sub(" ", re.sub(r"income restricted", " ", text or "", flags=re.I)))
     ex = []
+    # addresses where the evidence pass saw a numbered unit live: there a "gone" row with no unit number is one floor-plan
+    # row that left the page, not the whole building (111 Prospect St, batch 19: the plan row is gone, #206, #306 and #511
+    # are on the manager's page). The plan row itself is dropped through its own live status in the master table.
+    live_named = {r.addr_key for r in L.itertuples() if r.status in ("live", "changed") and parsers.unit_label_key(r.unit)}
     for r in L.itertuples():
+        if r.status == "gone" and not parsers.unit_label_key(r.unit) and r.addr_key in live_named:
+            continue
         if r.status == "gone":
             ex.append((r.addr_key, r.unit, "listing gone at live check", r.listing_url))
-        elif NOT_REAL.search(r.notes or ""):
+        elif NOT_REAL.search(r.notes or "") and not income_tag_only(r.addr_key, r.notes):
             ex.append((r.addr_key, r.unit, "checker judged the listing not open-market, not genuine, stale or duplicate: " + r.notes[:160], r.listing_url))
     xwf = DATA / "reference" / "building_crosswalk.csv"
     XW = pd.read_csv(xwf, dtype=str).set_index("addr_key").building_id.to_dict() if xwf.exists() else {}
@@ -118,11 +133,15 @@ def main():
     F = cat("facts")
     for r in L.itertuples():
         m = INELIGIBLE.search(r.notes or "")
+        if m and INCOME_WORDS.fullmatch(m.group(0)) and r.addr_key in tag_only:
+            m = INELIGIBLE.search(INCOME_WORDS.sub(" ", r.notes))          # the tag alone does not exclude; anything else in the note still does
         if m:
             whole = bool(BUILDING_WIDE.search(m.group(0)))
             ex.append((r.addr_key, "" if whole else r.unit, "not open to her or not really available: " + _around(r.notes, m), r.listing_url))
     for r in F.itertuples():
         m = INELIGIBLE.search(r.value)                      # the checker's own statement, not a quoted page line
+        if m and INCOME_WORDS.fullmatch(m.group(0)) and r.addr_key in tag_only:
+            continue
         if m and BUILDING_WIDE.search(m.group(0)) and not re.search(r"market[- ]rate and|are not\b", r.value, re.I):
             ex.append((r.addr_key, "", "not open to her: " + _around(r.value, m), r.source_url))
     MU = pd.read_csv(DATA / "master_units.csv", dtype=str, keep_default_na=False, usecols=["addr_key", "unit"], low_memory=False)
