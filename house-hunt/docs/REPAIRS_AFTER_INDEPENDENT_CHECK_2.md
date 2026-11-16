@@ -8,7 +8,66 @@ The check's diagnosis was that evidence agents wrote their doubts in plain words
 phrases. Two things were done about it: a reviewed verdict table that a shown unit cannot do without, and a fix for each
 of the 21 defects at the cause the report names.
 
-## Final counts
+## Where it stands now (after the owner's three changes of 2026-11-16)
+
+The repairs were first finished under the strict rule in the brief ("every asterisk counts as an open fact"): 210 shown.
+The owner then changed three things, applied in this order. Each newly shown unit was read and given a verdict before
+it could be shown.
+
+| Stage | Rule | Ranked | Shown | Of them inside the old cap of 10 per neighborhood |
+|---|---|---|---|---|
+| A | Strict: every asterisk is an open fact; two or more is out; 10 per neighborhood | 621 | **210** | 210 |
+| B | **Disclosures do not count.** Lease term, cost near the cap, condo rented by its owner and net-effective rent are listed on the unit (`disclosures`) and never remove it. **The cap of 10 is lifted** (`SHOWN`), 2 per building kept, `more_in_building` recorded. New rule of mine: a building with no evidence rows at all cannot be shown (86 ranked units wait for that reason) | 740 | **260** | 250 |
+| C | **An unpublished floor does not count.** It is the disclosure and tour question "Floor not published: confirm it is above the ground floor". Still out: floor 1 or ground, a reading that the unit is probably or possibly on the ground floor, a verdict saying so | 855 | **326** | 304 |
+
+So the disclosure change is worth +40 at the old cap (210 → 250) and the lifted cap +10 more; the floor change is worth
++54 at the old cap (250 → 304) and +66 in all (260 → 326).
+
+**Final: 326 shown in 233 buildings, 107 neighborhoods (36 with three or more; the largest has 22).** 35 avoid cards, 26
+held, 28 waiting for a live check. Open gate facts that count now: elevator, dogs allowed, and whether the listing is
+real and available (availability, listing, eligibility); a missing live check is its own item as before; at most one in all.
+
+| | Count among the 326 shown |
+|---|---|
+| Nothing open | 208 |
+| One open item (asterisk) | 118: live check 42, listing (stale or doubtful) 27, dogs allowed 17, elevator 16, availability (floor-plan row) 14, eligibility 2 |
+| Disclosure: floor not published | 295 (163 read from the unit number, 132 unknown); 31 floors are confirmed or stated |
+| Disclosure: cost near the cap | 50 (of 63 shown units at $2,900 or more) |
+| Disclosure: lease term over 13 months | 39 |
+| Disclosure: net-effective rent | 26 |
+| Disclosure: condo rented by its owner | 4 |
+| No asterisk and no disclosure at all | 8 |
+
+| Year | CT | NJ | NY | Total |
+|---|---|---|---|---|
+| Little-City | 38 | 59 | 35 | 132 |
+| Room-to-Breathe | 24 | 44 | 8 | 76 |
+| Old-Neighborhood | 0 | 13 | 62 | 75 |
+| Fresh-Start | 11 | 16 | 0 | 27 |
+| Quiet-Street | 5 | 5 | 0 | 10 |
+| Walk-Everywhere | 0 | 0 | 6 | 6 |
+| **All** | **78** | **137** | **111** | **326** |
+
+**Verdicts now: 507** (remove 160, asterisk 83, ok 264); the 326 shown hold 252 ok and 74 asterisk. Review rounds in
+all: 4 under the strict rule (209, 11, 6, 0 units), the 23 seeded units, then 71, 1, 1 after stage B and 54, 9, 2 after
+stage C. 26 of my earlier removes rested on "a second thing, the floor" and were turned into single asterisks. 49
+removes are now for a unit number that reads as a first-floor unit under the building's own numbering (for example
+Kennedy Flats 2132, Steel Works 1127, Avalon Teaneck 003-163): most are siblings of units the checker had flagged.
+
+**Seven units the checker marked "must remove" are shown again, each with one asterisk**, because the checker's second
+reason was the floor and the floor no longer counts: The Grove Somerset 2205 and Spinnaker Wharf 5-02E (elevator in
+select buildings only), 99 Bridge 232 (elevator on a listing tag only), The District at 15Fifteen 1-219 and 1-234 (one of
+three communities is 55+), 25 West Broadway 204 and 7914 Rockaway Beach Blvd 2F (condo units, pets "case by case").
+That follows the new rule to the letter; the owner should look at these seven.
+
+A fault of mine found and repaired during stage C: `verdicts.py add` mis-read an empty field written "| |", so 79 remove
+rows had their reason stored in the wrong column (the removal itself worked; the reason shown was a row tag). The parser
+and the 79 rows are fixed. One more fix in stage C: a floor-plan row matched to a live check by its plan name no longer
+takes that check's price when the price belongs to another plan (3333 Broadway, Willett Point, Woodmere).
+
+The sections below describe stage A. The per-defect table still holds; its "after" counts are stage A counts.
+
+## Final counts under the strict rule (stage A)
 
 | | Before (run the check froze, 23:16 UTC) | Now |
 |---|---|---|
@@ -155,13 +214,16 @@ The page's script was syntax-checked with Node; it was **not** opened in a brows
 
 ## For the owner to decide
 
-1. **Lease term as an open item.** A unit whose only issue is "this price is for a 15-month lease" is shown with an
-   asterisk; with any second open item it is dropped (12 units went this way with "floor"). If a long lease is a known
-   condition, not a doubt, it should be a note beside the rent and not count toward "two things open".
-2. **Cost near the cap** counts the same way: 20 previously shown units were dropped for "floor + cost near the cap".
-3. **Staleness thresholds**: 60 days since the page changed, six months since the availability date. Stricter or looser?
+1. (Decided 2026-11-16: lease term and cost near the cap are disclosures.)
+2. **The seven "must remove" units that are back** (see the top of this file), and floor-plan rows in general: 14 rows with
+   no unit number are shown with the asterisk "availability" where the page shows units available; rows on a page with
+   0 units available are removed.
+3. **Staleness thresholds**: a page unchanged for more than 60 days, or an availability date more than six months old, is one open item; a page unchanged for more than six months is removed. Stricter or looser?
 4. **Condo units rented by their owner** are kept with an asterisk; two are shown (623 Avenue H 6C, 2781 Ocean Ave 6E).
 5. **"Weight restrictions apply", no number**: treated like "small dogs" (passes). Say if it should be an asterisk.
-6. **Elevator known only from a listing site's amenity list** (point 2 above): accept, or open it everywhere? Opening it
-   everywhere would put an elevator asterisk on 47 shown units in 33 buildings, and drop those that already carry
-   another asterisk.
+6. **Elevator known only from a listing site's amenity list** (point 2 above): accept, or open it everywhere? (The
+   count of 33 buildings and 47 units was taken at stage A; it is higher among the 326.)
+7. **Buildings the evidence pass never touched** (86 ranked units, many in Stamford): not shown, by a rule I added,
+   because there is nothing to read. They need an evidence batch, or a decision to show them on the harvester's facts.
+8. **First-floor readings by pattern**: I removed 49 units whose number reads as floor 1 under the building's numbering.
+   Where the pattern is my inference from sibling units (Halstead Parsippany, TGM Anchor Point), some may be upper floors.

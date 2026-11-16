@@ -118,3 +118,15 @@ unknown, whatever the unit label reads as.
 cost and the cap use the 12-month price. `all_in_unknown_count` and `cap_margin` are on every unit.
 
 **Selection order** is deterministic: neighborhood, dominated last, score, units seen live first, `listing_id`.
+
+**Owner's changes later on 2026-11-16 (these replace the "open items" paragraph above).**
+- Open gate facts that count toward "at most one": elevator; dogs allowed; whether the listing is real and available
+  (availability, listing, eligibility). A missing live check is still its own item; a shown unit has at most one in all.
+- Disclosures never count and never remove a unit: floor not published (unknown, or only read from the unit number: tour
+  question "Floor not published: confirm it is above the ground floor"), lease term over 13 months, cost near the cap,
+  condo rented by its owner, net-effective rent. They are listed per unit in `disclosures` (what, why, question) in
+  `ranked_units.csv` and `site/data.json`.
+- Still excluded on the floor: floor 1 or ground (confirmed, stated or read from the unit number), a checker's reading that
+  the unit is probably or possibly on the ground floor, and a reviewer's verdict saying so.
+- No cap of 10 per neighborhood: every showable, reviewed unit is shown in rank order, at most 2 per building, with
+  `more_in_building` on each. A building with no evidence rows at all is not shown.
