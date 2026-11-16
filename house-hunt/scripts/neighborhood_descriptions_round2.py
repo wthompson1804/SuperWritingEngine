@@ -74,18 +74,18 @@ WALL = re.compile(r"captcha|just a moment\.\.\.|cf-challenge|challenge-platform|
 # ---------------------------------------------------------------- neighborhoods and their articles
 JC = "https://en.wikipedia.org/wiki/Jersey_City,_New_Jersey"
 JC_HOODS = {  # id -> (name, [(title, about_area, scope)])
-    "nj:jersey-city-downtown": ("Jersey City: Downtown", [("Downtown Jersey City", "Downtown Jersey City", "exact")]),
-    "nj:jersey-city-journal-square": ("Jersey City: Journal Square", [("Journal Square", "Journal Square", "exact")]),
-    "nj:jersey-city-the-heights": ("Jersey City: The Heights",
+    "nj:jersey-city-downtown": ("Jersey City – Downtown", [("Downtown Jersey City", "Downtown Jersey City", "exact")]),
+    "nj:jersey-city-journal-square": ("Jersey City – Journal Square", [("Journal Square", "Journal Square", "exact")]),
+    "nj:jersey-city-the-heights": ("Jersey City – The Heights",
                                    [("The Heights, Jersey City", "The Heights", "exact")]),
-    "nj:jersey-city-bergen-lafayette": ("Jersey City: Bergen-Lafayette",
+    "nj:jersey-city-bergen-lafayette": ("Jersey City – Bergen-Lafayette",
                                         [("Bergen-Lafayette, Jersey City", "Bergen-Lafayette", "exact")]),
-    "nj:jersey-city-west-side": ("Jersey City: West Side", [("West Side, Jersey City", "West Side", "exact")]),
-    "nj:jersey-city-greenville": ("Jersey City: Greenville",
+    "nj:jersey-city-west-side": ("Jersey City – West Side", [("West Side, Jersey City", "West Side", "exact")]),
+    "nj:jersey-city-greenville": ("Jersey City – Greenville",
                                   [("Greenville, Jersey City", "Greenville", "exact")]),
-    "nj:jersey-city-mcginley-square": ("Jersey City: McGinley Square",
+    "nj:jersey-city-mcginley-square": ("Jersey City – McGinley Square",
                                        [("McGinley Square", "McGinley Square", "exact")]),
-    "nj:jersey-city-newport": ("Jersey City: Newport", [("Newport, Jersey City", "Newport", "exact")]),
+    "nj:jersey-city-newport": ("Jersey City – Newport", [("Newport, Jersey City", "Newport", "exact")]),
 }
 # Articles about a district, park or station INSIDE a neighborhood (scope = part: the quote is
 # about one part of the place, named in about_area). Only titles found in the dump are used.
@@ -135,7 +135,6 @@ EXTRA: dict[str, list[tuple[str, str, str]]] = {
     "nj:harrison": [("Harrison station (PATH)", "Harrison PATH station", "part")],
     "nj:new-brunswick": [("Downtown New Brunswick", "Downtown New Brunswick", "part")],
     "ny:white-plains": [("Downtown White Plains", "Downtown White Plains", "part")],
-    "ny:flushing-willets-point": [("Downtown Flushing", "Downtown Flushing", "part")],
     "ny:jamaica": [("Downtown Jamaica", "Downtown Jamaica", "part")],
     "ny:jamaica-hills-briarwood": [("Jamaica Hills", "Jamaica Hills", "exact")],
     "ny:patchogue": [("Patchogue, New York", "Patchogue", "exact")],
@@ -388,7 +387,9 @@ def clean_wikitext(w: str) -> str:
     paras = []
     for line in w.split("\n"):
         s = line.strip()
-        if not s or s.strip(MARK + " ") == "" or s[0] in "*#:;|!{}":
+        if s[:1] in "*#":  # a list item: kept as its own paragraph (quotable only if a whole sentence)
+            s = s.lstrip("*#: ").strip()
+        if not s or s.strip(MARK + " ") == "" or s[0] in ":;|!{}":
             continue
         paras.append(re.sub(r"[ \t]+", " ", s))
     return "\n".join(paras)
@@ -482,14 +483,18 @@ def stage_candidates() -> None:
     topn = int(os.environ.get("SHORTLIST_N", "12"))
     for hid, name in hoods.items():
         lines.append(f"\n### {hid} | {name}")
+        done = set()
         for title, about, scope in arts.get(hid, []):
             c = out.get(title, {})
+            if c.get("article") in done:
+                continue
+            done.add(c.get("article"))
             if c.get("missing"):
                 lines.append(f"## {title}: MISSING")
                 continue
             ok = [s for s in c["sentences"] if not s["flag"] and not s["skip_section"]]
-            if scope == "enclosing" and hid.startswith("nj:jersey-city-"):
-                key = name.split(": ")[1].replace("The ", "")
+            if scope == "enclosing" and hid in JC_HOODS:
+                key = JC_HOODS[hid][0].split(" – ")[1].replace("The ", "")
                 ok = [s for s in ok if key.lower() in s["text"].lower()]
             ok.sort(key=lambda s: -s["score"])
             n = topn if scope == "exact" else max(4, topn // 2)

@@ -2,9 +2,15 @@
 
 Read-only on every existing file. Writes only data/evidence_pending/* (and raw/ caches through lib.cached_get).
 
-  python3 scripts/resolve_pending_thin_years.py select   -> data/evidence_pending/candidates.csv, candidate_buildings.csv, funnel.json
-  python3 scripts/resolve_pending_thin_years.py fetch    -> fetches pages for the selected buildings (resumable)
-  python3 scripts/resolve_pending_thin_years.py write    -> the batch-18 files and resolved_candidates.csv
+Run in this order (each step is resumable; a URL already in fetch_log.jsonl is never requested twice):
+  select        candidates.csv, candidate_buildings.csv, funnel.json (hood = pipeline method, see hood_lookup)
+  fetch         re-read each candidate's own listing page (Apartment List, Zumper, management sites; never Trulia)
+  sites         building_sites.csv: each building's own website and how many of its units already pass
+  crawl-sites   robots.txt, home page and up to four amenity / pet / FAQ / floor-plan pages of each own site
+  secondary     secondary_urls.csv: Zumper address pages and guessed Apartment List pages for buildings not yet on them
+  fetch-urls F  fetch the URLs in F (the file written by `secondary`)
+  write         confirm/facts/live_check/items _batch_18.csv, resolved_candidates.csv, open_questions_by_building.csv,
+                summary.json (all under data/evidence_pending/, NOT data/evidence/, which the repair agent reads)
 
 HARD RULE (persisted): one refusal (401/403/429, CAPTCHA, bot wall) from a host ends every request to that host,
 also after a restart: data/evidence_pending/refused_hosts.json. trulia.com is pre-refused (blocking us since Nov 15).
@@ -430,6 +436,33 @@ def crawl_sites(max_links: int = 4):
             f.write(json.dumps({"bkey": b.bkey, "name": b.name, "pages": pages}) + "\n")
         print(b.name[:40], [(str(p["status"]), p["url"][-50:]) for p in pages][:5], flush=True)
     print("refused hosts:", refused())
+
+
+def secondary():
+    """Cross-aggregator lookups for buildings still missing elevator or dog facts: the Zumper address page when we hold
+    no Zumper row for the building, and a guessed Apartment List property page for named communities."""
+    L = pd.read_csv(DATA / "listings.csv", dtype=str, keep_default_na=False)
+    L["bkey"] = L.apply(building_key, axis=1)
+    nk = lambda x: re.sub(r"[^a-z0-9]", "", str(x).lower())
+    L["nkey"] = L.building_name.map(nk) + "|" + L.zip5
+    C = pd.read_csv(OUT / "candidates.csv", dtype=str, keep_default_na=False)
+    C["nkey"] = C.building_name.map(nk) + "|" + C.zip5
+    rows = []
+    for bk, g in C.groupby("bkey", sort=False):
+        if not set(";".join(g.pending_reasons).split(";")) & {"elevator", "dog"}:
+            continue
+        srcs = set(L[(L.bkey == bk) | L.nkey.isin(set(g.nkey[g.building_name != ""]))].source_site)
+        r = g.iloc[0]
+        m = re.match(r"^(.*?),\s*[^,]+,\s*[A-Z]{2}\s*\d{5}", r.address)
+        addr = m.group(1) if m else r.address
+        if "zumper" not in srcs and re.match(r"^\d", addr):
+            rows.append(dict(url=zumper_address_url(addr, r.city, r.state, r.zip5), why="zumper address page|" + bk))
+        if "apartmentlist.com" not in srcs and r.building_name and not re.match(r"^\d", r.building_name) and "LLC" not in r.building_name:
+            slug = re.sub(r"[^a-z0-9]+", "-", r.building_name.lower().replace("&", "and")).strip("-")
+            city = re.sub(r"[^a-z0-9]+", "-", r.city.lower()).strip("-")
+            rows.append(dict(url=f"https://www.apartmentlist.com/{r.state.lower()}/{city}/{slug}", why="apartment list guess|" + bk))
+    pd.DataFrame(rows).drop_duplicates("url").to_csv(OUT / "secondary_urls.csv", index=False)
+    print(len(rows), "secondary urls")
 
 
 # ---------------------------------------------------------------- evidence -> verdicts
@@ -866,6 +899,8 @@ if __name__ == "__main__":
         fetch_primary()
     elif cmd == "fetch-urls":
         fetch_urls(sys.argv[2])
+    elif cmd == "secondary":
+        secondary()
     elif cmd == "write":
         write()
     elif cmd == "sites":
