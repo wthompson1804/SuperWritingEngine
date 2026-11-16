@@ -8,16 +8,22 @@
     "topic": "food and nightlife"
    },
    {
-    "title": "Mill River Park",
-    "quote": "The park, which separates Downtown from the West Side, features a restored section of the Mill River, extensive landscaping, and various recreational amenities.",
+    "web_url": "https://ctvisit.com/listings/city-stamford",
+    "quote": "Whether you're strolling along the 19 miles of shoreline, dining and drinking at the bars Downtown, or hiking the scenic trails of North Stamford, you'll quickly discover that there's never a dull moment.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Stamford",
+    "scope": "exact",
     "character": 3,
-    "topic": "parks"
+    "topic": "food and nightlife"
    },
    {
-    "title": "Harbor Point (Stamford)",
-    "quote": "The development also includes office buildings, restaurants, parks, and a boardwalk.",
-    "character": 2,
-    "topic": "waterfront"
+    "web_url": "https://ctvisit.com/listings/city-stamford",
+    "quote": "Mill River Park, often referred to as a mini Central Park, lies in the heart of Downtown Stamford, hosting various events throughout the year in its beautifully landscaped space.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Stamford",
+    "scope": "exact",
+    "character": 3,
+    "topic": "parks"
    }
   ],
   "landmarks": []
@@ -54,15 +60,21 @@
     "topic": "event"
    },
    {
-    "title": "Norwalk, Connecticut",
-    "quote": "Being a coastal city, Norwalk is home to a great many water sports, including competitive swimming, recreational boating and fishing, sailing, windsurfing, and kayaking.",
+    "web_url": "https://ctvisit.com/listings/city-norwalk",
+    "quote": "South Norwalk, known as SoNo, is a unique destination offering a variety of shopping opportunities, restaurants, and vibrant nightlife.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Norwalk",
+    "scope": "exact",
     "character": 3,
-    "topic": "waterfront"
+    "topic": "food and nightlife"
    },
    {
-    "title": "Norwalk, Connecticut",
-    "quote": "Norwalk's topography is dominated by its coastline along Long Island Sound, the Norwalk River and its eastern and western banks, and the Norwalk Islands.",
-    "character": 2,
+    "web_url": "https://ctvisit.com/listings/city-norwalk",
+    "quote": "The Norwalk shoreline offers access to some of Connecticut’s best boating, public beaches, lighthouses, protected islands, and marinas—making it a true coastal haven with both culture and class.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Norwalk",
+    "scope": "exact",
+    "character": 3,
     "topic": "waterfront"
    }
   ],
@@ -78,15 +90,18 @@
    },
    {
     "title": "Bayonne, New Jersey",
-    "quote": "Hackensack RiverWalk begins at Collins Park in Bergen Point where the Kill Van Kull meets the Newark Bay.",
-    "character": 2,
-    "topic": "waterfront"
-   },
-   {
-    "title": "Bayonne, New Jersey",
     "quote": "The Hudson-Bergen Light Rail has four stops in Bayonne, all originally station locations of the former Central Railroad of New Jersey (CNJ).",
     "character": 2,
     "topic": "transit"
+   },
+   {
+    "web_url": "https://www.visithudson.org/neighborhoods/bayonne/",
+    "quote": "Richard A. Rutkowski Park is filled with great fishing holes, not to mention a quarter-mile long wooden pathway to enjoy the water vistas.",
+    "source_name": "Visit Hudson (Hudson County Office of Cultural and Heritage Affairs/Tourism Development)",
+    "about_area": "Bayonne",
+    "scope": "exact",
+    "character": 3,
+    "topic": "waterfront"
    }
   ],
   "landmarks": []
@@ -101,15 +116,18 @@
    },
    {
     "title": "Hackensack, New Jersey",
-    "quote": "Areas considered suburban single-family residential neighborhoods account for about one-third of the city's area, mostly along its western side.",
-    "character": 2,
-    "topic": "housing feel"
-   },
-   {
-    "title": "Hackensack, New Jersey",
     "quote": "Anderson Street station serves central Hackensack while Essex Street station serves southern portions of the city.",
     "character": 2,
     "topic": "transit"
+   },
+   {
+    "web_url": "https://www.hackensack.org/news/main-street-revitalization-continues-with-new-residential-developments-restaurants-and-shops-now-open/",
+    "quote": "The Hackensack Performing Arts Center showcases theater, music, and visual arts, bringing artists and neighbors together through performances, exhibits, and community events.",
+    "source_name": "City of Hackensack",
+    "about_area": "Hackensack",
+    "scope": "exact",
+    "character": 3,
+    "topic": "landmark"
    }
   ],
   "landmarks": []
@@ -152,10 +170,13 @@
     "topic": "landmark"
    },
    {
-    "title": "Getty Square",
-    "quote": "Van der Donck Park was the first phase of daylighting the river in Getty Square.",
-    "character": 2,
-    "topic": "parks"
+    "web_url": "https://www.visitwestchesterny.com/about-westchester/communities-local-flair/southern-westchester/yonkers/",
+    "quote": "During the summer months, weekly live outdoor concerts at locations across the city are always a great way to spend the evening.",
+    "source_name": "Visit Westchester (Westchester County Tourism & Film)",
+    "about_area": "Yonkers",
+    "scope": "exact",
+    "character": 3,
+    "topic": "event"
    }
   ],
   "landmarks": []
@@ -164,14 +185,26 @@
   "quotes": [
    {
     "title": "Danbury, Connecticut",
-    "quote": "The city is located in the foothills of the Berkshire Mountains on low-lying land just south of Candlewood Lake (the City includes the southern parts of the lake).",
+    "quote": "The Ives Trail is a 20-mile stretch of trail that runs from Bennett's Pond in Ridgefield through Danbury to Redding.",
     "character": 2,
     "topic": "parks"
    },
    {
-    "title": "Danbury, Connecticut",
-    "quote": "The Ives Trail is a 20-mile stretch of trail that runs from Bennett's Pond in Ridgefield through Danbury to Redding.",
-    "character": 2,
+    "web_url": "https://ctvisit.com/listings/city-danbury",
+    "quote": "Downtown, visitors will find unique dining, day spas, and boutique shops, creating a vibrant scene.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Danbury",
+    "scope": "exact",
+    "character": 3,
+    "topic": "main street"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/city-danbury",
+    "quote": "For a break from city life, Danbury offers over a dozen parks and hiking trails, plus the beautiful Candlewood Lake, ideal for fishing, boating, and swimming.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Danbury",
+    "scope": "exact",
+    "character": 3,
     "topic": "parks"
    }
   ],
@@ -186,28 +219,28 @@
     "topic": "waterfront"
    },
    {
-    "title": "Walnut Beach",
-    "quote": "A boardwalk along the shoreline connects to the beach at Silver Sands State Park to the east and Charles Island.",
+    "web_url": "https://ctvisit.com/listings/city-milford",
+    "quote": "The meticulously maintained town green, the second longest in New England, features memorials that salute those who have served in past conflicts dating back centuries.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Milford",
+    "scope": "exact",
     "character": 3,
-    "topic": "waterfront"
+    "topic": "main street"
    },
    {
-    "title": "Milford, Connecticut",
-    "quote": "The Metro-North New Haven Line has a station stop in downtown Milford (Milford station) with direct service to New York City.",
+    "web_url": "https://ctvisit.com/listings/city-milford",
+    "quote": "Don’t forget to hit one of over 20 downtown restaurants.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Milford",
+    "scope": "exact",
     "character": 2,
-    "topic": "transit"
+    "topic": "food and nightlife"
    }
   ],
   "landmarks": []
  },
  "nj:harrison": {
   "quotes": [
-   {
-    "title": "Harrison, New Jersey",
-    "quote": "Once considered \"the beehive of industry\", the town is undergoing a residential and economic renewal, particularly along the Passaic River.",
-    "character": 2,
-    "topic": "housing feel"
-   },
    {
     "title": "Harrison, New Jersey",
     "quote": "The Harrison station on the PATH rapid transit system offers service to Newark, Jersey City, Hoboken and New York City.",
@@ -219,6 +252,15 @@
     "quote": "The stadium sits alongside the Passaic River with a view of the New York and Newark skyline, and is accessible via public transportation at the PATH train station in Harrison.",
     "character": 3,
     "topic": "landmark"
+   },
+   {
+    "web_url": "https://www.visithudson.org/neighborhoods/harrison/",
+    "quote": "And, for nature enthusiasts, the charming West Hudson Park, which offers everything from athletic facilities to walking trails and a fishing lake, is right on the Harrison-Kearny border.",
+    "source_name": "Visit Hudson (Hudson County Office of Cultural and Heritage Affairs/Tourism Development)",
+    "about_area": "West Hudson Park, on the Harrison-Kearny border",
+    "scope": "part",
+    "character": 3,
+    "topic": "parks"
    }
   ],
   "landmarks": []
@@ -276,6 +318,24 @@
     "quote": "The Orange and Highland Avenue stations provide NJ Transit train service along the Morris & Essex Lines (formerly Erie Lackawanna Railway).",
     "character": 1,
     "topic": "transit"
+   },
+   {
+    "web_url": "https://www.essexcountyparks.org/parks/monte-irvin-orange-park",
+    "quote": "The park hosts a variety of free concerts annually each summer and is one of the original Olmsted designed landscapes in the Essex County Park System.",
+    "source_name": "Essex County Parks (Essex County, New Jersey)",
+    "about_area": "Monte Irvin Orange Park",
+    "scope": "part",
+    "character": 3,
+    "topic": "parks"
+   },
+   {
+    "web_url": "https://www.essexcountyparks.org/parks/monte-irvin-orange-park",
+    "quote": "Monte Irvin Orange Park serves the City of Orange with athletic fields, walking paths, and a playground.",
+    "source_name": "Essex County Parks (Essex County, New Jersey)",
+    "about_area": "Monte Irvin Orange Park",
+    "scope": "part",
+    "character": 2,
+    "topic": "parks"
    }
   ],
   "landmarks": []
@@ -344,6 +404,24 @@
     "quote": "Downtown Flushing is a major commercial and retail area, with the intersection of Main Street and Roosevelt Avenue at its core being the third-busiest in New York City, behind Times Square and Herald Square.",
     "character": 3,
     "topic": "main street"
+   },
+   {
+    "web_url": "https://www.nyctourism.com/new-york/queens/flushing/",
+    "quote": "The neighborhood is quite lush, too; it’s home to the borough’s botanical garden and one of NYC’s largest green spaces, Flushing Meadows Corona Park.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Flushing",
+    "scope": "exact",
+    "character": 3,
+    "topic": "parks"
+   },
+   {
+    "web_url": "https://www.nyctourism.com/new-york/queens/flushing/",
+    "quote": "That park itself holds multiple attractions, including sports venues, museums, playgrounds, a golf course and multiple reminders of the World’s Fairs that were held here.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Flushing Meadows Corona Park",
+    "scope": "part",
+    "character": 3,
+    "topic": "landmark"
    }
   ],
   "landmarks": []
@@ -384,6 +462,15 @@
     "quote": "Jamaica station is a central transfer point on the LIRR which is headquartered in a building adjoining the station.",
     "character": 2,
     "topic": "transit"
+   },
+   {
+    "web_url": "https://www.nyctourism.com/new-york/queens/jamaica/",
+    "quote": "The neighborhood also features the 200-year-old King Manor Museum, a National Historic Landmark and the former home of Rufus King, a New York senator and signer of the Constitution.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Jamaica",
+    "scope": "exact",
+    "character": 3,
+    "topic": "landmark"
    }
   ],
   "landmarks": []
@@ -397,11 +484,22 @@
     "topic": "transit"
    },
    {
-    "title": "White Plains, New York",
-    "quote": "The White Plains Farmers' Market operates year-round in the city, setting up Downtown at 255 Main Street from May to November, and in the Westchester County Center the rest of the year.",
-    "character": 2,
-    "topic": "event",
-    "force": true
+    "web_url": "https://www.visitwestchesterny.com/discover/communities/mid-county/",
+    "quote": "It boasts a vibrant nightlife, unique dining experiences and hotels for a broad range of tastes and budgets.",
+    "source_name": "Visit Westchester (Westchester County Tourism & Film)",
+    "about_area": "Mid-county Westchester, centred on White Plains",
+    "scope": "enclosing",
+    "character": 3,
+    "topic": "food and nightlife"
+   },
+   {
+    "web_url": "https://www.visitwestchesterny.com/about-westchester/communities-local-flair/mid-county/white-plains/",
+    "quote": "Every year, from May to September, more than 60,000 participants bike, walk, or jog the Bronx River Parkway starting at the Westchester County Center in White Plains.",
+    "source_name": "Visit Westchester (Westchester County Tourism & Film)",
+    "about_area": "White Plains",
+    "scope": "exact",
+    "character": 3,
+    "topic": "event"
    }
   ],
   "landmarks": []
@@ -421,10 +519,13 @@
     "topic": "main street"
    },
    {
-    "title": "Bloomfield, New Jersey",
-    "quote": "It is the location of the Bloomfield Green Historic District, which was added to the National Register of Historic Places in 1978.",
+    "web_url": "https://www.essexcountyparks.org/parks/brookdale-park",
+    "quote": "Brookdale Park offers the public access to both passive and active recreational activities as well as picturesque vistas.",
+    "source_name": "Essex County Parks (Essex County, New Jersey)",
+    "about_area": "Brookdale Park (in Bloomfield and Montclair)",
+    "scope": "part",
     "character": 2,
-    "topic": "landmark"
+    "topic": "parks"
    }
   ],
   "landmarks": []
@@ -524,21 +625,27 @@
   "quotes": [
    {
     "title": "Westport, Connecticut",
-    "quote": "There has been recent growth in the downtown area, including Levitt Pavilion, and Bedford square, a mixed-use development incorporating the Bedford Mansion.",
-    "character": 2,
-    "topic": "main street"
-   },
-   {
-    "title": "Westport, Connecticut",
-    "quote": "Compo Beach and Burying Hill Beach are municipal beaches that are open to out-of-town visitors in the summer for a fee.",
-    "character": 2,
-    "topic": "waterfront"
-   },
-   {
-    "title": "Westport, Connecticut",
     "quote": "Westport has two train stations, Green's Farms and Westport on the Metro-North Railroad's New Haven Line, which serves Stamford and Grand Central Terminal in New York City or New Haven Union Station.",
     "character": 2,
     "topic": "transit"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/town-westport",
+    "quote": "Stroll along walkable streets lined with high-end shops, then pop into a cozy restaurant for a bite.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Westport",
+    "scope": "exact",
+    "character": 3,
+    "topic": "main street"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/town-westport",
+    "quote": "Spend a day unwinding on a sandy beach, or explore MoCA Westport for contemporary art, catch a show at the Levitt Pavilion, or enjoy a performance at the Westport Country Playhouse.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Westport",
+    "scope": "exact",
+    "character": 3,
+    "topic": "landmark"
    }
   ],
   "landmarks": []
@@ -646,6 +753,15 @@
     "quote": "The Capitol Theatre is a historic theater located in the village of Port Chester, Westchester County, New York.",
     "character": 2,
     "topic": "landmark"
+   },
+   {
+    "web_url": "https://www.visitwestchesterny.com/about-westchester/communities-local-flair/sound-shore/port-chester/",
+    "quote": "Port Chester has six parks for general recreation, including picnicking and sports.",
+    "source_name": "Visit Westchester (Westchester County Tourism & Film)",
+    "about_area": "Port Chester",
+    "scope": "exact",
+    "character": 2,
+    "topic": "parks"
    }
   ],
   "landmarks": []
@@ -688,12 +804,6 @@
   "quotes": [
    {
     "title": "Beacon Falls, Connecticut",
-    "quote": "It lies in the southwestern part of the state, and is bisected by the Naugatuck River.",
-    "character": 1,
-    "topic": "waterfront"
-   },
-   {
-    "title": "Beacon Falls, Connecticut",
     "quote": "The Beacon Falls train station provides commuter rail service to Bridgeport, Stamford, and Grand Central Terminal in New York City via the Waterbury Branch on the Metro-North Railroad's New Haven Line.",
     "character": 2,
     "topic": "transit"
@@ -703,6 +813,15 @@
     "quote": "The history of Beacon Falls is tied to the series of manufacturing concerns that operated in the town's impressive brick factory buildings on North Main Street, adjacent to the Naugatuck River.",
     "character": 2,
     "topic": "history"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/town-beacon-falls",
+    "quote": "It is a great community for those interested in passive recreation, canoeing, kayaking, and fishing with the only recognized official access to the Naugatuck River in several locations.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Beacon Falls",
+    "scope": "exact",
+    "character": 3,
+    "topic": "waterfront"
    }
   ],
   "landmarks": []
@@ -714,6 +833,15 @@
     "quote": "Brookfield Town Center (known to locals as \"Four Corners\") is the downtown shopping district of Brookfield.",
     "character": 2,
     "topic": "main street"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/town-brookfield",
+    "quote": "The town is bordered by Connecticut’s two largest lakes, Candlewood Lake to the west and Lake Lillinonah to the east.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Brookfield",
+    "scope": "exact",
+    "character": 3,
+    "topic": "waterfront"
    }
   ],
   "landmarks": []
@@ -733,10 +861,13 @@
     "topic": "event"
    },
    {
-    "title": "Fairfield, Connecticut",
-    "quote": "The Fairfield Theater Company operates an auditorium located near the downtown Fairfield train station.",
-    "character": 2,
-    "topic": "landmark"
+    "web_url": "https://ctvisit.com/listings/town-fairfield",
+    "quote": "Its historic downtown offers a range of activities, from shopping at locally owned boutiques and national retail stores to enjoying weekly outdoor concerts on the Green and a night out at the theater.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Fairfield",
+    "scope": "exact",
+    "character": 3,
+    "topic": "main street"
    }
   ],
   "landmarks": []
@@ -750,16 +881,22 @@
     "topic": "parks"
    },
    {
-    "title": "Hamden, Connecticut",
-    "quote": "Hamden Town Center Park hosts fireworks, free concerts, outdoor movies, and other seasonal festivals.",
-    "character": 2,
-    "topic": "event"
+    "web_url": "https://ctvisit.com/listings/town-hamden",
+    "quote": "Sleeping Giant State Park, with its landscape rich in hills and walking trails, leads visitors on a 1.5-mile hike to the stone observation tower, which overlooks Long Island Sound and the New Haven area.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Hamden",
+    "scope": "exact",
+    "character": 3,
+    "topic": "parks"
    },
    {
-    "title": "Hamden, Connecticut",
-    "quote": "Two blue-blazed hiking trails, the Quinnipiac Trail and the Regicides Trail, also run through the town.",
+    "web_url": "https://ctvisit.com/listings/town-hamden",
+    "quote": "Hamden also offers a variety of shops, restaurants, museums, and gardens to suit every interest.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Hamden",
+    "scope": "exact",
     "character": 2,
-    "topic": "parks"
+    "topic": "main street"
    }
   ],
   "landmarks": []
@@ -773,10 +910,22 @@
     "topic": "transit"
    },
    {
-    "title": "Seymour, Connecticut",
-    "quote": "One day in the month of October is \"Seymour Pink Day\" where the whole town unites and wears pink in hopes of raising money.",
-    "character": 2,
-    "topic": "event"
+    "web_url": "https://ctvisit.com/listings/town-seymour",
+    "quote": "The quaint, walkable historic downtown district offers world-class antiquing, charming boutiques, and scenic riverfront vistas.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Seymour",
+    "scope": "exact",
+    "character": 3,
+    "topic": "main street"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/town-seymour",
+    "quote": "This charming town, with remnants of 19th-century river-powered industry, still features small family farms dotting the hillsides.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Seymour",
+    "scope": "exact",
+    "character": 3,
+    "topic": "housing feel"
    }
   ],
   "landmarks": []
@@ -794,6 +943,15 @@
     "quote": "The forest includes campsites with cooking pits, picnic tables, and walking trails.",
     "character": 2,
     "topic": "parks"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/town-stratford",
+    "quote": "Located along Long Island Sound and bordered by the Housatonic River to the east, Stratford boasts 18 miles of stunning coastline, two public beaches, five marinas, multiple fishing piers, and two public boat launches.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Stratford",
+    "scope": "exact",
+    "character": 3,
+    "topic": "waterfront"
    }
   ],
   "landmarks": []
@@ -805,6 +963,24 @@
     "quote": "The Trumbull Nature & Arts Center is located at 7115 Main Street and coordinate trips for fishing, butterfly searches, gardening, outdoor photography and other nature related activities.",
     "character": 2,
     "topic": "parks"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/town-trumbull",
+    "quote": "With over 1,400 acres of beautiful parks, Trumbull invites you to explore — from the fascinating mineral history of Old Mine Park to the scenic Pequonnock River Trail, perfect for a countryside bike ride.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Trumbull",
+    "scope": "exact",
+    "character": 3,
+    "topic": "parks"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/town-trumbull",
+    "quote": "Just a quick 5-mile drive from Long Island Sound, you’re minutes from beaches and seaside dining.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Trumbull",
+    "scope": "exact",
+    "character": 2,
+    "topic": "waterfront"
    }
   ],
   "landmarks": []
@@ -822,6 +998,15 @@
     "quote": "The Silver Lake station provides service to Newark Penn Station on the Newark Light Rail.",
     "character": 2,
     "topic": "transit"
+   },
+   {
+    "web_url": "https://www.essexcountyparks.org/parks/branch-brook-park",
+    "quote": "The New Jersey Symphony Orchestra performs an annual concert under the stars in Branch Brook Park.",
+    "source_name": "Essex County Parks (Essex County, New Jersey)",
+    "about_area": "Branch Brook Park (in Newark and Belleville)",
+    "scope": "part",
+    "character": 3,
+    "topic": "event"
    }
   ],
   "landmarks": []
@@ -1075,15 +1260,18 @@
    },
    {
     "title": "Weehawken, New Jersey",
-    "quote": "Situated on the western shore of the Hudson River, along the southern end of the New Jersey Palisades across from Midtown Manhattan, it is the western terminus of the Lincoln Tunnel.",
-    "character": 3,
-    "topic": "waterfront"
-   },
-   {
-    "title": "Weehawken, New Jersey",
     "quote": "Public transportation in Weehawken is provided by bus, ferry, and light rail.",
     "character": 2,
     "topic": "transit"
+   },
+   {
+    "web_url": "https://www.visithudson.org/neighborhoods/weehawken/",
+    "quote": "From the waterfront walkway to the clifftop Palisades vantage point, Weehawken is full of scenery and serenity.",
+    "source_name": "Visit Hudson (Hudson County Office of Cultural and Heritage Affairs/Tourism Development)",
+    "about_area": "Weehawken",
+    "scope": "exact",
+    "character": 3,
+    "topic": "waterfront"
    }
   ],
   "landmarks": []
@@ -1220,6 +1408,24 @@
     "quote": "Among the parks serving Oxford residents are Southford Falls State Park in the northern section of town, Jackson Cove Beach, and Kirks Pond in the center of town.",
     "character": 2,
     "topic": "parks"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/town-oxford",
+    "quote": "Oxford also features two breweries, museums, unique shops, and delightful dining options for visitors and residents to explore.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Oxford",
+    "scope": "exact",
+    "character": 3,
+    "topic": "food and nightlife"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/town-oxford",
+    "quote": "This rural town is rich with history and New England character.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Oxford",
+    "scope": "exact",
+    "character": 2,
+    "topic": "housing feel"
    }
   ],
   "landmarks": []
@@ -1533,6 +1739,15 @@
     "quote": "Astoria's film production heritage is preserved today by the Museum of the Moving Image and continued by Kaufman Astoria Studios.",
     "character": 3,
     "topic": "landmark"
+   },
+   {
+    "web_url": "https://www.nyctourism.com/new-york/queens/astoria/",
+    "quote": "Savor Astoria’s international flavors, explore its lively streets and uncover trendy shops.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Astoria",
+    "scope": "enclosing",
+    "character": 3,
+    "topic": "food and nightlife"
    }
   ],
   "landmarks": []
@@ -1575,10 +1790,13 @@
     "topic": "main street"
    },
    {
-    "title": "Bedford–Stuyvesant, Brooklyn",
-    "quote": "Bedford–Stuyvesant is also served by the Nostrand Avenue station of the Long Island Rail Road.",
-    "character": 2,
-    "topic": "transit"
+    "web_url": "https://www.nyctourism.com/new-york/brooklyn/bedford-stuyvesant/",
+    "quote": "Dive into Bed-Stuy nightlife with intimate jazz shows, local bars and, yes, monthly turtle races.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Bedford-Stuyvesant",
+    "scope": "enclosing",
+    "character": 3,
+    "topic": "food and nightlife"
    }
   ],
   "landmarks": []
@@ -1598,10 +1816,13 @@
     "topic": "main street"
    },
    {
-    "title": "Bedford–Stuyvesant, Brooklyn",
-    "quote": "Bedford–Stuyvesant is also served by the Nostrand Avenue station of the Long Island Rail Road.",
-    "character": 2,
-    "topic": "transit"
+    "web_url": "https://www.nyctourism.com/new-york/brooklyn/bedford-stuyvesant/",
+    "quote": "Dive into Bed-Stuy nightlife with intimate jazz shows, local bars and, yes, monthly turtle races.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Bedford-Stuyvesant",
+    "scope": "enclosing",
+    "character": 3,
+    "topic": "food and nightlife"
    }
   ],
   "landmarks": []
@@ -1613,6 +1834,15 @@
     "quote": "Metro-North Railroad has a commuter rail station at Harlem–125th Street, serving trains to the Lower Hudson Valley and Connecticut.",
     "character": 2,
     "topic": "transit"
+   },
+   {
+    "web_url": "https://www.nyctourism.com/new-york/manhattan/east-harlem/",
+    "quote": "Numerous parks and works of public art add to the allure.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "East Harlem",
+    "scope": "enclosing",
+    "character": 2,
+    "topic": "parks"
    }
   ],
   "landmarks": []
@@ -1968,6 +2198,15 @@
     "quote": "Sunnyside Gardens Park is one of only two private residential parks in New York City, alongside Manhattan's Gramercy Park.",
     "character": 2,
     "topic": "parks"
+   },
+   {
+    "web_url": "https://www.nyctourism.com/new-york/queens/sunnyside/",
+    "quote": "Find an array of international cuisines plus classic spots for drinks and live music in Sunnyside.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Sunnyside",
+    "scope": "exact",
+    "character": 3,
+    "topic": "food and nightlife"
    }
   ],
   "landmarks": []
@@ -1998,16 +2237,28 @@
  "ny:upper-west-side-manhattan-valley": {
   "quotes": [
    {
-    "title": "Upper West Side",
-    "quote": "It is bounded by Central Park on the east, the Hudson River on the west, West 59th Street to the south, and West 110th Street to the north.",
-    "character": 2,
-    "topic": "parks"
-   },
-   {
     "title": "Manhattan Valley",
     "quote": "The area from W. 100th to W. 97th Streets between Central Park West and Amsterdam Avenue consists of Park West Village, a \"towers in a park\" housing development.",
     "character": 2,
     "topic": "housing feel"
+   },
+   {
+    "web_url": "https://www.nyctourism.com/new-york/manhattan/upper-west-side/",
+    "quote": "Bordered by Central Park and Riverside Park and lined with residential buildings that look ever-so-familiar from movies and TV, the Upper West Side is made for a stroll through pop-culture history—and history in general.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Upper West Side",
+    "scope": "exact",
+    "character": 3,
+    "topic": "housing feel"
+   },
+   {
+    "web_url": "https://www.nyctourism.com/new-york/manhattan/upper-west-side/",
+    "quote": "Lincoln Center performances and the American Museum of Natural History are just a few of its draws.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Upper West Side",
+    "scope": "exact",
+    "character": 3,
+    "topic": "landmark"
    }
   ],
   "landmarks": []
@@ -2056,21 +2307,27 @@
   "quotes": [
    {
     "title": "West Haven, Connecticut",
-    "quote": "At the eastern end, West Haven extends into New Haven Harbor at Sandy Point, a beach and bird sanctuary.",
-    "character": 3,
-    "topic": "waterfront"
-   },
-   {
-    "title": "West Haven, Connecticut",
     "quote": "The station provides full service on Metro-North into New York City, and has 660 parking spaces on-site.",
     "character": 2,
     "topic": "transit"
    },
    {
-    "title": "West Haven, Connecticut",
-    "quote": "The Savin Rock section of West Haven was the site of the Savin Rock Amusement Park, which began in the late 19th century as a regionally renowned seaside resort.",
-    "character": 2,
+    "web_url": "https://ctvisit.com/listings/city-west-haven",
+    "quote": "Once the site of Connecticut’s “Coney Island” at the former Savin Rock Amusement Park, West Haven has fun at its heart.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "West Haven",
+    "scope": "exact",
+    "character": 3,
     "topic": "history"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/city-west-haven",
+    "quote": "With the longest publicly accessible shoreline in Connecticut, including the Sandy Point Bird Sanctuary, West Haven is also a leader in coastal resiliency.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "West Haven",
+    "scope": "exact",
+    "character": 3,
+    "topic": "waterfront"
    }
   ],
   "landmarks": []
@@ -2113,8 +2370,11 @@
     "topic": "food and nightlife"
    },
    {
-    "title": "Liberty State Park",
-    "quote": "Liberty Walkway, a crescent-shaped promenade, stretches from the CRRNJ Terminal along the waterfront south to the Statue of Liberty overlook, bridging two coves along the way.",
+    "web_url": "https://www.visithudson.org/things-to-do/attractions/",
+    "quote": "At the heart of it all is Liberty State Park, a 1,212-acre waterfront oasis featuring unparalleled views of the Manhattan skyline, the Statue of Liberty, and Ellis Island.",
+    "source_name": "Visit Hudson (Hudson County Office of Cultural and Heritage Affairs/Tourism Development)",
+    "about_area": "Liberty State Park",
+    "scope": "part",
     "character": 3,
     "topic": "waterfront"
    }
@@ -2170,16 +2430,19 @@
     "topic": "food and nightlife"
    },
    {
-    "title": "Jersey City, New Jersey",
-    "quote": "Newport and Exchange Place are redeveloped waterfront areas consisting mostly of residential towers, hotels and office buildings that are among the tallest buildings in the city.",
-    "character": 2,
-    "topic": "housing feel"
-   },
-   {
     "title": "Newport, Jersey City",
     "quote": "New Jersey Transit's Hudson-Bergen Light Rail's Newport station and Port Authority Trans-Hudson's (\"PATH\") Newport station are located in Newport.",
     "character": 2,
     "topic": "transit"
+   },
+   {
+    "web_url": "https://www.visithudson.org/things-to-do/attractions/hudson-river-waterfront-walkway/",
+    "quote": "From biking and jogging to walking and fishing, you can enjoy your favorite hobbies with a Hudson River and Big Apple backdrop.",
+    "source_name": "Visit Hudson (Hudson County Office of Cultural and Heritage Affairs/Tourism Development)",
+    "about_area": "Hudson River Waterfront Walkway, which runs through Newport",
+    "scope": "enclosing",
+    "character": 3,
+    "topic": "waterfront"
    }
   ],
   "landmarks": []
@@ -2553,10 +2816,13 @@
     "topic": "waterfront"
    },
    {
-    "title": "Astoria, Queens",
-    "quote": "Astoria has been served by NYC Ferry's Astoria route since August 2017.",
-    "character": 2,
-    "topic": "transit"
+    "web_url": "https://www.nyctourism.com/new-york/queens/astoria/",
+    "quote": "Savor Astoria’s international flavors, explore its lively streets and uncover trendy shops.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Astoria",
+    "scope": "enclosing",
+    "character": 3,
+    "topic": "food and nightlife"
    }
   ],
   "landmarks": []
@@ -2574,6 +2840,15 @@
     "quote": "Corona Plaza is recognized by urban planning circles as a project that has created a new community space.",
     "character": 2,
     "topic": "main street"
+   },
+   {
+    "web_url": "https://www.nyctourism.com/new-york/queens/corona/",
+    "quote": "Walk off your feast in nearby Flushing Meadows Corona Park, where you’ll find the Queens Zoo, Queens Museum, New York Hall of Science and plenty more activities for the family.",
+    "source_name": "NYC Tourism + Conventions",
+    "about_area": "Corona",
+    "scope": "enclosing",
+    "character": 3,
+    "topic": "parks"
    }
   ],
   "landmarks": []
@@ -2585,6 +2860,49 @@
     "quote": "The commercial areas of the neighborhood include Main Street, Union Turnpike, Parsons Boulevard, and Kissena Boulevard.",
     "character": 2,
     "topic": "main street"
+   }
+  ],
+  "landmarks": []
+ },
+ "ny:harlem-north-": {
+  "quotes": [
+   {
+    "title": "Harlem",
+    "quote": "A chain of large linear parks includes West Harlem Piers, Riverbank State Park, St. Nicholas Park, and Jackie Robinson Park.",
+    "character": 2,
+    "topic": "parks"
+   },
+   {
+    "title": "Harlem",
+    "quote": "The Apollo Theater opened on 125th Street on January 26, 1934, in a former burlesque house.",
+    "character": 2,
+    "topic": "history"
+   },
+   {
+    "title": "Harlem",
+    "quote": "Metro-North Railroad has a commuter rail station at Harlem–125th Street, serving trains to the Lower Hudson Valley and Connecticut.",
+    "character": 2,
+    "topic": "transit"
+   }
+  ],
+  "landmarks": []
+ },
+ "ct:shelton": {
+  "quotes": [
+   {
+    "title": "Shelton, Connecticut",
+    "quote": "There is opportunity for fishing, boating, geocaching and letterboxing, hiking, walking and biking. Dogs are welcomed when on leash.",
+    "character": 3,
+    "topic": "parks"
+   },
+   {
+    "web_url": "https://ctvisit.com/listings/city-shelton",
+    "quote": "From Indian Wells State Park, to the Sports Complex of Connecticut, there is something to do for everyone.",
+    "source_name": "CTvisit (Connecticut Office of Tourism)",
+    "about_area": "Shelton",
+    "scope": "exact",
+    "character": 2,
+    "topic": "parks"
    }
   ],
   "landmarks": []

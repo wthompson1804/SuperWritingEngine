@@ -1,28 +1,19 @@
 # hood_id | article title (as listed for the hood) | sentence index (a+b = two consecutive) | character | topic
 ct:stamford|Downtown Stamford|73|3|food and nightlife
-ct:stamford|Mill River Park|1|3|parks
-ct:stamford|Harbor Point (Stamford)|2|2|waterfront
 nj:newark|Newark, New Jersey|78|3|food and nightlife
 nj:newark|Newark, New Jersey|11|3|parks
 nj:newark|Newark, New Jersey|564|2|transit
 ct:norwalk|South Norwalk|5|2|event
-ct:norwalk|Norwalk, Connecticut|96|3|waterfront
 nj:bayonne|Bayonne, New Jersey|132|2|main street
-nj:bayonne|Bayonne, New Jersey|141|2|waterfront
 nj:hackensack|Hackensack, New Jersey|217|2|main street
-nj:hackensack|Hackensack, New Jersey|49|2|housing feel
 nj:hackensack|Hackensack, New Jersey|177|2|transit
 ny:new-rochelle|New Rochelle, New York|138|3|waterfront
 ny:new-rochelle|New Rochelle, New York|149|3|parks
 ny:new-rochelle|New Rochelle, New York|159|3|parks
 ny:yonkers|Yonkers, New York|4|2|main street
 ny:yonkers|Yonkers, New York|7|2|landmark
-ct:danbury|Danbury, Connecticut|111|2|parks
 ct:danbury|Danbury, Connecticut|197|2|parks
 ct:milford-city-balance-|Milford, Connecticut|152|3|waterfront
-ct:milford-city-balance-|Walnut Beach|1|3|waterfront
-ct:milford-city-balance-|Milford, Connecticut|161|2|transit
-nj:harrison|Harrison, New Jersey|3|2|housing feel
 nj:harrison|Harrison, New Jersey|148|2|transit
 nj:harrison|Harrison, New Jersey|163|3|landmark
 nj:jersey-city-bergen-lafayette|Bergen-Lafayette, Jersey City|12|3|main street
@@ -56,8 +47,6 @@ ny:jamaica-hills-briarwood|Briarwood, Queens|5|2|landmark
 ny:jamaica-hills-briarwood|Briarwood, Queens|35|2|history
 ny:old-astoria-hallets-point|Astoria, Queens|237|3|waterfront
 ny:old-astoria-hallets-point|Astoria Park|3|2|parks
-ct:westport|Westport, Connecticut|36|2|main street
-ct:westport|Westport, Connecticut|88|2|waterfront
 ct:westport|Westport, Connecticut|115|2|transit
 nj:clifton|Clifton, New Jersey|100|2|parks
 nj:clifton|Clifton, New Jersey|173|2|transit
@@ -68,12 +57,8 @@ nj:montclair|Montclair, New Jersey|69|2|food and nightlife
 nj:montclair|Montclair, New Jersey|239|2|housing feel
 ny:bath-beach|Bath Beach, Brooklyn|11|2|history
 ny:bath-beach|Bensonhurst Park|1|2|parks
-ct:norwalk|Norwalk, Connecticut|15|2|waterfront
 nj:bayonne|Bayonne, New Jersey|243|2|transit
-ny:yonkers|Getty Square|36|2|parks
-ny:white-plains|White Plains, New York|181|2|event|force
 nj:bloomfield|Bloomfield, New Jersey|133|2|main street
-nj:bloomfield|Bloomfield, New Jersey|2|2|landmark
 nj:englewood|Englewood, New Jersey|82|3|parks
 ny:old-astoria-hallets-point|Astoria, Queens|232|2|transit
 ny:east-flatbush-farragut|East Flatbush, Brooklyn|0|1|housing feel
@@ -82,18 +67,13 @@ ny:port-chester|Capitol Theatre (Port Chester, New York)|0|2|landmark
 ny:prospect-lefferts-gardens-wingate|Prospect Lefferts Gardens|29|2|housing feel
 ny:prospect-lefferts-gardens-wingate|Prospect Lefferts Gardens|2|2|landmark
 ny:washington-heights-south-|Washington Heights, Manhattan|280|2|parks
-ct:beacon-falls|Beacon Falls, Connecticut|2|1|waterfront
 ct:beacon-falls|Beacon Falls, Connecticut|72|2|transit
 ct:beacon-falls|Beacon Falls, Connecticut|8|2|history
 ct:brookfield|Brookfield, Connecticut|39|2|main street
 ct:fairfield|Fairfield, Connecticut|123|3|parks
 ct:fairfield|Fairfield, Connecticut|115|3|event
-ct:fairfield|Fairfield, Connecticut|114|2|landmark
 ct:hamden|Hamden, Connecticut|20|3|parks
-ct:hamden|Hamden, Connecticut|133|2|event
-ct:hamden|Hamden, Connecticut|136|2|parks
 ct:seymour|Seymour, Connecticut|75|2|transit
-ct:seymour|Seymour, Connecticut|69|2|event
 ct:stratford|Stratford, Connecticut|6|2|history
 ct:stratford|Stratford, Connecticut|72|2|parks
 ct:trumbull|Trumbull, Connecticut|185|2|parks
@@ -127,7 +107,6 @@ nj:south-orange|South Orange, New Jersey|108|2|parks
 nj:south-orange|South Orange, New Jersey|160|2|landmark
 nj:wayne|Wayne, New Jersey|5|2|landmark
 nj:weehawken|Weehawken, New Jersey|98|3|main street
-nj:weehawken|Weehawken, New Jersey|44|3|waterfront
 ny:brighton-beach|Brighton Beach|55|3|waterfront
 ny:brighton-beach|Brighton Beach|54|2|main street
 ny:elmhurst|Elmhurst, Queens|171+172|2|parks
@@ -183,10 +162,8 @@ ny:bay-ridge|Bay Ridge, Brooklyn|127|2|transit
 ny:bay-ridge|Bay Ridge, Brooklyn|150|2|housing feel
 ny:bedford-stuyvesant-east-|Bedford–Stuyvesant, Brooklyn|5|3|housing feel
 ny:bedford-stuyvesant-east-|Bedford–Stuyvesant, Brooklyn|2|2|main street
-ny:bedford-stuyvesant-east-|Bedford–Stuyvesant, Brooklyn|235|2|transit
 ny:bedford-stuyvesant-west-|Bedford–Stuyvesant, Brooklyn|5|3|housing feel
 ny:bedford-stuyvesant-west-|Bedford–Stuyvesant, Brooklyn|2|2|main street
-ny:bedford-stuyvesant-west-|Bedford–Stuyvesant, Brooklyn|235|2|transit
 ny:east-harlem-south-|East Harlem|274|2|transit
 ny:flatbush-west-ditmas-park-parkville|Ditmas Park, Brooklyn|24|3|housing feel
 ny:flatbush-west-ditmas-park-parkville|Parkville, Brooklyn|11|2|housing feel
@@ -235,14 +212,12 @@ ny:sunnyside|Sunnyside, Queens|212|2|parks
 ny:tompkinsville-stapleton-clifton-fox-hills|Tompkinsville, Staten Island|27|3|main street
 ny:tompkinsville-stapleton-clifton-fox-hills|Stapleton, Staten Island|133|2|transit
 ny:tompkinsville-stapleton-clifton-fox-hills|Clifton, Staten Island|10|2|housing feel
-ny:upper-west-side-manhattan-valley|Upper West Side|1|2|parks
 ny:upper-west-side-manhattan-valley|Manhattan Valley|8|2|housing feel
 ny:wallkill|Wallkill, Orange County, New York|51|2|main street
 ny:wallkill|Wallkill, Orange County, New York|54|2|event
 ny:washington-heights-north-|Hudson Heights, Manhattan|116|3|event
 ny:washington-heights-north-|Hudson Heights, Manhattan|115|3|landmark
 ny:washington-heights-north-|Hudson Heights, Manhattan|5|2|parks
-ct:west-haven|West Haven, Connecticut|86|3|waterfront
 ct:west-haven|West Haven, Connecticut|131|2|transit
 nj:fort-lee|Fort Lee, New Jersey|0|2|waterfront
 nj:fort-lee|Fort Lee, New Jersey|192|2|housing feel
@@ -255,7 +230,6 @@ nj:jersey-city-greenville|Greenville, Jersey City|3|1|main street
 nj:jersey-city-mcginley-square|McGinley Square|11|2|main street
 nj:jersey-city-mcginley-square|Jersey City, New Jersey|331|1|main street
 nj:jersey-city-newport|Newport, Jersey City|10|2|food and nightlife
-nj:jersey-city-newport|Jersey City, New Jersey|319|2|housing feel
 nj:jersey-city-newport|Newport, Jersey City|6|2|transit
 nj:jersey-city-the-heights|The Heights, Jersey City|7|3|housing feel
 nj:jersey-city-the-heights|Central Avenue (Hudson Palisades)|15|3|main street
@@ -308,16 +282,14 @@ ny:forest-hills|Forest Hills, Queens|5|3|landmark
 nj:teaneck|Teaneck, New Jersey|10|2|main street
 ny:astoria-central-|Astoria, Queens|51|3|landmark
 ny:astoria-central-|Astoria, Queens|237|3|waterfront
-ny:astoria-central-|Astoria, Queens|232|2|transit
 ny:astoria-east-woodside-north-|Astoria, Queens|51|3|landmark
 ny:flatbush-west-ditmas-park-parkville|Ditmas Park, Brooklyn|21|3|food and nightlife
 ny:north-corona|Corona, Queens|31|3|landmark
 ny:north-corona|Corona, Queens|54|2|main street
-ct:west-haven|West Haven, Connecticut|38|2|history
-nj:jersey-city|Liberty State Park|32|3|waterfront
 nj:north-bergen|North Bergen, New Jersey|169|2|transit
 nj:edgewater|Edgewater, New Jersey|189|2|transit
 ny:kew-gardens-hills|Kew Gardens Hills, Queens|142|2|main street
 ny:harlem-north-|Harlem|25|2|parks
 ny:harlem-north-|Harlem|91|2|history
 ny:harlem-north-|Harlem|404|2|transit
+ct:shelton|Shelton, Connecticut|82+83|3|parks
