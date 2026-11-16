@@ -58,8 +58,6 @@ b_05f5f16a9e,parking_fee_monthly,116,confirmed,116.26 (amenities_page)
 b_9af0566916,building_floors,,dropped,4 (amenities_page) is below a unit label that reads as floor 30
 b_46e40b788b,building_floors,,dropped,5 (stated) is below a unit label that reads as floor 40
 b_84d5cbaa59,building_floors,,dropped,2 (stated) is below a unit label that reads as floor 4
-b_faa3612c6d,building_floors,,dropped,2 (amenities_page) is below a unit label that reads as floor 7
-b_84739a68fb,building_floors,,dropped,14 (amenities_page) is below a unit label that reads as floor 18
 b_144b021ca5,lat_lon,"41.029893,-73.774507",census_geocoder,"listing rows disagree by 266 m (continuumwhiteplains.com: 41.03009,-73.77471; greystar.com: 41.02931,-73.77771; greystar.com: 41.02938,-73.77743; trulia: 41.02938,-73.77512); Census geocoder matched '57 BANK ST, WHITE PLAINS, NY, 10606'"
 b_5c4193202c,lat_lon,"40.672560,-74.098197",census_geocoder (address check),"the listing's point is outside the address's ZIP area and 6889 m from where the address geocodes (point 40.67096,-74.17977 is in ZIP area 07201, Elizabeth; the address says Bayonne 07002); Census geocoder matched '302 CONSTITUTION AVE, BAYONNE, NJ, 07002'."
 b_10247a14f8,lat_lon,"41.522140,-74.110900",census_geocoder (address check),"the listing's point is outside the address's ZIP area and 1841 m from where the address geocodes (point 41.52087,-74.13292 is in ZIP area 12575, Montgomery; the address says Newburgh 12550); Census geocoder matched '7 LAKESIDE RD, NEWBURGH, NY, 12550'."

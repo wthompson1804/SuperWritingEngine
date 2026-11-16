@@ -34,7 +34,9 @@ sys.path.insert(0, str(Path(__file__).parent))
 from lib import DATA  # noqa: E402
 import parsers  # noqa: E402
 
-PREC = ["confirmed_by_phone", "confirmed", "community_page", "amenities_page", "official_record", "stated", "inferred"]
+# resident_review (independent check 4, D18): a figure taken from a resident's review. Below every page or record that
+# states the fact, above a bare inference; it is an estimate with its source named, never "stated".
+PREC = ["confirmed_by_phone", "confirmed", "community_page", "amenities_page", "official_record", "stated", "resident_review", "inferred"]
 BLANK = {"", "nan", "none", "unknown", "no_mention", "?", "not_found", "unconfirmed", "none stated", "none_stated"}
 
 ABBR = {"street": "st", "avenue": "ave", "boulevard": "blvd", "road": "rd", "drive": "dr", "place": "pl", "court": "ct",
@@ -318,6 +320,8 @@ def add_parking(M, b, text, basis, source, number=None):
     """Parking sentence -> parking_fee_monthly (+ note, options), keeping the sentence in parking_text (W4, A1-A16)."""
     if is_blank(text) and number is None:
         return
+    if not is_blank(text) and parsers.review_sourced(text)[0]:
+        basis = "resident_review"                # D18 (The Atwater: "$75/month, per a resident review dated 2025-05-01")
     pk = parsers.parse_parking(text) if not is_blank(text) else {"fee": None, "note": "", "options": "", "included": False}
     fee = pk["fee"] if pk["fee"] is not None else number
     if not is_blank(text) and (pk["fee"] is not None or "$" in str(text) or re.search(r"\d", str(text))):
@@ -383,7 +387,10 @@ def apply_fact(M, b, fact, value, quote, url):
         if "concierge" in f:
             M.add(b, "doorman", v, C, url)
     elif f.startswith(("doorman", "concierge")):
-        M.add(b, "doorman", v, C, url)
+        # independent check 4, D9: the source's own words travel with the value ("yes" under a fact named concierge, with
+        # the quote "amenity list: Concierge", is a concierge, not a doorman): parsers.staff_named reads them
+        q_ = "" if is_blank(quote) or str(quote).strip().lower() == str(v).strip().lower() else f" | {str(quote).strip()[:140]}"
+        M.add(b, "doorman", (f"concierge: {v}" if f.startswith("concierge") and "concierge" not in str(v).lower() else str(v)) + q_, C, url)
     elif f.startswith("year_built"):
         m = re.search(r"(18|19|20)\d{2}", str(v))
         M.add(b, "year_built", m.group(0) if m else "", C, url)
@@ -779,6 +786,8 @@ def main():
                 v = r.get(col, "")
                 if fld == "parking_type" and v == "parking_type_unknown":
                     v = ""
+                if col == "doorman_or_concierge" and v not in ("", "no_mention"):
+                    v = f"{v}: {r.get('doorman_or_concierge_evidence', '')[:160]}"      # D9: the page's own words say doorman or concierge
                 M.add(b, fld, v, "amenities_page", r.get("source_url", ""))
             # the stored number was "the first dollar figure in the sentence" (A16): re-read the sentence itself
             num = r.get("parking_fee_monthly", "")
@@ -954,7 +963,10 @@ def main():
     # 4c: which elevators rest on listing sites alone: every source that says "yes" (other than an inference) is a
     # listing site's page; no own or manager's page, no city record, no phone call says so
     agg_only = {b for (b, f), cands in M.c.items() if f == "elevator" and elevator_only_from_listing_sites(cands)}
+    staff_all = {b: " || ".join(dict.fromkeys(t[1] for t in sorted(cands, key=lambda t: t[0])))[:1200] for (b, f), cands in M.c.items() if f == "doorman"}
     rows, conflicts = M.resolve()
+    for b, txt in staff_all.items():           # D9: every source's sentence about the front desk, for parsers.staff_from_sources
+        rows.setdefault(b, {})["doorman_all_sources"] = txt
     rows = phone_overrides_building(rows)
     for b, when in called_b.items():
         rows.setdefault(b, {})["call_building_called_at"] = when
@@ -992,6 +1004,21 @@ def main():
                 d["elevator_doubt"] = ("rule: the elevator is named only in a listing site's amenity list, the unit labels carry several building numbers ("
                                        + ", ".join(prefs[:6]) + "), and no page or record gives a height of four floors or more")
                 d["elevator_doubt_source"] = "rule (scripts/build_master.py: garden_style)"
+
+    # independent check 4, D19 (Continuum: "Floors in the building: 2" with apartments on floors 3 to 16, three merged
+    # building records): the building's floor count is the LARGEST count a page or record states (not the first source
+    # in precedence order), and never below the highest floor a page states for one of its apartments.
+    for b, d in rows.items():
+        cands = [(parsers._bf(t[1]), t[2], t[3]) for t in M.c.get((b, "building_floors"), []) if t[2] != "inferred" and parsers._bf(t[1])]
+        top_unit = max([parsers._bf(f_) or 0 for f_ in stated_floor_by_b.get(b, [])] + [parsers._bf(f_) or 0 for (b_, lab, f_, basis, *_x) in floor_rows if b_ == b and basis == "confirmed"] + [0])
+        if cands:
+            n_, basis_, src_ = max(cands, key=lambda t: t[0])
+            if n_ != parsers._bf(d.get("building_floors")) and d.get("building_floors_basis") != "inferred":
+                d["building_floors"], d["building_floors_basis"], d["building_floors_source"] = f"{n_:g}", basis_, src_
+        cur = parsers._bf(d.get("building_floors")) if d.get("building_floors_basis") != "inferred" else None
+        if top_unit and cur and top_unit > cur:
+            d["building_floors"], d["building_floors_basis"] = f"{top_unit:g}", "at_least"
+            d["building_floors_source"] = f"the highest floor a page states for an apartment here ({top_unit:g}); a page gave {cur:g} floors for one part of the building"
 
     # ------------------------------------------------------------------ building table
     bfirst = U.drop_duplicates("building_id").set_index("building_id")

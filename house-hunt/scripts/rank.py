@@ -628,9 +628,17 @@ def main():
     u["pool"] = a("pool").map(parsers.pool_state)
     pr = u.parking_type.map(parking_rank).fillna(a("gated_or_garage_parking").map(parking_rank))
     u["parking_rank"] = pr
-    doorman = a("doorman_or_concierge").map(parsers.doorman_state)
+    # independent check 4, D9: doorman and concierge are separate amenities, each only from a source that says so
+    # (parsers.staff_from_sources over every source sentence). The SCORE still counts a staffed front of either kind,
+    # as it always did (`staffed`): only the amenity shown changes.
+    staffed = a("doorman_or_concierge").map(parsers.doorman_state)
+    staff = s("doorman_all_sources").where(s("doorman_all_sources").ne(""), s("doorman")).map(parsers.staff_from_sources)
     u["doorman_text"] = s("doorman")
-    u["doorman"] = doorman
+    u["doorman"] = staff.map(lambda d: {"yes": "doorman", "24h": "24h"}.get(d["doorman"], ""))
+    u["concierge"] = staff.map(lambda d: {"yes": "concierge", "24h": "24h"}.get(d["concierge"], ""))
+    u["front_desk"] = staff.map(lambda d: {"yes": "front desk", "24h": "24h"}.get(d["front_desk"], ""))
+    u["staffed_front"] = staffed
+    doorman = staffed
     has_doorman, doorman24 = doorman.ne(""), doorman.eq("24h")
     doorman_known = s("doorman_text").str.strip().ne("")
     controlled = has("controlled_access") | s("doorman_text").map(parsers.virtual_doorman).astype(bool)

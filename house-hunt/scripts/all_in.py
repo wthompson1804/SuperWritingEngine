@@ -166,7 +166,8 @@ def cost_unit(r, util, RT, MED):
         # for (Harbor Landing 452: $2,487 on 13 months, $3,040 on 12). Where no 12-month price was read, the listed
         # price stands and the unit carries the lease-term disclosure (scripts/rank.py).
         lease_m, p12 = num(r.get("price_lease_months")), num(r.get("price_12_month"))
-        long_lease = lease_m is not None and lease_m > 13
+        # (the lease-term gap, independent check 4: any term that is not 12 months, not only those over 13)
+        long_lease = lease_m is not None and lease_m != 12
         rent_line = "rent (net-effective)" if is_net else "rent (as listed)"
         use_p12 = parsers.use_12_month_price(listed, p12)
         if use_p12:
@@ -175,8 +176,13 @@ def cost_unit(r, util, RT, MED):
             rent_basis_val, rent_gross_val, rent_line, is_net = p12, p12, "rent (12-month lease price)", False
         elif long_lease:
             price_note = "; ".join(x for x in [price_note, f"this price is for a {lease_m:g}-month lease; the 12-month price is not published"] if x)
+        # independent check 4, D24: every receipt line carries a `code` and structured `data`; scripts/build_page_data.py
+        # writes the reader's note from them. `note` stays as the internal working note and is not printed.
         lines.append({"line": rent_line, "amount": rent_basis_val,
-                      "basis": "computed from stated terms" if is_net else ("live check" if live else "stated"), "note": price_note})
+                      "basis": "computed from stated terms" if is_net else ("live check" if live else "stated"), "note": price_note,
+                      "code": "rent_12_month" if use_p12 else ("rent_net_effective" if is_net else "rent_listed"),
+                      "data": {"lease_months": lease_m if (lease_m and lease_m != 12) else None, "listed": listed, "price_12": p12 if use_p12 else None,
+                               "old_price": listed_old if (live and listed_old and abs(live - listed_old) > 0.5) else None, "gross": rent_gross_val if is_net else None}})
         # required building fees: the listing's fee lines, and each fee sentence from the community page / evidence.
         # Sentences are alternatives (several sources describing the same fees), so the largest reading is used, never a sum.
         fj = parsers.fees_from_json(r.get("other_monthly_fees_json"), r.get("unit", ""))
@@ -217,32 +223,47 @@ def cost_unit(r, util, RT, MED):
             # D13 (Atlas): a fee sentence that prices internet ("Internet: $65") covers it; no estimate on top
             fee_src = " | ".join([str(r.get("required_fees_text", "")), str(r.get("other_monthly_fees_json", ""))])
             fee_has_internet = amt > 0 and bool(re.search(r"internet[^,;|\"]{0,14}\$?\s?\d{2}|wi-?fi[^,;|\"]{0,14}\$\s?\d{2}", fee_src, re.I)) and not re.search(r"internet[^,;|]{0,20}optional", fee_src, re.I)
-            lines.append({"line": "required building fees", "amount": round(amt), "basis": basis, "note": "; ".join(dict.fromkeys([note] + fee_notes))[:300]})
+            lines.append({"line": "required building fees", "amount": round(amt), "basis": basis, "note": "; ".join(dict.fromkeys([note] + fee_notes))[:300],
+                          "code": "fees_in_price" if total_price else "fees_published",
+                          "data": {"more_not_published": bool(open_note), "alternatives": "alternative amounts" in note, "differs_by_unit": "differs by unit" in note}})
             if open_note and ("amenity fee exists" in open_note or amt == 0):
                 unknown.append("building fees (part)")
         else:
-            lines.append({"line": "required building fees", "amount": 0, "basis": "unknown", "note": "; ".join(fee_notes)[:300]}); unknown.append("building fees")
+            lines.append({"line": "required building fees", "amount": 0, "basis": "unknown", "note": "; ".join(fee_notes)[:300], "code": "fees_unknown",
+                          "data": {"fee_exists": any("fee exists" in n_ or "not counted" in n_ for n_ in fee_notes)}}); unknown.append("building fees")
         pet = num(r.get("pet_rent_monthly"))
         st_ = r.get("state", "")
         if pet is not None and pet <= 150:
-            lines.append({"line": "pet rent", "amount": pet, "basis": r.get("pet_rent_monthly_basis", "stated"), "note": r.get("pet_rent_note", "")})
+            lines.append({"line": "pet rent", "amount": pet, "basis": r.get("pet_rent_monthly_basis", "stated"), "note": r.get("pet_rent_note", ""), "code": "pet_published",
+                          "data": {"several_amounts": "lowest" in str(r.get("pet_rent_note", ""))}})
         else:
             # owner, 2026-11-16: she is getting a dog, so pet rent is certain. Not published -> an estimate, never $0.
             pm, pn, pkey = pick(MED["pet"], st_, "") if os.environ.get("HH_NO_PET_ESTIMATE") != "1" else (None, 0, None)   # measurement switch only
             if pm is not None:
                 lines.append({"line": "pet rent (est.)", "amount": round(pm), "basis": "estimate",
-                              "note": f"not published for this building; estimate = the median of the known pet rents of {pn} buildings in {pkey or 'all three states'}"})
+                              "note": f"not published for this building; estimate = the median of the known pet rents of {pn} buildings in {pkey or 'all three states'}",
+                              "code": "pet_estimate", "data": {"buildings": int(pn), "state": pkey or ""}})
             else:
-                lines.append({"line": "pet rent", "amount": 0, "basis": "unknown"}); unknown.append("pet rent")
+                lines.append({"line": "pet rent", "amount": 0, "basis": "unknown", "code": "pet_unknown", "data": {}}); unknown.append("pet rent")
         pk, ptype = num(r.get("parking_fee_monthly")), str(r.get("parking_type", "")).lower()
         pnote = "; ".join(x for x in [str(r.get("parking_fee_note", "")), ("prices listed: " + str(r.get("parking_options", ""))) if r.get("parking_options") else ""] if x)[:400]
+        pfn, pbasis = str(r.get("parking_fee_note", "")), r.get("parking_fee_monthly_basis", "stated")
+        amts = sorted({float(a_.replace(",", "")) for a_ in re.findall(r"\$(\d[\d,]*(?:\.\d+)?)", str(r.get("parking_options", "")))})
+        rng = re.search(r"low end of the stated range \$([\d.]+)-\$([\d.]+)", pfn)
+        pdata = {"pick": "first_space" if "first spot" in pfn else ("lowest_covered" if "cheapest covered" in pfn else ("lowest_listed" if "cheapest of the prices" in pfn else ("range" if rng else "single"))),
+                 "low": float(rng.group(1)) if rng else (amts[0] if amts else None), "high": float(rng.group(2)) if rng else (amts[-1] if len(amts) > 1 else None),
+                 "limited_time_free_not_counted": "time-limited" in pfn or "limited time" in pfn, "extra_space_only": "additional-spot" in pfn,
+                 # D18: a fee read from a resident review is an estimate with its source named, never "stated"
+                 "from_resident_review": pbasis == "resident_review", "review_date": parsers.review_sourced(str(r.get("parking_text", "")))[1] if pbasis == "resident_review" else None}
         if pk is not None and pk <= 1000:
-            lines.append({"line": "parking (a spot is included)" if pk == 0 else "parking", "amount": pk, "basis": r.get("parking_fee_monthly_basis", "stated"), "note": pnote})
+            from_review = pbasis == "resident_review"
+            lines.append({"line": "parking (a spot is included)" if pk == 0 else ("parking (est.)" if from_review else "parking"), "amount": pk, "basis": "estimate" if from_review else pbasis, "note": pnote,
+                          "code": "parking_included" if pk == 0 else ("parking_estimate_review" if from_review else "parking_published"), "data": pdata})
         elif "street" in ptype and not re.search(r"garage|off[- ]street|lot", ptype):
             # D21: $0 because a listing for this building says street parking and none mentions a garage or lot
-            lines.append({"line": "parking (street)", "amount": 0, "basis": "stated", "note": "street parking only, per a listing for this building; no garage or lot is mentioned"})
+            lines.append({"line": "parking (street)", "amount": 0, "basis": "stated", "note": "street parking only, per a listing for this building; no garage or lot is mentioned", "code": "parking_street", "data": {}})
         else:
-            lines.append({"line": "parking", "amount": 0, "basis": "unknown", "note": pnote}); unknown.append("parking fee")
+            lines.append({"line": "parking", "amount": 0, "basis": "unknown", "note": pnote, "code": "parking_unknown", "data": pdata}); unknown.append("parking fee")
         # utilities: only an explicit "included" removes an estimate; "paid by resident" never does (W5)
         inc, ten, none_ = set(), set(), set()
         for seg in str(r.get("utilities_included", "")).split(" || "):
@@ -254,16 +275,16 @@ def cost_unit(r, util, RT, MED):
         for name, key in [("electricity (est.)", "electric"), ("gas (est.)", "gas"), ("internet (est.)", "internet")]:
             amt = num(u.get(key))
             if key in inc:
-                lines.append({"line": name.replace(" (est.)", " (included in rent)"), "amount": 0, "basis": ub})
+                lines.append({"line": name.replace(" (est.)", " (included in rent)"), "amount": 0, "basis": ub, "code": "utility_included", "data": {}})
             elif key == "internet" and fee_has_internet:
-                lines.append({"line": "internet (in the required building fees)", "amount": 0, "basis": "stated", "note": "the fee line above prices internet"})
+                lines.append({"line": "internet (in the required building fees)", "amount": 0, "basis": "stated", "note": "the fee line above prices internet", "code": "utility_in_fees", "data": {}})
             elif key == "gas" and "gas" in none_ and "gas" not in ten:
-                lines.append({"line": "gas (no gas service)", "amount": 0, "basis": ub})
+                lines.append({"line": "gas (no gas service)", "amount": 0, "basis": ub, "code": "utility_no_gas", "data": {}})
             elif amt is not None:
                 note = "cooking gas only; heat is included in the rent" if key == "gas" and "heat" in inc else ""
-                lines.append({"line": name, "amount": round(amt), "basis": "estimate", "note": note})
+                lines.append({"line": name, "amount": round(amt), "basis": "estimate", "note": note, "code": "utility_estimate", "data": {"cooking_gas_only": bool(note)}})
             else:
-                lines.append({"line": name, "amount": 0, "basis": "unknown"}); unknown.append(key)
+                lines.append({"line": name, "amount": 0, "basis": "unknown", "code": "utility_unknown", "data": {}}); unknown.append(key)
         extras = sum(l["amount"] or 0 for l in lines[1:])
         all_in_exact = (rent_basis_val or 0) + extras
         all_in = round(all_in_exact)
@@ -296,6 +317,9 @@ def cost_unit(r, util, RT, MED):
                     "rent_listed_price_is": t.get("listed_price_is", ""), "rent_offer_text": offer_text, "rent_offer_kind": offer_kind,
                     "rent_offer_type": otype, "all_in_likely": all_in_likely, "all_in_likely_note": "; ".join(likely_notes),
                     "rent_free_months": t.get("free_months", ""), "rent_lease_months": t.get("lease_months", ""),
+                    # independent check 4, D20: the offer's own qualifier is kept ("up to 2 months free" is not "2 months free")
+                    "rent_offer_up_to": "yes" if parsers.offer_is_up_to(t.get("conditions", ""), t.get("offer_text_page", "") or t.get("offer_text", ""), t.get("free_months", "")) else "",
+                    "rent_offer_select_units": "yes" if "select units" in str(t.get("conditions", "")) else "",
                     "rent_first_full_payment_date": t.get("first_full_payment_date", ""), "rent_first_full_payment_note": t.get("first_full_payment_note", ""),
                     "rent_needs_call": "yes" if has_offer and (not t or not offer) else t.get("needs_call", ""),
                     # D12: how close to the cap, and how many of parking / required fees (and pet rent, where no estimate exists) are not published

@@ -480,6 +480,28 @@ def _park_class(label: str) -> str:
     return "surface" if re.search(r"\blot\b", l) else "generic"
 
 
+_REVIEW_SRC = re.compile(r"\bper (?:a |an |one )?(?:resident|tenant|renter)s?'? reviews?|\b(?:resident|tenant|renter) reviews?\b|\bper reviews\b|\baccording to (?:a |one )?review", re.I)
+_REVIEW_TAIL = re.compile(r",?\s*\(?\bper (?:a |an |one )?(?:resident|tenant|renter)s?'? reviews?(?: dated \d{4}-\d\d-\d\d)?\)?", re.I)
+
+
+def review_sourced(text):
+    """(True, 'YYYY-MM-DD' or '') when a sentence says its figure comes from a resident's review
+    ('regular (first come) $75/month, per a resident review dated 2025-05-01'). Independent check 4, D18."""
+    t = str(text or "")
+    if not _REVIEW_SRC.search(t):
+        return False, ""
+    m = re.search(r"reviews?(?: dated| of| from)? (\d{4}-\d\d-\d\d)", t)
+    return True, (m.group(1) if m else "")
+
+
+def _cut_words(text, n):
+    """At most n characters, cut at a word boundary: never in the middle of a word, a number or a date."""
+    t = str(text)
+    if len(t) <= n:
+        return t
+    return t[:n + 1].rsplit(" ", 1)[0].rstrip(" ,;:-(")
+
+
 def parse_parking(text):
     """Read a parking sentence. Returns {'fee': float|None, 'note': str, 'options': str, 'included': bool}.
 
@@ -541,7 +563,8 @@ def parse_parking(text):
             if re.search(_SKIP_PARK, ctx) or (re.search(_OTHER_TOPIC, ll) and not re.search(r"park|garage|spot|space|\blot\b", ll)):
                 continue
             role = "second" if re.search(_SECOND, ll if len(amts) > 1 else cl) and not re.search(_FIRST, ll) else ("first" if re.search(_FIRST, ll if len(amts) > 1 else cl) else "")
-            opts.append({"amt": lo, "hi": hi, "label": re.sub(r"\s+", " ", label)[:60], "cls": _park_class(label if _park_class(label) != "generic" or len(amts) > 1 else c), "role": role})
+            label = _REVIEW_TAIL.sub("", label).strip(" :,-.")      # the source of the figure is not part of the option's name
+            opts.append({"amt": lo, "hi": hi, "label": _cut_words(re.sub(r"\s+", " ", label), 60), "cls": _park_class(label if _park_class(label) != "generic" or len(amts) > 1 else c), "role": role})
         if re.search(_FREE_NEAR, cl[:amts[0].start()]) and not re.search(r"not included|fee not|no free", cl):
             # a clause that also carries prices: the part before the first price says what is free
             head = c[:amts[0].start()]
@@ -1638,7 +1661,7 @@ def floor_by_convention(unit, convention):
 def tower_label_floor(unit):
     """'01-16C' -> 16: tower 01, floor 16, line C (Prospect Place, beside '02-229' = tower 02, floor 2). None for any
     other shape. Independent check 4, D22: this label was removed as a first-floor unit; it reads as floor 16."""
-    m = re.fullmatch(r"\d{1,2}[\s-]+(\d{1,2})([a-z])", clean_unit(unit).strip())
+    m = re.fullmatch(r"\d{1,3}[\s-]+(\d{1,2})([a-z])", clean_unit(unit).strip())
     return int(m.group(1)) if m else None
 
 
@@ -1709,3 +1732,111 @@ def dogs_open_code(evidence_text) -> str:
     if re.search(r"trulia pet field|zumper|listing site", t):
         return "listing_site_only"
     return "not_confirmed"
+
+
+# ---- independent check 4, D20: "up to 2 months free" is not "2 months free"
+_UP_TO_FREE = re.compile(r"\bup to\s+(?:\w+[\s-]+){0,3}?(?:\d+(?:\.\d+)?|one|two|three|four|six|eight)[\s-]*(?:months?|weeks?|mos?\b)", re.I)
+
+
+def offer_is_up_to(conditions="", offer_text="", free_months="") -> bool:
+    """True when the free-rent offer is an 'up to' amount: rent_terms.py recorded it among the conditions, the free
+    months are a range ('1-2'), or the page's own offer text says 'up to N months / weeks' ('RECEIVE UP TO 2 MONTHS
+    FREE ON BASE RENT', 'Up to 1 MONTH FREE', 'up to 6-Weeks Base Rent FREE')."""
+    if "'up to'" in str(conditions or "") or re.fullmatch(r"\s*[\d.]+\s*-\s*[\d.]+\s*", str(free_months or "")):
+        return True
+    return bool(_UP_TO_FREE.search(str(offer_text or "")))
+
+
+# ---- independent check 4, D9: doorman and concierge are separate amenities, each only from text that says so
+_STAFF_VETO = r"virtual (?:doorman|door ?person|concierge)|package concierge|concierge trash|trash concierge|valet trash|video (?:door|intercom)|electronic door|cyber ?door|tele-?door"
+
+
+def staff_named(text, fact="") -> dict:
+    """Who staffs the front of the building according to ONE source sentence: {'doorman': '' | 'yes' | '24h',
+    'concierge': ..., 'front_desk': ...}.
+      doorman     the text says doorman / door person / door man
+      concierge   the text says concierge (87 shown apartments in 20 buildings had 'Concierge' in an amenity list and
+                  were written up as 'a doorman at the front door')
+      front_desk  an attended lobby, a welcome or front desk, 'staffed', or a bare 'yes' under a fact that names neither
+    A negative ('no doorman stated', 'none listed') and a virtual doorman say nothing. `fact` is the evidence fact's name:
+    'concierge: yes' names a concierge; 'doorman: yes' with no other word is only a staffed front."""
+    t = str(text or "").strip().lower()
+    out = {"doorman": "", "concierge": "", "front_desk": ""}
+    if is_blank(t):
+        return out
+    t2 = re.sub(_STAFF_VETO, " ", t)
+    t2 = re.sub(r"\bvirtual\b", " ", t2)
+    if re.search(_NEG, t2) or re.search(r"\bno (?:doorman|concierge|door ?person)", t2):
+        return out
+    h24 = "24h" if re.search(r"24", t2) else "yes"
+    f = str(fact or "").strip().lower()
+    if re.search(r"door ?m[ae]n|door ?person|door ?people", t2):
+        out["doorman"] = h24
+    if re.search(r"concierge", t2) or (f.startswith("concierge") and re.search(r"\byes\b|24|daytime|full[- ](?:time|service)", t2)):
+        out["concierge"] = h24
+    if not out["doorman"] and not out["concierge"] and re.search(r"attended|staffed|welcome desk|front desk|lobby (?:staff|attendant)|\byes\b|24|daytime|full[- ](?:time|service)", t2):
+        out["front_desk"] = h24
+    return out
+
+
+def staff_from_sources(texts) -> dict:
+    """staff_named over every source sentence of a building (' || '-joined or a list): the strongest finding per kind."""
+    parts = texts if isinstance(texts, (list, tuple)) else str(texts or "").split(" || ")
+    out = {"doorman": "", "concierge": "", "front_desk": ""}
+    for p in parts:
+        for k, v in staff_named(p).items():
+            if v == "24h" or (v and not out[k]):
+                out[k] = v
+    if out["doorman"] or out["concierge"]:
+        out["front_desk"] = ""
+    return out
+
+
+# ---- independent check 4, D18: every kind of parking a sentence names
+def parking_kinds(text) -> list:
+    """['lot', 'garage'] for 'surface parking; optional garages, rate not stated': each kind the sentence names, the
+    plainest first (street, lot, covered, garage, offsite). parking_kind() gives only the best one, which is what the
+    score uses; the page must not call a building with a lot and optional garages 'garage parking'."""
+    t = re.sub(r"^[a-z_ ]+:\s*", "", str(text or "").lower())
+    full = str(text or "").lower()
+    out = []
+    if OFFSITE_PARKING.search(full):
+        return ["offsite"]
+    if re.search(r"\bstreet\b", t) and not re.search(r"off[- ]street", t):
+        out.append("street")
+    if re.search(r"\blot\b|surface|off[- ]street|assigned|on[- ]site|outdoor|outside|open parking|uncovered|open_lot|surface_lot", t):
+        out.append("lot")
+    if re.search(r"(?<!un)covered|carport", t):
+        out.append("covered")
+    if re.search(r"garage|gated|underground|indoor|\bdeck\b", t) and not re.search(r"no garage", t):
+        out.append("garage")
+    if not out and parking_kind(full):
+        out.append(parking_kind(full))
+    return out
+
+
+def garage_is_optional(text) -> bool:
+    """True when the sentence names a lot or surface parking AND a garage that is an optional extra, an add-on or
+    priced separately ('surface parking; optional garages', 'Open lot: included in lease; Underground parking garage:
+    $50/month', 'open lot included in lease; covered garage also listed')."""
+    k = parking_kinds(text)
+    t = str(text or "").lower()
+    return "lot" in k and ("garage" in k or "covered" in k) and bool(re.search(r"optional|also listed|add-on|additional|included in lease|free surface|\$\d", t))
+
+
+def manager_name(text) -> str:
+    """The manager's NAME for the page from the merged manager note: 'Greystar (site footer links to greystar.com)' ->
+    'Greystar'; 'Jones Street Residential (Trulia capture); batch file says Konover ...' -> 'Jones Street Residential';
+    'listed by Blue Chip Real Estate Group LLC (broker); manager not stated' -> '' (no manager is named).
+    The note itself is internal: it records where the name was read."""
+    t = str(text or "").strip()
+    if is_blank(t) or re.match(r"(?i)listed by\b|manager not|not stated|unknown", t):
+        return ""
+    n = re.split(r"\s*[;(]", t, 1)[0].strip(" ,.-")
+    return n if 2 <= len(n) <= 70 else ""
+
+
+def title_unit(building_name) -> str:
+    """'312' from a property title that names its apartment ('416 Highland Ave - 312', '20 Main St #4B'), else ''."""
+    m = re.search(r"\s(?:-|#)\s*#?(\d{1,4}[a-z]?)\s*$", str(building_name or ""), re.I)
+    return m.group(1).upper() if m and _TITLE_UNIT.search(str(building_name or "")) else ""

@@ -141,7 +141,7 @@ master_units,parking_type_basis,provenance,,travels with parking_type
 master_units,parking_type_source,provenance,,travels with parking_type
 master_units,building_floors,used,gates.py;build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
 master_units,building_floors_basis,used,build_master.py;rank.py,
-master_units,building_floors_source,provenance,,travels with building_floors
+master_units,building_floors_source,provenance,build_master.py,travels with building_floors
 master_units,laundry,used,build_master.py;rank.py,
 master_units,laundry_basis,provenance,,travels with laundry
 master_units,laundry_source,provenance,,travels with laundry
@@ -187,7 +187,7 @@ master_units,year_built_source,provenance,,travels with year_built
 master_units,pet_one_time_fee_text,display,build_master.py,text shown on the unit card or cost receipt
 master_units,pet_one_time_fee_text_basis,provenance,,travels with pet_one_time_fee_text
 master_units,pet_one_time_fee_text_source,provenance,,travels with pet_one_time_fee_text
-master_units,parking_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_units,parking_text,used,build_master.py;all_in.py,
 master_units,parking_text_basis,provenance,,travels with parking_text
 master_units,parking_text_source,provenance,,travels with parking_text
 master_units,required_fees_text,used,build_master.py;all_in.py;avoid.py,
@@ -208,6 +208,7 @@ master_units,pool_source,provenance,,travels with pool
 master_units,doorman,used,build_master.py;rank.py,
 master_units,doorman_basis,provenance,,travels with doorman
 master_units,doorman_source,provenance,,travels with doorman
+master_units,doorman_all_sources,used,build_master.py;rank.py,
 master_units,elevator_aggregator_only,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_units,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_units,parking_fee_monthly_basis,used,all_in.py,
@@ -500,6 +501,8 @@ master_units,all_in_likely,used,all_in.py;rank.py,
 master_units,all_in_likely_note,used,all_in.py;rank.py,
 master_units,rent_free_months,used,all_in.py,
 master_units,rent_lease_months,used,all_in.py;rank.py,
+master_units,rent_offer_up_to,used,all_in.py,
+master_units,rent_offer_select_units,used,all_in.py,
 master_units,rent_first_full_payment_date,used,all_in.py,
 master_units,rent_first_full_payment_note,used,all_in.py,
 master_units,rent_needs_call,used,all_in.py,
@@ -608,7 +611,7 @@ master_buildings,parking_type_basis,provenance,,travels with parking_type
 master_buildings,parking_type_source,provenance,,travels with parking_type
 master_buildings,building_floors,used,gates.py;build_master.py;rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py,
 master_buildings,building_floors_basis,used,build_master.py;rank.py,
-master_buildings,building_floors_source,provenance,,travels with building_floors
+master_buildings,building_floors_source,provenance,build_master.py,travels with building_floors
 master_buildings,laundry,used,build_master.py;rank.py,
 master_buildings,laundry_basis,provenance,,travels with laundry
 master_buildings,laundry_source,provenance,,travels with laundry
@@ -654,7 +657,7 @@ master_buildings,year_built_source,provenance,,travels with year_built
 master_buildings,pet_one_time_fee_text,display,build_master.py,text shown on the unit card or cost receipt
 master_buildings,pet_one_time_fee_text_basis,provenance,,travels with pet_one_time_fee_text
 master_buildings,pet_one_time_fee_text_source,provenance,,travels with pet_one_time_fee_text
-master_buildings,parking_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_buildings,parking_text,used,build_master.py;all_in.py,
 master_buildings,parking_text_basis,provenance,,travels with parking_text
 master_buildings,parking_text_source,provenance,,travels with parking_text
 master_buildings,required_fees_text,used,build_master.py;all_in.py;avoid.py,
@@ -675,6 +678,7 @@ master_buildings,pool_source,provenance,,travels with pool
 master_buildings,doorman,used,build_master.py;rank.py,
 master_buildings,doorman_basis,provenance,,travels with doorman
 master_buildings,doorman_source,provenance,,travels with doorman
+master_buildings,doorman_all_sources,used,build_master.py;rank.py,
 master_buildings,elevator_aggregator_only,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_buildings,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_buildings,parking_fee_monthly_basis,used,all_in.py,
@@ -1048,7 +1052,7 @@ rent_terms,net_effective_monthly,used,all_in.py;rent_terms.py,
 rent_terms,first_full_payment_date,used,all_in.py;rent_terms.py,
 rent_terms,first_full_payment_note,used,all_in.py;rent_terms.py,
 rent_terms,offer_expires,used,rent_terms.py,
-rent_terms,conditions,used,rent_terms.py,
+rent_terms,conditions,used,all_in.py;rent_terms.py,
 rent_terms,computed_how,used,rent_terms.py,
 rent_terms,confidence,used,rank.py;rent_terms.py,
 rent_terms,source_url,used,gates.py;build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,

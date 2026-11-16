@@ -1135,6 +1135,7 @@ def page_3(J, M, R, S):
     units = {u["id"]: u for u in J["units"]}
     if set(units) != set(S.index):
         return                                          # data.json is from an earlier run: build_page_data.py has not run since rank.py
+    page_ic4(J, M, R, S)
     # D12: experience and neighborhood figures are computed over the shown units
     for y in J["years"]:
         us = [u for u in J["units"] if u["year"] == y["id"]]
@@ -1233,6 +1234,218 @@ def pure_ic4():
        "IC4 D4: a higher number, a lettered label, an unknown count or a floor-digit label reads nothing")
 
 
+def pure_ic4_text():
+    """Independent check 4, D8 / D9 / D18 / D19 / D20 / D22 / D24 and the lease-term gap: pure rules and the page's text templates."""
+    import pandas as pd
+    import build_master as BM
+    import build_page_data as BP
+    # ---- D8: conditions in the evidence
+    eq(P.renter_conditions("Rental Terms, Policies & Fees: Furnished", "furnished"), {"furnished": True}, "IC4 D8: a Furnished tag (Appletree Suites, Metrovue)")
+    eq(P.renter_conditions("listed 2026-10-28; furnished; $300 building application fee + $150 background check"), {"furnished": True}, "IC4 D8: '; furnished;' in a checker's note")
+    eq(P.renter_conditions("Zumper's address page shows only a furnished corporate unit from 2014-2023."), {}, "IC4 D8: another listing's furnished corporate unit is not this apartment")
+    eq(P.renter_conditions("building amenities include a doorman, concierge, garage parking, and a furnished roof deck"), {}, "IC4 D8: a furnished roof deck is not a furnished apartment")
+    eq(P.renter_conditions("Requirements: Household income of $104,000+ (40x rent) and 700+ credit."), {"credit": "700+"}, "IC4 D8: 948 New York Avenue, 700+ credit")
+    eq(P.renter_conditions("... Parking 700+ credit Security deposit NO BROKER FEE"), {"credit": "700+"}, "IC4 D8: '700+ credit' in a listing's list")
+    for t in ["ONE MONTH FREE ON AN 18-MONTH LEASE $1,000 SECURITY FOR CREDIT OVER 700!", "a security deposit of just $99.00 with a 600+ credit score", "*Security Deposit-$2000 - minimum credit score-700",
+              "an additional $500 credit if you apply within 24 hours", "plus $1,500 credit, select apartments", "A $13 credit check fee will be taken electronically"]:
+        eq(P.renter_conditions(t), {}, f"IC4 D8: not a credit-score requirement: {t[:50]!r}")
+    eq(P.renter_conditions("Short-term rentals only").get("not_normal_lease"), "short-term rentals only", "IC4 D8: short-term only is not a normal lease")
+    eq(P.renter_conditions("month-to-month after the term costs $25 more per month"), {}, "IC4 D8: a month-to-month surcharge after the term is an ordinary lease")
+    ok(not P.income_restricted("$130,000 a year") and not P.income_restricted("3x the rent in household income"), "IC4 D8: an income requirement is not income-restricted housing")
+    # ---- D9: doorman and concierge, each only from text that says so
+    eq(P.staff_from_sources("yes: [community amenity] Concierge"), {"doorman": "", "concierge": "yes", "front_desk": ""}, "IC4 D9: 'Concierge' in an amenity list is a concierge, not a doorman")
+    eq(P.staff_from_sources("concierge: yes | amenity list: 24hr concierge"), {"doorman": "", "concierge": "24h", "front_desk": ""}, "IC4 D9: 24-hour concierge")
+    eq(P.staff_from_sources("yes | amenity list: Doorman || concierge: yes | amenity list: Concierge"), {"doorman": "yes", "concierge": "yes", "front_desk": ""}, "IC4 D9: both, each from its own source")
+    eq(P.staff_from_sources("24/7 attended lobby"), {"doorman": "", "concierge": "", "front_desk": "24h"}, "IC4 D9: an attended lobby is neither")
+    eq(P.staff_from_sources("virtual doorman"), {"doorman": "", "concierge": "", "front_desk": ""}, "IC4 D9: a virtual doorman is none of them")
+    eq(P.staff_from_sources("none listed; Trulia lists 'Night Patrol'"), {"doorman": "", "concierge": "", "front_desk": ""}, "IC4 D9: a negative says nothing")
+    eq(P.staff_from_sources("Door Person | Services | Door Person")["doorman"], "yes", "IC4 D9: door person")
+    # ---- D18: a fee from a resident's review is an estimate with its source named
+    eq(P.review_sourced("reserved $95/month; regular (first come) $75/month, per a resident review dated 2025-05-01"), (True, "2025-05-01"), "IC4 D18: The Atwater's fee sentence is from a review, with its whole date")
+    eq(P.review_sourced("Unassigned and/or Reserved Parking Fee $75"), (False, ""), "IC4 D18: a listing's fee line is not a review")
+    eq(P.parse_parking("reserved $95/month; regular (first come) $75/month, per a resident review dated 2025-05-01")["options"], "reserved $95; regular (first come) $75",
+       "IC4 D18: the option's name carries no source and no date cut short ('2025-05-0')")
+    ok(BM.PREC.index("resident_review") > BM.PREC.index("stated"), "IC4 D18: a review ranks below every page that states the fee")
+    m_ = BM.Merge()
+    BM.add_parking(m_, "b1", "reserved $95/month; regular (first come) $75/month, per a resident review dated 2025-05-01", "confirmed", "u1")
+    eq(m_.resolve()[0]["b1"]["parking_fee_monthly_basis"], "resident_review", "IC4 D18: basis resident_review, not confirmed")
+    BM.add_parking(m_, "b1", "Unassigned and/or Reserved Parking Fee $75", "amenities_page", "u2")
+    eq(m_.resolve()[0]["b1"]["parking_fee_monthly_basis"], "amenities_page", "IC4 D18: where a listing states the fee, the listing is the source")
+    eq((P.parking_kinds("garage: surface parking; optional garages, rate not stated"), P.garage_is_optional("garage: surface parking; optional garages, rate not stated")), (["lot", "garage"], True),
+       "IC4 D18: J Centra Burlington is a lot with optional garages, not 'garage parking'")
+    eq((P.parking_kinds("garage"), P.garage_is_optional("garage")), (["garage"], False), "IC4 D18: a plain garage")
+    eq(BP.receipt_note({"code": "parking_estimate_review", "data": {"review_date": "2025-05-01"}, "amount": 75}), "From a resident's review dated May 1, 2025, not from the building: an estimate.", "IC4 D18: the receipt names the review, with the date whole")
+    # ---- D20: "up to" is kept
+    for t in ["RECEIVE UP TO 2 MONTHS FREE ON BASE RENT! Restrictions and minimum lease term apply.", "Receive Up to 1 Month Free on base rent on select apartments.", "Receive up to 6-Weeks Base Rent FREE PLUS $250 Look and Lease",
+              "up to two months free off base rent"]:
+        ok(P.offer_is_up_to("", t, "2"), f"IC4 D20: an 'up to' offer: {t[:40]!r}")
+    ok(not P.offer_is_up_to("", "2 months free on a 13+ lease", "2") and not P.offer_is_up_to("", "Save up to $500 and get 2 months free", "2"), "IC4 D20: a definite offer is not 'up to'")
+    ok(P.offer_is_up_to("'up to' / range offer: amount for this unit not stated", "", "2") and P.offer_is_up_to("", "", "1-2"), "IC4 D20: the rent-terms condition and a range count")
+    row = {"rent_free_months": "2", "rent_offer_type": "months_free", "rent_offer_up_to": "yes", "rent_lease_months": ""}
+    eq(BP._free_text(row), "up to 2 months", "IC4 D20: the page's offer text keeps 'up to'")
+    eq(BP.disclosure_text({"what": "special offer", "code": "offer:months_free"}, row)[1][:51], "The listing advertises up to 2 months of free rent.", "IC4 D20: 'up to 2 months free' is not written as '2 months free'")
+    eq(BP._free_text({**row, "rent_offer_up_to": ""}), "2 months", "IC4 D20: a definite offer stays definite")
+    # ---- D22: numbering conventions
+    eq([P.floor_by_convention(u_, "floor_first") for u_ in ("2141", "3172", "4149", "4171", "1116", "4186")], [2, 3, 4, 4, 1, 4], "IC4 D22: The Grove Somerset: the floor is the first digit")
+    eq([P.floor_by_convention(u_, "building_floor_unit") for u_ in ("3104", "1236", "11102", "2284")], [1, 2, 1, 2], "IC4 D22: building, floor, number (Kensington Place, J Centra)")
+    eq(P.floor_by_convention("B9-309", "floor_first"), None, "IC4 D22: a label with a separator is not read by the table")
+    eq((P.tower_label_floor("01-16C"), P.tower_label_floor("02-229"), P.tower_label_floor("140-1F")), (16, None, 1), "IC4 D22: Prospect Place 01-16C is floor 16")
+    conv = BM.load_numbering_conventions()
+    ok(conv.get("b_05730a14a8") == "floor_first" and conv.get("b_15bd92512c") == "building_floor_unit", "IC4 D22: the reviewed conventions table is read")
+    # ---- D4 / D19 helpers
+    eq(P.manager_name("Jones Street Residential (Trulia capture); batch file says Konover Residential Corporation"), "Jones Street Residential", "IC4 D24: the manager's name without the working note")
+    eq(P.manager_name("listed by Blue Chip Real Estate Group LLC (broker); manager not stated"), "", "IC4 D24: a broker is not the manager")
+    # ---- D24: reader text
+    ok(not BP.reader_ok("Is this unit still available?") and not BP.reader_ok("see docs/PENDING_FIXES.md") and not BP.reader_ok("The evidence pass could not confirm an elevator")
+       and not BP.reader_ok("Zumper harvest row says elevator yes") and not BP.reader_ok("per a resident review dated 2025-05-0 $75") and not BP.reader_ok("class_c_violations"),
+       "IC4 D24: the reader check rejects unit, file paths, pipeline words, truncated dates and field names")
+    ok(BP.reader_ok("The listing page was last changed on August 22, 2026, 86 days before we read it."), "IC4 D24: a plain sentence passes")
+    eq(BP.day("2026-08-22"), "August 22, 2026", "IC4 D24: dates are written out whole")
+    eq(BP.day("2025-05-0"), "", "IC4 D24: a date cut short is never printed")
+    eq(BP.plain("Is unit 302 still available at $1,675?"), "Is apartment 302 still available at $1,675?", "IC4 D24: apartment, not unit")
+    eq(BP.reviewed("A Google review (seen in a search summary, docs/PENDING_FIXES.md) claims units here were advertised with no occupancy permit."), None, "IC4 D24: a reviewer's sentence with a file path is not printed; the template is used")
+    base = {"open_keys": "elevator", "confirm_what": "elevator", "confirm_asterisk": "yes", "open_review_why": "", "open_review_question": ""}
+    for code in ("height_only", "select_buildings", "city_record", "low_rise", "listing_site_only", "height_implied", "not_confirmed", "complex", "reviewer"):
+        t = BP.open_item_text({**base, "open_codes": code, "confirm_why": "The evidence pass could not confirm an elevator for this building: Zumper harvest row says elevator yes |"})
+        ok(t[2] and BP.reader_ok(t[2]) and BP.reader_ok(t[3]) and "evidence pass" in t[4], f"IC4 D24: elevator / {code}: plain why and question; the raw note only in why_internal")
+    for key, what, codes in [("dogs", "dogs allowed", ("sources_disagree", "case_by_case", "ask_policy", "dogs_not_named", "not_reread", "listing_site_only", "not_confirmed", "reviewer")),
+                             ("availability", "availability", ("second_site", "reviewer")),
+                             ("listing", "listing", ("place", "address_mismatch", "stale_page", "stale_date", "warning", "price_doubt", "sibling_12", "reviewer")),
+                             ("eligibility", "eligibility", ("income_tag", "not_normal_lease", "eligibility", "reviewer"))]:
+        for code in codes:
+            t = BP.open_item_text({"open_keys": key, "confirm_what": what, "open_codes": code, "confirm_asterisk": "yes", "listing_stale_why": "the listing page was last changed on 2026-08-22, 86 days before it was read (2026-11-16), and no second site lists the unit",
+                                   "price_12_sibling_why": "unit 425 of this building is $2,606 on its 24-month price and $3,210 on a 12-month lease (23 percent more)", "price_lease_months": "24"})
+            ok(t[2] and t[3] and BP.reader_ok(t[2]) and BP.reader_ok(t[3]) and BP.reader_ok(t[1]), f"IC4 D24: {key} / {code}: plain label, why and question")
+    t = BP.open_item_text({"open_keys": "listing", "confirm_what": "listing", "open_codes": "stale_page", "listing_stale_why": "the listing page was last changed on 2026-08-22, 86 days before it was read (2026-11-16), and no second site lists the unit"})
+    eq(t[2], "The listing page was last changed on August 22, 2026, 86 days before we read it, and no second site lists this apartment.", "IC4 D24: the stale-page sentence, from the date and the day count")
+    # the lease-term gap: any term that is not 12 months
+    eq(BP.disclosure_text({"what": "lease term", "code": "lease:term"}, {"price_lease_months": "13"})[1], "The price shown is for a 13-month lease: ask for the 12-month price.", "lease gap: the 13-month sentence")
+    eq(BP.disclosure_text({"what": "lease term", "code": "lease:term"}, {"price_lease_months": "11"})[1], "The price shown is for an 11-month lease: ask for the 12-month price.", "lease gap: a term under a year")
+    for code, row in [("floor:floor_read_from_number", {"unit_floor": "4", "unit": "4F"}), ("floor:floor_not_published", {}), ("lease:uses_12_month", {"price_lease_months": "13", "price_12_month": "3040", "listed_rent": "2487"}),
+                      ("lease:sibling_12", {"price_lease_months": "24"}), ("lease:lowest_of_terms", {}), ("lease:reviewer", {}), ("cost:could_pass", {"all_in": "2900", "all_in_likely": "3080", "unknown_cost_lines": "parking"}),
+                      ("condo:city_record", {}), ("condo:listed_as_condo", {}), ("net_effective", {}), ("offer:dollar_credit", {}), ("offer:other", {}), ("dog_weight", {}),
+                      ("overnight_parking", {"street_overnight_town": "East Orange", "street_overnight_rule": "Every car parked on the street overnight needs a permit."}),
+                      ("income_requirement", {"cond_income": "$130,000 a year"}), ("credit_requirement", {"cond_credit": "700+"}), ("furnished", {})]:
+        lab, why, q = BP.disclosure_text({"what": "x", "code": code}, row)
+        ok(why and BP.reader_ok(why) and BP.reader_ok(q), f"IC4 D24: disclosure {code}: plain why ({why[:50]!r}) and question")
+    eq(BP.disclosure_text({"what": "income requirement", "code": "income_requirement"}, {"cond_income": "$130,000 a year"})[1], "Income requirement: $130,000 a year.", "IC4 D8: the income requirement, as the listing states it")
+    eq(BP.disclosure_text({"what": "furnished apartment", "code": "furnished"}, {})[1], "Furnished apartment.", "IC4 D8: furnished")
+    for code, d_ in [("rent_listed", {"lease_months": 13}), ("rent_12_month", {"lease_months": 13, "listed": 2487}), ("rent_net_effective", {"gross": 2800}), ("fees_unknown", {"fee_exists": True}), ("fees_unknown", {}),
+                     ("fees_in_price", {}), ("fees_published", {"more_not_published": True, "alternatives": True}), ("pet_published", {"several_amounts": True}), ("pet_estimate", {"buildings": 40, "state": "NJ"}),
+                     ("parking_included", {}), ("parking_street", {}), ("parking_published", {"pick": "lowest_listed", "low": 75, "high": 95}), ("parking_published", {"pick": "range", "low": 75, "high": 150}),
+                     ("parking_published", {"pick": "first_space"}), ("parking_published", {"pick": "lowest_covered"}), ("parking_unknown", {}), ("parking_unknown", {"extra_space_only": True}),
+                     ("parking_unknown", {"limited_time_free_not_counted": True}), ("utility_estimate", {}), ("utility_estimate", {"cooking_gas_only": True}), ("utility_included", {}), ("utility_in_fees", {}),
+                     ("utility_no_gas", {}), ("utility_unknown", {})]:
+        n_ = BP.receipt_note({"code": code, "data": d_, "amount": 100})
+        ok(n_ and BP.reader_ok(n_), f"IC4 D24: receipt note {code}: {n_!r}")
+    eq(BP.receipt_note({"code": "parking_published", "data": {"pick": "lowest_listed", "low": 75, "high": 95}, "amount": 75}), "The lowest of the published prices ($75 to $95).",
+       "IC4 D24: 'cheapest of the prices listed; prices listed: reserved $95; regular ...' is written as a sentence")
+    pts = BP.evidence_points("NJ state housing inspection: 12 open violations at the latest report (2022-05-04); 3 older management complaint(s); management may have changed; 2 safety incident report(s) at the address")
+    eq(len(pts), 3, "IC4 D24: three things worth knowing, each one sentence")
+    ok(all(BP.reader_ok(x) for x in pts + BP.evidence_points("management: city records in the last 6 months above the 90th percentile on class_c_violations, pest_complaints")
+           + BP.evidence_points("reviews: rating at or below the pause line 3.5; google_via_zumper 3.1 from 40 reviews, as of 2025-02-12; rating figure is over 18 months old")), "IC4 D24: avoid and worth-knowing notes are plain sentences")
+    # ---- D10: no crime figure
+    eq(BP.safety_status({"violent": 1.2, "property": 9.0})[0], "published", "IC4 D10: both rates published")
+    st = BP.safety_status({"violent": float("nan"), "property": float("nan"), "state": "CT", "hood": "Beacon Falls"})
+    ok(st[0] == "not_published" and "Beacon Falls" in st[1] and "guessed" in st[1] and BP.reader_ok(st[1]), "IC4 D10: no figure: status not_published with a plain reason, never a pass")
+    eq(BP.safety_status({"violent": 1.0, "property": None, "state": "NY", "hood": "X"})[0], "not_published", "IC4 D10: one missing rate is enough")
+
+
+# keys of the page data that are NOT text written for the reader by the pipeline: enums and ids, names and addresses,
+# links, other people's words quoted verbatim (resident quotes, a listing's own offer text, the wording of a local rule),
+# raw source sentences kept for reference, fields marked internal, and the fields scripts/page_data_extras.py owns
+PAGE_TEXT_EXEMPT = re.compile(
+    r"_internal$|^(?:id|kind|year|code|hood_id|building_id|parent_id|experience|source|source_site|url|listing|building|photo|site|phone|email)$|_id$|_ids$|_url$|"
+    r"^(?:address|addresses|name|short_name|parent_name|building|unit|city|postal_city|zip|state|area|municipality|park|dog_park|supermarket|train_station|police|geography|manager|toll_items|"
+    r"transit_summary|last_train_home_sat|context|theme|date|as_of|measure|value|window|label_internal)$|"
+    r"^(?:excerpt|quote|offer_text|policy_text|size_only_source|doorman_text|pool_text|laundry|controlled_access|gym|in_unit_laundry|package_room|outdoor_space|lounge_or_coworking|dog_amenities|"
+    r"type|parking_type|fee_note|options_text|all_in_likely_note|avoid_reasons|pause_notes|first_full_payment_note|public_evidence|basis|drive_basis|toll_basis|toll_mail_note|method|label|"
+    r"summary|rule|about|source_area|location_basis|location_check|floor_basis|status|subhead|figures_over)$")
+EXTRAS_OWNED = {"prose", "host", "about_points", "tagline", "subhead_original", "headlines", "described", "contact", "ratings", "photos", "scenes", "catch", "realtor", "host_line", "about", "voices", "survey",
+                "parking_rules", "dog_rules", "local", "links", "evidence_items", "items", "positive", "queens_spectrum", "moment_thresholds", "anchor"}
+
+
+def page_text_fields(J):
+    """(path, text) for every string in the page data that the pipeline wrote for the reader."""
+    out = []
+
+    def walk(o, path, key):
+        if isinstance(o, dict):
+            for k, v_ in o.items():
+                if k in EXTRAS_OWNED:
+                    continue
+                walk(v_, path + "." + k, k)
+        elif isinstance(o, list):
+            for v_ in o:
+                walk(v_, path + "[]", key)
+        elif isinstance(o, str) and o and not PAGE_TEXT_EXEMPT.search(key or "") and not o.startswith(("http://", "https://")):
+            out.append((path, o))
+    for top in ("meta", "years", "neighborhoods", "neighborhoods_avoid_only", "buildings", "units", "avoid", "held"):
+        walk(J.get(top) or [], top, top)
+    return out
+
+
+def page_ic4(J, M, R, S):
+    """Independent check 4 on site/data.json (after scripts/build_page_data.py)."""
+    import build_page_data as BP
+    units = {u["id"]: u for u in J["units"]}
+    # D24: the whole page data. Every text field the pipeline writes for the reader: none of the task's words.
+    bad = [(p_, t) for p_, t in page_text_fields(J) if BP.BANNED_CORE.search(t)]
+    ok(not bad, f"IC4 D24: {len(bad)} reader text fields of the page data contain 'unit', a pipeline word, a file path or a truncated date, e.g. {bad[:3]}")
+    # the fields written by the templates pass the stricter list too
+    strict = []
+    for u in J["units"] + J["avoid"] + J["held"]:
+        c = u["confirm"]
+        strict += [("confirm", c.get(k)) for k in ("what", "label", "why", "question")]
+        for d in u["disclosures"]:
+            strict += [("disclosure " + str(d.get("what")), d.get(k)) for k in ("what", "label", "why", "question")]
+        for l in u["all_in_lines"]:
+            strict += [("cost line " + str(l.get("line")), l.get(k)) for k in ("line", "label", "note")]
+        strict += [("tour question", q) for q in u["tour_questions"]]
+        strict += [("worth knowing", q) for q in u["evidence"]["pause_points"] + u["evidence"]["avoid_points"]]
+    strict += [("safety note", h["safety"].get("status_note")) for h in J["neighborhoods"] + J["neighborhoods_avoid_only"]]
+    bad2 = [(w, t) for w, t in strict if t and not BP.reader_ok(t)]
+    ok(not bad2, f"IC4 D24: {len(bad2)} template-written fields fail the reader check, e.g. {bad2[:3]}")
+    ok(all(u["confirm"]["why"] and u["confirm"]["question"] and u["confirm"]["label"] for u in J["units"] if u["confirm"]["asterisk"]), "IC4 D24: every asterisk carries a label, a reason and a question")
+    ok(all(d["why"] for u in J["units"] for d in u["disclosures"]), "IC4 D24: every disclosure carries a reason")
+    ok(all((u["confirm"]["why_internal"] or "") != u["confirm"]["why"] or not u["confirm"]["asterisk"] or BP.reader_ok(u["confirm"]["why"]) for u in J["units"]), "IC4 D24: the raw note is only in why_internal")
+    ok(all(any(d["what"] == "lease term" for d in u["disclosures"]) for u in J["units"] if (u["cost_check"]["lease_term_months"] or 12) != 12 and not u["cost_check"]["price_12_month"]),
+       "lease gap: every shown price quoted for a lease that is not 12 months, with no 12-month price, carries the lease-term disclosure")
+    # D8
+    for lid, what in [("trulia:2098501053", "income requirement"), ("zumper-65782421", "income requirement"), ("zumper-65782421", "credit score requirement")]:
+        if lid in units:
+            ok(any(d["what"] == what for d in units[lid]["disclosures"]), f"IC4 D8: {lid} carries the disclosure '{what}'")
+    for b in ("b_bf42e361a0", "b_cd45a04dde"):
+        us = [u for u in J["units"] if u["building_id"] == b]
+        ok(all(any(d["what"] == "furnished apartment" for d in u["disclosures"]) for u in us), f"IC4 D8: every shown apartment of {b} says it is furnished")
+    # D9
+    con = [u for u in J["units"] if u["amenities"]["doorman"] and not re.search(r"door ?m[ae]n|door ?person", str(M.at[u["id"], "doorman_all_sources"] if "doorman_all_sources" in M.columns else ""), re.I)]
+    ok(not con, f"IC4 D9: {len(con)} shown apartments carry the amenity 'doorman' with no source that says doorman")
+    ok(sum(1 for u in J["units"] if u["amenities"]["concierge"]) > 50, "IC4 D9: concierge is an amenity of its own")
+    # D10
+    for h in J["neighborhoods"]:
+        sf = h["safety"]
+        ok(sf["status"] in ("published", "not_published") and (sf["status"] == "published") == (sf["violent_per_1000"] is not None and sf["property_per_1000"] is not None), f"IC4 D10: {h['id']} safety status follows the figures")
+        ok(sf["status"] == "published" or sf["status_note"], f"IC4 D10: {h['id']} says why no figure is published")
+        if sf["status"] == "published":
+            ok(sf["violent_per_1000"] <= J["meta"]["jamaica_yardstick"]["violent_per_1000"] and sf["property_per_1000"] <= J["meta"]["jamaica_yardstick"]["property_per_1000"], f"IC4 D10: {h['id']} is at or under Jamaica on both rates")
+    # D17 / D1
+    ok(all("city" in b and "postal_city" in b for b in J["buildings"]), "IC4 D17: every building carries its municipality and, where it differs, the listed city")
+    # D19
+    for b in J["buildings"]:
+        bf = b["amenities"]["building_floors"]
+        top = max([float(units[i]["floor"]) for i in b["unit_ids"] if units[i]["floor"] is not None and units[i]["floor_basis"] in ("stated", "confirmed")] + [0])
+        ok(bf is None or float(bf) >= top, f"IC4 D19: {b['id']} ({b['name']}): 'floors in the building' {bf} is below a stated apartment floor {top}")
+    # D20
+    upto = [u for u in J["units"] if re.search(r"\bup to\s+(?:\w+[\s-]+){0,3}?(?:\d|one|two|three)[\w.]*[\s-]*(?:months?|weeks?)", u["rent"]["offer_text"] or "", re.I) and u["rent"]["offer_type"] in ("months_free", "weeks_free")]
+    ok(all(u["rent"]["offer_up_to"] and (u["rent"]["free_text"] or "").startswith("up to") for u in upto), f"IC4 D20: {len(upto)} 'up to' offers keep their qualifier")
+    # D21
+    ok(all(h["counts"]["shown"] > 0 for h in J["neighborhoods"]), "IC4 D21: every neighborhood in the main array has an apartment to show")
+    ok(all(h["counts"]["shown"] == 0 and h["counts"]["avoid"] > 0 for h in J["neighborhoods_avoid_only"]), "IC4 D21: avoid-only places are in their own array")
+    ok(len(J["neighborhoods"]) == len({u["hood_id"] for u in J["units"]}) == J["meta"]["counts"]["neighborhoods"], "IC4 D21: the neighborhood count is the number of neighborhoods with a shown apartment")
+    ok(sum(y["counts"]["neighborhoods"] for y in J["years"]) == len(J["neighborhoods"]) and all(set(y["hood_ids"]) <= {h["id"] for h in J["neighborhoods"]} for y in J["years"]), "IC4 D21: experience counts and lists hold shown neighborhoods only")
+
+
 def data_ic4(M, R, S):
     """docs/INDEPENDENT_CHECK_4.md on the pipeline's output."""
     import pandas as pd
@@ -1271,6 +1484,7 @@ def data_ic4(M, R, S):
 if __name__ == "__main__":
     if "--data" not in sys.argv:
         pure_ic4()
+        pure_ic4_text()
     (data if "--data" in sys.argv else pure)()
     print(f"test_rules {'(data)' if '--data' in sys.argv else '(rules)'}: {N[0]} checks, {len(FAILS)} failed")
     for f in FAILS:

@@ -75,17 +75,472 @@ def moment_ratings(m, parking_rank=None, offsite=False, secured=False, overnight
     return out
 
 
+# ============================================================================================================
+# READER TEXT (independent check 4, D24). Everything the page prints about what is open, what to know and what each
+# cost line rests on is WRITTEN HERE, from structured fields, through a small set of plain templates:
+#   confirm.what / label / why / question, disclosures[].why / question / label, all_in_lines[].note / label,
+#   tour_questions[], evidence.pause_points / avoid_points, neighborhoods[].safety.status_note.
+# The pipeline's own working notes (rank.py's confirm_why, a checker's sentence, a parser's note) are kept only in
+# the *_internal fields, which the page must not show. A reviewer's sentence from data/evidence/review_verdicts.csv
+# (reviewed text, "plain words for the page") is used in place of a template only when it passes reader_ok() after
+# plain(); otherwise the template for its kind is used. scripts/test_rules.py --data walks the whole page data.
+# Vocabulary: apartment, never unit; no file paths; no pipeline or agent words; dates written out in full.
+BANNED = re.compile(
+    r"\bunits?\b|evidence pass|\bharvest\w*|\bbatch(?:es)?\b|docs/|\.csv\b|\.py\b|\.md\b|\.json\b|\bverdicts?\b|\bgates?\b|\bpipeline\b|\bcheckers?\b|live check|"
+    r"\brefetch\w*|\bre-read\b|not re-read|stored value|HTTP \d|\brobots\b|refused us|the host is|\bscrap\w+|listing_id|\b[a-z]+_[a-z_]+\b|"
+    r"(?:19|20)\d\d-\d\d-\d(?!\d)|(?:19|20)\d\d-\d(?!\d)|\.\.\.$|…$|\bnan\b|\bNone\b", re.I)
+# the list in the task ("unit", "evidence pass", "harvest", "batch", a file path, "docs/", ".csv", "verdict", "gate",
+# "pipeline", a truncated date): applied to every prose field of the page data, old and new
+BANNED_CORE = re.compile(r"\bunits?\b|evidence pass|\bharvest\w*|\bbatch(?:es)?\b|docs/|\.csv\b|\bverdicts?\b|\bgates?\b|\bpipeline\b|"
+                         r"(?:^|[\s(])(?:[\w.-]+/)+[\w.-]+\.(?:py|csv|md|json|txt)\b|(?:19|20)\d\d-\d\d-\d(?!\d)", re.I)
+MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+
+def reader_ok(text) -> bool:
+    return not BANNED.search(str(text or ""))
+
+
+def day(iso) -> str:
+    """'2026-08-22' -> 'August 22, 2026'; '' when it is not a full date (a date is never printed cut short)."""
+    m = re.match(r"((?:19|20)\d\d)-(\d\d)-(\d\d)", str(iso or ""))
+    if not m or not 1 <= int(m.group(2)) <= 12:
+        return ""
+    return f"{MONTHS[int(m.group(2)) - 1]} {int(m.group(3))}, {m.group(1)}"
+
+
+def usd(x) -> str:
+    try:
+        return "${:,.0f}".format(float(x))
+    except (TypeError, ValueError):
+        return ""
+
+
+def plain(text) -> str:
+    """A reviewed sentence in the page's vocabulary: apartment for unit, ISO dates written out. Nothing else is changed."""
+    t = str(text or "").strip()
+    t = re.sub(r"\bunit map\b", "map of apartments", t)
+    t = re.sub(r"\bUnits\b", "Apartments", t)
+    t = re.sub(r"\bunits\b", "apartments", t)
+    t = re.sub(r"\bUnit\b", "Apartment", t)
+    t = re.sub(r"\bunit\b", "apartment", t)
+    t = re.sub(r"\ban apartment\b", "an apartment", t)
+    t = re.sub(r"\ba apartment\b", "an apartment", t)
+    t = re.sub(r"((?:19|20)\d\d-\d\d-\d\d)", lambda m: day(m.group(1)) or m.group(1), t)
+    return t
+
+
+def reviewed(text):
+    """The reviewer's sentence when it is fit to print, else None (the caller then uses the template)."""
+    t = plain(text)
+    return t if t and reader_ok(t) and len(t) <= 420 else None
+
+
+def _f(r, c):
+    x = r.get(c)
+    return None if x is None or (isinstance(x, float) and np.isnan(x)) or str(x) in ("", "nan") else x
+
+
+def _num(r, c):
+    try:
+        x = float(_f(r, c))
+        return None if np.isnan(x) else x
+    except (TypeError, ValueError):
+        return None
+
+
+def _months(x):
+    try:
+        return int(float(x))
+    except (TypeError, ValueError):
+        return None
+
+
+def _a(n) -> str:
+    """'an 11-month lease', 'an 18-month lease', 'a 13-month lease'."""
+    return "an" if str(n).startswith(("8", "11", "18")) else "a"
+
+
+OPEN_LABEL = {"elevator": "the elevator", "dogs allowed": "whether dogs are allowed", "availability": "whether this apartment is still available",
+              "listing": "whether this listing is current", "eligibility": "who can rent this apartment"}
+LISTING_LABEL = {"place": "the building's exact address", "address_mismatch": "which building this apartment is in", "price_doubt": "the price", "sibling_12": "the 12-month price"}
+ELEVATOR_WHY = {
+    "select_buildings": "The building's own page says only some of its buildings have an elevator. It does not say which.",
+    "city_record": "The city's record for this address describes a building without an elevator, while a listing names one.",
+    "low_rise": "A listing site names an elevator, but the property is described as low buildings or townhomes.",
+    "listing_site_only": "A listing site names an elevator. The building's own page does not mention one.",
+    "height_implied": "No page says in words that the building has an elevator. Its height suggests one.",
+    "not_confirmed": "A listing names an elevator, but no page of the building's own confirms it.",
+    "complex": "An elevator is named for the property as a whole. The property has several buildings, so that does not tell us one serves this apartment.",
+    "reviewer": "An elevator is not confirmed for this apartment.",
+}
+DOGS_WHY = {
+    "sources_disagree": "Two listing sites disagree on whether dogs are allowed, and the building's own page does not settle it.",
+    "case_by_case": "The pet policy says pets are welcome on approval. It does not say dogs are allowed.",
+    "ask_policy": "The listing says to contact the building for its pet policy. No page says dogs are allowed.",
+    "dogs_not_named": "The listing says small pets are allowed and does not name dogs.",
+    "not_reread": "A listing said dogs are allowed, but the page could not be opened again to confirm it.",
+    "listing_site_only": "One listing site says small dogs are allowed. No page of the building's own confirms it.",
+    "not_confirmed": "No page we read confirms that dogs are allowed.",
+    "reviewer": "It is not confirmed that dogs are allowed here.",
+}
+
+
+def _sibling(r):
+    """('425', 2606, 24, 3210) from the sibling long-lease note, or None."""
+    m = re.search(r"unit (\S+) of this building is \$([\d,]+) on its (\d+)-month price and \$([\d,]+) on a 12-month lease", str(_f(r, "price_12_sibling_why") or ""))
+    return (m.group(1), float(m.group(2).replace(",", "")), int(m.group(3)), float(m.group(4).replace(",", ""))) if m else None
+
+
+def _stale(r):
+    """(date, days) of the stale page or old availability date behind a 'listing' item, from the structured columns first."""
+    why = str(_f(r, "listing_stale_why") or "") + " " + str(_f(r, "listing_warning") or "")
+    m = re.search(r"availability date ((?:19|20)\d\d-\d\d-\d\d) was (\d+) days", why)
+    if m:
+        return "date", m.group(1), int(m.group(2))
+    d = _f(r, "page_modified_date")
+    m = re.search(r"last changed on ((?:19|20)\d\d-\d\d-\d\d), (\d+) days", why) or re.search(r"STALE PAGE ((?:19|20)\d\d-\d\d-\d\d)", why)
+    if m:
+        return "page", m.group(1), int(m.group(2)) if m.lastindex and m.lastindex >= 2 else _months(_f(r, "listing_stale_days"))
+    return ("page", str(d)[:10], _months(_f(r, "listing_stale_days"))) if d else ("page", "", None)
+
+
+def open_item_text(r):
+    """(what, label, why, question, why_internal) for the ONE open item of a shown apartment, or None."""
+    keys = [k for k in str(_f(r, "open_keys") or "").split(";") if k]
+    if not keys:
+        return None
+    key = keys[0]
+    code = (str(_f(r, "open_codes") or "").split(";") + [""])[0]
+    what = str(_f(r, "confirm_what") or "").split("; ")[0] or {"dogs": "dogs allowed"}.get(key, key)
+    rv_why, rv_q = reviewed(_f(r, "open_review_why")) if len(keys) == 1 else None, reviewed(_f(r, "open_review_question")) if len(keys) == 1 else None
+    label, why, q = OPEN_LABEL.get(what, what), "", ""
+    if key == "elevator":
+        if code == "height_only":
+            fl = _months(_f(r, "building_floors")) or _months(_f(r, "pluto_floors"))
+            why = f"No page we read says the building has an elevator. It has {fl} floors, which suggests one." if fl and fl >= 6 else "No page we read says the building has an elevator. Its height suggests one."
+        else:
+            why = ELEVATOR_WHY.get(code, ELEVATOR_WHY["reviewer"])
+        q = "Is there an elevator in this apartment's building, and does it reach this floor?" if code in ("complex", "select_buildings", "low_rise") else "Does the building have an elevator?"
+    elif key == "dogs":
+        why, q = DOGS_WHY.get(code, DOGS_WHY["reviewer"]), "Are dogs allowed? Ask for the pet policy in writing."
+    elif key == "availability":
+        why = ("Another listing site shows this address without this apartment, and the listing itself could not be opened again." if code == "second_site"
+               else "It is not confirmed that this apartment is still available.")
+        q = "Is this apartment still available, and at this price?"
+    elif key == "listing":
+        label = LISTING_LABEL.get(code, label)
+        q = "Is this apartment still available, and at this price?"
+        if code == "place":
+            why, q = "The listing's map position and its street address do not match, so the drive time and the surroundings shown here may be for another spot.", "What is the building's exact street address?"
+        elif code == "address_mismatch":
+            why, q = "The listing's address and the building's own information differ. This apartment may be in a neighboring building of the same complex.", "Which building is this apartment in, and what is its address?"
+        elif code == "price_doubt":
+            why, q = "The price is well below similar apartments nearby.", "Is this price real? Confirm it by phone before touring."
+        elif code == "sibling_12":
+            sb, lm = _sibling(r), _months(_f(r, "price_lease_months"))
+            term = f"for {_a(lm)} {lm}-month lease" if lm else "for a long lease"
+            why = (f"The price shown is {term}. Another apartment in this building costs {usd(sb[1])} on its {sb[2]}-month lease and {usd(sb[3])} on a 12-month lease, so this one's 12-month price may be much higher."
+                   if sb else f"The price shown is {term}, and the 12-month price in this building can be much higher.")
+            q = "What is the rent on a 12-month lease? Ask before touring."
+        elif code in ("stale_page", "stale_date"):
+            kind, d, n = _stale(r)
+            if kind == "date" and day(d):
+                why = f"The move-in date on the listing is {day(d)}, more than six months ago. The apartment may have sat empty, or the date may be out of date."
+            elif day(d):
+                why = f"The listing page was last changed on {day(d)}" + (f", {n} days before we read it" if n else "") + ", and no second site lists this apartment."
+            else:
+                why = "The listing page has not changed in over two months, and no second site lists this apartment."
+        else:
+            why = "Something about this listing did not match the building's own information." if code == "warning" else "This listing could not be fully confirmed."
+    elif key == "eligibility":
+        q = "Is this apartment open to any renter on an ordinary lease?"
+        if code == "income_tag":
+            why, q = "A listing site tags this building as income-restricted. The manager's own page does not say so and gives no income limit.", "Is this apartment open to any renter, or is there an income limit?"
+        elif code == "not_normal_lease":
+            why = "The listing's wording suggests this is not an ordinary one-year lease (for example a short stay, a sublet, or student or corporate housing)."
+        else:
+            why = "It is not settled who can rent this apartment."
+    # a reviewer's sentence about THIS apartment is more specific than the template: used when it is fit to print
+    if rv_why and (code == "reviewer" or key in ("listing", "availability", "eligibility")) and code not in ("place", "sibling_12"):
+        why = rv_why
+    if rv_q and (code == "reviewer" or key in ("listing", "availability", "eligibility")) and code not in ("place", "sibling_12"):
+        q = rv_q
+    return what, label, why, q, str(_f(r, "confirm_why") or "")
+
+
+OFFER_WORD = {"dollar_credit": "a one-time credit or gift", "look_and_lease": "a one-time credit for applying quickly", "reduced_deposit_or_fee": "a reduced deposit or a waived fee"}
+DISCLOSURE_LABEL = {"floor not published": "floor not published", "lease term": "lease length", "could pass $3,000": "could pass $3,000", "special offer": "special offer",
+                    "net-effective rent": "average rent after free months", "condo rented by its owner": "condo rented by its owner",
+                    "dog weight limit not published": "dog weight limit not published", "overnight street parking": "overnight street parking",
+                    "income requirement": "income requirement", "credit score requirement": "credit score requirement", "furnished apartment": "furnished apartment",
+                    "something else to know": "something else to know"}
+
+
+def _free_text(r):
+    """'up to 2 months' / '6 weeks' / '' from the structured offer fields (independent check 4, D20: 'up to' is kept)."""
+    fm, typ = str(_f(r, "rent_free_months") or ""), str(_f(r, "rent_offer_type") or "")
+    up = "up to " if _f(r, "rent_offer_up_to") == "yes" else ""
+    m = re.fullmatch(r"\s*([\d.]+)(?:\s*-\s*([\d.]+))?\s*", fm)
+    if not m:
+        return ""
+    hi = float(m.group(2) or m.group(1))
+    if typ == "weeks_free":
+        w = round(hi * 52 / 12)
+        return f"{up}{w} week{'s' if w != 1 else ''}"
+    n = f"{hi:g}"
+    return f"{up or ('up to ' if m.group(2) else '')}{n} month{'s' if hi != 1 else ''}"
+
+
+def disclosure_text(d, r):
+    """(label, why, question) for one disclosure, from its code and the row's structured columns."""
+    what, code = d.get("what") or "", d.get("code") or ""
+    kind, _, sub = code.partition(":")
+    rv_why, rv_q = reviewed(d.get("review_why")), reviewed(d.get("review_question"))
+    label, why, q = DISCLOSURE_LABEL.get(what, what), "", ""
+    lm, p12 = _months(_f(r, "price_lease_months")), _num(r, "price_12_month")
+    if kind == "floor":
+        fl, un = _months(_f(r, "unit_floor")), _f(r, "unit")
+        why = (f"The listing does not give the floor. Floor {fl} is our reading of the apartment number {un}." if sub == "floor_read_from_number" and fl and un
+               else "The listing does not give the floor.")
+        q = d.get("question") or "Floor not published: confirm it is above the ground floor"
+    elif kind == "lease":
+        q = "What is the rent on a 12-month lease?"
+        listed = _num(r, "live_price") if str(_f(r, "live_status")) in ("live", "changed") and _num(r, "live_price") else _num(r, "listed_rent")
+        if sub == "uses_12_month" and p12:
+            why = (f"The listing shows {usd(listed)} for {_a(lm)} {lm}-month lease. " if lm and listed else "The price on the listing is not the 12-month price. ") + f"The rent and the total here use the 12-month price, {usd(p12)}."
+        elif sub == "sibling_12":
+            why = (f"The price shown is for {_a(lm)} {lm}-month lease. " if lm else "The price shown is for a long lease. ") + "The 12-month price is not published, and in this building it can be much higher: ask for it."
+        elif sub == "term" and lm:
+            why = f"The price shown is for {_a(lm)} {lm}-month lease: ask for the 12-month price."
+        elif sub == "lowest_of_terms":
+            why = "The price shown is the lowest across the lease lengths offered. The listing does not say which length it belongs to."
+        else:
+            why = rv_why or "The price shown may not be the 12-month price: ask for it."
+    elif kind == "cost":
+        a, l = _num(r, "all_in"), _num(r, "all_in_likely")
+        names = [x for x in str(_f(r, "unknown_cost_lines") or "").split("; ") if x in ("parking", "required fees", "some required fees")]
+        subj = " and ".join(names) if names else "parking and the required fees"
+        verb = "costs what it typically does" if subj == "parking" else "cost what they typically do"
+        why = (f"On what is published the total is {usd(a)} a month. If {subj} {verb}, it would be about {usd(l)}."
+               if a and l else "Parking or required fees are not published; once they are known the total could pass $3,000.")
+        q = "What do parking and the required monthly fees cost here?"
+    elif kind == "condo":
+        why = rv_why or ("City records show this building is a condominium, so the apartment is rented out by its owner, not by a leasing office." if sub == "city_record"
+                         else "The listing is for a condo or co-op apartment rented out by its owner, not by a leasing office.")
+        q = rv_q or "What are the building's rules for renting this apartment (application, fees, pets)?"
+    elif kind == "other":
+        why = rv_why or "There is one more thing to ask about this apartment before touring."
+        q = rv_q or ""
+    elif kind == "net_effective":
+        why, q = "The rent shown is the average after free months, not what you pay each month.", "What is the full monthly rent, and when is the first full payment due?"
+    elif kind == "offer":
+        free, lease = _free_text(r), _months(_f(r, "rent_lease_months"))
+        if sub in ("months_free", "weeks_free") and free:
+            why = f"The listing advertises {free} of free rent" + (f" on {_a(lease)} {lease}-month lease" if lease and lease != 12 else "") + "."
+        elif sub in ("months_free", "weeks_free"):
+            why = "The listing advertises free rent."
+        else:
+            why = f"The listing advertises {OFFER_WORD.get(sub, 'a special offer')}."
+        if _f(r, "rent_offer_select_units") == "yes":
+            why += " It applies to selected apartments only."
+        why += " The page does not say the price shown already includes it, so the price is treated as the normal monthly rent."
+        q = "Special offer: ask what a normal month costs"
+    elif kind == "dog_weight":
+        why, q = "The pet policy says a weight limit applies and gives no number.", parsers.DOG_WEIGHT_QUESTION
+    elif kind == "overnight_parking":
+        town, rule = str(_f(r, "street_overnight_town") or "").strip(), plain(_f(r, "street_overnight_rule"))
+        why = f"{town}: {rule}" if town and rule else "The town restricts overnight parking on the street."
+        q = "Overnight street parking is restricted here: confirm the building has a space, and its cost"
+    elif kind == "income_requirement":
+        v_ = plain(str(_f(r, "cond_income") or "")).strip().rstrip(".")
+        why, q = (f"Income requirement: {v_}." if v_ and reader_ok(v_) else "The listing states an income requirement."), "Do you meet the income requirement, and does a guarantor count?"
+    elif kind == "credit_requirement":
+        why, q = f"Credit score requirement: {_f(r, 'cond_credit')}.", "What credit score does the application need?"
+    elif kind == "furnished":
+        why, q = "Furnished apartment.", "Is the furniture optional, and is this a standard 12-month lease?"
+    else:
+        why, q = rv_why or "", rv_q or ""
+    return label, why, q
+
+
+LINE_LABEL = {"rent (net-effective)": "rent (average after free months)"}
+STATE_NAME = {"NJ": "New Jersey", "NY": "New York", "CT": "Connecticut"}
+
+
+def receipt_note(l):
+    """The reader's note for one cost line, from its code and data (all_in.py). Never the parser's working note."""
+    code, d, amount = l.get("code") or "", l.get("data") or {}, l.get("amount")
+    bits = []
+    if code.startswith("rent"):
+        lm = _months(d.get("lease_months"))
+        if code == "rent_12_month":
+            bits.append((f"The listing shows {usd(d.get('listed'))} for {_a(lm)} {lm}-month lease. " if lm else "") + "This is the 12-month price.")
+        elif code == "rent_net_effective":
+            bits.append("The average monthly rent after the free months in the offer." + (f" The full monthly rent is {usd(d.get('gross'))}." if d.get("gross") and d.get("gross") != amount else ""))
+        elif lm:
+            bits.append(f"The price shown is for {_a(lm)} {lm}-month lease. The 12-month price is not published.")
+        if d.get("old_price"):
+            bits.append(f"The price changed since we first read it: it was {usd(d.get('old_price'))}.")
+    elif code == "fees_unknown":
+        bits.append("The building charges a monthly fee, but the amount is not published." if d.get("fee_exists") else "Not published. Ask which monthly fees are added to the rent.")
+    elif code == "fees_in_price":
+        bits.append("Already inside the price shown.")
+    elif code == "fees_published":
+        bits.append("The required monthly fees published for this building.")
+        if d.get("alternatives"):
+            bits.append("The page gives more than one amount; the higher is used.")
+        if d.get("differs_by_unit"):
+            bits.append("The fee differs from apartment to apartment.")
+        if d.get("more_not_published"):
+            bits.append("A further fee exists whose amount is not published.")
+    elif code == "pet_published":
+        bits.append("As published for this building." + (" The page gives more than one amount; this is for one pet." if d.get("several_amounts") else ""))
+    elif code == "pet_estimate":
+        st = STATE_NAME.get(d.get("state"), "")
+        bits.append("Not published for this building. This is the typical pet rent" + (f" in {st}" if st else "") + (f", from {d.get('buildings')} buildings that publish one." if d.get("buildings") else "."))
+    elif code == "pet_unknown":
+        bits.append("Not published.")
+    elif code == "parking_included":
+        bits.append("A space is included at no charge.")
+    elif code == "parking_street":
+        bits.append("Street parking only: the listing names no garage or lot.")
+    elif code == "parking_estimate_review":
+        bits.append("From a resident's review" + (f" dated {day(d.get('review_date'))}" if day(d.get("review_date")) else "") + ", not from the building: an estimate.")
+    elif code == "parking_published":
+        pick, lo, hi = d.get("pick"), d.get("low"), d.get("high")
+        if pick == "first_space":
+            bits.append("The price of the first space.")
+        elif pick == "lowest_covered":
+            bits.append("The lowest published price for a covered or garage space.")
+        elif pick == "lowest_listed" and lo and hi:
+            bits.append(f"The lowest of the published prices ({usd(lo)} to {usd(hi)}).")
+        elif pick == "range" and lo and hi:
+            bits.append(f"The low end of the published range, {usd(lo)} to {usd(hi)}.")
+        else:
+            bits.append("As published for this building.")
+        if d.get("limited_time_free_not_counted"):
+            bits.append("A free-parking offer for a limited time is not counted.")
+    elif code == "parking_unknown":
+        if d.get("extra_space_only"):
+            bits.append("Only the price of an extra space is published.")
+        elif d.get("limited_time_free_not_counted"):
+            bits.append("Free for a limited time only; the regular fee is not published.")
+        else:
+            bits.append("Not published. Ask what a space costs.")
+    elif code == "utility_estimate":
+        bits.append("Cooking gas only; heat is included in the rent." if d.get("cooking_gas_only") else "An estimate for an apartment of this size in this area, not a quote.")
+    elif code == "utility_included":
+        bits.append("Included in the rent.")
+    elif code == "utility_in_fees":
+        bits.append("Covered by the building's required fees.")
+    elif code == "utility_no_gas":
+        bits.append("The building has no gas service.")
+    elif code == "utility_unknown":
+        bits.append("No estimate could be made.")
+    return " ".join(bits) or None
+
+
+def receipt_lines(lines):
+    out = []
+    for l in lines:
+        out.append({"line": l.get("line"), "label": LINE_LABEL.get(l.get("line"), l.get("line")), "amount": l.get("amount"), "basis": l.get("basis"),
+                    "note": receipt_note(l), "note_internal": l.get("note") or None, "code": l.get("code")})
+    return out
+
+
+_SRC_NAME = {"google_via_zumper": "Google reviews shown on Zumper", "own_site_widget": "the reviews on the building's own site", "google": "Google reviews", "apartments_com": "Apartments.com",
+             "apartmentlist": "Apartment List", "zumper": "Zumper", "trulia": "Trulia"}
+_CAT_NAME = {"class_c_violations": "serious housing violations", "heat_hot_water_complaints": "heat and hot water complaints", "pest_complaints": "pest complaints", "mold_complaints": "mold complaints",
+             "elevator_outage": "elevator outages", "mold": "mold", "safety_incident": "safety incidents", "unresponsive_management": "management that does not respond", "pests": "pests",
+             "car_crime": "car crime", "noise": "noise", "heat_hot_water": "heat and hot water"}
+_cat = lambda t: _CAT_NAME.get(t.strip(), t.strip().replace("_", " "))
+
+
+def evidence_points(text):
+    """The avoid reasons / things worth knowing as plain sentences (the stored strings are in a fixed, internal
+    vocabulary written by scripts/avoid.py; each known shape has one template; an unknown shape is dropped unless it
+    is already fit to print)."""
+    out = []
+    for part in re.split(r"\s*\|\|\s*|;\s+(?=(?:reviews:|management:|elevator:|car crime:|NJ state|recent management|some elevator|\d+ (?:older|safety)|car crime mentioned))", str(text or "")):
+        t = part.strip().rstrip(";")
+        if not t:
+            continue
+        m = re.fullmatch(r"NJ state housing inspection: (\d+) open violations? at the latest report \(((?:19|20)\d\d-\d\d-\d\d)\)", t)
+        if m:
+            out.append(f"The state's latest housing inspection report ({day(m.group(2))}) listed {m.group(1)} open violation{'s' if m.group(1) != '1' else ''}."); continue
+        m = re.fullmatch(r"(\d+) older management complaint\(s\); management may have changed", t)
+        if m:
+            out.append(f"{m.group(1)} older complaint{'s' if m.group(1) != '1' else ''} about management; the management may have changed since."); continue
+        m = re.fullmatch(r"(\d+) safety incident report\(s\) at the address", t)
+        if m:
+            out.append(f"{m.group(1)} report{'s' if m.group(1) != '1' else ''} of a safety incident at the address."); continue
+        m = re.fullmatch(r"car crime mentioned \((\d+) report\(s\), below the threshold or older\)", t)
+        if m:
+            out.append(f"{m.group(1)} mention{'s' if m.group(1) != '1' else ''} of car crime at the building, too few or too old to count against it."); continue
+        if t == "some elevator complaints, below the threshold":
+            out.append("A few complaints about the elevator."); continue
+        if t == "recent management complaints, below the threshold":
+            out.append("A few recent complaints about management."); continue
+        m = re.fullmatch(r"reviews: rating at or below the pause line [\d.]+; (\w+) ([\d.]+) from (\d+) reviews, as of ((?:19|20)\d\d-\d\d-\d\d)(; rating figure is over \d+ months old)?", t)
+        if m:
+            out.append(f"Low review rating: {m.group(2)} out of 5 from {m.group(3)} reviews ({_SRC_NAME.get(m.group(1), m.group(1).replace('_', ' '))}, {day(m.group(4))})."
+                       + (" The figure is more than a year and a half old." if m.group(5) else "")); continue
+        m = re.fullmatch(r"reviews: (\d+) negative reviews in the last (\d+) months \(([^)]*)\); (\w+) ([\d.]+) from (\d+) reviews, as of ((?:19|20)\d\d-\d\d-\d\d).*", t)
+        if m:
+            out.append(f"Reviews: {m.group(1)} negative reviews in the last {m.group(2)} months ({', '.join(_cat(x) for x in m.group(3).split(';') if x.strip())}). "
+                       f"Rating {m.group(5)} out of 5 from {m.group(6)} reviews ({_SRC_NAME.get(m.group(4), m.group(4).replace('_', ' '))}, {day(m.group(7))})."); continue
+        m = re.fullmatch(r"elevator: (\d+)\+ complaints to the city in (\d+) months, above the 90th percentile for similar buildings", t)
+        if m:
+            out.append(f"Elevator: {m.group(1)} or more complaints to the city in {m.group(2)} months, more than at nine in ten similar buildings."); continue
+        m = re.fullmatch(r"management: city records in the last (\d+) months above the 90th percentile on (.+)", t)
+        if m:
+            out.append(f"Management: in the last {m.group(1)} months, city records show more {', '.join(_cat(x) for x in m.group(2).split(','))} than at nine in ten similar buildings."); continue
+        m = re.fullmatch(r"car crime: (\d+) vehicle thefts and thefts from vehicles within (\d+) m (?:in (\d+) months \(police data\)|\(((?:19|20)\d\d-\d\d-\d\d) to ((?:19|20)\d\d-\d\d-\d\d),? about (\d+) months, ([^)]*)\)), "
+                         r"at least double the median of ([\d.]+) for candidate buildings in (.+)", t)
+        if m:
+            span = f"in {m.group(3)} months (police data)" if m.group(3) else f"from {day(m.group(4))} to {day(m.group(5))} ({m.group(7)})"
+            out.append(f"Car crime: {m.group(1)} vehicle thefts and thefts from vehicles within {m.group(2)} meters {span}, at least double what is usual around the other buildings we looked at in {m.group(9)}."); continue
+        t2 = plain(t)
+        if reader_ok(t2):
+            out.append(t2[0].upper() + t2[1:] + ("" if t2.endswith(".") else "."))
+    return list(dict.fromkeys(out))
+
+
 PUBLIC_EVIDENCE = {}  # building_id -> what the evidence pass could read (data/avoid_buildings.csv: public_evidence); filled in main()
+
+
+def safety_status(h):
+    """('published', None) when the neighborhood's police agency publishes both a violent and a property rate, else
+    ('not_published', why). The reason is a plain sentence for the page."""
+    def has(k):
+        x = h.get(k) if hasattr(h, "get") else None
+        return x is not None and not (isinstance(x, float) and np.isnan(x)) and str(x) not in ("", "nan")
+    if has("violent") and has("property"):
+        return "published", None
+    missing = "violent or property crime rate" if not has("violent") and not has("property") else ("violent crime rate" if not has("violent") else "property crime rate")
+    st = STATE_NAME.get(str(h.get("state") if hasattr(h, "get") else ""), "")
+    name = str(h.get("hood") if hasattr(h, "get") else "") or "This town"
+    return "not_published", (f"No {missing} is published for {name}. It has no police department of its own in the FBI's list of reporting agencies; "
+                             + (f"the {st} State Police cover it and report one total for the whole state, not a figure for the town. " if st == "Connecticut" else "the agency that covers it reports no figure for the town alone. ")
+                             + "So the rule that nothing here has more crime than Jamaica could not be tested for this place, and no figure is guessed.")
 
 
 def unit(r):
     g = lambda c: v(r.get(c))
-    qs = [q for q in str(g("to_confirm") or "").split("; ") if q]
+    # independent check 4, D24: every question is written from structured fields (apartment, never unit)
+    oi = open_item_text(r) if g("confirm_asterisk") == "yes" or g("open_keys") else None
+    disc = []
+    for d in j(r.get("disclosures"), []):
+        label, why, q = disclosure_text(d, r)
+        disc.append({"what": d.get("what"), "label": label, "why": why or None, "question": q or None, "url": d.get("url") or None, "severity": d.get("severity") or None,
+                     "code": d.get("code") or None, "why_internal": d.get("why") or None})
+    qs = [oi[3]] if oi and oi[3] else []
+    qs += [d["question"] for d in disc if d["question"]]
     for q in str(g("tour_confirm") or "").split("; "):
-        if q.startswith("Confirm the floor"):
-            qs.append(q + f" (floor {int(float(g('unit_floor')))} is read from the unit number {g('unit')})")
+        if q and "dog weight" in q:
+            qs.append(q + (" (the page says small dogs and gives no number)" if g("dog_size_note") else " (the page says weight restrictions apply and gives no number)"))
         elif q:
-            qs.append(q + ((" (the page says small dogs and gives no number)" if g("dog_size_note") else " (the page says weight restrictions apply and gives no number)") if "dog weight" in q else ""))
+            qs.append(q)
     if g("rent_needs_call") == "yes":
         qs.append("Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?")
     for line in str(g("all_in_unknown_lines") or "").split("; "):
@@ -95,11 +550,23 @@ def unit(r):
                        "building fees (part)": "Which required monthly fees have no published amount (for example an amenity fee), and how much are they?", "gas": "Who pays for heat and cooking gas?"}.get(line, f"What is the {line}?"))
     if "pet rent" in str(g("all_in_estimated_lines") or ""):
         qs.append("What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)")
+    if "parking" in str(g("all_in_estimated_lines") or ""):
+        qs.append("What does a parking spot cost per month? (the figure in the cost comes from a resident's review)")
     qs = list(dict.fromkeys(qs))
     out = unit_core(r, g, qs)
+    # independent check 4, D25: a property whose own title names the apartment ('416 Highland Ave - 312', one row labelled
+    # '1 Bed') is apartment 312 at that address: the label is the number, and the title is not a building name
+    tu = parsers.title_unit(g("building_name")) if parsers.is_plan_label(g("unit")) else ""
+    if tu:
+        out["unit"], out["building"], out["unit_label_basis"] = tu, None, "from the listing's title"
+    out["disclosures"] = disc
+    out["confirm"] = {"asterisk": g("confirm_asterisk") == "yes", "what": oi[0] if oi and g("confirm_asterisk") == "yes" else None,
+                      "label": oi[1] if oi and g("confirm_asterisk") == "yes" else None, "why": oi[2] if oi and g("confirm_asterisk") == "yes" else None,
+                      "question": oi[3] if oi and g("confirm_asterisk") == "yes" else None, "code": (str(g("open_codes") or "").split(";")[0] or None) if oi else None,
+                      "why_internal": oi[4] if oi else None, "reviewed": g("review_verdict")}
     am = out["amenities"]
     mr = moment_ratings(out["moments"], g("parking_rank"), out["parking"]["offsite"],
-                        secured=bool(am["doorman"]) or str(am["controlled_access"] or "").strip().lower().startswith(("yes", "true")),
+                        secured=bool(am["doorman"] or am["concierge"] or am["front_desk"]) or str(am["controlled_access"] or "").strip().lower().startswith(("yes", "true")),
                         overnight_restricted=any(d["what"] == "overnight street parking" for d in out["disclosures"]), sqft=g("sqft"), beds=g("beds"))
     for k, val in mr.items():
         out["moments"][k]["rating"] = val
@@ -110,13 +577,15 @@ def unit_core(r, g, qs):
     return {
         "id": g("listing_id"), "building_id": g("building_id"), "hood_id": g("hood_id"), "year": g("group_key"),
         "building": g("building_name"), "address": g("address"), "unit": g("unit"), "kind": g("listing_kind") or "unit", "beds": g("beds"), "sqft": g("sqft"),
-        "floor": g("unit_floor"), "floor_basis": g("unit_floor_basis"), "floor_basis_note": g("floor_basis_note"), "zip": g("zip5"), "lat": g("lat"), "lon": g("lon"),
+        "floor": g("unit_floor"), "floor_basis": g("unit_floor_basis"), "floor_basis_note": "read from the apartment number" if g("floor_basis_note") else None, "zip": g("zip5"), "lat": g("lat"), "lon": g("lon"),
         "available": g("available_date"), "listing_age_days": g("listing_age_days"),
         "rent": {"listed": g("listed_rent"), "basis": g("rent_basis"), "basis_kind": g("rent_basis_kind"), "gross": g("rent_gross"),
-                 "asterisk": g("rent_asterisk") == "yes", "offer_text": g("rent_offer_text"), "offer_kind": g("rent_offer_kind"), "free_months": g("rent_free_months"),
+                 "asterisk": g("rent_asterisk") == "yes", "offer_text": g("rent_offer_text"), "offer_kind": g("rent_offer_kind"), "offer_type": g("rent_offer_type"), "free_months": g("rent_free_months"),
+                 # independent check 4, D20: "up to 2 months free" is not "2 months free". free_text carries the qualifier.
+                 "offer_up_to": g("rent_offer_up_to") == "yes", "offer_selected_apartments_only": g("rent_offer_select_units") == "yes", "free_text": _free_text(r) or None,
                  "lease_months": g("rent_lease_months"), "first_full_payment_date": g("rent_first_full_payment_date"),
                  "first_full_payment_note": g("rent_first_full_payment_note"), "needs_call": g("rent_needs_call") == "yes"},
-        "all_in": g("all_in"), "all_in_gross": g("all_in_gross"), "all_in_lines": j(r.get("all_in_lines"), []),
+        "all_in": g("all_in"), "all_in_gross": g("all_in_gross"), "all_in_lines": receipt_lines(j(r.get("all_in_lines"), [])),
         "all_in_unknown": [x for x in str(g("all_in_unknown_lines") or "").split("; ") if x],
         # owner, 2026-11-16: all_in plus the median known parking fee and required fees for the lines not published here.
         # Never used for the cap. unknown_cost_lines names the parking / fee lines that are not published.
@@ -127,19 +596,31 @@ def unit_core(r, g, qs):
         "elevator": {"value": g("elevator"), "basis": g("elevator_basis"), "listing_site_only": g("elevator_aggregator_only") == "yes"},
         "dog": {"allowed": g("dogs_allowed"), "basis": g("dogs_allowed_basis"), "weight_limit_lb": g("dog_weight_limit_lb"), "size_note": g("dog_size_note"), "size_only_source": g("dog_size_only"), "policy_text": g("dog_policy_text"), "pet_rent": g("pet_rent")},
         "parking": {"type": g("parking_type"), "rank": g("parking_rank"), "fee": g("parking_fee"), "fee_note": g("parking_fee_note"), "options_text": g("parking_options"),
+                    # independent check 4, D18: where the fee comes from (the building's page or a listing, or a resident's
+                    # review: then it is an estimate), and every kind of parking the sentence names: "surface parking;
+                    # optional garages" is a lot with an optional garage, not "garage parking"
+                    "fee_basis": ("estimate from a resident's review" if g("parking_fee_monthly_basis") == "resident_review" else ("published" if g("parking_fee") is not None else None)),
+                    "kinds": parsers.parking_kinds(g("parking_type")), "garage_is_optional_extra": parsers.garage_is_optional(g("parking_type")),
                     # D10: parking that is not at the building ("2 blocks away") is never "covered parking" on the page
                     "offsite": bool(parsers.OFFSITE_PARKING.search(str(g("parking_type") or "")))},
-        "amenities": {"pool": g("pool") or None, "pool_text": g("pool_text"), "doorman": g("doorman") or None, "doorman_text": g("doorman_text"), "controlled_access": g("controlled_access"),
+        # independent check 4, D9: doorman and concierge are separate, each only from a source that says so; front_desk is
+        # an attended lobby or desk that is called neither. doorman_text is the internal source sentence.
+        "amenities": {"pool": g("pool") or None, "pool_text": g("pool_text"), "doorman": g("doorman") or None, "concierge": g("concierge") or None, "front_desk": g("front_desk") or None,
+                      "doorman_text": g("doorman_text"), "controlled_access": g("controlled_access"),
                       "gym": g("gym"), "in_unit_laundry": g("in_unit_laundry"), "laundry": g("laundry"), "package_room": g("package_room"),
                       "outdoor_space": g("outdoor_space"), "lounge_or_coworking": g("lounge_or_coworking"), "dog_amenities": g("dog_amenities"),
-                      "year_built": g("year_built"), "building_floors": g("building_floors"), "manager": g("manager")},
+                      "year_built": g("year_built"), "building_floors": g("building_floors"),
+                      # D19: 'at_least' = no page gives the whole building's height; this is the highest floor a page states for an apartment here
+                      "building_floors_at_least": g("building_floors_basis") == "at_least",
+                      # manager_name is the name alone; `manager` is the internal note that says where it was read
+                      "manager": g("manager"), "manager_name": parsers.manager_name(g("manager")) or None},
         "moments": {
             "wake": {"park": g("park_name"), "park_walk_min": g("park_walk_min"), "dog_park": g("dog_park_name"), "dog_park_m": g("dog_park_m"), "woods_ha_800m": g("woods_ha_within_800m")},
             "work": {"sqft": g("sqft"), "separate_bedroom": (g("beds") or 0) >= 1, "cafes_800m": g("cafes_800m"), "gyms_800m": g("gym_count_800m"), "supermarket": g("supermarket"),
                      "supermarket_m": g("supermarket_m"), "library_1600m": g("library_count_1600m"), "motorway_m": g("motorway_m"), "fiber": None},
             "after": {"restaurants_800m": g("restaurants_800m"), "bars_800m": g("bars_800m"), "cafes_800m": g("cafes_800m"), "cinema_theatre_1600m": g("cinema_theatre_count_1600m"),
                       "bookshops_1600m": g("bookshop_count_1600m"), "markets_1600m": g("market_count_1600m"), "shops_800m": g("shop_any_count_800m")},
-            "night": {"parking_type": g("parking_type"), "doorman": g("doorman"), "controlled_access": g("controlled_access"),
+            "night": {"parking_type": g("parking_type"), "doorman": g("doorman"), "concierge": g("concierge"), "front_desk": g("front_desk"), "controlled_access": g("controlled_access"),
                       "violent_per_1000": g("violent"), "violent_vs_jamaica": g("violent_vs_jamaica"), "near_violent_250m_24m": g("near_violent_250m_24m"),
                       "near_violent_evening_250m_24m": g("near_violent_evening_250m_24m"), "car_crime_250m_24m": (g("near_veh_theft_24m") or 0) + (g("near_theft_from_veh_24m") or 0) if g("near_veh_theft_24m") is not None else None,
                       "vehicle_theft_per_1000": g("motor_vehicle_theft"), "police": g("police_agency"), "police_geography": g("police_geography")},
@@ -160,17 +641,13 @@ def unit_core(r, g, qs):
         "vs_queens_diff": {k[4:-5]: g(k) for k in r.index if k.startswith("vsq_") and k.endswith("_diff")},
         "evidence": {"checked": bool(r.get("evidence_checked")), "avoid": g("ev_avoid") == "yes", "avoid_reasons": g("ev_reasons"), "pause_notes": g("ev_pause_notes"),
                      "items": j(r.get("ev_evidence_json"), []), "positive": j(r.get("ev_positive_json"), []),
+                     # the same two notes as plain sentences (independent check 4, D24): print these, not the strings above
+                     "avoid_points": evidence_points(g("ev_reasons")), "pause_points": evidence_points(g("ev_pause_notes")),
                      # display field for the page: "NYC records", "rating screen: <verdict>", "none readable", or null when the building was not in the evidence pass
                      "public_evidence": PUBLIC_EVIDENCE.get(g("building_id"))},
-        "confirm": {"asterisk": g("confirm_asterisk") == "yes", "what": g("confirm_what") if g("confirm_asterisk") == "yes" else None,
-                    "why": g("confirm_why") if g("confirm_asterisk") == "yes" else None,
-                    # the question to ask, in the reviewer's or the rule's words (independent check 2)
-                    "question": (qs[0] if qs else None) if g("confirm_asterisk") == "yes" else None,
-                    "reviewed": g("review_verdict")},
-        # conditions to know that are not open gate facts (owner, 2026-11-16): lease term, cost near the cap, condo rented by
-        # its owner, net-effective rent. Any number may sit beside at most one open gate fact (confirm).
-        "disclosures": [{"what": d.get("what"), "why": d.get("why"), "question": d.get("question") or None, "url": d.get("url") or None, "severity": d.get("severity") or None}
-                        for d in j(r.get("disclosures"), [])],
+        "confirm": None, "disclosures": [],          # written in unit(): reader text from structured fields
+        # conditions from the evidence (independent check 4, D8); each is also among the disclosures
+        "conditions": {"income_requirement": g("cond_income"), "credit_score_requirement": g("cond_credit"), "furnished": g("cond_furnished") == "yes"},
         "more_in_building": g("more_in_building"), "rank_in_building": g("nth_shown_in_building"),
         "cost_check": {"cap_margin": g("cap_margin"), "unknown_count": g("all_in_unknown_count"), "lease_term_months": g("rent_lease_term_months"), "price_12_month": g("rent_12_month_price")},
         "confidence": g("confidence"), "tour_questions": qs,
@@ -193,7 +670,11 @@ def buildings(shown):
         u0 = unit(r0)
         ex = pd.to_numeric(g.all_in, errors="coerce")
         likely = pd.to_numeric(g.all_in_likely, errors="coerce") if "all_in_likely" in g else ex
-        out.append({"id": b, "name": g0("building_name"), "address": g0("address"), "city": g0("city"), "state": g0("state"), "zip": g0("zip5"),
+        # independent check 4, D17: `city` is the municipality the building stands in (Census geography at its point);
+        # `postal_city` is the city the listing wrote (a mailing or market name), given only where it differs
+        out.append({"id": b, "name": None if (parsers.title_unit(g0("building_name")) and parsers.is_plan_label(g0("unit"))) else g0("building_name"), "address": g0("address"), "city": g0("city"), "state": g0("state"), "zip": g0("zip5"),
+                    "postal_city": g0("city_listed") if g0("city_listed") and not parsers.same_municipality(g0("city_listed"), g0("city")) else None,
+                    "location_basis": g0("coord_basis"), "location_check": g0("coord_check"),
                     "hood_id": g0("hood_id"), "experience": g0("group_key"), "lat": g0("lat"), "lon": g0("lon"),
                     "unit_ids": list(g.listing_id), "n_units": int(len(g)), "more_showable_not_shown": int(g0("more_in_building") or 0),
                     "from_all_in": v(ex.min()), "to_all_in": v(ex.max()), "from_all_in_likely": v(likely.min()),
@@ -201,7 +682,7 @@ def buildings(shown):
                     # some units of one building can differ in address (EDGE: two buildings leased together)
                     "addresses": sorted(set(str(a) for a in g.address.dropna())),
                     "elevator": u0["elevator"], "dogs": u0["dog"], "parking": u0["parking"], "amenities": u0["amenities"],
-                    "links": {"building": g0("building_url")}, "manager": g0("manager"),
+                    "links": {"building": g0("building_url")}, "manager": g0("manager"), "manager_name": parsers.manager_name(g0("manager")) or None,
                     "open_items": sorted(set(x for w in g.confirm_what.dropna().astype(str) for x in w.split("; ") if x and x != "nan")),
                     "units_with_asterisk": int((g.confirm_asterisk == "yes").sum())})
     by_h = {}
@@ -274,7 +755,7 @@ def main():
             sub_crime[r.hood_id] = {"label": "10-month estimate from the city's incident portal, not an official rate", "value_type": "estimate", "used_for_safety_rule": False,
                                     "violent_per_1000_scaled": v(r.violent_per_1000_scaled_to_fbi_2025), "property_per_1000_scaled": v(r.property_per_1000_scaled_to_fbi_2025),
                                     "violent_ratio_to_city": v(r.violent_ratio_to_city_portal), "property_ratio_to_city": v(r.property_ratio_to_city_portal),
-                                    "window": r.window, "method": r.method, "source_url": r.source_url}
+                                    "window": r.window, "method": re.sub(r";?\s*see data/\S+$", "", str(r.method)), "source_url": r.source_url}
     MEAS = [("all_in", "all_in"), ("sqft", "sqft"), ("drive_min", "drive_min_to"), ("transit_min", "transit_sat_median"), ("toll_round_trip", "toll_rt_known"),
             ("toll_round_trip_mail", "toll_rt_mail"), ("violent_per_1000", "violent"), ("property_per_1000", "property"), ("restaurants_800m", "restaurants_800m"),
             ("park_walk_min", "park_walk_min"), ("parking_rank", "parking_rank")]
@@ -299,7 +780,7 @@ def main():
         hoods.append({"id": hid, "name": g.hood.iloc[0], "area": v(g.hood_area.iloc[0]), "state": v(g.state.iloc[0]) if "state" in g else None, "year": g.group_key.iloc[0],
                       "lat": v(pd.to_numeric(g.lat, errors="coerce").mean()), "lon": v(pd.to_numeric(g.lon, errors="coerce").mean()),
                       "counts": {"shown": int(len(s)), "buildings": len(bl), "avoid": int(g_all.avoid_card.sum()), "held": int((g_all.listing_id.isin(held_ids) & ~g_all.shown).sum()), "ranked": int(len(g_all))},
-                      "figures_over": "shown places" if len(s) else "ranked units (nothing is shown here)",
+                      "figures_over": "shown places" if len(s) else "ranked apartments (nothing is shown here)",
                       "building_ids": [b_["id"] for b_ in sorted(bl, key=lambda b_: b_["rank_in_neighborhood"])],
                       "all_in_range": [v(s.all_in.min()), v(s.all_in.max())] if len(s) else None, "sqft_median": num("sqft"),
                       "drive_min": num("drive_min_to"), "transit_min": num("transit_sat_median"),
@@ -307,7 +788,11 @@ def main():
                       "toll_round_trip_mail": tollmed("toll_rt_mail") if "toll_rt_mail" in g and pd.to_numeric(g.toll_rt_mail, errors="coerce").notna().all() else None,
                       "toll_round_trip_mail_at_least": (v(pd.to_numeric(g.toll_rt_mail_subtotal, errors="coerce").median()) if "toll_rt_mail_subtotal" in g and not pd.to_numeric(g.toll_rt_mail, errors="coerce").notna().all() else None), "toll_basis": "New York E-ZPass, weekend off-peak",
                       "toll_complete": bool(g.toll_complete.astype(str).str.lower().eq("true").all()),
-                      "safety": {"violent_per_1000": v(h.get("violent")), "property_per_1000": v(h.get("property")), "vehicle_theft_per_1000": v(h.get("motor_vehicle_theft")),
+                      # independent check 4, D10: the owner's safety rule ("no crime higher than Jamaica") can only be
+                      # established where both rates are published. Where one is missing the neighborhood is kept, but it
+                      # says so: status 'not_published', with the reason, for "See how we got this". Never a guess.
+                      "safety": {"status": safety_status(h)[0], "status_note": safety_status(h)[1],
+                                 "violent_per_1000": v(h.get("violent")), "property_per_1000": v(h.get("property")), "vehicle_theft_per_1000": v(h.get("motor_vehicle_theft")),
                                  "vs_jamaica": v(h.get("violent_vs_jamaica")), "property_vs_jamaica": v(h.get("property_vs_jamaica")), "vs_us": v(h.get("violent_vs_us")),
                                  "vs_metro": v(h.get("violent_vs_metro")), "vs_local": v(h.get("violent_vs_local")), "police": v(h.get("police")), "geography": v(h.get("geography")), "year": v(h.get("crime_year")),
                                  # inside a split city every neighborhood carries the same citywide police rate: say so, and give the estimate as context
@@ -315,6 +800,13 @@ def main():
                                  "subcity_estimate": sub_crime.get(hid) if hid in PARENTS else None},
                       "parent_id": PARENTS[hid]["parent_id"] if hid in PARENTS else None, "parent_name": PARENTS[hid]["parent_name"] if hid in PARENTS else None,
                       "short_name": PARENTS[hid]["name"] if hid in PARENTS else None,
+                      # independent check 4, D16 / D6: the same measures over the apartments SHOWN here (medians; the
+                      # `traits` below describe the wider area profile the experiences were fitted on), and how many of
+                      # the shown buildings have a dog park or dog run of their own
+                      "shown_figures": {**{k: num(k) for k in ["restaurants_800m", "bars_800m", "cafes_800m", "park_ha_800m", "park_walk_min", "open_water_m", "dog_park_m", "supermarket_m",
+                                                                "train_station_m", "motorway_m", "restaurants_1600m", "bars_1600m"]},
+                                        "buildings_with_own_dog_area": int(sum(1 for b_ in bl if parsers.amenity_yes(str((b_["amenities"] or {}).get("dog_amenities") or "").lower()))),
+                                        "buildings": len(bl)} if len(s) else None,
                       "traits": {k: v(h.get(k)) for k in ["no_car_share", "age_25_34_share", "living_alone_share", "households_with_kids_share", "college_degree_share", "newcomer_share",
                                                           "wfh_share", "median_hh_income", "detached_house_share", "built_since_2010_share", "built_before_1940_share", "restaurants_800m",
                                                           "bars_800m", "cafes_800m", "park_ha_800m", "park_walk_min", "open_water_m", "dog_park_m", "supermarket_m_c"]},
@@ -322,6 +814,11 @@ def main():
                       "unit_ids": list(s.sort_values("shown_rank").listing_id), "avoid_ids": list(g_all[g_all.avoid_card].listing_id),
                       "local": {"parking_rules": local.get(hid, {}).get("street_parking") or None, "dog_rules": local.get(hid, {}).get("dogs") or None,
                                 "voices": voices.get(hid, []), "survey": survey.get(hid, [])}})
+    # independent check 4, D21: only neighborhoods with at least one apartment to show are neighborhoods of the page.
+    # A place that has only an avoid card goes to neighborhoods_avoid_only: the page can list the card there, and must
+    # not count the place among the neighborhoods, on the map chips or anywhere else.
+    avoid_only = [h for h in hoods if not h["counts"]["shown"]]
+    hoods = [h for h in hoods if h["counts"]["shown"]]
     years = []
     for key, g in R.groupby("group_key"):
         s = g[g.shown]
@@ -356,10 +853,14 @@ def main():
                     "jamaica_yardstick": {"violent_per_1000": v(G.jamaica_violent.iloc[0]), "property_per_1000": v(G.jamaica_property.iloc[0])},
                     "queens_spectrum": spec, "weights": {"safety": 22, "building": 16, "cost": 12, "car": 12, "space": 12, "distance": 10, "dog": 8, "daily": 8},
                     "counts": {"shown": int(len(shown)), "shown_with_asterisk": int((shown.confirm_asterisk == "yes").sum()), "avoid": int(len(avoid)), "held": int(len(held)),
-                               "awaiting_live_check": int(len(awaiting)), "ranked": int(len(R)), "buildings": len(BUILDINGS)},
+                               "awaiting_live_check": int(len(awaiting)), "ranked": int(len(R)), "buildings": len(BUILDINGS),
+                               "neighborhoods": len(hoods), "neighborhoods_avoid_only": len(avoid_only),
+                               "neighborhoods_safety_not_published": sum(1 for h in hoods if h["safety"]["status"] != "published")},
                     "toll_basis": {"assumes": "New York E-ZPass", "rate_time": "weekend off-peak", "mail_rate_field": "toll_round_trip_mail", "note": parsers.TOLL_NOTE},
                     "notes": ["Drive times are free-flow estimates without traffic.", parsers.TOLL_NOTE, "An asterisk on rent means a special offer applies; see the rent terms.",
-                              "A floor marked 'read from the unit number' is not stated on the page; confirm it on the tour.",
+                              "A floor marked 'read from the apartment number' is not stated on the page; confirm it on the tour.",
+                              "Where a neighborhood's safety status is 'not_published', no police agency publishes a crime rate for the town alone, so the rule that nothing shown has more crime than Jamaica could not be tested there; the page says so.",
+                              "A parking fee is 'published' only when the building's own page or a listing states it; a figure from a resident's review is an estimate and is labelled so.",
                               "A place with an asterisk has one thing still to confirm (elevator, dogs allowed, or whether the listing is real and available); the text beside it says what and why.",
                               "Disclosures are things to know that never remove a place: floor not published, lease term, a cost that could pass $3,000 once parking and fees are known, net-effective rent (only where the listing says the price is net-effective), a special offer (ask what a normal month costs), condo rented by its owner, a dog weight limit with no number, and a town rule restricting overnight street parking where the building's parking is not confirmed.",
                               "Pet rent is always counted: where a building does not publish it, the cost uses an estimate (the median of the known pet rents in the same state), marked as an estimate.",
@@ -369,7 +870,7 @@ def main():
                               "Each place carries the date its price was read (price_seen_at). A listing that was not read again since is not marked for that.",
                               "Cost lines that are not published add nothing to the all-in figure and are named on each receipt as not published."],
                     "moment_thresholds": MOMENT_THRESHOLDS, "max_units_per_building": 8},
-           "years": years, "neighborhoods": hoods, "buildings": BUILDINGS, "units": [unit(r) for _, r in shown.iterrows()],
+           "years": years, "neighborhoods": hoods, "neighborhoods_avoid_only": avoid_only, "buildings": BUILDINGS, "units": [unit(r) for _, r in shown.iterrows()],
            "avoid": [unit(r) for _, r in avoid.iterrows()], "held": [unit(r) for _, r in held.iterrows()],
            "awaiting_live_check": [{"id": r.listing_id, "building": v(r.building_name), "address": v(r.address), "unit": v(r.unit), "hood_id": r.hood_id, "year": v(r.group_key), "price_seen_at": v(r.last_seen),
                                     "rank": v(r.rank_score), "all_in": v(r.all_in), "listing": v(r.url)} for r in awaiting.itertuples()]}
