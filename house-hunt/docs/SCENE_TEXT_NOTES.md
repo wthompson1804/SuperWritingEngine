@@ -1,8 +1,9 @@
 # Scene text notes
 
 The words on the experience pages and the neighborhood pages: how they are written, built and checked.
-Rewritten 2026-11-16 after the copy edit. It describes the system as it stands; the earlier history is in git
-(`git log -- docs/SCENE_TEXT_NOTES.md`).
+Rewritten 2026-11-16 after the copy edit, and extended the same day after independent check 4
+(`docs/INDEPENDENT_CHECK_4.md`; the section "After independent check 4" below says what changed and why). It
+describes the system as it stands; the earlier history is in git (`git log -- docs/SCENE_TEXT_NOTES.md`).
 
 ## Why the copy edit happened
 
@@ -22,16 +23,20 @@ The rule now: **say the plain thing, and quote the page's own number.**
 | `scripts/build_scene_text.py` | Fills the numbers into the drafts, picks the icon points and section subheads, writes the evidence. Generates no wording. |
 | `scripts/check_scene_text.py` | Re-checks every text against the data and against the plain-language rules. |
 | `data/reference/scene_text_years.csv` | 6 rows, one per experience (the key column is still `year_label`, "... Year"). |
-| `data/reference/scene_text_neighborhoods.csv` | One row per neighborhood drafted that is still in `data/lifestyle_groups.csv` (133 today; 115 are in `site/data.json`, 104 of them with apartments shown). |
+| `data/reference/scene_text_neighborhoods.csv` | One row per neighborhood drafted that is still in `data/lifestyle_groups.csv`. Its `glance_json` column holds the "At a glance" facts, computed from the buildings shown. |
+| `scripts/check_published_text.py` | The final-text audit: reads `site/data.json`, every prose field the page shows, and checks it against its source, the plain-language rules, the numbers and a list of checkable claims. |
+| `scripts/test_check_published_text.py` | Tests for the audit and for the conceit guard, with the examples independent check 4 planted. |
 
 `scripts/realtor_lines.py`, `data/reference/realtor_lines.csv` and `data/reference/building_about.csv` (the building
 and apartment lines) are a separate system. They were not part of this copy edit, and have since been rewritten to the
 same plain standard by `scripts/realtor_lines.py`: the guards are the ones in `check_scene_text.py`, imported by
 `scripts/test_realtor_lines.py` and run over every building and apartment text.
 
-After any data rerun:
+After any data rerun (the order matters: the text is built from the page data, attached to it, then audited there):
 
-    python3 scripts/page_data_extras.py && python3 scripts/build_scene_text.py && python3 scripts/check_scene_text.py
+    python3 scripts/page_data_extras.py && python3 scripts/build_scene_text.py && python3 scripts/check_scene_text.py \
+      && python3 scripts/realtor_lines.py && python3 scripts/test_realtor_lines.py \
+      && python3 scripts/page_data_extras.py && python3 scripts/check_published_text.py
 
 The builder refills every number. It stops on a row when a sentence's hidden test no longer holds; edit that block and
 build again. It lists (and leaves out) a sentence about the shown apartments that stopped being true; rewrite those
@@ -102,7 +107,11 @@ line naming the themes. A number quoted from a local rule needs a `rules:` line.
 |---|---|---|
 | `{p_places}` `{p_bldgs}` `{p_hoods}` `{p_allin}` `{p_allin_lo/hi}` `{p_drive}` `{p_transit}` `{p_sqft}` `{p_rest}` `{p_parkwalk}` `{u_toll}` | `site/data.json` `years[]`: `counts.shown`, `counts.buildings`, `len(hood_ids)`, `medians`, `all_in_range` | the experience page's figure strip reads the same fields |
 | `{pg_n}` `{pg_bldgs}` `{pg_mid}` `{pg_lo/hi}` `{drive}` `{transit}` `{b_toll}` `{sqft}` | `neighborhoods[]`: `counts`, the median `all_in` of its units, `all_in_range`, `drive_min`, `transit_min`, `toll_round_trip`, `sqft_median` | the neighborhood page's figure strip |
-| `{rest}` `{bars}` `{cafes}` `{parkwalk}` `{parkha}` `{dogpark}` `{super}` `{water}` (neighborhood) | `neighborhoods[].traits` | the page's "At a glance" row prints the traits |
+| `{rest}` `{bars}` `{cafes}` `{rest1600}` `{parkwalk}` `{parkha}` `{dogpark}` `{super}` `{station}` `{water}` `{beach}` (neighborhood) | the buildings SHOWN there (`site/data.json` `buildings[]` and their apartments' `moments`; water, beach and park area from `data/master_buildings.csv` by building id): the median building, which is the building itself when one is shown | door-distance facts must describe the buildings she would live in (D16). "At a glance" reads the same figures from `glance_json` |
+| `{own_dog}` `{own_garage}` `{own_parking}` `{dog_any}`, `{owndog}`, `{owngarage}` | `buildings[].amenities.dog_amenities`, `buildings[].parking.type` | what the shown buildings supply themselves (D6) |
+| `{sqft_lo}` `{sqft_hi}` | the smallest and largest shown apartment | a plural "the apartments are large" is tested on the smallest |
+| `{close_areas}` `{far_names}` `{far_drive}` `{far_toll}` `{tollfree_areas}` `{by_hood}` `{hood_names}` ... (experience) | how the experience's shown apartments divide on the drive (30 minutes) and on tolls | an experience that splits is worded as a split (D12) |
+| `{@nj:teaneck drive}` (experience) | that neighborhood's own figure | a small experience gives each neighborhood's figure, never a typical one (D11) |
 | `{u_garage}` `{u_laundry}` `{u_pool}` `{u_gym}` `{u_bars}` `{u_cafes}` `{u_rest1600}` `{u_dogpark}` `{u_super}` | medians or shares over the experience's shown units | nothing else on the page states these |
 | census shares, `{station}`, `{beach}`, `{tj}`, `{vet}` | `data/lifestyle_groups.csv` or the shown units | not on the strip |
 | tolls | always worded "about $N round trip with a New York E-ZPass" | fixed wording |
@@ -110,9 +119,16 @@ line naming the themes. A number quoted from a local rule needs a `rules:` line.
 Prices in sentences are rounded to the nearest $10 with "about"; minutes are whole. For a neighborhood with nothing
 shown, every token falls back to `data/lifestyle_groups.csv`.
 
-Before 2026-11-16 the restaurant, park and dog-park figures of a neighborhood were medians over its shown units. They
-then differed from "At a glance" on the same page (Bay Ridge: 14 restaurants in the text, 29 beside it). They now read
-the traits, and the checker refuses the old source.
+History of the door-distance figures. First they were medians over a neighborhood's shown apartments. Then, to agree
+with "At a glance" (Bay Ridge: 14 restaurants in the text, 29 beside it), they were changed to the neighborhood's
+frozen area profile (`traits`), and the checker required that source. Independent check 4 (D16) showed that was the
+wrong way round: the area profile describes a wider sample than the apartments on the page (34 of 378 number claims
+were materially off, 12 of them in single-building neighborhoods). They are now the median over the shown BUILDINGS,
+the checker refuses the area profile for them, and "At a glance" is made to agree by reading `glance_json`.
+
+Area-wide facts stay area-wide and are worded so: the town's parking rule, what residents say, the census shares
+("most homes around here are houses", "nearly every household around here has a car", "many of the buildings in this
+area are new"), the drive, the tolls and the transit time (the neighborhood's own fields).
 
 ## What the checker enforces (see its docstring for the full list)
 
@@ -189,3 +205,80 @@ drive to a third.
 - "By mail they are typically $27.10 a round trip" is the same figure on three experiences because
   `toll_round_trip_mail` is missing for many units (27 of 63 have it in Fresh-Start), so the median is taken over a
   different, smaller set than the E-ZPass median beside it; in Room-to-Breathe it comes out below the E-ZPass figure.
+
+
+## After independent check 4 (2026-11-16)
+
+What the check found in this text, the cause, and the rule that now stops it. Each rule is in
+`scripts/check_scene_text.py` unless another file is named, and each has a test or a re-run condition.
+
+| Defect | Cause | What changed | The guard |
+|---|---|---|---|
+| D6: 12 neighborhoods said the dog park was miles away while their only building has its own | the builder read `dog_park_m` (the public dog park) and never a building's `dog_amenities` | `{own_dog}`, `{dog_any}`, `{owndog}`; an icon point "The building has its own dog area" / "Every building here ..." / "Some buildings here have their own dog area"; every hand-written dog-park complaint is conditional on no shown building listing a dog amenity; the same for garages (`{own_garage}`, `{owngarage}`) | `check_shown`: every building has one -> the text says so and names a dog park only as the public one; some have one (or list a dog amenity of unnamed kind) -> the distance is never the catch; "No building here has a dog park" needs none to; every building has a garage -> street parking comes with "the building has its own garage", never with "look for a garage" |
+| D16: text and "At a glance" described the area profile, not the shown apartments | the checker required the `traits` | door-distance tokens read the shown buildings; `glance_json`; scope words (`{door}`, the first `{w10}`): "from the door" for one building, "most buildings here" for several | `check_strip` refuses any other source for `DOOR_FIELDS`; `main()` recomputes `glance_json`; `check_shown` wants "most buildings here" where several buildings are shown and forbids it where one is |
+| D11, D7: tiny experiences generalised ("typical" from one apartment, "33 percent", "5 minutes away" for an apartment 31 minutes away; "almost no restaurants" above a Fairfield card with 8) | medians and shares of three rows written as tendencies | an experience with fewer than 8 apartments uses its `@small` draft: it names its neighborhoods and gives each one's figures | `check_experience`: no "typical", "percent", "most", "usually", "many" under 8 apartments; every neighborhood named; every claim tested against every neighborhood shown |
+| D12: "close to your parents" over an experience with 29 of 81 apartments in Newark; "usually no tolls" at 53% | one median for two groups | the split tokens; "Most of these apartments are in ..., within about 30 minutes; the Newark ones are about 47 minutes away, with a toll" | `EXP_CLAIMS`: a claim holds for 75% of the apartments and no neighborhood contradicts it, or it names the exceptions, or it is limited to named places ("From Brooklyn and Queens ..."), or it says "most" and holds for 60% |
+| D12: "From Jamaica ... about 3 minutes. The train and bus take about 65 minutes" | a named neighborhood's figure beside the experience's median | the sentence is gone; each figure names whose it is | `check_experience` (pairs) |
+| D25: "The apartment in East Brunswick is large" with 8 shown | drafts written when one apartment was shown | singular and plural alternatives on `{pg_n}`; the plural is tested on the smallest apartment | `check_shown`: "The apartment" needs 1 shown, "the apartments" 2, "typical" 3 |
+| D26: "Compared to staying in Queens" on Queens neighborhoods | subhead wordings compared with a place | every wording now compares with "a typical Queens apartment" | `STALE` |
+| D15: an unlisted conceit, "not checked again" and "No building here has a dog park" passed | the conceit guard was a list of cut phrases; nothing read the published text | `AGENCY`; `STALE`; `scripts/check_published_text.py` | `scripts/test_check_published_text.py` plants each example |
+
+### The conceit guard, and its limits
+
+`AGENCY` flags a sentence in which a thing is the grammatical subject of a verb of intention or speech. It is a
+noun list (`THING_NOUNS`: lawn, street, park, town, building, garage, river, price, rent, morning ...) followed, with
+at most one adverb between, by a verb list (`INTENT_VERBS`: keep, tell, know, want, ask, reward, pay, greet, wait,
+sleep, speak, promise, forgive, whisper, welcome, tuck ...), present or past. An imperative after the noun
+("..., so ask the office") is let through.
+
+It does not see: a noun that is not on the list; a verb that does not directly follow the noun ("a town that
+welcomes dogs", "the town, people say, never sleeps"); verbs with an everyday use for a thing, which are left off on
+purpose (has, is, offers, lists, costs, takes, needs, allows, bans, restricts); a metaphor with no such verb. Add a
+noun or a verb when a new conceit is cut.
+
+### What `check_published_text.py` does
+
+It reads `site/data.json` only. For experiences and neighborhoods the published fields must equal their row in the
+scene CSVs and pass `check_row` again as published. For apartments and buildings the published text must equal what
+`realtor_lines.py` writes from the same data (regenerated in memory), pass the guards of `test_realtor_lines.py`,
+contain no number that is not a field of the object, and pass a claims audit: a fixed list of patterns, each compared
+with the exact field it rests on (pool, gym, garage, covered parking, lot, parking included, doorman, concierge,
+staffed front desk, own dog area, washer and dryer, laundry in the apartment, lounge, dogs allowed, elevator, "the
+only building of N with ...", "the lowest-priced / largest / highest of the N apartments", "N apartments are listed",
+the distances and the year built). Neighborhood sentences are compared with the buildings shown (distances, "no
+bars", "no restaurants", minutes to her parents, tolls, "every building here has ...") and with those buildings'
+own published text. The pipeline's own strings (`confirm`, `disclosures`, `tour_questions`, receipt notes,
+`meta.notes`) get the vocabulary and stale-wording rules only and are listed under the owner "pipeline";
+`--template` lists banned constructions in `site/index.html`.
+
+Limits: the claims audit sees only its patterns; a wrong figure that equals another field of the same object passes
+the number rule; resident quotes, outside descriptions, rule summaries and listing offer text are other people's
+words and are not read.
+
+### The building and apartment lines (`scripts/realtor_lines.py`)
+
+- `desk_kind`: "doorman" is said only when the doorman amenity is set and its source text does not name something
+  else. A source that says "Concierge" gives "The building has a concierge desk."; "24hr concierge" gives "A
+  concierge is available 24 hours a day."; "attended lobby" gives "The lobby is attended."; "virtual doorman" gives
+  nothing. A separate `amenities.concierge` field, if the pipeline adds one, is read the same way.
+- `laundry_kind`: "washer and dryer" only where the source names both; otherwise "laundry in the apartment"; nothing
+  where the in-unit flag sits beside a text that says "On-site laundry", "W/D hookup" or "not in unit".
+- `garage_mixed`: where a garage's own text also names a surface lot or outdoor spaces, the building "has a garage"
+  and the text does not say "you would park in the garage".
+- "up to 2 months free" stays "up to" (D20). "Before you choose a puppy" and "choose the breed with care" are gone
+  (D25).
+
+### What the data still cannot support
+
+1. `dog_amenities` is the bare word "yes" for 11 shown buildings (Avalon Maplewood, Avalon Wayne, The Leaf, Continuum
+   and others). The text cannot say what the amenity is, so it says "The building lists a dog amenity, so ask what
+   it is" and does not complain about the distance to a dog park.
+2. A building's own measures of water, beach and park area are not in `site/data.json`; they are read from
+   `data/master_buildings.csv` by building id.
+3. "A newer building" (Fresh-Start) rests on the census median year built of the area, because `year_built` is
+   published for about half of the shown buildings.
+4. "From most buildings here" is the median building. Where the buildings of a neighborhood differ a great deal
+   (Stamford: 1 to 30 restaurants), the range is in `glance_json` and is not said in the text.
+5. A doorman known only "per tenant reviews" (1 building) and a doorman flag whose source text is the bare word "yes"
+   (11 buildings) are still called a doorman.
+6. Sizes are published for about half of the Old-Neighborhood apartments, so nothing there is claimed about size.

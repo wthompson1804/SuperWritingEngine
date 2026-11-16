@@ -40,9 +40,12 @@ UNIT_DROP = [
     "elevator.listing_site_only", "disclosures[].severity",
     "cost_check.unknown_count", "cost_check.cap_margin", "confirm.reviewed",
     "ratings.most_reviews", "ratings.platforms[].seen_via",
+    # internal notes (independent check 4, D24): never rendered, so never shipped in the page
+    "confirm.why_internal", "disclosures[].why_internal",
 ]
 # Avoid cards and "worth a phone call" items are short cards: name, price, what to confirm, the evidence, the questions.
-SHORT_CARD_DROP = UNIT_DROP + ["moments", "vs_queens", "vs_queens_diff", "amenities", "all_in_lines", "host", "headlines", "ratings", "photos"]
+# all_in_lines stays (UI pass 8): the rent line's name says which price the rent figure is (as listed, 12-month lease, after an offer).
+SHORT_CARD_DROP = UNIT_DROP + ["moments", "vs_queens", "vs_queens_diff", "amenities", "host", "headlines", "ratings", "photos"]
 DROP = {
     "units[]": UNIT_DROP,
     "avoid[]": SHORT_CARD_DROP,

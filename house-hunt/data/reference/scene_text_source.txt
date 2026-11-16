@@ -19,74 +19,74 @@
 # ------------------------------------------------------------------ The Walk-Everywhere Experience
 
 === hood: ny:kew-gardens
-host_intro: Kew Gardens is about {drive} minutes from your parents, close enough to visit on a weeknight{!drive<=10}. Forest Park{!b_park==Forest Park} and its dog run are a short walk{!parkwalk<=6}{!dogpark<=800}. Residents say street parking is very hard and tickets are common.
+host_intro: Kew Gardens is about {drive} minutes from your parents, close enough to visit on a weeknight{!drive<=10}. [[Forest Park{!b_park==Forest Park} and its dog run are a short walk{!parkwalk<=6}{!dogpark<=800}{!own_dog<1}.]] Residents say street parking is very hard and tickets are common.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}. The supermarket is {super} miles away and the train station {station} miles.
-good: Your parents, a big park{!parkha>=10} and a dog run are all close.
-watch: Ask each building where you would park, because street spaces are hard to find.
+good: [[Your parents, a big park{!parkha>=10} and a dog run are all close{!own_dog<1}.]]
+watch: Ask {eachb} where you would park, because street spaces are hard to find.
 voices: parking
 
 === hood: ny:astoria-east-woodside-north-
 host_intro: This is a neighborhood for eating out on foot{!rest>=20}. Residents say parking is easier here than in the neighborhoods around it. They also say green space is scarce.
 scene: About {rest} restaurants, {bars} bars and {cafes} cafés are within a {w10}. The supermarket is {super} miles away.
 good: Dinner, drinks and groceries are all a short walk.
-watch: The nearest park is about {parkwalk} minutes on foot, and the nearest dog run is {dogpark} miles away.
+watch: [[The nearest park is about {parkwalk} minutes on foot, and the nearest dog run is {dogpark} miles away{!dog_any==0}.]][[The nearest park is about {parkwalk} minutes on foot{!dog_any>0}.]]
 voices: parking, dogs_green
 
 === hood: ny:sunnyside
-host_intro: Sunnyside has about {rest} restaurants and {bars} bars within a {w10}{!rest>=50}. A dog run is {dogpark} miles from the door. Parking is the problem: residents call the street parking some of the toughest they have seen.
+host_intro: Sunnyside has about {rest} restaurants and {bars} bars within a {w10}{!rest>=50}. [[A dog run is {dogpark} miles {door}{!own_dog<1}.]] Parking is the problem: residents call the street parking some of the toughest they have seen.
 scene: Coffee and groceries are close too, with about {cafes} cafés nearby and a supermarket {super} miles away. The nearest park is about {parkwalk} minutes on foot.
-good: Dinner, coffee and the dog run are all a short walk.
+good: [[Dinner, coffee and the dog run are all a short walk{!own_dog<1}.]]
 watch: Get a parking space in writing, because most households here have no car{!nocar>=0.5} and street spaces are scarce.
 voices: parking
 
 === hood: ny:bedford-stuyvesant-west-
-host_intro: This part of Bedford-Stuyvesant has about {cafes} cafés and {bars} bars within a {w10}{!cafes>=15}. A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away. Most households have no car{!nocar>=0.5}, so ask every building about parking.
+host_intro: This part of Bedford-Stuyvesant has about {cafes} cafés and {bars} bars within a {w10}{!cafes>=15}. [[A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away{!own_dog<1}.]] Most households have no car{!nocar>=0.5}, so ask {everyb} about parking.
 scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away.
 good: A park and plenty of cafés and bars are a short walk.
 watch: Parking is hard to find, since {nocar} percent of households have no car.
 
 === hood: ny:upper-west-side-manhattan-valley
-host_intro: A large park is about {parkwalk} minutes from the door{!parkha>=20}, and a dog run is {dogpark} miles away. Residents say the neighborhood is easy for dog owners. Parking is hard, since {nocar} percent of households have no car.
+host_intro: [[A large park is about {parkwalk} minutes {door}{!parkha>=20}, and a dog run is {dogpark} miles away{!own_dog<1}.]] Residents say the neighborhood is easy for dog owners. Parking is hard, since {nocar} percent of households have no car.
 scene: About {rest} restaurants and {bars} bars are within a {w10}, and the supermarket is {super} miles away.
-good: The dog gets a big park and a dog run within a few minutes.
+good: [[The dog gets a big park and a dog run within a few minutes{!own_dog<1}.]]
 watch: The drive to your parents has a toll{!b_toll>0}, about ${b_toll} round trip with a New York E-ZPass.
 voices: dogs_green
 
 === hood: ny:bay-ridge
-host_intro: Bay Ridge runs along the water, and Shore Road Park{!b_park==Shore Road Park} is about {parkwalk} minutes from the door. The waterfront is {water} miles away, an easy walk with the dog. Residents praise the bars and restaurants.
+host_intro: Bay Ridge runs along the water, and Shore Road Park{!b_park==Shore Road Park} is about {parkwalk} minutes {door}. The waterfront is {water} miles away, an easy walk with the dog. Residents praise the bars and restaurants.
 scene: About {rest} restaurants, {bars} bars and {cafes} cafés are within a {w10}. The supermarket is {super} miles away.
 good: A waterfront park and many restaurants are a short walk.
-watch: The trip to your parents takes about {drive} minutes by car, and the nearest dog run is {dogpark} miles away.
+watch: [[The trip to your parents takes about {drive} minutes by car, and the nearest dog run is {dogpark} miles away{!dog_any==0}.]][[The trip to your parents takes about {drive} minutes by car{!dog_any>0}.]]
 voices: social_life
 
 # ------------------------------------------------------------------ The Quiet-Street Experience
 
 === hood: nj:teaneck
-host_intro: Teaneck is a town of houses and driveways{!detached>=0.8}, so an apartment here is unusual. The supermarket is {super} miles away, and almost nothing else is within walking distance{!rest<=3}. Residents say nightlife is thin.
+host_intro: Teaneck is a town of houses and driveways{!detached>=0.8}, so an apartment here is unusual. The supermarket is {super} miles away, and almost nothing else is within walking distance{!rest<=1}. Residents say nightlife is thin.
 scene: You would drive to dinner, because little is within a {w10}: {rest} restaurants and {bars} bars. The nearest park is about {parkwalk} minutes on foot, so most dog walks are on quiet streets.
 good: The streets are quiet and the supermarket is close.
-watch: The nearest dog park is {dogpark} miles away, and each visit to your parents has a toll{!b_toll>0}.
+watch: [[The nearest dog park is {dogpark} miles away, and each visit to your parents has a toll{!b_toll>0}{!dog_any==0}.]][[Each visit to your parents has a toll{!b_toll>0}{!dog_any>0}.]]
 voices: social_life
 
 === hood: nj:montvale
 host_intro: Montvale is a quiet town of houses{!detached>=0.5}, and residents mention a ban on leaving a car on the street overnight. Ask the building for a parking space in writing. The supermarket is {super} miles away.
-scene: Little else is within a {w10}: {rest} restaurants and {bars} bars. The dog park is {dogpark} miles away, so you would drive the dog there. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+scene: Little else is within a {w10}: {rest} restaurants and {bars} bars. [[The dog park is {dogpark} miles away, so you would drive the dog there{!dog_any==0}.]][[The nearest public dog park is {dogpark} miles away{!dog_any>0}.]] [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: The town is calm, and groceries are close.
 watch: No park is within an easy walk{!parkwalk>=20}, so daily dog walks are on the street.
 voices: parking
 
 === hood: ct:westport
 host_intro: Westport is a beach town of houses{!detached>=0.8}, with the beach {beach} miles away. You would drive to everything, including the supermarket at {super} miles. Residents say there are few places to spend an evening.
-scene: Almost no restaurants are within a {w10}{!rest<=1}, and only {rest1600} within {mile}. The nearest park is about {parkwalk} minutes on foot and the dog park is {dogpark} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+scene: Almost no restaurants are within a {w10}{!rest<=1}, and only {rest1600} within {mile}. [[The nearest park is about {parkwalk} minutes on foot and the dog park is {dogpark} miles away{!own_dog<1}.]] [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: A beach is a short drive away.
 watch: Your parents are about {drive} minutes away, and nothing here is within walking distance.
 voices: social_life
 
 === hood: ct:fairfield
 host_intro: Fairfield has a small center you can walk to, with {rest} restaurants and {bars} bars within a {w10}{!rest>=4}. Residents love the beaches and parks. They also say there is little nightlife for people your age.
-scene: The train station is {station} miles from the door and the supermarket {super} miles. A park is about {parkwalk} minutes on foot, and the beach is {beach} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+scene: The train station is {station} miles {door} and the supermarket {super} miles. A park is about {parkwalk} minutes on foot, and the beach is {beach} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: You can walk to dinner and to the train.
-watch: The drive to your parents is about {drive} minutes each way, and the dog park is {dogpark} miles away.
+watch: [[The drive to your parents is about {drive} minutes each way, and the dog park is {dogpark} miles away{!dog_any==0}.]][[The drive to your parents is about {drive} minutes each way{!dog_any>0}.]]
 voices: dogs_green, social_life
 
 === hood: nj:roxbury
@@ -97,17 +97,17 @@ watch: Nearly everything is a drive, and visiting your parents costs about ${b_t
 rules: Roxbury|dog_park
 
 === hood: nj:atlantic-highlands
-host_intro: Atlantic Highlands is a small harbor town, and the beach is {beach} miles from the door{!beach<=800}. Residents praise the restaurants and say the bars are few. Your parents are about {drive} minutes away, so visits would be day trips{!drive>=90}.
+host_intro: Atlantic Highlands is a small harbor town, and the beach is {beach} miles {door}{!beach<=800}. Residents praise the restaurants and say the bars are few. Your parents are about {drive} minutes away, so visits would be day trips{!drive>=90}.
 scene: {rest} restaurants and {cafes} cafés are within a {w10}, and the supermarket is {super} miles away. The nearest park is about {parkwalk} minutes on foot.
 good: The harbor and the beach are a short walk.
-watch: The vet and the dog park are both a drive, at {vet} and {dogpark} miles.
+watch: [[The vet and the dog park are both a drive, at {vet} and {dogpark} miles{!dog_any==0}.]]
 voices: social_life
 
 === hood: nj:princeton
 host_intro: Princeton has a town center you can walk to{!rest>=4}. Downtown, no car may park on the street from 2 to 6 AM without a permit, and permits go only to homes with no parking of their own. So make sure the building has a space for you.
 scene: {rest} restaurants are within a {w10}, and there are no bars{!bars==0}. A park is about {parkwalk} minutes on foot and the supermarket is {super} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: You can walk to dinner, a park and the supermarket.
-watch: Your parents are about {drive} minutes away each way, and the dog park is {dogpark} miles away.
+watch: [[Your parents are about {drive} minutes away each way, and the dog park is {dogpark} miles away{!dog_any==0}.]][[Your parents are about {drive} minutes away each way{!dog_any>0}.]]
 rules: Princeton|overnight_parking; Princeton|resident_permit
 
 # ------------------------------------------------------------------ The Fresh-Start Experience
@@ -116,70 +116,70 @@ rules: Princeton|overnight_parking; Princeton|resident_permit
 host_intro: Fort Lee is a town of tall apartment buildings{!bigbldg>=0.7}, many of them new{!post2010>=0.3}. Every residential street is a permit street, and residents register each car with the Parking Authority for $5. A big park is about {parkwalk} minutes on foot{!parkha>=20}.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}, and the supermarket is {super} miles away.
 good: There is plenty to eat on foot and a big park close by.
-watch: Few bars are nearby{!bars<=2}, and the nearest dog park is {dogpark} miles away.
+watch: [[Few bars are nearby{!bars<=2}, and the nearest dog park is {dogpark} miles away{!dog_any==0}.]][[Few bars are nearby{!bars<=2}{!dog_any>0}.]]
 rules: Fort Lee|resident_permit
 
 === hood: nj:weehawken
-host_intro: Weehawken's apartments are in new buildings on the waterfront{!post2010>=0.5}{!water<=500}. A dog run is {dogpark} miles from the door and a park about {parkwalk} minutes on foot. Residents wish there were more restaurants and coffee shops.
+host_intro: Weehawken's apartments are on the waterfront{!water<=500}, in an area of new buildings{!post2010>=0.5}. [[A dog run is {dogpark} miles {door} and a park about {parkwalk} minutes on foot{!dog_any==0}.]][[{owndog}, and a park is about {parkwalk} minutes on foot.]] Residents wish there were more restaurants and coffee shops.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}, and there are no bars{!bars==0}. The supermarket is {super} miles away.
-good: The water, a park and a dog run are all close.
+good: [[The water, a park and a dog run are all close{!dog_any==0}.]][[The water and a park are both close{!dog_any>0}.]]
 watch: The apartments are small, about {sqft} square feet{!sqft<=600}, and each visit to your parents has a toll{!b_toll>0}.
 voices: social_life
 
 === hood: nj:edgewater
 host_intro: Edgewater runs along the river, {water} miles from the water{!water<=500}. Errands are easy, with a supermarket {super} miles away and Trader Joe's {tj} miles. Residents call it relaxing and say there is no nightlife.
-scene: {rest} restaurants are within a {w10}. The nearest park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away.
+scene: {rest} restaurants are within a {w10}. [[The nearest park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away{!own_dog<1}.]]
 good: Errands are easy and the river is close.
 watch: The nearest park is a long walk{!parkwalk>=15}, and evenings are quiet.
 voices: social_life
 
 === hood: nj:north-bergen
-host_intro: A very large park is about {parkwalk} minutes from the door{!parkha>=20}, with a dog run {dogpark} miles away. Any car parked on a North Bergen street between 10 PM and 7 AM needs a township permit. Residents still call parking very limited.
-scene: About {rest} restaurants are within a {w10} and there are no bars{!bars==0}. The supermarket is {super} miles away.
-good: The park and the dog run make daily walks easy.
+host_intro: [[A very large park is about {parkwalk} minutes {door}{!parkha>=20}, with a dog run {dogpark} miles away{!own_dog<1}.]] Any car parked on a North Bergen street between 10 PM and 7 AM needs a township permit. Residents still call parking very limited.
+scene: About {rest} restaurants are within a {w10}[[ and there are no bars{!bars==0}]]. The supermarket is {super} miles away.
+good: [[The park and the dog run make daily walks easy{!own_dog<1}.]]
 watch: Overnight street parking needs a permit, so ask the building for a space.
 rules: North Bergen|overnight_parking; North Bergen|resident_permit
 voices: parking
 
 === hood: nj:harrison
-host_intro: Harrison is a district of new apartment buildings by the river{!post2010>=0.5}{!water<=500}. Harrison Riverfront Park{!b_park==Harrison Riverfront Park} is about {parkwalk} minutes from the door. Residents say street parking is tight, and a resident sticker requires a license and registration at a Harrison address.
+host_intro: Harrison is a district of new apartment buildings by the river{!post2010>=0.5}{!water<=500}. Harrison Riverfront Park{!b_park==Harrison Riverfront Park} is about {parkwalk} minutes {door}. Residents say street parking is tight, and a resident sticker requires a license and registration at a Harrison address.
 scene: There are {pg_n} apartments to choose from here{!pg_n>=6}. {rest} restaurants are within a {w10} and about {rest1600} within {mile}. The train station is {station} miles away and the supermarket {super} miles.
-good: The buildings are new, and a riverfront park is close.
+good: A riverfront park is close, in a district of new buildings.
 watch: The apartments are small, about {sqft} square feet{!sqft<=600}, and few bars are nearby{!bars<=2}.
 rules: Harrison|resident_permit
 voices: parking
 
 === hood: ct:norwalk
-host_intro: In Norwalk a park and the water are both a short walk from the apartments{!parkwalk<=5}{!water<=500}, and a dog park is {dogpark} miles away. There are {pg_n} apartments to choose from{!pg_n>=6}. Residents call the town a little boring.
+host_intro: [[In Norwalk a park and the water are both a short walk from the apartments{!parkwalk<=5}{!water<=500}, and a dog park is {dogpark} miles away{!own_dog<1}.]] There are {pg_n} apartments to choose from{!pg_n>=6}. Residents call the town a little boring.
 scene: About {rest} restaurants are within a {w10}, and few bars{!bars<=2}. The supermarket is {super} miles away, and the typical apartment is about {sqft} square feet. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: Daily walks with the dog are easy here.
 watch: Your parents are about {drive} minutes away by car, and about {transit} by train and bus.
 voices: social_life
 
 === hood: nj:new-brunswick
-host_intro: New Brunswick has a busy downtown, with about {rest} restaurants and {bars} bars within a {w10}{!rest>=20}. The train station is {station} miles from the door. Many streets are permit parking districts, and a monthly space in a city parking deck costs $200 or more.
-scene: A park is about {parkwalk} minutes on foot and a dog park is {dogpark} miles away. The supermarket is {super} miles from the door, and {cafes} cafés are nearby.
-good: You can walk to dinner, drinks, the dog park and the train.
+host_intro: New Brunswick has a busy downtown, with about {rest} restaurants and {bars} bars within a {w10}{!rest>=20}. The train station is {station} miles {door}. Many streets are permit parking districts, and a monthly space in a city parking deck costs $200 or more.
+scene: [[A park is about {parkwalk} minutes on foot and a dog park is {dogpark} miles away{!own_dog<1}.]] The supermarket is {super} miles {door}, and {cafes} cafés are nearby.
+good: [[You can walk to dinner, drinks, the dog park and the train{!own_dog<1}.]]
 watch: Your parents are about {drive} minutes away, and each visit costs about ${b_toll} round trip with a New York E-ZPass.
 rules: New Brunswick|resident_permit; New Brunswick|municipal_garage_monthly
 
 === hood: nj:jersey-city-bergen-lafayette
-host_intro: Liberty State Park{!b_park==Liberty State Park} is about {parkwalk} minutes from these apartments, which makes long dog walks easy. Many of the buildings are new{!post2010>=0.3}, and there are {pg_n} apartments to choose from{!pg_n>=6}. Only {rest} restaurants are within a {w10}{!rest<=10}{!rest>=2}.
-scene: The supermarket is {super} miles away, so groceries are usually a drive. A dog run is {dogpark} miles from the door. On many streets a car without a resident permit may park for only 2 hours.
+host_intro: Liberty State Park{!b_park==Liberty State Park} is about {parkwalk} minutes from these apartments, which makes long dog walks easy. Many of the buildings in this area are new{!post2010>=0.3}, and there are {pg_n} apartments to choose from{!pg_n>=6}. Only {rest} restaurants are within a {w10}{!rest<=10}{!rest>=2}.
+scene: The supermarket is {super} miles away, so groceries are usually a drive. [[A dog run is {dogpark} miles {door}{!own_dog<1}.]] On many streets a car without a resident permit may park for only 2 hours.
 good: A very large park is a very short walk away{!parkha>=20}.
 watch: The apartments are small, about {sqft} square feet{!sqft<=600}, and there are no bars within a {w10}{!bars==0}.
 rules: Jersey City|resident_permit
 
 === hood: nj:jersey-city-downtown
-host_intro: Downtown Jersey City suits going out, with about {rest} restaurants and {bars} bars within a {w10}{!rest>=25}. A park is about {parkwalk} minutes from the door. Parking is hard: on many streets a car without a resident permit may stay only 2 hours.
-scene: About {cafes} cafés are within a {w10}, and the supermarket is {super} miles away. A dog run is {dogpark} miles from the door.
-good: Dinner, drinks, a park and a dog run are all a short walk.
+host_intro: Downtown Jersey City suits going out, with about {rest} restaurants and {bars} bars within a {w10}{!rest>=25}. A park is about {parkwalk} minutes {door}. Parking is hard: on many streets a car without a resident permit may stay only 2 hours.
+scene: About {cafes} cafés are within a {w10}, and the supermarket is {super} miles away. [[A dog run is {dogpark} miles {door}{!own_dog<1}.]]
+good: [[Dinner, drinks, a park and a dog run are all a short walk{!own_dog<1}.]]
 watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
 rules: Jersey City|resident_permit
 
 === hood: nj:jersey-city-newport
-host_intro: In Newport nearly everything is a short walk: the supermarket is {super} miles away and a dog run {dogpark} miles. About {rest} restaurants are within a {w10}{!rest>=15}. Most households here have no car{!nocar>=0.6}, so ask about parking.
-scene: The water is {water} miles from the door, and a park is about {parkwalk} minutes on foot. Few bars are nearby{!bars<=2}.
+host_intro: [[In Newport nearly everything is a short walk: the supermarket is {super} miles away and a dog run {dogpark} miles{!own_dog<1}.]] About {rest} restaurants are within a {w10}{!rest>=15}. Most households here have no car{!nocar>=0.6}, so ask about parking.
+scene: The water is {water} miles {door}, and a park is about {parkwalk} minutes on foot. Few bars are nearby{!bars<=2}.
 good: Daily errands need no car.
 watch: The apartments are small, about {sqft} square feet{!sqft<=500}.
 
@@ -189,79 +189,79 @@ watch: The apartments are small, about {sqft} square feet{!sqft<=500}.
 host_intro: Kew Gardens Hills is about {drive} minutes from your parents{!drive<=20}. Residents say there is little for young adults to do at night.
 scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. A park is about {parkwalk} minutes on foot.
 good: Your parents are very close.
-watch: The nearest dog run is {dogpark} miles away, and there are no cafés within a {w10}{!cafes==0}.
+watch: [[The nearest dog run is {dogpark} miles away, and there are no cafés within a {w10}{!cafes==0}{!dog_any==0}.]][[There are no cafés within a {w10}{!cafes==0}{!dog_any>0}.]]
 voices: social_life
 
 === hood: ny:long-beach
-host_intro: In Long Beach the beach is {beach} miles from the door{!beach<=800}. Check with the city where dogs are allowed on the beach before you rely on it. Residents say parking is a problem.
+host_intro: In Long Beach the beach is {beach} miles {door}{!beach<=800}. Check with the city where dogs are allowed on the beach before you rely on it. Residents say parking is a problem.
 scene: {rest} restaurants and {cafes} cafés are within a {w10}, and the train station is {station} miles away.
-good: The beach is a short walk from the door.
-watch: The nearest park is about {parkwalk} minutes on foot, and the nearest dog park is {dogpark} miles away.
+good: The beach is a short walk {door}.
+watch: [[The nearest park is about {parkwalk} minutes on foot, and the nearest dog park is {dogpark} miles away{!dog_any==0}.]][[The nearest park is about {parkwalk} minutes on foot{!dog_any>0}.]]
 voices: parking
 
 === hood: ny:new-rochelle
-host_intro: New Rochelle is a practical choice: the train station is {station} miles from the door{!station<=500}, and there are {pg_n} apartments to choose from{!pg_n>=6}. Residents praise the pet-friendly buildings and the parks by the water. Alternate side parking is enforced from April 1 to December 31.
-scene: {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. For the dog, the nearest park is about {parkwalk} minutes on foot and the dog park is {dogpark} miles away.
+host_intro: New Rochelle is a practical choice: the train station is {station} miles {door}{!station<=500}, and there are {pg_n} apartments to choose from{!pg_n>=6}. Residents praise the pet-friendly buildings and the parks by the water. Alternate side parking is enforced from April 1 to December 31.
+scene: {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. [[For the dog, the nearest park is about {parkwalk} minutes on foot and the dog park is {dogpark} miles away{!own_dog<1}.]]
 good: The train is close and there are many apartments to compare{!pg_n>=6}.
 watch: The apartments are small, about {sqft} square feet{!sqft<=600}, and no park is close for daily dog walks{!parkwalk>=12}.
 rules: New Rochelle|alternate_side
 voices: dogs_green
 
 === hood: ny:riverdale-spuyten-duyvil
-host_intro: This part of Riverdale has a lot of parkland: a large park is about {parkwalk} minutes from the door{!parkha>=15}, and a dog run is {dogpark} miles away. Residents say they like walking their dogs through the greenery. They also say there is not much to do at night.
+host_intro: [[This part of Riverdale has a lot of parkland: a large park is about {parkwalk} minutes {door}{!parkha>=15}, and a dog run is {dogpark} miles away{!own_dog<1}.]] Residents say they like walking their dogs through the greenery. They also say there is not much to do at night.
 scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. The supermarket is {super} miles away, and the train station {station} miles.
-good: Daily dog walks are easy, with a park and a dog run close by.
+good: [[Daily dog walks are easy, with a park and a dog run close by{!own_dog<1}.]]
 watch: For a night out you would leave the neighborhood.
 voices: dogs_green, social_life
 
 === hood: nj:englewood
-host_intro: The apartments in Englewood are in newer buildings{!post2010>=0.3}, and a dog run is {dogpark} miles from the door. Nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}, so dinner out starts with a drive. Residents say parking and traffic can be a headache.
+host_intro: [[Much of the housing around these apartments is newer{!post2010>=0.3}, and a dog run is {dogpark} miles {door}{!own_dog<1}.]][[Much of the housing around here is newer{!post2010>=0.3}, and {owndog}{!own_dog==1}.]] Nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}, so dinner out starts with a drive. Residents say parking and traffic can be a headache.
 scene: The supermarket is {super} miles away, so groceries are a drive too. The nearest park is about {parkwalk} minutes on foot.
-good: The buildings are newer and a dog run is close.
+good: [[A dog run is close{!own_dog<1}{!dogpark<=800}.]]
 watch: Every errand is a drive.
 voices: parking
 
 === hood: ny:glen-cove
-host_intro: Glen Cove has a city dog park {dogpark} miles from the door. It is open from dawn to dusk, and only to residents whose dogs are licensed with the City Clerk. About {rest} restaurants are within a {w10}, and few bars{!bars<=2}.
+host_intro: Glen Cove has a city dog park {dogpark} miles {door}. It is open from dawn to dusk, and only to residents whose dogs are licensed with the City Clerk. About {rest} restaurants are within a {w10}, and few bars{!bars<=2}.
 scene: A park is about {parkwalk} minutes on foot. The supermarket is {super} miles away.
-good: The dog park is close, and the drive has no tolls{!b_toll==0}.
+good: [[The dog park is close, and the drive has no tolls{!b_toll==0}{!own_dog<1}.]]
 watch: The trip to your parents by train and bus takes about {transit} minutes.
 rules: Glen Cove|dog_park
 
 === hood: nj:hackensack
 host_intro: Hackensack gives you choice, with {pg_n} apartments{!pg_n>=6}. Residents like the parks and how close the shops are. Many streets are resident-permit-only from 2 AM to 6 AM, and the permit needs a car registered in New Jersey.
-scene: A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles away. {rest} restaurants are within a {w10}, and the train station is {station} miles from the door.
+scene: A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles away. {rest} restaurants are within a {w10}, and the train station is {station} miles {door}.
 good: A park, the supermarket and the train are all a short walk.
-watch: Ask each building for a guaranteed parking space, and expect a drive to the dog park, {dogpark} miles away.
+watch: [[Ask {eachb} for a guaranteed parking space, and expect a drive to the dog park, {dogpark} miles away{!dog_any==0}{!own_garage<1}.]][[Ask {eachb} for a guaranteed parking space{!dog_any>0}{!own_garage<1}.]][[Ask what a garage space costs at each building{!own_garage==1}.]]
 rules: Hackensack|overnight_parking; Hackensack|resident_permit
 voices: dogs_green
 
 === hood: ny:yonkers
 host_intro: The apartments in Yonkers are by the river, {water} miles from the water{!water<=500}. Residents praise the trails, parks and views along it. Only {rest} restaurants are within a {w10}{!rest<=8}{!rest>=2}.
-scene: A park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away. The supermarket is {super} miles from the door and the train station {station} miles.
+scene: [[A park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away{!own_dog<1}.]] The supermarket is {super} miles {door} and the train station {station} miles.
 good: The riverfront makes an easy daily walk.
 watch: For dinner out or a drink, you would usually drive.
 voices: dogs_green
 
 === hood: ny:port-chester
-host_intro: In Port Chester the train station is {station} miles from the door{!station<=500}. About {rest} restaurants are within a {w10}, so dinner is a short walk. The dog park is {dogpark} miles away, so that is a drive.
+host_intro: In Port Chester the train station is {station} miles {door}{!station<=500}. About {rest} restaurants are within a {w10}, so dinner is a short walk. [[The dog park is {dogpark} miles away, so that is a drive{!dog_any==0}.]][[The nearest public dog park is {dogpark} miles away{!dog_any>0}.]]
 scene: There are no bars or cafés within a {w10}{!bars==0}{!cafes==0}. The supermarket is {super} miles away, and the nearest park is about {parkwalk} minutes on foot. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: The train and dinner are both a short walk.
 watch: The apartment is small, about {sqft} square feet{!sqft<=600}.
 
 === hood: ny:white-plains
-host_intro: White Plains bans overnight street parking citywide, from 2 AM to 6 AM. Residents say the ban has made life harder, and the usual answer is a garage or lot permit. Ask every building where you would park.
-scene: The train station is {station} miles from the door, and a park is about {parkwalk} minutes on foot. {rest} restaurants are within a {w10}. The city dog park, {dogpark} miles away, has an area for small dogs.
+host_intro: White Plains bans overnight street parking citywide, from 2 AM to 6 AM. Residents say the ban has made life harder, and the usual answer is a garage or lot permit. [[Ask {everyb} where you would park{!own_garage<1}.]][[{owngarage}, which solves that.]]
+scene: The train station is {station} miles {door}, and a park is about {parkwalk} minutes on foot. {rest} restaurants are within a {w10}. The city dog park, {dogpark} miles away, has an area for small dogs.
 good: The train and a park are a short walk.
 watch: You need a garage or lot space, because you cannot park on the street overnight.
 rules: White Plains|overnight_parking; White Plains|dog_park
 voices: parking
 
 === hood: ny:new-springville-willowbrook-bulls-head-travis
-host_intro: Freshkills Park{!b_park==Freshkills Park}, a very large park{!parkha>=50}, is about {parkwalk} minutes from the door. That makes weekday walks with the dog easy. Residents say street parking spots are hard to find.
+host_intro: Freshkills Park{!b_park==Freshkills Park}, a very large park{!parkha>=50}, is about {parkwalk} minutes {door}. That makes weekday walks with the dog easy. Residents say street parking spots are hard to find.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}, and the supermarket is {super} miles away. There are no bars nearby{!bars==0}.
 good: Errands are easy, and a huge park is close for the dog.
-watch: The nearest dog run is {dogpark} miles away, so off-leash time means a drive{!dogpark>=3200}.
+watch: [[The nearest dog run is {dogpark} miles away, so off-leash time means a drive{!dogpark>=3200}{!dog_any==0}.]]
 voices: parking
 
 === hood: nj:ridgewood
@@ -274,64 +274,64 @@ voices: social_life
 
 === hood: nj:elizabeth
 host_intro: In Elizabeth you would drive for everything: nothing to eat is within a {w10}{!rest==0}, and the supermarket is {super} miles away. Residents say the streets are congested and parking is scarce. So the building's own parking matters most.
-scene: The nearest park is about {parkwalk} minutes on foot. The nearest dog park is {dogpark} miles away, and it is a small park meant for small dogs{!b_dogpark==The Sgt. Vincent J. Oliva Mini Dog Park (For Small Dogs)}.
+scene: The nearest park is about {parkwalk} minutes on foot. [[The nearest dog park is {dogpark} miles away, and it is a small park meant for small dogs{!b_dogpark==The Sgt. Vincent J. Oliva Mini Dog Park (For Small Dogs)}{!own_dog<1}.]]
 good: The apartments are a good size, about {sqft} square feet{!sqft>=700}.
 watch: Nothing is within walking distance, including a park.
 voices: parking
 
 === hood: nj:bloomfield
-host_intro: In Bloomfield the daily things are close: a dog park, the supermarket and the train are all within {dogpark} miles{!super<=800}{!station<=800}. Residents wish there were more nightlife. The town has an overnight permit-parking rule, so ask the leasing office for the hours.
-scene: About {rest} restaurants are within a {w10}. Watsessing Park{!b_park==Watsessing Park} is about {parkwalk} minutes on foot.
-good: A dog park, groceries and the train are all a short walk.
+host_intro: [[In Bloomfield the daily things are close: a dog park, the supermarket and the train are all within {dogpark} miles{!super<=800}{!station<=800}{!own_dog<1}.]] Residents wish there were more nightlife. The town has an overnight permit-parking rule, so ask the leasing office for the hours.
+scene: About {rest} restaurants are within a {w10}. [[Watsessing Park{!b_park==Watsessing Park} is about {parkwalk} minutes on foot.]][[A park is about {parkwalk} minutes on foot{!b_park!=Watsessing Park}.]]
+good: [[A dog park, groceries and the train are all a short walk{!own_dog<1}.]]
 watch: Your parents are about {drive} minutes away, and each visit costs about ${b_toll} round trip with a New York E-ZPass.
 rules: Bloomfield|overnight_parking
 voices: social_life
 
 === hood: ct:stamford
 host_intro: Stamford gives you a lot of choice, with {pg_n} apartments{!pg_n>=30}. About {rest} restaurants and {bars} bars are within a {w10}. Residents like living here and say you still need a car.
-scene: A park is about {parkwalk} minutes on foot and a dog park is {dogpark} miles away. The supermarket is {super} miles from the door and the train station {station} miles.
+scene: [[A park is about {parkwalk} minutes on foot and a dog park is {dogpark} miles away{!own_dog<1}.]] The supermarket is {super} miles {door} and the train station {station} miles.
 good: You can compare many buildings and walk to dinner and a drink.
 watch: The typical apartment is small, about {sqft} square feet{!sqft<=600}.
 voices: social_life
 
 === hood: nj:montclair
 host_intro: Montclair is a restaurant town, with about {rest} within a {w10}{!rest>=40}. Residents are split: some love the food and the parks, and others complain about overbuilding and parking.
-scene: About {cafes} cafés are within a {w10}, and the train station is {station} miles away. A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles from the door.
+scene: About {cafes} cafés are within a {w10}, and the train station is {station} miles away. A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles {door}.
 good: You would have a great many places to eat within a short walk.
-watch: The apartments are very small, about {sqft} square feet{!sqft<=500}, and the dog park is {dogpark} miles away.
+watch: [[The apartments are very small, about {sqft} square feet{!sqft<=500}, and the dog park is {dogpark} miles away{!dog_any==0}.]][[The apartments are very small, about {sqft} square feet{!sqft<=500}{!dog_any>0}.]]
 voices: social_life, parking, dogs_green
 
 === hood: nj:wayne
 host_intro: The apartments in Wayne are beside Barbour Pond Park{!b_park==Barbour Pond Park}, about {parkwalk} minutes away on foot. Residents say street parking is hard and advise getting a garage or driveway space.
-scene: {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. The dog park is {dogpark} miles away, so that is a drive.
+scene: {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. [[The dog park is {dogpark} miles away, so that is a drive{!dog_any==0}.]][[The nearest public dog park is {dogpark} miles away{!dog_any>0}.]]
 good: A park is close for daily dog walks.
 watch: Few bars are nearby{!bars<=1}, so a night out means a drive.
 voices: parking
 
 === hood: nj:south-orange
-host_intro: In South Orange the train station is {station} miles from the door{!station<=1200} and a park about {parkwalk} minutes on foot. No overnight parking is allowed from 2 to 6 AM on any street or in any lot without a permit. Residents call parking a nightmare.
+host_intro: In South Orange the train station is {station} miles {door}{!station<=1200} and a park about {parkwalk} minutes on foot. No overnight parking is allowed from 2 to 6 AM on any street or in any lot without a permit. Residents call parking a nightmare.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}, and the supermarket is {super} miles away.
 good: The park, coffee, dinner and groceries are all a short walk.
-watch: There are no bars within a {w10}{!bars==0}, and the dog park is {dogpark} miles away.
+watch: [[There are no bars within a {w10}{!bars==0}, and the dog park is {dogpark} miles away{!dog_any==0}.]][[There are no bars within a {w10}{!bars==0}{!dog_any>0}.]]
 rules: South Orange|overnight_parking; South Orange|resident_permit
 voices: parking
 
 === hood: nj:riverdale
-host_intro: The apartment in Riverdale is large, about {sqft} square feet{!sqft>=800}. A dog park is {dogpark} miles away and a park about {parkwalk} minutes on foot. Almost nothing to eat or drink is within walking distance{!rest<=3}.
+host_intro: [[The apartment in Riverdale is large, about {sqft} square feet{!sqft>=750}{!pg_n==1}.]][[The apartments in Riverdale are large, about {sqft} square feet{!sqft_lo>=700}{!pg_n>=2}.]] A dog park is {dogpark} miles away and a park about {parkwalk} minutes on foot. [[Almost nothing to eat or drink is within walking distance{!rest<=1}.]][[Only {rest} restaurants are within a {w10}{!rest>=2}{!rest<=3}.]]
 scene: The supermarket is {super} miles away, so groceries are a drive. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
-good: You get a large apartment with a dog park close by.
+good: [[You get a large apartment with a dog park close by{!own_dog<1}.]]
 watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
 
 === hood: nj:parsippany-troy-hills
 host_intro: Residents describe Parsippany as a fine place to live that is very boring. They like the parks and trails. The township dog park needs a permit.
 scene: Only {rest} restaurants are within a {w10}, and there are no bars or cafés{!bars==0}{!cafes==0}{!rest>=2}. The supermarket is {super} miles away, and the nearest park about {parkwalk} minutes on foot. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
-good: The apartments are a good size, about {sqft} square feet{!sqft>=700}.
+good: [[The apartments are a good size, about {sqft} square feet{!sqft>=700}.]][[Residents like the parks and trails{!sqft<700}.]]
 watch: Evenings are quiet, and you would drive to dinner.
 rules: Parsippany-Troy Hills|dog_park
 voices: social_life, dogs_green
 
 === hood: ny:peekskill
-host_intro: In Peekskill a big park is about {parkwalk} minutes from the door{!parkha>=20}. From December 1 to April 15, overnight parking on a city street is not allowed unless a sign says so. Residents like the casual local bars.
+host_intro: In Peekskill a big park is about {parkwalk} minutes {door}{!parkha>=20}. From December 1 to April 15, overnight parking on a city street is not allowed unless a sign says so. Residents like the casual local bars.
 scene: Little is within a {w10}: {rest} restaurants and {bars} bars. The city dog park is {dogpark} miles away and the train station {station} miles.
 good: The dog gets a big park close by.
 watch: The supermarket is {super} miles away, and in winter you cannot park on the street overnight.
@@ -339,46 +339,46 @@ rules: Peekskill|overnight_parking
 voices: social_life
 
 === hood: nj:franklin
-host_intro: In Franklin a large state park is about {parkwalk} minutes from the door{!parkha>=20}, which is ideal for long dog walks. [[The apartments are large, about {sqft} square feet{!sqft>=800}.]][[The apartments are a good size, about {sqft} square feet{!sqft>=700}{!sqft<800}.]] You would drive for everything else, starting with dinner{!rest<=3}.
-scene: No restaurants are within a {w10}{!rest==0}, and the supermarket is {super} miles away. The dog park is {dogpark} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
-good: You get a big park close by[[ and a large apartment{!sqft>=800}]].
+host_intro: [[In Franklin the Delaware and Raritan Canal State Park{!b_park==Delaware and Raritan Canal State Park} is about {parkwalk} minutes {door}, which suits long dog walks{!parkwalk<=10}.]][[In Franklin a park is about {parkwalk} minutes {door}{!b_park!=Delaware and Raritan Canal State Park}.]] [[The apartments are large, about {sqft} square feet{!sqft>=800}{!sqft_lo>=700}{!pg_n>=2}.]][[The apartments are a good size, about {sqft} square feet{!sqft>=700}{!sqft<800}{!pg_n>=2}.]] You would drive for everything else, starting with dinner{!rest<=3}.
+scene: No restaurants are within a {w10}{!rest==0}, and the supermarket is {super} miles away. [[The dog park is {dogpark} miles away{!own_dog<1}.]] [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+good: [[A state park is a short walk away{!b_park==Delaware and Raritan Canal State Park}{!parkwalk<=10}.]][[A park is a short walk away{!b_park!=Delaware and Raritan Canal State Park}{!parkwalk<=10}.]]
 watch: Your parents are about {drive} minutes away, and everything except the park is a drive.
 
 === hood: nj:somerville
 host_intro: Somerville has a small downtown you can walk to, with about {rest} restaurants and {bars} bars within a {w10}{!rest>=10}, and residents praise it. The apartment is large, about {sqft} square feet{!sqft>=800}. On restricted streets, residents can register for free parking permits.
-scene: The train station is {station} miles from the door and the supermarket {super} miles. A park is about {parkwalk} minutes on foot.
+scene: The train station is {station} miles {door} and the supermarket {super} miles. A park is about {parkwalk} minutes on foot.
 good: You get space and a downtown to walk to.
-watch: Your parents are about {drive} minutes away by car, and the dog park is {dogpark} miles away.
+watch: [[Your parents are about {drive} minutes away by car, and the dog park is {dogpark} miles away{!dog_any==0}.]][[Your parents are about {drive} minutes away by car{!dog_any>0}.]]
 rules: Somerville|resident_permit
 voices: social_life
 
 === hood: ct:danbury
-host_intro: The apartments in Danbury are in new buildings{!post2010>=0.4}, and there are {pg_n} to choose from{!pg_n>=6}. Your parents are about {drive} minutes away by car. By train and bus the trip takes about {transit} minutes, so visits would be by car.
+host_intro: Much of Danbury's housing is new{!post2010>=0.4}, and there are {pg_n} apartments to choose from{!pg_n>=6}. Your parents are about {drive} minutes away by car. By train and bus the trip takes about {transit} minutes, so visits would be by car.
 scene: Little is within a {w10}: {rest} restaurants and {bars} bars. The supermarket is {super} miles away.
-good: The buildings are new, with several apartments to compare.
-watch: The nearest park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away.
+good: There are several apartments to compare{!pg_n>=4}.
+watch: [[The nearest park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away{!dog_any==0}.]][[The nearest park is about {parkwalk} minutes on foot{!dog_any>0}.]]
 
 === hood: nj:red-bank
-host_intro: Red Bank suits an evening out: residents talk about dinner followed by a show at the theater. About {rest} restaurants are within a {w10}, and the river is {water} miles from the door. Street parking needs a residential permit from the Parking Utility.
+host_intro: Red Bank suits an evening out: residents talk about dinner followed by a show at the theater. About {rest} restaurants are within a {w10}, and the river is {water} miles {door}. Street parking needs a residential permit from the Parking Utility.
 scene: A park is about {parkwalk} minutes on foot, and the train station is {station} miles away. Residents say new buildings are replacing the trees.
 good: Dinner, the theater and the river are a short walk.
-watch: The supermarket is {super} miles away and the dog park {dogpark} miles, so both are drives.
+watch: [[The supermarket is {super} miles away and the dog park {dogpark} miles, so both are drives{!dog_any==0}.]]
 rules: Red Bank|resident_permit
 voices: social_life, dogs_green
 
 === hood: ct:milford-city-balance-
-host_intro: Milford is a shoreline town, and residents love its beaches and its downtown. Parking at Gulf Beach or Walnut Beach needs a resident sticker from May 1 to September 30. A park is about {parkwalk} minutes from the door.
-scene: About {rest} restaurants are within a {w10}, and the train station is {station} miles away. The beach is {beach} miles from the door and the supermarket {super} miles. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+host_intro: Milford is a shoreline town, and residents love its beaches and its downtown. Parking at Gulf Beach or Walnut Beach needs a resident sticker from May 1 to September 30. A park is about {parkwalk} minutes {door}.
+scene: About {rest} restaurants are within a {w10}, and the train station is {station} miles away. The beach is {beach} miles {door} and the supermarket {super} miles. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: A park, the train and dinner are all a short walk.
 watch: There are no bars within a {w10}{!bars==0}, and your parents are about {drive} minutes away.
 rules: Milford|resident_permit
 voices: dogs_green, social_life
 
 === hood: nj:long-branch
-host_intro: In Long Branch the beach is {beach} miles from the door{!beach<=800}. Dogs are banned from all beaches from May 1 to September 30, and from the boardwalk always. Residents say the off season is quiet.
+host_intro: In Long Branch the beach is {beach} miles {door}{!beach<=800}. Dogs are banned from all beaches from May 1 to September 30, and from the boardwalk always. Residents say the off season is quiet.
 scene: About {rest} restaurants and {bars} bars are within a {w10}, and the supermarket is {super} miles away. A big park is about {parkwalk} minutes on foot{!parkha>=20}.
 good: The ocean and a big park are both within walking distance.
-watch: Your parents are about {drive} minutes away, and the dog park is {dogpark} miles away.
+watch: [[Your parents are about {drive} minutes away, and the dog park is {dogpark} miles away{!dog_any==0}.]][[Your parents are about {drive} minutes away, so visits would be day trips{!dog_any>0}{!drive>=90}.]]
 rules: Long Branch|parks_and_beaches
 voices: social_life
 
@@ -386,25 +386,25 @@ voices: social_life
 host_intro: New Paltz is about {drive} minutes from your parents{!drive>=100}. Residents love the hiking and the downtown.
 scene: About {rest1600} restaurants are within {mile}. A park is about {parkwalk} minutes on foot.
 good: Residents say there are trails all around.
-watch: No dog park is within {dogpark:mi0} miles.
+watch: [[No dog park is within {dogpark:mi0} miles{!dog_any==0}.]]
 voices: dogs_green, social_life
 
 === hood: nj:jersey-city-journal-square
-host_intro: In Journal Square the errands are on foot: the supermarket is {super} miles from the door and a dog run {dogpark} miles. About {rest} restaurants are within a {w10}. On many streets a car without a resident permit may park for only 2 hours.
+host_intro: [[In Journal Square the errands are on foot: the supermarket is {super} miles {door} and a dog run {dogpark} miles{!own_dog<1}.]] About {rest} restaurants are within a {w10}. On many streets a car without a resident permit may park for only 2 hours.
 scene: About {cafes} cafés are close, and few bars{!bars<=2}. There are {pg_n} apartments to choose from{!pg_n>=6}.
-good: Dinner, groceries and a dog run are all a short walk.
+good: [[Dinner, groceries and a dog run are all a short walk{!own_dog<1}.]]
 watch: The nearest park is about {parkwalk} minutes on foot, and parking takes planning.
 rules: Jersey City|resident_permit
 
 === hood: nj:jersey-city-the-heights
-host_intro: In The Heights a dog run is {dogpark} miles from the door and a park about {parkwalk} minutes on foot. Many streets need a resident permit to park.
+host_intro: [[In The Heights a dog run is {dogpark} miles {door} and a park about {parkwalk} minutes on foot{!own_dog<1}.]] Many streets need a resident permit to park.
 scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away.
-good: A park and a dog run are both a short walk.
+good: [[A park and a dog run are both a short walk{!own_dog<1}.]]
 watch: Few bars are nearby{!bars<=2}, and street parking needs a permit on many streets.
 rules: Jersey City|resident_permit
 
 === hood: nj:jersey-city-west-side
-host_intro: The West Side is a part of Jersey City where most households keep a car{!nocar<=0.25}. There are {pg_n} apartments to choose from{!pg_n>=6}, and a dog run is {dogpark} miles away. Evenings are quiet, with no bars within a {w10}{!bars==0}.
+host_intro: The West Side is a part of Jersey City where most households keep a car{!nocar<=0.25}. [[There are {pg_n} apartments to choose from{!pg_n>=6}, and a dog run is {dogpark} miles away{!own_dog<1}.]] Evenings are quiet, with no bars within a {w10}{!bars==0}.
 scene: {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. The nearest park is about {parkwalk} minutes on foot.
 good: There are many apartments to compare, and groceries are close.
 watch: For a night out you would go to another part of the city.
@@ -412,80 +412,80 @@ watch: For a night out you would go to another part of the city.
 # ------------------------------------------------------------------ The Room-to-Breathe Experience
 
 === hood: nj:east-rutherford
-host_intro: Residents of East Rutherford say street parking is plentiful. Read the signs anyway, because alternate-side rules are enforced all year. A dog run is {dogpark} miles from the door.
+host_intro: Residents of East Rutherford say street parking is plentiful. Read the signs anyway, because alternate-side rules are enforced all year. [[A dog run is {dogpark} miles {door}{!dog_any==0}.]][[{owndog}.]]
 scene: {rest} restaurants are within a {w10} and about {rest1600} within {mile}. The supermarket is {super} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
-good: A dog run and the supermarket are close.
+good: [[A dog run and the supermarket are close{!dog_any==0}.]][[The supermarket is close{!dog_any>0}.]]
 watch: The nearest park is about {parkwalk} minutes on foot, a long way for a daily dog walk.
 rules: East Rutherford|alternate_side
 voices: parking
 
 === hood: ny:patchogue
 host_intro: From Patchogue the drive to your parents has no tolls{!b_toll==0}, though it takes about {drive} minutes. Residents love the water views and the downtown. They also say parking is tough.
-scene: {rest} restaurants and {bars} bars are within a {w10}, and the supermarket is {super} miles away. The train station is {station} miles from the door.
+scene: {rest} restaurants and {bars} bars are within a {w10}, and the supermarket is {super} miles away. The train station is {station} miles {door}.
 good: Dinner is a walk, and the drive to your parents has no tolls.
-watch: No park or dog park is close{!parkwalk>=15}{!dogpark>=4800}, so most dog walks are on the sidewalk.
+watch: [[No park or dog park is close{!parkwalk>=15}{!dogpark>=4800}, so most dog walks are on the sidewalk{!dog_any==0}.]]
 voices: dogs_green, social_life, parking
 
 === hood: ny:valley-stream
 host_intro: Valley Stream offers more room without moving far: the apartment is about {sqft} square feet{!sqft>=750}, and your parents are about {drive} minutes away{!drive<=25}. It is a suburb of houses and driveways{!detached>=0.6}. Residents say it is not very walkable and has little for younger adults.
-scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. A dog park is {dogpark} miles from the door and the train station {station} miles.
+scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. [[A dog park is {dogpark} miles {door} and the train station {station} miles{!own_dog<1}.]]
 good: You get a large apartment close to your parents{!drive<=25}.
 watch: [[The cost is near the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2850}.]]
 voices: social_life
 
 === hood: nj:belleville
-host_intro: Belleville is quiet: residents report no nightlife to speak of and some problems with parking. The supermarket is {super} miles from the door, and a park is about {parkwalk} minutes on foot.
-scene: {rest} restaurants are within a {w10}. A dog run is {dogpark} miles away. There are {pg_n} apartments to choose from{!pg_n>=6}.
+host_intro: Belleville is quiet: residents report no nightlife to speak of and some problems with parking. The supermarket is {super} miles {door}, and a park is about {parkwalk} minutes on foot.
+scene: {rest} restaurants are within a {w10}. [[A dog run is {dogpark} miles away{!dog_any==0}.]][[The nearest public dog run is {dogpark} miles away{!own_dog==1}.]] There are {pg_n} apartments to choose from{!pg_n>=6}.
 good: Groceries and a park are a short walk.
 watch: Visiting your parents costs about ${b_toll} round trip with a New York E-ZPass, and evenings are quiet.
 voices: parking, social_life
 
 === hood: nj:bayonne
-host_intro: Bayonne has a parking rule that matters for new apartment buildings. Street parking needs a $5 resident permit, and residents of developments in the newer redevelopment areas cannot get a permit. Ask each building whether that applies to it.
+host_intro: Bayonne has a parking rule that matters for new apartment buildings. Street parking needs a $5 resident permit, and residents of developments in the newer redevelopment areas cannot get a permit. Ask {eachb} whether that applies to it.
 scene: There are {pg_n} apartments to choose from{!pg_n>=6}, and the typical apartment is about {sqft} square feet. {rest} restaurants are within a {w10} and there are no bars{!bars==0}. The supermarket is {super} miles away.
 good: There are many apartments to compare, and they are a good size{!sqft>=700}.
-watch: The nearest park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away.
+watch: [[The nearest park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away{!dog_any==0}.]][[The nearest park is about {parkwalk} minutes on foot{!dog_any>0}.]]
 rules: Bayonne|resident_permit
 
 === hood: nj:clifton
-host_intro: Clifton has large apartments, about {sqft} square feet{!sqft>=800}, with a park about {parkwalk} minutes from the door. Residents praise the parks and say little else is within walking distance.
-scene: {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. The train station is {station} miles from the door, and there are {pg_n} apartments to choose from{!pg_n>=6}.
+host_intro: Clifton has large apartments, about {sqft} square feet{!sqft>=800}, with a park about {parkwalk} minutes {door}. Residents praise the parks and say little else is within walking distance.
+scene: {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. The train station is {station} miles {door}, and there are {pg_n} apartments to choose from{!pg_n>=6}.
 good: You get a large apartment and a short walk to a park.
-watch: You would drive to dinner and to the dog park, {dogpark} miles away.
+watch: [[You would drive to dinner and to the dog park, {dogpark} miles away{!dog_any==0}.]]
 voices: dogs_green
 
 === hood: nj:hawthorne
-host_intro: Residents of Hawthorne talk about the big town park, which is about {parkwalk} minutes from the door. A dog run is {dogpark} miles away. Where streets have permit parking, the resident fee is $2 per vehicle.
-scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. The train station is {station} miles from the door and the supermarket {super} miles. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
-good: A dog run and the train are close.
+host_intro: Residents of Hawthorne talk about the big town park, which is about {parkwalk} minutes {door}. [[A dog run is {dogpark} miles away{!own_dog<1}.]] Where streets have permit parking, the resident fee is $2 per vehicle.
+scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. The train station is {station} miles {door} and the supermarket {super} miles. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+good: [[A dog run and the train are close{!own_dog<1}.]]
 watch: For a night out you would drive to another town.
 rules: Hawthorne|resident_permit
 voices: dogs_green
 
 === hood: nj:east-orange
-host_intro: In East Orange every car parked on the street overnight, from 2 to 6 AM, needs a permit that costs $150 a year. So look for a building with its own garage. The nearest dog run is {dogpark} miles away, and a park is about {parkwalk} minutes on foot.
+host_intro: In East Orange every car parked on the street overnight, from 2 to 6 AM, needs a permit that costs $150 a year. [[So look for a building with its own garage{!nb!=1}.]][[So ask the building for a space off the street{!nb==1}{!own_garage<1}.]][[{owngarage}, which solves that{!nb==1}.]] [[The nearest dog run is {dogpark} miles away, and a park is about {parkwalk} minutes on foot{!own_dog<1}.]]
 scene: {rest} restaurants are within a {w10}, and about {rest1600} within {mile}. The train station is {station} miles away and the supermarket {super} miles.
 good: A park and the train are a short walk.
 watch: Visiting your parents costs about ${b_toll} round trip with a New York E-ZPass.
 rules: East Orange|overnight_parking; East Orange|resident_permit
 
 === hood: nj:city-of-orange
-host_intro: In Orange, overnight street parking needs a residents' permit, and a municipal lot permit costs $40 a month. A building with its own garage is simpler. The train station is {station} miles from the door.
+host_intro: In Orange, overnight street parking needs a residents' permit, and a municipal lot permit costs $40 a month. A building with its own garage is simpler. The train station is {station} miles {door}.
 scene: Almost no restaurants are within a {w10}{!rest<=1}, and the supermarket is {super} miles away. There are {pg_n} apartments to choose from{!pg_n>=6}, and the typical apartment is about {sqft} square feet.
 good: There are many apartments to compare, and the train is close.
-watch: The nearest park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away.
+watch: [[The nearest park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away{!dog_any==0}.]][[The nearest park is about {parkwalk} minutes on foot{!dog_any>0}.]]
 rules: City of Orange|overnight_parking; City of Orange|municipal_garage_monthly
 
 === hood: nj:maplewood
-host_intro: Residents call Maplewood very pet friendly. The apartment is large, about {sqft} square feet{!sqft>=800}. The dog park is {dogpark} miles away, so you would drive the dog there{!dogpark>=2400}.
+host_intro: Residents call Maplewood very pet friendly. [[The apartment is large, about {sqft} square feet{!sqft>=800}{!pg_n==1}.]][[The apartments are large, about {sqft} square feet{!sqft_lo>=700}{!pg_n>=2}.]] [[The dog park is {dogpark} miles away, so you would drive the dog there{!dogpark>=2400}{!dog_any==0}.]][[The nearest public dog park is {dogpark} miles away{!dog_any>0}.]]
 scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. A park is about {parkwalk} minutes on foot. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
-good: You get a large apartment in a town that welcomes dogs.
+good: [[You get a large apartment in a pet-friendly town{!sqft_lo>=700}.]][[Residents call the town very pet friendly{!sqft_lo<700}.]]
 watch: [[The cost is near the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2850}.]]
 voices: dogs_green
 
 === hood: nj:rahway
-host_intro: Rahway has a downtown with a train station {station} miles from the door{!station<=1600}, and residents like its arts scene. {rest} restaurants and {bars} bars are within a {w10}. Resident street permits are free, and they require a New Jersey license and registration at your address.
-scene: A park is about {parkwalk} minutes on foot. The supermarket is {super} miles away and the dog park {dogpark} miles, so both are short drives.
+host_intro: Rahway has a downtown with a train station {station} miles {door}{!station<=1600}, and residents like its arts scene. {rest} restaurants and {bars} bars are within a {w10}. Resident street permits are free, and they require a New Jersey license and registration at your address.
+scene: A park is about {parkwalk} minutes on foot. [[The supermarket is {super} miles away and the dog park {dogpark} miles, so both are short drives{!own_dog<1}.]]
 good: You can walk to dinner, a drink and the train.
 watch: Groceries are a drive, and your parents are about {drive} minutes away.
 rules: Rahway|resident_permit
@@ -493,7 +493,7 @@ voices: social_life
 
 === hood: nj:carteret
 host_intro: Carteret offers large apartments, about {sqft} square feet{!sqft>=800}, and nothing to eat or drink within a {w10}{!rest==0}{!bars==0}. Residents say traffic and parking are bad, so the building's own parking matters.
-scene: The supermarket is {super} miles away and the dog park {dogpark} miles. A park is about {parkwalk} minutes on foot.
+scene: [[The supermarket is {super} miles away and the dog park {dogpark} miles{!own_dog<1}.]] A park is about {parkwalk} minutes on foot.
 good: The apartments are large.
 watch: Every errand and every meal out is a drive.
 voices: parking
@@ -502,12 +502,12 @@ voices: parking
 host_intro: Springfield allows no parking on any public street from 2 to 6 AM, and exceptions are granted for a single night at a time. So rule out any building that has no parking space for you.
 scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. The supermarket is {super} miles away, and a park is about {parkwalk} minutes on foot.
 good: The apartment here is large, about {sqft} square feet{!sqft>=800}.
-watch: The dog park is {dogpark} miles away.
+watch: [[The dog park is {dogpark} miles away{!dog_any==0}.]]
 rules: Springfield (Union County)|overnight_parking
 
 === hood: nj:garwood
-host_intro: The apartment in Garwood is very large, about {sqft} square feet{!sqft>=1000}. The supermarket is {super} miles from the door and the train station {station} miles. A park is about {parkwalk} minutes away.
-scene: {rest} restaurants and {bars} bars are within a {w10}. The dog park is {dogpark} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+host_intro: The apartment in Garwood is very large, about {sqft} square feet{!sqft>=1000}. The supermarket is {super} miles {door} and the train station {station} miles. A park is about {parkwalk} minutes away.
+scene: {rest} restaurants and {bars} bars are within a {w10}. [[The dog park is {dogpark} miles away{!own_dog<1}.]] [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: A very large apartment, with groceries and the train close.
 watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
 
@@ -520,21 +520,21 @@ rules: Haverstraw (Town)|dog_park
 voices: parking
 
 === hood: nj:morris-plains
-host_intro: Morris Plains is a town of houses{!detached>=0.7} where the daily things are close: the supermarket is {super} miles from the door and a dog run {dogpark} miles. Residents say it has little nightlife.
+host_intro: [[Morris Plains is a town of houses{!detached>=0.7} where the daily things are close: the supermarket is {super} miles {door} and a dog run {dogpark} miles{!own_dog<1}.]] Residents say it has little nightlife.
 scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. A park is about {parkwalk} minutes on foot, and the train station is {station} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
-good: Groceries, a dog run, a park and the train are all close.
+good: [[Groceries, a dog run, a park and the train are all close{!own_dog<1}.]]
 watch: Your parents are about {drive} minutes away, and evenings are quiet.
 voices: social_life
 
 === hood: nj:plainfield
-host_intro: In Plainfield the train station is {station} miles from the door{!station<=1600}. Little else is close: no restaurant or bar is within a {w10}{!rest==0}{!bars==0}, and the dog park is {dogpark} miles away.
+host_intro: In Plainfield the train station is {station} miles {door}{!station<=1600}. [[Little else is close: no restaurant or bar is within a {w10}{!rest==0}{!bars==0}, and the dog park is {dogpark} miles away{!own_dog<1}.]]
 scene: The supermarket is {super} miles away. The nearest park is about {parkwalk} minutes on foot.
 good: The train is close.
-watch: You would drive for dinner, groceries and the dog park.
+watch: [[You would drive for dinner, groceries and the dog park{!dog_any==0}.]]
 
 === hood: nj:east-brunswick
-host_intro: The apartment in East Brunswick is large, about {sqft} square feet{!sqft>=850}. Residents are split: some enjoy the township's events and parks, and others call it boring. The township lists a public dog park at Heavenly Farms Park.
-scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. The dog park is {dogpark} miles from the door.
+host_intro: [[The apartment in East Brunswick is large, about {sqft} square feet{!sqft>=800}{!pg_n==1}.]][[The apartments in East Brunswick are large, about {sqft} square feet{!sqft>=800}{!sqft_lo>=700}{!pg_n>=2}.]] Residents are split: some enjoy the township's events and parks, and others call it boring. The township lists a public dog park at Heavenly Farms Park.
+scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. [[The dog park is {dogpark} miles {door}{!own_dog<1}.]]
 good: A large apartment, with restaurants and groceries close.
 watch: The nearest park is about {parkwalk} minutes on foot, a long way for a daily dog walk.
 rules: East Brunswick|dog_park
@@ -542,29 +542,29 @@ voices: social_life, dogs_green
 
 === hood: nj:dover
 host_intro: Dover has a busy downtown, with about {rest} restaurants and {bars} bars within a {w10}{!rest>=20}, and residents call it lively. Municipal lots are closed from 2 AM to 6 AM to cars without an overnight permit.
-scene: A park is about {parkwalk} minutes on foot. The train station is {station} miles from the door and the supermarket {super} miles.
+scene: A park is about {parkwalk} minutes on foot. The train station is {station} miles {door} and the supermarket {super} miles.
 good: You can walk to dinner, drinks, a park and the train.
-watch: Your parents are about {drive} minutes away, and the dog park is {dogpark} miles away.
+watch: [[Your parents are about {drive} minutes away, and the dog park is {dogpark} miles away{!dog_any==0}.]][[Your parents are about {drive} minutes away, so visits take planning{!dog_any>0}{!drive>=60}.]]
 rules: Dover|overnight_parking
 voices: social_life
 
 === hood: nj:old-bridge
-host_intro: Old Bridge is quiet and calm, residents say, and it is a town of houses{!detached>=0.7}. The supermarket is {super} miles from the door. No park is within walking distance: the nearest is about {parkwalk} minutes on foot{!parkwalk>=30}.
-scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. The dog park is {dogpark} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+host_intro: Old Bridge is quiet and calm, residents say, and it is a town of houses{!detached>=0.7}. The supermarket is {super} miles {door}. No park is within walking distance: the nearest is about {parkwalk} minutes on foot{!parkwalk>=30}.
+scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. [[The dog park is {dogpark} miles away{!own_dog<1}.]] [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: The town is quiet, and groceries are close.
 watch: With no park nearby, the dog's daily walks are on the street.
 voices: social_life
 
 === hood: nj:mount-arlington
-host_intro: Residents call Mount Arlington a cute little lake town. The apartment is large, about {sqft} square feet{!sqft>=850}. Daily life needs the car: the supermarket is {super} miles away.
-scene: Little is within a {w10}: {rest} restaurants and {bars} bars. The nearest park is about {parkwalk} minutes on foot and the dog park is {dogpark} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+host_intro: Residents call Mount Arlington a cute little lake town. [[The apartment is large, about {sqft} square feet{!sqft>=850}{!pg_n==1}.]][[The apartments are large, about {sqft} square feet{!sqft_lo>=750}{!pg_n>=2}.]] Daily life needs the car: the supermarket is {super} miles away.
+scene: Little is within a {w10}: {rest} restaurants and {bars} bars. The nearest park is about {parkwalk} minutes on foot[[ and the dog park is {dogpark} miles away{!dog_any==0}]][[ and the nearest public dog park is {dogpark} miles away{!own_dog==1}]]. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: You get a large apartment in a small lake town.
 watch: Your parents are about {drive} minutes away, and nearly every errand is a drive.
 voices: social_life
 
 === hood: nj:bound-brook
-host_intro: Residents call Bound Brook a good town for a young person starting out. The train station is {station} miles from the door and the supermarket {super} miles. Street permits cost $10 a year and need your license, registration and insurance at the Bound Brook address.
-scene: About {rest} restaurants and {bars} bars are within a {w10}, and a park is about {parkwalk} minutes on foot. The dog park is {dogpark} miles away.
+host_intro: Residents call Bound Brook a good town for a young person starting out. The train station is {station} miles {door} and the supermarket {super} miles. Street permits cost $10 a year and need your license, registration and insurance at the Bound Brook address.
+scene: About {rest} restaurants and {bars} bars are within a {w10}, and a park is about {parkwalk} minutes on foot. [[The dog park is {dogpark} miles away{!own_dog<1}.]]
 good: Dinner, groceries, a park and the train are all a short walk.
 watch: Your parents are about {drive} minutes away, and each visit costs about ${b_toll} round trip with a New York E-ZPass.
 rules: Bound Brook|resident_permit
@@ -572,45 +572,45 @@ voices: dogs_green
 
 === hood: ct:bridgeport
 host_intro: Every apartment listed in Bridgeport costs well under your limit{!pg_hi<=2650}, and there are {pg_n} apartments to choose from{!pg_n>=6}. Residents like the beach and the parks, though some say there is nothing to do. The city restricts all-night parking on some streets.
-scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. A park is about {parkwalk} minutes on foot, and the train station is {station} miles from the door.
+scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. A park is about {parkwalk} minutes on foot, and the train station is {station} miles {door}.
 good: Prices are low and there are many apartments to compare.
-watch: The supermarket is {super} miles away and the dog park {dogpark} miles, so both are drives.
+watch: [[The supermarket is {super} miles away and the dog park {dogpark} miles, so both are drives{!dog_any==0}.]][[The supermarket is {super} miles away, so groceries are a drive{!dog_any>0}{!super>=1200}.]]
 rules: Bridgeport|overnight_parking
 voices: social_life, dogs_green
 
 === hood: ct:stratford
-host_intro: Residents praise Stratford's town beach. The train station is {station} miles from the door and the supermarket {super} miles. The bars and the dog park are both a drive{!bars==0}{!dogpark>=3200}.
+host_intro: Residents praise Stratford's town beach. The train station is {station} miles {door} and the supermarket {super} miles. [[The bars and the dog park are both a drive{!bars==0}{!dogpark>=3200}{!dog_any==0}.]][[The bars are a drive{!bars==0}{!dog_any>0}.]]
 scene: {rest} restaurants are within a {w10}. A park is about {parkwalk} minutes on foot. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: The train and groceries are close.
-watch: The dog park is {dogpark} miles away, and your parents are about {drive} minutes away.
+watch: [[The dog park is {dogpark} miles away, and your parents are about {drive} minutes away{!dog_any==0}.]][[Your parents are about {drive} minutes away{!dog_any>0}.]]
 voices: dogs_green
 
 === hood: ct:trumbull
-host_intro: Trumbull is a quiet town of houses{!detached>=0.6}. Residents say there is no nightlife at all, and nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}. The apartment is large, about {sqft} square feet{!sqft>=800}.
-scene: A park is about {parkwalk} minutes on foot. The supermarket is {super} miles away and the dog park {dogpark} miles.
+host_intro: Trumbull is a quiet town of houses{!detached>=0.6}. Residents say there is no nightlife at all, and nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}. [[The apartment is large, about {sqft} square feet{!sqft>=800}{!pg_n==1}.]][[The apartments are large, about {sqft} square feet{!sqft_lo>=750}{!pg_n>=2}.]]
+scene: A park is about {parkwalk} minutes on foot. The supermarket is {super} miles away[[ and the dog park {dogpark} miles{!dog_any==0}]][[, and the nearest public dog park {dogpark} miles{!own_dog==1}]].
 good: You get a large apartment in a very quiet town.
 watch: You would drive for every meal out and every errand.
 voices: social_life
 
 === hood: ct:shelton
-host_intro: Shelton has {pg_n} apartments to choose from{!pg_n>=6}, in a quiet town with a dog park {dogpark} miles away. Residents say parking downtown is short. Your parents are about {drive} minutes away, so visits would be day trips{!drive>=90}.
+host_intro: [[Shelton has {pg_n} apartments to choose from{!pg_n>=6}, in a quiet town with a dog park {dogpark} miles away{!own_dog<1}.]] Residents say parking downtown is short. Your parents are about {drive} minutes away, so visits would be day trips{!drive>=90}.
 scene: {rest} restaurants and {bars} bars are within a {w10}, and a park is about {parkwalk} minutes on foot. The supermarket is {super} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
-good: There are many apartments to compare, and they are a good size{!sqft>=700}.
+good: [[There are many apartments to compare, and they are a good size{!sqft>=700}{!pg_n>=6}.]][[There are several apartments to compare{!sqft<700}{!pg_n>=4}.]]
 watch: The drive to your parents is long, and groceries are a drive too.
 voices: parking
 
 === hood: ct:brookfield
-host_intro: Residents describe Brookfield by its trails and its lake beach. The apartment is large, about {sqft} square feet{!sqft>=800}. The nearest dog park is {dogpark} miles away.
+host_intro: Residents describe Brookfield by its trails and its lake beach. [[The apartment is large, about {sqft} square feet{!sqft>=800}{!pg_n==1}.]][[The apartments are large, about {sqft} square feet{!sqft_lo>=750}{!pg_n>=2}.]] The nearest dog park is {dogpark} miles away.
 scene: {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. The nearest park is about {parkwalk} minutes on foot. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: A large apartment, with groceries and restaurants close.
-watch: Your parents are about {drive} minutes away, and the dog park is a long drive.
+watch: [[Your parents are about {drive} minutes away, and the dog park is a long drive{!dog_any==0}.]]
 voices: dogs_green
 
 === hood: ny:wallkill
-host_intro: The apartment in Wallkill is large, about {sqft} square feet{!sqft>=850}. A big park is about {parkwalk} minutes from the door{!parkha>=20}. Your parents are about {drive} minutes away, so visits would be day trips{!drive>=90}.
+host_intro: The apartment in Wallkill is large, about {sqft} square feet{!sqft>=850}. A big park is about {parkwalk} minutes {door}{!parkha>=20}. Your parents are about {drive} minutes away, so visits would be day trips{!drive>=90}.
 scene: Little is within a {w10}: {rest} restaurants and {bars} bars. About {rest1600} restaurants are within {mile}, and the supermarket is {super} miles away. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: You get a large apartment next to a big park.
-watch: The dog park is {dogpark} miles away, and each visit to your parents has a toll{!b_toll>0}.
+watch: [[The dog park is {dogpark} miles away, and each visit to your parents has a toll{!b_toll>0}{!dog_any==0}.]][[Each visit to your parents has a toll{!b_toll>0}{!dog_any>0}.]]
 
 === hood: ct:west-haven
 host_intro: The main reason to live in West Haven is the beach, {beach} miles away. Residents love it, and some say it is the only thing to do.
@@ -629,23 +629,23 @@ voices: social_life
 
 === hood: ct:seymour
 host_intro: [[The apartment in Seymour is very large, about {sqft} square feet{!sqft>=1000}, and costs about ${pg_mid} a month, everything included{!pg_mid<=2400}.]][[The apartment in Seymour is large, about {sqft} square feet{!sqft>=800}{!sqft<1000}.]] Residents describe antique shops, small diners and not much nightlife. Your parents are about {drive} minutes away{!drive>=90}.
-scene: {rest} restaurants are within a {w10}, and the train station is {station} miles away. The supermarket is {super} miles from the door. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
+scene: {rest} restaurants are within a {w10}, and the train station is {station} miles away. The supermarket is {super} miles {door}. [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: You get a great deal of space[[ for the price{!pg_mid<=2400}]].
-watch: The nearest park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away.
+watch: [[The nearest park is about {parkwalk} minutes on foot, and the dog park is {dogpark} miles away{!dog_any==0}.]][[The nearest park is about {parkwalk} minutes on foot{!dog_any>0}.]]
 voices: social_life
 
 === hood: nj:bordentown
 host_intro: Residents call Bordentown a peaceful, pet-friendly town with little to do.
 scene: {rest} restaurants are within a {w10}. The supermarket is {super} miles away. Your parents are about {drive} minutes away.
-good: The town is quiet and welcomes dogs.
+good: The town is quiet and pet friendly.
 watch: The nearest park is about {parkwalk} minutes on foot.
 voices: dogs_green, social_life
 
 === hood: ct:beacon-falls
-host_intro: Beacon Falls is a small town by the water with its own train station, {station} miles from the door{!station<=800}. Residents enjoy the walking paths and say there is not much to do in town. The apartments cost about ${pg_mid} a month, everything included{!pg_mid<=2400}.
+host_intro: Beacon Falls is a small town by the water with its own train station, {station} miles {door}{!station<=800}. Residents enjoy the walking paths and say there is not much to do in town. The apartments cost about ${pg_mid} a month, everything included{!pg_mid<=2400}.
 scene: Little is within a {w10}: {rest} restaurants and {bars} bars. The supermarket is {super} miles away.
 good: The price is low and the train is close.
-watch: Your parents are about {drive} minutes away, and groceries and the dog park are both a drive.
+watch: [[Your parents are about {drive} minutes away, and groceries and the dog park are both a drive{!dog_any==0}.]][[Your parents are about {drive} minutes away, and groceries are a drive{!dog_any>0}{!super>=1600}.]]
 voices: dogs_green, social_life
 
 === hood: ct:oxford
@@ -657,20 +657,20 @@ voices: social_life
 
 === hood: ct:hamden
 host_intro: Hamden is about {drive} minutes from your parents{!drive>=100}, so visits would be day trips. Residents like the parks and trails. The apartments cost about ${pg_mid} a month, everything included{!pg_mid<=2400}.
-scene: About {rest} restaurants are within a {w10}, and there are no bars{!bars==0}. The supermarket is {super} miles away and the dog park {dogpark} miles.
+scene: About {rest} restaurants are within a {w10}, and there are no bars{!bars==0}. [[The supermarket is {super} miles away and the dog park {dogpark} miles{!own_dog<1}.]]
 good: The price leaves room in your budget.
 watch: The drive to your parents is very long, and most errands need the car.
 voices: dogs_green
 
 === hood: ny:lagrange
-host_intro: LaGrange does not allow pets in any town park or recreation area unless a program says otherwise. The nearest dog park is {dogpark:mi0} miles away. That makes it a poor fit for a new dog owner.
+host_intro: LaGrange does not allow pets in any town park or recreation area unless a program says otherwise. [[The nearest dog park is {dogpark:mi0} miles away{!own_dog<1}.]] That makes it a poor fit for a dog owner.
 scene: Nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}. The supermarket is {super} miles away.
 good: The apartment here is large, about {sqft} square feet{!sqft>=800}.
 watch: Your parents are about {drive} minutes away, and no park nearby allows dogs.
 rules: LaGrange (Town)|parks_and_beaches
 
 === hood: nj:bogota
-host_intro: In Bogota the water is {water} miles from the door{!water<=200} and a park about {parkwalk} minutes on foot{!parkwalk<=10}. Residents praise the parks and call the town peaceful. The {pg_n} apartments are in a single building{!pg_bldgs==1} and cost about ${pg_mid} a month, everything included{!pg_mid>=2850}.
+host_intro: In Bogota the water is {water} miles {door}{!water<=200} and a park about {parkwalk} minutes on foot{!parkwalk<=10}. Residents praise the parks and call the town peaceful. The {pg_n} apartments are in a single building{!pg_bldgs==1} and cost about ${pg_mid} a month, everything included{!pg_mid>=2850}.
 scene: {rest} restaurants and {cafes} cafés are within a {w10}, and there are no bars{!bars==0}. The supermarket is {super} miles away and the train station {station} miles. [[Each apartment listed has a detail to confirm by phone before you tour{!s_open==1}.]] [[This is also one of the safest spots on the whole list{!pg_safe<=0.2}.]]
 good: The water, a park and the supermarket are all a short walk{!super<=500}.
 watch: The cheapest apartment is about ${pg_lo} a month, everything included, which is close to your limit{!pg_lo>=2850}.
@@ -678,7 +678,7 @@ voices: dogs_green, noise
 
 === hood: nj:burlington
 host_intro: The apartments in Burlington cost about ${pg_mid} a month, everything included, less than a typical Queens apartment{!q_cost>=4}. All {pg_n} are in a single building{!pg_bldgs==1}. Your parents are about {drive} minutes away each way{!drive>=110}, so a visit takes the whole day.
-scene: {rest} restaurants are within a {w10}, and there are no bars{!bars==0}. The supermarket is {super} miles away and the dog park {dogpark} miles, so both need the car{!super>=1600}{!dogpark>=4800}. By train and bus the trip to your parents takes about {transit} minutes. [[Each apartment listed has a detail to confirm by phone before you tour{!s_open==1}.]]
+scene: {rest} restaurants are within a {w10}, and there are no bars{!bars==0}. [[The supermarket is {super} miles away and the dog park {dogpark} miles, so both need the car{!super>=1600}{!dogpark>=4800}{!dog_any==0}.]][[The supermarket is {super} miles away, so groceries need the car{!super>=1600}{!dog_any>0}.]] By train and bus the trip to your parents takes about {transit} minutes. [[Each apartment listed has a detail to confirm by phone before you tour{!s_open==1}.]]
 good: You pay less here and get a good-sized apartment{!pg_hi<=2600}{!sqft>=700}.
 watch: The nearest park is about {parkwalk} minutes on foot{!parkwalk>=30}, which is too far for a daily dog walk.
 
@@ -688,14 +688,14 @@ watch: The nearest park is about {parkwalk} minutes on foot{!parkwalk>=30}, whic
 host_intro: This is your parents' own neighborhood, about {drive} minutes from their door{!drive<=5}. You would have your own apartment and change little else. Residents say the parks need care and the nightlife could be better.
 scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away. A park is about {parkwalk} minutes on foot.
 good: You could see your parents any day of the week.
-watch: Few bars are within a {w10}{!bars<=2}, and the nearest dog run is {dogpark} miles away.
+watch: [[Few bars are within a {w10}{!bars<=2}, and the nearest dog run is {dogpark} miles away{!dog_any==0}.]][[Few bars are within a {w10}{!bars<=2}{!dog_any>0}.]]
 voices: dogs_green, social_life
 
 === hood: ny:jamaica-hills-briarwood
-host_intro: Briarwood is about {drive} minutes from your parents{!drive<=10}. Residents say it has everything except nightlife and parking. Ask every building about a reserved parking space.
+host_intro: Briarwood is about {drive} minutes from your parents{!drive<=10}. Residents say it has everything except nightlife and parking. Ask {everyb} about a reserved parking space.
 scene: About {rest} restaurants and {bars} bars are within a {w10}. A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles away.
 good: Your parents are very close, and prices are moderate{!pg_hi<=2650}.
-watch: Street parking is hard, and the nearest dog run is {dogpark} miles away.
+watch: [[Street parking is hard, and the nearest dog run is {dogpark} miles away{!dog_any==0}.]][[Street parking is hard{!dog_any>0}.]]
 voices: parking, social_life
 
 === hood: ny:pomonok-electchester-hillcrest
@@ -706,23 +706,23 @@ watch: Most households have no car{!nocar>=0.6}, so ask where you would park.
 
 === hood: ny:forest-hills
 host_intro: Forest Hills has about {rest} restaurants within a {w10}{!rest>=30}. Residents call the parking horrendous and describe long searches for a space after work. Look for a building with a garage.
-scene: A dog run is {dogpark} miles away and the supermarket {super} miles.
-good: Dinner and a dog run are a short walk.
+scene: [[A dog run is {dogpark} miles away and the supermarket {super} miles{!own_dog<1}.]]
+good: [[Dinner and a dog run are a short walk{!own_dog<1}.]]
 watch: Without a garage space, parking would be a daily problem.
 voices: parking
 
 === hood: ny:north-corona
 host_intro: Flushing Meadows-Corona Park{!b_park==Flushing Meadows-Corona Park} is about {parkwalk} minutes away on foot, and residents praise it. About {rest} restaurants are within a {w10}. The apartment is very small, about {sqft} square feet{!sqft<=450}.
-scene: The supermarket is {super} miles from the door. The nearest dog run is {dogpark} miles away.
+scene: The supermarket is {super} miles {door}. [[The nearest dog run is {dogpark} miles away{!own_dog<1}.]]
 good: A well-liked park and many restaurants are close.
 watch: Most households here have no car{!nocar>=0.6}, so ask about parking.
 voices: dogs_green
 
 === hood: ny:flushing-willets-point
 host_intro: Flushing is a neighborhood for eating out: about {rest} restaurants and {cafes} cafés are within a {w10}{!rest>=40}. Residents say parking is almost nonexistent, so look for a building with a garage.
-scene: A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles away. The train station is {station} miles from the door.
+scene: A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles away. The train station is {station} miles {door}.
 good: You would have a huge choice of restaurants within a short walk.
-watch: The nearest dog run is {dogpark} miles away, and street parking is very hard.
+watch: [[The nearest dog run is {dogpark} miles away, and street parking is very hard{!dog_any==0}.]][[Street parking is very hard{!dog_any>0}.]]
 voices: parking
 
 === hood: ny:east-new-york-north-
@@ -732,27 +732,27 @@ good: Your parents are a short drive away.
 watch: Most households have no car{!nocar>=0.5}, so ask about parking.
 
 === hood: ny:murray-hill-broadway-flushing
-host_intro: Murray Hill puts daily needs close: a park is about {parkwalk} minutes from the door, and about {rest} restaurants are within a {w10}{!rest>=30}. Residents say parking is almost nonexistent.
+host_intro: Murray Hill puts daily needs close: a park is about {parkwalk} minutes {door}, and about {rest} restaurants are within a {w10}{!rest>=30}. Residents say parking is almost nonexistent.
 scene: The supermarket is {super} miles away and the train station {station} miles. About {cafes} cafés are close too.
 good: [[The price is low, about ${pg_mid} a month with everything included{!pg_mid<=2400}.]]
-watch: The nearest dog run is {dogpark} miles away, and you would need a parking space from the building.
+watch: [[The nearest dog run is {dogpark} miles away, and you would need a parking space from the building{!dog_any==0}.]][[You would need a parking space from the building{!dog_any>0}.]]
 voices: parking
 
 === hood: ny:elmhurst
 host_intro: Elmhurst has about {rest} restaurants within a {w10}{!rest>=40}. Residents say parking is in short supply, and most households have no car{!nocar>=0.6}. Ask about a garage before anything else.
-scene: A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away. The supermarket is {super} miles from the door.
+scene: [[A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away{!own_dog<1}.]] The supermarket is {super} miles {door}.
 good: You can walk to a very wide choice of restaurants.
 watch: Parking is the main problem here.
 voices: parking
 
 === hood: ny:old-astoria-hallets-point
-host_intro: This part of Astoria is on the waterfront, {water} miles from the water{!water<=500}. A dog run is {dogpark} miles from the door and a park about {parkwalk} minutes on foot. Most households have no car{!nocar>=0.6}, so ask where you would park.
+host_intro: This part of Astoria is on the waterfront, {water} miles from the water{!water<=500}. [[A dog run is {dogpark} miles {door} and a park about {parkwalk} minutes on foot{!own_dog<1}.]] Most households have no car{!nocar>=0.6}, so ask where you would park.
 scene: About {rest} restaurants are within a {w10}, and the supermarket is {super} miles away.
-good: Morning dog walks are easy, with the water and a dog run close.
+good: [[Morning dog walks are easy, with the water and a dog run close{!own_dog<1}.]]
 watch: Few bars are nearby{!bars<=2}.
 
 === hood: ny:bedford-stuyvesant-east-
-host_intro: Residents of this part of Bedford-Stuyvesant like the coffee shops and say the parks could use upkeep. A park is about {parkwalk} minutes from the door. Most households have no car{!nocar>=0.6}, so settle parking before you sign a lease.
+host_intro: Residents of this part of Bedford-Stuyvesant like the coffee shops and say the parks could use upkeep. A park is about {parkwalk} minutes {door}. Most households have no car{!nocar>=0.6}, so settle parking before you sign a lease.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}. The supermarket is {super} miles away.
 good: Coffee, a park and groceries are all a short walk.
 watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
@@ -762,19 +762,19 @@ voices: dogs_green, social_life
 host_intro: Prospect Lefferts Gardens has older buildings{!pre1940>=0.5} and {cafes} cafés within a {w10}. Residents call the nightlife limited. They also say finding a parking space is a challenge.
 scene: About {rest} restaurants and {bars} bars are within a {w10}. A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles away.
 good: Coffee, dinner and groceries are a short walk.
-watch: The nearest dog run is {dogpark} miles away, and street parking is hard.
+watch: [[The nearest dog run is {dogpark} miles away, and street parking is hard{!dog_any==0}.]][[Street parking is hard{!dog_any>0}.]]
 voices: parking, social_life
 
 === hood: ny:pelham-bay-country-club-city-island
 host_intro: Pelham Bay Park{!b_park==Pelham Bay Park} is a very large park{!parkha>=50}, and residents praise it and the beaches. They call the nightlife boring.
-scene: {rest} restaurants are within a {w10}. A dog run is {dogpark} miles away.
+scene: {rest} restaurants are within a {w10}. [[A dog run is {dogpark} miles away{!own_dog<1}.]]
 good: A huge park is very close.
 watch: Few places to eat or drink are nearby{!rest<=5}.
 voices: dogs_green, social_life
 
 === hood: ny:east-flatbush-erasmus
 host_intro: In this part of East Flatbush about {rest} restaurants and {bars} bars are within a {w10}. Residents complain about dirty sidewalks. Walk the block in the evening before you sign a lease.
-scene: The supermarket is {super} miles away. The nearest park is about {parkwalk} minutes on foot and the nearest dog run {dogpark} miles.
+scene: The supermarket is {super} miles away. [[The nearest park is about {parkwalk} minutes on foot and the nearest dog run {dogpark} miles{!own_dog<1}.]]
 good: Restaurants, bars and groceries are within walking distance.
 watch: Most households have no car{!nocar>=0.6}, and no park is close for the dog{!parkwalk>=10}.
 voices: dogs_green
@@ -790,39 +790,39 @@ rules: Hempstead (Town)|dog_park; Hempstead (Village)|overnight_parking
 host_intro: Flatlands is a quiet neighborhood where few people are new{!newcomers<=0.1}. Residents like the small family restaurants, though there are few of them.
 scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. The supermarket is {super} miles away, and a park is about {parkwalk} minutes on foot.
 good: Groceries and a park are close.
-watch: The nearest dog run is {dogpark} miles away, and evenings are quiet.
+watch: [[The nearest dog run is {dogpark} miles away, and evenings are quiet{!dog_any==0}.]][[Evenings are quiet{!dog_any>0}.]]
 voices: social_life
 
 === hood: ny:east-flatbush-farragut
 host_intro: The main advantage here is the short drive to your parents, about {drive} minutes{!drive<=30}. Residents complain about dirty streets. Few restaurants are within walking distance{!rest<=5}.
 scene: The supermarket is {super} miles away and a park about {parkwalk} minutes on foot. There are no bars within a {w10}{!bars==0}.
 good: Your parents are a short drive away, with no tolls{!b_toll==0}.
-watch: Prices are near your limit{!pg_lo>=2750}, and the nearest dog run is {dogpark} miles away.
+watch: [[Prices are near your limit{!pg_lo>=2750}, and the nearest dog run is {dogpark} miles away{!dog_any==0}.]][[Prices are near your limit{!pg_lo>=2750}{!dog_any>0}.]]
 voices: dogs_green
 
 === hood: ny:flatbush
 host_intro: Prospect Park{!b_park==Prospect Park} is about {parkwalk} minutes away on foot, and residents love having it close. They say the sidewalks on the way are filthy.
-scene: About {rest} restaurants and {bars} bars are within a {w10}. A dog run is {dogpark} miles away.
+scene: About {rest} restaurants and {bars} bars are within a {w10}. [[A dog run is {dogpark} miles away{!own_dog<1}.]]
 good: A large park is within walking distance.
 watch: Most households have no car{!nocar>=0.6}, so ask about parking.
 voices: dogs_green
 
 === hood: ny:east-harlem-south-
-host_intro: In this part of East Harlem nearly everything is a short walk: about {rest} restaurants are within a {w10}{!rest>=40}, and a dog run is {dogpark} miles away. Most households have no car{!nocar>=0.7}, so do not plan on street parking.
-scene: A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles from the door.
-good: Dinner, a park and a dog run are all close.
+host_intro: [[In this part of East Harlem nearly everything is a short walk: about {rest} restaurants are within a {w10}{!rest>=40}, and a dog run is {dogpark} miles away{!own_dog<1}.]] Most households have no car{!nocar>=0.7}, so do not plan on street parking.
+scene: A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles {door}.
+good: [[Dinner, a park and a dog run are all close{!own_dog<1}.]]
 watch: Visiting your parents costs about ${b_toll} round trip with a New York E-ZPass.
 
 === hood: ny:madison
-host_intro: The apartment in Madison is large, about {sqft} square feet{!sqft>=800}. A park is about {parkwalk} minutes from the door. Evenings are quiet, with no bars within a {w10}{!bars==0}.
-scene: {rest} restaurants and {cafes} cafés are within a {w10}, and the supermarket is {super} miles away.
+host_intro: [[The apartment in Madison is large, about {sqft} square feet{!sqft>=800}{!pg_n==1}.]][[The apartments in Madison are large, about {sqft} square feet{!sqft_lo>=700}{!pg_n>=2}.]] A park is about {parkwalk} minutes {door}. Evenings are quiet, with no bars within a {w10}{!bars==0}.
+scene: {rest} restaurants and {cafes} cafés are within a {w10}. The supermarket is {super} miles away.
 good: You get a large apartment with a park close by.
-watch: The nearest dog run is {dogpark} miles away.
+watch: [[The nearest dog run is {dogpark} miles away{!dog_any==0}.]]
 
 === hood: ny:harlem-north-
-host_intro: Residents of this part of Harlem praise the parks and the local restaurants. A dog run is {dogpark} miles from the door and a park about {parkwalk} minutes on foot. Most households have no car{!nocar>=0.7}, so ask each building where you would park.
-scene: About {rest} restaurants and {cafes} cafés are within a {w10}, and the supermarket is {super} miles away.
-good: The dog has a park and a dog run close by.
+host_intro: Residents of this part of Harlem praise the parks and the local restaurants. [[A dog run is {dogpark} miles {door} and a park about {parkwalk} minutes on foot{!own_dog<1}.]] Most households have no car{!nocar>=0.7}, so ask {eachb} where you would park.
+scene: About {rest} restaurants and {cafes} cafés are within a {w10}. The supermarket is {super} miles away.
+good: [[The dog has a park and a dog run close by{!own_dog<1}.]]
 watch: Visiting your parents costs about ${b_toll} round trip with a New York E-ZPass.
 voices: dogs_green, social_life
 
@@ -830,33 +830,33 @@ voices: dogs_green, social_life
 host_intro: The apartment in Sheepshead Bay costs about ${pg_mid} a month, everything included{!pg_mid<=2200}, far below your limit. Residents like the cafés and restaurants and the easy trip to the beach. The apartment is small, about {sqft} square feet{!sqft<=600}.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}. A park is about {parkwalk} minutes on foot.
 good: The price is low and there is plenty to eat nearby.
-watch: The nearest dog run is {dogpark} miles away.
+watch: [[The nearest dog run is {dogpark} miles away{!dog_any==0}.]]
 voices: social_life, dogs_green
 
 === hood: ny:midwood
 host_intro: Residents say Midwood has no nightlife, and they call it quiet and affordable. That suits you only if you plan to go out elsewhere.
 scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles away.
 good: The neighborhood is quiet.
-watch: The nearest dog run is {dogpark} miles away.
+watch: [[The nearest dog run is {dogpark} miles away{!dog_any==0}.]]
 voices: social_life
 
 === hood: ny:brighton-beach
-host_intro: Brighton Beach is by the ocean, with the beach {beach} miles from the door{!beach<=1200}, and residents love being next to it. They say parking is difficult and traffic is heavy. Check the city's rules before taking the dog on the beach.
-scene: About {rest} restaurants and {cafes} cafés are within a {w10}. A dog run is {dogpark} miles from the door, and a park is about {parkwalk} minutes on foot.
-good: The beach, a dog run and many restaurants are close.
-watch: Ask each building about parking, because street spaces are hard to find.
+host_intro: Brighton Beach is by the ocean, with the beach {beach} miles {door}{!beach<=1200}, and residents love being next to it. They say parking is difficult and traffic is heavy. Check the city's rules before taking the dog on the beach.
+scene: About {rest} restaurants and {cafes} cafés are within a {w10}. [[A dog run is {dogpark} miles {door}, and a park is about {parkwalk} minutes on foot{!own_dog<1}.]]
+good: [[The beach, a dog run and many restaurants are close{!own_dog<1}.]]
+watch: Ask {eachb} about parking, because street spaces are hard to find.
 voices: parking, dogs_green
 
 === hood: ny:manhattanville-west-harlem
-host_intro: A large park is about {parkwalk} minutes from the door{!parkha>=20}. Residents like the restaurants and bars. Most households have no car{!nocar>=0.7}, so do not plan on street parking.
-scene: About {rest} restaurants are within a {w10}, and a dog run is {dogpark} miles away.
-good: A large park and a dog run are close.
+host_intro: A large park is about {parkwalk} minutes {door}{!parkha>=20}. Residents like the restaurants and bars. Most households have no car{!nocar>=0.7}, so do not plan on street parking.
+scene: [[About {rest} restaurants are within a {w10}, and a dog run is {dogpark} miles away{!own_dog<1}.]]
+good: [[A large park and a dog run are close{!own_dog<1}.]]
 watch: Visiting your parents costs about ${b_toll} round trip with a New York E-ZPass.
 voices: social_life
 
 === hood: ny:hamilton-heights-sugar-hill
-host_intro: A park is about {parkwalk} minutes from the door, in a neighborhood of older buildings{!pre1940>=0.5}. About {rest} restaurants are within a {w10}{!rest>=20}. Most households have no car{!nocar>=0.7}, so ask about parking first.
-scene: A dog run is {dogpark} miles away and the supermarket {super} miles.
+host_intro: A park is about {parkwalk} minutes {door}, in a neighborhood of older buildings{!pre1940>=0.5}. About {rest} restaurants are within a {w10}{!rest>=20}. Most households have no car{!nocar>=0.7}, so ask about parking first.
+scene: [[A dog run is {dogpark} miles away and the supermarket {super} miles{!own_dog<1}.]]
 good: A park and dinner are a short walk.
 watch: Visiting your parents costs about ${b_toll} round trip with a New York E-ZPass.
 
@@ -868,76 +868,76 @@ watch: The trip to your parents takes about {transit} minutes by train and bus, 
 voices: social_life
 
 === hood: ny:rockaway-beach-arverne-edgemere
-host_intro: In Rockaway Beach the ocean is {water} miles from the door{!water<=500}. Residents love the beach and the nature preserve. They wish there were more restaurants and nightlife.
-scene: A dog park is {dogpark} miles away. Little is within a {w10}: {rest} restaurants and {bars} bars.
-good: The beach and a dog park are close.
+host_intro: In Rockaway Beach the ocean is {water} miles {door}{!water<=500}. Residents love the beach and the nature preserve. They wish there were more restaurants and nightlife.
+scene: [[A dog park is {dogpark} miles away{!own_dog<1}.]] Little is within a {w10}: {rest} restaurants and {bars} bars.
+good: [[The beach and a dog park are close{!own_dog<1}.]]
 watch: Few restaurants are nearby{!rest<=5}.
 voices: dogs_green, social_life
 
 === hood: ny:gravesend-south-
-host_intro: A large waterfront park is about {parkwalk} minutes from the door{!parkha>=20}{!water<=500}, which suits daily dog walks. [[The apartment costs about ${pg_mid} a month, everything included{!pg_mid<=2400}.]] Few restaurants are within walking distance{!rest<=5}.
-scene: A dog run is {dogpark} miles away, and the supermarket is {super} miles from the door. Few bars are nearby{!bars<=2}.
+host_intro: A large waterfront park is about {parkwalk} minutes {door}{!parkha>=20}{!water<=500}, which suits daily dog walks. [[The apartment costs about ${pg_mid} a month, everything included{!pg_mid<=2400}.]] Few restaurants are within walking distance{!rest<=5}.
+scene: [[A dog run is {dogpark} miles away, and the supermarket is {super} miles {door}{!own_dog<1}.]] Few bars are nearby{!bars<=2}.
 good: A large park is very close[[ and the price is low{!pg_mid<=2400}]].
 watch: The apartment is small, about {sqft} square feet{!sqft<=600}, and you would travel for dinner out.
 
 === hood: ny:windsor-terrace-south-slope
 host_intro: Residents of Windsor Terrace say parking is decent enough to own a car. They also praise the quiet streets and the big park nearby.
-scene: About {rest} restaurants and {bars} bars are within a {w10}. A dog run is {dogpark} miles away.
-good: Restaurants, bars and a dog run are within walking distance.
+scene: About {rest} restaurants and {bars} bars are within a {w10}. [[A dog run is {dogpark} miles away{!own_dog<1}.]]
+good: [[Restaurants, bars and a dog run are within walking distance{!own_dog<1}.]]
 watch: The nearest park is about {parkwalk} minutes on foot.
 voices: parking, dogs_green
 
 === hood: ny:washington-heights-south-
-host_intro: Highbridge Park{!b_park==Highbridge Park}, a large park{!parkha>=20}, is about {parkwalk} minutes from the door. Residents praise the parks and complain about litter on the sidewalks. Most households have no car{!nocar>=0.7}, so ask every building about a garage.
-scene: About {rest} restaurants are within a {w10}. A dog run is {dogpark} miles away and the supermarket {super} miles.
-good: A large park and a dog run are a short walk.
+host_intro: Highbridge Park{!b_park==Highbridge Park}, a large park{!parkha>=20}, is about {parkwalk} minutes {door}. Residents praise the parks and complain about litter on the sidewalks. Most households have no car{!nocar>=0.7}, so ask {everyb} about a garage.
+scene: About {rest} restaurants are within a {w10}. [[A dog run is {dogpark} miles away and the supermarket {super} miles{!own_dog<1}.]]
+good: [[A large park and a dog run are a short walk{!own_dog<1}.]]
 watch: Visiting your parents costs about ${b_toll} round trip with a New York E-ZPass.
 voices: dogs_green
 
 === hood: ny:flatbush-west-ditmas-park-parkville
-host_intro: Street parking is hard here, since most households have no car{!nocar>=0.5}, so ask every building for a garage space. No park is close: the nearest is about {parkwalk} minutes on foot{!parkwalk>=12}.
+host_intro: Street parking is hard here, since most households have no car{!nocar>=0.5}, so ask {everyb} for a garage space. No park is close: the nearest is about {parkwalk} minutes on foot{!parkwalk>=12}.
 scene: {rest} restaurants and {cafes} cafés are within a {w10}, and the supermarket is {super} miles away.
 good: Cafés, restaurants and groceries are within walking distance.
-watch: The nearest dog run is {dogpark} miles away, so the dog's daily walks are on the street.
+watch: [[The nearest dog run is {dogpark} miles away, so the dog's daily walks are on the street{!dog_any==0}.]]
 
 === hood: ny:williamsbridge-olinville
-host_intro: A large park is about {parkwalk} minutes from the door{!parkha>=20}. There are no bars within a {w10}{!bars==0}.
+host_intro: A large park is about {parkwalk} minutes {door}{!parkha>=20}. There are no bars within a {w10}{!bars==0}.
 scene: {rest} restaurants are within a {w10}, and the train station is {station} miles away.
 good: A large park is close.
 watch: For a night out you would leave the neighborhood.
 
 === hood: ny:bensonhurst
-host_intro: Bensonhurst has about {rest} restaurants within a {w10}{!rest>=20} and no bars{!bars==0}. Most households have no car{!nocar>=0.6}, so ask each building about parking.
+host_intro: Bensonhurst has about {rest} restaurants within a {w10}{!rest>=20} and no bars{!bars==0}. Most households have no car{!nocar>=0.6}, so ask {eachb} about parking.
 scene: A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles away.
 good: Dinner is a short walk.
-watch: The nearest dog run is {dogpark} miles away.
+watch: [[The nearest dog run is {dogpark} miles away{!dog_any==0}.]]
 
 === hood: ny:washington-heights-north-
-host_intro: Fort Tryon Park{!b_park==Fort Tryon Park}, a very large park{!parkha>=50}, is about {parkwalk} minutes from the door, and residents praise it. A dog run is {dogpark} miles away. Residents say parking is limited, and most households have no car{!nocar>=0.7}.
+host_intro: Fort Tryon Park{!b_park==Fort Tryon Park}, a very large park{!parkha>=50}, is about {parkwalk} minutes {door}, and residents praise it. [[A dog run is {dogpark} miles away{!own_dog<1}.]] Residents say parking is limited, and most households have no car{!nocar>=0.7}.
 scene: About {rest} restaurants and {bars} bars are within a {w10}, and the supermarket is {super} miles away.
-good: The dog has a very large park and a dog run close by.
+good: [[The dog has a very large park and a dog run close by{!own_dog<1}.]]
 watch: Visiting your parents costs about ${b_toll} round trip with a New York E-ZPass.
 voices: dogs_green, parking
 
 === hood: ny:bath-beach
-host_intro: In Bath Beach the waterfront is {water} miles from the door{!water<=500}, with a big park beside it{!parkha>=10}{!parkwalk<=3}. Residents say almost nothing stays open late. They also say parking spaces are hard to find.
+host_intro: In Bath Beach the waterfront is {water} miles {door}{!water<=500}, with a big park beside it{!parkha>=10}{!parkwalk<=3}. Residents say almost nothing stays open late. They also say parking spaces are hard to find.
 scene: {rest} restaurants are within a {w10} and there are no bars{!bars==0}. The supermarket is {super} miles away.
 good: The waterfront park makes daily dog walks easy.
-watch: The nearest dog run is {dogpark} miles away, and evenings are quiet.
+watch: [[The nearest dog run is {dogpark} miles away, and evenings are quiet{!dog_any==0}.]][[Evenings are quiet{!dog_any>0}.]]
 voices: parking, social_life
 
 === hood: ny:inwood
-host_intro: Inwood has large parks, and residents praise them: the nearest is about {parkwalk} minutes from the door{!parkha>=20}. About {rest} restaurants and {bars} bars are within a {w10}. Residents say parking is limited.
-scene: A dog run is {dogpark} miles away, and the supermarket is {super} miles from the door. The train station is {station} miles away.
-good: Large parks, a dog run and restaurants are all close.
+host_intro: Inwood has large parks, and residents praise them: the nearest is about {parkwalk} minutes {door}{!parkha>=20}. About {rest} restaurants and {bars} bars are within a {w10}. Residents say parking is limited.
+scene: [[A dog run is {dogpark} miles away, and the supermarket is {super} miles {door}{!own_dog<1}.]] The train station is {station} miles away.
+good: [[Large parks, a dog run and restaurants are all close{!own_dog<1}.]]
 watch: Most households have no car{!nocar>=0.7}, and visiting your parents costs about ${b_toll} round trip with a New York E-ZPass.
 voices: parking, dogs_green
 
 === hood: ny:gravesend-west-
-host_intro: In this part of Gravesend most households keep a car{!nocar<=0.35}, so ask each building what parking it offers. The apartment is large, about {sqft} square feet{!sqft>=800}.
+host_intro: [[In this part of Gravesend most households keep a car{!nocar<=0.35}, so ask {eachb} what parking it offers{!own_garage<1}.]][[In this part of Gravesend most households keep a car{!nocar<=0.35}, and {owngarage}.]] The apartment is large, about {sqft} square feet{!sqft>=800}.
 scene: About {rest} restaurants and {cafes} cafés are within a {w10}. A park is about {parkwalk} minutes on foot, and the supermarket is {super} miles away.
 good: You get a large apartment with restaurants and a park close by.
-watch: There are no bars within a {w10}{!bars==0}, and the nearest dog run is {dogpark} miles away.
+watch: [[There are no bars within a {w10}{!bars==0}, and the nearest dog run is {dogpark} miles away{!dog_any==0}.]][[There are no bars within a {w10}{!bars==0}{!dog_any>0}.]]
 
 === hood: ny:kingsbridge-heights-van-cortlandt-village
 host_intro: Residents say they stay for the outdoors: parks, a parkway and walks around a reservoir. They also say there is little else.
@@ -947,28 +947,28 @@ watch: Few places to eat or drink are nearby{!rest<=5}.
 voices: dogs_green, social_life
 
 === hood: ny:tompkinsville-stapleton-clifton-fox-hills
-host_intro: This neighborhood is on the waterfront, {water} miles from the water{!water<=500}, with a park about {parkwalk} minutes from the door. About {rest} restaurants and {bars} bars are within a {w10}. The drive to your parents has a toll{!b_toll>0}.
-scene: A dog run is {dogpark} miles away, and the supermarket is {super} miles from the door.
+host_intro: This neighborhood is on the waterfront, {water} miles from the water{!water<=500}, with a park about {parkwalk} minutes {door}. About {rest} restaurants and {bars} bars are within a {w10}. The drive to your parents has a toll{!b_toll>0}.
+scene: [[A dog run is {dogpark} miles away, and the supermarket is {super} miles {door}{!own_dog<1}.]]
 good: The water, a park, restaurants and bars are a short walk.
 watch: The apartment is small, about {sqft} square feet{!sqft<=600}, and your parents are about {drive} minutes away.
 
 === hood: ny:st-george-new-brighton
-host_intro: Residents talk about the skyline views and the bars where everybody knows everybody. The water is {water} miles from the door and a dog run {dogpark} miles. The drive to your parents has a toll{!b_toll>0}.
+host_intro: Residents talk about the skyline views and the bars where everybody knows everybody. [[The water is {water} miles {door} and a dog run {dogpark} miles{!own_dog<1}.]] The drive to your parents has a toll{!b_toll>0}.
 scene: About {rest} restaurants and {bars} bars are within a {w10}. A park is about {parkwalk} minutes on foot.
-good: The waterfront, a dog run and a park are close.
+good: [[The waterfront, a dog run and a park are close{!own_dog<1}.]]
 watch: [[The cost is at the top of your budget, about ${pg_mid} a month with everything included{!pg_mid>=2900}.]]
 voices: social_life
 
 === hood: nj:newark
-host_intro: Newark has {pg_n} apartments to choose from{!pg_n>=6}, in a downtown with about {rest} restaurants within a {w10}{!rest>=20}. Residents call parking frustrating, so favor buildings with their own garage.
-scene: A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away. The train station is {station} miles from the door and the supermarket {super} miles.
+host_intro: Newark has {pg_n} apartments to choose from{!pg_n>=6}, in a downtown with about {rest} restaurants within a {w10}{!rest>=10}. [[Residents call parking frustrating, so favor buildings with their own garage{!own_garage<1}.]][[Residents call parking frustrating, and {owngarage}.]]
+scene: [[A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away{!own_dog<1}.]] The train station is {station} miles {door} and the supermarket {super} miles.
 good: Many apartments to compare, close to dinner and the train.
 watch: Your parents are about {drive} minutes away, and each visit costs about ${b_toll} round trip with a New York E-ZPass.
 voices: parking
 
 === hood: nj:jersey-city-mcginley-square
-host_intro: McGinley Square is an older part of Jersey City{!pre1940>=0.3}, with about {rest} restaurants within a {w10}. Most households have no car{!nocar>=0.5}, so ask each building about parking.
-scene: The supermarket is {super} miles away and a dog run {dogpark} miles.
+host_intro: McGinley Square is an older part of Jersey City{!pre1940>=0.3}, with about {rest} restaurants within a {w10}. Most households have no car{!nocar>=0.5}, so ask {eachb} about parking.
+scene: [[The supermarket is {super} miles away and a dog run {dogpark} miles{!own_dog<1}.]]
 good: Dinner is a short walk.
 watch: The nearest park is about {parkwalk} minutes on foot.
 
@@ -984,7 +984,29 @@ watch: The nearest park is about {parkwalk} minutes on foot.
 #   promise (one sentence), catch (one or two).
 # p_ tokens are the figure strip's own values; u_ tokens are medians or shares over the apartments shown.
 
-=== year: The Walk-Everywhere Year
+# An experience that shows fewer than 8 apartments is written as what it is (independent check 4, D11): a short note
+# that names its neighborhoods and gives each one's own figures, with no "typical", no percentage and no "most".
+# Its draft is the block marked "@small"; "@full" is used from 8 apartments up. {@nj:teaneck drive} reads a
+# neighborhood's own figure; {!hood_names==...} stops the build when the neighborhoods change, so the names typed in
+# the prose are always the ones on the page.
+# A claim about an experience ("close to your parents", "no tolls", "you drive to dinner", "small apartments", "a
+# garage") is tested by the checker against the apartments shown and against every neighborhood shown under it: it
+# must hold for 75% of the apartments with no neighborhood contradicting it, or name the exceptions ("except in
+# Stamford", "the Newark ones"), or be limited to named places ("From Brooklyn and Queens ..."), or say "most".
+
+=== year: The Walk-Everywhere Year @small
+display: The Walk-Everywhere Experience
+tagline: Dinner, coffee and a park on foot, in Kew Gardens or Bay Ridge.
+subhead: City blocks where you walk to dinner and coffee: {p_places} apartments, in Kew Gardens and Bay Ridge.
+host_intro: Only {p_places} apartments fit right now: {by_hood}{!hood_names==Bay Ridge; Kew Gardens}. Both are city neighborhoods with restaurants, cafés and a park within a short walk{!@ny:kew-gardens rest>=10}{!@ny:bay-ridge rest>=10}{!@ny:kew-gardens parkwalk<=8}{!@ny:bay-ridge parkwalk<=8}. What you give up is easy parking{!u_garage<=0.2}.
+points: clock | Kew Gardens is about {@ny:kew-gardens drive} minutes from your parents by car, with no tolls{!@ny:kew-gardens b_toll==0}. ;; car | Bay Ridge is about {@ny:bay-ridge drive} minutes from your parents, also with no tolls{!@ny:bay-ridge b_toll==0}. ;; fork | Kew Gardens has about {@ny:kew-gardens rest} restaurants within a {w10}, and Bay Ridge {@ny:bay-ridge rest}. ;; warning | The listings say little about parking{!u_parkpub<0.6}, so ask every building where you would park.
+moment1: coffee | In Kew Gardens the morning dog walk reaches Forest Park{!@ny:kew-gardens b_park==Forest Park} in about {@ny:kew-gardens parkwalk} minutes. In Bay Ridge, Shore Road Park{!@ny:bay-ridge b_park==Shore Road Park} is about {@ny:bay-ridge parkwalk} minutes away. Cafés are close in both{!@ny:kew-gardens cafes>=3}{!@ny:bay-ridge cafes>=3}.
+moment2: cocktail | You walk to dinner and walk back. About {@ny:kew-gardens bars} bars are a short walk away in Kew Gardens, and about {@ny:bay-ridge bars} in Bay Ridge. If you drive instead, expect a search for parking afterward.
+moment3: heart | From Kew Gardens the drive to your parents is about {@ny:kew-gardens drive} minutes, and the train and bus take about {@ny:kew-gardens transit}. From Bay Ridge the drive is about {@ny:bay-ridge drive} minutes, the train and bus about {@ny:bay-ridge transit}.
+promise: You walk to dinner, coffee and a park from each apartment.
+catch: Choice is small: only {p_places} apartments, and Bay Ridge is a much longer trip to your parents than Kew Gardens{!@ny:bay-ridge drive>=25}{!@ny:kew-gardens drive<=10}.
+
+=== year: The Walk-Everywhere Year @full
 display: The Walk-Everywhere Experience
 tagline: Dinner, coffee and the dog run are on foot, and your parents are close.
 subhead: City blocks where you walk to dinner, coffee and the dog run, and rarely need the car.
@@ -998,41 +1020,53 @@ catch: Easy parking is what you give up: most households in these neighborhoods 
 
 === year: The Old-Neighborhood Year
 display: The Old-Neighborhood Experience
-tagline: Your own apartment in a long-established city neighborhood, close to your parents.
-subhead: Long-established city neighborhoods{!m_yrbuilt<=1970} close to your parents, with daily errands on foot.
-host_intro: This suits you if you want your own apartment without moving far from your parents. These are older city neighborhoods{!m_yrbuilt<=1970} where errands are on foot and a park is close. What you give up is nightlife and easy parking.
-points: clock | [[Your parents are about {p_drive} minutes away by car, usually with no tolls{!u_toll==0}.]][[Your parents are about {p_drive} minutes away by car{!u_toll>0}.]] ;; park | A park is about {p_parkwalk} minutes from the door on foot. ;; fork | About {p_rest} restaurants are within a {w10}. ;; home | [[With {p_places} apartments, you have plenty to choose from{!p_places>=40}.]] ;; warning | [[Only {u_garage} percent of the apartments list a garage or covered parking, so ask{!u_garage<0.6}.]][[Street parking is crowded, so ask each building for a space{!u_garage>=0.6}.]]
-moment1: coffee | The morning dog walk is short, and a dog run is about {u_dogpark} miles away. About {u_cafes} cafés are close for a break from the desk, and the supermarket is about {u_super} miles away.
-moment2: fork | Dinner is easy, with about {u_rest1600} restaurants within {mile}. [[Bars are fewer{!u_bars<=3}, so a late night usually means going to another neighborhood.]]
-moment3: heart | Your parents are close enough for a weeknight visit. [[From {p_near}, the closest neighborhood, the drive is about {p_near_drive} minutes. ]]The train and bus take about {p_transit} minutes, so the car is easier.
-promise: You stay close to your parents and run errands on foot.
-catch: You give up nightlife and easy parking. Bars are few{!u_bars<=3}, and most of these buildings do not list a garage{!u_garage<0.5}.
+tagline: An older city neighborhood: close to your parents, except in Newark{!far_names==Newark}.
+subhead: Long-established city neighborhoods{!m_yrbuilt<=1970} with daily errands on foot, close to your parents except in Newark{!far_names==Newark}.
+host_intro: This suits you if you want your own apartment in an older city neighborhood{!m_yrbuilt<=1970}, with errands on foot. Most of these apartments are in {close_areas}, within about {close_drive_hi:r5} minutes of your parents; the Newark ones{!far_names==Newark} are about {far_drive} minutes away, with a toll{!far_toll>0}. What you usually give up is nightlife and easy parking.
+points: clock | From {tollfree_areas} the drive to your parents has no tolls{!tollfree_share>=0.5}. ;; car | From Newark{!far_names==Newark} each visit costs about ${far_toll} round trip with a New York E-ZPass. ;; money | [[From {toll_areas} each visit costs about ${close_toll} round trip with a New York E-ZPass{!close_toll>0}.]] ;; park | From the typical apartment a park is about {p_parkwalk} minutes on foot. ;; fork | About {p_rest} restaurants are within a {w10} of the typical apartment. ;; warning | [[Only {u_garage} percent of the apartments list a garage or covered parking, so ask{!u_garage<0.6}.]][[Street parking is crowded, so ask each building for a space{!u_garage>=0.6}.]]
+moment1: coffee | A dog run is about {u_dogpark} miles from the typical apartment. About {u_cafes} cafés are close for a break from the desk, and the supermarket is about {u_super} miles away.
+moment2: fork | Dinner is easy, with about {u_rest1600} restaurants within {mile} of the typical apartment. [[Bars are usually few{!u_bars<=3}, so a late night often means going to another neighborhood.]]
+moment3: heart | From {close_areas} your parents are close enough for a weeknight visit{!close_share>=0.6}. From Newark{!far_names==Newark} the drive is about {far_drive} minutes each way. The typical trip by train and bus takes about {p_transit} minutes.
+promise: Errands on foot in a long-established city neighborhood.
+catch: Nightlife and easy parking are usually what you give up. Bars are usually few{!u_bars<=3}, and many of these buildings do not list a garage{!u_garage<0.6}.
 
 === year: The Little-City Year
 display: The Little-City Experience
-tagline: A small downtown, a garage for the car{!u_garage>=0.6}, a longer drive to your parents.
-subhead: Small cities and inner suburbs with a downtown to walk to, garage parking{!u_garage>=0.6} and a longer drive to your parents.
-host_intro: This suits you if you want to park in a garage, do laundry in your own apartment and still walk to a small downtown. Most of these buildings offer that{!u_garage>=0.6}{!u_laundry>=0.6}. What you give up is being near your parents: visits become planned trips{!p_drive>=40}.
-points: parking | {u_garage} percent of the apartments list a garage or covered parking. ;; laundry | {u_laundry} percent have a washer in the apartment. ;; pool | {u_pool} percent have a pool in the building, and nearly all have a gym{!u_gym>=0.85}. ;; train | A train station is typically about {m_station} miles away. ;; warning | Visits to your parents take planning: the drive is about {p_drive} minutes.
-moment1: dog | The morning dog walk reaches a park in about {p_parkwalk} minutes. The nearest dog park is about {u_dogpark} miles away, and the supermarket is about {u_super} miles from the door.
-moment2: fork | You can walk to dinner: about {p_rest} restaurants are within a {w10}. Bars are few{!u_bars<=2}, so a bigger night out means a drive or a ride. Most buildings have a garage to return to{!u_garage>=0.6}.
-moment3: car | Seeing your parents is a planned trip. [[Tolls run about ${u_toll} round trip with a New York E-ZPass{!u_toll>0}, and the train]][[There are no tolls on the typical trip{!u_toll==0}, and the train]] and bus take about {p_transit} minutes, so you would drive.
-promise: A small downtown to walk to, and simple parking at the building{!u_garage>=0.6}.
-catch: You cannot drop in on your parents from here. The apartments also run small, about {p_sqft} square feet{!p_sqft<=620}.
+tagline: Small cities, a garage at most buildings{!u_garage>=0.6}, a longer drive to your parents.
+subhead: Small cities and inner suburbs, most with a walkable downtown and a garage{!u_garage>=0.6}, and a longer drive to your parents.
+host_intro: This suits you if you want to park in a garage and do laundry in your own apartment, which most of these buildings offer{!u_garage>=0.6}{!u_laundry>=0.6}. Many of the towns also have a small downtown to walk to{!p_rest>=4}. What you give up is being near your parents: visits are usually planned trips{!p_drive>=40}.
+points: parking | {u_garage} percent of the apartments list a garage or covered parking. ;; laundry | {u_laundry} percent have a washer in the apartment. ;; pool | {u_pool} percent have a pool in the building, and nearly all have a gym{!u_gym>=0.85}. ;; dog | [[{u_owndog} percent are in a building with its own dog area{!u_owndog>=0.15}.]] ;; train | A train station is typically about {m_station} miles away. ;; warning | The typical drive to your parents is about {p_drive} minutes, so visits take planning.
+moment1: dog | From the typical apartment a park is about {p_parkwalk} minutes on foot and the supermarket about {u_super} miles. A public dog park is about {u_dogpark} miles from the typical apartment.
+moment2: fork | You can usually walk to dinner{!p_rest>=4}: about {p_rest} restaurants are within a {w10} of the typical apartment. Bars are usually few{!u_bars<=2}, so a late night means a ride.
+moment3: car | Seeing your parents is a planned trip from most of these towns. [[Tolls run about ${u_toll} round trip with a New York E-ZPass{!u_toll>0}, and the train]][[There are no tolls on the typical trip{!u_toll==0}, and the train]] and bus take about {p_transit} minutes.
+promise: A garage at most buildings, and often a small downtown nearby{!u_garage>=0.6}.
+catch: From here you usually cannot drop in on your parents. The typical apartment is also modest in size, about {p_sqft} square feet{!p_sqft<=620}.
 
 === year: The Fresh-Start Year
 display: The Fresh-Start Experience
-tagline: A newer building{!m_yrbuilt>=2000} near the water{!m_water<=800}, with a gym{!u_gym>=0.8} and a garage{!u_garage>=0.6}.
-subhead: Newer buildings{!m_yrbuilt>=2000} near the water{!m_water<=800}, with gyms, pools and garages, across a toll crossing{!u_toll>0} from your parents.
-host_intro: This suits you if you want a newer building{!m_yrbuilt>=2000} with a gym{!u_gym>=0.9}, a garage{!u_garage>=0.6} and often a pool{!u_pool>=0.5}. The water and a park are a short walk{!m_water<=800}{!p_parkwalk<=5}. What you give up is space and nightlife{!p_sqft<=600}{!u_bars<=1}.
-points: heart | [[Every building here has a gym{!u_gym==1}.]][[Nearly every building here has a gym{!u_gym>=0.8}{!u_gym<1}.]] ;; parking | {u_garage} percent of the apartments list a garage or covered parking. ;; pool | {u_pool} percent are in a building with a pool. ;; laundry | {u_laundry} percent have a washer in the apartment. ;; park | A park is about {p_parkwalk} minutes from the door. ;; warning | [[The typical apartment is small, about {p_sqft} square feet{!p_sqft<600}.]][[Few bars are nearby, so nights out mean a drive{!p_sqft>=600}{!u_bars<=2}.]]
-moment1: water | The morning dog walk can follow the water{!m_water<=800}, and a dog run is about {u_dogpark} miles away. The supermarket is about {u_super} miles from the door.
-moment2: fork | About {p_rest} restaurants are within a {w10}, and about {u_rest1600} within {mile}. [[There are no bars close by{!u_bars==0}, so a night out means a drive or a ride.]][[Bars are few{!u_bars>0}, so a bigger night out means a drive or a ride.]]
-moment3: car | The drive to your parents is about {p_drive} minutes each way[[, and tolls run about ${u_toll} round trip with a New York E-ZPass{!u_toll>0}]]. The train and bus take about {p_transit} minutes.
-promise: A gym, a garage and the water close by, in a newer building{!u_garage>=0.6}{!u_gym>=0.8}{!m_water<=800}.
-catch: You give up space and nightlife: the apartments are small{!p_sqft<=600} and bars are scarce{!u_bars<=1}. [[Each visit to your parents also has a toll{!u_toll>0}.]]
+tagline: A newer building{!m_yrbuilt>=2000} near the water{!m_water<=800}, with a gym{!u_gym>=0.8} and usually a garage{!u_garage>=0.6}.
+subhead: Newer buildings{!m_yrbuilt>=2000} near the water{!m_water<=800}, most with a gym and a garage{!u_garage>=0.6}, across a toll crossing{!u_toll>0} from your parents.
+host_intro: This suits you if you want a newer building{!m_yrbuilt>=2000} with a gym{!u_gym>=0.9}, usually a garage{!u_garage>=0.6} and often a pool{!u_pool>=0.5}. The water and a park are a short walk from most of them{!m_water<=800}{!p_parkwalk<=5}. What you usually give up is space and nightlife{!p_sqft<=600}{!u_bars<=1}.
+points: heart | [[Every building here has a gym{!u_gym==1}.]][[Nearly every building here has a gym{!u_gym>=0.8}{!u_gym<1}.]] ;; parking | {u_garage} percent of the apartments list a garage or covered parking. ;; pool | {u_pool} percent are in a building with a pool. ;; laundry | {u_laundry} percent have a washer in the apartment. ;; park | From the typical apartment a park is about {p_parkwalk} minutes on foot. ;; warning | [[The typical apartment is small, about {p_sqft} square feet{!p_sqft<600}.]][[Bars are usually few nearby, so nights out mean a drive{!p_sqft>=600}{!u_bars<=2}.]]
+moment1: water | From most of these buildings the morning dog walk can follow the water{!m_water<=800}, and a dog run is about {u_dogpark} miles from the typical apartment. The supermarket is about {u_super} miles away.
+moment2: fork | About {p_rest} restaurants are within a {w10} of the typical apartment, and about {u_rest1600} within {mile}. [[There are usually no bars close by{!u_bars==0}, so a night out means a drive or a ride.]][[Bars are usually few{!u_bars>0}, so a bigger night out means a drive or a ride.]]
+moment3: car | The typical drive to your parents is about {p_drive} minutes each way[[, and tolls run about ${u_toll} round trip with a New York E-ZPass{!u_toll>0}]]. The train and bus take about {p_transit} minutes.
+promise: The water close by, a gym in the building and usually a garage{!u_garage>=0.6}{!u_gym>=0.8}{!m_water<=800}.
+catch: You give up space and nightlife: most of the apartments are small{!p_sqft<=600} and bars are usually scarce{!u_bars<=1}. [[Each visit to your parents also has a toll{!u_toll>0}.]]
 
-=== year: The Quiet-Street Year
+=== year: The Quiet-Street Year @small
+display: The Quiet-Street Experience
+tagline: Quiet towns of houses, in Westport, Fairfield or Teaneck.
+subhead: Apartments among houses in quiet towns: {p_places} of them, in Westport, Fairfield and Teaneck.
+host_intro: Only {p_places} apartments fit right now: {by_hood}{!hood_names==Fairfield; Teaneck; Westport}. All are in quiet towns of houses{!@ct:westport detached>=0.5}{!@ct:fairfield detached>=0.5}{!@nj:teaneck detached>=0.5}, and each building has parking of its own{!u_parkown==1}. In Westport and Teaneck you would drive to dinner{!@ct:westport rest<=3}{!@nj:teaneck rest<=3}; the Fairfield apartment is a short walk from restaurants and the train{!@ct:fairfield rest>=4}{!@ct:fairfield station<=800}.
+points: clock | Teaneck is about {@nj:teaneck drive} minutes from your parents, Westport {@ct:westport drive} and Fairfield {@ct:fairfield drive}. ;; ruler | About {@ct:westport sqft} square feet in Westport, {@nj:teaneck sqft} in Teaneck and {@ct:fairfield sqft} in Fairfield. ;; fork | Fairfield has {@ct:fairfield rest} restaurants within a {w10}; Westport and Teaneck have almost none{!@ct:westport rest<=1}{!@nj:teaneck rest<=1}. ;; dog | The Teaneck building has its own dog area{!@nj:teaneck own_dog==1}. ;; warning | Choice is small: only {p_places} apartments, {@ct:westport pg_n} of them in a single Westport building{!@ct:westport pg_bldgs==1}.
+moment1: dog | The streets are quiet for dog walks. The nearest park is about {@nj:teaneck parkwalk} minutes on foot in Teaneck, {@ct:westport parkwalk} in Westport and {@ct:fairfield parkwalk} in Fairfield.
+moment2: car | You drive to dinner, except in Fairfield, where about {@ct:fairfield rest} restaurants and {@ct:fairfield bars} bars are within a {w10}. Coming back is simple, because parking is at the building{!u_parkown==1}.
+moment3: heart | From Teaneck the drive to your parents is about {@nj:teaneck drive} minutes and costs about ${@nj:teaneck b_toll} round trip with a New York E-ZPass. From Westport and Fairfield it is about {@ct:westport drive} and {@ct:fairfield drive} minutes.
+promise: Quiet streets among houses, with parking at the building.
+catch: Westport and Fairfield are more than an hour from your parents{!@ct:westport drive>60}{!@ct:fairfield drive>60}. Almost everything is a drive in Westport and Teaneck{!@ct:westport rest<=3}{!@nj:teaneck rest<=3}.
+
+=== year: The Quiet-Street Year @full
 display: The Quiet-Street Experience
 tagline: A quiet street of houses and lawns{!m_detached>=0.5}, where you drive to everything.
 subhead: An apartment among houses and lawns{!m_detached>=0.5}: very quiet, with almost nothing within walking distance.
@@ -1046,15 +1080,15 @@ catch: Almost nothing is within walking distance{!p_rest<=3}, so every outing st
 
 === year: The Room-to-Breathe Year
 display: The Room-to-Breathe Experience
-tagline: More space for you, the desk and the dog, in towns farther out.
-subhead: Bigger apartments in towns farther out, where nearly everything is a drive.
-host_intro: This suits you if the apartment itself matters most, because you work from home. The typical apartment here is about {p_sqft} square feet, with room for a desk that is separate from the dinner table. In exchange you live farther from your parents, and you drive to almost everything.
-points: laundry | {u_laundry} percent have a washer in the apartment. ;; parking | {u_garage} percent list a garage or covered parking. ;; heart | Nearly every building has a gym{!u_gym>=0.85}. ;; dog | The nearest dog park is about {u_dogpark} miles away. ;; fork | Only about {p_rest} restaurants are within a {w10}. ;; warning | Your parents are about {p_drive} minutes away by car, each way.
-moment1: home | You have room for a proper desk, and the morning dog walk reaches a park in about {p_parkwalk} minutes. The supermarket is about {u_super} miles away, so errands are by car.
-moment2: moon | Going out takes a drive: about {u_rest1600} restaurants are within {mile}[[, and bars are scarce{!u_bars1600<=2}]]. With this much space, having friends over is the easier evening.
+tagline: Usually more space for you, the desk and the dog, in towns farther out.
+subhead: Mostly bigger apartments in towns farther out, with a longer drive to your parents.
+host_intro: This suits you if the apartment itself matters most, because you work from home. The typical apartment here is about {p_sqft} square feet, with room for a desk that is separate from the dinner table. In exchange you usually live farther from your parents{!p_drive>=45}, and what you can walk to depends on the town.
+points: laundry | {u_laundry} percent have a washer in the apartment. ;; parking | {u_garage} percent list a garage or covered parking. ;; heart | Nearly every building has a gym{!u_gym>=0.85}. ;; dog | [[{u_owndog} percent are in a building with its own dog area{!u_owndog>=0.15}.]] ;; fork | About {p_rest} restaurants are within a {w10} of the typical apartment. ;; warning | The typical drive to your parents is about {p_drive} minutes, each way.
+moment1: home | Most of these apartments have room for a proper desk. From the typical apartment a park is about {p_parkwalk} minutes on foot, and the supermarket is about {u_super} miles away.
+moment2: moon | From the typical apartment about {u_rest1600} restaurants are within {mile}[[, and bars are usually scarce{!u_bars1600<=2}]]. With this much space, having friends over is an easy evening.
 moment3: car | Seeing your parents is a long drive from most of these towns. [[Tolls run about ${u_toll} round trip with a New York E-ZPass{!u_toll>0}, and the train]][[There are no tolls on the typical trip{!u_toll==0}, and the train]] and bus take about {p_transit} minutes.
-promise: More room for you, your desk and the dog.
-catch: You live far from your parents{!p_drive>=45} and drive to nearly everything, including dinner{!p_rest<=6} and the dog park.
+promise: Usually more room for you, your desk and the dog.
+catch: From most of these towns your parents are a long drive away{!p_drive>=45}. The typical apartment has only about {p_rest} restaurants within a {w10}.
 
 # ================================================================== ABOUT POINTS (neighborhoods)
 # The icon points beside "About <neighborhood>": 3 to 6, exactly one `warning` (the honest catch).
@@ -1067,42 +1101,50 @@ catch: You live far from your parents{!p_drive>=45} and drive to nearly everythi
 
 === points: hood
 choice | warning | s_n==1, s_open==1 :: Only {s_n} apartment is listed here, and it needs a call to confirm.
-parking | warning | rule:overnight_parking~banned|NO (overnight )?parking|No overnight parking|prohibited|needs a permit|must have an overnight|not allowed|resident-permit-only|closed to cars :: Overnight street parking is restricted, so get a parking space in writing. | Overnight street parking is restricted here, so ask each building for a space.
+parking | warning | rule:overnight_parking~banned|NO (overnight )?parking|No overnight parking|prohibited|needs a permit|must have an overnight|not allowed|resident-permit-only|closed to cars, own_garage==1 :: Overnight street parking is restricted, so plan to use [[the building's garage{!s_bldgs==1}]][[each building's garage{!s_bldgs>=2}]].
+parking | warning | rule:overnight_parking~banned|NO (overnight )?parking|No overnight parking|prohibited|needs a permit|must have an overnight|not allowed|resident-permit-only|closed to cars :: Overnight street parking is restricted, so get a parking space in writing. | Overnight street parking is restricted here, so ask {eachb} for a space.
 dogrule | warning | rule:parks_and_beaches~does not allow dogs|not allowed|banned|beach ordinance :: Town rules limit where dogs may go, so read them before planning walks.
 drive | warning | drive>=90 :: Your parents are about {drive} minutes away each way, so visits are day trips.
-parking | warning | nocar>=0.6 :: Most households here have no car, so ask every building about parking.
-parking | warning | v:parking:negative>=1 :: Residents say parking is hard, so ask for a reserved space.
-night | warning | rest<=3, bars==0 :: Almost nothing to eat or drink is within a {w10}.
-dog | warning | dogpark>=4800 :: The nearest dog park is {dogpark} miles away, so it is a drive.
+parking | warning | nocar>=0.6, not:own_garage==1 :: Most households here have no car, so ask {everyb} about parking.
+parking | warning | v:parking:negative>=1, not:own_garage==1 :: Residents say parking is hard, so ask for a reserved space.
+food | warning | rest==0, bars==0 :: No restaurants or bars are within a {w10}.
+food | warning | rest<=3, bars==0 :: Only {rest} restaurants and no bars are within a {w10}.
+dog | warning | dogpark>=4800, dog_any==0 :: The nearest dog park is {dogpark} miles away, so it is a drive.
 green | warning | parkwalk>=15 :: The nearest park is about {parkwalk} minutes away on foot.
 drive | warning | drive>=60 :: Your parents are about {drive} minutes away, so visits take planning.
+parking | warning | rule:resident_permit~zone-permit|permit streets|Permit Parking districts|citywide residential permit|need a Parking Authority permit|resident parking sticker|Resident permit parking on designated|Resident Parking Program|Restricted Parking Area|streets with restricted parking|Resident Permit Parking Program, own_garage==1 :: Street parking needs a resident permit, so plan to use [[the building's garage{!s_bldgs==1}]][[each building's garage{!s_bldgs>=2}]].
 parking | warning | rule:resident_permit~zone-permit|permit streets|Permit Parking districts|citywide residential permit|need a Parking Authority permit|resident parking sticker|Resident permit parking on designated|Resident Parking Program|Restricted Parking Area|streets with restricted parking|Resident Permit Parking Program :: Street parking needs a resident permit, so ask about the building's parking.
 night | warning | bars==0 :: There are no bars within a {w10}.
-parking | warning | nocar>=0.4 :: Many households here have no car, so ask each building about parking.
+parking | warning | nocar>=0.4, not:own_garage==1 :: Many households here have no car, so ask {eachb} about parking.
 toll | warning | b_toll>0 :: Visiting your parents costs about ${b_toll} round trip with a New York E-ZPass.
-ask | warning | drive>=0 :: Ask each building where you would park before you tour.
-beach | water | beach<=800 :: The beach is {beach} miles from the door.
+ask | warning | own_garage==1 :: Ask what a space in [[the building's garage{!s_bldgs==1}]][[each building's garage{!s_bldgs>=2}]] costs each month.
+ask | warning | drive>=0 :: Ask {eachb} where you would park before you tour.
+dog | dog | own_dog>0 :: {owndog}.
+dog | dog | dog_any>0, own_dog==0 :: [[The building lists a dog amenity{!s_bldgs==1}]][[Some buildings here list a dog amenity{!s_bldgs>=2}]], so ask what it is.
+garage | parking | own_garage==1 :: {owngarage}.
+beach | water | beach<=800 :: The beach is {beach} miles {door}.
 size | ruler | s_n==1, sqft>=850 :: The apartment here is about {sqft} square feet.
-size | ruler | sqft>=850 :: The typical apartment here is about {sqft} square feet.
+size | ruler | s_n>=3, sqft>=850 :: The typical apartment here is about {sqft} square feet.
 food | fork | rest>=20, bars>=4 :: About {rest} restaurants and {bars} bars are within a {w10}.
 food | fork | rest>=10 :: About {rest} restaurants are within a {w10}.
-train | train | station<=500 :: A train station is {station} miles from the door.
-dog | dog | dogpark<=1600 :: A dog run is {dogpark} miles from the door.
-green | park | parkwalk<0.5 :: A park is less than a minute from the door.
-green | park | parkwalk<=3, parkha>=20 :: A large park is about {parkwalk} minutes from the door.
+train | train | station<=500 :: A train station is {station} miles {door}.
+dog | dog | dogpark<=1600, own_dog==0 :: A dog run is {dogpark} miles {door}.
+green | park | parkwalk<0.5 :: A park is less than a minute {door}.
+green | park | parkwalk<=3, parkha>=20 :: A large park is about {parkwalk} minutes {door}.
 green | park | parkwalk<=8 :: A park is about {parkwalk} minutes away on foot.
-water | water | water<=500 :: The waterfront is {water} miles from the door.
-train | train | station<=1200 :: A train station is {station} miles from the door.
+water | water | water<=500 :: The waterfront is {water} miles {door}.
+train | train | station<=1200 :: A train station is {station} miles {door}.
 size | ruler | s_n==1, sqft>=700 :: The apartment here is about {sqft} square feet.
-size | ruler | sqft>=700 :: The typical apartment here is about {sqft} square feet.
+size | ruler | s_n>=3, sqft>=700 :: The typical apartment here is about {sqft} square feet.
 food | fork | rest>=2 :: {rest} restaurants are within a {w10}.
 grocery | home | super<=1600 :: The supermarket is {super} miles away.
-homes | home | post2010>=0.3 :: Many of the buildings here are new.
-dog | dog | dogpark<4800 :: The nearest dog park is {dogpark} miles away.
+homes | home | post2010>=0.3 :: Many of the buildings in this area are new.
+dog | dog | dogpark<4800, own_dog==0 :: The nearest dog park is {dogpark} miles away.
 green | park | parkwalk<15 :: The nearest park is about {parkwalk} minutes away on foot.
 coffee | coffee | cafes>=2 :: {cafes} cafés are within a {w10}.
-cars | car | nocar<=0.08 :: Nearly every household here has a car.
-homes | home | detached>=0.5 :: Most homes here are houses, with few apartment buildings.
+cars | car | nocar<=0.08 :: Nearly every household around here has a car.
+homes | home | detached>=0.5 :: Most homes around here are houses, with few apartment buildings.
+drive | clock | drive>=0 :: Your parents are about {drive} minutes away by car.
 
 # ================================================================== SECTION SUBHEADS
 # One short plain line under each section headline of the page. The headline carries the numbers, so a subhead has
@@ -1114,8 +1156,8 @@ homes | home | detached>=0.5 :: Most homes here are houses, with few apartment b
 # same plain-language rules as everything else: say what it means for her, do not decorate.
 
 === sub: hood.cost
-pg_hi<=2400 :: Every apartment here costs well under your limit. | The monthly cost here leaves room in your budget. | These prices leave money over each month.
-pg_lo>=2850 :: Prices here are close to your limit, so ask about every fee. | This is the top of your budget, so check each fee. | Expect to spend nearly all of your budget here.
+pg_hi<=2400 :: The cost here is well under your limit. | The monthly cost here leaves room in your budget. | The price here leaves money over each month.
+pg_lo>=2850 :: The cost here is close to your limit, so ask about every fee. | This is the top of your budget, so check each fee. | Expect to spend nearly all of your budget here.
 pg_lo<=2300, pg_hi>=2850 :: Prices vary a lot here, so compare building by building. | The cheapest and the most expensive apartments here are far apart. | The monthly cost depends heavily on which building you choose.
 
 === sub: hood.to_parents
@@ -1128,16 +1170,22 @@ drive<=90 :: Sunday dinner takes the afternoon, there and back. | A long drive e
 drive>90 :: A visit to your parents takes the whole day. | Be honest about how often you would make this drive. | Expect to see your parents less often, and for longer each time.
 
 === sub: hood.parking
-rule:overnight_parking~banned|NO (overnight )?parking|No overnight parking|prohibited|needs a permit|must have an overnight|not allowed|resident-permit-only|closed to cars :: Overnight street parking is restricted, so get a space in writing. | The town limits overnight street parking, so the building must provide a space. | Check the overnight parking rule first, then ask each building for a space.
+own_garage==1, s_bldgs==1 :: The building has its own garage, so the street rules matter less. | You would park in the building's garage, not on the street. | The building's garage means you need not rely on the street.
+own_garage==1 :: Every building shown here has a garage, so the street matters less. | Each building here has its own garage for your car. | You would park in a building garage here, not on the street.
+rule:overnight_parking~banned|NO (overnight )?parking|No overnight parking|prohibited|needs a permit|must have an overnight|not allowed|resident-permit-only|closed to cars :: Overnight street parking is restricted, so get a space in writing. | The town limits overnight street parking, so the building must provide a space. | Check the overnight parking rule first, then ask {eachb} for a space.
 nocar>=0.6 :: Most households here have no car, so ask where you would park. | Street parking is hard here, so settle it before you sign. | Few neighbors own a car, and parking is scarce.
 v:parking:negative>=1 :: Residents complain about parking, so ask for a reserved space. | Residents say parking is a struggle. | Residents warn that street parking is hard to find.
 rule:resident_permit~zone-permit|permit streets|Permit Parking districts|citywide residential permit|need a Parking Authority permit|resident parking sticker|Resident permit parking on designated|Resident Parking Program|Restricted Parking Area|streets with restricted parking|Resident Permit Parking Program :: Street parking needs a permit, so ask what you would qualify for. | Find out which permit you would need before relying on the street. | Permit rules apply on the street, so the building's parking matters.
-nocar<=0.08 :: Nearly everyone drives here, so buildings expect you to have a car. | Almost every household here has a car. | Driving is normal here, so ask each building which space is yours.
+nocar<=0.08 :: Nearly everyone drives here, so buildings expect you to have a car. | Almost every household here has a car. | Driving is normal here, so ask {eachb} which space is yours.
 
 === sub: hood.dog
-dogpark<=500 :: A dog run is a short walk from the door. | The dog run is close enough for a weekday morning. | The dog run is near enough to use every day.
+own_dog==1, s_bldgs==1 :: The building has its own dog area for quick trips outside. | The dog can go out without leaving the property. | A dog area on the property keeps late walks short.
+own_dog==1 :: Every building shown here has its own dog area. | Each building here has a dog area on the property. | At any building here, the dog can go out without leaving the property.
+own_dog>0 :: Some buildings here have their own dog area. | Some of these buildings have a dog area on the property. | Ask which buildings have their own dog area, because some do.
+dog_any>0 :: A dog amenity is listed here, so ask what it is. | Ask what the listed dog amenity is. | The listing names a dog amenity without saying what it is.
+dogpark<=500 :: A dog run is a short walk away. | The dog run is close enough for a weekday morning. | The dog run is near enough to use every day.
 parkwalk<=3, parkha>=10 :: A large park is a very short walk away for the daily walk. | The morning walk can start at a large park. | A large park is very close for the dog.
-dogpark>=4800 :: The nearest dog park is a drive, so weekday walks are on the leash. | No dog run is nearby, so keep it for weekends. | Off-leash time means a drive.
+dogpark>=4800 :: The nearest dog park is a drive away. | No dog run is within walking distance. | Off-leash time means a drive.
 dogpark>=2400, parkwalk>=12 :: Neither a park nor a dog run is close. | Both the park and the dog run take a drive. | Expect street walks on weekdays and park trips on weekends.
 
 === sub: hood.going_out
@@ -1169,40 +1217,46 @@ rule:resident_permit~zone-permit|permit streets|Permit Parking districts|citywid
 rule:dog_park~by permit|needs a permit|residents only|small|Township dog park|list a dog run|Public dog park :: The local dog park has its own entry rules. | Ask what the dog park requires before your first visit. | Check the dog park's rules before you go.
 
 === sub: hood.compared_to_queens
-q_cost>=4, q_sqft>=4 :: Cheaper and bigger than a typical Queens apartment. | You pay less and get more room than in Queens. | A typical Queens apartment costs more and is smaller.
-q_cost>=4, q_drive<=2 :: Cheaper than Queens, and farther from your parents. | You save money compared to Queens and drive longer. | Compared to staying in Queens, this costs less and is farther away.
-q_sqft>=4, q_drive<=2 :: Bigger than a typical Queens apartment, and farther from your parents. | More space than in Queens, with a longer drive to your parents. | Compared to staying in Queens, you get more room and a longer drive.
-q_food>=4 :: More restaurants within a walk than around a typical Queens apartment. | Compared to staying in Queens, more restaurants are within walking distance. | There is more to walk to here than in most of Queens.
-q_green>=4, q_food<=2 :: A shorter walk to a park than in Queens, and fewer restaurants. | Compared to staying in Queens, parks are closer and restaurants farther. | Closer to a park than in Queens, with less to eat nearby.
-q_cost<=2, q_drive<=2 :: Costs more than Queens and is farther from your parents. | Compared to staying in Queens, you pay more and drive farther. | More expensive than Queens, with a longer drive to your parents.
-q_cost<=2 :: Costs more than a typical Queens apartment. | Compared to staying in Queens, the monthly cost goes up. | More expensive than the typical Queens apartment.
+q_cost>=4, q_sqft>=4 :: Cheaper and bigger than a typical Queens apartment. | You pay less and get more room than in a typical Queens apartment. | A typical Queens apartment costs more and is smaller.
+q_cost>=4, q_drive<=2 :: Cheaper than a typical Queens apartment, and farther from your parents. | You pay less than for a typical Queens apartment and drive longer. | A typical Queens apartment costs more and is closer to your parents.
+q_sqft>=4, q_drive<=2 :: Bigger than a typical Queens apartment, and farther from your parents. | More space than a typical Queens apartment, with a longer drive to your parents. | A typical Queens apartment is smaller and closer to your parents.
+q_food>=4 :: More restaurants within a walk than around a typical Queens apartment. | A typical Queens apartment has fewer restaurants within walking distance. | There is more to walk to here than around a typical Queens apartment.
+q_green>=4, q_food<=2 :: Closer to a park than a typical Queens apartment, with fewer restaurants. | A typical Queens apartment is farther from a park and nearer to restaurants. | Parks are closer and restaurants farther than for a typical Queens apartment.
+q_cost<=2, q_drive<=2 :: Costs more than a typical Queens apartment and is farther from your parents. | You pay more than for a typical Queens apartment and drive farther. | A typical Queens apartment costs less and is closer to your parents.
+q_cost<=2 :: Costs more than a typical Queens apartment. | A typical Queens apartment costs less each month. | More expensive than the typical Queens apartment.
 
 === sub: year.cost
+p_places<8 :: Each apartment's price is on its own card below. | Prices differ by apartment, so compare each of them. | With so few apartments, look at each price itself.
 p_allin<=2650 :: The typical apartment costs well under your limit. | Most apartments here leave some of your budget unspent. | The typical monthly cost is comfortably inside your budget.
 p_allin>=2800 :: The typical apartment costs close to your limit. | Expect to spend most of your budget here. | The typical monthly cost is near the top of your budget.
 p_allin>2650 :: The typical apartment leaves a little room under your limit. | The typical monthly cost is inside your budget, without much to spare. | Most apartments here fit your budget with a little left over.
 
 === sub: year.to_parents
+far_n>0, close_share>=0.5, p_places>=8 :: Usually a short drive to your parents, with some apartments farther away. | Most of these apartments are a short drive from your parents. | Close to your parents in most cases, and farther in some.
+p_places<8 :: The drive differs by neighborhood, so check each. | Each neighborhood below gives its own drive to your parents. | How far your parents are depends on which apartment you pick.
 p_drive<=20 :: Close enough to drop by on a weeknight. | Sunday dinner needs no planning. | You could stop by after work without planning.
 p_drive<=35 :: Close enough for Sunday dinner without planning the week around it. | A short drive to your parents whenever you like. | Near enough that visits stay casual.
 p_drive<=60 :: Far enough that visits to your parents get planned. | A longer drive, so you would plan each visit. | Sunday dinner takes some driving.
 p_drive>60 :: Sunday dinner takes the whole afternoon. | Each visit to your parents is a long drive. | Expect fewer visits, and longer ones.
 
 === sub: year.going_out
+p_places<8 :: What is within a walk differs by neighborhood. | Each neighborhood below says what you can walk to. | Check each neighborhood for what is on foot.
 p_rest>=20, u_bars>=4 :: Restaurants and bars are both within walking distance. | Dinner and a drink are both a walk. | You can spend the evening out without the car.
 p_rest>=15 :: Plenty of restaurants within a walk, and fewer bars. | You can walk to dinner most nights. | Good for eating out, with fewer bars.
 p_rest<=3 :: Going out means driving. | Almost no restaurants are within walking distance. | Dinner out starts with a drive.
-p_rest<=14 :: A few restaurants within a walk, and more by car. | You can walk to dinner, with limited choice. | Some places to eat are close, and the others are a drive.
+p_rest<=14 :: A few restaurants within a walk, and more by car. | From the typical apartment a few restaurants are within a walk. | Some places to eat are close, and the others are a drive.
 
 === sub: year.green
+p_places<8 :: The walk to a park differs by apartment. | Each neighborhood below gives its own walk to a park. | Check each apartment's walk to a park.
 p_parkwalk<=3 :: A park is a very short walk from the typical apartment. | The typical apartment has a park very close. | Morning walks can start at a park.
 p_parkwalk<=7 :: A park is a short walk for you and the dog. | A park is close enough for daily walks. | You reach a park in a few minutes on foot.
 p_parkwalk>=12 :: Quiet streets to walk, and few parks close by. | The nearest park is a long walk, so the dog walks the neighborhood. | A park usually means getting in the car.
 p_parkwalk>=8 :: A park is a longer walk here. | Parks are within reach, with a bit of a walk. | Getting to a park takes a longer walk.
 
 === sub: year.compared_to_queens
-q_food>=3, q_green>=3 :: Much like Queens for walking to dinner and to a park. | Compared to staying in Queens, daily life on foot is much the same. | Walking to dinner and a park is about as easy as in Queens.
-q_sqft>=4, q_food<=1 :: More room than Queens, and far less within walking distance. | You gain space over Queens and lose the walk to dinner. | Compared to staying in Queens, apartments are bigger and little is walkable.
-q_green>=4 :: A shorter walk to a park than in Queens, and a longer drive to your parents. | Compared to staying in Queens, parks are closer and your parents farther. | Closer to a park than in Queens, and farther from your parents.
-q_food<=2, q_drive<=1 :: Farther out than Queens, with less within walking distance. | Compared to staying in Queens, there is less to walk to and more driving. | Less to walk to than in Queens, and a longer drive to your parents.
-q_sqft>=4 :: Compared to staying in Queens, the typical apartment is bigger. | More space than a typical Queens apartment. | A bigger apartment than Queens usually offers.
+p_places<8 :: These few apartments differ, so compare each with a typical Queens apartment. | With so few apartments, set each beside a typical Queens apartment. | The comparison rests on only a few apartments.
+q_food>=3, q_green>=3 :: Much like a typical Queens apartment for walking to dinner and a park. | Dinner and a park are about as walkable as from a typical Queens apartment. | Daily life on foot is much the same as around a typical Queens apartment.
+q_sqft>=4, q_food<=1 :: More room than a typical Queens apartment, and far fewer restaurants on foot. | You gain space over a typical Queens apartment and lose restaurants on foot. | Bigger than a typical Queens apartment, with fewer restaurants you can walk to.
+q_green>=4 :: Closer to a park than a typical Queens apartment, and a longer drive away. | A typical Queens apartment is farther from a park and a shorter drive away. | Parks are closer than from a typical Queens apartment, and the drive is longer.
+q_food<=2, q_drive<=1 :: Fewer restaurants on foot than around a typical Queens apartment, and more driving. | A typical Queens apartment has more restaurants on foot and a shorter drive. | There are fewer restaurants on foot than around a typical Queens apartment.
+q_sqft>=4 :: Bigger than a typical Queens apartment. | More space than a typical Queens apartment. | A typical Queens apartment is smaller.

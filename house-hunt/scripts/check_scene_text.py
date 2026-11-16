@@ -17,11 +17,26 @@ TRUE
    neighborhoods = len(hood_ids), typical all-in = the median shown apartment, lowest / highest = all_in_range,
    minutes = medians.drive_min / transit_min (a neighborhood's own drive_min / transit_min). Any "$2,840", any
    "17 apartments", any "N minutes" in a sentence about her parents that is not the strip's figure fails; so does an
-   evidence item that computes one of these from the unit list instead of reading the strip's field. In a
-   neighborhood, restaurants, bars, cafés, the walk to a park, the dog park and the supermarket must be the
-   neighborhood's own traits, because the page's "At a glance" row prints those;
+   evidence item that computes one of these from the unit list instead of reading the strip's field;
+3b. DOOR-DISTANCE FACTS (independent check 4, D16): in a neighborhood with apartments on the page, restaurants, bars,
+   cafés, the walk to a park, the dog park, the supermarket, the station, the water and the beach must be computed over
+   the BUILDINGS SHOWN there (site/data.json#buildings: the median building; the building itself when one is shown).
+   The neighborhood's frozen area profile (traits) is refused for them. glance_json, the "At a glance" facts written
+   beside each neighborhood text, is recomputed here and must match (glance());
+3c. WHAT THE SHOWN BUILDINGS SUPPLY, AND HOW MANY (check_shown; D6, D25): where every shown building has its own dog
+   area the text says so and speaks of a dog park only as the public one; where some do, the distance is never the
+   catch; where every shown building has a garage, street-parking trouble comes with "the building has its own
+   garage" and never with advice to look for one; "The apartment ..." needs 1 apartment shown, "the apartments"
+   2, "typical" 3; with several buildings a door-distance figure is scoped "most buildings here";
+3d. WHAT AN EXPERIENCE MAY CLAIM (check_experience; D7, D11, D12): a claim such as "close to your parents", "no
+   tolls", "you drive to dinner", "small apartments", "a garage" must hold for 75% of the apartments shown and for
+   every neighborhood shown under it, or name the exceptions, or be limited to named places, or say "most" (60%).
+   An experience with fewer than 8 apartments names its neighborhoods and uses no "typical", percentage or "most".
+   A named neighborhood's figure never sits beside an unscoped figure for the whole experience;
 PLAIN (check_plain; the reason for the edit: lines that tried to be clever and read like an error)
-4. no construction from the removed list (CONCEITS): a thing acting on "you" ("the dog walks you"), "has a bedtime",
+4. no thing as the subject of a verb of intention or speech (AGENCY, a noun-list x verb-list pattern: "the lawns
+   keep their own counsel"), no stale wording (STALE: "not checked again", "compared to staying in Queens"), and
+   no construction from the removed list (CONCEITS): a thing acting on "you" ("the dog walks you"), "has a bedtime",
    "where the car sleeps", "the cost is the ...", "the upside is", "the rest of the story", "count on about", "then
    there is", "on the table", "green" or "sand" as a noun, "home" for her parents' house, "about 0";
 5. readability, per text: sentences average at most 20 words, none over 32, at most one figure-of-speech marker
@@ -132,8 +147,17 @@ SHOWN_ONLY_FIELDS = {"restaurants_800m", "bars_800m", "cafes_800m", "restaurants
 
 GLANCE_TRAITS = ["restaurants_800m", "bars_800m", "cafes_800m", "park_walk_min", "park_ha_800m", "dog_park_m",
                  "supermarket_m_c", "open_water_m"]
-# the same facts computed from the unit list: not accepted in a neighborhood text, because "At a glance" prints the traits
-GLANCE_OLD = {"restaurants_800m", "bars_800m", "cafes_800m", "park_walk_min", "dog_park_m", "supermarket_m"}
+# DOOR-DISTANCE FACTS (independent check 4, D16). Things measured from the door of the buildings she would live in:
+# in a neighborhood with apartments on the page they must be computed over the SHOWN BUILDINGS
+# (site/data.json#buildings: the median building, which is the building itself when one is shown). The neighborhood's
+# frozen area profile (traits, the t_ columns) and the area file are refused for them, and so is a median over the
+# apartments (a building with 8 apartments would count 8 times). Before D16 the rule was the opposite: the text had
+# to quote the traits because "At a glance" printed them; "At a glance" now reads glance_json (see glance()).
+DOOR_FIELDS = {"restaurants_800m", "bars_800m", "cafes_800m", "restaurants_1600m", "park_walk_min", "dog_park_m",
+               "supermarket_m", "supermarket_m_c", "train_station_m", "train_station_m_c", "open_water_m", "beach_m",
+               "park_ha_800m", "t_restaurants_800m", "t_bars_800m", "t_cafes_800m", "t_park_walk_min",
+               "t_park_ha_800m", "t_dog_park_m", "t_supermarket_m_c", "t_open_water_m"}
+DOOR_SOURCE = PAGE + "#buildings"
 
 
 @lru_cache(maxsize=None)
@@ -326,7 +350,10 @@ def _building_table(d, labels):
              "train_station": first(us, "sat", "train_station"),
              "drive_min": first(us, "sun", "drive_min"),
              "own_dog_area": float(own_dog_area(b.get("amenities"))),
-             "own_garage": float(head in ("garage", "covered")),
+             # any dog amenity at all, also one whose kind the data does not say ("yes") or a pet spa or dog wash: not
+             # a dog area the text may claim, but enough that the distance to a public dog park is not the catch
+             "dog_amenity_any": float(bool(str((b.get("amenities") or {}).get("dog_amenities") or "").strip())),
+             "own_garage": float(head == "garage"),         # a garage, not covered parking or a lot
              "own_parking": float(head in ("garage", "covered", "lot", "onsite")),
              "year_built": (b.get("amenities") or {}).get("year_built")}
         for k in ("open_water_m", "beach_m", "park_ha_800m"):
@@ -430,6 +457,9 @@ def lookup(source_file, field, row, agg=None):
         return [plain(x) for x in s.tolist()]
     if agg == "count":
         return int(len(s))
+    if agg == "share":              # a mean that is 0 over no rows: "no building shown here has it" also where none is shown
+        num = pd.to_numeric(s, errors="coerce").dropna()
+        return plain(float(num.mean())) if len(num) else 0.0
     if agg == "nunique":
         return int(s.dropna().astype(str).nunique())
     if agg == "sentiment_counts":
@@ -754,9 +784,9 @@ def check_strip(kind, key, texts, evidence):
     on_page = bool(strip)
     for ev in evidence:
         src, field, agg = str(ev.get("source_file", "")), ev.get("field"), ev.get("agg")
-        if kind == "hood" and src == PAGE + "#units" and field in GLANCE_OLD and on_page:
-            out.append(f"{field} is computed from the unit list, but the page's 'At a glance' row prints the "
-                       f"neighborhood's own figure: quote that one ({ev.get('claim', '')[:50]})")
+        if kind == "hood" and on_page and field in DOOR_FIELDS and src != DOOR_SOURCE and ev.get("transform") != "convention":
+            out.append(f"{field} is read from {src}, but it is a door-distance fact: it must be the median over the "
+                       f"buildings shown here ({DOOR_SOURCE}), not the area profile ({ev.get('claim', '')[:50]})")
         if src == PAGE + "#units" and (field, agg) in STRIP_OLD and on_page:
             out.append(f"{field} ({agg}) is computed from the unit list; take it from the figure strip "
                        f"({STRIP_SOURCE[kind]}) so the text and the strip cannot differ ({ev.get('claim', '')[:50]})")
@@ -776,7 +806,20 @@ def check_strip(kind, key, texts, evidence):
         if on_page:
             for sent in sentences(text):
                 if re.search(r"\bparents\b", sent) and not re.search(r"\b(park|dog run|on foot|walk)\b", sent):
+                    named = set()                         # an experience text may give a named neighborhood's own minutes
+                    if kind == "year":
+                        ht = table(PAGE + "#neighborhoods")
+                        for h in ht[ht["name"].notna()].itertuples():
+                            if str(h.name) in sent:
+                                named |= {transform(x, "int") for x in (h.drive_min, h.transit_min) if not is_missing(x)}
+                        yr = table(PAGE + "#years")
+                        yr = yr[yr["year_label"].astype(str) == str(key)]
+                        if len(yr):                       # and the two halves of a split (D12)
+                            named |= {transform(yr.iloc[0][c], how) for c in ("far_drive", "close_drive_hi")
+                                      for how in ("int", "r5") if not is_missing(yr.iloc[0][c])}
                     for n in PARENT_MIN.findall(sent):
+                        if n in named:
+                            continue
                         if n not in strip["minutes"]:
                             out.append(f"{col}: '{n} minutes' to her parents, but the strip has {sorted(strip['minutes'])}")
     return out
@@ -929,6 +972,373 @@ def shared_runs(groups, n=RUN_WORDS_ROW):
     return out
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# WHAT THE SHOWN BUILDINGS SUPPLY, AND HOW MANY THERE ARE (independent check 4: D6, D16, D25).
+DOG_PLACE = re.compile(r"\bdog (?:park|run)s?\b|\boff-leash\b", re.I)
+OWN_DOG = re.compile(r"\b(?:has|have) (?:its|their) own dog (?:area|park|run)s?\b|\bdog area on the property\b", re.I)
+SOME_OWN_DOG = re.compile(r"\bsome (?:of these )?buildings (?:here )?have (?:their own dog area|a dog area)|"
+                          r"\bwhich buildings have their own dog area", re.I)
+NO_OWN_DOG = re.compile(r"\bno (?:building|dog run|dog park) (?:here |is nearby|nearby)?(?:has|is)?\b.*\bdog\b|"
+                        r"\bno dog (?:run|park) is (?:nearby|close)\b|\bno building here has\b[^.]*\bdog\b", re.I)
+DOG_LAMENT = re.compile(r"\bso you would drive\b|\bis a drive\b|\bare (?:both )?(?:a drive|drives)\b|\bneeds? the car\b|"
+                        r"\ba long drive\b|\bmeans a drive\b|\bon the (?:street|sidewalk|leash)\b", re.I)
+STREET_CATCH = re.compile(r"\bstreet parking\b|\bstreet spaces?\b|\bparking (?:is|was) (?:very |almost |the )?(?:hard|"
+                          r"tough|a problem|difficult|scarce|limited|tight|short|nonexistent|a nightmare|horrendous|"
+                          r"frustrating)|\bpark on the street\b|\bovernight (?:street )?parking\b|\bparking spaces? "
+                          r"(?:is|are) hard\b|\bask (?:each|every) building\b|\bparking space in writing\b|"
+                          r"\bwhere you would park\b|\bask about (?:parking|a garage)\b|\bparking spots? (?:is|are) hard",
+                          re.I)
+GARAGE_SOLVES = re.compile(r"\bbuilding has its own garage\b|\bevery building (?:shown )?here has a garage\b|"
+                           r"\bthe building's garage\b|\beach building's garage\b", re.I)
+GARAGE_ADVICE = re.compile(r"\blook for a building with\b|\bfavor buildings with\b|\bask (?:each|every) building "
+                           r"(?:about parking|about a (?:garage|reserved)|where you would park|for a (?:garage|parking|"
+                           r"guaranteed|reserved)|what parking)|\bask about a garage\b|\brule out any building\b|"
+                           r"\bbuilding with its own garage is simpler\b|\bask where you would park\b", re.I)
+ONE_APARTMENT = re.compile(r"\bThe apartment (?:in [A-Z][\w .'-]+? |here )?(?:is|costs|has)\b|\bthe apartment here\b|"
+                           r"\bOnly 1 apartment\b|\bthe (?:one|only|single) apartment\b")
+MANY_APARTMENTS = re.compile(r"\bapartments (?:in [A-Z][\w .'-]+? |here |listed )?(?:are|cost|run|have)\b|"
+                             r"\bapartments to (?:choose|compare)\b|\btypical apartment\b|\bevery apartment\b|"
+                             r"\beach apartment\b|\bmany apartments\b|\blarge apartments\b|\bsmall apartments\b", re.I)
+SEVERAL_BUILDINGS = re.compile(r"\b(?:each|every) building\b(?! shown)|\blook for a building\b|\bfavor buildings\b|"
+                               r"\ba building with its own garage is simpler\b|\bbuilding by building\b|\bmany buildings\b", re.I)
+NEW_BUILDINGS = re.compile(r"\b(?:apartments|buildings) (?:here |in [A-Z][\w .'-]+? )?are (?:in )?(?:new|newer)\b|"
+                           r"\bin (?:new|newer) buildings\b", re.I)
+TYPICAL = re.compile(r"\btypical(?:ly)?\b", re.I)
+TYPICAL_MIN = 3                       # "typical" needs at least this many apartments behind it
+SCOPE_MANY_RX = re.compile(r"\bmost buildings here\b", re.I)
+
+
+def shown_buildings(hood_id):
+    t = table(DOOR_SOURCE)
+    return t[t["hood_id"].astype(str) == str(hood_id)]
+
+
+def check_shown(key, cols, evidence):
+    """cols: [(column, text)] of one neighborhood, the icon points as ('point', text) and the catch as ('warning',
+    text). Rules, each re-read from the buildings and apartments shown on the page:
+      dogs     every shown building has its own dog area -> the text must say so, and may speak of a dog park or dog
+               run only as "public"; some do -> the text says "some buildings here have their own dog area" and the
+               distance may not be the catch; none does -> free. "No building here has a dog park" needs none to.
+      parking  every shown building has a garage -> a sentence about street parking needs the garage said beside it
+               somewhere in the row, and advice to "look for a building with a garage" is wrong;
+      count    "The apartment ..." needs exactly 1 apartment shown, "the apartments ..." at least 2, "typical" 3;
+      scope    with several buildings shown, a lead or scene that gives a door-distance figure says "most buildings
+               here"; with one building it must not."""
+    out = []
+    b = shown_buildings(key)
+    if not len(b):
+        return out
+    nb, n = len(b), int(b["n_units"].sum())
+    own, gar = float(b["own_dog_area"].mean()), float(b["own_garage"].mean())
+    some_dog = float(b["dog_amenity_any"].mean())         # includes amenities whose kind the data does not give
+    every = " ".join(t for _, t in cols)
+    catch_cols = {"watch_for", "warning"}
+    for col, text in cols:
+        for sent in sentences(text):
+            dog = DOG_PLACE.search(sent)
+            if dog and own == 1 and not OWN_DOG.search(sent) and not re.search(r"\bpublic\b|\btownship\b|\btown park\b|"
+                                                                               r"\bcity dog park\b|\btown dog park\b|\bThe Town of\b", sent):
+                out.append(f"{col}: every building shown here has its own dog area, so a dog park or dog run may only "
+                           f"be mentioned as the public one, never as what the dog has: {sent[:90]}")
+            if dog and 0 < some_dog and (col in catch_cols or DOG_LAMENT.search(sent)) and not OWN_DOG.search(sent) \
+                    and not SOME_OWN_DOG.search(sent) and not re.search(r"\bpublic\b", sent):
+                out.append(f"{col}: {int(round(some_dog * nb))} of the {nb} buildings shown here list a dog amenity of "
+                           f"their own, so the distance to a dog park cannot be the catch or a complaint: {sent[:90]}")
+            if NO_OWN_DOG.search(sent) and own > 0:
+                out.append(f"{col}: says no dog run is here, but {int(round(own * nb))} of the {nb} buildings shown "
+                           f"have their own dog area: {sent[:90]}")
+            if gar == 1 and GARAGE_ADVICE.search(sent):
+                out.append(f"{col}: every building shown here has a garage, so advice to look or ask for one is "
+                           f"wrong; say the building's garage solves it: {sent[:90]}")
+            if nb == 1 and SEVERAL_BUILDINGS.search(sent):
+                out.append(f"{col}: speaks of several buildings, but 1 is shown here (say \"the building\"): {sent[:90]}")
+            if NEW_BUILDINGS.search(sent) and not re.search(r"\barea\b|\bdistrict\b|\baround\b|\bhousing\b", sent):
+                out.append(f"{col}: says the shown buildings are new on the strength of the area's census profile; "
+                           f"word it as the area (\"much of the housing around here is new\"): {sent[:90]}")
+            if n >= 2 and ONE_APARTMENT.search(sent):
+                out.append(f"{col}: speaks of one apartment, but {n} are shown here: {sent[:90]}")
+            if n == 1 and MANY_APARTMENTS.search(sent):
+                out.append(f"{col}: speaks of several apartments, but 1 is shown here: {sent[:90]}")
+            if n < TYPICAL_MIN and TYPICAL.search(sent) and "Queens" not in sent:
+                out.append(f"{col}: 'typical' from {n} apartment{'s' if n != 1 else ''}: give the figure itself: {sent[:90]}")
+    if own == 1 and not OWN_DOG.search(every):
+        out.append("every building shown here has its own dog area, and the text does not say so "
+                   "(\"The building has its own dog area\")")
+    if 0 < own < 1 and DOG_PLACE.search(every) and not SOME_OWN_DOG.search(every):
+        out.append(f"{int(round(own * nb))} of the {nb} buildings shown have their own dog area, and the text speaks "
+                   f"of dog parks without saying \"some buildings here have their own dog area\"")
+    if gar == 1 and STREET_CATCH.search(every) and not GARAGE_SOLVES.search(every):
+        out.append("every building shown here has a garage: the text raises street parking and never says the "
+                   "building's garage solves it")
+    lead_scene = " ".join(t for c, t in cols if c in ("host_intro", "scene"))
+    door_numbers = any(ev.get("source_file") == DOOR_SOURCE and ev.get("shown") and ev.get("claim") in
+                       sentences(lead_scene.replace("St. ", "St ")) for ev in evidence)
+    if nb >= 2 and door_numbers and not SCOPE_MANY_RX.search(lead_scene):
+        out.append(f"{nb} buildings are shown here, so a figure measured from the door is the median building's: the "
+                   f"lead or the scene must say \"most buildings here\"")
+    if nb == 1 and SCOPE_MANY_RX.search(every):
+        out.append("says \"most buildings here\", but 1 building is shown")
+    return out
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# WHAT AN EXPERIENCE MAY CLAIM (independent check 4: D7, D11, D12). A sentence of an experience that makes one of the
+# claims below is tested against the apartments shown in it and against every neighborhood shown under it.
+#   (name, pattern, column of #units, test, what it means)   a unit with no value is left out of the share
+EXP_CLAIMS = [
+    ("close to your parents",
+     r"close to your parents|parents are close|without moving far from your parents|(?<!cannot )drop (?:by|in)\b|weeknight visit|close enough for (?:a weeknight|sunday|dinner)|"
+     r"stay close to your parents|parents are (?:very )?close|near your parents|easy trip",
+     "hood_drive_min", ("<=", CLOSE_DRIVE_MIN)),
+    ("no tolls", r"\bno tolls?\b|toll-free|without a toll|nothing to pay on the (?:way|road)", "toll_own", ("==", 0)),
+    ("you drive to everything",
+     r"drive to (?:almost |nearly )?everything|(?:almost )?nothing (?:is |else is )?within walking distance|every outing "
+     r"starts in the car|going out means driving|(?:almost )?no restaurants are within|walking anywhere|"
+     r"drive to dinner|dinner[^.]{0,40}all a drive|nearly everything is a drive|drive to nearly everything",
+     "restaurants_800m", ("<=", 3)),
+    ("you walk to dinner",
+     r"walk to dinner|downtown to walk to|walk to a small downtown|dinner[^.]{0,30}(?:on foot|a short walk)|"
+     r"short walk away|you walk to dinner", "restaurants_800m", (">=", 4)),
+    ("small apartments", r"apartments (?:also )?(?:are|run) small|small apartments|apartment is small|give up is space\b|"
+     r"give up space", "sqft", ("<=", 650)),
+    ("bigger apartments", r"bigger apartments|more (?:space|room) for you|room for a (?:proper )?desk", "sqft", (">=", 650)),
+    ("far from your parents", r"far(?:ther)? from your parents|long drive (?:from|away)|cannot drop in|"
+     r"planned trips?|visits become planned|take planning", "hood_drive_min", (">", CLOSE_DRIVE_MIN)),
+    ("a longer drive than from Queens", r"longer drive to your parents", "hood_drive_min", (">", 15)),
+    ("a garage", r"a garage for the car|park in a garage|garage to return to|simple parking at the building|"
+     r"\bgarages?\b(?! or covered)", "garage_or_covered", ("==", 1)),
+    ("easy parking", r"parking is easy|easy parking(?! is what you give up)|own parking", "own_parking", ("==", 1)),
+    ("a gym", r"\bwith a gym\b|\ba gym,|every building here has a gym|has a gym", "gym", ("==", 1)),
+    ("near the water", r"near the water|follow the water|water close by|the water and a park are a short walk",
+     "open_water_m", ("<=", 800)),
+    ("few bars", r"bars are (?:few|scarce|fewer)|no bars close by|give up is (?:space and )?nightlife|give up nightlife",
+     "bars_800m", ("<=", 3)),
+    ("houses and lawns", r"houses and lawns|town of houses", "hood_detached", (">=", 0.5)),
+    # tested on the buildings that publish a year (about half do); the others are left out of the share
+    ("a newer building", r"\bnewer buildings?\b", "year_built", (">=", 2000)),
+]
+EXP_CLAIMS = [(n, re.compile(rx, re.I), f, t) for n, rx, f, t in EXP_CLAIMS]
+CLAIM_SHARE = 0.75                    # a claim about the experience must hold for this share of its apartments
+SPLIT_WORDS = re.compile(r"\bexcept\b|\bapart from\b|\boutside\b|\bmost of these\b|\bthe [A-Z][\w .'-]+? (?:ones?|apartments?)\b|"
+                         r"\bones in\b|\bonly in\b|\bin [A-Z][\w .'-]+? (?:only|alone)\b", re.I)
+GIVE_UP = re.compile(r"\bgive up\b|\bwhat you give up\b", re.I)       # "what you give up is easy parking" denies the claim
+SMALL_BANNED = re.compile(r"\btypical(?:ly)?\b(?! Queens)|\bpercent\b|\bmost\b|\busually\b|\bnearly (?:all|every)\b|\bon average\b|"
+                          r"\bmany\b|\bplenty\b", re.I)
+PAIR_SCOPE = re.compile(r"\btypical\b|\bmost\b|\bacross\b|\bfrom the others\b|\bfrom most\b", re.I)
+
+
+@lru_cache(maxsize=None)
+def _units_with_hood():
+    u = table(PAGE + "#units").copy()
+    h = _page()["neighborhoods"]
+    drive = {x["id"]: x.get("drive_min") for x in h}
+    det = {x["id"]: (x.get("traits") or {}).get("detached_house_share") for x in h}
+    u["hood_drive_min"], u["hood_detached"] = u["hood_id"].map(drive), u["hood_id"].map(det)
+    u["hood_name"] = u["hood_id"].map({x["id"]: x.get("name") for x in h})
+    u["hood_area"] = u["hood_id"].map({x["id"]: x.get("area") for x in h})
+    return u
+
+
+EXCEPTION_BEFORE = re.compile(r"(?:\bexcept|\bapart from|\boutside|\bother than|\bunlike)(?: in| for| from)?(?: the)? (?:[A-Z][\w.'-]+(?:,| and| or)? )*$")
+
+
+def claim_scope(sent, units):
+    """A claim that names some of the experience's neighborhoods or areas ("From Brooklyn and Queens the drive has no
+    tolls", "In Westport and Teaneck you drive to dinner") is a claim about those apartments only -> the units it is
+    about. A name given as the exception ("except in Newark", "the Newark ones") does not narrow the claim."""
+    keep = None
+    for col in ("hood_name", "hood_area"):
+        for nm in sorted(set(units[col].dropna()), key=len, reverse=True):
+            for m in re.finditer(re.escape(str(nm)) + r"\b", sent):
+                if EXCEPTION_BEFORE.search(sent[:m.start()]) or re.match(r" (?:ones?|apartments?)\b", sent[m.end():]):
+                    continue
+                mask = units[col] == nm
+                keep = mask if keep is None else (keep | mask)
+    return units if keep is None else units[keep]
+
+
+def claim_share(units, field, test):
+    """-> (share of the units with a value that satisfy the test, how many have a value)."""
+    vals = [v for v in units[field].tolist() if not is_missing(v)]
+    if not vals:
+        return None, 0
+    return sum(holds(v, list(test)) for v in vals) / len(vals), len(vals)
+
+
+def check_experience(key, cols, evidence):
+    """cols: [(column, text)] of one experience (tagline, subhead, lead, points, moments, promise, catch, subheads).
+      share   a claim of EXP_CLAIMS must hold for CLAIM_SHARE of the apartments shown, or its sentence must be worded as
+              a split ("Most of these ...; the Newark ones ...", "except Fairfield");
+      cards   and for every neighborhood shown under the experience: a neighborhood where the claim fails for most of
+              its apartments must be named in the same text (D7: "Almost no restaurants are within a 10-minute walk"
+              above a Fairfield card with 8 restaurants). A sentence that itself says "most", "usually",
+              "often" or "typical" passes when the claim holds for MOST_SHARE (60%) of the apartments, and a
+              sentence that names places ("From Brooklyn and Queens ...") is tested on those places only;
+      small   an experience with fewer than SMALL_EXPERIENCE apartments is a short note: it names each of its
+              neighborhoods and uses no "typical", no percentage, no "most", "usually", "many" (D11);
+      pairs   a text that gives a named neighborhood's own figure may give another figure only in a sentence that
+              says whose it is (D12: Jamaica's 3-minute drive beside the experience's 65-minute train)."""
+    out = []
+    u = _units_with_hood()
+    u = u[u["year_label"].astype(str) == str(key)]
+    if not len(u):
+        return out
+    small = len(u) < SMALL_EXPERIENCE
+    names = sorted(set(u["hood_name"].dropna()))
+    every = " ".join(t for _, t in cols)
+    if small:
+        for col, text in cols:
+            m = SMALL_BANNED.search(text)
+            if m:
+                out.append(f"{col}: '{m.group(0)}' in an experience with {len(u)} apartments: name the apartments "
+                           f"and neighborhoods and give each one's own figure: {text[:90]}")
+        for nm in names:
+            if nm not in every:
+                out.append(f"an experience with {len(u)} apartments must name each neighborhood it shows; "
+                           f"'{nm}' is not in the text")
+    for col, text in cols:
+        for sent in sentences(text):
+            for name, rx, field, test in EXP_CLAIMS:
+                m = rx.search(sent)
+                if not m or field not in u.columns:
+                    continue
+                if GIVE_UP.search(sent) and name in ("easy parking", "a garage", "you walk to dinner", "bigger apartments",
+                                                     "close to your parents"):
+                    continue                              # the sentence says she gives this up
+                if name == "a garage" and re.search(r"\bpercent\b|\bask\b|\bnot list\b|\bno garage\b|\bwithout a garage\b", sent):
+                    continue                              # a share, a question or a denial, not the claim
+                about = claim_scope(sent, u)              # the apartments the sentence is about
+                share, known = claim_share(about, field, test)
+                if share is None:
+                    continue
+                failing = []
+                for nm, g in about.groupby("hood_name"):
+                    sh, k = claim_share(g, field, test)
+                    if sh is not None and sh < 0.5:
+                        failing.append(nm)
+                named = [nm for nm in failing if nm in text]
+                where = f"{sent[:90]}"
+                if failing and len(named) == len(failing) and SPLIT_WORDS.search(text):
+                    continue                              # worded as a split, every exception named
+                if not small and QUANTIFIED.search(sent) and share >= MOST_SHARE:
+                    continue                              # "most of these ...": true of a clear majority, and said so
+                if share < CLAIM_SHARE:
+                    out.append(f"{col}: \"{m.group(0)}\" ({name}) holds for {share:.0%} of the {known} apartments shown "
+                               f"with a value (under {CLAIM_SHARE:.0%}): word it as a split, naming {failing[:6]}: {where}")
+                elif failing:
+                    out.append(f"{col}: \"{m.group(0)}\" ({name}) is contradicted by the neighborhood card(s) shown "
+                               f"under this experience: {failing[:8]}; say \"except ...\" or drop the claim: {where}")
+    # pairs
+    for col, text in cols:
+        sents = sentences(text)
+        named_fig = [s for s in sents if any(ev.get("claim") == s and ev.get("field") in ("nearest_drive_min",)
+                                             and ev.get("shown") for ev in evidence)]
+        if not named_fig:
+            continue
+        for s2 in sents:
+            if s2 in named_fig:
+                continue
+            if any(ev.get("claim") == s2 and ev.get("shown") and ev.get("transform") not in ("convention",)
+                   and ev.get("field") in ("transit_min", "drive_min") for ev in evidence) and not PAIR_SCOPE.search(s2) \
+                    and not any(nm in s2 for nm in names):
+                out.append(f"{col}: a named neighborhood's figure sits beside a figure for the whole experience with "
+                           f"nothing saying whose it is: {s2[:90]}")
+    return out
+
+
+MOST_SHARE = 0.6                      # a sentence that says "most", "usually", "often", "typical" needs this share
+QUANTIFIED = re.compile(r"\bmost(?:ly)?\b|\bmany\b|\boften\b|\busually\b|\btypical(?:ly)?\b|\bnearly (?:all|every)\b", re.I)
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# "AT A GLANCE" (independent check 4, D16). The facts the neighborhood page prints beside the text, computed here
+# from the buildings shown, so the text and the row cannot disagree. Written to scene_text_neighborhoods.csv as
+# glance_json; scripts/page_data_extras.py attaches it as neighborhoods[].at_a_glance and the page prints it in
+# place of the area profile (traits).
+WALK_M_PER_MIN = 80                   # the page's own conversion (site/index.html)
+
+
+def _dist_words(m):
+    """The page's distShort(): a walk in minutes up to 1,600 m, miles beyond."""
+    if is_missing(m):
+        return None
+    if m <= 1600:
+        return f"{max(1, int(half_up(m / WALK_M_PER_MIN)))} min walk"
+    mi = m / 1609.34
+    return f"{half_up(mi, 0.1):.1f} miles" if mi < 3 else f"{int(half_up(mi))} miles"
+
+
+def _count_words(n, one):
+    n = int(half_up(n))
+    return f"{n} {one if n == 1 else one + 's'}"
+
+
+def glance(hood_id):
+    """-> the "At a glance" facts of a neighborhood with apartments on the page ([] otherwise). Each fact:
+         key      food | park | dog | supermarket | train_station | garage
+         icon     the page's icon name
+         text     the bold words ("66 restaurants, 8 bars"), ready to print
+         label    the small words after them, scope included ("within a 10-minute walk of most buildings here")
+         value    the number behind `text` (median over the shown buildings), unit: count | minutes | metres | share
+         scope    "this building" (1 building shown) | "most buildings here" (2 or more: the median building)
+         buildings   how many shown buildings the figure rests on;  range [lowest, highest] over them
+       Area-wide facts (the town's parking rule, the trip to her parents by train and bus) stay with the page: they
+       are the neighborhood's own fields and are true of every building in it."""
+    b = shown_buildings(hood_id)
+    if not len(b):
+        return []
+    nb = len(b)
+    many = nb >= 2
+    scope = "most buildings here" if many else "this building"
+    def med(col):
+        v = pd.to_numeric(b[col], errors="coerce").dropna()
+        return (float(v.median()), [plain(float(v.min())), plain(float(v.max()))], int(len(v))) if len(v) else (None, None, 0)
+    out = []
+    def add(key, icon, text, label, value, unit, rng, k, **more):
+        out.append({"key": key, "icon": icon, "text": text, "label": label, "value": plain(value), "unit": unit,
+                    "scope": scope, "buildings": k, "range": rng, **more})
+    r, rr, k = med("restaurants_800m")
+    if r is not None:
+        bars, br, _ = med("bars_800m")
+        text = _count_words(r, "restaurant") + (", " + _count_words(bars, "bar") if bars is not None and half_up(bars) > 0 else "")
+        add("food", "fork", text, "within a 10-minute walk" + (" of most buildings here" if many else ""), r, "count", rr, k,
+            bars=plain(bars), bars_range=br)
+    p, pr_, k = med("park_walk_min")
+    if p is not None:
+        add("park", "park", f"{max(1, int(half_up(p)))} min walk", "to a park" + (" from most buildings here" if many else ""),
+            p, "minutes", pr_, k)
+    dg, dr, k = med("dog_park_m")
+    own = float(b["own_dog_area"].mean())
+    public = _dist_words(dg)
+    if own == 1:
+        add("dog", "dog", "Own dog area", ("at every building here" if many else "at the building")
+            + (f"; the nearest public dog park is {public} away" if public else ""), 1.0, "share", [1.0, 1.0], nb,
+            own_dog_area="all", public_dog_park_m=plain(dg), public_dog_park_text=public)
+    elif own > 0:
+        add("dog", "dog", public or "Ask", "to the public dog park" + (" from most buildings here" if many else "")
+            + f"; {int(round(own * nb))} of the {nb} buildings here have their own dog area", dg, "metres", dr, k,
+            own_dog_area="some", own_dog_area_buildings=int(round(own * nb)), public_dog_park_m=plain(dg),
+            public_dog_park_text=public)
+    elif dg is not None:
+        add("dog", "dog", public, "to the dog park" + (" from most buildings here" if many else ""), dg, "metres", dr, k,
+            own_dog_area="none", public_dog_park_m=plain(dg), public_dog_park_text=public)
+    sm, sr, k = med("supermarket_m")
+    if sm is not None:
+        add("supermarket", "bag", _dist_words(sm), "to a supermarket" + (" from most buildings here" if many else ""),
+            sm, "metres", sr, k)
+    tr, trr, k = med("train_station_m")
+    if tr is not None:
+        add("train_station", "train", _dist_words(tr), "to a train station" + (" from most buildings here" if many else ""),
+            tr, "metres", trr, k)
+    gar = float(b["own_garage"].mean())
+    if gar > 0:
+        ng = int(round(gar * nb))
+        add("garage", "parking", "Garage", ("at the building" if not many else "at every building here" if gar == 1
+                                              else f"at {ng} of the {nb} buildings here"), gar, "share", None, nb,
+            own_garage="all" if gar == 1 else "some", own_garage_buildings=ng)
+    return out
+
+
 def check_row(kind, key, texts, evidence):
     """texts: {column: prose}. Returns (problems, drift)."""
     problems, drift, allowed = [], [], set()
@@ -976,6 +1386,13 @@ def check_row(kind, key, texts, evidence):
     shown_cols = [(c, t) for c, t in list(texts.items()) + extra
                   if not (kind == "year" and c in ("scene", "host_walkthrough"))]     # those two repeat the moments
     problems += check_strip(kind, key, shown_cols, evidence)
+    claim_cols = [(c, t) for c, t in shown_cols if c != "display_label" and t.strip()]
+    if kind == "hood":
+        warn = [str(p.get("text", "")) for p in points if p.get("icon") == "warning"]
+        claim_cols = [(c, t) for c, t in claim_cols if not (c == "point" and t in warn)] + [("warning", t) for t in warn]
+        problems += check_shown(key, claim_cols, evidence)
+    else:
+        problems += check_experience(key, claim_cols, evidence)
     for run in shared_runs({"lead": [texts.get("host_intro", "")], "points": [p.get("text", "") for p in points],
                             "moments": [m.get("text", "") for m in moments],
                             "promise": [texts.get("promise", "")], "catch": [texts.get("catch", "")]}):
@@ -1105,6 +1522,15 @@ def main():
                 problems, drift = check_row(kind, r[key], {c: r[c] or "" for c in cols}, evidence)
                 if kind == "year" and year_key(r["display_label"]) != r[key]:
                     problems.append(f"display_label '{r['display_label']}' does not match the key")
+                if kind == "hood":                        # "At a glance" must be the shown buildings' figures, as of now
+                    try:
+                        have = json.loads(r.get("glance_json") or "null")
+                    except json.JSONDecodeError:
+                        have = None
+                    want = json.loads(json.dumps(glance(r[key])))
+                    if have != want:
+                        problems.append("glance_json is missing or no longer equals the figures of the buildings "
+                                        "shown (rebuild: python3 scripts/build_scene_text.py)")
                 for p in problems:
                     print(f"FAIL {r[key]}: {p}")
                 for d in drift:

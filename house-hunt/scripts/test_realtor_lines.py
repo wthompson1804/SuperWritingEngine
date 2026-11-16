@@ -190,8 +190,8 @@ def allowed_numbers(u, n_peers):
         v = R.num(R.get(u, *path))
         if v is not None:
             ok.add(R.miles(v))
-    if R.get(u, "amenities", "doorman") == "24h":
-        ok.add("24")
+    if "24h" in (R.get(u, "amenities", "doorman"), R.get(u, "amenities", "concierge"), R.get(u, "amenities", "front_desk")):
+        ok.add("24")                                          # "staffed 24 hours a day"
     try:
         ok.add(str(date.fromisoformat(str(u.get("available"))[:10]).day))
     except ValueError:
@@ -741,6 +741,110 @@ class Building(unittest.TestCase):
             for a, b in zip(group, group[1:]):                        # neighboring buildings do not open the same way
                 self.assertNotEqual(sentences(a["about_building"])[0], sentences(b["about_building"])[0],
                                     f"{hood}: {a['about_building']}")
+
+
+class AmenityFields(unittest.TestCase):
+    """Independent check 4, D9 and item 5: a sentence about an amenity says exactly what its field says."""
+
+    def all_text(self, **am):
+        u = unit("a1", amenities=am)
+        r, b = run([u])["a1"], buildings([u])["b-a1"]
+        return " ".join([r["host_line"], r["host_catch"], r["sub_building"], b["about_building"]]
+                        + [p["text"] for p in json.loads(b["about_points_json"])])
+
+    def test_desk_kind(self):
+        k = R.desk_kind
+        self.assertEqual(k({"doorman": "doorman", "doorman_text": "Concierge"}), "concierge")
+        self.assertEqual(k({"doorman": "doorman", "doorman_text": "concierge (listing-site amenity tag)"}), "concierge")
+        self.assertEqual(k({"doorman": "24h", "doorman_text": "24hr concierge"}), "concierge24")
+        self.assertEqual(k({"doorman": "24h", "doorman_text": "24hr concierge, Doorman"}), "doorman24")
+        self.assertEqual(k({"doorman": "doorman", "doorman_text": "Door Person"}), "doorman")
+        self.assertEqual(k({"doorman": "doorman", "doorman_text": "yes"}), "doorman")
+        self.assertEqual(k({"doorman": "24h", "doorman_text": "24/7 attended lobby"}), "attended24")
+        self.assertEqual(k({"doorman": "doorman", "doorman_text": "attended lobby"}), "attended")
+        self.assertIsNone(k({"doorman": None, "doorman_text": "virtual doorman"}))
+        self.assertIsNone(k({"doorman": "doorman", "doorman_text": "virtual doorman"}))
+        self.assertIsNone(k({"doorman": None, "doorman_text": None}))
+        # the page data's separate fields (after independent check 4): each is said as what it is
+        self.assertEqual(k({"doorman": None, "concierge": "concierge", "front_desk": None}), "concierge")
+        self.assertEqual(k({"doorman": None, "concierge": "24h", "front_desk": None}), "concierge24")
+        self.assertEqual(k({"doorman": "doorman", "concierge": "concierge", "front_desk": None}), "doorman")
+        self.assertEqual(k({"doorman": "24h", "concierge": None, "front_desk": None}), "doorman24")
+        self.assertEqual(k({"doorman": None, "concierge": None, "front_desk": "24h"}), "attended24")
+        self.assertEqual(k({"doorman": None, "concierge": None, "front_desk": "front desk"}), "attended")
+        self.assertIsNone(k({"doorman": None, "concierge": None, "front_desk": None, "doorman_text": "virtual doorman"}))
+
+    def test_a_concierge_is_never_called_a_doorman(self):
+        for am in ({"doorman": "doorman", "doorman_text": "Concierge"}, {"doorman": "24h", "doorman_text": "24hr concierge"},
+                   {"doorman": None, "concierge": "concierge", "front_desk": None}):
+            text = self.all_text(**am)
+            self.assertNotRegex(text, r"(?i)doorman|front door|front desk is staffed", f"{am}: {text}")
+            self.assertRegex(text, r"(?i)concierge", f"{am}: {text}")
+        self.assertRegex(self.all_text(doorman="doorman", doorman_text="Doorman"), r"(?i)doorman")
+        self.assertNotRegex(self.all_text(doorman="doorman", doorman_text="virtual doorman"), r"(?i)doorman|concierge")
+
+    def test_only_doorman_needs_a_doorman(self):
+        us = [unit("a1", hood="xx:h", amenities={"doorman": "doorman", "doorman_text": "Concierge"}),
+              unit("a2", hood="xx:h"), unit("a3", hood="xx:h")]
+        self.assertNotRegex(buildings(us)["b-a1"]["about_building"], r"(?i)doorman")
+
+    def test_laundry_says_what_the_field_says(self):
+        k = R.laundry_kind
+        self.assertEqual(k({"in_unit_laundry": "yes", "laundry": "Washer, Dryer"}), "wd")
+        self.assertEqual(k({"in_unit_laundry": "yes", "laundry": "In unit laundry"}), "in_unit")
+        self.assertEqual(k({"in_unit_laundry": "yes", "laundry": "Washer"}), "in_unit")
+        self.assertEqual(k({"in_unit_laundry": "yes", "laundry": None}), "in_unit")
+        self.assertIsNone(k({"in_unit_laundry": "yes", "laundry": "On-site laundry"}))
+        self.assertIsNone(k({"in_unit_laundry": "yes", "laundry": "W/D hookup; On-site laundry"}))
+        self.assertIsNone(k({"in_unit_laundry": "yes", "laundry": "laundry room, additional fees may apply (not in unit)"}))
+        self.assertIsNone(k({"in_unit_laundry": "on_site_only", "laundry": "Washer, Dryer"}))
+        self.assertNotRegex(self.all_text(in_unit_laundry="yes", laundry="In unit laundry"), r"(?i)washer|dryer")
+        self.assertNotRegex(self.all_text(in_unit_laundry="yes", laundry="On-site laundry"), r"(?i)laundry|washer")
+        self.assertNotRegex(self.all_text(in_unit_laundry="on_site_only", laundry="Yes"), r"(?i)laundry|washer")
+        self.assertRegex(self.all_text(in_unit_laundry="yes", laundry="Washer, Dryer"), r"(?i)washer and dryer")
+
+    def test_a_garage_beside_a_lot_is_not_where_she_would_park(self):
+        u = unit("a1", parking={"type": "garage: surface lot; garage $50/month", "fee": 50.0})
+        self.assertTrue(R.garage_mixed(u))
+        self.assertFalse(R.garage_mixed(unit("a2")))
+        r, b = run([u])["a1"], buildings([u])["b-a1"]
+        text = " ".join([r["sub_parking"], b["about_building"]] + [p["text"] for p in json.loads(b["about_points_json"])])
+        self.assertNotRegex(text, r"(?i)you would park in the building's garage|park indoors", text)
+
+    def test_a_pool_table_is_not_a_pool(self):
+        self.assertNotRegex(self.all_text(pool=None, pool_text="Pool table"), r"(?i)\bpool\b")
+
+    def test_a_pet_spa_or_an_unnamed_dog_amenity_is_not_a_dog_area(self):
+        for a in ("pet spa", "yes", "dog wash", "pet washing station; no dog run listed"):
+            self.assertNotRegex(self.all_text(dog_amenities=a), r"(?i)its own dog (park|run|area)|dog (park|run) on site", a)
+        self.assertRegex(self.all_text(dog_amenities="dog park; pet spa"), r"(?i)its own dog park")
+
+    def test_no_stale_wording_in_the_libraries(self):
+        for name, texts in families():
+            for t in texts:
+                for rx, what in G.STALE:
+                    self.assertIsNone(rx.search(t), f"{name}: {what}: {t}")
+
+
+class Offers(unittest.TestCase):
+    """Independent check 4, D20: "up to 2 months free" on the page is not "2 months free" in the sentence."""
+
+    def lines(self, offer):
+        us = [unit(f"o{i}", building="b-o", sqft=None, floor=None, floor_basis="unknown", available=None, all_in=2500 + i,
+                   rent={"free_months": 2, "offer_text": offer}) for i in range(1, 9)]
+        return [r["host_line"] for r in run(us).values() if "free" in r["host_line"]]
+
+    def test_up_to_is_kept(self):
+        got = self.lines("Lease by 11/30 to receive up to 2 months free off base rent.")
+        self.assertTrue(got)
+        for line in got:
+            self.assertIn("up to 2 months", line)
+
+    def test_a_plain_offer_stays_plain(self):
+        got = self.lines("2 months free on a 14-month lease.")
+        self.assertTrue(got)
+        for line in got:
+            self.assertNotIn("up to", line)
 
 
 class OnThePage(unittest.TestCase):

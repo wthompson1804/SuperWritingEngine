@@ -25,9 +25,19 @@ Year tokens: p_... the experience page's figure strip, read from the fields the 
   counts, medians, all_in_range, hood_ids); u_... medians and shares over the apartments shown; m_ + alias the median
   neighborhood for census traits (lifestyle_groups.csv), used only inside hidden tests.
 Neighborhood tokens: {drive} {transit} {b_toll} {sqft} {pg_n} {pg_bldgs} {pg_mid} {pg_lo} {pg_hi} are the neighborhood
-  page's figure strip; {rest} {bars} {cafes} {parkwalk} {dogpark} {super} {water} are the traits its "At a glance" row
-  prints; the other aliases in HOOD are census and distance fields. For a neighborhood with nothing shown, all of them
-  fall back to lifestyle_groups.csv. Prices print to the nearest $10, minutes whole.
+  page's figure strip; {rest} {bars} {cafes} {parkwalk} {dogpark} {super} {station} {water} {beach} {parkha} are
+  door-distance facts: the median over the BUILDINGS SHOWN in the neighborhood (HOOD_BLDGS; the building's own figure
+  when one is shown); {own_dog} {own_garage} {dog_any} are the share of the shown buildings with a dog area, a garage,
+  any dog amenity (0 where nothing is shown); the other aliases in HOOD are census fields, worded as area-wide. For a
+  neighborhood with nothing shown, the distance tokens fall back to lifestyle_groups.csv. Prices print to the nearest
+  $10, minutes whole.
+  {door}       "from the door" (one building shown) or "from most buildings here" (several)
+  {w10}        the first one in a lead or a scene reads "10-minute walk of most buildings here" when several are shown
+  {owndog} {owngarage}   "the building has its own dog area / garage", "every building here has ...", "some buildings
+               here have their own dog area"; used inside [[ ]], dropped where no shown building has it
+  {@nj:teaneck drive}    in an experience's text: that neighborhood's own figure
+  === year: <label> @small   the draft used while the experience shows fewer than 8 apartments (@full otherwise)
+  not:own_garage==1          in a points or subhead condition: holds when the test fails or there is no value
 
 Run from the house-hunt folder: python3 scripts/build_scene_text.py && python3 scripts/check_scene_text.py
 """
@@ -115,6 +125,7 @@ YEAR_UNITS = {
     "u_garage": ("garage_or_covered", "mean", "pct"), "u_parkpub": ("parking_published", "mean", "pct"),
     "u_pool": ("pool", "mean", "pct"), "u_doorman": ("doorman", "mean", "pct"), "u_gym": ("gym", "mean", "pct"),
     "u_laundry": ("in_unit_laundry", "mean", "pct"), "u_n": ("listing_id", "count", "int"),
+    "u_parkown": ("own_parking", "mean", "pct"), "u_owndog": ("own_dog_area", "mean", "pct"),
 }
 # In a neighborhood with places on the page, these aliases are computed from the SHOWN units (the median unit, or the
 # commonest name), so the prose matches what the reader sees listed under it. alias: (column of #units, agg, rounding)
@@ -146,9 +157,10 @@ HOOD_BLDGS = {
     "b_station": ("train_station", "mode", "str"),
     # what the shown buildings supply themselves (D6): the share of them with a dog park or dog run on the property,
     # with a garage or covered parking, with any parking of their own
-    "own_dog": ("own_dog_area", "mean", "pct"), "own_garage": ("own_garage", "mean", "pct"),
-    "own_parking": ("own_parking", "mean", "pct"),
+    "own_dog": ("own_dog_area", "share", "pct"), "own_garage": ("own_garage", "share", "pct"),
+    "own_parking": ("own_parking", "share", "pct"), "dog_any": ("dog_amenity_any", "share", "pct"),
     "rest_lo": ("restaurants_800m", "min", "int"), "rest_hi": ("restaurants_800m", "max", "int"),
+    "nb": ("building_id", "count", "int"),                # buildings shown here: 0 where nothing is shown
 }
 # ... and these are the neighborhood's figure strip, read from the fields the strip itself reads (never recomputed)
 HOOD_STRIP = {"drive": ("drive_min", "int"), "transit": ("transit_min", "int"), "b_toll": ("toll_round_trip", "int"),
@@ -171,6 +183,17 @@ TOKEN = re.compile(r"\{(!?)(?:@([a-z]{2}:[a-z0-9\-]+)\s+)?([a-z_0-9]+)(?::([a-z0
 # Scope words (D16). A door-distance figure in a neighborhood with several shown buildings is the median building's,
 # so the text says whose door it is: {door} prints "from the door" where one building is shown and "from most
 # buildings here" where several are, and the first {w10} of a lead or a scene gains "of most buildings here".
+OWN_ALIASES = ("own_dog", "own_garage", "own_parking", "dog_any", "nb")
+# {owndog} and {owngarage}: what the shown buildings supply themselves (D6), in fixed words that follow the count of
+# buildings. They print nothing-and-fail (so sit inside [[ ]]) when no shown building has it.
+OWN_WORDS = {
+    "owndog": ("own_dog", {"one": "the building has its own dog area", "all": "every building here has its own dog area",
+                           "some": "some buildings here have their own dog area"}),
+    "owngarage": ("own_garage", {"one": "the building has its own garage", "all": "every building here has a garage"}),
+}
+# {eachb} / {everyb}: "each building" / "every building" where several are shown (or none: the text is then about
+# the area), "the building" where one is: advice to "ask each building" above a single building reads as an error.
+BUILDING_WORDS = {"eachb": "each building", "everyb": "every building"}
 SCOPE_ONE, SCOPE_MANY = "from the door", "from most buildings here"
 W10_MANY = " of most buildings here"
 
@@ -180,6 +203,27 @@ def n_buildings(ctx):
     if ctx["kind"] != "hood" or ctx["id"] not in C.shown_hoods():
         return 0
     return int(C.lookup(PAGE_H, "buildings", {"hood_id": ctx["id"]}) or 0)
+
+
+def own_words(alias, ctx):
+    """-> (words or None, evidence items) for {owndog} / {owngarage} in a neighborhood."""
+    src_alias, words = OWN_WORDS[alias]
+    if ctx["kind"] != "hood":
+        return None, []
+    f, agg, _ = HOOD_BLDGS[src_alias]
+    share = C.lookup(PAGE_B, f, {"hood_id": ctx["id"]}, agg) or 0
+    nb = n_buildings(ctx)
+    key = "one" if share == 1 and nb == 1 else "all" if share == 1 else "some" if share > 0 else None
+    if key is None or key not in words:
+        return None, []
+    test = ["==", "1"] if key in ("one", "all") else [">", "0"]
+    evs = [{"field": f, "value": share, "source_file": PAGE_B, "row": {"hood_id": ctx["id"]}, "agg": agg, "holds_if": test},
+           {"field": "buildings", "value": nb, "source_file": PAGE_H, "row": {"hood_id": ctx["id"]},
+            "holds_if": ["==", "1"] if key == "one" else [">=", "2"]}]
+    if key == "some":
+        evs.append({"field": f, "value": share, "source_file": PAGE_B, "row": {"hood_id": ctx["id"]}, "agg": agg,
+                    "holds_if": ["<", "1"]})
+    return words[key], evs
 
 
 def at_ctx(at, ctx):
@@ -196,8 +240,9 @@ def resolve(alias, ctx):
         if alias in HOOD_BLDGS and ctx["id"] in C.shown_hoods():
             f, agg, how = HOOD_BLDGS[alias]
             return PAGE_B, f, {"hood_id": ctx["id"]}, agg, how
-        if alias in ("own_dog", "own_garage", "own_parking"):
-            raise LookupError(f"{ctx['id']}: nothing is shown here, so {alias} has no value")
+        if alias in OWN_ALIASES:                          # 0 where nothing is shown: no shown building supplies it
+            f, agg, how = HOOD_BLDGS[alias]
+            return PAGE_B, f, {"hood_id": ctx["id"]}, agg, how
         if alias in HOOD_STRIP and (ctx["id"] in C.shown_hoods() or alias.startswith("s_")):
             f, how = HOOD_STRIP[alias]
             return PAGE_H, f, {"hood_id": ctx["id"]}, None, how
@@ -265,7 +310,11 @@ def drop_optional(raw, ctx):
     def keep(m):
         for t in TOKEN.finditer(m.group(1)):
             hidden, at, alias, _, op, operand = t.groups()
-            if alias in CONVENTION or alias == "door":
+            if alias in CONVENTION or alias == "door" or alias in BUILDING_WORDS:
+                continue
+            if alias in OWN_WORDS:
+                if own_words(alias, ctx)[0] is None:
+                    return ""
                 continue
             try:
                 src, field, row, agg, _ = resolve(alias, at_ctx(at, ctx))
@@ -309,6 +358,18 @@ def render(raw, ctx, evidence, scope=False):
                     pending.append({"field": "buildings", "value": n_buildings(ctx), "source_file": PAGE_H,
                                     "row": {"hood_id": ctx["id"]}, "holds_if": [">=", "2"]})
                     return words + W10_MANY
+                return words
+            if alias in BUILDING_WORDS:
+                nb = n_buildings(ctx)
+                if ctx["kind"] == "hood" and ctx["id"] in C.shown_hoods():
+                    pending.append({"field": "buildings", "value": nb, "source_file": PAGE_H, "row": {"hood_id": ctx["id"]},
+                                    "holds_if": ["==", "1"] if nb == 1 else [">=", "2"]})
+                return "the building" if nb == 1 else BUILDING_WORDS[alias]
+            if alias in OWN_WORDS:
+                words, evs = own_words(alias, ctx)
+                if words is None:
+                    raise ValueError(f"{ctx['id']}: {{{alias}}} has nothing to say here; put it inside [[ ]]")
+                pending.extend(evs)
                 return words
             if alias == "door":                           # whose door: the building's, or most buildings'
                 if ctx["kind"] != "hood":
@@ -489,6 +550,7 @@ def hood_rules(hood_id, rule, pattern=None):
     return out
 
 
+NEGATED = {"==": "!=", "!=": "==", ">": "<=", ">=": "<", "<": ">=", "<=": ">"}
 SUB_MIN_WORDINGS = 3                                   # wordings per condition in the "=== sub:" drafts
 POINT_MIN_WORDINGS = 1                                 # wordings per line in the "=== points:" drafts
 POINT_SHARE = 0.35                                     # a point wording on at most 8% of the neighborhoods
@@ -507,6 +569,8 @@ def conds_hold(conds, ctx):
     Every condition becomes an evidence item with a test, so the checker re-runs it after a data change."""
     evs = []
     for cond in conds:
+        negate = cond.startswith("not:")                  # not:own_garage==1 holds when the test fails OR there is no
+        cond = cond[4:] if negate else cond               # value (a neighborhood with nothing shown has no buildings)
         m = COND.match(cond)
         if not m:
             raise ValueError(f"cannot read condition '{cond}'")
@@ -539,8 +603,16 @@ def conds_hold(conds, ctx):
                 src, field, row, agg, _ = resolve(alias, ctx)
                 value = C.lookup(src, field, row, agg)
             except (KeyError, LookupError):
+                if negate:
+                    continue
                 return False, []
             test = [op, operand]
+            if negate:
+                if not op or C.is_missing(value):
+                    continue
+                if C.holds(value, test):
+                    return False, []
+                test = [NEGATED[op], operand]
             if not op or not C.holds(value, test):
                 return False, []
             ev = {"field": field, "value": value, "source_file": src, "row": row, "holds_if": test}
@@ -562,7 +634,9 @@ def pick_sub(rules, ctx, salt, cap=None):
             for text in seeded(variants, f"{ctx['id']}|{salt}"):
                 if cap is None or used[text] < cap:
                     used[text] += 1
-                    return text, [{"claim": text, **e} for e in evs]
+                    extra = []
+                    shown = render(text, ctx, extra) if "{" in text else text    # {eachb} and the like
+                    return shown, [{"claim": shown, **e} for e in evs] + extra
             return "", []
     return "", []
 
@@ -732,6 +806,8 @@ def main():
         else:
             hoods.append({"hood_id": b["id"], "hood_name": lg.loc[b["id"], "hood"],
                           "year_label": lg.loc[b["id"], "group_label"], **{c: texts[c] for c in C.COLUMNS["hood"]},
+                          # "At a glance", from the buildings shown (D16); attached to the page as at_a_glance
+                          "glance_json": json.dumps(C.glance(b["id"]), ensure_ascii=False),
                           "evidence_json": ej})
     for col, rows, key in (("host_intro", years, "year_label"), ("host_intro", hoods, "hood_id")):
         errors += C.check_repetition(col, {r[key]: r[col] for r in rows})

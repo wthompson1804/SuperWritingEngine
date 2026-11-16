@@ -191,6 +191,8 @@ def parking_kind(u):
     kind = "garage" if head.startswith("garage") else "covered" if head.startswith("covered") else \
         "lot" if head in ("lot", "open_lot", "open lot") else "street" if head.startswith("street") else "onsite"
     fee = num(p.get("fee"))
+    if str(p.get("fee_basis") or "").lower().startswith("estimate"):
+        fee = None                                   # a figure from a resident's review is not the building's published price (D18)
     included = fee == 0 and "included or free" in str(p.get("fee_note") or "")
     if fee == 0 and not included:
         fee = None                                   # a zero with no "included" note is not a published price
@@ -210,6 +212,99 @@ def dog_amenity(u):
     if "wash" in a:
         return "a dog wash station"
     return None
+
+
+def desk_kind(am):
+    """What the building's front-door amenity really is, read from the exact fields (independent check 4, D9: "A
+    doorman is at the front door" was written for 87 apartments whose source says only "Concierge").
+    -> None | 'doorman' | 'doorman24' | 'concierge' | 'concierge24' | 'attended' | 'attended24'.
+    'doorman' is said only when the doorman amenity is set AND its source text does not say something else:
+      - a text naming a doorman or door person -> doorman;      - a text naming only a concierge -> concierge;
+      - "attended lobby" -> attended;                           - "virtual doorman" alone -> nothing;
+      - a separate concierge amenity (amenities.concierge, the pipeline's split field) with no doorman -> concierge.
+    A bare "yes" beside the doorman field is the field's own word and stays a doorman."""
+    am = am or {}
+    if "concierge" in am or "front_desk" in am:
+        # the page data after independent check 4: three separate fields, each set only from a source that says so
+        # (amenities.doorman, .concierge, .front_desk; "24h" = staffed around the clock). Each is said as what it is.
+        clean = lambda k: "" if str(am.get(k) or "").strip().lower() in ("", "no", "none", "false", "nan") else str(am[k]).strip().lower()
+        door, conc, desk = clean("doorman"), clean("concierge"), clean("front_desk")
+        if door:
+            return "doorman24" if door == "24h" else "doorman"
+        if conc:
+            return "concierge24" if conc == "24h" else "concierge"
+        if desk:
+            return "attended24" if desk == "24h" else "attended"
+        return None
+    val = str(am.get("doorman") or "").strip().lower()
+    text = str(am.get("doorman_text") or "").strip().lower()
+    conc = str(am.get("concierge") or "").strip().lower()
+    conc_text = str(am.get("concierge_text") or "").strip().lower()
+    if val in ("no", "none", "false", "nan"):
+        val = ""
+    if conc in ("no", "none", "false", "nan"):
+        conc = ""
+    both = text + " " + conc_text
+    all_day = val == "24h" or conc == "24h" or bool(re.search(r"24|all hours|round[- ]the[- ]clock", both))
+    names_door = bool(re.search(r"(?<!virtual )\bdoor ?(?:man|men|person|woman|staff|attendant)", text))
+    names_conc = "concierge" in both
+    attended = bool(re.search(r"attended lobby|lobby attendant|front desk", both))
+    if val and names_door:
+        return "doorman24" if all_day else "doorman"
+    if (val and names_conc) or (conc and not names_door and not (val and not text)):
+        return "concierge24" if all_day else "concierge"
+    if val and attended:
+        return "attended24" if all_day else "attended"
+    if val and "virtual" in text:
+        return None
+    if val:
+        return "doorman24" if val == "24h" else "doorman"
+    return None
+
+
+def laundry_kind(am):
+    """-> 'wd' (a washer AND a dryer are named in the apartment) | 'in_unit' (laundry in the apartment, machines not
+    named) | None. The in-unit flag alone is not enough when the source text beside it says something else
+    ("On-site laundry", "W/D hookup", "not in unit"): then nothing is claimed."""
+    am = am or {}
+    if am.get("in_unit_laundry") != "yes":
+        return None
+    t = str(am.get("laundry") or "").strip().lower()
+    if re.search(r"not in unit|not in-unit", t):
+        return None
+    says_in = bool(re.search(r"in[ _-]?unit|washer|dryer|^yes$", t))
+    if t and not says_in:                                  # "On-site laundry", "W/D hookup; On-site laundry"
+        return None
+    if re.search(r"washer", t) and re.search(r"dryer", t):
+        return "wd"
+    return "in_unit"
+
+
+def garage_mixed(u):
+    """The parking is filed as a garage, and its own text also names a surface lot or outdoor spaces: "a garage" is
+    true, "you would park in the garage" is more than the field says (D18)."""
+    t = str((u.get("parking") or {}).get("type") or "").lower()
+    if (u.get("parking") or {}).get("garage_is_optional_extra"):
+        return True
+    if not t.startswith("garage"):
+        return False
+    rest = t.split(":", 1)[1] if ":" in t else ""
+    return bool(re.search(r"surface|\blot\b|outdoor|outside|uncovered|open parking|off-street|carport", rest))
+
+
+OVERCLAIM = {                                           # a wording is skipped when the field does not carry it
+    "laundry_plain": re.compile(r"washer|dryer", re.I),
+    "garage_mixed": re.compile(r"you would park in the building's garage|park indoors|under cover|there is a garage for your car", re.I),
+}
+
+
+def fits(text, f):
+    """May this wording be used for an apartment or building with these facts?"""
+    if f.get("laundry") and not f.get("laundry_wd") and OVERCLAIM["laundry_plain"].search(text):
+        return False
+    if f.get("garage_mixed") and OVERCLAIM["garage_mixed"].search(text):
+        return False
+    return True
 
 
 def disclosed(u):
@@ -237,7 +332,7 @@ DOG_REASONS = [                                        # (what the open item's t
     (r"disagree|and another says", "conflict"),
     (r"upon approval|on approval", "approval"),
     (r"case by case", "case"),
-    (r"contact for more information", "contact"),
+    (r"contact for more information|contact the building for its pet policy", "contact"),
     (r"small pets", "small pets"),
     (r"no policy text", "no text"),
 ]
@@ -263,7 +358,8 @@ def facts(u):
     floor = num(u.get("floor"))
     label, day = when(u.get("available"))
     free = str(get(u, "rent", "free_months") or "")
-    doorman = am.get("doorman")
+    desk = desk_kind(am)
+    wash = laundry_kind(am)
     all_in, sqft = num(u.get("all_in")), num(u.get("sqft"))
     built = num(am.get("year_built"))
     questions = u.get("tour_questions")
@@ -281,8 +377,11 @@ def facts(u):
         "margin": margin,
         "park_kind": kind, "park_fee": fee, "park_included": included,
         "pool": bool(am.get("pool")), "gym": am.get("gym") == "yes",
-        "doorman": "24-hour" if doorman == "24h" else "yes" if doorman else None,
-        "laundry": am.get("in_unit_laundry") == "yes",
+        # the front door: "doorman" only where the doorman amenity itself is set (desk_kind); a concierge is a concierge
+        "desk": desk,
+        "doorman": "24-hour" if desk in ("doorman24", "attended24") else "yes" if desk == "doorman" else None,
+        "laundry": wash is not None, "laundry_wd": wash == "wd",
+        "garage_mixed": garage_mixed(u),
         "lounge": am.get("lounge_or_coworking") == "yes",
         "built": int(built) if built else None,
         "dog_amenity": dog_amenity(u),
@@ -294,6 +393,8 @@ def facts(u):
         "avail": label, "avail_date": day,
         "open_questions": len(questions) if isinstance(questions, list) else None,
         "free_months": int(free) if free in ("1", "2", "3") else None,
+        "free_up_to": bool(get(u, "rent", "offer_up_to")) or bool(re.search(r"\bup to\b", str(get(u, "rent", "offer_text") or ""), re.I)),
+        "free_text": get(u, "rent", "free_text"),
         "rank": num(get(u, "scores", "hood_rank")),
         "no_weight_limit": limit == "no limit",
         "weight_limit": num(limit),
@@ -447,16 +548,14 @@ SECOND = {
 # used only where the apartment's own fields give that reason (CATCH_BASIS).
 CATCHES = {
     "confirm:live check": [
-        "The price and the move-in date were read from the listing and have not been checked again. Call to confirm both.",
-        "Call to confirm that this apartment is still available at this price. The listing has not been checked again "
-        "since it was read.",
+        "The price and the move-in date were read from the listing once. Call to confirm both.",
+        "Call to confirm that this apartment is still available at this price.",
         "Before you plan around this apartment, ask the leasing office to confirm the rent and the move-in date. Both "
         "come from a single reading of the listing.",
         "Ask the leasing office whether this apartment is still available and what the rent is today. The listing was "
         "read only once.",
         "The rent and the move-in date come from a single reading of the listing, so confirm both by phone.",
-        "Before you tour, confirm the price and the move-in date by phone. They have not been checked since the listing "
-        "was read."],
+        "Before you tour, confirm the price and the move-in date by phone."],
     "confirm:elevator named": [
         "The listing names an elevator for the property and does not say it serves this apartment. Ask before you tour.",
         "Ask whether an elevator serves this apartment's building and floor. The listing names an elevator for the "
@@ -478,6 +577,9 @@ CATCHES = {
     "confirm:listing which building": [
         "It is not clear which building this apartment is in. Ask the office before you tour.",
         "Ask the office which building this apartment is in. The listing does not make that clear."],
+    "confirm:listing lease price": [
+        "The price shown is for a longer lease. Ask for the price on a 12-month lease before you compare.",
+        "Ask for the price on a 12-month lease. The price shown is for a longer lease."],
     "confirm:listing": [
         "Part of this listing could not be confirmed. Ask whether the apartment is still available, and at what price.",
         "Ask whether this apartment is still available, and at what price. The listing could not be fully confirmed."],
@@ -548,6 +650,17 @@ CATCHES = {
     "dog_weight": [
         "The listing says a dog weight limit applies and gives no number. Ask for the limit in pounds.",
         "Ask for the dog weight limit in pounds. The listing says there is a limit and does not give it."],
+    # conditions the renter must meet or know (independent check 4, D8): the figure itself is on the disclosure
+    "conditions:income": [
+        "The listing sets an income requirement. Check that you meet it, or ask whether a guarantor counts.",
+        "This apartment has an income requirement. Ask what it is and whether a guarantor counts."],
+    "conditions:credit": [
+        "The listing asks for a minimum credit score. Ask what score the application needs.",
+        "A minimum credit score applies here. Check yours against it before you apply."],
+    "conditions:furnished": [
+        "The listing says this apartment is furnished. Ask whether the furniture is optional and whether the lease is a "
+        "standard 12-month lease.",
+        "This apartment is listed as furnished. Ask whether you can rent it without the furniture, on a 12-month lease."],
     "condo": [
         "This apartment is in a condominium and is rented by its owner. Ask about the building's rules for renters, "
         "including pets.",
@@ -658,13 +771,13 @@ SUBS = {
             "The listing says small dogs and gives no weight, so ask for the limit.",
             "Ask what weight counts as a small dog here.",
             "Small dogs are allowed, and the weight limit is not published.",
-            "Ask for the dog weight limit in pounds before you choose a puppy."]),
+            "Ask for the dog weight limit in pounds before you apply."]),
         ("weight_unpublished", [
             "A dog weight limit applies, and the number is not published.",
             "Ask for the dog weight limit in pounds."]),
         ("weight_limit", [
             "Check the weight limit against the adult size of your dog.",
-            "Dogs are allowed up to a weight limit, so choose the breed with care.",
+            "Dogs are allowed up to a weight limit, so check it against your dog.",
             "The weight limit applies to the adult dog, so plan for that."]),
         ("onsite", [
             "The building has its own dog area for quick trips outside.",
@@ -690,13 +803,27 @@ SUBS = {
             "A doorman is at the front door.",
             "A doorman can receive deliveries when you are out.",
             "There is a doorman, which helps with packages."]),
+        ("concierge24", [
+            "The building has a concierge at all hours.",
+            "A concierge is listed as available day and night.",
+            "The listing names a concierge at all hours."]),
+        ("concierge", [
+            "The building has a concierge desk.",
+            "A concierge desk is listed for the building.",
+            "The listing names a concierge desk."]),
+        ("attended", [
+            "The lobby is attended.",
+            "The listing says the lobby is attended.",
+            "Someone staffs the lobby."]),
         ("pool_laundry", [
             "A pool, and a washer and dryer in the apartment.",
             "You get a pool and your own washer and dryer.",
-            "Laundry is in the apartment, and the building has a pool."]),
+            "Laundry is in the apartment, and the building has a pool.",
+            "The building has a pool, and laundry is in the apartment."]),
         ("laundry", [
             "The washer and dryer are inside the apartment.",
             "You would do laundry in your own apartment.",
+            "Laundry is inside the apartment.",
             "No shared laundry room, because the washer and dryer are in the apartment.",
             "Your own washer and dryer come with the apartment."]),
         ("pool", [
@@ -724,7 +851,9 @@ BUILDING = {
         "No other building listed in this neighborhood has a doorman."]),
     "only_laundry": ("laundry", "inside", [
         "This is the only building of the {n} listed in this neighborhood with a washer and dryer in the apartment.",
-        "No other building listed in this neighborhood has a washer and dryer in the apartment."]),
+        "No other building listed in this neighborhood has a washer and dryer in the apartment.",
+        "This is the only building of the {n} listed in this neighborhood with laundry in the apartment.",
+        "No other building listed in this neighborhood has laundry in the apartment."]),
     "only_dogspot": ("dog", "inside", [
         "This is the only building of the {n} listed in this neighborhood with its own {dogthing}.",
         "No other building listed in this neighborhood has its own {dogthing}."]),
@@ -762,7 +891,18 @@ BUILDING = {
         "The building has a doorman.",
         "A doorman is at the front door.",
         "There is a doorman, which helps with packages and deliveries."]),
+    "concierge24": ("doorman", "inside", [
+        "The building has a concierge 24 hours a day.",
+        "The listing names a concierge, available 24 hours a day."]),
+    "concierge": ("doorman", "inside", [
+        "The building has a concierge desk.",
+        "A concierge desk is listed for the building."]),
+    "attended": ("doorman", "inside", [
+        "The lobby is attended.",
+        "The listing says the lobby is attended."]),
     "laundry": ("laundry", "inside", [
+        "Laundry is inside the apartment.",
+        "You would do laundry inside the apartment.",
         "The apartment has its own washer and dryer.",
         "A washer and dryer are inside the apartment.",
         "You would do laundry inside the apartment, with your own washer and dryer."]),
@@ -850,8 +990,12 @@ POINTS = {
     "dog_ok": ("dog", "dog", "Dogs are allowed."),
     "pool": ("pool", "pool", "The building has a pool."),
     "laundry": ("laundry", "laundry", "Washer and dryer in the apartment."),
+    "laundry_plain": ("laundry", "laundry", "Laundry in the apartment."),
     "front_desk": ("key", "doorman", "The front desk is staffed 24 hours a day."),
     "doorman": ("key", "doorman", "The building has a doorman."),
+    "concierge24": ("key", "doorman", "A concierge is available 24 hours a day."),
+    "concierge": ("key", "doorman", "The building has a concierge desk."),
+    "attended": ("key", "doorman", "The lobby is attended."),
     "gym": ("heart", "gym", "The building has a gym."),
     "lounge": ("coffee", "lounge", "The building has a lounge or coworking room."),
     "park": ("park", "park", "{park} is about {park_mins} away on foot."),
@@ -919,7 +1063,11 @@ def lead_conditions(f, peers):
         add(46, "high_floor", {"floor": f["floor"]}, floor=f["floor"])
     if f["free_months"]:
         m = "month" if f["free_months"] == 1 else "months"
-        add(40, "concession", {"free": f"{f['free_months']} {m}"}, free_months=f["free_months"])
+        # "up to 2 months free" on the page stays "up to" in the sentence (independent check 4, D20)
+        # the page data's own phrase where it has one (rent.free_text: "up to 2 months"); else built from the count
+        ft = str(f["free_text"] or "")
+        phrase = ft if re.fullmatch(r"(?:up to )?[123] months?", ft) else f"{'up to ' if f['free_up_to'] else ''}{f['free_months']} {m}"
+        add(40, "concession", {"free": phrase}, free_months=f["free_months"])
     if f["beds"] == "1-bedroom":
         add(36, "one_bed", beds=f["beds"])
     elif f["beds"] == "studio":
@@ -1063,6 +1211,11 @@ def _why(u):
     return str(get(u, "confirm", "why") or "")
 
 
+def _code(u):
+    """The open item's reason code in the page data (confirm.code: complex, select_buildings, stale_page, ...)."""
+    return str(get(u, "confirm", "code") or "") if get(u, "confirm", "asterisk") else ""
+
+
 def _what(u):
     return get(u, "confirm", "what") if get(u, "confirm", "asterisk") else None
 
@@ -1071,14 +1224,16 @@ def _what(u):
 CATCH_BASIS = {
     "confirm:live check": lambda u: _what(u) == "live check",
     "confirm:elevator": lambda u: _what(u) == "elevator",
-    "confirm:elevator named": lambda u: _what(u) == "elevator" and bool(
-        re.search(r"elevator is named for this property|select buildings|some buildings", _why(u), re.I)),
+    "confirm:elevator named": lambda u: _what(u) == "elevator" and (_code(u) in ("complex", "select_buildings") or bool(
+        re.search(r"elevator is named for (?:this|the) property|select buildings|some (?:of its )?buildings", _why(u), re.I))),
     "confirm:listing": lambda u: _what(u) == "listing",
-    "confirm:listing stale": lambda u: _what(u) == "listing" and bool(
-        re.search(r"last changed|last updated|last refreshed|stale|months old|availability date is", _why(u), re.I)),
+    "confirm:listing stale": lambda u: _what(u) == "listing" and (_code(u) == "stale_page" or bool(
+        re.search(r"last changed|last updated|last refreshed|stale|months old|availability date is", _why(u), re.I))),
+    "confirm:listing lease price": lambda u: _what(u) == "listing" and (_code(u) == "sibling_12" or "12-month price" in str(
+        get(u, "confirm", "label") or "")),
     "confirm:listing one site": lambda u: _what(u) == "listing" and bool(re.search(r"one listing site only", _why(u), re.I)),
-    "confirm:listing which building": lambda u: _what(u) == "listing" and str(
-        get(u, "confirm", "question") or "").lower().startswith("which building"),
+    "confirm:listing which building": lambda u: _what(u) == "listing" and (_code(u) == "address_mismatch" or str(
+        get(u, "confirm", "question") or "").lower().startswith("which building")),
     "confirm:availability": lambda u: _what(u) == "availability",
     "confirm:availability plan": lambda u: _what(u) == "availability" and bool(re.search(r"floor.?plan", _why(u), re.I)),
     "confirm:eligibility": lambda u: _what(u) == "eligibility",
@@ -1098,6 +1253,9 @@ CATCH_BASIS = {
     "lease_term": lambda u: lease_months(u) is not None,
     "dog_weight": lambda u: "dog weight limit not published" in disclosed(u),
     "condo": lambda u: "condo rented by its owner" in disclosed(u),
+    "conditions:income": lambda u: "income requirement" in disclosed(u),
+    "conditions:credit": lambda u: "credit score requirement" in disclosed(u),
+    "conditions:furnished": lambda u: "furnished apartment" in disclosed(u),
     "floor:unpublished": lambda u: num(u.get("floor")) is None,
     "floor:inferred": lambda u: num(u.get("floor")) is not None and u.get("floor_basis") not in ("confirmed", "stated"),
     "weak:space": lambda u: num(u.get("sqft")) is not None and num(u.get("sqft")) < 600,
@@ -1106,7 +1264,8 @@ CATCH_BASIS = {
 CONFIRM_ORDER = {                                       # the open item -> its families, the most specific first
     "live check": ["confirm:live check"],
     "elevator": ["confirm:elevator named", "confirm:elevator"],
-    "listing": ["confirm:listing which building", "confirm:listing one site", "confirm:listing stale", "confirm:listing"],
+    "listing": ["confirm:listing lease price", "confirm:listing which building", "confirm:listing one site",
+                "confirm:listing stale", "confirm:listing"],
     "availability": ["confirm:availability plan", "confirm:availability"],
     "eligibility": ["confirm:eligibility income", "confirm:eligibility age", "confirm:eligibility"],
 }
@@ -1142,6 +1301,10 @@ def catch_options(u, f):
         return [("confirm:other", {}, used)]
     out = []
     rent = u.get("rent") or {}
+    for kind, what in (("conditions:income", "income requirement"), ("conditions:credit", "credit score requirement"),
+                       ("conditions:furnished", "furnished apartment")):
+        if what in f["disclosures"]:
+            out.append((kind, {}, {"disclosure": what}))
     if net_effective(u):
         out.append(("rent:net_effective", {}, {"rent_basis_kind": "net_effective"}))
     names = f["unknown"]
@@ -1251,6 +1414,8 @@ def sub_keys(u, f):
         building = "front_desk"
     elif f["doorman"]:
         building = "doorman"
+    elif f["desk"] in ("concierge24", "concierge", "attended"):
+        building = f["desk"]
     elif f["pool"] and f["laundry"]:
         building = "pool_laundry"
     elif f["laundry"]:
@@ -1272,6 +1437,7 @@ def compose_subs(u, f, spread=None, before=()):
     out = {}
     for section, key in keys.items():
         options = dict(SUBS[section]).get(key) if key else None
+        options = [o for o in options if fits(o, f)] if options else options
         text = ""
         if options:
             heard = {b.get(section) for b in before}
@@ -1370,7 +1536,7 @@ def building_conditions(b, peers):
         gtail = ", and parking is included" if b["park_included"] else f", at {usd(b['park_fee'])} a month" if b["park_fee"] \
             else "" if fee_asked else ", with the fee not published"
         add(88 + small, "only_garage", {"gtail": gtail}, peers=n, parking="garage", parking_fee=b["park_fee"])
-    if only(b, peers, lambda p: bool(p["doorman"])):
+    if only(b, peers, lambda p: p["desk"] in ("doorman", "doorman24")):     # "a doorman" only where the amenity is one
         add(72 + small, "only_doorman", peers=n, doorman=b["doorman"])
     if only(b, peers, lambda p: p["laundry"]):
         add(68 + small, "only_laundry", peers=n, in_unit_laundry=True)
@@ -1390,6 +1556,8 @@ def building_conditions(b, peers):
         add(50, "pool", pool=True)
     if b["doorman"]:
         add(45, "front_desk" if b["doorman"] == "24-hour" else "doorman", doorman=b["doorman"])
+    elif b["desk"] in ("concierge24", "concierge", "attended"):
+        add(42, b["desk"], desk=b["desk"])
     if b["laundry"]:
         add(40, "laundry", in_unit_laundry=True)
     if b["park_kind"] == "covered" and not b["park_included"]:
@@ -1474,11 +1642,13 @@ def building_points(b):
         rest.append((key, {"w10": WALK_RADIUS, **(vals or {})}, used))
 
     if b["laundry"]:
-        more("laundry", in_unit_laundry=True)
+        more("laundry" if b["laundry_wd"] else "laundry_plain", in_unit_laundry=True)
     if b["pool"]:
         more("pool", pool=True)
     if b["doorman"]:
         more("front_desk" if b["doorman"] == "24-hour" else "doorman", doorman=b["doorman"])
+    elif b["desk"] in ("concierge24", "concierge", "attended"):
+        more(b["desk"], desk=b["desk"])
     if b["gym"]:
         more("gym", gym=True)
     if b["lounge"]:
@@ -1543,7 +1713,7 @@ def compose_building(b, peers, spread=None, before=()):
                     if (capped and not spread.free("b:sentence", pid)) or (fresh and pid in heard):
                         continue
                     text = cap_first(texts[i].format(**c[2]))
-                    if words(text) > budget - (8 if group == "inside" else 0):
+                    if words(text) > budget - (8 if group == "inside" else 0) or not fits(text, b):
                         continue
                     pick = (c, pid, text)
                     break
