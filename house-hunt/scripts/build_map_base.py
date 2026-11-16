@@ -1,8 +1,10 @@
 """Build site/map_base.json: simplified land, borough and state-line geometry for the page's inline SVG map.
 
-Source: US Census cartographic boundary file, counties, 1:500,000 (cb_2023_us_county_500k), which is already
-clipped to the shoreline, so "not a county" inside the frame is water (Atlantic, Long Island Sound, the harbor,
-the lower Hudson). Fetched once through scripts/lib.py cached_get into raw/census_cb/ and reused after that.
+Sources (both www2.census.gov, fetched once through scripts/lib.py cached_get and reused after that):
+- Cartographic boundary file, counties, 1:500,000 (cb_2023_us_county_500k): clipped to the ocean and Sound
+  shoreline only, so the Hudson, the East River, the bays and the harbor are still "county" in it.
+- TIGER/Line 2023 AREAWATER, one file per county in the frame: the larger water polygons are cut out of the land.
+One refusal (403, 429) from the host stops the script; it does not retry.
 
 Output coordinates are pre-projected to a flat pixel-like space so the page only has to drop the path strings
 into an <svg>:  x = (lon - west) * cos(ref_lat) * scale,   y = (north - lat) * scale   (equirectangular, true
@@ -28,6 +30,9 @@ from shapely.ops import linemerge, unary_union  # noqa: E402
 from lib import ROOT, cached_get, now_iso  # noqa: E402
 
 URL = "https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_county_500k.zip"
+WATER_URL = "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_{fips}_areawater.zip"
+WATER_MIN_PIECE_M2 = 150_000   # ignore ponds: a single water polygon must be at least this big to be read
+WATER_MIN_BODY = 2.5e-4        # after merging, keep water bodies of about 3 km2 or more (square degrees, x scaled)
 OUT = ROOT / "site" / "map_base.json"
 DATA = ROOT / "site" / "data.json"
 
@@ -154,8 +159,27 @@ def main() -> None:
     g["iso"] = g.geometry.apply(to_iso)
     pr = Proj(w, n)
 
-    # Land: every county dissolved, simplified once so the coast is one clean edge.
+    # Water inside county outlines (rivers, bays, the harbor), from TIGER AREAWATER, county by county.
+    water_parts, water_meta = [], []
+    for fips in sorted(g["GEOID"]):
+        wc, wm = cached_get(WATER_URL.format(fips=fips), "census_areawater", ext="zip", timeout=300)
+        if wm["status"] in (403, 429):
+            raise SystemExit(f"HTTP {wm['status']} from www2.census.gov; stopping, no retry")
+        if wm["status"] != 200:
+            print(f"  no AREAWATER for {fips}: HTTP {wm['status']}")
+            continue
+        water_meta.append(wm["retrieved_at"])
+        wg = gpd.read_file(f"zip://{ROOT / wm['path']}", bbox=(w, s, e, n))
+        wg = wg[wg["AWATER"] >= WATER_MIN_PIECE_M2]
+        water_parts.extend(to_iso(x) for x in wg.geometry if x is not None and not x.is_empty)
+    water = unary_union(water_parts).buffer(0.0004).buffer(-0.0004) if water_parts else None
+    if water is not None:
+        water = unary_union([p for p in polys(water) if p.area >= WATER_MIN_BODY])
+
+    # Land: every county dissolved, minus water, simplified once so the coast is one clean edge.
     land = unary_union(list(g["iso"])).buffer(0)
+    if water is not None:
+        land = land.difference(water).buffer(0)
     land_s = land.simplify(TOL, preserve_topology=True)
 
     # Boroughs: simplified as a coverage where the library allows, so shared edges stay shared.
@@ -165,6 +189,8 @@ def main() -> None:
         simp = list(shapely.coverage_simplify(geoms, TOL))
     except Exception:  # older shapely / GEOS: per-polygon simplify (tiny slivers show the land colour)
         simp = [x.simplify(TOL, preserve_topology=True) for x in geoms]
+    # Cut to the simplified land so the borough tint and the coast share one edge.
+    simp = [x.buffer(0).intersection(land_s) for x in simp]
     boroughs = []
     for (_, row), sg in zip(b.iterrows(), simp):
         boroughs.append({"id": row["GEOID"], "name": BOROUGHS[row["GEOID"]], "d": poly_path(sg, pr)})
@@ -177,7 +203,8 @@ def main() -> None:
         for c in names[i + 1:]:
             shared = states[a].boundary.intersection(states[c].buffer(0.0005))
             border_parts.extend(lines(shared))
-    merged = linemerge(border_parts) if border_parts else None
+    land_in = land_s.buffer(-0.0006)
+    merged = linemerge(lines(unary_union(border_parts).intersection(land_in))) if border_parts else None
     borders = []
     for ln in lines(merged) if merged is not None else []:
         if ln.length < 0.01:
@@ -195,7 +222,7 @@ def main() -> None:
                 continue
             sh = seen[i].boundary.intersection(seen[j].boundary)
             cl.extend(lines(sh))
-    cm = linemerge(cl) if cl else None
+    cm = linemerge(lines(unary_union(cl).intersection(land_in))) if cl else None
     counties = []
     for ln in lines(cm) if cm is not None else []:
         if ln.length < 0.02:
@@ -214,9 +241,14 @@ def main() -> None:
     out = {
         "meta": {
             "what": "Simplified base geometry for the inline SVG map: land, the five boroughs, state and county lines.",
-            "source": "US Census Bureau, Cartographic Boundary Files 2023, counties, 1:500,000 (shoreline-clipped)",
+            "source": "US Census Bureau: Cartographic Boundary Files 2023, counties, 1:500,000; "
+                      "TIGER/Line 2023 AREAWATER for each county in the frame (water cut out of the land)",
             "source_url": meta["url"],
             "retrieved_at": meta["retrieved_at"],
+            "water_source_url": WATER_URL.replace("{fips}", "<county FIPS>"),
+            "water_counties": sorted(g["GEOID"]),
+            "water_retrieved_at": [min(water_meta), max(water_meta)] if water_meta else None,
+            "water_rule": f"water polygons of at least {WATER_MIN_PIECE_M2} m2, merged; bodies under about 3 km2 dropped",
             "built_at": now_iso(),
             "builder": "scripts/build_map_base.py",
             "simplification": f"Douglas-Peucker, tolerance {TOL} degrees of latitude on longitude-scaled coordinates; "
