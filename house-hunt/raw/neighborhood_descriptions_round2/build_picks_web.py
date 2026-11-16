@@ -66,6 +66,7 @@ P = [  # hood, url, starts with, ends with, source, about_area, scope, character
  ("ny:bedford-stuyvesant-east-", ny+"brooklyn/bedford-stuyvesant/", "Dive into Bed-Stuy nightlife", "turtle races.", NY, "Bedford-Stuyvesant", "enclosing", 3, "food and nightlife"),
  ("ny:bedford-stuyvesant-west-", ny+"brooklyn/bedford-stuyvesant/", "Dive into Bed-Stuy nightlife", "turtle races.", NY, "Bedford-Stuyvesant", "enclosing", 3, "food and nightlife"),
 ]
+FORCE = {("ct:shelton", "From Indian Wells State Park"), ("ny:white-plains", "Every year, from May to September")}
 out, bad = [], []
 for hid, url, a, b, src, about, scope, ch, topic in P:
     p = D + "web_text/" + hashlib.sha1(url.encode()).hexdigest()[:16] + ".txt"
@@ -76,7 +77,9 @@ for hid, url, a, b, src, about, scope, ch, topic in P:
         bad.append((hid, a))
         continue
     out.append({"hood_id": hid, "web_url": url, "quote": t[i:j + len(b)], "source_name": src,
-                "about_area": about, "scope": scope, "character": ch, "topic": topic})
+                "about_area": about, "scope": scope, "character": ch, "topic": topic,
+                # place names the topic filter trips on ("Indian Wells State Park", "White Plains"): read by hand
+                **({"force": True} if (hid, a) in FORCE else {})})
 if bad:
     sys.exit(f"not found: {bad}")
 json.dump(out, open(D + "picks_web.json", "w"), indent=1, ensure_ascii=False)

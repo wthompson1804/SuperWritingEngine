@@ -7,7 +7,8 @@
   "about_area": "Shelton",
   "scope": "exact",
   "character": 2,
-  "topic": "parks"
+  "topic": "parks",
+  "force": true
  },
  {
   "hood_id": "ct:stratford",
@@ -277,7 +278,8 @@
   "about_area": "White Plains",
   "scope": "exact",
   "character": 3,
-  "topic": "event"
+  "topic": "event",
+  "force": true
  },
  {
   "hood_id": "ny:port-chester",
