@@ -675,6 +675,11 @@ def main():
             if gate_fact == "dogs_allowed" and r.status == "confirmed" and not re.search(r"zumper", r.source_url, re.I) \
                     and re.search(r"dogs? (?:are )?(?:allowed|ok|welcome)|small dogs|dogs: allowed|cats (?:and|&|,) (?:small )?dogs", txt, re.I):
                 dogs_named.add(b)
+            if fact.startswith("floor") and not fact.startswith("floors") and r.status == "unconfirmed" \
+                    and re.match(r"\s*(?:unknown|unclear|cannot|not (?:stated|known))", val, re.I):
+                # independent check 3, D15: this used to sit below the 'continue' and never ran, so 100 W 139th St 27A
+                # kept floor 27 in a six-floor building. e.g. "Unit 27A cannot be floor 27: the building has 6 floors"
+                floor_unknown.append((b, f"{val} | {r.quote}"))
             if r.status == "unconfirmed":        # an unconfirmed row never upgrades a basis (W3)
                 continue
             if fact.startswith("elevator") and ekind == "contra":
@@ -723,8 +728,6 @@ def main():
                 for lab, fl_ in pairs:
                     # a floor the checker read off the unit number is an inference, whatever the row's status (W1)
                     floor_rows.append((b, lab, fl_, "inferred" if inferred else "confirmed", r.source_url, val[:120], r.quote or ""))
-                if r.status == "unconfirmed" and re.match(r"\s*(?:unknown|unclear|cannot|not (?:stated|known))", val, re.I):
-                    floor_unknown.append((b, f"{val} | {r.quote}"))      # e.g. "Unit 27A cannot be floor 27: the building has 6 floors"
                 if not pairs and not re.search(r"unknown|unconfirmed", val, re.I):
                     floor_rows.append((b, "?", None, "unparsed", r.source_url, val[:120], r.quote or ""))
     for b, (t_, src_) in contact_only.items():

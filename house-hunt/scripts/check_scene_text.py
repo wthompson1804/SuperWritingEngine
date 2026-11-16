@@ -21,9 +21,8 @@ data/reference/scene_text_neighborhoods.csv and, for every row and every prose c
    dashes, no "not ... but", no spelled-out quantities (so that rule 1 cannot be dodged), no wording about race,
    ethnicity or religion, no listing-ad hype words, no dollar amounts of 1,000 or more outside the host fields;
 4. no crime wording in any open field (crime, violent, burglar, theft, "per 1,000", "safer than", safe, police).
-   Two fixed wordings are allowed, each only with a test in the evidence: "one of the safest spots on the whole list"
-   (neighborhood in the lowest fifth by violent rate among those on the page; one field only) and "the safety limit
-   we set" (watch_for only; violent rate of 8.0 or more, where Jamaica's 9.8 is the limit);
+   One fixed wording is allowed, only with a test in the evidence: "one of the safest spots on the whole list"
+   (neighborhood in the lowest fifth by violent rate among those on the page; one field only);
 5. across rows, the host voice must not read like a form letter: at most 3 host_intro texts may open with the same 3
    words, and no run of 6 words may appear in more than a tenth of them (the fixed toll wording is exempt);
 6. the neighborhood host_intro texts must not all end the same way: no closing shape (the first 4 words of the last
@@ -103,8 +102,19 @@ CRIME = re.compile(r"\bcrimes?\b|\bviolent\b|burglar\w*|\bthefts?\b|\bstolen\b|b
 # Two wordings are allowed, each tied to a test the checker re-runs:
 SAFEST = "one of the safest spots on the whole list"      # only where the neighborhood is in the lowest fifth by violent
 SAFEST_FIELD, SAFEST_MAX = "violent_pctile", 0.2          # rate among the neighborhoods shown on the page; one clause
-AT_LIMIT = "safety limit we set"                          # watch_for only, only where the violent rate is right at the
-AT_LIMIT_FIELD, AT_LIMIT_MIN = "violent", 8.0             # limit (Jamaica's rate is the limit, 9.8)
+# (A second wording, "the safety limit we set", was removed on the owner's instruction, 2026-11-16: safety is not a
+# recurring theme, and a neighborhood near the limit simply gets no safety remark. It now fails like any crime wording.)
+# Figures that describe the places SHOWN on the page: in a neighborhood that has shown units, these must be computed
+# from those units (site/data.json#units), never from every candidate building or the area-wide file.
+SHOWN_ONLY_FIELDS = {"restaurants_800m", "bars_800m", "cafes_800m", "restaurants_1600m", "park_walk_min", "dog_park_m",
+                     "supermarket_m_c", "unit_sqft", "drive_min", "transit_to_parents_min", "train_station_m_c",
+                     "toll_round_trip_ezpass", "dog_park_name", "park_name", "train_station"}
+
+
+@lru_cache(maxsize=None)
+def shown_hoods():
+    """hood_ids that have at least one unit shown on the page."""
+    return frozenset(table(PAGE + "#units")["hood_id"].dropna().astype(str))
 DOLLARS = (re.compile(r"\$\s?\d{1,3},?\d{3}"), "a dollar amount of 1,000 or more (no rents or prices in scene text)")
 
 
@@ -183,6 +193,11 @@ def _page_table(part):
                 "listing_id": u["id"], "hood_id": u.get("hood_id"), "year_label": labels.get(u.get("year")),
                 "all_in": u.get("all_in"), "sqft": u.get("sqft"),
                 "toll_rt": toll.get(u.get("building_id")),
+                "toll_complete": bool((mo.get("sun") or {}).get("toll_complete")),
+                "park": (mo.get("wake") or {}).get("park"), "dog_park": (mo.get("wake") or {}).get("dog_park"),
+                "train_station": (mo.get("sat") or {}).get("train_station"),
+                "train_station_m": (mo.get("sat") or {}).get("train_station_m"),
+                "open_gate": float(bool((u.get("confirm") or {}).get("asterisk"))),
                 "drive_min": (mo.get("sun") or {}).get("drive_min"),
                 "transit_min": (mo.get("sun") or {}).get("transit_min"),
                 "dog_park_m": (mo.get("wake") or {}).get("dog_park_m"),
@@ -242,6 +257,8 @@ def lookup(source_file, field, row, agg=None):
         return [plain(x) for x in s.tolist()]
     if agg == "count":
         return int(len(s))
+    if agg == "nunique":
+        return int(s.dropna().astype(str).nunique())
     if agg == "sentiment_counts":
         vc = s.astype(str).str.lower().value_counts()
         return ";".join(f"{k}={int(vc.get(k, 0))}" for k in ("positive", "mixed", "negative"))
@@ -390,14 +407,12 @@ def check_style(kind, col, text):
         m = rx.search(bare)
         if m:
             out.append(f"{col}: {what}: '{m.group(0)}'")
-    open_text = bare.replace(SAFEST, "").replace(AT_LIMIT, "")
+    open_text = bare.replace(SAFEST, "")
     m = CRIME.search(open_text) or re.search(r"\bsafe\w*", open_text, re.I)
     if m:
         out.append(f"{col}: crime or safety wording '{m.group(0)}' (the open prose is about living there)")
     if text.count(SAFEST) > 1:
         out.append(f"{col}: the 'safest' clause appears more than once")
-    if AT_LIMIT in text and col != "watch_for":
-        out.append(f"{col}: the safety-limit clause is allowed in watch_for only")
     m = NUMBER_WORDS.search(text.replace(SAFEST, ""))
     if m:
         out.append(f"{col}: spelled-out quantity '{m.group(0)}' (write digits and cite them)")
@@ -516,8 +531,12 @@ def check_row(kind, key, texts, evidence):
         problems.append(f"'{SAFEST}' needs a test that the neighborhood is in the lowest fifth by violent rate")
     if joined.count(SAFEST) > 1:
         problems.append(f"'{SAFEST}' is used in more than one field")
-    if AT_LIMIT in joined and not backed(AT_LIMIT_FIELD, (">=", ">"), AT_LIMIT_MIN):
-        problems.append(f"'{AT_LIMIT}' needs a test that the violent rate is at least {AT_LIMIT_MIN}")
+    if kind == "hood" and key in shown_hoods():
+        for ev in evidence:
+            if ev.get("transform") != "convention" and ev.get("field") in SHOWN_ONLY_FIELDS \
+                    and not str(ev.get("source_file", "")).startswith(PAGE):
+                problems.append(f"{ev['field']} is quoted from {ev['source_file']}, but this neighborhood has places on "
+                                f"the page: the figure must come from the shown units ({ev.get('claim', '')[:50]})")
     for col, text in list(texts.items()) + extra:
         if not text.strip():
             if not col.startswith("sub_"):                # an empty section subhead is allowed: better than filler

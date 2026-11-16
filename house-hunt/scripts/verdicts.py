@@ -6,15 +6,21 @@ been read and a verdict written:
 
   data/evidence/review_verdicts.csv
     listing_id, building_id, addr_key, unit,
-    verdict        remove | asterisk | ok
+    verdict        remove | asterisk | disclose | ok
     kind           elevator | floor | dogs | not_available | unverified | wrong_building | lease_term | restricted |
                    coop_condo | other          (blank for ok)
+
+  SEVERAL ROWS PER UNIT (independent check 3, D22): the table is keyed on (listing_id, kind). A unit whose evidence
+  shows two things carries two rows, for example 'asterisk | elevator' and 'disclose | lease_term'. One kind per unit
+  hid the second issue (98-76 Queens Blvd 2M, Avalon Somerville 022-265, four owner-rented condos).
     what_to_confirm, why (plain words for the page), evidence_quote, evidence_file, reviewed_at,
     evidence_hash  fingerprint of every evidence row of the building when the verdict was written
 
   remove    -> scripts/rank.py excludes the unit before ranking, with the reason (data/excluded_by_review.csv)
-  asterisk  -> the unit counts as having that open fact: shown with an asterisk that says what and why, or dropped as
-               sketchy when that makes two or more open facts
+  asterisk  -> an open GATE fact (kinds elevator, dogs, not_available, unverified, wrong_building, restricted): shown
+               with an asterisk that says what and why, or dropped as sketchy when that makes two or more open facts
+  disclose  -> a condition to know that never removes the unit (kinds lease_term, coop_condo, other, floor): listed
+               among the unit's disclosures. Any number of them may sit beside at most one open gate fact.
   ok        -> nothing added; the rules' own asterisks still apply. A verdict never closes a fact the rules leave open.
 
 scripts/check_registry.py fails the run when a shown unit has no verdict of ok / asterisk, or when its verdict was
@@ -26,9 +32,11 @@ Commands
   python3 scripts/verdicts.py add FILE             add verdict lines written by the reviewer (format below)
   python3 scripts/verdicts.py restamp-check        list verdicts whose evidence has changed since they were written
 
-Verdict line (one per unit, fields separated by ' | '):
+Verdict line (fields separated by ' | '; several lines for one unit are allowed, one per kind; the lines given for a
+unit in one 'add' replace every earlier row of that unit):
   <listing_id or #n from the digest> | ok
-  <id> | asterisk | <kind> | <what to confirm> | <why> | <row tag from the digest, e.g. L2, or a literal quote> [| file]
+  <id> | asterisk | <gate kind> | <what to confirm> | <why> | <row tag from the digest, e.g. L2, or a literal quote> [| file]
+  <id> | disclose | <disclosure kind> | <question> | <why> | <row tag or literal quote> [| file]
   <id> | remove   | <kind> | | <why> | <row tag or literal quote> [| file]
 """
 from __future__ import annotations
@@ -50,6 +58,9 @@ VERDICTS = DATA / "evidence" / "review_verdicts.csv"
 COLS = ["listing_id", "building_id", "addr_key", "unit", "verdict", "kind", "what_to_confirm", "why", "evidence_quote", "evidence_file",
         "reviewed_at", "evidence_hash"]
 KINDS = {"elevator", "floor", "dogs", "not_available", "unverified", "wrong_building", "lease_term", "restricted", "coop_condo", "other"}
+GATE_KINDS = {"elevator", "dogs", "not_available", "unverified", "wrong_building", "restricted"}     # an asterisk: one open gate fact
+DISCLOSURE_KINDS = {"lease_term", "coop_condo", "other", "floor"}                                     # disclose: never removes
+SHOWABLE = ("ok", "asterisk", "disclose")
 FAMILIES = ("live_check", "confirm", "facts", "items")
 BORING_FACT = re.compile(r"^(?:building_size|building_site|listing_broker|listing_agent|listing_contact|deposit|application_fee|management|registered|"
                          r"total_units|units|year_built|parking|garage|pet_rent|pet_fee|pet_deposit|pet_count|pool|gym|laundry|doorman|concierge|utilities|"
@@ -124,7 +135,37 @@ def load_verdicts() -> pd.DataFrame:
     for col in COLS:
         if col not in V:
             V[col] = ""
-    return V[COLS]
+    return normalise(V[COLS])
+
+
+def normalise(V: pd.DataFrame) -> pd.DataFrame:
+    """One row per (listing_id, kind), the later row winning. An asterisk on a disclosure kind (the old one-kind table
+    wrote 'asterisk | lease_term') is a 'disclose' row: the verdict column then says what the page does (D22)."""
+    V = V.copy()
+    V.loc[(V.verdict == "asterisk") & V.kind.isin(DISCLOSURE_KINDS), "verdict"] = "disclose"
+    V = V.drop_duplicates(["listing_id", "kind"], keep="last")
+    # an 'ok' row beside another row of the same unit says nothing more: the other rows are the verdict
+    multi = V.groupby("listing_id").verdict.transform("size") > 1
+    return V[~(multi & (V.verdict == "ok"))].reset_index(drop=True)
+
+
+def by_unit(V: pd.DataFrame | None = None) -> dict:
+    """listing_id -> {"verdict": remove | asterisk | disclose | ok (the strongest of its rows), "rows": [row dicts],
+    "gate": [gate kinds with an asterisk], "disclose": [disclosure kinds], "hashes": {evidence_hash, ...}}."""
+    V = load_verdicts() if V is None else V
+    out = {}
+    order = {"remove": 0, "asterisk": 1, "disclose": 2, "ok": 3}
+    for r in V.to_dict("records"):
+        d = out.setdefault(r["listing_id"], {"verdict": "ok", "rows": [], "gate": [], "disclose": [], "hashes": set(), "building_id": r["building_id"]})
+        d["rows"].append(r)
+        d["hashes"].add(r["evidence_hash"])
+        if order.get(r["verdict"], 9) < order[d["verdict"]]:
+            d["verdict"] = r["verdict"]
+        if r["verdict"] == "asterisk":
+            d["gate"].append(r["kind"])
+        elif r["verdict"] == "disclose":
+            d["disclose"].append(r["kind"])
+    return out
 
 
 def shown_units() -> pd.DataFrame:
@@ -135,14 +176,14 @@ def shown_units() -> pd.DataFrame:
 def unreviewed(S: pd.DataFrame | None = None):
     """(listing_id, why) for every shown unit without a current ok / asterisk verdict."""
     S = shown_units() if S is None else S
-    V = load_verdicts().drop_duplicates("listing_id", keep="last").set_index("listing_id")
+    V = by_unit()
     out = []
     for lid, b in zip(S.listing_id, S.building_id):
-        if lid not in V.index:
+        if lid not in V:
             out.append((lid, "no reviewed verdict: nobody has read this unit's evidence"))
-        elif V.at[lid, "verdict"] not in ("ok", "asterisk"):
-            out.append((lid, f"verdict is '{V.at[lid, 'verdict']}', so the unit must not be shown"))
-        elif V.at[lid, "evidence_hash"] != evidence_hash(b):
+        elif V[lid]["verdict"] not in SHOWABLE:
+            out.append((lid, f"verdict is '{V[lid]['verdict']}', so the unit must not be shown"))
+        elif V[lid]["hashes"] != {evidence_hash(b)}:
             out.append((lid, "the verdict was written against older evidence: the building's evidence rows have changed since the review"))
     return out
 
@@ -244,7 +285,10 @@ def add_lines(lines, numbered=None):
         why = p[4] if len(p) > 4 else ""
         quote = p[5] if len(p) > 5 else ""
         file = p[6] if len(p) > 6 else ""
-        if verdict not in ("ok", "asterisk", "remove") or (verdict != "ok" and (kind not in KINDS or not why)):
+        if verdict == "asterisk" and kind in DISCLOSURE_KINDS:
+            verdict = "disclose"
+        if verdict not in ("ok", "asterisk", "disclose", "remove") or (verdict != "ok" and (kind not in KINDS or not why)) \
+                or (verdict == "disclose" and kind not in DISCLOSURE_KINDS):
             bad.append(f"bad verdict line: {raw[:100]}")
             continue
         b = M.at[lid, "building_id"]
@@ -264,9 +308,11 @@ def add_lines(lines, numbered=None):
     if bad:
         print("\n".join(bad))
         raise SystemExit(f"{len(bad)} verdict line(s) rejected; nothing written")
-    V = pd.concat([V, pd.DataFrame(new, columns=COLS)], ignore_index=True).drop_duplicates("listing_id", keep="last")
-    V.sort_values(["verdict", "building_id", "listing_id"]).to_csv(VERDICTS, index=False)
-    print(f"verdicts written: {len(new)}; table now {len(V)} rows {V.verdict.value_counts().to_dict()}")
+    N_ = pd.DataFrame(new, columns=COLS)
+    # the lines given for a unit replace every earlier row of that unit (so a re-review can drop a kind)
+    V = normalise(pd.concat([V[~V.listing_id.isin(set(N_.listing_id))], N_], ignore_index=True))
+    V.sort_values(["verdict", "building_id", "listing_id", "kind"]).to_csv(VERDICTS, index=False)
+    print(f"verdict rows written: {len(new)} for {N_.listing_id.nunique()} units; table now {len(V)} rows for {V.listing_id.nunique()} units {V.verdict.value_counts().to_dict()}")
 
 
 def main():
@@ -294,7 +340,7 @@ def main():
     elif cmd == "restamp-check":
         V = load_verdicts()
         stale = [(r.listing_id, r.verdict) for r in V.itertuples() if r.evidence_hash != evidence_hash(r.building_id)]
-        print(f"{len(stale)} of {len(V)} verdicts were written against evidence that has since changed")
+        print(f"{len(stale)} of {len(V)} verdict rows were written against evidence that has since changed")
         for lid, vd in stale[:50]:
             print("  ", vd, lid)
 

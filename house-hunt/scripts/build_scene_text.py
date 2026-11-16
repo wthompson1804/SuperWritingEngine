@@ -78,18 +78,21 @@ HOOD_PAGE = {"pg_lo": ("all_in_lo", "usd50"), "pg_hi": ("all_in_hi", "usd50"), "
              "q_food": ("vq_food_and_drink_nearby", "int"), "q_green": ("vq_walk_to_green", "int")}
 # alias: (column of site/data.json#years, usual rounding)   the page's own tile figures
 YEAR_PAGE = {
-    "p_allin": ("all_in", "usd50"), "p_allin_lo": ("all_in_lo", "usd50"), "p_allin_hi": ("all_in_hi", "usd50"),
-    "p_sqft": ("sqft", "r10"), "p_drive": ("drive_min", "int"), "p_drive_lo": ("drive_min_lo", "int"),
-    "p_drive_hi": ("drive_min_hi", "int"), "p_transit": ("transit_min", "r5"),
+    "p_allin_lo": ("all_in_lo", "usd50"), "p_allin_hi": ("all_in_hi", "usd50"),
+    "p_drive_lo": ("drive_min_lo", "int"), "p_drive_hi": ("drive_min_hi", "int"),
     "p_viol": ("violent_per_1000", "1dp"), "p_prop": ("property_per_1000", "1dp"),
-    "p_rest": ("restaurants_800m", "int"), "p_parkwalk": ("park_walk_min", "int"),
-    "p_hoods": ("neighborhoods", "int"), "p_places": ("shown", "int"),
     "p_near": ("nearest_name", "str"), "p_near_drive": ("nearest_drive_min", "int"),
     "q_cost": ("vq_all_in", "int"), "q_sqft": ("vq_sqft", "int"), "q_drive": ("vq_drive_min", "int"),
     "q_food": ("vq_food_and_drink_nearby", "int"), "q_green": ("vq_walk_to_green", "int"),
 }
 # alias: (column of site/data.json#units, aggregation over the year's shown units, usual rounding)
 YEAR_UNITS = {
+    # the experience's headline figures: the median over the units SHOWN in it (2026-11-16: these used to be read from
+    # the page's tiles, which were computed over a wider set than the places listed)
+    "p_allin": ("all_in", "median", "usd50"), "p_sqft": ("sqft", "median", "r10"), "p_drive": ("drive_min", "median", "int"),
+    "p_transit": ("transit_min", "median", "r5"), "p_rest": ("restaurants_800m", "median", "int"),
+    "p_parkwalk": ("park_walk_min", "median", "int"), "p_places": ("listing_id", "count", "int"),
+    "p_hoods": ("hood_id", "nunique", "int"),
     "u_toll": ("toll_rt", "median", "int"), "u_tollmax": ("toll_rt", "max", "int"),
     "u_dogpark": ("dog_park_m", "median", "mi"), "u_super": ("supermarket_m", "median", "mi"),
     "u_cafes": ("cafes_800m", "median", "int"), "u_bars": ("bars_800m", "median", "int"),
@@ -98,6 +101,27 @@ YEAR_UNITS = {
     "u_pool": ("pool", "mean", "pct"), "u_doorman": ("doorman", "mean", "pct"), "u_gym": ("gym", "mean", "pct"),
     "u_laundry": ("in_unit_laundry", "mean", "pct"), "u_n": ("listing_id", "count", "int"),
 }
+# In a neighborhood with places on the page, these aliases are computed from the SHOWN units (the median unit, or the
+# commonest name), so the prose matches what the reader sees listed under it. alias: (column of #units, agg, rounding)
+HOOD_SHOWN = {
+    "rest": ("restaurants_800m", "median", "int"), "bars": ("bars_800m", "median", "int"),
+    "cafes": ("cafes_800m", "median", "int"), "rest1600": ("restaurants_1600m", "median", "int"),
+    "parkwalk": ("park_walk_min", "median", "int"), "dogpark": ("dog_park_m", "median", "mi"),
+    "super": ("supermarket_m", "median", "mi"), "sqft": ("sqft", "median", "r10"),
+    "drive": ("drive_min", "median", "int"), "transit": ("transit_min", "median", "int"),
+    "station": ("train_station_m", "median", "mi"),
+    "b_toll": ("toll_rt", "median", "int"), "b_tollmax": ("toll_rt", "max", "int"),
+    "b_tollok": ("toll_complete", "all_true", "str"),
+    "b_park": ("park", "mode", "str"), "b_dogpark": ("dog_park", "mode", "str"), "b_station": ("train_station", "mode", "str"),
+    "s_n": ("listing_id", "count", "int"),               # places shown
+    "s_open": ("open_gate", "mean", "pct"),               # share of them with a gate fact still to confirm
+    "s_bldgs": ("building_id", "nunique", "int"),
+}
+# The same for an experience: figures over the units shown in it (m_ + alias used to be the median neighborhood).
+YEAR_SHOWN = {"rest": ("restaurants_800m", "int"), "bars": ("bars_800m", "int"), "cafes": ("cafes_800m", "int"),
+              "rest1600": ("restaurants_1600m", "int"), "parkwalk": ("park_walk_min", "int"),
+              "dogpark": ("dog_park_m", "mi"), "super": ("supermarket_m", "mi"), "sqft": ("sqft", "r10"),
+              "drive": ("drive_min", "int"), "transit": ("transit_min", "r5"), "station": ("train_station_m", "mi")}
 CONVENTION = {
     "w10": ("10-minute walk", "restaurants_800m", "800 m radius, written as a 10-minute walk"),
     "mile": ("1 mile", "restaurants_1600m", "1,600 m radius, written as 1 mile"),
@@ -115,6 +139,9 @@ def resolve(alias, ctx):
         f, how = JAMAICA[alias]
         return LG, f, {"hood_id": "ny:jamaica"}, None, how
     if ctx["kind"] == "hood":
+        if alias in HOOD_SHOWN and (ctx["id"] in C.shown_hoods() or alias.startswith("s_")):
+            f, agg, how = HOOD_SHOWN[alias]
+            return PAGE_U, f, {"hood_id": ctx["id"]}, agg, how
         if alias in HOOD:
             f, how = HOOD[alias]
             return LG, f, {"hood_id": ctx["id"]}, None, how
@@ -133,6 +160,9 @@ def resolve(alias, ctx):
             return PAGE_U, f, {"year_label": ctx["id"]}, agg, how
         row = {"group_label": ctx["id"], "safety_cut": False}
         for pre, agg in (("m_", "median"), ("max_", "max"), ("min_", "min")):
+            if alias.startswith(pre) and alias[len(pre):] in YEAR_SHOWN:
+                f, how = YEAR_SHOWN[alias[len(pre):]]
+                return PAGE_U, f, {"year_label": ctx["id"]}, agg, how
             if alias.startswith(pre) and alias[len(pre):] in HOOD:
                 f, how = HOOD[alias[len(pre):]]
                 return LG, f, row, agg, how
@@ -258,8 +288,8 @@ def attach_rules(ctx, spec, texts, evidence):
 
 def attach_voices(ctx, spec, texts, evidence):
     claim = " ".join(s for t in texts.values() for s in C.sentences(t) if C.VOICE_PHRASE.search(s))
-    if not claim:
-        raise ValueError(f"{ctx['id']}: voices cited but no sentence says 'review sites' or 'people who live here'")
+    if not claim:                                     # the themes are listed, but no text paraphrases residents any more
+        return
     for theme in dict.fromkeys(t.strip() for t in spec.split(",") if t.strip()):
         row, n = {"hood_id": ctx["id"], "theme": theme}, 0
         for quotes_file in (QUOTES, QUOTES2):
@@ -282,6 +312,21 @@ def parse(path):
             cur = {"kind": "sub", "id": (m.group(1), m.group(2)), "rules": []}
             blocks.append(cur)
             continue
+        m = re.match(r"=== points: (hood)", line)
+        if m:                                             # conditional drafts for the icon points of a neighborhood
+            cur = {"kind": "points", "id": m.group(1), "rules": []}
+            blocks.append(cur)
+            continue
+        if cur is not None and cur["kind"] == "points":
+            if not line.startswith("==="):
+                head, sep, variants = line.partition("::")
+                parts = [x.strip() for x in head.split("|")]
+                if not sep or len(parts) < 3:
+                    raise ValueError(f"cannot read point draft: {line[:80]}")
+                topic, icon, conds = parts[0], parts[1], "|".join(parts[2:])
+                cur["rules"].append((topic, icon, [c.strip() for c in conds.split(",") if c.strip()],
+                                     [v.strip() for v in variants.split(" | ") if v.strip()]))
+                continue
         if cur is not None and cur["kind"] == "sub":
             if not line.startswith("==="):
                 conds, sep, variants = line.partition("::")
@@ -333,68 +378,76 @@ def hood_rules(hood_id, rule, pattern=None):
 
 
 SUB_MIN_WORDINGS = 5                                   # wordings per condition in the "=== sub:" drafts
+POINT_MIN_WORDINGS = 4                                 # wordings per line in the "=== points:" drafts
+POINT_SHARE = 0.08                                     # a point wording on at most 8% of the neighborhoods
+MAX_PLAIN_POINTS = 5                                   # plus the one warning
 SUB_USED = {}                                          # (kind, section) -> Counter of wordings used so far in this build
+
+
+def seeded(variants, key):
+    import hashlib
+    i = int(hashlib.sha1(key.encode()).hexdigest()[:8], 16) % len(variants)
+    return variants[i:] + variants[:i]
+
+
+def conds_hold(conds, ctx):
+    """Do all the conditions of a draft line hold for this row? -> (True, evidence items) or (False, []).
+    Every condition becomes an evidence item with a test, so the checker re-runs it after a data change."""
+    evs = []
+    for cond in conds:
+        m = COND.match(cond)
+        if not m:
+            raise ValueError(f"cannot read condition '{cond}'")
+        theme, sent, rule, pattern, alias, op, operand = m.groups()
+        operand = operand.strip()
+        if theme:                                     # v:parking:negative>=1  (residents' comments, both files)
+            if ctx["kind"] != "hood":
+                return False, []
+            n, items = 0, []
+            for qf in (QUOTES, QUOTES2):
+                row = {"hood_id": ctx["id"], "theme": theme}
+                counts = C.lookup(qf, "sentiment", row, "sentiment_counts")
+                n += int(dict(x.split("=") for x in counts.split(";"))[sent])
+                if counts != "positive=0;mixed=0;negative=0":
+                    items.append({"field": "sentiment", "value": counts, "source_file": qf, "row": row,
+                                  "agg": "sentiment_counts"})
+            if not C.holds(n, [op or ">=", operand or "1"]):
+                return False, []
+            evs += items
+        elif rule:                                    # rule:overnight_parking  (a found local rule applies here)
+            found = hood_rules(ctx["id"], rule, pattern) if ctx["kind"] == "hood" else []
+            if not found:
+                return False, []
+            f, muni, summary = found[0]
+            evs.append({"field": "summary", "value": summary, "source_file": f,
+                        "row": {"municipality": muni, "rule": rule, "value_type": "found"}, "agg": "any_row",
+                        "transform": "in_text", "shown": []})
+        else:
+            try:
+                src, field, row, agg, _ = resolve(alias, ctx)
+                value = C.lookup(src, field, row, agg)
+            except (KeyError, LookupError):
+                return False, []
+            test = [op, operand]
+            if not op or not C.holds(value, test):
+                return False, []
+            ev = {"field": field, "value": value, "source_file": src, "row": row, "holds_if": test}
+            if agg:
+                ev["agg"] = agg
+            evs.append(ev)
+    return True, evs
 
 
 def pick_sub(rules, ctx, salt, cap=None):
     """The first draft whose conditions all hold for this row -> (sentence, evidence). ('' , []) when none does.
-    Every condition becomes an evidence item with a test, so the checker re-runs it after a data change. The wording
-    is the first one, in an order seeded by the row's id, that has not reached `cap` uses in this build; when every
-    wording of the matching draft has, the subhead stays empty (better than the same line once more)."""
-    import hashlib
+    The wording is the first one, in an order seeded by the row's id, that has not reached `cap` uses in this build;
+    when every wording of the matching draft has, the subhead stays empty (better than the same line once more)."""
     from collections import Counter
     used = SUB_USED.setdefault((ctx["kind"], salt), Counter())
     for conds, variants in rules:
-        evs, ok = [], True
-        for cond in conds:
-            m = COND.match(cond)
-            if not m:
-                raise ValueError(f"cannot read condition '{cond}'")
-            theme, sent, rule, pattern, alias, op, operand = m.groups()
-            operand = operand.strip()
-            if theme:                                     # v:parking:negative>=1  (residents' comments, both files)
-                if ctx["kind"] != "hood":
-                    ok = False
-                    break
-                n, items = 0, []
-                for qf in (QUOTES, QUOTES2):
-                    row = {"hood_id": ctx["id"], "theme": theme}
-                    counts = C.lookup(qf, "sentiment", row, "sentiment_counts")
-                    n += int(dict(x.split("=") for x in counts.split(";"))[sent])
-                    if counts != "positive=0;mixed=0;negative=0":
-                        items.append({"field": "sentiment", "value": counts, "source_file": qf, "row": row,
-                                      "agg": "sentiment_counts"})
-                if not C.holds(n, [op or ">=", operand or "1"]):
-                    ok = False
-                    break
-                evs += items
-            elif rule:                                    # rule:overnight_parking  (a found local rule applies here)
-                found = hood_rules(ctx["id"], rule, pattern) if ctx["kind"] == "hood" else []
-                if not found:
-                    ok = False
-                    break
-                f, muni, summary = found[0]
-                evs.append({"field": "summary", "value": summary, "source_file": f,
-                            "row": {"municipality": muni, "rule": rule, "value_type": "found"}, "agg": "any_row",
-                            "transform": "in_text", "shown": []})
-            else:
-                try:
-                    src, field, row, agg, _ = resolve(alias, ctx)
-                    value = C.lookup(src, field, row, agg)
-                except (KeyError, LookupError):
-                    ok = False
-                    break
-                test = [op, operand]
-                if not op or not C.holds(value, test):
-                    ok = False
-                    break
-                ev = {"field": field, "value": value, "source_file": src, "row": row, "holds_if": test}
-                if agg:
-                    ev["agg"] = agg
-                evs.append(ev)
+        ok, evs = conds_hold(conds, ctx)
         if ok:
-            i = int(hashlib.sha1(f"{ctx['id']}|{salt}".encode()).hexdigest()[:8], 16) % len(variants)
-            for text in variants[i:] + variants[:i]:
+            for text in seeded(variants, f"{ctx['id']}|{salt}"):
                 if cap is None or used[text] < cap:
                     used[text] += 1
                     return text, [{"claim": text, **e} for e in evs]
@@ -402,6 +455,71 @@ def pick_sub(rules, ctx, salt, cap=None):
     return "", []
 
 
+def hood_points(rules, ctx, evidence, cap=None):
+    """The icon points of a neighborhood, from the "=== points: hood" drafts -> [{icon, text}].
+    Each draft line is `topic | icon | conditions :: wording | wording`. The first `warning` line whose conditions
+    hold is the one honest catch; then, in the order written, the first matching line of each other topic, up to
+    MAX_PLAIN_POINTS, skipping the topic the warning already covers. The warning is listed last."""
+    from collections import Counter
+    used = SUB_USED.setdefault(("hood", "points"), Counter())
+
+    def take(topic, icon, conds, variants):
+        ok, evs = conds_hold(conds, ctx)
+        if not ok:
+            return None
+        order = seeded(variants, f"{ctx['id']}|point|{topic}")
+        order = [v for v in order if cap is None or used[v] < cap] or order
+        for raw in order:
+            trial = []
+            try:
+                text = render(raw, ctx, trial)
+            except (ValueError, LookupError, KeyError):
+                continue
+            if text:
+                used[raw] += 1
+                evidence.extend(trial + [{"claim": text, **e} for e in evs])
+                return {"icon": icon, "text": text}
+        return None
+
+    warning, w_topic = None, None
+    for topic, icon, conds, variants in rules:
+        if icon == "warning":
+            warning = take(topic, icon, conds, variants)
+            if warning:
+                w_topic = topic
+                break
+    points, topics = [], {w_topic}
+    for topic, icon, conds, variants in rules:
+        if icon == "warning" or topic in topics or len(points) >= MAX_PLAIN_POINTS:
+            continue
+        got = take(topic, icon, conds, variants)
+        if got:
+            points.append(got)
+            topics.add(topic)
+    return points + ([warning] if warning else [])
+
+
+def written_points(spec, ctx, evidence):
+    """`points: icon | text ;; icon | text` in an experience block -> [{icon, text}]. A point whose text renders
+    empty (every optional stretch dropped) is left out."""
+    out = []
+    for part in [x.strip() for x in spec.split(";;") if x.strip()]:
+        icon, _, raw = part.partition("|")
+        text = render(raw.strip(), ctx, evidence)
+        if text:
+            out.append({"icon": icon.strip(), "text": text})
+    return out
+
+
+def written_moments(f, ctx, evidence):
+    out = []
+    for key, title in zip(MOMENTS, C.MOMENT_TITLES):
+        icon, _, raw = f[key].partition("|")
+        out.append({"icon": icon.strip(), "title": title, "text": render(raw.strip(), ctx, evidence)})
+    return out
+
+
+MOMENTS = ["moment1", "moment2", "moment3"]           # a weekday, Saturday night, Sunday with Mom and Dad
 YEAR_COLS = {"display": "display_label", "tagline": "tagline", "subhead": "subhead", "scene": "scene", "promise": "promise", "catch": "catch",
              "host_intro": "host_intro"}
 HOOD_COLS = {"scene": "scene", "good": "good_for_her", "watch": "watch_for", "host_intro": "host_intro"}
@@ -413,6 +531,13 @@ def main():
     years, hoods, errors, stale = [], [], [], []
     blocks = parse(SOURCE)
     subs = {b["id"]: b["rules"] for b in blocks if b["kind"] == "sub"}
+    point_rules = next((b["rules"] for b in blocks if b["kind"] == "points"), [])
+    for topic, icon, conds, variants in point_rules:
+        if icon not in C.ICONS:
+            errors.append(f"points [{topic}]: unknown icon '{icon}'")
+        if len(set(variants)) < POINT_MIN_WORDINGS:
+            errors.append(f"points [{topic} | {icon} | {', '.join(conds)}]: {len(set(variants))} wordings, wanted at "
+                          f"least {POINT_MIN_WORDINGS}")
     SUB_USED.clear()
     for (kind, section), rules in subs.items():
         for conds, variants in rules:
@@ -421,9 +546,10 @@ def main():
                               f"wanted at least {SUB_MIN_WORDINGS}")
     n_hoods = sum(1 for b in blocks if b["kind"] == "hood" and b["id"] in lg.index)
     sub_cap = {"hood": int(n_hoods * C.SUB_SHARE), "year": None}
+    point_cap = max(3, int(n_hoods * POINT_SHARE))
     closes = {}
     for b in blocks:
-        if b["kind"] == "sub":
+        if b["kind"] in ("sub", "points"):
             continue
         ctx, f, evidence = {"kind": b["kind"], "id": b["id"]}, b["f"], []
         cols = YEAR_COLS if b["kind"] == "year" else HOOD_COLS
@@ -431,12 +557,14 @@ def main():
             stale.append(b["id"])
             continue
         try:
-            lacking = [k for k in list(cols) + (WALK if b["kind"] == "year" else []) if not f.get(k)]
+            lacking = [k for k in list(cols) + (WALK + MOMENTS + ["points"] if b["kind"] == "year" else []) if not f.get(k)]
             if lacking:
                 raise ValueError(f"{b['id']}: no text for {lacking}")
             texts = {out: render(f[src], ctx, evidence) for src, out in cols.items()}
             if b["kind"] == "year":
                 texts["host_walkthrough"] = "\n\n".join(render(f[k], ctx, evidence) for k in WALK)
+                texts["about_points_json"] = json.dumps(written_points(f["points"], ctx, evidence), ensure_ascii=False)
+                texts["day_moments_json"] = json.dumps(written_moments(f, ctx, evidence), ensure_ascii=False)
             if b["kind"] == "hood":
                 if f.get("rules"):
                     attach_rules(ctx, f["rules"], texts, evidence)
@@ -456,6 +584,9 @@ def main():
                 texts["sub_" + section], evs = pick_sub(subs.get((b["kind"], section), []), ctx, section,
                                                          sub_cap[b["kind"]])
                 evidence += evs
+            if b["kind"] == "hood":
+                texts["about_points_json"] = json.dumps(hood_points(point_rules, ctx, evidence, point_cap),
+                                                        ensure_ascii=False)
             problems, _ = C.check_row(b["kind"], b["id"], texts, evidence)
             errors += [f"{b['id']}: {p}" for p in problems]
         except (KeyError, ValueError, LookupError) as e:

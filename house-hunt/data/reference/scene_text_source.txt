@@ -502,7 +502,7 @@ voices: safety
 === hood: ny:jamaica
 scene: This is your parents' neighborhood, about {drive} minutes from them by car. Most homes are rented apartments in large buildings{!renters>=0.8}{!bigbldg>=0.7}. About {rest} restaurants, {bars} bar and {cafes} cafés sit within a {w10}. A supermarket is {super} miles away and a park about {parkwalk} minutes on foot. There are no tolls{!b_toll==0}{!b_tollok==True}.
 good: You could be at your parents' door in minutes, and daily errands are on foot.
-watch: The nearest dog run is {dogpark} miles away, and the neighborhood sits at the safety limit we set{!viol>=8}.
+watch: The nearest dog run is {dogpark} miles away, so the dog's daily exercise takes a trip.
 
 === hood: ny:jamaica-hills-briarwood
 scene: Briarwood is a quiet apartment area a short drive from your parents, about {drive} minutes. About {rest} restaurants, {bars} bars and {cafes} cafés are within a {w10}, and {rest1600} restaurants within {mile}. A park is about {parkwalk} minutes on foot. There are no tolls{!b_toll==0}{!b_tollok==True}.
@@ -536,7 +536,7 @@ voices: parking
 === hood: ny:east-new-york-north-
 scene: These are old blocks: {pre1940} percent of homes went up before 1940. About {rest} restaurants and {bars} bar are within a {w10}. A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away. Your parents are about {drive} minutes away by car, with no tolls{!b_toll==0}{!b_tollok==True}.
 good: Your parents are about {drive} minutes away and a park is close.
-watch: It sits close to the safety limit we set{!viol>=8}, and only {rest} restaurants are within a {w10}.
+watch: Only {rest} restaurants are within a {w10}.
 
 === hood: ny:murray-hill-broadway-flushing
 scene: This quieter side of Flushing still has plenty nearby: about {rest} restaurants, {bars} bars and {cafes} cafés within a {w10}. A small green is about {parkwalk} minutes on foot and the train station {station} miles away. Your parents are about {drive} minutes away by car, with no tolls{!b_toll==0}{!b_tollok==True}.
@@ -603,7 +603,7 @@ voices: dogs_green
 === hood: ny:east-harlem-south-
 scene: East Harlem is dense Manhattan with a lot on foot: about {rest} restaurants, {bars} bars and {cafes} cafés within a {w10}. A park is about {parkwalk} minutes on foot and a dog run {dogpark} miles away. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
 good: The dog run, park and Trader Joe's{!tj<=2000} are all close.
-watch: {nocar} percent of households have no car, so parking is very limited, and the neighborhood sits close to the safety limit we set{!viol>=8}.
+watch: {nocar} percent of households have no car, so parking is very limited.
 
 === hood: ny:madison
 scene: Madison is a calm residential part of southern Brooklyn. About {rest} restaurants and {cafes} cafés are within a {w10}, and {rest1600} restaurants within {mile}. A park is about {parkwalk} minutes on foot and the beach is {beach} miles away. Your parents are about {drive} minutes away by car, with no tolls{!b_toll==0}{!b_tollok==True}.
@@ -613,7 +613,7 @@ watch: There are no bars within a {w10}{!bars==0}, the dog run is {dogpark} mile
 === hood: ny:harlem-north-
 scene: Upper Harlem is old apartment blocks where nearly everyone rents{!renters>=0.9}. About {rest} restaurants, {bars} bars and {cafes} cafés are within a {w10}. A park is about {parkwalk} minutes on foot, a dog run {dogpark} miles away and Trader Joe's {tj} miles. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
 good: Park, dog run, vet and groceries are all within {tj} miles{!vet<=1200}, and many neighbors live alone{!alone>=0.5}.
-watch: {nocar} percent of households have no car, so parking is very limited, and the neighborhood sits close to the safety limit we set{!viol>=8}.
+watch: {nocar} percent of households have no car, so parking is very limited.
 
 === hood: ny:sheepshead-bay-manhattan-beach-gerritsen-beach
 scene: Sheepshead Bay is a waterside neighborhood with the beach {beach} miles away. About {rest} restaurants and {cafes} cafés sit within a {w10}. A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away. Your parents are about {drive} minutes away by car, with no tolls{!b_toll==0}{!b_tollok==True}.
@@ -675,7 +675,7 @@ watch: The nearest park is about {parkwalk} minutes on foot and the dog run is {
 === hood: ny:williamsbridge-olinville
 scene: Williamsbridge runs beside a long river park{!parkha>=20}, about {parkwalk} minutes on foot. A supermarket is {super} miles away. About {rest} restaurants are within a {w10}. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
 good: The park is close, and residents on review sites mention parks and shops nearby.
-watch: It sits right at the safety limit we set{!viol>=8}, and there are no bars within a {w10}{!bars==0}.
+watch: [[There are no bars within a {w10}{!bars==0}, so the late night is somewhere else.]][[Bars are few, about {bars} within a {w10}{!bars>0}, so the late night is often somewhere else.]]
 voices: dogs_green
 
 === hood: ny:bensonhurst

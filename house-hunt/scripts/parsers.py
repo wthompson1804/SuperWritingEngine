@@ -349,9 +349,16 @@ _FREE_NEAR = (r"(?:\bfree\b|complimentary|\bincluded\b|no (?:extra |additional )
               + r"\b[^,;.]{0,45}(?:\bfree\b|\bincluded\b|no (?:extra |additional )?(?:charge|cost)|complimentary|at no (?:cost|charge))")
 
 
+OFFSITE_PARKING = re.compile(r"\boff[- ]?site\b|\b(?:\d+|one|two|three|four|five|a few|several) blocks? away\b|\bnearby (?:public |municipal )?(?:garage|lot)\b", re.I)
+
+
 def parking_kind(text) -> str:
     """'garage', 'covered', 'lot', 'street' or '' from a parking sentence (the words rank.py scores)."""
     t = str(text or "").lower()
+    if OFFSITE_PARKING.search(t):
+        # independent check 3, D10 (30 Broad Street): "Offsite parking ... 2 blocks away covered" is not covered parking at
+        # the building. It is its own kind, scored like a lot (off the street, but not where she lives).
+        return "offsite"
     if re.search(r"garage|gated|underground|indoor|\bdeck\b", t) and not re.search(r"no garage|garage_lot: fee", t):
         return "garage"
     if re.search(r"(?<!un)covered|carport", t):
@@ -513,6 +520,11 @@ def monthly_fees_from_text(text, unit=""):
         return float(m.group(1)), "the site's total of priced required fees" + ("; some required items have no published amount" if "amount not stated" in tl else "")
     if re.search(r"included in (?:the )?(?:advertised |listed |base )?rent", tl) and not re.search(AMT, tl):
         return 0.0, "stated as included in the advertised rent"
+    m = re.match(r"\s*" + AMT + r"\s*(?:/\s*mo(?:nth)?\.?|a month|per month|monthly)?\s*\((?:the )?total[_ ]price (?:minus|less) (?:the )?base[_ ](?:price|rent)[^)]*\)", t, re.I)
+    if m:
+        # independent check 3, D14 (1 Kennedy Flats): "$90/mo (total_price minus base_price); $50 amenity fee named".
+        # The first figure IS the total of the required fees; whatever is named after it is a part of it, never added.
+        return _f(m.group(1), m.group(2)), "the page's total price minus its base price (the fees named beside it are parts of this total)"
     if re.fullmatch(r"\$?\s*\d+(?:\.\d+)?(?:\s*/\s*mo(?:nth)?)?", tl):
         v = money(tl)
         return (v, "parsed from the fee text") if v <= 400 else (None, f"${v:g} not counted: no monthly wording")
@@ -996,7 +1008,9 @@ def staleness(modified, read_on, available_date="", second_source=False):
 
 
 # ---- step 4c: an elevator known only from a listing site's amenity list
-_ELEV_CONTRA = re.compile(r"own (?:site|pages?|feature list|features? (?:list|page)|amenit\w+ page)[^.;|]{0,40}(?:never mention|not mention|(?:does|do) not (?:list|mention|state)|omits?|lists? no|no elevator|none either|did not state)|"
+_ELEV_CONTRA = re.compile(r"not (?:listed|mentioned|stated|found|shown|named) on [^.;|]{0,50}own (?:site|pages?|web ?site)|"
+                          r"(?:community|building|unit)(?:'s)? features[^.;|]{0,80}do(?:es)? not include an elevator|"
+                          r"own (?:site|pages?|feature list|features? (?:list|page)|amenit\w+ page)[^.;|]{0,40}(?:never mention|not mention|(?:does|do) not (?:list|mention|state)|omits?|lists? no|no elevator|none either|did not state)|"
                           r"(?:own site|manager'?s? (?:own )?page|building'?s? (?:own )?(?:site|page)|\w+'s page for the building|page for the building)[^.|]{0,140}(?:does not mention|do not mention|and no elevator|no elevator)|"
                           r"own pages never mention|omits? it|select buildings|walk-?up|my reading: (?:unlikely|no elevator|probably (?:a walk|no|not))|"
                           r"which buildings have|not established|only in (?:some|select|certain)", re.I)
@@ -1024,3 +1038,58 @@ def elevator_row_kind(value, quote, source_is_aggregator, status):
     if not positive:
         return "none"
     return "stated" if source_is_aggregator else ("own" if status == "confirmed" else "none")
+
+
+# ---- independent check 3
+# D1 (98-76 Queens Blvd 2M): a checker's note that the PRICE itself needs verifying is an open "listing" fact.
+PRICE_DOUBT = re.compile(r"verify the price|far below (?:the )?(?:area|market|neighbou?rhood|other listings)|price (?:looks|seems|is) (?:too low|suspicious|implausib\w+)|"
+                         r"too good to be true|well below (?:the )?market|confirm the price (?:by phone )?before", re.I)
+
+
+def price_doubt(note) -> bool:
+    return bool(PRICE_DOUBT.search(str(note or "")))
+
+
+def building_prefix(unit) -> str:
+    """The building part of a unit label in a multi-building complex, or ''.
+      '09-326', '3-329', 'B9-309', 'PA-405', 'K3-02', 'PA 112'  -> the part before the separator ('09', '3', 'B9', 'PA', 'K3')
+      '5201', '2303', '4234' (four digits whose second digit is 1-4: building, floor, two-digit unit) -> the first digit
+    A plain label ('305', '4F', '12B', '1205' read as floor 12 is NOT excluded here: see multi_building_labels)."""
+    u = clean_unit(unit).strip()
+    m = re.fullmatch(r"([a-z]{0,2}\d{0,3}|[a-z]{1,3})[\s-]+[a-z]?\d{2,4}[a-z]?", u)
+    if m and m.group(1):
+        return m.group(1).lstrip("0") or "0"
+    m = re.fullmatch(r"([1-9])([1-4])\d\d", u)
+    return m.group(1) if m else ""
+
+
+def multi_building_labels(units) -> bool:
+    """True when the unit labels of one complex carry two or more different building numbers (building_prefix).
+    Used with 'no height of 4+ floors on any page or record' for the garden-style rule (owner, 2026-11-16)."""
+    return len({building_prefix(u) for u in units if building_prefix(u)}) >= 2
+
+
+def ground_digit_positions(removed_labels):
+    """Sibling consistency (independent check 3, D2: Halstead Parsippany 2182). removed_labels: unit labels of ONE
+    building that a reviewer removed because "the unit number reads as floor 1". Returns (length, [positions]) where
+    every removed label has that many characters in its last segment and the digit '1' at each position, i.e. the place
+    in the label the reviewer read as the floor. (0, []) when the labels share no such shape (nothing is inferred)."""
+    tails = [unit_tail(u) if re.search(r"[^a-z0-9]", clean_unit(u)) else unit_key(u) for u in removed_labels]
+    tails = [t for t in tails if t]
+    if len(tails) < 2 or len({len(t) for t in tails}) != 1:
+        return 0, []
+    n = len(tails[0])
+    pos = [i for i in range(n - 2) if all(t[i] == "1" for t in tails)]      # the last two characters are the unit on the floor
+    # where every label ALSO shares its leading digit (building 2 in '2153', '2158' ...), that digit is the building, not the floor
+    if len(pos) > 1:
+        pos = pos[-1:]
+    return (n, pos) if pos else (0, [])
+
+
+def reads_as_ground_like_siblings(unit, removed_labels) -> bool:
+    """True when `unit` has the same shape as the removed siblings and '1' in the place they carry the floor."""
+    n, pos = ground_digit_positions(removed_labels)
+    if not n:
+        return False
+    t = unit_tail(unit) if re.search(r"[^a-z0-9]", clean_unit(unit)) else unit_key(unit)
+    return len(t) == n and t.isdigit() == all(x.isdigit() for x in [t]) and all(t[i] == "1" for i in pos)

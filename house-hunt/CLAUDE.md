@@ -90,3 +90,6 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
   Saving is unlimited ("My list"); compare any two or three ticked from the list; Save sits at the top and bottom of a
   building page. Each experience gets an illustration. Ratings from review sites are shown as information; no drop rule
   is applied until the owner chooses one.
+- **Fix what does not land (Will, 2026-11-16, standing):** when something is visibly weak (an illustration, a line of
+  text, a layout, a number that does not hold up), revise it without asking, then say what was changed. This does not
+  cover changing the owner's rules (gates, cap, safety rule, what is shown or dropped): those still go to him.
