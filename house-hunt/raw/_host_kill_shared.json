@@ -42,5 +42,17 @@
   "time": "2026-11-16T00:46:25+00:00",
   "url": "https://visitnj.org/city/long-branch",
   "by": "scripts/neighborhood_descriptions_round2.py"
+ },
+ "www.504glenbrook.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.504glenbrook.com/",
+  "at": "2026-11-16T01:06:59+00:00",
+  "by": "ratings_census_part3"
+ },
+ "www.loftsat335.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.loftsat335.com/contactus",
+  "at": "2026-11-16T01:07:03+00:00",
+  "by": "ratings_census_part3"
  }
 }

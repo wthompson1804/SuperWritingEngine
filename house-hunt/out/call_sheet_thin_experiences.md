@@ -26,7 +26,7 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
   - Phone (supplied): (833) 545-9820. Hours: Mon 10am-6pm; Tue 11am-7pm; Wed 10am-6pm; Thu 11am-7pm; Fri 10am-6pm; Sat-Sun 10am-4pm. Site: [ironstate.com/property/harrison-station/index.aspx](https://ironstate.com/property/harrison-station/index.aspx).
   - Answer: ____________________
 - [ ] **Vermella Harrison**, Harrison: 6 unit(s) from $2229. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p17724/vermella-harrison-harr](https://www.zumper.com/apartment-buildings/p17724/vermella-harrison-harrison-nj)
-  - Phone (office): (833) 840-5273. Hours: Mon-Tue 9am-5pm; Wed 1pm-5pm; Thu-Sat 9am-5pm. Site: [tours.vermellaharrison.com/](https://tours.vermellaharrison.com/).
+  - Phone (office): (833) 840-5273. Hours: Mon-Tue 9am-5pm; Wed 1pm-5pm; Thu-Sat 9am-5pm. Site: [vermellaharrison.com/floorplans](https://vermellaharrison.com/floorplans).
   - Answer: ____________________
 - [ ] **The Brunswick**, New Brunswick: 6 unit(s) from $2169. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p121274/riverwatch-commons-ne](https://www.zumper.com/apartment-buildings/p121274/riverwatch-commons-new-brunswick-nj)
   - Phone (office): (732) 435-0151. Hours: Mon-Fri 09:00-18:00; Sat 10:00-17:00. Site: [livethebrunswick.com/](https://www.livethebrunswick.com/).
@@ -62,7 +62,7 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
   - Phone (supplied): (732) 828-4108. Hours: Mon-Tue 9:30am-8:00pm; Wed-Thu 9:30am-6:00pm; Fri 9:30am-4:00pm; Sun 10:00am-6:00pm. Site: [oxfordrealtygroup.com/properties/new-jersey/skyline-tower/](http://www.oxfordrealtygroup.com/properties/new-jersey/skyline-tower/).
   - Answer: ____________________
 - [ ] **Avalon North Bergen**, North Bergen: 2 unit(s) from $2650. Ask: Is there a passenger elevator that serves this unit's floor? [avaloncommunities.com/new-jersey/north-bergen-apartments/ava](https://www.avaloncommunities.com/new-jersey/north-bergen-apartments/avalon-north-bergen/apartment/NJ015-NJ015-001-523)
-  - Phone (office): (551) 231-1413. Hours: Mon-Sun 9am-7pm. Site: [avaloncommunities.com/new-jersey/north-bergen-apartments/ava](https://www.avaloncommunities.com/new-jersey/north-bergen-apartments/avalon-north-bergen).
+  - Phone (office): (551) 231-1413. Hours: Mon-Sun 9am-7pm. Site: [avaloncommunities.com/new-jersey/north-bergen-apartments/ava](https://www.avaloncommunities.com/new-jersey/north-bergen-apartments/avalon-north-bergen/apartment/NJ015-NJ015-001-523).
   - Answer: ____________________
 - [ ] **The George New Brunswick**, New Brunswick: 1 unit(s) from $2334. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p32449/the-george-new-brunswi](https://www.zumper.com/apartment-buildings/p32449/the-george-new-brunswick-new-brunswick-nj)
   - Phone (office): (848) 200-9044. Hours: Mon-Fri 09:00-18:00; Sat 10:00-17:00. Site: [thegeorgenewbrunswick.com/](https://www.thegeorgenewbrunswick.com/).
@@ -71,7 +71,7 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
   - Phone (supplied): (201) 348-0207. Hours: Mon-Thu 10am-7pm; Fri 10am-3pm; Sun 10am-6pm. Site: [oxfordrealtygroup.com/communities/plaza-53/](https://www.oxfordrealtygroup.com/communities/plaza-53/).
   - Answer: ____________________
 - [ ] **Merritt River**, Norwalk: 1 unit(s) from $2275. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [merrittriver.com/floorplans/](https://www.merrittriver.com/floorplans/)
-  - Phone (office): (203) 884-6366. Hours: Mon-Fri 9:00am-5:00pm. Site: [merrittriver.com/](https://www.merrittriver.com/).
+  - Phone (office): (203) 884-6366. Hours: Mon-Fri 9:00am-5:00pm. Site: [merrittriver.com/floorplans/](https://www.merrittriver.com/floorplans/).
   - Answer: ____________________
 - [ ] **Brim and Crown**, Norwalk: 10 unit(s) from $2192. Ask: Which unit is this and when is it available (must be on or before Dec 15)? [zumper.com/apartment-buildings/p499811/brim-and-crown-east-n](https://www.zumper.com/apartment-buildings/p499811/brim-and-crown-east-norwalk-norwalk-ct)
   - Phone (tracking): (844) 325-6407 ext. 8055. Hours: Mon-Thu 9am-6pm; Fri 9am-5pm; Sat 10am-5pm. Site: [brimcrown.com/](https://www.brimcrown.com/).
@@ -155,7 +155,7 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
 ## The Quiet-Street Experience (13 buildings, 97 units; 8 with a real office number)
 
 - [ ] **Avalon W Squared At Princeton Junction**, Princeton: 65 unit(s) from $2395. Ask: Is there a passenger elevator that serves this unit's floor? [avaloncommunities.com/new-jersey/west-windsor-apartments/ava](https://www.avaloncommunities.com/new-jersey/west-windsor-apartments/avalon-w-squared-at-princeton-junction/apartment/NJ034-NJ034-500-3085)
-  - Phone (office): (833) 853-6223. Hours: Mon-Thu 9:30am-6:30pm; Fri-Sat 8:30am-5:30pm; Sun 9:30am-5:30pm. Site: [avaloncommunities.com/new-jersey/west-windsor-apartments/ava](https://www.avaloncommunities.com/new-jersey/west-windsor-apartments/avalon-w-squared-at-princeton-junction/).
+  - Phone (office): (833) 853-6223. Hours: Mon-Thu 9:30am-6:30pm; Fri-Sat 8:30am-5:30pm; Sun 9:30am-5:30pm. Site: [avaloncommunities.com/new-jersey/west-windsor-apartments/ava](https://www.avaloncommunities.com/new-jersey/west-windsor-apartments/avalon-w-squared-at-princeton-junction/apartment/NJ034-NJ034-500-3085).
   - Answer: ____________________
 - [ ] **Chatham Hill Apartments**, Chatham: 8 unit(s) from $2604. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/chatham/chatham-hill-apartments--1](https://www.apartmentlist.com/nj/chatham/chatham-hill-apartments--1)
   - Phone (supplied): (877) 560-9104. Hours: Mon-Wed 9am-6pm; Thu 9am-7pm; Fri 9am-6pm; Sat 10am-5pm; Sun 11am-5pm.
@@ -170,10 +170,10 @@ How to read the phone: **office** = the building's own site; **supplied** = the 
   - Phone (supplied): (833) 355-2544. Hours: Mon-Fri 8:30am-4:30pm. Site: [goldberg-realty.com/nj/short-hills/510-millburn-avenue/index](https://www.goldberg-realty.com/nj/short-hills/510-millburn-avenue/index.aspx).
   - Answer: ____________________
 - [ ] **Avalon Princeton**, Princeton: 3 unit(s) from $2550. Ask: Is there a passenger elevator that serves this unit's floor? [avaloncommunities.com/new-jersey/princeton-apartments/avalon](https://www.avaloncommunities.com/new-jersey/princeton-apartments/avalon-princeton/apartment/NJ024-NJ024-001-1256)
-  - Phone (office): (609) 831-4684. Hours: Mon-Sun 9am-7pm. Site: [avaloncommunities.com/new-jersey/princeton-apartments/avalon](https://www.avaloncommunities.com/new-jersey/princeton-apartments/avalon-princeton).
+  - Phone (office): (609) 831-4684. Hours: Mon-Sun 9am-7pm. Site: [avaloncommunities.com/new-jersey/princeton-apartments/avalon](https://www.avaloncommunities.com/new-jersey/princeton-apartments/avalon-princeton/apartment/NJ024-NJ024-001-1256).
   - Answer: ____________________
 - [ ] **Modera Berkeley Heights**, Berkeley Heights: 2 unit(s) from $2408. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/nj/new-providence/modera-berkeley-heights](https://www.apartmentlist.com/nj/new-providence/modera-berkeley-heights)
-  - Phone (office): (561) 998-4465. Hours: Mon-Thu 10am-6pm; Fri-Sat 10am-5pm. Site: [moderaberkeleyheights.com/](https://www.moderaberkeleyheights.com/).
+  - Phone (supplied): (908) 944-9200. Hours: Mon-Thu 10am-6pm; Fri-Sat 10am-5pm. Site: [moderaberkeleyheights.com/](https://www.moderaberkeleyheights.com/).
   - Answer: ____________________
 - [ ] **Creekline at Fairfield**, Fairfield: 2 unit(s) from $2471. Ask: Is there a passenger elevator that serves this unit's floor? [apartmentlist.com/ct/bridgeport/creekline-at-fairfield](https://www.apartmentlist.com/ct/bridgeport/creekline-at-fairfield)
   - Phone (supplied): (475) 265-6245. Hours: Tue-Wed 9am-5:30pm; Thu 10am-6:30pm; Fri-Sat 9am-5:30pm. Site: [livecreeklineapts.com/](https://www.livecreeklineapts.com/).

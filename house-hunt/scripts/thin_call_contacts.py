@@ -248,7 +248,7 @@ def candidates_for(b, idx, spages, sites, slugs):
             cands.append(c)
     own = [bc.clean_url(c["site"]) for c in cands if c.get("site")]
     if sites.get(b["bkey"]):
-        own.insert(0, sites[b["bkey"]])
+        own.append(sites[b["bkey"]])
     own += [u for _, u, _ in named_own]
     own += [bc.clean_url(u) for u in urls if bc.is_own(u) and "?" not in u]
     own = [u for u in dict.fromkeys(own) if u and bc.is_own(u)]
@@ -284,13 +284,18 @@ def build_row(b, cands, own):
     if managed:                                  # a building-level page exists: a unit broker's line is not the office
         with_phone = [c for c in with_phone if c["kind"] == "leasing office"] or with_phone
     # own-site pages can carry several numbers; take the one most own-site pages agree on
-    top = [c for c in with_phone if c["rank"] <= 10]
+    local = lambda p: p[1:4] in bc.LOCAL_CODES or bc.is_tollfree(p)
+    supplied_local = any(10 < c["rank"] <= 30 and local(c["phone"]) for c in with_phone)
+    # a manager's portfolio site can show its head office (e.g. a Florida number for a New Jersey building):
+    # an out-of-area own-site number gives way to a local number the property itself supplied
+    top = [c for c in with_phone if c["rank"] <= 10 and (local(c["phone"]) or not supplied_local)]
     if top:
         n = Counter(c["phone"] for c in top)
         top.sort(key=lambda c: (-n[c["phone"]], c["rank"], c["src"]))
         best = top[0]
     else:
-        best = with_phone[0] if with_phone else None
+        rest = [c for c in with_phone if c["rank"] > 10] or with_phone
+        best = rest[0] if rest else None
     row = {k: "" for k in COLS}
     row.update(year=q["year"], hood=q["hood"], building=q["building"], addr_key=b["bkey"], example_url=q["example_url"],
                question=q["question"], units=q["units"], min_rent=q["min_rent"])

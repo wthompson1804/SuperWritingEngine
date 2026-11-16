@@ -190,6 +190,10 @@ def main():
             if o is not None:
                 u["contact"] = {"phone": o.leasing_phone, "hours": o.office_hours or c.office_hours or None, "site": o.own_site_url or c.leasing_url or None,
                                 "kind": "leasing office", "note": None, "source": o.phone_page_url}
+            elif c.contact_kind in ("broker", "individual owner"):
+                # a number on a single listing may be one agent's or owner's own line: never shown; go through the listing page
+                u["contact"] = {"phone": None, "hours": None, "site": c.leasing_url or None, "kind": c.contact_kind,
+                                "note": "Listed by a broker or the owner: get in touch through the listing page.", "source": None}
             elif c.leasing_phone or c.leasing_url:
                 u["contact"] = {"phone": c.leasing_phone or None, "hours": c.office_hours or None, "site": c.leasing_url or None, "kind": c.contact_kind or None,
                                 "note": c.note or None, "source": c.leasing_phone_source_url or None}

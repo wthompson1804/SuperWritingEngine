@@ -123,3 +123,61 @@ The other 104 open units need two or three answers (mostly elevator + dogs on si
 `funnel.json`, `candidates.csv`, `candidate_buildings.csv`, `building_sites.csv`, `site_pages.jsonl`,
 `secondary_urls.csv`, `fetch_log.jsonl`, `request_log.jsonl`, `refused_hosts.json`, `hood_cache.json`, run logs.
 Raw pages: `raw/resolve_pending_b18/`.
+
+## Contacts for the call list (2026-11-16, `scripts/thin_call_contacts.py`)
+
+Adds a phone, office hours and the building's own leasing URL to the 82 one-question buildings. Outputs:
+`data/evidence_pending/open_questions_contacts.csv` (all 82) and `out/call_sheet_thin_experiences.md` (78: the four
+buildings with an all-in warning are left out and named in the sheet's last line). Both are rebuilt whole on each run.
+**No request was made**: everything was read from pages already cached under `raw/`. No new refusal; neither ledger changed.
+
+How it works. The parsers are imported read-only from `scripts/building_contacts.py`, so a number means the same thing
+as in `data/reference/building_contacts.csv`. For each building the script reads: the cached pages of its candidate
+listings (`raw_path`) and their re-reads in `raw/resolve_pending_b18/`; other `data/listings.csv` rows at the same
+address or with the same name and ZIP (building-level pages only); the own-site pages the resolve pass crawled
+(`site_pages.jsonl`, minus a portfolio site's home page); and any cached page whose last path segment is the building's
+name (an Apartment List page in the same state, or a page on a manager's site, e.g. `livebh.com/apartments/harbourside-sono/`).
+Preference: own site > Apartment List `original_phone` > Zumper building page > Trulia building page (tracking) >
+brokerage number on the unit's own listing.
+
+| Experience | Buildings | Own office | Property-supplied | Tracking only | Brokerage | No phone |
+|---|---|---|---|---|---|---|
+| Fresh-Start | 50 | 14 | 10 | 9 | 0 | 17 (11 broker-listed, 5 individual owner, 1 managed: Iron Works SoNo) |
+| Quiet-Street | 15 | 5 | 5 | 4 | 0 | 1 (individual owner) |
+| Walk-Everywhere | 17 | 0 | 0 | 1 | 1 | 15 (9 broker-listed, 6 individual owner) |
+| All | 82 | 19 | 15 | 14 | 1 | 33 |
+
+Office hours are filled for 40 buildings and an own-site URL for 37.
+
+Three rules this script adds to `building_contacts.py`'s behaviour:
+1. **Single-unit Apartment List listings carry no phone here.** A listing whose `contract` is `free` (feeds:
+   Propertyware unit, ListHub, Avail, Tenant Turner, Listanza, long-tail; no unit count, no management company, no office
+   hours) shows the number of whoever posted the unit: a private landlord or an individual agent. Nothing on the page
+   says it is a brokerage's office line (`office_phone` is empty on all of them), several have area codes far from the
+   unit (213, 310, 409, 607, 678, 838), and the brokerage attribution on these pages sometimes points at a different
+   unit. 19 such numbers were on the cached pages and were **not recorded**; the rows are `broker` (a brokerage is named)
+   or `individual owner`, with the listing link. This is why Walk-Everywhere has no real office number: 15 of its 17
+   buildings are single units of this kind. `building_contacts.py` does not have this rule, so some "supplied" numbers
+   in `data/reference/building_contacts.csv` for single-unit Apartment List rows may be a poster's own number.
+2. A broker or owner of **another** unit at the same address is not used as this unit's contact.
+3. An own-site number outside the NY/NJ/CT area codes (and not toll-free) gives way to a local number the property
+   supplied. One case: Modera Berkeley Heights, where `millcreekplaces.com` shows a 561 (Florida) head-office number and
+   Apartment List carries (908) 944-9200.
+
+Caveats.
+- The 14 tracking numbers are 11 Trulia building-page forwarding lines and 3 Zumper `(844) ... ext.` proxy lines (The Vue,
+  Brim and Crown, 805 St. Marks Ave). They can stop working when the listing ends. Ten of the 14 (Norwalk, Wilton,
+  Fairfield CT, Crown Heights) have no known own site; (203) 900-4467 serves three buildings of one owner (8 Union Ave, 31 Ferris,
+  Three Hubbard Rd).
+- The Beacon, Norwalk: the own site shows (203) 826-8490 and Apartment List carries (203) 826-8726. The own-site number
+  is used; an own-site number can itself be a marketing vendor's call-tracking line.
+- 12 of the 34 real numbers are toll-free leasing lines (RentCafe / Avalon), which is how those properties publish them.
+- Fairfield at Hauppauge and at Smithtown: the manager's pages are cached but show several numbers and none in JSON-LD,
+  so the Trulia tracking line stands; the leasing URL points at the manager's page.
+- Iron Works SoNo is the only managed building with no number: its Zumper page has hours but no phone, the cached
+  Apartment List page for it is an empty (soft-404) page, and `ironworkssono.com` refused earlier. No other allowed page
+  existed to fetch, so the one-request-per-building step had no target. The same holds for the 32 broker / owner units
+  (their Apartment List or Zumper page is already cached; no phone is wanted for them).
+- `--fetch` is implemented (one Apartment List or Zumper page per building with no phone, never an own site or Trulia;
+  ledgers `data/evidence_pending/refused_hosts.json` and `raw/_host_kill_shared.json` read first and written on a
+  refusal) and was run: 0 requests.

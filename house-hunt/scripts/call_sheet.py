@@ -431,6 +431,9 @@ def contact_for(units: list) -> tuple[str, str]:
     """(contact, basis). The contact table first; else what is in the unit rows: a phone in the notes, or a non-aggregator site."""
     for u in units:
         c = _contacts().get(val(u, "building_id")) or _contacts().get(val(u, "addr_key"))
+        if c and c.get("contact_kind") in ("broker", "individual owner"):
+            # a number on a single listing may be one agent's or owner's own line: not printed
+            return ("site " + c["leasing_url"]) if c.get("leasing_url") else "", "listed by a broker or the owner: get in touch through the listing page"
         if c and (c.get("leasing_phone") or c.get("leasing_url")):
             parts = [x for x in [("phone " + c["leasing_phone"]) if c.get("leasing_phone") else "",
                                  ("hours " + c["office_hours"]) if c.get("office_hours") else "",
