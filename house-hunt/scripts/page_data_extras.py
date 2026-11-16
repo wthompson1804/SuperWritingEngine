@@ -113,6 +113,19 @@ def main():
                 h["local"][key] = lst
         rep["round 2 local rules added"] = n
 
+    # New York City's rules apply to every NYC neighborhood, including ones added to the page after round 1
+    NYC = re.compile(r"\b(kings|queens|new york|bronx|richmond)\b", re.I)
+    nyc = [h for h in hoods.values() if h.get("state") == "NY" and NYC.search(str(h.get("area") or ""))]
+    donor = next((h for h in nyc if (h.get("local") or {}).get("parking_rules")), None)
+    if donor:
+        n = 0
+        for h in nyc:
+            lo = h.setdefault("local", {})
+            for key in ("parking_rules", "dog_rules"):
+                if not lo.get(key) and donor["local"].get(key):
+                    lo[key] = [r for r in donor["local"][key] if r.get("municipality") == "New York City"]; n += 1
+        rep["NYC rules copied to later NYC neighborhoods"] = n
+
     C = rd(DATA / "reference" / "building_contacts.csv")
     if C is not None:
         own = rd(DATA / "reference" / "building_contacts_own_site.csv")

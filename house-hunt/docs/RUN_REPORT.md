@@ -1,4 +1,4 @@
-# Run report (2026-11-16T00:03:57+00:00)
+# Run report (2026-11-16T00:06:03+00:00)
 
 ## Steps
 
@@ -25,14 +25,14 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2573 | 2573 | +0 |
 | within the $3,000 all-in cap | 1655 | 1655 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 625 | 667 | -42 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 214 | 216 | -2 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 621 | 621 | +0 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 210 | 210 | +0 |
 | avoid cards | 33 | 33 | +0 |
-|   shown with an asterisk (one thing to confirm) | 135 | 136 | -1 |
-| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 105 | 61 | +44 |
-| held back for one confirmation | 52 | 54 | -2 |
-| clean, waiting for a live check (not shown) | 52 | 53 | -1 |
-| neighborhoods with 3+ shown places | 26 | 27 | -1 |
+|   shown with an asterisk (one thing to confirm) | 130 | 130 | +0 |
+| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 109 | 109 | +0 |
+| held back for one confirmation | 53 | 53 | +0 |
+| clean, waiting for a live check (not shown) | 53 | 53 | +0 |
+| neighborhoods with 3+ shown places | 26 | 26 | +0 |
 | buildings in the master table | 665 | 665 | +0 |
 
 ## Why units left
@@ -64,32 +64,32 @@
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
 | The Fresh-Start Year      |               3 |       44 |      15 |             0 |
-| The Little-City Year      |              26 |      307 |      80 |             7 |
-| The Old-Neighborhood Year |              36 |      117 |      58 |            24 |
+| The Little-City Year      |              25 |      305 |      78 |             7 |
+| The Old-Neighborhood Year |              36 |      116 |      57 |            24 |
 | The Quiet-Street Year     |               6 |        8 |       6 |             0 |
-| The Room-to-Breathe Year  |              23 |      142 |      50 |             0 |
+| The Room-to-Breathe Year  |              23 |      141 |      49 |             0 |
 | The Walk-Everywhere Year  |               5 |        7 |       5 |             2 |
 
 ## Fill rate among shown units (percent with a value)
 
 | Field | % |
 |---|---|
-| sqft | 82 |
+| sqft | 81 |
 | unit_floor | 76 |
 | elevator_basis | 100 |
-| dog_weight_limit_lb | 19 |
-| parking_type | 77 |
+| dog_weight_limit_lb | 20 |
+| parking_type | 76 |
 | parking_fee | 21 |
-| pet_rent | 45 |
+| pet_rent | 44 |
 | pool | 26 |
 | doorman | 28 |
-| year_built | 51 |
+| year_built | 50 |
 | toll_rt_ezpass | 36 |
 | transit_sat_median | 96 |
 | near_violent_250m_24m | 25 |
-| live_status | 94 |
-| rent_first_full_payment_date | 68 |
-| ev_pause_notes | 32 |
+| live_status | 95 |
+| rent_first_full_payment_date | 67 |
+| ev_pause_notes | 33 |
 
 ## Last lines of each step
 
@@ -148,14 +148,14 @@ units 2573; cost gate {'pass': 1655, 'fail': 918}; rent asterisk 1763; rent term
 
 **ranking and selection**
 ```
-evidence: 36 units excluded, shown 214, avoid cards 33, of them with an asterisk 135 ({'floor': 60, 'live check': 17, 'lease term': 15, 'listing': 12, 'cost near the cap': 12, 'elevator': 10, 'dogs allowed': 7, 'other': 2}), held for a confirmation 52, waiting for a live check 52
-stages: 2573 costed -> -918 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -105 removed by a reviewed verdict -> -453 sketchy -> -36 evidence exclusions -> 625 ranked
-(kept 625 units; candidates 295; shown 282; pools: {'': 358, 'pool': 249, 'indoor': 18}
+evidence: 36 units excluded, shown 210, avoid cards 33, of them with an asterisk 130 ({'floor': 60, 'live check': 16, 'lease term': 14, 'listing': 12, 'cost near the cap': 12, 'elevator': 8, 'dogs allowed': 6, 'other': 2}), held for a confirmation 53, waiting for a live check 53
+stages: 2573 costed -> -918 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -109 removed by a reviewed verdict -> -453 sketchy -> -36 evidence exclusions -> 621 ranked
+(kept 621 units; candidates 292; shown 279; pools: {'': 355, 'pool': 248, 'indoor': 18}
 ```
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 88 checks, 0 failed
+test_rules (data): 84 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
