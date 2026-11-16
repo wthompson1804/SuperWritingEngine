@@ -396,8 +396,34 @@ def questions_for_building(units: list) -> list[tuple[str, str]]:
 
 
 # ------------------------------------------------------------------------------------------------- contact
+_CONTACTS = None
+
+
+def _contacts() -> dict:
+    """data/reference/building_contacts.csv (scripts/building_contacts.py), keyed by building_id and addr_key."""
+    global _CONTACTS
+    if _CONTACTS is None:
+        _CONTACTS = {}
+        f = Path(__file__).resolve().parent.parent / "data" / "reference" / "building_contacts.csv"
+        if f.exists():
+            import csv
+            for r in csv.DictReader(open(f, encoding="utf-8")):
+                for k in (r.get("building_id"), r.get("addr_key")):
+                    if k:
+                        _CONTACTS[k] = r
+    return _CONTACTS
+
+
 def contact_for(units: list) -> tuple[str, str]:
-    """(contact, basis). Only what is already in the data: a phone number in the notes, or a non-aggregator site."""
+    """(contact, basis). The contact table first; else what is in the unit rows: a phone in the notes, or a non-aggregator site."""
+    for u in units:
+        c = _contacts().get(val(u, "building_id")) or _contacts().get(val(u, "addr_key"))
+        if c and (c.get("leasing_phone") or c.get("leasing_url")):
+            parts = [x for x in [("phone " + c["leasing_phone"]) if c.get("leasing_phone") else "",
+                                 ("hours " + c["office_hours"]) if c.get("office_hours") else "",
+                                 ("site " + c["leasing_url"]) if c.get("leasing_url") else ""] if x]
+            basis = [c.get("contact_kind", ""), c.get("note", "")]
+            return "; ".join(parts), "; ".join(x for x in basis if x)
     phones, sites = [], []
     for u in units:
         for c in ("notes", "live_notes", "ev_pause_notes"):

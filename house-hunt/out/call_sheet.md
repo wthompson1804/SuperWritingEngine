@@ -4,7 +4,7 @@
 
 Move-in must be on or before Dec 15, 2026. Questions are only the facts still open in the data; "Already known" lists what not to ask. An asterisk on all-in means some cost lines are still unknown.
 
-Contact details are in the data for 2 of 30 buildings; for the rest, use the listing link.
+Contact details are in the data for 30 of 30 buildings; for the rest, use the listing link.
 
 ## The Fresh-Start Year
 
@@ -12,6 +12,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 - Address: 1100 South 5th Street, Harrison NJ
 - Candidate: unit 439, listed $2,503, all-in $2,712*, available now
 - Candidate: unit 477, listed $2,452, all-in $2,661*, available 2026-11-27
+- Contact: phone (201) 409-1100; hours Mon-Tue 9am-6pm; Wed 11am-6pm; Thu 9am-6pm; Fri 8am-5pm; Sat 10am-5pm; Sun 12pm-5pm; site https://www.thewyldes.com/
 - Listing: https://www.apartmentlist.com/nj/harrison/the-wyldes
 - Already known (do not ask): elevator: yes (confirmed)
 
@@ -36,6 +37,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 - Address: 11 US Highway 1, New Brunswick NJ
 - Candidate: unit 329, listed $2,495, all-in $2,697*, available 2026-11-25
 - Candidate: unit 407, listed $2,566, all-in $2,768*, available 2026-12-04
+- Contact: phone (848) 260-4746; hours Mon-Sun 9:30am-6pm; site https://www.theedgeatraritanheights.com/
 - Listing: https://www.apartmentlist.com/nj/new-brunswick/the-edge-at-raritan-heights--1
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: 40 lb; pet rent: $50/mo; parking: a spot is included or free
 
@@ -51,32 +53,11 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 11. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 3. Sono Pearl (Norwalk)
-- Address: 101 Washington St, Norwalk CT
-- Candidate: unit 313, listed $2,365, all-in $2,594*, available now
-- Candidate: unit 401, listed $2,440, all-in $2,669*, available now
-- Listing: https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032
-- Already known (do not ask): elevator: yes (confirmed); pet rent: $50/mo
-
-1. [ ] Is unit 313 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Is unit 401 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-3. [ ] Which floor is unit 313 on? (we have floor 3 only as a reading of the unit number, not from a page)
-4. [ ] Which floor is unit 401 on? (we have floor 4 only as a reading of the unit number, not from a page)
-5. [ ] Which lease term does the $2,365 price for unit 313 apply to, and what is the monthly price on a 12-month lease?
-6. [ ] Which lease term does the $2,440 price for unit 401 apply to, and what is the monthly price on a 12-month lease?
-7. [ ] What is the dog weight limit in pounds? (the listing only says: "yes: small dogs only, number not stated") (we need 25 lb or more)
-8. [ ] Are there breed restrictions, and which breeds?
-9. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
-10. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount? (the listing mentions: "Required monthly: Amenity fee; Trash Service Fee; Water fee Required monthly: Amenity fee;")
-11. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-12. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-13. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
-
-### 4. Scribe (Norwalk)
+### 3. Scribe (Norwalk)
 - Address: 370 West Ave, Norwalk CT
 - Candidate: unit 508, listed $2,426, all-in $2,755*, available now
 - Candidate: unit 446, listed $2,359, all-in $2,675*, available now
-- Contact: site https://scribenorwalk.com
+- Contact: phone (203) 563-8139; site https://scribenorwalk.com/
 - Listing: https://scribenorwalk.com
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: 50 lb; pet rent: $50/mo
 
@@ -95,9 +76,32 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 13. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 14. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
+### 4. Sono Pearl (Norwalk)
+- Address: 101 Washington St, Norwalk CT
+- Candidate: unit 401, listed $2,440, all-in $2,669*, available now
+- Candidate: unit 516, listed $2,490, all-in $2,719*, available now
+- Contact: phone (914) 877-2165; site https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032
+- Listing: https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032
+- Already known (do not ask): elevator: yes (confirmed); pet rent: $50/mo
+
+1. [ ] Is unit 401 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Is unit 516 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+3. [ ] Which floor is unit 401 on? (we have floor 4 only as a reading of the unit number, not from a page)
+4. [ ] Which floor is unit 516 on? (we have floor 5 only as a reading of the unit number, not from a page)
+5. [ ] Which lease term does the $2,440 price for unit 401 apply to, and what is the monthly price on a 12-month lease?
+6. [ ] Which lease term does the $2,490 price for unit 516 apply to, and what is the monthly price on a 12-month lease?
+7. [ ] What is the dog weight limit in pounds? (the listing only says: "yes: small dogs only, number not stated") (we need 25 lb or more)
+8. [ ] Are there breed restrictions, and which breeds?
+9. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
+10. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount? (the listing mentions: "Required monthly: Amenity fee; Trash Service Fee; Water fee Required monthly: Amenity fee;")
+11. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
+12. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+13. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+
 ### 5. Cobalt Lofts (Harrison)
 - Address: 1200 S. Fifth Street, Harrison NJ
 - Candidate: unit 2113, listed $2,398, all-in $2,747*, available now
+- Contact: phone (877) 589-4939; hours Mon-Tue 9am-6pm; Wed 11am-6pm; Thu 9am-6pm; Fri 8am-5pm; Sat 10am-5pm; Sun 12pm-5pm; site https://www.cobaltlofts.com/
 - Listing: https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
 - Already known (do not ask): elevator: yes (confirmed); parking fee: $150/mo
 
@@ -117,7 +121,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 - Address: 150 Broad St, Stamford CT
 - Candidate: unit 530, listed $2,345, all-in $2,674*, available now
 - Candidate: unit 536, listed $2,332, all-in $2,648*, available 2026-12-01
-- Contact: site https://www.theasherstamford.com
+- Contact: phone (833) 323-1049; site https://www.theasherstamford.com/
 - Listing: https://www.theasherstamford.com
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: 50 lb; pet rent: $50/mo
 
@@ -139,6 +143,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 - Address: 1340 Washington Boulevard, Stamford CT
 - Candidate: unit 217, listed $2,590, all-in $2,898*, available now
 - Candidate: unit 323, listed $2,650, all-in $2,958*, available now
+- Contact: phone (203) 263-1100; site http://paredimcommunities.com/communities/parallel-41/
 - Listing: https://www.apartmentlist.com/ct/stamford/parallel-41--1
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: 65 lb; pet rent: $40/mo
 
@@ -156,6 +161,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 - Address: 2 South Willow Street, Montclair NJ
 - Candidate: unit 508, listed $2,115, all-in $2,539, available now
 - Candidate: unit 547, listed $2,199, all-in $2,623, available now
+- Contact: phone (973) 771-5350; hours Mon-Tue 9am-6pm; Wed 11am-6pm; Thu 9am-6pm; Fri 8am-5pm; Sat 10am-5pm; site https://www.twosouthwillow.com/
 - Listing: https://www.apartmentlist.com/nj/montclair/two-south-willow
 - Already known (do not ask): elevator: yes (confirmed); pet rent: $75/mo; parking fee: $150/mo
 
@@ -177,6 +183,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 4. Life Time Living Stamford (Stamford)
 - Address: 130 Tresser Blvd, Stamford CT
 - Candidate: unit 500, listed $2,400, all-in $2,616*, available 2026-12-07
+- Contact: phone (475) 258-8069; hours Mon-Fri 9:00am-5:00pm; site https://www.trulia.com/building/life-time-living-stamford-130-tresser-blvd-stamford-ct-06901-2775168599
 - Listing: https://www.trulia.com/building/life-time-living-stamford-130-tresser-blvd-stamford-ct-06901-2775168599
 - Already known (do not ask): elevator: yes (confirmed); pet rent: $50/mo
 
@@ -196,16 +203,17 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 5. 163 Franklin Street (Stamford)
 - Address: 163 Franklin St, Stamford CT
 - Candidate: unit 310, listed $2,600, all-in $2,829*, available now
-- Candidate: unit 403, listed $2,625, all-in $2,854*, available 2026-11-28
+- Candidate: unit 311, listed $2,600, all-in $2,829*, available now
+- Contact: phone (475) 267-6192; hours Tue-Sat 10:00am-5:00pm; site https://www.trulia.com/building/163-franklin-street-163-franklin-st-stamford-ct-06901-1001659327
 - Listing: https://www.trulia.com/building/163-franklin-street-163-franklin-st-stamford-ct-06901-1001659327
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: 75 lb; pet rent: $50/mo
 
 1. [ ] Is unit 310 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Is unit 403 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said 2026-11-28 when seen on 2026-11-15).
+2. [ ] Is unit 311 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
 3. [ ] Which floor is unit 310 on? (we have floor 3 only as a reading of the unit number, not from a page)
-4. [ ] Which floor is unit 403 on? (we have floor 4 only as a reading of the unit number, not from a page)
+4. [ ] Which floor is unit 311 on? (we have floor 3 only as a reading of the unit number, not from a page)
 5. [ ] Which lease term does the $2,600 price for unit 310 apply to, and what is the monthly price on a 12-month lease?
-6. [ ] Which lease term does the $2,625 price for unit 403 apply to, and what is the monthly price on a 12-month lease?
+6. [ ] Which lease term does the $2,600 price for unit 311 apply to, and what is the monthly price on a 12-month lease?
 7. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
 8. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
 9. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
@@ -218,6 +226,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 1. 375 Lefferts Ave (Prospect Lefferts Gardens-Wingate)
 - Address: 375 Lefferts Ave, Brooklyn NY
 - Candidate: unit 7E, listed $2,500, all-in $2,694*, available now
+- Contact: phone (208) 718-2008; site https://www.trulia.com/home/375-lefferts-ave-7e-brooklyn-ny-11225-453282973
 - Listing: https://www.trulia.com/home/375-lefferts-ave-7e-brooklyn-ny-11225-453282973
 - Already known (do not ask): elevator: yes (confirmed)
 
@@ -236,6 +245,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 2. 1775 E 18th St (Madison)
 - Address: 1775 East 18th Street, Brooklyn NY
 - Candidate: unit 5N, listed $2,250, all-in $2,444*, available now
+- Contact: phone (646) 421-8063; site https://www.apartmentlist.com/ny/brooklyn/1775-e-18th-st
 - Listing: https://www.apartmentlist.com/ny/brooklyn/1775-e-18th-st
 - Already known (do not ask): elevator: yes (confirmed)
 
@@ -253,6 +263,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 3. 153-10 88th Ave (Jamaica)
 - Address: 153-10 88th Ave, Jamaica NY
 - Candidate: unit 621, listed $2,550, all-in $2,729*, available now
+- Contact: phone (347) 503-4117; site https://www.the88nyc.com/amenities/
 - Listing: https://www.trulia.com/home/153-10-88th-ave-621-jamaica-ny-11432-466380287
 - Already known (do not ask): elevator: yes (confirmed)
 
@@ -271,6 +282,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 4. 8700 25th Ave (Gravesend (West))
 - Address: 8700 25th Ave, Brooklyn NY
 - Candidate: unit 6G, listed $2,300, all-in $2,494*, available now
+- Contact: site https://www.trulia.com/home/8700-25th-ave-6g-brooklyn-ny-11214-2059283926
 - Listing: https://www.trulia.com/home/8700-25th-ave-6g-brooklyn-ny-11214-2059283926
 - Already known (do not ask): elevator: yes (confirmed)
 
@@ -290,6 +302,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 5. 92-27 160th St (Jamaica)
 - Address: 92-27 160th St, Jamaica NY
 - Candidate: unit 2215, listed $2,395, all-in $2,574*, available now
+- Contact: phone (718) 523-4000; site https://onearcherave.com/
 - Listing: https://www.trulia.com/home/92-27-160th-st-2215-jamaica-ny-11433-2056424620
 - Already known (do not ask): elevator: yes (confirmed)
 
@@ -309,6 +322,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 1. Avalon Princeton on Harrison (Princeton)
 - Address: 275 N Harrison St, Princeton NJ
 - Candidate: unit 431, listed $2,571, all-in $2,919, available 2026-11-21
+- Contact: phone (609) 803-3852; hours Mon-Sun 9am-7pm; site https://www.avaloncommunities.com/new-jersey/princeton-apartments/avalon-princeton-on-harrison/
 - Listing: https://www.apartmentlist.com/nj/princeton/avalon-princeton-on-harrison
 - Already known (do not ask): elevator: yes (amenities_page); pet rent: $60/mo; parking fee: $50/mo; utilities included: resident pays electric, gas, trash, water || resident pays E
 
@@ -324,7 +338,8 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 
 ### 2. Avalon Teaneck (Teaneck)
 - Address: 1775 Windsor Road, Bergenfield NJ
-- Candidate: unit 001-215, listed $2,516, all-in $2,917, available 2026-11-16
+- Candidate: unit 001-215, listed $2,516, all-in $2,922, available 2026-11-16
+- Contact: phone (201) 833-4560; hours Tue-Thu 9:30am-6:30pm; Fri-Sat 8:30am-5:30pm; site https://www.avaloncommunities.com/new-jersey/teaneck-apartments/avalon-teaneck
 - Listing: https://www.apartmentlist.com/nj/bergenfield/avalon-teaneck
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; pet rent: $60/mo; parking fee: $135/mo; utilities included: resident pays Electric; Gas; Trash; Water; Sewer
 
@@ -340,6 +355,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 3. 5545 Park (Fairfield)
 - Address: 5545 Park Ave, Fairfield CT
 - Candidate: unit 408, listed $2,700, all-in $2,867*, available now
+- Contact: phone (475) 275-8171; hours Mon-Fri 10:00am-4:00pm; Sat 9:00am-12:00pm; site https://www.trulia.com/building/5545-park-5545-park-ave-fairfield-ct-06825-2752075024
 - Listing: https://www.trulia.com/building/5545-park-5545-park-ave-fairfield-ct-06825-2752075024
 - Already known (do not ask): elevator: yes (confirmed); parking: a spot is included or free
 
@@ -360,6 +376,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 4. Woodland Square (Montvale)
 - Address: 12 Van Riper Road, Montvale NJ
 - Candidate: unit 217, listed $2,695, all-in $2,847*, available 2026-11-21
+- Contact: phone (201) 442-2912; hours Tue-Sat 9am-5pm; site https://www.apartmentlist.com/nj/montvale/woodland-square
 - Listing: https://www.apartmentlist.com/nj/montvale/woodland-square
 - Already known (do not ask): elevator: yes (confirmed)
 
@@ -379,6 +396,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 5. Parc At Roxbury (Roxbury)
 - Address: 400 Cardinal Ct, Ledgewood NJ
 - Candidate: unit N/A-0715, listed $2,507, all-in $2,844*, available now
+- Contact: phone (973) 358-7507; hours Mon-Fri 9am-6pm; Sat 10am-5pm; site https://www.trulia.com/building/parc-at-roxbury-400-cardinal-ct-ledgewood-nj-07852-2734023302
 - Listing: https://www.trulia.com/building/parc-at-roxbury-400-cardinal-ct-ledgewood-nj-07852-2734023302
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; pet rent: $50/mo; parking fee: $150/mo
 
@@ -398,6 +416,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 1. Liberty Bay Club (Bayonne)
 - Address: 190 West 54th Street, Bayonne NJ
 - Candidate: unit 457, listed $2,276, all-in $2,659, available now
+- Contact: phone (551) 316-6808; hours Mon-Fri 10am-6pm; Sat 10am-5pm; site https://libertybayclub.com/
 - Listing: https://www.apartmentlist.com/nj/bayonne/liberty-bay-club
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; pet rent: $65/mo; parking fee: $160/mo; utilities included: resident pays Utility - Electric - Third Party; Utility - Wa
 
@@ -414,6 +433,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 - Address: 740-748 Washington Ave, Belleville NJ
 - Candidate: unit 526, listed $2,250, all-in $2,467*, available now
 - Candidate: unit 320, listed $2,700, all-in $2,917*, available now
+- Contact: phone (201) 298-9492; site https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
 - Listing: https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
 - Already known (do not ask): elevator: yes (confirmed); pet rent: $65/mo
 
@@ -439,6 +459,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 3. The Highlands (Morris Plains)
 - Address: 40 E Hanover Ave, Morris Plains NJ
 - Candidate: unit 1200, listed $2,500, all-in $2,737*, available now
+- Contact: phone (973) 846-9708; hours Mon-Fri 9:00am-6:00pm; site https://www.trulia.com/building/the-highlands-40-e-hanover-ave-morris-plains-nj-07950-1001488769
 - Listing: https://www.trulia.com/building/the-highlands-40-e-hanover-ave-morris-plains-nj-07950-1001488769
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; parking fee: $100/mo
 
@@ -459,6 +480,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 - Address: 100 Hamilton Street, Bound Brook NJ
 - Candidate: unit 303, listed $2,604, all-in $2,781*, available now
 - Candidate: unit 529, listed $2,453, all-in $2,630*, available now
+- Contact: phone (848) 375-0930; hours Mon-Fri 9am-5pm; Sat 10am-5pm; site https://www.therailboundbrook.com/
 - Listing: https://www.apartmentlist.com/nj/bound-brook/rail-at-bound-brook
 - Already known (do not ask): elevator: yes (confirmed)
 
@@ -481,6 +503,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 5. AVE Clifton (Clifton)
 - Address: 743 Passaic Ave, Clifton NJ
 - Candidate: unit 467, listed $2,598, all-in $2,800*, available now
+- Contact: phone (973) 284-7700; hours Mon-Sat 9am-6pm; Sun 11:30am-4pm; site https://www.aveliving.com/locations/northern-new-jersey/clifton/luxury-apartments
 - Listing: https://www.apartmentlist.com/nj/clifton/ave-clifton--1
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; pet rent: $50/mo; utilities included: Trash
 
@@ -500,6 +523,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 1. 8267 Austin St (Kew Gardens)
 - Address: 8267 Austin St, Kew Gardens NY
 - Candidate: unit 916, listed $2,550, all-in $2,744*, available 2026-11-17
+- Contact: phone (917) 567-4708; site https://www.trulia.com/home/8267-austin-st-916-kew-gardens-ny-11415-2098501053
 - Listing: https://www.trulia.com/home/8267-austin-st-916-kew-gardens-ny-11415-2098501053
 - Already known (do not ask): elevator: yes (confirmed); income: $130,000 a year
 
@@ -518,23 +542,26 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 2. 31-20 54th Street #2fl , 31-20 54th St, Flushing, NY 11377, US (Astoria (East)-Woodside (North))
 - Address: 31-20 54th Street #2fl , 31-20 54th St, Flushing, NY 11377, US, New York NY
 - Candidate: unit 2fl, listed $2,500, all-in $2,694*, available 2026-12-01
+- Contact: site https://www.zumper.com/listings/65756566/1-bedroom-woodside-new-york-ny
 - Listing: https://www.zumper.com/listings/65756566/1-bedroom-woodside-new-york-ny
 - Already known (do not ask): elevator: yes (official_record)
 
 1. [ ] Is unit 2fl still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said 2026-12-01 when seen on 2026-11-15).
 2. [ ] Which lease term does the $2,500 price for unit 2fl apply to, and what is the monthly price on a 12-month lease?
-3. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
-4. [ ] Are there breed restrictions, and which breeds?
-5. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
-6. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is it a garage or an open lot; is a spot available now or is there a waitlist?
-7. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
-8. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-9. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-10. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+3. [ ] Are dogs allowed?
+4. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
+5. [ ] Are there breed restrictions, and which breeds?
+6. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
+7. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is it a garage or an open lot; is a spot available now or is there a waitlist?
+8. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
+9. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
+10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+11. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
 ### 3. 9949 Shore Rd (Bay Ridge)
 - Address: 9949 Shore Rd, Brooklyn NY
 - Candidate: unit 502, listed $2,595, all-in $2,789*, available now
+- Contact: phone (347) 585-2065; site https://www.trulia.com/home/9949-shore-rd-502-brooklyn-ny-11209-2100220346
 - Listing: https://www.trulia.com/home/9949-shore-rd-502-brooklyn-ny-11209-2100220346
 - Already known (do not ask): elevator: yes (confirmed)
 
@@ -553,6 +580,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 4. 4545 46th St (Sunnyside)
 - Address: 4545 46th St, Woodside NY
 - Candidate: unit 5F, listed $2,650, all-in $2,844*, available now
+- Contact: phone (917) 992-3143; site https://www.trulia.com/home/4545-46th-st-5f-woodside-ny-11377-2093254023
 - Listing: https://www.trulia.com/home/4545-46th-st-5f-woodside-ny-11377-2093254023
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: 25 lb; utilities included: heat and hot water
 
@@ -569,6 +597,7 @@ Contact details are in the data for 2 of 30 buildings; for the rest, use the lis
 ### 5. 12333 83rd Ave (Kew Gardens)
 - Address: 12333 83rd Ave, Kew Gardens NY
 - Candidate: unit 3203, listed $2,695, all-in $2,874*, available now
+- Contact: phone (212) 406-0030; site https://www.trulia.com/home/12333-83rd-ave-3203-kew-gardens-ny-11415-2086095362
 - Listing: https://www.trulia.com/home/12333-83rd-ave-3203-kew-gardens-ny-11415-2086095362
 - Already known (do not ask): elevator: yes (confirmed)
 
