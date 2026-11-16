@@ -215,3 +215,7 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
 | 2026-11-16 | Ratings shown as information; no drop rule; no Google Places key | Idea of dropping buildings with too few reviews |
 | 2026-11-16 | Diversity quotes stay; only quotes singling out a named group are left out | Filter that dropped any quote characterising residents by group |
 | 2026-11-16 | Fix what does not land without asking (not the owner's rules) | — |
+
+- **Thin neighborhoods (Will, 2026-11-16):** a neighborhood that would show exactly one apartment is cut unless that
+  apartment is well attested (seen live, nothing open) and promising (rank score at or above its experience's median).
+  Implemented in `scripts/rank.py`; reason `thin_neighborhood`.

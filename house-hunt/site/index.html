@@ -1562,7 +1562,8 @@ function seenShort(iso){if(!iso)return "date seen not known";
   try{return "seen "+new Date(iso).toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"America/New_York"})}catch(e){return "seen "+dayStr(iso)}}
 function seenLong(iso){if(!iso)return NK;
   try{return new Date(iso).toLocaleString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit",timeZone:"America/New_York"})+" New York time"}catch(e){return String(iso)}}
-function distWords(m){if(m==null)return NK;if(m<=1600)return "a "+Math.max(1,Math.round(m/WALK_M_PER_MIN))+"-minute walk";var mi=m/1609.34;return (mi<3?Math.round(mi*10)/10:Math.round(mi))+(Math.round(mi*10)===10||(mi>=3&&Math.round(mi)===1)?" mile":" miles")+" away"}
+function aWalk(n){n=Math.max(1,Math.round(n));return (n===8||n===11||n===18||(n>=80&&n<90)?"an ":"a ")+n+"-minute walk"}
+function distWords(m){if(m==null)return NK;if(m<=1600)return aWalk(m/WALK_M_PER_MIN);var mi=m/1609.34;return (mi<3?Math.round(mi*10)/10:Math.round(mi))+(Math.round(mi*10)===10||(mi>=3&&Math.round(mi)===1)?" mile":" miles")+" away"}
 function ext(url,label){url=okUrl(url);return url?' <a class="srcl" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label||"source")+' ↗</a>':''}
 function hostOf(url){try{return new URL(url).hostname.replace(/^www\./,"")}catch(e){return "source"}}
 function humanize(k){k=String(k||"").replace(/_/g," ");return k.charAt(0).toUpperCase()+k.slice(1)}
@@ -1745,15 +1746,15 @@ function tourQs(U){var q=(U.tour_questions||[]).slice(),add=[];
 /* ================= Template sentences. Every sentence on the page that is not quoted evidence,
    approved year text (label, subhead) or interface copy is built here from data fields. ================= */
 var SAY={
-  size:function(U){var s="A "+bedsNoun(U)+(U.sqft!=null?" of "+r0(U.sqft)+" sq ft":", size not known yet,");
+  size:function(U){var s="A "+bedsNoun(U)+(U.sqft!=null?" of "+r0(U.sqft)+" sq ft":", size not published");
     if(U.floor!=null)s+=" on floor "+r0(U.floor)+(U.floor_basis==="inferred"?" (floor worked out from the unit number)":"");
-    else s+=", floor not known yet";return s+"."},
-  park:function(w){return w.park&&w.park_walk_min!=null?w.park+" is a "+Math.max(1,r0(w.park_walk_min))+"-minute walk.":w.park_walk_min!=null?"Green space is a "+Math.max(1,r0(w.park_walk_min))+"-minute walk.":"Walk to green space: "+NK+"."},
+    else s+=", floor not published";return s+"."},
+  park:function(w){return w.park&&w.park_walk_min!=null?w.park+" is "+aWalk(w.park_walk_min)+" away.":w.park_walk_min!=null?"A park is "+aWalk(w.park_walk_min)+" away.":"Walk to green space: "+NK+"."},
   dogpark:function(w){return w.dog_park_m==null?"Nearest dog park: "+NK+".":(w.dog_park?w.dog_park:"The nearest dog park")+" is "+distWords(w.dog_park_m)+"."},
   food:function(a){return a.restaurants_800m==null?"Restaurants nearby: "+NK+".":pl(a.restaurants_800m,"restaurant")+" and "+(a.bars_800m==null?"an unknown number of bars":pl(a.bars_800m,"bar"))+" within a 10-minute walk."},
   drive:function(s){if(s.drive_min==null)return "Drive to Mom and Dad: "+NK+".";
     return r0(s.drive_min)+" minutes by car to Mom and Dad; "+SAY.toll(s)+"."},
-  toll:function(s){return s.toll_round_trip==null?"tolls not known yet":s.toll_round_trip===0?"no tolls":money(s.toll_round_trip)+" in tolls a visit"+ezNote(s)},
+  toll:function(s){return s.toll_round_trip==null?"tolls not known yet":s.toll_round_trip===0?"no tolls":tollMoney(s.toll_round_trip)+" in tolls, round trip"+ezNote(s)},
   crime:function(n){var x=n.violent_vs_jamaica;if(x==null)return "Violent crime here: "+NK+".";
     if(Math.abs(x-1)<0.005)return "Violent crime here runs at the same rate as around Mom and Dad's.";
     return "Violent crime here runs at "+times(x)+" the rate around Mom and Dad's."},
@@ -1829,7 +1830,7 @@ function factsOf(U,k){var m=U.moments,L=okUrl(U.links&&U.links.listing),o=[],a=U
     f(n.violent_per_1000==null?"Violent crime rate: "+NK+".":r1(n.violent_per_1000)+" violent crimes per 1,000 residents a year here; "+(JAM.violent_per_1000!=null?JAM.violent_per_1000+" around Mom and Dad's.":""));
     f(n.near_violent_250m_24m==null?"Violent incidents within 250 metres: "+NK+" (police publish this only in New York City).":pl(n.near_violent_250m_24m,"violent incident")+" within 250 metres in 24 months"+(n.near_violent_evening_250m_24m!=null?", "+r0(n.near_violent_evening_250m_24m)+" of them in the evening":"")+" (police data).");
     f(n.car_crime_250m_24m==null?"Car thefts and break-ins within 250 metres: "+NK+".":pl(n.car_crime_250m_24m,"car theft or break-in","car thefts and break-ins")+" within 250 metres in 24 months (police data).");
-    f(n.vehicle_theft_per_1000==null?"Car theft rate: "+NK+".":r1(n.vehicle_theft_per_1000)+" car thefts per 1,000 residents a year.");
+    f(n.vehicle_theft_per_1000==null?"Car theft rate: "+NK+".":r1(n.vehicle_theft_per_1000)+(Number(r1(n.vehicle_theft_per_1000))===1?" car theft":" car thefts")+" per 1,000 residents a year.");
     if(n.police_geography)f("These rates describe the police area, not the block: "+n.police_geography+".")}
   else if(k==="sat"){var s=m.sat;
     f(s.bars_1600m==null?"Bars within a mile: "+NK+".":pl(s.bars_1600m,"bar")+" within a mile.");
@@ -2034,13 +2035,13 @@ function plainCats(x){return String(x).replace(/\b[a-z]+(?:_[a-z]+)+\b/g,functio
 function splitNotes(s){return String(s||"").split(/;\s*/).filter(Boolean).map(function(x){x=plainCats(x);return x.charAt(0).toUpperCase()+x.slice(1)})}
 
 function yearFacts(Y){var M=Y.medians||{},o=[];
-  if(M.all_in!=null)o.push("A typical place: "+(M.sqft!=null?r0(M.sqft)+" sq ft for ":"")+money(Math.round(M.all_in))+" a month, all-in");
-  if(M.drive_min!=null)o.push("A typical drive to Mom and Dad: "+r0(M.drive_min)+" minutes, "+(M.toll_round_trip==null?"tolls not known yet":M.toll_round_trip===0?"no tolls":money(M.toll_round_trip)+" in tolls a visit"+ezNote(M)));
-  if(M.restaurants_800m!=null)o.push(pl(M.restaurants_800m,"restaurant")+" within a 10-minute walk"+(M.park_walk_min!=null?"; green space a "+Math.max(1,r0(M.park_walk_min))+"-minute walk":""));
+  if(M.all_in!=null)o.push("A typical apartment: "+(M.sqft!=null?r0(M.sqft)+" sq ft for ":"")+money(Math.round(M.all_in))+" a month, all-in");
+  if(M.drive_min!=null)o.push("A typical drive to Mom and Dad: "+r0(M.drive_min)+" minutes, "+(M.toll_round_trip==null?"tolls not known yet":M.toll_round_trip===0?"no tolls":tollMoney(M.toll_round_trip)+" in tolls, round trip"+ezNote(M)));
+  if(M.restaurants_800m!=null)o.push(pl(M.restaurants_800m,"restaurant")+" within a 10-minute walk"+(M.park_walk_min!=null?"; a park is "+aWalk(M.park_walk_min)+" away":""));
   return o}
 function hoodFacts(H){var o=[],t=H.traits||{},s=H.safety||{};
   if(t.restaurants_800m!=null)o.push(SAY.food(t).replace(/\.$/,""));
-  if(t.park_walk_min!=null)o.push("Green space is a "+Math.max(1,r0(t.park_walk_min))+"-minute walk");
+  if(t.park_walk_min!=null)o.push("A park is "+aWalk(t.park_walk_min)+" away");
   return o}
 /* "What residents say": quotes grouped by theme, newest first, with as many positive as negative shown wherever a theme
    has both (the rest sit in a fold); survey figures as plain sentences. No names are shown. Never disappears when empty. */
@@ -2264,12 +2265,7 @@ var HL={
     if(!ps.length||r.found_any===false)return r.searched?"No reviews found online":"Not looked up yet";
     return Number(t.rating).toFixed(1)+" on "+t.platform+(t.count!=null?" · "+pl(Math.round(t.count),"review"):"")+(ps.length>1?", and "+(ps.length-1)+" more "+(ps.length===2?"site":"sites"):"")},
   /* prose as a headline: the first sentence when it fits; otherwise its opening clause, whole, with no ellipsis */
-  first:function(t,n){n=n||HL_MAX;var s=firstSentence(calm(t)).replace(/\s+/g," ").trim(),re=/[,;:]\s+|\s+(?=(?:and|but|so|with|where|while|which)\s)/g,m,best=0,soft=Math.min(n,HL_AIM);
-    if(s.length<=soft)return s;
-    while((m=re.exec(s))){if(m.index<=soft-1&&m.index>=18)best=m.index}
-    if(!best&&s.length<=n)return s;
-    if(!best){re.lastIndex=0;while((m=re.exec(s))){if(m.index<=n-1&&m.index>=18)best=m.index}}
-    return best?s.slice(0,best).replace(/[,;:\s]+$/,"")+".":cut(s,n)}
+  first:function(t){return firstSentence(calm(t)).replace(/\s+/g," ").trim()}
 };
 
 /* ---- first screen: six short cards ---- */
@@ -2394,9 +2390,9 @@ function kfacts(cells,dark){cells=cells.filter(Boolean);var anyT=cells.some(func
     return c.act?'<button type="button" class="kfc" data-act="'+c.act+'"'+(c.attr||'')+' aria-haspopup="dialog">'+inner+'</button>':'<div class="kfc">'+inner+'</div>'}).join("")+'</div>'}
 function tollFact(o,typ,kind,id){var t=o&&o.toll_round_trip;if(t==null)return {b:"Ask",s:"tolls not fully known"};if(Number(t)===0)return {t:typ?"typical":"",b:"No tolls",s:"on the drive"};
   return {t:typ?"typical":"",b:tollMoney(t),s:"tolls, round trip",r:'<small class="rng">with NY E-ZPass</small>',act:"toll-info",attr:' data-kind="'+kind+'" data-id="'+esc(id)+'"'}}
-function tollSheet(o,name,typ){var t=o.toll_round_trip,m=tollMail(o);
-  return shTop("Tolls, round trip",esc(name))+'<p>'+(typ?"A typical drive":"The drive")+' to Mom and Dad and back costs '+money(t)+' in tolls with a New York E-ZPass: the small tag on the windshield that pays each toll at the lower rate.</p>'+(m!=null&&m>0?'<p style="margin-top:8px">Without the tag the bill comes by mail'+(typ?', typically ':': ')+money(m)+' a round trip.</p>':'')+how("tolls from "+SOURCES.tolls)}
-function allInSheet(us,name){return shTop("All-in, a month",esc(name))+allInLine(us)}
+function tollSheet(o,name,typ){var t=o.toll_round_trip;
+  return shTop("Tolls, round trip",esc(name))+'<p>'+(typ?"A typical drive":"The drive")+' to Mom and Dad and back costs '+money(t)+' in tolls with a New York E-ZPass: the small tag on the windshield that pays each toll at the lower rate.</p>'+howHtml('<p>An out-of-state tag pays more at MTA crossings.</p><p>'+esc(capFirst("tolls from "+SOURCES.tolls))+'.</p>')}
+function allInSheet(us,name){return shTop("All-in",esc(name))+'<p style="margin-bottom:8px"><b>A month, everything included.</b></p>'+allInLine(us)}
 function costFact(us,cost,r,typ,kind,id){return cost!=null?{t:typ?"typical":"",b:typ?m10(cost):m0(cost),s:"a month, all-in",r:typ?rngFrom(r,m10):"",act:"allin-info",attr:' data-kind="'+kind+'" data-id="'+esc(id)+'"'}:null}
 /* the short street-parking answer: the rule that changes what she does, in two or three words */
 var PARK_SHORT=[["overnight_parking","Overnight limits"],["resident_permit","Permit zones"],["alternate_side","Street-cleaning days"],["snow_emergency","Snow-day bans"],["meter_hours","Metered streets"]];
@@ -2459,11 +2455,11 @@ function vYear(Y){
   if(us.length)costHow.push("The big figure is the median of the "+pl(us.length,"place")+" here: half cost more, half less. The small one is the lowest and the highest.");
   if(c)costHow.push("All-in runs from "+money(c[0])+" to "+money(c[1])+" a month"+(seenRange(us)?" (prices "+seenRange(us)+")":"")+".");
   if(near&&far&&near!==far)costHow.push("The nearest neighborhood is "+near.name+", "+r0(near.drive_min)+" minutes by car; the farthest is "+far.name+", "+r0(far.drive_min)+".");
-  if(M.toll_round_trip!=null&&tollMail(M)!=null)costHow.push(tollMail(M)>0?"Tolls are the New York E-ZPass figure. By mail they are typically "+money(tollMail(M))+" a round trip.":"No tolls either way.");
+  if(M.toll_round_trip!=null&&tollMail(M)!=null)costHow.push(tollMail(M)>0?"Tolls are the New York E-ZPass figure. An out-of-state tag pays more at MTA crossings.":"No tolls either way.");
   costHow.push(capFirst(["prices from "+SOURCES.listing,"drive times, with clear roads, from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"train and bus from "+SOURCES.transit,"restaurant counts and walks to green space from "+SOURCES.map].join("; "))+".");
   h+='<section class="sec rows" id="sec-rows"><h2 class="h2s">More about this experience</h2>'+rowsTop();
   if(scenes||prom||kat)h+=row("r-scene","The promise and the catch",wholeHead([prom,kat,pr(Y,"scene")||Y.scenes],"what you gain, and what you give up"),scenes+(prom||kat?'<div class="two"'+(scenes?' style="margin-top:10px"':'')+'>'+(prom?'<div class="panel love"><h3>The promise</h3><p>'+esc(prom)+'</p></div>':'')+(kat?'<div class="panel pause"><h3>The catch</h3><p>'+esc(kat)+'</p></div>':'')+'</div>':''),{sub:dm.length?"":hlSub(Y,"day","scene")});
-  if(us.length)h+=row("r-cost","What it costs you",HL.yearCost(Y),allInLine(us)+'<div class="figs" style="margin-top:8px"><div>'+(f.cost!=null?'<b>'+m0(f.cost)+'</b><span>a month, all-in, typical</span>'+rngFrom(f.cr,m0):'<b>'+NK+'</b>')+'</div><div>'+(f.drive!=null?'<b>'+r0(f.drive)+' min</b><span>to Mom and Dad, typical</span>'+rngFrom(f.dr,r0," min"):'<b>'+NK+'</b>')+'</div></div>'+(M.transit_min!=null?'<p style="margin-top:8px">'+r0(M.transit_min)+' minutes by train and bus, typically.</p>':'')+(M.sqft!=null?'<p>A typical place is '+r0(M.sqft)+' sq ft.</p>':'')+howHtml('<p>'+costHow.map(esc).join('</p><p>')+'</p>'),{sub:hlSub(Y,"cost","to_parents")});
+  if(us.length)h+=row("r-cost","What it costs you",HL.yearCost(Y),allInLine(us)+'<div class="figs" style="margin-top:8px"><div>'+(f.cost!=null?'<b>'+m0(f.cost)+'</b><span>a month, all-in, typical</span>'+rngFrom(f.cr,m0):'<b>'+NK+'</b>')+'</div><div>'+(f.drive!=null?'<b>'+r0(f.drive)+' min</b><span>to Mom and Dad, typical</span>'+rngFrom(f.dr,r0," min"):'<b>'+NK+'</b>')+'</div></div>'+(M.transit_min!=null?'<p style="margin-top:8px">'+r0(M.transit_min)+' minutes by train and bus, typically.</p>':'')+(M.sqft!=null?'<p>A typical apartment is '+r0(M.sqft)+' sq ft.</p>':'')+howHtml('<p>'+costHow.map(esc).join('</p><p>')+'</p>'),{sub:hlSub(Y,"cost","to_parents")});
   if(M.restaurants_800m!=null||M.park_walk_min!=null)h+=row("r-out","Going out and green space",HL.out(M),'<ul>'+lis(yf.slice(2).concat(hlSub(Y,"green")&&hlSub(Y,"going_out")?[hlSub(Y,"green")]:[]))+'</ul>'+how("restaurant counts and walks to green space from "+SOURCES.map),{sub:hlSub(Y,"going_out","green")});
   if(SPEC_OPEN.length&&Y.vs_queens&&SPEC_OPEN.some(function(s){return Y.vs_queens[s.measure]!=null}))h+=row("r-queens","Compared to staying in Queens",HL.queens(Y.vs_queens),SCALE_KEY+'<div class="ylist">'+SPEC_OPEN.map(function(s){var p=Y.vs_queens[s.measure],dk=YEAR_DIFF_KEY[s.measure],d=dk&&Y.vs_queens_diff?Y.vs_queens_diff[dk]:null;p=p==null?null:Math.round(p);
       return pointBtn("year",Y.id,s.measure,p,d==null?(p===3?"same":"difference not in the data"):fmtDiff(s.measure,d),true)}).join("")+'</div>',{sub:hlSub(Y,"compared_to_queens","queens")});
@@ -2503,7 +2499,7 @@ function vHood(H){
   var pRules=rulesOf(H,"parking_rules"),carBits=[],kinds={},dogBits=[],foodBits=[],errBits=[],whoBits=[];
   H.units.forEach(function(U){var w=parkWord(U);kinds[w]=(kinds[w]||0)+1});
   Object.keys(kinds).forEach(function(w){carBits.push(kinds[w]+" of "+N+": "+w.toLowerCase())});
-  if(t.park_walk_min!=null)dogBits.push("Green space is a "+Math.max(1,r0(t.park_walk_min))+"-minute walk");
+  if(t.park_walk_min!=null)dogBits.push("A park is "+aWalk(t.park_walk_min)+" away");
   if(t.park_ha_800m!=null)dogBits.push(r1(t.park_ha_800m)+" hectares of park within a 10-minute walk");
   if(t.dog_park_m!=null)dogBits.push("the nearest dog park is "+distWords(t.dog_park_m));
   if(t.restaurants_800m!=null)foodBits.push(pl(t.restaurants_800m,"restaurant"));if(t.bars_800m!=null)foodBits.push(pl(t.bars_800m,"bar"));if(t.cafes_800m!=null)foodBits.push(pl(t.cafes_800m,"café"));
@@ -2520,7 +2516,7 @@ function vHood(H){
   if(s.violent_per_1000!=null)sf.push(r1(s.violent_per_1000)+" violent crimes per 1,000 residents a year"+(s.year?" ("+Math.round(s.year)+")":"")+(JAM.violent_per_1000!=null?"; around Mom and Dad's it is "+JAM.violent_per_1000:"")+".");
   if(s.vs_jamaica!=null)sf.push(SAY.crime({violent_vs_jamaica:s.vs_jamaica})+(s.vs_us!=null?" Compared to the United States as a whole: "+times(s.vs_us)+".":""));
   if(s.property_per_1000!=null)sf.push(r1(s.property_per_1000)+" property crimes per 1,000 residents a year"+(s.property_vs_jamaica!=null?(Math.abs(s.property_vs_jamaica-1)<0.005?", the same rate as around Mom and Dad's":", "+times(s.property_vs_jamaica)+" the rate around Mom and Dad's"):"")+".");
-  if(s.vehicle_theft_per_1000!=null)sf.push(r1(s.vehicle_theft_per_1000)+" car thefts per 1,000 residents a year.");
+  if(s.vehicle_theft_per_1000!=null)sf.push(r1(s.vehicle_theft_per_1000)+(Number(r1(s.vehicle_theft_per_1000))===1?" car theft":" car thefts")+" per 1,000 residents a year.");
   if(sf.length&&s.geography)sf.push("These numbers describe the police area, not the block: "+s.geography+".");
   var hw=[];
   hw.push("<p>"+esc(capFirst(["parks, dog parks, food, shops and water from "+SOURCES.map,SOURCES.walk,"who lives here from the "+SOURCES.census,"local rules from the town pages linked beside each one","drive time, with clear roads, from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"train and bus time from "+SOURCES.transit].join("; ")))+".</p>");
@@ -2566,9 +2562,12 @@ function momentSrc(U,k){var H=hoodOf(U),yr=H.safety&&H.safety.year;
   return {wake:[SOURCES.map,SOURCES.walk,"dog policy from "+SOURCES.listing],work:["size and rooms from "+SOURCES.listing,"cafés, gyms, libraries, supermarket and highway from "+SOURCES.map,SOURCES.walk],after:[SOURCES.map],
     night:["crime rates from "+crimeSrc(U.moments.night.police,yr),"parking, front desk and entry from "+SOURCES.listing],sat:["bars, restaurants, music and the station from "+SOURCES.map,"the last ride home from "+SOURCES.transit,"parking from "+SOURCES.listing],
     sun:["drive time and miles from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"train and bus from "+SOURCES.transit]}[k]||[]}
+var CRIME_LINE=/\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000|break-in|incident|police/i;
+function momentBody(U,k){var fs=factsOf(U,k),open=fs.filter(function(x){return !CRIME_LINE.test(x.t)}),cr=fs.filter(function(x){return CRIME_LINE.test(x.t)}),src=momentSrc(U,k);
+  return '<ul>'+factLis(open)+'</ul>'+(cr.length?howHtml('<ul>'+factLis(cr)+'</ul>'+(src.length?'<p>'+esc(capFirst(src.join("; ")))+'.</p>':'')):how.apply(null,src))}
 function dayStack(U){var d=dayOfUnit(U);
   return '<p class="momcount" id="mom-count">'+pl(d.length,"moment")+'</p><div class="moms">'+d.map(function(x){var id="m-"+x.k;
-    return '<details class="rowd mom" id="'+id+'" data-row="'+id+'"'+(rowOpen(id,false)?' open':'')+'><summary><span class="mi">'+ptIcon(MOM_IC[x.k])+'</span><span class="rl">'+esc(MOM_TITLE[x.k]||x.t)+lvlChip(x.tint)+'</span><span class="rh">'+esc(x.cap)+'</span><i class="chev" aria-hidden="true"></i></summary><div class="rb"><ul>'+factLis(factsOf(U,x.k))+'</ul>'+how.apply(null,momentSrc(U,x.k))+'</div></details>'}).join("")+'</div>'}
+    return '<details class="rowd mom" id="'+id+'" data-row="'+id+'"'+(rowOpen(id,false)?' open':'')+'><summary><span class="mi">'+ptIcon(MOM_IC[x.k])+'</span><span class="rl">'+esc(MOM_TITLE[x.k]||x.t)+lvlChip(x.tint)+'</span><span class="rh">'+esc(x.cap)+'</span><i class="chev" aria-hidden="true"></i></summary><div class="rb">'+momentBody(U,x.k)+'</div></details>'}).join("")+'</div>'}
 function saveBtn(ids,label,wide,pos,sub){var all=ids.length>0&&ids.every(function(id){return savedIx(id)>-1});
   return '<button type="button" class="btn savb '+(all?'held':'main')+(wide?' wide':'')+'" data-act="save" data-ids="'+esc(ids.join("\u0001"))+'"'+(pos?' data-pos="'+pos+'"':'')+' aria-pressed="'+all+'">'+HEART+(all?'<span>Saved<small>Tap to take it off your list</small></span>':sub?'<span class="sv2">'+esc(label)+' <small>'+esc(sub)+'</small></span>':esc(label))+'</button>'}
 var HEART='<svg class="hrt" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 20.500c-5.500-3.800-8.500-7-8.500-10.600A4.700 4.700 0 0 1 12 7.200a4.700 4.700 0 0 1 8.500 2.700c0 3.600-3 6.800-8.500 10.600z" fill="currentColor"/></svg>';
@@ -2795,7 +2794,7 @@ function openLimits(on){var was=limsheet.classList.contains("open");if(on===was)
   if(on){try{limsheet.querySelector("h2").focus({preventScroll:true})}catch(e){}}else if(lastFocus&&lastFocus.focus&&document.contains(lastFocus)){try{lastFocus.focus({preventScroll:true})}catch(e){}}}
 function tourText(){var H=listSorted();
   return "LAMIA'S TOUR LIST\nData built "+seenLong(META.built_at)+". Prices are as seen on the dates shown.\n\n"+H.map(function(U,i){var R=U.rent||{},q=tourQs(U),c=conf(U);
-    return (i+1)+". "+uName(U)+(U.unit?", unit "+U.unit:"")+"\n   "+(U.address||"Address not known yet")+" · "+hoodOf(U).name+" ("+yearOf(U).label+")\n   "+money(U.all_in)+(R.asterisk?"*":"")+" all-in a month, "+seenShort(U.price_seen_at)+" · "+bedsWord(U)+", "+(U.sqft!=null?r0(U.sqft)+" sq ft":"size not known yet")+" · "+parkWord(U)+
+    return (i+1)+". "+uName(U)+(U.unit?", unit "+U.unit:"")+"\n   "+(U.address||"Address not known yet")+" · "+hoodOf(U).name+" ("+yearOf(U).label+")\n   "+money(U.all_in)+(R.asterisk?"*":"")+" all-in a month, "+seenShort(U.price_seen_at)+" · "+bedsWord(U)+", "+(U.sqft!=null?r0(U.sqft)+" sq ft":"size not published")+" · "+parkWord(U)+
       (R.asterisk?"\n   * Rent offer: "+(offerText(U)||"a special offer applies.")+(R.gross!=null?" A paying month is "+money(R.gross)+" rent"+(U.all_in_gross!=null?", "+money(U.all_in_gross)+" all-in":"")+".":"")+(R.needs_call?" Needs a call.":""):"")+
       confs(U).map(function(c){return "\n   * Still to confirm: "+cWhat(c)+"."+(c.why?" "+c.why:"")}).join("")+
       (discs(U).length?"\n   Good to know before you call: "+discs(U).map(function(d){return d.what}).join("; ")+".":"")+
@@ -2871,7 +2870,7 @@ window.addEventListener("resize",fitTray);
 document.addEventListener("toggle",function(e){var d=e.target,id=d&&d.getAttribute&&d.getAttribute("data-row");if(id&&view.contains(d))(OPENED[current]=OPENED[current]||{})[id]=d.open},true);
 window.addEventListener("hashchange",function(){var r=location.hash.replace(/^#/,"")||"lives";if(routeOf(parse(r))!==current){closeSheet();go(r)}});
 
-window.__houseHunt={bldgs:function(){return BLDGS.map(function(B){return {id:B.id,slug:SLUG.bldg[B.id],hood:B.hood.id,units:B.units.map(function(u){return u.id})}})},state:function(){return {saved:S.saved.slice(),pick:S.pick.slice(),sort:S.sort}},tint:function(id,k){return U_BY[id]?tintOf(U_BY[id],k):null},sentences:sentences,payNote:payNote,ptBody:ptBody,parkShort:parkShort,distShort:distShort,HL:HL,HL_MAX:HL_MAX,cleanText:cleanText,looksDump:looksDump,hoodWhere:hoodWhere,hoodTitle:hoodTitle,headline:function(kind,id,key){var o=kind==="unit"?U_BY[id]:kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;
+window.__houseHunt={bldgs:function(){return BLDGS.map(function(B){return {id:B.id,slug:SLUG.bldg[B.id],hood:B.hood.id,units:B.units.map(function(u){return u.id})}})},state:function(){return {saved:S.saved.slice(),pick:S.pick.slice(),sort:S.sort}},tint:function(id,k){return U_BY[id]?tintOf(U_BY[id],k):null},sentences:sentences,aWalk:aWalk,payNote:payNote,ptBody:ptBody,parkShort:parkShort,distShort:distShort,HL:HL,HL_MAX:HL_MAX,cleanText:cleanText,looksDump:looksDump,hoodWhere:hoodWhere,hoodTitle:hoodTitle,headline:function(kind,id,key){var o=kind==="unit"?U_BY[id]:kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;
     return key==="trip"?HL.trip(kind==="unit"?o.moments.sun:o):key==="queens"?HL.queens(o.vs_queens):key==="reviews"?HL.reviews(o.ratings):HL[key](o)},map:function(){return HHMAP},marks:function(){return YEARS.map(function(Y){return Y.mark})},mapHoods:function(id){return mapData().neighborhoods.filter(function(h){return !id||h.year===id}).length},tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
 syncSliders();renderCounts();renderTray();renderFoot();
 go((function(){try{return location.hash.replace(/^#/,"")}catch(e){return ""}})()||"lives");

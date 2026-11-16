@@ -396,3 +396,127 @@ compare view of three.
 - Headlines longer than the row are cut with an ellipsis until the row is opened.
 - The first-run "How this works" card still opens on the first visit.
 - Old screenshots from earlier passes remain in `site/screens/`; this pass wrote `ux-*`, `map-int-*` and the numbered ones.
+
+## UI pass 5: experience and neighborhood pages
+
+(2026-11-16. Will: "go over as a UI/UX designer… especially the experience pages and the neighborhood pages… figure out
+ways we can be clearer… better storytelling". Also applies `docs/A11Y_READABILITY_AUDIT.md` and the data-side changes of
+the same day. Copy is not written in the template: every sentence on these two pages comes from `data.json`.)
+
+### Story order
+
+**Experience** (`vYear`, wrapper `.pg.pg-exp`): drawing (the *banner* crop, 96 px) → name and tagline → key facts →
+"See the N neighborhoods ↓" (with "M places to see" on the button) → About this experience → A day in this experience →
+the neighborhoods (List / Map, top three, Show more) → "More about this experience" rows (the promise and the catch;
+what it costs you; going out and green space; compared to staying in Queens) → the other-places rows (looked good,
+skipped; worth a phone call; not re-checked).
+
+**Neighborhood** (`vHood`, `.pg.pg-hood`): experience marker + rank + experience name → name → where → key facts →
+"See the N places ↓" ("in M buildings" on the button) → About <name> → At a glance → one pull quote → the buildings
+(top three, Show more) → avoid / phone call / not re-checked rows (they are about places, so they sit under the list)
+→ "More about <name>" rows (what residents say; how others describe it; the good and the catch; the area in detail;
+local rules; reviews of the buildings; compared to staying in Queens).
+
+### The pieces
+
+- **Key facts** (`kfacts`, `#keyfacts`): three cells, not four. All-in, drive to Mom and Dad, tolls. A median carries a
+  small "TYPICAL" tag above it and its range beneath, worded as a range ("from $1,810 to $2,990"). Sums are rounded to
+  $10 here (`m10`), tolls to the dollar (`tollMoney`, "under $1" below that), minutes whole; exact figures stay inside
+  the rows and sheets. A single-place neighborhood shows its exact price and no tag. The count cell is gone: the counts
+  ride on the button under the strip, which is where the old underlined "N places" cell led anyway (audit 7).
+  The all-in and toll cells are real buttons with an "i": all-in opens the one-line list of what it includes; tolls
+  opens what a round trip costs with a New York E-ZPass, what the tag is, and the by-mail figure.
+- **About** (`aboutBox`, `ptBody`, `catchBox`): lead, then the icon points. A point shows a bold lead-in when the data
+  gives one (`about_points[].lead`) or when the text is "Lead: rest"; otherwise its first figure is set in bold
+  ("about **72 minutes** away") so the list can be scanned. Points with `icon: "warning"` leave the list and go last in
+  a butter box labelled "The catch": distinct, no border, no red.
+- **A day in this experience** (`storyHtml`, `#sec-day`): three cards side by side in one sideways-scrolling strip
+  (80% wide, scroll-snap, the next card peeking in; keyboard-focusable). Each: icon in a ring of the experience colour,
+  "1 of 3", title, and when the text opens with a short sentence that sentence as a bold caption. Stacked cards were
+  the alternative: at 390 px three stacked moments are about 520 px of prose and read as a text block (that is what
+  the old row looked like when opened); the strip is about 250 px and reads as a storyboard. Chosen: the strip.
+- **At a glance** (`glance`, `#sec-glance`): two columns of icon facts, always in the same order: restaurants and bars
+  on foot; walk to a park; dog park; supermarket; Mom and Dad by train and bus; street parking in three words
+  (`parkShort`: "No overnight parking", "Resident permits only", "Street-cleaning days", "Snow-day bans", "Metered
+  streets", "N rules on record", "Ask the building"). The parking fact is a button that opens Local rules. Distances
+  under a mile are minutes on foot (`distShort`).
+- **Pull quote** (`pullPick`, `#pull`): one outside description, with its source link and "about <area>" when the data
+  says the quote is about a wider or narrower place. Picked: `described[].featured` if the data sets it, else the first
+  of 40 to 150 characters, else the shortest; never one with crime wording. The others stay in "How others describe
+  it", and none is shown twice. Resident quotes are not put in the open (they can mention crime); inside their row the
+  first quote is set larger, and safety themes are listed after daily-life themes.
+- **Rows**: residents' headline is the balance plus the commonest topic ("8 positive, 1 negative · mostly dogs and
+  green space"); "Reviews of the buildings" is new on the neighborhood (how many buildings have ratings, each linked);
+  "Good for you, watch for" is "The good and the catch"; "What's here" is "The area in detail" (its summary is now At a
+  glance); prose headlines are shown whole or replaced by a plain fallback (`wholeHead`), never cut with "…".
+- **Cards**: a neighborhood card's price chip reads "typical all-in, from $X to $Y"; a neighborhood with
+  `single_building` says "1 building, N apartments"; "Top pick" is withheld (card and page) when that one building still
+  has something to confirm.
+- **Type and spacing** on these two pages: 14 / 16 / 20 px plus the page title and 13 px caps labels; 26 px between
+  sections, no box around a section; the strip's small text went from 10.5 to 14 px.
+
+### Collapsed heights at 390 × 844 (under the sticky top line, to the end of the footer)
+
+| Page | Before this pass | After | "See …" button ends at (page y) |
+|---|---|---|---|
+| Experience, six of six | 2,150 to 2,357 (2.55 to 2.79 screens) | 2,568 to 2,794 (3.04 to 3.31) | before 508 to 539, after 471 to 502 (0.56 to 0.59 of a screen) |
+| Neighborhood, rich (Stamford) | 2,064 (2.45) | 2,677 (3.17) | 293 → 347 |
+| Neighborhood, Newark / West Side / Bridgeport / Hackensack | 2,034 to 2,104 | 2,737 to 2,838 (3.24 to 3.36) | about 363 |
+| Neighborhood, single building (Brookfield) | 1,558 (1.85) | 2,185 (2.59) | 281 → 331 |
+| Neighborhood, nothing to tour (McGinley Square) | 1,273 (1.51) | 1,835 (2.17) | none |
+
+The 2.5-screen aim is **not** met: the day (about 290 px), At a glance (about 200 px) and the pull quote (100 to 190 px)
+moved from behind a tap into the open, and small text grew. What did improve is where things are: the way on is inside
+0.6 of a screen on all six experiences, and the list starts after About and the story instead of after the rows. The
+walkthrough's ceilings are 3.6 screens for both page kinds.
+
+### Elsewhere (the brief's "obvious fixes", the audit, the data changes)
+
+- **Save this place** saves one apartment, the building's best-ranked; the button says which ("Unit 508, the top pick
+  of 8 here"), the toast names it, hearts on the rows save the others.
+- **Rent terms**: `first_full_payment_note` is never printed raw (`payNote`): "Counting from a Dec 1, 2026 move-in; a
+  first part-month is charged by the day." / "Ask when the free month applies." / nothing.
+- **Apartment price with an offer**: "$X* a month, with the current offer", and one line "With the current offer; a
+  normal month is $Y". "Net-effective" and "cap" are out of the open text ("your $3,000 limit").
+- **Compare**: column heads are two lines ("Unit 606" over the building), never ellipsised; the sentence uses the same
+  names, not "House 1"; × is 44 px; the best cell says "✓ Best".
+- **My list**: facts wrap instead of overlapping; labels 12.5 px; with two or three saved they arrive ticked.
+- **Sheets**: the page behind is `inert` while a sheet is open; the limits sheet has the scrim, `aria-modal`, focus on
+  its heading, and returns focus on close.
+- **Focus and history**: a route change focuses the `h1`; "See the … ↓" moves focus to the list heading; the trail's
+  links go `history.back()` when that is where they lead, else replace, so browser Back agrees; `scroll-padding` keeps
+  focus out from under the bar. First screen has an `h1`; cards are `h3`; headings and row labels have real spaces.
+- **Small text and contrast**: floors raised (nothing under 12.5 px in the open); row and map-control borders #B58CA5;
+  unselected map chips no longer faded; map labels darkened; the 31-to-60 drive band is further from its neighbours.
+- **320 px**: the map's experience chips are one row that scrolls sideways.
+- **Building-level data**: contact, About text and points, ratings and photos are read from `buildings[]` (`bView`),
+  a unit's copy is the last resort. A listing site's forwarding number is labelled "Listing-site number (forwards to
+  the office)", the button reads "Phone and hours", and the building's own site leads when there is one.
+  `scripts/build_site.py` keeps only those fields of `buildings[]`, keeps `local.survey[].source_area` (now read) and
+  drops `experience_score_basis` (the scoring sentence is no longer shown).
+- **Publish step**: `python3 scripts/build_artifact.py` after `build_site.py`; the walkthrough's "stripped and
+  re-wrapped" runs (phone and desktop) cover that shape and pass.
+
+### Not done, and why
+
+- **A one-apartment building does not open its apartment by default** (audit 16): it made the page 4,076 px tall
+  collapsed, against the owner's rule that every section starts as a headline.
+- **The map is still the List / Map switch**, not a collapsed row: it is a second view of the same list, one tap away.
+- **"Only show what differs" is still on by default; the bar still reads "Saved · N"** (audit 26, 21): both are covered
+  by existing walkthrough assertions and are the owner's earlier choices.
+- **"floor not published", "parking rules not found, ask"** and other ask-phrases (audit 18) are unchanged.
+- Compare row titles are still `h4`; the tray is still a `div`; font sizes are still px; fonts are still remote.
+- The rent offer is still told in several places inside an open apartment (audit 22); only the wording changed.
+- "Places" is still the umbrella word on buttons and counts ("See the 58 places · in 25 buildings").
+
+### Weak
+
+- **About points repeat the strip and At a glance** on most neighborhoods ("Your parents are about 53 minutes away",
+  "About 24 restaurants…"): the points are numeric restatements. Nothing is hidden; the fix is in the copy.
+- Bold figures in points come from a pattern (`QTY_RE`), not from the writer: a point with no number has no bold.
+- The pull quote is chosen by length, so it can be the dullest description (an encyclopedia sentence).
+- The story strip hides cards two and three until she swipes; only the peeking edge says there is more.
+- At 320 px the strip's cells are tight ("a month, all-in" wraps to two lines).
+- Data that would help: `about_points[].lead`; `described[].featured`; `traits.station_m` + station name; names of
+  the nearest park and dog park; `day_moments[].caption`; a one-line `headlines.residents_say.headline`; a written
+  three-word `local.street_parking_short`; `years[].counts` used for the strip so text and figures share one source.

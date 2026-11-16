@@ -263,7 +263,7 @@ const LIMITS = { experience: 3.6, neighborhood: 3.6, building: 2.6, 'building, m
     confirm: '1 thing to confirm · 2 to ask', confirmRent: '1 thing to confirm', confirmAsk: '1 to ask', confirmNone: 'nothing',
     reviews: '4.2 on Google · 149 reviews, and 2 more sites', reviewsOne: '4.0 on Google · 1 review', reviewsTwo: '4.5 on Google · 20 reviews, and 1 more site',
     reviewsNone: 'No reviews found online', reviewsNotYet: 'Not looked up yet', reviewsMissing: 'Not looked up yet',
-    firstLong: 'There is a real night out on foot here.', firstMax: 64,
+    firstLong: 'There is a real night out on foot here, with neighbors your age and a dog run that stays busy until late in the evening.', firstMax: 64,
     dump: ['', 'First month free on a 13-month lease', 'NOW OFFERING 1 MONTH FREE', ''],
     questions: 'nothing flagged', first: 'It has 2.5 miles of beach.' });
 
@@ -316,6 +316,7 @@ const LIMITS = { experience: 3.6, neighborhood: 3.6, building: 2.6, 'building, m
     const about = await page.textContent('#about'), sents = await page.evaluate(x => window.__houseHunt.sentences(x), Y1.host.intro || '');
     for (const s of sents) if (s.length > 30) assert(!(await page.textContent('#sec-day')).includes(s), 'the day repeats nothing from the About text: ' + s);
     const all = await page.evaluate(() => document.getElementById('view').textContent); for (const d of dm) { const s = d.p.slice(0, 60); assert.strictEqual(all.split(s).length - 1, 1, 'each passage appears once on the page: ' + s); } }
+  { await page.click('[data-act=rows-all]'); const t = await page.evaluate(() => document.getElementById('view').textContent); assert(!/by mail/i.test(t) && !/a 8-minute|a 11-minute|a 18-minute/.test(t) && !/,,/.test(t) && !/typical place is/.test(t), 'no by-mail toll figure and no "a 8-minute" anywhere on the experience, rows open'); await page.click('[data-act=rows-all]'); }
   // the story order of the page: drawing, title, key facts, the way on, About, the day, the neighborhoods, then the rows
   { const ys = await page.evaluate(() => ['.ph1', '#keyfacts', '#see-hoods', '#about', '#sec-day', '#sec-hoods', '#sec-rows'].map(s => { const e = document.querySelector(s); return e ? Math.round(e.getBoundingClientRect().top + window.scrollY) : null; }).filter(v => v != null)); assert.deepStrictEqual(ys, ys.slice().sort((a, b) => a - b), 'in story order: ' + ys);
     const sizes = await page.evaluate(() => [...new Set([...document.querySelectorAll('#view .pg p, #view .pg li, #view .pg small, #view .pg b, #view .pg span, #view .pg h2, #view .pg h3')].filter(e => e.getClientRects().length && e.textContent.trim() && !e.closest('svg') && !e.closest('.rb') && !e.closest('.hhmap')).map(e => parseFloat(getComputedStyle(e).fontSize)))].sort((a, b) => a - b)); assert(sizes[0] >= 12.5, 'nothing on the page is under 12.5 px: ' + sizes); console.log('experience: text sizes in the open', sizes.join(', ')); }
@@ -493,7 +494,10 @@ const LIMITS = { experience: 3.6, neighborhood: 3.6, building: 2.6, 'building, m
   // "A day here": a stack of closed rows, one per moment: icon, title, one-line takeaway, and a chip in three levels where the data can say
   await go('#bldg-' + bSlug(star), '.bpage'); await openRow('r-day');
   { const B0 = bUnits(star)[0], KS = ['wake', 'work', 'after', 'night', 'sat', 'sun'], ms = await page.evaluate(() => [...document.querySelectorAll('#r-day details.mom')].map(d => ({ id: d.id, open: d.open, icon: d.querySelectorAll('summary .mi svg').length, title: d.querySelector('summary .rl').firstChild.textContent.trim(), take: d.querySelector('summary .rh').textContent, chip: (d.querySelector('summary .lvl') || {}).textContent || '', chev: d.querySelectorAll('summary .chev').length })));
-    assert.deepStrictEqual(ms.map(m => m.id), KS.map(k => 'm-' + k)); assert.strictEqual((await page.textContent('#mom-count')).trim(), '6 moments', 'it says how many are below');
+    assert.deepStrictEqual(ms.map(m => m.id), KS.map(k => 'm-' + k));
+    // crime wording of the night moment is only inside its closed "See how we got this"; "an 8-minute walk", never "a 8-minute"
+    { await page.click('#m-night > summary'); const vis = await page.evaluate(() => document.getElementById('m-night').innerText); assert(!CRIME.test(vis), 'no crime line in the open night moment: ' + (CRIME.exec(vis) || [''])[0]); await page.click('#m-night > summary');
+      assert.deepStrictEqual(await page.evaluate(() => [8, 11, 18, 5, 80, 1].map(n => window.__houseHunt.aWalk(n))), ['an 8-minute walk', 'an 11-minute walk', 'an 18-minute walk', 'a 5-minute walk', 'an 80-minute walk', 'a 1-minute walk']); } assert.strictEqual((await page.textContent('#mom-count')).trim(), '6 moments', 'it says how many are below');
     const tints = await page.evaluate(([id, ks]) => ks.map(k => window.__houseHunt.tint(id, k)), [B0.id, KS]);
     ms.forEach((m, i) => { assert(!m.open && m.icon === 1 && m.chev === 1 && m.title && m.take, 'closed, with icon, title, takeaway and caret: ' + JSON.stringify(m)); assert.strictEqual(m.chip, { s: 'Strong', m: 'Mixed', w: 'Weak' }[tints[i]] || '', 'the chip is the level, and absent where the data cannot say: ' + m.id); });
     assert(!CRIME.test(await page.evaluate(() => document.getElementById('r-day').innerText)), 'no crime figure on a moment row');
@@ -763,7 +767,7 @@ const LIMITS = { experience: 3.6, neighborhood: 3.6, building: 2.6, 'building, m
   assert(subStyle.headW > subStyle.subW && subStyle.lines <= 2, 'headline strong, subhead lighter and at most two lines: ' + JSON.stringify(subStyle));
   // tolls: the E-ZPass figure, with its note when a mail rate is also present
   { const chips = await page2.textContent('.sec.head #keyfacts'); assert(chips.includes('$14') && !chips.includes('13.50') && chips.includes('NY E-ZPass') && !chips.includes('21.25'), 'E-ZPass figure, to the dollar, with its note: ' + chips);
-    await page2.click('#keyfacts [data-act="toll-info"]'); await page2.waitForSelector('#sheet.open'); const sh = await page2.textContent('#sheetBody'); assert(sh.includes('$13.50') && sh.includes('$21.25') && /by mail/.test(sh), 'the exact figures and the mail rate are behind the tap: ' + sh); await page2.click('#shClose'); await page2.waitForSelector('#sheet:not(.open)'); }
+    await page2.click('#keyfacts [data-act="toll-info"]'); await page2.waitForSelector('#sheet.open'); const sh = await page2.textContent('#sheetBody'); assert(sh.includes('$13.50') && !sh.includes('21.25') && !/by mail/i.test(sh) && /out-of-state tag/.test(sh), 'the exact figure is behind the tap; the by-mail figure is not shown anywhere (it rests on fewer apartments and misleads): ' + sh); await page2.click('#shClose'); await page2.waitForSelector('#sheet:not(.open)'); }
   // resident voices in their row
   assert((await headOf('r-voices', page2)).startsWith('3 positive, 2 negative'), 'the balance leads the headline, then what most of it is about: ' + await headOf('r-voices', page2)); await openRow('r-voices', page2);
   assert.strictEqual(await page2.locator('#no-voices').count(), 0); assert.strictEqual(await page2.locator('#sec-voices .vtheme').count(), 3, 'two themes and the survey heading');
