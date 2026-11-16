@@ -142,11 +142,14 @@ is blank, so only "net-effective rent" is disclosed.
 available - 1st year FREE! 2 blocks away covered and permitted not assigned". The host line says "covered parking (fee
 not published)" and the subhead "The car gets a roof".
 
-**D11. Units on a stale page that carry nothing, because one unit row shows a date.** Sono Pearl 401 (page last
-modified 2026-07-13, 125 days; its sibling 313 has the asterisk), Wakefield Station 401 (2026-07-21, 117 days), 134
-Baldwin Ave 301 and 411 (2026-08-06, 101 days). The exemption for "a date for the unit in the last 60 days" is applied
-by `parsers.listing_stale` when the Trulia row prints "Available Now (2026-10-17)"; that date is Trulia's own stamp on
-a page it has not rebuilt since July.
+**D11. The staleness rule is switched off for most Trulia building-page units; 4 shown units on stale pages carry
+nothing.** Sono Pearl 401 (page last modified 2026-07-13, 125 days; its sibling 313 has the asterisk, by verdict),
+Wakefield Station 401 (2026-07-21, 117 days), 134 Baldwin Ave 301 and 411 (2026-08-06, 101 days). Two causes in
+`scripts/build_master.py`. Line 1057 treats a non-empty `also_seen_at` as "a second site also lists the unit", but for
+these rows `also_seen_at` is the same Trulia building page the unit came from, so `listing_stale` stays blank although
+`listing_stale_days` is 125 and 117. Line 1052 looks for a modification-date fact only when the unit was not seen
+live, so a unit marked live whose date sits in `facts_batch_8` (`listing_last_modified = 2026-08-06`) never gets a date.
+The rule itself raised the item on 8 shown units; the other stale asterisks on the page come from verdicts.
 
 ### S3
 
@@ -195,9 +198,10 @@ intros do match.
 **D14. Required fees counted twice on 4 units** (overstates; the safe direction). Parc at Glenbrook 2328: Trulia's
 $2,598 is a total price that includes $123 of fees, and the fee line adds $123 again (all-in $2,960, should be about
 $2,837). 1 Kennedy Flats 2303 and 1315: fee line $140 against "$90/mo (total_price minus base_price); $50 amenity fee
-named" (the $50 is inside the $90). Residences at The Summit M2-07: $25 inside a total price, added again. Cause:
-`parsers.monthly_fees_from_text` sums the named fee with the total, and the "total price" rule from check 2 (D15) is
-applied only where the fee text is empty.
+named" (the $50 is inside the $90). Residences at The Summit M2-07: $25 inside a total price, added again. Likely
+cause: `parsers.monthly_fees_from_text` (`scripts/parsers.py:500`) adds a named fee to the total it is part of, and the
+"total price already includes the fees" rule from check 2 (D15) is applied to 23 units but not where a fee text was
+also parsed (both fee lines say "parsed from the fee text").
 
 **D15. Wrong floor and height values.** 100 W 139th St 27A is shown as floor 27 "read from the unit number" in a
 six-floor building (the repair note says an "unknown" evidence row now beats the label; `unit_floor` is still 27).
