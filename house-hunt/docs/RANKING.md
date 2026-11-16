@@ -96,3 +96,25 @@ places inside a neighborhood (top three, then more). "Years" are called "experie
 Neighborhood score = mean rank score of the neighborhood's three best shown places. A neighborhood with fewer than three
 shown places loses 2 points per missing place. Ties break on the neighborhood id. Computed in `scripts/page_data_extras.py`
 (`experience_score`, `rank_in_experience`), after the unit ranking, so it uses the same weights as the places.
+
+## After the second independent check (2026-11-16) — see `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_2.md`
+
+**Reviewed verdicts.** `data/evidence/review_verdicts.csv` (remove / asterisk / ok per unit, with the reason and the evidence
+quote). `remove` excludes the unit before ranking; `asterisk` adds that open item; `ok` adds nothing. A unit with no current
+`ok` or `asterisk` verdict cannot be shown (`scripts/check_registry.py`). A verdict never closes a fact the rules leave open.
+
+**Open items now counted** (one is an asterisk, two or more is sketchy): elevator; floor; dogs allowed; lease term (the listed
+price is for more than 13 months, or only "the lowest over the lease terms"); cost near the cap (all-in of $2,900 or more with
+pet rent, parking or required fees unknown); availability (a floor-plan row, or a reviewer's finding); listing (an evidence
+warning about the listing, or a reviewer's finding); eligibility; condo rules; other. A missing live check is still the
+separate item it was.
+
+**What opens a gate fact that used to stand.** An evidence row marked `unconfirmed` with no confirmed row beside it (elevator,
+dogs); a dog policy that does not name dogs as allowed ("upon approval", "case by case", small pets only); an elevator resting
+on the city's record for a lot at another address, or one with no active elevator on file; a floor the evidence pass called
+unknown, whatever the unit label reads as.
+
+**Cost.** Where the listed price belongs to a lease longer than 13 months and the page gives the 12-month price, the all-in
+cost and the cap use the 12-month price. `all_in_unknown_count` and `cap_margin` are on every unit.
+
+**Selection order** is deterministic: neighborhood, dominated last, score, units seen live first, `listing_id`.

@@ -9,11 +9,18 @@ Read this first every session. Newest entries at the top of the log.
 The "data only, no UI, no ranking" lines in `CLAUDE.md` and the handoff brief are superseded: the job is now the finished decision page.
 
 **Run everything:** `python3 scripts/run_all.py` (`--fast` after evidence-only changes) → `scripts/build_page_data.py` →
-`scripts/build_site.py` → `site/dist/index.html`. Publish as a NEW private artifact (never replace the mock).
+`scripts/page_data_extras.py` (prose, round 2 quotes and rules, contacts) → `scripts/build_site.py` → `site/dist/index.html`. Publish as a NEW private artifact (never replace the mock).
 
-**Latest run:** 20,464 listings → 2,598 pass listing gates → 1,653 within the all-in cap → 995 ranked → **344 shown**
-(194 with an asterisk: floor 159, live check 31, elevator 4, dogs 2), 36 avoid cards, 63 held. 132 neighborhoods on the page.
-By year: Little-City ~119, Old-Neighborhood ~93, Room-to-Breathe ~91, Fresh-Start 24, Walk-Everywhere 10, Quiet-Street 9.
+**Latest run (2026-11-16, after the second independent check):** 20,464 listings → 2,598 pass listing gates → 1,655 within
+the all-in cap → 621 ranked → **210 shown** in 163 buildings (130 with an asterisk: floor 60, live check 16, lease term 14,
+listing 12, cost near the cap 12, elevator 8, dogs 6, condo rules 2), 33 avoid cards, 53 held, 53 waiting for a live check.
+By year: Little-City 78, Old-Neighborhood 57, Room-to-Breathe 49, Fresh-Start 15, Quiet-Street 6, Walk-Everywhere 5.
+By state: NJ 88, NY 83, CT 39.
+
+**The review rule (new):** a unit is shown only if `data/evidence/review_verdicts.csv` holds an `ok` or `asterisk` verdict for
+it, written against the evidence as it stands (`scripts/verdicts.py`; `check_registry.py` fails the run otherwise). When
+evidence is added or a new unit is promoted: `python3 scripts/verdicts.py digest`, read it, `python3 scripts/verdicts.py add
+<file>`, rerun. See `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_2.md` (per-defect status, what is still weak, six decisions for Will).
 
 | Piece | Status |
 |---|---|
@@ -22,7 +29,7 @@ By year: Little-City ~119, Old-Neighborhood ~93, Room-to-Breathe ~91, Fresh-Star
 | Checker findings reach the list (`scripts/avoid.py`): age/income-restricted, waitlist, rented, dead listing, pet-free, "probably no elevator" readings, confirmed or probable ground-floor units | Added after round 3 showed they were being missed |
 | Elevator "inferred from height" needs a real building height (page or record, 6+ floors); a height guessed from a unit label ("36D") no longer counts (`scripts/rank.py`) | Done |
 | First independent check + repairs (`docs/INDEPENDENT_CHECK.md`, `docs/REPAIRS_AFTER_INDEPENDENT_CHECK.md`) | Done |
-| Second independent check (`docs/INDEPENDENT_CHECK_2.md`) | Running; fix what it finds, then publish the draft |
+| Second independent check (`docs/INDEPENDENT_CHECK_2.md`) and repairs (`docs/REPAIRS_AFTER_INDEPENDENT_CHECK_2.md`) | Done: 21 defects, 19 fixed, D13 one case left, D18 by review only; 352 reviewed verdicts |
 | Neighborhood voices: 890 verified quotes, 79 neighborhoods, 873 from Niche | Done; 53 later neighborhoods have none |
 | Local rules (parking, dogs) for 34 of 56 municipalities | Done |
 | Trulia | Blocking us (403/CAPTCHA) since the evening of Nov 15. No Trulia requests until a single test on Nov 16. About 100 NYC shown units cannot be re-checked until then |
