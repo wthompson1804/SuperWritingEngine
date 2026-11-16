@@ -4,7 +4,10 @@
 //   BASE=http://localhost:8765 OUT=site/screens W=390 node scripts/site_walkthrough_test.js     (then W=1280 and W=320)
 // BASE serves site/ (index.html fetches data.json and map_base.json). At W=390 it also opens the built single file
 // (site/dist/index.html) as a phone, a desktop, a small phone with reduced motion, with storage that throws, and with its
-// outer doctype/html/head/body stripped and re-wrapped. Screenshots are written at W=390 only.
+// outer doctype/html/head/body stripped and re-wrapped, and compares what the built page (slimmed data) shows with what the
+// whole data shows on a sample of pages. Screenshots are written at W=390 only.
+// Structure since round 3: experience -> neighborhood -> BUILDING (its rows, then "Apartments here") ; #unit-… opens the
+// building with that apartment open; saving is unlimited ("My list", #list); compare takes the two or three ticked there.
 const { chromium } = require('playwright');
 const assert = require('assert');
 const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390), VH = W === 320 ? 640 : W >= 1000 ? 900 : 844;
@@ -729,6 +732,20 @@ const LIMITS = { experience: 3.6, neighborhood: 3.4, building: 2.6, 'building, m
     console.log(`built page: ${bytes} bytes (${(bytes / 1048576).toFixed(2)} MB) = data ${dataBytes} + map base ${baseBytes} + template ${bytes - dataBytes - baseBytes}`);
     assert(baseBytes > 1000, 'the built page carries the map base');
     if (bytes >= 4 * 1000 * 1000) console.log('WARN built page is over 4 MB');
+    // The built page carries slimmed data (scripts/build_site.py drops what the template never reads). What it shows must be
+    // what the whole data shows: every experience, and a sample of neighborhoods and buildings, with everything opened, sheets included.
+    { const routes = ['#lives', ...data.years.map(y => '#exp-' + slug(y.id)), ...shownHoods.filter((h, i) => i % 6 === 0).map(h => '#hood-' + slug(h.id)), ...pageBldgs.filter((b, i) => i % 8 === 0).map(b => '#bldg-' + b.slug)];
+      const read = async rs => { const out = {}; for (const h of rs) { location.hash = h; await new Promise(r => setTimeout(r, 25));
+          for (let k = 0; k < 20; k++) { const m = [...document.querySelectorAll('#view [data-act=more]')].filter(x => x.getAttribute('data-n') !== '3').pop(); if (!m) break; m.click(); }
+          document.querySelectorAll('#view details').forEach(d => { d.open = true; }); let s = document.getElementById('view').innerText;
+          document.querySelectorAll('#view [data-act=scale],#view [data-act=contact]').forEach(b => { b.click(); document.querySelectorAll('#sheetBody details').forEach(d => { d.open = true; }); s += '\n@@' + document.getElementById('sheetBody').innerText; });
+          const c = document.querySelector('[data-act=close-sheet]'); if (c) c.click(); out[h] = s; } return out; };
+      const cx = await browser.newContext({ viewport: { width: 390, height: 844 } }), a = await cx.newPage(), b = await cx.newPage();
+      await a.goto(BASE + '/index.html'); await a.waitForSelector('.life'); await b.goto(BASE + '/dist/index.html'); await b.waitForSelector('.life');
+      const full = await a.evaluate(read, routes), slim = await b.evaluate(read, routes), diff = routes.filter(r => full[r] !== slim[r]);
+      assert.strictEqual(diff.length, 0, 'the slimmed page reads differently from the whole data on: ' + diff.slice(0, 5).join(', '));
+      const whole = Buffer.byteLength(JSON.stringify(data)); console.log(`slimmed data: ${dataBytes} bytes in the page against ${whole} whole (${Math.round(100 - 100 * dataBytes / whole)}% less); same text on ${routes.length} sampled pages`);
+      await cx.close(); }
     const wrapped = path.join(os.tmpdir(), 'house-hunt-rewrapped.html');
     fs.writeFileSync(wrapped, '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>skeleton</title></head><body>' +
       html.replace(/<!doctype[^>]*>/i, '').replace(/<\/?(html|head|body)\b[^>]*>/gi, '') + '</body></html>');

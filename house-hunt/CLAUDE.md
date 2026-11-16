@@ -93,3 +93,7 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
 - **Fix what does not land (Will, 2026-11-16, standing):** when something is visibly weak (an illustration, a line of
   text, a layout, a number that does not hold up), revise it without asking, then say what was changed. This does not
   cover changing the owner's rules (gates, cap, safety rule, what is shown or dropped): those still go to him.
+- **Diversity quotes are fine (Will, 2026-11-16):** resident quotes that mention diversity stay on the page. Only quotes
+  that single out residents by a named race, ethnicity, religion or national origin are left out. No Google Places key:
+  the ratings census stays as it is (information only; buildings never searched say "Not looked up yet"); no drop rule.
+  Lamia will not be asked to react to the experiences before the page is finished: the work now is the code.

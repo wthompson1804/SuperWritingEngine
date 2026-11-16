@@ -1,4 +1,4 @@
-# Run report (2026-11-16T01:45:23+00:00)
+# Run report (2026-11-16T01:48:58+00:00)
 
 ## Steps
 
@@ -12,8 +12,8 @@
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | FAILED |
-| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | FAILED |
+| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | ok |
+| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
 
 ## Stage counts
 
@@ -25,14 +25,14 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2632 | 2632 | +0 |
 | within the $3,000 all-in cap | 1613 | 1613 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 767 | 760 | +7 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 505 | 513 | -8 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 761 | 761 | +0 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 487 | 487 | +0 |
 | avoid cards | 34 | 34 | +0 |
-|   shown with an asterisk (one thing to confirm) | 312 | 317 | -5 |
-| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 115 | 122 | -7 |
-| held back for one confirmation | 35 | 30 | +5 |
-| clean, waiting for a live check (not shown) | 35 | 30 | +5 |
-| neighborhoods with 3+ shown places | 43 | 44 | -1 |
+|   shown with an asterisk (one thing to confirm) | 294 | 294 | +0 |
+| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 121 | 121 | +0 |
+| held back for one confirmation | 35 | 35 | +0 |
+| clean, waiting for a live check (not shown) | 35 | 35 | +0 |
+| neighborhoods with 3+ shown places | 42 | 42 | +0 |
 | buildings in the master table | 665 | 665 | +0 |
 
 ## Why units left
@@ -64,32 +64,32 @@
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
 | The Fresh-Start Year      |               6 |       92 |      63 |             0 |
-| The Little-City Year      |              29 |      319 |     216 |             5 |
-| The Old-Neighborhood Year |              40 |      133 |      86 |            27 |
+| The Little-City Year      |              29 |      313 |     202 |             5 |
+| The Old-Neighborhood Year |              40 |      133 |      83 |            27 |
 | The Quiet-Street Year     |               7 |       10 |      10 |             0 |
-| The Room-to-Breathe Year  |              31 |      206 |     125 |             0 |
+| The Room-to-Breathe Year  |              31 |      206 |     124 |             0 |
 | The Walk-Everywhere Year  |               5 |        7 |       5 |             2 |
 
 ## Fill rate among shown units (percent with a value)
 
 | Field | % |
 |---|---|
-| sqft | 89 |
-| unit_floor | 59 |
+| sqft | 90 |
+| unit_floor | 61 |
 | elevator_basis | 100 |
 | dog_weight_limit_lb | 20 |
 | parking_type | 85 |
 | parking_fee | 26 |
-| pet_rent | 60 |
-| pool | 46 |
+| pet_rent | 59 |
+| pool | 44 |
 | doorman | 37 |
-| year_built | 47 |
+| year_built | 45 |
 | toll_rt_ezpass | 100 |
-| transit_sat_median | 93 |
-| near_violent_250m_24m | 12 |
-| live_status | 63 |
-| rent_first_full_payment_date | 58 |
-| ev_pause_notes | 26 |
+| transit_sat_median | 94 |
+| near_violent_250m_24m | 13 |
+| live_status | 66 |
+| rent_first_full_payment_date | 57 |
+| ev_pause_notes | 27 |
 
 ## Last lines of each step
 
@@ -148,25 +148,20 @@ needs_call: {'yes': 1660, 'no': 999}
 
 **ranking and selection**
 ```
-evidence: 46 units excluded, shown 505, avoid cards 34, of them with an asterisk 312 ({'live check': 196, 'elevator': 44, 'listing': 37, 'availability': 16, 'dogs allowed': 14, 'eligibility': 5}), held for a confirmation 35, waiting for a live check 35
-stages: 2632 costed -> -1019 over the all-in cap -> -361 Jamaica safety rule -> -114 failed a gate on confirmed facts -> -115 removed by a reviewed verdict -> -1 sibling floor rule -> -209 sketchy -> -46 evidence exclusions -> 767 ranked
-shown buildings 231; disclosures: {'floor not published': 456, 'special offer': 257, 'could pass $3,000': 101, 'lease term': 98, 'dog weight limit not published': 28, 'overnight street parking': 19, 'net-effective rent': 18, 'condo rented by its owner': 9}
-(kept 767 units; candidates 362; shown 395; pools: {'': 405, 'pool': 362}
+evidence: 46 units excluded, shown 487, avoid cards 34, of them with an asterisk 294 ({'live check': 178, 'elevator': 44, 'listing': 37, 'availability': 16, 'dogs allowed': 14, 'eligibility': 5}), held for a confirmation 35, waiting for a live check 35
+stages: 2632 costed -> -1019 over the all-in cap -> -361 Jamaica safety rule -> -114 failed a gate on confirmed facts -> -121 removed by a reviewed verdict -> -1 sibling floor rule -> -209 sketchy -> -46 evidence exclusions -> 761 ranked
+shown buildings 231; disclosures: {'floor not published': 438, 'special offer': 253, 'lease term': 98, 'could pass $3,000': 97, 'dog weight limit not published': 22, 'overnight street parking': 19, 'net-effective rent': 18, 'condo rented by its owner': 9}
+(kept 761 units; candidates 362; shown 395; pools: {'': 405, 'pool': 356}
 ```
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 302 checks, 1 failed
-  FAIL verdicts: a shown unit has no ok / asterisk / disclose verdict
+test_rules (data): 302 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
-   apartmentlist:p27690738-bay-s01-BAY-0708 (Bay One BAY-0708): no reviewed verdict: nobody has read this unit's evidence
-   apartmentlist:p1932824-19e-a03-431 (19 East 431): no reviewed verdict: nobody has read this unit's evidence
-   apartmentlist:p27690738-bay-a16-BAY-0803 (Bay One BAY-0803): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2746633852:Unit_322:466166988 (Ethos Kelsey 322): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2746633852:Unit_504:465853553 (Ethos Kelsey 504): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2746633852:Unit_511:465853566 (Ethos Kelsey 511): no reviewed verdict: nobody has read this unit's evidence
+field registry: {'used': 500, 'display': 311, 'provenance': 191, 'not_used': 17}
+shown-list assertions: all pass
 ```
 
