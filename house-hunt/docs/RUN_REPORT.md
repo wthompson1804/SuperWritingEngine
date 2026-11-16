@@ -1,4 +1,4 @@
-# Run report (2026-11-16T00:03:10+00:00)
+# Run report (2026-11-16T00:03:57+00:00)
 
 ## Steps
 
@@ -12,8 +12,8 @@
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | FAILED |
-| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | FAILED |
+| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | ok |
+| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
 
 ## Stage counts
 
@@ -25,14 +25,14 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2573 | 2573 | +0 |
 | within the $3,000 all-in cap | 1655 | 1655 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 667 | 674 | -7 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 216 | 218 | -2 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 625 | 667 | -42 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 214 | 216 | -2 |
 | avoid cards | 33 | 33 | +0 |
-|   shown with an asterisk (one thing to confirm) | 136 | 138 | -2 |
-| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 61 | 54 | +7 |
-| held back for one confirmation | 54 | 54 | +0 |
-| clean, waiting for a live check (not shown) | 53 | 52 | +1 |
-| neighborhoods with 3+ shown places | 27 | 27 | +0 |
+|   shown with an asterisk (one thing to confirm) | 135 | 136 | -1 |
+| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 105 | 61 | +44 |
+| held back for one confirmation | 52 | 54 | -2 |
+| clean, waiting for a live check (not shown) | 52 | 53 | -1 |
+| neighborhoods with 3+ shown places | 26 | 27 | -1 |
 | buildings in the master table | 665 | 665 | +0 |
 
 ## Why units left
@@ -50,10 +50,10 @@
 
 **excluded_sketchy.csv**
 
-- two or more things unconfirmed: floor: 220
+- two or more things unconfirmed: floor: 218
 - elevator not stated on any page and the building's height is not known (it was guessed from the unit label): 112
-- cost near the cap: 110
-- availability: 61
+- cost near the cap: 109
+- availability: 60
 - two or more things unconfirmed: elevator: 59
 - lease term: 57
 - floor: 51
@@ -64,10 +64,10 @@
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
 | The Fresh-Start Year      |               3 |       44 |      15 |             0 |
-| The Little-City Year      |              26 |      310 |      81 |             7 |
-| The Old-Neighborhood Year |              36 |      119 |      59 |            24 |
+| The Little-City Year      |              26 |      307 |      80 |             7 |
+| The Old-Neighborhood Year |              36 |      117 |      58 |            24 |
 | The Quiet-Street Year     |               6 |        8 |       6 |             0 |
-| The Room-to-Breathe Year  |              23 |      179 |      50 |             0 |
+| The Room-to-Breathe Year  |              23 |      142 |      50 |             0 |
 | The Walk-Everywhere Year  |               5 |        7 |       5 |             2 |
 
 ## Fill rate among shown units (percent with a value)
@@ -79,16 +79,16 @@
 | elevator_basis | 100 |
 | dog_weight_limit_lb | 19 |
 | parking_type | 77 |
-| parking_fee | 22 |
-| pet_rent | 44 |
+| parking_fee | 21 |
+| pet_rent | 45 |
 | pool | 26 |
 | doorman | 28 |
 | year_built | 51 |
-| toll_rt_ezpass | 37 |
+| toll_rt_ezpass | 36 |
 | transit_sat_median | 96 |
 | near_violent_250m_24m | 25 |
 | live_status | 94 |
-| rent_first_full_payment_date | 67 |
+| rent_first_full_payment_date | 68 |
 | ev_pause_notes | 32 |
 
 ## Last lines of each step
@@ -148,24 +148,19 @@ units 2573; cost gate {'pass': 1655, 'fail': 918}; rent asterisk 1763; rent term
 
 **ranking and selection**
 ```
-evidence: 36 units excluded, shown 216, avoid cards 33, of them with an asterisk 136 ({'floor': 62, 'live check': 19, 'lease term': 15, 'cost near the cap': 12, 'elevator': 10, 'listing': 9, 'dogs allowed': 7, 'other': 2}), held for a confirmation 54, waiting for a live check 53
-stages: 2573 costed -> -918 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -61 removed by a reviewed verdict -> -455 sketchy -> -36 evidence exclusions -> 667 ranked
-(kept 667 units; candidates 297; shown 283; pools: {'': 399, 'pool': 250, 'indoor': 18}
+evidence: 36 units excluded, shown 214, avoid cards 33, of them with an asterisk 135 ({'floor': 60, 'live check': 17, 'lease term': 15, 'listing': 12, 'cost near the cap': 12, 'elevator': 10, 'dogs allowed': 7, 'other': 2}), held for a confirmation 52, waiting for a live check 52
+stages: 2573 costed -> -918 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -105 removed by a reviewed verdict -> -453 sketchy -> -36 evidence exclusions -> 625 ranked
+(kept 625 units; candidates 295; shown 282; pools: {'': 358, 'pool': 249, 'indoor': 18}
 ```
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 85 checks, 1 failed
-  FAIL verdicts: a shown unit has no ok / asterisk verdict
+test_rules (data): 88 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
-   trulia:b2746633852:Unit_502:466166385 (Ethos Kelsey 502): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2792782357:Unit_517:463832791 (80East | Luxury Apartments | Dover, NJ 517): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2792782357:Unit_613:463832823 (80East | Luxury Apartments | Dover, NJ 613): no reviewed verdict: nobody has read this unit's evidence
-   manual:envy:220 (Envy by Gomes 220): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2594867367:Unit_207E:466174042 (Symphony 207E): no reviewed verdict: nobody has read this unit's evidence
-   trulia:b2737454290:Unit_8V:452657834 (Park Place Towers 8V): no reviewed verdict: nobody has read this unit's evidence
+field registry: {'used': 462, 'display': 309, 'provenance': 178, 'not_used': 18}
+shown-list assertions: all pass
 ```
 

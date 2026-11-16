@@ -1,0 +1,7 @@
+{
+ "url": "https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_county_500k.zip",
+ "retrieved_at": "2026-11-16T00:04:30+00:00",
+ "status": 200,
+ "path": "raw/census_cb/a31400440e704704.zip",
+ "source": "census_cb"
+}
