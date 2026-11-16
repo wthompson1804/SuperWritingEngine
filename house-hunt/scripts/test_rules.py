@@ -101,6 +101,20 @@ def pure():
         eq(P.unit_label_key(u), "", f"D17: plan label {u!r}")
     eq(P.unit_label_key("302"), "302", "D17: a real unit label")
 
+    # ---- tolls: an incomplete sum is not a toll, and unknown is never 0
+    eq(P.toll_known(16.66, True), 16.66, "toll: complete")
+    eq(P.toll_known("16.66", "True"), 16.66, "toll: complete, strings")
+    eq(P.toll_known(0.0, True), 0.0, "toll: a complete route with no tolled crossing is a real $0")
+    eq(P.toll_known(0.0, False), None, "toll: an incomplete sum of $0 is unknown, not $0")
+    eq(P.toll_known(float("nan"), True), None, "toll: missing value")
+    eq(P.toll_known(None, None), None, "toll: nothing known")
+    ok("New York E-ZPass" in P.TOLL_NOTE and "mail" in P.TOLL_NOTE.lower(), "toll note names the New York E-ZPass assumption and the mail rate")
+    pure_more()
+
+
+def pure_more():
+    pass
+
 
 def data():
     import pandas as pd
@@ -211,16 +225,38 @@ def data():
     t = X[X.addr_key == "62 treat st|06516"]
     ok(not ((t.unit == "") & (t.listing_id == "")).any(), "62 Treat St must not be excluded as a whole building")
     ok(t.listing_id.str.contains("plan-103").any(), "62 Treat St plan 103 (reads as floor 1) is excluded by its listing id")
+    # tolls (MTA rates filled): complete everywhere, the mail-rate figure beside the NY E-ZPass figure
+    ok((M.toll_complete == "True").all(), f"tolls: toll_complete must be true on every unit ({(M.toll_complete != 'True').sum()} are not)")
+    ok("toll_rt_mail" in M.columns and (pd.to_numeric(M.toll_rt_mail, errors="coerce") >= pd.to_numeric(M.toll_rt_ezpass, errors="coerce")).all(),
+       "tolls: every unit has a mail-rate figure at or above the NY E-ZPass figure")
+    ok(pd.to_numeric(R.toll_rt_known, errors="coerce").notna().all(), "tolls: every ranked unit's toll is known to the distance score")
+    data_more(M, R, S)
     # D20 (only when the page data is newer than the ranking)
     pj = ROOT / "site" / "data.json"
     if pj.exists() and pj.stat().st_mtime >= (DATA / "ranked_units.csv").stat().st_mtime:
         J = json.loads(pj.read_text())
+        ok(any("New York E-ZPass" in n for n in J["meta"]["notes"]), "tolls: meta.notes must state the New York E-ZPass assumption")
+        for u_ in J["units"]:
+            sun = u_["moments"]["sun"]
+            ok(sun["toll_complete"] or sun["toll_round_trip"] is None, f"tolls: {u_['id']} shows a toll figure for an incomplete route")
+            ok(not sun["toll_complete"] or (sun["toll_round_trip"] is not None and sun["toll_round_trip_mail"] is not None), f"tolls: {u_['id']} lacks the E-ZPass or mail figure")
+        for h_ in J["neighborhoods"]:
+            ok(h_["toll_complete"] or h_["toll_round_trip"] is None, f"tolls: neighborhood {h_['id']} shows a toll figure though a route is incomplete")
+        page_more(J, M, R, S)
         txt = json.dumps(J)
         ok("North Plainfield is a beautiful subset of Somerset County" not in txt, "D20: the North Plainfield quote must not be on the page")
         ok("As the President of Jamaica Hill Community Association" not in txt, "D20: the quote naming its writer by office must not be on the page")
         vs = [v for h in J["neighborhoods"] for v in ((h.get("local") or {}).get("voices") or []) if isinstance(v, dict)]
         ok(not vs or any(v.get("about") for v in vs), "D20: quotes about a wider area carry 'about'")
         ok(not vs or all("source_area" in v for v in vs), "D20: source_area is kept on every quote")
+
+
+def data_more(M, R, S):
+    pass
+
+
+def page_more(J, M, R, S):
+    pass
 
 
 if __name__ == "__main__":

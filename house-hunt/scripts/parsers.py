@@ -922,3 +922,21 @@ def lot_address_agrees(listing_address, lot_address) -> bool:
         if len(lo) == len(hi) and lo.isdigit() and hi.isdigit() and int(lo) <= int(na) <= int(hi) and int(hi) - int(lo) <= 40:
             return True
     return False
+
+
+def toll_known(value, complete):
+    """A round-trip toll counts as known only when every crossing on the route has a rate (toll_complete). An
+    incomplete sum is not a toll, and an unknown toll is never 0: returns the number, or None."""
+    if str(complete).strip().lower() != "true":
+        return None
+    try:
+        v = float(value)
+    except (TypeError, ValueError):
+        return None
+    return None if v != v else v
+
+
+TOLL_NOTE = ("Tolls are round trip at New York E-ZPass rates (a tag issued by the New York E-ZPass service centre), weekend off-peak. "
+             "An E-ZPass tag from New Jersey, Connecticut or any other state pays the higher Tolls by Mail rate at MTA bridges and tunnels "
+             "(for example $12.03 instead of $7.46 at the Whitestone, Throgs Neck, RFK and Verrazzano bridges); that figure is given beside "
+             "each toll as the mail rate. Resident discounts are not applied.")

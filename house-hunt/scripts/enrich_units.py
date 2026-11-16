@@ -86,6 +86,9 @@ def flat(r):
         "drive_miles": v(d, "miles_to_jamaica"),
         "toll_rt_ezpass": tr.get("value"), "toll_complete": tr.get("complete"),
         "toll_known_subtotal": tr.get("known_subtotal"),
+        # the same crossings at the Tolls by Mail rate, which is also what an E-ZPass tag issued outside New York pays
+        # at MTA bridges and tunnels (docs/tools_notes/mta_tolls.md)
+        "toll_rt_mail": (d.get("toll_round_trip_mail") or {}).get("value"),
         "toll_items": "; ".join(str(i.get("facility", i)) for i in (tr.get("items") or [])),
         "transit_sat_fastest": v(r.get("transit_sat", {}), "fastest_minutes"),
         "transit_sat_median": v(r.get("transit_sat", {}), "median_minutes"),

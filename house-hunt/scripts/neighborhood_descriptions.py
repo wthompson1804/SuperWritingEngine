@@ -261,7 +261,14 @@ def hood_list() -> dict[str, str]:
     with open(ROOT / "data" / "reference" / "scene_text_neighborhoods.csv") as f:
         for r in csv.DictReader(f):
             u.setdefault(r["hood_id"], r["hood_name"])
-    return dict(sorted(u.items(), key=lambda kv: (-shown.get(kv[0], 0), kv[0])))
+    # The list shifts while the data is being repaired: remember every neighborhood ever seen,
+    # so a place that drops out of one build and comes back still has its rows.
+    seen_path = D / "hood_names.json"
+    seen = json.loads(seen_path.read_text()) if seen_path.exists() else {}
+    seen.update(u)
+    D.mkdir(parents=True, exist_ok=True)
+    seen_path.write_text(json.dumps(seen, indent=1, ensure_ascii=False, sort_keys=True))
+    return dict(sorted(seen.items(), key=lambda kv: (-shown.get(kv[0], 0), kv[0])))
 
 
 # ---------------------------------------------------------------- stage: index

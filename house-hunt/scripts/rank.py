@@ -383,7 +383,10 @@ def main():
         m = __import__("re").match(r"(\d{1,2}):(\d{2})", str(t))
         return (int(m.group(1)) * 60 + int(m.group(2)) - 720) if m else np.nan
     last_train = u.get("transit_last_sat_departure_from_jamaica", pd.Series("", index=u.index)).map(clock)
-    u["p_distance"] = blend((pct(u.drive_min_to, False), 50), (pct(u.transit_sat_median, False), 20), (pct(u.toll_rt_ezpass, False), 12),
+    # a toll counts only when every crossing on the route has a rate; an incomplete sum scores as unknown, never as $0
+    toll = pd.Series([parsers.toll_known(v_, c_) for v_, c_ in zip(u.toll_rt_ezpass, u.toll_complete)], index=u.index, dtype=float)
+    u["toll_rt_known"] = toll
+    u["p_distance"] = blend((pct(u.drive_min_to, False), 50), (pct(u.transit_sat_median, False), 20), (pct(toll, False), 12),
                             (pct(n("transit_sat_transfers"), False), 8), (pct(last_train), 5), (pct(n("transit_sun_return_median"), False), 5))
     dog_small = dog_small.reindex(u.index).fillna(False)
     dogam = has("dog_amenities")
@@ -513,7 +516,7 @@ def main():
     # ---- exchange rates against staying in Queens
     home = u[u.hood_area.astype(str).eq("Queens")]
     meas = {"all_in": "all_in", "sqft": "sqft", "drive_min": "drive_min_to", "transit_min": "transit_sat_median",
-            "toll_round_trip": "toll_rt_ezpass", "violent_per_1000": "violent", "property_per_1000": "property",
+            "toll_round_trip": "toll_rt_known", "toll_round_trip_mail": "toll_rt_mail", "violent_per_1000": "violent", "property_per_1000": "property",
             "restaurants_800m": "restaurants_800m", "park_walk_min": "park_walk_min", "parking_rank": "parking_rank"}
     rows = []
     for k, g in list(u.groupby("group_label")) + [("STAYING IN QUEENS (baseline)", home)]:

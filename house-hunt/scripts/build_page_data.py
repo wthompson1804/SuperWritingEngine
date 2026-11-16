@@ -10,6 +10,7 @@ from pathlib import Path
 import numpy as np, pandas as pd
 sys.path.insert(0, str(Path(__file__).parent))
 from lib import DATA, ROOT
+import parsers
 
 
 def v(x):
@@ -78,7 +79,10 @@ def unit(r):
                       "near_violent_evening_250m_24m": g("near_violent_evening_250m_24m"), "car_crime_250m_24m": (g("near_veh_theft_24m") or 0) + (g("near_theft_from_veh_24m") or 0) if g("near_veh_theft_24m") is not None else None,
                       "vehicle_theft_per_1000": g("motor_vehicle_theft"), "police": g("police_agency"), "police_geography": g("police_geography")},
             "sat": {"bars_1600m": g("bars_1600m"), "music_1600m": g("music_1600m"), "restaurants_1600m": g("restaurants_1600m"), "parking_type": g("parking_type"), "train_station": g("train_station"), "train_station_m": g("train_station_m")},
-            "sun": {"drive_min": g("drive_min_to"), "drive_miles": g("drive_miles"), "drive_basis": "free-flow estimate, no traffic", "toll_round_trip": g("toll_rt_ezpass"),
+            "sun": {"drive_min": g("drive_min_to"), "drive_miles": g("drive_miles"), "drive_basis": "free-flow estimate, no traffic",
+                    # null when a crossing on the route has no rate (never 0 for unknown); NY E-ZPass, with the mail rate beside it
+                    "toll_round_trip": parsers.toll_known(g("toll_rt_ezpass"), g("toll_complete")),
+                    "toll_round_trip_mail": parsers.toll_known(g("toll_rt_mail"), g("toll_complete")), "toll_basis": "New York E-ZPass, weekend off-peak",
                     "toll_complete": str(g("toll_complete")) == "True", "toll_items": g("toll_items"), "transit_min": g("transit_sat_median"), "transit_transfers": g("transit_sat_transfers"),
                     "transit_summary": g("transit_sat_summary"), "last_train_home_sat": g("transit_last_sat_departure_from_jamaica"), "sunday_return_min": g("transit_sun_return_median")}},
         "scores": {"rank": g("rank_score"), "universal": g("universal"), "promise": g("promise"), "pool_bump": g("pool_bump"), "hood_rank": g("shown_rank") or g("hood_rank"),
@@ -165,11 +169,16 @@ def main():
             continue
         h = G.loc[hid] if hid in G.index else {}
         num = lambda c: v(pd.to_numeric(g[c], errors="coerce").median()) if c in g else None
+        # null unless every route in the neighborhood has a complete toll (never 0 for unknown)
+        tollmed = lambda c: v(pd.Series([parsers.toll_known(a, b) for a, b in zip(g[c], g.toll_complete)], dtype=float).median()) \
+            if c in g and g.toll_complete.astype(str).str.lower().eq("true").all() else None
         hoods.append({"id": hid, "name": g.hood.iloc[0], "area": v(g.hood_area.iloc[0]), "state": v(g.state.iloc[0]) if "state" in g else None, "year": g.group_key.iloc[0],
                       "lat": v(pd.to_numeric(g.lat, errors="coerce").mean()), "lon": v(pd.to_numeric(g.lon, errors="coerce").mean()),
                       "counts": {"shown": int(len(s)), "avoid": int(g.avoid_card.sum()), "held": int((g.listing_id.isin(held_ids) & ~g.shown).sum()), "ranked": int(len(g))},
                       "all_in_range": [v(s.all_in.min()), v(s.all_in.max())] if len(s) else None, "sqft_median": num("sqft"),
-                      "drive_min": num("drive_min_to"), "transit_min": num("transit_sat_median"), "toll_round_trip": num("toll_rt_ezpass"),
+                      "drive_min": num("drive_min_to"), "transit_min": num("transit_sat_median"),
+                      "toll_round_trip": tollmed("toll_rt_ezpass"), "toll_round_trip_mail": tollmed("toll_rt_mail"), "toll_basis": "New York E-ZPass, weekend off-peak",
+                      "toll_complete": bool(g.toll_complete.astype(str).str.lower().eq("true").all()),
                       "safety": {"violent_per_1000": v(h.get("violent")), "property_per_1000": v(h.get("property")), "vehicle_theft_per_1000": v(h.get("motor_vehicle_theft")),
                                  "vs_jamaica": v(h.get("violent_vs_jamaica")), "property_vs_jamaica": v(h.get("property_vs_jamaica")), "vs_us": v(h.get("violent_vs_us")),
                                  "vs_metro": v(h.get("violent_vs_metro")), "vs_local": v(h.get("violent_vs_local")), "police": v(h.get("police")), "geography": v(h.get("geography")), "year": v(h.get("crime_year"))},
@@ -188,7 +197,7 @@ def main():
                       "counts": {"neighborhoods": int(s.hood_id.nunique()), "shown": int(len(s)), "avoid": int(g.avoid_card.sum())},
                       "all_in_range": [v(s.all_in.min()), v(s.all_in.max())] if len(s) else None,
                       "drive_min_range": [v(s.drive_min_to.min()), v(s.drive_min_to.max())] if len(s) else None,
-                      "medians": {k: v(ex[k].iloc[0]) for k in ["all_in", "sqft", "drive_min", "transit_min", "toll_round_trip", "violent_per_1000", "property_per_1000", "restaurants_800m", "park_walk_min"] if len(ex) and k in ex},
+                      "medians": {k: v(ex[k].iloc[0]) for k in ["all_in", "sqft", "drive_min", "transit_min", "toll_round_trip", "toll_round_trip_mail", "violent_per_1000", "property_per_1000", "restaurants_800m", "park_walk_min"] if len(ex) and k in ex},
                       "vs_queens": {k[4:]: v(ex[k].iloc[0]) for k in ex.columns if k.startswith("vsq_")} if len(ex) else {},
                       "vs_queens_diff": {k[:-8]: v(ex[k].iloc[0]) for k in ex.columns if k.endswith("_vs_home")} if len(ex) else {},
                       "hood_ids": [h["id"] for h in sorted([h for h in hoods if h["year"] == key and h["counts"]["shown"]], key=lambda h: h["drive_min"] or 999)],
@@ -200,7 +209,8 @@ def main():
                     "queens_spectrum": spec, "weights": {"safety": 22, "building": 16, "cost": 12, "car": 12, "space": 12, "distance": 10, "dog": 8, "daily": 8},
                     "counts": {"shown": int(len(shown)), "shown_with_asterisk": int((shown.confirm_asterisk == "yes").sum()), "avoid": int(len(avoid)), "held": int(len(held)),
                                "awaiting_live_check": int(len(awaiting)), "ranked": int(len(R))},
-                    "notes": ["Drive times are free-flow estimates without traffic.", "An asterisk on rent means a special offer applies; see the rent terms.",
+                    "toll_basis": {"assumes": "New York E-ZPass", "rate_time": "weekend off-peak", "mail_rate_field": "toll_round_trip_mail", "note": parsers.TOLL_NOTE},
+                    "notes": ["Drive times are free-flow estimates without traffic.", parsers.TOLL_NOTE, "An asterisk on rent means a special offer applies; see the rent terms.",
                               "A floor marked 'read from the unit number' is not stated on the page; confirm it on the tour.",
                               "A place with an asterisk has one thing still to confirm (elevator, floor, dog policy or a live re-check of the listing); the text beside it says what and why.",
                               "Unknown cost lines count as $0 and are named on each receipt."]},
