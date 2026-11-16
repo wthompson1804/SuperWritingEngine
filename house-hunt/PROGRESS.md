@@ -2,7 +2,7 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-16, after the pipeline consistency pass)
+## Current state (2026-11-16, after the owner's "no not-re-checked flag" rule)
 
 **Authorities, newest first:** `CLAUDE.md` (rules and decision log) → `docs/RANKING.md` (rewritten as ONE current statement of the gates, the elevator rule,
 duplicates, score and selection, with a change log) → `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` → `docs/SAFETY_BASIS.md` → `docs/PLAN_V3_APPROVED_2026-11-15.md` → UX brief and mock-up 4 (layout only).
@@ -13,13 +13,29 @@ The job is the finished decision page.
 `scripts/page_data_extras.py` → `scripts/build_site.py` → `site/dist/index.html`. **The text check (`check_scene_text.py`) is a separate step after
 `page_data_extras.py`; `run_all.py` does not run it.** Publish as a NEW private artifact (never replace the mock).
 
-**Counts now** (details and the full shown-set diff: `docs/PIPELINE_CONSISTENCY_PASS.md`): 20,468 listings → 2,505 pass the listing gates → 2,451 costed →
-1,480 within the all-in cap → 760 ranked → **446 apartments shown in 191 buildings, 68 neighborhoods** (41 with three or more). It was 491 / 233 / 104.
-By experience (apartments / buildings / neighborhoods): Little-City 195 / 78 / 22, Room-to-Breathe 108 / 33 / 17, Old-Neighborhood 73 / 52 / 20,
-Fresh-Start 62 / 23 / 5, Quiet-Street 6 / 3 / 3, Walk-Everywhere 2 / 2 / 1. 265 shown apartments carry one open item. 71 rows are `not_an_apartment`
-(63 floor plans, 5 building-page prices, 3 co-living rooms; 16 of them were shown before); 35 single-apartment neighborhoods were cut by the
-thin-neighborhood rule and 11 kept. Verdicts: 808 rows for 807 units. Two consecutive runs give an identical `data/ranked_units.csv`;
-`check_registry.py` and all tests pass (`test_rules.py`: 421 pure checks; `--data` on the output; `test_parsers.py`: 259).
+**Counts now**: 20,468 listings → 2,505 pass the listing gates → 2,451 costed → 1,480 within the all-in cap → 733 ranked →
+**568 apartments shown in 212 buildings, 78 neighborhoods** (52 with three or more). Before the rule below it was 446 / 191 / 68.
+By experience (apartments / buildings / neighborhoods): Little-City 248 / 83 / 23, Room-to-Breathe 155 / 39 / 23, Old-Neighborhood 81 / 57 / 21,
+Fresh-Start 75 / 27 / 6, Quiet-Street 6 / 3 / 3, Walk-Everywhere 3 / 3 / 2. **209 shown apartments carry one open item, every one a gate fact**
+(elevator 96, listing 65, dogs allowed 31, eligibility 11, availability 6); 359 carry none. 71 rows are `not_an_apartment`; 28 single-apartment
+neighborhoods are cut by the thin-neighborhood rule and 10 kept. Verdicts: 916 rows for 915 units (ok 536, asterisk 161, disclose 21, remove 198).
+Two consecutive runs give an identical `data/ranked_units.csv`; `check_registry.py` and all tests pass (`test_rules.py`: 428 pure checks; `--data` on the
+output: 3,868 with the page data; `test_parsers.py`: 259).
+
+**Owner's rule, 2026-11-16 ("Forget call check"): no "not re-checked" flag.** A listing that was simply never re-read in an evidence pass (live status
+blank, not checked, blocked: for example the Trulia rows that cannot be re-read) is not an open item: no asterisk, and it counts in no rule (not in "two or
+more open", not in the thin-neighborhood rule, not as the second open item beside an elevator doubt, not in the order among equal scores). What a re-read
+FOUND still counts through the facts that already existed (gone → removed; price changed → updated; a stale page, a page for another building, a "verify the
+price" note → "listing" / "availability"). Reviewed verdicts are still required. Effect: 124 apartments entered (114 had "no live check" as their second open
+item beside one gate fact: elevator 57, listing 30, dogs 16, eligibility 6, availability 5; 9 sit in neighborhoods that are no longer single-apartment; 1 moved
+up inside its building), 2 left (The Lofts at Garwood: its experience's median rose; Aviva E0721: now ninth in its building). 108 verdicts were written by
+reading the evidence (79 ok, 4 asterisk, 25 remove: all 25 are unit numbers that read as first-floor units). `data/needs_live_check.csv` is no longer written;
+`site/data.json` keeps `awaiting_live_check` as an empty array and `meta.counts.awaiting_live_check` = 0; each unit keeps `price_seen_at` and `live`
+(status, checked_at) as information. 292 shown apartments were never re-read (266 blank, 26 blocked); nothing on them says so.
+
+**Open after this run:** `scripts/build_scene_text.py` still exits 1 on three neighborhoods that are not on the page (Franklin, Seymour, Gravesend South;
+it was six before); `verify_all.py --quick` fails one check: the two newly shown neighborhoods **Bogota and Burlington have no scene text** in
+`data/reference/scene_text_source.txt`. `site/dist` is older than `site/data.json` (rebuild with `build_site.py`).
 
 **What the consistency pass changed (2026-11-16):** one elevator rule for every stage (`parsers.elevator_rule`; a near-miss tax lot neither passes nor fails);
 experiences assigned from frozen area profiles and saved parameters (East Rutherford and Patchogue are back in Little-City; four other neighborhoods are held
@@ -28,8 +44,8 @@ where they were by `data/reference/lifestyle_group_overrides.csv`, for the owner
 policy is one open fact, not "sketchy"; in-unit laundry no longer counts a shared laundry room; building names cleaned of listing titles; park names that are not
 parks blanked; a third party's API key stripped from `photo_url` everywhere.
 
-**Weak, plainly:** 265 of 446 shown apartments have something open (most often no live check: the third to eighth unit of a building whose first two were
-checked). Most shown elevators rest on listing sites only. Most shown floors are not published. Parking and required fees are unpublished for most shown units.
+**Weak, plainly:** 292 of 568 shown apartments were never re-read after the first reading (by the owner's rule that is no longer flagged); 209 have a gate
+fact open. Most shown elevators rest on listing sites only. Most shown floors are not published. Parking and required fees are unpublished for most shown units.
 The experience profile of a neighborhood is the median over the buildings sampled there (frozen at the largest sample on record), not a census of the whole
 area; 33 of 197 neighborhoods sit within 10 percent of a second experience (`data/lifestyle_group_distances.csv`). `scripts/h_trulia.py` now refuses to fetch while `trulia.com` is in `raw/_host_kill_shared.json` (it is) or without `--i-know`.
 
@@ -52,7 +68,8 @@ it stands (`scripts/verdicts.py pending / digest / add`; `check_registry.py` fai
 | Evidence rounds 1–3 (batches 1–19), NYC and non-NYC records, rating standard | Done |
 | Independent checks 1–3 and their repairs | Done (`docs/REPAIRS_AFTER_INDEPENDENT_CHECK*.md`) |
 | Pipeline consistency pass (`docs/PIPELINE_CONSISTENCY_PASS.md`) | Done 2026-11-16 |
-| Only real apartments; thin-neighborhood rule (owner, 2026-11-16) | Done: 446 shown in 68 neighborhoods |
+| Only real apartments; thin-neighborhood rule (owner, 2026-11-16) | Done |
+| No "not re-checked" flag (owner, 2026-11-16) | Done: 568 shown in 212 buildings, 78 neighborhoods |
 | Neighborhood voices, local rules, Jersey City split, MTA tolls | Done |
 | Trulia | Blocked; no requests. About 100 NYC shown units cannot be re-checked |
 | Photos; Reddit key; Zumper opened-listings merge | Open |

@@ -49,7 +49,7 @@ This file says what each file is, what one row is, its key, who writes it and wh
 | `excluded_sketchy.csv` | A unit removed for low listing confidence (`sketchy_reason`) | `listing_id` | 206 | `rank.py` | `run_all.py` report |
 | `excluded_by_evidence.csv` | A unit removed by `unit_exclusions.csv` | `listing_id` | 47 | `rank.py` | people |
 | `needs_confirmation.csv` | The phone list: a ranked unit with one open item, the question (`to_confirm`, `confirm_what`, `confirm_why`) and whether it is shown with an asterisk | `listing_id` | 150 | `rank.py` | `build_page_data.py` (`held`), `call_sheet.py` |
-| `needs_live_check.csv` | A candidate with an open gate fact that has not been seen live; not shown | `listing_id` | 35 | `rank.py` | `build_page_data.py` (`awaiting_live_check`) |
+| `needs_live_check.csv` | No longer written (owner, 2026-11-16: a listing never re-read is not an open item). `site/data.json` keeps `awaiting_live_check` as an empty array | | 0 | | |
 | `group_exchange.csv` | Per experience, medians over ranked units and their difference from "near home". The page no longer uses it for its tiles (figures are over shown units) | `group` | 7 | `rank.py` | `build_page_data.py` (loaded) |
 | `neighborhoods.csv` | A neighborhood with passing units: counts and medians | `hood_id` | 221 | `build_neighborhoods.py` | lifestyle scripts |
 | `lifestyle_features.csv`, `lifestyle_color.csv` | Neighborhood features (ACS, OpenStreetMap), then the wider descriptive set | `hood_id` | 221 | `lifestyle_features.py`, `lifestyle_color.py` | `lifestyle_groups.py`, `rank.py` |
