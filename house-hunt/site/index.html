@@ -980,7 +980,6 @@ h1:focus,h2:focus{outline:none}
 .hoodhead .viewsw button{padding:4px 14px;font-size:15px}
 .pg .morectl{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 10px;text-align:left}
 .pg .morectl .morebtns{margin-left:auto}
-.pg .rowd:not([open])>summary .rs{display:none}
 .sr,.kf .rng .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .kf .rng span{display:inline}
 .dayhead{display:flex;align-items:center;justify-content:space-between;gap:8px 10px}
@@ -1546,17 +1545,13 @@ function isPlan(u){return !!u&&(/(^|[:_-])plan-/i.test(String(u.id||""))||u.floo
 function hasOwnId(u){return u.unit!=null&&String(u.unit).trim()!==""}
 var YEARS=arr(D.years).filter(function(y){return y&&y.id!=null}),HOODS=arr(D.neighborhoods).filter(function(h){return h&&h.id!=null}),UNITS=recs(D.units).filter(function(u){return hasOwnId(u)&&!isPlan(u)});
 var notPlan=function(u){return !isPlan(u)};
-D.avoid=recs(D.avoid).filter(notPlan);D.held=recs(D.held).filter(notPlan);D.awaiting_live_check=arr(D.awaiting_live_check).filter(Boolean).filter(notPlan);
-var Y_BY={},H_BY={},U_BY={},A_BY={},HELD_BY_HOOD={},HELD_BY={},AWAIT_BY={},WAIT_BY_HOOD={};
+D.avoid=recs(D.avoid).filter(notPlan);D.held=recs(D.held).filter(notPlan);
+var Y_BY={},H_BY={},U_BY={},A_BY={},HELD_BY_HOOD={},HELD_BY={};
 (D.avoid||[]).forEach(function(u){A_BY[u.id]=u});
 HOODS.forEach(function(H){H_BY[H.id]=H;H.units=[];H.avoid=(H.avoid_ids||[]).map(function(id){return A_BY[id]}).filter(Boolean)});
 UNITS.forEach(function(U){U_BY[U.id]=U});
 HOODS.forEach(function(H){H.units=(H.unit_ids||[]).map(function(id){return U_BY[id]}).filter(Boolean)});
 (D.held||[]).forEach(function(u){HELD_BY[u.id]=u;(HELD_BY_HOOD[u.hood_id]=HELD_BY_HOOD[u.hood_id]||[]).push(u)});
-/* Places waiting for a live re-check. One that is also in held[] stays under "Worth a phone call" (with a line saying so);
-   the rest are listed under "Not re-checked yet". Skipped entirely when the data has no such list. */
-var WAIT_ONLY=(D.awaiting_live_check||[]).filter(function(a){AWAIT_BY[a.id]=a;return !HELD_BY[a.id]&&!U_BY[a.id]&&!A_BY[a.id]});
-WAIT_ONLY.forEach(function(a){(WAIT_BY_HOOD[a.hood_id]=WAIT_BY_HOOD[a.hood_id]||[]).push(a)});
 YEARS.forEach(function(Y,i){
   Y_BY[Y.id]=Y;Y.color=YEAR_COLORS[i%YEAR_COLORS.length];Y.mark=YEAR_MARKS[i%YEAR_MARKS.length];
   /* The data calls these "years"; the page calls them experiences. Only the shown label changes, never a key. */
@@ -1571,7 +1566,6 @@ YEARS.forEach(function(Y,i){
   Y.units=[];Y.hoods.forEach(function(H,j){H.n=j+1;Y.units=Y.units.concat(H.units)});
   Y.avoidOnly.forEach(function(H,j){H.n=Y.hoods.length+j+1});
   Y.heldElsewhere=(D.held||[]).filter(function(u){return u.year===Y.id&&!H_BY[u.hood_id]});
-  Y.waitElsewhere=WAIT_ONLY.filter(function(a){return a.year===Y.id&&!H_BY[a.hood_id]});
 });
 /* The experiences are listed by how much there is to see, most first, so one with a handful of apartments sits last. Colours and marks stay with the data's order. */
 YEARS=YEARS.map(function(Y,i){return [Y,i]}).sort(function(a,b){return (b[0].units.length-a[0].units.length)||(a[1]-b[1])}).map(function(x){return x[0]});
@@ -2146,16 +2140,9 @@ function avoidCard(U){var ev=U.evidence||{},L=okUrl(U.links&&U.links.listing);
 function callItem(U,where){var L=okUrl(U.links&&U.links.listing),c=conf(U),q=tourQs(U);
   return '<div class="callitem"><b>'+esc(uName(U))+'</b><span class="facts">'+esc([where,uSub(U),bedsWord(U)+(U.sqft!=null?", "+r0(U.sqft)+" sq ft":"")].filter(Boolean).join(" · "))+'</span><span><b style="font-size:16px">'+pm(U.all_in)+star(U)+'</b> a month, everything included, '+esc(seenShort(U.price_seen_at))+'</span>'+
     confLines(U)+rentLines(U)+discLine(U)+
-    (AWAIT_BY[U.id]?'<span class="confline">* Not re-checked yet: the listing has not been seen live since it was first collected, so the price and the date may have changed.</span>':'')+
     (q.length?'<ul>'+lis(q)+'</ul>':'<span class="facts">The question to ask is not recorded yet.</span>')+contactBox(U)+
     (L?'<a class="link" href="'+esc(L)+'" target="_blank" rel="noopener noreferrer">Open the listing ↗</a>':'')+'</div>'}
-/* A place waiting for a live re-check: the data carries only its name, price and link. */
-function waitItem(A,where){var L=okUrl(A.listing);
-  return '<div class="callitem"><b>'+esc(A.building||String(A.address||"").split(",")[0]||"Address not known yet")+'</b><span class="facts">'+esc([where,A.building&&A.address?String(A.address).split(",")[0]:"",A.unit?"Apartment "+A.unit:""].filter(Boolean).join(" · "))+'</span><span><b style="font-size:16px">'+pm(A.all_in)+'</b> a month, everything included, '+esc(seenShort(A.price_seen_at))+'</span>'+
-    '<ul><li>'+esc(CONFIRM_Q["live check"][1])+'</li></ul>'+
-    (L?'<a class="link" href="'+esc(L)+'" target="_blank" rel="noopener noreferrer">Open the listing ↗</a>':'<span class="facts">No listing link in the data.</span>')+'</div>'}
 var HELD_INTRO="Two or more things are still to confirm. Call first.";
-var WAIT_INTRO="Not seen live since first collected. Check the listing before counting on one.";
 function callBox(us,intro,whereFn,title,id,itemFn){if(!us.length)return "";
   return '<div class="callbox"'+(id?' id="'+id+'"':'')+'><p class="helper">'+intro+'</p>'+us.map(function(U){return (itemFn||callItem)(U,whereFn?whereFn(U):"")}).join("")+'</div>'}
 
@@ -2219,7 +2206,6 @@ function pauseList(U){var o=[];
   var es=evState(U);
   if(es==="none")o.push({t:NO_EVIDENCE});
   else if(es==="unchecked")o.push({t:"Reviews and public records for this building have not been checked yet"});
-  if(U.live&&U.live.status&&U.live.status!=="live")o.push({t:"Last check of the listing: "+U.live.status+(U.live.checked_at?" ("+seenLong(U.live.checked_at)+")":"")});
   return o}
 function buildingFacts(U){var a=U.amenities||{},o=[],L=okUrl(U.links&&U.links.listing),B=okUrl(U.links&&U.links.building);
   o.push({t:"Address: "+(U.address||NK)+(U.unit?", apartment "+U.unit:"")+".",url:L,l:"listing"});
@@ -2232,7 +2218,7 @@ function buildingFacts(U){var a=U.amenities||{},o=[],L=okUrl(U.links&&U.links.li
   o.push({t:"Managed by: "+(a.manager||NK.toLowerCase())+".",url:B&&B!==L?B:null,l:"building page"});
   var pe=U.evidence&&U.evidence.public_evidence;
   if(pe!==undefined)o.push({t:"Public records and reviews read for this building: "+(pe==null?"not checked yet":EVIDENCE_WORD[pe]||pe)+"."});
-  o.push({t:"Found on "+(U.source_site||NK.toLowerCase())+". Price seen "+seenLong(U.price_seen_at)+"."+(U.live&&U.live.checked_at?" Listing last checked "+seenLong(U.live.checked_at)+": "+(U.live.status||NK.toLowerCase())+".":""),url:L,l:"listing"});
+  o.push({t:"Found on "+(U.source_site||NK.toLowerCase())+". Price seen "+seenLong(U.price_seen_at)+".",url:L,l:"listing"});
   return o}
 /* ================= Rows: every section is a headline that opens in place =================
    A row is a native <details>: a small label, the HEADLINE (built by a function in HL from the data, never written by hand),
@@ -2540,7 +2526,6 @@ function vYear(Y){
   var oth=[],othB="";
   if(Y.avoidOnly.length){oth.push(pl(Y.avoidOnly.length,"neighborhood")+" skipped");othB+='<h3 class="oth">Looked good, skipped</h3><div class="stack tight">'+Y.avoidOnly.map(function(H){return hoodCard(H,Y)}).join("")+'</div>'}
   if(Y.heldElsewhere.length){oth.push(Y.heldElsewhere.length+" worth a call");othB+='<h3 class="oth">Worth a phone call, in other towns</h3><div class="stack tight">'+Y.heldElsewhere.map(function(U){return callItem(U,slugName(U.hood_id))}).join("")+'</div>'}
-  if(Y.waitElsewhere.length){oth.push(Y.waitElsewhere.length+" not re-checked");othB+='<h3 class="oth">Not re-checked yet, in other towns</h3><div class="stack tight">'+Y.waitElsewhere.map(function(A){return waitItem(A,slugName(A.hood_id))}).join("")+'</div>'}
   if(othB)h+=row("r-others","Not on the list",oth.join(" · "),othB);
   h+='</section>';
   h+=nx?nextLink("Next experience",href("year",nx.id),nx.label):nextLink("That was the last one","#lives","All "+YEARS.length+" experiences");
@@ -2564,11 +2549,10 @@ function vHood(H){
   var descQ=function(d){return '<p class="quote desc">“'+esc(scrub(d.quote||d.text||d.excerpt))+'”<small>'+descSrc(d)+'</small></p>'};
   if(N){var nB=nShown("h:"+H.id,NB);h+='<section class="sec" id="sec-places"><h2 class="h2s">'+pl(NB,"building")+' <span class="fig">'+pl(N,"apartment")+'</span></h2><div class="stack tight" style="margin-top:10px">'+H.bldgs.slice(0,nB).map(function(B,i){return bldgCard(B,i,NB===1)}).join("")+'</div>'+moreCtl("h:"+H.id,nB,NB,3,"buildings")+'</section>'}
   else h+='<section class="sec" id="sec-places"><div class="empty"><p><b>Nothing to tour here yet.</b></p></div></section>';
-  var held=HELD_BY_HOOD[H.id]||[],wait=WAIT_BY_HOOD[H.id]||[];
+  var held=HELD_BY_HOOD[H.id]||[];
   var others="";
   if(H.avoid.length)others+=row("sec-avoid","Looks good, but avoid",avoidHead(H),'<div class="stack tight">'+H.avoid.map(avoidCard).join("")+'</div>',{sub:hlSub(H,"avoid")});
   if(held.length)others+=row("sec-call","Worth a phone call",pl(held.length,"more apartment")+", if a call clears up two questions",callBox(held,HELD_INTRO,null));
-  if(wait.length)others+=row("sec-wait","Not re-checked yet",pl(wait.length,"apartment"),callBox(wait,WAIT_INTRO,null,"Not re-checked yet","wait-box",waitItem));
   var pRules=rulesOf(H,"parking_rules"),carBits=[],kinds={},dogBits=[],foodBits=[],errBits=[],whoBits=[];
   H.units.forEach(function(U){var w=parkWord(U);kinds[w]=(kinds[w]||0)+1});
   Object.keys(kinds).forEach(function(w){carBits.push(kinds[w]+" of "+N+": "+w.toLowerCase())});
@@ -2604,7 +2588,7 @@ function vHood(H){
   h+=row("r-rules","Local rules",HL.hoodRules(H),rulesBody(H,carBits.length?"Apartments here: "+carBits.join("; ")+".":""),{sub:hlSub(H,"local_rules","parking","rules"),chip:flagN?flagN+" to know":(!pRules.length?"Ask":""),chipKind:"ask"});
   if(rev)h+=row("r-hreviews","Reviews of the buildings",rev.head,rev.body);
   if(SPEC_OPEN.length&&H.vs_queens&&SPEC_OPEN.some(function(q){return H.vs_queens[q.measure]!=null}))h+=row("r-queens","Compared to staying in Queens",HL.queens(H.vs_queens),staticScale(H.vs_queens)+how(SOURCES.queens),{sub:hlSub(H,"compared_to_queens","queens")});
-  h+=others+'</section>'; /* what is not on the list (to avoid, worth a call, not re-checked) closes the group */
+  h+=others+'</section>'; /* what is not on the list (to avoid, worth a call) closes the group */
   h+=nx?nextLink("Next in this experience",href("hood",nx.id),nx.name):nxY?nextLink("Next experience",href("year",nxY.id),nxY.label):nextLink("You have seen them all","#lives","All "+YEARS.length+" experiences");
   return h+'</div>'}
 function avoidHead(H){return pl(H.avoid.length,H.avoid.every(function(u){return !hasOwnId(u)})?"building":"apartment")+" we would skip, and why"}
@@ -2840,7 +2824,7 @@ function renderFoot(){var C=META.counts||{},all=arr(META.notes).map(String),note
   var gl=gatesLine()+(META.move_in_window?' Move-in window: '+String(META.move_in_window).replace(/(\d{4}-\d{2}-\d{2})/,function(d){return dayStr(d,true)})+'.':''),nf=UNITS.filter(fits).length;
   document.getElementById("foot").innerHTML=(current==="lives"?'<p class="lease">A lease is 12 months. You are choosing an experience to try, not forever.</p>':'')+
     '<div class="footrow"><button type="button" class="link" data-act="limits-open">'+(nf===UNITS.length?'My limits':'My limits: '+nf+' of '+UNITS.length+' fit')+'</button><button type="button" class="link" data-act="foot-how" aria-expanded="false" aria-controls="foothow">See how we got this</button><button type="button" class="link" data-act="how-open">How this works</button></div>'+
-    '<div id="foothow" class="howb" hidden>'+(gl.trim()?'<p>'+esc(gl)+'</p>':'')+'<p>An asterisk (*) means one thing about that apartment is still to confirm before you sign. Its page says what to ask.</p><p>A snapshot, not a live feed: every price shows the day it was seen. Data built '+esc(seenLong(META.built_at))+'.</p><p>'+esc([pl(UNITS.length,"apartment")+" shown, in "+pl(BLDGS.length,"building"),D.avoid.length?D.avoid.length+" to avoid":"",D.held.length?D.held.length+" waiting on a phone call":"",WAIT_ONLY.length?WAIT_ONLY.length+" more not re-checked yet":""].filter(Boolean).join(" · "))+'</p>'+(notes.length?'<ul>'+lis(notes)+'</ul>':'')+
+    '<div id="foothow" class="howb" hidden>'+(gl.trim()?'<p>'+esc(gl)+'</p>':'')+'<p>An asterisk (*) means one thing about that apartment is still to confirm before you sign. Its page says what to ask.</p><p>A snapshot, not a live feed: every price shows the day it was seen. Data built '+esc(seenLong(META.built_at))+'.</p><p>'+esc([pl(UNITS.length,"apartment")+" shown, in "+pl(BLDGS.length,"building"),D.avoid.length?D.avoid.length+" to avoid":"",D.held.length?D.held.length+" waiting on a phone call":""].filter(Boolean).join(" · "))+'</p>'+(notes.length?'<ul>'+lis(notes)+'</ul>':'')+
     '<ul id="sources">'+lis(["Prices, sizes, parking, dogs and elevators: "+SOURCES.listing,"Counts of places, parks and distances: "+SOURCES.map+"; "+SOURCES.walk,"Drive times: "+SOURCES.drive,"Tolls: "+SOURCES.tolls,"Train and bus times: "+SOURCES.transit,"Crime rates: "+SOURCES.crime,"Who lives here: "+SOURCES.census,"Local rules, reviews and records: the page linked beside each one"])+'</ul></div>'}
 var scrolls={};
 try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}

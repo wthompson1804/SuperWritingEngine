@@ -49,7 +49,7 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
   const heights = [];
   const fits = async (kind, tag) => { const h = await pageHeight(), open = await page.evaluate(() => [...document.querySelectorAll('#view details.rowd[open]')].map(d => d.id));
     heights.push({ kind, tag, h, screens: +(h / SCREEN).toFixed(2) });
-    if (W === 390) { assert(h <= limitOf(kind), `${kind} ${tag} is ${h}px collapsed, over ${limitOf(kind)}px`); assert.strictEqual(open.length, 0, `${kind} ${tag} has a row open by default: ${open}`); }
+    if (W === 390) { /* the owner dropped the page-height limit (UI pass 6): the height is measured and printed, never asserted */ assert.strictEqual(open.length, 0, `${kind} ${tag} has a row open by default: ${open}`); }
     return h; };
   // crime is not shown in the open: nothing visible on a page in its default state names it
   const CRIME = /\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000/i;
@@ -451,10 +451,9 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
     assert((await page.textContent('#sec-call > summary')).includes('two questions')); await overflow('hood-held');
     await page.evaluate(() => document.getElementById('sec-call').scrollIntoView()); await page.evaluate(() => window.scrollBy(0, -70)); await shot('03c-worth-a-phone-call'); }
   const known = new Set([...data.held, ...data.units, ...data.avoid].map(u => u.id)), hoodIds = new Set(data.neighborhoods.map(h => h.id));
-  const waitOnly = (data.awaiting_live_check || []).filter(a => !known.has(a.id)), waitHood = waitOnly.find(a => hoodIds.has(a.hood_id) && yearBy[hoodBy[a.hood_id].year]);
-  console.log('awaiting live check:', (data.awaiting_live_check || []).length, '| not already in held:', waitOnly.length);
-  if (waitHood) { await go('#hood-' + slug(waitHood.hood_id)); await openRow('sec-wait');
-    assert.strictEqual(await page.locator('#sec-wait .callitem').count(), waitOnly.filter(a => a.hood_id === waitHood.hood_id).length); await overflow('hood-wait'); }
+  // (pass 6, owner decision) there is no "not re-checked" list any more: whatever the data still carries under awaiting_live_check is not shown, and no page says "re-checked"
+  { const hw = (data.awaiting_live_check || []).map(a => a.hood_id).find(id => hoodIds.has(id) && yearBy[hoodBy[id].year] && hoodBy[id].unit_ids.length) || shownHoods[0].id; await go('#hood-' + slug(hw)); await page.click('[data-act=rows-all]');
+    const t = await page.evaluate(() => document.getElementById('view').textContent + document.getElementById('foot').textContent); assert.strictEqual(await page.locator('#sec-wait, #wait-box').count(), 0, 'no "Not re-checked yet" row'); assert(!/re-checked|not seen live|live check/i.test(t), 'no "re-checked" wording on the page'); await page.click('[data-act=rows-all]'); }
   // local rules and what is here; crime only inside the closed "See how we got this"
   const hRules = shownHoods.find(h => (h.local.parking_rules || []).length >= 3 && (h.local.dog_rules || []).length && h.state !== 'NY') || shownHoods.find(h => (h.local.parking_rules || []).length && (h.local.dog_rules || []).length);
   await go('#hood-' + slug(hRules.id));
@@ -751,7 +750,7 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
     [[...data.years.map(y => 'exp-' + slug(y.id)), ...data.neighborhoods.filter(h => yearBy[h.year]).map(h => 'hood-' + slug(h.id)), ...pageBldgs.map(b => 'bldg-' + b.slug), ...data.units.filter(u => hoodBy[u.hood_id]).map(u => 'unit-' + slug(u.id))], { exp: limitOf('experience'), hood: limitOf('neighborhood'), bldg: limitOf('building'), unit: 1e9 }]);
   console.log('all views:', JSON.stringify(res).slice(0, 1500), 'in', Date.now() - t0, 'ms');
   assert(typeof res === 'object', String(res)); assert(res.unresolved.length <= 3, 'hashes the page did not open: ' + res.unresolved);
-  if (W === 390) assert.strictEqual(res.tall.length, 0, 'pages over their ceiling, collapsed: ' + res.tall.slice(0, 8));
+  if (res.tall.length) console.log('pages over the old ceilings, collapsed (measured only, not a failure):', res.tall.length, res.tall.slice(0, 4).join(' | '));
   assert.strictEqual(res.cutHeads.length, 0, 'row headlines that are cut or too long: ' + res.cutHeads.slice(0, 6).join(' | '));
   assert.strictEqual(res.dumps.length, 0, 'pipeline text on a page: ' + res.dumps.slice(0, 3).join(' | '));
   console.log('row headlines:', res.heads, 'on', res.n, 'pages, none cut;', res.longHeads, 'longer than 44 characters (two lines)');
@@ -788,16 +787,21 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
     h.headlines = { local_rules: { subhead: 'TEST subhead written by hand: ask the building about the overnight permit before you bring the car, and ask again in writing.' }, residents_say: { subhead: 'TEST subhead about violent crime that must not show.' } };
     y.tagline = 'TEST subhead: a quiet town, the lowest crime on the list and a train to the city.'; y.subhead = y.tagline; y.prose = Object.assign({}, y.prose, { promise: 'TEST promise about very low crime, 0.3 violent per 1,000.' });
     y.host = { intro: 'TEST experience host intro.', walkthrough: ['TEST walkthrough one.', 'TEST walkthrough two.'] }; delete y.day_moments; delete y.about_points; delete h.about_points; // the older shape: no points, no moments
-    u.host = { line: 'TEST host line for the place.', catch: 'TEST host catch.' }; delete u.about_building; delete u.about_points; { const vb = (d.buildings || []).find(b => b.id === u.building_id); if (vb) { delete vb.about_building; delete vb.about_points; } } /* the last resort: no About text on the building or the unit, so the host line shows */ u.headlines = { parking: { subhead: 'TEST parking subhead.' } };
+    u.host = { line: 'TEST host line for the place.', catch: 'TEST host catch.' }; delete u.about_building; delete u.about_points; { const vb = (d.buildings || []).find(b => b.id === u.building_id); if (vb) { delete vb.about_building; delete vb.about_points; } } /* the last resort: no About text on the building or the unit, so the host line shows */ d.units.filter(x => x.building_id === u.building_id).forEach(x => { x.headlines = { parking: { subhead: 'TEST parking subhead.' }, building: { subhead: 'The building.' }, cost: { subhead: 'TEST cost subhead: ask about the fee.' } }; });
+    // (pass 6) a floor plan and an apartment with no identifier of its own are never shown or counted; no description is marked as featured here
+    { const c = JSON.parse(JSON.stringify(u)); d.units.push(Object.assign({}, c, { id: 'test:plan-A1', unit: null }), Object.assign({}, c, { id: 'test-no-unit', unit: '' })); h.unit_ids = (h.unit_ids || []).concat(['test:plan-A1', 'test-no-unit']); (h.described || []).forEach(x => { if (x && typeof x === 'object') delete x.featured; }); }
     // fields the writing agent will send: icon points, the day's moments, a text about the building
     const y2 = d.years.find(x => x.id === h2o.year), h2 = d.neighborhoods.find(x => x.id === h2id), u2 = d.units.find(x => x.id === u2id);
     y2.about_points = [{ icon: 'dog', text: 'TEST point one, with a dog.' }, { icon: 'no-such-icon', text: 'TEST point two, unknown icon.' }, { icon: 'moon', text: 'TEST point about violent crime that must not show.' }, 'TEST point three, a plain string.'];
     y2.day_moments = [{ icon: 'coffee', title: 'TEST morning', text: 'TEST moment one.' }, { icon: 'train', title: 'TEST commute', text: 'TEST moment two.' }];
     h2.about_points = [{ icon: 'park', text: 'TEST hood point.' }]; u2.about_building = 'TEST about the building. It has a second sentence. And a third one.'; { const b2 = (d.buildings || []).find(b => b.id === u2.building_id); if (b2) { b2.about_building = u2.about_building; b2.about_points = [{ icon: 'pool', text: 'TEST building point.' }, { icon: 'warning', text: 'TEST building catch.' }]; b2.contact = { phone: '(555) 010-0100', kind: 'leasing office', note: 'listing-site tracking number (TEST forwarding line)', site: 'https://example.com/own' }; } }
-    h2.single_building = true; h2.described = [{ quote: 'TEST description of the park next door, long enough to be set as the pull quote.', source: 'TEST source', url: 'https://example.com/d', about: 'TEST Park' }, { quote: 'TEST second description, which waits in its row with the others.', source: 'TEST two' }];
+    h2.single_building = true; h2.described = [{ quote: 'TEST second description, which is shorter and comes first but is not the one marked, so it waits in its row.', source: 'TEST two' }, { quote: 'TEST description of the park next door, written long so that the pull quote holds thirty-five words in all and can be measured on a phone to see that it never runs past six lines.', source: 'TEST source', url: 'https://example.com/d', about: 'TEST Park', featured: true }];
     await route.fulfill({ contentType: 'application/json', body: JSON.stringify(d) }); });
   await page2.goto(BASE + '/index.html#hood-' + slug(vh.id)); await page2.waitForSelector('.ph1');
   
+  // (pass 6) the floor plan and the apartment without an identifier are not counted, listed or linked; with no description marked as featured there is no pull quote
+  { const sb = (await page2.textContent('#see-places')).replace(/\s+/g, ' ').trim(), n = vh.unit_ids.length; assert(sb.endsWith(n + (n === 1 ? ' apartment' : ' apartments')), 'the count leaves the floor plan out: ' + sb); assert.strictEqual(await page2.locator('#pull').count(), 0, 'no description is marked, so no pull quote is shown (never picked by length)');
+    assert.strictEqual(await page2.evaluate(() => window.__houseHunt.bldgs().filter(b => b.units.some(id => /^test/.test(id))).length), 0, 'neither sits in a building'); }
   // "About <name>": the made-up intro whole, no host box, nothing clamped
   { const ab = await page2.evaluate(() => ({ h2: document.querySelector('#about h2').textContent, text: document.getElementById('about').textContent, host: document.querySelectorAll('#view .host, #view .clampw, #view [data-act=unclamp]').length }));
     assert.strictEqual(ab.h2, 'About ' + (vh.parent_name && vh.short_name ? vh.short_name : vh.name)); assert.strictEqual(ab.host, 0); assert.strictEqual(ab.text.split('This is a long made-up paragraph').length - 1, 3, 'all of it is shown'); }
@@ -822,8 +826,11 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
   await page2.evaluate(() => { location.hash = '#lives'; }); await page2.waitForSelector('.life'); assert(!CRIME.test(await page2.evaluate(() => document.getElementById('view').innerText)));
   // building: the text under "About the building", the catch as its own marked line, a written subhead on a row
   await page2.evaluate(h => { location.hash = h; }, '#bldg-' + bSlug(vu)); await page2.waitForSelector('.bpage');
-  { const a = await page2.evaluate(() => ({ t: document.getElementById('about').textContent, warn: document.querySelectorAll('#about .pi.warn').length })); assert(a.t.includes('TEST host line for the place.') && a.t.includes('The catch') && a.t.includes('TEST host catch.') && a.warn === 1, a.t); assert.strictEqual(await page2.textContent('#about .catchb p'), 'TEST host catch.', 'the catch stands apart in its own box'); }
-  assert.strictEqual((await page2.textContent('#r-parking .rs')).trim(), 'TEST parking subhead.');
+  // (pass 6) the apartment's own line and catch are in its row (the line first, the catch as "To ask"), not under "About the building"; with no text about the building there is no About block
+  { const a = await page2.evaluate(s => { const d = document.querySelector(s); return { about: document.querySelectorAll('#about').length, line: (d.querySelector('.rb > .aline') || {}).textContent, katch: (d.querySelector('.rb > .acatch') || {}).textContent, cost: (d.querySelector('.costsub') || {}).textContent, all: document.getElementById('view').textContent, floor: document.querySelectorAll('[id*="test-plan"], [id*="test-no-unit"]').length }; }, '#apt-' + slug(vu.id));
+    assert.strictEqual(a.about, 0, 'no About block without text about the building'); assert.strictEqual(a.line, 'TEST host line for the place.'); assert.strictEqual(a.katch, 'To ask: TEST host catch.'); assert.strictEqual(a.cost, 'TEST cost subhead: ask about the fee.', 'the cost subhead sits under "What it costs"');
+    assert.strictEqual(a.all.split('TEST host line for the place.').length - 1, 1, 'the line is on the page once'); assert.strictEqual(a.floor, 0, 'no row for the floor plan or the apartment without an identifier'); }
+  assert.strictEqual((await page2.textContent('#r-parking .rs')).trim(), 'TEST parking subhead.'); assert.strictEqual(await page2.locator('#r-building > summary .rs').count(), 0, 'a subhead that only repeats the headline is left out');
   // about_points: an icon list, a dot for an unknown key, a point about crime left out; day_moments: its own titles; about_building in place of the host line
   await page2.evaluate(h => { location.hash = h; }, '#exp-' + slug(h2o.year)); await page2.waitForSelector('#about .pts');
   { const pts = await page2.evaluate(() => [...document.querySelectorAll('#about .pts li')].map(li => ({ t: li.textContent, stroke: li.querySelectorAll('svg path, svg rect').length, dot: li.querySelectorAll('svg circle[fill=currentColor]').length })));
@@ -831,12 +838,13 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
     assert.strictEqual(await page2.locator('#about .lead2').count(), 1, 'the written lead stays above the points'); 
     assert.deepStrictEqual(await page2.evaluate(() => [...document.querySelectorAll('#sec-day .scene h3')].map(h => h.textContent.trim())), ['TEST morning', 'TEST commute']); assert.deepStrictEqual(await page2.evaluate(() => [...document.querySelectorAll('#sec-day .scene p')].map(h => h.textContent.trim())), ['TEST moment one.', 'TEST moment two.']);
     // a neighborhood that rests on one building says "1 building" on its card
-    { const c = await page2.evaluate(hh => { const a = document.querySelector('#view a.hood[href="' + hh + '"]'); return a ? a.querySelector('.hd small').textContent : null; }, '#hood-' + slug(h2id)); if (c != null) assert(/1 building, \d+ apartments?/.test(c), 'the card says 1 building: ' + c); }
+    { const c = await page2.evaluate(hh => { const a = document.querySelector('#view a.hood[href="' + hh + '"]'); return a ? a.querySelector('.hsub').textContent : null; }, '#hood-' + slug(h2id)); if (c != null) assert(/1 building, \d+ apartments?/.test(c), 'the card says 1 building: ' + c); }
     if (W === 390 && OUT) { await page2.evaluate(() => window.scrollTo(0, 0)); await page2.screenshot({ path: `${OUT}/ux-07b-test-data-about-points.png` }); } }
   await page2.evaluate(h => { location.hash = h; }, '#hood-' + slug(h2id)); await page2.waitForSelector('#about .pts'); assert.strictEqual((await page2.textContent('#about .pts')).trim(), 'TEST hood point.');
   // the pull quote: the first description short enough, with its source and what it is about; the other waits in its row
   { const pq = await page2.evaluate(() => ({ q: document.querySelector('#pull blockquote').textContent, cap: document.querySelector('#pull figcaption').textContent, link: document.querySelector('#pull figcaption a').getAttribute('href'), rest: [...document.querySelectorAll('#sec-described .quote')].map(q => q.textContent) }));
-    assert(pq.q.startsWith('TEST description of the park') && pq.cap.includes('TEST source') && pq.cap.includes('about TEST Park') && pq.link === 'https://example.com/d', JSON.stringify(pq)); assert(pq.rest.length === 1 && pq.rest[0].includes('TEST second description'), 'the other description is in the row, once'); }
+    assert(pq.q.startsWith('TEST description of the park') && pq.cap.includes('TEST source') && pq.cap.includes('about TEST Park') && pq.link === 'https://example.com/d', 'the one marked as featured, not the first or the shortest: ' + JSON.stringify(pq)); assert(pq.rest.length === 1 && pq.rest[0].includes('TEST second description'), 'the other description is in the row, once');
+    const lines = await page2.evaluate(() => { const b = document.querySelector('#pull blockquote'); return Math.round(b.getBoundingClientRect().height / parseFloat(getComputedStyle(b).lineHeight)); }); if (W === 390) assert(lines <= 6, 'a 35-word pull quote is at most six lines at 390 px: ' + lines); }
   await page2.evaluate(h => { location.hash = h; }, '#bldg-' + bSlug(u2o)); await page2.waitForSelector('.bpage');
   { const a = await page2.textContent('#about'); assert(a.includes('TEST about the building. It has a second sentence.') && a.includes('And a third one.'), a);
     // the building's own points and contact (buildings[] in the data) are what the page shows
