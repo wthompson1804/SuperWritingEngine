@@ -3,15 +3,39 @@
 
 Run from the house-hunt folder:  python3 scripts/test_realtor_lines.py     (or: python3 -m pytest scripts/test_realtor_lines.py)
 
-They cover the sentence libraries (at least 8 different sentences per condition, house style, no host on screen), the
-unit line (what sets a unit apart inside its building), the catch (a reason is stated only when the unit's own fields
-give it), "About the building" (two sentences and icon points per building), the handling of unknowns, the rule that
-no number is printed unless it is in the data, the rules against repetition (shares of the page, the top three of a
-neighbourhood, the units of one building, neighbouring rows), stability across reruns and the length limits. The
-"on the page" tests run the same checks over everything in site/data.json when that file is present, so the tests
-also work as a check after a rerun.
+THE PLAIN-LANGUAGE GUARDS are not written here. They are imported from scripts/check_scene_text.py, the checker of
+the experience and neighborhood text, so the apartment and building text is held to the same standard as the rest of
+the page and the two cannot drift apart:
+    check_plain   CONCEITS (the constructions the copy edit of 2026-11-16 removed: a thing acting on "you", "where the
+                  car sleeps", template seams such as "then the practical side" / "count on about" / "then there is"),
+                  VOCAB ("unit", "place" for an apartment, bare "all-in", "Mom and Dad", British spelling, "we found"),
+                  INTERNAL (ranked, scorecard, verified, live check, net-effective, gate, asterisk, cap, ceiling),
+                  FIGURE (at most one figure-of-speech marker per text) and the readability limits
+                  (sentences average at most 20 words, none over 32)
+    BANNED        dashes, question marks, "not X but Y", wording about race or religion, listing-ad hype
+    CRIME         no crime or safety wording at all
+    NUMBER_WORDS  no spelled-out quantities
+    STAGE         no host on screen ("I", "let me", "your host")
+EXTRA below is stricter still for this text: no "unit" in any form, no narrator ("we", "our", "us"), and the template
+connectives the owner's editor flagged in the old lines ("Add ...", "Note ... as well", "the rest of the story").
+`guard()` runs all of it. It is applied to EVERY sentence in the libraries and to EVERY generated line, catch,
+subhead, About sentence and icon point for everything in site/data.json.
+
+Also covered: what sets an apartment apart inside its building; the catch (a reason is stated only when the
+apartment's own fields give it); "About the building"; unknowns never stated as fact; an open dog policy never yields
+"dogs are allowed"; no number that is not in the apartment's or building's fields (after the page's rounding);
+"a month, everything included" on the first monthly figure of a text; stability across reruns; length limits; and
+that the two CSVs on disk have exactly the page's apartments and buildings.
+
+REPETITION. Variety matters less than clarity, so the limit is deliberately loose: no lead wording, catch wording,
+subhead or building sentence may be on more than 8% of the rows (R.SHARE; it was 4% and 5% before the copy edit, and
+chasing it is where the odd lines came from). The price-and-size sentence, the icon points and the warning are plain
+facts in fixed words and are not counted. What must differ is what sits side by side: the first three apartments of a
+building lead with different facts and none reads the same as another, and the first three buildings of a
+neighborhood do not read identically.
 """
 import copy
+import csv
 import itertools
 import json
 import re
@@ -22,17 +46,56 @@ from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import check_scene_text as G  # noqa: E402   the guards of the experience and neighborhood text
 import realtor_lines as R  # noqa: E402
 
 NUMBER = re.compile(r"\d[\d,]*(?:\.\d+)?")
-STYLE = re.compile(r"[—–?]|\b(stunning|nestled|boasts?|vibrant|luxur\w*|oasis|gem|bustling|breathtaking)\b|"
-                   r"\bnot\b[^.]{0,60}\bbut\b|\byears?\b|scorecard|crime|violent|burglar|theft|per 1,000|safe|police", re.I)
-STAGE = re.compile(r"\b(I|I'll|I'd|I've|my|me)\b|\blet's\b|\blet me\b|picture this|\bokay\b|your host")   # no host on screen
+# Stricter than the scene-text checker, for wording the owner's editor flagged in the old apartment and building lines.
+EXTRA = [
+    (re.compile(r"\bunits?\b", re.I), "'unit' (say 'apartment')"),
+    (re.compile(r"\b(we|we're|we've|our|ours|us)\b", re.I), "a narrator ('we', 'our')"),
+    (re.compile(r"\ball in\b|\ball-in\b", re.I), "'all in' (say 'everything included')"),
+    (re.compile(r"\bheadroom\b|\bcushion\b|\bbudget pick\b|\bwallet\b", re.I), "budget jargon or a joke"),
+    (re.compile(r"^(add|note|count|figure|expect|budget|call it|set aside|round it)\b|\bas well\.$|\bbesides\.$|"
+                r"\bthe practical side\b|\bthe rest of the story\b|\bon top of that\b|\bbeyond that\b|\bthe plain facts\b|"
+                r"\bthe numbers:", re.I), "a template connective"),
+    (re.compile(r"\bcircle the block\b|\bfavorite\b|\byes, you would\b|\bfor the tour to show\b|"
+                r"\bforgotten ingredient\b|\byour own door\b|\bdangling\b|\bbaked in\b|\bfine print\b|\bloose ends?\b",
+                re.I), "one of the cut jokes or figures"),
+    (re.compile(r"\bdogs are welcome\b", re.I), "'dogs are welcome' (say 'dogs are allowed', and only when they are)"),
+    (re.compile(r"\byears?\b", re.I), "'year' (experiences are not years; a building's year is 'built in')"),
+]
+HEDGE = re.compile(r"\b(may|might|perhaps|probably|possibly|somewhat|fairly|arguably|seems?)\b", re.I)
+
+
+def guard(text, masked=None):
+    """Every plain-language and house-style fault in one text -> list of messages (empty = clean). `masked` is the
+    same text with names from the data (a park, a station, a supermarket) replaced, so a name cannot trip a rule."""
+    bare = masked if masked is not None else text
+    out = G.check_plain("text", bare)
+    for rx, what in G.BANNED + EXTRA:
+        m = rx.search(bare)
+        if m:
+            out.append(f"{what}: '{m.group(0)}'")
+    m = G.CRIME.search(bare) or re.search(r"\bsafe\w*", bare, re.I)
+    if m:
+        out.append(f"crime or safety wording '{m.group(0)}'")
+    m = G.NUMBER_WORDS.search(bare)
+    if m:
+        out.append(f"spelled-out quantity '{m.group(0)}'")
+    m = G.STAGE.search(bare)
+    if m:
+        out.append(f"stage business '{m.group(0)}'")
+    return out
+
+
+def sentences(text):
+    return G.sentences(text)
 
 
 def unit(uid, hood="xx:test", building=None, **over):
-    """A complete synthetic unit with nothing remarkable about it; `over` replaces top-level keys. By default every
-    unit is its own building."""
+    """A complete synthetic apartment with nothing remarkable about it; `over` replaces top-level keys. By default
+    every apartment is its own building."""
     u = {
         "id": uid, "hood_id": hood, "building_id": building or "b-" + uid, "beds": 1, "sqft": 700.0, "floor": 3.0,
         "floor_basis": "confirmed", "available": "now",
@@ -72,12 +135,8 @@ def meta(row):
     return json.loads(row["facts_used_json"])
 
 
-def pattern(row):
-    return meta(row)["pattern"]
-
-
 def cond(row):
-    return pattern(row).rsplit("_", 1)[0]
+    return meta(row)["pattern"].rsplit("_", 1)[0]
 
 
 def catch_kind(row):
@@ -97,22 +156,34 @@ def names(u):
             R.get(u, "moments", "sat", "train_station"), R.get(u, "moments", "work", "supermarket"))
 
 
+def mask(text, u):
+    """The text with the names taken from the data replaced by NAME (longest first)."""
+    for name in sorted((str(n) for n in names(u) if n), key=lambda x: -len(x)):
+        text = text.replace(name, "NAME").replace(re.sub(r"\s*\(.*?\)", "", name).strip(), "NAME")
+    return text
+
+
 def allowed_numbers(u, n_peers):
-    """Every number a text about this unit or its building may contain, worked out from the fields without using the
-    generator's own templates: its figures, the size of the group it is compared with, the page's fixed wordings."""
-    ok = {str(n) for n in n_peers} | {"10", "12"}             # "10-minute walk", "12-month lease"
-    if u.get("beds") == 1:
+    """Every number a text about this apartment or its building may contain, worked out from the fields without
+    using the generator's own templates: its figures as the page rounds them in a sentence (prices and sizes to the
+    nearest 10), her limit and what is left under it, the size of the group it is compared with, fixed wordings."""
+    ok = {str(n) for n in n_peers} | {"10", "12", str(R.CAP)}             # "10-minute walk", "12-month lease", her limit
+    if u.get("beds") == 1 or u.get("beds") is None:
         ok.add("1")                                           # "1-bedroom"
 
-    def put(x):
+    def put(x, rounded=False):
         v = R.num(x)
         if v is not None:
-            ok.add(str(int(round(v))))
-            ok.add(f"{v:.1f}")
-    for path in (("all_in",), ("sqft",), ("floor",), ("cost_check", "cap_margin"), ("parking", "fee"),
-                 ("rent", "free_months"), ("rent", "lease_months"), ("cost_check", "lease_term_months"),
-                 ("moments", "wake", "park_walk_min"), ("moments", "after", "restaurants_800m"),
-                 ("listing_age_days",), ("amenities", "year_built"), ("dog", "weight_limit_lb")):
+            ok.add(str(R.round10(v)) if rounded else str(int(round(v))))
+            if not rounded:
+                ok.add(f"{v:.1f}")
+    for path in (("all_in",), ("sqft",), ("cost_check", "cap_margin")):
+        put(R.get(u, *path), rounded=True)
+    if R.num(u.get("all_in")) is not None:
+        ok.add(str(R.CAP - R.round10(u["all_in"])))           # "about $520 under your $3,000 limit"
+    for path in (("floor",), ("parking", "fee"), ("rent", "free_months"), ("rent", "lease_months"),
+                 ("cost_check", "lease_term_months"), ("moments", "wake", "park_walk_min"),
+                 ("moments", "after", "restaurants_800m"), ("amenities", "year_built"), ("dog", "weight_limit_lb")):
         put(R.get(u, *path))
     for path in (("moments", "wake", "dog_park_m"), ("moments", "sat", "train_station_m"),
                  ("moments", "work", "supermarket_m")):
@@ -125,21 +196,30 @@ def allowed_numbers(u, n_peers):
         ok.add(str(date.fromisoformat(str(u.get("available"))[:10]).day))
     except ValueError:
         pass
-    for text in (R.get(u, "confirm", "question"),) + names(u):   # a name or a question quoted from the unit
+    for text in names(u):                                     # a name quoted from the data
         ok.update(numbers(str(text or "")))
     return ok
 
 
-def sentence_count(text, u):
-    for name in sorted((n for n in names(u) + (R.get(u, "confirm", "question"),) if n), key=lambda x: -len(str(x))):
-        text = text.replace(str(name), "NAME")
-    return len([s for s in re.split(r"(?<=[.!?])\s+", text.strip()) if s])
+FILL = {"n": 5, "low": "lowest", "big": "largest", "high": "highest", "least": "the least", "most": "the most",
+        "floor": 6, "date": "December 1", "sqft": "610", "price": "$2,780", "gap": "about $220 under your $3,000 limit",
+        "limit": "$3,000", "free": "1 month", "this_kind": "this studio", "This_kind": "This studio",
+        "Type_sentence": "This is a studio.", "months": 15, "names": "building fees and the parking fee",
+        "Names": "Building fees and the parking fee", "are": "are", "them": "them", "amounts": "amounts",
+        "gtail": ", with the fee not published", "ptail": ", and the fee is not published", "dogthing": "dog park",
+        "fee": "$150", "built": 2019, "Dogpark": "NAME", "dogpark_end": "NAME", "dogpark_mi": "0.3", "park": "NAME",
+        "park_mins": "4 minutes", "rest": "31", "w10": R.WALK_RADIUS, "station": "NAME", "Station": "NAME",
+        "station_mi": "0.4", "market": "NAME", "market_mi": "0.2", "Rest_few": "6 restaurants are",
+        "Rest_count": "About 31 restaurants are", "Apts_listed": "5 apartments are listed", "lb": "50",
+        "parking": "garage"}
 
 
 def families():
     """Every (family name, [sentences]) in the libraries."""
     for c, (_, texts) in R.LEADS.items():
         yield "lead:" + c, texts
+    for name, texts in R.SECOND.items():
+        yield "second:" + name, texts
     for c, (_, _, texts) in R.BUILDING.items():
         yield "building:" + c, texts
     for kind, texts in R.CATCHES.items():
@@ -147,12 +227,10 @@ def families():
     for section, entries in R.SUBS.items():
         for key, texts in entries:
             yield f"sub:{section}.{key}", texts
-    for name, texts in R.FRAMES.items():
-        yield "frame:" + name, texts
-    for key, (_, _, texts) in R.POINTS.items():
-        yield "point:" + key, texts
-    for key, (_, texts) in R.WARNINGS.items():
-        yield "point:warning." + key, texts
+    for key, (_, _, text) in R.POINTS.items():
+        yield "point:" + key, [text]
+    for key, (_, text) in R.WARNINGS.items():
+        yield "point:warning." + key, [text]
 
 
 def page_units():
@@ -160,86 +238,104 @@ def page_units():
 
 
 class Library(unittest.TestCase):
-    def test_every_condition_has_enough_sentences(self):
+    def test_every_sentence_passes_the_plain_language_guards(self):
+        n = 0
         for name, texts in families():
-            need = R.MIN_POINT_WORDINGS if name.startswith("point:") else R.MIN_WORDINGS
-            self.assertGreaterEqual(len(texts), need, name)
+            self.assertTrue(texts, name)
             self.assertEqual(len(set(texts)), len(texts), f"{name}: a sentence appears twice")
+            for t in texts:
+                filled = t.format(**FILL)
+                self.assertEqual(guard(filled), [], f"{name}: {filled}")
+                n += 1
+        self.assertGreater(n, 250)
 
-    def test_sentences_of_a_condition_start_differently(self):
-        # different sentences, never a template with a synonym swapped: no shared opening inside a condition
-        for name, texts in families():
-            if name.startswith(("frame:", "point:")):
-                continue
-            opens = [" ".join(re.findall(r"[A-Za-z{}_']+", t.lower())[:3]) for t in texts]
-            dup = [o for o in set(opens) if opens.count(o) > 1]
-            self.assertEqual(dup, [], f"{name}: more than one sentence opens with {dup}")
+    def test_the_guards_catch_what_the_copy_edit_removed(self):
+        # the lines the owner's editor flagged must fail, or the guards are not guarding
+        for bad in ("About $1,297 of headroom under your cap, on an all-in of about $1,703 a month.",
+                    "The price shown is a net-effective rent, so ask for the gross rent.",
+                    "We owe this listing a fresh check, and until then the rent and date are provisional.",
+                    "No other apartment we found in this building comes in under this one.",
+                    "The washer and dryer are in the unit.",
+                    "Where the car sleeps is unanswered, so ask before the tour.",
+                    "Your car sleeps indoors, and you never circle the block.",
+                    "Then the practical side: about $1,967 a month all in, with 614 square feet.",
+                    "Then there is 554 square feet.", "Count on about $2,044 a month all in.", "Add 773 square feet.",
+                    "Note 725 square feet as well.", "There is a pool, and yes, you would use it.",
+                    "Your wallet's favorite of the 2 here.", "Your own machines, inside your own door.",
+                    "It is 0.2 miles to Seabra Foods, which makes a forgotten ingredient a small problem.",
+                    "What is around the door is for the tour to show you.", "Dogs are welcome with no weight limit.",
+                    "This sits near your ceiling.", "The scorecard ranked this first.", "Is it still available?",
+                    "The neighbourhood is low on crime."):
+            self.assertNotEqual(guard(bad), [], f"the guards let this through: {bad}")
 
-    def test_no_sentence_is_shared_between_conditions(self):
-        seen = {}
-        for name, texts in families():
-            if name.split(":")[0] in ("lead", "catch", "building"):
-                for t in texts:
-                    self.assertNotIn(t, seen, f"{name} repeats a sentence of {seen.get(t)}")
-                    seen[t] = name
-
-    def test_house_style_and_no_host_on_screen(self):
+    def test_lengths_and_shapes(self):
         for name, texts in families():
             for t in texts:
-                self.assertIsNone(STYLE.search(t), f"{name}: {t}")
-                self.assertIsNone(STAGE.search(t), f"{name}: stage business in: {t}")
-                if not name.startswith("frame:") and "{q}" not in t:
-                    self.assertEqual(len(re.findall(r"[.!](\s|$)", t)), 1, f"{name}: one sentence wanted: {t}")
-                if name.startswith(("lead:", "building:")):
-                    self.assertLessEqual(len(t.split()), 24, t)
+                n = len(sentences(t.format(**FILL)))
+                if name.startswith(("lead:", "second:", "building:", "sub:", "point:")):
+                    self.assertEqual(n, 1, f"{name}: one sentence wanted: {t}")
+                if name.startswith("catch:"):
+                    self.assertIn(n, (1, 2), f"{name}: one or two sentences wanted: {t}")
                 if name.startswith(("sub:", "point:")):
                     self.assertLessEqual(len(t.split()), 14, t)
                 if name.startswith("sub:"):
                     self.assertNotRegex(t, r"\d", t)
-                    self.assertNotRegex(t.lower(), r"\b(may|might|probably|perhaps|possibly|somewhat|fairly)\b", t)
+                    self.assertIsNone(HEDGE.search(t), t)
 
     def test_no_typed_numbers(self):
         # the only digits typed in the libraries are fixed wordings: a 12-month lease, a 24-hour desk, a 1-bedroom
         for name, texts in families():
             for t in texts:
                 bare = re.sub(r"\{[A-Za-z_0-9]+\}", "", t)
-                for fixed in ("12-month", "24-hour", "24 hours", "1-bedroom"):
+                for fixed in ("12-month", "24 hours", "1-bedroom"):
                     bare = bare.replace(fixed, "")
                 self.assertNotRegex(bare, r"\d", f"{name}: {t}")
 
-    def test_unpriced_garage_sentences_all_say_the_fee_is_missing(self):
+    def test_a_monthly_price_always_says_everything_included(self):
+        for name, texts in families():
+            for t in texts:
+                if "{price}" in t:
+                    self.assertRegex(t, r"about \{price\} a month, everything included", f"{name}: {t}")
+
+    def test_unpriced_parking_sentences_say_the_fee_is_missing(self):
         for t in R.BUILDING["garage_unpriced"][2]:
             self.assertRegex(t, R.UNPRICED, t)
             self.assertNotRegex(t.lower(), r"free|included")
         for key in ("garage_unpriced", "covered_unpriced", "lot_unpriced", "onsite_unpriced"):
-            for t in R.POINTS[key][2]:
-                self.assertRegex(t.lower(), r"not published|no price|unpublished|not stated", t)
+            self.assertRegex(R.POINTS[key][2].lower(), r"not published|no type or price", key)
+        self.assertRegex(R.WARNINGS["parking_fee"][1], r"not published")
 
     def test_icons_are_from_the_fixed_set(self):
         for key, (icon, _, _) in R.POINTS.items():
             self.assertIn(icon, R.ICONS, key)
             self.assertNotEqual(icon, "warning", key)
 
-    def test_an_open_dog_policy_is_never_called_welcome(self):
+    def test_an_open_dog_policy_is_never_called_allowed(self):
+        yes = r"small dogs are allowed|dogs are allowed[.,]|dogs are welcome|takes dogs|dog-friendly"
+        asked = lambda t: re.sub(r"(not confirmed that|whether) dogs are allowed", "", t.lower())   # asking is not stating
         for key in ("conflicting", "unsettled"):
             for t in dict(R.SUBS["dog"])[key]:
-                self.assertNotRegex(t.lower(), r"small dogs are|dogs, yes|allow dogs and|dogs are welcome[.,]", t)
-        for kind in ("confirm:dogs open", "confirm:dogs reason", "confirm:dogs conflict"):
-            for t in R.CATCHES[kind]:
-                self.assertNotRegex(t.lower(), r"dogs are welcome[.,]|dogs are allowed[.,]", t)
-        for t in R.CATCHES["confirm:dogs open"] + R.CATCHES["confirm:dogs reason"] + dict(R.SUBS["dog"])["unsettled"]:
-            self.assertNotRegex(t.lower(), r"disagree|conflict|contradict|mixed signals|differ", t)   # a reason needs its field
+                self.assertNotRegex(asked(t), yes, t)
+        for kind, texts in R.CATCHES.items():
+            if kind.startswith("confirm:dogs"):
+                for t in texts:
+                    self.assertNotRegex(asked(t), yes, t)
+                    if kind != "confirm:dogs conflict":       # a reason needs its field
+                        self.assertNotRegex(t.lower(), r"disagree|do not agree|conflict|contradict", t)
+        self.assertNotRegex(asked(R.WARNINGS["dog_unsettled"][1]), yes)
 
-    def test_only_the_net_effective_family_says_net_effective(self):
+    def test_only_the_after_offer_family_says_the_price_includes_the_offer(self):
+        claim = r"price shown includes|lowers (this|the) price|price includes a special|lower than a normal month"
         for name, texts in families():
-            if name in ("catch:rent:net_effective", "sub:cost.net_effective"):
-                continue
             for t in texts:
-                self.assertNotRegex(t.lower(), r"net-effective|gross rent|discounted average", f"{name}: {t}")
+                if name in ("catch:rent:net_effective", "sub:cost.net_effective"):
+                    self.assertNotRegex(t.lower(), r"net.effective|gross", t)     # said in plain words
+                else:
+                    self.assertNotRegex(t.lower(), claim, f"{name}: {t}")
 
 
 class UnitLine(unittest.TestCase):
-    def test_a_unit_is_compared_with_the_units_of_its_own_building(self):
+    def test_an_apartment_is_compared_with_the_apartments_of_its_own_building(self):
         us = [unit("a", building="B", all_in=2100, scores={"hood_rank": 2.0}),
               unit("b", building="B", all_in=2600, scores={"hood_rank": 1.0}),
               unit("c", building="B", all_in=2700, scores={"hood_rank": 3.0}),
@@ -250,17 +346,20 @@ class UnitLine(unittest.TestCase):
         alone = {c[1] for c in R.lead_conditions(R.facts(us[3]), [R.facts(us[3])])}
         self.assertFalse(alone & R.PEER_CONDITIONS)                 # alone in its building: no comparison at all
 
-    def test_cheapest_names_the_price(self):
-        us = [unit("a", building="B", all_in=2100, sqft=None, scores={"hood_rank": 2.0}),
-              unit("b", building="B", all_in=2600, sqft=None, scores={"hood_rank": 1.0}),
-              unit("c", building="B", all_in=2700, sqft=None, scores={"hood_rank": 3.0})]
-        for salt in range(40):
-            rows = run([dict(u, id=f"{u['id']}{salt}") for u in us])
-            r = rows[f"a{salt}"]
-            if cond(r) == "cheapest":
-                self.assertIn("2,100", r["host_line"].split(". ")[0])
-                return
-        self.fail("the cheapest of three never led with its price")
+    def test_the_line_gives_the_price_rounded_with_everything_included(self):
+        us = [unit("a", building="B", all_in=2104, sqft=613.0, scores={"hood_rank": 2.0}),
+              unit("b", building="B", all_in=2600, scores={"hood_rank": 1.0}),
+              unit("c", building="B", all_in=2700, scores={"hood_rank": 3.0})]
+        line = run(us)["a"]["host_line"]
+        self.assertIn("about $2,100 a month, everything included", line)
+        self.assertIn("about 610 square feet", line)
+        self.assertNotIn("2,104", line)
+
+    def test_two_figures_in_one_sentence_add_up_to_her_limit(self):
+        f = R.facts(unit("a", all_in=2705, cost_check={"cap_margin": 295}))
+        self.assertEqual(R.price_words(f), ("$2,710", "about $290 under your $3,000 limit"))
+        f = R.facts(unit("a", all_in=2998, cost_check={"cap_margin": 2}))
+        self.assertEqual(R.price_words(f), ("$3,000", "at your $3,000 limit"))
 
     def test_biggest_highest_value_soonest(self):
         us = [unit("a", building="B", sqft=950.0, all_in=2600, scores={"hood_rank": 2.0}),
@@ -272,14 +371,14 @@ class UnitLine(unittest.TestCase):
         self.assertIn("biggest", got(0))
         self.assertIn("cheapest", got(1))
         self.assertLessEqual({"highest", "value"}, got(2))
-        self.assertNotIn("soonest_date", got(2))                    # two units are available now
+        self.assertNotIn("soonest_date", got(2))                    # two apartments are available now
 
     def test_a_tie_is_not_called_the_best(self):
-        us = [unit("a", building="B"), unit("b", building="B", scores={"hood_rank": 2.0})]      # identical units
+        us = [unit("a", building="B"), unit("b", building="B", scores={"hood_rank": 2.0})]      # identical
         for r in run(us).values():
             self.assertNotIn(cond(r), R.PEER_CONDITIONS)
 
-    def test_a_superlative_needs_every_unit_to_publish_the_figure(self):
+    def test_a_superlative_needs_every_apartment_to_publish_the_figure(self):
         us = [unit("a", building="B", sqft=950.0), unit("b", building="B", sqft=700.0, scores={"hood_rank": 2.0}),
               unit("c", building="B", sqft=None, scores={"hood_rank": 3.0})]
         peers = [R.facts(u) for u in us]
@@ -287,15 +386,7 @@ class UnitLine(unittest.TestCase):
         self.assertNotIn("biggest", conds)
         self.assertNotIn("value", conds)
 
-    def test_fewest_open_questions_and_newest_listing(self):
-        us = [unit("a", building="B", tour_questions=["q1"], listing_age_days=2.0),
-              unit("b", building="B", tour_questions=["q1", "q2", "q3"], listing_age_days=30.0, scores={"hood_rank": 2.0}),
-              unit("c", building="B", tour_questions=["q1", "q2"], scores={"hood_rank": 3.0})]
-        peers = [R.facts(u) for u in us]
-        self.assertLessEqual({"fewest_questions", "newest"}, {c[1] for c in R.lead_conditions(peers[0], peers)})
-        self.assertFalse({"fewest_questions", "newest"} & {c[1] for c in R.lead_conditions(peers[1], peers)})
-
-    def test_the_building_is_not_described_in_the_unit_line(self):
+    def test_the_building_is_not_described_in_the_apartment_line(self):
         rich = dict(amenities={"pool": "pool", "doorman": "24h", "gym": "yes", "in_unit_laundry": "yes",
                                "dog_amenities": "dog park"})
         for salt in range(20):
@@ -319,11 +410,18 @@ class UnitLine(unittest.TestCase):
         us = [unit("a", building="B", floor=12.0, floor_basis="inferred"), unit("b", building="B", scores={"hood_rank": 2.0})]
         self.assertNotIn("floor", run(us)["a"]["host_line"].lower())
 
-    def test_missing_all_in_prints_no_price(self):
+    def test_missing_cost_prints_no_price(self):
         u = unit("a", all_in=None, cost_check={"cap_margin": None})
         line = run([u])["a"]["host_line"]
-        self.assertNotIn("all in", line)
-        self.assertNotIn("2,500", line)
+        self.assertNotIn("$", line)
+        self.assertNotIn("a month", line)
+
+    def test_a_lead_does_not_repeat_the_catch(self):
+        special = {"asterisk": True, "needs_call": True, "free_months": "2"}
+        for salt in range(20):
+            row = run([unit(f"a{salt}", rent=special)])[f"a{salt}"]
+            self.assertEqual(catch_kind(row), "rent:needs_call")
+            self.assertNotEqual(cond(row), "concession", row["host_line"])
 
 
 class Catch(unittest.TestCase):
@@ -334,85 +432,129 @@ class Catch(unittest.TestCase):
     def test_sources_disagree_only_when_the_open_item_says_so(self):
         row = run([self.dog("Two listing sites disagree on whether dogs are allowed, and the building's own page does not settle it.")])["a"]
         self.assertEqual(catch_kind(row), "confirm:dogs conflict")
-        for why, word in (("Dogs are not confirmed as allowed here: dogs are not named as allowed ('upon approval')", "upon approval"),
-                          ("A condo unit where pets are considered case by case, so dogs are not explicitly allowed.", "case by case"),
-                          ("dogs are not named as allowed (the only policy text is 'contact for more information on pet policy')", "contact the office"),
-                          ("The listing says only 'small pets allowed'; dogs are not named.", "small pets"),
-                          ("Dogs are allowed only according to a listing site's pet data; there is no policy text.", "no policy text")):
-            for salt in range(8):
+        for why, kind, word in (
+                ("Dogs are not confirmed as allowed here: dogs are not named as allowed ('upon approval')", "approval", "upon approval"),
+                ("A condo where pets are considered case by case, so dogs are not explicitly allowed.", "case", "case by case"),
+                ("dogs are not named as allowed (the only policy text is 'contact for more information on pet policy')", "contact", "contact the office"),
+                ("The listing says only 'small pets allowed'; dogs are not named.", "small pets", "small pets"),
+                ("Dogs are allowed only according to a listing site's pet data; there is no policy text.", "no text", "no policy text")):
+            for salt in range(4):
                 u = self.dog(why)
                 u["id"] = f"a{salt}"
                 row = run([u])[f"a{salt}"]
-                self.assertEqual(catch_kind(row), "confirm:dogs reason", why)
+                self.assertEqual(catch_kind(row), "confirm:dogs " + kind, why)
                 self.assertIn(word, row["host_catch"].lower())
-                self.assertNotRegex(row["host_catch"].lower(), r"disagree|conflict|contradict")
+                self.assertNotRegex(row["host_catch"].lower(), r"disagree|do not agree|conflict|contradict")
 
     def test_an_open_dog_item_with_no_stated_reason_asserts_none(self):
         row = run([self.dog("Not settled.")])["a"]
         self.assertEqual(catch_kind(row), "confirm:dogs open")
-        self.assertNotRegex(row["host_catch"].lower(), r"disagree|conflict|approval|case by case|small pets")
+        self.assertNotRegex(row["host_catch"].lower(), r"disagree|do not agree|approval|case by case|small pets")
 
-    def test_the_dog_subhead_never_says_welcome_while_dogs_are_open(self):
+    def test_nothing_says_dogs_are_allowed_while_dogs_are_open(self):
         u = self.dog("The listing says only 'small pets allowed'; dogs are not named.",
                      size_note="page says small dogs; no weight number")
         row = run([u])["a"]
         self.assertEqual(meta(row)["subs"]["dog"], "unsettled")
-        self.assertNotRegex(row["sub_dog"].lower(), r"small dogs are|welcome,|dogs are allowed")
         b = buildings([u])["b-a"]
         self.assertEqual(json.loads(b["facts_used_json"])["warning"], "dog_unsettled")
-        self.assertFalse([p for p in points(b) if p["icon"] == "dog" and re.search(r"allowed|welcome|takes dogs|friendly", p["text"].lower())])
+        everything = " ".join([row["host_line"], row["sub_dog"], b["about_building"]] +
+                              [p["text"] for p in points(b) if p["icon"] != "warning"]).lower()
+        self.assertNotRegex(everything.replace("not confirmed that dogs are allowed", ""),
+                            r"dogs are allowed|small dogs are|welcome|takes dogs|friendly")
 
-    def test_net_effective_needs_the_basis_and_a_gross_figure(self):
+    def test_the_price_includes_an_offer_only_when_the_rent_block_says_so(self):
         special = {"basis_kind": "net_effective", "listed": 2300, "gross": 2600, "asterisk": True, "needs_call": True,
                    "offer_text": "2 months free on a 14-month lease; price shown is net effective"}
         row = run([unit("a", rent=special)])["a"]
         self.assertEqual(catch_kind(row), "rent:net_effective")
         self.assertEqual(meta(row)["subs"]["cost"], "net_effective")
-        for change in ({"gross": 2300}, {"gross": None}, {"offer_text": "Gross or net-effective: not stated"},
-                       {"basis_kind": "listed"}):
+        self.assertRegex(row["host_catch"].lower(), r"special offer")
+        self.assertRegex(row["host_catch"].lower(), r"ask (what|for)")
+        for change in ({"offer_text": "Gross or net-effective: not stated"}, {"basis_kind": "listed"}):
             row = run([unit("a", rent={**special, **change})])["a"]
             self.assertEqual(catch_kind(row), "rent:needs_call", change)
             self.assertEqual(meta(row)["subs"]["cost"], "ambiguous_rent", change)
             text = (row["host_catch"] + " " + row["sub_cost"]).lower()
-            self.assertNotRegex(text, r"net-effective|gross|discounted average", change)
+            self.assertNotRegex(text, r"price shown includes|lowers (this|the) price|lower than a normal month", change)
 
-    def test_asterisk_comes_first_and_the_units_own_question_is_quoted(self):
+    def test_the_open_item_comes_first_and_is_said_with_its_own_reason(self):
         u = unit("a", confirm={"asterisk": True, "what": "elevator", "why": "x", "question": "Does it have one?"},
                  rent={"asterisk": True, "needs_call": True})
         self.assertEqual(catch_kind(run([u])["a"]), "confirm:elevator")
-        u = unit("a", confirm={"asterisk": True, "what": "listing", "why": "x", "question": "Is unit 302 still available?"})
-        self.assertIn("Is unit 302 still available?", run([u])["a"]["host_catch"])
+        named = "An elevator is named for this property, but it is a low-rise or multi-building complex."
+        u = unit("a", confirm={"asterisk": True, "what": "elevator", "why": named, "question": "q"})
+        self.assertEqual(catch_kind(run([u])["a"]), "confirm:elevator named")
+        for why, q, kind in (("The listing page was last changed on 8 July 2026.", "Is it still available?", "confirm:listing stale"),
+                             ("This unit appears on one listing site only.", "Is it available?", "confirm:listing one site"),
+                             ("The page describes another building.", "Which building is this unit in?", "confirm:listing which building"),
+                             ("An open house is still advertised.", "Is it still available?", "confirm:listing")):
+            u = unit("a", confirm={"asterisk": True, "what": "listing", "why": why, "question": q})
+            row = run([u])["a"]
+            self.assertEqual(catch_kind(row), kind, why)
+            self.assertNotIn(q, row["host_catch"])                  # the open item's question is never pasted in
         u = unit("a", confirm={"asterisk": True, "what": "something new", "why": "x", "question": "Is it real?"})
-        self.assertIn("Is it real?", run([u])["a"]["host_catch"])
+        self.assertEqual(catch_kind(run([u])["a"]), "confirm:other")
 
     def test_a_floor_plan_is_called_one_only_when_the_open_item_says_so(self):
         u = unit("a", confirm={"asterisk": True, "what": "availability", "why": "Floor plan only: no unit, floor or date.",
                                "question": "Which unit?"})
-        self.assertEqual(meta(run([u])["a"])["catch_id"].rsplit("_", 1)[0], "confirm:availability")
+        self.assertEqual(catch_kind(run([u])["a"]), "confirm:availability plan")
         u = unit("a", confirm={"asterisk": True, "what": "availability", "why": "Date unclear.", "question": "When is it free?"})
         row = run([u])["a"]
-        self.assertIn("When is it free?", row["host_catch"])
+        self.assertEqual(catch_kind(row), "confirm:availability")
         self.assertNotRegex(row["host_catch"].lower(), r"floor plan|layout|plan type")
 
-    def test_the_unpublished_floor_is_the_units_catch_when_nothing_else_is_open(self):
+    def test_income_and_age_limits_need_the_open_item_to_say_so(self):
+        for why, kind in (("Eligibility is not settled: INCOME-RESTRICTED per a listing tag.", "confirm:eligibility income"),
+                          ("One of the communities at this address is for ages 55 and over.", "confirm:eligibility age"),
+                          ("Who may apply is unclear.", "confirm:eligibility")):
+            u = unit("a", confirm={"asterisk": True, "what": "eligibility", "why": why, "question": "q"})
+            row = run([u])["a"]
+            self.assertEqual(catch_kind(row), kind)
+            self.assertNotIn("55", row["host_catch"])
+
+    def test_the_floor_is_the_catch_when_nothing_else_is_open(self):
         row = run([unit("a", floor=None, floor_basis="unknown")])["a"]
         self.assertEqual(catch_kind(row), "floor:unpublished")
         row = run([unit("a", floor=6.0, floor_basis="inferred")])["a"]
         self.assertEqual(catch_kind(row), "floor:inferred")
         self.assertIn("6", numbers(row["host_catch"]))
 
-    def test_unpublished_costs_near_the_cap(self):
-        u = unit("a", all_in_unknown=["pet rent", "parking fee"], cost_check={"cap_margin": 120})
+    def test_unpublished_costs_that_could_pass_her_limit(self):
+        u = unit("a", all_in_unknown=["building fees", "parking fee"], cost_check={"cap_margin": 120}, all_in=2880,
+                 parking={"type": "garage: fee not stated", "fee": None, "fee_note": ""})
         row = run([u])["a"]
-        self.assertEqual(catch_kind(row), "unknown:costs_tight")
-        self.assertRegex(row["host_catch"], r"pet rent")
-        self.assertIn("$120", row["host_catch"])
+        self.assertEqual(catch_kind(row), "costs:could_pass")
+        self.assertRegex(row["host_catch"], r"[Bb]uilding fees and the parking fee")
+        self.assertIn("$3,000 limit", row["host_catch"])
+        u["disclosures"] = [{"what": "could pass $3,000"}]
+        u["cost_check"]["cap_margin"] = 400                          # the page's own disclosure is enough
+        self.assertEqual(catch_kind(run([u])["a"]), "costs:could_pass")
+        u["parking"] = {"type": None, "fee": None, "fee_note": None}   # parking itself unknown: not "the parking fee"
+        self.assertNotIn("the parking fee", run([u])["a"]["host_catch"])
 
-    def test_the_catch_is_never_about_safety_or_the_neighbourhood(self):
+    def test_lease_term_dog_weight_and_condo_come_from_the_disclosures(self):
+        row = run([unit("a", cost_check={"lease_term_months": 15.0}, rent={"lease_months": 15.0})])["a"]
+        self.assertEqual(catch_kind(row), "lease_term")
+        self.assertIn("15", numbers(row["host_catch"]))
+        row = run([unit("a", disclosures=[{"what": "dog weight limit not published"}])])["a"]
+        self.assertEqual(catch_kind(row), "dog_weight")
+        row = run([unit("a", disclosures=[{"what": "condo rented by its owner"}])])["a"]
+        self.assertEqual(catch_kind(row), "condo")
+
+    def test_small_or_dear_is_said_only_when_it_is_plainly_so(self):
         u = unit("a", scores={"hood_rank": 1.0, "parts": {"safety": 1, "distance": 2, "space": 45, "cost": 50}})
-        self.assertEqual(catch_kind(run([u])["a"]), "weak:space")
+        self.assertEqual(catch_kind(run([u])["a"]), "none")          # 700 square feet is not small: nothing is claimed
+        self.assertEqual(catch_kind(run([dict(u, sqft=480.0)])["a"]), "weak:space")
+        u = unit("a", all_in=2950, cost_check={"cap_margin": 50},
+                 scores={"hood_rank": 1.0, "parts": {"space": 80, "cost": 5}})
+        row = run([u])["a"]
+        self.assertEqual(catch_kind(row), "weak:cost")
+        self.assertIn("about $2,950 a month, everything included", row["host_catch"])
+        self.assertIn("about $50 under your $3,000 limit", row["host_catch"])
 
-    def test_every_catch_on_the_page_that_gives_a_reason_has_it_in_the_units_fields(self):
+    def test_every_catch_on_the_page_that_gives_a_reason_has_it_in_the_apartments_fields(self):
         units = page_units()
         if units is None:
             self.skipTest("site/data.json is not here")
@@ -420,20 +562,21 @@ class Catch(unittest.TestCase):
         for r in R.build(units):
             u, m = by_id[r["listing_id"]], meta(r)
             family = m["catch_id"].rsplit("_", 1)[0]
+            self.assertEqual(family, m["catch_kind"])
             if family in R.CATCH_BASIS:
-                self.assertTrue(R.CATCH_BASIS[family](u), f"{r['listing_id']}: '{r['host_catch']}' has no basis in the unit")
-            q = str(R.get(u, "confirm", "question") or "\0")
-            text = r["host_catch"].replace(q, "").lower()
+                self.assertTrue(R.CATCH_BASIS[family](u), f"{r['listing_id']}: '{r['host_catch']}' has no basis in the apartment")
+            text = r["host_catch"].lower()
             why = str(R.get(u, "confirm", "why") or "").lower()
-            if "dog" in text and re.search(r"disagree|contradict|mixed signals|sources conflict|conflicts\b|break the tie", text):
+            if "dog" in text and re.search(r"disagree|do not agree", text):
                 self.assertRegex(why, r"disagree|and another says", r["listing_id"])
             for phrase, need in (("upon approval", "approval"), ("case by case", "case by case"),
                                  ("contact the office", "contact for more information"), ("small pets", "small pets"),
-                                 ("income", "income"), ("floor plan", "plan")):
+                                 ("income", "income"), ("floor plan", "plan"), ("older residents", "55")):
                 if phrase in text and family.startswith("confirm:"):
                     self.assertIn(need, why, f"{r['listing_id']}: {r['host_catch']}")
-            if re.search(r"net-effective|gross rent|discounted average|baked in|averaged over", text + " " + r["sub_cost"].lower()):
-                self.assertTrue(R.net_effective(u), f"{r['listing_id']}: net-effective said without the rent block's proof")
+            if re.search(r"price shown includes|lowers (this|the) price|lower than a normal month",
+                         text + " " + r["sub_cost"].lower()):
+                self.assertTrue(R.net_effective(u), f"{r['listing_id']}: an after-offer price said without the rent block's word")
             if R.dog_open(u):                                         # dogs are the open item
                 self.assertIn(m["subs"]["dog"], ("conflicting", "unsettled"), r["listing_id"])
                 if m["subs"]["dog"] == "conflicting":
@@ -445,30 +588,48 @@ class Subheads(unittest.TestCase):
 
     def test_unknown_parking_gets_an_ask_line(self):
         row = run([unit("a", parking={"type": None, "fee": None, "fee_note": None})])["a"]
-        self.assertRegex(row["sub_parking"].lower(), r"ask|question")
+        self.assertRegex(row["sub_parking"].lower(), r"\bask\b")
         self.assertNotRegex(row["sub_parking"].lower(), r"garage|indoors|free|included")
 
     def test_unpriced_garage_says_the_price_is_missing(self):
         row = run([unit("a", parking={"type": "garage: fee not stated", "fee": None, "fee_note": ""})])["a"]
-        ask = r"ask|in writing|question|not published|unpublished|missing|not shared|leaves it out"
+        ask = r"\bask\b|in writing|not published|does not give"
         self.assertRegex(row["sub_parking"].lower(), ask)
         for t in dict(R.SUBS["parking"])["garage_unpriced"]:
             self.assertRegex(t.lower(), ask, t)
 
-    def test_priced_garage_and_included_spot(self):
+    def test_priced_garage_included_space_and_street(self):
         self.assertEqual(meta(run([unit("a")])["a"])["subs"]["parking"], "garage_priced")
         inc = unit("a", parking={"type": "lot: assigned", "fee": 0.0, "fee_note": "a spot is included or free: assigned"})
         self.assertEqual(meta(run([inc])["a"])["subs"]["parking"], "included")
+        street = unit("a", parking={"type": "street_only", "fee": None, "fee_note": ""})
+        self.assertEqual(meta(run([street])["a"])["subs"]["parking"], "street")       # never "on-site parking"
+        b = buildings([street])["b-a"]
+        self.assertNotRegex(b["about_building"].lower(), r"garage|parking lot|on-site")
 
     def test_unknown_pet_rent(self):
         row = run([unit("a", dog={"allowed": "yes", "weight_limit_lb": None, "pet_rent": None})])["a"]
-        self.assertRegex(row["sub_dog"].lower(), r"ask|question|unstated|missing|find out|off the page|unpublished")
+        self.assertRegex(row["sub_dog"].lower(), r"\bask\b")
 
     def test_nothing_distinctive_stays_empty(self):
         row = run([unit("a", cost_check={"cap_margin": 250})])["a"]      # known pet rent, no amenities, mid budget
         self.assertEqual(row["sub_cost"], "")
         self.assertEqual(row["sub_dog"], "")
         self.assertEqual(row["sub_building"], "")
+
+    def test_the_best_apartment_of_each_building_is_served_first(self):
+        # the page shows the subheads of a building's best apartment: it gets one even when a wording runs out
+        units = page_units()
+        if units is None:
+            self.skipTest("site/data.json is not here")
+        rows = run(units)
+        best = {}
+        for u in sorted(units, key=R.rank_key):
+            best.setdefault(u.get("building_id") or u["id"], u)
+        for u in best.values():
+            for section, key in meta(rows[u["id"]])["subs"].items():
+                if key:
+                    self.assertTrue(rows[u["id"]]["sub_" + section], f"{u['id']}: no {section} subhead for '{key}'")
 
 
 class Building(unittest.TestCase):
@@ -487,31 +648,39 @@ class Building(unittest.TestCase):
             ok = allowed_numbers(top, (hood_sizes[top.get("hood_id")], len(group)))
             text = r["about_building"]
             self.assertLessEqual(len(text.split()), R.ABOUT_MAX_WORDS, text)
-            self.assertEqual(sentence_count(text, top), 2, text)
+            self.assertIn(len(sentences(mask(text, top))), (1, 2), text)
             pts = points(r)
             self.assertTrue(R.POINTS_COUNT[0] <= len(pts) <= R.POINTS_COUNT[1], pts)
             self.assertEqual(sum(p["icon"] == "warning" for p in pts), 1, pts)
             self.assertEqual(len({p["text"] for p in pts}), len(pts), pts)
-            mask = "|".join(re.escape(str(x)) for x in sorted((n for n in names(top) if n), key=lambda n: -len(str(n)))) or "$^"
             for p in pts:
                 self.assertEqual(set(p), {"icon", "text"})
                 self.assertIn(p["icon"], R.ICONS)
-                self.assertLessEqual(len(p["text"].split()), R.POINT_MAX_WORDS + len(str(top["moments"]["wake"].get("park") or "").split()), p["text"])
+                self.assertLessEqual(len(mask(p["text"], top).split()), R.POINT_MAX_WORDS, p["text"])
+                self.assertEqual(len(sentences(mask(p["text"], top))), 1, p["text"])
             for t in [text] + [p["text"] for p in pts]:
                 for n in numbers(t):
                     self.assertIn(n, ok, f"{bid}: '{n}' is not in the building's fields: {t}")
-                self.assertIsNone(STYLE.search(re.sub(mask, "NAME", t)), t)
-                self.assertIsNone(STAGE.search(re.sub(mask, "NAME", t)), t)
-            # the two sentences and the points do not say the same thing twice
+                self.assertEqual(guard(t, mask(t, top)), [], f"{bid}: {t}")
+            # the sentences and the points do not say the same thing twice
             lead = re.findall(r"[a-z#'é$-]+", re.sub(r"\d[\d,.]*", "#", text.lower()))
             runs = {" ".join(lead[i:i + 6]) for i in range(len(lead) - 5)}
             for p in pts:
                 w = re.findall(r"[a-z#'é$-]+", re.sub(r"\d[\d,.]*", "#", p["text"].lower()))
                 for i in range(len(w) - 5):
                     self.assertNotIn(" ".join(w[i:i + 6]), runs, f"{bid}: a point repeats the sentences: {p['text']}")
-            if not R.get(top, "parking", "type"):                    # parking not published: an ask, never a description
-                self.assertNotRegex(re.sub(mask, "NAME", text).lower(), r"garage|parking|\blot\b")
+            everything = mask(" ".join([text] + [p["text"] for p in pts]), top).lower()
+            kind, fee, included = R.parking_kind(top)
+            if kind is None:                                         # parking not published: an ask, never a description
+                self.assertNotRegex(mask(text, top).lower(), r"garage|parking|\blot\b")
                 self.assertFalse([p for p in pts if p["icon"] == "parking"], pts)
+            if kind in ("garage", "covered", "lot") and not fee and not included and \
+                    re.search(r"garage|covered parking|parking lot|building's lot", everything):
+                self.assertRegex(everything, r"not published|does not publish", f"{bid}: a fee that is not published must be called that")
+                self.assertNotRegex(everything, r"\bfree\b|included in the rent", bid)
+            if any(R.dog_open(u) for u in group):                    # an open dog policy never yields "dogs are allowed"
+                self.assertNotRegex(everything.replace("it is not confirmed that dogs are allowed", ""),
+                                    r"dogs are allowed|small dogs are|welcome|no weight limit", bid)
 
     def test_synthetic_buildings(self):
         us = [unit("a", building="B1", amenities={"pool": "pool", "doorman": "24h", "in_unit_laundry": "yes"}),
@@ -525,22 +694,34 @@ class Building(unittest.TestCase):
         self.assertEqual(json.loads(rows["B2"]["facts_used_json"])["warning"], "parking_unknown")
         self.assertEqual(json.loads(rows["B3"]["facts_used_json"])["warning"], "parking_fee")
         text = rows["B3"]["about_building"] + " " + " ".join(p["text"] for p in points(rows["B3"]))
+        self.assertIn("The garage fee is not published", text)
         self.assertNotRegex(text.lower(), r"free parking|parking is free|included")
 
     def test_the_warning_is_the_most_pressing_thing_to_ask(self):
         ask = {"asterisk": True, "what": "elevator", "why": "x", "question": "Is there one?"}
         b = buildings([unit("a", confirm=ask, parking={"type": None, "fee": None, "fee_note": None})])["b-a"]
         self.assertEqual(json.loads(b["facts_used_json"])["warning"], "elevator_open")
-        self.assertFalse([p for p in points(b) if "elevator building" in p["text"].lower() or "has an elevator" in p["text"].lower()])
+        self.assertFalse([p for p in points(b) if p["text"] == R.POINTS["elevator"][2]])
         b = buildings([unit("a")])["b-a"]                             # garage priced, pet rent known, nothing unknown
         self.assertEqual(json.loads(b["facts_used_json"])["warning"], "tour")
 
-    def test_only_pool_is_against_the_buildings_of_the_neighbourhood(self):
+    def test_only_pool_is_against_the_buildings_of_the_neighborhood(self):
         us = [unit("a", building="B1", amenities={"pool": "pool"}), unit("b", building="B2", scores={"hood_rank": 2.0}),
               unit("c", building="B3", scores={"hood_rank": 3.0})]
         peers = [R.building_facts([u]) for u in us]
         self.assertIn("only_pool", {c[1] for c in R.building_conditions(peers[0], peers)})
         self.assertNotIn("only_pool", {c[1] for c in R.building_conditions(peers[1], peers)})
+
+    def test_names_from_the_data_read_as_plain_words(self):
+        self.assertEqual(R.dog_park_words("Dog Run"), "the nearest dog park")
+        self.assertEqual(R.dog_park_words("Oyster Shell Dog Park"), "Oyster Shell Dog Park")
+        self.assertEqual(R.dog_park_words("The Sirius Dog Park (For Large Dogs)"), "The Sirius Dog Park")
+        self.assertEqual(R.dog_park_words("Liberty Park II"), "the nearest dog park, Liberty Park II,")
+        self.assertEqual(R.station_words("Newark Penn Station"), "Newark Penn Station")
+        self.assertEqual(R.station_words("Kew Gardens"), "the Kew Gardens train station")
+        self.assertEqual(R.restaurants_words(0), "No restaurants are")       # never "about 0"
+        self.assertEqual(R.restaurants_words(1), "1 restaurant is")
+        self.assertEqual(R.restaurants_words(31), "About 31 restaurants are")
 
     def test_every_building_on_the_page(self):
         units = page_units()
@@ -550,16 +731,21 @@ class Building(unittest.TestCase):
         rows = R.build_buildings(units)
         self.assertEqual(rows, R.build_buildings(units))
         d = R.building_distribution(rows)
-        self.assertLessEqual(d["building sentence"]["top_share"], R.LINE_SHARE + 1e-9, d["building sentence"])
-        self.assertLessEqual(d["warning wording"]["top_share"], R.CATCH_SHARE + 1e-9, d["warning wording"])
-        last = {}
-        for r in rows:                                               # neighbouring buildings do not open the same way
-            hood = json.loads(r["facts_used_json"])["hood_id"]
-            self.assertNotEqual(last.get(hood), R.open3(r["about_building"]), r["building_id"])
-            last[hood] = R.open3(r["about_building"])
+        self.assertLessEqual(d["building sentence"]["top_share"], R.SHARE + 1e-9, d["building sentence"])
+        by_hood = {}
+        for r in rows:
+            by_hood.setdefault(json.loads(r["facts_used_json"])["hood_id"], []).append(r)
+        for hood, group in by_hood.items():
+            for a, b in itertools.combinations(group[:3], 2):         # the top three buildings do not read identically
+                self.assertNotEqual(a["about_building"], b["about_building"], hood)
+            for a, b in zip(group, group[1:]):                        # neighboring buildings do not open the same way
+                self.assertNotEqual(sentences(a["about_building"])[0], sentences(b["about_building"])[0],
+                                    f"{hood}: {a['about_building']}")
 
 
-class Numbers(unittest.TestCase):
+class OnThePage(unittest.TestCase):
+    """Every generated text for every apartment in site/data.json, against the guards, the numbers and the limits."""
+
     def check(self, units):
         by_b = {}
         for u in units:
@@ -569,29 +755,52 @@ class Numbers(unittest.TestCase):
             ok = allowed_numbers(u, (len(by_b[u.get("building_id") or u["id"]]),))
             r = rows[u["id"]]
             for col in ("host_line", "host_catch"):
-                for n in numbers(r[col]):
-                    self.assertIn(n, ok, f"{u['id']} {col}: '{n}' is not in the unit's fields: {r[col]}")
+                text = r[col]
+                self.assertTrue(text, f"{u['id']}: empty {col}")
+                self.assertEqual(guard(text), [], f"{u['id']} {col}: {text}")
+                for n in numbers(text):
+                    self.assertIn(n, ok, f"{u['id']} {col}: '{n}' is not in the apartment's fields: {text}")
+                self.assertIn(len(sentences(text)), (1, 2), text)
+                # the first monthly figure of a text is "a month, everything included"; a price is always "about"
+                first = re.search(r"\$[\d,]+ a month(, everything included)?", text)
+                if first:
+                    self.assertTrue(first.group(1), f"{u['id']} {col}: {text}")
+                for m in re.finditer(r"(about )?\$([\d,]+)", text):
+                    if int(m.group(2).replace(",", "")) != R.CAP:
+                        self.assertTrue(m.group(1), f"{u['id']} {col}: a price without 'about': {text}")
+                for m in re.finditer(r"(about )?([\d,]+) square feet", text):
+                    self.assertTrue(m.group(1), f"{u['id']} {col}: a size without 'about': {text}")
             self.assertLessEqual(len(r["host_line"].split()), R.MAX_WORDS, r["host_line"])
-            self.assertIn(sentence_count(r["host_line"], u), (1, 2), r["host_line"])
-            self.assertEqual(sentence_count(r["host_catch"], u), 1, r["host_catch"])
-            q = str(R.get(u, "confirm", "question") or "\0")
-            both = (r["host_line"] + " " + r["host_catch"]).replace(q, "")
-            self.assertNotRegex(both, r"[—–]|\b(stunning|nestled|boasts|vibrant|luxury|oasis|gem)\b|scorecard")
-            self.assertNotRegex(both.lower(), r"crime|violent|burglar|theft|per 1,000|safe|police", "no crime or safety wording")
-            self.assertIsNone(STAGE.search(both), both)
+            self.assertLessEqual(len(r["host_catch"].split()), R.CATCH_MAX_WORDS, r["host_catch"])
+            if u.get("floor_basis") not in ("confirmed", "stated"):      # an unknown is never stated as fact
+                self.assertNotRegex(r["host_line"].lower(), r"\bfloor \d", f"{u['id']}: a floor that no page states")
+            if R.num(u.get("sqft")) is None:
+                self.assertNotIn("square feet", r["host_line"] + r["host_catch"])
+            if R.dog_open(u) or str(R.get(u, "dog", "allowed") or "").lower() != "yes":
+                asked = re.sub(r"(not confirmed that|whether|confirm that) (dogs are|a dog is) allowed", "",
+                               " ".join(r[c] for c in ("host_line", "host_catch", "sub_dog")).lower())   # asking is not stating
+                self.assertNotRegex(asked, r"dogs are allowed|a dog is allowed|small dogs are allowed|dogs are welcome", u["id"])
+            if not R.get(u, "parking", "type"):
+                self.assertNotRegex(r["sub_parking"].lower(), r"garage|indoors|included|\blot\b", u["id"])
             for c in Subheads.COLS:
-                self.assertLessEqual(len(r[c].split()), R.SUB_MAX_WORDS, r[c])
-                self.assertNotRegex(r[c], r"\d", r[c])
+                if r[c]:
+                    self.assertEqual(guard(r[c]), [], f"{u['id']} {c}: {r[c]}")
+                    self.assertLessEqual(len(r[c].split()), R.SUB_MAX_WORDS, r[c])
+                    self.assertEqual(len(sentences(r[c])), 1, r[c])
+                    self.assertNotRegex(r[c], r"\d", r[c])
+                    self.assertIsNone(HEDGE.search(r[c]), r[c])
 
-    def test_synthetic_units(self):
+    def test_synthetic_apartments(self):
         us = [unit("a", building="B", all_in=2111, sqft=913.0, floor=14.0, amenities={"pool": "pool", "doorman": "24h"}),
               unit("b", building="B", scores={"hood_rank": 2.0}, available="2026-12-07", rent={"free_months": "2"},
                    parking={"type": "covered: carport", "fee": 45.0, "fee_note": "single price stated"}),
               unit("c", scores={"hood_rank": 3.0}, moments={"wake": {"park": "Pier 4 Park", "park_walk_min": 2.4,
-                                                                       "dog_park": "Run 105", "dog_park_m": 480}})]
+                                                                       "dog_park": "Run 105", "dog_park_m": 480}}),
+              unit("d", scores={"hood_rank": 4.0}, beds=None, all_in=None, sqft=None, floor=None, floor_basis="unknown",
+                   available=None, cost_check={"cap_margin": None}, parking={"type": None, "fee": None, "fee_note": None})]
         self.check(us)
 
-    def test_every_unit_on_the_page(self):
+    def test_every_apartment_on_the_page(self):
         units = page_units()
         if units is None:
             self.skipTest("site/data.json is not here")
@@ -600,9 +809,22 @@ class Numbers(unittest.TestCase):
         self.assertEqual(len(rows), len(units))
         self.assertEqual(rows, R.build(units))
 
+    def test_the_csvs_on_disk_have_exactly_the_pages_apartments_and_buildings(self):
+        units = page_units()
+        if units is None or not R.OUT.exists() or not R.OUT_BUILDINGS.exists():
+            self.skipTest("site/data.json or the CSVs are not here")
+        with open(R.OUT, newline="", encoding="utf-8") as fh:
+            on_disk = [r["listing_id"] for r in csv.DictReader(fh)]
+        self.assertEqual(sorted(on_disk), sorted(u["id"] for u in units),
+                         "data/reference/realtor_lines.csv is stale: run python3 scripts/realtor_lines.py")
+        with open(R.OUT_BUILDINGS, newline="", encoding="utf-8") as fh:
+            on_disk = [r["building_id"] for r in csv.DictReader(fh)]
+        self.assertEqual(sorted(on_disk), sorted({u.get("building_id") or u["id"] for u in units}),
+                         "data/reference/building_about.csv is stale: run python3 scripts/realtor_lines.py")
+
 
 def groups(rows, key):
-    """rows of R.build (which come out in neighbourhood rank order) -> {hood_id or building_id: [row, ...]}"""
+    """rows of R.build (which come out in neighborhood rank order) -> {hood_id or building_id: [row, ...]}"""
     out = {}
     for r in rows:
         out.setdefault(meta(r)[key], []).append(r)
@@ -610,75 +832,46 @@ def groups(rows, key):
 
 
 class Repetition(unittest.TestCase):
-    """What repeats on neighbouring cards is what the reader notices."""
+    """What repeats side by side is what the reader notices; across the page, the limit is a loose 8% per wording."""
 
-    def check_neighbours(self, rows):
-        for key in ("hood_id", "building_id"):
-            for name, group in groups(rows, key).items():
-                for a, b in itertools.combinations(group[:3], 2):
-                    self.assertNotEqual(meta(a)["angle"], meta(b)["angle"], f"{name}: two of the first three lead with the same angle")
-                    self.assertNotEqual(a["host_catch"], b["host_catch"], f"{name}: two of the first three share a catch")
-                    self.assertNotEqual(a["host_line"], b["host_line"], name)
-                for a, b in zip(group, group[1:]):
-                    self.assertNotEqual(R.open3(a["host_line"]), R.open3(b["host_line"]),
-                                        f"{name}: neighbouring units open with the same three words: {a['host_line'][:40]}")
-                    self.assertNotEqual(meta(a)["pattern"], meta(b)["pattern"], name)
-                    self.assertNotEqual(a["host_catch"], b["host_catch"], name)
-                    if key == "hood_id":
-                        for c in Subheads.COLS:
-                            if a[c]:
-                                self.assertNotEqual(a[c], b[c], f"{name}: neighbouring units share the subhead '{a[c]}'")
+    def check_neighbors(self, rows):
+        for name, group in groups(rows, "building_id").items():
+            for a, b in itertools.combinations(group[:3], 2):
+                self.assertNotEqual(meta(a)["angle"], meta(b)["angle"], f"{name}: two of the first three lead with the same kind of fact")
+                self.assertNotEqual(a["host_line"], b["host_line"], name)
+            for a, b in zip(group, group[1:]):
+                self.assertNotEqual(meta(a)["pattern"], meta(b)["pattern"], name)
 
-    def test_identical_units_in_one_building_still_get_three_angles(self):
-        us = [unit(f"u{i}", building="B", scores={"hood_rank": float(i + 1)}) for i in range(8)]   # eight identical units
-        self.check_neighbours(R.build(us))
+    def test_identical_apartments_in_one_building_still_read_differently(self):
+        us = [unit(f"u{i}", building="B", scores={"hood_rank": float(i + 1)}) for i in range(8)]   # eight identical
+        self.check_neighbors(R.build(us))
 
-    def test_identical_single_unit_buildings_still_get_three_angles(self):
-        us = [unit(f"u{i}", scores={"hood_rank": float(i + 1)}) for i in range(8)]
-        self.check_neighbours(R.build(us))
-
-    def test_units_with_nothing_published_still_get_three_angles(self):
+    def test_apartments_with_nothing_published_still_read_differently(self):
         bare = dict(all_in=None, sqft=None, floor=None, floor_basis="unknown", available=None, beds=None,
                     parking={"type": None, "fee": None, "fee_note": None}, cost_check={"cap_margin": None})
-        us = [unit(f"u{i}", building="B", scores={"hood_rank": float(i + 1)}, **bare) for i in range(5)]
-        self.check_neighbours(R.build(us))
+        us = [unit(f"u{i}", building="B", scores={"hood_rank": float(i + 1)}, **bare) for i in range(3)]
+        rows = R.build(us)
+        self.check_neighbors(rows)
+        for r in rows:
+            self.assertEqual(guard(r["host_line"]), [], r["host_line"])
 
-    def test_units_with_the_same_caution_get_different_catches(self):
+    def test_the_same_caution_is_said_to_every_apartment_that_has_it(self):
+        # the catch is the apartment's most important open point; it is never swapped for a lesser one for variety
         special = {"asterisk": True, "needs_call": True}
         us = [unit("a", building="B", rent=special), unit("b", building="B", rent=special, scores={"hood_rank": 2.0}),
               unit("c", building="B", rent=special, scores={"hood_rank": 3.0}, floor=None, floor_basis="unknown")]
         rows = run(us)
-        self.assertEqual(len({rows[k]["host_catch"] for k in "abc"}), 3)
-        self.assertEqual(catch_kind(rows["a"]), "rent:needs_call")
-        self.assertEqual(catch_kind(rows["c"]), "floor:unpublished")   # its second real caution, so the three differ
-        self.assertEqual(meta(rows["c"])["subs"]["cost"], "ambiguous_rent")           # the special is still flagged
+        self.assertEqual({catch_kind(rows[k]) for k in "abc"}, {"rent:needs_call"})
+        self.assertEqual(len({rows[k]["host_catch"] for k in "abc"}), 3)     # in different words while wordings last
 
-    def test_an_open_gate_question_is_never_swapped_out(self):
-        ask = {"asterisk": True, "what": "elevator", "why": "x", "question": "Does it have one?"}
-        us = [unit(f"u{i}", building="B", confirm=ask, scores={"hood_rank": float(i + 1)}) for i in range(3)]
-        rows = R.build(us)
-        self.assertEqual({catch_kind(r) for r in rows}, {"confirm:elevator"})
-        self.assertEqual(len({r["host_catch"] for r in rows}), 3)
-
-    def test_the_best_unit_of_a_building_can_be_the_pick_and_never_cites_a_score(self):
-        us = [unit(f"u{i}", building="B", scores={"hood_rank": float(i + 1)}) for i in range(4)]
-        picks = 0
-        for salt in range(40):                                        # different ids, so different seeded choices
-            rows = R.build([dict(u, id=f"{u['id']}-{salt}") for u in us])
-            picks += cond(rows[0]) == "pick"
-            for r in rows:
-                self.assertNotRegex(r["host_line"].lower(), r"scorecard|first of|ranks? ")
-            for r in rows[1:]:
-                self.assertNotEqual(cond(r), "pick")
-        self.assertGreater(picks, 0)
-
-    def test_every_neighbourhood_and_building_on_the_page(self):
+    def test_every_building_on_the_page(self):
         units = page_units()
         if units is None:
             self.skipTest("site/data.json is not here")
-        self.check_neighbours(R.build(units))
+        self.check_neighbors(R.build(units))
 
-    def test_no_wording_passes_its_share_of_the_page(self):
+    def test_no_wording_is_on_more_than_8_percent_of_the_page(self):
+        self.assertEqual(R.SHARE, 0.08)      # the owner's editor set 8%: clarity first, enough variety side by side
         units = page_units()
         if units is None:
             self.skipTest("site/data.json is not here")
@@ -687,16 +880,15 @@ class Repetition(unittest.TestCase):
         print()
         for name, x in {**d, **R.building_distribution(R.build_buildings(units))}.items():
             print(f"    {name:22} commonest on {x['top_count']:3} ({x['top_share']:.1%}), {x['distinct']} distinct")
-        self.assertLessEqual(d["lead wording"]["top_share"], R.LINE_SHARE, d["lead wording"])
-        self.assertLessEqual(d["second-sentence frame"]["top_share"], R.LINE_SHARE, d["second-sentence frame"])
-        self.assertLessEqual(d["catch wording"]["top_share"], R.CATCH_SHARE, d["catch wording"])
+        self.assertLessEqual(d["lead wording"]["top_share"], R.SHARE, d["lead wording"])
+        self.assertLessEqual(d["catch wording"]["top_share"], R.SHARE, d["catch wording"])
         for c in Subheads.COLS:
-            self.assertLessEqual(d[c]["top_share"], R.LINE_SHARE, d[c])
-        # the same thresholds on the finished sentences, whatever the ids say
-        lead = Counter(re.sub(r"\d[\d,.]*", "#", r["host_line"].split(". ")[0]) for r in rows).most_common(1)[0]
+            self.assertLessEqual(d[c]["top_share"], R.SHARE, d[c])
+        # the same threshold on the finished sentences, whatever the ids say
+        lead = Counter(re.sub(r"\d[\d,.]*", "#", sentences(r["host_line"])[0]) for r in rows).most_common(1)[0]
         catch = Counter(re.sub(r"\d[\d,.]*", "#", r["host_catch"]) for r in rows).most_common(1)[0]
-        self.assertLessEqual(lead[1] / len(rows), R.LINE_SHARE, lead)
-        self.assertLessEqual(catch[1] / len(rows), R.CATCH_SHARE, catch)
+        self.assertLessEqual(lead[1] / len(rows), R.SHARE, lead)
+        self.assertLessEqual(catch[1] / len(rows), R.SHARE, catch)
 
 
 if __name__ == "__main__":
