@@ -1994,7 +1994,9 @@ var HL={
   described:function(H){var a=arr(H.described).map(function(d){return d&&(typeof d==="string"?d:(d.quote||d.text||d.excerpt))}).filter(Boolean),i,s;
     for(i=0;i<a.length;i++){s=firstSentence(scrub(a[i])).replace(/\s+/g," ");if(s.length<=HL_MAX-2&&s.length===scrub(a[i]).replace(/\s+/g," ").trim().length)return "“"+s+"”"}
     for(i=0;i<a.length;i++){s=firstSentence(scrub(a[i])).replace(/\s+/g," ");if(s.length<=HL_MAX-2&&s.length>=24&&!/(?:\b[A-Z]\.|\b(?:St|Mt|Dr|Mr|Mrs|Ms|Ave|Rd|Blvd|vs|etc|No|Inc|Co)\.)$/.test(s))return "“"+s+"”"}
-    return a.length?pl(a.length,"outside description"):""},
+    var src=[];arr(H.described).forEach(function(d){var n=d&&typeof d==="object"?String(d.source||(okUrl(d.url)?hostOf(d.url):"")):"";if(n&&src.indexOf(n)<0)src.push(n)});
+    s=a.length?pl(a.length,"description")+(src.length&&src.length<=2?", from "+src.join(" and "):src.length?", from "+src.length+" sources":""):"";
+    return s.length<=HL_MAX?s:pl(a.length,"description")},
   here:function(H){var t=H.traits||{},o=[];if(t.restaurants_800m!=null)o.push(pl(r0(t.restaurants_800m),"restaurant")+" on foot");if(t.park_walk_min!=null)o.push("green space "+Math.max(1,r0(t.park_walk_min))+" min");
     if(!o.length&&t.supermarket_m_c!=null)o.push("supermarket "+distWords(t.supermarket_m_c));return o.length?o.join(", "):"not known yet"},
   yearCost:function(Y){var f=yearNums(Y);return f.cost==null?"not known yet":"about "+m0(f.cost)+" a month all-in"},
