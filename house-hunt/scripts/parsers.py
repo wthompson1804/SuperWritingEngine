@@ -941,3 +941,86 @@ TOLL_NOTE = ("Tolls are round trip at New York E-ZPass rates (a tag issued by th
              "(for example $12.03 instead of $7.46 at the Whitestone, Throgs Neck, RFK and Verrazzano bridges); that figure is given beside "
              "each toll as the mail rate. Where a route enters the Manhattan congestion zone, no mail rate for the zone was found on a page we could "
              "read, so the mail figure there is given as 'at least' the sum of the other crossings. Resident discounts are not applied.")
+
+
+# ---- step 4a: "weight restrictions apply" with no number
+_NO_WEIGHT_LIMIT = re.compile(r"\bno (?:\w+ ){0,2}(?:weight|size) (?:limit|restriction)s?\b[^.;|]*", re.I)
+_WEIGHT_LIMIT_EXISTS = re.compile(r"\b(?:weight|size)\b[^.;|]{0,25}\b(?:restrictions?|limits?)\b|\blimit exists\b|maximum weight limit", re.I)
+DOG_WEIGHT_QUESTION = "Confirm the dog weight limit in pounds"
+
+
+def dog_weight_unstated(text) -> bool:
+    """True when a policy says a dog weight or size limit exists (or 'restrictions apply' naming weight or size) and
+    gives no pound figure. 'No weight limit', breed-only restrictions and a stated number are all False. Such a unit
+    passes like 'small dogs' (owner, 2026-11-15) but must carry the tour question (repair report, decision 5)."""
+    t = str(text or "")
+    if not t.strip() or parse_dog_weight(t)[0] == "limit":
+        return False
+    return bool(_WEIGHT_LIMIT_EXISTS.search(_NO_WEIGHT_LIMIT.sub(" ", t)))
+
+
+# ---- step 4b: staleness of a listing page, from modification dates where the data has them
+STALE_OPEN_DAYS, STALE_REMOVE_DAYS, AVAIL_OLD_DAYS = 60, 183, 183
+_PAGE_MODIFIED = re.compile(r"(?:last[- ]?modified|lastDateModified|lastmod|date ?modified|\bmodified|updated_at|last updated|"
+                            r"record (?:last )?updated|page updated|\bupdated)\D{0,12}(20\d\d-\d\d-\d\d)", re.I)
+
+
+def page_modified_date(text) -> str:
+    """The latest 'last modified / updated' date (YYYY-MM-DD) a checker's note or a fact gives for a listing page, or ''."""
+    ds = _PAGE_MODIFIED.findall(str(text or ""))
+    return max(ds) if ds else ""
+
+
+def _days_between(earlier, later):
+    from datetime import date
+    try:
+        a, b = date.fromisoformat(str(earlier)[:10]), date.fromisoformat(str(later)[:10])
+    except ValueError:
+        return None
+    return (b - a).days
+
+
+def staleness(modified, read_on, available_date="", second_source=False):
+    """(level, days, reason). level: 'remove' when the page was last changed more than six months (183 days) before it
+    was read; 'open' when it was last changed more than 60 days before (unless a second site also lists the unit), or
+    when the availability date is more than six months old; '' otherwise. Unknown dates give ''."""
+    d = _days_between(modified, read_on) if modified else None
+    if d is not None and d > STALE_REMOVE_DAYS:
+        return "remove", d, f"the listing page was last changed on {str(modified)[:10]}, {d} days before it was read ({str(read_on)[:10]}): more than six months unchanged"
+    if d is not None and d > STALE_OPEN_DAYS and not second_source:
+        return "open", d, f"the listing page was last changed on {str(modified)[:10]}, {d} days before it was read ({str(read_on)[:10]}), and no second site lists the unit"
+    a = _days_between(available_date, read_on) if re.fullmatch(r"\d{4}-\d\d-\d\d.*", str(available_date or "")) else None
+    if a is not None and a > AVAIL_OLD_DAYS:
+        return "open", a, f"the availability date {str(available_date)[:10]} was {a} days old when the page was read ({str(read_on)[:10]})"
+    return "", d, ""
+
+
+# ---- step 4c: an elevator known only from a listing site's amenity list
+_ELEV_CONTRA = re.compile(r"own (?:site|pages?|feature list|features? (?:list|page))[^.;|]{0,60}(?:never|not|omit|no elevator|none)|"
+                          r"(?:never|not|doesn't|does not) mention[^.;|]{0,30}(?:own|manager|owner)|omits? it|select buildings|"
+                          r"walk-?up|my reading: (?:unlikely|probably (?:a walk|no|not))|which buildings have|not established|only in (?:some|select|certain)|"
+                          r"floors? 1 to 3|garden", re.I)
+_ELEV_NEG = re.compile(r"\bno elevator|not (?:listed|stated|mentioned)|none listed|no ['\"]?elevator|unknown|does not mention|lists no|has no elevator|"
+                       r"no page (?:read )?(?:states|says|mentions)|implied|inferred", re.I)
+_ELEV_LIST_POS = re.compile(r"amenit|tags?\b|feature|\belevator\b", re.I)
+
+
+def elevator_row_kind(value, quote, source_is_aggregator, status):
+    """How one elevator row of the evidence pass counts (status confirmed or unconfirmed; 'contradicts' is handled apart):
+      'own'     confirmed on the building's own or its manager's page                      -> basis confirmed
+      'stated'  an elevator in a listing site's amenity list, tag or text, whatever the     -> basis stated (not confirmed)
+                batch called the row (batches 1, 2, 8, 9 wrote 'confirmed', 10 and 15 'unconfirmed')
+      'contra'  the row itself says the building's own site omits it, or the checker reads a walk-up -> stays open
+      'none'    the row found no elevator stated anywhere                                   -> stays open
+    """
+    txt = f"{value} | {quote}"
+    if _ELEV_CONTRA.search(txt):
+        return "contra"
+    v = str(value).strip().lower()
+    positive = v.startswith(("yes", "true")) or (status == "confirmed" and not _ELEV_NEG.search(v))
+    if status == "unconfirmed":
+        positive = v.startswith("yes") or bool(re.search(r"tags? ['\"]?elevator|elevator['\"]? (?:tag|amenity|in the amenit)|amenit[^.;|]{0,30}(?:lists?|has|shows|includes) (?:an )?['\"]?elevator", txt, re.I)
+                                               and not _ELEV_NEG.search(v))
+    if not positive:
+        return "none"
+    return "stated" if source_is_aggregator else ("own" if status == "confirmed" else "none")

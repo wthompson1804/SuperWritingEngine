@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/tesw-yqqr.json?%24select=registrationid%2Chousenumber%2Cstreetname%2Clastregistrationdate%2Cregistrationenddate&%24where=boroid%3D%272%27+AND+block%3D%273250%27+AND+lot%3D%27154%27",
+ "retrieved_at": "2026-11-16T00:41:12+00:00",
+ "status": 200,
+ "path": "raw/evidence_b19/2b48a77266b099f7.json",
+ "source": "evidence_b19"
+}
