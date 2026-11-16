@@ -225,3 +225,7 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
 - **No "not re-checked" flag (Will, 2026-11-16):** a listing that was simply never re-read is not an open item, carries
   no asterisk for it, and does not count against an apartment in any rule. A re-read that found a problem still counts.
   The fourth independent check was cancelled at the owner's request.
+
+- **Overnight accuracy pass (Will, 2026-11-16):** the owner asked that the published page be accurate, re-authorised the
+  independent check that had been cancelled, said data that needs updating should be updated, and that work may run as
+  long as needed. The front tutorial is restored. The "not re-checked" flag stays removed. Trulia stays untouched.
