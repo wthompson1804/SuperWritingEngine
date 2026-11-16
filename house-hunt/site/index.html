@@ -1663,7 +1663,7 @@ function mapData(){
   return {meta:META,years:YEARS.map(function(Y){return {id:Y.id,label:Y.label}}),
     neighborhoods:HOODS.filter(function(H){var Y=Y_BY[H.year];return Y&&H.lat!=null&&H.lon!=null&&(Y.hoods.indexOf(H)>-1||Y.avoidOnly.indexOf(H)>-1)}) /* the ones the lists show */.map(function(H){var Y=Y_BY[H.year];
       return {id:H.id,name:H.name,state:H.state,year:H.year,lat:H.lat,lon:H.lon,counts:{shown:H.units.filter(fits).length},places_all:H.units.length,
-        drive_min:H.drive_min,toll_round_trip:H.toll_round_trip,toll_note:tollMail(H)!=null?"with a New York E-ZPass":"",badge:SAFEST[H.id]?"Among the safest on the list":"",safety:H.safety,rank_in_experience:Y.hoods.indexOf(H)>-1?H.rank_in_experience:null,rank_of:Y.hoods.length}})}}
+        drive_min:H.drive_min,toll_round_trip:H.toll_round_trip,toll_note:tollMail(H)!=null?"NY E-ZPass":"",badge:SAFEST[H.id]?"Among the safest on the list":"",safety:H.safety,rank_in_experience:Y.hoods.indexOf(H)>-1?H.rank_in_experience:null,rank_of:Y.hoods.length}})}}
 function unmountMap(){if(HHMAP){try{HHMAP.destroy()}catch(e){}HHMAP=null}}
 function mapFail(el){el.innerHTML='<div class="empty"><p><b>The map could not be drawn here.</b></p><p>Every neighborhood is in the lists.</p></div>'}
 function mountMap(){

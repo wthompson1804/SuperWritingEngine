@@ -155,33 +155,102 @@ def site_pages():
     return out, sites
 
 
-def candidates_for(b, idx, spages, sites):
-    pages, seen = [], set()
+def al_listing(text: str):
+    """The `listing` object of an Apartment List page (same search as building_contacts.parse_apartmentlist)."""
+    fl, best = bc.al_flight(text), None
+    for m in re.finditer(r'"listing":\{"rental_id"', fl):
+        try:
+            o, _ = bc.DEC.raw_decode(fl, m.start() + 10)
+        except json.JSONDecodeError:
+            continue
+        if "available_units" in o and (best is None or len(o) > len(best)):
+            best = o
+    return best
 
-    def add(path, url, when=""):
+
+def parse(path: str, url: str):
+    """building_contacts.parse_page, plus one rule it does not have: an Apartment List page that is a single unit
+    from a long-tail feed (`contract` = free: Propertyware, ListHub, Avail, Tenant Turner, Listanza; no unit count, no
+    management company, no office hours) carries the number of whoever posted the unit, a private landlord or an
+    individual agent, never a number known to be a brokerage's office line. That number is NOT recorded."""
+    if "apartmentlist.com" in bc.host_of(url):
+        try:
+            o = al_listing((ROOT / path).read_text(errors="replace"))
+        except OSError:
+            o = None
+        if o and not (o.get("total_units_count") or o.get("pmc_display_name") or o.get("office_hours_this_week")
+                      or (o.get("contract") or "free") != "free"):
+            if (o.get("brokerage_name") or "").strip():
+                return [bc.cand(92, url, kind="broker",
+                                note="single unit from an agent feed on Apartment List; the number shown is the "
+                                     "poster's, not a published office line, and is not recorded")]
+            return [bc.cand(95, url, kind="individual owner",
+                            note="single unit posted on Apartment List with no brokerage or manager named; number not recorded")]
+    return bc.parse_page(path, url)
+
+
+def build_slug_index(idx):
+    """last path segment (letters and digits only) -> [(norm_url, path, url, retrieved_at)] for cached HTML pages."""
+    out = defaultdict(list)
+    for k, (path, url, when) in idx.items():
+        if path.endswith(".json") or "/" not in k:
+            continue
+        seg = re.sub(r"--\d+$", "", k.rsplit("/", 1)[1])
+        seg = re.sub(r"[^a-z0-9]", "", seg)
+        if len(seg) >= 8:
+            out[seg].append((k, path, url, when))
+    return out
+
+
+def candidates_for(b, idx, spages, sites, slugs):
+    pages, seen = [], set()
+    r0 = b["rows"][0]
+
+    def add(path, url, when="", own_row=False):
         if path and path not in seen and (ROOT / path).exists():
             seen.add(path)
-            pages.append((path, url, when or bc.meta_of(path).get("retrieved_at", "")))
+            pages.append((path, url, when or bc.meta_of(path).get("retrieved_at", ""), own_row))
 
-    urls = []
+    urls, named_own = [], []
+    for x in b["rows"]:
+        add(x["raw_path"], x["url"], own_row=True)
     for x in b["rows"] + b.get("extra", []):
         add(x["raw_path"], x["url"])
         for col in ("url", "building_url", "also_seen_at"):
             urls += bc.urls_in(x.get(col, ""))
+    # cached pages named after the building: its Apartment List page in the same state, or a page on a manager's site
+    name = re.sub(r"[^a-z0-9]", "", r0["building_name"].lower())
+    if len(name) >= 8 and not r0["building_name"][:1].isdigit():
+        for k, path, url, when in slugs.get(name, []):
+            h = bc.host_of(url)
+            if "apartmentlist.com" in h and f"/{r0['state'].lower()}/" in k:
+                add(path, url, when)
+                urls.append(url)
+            elif bc.is_own(url) and "?" not in url:
+                named_own.append((path, url, when))
     for u in dict.fromkeys(urls):               # newest cached copy of the same URL (the resolve pass re-read them)
         hit = idx.get(bc.norm_url(u))
         if hit:
             add(hit[0], u, hit[2])
     cands = []
-    for path, url, when in pages:
-        for c in bc.parse_page(path, url):
+    for path, url, when, own_row in pages:
+        for c in parse(path, url):
+            if c["kind"] != "leasing office" and not own_row:
+                continue                         # a broker or owner of ANOTHER unit at the address is not this unit's contact
             c["when"] = when
             cands.append(c)
     own = [bc.clean_url(c["site"]) for c in cands if c.get("site")]
     if sites.get(b["bkey"]):
         own.insert(0, sites[b["bkey"]])
-    own += [bc.clean_url(u) for u in urls if bc.is_own(u)]
+    own += [u for _, u, _ in named_own]
+    own += [bc.clean_url(u) for u in urls if bc.is_own(u) and "?" not in u]
     own = [u for u in dict.fromkeys(own) if u and bc.is_own(u)]
+    for path, url, when in named_own:
+        if path not in seen:
+            seen.add(path)
+            for c in bc.parse_own_site((ROOT / path).read_text(errors="replace"), url, rank=9):
+                c["when"] = when
+                cands.append(c)
     for path, url, when in spages.get(b["bkey"], []):
         if path in seen:
             continue
@@ -363,11 +432,12 @@ def main(argv=None) -> int:
     same_building_rows(buildings)
     idx, prior_refused = bc.build_index()
     spages, sites = site_pages()
+    slugs = build_slug_index(idx)
     led = Ledger(prior_refused)
     state = bc.load_json(STATE_F, {"urls": {}, "building": {}})
     rows, fetched = [], 0
     for b in buildings:
-        cands, own, urls = candidates_for(b, idx, spages, sites)
+        cands, own, urls = candidates_for(b, idx, spages, sites, slugs)
         bid = f"{b['q']['year']}|{b['q']['hood']}|{b['q']['building']}|{b['bkey']}"
         if not any(c["phone"] for c in cands) and not any(c["kind"] in ("individual owner", "broker") for c in cands):
             u = state["building"].get(bid) or (fetch_target(urls, idx, state) if a.fetch else "")
@@ -377,7 +447,7 @@ def main(argv=None) -> int:
                 fetched += u not in state["urls"]
                 path, when = fetch_one(u, led, state)
                 if path:
-                    for c in bc.parse_page(path, u):
+                    for c in parse(path, u):
                         c["when"] = when
                         cands.append(c)
                     own += [bc.clean_url(c["site"]) for c in cands if c.get("site") and bc.clean_url(c["site"]) not in own]

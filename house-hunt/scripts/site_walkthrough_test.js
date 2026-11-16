@@ -312,7 +312,7 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   { const n = await page.locator('#sec-rows details.rowd').count(); assert(n >= 5 && n <= 8, 'five to eight rows on a place: ' + n);
     assert.strictEqual(await page.locator('.unit.page .kstrip > div').count(), 4); assert((await page.textContent('#r-confirm .st')).trim() === 'Ask', 'what she must not miss is on the row itself');
     assert(await page.isVisible('#host-line') && await page.isVisible('.unit.page [data-act=hold]') && await page.isVisible('.unit.page .sign'), 'the price, the host line and Hold are in view'); }
-  if (await page.locator('.plinks [data-act=contact]').count()) { await page.click('.plinks [data-act=contact]'); await page.waitForSelector('#sheet.open'); assert((await page.textContent('#sheetBody')).includes('Leasing office')); await page.waitForTimeout(300); await shot('ux-04c-leasing-office-sheet'); await page.keyboard.press('Escape'); await page.waitForSelector('#sheet:not(.open)'); }
+  if (await page.locator('.plinks [data-act=contact]').count()) { await page.click('.plinks [data-act=contact]'); await page.waitForSelector('#sheet.open'); assert((await page.textContent('#sheetBody')).includes('Leasing office')); await page.waitForTimeout(300); await shot('ux-04c-leasing-office-sheet'); await page.keyboard.press('Escape'); await page.waitForSelector('#sheet:not(.open)'); await page.waitForTimeout(400); }
   // the money box: closed, then open; the basis of each line stays behind "See how we got this"
   await openRow('r-cost');
   assert.strictEqual(await page.locator('#r-cost .receipt .ln:not(.tot)').count(), uRich.all_in_lines.length, 'every cost line is in the box');
