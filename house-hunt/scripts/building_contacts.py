@@ -317,11 +317,12 @@ def parse_trulia(text: str, url: str):
         hours = ""
         items = ((pv.get("officeHours") or {}).get("scheduleItems")) or []
         if items:
-            hours = "; ".join(f"{it.get('formattedDaysOfWeek')} {it.get('startTime')}-{it.get('endTime')}"
-                              for it in items if it.get("formattedDaysOfWeek") and it.get("startTime"))
+            hours = compress_hours([(re.sub(r"\s*-\s*", "-", it["formattedDaysOfWeek"]), f"{it.get('startTime')}-{it.get('endTime')}")
+                                    for it in items if it.get("formattedDaysOfWeek") and it.get("startTime")])
         mgr = (pm.get("name") or "").strip()
         return [cand(40 if phone else 91, url, phone=phone, hours=hours, manager=mgr, kind="leasing office",
-                     note=f"{TRACK} (Trulia / Zillow Rentals forwarding line)" if phone else "")]
+                     note=f"{TRACK} (Trulia / Zillow Rentals forwarding line)" if phone
+                     else "no phone number on the cached Trulia building page")]
     prov = (h.get("activeListing") or {}).get("provider") or (h.get("activeForRentListing") or {}).get("provider") or {}
     br = prov.get("broker") or {}
     name = (br.get("name") or "").strip()
@@ -446,8 +447,12 @@ def load_buildings():
                 e["addr_keys"].add(k.strip())
         e["name"] = e["name"] or (x.get("building_name") or "").strip()
         if not e["address"] and x.get("address"):
-            tail = " ".join(v for v in ((x.get("state") or "").strip(), (x.get("zip5") or "").strip()) if v)
-            e["address"] = ", ".join(v for v in (x["address"].strip(), (x.get("city") or "").strip(), tail) if v)
+            street = x["address"].strip()
+            if re.search(r"\b\d{5}\b", street):                 # the field already holds a full address
+                e["address"] = re.sub(r",\s*(US|USA)\s*$", "", street)
+            else:
+                tail = " ".join(v for v in ((x.get("state") or "").strip(), (x.get("zip5") or "").strip()) if v)
+                e["address"] = ", ".join(v for v in (street, (x.get("city") or "").strip(), tail) if v)
         e["manager"] = e["manager"] or (x.get("manager") or "").strip()
         if x.get("raw_path") and x.get("url"):
             e["pages"].append((x["raw_path"], x["url"]))
@@ -456,7 +461,8 @@ def load_buildings():
         for col in ("url", "building_url", "also_seen_at"):
             e["urls"] += urls_in(x.get(col, ""))
         for col, v in x.items():
-            if col.endswith("_source") and v and "http" in v:
+            # year_built_source often cites a news article, so it is not a lead to the building's own site
+            if col.endswith("_source") and col != "year_built_source" and v and "http" in v:
                 e["own"] += [u for u in urls_in(v) if is_own(u)]
         e["own"] += [u for u in urls_in(x.get("building_url", "")) + urls_in(x.get("url", "")) if is_own(u)]
     for x in read_csv(DATA / "needs_confirmation.csv"):
@@ -733,12 +739,12 @@ def build_row(e, cands, own, fact_mgr, fetch_note=""):
     row["manager_name"] = mgr
     # alternates worth knowing about
     if best and best["phone"]:
-        alts = []
+        alts = {}
         for c in with_phone[1:]:
             if c["phone"] != best["phone"] and c["phone"] not in alts and c["kind"] == "leasing office" and len(alts) < 2:
-                alts.append(c["phone"] + (" (tracking)" if TRACK in c["note"] else ""))
+                alts[c["phone"]] = c["phone"] + (" (tracking)" if TRACK in c["note"] else "")
         if alts:
-            notes.append("also seen: " + ", ".join(alts))
+            notes.append("also seen: " + ", ".join(alts.values()))
     if not row["leasing_phone"]:
         if not best:
             row["retrieved_at"], row["basis"] = "", ""

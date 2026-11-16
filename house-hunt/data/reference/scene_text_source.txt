@@ -310,7 +310,7 @@ watch: Your parents are about {drive} minutes away each way, and the vet and dog
 === hood: ny:new-paltz
 scene: New Paltz is a small college town far up the Hudson Valley. About {rest1600} restaurants are within {mile}, though only {rest} within a {w10}. A park is about {parkwalk} minutes on foot. The supermarket is {super} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
 good: Residents on review sites describe hiking and trails all around, which suits long weekend walks with the dog.
-watch: Your parents are about {drive} minutes away, no dog park was found within {dogpark:int} miles, and crime figures for the local police were not found{!viol missing}.
+watch: Your parents are about {drive} minutes away, no dog park was found within {dogpark:mi0} miles, and crime figures for the local police were not found{!viol missing}.
 voices: dogs_green
 
 # ------------------------------------------------------------------ The Room-to-Breathe Year
@@ -437,7 +437,7 @@ voices: safety, social_life
 === hood: ct:stratford
 scene: Stratford is a shoreline town of houses{!detached>=0.5}. About {rest} restaurants are within a {w10} and {rest1600} within {mile}. The vet is {vet} miles away, the supermarket {super} miles and the train station {station} miles. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
 good: Violent crime is {viol} per 1,000 against Jamaica's {jv}, and the vet and groceries are close.
-watch: No dog park was found within {dogpark:int} miles, and there are no bars or cafés within a {w10}{!bars==0}{!cafes==0}.
+watch: No dog park was found within {dogpark:mi0} miles, and there are no bars or cafés within a {w10}{!bars==0}{!cafes==0}.
 
 === hood: ct:trumbull
 scene: Trumbull is a town of houses and families: {detached} percent of homes are detached. Nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}{!cafes==0}. The supermarket is {super} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
@@ -453,7 +453,7 @@ watch: Your parents are about {drive} minutes away by car and about {transit:r10
 === hood: ct:brookfield
 scene: Brookfield is a town of houses: {detached} percent of homes are detached. A market is {super} miles away and about {rest} restaurants are within a {w10}. Almost nobody here is new{!newcomers<=0.05}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
 good: Crime is very low, at {viol} violent and {prop} property per 1,000, and groceries and dinner are close.
-watch: No dog park was found within {dogpark:int} miles, the nearest park is about {parkwalk} minutes on foot, and your parents are about {drive} minutes away.
+watch: No dog park was found within {dogpark:mi0} miles, the nearest park is about {parkwalk} minutes on foot, and your parents are about {drive} minutes away.
 
 === hood: ny:wallkill
 scene: Wallkill is a spread-out town far up the valley. A very large green space{!parkha>=30} is about {parkwalk} minutes on foot. About {rest1600} restaurants are within {mile}, though only {rest} within a {w10}. The supermarket is {super} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
@@ -475,7 +475,7 @@ voices: social_life
 === hood: ct:seymour
 scene: Seymour is a small valley town of houses: {detached} percent of homes are detached. A large park{!parkha>=20} is about {parkwalk} minutes on foot and the river is {water} miles away. About {rest} restaurants are within a {w10}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
 good: Crime is very low, at {viol} violent and {prop} property per 1,000, with a big park in walking reach.
-watch: Your parents are about {drive} minutes away, and the vet and dog park are each about {dogpark:int} miles away{!vet>=7000}.
+watch: Your parents are about {drive} minutes away, and the vet and dog park are each about {dogpark:mi0} miles away{!vet>=7000}.
 
 === hood: nj:bordentown
 scene: Bordentown is a small town of houses{!detached>=0.5} near the Delaware. About {rest} restaurants are within a {w10} and {rest1600} within {mile}. The vet is {vet} miles away and the supermarket {super} miles. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
@@ -501,7 +501,7 @@ watch: Property crime is {prop} per 1,000, just under Jamaica's {jp}, vehicle th
 === hood: ny:lagrange
 scene: LaGrange is almost entirely houses: {detached} percent of homes are detached. Nothing to eat or drink is within {mile}{!rest1600==0}{!bars==0}{!cafes==0}. The supermarket is {super} miles away. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
 good: Residents on review sites call it safe and peaceful.
-watch: Pets are not allowed in town parks unless a programme welcomes them, the dog park is {dogpark:int} miles away, and crime figures for the local police were not found{!viol missing}.
+watch: Pets are not allowed in town parks unless a programme welcomes them, the dog park is {dogpark:mi0} miles away, and crime figures for the local police were not found{!viol missing}.
 rules: LaGrange (Town)|parks_and_beaches
 voices: safety
 
@@ -574,7 +574,7 @@ watch: Violent crime is {viol} per 1,000 against Jamaica's {jv}, and residents o
 voices: parking
 
 === hood: ny:pelham-bay-country-club-city-island
-scene: This corner of the Bronx sits beside a huge park{!parkha>=50}, about {parkwalk} minute on foot{!parkwalk<=1}, with a dog run {dogpark} miles away and the water {water} miles. Only {rest} restaurants are within a {w10}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
+scene: This corner of the Bronx sits right beside a huge park{!parkha>=50}{!parkwalk<=1}, with a dog run {dogpark} miles away and the water {water} miles. Only {rest} restaurants are within a {w10}. Your parents are about {drive} minutes away by car; tolls not fully known{!b_tollok==False}.
 good: The dog would have a very large park at the door, and residents on review sites praise the park and beaches.
 watch: Vehicle theft is {mvt} per 1,000, property crime is {prop} against Jamaica's {jp}, and there are no bars within a {w10}{!bars==0}.
 voices: dogs_green

@@ -7,7 +7,7 @@ token's value is missing the build stops, and the sentence has to be rewritten w
 
 Tokens
   {alias}            the value, rounded the alias's usual way      {drive} -> 38
-  {alias:how}        the value, rounded another way                {drive:r5} -> 40   (int 1dp r5 r10 pct mi str time12)
+  {alias:how}        the value, rounded another way                {drive:r5} -> 40   (int 1dp r5 r10 pct mi mi0 str time12)
   {!alias OP value}  nothing is printed; the sentence is recorded as resting on this field, and the checker
                      re-tests it later                             {!bars==0}  {!b_tollok==False}  {!viol missing}
   {w10}  {mile}      the fixed wordings for the 800 m and 1,600 m search radii ("10-minute walk", "1 mile")

@@ -143,6 +143,8 @@ def transform(value, how):
         return f"{int(half_up(x, 10))}"
     if how == "pct":                                  # a share 0..1 -> whole percent
         return f"{int(half_up(x * 100))}"
+    if how == "mi0":                                  # metres -> whole miles (for far-away things)
+        return f"{int(half_up(x / 1609.34))}"
     if how == "mi":                                   # metres -> miles, one decimal, never below 0.1
         return f"{max(0.1, half_up(x / 1609.34, 0.1)):.1f}"
     raise ValueError(f"unknown transform {how}")
