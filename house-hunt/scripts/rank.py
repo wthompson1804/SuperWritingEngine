@@ -366,10 +366,14 @@ def main():
     # D26: a floor-plan row (parsers.listing_kind, from the source's structure and the label's shape), not a named apartment
     # (floor-plan rows were removed above as not_an_apartment; nothing here is a plan any more)
     plan_only = pd.Series(False, index=u.index)
-    avail_open = (plan_only | vhas("not_available")) & ~phone_av
+    # independent check 4, D2: "a second site lists the address and does not show this apartment" (a checker's finding on
+    # a listing that could not be re-read) is the open item "availability" WHEREVER it was recorded, not only where a
+    # reviewer wrote it up (parsers.second_site_omits). With another open gate fact the apartment is not shown.
+    second_omit = pd.Series([parsers.second_site_omits(n_, st_) for n_, st_ in zip(s("live_notes"), s("live_status"))], index=u.index)
+    avail_open = (plan_only | vhas("not_available") | second_omit) & ~phone_av
     # 4b: a page last changed more than 60 days before it was read (no second site), or an availability date over six
     # months old, is the open item "listing" by rule; it is not counted twice when a reviewer already wrote it up as availability
-    stale_open = s("listing_stale").eq("open") & ~vhas("not_available") & ~phone_av
+    stale_open = s("listing_stale").eq("open") & ~vhas("not_available") & ~second_omit & ~phone_av
     # D1 (98-76 Queens Blvd 2M): a checker's note that the price itself must be verified ("far below the area's other listings")
     price_open = s("live_notes").map(parsers.price_doubt) & ~phone_av
     sib_open = sib12 & ~phone_av
@@ -413,7 +417,8 @@ def main():
         ("cost", cost_open, COST_DISCLOSURE, COST_DISCLOSURE_TEXT + ": $" + u.all_in.round().astype(int).astype(str) + " a month on what is published; about $"
          + likely.fillna(0).round().astype(int).astype(str) + " if " + unknown_lines.str.replace(" / ", " and ") + " cost what they typically do (" + s("all_in_likely_note").str[:260] + "). Not published for this building.",
          "What do parking and the required monthly fees cost here?"),
-        ("availability", avail_open, "availability", "This is a floor-plan price, not a named unit: no unit, floor or date could be checked.", "Which unit is available at this price, on which floor, and from when?"),
+        ("availability", avail_open, "availability", np.where(second_omit, "A second listing site covers this address and does not show this apartment: " + s("live_notes").str[:300], "A reviewer found the apartment may not be available."),
+         "Is this apartment still available, and at this price?"),
         ("listing", listing_open, "listing", np.where(place_open, "The listing's map position and its address disagree, so the drive, the surroundings and the police figures here may describe another place: " + s("coord_check_note").str[:300],
                                              np.where(s("listing_warning").ne(""), "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160],
                                                       np.where(price_open, "The evidence pass flagged the price: " + s("live_notes").str[:200],

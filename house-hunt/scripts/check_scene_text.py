@@ -624,6 +624,59 @@ VOCAB = [
     (re.compile(r"\bwe (found|set|would|think|looked)\b|\bour (list|scorecard|search)\b", re.I),
      "'we' / 'our' (no narrator on the page)"),
 ]
+# Wording that was true of an earlier state of the project and must not come back (independent check 4, D15).
+STALE = [
+    (re.compile(r"\bnot (?:been )?(?:checked|read|re-read|re-checked|rechecked|looked at) again\b|\bnot re-?checked\b|"
+                r"\bnever re-?read\b|\bnot yet re-?checked\b", re.I),
+     "'not checked again' (a listing that was never re-read carries no remark; owner's rule of 2026-11-16)"),
+    (re.compile(r"\bcompared to staying in Queens\b|\bthan (?:in )?(?:most of )?Queens\b(?! apartments?\b)|"
+                r"\b(?:like|over|as in|in most of) Queens\b(?! apartments?\b)", re.I),
+     "a comparison with 'Queens' as a place (some of these neighborhoods are in Queens: compare with 'a typical "
+     "Queens apartment')"),
+]
+
+# THE GENERAL CONCEIT GUARD (independent check 4, D15b). The list above only catches constructions that were already
+# cut once; "The lawns keep their own counsel." passed. This rule catches the family: a sentence in which a THING is
+# the grammatical subject of a verb of intention or speech. It is a noun-list x verb-list pattern, nothing cleverer:
+#   subject = a noun of THING_NOUNS (singular or plural), optionally one adverb, immediately followed by
+#   a verb of INTENT_VERBS in the present or the past ("the lawns keep", "the river tucks", "the town never sleeps").
+# Limits, on purpose and documented in docs/SCENE_TEXT_NOTES.md:
+#   - only a noun on the list is seen ("the cul-de-sac keeps its secrets" passes until "cul-de-sac" is added);
+#   - the verb must follow the noun directly (or after one adverb): "the town, people say, never sleeps" and a verb in
+#     a relative clause ("a town that welcomes dogs") pass;
+#   - verbs with a plain everyday use for a thing are NOT on the list (has, is, offers, lists, costs, takes, needs,
+#     allows, bans, restricts, runs, sits, opens, closes, includes), so "the town bans overnight parking" passes;
+#   - a metaphor with no such verb ("a harbor of calm") still needs a human read.
+THING_NOUNS = ("lawn|street|block|avenue|sidewalk|park|town|city|village|suburb|neighborhood|building|tower|garage|lot|"
+               "downtown|drive|road|highway|car|water|river|harbor|bay|ocean|sea|beach|shore|waterfront|pond|lake|"
+               "price|rent|cost|toll|budget|lease|apartment|studio|kitchen|bedroom|lobby|elevator|hallway|morning|"
+               "evening|night|weekend|day|train|station|bus|house|yard|tree|bar|restaurant|café|cafe|shop|store|"
+               "supermarket|view|skyline|bridge|tunnel|pool|gym|desk|sofa|door|window|map|dog run|dog park|commute|"
+               "parking|quiet|silence|trail|boardwalk|pier|field|garden|hill")
+INTENT_VERBS = ("keeps?|kept|tells?|told|knows?|knew|wants?|wanted|asks?|asked|rewards?|rewarded|pays?|paid|greets?|"
+                "greeted|waits?|waited|sleeps?|slept|speaks?|spoke|promises?|promised|forgives?|forgave|whispers?|"
+                "whispered|welcomes?|welcomed|invites?|invited|remembers?|remembered|forgets?|forgot|hugs?|hugged|"
+                "embraces?|embraced|tucks?|tucked|sings?|sang|smiles?|smiled|beckons?|beckoned|watches|watch|watched|"
+                "loves?|loved|hates?|hated|hopes?|hoped|dreams?|dreamed|wakes?|woke|breathes?|breathed|listens?|"
+                "listened|insists?|insisted|demands?|demanded|refuses?|refused|nods?|nodded|winks?|winked|hums?|"
+                "hummed|talks?|talked|shouts?|shouted|decides?|decided|tries|tried|thinks?|thought|feels?|felt|"
+                "minds?|minded|cares?|cared|laughs?|laughed|cries|cried|begs?|begged|owes?|owed|forgives|teaches|"
+                "taught|learns?|learned|plays?|played host|stands? guard|holds? its breath")
+AGENCY = re.compile(rf"\b(?:{THING_NOUNS})s? (?:(?:still|never|always|only|just|really|simply|quietly|gently|also|"
+                    rf"almost|usually|often|rarely|barely|hardly|finally) )?(?:{INTENT_VERBS})\b", re.I)
+# "... so ask the office", "before you tour ask": an imperative or an infinitive after the noun is not the noun acting
+AGENCY_OK = re.compile(r"\b(?:to|and|or|then|so|please|would|will|can|could|should|must|may|might|you|they|we|i) $", re.I)
+
+
+def agency(text):
+    """A thing as the subject of a verb of intention or speech -> the matched words, or None."""
+    for m in AGENCY.finditer(text):
+        if AGENCY_OK.search(text[:m.start()] + " "):
+            continue
+        return m.group(0)
+    return None
+
+
 # Markers of a figure of speech. One per text is tolerated when its meaning is unmistakable; two is decoration.
 FIGURE = re.compile(r"\blike a\b|\bas if\b|\bas though\b|\bfeels like\b|\bkind of\b|\bsort of\b|\bso to speak\b|"
                     r"\bthe heart of\b|\ba world away\b|\bat your door(step)?\b|\bon your doorstep\b|\bstone's throw\b|"
@@ -635,10 +688,13 @@ AVG_SENTENCE_WORDS, MAX_SENTENCE_WORDS = 20, 32          # per text: the average
 def check_plain(col, text):
     """Clarity guards for one text: removed conceits, internal terms, page vocabulary, sentence length, figures."""
     out = []
-    for rx, what in CONCEITS + VOCAB:
+    for rx, what in CONCEITS + VOCAB + STALE:
         m = rx.search(text)
         if m:
             out.append(f"{col}: {what}: '{m.group(0)}'")
+    hit = agency(text)
+    if hit:
+        out.append(f"{col}: a thing as the subject of a verb of intention or speech (say the plain fact): '{hit}'")
     m = INTERNAL.search(text)
     if m:
         out.append(f"{col}: internal term '{m.group(0)}'")

@@ -1552,3 +1552,23 @@ def municipality_name(place, county_subdivision="") -> str:
 def same_municipality(a, b) -> bool:
     k = lambda s: re.sub(r"[^a-z]", "", municipality_name(re.sub(r"\b(?:city of|town of|village of|township of)\b", "", str(s), flags=re.I)).lower())
     return bool(k(a)) and k(a) == k(b)
+
+
+# ---- independent check 4, D2: "a second site lists the address and does not show this apartment" is one open fact
+_SECOND_SITE = r"(?:zumper|apartment ?list|trulia|the (?:second|other) site)"
+SECOND_SITE_OMITS = re.compile(
+    r"not on the " + _SECOND_SITE + r"(?:'s)? (?:address |building )?page|"
+    + _SECOND_SITE + r"(?:'s)?(?: (?:address|building) page| page)?(?: for [^.()]{0,50}?)?(?:\s*\([^)]{0,200}\))? (?:shows?|lists?) (?:only|a different|other units?[^.]{0,80}? but not)|"
+    + _SECOND_SITE + r"[^.]{0,60}? lists? (?:this|the) address but not this (?:apartment|unit)", re.I)
+
+
+def second_site_omits(live_note, live_status="") -> bool:
+    """A checker's finding that another listing site covers this ADDRESS and does not show this apartment
+    ('Unit 16F is not on the Zumper address page', 'Zumper shows only unit #401 for this address', 'Zumper's address
+    page shows a different apartment here'). It is the open item 'availability' wherever a checker recorded it and the
+    apartment itself was not seen live (Bedford Creative and The Tetris carried it by a reviewer's verdict; 328 Pacific
+    705, Metropolis Towers 16F, 509 MLK Dr 39E and 525 Riverdale Ave 5U did not). Not a finding: 'No other allowed site
+    shows this unit' with no site covering the address ('Zumper has no address page (404)')."""
+    if str(live_status or "").strip().lower() in ("live", "changed"):
+        return False
+    return bool(SECOND_SITE_OMITS.search(str(live_note or "")))
