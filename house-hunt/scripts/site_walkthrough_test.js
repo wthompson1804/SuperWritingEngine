@@ -13,7 +13,7 @@ const assert = require('assert');
 const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390), VH = W === 320 ? 640 : W >= 1000 ? 900 : 844;
 const SCREEN = 844, AIM = 2 * SCREEN; // collapsed pages: aim for two phone screens
 // The "About" text is now shown whole, so a page is taller than two screens; what must hold is how soon the way on is reached (the "See the …" button) and these ceilings.
-const LIMITS = { experience: 2.95, neighborhood: 2.9, building: 2.6, 'building, many': 3.5, compare: 2.2, list: 2.2 }, LIMIT = Math.round(3.6 * SCREEN), limitOf = kind => Math.round((LIMITS[kind] || 3.6) * SCREEN);
+const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, many': 3.5, compare: 2.2, list: 2.2 }, LIMIT = Math.round(3.6 * SCREEN), limitOf = kind => Math.round((LIMITS[kind] || 3.6) * SCREEN);
 (async () => {
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: W, height: VH }, deviceScaleFactor: 1 });
@@ -178,6 +178,9 @@ const LIMITS = { experience: 2.95, neighborhood: 2.9, building: 2.6, 'building, 
     const emptied = new Set(data.neighborhoods.filter(h => !h.unit_ids.length && (h.unit_ids_raw.length || (h.avoid_ids || []).length)).map(h => h.id)); data.years.forEach(y => { y.hood_ids = (y.hood_ids || []).filter(id => !emptied.has(id)); });
     console.log('shown after the identifier rule:', data.units.length, 'of', RAW.units, 'apartments;', emptied.size, 'neighborhoods left without one'); }
   { const av = new Set(data.avoid.map(u => u.id)); data.neighborhoods.forEach(h => { h.counts = Object.assign({}, h.counts, { shown: h.unit_ids.length, avoid: (h.avoid_ids || []).filter(id => av.has(id)).length, held: data.held.filter(u => u.hood_id === h.id).length }); }); }
+  // the experiences are listed by how much there is to see, most first (the page sorts them the same way); FEW: below this a tile says so
+  { const n = y => (y.hood_ids || []).reduce((s, id) => { const h = data.neighborhoods.find(x => x.id === id); return s + (h ? h.unit_ids.length : 0); }, 0); data.years.forEach((y, i) => { y.data_ix = i; y.n_shown = n(y); }); data.years.sort((a, b) => (b.n_shown - a.n_shown) || (a.data_ix - b.data_ix)); }
+  const FEW = 5;
   // a building name as the page shows it (cleanName in site/index.html)
   const cleanName = t => { t = String(t == null ? '' : t).split(/\s+[|~]\s+/)[0].trim(); t = t.replace(/\s+[–—-]\s+\d.*$/, ''); if (/,\s*[A-Z]{2}\b(?:\s+\d{5}(?:-\d{4})?)?\s*(?:,|$)|,\s*(?:USA?|United States)\s*$/.test(t)) t = t.split(',')[0]; return t.replace(/\s*#\s*\S+\s*$/, '').trim(); };
   const m10 = v => '$' + (Math.round(v / 10) * 10).toLocaleString('en-US');
@@ -209,15 +212,17 @@ const LIMITS = { experience: 2.95, neighborhood: 2.9, building: 2.6, 'building, 
   const tiles = await page.evaluate(() => [...document.querySelectorAll('a.life')].map(a => ({ h: Math.round(a.getBoundingClientRect().height), label: a.querySelector('h3').textContent.trim(), figs: [...a.querySelectorAll('.figs b')].map(b => b.textContent), labels: [...a.querySelectorAll('.figs span')].map(b => b.textContent), kids: [...a.children].map(c => c.tagName + (c.className ? '.' + c.className : '')), mark: a.querySelectorAll('h3 .ymk').length, w: a.clientWidth, art: (i => i ? { h: Math.round(i.getBoundingClientRect().height), w: Math.round(i.getBoundingClientRect().width), svg: i.querySelectorAll('svg').length } : null)(a.querySelector('.illus')), tag: (a.querySelector('.l2') || {}).textContent, rng: [...a.querySelectorAll('.figs .rng')].map(b => b.textContent), text: a.innerText })));
   tiles.forEach((t, i) => { const y = data.years[i];
     assert.strictEqual(t.label, String(y.display_label || y.label).replace(/ Year$/, ' Experience'));
-    if (y.medians && y.medians.all_in != null) assert.strictEqual(t.figs[0], money0(y.medians.all_in), 'the tile shows the median cost');
+    if (y.medians && y.medians.all_in != null) assert.strictEqual(t.figs[0], m10(y.medians.all_in), 'the tile shows the median cost, to the nearest $10');
     if (y.medians && y.medians.drive_min != null) assert.strictEqual(t.figs[1], Math.round(y.medians.drive_min) + ' min', 'the tile shows the median drive');
-    if (y.all_in_range && money0(y.all_in_range[0]) !== money0(y.all_in_range[1])) assert(t.rng.includes(money0(y.all_in_range[0]) + ' to ' + money0(y.all_in_range[1])), 'the range sits under the median: ' + t.rng);
+    const few = y.n_shown < FEW; if (i) assert(data.years[i - 1].n_shown >= y.n_shown, 'the tiles run from the most apartments to the fewest');
+    if (few) { assert.strictEqual(t.rng.length, 0, 'a tile with a handful of apartments shows no range'); assert(t.text.includes('Only ' + y.n_shown + (y.n_shown === 1 ? ' apartment' : ' apartments') + ' right now'), 'it says how few there are: ' + t.text.replace(/\s+/g, ' ')); }
+    else if (y.all_in_range && m10(y.all_in_range[0]) !== m10(y.all_in_range[1])) assert(t.rng.includes(m10(y.all_in_range[0]) + ' to ' + m10(y.all_in_range[1])), 'the range sits under the median: ' + t.rng);
     // a tile is its marker, the label, the tagline, two numbers with their ranges, and the count of places: nothing else
-    assert.deepStrictEqual(t.kids, [illus ? 'DIV.illus banner' : null, 'H3', y.tagline ? 'P.l2' : null, 'DIV.figs xt'].filter(Boolean), 'a tile has nothing else: ' + t.kids);
+    assert.deepStrictEqual(t.kids, [illus ? 'DIV.illus banner' : null, 'H3', y.tagline ? 'P.l2' : null, 'DIV.figs xt', few ? 'P.tnote' : null].filter(Boolean), 'a tile has nothing else: ' + t.kids);
     if (illus) { assert(t.art.h >= 100 && t.art.h <= 132, 'the drawing is a banner of about 110 to 130 px: ' + t.art.h); assert(t.art.svg === 1 && t.art.w >= t.w - 8, 'edge to edge on the tile'); }
     assert.strictEqual(t.mark, 1, 'the marker is on the tile'); if (y.tagline && !CRIME.test(y.tagline)) assert.strictEqual(t.tag, y.tagline, 'the tagline is shown whole');
     assert.strictEqual(t.figs.length, 3); assert.strictEqual(t.figs[2], String(listed(y).reduce((n, h) => n + (h.unit_ids || []).filter(id => unitIds.has(id)).length, 0)), 'the count of places');
-    assert.deepStrictEqual(t.labels, ['typical month', 'typical to Mom and Dad', t.figs[2] === '1' ? 'apartment' : 'apartments']);
+    assert.deepStrictEqual(t.labels, [y.n_shown === 1 ? 'a month' : 'typical month', (y.hood_ids.length <= 1 ? '' : 'typical ') + 'to Mom and Dad', t.figs[2] === '1' ? 'apartment' : 'apartments']);
     if (W === 390) assert(t.h <= (illus ? 320 : 200), 'an experience tile is a short card: ' + t.h + 'px'); });
   { const end = await page.evaluate(() => Math.round(document.getElementById('see-map').getBoundingClientRect().bottom + window.scrollY));
     console.log('first screen: the six tiles and "See them on a map" end at', end, 'px =', (end / SCREEN).toFixed(2), 'screens');

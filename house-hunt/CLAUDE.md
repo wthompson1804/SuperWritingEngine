@@ -221,3 +221,7 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
   Implemented in `scripts/rank.py`; reason `thin_neighborhood`.
 - **Real apartments only (Will, 2026-11-16):** a floor plan, a "from $X" building offer, a row with no individual unit,
   or a room in a shared suite is not an apartment and is never shown or counted (status `not_an_apartment`).
+
+- **No "not re-checked" flag (Will, 2026-11-16):** a listing that was simply never re-read is not an open item, carries
+  no asterisk for it, and does not count against an apartment in any rule. A re-read that found a problem still counts.
+  The fourth independent check was cancelled at the owner's request.
