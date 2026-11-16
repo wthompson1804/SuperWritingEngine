@@ -1,10 +1,10 @@
 # Call sheet
 
-30 buildings, 40 candidate units. Top 5 buildings per year by rank score.
+30 buildings, 42 candidate units. Top 5 buildings per year by rank score.
 
 Move-in must be on or before Dec 15, 2026. Questions are only the facts still open in the data; "Already known" lists what not to ask. An asterisk on all-in means some cost lines are still unknown.
 
-Contact details are in the data for 30 of 30 buildings; for the rest, use the listing link.
+Contact details are in the data for 25 of 30 buildings; for the rest, use the listing link.
 
 ## The Fresh-Start Year
 
@@ -79,17 +79,17 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 ### 4. Sono Pearl (Norwalk)
 - Address: 101 Washington St, Norwalk CT
 - Candidate: unit 401, listed $2,440, all-in $2,669*, available now
-- Candidate: unit 516, listed $2,490, all-in $2,719*, available now
+- Candidate: unit 313, listed $2,365, all-in $2,594*, available now
 - Contact: phone (914) 877-2165; site https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032
 - Listing: https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032
 - Already known (do not ask): elevator: yes (confirmed); pet rent: $50/mo
 
 1. [ ] Is unit 401 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Is unit 516 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Is unit 313 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
 3. [ ] Which floor is unit 401 on? (we have floor 4 only as a reading of the unit number, not from a page)
-4. [ ] Which floor is unit 516 on? (we have floor 5 only as a reading of the unit number, not from a page)
+4. [ ] Which floor is unit 313 on? (we have floor 3 only as a reading of the unit number, not from a page)
 5. [ ] Which lease term does the $2,440 price for unit 401 apply to, and what is the monthly price on a 12-month lease?
-6. [ ] Which lease term does the $2,490 price for unit 516 apply to, and what is the monthly price on a 12-month lease?
+6. [ ] Which lease term does the $2,365 price for unit 313 apply to, and what is the monthly price on a 12-month lease?
 7. [ ] What is the dog weight limit in pounds? (the listing only says: "yes: small dogs only, number not stated") (we need 25 lb or more)
 8. [ ] Are there breed restrictions, and which breeds?
 9. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
@@ -100,24 +100,46 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 
 ### 5. Cobalt Lofts (Harrison)
 - Address: 1200 S. Fifth Street, Harrison NJ
+- Candidate: unit 2117, listed $2,629, all-in $2,988*, available now
 - Candidate: unit 2113, listed $2,398, all-in $2,747*, available now
 - Contact: phone (877) 589-4939; hours Mon-Tue 9am-6pm; Wed 11am-6pm; Thu 9am-6pm; Fri 8am-5pm; Sat 10am-5pm; Sun 12pm-5pm; site https://www.cobaltlofts.com/
 - Listing: https://www.apartmentlist.com/nj/harrison/cobalt-lofts--2
 - Already known (do not ask): elevator: yes (confirmed); parking fee: $150/mo
 
-1. [ ] Is unit 2113 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Which floor is unit 2113 on? (ground floor is not acceptable)
-3. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
-4. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
-5. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
-6. [ ] Parking: is a spot available now or is there a waitlist?
-7. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-8. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-9. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+1. [ ] Is unit 2117 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Is unit 2113 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+3. [ ] Which floor is unit 2117 on? (ground floor is not acceptable)
+4. [ ] Which floor is unit 2113 on? (ground floor is not acceptable)
+5. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
+6. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
+7. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
+8. [ ] Parking: is a spot available now or is there a waitlist?
+9. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
+10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+11. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
 ## The Little-City Year
 
-### 1. The Asher (Stamford)
+### 1. 75 Tresser (Stamford)
+- Address: 75 Tresser Boulevard, Stamford CT
+- Candidate: unit 403, listed $2,258, all-in $2,695, available now
+- Contact: phone (203) 349-2253; hours Mon-Fri 09:00-18:00; Sat 10:00-17:00; site https://www.75tresser.com/
+- Listing: https://www.apartmentlist.com/ct/stamford/75-tresser
+- Already known (do not ask): elevator: yes (confirmed); pet rent: $50/mo; parking fee: $100/mo
+
+1. [ ] Is unit 403 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Which floor is unit 403 on? (we have floor 4 only as a reading of the unit number, not from a page)
+3. [ ] Is the listed $2,258 for unit 403 the full monthly rent, or a net price after a concession? (the listing shows an offer: "Receive up to 6-Weeks Base Rent FREE PLUS $250 Look and Lease BONUS OFFER. Applicable on select apartments! Co")
+4. [ ] The $2,258 price for unit 403 is for a 16-month lease. What is the monthly price on a 12-month lease?
+5. [ ] On what date is the first full rent payment due for unit 403? (there is a free period)
+6. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
+7. [ ] Are there breed restrictions, and which breeds?
+8. [ ] Parking: is a spot available now or is there a waitlist?
+9. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
+10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+11. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+
+### 2. The Asher (Stamford)
 - Address: 150 Broad St, Stamford CT
 - Candidate: unit 530, listed $2,345, all-in $2,674*, available now
 - Candidate: unit 536, listed $2,332, all-in $2,648*, available 2026-12-01
@@ -139,51 +161,49 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 12. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 13. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 2. Parallel 41 (Stamford)
+### 3. Parallel 41 (Stamford)
 - Address: 1340 Washington Boulevard, Stamford CT
-- Candidate: unit 217, listed $2,590, all-in $2,898*, available now
 - Candidate: unit 323, listed $2,650, all-in $2,958*, available now
+- Candidate: unit 217, listed $2,590, all-in $2,898*, available now
 - Contact: phone (203) 263-1100; site http://paredimcommunities.com/communities/parallel-41/
 - Listing: https://www.apartmentlist.com/ct/stamford/parallel-41--1
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: 65 lb; pet rent: $40/mo
 
-1. [ ] Is unit 217 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Is unit 323 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-3. [ ] Which floor is unit 217 on? (we have floor 2 only as a reading of the unit number, not from a page)
-4. [ ] Which floor is unit 323 on? (we have floor 3 only as a reading of the unit number, not from a page)
+1. [ ] Is unit 323 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Is unit 217 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+3. [ ] Which floor is unit 323 on? (we have floor 3 only as a reading of the unit number, not from a page)
+4. [ ] Which floor is unit 217 on? (we have floor 2 only as a reading of the unit number, not from a page)
 5. [ ] Are there breed restrictions, and which breeds?
 6. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
 7. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
 8. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 9. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 3. Two South Willow (Montclair)
-- Address: 2 South Willow Street, Montclair NJ
-- Candidate: unit 508, listed $2,115, all-in $2,539, available now
-- Candidate: unit 547, listed $2,199, all-in $2,623, available now
-- Contact: phone (973) 771-5350; hours Mon-Tue 9am-6pm; Wed 11am-6pm; Thu 9am-6pm; Fri 8am-5pm; Sat 10am-5pm; site https://www.twosouthwillow.com/
-- Listing: https://www.apartmentlist.com/nj/montclair/two-south-willow
-- Already known (do not ask): elevator: yes (confirmed); pet rent: $75/mo; parking fee: $150/mo
+### 4. 163 Franklin Street (Stamford)
+- Address: 163 Franklin St, Stamford CT
+- Candidate: unit 310, listed $2,600, all-in $2,829*, available now
+- Candidate: unit 403, listed $2,625, all-in $2,854*, available 2026-11-28
+- Contact: phone (475) 267-6192; hours Tue-Sat 10:00am-5:00pm; site https://www.trulia.com/building/163-franklin-street-163-franklin-st-stamford-ct-06901-1001659327
+- Listing: https://www.trulia.com/building/163-franklin-street-163-franklin-st-stamford-ct-06901-1001659327
+- Already known (do not ask): elevator: yes (confirmed); dog weight limit: 75 lb; pet rent: $50/mo
 
-1. [ ] Is unit 508 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Is unit 547 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-3. [ ] Which floor is unit 508 on? (we have floor 5 only as a reading of the unit number, not from a page)
-4. [ ] Which floor is unit 547 on? (we have floor 5 only as a reading of the unit number, not from a page)
-5. [ ] Is the listed $2,115 for unit 508 the full monthly rent, or a net price after a concession? (the listing shows an offer: "Your New Home Comes with a Bonus! Enjoy 1/2 Month FREE on Select Units for a Limited Time! *Restrictions May A")
-6. [ ] Is the listed $2,199 for unit 547 the full monthly rent, or a net price after a concession? (the listing shows an offer: "Your New Home Comes with a Bonus! Enjoy 1/2 Month FREE on Select Units for a Limited Time! *Restrictions May A")
-7. [ ] On what date is the first full rent payment due for unit 508? (there is a free period)
-8. [ ] On what date is the first full rent payment due for unit 547? (there is a free period)
-9. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
-10. [ ] Are there breed restrictions, and which breeds?
-11. [ ] Parking: is a spot available now or is there a waitlist?
-12. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-13. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-14. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+1. [ ] Is unit 310 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Is unit 403 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said 2026-11-28 when seen on 2026-11-15).
+3. [ ] Which floor is unit 310 on? (we have floor 3 only as a reading of the unit number, not from a page)
+4. [ ] Which floor is unit 403 on? (we have floor 4 only as a reading of the unit number, not from a page)
+5. [ ] Which lease term does the $2,600 price for unit 310 apply to, and what is the monthly price on a 12-month lease?
+6. [ ] Which lease term does the $2,625 price for unit 403 apply to, and what is the monthly price on a 12-month lease?
+7. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
+8. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
+9. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
+10. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
+11. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+12. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 4. Life Time Living Stamford (Stamford)
+### 5. Life Time Living Stamford (Stamford)
 - Address: 130 Tresser Blvd, Stamford CT
 - Candidate: unit 500, listed $2,400, all-in $2,616*, available 2026-12-07
-- Contact: phone (475) 258-8069; hours Mon-Fri 9:00am-5:00pm; site https://www.trulia.com/building/life-time-living-stamford-130-tresser-blvd-stamford-ct-06901-2775168599
+- Contact: phone (203) 200-0473; hours Mon-Fri 9:00am-5:00pm; site https://www.lifetimelivingstamford.com/contact/
 - Listing: https://www.trulia.com/building/life-time-living-stamford-130-tresser-blvd-stamford-ct-06901-2775168599
 - Already known (do not ask): elevator: yes (confirmed); pet rent: $50/mo
 
@@ -200,30 +220,27 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 11. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 12. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 5. 163 Franklin Street (Stamford)
-- Address: 163 Franklin St, Stamford CT
-- Candidate: unit 310, listed $2,600, all-in $2,829*, available now
-- Candidate: unit 311, listed $2,600, all-in $2,829*, available now
-- Contact: phone (475) 267-6192; hours Tue-Sat 10:00am-5:00pm; site https://www.trulia.com/building/163-franklin-street-163-franklin-st-stamford-ct-06901-1001659327
-- Listing: https://www.trulia.com/building/163-franklin-street-163-franklin-st-stamford-ct-06901-1001659327
-- Already known (do not ask): elevator: yes (confirmed); dog weight limit: 75 lb; pet rent: $50/mo
-
-1. [ ] Is unit 310 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Is unit 311 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-3. [ ] Which floor is unit 310 on? (we have floor 3 only as a reading of the unit number, not from a page)
-4. [ ] Which floor is unit 311 on? (we have floor 3 only as a reading of the unit number, not from a page)
-5. [ ] Which lease term does the $2,600 price for unit 310 apply to, and what is the monthly price on a 12-month lease?
-6. [ ] Which lease term does the $2,600 price for unit 311 apply to, and what is the monthly price on a 12-month lease?
-7. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
-8. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
-9. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
-10. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-11. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-12. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
-
 ## The Old-Neighborhood Year
 
-### 1. 375 Lefferts Ave (Prospect Lefferts Gardens-Wingate)
+### 1. 1775 E 18th St (Madison)
+- Address: 1775 East 18th Street, Brooklyn NY
+- Candidate: unit 5N, listed $2,250, all-in $2,444*, available now
+- Contact: phone (646) 421-8063; site https://www.apartmentlist.com/ny/brooklyn/1775-e-18th-st
+- Listing: https://www.apartmentlist.com/ny/brooklyn/1775-e-18th-st
+- Already known (do not ask): elevator: yes (confirmed)
+
+1. [ ] Is unit 5N still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Which floor is unit 5N on? (we have floor 5 only as a reading of the unit number, not from a page)
+3. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
+4. [ ] Are there breed restrictions, and which breeds?
+5. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
+6. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
+7. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
+8. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
+9. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+10. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+
+### 2. 375 Lefferts Ave (Prospect Lefferts Gardens-Wingate)
 - Address: 375 Lefferts Ave, Brooklyn NY
 - Candidate: unit 7E, listed $2,500, all-in $2,694*, available now
 - Contact: phone (208) 718-2008; site https://www.trulia.com/home/375-lefferts-ave-7e-brooklyn-ny-11225-453282973
@@ -242,44 +259,7 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 11. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 2. 1775 E 18th St (Madison)
-- Address: 1775 East 18th Street, Brooklyn NY
-- Candidate: unit 5N, listed $2,250, all-in $2,444*, available now
-- Contact: phone (646) 421-8063; site https://www.apartmentlist.com/ny/brooklyn/1775-e-18th-st
-- Listing: https://www.apartmentlist.com/ny/brooklyn/1775-e-18th-st
-- Already known (do not ask): elevator: yes (confirmed)
-
-1. [ ] Is unit 5N still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Which floor is unit 5N on? (we have floor 5 only as a reading of the unit number, not from a page)
-3. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
-4. [ ] Are there breed restrictions, and which breeds?
-5. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
-6. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
-7. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
-8. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-9. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-10. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
-
-### 3. 153-10 88th Ave (Jamaica)
-- Address: 153-10 88th Ave, Jamaica NY
-- Candidate: unit 621, listed $2,550, all-in $2,729*, available now
-- Contact: phone (347) 503-4117; site https://www.the88nyc.com/amenities/
-- Listing: https://www.trulia.com/home/153-10-88th-ave-621-jamaica-ny-11432-466380287
-- Already known (do not ask): elevator: yes (confirmed)
-
-1. [ ] Is unit 621 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Which floor is unit 621 on? (we have floor 6 only as a reading of the unit number, not from a page)
-3. [ ] Which lease term does the $2,550 price for unit 621 apply to, and what is the monthly price on a 12-month lease?
-4. [ ] What is the dog weight limit in pounds? (the listing only says: "yes: not stated on listing or the building's site; page says small dogs") (we need 25 lb or more)
-5. [ ] Are there breed restrictions, and which breeds?
-6. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
-7. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
-8. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
-9. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-11. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
-
-### 4. 8700 25th Ave (Gravesend (West))
+### 3. 8700 25th Ave (Gravesend (West))
 - Address: 8700 25th Ave, Brooklyn NY
 - Candidate: unit 6G, listed $2,300, all-in $2,494*, available now
 - Contact: site https://www.trulia.com/home/8700-25th-ave-6g-brooklyn-ny-11214-2059283926
@@ -299,27 +279,63 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 11. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 12. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 5. 92-27 160th St (Jamaica)
-- Address: 92-27 160th St, Jamaica NY
-- Candidate: unit 2215, listed $2,395, all-in $2,574*, available now
-- Contact: phone (718) 523-4000; site https://onearcherave.com/
-- Listing: https://www.trulia.com/home/92-27-160th-st-2215-jamaica-ny-11433-2056424620
+### 4. 1941 Coney Island Ave (Gravesend (East)-Homecrest)
+- Address: 1941 Coney Island Ave, Brooklyn NY
+- Candidate: unit 402, listed $2,500, all-in $2,655*, available 2026-12-15
+- Contact: phone (718) 717-7727; site https://www.trulia.com/home/1941-coney-island-ave-402-brooklyn-ny-11223-2069400029
+- Listing: https://www.trulia.com/home/1941-coney-island-ave-402-brooklyn-ny-11223-2069400029
+- Already known (do not ask): elevator: yes (confirmed); utilities included: ... illustrative purposes showcasing the model units. *Cooki
+
+1. [ ] Is unit 402 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said 2026-12-15 when seen on 2026-11-15).
+2. [ ] Which floor is unit 402 on? (we have floor 4 only as a reading of the unit number, not from a page)
+3. [ ] Is the listed $2,500 for unit 402 the full monthly rent, or a net price after a concession? (the listing shows an offer: "[live check] Trulia: 22 days on Trulia; listed 2026-10-24. Page says: "Price shown is base rent. Additional co")
+4. [ ] Which lease term does the $2,500 price for unit 402 apply to, and what is the monthly price on a 12-month lease?
+5. [ ] What is the dog weight limit in pounds? (the listing only says: "yes: yes (small dogs)") (we need 25 lb or more)
+6. [ ] Are there breed restrictions, and which breeds?
+7. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
+8. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
+9. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
+10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+11. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+
+### 5. 153-10 88th Ave (Jamaica)
+- Address: 153-10 88th Ave, Jamaica NY
+- Candidate: unit 621, listed $2,550, all-in $2,729*, available now
+- Contact: phone (347) 503-4117; site https://www.the88nyc.com/amenities/
+- Listing: https://www.trulia.com/home/153-10-88th-ave-621-jamaica-ny-11432-466380287
 - Already known (do not ask): elevator: yes (confirmed)
 
-1. [ ] Is unit 2215 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Which lease term does the $2,395 price for unit 2215 apply to, and what is the monthly price on a 12-month lease?
-3. [ ] What is the dog weight limit in pounds? (the listing only says: "yes: yes (small dogs)") (we need 25 lb or more)
-4. [ ] Are there breed restrictions, and which breeds?
-5. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
-6. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
-7. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
-8. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-9. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-10. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+1. [ ] Is unit 621 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Which floor is unit 621 on? (we have floor 6 only as a reading of the unit number, not from a page)
+3. [ ] Which lease term does the $2,550 price for unit 621 apply to, and what is the monthly price on a 12-month lease?
+4. [ ] What is the dog weight limit in pounds? (the listing only says: "yes: not stated on listing or the building's site; page says small dogs") (we need 25 lb or more)
+5. [ ] Are there breed restrictions, and which breeds?
+6. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
+7. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
+8. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
+9. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
+10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+11. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
 ## The Quiet-Street Year
 
-### 1. Avalon Princeton on Harrison (Princeton)
+### 1. Avalon Teaneck (Teaneck)
+- Address: 1775 Windsor Road, Bergenfield NJ
+- Candidate: unit 001-215, listed $2,516, all-in $2,922, available 2026-11-16
+- Contact: phone (201) 833-4560; hours Tue-Thu 9:30am-6:30pm; Fri-Sat 8:30am-5:30pm; site https://www.avaloncommunities.com/new-jersey/teaneck-apartments/avalon-teaneck
+- Listing: https://www.apartmentlist.com/nj/bergenfield/avalon-teaneck
+- Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; pet rent: $60/mo; parking fee: $135/mo; utilities included: resident pays Electric; Gas; Trash; Water; Sewer
+
+1. [ ] Is unit 001-215 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said 2026-11-16 when seen on 2026-11-15).
+2. [ ] Is the listed $2,516 for unit 001-215 the full monthly rent, or a net price after a concession? (the listing shows an offer: "* Apply by 11-30 for 1 month off! * Terms and conditions apply.")
+3. [ ] On what date is the first full rent payment due for unit 001-215? (there is a free period)
+4. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
+5. [ ] Is there a one-time pet fee or pet deposit, and how much?
+6. [ ] Parking: is a spot available now or is there a waitlist?
+7. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+8. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+
+### 2. Avalon Princeton on Harrison (Princeton)
 - Address: 275 N Harrison St, Princeton NJ
 - Candidate: unit 431, listed $2,571, all-in $2,919, available 2026-11-21
 - Contact: phone (609) 803-3852; hours Mon-Sun 9am-7pm; site https://www.avaloncommunities.com/new-jersey/princeton-apartments/avalon-princeton-on-harrison/
@@ -335,22 +351,6 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 7. [ ] Parking: is a spot available now or is there a waitlist?
 8. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 9. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
-
-### 2. Avalon Teaneck (Teaneck)
-- Address: 1775 Windsor Road, Bergenfield NJ
-- Candidate: unit 001-215, listed $2,516, all-in $2,922, available 2026-11-16
-- Contact: phone (201) 833-4560; hours Tue-Thu 9:30am-6:30pm; Fri-Sat 8:30am-5:30pm; site https://www.avaloncommunities.com/new-jersey/teaneck-apartments/avalon-teaneck
-- Listing: https://www.apartmentlist.com/nj/bergenfield/avalon-teaneck
-- Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; pet rent: $60/mo; parking fee: $135/mo; utilities included: resident pays Electric; Gas; Trash; Water; Sewer
-
-1. [ ] Is unit 001-215 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said 2026-11-16 when seen on 2026-11-15).
-2. [ ] Is the listed $2,516 for unit 001-215 the full monthly rent, or a net price after a concession? (the listing shows an offer: "* Apply by 11-30 for 1 month off! * Terms and conditions apply.")
-3. [ ] On what date is the first full rent payment due for unit 001-215? (there is a free period)
-4. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
-5. [ ] Is there a one-time pet fee or pet deposit, and how much?
-6. [ ] Parking: is a spot available now or is there a waitlist?
-7. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-8. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
 ### 3. 5545 Park (Fairfield)
 - Address: 5545 Park Ave, Fairfield CT
@@ -373,67 +373,72 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 12. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 13. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 4. Woodland Square (Montvale)
-- Address: 12 Van Riper Road, Montvale NJ
-- Candidate: unit 217, listed $2,695, all-in $2,847*, available 2026-11-21
-- Contact: phone (201) 442-2912; hours Tue-Sat 9am-5pm; site https://www.apartmentlist.com/nj/montvale/woodland-square
-- Listing: https://www.apartmentlist.com/nj/montvale/woodland-square
-- Already known (do not ask): elevator: yes (confirmed)
+### 4. Alto Fairfield Metro (Fairfield)
+- Address: 1401 Kings Hwy, Fairfield CT
+- Candidate: unit 402A, listed $2,335, all-in $2,664*, available now
+- Listing: https://www.apartmentlist.com/ct/fairfield/alto-fairfield-metro
+- Already known (do not ask): elevator: yes (confirmed); dog weight limit: 75 lb; pet rent: $70/mo; utilities included: gas, hot water, sewer, trash, water || Gas, Hot Water, Sewer
 
-1. [ ] Is unit 217 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said 2026-11-21 when seen on 2026-11-15).
-2. [ ] Which floor is unit 217 on? (we have floor 2 only as a reading of the unit number, not from a page)
-3. [ ] Is the listed $2,695 for unit 217 the full monthly rent, or a net price after a concession? (the listing shows an offer: "UP TO 1 MONTH FREE")
-4. [ ] On what date is the first full rent payment due for unit 217? (there is a free period)
-5. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
-6. [ ] Are there breed restrictions, and which breeds?
-7. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
-8. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
-9. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
-10. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-11. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-12. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
-
-### 5. Parc At Roxbury (Roxbury)
-- Address: 400 Cardinal Ct, Ledgewood NJ
-- Candidate: unit N/A-0715, listed $2,507, all-in $2,844*, available now
-- Contact: phone (973) 358-7507; hours Mon-Fri 9am-6pm; Sat 10am-5pm; site https://www.trulia.com/building/parc-at-roxbury-400-cardinal-ct-ledgewood-nj-07852-2734023302
-- Listing: https://www.trulia.com/building/parc-at-roxbury-400-cardinal-ct-ledgewood-nj-07852-2734023302
-- Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; pet rent: $50/mo; parking fee: $150/mo
-
-1. [ ] Is unit N/A-0715 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Which floor is unit N/A-0715 on? (ground floor is not acceptable)
-3. [ ] Which lease term does the $2,507 price for unit N/A-0715 apply to, and what is the monthly price on a 12-month lease?
-4. [ ] Are there breed restrictions, and which breeds?
+1. [ ] Is unit 402A still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Which floor is unit 402A on? (ground floor is not acceptable)
+3. [ ] The $2,335 price for unit 402A is for a 14-month lease. What is the monthly price on a 12-month lease?
+4. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
 5. [ ] Is there a one-time pet fee or pet deposit, and how much?
-6. [ ] Parking: is a spot available now or is there a waitlist?
-7. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount? (the listing mentions: "pest control, trash, utility billing fee, electric, gas, water and sewer billed on top of ")
-8. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-9. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-10. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+6. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
+7. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+8. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+
+### 5. 1177 Greens Farms (Westport)
+- Address: 1177 Post Road East, Westport CT
+- Candidate: unit 212, listed $2,699, all-in $2,937*, available 2026-11-23
+- Candidate: unit 231, listed $2,724, all-in $2,962*, available now
+- Listing: https://www.apartmentlist.com/ct/westport/1177-greens-farms
+- Already known (do not ask): elevator: yes (confirmed); dog weight limit: 50 lb; pet rent: $50/mo; parking fee: $50/mo
+
+1. [ ] Is unit 212 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said 2026-11-23 when seen on 2026-11-15).
+2. [ ] Is unit 231 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+3. [ ] Which floor is unit 212 on? (we have floor 2 only as a reading of the unit number, not from a page)
+4. [ ] Which floor is unit 231 on? (we have floor 2 only as a reading of the unit number, not from a page)
+5. [ ] Is the listed $2,699 for unit 212 the full monthly rent, or a net price after a concession? (the listing shows an offer: "New residents can receive 1 Month free when moving in before the end of 2026! *Terms and conditions apply. Val")
+6. [ ] Is the listed $2,724 for unit 231 the full monthly rent, or a net price after a concession? (the listing shows an offer: "New residents can receive 1 Month free when moving in before the end of 2026! *Terms and conditions apply. Val")
+7. [ ] The $2,699 price for unit 212 is for a 11-month lease. What is the monthly price on a 12-month lease?
+8. [ ] The $2,724 price for unit 231 is for a 11-month lease. What is the monthly price on a 12-month lease?
+9. [ ] On what date is the first full rent payment due for unit 212? (there is a free period)
+10. [ ] On what date is the first full rent payment due for unit 231? (there is a free period)
+11. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
+12. [ ] Parking: is a spot available now or is there a waitlist?
+13. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
+14. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
+15. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+16. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
 ## The Room-to-Breathe Year
 
 ### 1. Liberty Bay Club (Bayonne)
 - Address: 190 West 54th Street, Bayonne NJ
 - Candidate: unit 457, listed $2,276, all-in $2,659, available now
+- Candidate: unit 448, listed $2,308, all-in $2,691, available 2026-11-21
 - Contact: phone (551) 316-6808; hours Mon-Fri 10am-6pm; Sat 10am-5pm; site https://libertybayclub.com/
 - Listing: https://www.apartmentlist.com/nj/bayonne/liberty-bay-club
 - Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; pet rent: $65/mo; parking fee: $160/mo; utilities included: resident pays Utility - Electric - Third Party; Utility - Wa
 
 1. [ ] Is unit 457 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Is the listed $2,276 for unit 457 the full monthly rent, or a net price after a concession? (the listing shows an offer: "[live check] Apartment List: plan Abby, unit 457, 780 sqft, $2,276 base, $2,283 with required fees. The buildi")
-3. [ ] The $2,276 price for unit 457 is for a 10-month lease. What is the monthly price on a 12-month lease?
-4. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
-5. [ ] Parking: is a spot available now or is there a waitlist?
-6. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount? (the listing mentions: "about $6 (total $2,282.06 against base $2,276); electric, water/sewer and renters insuranc")
-7. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-8. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+2. [ ] Is unit 448 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said 2026-11-21 when seen on 2026-11-15).
+3. [ ] Which floor is unit 448 on? (we have floor 4 only as a reading of the unit number, not from a page)
+4. [ ] Is the listed $2,276 for unit 457 the full monthly rent, or a net price after a concession? (the listing shows an offer: "[live check] Apartment List: plan Abby, unit 457, 780 sqft, $2,276 base, $2,283 with required fees. The buildi")
+5. [ ] The $2,276 price for unit 457 is for a 10-month lease. What is the monthly price on a 12-month lease?
+6. [ ] The $2,308 price for unit 448 is for a 15-month lease. What is the monthly price on a 12-month lease?
+7. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
+8. [ ] Parking: is a spot available now or is there a waitlist?
+9. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount? (the listing mentions: "about $6 (total $2,282.06 against base $2,276); electric, water/sewer and renters insuranc")
+10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+11. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
 ### 2. Ethos Kelsey (Belleville)
 - Address: 740-748 Washington Ave, Belleville NJ
 - Candidate: unit 526, listed $2,250, all-in $2,467*, available now
 - Candidate: unit 320, listed $2,700, all-in $2,917*, available now
-- Contact: phone (201) 298-9492; site https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
+- Contact: phone (973) 477-6806; site https://ethoskelsey.com/
 - Listing: https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852
 - Already known (do not ask): elevator: yes (confirmed); pet rent: $65/mo
 
@@ -456,7 +461,25 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 17. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 18. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 3. The Highlands (Morris Plains)
+### 3. Woodmont West (Mount Arlington)
+- Address: 100 Fieldstone Drive, Mount Arlington NJ
+- Candidate: unit 5201, listed $2,520, all-in $2,707*, available 2026-12-09
+- Listing: https://www.apartmentlist.com/nj/mount-arlington/woodmont-west
+- Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; pet rent: $50/mo; parking: a spot is included or free
+
+1. [ ] Is unit 5201 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said 2026-12-09 when seen on 2026-11-15).
+2. [ ] Which floor is unit 5201 on? (ground floor is not acceptable)
+3. [ ] Is the listed $2,520 for unit 5201 the full monthly rent, or a net price after a concession? (the listing shows an offer: "1 month free on Vacant 2 Bedroom Apartments. 15+ month lease term.")
+4. [ ] The $2,520 price for unit 5201 is for a 15-month lease. What is the monthly price on a 12-month lease?
+5. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
+6. [ ] Is there a one-time pet fee or pet deposit, and how much?
+7. [ ] Parking: is a spot available now or is there a waitlist?
+8. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount? (the listing mentions: "Renter's insurance required; $375 holding fee")
+9. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
+10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+11. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+
+### 4. The Highlands (Morris Plains)
 - Address: 40 E Hanover Ave, Morris Plains NJ
 - Candidate: unit 1200, listed $2,500, all-in $2,737*, available now
 - Contact: phone (973) 846-9708; hours Mon-Fri 9:00am-6:00pm; site https://www.trulia.com/building/the-highlands-40-e-hanover-ave-morris-plains-nj-07950-1001488769
@@ -476,47 +499,30 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 11. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 12. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 4. Rail at Bound Brook (Bound Brook)
-- Address: 100 Hamilton Street, Bound Brook NJ
-- Candidate: unit 303, listed $2,604, all-in $2,781*, available now
-- Candidate: unit 529, listed $2,453, all-in $2,630*, available now
-- Contact: phone (848) 375-0930; hours Mon-Fri 9am-5pm; Sat 10am-5pm; site https://www.therailboundbrook.com/
-- Listing: https://www.apartmentlist.com/nj/bound-brook/rail-at-bound-brook
-- Already known (do not ask): elevator: yes (confirmed)
+### 5. Merion Riverwalk (Shelton)
+- Address: 185 Canal Street East, Shelton CT
+- Candidate: unit 4083, listed $2,675, all-in $2,931*, available now
+- Candidate: unit 2096, listed $2,283, all-in $2,539*, available now
+- Listing: https://www.apartmentlist.com/ct/shelton/merion-riverwalk
+- Already known (do not ask): elevator: yes (confirmed); pet rent: $60/mo
 
-1. [ ] Is unit 303 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Is unit 529 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-3. [ ] Which floor is unit 303 on? (we have floor 3 only as a reading of the unit number, not from a page)
-4. [ ] Which floor is unit 529 on? (we have floor 5 only as a reading of the unit number, not from a page)
-5. [ ] Is the listed $2,604 for unit 303 the full monthly rent, or a net price after a concession? (the listing shows an offer: "[live check] Apartment List unit table: plan 1 Bedroom with Den, unit 303, 852 sqft, $2,604. No offer: "Rail a")
-6. [ ] Is the listed $2,453 for unit 529 the full monthly rent, or a net price after a concession? (the listing shows an offer: "[live check] Apartment List unit table: plan 1 Bedroom Standard, unit 529, 709 sqft, $2,453. No offer: "Rail a")
-7. [ ] The $2,604 price for unit 303 is for a 6-month lease. What is the monthly price on a 12-month lease?
-8. [ ] The $2,453 price for unit 529 is for a 6-month lease. What is the monthly price on a 12-month lease?
-9. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
-10. [ ] Are there breed restrictions, and which breeds?
-11. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
-12. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
-13. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
-14. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-15. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
-
-### 5. AVE Clifton (Clifton)
-- Address: 743 Passaic Ave, Clifton NJ
-- Candidate: unit 467, listed $2,598, all-in $2,800*, available now
-- Contact: phone (973) 284-7700; hours Mon-Sat 9am-6pm; Sun 11:30am-4pm; site https://www.aveliving.com/locations/northern-new-jersey/clifton/luxury-apartments
-- Listing: https://www.apartmentlist.com/nj/clifton/ave-clifton--1
-- Already known (do not ask): elevator: yes (confirmed); dog weight limit: no limit; pet rent: $50/mo; utilities included: Trash
-
-1. [ ] Is unit 467 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Which floor is unit 467 on? (we have floor 4 only as a reading of the unit number, not from a page)
-3. [ ] Is the listed $2,598 for unit 467 the full monthly rent, or a net price after a concession? (the listing shows an offer: "For a limited time, enjoy 1 month free on select apartments when you sign a 13 month lease. Terms and conditio")
-4. [ ] The $2,598 price for unit 467 is for a 13-month lease. What is the monthly price on a 12-month lease?
-5. [ ] On what date is the first full rent payment due for unit 467? (there is a free period)
-6. [ ] Are there breed restrictions, and which breeds? (the listing mentions breed restrictions but does not list them)
-7. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
-8. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount? (the listing mentions: "Renter's insurance required")
-9. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
-10. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
+1. [ ] Is unit 4083 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Is unit 2096 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+3. [ ] Which floor is unit 4083 on? (ground floor is not acceptable)
+4. [ ] Which floor is unit 2096 on? (ground floor is not acceptable)
+5. [ ] Is the listed $2,675 for unit 4083 the full monthly rent, or a net price after a concession? (the listing shows an offer: "Move In by 12/15 for 1 Month Free! *Details Apply!")
+6. [ ] Is the listed $2,283 for unit 2096 the full monthly rent, or a net price after a concession? (the listing shows an offer: "Move In by 12/15 for 1 Month Free! *Details Apply!")
+7. [ ] The $2,675 price for unit 4083 is for a 20-month lease. What is the monthly price on a 12-month lease?
+8. [ ] The $2,283 price for unit 2096 is for a 20-month lease. What is the monthly price on a 12-month lease?
+9. [ ] On what date is the first full rent payment due for unit 4083? (there is a free period)
+10. [ ] On what date is the first full rent payment due for unit 2096? (there is a free period)
+11. [ ] What is the dog weight limit in pounds? (we need 25 lb or more)
+12. [ ] Are there breed restrictions, and which breeds?
+13. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
+14. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
+15. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
+16. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
+17. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
 ## The Walk-Everywhere Year
 
@@ -594,20 +600,19 @@ Contact details are in the data for 30 of 30 buildings; for the rest, use the li
 8. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?
 9. [ ] How long does an application take from submission to approval, and can a lease start by Dec 15, 2026?
 
-### 5. 12333 83rd Ave (Kew Gardens)
-- Address: 12333 83rd Ave, Kew Gardens NY
-- Candidate: unit 3203, listed $2,695, all-in $2,874*, available now
-- Contact: phone (212) 406-0030; site https://www.trulia.com/home/12333-83rd-ave-3203-kew-gardens-ny-11415-2086095362
-- Listing: https://www.trulia.com/home/12333-83rd-ave-3203-kew-gardens-ny-11415-2086095362
+### 5. 949 W  End Ave (Upper West Side-Manhattan Valley)
+- Address: 949 W  End Ave, New York NY
+- Candidate: unit D, listed $2,795, all-in $2,983*, available now
+- Listing: https://www.trulia.com/home/949-w-end-ave-d-new-york-ny-10025-2106139475
 - Already known (do not ask): elevator: yes (confirmed)
 
-1. [ ] Is unit 3203 still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
-2. [ ] Which floor is unit 3203 on? (ground floor is not acceptable)
-3. [ ] Which lease term does the $2,695 price for unit 3203 apply to, and what is the monthly price on a 12-month lease?
-4. [ ] What is the dog weight limit in pounds? (the listing only says: "yes: yes (small dogs)") (we need 25 lb or more)
+1. [ ] Is unit D still available, and for what move-in date? It must be on or before Dec 15, 2026 (the listing said available now when seen on 2026-11-15).
+2. [ ] Which floor is unit D on? (ground floor is not acceptable)
+3. [ ] Which lease term does the $2,795 price for unit D apply to, and what is the monthly price on a 12-month lease?
+4. [ ] What is the dog weight limit in pounds? (the listing only says: "yes: size only: "Small" (no number)") (we need 25 lb or more)
 5. [ ] Are there breed restrictions, and which breeds?
 6. [ ] What is the monthly pet rent for one dog, and the one-time pet fee or deposit?
-7. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is a spot available now or is there a waitlist?
+7. [ ] Parking: is a spot included in the rent; if not, what is the monthly fee; is it a garage or an open lot; is a spot available now or is there a waitlist?
 8. [ ] What are all the required monthly fees on top of rent (amenity, trash, pest, technology or package fees, utility billing fee), each with its amount?
 9. [ ] Which utilities are included in the rent (heat, hot water, water and sewer, gas, electricity, trash), and which does the tenant pay?
 10. [ ] What is the income requirement as a multiple of the monthly rent, and is a guarantor accepted?

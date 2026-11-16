@@ -411,6 +411,19 @@ def _contacts() -> dict:
                 for k in (r.get("building_id"), r.get("addr_key")):
                     if k:
                         _CONTACTS[k] = r
+        # the building's own published number replaces a listing-site forwarding number (scripts/building_contacts_own_site.py)
+        o = f.with_name("building_contacts_own_site.csv")
+        if o.exists():
+            import csv
+            for r in csv.DictReader(open(o, encoding="utf-8")):
+                if r.get("leasing_phone") and r.get("confidence") in ("high", "medium"):
+                    base = dict(_CONTACTS.get(r.get("building_id")) or {})
+                    base.update({"leasing_phone": r["leasing_phone"], "leasing_url": r.get("own_site_url") or base.get("leasing_url", ""),
+                                 "office_hours": r.get("office_hours") or base.get("office_hours", ""),
+                                 "note": "from the building's own site" + ("" if r["confidence"] == "high" else " (manager's general line; confirm it reaches this building)")})
+                    for k in (r.get("building_id"), r.get("addr_key")):
+                        if k:
+                            _CONTACTS[k] = base
     return _CONTACTS
 
 

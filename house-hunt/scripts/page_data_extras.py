@@ -132,7 +132,7 @@ def main():
         ownb = {}
         if own is not None:
             for r in own.itertuples():
-                if r.leasing_phone and getattr(r, "confidence", "") == "high":
+                if r.leasing_phone and getattr(r, "confidence", "") in ("high", "medium"):
                     ownb[r.building_id] = r
         cb = {r.building_id: r for r in C.itertuples()}
         n = 0
