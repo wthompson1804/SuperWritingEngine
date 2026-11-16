@@ -215,7 +215,7 @@ def main():
                   "Dogs are not confirmed as allowed here: " + s("dogs_evidence_open").str.replace("the evidence pass could not confirm it: ", "", regex=False).str[:140]),
          "Are dogs allowed? (dogs must be named as allowed, not 'pets on approval')"),
         ("lease", lease_open, "lease term", lease_why, "What is the rent on a 12-month lease?"),
-        ("cost", cost_open, "cost near the cap", "Cost near the cap: " + unknown_lines + " not published. The all-in figure counts them as $0 and is within $" + str(NEAR_CAP) + " of $3,000.",
+        ("cost", cost_open, "cost near the cap", "Cost near the cap: " + unknown_lines + " not published (counted as $0), and the all-in figure is within $" + str(NEAR_CAP) + " of $3,000.",
          "What are the pet rent, parking and required monthly fees?"),
         ("availability", avail_open, "availability", "This is a floor-plan price, not a named unit: no unit, floor or date could be checked.", "Which unit is available at this price, on which floor, and from when?"),
         ("listing", listing_open, "listing", "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160], "Is this listing for this building, and is it genuine?"),

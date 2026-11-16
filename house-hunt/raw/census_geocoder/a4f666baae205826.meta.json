@@ -1,0 +1,7 @@
+{
+ "url": "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-74.219056&y=40.747169&benchmark=Public_AR_Current&vintage=Current_Current&format=json&layers=all",
+ "retrieved_at": "2026-11-16T00:07:08+00:00",
+ "status": 200,
+ "path": "raw/census_geocoder/a4f666baae205826.json",
+ "source": "census_geocoder"
+}

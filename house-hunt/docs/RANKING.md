@@ -87,3 +87,12 @@ unit breaks any of these rules.
 **Scoring changes.** Pool, doorman and the other amenity tests reject negatives and near-misses ("Pool table", "none listed", "no doorman
 stated"; a virtual doorman counts as controlled access only). A confirmed "no weight limit" scores as the best weight policy. The
 "cost lines stated" variable now counts the lines of the cost receipt that are stated rather than estimated or unknown.
+
+## Neighborhood order inside an experience (2026-11-16)
+
+Owner: show the top three neighborhoods of each experience first, the rest on "show more" in descending order; the same for
+places inside a neighborhood (top three, then more). "Years" are called "experiences" in the interface; internal keys are unchanged.
+
+Neighborhood score = mean rank score of the neighborhood's three best shown places. A neighborhood with fewer than three
+shown places loses 2 points per missing place. Ties break on the neighborhood id. Computed in `scripts/page_data_extras.py`
+(`experience_score`, `rank_in_experience`), after the unit ranking, so it uses the same weights as the places.

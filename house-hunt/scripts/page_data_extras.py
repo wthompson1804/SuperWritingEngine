@@ -152,6 +152,23 @@ def main():
             n += 1
         rep["units with a contact"] = f"{n} of {len(d['units'])}"
 
+    # Neighborhood order inside an experience (owner, 2026-11-16: show the top three, the rest on "show more", in
+    # descending order). Score = the mean rank score of the neighborhood's three best shown places; a neighborhood with
+    # fewer than three loses 2 points per missing place, so one good apartment does not outrank real choice.
+    units = {u["id"]: u for u in d["units"]}
+    for y in d["years"]:
+        y["display_label"] = re.sub(r" Year$", " Experience", y.get("label", ""))
+        hs = [hoods[i] for i in y.get("hood_ids", []) if i in hoods]
+        for h in hs:
+            sc = sorted([(units[i].get("scores") or {}).get("rank") or 0 for i in h.get("unit_ids", []) if i in units], reverse=True)[:3]
+            h["experience_score"] = round(sum(sc) / len(sc) - 2 * (3 - len(sc)), 1) if sc else None
+            h["experience_score_basis"] = f"mean rank score of its top {len(sc)} shown place(s)" + (f", minus {2 * (3 - len(sc))} for having fewer than three" if 0 < len(sc) < 3 else "")
+        ranked = sorted(hs, key=lambda h: (-(h["experience_score"] if h["experience_score"] is not None else -1e9), h["id"]))
+        for i, h in enumerate(ranked, 1):
+            h["rank_in_experience"] = i
+        y["hood_ids"] = [h["id"] for h in ranked]
+    rep["neighborhoods ranked within experiences"] = sum(1 for h in hoods.values() if h.get("rank_in_experience"))
+
     d.setdefault("meta", {})["extras"] = rep
     json.dump(d, open(f, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     print("site/data.json extras:", rep)

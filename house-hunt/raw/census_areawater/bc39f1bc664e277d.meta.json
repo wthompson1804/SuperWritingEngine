@@ -1,0 +1,7 @@
+{
+ "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_34037_areawater.zip",
+ "retrieved_at": "2026-11-16T00:06:44+00:00",
+ "status": 200,
+ "path": "raw/census_areawater/bc39f1bc664e277d.zip",
+ "source": "census_areawater"
+}

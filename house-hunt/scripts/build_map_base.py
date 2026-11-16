@@ -39,8 +39,9 @@ DATA = ROOT / "site" / "data.json"
 REF_LAT = 40.8
 KX = math.cos(math.radians(REF_LAT))
 SCALE = 2000            # units per degree of latitude: 1 unit = 0.0005 degrees, about 55 m
-MARGIN = 0.14           # degrees of margin around the neighborhoods
-TOL = 0.0011            # Douglas-Peucker tolerance in degrees of latitude (about 120 m)
+FRAME = (-74.95, 39.98, -72.60, 41.95)   # west, south, east, north: the under-two-hours-by-car region
+MARGIN = 0.08           # every neighborhood must be at least this far (degrees of latitude) inside FRAME
+TOL = 0.0008            # Douglas-Peucker tolerance in degrees of latitude (about 90 m)
 TOL_LINE = 0.002
 MIN_AREA = 0.6e-5       # drop islands smaller than this (square degrees, x already scaled)
 
@@ -68,15 +69,17 @@ LABELS = [
 
 
 def frame() -> tuple[float, float, float, float]:
+    """A fixed frame (so the base does not move when the neighborhood list changes), checked against the data:
+    every neighborhood and the anchor must sit inside it with MARGIN to spare, or the build stops."""
+    w, s, e, n = FRAME
     d = json.loads(DATA.read_text())
-    pts = [(h["lon"], h["lat"]) for h in d["neighborhoods"] if h.get("lat") is not None]
+    pts = [(h["lon"], h["lat"], h["id"]) for h in d["neighborhoods"] if h.get("lat") is not None]
     a = d["meta"]["anchor"]
-    pts.append((a["lon"], a["lat"]))
-    w = min(p[0] for p in pts) - MARGIN / KX
-    e = max(p[0] for p in pts) + MARGIN / KX
-    s = min(p[1] for p in pts) - MARGIN
-    n = max(p[1] for p in pts) + MARGIN
-    return (round(w, 2), round(s, 2), round(e, 2), round(n, 2))
+    pts.append((a["lon"], a["lat"], "anchor"))
+    out = [p for p in pts if not (w + MARGIN / KX <= p[0] <= e - MARGIN / KX and s + MARGIN <= p[1] <= n - MARGIN)]
+    if out:
+        raise SystemExit(f"FRAME is too small for: {out}; widen FRAME in scripts/build_map_base.py")
+    return FRAME
 
 
 def to_iso(g):
