@@ -572,6 +572,14 @@ def web_counts() -> tuple[int, dict[str, int]]:
     return total, per
 
 
+def tried_urls() -> set[str]:
+    """Every URL already requested once, whatever came back: a URL is never requested twice."""
+    if not WEB_LOG.exists():
+        return set()
+    return {r["url"] for r in map(json.loads, WEB_LOG.read_text().splitlines())
+            if r.get("kind") == "page" and (r.get("sent") or r.get("attempted"))}
+
+
 def fetch_page(hid: str, url: str) -> str:
     """Returns 'ok', or the reason nothing was read. Never retries, never works around a refusal."""
     host = urlparse(url).netloc
@@ -581,6 +589,8 @@ def fetch_page(hid: str, url: str) -> str:
         return "ok"
     if killed(host):
         return "host ended"
+    if url in tried_urls():
+        return "tried before (not repeated)"
     total, per = web_counts()
     if total >= MAX_PAGES_TOTAL:
         return "total cap reached"
@@ -597,7 +607,9 @@ def fetch_page(hid: str, url: str) -> str:
         raw, meta = lib.cached_get(url, SRC, ext="html", retries=1, timeout=40)
     except RuntimeError as e:
         why = str(e)[-120:]
-        log(WEB_LOG, {"kind": "page", "sent": True, "hood_id": hid, "url": url, "status": why, "at": now_iso()})
+        # no HTTP answer (TLS / connection failure): not a fetched page, so it does not use the caps
+        log(WEB_LOG, {"kind": "page", "sent": "HTTP 429" in why, "attempted": True, "hood_id": hid, "url": url,
+                      "status": why, "at": now_iso()})
         if "HTTP 429" in why:
             kill_host(host, "HTTP 429", url)
             return "refused: HTTP 429"
@@ -610,7 +622,9 @@ def fetch_page(hid: str, url: str) -> str:
     if meta["status"] != 200:
         return f"HTTP {meta['status']}"
     text = page_text(raw)
-    if len(text) < 3000 and WALL.search(text):
+    if len(text) < 3000 and (WALL.search(text) or WALL.search(raw[:5000].decode("utf-8", "replace"))
+                             or (len(text) < 200 and b"<script" in raw)):
+        # a challenge page or an empty script shell instead of the article: treated as a refusal
         kill_host(host, "bot wall / CAPTCHA page", url)
         return "refused: wall"
     WEBTEXT.mkdir(parents=True, exist_ok=True)
@@ -626,7 +640,7 @@ def stage_web(only: list[str] | None = None) -> None:
             continue
         had = web_text_path(item["url"]).exists()
         res = fetch_page(item["hood_id"], item["url"])
-        if not had or res != "ok":
+        if not had and res not in ("host ended", "tried before (not repeated)"):
             n = len(json.loads(web_text_path(item["url"]).read_text())["text"]) if res == "ok" else 0
             print(f"web: {item['hood_id']} {item['url']} -> {res} ({n} chars)")
     total, per = web_counts()

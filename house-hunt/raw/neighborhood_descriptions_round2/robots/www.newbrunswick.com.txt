@@ -1,0 +1,8 @@
+Sitemap: https://www.newbrunswick.com/sitemap.xml
+
+User-Agent: *
+Allow: /sitemap.xml
+Disallow: /admin/
+Disallow: /event/tag/
+Disallow: /news/?page=
+Disallow: /iamap/viewlisting/

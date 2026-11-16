@@ -237,6 +237,53 @@ class Unknowns(unittest.TestCase):
         self.assertIn("not published", row["host_catch"])
 
 
+class Subheads(unittest.TestCase):
+    COLS = ("sub_cost", "sub_parking", "sub_dog", "sub_building")
+
+    def test_library_lines_are_short_and_carry_no_numbers(self):
+        for section, entries in R.SUBS.items():
+            for key, options in entries:
+                for text in options:
+                    self.assertLessEqual(len(text.split()), R.SUB_MAX_WORDS, text)
+                    self.assertNotRegex(text, r"\d", text)
+                    self.assertNotRegex(text.lower(), r"crime|violent|theft|safe|police|[—–]|\b(may|might|probably|perhaps)\b", text)
+                    self.assertEqual(len(re.findall(r"[.!?](\s|$)", text)), 1, text)
+
+    def test_unknown_parking_gets_an_ask_line(self):
+        row = run([unit("a", parking={"type": None, "fee": None, "fee_note": None})])["a"]
+        self.assertRegex(row["sub_parking"].lower(), r"ask|question")
+        self.assertNotRegex(row["sub_parking"].lower(), r"garage|indoors|free|included")
+
+    def test_unpriced_garage_says_the_price_is_missing(self):
+        row = run([unit("a", parking={"type": "garage: fee not stated", "fee": None, "fee_note": ""})])["a"]
+        self.assertRegex(row["sub_parking"].lower(), r"don't publish the price|no price listed")
+
+    def test_priced_garage_and_included_spot(self):
+        self.assertEqual(json.loads(run([unit("a")])["a"]["facts_used_json"])["subs"]["parking"], "garage_priced")
+        inc = unit("a", parking={"type": "lot: assigned", "fee": 0.0, "fee_note": "a spot is included or free: assigned"})
+        self.assertEqual(json.loads(run([inc])["a"]["facts_used_json"])["subs"]["parking"], "included")
+
+    def test_unknown_pet_rent_and_conflicting_policy(self):
+        row = run([unit("a", dog={"allowed": "yes", "weight_limit_lb": None, "pet_rent": None})])["a"]
+        self.assertRegex(row["sub_dog"].lower(), r"ask")
+        row = run([unit("a", dog={"allowed": "conflicting", "weight_limit_lb": None, "pet_rent": None})])["a"]
+        self.assertRegex(row["sub_dog"].lower(), r"in writing|confirm")
+
+    def test_nothing_distinctive_stays_empty(self):
+        row = run([unit("a", cost_check={"cap_margin": 250})])["a"]      # known pet rent, no amenities, mid budget
+        self.assertEqual(row["sub_cost"], "")
+        self.assertEqual(row["sub_dog"], "")
+        self.assertEqual(row["sub_building"], "")
+
+    def test_every_unit_on_the_page(self):
+        if not R.DATA.exists():
+            self.skipTest("site/data.json is not here")
+        for r in R.build(json.loads(R.DATA.read_text(encoding="utf-8"))["units"]):
+            for c in self.COLS:
+                self.assertLessEqual(len(r[c].split()), R.SUB_MAX_WORDS, r[c])
+                self.assertNotRegex(r[c], r"\d", r[c])
+
+
 class Numbers(unittest.TestCase):
     def check(self, units):
         by_hood = {}

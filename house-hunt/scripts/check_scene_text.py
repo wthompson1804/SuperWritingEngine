@@ -55,8 +55,15 @@ PARAGRAPHS = {"year": {"host_walkthrough": (3, 40, 60)}, "hood": {}}      # colu
 ONE_SENTENCE = {"year": ["promise", "tagline", "subhead"], "hood": ["good_for_her", "watch_for"]}
 ONE_OR_TWO = {"year": ["catch"], "hood": []}
 HOST_COLS = {"host_intro", "host_walkthrough", "tagline", "display_label", "subhead"}   # the host voice may state all-in dollars
-COLUMNS = {"year": ["display_label", "tagline", "subhead", "scene", "promise", "catch", "host_intro", "host_walkthrough"],
-           "hood": ["scene", "good_for_her", "watch_for", "host_intro"]}
+# One optional line in the host's voice under each section headline of the page ("sub_" columns). They are chosen from
+# the conditional drafts in the source file ("=== sub:" blocks); empty means the data gave nothing distinctive to say.
+SUB_SECTIONS = {"year": ["cost", "to_parents", "going_out", "green", "compared_to_queens"],
+                "hood": ["cost", "to_parents", "parking", "dog", "going_out", "green", "residents_say", "local_rules",
+                         "compared_to_queens"]}
+SUB_MAX_WORDS = 14
+COLUMNS = {"year": ["display_label", "tagline", "subhead", "scene", "promise", "catch", "host_intro", "host_walkthrough"]
+           + ["sub_" + x for x in SUB_SECTIONS["year"]],
+           "hood": ["scene", "good_for_her", "watch_for", "host_intro"] + ["sub_" + x for x in SUB_SECTIONS["hood"]]}
 VOICE_PHRASE = re.compile(r"review sites|people who live (here|in )|residents (also |here )?(say|like|praise)", re.I)
 
 NUMBER = re.compile(r"\d{1,2}:\d{2}|\d[\d,]*(?:\.\d+)?")
@@ -128,7 +135,8 @@ def _page_table(part):
     if part == "years":
         rows = []
         for y in d["years"]:
-            r = {"year_label": labels[y["id"]], "id": y["id"], **(y.get("medians") or {})}
+            r = {"year_label": labels[y["id"]], "id": y["id"], **(y.get("medians") or {}),
+                 **{"vq_" + k: v for k, v in (y.get("vs_queens") or {}).items()}}
             for k in ("all_in", "drive_min"):
                 lo, hi = (y.get(k + "_range") or [None, None])[:2]
                 r[k + "_lo"], r[k + "_hi"] = lo, hi
@@ -145,7 +153,8 @@ def _page_table(part):
             lo, hi = (h.get("all_in_range") or [None, None])[:2]
             rows.append({"hood_id": h["id"], "all_in_lo": lo, "all_in_hi": hi, "sqft_median": h.get("sqft_median"),
                          "shown": (h.get("counts") or {}).get("shown"),
-                         "violent": (h.get("safety") or {}).get("violent_per_1000")})
+                         "violent": (h.get("safety") or {}).get("violent_per_1000"),
+                         **{"vq_" + k: v for k, v in (h.get("vs_queens") or {}).items()}})
         t = pd.DataFrame(rows)
         # share of the page's neighborhoods (those with a rate) whose violent rate is at or below this one: 0.2 = lowest fifth
         t["violent_pctile"] = t["violent"].rank(pct=True, method="max")
@@ -376,6 +385,15 @@ def check_style(kind, col, text):
     if m:
         out.append(f"{col}: spelled-out quantity '{m.group(0)}' (write digits and cite them)")
     words = len(text.split())
+    if col.startswith("sub_"):
+        if words > SUB_MAX_WORDS:
+            out.append(f"{col}: {words} words, wanted at most {SUB_MAX_WORDS}")
+        if len(sentences(text)) != 1:
+            out.append(f"{col}: {len(sentences(text))} sentences, wanted 1")
+        if re.search(r"\d", text):
+            out.append(f"{col}: a section subhead carries no numbers (the headline states them)")
+        if re.search(r"\b(may|might|perhaps|probably|possibly|somewhat|fairly|arguably|seems?)\b", text, re.I):
+            out.append(f"{col}: hedging word")
     if col in LIMITS[kind]:
         lo, hi = LIMITS[kind][col]
         if not lo <= words <= hi:
@@ -425,7 +443,8 @@ def check_row(kind, key, texts, evidence):
         problems.append(f"'{AT_LIMIT}' needs a test that the violent rate is at least {AT_LIMIT_MIN}")
     for col, text in texts.items():
         if not text.strip():
-            problems.append(f"{col}: empty")
+            if not col.startswith("sub_"):                # an empty section subhead is allowed: better than filler
+                problems.append(f"{col}: empty")
             continue
         problems += check_style(kind, col, text)
         for n in numbers_in(text):
@@ -493,7 +512,7 @@ def main():
                     print(f"FAIL {r[key]}: evidence_json does not parse ({e})")
                     fails += 1
                     continue
-                problems, drift = check_row(kind, r[key], {c: r[c] for c in cols}, evidence)
+                problems, drift = check_row(kind, r[key], {c: r[c] or "" for c in cols}, evidence)
                 if kind == "year" and year_key(r["display_label"]) != r[key]:
                     problems.append(f"display_label '{r['display_label']}' does not match the key")
                 for p in problems:

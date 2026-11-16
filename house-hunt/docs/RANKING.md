@@ -130,3 +130,48 @@ cost and the cap use the 12-month price. `all_in_unknown_count` and `cap_margin`
   the unit is probably or possibly on the ground floor, and a reviewer's verdict saying so.
 - No cap of 10 per neighborhood: every showable, reviewed unit is shown in rank order, at most 2 per building, with
   `more_in_building` on each. A building with no evidence rows at all is not shown.
+
+## Rules added 2026-11-16 (after the repair report's open decisions) — `scripts/build_master.py`, `scripts/rank.py`, tests in `scripts/test_rules.py`
+
+**Staleness (rule; before this it was caught only by the verdict review).** `build_master.py` reads a page's modification date
+where the data has one: the unit's own live-check note ("page last modified 2026-09-03", "unit record updated ..."), else a
+`listing_last_modified` / `listing_updated_at` evidence fact read on the same site as the unit's listing (`page_modified_date`,
+`page_modified_source`). Days are counted to the day the page was read (`parsers.staleness`).
+- Page unchanged **more than 60 days** and no second site lists the unit, or an availability date **more than six months
+  (183 days) old**: one open item, "listing" (`listing_stale = open`). Where a reviewer already wrote the same doubt up as
+  "availability" it counts once.
+- Page unchanged **more than six months (183 days)**: removed before ranking (`listing_stale = remove`,
+  `excluded_by_confirmed_facts.csv`), second site or not.
+- The latest date in the unit's own note wins, so a fresh unit record on an old building page is not stale. Where no date exists
+  (most building-page rows) the rule says nothing and the verdict review remains the only check. A phone answer about
+  availability clears it.
+
+**Elevator stated on a listing site (one grading for all batches).** An elevator in a listing site's amenity list, tag or text is
+basis `stated`, not `confirmed`, whether the evidence batch wrote the row as confirmed (batches 1, 2, 8, 9 ...) or unconfirmed
+("amenity tag only", batches 10, 15). It settles the elevator unless a row says the building's own site omits it, that it is
+"in select buildings", or the checker's reading goes against it; a reviewer's elevator asterisk also still stands. `confirmed` is
+kept for the building's own or its manager's page. `elevator_aggregator_only = yes` marks every building whose only "yes"
+sources are listing sites (no own page, no city record, no phone call). In New York City a lot classed D (elevator apartments) at
+the listing's own address, with no zero on the device list, is entered as an official record beside the listing.
+
+**Dog weight limit with no number.** "Weight restrictions apply", "a limit exists, pounds not published" and the like
+(`parsers.dog_weight_unstated`) pass like "small dogs" and carry the disclosure "dog weight limit not published" with the tour
+question "Confirm the dog weight limit in pounds".
+
+**Overnight street parking (disclosure, never removes).** `data/reference/overnight_parking_towns.csv` is a reviewed table
+(municipality, rule summary, hood ids, source URL, severity ban / permit / seasonal) filled by reading the local-rule rows; no
+free text is parsed at run time. Where the unit's neighborhood is in it and the unit's parking is not confirmed at the building
+(parking type street, or type unknown and no fee known), the unit carries the disclosure "Overnight street parking is restricted
+here: confirm the building has a space, and its cost", with the rule's one-line summary and URL.
+
+**Phone answers.** `data/evidence/call_answers.csv` (format in `docs/SHORTLIST_TOOLS.md`), when present, is the highest-precedence
+source: basis `confirmed_by_phone`, source "phone call <called_at>". Elevator, dog weight limit (which also says dogs are
+allowed), pet rent, parking fee and the total of required fees per building; floor, lease term, 12-month price and the move-in
+date per unit ("gone" removes the unit; a date or "now" counts as seeing it live; a date after Dec 15 removes it). A fact
+answered on the phone is no longer open, whatever an older evidence row or reviewer's asterisk said.
+
+**Tolls.** A toll counts in the distance part only when every crossing on the route has a rate (`toll_complete`); all 792
+buildings now do. Figures are New York E-ZPass, weekend off-peak; the Tolls by Mail figure (what an out-of-state tag pays at MTA
+crossings) is carried beside it, and is "at least" where the route enters the Manhattan congestion zone (no mail rate found).
+
+**Jersey City** is split into its neighborhoods (`docs/SUBCITY_SPLIT_PLAN.md`); the safety rule still uses the citywide police rate.

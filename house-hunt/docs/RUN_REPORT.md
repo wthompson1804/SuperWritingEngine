@@ -1,4 +1,4 @@
-# Run report (2026-11-16T00:43:54+00:00)
+# Run report (2026-11-16T00:48:33+00:00)
 
 ## Steps
 
@@ -12,8 +12,8 @@
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | FAILED |
-| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | FAILED |
+| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | ok |
+| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
 
 ## Stage counts
 
@@ -25,14 +25,14 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2573 | 2573 | +0 |
 | within the $3,000 all-in cap | 1652 | 1652 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 850 | 855 | -5 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 322 | 326 | -4 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 848 | 848 | +0 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 321 | 321 | +0 |
 | avoid cards | 36 | 36 | +0 |
-|   shown with an asterisk (one thing to confirm) | 119 | 118 | +1 |
-| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 118 | 141 | -23 |
+|   shown with an asterisk (one thing to confirm) | 118 | 118 | +0 |
+| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 120 | 120 | +0 |
 | held back for one confirmation | 29 | 29 | +0 |
 | clean, waiting for a live check (not shown) | 39 | 39 | +0 |
-| neighborhoods with 3+ shown places | 36 | 37 | -1 |
+| neighborhoods with 3+ shown places | 36 | 36 | +0 |
 | buildings in the master table | 665 | 665 | +0 |
 
 ## Why units left
@@ -64,7 +64,7 @@
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
 | The Fresh-Start Year      |               7 |       97 |      35 |             0 |
-| The Little-City Year      |              31 |      361 |     121 |             5 |
+| The Little-City Year      |              30 |      359 |     120 |             5 |
 | The Old-Neighborhood Year |              43 |      164 |      75 |            29 |
 | The Quiet-Street Year     |               7 |       11 |       9 |             0 |
 | The Room-to-Breathe Year  |              32 |      209 |      76 |             0 |
@@ -100,7 +100,7 @@ test_parsers: 259 assertions passed
 
 **rule tests (every defect in docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (rules): 105 checks, 0 failed
+test_rules (rules): 185 checks, 0 failed
 ```
 
 **building amenities (cached pages)**
@@ -114,7 +114,7 @@ passing buildings: 692; already in csv: 750; to process: 0
   confirmed floor values: 77 read, 9 matched no unit in the master (most are units that left the list), 3 not parseable (data/reference/floor_confirm_unmatched.csv)
   live status {'not checked': 1941, 'live': 565, 'blocked': 47, 'changed': 18, 'gone': 2} | coordinates {'listing rows agree': 662, 'census_geocoder': 3}
   phone answers: 0 listing rows in 0 buildings (data/evidence/call_answers.csv is absent or empty)
-  page modification date known: 354 | stale: {'no': 2479, 'open': 62, 'remove': 32} | elevator on a listing site's page alone: 484 buildings | overnight parking rule: {'none': 522, 'permit': 98, 'ban': 28, 'seasonal': 17}
+  page modification date known: 354 | stale: {'no': 2479, 'open': 62, 'remove': 32} | elevator on a listing site's page alone: 385 buildings | overnight parking rule: {'none': 522, 'permit': 98, 'ban': 28, 'seasonal': 17}
   evidence facts not mapped to a field: {'building_size': 133, 'building_site': 59, 'listing_broker': 56, 'deposit': 24, 'owner_of_record': 24, 'listing_date': 21, 'application_fee': 19, 'building': 16, 'openigloo_summary': 16, 'move_in_fees': 16, 'available_units_listed': 16, 'pet_count_limit': 14, 'building_name': 13, 'dog': 12, 'deposit_and_fees': 10, 'one_time_fees': 10, 'openigloo_summary_counts': 10, 'listing_agent': 9, 'building_size_openigloo': 9, 'broker_fee': 8, 'own_site': 7, 'amenities': 6, 'ownership_change': 6, 'other_fees': 5, 'one_time_fee': 5}
 ```
 
@@ -148,24 +148,19 @@ units 2573; cost gate {'pass': 1652, 'fail': 921}; rent asterisk 1763; rent term
 
 **ranking and selection**
 ```
-evidence: 45 units excluded, shown 322, avoid cards 36, of them with an asterisk 119 ({'live check': 44, 'listing': 29, 'dogs allowed': 17, 'availability': 14, 'elevator': 13, 'eligibility': 2}), held for a confirmation 29, waiting for a live check 39
-stages: 2573 costed -> -921 over the all-in cap -> -363 Jamaica safety rule -> -101 failed a gate on confirmed facts -> -118 removed by a reviewed verdict -> -175 sketchy -> -45 evidence exclusions -> 850 ranked
-(kept 850 units; candidates 388; shown 424; pools: {'': 448, 'pool': 381, 'indoor': 21}
+evidence: 45 units excluded, shown 321, avoid cards 36, of them with an asterisk 118 ({'live check': 42, 'listing': 29, 'dogs allowed': 17, 'elevator': 14, 'availability': 14, 'eligibility': 2}), held for a confirmation 29, waiting for a live check 39
+stages: 2573 costed -> -921 over the all-in cap -> -363 Jamaica safety rule -> -101 failed a gate on confirmed facts -> -120 removed by a reviewed verdict -> -175 sketchy -> -45 evidence exclusions -> 848 ranked
+(kept 848 units; candidates 387; shown 423; pools: {'': 447, 'pool': 380, 'indoor': 21}
 ```
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 147 checks, 3 failed
-  FAIL D7/D9: apartmentlist:p98932510-00B-308 elevator must be open
-  FAIL D7/D9: apartmentlist:p90606231-431 elevator must be open
-  FAIL verdicts: a shown unit has no ok / asterisk verdict
+test_rules (data): 211 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
 field registry: {'used': 485, 'display': 314, 'provenance': 181, 'not_used': 18}
-SHOWN-LIST ASSERTIONS FAILED: 2 violation(s)
-   apartmentlist:p846470-u48002211 (Grandville Towers 9C): no reviewed verdict: nobody has read this unit's evidence
-   apartmentlist:p98932510-00B-348 (Avalon Wayne 00B-348): no reviewed verdict: nobody has read this unit's evidence
+shown-list assertions: all pass
 ```
 

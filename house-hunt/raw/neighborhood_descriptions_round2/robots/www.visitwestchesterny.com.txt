@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /plugins/crm/count/
+Allow: /
+Crawl-delay: 2
+
+Sitemap: https://www.visitwestchesterny.com/sitemap.xml

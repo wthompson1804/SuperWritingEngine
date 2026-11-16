@@ -1,0 +1,49 @@
+{"kind": "robots", "host": "visitnj.org", "status": 200, "at": "2026-11-16T00:44:52+00:00", "final_url": "https://visitnj.org/robots.txt"}
+{"kind": "robots", "host": "www.ctvisit.com", "status": 200, "at": "2026-11-16T00:44:53+00:00", "final_url": "https://ctvisit.com/robots.txt"}
+{"kind": "robots", "host": "www.visitwestchesterny.com", "status": 200, "at": "2026-11-16T00:44:54+00:00", "final_url": "https://www.visitwestchesterny.com/robots.txt"}
+{"kind": "robots", "host": "www.nycgovparks.org", "status": 200, "at": "2026-11-16T00:44:54+00:00", "final_url": "https://www.nycgovparks.org/robots.txt"}
+{"kind": "robots", "host": "www.essexcountyparks.org", "status": 200, "at": "2026-11-16T00:44:55+00:00", "final_url": "https://essexcountyparks.org/robots.txt"}
+{"kind": "robots", "host": "www.nycgo.com", "error": "SSLError(MaxRetryError(\"HTTPSConnectionPool(host='www.nycgo.com', port=443): Max retries exceeded with url: /robots.txt (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED", "at": "2026-11-16T00:44:55+00:00"}
+{"kind": "robots", "host": "www.cityofshelton.org", "status": 200, "at": "2026-11-16T00:44:56+00:00", "final_url": "https://www.cityofshelton.org/robots.txt"}
+{"kind": "robots", "host": "www.danbury-ct.gov", "status": 200, "at": "2026-11-16T00:44:56+00:00", "final_url": "https://www.danbury-ct.gov/robots.txt"}
+{"kind": "robots", "host": "www.hackensack.org", "status": 200, "at": "2026-11-16T00:44:57+00:00", "final_url": "https://www.hackensack.org/robots.txt"}
+{"kind": "robots", "host": "www.yonkersny.gov", "status": 403, "at": "2026-11-16T00:44:57+00:00", "final_url": "https://www.yonkersny.gov/robots.txt"}
+{"kind": "robots", "host": "www.visithudson.org", "status": 200, "at": "2026-11-16T00:44:58+00:00", "final_url": "https://www.visithudson.org/robots.txt"}
+{"kind": "robots", "host": "www.discoverlongisland.com", "status": 200, "at": "2026-11-16T00:44:58+00:00", "final_url": "https://www.discoverlongisland.com/robots.txt"}
+{"kind": "robots", "host": "explorerocklandny.com", "status": 200, "at": "2026-11-16T00:44:59+00:00", "final_url": "https://explorerocklandny.com/robots.txt"}
+{"kind": "robots", "host": "www.nyc.gov", "status": 200, "at": "2026-11-16T00:44:59+00:00", "final_url": "https://www.nyc.gov/robots.txt"}
+{"kind": "robots", "host": "www.stamford-downtown.com", "error": "SSLError(MaxRetryError(\"HTTPSConnectionPool(host='www.stamford-downtown.com', port=443): Max retries exceeded with url: /robots.txt (Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE", "at": "2026-11-16T00:45:00+00:00"}
+{"kind": "robots", "host": "www.norwalkct.gov", "status": 200, "at": "2026-11-16T00:45:01+00:00", "final_url": "https://www.norwalkct.gov/robots.txt"}
+{"kind": "robots", "host": "www.njtransit.com", "status": 200, "at": "2026-11-16T00:45:01+00:00", "final_url": "https://www.njtransit.com/robots.txt"}
+{"kind": "robots", "host": "www.mta.info", "status": 403, "at": "2026-11-16T00:45:02+00:00", "final_url": "https://www.mta.info/robots.txt"}
+{"kind": "robots", "host": "www.bayonnenj.org", "status": 200, "at": "2026-11-16T00:45:02+00:00", "final_url": "https://www.bayonnenj.org/robots.txt"}
+{"kind": "robots", "host": "www.cityofwhiteplains.com", "error": "ConnectionError(ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))", "at": "2026-11-16T00:45:12+00:00"}
+{"kind": "robots", "host": "www.visitmonmouth.com", "status": 200, "at": "2026-11-16T00:45:13+00:00", "final_url": "https://www.visitmonmouth.com/robots.txt"}
+{"kind": "robots", "host": "www.princetonnj.gov", "error": "ConnectionError(ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))", "at": "2026-11-16T00:45:23+00:00"}
+{"kind": "robots", "host": "www.visitprinceton.org", "status": 404, "at": "2026-11-16T00:45:24+00:00", "final_url": "https://www.visitprinceton.org/robots.txt"}
+{"kind": "robots", "host": "www.longbranch.org", "error": "ConnectionError(ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))", "at": "2026-11-16T00:45:34+00:00"}
+{"kind": "robots", "host": "www.cityofpeekskill.com", "error": "ConnectionError(ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))", "at": "2026-11-16T00:45:44+00:00"}
+{"kind": "robots", "host": "www.portchesterny.gov", "status": 200, "at": "2026-11-16T00:45:45+00:00", "final_url": "https://www.portchesterny.gov/robots.txt"}
+{"kind": "robots", "host": "www.vsvny.org", "status": 200, "at": "2026-11-16T00:45:45+00:00", "final_url": "https://www.vsvny.org/robots.txt"}
+{"kind": "robots", "host": "www.newbrunswick.com", "status": 200, "at": "2026-11-16T00:45:46+00:00", "final_url": "https://www.newbrunswick.com/robots.txt"}
+{"kind": "robots", "host": "www.cityofnewbrunswick.org", "status": 200, "at": "2026-11-16T00:45:47+00:00", "final_url": "https://cms3.revize.com/revize/brunswicknj/robots.txt"}
+{"kind": "robots", "host": "jamaica.nyc", "error": "ProxyError(MaxRetryError(\"HTTPSConnectionPool(host='jamaica.nyc', port=443): Max retries exceeded with url: /robots.txt (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection f", "at": "2026-11-16T00:45:47+00:00"}
+{"kind": "robots", "host": "www.orangenj.gov", "status": 200, "at": "2026-11-16T00:45:48+00:00", "final_url": "https://www.orangenj.gov/robots.txt"}
+{"kind": "page", "sent": true, "hood_id": "nj:long-branch", "url": "https://visitnj.org/city/long-branch", "status": 200, "at": "2026-11-16T00:46:04+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:jamaica-hills-briarwood", "url": "https://www.nycgovparks.org/parks/captain-tilly-park/history", "status": 403, "at": "2026-11-16T00:46:04+00:00", "robots": "group *"}
+{"kind": "page", "sent": false, "hood_id": "ct:shelton", "url": "https://www.cityofshelton.org/about/", "status": "rtificate verify failed: Hostname mismatch, certificate is not valid for \\'www.cityofshelton.org\\'. (_ssl.c:1035)\")))'))", "at": "2026-11-16T00:46:07+00:00", "attempted": true}
+{"kind": "page", "sent": false, "hood_id": "ct:shelton", "url": "https://www.cityofshelton.org/about/", "status": "rtificate verify failed: Hostname mismatch, certificate is not valid for \\'www.cityofshelton.org\\'. (_ssl.c:1035)\")))'))", "at": "2026-11-16T00:47:07+00:00", "attempted": true}
+{"kind": "page", "sent": true, "hood_id": "ny:yonkers", "url": "https://www.visitwestchesterny.com/about-westchester/communities-local-flair/southern-westchester/yonkers/", "status": 200, "at": "2026-11-16T00:47:08+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:white-plains", "url": "https://www.visitwestchesterny.com/discover/communities/mid-county/", "status": 200, "at": "2026-11-16T00:47:10+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:peekskill", "url": "https://www.visitwestchesterny.com/discover/communities/hudson-river/", "status": 200, "at": "2026-11-16T00:47:12+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:port-chester", "url": "https://www.visitwestchesterny.com/discover/communities/sound-shore/", "status": 200, "at": "2026-11-16T00:47:14+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:new-rochelle", "url": "https://www.visitwestchesterny.com/discover/communities/southern-westchester/", "status": 200, "at": "2026-11-16T00:47:16+00:00", "robots": "group *"}
+{"kind": "robots", "host": "ctvisit.com", "status": 200, "at": "2026-11-16T00:47:30+00:00", "final_url": "https://ctvisit.com/robots.txt"}
+{"kind": "page", "sent": true, "hood_id": "ct:shelton", "url": "https://ctvisit.com/listings/city-shelton", "status": 200, "at": "2026-11-16T00:47:33+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:port-chester", "url": "https://www.visitwestchesterny.com/about-westchester/communities-local-flair/sound-shore/port-chester/", "status": 200, "at": "2026-11-16T00:48:07+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:peekskill", "url": "https://www.visitwestchesterny.com/about-westchester/communities-local-flair/hudson-river/peekskill/", "status": 404, "at": "2026-11-16T00:48:08+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:white-plains", "url": "https://www.visitwestchesterny.com/about-westchester/communities-local-flair/mid-county/white-plains/", "status": 200, "at": "2026-11-16T00:48:10+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:city-of-orange", "url": "https://www.essexcountyparks.org/parks/monte-irvin-orange-park", "status": 200, "at": "2026-11-16T00:48:11+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:bloomfield", "url": "https://www.essexcountyparks.org/parks/brookdale-park", "status": 200, "at": "2026-11-16T00:48:12+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:belleville", "url": "https://www.essexcountyparks.org/parks/branch-brook-park", "status": 200, "at": "2026-11-16T00:48:13+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:south-orange", "url": "https://www.essexcountyparks.org/parks/south-mountain-reservation", "status": 200, "at": "2026-11-16T00:48:14+00:00", "robots": "group *"}

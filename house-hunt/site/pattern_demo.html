@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pattern demo: collapse to headlines</title>
+<style>
+/* ---------- theme (same token names as site/index.html) ---------- */
+:root{--paper:#FFF4F7;--ink:#3A1630;--muted:#7A5670;--berry:#E0457B;--berry-deep:#C12C62;--blush:#FFE7EF;
+  --butter:#FFD86B;--mint-ink:#1B6F50;--mint-bg:#DDF5EA;--coral-ink:#A5342B;--white:#fff;--line:#F3CADA;
+  --tap:44px;--r:14px;--focus:3px solid var(--berry-deep)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.4 system-ui,"Segoe UI",sans-serif}
+.wrap{max-width:430px;margin:0 auto;padding:0 16px 96px}
+:focus-visible{outline:var(--focus);outline-offset:2px;border-radius:6px}
+button{font:inherit;color:inherit}
+h1{font-size:26px;line-height:1.1;margin:0}
+.sub{margin:4px 0 0;color:var(--muted);font-size:14px}
+.kicker{margin:12px 0 2px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--berry-deep);font-weight:700}
+.crumb{display:inline-flex;align-items:center;min-height:var(--tap);color:var(--berry-deep);font-weight:600;text-decoration:none}
+.listhd{margin:18px 0 8px;font-size:18px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+[hidden]{display:none!important}
+
+/* demo-only view switch */
+.views{display:flex;gap:6px;padding:8px 0}
+.views button{flex:1;min-height:var(--tap);border:1px solid var(--line);background:var(--white);border-radius:999px;font-weight:600}
+.views button[aria-pressed=true]{background:var(--ink);color:var(--white);border-color:var(--ink)}
+
+/* ---------- (d) at-a-glance key-facts strip ---------- */
+.glance{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin:12px 0 0;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.glance>div{background:var(--white);margin:0}
+.glance button{display:flex;flex-direction:column-reverse;justify-content:center;width:100%;min-height:64px;padding:8px 4px;
+  border:0;background:none;text-align:center;cursor:pointer}
+.glance dd{margin:0;font-size:17px;font-weight:800;line-height:1.1;white-space:nowrap}
+.glance dt{font-size:11px;color:var(--muted);line-height:1.2;margin-top:3px}
+.glance small{display:block;font-size:10px;font-weight:500;color:var(--muted)}
+
+/* ---------- (b) two-line clamp with "More" ---------- */
+.host{margin:12px 0 0;padding:10px 12px;background:var(--blush);border-radius:var(--r)}
+.host p{margin:0}
+.js .clamp:not(.open){display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}
+.more{min-height:var(--tap);margin:-6px 0 -10px;padding:0 12px 0 0;border:0;background:none;color:var(--berry-deep);font-weight:700;cursor:pointer}
+
+/* ---------- (a) headline row: label + headline + subhead + chip + chevron ---------- */
+.rows{margin:14px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--white);overflow:hidden}
+.rows-bar{display:flex;justify-content:flex-end;margin:6px 0 -8px}
+.rows-bar button{min-height:var(--tap);border:0;background:none;color:var(--berry-deep);font-weight:600;cursor:pointer}
+.row+.row{border-top:1px solid var(--line)}
+.row>summary{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;align-items:center;
+  min-height:56px;padding:9px 12px;cursor:pointer;list-style:none}
+.row>summary::-webkit-details-marker{display:none}
+.row>summary:focus-visible{outline-offset:-3px}
+.row-l{grid-column:1;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.row-h{grid-column:1;margin:0;font-size:16px;font-weight:700;line-height:1.25}
+.row-s{grid-column:1;font-size:13px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.row[open] .row-s{white-space:normal}
+.chip{grid-column:2;grid-row:1;justify-self:end;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap;
+  background:var(--blush);color:var(--ink)}
+.chip.ok{background:var(--mint-bg);color:var(--mint-ink)}
+.chip.ask{background:var(--butter);color:var(--ink)}
+.chev{grid-column:2;grid-row:2;justify-self:end;width:20px;height:20px;stroke:var(--berry-deep);fill:none;stroke-width:2.5;
+  stroke-linecap:round;stroke-linejoin:round}
+.row[open] .chev{transform:rotate(180deg)}
+.row-b{padding:0 12px 12px;font-size:15px}
+.row-b ul{margin:0;padding-left:18px}
+.row-b li{margin:4px 0}
+.row-b dl{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0}
+.row-b dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.row-b .total{font-weight:800;border-top:1px solid var(--line);padding-top:4px}
+.link{min-height:var(--tap);padding:0;border:0;background:none;color:var(--berry-deep);font-weight:600;text-decoration:underline;cursor:pointer}
+.row-close{display:none}
+.js .row-close{display:block;min-height:var(--tap);margin:8px 0 -8px auto}
+/* height animation: progressive enhancement, instant where unsupported or motion is reduced */
+@media (prefers-reduced-motion:no-preference){
+  .chev{transition:transform .2s}
+  @supports (interpolate-size:allow-keywords){
+    :root{interpolate-size:allow-keywords}
+    .row::details-content{block-size:0;overflow:clip;transition:block-size .25s ease,content-visibility .25s allow-discrete}
+    .row[open]::details-content{block-size:auto}
+  }
+}
+
+/* ---------- (c) sticky jump chips with scrollspy ---------- */
+.jump{position:sticky;top:0;z-index:5;display:flex;gap:6px;margin:10px -16px 0;padding:6px 16px;overflow-x:auto;
+  background:var(--paper);border-bottom:1px solid var(--line);scrollbar-width:none}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:none;display:inline-flex;align-items:center;min-height:var(--tap);padding:0 14px;border:1px solid var(--line);
+  border-radius:999px;background:var(--white);color:var(--ink);font-size:14px;font-weight:600;text-decoration:none}
+.jump a[aria-current=true]{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.spy{scroll-margin-top:64px}
+
+/* compact place card: one line of name, one of facts, two-line host clamp */
+.card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:10px 12px;margin:8px 0;min-height:var(--tap);
+  background:var(--white);border:1px solid var(--line);border-radius:var(--r);color:inherit;text-decoration:none}
+.card b{font-size:16px}
+.card .pr{font-weight:800;font-size:17px;text-align:right}
+.card .f{grid-column:1/-1;font-size:13px;color:var(--muted)}
+.card .v{grid-column:1/-1;font-size:14px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}
+.btn{display:block;width:100%;min-height:48px;border:1px solid var(--line);border-radius:999px;background:var(--white);font-weight:700;cursor:pointer}
+.btn.main{background:var(--berry-deep);border-color:var(--berry-deep);color:var(--white)}
+.tray{position:fixed;left:0;right:0;bottom:0;z-index:6;padding:8px 16px;background:var(--white);border-top:1px solid var(--line)}
+.tray .btn{max-width:398px;margin:0 auto}
+
+/* ---------- (e) peek bottom sheet ---------- */
+dialog.sheet{position:fixed;inset:auto 0 0 0;width:100%;max-width:430px;max-height:70dvh;margin:0 auto;padding:0;border:0;
+  border-radius:18px 18px 0 0;background:var(--white);color:var(--ink);overflow:auto;overscroll-behavior:contain}
+dialog.sheet::backdrop{background:rgb(58 22 48/.45)}
+.sheet-top{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px 8px;background:var(--white)}
+.sheet-top::before{content:"";position:absolute;top:6px;left:50%;width:36px;height:4px;margin-left:-18px;border-radius:2px;background:var(--line)}
+.sheet-top h2{margin:0;font-size:18px}
+.sheet-top button{min-width:var(--tap);min-height:var(--tap);padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--white);font-weight:700;cursor:pointer}
+.sheet-body{padding:0 16px 20px;font-size:15px}
+@media (prefers-reduced-motion:no-preference){
+  dialog.sheet[open]{animation:sheet-up .22s ease-out}
+  @keyframes sheet-up{from{transform:translateY(40%);opacity:0}}
+}
+
+/* ---------- (f) compare: sticky names, swipeable columns, differences only ---------- */
+.cmp{--col:118px;margin-top:10px}
+.cmp-head{position:sticky;top:0;z-index:4;overflow:hidden;background:var(--paper);border-bottom:1px solid var(--line)}
+.cmp-body{overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain}
+.cmp-grid{display:grid;grid-template-columns:repeat(var(--n,3),minmax(var(--col),1fr));gap:6px;min-width:calc(var(--n,3)*var(--col) + (var(--n,3) - 1)*6px)}
+.cmp-head .cmp-grid{padding:6px 0}
+.cmp-head b{display:block;font-size:14px;line-height:1.15}
+.cmp-head span{font-size:13px;color:var(--muted)}
+.cmp-row{padding:8px 0;border-bottom:1px solid var(--line)}
+.cmp-row h3{margin:0 0 4px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cmp-row h3 span{position:sticky;left:0;display:inline-block}
+.cmp-row .cmp-grid>div{scroll-snap-align:start;padding:8px;background:var(--white);border:1px solid var(--line);border-radius:10px;font-size:14px}
+.cmp-row .cmp-grid b{display:block;font-size:17px}
+.cmp.diff .cmp-row[data-same]{display:none}
+.switch{display:flex;align-items:center;gap:10px;min-height:var(--tap);font-weight:600;cursor:pointer}
+.switch input{width:22px;height:22px;accent-color:var(--berry-deep)}
+.verdict{margin:10px 0 0;padding:10px 12px;border-radius:var(--r);background:var(--ink);color:var(--white)}
+.verdict p{margin:0}
+.seg{display:flex;margin:10px 0 0;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--white)}
+.seg button{flex:1;min-height:var(--tap);border:0;background:none;font-weight:600;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--blush)}
+.note{font-size:13px;color:var(--muted);margin:6px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="views" id="views">
+    <button type="button" data-view="place" aria-pressed="true">Place</button>
+    <button type="button" data-view="hood" aria-pressed="false">Neighborhood</button>
+    <button type="button" data-view="compare" aria-pressed="false">Compare</button>
+  </div>
+
+  <!-- ================= PLACE ================= -->
+  <main id="v-place">
+    <a class="crumb" href="#v-hood" data-go="hood">‹ Harbor Point</a>
+    <p class="kicker">Harbor Point · The Waterfront Year</p>
+    <h1>The Marlow, 5C</h1>
+    <p class="sub">1 bedroom · floor 5 · 150 Dock St · seen Nov 15</p>
+
+    <dl class="glance" aria-label="At a glance">
+      <div><button type="button" data-sheet="sh-cost"><dd>$2,674</dd><dt>a month, all-in</dt></button></div>
+      <div><button type="button" data-sheet="sh-space"><dd>502</dd><dt>square feet</dt></button></div>
+      <div><button type="button" data-sheet="sh-drive"><dd>53 min</dd><dt>to Mom and Dad</dt></button></div>
+      <div><button type="button" data-sheet="sh-dog"><dd>Yes</dd><dt>dogs, any size</dt></button></div>
+    </dl>
+
+    <div class="host">
+      <p class="clamp" id="host-place">A bright one-bedroom five floors up, with the garage right downstairs and a waterfront park three minutes from the lobby for the 9pm dog walk. The catch is the price: it is quoted on a 21-month lease, so ask what twelve months costs before you fall for it.</p>
+      <button type="button" class="more" aria-controls="host-place" aria-expanded="false" hidden>More</button>
+    </div>
+
+    <div class="rows-bar"><button type="button" id="allRows" aria-pressed="false">Open all</button></div>
+    <div class="rows" id="placeRows"><!-- built from data by headline functions, see script --></div>
+
+    <p class="note"><button type="button" class="link" data-sheet="sh-how">How we got this</button> · <button type="button" class="link" data-sheet="sh-contact">Leasing office</button></p>
+    <a class="card" href="#"><b>Up next: Parallel 41</b><span class="pr">$2,755</span><span class="f">1 bedroom · 800 sq ft · garage</span></a>
+    <div class="tray"><button type="button" class="btn main">Hold this place</button></div>
+  </main>
+
+  <!-- ================= NEIGHBORHOOD ================= -->
+  <main id="v-hood" hidden>
+    <a class="crumb" href="#">‹ The Waterfront Year</a>
+    <p class="kicker">Number 1 of 4 in this experience</p>
+    <h1>Harbor Point</h1>
+    <p class="sub">Stamford, Connecticut · among the safest on the list</p>
+
+    <dl class="glance" aria-label="At a glance">
+      <div><button type="button" data-sheet="sh-cost"><dd>$2,674<small>$2,345 to $2,867</small></dd><dt>typical all-in</dt></button></div>
+      <div><button type="button" data-sheet="sh-drive"><dd>53 min</dd><dt>to Mom and Dad</dt></button></div>
+      <div><button type="button" data-sheet="sh-drive"><dd>$0</dd><dt>tolls a visit</dt></button></div>
+      <div><button type="button" data-go-id="hood-places"><dd>10</dd><dt>places to see</dt></button></div>
+    </dl>
+
+    <div class="host">
+      <p class="clamp" id="host-hood">New towers on the water, a boardwalk that fills up at sunset, and more restaurants within ten minutes on foot than anywhere else on your list. It is the furthest drive home of the top three, and street parking is not a thing here: you will want the garage.</p>
+      <button type="button" class="more" aria-controls="host-hood" aria-expanded="false" hidden>More</button>
+    </div>
+
+    <nav class="jump" aria-label="On this page" id="hoodJump">
+      <a href="#hood-area">The area</a><a href="#hood-places">Places (10)</a><a href="#hood-avoid">Skip these (2)</a><a href="#hood-call">Worth a call (3)</a>
+    </nav>
+
+    <section class="spy" id="hood-area">
+      <div class="rows">
+        <details class="row" id="h-fit"><summary><span class="row-l">Good for you, watch for</span><h3 class="row-h">4 things to love, 2 to watch</h3><span class="row-s">Loves: the boardwalk, the dog park. Watch: garage fees.</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></summary>
+          <div class="row-b"><ul><li>Boardwalk and park three minutes away</li><li>Fenced dog park open until 10pm</li><li>29 restaurants within a ten-minute walk</li><li>Every building here has an elevator</li><li>Watch for: garage is $150 to $200 a month</li><li>Watch for: summer event traffic on Fridays</li></ul></div></details>
+        <details class="row" id="h-here"><summary><span class="row-l">What's here</span><h3 class="row-h">Garage parking, dog park, 29 places to eat</h3><span class="row-s">Grocery is a 6-minute walk; no street parking overnight.</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></summary>
+          <div class="row-b"><ul><li>For the car: garages in every building; no overnight street parking</li><li>For the dog: fenced park, pet spa, two vets within a mile</li><li>Food and coffee: 29 restaurants, 7 bars</li><li>Errands: grocery 6 min on foot, pharmacy 4</li></ul></div></details>
+        <details class="row" id="h-voices"><summary><span class="row-l">What residents say</span><h3 class="row-h">Quiet at night, pricey garages</h3><span class="row-s">14 short quotes across safety, noise, parking and dogs.</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></summary>
+          <div class="row-b"><ul><li>"I walk my dog at 11 and it is just other people walking dogs."</li><li>"The garage fee stings but I never circle for a spot."</li><li>"Friday concerts are loud until ten, then nothing."</li></ul><button type="button" class="link">11 more quotes</button></div></details>
+        <details class="row" id="h-desc"><summary><span class="row-l">How others describe it</span><h3 class="row-h">"A small city's new front porch"</h3><span class="row-s">3 outside descriptions, each with its source.</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></summary>
+          <div class="row-b"><ul><li>"A small city's new front porch" (regional magazine)</li><li>"Walkable, polished, a little corporate" (city guide)</li><li>"Where the commuters stay for dinner" (local paper)</li></ul></div></details>
+        <details class="row" id="h-rules"><summary><span class="row-l">Local rules</span><h3 class="row-h">Dog license needed; no overnight street parking</h3><span class="row-s">5 rules that touch the car and the dog.</span><span class="chip ask">2 to know</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></summary>
+          <div class="row-b"><ul><li>City dog license within 30 days, $19 a year</li><li>No street parking 2am to 6am</li><li>Leash required on the boardwalk</li></ul></div></details>
+        <details class="row" id="h-queens"><summary><span class="row-l">Compared to staying in Queens</span><h3 class="row-h">$93 more a month, 47 more minutes home</h3><span class="row-s">More to eat on foot; less space for the money.</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></summary>
+          <div class="row-b"><dl><dt>Monthly, all-in</dt><dd>$93 more</dd><dt>Space</dt><dd>138 sq ft less</dd><dt>Drive to Mom and Dad</dt><dd>47 min more</dd><dt>Restaurants on foot</dt><dd>12 more</dd></dl></div></details>
+      </div>
+    </section>
+
+    <section class="spy" id="hood-places">
+      <h2 class="listhd">Places to see</h2>
+      <a class="card" href="#v-place" data-go="place"><b>1. The Marlow, 5C</b><span class="pr">$2,674</span><span class="f">1 bed · 502 sq ft · garage · 1 thing to confirm</span><span class="v">Bright, five floors up, garage downstairs. Ask what a 12-month lease costs.</span></a>
+      <a class="card" href="#"><b>2. Parallel 41</b><span class="pr">$2,755</span><span class="f">1 bed · 800 sq ft · garage</span><span class="v">The big one: 800 square feet and a balcony over the courtyard.</span></a>
+      <a class="card" href="#"><b>3. Scribe House</b><span class="pr">$2,345</span><span class="f">Studio · 470 sq ft · garage $175</span><span class="v">The saver. Smallest of the three, newest building, rooftop dog run.</span></a>
+      <button type="button" class="btn">Show 7 more places</button>
+    </section>
+
+    <section class="spy" id="hood-avoid">
+      <div class="rows">
+        <details class="row" id="h-avoid"><summary><span class="row-l">Looks good, but avoid</span><h3 class="row-h">2 we'd skip, and why</h3><span class="row-s">One is ground-floor only; one caps dogs at 20 lb.</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></summary>
+          <div class="row-b"><ul><li>Atlantic Station West: only ground-floor units open</li><li>The Beacon: dogs up to 20 lb only</li></ul></div></details>
+      </div>
+    </section>
+    <section class="spy" id="hood-call">
+      <div class="rows">
+        <details class="row" id="h-call"><summary><span class="row-l">Worth a phone call</span><h3 class="row-h">3 more if the office confirms two things</h3><span class="row-s">Elevator or dog policy not published.</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></summary>
+          <div class="row-b"><ul><li>Vela on the Park: ask about the elevator and dogs</li><li>Postmark: ask whether the listing is still open</li><li>Summer House: ask about dogs over 25 lb</li></ul></div></details>
+      </div>
+      <p class="note"><button type="button" class="link" data-sheet="sh-how">How we got this</button></p>
+    </section>
+  </main>
+
+  <!-- ================= COMPARE ================= -->
+  <main id="v-compare" hidden>
+    <a class="crumb" href="#">‹ Back to the tour</a>
+    <h1>The decision</h1>
+    <div class="seg" role="group" aria-label="Which two to put in plain words" id="pairSeg">
+      <button type="button" aria-pressed="true" data-pair="0">1 and 2</button>
+      <button type="button" aria-pressed="false" data-pair="1">1 and 3</button>
+      <button type="button" aria-pressed="false" data-pair="2">2 and 3</button>
+    </div>
+    <div class="verdict" aria-live="polite"><p class="clamp open" id="verdict"></p></div>
+
+    <div class="cmp" id="cmp" style="--n:3">
+      <label class="switch"><input type="checkbox" id="diffOnly" checked> Only show what differs</label>
+      <p class="note" id="diffNote" role="status"></p>
+      <div class="cmp-head" id="cmpHead" aria-hidden="true"><div class="cmp-grid">
+        <div><b>1. The Marlow</b><span>$2,674</span></div><div><b>2. Parallel 41</b><span>$2,755</span></div><div><b>3. Scribe House</b><span>$2,345</span></div>
+      </div></div>
+      <div class="cmp-body" id="cmpBody" tabindex="0" role="region" aria-label="Side by side">
+        <section class="cmp-row"><h3><span>Monthly, all-in</span></h3><div class="cmp-grid"><div><span class="vh">The Marlow: </span><b>$2,674</b>21-month price</div><div><span class="vh">Parallel 41: </span><b>$2,755</b>12-month price</div><div><span class="vh">Scribe House: </span><b>$2,345</b>12-month price</div></div></section>
+        <section class="cmp-row"><h3><span>Space</span></h3><div class="cmp-grid"><div><span class="vh">The Marlow: </span><b>502 sq ft</b>1 bedroom</div><div><span class="vh">Parallel 41: </span><b>800 sq ft</b>1 bedroom</div><div><span class="vh">Scribe House: </span><b>470 sq ft</b>Studio</div></div></section>
+        <section class="cmp-row"><h3><span>Sunday with Mom and Dad</span></h3><div class="cmp-grid"><div><span class="vh">The Marlow: </span><b>53 min</b>no tolls</div><div><span class="vh">Parallel 41: </span><b>53 min</b>no tolls</div><div><span class="vh">Scribe House: </span><b>53 min</b>no tolls</div></div></section>
+        <section class="cmp-row"><h3><span>The 9pm dog walk</span></h3><div class="cmp-grid"><div><span class="vh">The Marlow: </span><b>3 min</b>to the park</div><div><span class="vh">Parallel 41: </span><b>5 min</b>to the park</div><div><span class="vh">Scribe House: </span><b>On the roof</b>dog run</div></div></section>
+        <section class="cmp-row"><h3><span>Parking when you get back</span></h3><div class="cmp-grid"><div><span class="vh">The Marlow: </span><b>Garage</b>in the building</div><div><span class="vh">Parallel 41: </span><b>Garage</b>in the building</div><div><span class="vh">Scribe House: </span><b>Garage</b>in the building</div></div></section>
+        <section class="cmp-row"><h3><span>Still to confirm</span></h3><div class="cmp-grid"><div><span class="vh">The Marlow: </span><b>1 thing</b>12-month price</div><div><span class="vh">Parallel 41: </span><b>Nothing</b>&nbsp;</div><div><span class="vh">Scribe House: </span><b>1 thing</b>which floor</div></div></section>
+      </div>
+    </div>
+    <div class="rows">
+      <details class="row" id="c-queens"><summary><span class="row-l">Compared to staying in Queens</span><h3 class="row-h">All three cost more and sit further out</h3><span class="row-s">$93 to $174 more a month; 47 more minutes home.</span><svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></summary>
+        <div class="row-b"><dl><dt>The Marlow</dt><dd>$93 more</dd><dt>Parallel 41</dt><dd>$174 more</dd><dt>Scribe House</dt><dd>$236 less</dd></dl></div></details>
+    </div>
+    <div class="tray"><button type="button" class="btn main">Copy my tour list</button></div>
+  </main>
+</div>
+
+<!-- (e) one dialog reused for every sheet; content comes from <template>s -->
+<dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+  <div class="sheet-top"><h2 id="sheetTitle"></h2><button type="button" id="sheetClose">Close</button></div>
+  <div class="sheet-body" id="sheetBody"></div>
+</dialog>
+<template id="sh-cost" data-title="What is in the $2,674"><dl class="row-b" style="padding:0;display:grid;grid-template-columns:1fr auto;gap:4px 12px"><dt>Rent (21-month price)</dt><dd>$2,345</dd><dt>Garage</dt><dd>$150</dd><dt>Pet rent</dt><dd>$50</dd><dt>Electric, gas, internet*</dt><dd>$129</dd><dt class="total">All-in</dt><dd class="total">$2,674</dd></dl><p class="note">* our estimate; the rest is from the listing, seen Nov 15.</p></template>
+<template id="sh-space" data-title="502 square feet"><p>One bedroom on floor 5. The size is from the listing's floor plan.</p></template>
+<template id="sh-drive" data-title="53 minutes to Mom and Dad"><p>Door to door by car without traffic, 31 miles, no tolls on the usual route. By train and bus it is about 1 hour 50.</p></template>
+<template id="sh-dog" data-title="Dogs welcome"><p>No weight limit, two pets at most, $50 a month pet rent and a $400 one-time fee. From the building's pet policy page.</p></template>
+<template id="sh-how" data-title="How we got this"><p>Prices, sizes and policies come from each listing page, with the date we saw it. Drive times are without traffic. Walks and counts are measured on the map.</p></template>
+<template id="sh-contact" data-title="Leasing office"><p>(203) 555-0149 · open 10 to 6, closed Sunday.</p></template>
+
+<script>
+(function(){
+"use strict";
+document.documentElement.classList.add("js");
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+function store(k,v){try{if(v===undefined)return JSON.parse(sessionStorage.getItem(k));sessionStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function money(n){return "$"+Math.round(n).toLocaleString("en-US")}
+
+/* ---------- headline functions: small, pure, tested ---------- */
+var U={name:"The Marlow",all_in:2674,rent:2345,cap:3000,lease_months:21,drive_min:53,toll:0,parking:"garage",parking_fee:150,
+  dog_limit_lb:null,pet_rent:50,elevator:true,floor:5,laundry:"in the unit",confirm:["What is the rent on a 12-month lease?"],
+  queens:{cost:93,drive:47},day:{walk_green:3,restaurants:29}};
+var H={
+  cost:function(u){return money(u.all_in)+" a month, all-in"},
+  costChip:function(u){return u.all_in<=u.cap?["ok",money(u.cap-u.all_in)+" under"]:["ask",money(u.all_in-u.cap)+" over"]},
+  confirm:function(u){var n=u.confirm.length;return n?n+(n===1?" thing":" things")+" to ask before you sign":"Nothing left to confirm"},
+  drive:function(u){return u.drive_min+" min to Mom and Dad, "+(u.toll?money(u.toll)+" in tolls":"no tolls")},
+  dog:function(u){return u.dog_limit_lb==null?"Dogs welcome, any size":"Dogs up to "+u.dog_limit_lb+" lb"},
+  building:function(u){return (u.elevator?"Elevator, ":"")+"floor "+u.floor+", laundry "+u.laundry},
+  day:function(u){return u.day.walk_green+" min to green space, "+u.day.restaurants+" places to eat on foot"},
+  queens:function(u){var q=u.queens;return money(Math.abs(q.cost))+(q.cost>0?" more":" less")+" a month, "+Math.abs(q.drive)+(q.drive>0?" more":" fewer")+" minutes home"}
+};
+console.assert(H.cost(U)==="$2,674 a month, all-in","cost");
+console.assert(H.costChip(U).join()==="ok,$326 under","costChip");
+console.assert(H.confirm({confirm:[]})==="Nothing left to confirm","confirm0");
+console.assert(H.drive({drive_min:40,toll:14})==="40 min to Mom and Dad, $14 in tolls","drive");
+console.assert(H.dog({dog_limit_lb:40})==="Dogs up to 40 lb","dog");
+
+/* one row = {id,label,headline (function-built),sub (written, optional),chip [kind,text] (optional),body html} */
+function rowHtml(r){return '<details class="row" id="'+r.id+'"><summary><span class="row-l">'+esc(r.label)+'</span><h3 class="row-h">'+esc(r.headline)+'</h3>'+
+  (r.sub?'<span class="row-s">'+esc(r.sub)+'</span>':'')+(r.chip?'<span class="chip '+r.chip[0]+'">'+esc(r.chip[1])+'</span>':'')+
+  '<svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg></summary><div class="row-b">'+r.body+
+  '<button type="button" class="link row-close">Close ↑</button></div></details>'}
+var PLACE_ROWS=[
+ {id:"p-confirm",label:"Still to confirm",headline:H.confirm(U),sub:"The price shown is for a 21-month lease.",chip:["ask","Ask"],
+  body:"<ul><li>What is the rent on a 12-month lease?</li><li>Is the free month taken up front or spread out?</li><li>Which floor is 5C on? Confirm it is above the ground floor.</li></ul>"},
+ {id:"p-cost",label:"What it costs",headline:H.cost(U),sub:"Rent $2,345, then garage, pet rent and utilities.",chip:H.costChip(U),
+  body:'<dl><dt>Rent (21-month price)</dt><dd>$2,345</dd><dt>Garage</dt><dd>$150</dd><dt>Pet rent</dt><dd>$50</dd><dt>Electric, gas, internet*</dt><dd>$129</dd><dt class="total">All-in</dt><dd class="total">$2,674</dd></dl><p class="note">* our estimate</p>'},
+ {id:"p-day",label:"A day here",headline:H.day(U),sub:"Work from the bedroom nook; the park for the 9pm walk.",
+  body:"<ul><li>Workday: own bedroom, 502 sq ft, quiet side of the building</li><li>9pm dog walk: lit waterfront park, 3 minutes</li><li>Saturday night: 7 bars and 29 restaurants within a mile; garage when you get back</li><li>Sunday: 53 minutes to Mom and Dad, no tolls</li></ul>"},
+ {id:"p-drive",label:"The car",headline:H.drive(U),sub:"Garage in the building, $150 a month, already counted.",
+  body:"<ul><li>31 miles by the usual route, without traffic</li><li>No tolls each way</li><li>Assigned garage space; guests park on Dock St until 2am</li></ul>"},
+ {id:"p-dog",label:"For the dog",headline:H.dog(U),sub:"$50 a month pet rent; dog park 3 minutes away.",chip:["ok","Yes"],
+  body:"<ul><li>No weight limit, two pets at most</li><li>$400 one-time pet fee</li><li>Pet spa off the lobby</li></ul>"},
+ {id:"p-bldg",label:"The building",headline:H.building(U),sub:"Pool, gym and a roof deck; 8 residents weigh in.",
+  body:'<ul><li>Elevators: two, plus a service lift</li><li>Washer and dryer in the unit</li><li>Pool, gym, roof deck, package room</li><li>"Maintenance shows up the same day." (resident)</li><li>"Thin walls on the courtyard side." (resident)</li></ul>'},
+ {id:"p-queens",label:"Compared to staying in Queens",headline:H.queens(U),sub:"You gain the water and a garage; you give up space.",
+  body:"<dl><dt>Monthly, all-in</dt><dd>$93 more</dd><dt>Space</dt><dd>138 sq ft less</dd><dt>Drive to Mom and Dad</dt><dd>47 min more</dd><dt>Restaurants on foot</dt><dd>12 more</dd></dl>"}
+];
+$("#placeRows").innerHTML=PLACE_ROWS.map(rowHtml).join("");
+
+/* ---------- (a) accordion behaviour on top of native <details> ---------- */
+function initRows(root,key){
+  var rows=$$("details.row",root),saved=store(key)||[],all=$("#allRows");
+  function sync(){store(key,rows.filter(function(d){return d.open}).map(function(d){return d.id}));
+    if(all&&root.contains($("#placeRows"))){var any=rows.some(function(d){return d.open});all.textContent=any?"Close all":"Open all";all.setAttribute("aria-pressed",String(any))}}
+  rows.forEach(function(d){
+    if(saved.indexOf(d.id)>-1)d.open=true;
+    d.addEventListener("toggle",function(){
+      if(!d.open){var t=d.getBoundingClientRect().top;if(t<56)window.scrollBy({top:t-64,behavior:"instant"})} /* never leave her below a section she just closed */
+      sync()});
+    var c=$(".row-close",d);if(c)c.addEventListener("click",function(){d.open=false;$("summary",d).focus({preventScroll:true})});
+  });
+  if(all&&root.id==="v-place")all.addEventListener("click",function(){var open=!rows.some(function(d){return d.open});rows.forEach(function(d){d.open=open})});
+  sync();
+}
+["place","hood","compare"].forEach(function(v){initRows($("#v-"+v),"rows:"+v)});
+
+/* ---------- (b) clamp: show "More" only when text is really cut ---------- */
+function initClamps(root){$$(".more",root).forEach(function(b){var p=document.getElementById(b.getAttribute("aria-controls"));
+  if(!p)return;if(!p.classList.contains("open"))b.hidden=p.scrollHeight<=p.clientHeight+1;
+  if(b.dataset.on)return;b.dataset.on=1;
+  b.addEventListener("click",function(){var o=p.classList.toggle("open");b.setAttribute("aria-expanded",String(o));b.textContent=o?"Less":"More"})})}
+
+/* ---------- (c) scrollspy for jump chips ---------- */
+function initJump(nav){
+  var links=$$("a",nav),secs=links.map(function(a){return document.getElementById(a.hash.slice(1))});
+  function mark(i){links.forEach(function(a,j){if(j===i)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current")});
+    var a=links[i];nav.scrollTo({left:a.offsetLeft-nav.clientWidth/2+a.offsetWidth/2,behavior:"instant"})}
+  function spy(){if(nav.offsetParent===null)return;var line=nav.getBoundingClientRect().bottom+8,cur=0;
+    secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<=line)cur=i});
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-2)cur=secs.length-1;mark(cur)}
+  var tick=0;window.addEventListener("scroll",function(){if(!tick){tick=1;requestAnimationFrame(function(){tick=0;spy()})}},{passive:true});
+  links.forEach(function(a,i){a.addEventListener("click",function(e){e.preventDefault();var s=secs[i];if(!s)return;
+    var d=s.matches("details")?s:$("details.row",s);if(d&&$$("details.row",s).length===1)d.open=true; /* a chip that lands on a single row opens it */
+    s.scrollIntoView({block:"start"});s.setAttribute("tabindex","-1");s.focus({preventScroll:true})})});
+  spy();return spy;
+}
+var spyHood=initJump($("#hoodJump"));
+
+/* ---------- (e) bottom sheet on native <dialog> ---------- */
+var sheet=$("#sheet");
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-sheet]");
+  if(b){var t=document.getElementById(b.dataset.sheet);if(!t||!sheet.showModal)return;
+    $("#sheetTitle").textContent=t.dataset.title;$("#sheetBody").replaceChildren(t.content.cloneNode(true));sheet.showModal();return}
+  if(e.target===sheet||e.target.id==="sheetClose")sheet.close(); /* backdrop tap or Close; Esc and focus return are native */
+});
+
+/* ---------- (f) compare ---------- */
+(function(){
+  var cmp=$("#cmp"),body=$("#cmpBody"),head=$("#cmpHead"),box=$("#diffOnly"),note=$("#diffNote"),same=0;
+  $$(".cmp-row",cmp).forEach(function(r){var v=$$(".cmp-grid>div",r).map(function(c){var k=c.cloneNode(true),h=$(".vh",k);if(h)h.remove();return k.textContent.trim()});
+    if(v.every(function(x){return x===v[0]})){r.setAttribute("data-same","");same++}});
+  function apply(){cmp.classList.toggle("diff",box.checked);note.textContent=same?(box.checked?same+" rows where they tie are hidden.":"Showing all rows, "+same+" of them ties."):""}
+  box.addEventListener("change",apply);apply();
+  body.addEventListener("scroll",function(){head.scrollLeft=body.scrollLeft},{passive:true});
+  var V=["Marlow costs $81 less a month than Parallel 41. Parallel 41 gives you 298 more square feet.",
+         "Scribe House costs $329 less a month than Marlow. Marlow gives you a bedroom door and 32 more square feet.",
+         "Scribe House costs $410 less a month than Parallel 41. Parallel 41 gives you 330 more square feet."];
+  function pair(i){$$("#pairSeg button").forEach(function(b,j){b.setAttribute("aria-pressed",String(i===j))});$("#verdict").textContent=V[i]}
+  $("#pairSeg").addEventListener("click",function(e){var b=e.target.closest("button");if(b)pair(+b.dataset.pair)});pair(0);
+})();
+
+/* ---------- demo view switch, with scroll restoration per view ---------- */
+var cur="place";
+function show(v,keep){store("y:"+cur,window.scrollY);cur=v;
+  ["place","hood","compare"].forEach(function(n){$("#v-"+n).hidden=n!==v});
+  $$("#views button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.view===v))});
+  initClamps($("#v-"+v));window.scrollTo(0,keep?(store("y:"+v)||0):0);spyHood()}
+$("#views").addEventListener("click",function(e){var b=e.target.closest("button");if(b)show(b.dataset.view,true)});
+document.addEventListener("click",function(e){var a=e.target.closest("[data-go]");if(a){e.preventDefault();show(a.dataset.go,false)}
+  var g=e.target.closest("[data-go-id]");if(g)document.getElementById(g.dataset.goId).scrollIntoView({block:"start"})});
+initClamps($("#v-place"));
+})();
+</script>
+</body>
+</html>

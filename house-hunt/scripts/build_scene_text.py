@@ -72,7 +72,10 @@ BLDG = {
 FROM_TOLLS = {"b_toll", "b_tollmax", "b_tollok"}       # read from data/enriched, not master_buildings.csv
 # alias: (column of site/data.json#neighborhoods, usual rounding)
 HOOD_PAGE = {"pg_lo": ("all_in_lo", "usd50"), "pg_hi": ("all_in_hi", "usd50"), "pg_n": ("shown", "int"),
-             "pg_sqft": ("sqft_median", "r10"), "pg_safe": ("violent_pctile", "pct")}
+             "pg_sqft": ("sqft_median", "r10"), "pg_safe": ("violent_pctile", "pct"),
+             # the page's 1-to-5 comparison with the Queens median (3 = about the same, 5 = much better for her)
+             "q_cost": ("vq_all_in", "int"), "q_sqft": ("vq_sqft", "int"), "q_drive": ("vq_drive_min", "int"),
+             "q_food": ("vq_food_and_drink_nearby", "int"), "q_green": ("vq_walk_to_green", "int")}
 # alias: (column of site/data.json#years, usual rounding)   the page's own tile figures
 YEAR_PAGE = {
     "p_allin": ("all_in", "usd50"), "p_allin_lo": ("all_in_lo", "usd50"), "p_allin_hi": ("all_in_hi", "usd50"),
@@ -82,6 +85,8 @@ YEAR_PAGE = {
     "p_rest": ("restaurants_800m", "int"), "p_parkwalk": ("park_walk_min", "int"),
     "p_hoods": ("neighborhoods", "int"), "p_places": ("shown", "int"),
     "p_near": ("nearest_name", "str"), "p_near_drive": ("nearest_drive_min", "int"),
+    "q_cost": ("vq_all_in", "int"), "q_sqft": ("vq_sqft", "int"), "q_drive": ("vq_drive_min", "int"),
+    "q_food": ("vq_food_and_drink_nearby", "int"), "q_green": ("vq_walk_to_green", "int"),
 }
 # alias: (column of site/data.json#units, aggregation over the year's shown units, usual rounding)
 YEAR_UNITS = {
@@ -272,6 +277,19 @@ def parse(path):
     for line in path.read_text(encoding="utf-8").splitlines():
         if line.startswith("#") or not line.strip():
             continue
+        m = re.match(r"=== sub: (year|hood)\.(\w+)", line)
+        if m:                                             # conditional drafts for a section subhead
+            cur = {"kind": "sub", "id": (m.group(1), m.group(2)), "rules": []}
+            blocks.append(cur)
+            continue
+        if cur is not None and cur["kind"] == "sub":
+            if not line.startswith("==="):
+                conds, sep, variants = line.partition("::")
+                if not sep:
+                    raise ValueError(f"cannot read subhead draft: {line[:80]}")
+                cur["rules"].append(([c.strip() for c in conds.split(",") if c.strip()],
+                                     [v.strip() for v in variants.split("|") if v.strip()]))
+                continue
         m = re.match(r"=== (year|hood): (.+)", line)
         if m:
             key = (m.group(1), m.group(2).strip())
@@ -294,6 +312,84 @@ def parse(path):
     return blocks
 
 
+COND = re.compile(r"^(?:v:(\w+):(positive|mixed|negative)|rule:(\w+)(?:~(.+))?|([a-z_0-9]+))\s*(==|!=|<=|>=|<|>)?\s*(.*)$")
+
+
+def hood_rules(hood_id, rule, pattern=None):
+    """Found local rules of this kind that apply to the neighborhood (and whose summary matches `pattern`, when one
+    is given: "rule:overnight_parking~banned|prohibited") -> [(file, municipality, summary)]."""
+    out = []
+    for f in (RULES, RULES2):
+        t = C.table(f)
+        if "applies_to_hood_ids" not in t.columns:
+            continue
+        for r in t[(t.value_type == "found") & (t.rule == rule)].itertuples():
+            ids = [x.strip() for x in str(r.applies_to_hood_ids).split(";")]
+            if pattern and not re.search(pattern, str(r.summary), re.I):
+                continue
+            if any(hood_id == i or hood_id.startswith(i + "-") for i in ids if i and i != "nan"):
+                out.append((f, r.municipality, r.summary))
+    return out
+
+
+def pick_sub(rules, ctx, salt):
+    """The first draft whose conditions all hold for this row -> (sentence, evidence). ('' , []) when none does.
+    Every condition becomes an evidence item with a test, so the checker re-runs it after a data change."""
+    import hashlib
+    for conds, variants in rules:
+        evs, ok = [], True
+        for cond in conds:
+            m = COND.match(cond)
+            if not m:
+                raise ValueError(f"cannot read condition '{cond}'")
+            theme, sent, rule, pattern, alias, op, operand = m.groups()
+            operand = operand.strip()
+            if theme:                                     # v:parking:negative>=1  (residents' comments, both files)
+                if ctx["kind"] != "hood":
+                    ok = False
+                    break
+                n, items = 0, []
+                for qf in (QUOTES, QUOTES2):
+                    row = {"hood_id": ctx["id"], "theme": theme}
+                    counts = C.lookup(qf, "sentiment", row, "sentiment_counts")
+                    n += int(dict(x.split("=") for x in counts.split(";"))[sent])
+                    if counts != "positive=0;mixed=0;negative=0":
+                        items.append({"field": "sentiment", "value": counts, "source_file": qf, "row": row,
+                                      "agg": "sentiment_counts"})
+                if not C.holds(n, [op or ">=", operand or "1"]):
+                    ok = False
+                    break
+                evs += items
+            elif rule:                                    # rule:overnight_parking  (a found local rule applies here)
+                found = hood_rules(ctx["id"], rule, pattern) if ctx["kind"] == "hood" else []
+                if not found:
+                    ok = False
+                    break
+                f, muni, summary = found[0]
+                evs.append({"field": "summary", "value": summary, "source_file": f,
+                            "row": {"municipality": muni, "rule": rule, "value_type": "found"}, "agg": "any_row",
+                            "transform": "in_text", "shown": []})
+            else:
+                try:
+                    src, field, row, agg, _ = resolve(alias, ctx)
+                    value = C.lookup(src, field, row, agg)
+                except (KeyError, LookupError):
+                    ok = False
+                    break
+                test = [op, operand]
+                if not op or not C.holds(value, test):
+                    ok = False
+                    break
+                ev = {"field": field, "value": value, "source_file": src, "row": row, "holds_if": test}
+                if agg:
+                    ev["agg"] = agg
+                evs.append(ev)
+        if ok:
+            i = int(hashlib.sha1(f"{ctx['id']}|{salt}".encode()).hexdigest()[:8], 16) % len(variants)
+            return variants[i], [{"claim": variants[i], **e} for e in evs]
+    return "", []
+
+
 YEAR_COLS = {"display": "display_label", "tagline": "tagline", "subhead": "subhead", "scene": "scene", "promise": "promise", "catch": "catch",
              "host_intro": "host_intro"}
 HOOD_COLS = {"scene": "scene", "good": "good_for_her", "watch": "watch_for", "host_intro": "host_intro"}
@@ -303,7 +399,11 @@ WALK = ["walk1", "walk2", "walk3"]                    # a weekday, a Saturday ni
 def main():
     lg = C.table(LG).set_index("hood_id")
     years, hoods, errors, stale = [], [], [], []
-    for b in parse(SOURCE):
+    blocks = parse(SOURCE)
+    subs = {b["id"]: b["rules"] for b in blocks if b["kind"] == "sub"}
+    for b in blocks:
+        if b["kind"] == "sub":
+            continue
         ctx, f, evidence = {"kind": b["kind"], "id": b["id"]}, b["f"], []
         cols = YEAR_COLS if b["kind"] == "year" else HOOD_COLS
         if b["kind"] == "hood" and b["id"] not in lg.index:       # the data no longer has this neighborhood
@@ -323,6 +423,9 @@ def main():
                     attach_voices(ctx, f["voices"], texts, evidence)
                 elif any(C.VOICE_PHRASE.search(t) for t in texts.values()):
                     raise ValueError(f"{b['id']}: paraphrases residents without a voices: line")
+            for section in C.SUB_SECTIONS[b["kind"]]:
+                texts["sub_" + section], evs = pick_sub(subs.get((b["kind"], section), []), ctx, section)
+                evidence += evs
             problems, _ = C.check_row(b["kind"], b["id"], texts, evidence)
             errors += [f"{b['id']}: {p}" for p in problems]
         except (KeyError, ValueError, LookupError) as e:

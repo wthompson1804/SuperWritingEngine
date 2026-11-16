@@ -8,6 +8,8 @@ units shown in the same neighbourhood first, then on their own), and fills one o
   host_line   1 or 2 sentences, at most 45 words: the most distinctive fact, then the price and one or two more facts
   host_catch  1 sentence: the open question (the asterisk) if the unit has one, else what the listing does not
               publish, else the weakest fact
+  sub_cost, sub_parking, sub_dog, sub_building   one optional short line (at most 14 words, no numbers) for under each
+              section headline of the place; empty when the fields give nothing distinctive to say
   facts_used_json   the pattern chosen and every value that was printed, so each word can be traced to a field
 
 Rules the code keeps (scripts/test_realtor_lines.py checks them):
@@ -478,10 +480,151 @@ def weakest(u, f, unknown=()):
     return "Nothing stands out as a problem on paper, which is exactly when a tour matters most.", "none", {}
 
 
+# ------------------------------------------------------------------ section subheads
+# One short line (at most 14 words, no numbers: the section's headline states them) under the cost, parking, dog and
+# building headlines of a place. Each is picked from a small library by what the unit's fields say; an unknown gets
+# an "ask" line, never a statement; when nothing distinctive can be said the subhead is empty.
+
+SUB_MAX_WORDS = 14
+SUBS = {
+    "cost": [
+        ("net_effective", ["The price shown is after a discount, so ask for the real monthly rent.",
+                           "This is a net-effective number, and the monthly bill will be higher."]),
+        ("ambiguous_rent", ["There is a special here, so ask what a normal month costs.",
+                            "Ask whether this price is before or after the free period."]),
+        ("tight", ["Right at your ceiling, so a single surprise fee tips it over.",
+                   "No room to spare here, so every unlisted fee matters."]),
+        ("unpublished", ["Some costs are unpublished, so treat this number as a floor.",
+                         "They leave some fees off the page, so ask for the full monthly bill."]),
+        ("roomy", ["Leaves real room under your ceiling for the things nobody lists.",
+                   "Comfortably inside your budget, with money left for the sofa."]),
+    ],
+    "parking": [
+        ("unknown", ["They say nothing about parking, so make it your opening question.",
+                     "Parking is not published here, so ask before you fall for it."]),
+        ("included", ["The spot comes with the lease, so the car costs nothing extra.",
+                      "Parking is part of the deal, so there is no monthly fee to chase."]),
+        ("garage_priced", ["Your car sleeps indoors, and you never circle the block.",
+                           "Pull in, park under a roof, and the day is over."]),
+        ("garage_unpriced", ["Indoor parking, but they don't publish the price, so ask before you fall for it.",
+                             "A garage with no price listed, so get the monthly fee in writing."]),
+        ("covered_priced", ["A roof over the car, with the price on the page.",
+                            "Covered parking, so no scraping ice in January."]),
+        ("covered_unpriced", ["Covered parking, though they don't publish the price, so ask.",
+                              "The car gets a roof, and the fee is a question for the office."]),
+        ("lot_priced", ["A spot in the building's lot, so you are off the street.",
+                        "Lot parking with a listed price, which beats hunting the curb."]),
+        ("lot_unpriced", ["A lot on site, but no price on the page, so ask.",
+                          "There is a lot, and what it costs is still a question."]),
+        ("onsite_unpriced", ["Parking exists on site, and the details are yours to ask for.",
+                             "They mention parking and little else, so ask what kind and how much."]),
+    ],
+    "dog": [
+        ("conflicting", ["The dog policy is unsettled, so get a yes in writing.",
+                         "Listings disagree about dogs here, so confirm before you tour."]),
+        ("onsite", ["The dog's first walk of the day can start in the elevator.",
+                    "A place for the dog without leaving the property."]),
+        ("near_run", ["A dog run is close enough for a quick morning lap.",
+                      "The dog gets a proper run before your first meeting."]),
+        ("small_only", ["The page says small dogs and gives no weight, so ask for the number.",
+                        "Small dogs are welcome, and the exact limit is a question to ask."]),
+        ("weight_limit", ["There is a weight limit, so check it against the dog you choose.",
+                          "Dogs are welcome up to a weight limit, so pick the puppy with that in mind."]),
+        ("pet_rent_unknown", ["Dogs are welcome, though they don't publish the pet rent, so ask.",
+                              "No pet rent on the page, so ask what the dog adds each month."]),
+    ],
+    "building": [
+        ("front_desk", ["Someone is at the desk when you come home late.",
+                        "A staffed front desk, which also means your packages wait for you."]),
+        ("doorman", ["A doorman at the door, and a familiar face after a long day.",
+                     "There is a doorman, so deliveries and late arrivals are easier."]),
+        ("pool_laundry", ["A pool downstairs and laundry in your own apartment.",
+                          "Laundry at home and a pool for the weekend."]),
+        ("laundry", ["Laundry happens in your own apartment, on your own schedule.",
+                     "The washer and dryer are yours alone."]),
+        ("pool", ["A pool comes with the building, and summer gets easier.",
+                  "There is a pool, and yes, you would use it."]),
+        ("gym", ["A gym in the building, which helps in February.",
+                 "The gym is an elevator ride away."]),
+    ],
+}
+
+
+def sub_keys(u, f):
+    """Which library entry applies in each section, from the unit's own fields. None = say nothing."""
+    rent = u.get("rent") or {}
+    unknown = u.get("all_in_unknown") or []
+    if rent.get("basis_kind") == "net_effective":
+        cost = "net_effective"
+    elif rent.get("asterisk") and rent.get("needs_call"):
+        cost = "ambiguous_rent"
+    elif f["margin"] is not None and f["margin"] < 100:
+        cost = "tight"
+    elif unknown:
+        cost = "unpublished"
+    elif f["margin"] is not None and f["margin"] >= 400:
+        cost = "roomy"
+    else:
+        cost = None
+    k = f["park_kind"]
+    if k is None:
+        parking = "unknown"
+    elif f["park_included"]:
+        parking = "included"
+    elif k == "onsite":
+        parking = "onsite_unpriced" if not f["park_fee"] else "lot_priced"
+    else:
+        parking = f"{k}_{'priced' if f['park_fee'] else 'unpriced'}"
+    dog_field = u.get("dog") or {}
+    limit = str(dog_field.get("weight_limit_lb") or "").strip().lower()
+    if str(dog_field.get("allowed") or "").lower() == "conflicting":
+        dog = "conflicting"
+    elif f["dog_amenity"] and "on site" in f["dog_amenity"]:
+        dog = "onsite"
+    elif f["dog_park_m"] is not None and f["dog_park_m"] <= 800:
+        dog = "near_run"
+    elif dog_field.get("size_note") and "small" in str(dog_field.get("size_note")).lower() and not limit:
+        dog = "small_only"
+    elif limit and limit != "no limit":
+        dog = "weight_limit"
+    elif dog_field.get("pet_rent") is None:
+        dog = "pet_rent_unknown"
+    else:
+        dog = None
+    if f["doorman"] == "24-hour":
+        building = "front_desk"
+    elif f["doorman"]:
+        building = "doorman"
+    elif f["pool"] and f["laundry"]:
+        building = "pool_laundry"
+    elif f["laundry"]:
+        building = "laundry"
+    elif f["pool"]:
+        building = "pool"
+    elif f["gym"]:
+        building = "gym"
+    else:
+        building = None
+    return {"cost": cost, "parking": parking, "dog": dog, "building": building}
+
+
+def compose_subs(u, f):
+    """-> ({sub_cost, sub_parking, sub_dog, sub_building}, {section: library key})"""
+    keys = sub_keys(u, f)
+    out = {}
+    for section, key in keys.items():
+        options = dict(SUBS[section]).get(key) if key else None
+        out["sub_" + section] = pick(options, f["id"], "sub_" + section) if options else ""
+    return out, keys
+
+
 # ------------------------------------------------------------------ the run
 
+FIELDS = ["listing_id", "host_line", "host_catch", "sub_cost", "sub_parking", "sub_dog", "sub_building", "facts_used_json"]
+
+
 def build(units):
-    """units: the `units` list of site/data.json. -> rows [{listing_id, host_line, host_catch, facts_used_json}]"""
+    """units: the `units` list of site/data.json. -> rows with the columns in FIELDS."""
     by_hood = defaultdict(list)
     for u in units:
         by_hood[u.get("hood_id")].append(u)
@@ -494,9 +637,11 @@ def build(units):
             line, pid, used = compose_line(f, peers, previous)
             previous = pid
             catch, ckind, cused = compose_catch(u, f)
-            rows.append({"listing_id": u["id"], "host_line": line, "host_catch": catch,
+            subs, sub_kinds = compose_subs(u, f)
+            rows.append({"listing_id": u["id"], "host_line": line, "host_catch": catch, **subs,
                          "facts_used_json": json.dumps({"hood_id": hood, "pattern": pid, "line": used, "catch_kind": ckind,
-                                                        "catch": cused}, ensure_ascii=False, sort_keys=True)})
+                                                        "catch": cused, "subs": sub_kinds},
+                                                       ensure_ascii=False, sort_keys=True)})
     return rows
 
 
@@ -508,7 +653,7 @@ def main():
     units = json.loads(Path(a.data).read_text(encoding="utf-8"))["units"]
     rows = build(units)
     with open(a.out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=["listing_id", "host_line", "host_catch", "facts_used_json"])
+        w = csv.DictWriter(fh, fieldnames=FIELDS)
         w.writeheader()
         w.writerows(rows)
     from collections import Counter

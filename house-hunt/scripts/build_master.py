@@ -540,6 +540,10 @@ def main():
             # 'stated' only when the page lists an elevator; a harvester's "6+ floors" note is an inference (W3)
             M.add(b, "elevator", "yes", "inferred" if el_basis.startswith("inferred") else ("official_record" if el_basis.startswith("nyc") else "stated"),
                   src if not el_basis.startswith("nyc") else "NYC PLUTO building class " + getattr(r, "pluto_class", ""))
+        if str(getattr(r, "pluto_class", "")).upper().startswith("D") and official_elevator_ok(r.addr_key):
+            # the city classes this lot (the listing's own address) as an elevator apartment building, with no zero on the
+            # device list: an official record beside whatever the listing says (so the elevator does not rest on a listing site alone)
+            M.add(b, "elevator", "yes", "official_record", "NYC PLUTO building class " + getattr(r, "pluto_class", ""))
         if r.addr_key in lot_addr:
             M.add(b, "pluto_lot_ok", "yes" if lot_ok.get(r.addr_key) else "no", "official_record", "data/reference/nyc_building_facts.csv")
             M.add(b, "pluto_lot_address", lot_addr[r.addr_key], "official_record", "data/reference/nyc_building_facts.csv")

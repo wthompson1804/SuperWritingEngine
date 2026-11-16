@@ -10,5 +10,37 @@
   "url": "https://www.citylineeast.com/",
   "at": "2026-11-16T00:33:22+00:00",
   "by": "evidence_batch_19"
+ },
+ "www.yonkersny.gov": {
+  "reason": "HTTP 403 on robots.txt",
+  "status": "HTTP 403 on robots.txt",
+  "at": "2026-11-16T00:44:57+00:00",
+  "time": "2026-11-16T00:44:57+00:00",
+  "url": "https://www.yonkersny.gov/robots.txt",
+  "by": "scripts/neighborhood_descriptions_round2.py"
+ },
+ "www.mta.info": {
+  "reason": "HTTP 403 on robots.txt",
+  "status": "HTTP 403 on robots.txt",
+  "at": "2026-11-16T00:45:02+00:00",
+  "time": "2026-11-16T00:45:02+00:00",
+  "url": "https://www.mta.info/robots.txt",
+  "by": "scripts/neighborhood_descriptions_round2.py"
+ },
+ "www.nycgovparks.org": {
+  "reason": "HTTP 403",
+  "status": "HTTP 403",
+  "at": "2026-11-16T00:46:04+00:00",
+  "time": "2026-11-16T00:46:04+00:00",
+  "url": "https://www.nycgovparks.org/parks/captain-tilly-park/history",
+  "by": "scripts/neighborhood_descriptions_round2.py"
+ },
+ "visitnj.org": {
+  "reason": "Incapsula bot-challenge page served instead of the article (HTTP 200, 212 bytes)",
+  "status": "Incapsula bot-challenge page served instead of the article (HTTP 200, 212 bytes)",
+  "at": "2026-11-16T00:46:25+00:00",
+  "time": "2026-11-16T00:46:25+00:00",
+  "url": "https://visitnj.org/city/long-branch",
+  "by": "scripts/neighborhood_descriptions_round2.py"
  }
 }
