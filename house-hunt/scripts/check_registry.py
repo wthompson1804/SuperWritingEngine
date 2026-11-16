@@ -39,6 +39,7 @@ DISPLAY = {  # pattern -> why it is kept but not scored
     r"^(parking_text|optional_fees_text|dog_weight_text|dogs_allowed_note|elevator_note)$": "source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)",
     r"^(price_term_text|price_lease_quote|price_lease_source|pluto_lot_address|review_kind)$": "source sentence or record behind the lease-term asterisk and the NYC lot check (independent check 2)",
     r"^(dob_active_elevators)$": "the city's count of active passenger elevators on the lot: gate input in build_master.py, asserted in this script",
+    r"^(disclosures|more_in_building)$": "shown on the unit card: conditions to know (never an open gate fact), and further showable units in the building",
     r"^(duplicate_listing_ids)$": "other listings of the same unit, merged into this row (their links are in also_seen_at)",
     r"^(near_vs_baseline|crime_latest|crime_source|crime_year|nyc_record_flags)$": "context shown when she asks how a score was reached",
     r"^nycrec_": "NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule",
@@ -91,12 +92,21 @@ def shown_violations():
     open_cost = (num("all_in") >= CAP - 100) & (num("all_in_unknown_count").fillna(0) >= 1)
     open_avail = (S.unit.map(parsers.unit_label_key) == "") & ((col("detail_level") == "building_floorplan") | col("listing_id").str.contains(":plan-") | (S.unit.str.strip() != ""))
     open_listing = col("listing_warning") != ""
-    opens = {"elevator": open_e, "floor": open_f, "dogs allowed": open_d, "lease term": open_lease, "cost near the cap": open_cost,
-             "availability": open_avail, "listing": open_listing, "eligibility": open_e & False, "condo rules": open_e & False, "other": open_e & False}
+    # GATE facts count toward "at most one open"; DISCLOSURES (lease term, cost near the cap, condo rented by its owner,
+    # net-effective rent) never do, but must be listed on the unit (owner, 2026-11-16)
+    opens = {"elevator": open_e, "floor": open_f, "dogs allowed": open_d, "availability": open_avail, "listing": open_listing, "eligibility": open_e & False}
+    disc = col("disclosures")
+    flag(open_lease & ~disc.str.contains('"what": "lease term"', regex=False), "price is for a lease over 13 months but the disclosure 'lease term' is missing")
+    flag(open_cost & ~disc.str.contains('"what": "cost near the cap"', regex=False), "cost near the cap with an unknown line but the disclosure is missing")
+    flag((col("rent_basis_kind") == "net_effective") & ~disc.str.contains('"what": "net-effective rent"', regex=False), "net-effective rent without its disclosure")
+    flag(disc.str.contains('"what": "(?:elevator|floor|dogs allowed|availability|listing|eligibility)"'), "a gate fact is listed as a disclosure")
     import verdicts
     V = verdicts.load_verdicts().drop_duplicates("listing_id", keep="last").set_index("listing_id")
-    KIND_LABEL = {"elevator": "elevator", "floor": "floor", "dogs": "dogs allowed", "lease_term": "lease term", "not_available": "availability", "unverified": "listing",
-                  "wrong_building": "listing", "restricted": "eligibility", "coop_condo": "condo rules", "other": "other"}
+    KIND_LABEL = {"elevator": "elevator", "floor": "floor", "dogs": "dogs allowed", "not_available": "availability", "unverified": "listing",
+                  "wrong_building": "listing", "restricted": "eligibility"}
+    vdisc = S.listing_id.map(lambda l: V.at[l, "kind"] if l in V.index and V.at[l, "verdict"] == "asterisk" else "")
+    flag(vdisc.isin(["coop_condo", "other"]) & ~disc.str.contains('"what": "condo rented by its owner"', regex=False), "a reviewer's condo verdict is not among the disclosures")
+    flag((vdisc == "lease_term") & ~disc.str.contains('"what": "lease term"', regex=False), "a reviewer's lease-term verdict is not among the disclosures")
     vlab = S.listing_id.map(lambda l: KIND_LABEL.get(V.at[l, "kind"], "") if l in V.index and V.at[l, "verdict"] == "asterisk" else "")
     for lab in opens:
         opens[lab] = opens[lab] | (vlab == lab)
@@ -129,6 +139,7 @@ def shown_violations():
     key = key.where(~nolabel, S.building_id + "|" + col("beds") + "|" + col("sqft") + "|" + col("listed_rent"))
     flag(key.duplicated(keep=False), "duplicate unit on the shown list")
     flag(col("review_verdict") == "remove", "a reviewed verdict says remove")
+    flag(~(num("evidence_rows") > 0), "the building has no evidence rows: nothing was read, so the unit cannot be shown")
     flag(S.groupby("building_id").listing_id.transform("count") > MAX_PER_BUILDING, f"more than {MAX_PER_BUILDING} shown in one building")
     flag(col("safety_cut").str.lower() == "true", "safety_cut neighborhood")
     gf = DATA / "lifestyle_groups.csv"

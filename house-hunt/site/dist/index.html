@@ -549,7 +549,7 @@ var RULE_FLAG=[
    CONFIRM_WORD only tidies the kinds it knows. Any other text in confirm.what is shown exactly as the data gives it. */
 var CONFIRM_WORD={floor:"the floor",elevator:"the elevator","dogs allowed":"whether dogs are allowed","live check":"that the listing is still live",
   "lease term":"the lease term behind this price","cost near the cap":"pet rent, parking and fees (cost near the cap)",availability:"that a unit is available",
-  listing:"that the listing is genuine and for this building",eligibility:"that the unit is open to any renter","condo rules":"the building's rules for renting this unit",other:"one more thing (see the card)"};
+  listing:"that the listing is genuine and for this building",eligibility:"that the unit is open to any renter","condo rules":"the building's rules for renting this unit",other:"one more thing"};
 var CONFIRM_Q={floor:[/floor/i,"Which floor is the unit on?"],elevator:[/elevator/i,"Does the building have an elevator?"],"dogs allowed":[/dogs allowed/i,"Are dogs allowed?"],"live check":[/still available/i,"Is this unit still available, and at what price?"]};
 var Q_PARKING="Where do residents park overnight, and is a permit needed?";
 var Q_EVIDENCE="How are repairs handled, and how often has the elevator been out of service? (no public records or readable reviews were found for this building)";
@@ -597,7 +597,7 @@ WAIT_ONLY.forEach(function(a){(WAIT_BY_HOOD[a.hood_id]=WAIT_BY_HOOD[a.hood_id]||
 YEARS.forEach(function(Y,i){
   Y_BY[Y.id]=Y;Y.color=YEAR_COLORS[i%YEAR_COLORS.length];
   /* The data calls these "years"; the page calls them experiences. Only the shown label changes, never a key. */
-  Y.label=String(Y.label||Y.id).replace(/ Year$/," Experience");
+  Y.label=String(Y.display_label||Y.label||Y.id).replace(/ Year$/," Experience");
   Y.short=Y.label.replace(/^The\s+/,"").replace(/\s+Experience$/,"");
   Y.hoods=(Y.hood_ids||[]).map(function(id){return H_BY[id]}).filter(Boolean);
   /* Neighborhood order: rank_in_experience (1 is best) when the data has it, otherwise the order given. */
@@ -672,9 +672,9 @@ function first(o,keys){for(var i=0;i<keys.length;i++){var v=o&&o[keys[i]];if(v!=
 function numOf(v){var n=typeof v==="number"?v:parseFloat(String(v==null?"":v).replace(/[$,]/g,""));return isFinite(n)?n:null}
 function isNum(v){return typeof v==="number"||/^\s*\d+(\.\d+)?\s*$/.test(String(v))}
 var LEASE_KEYS=["lease_months","lease_term_months","lease_term"],LEASE_TEXT_KEYS=["lease_term_text","lease_terms_text","lease_term"],P12_KEYS=["price_12mo","rent_12mo","price_12_month","rent_12_month","price_12_months","rent_12_months","twelve_month_price","twelve_month_rent"];
-function leaseMonths(U){var v=first(U.rent,LEASE_KEYS);if(v==null)v=first(U,LEASE_KEYS);return v!=null&&isNum(v)?numOf(v):null}
+function leaseMonths(U){var v=first(U.rent,LEASE_KEYS);if(v==null)v=first(U,LEASE_KEYS);if(v==null)v=first(U.cost_check,LEASE_KEYS);return v!=null&&isNum(v)?numOf(v):null}
 function leaseText(U){var v=first(U.rent,LEASE_TEXT_KEYS);if(v==null||isNum(v))v=first(U,LEASE_TEXT_KEYS);return v!=null&&!isNum(v)?String(v):null}
-function price12(U){var v=first(U.rent,P12_KEYS);if(v==null)v=first(U,P12_KEYS);return numOf(v)}
+function price12(U){var v=first(U.rent,P12_KEYS);if(v==null)v=first(U,P12_KEYS);if(v==null)v=first(U.cost_check,P12_KEYS);return numOf(v)}
 function netEff(U){return U.rent.basis_kind==="net_effective"}
 function rentStar(U){return !!(U.rent.asterisk||netEff(U))}
 function leaseBits(U){var lm=leaseMonths(U),p=price12(U),o=[];
@@ -714,7 +714,7 @@ function contactBox(U){var c=U.contact;if(!c||typeof c!=="object")return "";var 
   return '<div class="contact"><h4>Phone and hours'+(c.kind?'<small style="display:block;font-family:var(--body);font-size:13px;font-weight:700;color:var(--muted)">'+esc(humanize(c.kind))+'</small>':'')+'</h4>'+
     (ph?'<p class="telrow"><span class="tel">'+esc(ph)+'</span><button type="button" class="btn sm" data-act="copy-text" data-v="'+esc(ph)+'">Copy number</button></p>':'<p class="facts">Phone number: '+NK.toLowerCase()+'.</p>')+
     '<p><b>Hours:</b> '+esc(c.hours?String(c.hours):NK.toLowerCase())+'</p>'+(c.note?'<p>'+esc(String(c.note))+'</p>':'')+
-    (site?'<a class="link" href="'+esc(site)+'" target="_blank" rel="noopener noreferrer">'+esc(hostOf(site))+' ↗</a>':'')+'</div>'}
+    (site?'<a class="link" href="'+esc(site)+'" target="_blank" rel="noopener noreferrer">'+esc(hostOf(site))+' ↗</a>':'')+(okUrl(c.source)&&c.source!==c.site?'<p class="facts">Where this was found:'+ext(c.source,hostOf(c.source))+'</p>':'')+'</div>'}
 /* Quotes never show a handle, even if one slips into an excerpt. */
 function scrub(t){return String(t==null?"":t).replace(/(^|[\s(\[])(?:u\/|@)[A-Za-z0-9_-]{2,}/g,"$1a resident")}
 
@@ -750,10 +750,11 @@ function rulesBlock(a,order,what){a=sortRules(a,order);var top=a.slice(0,RULES_S
 /* Things still to confirm. Reads unit.confirm (one object or a list), unit.confirms / unit.asterisks (lists), or flat
    confirm_what / confirm_why / what_to_confirm. Each item: what (also what_to_confirm, confirm_what, kind, label),
    why (also confirm_why, reason), and optionally question (also ask). The text is shown as given. */
+function noZero(t){return String(t==null?"":t).replace(/\s*\((?:and )?count(?:ed|s)? as \$0\)/gi,"").replace(/\bcount(?:ed|s)? as \$0\b/gi,"left out of the total")}
 function confItem(x){if(!x)return null;if(typeof x==="string")return {what:x,why:"",ask:""};if(typeof x!=="object"||x.asterisk===false)return null;
   var what=x.what||x.what_to_confirm||x.confirm_what||x.kind||x.label||"",why=x.why||x.confirm_why||x.reason||"",ask=x.question||x.ask||"";
   if(Array.isArray(what))what=what.join("; ");if(Array.isArray(why))why=why.join(" ");
-  if(!what&&!why&&x.asterisk!==true)return null;return {what:String(what),why:String(why),ask:String(ask)}}
+  if(!what&&!why&&x.asterisk!==true)return null;return {what:String(what),why:noZero(why),ask:String(ask)}}
 function confs(U){if(U._confs)return U._confs;var o=[],seen={};
   function add(x){(Array.isArray(x)?x:[x]).forEach(function(y){var c=confItem(y);if(!c)return;var k=c.what+"|"+c.why;if(!seen[k]){seen[k]=1;o.push(c)}})}
   add(U.confirm);add(U.confirms);add(U.asterisks);
@@ -1200,7 +1201,7 @@ function vYear(Y){
 function vHood(H){
   var Y=Y_BY[H.year],hs=Y.hoods,ix=hs.indexOf(H),nx=ix>-1?hs[ix+1]:null,nxY=YEARS[YEARS.indexOf(Y)+1],N=H.units.length,k=H.units.filter(fits).length,r=H.all_in_range,t=H.traits||{},s=H.safety||{},loc=H.local||{};
   var h='<div class="wrap">';
-  h+='<section class="sec" style="margin-top:14px"><div class="hero"><div class="art">'+hoodArt(H)+'</div><div class="body"><p class="kicker">'+esc(Y.label)+'</p><h1>'+esc(H.name)+'</h1><p class="facts">'+esc(hoodWhere(H))+' · '+esc(hoodDrive(H))+' · '+(H.toll_round_trip==null?'tolls not known yet':H.toll_round_trip===0?'no tolls':money(H.toll_round_trip)+' in tolls a visit')+(H.transit_min!=null?' · '+r0(H.transit_min)+' min by train and bus':'')+'</p>'+(N?'<button type="button" class="btn main wide" data-act="scrollto" data-to="sec-places">See its '+pl(N,"place")+' ↓</button>':'')+'</div></div></section>';
+  h+='<section class="sec" style="margin-top:14px"><div class="hero"><div class="art">'+hoodArt(H)+'</div><div class="body"><p class="kicker">'+esc(Y.label)+'</p><h1>'+esc(H.name)+'</h1><p class="facts">'+esc(hoodWhere(H))+' · '+esc(hoodDrive(H))+' · '+(H.toll_round_trip==null?'tolls not known yet':H.toll_round_trip===0?'no tolls':money(H.toll_round_trip)+' in tolls a visit')+(H.transit_min!=null?' · '+r0(H.transit_min)+' min by train and bus':'')+'</p>'+(H.rank_in_experience!=null&&ix>-1?'<p class="facts" id="hood-rank">Number '+(ix+1)+' of '+hs.length+' in this experience'+(H.experience_score_basis?' ('+esc(String(H.experience_score_basis))+')':'')+'</p>':'')+(N?'<button type="button" class="btn main wide" data-act="scrollto" data-to="sec-places">See its '+pl(N,"place")+' ↓</button>':'')+'</div></div></section>';
   var hScene=slotText(pr(H,"scene")||loc.scene),good=slotText(pr(H,"good_for_her")||loc.good_for_her),watch=slotText(pr(H,"watch_for")||loc.watch_for),hIntro=hostBox(hostOfRec(H,"intro"),null,false,"host-intro");
   if(hIntro)h+='<section class="sec">'+hIntro+'</section>';
   if(hScene||good||watch)h+='<section class="sec" id="sec-scene">'+hScene+(good||watch?'<div class="two"'+(hScene?' style="margin-top:12px"':'')+'>'+(good?'<div class="panel love"><h4>Good for you</h4>'+good+'</div>':'')+(watch?'<div class="panel pause"><h4>Watch for</h4>'+watch+'</div>':'')+'</div>':'')+'</section>';

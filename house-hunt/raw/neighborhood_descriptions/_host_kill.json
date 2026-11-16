@@ -1,0 +1,6 @@
+{
+ "en.wikipedia.org": {
+  "reason": "HTTP 429 'You are making too many requests to the API' on the first REST summary request of the session (2026-11-16)",
+  "at": "2026-11-16T00:16:17+00:00"
+ }
+}

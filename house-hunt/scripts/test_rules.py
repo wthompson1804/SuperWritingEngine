@@ -140,7 +140,8 @@ def data():
         eq((m(lid, "unit_floor"), m(lid, "unit_floor_basis")), ("2", "confirmed"), "D10: Avalon Somerville 022-265 confirmed floor 2 must land")
     for lid in S.index:
         if (S.at[lid, "price_lease_months"] or "0").isdigit() and int(S.at[lid, "price_lease_months"] or 0) > 13:
-            ok("lease term" in S.at[lid, "confirm_what"], f"D8: shown unit {lid} on a {S.at[lid, 'price_lease_months']}-month price must carry the lease-term asterisk")
+            ok('"what": "lease term"' in S.at[lid, "disclosures"], f"D8: shown unit {lid} on a {S.at[lid, 'price_lease_months']}-month price must carry the lease-term disclosure")
+            ok("lease term" not in S.at[lid, "confirm_what"], f"D8: lease term is a disclosure, not an open gate fact ({lid})")
     # D10: floors read from the unit number are not "confirmed"; amenity floors are not "stated"
     for addr, unit in [("89-25 162nd", "1003"), ("92-29 guy r brewer", "1307"), ("8267 austin", "916")]:
         x = M[M.addr_key.str.contains(addr) & (M.unit == unit)]
@@ -160,7 +161,12 @@ def data():
         ok(c in M.columns, f"D12: column {c}")
     ok((pd.to_numeric(M.cap_margin) == 3000 - pd.to_numeric(M.all_in)).all(), "D12: cap_margin = 3000 - all_in")
     near = S[(pd.to_numeric(S.all_in) >= 2900) & (pd.to_numeric(S.all_in_unknown_count) >= 1)]
-    ok(near.confirm_what.str.contains("cost near the cap").all(), "D12: every shown unit at $2,900+ with an unknown cost line carries the asterisk")
+    ok(near.disclosures.str.contains('"what": "cost near the cap"', regex=False).all(), "D12: every shown unit at $2,900+ with an unknown cost line carries the disclosure")
+    ok(not S.confirm_what.str.contains("cost near the cap|lease term|condo").any(), "disclosures never count as the open gate fact")
+    ok((S.open_gate_facts.astype(float) <= 1).all(), "a shown unit has at most one open gate fact")
+    sk_ = pd.read_csv(DATA / "excluded_sketchy.csv", dtype=str, keep_default_na=False, low_memory=False)
+    ok(not sk_.sketchy_reason.str.contains("cost near the cap|lease term").any(), "no unit is dropped as sketchy because of a disclosure")
+    ok("more_in_building" in S.columns and (S.groupby("building_id").size() <= 2).all(), "at most 2 shown per building, with more_in_building recorded")
     # D13 / D14 / D15
     for lid, c, want in [("rc:sightmap:scribe:508", "required building fees\", \"amount\": 100", True), ("rc:sightmap:the-asher:530", "required building fees\", \"amount\": 100", True)]:
         if lid in M.index:
@@ -193,7 +199,8 @@ def data():
     ok(not set(V[V.verdict == "remove"].listing_id) & set(R.index), "verdicts: a unit with verdict remove is still ranked")
     for r in V[V.verdict == "asterisk"].itertuples():
         if r.listing_id in S.index:
-            ok(S.at[r.listing_id, "confirm_asterisk"] == "yes", f"verdicts: {r.listing_id} has an asterisk verdict but is shown without an asterisk")
+            ok(S.at[r.listing_id, "confirm_asterisk"] == "yes" or (r.kind in ("lease_term", "coop_condo", "other") and S.at[r.listing_id, "disclosures"] != ""),
+               f"verdicts: {r.listing_id} has an asterisk verdict but is shown without an asterisk or a disclosure")
     ok(set(S.index) <= set(V[V.verdict.isin(["ok", "asterisk"])].listing_id), "verdicts: a shown unit has no ok / asterisk verdict")
     # 62 Treat St: plan "103" reads as floor 1; plan "208" must not be excluded with it
     X = pd.read_csv(DATA / "unit_exclusions.csv", dtype=str, keep_default_na=False)

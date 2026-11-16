@@ -1,0 +1,12 @@
+# START YOAST BLOCK
+# ---------------------------
+User-agent: *
+Disallow: /poi/
+Disallow: /floor_plans/
+User-agent: Yandexbot
+Disallow: /
+User-agent: Baidu
+Disallow: /
+
+# ---------------------------
+# END YOAST BLOCK

@@ -50,21 +50,26 @@ BOROUGHS = {"36061": "Manhattan", "36005": "The Bronx", "36081": "Queens", "3604
 
 # Place-name labels: neutral geography only. (text, lat, lon, kind, min_zoom)
 LABELS = [
-    ("Atlantic Ocean", 40.33, -73.45, "water", 1),
-    ("Long Island Sound", 41.06, -73.12, "water", 1),
+    ("Atlantic Ocean", 40.22, -73.25, "water", 1),
+    ("Long Island Sound", 41.07, -72.98, "water", 1),
     ("Hudson River", 41.02, -73.895, "water", 5),
     ("Upper Bay", 40.665, -74.045, "water", 5),
-    ("New Jersey", 40.62, -74.62, "state", 1),
-    ("Connecticut", 41.62, -73.28, "state", 1),
-    ("Hudson Valley", 41.52, -74.05, "state", 1),
-    ("Long Island", 40.80, -73.28, "state", 1),
-    ("Pennsylvania", 40.93, -75.02, "state", 2),
+    ("Jamaica Bay", 40.615, -73.84, "water", 6),
+    ("New Jersey", 40.48, -74.52, "state", 1),
+    ("Connecticut", 41.76, -73.3, "state", 1),
+    ("Hudson Valley", 41.62, -74.25, "state", 1),
+    ("Long Island", 40.87, -72.98, "state", 1),
+    ("Pennsylvania", 40.95, -75.0, "state", 3),
     ("Manhattan", 40.775, -73.968, "boro", 3.5),
     ("The Bronx", 40.853, -73.865, "boro", 3.5),
     ("Queens", 40.742, -73.80, "boro", 3.5),
     ("Brooklyn", 40.652, -73.925, "boro", 3.5),
     ("Staten Island", 40.585, -74.145, "boro", 3.5),
     ("Jersey City", 40.722, -74.085, "boro", 5),
+    ("Hoboken", 40.745, -74.032, "boro", 7),
+    ("Newark", 40.735, -74.185, "boro", 5),
+    ("Nassau", 40.74, -73.60, "boro", 3.5),
+    ("Westchester", 41.10, -73.76, "boro", 3.5),
 ]
 
 

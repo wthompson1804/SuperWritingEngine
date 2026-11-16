@@ -1,4 +1,4 @@
-# Run report (2026-11-16T00:11:55+00:00)
+# Run report (2026-11-16T00:18:04+00:00)
 
 ## Steps
 
@@ -25,14 +25,14 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2573 | 2573 | +0 |
 | within the $3,000 all-in cap | 1655 | 1655 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 621 | 621 | +0 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 210 | 210 | +0 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 740 | 740 | +0 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 260 | 260 | +0 |
 | avoid cards | 33 | 33 | +0 |
-|   shown with an asterisk (one thing to confirm) | 130 | 130 | +0 |
-| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 109 | 109 | +0 |
-| held back for one confirmation | 53 | 53 | +0 |
-| clean, waiting for a live check (not shown) | 53 | 53 | +0 |
-| neighborhoods with 3+ shown places | 26 | 26 | +0 |
+|   shown with an asterisk (one thing to confirm) | 149 | 149 | +0 |
+| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 113 | 113 | +0 |
+| held back for one confirmation | 50 | 50 | +0 |
+| clean, waiting for a live check (not shown) | 52 | 52 | +0 |
+| neighborhoods with 3+ shown places | 31 | 31 | +0 |
 | buildings in the master table | 665 | 665 | +0 |
 
 ## Why units left
@@ -50,45 +50,45 @@
 
 **excluded_sketchy.csv**
 
-- two or more things unconfirmed: floor: 218
 - elevator not stated on any page and the building's height is not known (it was guessed from the unit label): 112
-- cost near the cap: 109
+- two or more things unconfirmed: floor: 104
 - availability: 60
-- two or more things unconfirmed: elevator: 59
-- lease term: 57
+- two or more things unconfirmed: elevator: 52
 - floor: 51
 - dogs allowed: 35
+- listing 60+ days old: 26
+- listing: 20
 
 ## Shown units by year
 
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
-| The Fresh-Start Year      |               3 |       44 |      15 |             0 |
-| The Little-City Year      |              25 |      305 |      78 |             7 |
-| The Old-Neighborhood Year |              36 |      116 |      57 |            24 |
-| The Quiet-Street Year     |               6 |        8 |       6 |             0 |
-| The Room-to-Breathe Year  |              23 |      141 |      49 |             0 |
-| The Walk-Everywhere Year  |               5 |        7 |       5 |             2 |
+| The Fresh-Start Year      |               5 |       51 |      20 |             0 |
+| The Little-City Year      |              28 |      382 |     100 |             7 |
+| The Old-Neighborhood Year |              39 |      124 |      65 |            24 |
+| The Quiet-Street Year     |               7 |       13 |       9 |             0 |
+| The Room-to-Breathe Year  |              27 |      162 |      60 |             0 |
+| The Walk-Everywhere Year  |               6 |        8 |       6 |             2 |
 
 ## Fill rate among shown units (percent with a value)
 
 | Field | % |
 |---|---|
-| sqft | 81 |
-| unit_floor | 76 |
+| sqft | 83 |
+| unit_floor | 70 |
 | elevator_basis | 100 |
 | dog_weight_limit_lb | 20 |
-| parking_type | 76 |
-| parking_fee | 21 |
-| pet_rent | 44 |
-| pool | 26 |
-| doorman | 28 |
-| year_built | 50 |
+| parking_type | 78 |
+| parking_fee | 23 |
+| pet_rent | 49 |
+| pool | 34 |
+| doorman | 31 |
+| year_built | 52 |
 | toll_rt_ezpass | 36 |
-| transit_sat_median | 96 |
-| near_violent_250m_24m | 25 |
-| live_status | 95 |
-| rent_first_full_payment_date | 67 |
+| transit_sat_median | 95 |
+| near_violent_250m_24m | 24 |
+| live_status | 94 |
+| rent_first_full_payment_date | 65 |
 | ev_pause_notes | 33 |
 
 ## Last lines of each step
@@ -148,19 +148,19 @@ units 2573; cost gate {'pass': 1655, 'fail': 918}; rent asterisk 1763; rent term
 
 **ranking and selection**
 ```
-evidence: 36 units excluded, shown 210, avoid cards 33, of them with an asterisk 130 ({'floor': 60, 'live check': 16, 'lease term': 14, 'listing': 12, 'cost near the cap': 12, 'elevator': 8, 'dogs allowed': 6, 'other': 2}), held for a confirmation 53, waiting for a live check 53
-stages: 2573 costed -> -918 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -109 removed by a reviewed verdict -> -453 sketchy -> -36 evidence exclusions -> 621 ranked
-(kept 621 units; candidates 292; shown 279; pools: {'': 355, 'pool': 248, 'indoor': 18}
+evidence: 45 units excluded, shown 260, avoid cards 33, of them with an asterisk 149 ({'floor': 96, 'live check': 21, 'listing': 12, 'elevator': 11, 'dogs allowed': 9}), held for a confirmation 50, waiting for a live check 52
+stages: 2573 costed -> -918 over the all-in cap -> -363 Jamaica safety rule -> -73 failed a gate on confirmed facts -> -113 removed by a reviewed verdict -> -321 sketchy -> -45 evidence exclusions -> 740 ranked
+(kept 740 units; candidates 332; shown 377; pools: {'': 378, 'pool': 344, 'indoor': 18}
 ```
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 84 checks, 0 failed
+test_rules (data): 95 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
-field registry: {'used': 462, 'display': 309, 'provenance': 178, 'not_used': 18}
+field registry: {'used': 464, 'display': 309, 'provenance': 178, 'not_used': 18}
 shown-list assertions: all pass
 ```
 

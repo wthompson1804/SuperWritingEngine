@@ -1,10 +1,10 @@
 measure,column,queens_median,kind,same_band,big_band,direction
-all_in,all_in,2581.0,abs,75.0,250.0,lower is better
-sqft,sqft,640.0,abs,50.0,150.0,higher is better
-drive_min,drive_min_to,6.25,abs,5.0,20.0,lower is better
-transit_min,transit_sat_median,20.65,abs,10.0,30.0,lower is better
+all_in,all_in,2624.0,abs,75.0,250.0,lower is better
+sqft,sqft,634.5,abs,50.0,150.0,higher is better
+drive_min,drive_min_to,7.6,abs,5.0,20.0,lower is better
+transit_min,transit_sat_median,25.3,abs,10.0,30.0,lower is better
 violent_crime,violent,3.5,ratio,0.2,0.5,lower is better
 property_crime,property,17.35,ratio,0.2,0.5,lower is better
-food_and_drink_nearby,restaurants_800m,28.0,ratio,0.25,0.6,higher is better
-walk_to_green,park_walk_min,4.2,abs,2.0,6.0,lower is better
+food_and_drink_nearby,restaurants_800m,26.5,ratio,0.25,0.6,higher is better
+walk_to_green,park_walk_min,4.75,abs,2.0,6.0,lower is better
 parking,parking_rank,4.0,abs,0.5,1.5,higher is better

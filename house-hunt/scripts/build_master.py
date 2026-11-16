@@ -645,6 +645,14 @@ def main():
     if ff.exists():
         NF = pd.read_csv(ff, dtype=str, keep_default_na=False); NF["building_id"] = NF.addr_key.map(A2B)
         B["nyc_record_flags"] = NF[NF.flag != "none"].groupby("building_id").flag.agg(lambda s: ";".join(sorted(set(s))))
+    # how many evidence rows (live check, confirm, facts) the building has: a unit in a building the evidence pass never
+    # touched cannot be shown (scripts/rank.py), because there is nothing a reviewer could have read
+    ev_n = {}
+    for D_ in (C, F, L):
+        if len(D_):
+            for k, n_ in D_.addr_key.map(A2B).dropna().value_counts().items():
+                ev_n[k] = ev_n.get(k, 0) + int(n_)
+    B["evidence_rows"] = pd.Series(ev_n).reindex(B.index).fillna(0).astype(int)
     B.index.name = "building_id"
     B.to_csv(DATA / "master_buildings.csv")
     pd.DataFrame(conflicts).to_csv(DATA / "master_conflicts.csv", index=False)

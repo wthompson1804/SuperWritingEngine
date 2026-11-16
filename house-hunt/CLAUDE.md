@@ -66,3 +66,11 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
   another running agent owns; give each agent its own output files.)
 - The job is now the finished decision page, not data only: the "do not build UI, rank or recommend" line above is superseded.
 - One refusal (403, 429, CAPTCHA) from a host ends requests to that host for the session. Say so in every agent brief.
+- **Floor rule (Will, 2026-11-16):** an unpublished floor is not a strike. It is a standing tour question ("confirm it is
+  above the ground floor"). A floor stated or confirmed as ground, or a checker's reading that the unit is probably or
+  possibly ground-level, still excludes the unit. Open gate facts that count toward "two or more: not shown" are only
+  elevator, dogs, and whether the listing is real and available; lease term, cost near the cap, condo-by-owner and
+  net-effective rent are disclosures and never remove a unit.
+- **Presentation (Will, 2026-11-16):** "years" are called "experiences". Show the top three of everything first (top three
+  neighborhoods in an experience, top three places in a neighborhood) with "show more" in descending rank. Voice: an HGTV
+  show, a great realtor walking her through. Each neighborhood carries short attributed outside descriptions. Co-op rentals are out.

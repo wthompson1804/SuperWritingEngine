@@ -35,7 +35,15 @@ UNIVERSAL_SHARE, PROMISE_SHARE = 0.7, 0.3
 POOL_BUMP, INDOOR_POOL_BUMP = 3, 6
 UNKNOWN_PCT = 25
 CERTAINTY = {"clean": 1.0, "one_inferred": 0.97}
-MAX_PER_BUILDING, SHOWN, CANDIDATES = 2, 10, 15
+MAX_PER_BUILDING, SHOWN, CANDIDATES = 2, 10 ** 6, 15
+# SHOWN (owner, 2026-11-16): the page shows the top three first and the rest on "show more", so the old cap of 10 per
+# neighborhood no longer hides a reviewed, showable unit. Order is still by rank; at most MAX_PER_BUILDING per building,
+# and each shown unit records how many further showable units its building has (more_in_building).
+# GATE facts count toward "two or more open -> not shown". DISCLOSURES never do, and never remove a unit by themselves
+# (owner, 2026-11-16): a long-lease price, a cost near the cap with an unknown line, a condo rented by its owner, a
+# net-effective rent. A unit may carry any number of disclosures plus at most one open gate fact.
+GATE_KEYS = {"elevator", "floor", "dogs", "availability", "listing", "eligibility"}
+DISCLOSURE_KEYS = {"lease", "cost", "condo", "other"}
 CAP, NEAR_CAP = 3000, 100          # D12: within $100 of the cap with an unknown cost line -> asterisk "cost near the cap"
 COLOR_DIR = DATA / "enriched_color"
 
@@ -226,8 +234,9 @@ def main():
     KIND_KEY = {"elevator": "elevator", "floor": "floor", "dogs": "dogs", "lease_term": "lease", "not_available": "availability", "unverified": "listing",
                 "wrong_building": "listing", "restricted": "eligibility", "coop_condo": "condo", "other": "other"}
     n_inf = weak_e.astype(int)
-    for _, flag, *_rest in OPEN:
-        n_inf = n_inf + flag.astype(int)
+    for key_, flag, *_rest in OPEN:
+        if key_ in GATE_KEYS:
+            n_inf = n_inf + flag.astype(int)
     u["dog_size_note"] = np.where(dog_small, parsers.SMALL_DOG_NOTE, "")
     floor_q = np.where(fb.eq("inferred"), "Which floor is the unit on? (" + s("unit_floor").str.replace(r"\.0$", "", regex=True) + " is only a guess from the unit number " + s("unit") + "); ",
                        "Which floor is the unit on?; ")
@@ -235,19 +244,30 @@ def main():
     floor_why = np.where(inf_f & fb.eq("inferred"), "No page states the floor; " + fnum + " is only read from the unit number " + s("unit") + ".",
                          "The listing does not give the floor, and the unit number does not show it.")
     v_why, v_q, v_key = vd("why").where(v_ast, ""), vd("what_to_confirm").where(v_ast, ""), vk.map(KIND_KEY).fillna("")
-    what_l, why_l, q_l, keys_l = [], [], [], []
+    what_l, why_l, q_l, keys_l, disc_l = [], [], [], [], []
+    net_eff = s("rent_basis_kind").eq("net_effective").values
+    offer_txt = s("rent_offer_text").str[:160].values
     cols_ = [(k, f.values, lab, np.asarray(floor_why if k == "floor" else (w if not isinstance(w, str) else np.full(len(u), w, dtype=object))), (None if k == "floor" else q)) for k, f, lab, w, q in OPEN]
     fq = pd.Series(floor_q, index=u.index).str.rstrip("; ").values
     for i in range(len(u)):
-        whats, whys, qs, keys = [], [], [], []
+        whats, whys, qs, keys, disc = [], [], [], [], []
         for k, f, lab, w, q in cols_:
             if f[i]:
                 reviewed = v_key.iloc[i] == k
-                keys.append(k); whats.append(lab)
-                whys.append(v_why.iloc[i] if reviewed and v_why.iloc[i] else str(w[i]))
-                qs.append(v_q.iloc[i] if reviewed and v_q.iloc[i] else (fq[i] if k == "floor" else q))
+                why_ = v_why.iloc[i] if reviewed and v_why.iloc[i] else str(w[i])
+                q_ = v_q.iloc[i] if reviewed and v_q.iloc[i] else (fq[i] if k == "floor" else q)
+                if k in DISCLOSURE_KEYS:
+                    disc.append({"what": "condo rented by its owner" if k in ("condo", "other") else lab, "why": why_, "question": q_ or ""})
+                    continue
+                keys.append(k); whats.append(lab); whys.append(why_); qs.append(q_)
+        if net_eff[i]:
+            disc.append({"what": "net-effective rent", "why": "The rent shown is the average after a special offer, not the monthly payment." + (" Offer: " + offer_txt[i] if offer_txt[i] else ""),
+                         "question": "What is the full monthly rent, and when is the first full payment due?"})
+        qs += [d["question"] for d in disc]
+        disc_l.append(json.dumps(disc) if disc else "")
         what_l.append("; ".join(whats)); why_l.append(" ".join(whys)); q_l.append("; ".join(x for x in qs if x)); keys_l.append(";".join(keys))
     u["open_keys"] = keys_l
+    u["disclosures"] = disc_l
     u["to_confirm"] = [q + "; " if q else "" for q in q_l]
     u["tour_confirm"] = (pd.Series(np.where(floor_from_label_ok, "Confirm the floor; ", ""), index=u.index)
                          + pd.Series(np.where(dog_small, "Confirm the dog weight limit in pounds; ", ""), index=u.index)).str.rstrip("; ")
@@ -433,13 +453,17 @@ def main():
                         "The listing has not been seen live in the evidence pass yet; price and availability are as first collected.")
     u["confirm_what"] = np.where(clean & no_live, "live check", u.confirm_what)
     u["confirm_why"] = np.where(clean & no_live, live_txt, u.confirm_why)
-    showable = ~is_avoid & (u.open_items <= 1)
+    # a building the evidence pass never touched has nothing a reviewer could read: its units wait, they are not shown
+    u["no_evidence"] = pd.to_numeric(u.get("evidence_rows"), errors="coerce").fillna(0) <= 0
+    showable = ~is_avoid & (u.open_items <= 1) & ~u.no_evidence
     u["nth_shown_in_building"] = np.nan
     u.loc[showable, "nth_shown_in_building"] = u[showable].groupby("building_id").cumcount() + 1
     ok = showable & (u.nth_shown_in_building <= MAX_PER_BUILDING)
     u["shown_rank"] = np.nan
     u.loc[ok, "shown_rank"] = u[ok].groupby("hood_id").cumcount() + 1
     u["shown"] = u.shown_rank <= SHOWN
+    n_showable_b = u[showable].groupby("building_id").size()
+    u["more_in_building"] = np.where(u.shown, (u.building_id.map(n_showable_b).fillna(0) - MAX_PER_BUILDING).clip(lower=0), np.nan)
     u["confirm_asterisk"] = np.where(u.open_items >= 1, "yes", "")
     cols = ["listing_id", "building_id", "building_name", "address", "unit", "hood", "group_label", "hood_rank", "rank_score", "all_in", "to_confirm", "url"]
     nc = u[~is_avoid & ~clean & (u.shown | (elig & (u.hood_rank <= CANDIDATES)))]

@@ -95,6 +95,10 @@ def unit(r):
                     # the question to ask, in the reviewer's or the rule's words (independent check 2)
                     "question": (qs[0] if qs and g("confirm_what") != "live check" else None) if g("confirm_asterisk") == "yes" else None,
                     "reviewed": g("review_verdict")},
+        # conditions to know that are not open gate facts (owner, 2026-11-16): lease term, cost near the cap, condo rented by
+        # its owner, net-effective rent. Any number may sit beside at most one open gate fact (confirm).
+        "disclosures": [{"what": d.get("what"), "why": d.get("why"), "question": d.get("question") or None} for d in j(r.get("disclosures"), [])],
+        "more_in_building": g("more_in_building"),
         "cost_check": {"cap_margin": g("cap_margin"), "unknown_count": g("all_in_unknown_count"), "lease_term_months": g("rent_lease_term_months"), "price_12_month": g("rent_12_month_price")},
         "confidence": g("confidence"), "tour_questions": qs,
         "links": {"listing": g("url"), "building": g("building_url")}, "source_site": g("source_site"),

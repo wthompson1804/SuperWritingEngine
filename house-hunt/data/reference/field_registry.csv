@@ -433,17 +433,18 @@ master_units,nycrec_sr311_unsanitary_condition__2026_ytd,display,,NYC record cou
 master_units,nycrec_sr311_unsanitary_condition__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
 master_units,nycrec_sr311_unsanitary_condition__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
 master_units,nyc_record_flags,used,build_master.py;rating_standard.py,
+master_units,evidence_rows,used,build_master.py;rank.py,
 master_units,price_lease_months,used,build_master.py;all_in.py;rank.py,
 master_units,price_12_month,used,build_master.py;all_in.py;rank.py,
 master_units,price_lease_quote,display,build_master.py,source sentence or record behind the lease-term asterisk and the NYC lot check (independent check 2)
 master_units,price_lease_source,provenance,build_master.py,travels with price_lease
 master_units,price_lowest_of_terms,used,build_master.py;rank.py,
 master_units,rent_basis,used,all_in.py,
-master_units,rent_basis_kind,used,all_in.py,
+master_units,rent_basis_kind,used,all_in.py;rank.py,
 master_units,rent_gross,used,all_in.py,
 master_units,rent_asterisk,used,all_in.py,
 master_units,rent_listed_price_is,used,all_in.py,
-master_units,rent_offer_text,used,all_in.py,
+master_units,rent_offer_text,used,all_in.py;rank.py,
 master_units,rent_free_months,used,all_in.py,
 master_units,rent_lease_months,used,all_in.py,
 master_units,rent_first_full_payment_date,used,all_in.py,
@@ -853,6 +854,7 @@ master_buildings,nycrec_sr311_unsanitary_condition__2026_ytd,display,,NYC record
 master_buildings,nycrec_sr311_unsanitary_condition__last_24_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
 master_buildings,nycrec_sr311_unsanitary_condition__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
 master_buildings,nyc_record_flags,used,build_master.py;rating_standard.py,
+master_buildings,evidence_rows,used,build_master.py;rank.py,
 evidence:items,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:items,building_name,used,gates.py;build_master.py;rank.py;avoid.py;rent_terms.py;rating_standard.py,
 evidence:items,category,used,avoid.py,

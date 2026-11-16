@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /imunify-bot-check
+
+# START YOAST BLOCK
+# ---------------------------
+User-agent: *
+Disallow:
+
+Sitemap: https://www.goosepm.com/sitemap_index.xml
+# ---------------------------
+# END YOAST BLOCK

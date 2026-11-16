@@ -11,9 +11,45 @@
   "status": 200,
   "why": ""
  },
+ "https://460summer.com/": {
+  "path": "raw/building_contacts_own_site/95fe051d07fb8ea1.html",
+  "retrieved_at": "2026-11-16T00:14:32+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://460summer.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/7da4f4ba5b12aec8.txt",
+  "retrieved_at": "2026-11-16T00:14:31+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://arrivestamford.com/": {
+  "path": "raw/building_contacts_own_site/eb5b97642df4ac34.html",
+  "retrieved_at": "2026-11-16T00:14:12+00:00",
+  "status": 200,
+  "why": ""
+ },
  "https://arrivestamford.com/robots.txt": {
   "path": "raw/building_contacts_own_site/56d61cb7db87df8e.txt",
   "retrieved_at": "2026-11-16T00:14:11+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://bedfordcreativeapts.com/": {
+  "path": "raw/building_contacts_own_site/1e5979dff476e81e.html",
+  "retrieved_at": "2026-11-16T00:14:55+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://bedfordcreativeapts.com/contact": {
+  "path": "raw/building_contacts_own_site/dd7665ad288fa065.html",
+  "retrieved_at": "2026-11-16T00:14:56+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://bedfordcreativeapts.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/39ae05c42c08d7c9.txt",
+  "retrieved_at": "2026-11-16T00:14:54+00:00",
   "status": 200,
   "why": ""
  },
@@ -29,6 +65,24 @@
   "status": 200,
   "why": ""
  },
+ "https://elksliving.com/": {
+  "path": "raw/building_contacts_own_site/ae031bccbe374e31.html",
+  "retrieved_at": "2026-11-16T00:14:51+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://elksliving.com/contact": {
+  "path": "raw/building_contacts_own_site/0935de061ca8e09d.html",
+  "retrieved_at": "2026-11-16T00:14:51+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://elksliving.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/28813278867b494a.txt",
+  "retrieved_at": "2026-11-16T00:14:49+00:00",
+  "status": 200,
+  "why": ""
+ },
  "https://ethoskelsey.com/": {
   "path": "raw/building_contacts_own_site/3802b8869725637e.html",
   "retrieved_at": "2026-11-16T00:13:43+00:00",
@@ -41,6 +95,18 @@
   "status": 200,
   "why": ""
  },
+ "https://hellerorg.com/alvista-rise-leasing-office": {
+  "path": "raw/building_contacts_own_site/4fce20096cfd9a86.html",
+  "retrieved_at": "2026-11-16T00:14:19+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://hellerorg.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/1d3b28ce44df3cb4.txt",
+  "retrieved_at": "2026-11-16T00:14:17+00:00",
+  "status": 200,
+  "why": ""
+ },
  "https://highlandsmorrisplains.com/": {
   "retrieved_at": "2026-11-16T00:13:49+00:00",
   "status": -1,
@@ -49,6 +115,17 @@
  "https://highlandsmorrisplains.com/robots.txt": {
   "path": "raw/building_contacts_own_site/24641e7c0afab3a3.txt",
   "retrieved_at": "2026-11-16T00:13:49+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://hudson44.com/": {
+  "retrieved_at": "2026-11-16T00:14:24+00:00",
+  "status": -1,
+  "why": "robots.txt disallows this path for ClaudeBot"
+ },
+ "https://hudson44.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/eaefe204be20efe6.txt",
+  "retrieved_at": "2026-11-16T00:14:24+00:00",
   "status": 200,
   "why": ""
  },
@@ -106,6 +183,18 @@
   "status": 200,
   "why": ""
  },
+ "https://metrovuejc.com/": {
+  "path": "raw/building_contacts_own_site/105625f57a1e75a9.html",
+  "retrieved_at": "2026-11-16T00:16:32+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://metrovuejc.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/759598438e3e2835.txt",
+  "retrieved_at": "2026-11-16T00:16:31+00:00",
+  "status": 200,
+  "why": ""
+ },
  "https://regencyhudson.com/contact/": {
   "path": "raw/building_contacts_own_site/bb1d82233a9eee10.html",
   "retrieved_at": "2026-11-16T00:13:59+00:00",
@@ -128,6 +217,36 @@
   "retrieved_at": "2026-11-16T00:14:11+00:00",
   "status": 0,
   "why": "ts.txt (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1035)')))\"))"
+ },
+ "https://residencesatthesummit.com/contact/": {
+  "path": "raw/building_contacts_own_site/509e07e00ecca636.html",
+  "retrieved_at": "2026-11-16T00:14:17+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://residencesatthesummit.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/a64182e5b45cb1ea.txt",
+  "retrieved_at": "2026-11-16T00:14:14+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://revonaproperties.com/": {
+  "path": "raw/building_contacts_own_site/fc24a539ae0c0f57.html",
+  "retrieved_at": "2026-11-16T00:14:46+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://revonaproperties.com/properties/resident-services/shore-haven-apartments/": {
+  "path": "raw/building_contacts_own_site/7373534f5174717f.html",
+  "retrieved_at": "2026-11-16T00:14:46+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://revonaproperties.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/f48fa53907c26d2d.txt",
+  "retrieved_at": "2026-11-16T00:14:44+00:00",
+  "status": 200,
+  "why": ""
  },
  "https://shamcomanagement.com/robots.txt": {
   "path": "raw/building_contacts_own_site/0c9e5d7ca8c3fc8b.txt",
@@ -152,6 +271,30 @@
   "status": 200,
   "why": ""
  },
+ "https://theparkatmain.com/contact/": {
+  "path": "raw/building_contacts_own_site/a1a56877b17e0307.html",
+  "retrieved_at": "2026-11-16T00:14:27+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://theparkatmain.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/c3a98dc37081f1b2.txt",
+  "retrieved_at": "2026-11-16T00:14:26+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://vanderbiltpm.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/395ebc110c1ffdd9.txt",
+  "retrieved_at": "2026-11-16T00:14:52+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://vanderbiltpm.com/welcome/142-27-barclay-ave-flushing-ny/": {
+  "path": "raw/building_contacts_own_site/03216262de3a3080.html",
+  "retrieved_at": "2026-11-16T00:14:53+00:00",
+  "status": 403,
+  "why": ""
+ },
  "https://www.10oceanapts.com/": {
   "path": "raw/building_contacts_own_site/d4d84d5f67c24549.html",
   "retrieved_at": "2026-11-16T00:13:35+00:00",
@@ -164,6 +307,18 @@
   "status": 200,
   "why": ""
  },
+ "https://www.121towne.com/contact_us/": {
+  "path": "raw/building_contacts_own_site/ad8ecf06047ef689.html",
+  "retrieved_at": "2026-11-16T00:14:26+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.121towne.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/09829eea6056c748.txt",
+  "retrieved_at": "2026-11-16T00:14:25+00:00",
+  "status": 200,
+  "why": ""
+ },
  "https://www.333statestreet.com/": {
   "path": "raw/building_contacts_own_site/4584f9cf139ecd6a.html",
   "retrieved_at": "2026-11-16T00:13:42+00:00",
@@ -173,6 +328,18 @@
  "https://www.333statestreet.com/robots.txt": {
   "path": "raw/building_contacts_own_site/1626a9ee9da9054d.txt",
   "retrieved_at": "2026-11-16T00:13:41+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.3acresjc.com/contact": {
+  "path": "raw/building_contacts_own_site/9633c0f10867f851.html",
+  "retrieved_at": "2026-11-16T00:14:29+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.3acresjc.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/57e3bb6ae1a4e2c5.txt",
+  "retrieved_at": "2026-11-16T00:14:28+00:00",
   "status": 200,
   "why": ""
  },
@@ -212,6 +379,30 @@
   "status": 200,
   "why": ""
  },
+ "https://www.arproperties.com/2828-university-ave": {
+  "path": "raw/building_contacts_own_site/32200220af592f97.html",
+  "retrieved_at": "2026-11-16T00:14:44+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.arproperties.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/a685c805b7063c4a.txt",
+  "retrieved_at": "2026-11-16T00:14:42+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.be448.com/": {
+  "path": "raw/building_contacts_own_site/2c4b51eb42744f1c.html",
+  "retrieved_at": "2026-11-16T00:14:20+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.be448.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/3ab50c2d4a672e06.txt",
+  "retrieved_at": "2026-11-16T00:14:19+00:00",
+  "status": 200,
+  "why": ""
+ },
  "https://www.brookfieldvillagect.com/contact/": {
   "path": "raw/building_contacts_own_site/421eb71b39bff9b2.html",
   "retrieved_at": "2026-11-16T00:13:45+00:00",
@@ -221,6 +412,24 @@
  "https://www.brookfieldvillagect.com/robots.txt": {
   "path": "raw/building_contacts_own_site/480b35e238be9ddb.txt",
   "retrieved_at": "2026-11-16T00:13:44+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.currentonriver.com/": {
+  "path": "raw/building_contacts_own_site/a50d08e6054785b6.html",
+  "retrieved_at": "2026-11-16T00:14:36+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.currentonriver.com/contact": {
+  "path": "raw/building_contacts_own_site/c815979450f6b721.html",
+  "retrieved_at": "2026-11-16T00:14:35+00:00",
+  "status": 404,
+  "why": ""
+ },
+ "https://www.currentonriver.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/07fdf7aef8510176.txt",
+  "retrieved_at": "2026-11-16T00:14:34+00:00",
   "status": 200,
   "why": ""
  },
@@ -236,6 +445,18 @@
   "status": 200,
   "why": ""
  },
+ "https://www.goosepm.com/portfolio/2-24-26th-ave/": {
+  "path": "raw/building_contacts_own_site/d142e2ca73d4bb09.html",
+  "retrieved_at": "2026-11-16T00:14:48+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.goosepm.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/e32a3baa37c5bf84.txt",
+  "retrieved_at": "2026-11-16T00:14:47+00:00",
+  "status": 200,
+  "why": ""
+ },
  "https://www.harborgroupmanagement.com/apartments/ny/new-rochelle/skyline-new-rochelle/contact-us": {
   "retrieved_at": "2026-11-16T00:13:58+00:00",
   "status": -1,
@@ -244,6 +465,41 @@
  "https://www.harborgroupmanagement.com/robots.txt": {
   "path": "raw/building_contacts_own_site/4c5bb2a2d29beff4.txt",
   "retrieved_at": "2026-11-16T00:13:58+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.hoytbedfordct.com/": {
+  "path": "raw/building_contacts_own_site/6cad1408f97b8db1.html",
+  "retrieved_at": "2026-11-16T00:14:24+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.hoytbedfordct.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/117b3b19789e6cc0.txt",
+  "retrieved_at": "2026-11-16T00:14:22+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.hoyttowernewark.com/": {
+  "path": "raw/building_contacts_own_site/1eb5f512e79d1ae0.html",
+  "retrieved_at": "2026-11-16T00:14:30+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.hoyttowernewark.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/7b255792b3b2f552.txt",
+  "retrieved_at": "2026-11-16T00:14:29+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.jolionguider.com/": {
+  "retrieved_at": "2026-11-16T00:14:44+00:00",
+  "status": -1,
+  "why": "robots.txt disallows this path for ClaudeBot"
+ },
+ "https://www.jolionguider.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/9d39c6e857a18132.txt",
+  "retrieved_at": "2026-11-16T00:14:44+00:00",
   "status": 200,
   "why": ""
  },
@@ -268,6 +524,42 @@
  "https://www.liveatfranklin.com/robots.txt": {
   "path": "raw/building_contacts_own_site/4de844c18292e4ed.txt",
   "retrieved_at": "2026-11-16T00:13:21+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.livehudsonpark.com/contact_us/": {
+  "path": "raw/building_contacts_own_site/145c1c131b00e69c.html",
+  "retrieved_at": "2026-11-16T00:14:14+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.livehudsonpark.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/7ed16947b4b34820.txt",
+  "retrieved_at": "2026-11-16T00:14:13+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.livejamaicacentral.com/contact": {
+  "path": "raw/building_contacts_own_site/13bf500b7179f09f.html",
+  "retrieved_at": "2026-11-16T00:14:38+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.livejamaicacentral.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/ad5c04ce18735236.txt",
+  "retrieved_at": "2026-11-16T00:14:36+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.liveparksquarewest.com/": {
+  "path": "raw/building_contacts_own_site/cf5d54c46f0463b4.html",
+  "retrieved_at": "2026-11-16T00:14:33+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.liveparksquarewest.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/a90b887aeee1fb46.txt",
+  "retrieved_at": "2026-11-16T00:14:32+00:00",
   "status": 200,
   "why": ""
  },
@@ -306,6 +598,24 @@
   "status": 200,
   "why": ""
  },
+ "https://www.rosenyc.com/contact/": {
+  "path": "raw/building_contacts_own_site/1b0b39b99ba58ac6.html",
+  "retrieved_at": "2026-11-16T00:14:42+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.rosenyc.com/rentals/66-st-nicholas-place/": {
+  "path": "raw/building_contacts_own_site/a2a161eca04a7525.html",
+  "retrieved_at": "2026-11-16T00:14:41+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.rosenyc.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/bb3e3b2108f51cf2.txt",
+  "retrieved_at": "2026-11-16T00:14:39+00:00",
+  "status": 200,
+  "why": ""
+ },
  "https://www.thegeorgenewbrunswick.com/contact-us": {
   "path": "raw/building_contacts_own_site/4b4bfdf390828073.html",
   "retrieved_at": "2026-11-16T00:13:17+00:00",
@@ -315,6 +625,18 @@
  "https://www.thegeorgenewbrunswick.com/robots.txt": {
   "path": "raw/building_contacts_own_site/198c26488fd4be00.txt",
   "retrieved_at": "2026-11-16T00:13:16+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.thetrent14212.com/": {
+  "path": "raw/building_contacts_own_site/4c7bd344edc253d9.html",
+  "retrieved_at": "2026-11-16T00:14:49+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.thetrent14212.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/24912b2c6cd17041.txt",
+  "retrieved_at": "2026-11-16T00:14:49+00:00",
   "status": 200,
   "why": ""
  },

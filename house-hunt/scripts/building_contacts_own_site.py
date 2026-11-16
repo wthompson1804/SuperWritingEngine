@@ -92,28 +92,42 @@ def squash(s: str) -> str:
 
 def addr_variants(address: str) -> list[str]:
     """'house-number first-street-words' forms to look for in a page, e.g. '440 elizabeth', '1 north main'."""
-    a = squash(address.split(",")[0])
+    first = address.split(",")[0].split("#")[0]
+    a = squash(first)
     a = re.sub(r"^(\d+) (\d+) ", r"\1\2 ", a) if re.match(r"^\d+ \d+ \d", a) else a   # '147 25 94th' -> '14725 94th'
     toks = a.split()
     if len(toks) < 2 or not toks[0][0].isdigit():
         return []
     num, rest = toks[0], toks[1:]
     nums = {num}
-    m = re.match(r"^(\d+)-(\d+)", address.strip())
+    m = re.match(r"^\s*(\d+)-(\d+)", first)
     if m:                                             # '65-77 Prospect St' / '89-25 162nd St'
-        nums |= {m.group(1), m.group(1) + m.group(2), f"{m.group(1)} {m.group(2)}"}
+        if rest and rest[0] == m.group(2):
+            rest = rest[1:]
+        nums |= {m.group(1), m.group(2), m.group(1) + m.group(2), f"{m.group(1)} {m.group(2)}"}
     if len(num) >= 4 and num.isdigit():               # '14725' may be written '147-25' on the page
         nums.add(f"{num[:-2]} {num[-2:]}")
-    out = set()
-    words = [w for w in rest if w not in SUFFIX][:2] or rest[:1]
+    words = []
+    for w in rest:                                    # street words up to the suffix ('st', 'ave', ...)
+        if w in SUFFIX or w in SUFFIX.values():
+            break
+        words.append(w)
+    words = words[:2] or rest[:1]
     alts = [words]
-    if words and words[0] in DIR:
+    if words and words[0] in DIR and len(words) > 1:
         alts += [[DIR[words[0]]] + words[1:], words[1:]]
+    out = set()
     for n in nums:
         for w in alts:
             if w:
                 out.add(f"{n} " + " ".join(w))
     return sorted(out)
+
+
+def address_named(name: str, address: str) -> bool:
+    """True when the 'name' is only the street address ('93 Richards', '750 Summer Street')."""
+    n = squash(name)
+    return bool(n) and n.split()[0][0].isdigit() and any(n.startswith(v) or v in n for v in addr_variants(address))
 
 
 def name_tokens(name: str) -> list[str]:
@@ -126,7 +140,7 @@ def match_flags(text: str, name: str, address: str) -> tuple[bool, bool]:
     toks = name_tokens(name)
     name_ok = bool(toks) and (all(f" {t} " in sq for t in toks) or "".join(toks) in glued)
     # a name that is only the address ('93 Richards', '750 Summer Street') proves nothing on its own
-    if name_ok and squash(name).split()[0].isdigit() and squash(name) in squash(address):
+    if name_ok and address_named(name, address):
         name_ok = False
     addr_ok = any(f" {v} " in sq or f" {v}" in sq for v in addr_variants(address))
     return name_ok, addr_ok
@@ -151,6 +165,33 @@ def phones_on_page(html: str) -> list[tuple[str, str]]:
     for m in bc.PHONE_TXT.finditer(visible_text(html)):
         add(bc.norm_phone("".join(m.groups())), "page text")
     return out
+
+
+def phone_class(p: str) -> int:
+    """0 local (NY/NJ/CT area code), 1 toll-free, 2 other area code."""
+    return 1 if bc.is_tollfree(p) else (0 if p[1:4] in bc.LOCAL_CODES else 2)
+
+
+def choose_phone(html: str, ph: list[tuple[str, str]], address: str) -> tuple[str, str]:
+    """A page that lists several properties: the number printed right after this building's address.
+    Otherwise a local-area-code number before a toll-free or out-of-region one (those are often vendor
+    call-tracking lines), keeping the JSON-LD > tel: link > page text order inside each class."""
+    txt = " " + re.sub(r"\s+", " ", squash_keep(visible_text(html))) + " "
+    in_text = {}
+    for m in bc.PHONE_TXT.finditer(txt):
+        in_text.setdefault(bc.norm_phone("".join(m.groups())), []).append(m.start())
+    if len(in_text) >= 3:
+        for v in addr_variants(address):
+            for am in re.finditer(r"(?<![a-z0-9])" + re.escape(v) + r"(?![a-z0-9])", txt):
+                near = [(pos - am.end(), p) for p, poss in in_text.items() for pos in poss if 0 <= pos - am.end() <= 140]
+                if near:
+                    return min(near)[1], "page text, the number printed next to this building's address on a multi-property page"
+    return sorted(ph, key=lambda x: phone_class(x[0]))[0]
+
+
+def squash_keep(s: str) -> str:
+    """Lower-case, punctuation other than phone punctuation turned into spaces (keeps '(203) 212-5085' intact)."""
+    return re.sub(r"[^a-z0-9()+.\- ]+", " ", s.lower().replace("\n", " "))
 
 
 def hours_on_page(html: str) -> str:
@@ -306,6 +347,10 @@ def process(t: dict, fx, fetch: bool) -> dict:
         if budget <= 0 or any(u == p[0] for p in pages):
             return None
         known = u in fx.state
+        why = fx.blocked(bc.host_of(u))
+        if why and not (known and fx.state[u].get("status") == 200):
+            tried.append(f"{u} not fetched ({why})")
+            return None
         if not known and not fetch:
             tried.append(f"{u} not fetched (run with --fetch)")
             return None
@@ -355,11 +400,17 @@ def process(t: dict, fx, fetch: bool) -> dict:
         row["confidence"] = "low"
         row["note"] = "; ".join(notes + [f"no phone number on the fetched page(s): {', '.join(p[0] for p in pages)}"] + tried)
         return row
-    phone, how = ph[0]
+    phone, how = choose_phone(h, ph, t["address"])
+    ph = [(phone, how)] + [x for x in ph if x[0] != phone]
     row["leasing_phone"], row["phone_page_url"] = phone, u
     named = bool(name_tokens(t["building_name"]))
+    host = bc.host_of(u)
+    housenum = squash(t["building_name"]).split()[0] if squash(t["building_name"]) else ""
     if nm and ad:
         conf = "high"
+    elif ad and address_named(t["building_name"], t["address"]) and housenum and housenum in host:
+        conf = "high"
+        notes.append("the building is named after its address; the address is on the page and the site's domain carries it")
     elif ad and not named:
         conf = "medium"
         notes.append("the address is on the page; the data has no building name to match")
