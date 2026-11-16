@@ -31,3 +31,8 @@
 2026-11-16T01:47:20+00:00 requests this run 625, total 780/900
 2026-11-16T01:49:50+00:00 requests this run 650, total 805/900
 2026-11-16T01:52:26+00:00 requests this run 675, total 830/900
+2026-11-16T01:55:03+00:00 requests this run 700, total 855/900
+2026-11-16T01:57:45+00:00 requests this run 725, total 880/900
+cap of 900 requests reached
+fetch finished: requests this run 745, total 900
+opened rows written: 1197 | summary: {'opened': 1252, 'gone': 114, 'not_requested': 1012}
