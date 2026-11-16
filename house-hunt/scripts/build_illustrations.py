@@ -240,12 +240,10 @@ def walk(A, tall):
     if tall:
         s.r(-4, 136, 368, 22, PAPER)
         s.p(grid(8, 141, 12, 2, 20, 1.5, 30, 8), LINE, 0)
-        s.r(40, 132, 26, 12, CORAL, 2)
-        s.c(46, 130, 6, MINT)
-        s.c(58, 129, 7, MINT)
-        s.r(300, 132, 26, 12, CORAL, 2)
-        s.c(307, 129, 7, MINT)
-        s.c(319, 130, 6, MINT)
+        for x in (40, 296):
+            s.c(x + 7, 141, 6, MINT)
+            s.c(x + 19, 140, 7, MINT)
+            s.r(x, 143, 26, 10, CORAL, 2)
     return sky, s
 
 
@@ -265,14 +263,13 @@ def settled(A, tall):
     s.p(grid(246, 34, 8, 1, 10, 7, 15, 0), WHITE, 1.5)
     s.r(238, 44, 130, 2.5, BUTTER, 0, 0)
     s.r(226, 50, 140, 7, steel)
-    s.p(grid(232, 52, 14, 1, 4, 3, 10, 0), mix(PLUM, PAPER, .8), 0)
     s.p("M250 57h7v47h-7zM312 57h7v47h-7z", steel)
     s.line("M240 57l10 10M267 57l-10 10M302 57l10 10M329 57l-10 10")
     # building one: six storeys of brick, shops below
     s.r(4, 18, 148, 86, brick)
     s.r(2, 14, 152, 6, WHITE, 1)
     s.r(60, 5, 22, 10, brick)
-    s.p(bricks(8, 22, 140, 56, 10, 6), mix(CORAL, PAPER, .68), 0)
+    s.p(bricks(8, 22, 140, 56, 14, 6), mix(CORAL, PAPER, .68), 0)
     s.p(grid(12, 25, 8, 5, 10, 7, 17.5, 11), WHITE)
     s.r(4, 79, 148, 3, WHITE, 0, 0)
     # bakery
@@ -313,7 +310,6 @@ def settled(A, tall):
     if tall:
         s.r(-4, 136, 368, 22, PAPER)
         s.p(grid(8, 141, 12, 2, 20, 1.5, 30, 8), LINE, 0)
-        s.p("M150 124h12M190 124h12M230 124h12", "none", 2, ' stroke="%s"' % WHITE)
     return sky, s
 
 
@@ -325,7 +321,6 @@ def little(A, tall):
     if tall:
         cloud(s, 84, -18, 1.1)
         cloud(s, 300, -26, .7)
-    s.p("M-4 104V78q40-20 90-6t90-4t100-6t88 8v34z", mix(MINT, PAPER, .32), 0)
     G = 104
     # station with clock tower
     s.r(2, 74, 88, 30, stone)
@@ -361,7 +356,6 @@ def little(A, tall):
     s.r(246, 88, 20, 10, WHITE)
     s.r(278, 84, 54, 20, PLUM, 2)
     s.p(grid(280, 85.500, 7, 1, 4, 4, 7.6, 0), BUTTER, 0)
-    car(s, 325, 109, BUTTER, .85, flip=True)
     # pavement and main street
     s.r(-4, G + 5 - 5, 368, 14, PAPER)
     s.r(-4, 118, 368, 14 + (26 if tall else 0), mix(MUTED, PAPER, .32))
@@ -374,7 +368,6 @@ def little(A, tall):
     if tall:
         s.r(-4, 136, 368, 22, PAPER)
         s.p(grid(8, 141, 12, 2, 20, 1.5, 30, 8), LINE, 0)
-        s.p("M60 124h12M100 124h12M140 124h12", "none", 2, ' stroke="%s"' % WHITE)
     return sky, s
 
 
@@ -436,8 +429,9 @@ def fresh(A, tall):
     s.c(138, 106, 7, MINT)
     dog(s, 312, 124, .9)
     if tall:
-        s.r(-4, 150, 368, 8, water, 0, 0)
-        s.r(-4, 147, 368, 4, MUTED, 0, 0)
+        s.r(20, 140, 30, 10, mix(A, PAPER, .5), 2)
+        s.c(28, 137, 6, MINT)
+        s.c(40, 136, 7, MINT)
     return sky, s
 
 
@@ -550,15 +544,15 @@ def quiet(A, tall):
     # lawns, hedges, pavement, street
     s.r(-4, G, 368, 10, lawn, 0, 0)
     s.p("M-4 104h368", "none")
-    s.p("M86 106q0-9 9-9t9 9zM228 106q0-10 11-10t11 10zM336 106q0-9 10-9t10 9z", hedge)
+    s.p("M228 106q0-10 11-10t11 10zM336 106q0-9 10-9t10 9z", hedge)
     s.p("M62 104h8l-2 10h-10zM162 104h12l2 10h-16zM274 104h8l2 10h-10z", PAPER, 0)
     s.r(-4, 113, 368, 6, PAPER)
     s.r(-4, 119, 368, 13 + (26 if tall else 0), mix(PLUM, PAPER, .42))
     s.p(dots([(30, 125), (120, 127), (210, 125), (300, 127)], 14, 1.5), mix(PLUM, PAPER, .2), 0)
     # mailbox at the kerb
-    s.line("M100 118v-12", 2.5)
-    s.p("M92 106v-5q0-5 5-5h8q4 0 4 4v6z", A)
-    s.p("M106 100v-6h5v3h-5", BERRY, 1.5)
+    s.line("M98 119v-12", 3)
+    s.p("M86 108v-7q0-7 7-7h12q5 0 5 5v9z", A)
+    s.p("M104 99v-9h6v4h-6", BERRY, 1.5)
     dog(s, 204, 117, .85)
     if tall:
         s.p(dots([(60, 138), (170, 141), (270, 138)], 14, 1.5), mix(PLUM, PAPER, .2), 0)
@@ -598,9 +592,10 @@ def build():
         for key, tall in (("banner", False), ("tall", True)):
             sky, s = fn(ACCENT[y["id"]], tall)
             entry[key] = wrap(sky, s.out(), alt, tall)
-        for k in (y.get("label"), y.get("display_label"), y.get("id")):
-            if k:
-                out[k] = entry
+        out[y["label"]] = entry
+        for k in (y.get("display_label"), y.get("id")):
+            if k and k not in out:
+                out[k] = y["label"]  # alias: a string naming the key that holds the drawings
         order.append((y.get("display_label") or y["label"], y["id"], entry))
     path = os.path.join(ROOT, "site", "illustrations.json")
     with open(path, "w") as f:

@@ -53,12 +53,21 @@ HOODS = ROOT / "data/reference/scene_text_neighborhoods.csv"
 TOLLS = "data/enriched/*.json"                     # virtual table: one row per building, see _toll_table()
 PAGE = "site/data.json"                            # virtual tables "site/data.json#years|neighborhoods|units"
 
-LIMITS = {"year": {"scene": (60, 90), "host_intro": (110, 160), "tagline": (4, 14), "subhead": (6, 22)},
-          "hood": {"scene": (35, 68), "host_intro": (60, 90)}}
+# host_intro is the lead of "About this experience" / "About <neighborhood>": 2 or 3 sentences, short, because the
+# facts sit beside it as icon points (about_points_json) and must not be said twice.
+LIMITS = {"year": {"scene": (60, 90), "host_intro": (25, 60), "tagline": (4, 14), "subhead": (6, 22)},
+          "hood": {"scene": (35, 68), "host_intro": (15, 45)}}
+LEAD_SENTENCES = (2, 3)
+ICONS = ["home", "dog", "park", "car", "parking", "fork", "cocktail", "coffee", "train", "money", "clock", "moon", "sun",
+         "water", "key", "heart", "people", "ruler", "laundry", "pool", "warning"]
+POINTS_COUNT, POINT_MAX_WORDS = (4, 6), 14            # about_points_json: 4 to 6 {icon, text}; exactly one "warning"
+MOMENT_TITLES, MOMENT_MAX_WORDS = ["A weekday", "Saturday night", "Sunday with Mom and Dad"], 35
+JSON_COLS = {"year": ["about_points_json", "day_moments_json"], "hood": ["about_points_json"]}
+STAGE = re.compile(r"\b(I|I'll|I'd|I've|my|me)\b|\blet's\b|\blet me\b|picture this|\bokay\b|your host", re.I)
 PARAGRAPHS = {"year": {"host_walkthrough": (3, 40, 60)}, "hood": {}}      # column: (paragraphs, min words, max words) each
 ONE_SENTENCE = {"year": ["promise", "tagline", "subhead"], "hood": ["good_for_her", "watch_for"]}
 ONE_OR_TWO = {"year": ["catch"], "hood": []}
-HOST_COLS = {"host_intro", "host_walkthrough", "tagline", "display_label", "subhead"}   # the host voice may state all-in dollars
+HOST_COLS = {"host_intro", "host_walkthrough", "tagline", "display_label", "subhead", "point", "moment"}   # may state all-in dollars
 # One optional line in the host's voice under each section headline of the page ("sub_" columns). They are chosen from
 # the conditional drafts in the source file ("=== sub:" blocks); empty means the data gave nothing distinctive to say.
 SUB_SECTIONS = {"year": ["cost", "to_parents", "going_out", "green", "compared_to_queens"],
@@ -66,8 +75,9 @@ SUB_SECTIONS = {"year": ["cost", "to_parents", "going_out", "green", "compared_t
                          "compared_to_queens"]}
 SUB_MAX_WORDS = 14
 COLUMNS = {"year": ["display_label", "tagline", "subhead", "scene", "promise", "catch", "host_intro", "host_walkthrough"]
-           + ["sub_" + x for x in SUB_SECTIONS["year"]],
-           "hood": ["scene", "good_for_her", "watch_for", "host_intro"] + ["sub_" + x for x in SUB_SECTIONS["hood"]]}
+           + ["sub_" + x for x in SUB_SECTIONS["year"]] + JSON_COLS["year"],
+           "hood": ["scene", "good_for_her", "watch_for", "host_intro"] + ["sub_" + x for x in SUB_SECTIONS["hood"]]
+           + JSON_COLS["hood"]}
 VOICE_PHRASE = re.compile(r"review sites|people who live (here|in )|residents (also |here )?(say|like|praise)", re.I)
 
 NUMBER = re.compile(r"\d{1,2}:\d{2}|\d[\d,]*(?:\.\d+)?")
@@ -190,6 +200,9 @@ def _page_table(part):
             })
         return pd.DataFrame(rows)
     raise KeyError(f"no page table '{part}'")
+
+
+RUN_WORDS_ROW = 6                                  # no run of 6 words shared by a row's lead, points and moments
 
 
 def is_missing(v):
@@ -402,6 +415,18 @@ def check_style(kind, col, text):
         lo, hi = LIMITS[kind][col]
         if not lo <= words <= hi:
             out.append(f"{col}: {words} words, wanted {lo} to {hi}")
+    if col == "host_intro":
+        k = len(sentences(text.replace("St. ", "St ")))
+        if not LEAD_SENTENCES[0] <= k <= LEAD_SENTENCES[1]:
+            out.append(f"{col}: {k} sentences, wanted {LEAD_SENTENCES[0]} or {LEAD_SENTENCES[1]}")
+    if col in ("host_intro", "point", "moment"):
+        m = STAGE.search(text)
+        if m:
+            out.append(f"{col}: stage business '{m.group(0)}' (the text is shown as a plain 'About ...', with no host on screen)")
+    if col == "point" and words > POINT_MAX_WORDS:
+        out.append(f"{col}: {words} words, wanted at most {POINT_MAX_WORDS}: {text}")
+    if col == "moment" and words > MOMENT_MAX_WORDS:
+        out.append(f"{col}: {words} words, wanted at most {MOMENT_MAX_WORDS}: {text}")
     if col in PARAGRAPHS[kind]:
         want, lo, hi = PARAGRAPHS[kind][col]
         paras = [p for p in text.split("\n\n") if p.strip()]
@@ -418,9 +443,57 @@ def check_style(kind, col, text):
     return out
 
 
+def read_points(kind, texts):
+    """The icon points and the day's moments of a row -> (points, moments, problems). Each is a list of dicts."""
+    out, problems = {}, []
+    for col in JSON_COLS[kind]:
+        try:
+            out[col] = json.loads(texts.get(col) or "[]")
+        except json.JSONDecodeError as e:
+            out[col] = []
+            problems.append(f"{col}: does not parse ({e})")
+    points, moments = out.get("about_points_json", []), out.get("day_moments_json", [])
+    if "about_points_json" in out:
+        if not POINTS_COUNT[0] <= len(points) <= POINTS_COUNT[1]:
+            problems.append(f"about_points_json: {len(points)} points, wanted {POINTS_COUNT[0]} to {POINTS_COUNT[1]}")
+        if sum(p.get("icon") == "warning" for p in points) != 1:
+            problems.append("about_points_json: wanted exactly one 'warning' point (the honest catch)")
+        for p in points:
+            if set(p) != {"icon", "text"} or p["icon"] not in ICONS or not str(p["text"]).strip():
+                problems.append(f"about_points_json: bad point {p}")
+        if len({p.get("text") for p in points}) < len(points):
+            problems.append("about_points_json: a point appears twice")
+    if "day_moments_json" in out:
+        if [m.get("title") for m in moments] != MOMENT_TITLES:
+            problems.append(f"day_moments_json: wanted exactly the moments {MOMENT_TITLES}")
+        for m in moments:
+            if set(m) != {"icon", "title", "text"} or m["icon"] not in ICONS or m["icon"] == "warning" or not str(m["text"]).strip():
+                problems.append(f"day_moments_json: bad moment {m}")
+    return points, moments, problems
+
+
+def shared_runs(groups, n=RUN_WORDS_ROW):
+    """groups: {name: [text, ...]}. Runs of n words that two different groups of one row share (the lead, the points
+    and the moments must each say something of their own; the fixed toll wording is exempt)."""
+    seen, out = {}, []
+    for name, texts in groups.items():
+        for text in texts:
+            for sent in sentences(text):
+                for words in _norm(sent):
+                    for i in range(len(words) - n + 1):
+                        run = " ".join(words[i:i + n])
+                        if seen.setdefault(run, name) != name and run not in out:
+                            out.append(run)
+    return out
+
+
 def check_row(kind, key, texts, evidence):
     """texts: {column: prose}. Returns (problems, drift)."""
     problems, drift, allowed = [], [], set()
+    points, moments, bad = read_points(kind, texts)
+    problems += bad
+    texts = {c: t for c, t in texts.items() if c not in JSON_COLS[kind]}
+    extra = [("point", str(p.get("text", ""))) for p in points] + [("moment", str(m.get("text", ""))) for m in moments]
     for ev in evidence:
         p, d, shown = check_evidence(ev)
         problems += p
@@ -445,7 +518,7 @@ def check_row(kind, key, texts, evidence):
         problems.append(f"'{SAFEST}' is used in more than one field")
     if AT_LIMIT in joined and not backed(AT_LIMIT_FIELD, (">=", ">"), AT_LIMIT_MIN):
         problems.append(f"'{AT_LIMIT}' needs a test that the violent rate is at least {AT_LIMIT_MIN}")
-    for col, text in texts.items():
+    for col, text in list(texts.items()) + extra:
         if not text.strip():
             if not col.startswith("sub_"):                # an empty section subhead is allowed: better than filler
                 problems.append(f"{col}: empty")
@@ -453,7 +526,10 @@ def check_row(kind, key, texts, evidence):
         problems += check_style(kind, col, text)
         for n in numbers_in(text):
             if n not in allowed:
-                problems.append(f"{col}: number '{n}' has no evidence item")
+                problems.append(f"{col}: number '{n}' has no evidence item: {text[:60]}")
+    for run in shared_runs({"lead": [texts.get("host_intro", "")], "points": [p.get("text", "") for p in points],
+                            "moments": [m.get("text", "") for m in moments]}):
+        problems.append(f"the lead, the points and the moments repeat each other: '{run}'")
     return problems, drift
 
 
