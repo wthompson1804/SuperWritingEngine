@@ -2538,9 +2538,9 @@ function vYear(Y){
       return pointBtn("year",Y.id,s.measure,p,d==null?(p===3?"same":"difference not in the data"):fmtDiff(s.measure,d),true)}).join("")+'</div>',{sub:hlSub(Y,"compared_to_queens","queens")});
   /* neighborhoods with nothing to tour, and apartments in other towns: about what is not on the list, so they close the group */
   var oth=[],othB="";
-  if(Y.avoidOnly.length){oth.push(pl(Y.avoidOnly.length,"neighborhood")+" with nothing to tour");othB+='<h3 class="oth">Looked good, skipped</h3><div class="stack tight">'+Y.avoidOnly.map(function(H){return hoodCard(H,Y)}).join("")+'</div>'}
-  if(Y.heldElsewhere.length){oth.push(pl(Y.heldElsewhere.length,"apartment")+" worth a phone call");othB+='<h3 class="oth">Worth a phone call, in other towns</h3><div class="stack tight">'+Y.heldElsewhere.map(function(U){return callItem(U,slugName(U.hood_id))}).join("")+'</div>'}
-  if(Y.waitElsewhere.length){oth.push(Y.waitElsewhere.length+" not re-checked yet");othB+='<h3 class="oth">Not re-checked yet, in other towns</h3><div class="stack tight">'+Y.waitElsewhere.map(function(A){return waitItem(A,slugName(A.hood_id))}).join("")+'</div>'}
+  if(Y.avoidOnly.length){oth.push(pl(Y.avoidOnly.length,"neighborhood")+" skipped");othB+='<h3 class="oth">Looked good, skipped</h3><div class="stack tight">'+Y.avoidOnly.map(function(H){return hoodCard(H,Y)}).join("")+'</div>'}
+  if(Y.heldElsewhere.length){oth.push(Y.heldElsewhere.length+" worth a call");othB+='<h3 class="oth">Worth a phone call, in other towns</h3><div class="stack tight">'+Y.heldElsewhere.map(function(U){return callItem(U,slugName(U.hood_id))}).join("")+'</div>'}
+  if(Y.waitElsewhere.length){oth.push(Y.waitElsewhere.length+" not re-checked");othB+='<h3 class="oth">Not re-checked yet, in other towns</h3><div class="stack tight">'+Y.waitElsewhere.map(function(A){return waitItem(A,slugName(A.hood_id))}).join("")+'</div>'}
   if(othB)h+=row("r-others","Not on the list",oth.join(" · "),othB);
   h+='</section>';
   h+=nx?nextLink("Next experience",href("year",nx.id),nx.label):nextLink("That was the last one","#lives","All "+YEARS.length+" experiences");
