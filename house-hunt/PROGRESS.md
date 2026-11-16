@@ -2,7 +2,7 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-16, after the repairs to independent check 4; details in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_4.md`)
+## Current state (2026-11-16, after the repairs to independent check 4 and the pipeline clean-up that followed; details in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_4.md`)
 
 **Authorities, newest first:** `CLAUDE.md` → `docs/RANKING.md` (one current statement; change log at its end) → plan v4 → `docs/SAFETY_BASIS.md` → plan v3.
 
@@ -19,6 +19,33 @@ thin-neighborhood rule and 10 kept. Verdicts: 924 rows for 922 units (ok 533, as
 identical `data/ranked_units.csv` and `data/master_units.csv`; `check_registry.py` and all tests pass (`test_rules.py`: 617 pure checks; `--data`: 4,170
 with the page data; `test_parsers.py`: 259). `verify_all.py`: 19 passed, 0 failed, 1 warning (`site/dist` is older than `site/data.json`: `build_site.py`
 is the page agent's step).
+
+**Pipeline clean-up after the text audit (2026-11-16, later; counts unchanged at 523 / 202 / 77):**
+- `python3 scripts/check_published_text.py` (no flag) now exits 0: text 0, pipeline strings 0 (was 17). `verify_all.py`: 21 passed, 0 failed.
+  Tests: `test_rules.py` 793 pure checks (`pure_cleanup`), `--data` 5,385 with the page data (`page_cleanup`), `test_parsers.py` 259.
+- **Spelling.** American spelling in our own rule summaries: `data/reference/local_rules.csv` (39 summaries), `local_rules_round2.csv` (38),
+  `overnight_parking_towns.csv` (2: the Jersey City "license" sentence printed in 10 disclosures, and Peekskill), and the same summaries in
+  `scripts/local_rules_rows.jsonl` / `local_rules_round2_rows.jsonl` so a rebuild does not bring them back. No `quote` was touched.
+- **`meta.notes` and `meta.moment_thresholds`** are plain reader sentences (`build_page_data.META_NOTES`): no field names, "total with utilities
+  and fees", no "where the car sleeps", no "not read again".
+- **Dog amenities are structured** (`parsers.dog_amenity_facts`, from every source's words; `build_master.structured_dog_and_laundry`):
+  `amenities.dog_park_or_run`, `pet_spa_or_wash`, `dog_amenity_unspecified`. The bare "yes" on 11 shown buildings came from the management
+  page's value outranking the listing site's tag; read with its own sentence, all 11 name what they have (Avalon Maplewood, Avalon Wayne, Liberty
+  Bay Club, The Walcott, West Side Square: dog park and pet spa; Continuum: dog park, pet spa, dog wash; The Leaf: dog run, dog park, pet spa;
+  Vermella Harrison: dog run and dog park; The Brownstones at Englewood South, Summer Street: dog park; 500 PARQ: pet spa only). No shown
+  building is left unspecified. `shown_figures.buildings_with_own_dog_area` counts only a dog park or run (12 neighborhoods changed).
+  `dog_amenities` stays as the label (`dog run; dog park; pet spa; dog wash`, or `yes`), so the text system reads it as before.
+- **Laundry is structured** (`parsers.laundry_facts`): `in_unit_laundry` is `yes` only where a source says in the apartment and none says it is
+  not; `washer_dryer_hookups`, `on_site_laundry`; `laundry` is a label written from the same facts. Changed flags: Beacon Mill Village (only
+  "select apartments" have a washer: `select_apartments`; five apartments lose 1.5 to 1.6 rank points and keep their order) and 153-10 88th Ave
+  (a checker read "LAUNDRY ROOM (not in unit)": `on_site_only`; the ranking already scored it so). Bay One and West Side Square keep `yes` (their
+  own pages say in-unit); only the words beside the flag were another source's. The amenities parser no longer reads "Dishwasher In Every Unit"
+  as a washer. **Shown list:** 3 Acres 6052 entered and 3 Acres 5066 left (the eighth place in the building; scores moved by 0.1 through the
+  percentile shift; 6052 has a current `ok` verdict and was on the manager's own page at $2,245).
+- **`shown_figures` are the median building's** (one vote per shown building), the same computation as the text and "At a glance"; 28
+  neighborhoods changed a figure (Newark restaurants within a 10-minute walk: 35 → 14).
+- Left for others: `at_a_glance[].unit` is the word "metres" (text system's `glance_json`); the internal `why_internal` notes still say
+  "neighbouring lot" (never shown).
 
 **What changed (independent check 4, pipeline side):**
 - **Where buildings stand.** Every building's point is compared with its own address (ZIP area and municipality from the Census at the point). 14 points
