@@ -209,6 +209,17 @@ def al_flight(text: str) -> str:
     return "".join(out)
 
 
+def single_lister_listing(listing: dict) -> bool:
+    """An Apartment List listing that is one lister's own unit(s), not a property with a leasing office: the page gives
+    no unit count for the building and no website."""
+    tu = listing.get("total_units_count")
+    try:
+        many = tu is not None and float(tu) > 4
+    except (TypeError, ValueError):
+        many = False
+    return not many and not str(listing.get("website_url") or "").strip()
+
+
 def parse_apartmentlist(text: str, url: str):
     fl = al_flight(text)
     best = None
@@ -239,6 +250,20 @@ def parse_apartmentlist(text: str, url: str):
                 fmt = lambda t: (t.strftime("%-I:%M%p") if t.minute else t.strftime("%-I%p")).lower()
                 items.append((day[:3].title(), f"{fmt(a)}-{fmt(b)}"))
         hours = compress_hours(items)
+    # Re-grade (docs/PENDING_FIXES.md, contacts agent): "the number the property supplied" is true only of a property with
+    # a leasing office. A page with no unit count for the building and no website is a small lister's own listing (feeds
+    # such as reallyo, rentalutions): its original_phone is the LISTER's number. Such a page is graded like a
+    # single-unit listing elsewhere: a named brokerage -> kind broker with the brokerage's number; nobody named ->
+    # kind individual owner with a blank phone (contact through the listing). Never "leasing office".
+    if single_lister_listing(best):
+        brokerage = next((str(best.get(k) or "").strip() for k in ("brokerage_name", "pmc_display_name", "office_name")
+                          if str(best.get(k) or "").strip() and BUSINESS.search(str(best.get(k)))), "")
+        if brokerage:
+            return [cand(60 if (orig or shown) else 92, url, phone=orig or shown, manager=brokerage, kind="broker",
+                         note="number on a small lister's Apartment List listing, by this brokerage (not a leasing office)" if (orig or shown)
+                         else "brokerage named on the Apartment List listing; no phone on the page")]
+        return [cand(95, url, kind="individual owner",
+                     note="Apartment List listing by a small lister with no company named (no unit count or website for the building); contact through the listing")]
     out = []
     if orig:
         note = "number the property supplied to Apartment List (original_phone)"
