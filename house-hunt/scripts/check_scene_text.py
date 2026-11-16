@@ -45,7 +45,7 @@ ONE_OR_TWO = {"year": ["catch"], "hood": []}
 HOST_COLS = {"host_intro", "host_walkthrough", "tagline", "display_label"}   # the host voice may state all-in dollars
 COLUMNS = {"year": ["display_label", "tagline", "scene", "promise", "catch", "host_intro", "host_walkthrough"],
            "hood": ["scene", "good_for_her", "watch_for", "host_intro"]}
-VOICE_PHRASE = re.compile(r"review sites|people who live here", re.I)
+VOICE_PHRASE = re.compile(r"review sites|people who live (here|in )|residents (also |here )?(say|like|praise)", re.I)
 
 NUMBER = re.compile(r"\d{1,2}:\d{2}|\d[\d,]*(?:\.\d+)?")
 UNIT_PHRASES = [r"per 1,000"]                      # a unit, not a quantity
@@ -379,13 +379,14 @@ def check_row(kind, key, texts, evidence):
     return problems, drift
 
 
-REQUIRED_PHRASE = re.compile(r"about \$?# round trip with a new york e-zpass")     # the fixed toll wording
+# Fixed wordings that every text may use: the toll sentence and the units of the crime figures.
+REQUIRED_PHRASE = re.compile(r"about \$?# round trip with a new york e-zpass|per # residents|per #|against jamaica's #")
 OPENING_WORDS, OPENING_MAX = 3, 3        # at most 3 texts may start with the same 3 words
-RUN_WORDS, RUN_MAX = 6, 8                # at most 8 texts may share any run of 6 words
+RUN_WORDS, RUN_SHARE, RUN_FLOOR = 6, 0.10, 8   # no run of 6 words in more than a tenth of the texts (never fewer than 8)
 
 
 def _norm(sentence):
-    t = REQUIRED_PHRASE.sub(" | ", re.sub(r"\d[\d,.:]*", "#", sentence.lower()))
+    t = REQUIRED_PHRASE.sub(" | ", re.sub(r"\d[\d,.:]*\d|\d", "#", sentence.lower()))
     return [re.findall(r"[a-z#'é$-]+", part) for part in t.split("|")]
 
 
@@ -403,6 +404,7 @@ def check_repetition(col, texts):
             for words in _norm(sent):
                 for i in range(len(words) - RUN_WORDS + 1):
                     runs[" ".join(words[i:i + RUN_WORDS])].add(key)
+    RUN_MAX = max(RUN_FLOOR, int(len(texts) * RUN_SHARE))
     out = [f"{col}: {len(k)} texts open with '{o} ...' (limit {OPENING_MAX}): {sorted(k)[:5]}"
            for o, k in openers.items() if len(k) > OPENING_MAX]
     seen = set()

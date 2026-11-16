@@ -897,7 +897,7 @@ host_intro: New buildings by the water, and a dog run practically downstairs. Th
 voices: social_life
 
 === hood: nj:edgewater
-host_intro: Edgewater is the calm, errands-are-easy option by the water. Trader Joe's is {tj} miles away, the water {water} miles, and violent crime is {viol} per 1,000 against Jamaica's {jv}. People who live here call it relaxing and say plainly that it is no nightlife spot. They are right, with {bars} bar within a {w10}. The nearest park is about {parkwalk} minutes on foot, which is a long way with a puppy. The drive to your parents runs about {drive} minutes and about ${b_toll} round trip with a New York E-ZPass.
+host_intro: Edgewater is the calm, errands-are-easy option by the water. Trader Joe's is {tj} miles away, the water {water} miles, and violent crime is {viol} per 1,000 against Jamaica's {jv}. People who live here call it relaxing and no nightlife spot. They are right, with {bars} bar within a {w10}. The nearest park is about {parkwalk} minutes on foot, which is a long way with a puppy. The drive to your parents runs about {drive} minutes and about ${b_toll} round trip with a New York E-ZPass.
 voices: social_life
 
 === hood: nj:north-bergen
@@ -945,3 +945,129 @@ rules: Glen Cove|dog_park
 === hood: nj:hackensack
 host_intro: Hackensack gives you choice, and a parking rule to learn. [[We found {pg_n} places here, from about ${pg_lo} to ${pg_hi} a month all in. ]]Many streets are resident-permit-only from 2 AM to 6 AM, and the permit needs a car registered in New Jersey, so out-of-state plates would not qualify until re-registered. Ask each building for a guaranteed spot. The dog park is {dogpark} miles off. Property crime is {prop} per 1,000 against Jamaica's {jp}. Sunday is about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
 rules: Hackensack|overnight_parking; Hackensack|resident_permit
+
+=== hood: ny:yonkers
+host_intro: [[Yonkers has range: {pg_n} places, from about ${pg_lo} to ${pg_hi} a month all in. ]]The water is {water} miles from the typical building, the train station {station} miles, and people who live here talk about trails and parks along the water. What it lacks is a walkable night: {rest} restaurants and {bars} bar within a {w10}. Violent crime is {viol} per 1,000 against Jamaica's {jv}, so read each address on its own. Sunday runs about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
+voices: dogs_green
+
+=== hood: nj:jersey-city
+host_intro: Dog people, pay attention. People who live in Jersey City call it very dog friendly, and {b_dogpark} is {dogpark} miles away. About {rest1600} restaurants sit within {mile}. Many streets are zone-permit streets, where a car without a resident permit gets 2 hours, and the permit needs a licence showing your Jersey City address. Violent crime is {viol} per 1,000 against Jamaica's {jv}, and vehicle theft is {mvt}. Home is about {drive} minutes back, about ${b_toll} round trip with a New York E-ZPass.
+rules: Jersey City|resident_permit
+voices: dogs_green
+
+=== hood: ny:port-chester
+host_intro: The train station is {station} miles from the door, which is the headline in Port Chester. Violent crime is {viol} per 1,000 against Jamaica's {jv}, and about {rest} restaurants are within a {w10}. There the list thins out. No bars or cafés are that close{!bars==0}{!cafes==0}, the nearest park is a {parkwalk}-minute walk, and the dog park is {dogpark} miles off, so the dog's big outings need the car. Figure about {drive} minutes to your parents and about ${b_toll} round trip with a New York E-ZPass.
+
+=== hood: nj:east-rutherford
+host_intro: Here is something rare on this page: people who live here say street parking is plentiful. Read the signs anyway, because alternate-side rules are enforced all year. East Rutherford is also very low on crime, at {viol} violent and {prop} property per 1,000, with about {rest} restaurants within a {w10}. The gap is green. The nearest park is a {parkwalk}-minute walk, and the dog park is {dogpark} miles off. It is about {drive} minutes to Sunday dinner, about ${b_toll} round trip with a New York E-ZPass.
+rules: East Rutherford|alternate_side
+voices: parking
+
+=== hood: ny:white-plains
+host_intro: White Plains has no overnight street parking. None. The city bans it from 2 AM to 6 AM, people who live here say that has made life harder, and the fix is a garage or lot permit. So every building gets the same opening question: where does my car sleep. The rest is easy to like. {b_dogpark} is {dogpark} miles away, by city permit, and violent crime is {viol} per 1,000. Mom and Dad are about {drive} minutes by car, about ${b_toll} round trip with a New York E-ZPass.
+rules: White Plains|overnight_parking; White Plains|dog_park
+voices: parking
+
+=== hood: ny:new-springville-willowbrook-bulls-head-travis
+host_intro: {b_park} is the neighbor here, and it is enormous{!parkha>=50}. It is about {parkwalk} minutes from the building we found, with Trader Joe's {tj} miles away and the vet {vet} miles. That is a strong weekday. The weak points: a dog park is {dogpark} miles off, there are no bars within a {w10}{!bars==0}, and people who live here say street spots are hard to find. Getting to your parents takes about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
+voices: parking
+
+=== hood: nj:ridgewood
+host_intro: Ridgewood has a real downtown: about {rest} restaurants and {cafes} cafés within a {w10}, and people who live here rave about it. No bars, though{!bars==0}. Violent crime is {viol} per 1,000, and the train station is {station} miles away. The rule to know: no parking on any public street or lot from 2 to 6 AM. Your car needs a home on the building's property, in writing. Plan on about {drive} minutes to reach your parents and about ${b_toll} round trip with a New York E-ZPass.
+rules: Ridgewood|overnight_parking
+voices: social_life
+
+=== hood: nj:elizabeth
+host_intro: I would walk into this with my eyes open. Property crime in Elizabeth is {prop} per 1,000 residents, a hair under Jamaica's {jp}, and vehicle theft is {mvt} per 1,000. For someone who loves her car, that matters. Nothing to eat or drink sits within a {w10} of the building we found{!rest==0}{!bars==0}{!cafes==0}, the nearest park is a {parkwalk}-minute walk, and people who live here describe congested streets and scarce parking. The drive to your parents is about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
+voices: parking
+
+=== hood: nj:bloomfield
+host_intro: [[Bloomfield is gentle on the budget: the places we found run about ${pg_lo} to ${pg_hi} a month all in. ]]{b_park} is about {parkwalk} minutes away, {b_dogpark} is {dogpark} miles, and violent crime is {viol} per 1,000. About {rest} restaurants sit within a {w10}, though people who live here wish for more nightlife. The town has an overnight permit-parking ordinance, so get the hours from the leasing office. Budget about {drive} minutes for the trip home, about ${b_toll} round trip with a New York E-ZPass.
+rules: Bloomfield|overnight_parking
+voices: social_life
+
+=== hood: ct:stamford
+host_intro: [[{pg_n} places made the cut in Stamford, from about ${pg_lo} to ${pg_hi} a month all in. ]]This is apartment country: {bigbldg} percent of homes are in large buildings and {newcomers} percent of residents moved in within the last year, so being new is normal. About {rest} restaurants and {bars} bars sit within a {w10}. People who live here like it and warn that a car is still necessary. About {drive} minutes separates you from Sunday dinner, plus about ${b_toll} round trip with a New York E-ZPass.
+voices: social_life
+
+=== hood: nj:montclair
+host_intro: Montclair is the restaurant town. About {rest} restaurants and {cafes} cafés sit within a {w10}, with violent crime at {viol} per 1,000 and a train station {station} miles away. People who live here are split: some love the food and the parks, others complain about overbuilding and car theft, and the police figure for vehicle theft is {mvt} per 1,000. The dog park is {dogpark} miles off. Door to door, call it {drive} minutes to your parents, about ${b_toll} round trip with a New York E-ZPass.
+voices: social_life, car_crime, parking, dogs_green
+
+=== hood: nj:wayne
+host_intro: A pond, a park and not much else, which may be exactly the point. In Wayne, {b_park} is about {parkwalk} minutes from the door and {b_dogpark} is {dogpark} miles away. About {rest} restaurants and hardly a bar are within a {w10}{!bars<=1}. People who live here say street parking is hard and tell newcomers to get a garage or driveway space, so take that advice. Property crime is {prop} per 1,000 against Jamaica's {jp}. Sunday is about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
+voices: parking
+
+=== hood: nj:south-orange
+host_intro: Let me save you a ticket. South Orange allows no overnight parking from 2 to 6 AM on any street or in any lot without a permit, and apartment residents can only buy a permit for a municipal lot, at $25 a month for nights. People who live here call parking a nightmare. The pleasant parts: the train station is {station} miles away and a park is {parkwalk} minutes from the door. Home is about {drive} minutes off, about ${b_toll} round trip with a New York E-ZPass.
+rules: South Orange|overnight_parking; South Orange|resident_permit; South Orange|municipal_garage_monthly
+voices: parking
+
+=== hood: nj:riverdale
+host_intro: Small town, short list. Around the building we found in Riverdale there is {rest} restaurant within a {w10}, no bars or cafés{!bars==0}{!cafes==0}, and the supermarket is {super} miles off. What you get is calm and a decent dog routine: a park about {parkwalk} minutes away and a dog park at {dogpark} miles. Violent crime is {viol} per 1,000, but property crime is {prop} against Jamaica's {jp}, so ask about secured parking. It takes about {drive} minutes to reach your parents, about ${b_toll} round trip with a New York E-ZPass.
+
+=== hood: ny:patchogue
+host_intro: No tolls{!b_toll==0}. That counts for a lot this far out, and it is Patchogue's quiet advantage: about {drive} minutes to your parents and nothing to pay on the way. People who live here love the water views and the downtown, and {brew} breweries sit within {mile}. They also say parking is tough. The dog draws the short straw. The nearest park is a {parkwalk}-minute walk and the dog park is {dogpark} miles away, so most of the exercise will be on the sidewalk.
+voices: dogs_green, social_life, parking
+
+=== hood: nj:parsippany-troy-hills
+host_intro: People who live here describe Parsippany as a fine place to live that is very boring. I would call that honest advertising. Violent crime is {viol} per 1,000 and property crime {prop}, the typical apartment is about {sqft} square feet, and residents like the parks and trails. {b_dogpark}, {dogpark} miles away, needs a township permit. Within a {w10} you get about {rest} restaurants and no bars{!bars==0}. Then there is the drive: about {drive} minutes to your parents, about ${b_toll} round trip with a New York E-ZPass.
+rules: Parsippany-Troy Hills|dog_park
+voices: social_life, dogs_green
+
+=== hood: ny:peekskill
+host_intro: Winter changes the parking in Peekskill. From December 1 to April 15, overnight parking on a city street is not allowed unless a sign says so. Ask for an off-street space. The green is the draw: a big park{!parkha>=20} about {parkwalk} minutes from the door and {b_dogpark} at {dogpark} miles. People who live here like the casual nights out, though only {rest} restaurants are within a {w10}. Reaching your parents takes about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
+rules: Peekskill|overnight_parking
+voices: social_life
+
+=== hood: nj:franklin
+host_intro: {b_park} is about {parkwalk} minutes from the door. That is the dog's whole case for Franklin, and it is a good case{!parkha>=20}. Crime is very low, at {viol} violent and {prop} property per 1,000. The trade is everything else. Nothing to eat or drink sits within a {w10}{!rest==0}{!bars==0}{!cafes==0}, only about {rest1600} restaurants are within {mile}, and Sunday is a haul: about {drive} minutes each way and about ${b_toll} round trip with a New York E-ZPass.
+
+=== hood: nj:somerville
+host_intro: Somerville is a walkable little downtown with room to spread out. The typical apartment we found is about {sqft} square feet, about {rest} restaurants and {bars} bars sit within a {w10}, and people who live here praise exactly that. {young} percent of residents are aged 25 to 34. Parking is friendly: on restricted streets, residents register for free permits. The train station is {station} miles away. The cost is the map. Sunday dinner is about {drive} minutes off, about ${b_toll} round trip with a New York E-ZPass.
+rules: Somerville|resident_permit
+voices: social_life
+
+=== hood: ct:danbury
+host_intro: [[Danbury is where the monthly number drops: about ${pg_lo} to ${pg_hi} all in for the places we found. ]]The buildings are new, with {post2010} percent of homes built since 2010, and violent crime is {viol} per 1,000 against Jamaica's {jv}. You pay in distance. About {drive} minutes to your parents, about ${b_toll} round trip with a New York E-ZPass, and transit is no real option at about {transit} minutes. The nearest park is a {parkwalk}-minute walk and the dog park is {dogpark} miles away. Bars within a {w10}: {bars}.
+
+=== hood: nj:red-bank
+host_intro: Dinner, then a show. People who live in Red Bank talk about evenings that end at the theatre, and about {rest} restaurants sit within a {w10} of the building we found. The water is {water} miles away and the train station {station} miles. Residents also say new buildings are replacing the trees, and the dog park is {dogpark} miles off. Street parking runs on a residential permit from the Parking Utility. The big cost: about {drive} minutes to your parents and about ${b_toll} round trip with a New York E-ZPass.
+rules: Red Bank|resident_permit
+voices: social_life, dogs_green
+
+=== hood: ct:milford-city-balance-
+host_intro: Milford sells itself on the shoreline, and people who live here back it up: they love the beaches and the downtown. The beach is {beach} miles away, a park is {parkwalk} minutes from the door, and violent crime is {viol} per 1,000. Parking at Gulf Beach or Walnut Beach needs a resident sticker from May 1 to September 30. Keep an eye on property crime, at {prop} per 1,000 against Jamaica's {jp}. The distance: about {drive} minutes to your parents, about ${b_toll} round trip with a New York E-ZPass.
+rules: Milford|resident_permit
+voices: dogs_green, social_life
+
+=== hood: nj:long-branch
+host_intro: The beach is {beach} miles from the door, and your dog is not invited in summer. Long Branch bans dogs from all beaches from May 1 to September 30 and from the boardwalk always; leashed dogs are welcome on the sand from October 1 to April 30. The dog park is {dogpark} miles away and the vet {vet} miles. People who live here say the off season is quiet for locals. Your parents are a long way: about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
+rules: Long Branch|parks_and_beaches
+voices: social_life
+
+=== hood: ny:new-paltz
+host_intro: I will be straight with you: this is about as far as this search goes{!drive>=110}. New Paltz is about {drive} minutes from your parents, about ${b_toll} round trip with a New York E-ZPass, and the nearest dog park is {dogpark:mi0} miles away. We also have no crime figures for it{!viol missing}, so I will not tell you it is safe or unsafe. What people who live here love is the hiking and the downtown, with about {rest1600} restaurants within {mile}. A hard place to do Sunday dinner from.
+voices: dogs_green, social_life
+
+=== hood: ny:valley-stream
+host_intro: Valley Stream is the answer to a specific wish: more room, still close. The typical place we found is about {sqft} square feet, and your parents are about {drive} minutes away with no tolls{!b_toll==0}. {b_dogpark} is {dogpark} miles from the door. Violent crime is {viol} per 1,000 against Jamaica's {jv}. It is a house-and-driveway suburb{!detached>=0.6}, and people who live here say it is not very walkable and could use more for younger adults. About {rest} restaurants are within a {w10}, with {bars} bar.
+voices: social_life
+
+=== hood: nj:belleville
+host_intro: Belleville trades nightlife for square feet, and says so. People who live here report no nightlife to speak of and a few problems with parking. The typical apartment we found is about {sqft} square feet, a park is {parkwalk} minutes from the door, and {b_dogpark} is {dogpark} miles away. Watch the car figures: vehicle theft is {mvt} per 1,000 and property crime {prop} against Jamaica's {jp}. The drive back to your parents runs about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
+voices: social_life, parking
+
+=== hood: nj:bayonne
+host_intro: Bayonne has a parking rule aimed straight at new apartment buildings. Street parking runs on a $5 resident permit, and residents of developments in the newer redevelopment areas cannot get it at all. Ask each building whether that applies. People who live here describe fights over street spots. [[The places we found run about ${pg_lo} to ${pg_hi} a month all in. ]]Only about {rest} restaurants are within a {w10}. Sunday is about {drive} minutes away, about ${b_toll} round trip with a New York E-ZPass.
+rules: Bayonne|resident_permit
+voices: parking
+
+=== hood: nj:clifton
+host_intro: Clifton is big apartments and short dog walks. The typical place we found is about {sqft} square feet, and {b_park} is about {parkwalk} minutes from the door. Trader Joe's is {tj} miles away. People who live here praise the parks and complain that nothing else is walkable, and the count agrees: about {rest} restaurants and hardly a bar within a {w10}{!bars<=1}. Property crime is {prop} per 1,000 against Jamaica's {jp}. Mom and Dad are about {drive} minutes by car, about ${b_toll} round trip with a New York E-ZPass.
+voices: dogs_green
+
+=== hood: nj:hawthorne
+host_intro: Violent crime in Hawthorne is {viol} per 1,000 residents. Jamaica's is {jv}. The typical apartment we found is about {sqft} square feet, a dog run is {dogpark} miles away, the train station {station} miles, and people who live here talk about the big town park. Where there is permit parking, the resident fee is $2 per vehicle. What you will not find is a night out: about {rest} restaurants, no bars{!bars==0}. It is about {drive} minutes to your parents, about ${b_toll} round trip with a New York E-ZPass.
+rules: Hawthorne|resident_permit
+voices: dogs_green

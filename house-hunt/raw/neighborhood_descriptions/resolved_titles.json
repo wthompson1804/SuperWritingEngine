@@ -797,5 +797,45 @@
   "offset": 1135236644,
   "end": 1135631496,
   "page_id": 306906
+ },
+ "Roxbury, New Jersey": {
+  "offset": 627988998,
+  "end": 628925384,
+  "page_id": 125582
+ },
+ "Park Slope": {
+  "offset": 1939110030,
+  "end": 1939360393,
+  "page_id": 765341
+ },
+ "Willets Point": {
+  "offset": 3095777384,
+  "end": 3095989607,
+  "page_id": 1892204
+ },
+ "Flatbush": {
+  "offset": 1748587061,
+  "end": 1748725069,
+  "page_id": 626242
+ },
+ "East New York": {
+  "offset": 2344844651,
+  "end": 2345033513,
+  "page_id": 1112478
+ },
+ "Middletown, New York": {
+  "offset": 633033431,
+  "end": 633326458,
+  "page_id": 126946
+ },
+ "Kensington, Brooklyn": {
+  "offset": 1954435219,
+  "end": 1954465879,
+  "page_id": 776986
+ },
+ "Fresh Meadows, Queens": {
+  "offset": 2601945427,
+  "end": 2602238806,
+  "page_id": 1354213
  }
 }

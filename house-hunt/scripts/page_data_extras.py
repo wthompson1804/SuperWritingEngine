@@ -169,6 +169,16 @@ def main():
         y["hood_ids"] = [h["id"] for h in ranked]
     rep["neighborhoods ranked within experiences"] = sum(1 for h in hoods.values() if h.get("rank_in_experience"))
 
+    # finer neighborhood coordinates for the map (the page builder rounds to two decimals, about 1 km)
+    ru = DATA / "ranked_units.csv"
+    if ru.exists():
+        RU = pd.read_csv(ru, usecols=lambda c: c in ("hood_id", "lat", "lon"), low_memory=False)
+        if {"hood_id", "lat", "lon"} <= set(RU.columns):
+            g = RU.assign(lat=pd.to_numeric(RU.lat, errors="coerce"), lon=pd.to_numeric(RU.lon, errors="coerce")).groupby("hood_id")[["lat", "lon"]].mean()
+            for hid, r in g.iterrows():
+                if hid in hoods and pd.notna(r.lat) and pd.notna(r.lon):
+                    hoods[hid]["lat"], hoods[hid]["lon"] = round(float(r.lat), 5), round(float(r.lon), 5)
+
     d.setdefault("meta", {})["extras"] = rep
     json.dump(d, open(f, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     print("site/data.json extras:", rep)
