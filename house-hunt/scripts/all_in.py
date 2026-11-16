@@ -27,6 +27,7 @@ and no gross figure is invented for it (independent check 3, D5, D16): such a un
 from __future__ import annotations
 
 import glob
+import os
 import json
 import re
 import sys
@@ -224,7 +225,7 @@ def cost_unit(r, util, RT, MED):
             lines.append({"line": "pet rent", "amount": pet, "basis": r.get("pet_rent_monthly_basis", "stated"), "note": r.get("pet_rent_note", "")})
         else:
             # owner, 2026-11-16: she is getting a dog, so pet rent is certain. Not published -> an estimate, never $0.
-            pm, pn, pkey = pick(MED["pet"], st_, "")
+            pm, pn, pkey = pick(MED["pet"], st_, "") if os.environ.get("HH_NO_PET_ESTIMATE") != "1" else (None, 0, None)   # measurement switch only
             if pm is not None:
                 lines.append({"line": "pet rent (est.)", "amount": round(pm), "basis": "estimate",
                               "note": f"not published for this building; estimate = the median of the known pet rents of {pn} buildings in {pkey or 'all three states'}"})

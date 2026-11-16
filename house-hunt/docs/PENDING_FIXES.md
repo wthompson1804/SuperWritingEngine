@@ -21,3 +21,5 @@ From the page agent:
 From the contacts agent:
 - `scripts/building_contacts.py` has no rule against recording a single-unit lister's own number as "property-supplied".
   The page and call sheet now hide broker and owner numbers; the table itself should be re-graded.
+
+**Settled 2026-11-16:** every item above is settled in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_3.md` ("docs/PENDING_FIXES.md, settled by reading").

@@ -2,46 +2,41 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-16, 01:00 UTC)
+## Current state (2026-11-16, after the third independent check)
 
-**Authorities, newest first:** `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` → `docs/RANKING.md` (v2) → `docs/SAFETY_BASIS.md`
+**Authorities, newest first:** `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` → `docs/RANKING.md` (v2, with the sections added after each check; the last one is current) → `docs/SAFETY_BASIS.md`
 → `docs/PLAN_V3_APPROVED_2026-11-15.md` (gates; dog limit 25 lb; size-only "small dogs" passes) → UX brief and mock-up 4 (layout only).
 The "data only, no UI, no ranking" lines in `CLAUDE.md` and the handoff brief are superseded: the job is now the finished decision page.
 
 **Run everything:** `python3 scripts/run_all.py` (`--fast` after evidence-only changes) → `scripts/build_page_data.py` →
 `scripts/page_data_extras.py` (prose, round 2 quotes and rules, contacts) → `scripts/build_site.py` → `site/dist/index.html`. Publish as a NEW private artifact (never replace the mock).
 
-**Latest run (2026-11-16, 01:00 UTC; tolls, Jersey City split, rule items, evidence batches 18 and 19):** 20,464 listings →
-2,659 pass listing gates (61 pending listings settled by batch 18) → 1,653 within the all-in cap → 821 ranked → **347 shown** in
-246 buildings, 110 neighborhoods (37 with three or more; Stamford has 38). 133 with one open item: live check 46, listing 29,
-elevator 19, dogs 19, availability 15, eligibility 5. Disclosures: floor not published 313, cost near the cap 51, lease term 41,
-net-effective rent 26, dog weight limit not published 19, overnight street parking 12, condo 4. 36 avoid cards, 28 held, 28 waiting
-for a live check. By experience: Little-City 143, Room-to-Breathe 76, Old-Neighborhood 75, Fresh-Start 38, Quiet-Street 9,
-Walk-Everywhere 6. By state: NJ 145, NY 111, CT 91. 539 reviewed verdicts (ok 287, asterisk 85, remove 167).
+**Latest run (2026-11-16, repairs after `docs/INDEPENDENT_CHECK_3.md`; details in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_3.md`):** 20,464 listings →
+2,659 pass listing gates → 2,632 costed (27 duplicates merged) → 1,613 within the all-in cap (pet rent now estimated where unpublished) → 763 ranked → **489 shown in 232 buildings**,
+104 neighborhoods (42 with three or more). Up to 8 per building (139 buildings show one unit, 11 show eight). 293 carry one open item: live check 178, elevator 41, listing 37,
+dogs 16, availability 16, eligibility 5. Disclosures: floor not published 440, special offer 253, lease term 98, could pass $3,000 once parking and fees are known 97,
+dog weight limit not published 22, overnight street parking 19, net-effective rent 18, condo 9. 34 avoid cards, 35 held, 35 waiting for a live check.
+By experience (units / buildings): Little-City 202 / 87, Room-to-Breathe 124 / 46, Old-Neighborhood 85 / 63, Fresh-Start 63 / 24, Quiet-Street 10 / 7, Walk-Everywhere 5 / 5.
+By state: NJ 244 units in 90 buildings, CT 135 in 57, NY 110 in 85. Reviewed verdicts: 792 rows for 791 units (ok 445, asterisk 155, disclose 20, remove 172).
+Two consecutive runs give an identical `data/ranked_units.csv`; `check_registry.py` and all tests pass.
 
-**Done in this pass** (`docs/RANKING.md`, last section; tests in `scripts/test_rules.py`: 199 rule checks, about 1,450 on the output):
-- **Tolls complete** for all 792 buildings (MTA rates). New York E-ZPass figure plus the mail-rate figure (what an out-of-state tag pays
-  at MTA crossings); the mail figure is "at least" for the 187 buildings whose route enters the Manhattan congestion zone (no mail rate found).
-- **Jersey City split** into its neighborhoods (Jersey City only; `data/reference/subcity_overrides.csv` holds four boundary overrides).
-  Shown: Bergen-Lafayette 8 (Fresh-Start), West Side 7 and Journal Square 6 (Little-City), Downtown 1 (Fresh-Start), McGinley Square 0
-  (Old-Neighborhood; 4 avoid cards). Safety stays on the citywide police rate; the sub-city figure is a labelled 10-month estimate.
-- **Overnight street-parking disclosure** from the reviewed table `data/reference/overnight_parking_towns.csv` (26 towns: 6 ban, 12 permit, 8 seasonal).
-- **Staleness is a rule** (over 60 days: one open item; over six months: removed), **dog weight limit with no number** carries the tour
-  question, **an elevator on a listing site's amenity list is `stated`** in every batch.
-- **Phone answers**: `data/evidence/call_answers.csv` (absent today) is wired in as the highest-precedence source (`confirmed_by_phone`).
-- **Evidence batch 18** (pending listings in the thin experiences) and **batch 19** (buildings that had no evidence) are in.
+**Changed in this pass:** verdicts carry several kinds per unit; net-effective only where the evidence says so (other offers are the "special offer" disclosure, no invented gross);
+staleness no longer switched off by a "second site" that is the same page, and a building page's date applies to every unit on it; the elevator doubt table
+(`data/reference/elevator_doubt.csv`, 15 buildings) and the garden-style rule; pet rent estimated, `all_in_likely` and its disclosure; 8 per building with a `buildings` array;
+experience and neighborhood figures computed over the shown units; day-moment ratings on absolute thresholds; fees not counted twice; names and addresses corrected
+(`data/reference/address_overrides.csv`); 30 Broad Street removed; contacts re-graded.
 
-**Weak, plainly:** 257 of the 347 shown units (173 buildings) have their elevator from listing sites only (Apartment List, Trulia, Zumper),
-never from the building's own page or a record. 313 shown floors are not published. 179 shown units are Trulia rows that cannot be re-read
-(Trulia is refusing us); 46 shown units were never seen live. Page modification dates exist for only about 350 of 2,634 units, so the
-staleness rule is silent on most building-page rows. `scripts/check_scene_text.py` fails on 5 rows whose counts moved (Little-City,
-Fresh-Start, Harrison, Yonkers, Stamford): the writing agent owns those.
+**Weak, plainly:** 178 of the 489 shown units have never been seen live (most are the third to eighth unit of a building whose first two were checked); 217 are Trulia rows
+that cannot be re-read. 377 shown units in 164 buildings have their elevator from listing sites only. 440 shown floors are not published. Parking is not published for 359
+shown units and required fees for 306; 97 units would pass $3,000 at typical parking and fees, and 201 use an estimated pet rent. The garden-style rule catches only two
+buildings beyond the reviewed table, because unit labels are ambiguous. 13 shown rows are floor plans, not named apartments. The estimates' medians come from the master table,
+not the ranked set. `docs/harvest_notes/zumper_open_pending.md` did not exist when this pass ended, so the Zumper opened-listings file is still not merged.
 
 **Open:** the Zumper opened-listings harvest (`data/listings_pending/zumper_opened.csv`) was not finished when this pass ended and is not
 merged; Avalon W Squared (West Windsor, 65 pending units) must not be filed under Princeton if it ever passes; the Manhattan congestion-zone
 mail rate; photos; Reddit key.
 
-**The review rule (new):** a unit is shown only if `data/evidence/review_verdicts.csv` holds an `ok` or `asterisk` verdict for
+**The review rule (new):** a unit is shown only if `data/evidence/review_verdicts.csv` holds an `ok`, `asterisk` or `disclose` verdict (several rows per unit, one per kind) for
 it, written against the evidence as it stands (`scripts/verdicts.py`; `check_registry.py` fails the run otherwise). When
 evidence is added or a new unit is promoted: `python3 scripts/verdicts.py digest`, read it, `python3 scripts/verdicts.py add
 <file>`, rerun. See `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_2.md` (per-defect status, what is still weak, six decisions for Will).

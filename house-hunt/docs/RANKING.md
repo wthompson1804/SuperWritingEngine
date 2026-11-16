@@ -175,3 +175,75 @@ buildings now do. Figures are New York E-ZPass, weekend off-peak; the Tolls by M
 crossings) is carried beside it, and is "at least" where the route enters the Manhattan congestion zone (no mail rate found).
 
 **Jersey City** is split into its neighborhoods (`docs/SUBCITY_SPLIT_PLAN.md`); the safety rule still uses the citywide police rate.
+
+## After the third independent check (2026-11-16) — see `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_3.md`
+
+These replace the rules above where they differ. Tests: `scripts/test_rules.py` (`pure_4`, `data_4`, `page_3`).
+
+**Elevator (owner's decision from the check's finding).** An elevator named in a listing site's amenity list is still
+`stated`. Two exceptions make it an OPEN gate fact, with the asterisk "Confirm an elevator serves this apartment":
+1. the building is in the reviewed table `data/reference/elevator_doubt.csv` (building_id, name, why, source): 15 rows, the
+   14 doubtful low-rise or multi-building complexes the check named and 99 Bridge (added in the repair pass, from its own
+   evidence rows);
+2. by rule (`build_master.py: garden_style`, `parsers.multi_building_labels`): the elevator rests on listing sites only AND
+   the unit labels read as a multi-building low complex AND no page or record gives a height of four floors or more. The
+   labels count only when every labelled unit has a building part (`09-326`, `B9-309`, `K3-02`, `5201`), two or more
+   buildings appear and no label reads above floor 3; for bare four-digit labels the floor digit must vary and no
+   unit-on-floor number may exceed 40 (this keeps towers such as `1206` and floor-plus-three-digit labels such as `5158` out).
+With a second open item (most often no live check) the unit is not shown. A phone answer settles it. Also: an unconfirmed
+"the listing does not state an elevator" no longer keeps the elevator open where the city's record settles it (the listing's
+own lot, an elevator class, an active passenger elevator on the device list).
+
+**Cost (owner's decision; the cap stays on `all_in`).**
+- Pet rent is certain (she is getting a dog). Where it is not published the line is an estimate, "pet rent (est.)": the
+  median of the known pet rents, one value per building, of the buildings in the same state. Today $50 in all three states.
+  It counts toward `all_in` and the $3,000 cap. The medians are taken over the buildings of the master table (those with a
+  unit that passes the listing gates), not over the ranked buildings, because the ranked set depends on the cost gate; the
+  two agree to within $10 in every state (a test checks it).
+- Parking and required building fees stay unknown: nothing is estimated into `all_in`. `all_in_likely` = `all_in` + the
+  median known parking fee (same state and same kind of parking where five or more buildings have a known fee, else the
+  state, else all states; fees of $0 count) + the median known required fees of the state, for the lines that are not
+  published. Figures and counts: `data/reference/cost_estimates.csv`.
+- Where `all_in` ≤ $3,000 < `all_in_likely` the unit carries the disclosure "Could pass $3,000 once parking and fees are
+  known", with both figures. This replaces "cost near the cap".
+- A listed price that is a page's "total price" already contains the required fees: the fee line is $0 whatever fee text
+  was parsed beside it. A fee named beside a total it is part of ("$90/mo (total price minus base price); $50 amenity fee
+  named") is not added to it.
+- Net-effective: the rent used is always the listed price (or the 12-month price of a longer lease). It is called
+  net-effective only where a page or evidence row says the listed price is net-effective; a gross figure is given only then.
+  Any other offer that could change what a month costs (free months not tied to the price, a credit, a gift card) is the
+  disclosure "special offer" with the question "Special offer: ask what a normal month costs", and no gross is computed.
+
+**Buildings.** Up to 8 shown units per building (`MAX_PER_BUILDING`; it was 2), in rank order by the same score. Candidate
+and phone-call lists still take two per building. `site/data.json` has a `buildings` array and `building_ids` per
+neighborhood, ordered by each building's best unit.
+
+**Reviewed verdicts hold several rows per unit**, keyed on (listing_id, kind): `asterisk` for a gate kind (elevator, dogs,
+not_available, unverified, wrong_building, restricted), `disclose` for a disclosure kind (lease_term, coop_condo, other,
+floor), `remove`, or `ok`. Each gate row counts as an open gate fact (two: not shown); every disclosure row is listed.
+
+**New rule-made open items and removals.** A checker's note that the price itself must be verified ("far below the area's
+other listings") is the open item "listing". A condominium lot (city class R at the listing's own address, not a managed
+rental building) or a listing typed condo carries the condo disclosure. A lease term named in the offer of a
+net-effective price ("3 months free on 18 month leases") carries the lease-term disclosure. Sibling rule: where a reviewer
+removed units of a building because their numbers read as first-floor units, every unit of that building with the same
+label shape and the same digit in that place is removed. Staleness: a second site is a different host; the modification date
+of a building page applies to every unit listed on that page; a unit seen "live" only on that same stale page is stale too.
+
+**Experience and neighborhood figures** are computed over the shown units (medians and ranges over the same set); each
+experience names its nearest and farthest neighborhood by drive time.
+
+**Day moments: three levels, absolute thresholds (owner, 2026-11-16).** `moments.<key>.rating` is strong / mixed / weak, or
+null where the data cannot say. No level holds more than about 60 percent of the shown places for any moment (tested).
+
+| Moment (key) | Measure | Strong | Mixed | Weak |
+|---|---|---|---|---|
+| Morning with the dog (`wake`) | minutes on foot to the nearest green space | 3 or less | over 3, up to 10 | more than 10 |
+| Work day at home (`work`) | size and a separate bedroom (null when the size is not published) | a separate bedroom and 700 sq ft or more | everything between | under 550 sq ft, or a studio under 600 sq ft |
+| Evening out (`after`) | restaurants and bars within a 10-minute walk (800 m) | 15 or more restaurants and at least one bar | 4 or more restaurants | fewer than 4 restaurants |
+| The car at night (`night`) | where the car sleeps | garage or gated parking at the building and a front desk or controlled entry stated | garage with neither stated, covered, lot, off-site, or parking not known | street only, or the town restricts overnight street parking and no space is confirmed |
+| Saturday (`sat`) | bars and restaurants within 1,600 m | 5 or more bars and 30 or more restaurants | everything between | at most 1 bar and fewer than 15 restaurants |
+| Sunday with her parents (`sun`) | drive one way, free-flow estimate | 30 minutes or less | 31 to 60 | more than 60 |
+
+Shares among the 489 shown (strong / mixed / weak): wake 27 / 45 / 28; work 36 / 22 / 31 (10 percent null); after 28 / 47 / 25;
+night 54 / 41 / 4; sat 32 / 41 / 27; sun 16 / 57 / 27.

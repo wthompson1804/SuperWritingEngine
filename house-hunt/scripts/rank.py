@@ -35,7 +35,11 @@ UNIVERSAL_SHARE, PROMISE_SHARE = 0.7, 0.3
 POOL_BUMP, INDOOR_POOL_BUMP = 3, 6
 UNKNOWN_PCT = 25
 CERTAINTY = {"clean": 1.0, "one_inferred": 0.97}
-MAX_PER_BUILDING, SHOWN, CANDIDATES = 8, 10 ** 6, 15
+import os  # noqa: E402
+# Measurement switches (docs/REPAIRS_AFTER_INDEPENDENT_CHECK_3.md reports the effect of each rule by itself). They are
+# never set in a normal run; scripts/check_registry.py asserts the shipped values on the output.
+MAX_PER_BUILDING, SHOWN, CANDIDATES = int(os.environ.get("HH_MAX_PER_BUILDING", 8)), 10 ** 6, 15
+NO_ELEVATOR_DOUBT = os.environ.get("HH_NO_ELEVATOR_DOUBT") == "1"
 # MAX_PER_BUILDING (owner, 2026-11-16): the page now groups apartments under their building, so up to 8 units of a
 # building are shown (it was 2), in rank order inside the building by the same score. CAND_PER_BUILDING keeps the
 # candidate / phone-call lists (hood_rank, needs_confirmation, needs_live_check) at two per building, as before.
@@ -242,7 +246,7 @@ def main():
     base_e = s("elevator_basis").isin(["inferred", "", "unknown"]) | s("elevator").str.lower().ne("yes")
     # owner, 2026-11-16: a building in the reviewed doubt table, or a tag-only elevator in a complex the data shows to be
     # multi-building garden-style (build_master.py: elevator_doubt), is an open gate fact: "confirm an elevator serves this apartment"
-    doubt_e = s("elevator_doubt").ne("") & ~phone_e
+    doubt_e = s("elevator_doubt").ne("") & ~phone_e & (not NO_ELEVATOR_DOUBT)
     inf_e = base_e | ((s("elevator_evidence_open").ne("") | vhas("elevator")) & ~phone_e) | doubt_e
     fb, fk = s("unit_floor_basis"), s("unit_floor_label_kind")
     floor_settled = fb.isin(["confirmed", "stated", SETTLED_BY_PHONE])

@@ -211,13 +211,15 @@ def al_flight(text: str) -> str:
 
 def single_lister_listing(listing: dict) -> bool:
     """An Apartment List listing that is one lister's own unit(s), not a property with a leasing office: the page gives
-    no unit count for the building and no website."""
+    no unit count for the building, no website, at most three units, and a title that is a street address."""
     tu = listing.get("total_units_count")
     try:
         many = tu is not None and float(tu) > 4
     except (TypeError, ValueError):
         many = False
-    return not many and not str(listing.get("website_url") or "").strip()
+    few = len(listing.get("available_units") or []) <= 3
+    by_address = bool(re.match(r"\s*\d", str(listing.get("display_name") or listing.get("street_address") or "")))   # titled by its street address, not a property name
+    return not many and few and by_address and not str(listing.get("website_url") or "").strip()
 
 
 def parse_apartmentlist(text: str, url: str):

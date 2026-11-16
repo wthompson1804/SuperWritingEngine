@@ -369,6 +369,15 @@ def pure_4():
         ok(P.characterises_residents_by_group(t), f"IC3 D24: screened: {t!r}")
     for t in ["Great Italian restaurants and a Chinese bakery", "lots of Mexican food", "very diverse and friendly", "Lots of traffic"]:
         ok(not P.characterises_residents_by_group(t), f"IC3 D24: not screened: {t!r}")
+    # ---- contacts: a small lister's own number is never "the number the property supplied"
+    import building_contacts as BC
+    lone = {"display_name": "630 West 163rd Street", "total_units_count": None, "website_url": None, "available_units": [{}], "original_phone": "9176515298"}
+    ok(BC.single_lister_listing(lone), "contacts: an Apartment List page with no unit count, no website, one unit and an address for a title is a single lister's listing")
+    ok(not BC.single_lister_listing(dict(lone, total_units_count=245, display_name="LIA by Vermella", website_url="https://x")), "contacts: a property with a unit count and a website is a leasing office")
+    ok(not BC.single_lister_listing(dict(lone, display_name="The Mercer", available_units=[{}] * 19)), "contacts: a named property with many units is not a single lister")
+    C_ = pd.read_csv(DATA / "reference" / "building_contacts.csv", dtype=str, keep_default_na=False)
+    ok(not (C_.contact_kind.eq("individual owner") & C_.leasing_phone.ne("")).any(), "contacts: an individual owner never has a phone recorded")
+    ok(not (C_.contact_kind.isin(["individual owner", "broker"]) & C_.note.str.contains("property supplied")).any(), "contacts: a broker's or owner's number is never called property-supplied")
     # ---- moments: the three-level rating
     import build_page_data as BP
     m = {"wake": {"park_walk_min": 2.5}, "work": {}, "after": {"restaurants_800m": 20, "bars_800m": 2}, "night": {}, "sat": {"bars_1600m": 3, "restaurants_1600m": 40}, "sun": {"drive_min": 28}}

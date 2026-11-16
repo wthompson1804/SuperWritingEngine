@@ -1,4 +1,4 @@
-# Run report (2026-11-16T01:52:31+00:00)
+# Run report (2026-11-16T01:58:09+00:00)
 
 ## Steps
 
@@ -100,7 +100,7 @@ test_parsers: 259 assertions passed
 
 **rule tests (every defect in docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (rules): 267 checks, 0 failed
+test_rules (rules): 276 checks, 0 failed
 ```
 
 **building amenities (cached pages)**
