@@ -168,6 +168,18 @@ const LIMITS = { experience: 3.6, neighborhood: 3.6, building: 2.6, 'building, m
     console.log(`map flow OK: ${tag} (${w}px) | ${name} -> #hood-${slug(H.id)} | ${Y.id}: ${H2.name}`);
   };
   const data = await (await page.request.get(BASE + '/data.json')).json();
+  // UI pass 6: the page never shows a floor plan or an apartment without its own identifier, and counts only what it shows.
+  // The data is held to the same rule here, so every count below is recomputed from the arrays, as the page does.
+  const isPlan = u => !!u && (/(^|[:_-])plan-/i.test(String(u.id || '')) || u.floor_plan === true || u.is_floor_plan === true || /floor[ _-]?plan/i.test(String(u.kind || u.listing_kind || u.unit || '')));
+  const RAW = { units: data.units.length };
+  data.units = data.units.filter(u => u.unit != null && String(u.unit).trim() !== '' && !isPlan(u));
+  ['avoid', 'held', 'awaiting_live_check'].forEach(k => { data[k] = (data[k] || []).filter(u => !isPlan(u)); });
+  { const ok = new Set(data.units.map(u => u.id)); data.neighborhoods.forEach(h => { h.unit_ids_raw = h.unit_ids || []; h.unit_ids = (h.unit_ids || []).filter(id => ok.has(id)); });
+    const emptied = new Set(data.neighborhoods.filter(h => !h.unit_ids.length && (h.unit_ids_raw.length || (h.avoid_ids || []).length)).map(h => h.id)); data.years.forEach(y => { y.hood_ids = (y.hood_ids || []).filter(id => !emptied.has(id)); });
+    console.log('shown after the identifier rule:', data.units.length, 'of', RAW.units, 'apartments;', emptied.size, 'neighborhoods left without one'); }
+  // a building name as the page shows it (cleanName in site/index.html)
+  const cleanName = t => { t = String(t == null ? '' : t).split(/\s+[|~]\s+/)[0].trim(); t = t.replace(/\s+[–—-]\s+\d.*$/, ''); if (/,\s*[A-Z]{2}\b(?:\s+\d{5}(?:-\d{4})?)?\s*(?:,|$)|,\s*(?:USA?|United States)\s*$/.test(t)) t = t.split(',')[0]; return t.replace(/\s*#\s*\S+\s*$/, '').trim(); };
+  const m10 = v => '$' + (Math.round(v / 10) * 10).toLocaleString('en-US');
   const hoodBy = Object.fromEntries(data.neighborhoods.map(h => [h.id, h])), yearBy = Object.fromEntries(data.years.map(y => [y.id, y]));
   const median = a => { a = a.filter(x => x != null).sort((x, y) => x - y); const m = a.length >> 1; return !a.length ? null : a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; };
   const money0 = v => '$' + Math.round(v).toLocaleString('en-US');

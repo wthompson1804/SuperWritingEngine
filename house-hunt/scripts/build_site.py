@@ -60,7 +60,7 @@ DROP = {
 }
 # buildings[]: the template reads only the building's own copies of these (bView() in site/index.html); everything else
 # about a building it still takes from the building's apartments.
-BUILDING_KEEP = ("id", "contact", "about_building", "about_points", "ratings", "photos")
+BUILDING_KEEP = ("id", "contact", "about_building", "about_points", "catch", "ratings", "photos")
 # A local rule's "quote" is shown only when it has no "summary" (ruleLi: r.summary || r.quote): duplicate text otherwise.
 RULE_LISTS = ("parking_rules", "dog_rules")
 # A key whose value is null reads the same as a missing key everywhere in the template except under these, where
