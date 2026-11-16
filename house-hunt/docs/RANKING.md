@@ -27,6 +27,9 @@ A listing goes through these steps in order. Counts of each step are in `docs/RU
    building's own page; a weight limit under 25 lb; floor 1 or ground; gone at the live check (where the check found the
    building's whole listing page gone, "page could not be found", every unit listed on that page is gone, not only the
    units the check asked about: `parsers.listing_page_gone`, The Mercer); a page unchanged more than six months; available after the window; income-restricted or senior housing; a harvester's BUILDING_FAILS note.
+   Also floor 1 by a **reading**: the unit number reads as floor 1 under its complex's reviewed numbering convention
+   (section 3), or a bare apartment number in a building numbered in sequence is at most the average number of
+   apartments per floor (`parsers.sequential_number_reads_ground`: 630 West 163rd Street 10, of 65 on six floors).
 5. **Only real apartments** (owner, 2026-11-16). `parsers.listing_kind` classifies every row from the source's
    structure first and the label's shape second:
    - `unit`: its own identifier for one specific home (`5D`, `PH2`, `B9-309`, `022-265`, `T526`), or a single-home
@@ -35,6 +38,9 @@ A listing goes through these steps in order. Counts of each step are in `docs/RU
      number), or a label that names a plan (`1 Bed - 1 Bath`, `A - Large-1`, `B, H, K, R - Small-1`);
    - `building_offer`: a managed building's page price with no unit at all;
    - `private_room`: a room of a co-living suite (`448-3` at The Agnes Co-Living).
+   - also `floor_plan`: a one-letter label beside numbered apartments of the same street address (`parsers.plan_letter_label`:
+     BE `P` and `F` beside `3Pb`, `4OA`; Appletree Suites `C`, `E`, `F` beside `2B` to `6D`). A lone letter with no numbered
+     sibling stays an apartment.
    Everything but `unit` gets the status `not_an_apartment` (`data/excluded_not_an_apartment.csv`): never ranked, shown,
    counted, or put on an avoid or held card. A building with only such rows does not appear.
 6. **Reviewed verdicts** (`data/evidence/review_verdicts.csv`, several rows per unit, keyed on listing and kind):
@@ -76,13 +82,34 @@ only when its address agrees with the listing's: `parsers.lot_is_exact`).
 
 Listing gate: established or open passes, no fails, unknown is pending. Ranking: established is settled, open is one
 open gate fact with the asterisk, unknown is not shown. An elevator named only on listing sites is marked
-`elevator_aggregator_only`. Garden-style rule: the elevator rests on listing sites only, the unit labels read as a
-multi-building low complex, and no page or record gives four floors or more.
+`elevator_aggregator_only`. Garden-style rule: the elevator rests on listing sites only, the unit labels name several
+buildings, and no page or record gives four floors or more. A label that names its building (`K3-02`, `B9-309`, `09-426`,
+`A207`: `parsers.explicit_building_label`) counts whatever floor it reads as, because a floor read from a label is not a
+height (Residences at The Summit, buildings K, L, M, used to escape on `K4-19`). Bare four-digit labels (`5201`) count
+only when no label reads above floor 3, the floor digit varies and no unit-on-floor number exceeds 40; complexes of that
+shape that a reviewer has read as several buildings are in `data/reference/elevator_doubt.csv` (1 Kennedy Flats, Admirals
+Cove, Halstead Parsippany, The Confluence were added after independent check 4).
 
 ## 3. Floor, dogs, staleness, disclosures
 
 - **Floor.** Floor 1 or ground (confirmed, stated, or read from the unit number), or a checker's reading that the unit
   is probably ground-level, excludes. An unpublished floor is a disclosure and tour question, never a strike.
+  **One numbering convention per complex** (`data/reference/unit_numbering_conventions.csv`, each row with how it was
+  established): `floor_first` (`4186` is floor 4: The Grove Somerset, Steel Works, Cobalt Lofts, Piper, 3 Acres) or
+  `building_floor_unit` (`3104` is building 3, floor 1: Kensington Place, J Centra Burlington and nine more). The master
+  carries the reading (`unit_floor_reading`); it removes a unit that reads as floor 1 and is used for nothing else. Where
+  a convention is on file the "same shape as removed siblings" rule is not used. A tower label `01-16C` is floor 16.
+- **Availability on a second site.** A checker's finding that another listing site covers the address and does not show
+  the apartment (`parsers.second_site_omits`), on a listing that could not be read again, is the open item
+  "availability" wherever it was recorded. The page's staleness, or a warning that only repeats it, is the same doubt
+  and is not counted a second time.
+- **Where the building stands.** Every building's point is compared with its own address
+  (`build_master.check_coords_against_address`, `parsers.coord_check`): the Census ZIP area and municipality at the
+  point against the ZIP and city of the listing rows. Outside the ZIP area, the address is geocoded (Census): within
+  150 m the point is kept (a ZIP boundary), otherwise the geocoder's point replaces it when that lies where the address
+  says; if neither can be trusted the building is flagged and its apartments carry one open "listing" fact. The
+  building's `city` is the municipality at its point (Census place, else county subdivision); the city a listing wrote is
+  kept in `city_listed`. Results: `data/reference/building_coord_check.csv`, `data/reference/municipality_changes.csv`.
 - **Dogs.** Allowed must be stated or confirmed, with dogs named ("pets upon approval" leaves it open). A policy that
   **conflicts between sources is one open gate fact (dogs)**; the building's own or its manager's page settles it; only
   a clear "no dogs" there removes. "Small dogs" or "weight restrictions apply" with no number passes with the tour
@@ -103,8 +130,11 @@ multi-building low complex, and no page or record gives four floors or more.
   ask for it" with the sibling's two prices, and the unit carries **one open "listing" fact** (asterisk; with another
   open gate fact it is not shown). A sibling that is only slightly dearer on 12 months (Scribe 502: $2,379 against
   $2,395) does not trigger it.
-- **Disclosures** never count and never remove: floor not published; lease term (the listed price is for a lease over
-  13 months, or the 12-month price is used in its place, or a reviewer read a term under 12 months); could pass $3,000 once
+- **Disclosures** never count and never remove: floor not published; lease term (**any** listed price quoted for a
+  lease that is not 12 months with no 12-month price read: "The price shown is for a 13-month lease: ask for the 12-month
+  price"; or the 12-month price is used in its place); income requirement, credit-score requirement and furnished
+  apartment, read from the evidence (`parsers.renter_conditions`; a statement that the apartment is not a normal lease,
+  short-term only, corporate or student housing, a sublet, is the open fact "eligibility" instead); could pass $3,000 once
   parking and fees are known; special offer; net-effective rent; condo rented by its owner; dog weight limit not
   published; overnight street parking restricted (`data/reference/overnight_parking_towns.csv`).
 
@@ -121,6 +151,11 @@ multi-building low complex, and no page or record gives four floors or more.
   either end of the range on the same street and ZIP within 400 m (not Queens-style numbers).
 - The building's own site outranks an aggregator; then the fuller row. Other links are kept in `also_seen_at`.
 - A building's name is its name: marketing tails are cut and an address used as a name is dropped (`parsers.clean_building_name`).
+- A building's floor count is the largest count a page or record states, and never below the highest floor a page states
+  for one of its apartments (basis `at_least`; the Continuum showed "2 floors" with apartments on floors 3 to 16).
+- A fact taken from a resident's review has the basis `resident_review`: below every page or record that states it,
+  above a bare inference. A parking fee is "published" only from the building's own page or a listing; from a review it
+  is an estimate with the review named.
 
 ## 5. Score
 
@@ -138,6 +173,9 @@ multi-building low complex, and no page or record gives four floors or more.
 | Daily life | 8 | supermarket distance, cafés on foot, gyms, distance from the motorway, farmers' market, corner stores, library |
 
 In-unit laundry counts only when the amenities say so or the listing says "in unit"; a shared laundry room does not.
+The security points count a staffed front of any kind, as before. The AMENITY shown is separate: `doorman` only where a
+source says doorman, `concierge` only where a source says concierge, `front_desk` for an attended lobby or desk called
+neither (`parsers.staff_from_sources`).
 
 **The experience's promise (30 percent).** Walk-Everywhere: restaurants, bars, cafés, shops, street-grid density,
 cinemas and theatres, bookshops. Old-Neighborhood: corner stores, hair and beauty shops, restaurants, laundromats,
@@ -193,6 +231,16 @@ then rank score, then `listing_id`.
 
 ## 8. Reading the page data
 
+- **Neighborhoods.** `neighborhoods` holds only places with at least one shown apartment; a place with only an avoid card
+  is in `neighborhoods_avoid_only` and is not counted anywhere. `safety.status` is `published` or `not_published` (no
+  agency publishes a rate for the town alone: the safety rule could not be tested there; `status_note` says why).
+  `shown_figures` are medians over the shown apartments; `traits` describe the wider area profile.
+- **Reader text.** `confirm.label / why / question`, each disclosure's `label / why / question`, each cost line's `note`
+  and every tour question are written in `scripts/build_page_data.py` from a reason code and structured fields
+  (apartment, never unit; dates in full; no file paths or working vocabulary). The working note is kept in
+  `why_internal` / `note_internal`, which the page does not show. A reviewer's sentence replaces a template only when it
+  passes the same check. `scripts/test_rules.py --data` walks every reader text field of `site/data.json`.
+
 - **Compared to staying in Queens**: every measure on five points with Queens in the centre
   (`data/reference/queens_spectrum_definition.csv`, `vsq_*` columns). Closer to her parents is better.
 - **Standings**: each unit carries its standing per part within its experience and against everything;
@@ -224,8 +272,9 @@ then rank score, then `listing_id`.
 | 2026-11-16 | Owner: only real apartments (floor plans, building prices and co-living rooms are `not_an_apartment`); thin-neighborhood rule |
 | 2026-11-16 | Evidence batch 20 (190 shown apartments re-read): the 12-month price is used wherever the page gives one and it differs, whatever the quoted term (was: only for leases over 13 months, and only when higher); a 12-month price is never taken from a fact about another unit (a dollar amount such as "$2,616" no longer reads as unit 616); sibling long-lease rule (one open "listing" fact, nothing guessed); a listing page that is gone takes every unit on it; reviewed page-date corrections (Grandville Towers) |
 | 2026-11-16 | Owner ("Forget call check"): the "not re-checked live" flag is dropped. A listing never re-read is not an open item in any rule; the thin rule's "well attested" is "no open gate fact"; ties are broken by `listing_id` only; `needs_live_check.csv` and the "awaiting live check" list are gone. A problem a re-read found still counts |
+| 2026-11-16 | After independent check 4: every building's point checked against its address (Harbor Pointe is in Bayonne, Parkway Lofts in Bloomfield) and `city` from geography; second-site rule for availability; garden-style rule no longer escaped by a label that reads as floor 4; plan letters are not apartments; a sequential apartment number that reads as floor 1; numbering conventions per complex (The Grove Somerset 2141, 3172, 4149, 4171 restored); income, credit and furnished disclosures; lease-term disclosure for any term that is not 12 months; doorman and concierge apart; `resident_review` basis; building floors from the largest stated count; "up to" kept on offers; avoid-only neighborhoods in their own array; `safety.status`; reader text from templates |
 
-Superseded and no longer true anywhere: "the 12-month price only for leases longer than 13 months", "at most 2 per building" for the shown list, "best 10 per neighborhood", "top 15
+Superseded and no longer true anywhere: "the lease-term disclosure starts above 13 months", "no label reads above floor 3" as a condition of the garden-style rule for labels that name their building, `doorman` as "doorman or concierge", "the 12-month price only for leases longer than 13 months", "at most 2 per building" for the shown list, "best 10 per neighborhood", "top 15
 candidates then the best 10", a floor-plan row shown with an availability asterisk, "weight limit stated ≥ 40 lb",
 conflicting dog policy as sketchy or as a drop, "a missing live check is its own open item", "units seen live first"
 among equal scores, the "waiting for a live check" list. `scripts/rank_v1_backup.py` keeps version 1.

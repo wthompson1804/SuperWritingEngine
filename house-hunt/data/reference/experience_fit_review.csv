@@ -1,0 +1,89 @@
+hood_id,hood,on_page,shown_apartments,assigned,nearest_group,second_nearest,ratio,boundary,restaurants_800m_at_shown,decision
+nj:harrison,Harrison,shown,17,Fresh-Start,Fresh-Start,Little-City,0.2757,False,8.0,assigned to its nearest group: not moved
+nj:weehawken,Weehawken,shown,2,Fresh-Start,Fresh-Start,Little-City,0.3905,False,10.5,assigned to its nearest group: not moved
+nj:jersey-city-bergen-lafayette,Jersey City – Bergen-Lafayette,shown,16,Fresh-Start,Fresh-Start,Little-City,0.6717,False,5.5,assigned to its nearest group: not moved
+nj:new-brunswick,New Brunswick,shown,10,Fresh-Start,Fresh-Start,Little-City,0.8226,False,34.0,assigned to its nearest group: not moved
+ct:norwalk,Norwalk,shown,26,Fresh-Start,Fresh-Start,Little-City,0.9303,True,13.0,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+nj:hackensack,Hackensack,shown,15,Little-City,Little-City,Room-to-Breathe,0.4499,False,7.0,assigned to its nearest group: not moved
+ny:white-plains,White Plains,shown,9,Little-City,Little-City,Old-Neighborhood,0.5137,False,2.0,assigned to its nearest group: not moved
+nj:south-orange,South Orange,shown,2,Little-City,Little-City,Fresh-Start,0.576,False,16.0,assigned to its nearest group: not moved
+nj:east-rutherford,East Rutherford,shown,2,Little-City,Little-City,Room-to-Breathe,0.5769,False,3.0,assigned to its nearest group: not moved
+ny:new-rochelle,New Rochelle,shown,14,Little-City,Little-City,Room-to-Breathe,0.582,False,8.0,assigned to its nearest group: not moved
+nj:wayne,Wayne,shown,2,Little-City,Little-City,Room-to-Breathe,0.6121,False,8.0,assigned to its nearest group: not moved
+nj:red-bank,Red Bank,shown,3,Little-City,Little-City,Old-Neighborhood,0.6422,False,18.0,assigned to its nearest group: not moved
+nj:franklin,Franklin,shown,5,Little-City,Little-City,Room-to-Breathe,0.6817,False,0.0,assigned to its nearest group: not moved
+nj:jersey-city-west-side,Jersey City – West Side,shown,21,Little-City,Little-City,Room-to-Breathe,0.7052,False,5.0,assigned to its nearest group: not moved
+ct:milford-city-balance-,Milford,shown,6,Little-City,Little-City,Room-to-Breathe,0.7239,False,10.0,assigned to its nearest group: not moved
+nj:parsippany-troy-hills,Parsippany-Troy Hills,shown,3,Little-City,Little-City,Room-to-Breathe,0.7302,False,6.0,assigned to its nearest group: not moved
+nj:long-branch,Long Branch,shown,8,Little-City,Little-City,Old-Neighborhood,0.7473,False,13.0,assigned to its nearest group: not moved
+nj:englewood,Englewood,shown,5,Little-City,Little-City,Fresh-Start,0.7628,False,0.0,assigned to its nearest group: not moved
+nj:montclair,Montclair,shown,5,Little-City,Little-City,Walk-Everywhere,0.7836,False,72.0,assigned to its nearest group: not moved
+nj:bloomfield,Bloomfield,shown,8,Little-City,Little-City,Old-Neighborhood,0.8083,False,15.0,assigned to its nearest group: not moved
+ct:stamford,Stamford,shown,58,Little-City,Little-City,Fresh-Start,0.8395,False,24.0,assigned to its nearest group: not moved
+nj:ridgewood,Ridgewood,shown,1,Little-City,Little-City,Room-to-Breathe,0.8855,False,50.0,assigned to its nearest group: not moved
+nj:riverdale,Riverdale,shown,2,Little-City,Little-City,Room-to-Breathe,0.8902,False,1.0,assigned to its nearest group: not moved
+ct:danbury,Danbury,shown,8,Little-City,Little-City,Room-to-Breathe,0.9118,True,1.0,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+ny:yonkers,Yonkers,shown,15,Little-City,Little-City,Fresh-Start,0.9269,True,3.0,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+ny:patchogue,Patchogue,shown,2,Little-City,Little-City,Room-to-Breathe,0.9321,True,8.0,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+ny:kew-gardens-hills,Kew Gardens Hills,avoid card only,0,Little-City,Little-City,Old-Neighborhood,0.9379,True,,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+ny:peekskill,Peekskill,shown,2,Little-City,Little-City,Room-to-Breathe,0.9439,True,1.0,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+nj:jersey-city-journal-square,Jersey City – Journal Square,shown,21,Little-City,Little-City,Old-Neighborhood,0.974,True,29.0,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+ny:sheepshead-bay-manhattan-beach-gerritsen-beach,Sheepshead Bay-Manhattan Beach-Gerritsen Beach,shown,1,Old-Neighborhood,Old-Neighborhood,Little-City,0.4161,False,21.0,assigned to its nearest group: not moved
+ny:brighton-beach,Brighton Beach,shown,2,Old-Neighborhood,Old-Neighborhood,Little-City,0.4678,False,33.5,assigned to its nearest group: not moved
+ny:murray-hill-broadway-flushing,Murray Hill-Broadway Flushing,shown,1,Old-Neighborhood,Old-Neighborhood,Little-City,0.4721,False,45.0,assigned to its nearest group: not moved
+ny:east-harlem-south-,East Harlem (South),shown,1,Old-Neighborhood,Old-Neighborhood,Walk-Everywhere,0.5352,False,61.0,assigned to its nearest group: not moved
+ny:jamaica,Jamaica,shown,4,Old-Neighborhood,Old-Neighborhood,Little-City,0.5443,False,22.0,assigned to its nearest group: not moved
+ny:flushing-willets-point,Flushing-Willets Point,shown,7,Old-Neighborhood,Old-Neighborhood,Walk-Everywhere,0.5447,False,89.0,assigned to its nearest group: not moved
+ny:old-astoria-hallets-point,Old Astoria-Hallets Point,shown,3,Old-Neighborhood,Old-Neighborhood,Little-City,0.6159,False,11.0,assigned to its nearest group: not moved
+nj:newark,Newark,shown,21,Old-Neighborhood,Old-Neighborhood,Room-to-Breathe,0.6438,False,35.0,assigned to its nearest group: not moved
+ny:east-flatbush-farragut,East Flatbush-Farragut,shown,3,Old-Neighborhood,Old-Neighborhood,Little-City,0.6482,False,4.0,assigned to its nearest group: not moved
+ny:gravesend-east-homecrest,Gravesend (East)-Homecrest,shown,1,Old-Neighborhood,Old-Neighborhood,Little-City,0.6705,False,11.0,assigned to its nearest group: not moved
+ny:jamaica-hills-briarwood,Jamaica Hills-Briarwood,shown,4,Old-Neighborhood,Old-Neighborhood,Little-City,0.7225,False,10.0,assigned to its nearest group: not moved
+ny:washington-heights-south-,Washington Heights (South),shown,2,Old-Neighborhood,Old-Neighborhood,Walk-Everywhere,0.7247,False,20.0,assigned to its nearest group: not moved
+ny:elmhurst,Elmhurst,shown,2,Old-Neighborhood,Old-Neighborhood,Walk-Everywhere,0.7336,False,73.5,assigned to its nearest group: not moved
+ny:gravesend-west-,Gravesend (West),shown,1,Old-Neighborhood,Old-Neighborhood,Room-to-Breathe,0.738,False,19.0,assigned to its nearest group: not moved
+ny:kingsbridge-heights-van-cortlandt-village,Kingsbridge Heights-Van Cortlandt Village,avoid card only,0,Old-Neighborhood,Old-Neighborhood,Little-City,0.74,False,,assigned to its nearest group: not moved
+ny:inwood,Inwood,shown,3,Old-Neighborhood,Old-Neighborhood,Walk-Everywhere,0.7532,False,17.0,assigned to its nearest group: not moved
+ny:bensonhurst,Bensonhurst,avoid card only,0,Old-Neighborhood,Old-Neighborhood,Room-to-Breathe,0.7571,False,,assigned to its nearest group: not moved
+ny:prospect-lefferts-gardens-wingate,Prospect Lefferts Gardens-Wingate,shown,2,Old-Neighborhood,Old-Neighborhood,Walk-Everywhere,0.7715,False,9.5,assigned to its nearest group: not moved
+ny:rockaway-beach-arverne-edgemere,Rockaway Beach-Arverne-Edgemere,avoid card only,0,Old-Neighborhood,Old-Neighborhood,Little-City,0.7804,False,,assigned to its nearest group: not moved
+ny:east-flatbush-erasmus,East Flatbush-Erasmus,shown,4,Old-Neighborhood,Old-Neighborhood,Walk-Everywhere,0.7834,False,17.5,assigned to its nearest group: not moved
+ny:midwood,Midwood,shown,2,Old-Neighborhood,Old-Neighborhood,Little-City,0.797,False,1.0,assigned to its nearest group: not moved
+ny:williamsbridge-olinville,Williamsbridge-Olinville,avoid card only,0,Old-Neighborhood,Old-Neighborhood,Little-City,0.7974,False,,assigned to its nearest group: not moved
+ny:bath-beach,Bath Beach,shown,3,Old-Neighborhood,Old-Neighborhood,Little-City,0.8006,False,8.0,assigned to its nearest group: not moved
+ny:harlem-north-,Harlem (North),shown,2,Old-Neighborhood,Old-Neighborhood,Little-City,0.8528,False,22.5,assigned to its nearest group: not moved
+ny:east-new-york-north-,East New York (North),avoid card only,0,Old-Neighborhood,Old-Neighborhood,Room-to-Breathe,0.8613,False,,assigned to its nearest group: not moved
+ny:manhattanville-west-harlem,Manhattanville-West Harlem,avoid card only,0,Old-Neighborhood,Old-Neighborhood,Walk-Everywhere,0.8853,False,,assigned to its nearest group: not moved
+ny:hamilton-heights-sugar-hill,Hamilton Heights-Sugar Hill,avoid card only,0,Old-Neighborhood,Old-Neighborhood,Walk-Everywhere,0.8964,False,,assigned to its nearest group: not moved
+ny:windsor-terrace-south-slope,Windsor Terrace-South Slope,avoid card only,0,Old-Neighborhood,Old-Neighborhood,Little-City,0.9397,True,,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+ny:madison,Madison,shown,3,Old-Neighborhood,Old-Neighborhood,Room-to-Breathe,0.9676,True,9.0,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+nj:teaneck,Teaneck,shown,1,Quiet-Street,Quiet-Street,Room-to-Breathe,0.3886,False,1.0,assigned to its nearest group: not moved
+ct:westport,Westport,shown,4,Quiet-Street,Quiet-Street,Room-to-Breathe,0.4074,False,0.0,assigned to its nearest group: not moved
+ct:fairfield,Fairfield,shown,1,Quiet-Street,Quiet-Street,Room-to-Breathe,0.8188,False,8.0,assigned to its nearest group: not moved
+nj:carteret,Carteret,shown,5,Room-to-Breathe,Room-to-Breathe,Quiet-Street,0.4977,False,0.0,assigned to its nearest group: not moved
+nj:maplewood,Maplewood,shown,5,Room-to-Breathe,Room-to-Breathe,Quiet-Street,0.5236,False,10.0,assigned to its nearest group: not moved
+ct:shelton,Shelton,shown,7,Room-to-Breathe,Room-to-Breathe,Little-City,0.5527,False,8.0,assigned to its nearest group: not moved
+nj:city-of-orange,City of Orange,shown,9,Room-to-Breathe,Room-to-Breathe,Old-Neighborhood,0.5857,False,0.0,assigned to its nearest group: not moved
+ct:stratford,Stratford,shown,4,Room-to-Breathe,Room-to-Breathe,Little-City,0.6048,False,6.0,assigned to its nearest group: not moved
+nj:east-brunswick,East Brunswick,shown,8,Room-to-Breathe,Room-to-Breathe,Little-City,0.6085,False,17.0,assigned to its nearest group: not moved
+nj:clifton,Clifton,shown,9,Room-to-Breathe,Room-to-Breathe,Little-City,0.6173,False,2.0,assigned to its nearest group: not moved
+nj:bayonne,Bayonne,shown,30,Room-to-Breathe,Room-to-Breathe,Little-City,0.6508,False,6.0,assigned to its nearest group: not moved
+ct:hamden,Hamden,shown,3,Room-to-Breathe,Room-to-Breathe,Little-City,0.6538,False,11.0,assigned to its nearest group: not moved
+nj:east-orange,East Orange,shown,2,Room-to-Breathe,Room-to-Breathe,Old-Neighborhood,0.6882,False,0.0,assigned to its nearest group: not moved
+nj:bound-brook,Bound Brook,shown,4,Room-to-Breathe,Room-to-Breathe,Little-City,0.6938,False,13.0,assigned to its nearest group: not moved
+nj:dover,Dover,shown,2,Room-to-Breathe,Room-to-Breathe,Old-Neighborhood,0.7031,False,27.0,assigned to its nearest group: not moved
+ct:beacon-falls,Beacon Falls,shown,5,Room-to-Breathe,Room-to-Breathe,Little-City,0.7124,False,2.0,assigned to its nearest group: not moved
+nj:burlington,Burlington,shown,6,Room-to-Breathe,Room-to-Breathe,Quiet-Street,0.7152,False,2.0,assigned to its nearest group: not moved
+nj:mount-arlington,Mount Arlington,shown,3,Room-to-Breathe,Room-to-Breathe,Little-City,0.728,False,2.0,assigned to its nearest group: not moved
+nj:belleville,Belleville,shown,7,Room-to-Breathe,Room-to-Breathe,Old-Neighborhood,0.7675,False,5.0,assigned to its nearest group: not moved
+ny:valley-stream,Valley Stream,shown,1,Room-to-Breathe,Room-to-Breathe,Quiet-Street,0.7902,False,17.0,assigned to its nearest group: not moved
+ny:haverstraw,Haverstraw,shown,8,Room-to-Breathe,Room-to-Breathe,Little-City,0.8132,False,1.0,assigned to its nearest group: not moved
+nj:rahway,Rahway,shown,6,Room-to-Breathe,Room-to-Breathe,Little-City,0.8283,False,9.0,assigned to its nearest group: not moved
+ct:trumbull,Trumbull,shown,5,Room-to-Breathe,Room-to-Breathe,Quiet-Street,0.8399,False,0.0,assigned to its nearest group: not moved
+nj:bogota,Bogota,shown,8,Room-to-Breathe,Room-to-Breathe,Quiet-Street,0.8932,False,2.0,assigned to its nearest group: not moved
+ct:bridgeport,Bridgeport,shown,15,Room-to-Breathe,Room-to-Breathe,Old-Neighborhood,0.9829,True,4.0,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+ct:brookfield,Brookfield,shown,2,Room-to-Breathe,Room-to-Breathe,Quiet-Street,0.987,True,8.0,assigned to its nearest group: not moved (boundary: second group within 10 percent)
+ny:bedford-stuyvesant-west-,Bedford-Stuyvesant (West),avoid card only,0,Walk-Everywhere,Walk-Everywhere,Old-Neighborhood,0.6161,False,,assigned to its nearest group: not moved
+ny:kew-gardens,Kew Gardens,shown,2,Walk-Everywhere,Walk-Everywhere,Old-Neighborhood,0.7244,False,25.5,assigned to its nearest group: not moved
+ny:bay-ridge,Bay Ridge,shown,1,Walk-Everywhere,Walk-Everywhere,Old-Neighborhood,0.76,False,14.0,assigned to its nearest group: not moved
+nj:jersey-city-mcginley-square,Jersey City – McGinley Square,avoid card only,0,Walk-Everywhere,Old-Neighborhood,Walk-Everywhere,0.9407,True,,kept by a reviewed override (owner to decide)

@@ -2,7 +2,57 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-16, after evidence batch 20: the live re-read of 190 shown apartments)
+## Current state (2026-11-16, after the repairs to independent check 4; details in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_4.md`)
+
+**Authorities, newest first:** `CLAUDE.md` → `docs/RANKING.md` (one current statement; change log at its end) → plan v4 → `docs/SAFETY_BASIS.md` → plan v3.
+
+**Run everything:** `python3 scripts/run_all.py` → `scripts/build_page_data.py` → `scripts/page_data_extras.py` → the text builders (`build_scene_text.py`,
+`check_scene_text.py`, `realtor_lines.py`, `test_realtor_lines.py`) → `page_data_extras.py` → `build_site.py`. The page tests in `test_rules.py --data` need
+`site/data.json` to be newer than `data/ranked_units.csv`, so run that suite again after `page_data_extras.py`.
+
+**Counts now**: 20,468 listings → 2,505 pass the listing gates → 2,451 costed → 1,469 within the all-in cap → 664 ranked →
+**523 apartments shown in 202 buildings, 77 neighborhoods** (50 with three or more). Before these repairs: 542 / 209 / 78.
+By experience (apartments / buildings / neighborhoods): Little-City 217 / 80 / 23, Room-to-Breathe 154 / 38 / 23, Old-Neighborhood 72 / 55 / 21,
+Fresh-Start 71 / 23 / 5, Quiet-Street 6 / 3 / 3, Walk-Everywhere 3 / 3 / 2. **218 shown apartments carry one open item** (elevator 118, listing 61,
+dogs allowed 28, availability 8, eligibility 3); 305 carry none. 76 rows are `not_an_apartment`; 28 single-apartment neighborhoods are cut by the
+thin-neighborhood rule and 10 kept. Verdicts: 924 rows for 922 units (ok 533, asterisk 167, disclose 31, remove 193). Two consecutive full runs give an
+identical `data/ranked_units.csv` and `data/master_units.csv`; `check_registry.py` and all tests pass (`test_rules.py`: 617 pure checks; `--data`: 4,170
+with the page data; `test_parsers.py`: 259). `verify_all.py`: 19 passed, 0 failed, 1 warning (`site/dist` is older than `site/data.json`: `build_site.py`
+is the page agent's step).
+
+**What changed (independent check 4, pipeline side):**
+- **Where buildings stand.** Every building's point is compared with its own address (ZIP area and municipality from the Census at the point). 14 points
+  were outside their address's ZIP area: 9 are ZIP boundaries (kept), 4 were re-geocoded from the address (Harbor Pointe, Bayonne: 6.9 km off, in
+  Elizabeth's port; Parkway Lofts, Bloomfield: 168 m, across the East Orange line; The Grand, West New York: 248 m; Reserve at Lakeside, Newburgh: 1.8 km),
+  1 is flagged (Parc at Roxbury: the address could not be geocoded; not shown). The "Elizabeth" neighborhood is gone; Harbor Pointe is in Bayonne and
+  Parkway Lofts in Bloomfield, each with its own drive, surroundings, local rules and police figures. `city` is now the municipality at the point
+  (34 buildings changed, 10 of them shown: `data/reference/municipality_changes.csv`); the listed city is kept as `city_listed` / `postal_city`.
+- **Left the page (26):** Residences at The Summit, all 8 (stale page plus an elevator named only for a complex of buildings K, L, M); The District at
+  15Fifteen, all 8 (the same elevator rule plus an open eligibility question); 328 Pacific 705, Metropolis Towers 16F and 509 Martin Luther King Jr Dr 39E
+  (dogs open plus "a second site lists the address and not this apartment"); BE `P`, `F` and Appletree Suites `C`, `E`, `F` (plan letters, not
+  apartments); 630 West 163rd Street 10 (a sequential apartment number that reads as the first floor); Portside Towers 311 (Downtown Jersey City became a
+  single-apartment neighborhood and the thin rule cut it).
+- **Entered (7):** The Grove Somerset 2141, 2205, 3172, 4149, 4171 (four had been removed as "first floor" on a wrong reading of the number; with them
+  Franklin is no longer a single-apartment neighborhood, so 2205 returns too; all carry the elevator asterisk); Appletree Suites 3A, 5A (moved up when the
+  plan letters left; verdicts written from the evidence: ok).
+- **New asterisks on apartments that stay (28):** elevator at Pier Village (8), The Brunswick (5), 1 Kennedy Flats (4), Admirals Cove (4), Halstead
+  Parsippany (2), The Confluence (1), Fort Hill Peekskill (1), Valley and Bloom (1); availability at 525 Riverdale Ave 5U and 100 Prospect N311.
+- **New disclosures:** lease term on every price quoted for a lease that is not 12 months (129, was 101); income requirement (9), credit-score
+  requirement (3), furnished apartment (11).
+- **Page data (`site/data.json`):** reader text from templates (`confirm.label / why / question`, disclosure `label / why / question`, cost-line `note`,
+  tour questions; raw notes only in `*_internal`); `neighborhoods` holds the 77 with an apartment to show and `neighborhoods_avoid_only` the 11 with only
+  an avoid card; `safety.status`; `amenities.doorman / concierge / front_desk` apart; `rent.offer_up_to` and `rent.free_text`; `parking.kinds`,
+  `parking.fee_basis`; `amenities.building_floors_at_least`; building `city` / `postal_city`; `shown_figures` per neighborhood.
+- **No crime figure published:** Beacon Falls, CT (5 apartments shown). No police agency reports a figure for the town alone (the Connecticut State Police
+  report one statewide total). It is kept, with `safety.status = "not_published"`; the owner's safety rule could not be tested there. **For the owner.**
+- **Experiences:** no neighborhood moved. Every shown neighborhood already sits in the group its frozen area profile is nearest to; none is nearer
+  another group. The misfits the check names (Fairfield, Englewood, Kew Gardens Hills) come from the area profile describing a wider sample than the one
+  building shown: a text matter (`shown_figures` is there for it), or a refit, which is the owner's call.
+
+**For the owner:** `CLAUDE.md` still words the thin rule as "well attested (seen live, nothing open)" one paragraph above the rule that dropped "seen
+live" (not edited here); Beacon Falls above; Metropolis Towers 16F is off the page now, and whether the building is a co-op is still unread.
+
+## Previous state (2026-11-16, after evidence batch 20: the live re-read of 190 shown apartments; superseded by the section above)
 
 **Authorities, newest first:** `CLAUDE.md` (rules and decision log) → `docs/RANKING.md` (rewritten as ONE current statement of the gates, the elevator rule,
 duplicates, score and selection, with a change log) → `docs/PLAN_V4_MASTER_MODEL_2026-11-15.md` → `docs/SAFETY_BASIS.md` → `docs/PLAN_V3_APPROVED_2026-11-15.md` → UX brief and mock-up 4 (layout only).

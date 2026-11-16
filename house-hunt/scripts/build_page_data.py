@@ -673,7 +673,8 @@ def buildings(shown):
         # independent check 4, D17: `city` is the municipality the building stands in (Census geography at its point);
         # `postal_city` is the city the listing wrote (a mailing or market name), given only where it differs
         out.append({"id": b, "name": None if (parsers.title_unit(g0("building_name")) and parsers.is_plan_label(g0("unit"))) else g0("building_name"), "address": g0("address"), "city": g0("city"), "state": g0("state"), "zip": g0("zip5"),
-                    "postal_city": g0("city_listed") if g0("city_listed") and not parsers.same_municipality(g0("city_listed"), g0("city")) else None,
+                    "postal_city": g0("city_listed") if g0("city_listed") and not parsers.same_municipality(g0("city_listed"), g0("city"))
+                    and not re.search(r"\d|\b(?:blvd|st|ave|rd|dr|street|avenue)\b", str(g0("city_listed")), re.I) else None,
                     "location_basis": g0("coord_basis"), "location_check": g0("coord_check"),
                     "hood_id": g0("hood_id"), "experience": g0("group_key"), "lat": g0("lat"), "lon": g0("lon"),
                     "unit_ids": list(g.listing_id), "n_units": int(len(g)), "more_showable_not_shown": int(g0("more_in_building") or 0),
