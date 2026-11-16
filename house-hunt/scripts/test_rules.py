@@ -1813,6 +1813,8 @@ def pure_ic5():
     pts = BP.evidence_points("car crime: 14 vehicle thefts and thefts from vehicles within 250 m in 24 months (police data), at least double the median of 6.5 for candidate buildings in Brooklyn")
     eq(pts, ["Police recorded 14 car break-ins or thefts within about 250 meters (a few blocks) in two years, about twice what is typical for the buildings we looked at in Brooklyn."], "N19: the car-crime reason of an avoid card")
     eq(BP._times(3.2), "about three times", "N19: 'about three times'")
+    pts = BP.evidence_points("car crime: 14 vehicle thefts and thefts from vehicles within 250 m (2025-12-28 to 2026-11-11, about 10.5 months, Jersey City police data), at least double the median of 5 for candidate buildings in Jersey City")
+    eq(pts, ["Police recorded 14 car break-ins or thefts within about 250 meters (a few blocks) in about 10.5 months, about three times what is typical for the buildings we looked at in Jersey City."], "N19: the car-crime reason from a city's own portal, over part of a year")
     # ---- N20 / N26: questions
     eq(BP.dedupe_questions(["What is the rent on a 12-month lease? Ask before touring.", "Are dogs allowed?", "What is the rent on a 12-month lease?"]),
        ["What is the rent on a 12-month lease? Ask before touring.", "Are dogs allowed?"], "N20: the same question is asked once")
@@ -1924,7 +1926,9 @@ def page_ic5(J, M, R, S):
         bl = [B[i] for i in h["building_ids"]]
         ok(sf["buildings_with_garage"] == sum(1 for b in bl if b["parking"]["kind"] in ("garage", "gated_lot")), f"N8: {h['id']} garage count")
         ok(sf["buildings_with_garage"] <= sf["buildings_with_garage_or_covered"] <= sf["buildings"], f"N8: {h['id']} garage counts out of order")
-    for name, n in [("Milford", 2), ("Stamford", 17), ("New Brunswick", 1)]:
+    # (the check's own counts, 17 in Stamford and 1 in New Brunswick, took out only the buildings it had read; with every
+    # building re-read Stamford has 14 and New Brunswick none: the count follows the corrected kinds, tested just above)
+    for name, n in [("Milford", 2)]:
         for h in [h for h in J["neighborhoods"] if h["name"] == name]:
             ok(h["shown_figures"]["buildings_with_garage"] == n, f"N8: {name} has a garage at {h['shown_figures']['buildings_with_garage']} buildings, the check counted {n}")
     # the night moment follows the space that is there

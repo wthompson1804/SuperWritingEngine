@@ -1,4 +1,4 @@
-# Run report (2026-11-16T07:34:28+00:00)
+# Run report (2026-11-16T08:00:10+00:00)
 
 ## Steps
 
@@ -6,13 +6,22 @@
 |---|---|---|
 | parser tests (every example in docs/INDEPENDENT_CHECK.md) | `test_parsers.py` | ok |
 | rule tests (every repaired defect and rule, pure) | `test_rules.py` | ok |
+| gates (merge, dedupe, gate each listing) | `gates.py` | ok |
+| NYC building class (PLUTO) | `enrich_nyc_pluto.py` | ok |
+| gates again with PLUTO | `gates.py` | ok |
+| lookup tools per building | `enrich_units.py` | ok |
+| neighborhood assignment | `build_neighborhoods.py` | ok |
+| lifestyle features | `lifestyle_features.py` | ok |
+| lifestyle colour | `lifestyle_color.py` | ok |
+| crime benchmarks | `crime_benchmarks.py` | ok |
+| lifestyle groups (saved centres) | `lifestyle_groups.py` | ok |
 | building amenities (cached pages) | `building_amenities.py --no-fetch` | ok |
 | master tables | `build_master.py` | ok |
 | rent terms | `rent_terms.py` | ok |
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output | `test_rules.py --data` | FAILED |
+| rule tests on the output | `test_rules.py --data` | ok |
 | field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
 
 ## Stage counts
@@ -103,7 +112,81 @@ test_parsers: 259 assertions passed
 
 **rule tests (every repaired defect and rule, pure)**
 ```
-test_rules (rules): 899 checks, 0 failed
+test_rules (rules): 900 checks, 0 failed
+```
+
+**gates (merge, dedupe, gate each listing)**
+```
+| movein | 7841 | 932 | 11695 |
+| dog | 10298 | 1171 | 8999 |
+| elevator | 5328 | 845 | 14295 |
+| floor | 5461 | 1163 | 13844 |
+| place | 20438 | 0 | 30 |
+| proof | 10376 | 7 | 10085 |
+```
+
+**NYC building class (PLUTO)**
+```
+3033 NYC buildings; {'house_number+location': 1486, 'nearest_lot': 837, 'no_lot_within_40m': 710}
+{'no': 1154, 'yes': 947, nan: 710, 'unknown': 222}
+```
+
+**gates again with PLUTO**
+```
+| movein | 7841 | 932 | 11695 |
+| dog | 10298 | 1171 | 8999 |
+| elevator | 5328 | 845 | 14295 |
+| floor | 5461 | 1163 | 13844 |
+| place | 20438 | 0 | 30 |
+| proof | 10376 | 7 | 10085 |
+```
+
+**lookup tools per building**
+```
+525 608
+550 608
+575 608
+600 608
+{'pass': 2505} buildings: 608
+coordinates: {'listing rows agree': 569, 'census_geocoder (address check)': 4, 'census_geocoder': 4, 'listing majority, unverified': 1}; lookups redone at a corrected coordinate: 0 address keys
+```
+
+**neighborhood assignment**
+```
+municipality from geography differs from the listed city for 33 address keys (data/reference/municipality_changes.csv)
+# Checkpoint A: neighborhoods and proposed years
+Passing units: 2505 in 608 buildings, across 195 neighborhoods; 100 neighborhoods have 3+ passing places.
+Cluster quality (silhouette; higher is cleaner): {5: 0.116, 6: 0.125}. Using k=6.
+```
+
+**lifestyle features**
+```
+195 neighborhoods; {'people_per_km2': 0.0, 'age_25_34_share': 0.0, 'median_age': 0.0, 'living_alone_share': 0.0, 'renter_share': 0.0, 'big_building_share': 0.0, 'detached_house_share': 0.0, 'median_year_built': 0.0, 'no_car_share': 0.0, 'transit_commute_share': 0.0, 'walk_commute_share': 0.0, 'wfh_share': 0.0, 'median_hh_income': 0.0, 'newcomer_share': 0.0, 'restaurants_800m': 0.0, 'bars_800m': 0.0, 'cafes_800m': 0.0, 'music_1600m': 0.0, 'park_ha_800m': 0.0, 'park_walk_min': 0.0, 'open_water_m': 0.0, 'beach_m': 0.0, 'supermarket_m': 0.0, 'train_station_m': 0.0, 'motorway_m': 0.0, 'violent_per_1000': 0.02, 'vehicle_theft_per_1000': 0.02, 'sqft': 0.21, 'bfloors': 0.93, 'garage': 0.0, 'sqft_per_1000usd': 0.21}
+```
+
+**lifestyle colour**
+```
+195 {'college_degree_share': 0.0, 'households_with_kids_share': 0.0, 'age_65plus_share': 0.0, 'commute_60min_plus_share': 0.0, 'built_since_2010_share': 0.0, 'built_before_1940_share': 0.0, 'tract_median_rent': 0.01, 'rent_burden_pct': 0.0, 'supermarket_m': 0.0, 'trader_joes_m': 0.19, 'whole_foods_m': 0.25, 'target_m': 0.04, 'vet_m': 0.0, 'dog_park_m': 0.0, 'train_station_m': 0.08, 'breweries_1600m': 0.0, 'restaurants_1600m': 0.0, 'transit_to_parents_min': 0.1, 'pool': 0.0, 'garage_or_gated': 0.0, 'street_parking': 0.0, 'building_floors': 0.55, 'building_year': 0.62, 'unit_sqft': 0.21, 'all_in': 0.0}
+```
+
+**crime benchmarks**
+```
+std       3.12           0.95              0.91              0.89                       0.58
+min       0.00           0.00              0.00              0.00                       0.00
+25%       0.98           0.26              0.29              0.45                       0.26
+50%       2.34           0.71              0.68              0.80                       0.56
+75%       4.68           1.42              1.36              1.51                       0.91
+max      17.21           5.22              5.02              7.26                       3.44
+```
+
+**lifestyle groups (saved centres)**
+```
+enclave :: Berkeley Heights[60]; Harrison[23]; Teaneck[8]; Westport[5]; Fairfield[2]; Watchung[2]; Roxbury[2]; Montvale[1]; Atlantic Highlands[1]; Princeton[1]
+middle :: Stamford[161]; Parsippany-Troy Hills[114]; Jersey City – Journal Square[112]; New Rochelle[85]; Yonkers[69]; Port Chester[59]; White Plains[58]; Jersey City – West Side[50]; Hackensack[41]; Danbury[23]
+new_water :: Jersey City – Bergen-Lafayette[135]; Norwalk[96]; Harrison[45]; New Brunswick[23]; West New York[11]; Jersey City – Downtown[7]; Weehawken[6]; North Bergen[5]; Jersey City – Newport[4]; Edgewater[2]
+pre_car :: New Haven[303]; Jersey City – McGinley Square[25]; Kew Gardens[6]; Astoria (Central)[2]; Bedford-Stuyvesant (West)[2]; Bay Ridge[2]; Sunnyside[2]; Upper West Side-Manhattan Valley[2]; Brooklyn Heights[1]; Astoria (East)-Woodside (North)[1]
+settled :: Newark[46]; Flushing-Willets Point[19]; Hempstead[11]; Jamaica[11]; Jamaica Hills-Briarwood[11]; Mott Haven-Port Morris[9]; East Flatbush-Erasmus[8]; Harlem (North)[7]; Washington Heights (North)[6]; East Harlem (North)[5]
+space :: Bridgeport[108]; Bayonne[64]; Dover[41]; Bogota[31]; Clifton[22]; Burlington[21]; Trumbull[19]; Flemington[18]; East Brunswick[18]; Haverstraw[16]
 ```
 
 **building amenities (cached pages)**
@@ -159,12 +242,7 @@ shown buildings 202; disclosures: {'floor not published': 478, 'special offer': 
 
 **rule tests on the output**
 ```
-  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
-  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
-  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
-  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_status
-  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
-pandas.errors.ParserError: Error tokenizing data. C error: Expected 11 fields in line 41, saw 12
+test_rules (data): 453 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**

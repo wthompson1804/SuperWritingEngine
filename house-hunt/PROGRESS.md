@@ -2,7 +2,39 @@
 
 Read this first every session. Newest entries at the top of the log.
 
-## Current state (2026-11-16, after the repairs to independent check 4 and the pipeline clean-up that followed; details in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_4.md`)
+## Current state (2026-11-16, after the pipeline repairs to independent check 5; details in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_5.md`)
+
+**Authorities, newest first:** `CLAUDE.md` → `docs/RANKING.md` (one current statement; change log at its end) → plan v4 → `docs/SAFETY_BASIS.md` → plan v3.
+
+**Run everything:** `python3 scripts/run_all.py` → `build_page_data.py` → `page_data_extras.py` → `build_scene_text.py`, `check_scene_text.py`,
+`realtor_lines.py`, `test_realtor_lines.py` → `page_data_extras.py` → `check_published_text.py` → `verify_all.py` → `build_site.py` (page agent).
+`test_rules.py --data` checks the page data only after `page_data_extras.py` has run.
+
+**Counts now**: 20,468 listings → 2,505 pass the listing gates → 2,451 costed → 1,469 within the cap → 664 ranked →
+**523 apartments shown in 202 buildings, 77 neighborhoods** (unchanged by these repairs; no apartment entered or left). By experience: Little-City
+217 / 80 / 23, Room-to-Breathe 154 / 38 / 23, Old-Neighborhood 72 / 55 / 21, Fresh-Start 71 / 23 / 5, Quiet-Street 6 / 3 / 3, Walk-Everywhere 3 / 3 / 2.
+**224 shown apartments carry one open item** (elevator 118, listing 67, dogs allowed 28, availability 8, eligibility 3). Two consecutive full runs are
+identical. Tests: `test_parsers.py` 259, `test_rules.py` 900, `--data` 14,959, `check_registry.py` passes.
+`check_published_text.py`: text 2, pipeline strings 0. `verify_all.py`: 18 passed, 2 failed (the same two sentences, for the text agent: East
+Brunswick `sub_local_rules`, The George's parking subhead), 1 warning (`site/dist` older than the data).
+
+**What changed (independent check 5, pipeline side):**
+- **Parking is structured** from every source's words (`parsers.parking_facts`; reviewed table `data/reference/parking_reviewed.csv`): kinds, the
+  included kind, optional kinds with fees, the kind the fee pays for, and the primary kind the score, the night moment and the page read. A free open
+  lot is not a garage. 24 shown buildings changed their word, 16 their rank.
+- **The train station is the nearest rail station of any kind** (`data/reference/rail_stations.csv` from the cached GTFS feeds), with its kind
+  (train, subway, PATH, light rail) and system; the commuter station is kept beside it. 64 shown buildings changed.
+- **New disclosures:** broker fee (8 apartments: 525 Riverdale Ave 5U and all 7 at Regency on Hudson), no broker fee (19), one-time costs (59),
+  washer and dryer to confirm (70). `scripts/tools/listing_fees.py` reads each listing's own description from its cached page
+  (`data/reference/listing_fee_statements.csv`).
+- **Dog weight limit** only where a source's words state it (Brookview Commons East: no figure). **Staleness** counted to the first tour day,
+  2026-11-22 (six more asterisks). **A utility with no estimate** feeds `all_in_likely`. **Toll range** per neighborhood. **Avoid-card evidence** as
+  sentences. Rent-line invariant in `test_rules.py --data`.
+- Not done, with reasons in the repairs file: D14 (Franklin stays; distances do not support a move), N24 (two Nostrand Ave entries), N29.
+
+**For the owner:** Regency on Hudson's listing says a broker fee applies (7 shown apartments); Beacon Falls still has no published crime figure.
+
+## Previous state (2026-11-16, after the repairs to independent check 4 and the pipeline clean-up that followed; details in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_4.md`; superseded by the section above)
 
 **Authorities, newest first:** `CLAUDE.md` → `docs/RANKING.md` (one current statement; change log at its end) → plan v4 → `docs/SAFETY_BASIS.md` → plan v3.
 

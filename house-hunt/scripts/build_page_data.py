@@ -580,10 +580,10 @@ def evidence_points(text):
         m = re.fullmatch(r"management: city records in the last (\d+) months above the 90th percentile on (.+)", t)
         if m:
             out.append(f"Management: in the last {m.group(1)} months, city records show more {', '.join(_cat(x) for x in m.group(2).split(','))} than at nine in ten similar buildings."); continue
-        m = re.fullmatch(r"car crime: (\d+) vehicle thefts and thefts from vehicles within (\d+) m (?:in (\d+) months \(police data\)|\(((?:19|20)\d\d-\d\d-\d\d) to ((?:19|20)\d\d-\d\d-\d\d),? about (\d+) months, ([^)]*)\)), "
+        m = re.fullmatch(r"car crime: (\d+) vehicle thefts and thefts from vehicles within (\d+) m (?:in (\d+) months \(police data\)|\(((?:19|20)\d\d-\d\d-\d\d) to ((?:19|20)\d\d-\d\d-\d\d),? about ([\d.]+) months, ([^)]*)\)), "
                          r"at least double the median of ([\d.]+) for candidate buildings in (.+)", t)
         if m:
-            out.append(car_crime_sentence(int(m.group(1)), int(m.group(2)), int(m.group(3) or m.group(6)), float(m.group(8)), m.group(9))); continue
+            out.append(car_crime_sentence(int(m.group(1)), int(m.group(2)), float(m.group(3) or m.group(6)), float(m.group(8)), m.group(9))); continue
         t2 = plain(t)
         if reader_ok(t2):
             out.append(t2[0].upper() + t2[1:] + ("" if t2.endswith(".") else "."))
@@ -598,8 +598,8 @@ def _times(ratio):
 
 
 def _span_words(months):
-    months = int(months)
-    return {6: "six months", 12: "a year", 24: "two years"}.get(months, f"about {months} months")
+    months = float(months)
+    return {6: "six months", 12: "a year", 24: "two years"}.get(months, f"about {months:g} months")
 
 
 def car_crime_sentence(n, metres, months, median, area) -> str:
@@ -750,7 +750,7 @@ def parking_block(g):
     est = g("parking_fee_monthly_basis") == "resident_review"
     plain = kind in ("open_lot", "assigned_lot", "off_street", "assigned")
     return {"kinds": kinds, "kind": kind, "kind_words": parsers.PARKING_KIND_WORDS.get(kind) if kind else None,
-            "included_kind": inc if g("parking_fee") == 0 else None, "included_quote": (g("parking_included_quote") or None) if g("parking_fee") == 0 else None,
+            "included_kind": inc if g("parking_fee") == 0 else None, "included_words_internal": (g("parking_included_quote") or None) if g("parking_fee") == 0 else None,
             "included_basis": parsers.PARKING_BASIS_WORDS.get(g("parking_included_basis")) if g("parking_fee") == 0 else None,
             "optional_kinds": [{"kind": o.get("kind"), "kind_words": parsers.PARKING_KIND_WORDS.get(o.get("kind")), "fee": o.get("fee"), "fee_high": o.get("fee_high"),
                                 "fee_basis": "published" if o.get("fee") is not None else None} for o in opt],
