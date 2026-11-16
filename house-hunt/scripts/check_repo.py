@@ -131,20 +131,27 @@ def check_csvs():
     show(sorted(rows, key=lambda r: r[1]), lambda r: f"{r[0] / 1024:8.0f} KB  {r[1]}")
 
 
+def mentions(text: str) -> set:
+    """Script names a text refers to: 'x.py' / 'x.js' written out, and modules named on an import line."""
+    out = set(re.findall(r"(?<![\w.])([A-Za-z_][\w]*)\.(?:py|js)\b", text))
+    for line in text.splitlines():
+        s = line.strip()
+        if s.startswith(("import ", "from ")):
+            out.update(re.findall(r"[A-Za-z_]\w*", s))
+    return out
+
+
 def check_scripts():
     print("\n== 3. Scripts no other file references ==")
     scripts = script_files()
-    code = {p: read(p) for p in scripts}
-    docs = {p: read(p) for p in doc_files()}
+    code = {p: mentions(read(p)) for p in scripts}
+    docs = {p: set(re.findall(r"(?<![\w.])([A-Za-z_][\w]*)\.(?:py|js)\b", read(p))) for p in doc_files() if p.name != "README.md"}
     alone, docs_only = [], []
     for p in scripts:
         if p.name in ("__init__.py", "check_repo.py"):
             continue
-        stem = re.escape(p.stem)
-        pat = re.compile(r"(?<![\w.])" + re.escape(p.name) + r"|(?:^|\n)\s*(?:import|from)\s+(?:scripts\.)?(?:tools\.)?" + stem + r"\b"
-                         r"|import [\w, .]*\b" + stem + r"\b|from (?:scripts\.)?tools import [\w, ]*\b" + stem + r"\b")
-        in_code = [q.name for q, t in code.items() if q != p and pat.search(t)]
-        in_docs = [q.name for q, t in docs.items() if q.name != "README.md" and re.search(r"(?<![\w])" + re.escape(p.name), t)]
+        in_code = [q.name for q, names in code.items() if q != p and p.stem in names]
+        in_docs = [q.name for q, names in docs.items() if p.stem in names]
         rel = str(p.relative_to(ROOT))
         if not in_code and not in_docs:
             alone.append(rel)

@@ -663,7 +663,7 @@ def build(quiet=False):
         log[rec["url"]] = rec
     L = {r["listing_id"]: r for r in csv.DictReader(open(lib.DATA / "listings.csv"))
          if r["source_site"] == "zumper" and r["detail_level"] == "card"}
-    rows, summ, sel_id = {}, {}, {}
+    rows, summ, sel_id, dups = {}, {}, {}, {}
     for s in sel:
         url = hz.BASE + s["path"]
         ids = s["listing_ids"].split()
@@ -737,18 +737,36 @@ def build(quiet=False):
                 rows[lid] = r
         else:
             lid = f"zumper-{ent.get('listing_id')}"
+            own = lid in tail                    # the page shows the listing the card row is about
             target = tail.get(lid) or ids[0]
+            attach = True
+            if not own:
+                # A /listings/ URL can now resolve to the address page, which shows ONE listing at that address -
+                # often a sibling unit. Only when street and unit label agree is it the card's unit under a new id.
+                nz = lambda x: re.sub(r"[^a-z0-9]", "", str(x).lower())
+                ca = (L.get(target) or {}).get("address", "")
+                cu = re.search(r"#\s*#?\s*([\w-]+)", ca)
+                pu = (ent.get("listing_location") or {}).get("unit") or ""
+                pa = ent.get("address") or ""
+                same_street = nz(re.split(r"[#,]", ca)[0])[:10] == nz(re.split(r"[#,]", pa)[0])[:10]
+                attach = same_street and nz(cu.group(1) if cu else "") == nz(re.sub(r"^#", "", str(pu)))
+                if not attach:
+                    summ[target].update(status="gone", note=f"its URL now resolves to a page showing another listing "
+                                        f"({lid}, {pa}); this unit's own price and date are no longer shown")
             if ent.get("listing_status") not in (1, None):
-                summ[target].update(status="gone", note=f"listing_status={ent.get('listing_status')} (inactive) on its page")
+                if attach:
+                    summ[target].update(status="gone", note=f"listing_status={ent.get('listing_status')} (inactive) on its page")
                 continue
             p = ent.get("min_price") if ent.get("min_price") is not None else ent.get("price")
             if ent.get("bedrooms") is None or ent["bedrooms"] > 1:
-                summ[target].update(status="opened", g_type="fail", preview_status="fail", fail_gates="type", pf_status="fail", pf_fail_gates="type",
-                                    note="page shows 2+ bedrooms (or none stated); not written to zumper_opened.csv")
+                if attach:
+                    summ[target].update(status="opened", g_type="fail", preview_status="fail", fail_gates="type", pf_status="fail", pf_fail_gates="type",
+                                        note="page shows 2+ bedrooms (or none stated); not written to zumper_opened.csv")
                 continue
             if p is None or p > hz.MAX_RENT:
-                summ[target].update(status="opened", g_rent="fail", preview_status="fail", fail_gates="rent", pf_status="fail", pf_fail_gates="rent",
-                                    note=f"page price {p} is over $3,000 (or absent); not written to zumper_opened.csv")
+                if attach:
+                    summ[target].update(status="opened", g_rent="fail", preview_status="fail", fail_gates="rent", pf_status="fail", pf_fail_gates="rent",
+                                        note=f"page price {p} is over $3,000 (or absent); not written to zumper_opened.csv")
                 continue
             bld, bvt, bblock = None, "", ""
             if ent.get("pb_id") and ent.get("pb_url"):
@@ -761,12 +779,28 @@ def build(quiet=False):
                         bblock = hz.fees_block(bvt)
             f = hz.facts_from(ent, vt, bld, bvt)
             r = unit_row(ent, s["path"], seen, rawp, bld, f, hz.fees_block(vt) or bblock, "listing", cards, seen_day)
-            if lid != target.split(":")[-1]:
-                r["notes"] = (r["notes"] + f"; page listing_id {lid} differs from the card row {target}").strip("; ")
-            sel_id[lid] = target
-            r["selected_card_row"] = "yes"
             r["hood_id"], r["hood_basis"] = s["hood_id"], s["hood_basis"]
-            rows[lid] = r
+            if not own:
+                ownp = hz.to_path(ent.get("url") or "")
+                r["notes"] = (r["notes"] + f"; read from the page that {url} now resolves to").strip("; ")
+                if ownp:
+                    r["url"] = hz.BASE + ownp          # the listing's own URL, as the page data gives it
+            if attach:
+                r["selected_card_row"] = "yes"
+                if own:
+                    if lid in sel_id and sel_id[lid] != target:
+                        dups[sel_id[lid]] = lid        # an earlier card row reached the same unit under its old id
+                    sel_id[lid] = target
+                    rows[lid] = r
+                elif lid in sel_id:
+                    dups[target] = lid                 # two card rows for one unit: the first keeps the row
+                else:
+                    r["notes"] += f"; card row {target} is this unit under an earlier listing id"
+                    sel_id[lid] = target
+                    rows[lid] = r
+            elif lid not in rows:
+                r["selected_card_row"] = "no (unit shown where a card row's URL now resolves)"
+                rows[lid] = r
 
     # building facts settled on a detail page apply to the other opened rows at the same street address
     # (same rule as h_zumper.build: dogs only from a building page with a visible policy, elevator from any page)
@@ -848,6 +882,10 @@ def build(quiet=False):
         summ[lid] = base
         if in_grid:
             out_rows.append(r)
+    for sid, zid in dups.items():
+        if sid in summ and summ[sid].get("status") != "opened":
+            summ[sid].update(status="opened", preview_status="duplicate", pf_status="duplicate",
+                             note=f"its page now shows listing {zid}, which is counted under row {sel_id.get(zid, zid)}")
     out_rows.sort(key=lambda r: (drive.get(str(r["zip"]).zfill(5)[:5], 999), r["listing_id"]))
     tmp = OPENED_F.with_suffix(".tmp")
     with open(tmp, "w", newline="") as fh:
