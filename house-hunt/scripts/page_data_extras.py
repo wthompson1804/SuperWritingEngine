@@ -47,6 +47,12 @@ def _host_fields(obj, r):
         host["walkthrough"] = [x.strip() for x in g("host_walkthrough").split("\n\n") if x.strip()]
     if host:
         obj["host"] = {**(obj.get("host") or {}), **host}
+    for col, key in (("about_points_json", "about_points"), ("day_moments_json", "day_moments")):
+        if g(col) and g(col).lower() != "nan":
+            try:
+                obj[key] = json.loads(g(col))
+            except ValueError:
+                pass
     for c in ("tagline", "display_label"):
         if g(c):
             obj[c] = g(c)
@@ -218,6 +224,23 @@ def main():
             h["rank_in_experience"] = i
         y["hood_ids"] = [h["id"] for h in ranked]
     rep["neighborhoods ranked within experiences"] = sum(1 for h in hoods.values() if h.get("rank_in_experience"))
+
+    # "About the building": two sentences and a few points per building (scripts/realtor_lines.py)
+    BA = rd(DATA / "reference" / "building_about.csv")
+    if BA is not None:
+        ba = {r.building_id: r for r in BA.itertuples()}
+        n = 0
+        for u in d["units"]:
+            r = ba.get(u.get("building_id"))
+            if r is None or not str(r.about_building).strip():
+                continue
+            u["about_building"] = str(r.about_building).strip()
+            try:
+                u["about_points"] = json.loads(r.about_points_json) if str(getattr(r, "about_points_json", "")).strip() else None
+            except ValueError:
+                u["about_points"] = None
+            n += 1
+        rep["places with an About-the-building text"] = f"{n} of {len(d['units'])}"
 
     # ratings census (docs/RATINGS_CENSUS_BRIEF.md): aggregate rating and review count per platform, as information only.
     # Shown: 5-star-scale figures matched with high or medium confidence; ForRent and ApartmentFinder repeat the

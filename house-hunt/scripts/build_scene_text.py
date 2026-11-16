@@ -332,10 +332,18 @@ def hood_rules(hood_id, rule, pattern=None):
     return out
 
 
-def pick_sub(rules, ctx, salt):
+SUB_MIN_WORDINGS = 5                                   # wordings per condition in the "=== sub:" drafts
+SUB_USED = {}                                          # (kind, section) -> Counter of wordings used so far in this build
+
+
+def pick_sub(rules, ctx, salt, cap=None):
     """The first draft whose conditions all hold for this row -> (sentence, evidence). ('' , []) when none does.
-    Every condition becomes an evidence item with a test, so the checker re-runs it after a data change."""
+    Every condition becomes an evidence item with a test, so the checker re-runs it after a data change. The wording
+    is the first one, in an order seeded by the row's id, that has not reached `cap` uses in this build; when every
+    wording of the matching draft has, the subhead stays empty (better than the same line once more)."""
     import hashlib
+    from collections import Counter
+    used = SUB_USED.setdefault((ctx["kind"], salt), Counter())
     for conds, variants in rules:
         evs, ok = [], True
         for cond in conds:
@@ -386,7 +394,11 @@ def pick_sub(rules, ctx, salt):
                 evs.append(ev)
         if ok:
             i = int(hashlib.sha1(f"{ctx['id']}|{salt}".encode()).hexdigest()[:8], 16) % len(variants)
-            return variants[i], [{"claim": variants[i], **e} for e in evs]
+            for text in variants[i:] + variants[:i]:
+                if cap is None or used[text] < cap:
+                    used[text] += 1
+                    return text, [{"claim": text, **e} for e in evs]
+            return "", []
     return "", []
 
 
@@ -401,6 +413,15 @@ def main():
     years, hoods, errors, stale = [], [], [], []
     blocks = parse(SOURCE)
     subs = {b["id"]: b["rules"] for b in blocks if b["kind"] == "sub"}
+    SUB_USED.clear()
+    for (kind, section), rules in subs.items():
+        for conds, variants in rules:
+            if len(variants) < SUB_MIN_WORDINGS or len(set(variants)) < len(variants):
+                errors.append(f"sub {kind}.{section} [{', '.join(conds)}]: {len(set(variants))} different wordings, "
+                              f"wanted at least {SUB_MIN_WORDINGS}")
+    n_hoods = sum(1 for b in blocks if b["kind"] == "hood" and b["id"] in lg.index)
+    sub_cap = {"hood": int(n_hoods * C.SUB_SHARE), "year": None}
+    closes = {}
     for b in blocks:
         if b["kind"] == "sub":
             continue
@@ -423,8 +444,17 @@ def main():
                     attach_voices(ctx, f["voices"], texts, evidence)
                 elif any(C.VOICE_PHRASE.search(t) for t in texts.values()):
                     raise ValueError(f"{b['id']}: paraphrases residents without a voices: line")
+                # close: says what the last sentence of the host_intro turns on (see the note above the hood intros)
+                tag = f.get("close", "")
+                if tag not in C.CLOSE_KINDS:
+                    raise ValueError(f"{b['id']}: 'close:' must be one of {C.CLOSE_KINDS}, found '{tag}'")
+                if (tag == "drive") != C.ends_on_drive(texts["host_intro"]):
+                    raise ValueError(f"{b['id']}: close: {tag}, but the last sentence reads otherwise: "
+                                     f"{C.closing(texts['host_intro'])}")
+                closes[b["id"]] = tag
             for section in C.SUB_SECTIONS[b["kind"]]:
-                texts["sub_" + section], evs = pick_sub(subs.get((b["kind"], section), []), ctx, section)
+                texts["sub_" + section], evs = pick_sub(subs.get((b["kind"], section), []), ctx, section,
+                                                         sub_cap[b["kind"]])
                 evidence += evs
             problems, _ = C.check_row(b["kind"], b["id"], texts, evidence)
             errors += [f"{b['id']}: {p}" for p in problems]
@@ -440,6 +470,12 @@ def main():
                           "evidence_json": ej})
     for col, rows, key in (("host_intro", years, "year_label"), ("host_intro", hoods, "hood_id")):
         errors += C.check_repetition(col, {r[key]: r[col] for r in rows})
+    errors += C.check_closings("host_intro", {r["hood_id"]: r["host_intro"] for r in hoods})
+    errors += C.check_sub_shares("hood", hoods)
+    from collections import Counter
+    kinds = Counter(closes.values())
+    if hoods and len([k for k, n in kinds.items() if n >= 3]) < 6:
+        errors.append(f"host_intro closes: fewer than 6 kinds of close are in real use: {dict(kinds)}")
     for name, rows in ((C.YEARS, years), (C.HOODS, hoods)):
         if rows:
             with open(name, "w", newline="", encoding="utf-8") as fh:
@@ -447,6 +483,13 @@ def main():
                 w.writeheader()
                 w.writerows(rows)
     print(f"{len(years)} years, {len(hoods)} neighborhoods written; {len(errors)} problems")
+    print(f"host_intro closes by kind: {dict(kinds.most_common())}")
+    for section in C.SUB_SECTIONS["hood"]:
+        c = Counter(r["sub_" + section] for r in hoods if r["sub_" + section])
+        if c:
+            text, n = c.most_common(1)[0]
+            print(f"  sub_{section:20} {sum(c.values()):3} neighborhoods, {len(c):2} wordings, commonest {n} "
+                  f"({n / len(hoods):.1%}): {text[:50]}")
     for e in errors:
         print("  ", e)
     if stale:

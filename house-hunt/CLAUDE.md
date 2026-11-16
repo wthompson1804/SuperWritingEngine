@@ -83,3 +83,10 @@ full brief (who Lamia is, her limits, scope, phases, decisions and rejected dire
 - **Collapse to headlines (Will, 2026-11-16):** every section collapses to a headline that states its conclusion; expanding
   is the reader's choice. Target: any one place, neighborhood or experience fits in about 1.5 phone screens when collapsed.
   At experience level show the median as the headline figure with the range in small text beneath it.
+- **Page feedback round 3 (Will, 2026-11-16):** no "Your host says" label anywhere: the text is "About this experience /
+  About <neighborhood> / About the building", fully shown, scannable (icon points), never repeated lower on the page.
+  A "See the neighborhoods" / "See the places" button sits near the top. Units group under their building; "Next" moves
+  to the next building. "A day here" is a vertical stack of collapsible moments with green / yellow / soft red chips.
+  Saving is unlimited ("My list"); compare any two or three ticked from the list; Save sits at the top and bottom of a
+  building page. Each experience gets an illustration. Ratings from review sites are shown as information; no drop rule
+  is applied until the owner chooses one.

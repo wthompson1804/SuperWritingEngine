@@ -25,7 +25,11 @@ data/reference/scene_text_neighborhoods.csv and, for every row and every prose c
    (neighborhood in the lowest fifth by violent rate among those on the page; one field only) and "the safety limit
    we set" (watch_for only; violent rate of 8.0 or more, where Jamaica's 9.8 is the limit);
 5. across rows, the host voice must not read like a form letter: at most 3 host_intro texts may open with the same 3
-   words, and no run of 6 words may appear in more than a tenth of them (the fixed toll wording is exempt).
+   words, and no run of 6 words may appear in more than a tenth of them (the fixed toll wording is exempt);
+6. the neighborhood host_intro texts must not all end the same way: no closing shape (the first 4 words of the last
+   sentence) in more than 15% of them, the drive-and-toll close on at most a third of them, and never on a text that
+   already opened with the drive;
+7. section subheads (sub_ columns): no wording on more than 6% of the neighborhoods for its section.
 
 A value that moved but still rounds to the same words is reported as drift, not failure.
 
@@ -489,6 +493,66 @@ def check_repetition(col, texts):
     return out
 
 
+# How a host_intro ends. The last sentence is "about the drive home" when it speaks of the parents, the toll or transit.
+CLOSE_WORDS, CLOSE_SHARE, CLOSE_MIN_TEXTS = 4, 0.15, 20     # no closing shape in more than 15% of the texts
+DRIVE_CLOSE_SHARE = 1 / 3                                   # the drive-and-toll close on at most a third of them
+DRIVE_TALK = re.compile(r"e-zpass|\btolls?\b|toll-free|\btransit\b|your parents|sunday dinner|mom and dad", re.I)
+CLOSE_KINDS = ["parking", "dog_green", "dinner", "residents", "choice", "life", "drive"]
+SUB_SHARE = 0.06                                            # a section subhead on fewer than 6% of the neighborhoods
+
+
+def closing(text):
+    s = sentences(text)
+    return s[-1] if s else ""
+
+
+def ends_on_drive(text):
+    return bool(DRIVE_TALK.search(closing(text)))
+
+
+def opens_on_drive(text):
+    return bool(DRIVE_TALK.search(" ".join(sentences(text)[:2])))
+
+
+def check_closings(col, texts):
+    """texts: {key: prose}. The last sentence must not be the same move every time. Returns a list of problems."""
+    from collections import defaultdict
+    texts = {k: t for k, t in texts.items() if t.strip()}
+    if len(texts) < CLOSE_MIN_TEXTS:
+        return []
+    shapes = defaultdict(set)
+    for key, text in texts.items():
+        words = [w for part in _norm(closing(text)) for w in part]
+        shapes[" ".join(words[:CLOSE_WORDS])].add(key)
+    limit = int(len(texts) * CLOSE_SHARE)
+    out = [f"{col}: {len(k)} texts close with '{shape} ...' (limit {limit}): {sorted(k)[:5]}"
+           for shape, k in shapes.items() if len(k) > limit]
+    drive = sorted(k for k, t in texts.items() if ends_on_drive(t))
+    if len(drive) > len(texts) * DRIVE_CLOSE_SHARE:
+        out.append(f"{col}: {len(drive)} of {len(texts)} texts end on the drive, the toll or transit "
+                   f"(limit a third): {drive[:5]}")
+    both = [k for k in drive if opens_on_drive(texts[k])]
+    if both:
+        out.append(f"{col}: these open with the drive and end on it too: {both[:8]}")
+    return out
+
+
+def check_sub_shares(kind, rows):
+    """rows: [{column: text}]. No section subhead on more than SUB_SHARE of the rows (neighborhoods only: with 6
+    experiences every subhead is a sixth of them)."""
+    from collections import Counter
+    if kind != "hood" or len(rows) < CLOSE_MIN_TEXTS:
+        return []
+    out = []
+    limit = int(len(rows) * SUB_SHARE)
+    for section in SUB_SECTIONS[kind]:
+        col = "sub_" + section
+        for text, n in Counter(r.get(col) or "" for r in rows).items():
+            if text and n > limit:
+                out.append(f"{col}: '{text}' is on {n} of {len(rows)} neighborhoods (limit {limit})")
+    return out
+
+
 def main():
     fails = drifts = rows = 0
     for kind, path, key in (("year", YEARS, "year_label"), ("hood", HOODS, "hood_id")):
@@ -497,7 +561,7 @@ def main():
             print(f"MISSING {path}")
             fails += 1
             continue
-        host = {}
+        host, seen = {}, []
         with open(path, newline="", encoding="utf-8") as f:
             for r in csv.DictReader(f):
                 rows += 1
@@ -522,7 +586,13 @@ def main():
                 fails += bool(problems)
                 drifts += bool(drift)
                 host[r[key]] = r["host_intro"]
-        for p in check_repetition("host_intro", host):
+                seen.append(r)
+        across = check_repetition("host_intro", host) + check_sub_shares(kind, seen)
+        if kind == "hood":
+            across += check_closings("host_intro", host)
+            n_drive = sum(ends_on_drive(t) for t in host.values())
+            print(f"host_intro closes: {n_drive} of {len(host)} end on the drive, the toll or transit")
+        for p in across:
             print(f"FAIL {kind} texts: {p}")
             fails += 1
     print(f"{rows} rows checked, {fails} failing, {drifts} with drift only")

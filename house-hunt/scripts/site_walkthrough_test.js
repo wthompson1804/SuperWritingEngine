@@ -70,7 +70,7 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   // First screen map -> New York City -> a mark -> card -> "See places" -> the neighborhood -> Back; then an experience: List -> Map -> a mark -> Back -> List.
   const mapFlow = async (pg, d, tag, o) => { o = o || {};
     const w = pg.viewportSize().width, hoodByName = n => d.neighborhoods.filter(h => (h.name + (h.state ? ', ' + h.state : '')) === n);
-    await pg.waitForSelector('.life'); if (await pg.isVisible('#tour')) await pg.click('[data-act=tour-skip]');
+    await pg.waitForSelector('.life');
     await pg.evaluate(() => { location.hash = '#lives'; }); await pg.waitForSelector('#hhmap .hhm');
     // tiles stay the way in; the map sits below them behind a jump control
     assert(await pg.evaluate(() => document.querySelector('.life').getBoundingClientRect().top < document.getElementById('sec-map').getBoundingClientRect().top), 'the experience tiles come before the map');
@@ -153,24 +153,43 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   const hoodBy = Object.fromEntries(data.neighborhoods.map(h => [h.id, h])), yearBy = Object.fromEntries(data.years.map(y => [y.id, y]));
   const median = a => { a = a.filter(x => x != null).sort((x, y) => x - y); const m = a.length >> 1; return !a.length ? null : a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; };
   const money0 = v => '$' + Math.round(v).toLocaleString('en-US');
-  const listed = y => y.hood_ids.map(id => hoodBy[id]).filter(Boolean);
+  const listed = y => y.hood_ids.map(id => hoodBy[id]).filter(Boolean), unitIds = new Set(data.units.map(u => u.id));
 
   await page.goto(BASE + '/index.html');
   await page.waitForSelector('.life');
-  // first-run card
-  await page.waitForSelector('#tour:not([hidden])');
-  await page.click('[data-act=tour-next]'); await page.click('[data-act=tour-next]'); await page.click('[data-act=tour-next]');
-  assert(await page.isHidden('#tour'));
+  // nothing opens by itself on a first visit; "How this works" is a footer link that opens three lines in the sheet
+  assert.strictEqual(await page.locator('#tour, #tourscrim, .tour').count(), 0, 'no first-run card');
+  assert(!(await page.evaluate(() => document.getElementById('sheet').classList.contains('open'))), 'no sheet is open on arrival');
+  await page.click('#foot [data-act=how-open]'); await page.waitForSelector('#sheet.open .howl');
+  assert.strictEqual(await page.locator('#sheet .howl li').count(), 3); await shot('ux-00-how-this-works-sheet');
+  await page.click('#shClose'); assert(!(await page.evaluate(() => document.getElementById('sheet').classList.contains('open'))));
+  // ---------- the bottom bar: one slim line until something is held ----------
+  { const tr = await page.evaluate(() => { const e = document.getElementById('tray'); return { h: e.offsetHeight, text: e.innerText.replace(/\s+/g, ' ').trim(), open: e.classList.contains('open'), slots: e.querySelectorAll('.slot').length - e.querySelectorAll('.tr-row[hidden] .slot').length, go: !!document.getElementById('goBtn'), pad: parseFloat(getComputedStyle(document.body).paddingBottom) }; });
+    assert(tr.h >= 50 && tr.h <= 58, 'nothing held: the bar is slim, ' + tr.h + 'px'); assert.strictEqual(tr.text, 'My top three 0 of 3'); assert(!tr.open && tr.slots === 0 && !tr.go, 'no slots and no Compare while it is closed and empty');
+    assert(Math.abs(tr.pad - tr.h - 20) < 1.5, 'the page keeps room for the bar: ' + tr.pad);
+    console.log('bottom bar, nothing held:', tr.h, 'px');
+    await page.click('#tray .tr-tog'); const o = await page.evaluate(() => ({ h: document.getElementById('tray').offsetHeight, slots: document.querySelectorAll('#tray .slot').length, exp: document.querySelector('#tray .tr-tog').getAttribute('aria-expanded'), go: document.getElementById('goBtn').className, dis: document.getElementById('goBtn').getAttribute('aria-disabled') }));
+    assert(o.slots === 3 && o.exp === 'true' && !/live/.test(o.go) && o.dis === 'true', 'tapped: three empty slots, Compare not yet live'); console.log('bottom bar, opened:', o.h, 'px'); await shot('ux-00b-bar-opened-empty');
+    await page.click('#tray .tr-tog'); assert.strictEqual(await page.evaluate(() => document.getElementById('tray').offsetHeight), tr.h, 'tapped again: slim'); }
 
   // ---------- first screen: six short cards, the median with the range small beneath, nothing explained ----------
   assert.strictEqual(await page.locator('a.life').count(), data.years.length);
-  const tiles = await page.evaluate(() => [...document.querySelectorAll('a.life')].map(a => ({ h: Math.round(a.getBoundingClientRect().height), label: a.querySelector('h3').textContent.trim(), figs: [...a.querySelectorAll('.figs b')].map(b => b.textContent), rng: [...a.querySelectorAll('.figs .rng')].map(b => b.textContent), text: a.innerText })));
+  const tiles = await page.evaluate(() => [...document.querySelectorAll('a.life')].map(a => ({ h: Math.round(a.getBoundingClientRect().height), label: a.querySelector('h3').textContent.trim(), figs: [...a.querySelectorAll('.figs b')].map(b => b.textContent), labels: [...a.querySelectorAll('.figs span')].map(b => b.textContent), kids: [...a.children].map(c => c.tagName + (c.className ? '.' + c.className : '')), mark: a.querySelectorAll('h3 .ymk').length, tag: (a.querySelector('.l2') || {}).textContent, rng: [...a.querySelectorAll('.figs .rng')].map(b => b.textContent), text: a.innerText })));
   tiles.forEach((t, i) => { const y = data.years[i];
     assert.strictEqual(t.label, String(y.display_label || y.label).replace(/ Year$/, ' Experience'));
-    if (y.medians && y.medians.all_in != null) assert.strictEqual(t.figs[0], 'about ' + money0(y.medians.all_in), 'the tile shows the median cost');
-    if (y.medians && y.medians.drive_min != null) assert.strictEqual(t.figs[1], 'about ' + Math.round(y.medians.drive_min) + ' min', 'the tile shows the median drive');
+    if (y.medians && y.medians.all_in != null) assert.strictEqual(t.figs[0], money0(y.medians.all_in), 'the tile shows the median cost');
+    if (y.medians && y.medians.drive_min != null) assert.strictEqual(t.figs[1], Math.round(y.medians.drive_min) + ' min', 'the tile shows the median drive');
     if (y.all_in_range && money0(y.all_in_range[0]) !== money0(y.all_in_range[1])) assert(t.rng.includes(money0(y.all_in_range[0]) + ' to ' + money0(y.all_in_range[1])), 'the range sits under the median: ' + t.rng);
-    if (W === 390) assert(t.h <= 260, 'an experience tile is a short card: ' + t.h + 'px'); });
+    // a tile is its marker, the label, the tagline, two numbers with their ranges, and the count of places: nothing else
+    assert.deepStrictEqual(t.kids, ['H3', y.tagline ? 'P.l2' : null, 'DIV.figs xt'].filter(Boolean), 'a tile has nothing else: ' + t.kids);
+    assert.strictEqual(t.mark, 1, 'the marker is on the tile'); if (y.tagline && !CRIME.test(y.tagline)) assert.strictEqual(t.tag, y.tagline, 'the tagline is shown whole');
+    assert.strictEqual(t.figs.length, 3); assert.strictEqual(t.figs[2], String(listed(y).reduce((n, h) => n + (h.unit_ids || []).filter(id => unitIds.has(id)).length, 0)), 'the count of places');
+    assert.deepStrictEqual(t.labels, ['typical all-in', 'typical to Mom and Dad', t.figs[2] === '1' ? 'place' : 'places']);
+    if (W === 390) assert(t.h <= 200, 'an experience tile is a short card: ' + t.h + 'px'); });
+  { const end = await page.evaluate(() => Math.round(document.getElementById('see-map').getBoundingClientRect().bottom + window.scrollY));
+    console.log('first screen: the six tiles and "See them on a map" end at', end, 'px =', (end / SCREEN).toFixed(2), 'screens');
+    if (W === 390) assert(end <= 2.5 * SCREEN, 'tiles and the map button fit in 2.5 screens: ' + end);
+    assert(await page.evaluate(() => document.getElementById('see-map').getBoundingClientRect().top > [...document.querySelectorAll('a.life')].pop().getBoundingClientRect().bottom), 'the map button follows the tiles'); }
   console.log('first screen: tile heights', tiles.map(t => t.h).join(', '), '| page', await pageHeight(), 'px with the map');
   assert.strictEqual(await page.locator('#view .mock, #view .coldopen, #view .confnote, #view .tip').count(), 0, 'no explaining lines on the first screen');
   assert.strictEqual(await page.locator('#view details.howd[open]').count(), 0);
@@ -191,9 +210,17 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
       dog: HL.dog(u({ dog: { allowed: 'yes', weight_limit_lb: null } })), dog50: HL.dog(u({ dog: { allowed: 'yes', weight_limit_lb: 50 } })), dogNoLimit: HL.dog(u({ dog: { allowed: 'yes', weight_limit_lb: 'no limit' } })), dogUnk: HL.dog(u({ dog: {} })),
       bld: HL.building(u({ elevator: { value: 'yes' }, amenities: { gym: 'yes', pool: 'pool' } })), bldNone: HL.building(u({})),
       queens: HL.queens({ drive_min: 5, all_in: 4, sqft: 1, parking: 3 }), queensSame: HL.queens({ drive_min: 3, all_in: 3 }), queensUnk: HL.queens({}),
-      voices: HL.voices({ local: { voices: [{ excerpt: 'a', sentiment: 'positive', theme: 'parking' }, { excerpt: 'b', sentiment: 'positive', theme: 'parking' }, { excerpt: 'c', sentiment: 'negative', theme: 'noise' }, { excerpt: 'd', sentiment: 'positive', theme: 'safety' }] } }), voicesNone: HL.voices({ local: {} }),
+      voices: HL.voices({ local: { voices: [{ excerpt: 'a', sentiment: 'positive', theme: 'parking' }, { excerpt: 'b', sentiment: 'positive', theme: 'parking' }, { excerpt: 'c', sentiment: 'negative', theme: 'noise' }, { excerpt: 'd', sentiment: 'positive', theme: 'safety' }] } }), voicesNone: HL.voices({ local: {} }), voicesTopic: HL.voicesTopic({ local: { voices: [{ excerpt: 'a', theme: 'parking' }, { excerpt: 'b', theme: 'parking' }, { excerpt: 'c', theme: 'noise' }, { excerpt: 'd', theme: 'safety' }, { excerpt: 'e', theme: 'car_crime' }, { excerpt: 'f', theme: 'car_crime' }, { excerpt: 'g', theme: 'car_crime' }] } }),
       rules: HL.rules({ local: { parking_rules: [{ rule: 'overnight_parking', summary: 'Overnight parking on the street needs a permit.' }] } }), rulesPlain: HL.rules({ local: { parking_rules: [{ rule: 'meters', summary: 'Meters run 9 to 6.' }] } }), rulesNone: HL.rules({ local: {} }),
       described: HL.described({ described: [{ quote: 'A leafy village on the Sound with a train to the city and a main street that people walk on weekends.' }] }),
+      describedCount: HL.described({ described: [{ quote: 'A leafy village on the Sound with a train to the city and a main street that people walk on weekends, all year.', source: 'Wikipedia' }, { quote: 'It is also a place where the second sentence is the short one, after a very long opening clause. Short.', source: 'Wikipedia' }] }),
+      describedAbbr: HL.described({ described: [{ quote: 'East Brunswick is a township in Middlesex County, in the U.S. state of New Jersey.', source: 'Wikipedia' }, { quote: 'x', source: 'niche.com' }] }), describedNone: HL.described({}),
+      confirm: HL.confirm(u({ confirm: { asterisk: true, what: 'listing', why: 'w' }, disclosures: [{ what: 'a' }, { what: 'b' }] })), confirmRent: HL.confirm(u({ rent: { asterisk: true } })), confirmAsk: HL.confirm(u({ disclosures: [{ what: 'a' }] })), confirmNone: HL.confirm(u({})),
+      reviews: HL.reviews({ platforms: [{ platform: 'Yelp', rating: 3, count: 12 }, { platform: 'Google', rating: 4.24, count: 149 }, { platform: 'Zillow', rating: 5, count: 1 }], searched: true, found_any: true }),
+      reviewsOne: HL.reviews({ platforms: [{ platform: 'Google', rating: 4, count: 1 }], searched: true, found_any: true }), reviewsTwo: HL.reviews({ platforms: [{ platform: 'Google', rating: 4.5, count: 20 }, { platform: 'Yelp', rating: 2, count: null }], found_any: true }),
+      reviewsNone: HL.reviews({ platforms: [], searched: true, found_any: false }), reviewsNotYet: HL.reviews({ platforms: [], searched: false, found_any: false }), reviewsMissing: HL.reviews(undefined),
+      firstLong: HL.first('There is a real night out on foot here, with neighbors your age and a dog run that stays busy until late in the evening.'), firstMax: window.__houseHunt.HL_MAX,
+      dump: [window.__houseHunt.cleanText('term 12: price 2805, totalPrice 2805, concession 0'), window.__houseHunt.cleanText('First month free on a 13-month lease | The page does not say whether the listed price is gross or net-effective.'), window.__houseHunt.cleanText('**NOW OFFERING 1 MONTH FREE | lease_term: 12 | {"a":1}'), window.__houseHunt.cleanText(null)],
       questions: HL.questions(0), first: HL.first('It has 2.5 miles of beach. And more.', 80) }; });
   assert.deepStrictEqual(hl, { cost: '$2,710 all-in', costUnknown: 'not published, ask',
     trip: 'about 28 min, $15 in tolls', tripFree: 'about 12 min, no tolls', tripUnk: 'about 40 min, tolls not fully known', tripNone: 'drive time not known',
@@ -201,9 +228,15 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
     dog: 'allowed, weight limit not stated', dog50: 'allowed, up to 50 lb', dogNoLimit: 'allowed, no weight limit', dogUnk: 'not stated, ask',
     bld: 'elevator, gym, pool', bldNone: 'details not published',
     queens: 'closer, cheaper, smaller', queensSame: 'about the same', queensUnk: 'not known yet',
-    voices: '3 positive, 1 negative; most about parking', voicesNone: 'none found yet',
+    voices: '3 positive, 1 negative', voicesTopic: 'Parking', voicesNone: 'none found yet',
     rules: 'overnight street parking restricted', rulesPlain: '1 rule on record', rulesNone: 'not found, ask',
-    described: '“A leafy village on the Sound with a train to the city and a…”', questions: 'nothing flagged', first: 'It has 2.5 miles of beach.' });
+    described: '1 description', describedCount: '2 descriptions, from Wikipedia', describedAbbr: '2 descriptions, from Wikipedia and niche.com', describedNone: '',
+    confirm: '1 thing to confirm · 2 to ask', confirmRent: '1 thing to confirm', confirmAsk: '1 to ask', confirmNone: 'nothing',
+    reviews: '4.2 on Google · 149 reviews, and 2 more sites', reviewsOne: '4.0 on Google · 1 review', reviewsTwo: '4.5 on Google · 20 reviews, and 1 more site',
+    reviewsNone: 'No reviews found online', reviewsNotYet: 'Not looked up yet', reviewsMissing: 'Not looked up yet',
+    firstLong: 'There is a real night out on foot here.', firstMax: 64,
+    dump: ['', 'First month free on a 13-month lease', 'NOW OFFERING 1 MONTH FREE', ''],
+    questions: 'nothing flagged', first: 'It has 2.5 miles of beach.' });
 
   // ---------- an experience: headline, the day (clamped), the figures, the top three, then rows ----------
   const star = data.units.find(u => u.rent.asterisk && u.all_in_gross > u.all_in && hoodBy[u.hood_id]) || data.units.find(u => u.rent.asterisk);
@@ -304,10 +337,18 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   // ---------- places ----------
   const uRich = data.units.filter(u => u.confirm.asterisk && u.rent.asterisk && (u.disclosures || []).length && hoodBy[u.hood_id]).sort((a, b) => (b.evidence.items.length + b.tour_questions.length) - (a.evidence.items.length + a.tour_questions.length))[0] || star;
   const uSparse = data.units.filter(u => !u.confirm.asterisk && !u.rent.asterisk && !u.contact).sort((a, b) => (a.evidence.items.length + a.tour_questions.length) - (b.evidence.items.length + b.tour_questions.length))[0] || data.units[0];
+  const whatsOf = u => [...new Set((u.disclosures || []).map(x => String(x.what || '').trim()).filter(w => w && w.toLowerCase() !== String(u.confirm.what || '').toLowerCase()))];
   const conf = data.units.find(u => u.confirm.asterisk && !u.rent.asterisk) || data.units.find(u => u.confirm.asterisk);
   for (const [tag, u] of [['rich', uRich], ['sparse', uSparse], ['with an asterisk', conf], ['rent asterisk', star]]) {
     await go('#unit-' + slug(u.id)); await fits('place', tag + ' (' + (u.building || u.address) + ')'); await noCrime('place ' + tag); await overflow('unit ' + tag);
-    for (const [id, key] of [['r-cost', 'cost'], ['r-trip', 'trip'], ['r-parking', 'parking'], ['r-dog', 'dog'], ['r-building', 'building']]) assert.strictEqual(await headOf(id), await page.evaluate(([i, k]) => window.__houseHunt.headline('unit', i, k), [u.id, key]), 'the row headline is the builder\'s: ' + id); }
+    for (const [id, key] of [['r-cost', 'cost'], ['r-trip', 'trip'], ['r-parking', 'parking'], ['r-dog', 'dog'], ['r-building', 'reviews'], ['r-confirm', 'confirm']]) assert.strictEqual(await headOf(id), await page.evaluate(([i, k]) => window.__houseHunt.headline('unit', i, k), [u.id, key]), 'the row headline is the builder\'s: ' + id);
+    // reviews of the building: what the sites show, most reviews first, each linked; never a judgement of ours
+    { const r = u.ratings || {}, ps = (r.platforms || []).filter(x => x && x.platform && x.rating != null), exp = !ps.length || r.found_any === false ? (r.searched ? 'No reviews found online' : 'Not looked up yet') : null;
+      const head = await headOf('r-building'); if (exp) assert.strictEqual(head, exp); else { const top = ps.slice().sort((a, b) => (b.count == null ? -1 : b.count) - (a.count == null ? -1 : a.count))[0]; assert(head.startsWith(Number(top.rating).toFixed(1) + ' on ' + top.platform), 'the site with the most reviews leads: ' + head); assert.strictEqual(/and (\d+) more sites?$/.test(head) ? +RegExp.$1 : 0, ps.length - 1); }
+      assert(head.length <= 64, 'the headline fits: ' + head);
+      const body = await page.evaluate(() => ({ lis: [...document.querySelectorAll('#bld-reviews li')].map(li => li.textContent), links: [...document.querySelectorAll('#bld-reviews li a')].map(a => a.target + '|' + a.rel), facts: document.querySelectorAll('#bld-facts li').length, text: document.getElementById('bld-reviews').textContent }));
+      assert.strictEqual(body.lis.length, exp ? 0 : ps.length); assert(body.facts >= 5, 'the building facts are still in the row'); assert(!/★|we think|our rating|recommend/i.test(body.text));
+      if (!exp) { assert(body.lis.every(x => /out of 5/.test(x)), 'each line: rating out of 5: ' + body.lis[0]); assert(body.links.every(x => x === '_blank|noopener noreferrer')); } } }
   await go('#unit-' + slug(uRich.id)); await small('unit'); await shot('04-place', true); await shot('ux-04-place-collapsed');
   { const n = await page.locator('#sec-rows details.rowd').count(); assert(n >= 5 && n <= 8, 'five to eight rows on a place: ' + n);
     assert.strictEqual(await page.locator('.unit.page .kstrip > div').count(), 4); assert((await page.textContent('#r-confirm .st')).trim() === 'Ask', 'what she must not miss is on the row itself');
@@ -323,12 +364,22 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   await page.click('#r-cost .receipt details.howd > summary'); assert(await page.isVisible('#r-cost .receipt .howb')); await shot('05-receipt-how-open');
   // the asterisk: what to confirm on the page, the why behind a tap; disclosures as "Good to know before you call"
   await go('#unit-' + slug(conf.id));
-  assert((await page.textContent('.ph1')).includes('*')); assert((await page.textContent('.unit.page .confl')).startsWith('* To confirm:'));
+  assert((await page.textContent('.ph1')).includes('*')); 
+  // one compact line carries the asterisk and the count; it sits after the host voice, which follows the key facts; a tap opens "Still to confirm"
+  { const top = await page.evaluate(() => { const pg = document.querySelector('.unit.page'), y = s => { const e = pg.querySelector(s); return e ? e.getBoundingClientRect().top : null; }; return { boxes: pg.querySelectorAll('.confl').length, lines: pg.querySelectorAll('.starline').length, text: (pg.querySelector('.starline') || {}).innerText, strip: y('.kstrip'), host: y('#host-line'), star: y('.starline'), hold: y('[data-act=hold]'), between: [...pg.children].map(c => c.className.split(' ')[0]).join('>'), h: pg.querySelector('.starline').offsetHeight }; });
+    assert.strictEqual(top.boxes, 0, 'no separate "To confirm" and "Rent" boxes at the top'); assert.strictEqual(top.lines, 1);
+    const nc = 1 + (conf.rent.asterisk || conf.rent.basis_kind === 'net_effective' ? 1 : 0), nd = whatsOf(conf).length;
+    assert.strictEqual(top.text.replace(/\s+/g, ' ').trim(), '* ' + (nc === 1 ? '1 thing' : nc + ' things') + ' to confirm' + (nd ? ' · ' + nd + ' to ask' : ''), 'the asterisk line: ' + top.text);
+    assert(top.strip < top.host && top.host < top.star && top.star < top.hold, 'key facts, then the host, then the asterisk line, then Hold'); assert(top.h <= 48, 'one compact line: ' + top.h + 'px');
+    if (conf.host && (conf.host.line || conf.host.catch)) assert(/kstrip>host/.test(top.between), 'the host voice comes right after the key facts: ' + top.between);
+    await page.click('.unit.page .starline'); assert(await page.evaluate(() => document.getElementById('r-confirm').open), 'the line opens the row');
+    const rt = await page.evaluate(() => document.getElementById('r-confirm').getBoundingClientRect().top); assert(rt >= 0 && rt < 200, 'and scrolls to it: ' + Math.round(rt)); await shot('ux-08b-asterisk-line-opens-row'); }
   await openRow('r-confirm'); assert((await page.textContent('#confirm-box h4')).includes('Still to confirm'));
   assert((await page.textContent('#confirm-box')).includes(conf.confirm.why.replace(/\s*\((?:and )?count(?:ed|s)? as \$0\)/gi, '').slice(0, 40)), 'the why is on the page'); assert(await page.isHidden('#confirm-box blockquote'), 'but behind "See why"');
   if (await page.locator('#confirm-box p:has-text("What to ask:")').count()) { const q = (await page.locator('#confirm-box p:has-text("What to ask:")').first().textContent()).replace('What to ask: ', ''); assert((await page.textContent('#tour-qs')).includes(q), 'the confirmation question is also in the tour questions'); }
   await overflow('unit-confirm'); await shot('08-unit-confirm-asterisk', true);
-  const whats = u => [...new Set((u.disclosures || []).map(x => String(x.what || '').trim()).filter(w => w && w.toLowerCase() !== String(u.confirm.what || '').toLowerCase()))];
+  const whats = whatsOf;
+  const whats0 = u => [...new Set((u.disclosures || []).map(x => String(x.what || '').trim()).filter(w => w && w.toLowerCase() !== String(u.confirm.what || '').toLowerCase()))];
   const dU = data.units.find(u => whats(u).length >= 2 && !u.confirm.asterisk) || data.units.find(u => whats(u).length);
   console.log('places with a disclosure:', data.units.filter(u => whats(u).length).length, 'of', data.units.length);
   if (dU) { await go('#unit-' + slug(dU.id)); assert((await headOf('r-confirm')).startsWith(await page.evaluate(id => window.__houseHunt.headline('unit', id, 'confirm'), dU.id)));
@@ -339,10 +390,11 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
     if (!dU.confirm.asterisk) assert.strictEqual(await page.locator('#confirm-box, .cstar').count(), 0, 'a disclosure is not an asterisk');
     await page.evaluate(() => document.getElementById('r-confirm').scrollIntoView()); await page.evaluate(() => window.scrollBy(0, -70)); await shot('12-unit-good-to-know'); await overflow('unit-disclosures'); }
   const noConf = data.units.find(u => !u.confirm.asterisk && !whats(u).length);
-  if (noConf) { await go('#unit-' + slug(noConf.id)); assert.strictEqual(await page.locator('#confirm-box, #good-to-know, .unit .confl:not(.rent), .cstar').count(), 0); assert.strictEqual(await page.locator('#r-confirm .st').count(), 0, 'no "Ask" chip when nothing is to confirm'); }
+  if (noConf) { await go('#unit-' + slug(noConf.id)); assert.strictEqual(await page.locator('#confirm-box, #good-to-know, .unit .confl:not(.rent), .cstar').count(), 0); assert.strictEqual(await page.locator('.starline').count(), noConf.rent.asterisk || noConf.rent.basis_kind === 'net_effective' ? 1 : 0, 'no asterisk line when nothing is to confirm'); assert.strictEqual(await page.locator('#r-confirm .st').count(), noConf.rent.asterisk || noConf.rent.basis_kind === 'net_effective' ? 1 : 0, 'no "Ask" chip when nothing is to confirm'); }
   // rent with an asterisk: the short line in the open, the terms in the Costs row
-  await go('#unit-' + slug(star.id)); assert((await page.textContent('.sign strong')).includes('*')); assert((await page.textContent('.unit.page .confl.rent')).startsWith('* Rent:'));
-  await openRow('r-cost'); assert((await page.textContent('#rent-terms')).includes(star.rent.offer_text.slice(0, 30))); await shot('04-unit-rent-asterisk', true);
+  await go('#unit-' + slug(star.id)); assert((await page.textContent('.sign strong')).includes('*')); assert.strictEqual(await page.locator('.unit.page .confl').count(), 0); assert((await page.textContent('.unit.page .starline')).includes('to confirm'), 'the rent offer is counted on the asterisk line');
+  await openRow('r-confirm'); assert((await page.textContent('#r-confirm .confl.rent')).startsWith('* Rent:'), 'and said in the row');
+  await openRow('r-cost'); { const co = await page.evaluate(x => window.__houseHunt.cleanText(x), star.rent.offer_text), rt = await page.textContent('#rent-terms'); if (co) assert(rt.includes(co.slice(0, 30)), 'the offer, in the listing\'s words'); else assert(!rt.includes('in the listing\'s words')); } await shot('04-unit-rent-asterisk', true);
   // parking rules that matter for a car on the street, in the Parking row
   const flagRe = [['overnight_parking', /\bbanned\b|not allowed|needs (a|the) permit|permit-only|may not park|overnight (parking )?permit|all-night parking restrictions/i], ['resident_permit', /out-of-state|out-of-town|registered in|registration[^.]{0,60}(show|address|same)|(licen[cs]e and|valid vehicle|motor vehicle|permanent vehicle) registration/i]];
   const flagged = h => (h.local.parking_rules || []).filter(r => flagRe.some(([k, re]) => r.rule === k && re.test(r.summary)));
@@ -398,10 +450,13 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   // ---------- limits ----------
   await page.evaluate(() => { location.hash = '#lives'; }); await page.waitForSelector('.life');
   await page.click('[data-act=limits-open]'); await page.waitForSelector('#limsheet.open');
+  // the limits are cost, drive, space and the "nothing left to confirm" switch: no safety slider, and no crime wording in the sheet
+  assert.strictEqual(await page.locator('#lim-safe, #out-safe').count(), 0, 'no safety slider'); assert.strictEqual(await page.locator('#limsheet input[type=range]').count(), 3);
+  { const lt = await page.evaluate(() => document.getElementById('limsheet').innerText), m = CRIME.exec(lt) || /safety|safe\b/i.exec(lt); assert(!m, 'the limits sheet names no crime rate: ' + (m && lt.slice(Math.max(0, m.index - 40), m.index + 40))); }
   const before = await page.textContent('#fitline');
-  await page.locator('#lim-cost').fill('2400'); await page.locator('#lim-safe').fill('3'); await page.locator('#lim-sqft').fill('700'); await page.locator('#lim-mins').fill('30');
+  await page.locator('#lim-cost').fill('2400'); await page.locator('#lim-sqft').fill('700'); await page.locator('#lim-mins').fill('30');
   const after = await page.textContent('#fitline'); assert(before !== after, 'limits changed counts');
-  const expect = data.units.filter(u => u.all_in <= 2400 && Math.round(u.moments.sun.drive_min) <= 30 && u.moments.night.violent_vs_jamaica != null && u.moments.night.violent_vs_jamaica < 0.5 && u.sqft != null && u.sqft >= 700).length;
+  const expect = data.units.filter(u => u.all_in <= 2400 && Math.round(u.moments.sun.drive_min) <= 30 && u.sqft != null && u.sqft >= 700).length;
   assert(after.startsWith(expect + ' of '), `limit count ${after} vs expected ${expect}`);
   console.log('limits:', before, '->', after, '| greyed experiences:', await page.locator('.life.none').count());
   await page.waitForTimeout(300); await shot('07-limits-sheet'); await overflow('limits');
@@ -463,7 +518,7 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
     u.host = { line: 'TEST host line for the place.', catch: 'TEST host catch.' }; u.headlines = { cost: { subhead: 'TEST cost subhead.' } };
     await route.fulfill({ contentType: 'application/json', body: JSON.stringify(d) }); });
   await page2.goto(BASE + '/index.html#hood-' + slug(vh.id)); await page2.waitForSelector('.ph1');
-  if (await page2.isVisible('#tour')) await page2.click('[data-act=tour-skip]');
+  
   // host voice: the one thing open, clamped to about four lines with "more"
   assert(await page2.isVisible('#host-intro')); const clampH = await page2.evaluate(() => document.querySelector('#host-intro .clamp').clientHeight);
   assert(clampH <= 2 * 1.4 * 15.5 + 2, 'the host intro is clamped to two lines: ' + clampH + 'px'); assert(await page2.isVisible('#host-intro [data-act=unclamp]'));
@@ -475,7 +530,7 @@ const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // colla
   // tolls: the E-ZPass figure, with its note when a mail rate is also present
   { const chips = await page2.textContent('.sec.head .kstrip'); assert(chips.includes('$13.50') && chips.includes('NY E-ZPass') && !chips.includes('21.25'), 'E-ZPass figure with its note: ' + chips); }
   // resident voices in their row
-  assert.strictEqual(await headOf('r-voices', page2), '3 positive, 2 negative; most about noise'); await openRow('r-voices', page2);
+  assert.strictEqual(await headOf('r-voices', page2), '3 positive, 2 negative'); await openRow('r-voices', page2);
   assert.strictEqual(await page2.locator('#no-voices').count(), 0); assert.strictEqual(await page2.locator('#sec-voices .vtheme').count(), 3, 'two themes and the survey heading');
   assert.strictEqual(await page2.locator('#sec-voices > .quote.pos').count(), 1, 'one positive shown against the one negative'); assert.strictEqual(await page2.locator('#sec-voices > .quote.neg').count(), 2);
   assert.strictEqual(await page2.locator('#sec-voices details .quote').count(), 2, 'the other positives are folded'); assert.strictEqual(await page2.locator('#sec-voices .quote a.srcl').count(), 4);

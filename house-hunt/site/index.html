@@ -714,7 +714,6 @@ body{padding-bottom:calc(var(--tray-h,56px) + 20px)}
 .toast{bottom:calc(var(--tray-h,56px) + 6px)}
 .rowd{scroll-margin-top:64px}
 .rh{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
-.rs{display:block;-webkit-line-clamp:unset;overflow:visible}
 .starline{display:flex;align-items:center;gap:6px;width:100%;min-height:44px;text-align:left;background:#FFF3C9;border:2px solid var(--ink);border-radius:14px;padding:4px 12px;font-size:14.5px;font-weight:800;line-height:1.25;color:var(--ink);cursor:pointer}
 .starline b{font-family:var(--display);font-size:20px;line-height:1;color:var(--berry-deep)}
 .starline span{flex:1 1 auto;min-width:0}
@@ -723,6 +722,8 @@ body{padding-bottom:calc(var(--tray-h,56px) + 20px)}
 .howl b{font-family:var(--display);font-weight:800}
 .life.slim{gap:6px;padding:11px 14px 12px}
 .life.slim .l2{display:block;-webkit-line-clamp:unset;overflow:visible}
+.chip small{white-space:normal;overflow:visible}
+.hhm>.hhm-hint{display:none}
 .figs.xt{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) auto;gap:8px;margin-top:2px}
 .figs.xt b{font-size:19px}
 .figs.xt span{font-size:12.5px;line-height:1.2}
@@ -1825,7 +1826,7 @@ function voicesSection(H){var loc=H.local||{},themes=[],by={};
     var show=[],rest=[],i,k;
     if(pos.length&&neg.length){k=Math.min(pos.length,neg.length,2);for(i=0;i<k;i++){show.push(pos[i]);show.push(neg[i])}rest=pos.slice(k).concat(neg.slice(k),oth.slice(1));show=show.concat(oth.slice(0,1))}
     else{var all=pos.concat(neg,oth);show=all.slice(0,3);rest=all.slice(3)}
-    h+='<h3 class="vtheme">'+esc(humanize(t))+'</h3>'+show.map(voiceQuote).join("")+
+    h+='<h3 class="vtheme">'+esc(themeWord(t))+'</h3>'+show.map(voiceQuote).join("")+
       (rest.length?'<details class="fold" style="margin-top:10px"><summary>'+rest.length+' more on this</summary>'+rest.map(voiceQuote).join("")+'</details>':'')});
   var svSeen={};sv=sv.filter(function(x){var k=[x.measure,x.value,x.source,x.as_of].join("|");if(svSeen[k])return false;svSeen[k]=1;return true});
   var svLi=function(x){return '<li>'+esc(humanize(x.measure)+": "+x.value+".")+' <span class="facts">'+esc([x.source,x.as_of?"as of "+(dayStr(x.as_of,true)||x.as_of):""].filter(Boolean).join(", "))+'</span>'+(okUrl(x.url)?ext(x.url,"source"):' <span class="facts">(no link in the data)</span>')+'</li>'};
@@ -1961,7 +1962,14 @@ function fitClamps(){[].forEach.call(view.querySelectorAll(".clampw"),function(w
 /* ================= Headlines: one small pure function per section. Unknown is never shown as a fact. ================= */
 var Q_WORD={drive_min:["farther","closer"],all_in:["pricier","cheaper"],sqft:["smaller","bigger"],transit_min:["slower by train","quicker by train"],food_and_drink_nearby:["less to eat nearby","more to eat nearby"],walk_to_green:["less green","greener"],parking:["harder parking","easier parking"]};
 var RULE_SHORT={overnight_parking:"overnight street parking restricted",resident_permit:"permit tied to where the car is registered"};
-var HL_MAX=64; /* a headline is read whole when the row is closed: two lines of a phone at most */
+var THEME_WORD={dogs_green:"Dogs and green space",social_life:"Social life",car_crime:"Car crime",value:"Value for money",travel:"Getting around"};
+function themeWord(t){return THEME_WORD[t]||humanize(t)}
+/* unit.ratings.platforms, most reviews first; rows without a platform name or a rating are left out */
+function ratingRows(r){return arr(r&&r.platforms).filter(function(x){return x&&x.platform&&x.rating!=null&&isFinite(+x.rating)}).map(function(x,i){return [x,i]}).sort(function(a,b){return ((b[0].count==null?-1:+b[0].count)-(a[0].count==null?-1:+a[0].count))||(a[1]-b[1])}).map(function(x){return x[0]})}
+function reviewsBox(U){var r=U.ratings||{},ps=ratingRows(r);
+  return '<div id="bld-reviews"><h4 class="costh">Reviews of the building</h4>'+(ps.length&&r.found_any!==false?'<ul class="rules">'+ps.map(function(x){var u=okUrl(x.url);
+      return '<li>'+(u?'<a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(x.platform)+' ↗</a>':'<b>'+esc(x.platform)+'</b>')+': '+esc(Number(x.rating).toFixed(1))+' out of 5'+(x.count!=null?' · '+esc(pl(Math.round(x.count),"review")):'')+(x.as_of?' <small class="facts">seen '+esc(dayStr(x.as_of,true)||String(x.as_of))+'</small>':'')+'</li>'}).join("")+'</ul><p class="helper" style="margin-top:6px">As each site shows it.</p>':'<p class="helper">'+esc(HL.reviews(r))+'.</p>')+'</div>'}
+var HL_MAX=64,HL_AIM=44; /* a headline is read whole when the row is closed: two lines of a phone at most */
 var HL={
   cost:function(U){return U.all_in==null?"not published, ask":money(U.all_in)+(rentStar(U)?"*":"")+" all-in"},
   trip:function(s){if(!s||s.drive_min==null)return "drive time not known";var t=s.toll_round_trip;
@@ -1984,32 +1992,41 @@ var HL={
   questions:function(n){return n?pl(n,"question"):"nothing flagged"},
   photos:function(U){return okUrl(U.links&&U.links.listing)?"on the listing":"no listing link"},
   voices:function(H){var vs=arr(H.local&&H.local.voices).filter(function(v){return v&&(typeof v==="string"||v.excerpt)}),p=0,n=0,th={},top=null;if(!vs.length)return "none found yet";
-    vs.forEach(function(v){var s=String(v.sentiment||"");if(/^pos/i.test(s))p++;else if(/^neg/i.test(s))n++;var t=v.theme;if(t&&!CRIME_RE.test(t)&&!/safety/i.test(t))th[t]=(th[t]||0)+1});
+    vs.forEach(function(v){var s=String(v.sentiment||"");if(/^pos/i.test(s))p++;else if(/^neg/i.test(s))n++;var t=v.theme;if(t&&!CRIME_RE.test(String(t).replace(/_/g," "))&&!/safety/i.test(t))th[t]=(th[t]||0)+1});
     Object.keys(th).forEach(function(t){if(!top||th[t]>th[top])top=t});
-    return [p?p+" positive":"",n?n+" negative":"",!p&&!n?pl(vs.length,"comment"):""].filter(Boolean).join(", ")+(top?"; most about "+humanize(top).toLowerCase():"")},
+    return [p?p+" positive":"",n?n+" negative":"",!p&&!n?pl(vs.length,"comment"):""].filter(Boolean).join(", ")},
+  /* what most of the comments are about: said inside the row, not in its headline */
+  voicesTopic:function(H){var th={},top=null;arr(H.local&&H.local.voices).forEach(function(v){var t=v&&v.theme;if(t&&!CRIME_RE.test(String(t).replace(/_/g," "))&&!/safety/i.test(t))th[t]=(th[t]||0)+1});
+    Object.keys(th).forEach(function(t){if(!top||th[t]>th[top])top=t});return top?themeWord(top):""},
   rules:function(H){var a=rulesOf(H,"parking_rules"),o=[];if(!a.length)return "not found, ask";
     RULE_FLAG.forEach(function(F){if(a.some(function(r){return r.rule===F.rule&&F.re.test(r.summary||"")}))o.push(RULE_SHORT[F.rule]||F.label.toLowerCase())});
-    return o.length?o[0]+(o.length>1?", and "+(o.length-1)+" more":""):pl(a.length,"rule")+" on record"},
+    return o.length?o[0]:pl(a.length,"rule")+" on record"},
   /* a quote is shown whole or not at all: the first description with a sentence short enough, else a count */
   described:function(H){var a=arr(H.described).map(function(d){return d&&(typeof d==="string"?d:(d.quote||d.text||d.excerpt))}).filter(Boolean),i,s;
-    for(i=0;i<a.length;i++){s=firstSentence(scrub(a[i])).replace(/\s+/g," ");if(s.length<=HL_MAX-2&&s.length===scrub(a[i]).replace(/\s+/g," ").trim().length)return "“"+s+"”"}
+    for(i=0;i<a.length;i++){s=firstSentence(scrub(a[i])).replace(/\s+/g," ");if(s.length<=HL_MAX-2&&s.length>=24&&s.length===scrub(a[i]).replace(/\s+/g," ").trim().length)return "“"+s+"”"}
     for(i=0;i<a.length;i++){s=firstSentence(scrub(a[i])).replace(/\s+/g," ");if(s.length<=HL_MAX-2&&s.length>=24&&!/(?:\b[A-Z]\.|\b(?:St|Mt|Dr|Mr|Mrs|Ms|Ave|Rd|Blvd|vs|etc|No|Inc|Co)\.)$/.test(s))return "“"+s+"”"}
     var src=[];arr(H.described).forEach(function(d){var n=d&&typeof d==="object"?String(d.source||(okUrl(d.url)?hostOf(d.url):"")):"";if(n&&src.indexOf(n)<0)src.push(n)});
     s=a.length?pl(a.length,"description")+(src.length&&src.length<=2?", from "+src.join(" and "):src.length?", from "+src.length+" sources":""):"";
     return s.length<=HL_MAX?s:pl(a.length,"description")},
-  here:function(H){var t=H.traits||{},o=[];if(t.restaurants_800m!=null)o.push(pl(r0(t.restaurants_800m),"restaurant")+" on foot");if(t.park_walk_min!=null)o.push("green space "+Math.max(1,r0(t.park_walk_min))+" min");
+  here:function(H){var t=H.traits||{},o=[];if(t.restaurants_800m!=null)o.push(pl(r0(t.restaurants_800m),"restaurant")+" on foot");if(t.park_walk_min!=null)o.push("green "+Math.max(1,r0(t.park_walk_min))+" min");
     if(!o.length&&t.supermarket_m_c!=null)o.push("supermarket "+distWords(t.supermarket_m_c));return o.length?o.join(", "):"not known yet"},
   yearCost:function(Y){var f=yearNums(Y);return f.cost==null?"not known yet":"about "+m0(f.cost)+" a month all-in"},
   yearTrip:function(Y){var f=yearNums(Y),M=Y.medians||{};return HL.trip({drive_min:f.drive,toll_round_trip:M.toll_round_trip})},
   places:function(H){var cf=costFig(H.units);return cf?(cf.n>1?"about "+m0(cf.m):m0(cf.m))+" a month":"nothing to tour"},
   count:function(n,w){return pl(n,w)},
   out:function(t){var o=[];t=t||{};if(t.restaurants_800m!=null)o.push(pl(r0(t.restaurants_800m),"restaurant")+" on foot");if(t.park_walk_min!=null)o.push("green "+Math.max(1,r0(t.park_walk_min))+" min");return o.length?o.join(", "):"not known yet"},
-  hoodRules:function(H){var a=rulesOf(H,"parking_rules"),d=rulesOf(H,"dog_rules");return a.length?HL.rules(H):d.length?pl(d.length,"dog rule")+"; parking rules not found, ask":"not found, ask"},
+  hoodRules:function(H){var a=rulesOf(H,"parking_rules"),d=rulesOf(H,"dog_rules");return a.length?HL.rules(H):d.length?"parking rules not found, ask":"not found, ask"},
   lifts:function(nl,np){return HL.love(nl,np)},
+  /* what review sites show for the building: the site with the most reviews, then how many other sites. Never our judgement. */
+  reviews:function(r){r=r||{};var ps=ratingRows(r),t=ps[0];
+    if(!ps.length||r.found_any===false)return r.searched?"No reviews found online":"Not looked up yet";
+    return Number(t.rating).toFixed(1)+" on "+t.platform+(t.count!=null?" · "+pl(Math.round(t.count),"review"):"")+(ps.length>1?", and "+(ps.length-1)+" more "+(ps.length===2?"site":"sites"):"")},
   /* prose as a headline: the first sentence when it fits; otherwise its opening clause, whole, with no ellipsis */
-  first:function(t,n){n=n||HL_MAX;var s=firstSentence(calm(t)).replace(/\s+/g," ").trim(),re=/[,;:]\s+|\s+(?=(?:and|but|so|with|where|while|which)\s)/g,m,best=0;
-    if(s.length<=n)return s;
-    while((m=re.exec(s))){if(m.index<=n-1&&m.index>=18)best=m.index}
+  first:function(t,n){n=n||HL_MAX;var s=firstSentence(calm(t)).replace(/\s+/g," ").trim(),re=/[,;:]\s+|\s+(?=(?:and|but|so|with|where|while|which)\s)/g,m,best=0,soft=Math.min(n,HL_AIM);
+    if(s.length<=soft)return s;
+    while((m=re.exec(s))){if(m.index<=soft-1&&m.index>=18)best=m.index}
+    if(!best&&s.length<=n)return s;
+    if(!best){re.lastIndex=0;while((m=re.exec(s))){if(m.index<=n-1&&m.index>=18)best=m.index}}
     return best?s.slice(0,best).replace(/[,;:\s]+$/,"")+".":cut(s,n)}
 };
 
@@ -2027,7 +2044,7 @@ function vLives(){
 /* ---- cards in lists: name, rank, one line, three facts, the asterisk. The rest is on the page behind them. ---- */
 function hoodLine(H){return hlSub(H,"top")||textOf(hostOfRec(H,"intro"))||calm(pr(H,"good_for_her"))||calm(pr(H,"scene"))}
 function hoodStandout(H){var t=H.traits||{};
-  if(t.restaurants_800m!=null&&t.restaurants_800m>=15)return chip(r0(t.restaurants_800m)+" restaurants","on foot");
+  if(t.restaurants_800m!=null&&t.restaurants_800m>=15)return chip(String(r0(t.restaurants_800m)),"restaurants on foot");
   if(t.park_walk_min!=null&&t.park_walk_min<=5)return chip(Math.max(1,r0(t.park_walk_min))+" min","to green space");
   if(H.transit_min!=null&&H.transit_min<=45)return chip(r0(H.transit_min)+" min","by train and bus");
   return ""}
@@ -2059,7 +2076,6 @@ function vYear(Y){
     strip([f.cost!=null?{b:m0(f.cost),s:"typical, all-in",r:rng(f.cr,m0)}:{b:"Ask",s:"cost not known"},f.drive!=null?{b:r0(f.drive)+" min",s:"typical drive to Mom and Dad",r:rng(f.dr,r0," min")}:{b:"Ask",s:"drive not known"},tollCell(M,true),{b:String(us.length),s:us.length===1?"place":"places",to:"sec-hoods"}],true)+'</section>';
   var hIntro=hostClamp(hostOfRec(Y,"intro"),null,"host-intro"),scenes=slotText(calmV(pr(Y,"scene")||Y.scenes)),prom=calm(pr(Y,"promise")),kat=calm(pr(Y,"catch")),yf=yearFacts(Y),walk=paras(hostOfRec(Y,"walkthrough"));
   h+=hIntro;
-  if(prom||kat)h+='<section class="sec pc" id="sec-promise">'+(prom?'<p class="l2"><b>The promise:</b> '+esc(prom)+'</p>':'')+(kat?'<p class="l2"><b>The catch:</b> '+esc(kat)+'</p>':'')+'</section>';
   var near=null,far=null;hs.forEach(function(H){if(H.drive_min==null)return;if(!near||H.drive_min<near.drive_min)near=H;if(!far||H.drive_min>far.drive_min)far=H});
   var costHow=[];
   if(us.length)costHow.push("The big figure is the median of the "+pl(us.length,"place")+" here: half cost more, half less. The small one is the lowest and the highest.");
@@ -2133,7 +2149,7 @@ function vHood(H){
   h+='<section class="sec rows" id="sec-rows">'+rowsTop();
   if(good||watch||hScene)h+=row("r-good","Good for you, watch for",HL.first(pr(H,"good_for_her")||loc.good_for_her||pr(H,"watch_for")||pr(H,"scene")),(hScene?'<div style="margin-bottom:10px">'+hScene+'</div>':'')+'<div class="two">'+(good?'<div class="panel love"><h4>Good for you</h4>'+good+'</div>':'')+(watch?'<div class="panel pause"><h4>Watch for</h4>'+watch+'</div>':'')+'</div>',{sub:hlSub(H,"good","cost")});
   h+=row("r-here","What's here",HL.here(H),amen([[IC.after,"Food and coffee",food],[IC.pup,"For the dog",dogBits.length?dogBits.join("; ")+".":NK+"."],[IC.bag,"Errands",errBits.length?errBits.join("; ")+".":NK+"."],[IC.sun,"To Mom and Dad",HL.trip(H)+(H.transit_min!=null?"; "+r0(H.transit_min)+" min by train and bus":"")+"."],[IC.ppl,"Who lives here (census)",whoBits.length?whoBits.join("; ")+".":NK+"."]])+'<div id="sec-how">'+howHtml(hw.join(""))+'</div>',{sub:hlSub(H,"going_out","green","to_parents","dog")});
-  h+=row("r-voices","What residents say",HL.voices(H),voicesSection(H),{sub:hlSub(H,"residents_say","residents")});
+  h+=row("r-voices","What residents say",HL.voices(H),(HL.voicesTopic(H)?'<p class="helper" id="voices-topic" style="margin-bottom:6px">Most often about: '+esc(HL.voicesTopic(H).toLowerCase())+'.</p>':'')+voicesSection(H),{sub:hlSub(H,"residents_say","residents")});
   if(desc.length)h+=row("sec-described","How others describe it",HL.described(H),desc.map(descQ).join(""),{sub:hlSub(H,"described")});
   h+=row("r-rules","Local rules",HL.hoodRules(H),amen([[IC.car,"For the car",car,1],[IC.pup,"For the dog",dogT,1]]),{sub:hlSub(H,"local_rules","parking","rules"),chip:flagN?flagN+" to know":(!pRules.length?"Ask":""),chipKind:"ask"});
   if(SPEC_OPEN.length&&H.vs_queens&&SPEC_OPEN.some(function(q){return H.vs_queens[q.measure]!=null}))h+=row("r-queens","Compared to staying in Queens",HL.queens(H.vs_queens),staticScale(H.vs_queens)+how(SOURCES.queens),{sub:hlSub(H,"compared_to_queens","queens")});
@@ -2164,7 +2180,7 @@ function vUnit(U){
   h+=row("r-parking","The car",HL.parking(U),'<p>'+esc(SAY.parking(U))+'</p>'+(U.parking&&U.parking.type&&String(U.parking.type).length>12&&String(U.parking.type).length<180?'<p class="helper" style="margin-top:6px">The listing says: “'+esc(U.parking.type)+'”'+ext(L,"listing")+'</p>':'')+
     (pf.length?'<div class="confbox park" id="park-rules" style="margin-top:10px"><h4>Before the car sleeps on the street</h4><ul class="rules">'+pf.map(function(x){return '<li><b>'+esc(x.label)+'.</b> '+esc(x.r.summary)+ruleLink(x.r)+'</li>'}).join("")+'</ul></div>':''),{sub:hlSub(U,"parking"),chip:pf.length?"Street rules":pk==="unknown"||(U.parking&&U.parking.fee==null)?"Ask":"",chipKind:"ask"});
   h+=row("r-dog","For the dog",HL.dog(U),'<ul>'+factLis(buildingFacts(U).filter(function(x){return /^Dogs:/.test(x.t)}).concat(factsOf(U,"wake")))+'</ul>'+(smallDog(U)?'<p class="helper" id="dog-note" style="margin-top:8px">'+SMALL_DOG+'.'+ext(L,"listing")+'</p>':''),{sub:hlSub(U,"dog"),chip:d.allowed==="yes"&&d.weight_limit_lb==null?"Ask the limit":"",chipKind:"ask"});
-  h+=row("r-building","The building",HL.building(U),'<ul>'+factLis(buildingFacts(U))+'</ul>',{sub:hlSub(U,"building")});
+  h+=row("r-building","The building and its reviews",HL.reviews(U.ratings),reviewsBox(U)+'<h4 class="costh" style="margin-top:10px">About the building</h4><ul id="bld-facts">'+factLis(buildingFacts(U))+'</ul>',{sub:hlSub(U,"building")||capFirst(HL.building(U))});
   if((SPEC_OPEN.length&&U.vs_queens&&SPEC_OPEN.some(function(q){return U.vs_queens[q.measure]!=null}))||love.length||pos.length||pause.length||neg.length)h+=row("r-queens","Compared to staying in Queens",HL.queens(U.vs_queens),SCALE_KEY+'<div class="ylist">'+SPEC_OPEN.map(function(q){var p=U.vs_queens&&U.vs_queens[q.measure],df=U.vs_queens_diff&&U.vs_queens_diff[q.measure];p=p==null?null:Math.round(p);
       return pointBtn("unit",U.id,q.measure,p,q.measure==="parking"?parkWordShort(U):df==null?(p===3?"same":"difference not in the data"):fmtDiff(q.measure,df),true)}).join("")+'</div><div class="two" id="r-love" style="margin-top:10px">'+(love.length||pos.length?'<div class="panel love"><h4>You\'ll love</h4>'+(love.length?'<ul>'+factLis(love)+'</ul>':'')+pos.map(quote).join("")+'</div>':'')+(pause.length||neg.length?'<div class="panel pause"><h4>Gives us pause</h4>'+(pause.length?'<ul>'+factLis(pause)+'</ul>':'')+neg.map(quote).join("")+'</div>':'')+'</div>',{sub:hlSub(U,"compared_to_queens","queens")});
   h+='</section><p class="plinks">'+(L?'<a class="link" href="'+esc(L)+'" target="_blank" rel="noopener noreferrer">Photos on the listing ↗</a>':'')+(contactBox(U)?'<button type="button" class="link" data-act="contact" data-id="'+esc(U.id)+'">Leasing office</button>':'')+'</p>';
@@ -2397,7 +2413,7 @@ document.addEventListener("toggle",function(e){var d=e.target,id=d&&d.getAttribu
 window.addEventListener("hashchange",function(){var r=location.hash.replace(/^#/,"")||"lives";if(routeOf(parse(r))!==current){closeSheet();go(r)}});
 
 window.__houseHunt={HL:HL,HL_MAX:HL_MAX,cleanText:cleanText,looksDump:looksDump,hoodWhere:hoodWhere,hoodTitle:hoodTitle,headline:function(kind,id,key){var o=kind==="unit"?U_BY[id]:kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;
-    return key==="trip"?HL.trip(kind==="unit"?o.moments.sun:o):key==="queens"?HL.queens(o.vs_queens):HL[key](o)},map:function(){return HHMAP},marks:function(){return YEARS.map(function(Y){return Y.mark})},mapHoods:function(id){return mapData().neighborhoods.filter(function(h){return !id||h.year===id}).length},tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
+    return key==="trip"?HL.trip(kind==="unit"?o.moments.sun:o):key==="queens"?HL.queens(o.vs_queens):key==="reviews"?HL.reviews(o.ratings):HL[key](o)},map:function(){return HHMAP},marks:function(){return YEARS.map(function(Y){return Y.mark})},mapHoods:function(id){return mapData().neighborhoods.filter(function(h){return !id||h.year===id}).length},tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
 syncSliders();renderCounts();renderTray();renderFoot();
 go((function(){try{return location.hash.replace(/^#/,"")}catch(e){return ""}})()||"lives");
 }
