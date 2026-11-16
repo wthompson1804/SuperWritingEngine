@@ -3,20 +3,33 @@
 
 The unit list changes with every repair run, so nothing here is hand-written per unit. For each unit in
 site/data.json this script reads the unit's own fields, works out which facts are most distinctive (against the other
-units shown in the same neighbourhood first, then on their own), and fills one of the sentence patterns below.
+units shown in the same neighbourhood first, then on their own), and fills one of the hand-written sentences below.
 
   host_line   1 or 2 sentences, at most 45 words: the most distinctive fact, then the price and one or two more facts
   host_catch  1 sentence: the open question (the asterisk) if the unit has one, else what the listing does not
               publish, else the weakest fact
   sub_cost, sub_parking, sub_dog, sub_building   one optional short line (at most 14 words, no numbers) for under each
               section headline of the place; empty when the fields give nothing distinctive to say
-  facts_used_json   the pattern chosen and every value that was printed, so each word can be traced to a field
+  facts_used_json   the wording chosen and every value that was printed, so each word can be traced to a field
+
+How the wording is spread (2026-11-16, second pass). The page shows a neighbourhood's top three places together, and
+the same sentence on card after card kills the walk-through. So:
+  * every condition (a fact that can lead a line, a kind of catch, a subhead case) has at least 8 different sentences,
+    written from different angles, never one template with synonyms swapped;
+  * a lead leads with what sets THIS place apart from the others shown in its neighbourhood where it can (cheapest,
+    most room, most room per dollar, highest floor, soonest move-in, newest listing, the only pool / garage / doorman /
+    in-unit laundry / dog spot, nearest dog run or park, fewest open questions, the host's own first choice);
+  * no line wording is used for more than LINE_SHARE of the units, no catch wording for more than CATCH_SHARE, no
+    subhead wording for more than LINE_SHARE (the run prints the distribution; the tests hold the thresholds);
+  * the three top-ranked places of a neighbourhood have three different lead angles and three different catch
+    wordings, and two neighbouring units never open with the same three words.
 
 Rules the code keeps (scripts/test_realtor_lines.py checks them):
-  * deterministic: the choice among equally good patterns is seeded by listing_id, so a rerun gives the same text;
-  * two neighbouring units in a neighbourhood (in rank order) never open with the same pattern;
+  * deterministic: choices are seeded by listing_id and made in a fixed order (neighbourhood, then rank), so a rerun
+    on the same data gives the same text;
   * an unknown is never stated as a fact: no parking type means parking is not mentioned in the line and the catch
     says it is not published; a garage with no price is "fee not published", never "free";
+  * a superlative ("the most room here") is claimed only when every other unit shown there publishes the figure;
   * every number printed is the unit's own field (or the count of units it is compared with), never typed;
   * no crime or safety wording: everything shown has passed the safety rule, so the lines are about living there.
 
@@ -29,7 +42,7 @@ import csv
 import hashlib
 import json
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
 
@@ -38,6 +51,11 @@ DATA = ROOT / "site" / "data.json"
 OUT = ROOT / "data" / "reference" / "realtor_lines.csv"
 MAX_WORDS = 45
 WALK_RADIUS = "10-minute walk"            # the page's wording for the 800 m radius
+LINE_SHARE = 0.04                         # no lead wording, second-sentence frame or subhead on more than 4% of units
+CATCH_SHARE = 0.05                        # no catch wording on more than 5% of units
+COND_SHARE = 0.08                         # a lead condition used this often is set back, so other angles get a turn
+MIN_WORDINGS = 8                          # sentences per condition
+UNPRICED = re.compile(r"not published|does not publish|unpublished", re.I)   # every unpriced-garage lead says so
 
 
 # ------------------------------------------------------------------ small helpers
@@ -97,6 +115,21 @@ def when(avail):
     except ValueError:
         return None, None
     return f"{d.strftime('%b')} {d.day}", d
+
+
+def open3(text: str) -> str:
+    """The first three words, lower case: two neighbouring units never share them."""
+    return " ".join(re.findall(r"[A-Za-z0-9$'-]+", text.lower())[:3])
+
+
+def rotate(options, listing_id, salt):
+    """The options in an order seeded by the listing id (stable across reruns)."""
+    k = seed(listing_id, salt) % len(options)
+    return options[k:] + options[:k]
+
+
+def share_cap(share, n):
+    return max(3, int(share * n))
 
 
 # ------------------------------------------------------------------ what a unit's fields say
