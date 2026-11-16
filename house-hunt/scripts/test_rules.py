@@ -272,6 +272,110 @@ def pure_3():
         ok("allowed_pets=dogs/cats" in L.at["a:2", "dog_policy_text"], "pending: the dog policy text is kept")
         eq((L.at["a:3", "elevator"], L.at["a:4", "elevator"], L.at["a:5", "elevator"]), ("unknown", "unknown", "unknown"), "pending: duplicates, still-open rows and other listings are untouched")
         ok(L.at["a:1", "resolved_by"].startswith("resolved_pending_batch_99") and L.at["a:5", "resolved_by"] == "", "pending: resolved_by says which batch settled it")
+    pure_4()
+
+
+def pure_4():
+    """Independent check 3 (docs/INDEPENDENT_CHECK_3.md): the rules, on the report's own rows."""
+    import tempfile
+    import pandas as pd
+    import rent_terms as RT
+    import build_master as BM
+    import all_in as AI
+    import rank
+    import verdicts as VD
+    # ---- D5: the checker's own "the page does not say" is never a net-effective statement
+    for t in ["Gross or net-effective: not stated on the page", "Gross or net-effective: not stated", "Listed price is base rent (base_price field); not stated as net-effective.",
+              "Trulia capture 21:47 UTC; not stated whether the listed price is gross or net-effective.", "Applies to base rent for the first 4 months; gross or net-effective listing price: not stated",
+              "gross or net not stated"]:
+        ok(RT.NET_NEG.search(t), f"IC3 D5: a negation must match NET_NEG: {t!r}")
+    for t in ["*Rents Reflect Net-Effective Pricing", "Net effective Prices advertised reflect 3 months free on 18 month leases!", "* PRICE INCLUDES CONCESSIONS.",
+              "Rents shown reflect net-effective pricing for select apartments inclusive of concessions.", "net-effective on own site; gross rent not published"]:
+        ok(RT.NET_STMT.search(t) and not RT.NET_NEG.search(t), f"IC3 D5: a real net-effective statement must stand: {t!r}")
+    p = RT.parse_piece("1 Month Free On 14 Month Lease Term. Gross or net-effective: not stated on the page", "1")
+    ok(p["net_neg"] and not p["net"], "IC3 D5: BE (448 Scotland Rd): the offer plus the checker's negation is not net-effective")
+    ok(RT.NOT_PAGE_WORDS.search("term 12: price 2805, totalPrice 2901, netEffectivePrice 2571") and RT.NOT_PAGE_WORDS.search("[live check] Apartment List unit data, refreshed 2026-11-15")
+       and not RT.NOT_PAGE_WORDS.search("Enjoy one month free on all new leases. Restrictions apply, see agent for details."), "pending fix: raw page data and checker notes are not the offer's own words")
+    # ---- D11: a second site is a different site
+    tr = "https://www.trulia.com/building/sono-pearl-101-washington-st-norwalk-ct-06854-2757887032"
+    ok(not BM.second_site(tr, tr), "IC3 D11: also_seen_at pointing at the same page is not a second site")
+    ok(not BM.second_site(tr, "https://www.trulia.com/home/x-1 https://trulia.com/building/y"), "IC3 D11: two pages of the same site are not a second site")
+    ok(BM.second_site(tr, "https://www.zumper.com/apartment-buildings/p1/sono-pearl"), "IC3 D11: another site is a second site")
+    ok(BM.second_site(tr, "", "https://www.apartmentlist.com/ct/norwalk/sono-pearl"), "IC3 D11: a merged duplicate from another site is a second site")
+    eq(P.staleness("2026-07-13", "2026-11-15", "", second_source=BM.second_site(tr, tr))[0], "open", "IC3 D11: Sono Pearl 401, page unchanged 125 days, same-page 'second site' -> open")
+    # ---- D6: "not listed on AvalonBay's own pages"
+    eq(P.elevator_row_kind("not listed on AvalonBay's own pages", "[Community features on avaloncommunities.com do not include an elevator]", False, "unconfirmed"), "contra", "IC3 D6: Avalon Somerville's row speaks against the elevator")
+    eq(P.elevator_row_kind("yes (Apartment List amenity tag only)", "Elevator", True, "unconfirmed"), "stated", "IC3 D6: a plain amenity tag is still 'stated'")
+    # ---- D14: a fee named beside a total it is part of is not added to it
+    eq(P.monthly_fees_from_text("$90/mo (total_price minus base_price); $50 amenity fee named")[0], 90.0, "IC3 D14: 1 Kennedy Flats: $90 is the total, the $50 is inside it")
+    eq(P.monthly_fees_from_text("$100/mo (trash $25 + amenity $75); electricity separate")[0], 100.0, "IC3 D14: the check-2 bracket case still reads $100")
+    # ---- D10: off-site parking is not covered parking at the building
+    eq(P.parking_kind("Offsite parking available - 1st year FREE! 2 blocks away covered and permitted not assigned."), "offsite", "IC3 D10: 30 Broad Street's parking is off-site")
+    eq(P.parking_kind("off-site covered garage two blocks away, not assigned; first year free"), "offsite", "IC3 D10: 'off-site covered garage' is off-site")
+    eq(P.parking_kind("Covered parking"), "covered", "IC3 D10: covered parking at the building is still covered")
+    eq(rank.parking_rank("offsite: Offsite parking available - 1st year FREE! 2 blocks away covered"), 2, "IC3 D10: off-site parking ranks as a lot, never as covered or a garage")
+    eq(rank.parking_rank("covered"), 3, "IC3 D10: covered parking keeps its rank")
+    # ---- D1: a checker's note that the price itself needs verifying
+    ok(P.price_doubt("1BR 900 sqft at $1,663 is far below the area's other listings in this batch: verify the price by phone before touring"), "IC3 D1: 98-76 Queens Blvd 2M's note is a price doubt")
+    ok(not P.price_doubt("price history: Nov 12, 2026 Listed For Rent $2,575"), "IC3 D1: a price history is not a price doubt")
+    # ---- D2: sibling consistency on unit numbers read as first-floor
+    rem = ["2153", "2158", "2165", "2169", "2178"]
+    ok(P.reads_as_ground_like_siblings("2182", rem), "IC3 D2: Halstead Parsippany 2182 has the shape of its removed siblings")
+    ok(not any(P.reads_as_ground_like_siblings(u_, rem) for u_ in ["2284", "2257", "2261", "2263", "1205", "1206"]), "IC3 D2: second-floor siblings are not caught")
+    ok(not P.reads_as_ground_like_siblings("4114", ["1119", "1127", "1142"]) and P.reads_as_ground_like_siblings("1150", ["1119", "1127", "1142"]),
+       "IC3 D2: where the removed labels share '1' in two places, a sibling must carry both (Steel Works 4114 is not caught)")
+    ok(not P.reads_as_ground_like_siblings("305", ["2153"]), "IC3 D2: one removed label is no pattern")
+    # ---- D19: the same apartment on two sites, one row without a unit label
+    ok(BM.same_apartment_other_site("1", "806", "2675", "trulia", "1", "806.0", "2700", "zumper"), "IC3 D19: 12 Brooklyn Ave 501 ($2,675 Trulia) = the Zumper row with no unit ($2,700)")
+    ok(not BM.same_apartment_other_site("1", "806", "2675", "trulia", "1", "806", "2700", "trulia"), "IC3 D19: two rows of one site are not merged on a near price")
+    ok(not BM.same_apartment_other_site("1", "", "2675", "trulia", "1", "", "2700", "zumper"), "IC3 D19: no published size, no merge")
+    ok(not BM.same_apartment_other_site("1", "806", "2675", "trulia", "1", "806", "2900", "zumper"), "IC3 D19: rents more than 2 percent apart are two apartments")
+    # ---- step 3: the garden-style rule and the doubt table
+    ok(P.multi_building_labels(["1109", "2303", "2307", "2309", "5201", "7106"]), "step 3: Woodmont West's labels read as a multi-building low complex")
+    ok(P.multi_building_labels(["1123", "1133", "1212", "1221", "4211", "4234", "4311", "6103", "9114"]), "step 3: The Royce at Trumbull")
+    ok(P.multi_building_labels(["5204", "6108", "6207"]), "step 3: Brookfield Village")
+    for labs, name in [(["0705", "0707", "0903", "1003", "1104"], "360 State Street (a tower)"), (["1116", "1118", "1174", "2141", "2205", "3172", "4149", "4186"], "The Grove Somerset (floor + three-digit unit)"),
+                       (["1147", "2113", "2117", "4108", "5136", "5158"], "Cobalt Lofts"), (["001-215", "001-304", "003-463"], "Avalon Teaneck (a fourth floor)"),
+                       (["305", "4F", "12B"], "plain labels"), (["34-204", "34-615", "36-206"], "Valley and Bloom (a sixth floor)"), (["1-101", "1-208"], "one building number only")]:
+        ok(not P.multi_building_labels(labs), f"step 3: not garden-style: {name}")
+    ok(BM.garden_style(["5204", "6108", "6207"], ["", None]) and not BM.garden_style(["5204", "6108", "6207"], ["5"]), "step 3: a height of 4+ floors on a page or record switches the rule off")
+    D_ = BM.load_elevator_doubt()
+    ok(len(D_) >= 14 and all(d["why"] and d["source"] for d in D_.values()), "step 3: the reviewed doubt table has its seed rows, each with a reason and a source")
+    # ---- step 4: medians behind the estimates
+    recs = [{"building_id": f"b{i}", "state": "NJ", "pet_rent_monthly": str(v_), "parking_fee_monthly": "", "parking_type": ""} for i, v_ in enumerate([25, 35, 50, 50, 75, 100])] \
+        + [{"building_id": "b0", "state": "NJ", "pet_rent_monthly": "25", "parking_fee_monthly": "", "parking_type": ""}] \
+        + [{"building_id": f"p{i}", "state": "NJ", "pet_rent_monthly": "", "parking_fee_monthly": str(v_), "parking_type": "garage"} for i, v_ in enumerate([0, 100, 150, 150, 200])]
+    MED = AI.known_medians(recs, {f"b{i}": v_ for i, v_ in enumerate([0, 50, 60, 70, 300])})
+    eq(MED["pet"]["NJ"], (50.0, 6), "step 4: pet-rent median is per building (a building listed twice counts once)")
+    eq(MED["parking"][("NJ", "garage")], (150.0, 5), "step 4: parking median by state and kind")
+    eq(MED["fees"]["NJ"], (60.0, 5), "step 4: required-fee median")
+    eq(AI.pick(MED["parking"], ("NJ", "lot"), ("NJ", ""), ("", "")), (150.0, 5, ("NJ", "")), "step 4: a kind with too few buildings falls back to the state")
+    ok(AI.known_medians(recs[:3], {})["pet"] == {}, "step 4: a median never rests on fewer than five buildings")
+    # ---- D22: several verdict rows per unit
+    V = pd.DataFrame([{"listing_id": "a", "kind": "elevator", "verdict": "asterisk"}, {"listing_id": "a", "kind": "lease_term", "verdict": "asterisk"},
+                      {"listing_id": "b", "kind": "", "verdict": "ok"}, {"listing_id": "b", "kind": "coop_condo", "verdict": "disclose"},
+                      {"listing_id": "c", "kind": "dogs", "verdict": "asterisk"}, {"listing_id": "c", "kind": "unverified", "verdict": "remove"}])
+    for c in VD.COLS:
+        if c not in V:
+            V[c] = "h" if c == "evidence_hash" else ""
+    U_ = VD.by_unit(VD.normalise(V[VD.COLS]))
+    eq((U_["a"]["verdict"], U_["a"]["gate"], U_["a"]["disclose"]), ("asterisk", ["elevator"], ["lease_term"]), "IC3 D22: an asterisk on a disclosure kind becomes a 'disclose' row beside the gate row")
+    eq((U_["b"]["verdict"], len(U_["b"]["rows"])), ("disclose", 1), "IC3 D22: an 'ok' row beside another row of the unit is dropped")
+    eq(U_["c"]["verdict"], "remove", "IC3 D22: any remove row removes the unit")
+    ok(VD.GATE_KINDS.isdisjoint(VD.DISCLOSURE_KINDS) and VD.GATE_KINDS | VD.DISCLOSURE_KINDS == VD.KINDS, "IC3 D22: every kind is either a gate fact or a disclosure")
+    # ---- D24: quotes that characterise residents by ethnicity
+    ok(P.characterises_residents_by_group("Lots of traffic jams but delicious food. Lots of hispanics"), "IC3 D24: the Dover quote is screened")
+    for t in ["mostly white people live here", "a large Jewish community", "the residents are predominantly Asian"]:
+        ok(P.characterises_residents_by_group(t), f"IC3 D24: screened: {t!r}")
+    for t in ["Great Italian restaurants and a Chinese bakery", "lots of Mexican food", "very diverse and friendly", "Lots of traffic"]:
+        ok(not P.characterises_residents_by_group(t), f"IC3 D24: not screened: {t!r}")
+    # ---- moments: the three-level rating
+    import build_page_data as BP
+    m = {"wake": {"park_walk_min": 4}, "work": {"sqft": 700, "separate_bedroom": True}, "after": {"restaurants_800m": 5},
+         "night": {"violent_vs_jamaica": 0.4}, "sat": {"bars_1600m": 3, "restaurants_1600m": 30}}
+    eq(BP.moment_ratings(m, 4, 3), {"wake": "strong", "work": "strong", "after": "weak", "night": "strong", "sat": "mixed", "sun": "strong"}, "moments: ratings from the page's thresholds")
+    m2 = {"wake": {"park_walk_min": None}, "work": {"sqft": 500, "separate_bedroom": False}, "after": {"restaurants_800m": 12}, "night": {"violent_vs_jamaica": 0.9}, "sat": {"bars_1600m": None, "restaurants_1600m": 3}}
+    eq(BP.moment_ratings(m2, 1, None), {"wake": None, "work": "weak", "after": "mixed", "night": "weak", "sat": None, "sun": None}, "moments: null where the deciding number is unknown")
 
 
 def data():
@@ -339,8 +443,8 @@ def data():
     for c in ("all_in_unknown_count", "cap_margin"):
         ok(c in M.columns, f"D12: column {c}")
     ok((pd.to_numeric(M.cap_margin) == 3000 - pd.to_numeric(M.all_in)).all(), "D12: cap_margin = 3000 - all_in")
-    near = S[(pd.to_numeric(S.all_in) >= 2900) & (pd.to_numeric(S.all_in_unknown_count) >= 1)]
-    ok(near.disclosures.str.contains('"what": "cost near the cap"', regex=False).all(), "D12: every shown unit at $2,900+ with an unknown cost line carries the disclosure")
+    near = S[(pd.to_numeric(S.all_in) <= 3000) & (pd.to_numeric(S.all_in_likely) > 3000)]       # owner, 2026-11-16: replaces "cost near the cap"
+    ok(near.disclosures.str.contains('"what": "could pass $3,000"', regex=False).all(), "D12: every shown unit that would pass $3,000 once parking and fees are known carries the disclosure")
     ok(not S.confirm_what.str.contains("cost near the cap|lease term|condo|floor").any(), "disclosures never count as the open gate fact")
     npub = S[~S.unit_floor_basis.isin(["confirmed", "stated"])]
     ok(npub.disclosures.str.contains('"what": "floor not published"', regex=False).all() and npub.tour_confirm.str.contains("above the ground floor").all(),
@@ -349,7 +453,7 @@ def data():
     ok((S.open_gate_facts.astype(float) <= 1).all(), "a shown unit has at most one open gate fact")
     sk_ = pd.read_csv(DATA / "excluded_sketchy.csv", dtype=str, keep_default_na=False, low_memory=False)
     ok(not sk_.sketchy_reason.str.contains("cost near the cap|lease term|floor(?! plan)").any() or not sk_.sketchy_reason.str.contains("unconfirmed: [^;]*floor").any(), "no unit is dropped as sketchy because of a disclosure")
-    ok("more_in_building" in S.columns and (S.groupby("building_id").size() <= 2).all(), "at most 2 shown per building, with more_in_building recorded")
+    ok("more_in_building" in S.columns and (S.groupby("building_id").size() <= 8).all(), "at most 8 shown per building (owner, 2026-11-16), with more_in_building recorded")
     # D13 / D14 / D15
     for lid, c, want in [("rc:sightmap:scribe:508", "required building fees\", \"amount\": 100", True), ("rc:sightmap:the-asher:530", "required building fees\", \"amount\": 100", True)]:
         if lid in M.index:
@@ -378,13 +482,17 @@ def data():
     exp = Rr.sort_values(["hood_id", "dominated", "rank_score_num", "live_ok_", "listing_id"], ascending=[True, True, False, False, True], kind="mergesort")
     ok(list(exp.listing_id) == list(Rr.listing_id), "D19: ranked_units.csv is not in the deterministic order (hood, dominated, score, live-checked first, listing_id)")
     # verdict table is applied
-    V = pd.read_csv(DATA / "evidence" / "review_verdicts.csv", dtype=str, keep_default_na=False)
+    import verdicts as VD
+    V = VD.load_verdicts()
     ok(not set(V[V.verdict == "remove"].listing_id) & set(R.index), "verdicts: a unit with verdict remove is still ranked")
     for r in V[V.verdict == "asterisk"].itertuples():
         if r.listing_id in S.index:
-            ok(S.at[r.listing_id, "confirm_asterisk"] == "yes" or (r.kind in ("lease_term", "coop_condo", "other", "floor") and S.at[r.listing_id, "disclosures"] != ""),
-               f"verdicts: {r.listing_id} has an asterisk verdict but is shown without an asterisk or a disclosure")
-    ok(set(S.index) <= set(V[V.verdict.isin(["ok", "asterisk"])].listing_id), "verdicts: a shown unit has no ok / asterisk verdict")
+            ok(S.at[r.listing_id, "confirm_asterisk"] == "yes", f"verdicts: {r.listing_id} has an asterisk verdict (an open gate fact) but is shown without an asterisk")
+    for r in V[V.verdict == "disclose"].itertuples():
+        if r.listing_id in S.index:
+            ok(S.at[r.listing_id, "disclosures"] != "", f"verdicts: {r.listing_id} has a disclose verdict but no disclosure on the unit")
+    ok(set(S.index) <= set(V[V.verdict.isin(list(VD.SHOWABLE))].listing_id), "verdicts: a shown unit has no ok / asterisk / disclose verdict")
+    ok(not V.duplicated(["listing_id", "kind"]).any(), "verdicts: one row per unit and kind")
     # 62 Treat St: plan "103" reads as floor 1; plan "208" must not be excluded with it
     X = pd.read_csv(DATA / "unit_exclusions.csv", dtype=str, keep_default_na=False)
     t = X[X.addr_key == "62 treat st|06516"]
@@ -482,6 +590,129 @@ def data_3(M, R, S):
 
 
 def data_4(M, R, S):
+    """Independent check 3, on the pipeline's output."""
+    import pandas as pd
+    import verdicts as VD
+    num = lambda df, c: pd.to_numeric(df[c], errors="coerce")
+    named = lambda pat: M[M.building_name.str.contains(pat, case=False, regex=True) | M.address.str.contains(pat, case=False, regex=True)]
+    # ---- S1: the three units
+    for lid, why in [("apartmentlist:p10919258-2M", "D1: 98-76 Queens Blvd 2M (dogs open + price to verify)"), ("apartmentlist:p1412214-2182", "D2: Halstead Parsippany 2182 (first-floor pattern)"),
+                     ("rc:trulia:b2751605456:Unit_K3-02:351211069", "D3: Residences at The Summit K3-02 (stale page, never seen live)")]:
+        ok(lid not in S.index, f"IC3 {why} must not be shown")
+    ok("apartmentlist:p1412214-2182" not in R.index, "IC3 D2: 2182 is removed before ranking by the sibling rule")
+    k3 = "rc:trulia:b2751605456:Unit_K3-02:351211069"
+    if k3 in M.index:
+        ok(M.at[k3, "page_modified_date"] == "2026-08-22" and M.at[k3, "listing_stale"] == "open", "IC3 D3: K3-02 takes the page date its sibling's note gives for the same building page")
+    # D3 as a rule: no shown unit is both unseen live and on a page known to be over 60 days unchanged
+    ok(not (~S.live_status.isin(["live", "changed"]) & (num(S, "listing_stale_days") > 60) & (S.listing_stale != "")).any(), "IC3 D3: a unit never seen live on a stale page is not shown")
+    # ---- D5 / D16: net-effective only where the evidence says so; no invented gross
+    for pat, unit in [("1 Kennedy Flats", "2303"), ("1 Kennedy Flats", "1315"), ("Harbourside SoNo", "225"), ("Kensington Place", "1236"), ("Harbor Pointe", "B9-309"), ("Harbor Pointe", "B9-258"),
+                      ("The Grove Somerset", "2205"), ("Pier Village", "4-408"), ("Pier Village", "1-347"), ("Spinnaker Wharf", "5-02E"), ("The Botanic", "430"), ("The Botanic", "444")]:
+        x = named(pat); x = x[x.unit == unit]
+        ok(len(x) == 0 or ((x.rent_basis_kind == "listed") & (num(x, "rent_gross") == num(x, "rent_basis")) & (num(x, "rent_basis") == num(x, "listed_rent").where(x.live_price == "", num(x, "rent_basis")))).all(),
+           f"IC3 D5/D16: {pat} {unit} is costed on its listed price, not as net-effective, with no invented gross")
+    for pat in ["448 Scotland", "Harrison Somerset"]:
+        x = named(pat)
+        ok(len(x) == 0 or (x.rent_basis_kind == "listed").all(), f"IC3 D5: {pat} is not net-effective")
+    ok((M[M.rent_basis_kind == "net_effective"].rent_listed_price_is == "net_effective").all(), "IC3 D5: net-effective only where rent_terms says the listed price is net-effective")
+    ok(not M.rent_offer_text.str.contains(r"\[live check\]|\[evidence\]|not stated|totalPrice|netEffectivePrice", regex=True).any(), "pending fix: rent_offer_text holds the page's own words only")
+    sp = S[(S.rent_offer_kind == "special_offer")]
+    ok(sp.disclosures.str.contains('"what": "special offer"', regex=False).all() and sp.disclosures.str.contains("ask what a normal month costs", regex=False).all(), "IC3 D5: an offer not tied to the price is disclosed as a special offer")
+    ok(not S[S.rent_basis_kind != "net_effective"].disclosures.str.contains('"what": "net-effective rent"', regex=False).any(), "IC3 D5: no net-effective disclosure on a unit not stated to be net-effective")
+    # ---- D6 / D8 / D9 / D22: several issues per unit
+    x = named("Avalon Somerville"); x = x[x.unit.str.contains("265")]
+    ok(len(x) == 0 or (x.elevator_evidence_open != "").all(), "IC3 D6: Avalon Somerville Station's elevator is open (not listed on AvalonBay's own pages)")
+    for lid in x.index:
+        if lid in S.index:
+            ok(S.at[lid, "confirm_what"] == "elevator" and '"what": "lease term"' in S.at[lid, "disclosures"], "IC3 D6: 022-265 shows the elevator asterisk AND the lease-term disclosure")
+    for pat, unit in [("7914 Rockaway", "2F"), ("142-38 37th", "8E"), ("25 W +Broadway", "204"), ("98-76 Queens", "2M"), ("405 W +206th", "713E")]:
+        x = R[(R.address.str.contains(pat, regex=True)) & (R.unit == unit)]
+        ok(len(x) == 0 or x.disclosures.str.contains('"what": "condo rented by its owner"', regex=False).all(), f"IC3 D8: {pat} {unit} carries the condo disclosure")
+    x = R[R.building_name.str.contains("The Riverhouse")]
+    ok(len(x) == 0 or x.disclosures.str.contains('"what": "lease term"', regex=False).all(), "IC3 D9: The Riverhouse (price is for an 18-month lease) carries the lease-term disclosure")
+    V = VD.load_verdicts()
+    ok(not ((V.verdict == "asterisk") & V.kind.isin(list(VD.DISCLOSURE_KINDS))).any(), "IC3 D22: no asterisk row on a disclosure kind")
+    # ---- D10: 30 Broad Street
+    x = named("30 Broad St")
+    ok(len(x) == 0 or x.parking_type.str.startswith("offsite").all(), "IC3 D10: 30 Broad Street's parking type is off-site")
+    ok(not S.address.str.contains("30 Broad St").any(), "pending fix: 30 Broad Street (under construction, no page shows it occupied) is not shown")
+    # ---- D11: no shown unit sits on a stale page with the rule switched off
+    ok(not ((num(S, "listing_stale_days") > 60) & (S.listing_stale == "") & ~pd.Series([__import__("build_master").second_site(a, b) or bool(d) for a, b, d in zip(S.url, S.also_seen_at, S.duplicate_listing_ids)], index=S.index)).any(),
+       "IC3 D11: a page over 60 days unchanged with no second SITE always carries the staleness item")
+    for pat, unit in [("Sono Pearl", "401"), ("Wakefield Station", "401"), ("134 Baldwin", "301"), ("134 Baldwin", "411")]:
+        x = named(pat); x = x[x.unit == unit]
+        ok(len(x) == 0 or (x.listing_stale == "open").all(), f"IC3 D11: {pat} {unit} is stale by rule")
+    # ---- D14: fees not counted twice
+    for pat, unit, fee in [("Parc at Glenbrook", "2328", 0), ("1 Kennedy Flats", "2303", 90), ("1 Kennedy Flats", "1315", 90), ("Residences at The Summit", "M2-07", 0)]:
+        x = named(pat); x = x[x.unit == unit]
+        for r in x.itertuples():
+            line = next(l for l in json.loads(r.all_in_lines) if l["line"] == "required building fees")
+            eq(line["amount"], fee, f"IC3 D14: {pat} {unit} required-fee line")
+    tp = M[M.price_basis.str.contains("total monthly|isTotalMonthlyFeeIncluded", regex=True) & (M.get("required_fees_phone", "") == "")]
+    ok(all(next(l for l in json.loads(a) if l["line"] == "required building fees")["amount"] == 0 for a in tp.all_in_lines), "IC3 D14: a total price never has its own fees added again")
+    # ---- D15: floors
+    if "trulia:2068551955" in M.index:
+        eq(M.at["trulia:2068551955", "unit_floor_basis"], "unknown", "IC3 D15: 100 W 139th St 27A has no floor (the evidence says the label is not a floor)")
+    x = named("Alexander Crossing")
+    ok(len(x) == 0 or (x.building_floors == "").all(), "IC3 D15: Alexander Crossing's '2 floors' is dropped (a unit label reads above it)")
+    # ---- D17: EDGE 408 / 410
+    for lid in ["apartmentlist:p44503265-408", "apartmentlist:p44503265-410"]:
+        if lid in M.index:
+            eq(M.at[lid, "address"], "170 Avenue F", f"IC3 D17: {lid} is at 170 Avenue F")
+    # ---- D19: 12 Brooklyn Ave once
+    x = M[M.address.str.contains("12 Brooklyn Ave")]
+    ok(len(x) <= 1 or x.unit.ne("").all(), "IC3 D19: 12 Brooklyn Ave's unlabelled Zumper row is merged into unit 501")
+    # ---- pending fixes: names, addresses
+    for pat, name in [("475 Main St", "The Elks"), ("270 Luis M", "Metropolis Towers"), ("26-25 4th", "The Winslow"), ("187 Culver", "The Tetris"), ("479 Front", "Village Lofts"),
+                      ("12 Brooklyn Ave", "Sun Valley Towers"), ("5 Linden St", "The Hampton")]:
+        x = M[M.address.str.contains(pat)]
+        ok(len(x) == 0 or (x.building_name == name).all(), f"pending fix: {pat} is named {name}")
+    x = M[M.building_name.str.contains("Vermella Harrison")]
+    ok(len(x) == 0 or ((x.city == "Harrison") & x.address.str.startswith("1100 Frank E Rodgers")).all(), "pending fix: Vermella Harrison's address is whole and its city is Harrison")
+    x = M[M.building_name.str.contains("Kensington Place")]
+    ok(len(x) == 0 or ((x.city == "East Brunswick") & (x.hood_id == "nj:east-brunswick")).all(), "pending fix: Kensington Place is in East Brunswick")
+    for pat in ["1244 New York Ave", "61 Clarkson Ave"]:
+        x = M[M.address.str.contains(pat)]
+        ok(len(x) == 0 or ((x.pluto_lot_ok == "yes") & (x.pluto_lot_address.str.lower().str.replace("avenue", "ave") == pat.lower())).all(), f"pending fix: {pat}: the city lot is the listing's own address, so its record stands")
+    ok(not S.building_name.str.contains("Regency on Hudson").any() or S[S.building_name.str.contains("Regency on Hudson")].confirm_what.eq("listing").all(), "pending fix: Regency on Hudson carries one open 'listing' fact")
+    # ---- step 3: elevator doubt
+    DT = pd.read_csv(DATA / "reference" / "elevator_doubt.csv", dtype=str, keep_default_na=False)
+    ok(set(DT.building_id) <= set(M.building_id) | set(), "step 3: every row of the doubt table names a building in the master")
+    dm = M[M.building_id.isin(set(DT.building_id)) & (M.elevator == "yes") & (M.elevator_basis != "confirmed_by_phone")]
+    ok((dm.elevator_doubt != "").all(), "step 3: every building of the doubt table has the elevator doubt set")
+    ds = S[S.elevator_doubt != ""]
+    ok((ds.confirm_what == "elevator").all() and (ds.confirm_asterisk == "yes").all(), "step 3: a shown unit under elevator doubt carries the elevator asterisk as its one open item")
+    ok(ds[(ds.elevator_evidence_open == "")].to_confirm.str.contains("Confirm an elevator serves this apartment", regex=False).all(), "step 3: ... with the question 'confirm an elevator serves this apartment'")
+    ok(not (S.elevator_doubt != "").values[~S.live_status.isin(["live", "changed"]).values].any(), "step 3: with a second open item (no live check) a doubted unit is not shown")
+    # ---- step 4: pet rent estimated, all_in_likely, the new disclosure
+    ok(not M.all_in_unknown_lines.str.contains("pet rent").any(), "step 4a: pet rent is never unknown-and-nothing")
+    est = M[M.all_in_estimated_lines.str.contains("pet rent")]
+    ok(len(est) > 0 and all(next(l for l in json.loads(a) if l["line"].startswith("pet rent"))["amount"] > 0 for a in est.all_in_lines), "step 4a: an unpublished pet rent is a positive estimate line")
+    ok((num(M, "all_in_likely") >= num(M, "all_in")).all(), "step 4b: all_in_likely is never below all_in")
+    kn = M[~M.all_in_unknown_lines.str.contains("parking fee|building fees")]
+    ok((num(kn, "all_in_likely") == num(kn, "all_in")).all(), "step 4b: with parking and fees known, all_in_likely equals all_in")
+    ok((num(S, "all_in") <= 3000).all(), "step 4: the hard cap stays on all_in")
+    flag_ = (num(S, "all_in") <= 3000) & (num(S, "all_in_likely") > 3000)
+    has_ = S.disclosures.str.contains('"what": "could pass $3,000"', regex=False)
+    ok((flag_ == has_).all(), "step 4b: the 'could pass $3,000' disclosure sits on exactly the units it applies to")
+    ok(S[has_].disclosures.str.contains("Could pass $3,000 once parking and fees are known", regex=False).all(), "step 4b: the disclosure names both figures in its sentence")
+    ok(not S.disclosures.str.contains("cost near the cap", regex=False).any() and not S.disclosures.str.contains("counted as $0", regex=False).any(), "step 4b: the old 'cost near the cap' disclosure and 'counted as $0' are gone")
+    ok(not R.confirm_why.str.contains("counted as $0", regex=False).any(), "pending fix: no confirm_why says 'counted as $0'")
+    # the estimate's reference set (master buildings) against the ranked buildings, per state: reported, and must be close
+    E_ = pd.read_csv(DATA / "reference" / "cost_estimates.csv")
+    Rb = R.drop_duplicates("building_id")
+    for st_, g_ in Rb.groupby("state"):
+        known = pd.to_numeric(g_.pet_rent, errors="coerce").dropna()
+        used = E_[(E_.line == "pet rent") & (E_.state == st_)]["median"]
+        if len(known) >= 5 and len(used):
+            ok(abs(float(known.median()) - float(used.iloc[0])) <= 10, f"step 4a: {st_} pet-rent estimate ${float(used.iloc[0]):g} is within $10 of the median among ranked buildings (${float(known.median()):g})")
+    # ---- step 5: buildings
+    ok((S.groupby("building_id").size() <= 8).all(), "step 5: at most 8 shown per building")
+    o = S.assign(rs=num(S, "rank_score"), n=num(S, "nth_shown_in_building")).sort_values(["building_id", "n"])
+    ok(all((g.n.values == range(1, len(g) + 1)).all() for _, g in o.groupby("building_id")), "step 5: nth_shown_in_building runs 1..n inside each building")
+
+
+def data_units_unique(S):
     pass
 
 
@@ -506,7 +737,47 @@ def page_more(J, M, R, S):
 
 
 def page_3(J, M, R, S):
-    pass
+    """Independent check 3: the page data."""
+    import pandas as pd
+    if "buildings" not in J:
+        ok(False, "page: site/data.json has no buildings array (run scripts/build_page_data.py)")
+        return
+    units = {u["id"]: u for u in J["units"]}
+    if set(units) != set(S.index):
+        return                                          # data.json is from an earlier run: build_page_data.py has not run since rank.py
+    # D12: experience and neighborhood figures are computed over the shown units
+    for y in J["years"]:
+        us = [u for u in J["units"] if u["year"] == y["id"]]
+        for key, get in [("all_in", lambda u: u["all_in"]), ("sqft", lambda u: u["sqft"]), ("drive_min", lambda u: u["moments"]["sun"]["drive_min"])]:
+            vals = pd.Series([get(u) for u in us], dtype=float).dropna()
+            if len(vals):
+                ok(abs(float(vals.median()) - float(y["medians"][key])) <= 0.06, f"IC3 D12: {y['id']} median {key} is the median of its shown units")
+                ok(abs(float(vals.min()) - y["ranges"][key][0]) <= 0.06 and abs(float(vals.max()) - y["ranges"][key][1]) <= 0.06, f"IC3 D12: {y['id']} range {key} is over the same shown units")
+        e = y.get("drive_min_range_hoods")
+        ok(bool(e) and e["nearest"]["name"] and e["farthest"]["name"] and e["nearest"]["drive_min"] <= e["farthest"]["drive_min"], f"IC3 D12: {y['id']} names its nearest and farthest neighborhoods")
+    for h in J["neighborhoods"]:
+        us = [units[i] for i in h["unit_ids"]]
+        sq = pd.Series([u["sqft"] for u in us], dtype=float).dropna()
+        if len(sq):
+            ok(abs(float(sq.median()) - float(h["sqft_median"])) <= 0.06, f"IC3 D12: {h['id']} sqft_median is over its shown places")
+        ok([b for b in h["building_ids"]] == [b["id"] for b in sorted([b for b in J["buildings"] if b["hood_id"] == h["id"]], key=lambda b: b["rank_in_neighborhood"])], f"step 5: {h['id']} building_ids in rank order")
+    # step 5: buildings
+    seen = [i for b in J["buildings"] for i in b["unit_ids"]]
+    ok(sorted(seen) == sorted(units), "step 5: every shown unit sits under exactly one building")
+    for b in J["buildings"]:
+        us = [units[i] for i in b["unit_ids"]]
+        ok(b["n_units"] == len(us) <= 8 and b["from_all_in"] == min(u["all_in"] for u in us), f"step 5: {b['id']} n_units and from_all_in")
+        ok([u["scores"]["hood_rank"] for u in us] == sorted(u["scores"]["hood_rank"] for u in us), f"step 5: {b['id']} units in rank order")
+        ok(all(u["building_id"] == b["id"] and u["hood_id"] == b["hood_id"] for u in us), f"step 5: {b['id']} units belong to it")
+    # step 6: per-unit fields
+    for u in J["units"][:400]:
+        ok("all_in_likely" in u and u["all_in_likely"] >= u["all_in"] and isinstance(u["unknown_cost_lines"], list) and "more_in_building" in u, f"step 6: {u['id']} carries all_in_likely, unknown_cost_lines, more_in_building")
+        ok(all(u["moments"][k].get("rating") in ("strong", "mixed", "weak", None) for k in ("wake", "work", "after", "night", "sat", "sun")), f"step 6: {u['id']} moment ratings")
+    txt = json.dumps(J["meta"]["notes"]) + json.dumps([u["confirm"] for u in J["units"]])
+    ok("counted as $0" not in txt and "count as $0" not in txt, "pending fix: neither meta.notes nor any confirm.why says 'counted as $0'")
+    ok(not any(re.search(r"\[live check\]|\[evidence\]|totalPrice|not stated", (u["rent"]["offer_text"] or "")) for u in J["units"]), "pending fix: rent.offer_text holds clean text only")
+    ok("Lots of hispanics" not in json.dumps([h["local"]["voices"] for h in J["neighborhoods"]]), "IC3 D24: the Dover quote is not on the page")
+    ok(all(not u["parking"]["offsite"] or (u["parking"]["rank"] or 0) <= 2 for u in J["units"]), "IC3 D10: off-site parking is never ranked as covered parking")
 
 
 if __name__ == "__main__":

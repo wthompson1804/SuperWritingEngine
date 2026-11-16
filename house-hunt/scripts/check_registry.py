@@ -247,7 +247,7 @@ def main():
             line = txt[:m.start()].count("\n") + 1
             ctx = txt[txt.rfind("\n", 0, m.start()):txt.find("\n", m.end())]
             if "read_csv" in ctx or ".exists()" in ctx or "= DATA" in ctx:
-                if f not in ALLOWED_INPUTS and "to_csv" not in ctx and not re.search(r"excluded|needs_confirmation|ranked_units|group_exchange|queens_spectrum", f):
+                if f not in ALLOWED_INPUTS and "to_csv" not in ctx and not re.search(r"excluded|needs_confirmation|ranked_units|group_exchange|queens_spectrum|cost_estimates", f):
                     wiring.append(f"{s}:{line} reads {f}")
     st = pd.DataFrame(rows).status.value_counts().to_dict()
     print("field registry:", st)

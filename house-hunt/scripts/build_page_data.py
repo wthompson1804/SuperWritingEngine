@@ -35,6 +35,37 @@ def j(x, default):
         return default
 
 
+# Day moments: a three-level rating per moment, from the thresholds the page template already used for its chips
+# (site/index.html TINT, ported here so the data carries the rating). None where the deciding number is unknown.
+MOMENT_THRESHOLDS = {
+    "wake": {"measure": "minutes on foot to green space (park_walk_min)", "strong": "<= 5", "weak": "> 10"},
+    "work": {"measure": "size and a separate bedroom", "strong": "a separate bedroom and >= 650 sq ft", "weak": "a studio under 650 sq ft"},
+    "after": {"measure": "restaurants within 800 m", "strong": ">= 20", "weak": "< 10"},
+    "night": {"measure": "violent crime against Jamaica and where the car sleeps (parking rank: garage 4, covered 3, lot or off-site 2, street 1)",
+              "strong": "violent rate <= 0.5 x Jamaica and parking rank >= 3", "weak": "parking rank known and under 2 (crime never makes it weak)"},
+    "sat": {"measure": "bars and restaurants within 1,600 m", "strong": ">= 5 bars and >= 25 restaurants", "weak": "< 2.5 bars and < 12.5 restaurants"},
+    "sun": {"measure": "five-point drive-time scale against Queens (vs_queens.drive_min)", "strong": ">= 3 (as close as the typical Queens place, or closer)", "weak": "<= 1"},
+}
+
+
+def moment_ratings(m, parking_rank, vsq_drive):
+    f = lambda x: None if x is None else float(x)
+    out = {}
+    w = f(m["wake"]["park_walk_min"])
+    out["wake"] = None if w is None else ("strong" if w <= 5 else ("weak" if w > 10 else "mixed"))
+    sq, bed = f(m["work"]["sqft"]), bool(m["work"]["separate_bedroom"])
+    out["work"] = None if sq is None else ("strong" if bed and sq >= 650 else ("weak" if (not bed and sq < 650) else "mixed"))
+    r = f(m["after"]["restaurants_800m"])
+    out["after"] = None if r is None else ("strong" if r >= 20 else ("weak" if r < 10 else "mixed"))
+    vj, pr = f(m["night"]["violent_vs_jamaica"]), f(parking_rank)
+    out["night"] = None if vj is None else ("strong" if (vj <= 0.5 and pr is not None and pr >= 3) else ("weak" if (pr is not None and pr < 2) else "mixed"))
+    b, rs = f(m["sat"]["bars_1600m"]), f(m["sat"]["restaurants_1600m"])
+    out["sat"] = None if b is None or rs is None else ("strong" if (b >= 5 and rs >= 25) else ("weak" if (b < 2.5 and rs < 12.5) else "mixed"))
+    v_ = f(vsq_drive)
+    out["sun"] = None if v_ is None else ("strong" if v_ >= 3 else ("weak" if v_ <= 1 else "mixed"))
+    return out
+
+
 PUBLIC_EVIDENCE = {}  # building_id -> what the evidence pass could read (data/avoid_buildings.csv: public_evidence); filled in main()
 
 
@@ -53,21 +84,39 @@ def unit(r):
             qs.append({"parking fee": "What does a parking spot cost per month, and is one guaranteed in the lease?", "pet rent": "What is the monthly pet rent and any one-time pet fee?",
                        "building fees": "What required monthly fees are added to the rent (amenity, trash, technology)?",
                        "building fees (part)": "Which required monthly fees have no published amount (for example an amenity fee), and how much are they?", "gas": "Who pays for heat and cooking gas?"}.get(line, f"What is the {line}?"))
+    if "pet rent" in str(g("all_in_estimated_lines") or ""):
+        qs.append("What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)")
     qs = list(dict.fromkeys(qs))
+    out = unit_core(r, g, qs)
+    mr = moment_ratings(out["moments"], g("parking_rank"), g("vsq_drive_min"))
+    for k, val in mr.items():
+        out["moments"][k]["rating"] = val
+    return out
+
+
+def unit_core(r, g, qs):
     return {
         "id": g("listing_id"), "building_id": g("building_id"), "hood_id": g("hood_id"), "year": g("group_key"),
         "building": g("building_name"), "address": g("address"), "unit": g("unit"), "beds": g("beds"), "sqft": g("sqft"),
         "floor": g("unit_floor"), "floor_basis": g("unit_floor_basis"), "floor_basis_note": g("floor_basis_note"), "zip": g("zip5"), "lat": g("lat"), "lon": g("lon"),
         "available": g("available_date"), "listing_age_days": g("listing_age_days"),
         "rent": {"listed": g("listed_rent"), "basis": g("rent_basis"), "basis_kind": g("rent_basis_kind"), "gross": g("rent_gross"),
-                 "asterisk": g("rent_asterisk") == "yes", "offer_text": g("rent_offer_text"), "free_months": g("rent_free_months"),
+                 "asterisk": g("rent_asterisk") == "yes", "offer_text": g("rent_offer_text"), "offer_kind": g("rent_offer_kind"), "free_months": g("rent_free_months"),
                  "lease_months": g("rent_lease_months"), "first_full_payment_date": g("rent_first_full_payment_date"),
                  "first_full_payment_note": g("rent_first_full_payment_note"), "needs_call": g("rent_needs_call") == "yes"},
         "all_in": g("all_in"), "all_in_gross": g("all_in_gross"), "all_in_lines": j(r.get("all_in_lines"), []),
         "all_in_unknown": [x for x in str(g("all_in_unknown_lines") or "").split("; ") if x],
+        # owner, 2026-11-16: all_in plus the median known parking fee and required fees for the lines not published here.
+        # Never used for the cap. unknown_cost_lines names the parking / fee lines that are not published.
+        "all_in_likely": g("all_in_likely"), "all_in_likely_note": g("all_in_likely_note"),
+        "unknown_cost_lines": [{"parking fee": "parking", "building fees": "required fees", "building fees (part)": "some required fees"}.get(x, x)
+                               for x in str(g("all_in_unknown_lines") or "").split("; ") if x],
+        "estimated_cost_lines": [x for x in str(g("all_in_estimated_lines") or "").split("; ") if x],
         "elevator": {"value": g("elevator"), "basis": g("elevator_basis"), "listing_site_only": g("elevator_aggregator_only") == "yes"},
         "dog": {"allowed": g("dogs_allowed"), "basis": g("dogs_allowed_basis"), "weight_limit_lb": g("dog_weight_limit_lb"), "size_note": g("dog_size_note"), "size_only_source": g("dog_size_only"), "policy_text": g("dog_policy_text"), "pet_rent": g("pet_rent")},
-        "parking": {"type": g("parking_type"), "rank": g("parking_rank"), "fee": g("parking_fee"), "fee_note": g("parking_fee_note"), "options_text": g("parking_options")},
+        "parking": {"type": g("parking_type"), "rank": g("parking_rank"), "fee": g("parking_fee"), "fee_note": g("parking_fee_note"), "options_text": g("parking_options"),
+                    # D10: parking that is not at the building ("2 blocks away") is never "covered parking" on the page
+                    "offsite": bool(parsers.OFFSITE_PARKING.search(str(g("parking_type") or "")))},
         "amenities": {"pool": g("pool") or None, "pool_text": g("pool_text"), "doorman": g("doorman") or None, "doorman_text": g("doorman_text"), "controlled_access": g("controlled_access"),
                       "gym": g("gym"), "in_unit_laundry": g("in_unit_laundry"), "laundry": g("laundry"), "package_room": g("package_room"),
                       "outdoor_space": g("outdoor_space"), "lounge_or_coworking": g("lounge_or_coworking"), "dog_amenities": g("dog_amenities"),
@@ -110,12 +159,44 @@ def unit(r):
         # its owner, net-effective rent. Any number may sit beside at most one open gate fact (confirm).
         "disclosures": [{"what": d.get("what"), "why": d.get("why"), "question": d.get("question") or None, "url": d.get("url") or None, "severity": d.get("severity") or None}
                         for d in j(r.get("disclosures"), [])],
-        "more_in_building": g("more_in_building"),
+        "more_in_building": g("more_in_building"), "rank_in_building": g("nth_shown_in_building"),
         "cost_check": {"cap_margin": g("cap_margin"), "unknown_count": g("all_in_unknown_count"), "lease_term_months": g("rent_lease_term_months"), "price_12_month": g("rent_12_month_price")},
         "confidence": g("confidence"), "tour_questions": qs,
         "links": {"listing": g("url"), "building": g("building_url")}, "source_site": g("source_site"),
         "live": {"status": g("live_status"), "checked_at": g("live_checked_at")}, "price_seen_at": g("last_seen"),
     }
+
+
+BUILDINGS = []
+
+
+def buildings(shown):
+    """One entry per building with a shown unit (owner, 2026-11-16: the page groups apartments under their building).
+    unit_ids are in rank order (the same score as everywhere); rank_in_neighborhood orders buildings by their best unit.
+    Shared facts are the building's merged facts (they are the same on every unit row); ratings stay on the units."""
+    out = []
+    for b, g in shown.sort_values(["hood_id", "shown_rank"]).groupby("building_id", sort=False):
+        r0 = g.iloc[0]
+        g0 = lambda c: v(r0.get(c))
+        u0 = unit(r0)
+        ex = pd.to_numeric(g.all_in, errors="coerce")
+        likely = pd.to_numeric(g.all_in_likely, errors="coerce") if "all_in_likely" in g else ex
+        out.append({"id": b, "name": g0("building_name"), "address": g0("address"), "city": g0("city"), "state": g0("state"), "zip": g0("zip5"),
+                    "hood_id": g0("hood_id"), "experience": g0("group_key"), "lat": g0("lat"), "lon": g0("lon"),
+                    "unit_ids": list(g.listing_id), "n_units": int(len(g)), "more_showable_not_shown": int(g0("more_in_building") or 0),
+                    "from_all_in": v(ex.min()), "to_all_in": v(ex.max()), "from_all_in_likely": v(likely.min()),
+                    "best_unit_id": r0.listing_id, "best_rank_score": g0("rank_score"), "best_shown_rank": int(r0.shown_rank),
+                    # some units of one building can differ in address (EDGE: two buildings leased together)
+                    "addresses": sorted(set(str(a) for a in g.address.dropna())),
+                    "elevator": u0["elevator"], "dogs": u0["dog"], "parking": u0["parking"], "amenities": u0["amenities"],
+                    "links": {"building": g0("building_url")}, "manager": g0("manager"),
+                    "open_items": sorted(set(x for w in g.confirm_what.dropna().astype(str) for x in w.split("; ") if x and x != "nan")),
+                    "units_with_asterisk": int((g.confirm_asterisk == "yes").sum())})
+    by_h = {}
+    for e in sorted(out, key=lambda e: (e["hood_id"], e["best_shown_rank"])):
+        by_h[e["hood_id"]] = by_h.get(e["hood_id"], 0) + 1
+        e["rank_in_neighborhood"] = by_h[e["hood_id"]]
+    return out
 
 
 def main():
@@ -158,8 +239,8 @@ def main():
             t = re.sub(r",\s*[A-Z]{2}$", "", str(t).strip())
             return re.sub(r"\b(township|city of|city|town|village|borough)\b|\(.*?\)|[^a-z]", "", t.lower())
         for r in VQ.itertuples():
-            if any(r.hood_id == h and r.excerpt.startswith(x) for h, x in QX):
-                continue
+            if any(r.hood_id == h and r.excerpt.startswith(x) for h, x in QX) or parsers.characterises_residents_by_group(r.excerpt):
+                continue                              # D24: also any quote that characterises residents by ethnicity, race or religion
             # D20: keep source_area. A quote about a wider or different area than the neighborhood it is filed under
             # says so ("about Corona" under North Corona). Thread titles used as an area name are not shown.
             sa = getattr(r, "source_area", "")
@@ -182,19 +263,30 @@ def main():
                                     "violent_per_1000_scaled": v(r.violent_per_1000_scaled_to_fbi_2025), "property_per_1000_scaled": v(r.property_per_1000_scaled_to_fbi_2025),
                                     "violent_ratio_to_city": v(r.violent_ratio_to_city_portal), "property_ratio_to_city": v(r.property_ratio_to_city_portal),
                                     "window": r.window, "method": r.method, "source_url": r.source_url}
+    MEAS = [("all_in", "all_in"), ("sqft", "sqft"), ("drive_min", "drive_min_to"), ("transit_min", "transit_sat_median"), ("toll_round_trip", "toll_rt_known"),
+            ("toll_round_trip_mail", "toll_rt_mail"), ("violent_per_1000", "violent"), ("property_per_1000", "property"), ("restaurants_800m", "restaurants_800m"),
+            ("park_walk_min", "park_walk_min"), ("parking_rank", "parking_rank")]
+    HOME = shown[shown.hood_area.astype(str).eq("Queens")]
+    BUILDINGS.clear()
+    BUILDINGS.extend(buildings(shown))
     hoods = []
     for hid, g in R.groupby("hood_id"):
         s = g[g.shown]
         if not len(s) and not len(g[g.avoid_card]):
             continue
         h = G.loc[hid] if hid in G.index else {}
+        # independent check 3, D12: figures describe the SHOWN places (a neighborhood with only avoid cards uses its ranked units)
+        g_all, g = g, (s if len(s) else g)
         num = lambda c: v(pd.to_numeric(g[c], errors="coerce").median()) if c in g else None
         # null unless every route in the neighborhood has a complete toll (never 0 for unknown)
         tollmed = lambda c: v(pd.Series([parsers.toll_known(a, b) for a, b in zip(g[c], g.toll_complete)], dtype=float).median()) \
             if c in g and g.toll_complete.astype(str).str.lower().eq("true").all() else None
+        bl = [b_ for b_ in BUILDINGS if b_["hood_id"] == hid]
         hoods.append({"id": hid, "name": g.hood.iloc[0], "area": v(g.hood_area.iloc[0]), "state": v(g.state.iloc[0]) if "state" in g else None, "year": g.group_key.iloc[0],
                       "lat": v(pd.to_numeric(g.lat, errors="coerce").mean()), "lon": v(pd.to_numeric(g.lon, errors="coerce").mean()),
-                      "counts": {"shown": int(len(s)), "avoid": int(g.avoid_card.sum()), "held": int((g.listing_id.isin(held_ids) & ~g.shown).sum()), "ranked": int(len(g))},
+                      "counts": {"shown": int(len(s)), "buildings": len(bl), "avoid": int(g_all.avoid_card.sum()), "held": int((g_all.listing_id.isin(held_ids) & ~g_all.shown).sum()), "ranked": int(len(g_all))},
+                      "figures_over": "shown places" if len(s) else "ranked units (nothing is shown here)",
+                      "building_ids": [b_["id"] for b_ in sorted(bl, key=lambda b_: b_["rank_in_neighborhood"])],
                       "all_in_range": [v(s.all_in.min()), v(s.all_in.max())] if len(s) else None, "sqft_median": num("sqft"),
                       "drive_min": num("drive_min_to"), "transit_min": num("transit_sat_median"),
                       "toll_round_trip": tollmed("toll_rt_ezpass"),
@@ -213,20 +305,35 @@ def main():
                                                           "wfh_share", "median_hh_income", "detached_house_share", "built_since_2010_share", "built_before_1940_share", "restaurants_800m",
                                                           "bars_800m", "cafes_800m", "park_ha_800m", "park_walk_min", "open_water_m", "dog_park_m", "supermarket_m_c"]},
                       "vs_queens": {k[4:]: v(pd.to_numeric(g[k], errors="coerce").median()) for k in g.columns if k.startswith("vsq_") and not k.endswith("_diff")},
-                      "unit_ids": list(s.sort_values("shown_rank").listing_id), "avoid_ids": list(g[g.avoid_card].listing_id),
+                      "unit_ids": list(s.sort_values("shown_rank").listing_id), "avoid_ids": list(g_all[g_all.avoid_card].listing_id),
                       "local": {"parking_rules": local.get(hid, {}).get("street_parking") or None, "dog_rules": local.get(hid, {}).get("dogs") or None,
                                 "voices": voices.get(hid, []), "survey": survey.get(hid, [])}})
     years = []
     for key, g in R.groupby("group_key"):
         s = g[g.shown]
-        ex = E[E.group == g.group_label.iloc[0]]
+        # independent check 3, D12: every experience figure is computed over the SHOWN units of the experience (it used
+        # to come from data/group_exchange.csv, over all ranked units, more than half of them not on the page), and the
+        # median and the range now describe the same set. Queens baseline: the shown units in Queens.
+        col_of = dict(MEAS)
+        sv = lambda k: pd.to_numeric(s[col_of[k]], errors="coerce").dropna()
+        hv = lambda k: pd.to_numeric(HOME[col_of[k]], errors="coerce").dropna()
+        med = {k: (v(round(float(sv(k).median()), 1)) if len(sv(k)) else None) for k in col_of}
+        rng = {k: ([v(round(float(sv(k).min()), 1)), v(round(float(sv(k).max()), 1))] if len(sv(k)) else None) for k in col_of}
+        dh = s.groupby("hood_id").drive_min_to.median().dropna() if len(s) else pd.Series(dtype=float)
+        ends = None
+        if len(dh):
+            near, far = dh.idxmin(), dh.idxmax()
+            ends = {"nearest": {"hood_id": near, "name": s[s.hood_id == near].hood.iloc[0], "drive_min": v(round(float(dh[near]), 1))},
+                    "farthest": {"hood_id": far, "name": s[s.hood_id == far].hood.iloc[0], "drive_min": v(round(float(dh[far]), 1))}}
         years.append({"id": key, "label": g.group_label.iloc[0], "subhead": g.group_subhead.iloc[0],
-                      "counts": {"neighborhoods": int(s.hood_id.nunique()), "shown": int(len(s)), "avoid": int(g.avoid_card.sum())},
+                      "counts": {"neighborhoods": int(s.hood_id.nunique()), "buildings": int(s.building_id.nunique()), "shown": int(len(s)), "avoid": int(g.avoid_card.sum())},
+                      "figures_over": "shown places",
                       "all_in_range": [v(s.all_in.min()), v(s.all_in.max())] if len(s) else None,
                       "drive_min_range": [v(s.drive_min_to.min()), v(s.drive_min_to.max())] if len(s) else None,
-                      "medians": {k: v(ex[k].iloc[0]) for k in ["all_in", "sqft", "drive_min", "transit_min", "toll_round_trip", "toll_round_trip_mail", "violent_per_1000", "property_per_1000", "restaurants_800m", "park_walk_min"] if len(ex) and k in ex},
-                      "vs_queens": {k[4:]: v(ex[k].iloc[0]) for k in ex.columns if k.startswith("vsq_")} if len(ex) else {},
-                      "vs_queens_diff": {k[:-8]: v(ex[k].iloc[0]) for k in ex.columns if k.endswith("_vs_home")} if len(ex) else {},
+                      "drive_min_range_hoods": ends,
+                      "medians": med, "ranges": rng,
+                      "vs_queens": {k[4:]: v(pd.to_numeric(s[k], errors="coerce").median()) for k in s.columns if k.startswith("vsq_") and not k.endswith("_diff")} if len(s) else {},
+                      "vs_queens_diff": {k: (v(round(float(sv(k).median() - hv(k).median()), 1)) if len(sv(k)) and len(hv(k)) else None) for k in col_of},
                       "hood_ids": [h["id"] for h in sorted([h for h in hoods if h["year"] == key and h["counts"]["shown"]], key=lambda h: h["drive_min"] or 999)],
                       "catch": None, "scenes": None})
     spec = pd.read_csv(DATA / "reference" / "queens_spectrum_definition.csv").to_dict("records")
@@ -235,15 +342,19 @@ def main():
                     "jamaica_yardstick": {"violent_per_1000": v(G.jamaica_violent.iloc[0]), "property_per_1000": v(G.jamaica_property.iloc[0])},
                     "queens_spectrum": spec, "weights": {"safety": 22, "building": 16, "cost": 12, "car": 12, "space": 12, "distance": 10, "dog": 8, "daily": 8},
                     "counts": {"shown": int(len(shown)), "shown_with_asterisk": int((shown.confirm_asterisk == "yes").sum()), "avoid": int(len(avoid)), "held": int(len(held)),
-                               "awaiting_live_check": int(len(awaiting)), "ranked": int(len(R))},
+                               "awaiting_live_check": int(len(awaiting)), "ranked": int(len(R)), "buildings": len(BUILDINGS)},
                     "toll_basis": {"assumes": "New York E-ZPass", "rate_time": "weekend off-peak", "mail_rate_field": "toll_round_trip_mail", "note": parsers.TOLL_NOTE},
                     "notes": ["Drive times are free-flow estimates without traffic.", parsers.TOLL_NOTE, "An asterisk on rent means a special offer applies; see the rent terms.",
                               "A floor marked 'read from the unit number' is not stated on the page; confirm it on the tour.",
                               "A place with an asterisk has one thing still to confirm (elevator, dogs allowed, whether the listing is real and available, or a live re-check of the listing); the text beside it says what and why.",
-                              "Disclosures are things to know that never remove a place: floor not published, lease term, cost near the cap, net-effective rent, condo rented by its owner, a dog weight limit with no number, and a town rule restricting overnight street parking where the building's parking is not confirmed.",
+                              "Disclosures are things to know that never remove a place: floor not published, lease term, a cost that could pass $3,000 once parking and fees are known, net-effective rent (only where the listing says the price is net-effective), a special offer (ask what a normal month costs), condo rented by its owner, a dog weight limit with no number, and a town rule restricting overnight street parking where the building's parking is not confirmed.",
+                              "Pet rent is always counted: where a building does not publish it, the cost uses an estimate (the median of the known pet rents in the same state), marked as an estimate.",
+                              "all_in_likely adds the median known parking fee and required fees for the lines a building does not publish; it is shown beside the all-in figure and is never used for the $3,000 limit.",
+                              "Experience and neighborhood figures (medians and ranges) are computed over the places shown on the page.",
                               "An elevator marked 'listing_site_only' is stated in a listing site's amenity list or text and has not been confirmed on the building's own page.",
-                              "Unknown cost lines count as $0 and are named on each receipt."]},
-           "years": years, "neighborhoods": hoods, "units": [unit(r) for _, r in shown.iterrows()],
+                              "Cost lines that are not published add nothing to the all-in figure and are named on each receipt as not published."],
+                    "moment_thresholds": MOMENT_THRESHOLDS, "max_units_per_building": 8},
+           "years": years, "neighborhoods": hoods, "buildings": BUILDINGS, "units": [unit(r) for _, r in shown.iterrows()],
            "avoid": [unit(r) for _, r in avoid.iterrows()], "held": [unit(r) for _, r in held.iterrows()],
            "awaiting_live_check": [{"id": r.listing_id, "building": v(r.building_name), "address": v(r.address), "unit": v(r.unit), "hood_id": r.hood_id, "year": v(r.group_key), "price_seen_at": v(r.last_seen),
                                     "rank": v(r.rank_score), "all_in": v(r.all_in), "listing": v(r.url)} for r in awaiting.itertuples()]}

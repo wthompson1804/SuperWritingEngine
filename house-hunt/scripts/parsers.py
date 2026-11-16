@@ -1121,3 +1121,21 @@ def reads_as_ground_like_siblings(unit, removed_labels) -> bool:
         return False
     t = unit_tail(unit) if re.search(r"[^a-z0-9]", clean_unit(unit)) else unit_key(unit)
     return len(t) == n and all(t[i] == "1" for i in pos)
+
+
+# D24: a resident quote that characterises who lives somewhere by ethnicity, race, religion or origin is never shown
+# (working rule 9). It matches a group word used OF PEOPLE ("lots of hispanics", "mostly white people", "the Jewish
+# community"), not a cuisine or a shop ("Italian restaurants", "Chinese food").
+_GROUP = (r"(?:hispanics?|latin[oa]s?|latinx|blacks?|whites?|asians?|african[- ]americans?|caucasians?|jews?|jewish|muslims?|christians?|catholics?|hindus?|sikhs?|"
+          r"hasidi[cm]|orthodox|indians?|chinese|koreans?|filipinos?|mexicans?|dominicans?|puerto ricans?|haitians?|jamaicans?|italians?|irish|polish|portuguese|"
+          r"brazilians?|russians?|arabs?|guyanese|bangladeshis?|pakistanis?|colombians?|ecuadorians?|peruvians?|greeks?|albanians?|west indians?|caribbean|"
+          r"immigrants?|minorit(?:y|ies)|foreigners?)")
+_PEOPLE = r"(?:people|persons?|folks?|residents?|population|populated|communit(?:y|ies)|famil(?:y|ies)|neighbou?rs?|neighbou?rhood|area|town|kids|students|demographics?|majority|enclave)"
+_NOT_PEOPLE = r"(?!\s+(?:food|restaurants?|cuisine|places?|spots?|bakery|bakeries|delis?|markets?|stores?|shops?|groceries|supermarkets?|church(?:es)?|eateries|options|dishes))"
+RESIDENTS_BY_GROUP = re.compile(
+    r"\b(?:lots? of|many|mostly|full of|too many|all|majority(?: of)?|predominantly|mainly|primarily|largely|heavily|a lot of|so many|nothing but|only)\s+(?:\w+\s+){0,2}?" + _GROUP + r"\b" + _NOT_PEOPLE
+    + r"|\b" + _GROUP + r"\s+" + _PEOPLE + r"\b|\b" + _PEOPLE + r"\s+(?:is|are|of)\s+(?:\w+\s+){0,2}?" + _GROUP + r"\b" + _NOT_PEOPLE, re.I)
+
+
+def characterises_residents_by_group(text) -> bool:
+    return bool(RESIDENTS_BY_GROUP.search(str(text or "")))
