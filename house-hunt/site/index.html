@@ -531,7 +531,7 @@ small.gtkc{display:block;margin-top:6px;padding-top:5px;border-top:1.5px dashed 
 .st{font-style:normal;text-transform:none;letter-spacing:0;font-size:11.5px;font-weight:800;border-radius:999px;padding:1px 8px;margin-left:6px;white-space:nowrap}
 .st.ask{background:var(--butter);color:var(--ink)}
 .st.ok{background:#E3F6EE;color:var(--mint-ink)}
-.rowstop{display:flex;justify-content:flex-end;margin:-6px 0 -4px}
+.rowstop{display:flex;justify-content:flex-end;margin:-10px 0 -8px}
 .rowstop .link{min-height:44px;font-size:13.5px;color:var(--muted)}
 .kstrip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:2px solid var(--line);border-radius:14px;overflow:hidden;margin-top:10px}
 .kstrip>div{background:var(--white);padding:6px 6px 7px;min-width:0;text-align:center}
@@ -552,7 +552,10 @@ small.gtkc{display:block;margin-top:6px;padding-top:5px;border-top:1.5px dashed 
 .host.sm{padding:8px 12px 6px;gap:2px}
 .host.sm .who{font-size:20px}
 .host.sm .who svg{width:24px;height:24px}
-.host .morel{padding:4px 0 0;min-height:44px}
+.host .who span{flex:1 1 auto}
+.host .who .morel{flex:0 0 auto;font-family:var(--body);font-size:14.5px;min-height:44px;padding:0 2px;margin:-10px 0;color:var(--ink)}
+.cardl .confl{font-size:13.5px;padding:5px 9px}
+.rowd>summary{min-height:46px}
 .unit.page .host{border-width:2px}
 .plinks{display:flex;gap:0 18px;flex-wrap:wrap;margin-top:6px}
 .plinks .link{display:inline-flex;align-items:center;min-height:44px;font-size:14.5px}
@@ -1906,14 +1909,14 @@ function firstSentence(t){t=textOf(t).trim();var m=/^[\s\S]*?[.!?](?=\s|$)/.exec
 function chip(b,small,cls){return '<span class="chip'+(cls?' '+cls:'')+'"><b>'+b+'</b>'+(small?'<small>'+small+'</small>':'')+'</span>'}
 /* Text that starts short: about `lines` lines, with a "more" button when there is more. */
 function clampBox(html,lines,id){return html?'<div class="clampw" data-clamp="'+esc(id)+'"><div class="clamp c'+lines+(rowOpen("clamp:"+id,false)?' all':'')+'">'+html+'</div><button type="button" class="link morel" data-act="unclamp" aria-expanded="'+rowOpen("clamp:"+id,false)+'" hidden>'+(rowOpen("clamp:"+id,false)?'less':'more')+'</button></div>':''}
-function hostClamp(v,katch,id){var a=paras(v),c=textOf(katch);if(!a.length&&!c)return "";
-  return '<div class="host sm" id="'+id+'"><p class="who">'+IC.mic+'Your host says</p>'+clampBox(a.map(function(x){return '<p>'+esc(x)+'</p>'}).join("")+(c?'<p class="hcatch"><b>The catch:</b> '+esc(c)+'</p>':''),2,id)+'</div>'}
+function hostClamp(v,katch,id){var a=paras(v),c=textOf(katch);if(!a.length&&!c)return "";var on=rowOpen("clamp:"+id,false);
+  return '<div class="host sm clampw" id="'+id+'" data-clamp="'+esc(id)+'"><p class="who">'+IC.mic+'<span>Your host says</span><button type="button" class="link morel" data-act="unclamp" aria-expanded="'+on+'" hidden>'+(on?'Less':'More')+'</button></p><div class="clamp c2'+(on?' all':'')+'">'+a.map(function(x){return '<p>'+esc(x)+'</p>'}).join("")+(c?'<p class="hcatch"><b>The catch:</b> '+esc(c)+'</p>':'')+'</div></div>'}
 /* One control for all the rows of a page. */
 function rowsTop(){return '<div class="rowstop"><button type="button" class="link" data-act="rows-all" aria-pressed="false">Open all</button></div>'}
 /* The key facts, always in view: four cells, the typical figure big and the range small beneath where there is one. */
 function strip(cells,dark){return '<div class="kstrip'+(dark?' dark':'')+'">'+cells.filter(Boolean).slice(0,4).map(function(c){return '<div'+(c.to?' role="button" tabindex="0" data-act="scrollto" data-to="'+c.to+'"':'')+'><b>'+c.b+'</b><span>'+c.s+'</span>'+(c.r||'')+'</div>'}).join("")+'</div>'}
 function staticScale(vs){return '<ul class="qlist">'+SPEC_OPEN.map(function(s){var p=vs&&vs[s.measure];if(p==null)return "";p=Math.round(p);return '<li><b>'+esc(mLabel(s.measure))+'</b><span>'+esc(POINT_WORD[p]||NK)+'</span>'+pips(p)+'</li>'}).join("")+'</ul>'}
-function fitClamps(){[].forEach.call(view.querySelectorAll(".clampw"),function(w){var c=w.firstChild,b=w.lastChild;if(c.classList.contains("all")||c.scrollHeight>c.clientHeight+3)b.hidden=false})}
+function fitClamps(){[].forEach.call(view.querySelectorAll(".clampw"),function(w){var c=w.querySelector(".clamp"),b=w.querySelector(".morel");if(c.classList.contains("all")||c.scrollHeight>c.clientHeight+3)b.hidden=false})}
 
 /* ================= Headlines: one small pure function per section. Unknown is never shown as a fact. ================= */
 var Q_WORD={drive_min:["farther","closer"],all_in:["pricier","cheaper"],sqft:["smaller","bigger"],transit_min:["slower by train","quicker by train"],food_and_drink_nearby:["less to eat nearby","more to eat nearby"],walk_to_green:["less green","greener"],parking:["harder parking","easier parking"]};
@@ -1983,10 +1986,13 @@ function hoodCard(H,Y,pick){var k=H.units.filter(fits).length,N=H.units.length,n
   return '<a class="hood card'+(none?' none':'')+(top?' pickc':'')+'" href="'+href("hood",H.id)+'"><div class="hd"><span class="pinl" style="background:'+(N?Y.color:"#fff")+'">'+H.n+'</span><div><h4>'+esc(H.name)+'</h4><small>'+ymark(Y,13)+esc([H.state,N?(k===N?pl(N,"place"):k+" of "+N+" fit your limits"):"nothing to tour",H.avoid.length?H.avoid.length+" to avoid":""].filter(Boolean).join(" · "))+'</small></div>'+(top&&pick===0&&Y.ranked?'<span class="pick">Top pick</span>':'')+'</div>'+safeBadge(H)+(line?'<p class="l2">'+esc(line)+'</p>':'')+hoodChips(H)+'</a>'}
 function rentShort(U){var R=U.rent||{};if(!rentStar(U))return "";
   return '<p class="confl rent"><b>* Rent:</b> '+(netEff(U)?esc(money(R.basis!=null?R.basis:R.listed))+' is the average after free months'+(R.gross!=null?'; '+esc(money(R.gross))+' in a paying month':''):'a special offer applies')+(R.needs_call?'. Needs a call':'')+'.</p>'}
+/* On a card the asterisk is one short line: what to confirm, and a word on the rent when it carries an offer. */
+function cardStar(U){var c=confs(U),R=U.rent||{};if(!c.length&&!rentStar(U))return "";
+  return '<p class="confl'+(c.length?'':' rent')+'"><b>* '+(c.length?'To confirm: '+esc(c.map(cWhat).join("; "))+'.':'Rent:')+'</b>'+(rentStar(U)?' '+(c.length?'Rent: ':'')+(netEff(U)?'the price is the average after free months':'a special offer applies')+(R.needs_call?'; needs a call':'')+'.':'')+'</p>'}
 function unitChips(U){var k=parkKind(U);
   return '<div class="chips">'+chip(money(U.all_in)+star(U),esc(seenShort(U.price_seen_at)||"all-in"))+chip(U.sqft!=null?r0(U.sqft)+" sq ft":"Size: ask",esc(bedsWord(U)))+chip(k==="unknown"?"Ask":esc(parkWordShort(U)),k==="unknown"?"parking not published":"parking")+'</div>'}
 function unitCard(U,pick){var w=why(U),out=w.length>0,top=pick!=null&&pick>-1&&pick<3,line=hlSub(U,"top")||textOf(hostOfRec(U,"line"));
-  return '<article class="unit card'+(out?' out':'')+(top?' pickc':'')+'"><a class="cardl" href="'+href("unit",U.id)+'"><div class="hd"><div><h4>'+esc(uName(U))+confStar(U)+'</h4>'+(uSub(U)?'<small>'+esc(uSub(U))+'</small>':'')+'</div>'+pickTag(pick,top)+'</div>'+(line?'<p class="l2">'+esc(line)+'</p>':'')+unitChips(U)+confLines(U)+rentShort(U)+(out?'<p class="why"><b>Outside your limits.</b> '+esc(w.join(". "))+'.</p>':'')+'</a></article>'}
+  return '<article class="unit card'+(out?' out':'')+(top?' pickc':'')+'"><a class="cardl" href="'+href("unit",U.id)+'"><div class="hd"><div><h4>'+esc(uName(U))+confStar(U)+'</h4>'+(uSub(U)?'<small>'+esc(uSub(U))+'</small>':'')+'</div>'+pickTag(pick,top)+'</div>'+(line?'<p class="l2">'+esc(line)+'</p>':'')+unitChips(U)+cardStar(U)+(out?'<p class="why"><b>Outside your limits.</b> '+esc(w.join(". "))+'.</p>':'')+'</a></article>'}
 function nextLink(label,hrefv,title){return '<a class="nextl" href="'+hrefv+'"><small>'+esc(label)+'</small><b>'+esc(title)+' ›</b></a>'}
 
 /* ---- an experience ---- */
@@ -2297,7 +2303,7 @@ document.addEventListener("click",function(e){
   else if(act==="limits-reset"){S.lim={cost:DEF.cost,mins:DEF.mins,safe:DEF.safe,sqft:DEF.sqft,clear:false};syncSliders();save();renderCounts();renderView()}
   else if(act==="close-sheet"){closeSheet()}
   else if(act==="scrollto"){var sec=document.getElementById(t.getAttribute("data-to"));if(sec)sec.scrollIntoView({block:"start"})}
-  else if(act==="unclamp"){var cw=t.parentNode,cc=cw.firstChild,on=!cc.classList.contains("all");cc.classList.toggle("all",on);t.textContent=on?"less":"more";t.setAttribute("aria-expanded",String(on));(OPENED[current]=OPENED[current]||{})["clamp:"+cw.getAttribute("data-clamp")]=on}
+  else if(act==="unclamp"){var cw=t.closest(".clampw"),cc=cw.querySelector(".clamp"),on=!cc.classList.contains("all"),cap=/^[A-Z]/.test(t.textContent);cc.classList.toggle("all",on);t.textContent=on?(cap?"Less":"less"):(cap?"More":"more");t.setAttribute("aria-expanded",String(on));(OPENED[current]=OPENED[current]||{})["clamp:"+cw.getAttribute("data-clamp")]=on}
   else if(act==="rows-all"){var rs=[].slice.call(view.querySelectorAll("details.rowd")),openAll=rs.some(function(d){return !d.open});rs.forEach(function(d){d.open=openAll});
     [].forEach.call(view.querySelectorAll('[data-act="rows-all"]'),function(b){b.textContent=openAll?"Close all":"Open all";b.setAttribute("aria-pressed",String(openAll))})}
   else if(act==="contact"){openSheet(shTop("Leasing office",esc(uName(U_BY[id])))+contactBox(U_BY[id]))}
