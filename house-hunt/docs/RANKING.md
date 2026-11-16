@@ -247,3 +247,23 @@ null where the data cannot say. No level holds more than about 60 percent of the
 
 Shares among the 489 shown (strong / mixed / weak): wake 27 / 45 / 28; work 36 / 22 / 31 (10 percent null); after 28 / 47 / 25;
 night 54 / 41 / 4; sat 32 / 41 / 27; sun 16 / 57 / 27.
+
+## Elevator at the listing gate: never from a unit label (2026-11-16, after `docs/harvest_notes/zumper_open_pending.md`)
+
+`gates.gate_elevator` used to read a unit label as a floor ("42M" → 42, "69B" at 69 N Broadway → 69) and pass the elevator gate on it, while `rank.py`
+already refused to show such units. The two stages now use the same rule. The listing gate's elevator passes only on:
+
+| basis (`listings.csv: elevator_basis`) | what it rests on |
+|---|---|
+| `stated` | the listing page or a listing site's amenity list names an elevator |
+| `nyc_pluto_building_class` | the city's elevator class, only where the tax lot is the listing's own address (`match_basis = house_number+location`) |
+| `evidence_confirmed`, `evidence_stated`, `amenities_page` | an evidence row (`confirm_batch_*.csv`) or a parsed amenities page of the same address states an elevator; not counted when a row for the building speaks against it, is itself an inference, or rests on the city class alone (`gates.elevator_evidence`) |
+| `inferred_6plus_floors` | a real height of 6+ floors: the building-floors field of a page, a floor the page states for the unit, or the city's floor count on the listing's own lot |
+| `inferred_harvester` | the harvester's "6+ floors" read from a page's floor list or floor field |
+| `inferred_high_rise_label` | the management's own page calls the building a high-rise |
+
+A floor read from a unit label, by the gate or by a harvester ("unit numbers on the page reach floor 37"), never supports the elevator: the listing is
+`pending`. Every `inferred_*` basis is still an open fact downstream. The floor gate keeps reading unit labels (an unpublished floor is a tour question).
+Effect: 2,659 → 2,503 listings pass (200 to pending, 44 from pending); shown 489 → 491. Tests: `test_rules.py` `pure_5` and the elevator-gate checks in `data_4`.
+
+Not changed, for the owner: the city's walk-up class still FAILS a listing on a nearest-lot match (493 listings), and 97 listings pass on the high-rise label alone.

@@ -597,7 +597,10 @@ def main():
     for r in U.itertuples():
         b, src = r.building_id, r.url
         el_basis = getattr(r, "elevator_basis", "")
-        if r.g_elevator == "pass" and not (el_basis.startswith("nyc") and not official_elevator_ok(r.addr_key)):
+        # a gate pass that rests on an evidence row or an amenities page (gates.elevator_evidence) is not a statement of
+        # this listing's own page: that evidence enters below from its own file, with its own source
+        if r.g_elevator == "pass" and not (el_basis.startswith("nyc") and not official_elevator_ok(r.addr_key)) \
+                and el_basis not in ("evidence_confirmed", "evidence_stated", "amenities_page"):
             # 'stated' only when the page lists an elevator; a harvester's "6+ floors" note is an inference (W3)
             M.add(b, "elevator", "yes", "inferred" if el_basis.startswith("inferred") else ("official_record" if el_basis.startswith("nyc") else "stated"),
                   src if not el_basis.startswith("nyc") else "NYC PLUTO building class " + getattr(r, "pluto_class", ""))

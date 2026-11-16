@@ -1,4 +1,4 @@
-# Run report (2026-11-16T02:10:48+00:00)
+# Run report (2026-11-16T02:17:06+00:00)
 
 ## Steps
 
@@ -21,28 +21,28 @@
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | FAILED |
-| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | FAILED |
+| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | ok |
+| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
 
 ## Stage counts
 
 | Stage | Now | Previous run | Change |
 |---|---|---|---|
 | listings harvested (after dedupe) | 20464 | 20464 | +0 |
-| pass every listing gate | 2503 | 2659 | -156 |
-|   pending: a gate fact is unstated | 13680 | 13534 | +146 |
-|   fail a gate | 4281 | 4271 | +10 |
-| costed in the master table | 2462 | 2632 | -170 |
-| within the $3,000 all-in cap | 1488 | 1613 | -125 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 771 | 763 | +8 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 493 | 489 | +4 |
-| avoid cards | 35 | 34 | +1 |
-|   shown with an asterisk (one thing to confirm) | 296 | 293 | +3 |
-| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 120 | 121 | -1 |
-| held back for one confirmation | 33 | 35 | -2 |
-| clean, waiting for a live check (not shown) | 37 | 35 | +2 |
+| pass every listing gate | 2503 | 2503 | +0 |
+|   pending: a gate fact is unstated | 13680 | 13680 | +0 |
+|   fail a gate | 4281 | 4281 | +0 |
+| costed in the master table | 2462 | 2462 | +0 |
+| within the $3,000 all-in cap | 1488 | 1488 | +0 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 769 | 769 | +0 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 491 | 491 | +0 |
+| avoid cards | 35 | 35 | +0 |
+|   shown with an asterisk (one thing to confirm) | 295 | 295 | +0 |
+| removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 122 | 122 | +0 |
+| held back for one confirmation | 33 | 33 | +0 |
+| clean, waiting for a live check (not shown) | 37 | 37 | +0 |
 | neighborhoods with 3+ shown places | 42 | 42 | +0 |
-| buildings in the master table | 579 | 665 | -86 |
+| buildings in the master table | 579 | 579 | +0 |
 
 ## Why units left
 
@@ -73,9 +73,9 @@
 | group_label               |   neighborhoods |   ranked |   shown |   avoid_cards |
 |:--------------------------|----------------:|---------:|--------:|--------------:|
 | The Fresh-Start Year      |               6 |       94 |      65 |             0 |
-| The Little-City Year      |              27 |      310 |     199 |             5 |
+| The Little-City Year      |              27 |      309 |     198 |             5 |
 | The Old-Neighborhood Year |              40 |      135 |      85 |            26 |
-| The Quiet-Street Year     |               7 |       11 |      11 |             0 |
+| The Quiet-Street Year     |               7 |       10 |      10 |             0 |
 | The Room-to-Breathe Year  |              34 |      212 |     128 |             0 |
 | The Walk-Everywhere Year  |               6 |        9 |       5 |             4 |
 
@@ -91,7 +91,7 @@
 | parking_fee | 26 |
 | pet_rent | 59 |
 | pool | 44 |
-| doorman | 37 |
+| doorman | 36 |
 | year_built | 46 |
 | toll_rt_ezpass | 100 |
 | transit_sat_median | 94 |
@@ -145,7 +145,7 @@ test_rules (rules): 297 checks, 0 failed
 575 607
 600 607
 {'pass': 2503} buildings: 607
-coordinates: {'listing rows agree': 574, 'census_geocoder': 4, 'listing majority, unverified': 1}; lookups redone at a corrected coordinate: 1 address keys
+coordinates: {'listing rows agree': 574, 'census_geocoder': 4, 'listing majority, unverified': 1}; lookups redone at a corrected coordinate: 0 address keys
 ```
 
 **neighborhood assignment**
@@ -187,12 +187,7 @@ space :: Bridgeport[108]; Bayonne[51]; Dover[41]; Bogota[31]; Clifton[22]; Burli
 
 **building amenities (cached pages)**
 ```
-  year_built                    116   19.1%
-  year_renovated                 12    2.0%
-  total_floors                   31    5.1%
-  unit_count                    161   26.5%
-  management_company             99   16.3%
-  fetched: 0
+passing buildings: 607; already in csv: 754; to process: 0
 ```
 
 **master tables**
@@ -201,7 +196,7 @@ space :: Bridgeport[108]; Bayonne[51]; Dover[41]; Bogota[31]; Clifton[22]; Burli
   confirmed floor values: 76 read, 9 matched no unit in the master (most are units that left the list), 3 not parseable (data/reference/floor_confirm_unmatched.csv)
   live status {'not checked': 1761, 'live': 593, 'blocked': 63, 'changed': 29, 'gone': 16} | coordinates {'listing rows agree': 574, 'census_geocoder': 4, 'listing majority, unverified': 1}
   phone answers: 0 listing rows in 0 buildings (data/evidence/call_answers.csv is absent or empty)
-  page modification date known: 494 | stale: {'no': 2266, 'open': 163, 'remove': 33} | elevator on a listing site's page alone: 379 buildings | overnight parking rule: {'none': 457, 'permit': 80, 'ban': 26, 'seasonal': 16}
+  page modification date known: 494 | stale: {'no': 2266, 'open': 163, 'remove': 33} | elevator on a listing site's page alone: 384 buildings | overnight parking rule: {'none': 457, 'permit': 80, 'ban': 26, 'seasonal': 16}
   evidence facts not mapped to a field: {'building_size': 120, 'listing_broker': 60, 'building_site': 54, 'deposit': 26, 'application_fee': 23, 'listing_date': 21, 'owner_of_record': 21, 'building': 15, 'move_in_fees': 15, 'openigloo_summary': 14, 'building_name': 13, 'available_units_listed': 13, 'pet_count_limit': 12, 'openigloo_summary_counts': 10, 'dog': 8, 'broker_fee': 7, 'building_size_openigloo': 7, 'own_site': 7, 'listing_type': 7, 'landlord': 6, 'ownership_change': 6, 'amenities': 5, 'one_time_fee': 5, 'former_or_other_name': 5, 'other_fees': 4}
 ```
 
@@ -235,25 +230,20 @@ needs_call: {'yes': 1586, 'no': 917}
 
 **ranking and selection**
 ```
-evidence: 47 units excluded, shown 493, avoid cards 35, of them with an asterisk 296 ({'live check': 179, 'elevator': 41, 'listing': 37, 'availability': 18, 'dogs allowed': 16, 'eligibility': 5}), held for a confirmation 33, waiting for a live check 37
-stages: 2462 costed -> -974 over the all-in cap -> -332 Jamaica safety rule -> -108 failed a gate on confirmed facts -> -120 removed by a reviewed verdict -> -1 sibling floor rule -> -109 sketchy -> -47 evidence exclusions -> 771 ranked
-shown buildings 233; disclosures: {'floor not published': 443, 'special offer': 254, 'could pass $3,000': 104, 'lease term': 98, 'dog weight limit not published': 22, 'overnight street parking': 20, 'net-effective rent': 18, 'condo rented by its owner': 9}
-(kept 771 units; candidates 370; shown 403; pools: {'': 413, 'pool': 358}
+evidence: 47 units excluded, shown 491, avoid cards 35, of them with an asterisk 295 ({'live check': 178, 'elevator': 41, 'listing': 37, 'availability': 18, 'dogs allowed': 16, 'eligibility': 5}), held for a confirmation 33, waiting for a live check 37
+stages: 2462 costed -> -974 over the all-in cap -> -332 Jamaica safety rule -> -108 failed a gate on confirmed facts -> -122 removed by a reviewed verdict -> -1 sibling floor rule -> -109 sketchy -> -47 evidence exclusions -> 769 ranked
+shown buildings 233; disclosures: {'floor not published': 442, 'special offer': 253, 'could pass $3,000': 104, 'lease term': 98, 'dog weight limit not published': 22, 'overnight street parking': 19, 'net-effective rent': 18, 'condo rented by its owner': 9}
+(kept 769 units; candidates 369; shown 402; pools: {'': 413, 'pool': 356}
 ```
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 310 checks, 1 failed
-  FAIL verdicts: a shown unit has no ok / asterisk / disclose verdict
+test_rules (data): 312 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
-SHOWN-LIST ASSERTIONS FAILED: 5 violation(s)
-   apartmentlist:p116944794-207cSB.E-448-3 (The Agnes Co-Living 448-3): no reviewed verdict: nobody has read this unit's evidence
-   apartmentlist:p693-u36624909 (Skyline Tower 1 Bedroom Large): no reviewed verdict: nobody has read this unit's evidence
-   apartmentlist:p693-u36308136 (Skyline Tower 1 Bed - 1 Bath): no reviewed verdict: nobody has read this unit's evidence
-   avalon:AVB-NJ030-001-215 (Avalon Teaneck 215): no reviewed verdict: nobody has read this unit's evidence
-   apartmentlist:p11978175-001-215 (Avalon Teaneck 001-215): the verdict was written against older evidence: the building's evidence rows have changed since the review
+field registry: {'used': 500, 'display': 311, 'provenance': 191, 'not_used': 17}
+shown-list assertions: all pass
 ```
 

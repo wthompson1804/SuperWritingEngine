@@ -11,6 +11,22 @@ The "data only, no UI, no ranking" lines in `CLAUDE.md` and the handoff brief ar
 **Run everything:** `python3 scripts/run_all.py` (`--fast` after evidence-only changes) → `scripts/build_page_data.py` →
 `scripts/page_data_extras.py` (prose, round 2 quotes and rules, contacts) → `scripts/build_site.py` → `site/dist/index.html`. Publish as a NEW private artifact (never replace the mock).
 
+**Elevator gate fix (2026-11-16, later; supersedes the counts in the next paragraph):** `gates.gate_elevator` no longer reads a unit label as a
+building height ("42M" is not floor 42; "69B" at 69 N Broadway is not floor 69). The gate passes only on an elevator stated on a page, the city's elevator
+class on the listing's own lot, an evidence row or amenities page that states one (`gates.elevator_evidence`), or a height of 6+ floors from a page or record
+(`docs/RANKING.md`, last section). Run now: 20,464 listings → **2,503 pass listing gates** (was 2,659: 200 label-only passes are now pending, 44 pending
+listings pass on an evidence row, an amenities page or the city's floor count) → 2,462 costed → 1,488 within the cap → 769 ranked → **491 shown in 233 buildings**,
+104 neighborhoods (42 with three or more). No shown unit left. Two entered (Skyline Tower, 60 Paterson St, New Brunswick: two floor-plan rows with the
+availability asterisk); two more that would have entered have a `remove` verdict (The Agnes Co-Living 448-3 is a private room with a shared bath;
+`avalon:AVB-NJ030-001-215` is the same apartment as the Apartment List row already shown). East Rutherford and Patchogue moved from Little-City to
+Room-to-Breathe (the lifestyle indices are standardised over the neighborhoods that have a passing unit, and that set changed). By experience
+(units / buildings): Little-City 198 / 85, Room-to-Breathe 128 / 48, Old-Neighborhood 85 / 63, Fresh-Start 65 / 25, Quiet-Street 10 / 7, Walk-Everywhere 5 / 5.
+Verdicts: 796 rows for 795 units. Two consecutive runs give an identical ranked file; `check_registry.py` and all tests pass.
+
+**Zumper opened pages (not merged, on purpose):** 900 Zumper pages were opened; on stated facts zero units pass every gate (the 15 the old gate passed
+all rested on a unit label read as a floor). 168 units are one fact short, 164 of them on the elevator, which Zumper pages almost never state. Files:
+`data/listings_pending/zumper_opened.csv`, `zumper_opened_summary.csv`, `zumper_opened_pass_or_one_open.csv`; notes in `docs/harvest_notes/zumper_open_pending.md`.
+
 **Latest run (2026-11-16, repairs after `docs/INDEPENDENT_CHECK_3.md`; details in `docs/REPAIRS_AFTER_INDEPENDENT_CHECK_3.md`):** 20,464 listings →
 2,659 pass listing gates → 2,632 costed (27 duplicates merged) → 1,613 within the all-in cap (pet rent now estimated where unpublished) → 763 ranked → **489 shown in 232 buildings**,
 104 neighborhoods (42 with three or more). Up to 8 per building (139 buildings show one unit, 11 show eight). 293 carry one open item: live check 178, elevator 41, listing 37,
