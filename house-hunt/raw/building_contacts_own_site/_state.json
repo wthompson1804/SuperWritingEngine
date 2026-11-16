@@ -1,0 +1,333 @@
+{
+ "https://203living.com/": {
+  "path": "raw/building_contacts_own_site/02ef439294f646f6.html",
+  "retrieved_at": "2026-11-16T00:13:40+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://203living.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/bd78379aa44636d7.txt",
+  "retrieved_at": "2026-11-16T00:13:39+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://arrivestamford.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/56d61cb7db87df8e.txt",
+  "retrieved_at": "2026-11-16T00:14:11+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://cosmo440.com/contact/": {
+  "path": "raw/building_contacts_own_site/c26771f505f86fe9.html",
+  "retrieved_at": "2026-11-16T00:13:15+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://cosmo440.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/d9207b5e21f13f68.txt",
+  "retrieved_at": "2026-11-16T00:13:14+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://ethoskelsey.com/": {
+  "path": "raw/building_contacts_own_site/3802b8869725637e.html",
+  "retrieved_at": "2026-11-16T00:13:43+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://ethoskelsey.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/2041c96419c8b89e.txt",
+  "retrieved_at": "2026-11-16T00:13:42+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://highlandsmorrisplains.com/": {
+  "retrieved_at": "2026-11-16T00:13:49+00:00",
+  "status": -1,
+  "why": "robots.txt disallows this path for ClaudeBot"
+ },
+ "https://highlandsmorrisplains.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/24641e7c0afab3a3.txt",
+  "retrieved_at": "2026-11-16T00:13:49+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://ironstate.com/property/the-agnes/": {
+  "path": "raw/building_contacts_own_site/86eb27a837cd8af9.html",
+  "retrieved_at": "2026-11-16T00:14:02+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://ironstate.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/aa473ad07b8827cf.txt",
+  "retrieved_at": "2026-11-16T00:14:00+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://johnandmaryanllc.com/": {
+  "path": "raw/building_contacts_own_site/eda942193796dce7.html",
+  "retrieved_at": "2026-11-16T00:14:04+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://johnandmaryanllc.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/76f374bf82b4f3a0.txt",
+  "retrieved_at": "2026-11-16T00:14:03+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://livebh.com/apartments/harbourside-sono/": {
+  "path": "raw/building_contacts_own_site/e3e31a2f11ddb49c.html",
+  "retrieved_at": "2026-11-16T00:14:06+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://livebh.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/43552003c3e5d50d.txt",
+  "retrieved_at": "2026-11-16T00:14:04+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://metrostarapartments.com/": {
+  "path": "raw/building_contacts_own_site/f7491e86c7fa741b.html",
+  "retrieved_at": "2026-11-16T00:13:19+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://metrostarapartments.com/contact-metrostar-apartments": {
+  "path": "raw/building_contacts_own_site/695a6b44a3f72164.html",
+  "retrieved_at": "2026-11-16T00:13:18+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://metrostarapartments.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/70911aad9ac2eb08.txt",
+  "retrieved_at": "2026-11-16T00:13:17+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://regencyhudson.com/contact/": {
+  "path": "raw/building_contacts_own_site/bb1d82233a9eee10.html",
+  "retrieved_at": "2026-11-16T00:13:59+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://regencyhudson.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/568c41aaac9d1042.txt",
+  "retrieved_at": "2026-11-16T00:13:58+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://rentashton.com/": {
+  "retrieved_at": "2026-11-16T00:14:11+00:00",
+  "status": -1,
+  "why": "robots.txt not readable (status 0)"
+ },
+ "https://rentashton.com/robots.txt": {
+  "path": "",
+  "retrieved_at": "2026-11-16T00:14:11+00:00",
+  "status": 0,
+  "why": "ts.txt (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1035)')))\"))"
+ },
+ "https://shamcomanagement.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/0c9e5d7ca8c3fc8b.txt",
+  "retrieved_at": "2026-11-16T00:13:31+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://shamcomanagement.com/uncategorized/a-look-at-the-harclay-house/": {
+  "path": "raw/building_contacts_own_site/131c81753a6a4ed6.html",
+  "retrieved_at": "2026-11-16T00:13:34+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://sonopearl.com/": {
+  "retrieved_at": "2026-11-16T00:13:37+00:00",
+  "status": -1,
+  "why": "robots.txt disallows this path for ClaudeBot"
+ },
+ "https://sonopearl.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/fa2b03767aed340b.txt",
+  "retrieved_at": "2026-11-16T00:13:37+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.10oceanapts.com/": {
+  "path": "raw/building_contacts_own_site/d4d84d5f67c24549.html",
+  "retrieved_at": "2026-11-16T00:13:35+00:00",
+  "status": 403,
+  "why": ""
+ },
+ "https://www.10oceanapts.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/e39d62f2dfa90b93.txt",
+  "retrieved_at": "2026-11-16T00:13:34+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.333statestreet.com/": {
+  "path": "raw/building_contacts_own_site/4584f9cf139ecd6a.html",
+  "retrieved_at": "2026-11-16T00:13:42+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.333statestreet.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/1626a9ee9da9054d.txt",
+  "retrieved_at": "2026-11-16T00:13:41+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.504glenbrook.com/": {
+  "path": "raw/building_contacts_own_site/52785541a334ed5b.html",
+  "retrieved_at": "2026-11-16T00:14:07+00:00",
+  "status": 403,
+  "why": ""
+ },
+ "https://www.504glenbrook.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/abed03b124a3b00f.txt",
+  "retrieved_at": "2026-11-16T00:14:07+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.750summer.com/": {
+  "path": "raw/building_contacts_own_site/c9372ca55a559df6.html",
+  "retrieved_at": "2026-11-16T00:13:46+00:00",
+  "status": 403,
+  "why": ""
+ },
+ "https://www.750summer.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/4f774f369f8a5289.txt",
+  "retrieved_at": "2026-11-16T00:13:45+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.appletreesuites.com/": {
+  "path": "raw/building_contacts_own_site/039f67aa73f7f55c.html",
+  "retrieved_at": "2026-11-16T00:13:52+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.appletreesuites.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/6979d7057043b573.txt",
+  "retrieved_at": "2026-11-16T00:13:51+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.brookfieldvillagect.com/contact/": {
+  "path": "raw/building_contacts_own_site/421eb71b39bff9b2.html",
+  "retrieved_at": "2026-11-16T00:13:45+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.brookfieldvillagect.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/480b35e238be9ddb.txt",
+  "retrieved_at": "2026-11-16T00:13:44+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.eaglerockproperties.com/apartments/ny/": {
+  "path": "raw/building_contacts_own_site/16ff3a5fc8d2552b.html",
+  "retrieved_at": "2026-11-16T00:13:39+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.eaglerockproperties.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/60825efe873dfabd.txt",
+  "retrieved_at": "2026-11-16T00:13:38+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.harborgroupmanagement.com/apartments/ny/new-rochelle/skyline-new-rochelle/contact-us": {
+  "retrieved_at": "2026-11-16T00:13:58+00:00",
+  "status": -1,
+  "why": "robots.txt disallows this path for ClaudeBot"
+ },
+ "https://www.harborgroupmanagement.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/4c5bb2a2d29beff4.txt",
+  "retrieved_at": "2026-11-16T00:13:58+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.lifetimelivingstamford.com/contact/": {
+  "path": "raw/building_contacts_own_site/72c9a153552bb212.html",
+  "retrieved_at": "2026-11-16T00:13:37+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.lifetimelivingstamford.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/7e325f9dca6f4ad1.txt",
+  "retrieved_at": "2026-11-16T00:13:36+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.liveatfranklin.com/our-communities/whitney-towers/": {
+  "path": "raw/building_contacts_own_site/1bc36a57c631ff10.html",
+  "retrieved_at": "2026-11-16T00:13:23+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.liveatfranklin.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/4de844c18292e4ed.txt",
+  "retrieved_at": "2026-11-16T00:13:21+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.livethebrunswick.com/": {
+  "path": "raw/building_contacts_own_site/4d417954d608753a.html",
+  "retrieved_at": "2026-11-16T00:13:57+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.livethebrunswick.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/31c2a2c44c18dca5.txt",
+  "retrieved_at": "2026-11-16T00:13:56+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.metrovuejsq.com/": {
+  "retrieved_at": "2026-11-16T00:13:56+00:00",
+  "status": -1,
+  "why": "robots.txt not readable (status 0)"
+ },
+ "https://www.metrovuejsq.com/robots.txt": {
+  "path": "",
+  "retrieved_at": "2026-11-16T00:13:56+00:00",
+  "status": 0,
+  "why": "t=443): Max retries exceeded with url: /robots.txt (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 502 Bad Gateway')))\"))"
+ },
+ "https://www.parcatroxbury.com/": {
+  "path": "raw/building_contacts_own_site/be5edaa5df7c4327.html",
+  "retrieved_at": "2026-11-16T00:13:31+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.parcatroxbury.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/0112d34d16f1e26b.txt",
+  "retrieved_at": "2026-11-16T00:13:30+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.thegeorgenewbrunswick.com/contact-us": {
+  "path": "raw/building_contacts_own_site/4b4bfdf390828073.html",
+  "retrieved_at": "2026-11-16T00:13:17+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.thegeorgenewbrunswick.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/198c26488fd4be00.txt",
+  "retrieved_at": "2026-11-16T00:13:16+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.urby.com/location/newark": {
+  "path": "raw/building_contacts_own_site/daf881f6f1c4c56f.html",
+  "retrieved_at": "2026-11-16T00:13:51+00:00",
+  "status": 200,
+  "why": ""
+ },
+ "https://www.urby.com/robots.txt": {
+  "path": "raw/building_contacts_own_site/ab8da5d8b091f93d.txt",
+  "retrieved_at": "2026-11-16T00:13:50+00:00",
+  "status": 200,
+  "why": ""
+ }
+}

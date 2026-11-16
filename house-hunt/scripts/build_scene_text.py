@@ -11,11 +11,19 @@ Tokens
   {!alias OP value}  nothing is printed; the sentence is recorded as resting on this field, and the checker
                      re-tests it later                             {!bars==0}  {!b_tollok==False}  {!viol missing}
   {w10}  {mile}      the fixed wordings for the 800 m and 1,600 m search radii ("10-minute walk", "1 mile")
+  [[ ... ]]          an optional stretch of text: dropped whole when any value inside it is missing or any hidden
+                     test inside it fails, so a fact that is not in the data is simply not said
 Lines
-  === year: <label>      then  scene: / promise: / catch:
-  === hood: <hood_id>    then  scene: / good: / watch: , and optionally
+  === year: <label>      then  scene: / promise: / catch: / display: / tagline: / host_intro: / walk1: walk2: walk3:
+  === hood: <hood_id>    then  scene: / good: / watch: / host_intro: , and optionally
       rules: Municipality|rule ; Municipality|rule      numbers typed in the prose must come from these summaries
       voices: theme, theme                              themes whose balance of comments the prose paraphrases
+  A block may appear twice (the host voice sits in its own section of the file); the two are merged, and their
+  rules: and voices: lines are added together.
+Year tokens: m_ / max_ / min_ + a neighborhood alias (median neighborhood, lifestyle_groups.csv); p_... the page's own
+  unit-weighted tile figures (site/data.json years[]); u_... medians and shares over the units shown on the page.
+Neighborhood tokens: the aliases in HOOD; b_... over the neighborhood's buildings (tolls come from data/enriched);
+  pg_... the page's all-in range for the neighborhood (use inside [[ ]]: a neighborhood can leave the page).
 
 Run from the house-hunt folder: python3 scripts/build_scene_text.py && python3 scripts/check_scene_text.py
 """
@@ -32,6 +40,8 @@ ROOT = C.ROOT
 SOURCE = ROOT / "data/reference/scene_text_source.txt"
 LG, MB, GX = "data/lifestyle_groups.csv", "data/master_buildings.csv", "data/group_exchange.csv"
 RULES, QUOTES = "data/reference/local_rules.csv", "data/voices/neighborhood_quotes.csv"
+RULES2, QUOTES2 = "data/reference/local_rules_round2.csv", "data/voices/neighborhood_quotes_round2.csv"
+TOLLS, PAGE_Y, PAGE_H, PAGE_U = C.TOLLS, C.PAGE + "#years", C.PAGE + "#neighborhoods", C.PAGE + "#units"
 
 # alias: (field in lifestyle_groups.csv, usual rounding)
 HOOD = {
@@ -53,11 +63,34 @@ HOOD = {
 }
 # alias: (field in master_buildings.csv, aggregation over the neighborhood's buildings, usual rounding)
 BLDG = {
-    "b_toll": ("toll_rt_ezpass", "median", "int"), "b_tollmax": ("toll_rt_ezpass", "max", "int"),
-    "b_tollok": ("toll_complete", "all_true", "str"),
+    "b_toll": ("toll_round_trip_ezpass", "median", "int"), "b_tollmax": ("toll_round_trip_ezpass", "max", "int"),
+    "b_tollok": ("complete", "all_true", "str"),
     "b_station": ("train_station", "mode", "str"), "b_dogpark": ("dog_park_name", "mode", "str"),
     "b_park": ("park_name", "mode", "str"), "b_super": ("supermarket", "mode", "str"),
     "b_lasttrain": ("last_sat_departure", "mode", "time12"),
+}
+FROM_TOLLS = {"b_toll", "b_tollmax", "b_tollok"}       # read from data/enriched, not master_buildings.csv
+# alias: (column of site/data.json#neighborhoods, usual rounding)
+HOOD_PAGE = {"pg_lo": ("all_in_lo", "usd50"), "pg_hi": ("all_in_hi", "usd50"), "pg_n": ("shown", "int"),
+             "pg_sqft": ("sqft_median", "r10")}
+# alias: (column of site/data.json#years, usual rounding)   the page's own tile figures
+YEAR_PAGE = {
+    "p_allin": ("all_in", "usd50"), "p_allin_lo": ("all_in_lo", "usd50"), "p_allin_hi": ("all_in_hi", "usd50"),
+    "p_sqft": ("sqft", "r10"), "p_drive": ("drive_min", "int"), "p_drive_lo": ("drive_min_lo", "int"),
+    "p_drive_hi": ("drive_min_hi", "int"), "p_transit": ("transit_min", "r5"),
+    "p_viol": ("violent_per_1000", "1dp"), "p_prop": ("property_per_1000", "1dp"),
+    "p_rest": ("restaurants_800m", "int"), "p_parkwalk": ("park_walk_min", "int"),
+    "p_hoods": ("neighborhoods", "int"), "p_places": ("shown", "int"),
+}
+# alias: (column of site/data.json#units, aggregation over the year's shown units, usual rounding)
+YEAR_UNITS = {
+    "u_toll": ("toll_rt", "median", "int"), "u_tollmax": ("toll_rt", "max", "int"),
+    "u_dogpark": ("dog_park_m", "median", "mi"), "u_super": ("supermarket_m", "median", "mi"),
+    "u_cafes": ("cafes_800m", "median", "int"), "u_bars": ("bars_800m", "median", "int"),
+    "u_rest1600": ("restaurants_1600m", "median", "int"), "u_bars1600": ("bars_1600m", "median", "int"),
+    "u_garage": ("garage_or_covered", "mean", "pct"), "u_parkpub": ("parking_published", "mean", "pct"),
+    "u_pool": ("pool", "mean", "pct"), "u_doorman": ("doorman", "mean", "pct"), "u_gym": ("gym", "mean", "pct"),
+    "u_laundry": ("in_unit_laundry", "mean", "pct"), "u_n": ("listing_id", "count", "int"),
 }
 CONVENTION = {
     "w10": ("10-minute walk", "restaurants_800m", "800 m radius, written as a 10-minute walk"),
@@ -81,8 +114,17 @@ def resolve(alias, ctx):
             return LG, f, {"hood_id": ctx["id"]}, None, how
         if alias in BLDG:
             f, agg, how = BLDG[alias]
-            return MB, f, {"hood_id": ctx["id"]}, agg, how
+            return (TOLLS if alias in FROM_TOLLS else MB), f, {"hood_id": ctx["id"]}, agg, how
+        if alias in HOOD_PAGE:
+            f, how = HOOD_PAGE[alias]
+            return PAGE_H, f, {"hood_id": ctx["id"]}, None, how
     else:
+        if alias in YEAR_PAGE:
+            f, how = YEAR_PAGE[alias]
+            return PAGE_Y, f, {"year_label": ctx["id"]}, None, how
+        if alias in YEAR_UNITS:
+            f, agg, how = YEAR_UNITS[alias]
+            return PAGE_U, f, {"year_label": ctx["id"]}, agg, how
         row = {"group_label": ctx["id"], "safety_cut": False}
         for pre, agg in (("m_", "median"), ("max_", "max"), ("min_", "min")):
             if alias.startswith(pre) and alias[len(pre):] in HOOD:
@@ -95,7 +137,29 @@ def resolve(alias, ctx):
     raise KeyError(f"{ctx['id']}: unknown token {{{alias}}}")
 
 
+def drop_optional(raw, ctx):
+    """[[ ... ]] stays only when every value inside it is present and every hidden test inside it holds."""
+    def keep(m):
+        for t in TOKEN.finditer(m.group(1)):
+            hidden, alias, _, op, operand = t.groups()
+            if alias in CONVENTION:
+                continue
+            try:
+                src, field, row, agg, _ = resolve(alias, ctx)
+                value = C.lookup(src, field, row, agg)
+            except LookupError:
+                return ""
+            if hidden and op:
+                if not C.holds(value, [op] if op in ("missing", "present") else [op, operand.strip()]):
+                    return ""
+            elif C.is_missing(value):
+                return ""
+        return m.group(1)
+    return re.sub(r"\[\[(.*?)\]\]", keep, raw)
+
+
 def render(raw, ctx, evidence):
+    raw = drop_optional(raw, ctx)
     out = []
     held = []                                         # tokens are set aside so a full stop inside one cannot split a sentence
 
@@ -153,13 +217,16 @@ def attach_rules(ctx, spec, texts, evidence):
     cited = []
     for part in [p.strip() for p in spec.split(";") if p.strip()]:
         muni, rule = [x.strip() for x in part.split("|")]
-        summaries = C.lookup(RULES, "summary", {"municipality": muni, "rule": rule, "value_type": "found"}, "any_row")
-        if not summaries:
+        found = False
+        for rules_file in (RULES, RULES2):
+            row = {"municipality": muni, "rule": rule, "value_type": "found"}
+            for s in C.lookup(rules_file, "summary", row, "any_row"):
+                found = True
+                cited.append({"claim": f"local rule cited: {muni}, {rule}", "field": "summary", "value": s,
+                              "source_file": rules_file, "row": row, "agg": "any_row", "transform": "in_text",
+                              "shown": []})
+        if not found:
             raise ValueError(f"{ctx['id']}: no found rule {muni}|{rule}")
-        for s in summaries:
-            cited.append({"claim": f"local rule cited: {muni}, {rule}", "field": "summary", "value": s,
-                          "source_file": RULES, "row": {"municipality": muni, "rule": rule, "value_type": "found"},
-                          "agg": "any_row", "transform": "in_text", "shown": []})
     covered = set()
     for ev in evidence:
         covered |= set(C.numbers_in(" ".join(ev.get("shown", []))))
@@ -177,23 +244,26 @@ def attach_rules(ctx, spec, texts, evidence):
     # keep every rule summary that supplied a number, and the first summary of each cited rule
     seen = set()
     for ev in cited:
-        k = (ev["row"]["municipality"], ev["row"]["rule"])
-        if ev in used or k not in seen and not any(u["row"] == ev["row"] for u in used):
+        k = (ev["source_file"], ev["row"]["municipality"], ev["row"]["rule"])
+        if ev in used or k not in seen and not any(u["row"] == ev["row"] and u["source_file"] == ev["source_file"] for u in used):
             evidence.append(ev)
         seen.add(k)
 
 
 def attach_voices(ctx, spec, texts, evidence):
-    claim = " ".join(s for t in texts.values() for s in C.sentences(t) if re.search(r"review sites", s))
+    claim = " ".join(s for t in texts.values() for s in C.sentences(t) if C.VOICE_PHRASE.search(s))
     if not claim:
-        raise ValueError(f"{ctx['id']}: voices cited but no sentence says 'review sites'")
-    for theme in [t.strip() for t in spec.split(",") if t.strip()]:
-        row = {"hood_id": ctx["id"], "theme": theme}
-        counts = C.lookup(QUOTES, "sentiment", row, "sentiment_counts")
-        if counts == "positive=0;mixed=0;negative=0":
+        raise ValueError(f"{ctx['id']}: voices cited but no sentence says 'review sites' or 'people who live here'")
+    for theme in dict.fromkeys(t.strip() for t in spec.split(",") if t.strip()):
+        row, n = {"hood_id": ctx["id"], "theme": theme}, 0
+        for quotes_file in (QUOTES, QUOTES2):
+            counts = C.lookup(quotes_file, "sentiment", row, "sentiment_counts")
+            if counts != "positive=0;mixed=0;negative=0":
+                n += 1
+                evidence.append({"claim": claim, "field": "sentiment", "value": counts, "source_file": quotes_file,
+                                 "row": row, "agg": "sentiment_counts"})
+        if not n:
             raise ValueError(f"{ctx['id']}: no quotes on {theme}")
-        evidence.append({"claim": claim, "field": "sentiment", "value": counts, "source_file": QUOTES, "row": row,
-                         "agg": "sentiment_counts"})
 
 
 def parse(path):
@@ -203,14 +273,30 @@ def parse(path):
             continue
         m = re.match(r"=== (year|hood): (.+)", line)
         if m:
-            cur = {"kind": m.group(1), "id": m.group(2).strip(), "f": {}}
-            blocks.append(cur)
+            key = (m.group(1), m.group(2).strip())
+            cur = next((b for b in blocks if (b["kind"], b["id"]) == key), None)
+            if cur is None:
+                cur = {"kind": key[0], "id": key[1], "f": {}}
+                blocks.append(cur)
             continue
         k, _, v = line.partition(":")
+        k, v = k.strip(), v.strip()
         if cur is None or not _:
             raise ValueError(f"cannot read line: {line[:80]}")
-        cur["f"][k.strip()] = v.strip()
+        if k in ("rules", "voices"):                  # a second block adds to the first block's citations
+            sep = "; " if k == "rules" else ", "
+            cur["f"][k] = sep.join(x for x in (cur["f"].get(k, ""), v) if x)
+        elif k in cur["f"]:
+            raise ValueError(f"{cur['id']}: '{k}:' appears twice")
+        else:
+            cur["f"][k] = v
     return blocks
+
+
+YEAR_COLS = {"display": "display_label", "tagline": "tagline", "scene": "scene", "promise": "promise", "catch": "catch",
+             "host_intro": "host_intro"}
+HOOD_COLS = {"scene": "scene", "good": "good_for_her", "watch": "watch_for", "host_intro": "host_intro"}
+WALK = ["walk1", "walk2", "walk3"]                    # a weekday, a Saturday night, a Sunday with her parents
 
 
 def main():
@@ -218,17 +304,21 @@ def main():
     years, hoods, errors = [], [], []
     for b in parse(SOURCE):
         ctx, f, evidence = {"kind": b["kind"], "id": b["id"]}, b["f"], []
-        cols = {"scene": "scene", "promise": "promise", "catch": "catch"} if b["kind"] == "year" else \
-               {"scene": "scene", "good": "good_for_her", "watch": "watch_for"}
+        cols = YEAR_COLS if b["kind"] == "year" else HOOD_COLS
         try:
+            lacking = [k for k in list(cols) + (WALK if b["kind"] == "year" else []) if not f.get(k)]
+            if lacking:
+                raise ValueError(f"{b['id']}: no text for {lacking}")
             texts = {out: render(f[src], ctx, evidence) for src, out in cols.items()}
+            if b["kind"] == "year":
+                texts["host_walkthrough"] = "\n\n".join(render(f[k], ctx, evidence) for k in WALK)
             if b["kind"] == "hood":
                 if f.get("rules"):
                     attach_rules(ctx, f["rules"], texts, evidence)
                 if f.get("voices"):
                     attach_voices(ctx, f["voices"], texts, evidence)
-                elif any("review sites" in t for t in texts.values()):
-                    raise ValueError(f"{b['id']}: mentions review sites without a voices: line")
+                elif any(C.VOICE_PHRASE.search(t) for t in texts.values()):
+                    raise ValueError(f"{b['id']}: paraphrases residents without a voices: line")
             problems, _ = C.check_row(b["kind"], b["id"], texts, evidence)
             errors += [f"{b['id']}: {p}" for p in problems]
         except (KeyError, ValueError, LookupError) as e:
@@ -236,10 +326,13 @@ def main():
             continue
         ej = json.dumps(evidence, ensure_ascii=False)
         if b["kind"] == "year":
-            years.append({"year_label": b["id"], **texts, "evidence_json": ej})
+            years.append({"year_label": b["id"], **{c: texts[c] for c in C.COLUMNS["year"]}, "evidence_json": ej})
         else:
             hoods.append({"hood_id": b["id"], "hood_name": lg.loc[b["id"], "hood"],
-                          "year_label": lg.loc[b["id"], "group_label"], **texts, "evidence_json": ej})
+                          "year_label": lg.loc[b["id"], "group_label"], **{c: texts[c] for c in C.COLUMNS["hood"]},
+                          "evidence_json": ej})
+    for col, rows, key in (("host_intro", years, "year_label"), ("host_intro", hoods, "hood_id")):
+        errors += C.check_repetition(col, {r[key]: r[col] for r in rows})
     for name, rows in ((C.YEARS, years), (C.HOODS, hoods)):
         if rows:
             with open(name, "w", newline="", encoding="utf-8") as fh:

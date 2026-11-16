@@ -1,0 +1,7 @@
+User-Agent: *
+Disallow: /wp-admin/
+
+User-agent: Bytespider
+Disallow: /
+
+Sitemap: https://www.livebh.com/sitemap.xml

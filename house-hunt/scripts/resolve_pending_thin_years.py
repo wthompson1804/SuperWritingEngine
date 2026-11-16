@@ -96,7 +96,11 @@ def polite_get(url: str, *, refresh: bool = False, ext: str = "html"):
 # ---------------------------------------------------------------- selection
 def building_key(r) -> str:
     """Building = street address without the unit (some harvesters put '#555' in the address) + ZIP."""
-    a = re.sub(r"\s*(#|apt\.?|unit|suite|ste\.?)\s*[\w-]+\s*$", "", str(r.address), flags=re.I)
+    a = str(r.address)
+    m = re.match(r"^(.*?),\s*[^,]+,\s*[A-Z]{2}\s*\d{5}", a)   # Zumper style: "515 West Ave, Norwalk, CT 06850, USA"
+    if m:
+        a = m.group(1)
+    a = re.sub(r"\s*(#|apt\.?|unit|suite|ste\.?)\s*[\w-]+\s*$", "", a, flags=re.I)
     return norm_addr(a) + "|" + r.zip5
 
 
@@ -219,9 +223,77 @@ def select():
     print(json.dumps(funnel, indent=1))
 
 
+# ---------------------------------------------------------------- fetch
+FETCHLOG = OUT / "fetch_log.jsonl"
+
+
+def fetched() -> dict:
+    d = {}
+    if FETCHLOG.exists():
+        for line in open(FETCHLOG):
+            r = json.loads(line)
+            d[r["url"]] = r
+    return d
+
+
+def get_logged(url: str, why: str, *, refresh: bool = True):
+    """One request per URL per session (resumable: a URL already in fetch_log.jsonl is not requested again)."""
+    done = fetched()
+    if url in done:
+        return done[url]
+    content, meta = polite_get(url, refresh=refresh)
+    rec = {"url": url, "why": why, "status": meta.get("status"), "path": meta.get("path") if content else "",
+           "retrieved_at": meta.get("retrieved_at", now_iso()), "bytes": len(content) if content else 0}
+    with open(FETCHLOG, "a") as f:
+        f.write(json.dumps(rec) + "\n")
+    return rec
+
+
+def zumper_address_url(address: str, city: str, state: str, zip5: str) -> str:
+    a = re.sub(r"[#,].*", "", address).strip().lower()
+    for x, y in [("avenue", "ave"), ("street", "st"), ("boulevard", "blvd"), ("road", "rd"), ("drive", "dr"),
+                 ("terrace", "ter"), ("place", "pl"), ("lane", "ln"), ("north ", "n "), ("east ", "e "), ("west ", "w "),
+                 ("south ", "s "), ("highway", "hwy")]:
+        a = re.sub(r"\b" + x.strip() + r"\b", y.strip(), a)
+    return "https://www.zumper.com/address/" + re.sub(r"[^a-z0-9]+", "-", f"{a} {city} {state} {zip5} usa".lower()).strip("-")
+
+
+def fetch_primary():
+    """Re-read each candidate's own listing page (Apartment List, Zumper, management sites). Trulia is never requested."""
+    C = pd.read_csv(OUT / "candidates.csv", dtype=str, keep_default_na=False)
+    urls = {}
+    for r in C.itertuples():
+        host = urlparse(r.url).netloc.lower()
+        if "trulia.com" in host:
+            continue
+        mgmt = not ("apartmentlist.com" in host or "zumper.com" in host)
+        u = r.url.split("?")[0] if "zumper.com" in host else r.url
+        if mgmt and r.building_url:
+            urls.setdefault(r.building_url, "building page")
+        urls.setdefault(u, "listing page")
+    print(len(urls), "primary urls;", len(fetched()), "already logged")
+    for n, (u, why) in enumerate(urls.items()):
+        rec = get_logged(u, why)
+        if n % 20 == 0:
+            print(n, rec["status"], u[:90], flush=True)
+    print("refused hosts:", refused())
+
+
+def fetch_urls(path: str):
+    """Fetch the URLs listed in a small CSV (url, why): secondary pages chosen after reading the primary ones."""
+    for r in pd.read_csv(path, dtype=str, keep_default_na=False).itertuples():
+        rec = get_logged(r.url, r.why)
+        print(rec["status"], rec["bytes"], r.url[:100], flush=True)
+    print("refused hosts:", refused())
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "select"
     if cmd == "select":
         select()
-    else:
-        import resolve_pending_fetch as F  # noqa: F401  (kept in this file below in the final version)
+    elif cmd == "fetch":
+        fetch_primary()
+    elif cmd == "fetch-urls":
+        fetch_urls(sys.argv[2])
+    elif cmd == "write":
+        import resolve_pending_write  # placeholder, replaced below

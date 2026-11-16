@@ -5,7 +5,7 @@
  "rent_le_2800": 12514,
  "available_by_dec15_or_unstated": 12514,
  "one_or_two_unstated_none_failed": 4448,
- "  buildings_at_that_point": 2597,
+ "  buildings_at_that_point": 2504,
  "in_thin_year_hood_incl_crime_cut": 633,
  "  of_which_in_crime_cut_hoods": {
   "ct:new-haven": 112,
@@ -23,11 +23,11 @@
   "The Quiet-Street Year": 220,
   "The Walk-Everywhere Year": 62
  },
- "candidate_buildings": 219,
+ "candidate_buildings": 204,
  "  by_year_buildings": {
-  "The Fresh-Start Year": 110,
-  "The Quiet-Street Year": 49,
-  "The Walk-Everywhere Year": 60
+  "The Fresh-Start Year": 100,
+  "The Quiet-Street Year": 46,
+  "The Walk-Everywhere Year": 58
  },
  "  by_pending_reason": {
   "elevator": 210,
@@ -40,5 +40,5 @@
   "movein;proof": 4
  },
  "buildings_taken": 150,
- "candidate_units_in_taken_buildings": 448
+ "candidate_units_in_taken_buildings": 463
 }

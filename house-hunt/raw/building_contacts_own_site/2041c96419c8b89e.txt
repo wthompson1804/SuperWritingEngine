@@ -1,0 +1,26 @@
+Sitemap: https://ethoskelsey.com/sitemap.xml
+User-agent: AdsBot-Google
+Disallow: /api/
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: SiteAuditBot
+Crawl-delay: 10
+
+User-agent: PetalBot
+Crawl-delay: 10
+
+User-agent: dotbot
+Crawl-delay: 10
+
+User-agent: *
+Disallow: /thankyou
+Disallow: /modules/
+Disallow: /internal/
+Disallow: /thank-you
+Disallow: /home-search/account
+Disallow: /home-search/auth/
+Disallow: /api/
+Disallow: /cdn-cgi/
+Disallow: /modals.html
