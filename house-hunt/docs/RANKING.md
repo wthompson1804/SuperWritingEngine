@@ -172,7 +172,19 @@ Cove, Halstead Parsippany, The Confluence were added after independent check 4).
 | Dog | 8 | walk to green, park area, dog park, vets, dog amenities, **a weight limit of 25 lb or more, or no limit** (10), woods, pet shops, pet rent |
 | Daily life | 8 | supermarket distance, cafés on foot, gyms, distance from the motorway, farmers' market, corner stores, library |
 
-In-unit laundry counts only when the amenities say so or the listing says "in unit"; a shared laundry room does not.
+In-unit laundry counts only where the master says `in_unit_laundry = yes`: a source says the washer / dryer or the
+laundry is IN the apartment, and no source says it is not (`parsers.laundry_facts`, applied in `build_master.py` to every
+source's own words: the listing's laundry field, the amenities page with the sentence it was read from, a checker's
+fact). A checker's "not in unit" settles it against a listing site's appliance tags (153-10 88th Ave). Hookups alone are
+`washer_dryer_hookups`; a shared room is `on_site_laundry` (`in_unit_laundry = on_site_only` when nothing is in the
+apartment); "select apartments have a washer" is `select_apartments` and does not score (Beacon Mill Village). The
+`laundry` label beside the flag is written from the same facts, so the two cannot disagree.
+
+Dog amenities are structured the same way (`parsers.dog_amenity_facts`, every source's words): `dog_park_or_run` only
+where a source names a dog park, dog run, bark park, pet park or fenced dog area on the property; `pet_spa_or_wash`
+for a pet spa, grooming room or dog wash; `dog_amenity_unspecified` where a source says only "yes". The Dog part's
+"dog amenities" variable still counts any of the three. `dog_amenities` stays as the label (`dog run; dog park; pet spa;
+dog wash`, or `yes` when unspecified).
 The security points count a staffed front of any kind, as before. The AMENITY shown is separate: `doorman` only where a
 source says doorman, `concierge` only where a source says concierge, `front_desk` for an attended lobby or desk called
 neither (`parsers.staff_from_sources`).
@@ -234,7 +246,10 @@ then rank score, then `listing_id`.
 - **Neighborhoods.** `neighborhoods` holds only places with at least one shown apartment; a place with only an avoid card
   is in `neighborhoods_avoid_only` and is not counted anywhere. `safety.status` is `published` or `not_published` (no
   agency publishes a rate for the town alone: the safety rule could not be tested there; `status_note` says why).
-  `shown_figures` are medians over the shown apartments; `traits` describe the wider area profile.
+  `shown_figures` are the median BUILDING's figures (one vote per shown building, then the median over the buildings:
+  the same computation as the written text and "At a glance"), and `buildings_with_own_dog_area` counts only
+  `dog_park_or_run`; `traits` describe the wider area profile. `meta.notes` and `meta.moment_thresholds` are plain
+  sentences for the reader (no field names).
 - **Reader text.** `confirm.label / why / question`, each disclosure's `label / why / question`, each cost line's `note`
   and every tour question are written in `scripts/build_page_data.py` from a reason code and structured fields
   (apartment, never unit; dates in full; no file paths or working vocabulary). The working note is kept in
@@ -253,7 +268,7 @@ then rank score, then `listing_id`.
 | Morning with the dog (`wake`) | minutes on foot to the nearest green space | 3 or less | up to 10 | more than 10 |
 | Work day at home (`work`) | size and a separate bedroom | a separate bedroom and 700 sq ft or more | between | under 550 sq ft, or a studio under 600 |
 | Evening out (`after`) | restaurants and bars within 800 m | 15+ restaurants and a bar | 4+ restaurants | fewer than 4 |
-| The car at night (`night`) | where the car sleeps | garage or gated parking and a front desk or controlled entry | garage with neither, covered, lot, off-site, unknown | street only, or the town restricts overnight parking and no space is confirmed |
+| The car at night (`night`) | where you would park overnight | garage or gated parking and a front desk or controlled entry | garage with neither, covered, lot, off-site, unknown | street only, or the town restricts overnight parking and no space is confirmed |
 | Saturday (`sat`) | bars and restaurants within 1,600 m | 5+ bars and 30+ restaurants | between | at most 1 bar and fewer than 15 restaurants |
 | Sunday with her parents (`sun`) | drive one way | 30 minutes or less | 31 to 60 | more than 60 |
 
@@ -273,6 +288,7 @@ then rank score, then `listing_id`.
 | 2026-11-16 | Evidence batch 20 (190 shown apartments re-read): the 12-month price is used wherever the page gives one and it differs, whatever the quoted term (was: only for leases over 13 months, and only when higher); a 12-month price is never taken from a fact about another unit (a dollar amount such as "$2,616" no longer reads as unit 616); sibling long-lease rule (one open "listing" fact, nothing guessed); a listing page that is gone takes every unit on it; reviewed page-date corrections (Grandville Towers) |
 | 2026-11-16 | Owner ("Forget call check"): the "not re-checked live" flag is dropped. A listing never re-read is not an open item in any rule; the thin rule's "well attested" is "no open gate fact"; ties are broken by `listing_id` only; `needs_live_check.csv` and the "awaiting live check" list are gone. A problem a re-read found still counts |
 | 2026-11-16 | After independent check 4: every building's point checked against its address (Harbor Pointe is in Bayonne, Parkway Lofts in Bloomfield) and `city` from geography; second-site rule for availability; garden-style rule no longer escaped by a label that reads as floor 4; plan letters are not apartments; a sequential apartment number that reads as floor 1; numbering conventions per complex (The Grove Somerset 2141, 3172, 4149, 4171 restored); income, credit and furnished disclosures; lease-term disclosure for any term that is not 12 months; doorman and concierge apart; `resident_review` basis; building floors from the largest stated count; "up to" kept on offers; avoid-only neighborhoods in their own array; `safety.status`; reader text from templates |
+| 2026-11-16 | Pipeline clean-up: laundry and dog amenities derived from every source's words (structured fields; the label beside a flag agrees with it); `buildings_with_own_dog_area` counts only a dog park or run; `shown_figures` over buildings, not apartments; `meta.notes` and `meta.moment_thresholds` as reader sentences; American spelling in our own rule summaries (quotes untouched) |
 
 Superseded and no longer true anywhere: "the lease-term disclosure starts above 13 months", "no label reads above floor 3" as a condition of the garden-style rule for labels that name their building, `doorman` as "doorman or concierge", "the 12-month price only for leases longer than 13 months", "at most 2 per building" for the shown list, "best 10 per neighborhood", "top 15
 candidates then the best 10", a floor-plan row shown with an availability asterisk, "weight limit stated ≥ 40 lb",
