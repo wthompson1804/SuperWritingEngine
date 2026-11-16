@@ -552,6 +552,13 @@ def write():
         if bad and not [p for p in b["pages"] if p.get("path")]:
             blocked_sites[b["bkey"]] = f"{bad[0]['url']} -> {bad[0]['status']}"
 
+    # all-in warning: what this building's already-judged units carry on top of rent (scripts/all_in.py results, read-only)
+    M = pd.read_csv(DATA / "master_units.csv", dtype=str, keep_default_na=False,
+                    usecols=["building_name", "zip5", "listed_rent", "all_in", "cost_gate"])
+    M["over"] = pd.to_numeric(M.all_in, errors="coerce") - pd.to_numeric(M.listed_rent, errors="coerce")
+    M["nkey"] = M.building_name.map(nk) + "|" + M.zip5.str.zfill(5)
+    overhead = M[M.building_name != ""].groupby("nkey").over.median().dropna().to_dict()
+
     confirm, facts, live, resolved = [], [], [], []
     for bk, g in C.groupby("bkey", sort=False):
         nks = set(g.nkey[g.building_name != ""])
@@ -606,7 +613,7 @@ def write():
 
         # ---------- dogs (building level)
         dog = None                       # (value, weight, quote, url, at, how)
-        yes = X[X.dogs.str.lower() == "yes"]
+        yes = X[(X.dogs.str.lower() == "yes") & (X.detail_level != "card")]     # a search card is not a page reading
         no = X[X.dogs.str.lower() == "no"]
         if len(yes) and len(no):
             y, n = yes.iloc[0], no.iloc[0]
@@ -617,7 +624,7 @@ def write():
             y = yes[yes.source_site != "trulia"].iloc[0] if (yes.source_site != "trulia").any() else yes.iloc[0]
             # A managed community has one pet policy; a co-op/condo or small building listed unit by unit does not.
             # Another unit's listing counts only for a community (5+ listings of it, or a building-level page).
-            community = len(X) >= 5 or yes.detail_level.str.startswith("building").any() or y.listing_id in set(g.listing_id)
+            community = len(X) >= 5 or yes.detail_level.str.startswith("building").any()
             dog = ("yes" if community else "other_unit_only", str(int(wl.min())) if len(wl) else "", y.dog_policy_text[:220], y.url, y.last_seen,
                    f"dog policy on the {y.source_site} page of the same building" + ("" if y.listing_id in set(g.listing_id) else " (another listing of this building)"))
         if not dog:
@@ -780,6 +787,11 @@ def write():
             dup = pass_tails.get(unit_tail(r.unit), "") or seen_tails.get(unit_tail(r.unit), "") if unit_tail(r.unit) else ""
             if unit_tail(r.unit):
                 seen_tails.setdefault(unit_tail(r.unit), r.listing_id)
+            oh = overhead.get(r.nkey)
+            warn = ""
+            if oh is not None and float(r.listed_rent) + oh > 3000:
+                warn = (f"all-in likely over $3,000: units of this building already judged carry about ${oh:.0f} a month on top of rent "
+                        f"(fees, pet rent, parking, utilities), so rent would need to be ${3000 - oh:.0f} or less")
             if fails:
                 verdict = "fails (" + "; ".join(fails) + ")"
             elif opens:
@@ -790,7 +802,7 @@ def write():
                          "", checked, "; ".join(n for n in notes if n)])
             resolved.append([r.listing_id, r.addr_key, bname, r.unit, r.hood, r.year, r.listed_rent, ";".join(reasons),
                              " ; ".join(how), verdict, src_url, checked, dup, len(opens) if not fails else 0,
-                             "; ".join(n for n in notes if n), len(passing)])
+                             "; ".join(n for n in notes if n), len(passing), warn])
         if len(g):
             Ld = None
             for u in dict.fromkeys(g.url):
@@ -816,16 +828,30 @@ def write():
                                 "retrieved_at"], [])
     dump("resolved_candidates.csv", ["listing_id", "addr_key", "building", "unit", "hood", "year", "rent", "missing_fact", "how_settled",
                                      "verdict", "source_url", "checked_at", "duplicate_of", "open_questions", "notes",
-                                     "units_of_building_already_passing"], resolved)
+                                     "units_of_building_already_passing", "all_in_warning"], resolved)
     R = pd.DataFrame(resolved, columns=["listing_id", "addr_key", "building", "unit", "hood", "year", "rent", "missing", "how", "verdict",
-                                        "src", "at", "dup", "nq", "notes", "npass"])
+                                        "src", "at", "dup", "nq", "notes", "npass", "warn"])
     R["v"] = R.verdict.str.split(" ").str[0]
     R["bkey"] = C.set_index("listing_id").bkey.reindex(R.listing_id).values
     print(R.v.value_counts().to_dict())
     print(R.groupby(["year", "v"]).agg(units=("listing_id", "size"), buildings=("bkey", "nunique")).to_string())
+    # call sheet: one row per building that is one answer away
+    O = R[(R.v == "still_open") & (R.nq == 1)].copy()
+    O["question"] = O.verdict.str.replace(r"^still_open \(|\)$", "", regex=True)
+    O["rent"] = pd.to_numeric(O.rent)
+    cs = O.groupby(["year", "hood", "building", "bkey"]).agg(units=("listing_id", "size"), min_rent=("rent", "min"),
+                                                             question=("question", "first"), already_passing_units=("npass", "max"),
+                                                             all_in_warning=("warn", lambda x: next((w for w in x if w), "")),
+                                                             example_url=("src", "first")).reset_index()
+    cs.sort_values(["year", "hood", "units"], ascending=[True, True, False]).drop(columns="bkey").to_csv(OUT / "open_questions_by_building.csv", index=False)
     summary = {"verdicts": R.v.value_counts().to_dict(),
+               "now_passes_with_all_in_warning": int(((R.v == "now_passes") & (R.warn != "")).sum()),
                "now_passes_new_units": int(((R.v == "now_passes") & (R.dup == "")).sum()),
                "now_passes_duplicates_of_passing_units": int(((R.v == "now_passes") & (R.dup != "")).sum()),
+               "now_passes_by_year_hood_building": {f"{k[0]} | {k[1]} | {k[2]}": {"units": int(v), "new_units": int(n), "already_passing_units_in_building": int(p)}
+                                                    for k, v, n, p in [(k, len(x), (x.dup == "").sum(), pd.to_numeric(x.npass).max())
+                                                                       for k, x in R[R.v == "now_passes"].groupby(["year", "hood", "building"])]},
+               "still_open_single_question_in_buildings_with_no_passing_unit": int(((R.v == "still_open") & (R.nq == 1) & (pd.to_numeric(R.npass) == 0)).sum()),
                "still_open_single_question": int(((R.v == "still_open") & (R.nq == 1)).sum()),
                "still_open_single_question_buildings": int(R[(R.v == "still_open") & (R.nq == 1)].bkey.nunique()),
                "refused_hosts": refused()}

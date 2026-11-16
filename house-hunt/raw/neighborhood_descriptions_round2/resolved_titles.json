@@ -975,7 +975,8 @@
  "Erasmus, Brooklyn": {
   "offset": 20590873159,
   "end": 20591147530,
-  "page_id": 61516271
+  "page_id": 61516271,
+  "redirect_to": "East Flatbush, Brooklyn"
  },
  "Downtown Newark": {
   "offset": 2589773964,
@@ -985,7 +986,8 @@
  "Downtown Danbury": {
   "offset": 10195953708,
   "end": 10196062271,
-  "page_id": 22583216
+  "page_id": 22583216,
+  "redirect_to": "Main Street Historic District (Danbury, Connecticut)"
  },
  "Liberty State Park": {
   "offset": 1773620322,
@@ -1009,7 +1011,8 @@
  "Downtown New Brunswick": {
   "offset": 23331190887,
   "end": 23331315632,
-  "page_id": 71431948
+  "page_id": 71431948,
+  "redirect_to": "New Brunswick, New Jersey"
  },
  "Orange station (NJ Transit)": {
   "offset": 5321911775,
@@ -1052,7 +1055,8 @@
  "Downtown Flushing": {
   "offset": 18797361858,
   "end": 18797469618,
-  "page_id": 54654806
+  "page_id": 54654806,
+  "redirect_to": "Chinatowns in Queens"
  },
  "Bergen Square": {
   "offset": 7376607329,
@@ -1072,7 +1076,8 @@
  "Jamaica Hills": {
   "offset": 6469617013,
   "end": 6469711907,
-  "page_id": 9122990
+  "page_id": 9122990,
+  "redirect_to": "Jamaica Hills, Queens"
  },
  "Seaside Park (Connecticut)": {
   "offset": 11784019278,
@@ -1118,17 +1123,20 @@
  "Exchange Place (Jersey City)": {
   "offset": 10935408967,
   "end": 10935474318,
-  "page_id": 25073857
+  "page_id": 25073857,
+  "redirect_to": "Exchange Place, Jersey City"
  },
  "Jersey City Heights": {
   "offset": 6513107806,
   "end": 6513187052,
-  "page_id": 9281703
+  "page_id": 9281703,
+  "redirect_to": "The Heights, Jersey City"
  },
  "South Norwalk": {
   "offset": 21729577889,
   "end": 21729737263,
-  "page_id": 65731391
+  "page_id": 65731391,
+  "redirect_to": "South Norwalk, Connecticut"
  },
  "St. George Terminal": {
   "offset": 6335067467,
@@ -1159,7 +1167,8 @@
  "West Side Avenue": {
   "offset": 10692192961,
   "end": 10692306481,
-  "page_id": 24214727
+  "page_id": 24214727,
+  "redirect_to": "West Side, Jersey City"
  },
  "Prospect Park (Brooklyn)": {
   "offset": 1127421524,

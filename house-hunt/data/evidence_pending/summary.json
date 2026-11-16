@@ -1,11 +1,30 @@
 {
  "verdicts": {
-  "still_open": 390,
-  "now_passes": 68,
+  "still_open": 393,
+  "now_passes": 65,
   "fails": 5
  },
- "now_passes_new_units": 64,
+ "now_passes_with_all_in_warning": 62,
+ "now_passes_new_units": 61,
  "now_passes_duplicates_of_passing_units": 4,
+ "now_passes_by_year_hood_building": {
+  "The Fresh-Start Year | Harrison | Vermella Harrison": {
+   "units": 2,
+   "new_units": 2,
+   "already_passing_units_in_building": 0
+  },
+  "The Quiet-Street Year | Berkeley Heights | RT 500": {
+   "units": 59,
+   "new_units": 59,
+   "already_passing_units_in_building": 3
+  },
+  "The Quiet-Street Year | Teaneck | Avalon Teaneck": {
+   "units": 4,
+   "new_units": 0,
+   "already_passing_units_in_building": 7
+  }
+ },
+ "still_open_single_question_in_buildings_with_no_passing_unit": 217,
  "still_open_single_question": 289,
  "still_open_single_question_buildings": 82,
  "refused_hosts": {
