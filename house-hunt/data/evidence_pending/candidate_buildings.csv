@@ -1,0 +1,220 @@
+bkey,n_units,min_rent,year,hood_id,hood,building_name,address,city,state,zip5,sources,reasons,rank,taken
+500 avalon square|08550,65,2395.0,The Quiet-Street Year,nj:princeton,Princeton,Avalon W Squared At Princeton Junction,500 Avalon Square #3085,West Windsor,NJ,08550,apartmentlist.com;avaloncommunities.com,elevator,1,True
+500 district dr|07922,59,2622.0,The Quiet-Street Year,nj:berkeley-heights,Berkeley Heights,RT 500,500 District Drive,Summit,NJ,07922,apartmentlist.com;greystar.com,dog;elevator,2,True
+150 glover ave|06850,18,1915.0,The Fresh-Start Year,ct:norwalk,Norwalk,The Curb at North Seven,150 Glover Avenue,Norwalk,CT,06850,bltliveworkplay.com (SightMap embed),dog;elevator,3,True
+11 us hwy 1 new brunswick nj 08901 usa|08901,11,2460.0,The Fresh-Start Year,nj:new-brunswick,New Brunswick,"Raritan Heights Phase III , LLC","11 Us Highway 1, New Brunswick, NJ 08901, USA",New Brunswick,NJ,08901,zumper,movein,4,True
+one chester circle|08901,10,1636.0,The Fresh-Start Year,nj:new-brunswick,New Brunswick,The Gardens at Raritan,One Chester Circle,New Brunswick,NJ,08901,apartmentlist.com,elevator,5,True
+10 willard rd|06851,10,2362.0,The Fresh-Start Year,ct:norwalk,Norwalk,The Beacon Apartments,10 Willard Road,Norwalk,CT,06851,www.thebeaconnorwalk.com (SightMap embed),elevator,6,True
+64 danbury rd|06897,10,2650.0,The Quiet-Street Year,ct:wilton,Wilton,Brookside Wilton,64 Danbury Road,Wilton,CT,06897,apartmentlist.com,elevator,7,True
+25 hickory pl|07928,9,2604.0,The Quiet-Street Year,nj:chatham,Chatham,Chatham Hill Apartments,25 Hickory Pl,Chatham,NJ,07928,apartmentlist.com,elevator,8,True
+330 angelo cifelli dr|07029,8,2505.0,The Fresh-Start Year,nj:harrison,Harrison,330 Harrison Station,330 Angelo Cifelli Drive,Harrison,NJ,07029,apartmentlist.com,elevator,9,True
+100 hiram sq new brunswick nj 08901 usa|08901,6,2169.0,The Fresh-Start Year,nj:new-brunswick,New Brunswick,The Brunswick,"100 Hiram Sq, New Brunswick, NJ 08901, USA",New Brunswick,NJ,08901,zumper,movein,10,True
+1100 frank e rodgers blvd s harrison nj 07029 usa|07029,6,2229.0,The Fresh-Start Year,nj:harrison,Harrison,Vermella Harrison,"1100 Frank E Rodgers Blvd S, Harrison, NJ 07029, USA",Harrison,NJ,07029,zumper,movein,11,True
+300 somerset st|07029,6,2460.0,The Fresh-Start Year,nj:harrison,Harrison,Harrison Station,300 Somerset St,Harrison,NJ,07029,apartmentlist.com,elevator,12,True
+515 w ave norwalk ct 06850 usa|06850,6,2531.0,The Fresh-Start Year,ct:norwalk,Norwalk,The Waypointe,"515 West Ave, Norwalk, CT 06850, USA",Norwalk,CT,06850,zumper,movein,13,True
+515 w ave|06850,6,2531.0,The Fresh-Start Year,ct:norwalk,Norwalk,The Waypointe Apartments,515 West Ave,Norwalk,CT,06850,zumper,movein,14,True
+35 37 39 elliott pl|11787,5,2155.0,The Quiet-Street Year,ny:smithtown,Smithtown,Fairfield At Smithtown,"35, 37, 39 Elliott Place",Smithtown,NY,11787,fairfieldproperties.com,elevator;movein,15,True
+230 e ave norwalk ct 06855 usa|06855,5,2192.0,The Fresh-Start Year,ct:norwalk,Norwalk,Brim and Crown,"230 East Ave, Norwalk, CT 06855, USA",Norwalk,CT,06855,zumper,movein,16,True
+230 e ave|06855,5,2192.0,The Fresh-Start Year,ct:norwalk,Norwalk,Brim and Crown,230 East Ave,Norwalk,CT,06855,zumper,movein,17,True
+1775 windsor rd teaneck nj 07666 usa|07666,5,2280.0,The Quiet-Street Year,nj:teaneck,Teaneck,Avalon Teaneck,"1775 Windsor Rd, Teaneck, NJ 07666, USA",Teaneck,NJ,07666,zumper,elevator;movein,18,True
+101-616 goodmans crossing|07076,4,1995.0,The Quiet-Street Year,nj:scotch-plains,Scotch Plains,Riverview Terrace,101-616 Goodmans Crossing,Clark,NJ,07076,apartmentlist.com,elevator,19,True
+10 lytle st|08542,4,2100.0,The Quiet-Street Year,nj:princeton,Princeton,10 Lytle Street,10 Lytle Street,Princeton,NJ,08542,apartmentlist.com,dog;elevator,20,True
+100 thanet circle|08540,4,2471.0,The Quiet-Street Year,nj:princeton,Princeton,Avalon Princeton Circle,100 Thanet Circle,Princeton,NJ,08540,apartmentlist.com,elevator,21,True
+123 water st norwalk ct 06854 usa|06854,4,2490.0,The Fresh-Start Year,ct:norwalk,Norwalk,Harbourside SoNo,"123 Water St, Norwalk, CT 06854, USA",Norwalk,CT,06854,zumper,movein,22,True
+123 water st|06854,4,2490.0,The Fresh-Start Year,ct:norwalk,Norwalk,Harbourside SoNo,123 Water St,Norwalk,CT,06854,zumper,movein,23,True
+1775 windsor rd|07666,4,2516.0,The Quiet-Street Year,nj:teaneck,Teaneck,Avalon Teaneck,1775 Windsor Road #215,Teaneck,NJ,07666,avaloncommunities.com,elevator,24,True
+289 main ave|06851,3,1650.0,The Fresh-Start Year,ct:norwalk,Norwalk,The Flats at 289 Main,289 Main Avenue,Norwalk,CT,06851,apartmentlist.com;trulia,elevator,25,True
+8 union ave|06851,3,1795.0,The Fresh-Start Year,ct:norwalk,Norwalk,8 Union Ave LLC,8 Union Ave,Norwalk,CT,06851,trulia,elevator,26,True
+510 millburn ave|07078,3,1995.0,The Quiet-Street Year,nj:millburn,Millburn,510 Millburn Avenue Apts,510 Millburn Avenue,Short Hills,NJ,07078,apartmentlist.com,elevator,27,True
+4828 tonnelle ave|07047,3,2172.0,The Fresh-Start Year,nj:north-bergen,North Bergen,The Rail at North Bergen,4828 Tonnelle Avenue,North Bergen,NJ,07047,apartmentlist.com,elevator,28,True
+1 bergen st|07029,3,2275.0,The Fresh-Start Year,nj:harrison,Harrison,Dey & Bergen,1 Bergen Street,Harrison,NJ,07029,apartmentlist.com,elevator,29,True
+new brunswick nj usa|08901,3,2320.0,The Fresh-Start Year,nj:new-brunswick,New Brunswick,The Vue,"New Brunswick, NJ, USA",New Brunswick,NJ,08901,zumper,movein,30,True
+116 smithtown blvd|11787,3,2335.0,The Quiet-Street Year,ny:smithtown,Smithtown,Fairfield Manor At Nesconset,116 Smithtown Boulevard,Nesconset,NY,11787,fairfieldproperties.com,elevator;movein,31,True
+55 n water st|06854,3,2420.0,The Fresh-Start Year,ct:norwalk,Norwalk,The Sheffield SoNo,55 N Water St,Norwalk,CT,06854,trulia,elevator,32,True
+100 albert way princeton nj 08540 usa|08540,3,2550.0,The Quiet-Street Year,nj:princeton,Princeton,Avalon Princeton,"100 Albert Way, Princeton, NJ 08540, USA",Princeton,NJ,08540,zumper,elevator;movein,33,True
+100 albert way|08540,3,2550.0,The Quiet-Street Year,nj:princeton,Princeton,Avalon Princeton,100 Albert Way #1256,Princeton,NJ,08540,apartmentlist.com;avaloncommunities.com;trulia,elevator,34,True
+5665 john f kennedy blvd|07047,3,2570.0,The Fresh-Start Year,nj:north-bergen,North Bergen,Avalon North Bergen,5665 John F. Kennedy Boulevard,North Bergen,NJ,07047,apartmentlist.com,elevator,35,True
+1 richmond st|08901,3,2603.0,The Fresh-Start Year,nj:new-brunswick,New Brunswick,Renaissance Plaza Square,1 Richmond St,New Brunswick,NJ,08901,apartmentlist.com;zumper,elevator;proof,36,True
+130 fairchild ave|06825,2,1550.0,The Quiet-Street Year,ct:fairfield,Fairfield,Fairchild Apartments,130 Fairchild Ave,Fairfield,CT,06825,trulia,elevator,37,True
+1 chester cir|08901,2,1636.0,The Fresh-Start Year,nj:new-brunswick,New Brunswick,Gardens At Raritan,1 Chester Cir,New Brunswick,NJ,08901,zumper,elevator;proof,38,True
+3 bedford ave|06850,2,1895.0,The Fresh-Start Year,ct:norwalk,Norwalk,3 Bedford LLC,3 Bedford Ave,Norwalk,CT,06850,trulia,elevator,39,True
+1452 center ave|07024,2,2005.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,Palisades Gardens Apartments,1452 Center Avenue,Fort Lee,NJ,07024,apartmentlist.com,elevator,40,True
+1 n water st norwalk ct 06854 usa|06854,2,2041.0,The Fresh-Start Year,ct:norwalk,Norwalk,Iron Works Sono,"1 N Water St, Norwalk, CT 06854, USA",Norwalk,CT,06854,zumper,movein,41,True
+1 n water st|06854,2,2041.0,The Fresh-Start Year,ct:norwalk,Norwalk,Iron Works Sono,1 N Water St,Norwalk,CT,06854,zumper,movein,42,True
+60 paterson st|08901,2,2075.0,The Fresh-Start Year,nj:new-brunswick,New Brunswick,Skyline Tower,60 Paterson St,New Brunswick,NJ,08901,apartmentlist.com,elevator,43,True
+32 prospect ave|06850,2,2115.0,The Fresh-Start Year,ct:norwalk,Norwalk,Soundview Apartments,32 Prospect Ave,Norwalk,CT,06850,trulia,elevator,44,True
+1 chestnut st norwalk ct 06854 usa|06854,2,2150.0,The Fresh-Start Year,ct:norwalk,Norwalk,Shirt Factory Lofts and The Platform,"1 Chestnut St, Norwalk, CT 06854, USA",Norwalk,CT,06854,zumper,elevator;movein,45,True
+1 chestnut st|06854,2,2150.0,The Fresh-Start Year,ct:norwalk,Norwalk,Shirt Factory Lofts and The Platform,1 Chestnut St,Norwalk,CT,06854,zumper,elevator;movein,46,True
+1100 frank|07029,2,2176.0,The Fresh-Start Year,nj:harrison,Harrison,Vermella Harrison,1100 Frank,E Rodgers Blvd. S Harrison,NJ,07029,vermellaharrison.com,elevator,47,True
+1100 s 5th st harrison nj 07029 usa|07029,2,2250.0,The Fresh-Start Year,nj:harrison,Harrison,The Wyldes,"1100 S 5th St, Harrison, NJ 07029, USA",Harrison,NJ,07029,zumper,elevator;movein,48,True
+805 saint marks ave brooklyn ny 11213 usa|11213,2,2300.0,The Walk-Everywhere Year,ny:crown-heights-north-,Crown Heights (North),805 St. Marks Avenue,"805 Saint Marks Ave, Brooklyn, NY 11213, USA",New York,NY,11213,zumper,movein,49,True
+4 summer st|06851,2,2395.0,The Fresh-Start Year,ct:norwalk,Norwalk,Summerview Square,4 Summer Street,Norwalk,CT,06851,apartmentlist.com,dog;elevator,50,True
+1 bates ct|06854,2,2400.0,The Fresh-Start Year,ct:norwalk,Norwalk,SONO One,1 Bates Ct,Norwalk,CT,06854,trulia,elevator,51,True
+936 w end ave|10025,2,2400.0,The Walk-Everywhere Year,ny:upper-west-side-manhattan-valley,Upper West Side-Manhattan Valley,936 West End Avenue,936 West End Avenue,New York City,NY,10025,apartmentlist.com;trulia,dog;movein;proof,52,True
+1 lone pine dr|07922,2,2408.0,The Quiet-Street Year,nj:berkeley-heights,Berkeley Heights,Modera Berkeley Heights,1 Lone Pine Drive,New Providence,NJ,07922,apartmentlist.com,elevator,53,True
+1 harrison ave|07029,2,2435.0,The Fresh-Start Year,nj:harrison,Harrison,One Harrison,1 Harrison Avenue,Harrison,NJ,07029,apartmentlist.com,elevator,54,True
+219 ash creek blvd|06824,2,2471.0,The Quiet-Street Year,ct:fairfield,Fairfield,Creekline at Fairfield,219 Ash Creek Boulevard,Bridgeport,CT,06824,apartmentlist.com,elevator,55,True
+country club blvd|07076,2,2479.0,The Quiet-Street Year,nj:scotch-plains,Scotch Plains,Country Club Village North,Country Club Boulevard,Scotch Plains,NJ,07076,gardencommunities.com,dog;elevator,56,True
+26 belden ave norwalk ct 06850 usa|06850,2,2512.0,The Fresh-Start Year,ct:norwalk,Norwalk,The Confluence at Norwalk,"26 Belden Ave, Norwalk, CT 06850, USA",Norwalk,CT,06850,zumper,movein,57,True
+26 belden ave|06850,2,2512.0,The Fresh-Start Year,ct:norwalk,Norwalk,The Confluence at Norwalk,26 Belden Ave,Norwalk,CT,06850,zumper,movein,58,True
+5665 kennedy blvd|07047,2,2650.0,The Fresh-Start Year,nj:north-bergen,North Bergen,Avalon North Bergen,5665 Kennedy Blvd Apt 523,North Bergen,NJ,07047,avaloncommunities.com,elevator,59,True
+5201 city pl|07020,2,2795.0,The Fresh-Start Year,nj:edgewater,Edgewater,5201 City Place,5201 City Place,Edgewater,NJ,07020,apartmentlist.com;zumper,elevator;proof,60,True
+2-40 51st ave|11101,1,1050.0,The Fresh-Start Year,ny:long-island-city-hunters-point,Long Island City-Hunters Point,240 51st Ave,2-40 51st Avenue,Queens,NY,11101,apartmentlist.com,dog,61,True
+118 adams st|07030,1,1100.0,The Walk-Everywhere Year,nj:hoboken,Hoboken,118 Adams St,118 Adams Street,Hoboken,NJ,07030,apartmentlist.com,dog;elevator,62,True
+25-40 31st st|11102,1,1200.0,The Walk-Everywhere Year,ny:astoria-central-,Astoria (Central),2540 31st St # 5L,25-40 31st Street,Queens,NY,11102,apartmentlist.com,dog,63,True
+300 e 54th st|10022,1,1200.0,The Walk-Everywhere Year,ny:east-midtown-turtle-bay,East Midtown-Turtle Bay,300 E 54th St,300 East 54th Street,New York City,NY,10022,apartmentlist.com,dog,64,True
+327 w 83rd st|10024,1,1200.0,The Walk-Everywhere Year,ny:upper-west-side-central-,Upper West Side (Central),327 W 83rd St,327 West 83rd Street,New York City,NY,10024,apartmentlist.com,dog,65,True
+83-52 talbot st|11415,1,1300.0,The Walk-Everywhere Year,ny:kew-gardens,Kew Gardens,8352 Talbot St Apt 4H,83-52 Talbot Street,Queens,NY,11415,apartmentlist.com,dog,66,True
+5-49 borden ave|11101,1,1400.0,The Fresh-Start Year,ny:long-island-city-hunters-point,Long Island City-Hunters Point,549 Borden Ave Apt 2N,5-49 Borden Avenue,Queens,NY,11101,apartmentlist.com,dog,67,True
+3031 edwin ave|07024,1,1475.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,3031 Edwin Avenue,3031 Edwin Avenue,Fort Lee,NJ,07024,apartmentlist.com,dog;elevator,68,True
+577 lafayette ave|11216,1,1500.0,The Walk-Everywhere Year,ny:bedford-stuyvesant-west-,Bedford-Stuyvesant (West),577 Lafayette Ave,577 Lafayette Avenue,Brooklyn,NY,11216,apartmentlist.com,dog;elevator,69,True
+600 hudson st|07030,1,1500.0,The Walk-Everywhere Year,nj:hoboken,Hoboken,600 Hudson St Apt 1E,600 Hudson Street,Hoboken,NJ,07030,apartmentlist.com,dog;elevator,70,True
+7119 shore rd|11209,1,1500.0,The Walk-Everywhere Year,ny:bay-ridge,Bay Ridge,7119 Shore Rd # 8765,7119 Shore Road,Brooklyn,NY,11209,apartmentlist.com,dog,71,True
+8508 john f kennedy blvd|07047,1,1500.0,The Fresh-Start Year,nj:north-bergen,North Bergen,8508 Kennedy Blvd Apt D3,8508 John F. Kennedy Boulevard,North Bergen,NJ,07047,apartmentlist.com,dog;elevator,72,True
+410 jefferson st|07030,1,1550.0,The Walk-Everywhere Year,nj:hoboken,Hoboken,410 Jefferson St Apt 1L,410 Jefferson Street,Hoboken,NJ,07030,apartmentlist.com,dog;elevator,73,True
+6 3rd ave|07716,1,1585.0,The Quiet-Street Year,nj:atlantic-highlands,Atlantic Highlands,6 3rd Avenue,6 3rd Avenue,Atlantic Highlands,NJ,07716,apartmentlist.com,dog;elevator,74,True
+2 constitution ct|07030,1,1600.0,The Walk-Everywhere Year,nj:hoboken,Hoboken,2 Constitution Ct Apt 1115,2 Constitution Court,Hoboken,NJ,07030,apartmentlist.com,dog,75,True
+333 e 53rd st|10022,1,1600.0,The Walk-Everywhere Year,ny:east-midtown-turtle-bay,East Midtown-Turtle Bay,333 E 53rd St # 1109,333 East 53rd Street,New York City,NY,10022,apartmentlist.com,dog,76,True
+1512 park pl|11213,1,1615.0,The Walk-Everywhere Year,ny:crown-heights-north-,Crown Heights (North),1512 Park Pl,1512 Park Place,Brooklyn,NY,11213,apartmentlist.com,dog,77,True
+1107 72nd st|07047,1,1700.0,The Fresh-Start Year,nj:north-bergen,North Bergen,1107 72ND ST,1107 72nd Street,North Bergen,NJ,07047,apartmentlist.com,dog;elevator,78,True
+13 jefferson st|11206,1,1700.0,The Walk-Everywhere Year,ny:bushwick-west-,Bushwick (West),13 Jefferson St,13 Jefferson Street,Brooklyn,NY,11206,apartmentlist.com,dog;elevator,79,True
+235 e 73rd st|10021,1,1700.0,The Walk-Everywhere Year,ny:upper-east-side-lenox-hill-roosevelt-island,Upper East Side-Lenox Hill-Roosevelt Island,235 E 73rd St Apt 1A,235 East 73rd Street,New York City,NY,10021,apartmentlist.com,dog,80,True
+303 park ave|10022,1,1700.0,The Walk-Everywhere Year,ny:east-midtown-turtle-bay,East Midtown-Turtle Bay,303 Park Ave,303 Park Avenue,New York City,NY,10022,apartmentlist.com,dog;elevator,81,True
+42-62 hunter st|11101,1,1700.0,The Fresh-Start Year,ny:long-island-city-hunters-point,Long Island City-Hunters Point,42-62 Hunter Street,42-62 Hunter Street,Queens,NY,11101,apartmentlist.com,dog;elevator,82,True
+4612 park ave|07086,1,1700.0,The Fresh-Start Year,nj:weehawken,Weehawken,,4612 Park Ave,Weehawken,NJ,07086,trulia,dog;movein,83,True
+88 harvey st|08901,1,1700.0,The Fresh-Start Year,nj:new-brunswick,New Brunswick,88 Harvey Street,88 Harvey Street,New Brunswick,NJ,08901,apartmentlist.com,dog;elevator,84,True
+1650 john st|07024,1,1750.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,1650 John Street,1650 John Street,Fort Lee,NJ,07024,apartmentlist.com,dog;elevator,85,True
+207 flax hill rd|06854,1,1750.0,The Fresh-Start Year,ct:norwalk,Norwalk,207 Flax Hill Road,207 Flax Hill Road,Norwalk,CT,06854,apartmentlist.com,dog;elevator,86,True
+266 main ave|06851,1,1750.0,The Fresh-Start Year,ct:norwalk,Norwalk,266 Main Avenue,266 Main Avenue,Norwalk,CT,06851,apartmentlist.com,dog;elevator,87,True
+32 leonard ave|07716,1,1750.0,The Quiet-Street Year,nj:atlantic-highlands,Atlantic Highlands,32 Leonard Avenue,32 Leonard Avenue,Atlantic Highlands,NJ,07716,apartmentlist.com,dog;elevator,88,True
+7328 kennedy blvd|07047,1,1795.0,The Fresh-Start Year,nj:north-bergen,North Bergen,,7328 Kennedy Blvd,North Bergen,NJ,07047,trulia,movein,89,True
+1 n ave|06851,1,1800.0,The Fresh-Start Year,ct:norwalk,Norwalk,1 North Avenue,1 North Avenue,Norwalk,CT,06851,apartmentlist.com,dog;elevator,90,True
+10-55 47th ave|11101,1,1800.0,The Fresh-Start Year,ny:long-island-city-hunters-point,Long Island City-Hunters Point,1055 47th Ave Apt 3H,10-55 47th Avenue,Queens,NY,11101,apartmentlist.com,dog,91,True
+1511 fulton st|11216,1,1800.0,The Walk-Everywhere Year,ny:bedford-stuyvesant-west-,Bedford-Stuyvesant (West),1511 Fulton St Apt 2B,1511 Fulton Street,Brooklyn,NY,11216,apartmentlist.com,dog,92,True
+18 knapp st|06854,1,1800.0,The Fresh-Start Year,ct:norwalk,Norwalk,18 Knapp Street,18 Knapp Street,Norwalk,CT,06854,apartmentlist.com,dog;elevator,93,True
+266 w 96th st|10025,1,1800.0,The Walk-Everywhere Year,ny:upper-west-side-central-,Upper West Side (Central),266 West 96th Street,266 West 96th Street,New York City,NY,10025,apartmentlist.com,dog;elevator,94,True
+310 94th st|11209,1,1800.0,The Walk-Everywhere Year,ny:bay-ridge,Bay Ridge,310 94th St,310 94th Street,Brooklyn,NY,11209,apartmentlist.com,dog,95,True
+501 u s 46|07847,1,1800.0,The Quiet-Street Year,nj:roxbury,Roxbury,501 Route46Ken,501 U.S. 46,Kenvil,NJ,07847,apartmentlist.com,dog;elevator,96,True
+71 park ave|10016,1,1800.0,The Walk-Everywhere Year,ny:murray-hill-kips-bay,Murray Hill-Kips Bay,71 Park Ave # 2D,71 Park Avenue,New York City,NY,10016,apartmentlist.com,dog;elevator,97,True
+910 park pl|11216,1,1800.0,The Walk-Everywhere Year,ny:crown-heights-north-,Crown Heights (North),910 Park Pl Apt 1D,910 Park Place,Brooklyn,NY,11216,apartmentlist.com,dog;elevator,98,True
+221 lake ave s|11767,1,1825.0,The Quiet-Street Year,ny:smithtown,Smithtown,221 S Lake Avenue,221 Lake Avenue South,Nesconset,NY,11767,apartmentlist.com,dog;elevator,99,True
+156 u s 46|07866,1,1850.0,The Quiet-Street Year,nj:rockaway,Rockaway,156 US 46,156 U.S. 46,Rockaway,NJ,07866,apartmentlist.com,dog;elevator,100,True
+41-07 42nd st|11104,1,1850.0,The Walk-Everywhere Year,ny:sunnyside,Sunnyside,4107 42nd St,41-07 42nd Street,Queens,NY,11104,apartmentlist.com,dog,101,True
+94 washington st|06854,1,1850.0,The Fresh-Start Year,ct:norwalk,Norwalk,94 Washington Street,94 Washington Street,Norwalk,CT,06854,apartmentlist.com,dog;elevator,102,True
+34 glenwood ave|06854,1,1875.0,The Fresh-Start Year,ct:norwalk,Norwalk,34 Glenwood Ave,34 Glenwood Avenue,Norwalk,CT,06854,apartmentlist.com,elevator,103,True
+6 elm st|06850,1,1895.0,The Fresh-Start Year,ct:norwalk,Norwalk,6 Elm St,6 Elm St,Norwalk,CT,06850,trulia,elevator,104,True
+1590 anderson ave|07024,1,1900.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,1590 Anderson Avenue,1590 Anderson Avenue,Fort Lee,NJ,07024,apartmentlist.com,dog;elevator,105,True
+3071 edwin ave 5g fort lee nj 07024 usa|07024,1,1900.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,,"3071 Edwin Ave #5G, Fort Lee, NJ 07024, USA",Fort Lee,NJ,07024,zumper,dog;movein,106,True
+7427 blvd e 3 n bergen nj 07047 usa|07047,1,1900.0,The Fresh-Start Year,nj:north-bergen,North Bergen,,"7427 Boulevard E #3, North Bergen, NJ 07047, USA",North Bergen,NJ,07047,zumper,dog;movein,107,True
+7427 jfk blvd e|07047,1,1900.0,The Fresh-Start Year,nj:north-bergen,North Bergen,7427 BLVD E,7427 JFK Boulevard East,North Bergen,NJ,07047,apartmentlist.com,dog,108,True
+e front st and valleyscent ave|07076,1,1920.0,The Quiet-Street Year,nj:scotch-plains,Scotch Plains,Scotch Plains Gardens,E Front Street and Valleyscent Ave,Scotch Plains,NJ,07076,gardencommunities.com,dog;elevator,109,True
+3 hubbard rd|06897,1,1950.0,The Quiet-Street Year,ct:wilton,Wilton,Three Hubbard Rd LLC,3 Hubbard Rd,Wilton,CT,06897,trulia,elevator,110,True
+31 ferris ave|06854,1,1950.0,The Fresh-Start Year,ct:norwalk,Norwalk,31 Ferris LLC,31 Ferris Ave,Norwalk,CT,06854,trulia,elevator,111,True
+418 main st|07024,1,1950.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,418 Main Street,418 Main Street,Fort Lee,NJ,07024,apartmentlist.com,dog;elevator,112,True
+44 nassau st princeton nj 08542 usa|08542,1,1950.0,The Quiet-Street Year,nj:princeton,Princeton,,"44 Nassau St, Princeton, NJ 08542, USA",Princeton,NJ,08542,zumper,dog;movein,113,True
+44 nassau st|08542,1,1950.0,The Quiet-Street Year,nj:princeton,Princeton,Studio Apartment in Palmer Square,44 Nassau Street,Princeton,NJ,08542,apartmentlist.com,dog,114,True
+7505 palisade ave|07047,1,1950.0,The Fresh-Start Year,nj:north-bergen,North Bergen,7505 Palisade Avenue,7505 Palisade Avenue,North Bergen,NJ,07047,apartmentlist.com,elevator,115,True
+823 anderson ave 3 fort lee nj 07024 usa|07024,1,1950.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,,"823 Anderson Ave #3, Fort Lee, NJ 07024, USA",Fort Lee,NJ,07024,zumper,elevator,116,True
+tussel ln|07076,1,1970.0,The Quiet-Street Year,nj:scotch-plains,Scotch Plains,Riverside Village,Tussel Lane,Scotch Plains,NJ,07076,gardencommunities.com,dog;elevator,117,True
+1100 83rd st|07047,1,1975.0,The Fresh-Start Year,nj:north-bergen,North Bergen,1100 83rd Street,1100 83rd Street,North Bergen,NJ,07047,apartmentlist.com,dog;elevator,118,True
+10 fairview ave|06850,1,2000.0,The Fresh-Start Year,ct:norwalk,Norwalk,10 Fairview Avenue,10 Fairview Avenue,Norwalk,CT,06850,apartmentlist.com,dog;elevator,119,True
+1109 washington st|07030,1,2000.0,The Walk-Everywhere Year,nj:hoboken,Hoboken,1109 WASHINGTON ST,1109 Washington Street,Hoboken,NJ,07030,apartmentlist.com,dog;elevator,120,True
+1600 center ave 9b fort lee nj 07024 usa|07024,1,2000.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,,"1600 Center Ave #9B, Fort Lee, NJ 07024, USA",Fort Lee,NJ,07024,zumper,dog;movein,121,True
+220 e 57th st|10022,1,2000.0,The Walk-Everywhere Year,ny:east-midtown-turtle-bay,East Midtown-Turtle Bay,220 E 57th St Apt 14J,220 East 57th Street,New York City,NY,10022,apartmentlist.com,dog,122,True
+353 e 72nd st|10021,1,2000.0,The Walk-Everywhere Year,ny:upper-east-side-lenox-hill-roosevelt-island,Upper East Side-Lenox Hill-Roosevelt Island,353 E 72nd St Apt 18C,353 East 72nd Street,New York City,NY,10021,apartmentlist.com,dog,123,True
+357 grove st|11237,1,2000.0,The Walk-Everywhere Year,ny:bushwick-west-,Bushwick (West),357 Grove St,357 Grove Street,Brooklyn,NY,11237,apartmentlist.com,dog,124,True
+415 e 54th st|10022,1,2000.0,The Walk-Everywhere Year,ny:east-midtown-turtle-bay,East Midtown-Turtle Bay,,415 E  54th St,New York,NY,10022,trulia,movein,125,True
+queens ny 11103 usa|11103,1,2000.0,The Walk-Everywhere Year,ny:astoria-east-woodside-north-,Astoria (East)-Woodside (North),,"Queens, NY 11103, USA",New York,NY,11103,zumper,dog;movein,126,True
+320 country club ln|07076,1,2099.0,The Quiet-Street Year,nj:scotch-plains,Scotch Plains,Country Club Village,320 Country Club Ln,Scotch Plains,NJ,07076,gardencommunities.com,dog;elevator,127,True
+39 throop ave|08901,1,2100.0,The Fresh-Start Year,nj:new-brunswick,New Brunswick,,39 Throop Ave #201,New Brunswick,NJ,08901,zumper,elevator;proof,128,True
+57 ledgewood dr|06850,1,2100.0,The Fresh-Start Year,ct:norwalk,Norwalk,57 Ledgewood Drive,57 Ledgewood Drive,Norwalk,CT,06850,apartmentlist.com,dog;elevator,129,True
+100 crucible dr|07029,1,2125.0,The Fresh-Start Year,nj:harrison,Harrison,,100 Crucible Dr,Harrison,NJ,07029,trulia,elevator;movein,130,True
+65 winfield st|06855,1,2150.0,The Fresh-Start Year,ct:norwalk,Norwalk,,65 Winfield St #12,Norwalk,CT,06855,zumper,elevator;proof,131,True
+35 elliott pl|11787,1,2155.0,The Quiet-Street Year,ny:smithtown,Smithtown,Fairfield at Smithtown,35 Elliott Pl,Smithtown,NY,11787,trulia,elevator,132,True
+306 springfield ave|07901,1,2180.0,The Quiet-Street Year,nj:summit,Summit,306 Springfield Ave,306 Springfield Avenue,Summit,NJ,07901,apartmentlist.com,dog;elevator,133,True
+246 e 48th st|10017,1,2199.0,The Walk-Everywhere Year,ny:east-midtown-turtle-bay,East Midtown-Turtle Bay,246 E 48th St Apt 5J,246 East 48th Street,New York City,NY,10017,apartmentlist.com,dog,134,True
+489 main st|07024,1,2200.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,489 Main Street,489 Main Street,Fort Lee,NJ,07024,apartmentlist.com,dog;elevator,135,True
+8600 1st ave|07047,1,2200.0,The Fresh-Start Year,nj:north-bergen,North Bergen,8600 1st Avenue - C1,8600 1st Avenue,North Bergen,NJ,07047,apartmentlist.com,elevator,136,True
+660 veterans hwy|11788,1,2235.0,The Quiet-Street Year,ny:smithtown,Smithtown,Fairfield At Hauppauge,660 Veterans Hwy,Hauppauge,NY,11788,trulia,elevator,137,True
+2348 linwood ave|07024,1,2250.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,2348 Linwood Avenue,2348 Linwood Avenue,Fort Lee,NJ,07024,apartmentlist.com,dog,138,True
+9201-9207 john f kennedy blvd|07047,1,2250.0,The Fresh-Start Year,nj:north-bergen,North Bergen,,9201-9207 John F Kennedy Blvd,North Bergen,NJ,07047,trulia,dog,139,True
+248 e 48th st|10017,1,2270.0,The Walk-Everywhere Year,ny:east-midtown-turtle-bay,East Midtown-Turtle Bay,248 E 48th St Apt 5J,248 East 48th Street,New York City,NY,10017,apartmentlist.com,dog,140,True
+333 spruce mill ln|07076,1,2275.0,The Quiet-Street Year,nj:scotch-plains,Scotch Plains,Lamberts Mill Village,333 Spruce Mill Lane,Scotch Plains,NJ,07076,gardencommunities.com,dog;elevator,141,True
+399 main ave|06851,1,2275.0,The Fresh-Start Year,ct:norwalk,Norwalk,Merritt River,399 Main Ave,Norwalk,CT,06851,www.merrittriver.com,movein,142,True
+693 1st ave|10016,1,2285.0,The Walk-Everywhere Year,ny:murray-hill-kips-bay,Murray Hill-Kips Bay,693 1st Ave Apt 39J,693 1st Avenue,New York City,NY,10016,apartmentlist.com,dog;elevator,143,True
+553 undercliff ave|07020,1,2295.0,The Fresh-Start Year,nj:edgewater,Edgewater,,553 Undercliff Ave,Edgewater,NJ,07020,trulia,dog;movein,144,True
+1122 53rd st|07047,1,2300.0,The Fresh-Start Year,nj:north-bergen,North Bergen,Plaza 53,1122 53rd St,North Bergen,NJ,07047,apartmentlist.com,elevator,145,True
+165 w 95th st|10025,1,2300.0,The Walk-Everywhere Year,ny:upper-west-side-central-,Upper West Side (Central),165 West 95th Street,165 West 95th Street,New York City,NY,10025,apartmentlist.com,dog;elevator,146,True
+305 smithtown blvd|11767,1,2300.0,The Quiet-Street Year,ny:smithtown,Smithtown,305 Smithtown Boulevard,305 Smithtown Boulevard,Lake Ronkonkoma,NY,11767,apartmentlist.com,dog;elevator,147,True
+314 e 65th st|10065,1,2300.0,The Walk-Everywhere Year,ny:upper-east-side-lenox-hill-roosevelt-island,Upper East Side-Lenox Hill-Roosevelt Island,314 E 65th St Apt 3B,314 East 65th Street,New York City,NY,10065,apartmentlist.com,dog,148,True
+4 horizon rd|07024,1,2300.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,4 Horizon Road,4 Horizon Road,Fort Lee,NJ,07024,apartmentlist.com,dog,149,True
+153 w 68th st|10023,1,2310.0,The Walk-Everywhere Year,ny:upper-west-side-lincoln-square,Upper West Side-Lincoln Square,153 W 68th St Apt 204,153 West 68th Street,New York City,NY,10023,apartmentlist.com,dog;elevator,150,True
+301 e 65th st|10065,1,2310.0,The Walk-Everywhere Year,ny:upper-east-side-lenox-hill-roosevelt-island,Upper East Side-Lenox Hill-Roosevelt Island,301 E 65th St Apt 3B,301 East 65th Street,New York City,NY,10065,apartmentlist.com,dog,151,False
+285 george st new brunswick nj 08901 usa|08901,1,2334.0,The Fresh-Start Year,nj:new-brunswick,New Brunswick,The George New Brunswick,"285 George St, New Brunswick, NJ 08901, USA",New Brunswick,NJ,08901,zumper,movein,152,False
+1 wall st 3d fort lee nj 07024 usa|07024,1,2350.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,,"1 Wall St #3D, Fort Lee, NJ 07024, USA",Fort Lee,NJ,07024,zumper,elevator,153,False
+1 wall st|07024,1,2350.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,1 Wall Street,1 Wall Street,Fort Lee,NJ,07024,apartmentlist.com,elevator,154,False
+1620 valley st|07024,1,2350.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,1620 Valley Street,1620 Valley Street,Fort Lee,NJ,07024,apartmentlist.com,dog;elevator,155,False
+3 union park s|06850,1,2350.0,The Fresh-Start Year,ct:norwalk,Norwalk,3 Union Park,3 Union Park South,Norwalk,CT,06850,apartmentlist.com,dog;elevator,156,False
+5607 31st ave 5b woodside ny 11377 usa|11377,1,2350.0,The Walk-Everywhere Year,ny:astoria-east-woodside-north-,Astoria (East)-Woodside (North),,"5607 31st Ave #5B, Woodside, NY 11377, USA",New York,NY,11377,zumper,dog;movein,157,False
+311 e 25th st|10010,1,2395.0,The Walk-Everywhere Year,ny:murray-hill-kips-bay,Murray Hill-Kips Bay,311 East 25th Street,311 East 25th Street,New York City,NY,10010,apartmentlist.com,dog,158,False
+1111 river rd|07020,1,2400.0,The Fresh-Start Year,nj:edgewater,Edgewater,1111 RIVER RD,1111 River Road,Edgewater,NJ,07020,apartmentlist.com,dog;elevator,159,False
+125-05 84th ave|11415,1,2400.0,The Walk-Everywhere Year,ny:kew-gardens,Kew Gardens,125-05 84 Avenue,125-05 84th Avenue,Queens,NY,11415,apartmentlist.com,dog,160,False
+191 73rd st 219a brooklyn ny 11209 usa|11209,1,2400.0,The Walk-Everywhere Year,ny:bay-ridge,Bay Ridge,,"191 73rd St #219A, Brooklyn, NY 11209, USA",New York,NY,11209,zumper,dog;movein,161,False
+191 73rd st|11209,1,2400.0,The Walk-Everywhere Year,ny:bay-ridge,Bay Ridge,191 73rd Street,191 73rd Street,Brooklyn,NY,11209,apartmentlist.com,dog,162,False
+25 quintard ave|06854,1,2400.0,The Fresh-Start Year,ct:norwalk,Norwalk,25 Quintard Avenue,25 Quintard Avenue,Norwalk,CT,06854,apartmentlist.com,dog;elevator,163,False
+28 bergen ridge rd|07047,1,2400.0,The Fresh-Start Year,nj:north-bergen,North Bergen,28 BERGEN RIDGE RD,28 Bergen Ridge Road,North Bergen,NJ,07047,apartmentlist.com,dog;elevator,164,False
+359 ovington ave|11209,1,2400.0,The Walk-Everywhere Year,ny:bay-ridge,Bay Ridge,,359 Ovington Ave,Brooklyn,NY,11209,trulia,movein;proof,165,False
+45 tudor city pl 1616 new york ny 10017 usa|10017,1,2400.0,The Walk-Everywhere Year,ny:murray-hill-kips-bay,Murray Hill-Kips Bay,,"45 Tudor City Pl #1616, New York, NY 10017, USA",New York,NY,10017,zumper,dog;movein,166,False
+8300 talbot st 7d kew gardens ny 11415 usa|11415,1,2400.0,The Walk-Everywhere Year,ny:kew-gardens,Kew Gardens,,"8300 Talbot St #Unit# 7d, Kew Gardens, NY 11415, USA",New York,NY,11415,zumper,movein,167,False
+497 springfield ave|07901,1,2420.0,The Quiet-Street Year,nj:summit,Summit,Summit Opera House,497 Springfield Avenue,Summit,NJ,07901,apartmentlist.com,elevator,168,False
+25 grand st|06851,1,2445.0,The Fresh-Start Year,ct:norwalk,Norwalk,,25 Grand St,Norwalk,CT,06851,trulia,elevator,169,False
+2100 linwood ave|07024,1,2450.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,2100 Linwood Avenue,2100 Linwood Avenue,Fort Lee,NJ,07024,apartmentlist.com,dog;elevator,170,False
+391 springfield ave berkeley heights nj 07922 usa|07922,1,2450.0,The Quiet-Street Year,nj:berkeley-heights,Berkeley Heights,391 Springfield Avenue,"391 Springfield Ave, Berkeley Heights, NJ 07922, USA",Berkeley Heights,NJ,07922,zumper,movein,171,False
+|11757,1,2450.0,The Quiet-Street Year,ny:lindenhurst,Lindenhurst,,,Lindenhurst,NY,11757,trulia,elevator,172,False
+31 meadow rd w|11754,1,2466.0,The Quiet-Street Year,ny:smithtown,Smithtown,Cornerstone Kings Park,31 Meadow Road West,Kings Park,NY,11754,greystar.com,elevator,173,False
+1 carlson ct|06855,1,2499.0,The Fresh-Start Year,ct:norwalk,Norwalk,,1 Carlson Ct #1A,Norwalk,CT,06855,zumper,elevator;proof,174,False
+107 halstead ave|10528,1,2500.0,The Quiet-Street Year,ny:harrison,Harrison,107 Halstead Avenue,107 Halstead Avenue,Harrison,NY,10528,apartmentlist.com,dog;elevator,175,False
+11818 union tpke 4j kew gardens ny 11415 usa|11415,1,2500.0,The Walk-Everywhere Year,ny:kew-gardens,Kew Gardens,,"11818 Union Tpke #4J, Kew Gardens, NY 11415, USA",New York,NY,11415,zumper,dog;movein,176,False
+2077 center ave 7e fort lee nj 07024 usa|07024,1,2500.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,,"2077 Center Ave #7E, Fort Lee, NJ 07024, USA",Fort Lee,NJ,07024,zumper,dog;movein,177,False
+2077 center ave|07024,1,2500.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,2077 Center Avenue,2077 Center Avenue,Fort Lee,NJ,07024,apartmentlist.com,dog,178,False
+7002 blvd e|07093,1,2500.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,,7002 Boulevard East,West New York,NJ,07093,trulia,elevator,179,False
+8801 john f kennedy blvd|07047,1,2500.0,The Fresh-Start Year,nj:north-bergen,North Bergen,8801 Kennedy Boulevard,8801 John F. Kennedy Boulevard,North Bergen,NJ,07047,apartmentlist.com,dog,180,False
+8801 kennedy blvd 404 n bergen nj 07047 usa|07047,1,2500.0,The Fresh-Start Year,nj:north-bergen,North Bergen,,"8801 Kennedy Blvd #404, North Bergen, NJ 07047, USA",North Bergen,NJ,07047,zumper,dog;movein,181,False
+835 nesconset hwy|11767,1,2545.0,The Quiet-Street Year,ny:smithtown,Smithtown,Eagle Rock Apartments at Nesconset,835 Nesconset Hwy,Nesconset,NY,11767,trulia,elevator,182,False
+120 crucible dr|07029,1,2550.0,The Fresh-Start Year,nj:harrison,Harrison,,120 Crucible Dr,Harrison,NJ,07029,trulia,elevator;movein,183,False
+|10538,1,2550.0,The Quiet-Street Year,ny:larchmont,Larchmont,,,Larchmont,NY,10538,trulia,elevator;movein,184,False
+5711 john f kennedy blvd|07047,1,2561.0,The Fresh-Start Year,nj:north-bergen,North Bergen,5711 JOHN F KENNEDY BLVD,5711 John F. Kennedy Boulevard,North Bergen,NJ,07047,apartmentlist.com,dog;elevator,185,False
+310 monroe st|07030,1,2591.0,The Walk-Everywhere Year,nj:hoboken,Hoboken,310 MONROE ST,310 Monroe Street,Hoboken,NJ,07030,apartmentlist.com,dog;elevator,186,False
+1 horizon rd 803 fort lee nj 07024 usa|07024,1,2600.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,,"1 Horizon Rd #803, Fort Lee, NJ 07024, USA",Fort Lee,NJ,07024,zumper,dog;movein,187,False
+1 horizon rd|07024,1,2600.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,1 Horizon Road,1 Horizon Road,Fort Lee,NJ,07024,apartmentlist.com,dog,188,False
+445 s wellwood ave|11757,1,2600.0,The Quiet-Street Year,ny:lindenhurst,Lindenhurst,445 S Wellwood Avenue,445 South Wellwood Avenue,Lindenhurst,NY,11757,apartmentlist.com,dog;elevator,189,False
+35 ocean blvd|07716,1,2650.0,The Quiet-Street Year,nj:atlantic-highlands,Atlantic Highlands,35 Ocean Boulevard,35 Ocean Boulevard,Atlantic Highlands,NJ,07716,apartmentlist.com,dog;elevator,190,False
+48 first ave|07716,1,2650.0,The Quiet-Street Year,nj:atlantic-highlands,Atlantic Highlands,48 1st Avenue,48 First Avenue,Atlantic Highlands,NJ,07716,apartmentlist.com,dog;elevator,191,False
+244 w 64th st|10023,1,2665.0,The Walk-Everywhere Year,ny:upper-west-side-lincoln-square,Upper West Side-Lincoln Square,244 West 64th Street,244 West 64th Street,New York City,NY,10023,apartmentlist.com,dog,192,False
+1-15 57th ave|11101,1,2666.0,The Fresh-Start Year,ny:long-island-city-hunters-point,Long Island City-Hunters Point,,1-15 57th Ave,Long Island City,NY,11101,trulia,movein,193,False
+333 e 45th st|10017,1,2675.0,The Walk-Everywhere Year,ny:east-midtown-turtle-bay,East Midtown-Turtle Bay,333 E 45th Street,333 East 45th Street,New York City,NY,10017,apartmentlist.com,dog,194,False
+519 park ave|07076,1,2675.0,The Quiet-Street Year,nj:scotch-plains,Scotch Plains,Forest Park Village,519 Park Avenue,Scotch Plains,NJ,07076,gardencommunities.com,dog;elevator,195,False
+1500 ave at prt|07086,1,2680.0,The Fresh-Start Year,nj:weehawken,Weehawken,Rivers Edge at Port Imperial,1500 Avenue At Prt,Weehawken,NJ,07086,trulia,elevator,196,False
+13247 metropolitan ave 5e kew gardens ny 11418 usa|11418,1,2700.0,The Walk-Everywhere Year,ny:kew-gardens,Kew Gardens,,"13247 Metropolitan Ave #5E, Kew Gardens, NY 11418, USA",New York,NY,11418,zumper,elevator,197,False
+165 e 35th st|10016,1,2700.0,The Walk-Everywhere Year,ny:murray-hill-kips-bay,Murray Hill-Kips Bay,165 east 35th street,165 East 35th Street,New York City,NY,10016,apartmentlist.com,dog,198,False
+34-06 45th st|11101,1,2700.0,The Walk-Everywhere Year,ny:astoria-east-woodside-north-,Astoria (East)-Woodside (North),,34-06 45th St,Long Island City,NY,11101,trulia,dog,199,False
+696 1st ave|10016,1,2700.0,The Walk-Everywhere Year,ny:murray-hill-kips-bay,Murray Hill-Kips Bay,696 1st Ave Apt 43F,696 1st Avenue,New York City,NY,10016,apartmentlist.com,dog;elevator,200,False
+728 amsterdam ave|10025,1,2700.0,The Walk-Everywhere Year,ny:upper-west-side-central-,Upper West Side (Central),,728 Amsterdam Ave,New York,NY,10025,trulia,movein;proof,201,False
+e 35th st 12c new york ny 10016 usa|10016,1,2700.0,The Walk-Everywhere Year,ny:murray-hill-kips-bay,Murray Hill-Kips Bay,,"E 35th St #12C, New York, NY 10016, USA",New York,NY,10016,zumper,dog;movein,202,False
+1300 ave at prt|07086,1,2710.0,The Fresh-Start Year,nj:weehawken,Weehawken,RiverParc at Port Imperial,1300 Avenue At Prt,Weehawken,NJ,07086,trulia,elevator,203,False
+7601 river rd n bergen nj 07047 usa|07047,1,2736.0,The Fresh-Start Year,nj:north-bergen,North Bergen,The Duchess,"7601 River Rd, North Bergen, NJ 07047, USA",North Bergen,NJ,07047,zumper,movein,204,False
+2 river rd|07928,1,2745.0,The Quiet-Street Year,nj:chatham,Chatham,The Ivy,2 River Road,Chatham,NJ,07928,apartmentlist.com,elevator,205,False
+116 danbury rd|06897,1,2750.0,The Quiet-Street Year,ct:wilton,Wilton,The White Oaks,116 Danbury Rd,Wilton,CT,06897,trulia,elevator,206,False
+2100 n central rd|07024,1,2765.0,The Fresh-Start Year,nj:fort-lee,Fort Lee,FIAT House,2100 North Central Road,Fort Lee,NJ,07024,apartmentlist.com,elevator,207,False
+305 e 72nd st 3nl new york ny 10021 usa|10021,1,2772.0,The Walk-Everywhere Year,ny:upper-east-side-lenox-hill-roosevelt-island,Upper East Side-Lenox Hill-Roosevelt Island,,"305 E 72nd St #3NL, New York, NY 10021, USA",New York,NY,10021,zumper,dog;movein,208,False
+100 julia dr|07885,1,2775.0,The Quiet-Street Year,nj:rockaway,Rockaway,Pondview Estates,100 Julia Drive,"Wharton, Rockaway Township",NJ,07885,gardencommunities.com,movein,209,False
+100 river mews ln edgewater nj 07020 usa|07020,1,2795.0,The Fresh-Start Year,nj:edgewater,Edgewater,Avalon at Edgewater,"100 River Mews Ln, Edgewater, NJ 07020, USA",Edgewater,NJ,07020,zumper,movein,210,False
+12360 83rd ave|11415,1,2795.0,The Walk-Everywhere Year,ny:kew-gardens,Kew Gardens,,12360 83rd Ave,Kew Gardens,NY,11415,trulia,movein,211,False
+15 somerset ln|07020,1,2795.0,The Fresh-Start Year,nj:edgewater,Edgewater,The Oyster,15 Somerset Ln,Edgewater,NJ,07020,trulia,elevator,212,False
+1209 dekalb ave 226 brooklyn ny 11221 usa|11221,1,2800.0,The Walk-Everywhere Year,ny:bushwick-west-,Bushwick (West),,"1209 Dekalb Ave #226, Brooklyn, NY 11221, USA",New York,NY,11221,zumper,movein,213,False
+30-39 38th st|11103,1,2800.0,The Walk-Everywhere Year,ny:astoria-east-woodside-north-,Astoria (East)-Woodside (North),,30-39 38th St,Astoria,NY,11103,trulia,dog,214,False
+44-14 newtown rd|11103,1,2800.0,The Walk-Everywhere Year,ny:astoria-east-woodside-north-,Astoria (East)-Woodside (North),,44-14 Newtown Rd,Astoria,NY,11103,trulia,dog,215,False
+7855 blvd e 18g n bergen nj 07047 usa|07047,1,2800.0,The Fresh-Start Year,nj:north-bergen,North Bergen,,"7855 Boulevard E #18G, North Bergen, NJ 07047, USA",North Bergen,NJ,07047,zumper,dog;movein,216,False
+7855 blvd e|07047,1,2800.0,The Fresh-Start Year,nj:north-bergen,North Bergen,,7855 Boulevard East,North Bergen,NJ,07047,trulia,movein;proof,217,False
+79 lake st|10604,1,2800.0,The Quiet-Street Year,ny:harrison,Harrison,79 Lake Street,79 Lake Street,Harrison,NY,10604,apartmentlist.com,dog;elevator,218,False
+936 w end ave new york ny 10025 usa|10025,1,2800.0,The Walk-Everywhere Year,ny:upper-west-side-manhattan-valley,Upper West Side-Manhattan Valley,,"936 W End Ave, New York, NY 10025, USA",New York,NY,10025,zumper,dog;movein,219,False

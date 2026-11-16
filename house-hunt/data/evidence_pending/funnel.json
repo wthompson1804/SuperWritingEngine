@@ -1,0 +1,44 @@
+{
+ "all_listings": 20464,
+ "pending": 13595,
+ "studio_or_1br": 13595,
+ "rent_le_2800": 12514,
+ "available_by_dec15_or_unstated": 12514,
+ "one_or_two_unstated_none_failed": 4448,
+ "  buildings_at_that_point": 2597,
+ "in_thin_year_hood_incl_crime_cut": 633,
+ "  of_which_in_crime_cut_hoods": {
+  "ct:new-haven": 112,
+  "nj:watchung": 1,
+  "ny:financial-district-battery-park-city": 3
+ },
+ "in_thin_year_hood_passing_safety": 517,
+ "  hood_basis": {
+  "pipeline_method (Census place from coordinates)": 446,
+  "pipeline_method (NYC NTA polygon from coordinates)": 61,
+  "zip_fallback (no coordinates)": 10
+ },
+ "  by_year_listings": {
+  "The Fresh-Start Year": 235,
+  "The Quiet-Street Year": 220,
+  "The Walk-Everywhere Year": 62
+ },
+ "candidate_buildings": 219,
+ "  by_year_buildings": {
+  "The Fresh-Start Year": 110,
+  "The Quiet-Street Year": 49,
+  "The Walk-Everywhere Year": 60
+ },
+ "  by_pending_reason": {
+  "elevator": 210,
+  "dog;elevator": 105,
+  "movein": 78,
+  "dog": 70,
+  "movein;elevator": 25,
+  "movein;dog": 18,
+  "elevator;proof": 7,
+  "movein;proof": 4
+ },
+ "buildings_taken": 150,
+ "candidate_units_in_taken_buildings": 448
+}
