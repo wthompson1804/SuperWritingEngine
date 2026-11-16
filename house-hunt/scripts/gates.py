@@ -290,6 +290,12 @@ def main():
     df["addr_key"] = df.address_as_listed.map(norm_addr) + "|" + df.zip5
     df["unit_key"] = df.unit.map(norm_unit)
     df["listing_kind"] = [parsers.listing_kind(u, d, l, lt, bn) for u, d, l, lt, bn in zip(df.unit, df.detail_level, df.listing_id, df.listing_type, df.building_name)]
+    # independent check 4, D4: a one-letter label beside numbered apartments of the same address is a plan letter, not a
+    # home (BE 'P' and 'F'; Appletree Suites 'C', 'E', 'F' beside 2B to 6D): not_an_apartment
+    street = df.address.map(norm_addr) + "|" + df.zip5          # the cleaned street address: '448 Scotland Rd #4OA' is a sibling
+    sibs = df.groupby(street).unit.agg(list).to_dict()
+    letter = [k == "unit" and parsers.plan_letter_label(u, sibs[a]) for k, u, a in zip(df.listing_kind, df.unit, street)]
+    df.loc[letter, "listing_kind"] = "floor_plan"
     df["dedupe_key"] = df.addr_key + "|" + df.unit_key + "|" + df.beds.astype(str)
     # units with no unit label can't be told apart; keep one per source+rent to avoid over-merging
     blank = df.unit_key == ""

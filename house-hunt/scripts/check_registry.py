@@ -113,12 +113,19 @@ def shown_violations():
     flag(col("live_page_gone") == "yes", "the building's listing page is gone, but the unit is shown")
     open_cost = (num("all_in") <= CAP) & (num("all_in_likely") > CAP)        # owner, 2026-11-16: replaces "cost near the cap"
     # floor-plan rows are no longer shown at all (flagged above as "not a real apartment"), so no shown row is open on that ground
-    open_avail = pd.Series(False, index=S.index)
+    # independent check 4, D2: a second site that lists the address and omits the apartment is "availability", by rule
+    second_omit = pd.Series([parsers.second_site_omits(n_, st_) for n_, st_ in zip(col("live_notes"), col("live_status"))], index=S.index)
+    open_avail = second_omit.copy()
     phone = col("phone_settled")                   # facts answered on the phone (rank.py): no longer open, whatever an older row or verdict says
     by_phone = lambda lab: phone.str.split(";").map(lambda xs: lab in xs)
     open_avail = open_avail & ~by_phone("availability")
-    stale_rule = (col("listing_stale") == "open") & ~by_phone("listing")
-    open_listing = ((col("listing_warning") != "") | stale_rule | (col("live_notes").map(parsers.price_doubt) & ~by_phone("listing")) | (sib12 & ~by_phone("listing")))
+    stale_rule = (col("listing_stale") == "open") & ~by_phone("listing") & ~second_omit
+    # a warning that only repeats the page's staleness is the same doubt as an availability item: counted once
+    stale_only_warning = col("listing_warning").str.match(r"\s*STALE PAGE") & ~col("listing_warning").str.contains(r"\|\|")
+    warn0 = col("listing_warning") != ""
+    # independent check 4, D1: a building whose point disagrees with its address and could not be re-geocoded
+    place_flag = (col("coord_check") == "flagged") | col("coord_basis").str.contains("unverified")
+    open_listing = ((warn0 & ~(second_omit & stale_only_warning)) | stale_rule | (col("live_notes").map(parsers.price_doubt) & ~by_phone("listing")) | (sib12 & ~by_phone("listing")) | place_flag)
     flag(sib12 & ~by_phone("listing") & ~col("confirm_what").str.contains("listing"), "sibling long-lease rule: the unit's own 12-month price is unknown and a sibling's is far higher, but the open item 'listing' is missing")
     flag(sib12 & ~col("disclosures").str.contains(parsers.SIBLING_12_MONTH_TEXT.split(":")[0][4:], regex=False), "sibling long-lease rule: the lease-term disclosure does not say the building's 12-month price is much higher")
     # GATE facts count toward "at most one open"; DISCLOSURES (lease term, cost near the cap, condo rented by its owner,
@@ -158,7 +165,7 @@ def shown_violations():
          & ~disc.str.contains('"what": "condo rented by its owner"', regex=False), "a condominium unit (city class R*, or a listing typed condo) is shown without the condo disclosure")
     vgate = S.listing_id.map(lambda l: {KIND_LABEL.get(k, "") for k in kinds_of(l, "asterisk")} - {""})
     # 4b: staleness by rule is the open item "listing"; where the reviewer wrote the same doubt up as availability it counts once
-    opens["listing"] = opens["listing"] & ~(vgate.map(lambda ks: "availability" in ks) & (col("listing_warning") == "") & ~col("live_notes").map(parsers.price_doubt))
+    opens["listing"] = opens["listing"] & ~(vgate.map(lambda ks: "availability" in ks) & (~warn0 | stale_only_warning) & ~col("live_notes").map(parsers.price_doubt) & ~place_flag & ~sib12)
     for lab in opens:
         opens[lab] = opens[lab] | (vgate.map(lambda ks, lab=lab: lab in ks) & ~by_phone(lab))
     # D2: sibling consistency on unit numbers a reviewer read as first-floor

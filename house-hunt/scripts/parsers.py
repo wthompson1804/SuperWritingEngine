@@ -1216,6 +1216,7 @@ def label_reading(unit):
       '09-326', '3-329', 'PA-405', 'B9-309'   X-FUU   -> building X, floor F, unit UU
       '005-5306'                              X-BFUU  -> building B, floor F
       'K3-02', 'M4-22'                        LF-UU   -> building L (a letter), floor F
+      'A207', 'B511'                          LFUU    -> building L (a letter), floor F
       '5201', '2303', '4234'                  BFUU    -> building B, floor F (second digit 1-9), unit UU
     A plain label ('305', '4F', '12B', '0705') has no building part."""
     u = clean_unit(unit).strip()
@@ -1225,6 +1226,9 @@ def label_reading(unit):
     m = re.fullmatch(r"([a-z]{1,3}\d{0,2}|\d{1,3})[\s-]+([1-9])(\d{2})[a-z]?", u)
     if m:
         return m.group(1).lstrip("0") or "0", int(m.group(2)), int(m.group(3))
+    m = re.fullmatch(r"([a-z])([1-9])(\d{2})", u)          # 'A207', 'B511', 'C309' (Fort Hill Peekskill): building letter, floor, unit
+    if m:
+        return m.group(1), int(m.group(2)), int(m.group(3))
     m = re.fullmatch(r"\d{1,3}[\s-]+([1-9])([1-9])(\d{2})", u)
     if m:
         return m.group(1), int(m.group(2)), int(m.group(3))
@@ -1239,21 +1243,33 @@ def building_prefix(unit) -> str:
     return r[0] if r else ""
 
 
+def explicit_building_label(unit) -> bool:
+    """The label names its building apart from the floor and unit: a letter before the floor digit ('K3-02', 'M4-22') or a
+    building part before a separator ('B9-309', 'PA-405', '09-426', '3-329', '005-5306'). A bare four-digit label
+    ('5201', '4186') is not explicit: it may be floor + three-digit unit, or a tower floor."""
+    u = clean_unit(unit).strip()
+    return bool(label_reading(u)) and not re.fullmatch(r"\d{4}", u)
+
+
 def multi_building_labels(units) -> bool:
-    """True when the unit labels of one complex read as a multi-building, LOW complex (garden-style rule, owner 2026-11-16):
+    """True when the unit labels of one complex read as a multi-building complex (garden-style rule, owner 2026-11-16):
       - every labelled unit has a building part (label_reading), and two or more different buildings appear;
-      - no label reads above floor 3;
+      - labels that NAME their building (explicit_building_label: 'K3-02', 'B9-309', '09-426') need nothing more. A
+        floor read from such a label is not a height (independent check 4, D3: Residences at The Summit, buildings K, L
+        and M, used to escape because 'K4-19' reads as floor 4; the rule asks for a height of four floors or more ON A
+        PAGE OR RECORD, which build_master.garden_style tests);
       - for the bare four-digit shape (BFUU), which could also be floor + three-digit unit ('5158' = floor 5, unit 158)
-        or a tower ('1206' = floor 12): the floor digit must vary across the labels and no unit-on-floor number may
-        exceed 40 (a floor of a garden building does not hold 86 apartments; The Grove Somerset 4186 is floor 4)."""
+        or a tower ('1206' = floor 12): no label may read above floor 3, the floor digit must vary across the labels and
+        no unit-on-floor number may exceed 40 (a floor of a garden building does not hold 86 apartments; The Grove
+        Somerset 4186 is floor 4)."""
     labs = [u for u in units if unit_label_key(u)]
     rs = [label_reading(u) for u in labs]
     if len(labs) < 2 or any(r is None for r in rs):
         return False
-    if len({r[0] for r in rs}) < 2 or max(r[1] for r in rs) > 3:
+    if len({r[0] for r in rs}) < 2:
         return False
-    bare = [r for u, r in zip(labs, rs) if re.fullmatch(r"\d{4}", clean_unit(u).strip())]
-    if bare and (len({r[1] for r in bare}) < 2 or max(r[2] for r in bare) > 40):
+    bare = [r for u, r in zip(labs, rs) if not explicit_building_label(u)]
+    if bare and (max(r[1] for r in rs) > 3 or len({r[1] for r in bare}) < 2 or max(r[2] for r in bare) > 40):
         return False
     return True
 
@@ -1572,3 +1588,29 @@ def second_site_omits(live_note, live_status="") -> bool:
     if str(live_status or "").strip().lower() in ("live", "changed"):
         return False
     return bool(SECOND_SITE_OMITS.search(str(live_note or "")))
+
+
+# ---- independent check 4, D4: labels that do not identify a real, above-ground apartment
+def plan_letter_label(unit, sibling_units) -> bool:
+    """True for a label that is ONE letter ('P', 'F', 'C') in a building whose other listed apartments carry a number
+    ('3Pb', '4OA'; '2B', '5D'). There the letter is a plan or line letter, not one home: BE (448 Scotland Rd) 'P' and 'F'
+    are 'Unit P (1Bed)', 'Unit F (1 Bed with Den)' on the page; Appletree Suites lists 'C', 'E', 'F' beside 2B to 6D. A
+    single letter in a building with no numbered sibling ('F' at a two-family house) stays an apartment."""
+    u = clean_unit(unit).strip()
+    if not re.fullmatch(r"[a-z]", u):
+        return False
+    return any(re.search(r"\d", clean_unit(x)) and not is_plan_label(x) for x in sibling_units)
+
+
+def sequential_number_reads_ground(unit, units_total, floors) -> bool:
+    """True when a bare apartment NUMBER ('10') in a building numbered in sequence reads as the first floor: the number
+    is at most the average number of apartments per floor (630 West 163rd Street: apartment 10 of 65 on six floors, about
+    eleven to a floor). Labels with a letter or a floor digit ('2B', '305') are read elsewhere; unknown counts read nothing."""
+    u = clean_unit(unit).strip()
+    try:
+        n, tot, fl = int(u), float(units_total), float(floors)
+    except (TypeError, ValueError):
+        return False
+    if not re.fullmatch(r"\d{1,2}", u) or not (tot == tot and fl == fl) or fl < 2 or tot < fl:
+        return False
+    return 1 <= n <= int(tot // fl)

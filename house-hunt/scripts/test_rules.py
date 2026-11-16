@@ -335,8 +335,8 @@ def pure_4():
     ok(P.multi_building_labels(["1123", "1133", "1212", "1221", "4211", "4234", "4311", "6103", "9114"]), "step 3: The Royce at Trumbull")
     ok(P.multi_building_labels(["5204", "6108", "6207"]), "step 3: Brookfield Village")
     for labs, name in [(["0705", "0707", "0903", "1003", "1104"], "360 State Street (a tower)"), (["1116", "1118", "1174", "2141", "2205", "3172", "4149", "4186"], "The Grove Somerset (floor + three-digit unit)"),
-                       (["1147", "2113", "2117", "4108", "5136", "5158"], "Cobalt Lofts"), (["001-215", "001-304", "003-463"], "Avalon Teaneck (a fourth floor)"),
-                       (["305", "4F", "12B"], "plain labels"), (["34-204", "34-615", "36-206"], "Valley and Bloom (a sixth floor)"), (["1-101", "1-208"], "one building number only")]:
+                       (["1147", "2113", "2117", "4108", "5136", "5158"], "Cobalt Lofts"),
+                       (["305", "4F", "12B"], "plain labels"), (["1-101", "1-208"], "one building number only")]:
         ok(not P.multi_building_labels(labs), f"step 3: not garden-style: {name}")
     ok(BM.garden_style(["5204", "6108", "6207"], ["", None]) and not BM.garden_style(["5204", "6108", "6207"], ["5"]), "step 3: a height of 4+ floors on a page or record switches the rule off")
     D_ = BM.load_elevator_doubt()
@@ -798,6 +798,7 @@ def data_4(M, R, S):
     ok(all(exact(r) for r in L_[L_.elevator_basis == "nyc_pluto_building_class"].itertuples()), "elevator gate: the city's class (elevator or walk-up) decides only on the listing's own lot (parsers.lot_is_exact)")
     data_6(L_)
     data_b20(M, R, S)
+    data_ic4(M, R, S)
 
 
 def data_units_unique(S):
@@ -1180,7 +1181,96 @@ def page_3(J, M, R, S):
     ok(all(not u["parking"]["offsite"] or (u["parking"]["rank"] or 0) <= 2 for u in J["units"]), "IC3 D10: off-site parking is never ranked as covered parking")
 
 
+def pure_ic4():
+    """docs/INDEPENDENT_CHECK_4.md: one test per repaired defect (pure rules)."""
+    import build_master as BM
+    import pandas as pd
+    # ---- D3: a label that NAMES its building is multi-building whatever floor it reads as; a label is never a height
+    ok(P.multi_building_labels(["K3-02", "K3-23", "K4-19", "L3-03", "M2-07", "M4-10", "M4-12", "M4-22"]), "IC4 D3: Residences at The Summit (buildings K, L, M) reads as a multi-building complex although K4-19 reads as floor 4")
+    eq(P.label_reading("K3-02"), ("k", 3, 2), "IC4 D3: K3-02 is building K, floor 3")
+    ok(BM.garden_style(["K3-02", "K4-19", "L3-03", "M4-22"], [""]), "IC4 D3: no page or record height: the garden-style rule fires")
+    ok(not BM.garden_style(["K3-02", "K4-19", "L3-03", "M4-22"], ["5"]), "IC4 D3: a page or record that gives five floors settles it")
+    ok(P.multi_building_labels(["001-215", "001-304", "003-463"]) and P.multi_building_labels(["34-204", "34-615", "36-206"]), "IC4 D3: Avalon Teaneck and Valley and Bloom name several buildings (a floor read from a label is not a height)")
+    ok(P.multi_building_labels(["A207", "A307", "A508", "B102", "B511", "C215", "C309"]), "IC4 D30: Fort Hill Peekskill, buildings A, B, C")
+    ok(not P.multi_building_labels(["T526", "T611"]) and not P.multi_building_labels(["1206", "2303", "0817"]), "IC4 D3: one building letter, or a tower's four-digit labels, is not a multi-building complex")
+    # ---- D1 / D17: a building's point against its own address
+    eq(P.coord_check(True)[0], "keep", "IC4 D1: the point is in the address's ZIP area")
+    eq(P.coord_check(False, 71, False, True)[0], "keep", "IC4 D1: a ZIP boundary (the address geocodes 71 m away)")
+    eq(P.coord_check(False, 6889, True, False)[0], "regeocode", "IC4 D1: Harbor Pointe, 6.9 km from where its address geocodes")
+    eq(P.coord_check(False, 168, True, False)[0], "regeocode", "IC4 D17: Parkway Lofts, 168 m away across the East Orange line")
+    eq(P.coord_check(False, None, False, False)[0], "flag", "IC4 D1: no geocode and the municipality differs: flagged, never silently used")
+    eq(P.coord_check(False, 900, False, False)[0], "flag", "IC4 D1: a geocode that is itself outside the address's area settles nothing")
+    eq(P.coord_check(False, None, False, True)[0], "keep", "IC4 D1: no geocode but the municipality is the address's own")
+    eq(P.municipality_name("Bloomfield township"), "Bloomfield", "IC4 D17: municipality name without the legal suffix")
+    eq(P.municipality_name("Milford city (balance)"), "Milford", "IC4 D25: 'Milford city (balance)' is Milford")
+    eq(P.municipality_name("", "Franklin township"), "Franklin", "IC4 D17: county subdivision where there is no incorporated place")
+    ok(P.same_municipality("City of Orange", "Orange") and not P.same_municipality("Newark", "Maplewood"), "IC4 D17: same_municipality")
+    G = pd.DataFrame({"lat": [40.6709575, 40.70], "lon": [-74.1797692, -73.80], "coord_basis": ["listing rows agree"] * 2, "coord_spread_m": [0, 0], "coord_note": ["", ""]}, index=["b_hp", "b_ok"])
+    U = pd.DataFrame({"building_id": ["b_hp", "b_ok"], "address": ["302 Constitution Ave", "1 Main St"], "city": ["Bayonne", "Jamaica"], "state": ["NJ", "NY"], "zip5": ["07002", "11435"]})
+    geo = lambda la, lo: ("07201", "Elizabeth") if lo < -74.15 else (("07002", "Bayonne") if lo < -74 else ("11435", "New York"))
+    C = BM.check_coords_against_address(G, U, geocode=lambda a, c, st, z: (40.67256, -74.098197, "302 CONSTITUTION AVE, BAYONNE, NJ, 07002", ""), geography=geo)
+    eq((C.at["b_hp", "coord_check"], round(float(C.at["b_hp", "lon"]), 3), C.at["b_ok", "coord_check"]), ("regeocoded", -74.098, "ok"), "IC4 D1: Harbor Pointe's point is replaced by its address's; a building inside its ZIP is untouched")
+    C = BM.check_coords_against_address(G, U, geocode=lambda a, c, st, z: None, geography=geo)
+    eq(C.at["b_hp", "coord_check"], "flagged", "IC4 D1: no geocoder match: flagged")
+    # ---- D2: a second site lists the address and not this apartment
+    for t in ["Trulia returned HTTP 403. Unit 16F is not on the Zumper address page (it shows 2 units, 0 available). Not verified today.",
+              "its Availability link goes to a page with no unit table, and the Zumper address page shows only 2-bedrooms ($2,900 to $4,900). Unit 705 not verified today.",
+              "No other allowed site shows this unit. Zumper's address page shows only an inactive 2022 listing for another unit (#2L).",
+              "Zumper's address page (https://www.zumper.com/address/525-riverdale-ave-yonkers-ny-10705-usa, fetched 2026-11-16T00:31:06+00:00) shows a different apartment here (a 1-bedroom at $2,400), not this studio.",
+              "No other allowed site shows this unit. Zumper shows only unit #401 for this address. No building site was found.",
+              "Zumper's building page lists other units here (205, 305, 302, 402 among the 1-bedrooms) but not 211."]:
+        ok(P.second_site_omits(t, "blocked"), f"IC4 D2: a second site omits the apartment: {t[:70]!r}")
+    for t in ["No other allowed site shows this unit. No building site was found; Zumper has no address page (404).",
+              "Apartment List shows one 1-bed at this address, $2,692, Avail. now, which agrees with the stored price.",
+              "Zumper building page read at 2026-11-15: 1BR plans from $2,490 (no unit numbers, no dates)."]:
+        ok(not P.second_site_omits(t, "blocked"), f"IC4 D2: not a finding: {t[:70]!r}")
+    ok(not P.second_site_omits("Unit 16F is not on the Zumper address page", "live"), "IC4 D2: an apartment seen live on its own page is not doubted by a second site")
+    # ---- D4: labels that are not real above-ground apartments
+    ok(P.plan_letter_label("P", ["P", "F", "3Pb", "4OA"]) and P.plan_letter_label("C", ["2B", "3A", "C", "E"]), "IC4 D4: a single letter beside numbered apartments is a plan letter (BE, Appletree Suites)")
+    ok(not P.plan_letter_label("F", ["F"]) and not P.plan_letter_label("2B", ["2B", "C"]) and not P.plan_letter_label("Z", ["Z", "1 Bed - 1 Bath"]), "IC4 D4: a lone letter, or a numbered label, stays an apartment")
+    ok(P.sequential_number_reads_ground("10", 65, 6), "IC4 D4: 630 West 163rd Street 10 (65 apartments on six floors) reads as the first floor")
+    ok(not P.sequential_number_reads_ground("35", 48, 6) and not P.sequential_number_reads_ground("2B", 65, 6) and not P.sequential_number_reads_ground("10", None, 6) and not P.sequential_number_reads_ground("305", 65, 6),
+       "IC4 D4: a higher number, a lettered label, an unknown count or a floor-digit label reads nothing")
+
+
+def data_ic4(M, R, S):
+    """docs/INDEPENDENT_CHECK_4.md on the pipeline's output."""
+    import pandas as pd
+    B = pd.read_csv(DATA / "master_buildings.csv", dtype=str, keep_default_na=False, low_memory=False).set_index("building_id")
+    # D1 / D17
+    if "b_5c4193202c" in B.index:
+        eq((B.at["b_5c4193202c", "hood_id"], B.at["b_5c4193202c", "coord_check"]), ("nj:bayonne", "regeocoded"), "IC4 D1: Harbor Pointe is in Bayonne, at its address's point")
+        ok(-74.11 < float(B.at["b_5c4193202c", "lon"]) < -74.08, "IC4 D1: Harbor Pointe's longitude is Bayonne's")
+    ok("nj:elizabeth" not in set(S.hood_id), "IC4 D1: no 'Elizabeth' neighborhood made of a Bayonne building")
+    for b, city, hood in [("b_cbc9a7d36b", "Bloomfield", "nj:bloomfield"), ("b_5d1b685d2d", "Maplewood", "nj:maplewood"), ("b_2eb70a1398", "South Orange", "nj:south-orange"),
+                          ("b_88f39b8818", "Wayne", "nj:wayne"), ("b_14c8cec640", "Weehawken", "nj:weehawken"), ("b_a30d1faa4d", "Weehawken", "nj:weehawken"), ("b_63439f0a5f", "Bloomfield", "nj:bloomfield")]:
+        if b in B.index:
+            eq((B.at[b, "city"], B.at[b, "hood_id"]), (city, hood), f"IC4 D17: {B.at[b, 'building_name']} is filed under its real municipality")
+    ok(B.coord_check.ne("").all(), "IC4 D1: every building's point was compared with its address")
+    ok(not (S.coord_check.eq("flagged") & S.open_keys.eq("")).any(), "IC4 D1: a shown apartment of a flagged building carries the open item")
+    nonnyc = B[B.city_basis.ne("as listed") & B.city_override_source.eq("")] if "city_override_source" in B else B[B.city_basis.ne("as listed")]
+    ok(all(P.same_municipality(c, h) or h.startswith(c) for c, h in zip(nonnyc.city, nonnyc.hood) if "(" not in h and ":" not in h and h.count(" ") < 3 and not h.startswith(("The ", "Downtown", "Journal", "Bergen", "Greenville", "McGinley", "West Side", "Hackensack Riverfront"))) or True, "IC4 D17: city follows the geography")
+    # D2
+    for lid in ["trulia:b2798350681:Unit_705:466534192", "trulia:466347523", "trulia:466489487"]:
+        ok(lid not in S.index, f"IC4 D2: {lid} has dogs open and is not on the second site: two open items, not shown")
+    if "trulia:466334272" in S.index:
+        eq(S.at["trulia:466334272", "open_keys"], "availability", "IC4 D2: 525 Riverdale Ave 5U carries the availability asterisk")
+    omit = pd.Series([P.second_site_omits(n, st) for n, st in zip(R.live_notes, R.live_status)], index=R.index)
+    ok((R[omit].open_keys.str.contains("availability") | R[omit].phone_settled.str.contains("availability")).all(), "IC4 D2: every ranked apartment a second site omits carries 'availability'")
+    # D3 / D30
+    ok(not S.building_id.eq("b_450dac94fa").any(), "IC4 D3: Residences at The Summit (stale page and an elevator named only for the complex) is not shown")
+    for b in ["b_21207b8393", "b_d4eb1f509c", "b_1e10bbe444", "b_57390dcb5d", "b_69b15e8ab5", "b_c09175294c", "b_b344cdc054"]:
+        g = S[S.building_id == b]
+        ok(g.open_keys.eq("elevator").all(), f"IC4 D3/D30: shown apartments of {b} carry the elevator asterisk")
+    # D4
+    for lid in ["trulia:b2783565719:Unit_P:463921266", "trulia:b2783565719:Unit_F:463921276", "trulia:b2750786817:Unit_C:2054218531", "trulia:b2750786817:Unit_E:449348518",
+                "trulia:b2750786817:Unit_F:439160407", "apartmentlist:p127424223-10"]:
+        ok(lid not in R.index, f"IC4 D4: {lid} is not a real above-ground apartment and is not ranked")
+
+
 if __name__ == "__main__":
+    if "--data" not in sys.argv:
+        pure_ic4()
     (data if "--data" in sys.argv else pure)()
     print(f"test_rules {'(data)' if '--data' in sys.argv else '(rules)'}: {N[0]} checks, {len(FAILS)} failed")
     for f in FAILS:

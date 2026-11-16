@@ -213,6 +213,12 @@ def main():
                       (el.eq("conflicting"), "elevator not established: the sources conflict on which buildings have one"),
                       (s("dogs_allowed").str.lower().eq("no"), "dogs not allowed (confirmed)"),
                       (wl < 25, "dog weight limit under 25 lb"), (fl < 2, "ground-floor unit"),
+                      # independent check 4, D4 (630 West 163rd Street 10): a bare apartment number in a building numbered in
+                      # sequence, at most the average number of apartments per floor, reads as the first floor
+                      (pd.Series([s("unit_floor_basis").iloc[i] not in ("confirmed", "stated", "confirmed_by_phone") and parsers.sequential_number_reads_ground(un, uc, bf)
+                                  for i, (un, uc, bf) in enumerate(zip(s("unit"), pd.to_numeric(s("unit_count"), errors="coerce").fillna(pd.to_numeric(s("pluto_units"), errors="coerce")),
+                                                                         pd.to_numeric(s("building_floors"), errors="coerce").fillna(pd.to_numeric(s("pluto_floors"), errors="coerce"))))], index=u.index),
+                       "ground-floor unit: a bare apartment number in a building numbered in sequence, at most the average number of apartments per floor, reads as the first floor"),
                       (s("live_status").eq("gone"), "listing gone at live check"),
                       # 4b: a listing page unchanged for more than six months when it was read (build_master.py: listing_stale)
                       (s("listing_stale").eq("remove"), "stale listing: " + s("listing_stale_why")),
@@ -381,7 +387,10 @@ def main():
     # and whose address could not be geocoded to settle it (build_master.check_coords_against_address: 'flagged'), is
     # never silently used: everything measured from the point may describe another place. One open "listing" fact.
     place_open = s("coord_check").eq("flagged") | s("coord_basis").str.contains("unverified")
-    listing_open = ((s("listing_warning").ne("") | vhas("unverified", "wrong_building") | stale_open | price_open | sib_open) & ~(phone_av & s("listing_warning").eq(""))) | place_open
+    # a warning that only repeats the staleness of the page ("STALE PAGE 2026-07-28: ...") is the same doubt as the
+    # availability item above, as the staleness rule is: not counted twice (100 Prospect N311)
+    warn = s("listing_warning").ne("") & ~((second_omit | vhas("not_available")) & s("listing_warning").str.match(r"\s*STALE PAGE") & ~s("listing_warning").str.contains(r"\|\|"))
+    listing_open = ((warn | vhas("unverified", "wrong_building") | stale_open | price_open | sib_open) & ~(phone_av & ~warn)) | place_open
     # eligibility: a reviewer's finding, or a listing site's income-restricted tag the manager's own page does not bear out
     # D8: a condo by RULE, not only by verdict: the city classes the listing's own lot as a condominium (class R*) and the
     # row is not a managed rental building, or the listing itself is typed condo / co-op
@@ -420,10 +429,10 @@ def main():
         ("availability", avail_open, "availability", np.where(second_omit, "A second listing site covers this address and does not show this apartment: " + s("live_notes").str[:300], "A reviewer found the apartment may not be available."),
          "Is this apartment still available, and at this price?"),
         ("listing", listing_open, "listing", np.where(place_open, "The listing's map position and its address disagree, so the drive, the surroundings and the police figures here may describe another place: " + s("coord_check_note").str[:300],
-                                             np.where(s("listing_warning").ne(""), "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160],
+                                             np.where(warn, "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160],
                                                       np.where(price_open, "The evidence pass flagged the price: " + s("live_notes").str[:200],
                                                                np.where(sib_open & ~stale_open, sib_listing_why, "The listing may be stale: " + s("listing_stale_why") + ".")))),
-         np.where(place_open, "What is the building's exact street address?", np.where(s("listing_warning").ne(""), "Is this listing for this building, and is it genuine?",
+         np.where(place_open, "What is the building's exact street address?", np.where(warn, "Is this listing for this building, and is it genuine?",
                   np.where(price_open, "Is this price real? Verify it by phone before touring.",
                            np.where(sib_open & ~stale_open, "What is the rent on a 12-month lease? Ask before touring.", "Is this unit still available? The listing page has not changed in over two months."))))),
         ("eligibility", elig_open, "eligibility", np.where(s("eligibility_open").ne(""), "Eligibility is not settled: " + s("eligibility_open").str[:200], ""),
