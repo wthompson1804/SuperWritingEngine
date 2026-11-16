@@ -54,8 +54,8 @@ PAGE = "site/data.json"                            # virtual tables "site/data.j
 
 # host_intro is the lead of "About this experience" / "About <neighborhood>": 2 or 3 sentences, short, because the
 # facts sit beside it as icon points (about_points_json) and must not be said twice.
-LIMITS = {"year": {"scene": (60, 90), "host_intro": (25, 60), "tagline": (4, 14), "subhead": (6, 22)},
-          "hood": {"scene": (35, 68), "host_intro": (15, 45)}}
+LIMITS = {"year": {"host_intro": (25, 60), "tagline": (4, 14), "subhead": (6, 22)},
+          "hood": {"scene": (8, 60), "host_intro": (12, 50)}}
 LEAD_SENTENCES = (2, 3)
 ICONS = ["home", "dog", "park", "car", "parking", "fork", "cocktail", "coffee", "train", "money", "clock", "moon", "sun",
          "water", "key", "heart", "people", "ruler", "laundry", "pool", "warning"]
@@ -63,7 +63,7 @@ POINTS_COUNT, POINT_MAX_WORDS = (4, 6), 14            # about_points_json: 4 to 
 MOMENT_TITLES, MOMENT_MAX_WORDS = ["A weekday", "Saturday night", "Sunday with Mom and Dad"], 35
 JSON_COLS = {"year": ["about_points_json", "day_moments_json"], "hood": ["about_points_json"]}
 STAGE = re.compile(r"\b(I|I'll|I'd|I've|my|me)\b|\blet's\b|\blet me\b|picture this|\bokay\b|your host", re.I)
-PARAGRAPHS = {"year": {"host_walkthrough": (3, 40, 60)}, "hood": {}}      # column: (paragraphs, min words, max words) each
+PARAGRAPHS = {"year": {}, "hood": {}}      # (host_walkthrough and the year scene are now the three day moments, joined)
 ONE_SENTENCE = {"year": ["promise", "tagline", "subhead"], "hood": ["good_for_her", "watch_for"]}
 ONE_OR_TWO = {"year": ["catch"], "hood": []}
 HOST_COLS = {"host_intro", "host_walkthrough", "tagline", "display_label", "subhead", "point", "moment"}   # may state all-in dollars
@@ -77,7 +77,8 @@ COLUMNS = {"year": ["display_label", "tagline", "subhead", "scene", "promise", "
            + ["sub_" + x for x in SUB_SECTIONS["year"]] + JSON_COLS["year"],
            "hood": ["scene", "good_for_her", "watch_for", "host_intro"] + ["sub_" + x for x in SUB_SECTIONS["hood"]]
            + JSON_COLS["hood"]}
-VOICE_PHRASE = re.compile(r"review sites|people who live (here|in )|residents (also |here )?(say|like|praise)", re.I)
+VOICE_PHRASE = re.compile(r"review sites|people who live (here|in )|residents (of [A-Z][\w ]+ )?(also |here )?(say|like|praise|love|call|wish|"
+                          r"describe|talk|complain|are split|warn|advise|enjoy|mention|report)", re.I)
 
 NUMBER = re.compile(r"\d{1,2}:\d{2}|\d[\d,]*(?:\.\d+)?")
 UNIT_PHRASES = [r"per 1,000"]                      # a unit, not a quantity
@@ -166,6 +167,8 @@ def _page_table(part):
                 r[k + "_lo"], r[k + "_hi"] = lo, hi
             r["neighborhoods"] = (y.get("counts") or {}).get("neighborhoods")
             r["shown"] = (y.get("counts") or {}).get("shown")
+            r["buildings"] = (y.get("counts") or {}).get("buildings")
+            r["n_hoods"] = len(y.get("hood_ids") or [])          # what "See the N neighborhoods" counts
             near = sorted((h for h in d["neighborhoods"] if h.get("year") == y["id"] and h.get("drive_min") is not None
                            and (h.get("counts") or {}).get("shown")), key=lambda h: h["drive_min"])
             r["nearest_name"], r["nearest_drive_min"] = (near[0]["name"], near[0]["drive_min"]) if near else (None, None)
@@ -175,8 +178,14 @@ def _page_table(part):
         rows = []
         for h in d["neighborhoods"]:
             lo, hi = (h.get("all_in_range") or [None, None])[:2]
+            mine = sorted(u["all_in"] for u in d["units"] if u.get("hood_id") == h["id"] and u.get("all_in") is not None)
+            mid = None if not mine else (mine[len(mine) // 2] if len(mine) % 2 else (mine[len(mine) // 2 - 1] + mine[len(mine) // 2]) / 2)
             rows.append({"hood_id": h["id"], "all_in_lo": lo, "all_in_hi": hi, "sqft_median": h.get("sqft_median"),
+                         "all_in_median": mid,                    # the strip's "typical, all-in": the median shown unit
                          "shown": (h.get("counts") or {}).get("shown"),
+                         "buildings": (h.get("counts") or {}).get("buildings"),
+                         "drive_min": h.get("drive_min"), "transit_min": h.get("transit_min"),
+                         "toll_round_trip": h.get("toll_round_trip"),
                          "violent": (h.get("safety") or {}).get("violent_per_1000"),
                          **{"vq_" + k: v for k, v in (h.get("vs_queens") or {}).items()}})
         t = pd.DataFrame(rows)
@@ -307,6 +316,8 @@ def transform(value, how):
         return f"{int(half_up(x, 10))}"
     if how == "usd50":                                # dollars to the nearest 50, with a comma: 2707 -> "2,700"
         return f"{int(half_up(x, 50)):,}"
+    if how == "usd10":                                # dollars to the nearest 10 (the page's rule for prices in sentences)
+        return f"{int(half_up(x, 10)):,}"
     if how == "pct":                                  # a share 0..1 -> whole percent
         return f"{int(half_up(x * 100))}"
     if how == "mi0":                                  # metres -> whole miles (for far-away things)
