@@ -487,7 +487,7 @@ def pick_sub(rules, ctx, salt, cap=None):
     return "", []
 
 
-def hood_points(rules, ctx, evidence, cap=None):
+def hood_points(rules, ctx, evidence, cap=None, lead=""):
     """The icon points of a neighborhood, from the "=== points: hood" drafts -> [{icon, text}].
     Each draft line is `topic | icon | conditions :: wording | wording`. The first `warning` line whose conditions
     hold is the one honest catch; then, in the order written, the first matching line of each other topic, up to
@@ -507,7 +507,7 @@ def hood_points(rules, ctx, evidence, cap=None):
                 text = render(raw, ctx, trial)
             except (ValueError, LookupError, KeyError):
                 continue
-            if text:
+            if text and not C.shared_runs({"lead": [lead], "points": [text]}):   # never what the lead already says
                 used[raw] += 1
                 evidence.extend(trial + [{"claim": text, **e} for e in evs])
                 return {"icon": icon, "text": text}
@@ -618,8 +618,15 @@ def main():
                                                          sub_cap[b["kind"]])
                 evidence += evs
             if b["kind"] == "hood":
-                texts["about_points_json"] = json.dumps(hood_points(point_rules, ctx, evidence, point_cap),
-                                                        ensure_ascii=False)
+                pts = hood_points(point_rules, ctx, evidence, point_cap, texts["host_intro"])
+                texts["about_points_json"] = json.dumps(pts, ensure_ascii=False)
+                # A one-sentence field whose only sentence the shown places no longer support falls back to the
+                # matching icon point (the catch, or the first fact), which is chosen from the current data.
+                for col, pick in (("watch_for", [x for x in pts if x["icon"] == "warning"]),
+                                  ("good_for_her", [x for x in pts if x["icon"] != "warning"])):
+                    if not texts[col].strip() and pick:
+                        texts[col] = pick[0]["text"]
+                        DROPPED.append(f"{ctx['id']}: {col} now reads as its icon point: {texts[col]}")
             problems, _ = C.check_row(b["kind"], b["id"], texts, evidence)
             errors += [f"{b['id']}: {p}" for p in problems]
         except (KeyError, ValueError, LookupError) as e:

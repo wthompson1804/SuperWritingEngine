@@ -841,6 +841,15 @@ def main():
     for b, d in rows.items():
         # 4c: which elevators rest on a listing site's page alone (no own page, no record, no phone call)
         d["elevator_aggregator_only"] = "yes" if d.get("elevator") == "yes" and b in agg_only else ""
+    # independent check 3, D21 (4110 Bowne St 5W, 80 Richmond Hill Rd 7O): "the listing does not state an elevator" is not
+    # an open fact where the city's own record settles it: the listing's own lot, an elevator building on file with an
+    # active passenger elevator (basis official_record). A row that speaks AGAINST an elevator still keeps it open.
+    for b, d in rows.items():
+        eo = d.get("elevator_evidence_open", "")
+        if eo and d.get("elevator") == "yes" and d.get("elevator_basis") == "official_record" \
+                and all(x.startswith("the evidence pass could not confirm it") and "neighbouring lot" not in x for x in eo.split(" || ")):
+            d["elevator_note"] = ("the listing does not state an elevator; the city's record for the listing's own lot does (" + eo[:160] + ")")[:300]
+            d.pop("elevator_evidence_open")
     # owner, 2026-11-16 (independent check 3, part B): a tag-only elevator is still 'stated', EXCEPT
     #  (1) buildings in the reviewed table data/reference/elevator_doubt.csv, and
     #  (2) by rule, a tag-only elevator in a complex the data shows to be multi-building garden-style: several building

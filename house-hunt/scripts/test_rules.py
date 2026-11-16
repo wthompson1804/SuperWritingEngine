@@ -632,6 +632,11 @@ def data_4(M, R, S):
     ok(len(x) == 0 or x.disclosures.str.contains('"what": "lease term"', regex=False).all(), "IC3 D9: The Riverhouse (price is for an 18-month lease) carries the lease-term disclosure")
     V = VD.load_verdicts()
     ok(not ((V.verdict == "asterisk") & V.kind.isin(list(VD.DISCLOSURE_KINDS))).any(), "IC3 D22: no asterisk row on a disclosure kind")
+    # ---- D21: the city's record for the listing's own lot settles "the listing does not state an elevator"
+    for pat in ["4110 Bowne St", "80 Richmond Hill Rd", "8625 Van Wyck"]:
+        x = M[M.address.str.contains(pat)]
+        ok(len(x) == 0 or ((x.elevator_basis != "official_record") | (x.elevator_evidence_open == "")).all(), f"IC3 D21: {pat}: an elevator on the city's record for the listing's own lot is not left open")
+    ok(not ((M.elevator_basis == "official_record") & ((M.pluto_lot_ok != "yes") | (pd.to_numeric(M.dob_active_elevators, errors="coerce") == 0))).any(), "IC3 D21: an official-record elevator always rests on the listing's own lot with an active device")
     # ---- D10: 30 Broad Street
     x = named("30 Broad St")
     ok(len(x) == 0 or x.parking_type.str.startswith("offsite").all(), "IC3 D10: 30 Broad Street's parking type is off-site")

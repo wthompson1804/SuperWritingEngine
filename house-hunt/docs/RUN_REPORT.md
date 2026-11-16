@@ -1,4 +1,4 @@
-# Run report (2026-11-16T01:48:58+00:00)
+# Run report (2026-11-16T01:50:32+00:00)
 
 ## Steps
 
@@ -12,8 +12,8 @@
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | ok |
-| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
+| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | FAILED |
+| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | FAILED |
 
 ## Stage counts
 
@@ -25,10 +25,10 @@
 |   fail a gate | 4271 | 4271 | +0 |
 | costed in the master table | 2632 | 2632 | +0 |
 | within the $3,000 all-in cap | 1613 | 1613 | +0 |
-| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 761 | 761 | +0 |
-| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 487 | 487 | +0 |
+| ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 763 | 761 | +2 |
+| shown (every gate fact confirmed or stated; top 10 per neighborhood) | 489 | 487 | +2 |
 | avoid cards | 34 | 34 | +0 |
-|   shown with an asterisk (one thing to confirm) | 294 | 294 | +0 |
+|   shown with an asterisk (one thing to confirm) | 292 | 294 | -2 |
 | removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 121 | 121 | +0 |
 | held back for one confirmation | 35 | 35 | +0 |
 | clean, waiting for a live check (not shown) | 35 | 35 | +0 |
@@ -52,11 +52,11 @@
 
 - elevator not stated on any page and the building's height is not known (it was guessed from the unit label): 135
 - listing 60+ days old: 24
-- two or more things unconfirmed: elevator: 17
+- two or more things unconfirmed: elevator: 14
 - conflicting dog policy: 12
 - listing: 11
-- dogs allowed: 9
 - availability: 7
+- dogs allowed: 6
 - two or more things unconfirmed: dogs allowed: 5
 
 ## Shown units by year
@@ -65,7 +65,7 @@
 |:--------------------------|----------------:|---------:|--------:|--------------:|
 | The Fresh-Start Year      |               6 |       92 |      63 |             0 |
 | The Little-City Year      |              29 |      313 |     202 |             5 |
-| The Old-Neighborhood Year |              40 |      133 |      83 |            27 |
+| The Old-Neighborhood Year |              40 |      135 |      85 |            27 |
 | The Quiet-Street Year     |               7 |       10 |      10 |             0 |
 | The Room-to-Breathe Year  |              31 |      206 |     124 |             0 |
 | The Walk-Everywhere Year  |               5 |        7 |       5 |             2 |
@@ -83,7 +83,7 @@
 | pet_rent | 59 |
 | pool | 44 |
 | doorman | 37 |
-| year_built | 45 |
+| year_built | 46 |
 | toll_rt_ezpass | 100 |
 | transit_sat_median | 94 |
 | near_violent_250m_24m | 13 |
@@ -148,20 +148,22 @@ needs_call: {'yes': 1660, 'no': 999}
 
 **ranking and selection**
 ```
-evidence: 46 units excluded, shown 487, avoid cards 34, of them with an asterisk 294 ({'live check': 178, 'elevator': 44, 'listing': 37, 'availability': 16, 'dogs allowed': 14, 'eligibility': 5}), held for a confirmation 35, waiting for a live check 35
-stages: 2632 costed -> -1019 over the all-in cap -> -361 Jamaica safety rule -> -114 failed a gate on confirmed facts -> -121 removed by a reviewed verdict -> -1 sibling floor rule -> -209 sketchy -> -46 evidence exclusions -> 761 ranked
-shown buildings 231; disclosures: {'floor not published': 438, 'special offer': 253, 'lease term': 98, 'could pass $3,000': 97, 'dog weight limit not published': 22, 'overnight street parking': 19, 'net-effective rent': 18, 'condo rented by its owner': 9}
-(kept 761 units; candidates 362; shown 395; pools: {'': 405, 'pool': 356}
+evidence: 47 units excluded, shown 489, avoid cards 34, of them with an asterisk 292 ({'live check': 178, 'elevator': 40, 'listing': 37, 'dogs allowed': 16, 'availability': 16, 'eligibility': 5}), held for a confirmation 35, waiting for a live check 35
+stages: 2632 costed -> -1019 over the all-in cap -> -361 Jamaica safety rule -> -114 failed a gate on confirmed facts -> -121 removed by a reviewed verdict -> -1 sibling floor rule -> -206 sketchy -> -47 evidence exclusions -> 763 ranked
+shown buildings 232; disclosures: {'floor not published': 440, 'special offer': 253, 'lease term': 98, 'could pass $3,000': 97, 'dog weight limit not published': 22, 'overnight street parking': 19, 'net-effective rent': 18, 'condo rented by its owner': 9}
+(kept 763 units; candidates 364; shown 397; pools: {'': 407, 'pool': 356}
 ```
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 302 checks, 0 failed
+test_rules (data): 306 checks, 1 failed
+  FAIL verdicts: a shown unit has no ok / asterisk / disclose verdict
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
 field registry: {'used': 500, 'display': 311, 'provenance': 191, 'not_used': 17}
-shown-list assertions: all pass
+SHOWN-LIST ASSERTIONS FAILED: 1 violation(s)
+   zumper-65719910 ( 6G): no reviewed verdict: nobody has read this unit's evidence
 ```
 

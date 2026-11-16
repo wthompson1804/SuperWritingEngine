@@ -569,7 +569,7 @@ BUILDING = {'only_pool': ('pool',
                   'Your car gets a garage here, alone among the buildings in this neighborhood{gtail}.',
                   'Of the {n} buildings here, this is the single building that puts the car indoors{gtail}.',
                   "For the car, this is the standout: the lone garage on this neighborhood's list{gtail}.",
-                  'No other building here mentions a garage, so this is where the car sleeps indoors{gtail}.',
+                  'This is where the car sleeps indoors, since no other building here mentions a garage{gtail}.',
                   'If the car is the priority, start with this building, the only garage among the {n}{gtail}.',
                   'A garage is hard to find in this neighborhood, and this is the only building of {n} with '
                   'one{gtail}.']),
@@ -960,7 +960,7 @@ CATCHES = {'confirm:live check': ['We have not re-checked this listing live yet,
                      'you which.',
                      'Until they tell you what a month costs once the offer ends, treat this price as a maybe.',
                      'The offer muddies the price, so start by asking what the lease will say you owe each month.',
-                     'The page does not reveal whether the special is already in this rent, so make them spell it '
+                     'Nothing on the page reveals whether the special is already in this rent, so make them spell it '
                      'out.',
                      'Get the first full payment and the regular monthly rent from the office, since the special '
                      'leaves both unclear.',
@@ -1061,7 +1061,7 @@ CATCHES = {'confirm:live check': ['We have not re-checked this listing live yet,
                     'Treat floor {floor} as a guess from the unit number until the office confirms it.',
                     'Confirm the floor when you call, since floor {floor} comes from the unit number alone.',
                     'You want to be above the ground floor, and floor {floor} is only inferred here, so ask.',
-                    'Floor {floor} is an inference from the unit number, so have the office state the floor.',
+                    'Have the office state the floor, because floor {floor} is an inference from the unit number.',
                     'Nothing on the listing gives the floor, and floor {floor} is only what the unit number '
                     'implies.']}
 
@@ -1461,7 +1461,7 @@ WARNINGS = {                                           # key: (topic, [wordings]
                              "Check the town's overnight parking rule against the building's parking.",
                              "Street parking overnight is restricted, so the building must park you."]),
     "tour": ("tour", ["Ask to see the elevator, the hallways and the mail room.", "Walk the common areas before you decide.",
-                      "On the tour, look at the lobby and the halls as closely as the unit.",
+                      "On the tour, look at the lobby and halls as closely as the unit.",
                       "Check upkeep in the shared spaces when you visit.",
                       "Give the hallways and the elevator a look when you tour.", "See the building's shared spaces before you sign."]),
 }
