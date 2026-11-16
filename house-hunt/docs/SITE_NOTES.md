@@ -520,3 +520,18 @@ walkthrough's ceilings are 3.6 screens for both page kinds.
 - Data that would help: `about_points[].lead`; `described[].featured`; `traits.station_m` + station name; names of
   the nearest park and dog park; `day_moments[].caption`; a one-line `headlines.residents_say.headline`; a written
   three-word `local.street_parking_short`; `years[].counts` used for the strip so text and figures share one source.
+
+### Wording fixed in the template after the copy edit (same pass)
+
+- "A park is an 8-minute walk away" (`aWalk` picks "a" or "an"); never "green space a 8-minute walk".
+- "A typical apartment is 788 sq ft"; "1 car theft" / "2 car thefts"; "A studio, size not published, floor not
+  published." (no double comma).
+- The crime lines of the Night moment (rates, incidents nearby) moved inside that moment's closed "See how we got
+  this" (`momentBody`); opening the moment no longer shows them.
+- The by-mail toll figure is shown nowhere on experience and neighborhood views: the sheet and "See how we got this"
+  say only "with a New York E-ZPass" and that an out-of-state tag pays more at MTA crossings.
+- A prose headline (`HL.first`) is the first sentence, whole, and wraps; the cut-at-a-comma logic is gone.
+- The experience page shows `day_moments`; `scene` / `host.walkthrough` are used only when there are no moments, and
+  never both.
+- The all-in sheet opens with "A month, everything included."
+- Still to align with the copy's vocabulary: "place(s)" on buttons, counts, My list and "Save this place".

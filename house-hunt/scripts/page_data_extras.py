@@ -900,12 +900,22 @@ def is_bare_location(quote) -> bool:
     return bool(BARE_LOCATION.match(t))
 
 
+# What it is like to be there comes first; a fact about the economy or the founding date comes last.
+TOPIC_ORDER = ["main street", "food and nightlife", "parks", "waterfront", "housing feel", "landmark", "event", "transit", "history"]
+
+
+def topic_rank(topic):
+    """Position of a description's topic in TOPIC_ORDER; a row with no topic (round 1) sorts after all of them."""
+    t = (topic or "").strip().lower()
+    return TOPIC_ORDER.index(t) if t in TOPIC_ORDER else len(TOPIC_ORDER)
+
+
 def pick_descriptions(rows):
     """The descriptions to show for one place, best first. Each row: {quote, topic, _c (character), _r (round)}.
     Rule: higher character first, round 2 before round 1 at equal character; never the same quote twice (nor one that
     is contained in another already taken); one per topic when there are more than three to choose from; at most
     three; a row with character 1 (a bare location sentence) only when nothing better exists, and then alone."""
-    order = sorted(range(len(rows)), key=lambda i: (-rows[i]["_c"], -rows[i]["_r"], i))
+    order = sorted(range(len(rows)), key=lambda i: (-rows[i]["_c"], topic_rank(rows[i].get("topic")), -rows[i]["_r"], i))
     taken, picked, topics = [], [], set()
     for i in order:
         x, q = rows[i], squash(rows[i]["quote"])
@@ -950,20 +960,26 @@ def descriptions(c):
                 "topic": none_if_blank(r["topic"]), "licence": none_if_blank(r["licence_note"]), "_c": character, "_r": rnd})
     if not read:
         return "; ".join(why)
-    public = lambda x, about=None: {k: v for k, v in x.items() if not k.startswith("_")} | ({"about": x["about"] or about} if about else {})
+    def public_list(picked, about=None):
+        """The rows as the page reads them; the first (best) one is marked `featured` for the pull quote, unless it
+        is only a bare fact (character below 2)."""
+        out = [{k: v for k, v in x.items() if not k.startswith("_")} | ({"about": x["about"] or about} if about else {}) for x in picked]
+        if out and picked[0]["_c"] >= 2:
+            out[0]["featured"] = True
+        return out
     for h in c.hoods.values():
         h.pop("described", None)
     picks = {hid: pick_descriptions(rows) for hid, rows in pool.items()}
     for hid, picked in picks.items():
         if hid in c.hoods and picked:
-            c.hoods[hid]["described"] = [public(x) for x in picked]
+            c.hoods[hid]["described"] = public_list(picked)
     inherited = 0
     for hid, picked in picks.items():
         if hid in c.hoods or not picked:
             continue
         for h in c.kids.get(hid) or []:
             if not h.get("described"):
-                h["described"] = [public(x, f"{h.get('parent_name')} as a whole") for x in picked]
+                h["described"] = public_list(picked, f"{h.get('parent_name')} as a whole")
                 inherited += 1
     n = sum(1 for h in c.hoods.values() if h.get("described"))
     return (f"{n} of {len(c.hoods)} neighborhoods" + (f" ({inherited} show the city's)" if inherited else "")

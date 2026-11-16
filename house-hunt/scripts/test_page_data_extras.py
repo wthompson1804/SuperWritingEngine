@@ -629,7 +629,9 @@ class Descriptions(Sandbox):
                                                      "The borough is bisected by the Raritan Valley Line.",
                                                      "The main street has a hardware store older than the borough."],
                          "character 3 first, round 2 before round 1, one per topic, no repeat, and never the bare location sentence beside better ones")
-        self.assertEqual(set(got[0]), {"quote", "source", "url", "about", "topic", "licence"})
+        self.assertEqual(set(got[0]), {"quote", "source", "url", "about", "topic", "licence", "featured"})
+        self.assertTrue(got[0]["featured"])
+        self.assertTrue(all("featured" not in x for x in got[1:]))
         self.assertTrue(all(x["source"] and x["url"] for x in got))
         self.assertIn("no source or link", d["meta"]["extras"]["descriptions"])
         self.assertEqual(X.validate(d), [])
