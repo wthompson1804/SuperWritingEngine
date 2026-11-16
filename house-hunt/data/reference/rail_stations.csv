@@ -1,0 +1,1132 @@
+station,system,kind,lat,lon,feed,lines
+1 Av,NYC Subway,subway,40.730953,-73.981628,gtfs_subway,L
+103 St,NYC Subway,subway,40.799446,-73.968379,gtfs_subway,1
+103 St,NYC Subway,subway,40.7906,-73.947478,gtfs_subway,4; 6; 6X
+103 St,NYC Subway,subway,40.796092,-73.961454,gtfs_subway,A; B; C
+103 St-Corona Plaza,NYC Subway,subway,40.749865,-73.8627,gtfs_subway,7
+104 St,NYC Subway,subway,40.681711,-73.837683,gtfs_subway,A
+104 St,NYC Subway,subway,40.695178,-73.84433,gtfs_subway,J; Z
+110 St,NYC Subway,subway,40.79502,-73.94425,gtfs_subway,4; 6; 6X
+110 St-Malcolm X Plaza,NYC Subway,subway,40.799075,-73.951822,gtfs_subway,2; 3
+111 St,NYC Subway,subway,40.75173,-73.855334,gtfs_subway,7
+111 St,NYC Subway,subway,40.684331,-73.832163,gtfs_subway,A
+111 St,NYC Subway,subway,40.697418,-73.836345,gtfs_subway,J
+116 St,NYC Subway,subway,40.802098,-73.949625,gtfs_subway,2; 3
+116 St,NYC Subway,subway,40.798629,-73.941617,gtfs_subway,4; 6; 6X
+116 St,NYC Subway,subway,40.805085,-73.954882,gtfs_subway,A; B; C
+116 St-Columbia University,NYC Subway,subway,40.807722,-73.96411,gtfs_subway,1
+121 St,NYC Subway,subway,40.700492,-73.828294,gtfs_subway,J; Z
+125 St,NYC Subway,subway,40.815581,-73.958372,gtfs_subway,1
+125 St,NYC Subway,subway,40.807754,-73.945495,gtfs_subway,2; 3
+125 St,NYC Subway,subway,40.804138,-73.937594,gtfs_subway,4; 5; 6; 6X
+125 St,NYC Subway,subway,40.811109,-73.952343,gtfs_subway,A; B; C; D
+135 St,NYC Subway,subway,40.814229,-73.94077,gtfs_subway,2; 3
+135 St,NYC Subway,subway,40.817894,-73.947649,gtfs_subway,A; B; C
+137 St-City College,NYC Subway,subway,40.822008,-73.953676,gtfs_subway,1
+138 St-Grand Concourse,NYC Subway,subway,40.813224,-73.929849,gtfs_subway,4; 5
+14 St,NYC Subway,subway,40.737826,-74.000201,gtfs_subway,1; 2; 3
+14 St,NYC Subway,subway,40.740893,-74.00169,gtfs_subway,A; C; E
+14 St,NYC Subway,subway,40.738228,-73.996209,gtfs_subway,F; FX; M
+14 St-Union Sq,NYC Subway,subway,40.734673,-73.989951,gtfs_subway,4; 5; 6; 6X
+14 St-Union Sq,NYC Subway,subway,40.734789,-73.99073,gtfs_subway,L
+14 St-Union Sq,NYC Subway,subway,40.735736,-73.990568,gtfs_subway,N; Q; R; W
+145 St,NYC Subway,subway,40.826551,-73.95036,gtfs_subway,1
+145 St,NYC Subway,subway,40.820421,-73.936245,gtfs_subway,3
+145 St,NYC Subway,subway,40.824783,-73.944216,gtfs_subway,A; C
+149 St-Hostos,NYC Subway,subway,40.81841,-73.926718,gtfs_subway,2; 5
+149 St-Hostos,NYC Subway,subway,40.818375,-73.927351,gtfs_subway,4
+15 St-Prospect Park,NYC Subway,subway,40.660365,-73.979493,gtfs_subway,F; G
+155 St,NYC Subway,subway,40.830518,-73.941514,gtfs_subway,A; C
+155 St,NYC Subway,subway,40.830135,-73.938209,gtfs_subway,B; D
+157 St,NYC Subway,subway,40.834041,-73.94489,gtfs_subway,1
+161 St-Yankee Stadium,NYC Subway,subway,40.827994,-73.925831,gtfs_subway,4
+161 St-Yankee Stadium,NYC Subway,subway,40.827905,-73.925651,gtfs_subway,B; D
+163 St-Amsterdam Av,NYC Subway,subway,40.836013,-73.939892,gtfs_subway,A; C
+167 St,NYC Subway,subway,40.835537,-73.9214,gtfs_subway,4
+167 St,NYC Subway,subway,40.833771,-73.91844,gtfs_subway,B; D
+168 St,NYC Subway,subway,40.840719,-73.939561,gtfs_subway,A; C
+168 St-Washington Hts,NYC Subway,subway,40.840556,-73.940133,gtfs_subway,1
+169 St,NYC Subway,subway,40.71047,-73.793604,gtfs_subway,E; F; FX
+170 St,NYC Subway,subway,40.840075,-73.917791,gtfs_subway,4
+170 St,NYC Subway,subway,40.839306,-73.9134,gtfs_subway,B; D
+174 St,NYC Subway,subway,40.837288,-73.887734,gtfs_subway,2; 5
+174-175 Sts,NYC Subway,subway,40.8459,-73.910136,gtfs_subway,B; D
+175 St,NYC Subway,subway,40.847391,-73.939704,gtfs_subway,A
+176 St,NYC Subway,subway,40.84848,-73.911794,gtfs_subway,4
+18 Av,NYC Subway,subway,40.607954,-74.001736,gtfs_subway,D
+18 Av,NYC Subway,subway,40.629755,-73.976971,gtfs_subway,F; FX
+18 Av,NYC Subway,subway,40.620671,-73.990414,gtfs_subway,N; W
+18 St,NYC Subway,subway,40.74104,-73.997871,gtfs_subway,1; 2
+181 St,NYC Subway,subway,40.849505,-73.933596,gtfs_subway,1
+181 St,NYC Subway,subway,40.851695,-73.937969,gtfs_subway,A
+182-183 Sts,NYC Subway,subway,40.856093,-73.900741,gtfs_subway,B; D
+183 St,NYC Subway,subway,40.858407,-73.903879,gtfs_subway,4
+190 St,NYC Subway,subway,40.859022,-73.93418,gtfs_subway,A
+191 St,NYC Subway,subway,40.855225,-73.929412,gtfs_subway,1
+2 Av,NYC Subway,subway,40.723402,-73.989938,gtfs_subway,F; FX
+20 Av,NYC Subway,subway,40.604556,-73.998168,gtfs_subway,D
+20 Av,NYC Subway,subway,40.61741,-73.985026,gtfs_subway,N; W
+207 St,NYC Subway,subway,40.864621,-73.918822,gtfs_subway,1
+21 St,NYC Subway,subway,40.744065,-73.949724,gtfs_subway,G
+21 St-Queensbridge,NYC Subway,subway,40.754203,-73.942836,gtfs_subway,F; M
+215 St,NYC Subway,subway,40.869444,-73.915279,gtfs_subway,1
+219 St,NYC Subway,subway,40.883895,-73.862633,gtfs_subway,2; 5
+225 St,NYC Subway,subway,40.888022,-73.860341,gtfs_subway,2; 5
+23 St,NYC Subway,subway,40.744081,-73.995657,gtfs_subway,1; 2
+23 St,NYC Subway,subway,40.745906,-73.998041,gtfs_subway,A; C; E
+23 St,NYC Subway,subway,40.742878,-73.992821,gtfs_subway,F; FX; M
+23 St,NYC Subway,subway,40.741303,-73.989344,gtfs_subway,N; Q; R; W
+23 St-Baruch College,NYC Subway,subway,40.739864,-73.986599,gtfs_subway,4; 6; 6X
+231 St,NYC Subway,subway,40.878856,-73.904834,gtfs_subway,1
+233 St,NYC Subway,subway,40.893193,-73.857473,gtfs_subway,2; 5
+238 St,NYC Subway,subway,40.884667,-73.90087,gtfs_subway,1
+25 Av,NYC Subway,subway,40.597704,-73.986829,gtfs_subway,D
+25 St,NYC Subway,subway,40.660397,-73.998091,gtfs_subway,D; N; R; W
+28 St,NYC Subway,subway,40.747215,-73.993365,gtfs_subway,1; 2
+28 St,NYC Subway,subway,40.74307,-73.984264,gtfs_subway,4; 6; 6X
+28 St,NYC Subway,subway,40.745494,-73.988691,gtfs_subway,N; Q; R; W
+3 Av,NYC Subway,subway,40.732849,-73.986122,gtfs_subway,L
+3 Av-138 St,NYC Subway,subway,40.810476,-73.926138,gtfs_subway,6; 6X
+3 Av-149 St,NYC Subway,subway,40.816109,-73.917757,gtfs_subway,2; 5
+30 Av,NYC Subway,subway,40.766779,-73.921479,gtfs_subway,N; W
+33 St,NYC Subway,subway,40.746081,-73.982076,gtfs_subway,4; 6; 6X
+33 St-Rawson St,NYC Subway,subway,40.744587,-73.930997,gtfs_subway,7; 7X
+34 St-Herald Sq,NYC Subway,subway,40.749719,-73.987823,gtfs_subway,B; D; F; FX; M
+34 St-Herald Sq,NYC Subway,subway,40.749567,-73.98795,gtfs_subway,N; Q; R; W
+34 St-Hudson Yards,NYC Subway,subway,40.755882,-74.00191,gtfs_subway,7; 7X
+34 St-Penn Station,NYC Subway,subway,40.750373,-73.991057,gtfs_subway,1; 2; 3
+34 St-Penn Station,NYC Subway,subway,40.752287,-73.993391,gtfs_subway,A; C; E
+36 Av,NYC Subway,subway,40.756804,-73.929575,gtfs_subway,N; W
+36 St,NYC Subway,subway,40.752039,-73.928781,gtfs_subway,E; F; M; R
+36 St,NYC Subway,subway,40.655144,-74.003549,gtfs_subway,D; N; R; W
+39 Av-Dutch Kills,NYC Subway,subway,40.752882,-73.932755,gtfs_subway,N; W
+4 Av-9 St,NYC Subway,subway,40.670272,-73.989779,gtfs_subway,F; G
+4 Av-9 St,NYC Subway,subway,40.670847,-73.988302,gtfs_subway,D; N; R; W
+40 St-Lowery St,NYC Subway,subway,40.743781,-73.924016,gtfs_subway,7; 7X
+42 St-Bryant Pk,NYC Subway,subway,40.754222,-73.984569,gtfs_subway,B; D; F; FX; M
+42 St-Port Authority Bus Terminal,NYC Subway,subway,40.757308,-73.989735,gtfs_subway,A; C; E
+45 St,NYC Subway,subway,40.648939,-74.010006,gtfs_subway,N; R; W
+46 St,NYC Subway,subway,40.756312,-73.913333,gtfs_subway,E; F; M; R
+46 St-Bliss St,NYC Subway,subway,40.743132,-73.918435,gtfs_subway,7; 7X
+47-50 Sts-Rockefeller Ctr,NYC Subway,subway,40.758663,-73.981329,gtfs_subway,B; D; F; FX; M
+49 St,NYC Subway,subway,40.759901,-73.984139,gtfs_subway,N; Q; R; W
+5 Av,NYC Subway,subway,40.753821,-73.981963,gtfs_subway,7; 7X
+5 Av/53 St,NYC Subway,subway,40.760167,-73.975224,gtfs_subway,E; F; FX
+5 Av/59 St,NYC Subway,subway,40.764811,-73.973347,gtfs_subway,N; R; W
+50 St,NYC Subway,subway,40.761728,-73.983849,gtfs_subway,1; 2
+50 St,NYC Subway,subway,40.762456,-73.985984,gtfs_subway,A; C; E
+50 St,NYC Subway,subway,40.63626,-73.994791,gtfs_subway,D
+51 St,NYC Subway,subway,40.757107,-73.97192,gtfs_subway,4; 6; 6X
+52 St,NYC Subway,subway,40.744149,-73.912549,gtfs_subway,7; 7X
+53 St,NYC Subway,subway,40.645069,-74.014034,gtfs_subway,N; R; W
+55 St,NYC Subway,subway,40.631435,-73.995476,gtfs_subway,D
+57 St,NYC Subway,subway,40.763972,-73.97745,gtfs_subway,F; M
+57 St-7 Av,NYC Subway,subway,40.764664,-73.980658,gtfs_subway,N; Q; R; W
+59 St,NYC Subway,subway,40.762526,-73.967967,gtfs_subway,4; 5; 6; 6X
+59 St,NYC Subway,subway,40.641362,-74.017881,gtfs_subway,N; R; W
+59 St-Columbus Circle,NYC Subway,subway,40.768247,-73.981929,gtfs_subway,1; 2
+59 St-Columbus Circle,NYC Subway,subway,40.768296,-73.981736,gtfs_subway,A; B; C; D
+6 Av,NYC Subway,subway,40.737335,-73.996786,gtfs_subway,L
+61 St-Woodside,NYC Subway,subway,40.74563,-73.902984,gtfs_subway,7; 7X
+62 St,NYC Subway,subway,40.626472,-73.996895,gtfs_subway,D; R; W
+63 Dr-Rego Park,NYC Subway,subway,40.729846,-73.861604,gtfs_subway,E; F; M; R
+65 St,NYC Subway,subway,40.749669,-73.898453,gtfs_subway,E; F; M; R
+66 St-Lincoln Center,NYC Subway,subway,40.77344,-73.982209,gtfs_subway,1; 2
+67 Av,NYC Subway,subway,40.726523,-73.852719,gtfs_subway,E; F; M; R
+68 St-Hunter College,NYC Subway,subway,40.768141,-73.96387,gtfs_subway,4; 6; 6X
+69 St,NYC Subway,subway,40.746325,-73.896403,gtfs_subway,7; 7X
+7 Av,NYC Subway,subway,40.762862,-73.981637,gtfs_subway,B; D; E
+7 Av,NYC Subway,subway,40.67705,-73.972367,gtfs_subway,B; Q
+7 Av,NYC Subway,subway,40.666271,-73.980305,gtfs_subway,F; FX; G
+71 St,NYC Subway,subway,40.619589,-73.998864,gtfs_subway,D
+72 St,NYC Subway,subway,40.778453,-73.98197,gtfs_subway,1; 2; 3
+72 St,NYC Subway,subway,40.775594,-73.97641,gtfs_subway,A; B; C
+72 St,NYC Subway,subway,40.768799,-73.958424,gtfs_subway,N; Q; R
+74 St-Broadway,NYC Subway,subway,40.746848,-73.891394,gtfs_subway,7; 7X
+75 Av,NYC Subway,subway,40.718331,-73.837324,gtfs_subway,E; F; FX
+75 St-Elderts Ln,NYC Subway,subway,40.691324,-73.867139,gtfs_subway,J; Z
+77 St,NYC Subway,subway,40.77362,-73.959874,gtfs_subway,4; 6; 6X
+77 St,NYC Subway,subway,40.629742,-74.02551,gtfs_subway,R
+79 St,NYC Subway,subway,40.783934,-73.979917,gtfs_subway,1; 2
+79 St,NYC Subway,subway,40.613501,-74.00061,gtfs_subway,D
+8 Av,NYC Subway,subway,40.739777,-74.002578,gtfs_subway,L
+8 Av,NYC Subway,subway,40.635064,-74.011719,gtfs_subway,N; W
+8 St-NYU,NYC Subway,subway,40.730328,-73.992629,gtfs_subway,N; Q; R; W
+80 St,NYC Subway,subway,40.679371,-73.858992,gtfs_subway,A
+81 St-Museum of Natural History,NYC Subway,subway,40.781433,-73.972143,gtfs_subway,A; B; C
+82 St-Jackson Hts,NYC Subway,subway,40.747659,-73.883697,gtfs_subway,7
+85 St-Forest Pkwy,NYC Subway,subway,40.692435,-73.86001,gtfs_subway,J
+86 St,NYC Subway,subway,40.788644,-73.976218,gtfs_subway,1; 2
+86 St,NYC Subway,subway,40.779492,-73.955589,gtfs_subway,4; 5; 6; 6X
+86 St,NYC Subway,subway,40.785868,-73.968916,gtfs_subway,A; B; C
+86 St,NYC Subway,subway,40.592721,-73.97823,gtfs_subway,N; W
+86 St,NYC Subway,subway,40.777891,-73.951787,gtfs_subway,N; Q; R
+86 St,NYC Subway,subway,40.622687,-74.028398,gtfs_subway,R
+88 St,NYC Subway,subway,40.679843,-73.85147,gtfs_subway,A
+9 Av,NYC Subway,subway,40.646292,-73.994324,gtfs_subway,D; R; W
+90 St-Elmhurst Av,NYC Subway,subway,40.748408,-73.876613,gtfs_subway,7
+96 St,NYC Subway,subway,40.793919,-73.972323,gtfs_subway,1; 2; 3
+96 St,NYC Subway,subway,40.785672,-73.95107,gtfs_subway,4; 6; 6X
+96 St,NYC Subway,subway,40.791642,-73.964696,gtfs_subway,A; B; C
+96 St,NYC Subway,subway,40.784318,-73.947152,gtfs_subway,N; Q; R
+Alabama Av,NYC Subway,subway,40.676992,-73.898654,gtfs_subway,J; Z
+Allerton Av,NYC Subway,subway,40.865462,-73.867352,gtfs_subway,2; 5
+Annadale,Staten Island Railway,subway,40.54046,-74.178217,gtfs_subway,SIR
+Aqueduct Racetrack,NYC Subway,subway,40.672097,-73.835919,gtfs_subway,A
+Aqueduct-N Conduit Av,NYC Subway,subway,40.668234,-73.834058,gtfs_subway,A
+Arthur Kill,Staten Island Railway,subway,40.516578,-74.242096,gtfs_subway,SIR
+Astor Pl,NYC Subway,subway,40.730054,-73.99107,gtfs_subway,4; 6; 6X
+Astoria Blvd,NYC Subway,subway,40.770258,-73.917843,gtfs_subway,N; W
+Astoria-Ditmars Blvd,NYC Subway,subway,40.775036,-73.912034,gtfs_subway,N; W
+Atlantic Av,NYC Subway,subway,40.675345,-73.903097,gtfs_subway,L
+Atlantic Av-Barclays Ctr,NYC Subway,subway,40.684359,-73.977666,gtfs_subway,2; 3; 4; 5
+Atlantic Av-Barclays Ctr,NYC Subway,subway,40.68446,-73.97689,gtfs_subway,B; Q
+Atlantic Av-Barclays Ctr,NYC Subway,subway,40.683666,-73.97881,gtfs_subway,D; N; R; W
+Avenue H,NYC Subway,subway,40.62927,-73.961639,gtfs_subway,Q
+Avenue I,NYC Subway,subway,40.625322,-73.976127,gtfs_subway,F; FX
+Avenue J,NYC Subway,subway,40.625039,-73.960803,gtfs_subway,Q
+Avenue M,NYC Subway,subway,40.617618,-73.959399,gtfs_subway,Q
+Avenue N,NYC Subway,subway,40.61514,-73.974197,gtfs_subway,F; FX
+Avenue P,NYC Subway,subway,40.608944,-73.973022,gtfs_subway,F; FX
+Avenue U,NYC Subway,subway,40.5993,-73.955929,gtfs_subway,Q
+Avenue U,NYC Subway,subway,40.596063,-73.973357,gtfs_subway,F; FX
+Avenue U,NYC Subway,subway,40.597473,-73.979137,gtfs_subway,N; W
+Avenue X,NYC Subway,subway,40.58962,-73.97425,gtfs_subway,F; FX
+Bay 50 St,NYC Subway,subway,40.588841,-73.983765,gtfs_subway,D
+Bay Pkwy,NYC Subway,subway,40.601875,-73.993728,gtfs_subway,D; R; W
+Bay Pkwy,NYC Subway,subway,40.620769,-73.975264,gtfs_subway,F; FX
+Bay Pkwy,NYC Subway,subway,40.611815,-73.981848,gtfs_subway,N; W
+Bay Ridge Av,NYC Subway,subway,40.634967,-74.023377,gtfs_subway,R
+Bay Ridge-95 St,NYC Subway,subway,40.616622,-74.030876,gtfs_subway,R
+Bay Terrace,Staten Island Railway,subway,40.5564,-74.136907,gtfs_subway,SIR
+Baychester Av,NYC Subway,subway,40.878663,-73.838591,gtfs_subway,5
+Beach 105 St,NYC Subway,subway,40.583209,-73.827559,gtfs_subway,A; S
+Beach 25 St,NYC Subway,subway,40.600066,-73.761353,gtfs_subway,A
+Beach 36 St,NYC Subway,subway,40.595398,-73.768175,gtfs_subway,A
+Beach 44 St,NYC Subway,subway,40.592943,-73.776013,gtfs_subway,A
+Beach 60 St,NYC Subway,subway,40.592374,-73.788522,gtfs_subway,A
+Beach 67 St,NYC Subway,subway,40.590927,-73.796924,gtfs_subway,A
+Beach 90 St,NYC Subway,subway,40.588034,-73.813641,gtfs_subway,A; S
+Beach 98 St,NYC Subway,subway,40.585307,-73.820558,gtfs_subway,A; S
+Bedford Av,NYC Subway,subway,40.717304,-73.956872,gtfs_subway,L
+Bedford Park Blvd,NYC Subway,subway,40.873244,-73.887138,gtfs_subway,B; D
+Bedford Park Blvd-Lehman College,NYC Subway,subway,40.873412,-73.890064,gtfs_subway,4
+Bedford-Nostrand Avs,NYC Subway,subway,40.689627,-73.953522,gtfs_subway,G
+Bergen St,NYC Subway,subway,40.680829,-73.975098,gtfs_subway,2; 3; 4
+Bergen St,NYC Subway,subway,40.686145,-73.990862,gtfs_subway,F; G
+Beverley Rd,NYC Subway,subway,40.644031,-73.964492,gtfs_subway,Q
+Beverly Rd,NYC Subway,subway,40.645098,-73.948959,gtfs_subway,2; 5
+Bleecker St,NYC Subway,subway,40.725915,-73.994659,gtfs_subway,4; 6; 6X
+Borough Hall,NYC Subway,subway,40.693219,-73.989998,gtfs_subway,2; 3
+Borough Hall,NYC Subway,subway,40.692404,-73.990151,gtfs_subway,4; 5
+Botanic Garden,NYC Subway,subway,40.670343,-73.959245,gtfs_subway,S
+Bowery,NYC Subway,subway,40.72028,-73.993915,gtfs_subway,J; Z
+Bowling Green,NYC Subway,subway,40.704817,-74.014065,gtfs_subway,4; 5
+Briarwood,NYC Subway,subway,40.709179,-73.820574,gtfs_subway,E; F; FX
+Brighton Beach,NYC Subway,subway,40.577621,-73.961376,gtfs_subway,B; Q
+Broad Channel,NYC Subway,subway,40.608382,-73.815925,gtfs_subway,A; S
+Broad St,NYC Subway,subway,40.706476,-74.011056,gtfs_subway,J; Z
+Broadway,NYC Subway,subway,40.706092,-73.950308,gtfs_subway,G
+Broadway,NYC Subway,subway,40.76182,-73.925508,gtfs_subway,N; W
+Broadway Junction,NYC Subway,subway,40.678334,-73.905316,gtfs_subway,A; C
+Broadway Junction,NYC Subway,subway,40.679498,-73.904512,gtfs_subway,J; Z
+Broadway Junction,NYC Subway,subway,40.678856,-73.90324,gtfs_subway,L
+Broadway-Lafayette St,NYC Subway,subway,40.725297,-73.996204,gtfs_subway,B; D; F; FX; M
+Bronx Park East,NYC Subway,subway,40.848828,-73.868457,gtfs_subway,2; 5
+Brook Av,NYC Subway,subway,40.807566,-73.91924,gtfs_subway,6
+Brooklyn Bridge-City Hall,NYC Subway,subway,40.713065,-74.004131,gtfs_subway,4; 5; 6; 6X
+Buhre Av,NYC Subway,subway,40.84681,-73.832569,gtfs_subway,6; 6X
+Burke Av,NYC Subway,subway,40.871356,-73.867164,gtfs_subway,2; 5
+Burnside Av,NYC Subway,subway,40.853453,-73.907684,gtfs_subway,4
+Bushwick Av-Aberdeen St,NYC Subway,subway,40.682829,-73.905249,gtfs_subway,L
+Canal St,NYC Subway,subway,40.722854,-74.006277,gtfs_subway,1; 2
+Canal St,NYC Subway,subway,40.718803,-74.000193,gtfs_subway,4; 6; 6X
+Canal St,NYC Subway,subway,40.720824,-74.005229,gtfs_subway,A; C; E
+Canal St,NYC Subway,subway,40.718092,-73.999892,gtfs_subway,J; Z
+Canal St,NYC Subway,subway,40.718383,-74.00046,gtfs_subway,N; Q
+Canal St,NYC Subway,subway,40.719527,-74.001775,gtfs_subway,N; R; W
+Canarsie-Rockaway Pkwy,NYC Subway,subway,40.646654,-73.90185,gtfs_subway,L
+Carroll St,NYC Subway,subway,40.680303,-73.995048,gtfs_subway,F; G
+Castle Hill Av,NYC Subway,subway,40.834255,-73.851222,gtfs_subway,6; 6X
+Cathedral Pkwy (110 St),NYC Subway,subway,40.803967,-73.966847,gtfs_subway,1
+Cathedral Pkwy (110 St),NYC Subway,subway,40.800603,-73.958161,gtfs_subway,A; B; C
+Central Av,NYC Subway,subway,40.697857,-73.927397,gtfs_subway,M
+Chambers St,NYC Subway,subway,40.715478,-74.009266,gtfs_subway,1; 2; 3
+Chambers St,NYC Subway,subway,40.714111,-74.008585,gtfs_subway,A; C
+Chambers St,NYC Subway,subway,40.713243,-74.003401,gtfs_subway,J; Z
+Chauncey St,NYC Subway,subway,40.682893,-73.910456,gtfs_subway,J; Z
+Christopher St-Stonewall,NYC Subway,subway,40.733422,-74.002906,gtfs_subway,1; 2
+Church Av,NYC Subway,subway,40.650843,-73.949575,gtfs_subway,2; 5
+Church Av,NYC Subway,subway,40.650527,-73.962982,gtfs_subway,B; Q
+Church Av,NYC Subway,subway,40.644041,-73.979678,gtfs_subway,F; FX; G
+City Hall,NYC Subway,subway,40.713282,-74.006978,gtfs_subway,N; R; W
+Clark St,NYC Subway,subway,40.697466,-73.993086,gtfs_subway,2; 3
+Classon Av,NYC Subway,subway,40.688873,-73.96007,gtfs_subway,G
+Cleveland St,NYC Subway,subway,40.679947,-73.884639,gtfs_subway,J
+Clifton,Staten Island Railway,subway,40.621319,-74.071402,gtfs_subway,SIR
+Clinton-Washington Avs,NYC Subway,subway,40.683263,-73.965838,gtfs_subway,A; C
+Clinton-Washington Avs,NYC Subway,subway,40.688089,-73.966839,gtfs_subway,G
+Coney Island-Stillwell Av,NYC Subway,subway,40.577422,-73.981233,gtfs_subway,D; F; FX; N; Q
+Cortelyou Rd,NYC Subway,subway,40.640927,-73.963891,gtfs_subway,Q
+Cortlandt St,NYC Subway,subway,40.710668,-74.011029,gtfs_subway,N; R; W
+Court Sq,NYC Subway,subway,40.747023,-73.945264,gtfs_subway,7; 7X
+Court Sq,NYC Subway,subway,40.746554,-73.943832,gtfs_subway,G
+Court Sq-23 St,NYC Subway,subway,40.747846,-73.946,gtfs_subway,E; F; FX
+Court St,NYC Subway,subway,40.6941,-73.991777,gtfs_subway,N; R; W
+Crescent St,NYC Subway,subway,40.683194,-73.873785,gtfs_subway,J; Z
+Crown Hts-Utica Av,NYC Subway,subway,40.668897,-73.932942,gtfs_subway,2; 3; 4; 5
+Cypress Av,NYC Subway,subway,40.805368,-73.914042,gtfs_subway,6
+Cypress Hills,NYC Subway,subway,40.689941,-73.87255,gtfs_subway,J
+DeKalb Av,NYC Subway,subway,40.703811,-73.918425,gtfs_subway,L
+DeKalb Av,NYC Subway,subway,40.690635,-73.981824,gtfs_subway,B; D; N; Q; R; W
+Delancey St-Essex St,NYC Subway,subway,40.718611,-73.988114,gtfs_subway,F; FX
+Delancey St-Essex St,NYC Subway,subway,40.718315,-73.987437,gtfs_subway,J; M; Z
+Ditmas Av,NYC Subway,subway,40.636119,-73.978172,gtfs_subway,F; FX
+Dongan Hills,Staten Island Railway,subway,40.588849,-74.09609,gtfs_subway,SIR
+Dyckman St,NYC Subway,subway,40.860531,-73.925536,gtfs_subway,1
+Dyckman St,NYC Subway,subway,40.865491,-73.927271,gtfs_subway,A
+E 143 St-St Mary's St,NYC Subway,subway,40.808719,-73.907657,gtfs_subway,6
+E 149 St,NYC Subway,subway,40.812118,-73.904098,gtfs_subway,6
+E 180 St,NYC Subway,subway,40.841894,-73.873488,gtfs_subway,2; 5
+East 105 St,NYC Subway,subway,40.650573,-73.899485,gtfs_subway,L
+East Broadway,NYC Subway,subway,40.713715,-73.990173,gtfs_subway,F; FX
+Eastchester-Dyre Av,NYC Subway,subway,40.8883,-73.830834,gtfs_subway,5
+Eastern Pkwy-Brooklyn Museum,NYC Subway,subway,40.671987,-73.964375,gtfs_subway,2; 3; 4
+Elder Av,NYC Subway,subway,40.828584,-73.879159,gtfs_subway,6
+Elmhurst Av,NYC Subway,subway,40.742454,-73.882017,gtfs_subway,E; F; M; R
+Eltingville,Staten Island Railway,subway,40.544601,-74.16457,gtfs_subway,SIR
+Euclid Av,NYC Subway,subway,40.675377,-73.872106,gtfs_subway,A; C
+Far Rockaway-Mott Av,NYC Subway,subway,40.603995,-73.755405,gtfs_subway,A
+Flatbush Av-Brooklyn College,NYC Subway,subway,40.632836,-73.947642,gtfs_subway,2; 5
+Flushing Av,NYC Subway,subway,40.700377,-73.950234,gtfs_subway,G
+Flushing Av,NYC Subway,subway,40.70026,-73.941126,gtfs_subway,J; M
+Flushing-Main St,NYC Subway,subway,40.7596,-73.83003,gtfs_subway,7; 7X
+Fordham Rd,NYC Subway,subway,40.862803,-73.901034,gtfs_subway,4
+Fordham Rd,NYC Subway,subway,40.861296,-73.897749,gtfs_subway,B; D
+Forest Av,NYC Subway,subway,40.704423,-73.903077,gtfs_subway,M
+Forest Hills-71 Av,NYC Subway,subway,40.721691,-73.844521,gtfs_subway,E; F; FX; M; R
+Fort Hamilton Pkwy,NYC Subway,subway,40.640914,-73.994304,gtfs_subway,D
+Fort Hamilton Pkwy,NYC Subway,subway,40.650782,-73.975776,gtfs_subway,F; G
+Fort Hamilton Pkwy,NYC Subway,subway,40.631386,-74.005351,gtfs_subway,N; W
+Franklin Av,NYC Subway,subway,40.68138,-73.956848,gtfs_subway,A; C
+Franklin Av,NYC Subway,subway,40.680596,-73.955827,gtfs_subway,S
+Franklin Av-Medgar Evers College,NYC Subway,subway,40.670682,-73.958131,gtfs_subway,2; 3; 4; 5
+Franklin St,NYC Subway,subway,40.719318,-74.006886,gtfs_subway,1; 2
+Freeman St,NYC Subway,subway,40.829993,-73.891865,gtfs_subway,2; 5
+Fresh Pond Rd,NYC Subway,subway,40.706186,-73.895877,gtfs_subway,M
+Fulton St,NYC Subway,subway,40.709416,-74.006571,gtfs_subway,2; 3
+Fulton St,NYC Subway,subway,40.710368,-74.009509,gtfs_subway,4; 5
+Fulton St,NYC Subway,subway,40.710197,-74.007691,gtfs_subway,A; C
+Fulton St,NYC Subway,subway,40.687119,-73.975375,gtfs_subway,G
+Fulton St,NYC Subway,subway,40.710374,-74.007582,gtfs_subway,J; Z
+Gates Av,NYC Subway,subway,40.68963,-73.92227,gtfs_subway,J; Z
+Graham Av,NYC Subway,subway,40.714565,-73.944053,gtfs_subway,L
+Grand Army Plaza,NYC Subway,subway,40.675235,-73.971046,gtfs_subway,2; 3; 4
+Grand Av-Newtown,NYC Subway,subway,40.737015,-73.877223,gtfs_subway,E; F; M; R
+Grand Central-42 St,NYC Subway,subway,40.751776,-73.976848,gtfs_subway,4; 5; 6; 6X
+Grand Central-42 St,NYC Subway,subway,40.751431,-73.976041,gtfs_subway,7; 7X
+Grand Central-42 St,NYC Subway,subway,40.752769,-73.979189,gtfs_subway,S
+Grand St,NYC Subway,subway,40.718267,-73.993753,gtfs_subway,B; D
+Grand St,NYC Subway,subway,40.711926,-73.94067,gtfs_subway,L
+Grant Av,NYC Subway,subway,40.677044,-73.86505,gtfs_subway,A
+Grant City,Staten Island Railway,subway,40.578965,-74.109704,gtfs_subway,SIR
+Grasmere,Staten Island Railway,subway,40.603117,-74.084087,gtfs_subway,SIR
+Great Kills,Staten Island Railway,subway,40.551231,-74.151399,gtfs_subway,SIR
+Greenpoint Av,NYC Subway,subway,40.731352,-73.954449,gtfs_subway,G
+Gun Hill Rd,NYC Subway,subway,40.87785,-73.866256,gtfs_subway,2; 5
+Gun Hill Rd,NYC Subway,subway,40.869526,-73.846384,gtfs_subway,5
+Halsey St,NYC Subway,subway,40.68637,-73.916559,gtfs_subway,J
+Halsey St,NYC Subway,subway,40.695602,-73.904084,gtfs_subway,L
+Harlem-148 St,NYC Subway,subway,40.82388,-73.93647,gtfs_subway,3
+Hewes St,NYC Subway,subway,40.70687,-73.953431,gtfs_subway,J; M
+High St,NYC Subway,subway,40.699337,-73.990531,gtfs_subway,A; C
+Houston St,NYC Subway,subway,40.728251,-74.005367,gtfs_subway,1; 2
+Howard Beach-JFK Airport,NYC Subway,subway,40.660476,-73.830301,gtfs_subway,A
+Hoyt St,NYC Subway,subway,40.690545,-73.985065,gtfs_subway,2; 3
+Hoyt-Schermerhorn Sts,NYC Subway,subway,40.688484,-73.985001,gtfs_subway,A; C; G
+Huguenot,Staten Island Railway,subway,40.533674,-74.191794,gtfs_subway,SIR
+Hunters Point Av,NYC Subway,subway,40.742216,-73.948916,gtfs_subway,7; 7X
+Hunts Point Av,NYC Subway,subway,40.820948,-73.890549,gtfs_subway,6; 6X
+Intervale Av,NYC Subway,subway,40.822181,-73.896736,gtfs_subway,2; 5
+Inwood-207 St,NYC Subway,subway,40.868072,-73.919899,gtfs_subway,A
+Jackson Av,NYC Subway,subway,40.81649,-73.907807,gtfs_subway,2; 5
+Jackson Hts-Roosevelt Av,NYC Subway,subway,40.746644,-73.891338,gtfs_subway,E; F; FX; M; R
+Jamaica Center-York College,NYC Subway,subway,40.702147,-73.801109,gtfs_subway,E; J; Z
+Jamaica-179 St,NYC Subway,subway,40.712646,-73.783817,gtfs_subway,E; F; FX
+Jamaica-Van Wyck,NYC Subway,subway,40.702566,-73.816859,gtfs_subway,E
+Jay St-MetroTech,NYC Subway,subway,40.692338,-73.987342,gtfs_subway,A; C; F; FX
+Jay St-MetroTech,NYC Subway,subway,40.69218,-73.985942,gtfs_subway,N; R; W
+Jefferson Av,Staten Island Railway,subway,40.583591,-74.103338,gtfs_subway,SIR
+Jefferson St,NYC Subway,subway,40.706607,-73.922913,gtfs_subway,L
+Junction Blvd,NYC Subway,subway,40.749145,-73.869527,gtfs_subway,7; 7X
+Junius St,NYC Subway,subway,40.663515,-73.902447,gtfs_subway,2; 3; 4; 5
+Kew Gardens-Union Tpke,NYC Subway,subway,40.714441,-73.831008,gtfs_subway,E; F; FX
+Kings Hwy,NYC Subway,subway,40.60867,-73.957734,gtfs_subway,B; Q
+Kings Hwy,NYC Subway,subway,40.603217,-73.972361,gtfs_subway,F; FX
+Kings Hwy,NYC Subway,subway,40.603923,-73.980353,gtfs_subway,N; W
+Kingsbridge Rd,NYC Subway,subway,40.86776,-73.897174,gtfs_subway,4
+Kingsbridge Rd,NYC Subway,subway,40.866978,-73.893509,gtfs_subway,B; D
+Kingston Av,NYC Subway,subway,40.669399,-73.942161,gtfs_subway,2; 3; 4; 5
+Kingston-Throop Avs,NYC Subway,subway,40.679921,-73.940858,gtfs_subway,A; C
+Knickerbocker Av,NYC Subway,subway,40.698664,-73.919711,gtfs_subway,M
+Kosciuszko St,NYC Subway,subway,40.693342,-73.928814,gtfs_subway,J
+Lafayette Av,NYC Subway,subway,40.686113,-73.973946,gtfs_subway,A; C
+Lexington Av/53 St,NYC Subway,subway,40.757552,-73.969055,gtfs_subway,E; F; FX
+Lexington Av/59 St,NYC Subway,subway,40.76266,-73.967258,gtfs_subway,N; R; W
+Lexington Av/63 St,NYC Subway,subway,40.764629,-73.966113,gtfs_subway,F; M; N; Q; R
+Liberty Av,NYC Subway,subway,40.674542,-73.896548,gtfs_subway,A; C
+Livonia Av,NYC Subway,subway,40.664038,-73.900571,gtfs_subway,L
+Longwood Av,NYC Subway,subway,40.816104,-73.896435,gtfs_subway,6
+Lorimer St,NYC Subway,subway,40.714063,-73.950275,gtfs_subway,L
+Lorimer St,NYC Subway,subway,40.703869,-73.947408,gtfs_subway,J; M
+Marble Hill-225 St,NYC Subway,subway,40.874561,-73.909831,gtfs_subway,1
+Marcy Av,NYC Subway,subway,40.708359,-73.957757,gtfs_subway,J; M; Z
+Metropolitan Av,NYC Subway,subway,40.712792,-73.951418,gtfs_subway,G
+Mets-Willets Point,NYC Subway,subway,40.754622,-73.845625,gtfs_subway,7; 7X
+Middle Village-Metropolitan Av,NYC Subway,subway,40.711396,-73.889601,gtfs_subway,M
+Middletown Rd,NYC Subway,subway,40.843863,-73.836322,gtfs_subway,6; 6X
+Montrose Av,NYC Subway,subway,40.707739,-73.93985,gtfs_subway,L
+Morgan Av,NYC Subway,subway,40.706152,-73.933147,gtfs_subway,L
+Morris Park,NYC Subway,subway,40.854364,-73.860495,gtfs_subway,5
+Morrison Av-Soundview,NYC Subway,subway,40.829521,-73.874516,gtfs_subway,6
+Mosholu Pkwy,NYC Subway,subway,40.87975,-73.884655,gtfs_subway,4
+Mt Eden Av,NYC Subway,subway,40.844434,-73.914685,gtfs_subway,4
+Myrtle Av,NYC Subway,subway,40.697207,-73.935657,gtfs_subway,J; M; Z
+Myrtle-Willoughby Avs,NYC Subway,subway,40.694568,-73.949046,gtfs_subway,G
+Myrtle-Wyckoff Avs,NYC Subway,subway,40.699814,-73.911586,gtfs_subway,L
+Myrtle-Wyckoff Avs,NYC Subway,subway,40.69943,-73.912385,gtfs_subway,M
+Nassau Av,NYC Subway,subway,40.724635,-73.951277,gtfs_subway,G
+Neck Rd,NYC Subway,subway,40.595246,-73.955161,gtfs_subway,Q
+Neptune Av,NYC Subway,subway,40.581011,-73.974574,gtfs_subway,F; FX
+Nereid Av,NYC Subway,subway,40.898379,-73.854376,gtfs_subway,2; 5
+Nevins St,NYC Subway,subway,40.688246,-73.980492,gtfs_subway,2; 3; 4; 5
+New Dorp,Staten Island Railway,subway,40.57348,-74.11721,gtfs_subway,SIR
+New Lots Av,NYC Subway,subway,40.666235,-73.884079,gtfs_subway,2; 3; 4; 5
+New Lots Av,NYC Subway,subway,40.658733,-73.899232,gtfs_subway,L
+New Utrecht Av,NYC Subway,subway,40.624842,-73.996353,gtfs_subway,N; W
+Newkirk Av-Little Haiti,NYC Subway,subway,40.639967,-73.948411,gtfs_subway,2; 5
+Newkirk Plaza,NYC Subway,subway,40.635082,-73.962793,gtfs_subway,B; Q
+Northern Blvd,NYC Subway,subway,40.752885,-73.906006,gtfs_subway,E; F; M; R
+Norwood Av,NYC Subway,subway,40.68141,-73.880039,gtfs_subway,J; Z
+Norwood-205 St,NYC Subway,subway,40.874811,-73.878855,gtfs_subway,D
+Nostrand Av,NYC Subway,subway,40.669847,-73.950466,gtfs_subway,2; 3; 4; 5
+Nostrand Av,NYC Subway,subway,40.680438,-73.950426,gtfs_subway,A; C
+Oakwood Heights,Staten Island Railway,subway,40.56511,-74.12632,gtfs_subway,SIR
+Ocean Pkwy,NYC Subway,subway,40.576312,-73.968501,gtfs_subway,Q
+Old Town,Staten Island Railway,subway,40.596612,-74.087368,gtfs_subway,SIR
+Ozone Park-Lefferts Blvd,NYC Subway,subway,40.685951,-73.825798,gtfs_subway,A
+Park Pl,NYC Subway,subway,40.674772,-73.957624,gtfs_subway,S
+Park Place,NYC Subway,subway,40.713051,-74.008811,gtfs_subway,2; 3
+Parkchester,NYC Subway,subway,40.833226,-73.860816,gtfs_subway,6; 6X
+Parkside Av,NYC Subway,subway,40.655292,-73.961495,gtfs_subway,Q
+Parsons Blvd,NYC Subway,subway,40.707564,-73.803326,gtfs_subway,E; F; FX
+Pelham Bay Park,NYC Subway,subway,40.852462,-73.828121,gtfs_subway,6; 6X
+Pelham Pkwy,NYC Subway,subway,40.857192,-73.867615,gtfs_subway,2; 5
+Pelham Pkwy,NYC Subway,subway,40.858985,-73.855359,gtfs_subway,5
+Pennsylvania Av,NYC Subway,subway,40.664635,-73.894895,gtfs_subway,2; 3; 4; 5
+Pleasant Plains,Staten Island Railway,subway,40.52241,-74.217847,gtfs_subway,SIR
+President St-Medgar Evers College,NYC Subway,subway,40.667883,-73.950683,gtfs_subway,2; 5
+Prince St,NYC Subway,subway,40.724329,-73.997702,gtfs_subway,N; Q; R; W
+Prince's Bay,Staten Island Railway,subway,40.525507,-74.200064,gtfs_subway,SIR
+Prospect Av,NYC Subway,subway,40.819585,-73.90177,gtfs_subway,2; 5
+Prospect Av,NYC Subway,subway,40.665414,-73.992872,gtfs_subway,D; N; R; W
+Prospect Park,NYC Subway,subway,40.661614,-73.962246,gtfs_subway,B; Q; S
+Queens Plaza,NYC Subway,subway,40.748973,-73.937243,gtfs_subway,E; F; FX; R
+Queensboro Plaza,NYC Subway,subway,40.750582,-73.940202,gtfs_subway,7; 7X
+Ralph Av,NYC Subway,subway,40.678822,-73.920786,gtfs_subway,A; C
+Rector St,NYC Subway,subway,40.707513,-74.013783,gtfs_subway,1
+Rector St,NYC Subway,subway,40.70722,-74.013342,gtfs_subway,N; R; W
+Richmond Valley,Staten Island Railway,subway,40.519631,-74.229141,gtfs_subway,SIR
+Rockaway Av,NYC Subway,subway,40.662549,-73.908946,gtfs_subway,2; 3; 4; 5
+Rockaway Av,NYC Subway,subway,40.67834,-73.911946,gtfs_subway,A; C
+Rockaway Blvd,NYC Subway,subway,40.680429,-73.843853,gtfs_subway,A
+Rockaway Park-Beach 116 St,NYC Subway,subway,40.580903,-73.835592,gtfs_subway,A; S
+Roosevelt Island,NYC Subway,subway,40.759145,-73.95326,gtfs_subway,F; M
+Saratoga Av,NYC Subway,subway,40.661453,-73.916327,gtfs_subway,2; 3; 4; 5
+Seneca Av,NYC Subway,subway,40.702762,-73.90774,gtfs_subway,M
+Sheepshead Bay,NYC Subway,subway,40.586896,-73.954155,gtfs_subway,B; Q
+Shepherd Av,NYC Subway,subway,40.67413,-73.88075,gtfs_subway,A; C
+Simpson St,NYC Subway,subway,40.824073,-73.893064,gtfs_subway,2; 5
+Smith-9 Sts,NYC Subway,subway,40.67358,-73.995959,gtfs_subway,F; G
+South Ferry,NYC Subway,subway,40.702068,-74.013664,gtfs_subway,1
+Spring St,NYC Subway,subway,40.722301,-73.997141,gtfs_subway,4; 6; 6X
+Spring St,NYC Subway,subway,40.726227,-74.003739,gtfs_subway,A; C; E
+St George,Staten Island Railway,subway,40.643748,-74.073643,gtfs_subway,SIR
+St Lawrence Av,NYC Subway,subway,40.831509,-73.867618,gtfs_subway,6
+Stapleton,Staten Island Railway,subway,40.627915,-74.075162,gtfs_subway,SIR
+Steinway St,NYC Subway,subway,40.756879,-73.92074,gtfs_subway,E; F; M; R
+Sterling St,NYC Subway,subway,40.662742,-73.95085,gtfs_subway,2; 5
+Sutphin Blvd,NYC Subway,subway,40.70546,-73.810708,gtfs_subway,E; F; FX
+Sutphin Blvd-Archer Av-JFK Airport,NYC Subway,subway,40.700486,-73.807969,gtfs_subway,E; J; Z
+Sutter Av,NYC Subway,subway,40.669367,-73.901975,gtfs_subway,L
+Sutter Av-Rutland Rd,NYC Subway,subway,40.664717,-73.92261,gtfs_subway,2; 3; 4; 5
+Times Sq-42 St,NYC Subway,subway,40.75529,-73.987495,gtfs_subway,1; 2; 3
+Times Sq-42 St,NYC Subway,subway,40.755477,-73.987691,gtfs_subway,7; 7X
+Times Sq-42 St,NYC Subway,subway,40.755983,-73.986229,gtfs_subway,S
+Times Sq-42 St,NYC Subway,subway,40.754672,-73.986754,gtfs_subway,N; Q; R; W
+Tompkinsville,Staten Island Railway,subway,40.636949,-74.074835,gtfs_subway,SIR
+Tottenville,Staten Island Railway,subway,40.512764,-74.251961,gtfs_subway,SIR
+Tremont Av,NYC Subway,subway,40.85041,-73.905227,gtfs_subway,B; D
+Union St,NYC Subway,subway,40.677316,-73.98311,gtfs_subway,D; N; R; W
+Utica Av,NYC Subway,subway,40.679364,-73.930729,gtfs_subway,A; C
+Van Cortlandt Park-242 St,NYC Subway,subway,40.889248,-73.898583,gtfs_subway,1
+Van Siclen Av,NYC Subway,subway,40.665449,-73.889395,gtfs_subway,2; 3; 4; 5
+Van Siclen Av,NYC Subway,subway,40.67271,-73.890358,gtfs_subway,A; C
+Van Siclen Av,NYC Subway,subway,40.678024,-73.891688,gtfs_subway,J; Z
+Vernon Blvd-Jackson Av,NYC Subway,subway,40.742626,-73.953581,gtfs_subway,7; 7X
+W 4 St-Wash Sq,NYC Subway,subway,40.732338,-74.000495,gtfs_subway,A; C; E
+W 8 St-NY Aquarium,NYC Subway,subway,40.576127,-73.975939,gtfs_subway,F; FX; Q
+WTC Cortlandt,NYC Subway,subway,40.711835,-74.012188,gtfs_subway,1
+Wakefield-241 St,NYC Subway,subway,40.903125,-73.85062,gtfs_subway,2
+Wall St,NYC Subway,subway,40.706821,-74.0091,gtfs_subway,2; 3
+Wall St,NYC Subway,subway,40.707557,-74.011862,gtfs_subway,4; 5
+West Farms Sq-E Tremont Av,NYC Subway,subway,40.840295,-73.880049,gtfs_subway,2; 5
+Westchester Sq-E Tremont Av,NYC Subway,subway,40.839892,-73.842952,gtfs_subway,6; 6X
+Whitehall St-South Ferry,NYC Subway,subway,40.703087,-74.012994,gtfs_subway,N; R; W
+Whitlock Av,NYC Subway,subway,40.826525,-73.886283,gtfs_subway,6
+Wilson Av,NYC Subway,subway,40.688764,-73.904046,gtfs_subway,L
+Winthrop St,NYC Subway,subway,40.656652,-73.9502,gtfs_subway,2; 5
+Woodhaven Blvd,NYC Subway,subway,40.733106,-73.869229,gtfs_subway,E; F; M; R
+Woodhaven Blvd,NYC Subway,subway,40.693879,-73.851576,gtfs_subway,J; Z
+Woodlawn,NYC Subway,subway,40.886037,-73.878751,gtfs_subway,4
+World Trade Center,NYC Subway,subway,40.712582,-74.009781,gtfs_subway,E
+York St,NYC Subway,subway,40.701397,-73.986751,gtfs_subway,F; FX
+Zerega Av,NYC Subway,subway,40.836488,-73.847036,gtfs_subway,6; 6X
+Albertson,LIRR,train,40.772063,-73.641691,gtfslirr,Oyster Bay Branch
+Amagansett,LIRR,train,40.98004,-72.132334,gtfslirr,Montauk Branch
+Amityville,LIRR,train,40.680249,-73.420312,gtfslirr,Babylon Branch
+Atlantic Terminal,LIRR,train,40.683596,-73.975671,gtfslirr,Babylon Branch; City Terminal Zone; Far Rockaway Branch; Hempstead Branch; Long Beach Branch; Port Jefferson Branch; Ron
+Auburndale,LIRR,train,40.761443,-73.789959,gtfslirr,Port Washington Branch
+Babylon,LIRR,train,40.700689,-73.324056,gtfslirr,Babylon Branch; Montauk Branch
+Baldwin,LIRR,train,40.656732,-73.607162,gtfslirr,Babylon Branch
+Bay Shore,LIRR,train,40.724433,-73.254083,gtfslirr,Montauk Branch
+Bayside,LIRR,train,40.763152,-73.77125,gtfslirr,Port Washington Branch
+Bellerose,LIRR,train,40.722204,-73.716653,gtfslirr,Hempstead Branch
+Bellmore,LIRR,train,40.6688,-73.52886,gtfslirr,Babylon Branch
+Bellport,LIRR,train,40.773739,-72.943966,gtfslirr,Montauk Branch
+Bethpage,LIRR,train,40.743039,-73.483438,gtfslirr,Ronkonkoma Branch
+Brentwood,LIRR,train,40.780835,-73.243611,gtfslirr,Ronkonkoma Branch
+Bridgehampton,LIRR,train,40.938984,-72.310046,gtfslirr,Montauk Branch
+Broadway,LIRR,train,40.761653,-73.801766,gtfslirr,Port Washington Branch
+Carle Place,LIRR,train,40.749207,-73.603652,gtfslirr,Port Jefferson Branch; Ronkonkoma Branch
+Cedarhurst,LIRR,train,40.622175,-73.726183,gtfslirr,Far Rockaway Branch
+Central Islip,LIRR,train,40.791853,-73.194861,gtfslirr,Ronkonkoma Branch
+Centre Avenue,LIRR,train,40.648318,-73.663967,gtfslirr,Long Beach Branch
+Cold Spring Harbor,LIRR,train,40.835638,-73.451086,gtfslirr,Port Jefferson Branch
+Copiague,LIRR,train,40.681015,-73.39834,gtfslirr,Babylon Branch
+Country Life Press,LIRR,train,40.721457,-73.629674,gtfslirr,Hempstead Branch
+Deer Park,LIRR,train,40.769484,-73.293565,gtfslirr,Ronkonkoma Branch
+Douglaston,LIRR,train,40.768069,-73.749413,gtfslirr,Port Washington Branch
+East Hampton,LIRR,train,40.965086,-72.193242,gtfslirr,Montauk Branch
+East New York,LIRR,train,40.675812,-73.902809,gtfslirr,Babylon Branch; City Terminal Zone; Far Rockaway Branch; Hempstead Branch; Long Beach Branch; Port Jefferson Branch; Wes
+East Rockaway,LIRR,train,40.642211,-73.658216,gtfslirr,Long Beach Branch
+East Williston,LIRR,train,40.756019,-73.639408,gtfslirr,Oyster Bay Branch
+Elmont-UBS Arena,LIRR,train,40.720074,-73.725549,gtfslirr,Hempstead Branch; Port Jefferson Branch; Ronkonkoma Branch
+Far Rockaway,LIRR,train,40.609143,-73.750541,gtfslirr,Far Rockaway Branch
+Farmingdale,LIRR,train,40.735915,-73.441239,gtfslirr,Ronkonkoma Branch
+Floral Park,LIRR,train,40.724637,-73.706397,gtfslirr,Hempstead Branch; Port Jefferson Branch; Ronkonkoma Branch
+Flushing Main Street,LIRR,train,40.757895,-73.831347,gtfslirr,Port Washington Branch
+Forest Hills,LIRR,train,40.719576,-73.844814,gtfslirr,Babylon Branch; City Terminal Zone; Far Rockaway Branch; Hempstead Branch; Long Beach Branch; Port Jefferson Branch; Ron
+Freeport,LIRR,train,40.657458,-73.582324,gtfslirr,Babylon Branch
+Garden City,LIRR,train,40.723102,-73.640361,gtfslirr,Hempstead Branch
+Gibson,LIRR,train,40.649252,-73.701835,gtfslirr,Far Rockaway Branch
+Glen Cove,LIRR,train,40.865834,-73.616166,gtfslirr,Oyster Bay Branch
+Glen Head,LIRR,train,40.832225,-73.626118,gtfslirr,Oyster Bay Branch
+Glen Street,LIRR,train,40.857981,-73.621217,gtfslirr,Oyster Bay Branch
+Grand Central,LIRR,train,40.755162,-73.975455,gtfslirr,Babylon Branch; City Terminal Zone; Far Rockaway Branch; Hempstead Branch; Long Beach Branch; Port Jefferson Branch; Por
+Great Neck,LIRR,train,40.787216,-73.7261,gtfslirr,Port Washington Branch
+Great River,LIRR,train,40.740444,-73.170196,gtfslirr,Montauk Branch
+Greenlawn,LIRR,train,40.868665,-73.36285,gtfslirr,Port Jefferson Branch
+Greenport,LIRR,train,41.09971,-72.363104,gtfslirr,Greenport Service
+Greenvale,LIRR,train,40.815716,-73.626872,gtfslirr,Oyster Bay Branch
+Hampton Bays,LIRR,train,40.876609,-72.523949,gtfslirr,Montauk Branch
+Hempstead,LIRR,train,40.713297,-73.625032,gtfslirr,Hempstead Branch
+Hempstead Gardens,LIRR,train,40.694914,-73.646209,gtfslirr,West Hempstead Branch
+Hewlett,LIRR,train,40.636764,-73.705139,gtfslirr,Far Rockaway Branch
+Hicksville,LIRR,train,40.767175,-73.528533,gtfslirr,Montauk Branch; Port Jefferson Branch; Ronkonkoma Branch
+Hillside Facility,LIRR,train,40.707736,-73.776959,gtfslirr,Hempstead Branch; Montauk Branch; Port Jefferson Branch; Ronkonkoma Branch
+Hollis,LIRR,train,40.710182,-73.766753,gtfslirr,Hempstead Branch; Port Jefferson Branch; Ronkonkoma Branch
+Hunterspoint Avenue,LIRR,train,40.74239,-73.94679,gtfslirr,Montauk Branch; Oyster Bay Branch; Port Jefferson Branch
+Huntington,LIRR,train,40.85301,-73.409526,gtfslirr,Port Jefferson Branch
+Inwood,LIRR,train,40.612288,-73.744184,gtfslirr,Far Rockaway Branch
+Island Park,LIRR,train,40.601299,-73.654742,gtfslirr,Long Beach Branch
+Islip,LIRR,train,40.735834,-73.209321,gtfslirr,Montauk Branch
+Jamaica,LIRR,train,40.699608,-73.80853,gtfslirr,Babylon Branch; City Terminal Zone; Far Rockaway Branch; Hempstead Branch; Long Beach Branch; Montauk Branch; Oyster Bay
+Kew Gardens,LIRR,train,40.709649,-73.830888,gtfslirr,Babylon Branch; City Terminal Zone; Far Rockaway Branch; Hempstead Branch; Long Beach Branch; Port Jefferson Branch; Ron
+Kings Park,LIRR,train,40.883667,-73.256248,gtfslirr,Port Jefferson Branch
+Lakeview,LIRR,train,40.685856,-73.652138,gtfslirr,West Hempstead Branch
+Laurelton,LIRR,train,40.668483,-73.751747,gtfslirr,Babylon Branch; Far Rockaway Branch; Long Beach Branch
+Lawrence,LIRR,train,40.615735,-73.7359,gtfslirr,Far Rockaway Branch
+Lindenhurst,LIRR,train,40.688265,-73.369211,gtfslirr,Babylon Branch
+Little Neck,LIRR,train,40.775044,-73.740647,gtfslirr,Port Washington Branch
+Locust Manor,LIRR,train,40.675139,-73.765043,gtfslirr,Far Rockaway Branch; Long Beach Branch
+Locust Valley,LIRR,train,40.874467,-73.598303,gtfslirr,Oyster Bay Branch
+Long Beach,LIRR,train,40.590182,-73.664818,gtfslirr,Long Beach Branch
+Long Island City,LIRR,train,40.741343,-73.957639,gtfslirr,Montauk Branch; Oyster Bay Branch; Port Jefferson Branch
+Lynbrook,LIRR,train,40.656058,-73.676071,gtfslirr,Babylon Branch; Long Beach Branch
+Malverne,LIRR,train,40.675478,-73.668864,gtfslirr,West Hempstead Branch
+Manhasset,LIRR,train,40.796724,-73.699899,gtfslirr,Port Washington Branch
+Massapequa,LIRR,train,40.67693,-73.469056,gtfslirr,Babylon Branch
+Massapequa Park,LIRR,train,40.677859,-73.454737,gtfslirr,Babylon Branch
+Mastic-Shirley,LIRR,train,40.798988,-72.864423,gtfslirr,Montauk Branch
+Mattituck,LIRR,train,40.991794,-72.536062,gtfslirr,Greenport Service
+Medford,LIRR,train,40.817397,-72.998909,gtfslirr,Greenport Service
+Merillon Avenue,LIRR,train,40.735169,-73.662521,gtfslirr,Port Jefferson Branch; Ronkonkoma Branch
+Merrick,LIRR,train,40.6638,-73.550621,gtfslirr,Babylon Branch
+Mets-Willets Point,LIRR,train,40.752398,-73.843701,gtfslirr,Port Washington Branch
+Mineola,LIRR,train,40.740347,-73.640863,gtfslirr,Montauk Branch; Oyster Bay Branch; Port Jefferson Branch; Ronkonkoma Branch
+Montauk,LIRR,train,41.047109,-71.953881,gtfslirr,Montauk Branch
+Murray Hill,LIRR,train,40.762709,-73.814539,gtfslirr,Port Washington Branch
+Nassau Boulevard,LIRR,train,40.722962,-73.662698,gtfslirr,Hempstead Branch
+New Hyde Park,LIRR,train,40.730757,-73.680959,gtfslirr,Port Jefferson Branch; Ronkonkoma Branch
+Northport,LIRR,train,40.88065,-73.328485,gtfslirr,Port Jefferson Branch
+Nostrand Avenue,LIRR,train,40.678388,-73.948221,gtfslirr,Babylon Branch; City Terminal Zone; Far Rockaway Branch; Hempstead Branch; Long Beach Branch; Port Jefferson Branch; Wes
+Oakdale,LIRR,train,40.743433,-73.132435,gtfslirr,Montauk Branch
+Oceanside,LIRR,train,40.634721,-73.654666,gtfslirr,Long Beach Branch
+Oyster Bay,LIRR,train,40.875338,-73.534034,gtfslirr,Oyster Bay Branch
+Patchogue,LIRR,train,40.761879,-73.015745,gtfslirr,Montauk Branch
+Penn Station,LIRR,train,40.750588,-73.993584,gtfslirr,Babylon Branch; City Terminal Zone; Far Rockaway Branch; Hempstead Branch; Long Beach Branch; Montauk Branch; Oyster Bay
+Pinelawn,LIRR,train,40.745359,-73.399601,gtfslirr,Ronkonkoma Branch
+Plandome,LIRR,train,40.810699,-73.695214,gtfslirr,Port Washington Branch
+Port Jefferson,LIRR,train,40.934553,-73.052502,gtfslirr,Port Jefferson Branch
+Port Washington,LIRR,train,40.829035,-73.687401,gtfslirr,Port Washington Branch
+Queens Village,LIRR,train,40.717458,-73.73646,gtfslirr,Hempstead Branch; Port Jefferson Branch; Ronkonkoma Branch
+Riverhead,LIRR,train,40.919839,-72.666911,gtfslirr,Greenport Service
+Rockville Centre,LIRR,train,40.658318,-73.646549,gtfslirr,Babylon Branch
+Ronkonkoma,LIRR,train,40.808086,-73.10594,gtfslirr,Greenport Service; Ronkonkoma Branch
+Rosedale,LIRR,train,40.665949,-73.735548,gtfslirr,Far Rockaway Branch; Long Beach Branch
+Roslyn,LIRR,train,40.790478,-73.643262,gtfslirr,Oyster Bay Branch
+Sayville,LIRR,train,40.740354,-73.086455,gtfslirr,Montauk Branch
+Sea Cliff,LIRR,train,40.852368,-73.625417,gtfslirr,Oyster Bay Branch
+Seaford,LIRR,train,40.675724,-73.486568,gtfslirr,Babylon Branch
+Smithtown,LIRR,train,40.856548,-73.198032,gtfslirr,Port Jefferson Branch
+Southampton,LIRR,train,40.894719,-72.390124,gtfslirr,Montauk Branch
+Southold,LIRR,train,41.066321,-72.42788,gtfslirr,Greenport Service
+Speonk,LIRR,train,40.821315,-72.705262,gtfslirr,Montauk Branch
+St. Albans,LIRR,train,40.691183,-73.765509,gtfslirr,Babylon Branch; West Hempstead Branch
+St. James,LIRR,train,40.882169,-73.159507,gtfslirr,Port Jefferson Branch
+Stewart Manor,LIRR,train,40.723028,-73.68102,gtfslirr,Hempstead Branch
+Stony Brook,LIRR,train,40.920323,-73.128549,gtfslirr,Port Jefferson Branch
+Syosset,LIRR,train,40.824857,-73.500446,gtfslirr,Port Jefferson Branch
+Valley Stream,LIRR,train,40.661518,-73.704759,gtfslirr,Babylon Branch; Far Rockaway Branch; Long Beach Branch
+Wantagh,LIRR,train,40.67299,-73.508965,gtfslirr,Babylon Branch
+West Hempstead,LIRR,train,40.701961,-73.641644,gtfslirr,West Hempstead Branch
+Westbury,LIRR,train,40.753454,-73.585866,gtfslirr,Port Jefferson Branch; Ronkonkoma Branch
+Westhampton,LIRR,train,40.830305,-72.650325,gtfslirr,Montauk Branch
+Westwood,LIRR,train,40.668372,-73.681209,gtfslirr,West Hempstead Branch
+Woodmere,LIRR,train,40.631336,-73.713715,gtfslirr,Far Rockaway Branch
+Woodside,LIRR,train,40.745851,-73.902975,gtfslirr,Babylon Branch; City Terminal Zone; Far Rockaway Branch; Hempstead Branch; Long Beach Branch; Port Jefferson Branch; Por
+Wyandanch,LIRR,train,40.754801,-73.358066,gtfslirr,Ronkonkoma Branch
+Yaphank-BNL,LIRR,train,40.84927,-72.864466,gtfslirr,Greenport Service
+Ansonia,Metro-North,train,41.344156,-73.079892,gtfsmnr,Waterbury
+Appalachian Trail,Metro-North,train,41.592871,-73.588032,gtfsmnr,Harlem
+Ardsley-on-Hudson,Metro-North,train,41.026198,-73.876543,gtfsmnr,Hudson
+Beacon,Metro-North,train,41.504007,-73.984528,gtfsmnr,Hudson
+Beacon Falls,Metro-North,train,41.441752,-73.06359,gtfsmnr,Waterbury
+Bedford Hills,Metro-North,train,41.237316,-73.699936,gtfsmnr,Harlem
+Bethel,Metro-North,train,41.376225,-73.418171,gtfsmnr,Danbury
+Botanical Garden,Metro-North,train,40.866555,-73.883109,gtfsmnr,Harlem
+Branchville,Metro-North,train,41.26763,-73.441421,gtfsmnr,Danbury
+Brewster,Metro-North,train,41.39447,-73.619802,gtfsmnr,Harlem
+Bridgeport,Metro-North,train,41.178677,-73.187076,gtfsmnr,New Haven; Waterbury
+Bronxville,Metro-North,train,40.93978,-73.835208,gtfsmnr,Harlem
+Cannondale,Metro-North,train,41.21662,-73.426703,gtfsmnr,Danbury
+Chappaqua,Metro-North,train,41.158015,-73.774885,gtfsmnr,Harlem
+Cold Spring,Metro-North,train,41.415283,-73.95809,gtfsmnr,Hudson
+Cortlandt,Metro-North,train,41.246259,-73.921884,gtfsmnr,Hudson
+Cos Cob,Metro-North,train,41.030171,-73.598306,gtfsmnr,New Canaan; New Haven
+Crestwood,Metro-North,train,40.958997,-73.820564,gtfsmnr,Harlem
+Croton Falls,Metro-North,train,41.347722,-73.662269,gtfsmnr,Harlem
+Croton-Harmon,Metro-North,train,41.189903,-73.882394,gtfsmnr,Hudson
+Danbury,Metro-North,train,41.396146,-73.44879,gtfsmnr,Danbury
+Darien,Metro-North,train,41.076913,-73.472966,gtfsmnr,Danbury; New Haven
+Derby-Shelton,Metro-North,train,41.319718,-73.083548,gtfsmnr,Waterbury
+Dobbs Ferry,Metro-North,train,41.012459,-73.87949,gtfsmnr,Hudson
+Dover Plains,Metro-North,train,41.740401,-73.576502,gtfsmnr,Harlem
+East Norwalk,Metro-North,train,41.103996,-73.404588,gtfsmnr,New Haven
+Fairfield,Metro-North,train,41.143077,-73.257742,gtfsmnr,New Haven
+Fairfield-Black Rock,Metro-North,train,41.161,-73.234336,gtfsmnr,New Haven
+Fleetwood,Metro-North,train,40.92699,-73.83948,gtfsmnr,Harlem
+Fordham,Metro-North,train,40.8615,-73.89058,gtfsmnr,Harlem; New Canaan; New Haven
+Garrison,Metro-North,train,41.38178,-73.947202,gtfsmnr,Hudson
+Glenbrook,Metro-North,train,41.070547,-73.520021,gtfsmnr,New Canaan
+Glenwood,Metro-North,train,40.950496,-73.899062,gtfsmnr,Hudson
+Goldens Bridge,Metro-North,train,41.294338,-73.677655,gtfsmnr,Harlem
+Grand Central,Metro-North,train,40.752998,-73.977056,gtfsmnr,Danbury; Harlem; Hudson; New Canaan; New Haven
+Green's Farms,Metro-North,train,41.122265,-73.315408,gtfsmnr,New Haven
+Greenwich,Metro-North,train,41.021277,-73.624621,gtfsmnr,Danbury; New Canaan; New Haven
+Greystone,Metro-North,train,40.972705,-73.889069,gtfsmnr,Hudson
+Harlem Valley-Wingdale,Metro-North,train,41.637525,-73.57145,gtfsmnr,Harlem
+Harlem-125 St,Metro-North,train,40.805157,-73.939149,gtfsmnr,Danbury; Harlem; Hudson; New Canaan; New Haven
+Harrison,Metro-North,train,40.969432,-73.712964,gtfsmnr,New Canaan; New Haven
+Hartsdale,Metro-North,train,41.010333,-73.796407,gtfsmnr,Harlem
+Hastings-on-Hudson,Metro-North,train,40.994109,-73.884512,gtfsmnr,Hudson
+Hawthorne,Metro-North,train,41.108581,-73.79625,gtfsmnr,Harlem
+Highbridge Yard,Metro-North,train,40.8359,-73.9315,gtfsmnr,Hudson
+Irvington,Metro-North,train,41.039993,-73.873083,gtfsmnr,Hudson
+Katonah,Metro-North,train,41.259552,-73.684155,gtfsmnr,Harlem
+Larchmont,Metro-North,train,40.933394,-73.759792,gtfsmnr,New Canaan; New Haven
+Ludlow,Metro-North,train,40.924972,-73.904612,gtfsmnr,Hudson
+Mamaroneck,Metro-North,train,40.954061,-73.736125,gtfsmnr,New Canaan; New Haven
+Manitou,Metro-North,train,41.332601,-73.970426,gtfsmnr,Hudson
+Marble Hill,Metro-North,train,40.874333,-73.910941,gtfsmnr,Hudson
+Melrose,Metro-North,train,40.825761,-73.915231,gtfsmnr,Harlem
+Merritt 7,Metro-North,train,41.146618,-73.427859,gtfsmnr,Danbury
+Milford,Metro-North,train,41.223231,-73.057647,gtfsmnr,New Haven
+Morris Heights,Metro-North,train,40.854252,-73.919583,gtfsmnr,Hudson
+Mt Kisco,Metro-North,train,41.208242,-73.729778,gtfsmnr,Harlem
+Mt Pleasant,Metro-North,train,41.095877,-73.793822,gtfsmnr,Harlem
+Mt Vernon East,Metro-North,train,40.912161,-73.832185,gtfsmnr,New Canaan; New Haven
+Mt Vernon West,Metro-North,train,40.912142,-73.851129,gtfsmnr,Harlem
+Naugatuck,Metro-North,train,41.494204,-73.052655,gtfsmnr,Waterbury
+New Canaan,Metro-North,train,41.146305,-73.495626,gtfsmnr,New Canaan
+New Hamburg,Metro-North,train,41.587448,-73.947226,gtfsmnr,Hudson
+New Haven,Metro-North,train,41.296501,-72.92829,gtfsmnr,New Haven
+New Haven-State St,Metro-North,train,41.304979,-72.921747,gtfsmnr,New Haven
+New Rochelle,Metro-North,train,40.911605,-73.783807,gtfsmnr,New Canaan; New Haven
+Noroton Heights,Metro-North,train,41.069041,-73.49788,gtfsmnr,Danbury; New Haven
+North White Plains,Metro-North,train,41.049806,-73.773142,gtfsmnr,Harlem
+Old Greenwich,Metro-North,train,41.033817,-73.565859,gtfsmnr,New Canaan; New Haven
+Ossining,Metro-North,train,41.157663,-73.869281,gtfsmnr,Hudson
+Patterson,Metro-North,train,41.511827,-73.604584,gtfsmnr,Harlem
+Pawling,Metro-North,train,41.564205,-73.600524,gtfsmnr,Harlem
+Peekskill,Metro-North,train,41.285962,-73.93042,gtfsmnr,Hudson
+Pelham,Metro-North,train,40.910321,-73.810242,gtfsmnr,New Canaan; New Haven
+Philipse Manor,Metro-North,train,41.09492,-73.869755,gtfsmnr,Hudson
+Pleasantville,Metro-North,train,41.135222,-73.792661,gtfsmnr,Harlem
+Port Chester,Metro-North,train,41.000732,-73.6647,gtfsmnr,New Canaan; New Haven
+Poughkeepsie,Metro-North,train,41.705839,-73.937946,gtfsmnr,Hudson
+Purdy's,Metro-North,train,41.325775,-73.659061,gtfsmnr,Harlem
+Redding,Metro-North,train,41.325684,-73.4338,gtfsmnr,Danbury
+Riverdale,Metro-North,train,40.903981,-73.914126,gtfsmnr,Hudson
+Riverside,Metro-North,train,41.031682,-73.588173,gtfsmnr,New Canaan; New Haven
+Rowayton,Metro-North,train,41.077456,-73.445527,gtfsmnr,Danbury; New Haven
+Rye,Metro-North,train,40.985922,-73.682553,gtfsmnr,New Canaan; New Haven
+Scarborough,Metro-North,train,41.135763,-73.866163,gtfsmnr,Hudson
+Scarsdale,Metro-North,train,40.989168,-73.808634,gtfsmnr,Harlem
+Seymour,Metro-North,train,41.395139,-73.072499,gtfsmnr,Waterbury
+South Norwalk,Metro-North,train,41.09673,-73.421132,gtfsmnr,Danbury; New Haven
+Southeast,Metro-North,train,41.413203,-73.623787,gtfsmnr,Harlem
+Southport,Metro-North,train,41.134844,-73.28897,gtfsmnr,New Haven
+Springdale,Metro-North,train,41.08876,-73.517828,gtfsmnr,New Canaan
+Springdale MW Facility,Metro-North,train,41.082147,-73.519675,gtfsmnr,New Canaan
+Spuyten Duyvil,Metro-North,train,40.878245,-73.921455,gtfsmnr,Hudson
+Stamford,Metro-North,train,41.046611,-73.542846,gtfsmnr,Danbury; New Canaan; New Haven
+Stratford,Metro-North,train,41.194255,-73.131532,gtfsmnr,New Haven; Waterbury
+Talmadge Hill,Metro-North,train,41.116012,-73.498149,gtfsmnr,New Canaan
+Tarrytown,Metro-North,train,41.076473,-73.864563,gtfsmnr,Hudson
+Tenmile River,Metro-North,train,41.779938,-73.558204,gtfsmnr,Harlem
+Tremont,Metro-North,train,40.847301,-73.89955,gtfsmnr,Harlem
+Tuckahoe,Metro-North,train,40.949393,-73.830166,gtfsmnr,Harlem
+University Heights,Metro-North,train,40.862248,-73.91312,gtfsmnr,Hudson
+Valhalla,Metro-North,train,41.072819,-73.772599,gtfsmnr,Harlem
+Wakefield,Metro-North,train,40.905936,-73.85568,gtfsmnr,Harlem
+Wassaic,Metro-North,train,41.814722,-73.562197,gtfsmnr,Harlem
+Waterbury,Metro-North,train,41.552728,-73.046126,gtfsmnr,Waterbury
+West Haven,Metro-North,train,41.27142,-72.963488,gtfsmnr,New Haven
+Westport,Metro-North,train,41.118928,-73.371413,gtfsmnr,New Haven
+White Plains,Metro-North,train,41.032589,-73.775208,gtfsmnr,Harlem
+Williams Bridge,Metro-North,train,40.878569,-73.871064,gtfsmnr,Harlem
+Wilton,Metro-North,train,41.196202,-73.432434,gtfsmnr,Danbury
+Woodlawn,Metro-North,train,40.895361,-73.862916,gtfsmnr,Harlem
+Yankees-E 153 St,Metro-North,train,40.8253,-73.9299,gtfsmnr,Harlem; Hudson; New Haven
+Yonkers,Metro-North,train,40.935795,-73.902668,gtfsmnr,Hudson
+22ND STREET LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.661277,-74.11641,njt_rail,HBLR
+2ND STREET LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.74174,-74.042821,njt_rail,HBLR
+30TH ST. PHL.,NJ Transit,train,39.956565,-75.182327,njt_rail,ATLC
+34TH STREET LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.671778,-74.107493,njt_rail,HBLR
+36TH STREET LIGHT RAIL STATION,Riverline Light Rail,light_rail,39.96096,-75.079622,njt_rail,RVLN
+45TH STREET LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.67867,-74.101673,njt_rail,HBLR
+8TH STREET LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.654298,-74.129142,njt_rail,HBLR
+9TH STREET LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.748867,-74.038522,njt_rail,HBLR
+ABERDEEN-MATAWAN,NJ Transit,train,40.420161,-74.223702,njt_rail,NJCL; NJCLL
+ABSECON,NJ Transit,train,39.424333,-74.502094,njt_rail,ATLC
+ALLENDALE,NJ Transit,train,41.030902,-74.130957,njt_rail,MNBN; MNBNP
+ALLENHURST,NJ Transit,train,40.237659,-74.006769,njt_rail,NJCL; NJCLL
+ANDERSON STREET,NJ Transit,train,40.894458,-74.043781,njt_rail,PASC
+ANNANDALE,NJ Transit,train,40.645173,-74.878569,njt_rail,RARV
+AQUARIUM LIGHT RAIL STATION,Riverline Light Rail,light_rail,39.945658,-75.128682,njt_rail,RVLN
+ASBURY PARK,NJ Transit,train,40.215359,-74.014786,njt_rail,NJCL; NJCLL
+ATCO,NJ Transit,train,39.783547,-74.907588,njt_rail,ATLC
+ATLANTIC CITY,NJ Transit,train,39.363299,-74.441486,njt_rail,ATLC
+ATLANTIC STREET LIGHT RAIL STATION,Newark Light Rail,light_rail,40.74416,-74.168491,njt_rail,NLR
+AVENEL,NJ Transit,train,40.57762,-74.27753,njt_rail,NJCL
+BASKING RIDGE,NJ Transit,train,40.711378,-74.55527,njt_rail,MNEG
+BAY HEAD,NJ Transit,train,40.077178,-74.046183,njt_rail,NJCL; NJCLL
+BAY STREET,NJ Transit,train,40.808178,-74.208681,njt_rail,BNTN; BNTNM
+BELMAR,NJ Transit,train,40.18059,-74.027301,njt_rail,NJCL; NJCLL
+BERGENLINE AVE,Hudson-Bergen Light Rail,light_rail,40.782225,-74.022271,njt_rail,HBLR
+BERKELEY HEIGHTS,NJ Transit,train,40.682345,-74.442649,njt_rail,MNEG
+BERNARDSVILLE,NJ Transit,train,40.716845,-74.571023,njt_rail,MNEG
+BEVERLY/EDGEWATER PARK LIGHT RAIL STA,Riverline Light Rail,light_rail,40.06112,-74.915131,njt_rail,RVLN
+BLOOMFIELD,NJ Transit,train,40.792709,-74.200043,njt_rail,BNTN; BNTNM
+BLOOMFIELD AVENUE LIGHT RAIL STATION,Newark Light Rail,light_rail,40.76546,-74.179863,njt_rail,NLR
+BOONTON,NJ Transit,train,40.903378,-74.407736,njt_rail,BNTN
+BORDENTOWN LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.14811,-74.716271,njt_rail,RVLN
+BOUND BROOK,NJ Transit,train,40.560929,-74.530617,njt_rail,RARV
+BRADLEY BEACH,NJ Transit,train,40.203751,-74.018891,njt_rail,NJCL; NJCLL
+BRANCH BROOK PARK LIGHT RAIL STATION,Newark Light Rail,light_rail,40.779638,-74.174752,njt_rail,NLR
+BRICK CHURCH,NJ Transit,train,40.765134,-74.218612,njt_rail,MNE; MNEG
+BRIDGEWATER,NJ Transit,train,40.559904,-74.551741,njt_rail,RARV
+BROAD STREET LIGHT RAIL STATION,Newark Light Rail,light_rail,40.747209,-74.17151,njt_rail,NLR
+BROADWAY,NJ Transit,train,40.922505,-74.115236,njt_rail,MNBN; MNBNP
+BURLINGTON SOUTH LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.074558,-74.868981,njt_rail,RVLN
+BURLINGTON TOWNE CTR LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.077358,-74.859421,njt_rail,RVLN
+CAMPBELL HALL,NJ Transit,train,41.450917,-74.266554,njt_rail,MNBN; MNBNP
+CASS STREET LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.205409,-74.754313,njt_rail,RVLN
+CHATHAM,NJ Transit,train,40.740137,-74.384812,njt_rail,MNE
+CHERRY HILL,NJ Transit,train,39.928447,-75.041661,njt_rail,ATLC
+CINNAMINSON LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.016557,-74.999942,njt_rail,RVLN
+CLIFTON,NJ Transit,train,40.867998,-74.153206,njt_rail,MNBN; MNBNP
+COMMUNIPAW JUNCTION,Hudson-Bergen Light Rail,light_rail,40.708848,-74.058452,njt_rail,HBLR
+CONVENT,NJ Transit,train,40.779038,-74.443435,njt_rail,MNE
+COOPER STREET/RUTGERS LIGHT RAIL STATION,Riverline Light Rail,light_rail,39.947598,-75.12407,njt_rail,RVLN
+CRANFORD,NJ Transit,train,40.655523,-74.303226,njt_rail,RARV
+DANFORTH AVENUE LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.692357,-74.087262,njt_rail,HBLR
+DAVENPORT AVENUE LIGHT RAIL STATION,Newark Light Rail,light_rail,40.77239,-74.178272,njt_rail,NLR
+DELANCO LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.048068,-74.95028,njt_rail,RVLN
+DELAWANNA,NJ Transit,train,40.831369,-74.131262,njt_rail,MNBN; MNBNP
+DENVILLE,NJ Transit,train,40.8839,-74.481513,njt_rail,BNTN; MNE
+DOVER,NJ Transit,train,40.883415,-74.555887,njt_rail,BNTN; MNE
+DUNELLEN,NJ Transit,train,40.590869,-74.463043,njt_rail,RARV
+EAST ORANGE,NJ Transit,train,40.760977,-74.210464,njt_rail,MNE; MNEG
+EDISON STATION,NJ Transit,train,40.519148,-74.410972,njt_rail,NEC
+EGG HARBOR,NJ Transit,train,39.526441,-74.648028,njt_rail,ATLC
+ELBERON,NJ Transit,train,40.265292,-73.99762,njt_rail,NJCL; NJCLL
+ELIZABETH,NJ Transit,train,40.667857,-74.215174,njt_rail,NEC; NJCL
+EMERSON,NJ Transit,train,40.975036,-74.027474,njt_rail,PASC
+ENTERTAINMENT CENTER LIGHT RAIL STATION,Riverline Light Rail,light_rail,39.94094,-75.128473,njt_rail,RVLN
+ESSEX STREET,NJ Transit,train,40.878973,-74.051893,njt_rail,PASC
+ESSEX STREET LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.712838,-74.036082,njt_rail,HBLR
+EXCHANGE PLACE LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.716009,-74.034092,njt_rail,HBLR
+FANWOOD,NJ Transit,train,40.64106,-74.385003,njt_rail,RARV
+FAR HILLS,NJ Transit,train,40.68571,-74.633734,njt_rail,MNEG
+FLORENCE LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.100048,-74.805112,njt_rail,RVLN
+GARFIELD,NJ Transit,train,40.866669,-74.10556,njt_rail,MNBN; MNBNP
+GARFIELD AVENUE LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.710509,-74.07112,njt_rail,HBLR
+GARWOOD,NJ Transit,train,40.652569,-74.324794,njt_rail,RARV
+GILLETTE,NJ Transit,train,40.678251,-74.468317,njt_rail,MNEG
+GLADSTONE,NJ Transit,train,40.720284,-74.666371,njt_rail,MNEG
+GLEN RIDGE,NJ Transit,train,40.80059,-74.204655,njt_rail,BNTN; BNTNM
+GLEN ROCK BORO HALL,NJ Transit,train,40.96137,-74.1293,njt_rail,MNBN; MNBNP
+GLEN ROCK MAIN LINE,NJ Transit,train,40.962206,-74.133485,njt_rail,MNBN; MNBNP
+GROVE STREET LIGHT RAIL STATION,Newark Light Rail,light_rail,40.780317,-74.187931,njt_rail,NLR
+HACKETTSTOWN,NJ Transit,train,40.851444,-74.835352,njt_rail,BNTN; MNE
+HAMILTON,NJ Transit,train,40.255309,-74.70412,njt_rail,NEC
+HAMILTON AVENUE LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.211928,-74.755882,njt_rail,RVLN
+HAMMONTON,NJ Transit,train,39.631673,-74.79946,njt_rail,ATLC
+HARBORSIDE LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.719519,-74.034003,njt_rail,HBLR
+HARRIET TUBMAN SQUARE LIGHT RAIL STATION,Newark Light Rail,light_rail,40.743938,-74.169853,njt_rail,NLR
+HARRIMAN,NJ Transit,train,41.293354,-74.13987,njt_rail,MNBN; MNBNP
+HARSIMUS COVE LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.722668,-74.037281,njt_rail,HBLR
+HAWTHORNE,NJ Transit,train,40.942539,-74.152411,njt_rail,MNBN; MNBNP
+HAZLET,NJ Transit,train,40.415385,-74.190393,njt_rail,NJCL; NJCLL
+HIGH BRIDGE,NJ Transit,train,40.666884,-74.895863,njt_rail,RARV
+HIGHLAND AVENUE,NJ Transit,train,40.766863,-74.243744,njt_rail,MNE; MNEG
+HILLSDALE,NJ Transit,train,41.002414,-74.041033,njt_rail,PASC
+HOBOKEN,NJ Transit,train,40.734843,-74.028046,njt_rail,BNTN; BNTNM; MNBN; MNBNP; MNE; MNEG; PASC; RARV
+HOBOKEN TERMINAL LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.734059,-74.029192,njt_rail,HBLR
+HOHOKUS,NJ Transit,train,40.997369,-74.113521,njt_rail,MNBN; MNBNP
+JERSEY AVE.,NJ Transit,train,40.476912,-74.467363,njt_rail,NEC
+JERSEY AVENUE LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.714978,-74.048491,njt_rail,HBLR
+LAKE HOPATCONG,NJ Transit,train,40.904219,-74.665697,njt_rail,BNTN; MNE
+LEBANON,NJ Transit,train,40.636903,-74.835766,njt_rail,RARV
+LIBERTY STATE PARK-RIDE LIGHT RAIL STA,Hudson-Bergen Light Rail,light_rail,40.710378,-74.055812,njt_rail,HBLR
+LINCOLN HARBOR LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.761399,-74.024,njt_rail,HBLR
+LINCOLN PARK,NJ Transit,train,40.924138,-74.301826,njt_rail,BNTN
+LINDEN,NJ Transit,train,40.629485,-74.251772,njt_rail,NEC; NJCL
+LINDENWOLD,NJ Transit,train,39.833809,-75.000314,njt_rail,ATLC
+LITTLE FALLS,NJ Transit,train,40.880669,-74.235372,njt_rail,BNTN
+LITTLE SILVER,NJ Transit,train,40.326715,-74.041054,njt_rail,NJCL; NJCLL
+LONG BRANCH,NJ Transit,train,40.297145,-73.988331,njt_rail,NJCL; NJCLL
+LYNDHURST,NJ Transit,train,40.814165,-74.122696,njt_rail,MNBN; MNBNP
+LYONS,NJ Transit,train,40.684844,-74.54947,njt_rail,MNEG
+MADISON,NJ Transit,train,40.757028,-74.415105,njt_rail,MNE
+MAHWAH,NJ Transit,train,41.094416,-74.14662,njt_rail,MNBN; MNBNP
+MANASQUAN,NJ Transit,train,40.120573,-74.047688,njt_rail,NJCL; NJCLL
+MAPLEWOOD,NJ Transit,train,40.731149,-74.275427,njt_rail,MNE; MNEG
+MARIN BOULEVARD LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.714428,-74.043241,njt_rail,HBLR
+METROPARK,NJ Transit,train,40.56864,-74.329394,njt_rail,NEC
+METUCHEN,NJ Transit,train,40.540736,-74.360671,njt_rail,NEC
+MIDDLETOWN NJ,NJ Transit,train,40.38978,-74.116131,njt_rail,NJCL; NJCLL
+MIDDLETOWN NY,NJ Transit,train,41.457488,-74.37039,njt_rail,MNBN; MNBNP
+MILITARY PARK LIGHT RAIL STATION,Newark Light Rail,light_rail,40.737449,-74.170883,njt_rail,NLR
+MILLBURN,NJ Transit,train,40.725622,-74.303755,njt_rail,MNE; MNEG
+MILLINGTON,NJ Transit,train,40.673513,-74.523606,njt_rail,MNEG
+MLK DRIVE LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.712008,-74.077323,njt_rail,HBLR
+MONMOUTH PARK,NJ Transit,train,40.313425,-74.015172,njt_rail,NJCL
+MONTCLAIR HEIGHTS,NJ Transit,train,40.857536,-74.2025,njt_rail,BNTN; BNTNM
+MONTVALE,NJ Transit,train,41.040879,-74.029152,njt_rail,PASC
+MORRIS PLAINS,NJ Transit,train,40.828637,-74.478197,njt_rail,MNE
+MORRISTOWN,NJ Transit,train,40.797113,-74.474086,njt_rail,MNE
+MOUNT ARLINGTON,NJ Transit,train,40.89659,-74.632731,njt_rail,BNTN; MNE
+MOUNT OLIVE,NJ Transit,train,40.907376,-74.730653,njt_rail,BNTN; MNE
+MOUNT TABOR,NJ Transit,train,40.875904,-74.481915,njt_rail,MNE
+MOUNTAIN AVENUE,NJ Transit,train,40.848715,-74.205306,njt_rail,BNTN; BNTNM
+MOUNTAIN LAKES,NJ Transit,train,40.885947,-74.433604,njt_rail,BNTN
+MOUNTAIN STATION,NJ Transit,train,40.755365,-74.253024,njt_rail,MNE; MNEG
+MOUNTAIN VIEW,NJ Transit,train,40.914402,-74.268158,njt_rail,BNTN
+MSU,NJ Transit,train,40.869782,-74.197439,njt_rail,BNTN; BNTNM
+MURRAY HILL,NJ Transit,train,40.695068,-74.403134,njt_rail,MNEG
+NANUET,NJ Transit,train,41.090015,-74.014794,njt_rail,PASC
+NETCONG,NJ Transit,train,40.897552,-74.707317,njt_rail,BNTN; MNE
+NETHERWOOD,NJ Transit,train,40.629148,-74.403455,njt_rail,RARV
+NEW BRIDGE LANDING,NJ Transit,train,40.910856,-74.035044,njt_rail,PASC
+NEW BRUNSWICK,NJ Transit,train,40.497278,-74.445751,njt_rail,NEC
+NEW PROVIDENCE,NJ Transit,train,40.712022,-74.386501,njt_rail,MNEG
+NEW YORK PENN STATION,NJ Transit,train,40.750046,-73.992358,njt_rail,BNTNM; MNE; MNEG; NEC; NJCL; NJCLL; RARV
+NEWARK AIRPORT RAILROAD STATION,NJ Transit,train,40.704415,-74.190717,njt_rail,NEC; NJCL
+NEWARK BROAD ST,NJ Transit,train,40.747621,-74.171943,njt_rail,BNTN; BNTNM; MNE; MNEG
+NEWARK PENN STATION,NJ Transit,train,40.734221,-74.164554,njt_rail,NEC; NJCL; NJCLL; RARV
+NEWPORT LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.726819,-74.036233,njt_rail,HBLR
+NJPAC/CENTRE STREET LIGHT RAIL STATION,Newark Light Rail,light_rail,40.739498,-74.16558,njt_rail,NLR
+NORFOLK STREET LIGHT RAIL STATION,Newark Light Rail,light_rail,40.745319,-74.183033,njt_rail,NLR
+NORTH BRANCH,NJ Transit,train,40.59202,-74.683802,njt_rail,RARV
+NORTH ELIZABETH,NJ Transit,train,40.680265,-74.206165,njt_rail,NEC; NJCL
+ORADELL,NJ Transit,train,40.953478,-74.029983,njt_rail,PASC
+ORANGE,NJ Transit,train,40.771883,-74.233103,njt_rail,MNE; MNEG
+ORANGE STREET LIGHT RAIL STATION,Newark Light Rail,light_rail,40.750629,-74.184951,njt_rail,NLR
+OTISVILLE,NJ Transit,train,41.471784,-74.529212,njt_rail,MNBN; MNBNP
+PALMYRA LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.004659,-75.020391,njt_rail,RVLN
+PARK AVENUE NEWARK LIGHT RAIL STATION,Newark Light Rail,light_rail,40.75856,-74.184941,njt_rail,NLR
+PARK RIDGE,NJ Transit,train,41.032305,-74.036164,njt_rail,PASC
+PASSAIC,NJ Transit,train,40.849411,-74.133933,njt_rail,MNBN; MNBNP
+PATERSON,NJ Transit,train,40.914887,-74.16733,njt_rail,MNBN; MNBNP
+PEAPACK,NJ Transit,train,40.708794,-74.658469,njt_rail,MNEG
+PEARL RIVER,NJ Transit,train,41.058181,-74.02232,njt_rail,PASC
+PENN STATION LIGHT RAIL ARRIVAL,Newark Light Rail,light_rail,40.73481,-74.163603,njt_rail,NLR
+PENN STATION LIGHT RAIL DEPARTURE,Newark Light Rail,light_rail,40.73481,-74.163603,njt_rail,NLR
+PENNSAUKEN TRANSIT CENTER,NJ Transit,train,39.977769,-75.061796,njt_rail,ATLC
+PENNSAUKEN TRANSIT CENTER LIGHT RAIL STA,Riverline Light Rail,light_rail,39.978276,-75.061962,njt_rail,RVLN
+PERTH AMBOY,NJ Transit,train,40.509398,-74.273752,njt_rail,NJCL; NJCLL
+PLAINFIELD,NJ Transit,train,40.618425,-74.420163,njt_rail,RARV
+PLAUDERVILLE,NJ Transit,train,40.884916,-74.102695,njt_rail,MNBN; MNBNP
+POINT PLEASANT,NJ Transit,train,40.092718,-74.048191,njt_rail,NJCL; NJCLL
+PORT IMPERIAL HBLR STATION,Hudson-Bergen Light Rail,light_rail,40.775919,-74.012921,njt_rail,HBLR
+PORT JERVIS,NJ Transit,train,41.374899,-74.694622,njt_rail,MNBN; MNBNP
+PRINCETON,NJ Transit,train,40.342088,-74.65887,njt_rail,PRIN
+PRINCETON JCT.,NJ Transit,train,40.316316,-74.623753,njt_rail,NEC; PRIN
+RADBURN,NJ Transit,train,40.939914,-74.121617,njt_rail,MNBN; MNBNP
+RAHWAY,NJ Transit,train,40.606338,-74.276692,njt_rail,NEC; NJCL
+RAMSEY,NJ Transit,train,41.056422,-74.141877,njt_rail,MNBN; MNBNP
+RAMSEY ROUTE 17 STATION,NJ Transit,train,41.07513,-74.145485,njt_rail,MNBN; MNBNP
+RARITAN,NJ Transit,train,40.571005,-74.634364,njt_rail,RARV
+RED BANK,NJ Transit,train,40.348284,-74.074538,njt_rail,NJCL; NJCLL
+RICHARD STREET LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.699118,-74.078643,njt_rail,HBLR
+RIDGEWOOD,NJ Transit,train,40.980629,-74.120592,njt_rail,MNBN; MNBNP
+RIVER EDGE,NJ Transit,train,40.935146,-74.02914,njt_rail,PASC
+RIVERFRONT STADIUM LIGHT RAIL STATION,Newark Light Rail,light_rail,40.74559,-74.169202,njt_rail,NLR
+RIVERSIDE LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.039219,-74.958842,njt_rail,RVLN
+RIVERTON LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.008939,-75.013082,njt_rail,RVLN
+ROEBLING LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.116909,-74.770202,njt_rail,RVLN
+ROSELLE PARK,NJ Transit,train,40.66715,-74.266323,njt_rail,RARV
+ROUTE 73/PENNSAUKEN LIGHT RAIL STATION,Riverline Light Rail,light_rail,39.993109,-75.03961,njt_rail,RVLN
+RUTHERFORD,NJ Transit,train,40.828248,-74.100563,njt_rail,MNBN; MNBNP
+SALISBURY MILLS-CORNWALL,NJ Transit,train,41.437073,-74.101871,njt_rail,MNBN; MNBNP
+SECAUCUS LOWER LEVEL,NJ Transit,train,40.761188,-74.075821,njt_rail,MNBN; MNBNP; PASC
+SECAUCUS UPPER LEVEL,NJ Transit,train,40.761188,-74.075821,njt_rail,BNTNM; MNE; MNEG; NEC; NJCL; NJCLL; RARV
+SHORT HILLS,NJ Transit,train,40.725249,-74.323754,njt_rail,MNE; MNEG
+SILVER LAKE LIGHT RAIL STATION,Newark Light Rail,light_rail,40.780287,-74.180343,njt_rail,NLR
+SLOATSBURG,NJ Transit,train,41.157138,-74.191307,njt_rail,MNBN; MNBNP
+SOMERVILLE,NJ Transit,train,40.566075,-74.61397,njt_rail,RARV
+SOUTH AMBOY,NJ Transit,train,40.484308,-74.28014,njt_rail,NJCL; NJCLL
+SOUTH ORANGE,NJ Transit,train,40.745952,-74.260538,njt_rail,MNE; MNEG
+SPRING LAKE,NJ Transit,train,40.150557,-74.035481,njt_rail,NJCL; NJCLL
+SPRING VALLEY,NJ Transit,train,41.111978,-74.043991,njt_rail,PASC
+STIRLING,NJ Transit,train,40.674579,-74.493723,njt_rail,MNEG
+SUFFERN,NJ Transit,train,41.11354,-74.153442,njt_rail,MNBN; MNBNP
+SUMMIT,NJ Transit,train,40.716549,-74.357807,njt_rail,MNE; MNEG
+TETERBORO,NJ Transit,train,40.864858,-74.062676,njt_rail,PASC
+TONNELLE - WESTSIDE DEKALB JCT,Hudson-Bergen Light Rail,light_rail,40.733749,-74.036704,njt_rail,HBLR
+TONNELLE AVENUE LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.78733,-74.031263,njt_rail,HBLR
+TOWACO,NJ Transit,train,40.922809,-74.343842,njt_rail,BNTN
+TRENTON TRANSIT CENTER,NJ Transit,train,40.218515,-74.753926,njt_rail,NEC
+TRENTON TRANSIT CENTER LIGHT RAIL STATION,Riverline Light Rail,light_rail,40.218348,-74.755194,njt_rail,RVLN
+TUXEDO,NJ Transit,train,41.194208,-74.18446,njt_rail,MNBN; MNBNP
+UNION,NJ Transit,train,40.683663,-74.238605,njt_rail,RARV
+UPPER MONTCLAIR,NJ Transit,train,40.842004,-74.209368,njt_rail,BNTN; BNTNM
+WALDWICK,NJ Transit,train,41.012734,-74.123412,njt_rail,MNBN; MNBNP
+WALNUT STREET,NJ Transit,train,40.817218,-74.20963,njt_rail,BNTN; BNTNM
+WALTER RAND TRANSPORTATION CTR,Riverline Light Rail,light_rail,39.943258,-75.12021,njt_rail,RVLN
+WARREN STREET LIGHT RAIL STATION,Newark Light Rail,light_rail,40.742439,-74.181183,njt_rail,NLR
+WASHINGTON STREET LIGHT RAIL STATION,Newark Light Rail,light_rail,40.738347,-74.174081,njt_rail,NLR
+WATCHUNG AVENUE,NJ Transit,train,40.829514,-74.206934,njt_rail,BNTN; BNTNM
+WATSESSING AVENUE,NJ Transit,train,40.782743,-74.198451,njt_rail,BNTN; BNTNM
+WAYNE/ROUTE 23 TRANSIT CENTER [RR],NJ Transit,train,40.900254,-74.256971,njt_rail,BNTN
+WESMONT,NJ Transit,train,40.854979,-74.096951,njt_rail,MNBN; MNBNP
+WEST SIDE AVENUE LIGHT RAIL STATION,Hudson-Bergen Light Rail,light_rail,40.714548,-74.087581,njt_rail,HBLR
+WESTFIELD,NJ Transit,train,40.649448,-74.347629,njt_rail,RARV
+WESTWOOD,NJ Transit,train,40.990817,-74.032696,njt_rail,PASC
+WHITE HOUSE,NJ Transit,train,40.615611,-74.77066,njt_rail,RARV
+WOOD-RIDGE,NJ Transit,train,40.843974,-74.078719,njt_rail,PASC
+WOODBRIDGE,NJ Transit,train,40.55661,-74.277751,njt_rail,NJCL; NJCLL
+WOODCLIFF LAKE,NJ Transit,train,41.021078,-74.040775,njt_rail,PASC
+14th Street,PATH,path,40.73735,-73.99684,path,PATH
+23rd Street,PATH,path,40.7429,-73.99278,path,PATH
+33rd Street,PATH,path,40.74912,-73.98827,path,PATH
+9th Street,PATH,path,40.73424,-73.9991,path,PATH
+Christopher Street,PATH,path,40.73295,-74.00707,path,PATH
+Exchange Place,PATH,path,40.71676,-74.03238,path,PATH
+Grove Street,PATH,path,40.71966,-74.04245,path,PATH
+Harrison,PATH,path,40.73942,-74.15587,path,PATH
+Hoboken,PATH,path,40.73586,-74.02922,path,PATH
+Journal Square,PATH,path,40.73301,-74.06289,path,PATH
+Newark,PATH,path,40.73454,-74.16375,path,PATH
+Newport,PATH,path,40.72699,-74.03383,path,PATH
+World Trade Center,PATH,path,40.71271,-74.01193,path,PATH
+49th St,SEPTA Regional Rail,train,39.94361,-75.21667,septa_rail,MED
+9th St Lansdale,SEPTA Regional Rail,train,40.25,-75.27917,septa_rail,LAN
+Airport Terminal A,SEPTA Regional Rail,train,39.87611,-75.24528,septa_rail,AIR
+Airport Terminal B,SEPTA Regional Rail,train,39.87722,-75.24139,septa_rail,AIR
+Airport Terminals C & D,SEPTA Regional Rail,train,39.87806,-75.24,septa_rail,AIR
+Airport Terminals E & F,SEPTA Regional Rail,train,39.87944,-75.23972,septa_rail,AIR
+Allegheny,SEPTA Regional Rail,train,40.00361,-75.16472,septa_rail,NOR
+Ambler,SEPTA Regional Rail,train,40.15361,-75.22472,septa_rail,LAN
+Angora,SEPTA Regional Rail,train,39.94472,-75.23861,septa_rail,MED
+Ardmore,SEPTA Regional Rail,train,40.00828,-75.2904,septa_rail,PAO
+Ardsley,SEPTA Regional Rail,train,40.11417,-75.15305,septa_rail,WAR
+Bala,SEPTA Regional Rail,train,40.00111,-75.22778,septa_rail,CYN
+Berwyn,SEPTA Regional Rail,train,40.04805,-75.44222,septa_rail,PAO
+Bethayres,SEPTA Regional Rail,train,40.11666,-75.06834,septa_rail,WTR
+Bridesburg,SEPTA Regional Rail,train,40.01056,-75.06973,septa_rail,TRE
+Bristol,SEPTA Regional Rail,train,40.10472,-74.85472,septa_rail,TRE
+Bryn Mawr,SEPTA Regional Rail,train,40.02195,-75.31639,septa_rail,PAO
+Carpenter,SEPTA Regional Rail,train,40.05111,-75.19139,septa_rail,CHW
+Chalfont,SEPTA Regional Rail,train,40.28778,-75.20972,septa_rail,LAN
+Chelten Avenue,SEPTA Regional Rail,train,40.03,-75.18083,septa_rail,CHW
+Cheltenham,SEPTA Regional Rail,train,40.05806,-75.09278,septa_rail,FOX
+Chester T.C.,SEPTA Regional Rail,train,39.84972,-75.36,septa_rail,WIL
+Chestnut Hill East,SEPTA Regional Rail,train,40.08111,-75.20722,septa_rail,CHE
+Chestnut Hill West,SEPTA Regional Rail,train,40.07639,-75.20834,septa_rail,CHW
+Churchman's Crossing,SEPTA Regional Rail,train,39.695,-75.6725,septa_rail,WIL
+Claymont,SEPTA Regional Rail,train,39.79778,-75.45222,septa_rail,WIL
+Clifton-Aldan,SEPTA Regional Rail,train,39.92667,-75.29028,septa_rail,MED
+Colmar,SEPTA Regional Rail,train,40.26833,-75.25445,septa_rail,LAN
+Conshohocken,SEPTA Regional Rail,train,40.07222,-75.30861,septa_rail,NOR
+Cornwells Heights,SEPTA Regional Rail,train,40.0709,-74.95432,septa_rail,TRE
+Crestmont,SEPTA Regional Rail,train,40.13334,-75.11861,septa_rail,WAR
+Croydon,SEPTA Regional Rail,train,40.09361,-74.90667,septa_rail,TRE
+Crum Lynne,SEPTA Regional Rail,train,39.87194,-75.33111,septa_rail,WIL
+Curtis Park,SEPTA Regional Rail,train,39.90805,-75.265,septa_rail,WIL
+Cynwyd,SEPTA Regional Rail,train,40.00667,-75.23167,septa_rail,CYN
+Darby,SEPTA Regional Rail,train,39.91306,-75.25445,septa_rail,WIL
+Daylesford,SEPTA Regional Rail,train,40.04306,-75.46056,septa_rail,PAO
+Delaware Valley University,SEPTA Regional Rail,train,40.29722,-75.16167,septa_rail,LAN
+Devon,SEPTA Regional Rail,train,40.04722,-75.42278,septa_rail,PAO
+Downingtown,SEPTA Regional Rail,train,40.00219,-75.71078,septa_rail,PAO
+Doylestown,SEPTA Regional Rail,train,40.30639,-75.13028,septa_rail,LAN
+East Falls,SEPTA Regional Rail,train,40.01139,-75.19195,septa_rail,NOR
+Eastwick,SEPTA Regional Rail,train,39.89278,-75.24389,septa_rail,AIR
+Eddington,SEPTA Regional Rail,train,40.08306,-74.93361,septa_rail,TRE
+Eddystone,SEPTA Regional Rail,train,39.85722,-75.34222,septa_rail,WIL
+Elkins Park,SEPTA Regional Rail,train,40.07139,-75.12778,septa_rail,WAR; WTR
+Elwyn,SEPTA Regional Rail,train,39.9075,-75.41167,septa_rail,MED
+Exton,SEPTA Regional Rail,train,40.01929,-75.62171,septa_rail,PAO
+Fern Rock Transit Center,SEPTA Regional Rail,train,40.04055,-75.13472,septa_rail,LAN; WAR; WTR
+Fernwood-Yeadon,SEPTA Regional Rail,train,39.93972,-75.25584,septa_rail,MED
+Folcroft,SEPTA Regional Rail,train,39.90055,-75.27972,septa_rail,WIL
+Forest Hills,SEPTA Regional Rail,train,40.12778,-75.02055,septa_rail,WTR
+Fort Washington,SEPTA Regional Rail,train,40.13583,-75.21222,septa_rail,LAN
+Fortuna,SEPTA Regional Rail,train,40.25945,-75.26611,septa_rail,LAN
+Fox Chase,SEPTA Regional Rail,train,40.07639,-75.08334,septa_rail,FOX
+Germantown,SEPTA Regional Rail,train,40.0375,-75.17167,septa_rail,CHE
+Gladstone,SEPTA Regional Rail,train,39.93278,-75.28222,septa_rail,MED
+Glenolden,SEPTA Regional Rail,train,39.89639,-75.29,septa_rail,WIL
+Glenside,SEPTA Regional Rail,train,40.10139,-75.15361,septa_rail,LAN; WAR
+Gravers,SEPTA Regional Rail,train,40.0775,-75.20167,septa_rail,CHE
+Gray 30th St Station,SEPTA Regional Rail,train,39.95667,-75.18166,septa_rail,AIR; CHE; CHW; CYN; FOX; LAN; MED; NOR; PAO; TRE; WAR; WIL; WTR
+Gwynedd Valley,SEPTA Regional Rail,train,40.18472,-75.25694,septa_rail,LAN
+Hatboro,SEPTA Regional Rail,train,40.17611,-75.1025,septa_rail,WAR
+Haverford,SEPTA Regional Rail,train,40.01389,-75.29972,septa_rail,PAO
+Highland,SEPTA Regional Rail,train,40.07056,-75.21111,septa_rail,CHW
+Highland Avenue,SEPTA Regional Rail,train,39.83361,-75.39333,septa_rail,WIL
+Holmesburg Junction,SEPTA Regional Rail,train,40.03278,-75.02361,septa_rail,TRE
+Ivy Ridge,SEPTA Regional Rail,train,40.03417,-75.23556,septa_rail,NOR
+Jefferson Station,SEPTA Regional Rail,train,39.9525,-75.15806,septa_rail,AIR; CHE; CHW; FOX; LAN; MED; NOR; PAO; TRE; WAR; WIL; WTR
+Jenkintown-Wyncote,SEPTA Regional Rail,train,40.09278,-75.1375,septa_rail,LAN; WAR; WTR
+Langhorne,SEPTA Regional Rail,train,40.16083,-74.9125,septa_rail,WTR
+Lansdale,SEPTA Regional Rail,train,40.24278,-75.285,septa_rail,LAN
+Lansdowne,SEPTA Regional Rail,train,39.9375,-75.27084,septa_rail,MED
+Lawndale,SEPTA Regional Rail,train,40.05139,-75.10306,septa_rail,FOX
+Levittown,SEPTA Regional Rail,train,40.14028,-74.81695,septa_rail,TRE
+Link Belt,SEPTA Regional Rail,train,40.27389,-75.24667,septa_rail,LAN
+Main Street,SEPTA Regional Rail,train,40.11722,-75.34861,septa_rail,NOR
+Malvern,SEPTA Regional Rail,train,40.03639,-75.51556,septa_rail,PAO
+Manayunk,SEPTA Regional Rail,train,40.02694,-75.225,septa_rail,NOR
+Marcus Hook,SEPTA Regional Rail,train,39.82167,-75.41944,septa_rail,WIL
+Meadowbrook,SEPTA Regional Rail,train,40.11139,-75.0925,septa_rail,WTR
+Media,SEPTA Regional Rail,train,39.91444,-75.395,septa_rail,MED
+Melrose Park,SEPTA Regional Rail,train,40.05944,-75.12917,septa_rail,WAR; WTR
+Merion,SEPTA Regional Rail,train,39.99861,-75.25139,septa_rail,PAO
+Miquon,SEPTA Regional Rail,train,40.05861,-75.26639,septa_rail,NOR
+Morton-Rutledge,SEPTA Regional Rail,train,39.90778,-75.32889,septa_rail,MED
+Mount Airy,SEPTA Regional Rail,train,40.06528,-75.19083,septa_rail,CHE
+Moylan-Rose Valley,SEPTA Regional Rail,train,39.90611,-75.38861,septa_rail,MED
+Narberth,SEPTA Regional Rail,train,40.00472,-75.26139,septa_rail,PAO
+Neshaminy Falls,SEPTA Regional Rail,train,40.14695,-74.96167,septa_rail,WTR
+New Britain,SEPTA Regional Rail,train,40.2975,-75.17973,septa_rail,LAN
+Newark DE,SEPTA Regional Rail,train,39.66969,-75.75351,septa_rail,WIL
+Noble,SEPTA Regional Rail,train,40.10444,-75.12417,septa_rail,WTR
+Norristown Elm Street,SEPTA Regional Rail,train,40.12083,-75.345,septa_rail,NOR
+Norristown Transit Center,SEPTA Regional Rail,train,40.11278,-75.34417,septa_rail,NOR
+North Broad,SEPTA Regional Rail,train,39.99222,-75.15389,septa_rail,LAN; NOR
+North Hills,SEPTA Regional Rail,train,40.11195,-75.16944,septa_rail,LAN
+North Philadelphia Amtrak,SEPTA Regional Rail,train,39.99678,-75.15511,septa_rail,TRE
+North Philadelphia Septa,SEPTA Regional Rail,train,39.99778,-75.15639,septa_rail,CHW
+North Wales,SEPTA Regional Rail,train,40.21417,-75.27722,septa_rail,LAN
+Norwood,SEPTA Regional Rail,train,39.89167,-75.30167,septa_rail,WIL
+Olney,SEPTA Regional Rail,train,40.03333,-75.12278,septa_rail,FOX
+Oreland,SEPTA Regional Rail,train,40.11833,-75.18389,septa_rail,LAN
+Overbrook,SEPTA Regional Rail,train,39.98944,-75.24944,septa_rail,PAO
+Paoli,SEPTA Regional Rail,train,40.04276,-75.48376,septa_rail,PAO
+Penllyn,SEPTA Regional Rail,train,40.17,-75.24416,septa_rail,LAN
+Penn Medicine Station,SEPTA Regional Rail,train,39.94806,-75.19028,septa_rail,AIR; LAN; MED; WIL
+Pennbrook,SEPTA Regional Rail,train,40.23028,-75.28167,septa_rail,LAN
+Philmont,SEPTA Regional Rail,train,40.12194,-75.04361,septa_rail,WTR
+Primos,SEPTA Regional Rail,train,39.92167,-75.29833,septa_rail,MED
+Prospect Park - Moore,SEPTA Regional Rail,train,39.88833,-75.30889,septa_rail,WIL
+Queen Lane,SEPTA Regional Rail,train,40.02333,-75.17805,septa_rail,CHW
+Radnor,SEPTA Regional Rail,train,40.04472,-75.35889,septa_rail,PAO
+Richard Allen Lane,SEPTA Regional Rail,train,40.0575,-75.19473,septa_rail,CHW
+Ridley Park,SEPTA Regional Rail,train,39.88055,-75.32222,septa_rail,WIL
+Rosemont,SEPTA Regional Rail,train,40.02778,-75.32667,septa_rail,PAO
+Roslyn,SEPTA Regional Rail,train,40.12083,-75.13416,septa_rail,WAR
+Rydal,SEPTA Regional Rail,train,40.1075,-75.11056,septa_rail,WTR
+Ryers,SEPTA Regional Rail,train,40.06417,-75.08639,septa_rail,FOX
+Secane,SEPTA Regional Rail,train,39.91583,-75.30972,septa_rail,MED
+Sedgwick,SEPTA Regional Rail,train,40.06278,-75.18528,septa_rail,CHE
+Sharon Hill,SEPTA Regional Rail,train,39.90445,-75.27084,septa_rail,WIL
+Somerton,SEPTA Regional Rail,train,40.13055,-75.01195,septa_rail,WTR
+Spring Mill,SEPTA Regional Rail,train,40.07417,-75.28611,septa_rail,NOR
+St. Davids,SEPTA Regional Rail,train,40.04389,-75.3725,septa_rail,PAO
+St. Martins,SEPTA Regional Rail,train,40.06583,-75.20444,septa_rail,CHW
+Stenton,SEPTA Regional Rail,train,40.06055,-75.17861,septa_rail,CHE
+Strafford,SEPTA Regional Rail,train,40.04945,-75.40305,septa_rail,PAO
+Suburban Station,SEPTA Regional Rail,train,39.95389,-75.16778,septa_rail,AIR; CHE; CHW; CYN; FOX; LAN; MED; NOR; PAO; TRE; WAR; WIL; WTR
+Swarthmore,SEPTA Regional Rail,train,39.90222,-75.35083,septa_rail,MED
+Tacony,SEPTA Regional Rail,train,40.02333,-75.03889,septa_rail,TRE
+Temple University,SEPTA Regional Rail,train,39.98139,-75.14944,septa_rail,AIR; CHE; CHW; FOX; LAN; MED; NOR; PAO; TRE; WAR; WIL; WTR
+Thorndale,SEPTA Regional Rail,train,39.99278,-75.76361,septa_rail,PAO
+Torresdale,SEPTA Regional Rail,train,40.05444,-74.98444,septa_rail,TRE
+Trenton,SEPTA Regional Rail,train,40.21851,-74.75393,septa_rail,TRE
+Trevose,SEPTA Regional Rail,train,40.14028,-74.9825,septa_rail,WTR
+Tulpehocken,SEPTA Regional Rail,train,40.03528,-75.18694,septa_rail,CHW
+Upsal,SEPTA Regional Rail,train,40.0425,-75.19,septa_rail,CHW
+Villanova,SEPTA Regional Rail,train,40.03833,-75.34167,septa_rail,PAO
+Wallingford,SEPTA Regional Rail,train,39.90361,-75.37194,septa_rail,MED
+Warminster,SEPTA Regional Rail,train,40.19528,-75.08916,septa_rail,WAR
+Washington Lane,SEPTA Regional Rail,train,40.05083,-75.17139,septa_rail,CHE
+Wawa,SEPTA Regional Rail,train,39.90068,-75.45856,septa_rail,MED
+Wayne,SEPTA Regional Rail,train,40.04583,-75.38667,septa_rail,PAO
+Wayne Junction,SEPTA Regional Rail,train,40.02222,-75.16,septa_rail,CHE; FOX; LAN; WAR
+West Trenton,SEPTA Regional Rail,train,40.25778,-74.81528,septa_rail,WTR
+Whitford,SEPTA Regional Rail,train,40.01472,-75.63805,septa_rail,PAO
+Willow Grove,SEPTA Regional Rail,train,40.14389,-75.11417,septa_rail,WAR
+Wilmington,SEPTA Regional Rail,train,39.73726,-75.55109,septa_rail,WIL
+Wissahickon,SEPTA Regional Rail,train,40.01667,-75.21028,septa_rail,NOR
+Wister,SEPTA Regional Rail,train,40.03611,-75.16111,septa_rail,CHE
+Woodbourne,SEPTA Regional Rail,train,40.1925,-74.88917,septa_rail,WTR
+Wyndmoor,SEPTA Regional Rail,train,40.07333,-75.19666,septa_rail,CHE
+Wynnefield Avenue,SEPTA Regional Rail,train,39.99,-75.22556,septa_rail,CYN
+Wynnewood,SEPTA Regional Rail,train,40.00278,-75.2725,septa_rail,PAO
+Yardley,SEPTA Regional Rail,train,40.23528,-74.83056,septa_rail,WTR

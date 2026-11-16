@@ -75,6 +75,14 @@ SHOWN_FIGURE_KEYS = ["restaurants_800m", "bars_800m", "cafes_800m", "park_ha_800
                      "train_station_m", "motorway_m", "restaurants_1600m", "bars_1600m"]
 
 
+def toll_range(g, col):
+    """[lowest, highest] round-trip toll among the rows, or None unless every route has a complete toll (never 0 for unknown)."""
+    if col not in g or not g.toll_complete.astype(str).str.lower().eq("true").all():
+        return None
+    x = pd.Series([parsers.toll_known(a, b) for a, b in zip(g[col], g.toll_complete)], dtype=float).dropna()
+    return [v(float(x.min())), v(float(x.max()))] if len(x) else None
+
+
 def shown_figures(s, bl):
     """A neighborhood's door-distance figures over the BUILDINGS shown in it: one vote per building (the first shown
     apartment of the building that has the figure), then the median over the buildings. The written text and "At a
@@ -93,6 +101,22 @@ def shown_figures(s, bl):
         per_building = pd.to_numeric(order[k], errors="coerce").groupby(order.building_id).first().dropna()
         out[k] = v(float(per_building.median())) if len(per_building) else None
     am = [(b_.get("amenities") or {}) for b_ in bl]
+    first = order.groupby("building_id").first()
+    if "train_station_kind" in first:
+        # independent check 5, N3: which kind of station the "train station" figure measures in this neighborhood (the kind of
+        # the median building's station; kinds lists every kind among the shown buildings), and the commuter-rail distance
+        tk = first.dropna(subset=["train_station_m"]).sort_values(["train_station_m", "train_station"]) if "train_station_m" in first else first.iloc[0:0]
+        mid = tk.iloc[(len(tk) - 1) // 2] if len(tk) else None
+        out["train_station_kind"] = v(mid.train_station_kind) if mid is not None else None
+        out["train_station"] = v(mid.train_station) if mid is not None else None
+        out["train_station_system"] = v(mid.train_station_system) if mid is not None else None
+        out["train_station_kinds"] = {str(k): int(n) for k, n in first.train_station_kind.dropna().value_counts().sort_index().items()}
+        cm = pd.to_numeric(first.commuter_station_m, errors="coerce").dropna() if "commuter_station_m" in first else pd.Series(dtype=float)
+        out["commuter_station_m"] = v(float(cm.median())) if len(cm) else None
+    pk = [(b_.get("parking") or {}).get("kind") for b_ in bl]
+    out["buildings_with_garage"] = int(sum(1 for k in pk if k in ("garage", "gated_lot")))
+    out["buildings_with_garage_or_covered"] = int(sum(1 for k in pk if k in ("garage", "gated_lot", "covered")))
+    out["buildings_with_garage_as_paid_extra"] = int(sum(1 for b_ in bl if (b_.get("parking") or {}).get("garage_is_optional_extra")))
     out.update({"figures_over": "shown buildings (the median building)",
                 "buildings_with_own_dog_area": int(sum(1 for a in am if a.get("dog_park_or_run"))),
                 "buildings_with_pet_spa_or_wash": int(sum(1 for a in am if a.get("pet_spa_or_wash"))),
@@ -243,7 +267,7 @@ def _sibling(r):
 def _stale(r):
     """(date, days) of the stale page or old availability date behind a 'listing' item, from the structured columns first."""
     why = str(_f(r, "listing_stale_why") or "") + " " + str(_f(r, "listing_warning") or "")
-    m = re.search(r"availability date ((?:19|20)\d\d-\d\d-\d\d) was (\d+) days", why)
+    m = re.search(r"availability date ((?:19|20)\d\d-\d\d-\d\d) (?:was|is) (\d+) days", why)
     if m:
         return "date", m.group(1), int(m.group(2))
     d = _f(r, "page_modified_date")
@@ -296,7 +320,7 @@ def open_item_text(r):
             if kind == "date" and day(d):
                 why = f"The move-in date on the listing is {day(d)}, more than six months ago. The apartment may have sat empty, or the date may be out of date."
             elif day(d):
-                why = f"The listing page was last changed on {day(d)}" + (f", {n} days before we read it" if n else "") + ", and no second site lists this apartment."
+                why = f"The listing page was last changed on {day(d)}" + (f", {n} days before {'the first tour day, November 22' if 'by the first tour day' in str(_f(r, 'listing_stale_why') or '') else 'we read it'}" if n else "") + ", and no second site lists this apartment."
             else:
                 why = "The listing page has not changed in over two months, and no second site lists this apartment."
         else:
@@ -322,6 +346,7 @@ DISCLOSURE_LABEL = {"floor not published": "floor not published", "lease term": 
                     "net-effective rent": "average rent after free months", "condo rented by its owner": "condo rented by its owner",
                     "dog weight limit not published": "dog weight limit not published", "overnight street parking": "overnight street parking",
                     "income requirement": "income requirement", "credit score requirement": "credit score requirement", "furnished apartment": "furnished apartment",
+                    "broker fee": "broker fee", "no broker fee": "no broker fee", "one-time costs": "one-time costs", "washer and dryer to confirm": "washer and dryer to confirm",
                     "something else to know": "something else to know"}
 
 
@@ -367,12 +392,14 @@ def disclosure_text(d, r):
             why = rv_why or "The price shown may not be the 12-month price: ask for it."
     elif kind == "cost":
         a, l = _num(r, "all_in"), _num(r, "all_in_likely")
-        names = [x for x in str(_f(r, "unknown_cost_lines") or "").split("; ") if x in ("parking", "required fees", "some required fees")]
-        subj = " and ".join(names) if names else "parking and the required fees"
-        verb = "costs what it typically does" if subj == "parking" else "cost what they typically do"
+        # N11: a utility with no estimate here (gas, in a few Connecticut towns) is one of the unpublished lines too
+        names = [{"electric": "electricity"}.get(x, x) for x in str(_f(r, "unknown_cost_lines") or "").split("; ")
+                 if x in ("parking", "required fees", "some required fees", "gas", "electric", "internet")]
+        subj = (", ".join(names[:-1]) + " and " + names[-1] if len(names) > 1 else names[0]) if names else "parking and the required fees"
+        verb = "costs what it typically does" if len(names) == 1 and names[0] in ("parking", "gas", "electricity", "internet") else "cost what they typically do"
         why = (f"On what is published the total is {usd(a)} a month. If {subj} {verb}, it would be about {usd(l)}."
                if a and l else "Parking or required fees are not published; once they are known the total could pass $3,000.")
-        q = "What do parking and the required monthly fees cost here?"
+        q = "What do parking and the required monthly fees cost here?" if not names or any(n in ("parking", "required fees", "some required fees") for n in names) else "Who pays for heat and cooking gas, and what does it cost?"
     elif kind == "condo":
         why = rv_why or ("City records show this building is a condominium, so the apartment is rented out by its owner, not by a leasing office." if sub == "city_record"
                          else "The listing is for a condo or co-op apartment rented out by its owner, not by a leasing office.")
@@ -407,6 +434,15 @@ def disclosure_text(d, r):
         why, q = f"Credit score requirement: {_f(r, 'cond_credit')}.", "What credit score does the application need?"
     elif kind == "furnished":
         why, q = "Furnished apartment.", "Is the furniture optional, and is this a standard 12-month lease?"
+    elif kind == "broker_fee":
+        why, q = "Broker fee: the listing says a broker fee applies; ask how much.", "How much is the broker fee, and who pays it?"
+    elif kind == "no_broker_fee":
+        why, q = "No broker fee, per the listing.", ""
+    elif kind == "one_time_costs":
+        v_ = str(_f(r, "one_time_costs") or "").strip()
+        why, q = (f"One-time costs, per the listing: {v_}. They are not part of the monthly total." if v_ else "The listing states one-time costs at signing."), "What is due at signing, in total?"
+    elif kind == "laundry_appliance_list":
+        why, q = parsers.laundry_tag_text(_f(r, "in_unit_appliances")) + ".", parsers.laundry_tag_question(_f(r, "in_unit_appliances"))
     else:
         why, q = rv_why or "", rv_q or ""
     return label, why, q
@@ -547,12 +583,75 @@ def evidence_points(text):
         m = re.fullmatch(r"car crime: (\d+) vehicle thefts and thefts from vehicles within (\d+) m (?:in (\d+) months \(police data\)|\(((?:19|20)\d\d-\d\d-\d\d) to ((?:19|20)\d\d-\d\d-\d\d),? about (\d+) months, ([^)]*)\)), "
                          r"at least double the median of ([\d.]+) for candidate buildings in (.+)", t)
         if m:
-            span = f"in {m.group(3)} months (police data)" if m.group(3) else f"from {day(m.group(4))} to {day(m.group(5))} ({m.group(7)})"
-            out.append(f"Car crime: {m.group(1)} vehicle thefts and thefts from vehicles within {m.group(2)} meters {span}, at least double what is usual around the other buildings we looked at in {m.group(9)}."); continue
+            out.append(car_crime_sentence(int(m.group(1)), int(m.group(2)), int(m.group(3) or m.group(6)), float(m.group(8)), m.group(9))); continue
         t2 = plain(t)
         if reader_ok(t2):
             out.append(t2[0].upper() + t2[1:] + ("" if t2.endswith(".") else "."))
     return list(dict.fromkeys(out))
+
+
+def _times(ratio):
+    """'about twice', 'about three times', 'more than ten times' for a ratio of 2 or more."""
+    words = {2: "twice", 3: "three times", 4: "four times", 5: "five times", 6: "six times", 7: "seven times", 8: "eight times", 9: "nine times", 10: "ten times"}
+    n = int(round(ratio))
+    return "more than ten times" if ratio > 10.5 else "about " + words.get(max(2, n), "twice")
+
+
+def _span_words(months):
+    months = int(months)
+    return {6: "six months", 12: "a year", 24: "two years"}.get(months, f"about {months} months")
+
+
+def car_crime_sentence(n, metres, months, median, area) -> str:
+    """Independent check 5, N19 / N13: the car-crime reason of an avoid card as one plain sentence from the counts.
+    (The one place crime is stated: inside an avoid card.)"""
+    ratio = n / median if median else None
+    cmp_ = f"{_times(ratio)} what is typical for the buildings we looked at in {area}" if ratio and ratio >= 1.75 else f"more than is typical for the buildings we looked at in {area}"
+    return f"Police recorded {n} car break-in{'s' if n != 1 else ''} or thefts within about {metres} meters (a few blocks) in {_span_words(months)}, {cmp_}."
+
+
+_RECORD_THING = {"class_c_violations": ("serious housing violation", "serious housing violations"), "heat_hot_water_complaints": ("heat or hot water complaint", "heat and hot water complaints"),
+                 "pest_complaints": ("pest complaint", "pest complaints"), "mold_complaints": ("mold complaint", "mold complaints"),
+                 "elevator_complaints": ("elevator complaint", "elevator complaints")}
+
+
+def record_sentence(category, window, excerpt):
+    """'11 (22.92 per 100 units; citywide 90th percentile 15.79)' with its category and window -> '11 serious housing
+    violations recorded by the city here in the last six months, more for its size than at nine in ten buildings in the
+    city.' (it starts with the count: the page prints "On record: " before a text that starts with a digit)
+    None when the excerpt is not a city-record count."""
+    m = re.fullmatch(r"\s*(\d+) \(([\d.]+) per 100 units; citywide 90th percentile ([\d.]+)\)\s*", str(excerpt or ""))
+    thing = _RECORD_THING.get(str(category or ""))
+    if not m or not thing:
+        return None
+    n, rate, p90 = int(m.group(1)), float(m.group(2)), float(m.group(3))
+    mw = re.fullmatch(r"last_(\d+)_months", str(window or ""))
+    span = f" in the last {_span_words(mw.group(1))}" if mw else ""
+    if p90 > 0 and rate >= 3 * p90:
+        cmp_ = ", far more for its size than at nine in ten buildings in the city"
+    elif rate > p90:
+        cmp_ = ", more for its size than at nine in ten buildings in the city"
+    else:
+        cmp_ = ", which is within the usual range for a building its size"
+    return f"{n} {thing[0] if n == 1 else thing[1]} recorded by the city here{span}{cmp_}."
+
+
+def evidence_items(items):
+    """The evidence items of an avoid or pause card. A city-record count ('23 (34.33 per 100 units; citywide 90th
+    percentile 2.9)') becomes a reader sentence in `excerpt`; the raw count string is kept in `excerpt_internal`, and
+    `kind` is 'record' (a count from a public record) or 'quote' (someone's words)."""
+    out = []
+    for it in items or []:
+        it = dict(it)
+        sent = record_sentence(it.get("category"), it.get("date"), it.get("excerpt"))
+        if sent:
+            it["excerpt_internal"], it["excerpt"], it["kind"] = it.get("excerpt"), sent, "record"
+            mw = re.fullmatch(r"last_(\d+)_months", str(it.get("date") or ""))
+            it["window_words"] = f"the last {_span_words(mw.group(1))}" if mw else None     # `date` stays as it was ('last_6_months')
+        else:
+            it.setdefault("kind", "quote")
+        out.append(it)
+    return out
 
 
 PUBLIC_EVIDENCE = {}  # building_id -> what the evidence pass could read (data/avoid_buildings.csv: public_evidence); filled in main()
@@ -572,6 +671,19 @@ def safety_status(h):
     return "not_published", (f"No {missing} is published for {name}. It has no police department of its own in the FBI's list of reporting agencies; "
                              + (f"the {st} State Police cover it and report one total for the whole state, not a figure for the town. " if st == "Connecticut" else "the agency that covers it reports no figure for the town alone. ")
                              + "So the rule that nothing here has more crime than Jamaica could not be tested for this place, and no figure is guessed.")
+
+
+def dedupe_questions(qs):
+    """One question once (independent check 5, N20): 'What is the rent on a 12-month lease? Ask before touring.' and
+    'What is the rent on a 12-month lease?' are the same question; the first wording met is kept."""
+    key = lambda q: re.sub(r"\W+", " ", re.sub(r"(?i)\s*ask before touring\.?\s*$", "", str(q))).strip().lower()
+    out, seen = [], set()
+    for q in qs:
+        k = key(q)
+        if q and k not in seen:
+            seen.add(k)
+            out.append(q)
+    return out
 
 
 def unit(r):
@@ -601,8 +713,16 @@ def unit(r):
         qs.append("What is the monthly pet rent and any one-time pet fee? (the figure in the cost is an estimate)")
     if "parking" in str(g("all_in_estimated_lines") or ""):
         qs.append("What does a parking spot cost per month? (the figure in the cost comes from a resident's review)")
-    qs = list(dict.fromkeys(qs))
+    # independent check 5, N26: while "are dogs allowed" is itself the open item, the weight question is part of it, not a
+    # second question that presumes a policy ('the page says small dogs') the open item says is unconfirmed
+    dogs_open = bool(oi) and g("confirm_asterisk") == "yes" and oi[0] == "dogs allowed"
+    if dogs_open and any("dog weight limit" in q for q in qs):
+        qs = [q for q in qs if "dog weight limit" not in q]
+        qs = [("Are dogs allowed, and up to what weight? Ask for the pet policy in writing." if q == oi[3] and q.startswith("Are dogs allowed?") else q) for q in qs]
+    qs = dedupe_questions(qs)
     out = unit_core(r, g, qs)
+    if dogs_open and (str(g("open_codes") or "").split(";")[0] == "dogs_not_named"):
+        out["dog"]["size_note"] = None              # 'the page says small dogs' beside 'the listing does not name dogs' (142-38 37th Ave 8E)
     # independent check 4, D25: a property whose own title names the apartment ('416 Highland Ave - 312', one row labelled
     # '1 Bed') is apartment 312 at that address: the label is the number, and the title is not a building name
     tu = parsers.title_unit(g("building_name")) if parsers.is_plan_label(g("unit")) else ""
@@ -611,7 +731,7 @@ def unit(r):
     out["disclosures"] = disc
     out["confirm"] = {"asterisk": g("confirm_asterisk") == "yes", "what": oi[0] if oi and g("confirm_asterisk") == "yes" else None,
                       "label": oi[1] if oi and g("confirm_asterisk") == "yes" else None, "why": oi[2] if oi and g("confirm_asterisk") == "yes" else None,
-                      "question": oi[3] if oi and g("confirm_asterisk") == "yes" else None, "code": (str(g("open_codes") or "").split(";")[0] or None) if oi else None,
+                      "question": (qs[0] if dogs_open and qs and qs[0].startswith("Are dogs allowed, and up to what weight") else oi[3]) if oi and g("confirm_asterisk") == "yes" else None, "code": (str(g("open_codes") or "").split(";")[0] or None) if oi else None,
                       "why_internal": oi[4] if oi else None, "reviewed": g("review_verdict")}
     am = out["amenities"]
     mr = moment_ratings(out["moments"], g("parking_rank"), out["parking"]["offsite"],
@@ -620,6 +740,25 @@ def unit(r):
     for k, val in mr.items():
         out["moments"][k]["rating"] = val
     return out
+
+
+def parking_block(g):
+    kinds = [k for k in str(g("parking_kinds") or "").split("; ") if k]
+    kind, inc = g("parking_kind") or None, g("parking_included_kind") or None
+    opt = j(g("parking_optional"), [])
+    basis = j(g("parking_kind_basis"), {})
+    est = g("parking_fee_monthly_basis") == "resident_review"
+    plain = kind in ("open_lot", "assigned_lot", "off_street", "assigned")
+    return {"kinds": kinds, "kind": kind, "kind_words": parsers.PARKING_KIND_WORDS.get(kind) if kind else None,
+            "included_kind": inc if g("parking_fee") == 0 else None, "included_quote": (g("parking_included_quote") or None) if g("parking_fee") == 0 else None,
+            "included_basis": parsers.PARKING_BASIS_WORDS.get(g("parking_included_basis")) if g("parking_fee") == 0 else None,
+            "optional_kinds": [{"kind": o.get("kind"), "kind_words": parsers.PARKING_KIND_WORDS.get(o.get("kind")), "fee": o.get("fee"), "fee_high": o.get("fee_high"),
+                                "fee_basis": "published" if o.get("fee") is not None else None} for o in opt],
+            "fee_kind": g("parking_fee_kind") or None, "assigned": g("parking_assigned") == "yes",
+            "kinds_basis": {k: parsers.PARKING_BASIS_WORDS.get(b_, b_) for k, b_ in basis.items()} or None,
+            "garage_is_optional_extra": bool(plain and any(o.get("kind") in ("garage", "covered", "gated_lot") for o in opt)),
+            "summary": parsers.parking_summary(kind, inc, g("parking_fee"), opt, est) or None,
+            "reviewed_note": g("parking_reviewed") or None}
 
 
 def unit_core(r, g, qs):
@@ -649,7 +788,13 @@ def unit_core(r, g, qs):
                     # review: then it is an estimate), and every kind of parking the sentence names: "surface parking;
                     # optional garages" is a lot with an optional garage, not "garage parking"
                     "fee_basis": ("estimate from a resident's review" if g("parking_fee_monthly_basis") == "resident_review" else ("published" if g("parking_fee") is not None else None)),
-                    "kinds": parsers.parking_kinds(g("parking_type")), "garage_is_optional_extra": parsers.garage_is_optional(g("parking_type")),
+                    # independent check 5, N1 / D18: structured parking from every source's words (parsers.parking_facts).
+                    # kind: the space she would actually park in (a free open lot is 'open_lot' whatever garage is also
+                    # offered); kinds: every kind a source names (garage, gated_lot, covered, assigned_lot, open_lot,
+                    # off_street, assigned, offsite, street); included_kind: which kind the free space is; optional_kinds:
+                    # the other kinds offered for a fee ({kind, fee, fee_high}; fee null = not published); fee_kind: the
+                    # kind `fee` pays for; summary: one sentence to use as it stands.
+                    **parking_block(g),
                     # D10: parking that is not at the building ("2 blocks away") is never "covered parking" on the page
                     "offsite": bool(parsers.OFFSITE_PARKING.search(str(g("parking_type") or "")))},
         # independent check 4, D9: doorman and concierge are separate, each only from a source that says so; front_desk is
@@ -657,6 +802,13 @@ def unit_core(r, g, qs):
         "amenities": {"pool": g("pool") or None, "pool_text": g("pool_text"), "doorman": g("doorman") or None, "concierge": g("concierge") or None, "front_desk": g("front_desk") or None,
                       "doorman_text": g("doorman_text"), "controlled_access": g("controlled_access"),
                       "gym": g("gym"), "in_unit_laundry": g("in_unit_laundry"), "laundry": g("laundry"), "package_room": g("package_room"),
+                      # independent check 5, N6: where in-unit laundry comes from. 'listing_site_appliance_list' = only a listing
+                      # site's appliance list names the machines, which does not say they are in the apartment (the unit then
+                      # carries the "washer and dryer to confirm" disclosure); 'page_says_in_apartment' = a page's own words.
+                      # in_unit_appliances: 'washer and dryer', or 'washer' / 'dryer' when only one is named.
+                      "in_unit_laundry_basis": ({"appliance_list": "listing_site_appliance_list", "says_in_apartment": "page_says_in_apartment"}.get(g("in_unit_laundry_source_kind"))
+                                                if g("in_unit_laundry") == "yes" else None),
+                      "in_unit_appliances": (g("in_unit_appliances") or None) if g("in_unit_laundry") == "yes" else None,
                       "outdoor_space": g("outdoor_space"), "lounge_or_coworking": g("lounge_or_coworking"), "dog_amenities": g("dog_amenities"),
                       # 2026-11-16: laundry and dog amenities as structured facts, each from every source's own words
                       # (parsers.laundry_facts, parsers.dog_amenity_facts). in_unit_laundry is 'yes' only where a source says
@@ -683,7 +835,12 @@ def unit_core(r, g, qs):
                       "violent_per_1000": g("violent"), "violent_vs_jamaica": g("violent_vs_jamaica"), "near_violent_250m_24m": g("near_violent_250m_24m"),
                       "near_violent_evening_250m_24m": g("near_violent_evening_250m_24m"), "car_crime_250m_24m": (g("near_veh_theft_24m") or 0) + (g("near_theft_from_veh_24m") or 0) if g("near_veh_theft_24m") is not None else None,
                       "vehicle_theft_per_1000": g("motor_vehicle_theft"), "police": g("police_agency"), "police_geography": g("police_geography")},
-            "sat": {"bars_1600m": g("bars_1600m"), "music_1600m": g("music_1600m"), "restaurants_1600m": g("restaurants_1600m"), "parking_type": g("parking_type"), "train_station": g("train_station"), "train_station_m": g("train_station_m")},
+            "sat": {"bars_1600m": g("bars_1600m"), "music_1600m": g("music_1600m"), "restaurants_1600m": g("restaurants_1600m"), "parking_type": g("parking_type"), "train_station": g("train_station"), "train_station_m": g("train_station_m"),
+                    # independent check 5, N3: train_station is the nearest rail station of ANY kind; train_station_kind is the
+                    # word for it ('train' = commuter rail, 'subway', 'PATH', 'light rail') and train_station_system its
+                    # operator. commuter_station is the nearest commuter-rail station (the same station when kind is 'train').
+                    "train_station_kind": g("train_station_kind"), "train_station_system": g("train_station_system"),
+                    "commuter_station": g("commuter_station"), "commuter_station_m": g("commuter_station_m"), "commuter_station_system": g("commuter_station_system")},
             "sun": {"drive_min": g("drive_min_to"), "drive_miles": g("drive_miles"), "drive_basis": "free-flow estimate, no traffic",
                     # null when a crossing on the route has no rate (never 0 for unknown); NY E-ZPass, with the mail rate beside it
                     "toll_round_trip": parsers.toll_known(g("toll_rt_ezpass"), g("toll_complete")),
@@ -699,7 +856,7 @@ def unit_core(r, g, qs):
         "vs_queens": {k[4:]: g(k) for k in r.index if k.startswith("vsq_") and not k.endswith("_diff")},
         "vs_queens_diff": {k[4:-5]: g(k) for k in r.index if k.startswith("vsq_") and k.endswith("_diff")},
         "evidence": {"checked": bool(r.get("evidence_checked")), "avoid": g("ev_avoid") == "yes", "avoid_reasons": g("ev_reasons"), "pause_notes": g("ev_pause_notes"),
-                     "items": j(r.get("ev_evidence_json"), []), "positive": j(r.get("ev_positive_json"), []),
+                     "items": evidence_items(j(r.get("ev_evidence_json"), [])), "positive": j(r.get("ev_positive_json"), []),
                      # the same two notes as plain sentences (independent check 4, D24): print these, not the strings above
                      "avoid_points": evidence_points(g("ev_reasons")), "pause_points": evidence_points(g("ev_pause_notes")),
                      # display field for the page: "NYC records", "rating screen: <verdict>", "none readable", or null when the building was not in the evidence pass
@@ -707,6 +864,10 @@ def unit_core(r, g, qs):
         "confirm": None, "disclosures": [],          # written in unit(): reader text from structured fields
         # conditions from the evidence (independent check 4, D8); each is also among the disclosures
         "conditions": {"income_requirement": g("cond_income"), "credit_score_requirement": g("cond_credit"), "furnished": g("cond_furnished") == "yes"},
+        # independent check 5, N4: one-time costs the listing states; never part of the monthly total. broker_fee is
+        # 'applies', 'none' or null (the listing says nothing); one_time_costs is a ready phrase or null.
+        "one_time": {"broker_fee": g("broker_fee") or None, "broker_fee_source": g("broker_fee_source") or None, "one_time_costs": g("one_time_costs") or None,
+                     "in_monthly_total": False},
         "more_in_building": g("more_in_building"), "rank_in_building": g("nth_shown_in_building"),
         "cost_check": {"cap_margin": g("cap_margin"), "unknown_count": g("all_in_unknown_count"), "lease_term_months": g("rent_lease_term_months"), "price_12_month": g("rent_12_month_price")},
         "confidence": g("confidence"), "tour_questions": qs,
@@ -845,6 +1006,9 @@ def main():
                       "all_in_range": [v(s.all_in.min()), v(s.all_in.max())] if len(s) else None, "sqft_median": num("sqft"),
                       "drive_min": num("drive_min_to"), "transit_min": num("transit_sat_median"),
                       "toll_round_trip": tollmed("toll_rt_ezpass"),
+                      # independent check 5, N9: tolls are per building (Newark: $24 at most buildings, $33 and $43 at two); the
+                      # median stays, and the lowest and highest round trip among the shown apartments go with it
+                      "toll_round_trip_range": toll_range(g, "toll_rt_ezpass"), "toll_round_trip_mail_range": toll_range(g, "toll_rt_mail"),
                       "toll_round_trip_mail": tollmed("toll_rt_mail") if "toll_rt_mail" in g and pd.to_numeric(g.toll_rt_mail, errors="coerce").notna().all() else None,
                       "toll_round_trip_mail_at_least": (v(pd.to_numeric(g.toll_rt_mail_subtotal, errors="coerce").median()) if "toll_rt_mail_subtotal" in g and not pd.to_numeric(g.toll_rt_mail, errors="coerce").notna().all() else None), "toll_basis": "New York E-ZPass, weekend off-peak",
                       "toll_complete": bool(g.toll_complete.astype(str).str.lower().eq("true").all()),

@@ -763,8 +763,12 @@ def data_4(M, R, S):
     est = M[M.all_in_estimated_lines.str.contains("pet rent")]
     ok(len(est) > 0 and all(next(l for l in json.loads(a) if l["line"].startswith("pet rent"))["amount"] > 0 for a in est.all_in_lines), "step 4a: an unpublished pet rent is a positive estimate line")
     ok((num(M, "all_in_likely") >= num(M, "all_in")).all(), "step 4b: all_in_likely is never below all_in")
-    kn = M[~M.all_in_unknown_lines.str.contains("parking fee|building fees")]
-    ok((num(kn, "all_in_likely") == num(kn, "all_in")).all(), "step 4b: with parking and fees known, all_in_likely equals all_in")
+    kn = M[~M.all_in_unknown_lines.str.contains("parking fee|building fees|gas|electric|internet")]
+    ok((num(kn, "all_in_likely") == num(kn, "all_in")).all(), "step 4b: with parking, fees and every utility line known, all_in_likely equals all_in")
+    # independent check 5, N11: a utility line with no estimate (gas) feeds all_in_likely with the typical value
+    ug = M[M.all_in_unknown_lines.str.contains(r"(?:^|; )gas(?:;|$)")]
+    ok(len(ug) == 0 or (num(ug, "all_in_likely") > num(ug, "all_in")).all(), "N11: a unit with no gas estimate has all_in_likely above all_in (the typical gas bill is added)")
+    ok(len(ug) == 0 or ug.all_in_likely_note.str.contains("gas \\$").all(), "N11: the note behind all_in_likely names the gas figure and where it comes from")
     ok((num(S, "all_in") <= 3000).all(), "step 4: the hard cap stays on all_in")
     flag_ = (num(S, "all_in") <= 3000) & (num(S, "all_in_likely") > 3000)
     has_ = S.disclosures.str.contains('"what": "could pass $3,000"', regex=False)
@@ -799,6 +803,7 @@ def data_4(M, R, S):
     data_6(L_)
     data_b20(M, R, S)
     data_ic4(M, R, S)
+    data_ic5(M, R, S)
 
 
 def data_units_unique(S):
@@ -1137,6 +1142,7 @@ def page_3(J, M, R, S):
         return                                          # data.json is from an earlier run: build_page_data.py has not run since rank.py
     page_ic4(J, M, R, S)
     page_cleanup(J, M, R, S)
+    page_ic5(J, M, R, S)
     # D12: experience and neighborhood figures are computed over the shown units
     for y in J["years"]:
         us = [u for u in J["units"] if u["year"] == y["id"]]
@@ -1631,11 +1637,350 @@ def page_cleanup(J, M, R, S):
        "page: meta.notes and meta.moment_thresholds are plain sentences (no field names, no 'all-in', no conceit)")
 
 
+
+def pure_ic5():
+    """Independent check 5 (docs/INDEPENDENT_CHECK_5.md), pipeline side: N1 / D18 / N8 parking kinds, N3 nearest rail
+    station of any kind, N4 broker fee and one-time costs, N5 dog weight limit, N6 laundry basis, N9 toll range, N11 gas
+    in all_in_likely, N28 staleness as of the first tour day, N19 record sentences, N20 / N26 questions."""
+    import pandas as pd
+    import all_in
+    import build_master as BM
+    import build_page_data as BP
+    import enrich_units as EU
+    import rank
+    PF = P.parking_facts
+    C, S_, A = "confirmed", "stated", "amenities_page"
+    # ---- N1: the six buildings of the check, each from its own source words
+    spinnaker = [("covered_lot; garage_lot; surface_lot; Parking; Garage | Covered or garage parking is limited but available at an additional cost. Please contact the leasing office for more information. / 1 parking space per lease holder, maximum of 2 spaces per apartment. Unassigned off-street parking included.", S_, "u", "listing"),
+                 ("garage: [community amenity] Garage", A, "u", "amenities page"),
+                 ("1 parking space per lease holder, maximum of 2 spaces per apartment. Unassigned off-street parking included. | Covered or garage parking is limited but available at an additional cost.", C, "u", "evidence fact parking")]
+    f = PF(spinnaker, 0)
+    eq((f["primary_kind"], f["included_kind"]), ("off_street", "off_street"), "N1 Spinnaker Wharf: the free space is unassigned off-street parking, not a garage")
+    eq(sorted(o["kind"] for o in f["optional"]), ["covered", "garage"], "N1 Spinnaker Wharf: covered and garage parking are paid extras")
+    ok(all(o["fee"] is None for o in f["optional"]), "N1 Spinnaker Wharf: the extras have no published fee")
+    tgm = [("Parking; Garage; Guest parking", S_, "u", "listing"),
+           ("Parking Policy: 1 space of open parking included per apartment. Assigned outdoor parking is $65 per month outside of gated area or $85 per month inside gated area. | $150 parking fee | Parking Policy: Assigned garage spaces available for $150 per month.", C, "u", "evidence fact parking")]
+    f = PF(tgm, 0)
+    eq((f["primary_kind"], f["included_kind"], f["fee_kind"]), ("open_lot", "open_lot", "open_lot"), "N1 TGM Anchor Point: one space of open parking is included")
+    eq({o["kind"]: o["fee"] for o in f["optional"]}.get("garage"), 150.0, "N1 TGM Anchor Point: a garage space is $150 a month")
+    for name, words, extra in [("The Edge at Raritan Heights", "1 free surface spot per 1-bedroom. 2 free surface spots per 2-bedroom. Additional spots available at $50/mo./car (subject to availability). Attached private garages available.", None),
+                               ("Kensington Place", "open lot included in lease; covered garage also listed | Open lot: included in lease; Garages available soon", None),
+                               ("Woodmont West", "Open parking: included in lease; Garage: $125/$150 month", 125.0),
+                               ("Reserve at Riverdale", "Open lot: included in lease; Underground parking garage: $50/month", 50.0)]:
+        f = PF([("garage_lot; Parking; Garage", S_, "u", "listing"), (words, C, "u", "evidence fact parking")], 0)
+        eq((f["primary_kind"], f["included_kind"]), ("open_lot", "open_lot"), f"N1 {name}: the free space is an open lot")
+        eq(P.parking_kind_rank(f["primary_kind"]), 2, f"N1 {name}: a free open lot scores as a lot, not as a garage")
+        if extra:
+            eq({o["kind"]: o["fee"] for o in f["optional"]}.get("garage"), extra, f"N1 {name}: the garage is a paid extra at ${extra:g}")
+    # D18: J Centra Burlington
+    f = PF([("garage_lot; surface_lot; Parking; Garage | Please call us regarding our Parking Policy.", S_, "u", "listing"),
+            ("surface parking; optional garages, rate not stated | In addition to the surface parking, there is optional garage parking at J Centra Burlington.", C, "u", "evidence fact parking")], None)
+    eq((f["primary_kind"], f["included_kind"], [(o["kind"], o["fee"]) for o in f["optional"]]), ("open_lot", "", [("garage", None)]), "D18 J Centra Burlington: surface parking, with optional garages of unpublished price")
+    # a garage with its fee, a covered fee label that is the garage's, off-site parking, a heading that is not a garage
+    f = PF([("Garage; Parking: Attached Garage, Detached Garage; Parking: On-site garage with direct access to assigned spaces.", S_, "u", "listing"), ("Covered parking fee $150", S_, "u", "listing fee lines")], 150)
+    eq((f["kinds"], f["primary_kind"], f["fee_kind"]), (["garage"], "garage", "garage"), "N1 Regency on Hudson: 'Covered parking fee' on a fee line is the garage's fee, not a second kind")
+    f = PF([("Parking Lot; Parking: Parking Lot", S_, "u", "listing"), ("Parking Lot | Parking & Garage / Parking / Parking Lot", C, "u", "evidence fact parking")], None)
+    eq(f["kinds"], ["open_lot"], "N1 Chateau Rive: the listing site's heading 'Parking & Garage' is not a garage")
+    f = PF([("no on-site parking: permit at a nearby deck $185/month, or $100/month at The Brunswick if available", C, "u", "evidence fact parking")], 185)
+    eq((f["primary_kind"], P.parking_kind_rank(f["primary_kind"])), ("offsite", 2), "N1 The George: a permit at a nearby deck is off-site parking")
+    f = PF([("Special Features: Balcony, Controlled Access, Gated Entry, Outdoor Parking", A, "u", "amenities page")], None)
+    eq(f["kinds"], ["open_lot"], "N1 The Atwater: 'Gated Entry' in a feature list is not gated parking")
+    f = PF([("Parking: Street Parking", S_, "u", "listing")], None)
+    eq((f["primary_kind"], P.parking_kind_rank("street")), ("street", 1), "N1: street parking only")
+    f = PF([("800 Summer Street offers Downtown Stamford at its doorstep. Leave your car in our garage.", "community_page", "u", "community page"), ("garage, off-street parking included | SMOKE FREE! OFF-STREET PARKING INCLUDED!", C, "u", "evidence fact parking")], 0)
+    eq((f["included_kind"], "street" in f["kinds"]), ("off_street", False), "N1 Summer Street: 'Street' in an address is not street parking; the included space is off-street parking")
+    eq(PF([], None)["primary_kind"], "", "N1: no source, no kind")
+    # the headed type, its rank and the kind all_in groups by
+    t = P.parking_type_text("open_lot", "garage: Open parking: included in lease; Garage: $125/$150 month")
+    eq(t, "lot: Open parking: included in lease; Garage: $125/$150 month", "N1: parking_type is headed by the space she would park in")
+    eq((rank.parking_rank(t), P.parking_type_kind(t)), (2, "lot"), "N1: a headed type ranks and groups by its head, whatever garage the words name")
+    eq(rank.parking_rank("garage: enclosed garage with EV charging; fee not stated"), 4, "N1: a garage still ranks as a garage")
+    eq(rank.parking_rank("offsite: permit at a nearby deck"), 2, "N1: off-site parking ranks as a lot")
+    ok(rank.parking_rank("parking: Parking") != rank.parking_rank("parking: Parking"), "N1: parking of an unnamed kind has no rank (nan)")
+    eq(rank.parking_rank("Open Lot Parking (surface lot)"), 2, "N1: an unheaded sentence is read as before")
+    # the sentence for the page and the text
+    PS = P.parking_summary
+    eq(PS("open_lot", "open_lot", 0, [{"kind": "garage", "fee": 150.0, "fee_high": None}]), "A free open lot; garage spaces are $150 a month.", "N1: summary, free lot with a priced garage")
+    eq(PS("open_lot", "open_lot", 0, [{"kind": "garage", "fee": None, "fee_high": None}]), "A free open lot; garage spaces are extra (fee not published).", "N1: summary, garage extra with no price")
+    eq(PS("open_lot", "", None, [{"kind": "garage", "fee": None, "fee_high": None}]), "An open lot, with the fee not published; garage spaces are extra (fee not published).", "D18: summary for J Centra Burlington")
+    eq(PS("garage", "", 100, []), "Garage parking, $100 a month.", "N1: summary, priced garage")
+    eq(PS("garage", "", None, []), "Garage parking, with the fee not published.", "N1: summary, garage with no price")
+    eq(PS("open_lot", "", 75, [], True), "An open lot, about $75 a month by a resident's review.", "N1: a fee from a review is 'about'")
+    eq((PS("street", "", None, []), PS("", "", None, [])), ("Street parking only.", ""), "N1: summary, street and nothing")
+    ok("garage" not in PS("open_lot", "open_lot", 0, []).lower(), "N1: a free open lot is never called a garage")
+    # the reviewed table applies over the parser (The Hampton: 'along with assigned parking space in rear lot')
+    M_ = BM.Merge()
+    M_.note_parking("b1", "assigned space in rear lot, included | along with assigned parking space in rear lot", C, "u", "evidence fact parking")
+    M_.note_parking("b1", "garage: [community amenity] Garage", A, "u", "amenities page")
+    rows = {"b1": {"parking_type": "lot: assigned space in rear lot, included"}}
+    BM.structured_parking(rows, M_, reviewed={"b1": {"building_id": "b1", "kinds": "assigned_lot; garage", "primary_kind": "assigned_lot", "included_kind": "assigned_lot", "fee": "0", "optional": "", "quote": "along with assigned parking space in rear lot", "why": "read"}})
+    eq((rows["b1"]["parking_kind"], rows["b1"]["parking_included_kind"], rows["b1"]["parking_fee_monthly"], rows["b1"]["parking_type"].split(":")[0]), ("assigned_lot", "assigned_lot", "0", "lot"), "N1: the reviewed table sets the included space and the fee")
+    ok("included or free" in rows["b1"]["parking_fee_note"], "N1: a reviewed free space carries the 'included or free' note the text reads")
+    # ---- N3: nearest rail station of any kind
+    st = pd.DataFrame([{"station": "Journal Square", "system": "PATH", "kind": "path", "lat": 40.7334, "lon": -74.0627, "feed": "path"},
+                       {"station": "HOBOKEN", "system": "NJ Transit", "kind": "train", "lat": 40.7349, "lon": -74.0279, "feed": "njt_rail"},
+                       {"station": "WEST SIDE AVENUE LIGHT RAIL STATION", "system": "Hudson-Bergen Light Rail", "kind": "light_rail", "lat": 40.7146, "lon": -74.0880, "feed": "njt_rail"},
+                       {"station": "Elmhurst Av", "system": "NYC Subway", "kind": "subway", "lat": 40.7424, "lon": -73.8820, "feed": "gtfs_subway"}])
+    r = EU.rail_fields(40.7340, -74.0640, "Hoboken", 2929, st)
+    eq((r["train_station"], r["train_station_kind"], r["train_station_system"]), ("Journal Square", "PATH", "PATH"), "N3 Journal Square: the nearest station is the PATH station")
+    ok(r["train_station_m"] < 300 and r["commuter_station"] == "Hoboken" and r["commuter_station_m"] == 2929, "N3 Journal Square: PATH a short walk away; the commuter station is kept beside it at its old distance")
+    r = EU.rail_fields(40.7150, -74.0890, "Hoboken", 5300, st)
+    eq((r["train_station"], r["train_station_kind"]), ("West Side Avenue", "light rail"), "N3 West Side: the light rail stop, named without 'Light Rail Station'")
+    r = EU.rail_fields(40.7420, -73.8815, "Woodside", 2162, st)
+    eq((r["train_station_kind"], r["commuter_station"]), ("subway", "Woodside"), "N3 Elmhurst: the subway; a map station far nearer than any in the feeds is kept as the commuter station")
+    r = EU.rail_fields(40.7350, -74.0285, "Hoboken", 80, st)
+    eq((r["train_station"], r["train_station_kind"], r["train_station_m"], r["train_station_system"]), ("Hoboken", "train", 80, "NJ Transit"), "N3: where the commuter station is the nearest, the figure is unchanged and the kind is 'train'")
+    eq(EU.rail_fields(None, None, None, None, st)["train_station"], None, "N3: no coordinate, no station")
+    eq((EU._station_name("45TH STREET LIGHT RAIL STATION"), EU._station_name("PORT IMPERIAL HBLR STATION"), EU._station_name("Jamaica Center-York College")), ("45th Street", "Port Imperial", "Jamaica Center-York College"), "N3: station names")
+    # ---- N4: broker fee and one-time costs
+    BF = P.broker_fee_statement
+    eq(BF("Heat and water included. Broker fee. 12 Month lease")[0], "applies", "N4 525 Riverdale Ave 5U: 'Broker fee.'")
+    eq(BF("12-24 month lease options\nResidents are responsible for Con-Edison\nBroker Fee applies")[0], "applies", "N4 Regency on Hudson: 'Broker Fee applies'")
+    for t in ["Pets allowed 700+ credit Security deposit NO BROKER FEE Heat and hot water are included", "Rent directly. No broker’s fee. Rent: $2,600/month", "Make this NO FEE apartment your new home!",
+              "- No application fee, no amenity fee and no broker fee!", "No broker fee landlord pays the broker commission."]:
+        eq(BF(t)[0], "none", f"N4: no broker fee: {t[:50]!r}")
+    for t in ["apartments that have utilities included and some with no broker fee", "Keller Williams (broker listing; ask about a broker fee)", "Application fee $20", ""]:
+        eq(BF(t)[0], "", f"N4: not a statement about this apartment's broker fee: {t[:50]!r}")
+    OT = P.one_time_costs
+    o = OT("holding fee $250; application $50 per applicant; deposit $1,000 to 1.5 months' rent | At Application: Holding Fee($250.00/unit); Application Fee($50.00/applicant, Nonrefundable)")
+    eq((o["items"], o["deposit_months"], o["deposit_up_to"]), (["application fee $50 per applicant", "holding fee $250"], 1.5, True), "N4 Rail at Bound Brook: application fee, holding fee, deposit up to 1.5 months")
+    eq(P.one_time_costs_sentence(o["items"], o["deposit_months"], o["deposit_dollars"], o["deposit_up_to"], 2400), "application fee $50 per applicant; holding fee $250; a security deposit of up to 1.5 months' rent", "N4: the one-time costs phrase")
+    o = OT("- 1.5 month security deposit and 1st month's rent due at lease signing.")
+    eq((o["deposit_months"], P.one_time_costs_sentence(o["items"], o["deposit_months"], o["deposit_dollars"], o["deposit_up_to"], 2300)), (1.5, "a security deposit of 1.5 months' rent"), "N4 134 Baldwin Ave: 1.5 months (not '5 month')")
+    o = OT("*Rent Concession-1 month free on 18-month lease *Security Deposit-$2000 - minimum credit score-700")
+    eq((o["deposit_months"], o["deposit_dollars"]), (None, 2000.0), "N4: '18-month lease' is not an 18-month deposit")
+    eq(P.one_time_costs_sentence([], None, 2000.0, False, 2400), "", "N4: a deposit of less than a month's rent is not a line")
+    eq(P.one_time_costs_sentence([], None, 3585.0, False, 2390), "a security deposit of $3,585", "N4 The Hampton: a deposit above one month's rent")
+    eq(P.one_time_costs_sentence([], 1.0, None, False, 2390), "", "N4: one month's deposit is not a line")
+    eq(OT("Application fee waived and 50% off move-in costs")["items"], [], "N4: a waived fee is not listed")
+    eq(OT("Pet fee $500 one-time; pet deposit $300")["deposit_dollars"], None, "N4: a pet deposit is not the security deposit")
+    eq(P.listing_descriptions('{"price":1,"description":{"value":"Heat and water included. Broker fee.\\n12 Month lease in a quiet building near the river."},"x":2}').split("\n")[0], "Heat and water included. Broker fee.", "N4: the listing's own description is read out of the cached page")
+    # ---- N5: a dog weight limit is stated only when a page states it
+    eq(P.parse_dog_weight("small dogs only; no pound figure on any page read (the stored 25 lb could not be traced to a page)"), ("size_only", None), "N5 Brookview Commons East: the checker's note is not a 25 lb limit")
+    ok(not P.dog_weight_traced("25", ["Dogs: Allowed (Size allowed: Small) | Cats: Allowed", "small dogs only; no pound figure on any page read (the stored 25 lb could not be traced to a page) | Small Pets Permitted (Restr. Apply)"]), "N5: 25 lb with no page behind it is not traced")
+    ok(P.dog_weight_traced("50", ["Dogs: Allowed (Number allowed: 2; Size allowed: Small, large; Weight limit (lbs.): 50; Monthly dog rent: $50/mo)"]), "N5 The Atwater: 50 lb is on the listing page")
+    ok(P.dog_weight_traced("75", ["We welcome up to two pets per apartment home, each weighing up to 75 pounds, and breed restrictions apply."]), "N5 500 PARQ: 75 lb is on the building's page")
+    ok(P.dog_weight_traced("40", ["Dogs must be under 40 pounds"]) and P.dog_weight_traced("65", ["65lb weight limit. We accept cats and dogs."]) and P.dog_weight_traced("35", ["Weight limit (lbs.) 35"]), "N5: limits in the page's words")
+    ok(not P.dog_weight_traced("40", ["Pet rent $40 a month; dogs welcome"]), "N5: a $40 pet rent is not a 40 lb limit")
+    ok(P.dog_weight_traced("no limit", ["There are no weight limits for dogs, but we do have breed restrictions."]) and not P.dog_weight_traced("no limit", ["Dogs allowed; breed list on request"]), "N5: 'no limit' needs a page that says so")
+    rows = {"b1": {"dog_weight_limit_lb": "25", "dog_weight_limit_lb_basis": "stated"}, "b2": {"dog_weight_limit_lb": "25", "dog_weight_limit_lb_basis": BM.PHONE}, "b3": {"dog_weight_limit_lb": "50", "dog_weight_limit_lb_basis": "confirmed"}}
+    M_ = BM.Merge()
+    M_.note_dog_weight("b1", "Dogs: Allowed (Size allowed: Small)")
+    M_.note_dog_weight("b3", "Weight limit: 50 lbs")
+    eq(BM.untraced_dog_weight(rows, M_), ["b1"], "N5: only the limit no page states is removed; a phone answer stands")
+    ok("dog_weight_limit_lb" not in rows["b1"] and rows["b1"]["dog_weight_limit_untraced"].startswith("25"), "N5: the removed figure is kept beside it, as untraced")
+    # ---- N6: in-unit laundry that rests on a listing site's appliance list
+    LF = P.laundry_facts
+    f = LF([("Washer, Dryer", "stated", ""), ("[features: Interior Features > Appliances & Utilities] Dryer", "amenities_page", "yes")])
+    eq((f["in_unit"], f["basis"], f["appliances"]), ("yes", "appliance_list", "washer and dryer"), "N6 Regency on Hudson: in-unit laundry rests on the appliance list alone")
+    f = LF([("Washer", "stated", ""), ("[features: Interior Features > Appliances & Utilities] Washer", "amenities_page", "yes")])
+    eq((f["basis"], f["appliances"], f["label"]), ("appliance_list", "washer", "In-unit washer (no dryer named)"), "N6 Parkway Lofts: only a washer is named")
+    f = LF([("Washer, Dryer", "stated", ""), ("[description] Every apartment includes a full-size in-unit washer and dryer.", "amenities_page", "yes")])
+    eq(f["basis"], "says_in_apartment", "N6 460 Summer: a page's own sentence says in the apartment")
+    eq(LF([("In unit laundry", "stated", ""), ("[unit amenity] In unit laundry", "amenities_page", "yes")])["basis"], "says_in_apartment", "N6: 'In unit laundry' says where the machines are")
+    eq(LF([("On-site laundry", "stated", "")])["basis"], "", "N6: no in-unit laundry, no basis")
+    ok("feature list" in P.laundry_tag_text("washer and dryer") and "no dryer is named" in P.laundry_tag_text("washer"), "N6: the disclosure sentences")
+    # ---- N11: a utility with no estimate takes the typical value in all_in_likely
+    units = [{"building_id": f"b{i}", "state": "CT", "beds": "1"} for i in range(6)]
+    util = {(f"b{i}", "utilities_1br"): {"electric": 90, "gas": [25, 27, 29, 31, 33, None][i], "internet": 75} for i in range(6)}
+    med = all_in.utility_medians(units, util)
+    eq(med[("CT", "gas", "utilities_1br")], (29.0, 5), "N11: the typical gas bill is the median of the estimates that exist, one per building")
+    ok(("NY", "gas", "") not in med, "N11: no median from fewer than five buildings")
+    # ---- N28: staleness as of the first tour day
+    eq(P.TOUR_START, "2026-11-22", "N28: the first tour day")
+    eq(P.staleness("2026-09-18", "2026-11-15")[0], "", "N28: 58 days on the day it was read is not stale by the read date")
+    lvl, days, why = P.staleness("2026-09-18", "2026-11-15", as_of=P.TOUR_START)
+    eq((lvl, days), ("open", 65), "N28 SoNo 19 Day 207 / Bedford Hall: 65 days unchanged on the first tour day is one open item")
+    ok("first tour day" in why and "2026-11-22" in why, "N28: the reason says the day it is judged on")
+    eq(P.staleness("2026-09-23", "2026-11-15", as_of=P.TOUR_START)[0], "", "N28: exactly 60 days on the first tour day is not stale")
+    eq(P.staleness("2026-09-18", "2026-11-15", second_source=True, as_of=P.TOUR_START)[0], "", "N28: a second site still clears it")
+    eq(P.staleness("2026-05-22", "2026-11-15", as_of=P.TOUR_START)[0], "remove", "N28: 184 days on the first tour day is removed")
+    eq(P.staleness("2026-09-01", "2026-11-25", as_of=P.TOUR_START)[1], 85, "N28: a page read after the first tour day is judged on the day it was read")
+    r_ = {"open_keys": "listing", "confirm_what": "listing", "open_codes": "stale_page", "confirm_asterisk": "yes", "listing_stale_why": why}
+    t = BP.open_item_text(r_)
+    ok("65 days before the first tour day, November 22" in t[2], f"N28: the reader's sentence counts to the tour day: {t[2]!r}")
+    # ---- N19 / N13: record counts and car crime as reader sentences
+    eq(BP.record_sentence("pest_complaints", "last_6_months", "23 (34.33 per 100 units; citywide 90th percentile 2.9)"),
+       "23 pest complaints recorded by the city here in the last six months, far more for its size than at nine in ten buildings in the city.", "N19: a city-record count as a sentence")
+    eq(BP.record_sentence("class_c_violations", "last_6_months", "11 (22.92 per 100 units; citywide 90th percentile 15.79)"),
+       "11 serious housing violations recorded by the city here in the last six months, more for its size than at nine in ten buildings in the city.", "N19: above the ninetieth percentile")
+    eq(BP.record_sentence("elevator_complaints", "last_24_months", "1 (0.5 per 100 units; citywide 90th percentile 2.9)"),
+       "1 elevator complaint recorded by the city here in the last two years, which is within the usual range for a building its size.", "N19: singular, and within the usual range")
+    eq(BP.record_sentence("management", "2013-12-04", "The 88-unit building has 680 violations recorded"), None, "N19: someone's words stay a quote")
+    it = BP.evidence_items([{"category": "mold_complaints", "date": "last_6_months", "excerpt": "4 (4.0 per 100 units; citywide 90th percentile 3.12)", "url": "u", "source": "NYC Open Data"}, {"category": "elevator", "date": "2026-10", "excerpt": "The elevators break often."}])
+    eq((it[0]["kind"], it[0]["excerpt_internal"], it[0]["window_words"], it[1]["kind"]), ("record", "4 (4.0 per 100 units; citywide 90th percentile 3.12)", "the last six months", "quote"), "N19: record items keep the raw count aside and say what they are")
+    ok(not re.search(r"per 100 units|percentile", it[0]["excerpt"]), "N19: no raw record string in the reader's sentence")
+    pts = BP.evidence_points("car crime: 14 vehicle thefts and thefts from vehicles within 250 m in 24 months (police data), at least double the median of 6.5 for candidate buildings in Brooklyn")
+    eq(pts, ["Police recorded 14 car break-ins or thefts within about 250 meters (a few blocks) in two years, about twice what is typical for the buildings we looked at in Brooklyn."], "N19: the car-crime reason of an avoid card")
+    eq(BP._times(3.2), "about three times", "N19: 'about three times'")
+    # ---- N20 / N26: questions
+    eq(BP.dedupe_questions(["What is the rent on a 12-month lease? Ask before touring.", "Are dogs allowed?", "What is the rent on a 12-month lease?"]),
+       ["What is the rent on a 12-month lease? Ask before touring.", "Are dogs allowed?"], "N20: the same question is asked once")
+    # ---- D25: an address with its town is not a building's name
+    eq(P.clean_building_name("41-42 Elbertson Street, Elmhurst NY", "41-42 Elbertson Street"), "", "D25: '41-42 Elbertson Street, Elmhurst NY' is the address, not a name")
+    eq(P.clean_building_name("56 Prospect St Residences NY", "56 Prospect St"), "56 Prospect St Residences NY", "D25: a name that starts with the address stays a name")
+    # ---- N9: the toll range of a neighborhood
+    g = pd.DataFrame({"toll_rt_ezpass": [24.0, 24.0, 33.0, 43.0], "toll_complete": ["True"] * 4})
+    eq(BP.toll_range(g, "toll_rt_ezpass"), [24.0, 43.0], "N9 Newark: the round-trip toll runs from $24 to $43")
+    eq(BP.toll_range(g.assign(toll_complete=["True", "False", "True", "True"]), "toll_rt_ezpass"), None, "N9: no range where a route's toll is incomplete")
+
+
+def data_ic5(M, R, S):
+    """Independent check 5 on the pipeline's output (master and ranked tables)."""
+    import pandas as pd
+    import rank
+    numS = lambda c: pd.to_numeric(S[c], errors="coerce")
+    # N1: the head of parking_type, the structured kind and the rank agree on every ranked unit
+    head = R.parking_type.map(P.parking_type_head)
+    want = R.parking_kind.map(lambda k: P.PARKING_LEGACY_HEAD.get(k, "parking") if k else "")
+    ok((head == want).all(), f"N1: parking_type's head disagrees with parking_kind on {(head != want).sum()} ranked units")
+    pr = pd.to_numeric(R.parking_rank, errors="coerce")
+    wr = R.parking_kind.map(P.parking_kind_rank)
+    ok(((pr == wr) | (pr.isna() & wr.isna())).all(), f"N1: parking_rank is not the rank of the kind she would park in on {(~((pr == wr) | (pr.isna() & wr.isna()))).sum()} units")
+    free = S[pd.to_numeric(S.parking_fee, errors="coerce") == 0]
+    ok((free.parking_included_kind != "").all(), "N1: every free parking space says which kind is included (or 'unspecified')")
+    lot_free = free[free.parking_included_kind.isin(["open_lot", "assigned_lot", "off_street", "assigned"])]
+    ok(len(lot_free) >= 20 and (pd.to_numeric(lot_free.parking_rank, errors="coerce") == 2).all(), "N1: a free lot space is scored as a lot (rank 2), never as a garage")
+    for name, kind in [("Spinnaker Wharf Apartments", "off_street"), ("TGM Anchor Point", "open_lot"), ("The Edge At Raritan Heights", "open_lot"), ("Kensington Place", "open_lot"), ("Woodmont West", "open_lot"),
+                       ("Reserve at Riverdale", "open_lot"), ("J Centra Burlington", "open_lot")]:
+        x = S[S.building_name == name]
+        if len(x):
+            ok((x.parking_kind == kind).all() and not x.parking_type.str.startswith("garage").any(), f"N1 / D18: {name} is {kind}, got {x.parking_kind.iloc[0]!r} / {x.parking_type.iloc[0][:30]!r}")
+    # N3: a station of any kind is never farther than the commuter station; the kind is one of the four words
+    ts, cs = numS("train_station_m"), numS("commuter_station_m")
+    ok(((ts <= cs) | cs.isna()).all(), "N3: the nearest station of any kind is farther than the commuter station somewhere")
+    ok(S[S.train_station != ""].train_station_kind.isin(["train", "subway", "PATH", "light rail"]).all(), "N3: every station has its kind")
+    for hood, kind, max_m in [("Jersey City – Journal Square", "PATH", 1200), ("Jersey City – Bergen-Lafayette", "light rail", 900), ("Jersey City – West Side", "light rail", 900), ("Bayonne", "light rail", 1500), ("Elmhurst", "subway", 600)]:
+        x = S[S.hood == hood]
+        if len(x):
+            ok((x.train_station_kind == kind).all() and pd.to_numeric(x.train_station_m).median() <= max_m, f"N3: {hood} should be beside a {kind} station (kinds {x.train_station_kind.unique().tolist()}, median {pd.to_numeric(x.train_station_m).median():.0f} m)")
+    # N4: the broker fee
+    lid = "trulia:466334272"
+    if lid in S.index:
+        ok(S.at[lid, "broker_fee"] == "applies" and '"what": "broker fee"' in S.at[lid, "disclosures"], "N4: 525 Riverdale Ave 5U carries the broker-fee disclosure")
+    bf = S[S.broker_fee == "applies"]
+    ok(bf.disclosures.str.contains('"code": "broker_fee"', regex=False).all() and not S[S.broker_fee != "applies"].disclosures.str.contains('"code": "broker_fee"', regex=False).any(), "N4: the broker-fee disclosure sits exactly on the apartments whose listing says a broker fee applies")
+    ok((S[S.one_time_costs != ""].disclosures.str.contains('"code": "one_time_costs"', regex=False)).all(), "N4: stated one-time costs carry their disclosure")
+    # N5: every numeric dog weight limit of a shown building is traced to a source's words
+    ok((M.get("dog_weight_limit_untraced", pd.Series("", index=M.index)) == "").sum() == len(M) or (M[M.dog_weight_limit_untraced != ""].dog_weight_limit_lb == "").all(), "N5: a limit no page states is not stored as the limit")
+    x = S[S.building_name.str.startswith("Brookview Commons East")]
+    ok(len(x) == 0 or ((x.dog_weight_limit_lb == "") & (x.dog_size_note != "")).all(), "N5: Brookview Commons East has no pound figure and carries the small-dogs note")
+    # N6
+    tag = S[(S.in_unit_laundry == "yes") & (S.in_unit_laundry_source_kind == "appliance_list")]
+    ok(len(tag) > 0 and tag.disclosures.str.contains('"code": "laundry_appliance_list"', regex=False).all(), "N6: in-unit laundry from an appliance list alone carries the disclosure")
+    ok(not S[~S.index.isin(tag.index)].disclosures.str.contains('"code": "laundry_appliance_list"', regex=False).any(), "N6: and no other apartment does")
+    # N11: every unknown cost line feeds all_in_likely; the 'could pass' disclosure follows
+    for lid in ["apartmentlist:p72935-A2839-5-02E"]:
+        if lid in S.index:
+            ok(float(S.at[lid, "all_in_likely"]) > float(S.at[lid, "all_in"]), f"N11: {lid} (Spinnaker 5-02E) has a likely total above the published one")
+    # N28
+    for lid in S.index[S.building_name.eq("SoNo 19 Day") & S.unit.eq("207")]:
+        ok("listing" in S.at[lid, "open_keys"], "N28: SoNo 19 Day 207 carries the listing item (65 days unchanged on the first tour day)")
+    st = M[(M.listing_stale == "open") & M.listing_stale_why.str.contains("first tour day")]
+    ok(len(st) > 0, "N28: staleness is judged as of the first tour day")
+
+
+def page_ic5(J, M, R, S):
+    """Independent check 5 on site/data.json (after scripts/build_page_data.py)."""
+    import build_page_data as BP
+    if (ROOT / "site" / "data.json").stat().st_mtime < (DATA / "ranked_units.csv").stat().st_mtime:
+        return
+    B = {b["id"]: b for b in J["buildings"]}
+    # the guard gap named by the check: a rent cost line renamed "pet rent" passed every check. Exactly one rent line per
+    # apartment, it is the apartment's rent, no second line is called rent or pet rent, and the lines sum to the total.
+    for u in J["units"] + J.get("avoid", []) + J.get("held", []):
+        L_ = u["all_in_lines"]
+        rent_lines = [l for l in L_ if str(l.get("code") or "").startswith("rent")]
+        ok(len(rent_lines) == 1, f"cost lines: {u['id']} has {len(rent_lines)} rent lines")
+        named_rent = [l for l in L_ if re.match(r"rent\b", str(l.get("label") or "")) or re.match(r"rent\b", str(l.get("line") or ""))]
+        ok(len(named_rent) == 1 and (not rent_lines or named_rent[0] is rent_lines[0]), f"cost lines: {u['id']} the line called rent is not the rent line: {[l.get('label') for l in L_]}")
+        ok(sum(1 for l in L_ if re.match(r"pet rent", str(l.get("label") or "")) or re.match(r"pet rent", str(l.get("line") or ""))) == 1
+           and sum(1 for l in L_ if str(l.get("code") or "").startswith("pet")) == 1, f"cost lines: {u['id']} does not have exactly one pet-rent line: {[l.get('label') for l in L_]}")
+        if rent_lines:
+            ok(L_[0] is rent_lines[0], f"cost lines: {u['id']} the rent is not the first line")
+            ok(abs(float(rent_lines[0]["amount"]) - float(u["rent"]["basis"])) < 0.005, f"cost lines: {u['id']} rent line {rent_lines[0]['amount']} is not the apartment's rent {u['rent']['basis']}")
+        ok(round(sum(float(l["amount"] or 0) for l in L_)) == u["all_in"], f"cost lines: {u['id']} lines sum to {sum(float(l['amount'] or 0) for l in L_)}, total {u['all_in']}")
+        ok(len({l.get("label") for l in L_}) == len(L_), f"cost lines: {u['id']} has two lines with the same label")
+    # N1 / D18 / N8: the parking block
+    kinds = set(P.PARKING_KIND_RANK) | {"unspecified"}
+    for b in J["buildings"]:
+        p = b["parking"]
+        ok(p["kind"] is None or p["kind"] in kinds, f"parking: {b['id']} kind {p['kind']!r}")
+        ok(set(p["kinds"]) <= kinds, f"parking: {b['id']} kinds {p['kinds']!r}")
+        ok((p["included_kind"] is not None) == (p["fee"] == 0), f"parking: {b['id']} included_kind {p['included_kind']!r} beside fee {p['fee']!r}")
+        ok(p["rank"] is None or p["rank"] == P.PARKING_KIND_RANK.get(p["kind"]), f"parking: {b['id']} rank {p['rank']} is not the rank of {p['kind']!r}")
+        if p["fee"] == 0 and p["included_kind"] in ("open_lot", "assigned_lot", "off_street", "assigned", "unspecified"):
+            ok("garage parking" not in (p["summary"] or "").lower().split(";")[0] and not str(p["type"] or "").startswith("garage"), f"parking: {b['id']} a free lot space is called a garage: {p['summary']!r} / {p['type']!r}")
+        ok(p["kind"] is None or bool(p["summary"]), f"parking: {b['id']} has a kind and no summary")
+        ok(not p["summary"] or (BP.reader_ok(p["summary"]) and not re.search(r"_|\bnan\b|None", p["summary"])), f"parking: {b['id']} summary is not a plain sentence: {p['summary']!r}")
+        for o in p["optional_kinds"]:
+            ok(o["kind"] in kinds and (o["fee"] is None or o["fee"] > 0), f"parking: {b['id']} optional kind {o!r}")
+    for name, want in [("Spinnaker Wharf Apartments", "Free off-street parking"), ("TGM Anchor Point", "A free open lot"), ("The Edge At Raritan Heights", "A free open lot"), ("Kensington Place", "A free open lot"),
+                       ("Woodmont West", "A free open lot"), ("Reserve at Riverdale", "A free open lot"), ("J Centra Burlington", "An open lot, with the fee not published")]:
+        for b in [b for b in J["buildings"] if b.get("name") == name]:
+            ok((b["parking"]["summary"] or "").startswith(want), f"N1 / D18: {name} parking summary {b['parking']['summary']!r}")
+    for h in J["neighborhoods"]:
+        sf = h["shown_figures"]
+        bl = [B[i] for i in h["building_ids"]]
+        ok(sf["buildings_with_garage"] == sum(1 for b in bl if b["parking"]["kind"] in ("garage", "gated_lot")), f"N8: {h['id']} garage count")
+        ok(sf["buildings_with_garage"] <= sf["buildings_with_garage_or_covered"] <= sf["buildings"], f"N8: {h['id']} garage counts out of order")
+    for name, n in [("Milford", 2), ("Stamford", 17), ("New Brunswick", 1)]:
+        for h in [h for h in J["neighborhoods"] if h["name"] == name]:
+            ok(h["shown_figures"]["buildings_with_garage"] == n, f"N8: {name} has a garage at {h['shown_figures']['buildings_with_garage']} buildings, the check counted {n}")
+    # the night moment follows the space that is there
+    for u in J["units"]:
+        if u["moments"]["night"]["rating"] == "strong":
+            ok(u["parking"]["kind"] in ("garage", "gated_lot"), f"night: {u['id']} is 'strong' with {u['parking']['kind']!r} parking")
+    # N3: the station figure and its kind
+    for u in J["units"]:
+        s_ = u["moments"]["sat"]
+        ok(s_["train_station"] is None or s_["train_station_kind"] in ("train", "subway", "PATH", "light rail"), f"N3: {u['id']} station kind {s_['train_station_kind']!r}")
+        ok(s_["commuter_station_m"] is None or s_["train_station_m"] <= s_["commuter_station_m"], f"N3: {u['id']} nearest station is farther than the commuter station")
+    for h in J["neighborhoods"]:
+        sf = h["shown_figures"]
+        ok(sf["train_station_m"] is None or sf.get("train_station_kind") in ("train", "subway", "PATH", "light rail"), f"N3: {h['id']} shown_figures has no station kind")
+    for name, kind in [("Jersey City – Journal Square", "PATH"), ("Jersey City – Bergen-Lafayette", "light rail"), ("Jersey City – West Side", "light rail"), ("Bayonne", "light rail"), ("Elmhurst", "subway")]:
+        for h in [h for h in J["neighborhoods"] if h["name"] == name]:
+            ok(h["shown_figures"]["train_station_kind"] == kind and h["shown_figures"]["train_station_m"] < 1600, f"N3: {name}: {h['shown_figures']['train_station_kind']} at {h['shown_figures']['train_station_m']} m")
+    # N9: the toll range brackets the median
+    for h in J["neighborhoods"]:
+        t, rg = h["toll_round_trip"], h["toll_round_trip_range"]
+        ok((t is None) == (rg is None) and (rg is None or rg[0] - 0.005 <= t <= rg[1] + 0.005), f"N9: {h['id']} toll {t} outside its range {rg}")
+    for h in [h for h in J["neighborhoods"] if h["name"] == "Newark"]:
+        ok(h["toll_round_trip_range"][1] - h["toll_round_trip_range"][0] > 10, f"N9: Newark's toll range {h['toll_round_trip_range']} should run from about $24 to $43")
+    # N4 / N6: the disclosures as the reader gets them
+    for u in J["units"]:
+        codes = [d.get("code") for d in u["disclosures"]]
+        ok((u["one_time"]["broker_fee"] == "applies") == ("broker_fee" in codes), f"N4: {u['id']} broker fee {u['one_time']['broker_fee']!r} and its disclosure disagree")
+        ok(bool(u["one_time"]["one_time_costs"]) == ("one_time_costs" in codes), f"N4: {u['id']} one-time costs and their disclosure disagree")
+        a = u["amenities"]
+        ok((a["in_unit_laundry_basis"] == "listing_site_appliance_list") == ("laundry_appliance_list" in codes), f"N6: {u['id']} laundry basis {a['in_unit_laundry_basis']!r} and its disclosure disagree")
+        ok((a["in_unit_laundry"] == "yes") == (a["in_unit_laundry_basis"] is not None), f"N6: {u['id']} in-unit laundry without its basis")
+        if a["in_unit_appliances"] in ("washer", "dryer"):
+            ok("washer and dryer" not in str(a["laundry"]).lower(), f"N6: {u['id']} names one machine and the label says both: {a['laundry']!r}")
+        # N5: a weight limit on the page is traced; N20: no question twice
+        qs = [re.sub(r"\W+", " ", re.sub(r"(?i)\s*ask before touring\.?\s*$", "", q)).strip().lower() for q in u["tour_questions"]]
+        ok(len(qs) == len(set(qs)), f"N20: {u['id']} asks a question twice: {u['tour_questions']}")
+        if u["confirm"]["what"] == "dogs allowed":
+            ok(not any("dog weight limit" in q for q in u["tour_questions"]), f"N26: {u['id']} asks for the weight limit beside the open question whether dogs are allowed")
+    for u in J["units"]:
+        if u["building"] and u["building"].startswith("Brookview Commons East"):
+            ok(u["dog"]["weight_limit_lb"] is None, f"N5: {u['id']} still states a weight limit no page supports")
+    # N19 / N13: no raw record string anywhere in the evidence shown
+    raw = [(u["id"], it.get("excerpt")) for u in J["units"] + J["avoid"] + J.get("held", []) for it in ((u.get("evidence") or {}).get("items") or []) if re.search(r"per 100 units|citywide \d+th percentile", str(it.get("excerpt") or ""))]
+    ok(not raw, f"N19: {len(raw)} evidence items still carry a raw record string, e.g. {raw[:2]}")
+    pts = [(u["id"], p_) for u in J["units"] + J["avoid"] + J.get("held", []) for k in ("avoid_points", "pause_points") for p_ in ((u.get("evidence") or {}).get(k) or []) if re.search(r"^Car crime:|within \d+ m\b|median of", p_)]
+    ok(not pts, f"N19: {len(pts)} avoid or pause points still carry the raw car-crime string, e.g. {pts[:2]}")
+    shown_crime = [(u["id"], p_) for u in J["units"] for p_ in ((u.get("evidence") or {}).get("avoid_points") or []) if re.search(r"Police recorded", p_)]
+    ok(not shown_crime, f"N13: a car-crime sentence sits on a SHOWN apartment (it belongs to avoid cards only): {shown_crime[:2]}")
+    ok(not any(b.get("name") and re.search(r",\s*[A-Za-z .]+ (?:NY|NJ|CT)$", b["name"]) for b in J["buildings"]), "D25: a building is named by its address and town")
+
 if __name__ == "__main__":
     if "--data" not in sys.argv:
         pure_ic4()
         pure_ic4_text()
         pure_cleanup()
+        pure_ic5()
     (data if "--data" in sys.argv else pure)()
     print(f"test_rules {'(data)' if '--data' in sys.argv else '(rules)'}: {N[0]} checks, {len(FAILS)} failed")
     for f in FAILS:

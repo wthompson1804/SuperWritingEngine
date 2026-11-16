@@ -16,8 +16,12 @@ import json
 import sys
 from pathlib import Path
 
+import os
+
 ROOT = Path(__file__).resolve().parent.parent
-SITE = ROOT / "site"
+# HOUSE_HUNT_SITE_DIR: build from (and into) another folder laid out like site/ (index.html, data.json, map_base.json,
+# illustrations.json). Used to test the template against a frozen copy of the data while the pipeline rewrites site/data.json.
+SITE = Path(os.environ["HOUSE_HUNT_SITE_DIR"]).resolve() if os.environ.get("HOUSE_HUNT_SITE_DIR") else ROOT / "site"
 SLOT = "<!--HOUSE_HUNT_DATA_SLOT-->"
 MAP_SLOT = "<!--HOUSE_HUNT_MAP_BASE_SLOT-->"
 ILLUS_SLOT = "<!--HOUSE_HUNT_ILLUS_SLOT-->"
@@ -35,7 +39,7 @@ UNIT_DROP = [
     "confidence", "listing_age_days", "more_in_building", "zip",   # floor_basis_note is read since UI pass 8 ("read from the apartment number")
     "moments.sat.parking_type", "moments.night.parking_type",   # copies of parking.type
     "moments.sun.toll_basis", "moments.sun.toll_mail_note", "moments.sun.drive_basis",
-    "dog.size_only_source", "parking.options_text", "parking.fee_note",
+    "dog.size_only_source", "parking.options_text",   # parking.fee_note is read since UI pass 9 (which kind a single fee belongs to)
     "amenities.laundry", "amenities.pool_text", "amenities.doorman_text",
     "elevator.listing_site_only", "disclosures[].severity",
     "cost_check.unknown_count", "cost_check.cap_margin", "confirm.reviewed",
@@ -170,7 +174,7 @@ def main():
     dist.mkdir(exist_ok=True)
     (dist / "index.html").write_text(out, encoding="utf-8")
     print(f"data in the page: {slim_bytes // 1024} KB of {full_bytes // 1024} KB (fields the template never reads are left out)")
-    print(f"site/dist/index.html: {len(out.encode('utf-8')) // 1024} KB, {len(data['units'])} shown, "
+    print(f"{dist / 'index.html' if os.environ.get('HOUSE_HUNT_SITE_DIR') else 'site/dist/index.html'}: {len(out.encode('utf-8')) // 1024} KB, {len(data['units'])} shown, "
           f"{len(data['avoid'])} avoid, {len(data['held'])} held, data built {data['meta'].get('built_at')}")
 
 

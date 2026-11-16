@@ -297,6 +297,10 @@ def parse_dog_weight(text):
     t = str(text or "").strip().lower()
     if is_blank(t) or re.search(r"not applicable|n/a|dogs? not allowed|no pets|not accepted", t):
         return "unknown", None
+    if re.search(r"could not be traced|no pound figure|no (?:number|figure) (?:on |is |was )?(?:given|stated|published|any page)", t):
+        # independent check 5, N5: a checker's note that NO page states a number is not a number, whatever figure it quotes
+        # in passing ('small dogs only; no pound figure on any page read (the stored 25 lb could not be traced to a page)')
+        return ("size_only" if re.search(r"\bsmall\b", t) else "unknown"), None
     if re.search(r"\bno (?:upper |weight |size |stated |pet )*(?:limits?|restrictions?)\b|\bunlimited\b|\bany (?:size|weight)\b|regardless of (?:pet )?(?:size|weight)", t) \
             and not re.search(r"no (?:limit|number) (?:given|published)|limit exists", t):
         return "no_limit", None
@@ -1175,18 +1179,30 @@ def _days_between(earlier, later):
     return (b - a).days
 
 
-def staleness(modified, read_on, available_date="", second_source=False):
-    """(level, days, reason). level: 'remove' when the page was last changed more than six months (183 days) before it
-    was read; 'open' when it was last changed more than 60 days before (unless a second site also lists the unit), or
-    when the availability date is more than six months old; '' otherwise. Unknown dates give ''."""
-    d = _days_between(modified, read_on) if modified else None
+TOUR_START = "2026-11-22"          # the first tour day (CLAUDE.md): staleness is judged as of this day, not the day the page was read
+
+
+def staleness(modified, read_on, available_date="", second_source=False, as_of=None):
+    """(level, days, reason). level: 'remove' when the page was last changed more than six months (183 days) before the
+    day it is judged on; 'open' when it was last changed more than 60 days before (unless a second site also lists the
+    unit), or when the availability date is more than six months old; '' otherwise. Unknown dates give ''.
+
+    The day it is judged on is the day the page was read, or `as_of` when that is later (independent check 5, N28: the
+    pipeline passes the first tour day, so a page read on Nov 16 at 58 days unchanged is 64 days unchanged when tours
+    start, and carries the open item now, not on Nov 18)."""
+    judged = str(read_on)[:10]
+    ahead = bool(as_of) and re.fullmatch(r"\d{4}-\d\d-\d\d", str(as_of)[:10] or "") and str(as_of)[:10] > judged
+    if ahead:
+        judged = str(as_of)[:10]
+    when = (f"by the first tour day ({judged}; the page was read on {str(read_on)[:10]})" if ahead else f"before it was read ({str(read_on)[:10]})")
+    d = _days_between(modified, judged) if modified else None
     if d is not None and d > STALE_REMOVE_DAYS:
-        return "remove", d, f"the listing page was last changed on {str(modified)[:10]}, {d} days before it was read ({str(read_on)[:10]}): more than six months unchanged"
+        return "remove", d, f"the listing page was last changed on {str(modified)[:10]}, {d} days {when}: more than six months unchanged"
     if d is not None and d > STALE_OPEN_DAYS and not second_source:
-        return "open", d, f"the listing page was last changed on {str(modified)[:10]}, {d} days before it was read ({str(read_on)[:10]}), and no second site lists the unit"
-    a = _days_between(available_date, read_on) if re.fullmatch(r"\d{4}-\d\d-\d\d.*", str(available_date or "")) else None
+        return "open", d, f"the listing page was last changed on {str(modified)[:10]}, {d} days {when}, and no second site lists the unit"
+    a = _days_between(available_date, judged) if re.fullmatch(r"\d{4}-\d\d-\d\d.*", str(available_date or "")) else None
     if a is not None and a > AVAIL_OLD_DAYS:
-        return "open", a, f"the availability date {str(available_date)[:10]} was {a} days old when the page was read ({str(read_on)[:10]})"
+        return "open", a, f"the availability date {str(available_date)[:10]} is {a} days old {when}"
     return "", d, ""
 
 
@@ -1530,6 +1546,12 @@ def clean_building_name(name, address="") -> str:
         return ""                                  # the "name" is the listing's address line
     if address and _norm_addr_words(street) == _norm_addr_words(street_address(split_address_unit(address)[0])):
         return ""                                  # the name only repeats the building's own address
+    if address:
+        # independent check 5 (D25): '41-42 Elbertson Street, Elmhurst NY' is the address with its town, not a name
+        a_, n_ = _norm_addr_words(street_address(split_address_unit(address)[0])), _norm_addr_words(n)
+        rest = n_[len(a_):].strip() if a_ and n_.startswith(a_ + " ") else None
+        if rest is not None and re.search(r"\d", a_) and not re.search(r"\d", rest) and len(rest.split()) <= 4 and re.search(r",\s*[A-Za-z .]+\s+(?:NY|NJ|CT|PA)$", n):
+            return ""
     return bare if unit else n
 
 
@@ -1952,6 +1974,17 @@ def laundry_source_flags(text, amenity_value="") -> set:
     return out
 
 
+def laundry_is_appliance_tag(text) -> bool:
+    """True for a bare appliance list of a listing site: 'Washer, Dryer', 'Washer',
+    '[features: Interior Features > Appliances & Utilities] Dryer'. 'In unit laundry', 'in_unit' and any sentence that
+    says the machines are in the apartment are not."""
+    t = str(text or "").strip()
+    if re.search(r"Appliances\s*&\s*Utilities", t, re.I):
+        return True
+    t = re.sub(r"^\[[^\]]*\]\s*", "", t).strip().lower()
+    return bool(re.fullmatch(r"(?:washer|dryer|washer\s*/\s*dryer)(?:\s*[,;&]\s*(?:washer|dryer))*\.?", t))
+
+
 def laundry_facts(sources) -> dict:
     """The building's laundry, from every source: `sources` is a list of (text, basis, amenity_value).
 
@@ -1968,6 +2001,7 @@ def laundry_facts(sources) -> dict:
     phone call, a checker's reading: 'confirmed') says in the apartment."""
     best = {"confirmed_by_phone": 0, "confirmed": 1}
     said_in, said_not, select, hook, shared, both = [], [], False, False, False, False
+    tag_only, washer, dryer = True, False, False          # independent check 5, N6: is every in-apartment source a bare appliance list?
     for text, basis, val in sources:
         f = laundry_source_flags(text, val)
         rank_ = best.get(str(basis), 5)
@@ -1975,6 +2009,10 @@ def laundry_facts(sources) -> dict:
             said_in.append(rank_)
             t = str(text or "").lower()
             both = both or bool(re.search(r"washer|\bw/d\b", t) and re.search(r"dryer|\bw/d\b", t))
+            t_ = re.sub(r"(?i)\bdish ?washers?\b", " ", t)
+            washer = washer or bool(re.search(r"washer|\bw/d\b|laundry", t_))
+            dryer = dryer or bool(re.search(r"dryer|\bw/d\b|laundry", t_))
+            tag_only = tag_only and laundry_is_appliance_tag(text)
         if "not_in" in f:
             said_not.append(rank_)
         select = select or "select" in f
@@ -1989,4 +2027,433 @@ def laundry_facts(sources) -> dict:
         parts.append("No laundry in the apartment")
     if hook:
         parts.append("W/D hookups" if parts else "W/D hookups only")
-    return {"in_unit": in_unit, "hookups": hook, "on_site": shared, "names_both": both and yes, "label": "; ".join(parts)}
+    tag = yes and tag_only
+    appliances = ("washer and dryer" if (washer and dryer) else "washer" if washer else "dryer" if dryer else "") if yes else ""
+    if tag and appliances in ("washer", "dryer"):
+        parts[0] = f"In-unit {appliances} (no {'dryer' if appliances == 'washer' else 'washer'} named)"
+    return {"in_unit": in_unit, "hookups": hook, "on_site": shared, "names_both": both and yes, "label": "; ".join(parts),
+            # 'appliance_list': the only source is a listing site's appliance list ('Washer, Dryer'), which does not say the
+            # machines are in the apartment; 'says_in_apartment': a page's own words say so
+            "basis": ("appliance_list" if tag else "says_in_apartment") if yes else "", "appliances": appliances}
+
+
+# ---- independent check 5, N1 / D18 / N8: structured parking from EVERY source's own words
+PARKING_KIND_RANK = {"garage": 4, "gated_lot": 4, "covered": 3, "assigned_lot": 2, "open_lot": 2, "off_street": 2, "assigned": 2, "offsite": 2, "street": 1}
+PARKING_KIND_ORDER = ["street", "off_street", "assigned", "open_lot", "assigned_lot", "covered", "gated_lot", "garage", "offsite"]
+PARKING_KIND_WORDS = {"garage": "garage", "gated_lot": "gated lot", "covered": "covered parking", "assigned_lot": "assigned space in an open lot",
+                      "open_lot": "open lot", "off_street": "off-street parking", "assigned": "assigned space, kind not stated",
+                      "offsite": "off-site parking", "street": "street parking", "unspecified": "parking, kind not stated"}
+# the first word of `parking_type`, which the text system reads: garage / covered / lot / street_only; anything else is "parking on site"
+PARKING_LEGACY_HEAD = {"garage": "garage", "gated_lot": "garage", "covered": "covered", "assigned_lot": "lot", "open_lot": "lot", "off_street": "lot",
+                       "assigned": "assigned", "street": "street_only", "offsite": "offsite", "unspecified": "parking"}
+_PK_SKIP_ATOM = re.compile(r"\bguest|visitor|motorcycle|bicycle|\bbike|not stated on the page|no parking line|not_found|\bstation\b(?! )", re.I)
+_PK_EXTRA = re.compile(r"additional (?:cost|fee|charge|monthly fee)|addtional fee|optional|extra fee|for a fee|\(fee\)|\(paid\)|\bpaid\b|at an? (?:additional|extra)|charges apply|also listed", re.I)
+PARKING_BASIS_WORDS = {"confirmed_by_phone": "by phone", "confirmed": "read on the page by a checker", "community_page": "the building's own page",
+                       "amenities_page": "an amenity list or description on a listing or building page", "stated": "the listing",
+                       "resident_review": "a resident's review", "reviewed": "reviewed against every source"}
+_PK_PREC = ["confirmed_by_phone", "confirmed", "community_page", "amenities_page", "official_record", "stated", "resident_review", "inferred"]
+_PK_PLAIN = ("open_lot", "assigned_lot", "off_street", "assigned")
+
+
+def parking_atom_kind(atom) -> str:
+    """One kind for one short phrase of a parking source ('Garage Lot', 'surface_lot', 'Assigned Outside Parking',
+    'Unassigned off-street parking'): garage, gated_lot, covered, assigned_lot, open_lot, off_street, offsite, street,
+    assigned (an assigned space, place not said); 'unspecified' (parking named, kind not said), or ''."""
+    a = re.sub(r"[_]+", " ", str(atom or "").lower()).strip()
+    if not a or _PK_SKIP_ATOM.search(a) or re.search(r"no garage|garages? (?:available|coming) soon", a):
+        return ""
+    if OFFSITE_PARKING.search(a) or re.search(r"nearby (?:parking )?deck|sister property|no on-site parking", a):
+        return "offsite"
+    if re.search(r"garage|underground|indoor|\bparking deck\b|enclosed", a):
+        return "garage"
+    gated = bool(re.search(r"gated (?:parking|lot|area|surface|covered)|parking[^,;]{0,20}gated", a)) and not re.search(r"outside of (?:the )?gated", a)
+    if re.search(r"(?<!un)covered|carports?", a):
+        return "garage" if gated else "covered"
+    if gated:
+        return "gated_lot"
+    if re.search(r"\blots?\b|surface|outdoor|outside|open parking|uncovered", a):
+        return "assigned_lot" if re.search(r"\bassigned|reserved|designated", a) and not re.search(r"unassigned", a) else "open_lot"
+    if re.search(r"off[- ]street|on[- ]?site parking|onsite parking|^\s*on[- ]?site\s*$", a):
+        return "off_street"
+    if re.search(r"street parking|on[- ]street|street only", a):
+        return "street"
+    if re.search(r"(?<!un)assigned|reserved|designated", a) and (re.search(r"park|space|spot", a) or a.strip() in ("assigned",)):
+        return "assigned"
+    return "unspecified" if re.search(r"\bparking\b|\bvalet\b|\bspaces?\b|\bspots?\b", a) else ""
+
+
+def _pk_atoms(text):
+    return [x for x in re.split(r"[;|\n,/]|\.\s+|\band\b|\bor\b|\bplus\b|:\s|=", str(text or "")) if x.strip()]
+
+
+def _pk_clause_kinds(clause):
+    out = []
+    for a in _pk_atoms(clause):
+        k = parking_atom_kind(a)
+        if k and k not in out:
+            out.append(k)
+    return out
+
+
+def parking_facts(sources, fee=None) -> dict:
+    """Structured parking of one building from every source's own words.
+
+    sources: [(text, basis, source, origin)], any order. fee: the monthly parking fee the cost uses (0 = a space is
+    included or free; None = not published), as resolved by parse_parking and the merge.
+    Returns
+      kinds           every kind a source names, plainest first
+      primary_kind    the kind she would actually park in: the included kind when a space is free; the kind the counted
+                      fee pays for; otherwise the best kind named, leaving out a garage or covered space that is only an
+                      optional extra beside a plain lot
+      included_kind   which kind the free / included space is ('' when no space is included; 'unspecified' when a space
+                      is included and no source says of which kind)
+      included_quote, included_basis
+      optional        [{kind, fee|None, fee_high, label}] other kinds offered for a fee
+      fee_kind        the kind the counted fee belongs to
+      kind_basis      {kind: best basis that names it}
+      assigned        a source says the space is assigned
+    A free open lot is never a garage: 'Open lot: included in lease; Underground parking garage: $50/month' gives
+    included_kind open_lot, primary_kind open_lot, optional [garage $50]."""
+    order = {b: i for i, b in enumerate(_PK_PREC)}
+    src = sorted([s_ for s_ in sources if not is_blank(s_[0])], key=lambda s_: order.get(s_[1], 9))
+    kinds, kind_basis, assigned, extra, options, incl = [], {}, False, set(), [], []
+    unpriced = set()                                        # kinds named somewhere other than a price label
+    named = False
+    for text, basis, _url, origin in src:
+        t = re.sub(r"\[[^\]]{0,60}\]", " ", str(text))
+        t = re.sub(r"Parking\s*&\s*Garage\s*[/:]?", " ", t)                     # a section heading of the listing site, not a garage
+        if origin == "amenities page":
+            t = re.sub(r"^(?:garage|covered|lot|street|offsite|open_lot|street_only|parking_type_unknown):\s+", "", t)   # the amenities parser's own class
+        if re.match(r"\s*included:\s*no\b", t, re.I):
+            continue
+        for clause in re.split(r";|\||\n| / |\.\s+", t):
+            ck = _pk_clause_kinds(clause)
+            named = named or bool(ck)
+            cl = clause.lower()
+            priced_clause = bool(re.search(r"\$\s*\d|\bfee\b|:\s*\d", cl))
+            for k in ck:
+                if k == "unspecified":
+                    continue
+                if k not in kinds:
+                    kinds.append(k)
+                kind_basis.setdefault(k, basis)
+                if k in ("assigned_lot", "assigned"):
+                    assigned = True
+                if not priced_clause:
+                    unpriced.add(k)
+            real = [k for k in ck if k in PARKING_KIND_RANK]
+            if _PK_EXTRA.search(cl):
+                if real and all(PARKING_KIND_RANK[k] >= 3 for k in real):
+                    extra.update(real)                                           # 'Covered or garage parking ... at an additional cost'
+                else:
+                    for a in _pk_atoms(clause):                                  # 'surface parking, there is optional garage parking'
+                        if _PK_EXTRA.search(a.lower()) and parking_atom_kind(a) in PARKING_KIND_RANK:
+                            extra.add(parking_atom_kind(a))
+            if re.search(_FREE_NEAR, cl) and not re.search(_PROMO, cl) and not re.search(r"not included|included:\s*no|included\s*=\s*false|no free|fee not|^\s*special features|months? free|months? of complimentary", cl):
+                head_ = re.split(r"\$\s*\d", clause)[0]                          # the part before any price says what is free
+                hk = [k for k in _pk_clause_kinds(head_) if k in PARKING_KIND_RANK]
+                incl.append((hk, re.sub(r"\s+", " ", head_).strip(" :,-."), basis))
+        opts_ = [x for part in re.split(r"\s/\s|\|", t) for x in parse_parking(part)["options"].split("; ") if x and "(no charge)" not in x]
+        for o in opts_:
+            m = re.search(r"\$(\d+(?:\.\d+)?)(?:-\$(\d+(?:\.\d+)?))?\s*$", o)
+            if not m:
+                continue
+            label = o[:m.start()].strip(" :,-")
+            if re.search(_SECOND, label.lower()) or re.search(r"tandem|motorcycle|permit fee", label.lower()):
+                continue
+            lk = [k for k in _pk_clause_kinds(label) if k in PARKING_KIND_RANK]
+            if not lk and len(opts_) == 1:
+                tk = [k for k in _pk_clause_kinds(t) if k in PARKING_KIND_RANK and k != "street"]
+                lk = tk if len(tk) == 1 else []
+            options.append({"kind": lk[-1] if lk else "unspecified", "fee": float(m.group(1)), "hi": float(m.group(2)) if m.group(2) else None, "label": label, "basis": basis})
+    # 'Covered parking fee ($150)' is a listing site's label for a garage fee too: a covered kind named only on a price
+    # label folds into the kind the other sources name (the garage, else the lot), unless both are priced apart
+    if "covered" in kinds and "covered" not in unpriced:
+        cov_fees = {o["fee"] for o in options if o["kind"] == "covered"}
+        gar_fees = {o["fee"] for o in options if o["kind"] == "garage"}
+        target = "garage" if "garage" in kinds else next((k for k in ("gated_lot", "open_lot", "assigned_lot") if k in unpriced), "")
+        if target and not (target == "garage" and gar_fees - cov_fees and cov_fees - gar_fees) and not (target != "garage" and any(o["kind"] == target for o in options)):
+            kinds = [k for k in kinds if k != "covered"]
+            extra.discard("covered")
+            for o in options:
+                if o["kind"] == "covered":
+                    o["kind"] = target
+    f = None if fee is None or (isinstance(fee, float) and fee != fee) or str(fee).strip() == "" else float(fee)
+    priced = {o["kind"] for o in options}
+    included_kind, included_quote, included_basis = "", "", ""
+    if f == 0:
+        single = [x for x in incl if len(x[0]) == 1]
+        if single:
+            included_kind, included_quote, included_basis = single[0][0][0], single[0][1], single[0][2]
+        else:
+            cand = [k for k in kinds if k not in extra and k != "street" and k not in priced]
+            included_kind = cand[0] if len(cand) == 1 else "unspecified"
+            if incl:
+                included_quote, included_basis = incl[0][1], incl[0][2]
+    if included_kind != "off_street" and any(k not in ("off_street", "street") for k in kinds):
+        kinds = [k for k in kinds if k != "off_street"]        # 'Off Street Parking' beside a named garage or lot adds no kind
+    if included_kind != "assigned" and any(k not in ("assigned", "street", "off_street") for k in kinds):
+        kinds = [k for k in kinds if k != "assigned"]          # 'Assigned Parking' beside a named kind is an attribute, not a kind
+    kinds = sorted(dict.fromkeys(kinds), key=PARKING_KIND_ORDER.index)
+    here = [k for k in kinds if k != "street"]
+    best = lambda ks: max(ks, key=lambda k: (PARKING_KIND_RANK[k], PARKING_KIND_ORDER.index(k))) if ks else ""
+    plainest = lambda ks: min(ks, key=lambda k: (PARKING_KIND_RANK[k], PARKING_KIND_ORDER.index(k))) if ks else ""
+    fee_kind = ""
+    if f is not None and f > 0:
+        hit = [o["kind"] for o in options if abs(o["fee"] - f) < 0.01 and o["kind"] in kinds]
+        fee_kind = best(hit) or best(here)
+    if f == 0:
+        if included_kind in PARKING_KIND_RANK:
+            primary = included_kind
+        else:
+            primary = plainest([k for k in here if k not in extra and k not in priced] or here) or "unspecified"
+    elif f is not None:
+        primary = fee_kind or "unspecified"
+    else:
+        rest = [k for k in here if k not in extra]
+        primary = (best(rest) if any(k in _PK_PLAIN for k in rest) else best(here)) or best(kinds) or ("unspecified" if named else "")
+    optional, seen_k = [], set()
+    for o in sorted(options, key=lambda o: (order.get(o["basis"], 9), o["fee"])):
+        k = o["kind"]
+        if k not in kinds or k in ("off_street", "assigned") or k in seen_k:
+            continue
+        if k == primary and not (f == 0 and o["fee"] > 0):
+            continue
+        seen_k.add(k)
+        optional.append({"kind": k, "fee": o["fee"], "fee_high": o["hi"], "label": o["label"]})
+    for k in sorted(extra, key=PARKING_KIND_ORDER.index):
+        if k != primary and k not in seen_k and k in kinds:
+            optional.append({"kind": k, "fee": None, "fee_high": None, "label": ""})
+    return {"kinds": kinds, "primary_kind": primary, "included_kind": included_kind, "included_quote": included_quote[:200],
+            "included_basis": included_basis, "optional": optional, "fee_kind": fee_kind if (f is not None and f > 0) else (included_kind if f == 0 else ""),
+            "kind_basis": {k: kind_basis.get(k, "") for k in kinds}, "assigned": assigned}
+
+
+def parking_kind_rank(kind):
+    """The 'parking type' score of the Car part and the night moment: what she would actually park in."""
+    return PARKING_KIND_RANK.get(str(kind or ""), float("nan"))
+
+
+_PK_HEADS = {"garage": "garage", "covered": "covered", "lot": "lot", "assigned": "lot", "street_only": "street", "offsite": "offsite", "parking": ""}
+_PK_HEAD_RANK = {"garage": 4, "covered": 3, "lot": 2, "assigned": 2, "offsite": 2, "street_only": 1}
+
+
+def parking_type_head(text) -> str:
+    """The head of a structured `parking_type` ('lot: Open parking: included in lease; Garage: $125' -> 'lot'), or ''
+    when the text is not headed (a raw source sentence). build_master writes the head from parking_facts: it names the
+    space she would actually park in, whatever else the sentence mentions."""
+    m = re.match(r"\s*(garage|covered|lot|assigned|street_only|offsite|parking)\s*(?::|$)", str(text or "").lower())
+    return m.group(1) if m else ""
+
+
+def parking_type_kind(text) -> str:
+    """parking_kind() for a headed `parking_type` (the head decides), else for a raw sentence."""
+    h = parking_type_head(text)
+    return _PK_HEADS[h] if h else parking_kind(text)
+
+
+def parking_type_rank(text):
+    """4 garage or gated, 3 covered, 2 lot / assigned / off-site, 1 street, nan unknown: from the head when there is one."""
+    h = parking_type_head(text)
+    if h:
+        return _PK_HEAD_RANK.get(h, float("nan"))
+    return None
+
+
+def parking_type_text(primary_kind, old_type) -> str:
+    """`parking_type` as stored: '<head>: <the source's words>'. The words are the old value without the class our own
+    code had put in front of it."""
+    old = str(old_type or "").strip()
+    if not primary_kind:
+        return old
+    words = re.sub(r"^(?:garage|covered|lot|street|offsite|open_lot|open lot|street_only|assigned|parking)\s*(?::\s*|$)", "", old, flags=re.I).strip()
+    head = PARKING_LEGACY_HEAD.get(primary_kind, "parking")
+    return f"{head}: {words}" if words else head
+
+
+_PK_NOUN = {"garage": "Garage parking", "gated_lot": "A gated lot", "covered": "Covered parking", "assigned_lot": "An assigned space in an open lot",
+            "open_lot": "An open lot", "off_street": "Off-street parking", "assigned": "An assigned space (the listing does not say where)",
+            "offsite": "Off-site parking, not at the building", "street": "Street parking only", "unspecified": "Parking, of a kind the listing does not name"}
+_PK_FREE = {"garage": "A free garage space", "gated_lot": "A free space in a gated lot", "covered": "A free covered space", "assigned_lot": "A free assigned space in an open lot",
+            "open_lot": "A free open lot", "off_street": "Free off-street parking", "assigned": "A free assigned space (the listing does not say where)",
+            "offsite": "Free off-site parking", "unspecified": "A free parking space (the listing does not say what kind)"}
+_PK_EXTRA_NOUN = {"garage": "garage spaces", "gated_lot": "spaces in the gated lot", "covered": "covered spaces", "assigned_lot": "assigned outdoor spaces",
+                  "open_lot": "other open-lot spaces", "offsite": "off-site spaces"}
+
+
+def _usd(x):
+    return f"${float(x):,.0f}" if abs(float(x) - round(float(x))) < 0.005 else f"${float(x):,.2f}"
+
+
+def parking_summary(kind, included_kind, fee, optional, fee_is_estimate=False) -> str:
+    """One plain sentence from the structured parking, for the page and the text to use exactly:
+    'A free open lot; garage spaces are $150 a month.'  'Garage parking, $100 a month.'
+    'An open lot, with the fee not published; garage spaces are extra (fee not published).'  '' when nothing is known."""
+    kind, included_kind = str(kind or ""), str(included_kind or "")
+    if not kind:
+        return ""
+    f = None if fee is None or (isinstance(fee, float) and fee != fee) or str(fee).strip() == "" else float(fee)
+    if kind == "street":
+        head = _PK_NOUN["street"]
+    elif f == 0:
+        head = _PK_FREE.get(included_kind or kind, _PK_FREE["unspecified"])
+    elif f is not None:
+        head = f"{_PK_NOUN.get(kind, _PK_NOUN['unspecified'])}, " + (f"about {_usd(f)} a month by a resident's review" if fee_is_estimate else f"{_usd(f)} a month")
+    else:
+        head = f"{_PK_NOUN.get(kind, _PK_NOUN['unspecified'])}, with the fee not published"
+    tails = []
+    for o in optional or []:
+        noun = _PK_EXTRA_NOUN.get(o.get("kind"))
+        if not noun or (o.get("kind") == kind and f != 0):
+            continue
+        if o.get("fee") is None:
+            tails.append(f"{noun} are extra (fee not published)")
+        elif o.get("fee_high"):
+            tails.append(f"{noun} are {_usd(o['fee'])} to {_usd(o['fee_high'])} a month")
+        else:
+            tails.append(f"{noun} are {_usd(o['fee'])} a month")
+    return head + ("; " + "; ".join(tails) if tails else "") + "."
+
+
+# ---- independent check 5, N5: a dog weight limit is stated only when a page states it
+def dog_weight_traced(limit, words) -> bool:
+    """True when the stored limit ('50', 'no limit') can be read in one of the sources' own words: the listing's pet
+    policy text, the building's page, a checker's quote. A number with no page behind it ('small dogs' stored as 25 lb,
+    the gate's threshold) is not a published limit."""
+    lim = str(limit or "").strip().lower()
+    if not lim:
+        return True
+    text = " || ".join(str(w) for w in words if not is_blank(w)).lower()
+    text = re.sub(r"\([^)]*could not be traced[^)]*\)", " ", text)
+    if lim == "no limit":
+        return bool(re.search(r"\bno (?:upper |weight |size |pet |breed restrictions or weight )*(?:limits?|restrictions?)\b|restrictions?: none|\bunlimited\b|\bany (?:size|weight)\b"
+                              r"|regardless of (?:pet )?(?:size|weight)|not have a weight limit|over \d{2,3} ?lbs?\.? extra|maximumpetweight field (?:is|=) 0", text))
+    try:
+        n = f"{float(lim):g}"
+    except ValueError:
+        return True
+    return bool(re.search(rf"(?<![\d$.]){re.escape(n)}(?:\.0+)?\s*-?\s*(?:lbs?\b|pounds?|#)|(?:weight|max|limit|under|up to|lbs\.?\))[^|;]{{0,24}}?(?<![\d$.]){re.escape(n)}(?![\d.])", text))
+
+
+# ---- independent check 5, N4: one-time costs a listing states (broker fee, application fee, move-in fees, a large deposit)
+_BLURB = re.compile(r"you can find|if you.{0,3}re lucky|some with no|apartments that have|call \w+ home|wide selection|great for those looking", re.I)
+_NO_BROKER = re.compile(r"\bno\s+broker(?:'s|’s|s)?(?:age)?\s+fees?\b|\bno[- ]fee\s+(?:apartment|rental|listing|unit|building)|\breal estate no fee\b|landlord pays the broker|\bno fee\b(?=[!.]|\s*$)", re.I)
+_BROKER = re.compile(r"\bbroker(?:'s|’s|s)?(?:age)?\s+fee\b[^.;|!]{0,60}|\bfee apartment\b|\bbroker(?:'s|’s)? commission of[^.;|]{0,40}", re.I)
+
+
+def broker_fee_statement(text):
+    """('applies' | 'none' | '', the sentence) from a listing's own description or a checker's fact.
+    'Broker fee.' and 'Broker Fee applies' -> applies; 'NO BROKER FEE', 'No broker's fee', 'Make this NO FEE apartment
+    your new home' -> none. A listing site's neighborhood blurb ('some with no broker fee') is not about this apartment."""
+    sents = [re.sub(r"\s+", " ", x).strip() for x in re.split(r"(?<=[.!?])\s+|\s[-•*]\s|\n+|\s{2,}|\|", str(text or ""))]
+    for sent in sents:
+        if not sent.strip() or _BLURB.search(sent):
+            continue
+        if _NO_BROKER.search(sent):
+            return "none", _cut_words(sent.strip(), 160)
+    for sent in sents:
+        if not sent.strip() or _BLURB.search(sent):
+            continue
+        m = _BROKER.search(sent)
+        if m and not re.search(r"\bno\s+(?:\w+\s+){0,2}$", sent[:m.start()], re.I) and not re.search(r"ask about a broker fee|whether a broker fee", sent, re.I):
+            return "applies", _cut_words(sent.strip()[max(0, m.start() - 40):], 160)
+    return "", ""
+
+
+_OTC = [("application fee", r"application(?: fee| payment)?(?: per applicant| \(?per adult[^)]*\)?)?\s*(?:of|:|=|is|\()?\s*\$\s*(\d[\d,]*(?:\.\d\d)?)|\$\s*(\d[\d,]*(?:\.\d\d)?)\s*(?:non-?refundable\s+)?(?:application|tenant screening)(?: fee)?"),
+        ("credit-check fee", r"credit check(?: fee)?\s*(?:of|:|=|is|\()?\s*\$\s*(\d[\d,]*)|\$\s*(\d[\d,]*)\s*(?:for |per )?(?:a )?credit check"),
+        ("administrative fee", r"admin(?:istrative|istration)?(?: fee)?\s*(?:of|:|=|is|\()?\s*\$\s*(\d[\d,]*)|\$\s*(\d[\d,]*)\s*admin(?:istrative|istration)? fee"),
+        ("holding fee", r"holding fee\s*(?:of|:|=|is|\()?\s*\$?\s*(\d[\d,]*(?:\.\d\d)?)|\$\s*(\d[\d,]*)\s*holding fee"),
+        ("move-in fee", r"move[- ]in fees?(?: are| is|:| of)?\s*\$\s*(\d[\d,]*)|\$\s*(\d[\d,]*)\s*move[- ]in fee"),
+        ("amenity fee (one-time)", r"amenity fee:?\s*\$\s*(\d[\d,]*)\s*(?:per lease term|due at move|one[- ]time)|\$\s*(\d[\d,]*)\s*(?:one[- ]time )?amenity fee (?:per lease term|due at move)")]
+
+
+def one_time_costs(text) -> dict:
+    """One-time costs stated in a listing's description or a checker's fact:
+    {'items': ['application fee $50 per applicant', 'holding fee $250'], 'deposit_months': 1.5 | None,
+     'deposit_dollars': 3585.0 | None, 'deposit_text': '...'}. Pet fees are not read here (the pet lines have their own
+    question). A waived fee ('application fee waived') is not listed."""
+    t = re.sub(r"\s+", " ", str(text or ""))
+    items = []
+    for label, pat in _OTC:
+        for m in re.finditer(pat, t, re.I):
+            ctx = t[max(0, m.start() - 12):m.end() + 40].lower()
+            if re.search(r"waived|\bno application fee|\bno admin", ctx) or re.search(r"\bpet\b|\bdog\b|\bcat\b", t[max(0, m.start() - 25):m.start()].lower()):
+                continue
+            amt = (m.group(1) or m.group(2)).replace(",", "")
+            if not amt or not (1 <= float(amt) <= 2000):
+                continue
+            per = " per applicant" if label in ("application fee", "credit-check fee") and re.search(r"per (?:applicant|adult|person)|/applicant|each applicant", ctx) else ""
+            item = f"{label} ${float(amt):,.0f}{per}"
+            if not any(i.split(" $")[0] == label for i in items):
+                items.append(item)
+    dep_m, dep_d, dep_t, dep_upto = None, None, "", False
+    t2 = re.sub(r"(?<=\d)\.(?=\d)", "§", t)                                # '1.5 month' stays one number through the sentence split
+    t2 = re.sub(r"one[- ]and[- ]a[- ]half|1 ?1/2", "1§5", t2, flags=re.I)
+    t2 = re.sub(r"\btwo(?= months)", "2", re.sub(r"\bone(?= months?)", "1", t2, flags=re.I), flags=re.I)
+    num_ = r"(\d(?:§\d)?)"
+    for m in re.finditer(r"[^.;|]{0,60}deposit[^.;|]{0,90}", t2, re.I):
+        seg = m.group(0)
+        if re.search(r"\bpet\b|\bdog\b|\bcat\b|key deposit|holding|reduced|alternative|\$0\b|no (?:security )?deposit|deposit[- ]free", seg, re.I):
+            continue
+        mm = [x for x in re.findall(num_ + r"\s*-?\s*months?['’]?s?['’]?(?:\s+(?:of\s+)?rent)?(?:\s+as)?\s+(?:security\s+)?deposit", seg, re.I)]
+        mm += [x for pair in re.findall(r"deposit[^.;|]{0,50}?" + num_ + r"(?:\s*(?:-|to)\s*" + num_ + r")?\s*-?\s*months?", seg, re.I) for x in pair if x]
+        mm += [x for x in re.findall(r"\(" + num_ + r" months?\)", seg, re.I)]
+        mm = [float(x.replace("§", ".")) for x in mm]
+        dd = [float(x.replace(",", "")) for x in re.findall(r"deposit[^$.;|]{0,25}\$\s*(\d[\d,]{2,})", seg, re.I)
+              + re.findall(r"deposit[^$.;|]{0,25}\$\s*\d[\d,]*(?:§\d\d)?\s*(?:-|to)\s*\$?\s*(\d[\d,]{2,})", seg, re.I)
+              + re.findall(r"\$\s*(\d[\d,]{2,})(?:§\d\d)?\s*(?:refundable |advance |month )?(?:security )?deposit", seg, re.I)
+              + re.findall(r"deposit[^.;|]{0,12}\bmax (\d{3,5})\b", seg, re.I)]
+        upto = bool(re.search(r"up to|\bto\b|\d\s*-\s*\$?\d|based on credit|\bmax\b", seg, re.I))
+        if mm and (dep_m is None or max(mm) > dep_m):
+            dep_m, dep_t, dep_upto = max(mm), seg.strip().replace("§", "."), upto
+        if dd and (dep_d is None or max(dd) > dep_d):
+            dep_d = max(dd)
+            if not dep_m:
+                dep_t, dep_upto = seg.strip().replace("§", "."), upto
+    return {"items": items, "deposit_months": dep_m, "deposit_dollars": dep_d, "deposit_text": _cut_words(dep_t, 140), "deposit_up_to": dep_upto}
+
+
+def one_time_costs_sentence(items, deposit_months, deposit_dollars, deposit_up_to, rent) -> str:
+    """'application fee $50 per applicant; holding fee $250; a security deposit of 1.5 months' rent' : the one-time costs
+    worth a line. The deposit is named only when it is more than one month's rent (months > 1, or dollars above the
+    rent). '' when there is nothing to say."""
+    parts = [str(i) for i in (items or []) if str(i).strip()]
+    f = lambda x: None if x is None or x != x or str(x).strip() == "" else float(x)
+    dm, dd, r = f(deposit_months), f(deposit_dollars), f(rent)
+    up = "up to " if deposit_up_to else ""
+    if dm is not None and dm > 1:
+        parts.append(f"a security deposit of {up}{dm:g} months' rent")
+    elif dd is not None and r and dd > r * 1.05 and (dm is None):
+        parts.append(f"a security deposit of {up}{_usd(dd)}")
+    return "; ".join(parts)
+
+
+def listing_descriptions(raw_text) -> str:
+    """The listing's own description text out of a cached page: Trulia's "description":{"value": ...}, Zumper's and
+    Apartment List's "description":"..." strings. Site navigation, labels and other listings' cards are left out."""
+    out = []
+    for m in re.finditer(r'"description"\s*:\s*(?:\{\s*"value"\s*:\s*)?"((?:[^"\\]|\\.){40,20000})"', str(raw_text or "")):
+        s = m.group(1)
+        try:
+            s = json.loads('"' + s + '"')
+        except ValueError:
+            s = s.replace("\\n", " ").replace('\\"', '"')
+        s = re.sub(r"<[^>]+>", " ", s)
+        if s not in out:
+            out.append(s)
+    return "\n".join(out)
+
+
+# ---- independent check 5, N6: in-unit laundry named only on a listing site's appliance list
+def laundry_tag_text(appliances) -> str:
+    a = str(appliances or "").strip()
+    if a == "washer":
+        return "A washer in the apartment is from the listing site's feature list, and no dryer is named: confirm both"
+    if a == "dryer":
+        return "A dryer in the apartment is from the listing site's feature list, and no washer is named: confirm both"
+    return "Washer and dryer in the apartment is from the listing site's feature list: confirm it"
+
+
+def laundry_tag_question(appliances) -> str:
+    return "Is there a washer and a dryer inside the apartment?"

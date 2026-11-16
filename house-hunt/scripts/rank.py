@@ -89,6 +89,11 @@ def blend(*pairs):
 
 
 def parking_rank(t):
+    # independent check 5, N1: a headed type ('lot: Open parking: included in lease; Garage: $125') ranks by its head, the
+    # space she would actually park in; the words after it may name a garage that is only a paid extra
+    hr = parsers.parking_type_rank(t)
+    if hr is not None:
+        return hr
     t = str(t).lower()
     if not t or t in ("nan", "unknown", "?", "no_mention", "parking_type_unknown"):
         return np.nan
@@ -142,6 +147,8 @@ def in_unit_laundry(in_unit_col):
 
 SETTLED_BY_PHONE = "confirmed_by_phone"
 WINDOW_END = "2026-12-15"
+BROKER_FEE_TEXT = "Broker fee: the listing says a broker fee applies; ask how much"
+NO_BROKER_FEE_TEXT = "No broker fee, per the listing"
 PARKING_DISCLOSURE = "Overnight street parking is restricted here: confirm the building has a space, and its cost"
 
 
@@ -415,7 +422,7 @@ def main():
     income_req = s("income_requirement").where(~s("income_requirement").map(parsers.income_restricted), "")
     elig_open, condo_open, other_open = vhas("restricted") | s("eligibility_open").ne("") | not_normal.ne(""), vhas("coop_condo") | condo_rule, vhas("other")
     unknown_lines = s("all_in_unknown_lines").str.replace("building fees (part)", "some required fees", regex=False).str.replace("building fees", "required fees").str.replace("parking fee", "parking") \
-        .map(lambda t: " / ".join(x for x in t.split("; ") if x in ("pet rent", "parking", "required fees", "some required fees")))
+        .map(lambda t: " / ".join(x for x in t.split("; ") if x in ("pet rent", "parking", "required fees", "some required fees", "gas", "electric", "internet")))
     cur_price = pd.to_numeric(s("live_price").where(s("live_status").isin(["live", "changed"]) & s("live_price").ne(""), s("listed_rent")), errors="coerce")
     money = lambda v: "$" + v.fillna(0).round().astype(int).map("{:,}".format)
     term_txt = pd.Series(np.where(lm.notna(), "is for a " + lm.fillna(0).astype(int).astype(str) + "-month lease", "is not the 12-month price"), index=u.index)
@@ -496,6 +503,12 @@ def main():
     what_l, why_l, q_l, keys_l, disc_l, code_l, rwhy_l, rq_l = [], [], [], [], [], [], [], []
     code_v = {k: v.values for k, v in CODE.items()}
     furn_v, credit_v, income_v, notnormal_v = furnished.values, credit_req.values, income_req.values, not_normal.values
+    broker_v = s("broker_fee").values
+    rent_now = pd.to_numeric(u["rent_basis"] if "rent_basis" in u else u.get("listed_rent"), errors="coerce")
+    otc_v = [parsers.one_time_costs_sentence([x for x in str(it).split("; ") if x], dm, dd, up == "yes", rn)
+             for it, dm, dd, up, rn in zip(s("one_time_items"), pd.to_numeric(s("deposit_months"), errors="coerce"), pd.to_numeric(s("deposit_dollars"), errors="coerce"), s("deposit_up_to"), rent_now)]
+    laundry_tag_v = (s("in_unit_laundry").eq("yes") & s("in_unit_laundry_source_kind").eq("appliance_list")).values
+    laundry_app_v = s("in_unit_appliances").values
     net_eff = s("rent_basis_kind").eq("net_effective").values
     offer_txt = s("rent_offer_text").str[:160].values
     special = (s("rent_offer_kind").eq("special_offer") & ~s("rent_basis_kind").eq("net_effective")).values
@@ -549,6 +562,16 @@ def main():
             disc.append({"what": "credit score requirement", "why": "Credit score requirement: " + str(credit_v[i]), "question": "What credit score does the application need?", "code": "credit_requirement"})
         if furn_v[i]:
             disc.append({"what": "furnished apartment", "why": "Furnished apartment", "question": "Is the furniture optional, and is this a standard 12-month lease?", "code": "furnished"})
+        # independent check 5, N4: one-time costs the listing states. Never part of the monthly total.
+        if broker_v[i] == "applies":
+            disc.append({"what": "broker fee", "why": BROKER_FEE_TEXT, "question": "How much is the broker fee, and who pays it?", "code": "broker_fee"})
+        elif broker_v[i] == "none":
+            disc.append({"what": "no broker fee", "why": NO_BROKER_FEE_TEXT, "question": "", "code": "no_broker_fee"})
+        if otc_v[i]:
+            disc.append({"what": "one-time costs", "why": "One-time costs, per the listing: " + otc_v[i] + ".", "question": "What is due at signing, in total?", "code": "one_time_costs"})
+        # independent check 5, N6: in-unit laundry that rests only on a listing site's appliance list
+        if laundry_tag_v[i]:
+            disc.append({"what": "washer and dryer to confirm", "why": parsers.laundry_tag_text(laundry_app_v[i]), "question": parsers.laundry_tag_question(laundry_app_v[i]), "code": "laundry_appliance_list"})
         qs += [d["question"] for d in disc]
         disc_l.append(json.dumps(disc) if disc else "")
         what_l.append("; ".join(whats)); why_l.append(" ".join(whys)); q_l.append("; ".join(x for x in qs if x)); keys_l.append(";".join(keys))
@@ -556,6 +579,7 @@ def main():
     u["open_keys"] = keys_l
     u["open_codes"], u["open_review_why"], u["open_review_question"] = code_l, rwhy_l, rq_l
     u["cond_furnished"], u["cond_credit"], u["cond_income"], u["cond_not_normal_lease"] = np.where(furnished, "yes", ""), credit_req, income_req, not_normal
+    u["one_time_costs"] = otc_v
     u["disclosures"] = disc_l
     u["to_confirm"] = [q + "; " if q else "" for q in q_l]
     u["tour_confirm"] = (pd.Series(np.where(inf_f, FLOOR_DISCLOSURE + "; ", ""), index=u.index)

@@ -113,9 +113,17 @@ Cove, Halstead Parsippany, The Confluence were added after independent check 4).
 - **Dogs.** Allowed must be stated or confirmed, with dogs named ("pets upon approval" leaves it open). A policy that
   **conflicts between sources is one open gate fact (dogs)**; the building's own or its manager's page settles it; only
   a clear "no dogs" there removes. "Small dogs" or "weight restrictions apply" with no number passes with the tour
-  question "Confirm the dog weight limit in pounds".
+  question "Confirm the dog weight limit in pounds". **A weight limit is a number only where a source's own words state
+  it** (`parsers.dog_weight_traced`, over the listing's pet text, the building's page and every checker's quote): a
+  stored figure no page states is removed and kept aside as `dog_weight_limit_untraced` (Brookview Commons East: "small
+  dogs" had been stored as 25 lb, the gate's threshold). A checker's note that no page gives a number is never read as
+  the number it mentions.
 - **Staleness.** A page unchanged more than 60 days with no second site (a different host), or an availability date
-  more than 183 days old: the open item "listing". Unchanged more than 183 days: removed. The page date comes from the
+  more than 183 days old: the open item "listing". Unchanged more than 183 days: removed. **The days are counted to the
+  first tour day, 2026-11-22** (`parsers.TOUR_START`), or to the day the page was read when that is later
+  (`parsers.staleness(..., as_of=)`; independent check 5, N28): a page read on November 15 at 58 days unchanged is 65
+  days unchanged when tours start, and carries the open item now. Nothing is assumed about the page after it was read
+  except that it did not change. The page date comes from the
   unit's own live-check note, a page fact, or a sibling's note about the same page; where a later batch establishes the
   date for the whole page and an earlier note gives a newer building-level date, the reviewed table
   `data/evidence/page_date_corrections.csv` sets it for every unit on that page (Grandville Towers: 2026-07-30 for 5F,
@@ -134,8 +142,15 @@ Cove, Halstead Parsippany, The Confluence were added after independent check 4).
   lease that is not 12 months with no 12-month price read: "The price shown is for a 13-month lease: ask for the 12-month
   price"; or the 12-month price is used in its place); income requirement, credit-score requirement and furnished
   apartment, read from the evidence (`parsers.renter_conditions`; a statement that the apartment is not a normal lease,
-  short-term only, corporate or student housing, a sublet, is the open fact "eligibility" instead); could pass $3,000 once
-  parking and fees are known; special offer; net-effective rent; condo rented by its owner; dog weight limit not
+  short-term only, corporate or student housing, a sublet, is the open fact "eligibility" instead); **broker fee** ("the
+  listing says a broker fee applies; ask how much") or "no broker fee, per the listing", and **one-time costs** the
+  listing states (application, administrative, holding and move-in fees; a security deposit only when it is more than
+  one month's rent), read from the listing's own description on the cached page and from the checkers' facts
+  (`parsers.broker_fee_statement`, `parsers.one_time_costs`, `scripts/tools/listing_fees.py`): never part of the monthly
+  total; **washer and dryer to confirm**, where in-unit laundry rests only on a listing site's appliance list
+  (`in_unit_laundry_source_kind = appliance_list`); could pass $3,000 once the unpublished cost lines are known (parking,
+  required fees, **and a utility with no estimate**: where the utilities tool has no gas figure, `all_in_likely` adds the
+  median of the gas estimates that do exist, by state and bedroom count); special offer; net-effective rent; condo rented by its owner; dog weight limit not
   published; overnight street parking restricted (`data/reference/overnight_parking_towns.csv`).
 
 ## 4. One apartment, one row; one building, one id
@@ -166,7 +181,7 @@ Cove, Halstead Parsippany, The Confluence were added after independent check 4).
 | Safety | 22 | violent rate, property rate, vehicle-theft rate, car and violent crime within 250 m (NYC), evening share, three-year trend, building security features |
 | Building | 16 | security features (24h doorman 3, doorman 2, controlled entry 2.5, package room 1) 40; comfort (in-unit laundry 2.5, lounge or coworking 1.5, gym 1, outdoor space 1, elevator stated 1, balconies 0.5) 45; year built 15 |
 | Cost | 12 | all-in 85; cost lines stated rather than estimated 15 |
-| Car | 12 | parking type 50 (garage or gated > covered > lot or off-site > street); vehicle-theft rate 15; car crime nearby 15; parking fee 10; surface parking nearby 10 |
+| Car | 12 | parking type 50 (garage or gated > covered > lot or off-site > street), **of the space she would actually park in** (see "Parking" below); vehicle-theft rate 15; car crime nearby 15; parking fee 10; surface parking nearby 10 |
 | Space | 12 | sq ft 75; a separate bedroom 25 |
 | Distance | 10 | drive to her parents 60; transit 25; tolls 15 (closer is better; a toll counts only when every crossing has a rate) |
 | Dog | 8 | walk to green, park area, dog park, vets, dog amenities, **a weight limit of 25 lb or more, or no limit** (10), woods, pet shops, pet rent |
@@ -188,6 +203,30 @@ dog wash`, or `yes` when unspecified).
 The security points count a staffed front of any kind, as before. The AMENITY shown is separate: `doorman` only where a
 source says doorman, `concierge` only where a source says concierge, `front_desk` for an attended lobby or desk called
 neither (`parsers.staff_from_sources`).
+
+**Parking** (after independent check 5; `parsers.parking_facts`, `build_master.structured_parking`). Every source's own
+words about parking are collected per building (the listing's parking field and fee lines, the community page's three
+parking columns with their sentences, the amenities page, every evidence fact about parking, a phone answer) and read
+together. The result:
+
+- `parking_kinds`: every kind a source names: `garage`, `gated_lot`, `covered`, `assigned_lot`, `open_lot`, `off_street`
+  (off-street parking of unnamed kind), `assigned` (an assigned space, place not said), `offsite`, `street`.
+- `parking_included_kind`: which kind the free or included space is (only where the cost counts parking at $0;
+  `unspecified` when a space is included and no source says of which kind).
+- `parking_optional`: the other kinds offered for a fee, each with its fee, or with none when it is not published.
+- `parking_fee_kind`: the kind the counted fee pays for.
+- `parking_kind`, the **primary kind**: the included kind where a space is free; the kind the counted fee pays for;
+  otherwise the best kind named, leaving out a garage or covered space that is only an optional extra beside a plain lot.
+
+The score's "parking type", the night moment and the page's word for the parking all read the primary kind: garage or
+gated lot 4, covered 3, an open or assigned lot, off-street, assigned or off-site space 2, street 1, unnamed kind
+unknown. **A free open lot is not a garage**, whatever garage the same sentence offers for a fee ("Open lot: included in
+lease; Underground parking garage: $50/month" is an open lot with a $50 garage as an extra). `parking_type` is stored as
+`<head>: <the source's words>`, the head being the primary kind in the older vocabulary (`garage`, `covered`, `lot`,
+`assigned`, `street_only`, `offsite`, `parking`). "Covered parking fee" on a listing site's fee line is that site's label
+for a garage fee too: it adds no second kind beside a garage. A section heading ("Parking & Garage"), "Gated Entry" in a
+feature list and "Street" in an address are not parking. Buildings the sentence parser cannot settle are in the reviewed
+table `data/reference/parking_reviewed.csv` (each row with the quote and why).
 
 **The experience's promise (30 percent).** Walk-Everywhere: restaurants, bars, cafés, shops, street-grid density,
 cinemas and theatres, bookshops. Old-Neighborhood: corner stores, hair and beauty shops, restaurants, laundromats,
@@ -250,6 +289,22 @@ then rank score, then `listing_id`.
   the same computation as the written text and "At a glance"), and `buildings_with_own_dog_area` counts only
   `dog_park_or_run`; `traits` describe the wider area profile. `meta.notes` and `meta.moment_thresholds` are plain
   sentences for the reader (no field names).
+- **The train station** (independent check 5, N3). `train_station` / `train_station_m` are the nearest rail station **of
+  any kind**: commuter rail, subway, PATH or light rail, from the station table `data/reference/rail_stations.csv`
+  (built once from the six cached GTFS feeds under `raw/gtfs/`: LIRR, Metro-North, the NYC subway with the Staten Island
+  Railway, NJ Transit rail with the Hudson-Bergen, Newark and River Line light rail, PATH, SEPTA). `train_station_kind` is
+  the reader's word for it (`train`, `subway`, `PATH`, `light rail`) and `train_station_system` its operator.
+  `commuter_station` / `_m` / `_system` are the nearest commuter-rail station; where that is the same place as the map's
+  station used before, its name and distance are unchanged. Distances are straight lines. The Little-City promise's
+  "train station distance" reads the nearest station of any kind. `shown_figures.train_station_kind` is the kind at the
+  neighborhood's median building; `train_station_kinds` counts the kinds over its shown buildings.
+- **Tolls.** `toll_round_trip` of a neighborhood is the median over its shown apartments; `toll_round_trip_range` is the
+  lowest and highest (Newark: $24 at most buildings, $33 and $43 at two).
+- **Evidence on avoid and pause cards.** A city-record count is a sentence that starts with the count ("23 pest
+  complaints recorded by the city here in the last six months, far more for its size than at nine in ten buildings in the
+  city."); the raw count string is in `excerpt_internal` and `kind` is `record`. The car-crime reason of an avoid card is
+  "Police recorded N car break-ins or thefts within about 250 meters (a few blocks) in two years, about twice what is
+  typical for the buildings we looked at in <borough>." It appears only on avoid cards.
 - **Reader text.** `confirm.label / why / question`, each disclosure's `label / why / question`, each cost line's `note`
   and every tour question are written in `scripts/build_page_data.py` from a reason code and structured fields
   (apartment, never unit; dates in full; no file paths or working vocabulary). The working note is kept in
@@ -289,8 +344,9 @@ then rank score, then `listing_id`.
 | 2026-11-16 | Owner ("Forget call check"): the "not re-checked live" flag is dropped. A listing never re-read is not an open item in any rule; the thin rule's "well attested" is "no open gate fact"; ties are broken by `listing_id` only; `needs_live_check.csv` and the "awaiting live check" list are gone. A problem a re-read found still counts |
 | 2026-11-16 | After independent check 4: every building's point checked against its address (Harbor Pointe is in Bayonne, Parkway Lofts in Bloomfield) and `city` from geography; second-site rule for availability; garden-style rule no longer escaped by a label that reads as floor 4; plan letters are not apartments; a sequential apartment number that reads as floor 1; numbering conventions per complex (The Grove Somerset 2141, 3172, 4149, 4171 restored); income, credit and furnished disclosures; lease-term disclosure for any term that is not 12 months; doorman and concierge apart; `resident_review` basis; building floors from the largest stated count; "up to" kept on offers; avoid-only neighborhoods in their own array; `safety.status`; reader text from templates |
 | 2026-11-16 | Pipeline clean-up: laundry and dog amenities derived from every source's words (structured fields; the label beside a flag agrees with it); `buildings_with_own_dog_area` counts only a dog park or run; `shown_figures` over buildings, not apartments; `meta.notes` and `meta.moment_thresholds` as reader sentences; American spelling in our own rule summaries (quotes untouched) |
+| 2026-11-16 | After independent check 5: structured parking from every source's words, and the score, the night moment and the page read the space she would actually park in (a free open lot is not a garage; 16 shown buildings changed rank); the "train station" is the nearest rail station of any kind, with its kind and system; broker fee, one-time costs and "washer and dryer to confirm" disclosures; a dog weight limit only where a source's words state it; a utility with no estimate feeds `all_in_likely`; staleness counted to the first tour day (2026-11-22); record counts and car crime on avoid cards as sentences; toll range per neighborhood |
 
-Superseded and no longer true anywhere: "the lease-term disclosure starts above 13 months", "no label reads above floor 3" as a condition of the garden-style rule for labels that name their building, `doorman` as "doorman or concierge", "the 12-month price only for leases longer than 13 months", "at most 2 per building" for the shown list, "best 10 per neighborhood", "top 15
+Superseded and no longer true anywhere: "staleness is counted to the day the page was read", "parking type is the best kind the sentence names", "train station = nearest commuter-rail station", "the lease-term disclosure starts above 13 months", "no label reads above floor 3" as a condition of the garden-style rule for labels that name their building, `doorman` as "doorman or concierge", "the 12-month price only for leases longer than 13 months", "at most 2 per building" for the shown list, "best 10 per neighborhood", "top 15
 candidates then the best 10", a floor-plan row shown with an availability asterisk, "weight limit stated ≥ 40 lb",
 conflicting dog policy as sketchy or as a drop, "a missing live check is its own open item", "units seen live first"
 among equal scores, the "waiting for a live check" list. `scripts/rank_v1_backup.py` keeps version 1.

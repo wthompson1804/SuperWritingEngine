@@ -1075,7 +1075,20 @@ h1:focus,h2:focus{outline:none}
 .oth{font-size:16px;font-weight:800;margin:12px 0 6px}
 .oth:first-child{margin-top:0}
 /* ===== UI pass 8: the two prices (rent, then total), and the filters ===== */
-.pstar{color:var(--berry-deep)}
+.otag{display:inline-block;vertical-align:middle;font-family:var(--body);font-size:12.5px;font-weight:800;font-style:normal;line-height:1.25;letter-spacing:0;text-transform:none;white-space:nowrap;color:#0B4F6C;background:#E1F1F8;border:1.5px solid #0B4F6C;border-radius:6px;padding:0 5px;margin-left:3px}
+.pp-rb{display:inline-flex;align-items:center;flex-wrap:wrap;gap:0 2px;justify-content:inherit}
+.offl{font-size:13.5px;line-height:1.3;font-weight:600;border-left:4px solid #0B4F6C;padding:1px 0 1px 8px;overflow-wrap:anywhere}
+.offl b{font-weight:800;color:#0B4F6C}
+.tut-off{font-size:13.5px;margin-top:6px;display:flex;align-items:center;flex-wrap:wrap;gap:2px 5px}
+.tut-off{font-size:14px}
+/* (D28) a card's one line is a whole sentence: it is not cut in the middle */
+.hood.card .l2,.pg .hood.card .l2,.bcard .l2,.pg .bcard .l2{-webkit-line-clamp:6}
+/* (N21) three columns on a phone: "Apartment" sits whole on its own small line above the number; no word is broken in the middle unless it is longer than the column */
+.cmp-head .colh a b,.cmp-head .colh a small{overflow-wrap:break-word;word-break:normal;hyphens:none}
+.cmp-head .colh a small{-webkit-line-clamp:3}
+@media (max-width:560px){.cmp-head .cols.c3 .colh a b .apl{display:block;font-size:12.5px;font-weight:800;line-height:1.2}.cmp-head .cols.c3 .colh{padding-left:5px}.cmp-head .cols.c3 .colh a{gap:3px}}
+.tut-off span,.tut-off .otag{font-weight:800;font-size:14px}
+.tut-off i{font-style:normal;font-size:14px}
 .ab{font-style:normal;font-family:var(--body);font-size:13px;font-weight:700;letter-spacing:0}
 .pp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:0 10px;background:var(--paper);border-radius:14px;padding:7px 10px 8px;margin-top:2px;text-align:left}
 .pp-c{min-width:0;display:flex;flex-direction:column}
@@ -1799,6 +1812,9 @@ function bView(B){if(B.view)return B.view;var r=BREC[String(B.best.building_id)]
 function openable(U){return !!(U&&H_BY[U.hood_id]&&Y_BY[U.year]&&Y_BY[H_BY[U.hood_id].year])}
 
 /* (the state and the filters are set up further down, once every helper they call exists) */
+/* (N10) "Available now" is a listing that says so, or one dated on or before the day the data was built (meta.as_of, else the date of meta.built_at). Dates are compared as dates. */
+var AS_OF=(function(){var m=/^(\d{4}-\d\d-\d\d)/.exec(String(META.as_of||META.as_of_date||META.built_at||""));return m?m[1]:null})();
+function availNow(U){var a=String(U&&U.available==null?"":U.available).trim(),m=/^(\d{4}-\d\d-\d\d)/.exec(a);return /^now$/i.test(a)||!!(m&&AS_OF&&m[1]<=AS_OF)}
 function minOf(a,f){var m=Infinity;a.forEach(function(x){var v=f(x);if(v!=null&&v<m)m=v});return m===Infinity?null:m}
 function maxOf(a,f){var m=-Infinity;a.forEach(function(x){var v=f(x);if(v!=null&&v>m)m=v});return m===-Infinity?null:m}
 
@@ -1809,6 +1825,9 @@ function r1(n){return n==null?null:Math.round(n*10)/10}
 function lis(a){return a.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")}
 function list(a){return a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1]}
 function pl(n,one,many){n=Math.round(n);return n+" "+(n===1?one:(many||one+"s"))}
+/* (N17) every count sentence agrees with its count: "1 of the 4 buildings here has its own dog area", "2 of the 4 … have their own". */
+function nOf(n,total,noun,one,many){n=Math.round(n);return n+" of the "+Math.round(total)+" "+noun+" "+(n===1?one:many)}
+function agree(t){return String(t==null?"":t).replace(/\b1 of (the )?(\d+) ([a-z]+s)( here)? have their own\b/g,"1 of $1$2 $3$4 has its own").replace(/\b1 of (the )?(\d+) ([a-z]+s)( here)? have\b/g,"1 of $1$2 $3$4 has").replace(/\b1 of (the )?(\d+) ([a-z]+s)( here)? are\b/g,"1 of $1$2 $3$4 is")}
 function pct(x){return Math.round(x*100)+"%"}
 function times(x){return (Math.round(x*100)/100)+" times"}
 function hours(mins){return Math.round(4*2*mins/60*10)/10}
@@ -1831,7 +1850,12 @@ function first(o,keys){for(var i=0;i<keys.length;i++){var v=o&&o[keys[i]];if(v!=
 function numOf(v){var n=typeof v==="number"?v:parseFloat(String(v==null?"":v).replace(/[$,]/g,""));return isFinite(n)?n:null}
 function isNum(v){return typeof v==="number"||/^\s*\d+(\.\d+)?\s*$/.test(String(v))}
 var LEASE_KEYS=["lease_months","lease_term_months","lease_term"],LEASE_TEXT_KEYS=["lease_term_text","lease_terms_text","lease_term"],P12_KEYS=["price_12mo","rent_12mo","price_12_month","rent_12_month","price_12_months","rent_12_months","twelve_month_price","twelve_month_rent"];
-function leaseMonths(U){var v=first(U.rent,LEASE_KEYS);if(v==null)v=first(U,LEASE_KEYS);if(v==null)v=first(U.cost_check,LEASE_KEYS);return v!=null&&isNum(v)?numOf(v):null}
+/* (N7) Two different lease lengths live in the data and are never mixed: the lease the LISTED PRICE is quoted for (cost_check.lease_term_months,
+   or rent.price_lease_months when the data sends it) and the lease an OFFER asks for (rent.lease_months). Rent wording reads the first only. */
+var PRICE_LEASE_KEYS=["price_lease_months","price_lease_term_months","listed_price_lease_months","lease_months_of_price"];
+function leaseMonths(U){var v=first(U.rent,PRICE_LEASE_KEYS);if(v==null)v=first(U.cost_check,["lease_term_months","lease_months"]);return v!=null&&isNum(v)?numOf(v):null}
+function offerLeaseMonths(U){var v=first(U.rent,["offer_lease_months","lease_months"]);return v!=null&&isNum(v)?numOf(v):null}
+function aMonths(n){n=r1(n);return (/^(8|11|18)(\D|$)/.test(String(n))||/^8\d(\D|$)/.test(String(n))?"an ":"a ")+n+"-month"}
 function leaseText(U){var v=first(U.rent,LEASE_TEXT_KEYS);if(v==null||isNum(v))v=first(U,LEASE_TEXT_KEYS);return v!=null&&!isNum(v)?(cleanText(v)||null):null}
 function price12(U){var v=first(U.rent,P12_KEYS);if(v==null)v=first(U,P12_KEYS);if(v==null)v=first(U.cost_check,P12_KEYS);return numOf(v)}
 /* Text copied from a listing can arrive with the pipeline's own notes, or as a dump of fields ("term 12: price 2805,
@@ -1849,17 +1873,19 @@ function rentStar(U){return !!(U.rent.asterisk||netEff(U))}
 /* Which price the rent figure is, read from the name of the rent line in the cost breakdown: the 12-month lease price ("12"),
    a price after an offer ("offer"), or the listing's own price ("listed", for the lease length the listing gives). */
 function rentLine(U){var ls=arr(U&&U.all_in_lines),i;for(i=0;i<ls.length;i++)if(ls[i]&&/^rent\b/i.test(String(ls[i].line||"")))return ls[i];return null}
-function rentKind(U){var l=rentLine(U),n=String(l&&l.line||"");return /12[- ]month/i.test(n)?"12":(/net[- ]effective|offer/i.test(n)||netEff(U))?"offer":"listed"}
-function rentTerm(U){var k=rentKind(U),lm=leaseMonths(U);return k==="12"?"on a 12-month lease":k==="offer"?"with the current offer":lm!=null&&Math.round(lm)!==12?"on "+(/^(8|11|18)/.test(String(r1(lm)))?"an ":"a ")+r1(lm)+"-month lease":""}
+function rentKind(U){var l=rentLine(U),c=String(l&&l.code||""),R=obj(U&&U.rent);
+  if(R.is_12_month_price===true||/^rent_12/.test(c))return "12";if(/net_effective|offer/.test(c)||netEff(U))return "offer";if(c)return "listed";
+  var n=String(l&&l.line||"");return /12[- ]month/i.test(n)?"12":/net[- ]effective|offer/i.test(n)?"offer":"listed"} /* the line's name is read only when it carries no code */
+function rentTerm(U){var k=rentKind(U),lm=leaseMonths(U);return k==="12"?"on a 12-month lease":k==="offer"?"with the current offer":lm!=null&&Math.round(lm)!==12?"on "+aMonths(lm)+" lease":""}
 /* what must be read with the rent: the listing's own headline price when the page uses the 12-month one, and the warning that the 12-month price in the building runs much higher */
 function rentNotes(U){var o=[],R=U.rent||{},r=rentOf(U),lm=leaseMonths(U);
-  if(rentKind(U)==="12"&&R.listed!=null&&isFinite(+R.listed)&&+R.listed!==r)o.push("The listing shows "+money(R.listed)+(lm!=null&&Math.round(lm)!==12?" for a "+r1(lm)+"-month lease":"")+".");
+  if(rentKind(U)==="12"&&R.listed!=null&&isFinite(+R.listed)&&+R.listed!==r)o.push("The listing shows "+money(R.listed)+(lm!=null&&Math.round(lm)!==12?" for "+aMonths(lm)+" lease":"")+".");
   discs(U).forEach(function(d){var w=String(d.why||"");if(o.warned||!(/much higher/i.test(w)||/^lease:sibling/.test(d.code)))return;var m=/(\d+)-month price (?:is not published|in this building)/i.exec(w);o.warned=1;
     o.push("The "+(m?m[1]:"12")+"-month price in this building can be much higher than the price shown: ask for it.")});
   return o}
 function leaseBits(U){var lm=leaseMonths(U),p=price12(U),o=[];
   if(rentKind(U)==="12"){o.push("The rent shown is the 12-month lease price.");return o.concat(rentNotes(U).slice(0,1))}
-  if(lm!=null&&Math.round(lm)!==12)o.push("The price is for a "+r1(lm)+"-month lease.");
+  if(lm!=null&&Math.round(lm)!==12)o.push("The price is for "+aMonths(lm)+" lease.");
   if(p!=null)o.push("On a 12-month lease: "+money(p)+" a month.");
   else if(lm!=null&&lm>12.5)o.push("The 12-month price is "+NOT_PUB+".");
   return o}
@@ -1876,10 +1902,11 @@ function discsShown(U){return rentStar(U)?discs(U).filter(function(d){return !RE
 function oneRentQ(q){var hits=q.filter(function(x){return RENT_Q_RE.test(x)});if(hits.length<2)return q;var keep=hits.filter(function(x){return /\?\s*$/.test(x)})[0]||hits[0],done=false;
   return q.map(function(x){if(!RENT_Q_RE.test(x))return x;if(done)return null;done=true;return keep}).filter(function(x){return x!=null})}
 /* the same question twice, once with a note in brackets: the longer one stays */
-function noTwins(q){var k=function(x){return String(x).toLowerCase().replace(/\s*\([^)]*\)\s*$/,"").replace(/[^a-z0-9]+/g," ").trim()};
+function noTwins(q){var k=function(x){x=String(x).toLowerCase().replace(/\s*\([^)]*\)\s*$/,"");var m=/^([^?]{12,}\?)\s+[^?]*$/.exec(x);if(m)x=m[1]; /* (N20) a question followed by a short remark ("… Ask before touring.") is the same question */
+    return x.replace(/[^a-z0-9]+/g," ").trim()};
   return q.filter(function(x,i){return !q.some(function(y,j){return j!==i&&k(y)===k(x)&&(String(y).length>String(x).length||(String(y).length===String(x).length&&j<i))})})}
 function rentLines(U){var o=[];
-  if(rentStar(U))o.push("<b>*</b> "+esc(offerLine(U)));
+  if(hasOffer(U))o.push("<b>Offer:</b> "+esc(offerLine(U)));
   leaseBits(U).forEach(function(x){o.push(esc(x))});
   return o.length?'<p class="rentl">'+o.join(" ")+'</p>':''}
 function seenRange(us){var a=us.map(function(u){return u.price_seen_at}).filter(Boolean).sort();if(!a.length)return "";var x=seenShort(a[0]),y=seenShort(a[a.length-1]);return x===y?x:x+" to "+y.replace(/^seen /,"")}
@@ -1926,15 +1953,79 @@ function hoodOf(U){return H_BY[U.hood_id]}
 function yearOf(U){return Y_BY[U.year]}
 function slugName(id){return String(id||"").replace(/^[a-z]{2}:/,"").replace(/-+$/,"").split("-").map(function(w){return w?w.charAt(0).toUpperCase()+w.slice(1):w}).join(" ")+(/^([a-z]{2}):/.test(id)?", "+RegExp.$1.toUpperCase():"")}
 
-/* ---- parking: the listing text is messy, so the kind comes from parking.rank ---- */
-function parkKind(U){var r=U.parking&&U.parking.rank,t=String(U.parking&&U.parking.type||"");
-  if(r==null)return t?"some":"unknown";
-  if(r>=4)return /gated/i.test(t)?"gated":"garage";
-  if(r>=3)return "covered";if(r>=2)return "lot";return "street"}
-var PARK_WORD={garage:"Garage",gated:"Gated lot",covered:"Covered parking",lot:"Open lot",street:"Street parking",some:"Parking, kind not stated",unknown:"Parking not known yet"};
-var PARK_SENT={garage:"Garage parking",gated:"Parking in a gated lot",covered:"Covered parking",lot:"Parking in an open lot",street:"Street parking"};
-var PARK_PHRASE={garage:"a garage",gated:"a gated lot",covered:"covered parking",lot:"an open lot",street:"street parking"};
-function parkWord(U){return PARK_WORD[parkKind(U)]}
+/* ---- parking (N1, D18). What is said comes from the KINDS the data names, never from the rank or from the stored type string:
+   parking.kinds (every kind at the building), parking.included_kind (the space that comes with the apartment), parking.optional_kinds
+   (kinds that cost extra) and a fee for each kind (parking.fee_by_kind / fees, or {kind, fee} items). Until those arrive the older fields
+   are read: kinds, fee, garage_is_optional_extra, fee_note. A lot is never called a garage: "garage" needs a garage among the kinds. ---- */
+var PK_RANK={garage:4,gated:4,covered:3,lot:2,offsite:2,street:1},PK_ORDER=["lot","street","covered","gated","garage"];
+function pkNorm(k){k=String(k==null?"":k).toLowerCase().replace(/[_-]+/g," ").trim();if(!k||/^(none|no|unknown|unspecified|not found|not published|null|any|included|space)$/.test(k))return null;
+  return /street/.test(k)&&!/off street/.test(k)?"street":/^off ?site/.test(k)?"offsite":/^assigned$/.test(k)?"lot":/gated/.test(k)?"gated":/garage|underground|deck|structure/.test(k)?"garage":/uncovered|surface|open|outdoor/.test(k)?"lot":/cover|carport/.test(k)?"covered":/lot|off street/.test(k)?"lot":null}
+function pkFee(v){if(v&&typeof v==="object")v=first(v,["fee","amount","monthly","monthly_fee","price"]);if(v==null||v==="")return null;if(/includ|free|no charge/i.test(String(v)))return 0;return numOf(v)}
+function parkInfo(U){if(U&&U._pk)return U._pk;var P=obj(U&&U.parking),fee=P.fee!=null&&P.fee!==""?numOf(P.fee):null,fees={},kinds=[],opt=[],inc=null,incAny=false,feeAny=null,k;
+  function add(a,x){if(x&&a.indexOf(x)<0)a.push(x)}
+  arr(P.kinds).forEach(function(x){add(kinds,pkNorm(x&&typeof x==="object"?(x.kind||x.type):x))});
+  var src=P.fee_by_kind||P.fees_by_kind||P.kind_fees||P.fee_per_kind||P.fees;
+  if(Array.isArray(src))src.forEach(function(x){var n=x&&typeof x==="object"?pkNorm(x.kind||x.type):null;if(n)fees[n]=pkFee(x)});else if(src&&typeof src==="object")for(k in src){var n=pkNorm(k);if(n)fees[n]=pkFee(src[k])}
+  if(P.included_kind!==undefined||P.optional_kinds!==undefined){
+    inc=pkNorm(P.included_kind);if(!inc&&P.included_kind!=null&&P.included_kind!==""&&P.included_kind!==false&&!/^(none|no|unknown|not[ _]found|not[ _]published|null)$/i.test(String(P.included_kind)))incAny=true;
+    arr(P.optional_kinds).forEach(function(x){var n=pkNorm(x&&typeof x==="object"?(x.kind||x.type):x);if(!n||n===inc)return;add(opt,n);if(x&&typeof x==="object"&&fees[n]===undefined&&pkFee(x)!=null)fees[n]=pkFee(x)});
+    add(kinds,inc);opt.forEach(function(x){add(kinds,x)});
+    if(fee!=null&&fee>0){var open=opt.filter(function(x){return fees[x]==null});if(inc||incAny){if(open.length===1&&opt.length===1)fees[open[0]]=fee}else if(kinds.length===1&&fees[kinds[0]]==null)fees[kinds[0]]=fee;else if(!kinds.some(function(x){return fees[x]!=null}))feeAny=fee}}
+  else if(kinds.length){var byRank=kinds.slice().sort(function(a,b){return PK_RANK[a]-PK_RANK[b]});
+    if(fee===0){if(kinds.length===1)inc=kinds[0];else if(P.garage_is_optional_extra===true){inc=byRank[0];opt=byRank.slice(1)}else incAny=true}
+    else if(P.garage_is_optional_extra===true&&byRank.length>1&&byRank.some(function(x){return PK_RANK[x]<3})){opt=byRank.filter(function(x){return PK_RANK[x]>=3});
+      if(fee!=null){if(/cheapest covered or garage/i.test(String(P.fee_note||""))&&opt.length)fees[opt[0]]=fee;else feeAny=fee}} /* a single fee whose kind the data does not name stays unnamed */
+    else if(fee!=null){if(kinds.length===1)fees[kinds[0]]=fee;else if(/cheapest covered or garage/i.test(String(P.fee_note||""))){var cg=byRank.filter(function(x){return PK_RANK[x]>=3});if(cg.length)fees[cg[0]]=fee;else feeAny=fee}else feeAny=fee}}
+  if(!kinds.length&&!incAny&&fee!=null){if(fee===0)incAny=true;else feeAny=fee}
+  var base=kinds.filter(function(x){return x!==inc&&opt.indexOf(x)<0}),best=function(a){return a.slice().sort(function(x,y){return PK_RANK[y]-PK_RANK[x]})[0]||null};
+  var main=inc||best(base)||best(kinds),o={kinds:kinds,inc:inc,incAny:incAny,opt:opt,base:base,fees:fees,feeAny:feeAny,main:main,
+    state:kinds.length?"ok":incAny||P.type||fee!=null?"some":"unknown"};
+  o.fee=inc?(fees[inc]!=null&&fees[inc]>0?fees[inc]:0):incAny?0:main&&fees[main]!=null?fees[main]:feeAny; /* what the space she would use costs: 0 is included, null is not published */
+  /* the data's own reading, when it sends one: parking.kind is the space she would use (the included one, else the main one), kind_words its name, fee_kind the kind the fee belongs to, summary the whole answer as a sentence */
+  var rk=typeof P.kind==="string"?P.kind.toLowerCase().replace(/[ -]+/g,"_"):null;
+  if(rk){o.raw=rk;o.words=typeof P.kind_words==="string"?P.kind_words:"";var c=pkNorm(rk);if(c){o.main=main=c;if(o.state!=="ok")o.state="ok"}else{o.main=main=null;o.state=P.included_kind!=null&&P.included_kind!==""?"some":rk==="unspecified"?"some":o.state;if(P.included_kind!=null&&P.included_kind!=="")o.incAny=true}
+    o.fee=P.included_kind!=null&&P.included_kind!==""?0:fee!=null&&(P.fee_kind==null||String(P.fee_kind).toLowerCase().replace(/[ -]+/g,"_")===rk)?fee:null}
+  o.summary=typeof P.summary==="string"?pub(P.summary).replace(/\s*\.\s*$/,"").trim():"";
+  o.rank=o.state==="unknown"?null:main?PK_RANK[main]:1.5;
+  o.cov=kinds.some(function(x){return PK_RANK[x]>=3}); /* a garage, gated or covered space is included or can be had */
+  o.at=(o.state==="some"||kinds.some(function(x){return x!=="street"&&x!=="offsite"}))&&rk!=="offsite";
+  if(U)U._pk=o;return o}
+function parkKind(U){var I=parkInfo(U);return I.state!=="ok"?I.state:I.main}
+function parkRank(U){return parkInfo(U).rank}
+var PARK_WORD={garage:"Garage",gated:"Gated lot",covered:"Covered parking",lot:"Open lot",offsite:"Off-site parking",street:"Street parking",some:"Parking, kind not stated",unknown:"Parking not published"};
+var PARK_PHRASE={garage:"a garage",gated:"a gated lot",covered:"covered parking",lot:"an open lot",offsite:"off-site parking",street:"street parking"};
+var PK_NOUN={garage:"garage",gated:"gated lot",covered:"covered parking",lot:"open lot",offsite:"off-site parking",street:"street parking"},PK_SPACES={garage:"garage spaces",gated:"gated spaces",covered:"covered spaces",lot:"open-lot spaces",offsite:"off-site spaces",street:"street parking"};
+/* the short word for the kind the data names as hers (parking.kind): a chip, a card, a compare cell */
+var PK_SHORT={garage:"Garage",gated_lot:"Gated lot",covered:"Covered",open_lot:"Open lot",assigned_lot:"Assigned space",off_street:"Off-street",assigned:"Assigned space",offsite:"Off-site",street:"Street",unspecified:"Parking unclear"};
+function parkWord(U){var I=parkInfo(U);return I.words?capFirst(I.words):PARK_WORD[parkKind(U)]}
+function pkFeeW(f){return f==null?"price "+NOT_PUB:Number(f)===0?"included":money(f)+" a month"}
+/* the extra kinds, in a clause: "garage spaces are $150 a month", "covered and garage spaces are extra, price not published" */
+function pkOptClause(I){var known=I.opt.filter(function(k){return I.fees[k]!=null}),unk=I.opt.filter(function(k){return I.fees[k]==null}),o=[];
+  known.forEach(function(k){o.push(PK_SPACES[k]+" are "+(Number(I.fees[k])===0?"included too":money(I.fees[k])+" a month"))});
+  if(unk.length)o.push((unk.length>1?list(unk.map(function(k){return PK_SPACES[k].replace(/ spaces$/,"")}))+" spaces":PK_SPACES[unk[0]])+" are extra, price "+NOT_PUB);
+  return o.join("; ")}
+/* the whole answer in one sentence, without the full stop */
+function parkSentence(U){var I=parkInfo(U),ks=I.kinds,o;
+  if(I.summary)return I.summary; /* the data's own sentence, built from the kinds a checker read */
+  if(I.state==="unknown")return "Parking "+NOT_PUB+", ask";
+  if(I.state==="some")return I.incAny?"A parking space is included; the listing does not say what kind":I.feeAny!=null||I.fee!=null?"Parking is "+money(I.fee)+" a month; the listing does not say what kind":"The listing mentions parking but not what kind";
+  if(ks.length===1&&ks[0]==="street")return "Street parking only";
+  if(I.inc)o=I.fee>0?capFirst(PK_NOUN[I.inc])+", "+money(I.fee)+" a month":I.opt.length?"Free "+PK_NOUN[I.inc]:capFirst(PK_NOUN[I.inc])+", included";
+  else if(I.incAny)o="A parking space is included ("+list(ks.map(function(k){return PK_NOUN[k]}))+" at the building)";
+  else{var b=I.base.length?I.base:ks,sorted=b.slice().sort(function(x,y){return PK_RANK[y]-PK_RANK[x]});
+    if(sorted.every(function(k){return I.fees[k]!=null}))o=sorted.map(function(k,i){var t=PK_NOUN[k]+", "+pkFeeW(I.fees[k]);return i?t:capFirst(t)}).join("; ");
+    else if(I.feeAny!=null&&I.opt.length)return capFirst(list(sorted.map(function(k){return PK_NOUN[k]})))+", with "+list(I.opt.map(function(k){return PARK_PHRASE[k]}))+" as an extra; parking is "+money(I.feeAny)+" a month";
+    else if(I.feeAny!=null)o=capFirst(list(sorted.map(function(k){return PK_NOUN[k]})))+"; parking is "+money(I.feeAny)+" a month";
+    else if(sorted.some(function(k){return I.fees[k]!=null}))o=sorted.map(function(k,i){var t=PK_NOUN[k]+", "+pkFeeW(I.fees[k]);return i?t:capFirst(t)}).join("; ");
+    else o=capFirst(list(sorted.map(function(k){return PK_NOUN[k]})))+(I.opt.length?"":", price "+NOT_PUB)}
+  var oc=I.opt.length&&(I.inc||I.incAny||I.base.length)?pkOptClause(I):"";
+  return o+(oc?"; "+oc:"")}
+/* the short answer for a chip, a card and a compare cell: the kind she would park in, then what it costs */
+function parkFeeShort(U){var I=parkInfo(U);if(I.state==="unknown")return "ask";var f=I.fee,t=f==null?"price: ask":Number(f)===0?"included":money(f)+" a month";
+  var up=I.opt.filter(function(k){return PK_RANK[k]>(I.main?PK_RANK[I.main]:0)});return t+(up.length?"; "+PK_NOUN[up[up.length-1]]+" extra":"")}
+/* the listing's own words on parking: the stored string without our "kind:" prefix; left out when it is cut short or reads like our note */
+function parkQuote(U){var t=String(U.parking&&U.parking.type||"");if(t.length>=99)return "";t=t.replace(/^[a-z_ ]{3,14}:\s*/,"").trim();
+  return t.length>12&&!/_|not stated|not published|\bUTC\b|Trulia|Zumper|Apartment List|review|\.\.\.$/i.test(t)?t+(t.length>=85&&!/[.!?)]$/.test(t)?" …":""):""}
 
 /* ---- sources in words, local rules, confirmation asterisk, evidence state ---- */
 /* Everything that explains a method or a source sits behind this one link, closed until tapped. */
@@ -1942,7 +2033,7 @@ function howHtml(html,label){return html?'<details class="howd"><summary>'+(labe
 function how(){var a=[].slice.call(arguments).filter(Boolean);return a.length?howHtml('<p>'+esc(capFirst(a.join("; ")))+'.</p>'):''}
 /* Crime is not a selling point: everything shown already passed the safety rule. Sentences (or, in a subhead, clauses) about
    crime are left out of prose shown in the open. */
-var CRIME_RE=/\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000/i;
+var CRIME_RE=/\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000|\bsafest\b/i; /* "safest" (D27): the badge "Among the safest on the list" says it once; prose does not say it again in other words */
 function calm(t){t=textOf(t);if(!t||!CRIME_RE.test(t))return t;
   return t.replace(/([.!?])\s+/g,"$1\u0001").split("\u0001").filter(function(s){return !CRIME_RE.test(s)}).join(" ").trim()}
 function calmV(v){if(typeof v==="string")return calm(v);if(Array.isArray(v))return v.map(calmV).filter(Boolean);if(v&&typeof v==="object"&&typeof v.text==="string"){var o={};for(var k in v)o[k]=v[k];o.text=calm(v.text);return o.text?o:null}return v}
@@ -1970,7 +2061,7 @@ function sortRules(a,order){return a.map(function(r,i){return [r,i]}).sort(funct
 function ruleWord(r){return RULE_WORD[r.rule]||humanize(r.rule)}
 function ruleLink(r){return okUrl(r.url)?ext(r.url,r.municipality||hostOf(r.url)):' <span class="facts">(no link in the data)</span>'}
 /* a rule's text as the reader sees it: a pointer to one of our own files ("; see dog_parks.csv") is cut, and a sentence that names one is left out */
-function ruleText(r){var t=String(r&&(r.summary||r.quote)||"").replace(/[;,]?\s*\(?\bsee\s+[\w\/.-]+\.(?:csv|md|json)\)?/gi,"");
+function ruleText(r){var t=String(r&&(r.summary||r.quote)||"").replace(/[;,]?\s*\(?\bsee\s+[\w\/.-]+\.(?:csv|md|json)\)?/gi,"").replace(/\s*\(see [^)]*\b(?:row|table|sheet|column)s?\)/gi,""); /* (N18) "(see Connecticut statewide row)" points into our own table */
   return t.replace(/([.!?])\s+/g,"$1\u0001").split("\u0001").filter(function(s){return !/docs\/|\.csv\b|\.jsonl?\b/i.test(s)}).join(" ").trim()}
 function ruleLi(r){return '<li><b>'+esc(ruleWord(r))+':</b> '+esc(ruleText(r))+ruleLink(r)+'</li>'}
 function rulesBlock(a,order,what){a=sortRules(a,order);var top=a.slice(0,RULES_SHOWN),rest=a.slice(RULES_SHOWN);
@@ -2044,7 +2135,7 @@ function tourQs(U){var q=(U.tour_questions||[]).slice(),add=[];
    approved year text (label, subhead) or interface copy is built here from data fields. ================= */
 var SAY={
   size:function(U){var s=(bedsNoun(U)==="apartment"?"An ":"A ")+bedsNoun(U)+(U.sqft!=null?" of "+r0(U.sqft)+" sq ft":", size not published");
-    if(U.floor!=null)s+=" on floor "+r0(U.floor)+(U.floor_basis==="inferred"?" ("+(pub(U.floor_basis_note)||"read from the apartment number")+")":"");
+    if(U.floor!=null)s+=(floorRead(U)?", likely on floor ":" on floor ")+r0(U.floor)+(floorRead(U)?" ("+(pub(U.floor_basis_note)||"read from the apartment number")+")":"");
     else s+=", floor not published";return s+"."},
   park:function(w){return w.park&&w.park_walk_min!=null?w.park+" is "+aWalk(w.park_walk_min)+" away.":w.park_walk_min!=null?"A park is "+aWalk(w.park_walk_min)+" away.":"Walk to green space: "+NK+"."},
   dogpark:function(w){return w.dog_park_m==null?"Nearest dog park: "+NK+".":(w.dog_park?w.dog_park:"The nearest dog park")+" is "+distWords(w.dog_park_m)+"."},
@@ -2055,15 +2146,14 @@ var SAY={
   crime:function(n){var x=n.violent_vs_jamaica;if(x==null)return "Violent crime here: "+NK+".";
     if(Math.abs(x-1)<0.005)return "Violent crime here runs at the same rate as around Mom and Dad's.";
     return "Violent crime here runs at "+times(x)+" the rate around Mom and Dad's."},
-  parking:function(U){var k=parkKind(U),f=U.parking&&U.parking.fee;
-    if(k==="unknown")return "Parking is "+NOT_PUB+".";
-    if(k==="some")return "The listing mentions parking but not what kind.";
-    return PARK_SENT[k]+(f!=null?(Number(f)===0?", no monthly charge.":", "+money(f)+" a month."):"; the fee is "+NOT_PUB+".")},
+  parking:function(U){return parkSentence(U)+"."},
   supermarket:function(w){return w.supermarket_m==null?"Nearest supermarket: "+NK+".":(w.supermarket||"The nearest supermarket")+" is "+distWords(w.supermarket_m)+"."},
   cafes:function(w){return w.cafes_800m==null?"Cafés nearby: "+NK+".":pl(w.cafes_800m,"café")+" within a 10-minute walk."},
-  train:function(s){return s.train_station_m==null?"Nearest train station: "+NK+".":(s.train_station?s.train_station+" station":"The nearest train station")+" is "+distWords(s.train_station_m)+"."},
+  train:function(s){var sys=sysWord(first(s,["train_station_kind","station_kind","train_station_system","station_system","system"])),nm=first(s,["train_station","station","station_name"]),m=first(s,["train_station_m","station_m"]);
+    if(sys&&m!=null)return (sys==="PATH"?"PATH":sys==="the train"?"The train":sys==="the subway"?"The subway":capFirst(sys))+(nm?" ("+String(nm).replace(/\s+station$/i,"")+")":"")+" is "+distWords(+m)+"."; /* the nearest station of any kind, with its system (N3) */
+    return s.train_station_m==null?"Nearest commuter train station: "+NK+".":(s.train_station?s.train_station+", the nearest commuter train station,":"The nearest commuter train station")+" is "+distWords(s.train_station_m)+"."},
   transit:function(s){return s.transit_min==null?"By train and bus to Mom and Dad: "+NK+".":r0(s.transit_min)+" minutes by train and bus on a Saturday"+(s.transit_transfers!=null?", "+pl(s.transit_transfers,"transfer"):"")+"."},
-  available:function(U){return U.available==="now"?"Available now.":dayStr(U.available)?"Available "+dayStr(U.available,true)+".":"Move-in date: "+NK+"."}
+  available:function(U){return availNow(U)?"Available now.":dayStr(U.available)?"Available "+dayStr(U.available,true)+".":"Move-in date: "+NK+"."}
 };
 
 
@@ -2073,7 +2163,7 @@ function tintOf(U,k){var m=U.moments,v;
   if(k==="wake"){v=m.wake.park_walk_min;return v==null?"u":v<=TINT.WAKE_WALK_MIN?"s":v>TINT.WAKE_WEAK_WALK_MIN?"w":"m"}
   if(k==="work"){v=m.work.sqft;return v==null?"u":(m.work.separate_bedroom&&v>=TINT.WORK_SQFT)?"s":(TINT.WORK_WEAK&&!m.work.separate_bedroom&&v<TINT.WORK_SQFT)?"w":"m"}
   if(k==="after"){v=m.after.restaurants_800m;return v==null?"u":v>=TINT.AFTER_RESTAURANTS?"s":v<TINT.AFTER_WEAK_RESTAURANTS?"w":"m"}
-  if(k==="night"){v=m.night.violent_vs_jamaica;var pr=U.parking&&U.parking.rank;return v==null?"u":(v<=TINT.NIGHT_JAMAICA_RATIO&&pr!=null&&pr>=TINT.NIGHT_PARKING_RANK)?"s":(pr!=null&&pr<TINT.NIGHT_WEAK_PARKING_RANK)?"w":"m"}
+  if(k==="night"){v=m.night.violent_vs_jamaica;var pr=parkRank(U);return v==null?"u":(v<=TINT.NIGHT_JAMAICA_RATIO&&pr!=null&&pr>=TINT.NIGHT_PARKING_RANK)?"s":(pr!=null&&pr<TINT.NIGHT_WEAK_PARKING_RANK)?"w":"m"}
   if(k==="sat"){return m.sat.bars_1600m==null||m.sat.restaurants_1600m==null?"u":(m.sat.bars_1600m>=TINT.SAT_BARS&&m.sat.restaurants_1600m>=TINT.SAT_RESTAURANTS)?"s":(m.sat.bars_1600m<TINT.SAT_WEAK_BARS&&m.sat.restaurants_1600m<TINT.SAT_WEAK_RESTAURANTS)?"w":"m"}
   if(!TINT.SUNDAY_BY_SCALE)return m.sun.drive_min==null?"u":"y";
   v=U.vs_queens&&U.vs_queens.drive_min;return v==null?"u":v>=TINT.SUNDAY_POINT?"s":v<=TINT.SUNDAY_WEAK_POINT?"w":"m"}
@@ -2084,7 +2174,7 @@ function capOf(U,k){var m=U.moments;
   if(k==="night")return parkWordShort(U);
   if(k==="sat")return m.sat.bars_1600m==null?NK:pl(m.sat.bars_1600m,"bar")+", "+(m.sat.restaurants_1600m==null?"restaurants not known":pl(m.sat.restaurants_1600m,"restaurant"))+" in a mile";
   return m.sun.drive_min==null?NK:r0(m.sun.drive_min)+" min drive, "+SAY.toll(m.sun)}
-function parkWordShort(U){var k=parkKind(U);return {garage:"Garage",gated:"Gated lot",covered:"Covered",lot:"Open lot",street:"Street",some:"Parking unclear",unknown:"Parking not known"}[k]}
+function parkWordShort(U){var k=parkKind(U),I=parkInfo(U);if(I.raw&&PK_SHORT[I.raw]&&!(I.raw==="unspecified"&&I.incAny))return PK_SHORT[I.raw];return {garage:"Garage",gated:"Gated lot",covered:"Covered",lot:"Open lot",offsite:"Off-site",street:"Street",some:I.incAny?"Included":"Parking unclear",unknown:"Parking not known"}[k]}
 function dayOfUnit(U){return SLOTS.map(function(sl){return {k:sl.k,t:sl.t,s:sl.s,cap:capOf(U,sl.k),tint:tintOf(U,sl.k)}})}
 
 /* Facts behind each tile: {t: sentence, url: source link when the data carries one, l: link label}. */
@@ -2112,7 +2202,7 @@ function factsOf(U,k){var m=U.moments,L=okUrl(U.links&&U.links.listing),o=[],a=U
     f(m.after.bookshops_1600m==null?"Bookshops: "+NK+".":pl(m.after.bookshops_1600m,"bookshop")+" within a mile.");
     f(m.after.markets_1600m==null?"Farmers' markets: "+NK+".":pl(m.after.markets_1600m,"farmers' market")+" within a mile.")}
   else if(k==="night"){var n=m.night;f(SAY.parking(U),parkKind(U)!=="unknown"?L:null,"listing");
-    if(U.parking&&U.parking.type&&String(U.parking.type).length>12&&String(U.parking.type).length<180)f("The listing's own words on parking: “"+U.parking.type+"”.",L,"listing");
+    if(parkQuote(U))f("The listing's own words on parking: “"+parkQuote(U)+"”.",L,"listing");
     f(deskOf(a)?"The building lists a "+deskOf(a)+(/24/.test(String(a.doorman||a.concierge||a.front_desk))?", around the clock":"")+".":"Doorman, concierge or front desk: "+NOT_PUB+".",deskOf(a)?L:null,"listing");
     f(a.controlled_access?"The building lists controlled entry.":"Controlled entry: "+NOT_PUB+".",a.controlled_access?L:null,"listing");
     f(SAY.crime(n));
@@ -2132,7 +2222,7 @@ function factsOf(U,k){var m=U.moments,L=okUrl(U.links&&U.links.listing),o=[],a=U
     f(m.sun.last_train_home_sat?"The last ride home from Jamaica on a Saturday night leaves at "+String(m.sun.last_train_home_sat).replace(" (+1 day)"," (after midnight)")+".":"Last ride home from Jamaica on a Saturday night: "+NK+".")}
   else{var d=m.sun;f(SAY.drive(d));
     f(d.drive_miles==null?"Distance by road: "+NK+".":r1(d.drive_miles)+" miles by road. The time is an estimate with clear roads.");
-    if(d.toll_items)f((d.toll_complete?"Tolls on the route: ":"The route crosses these toll points, and the total is not known yet: ")+d.toll_items.replace(/;\s*/g,", ")+".");
+    if(d.toll_items)f((d.toll_complete?"Tolls on the route: ":"The route crosses these toll points, and the total is not known yet: ")+(function(a){var n={},o=[];a.forEach(function(x){if(n[x])n[x]++;else{n[x]=1;o.push(x)}});return o.map(function(x){return x+(n[x]>1?" (both ways)":"")}).join(", ")})(String(d.toll_items).split(/;\s*/).filter(Boolean))+".");
     if(d.drive_min!=null)f("Four visits a month: "+hours(d.drive_min)+" hours in the car"+(d.toll_round_trip?", "+money(Math.round(4*d.toll_round_trip*100)/100)+" in tolls":"")+".");
     f(SAY.transit(d));
     if(d.transit_summary)f("One Saturday trip, step by step: "+d.transit_summary+".");
@@ -2223,7 +2313,7 @@ var MEASURE_LABEL={all_in:L_TOTAL,sqft:"Space",drive_min:"Drive to Mom and Dad",
 var POINT_WORD={1:"Much worse",2:"Worse",3:"About the same",4:"Better",5:"Much better"};
 var YEAR_DIFF_KEY={all_in:"all_in",sqft:"sqft",drive_min:"drive_min",transit_min:"transit_min",violent_crime:"violent_per_1000",property_crime:"property_per_1000",food_and_drink_nearby:"restaurants_800m",walk_to_green:"park_walk_min"};
 var RANK_WORD={4:"garage or gated lot",3:"covered parking",2:"open lot",1:"street parking"};
-function mLabel(m){return MEASURE_LABEL[m]||humanize(m)}
+function mLabel(m){return m==="all_in"?L_TOTAL:MEASURE_LABEL[m]||humanize(m)} /* (N12) never "All in": the map above is filled before L_TOTAL exists */
 function sgn(n,d){var v=d?Math.round(n*Math.pow(10,d))/Math.pow(10,d):Math.round(n);return (v>0?"+":v<0?"−":"")+Math.abs(v).toLocaleString("en-US")}
 function fmtDiff(m,d){if(d==null)return NK;
   if(m==="parking"){var r=Math.round(d);return r===0?"same kind":r>0?"a step up":pl(-r,"step")+" down"}
@@ -2252,7 +2342,7 @@ function fmtBand(m,b){
 function unitVal(U,m){var mo=U.moments;
   if(m==="all_in")return U.all_in;if(m==="sqft")return U.sqft;if(m==="drive_min")return mo.sun.drive_min;if(m==="transit_min")return mo.sun.transit_min;
   if(m==="violent_crime")return mo.night.violent_per_1000;if(m==="food_and_drink_nearby")return mo.after.restaurants_800m;
-  if(m==="walk_to_green")return mo.wake.park_walk_min;if(m==="parking")return U.parking&&U.parking.rank;
+  if(m==="walk_to_green")return mo.wake.park_walk_min;if(m==="parking")return parkRank(U);
   var s=SPEC_BY[m],d=U.vs_queens_diff&&U.vs_queens_diff[m];return s&&d!=null?s.queens_median+d:null}
 function pips(p){return '<span class="pips'+(p?' p'+p:'')+'" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>'}
 /* The yardstick is the typical Queens apartment. For a place outside Queens the page says "compared to staying in Queens"; for one that is in Queens, "compared to a typical Queens apartment". */
@@ -2281,20 +2371,24 @@ function scaleSheet(kind,id,m){
 
 /* ================= Shared pieces ================= */
 function tip(text){return '<p class="tip">'+IC.pup+'<span>'+text+'</span><i class="arr" aria-hidden="true">↓</i></p>'}
-function star(U){return rentStar(U)?'<span class="pstar" aria-label="special offer applies, see the rent terms">*</span>':''}
+/* (N2) The star (*) means one thing only: something to confirm before signing (an open gate fact). A rent that carries a special offer
+   has its own small tag, "offer", beside the figure; a rent already worded "with the current offer" needs no second mark. */
+function hasOffer(U){return rentStar(U)}
+function offerTag(U){return hasOffer(U)&&rentKind(U)!=="offer"?' <span class="otag" title="A special offer applies. The rent terms say what it is.">offer</span>':''}
+function offerTxt(U){return hasOffer(U)&&rentKind(U)!=="offer"?" (offer)":""}
 /* ---- the two prices, always as a pair and always in this order: rent first and larger, the total beside or beneath it ---- */
 function ab(v,f){return '<i class="ab">about</i> '+(f||pm)(v)}
-function pp(o){return '<div class="pp'+(o.cls?' '+o.cls:'')+'"><div class="pp-c pp-r"><span class="pp-l">'+o.rl+'</span><b>'+o.r+'</b>'+(o.rs||'')+'</div><div class="pp-c pp-t"><span class="pp-l">'+o.tl+'</span><b>'+o.t+'</b><small class="uf">'+WITH_UF+'</small>'+(o.ts||'')+'</div>'+(o.note?'<p class="pp-n">'+o.note+'</p>':'')+'</div>'}
+function pp(o){return '<div class="pp'+(o.cls?' '+o.cls:'')+'"><div class="pp-c pp-r"><span class="pp-l">'+o.rl+'</span><span class="pp-rb"><b>'+o.r+'</b>'+(o.rtag||'')+'</span>'+(o.rs||'')+'</div><div class="pp-c pp-t"><span class="pp-l">'+o.tl+'</span><b>'+o.t+'</b><small class="uf">'+WITH_UF+'</small>'+(o.ts||'')+'</div>'+(o.note?'<p class="pp-n">'+o.note+'</p>':'')+'</div>'}
 /* one apartment: the rent exact, the total rounded to $10 and said with "about" */
-function ppUnit(U,o){o=o||{};var r=rentOf(U),rt=rentTerm(U);return pp({rl:o.from?L_RENT+" from":L_RENT,r:(r==null?"Ask":money(r))+star(U),rs:rt?'<small class="rt">'+esc(rt)+'</small>':'',tl:capFirst(S_TOTAL),t:U.all_in==null?"Ask":ab(U.all_in),note:o.note,cls:o.cls})}
+function ppUnit(U,o){o=o||{};var r=rentOf(U),rt=rentTerm(U);return pp({rl:o.from?L_RENT+" from":L_RENT,r:(r==null?"Ask":money(r)),rtag:offerTag(U),rs:rt?'<small class="rt">'+esc(rt)+'</small>':'',tl:capFirst(S_TOTAL),t:U.all_in==null?"Ask":ab(U.all_in),note:o.note,cls:o.cls})}
 /* a set of apartments: the typical (median) rent and total, both to $10, each range small beneath */
 function ppTyp(f,typ,o){o=o||{};return pp({rl:typ?"Typical "+S_RENT:L_RENT,r:f.rent==null?"Ask":typ?m10(f.rent):money(f.rent),rs:typ&&!o.norange?rngFrom(f.rr,m10):"",tl:typ?"Typical "+S_TOTAL:capFirst(S_TOTAL),t:f.total==null?"Ask":ab(f.total,m10),ts:typ&&!o.norange?rngFrom(f.tr,m10):"",cls:o.cls})}
 /* both in one line of text */
-function pairLine(U){var r=rentOf(U),rt=rentTerm(U);return L_RENT+" "+(r==null?"not published":money(r))+(rentStar(U)?"*":"")+(rt?" "+rt:"")+" · "+(U.all_in==null?S_TOTAL+" not known":"about "+pm(U.all_in)+" "+WITH_UF)}
+function pairLine(U){var r=rentOf(U),rt=rentTerm(U);return L_RENT+" "+(r==null?"not published":money(r))+offerTxt(U)+(rt?" "+rt:"")+" · "+(U.all_in==null?S_TOTAL+" not known":"about "+pm(U.all_in)+" "+WITH_UF)}
 /* a cost the building does not publish could carry the total past the limit: the note belongs to the total */
 function couldPass(U){var un=arr(U.all_in_unknown);if(!un.length)return "";
   return discs(U).some(function(d){return /could pass/i.test(d.key)})||(U.all_in_likely!=null&&U.all_in_likely>CAP&&U.all_in<=CAP)?"could pass "+money(CAP)+" once "+list(un.map(function(x){return /fee/i.test(x)&&!/^building/i.test(x)?"the "+x:x}))+" "+(un.length>1||/s$/.test(un[0])?"are":"is")+" known":""}
-function sign(U,plain){var r=rentOf(U);return '<div class="sign'+(plain?' plain':'')+'"><div class="board"><small>'+L_RENT+'</small><strong'+(r==null?' class="nk"':'')+'>'+money(r)+star(U)+'</strong>'+(rentTerm(U)?'<small class="tot">'+esc(rentTerm(U))+'</small>':'')+'<small class="tot">'+(U.all_in==null?capFirst(S_TOTAL)+" not known":'about '+pm(U.all_in)+' '+WITH_UF)+'</small><em>'+esc(seenShort(U.price_seen_at))+'</em></div></div>'}
+function sign(U,plain){var r=rentOf(U);return '<div class="sign'+(plain?' plain':'')+'"><div class="board"><small>'+L_RENT+'</small><strong'+(r==null?' class="nk"':'')+'>'+money(r)+'</strong>'+offerTag(U)+(rentTerm(U)?'<small class="tot">'+esc(rentTerm(U))+'</small>':'')+'<small class="tot">'+(U.all_in==null?capFirst(S_TOTAL)+" not known":'about '+pm(U.all_in)+' '+WITH_UF)+'</small><em>'+esc(seenShort(U.price_seen_at))+'</em></div></div>'}
 /* ---- filters: the button, the "nothing matches" box, the small line under a strip ---- */
 var IC_FILTER='<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
 function fBtn(id){return '<button type="button" class="btn sm fbtn'+(FON?' on':'')+'"'+(id?' id="'+id+'"':'')+' data-act="filter-open" aria-haspopup="dialog" aria-label="Filter'+(FON?", "+FON+" on":"")+'">'+IC_FILTER+'<span>Filter'+(FON?' · '+FON:'')+'</span></button>'}
@@ -2312,6 +2406,12 @@ function quote(it){var bits=[];if(it.category)bits.push(CAT_WORD[it.category]||h
   var u=okUrl(it.url);
   var tx=scrub(it.excerpt||it.text||""),rec=/^\d/.test(tx);
   return '<p class="quote">'+(rec?"On record: ":"“")+esc(tx)+(rec?"":"”")+'<small>'+esc(bits.join(" · "))+(u?' · <a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(hostOf(u))+' ↗</a>':' · no link in the data')+(it.source?'<br>'+esc(it.source):'')+'</small></p>'}
+/* (N19) A record's raw figure ("23 (34.33 per 100 units; citywide 90th percentile 2.9)") is never printed: the reader sentence in avoid_points / pause_points says it.
+   Residents' own words stay as quotes; a record keeps only the link to where it was read. */
+function isRecord(it){return /^\s*\d/.test(String(it&&(it.excerpt||it.text)||""))}
+function evQuotes(items){var a=arr(items).filter(function(x){return x&&typeof x==="object"}),recs=a.filter(isRecord),seen={},links=[];
+  recs.forEach(function(it){var u=okUrl(it.url),k=(it.source||"")+"|"+(u?hostOf(u):"");if(seen[k])return;seen[k]=1;links.push(u?'<a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(it.source||hostOf(u))+' ↗</a>':esc(it.source||""))});
+  return a.filter(function(x){return !isRecord(x)}).map(quote).join("")+(links.filter(Boolean).length?'<p class="recsrc facts">Public records: '+links.filter(Boolean).join(" · ")+'</p>':'')}
 function plainCats(x){return String(x).replace(/\b[a-z]+(?:_[a-z]+)+\b/g,function(k){return (CAT_WORD[k]||k.replace(/_/g," ")).toLowerCase()})}
 function splitNotes(s){return String(s||"").split(/;\s*/).filter(Boolean).map(function(x){x=plainCats(x);return x.charAt(0).toUpperCase()+x.slice(1)})}
 
@@ -2360,10 +2460,10 @@ function hoodWhere(H){
 
 function avoidCard(U){var ev=U.evidence||{},L=okUrl(U.links&&U.links.listing);
   return '<article class="unit avoid"><div class="row"><div><span class="badge">Avoid</span><h4 style="margin-top:6px">'+esc(uName(U))+'</h4>'+(uSub(U)?'<small>'+esc(uSub(U))+'</small>':'')+'<p style="margin-top:4px">'+esc(SAY.size(U))+'</p></div>'+sign(U,true)+'</div>'+confLines(U)+rentLines(U)+
-    '<div class="panel pause"><h4>Why to avoid it</h4><ul>'+lis(arr(ev.avoid_points).map(pub).filter(Boolean).length?arr(ev.avoid_points).map(pub).filter(Boolean):splitNotes(ev.avoid_reasons||"Reason not recorded"))+'</ul>'+(ev.items||[]).map(quote).join("")+'</div>'+
+    '<div class="panel pause"><h4>Why to avoid it</h4><ul>'+lis(arr(ev.avoid_points).map(pub).filter(Boolean).length?arr(ev.avoid_points).map(pub).filter(Boolean):["The reason is not written up yet."])+'</ul>'+evQuotes(ev.items)+'</div>'+
     (L?'<a class="link" href="'+esc(L)+'" target="_blank" rel="noopener noreferrer">See the listing anyway ↗</a>':'')+'</article>'}
 function callItem(U,where){var L=okUrl(U.links&&U.links.listing),c=conf(U),q=tourQs(U);
-  return '<div class="callitem"><b>'+esc(uName(U))+'</b><span class="facts">'+esc([where,uSub(U),bedsWord(U)+(U.sqft!=null?", "+r0(U.sqft)+" sq ft":"")].filter(Boolean).join(" · "))+'</span><span class="cprice"><b style="font-size:16px">'+L_RENT+' '+money(rentOf(U))+star(U)+'</b>'+(rentTerm(U)?' '+esc(rentTerm(U)):'')+' · '+(U.all_in==null?S_TOTAL+' not known':'about '+pm(U.all_in)+' '+WITH_UF)+', '+esc(seenShort(U.price_seen_at))+'</span>'+
+  return '<div class="callitem"><b>'+esc(uName(U))+'</b><span class="facts">'+esc([where,uSub(U),bedsWord(U)+(U.sqft!=null?", "+r0(U.sqft)+" sq ft":"")].filter(Boolean).join(" · "))+'</span><span class="cprice"><b style="font-size:16px">'+L_RENT+' '+money(rentOf(U))+'</b>'+offerTag(U)+(rentTerm(U)?' '+esc(rentTerm(U)):'')+' · '+(U.all_in==null?S_TOTAL+' not known':'about '+pm(U.all_in)+' '+WITH_UF)+', '+esc(seenShort(U.price_seen_at))+'</span>'+
     confLines(U)+rentLines(U)+discLine(U)+
     (q.length?'<ul>'+lis(q)+'</ul>':'<span class="facts">The question to ask is not recorded yet.</span>')+contactBox(U)+
     (L?'<a class="link" href="'+esc(L)+'" target="_blank" rel="noopener noreferrer">Open the listing ↗</a>':'')+'</div>'}
@@ -2377,6 +2477,7 @@ function callBox(us,intro,whereFn,title,id,itemFn){if(!us.length)return "";
      TOTAL = unit.all_in (rent + required fees + pet rent + parking where known + estimated electricity, gas and internet)
    The total is partly an estimate, so it is said with "about". The budget, the ranking and the filters' "total" use it. */
 var L_RENT="Rent",L_TOTAL="Total with utilities and fees",S_RENT="rent",S_TOTAL="total",WITH_UF="with utilities and fees";
+var LEASE_LINE="A lease is usually a year. Where a rent is for a longer or shorter lease, it says so. You are choosing an experience to try, not forever."; /* (N22) */
 var PRICE_SENT="Rent is what the listing asks. The total adds fees, parking, pet rent and our estimate of electricity, gas and internet.";
 function rentOf(U){var ls=arr(U&&U.all_in_lines),i,R=obj(U&&U.rent);for(i=0;i<ls.length;i++)if(ls[i]&&/^rent\b/i.test(String(ls[i].line||""))&&ls[i].amount!=null&&isFinite(+ls[i].amount))return +ls[i].amount;
   return R.basis!=null&&isFinite(+R.basis)?+R.basis:R.listed!=null&&isFinite(+R.listed)?+R.listed:null}
@@ -2384,11 +2485,11 @@ function rentOf(U){var ls=arr(U&&U.all_in_lines),i,R=obj(U&&U.rent);for(i=0;i<ls
 var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 function stepDown(v,s){return Math.floor(v/s)*s}
 function stepUp(v,s){return Math.ceil(v/s)*s}
-UNITS.forEach(function(U){var a=U.amenities||{},pr=U.parking&&U.parking.rank,B=B_OF[U.id],r=B?bView(B).ratings:U.ratings,av=String(U.available==null?"":U.available);
+UNITS.forEach(function(U){var a=U.amenities||{},pk=parkInfo(U),B=B_OF[U.id],r=B?bView(B).ratings:U.ratings,av=String(U.available==null?"":U.available);
   U._f={rent:rentOf(U),total:U.all_in!=null&&isFinite(+U.all_in)?+U.all_in:null,beds:U.beds,sqft:U.sqft!=null&&isFinite(+U.sqft)?+U.sqft:null,mins:U.moments.sun.drive_min!=null?+U.moments.sun.drive_min:null,
-    move:av==="now"?"":/^\d{4}-\d\d-\d\d/.test(av)?av.slice(0,10):null, /* "" is today; null is a date the listing does not give */
-    park:pr!=null&&isFinite(+pr)?+pr:(U.parking&&U.parking.type?1.5:null), /* 4 garage or gated, 3 covered, 2 open lot, 1.5 parking of an unnamed kind, 1 street */
-    wd:a.in_unit_laundry==="yes",star:!!conf(U),rev:!!(r&&r.found_any!==false&&ratingRows(r).length),year:U.year};U._ok=true});
+    move:availNow(U)?"":/^\d{4}-\d\d-\d\d/.test(av)?av.slice(0,10):null, /* "" is available now (said so, or dated on or before the day the data was built: N10); null is a date the listing does not give */
+    park:pk.rank,pkAt:pk.at,pkCov:pk.cov, /* the kind she would park in (4 garage or gated, 3 covered, 2 open lot, 1.5 a kind not named, 1 street); whether any space is at the building; whether a garage or covered space is included or can be had */
+    wd:a.in_unit_laundry==="yes",wdTag:wdTagOnly(U),star:!!conf(U),rev:!!(r&&r.found_any!==false&&ratingRows(r).length),year:U.year};U._ok=true});
 var RNG=(function(){var f=function(k){return function(u){return u._f[k]}},lo=function(k,d){var v=minOf(UNITS,f(k));return v==null?d:v},hi=function(k,d){var v=maxOf(UNITS,f(k));return v==null?d:v};
   var o={rent:{min:stepDown(lo("rent",1500),50),max:stepUp(hi("rent",CAP),50),step:50},total:{min:stepDown(lo("total",1500),50),max:Math.max(CAP,stepUp(hi("total",CAP),50)),step:50},
     mins:{min:Math.max(5,stepUp(lo("mins",5),5)),max:stepUp(hi("mins",120),5),step:5},sqft:{min:stepDown(lo("sqft",350),50),max:stepDown(hi("sqft",900),50),step:50}};
@@ -2399,7 +2500,7 @@ var MOVE_OPTS=(function(){var ds=UNITS.map(function(u){return u._f.move}).filter
   if(keep("now"))o.push(["now","Available now"]);
   if(last){[last.slice(0,8)+"01",last.slice(0,8)+"15"].forEach(function(c){if(keep(c))o.push([c,"By "+dayStr(c)])})}
   return o})();
-var PARK_OPTS=[["any","Any"],["at","Parking at the building"],["covered","Garage or covered"]],BED_OPTS=[["any","Either"],["0","Studio"],["1","1 bedroom"]];
+var PARK_OPTS=[["any","Any"],["at","Parking at the building"],["covered","A garage or covered space"]],BED_OPTS=[["any","Either"],["0","Studio"],["1","1 bedroom"]];
 var FDEF={rent:RNG.rent.max,total:RNG.total.max,beds:"any",sqft:RNG.sqft.min,nosize:false,mins:RNG.mins.max,move:"any",park:"any",wd:false,clear:false,rev:false,exps:[],mine:false};
 function fClone(f){var o={},k;for(k in FDEF)o[k]=Array.isArray(FDEF[k])?arr(f[k]).slice():f[k];return o}
 /* a stored filter is kept only when it is one the page can still offer with today's data */
@@ -2418,8 +2519,8 @@ function fPass(f,U){var x=U._f;if(!x)return true;
   if(x.sqft==null){if(f.nosize)return false}else if(x.sqft<f.sqft)return false;
   if(f.mins<RNG.mins.max&&x.mins!=null&&Math.round(x.mins)>f.mins)return false;
   if(f.move!=="any"&&(x.move==null||(f.move==="now"?x.move!=="":x.move>f.move)))return false;
-  if(f.park==="covered"&&!(x.park>=3))return false;
-  if(f.park==="at"&&!(x.park>=1.5))return false;
+  if(f.park==="covered"&&!x.pkCov)return false;
+  if(f.park==="at"&&!x.pkAt)return false;
   if(f.wd&&!x.wd)return false;
   if(f.clear&&x.star)return false;
   if(f.rev&&!x.rev)return false;
@@ -2448,7 +2549,7 @@ function fWhy(f,U){var x=U._f,o=[];if(!x)return o;
   if(x.sqft==null){if(f.nosize)o.push("size not published")}else if(x.sqft<f.sqft)o.push(r0(x.sqft)+" sq ft is under "+f.sqft);
   if(f.mins<RNG.mins.max&&x.mins!=null&&Math.round(x.mins)>f.mins)o.push(r0(x.mins)+" minutes by car is past "+f.mins);
   if(f.move!=="any"&&(x.move==null||(f.move==="now"?x.move!=="":x.move>f.move)))o.push(x.move==null?"move-in date not published":"available from "+dayStr(x.move));
-  if((f.park==="covered"&&!(x.park>=3))||(f.park==="at"&&!(x.park>=1.5)))o.push(x.park==null?"parking not published":parkWord(U).toLowerCase());
+  if((f.park==="covered"&&!x.pkCov)||(f.park==="at"&&!x.pkAt))o.push(x.park==null?"parking not published":f.park==="covered"?"no garage or covered parking listed":parkWord(U).toLowerCase());
   if(f.wd&&!x.wd)o.push("no washer and dryer listed in the apartment");
   if(f.clear&&x.star)o.push("something is still to confirm");
   if(f.rev&&!x.rev)o.push("no reviews found online");
@@ -2519,22 +2620,22 @@ function rentTerms(U){var R=U.rent||{},lm=leaseMonths(U),p12=price12(U),lt=lease
   if(offerText(U))h+='<dt>The offer, in the building\'s words</dt><dd><blockquote>'+esc(offerText(U))+'</blockquote></dd>';
   h+='<dt>Rent shown on this page</dt><dd>'+money(R.basis!=null?R.basis:R.listed)+' a month ('+(rentKind(U)==="12"?"the 12-month lease price":R.basis_kind==="net_effective"?"the average after the free months":"as listed")+')</dd>';
   h+='<dt>Rent in a month you pay</dt><dd>'+(R.gross!=null?money(R.gross)+' a month before any free months':NK)+'</dd>';
-  h+='<dt>Free months and lease length</dt><dd>'+(R.free_text?esc(String(R.free_text))+' free':R.free_months!=null?esc((R.offer_up_to?"up to ":"")+String(R.free_months))+' free':"Free months "+NOT_PUB)+', '+(lm!=null?'on a '+r1(lm)+'-month lease'+(rentKind(U)==="12"?' for the listing\'s price':''):'lease length '+NK.toLowerCase())+'</dd>';
-  if(rentKind(U)==="12"&&R.listed!=null)h+='<dt>The listing\'s own price</dt><dd>'+money(R.listed)+' a month'+(lm!=null&&Math.round(lm)!==12?' on a '+r1(lm)+'-month lease':'')+'</dd>';
+  h+='<dt>Free months and lease length</dt><dd>'+(R.free_text?esc(String(R.free_text))+' free':R.free_months!=null?esc((R.offer_up_to?"up to ":"")+String(R.free_months))+' free':"Free months "+NOT_PUB)+', '+(offerLeaseMonths(U)!=null?'on '+aMonths(offerLeaseMonths(U))+' lease':'lease length for the offer '+NK.toLowerCase())+'</dd>';
+  if(rentKind(U)==="12"&&R.listed!=null)h+='<dt>The listing\'s own price</dt><dd>'+money(R.listed)+' a month'+(lm!=null&&Math.round(lm)!==12?' on '+aMonths(lm)+' lease':'')+'</dd>';
   if(p12!=null||(lm!=null&&Math.round(lm)!==12))h+='<dt>Price on a 12-month lease</dt><dd>'+(p12!=null?money(p12)+' a month':NOT_PUB.charAt(0).toUpperCase()+NOT_PUB.slice(1))+'</dd>';
   if(lt)h+='<dt>The lease term, in the building\'s words</dt><dd><blockquote>'+esc(lt)+'</blockquote></dd>';
   h+='<dt>First full payment due</dt><dd>'+(R.first_full_payment_date?esc(dayStr(R.first_full_payment_date,true)||R.first_full_payment_date):NK)+payNote(R.first_full_payment_note)+'</dd></dl>';
   return '<div class="rentfold">'+howHtml(h+'</div>',st?"The offer in full":"The lease terms")+'</div>'}
 function loveList(U){var o=[],a=U.amenities||{},L=okUrl(U.links&&U.links.listing);
   SPEC_OPEN.forEach(function(s){var p=U.vs_queens&&U.vs_queens[s.measure],d=U.vs_queens_diff&&U.vs_queens_diff[s.measure];if(p!=null&&p>=4&&s.measure!=="parking")o.push({t:mLabel(s.measure)+": "+POINT_WORD[Math.round(p)].toLowerCase()+" than "+qWord(U)+" ("+fmtDiff(s.measure,d)+")"})});
-  if(a.in_unit_laundry==="yes")o.push({t:"Washer and dryer in the apartment",url:L,l:"listing"});
+  if(a.in_unit_laundry==="yes")o.push({t:wdTagOnly(U)?"A washer and dryer are on the listing site's feature list: confirm they are in the apartment":"Washer and dryer in the apartment",url:L,l:"listing"});
   if(deskOf(a))o.push({t:"A "+deskOf(a),url:L,l:"listing"});
   if(a.pool)o.push({t:"A pool",url:L,l:"listing"});
   if(a.dog_amenities&&a.dog_amenities!=="yes")o.push({t:"For the dog, in the building: "+a.dog_amenities.replace(/;\s*/g,", "),url:L,l:"listing"});
   if(a.outdoor_space)o.push({t:"Outdoor space listed",url:L,l:"listing"});
   return o}
 function pauseList(U){var o=[];
-  var pp0=arr(U.evidence&&U.evidence.pause_points).map(pub).filter(Boolean);(pp0.length?pp0:splitNotes(U.evidence&&U.evidence.pause_notes)).forEach(function(x){o.push({t:x})});
+  arr(U.evidence&&U.evidence.pause_points).map(pub).filter(Boolean).forEach(function(x){o.push({t:x})}); /* reader sentences only; the raw note string is never printed */
   SPEC_OPEN.forEach(function(s){var p=U.vs_queens&&U.vs_queens[s.measure],d=U.vs_queens_diff&&U.vs_queens_diff[s.measure];if(p!=null&&p<=2)o.push({t:mLabel(s.measure)+": "+POINT_WORD[Math.round(p)].toLowerCase()+" than "+qWord(U)+" ("+(s.measure==="parking"?parkWord(U).toLowerCase():fmtDiff(s.measure,d))+")"})});
   if((U.all_in_unknown||[]).length)o.push({t:"Not in the price yet: "+list(U.all_in_unknown)});
   if(U.rent&&U.rent.needs_call)o.push({t:"The rent offer needs a call before the price can be trusted"});
@@ -2542,12 +2643,16 @@ function pauseList(U){var o=[];
   if(es==="none")o.push({t:NO_EVIDENCE});
   else if(es==="unchecked")o.push({t:"Reviews and public records for this building have not been checked yet"});
   return o}
+/* (N6) A washer and dryer named only in a listing site's feature list is said as that, to confirm, the way an elevator is.
+   Read from the laundry basis when the data sends one (amenities.in_unit_laundry_basis / laundry_basis / in_unit_laundry_listing_site_only), or from a disclosure about it. */
+function wdTagOnly(U){var a=obj(U&&U.amenities),b=String(first(a,["in_unit_laundry_basis","laundry_basis","washer_dryer_basis","in_unit_laundry_source"])||"");
+  return a.in_unit_laundry==="yes"&&(a.in_unit_laundry_listing_site_only===true||a.laundry_listing_site_only===true||/listing[ _-]?site|aggregator|feature[ _]list|appliance|tag/i.test(b)||discs(U).some(function(d){return /laundry|washer/i.test(d.code+" "+d.key)&&/listing site|feature list|confirm/i.test(d.what+" "+d.why)}))}
 function buildingFacts(U){var a=U.amenities||{},o=[],L=okUrl(U.links&&U.links.listing),B=okUrl(U.links&&U.links.building);
   o.push({t:"Address: "+(U.address||NK)+(U.unit?", apartment "+U.unit:"")+".",url:L,l:"listing"});
   o.push({t:SAY.available(U)});
   o.push({t:openFact(U,OPEN_ELEV)?"Elevator: not confirmed for this apartment. See “Still to confirm”.":"Elevator: "+(U.elevator&&U.elevator.value||NOT_PUB)+(U.elevator&&U.elevator.basis?" ("+(BASIS_WORD[U.elevator.basis]||U.elevator.basis)+")":"")+".",url:B||L,l:B?"building page":"listing"});
   o.push({t:"Dogs: "+(openFact(U,OPEN_DOG)?"the policy is not confirmed, ask":(U.dog&&U.dog.allowed||NOT_PUB)+(U.dog&&U.dog.basis?" ("+(BASIS_WORD[U.dog.basis]||U.dog.basis)+")":""))+"; "+(U.dog&&U.dog.weight_limit_lb!=null?"weight limit "+(U.dog.weight_limit_lb==="no limit"?"none":U.dog.weight_limit_lb+" lb"):smallDog(U)?SMALL_DOG.charAt(0).toLowerCase()+SMALL_DOG.slice(1):"weight limit "+NOT_PUB)+"; pet rent "+(U.dog&&U.dog.pet_rent!=null?(Number(U.dog.pet_rent)===0?"none":money(U.dog.pet_rent)+" a month"):NOT_PUB)+".",url:L,l:"listing"});
-  o.push({t:"Laundry: "+(a.in_unit_laundry==="yes"?"in the apartment":a.in_unit_laundry==="on_site_only"?"in the building, not in the apartment":NK.toLowerCase())+"."});
+  o.push({t:"Laundry: "+(a.in_unit_laundry==="yes"?(wdTagOnly(U)?"a washer and dryer are on the listing site's feature list; confirm they are in the apartment":"in the apartment"):a.in_unit_laundry==="on_site_only"?"in the building, not in the apartment":NK.toLowerCase())+"."});
   o.push({t:"Gym: "+(a.gym?"listed":NK.toLowerCase())+". Package room: "+(a.package_room?"listed":NK.toLowerCase())+". Lounge or co-working: "+(a.lounge_or_coworking?"listed":NK.toLowerCase())+"."});
   o.push({t:"Built: "+(a.year_built!=null?Math.round(a.year_built):NK.toLowerCase())+". Floors in the building: "+(a.building_floors!=null?(a.building_floors_at_least===true?"at least ":"")+Math.round(a.building_floors):NOT_PUB)+"."});
   o.push({t:"Managed by: "+(a.manager_name||NOT_PUB)+".",url:B&&B!==L?B:null,l:"building page"});
@@ -2588,25 +2693,28 @@ var RULE_SHORT={overnight_parking:"overnight street parking restricted",resident
 var THEME_WORD={dogs_green:"Dogs and green space",social_life:"Social life",car_crime:"Car crime",value:"Value for money",travel:"Getting around"};
 function themeWord(t){return THEME_WORD[t]||humanize(t)}
 /* unit.ratings.platforms, most reviews first; rows without a platform name or a rating are left out */
+function sameSite(platform,url){var p=String(platform||"").toLowerCase().replace(/\.(com|org|net)$/,"").replace(/[^a-z0-9]/g,""),hs=hostOf(url).toLowerCase().split(".").map(function(x){return x.replace(/[^a-z0-9]/g,"")}).filter(function(x){return x.length>2});if(!p||!hs.length)return false;
+  return hs.some(function(h){return h===p||(h.indexOf(p)===0&&h.length-p.length<=1)||(h.length>=4&&p.indexOf(h)===0)})||(/google/.test(p)&&/google|goo\.gl|g\.page/.test(hostOf(url)))}
 function ratingRows(r){return arr(r&&r.platforms).filter(function(x){return x&&x.platform&&x.rating!=null&&isFinite(+x.rating)}).map(function(x,i){return [x,i]}).sort(function(a,b){return ((b[0].count==null?-1:+b[0].count)-(a[0].count==null?-1:+a[0].count))||(a[1]-b[1])}).map(function(x){return x[0]})}
 function reviewsBox(U){var r=U.ratings||{},ps=ratingRows(r);
   return '<div id="bld-reviews"><h4 class="costh">Reviews of the building</h4>'+(ps.length&&r.found_any!==false?'<ul class="rules">'+ps.map(function(x){var u=okUrl(x.url);
-      return '<li>'+(u?'<a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(x.platform)+' ↗</a>':'<b>'+esc(x.platform)+'</b>')+': '+esc(Number(x.rating).toFixed(1))+' out of 5'+(x.count!=null?' · '+esc(pl(Math.round(x.count),"review")):'')+(x.as_of?' <small class="facts">seen '+esc(dayStr(x.as_of,true)||String(x.as_of))+'</small>':'')+'</li>'}).join("")+'</ul><p class="helper" style="margin-top:6px">As each site shows it.</p>':'<p class="helper">'+esc(HL.reviews(r))+'.</p>')+'</div>'}
+      var own=u&&sameSite(x.platform,u); /* (N23) a rating read on another site is not linked as if the link were the review site itself */
+      return '<li>'+(own?'<a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(x.platform)+' ↗</a>':'<b>'+esc(x.platform)+'</b>')+': '+esc(Number(x.rating).toFixed(1))+' out of 5'+(x.count!=null?' · '+esc(pl(Math.round(x.count),"review")):'')+(u&&!own?', as shown on <a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(hostOf(u))+' ↗</a>':'')+(x.as_of?' <small class="facts">seen '+esc(dayStr(x.as_of,true)||String(x.as_of))+'</small>':'')+'</li>'}).join("")+'</ul><p class="helper" style="margin-top:6px">As each site shows it.</p>':'<p class="helper">'+esc(HL.reviews(r))+'.</p>')+'</div>'}
 var HL_MAX=64,HL_AIM=44; /* a headline is read whole when the row is closed: two lines of a phone at most */
 var HL={
-  cost:function(U){var r=rentOf(U);return r==null&&U.all_in==null?"not published, ask":S_RENT+" "+(r==null?"not published":money(r))+(rentStar(U)?"*":"")+" · "+S_TOTAL+" "+(U.all_in==null?"not known":"about "+pm(U.all_in))},
+  cost:function(U){var r=rentOf(U);return r==null&&U.all_in==null?"not published, ask":S_RENT+" "+(r==null?"not published":money(r))+offerTxt(U)+" · "+S_TOTAL+" "+(U.all_in==null?"not known":"about "+pm(U.all_in))},
   trip:function(s){if(!s||s.drive_min==null)return "drive time not known";var t=s.toll_round_trip;
     return "about "+r0(s.drive_min)+" min, "+(t==null?"tolls not fully known":Number(t)===0?"no tolls":tollMoney(t)+" in tolls")},
-  parking:function(U){var k=parkKind(U),f=U.parking&&U.parking.fee;if(k==="unknown")return "not published, ask";
-    return PARK_WORD[k].toLowerCase()+", "+(f==null?"fee not published, ask":Number(f)===0?"no monthly charge":money(f)+" a month")},
+  parking:function(U){var k=parkKind(U);if(k==="unknown")return "not published, ask";var s=parkSentence(U);
+    return s.length<=HL_MAX?s.charAt(0).toLowerCase()+s.slice(1):parkWord(U).toLowerCase()+", "+parkFeeShort(U)},
   dog:function(U){var d=U.dog||{},w=d.weight_limit_lb;if(openFact(U,OPEN_DOG))return "dog policy not confirmed, ask";if(d.allowed!=="yes")return "not stated, ask";
     return "allowed, "+(w==="no limit"?"no weight limit":w!=null&&isFinite(+w)?"up to "+r0(+w)+" lb":smallDog(U)?"small dogs, no weight given":"weight limit not stated")},
   building:function(U){var a=U.amenities||{},o=[];
-    if(openFact(U,OPEN_ELEV))o.push("elevator not confirmed");else if(U.elevator&&U.elevator.value==="yes")o.push("elevator");if(a.in_unit_laundry==="yes")o.push("washer-dryer in the apartment");if(a.gym)o.push("gym");if(a.pool)o.push("pool");
+    if(openFact(U,OPEN_ELEV))o.push("elevator not confirmed");else if(U.elevator&&U.elevator.value==="yes")o.push("elevator");if(a.in_unit_laundry==="yes")o.push(wdTagOnly(U)?"washer-dryer listed, to confirm":"washer-dryer in the apartment");if(a.gym)o.push("gym");if(a.pool)o.push("pool");
     if(deskOf(a))o.push(deskOf(a));if(a.outdoor_space)o.push("outdoor space");
     return o.length?o.slice(0,3).join(", "):"details not published"},
-  /* the count behind the asterisk: open gate facts plus a rent offer that needs a word with the office; then the things to ask */
-  confirm:function(U){var c=confs(U).length+(rentStar(U)?1:0),d=discsShown(U).length;return [c?pl(c,"thing")+" to confirm":"",d?d+" to ask":""].filter(Boolean).join(" · ")||"nothing"},
+  /* the count behind the star: open gate facts only (N2); then the things to ask */
+  confirm:function(U){var c=confs(U).length,d=discsShown(U).length;return [c?pl(c,"thing")+" to confirm":"",d?d+" to ask":""].filter(Boolean).join(" · ")||"nothing"},
   day:function(U){var d=dayOfUnit(U),c=function(t){return d.filter(function(x){return x.tint===t}).length},o=[c("s")?c("s")+" strong":"",c("m")?c("m")+" mixed":"",c("w")?c("w")+" weak":""].filter(Boolean);
     return pl(d.length,"moment")+(o.length?": "+o.join(", "):"")},
   love:function(nl,np){return [nl?nl+" to love":"",np?np+" to weigh":""].filter(Boolean).join(", ")||"nothing recorded"},
@@ -2622,7 +2730,7 @@ var HL={
   /* what most of the comments are about: said inside the row, not in its headline */
   voicesTopic:function(H){var th={},top=null;arr(H.local&&H.local.voices).forEach(function(v){var t=v&&v.theme;if(t&&!CRIME_RE.test(String(t).replace(/_/g," "))&&!/safety/i.test(t))th[t]=(th[t]||0)+1});
     Object.keys(th).forEach(function(t){if(!top||th[t]>th[top])top=t});return top?themeWord(top):""},
-  rules:function(H){var a=rulesOf(H,"parking_rules"),o=[];if(!a.length)return "not found, ask";
+  rules:function(H){var a=rulesOf(H,"parking_rules"),o=[];if(!a.length)return "none on record for this town: ask the building";
     RULE_FLAG.forEach(function(F){if(a.some(function(r){return r.rule===F.rule&&F.re.test(r.summary||"")}))o.push(RULE_SHORT[F.rule]||F.label.toLowerCase())});
     return o.length?o[0]:pl(a.length,"rule")+" on record"},
   /* a quote is shown whole or not at all: the first description with a sentence short enough, else a count */
@@ -2639,7 +2747,7 @@ var HL={
   places:function(H){var f=figsOf(shown(H.units));return f?(f.n>1?"typical ":"")+S_RENT+" "+m10(f.rent)+" · "+S_TOTAL+" about "+m10(f.total):"nothing to tour"},
   count:function(n,w){return pl(n,w)},
   out:function(t){var o=[];t=t||{};if(t.restaurants_800m!=null)o.push(pl(r0(t.restaurants_800m),"restaurant")+" on foot");if(t.park_walk_min!=null)o.push("green "+Math.max(1,r0(t.park_walk_min))+" min");return o.length?o.join(", "):"not known yet"},
-  hoodRules:function(H){var a=rulesOf(H,"parking_rules"),d=rulesOf(H,"dog_rules");return a.length?HL.rules(H):d.length?"parking rules not found, ask":"not found, ask"},
+  hoodRules:function(H){var a=rulesOf(H,"parking_rules"),d=rulesOf(H,"dog_rules");return a.length?HL.rules(H):d.length?"no parking rules on record: ask the building":"none on record for this town: ask the building"},
   lifts:function(nl,np){return HL.love(nl,np)},
   /* what review sites show for the building: the site with the most reviews, then how many other sites. Never our judgement. */
   reviews:function(r){r=r||{};var ps=ratingRows(r),t=ps[0];
@@ -2677,8 +2785,8 @@ function soloOpen(H){return !!(H.single_building&&H.bldgs.length===1&&nToConfirm
 function hoodCard(H,Y,pick){var k=shown(H.units).length,N=H.units.length,none=!k,top=pick!=null&&pick>-1&&pick<3,line=sentences(calm(hoodLine(H)))[0]||"",nb=hBldgs(H).length;
   return '<a class="hood card'+(none?' none':'')+(top?' pickc':'')+'" href="'+href("hood",H.id)+'"><div class="hd"><span class="pinl" style="background:'+(N?Y.color:"#fff")+'">'+H.n+'</span><div><h3>'+esc(hoodTitle(H))+'</h3></div>'+(top&&pick===0&&Y.ranked&&Y.hoods.length>1&&!soloOpen(H)?'<span class="pick">Top pick</span>':'')+'</div><small class="hsub">'+ymark(Y,13)+esc([hoodPart(H)?hoodWhere(H):H.state,N?(k===N?(H.single_building||H.bldgs.length===1?"1 building, "+pl(N,"apartment"):pl(H.bldgs.length,"building")+", "+pl(N,"apartment")):pl(nb,"building")+", "+k+" of "+pl(N,"apartment")+" match"):"nothing to tour",H.avoid.length?H.avoid.length+" to avoid":""].filter(Boolean).join(" · "))+'</small>'+safeBadge(H)+(line?'<p class="l2">'+esc(line)+'</p>':'')+hoodChips(H)+'</a>'}
 /* On a card the asterisk is one short line: what to confirm, and a word on the rent when it carries an offer. */
-function cardStar(U){var c=confs(U),R=U.rent||{};if(!c.length&&!rentStar(U))return "";
-  return '<p class="confl'+(c.length?'':' rent')+'"><b>* '+(c.length?'To confirm: '+esc(c.map(cWhat).join("; "))+'.':'')+'</b>'+(rentStar(U)?' '+esc(offerLine(U)):'')+'</p>'}
+function cardStar(U){var c=confs(U);
+  return (c.length?'<p class="confl"><b>* To confirm: '+esc(c.map(cWhat).join("; "))+'.</b></p>':'')+(hasOffer(U)?'<p class="offl"><b>Offer:</b> '+esc(offerLine(U))+'</p>':'')}
 /* A building in a neighborhood's list: name, from-price, how many apartments made the list, three facts, and the asterisk when every apartment there shares it. */
 function bldgStar(us){var a=us.map(cardStar);return a[0]&&a.every(function(x){return x===a[0]})?a[0]:""}
 /* the apartments of a building that pass the filters (all of them when none does: the building is then reached by its own link) */
@@ -2781,8 +2889,9 @@ var INFO_I='<i class="info" aria-hidden="true">i</i>';
 function kfacts(cells,dark){cells=cells.filter(Boolean);var anyT=cells.some(function(c){return c.t});
   return '<div class="kf'+(dark?' dark':'')+'" id="keyfacts">'+cells.map(function(c){var inner=(anyT?'<i class="kft"'+(c.t?'':' aria-hidden="true"')+'>'+(c.t||'&nbsp;')+'</i> ':'')+'<b>'+c.b+'</b> <span>'+c.s+'</span>'+(c.r?' '+c.r:'')+(c.act?INFO_I:'');
     return c.act?'<button type="button" class="kfc" data-act="'+c.act+'"'+(c.attr||'')+' aria-haspopup="dialog">'+inner+'</button>':'<div class="kfc">'+inner+'</div>'}).join("")+'</div>'}
-function tollFact(o,typ,kind,id){var t=o&&o.toll_round_trip;if(t==null)return {b:"Ask",s:"tolls not fully known"};if(Number(t)===0)return {t:typ?"typical":"",b:"No tolls",s:"on the drive"};
-  return {t:typ?"typical":"",b:tollMoney(t),s:"tolls, round trip",r:'<small class="rng">with NY E-ZPass</small>',act:"toll-info",attr:' data-kind="'+kind+'" data-id="'+esc(id)+'"'}}
+function tollRange(o,r){r=r||(o&&(o.toll_round_trip_range||o.toll_range));if(!Array.isArray(r)||r.length<2||r[0]==null||r[1]==null||!isFinite(+r[0])||!isFinite(+r[1]))return null;r=[+r[0],+r[1]];return tollMoney(r[0])!==tollMoney(r[1])?r:null}
+function tollFact(o,typ,kind,id,range){var t=o&&o.toll_round_trip,tr=tollRange(o,range);if(t==null)return {b:"Ask",s:"tolls not fully known"};if(Number(t)===0&&!tr)return {t:typ?"typical":"",b:"No tolls",s:"on the drive"};
+  return {t:typ||tr?"typical":"",b:tollMoney(t),s:"tolls, round trip",r:(tr?'<small class="rng tollr">'+(tr[0]===0?"$0":tollMoney(tr[0]))+'<span class="sr"> to </span><span aria-hidden="true">–</span>'+tollMoney(tr[1])+'</small> ':'')+'<small class="rng">with NY E-ZPass</small>',act:"toll-info",attr:' data-kind="'+kind+'" data-id="'+esc(id)+'"'}}
 function tollSheet(o,name,typ){var t=o.toll_round_trip;
   return shTop("Tolls, round trip",esc(name))+'<p>'+(typ?"A typical drive":"The drive")+' to Mom and Dad and back costs '+money(t)+' in tolls with a New York E-ZPass: the small tag on the windshield that pays each toll at the lower rate.</p>'+howHtml('<p>An out-of-state tag pays more at MTA crossings.</p><p>'+esc(capFirst("tolls from "+SOURCES.tolls))+'.</p>')}
 function allInSheet(us,name){return shTop(L_TOTAL,esc(name))+'<p style="margin-bottom:8px">'+esc(PRICE_SENT)+'</p>'+allInLine(us)+'<p class="helper" style="margin-top:8px">The '+S_TOTAL+' is said with “about” because part of it is an estimate. A cost a building has not published is left out, never counted as $0.</p>'}
@@ -2799,16 +2908,27 @@ function distShort(m){if(m==null)return null;if(m<=1600)return Math.max(1,Math.r
 /* "At a glance": what is around, as icon facts. Always the same facts in the same places; one that the data lacks is left out. */
 /* "At a glance" reads neighborhoods[].at_a_glance when the data has it (figures measured from the buildings shown: label, value, unit, scope); otherwise the neighborhood's traits. */
 function glanceIcon(l){l=String(l||"").toLowerCase();return /restaurant|\bbars?\b|food|eat/.test(l)?"fork":/dog/.test(l)?"dog":/parking|\bcar\b/.test(l)?"parking":/park|green|woods/.test(l)?"park":/supermarket|grocer/.test(l)?"bag":/train|bus|transit|station/.test(l)?"train":/coffee|caf/.test(l)?"coffee":/water|beach/.test(l)?"water":"dot"}
+/* (N3) The nearest station, named with its system: "to PATH (Journal Square)", "to the subway (Elmhurst Av)", "to light rail (…)", "to the train (…)".
+   The system and the name come from the item (system / mode / station_system, station / station_name / name). An item with neither measures
+   commuter-rail stations only, so it is never called "a train station": it says "a commuter train station". */
+var SYS_WORD=[[/\bpath\b/i,"PATH"],[/light[ _-]?rail|hblr|tram|river ?line/i,"light rail"],[/metro-north|lirr|long island rail|nj ?transit|amtrak|commuter|^train$|^rail\b/i,"the train"],[/subway|\bmta\b/i,"the subway"],[/ferry/i,"the ferry"],[/\bbus\b/i,"the bus"],[/rail|train/i,"the train"]];
+function sysWord(s){s=String(s||"");for(var i=0;i<SYS_WORD.length;i++)if(SYS_WORD[i][0].test(s))return SYS_WORD[i][1];return ""}
+var ST_SYS_KEYS=["kind","station_kind","train_station_kind","mode","system","station_system","train_station_system","network"];
+function stationLabel(x,lb){var sys=first(x,ST_SYS_KEYS),nm=first(x,["station","station_name","train_station","name","nearest_station"]),w=sysWord(sys),tail=/ from .*$/.exec(lb);
+  if(w)return "to "+w+(nm?" ("+String(nm).replace(/\s+station$/i,"")+")":"")+(tail?tail[0]:"");
+  return /\bto (a|the nearest) train station\b/.test(lb)?lb.replace(/\bto (a|the nearest) train station\b/,"to a commuter train station"):lb}
 function glance(H){var t=H.traits||{},o=[],ps=parkShort(H),g=arr(H.at_a_glance).filter(function(x){return x&&typeof x==="object"&&((x.text!=null&&pub(x.text)!=="")||(x.value!=null&&String(x.value)!==""))&&pub(x.label)!==""});
   /* until at_a_glance arrives: figures measured from the buildings shown (shown_figures) before the neighborhood's own (traits); a dog area in every shown building is said in place of the distance to a public dog park */
   var sf=obj(H.shown_figures),v=function(k,k2){return sf[k]!=null?sf[k]:t[k2||k]},own=sf.buildings_with_own_dog_area,nb=sf.buildings,tm=H.transit_min;
-  if(g.length){g.forEach(function(x){var tx=pub(x.text);o.push([x.icon||glanceIcon(x.key||x.label),tx||String(x.value)+(x.unit?" "+x.unit:""),tx?pub(x.label):[x.label,x.scope].filter(Boolean).join(", ")])}); /* at_a_glance: the bold words, then the small words, as the data gives them */
+  if(g.length){g.forEach(function(x){var tx=pub(x.text),lb=agree(tx?pub(x.label):[x.label,x.scope].filter(Boolean).join(", ")),isSt=/station|train|transit/.test(String(x.key||"")),hasSys=!!sysWord(first(x,ST_SYS_KEYS)),sfSt=isSt&&!hasSys&&sysWord(first(sf,["train_station_kind","train_station_system"]))&&sf.train_station_m!=null,
+        st=isSt?stationLabel(sfSt?{key:x.key,system:first(sf,["train_station_kind","train_station_system"]),station:sf.train_station}:x,lb):null;
+      o.push([x.icon||glanceIcon(x.key||x.label),sfSt?distShort(+sf.train_station_m):tx||String(x.value)+(x.unit?" "+x.unit:""),st||lb])}); /* at_a_glance: the bold words, then the small words, as the data gives them */
     if(tm!=null)o.push(["train",r0(tm)+" min","to Mom and Dad by train and bus"])}
   else{
     if(v("restaurants_800m")!=null)o.push(["fork",pl(r0(v("restaurants_800m")),"restaurant")+(r0(v("bars_800m"))>0?", "+pl(r0(v("bars_800m")),"bar"):""),"within a 10-minute walk"]);
     if(v("park_walk_min")!=null)o.push(["park",Math.max(1,r0(v("park_walk_min")))+" min walk","to a park"]);
     if(own>0&&nb>0&&own>=nb)o.push(["dog","Dog area",nb>1?"in every building here":"in the building"]);
-    else if(v("dog_park_m")!=null)o.push(["dog",distShort(v("dog_park_m")),"to the dog park"+(own>0&&nb>0?"; "+own+" of "+nb+" buildings have their own dog area":"")]);
+    else if(v("dog_park_m")!=null)o.push(["dog",distShort(v("dog_park_m")),"to the dog park"+(own>0&&nb>0?"; "+nOf(own,nb,"buildings here","has its own dog area","have their own dog area"):"")]);
     if(v("supermarket_m","supermarket_m_c")!=null)o.push(["bag",distShort(v("supermarket_m","supermarket_m_c")),"to a supermarket"]);
     if(tm!=null)o.push(["train",r0(tm)+" min","to Mom and Dad by train and bus"])}
   o.push(["parking",ps||"Ask the building","street parking","r-rules"]);
@@ -2848,7 +2968,7 @@ function vYear(Y){
   var f=yearNums(Y),us=f.us,hs=f.hs,allU=Y.units,allH=Y.hoods,c=f.tr,M=Y.medians||{},nx=YEARS[YEARS.indexOf(Y)+1],line=calmClause(Y.tagline)||calmClause(Y.subhead),few=us.length<FEW,typ=!few;
   var h='<div class="wrap pg pg-exp">'+illus(Y,"banner")+'<section class="sec head"><h1 class="ph1">'+ymark(Y,24)+' '+esc(Y.label)+'</h1>'+(line?'<p class="psub">'+esc(line)+'</p>':'')+
     (us.length?(few?kfacts([{t:S_RENT,b:'<em class="rg">'+rg(f.rr,m10)+'</em>',s:"a month"},{t:S_TOTAL,b:'<i class="ab">about</i> <em class="rg">'+rg(f.tr,m10)+'</em>',s:WITH_UF,act:"allin-info",attr:' data-kind="year" data-id="'+esc(Y.id)+'"'},f.dr?{b:rg(f.dr,r0)+" min",s:"drive to Mom and Dad"}:{b:"Ask",s:"drive not known"},!f.tollr?{b:"Ask",s:"tolls not fully known"}:f.tollr[1]===0?{b:"No tolls",s:"on the drive"}:{b:rg(f.tollr,tollMoney),s:"tolls, round trip",r:'<small class="rng">with NY E-ZPass</small>',act:"toll-info",attr:' data-kind="year" data-id="'+esc(Y.id)+'"'}],true)+'<p class="fnote" id="few-note">Only '+pl(us.length,"apartment")+(FON?" match":" right now")+': these are the lowest and the highest.</p>'
-      :kfacts([rentFact(f,typ),costFact(f,typ,"year",Y.id),f.drive!=null?{t:hs.length>1?"typical":"",b:r0(f.drive)+" min",s:"drive to Mom and Dad",r:hs.length>1?rngFrom(f.dr,r0," min"):""}:{b:"Ask",s:"drive not known"},tollFact(f.toll,hs.length>1,"year",Y.id)],true)+fNote(us.length,allU.length)):FON&&allU.length?emptyF(allU.length):'')+
+      :kfacts([rentFact(f,typ),costFact(f,typ,"year",Y.id),f.drive!=null?{t:hs.length>1?"typical":"",b:r0(f.drive)+" min",s:"drive to Mom and Dad",r:hs.length>1?rngFrom(f.dr,r0," min"):""}:{b:"Ask",s:"drive not known"},tollFact(f.toll,hs.length>1,"year",Y.id,hs.length>1?f.tollr:null)],true)+fNote(us.length,allU.length)):FON&&allU.length?emptyF(allU.length):'')+
     (hs.length?'<div class="seerow">'+seeBtn("See the "+pl(hs.length,"neighborhood"),"sec-hoods","see-hoods",pl(us.length,"apartment")+(FON?" match your filters":" to see"))+fBtn("filterBtn")+'</div>':'')+'</section>';
   var prom=calm(pr(Y,"promise")),kat=calm(pr(Y,"catch")),yf=yearFacts(Y),dm=dayMoments(Y),scenes=dm.length?"":slotText(calmV(pr(Y,"scene")||Y.scenes));
   h+=aboutBox("About this experience",Y,hostOfRec(Y,"intro"),"about",null,"exp");
@@ -2961,9 +3081,10 @@ function bPhotos(B){var own=null,any=null,rp=bView(B)&&B.rec&&B.rec.photos;if(rp
   return own||any}
 function photoWhere(p){return String(p.where||hostOf(p.url)||"the listing")}
 function aptName(U){return U.unit?"Apartment "+U.unit:bedsWord(U)}
-function floorWord(U){return U.floor!=null&&isFinite(+U.floor)?"floor "+Math.round(+U.floor):"floor not published"}
-function availWord(U){return openOwn(U,OPEN_AVAIL)?"availability to confirm":U.available==="now"?"available now":dayStr(U.available)?"from "+dayStr(U.available):"move-in date: ask"}
-function nToConfirm(U){return confs(U).length+(rentStar(U)?1:0)}
+function floorWord(U){return U.floor!=null&&isFinite(+U.floor)?(floorRead(U)?"likely floor ":"floor ")+Math.round(+U.floor):"floor not published"}
+function floorRead(U){return U.floor_basis==="inferred"||discs(U).some(function(d){return /floor_read_from_number/.test(d.code)})} /* (N14) the listing does not state it: it is our reading of the apartment number */
+function availWord(U){return openOwn(U,OPEN_AVAIL)?"availability to confirm":availNow(U)?"available now":dayStr(U.available)?"from "+dayStr(U.available):"move-in date: ask"}
+function nToConfirm(U){return confs(U).length} /* (N2) open gate facts only: a rent offer is not something "to confirm" */
 /* the level of one part of the day, as a word and a colour; none where the data cannot say */
 var LVL={s:["strong","Strong"],m:["mixed","Mixed"],w:["weak","Weak"]};
 function lvlChip(t){return LVL[t]?'<em class="lvl '+LVL[t][0]+'">'+LVL[t][1]+'</em>':''}
@@ -2986,7 +3107,7 @@ function heartBtn(U){var on=savedIx(U.id)>-1;return '<button type="button" class
 function aptRow(U,B,open,bp){var id="apt-"+SLUG.unit[U.id],o=rowOpen(id,open),cf=conf(U),tq=tourQs(U),L=okUrl(U.links&&U.links.listing),w=why(U),n=nToConfirm(U),ph=U.photos&&okUrl(U.photos.url),r=rentOf(U),cp=couldPass(U);
   var aln=sentences(calm(textOf(hostOfRec(U,"line")))).slice(0,2).join(" "),akt=calm(textOf(hostOfRec(U,"catch"))),acs=calm(hlSub(U,"cost"));if(acs&&acs===offerLine(U))acs="";
   return '<div class="apt'+(w.length?' out':'')+'" id="w-'+id+'"><details class="aptd" id="'+id+'" data-row="'+id+'"'+(o?' open':'')+'><summary><span class="an"><b>'+esc(aptName(U))+'</b>'+(cf?'<span class="cstar" aria-hidden="true">*</span>':'')+'</span>'+
-    '<span class="apx"><span class="apr"><small>'+L_RENT+'</small> <b>'+(r==null?"ask":money(r))+star(U)+'</b>'+(rentTerm(U)?' <small class="rt">'+esc(rentTerm(U))+'</small>':'')+'</span> <span class="apw">'+(U.all_in==null?capFirst(S_TOTAL)+" not known":'about <b>'+pm(U.all_in)+'</b> '+WITH_UF)+'</span></span>'+
+    '<span class="apx"><span class="apr"><small>'+L_RENT+'</small> <b>'+(r==null?"ask":money(r))+'</b>'+offerTag(U)+(rentTerm(U)?' <small class="rt">'+esc(rentTerm(U))+'</small>':'')+'</span> <span class="apw">'+(U.all_in==null?capFirst(S_TOTAL)+" not known":'about <b>'+pm(U.all_in)+'</b> '+WITH_UF)+'</span></span>'+
     '<span class="am">'+esc([U.unit?bedsWord(U):"",U.sqft!=null?r0(U.sqft)+" sq ft":"size not published",floorWord(U),availWord(U)].filter(Boolean).join(" · "))+'</span>'+
     rentNotes(U).map(function(x){return '<span class="ac rn'+(/much higher/.test(x)?' warn':'')+'">'+esc(x)+'</span>'}).join("")+
     (cf?'<span class="ac">* '+esc("To confirm: "+confWhat(U))+'</span>':'')+(rentStar(U)?'<span class="ac offer">'+esc(offerLine(U))+'</span>':'')+(cp?'<span class="ac cp">'+esc(capFirst(S_TOTAL)+" "+cp)+'</span>':'')+(w.length?'<span class="ac out"><b>Outside your filters:</b> '+esc(w.join("; "))+'.</span>':'')+'<i class="chev" aria-hidden="true"></i></summary>'+
@@ -3012,14 +3133,14 @@ function vBldg(B,openU){
   var pf=parkFlags(U),love=loveList(U),pause=pauseList(U),ev=U.evidence||{},pos=ev.positive||[],neg=ev.items||[],L=okUrl(U.links&&U.links.listing),pRules=rulesOf(H,"parking_rules");
   h+='<section class="sec rows" id="sec-rows">'+rowsTop();
   h+=row("r-day","A day here",HL.day(U),dayStack(U),{sub:hlSub(U,"day","going_out","green")});
-  h+=row("r-parking","The car",HL.parking(U),'<p>'+esc(SAY.parking(U))+'</p>'+(U.parking&&U.parking.type&&String(U.parking.type).length>12&&String(U.parking.type).length<180?'<p class="helper" style="margin-top:6px">The listing says: “'+esc(U.parking.type)+'”'+ext(L,"listing")+'</p>':'')+
-    (pf.length?'<div class="confbox park" id="park-rules" style="margin-top:10px"><h4>Street parking rules here</h4><ul class="rules">'+pf.map(function(x){return '<li><b>'+esc(x.label)+'.</b> '+esc(x.r.summary)+ruleLink(x.r)+'</li>'}).join("")+'</ul></div>':''),{sub:bSub(B,"parking"),chip:pf.length?"Street rules":pk==="unknown"||(U.parking&&U.parking.fee==null)?"Ask":"",chipKind:"ask"});
+  h+=row("r-parking","The car",HL.parking(U),'<p>'+esc(SAY.parking(U))+'</p>'+(parkQuote(U)?'<p class="helper" id="park-quote" style="margin-top:6px">The listing says: “'+esc(parkQuote(U))+'”'+ext(L,"listing")+'</p>':'')+
+    (pf.length?'<div class="confbox park" id="park-rules" style="margin-top:10px"><h4>Street parking rules here</h4><ul class="rules">'+pf.map(function(x){return '<li><b>'+esc(x.label)+'.</b> '+esc(x.r.summary)+ruleLink(x.r)+'</li>'}).join("")+'</ul></div>':''),{sub:bSub(B,"parking"),chip:pf.length?"Street rules":pk==="unknown"||parkInfo(U).fee==null?"Ask":"",chipKind:"ask"});
   h+=row("r-dog","For the dog",HL.dog(U),'<ul>'+factLis(buildingFacts(U).filter(function(x){return /^Dogs:/.test(x.t)}))+'</ul>'+(smallDog(U)?'<p class="helper" id="dog-note" style="margin-top:8px">'+SMALL_DOG+'.'+ext(L,"listing")+'</p>':''),{sub:bSub(B,"dog"),chip:openFact(U,OPEN_DOG)?"Ask":d.allowed==="yes"&&d.weight_limit_lb==null?"Ask the limit":"",chipKind:"ask"});
   h+=row("r-building","The building",HL.building(U),'<ul id="bld-facts">'+factLis(buildingFacts(U).filter(function(x){return !/^Dogs:/.test(x.t)}))+'</ul>'+(contactBox(V)?'<button type="button" class="link" data-act="contact" data-id="'+esc(U.id)+'">'+contactWord(V)+'</button>':''),{sub:bSub(B,"building")});
   h+=row("r-reviews","Reviews of the building",HL.reviews(V.ratings),reviewsBox(V));
   h+=row("r-rules","Local rules",HL.hoodRules(H),rulesBody(H,""),{chip:pf.length?pf.length+" to know":(!pRules.length?"Ask":""),chipKind:"ask"});
   if((SPEC_OPEN.length&&U.vs_queens&&SPEC_OPEN.some(function(q){return U.vs_queens[q.measure]!=null}))||love.length||pos.length||pause.length||neg.length)h+=row("r-queens","Compared to "+qWord(U),HL.queens(U.vs_queens),SCALE_KEY+'<div class="ylist">'+SPEC_OPEN.map(function(q){var p=U.vs_queens&&U.vs_queens[q.measure],df=U.vs_queens_diff&&U.vs_queens_diff[q.measure];p=p==null?null:Math.round(p);
-      return pointBtn("unit",U.id,q.measure,p,q.measure==="parking"?parkWordShort(U):df==null?(p===3?"same":"difference not in the data"):fmtDiff(q.measure,df),true)}).join("")+'</div><div class="two" id="r-love" style="margin-top:10px">'+(love.length||pos.length?'<div class="panel love"><h4>You\'ll love</h4>'+(love.length?'<ul>'+factLis(love)+'</ul>':'')+pos.map(quote).join("")+'</div>':'')+(pause.length||neg.length?'<div class="panel pause"><h4>Gives us pause</h4>'+(pause.length?'<ul>'+factLis(pause)+'</ul>':'')+neg.map(quote).join("")+'</div>':'')+'</div>',{sub:hlSub(U,"compared_to_queens","queens")});
+      return pointBtn("unit",U.id,q.measure,p,q.measure==="parking"?parkWordShort(U):df==null?(p===3?"same":"difference not in the data"):fmtDiff(q.measure,df),true)}).join("")+'</div><div class="two" id="r-love" style="margin-top:10px">'+(love.length||pos.length?'<div class="panel love"><h4>You\'ll love</h4>'+(love.length?'<ul>'+factLis(love)+'</ul>':'')+pos.map(quote).join("")+'</div>':'')+(pause.length||neg.length?'<div class="panel pause"><h4>Gives us pause</h4>'+(pause.length?'<ul>'+factLis(pause)+'</ul>':'')+evQuotes(neg)+'</div>':'')+'</div>',{sub:hlSub(U,"compared_to_queens","queens")});
   h+='</section><section class="sec" id="sec-apts"><div class="hoodhead"><h2 class="h2s">'+(n>1?"Apartments here":"The apartment")+(n>1?' <span class="fig">'+n+'</span>':'')+'</h2><div class="headacts">'+fBtn()+'</div></div><div class="apts">'+us.map(function(u){return aptRow(u,B,openU===u,ph)}).join("")+'</div>'+
     (us.length<all.length?'<p class="fhid" id="apts-hid"><span>'+pl(all.length-us.length,"more apartment")+' here '+(all.length-us.length===1?"does":"do")+' not match your filters.</span> <button type="button" class="link" data-act="apts-all" data-id="'+esc(B.id)+'">Show '+(all.length-us.length===1?"it":"them")+'</button></p>':'')+'</section>';
   h+='<div class="botacts">'+saveBtn(ids,saveLabel,true,"bottom",saveSub)+'</div>';
@@ -3028,7 +3149,7 @@ function vBldg(B,openU){
 
 /* ---- My list: everything she saved, at a glance. Sort it, tick two or three, compare. Nothing here is ranked for her. ---- */
 var LIST_SORTS=[["saved","In the order I saved them"],["rent",L_RENT+", lowest first"],["all_in",L_TOTAL+", lowest first"],["mins","Minutes to Mom and Dad"],["sqft","Size, biggest first"],["movein","Move-in date"],["confirm","Fewest things to confirm"],["exp","Experience"]];
-function moveKey(U){return U.available==="now"?"0000":dayStr(U.available)?String(U.available):"9999"}
+function moveKey(U){return availNow(U)?"0000":dayStr(U.available)?String(U.available):"9999"}
 function listSorted(){var a=S.saved.map(function(id,i){return [U_BY[id],i]}).filter(function(x){return x[0]}),k=S.sort,nul=function(v,hi){return v==null?(hi?-1e18:1e18):+v};
   var f={rent:function(x,y){return nul(rentOf(x))-nul(rentOf(y))},all_in:function(x,y){return nul(x.all_in)-nul(y.all_in)},mins:function(x,y){return nul(x.moments.sun.drive_min)-nul(y.moments.sun.drive_min)},sqft:function(x,y){return nul(y.sqft,true)-nul(x.sqft,true)},
     movein:function(x,y){return moveKey(x)<moveKey(y)?-1:moveKey(x)>moveKey(y)?1:0},confirm:function(x,y){return (nToConfirm(x)+discs(x).length)-(nToConfirm(y)+discs(y).length)},exp:function(x,y){return YEARS.indexOf(yearOf(x))-YEARS.indexOf(yearOf(y))}}[k];
@@ -3047,7 +3168,7 @@ function vList(){var ptk=S.saved.join("\u0001");if(ptk!==PRETICK){PRETICK=ptk;if
   h+='<ul class="mylist" id="mylist">'+a.map(function(U){var on=S.pick.indexOf(U.id)>-1,Y=yearOf(U),H=hoodOf(U),nc=nToConfirm(U),dn=discs(U).length,dm=U.moments.sun.drive_min,nm=uName(U)+(U.unit?", apartment "+U.unit:"");
     return '<li class="lrow'+(on?' on':'')+'" data-id="'+esc(U.id)+'"><label class="ltick"><input type="checkbox" data-act-change="pick" data-id="'+esc(U.id)+'"'+(on?' checked':'')+' aria-label="Compare '+esc(nm)+'"></label>'+
       '<div class="lmain"><a href="'+href("unit",U.id)+'"><b>'+esc(uName(U))+'</b>'+(U.unit?' <span>'+esc("Apartment\u00A0"+U.unit)+'</span>':'')+'</a><small>'+ymark(Y,12)+esc(Y.short+" · "+hoodTitle(H))+'</small>'+
-      '<div class="lfacts"><span class="lf-r"><b>'+money(rentOf(U))+star(U)+'</b> '+S_RENT+'</span><span class="lf-t"><b>'+(U.all_in==null?"Ask":"about "+pm(U.all_in))+'</b> '+S_TOTAL+'</span><span><b>'+(dm!=null?r0(dm):'Ask')+'</b> min to Mom and Dad</span><span><b>'+(U.sqft!=null?r0(U.sqft):'Ask')+'</b> sq ft</span><span><b>'+esc(U.available==="now"?"Now":dayStr(U.available)||"Ask")+'</b> move-in</span><span'+(nc?' class="warn"':'')+'><b>'+(nc?nc+'*':dn?String(dn):'0')+'</b> '+(nc?'to confirm':'to ask')+'</span></div>'+(FON&&!fits(U)?'<p class="lout">Outside your filters: '+esc(fWhy(S.f,U).join("; "))+'.</p>':'')+'</div>'+
+      '<div class="lfacts"><span class="lf-r"><b>'+money(rentOf(U))+'</b> '+S_RENT+offerTag(U)+'</span><span class="lf-t"><b>'+(U.all_in==null?"Ask":"about "+pm(U.all_in))+'</b> '+S_TOTAL+'</span><span><b>'+(dm!=null?r0(dm):'Ask')+'</b> min to Mom and Dad</span><span><b>'+(U.sqft!=null?r0(U.sqft):'Ask')+'</b> sq ft</span><span><b>'+esc(availNow(U)?"Now":dayStr(U.available)||"Ask")+'</b> move-in</span><span'+(nc?' class="warn"':'')+'><b>'+(nc?nc+'*':dn?String(dn):'0')+'</b> '+(nc?'to confirm':'to ask')+'</span></div>'+(FON&&!fits(U)?'<p class="lout">Outside your filters: '+esc(fWhy(S.f,U).join("; "))+'.</p>':'')+'</div>'+
       '<button type="button" class="lx" data-act="list-remove" data-id="'+esc(U.id)+'" aria-label="Take '+esc(nm)+' off my list">×</button></li>'}).join("")+'</ul>';
   h+='<div class="listacts"><a class="btn main wide'+(np>=2?'':' off')+'" id="cmpBtn" href="#compare"'+(np>=2?'':' aria-disabled="true"')+'>'+(np>=2?'Compare selected ('+np+')':'Tick two or three to compare')+'</a></div>';
   h+='<div class="tour-list"><h2>Go see them</h2><button type="button" class="btn" data-act="copy">Copy my tour list</button><span id="copyStatus" role="status" aria-live="polite"></span></div>';
@@ -3059,8 +3180,8 @@ function pairText(A,B,a,b){
   s.push(dr==null?"The "+S_RENT+" of one of them is not known yet.":Math.abs(dr)<25?"Same "+S_RENT+", within $25 a month.":b+" asks "+money(Math.abs(Math.round(dr)))+(dr>0?" more":" less")+" "+S_RENT+" a month than "+a+".");
   s.push(d==null?"The "+S_TOTAL+" of one of them is not known yet.":Math.abs(d)<25?capFirst(WITH_UF)+", the "+S_TOTAL+" is the same within $25 a month.":capFirst(WITH_UF)+", "+b+" comes to "+money(Math.abs(Math.round(d)))+(d>0?" more":" less")+" a month in "+S_TOTAL+".");
   if(A.sqft!=null&&B.sqft!=null){var q=Math.round(B.sqft-A.sqft);if(q>=50)gain.push(q+" more square feet");else if(q<=-50)lose.push((-q)+" square feet")}
-  var pa=A.parking&&A.parking.rank,pb=B.parking&&B.parking.rank;
-  if(pa!=null&&pb!=null){if(pb>pa)gain.push(PARK_PHRASE[parkKind(B)]+" where "+a+" has "+PARK_PHRASE[parkKind(A)]);else if(pb<pa)lose.push(PARK_PHRASE[parkKind(A)]+" for "+PARK_PHRASE[parkKind(B)])}
+  var pa=parkRank(A),pb=parkRank(B);
+  if(pa!=null&&pb!=null&&PARK_PHRASE[parkKind(A)]&&PARK_PHRASE[parkKind(B)]){if(pb>pa)gain.push(PARK_PHRASE[parkKind(B)]+" where "+a+" has "+PARK_PHRASE[parkKind(A)]);else if(pb<pa)lose.push(PARK_PHRASE[parkKind(A)]+" for "+PARK_PHRASE[parkKind(B)])}
   if(gain.length)s.push(b+" gives you "+list(gain)+".");
   if(lose.length)s.push("You give up "+list(lose)+".");
   var ma=A.moments.sun.drive_min,mb=B.moments.sun.drive_min;
@@ -3083,17 +3204,17 @@ function vCompare(){
   var A=H[S.pair[0]],B=H[S.pair[1]],an=cmpName(A,H),bn=cmpName(B,H),pt=pairText(A,B,an,bn),f=feelIt(A,B,an,bn);
   h+='<div class="pairbox">'+(n===3?'<div class="seg" role="group" aria-label="Which two to weigh">'+pairs.map(function(p){var on=p[0]===S.pair[0]&&p[1]===S.pair[1];return '<button type="button" data-act="pair" data-p="'+p[0]+"-"+p[1]+'" aria-pressed="'+on+'">'+(p[0]+1)+' and '+(p[1]+1)+'</button>'}).join("")+'</div>':'')+'<p>'+esc(pt.join(" "))+'</p></div></section>';
   var rows=[
-   {icon:IC.money,label:L_RENT,cells:H.map(function(U){var r=rentOf(U);return {html:(r==null?"Ask":money(r)+star(U))+'<small>a month, '+esc(seenShort(U.price_seen_at))+(U.rent&&U.rent.gross!=null&&r!=null&&+U.rent.gross>r?'; '+money(U.rent.gross)+' in a normal month':'')+(rentTerm(U)?'; '+esc(rentTerm(U)):'')+(rentNotes(U).length?'<br>'+esc(rentNotes(U).join(" ")):'')+'</small>',cls:r==null?"t-u":""}}),nums:H.map(rentOf),tol:24,best:"low"},
+   {icon:IC.money,label:L_RENT,cells:H.map(function(U){var r=rentOf(U);return {html:(r==null?"Ask":money(r)+offerTag(U))+'<small>a month, '+esc(seenShort(U.price_seen_at))+(U.rent&&U.rent.gross!=null&&r!=null&&+U.rent.gross>r?'; '+money(U.rent.gross)+' in a normal month':'')+(rentTerm(U)?'; '+esc(rentTerm(U)):'')+(rentNotes(U).length?'<br>'+esc(rentNotes(U).join(" ")):'')+'</small>',cls:r==null?"t-u":""}}),nums:H.map(rentOf),tol:24,best:"low"},
    {icon:IC.money,label:L_TOTAL,cells:H.map(function(U){var cp=couldPass(U);return {html:(U.all_in==null?"Ask":"about "+pm(U.all_in))+'<small>a month'+(U.all_in_gross>U.all_in?'; about '+pm(U.all_in_gross)+' in a normal month':'')+(cp?'; '+esc(cp):'')+'</small>',cls:U.all_in==null?"t-u":""}}),nums:H.map(function(U){return U.all_in}),tol:24,best:"low"},
    {icon:IC.space,label:"Space",cells:H.map(function(U){return {html:(U.sqft!=null?r0(U.sqft)+" sq ft":"Ask")+'<small>'+esc(bedsWord(U))+'</small>',cls:U.sqft==null?"t-u":""}}),nums:H.map(function(U){return U.sqft}),tol:20,best:"high"},
-   {icon:IC.car,label:"Parking",cells:H.map(function(U){var fee=U.parking&&U.parking.fee;return {html:esc(parkWordShort(U))+'<small>'+(fee!=null?(Number(fee)===0?'no monthly charge':money(fee)+' a month'):'fee: ask')+'</small>',cls:U.parking&&U.parking.rank!=null?"":"t-u"}}),nums:H.map(function(U){return U.parking&&U.parking.rank}),tol:0,best:"high"},
+   {icon:IC.car,label:"Parking",cells:H.map(function(U){return {html:esc(parkWordShort(U))+'<small>'+esc(parkFeeShort(U))+'</small>',cls:parkRank(U)!=null?"":"t-u"}}),nums:H.map(parkRank),tol:0,best:"high"},
    {icon:IC.sun,label:"To Mom and Dad",cells:H.map(function(U){var sn=U.moments.sun,tl=sn.toll_round_trip;return {html:(sn.drive_min!=null?r0(sn.drive_min)+" min":"Ask")+'<small>'+(tl==null?'tolls: ask':Number(tl)===0?'no tolls':tollMoney(tl)+' tolls')+'</small>',cls:sn.drive_min==null?"t-u":""}}),nums:H.map(function(U){return U.moments.sun.drive_min}),tol:4.9,best:"low"}];
   var days=H.map(dayOfUnit),dayRows=[],dayDiff=0,dayN=0;
   SLOTS.forEach(function(sl,i){if(sl.k==="sun")return;dayN++;
     var tints=days.map(function(d){return d[i].tint}),same=tints.every(function(t){return t===tints[0]});if(!same)dayDiff++;
     dayRows.push({same:same,html:'<div class="rowc"><h4>'+IC[sl.k]+esc(sl.t)+(same?'<em>level</em>':'')+'</h4><div class="cols c'+n+'">'+days.map(function(d){return '<div class="cell t-'+d[i].tint+'">'+esc(d[i].cap)+'<small>'+TINT_WORD[d[i].tint]+'</small></div>'}).join("")+'</div></div>'})});
-  if(H.some(function(U){return conf(U)||discs(U).length}))rows.push({icon:'<span class="cstar" aria-hidden="true" style="font-size:20px;margin:0">*</span>',label:"Still to confirm",cells:H.map(function(U){var cs=confs(U),ds=discs(U);
-    return {html:(cs.length?cs.map(function(c){return esc(capFirst(cWhat(c)))}).join('<br>'):'Nothing')+(ds.length?'<small class="gtkc">Also ask: '+esc(ds.map(function(d){return d.what}).join("; "))+'</small>':''),cls:cs.length?"t-m":""}}),tie:false,best:null});
+  if(H.some(function(U){return conf(U)||discs(U).length})){rows.push(H.some(conf)?{icon:'<span class="cstar" aria-hidden="true" style="font-size:20px;margin:0">*</span>',label:"Still to confirm"}:{icon:'',label:"Good to know before you call"});Object.assign(rows[rows.length-1],{cells:H.map(function(U){var cs=confs(U),ds=discs(U);
+    return {html:(cs.length?cs.map(function(c){return esc(capFirst(cWhat(c)))}).join('<br>'):'Nothing to confirm')+(ds.length?'<small class="gtkc">Also ask: '+esc(ds.map(function(d){return d.what}).join("; "))+'</small>':''),cls:cs.length?"t-m":""}}),tie:false,best:null})}
   var hidden=0,body="";
   rows.forEach(function(R){var tie,known=R.nums?R.nums.filter(function(x){return x!=null}):null;
     if(R.nums)tie=known.length===R.nums.length?(Math.max.apply(null,known)-Math.min.apply(null,known))<=R.tol:known.length===0;else tie=R.tie;
@@ -3101,7 +3222,7 @@ function vCompare(){
     var best=known&&known.length>1?(R.best==="low"?Math.min.apply(null,known):Math.max.apply(null,known)):null;
     body+='<div class="rowc"><h4>'+R.icon+esc(R.label)+(tie?'<em>level</em>':'')+'</h4><div class="cols c'+n+'">'+R.cells.map(function(c,i){return '<div class="cell'+(!tie&&best!==null&&R.nums[i]===best?' edge':'')+(c.cls?' '+c.cls:'')+'">'+c.html+'</div>'}).join("")+'</div></div>'});
   h+='<div class="tiesrow"><label class="switch" for="ties"><input type="checkbox" id="ties"'+(S.hideTies?' checked':'')+'>Only show what differs</label><small id="tiesNote">'+(hidden?hidden+(hidden===1?" row":" rows")+" where they tie "+(hidden===1?"is":"are")+" hidden":S.hideTies?"Nothing ties":"Showing every row")+'</small></div>';
-  h+='<div class="cmp-head"><div class="cols c'+n+'">'+H.map(function(U,i){return '<div class="colh"><a href="'+href("unit",U.id)+'"><span class="num n'+i+'">'+(i+1)+'</span> <span class="cn"><b>'+esc(U.unit?"Apartment "+U.unit:uName(U))+'</b> <small>'+esc(U.unit?uName(U):bedsWord(U))+'</small></span></a><span class="pr">'+money(rentOf(U))+star(U)+' <small>'+S_RENT+'</small></span><button type="button" class="x" data-act="untick" data-id="'+esc(U.id)+'" aria-label="Take '+esc(uName(U)+(U.unit?", apartment "+U.unit:""))+' out of this comparison">×</button></div>'}).join("")+'</div></div><div class="stack tight" id="cmp-rows">'+body+'</div>';
+  h+='<div class="cmp-head"><div class="cols c'+n+'">'+H.map(function(U,i){return '<div class="colh"><a href="'+href("unit",U.id)+'"><span class="num n'+i+'">'+(i+1)+'</span> <span class="cn"><b>'+(U.unit?'<span class="apl">Apartment</span> '+esc(U.unit):esc(uName(U)))+'</b> <small>'+esc(U.unit?uName(U):bedsWord(U))+'</small></span></a><span class="pr">'+money(rentOf(U))+' <small>'+S_RENT+'</small>'+offerTag(U)+'</span><button type="button" class="x" data-act="untick" data-id="'+esc(U.id)+'" aria-label="Take '+esc(uName(U)+(U.unit?", apartment "+U.unit:""))+' out of this comparison">×</button></div>'}).join("")+'</div></div><div class="stack tight" id="cmp-rows">'+body+'</div>';
   h+='<section class="sec rows" id="sec-rows">';
   h+=row("c-day","The day, part by part",dayDiff?"they differ on "+dayDiff+" of "+dayN+" parts":"level on all "+dayN+" parts",'<div class="stack tight" id="day-rows">'+dayRows.filter(function(r){return !(r.same&&S.hideTies)}).map(function(r){return r.html}).join("")+'</div>'+(S.hideTies&&dayDiff<dayN?'<p class="helper" style="margin-top:6px">'+(dayN-dayDiff)+' level '+(dayN-dayDiff===1?'part is':'parts are')+' hidden.</p>':''));
   if(f.length)h+=row("r-feel","What that feels like",f[0],'<div class="feel"><ul>'+lis(f)+'</ul></div>');
@@ -3155,9 +3276,9 @@ var TUT=[
   art:function(){var Y=YEARS[0],a="",b="";try{a=HL.yearCost(Y);b=HL.out(Y.medians||{})}catch(e){}
     return tutRow("What it costs you",a||"the monthly cost, in a line",false)+tutRow("Going out and green space",b||"what is close by, in a line",true)}},
  {t:function(){return "A star means ask first"},
-  p:function(){return "A star (*) on an apartment means one thing is still to confirm before you sign. Open the apartment: <b>Still to confirm</b> says what to ask."},
+  p:function(){return "A star (*) means one thing is still to confirm before you sign. <b>Still to confirm</b> says what to ask. An <b>offer</b> tag just means a special offer."},
   art:function(){var U=UNITS.filter(function(u){return confs(u).length===1&&confQ(confs(u)[0],u)})[0]||UNITS.filter(function(u){return confs(u).length})[0],c=U?confs(U):[],q=U?confQ(c[0],U):"";
-    return '<div class="tut-apt"><span class="nm">'+(U?esc(uName(U)):'An apartment')+'</span>'+(U&&U.unit?'<span class="ap">Apartment '+esc(U.unit)+'</span>':'')+'<p class="confl"><b>* To confirm: '+esc(U?c.map(cWhat).join("; "):CONFIRM_WORD.floor)+'.</b></p>'+(q?'<p class="ask"><b>What to ask:</b> '+esc(q)+'</p>':'')+'</div>'}},
+    return '<div class="tut-apt"><span class="nm">'+(U?esc(uName(U)):'An apartment')+'</span>'+(U&&U.unit?'<span class="ap">Apartment '+esc(U.unit)+'</span>':'')+'<p class="confl"><b>* To confirm: '+esc(U?c.map(cWhat).join("; "):CONFIRM_WORD.floor)+'.</b></p>'+(q?'<p class="ask"><b>What to ask:</b> '+esc(q)+'</p>':'')+(function(){var O=U&&offerTag(U)?U:UNITS.filter(function(u){return offerTag(u)&&rentOf(u)!=null})[0];return O?'<p class="tut-off"><span>'+L_RENT+'</span> <b>'+money(rentOf(O))+'</b>'+offerTag(O)+' <i>a special offer, not a star</i></p>':''})()+'</div>'}},
  {t:function(){return "Save, then compare"},
   p:function(){return "Tap <b>Save</b> (the heart) on any apartment. <b>My list</b>, at the bottom, holds them; sort it, tick two or three, tap <b>Compare</b>. <b>See photos</b> opens the listing's photos."},
   art:function(){return '<div class="tut-rowx"><span class="tut-heart">'+HEART+'Save</span><span class="tut-heart">'+PT_IC.camera+'See photos</span></div><span class="tut-cmp">Compare selected (2)</span><div class="tut-tray">'+HEART+'<b>Saved</b><span>· '+S.saved.length+'</span><em>My list</em></div>'}},
@@ -3251,7 +3372,7 @@ function buildFilterSheet(){var noSize=UNITS.filter(function(u){return u._f.sqft
     fRange("mins","Drive to Mom and Dad, at most")+
     (MOVE_OPTS.length>1?fSeg("move",MOVE_OPTS,"Move-in",last?"Every apartment here is available by "+esc(dayStr(last))+".":""):'')+
     fSeg("park",PARK_OPTS,"Parking",noPark?pl(noPark,"apartment")+" "+(noPark===1?"does":"do")+" not say how you park; "+(noPark===1?"it is":"they are")+" hidden when you pick a kind.":"")+
-    '<fieldset class="lim fchecks"><legend>Only show apartments with</legend>'+fSw("wd","A washer and dryer in the apartment")+fSw("clear","Nothing left to confirm","no star (*)")+fSw("rev","Reviews of the building online")+'</fieldset>'+
+    '<fieldset class="lim fchecks"><legend>Only show apartments with</legend>'+fSw("wd","A washer and dryer in the apartment",(function(n){return n?"includes "+n+" where a listing site names them and the building has not confirmed it":""})(UNITS.filter(function(u){return u._f.wdTag}).length))+fSw("clear","Nothing left to confirm","no star (*)")+fSw("rev","Reviews of the building online")+'</fieldset>'+
     (YEARS.length>1?'<fieldset class="lim fchecks" id="fs-exps"><legend>Experience</legend><p class="fhint">Tick the ones to keep. None ticked keeps them all.</p>'+YEARS.map(function(Y,i){return '<label class="switch" for="f-exp-'+i+'"><input type="checkbox" id="f-exp-'+i+'" data-k="exps" value="'+esc(Y.id)+'"><span>'+ymark(Y,14)+esc(Y.short)+'</span></label>'}).join("")+'</fieldset>':'')+
     '<div class="lim fmine">'+fSw("mine","Also apply these filters to My list","until then every saved apartment stays in My list")+'</div>'}
 function fSync(){var f=FD;["rent","total","sqft","mins"].forEach(function(k){var el=document.getElementById("f-"+k);if(el)el.value=f[k]});
@@ -3276,12 +3397,12 @@ function renderFbar(){var cs=fChips(S.f),on=cs.length>0&&parse(current).v!=="com
   fitTop()}
 /* the sticky lines at the top (the trail, then the filter bar): everything pinned under them, and every jump to a section, keeps clear of both */
 function fitTop(){try{var th=trailEl.hidden?0:trailEl.offsetHeight;fbar.style.top=th+"px";document.documentElement.style.setProperty("--top-h",(th+(fbar.hidden?0:fbar.offsetHeight))+"px")}catch(e){}}
-function renderFoot(){var C=META.counts||{},all=arr(META.notes).map(String),notes=all.filter(function(n){return !/\$0\b/.test(n)});
+function renderFoot(){var C=META.counts||{},all=arr(META.notes).map(String).filter(function(n){return !/asterisk on the rent/i.test(n)}),notes=all.filter(function(n){return !/\$0\b/.test(n)}); /* (N2) the note that gave the star a second meaning is not printed */
   if(notes.length<all.length||UNITS.some(function(u){return u.all_in_unknown.length}))notes.push(NOTE_UNPUBLISHED);
   var gl=gatesLine()+(META.move_in_window?' Move-in window: '+String(META.move_in_window).replace(/(\d{4}-\d{2}-\d{2})/,function(d){return dayStr(d,true)})+'.':'');
-  document.getElementById("foot").innerHTML=(current==="lives"?'<p class="lease">A lease is 12 months. You are choosing an experience to try, not forever.</p>':'')+
+  document.getElementById("foot").innerHTML=(current==="lives"?'<p class="lease">'+LEASE_LINE+'</p>':'')+
     '<div class="footrow"><button type="button" class="link" id="foot-filter" data-act="filter-open" aria-haspopup="dialog">'+(FON?'Filter · '+FON+' on: '+NFIT+' of '+UNITS.length+' match':'Filter')+'</button><button type="button" class="link" data-act="foot-how" aria-expanded="false" aria-controls="foothow">See how we got this</button><button type="button" class="link" data-act="how-open">How this works</button></div>'+
-    '<div id="foothow" class="howb" hidden>'+(gl.trim()?'<p>'+esc(gl)+'</p>':'')+'<p>'+esc(PRICE_SENT)+'</p><p>An asterisk (*) means one thing about that apartment is still to confirm before you sign. Its page says what to ask.</p><p>A snapshot, not a live feed: every price shows the day it was seen. Data built '+esc(seenLong(META.built_at))+'.</p><p>'+esc([pl(UNITS.length,"apartment")+" shown, in "+pl(BLDGS.length,"building"),D.avoid.length?D.avoid.length+" to avoid":"",D.held.length?D.held.length+" waiting on a phone call":""].filter(Boolean).join(" · "))+'</p>'+(notes.length?'<ul>'+lis(notes)+'</ul>':'')+
+    '<div id="foothow" class="howb" hidden>'+(gl.trim()?'<p>'+esc(gl)+'</p>':'')+'<p>'+esc(PRICE_SENT)+'</p><p>A star (*) means one thing about that apartment is still to confirm before you sign. Its page says what to ask. An “offer” tag beside a rent is something else: a special offer applies, and the rent terms say what it is.</p><p>A snapshot, not a live feed: every price shows the day it was seen. Data built '+esc(seenLong(META.built_at))+'.</p><p>'+esc([pl(UNITS.length,"apartment")+" shown, in "+pl(BLDGS.length,"building"),D.avoid.length?D.avoid.length+" to avoid":"",D.held.length?D.held.length+" waiting on a phone call":""].filter(Boolean).join(" · "))+'</p>'+(notes.length?'<ul>'+lis(notes)+'</ul>':'')+
     '<ul id="sources">'+lis(["Prices, sizes, parking, dogs and elevators: "+SOURCES.listing,"Counts of places, parks and distances: "+SOURCES.map+"; "+SOURCES.walk,"Drive times: "+SOURCES.drive,"Tolls: "+SOURCES.tolls,"Train and bus times: "+SOURCES.transit,"Crime rates: "+SOURCES.crime,"Who lives here: "+SOURCES.census,"Local rules, reviews and records: the page linked beside each one"])+'</ul></div>'}
 var scrolls={};
 try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}
@@ -3313,8 +3434,8 @@ function openLimits(on){var was=limsheet.classList.contains("open");if(on===was)
   else{var f=lastFocus&&lastFocus.focus&&document.contains(lastFocus)?lastFocus:(F_FROM==="bar"&&fbar.querySelector(".fb-n"))||(F_FROM==="foot"&&document.getElementById("foot-filter"))||view.querySelector(".fbtn")||document.getElementById("foot-filter");lastFocus=null;if(f){try{f.focus({preventScroll:true})}catch(e){}}}}
 function tourText(){var H=listSorted();
   return "LAMIA'S TOUR LIST\nData built "+seenLong(META.built_at)+". Prices are as seen on the dates shown.\n\n"+H.map(function(U,i){var R=U.rent||{},q=tourQs(U),c=conf(U);
-    return (i+1)+". "+uName(U)+(U.unit?", apartment "+U.unit:"")+"\n   "+(U.address||"Address not known yet")+" · "+hoodOf(U).name+" ("+yearOf(U).label+")\n   "+L_RENT+" "+money(rentOf(U))+(R.asterisk?"*":"")+" a month"+(rentTerm(U)?" "+rentTerm(U):"")+" · about "+money(U.all_in)+" "+WITH_UF+", "+seenShort(U.price_seen_at)+"\n   "+bedsWord(U)+", "+(U.sqft!=null?r0(U.sqft)+" sq ft":"size not published")+" · "+parkWord(U)+
-      (R.asterisk?"\n   * Rent offer: "+(offerText(U)||"a special offer applies.")+(R.gross!=null?" A paying month is "+money(R.gross)+" rent"+(U.all_in_gross!=null?", "+money(U.all_in_gross)+" "+WITH_UF:"")+".":"")+(R.needs_call?" Needs a call.":""):"")+
+    return (i+1)+". "+uName(U)+(U.unit?", apartment "+U.unit:"")+"\n   "+(U.address||"Address not known yet")+" · "+hoodOf(U).name+" ("+yearOf(U).label+")\n   "+L_RENT+" "+money(rentOf(U))+" a month"+(rentTerm(U)?" "+rentTerm(U):"")+" · about "+money(U.all_in)+" "+WITH_UF+", "+seenShort(U.price_seen_at)+"\n   "+bedsWord(U)+", "+(U.sqft!=null?r0(U.sqft)+" sq ft":"size not published")+" · "+parkWord(U)+
+      (R.asterisk?"\n   Rent offer: "+(offerText(U)||"a special offer applies.")+(R.gross!=null?" A paying month is "+money(R.gross)+" rent"+(U.all_in_gross!=null?", "+money(U.all_in_gross)+" "+WITH_UF:"")+".":"")+(R.needs_call?" Needs a call.":""):"")+
       confs(U).map(function(c){return "\n   * Still to confirm: "+cWhat(c)+"."+(c.why?" "+c.why:"")}).join("")+
       (discs(U).length?"\n   Good to know before you call: "+discs(U).map(function(d){return d.what}).join("; ")+".":"")+
       (netEff(U)&&R.first_full_payment_date?"\n   First full payment due "+(dayStr(R.first_full_payment_date,true)||R.first_full_payment_date)+".":"")+
@@ -3323,7 +3444,7 @@ function tourText(){var H=listSorted();
       "\n   "+dayOfUnit(U).map(function(d){return d.t+": "+d.cap}).join("\n   ")+
       "\n   Ask:"+(q.length?"\n"+q.map(function(x){return "   - "+x}).join("\n"):" nothing is flagged for this apartment.")+
       (U.contact&&U.contact.phone?"\n   Phone: "+U.contact.phone+(U.contact.hours?" ("+U.contact.hours+")":""):"")+
-      (okUrl(U.links&&U.links.listing)?"\n   Listing: "+U.links.listing:"")}).join("\n\n")+"\n\nA lease is 12 months. You are choosing an experience to try, not forever."}
+      (okUrl(U.links&&U.links.listing)?"\n   Listing: "+U.links.listing:"")}).join("\n\n")+"\n\n"+LEASE_LINE}
 
 document.addEventListener("click",function(e){
   var t=e.target.closest?e.target.closest("[data-act],a[href^='#']"):null;
@@ -3407,7 +3528,10 @@ window.addEventListener("resize",function(){fitTray();fitTop()});
 document.addEventListener("toggle",function(e){var d=e.target,id=d&&d.getAttribute&&d.getAttribute("data-row");if(id&&view.contains(d))(OPENED[current]=OPENED[current]||{})[id]=d.open},true);
 window.addEventListener("hashchange",function(){var r=location.hash.replace(/^#/,"")||"lives";if(routeOf(parse(r))!==current){closeTut();closeSheet();go(r)}});
 
-window.__houseHunt={say:function(){var u=function(o){return norm(Object.assign({id:null,rent:{},parking:{},amenities:{}},o))};return {one:SAY.size(u({beds:1,sqft:784,floor:3})),studio:SAY.size(u({beds:0,sqft:500})),garage:SAY.parking(u({parking:{rank:4,type:"garage"}})),garageFee:SAY.parking(u({parking:{rank:4,type:"garage",fee:150}})),lot:SAY.parking(u({parking:{rank:2,type:"lot",fee:0}})),none:SAY.parking(u({}))}},filters:function(){return {f:fClone(S.f),on:FON,n:NFIT,rng:RNG,def:fClone(FDEF),move:MOVE_OPTS,chips:fChips(S.f)}},pass:function(f,id){return U_BY[id]?fPass(fRead(f),U_BY[id]):null},rentOf:function(id){return U_BY[id]?rentOf(U_BY[id]):null},couldPass:function(id){return U_BY[id]?couldPass(U_BY[id]):null},labels:{rent:L_RENT,total:L_TOTAL,with_uf:WITH_UF,sentence:PRICE_SENT},bldgs:function(){return BLDGS.map(function(B){return {id:B.id,slug:SLUG.bldg[B.id],hood:B.hood.id,units:B.units.map(function(u){return u.id})}})},state:function(){return {saved:S.saved.slice(),pick:S.pick.slice(),sort:S.sort}},tint:function(id,k){return U_BY[id]?tintOf(U_BY[id],k):null},sentences:sentences,cleanName:cleanName,offerLine:function(id){return U_BY[id]?offerLine(U_BY[id]):null},aboutShown:function(kind,id,mode){var o=kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;var all=aboutPoints(o);return {all:all.length,stale:all.filter(function(p){return staleCount(p.text,o)}).map(function(p){return p.text}).concat(sentences(calm(textOf(hostOfRec(o,"intro")))).filter(function(s){return staleCount(s,o)})),restated:all.filter(function(p){return !staleCount(p.text,o)&&ptRestates(p,mode,o)}).map(function(p){return p.text})}},aWalk:aWalk,payNote:payNote,ptBody:ptBody,parkShort:parkShort,distShort:distShort,HL:HL,HL_MAX:HL_MAX,cleanText:cleanText,looksDump:looksDump,hoodWhere:hoodWhere,hoodTitle:hoodTitle,headline:function(kind,id,key){var o=kind==="unit"?U_BY[id]:kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;
+window.__houseHunt={say:function(){var u=function(o){return norm(Object.assign({id:null,rent:{},parking:{},amenities:{}},o))};return {one:SAY.size(u({beds:1,sqft:784,floor:3})),studio:SAY.size(u({beds:0,sqft:500})),garage:SAY.parking(u({parking:{rank:4,type:"garage",kinds:["garage"]}})),garageFee:SAY.parking(u({parking:{rank:4,type:"garage",kinds:["garage"],fee:150}})),lot:SAY.parking(u({parking:{rank:2,type:"lot",kinds:["lot"],fee:0}})),none:SAY.parking(u({}))}},filters:function(){return {f:fClone(S.f),on:FON,n:NFIT,rng:RNG,def:fClone(FDEF),move:MOVE_OPTS,chips:fChips(S.f)}},pass:function(f,id){return U_BY[id]?fPass(fRead(f),U_BY[id]):null},rentOf:function(id){return U_BY[id]?rentOf(U_BY[id]):null},
+  /* (pass 9) what the page says about one apartment, for the walk-through: its star, its offer tag, its lease wording, its parking, whether it is available now */
+  apt9:function(id){var U=typeof id==="string"?U_BY[id]:norm(Object.assign({id:null,rent:{},parking:{},amenities:{}},id));if(!U)return null;var I=parkInfo(U);return {star:confs(U).length,offer:!!offerTag(U),term:rentTerm(U),park:parkSentence(U),parkShort:parkWordShort(U),parkFee:parkFeeShort(U),kind:parkKind(U),rank:I.rank,cov:I.cov,at:I.at,now:availNow(U),floor:floorWord(U),qs:tourQs(U),wdTag:wdTagOnly(U),wd:HL.building(U)}},
+  tollFact:function(o,typ,range){return tollFact(o,typ,"hood","x",range)},stationLabel:stationLabel,asOf:AS_OF,agree:agree,couldPass:function(id){return U_BY[id]?couldPass(U_BY[id]):null},labels:{rent:L_RENT,total:L_TOTAL,with_uf:WITH_UF,sentence:PRICE_SENT},bldgs:function(){return BLDGS.map(function(B){return {id:B.id,slug:SLUG.bldg[B.id],hood:B.hood.id,units:B.units.map(function(u){return u.id})}})},state:function(){return {saved:S.saved.slice(),pick:S.pick.slice(),sort:S.sort}},tint:function(id,k){return U_BY[id]?tintOf(U_BY[id],k):null},sentences:sentences,cleanName:cleanName,offerLine:function(id){return U_BY[id]?offerLine(U_BY[id]):null},aboutShown:function(kind,id,mode){var o=kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;var all=aboutPoints(o);return {all:all.length,stale:all.filter(function(p){return staleCount(p.text,o)}).map(function(p){return p.text}).concat(sentences(calm(textOf(hostOfRec(o,"intro")))).filter(function(s){return staleCount(s,o)})),restated:all.filter(function(p){return !staleCount(p.text,o)&&ptRestates(p,mode,o)}).map(function(p){return p.text})}},aWalk:aWalk,payNote:payNote,ptBody:ptBody,parkShort:parkShort,distShort:distShort,HL:HL,HL_MAX:HL_MAX,cleanText:cleanText,looksDump:looksDump,hoodWhere:hoodWhere,hoodTitle:hoodTitle,headline:function(kind,id,key){var o=kind==="unit"?U_BY[id]:kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;
     return key==="trip"?HL.trip(kind==="unit"?o.moments.sun:o):key==="queens"?HL.queens(o.vs_queens):key==="reviews"?HL.reviews(o.ratings):HL[key](o)},map:function(){return HHMAP},marks:function(){return YEARS.map(function(Y){return Y.mark})},mapHoods:function(id){return mapData().neighborhoods.filter(function(h){return !id||h.year===id}).length},tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
 buildFilterSheet();fSync();renderTray();renderFoot();
 go((function(){try{return location.hash.replace(/^#/,"")}catch(e){return ""}})()||"lives");

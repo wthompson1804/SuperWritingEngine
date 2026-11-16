@@ -107,6 +107,13 @@ master_units,beach_m,used,build_neighborhoods.py;lifestyle_features.py;enrich_un
 master_units,open_water_m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
 master_units,train_station,used,build_master.py;enrich_units.py,
 master_units,train_station_m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_units,train_station_system,used,enrich_units.py,
+master_units,train_station_kind,used,enrich_units.py,
+master_units,commuter_station,used,build_master.py;enrich_units.py,
+master_units,commuter_station_m,used,enrich_units.py,
+master_units,commuter_station_system,used,enrich_units.py,
+master_units,train_station_osm,used,enrich_units.py,
+master_units,train_station_osm_m,used,enrich_units.py,
 master_units,motorway_m,used,rank.py;lifestyle_features.py;enrich_units.py,
 master_units,util_1br,used,enrich_units.py,
 master_units,util_1br_complete,used,enrich_units.py,
@@ -132,7 +139,7 @@ master_units,dog_policy_text_basis,provenance,,travels with dog_policy_text
 master_units,dog_policy_text_source,provenance,,travels with dog_policy_text
 master_units,dog_weight_limit_lb,used,gates.py;build_master.py;rank.py,
 master_units,dog_weight_limit_lb_basis,provenance,build_master.py,travels with dog_weight_limit_lb
-master_units,dog_weight_limit_lb_source,provenance,,travels with dog_weight_limit_lb
+master_units,dog_weight_limit_lb_source,provenance,build_master.py,travels with dog_weight_limit_lb
 master_units,pet_rent_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_units,pet_rent_monthly_basis,used,all_in.py,
 master_units,pet_rent_monthly_source,provenance,,travels with pet_rent_monthly
@@ -215,11 +222,25 @@ master_units,dog_amenity_unspecified,display,build_master.py,"2026-11-16: what t
 master_units,dog_amenities_all_sources,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
 master_units,washer_dryer_hookups,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
 master_units,on_site_laundry,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_units,in_unit_laundry_source_kind,used,build_master.py;rank.py,
+master_units,in_unit_appliances,used,build_master.py;rank.py,
 master_units,laundry_all_sources,used,build_master.py;rank.py,
+master_units,parking_type_listed,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_units,parking_kinds,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_units,parking_kind,used,build_master.py;all_in.py,
+master_units,parking_included_kind,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_units,parking_included_quote,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_units,parking_included_basis,provenance,build_master.py,travels with parking_included
+master_units,parking_optional,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_units,parking_fee_kind,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_units,parking_kind_basis,provenance,build_master.py,travels with parking_kind
+master_units,parking_assigned,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_units,parking_reviewed,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_units,parking_all_sources,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
 master_units,elevator_aggregator_only,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_units,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
-master_units,parking_fee_monthly_basis,used,all_in.py,
-master_units,parking_fee_monthly_source,provenance,,travels with parking_fee_monthly
+master_units,parking_fee_monthly_basis,used,build_master.py;all_in.py,
+master_units,parking_fee_monthly_source,provenance,build_master.py,travels with parking_fee_monthly
 master_units,parking_fee_note,used,build_master.py;all_in.py,
 master_units,parking_fee_note_basis,provenance,,travels with parking_fee_note
 master_units,parking_fee_note_source,provenance,,travels with parking_fee_note
@@ -262,6 +283,9 @@ master_units,pluto_lot_address_source,provenance,,travels with pluto_lot_address
 master_units,dob_active_elevators,display,build_master.py,"the city's count of active passenger elevators on the lot: gate input in build_master.py, asserted in this script"
 master_units,dob_active_elevators_basis,provenance,,travels with dob_active_elevators
 master_units,dob_active_elevators_source,provenance,,travels with dob_active_elevators
+master_units,one_time_costs_text,display,build_master.py,"independent check 5: the sentences behind the one-time-cost and broker-fee disclosures, a dog weight limit no page states (kept beside the removed value), which appliances an in-unit laundry source names, and the name, system and kind of the nearest rail station (shown on the page)"
+master_units,one_time_costs_text_basis,provenance,,travels with one_time_costs_text
+master_units,one_time_costs_text_source,provenance,,travels with one_time_costs_text
 master_units,dogs_allowed_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
 master_units,dogs_allowed_note_basis,provenance,,travels with dogs_allowed_note
 master_units,dogs_allowed_note_source,provenance,,travels with dogs_allowed_note
@@ -489,6 +513,13 @@ master_units,price_lease_source,provenance,build_master.py,travels with price_le
 master_units,price_lowest_of_terms,used,build_master.py;rank.py,
 master_units,call_called_at,display,build_master.py,phone answers (data/evidence/call_answers.csv): notes and when the call was made; the fee total is read by all_in.py
 master_units,call_available,used,build_master.py;rank.py,
+master_units,broker_fee,used,build_master.py;rank.py,
+master_units,broker_fee_quote,display,build_master.py,"independent check 5: the sentences behind the one-time-cost and broker-fee disclosures, a dog weight limit no page states (kept beside the removed value), which appliances an in-unit laundry source names, and the name, system and kind of the nearest rail station (shown on the page)"
+master_units,broker_fee_source,provenance,build_master.py,travels with broker_fee
+master_units,one_time_items,used,build_master.py;rank.py,
+master_units,deposit_months,used,build_master.py;rank.py,
+master_units,deposit_dollars,used,build_master.py;rank.py,
+master_units,deposit_up_to,used,build_master.py;rank.py,
 master_units,price_12_sibling_gap,used,build_master.py;rank.py,
 master_units,price_12_sibling_why,used,build_master.py;rank.py,
 master_units,page_modified_date,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
@@ -496,7 +527,7 @@ master_units,page_modified_source,provenance,build_master.py,travels with page_m
 master_units,listing_stale,used,build_master.py;rank.py,
 master_units,listing_stale_days,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_units,listing_stale_why,used,build_master.py;rank.py,
-master_units,rent_basis,used,all_in.py,
+master_units,rent_basis,used,all_in.py;rank.py,
 master_units,rent_basis_kind,used,all_in.py;rank.py,
 master_units,rent_gross,used,all_in.py,
 master_units,rent_asterisk,used,all_in.py,
@@ -584,6 +615,13 @@ master_buildings,beach_m,used,build_neighborhoods.py;lifestyle_features.py;enric
 master_buildings,open_water_m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_groups.py;enrich_units.py,
 master_buildings,train_station,used,build_master.py;enrich_units.py,
 master_buildings,train_station_m,used,rank.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;enrich_units.py,
+master_buildings,train_station_system,used,enrich_units.py,
+master_buildings,train_station_kind,used,enrich_units.py,
+master_buildings,commuter_station,used,build_master.py;enrich_units.py,
+master_buildings,commuter_station_m,used,enrich_units.py,
+master_buildings,commuter_station_system,used,enrich_units.py,
+master_buildings,train_station_osm,used,enrich_units.py,
+master_buildings,train_station_osm_m,used,enrich_units.py,
 master_buildings,motorway_m,used,rank.py;lifestyle_features.py;enrich_units.py,
 master_buildings,util_1br,used,enrich_units.py,
 master_buildings,util_1br_complete,used,enrich_units.py,
@@ -609,7 +647,7 @@ master_buildings,dog_policy_text_basis,provenance,,travels with dog_policy_text
 master_buildings,dog_policy_text_source,provenance,,travels with dog_policy_text
 master_buildings,dog_weight_limit_lb,used,gates.py;build_master.py;rank.py,
 master_buildings,dog_weight_limit_lb_basis,provenance,build_master.py,travels with dog_weight_limit_lb
-master_buildings,dog_weight_limit_lb_source,provenance,,travels with dog_weight_limit_lb
+master_buildings,dog_weight_limit_lb_source,provenance,build_master.py,travels with dog_weight_limit_lb
 master_buildings,pet_rent_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_buildings,pet_rent_monthly_basis,used,all_in.py,
 master_buildings,pet_rent_monthly_source,provenance,,travels with pet_rent_monthly
@@ -692,11 +730,25 @@ master_buildings,dog_amenity_unspecified,display,build_master.py,"2026-11-16: wh
 master_buildings,dog_amenities_all_sources,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
 master_buildings,washer_dryer_hookups,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
 master_buildings,on_site_laundry,display,build_master.py,"2026-11-16: what the dog amenity and the laundry ARE, from every source's words (parsers.dog_amenity_facts, parsers.laundry_facts); shown in the page data, and the count of buildings with their own dog area reads dog_park_or_run. The score reads dog_amenities and in_unit_laundry"
+master_buildings,in_unit_laundry_source_kind,used,build_master.py;rank.py,
+master_buildings,in_unit_appliances,used,build_master.py;rank.py,
 master_buildings,laundry_all_sources,used,build_master.py;rank.py,
+master_buildings,parking_type_listed,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_buildings,parking_kinds,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_buildings,parking_kind,used,build_master.py;all_in.py,
+master_buildings,parking_included_kind,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_buildings,parking_included_quote,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_buildings,parking_included_basis,provenance,build_master.py,travels with parking_included
+master_buildings,parking_optional,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_buildings,parking_fee_kind,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_buildings,parking_kind_basis,provenance,build_master.py,travels with parking_kind
+master_buildings,parking_assigned,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_buildings,parking_reviewed,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
+master_buildings,parking_all_sources,display,build_master.py,"independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)"
 master_buildings,elevator_aggregator_only,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_buildings,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
-master_buildings,parking_fee_monthly_basis,used,all_in.py,
-master_buildings,parking_fee_monthly_source,provenance,,travels with parking_fee_monthly
+master_buildings,parking_fee_monthly_basis,used,build_master.py;all_in.py,
+master_buildings,parking_fee_monthly_source,provenance,build_master.py,travels with parking_fee_monthly
 master_buildings,parking_fee_note,used,build_master.py;all_in.py,
 master_buildings,parking_fee_note_basis,provenance,,travels with parking_fee_note
 master_buildings,parking_fee_note_source,provenance,,travels with parking_fee_note
@@ -739,6 +791,9 @@ master_buildings,pluto_lot_address_source,provenance,,travels with pluto_lot_add
 master_buildings,dob_active_elevators,display,build_master.py,"the city's count of active passenger elevators on the lot: gate input in build_master.py, asserted in this script"
 master_buildings,dob_active_elevators_basis,provenance,,travels with dob_active_elevators
 master_buildings,dob_active_elevators_source,provenance,,travels with dob_active_elevators
+master_buildings,one_time_costs_text,display,build_master.py,"independent check 5: the sentences behind the one-time-cost and broker-fee disclosures, a dog weight limit no page states (kept beside the removed value), which appliances an in-unit laundry source names, and the name, system and kind of the nearest rail station (shown on the page)"
+master_buildings,one_time_costs_text_basis,provenance,,travels with one_time_costs_text
+master_buildings,one_time_costs_text_source,provenance,,travels with one_time_costs_text
 master_buildings,dogs_allowed_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
 master_buildings,dogs_allowed_note_basis,provenance,,travels with dogs_allowed_note
 master_buildings,dogs_allowed_note_source,provenance,,travels with dogs_allowed_note

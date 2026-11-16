@@ -1124,3 +1124,108 @@ if __name__ == "__main__":
         ld = r["last_departure_from_jamaica_sat"]
         print(f"  last Sat departure from Jamaica: {ld.get('value')} ({ld['value_type']})"
               f" arrives {ld.get('arrives_door')}; {ld.get('leg_summary') or ld.get('reason') or ld.get('method')}")
+
+
+# ------------------------------------------------------------------------------------------ nearest rail station of any kind
+# Independent check 5, N3: "miles to a train station" measured commuter rail only (OSM railway=station not tagged subway
+# or light rail), so Journal Square read 1.8 miles beside a PATH station 3 minutes away. Every rail station of the cached
+# GTFS feeds, with its system and kind, is written once to data/reference/rail_stations.csv.
+import re  # noqa: E402
+import pandas as pd  # noqa: E402
+RAIL_STATIONS = ROOT / "data" / "reference" / "rail_stations.csv"
+_RAIL_FEEDS = [("gtfs_subway", "NYC Subway"), ("gtfslirr", "LIRR"), ("gtfsmnr", "Metro-North"), ("njt_rail", "NJ Transit"),
+               ("path", "PATH"), ("septa_rail", "SEPTA Regional Rail")]
+RAIL_KIND_WORD = {"train": "train", "subway": "subway", "path": "PATH", "light_rail": "light rail"}
+
+
+def build_rail_stations(gtfs_dir=None):
+    """One row per station and kind from the six rail GTFS zips under raw/gtfs/: name, system, kind (train = commuter
+    rail; subway; path; light_rail), lat, lon, feed. A stop's kind comes from the routes that actually stop there
+    (NJ Transit's feed holds commuter rail, route_type 2, and the Hudson-Bergen, Newark and River Line light rail,
+    route_type 0; the subway feed holds the Staten Island Railway, kept under 'subway' with its own system name)."""
+    import zipfile
+    gdir = Path(gtfs_dir) if gtfs_dir else ROOT / "raw" / "gtfs"
+    out = []
+    for key, system in _RAIL_FEEDS:
+        zp = gdir / f"{key}.zip"
+        if not zp.exists():
+            continue
+        with zipfile.ZipFile(zp) as z:
+            stops, routes, trips = _rows(z, "stops.txt"), _rows(z, "routes.txt"), _rows(z, "trips.txt")
+            rt = {r["route_id"]: r for r in routes}
+            trip_route = {t["trip_id"]: t["route_id"] for t in trips}
+            parent = {s["stop_id"]: (s.get("parent_station") or s["stop_id"]) for s in stops}
+            served = {}
+            mm = {n.rsplit("/", 1)[-1]: n for n in z.namelist() if n.endswith(".txt")}
+            with z.open(mm["stop_times.txt"]) as f:
+                rd = csv.reader(io.TextIOWrapper(f, "utf-8-sig"))
+                hdr = [h.strip() for h in next(rd)]
+                it, isx = hdr.index("trip_id"), hdr.index("stop_id")
+                for row in rd:
+                    r_ = trip_route.get(row[it].strip())
+                    if r_ is not None:
+                        served.setdefault(parent.get(row[isx].strip(), row[isx].strip()), set()).add(r_)
+            by_id = {s["stop_id"]: s for s in stops}
+            for sid, rids in sorted(served.items()):
+                s = by_id.get(sid)
+                if s is None or not s.get("stop_lat"):
+                    continue
+                kinds = {}
+                for rid in rids:
+                    r_ = rt.get(rid, {})
+                    typ = r_.get("route_type", "")
+                    if key == "path":
+                        k_, sysname = "path", "PATH"
+                    elif key == "gtfs_subway":
+                        # the Staten Island Railway is rapid transit on the subway map: not commuter rail (from Bayonne it is
+                        # the nearest "rail" in a straight line, across the Kill Van Kull)
+                        k_, sysname = ("subway", "Staten Island Railway") if typ == "2" else ("subway", "NYC Subway")
+                    elif key == "njt_rail":
+                        k_, sysname = ("light_rail", r_.get("route_long_name") or "NJ Transit light rail") if typ == "0" else ("train", "NJ Transit")
+                    else:
+                        k_, sysname = "train", system
+                    kinds.setdefault((k_, sysname), set()).add(r_.get("route_short_name") or r_.get("route_long_name") or rid)
+                for (k_, sysname), lines in sorted(kinds.items()):
+                    out.append({"station": re.sub(r"\s+", " ", s["stop_name"]).strip(), "system": sysname, "kind": k_,
+                                "lat": round(float(s["stop_lat"]), 6), "lon": round(float(s["stop_lon"]), 6), "feed": key,
+                                "lines": "; ".join(sorted(lines))[:120]})
+    df = pd.DataFrame(out).sort_values(["feed", "station", "kind", "system"]).drop_duplicates(["feed", "station", "kind", "system", "lat", "lon"])
+    RAIL_STATIONS.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(RAIL_STATIONS, index=False)
+    return df
+
+
+_RAIL_CACHE = {}
+
+
+def rail_stations():
+    if "df" not in _RAIL_CACHE:
+        _RAIL_CACHE["df"] = pd.read_csv(RAIL_STATIONS) if RAIL_STATIONS.exists() else build_rail_stations()
+    return _RAIL_CACHE["df"]
+
+
+def nearest_rail(lat, lon, stations=None):
+    """{'any': {...}, 'commuter': {...}}: the nearest rail station of ANY kind (commuter rail, subway, PATH, light rail)
+    and the nearest commuter-rail station, each with station, system, kind, kind_word and metres (straight line).
+    None for a key when no station of that sort lies within 60 km."""
+    st = rail_stations() if stations is None else stations
+    try:
+        lat, lon = float(lat), float(lon)
+    except (TypeError, ValueError):
+        return {"any": None, "commuter": None}
+    if lat != lat or lon != lon or not len(st):
+        return {"any": None, "commuter": None}
+    la, lo = np.radians(st.lat.to_numpy(float)), np.radians(st.lon.to_numpy(float))
+    a = np.sin((la - math.radians(lat)) / 2) ** 2 + math.cos(math.radians(lat)) * np.cos(la) * np.sin((lo - math.radians(lon)) / 2) ** 2
+    d = 2 * 6371008.8 * np.arcsin(np.sqrt(a))
+
+    def pick(mask):
+        if not mask.any():
+            return None
+        dd = np.where(mask, d, np.inf)
+        i = int(np.argmin(dd))
+        if dd[i] > 60000:
+            return None
+        r = st.iloc[i]
+        return {"station": r.station, "system": r.system, "kind": r.kind, "kind_word": RAIL_KIND_WORD[r.kind], "metres": int(round(float(dd[i])))}
+    return {"any": pick(np.ones(len(st), bool)), "commuter": pick((st.kind == "train").to_numpy())}

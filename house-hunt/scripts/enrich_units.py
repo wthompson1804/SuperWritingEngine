@@ -6,7 +6,7 @@ Outputs:
   data/units.csv                       passing listings + all-in lines; all-in > $3,000 are marked fail_all_in
 Usage: python3 scripts/enrich_units.py [--include-pending-near]   (default: gate_status == pass only)
 """
-import hashlib, json, sys
+import hashlib, json, re, sys
 from pathlib import Path
 import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent)); sys.path.insert(0, str(Path(__file__).parent / "tools"))
@@ -119,13 +119,52 @@ def flat(r):
         "supermarket": (er.get("nearest_supermarket") or {}).get("name"),
         "supermarket_m": v(er, "nearest_supermarket"),
         "coast_m": v(st, "coastline_m"), "beach_m": v(st, "beach_m"), "open_water_m": v(st, "nearest_open_water_m"),
-        "train_station": (st.get("nearest_train_station") or {}).get("name"),
-        "train_station_m": v(st, "nearest_train_station"),
+        # independent check 5, N3: the nearest rail station of ANY kind (commuter rail, subway, PATH, light rail) with
+        # its system, and the nearest commuter-rail station beside it (rail_fields); the map's commuter station is kept
+        **rail_fields(r.get("lat"), r.get("lon"), (st.get("nearest_train_station") or {}).get("name"), v(st, "nearest_train_station")),
         "motorway_m": v(st, "motorway_m"),
         "util_1br": v(r.get("utilities_1br", {}), "total", "amount"),
         "util_1br_complete": v(r.get("utilities_1br", {}), "total", "complete"),
         "util_studio": v(r.get("utilities_studio", {}), "total", "amount"),
     }
+
+
+def _station_name(n):
+    """'45TH STREET LIGHT RAIL STATION' -> '45th Street'; 'PORT IMPERIAL HBLR STATION' -> 'Port Imperial'; mixed-case names stay."""
+    n = str(n or "").strip()
+    if n.isupper():
+        n = re.sub(r"(\d)(St|Nd|Rd|Th)\b", lambda m: m.group(1) + m.group(2).lower(), n.title().replace("'S", "'s"))
+        n = re.sub(r"\bHblr\b", "HBLR", n)
+    n = re.sub(r"\s+(?:HBLR|Light Rail)\s+(?:Station|Sta)\b\.?$|\s+Light Rail$", "", n).strip()
+    return n
+
+
+def rail_fields(lat, lon, osm_name=None, osm_m=None, stations=None) -> dict:
+    """train_station / _m / _system / _kind: the nearest rail station of any kind from the GTFS station table
+    (transit.nearest_rail: commuter rail, subway, PATH, light rail), with the reader's word for its kind ('train',
+    'subway', 'PATH', 'light rail').
+    commuter_station / _m / _system: the nearest commuter-rail station. Where the map's commuter station (the old
+    figure) and the feed's are the same place (within 300 m of each other in distance), the map's name and distance are
+    kept, so an unchanged station keeps its figure; a map station far nearer than any in the feeds (a line no cached
+    feed carries) is used with the system 'rail (map data)'. train_station_osm / _m: the map's value, as before."""
+    nr = transit.nearest_rail(lat, lon, stations)
+    om, gc = num(osm_m), nr["commuter"]
+    com = None
+    if gc:
+        com = (gc["metres"], _station_name(gc["station"]), gc["system"])
+        if om is not None and osm_name and abs(om - gc["metres"]) <= 300:
+            com = (om, osm_name, gc["system"])
+    if om is not None and osm_name and (com is None or om < com[0] - 300):
+        com = (om, osm_name, "rail (map data)")
+    best = (com[0], com[1], com[2], "train") if com else None
+    ga = nr["any"]
+    if ga and ga["kind"] != "train" and (best is None or ga["metres"] < best[0]):
+        best = (ga["metres"], _station_name(ga["station"]), ga["system"], ga["kind_word"])
+    return {"train_station": best[1] if best else None, "train_station_m": int(round(best[0])) if best else None,
+            "train_station_system": best[2] if best else None, "train_station_kind": best[3] if best else None,
+            "commuter_station": com[1] if com else None, "commuter_station_m": int(round(com[0])) if com else None,
+            "commuter_station_system": com[2] if com else None,
+            "train_station_osm": osm_name, "train_station_osm_m": om}
 
 
 def borrow_coordinates(L):

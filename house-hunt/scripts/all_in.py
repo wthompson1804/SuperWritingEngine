@@ -68,13 +68,33 @@ def known_medians(units, fee_of):
             pet.setdefault(st, []).append(pr); pet.setdefault("", []).append(pr)
         pk = num(r.get("parking_fee_monthly"))
         if pk is not None and 0 <= pk <= 1000:
-            kind = parsers.parking_kind(r.get("parking_type", ""))
+            kind = parsers.parking_type_kind(r.get("parking_type", ""))
             for key in dict.fromkeys(((st, kind), (st, ""), ("", ""))):
                 park.setdefault(key, []).append(pk)
         if b in fee_of:
             fees.setdefault(st, []).append(fee_of[b]); fees.setdefault("", []).append(fee_of[b])
     cut = lambda d: {k: (_median(v), len(v)) for k, v in d.items() if len(v) >= MIN_N}
     return {"pet": cut(pet), "parking": cut(park), "fees": cut(fees)}
+
+
+def utility_medians(units, util):
+    """Independent check 5, N11: the typical value of a utility line that has NO estimate here (gas in the towns served by
+    Southern Connecticut Gas, whose tariff could not be read): the median of the estimates the utilities tool does give,
+    one value per building, by state and bedroom count, then by state, then overall. Used only for `all_in_likely`.
+    Returns {(state, line, 'utilities_1br' | 'utilities_studio' | ''): (median, n)}."""
+    seen, d = set(), {}
+    for r in units:
+        kind = "utilities_studio" if str(r.get("beds", "")).startswith("0") else "utilities_1br"
+        if (r["building_id"], kind) in seen:
+            continue
+        seen.add((r["building_id"], kind))
+        u = util.get((r["building_id"], kind), {})
+        for line in ("electric", "gas", "internet"):
+            a = num(u.get(line))
+            if a is not None and a > 0:
+                for key in dict.fromkeys(((r.get("state", ""), line, kind), (r.get("state", ""), line, ""), ("", line, ""))):
+                    d.setdefault(key, []).append(a)
+    return {k: (_median(v), len(v)) for k, v in d.items() if len(v) >= MIN_N}
 
 
 def pick(table, *keys):
@@ -116,7 +136,7 @@ def main():
     # the medians behind the estimate lines: two passes. Pass 1 costs every unit with no medians (to learn each building's
     # known required fees); pass 2 uses the medians. The medians do not depend on pass-1 estimates, so this is stable.
     recs = U.to_dict("records")
-    MED = {"pet": {}, "parking": {}, "fees": {}}
+    MED = {"pet": {}, "parking": {}, "fees": {}, "utility": {}}
     first = [cost_unit(r, util, RT, MED) for r in recs]
     fee_by_b = {}
     for r, o in zip(recs, first):
@@ -124,10 +144,14 @@ def main():
         if fl["basis"] != "unknown" and not any(x.startswith("building fees") for x in o["all_in_unknown_lines"].split("; ")):
             fee_by_b.setdefault(r["building_id"], []).append(fl["amount"] or 0)
     MED = known_medians(recs, {b: _median(v) for b, v in fee_by_b.items()})
+    MED["utility"] = utility_medians(recs, util)
     out = [cost_unit(r, util, RT, MED) for r in recs]
+    util_rows = [{"line": {"electric": "electricity", "gas": "gas", "internet": "internet"}[k[1]] + " (no estimate here)", "state": k[0] or "all",
+                  "parking_kind": {"utilities_1br": "one bedroom", "utilities_studio": "studio", "": "any size"}[k[2]], "median": m, "buildings": n}
+                 for k, (m, n) in sorted(MED["utility"].items())]
     est_rows = [{"line": "pet rent", "state": k or "all", "parking_kind": "", "median": m, "buildings": n} for k, (m, n) in sorted(MED["pet"].items())] \
         + [{"line": "parking", "state": k[0] or "all", "parking_kind": k[1] or "any", "median": m, "buildings": n} for k, (m, n) in sorted(MED["parking"].items())] \
-        + [{"line": "required fees", "state": k or "all", "parking_kind": "", "median": m, "buildings": n} for k, (m, n) in sorted(MED["fees"].items())]
+        + [{"line": "required fees", "state": k or "all", "parking_kind": "", "median": m, "buildings": n} for k, (m, n) in sorted(MED["fees"].items())] + util_rows
     pd.DataFrame(est_rows).assign(method="median of the known values, one value per building, over the buildings of the master table; groups under "
                                   + str(MIN_N) + " buildings are not used").to_csv(EST_FILE, index=False)
     finish(U, out, RT)
@@ -291,7 +315,7 @@ def cost_unit(r, util, RT, MED):
         # (b) what the bill would likely be once the unknown parking and fee lines are known (never part of all_in)
         likely_add, likely_notes = 0.0, []
         if "parking fee" in unknown:
-            kind = parsers.parking_kind(r.get("parking_type", ""))
+            kind = parsers.parking_type_kind(r.get("parking_type", ""))
             m_, n_, k_ = pick(MED["parking"], (st_, kind), (st_, ""), ("", ""))
             if m_ is not None:
                 likely_add += m_
@@ -303,6 +327,15 @@ def cost_unit(r, util, RT, MED):
             if m_ is not None and m_ > known_part:
                 likely_add += m_ - known_part
                 likely_notes.append(f"required fees ${m_:g} (median of {n_} buildings with known fees: {k_ or 'all states'})" + (f", of which ${known_part:g} is already counted" if known_part else ""))
+        # N11: a utility line with no estimate (gas where the gas company's tariff could not be read) takes the typical
+        # value of the estimates that do exist, so a total just under $3,000 with gas left out carries the "could pass" line
+        ukind = "utilities_studio" if str(r["beds"]).startswith("0") else "utilities_1br"
+        for key, word in (("electric", "electricity"), ("gas", "gas"), ("internet", "internet")):
+            if key in unknown:
+                m_, n_, k_ = pick(MED.get("utility", {}), (st_, key, ukind), (st_, key, ""), ("", key, ""))
+                if m_ is not None:
+                    likely_add += m_
+                    likely_notes.append(f"{word} ${m_:g} (median of the {word} estimates for {n_} buildings: {k_[0] or 'all states'})")
         all_in_likely = round(all_in + likely_add)
         # the offer in the page's own words only: no checker's note, no raw page data (docs/PENDING_FIXES.md)
         offer_text = t.get("offer_text_page", "") if t else ""

@@ -278,6 +278,25 @@ class Merge:
         # all of them after the merge (structured_dog_and_laundry), not from the one source that ranks highest
         self.dog_words: dict[str, list[str]] = {}
         self.laundry_words: dict[str, list[tuple[str, str, str]]] = {}
+        # independent check 5, N1: every source's own words about parking, with basis, source and where they were read
+        # (listing, fee lines, community page, amenities page, evidence fact, phone): parsers.parking_facts reads all of them
+        self.parking_words: dict[str, list[tuple[str, str, str, str]]] = {}
+        # independent check 5, N5: every source's words about the dog weight limit (parsers.dog_weight_traced)
+        self.dog_weight_words: dict[str, list[str]] = {}
+
+    def note_dog_weight(self, bid, *texts):
+        for x in texts:
+            if bid is not None and not is_blank(x) and str(x).strip() not in self.dog_weight_words.setdefault(bid, []):
+                self.dog_weight_words[bid].append(str(x).strip()[:600])
+
+    def note_parking(self, bid, text, basis, source, origin):
+        t = "" if is_blank(text) else re.sub(r"\s+", " ", str(text)).strip()
+        if bid is None or not t or t.lower() in ("parking_type_unknown", "no_mention", "unknown", "?", "see quote"):
+            return
+        item = (t[:500], basis, str(source)[:300], origin)
+        L_ = self.parking_words.setdefault(bid, [])
+        if not any(x[0].lower() == item[0].lower() and x[3] == origin for x in L_):
+            L_.append(item)
 
     def note_dog(self, bid, *texts):
         t = " || ".join(str(x).strip() for x in texts if not is_blank(x))
@@ -316,7 +335,7 @@ class Merge:
 
 CONFLICT_FIELDS = {"elevator", "dogs_allowed", "dog_weight_limit_lb", "parking_fee_monthly", "pet_rent_monthly",
                    "building_floors", "year_built"}
-TEXT_APPEND = {"dog_weight_unstated", "required_fees_text", "utilities_included", "concession_text_evidence", "optional_fees_text", "parking_text",
+TEXT_APPEND = {"one_time_costs_text", "dog_weight_unstated", "required_fees_text", "utilities_included", "concession_text_evidence", "optional_fees_text", "parking_text",
                "listing_warning", "price_term_text", "elevator_evidence_open", "dogs_evidence_open", "elevator_height_basis"}
 GOOD_FLOORCOUNT = ("confirmed", "official_record", "community_page")     # floor counts trusted to bound a unit-label reading
 
@@ -366,6 +385,11 @@ def apply_fact(M, b, fact, value, quote, url):
     if is_blank(v):
         return f.startswith(KNOWN_FACT_PREFIXES)
     C = "confirmed"
+    if f.startswith(("parking", "garage")) and not f.startswith(("parking_spaces", "garage_door")):
+        q_ = "" if is_blank(quote) or str(quote).strip().lower() == str(v).strip().lower() else f" | {str(quote).strip()[:240]}"
+        M.note_parking(b, (f"garage: {v}" if f.startswith("garage") and "garage" not in str(v).lower() else str(v)) + q_, C, url, "evidence fact " + f)
+    elif re.search(r"\bparking\b|\bgarage\b|carport", str(v), re.I) and f.startswith(("fee:", "optional_monthly_fee", "required_monthly_fee", "additional_fees", "amenities")):
+        M.note_parking(b, v, C, url, "evidence fact " + f)
     if f.startswith(("parking", "garage")):
         # type: only when the sentence names a kind of parking, so "1 spaces available" does not hide a lower source
         kind = "garage" if f.startswith("garage") and yesno(v) == "yes" else parsers.parking_kind(v)
@@ -443,6 +467,7 @@ def apply_fact(M, b, fact, value, quote, url):
         M.add(b, "dog_amenities", v, C, url)
         M.note_dog(b, v, quote)
     elif f.startswith(("dog_weight_limit_lb", "pet_limit", "pet_restrictions")):
+        M.note_dog_weight(b, f"{v} | {quote}")
         kind, lb = parsers.parse_dog_weight(v)
         if kind == "limit" and f.startswith("dog_weight_limit_lb"):
             M.add(b, "dog_weight_limit_lb", f"{lb:g}", C, url)
@@ -461,6 +486,9 @@ KNOWN_FACT_PREFIXES = ("parking", "garage", "pet_rent", "dog", "pet_fee", "fee:"
 
 
 # ---------------------------------------------------------------------- overnight street-parking rules (reviewed table)
+DOG_AMENITY_WORDS = re.compile(r"dog park|dog run|bark park|pet park|pet spa|dog spa|dog wash|pet wash|paw wash|grooming (?:room|station|area|facility)|pet grooming", re.I)
+
+
 def community_dog_snippets(path=None):
     """(by address key, by lower-case name) -> the sentence behind community_facts.csv's `dog_park_pet_spa = yes`.
     The listing gate joins the value alone (scripts/gates.py, on the normalized address + ZIP, then the name); the
@@ -483,6 +511,128 @@ def community_dog_snippets(path=None):
     return by_addr, by_name
 
 
+def community_dog_weight_snippets(path=None):
+    """(by address key, by lower-case name) -> the sentences of community_facts.csv behind a dog weight limit
+    (dog_weight_limit_lb_snippet, pet_policy_text and its snippet)."""
+    f = Path(path) if path else DATA / "reference" / "community_facts.csv"
+    import gates
+    by_addr, by_name = {}, {}
+    if not f.exists():
+        return by_addr, by_name
+    for r in pd.read_csv(f, dtype=str, keep_default_na=False).to_dict("records"):
+        items = [r.get(c, "") for c in ("dog_weight_limit_lb_snippet", "pet_policy_text", "pet_policy_text_snippet", "dogs_snippet") if not is_blank(r.get(c, ""))]
+        if not items:
+            continue
+        z = re.search(r"\d{5}", str(r.get("zip", "")))
+        ka = gates.norm_addr(r.get("address", "")) + "|" + (z.group(0) if z else "")
+        if len(ka) > 6:
+            by_addr.setdefault(ka, items)
+        if str(r.get("building_name", "")).strip():
+            by_name.setdefault(str(r["building_name"]).lower().strip(), items)
+    return by_addr, by_name
+
+
+def untraced_dog_weight(rows, M):
+    """Independent check 5, N5. A stored dog weight limit that no source's words state is removed ('not published'),
+    kept beside it as dog_weight_limit_untraced; a phone answer is its own source. Returns the buildings changed."""
+    changed = []
+    for b, d in rows.items():
+        lim = d.get("dog_weight_limit_lb", "")
+        if is_blank(lim) or d.get("dog_weight_limit_lb_basis") == PHONE:
+            continue
+        if not parsers.dog_weight_traced(lim, M.dog_weight_words.get(b, [])):
+            d["dog_weight_limit_untraced"] = f"{lim} ({d.get('dog_weight_limit_lb_basis', '')}): no page read states it"
+            for k in ("dog_weight_limit_lb", "dog_weight_limit_lb_basis", "dog_weight_limit_lb_source"):
+                d.pop(k, None)
+            changed.append(b)
+    return changed
+
+
+def community_parking_snippets(path=None):
+    """(by address key, by lower-case name) -> [(words, url)] for every parking column of community_facts.csv with the
+    sentence it was read from (parking_type, parking_fee_monthly, parking_included)."""
+    f = Path(path) if path else DATA / "reference" / "community_facts.csv"
+    import gates
+    by_addr, by_name = {}, {}
+    if not f.exists():
+        return by_addr, by_name
+    c = pd.read_csv(f, dtype=str, keep_default_na=False)
+    for r in c.to_dict("records"):
+        items = []
+        for col in ("parking_type", "parking_fee_monthly", "parking_included"):
+            v, sn = r.get(col, ""), r.get(col + "_snippet", "")
+            if is_blank(v) and is_blank(sn) or str(v).strip().lower() in ("unknown", "not_found", "not found"):
+                continue
+            label = {"parking_type": "", "parking_fee_monthly": "fee: ", "parking_included": "included: "}[col]
+            items.append((f"{label}{v}" + (f" | {sn}" if not is_blank(sn) and str(sn).strip().lower() != str(v).strip().lower() else ""), r.get(col + "_source_url", "") or r.get("community_url", "")))
+        if not items:
+            continue
+        z = re.search(r"\d{5}", str(r.get("zip", "")))
+        ka = gates.norm_addr(r.get("address", "")) + "|" + (z.group(0) if z else "")
+        if len(ka) > 6:
+            by_addr.setdefault(ka, items)
+        if str(r.get("building_name", "")).strip():
+            by_name.setdefault(str(r["building_name"]).lower().strip(), items)
+    return by_addr, by_name
+
+
+def load_parking_reviewed(path=None) -> dict:
+    """building_id -> row of data/reference/parking_reviewed.csv: buildings whose parking was READ against every source
+    and where the sentence parser cannot say which space is included or which kinds are at the building. A blank cell
+    keeps the parsed value. `optional` is 'kind:fee; kind:' (no fee = not published)."""
+    f = Path(path) if path else DATA / "reference" / "parking_reviewed.csv"
+    if not f.exists():
+        return {}
+    return {r["building_id"]: r for r in pd.read_csv(f, dtype=str, keep_default_na=False).to_dict("records")}
+
+
+def structured_parking(rows, M, reviewed=None):
+    """Independent check 5, N1 / D18: the structured parking fields of every building from ALL its sources' words
+    (parsers.parking_facts), then the reviewed table. `parking_type` is rewritten as '<head>: <source words>' where the
+    head names the space she would actually park in (a free open lot is 'lot', whatever garage the sentence also offers)."""
+    reviewed = load_parking_reviewed() if reviewed is None else reviewed
+    for b, items in M.parking_words.items():
+        d = rows.setdefault(b, {})
+        rv = reviewed.get(b, {})
+        if str(rv.get("fee", "")).strip() != "":
+            d["parking_fee_monthly"] = f"{float(rv['fee']):g}"
+            d["parking_fee_monthly_basis"] = "confirmed"
+            d["parking_fee_monthly_source"] = "data/reference/parking_reviewed.csv"
+            d["parking_fee_note"] = ("a spot is included or free: " if float(rv["fee"]) == 0 else "") + str(rv.get("quote", ""))[:120]
+        f = parsers.parking_facts(items, d.get("parking_fee_monthly"))
+        if rv:
+            if rv.get("kinds", "").strip():
+                f["kinds"] = [k.strip() for k in rv["kinds"].split(";") if k.strip()]
+                f["kind_basis"] = {k: f["kind_basis"].get(k, "reviewed") for k in f["kinds"]}
+            for k_ in ("primary_kind", "included_kind"):
+                if rv.get(k_, "").strip():
+                    f[k_] = rv[k_].strip()
+            if rv.get("included_kind", "").strip():
+                f["included_quote"], f["included_basis"], f["fee_kind"] = rv.get("quote", ""), "reviewed", rv["included_kind"].strip()
+            if rv.get("optional", "").strip():
+                f["optional"] = []
+                for part in rv["optional"].split(";"):
+                    k_, _, v_ = part.strip().partition(":")
+                    lo, _, hi = v_.partition("-")
+                    f["optional"].append({"kind": k_.strip(), "fee": float(lo) if lo.strip() else None, "fee_high": float(hi) if hi.strip() else None, "label": ""})
+            elif rv.get("optional", "") == "none":
+                f["optional"] = []
+            f["optional"] = [o for o in f["optional"] if o["kind"] in f["kinds"] or rv.get("optional", "").strip()]
+        d["parking_type_listed"] = d.get("parking_type", "")
+        d["parking_type"] = parsers.parking_type_text(f["primary_kind"], d.get("parking_type", ""))
+        d["parking_kinds"] = "; ".join(f["kinds"])
+        d["parking_kind"] = f["primary_kind"]
+        d["parking_included_kind"] = f["included_kind"]
+        d["parking_included_quote"] = f["included_quote"]
+        d["parking_included_basis"] = f["included_basis"]
+        d["parking_optional"] = json.dumps(f["optional"]) if f["optional"] else ""
+        d["parking_fee_kind"] = f["fee_kind"]
+        d["parking_kind_basis"] = json.dumps(f["kind_basis"]) if f["kind_basis"] else ""
+        d["parking_assigned"] = "yes" if f["assigned"] else ""
+        d["parking_reviewed"] = rv.get("why", "")
+        d["parking_all_sources"] = json.dumps([list(x) for x in items])
+
+
 def structured_dog_and_laundry(rows, M):
     """Writes the structured dog-amenity and laundry fields of every building from ALL its sources' words
     (parsers.dog_amenity_facts, parsers.laundry_facts). `dog_amenities` and `laundry` stay, as plain labels that agree
@@ -503,6 +653,8 @@ def structured_dog_and_laundry(rows, M):
         d["washer_dryer_hookups"] = "yes" if f["hookups"] else ""
         d["on_site_laundry"] = "yes" if f["on_site"] else ""
         d["laundry"] = f["label"]
+        d["in_unit_laundry_source_kind"] = f["basis"]          # N6: 'appliance_list' = only a listing site's appliance list names it
+        d["in_unit_appliances"] = f["appliances"]
         d["laundry_all_sources"] = " ## ".join(f"{t or v} ({bs})" for t, bs, v in items)[:1200]
 
 
@@ -659,6 +811,7 @@ def apply_call_answers_building(M, answers, building_of):
                 M.add(b, fld, f"{n:g}", PHONE, src)
                 if fld == "parking_fee_monthly":
                     M.add(b, "parking_fee_note", "a spot is included, by phone" if n == 0 else "by phone", PHONE, src)
+                    M.note_parking(b, "a parking space is included (by phone)" if n == 0 else f"parking ${n:g} a month (by phone)", PHONE, src, "phone")
         if str(a.get("ans_income_multiple", "")).strip():
             M.add(b, "call_income_multiple", a["ans_income_multiple"], PHONE, src)
         if str(a.get("ans_notes", "")).strip():
@@ -761,6 +914,10 @@ def main():
 
     M = Merge()
     cf_dog_addr, cf_dog_name = community_dog_snippets()
+    cw_addr, cw_name = community_dog_weight_snippets()
+    community_dog_weight_words = lambda addr_key, name: cw_addr.get(str(addr_key)) or cw_name.get(str(name).lower().strip(), [])
+    cp_addr, cp_name = community_parking_snippets()
+    community_parking_words = lambda addr_key, name: cp_addr.get(str(addr_key)) or cp_name.get(str(name).lower().strip(), [])
     community_dog_words = lambda addr_key, name: cf_dog_addr.get(str(addr_key)) or cf_dog_name.get(str(name).lower().strip(), "")
     # ------------------------------------------------------------------ 5/6. listing rows + inference
     for r in U.itertuples():
@@ -798,6 +955,7 @@ def main():
         M.add(b, "dogs_allowed", yesno(r.dogs), "stated", src)
         M.add(b, "dog_policy_text", r.dog_policy_text, "stated", src)
         M.add(b, "dog_weight_limit_lb", r.dog_weight_limit_lb if re.fullmatch(r"[\d.]+", r.dog_weight_limit_lb or "") else "", "stated", src)
+        M.note_dog_weight(b, r.dog_policy_text, *community_dog_weight_words(r.addr_key, r.building_name))
         if parsers.dog_weight_unstated(r.dog_policy_text):
             M.add(b, "dog_weight_unstated", "yes: " + r.dog_policy_text[:160], "stated", src)
         if parsers.dog_size_only(r.dog_policy_text) or re.search(r"small dogs only|Size allowed: Small[;)]", r.notes or ""):
@@ -812,6 +970,10 @@ def main():
             add_pet_rent(M, b, fj["pet_text"], "stated", src, True)
         # parking: type text as listed; fee from the fee field, the parking sentence or the fee lines (W4, A1, A14, A15)
         M.add(b, "parking_type", r.parking_type, "stated", src)
+        M.note_parking(b, r.parking_type, "stated", src, "listing")
+        M.note_parking(b, fj["parking_text"], "stated", src, "listing fee lines")
+        for t_, u_ in community_parking_words(r.addr_key, r.building_name):
+            M.note_parking(b, t_, "community_page", u_, "community page")
         pf = float(r.parking_fee) if re.fullmatch(r"[\d.]+", r.parking_fee or "") else None
         add_parking(M, b, r.parking_type if "$" in (r.parking_type or "") or re.search(r"free|included", r.parking_type or "", re.I) else "", "stated", src, pf)
         add_parking(M, b, fj["parking_text"], "stated", src)
@@ -858,6 +1020,9 @@ def main():
                 M.add(b, fld, v, "amenities_page", r.get("source_url", ""))
             if r.get("dog_amenities", "") not in ("", "no_mention"):
                 M.note_dog(b, r["dog_amenities"], r.get("dog_amenities_evidence", ""))
+            if r.get("gated_or_garage_parking", "") not in ("", "no_mention", "parking_type_unknown") or not is_blank(r.get("gated_or_garage_parking_evidence", "")):
+                M.note_parking(b, f"{r.get('gated_or_garage_parking', '')}: {r.get('gated_or_garage_parking_evidence', '')}".strip(": "), "amenities_page", r.get("source_url", ""), "amenities page")
+            M.note_parking(b, r.get("parking_fee_monthly_evidence", ""), "amenities_page", r.get("source_url", ""), "amenities page fee")
             if r.get("in_unit_laundry", "") not in ("", "no_mention"):
                 M.note_laundry(b, r.get("in_unit_laundry_evidence", ""), "amenities_page", r["in_unit_laundry"])
             # the stored number was "the first dollar figure in the sentence" (A16): re-read the sentence itself
@@ -882,6 +1047,14 @@ def main():
             b, fact, val = bid_of(r.addr_key), r.fact.lower(), r.value
             if b is None:
                 continue
+            if fact.startswith(("dog_weight", "dogs_allowed", "pet_policy", "dog_policy")):
+                M.note_dog_weight(b, f"{val} | {r.quote}")
+                # independent check 5, N25: a dog amenity named in a checker's dog row ('Pet-Friendly with dog park', the
+                # building site's 'PET SPA') is a source like any other (Kensington Place, The Wyldes, 153-10 88th Ave)
+                txt_ = f"{val} | {r.quote}"
+                named = [m_.group(0) for m_ in DOG_AMENITY_WORDS.finditer(txt_) if not re.search(r"\bno\s+(?:\w+\s+){0,2}$", txt_[:m_.start()].lower())]
+                if named:
+                    M.note_dog(b, "; ".join(dict.fromkeys(x.lower() for x in named)) + " (named in a checker's row: " + txt_[:160] + ")")
             if fact.startswith("dog_weight") or fact.startswith("dogs_allowed"):
                 # a size word with no number is an open fact whatever the row's status (W2): it only ever adds caution
                 kind, lb = parsers.parse_dog_weight(val) if fact.startswith("dog_weight") else ("size_only" if parsers.dog_size_only(val) else "", None)
@@ -1000,6 +1173,7 @@ def main():
         M.add(b, "dogs_allowed", verdict, "confirmed", rows_[0][1])
         M.add(b, "dogs_allowed_note", "sources disagree: " + " / ".join(v for v, _ in rows_)[:260], "confirmed", rows_[0][1])
     unmapped = {}
+    broker_facts = {}                                # building -> [(applies | none, quote, listing URL)]
     mod_facts = {}                                   # building -> [(date, source_url)] from listing_last_modified / listing_updated_at facts
     if len(F):
         for r in F.itertuples():
@@ -1021,6 +1195,14 @@ def main():
                 M.add(b, "credit_requirement", cond["credit"], "confirmed", r.source_url)
             if cond.get("not_normal_lease"):
                 M.add(b, "not_normal_lease", cond["not_normal_lease"] + ": " + src_txt, "confirmed", r.source_url)
+            # independent check 5, N4: one-time costs and a broker fee a checker read on the listing (parsers.one_time_costs,
+            # parsers.broker_fee_statement); the broker statement belongs to the listing it was read on (its URL)
+            if fl_.startswith(("move_in_fee", "application_fee", "one_time_fee", "deposit", "other_fee", "admin_fee", "holding_fee")):
+                M.add(b, "one_time_costs_text", ("deposit: " if fl_.startswith("deposit") else "") + f"{r.value} | {getattr(r, 'quote', '')}", "confirmed", r.source_url)
+            if fl_.startswith("broker_fee"):
+                bk, bq = parsers.broker_fee_statement(f"{r.value} | {getattr(r, 'quote', '')}")
+                if bk:
+                    broker_facts.setdefault(b, []).append((bk, bq, r.source_url))
             if r.fact.lower().startswith("furnished"):
                 continue
             if not apply_fact(M, b, r.fact, r.value, getattr(r, "quote", ""), r.source_url):
@@ -1039,7 +1221,10 @@ def main():
     for b, txt in staff_all.items():           # D9: every source's sentence about the front desk, for parsers.staff_from_sources
         rows.setdefault(b, {})["doorman_all_sources"] = txt
     structured_dog_and_laundry(rows, M)
+    structured_parking(rows, M)
     rows = phone_overrides_building(rows)
+    untraced = untraced_dog_weight(rows, M)
+    print(f"  dog weight limits no page states (removed, kept as dog_weight_limit_untraced): {len(untraced)}")
     for b, when in called_b.items():
         rows.setdefault(b, {})["call_building_called_at"] = when
     for b, d in rows.items():
@@ -1096,7 +1281,7 @@ def main():
     bfirst = U.drop_duplicates("building_id").set_index("building_id")
     keep_from_units = ["address", "city", "city_listed", "city_basis", "state", "zip5", "hood", "hood_id", "hood_area"] + \
         [c for c in U.columns if c.startswith(("drive_", "toll_", "transit_", "police_", "crime_", "near_", "park_", "dog_park_", "restaurants_",
-                                               "bars_", "cafes_", "music_", "supermarket", "coast_", "beach_", "open_water_", "train_station",
+                                               "bars_", "cafes_", "music_", "supermarket", "coast_", "beach_", "open_water_", "train_station", "commuter_station",
                                                "motorway_", "util_", "last_sat", "pluto_"))]
     B = bfirst[[c for c in keep_from_units if c in bfirst.columns]].copy()
     B = B.join(G)                                # one coordinate per building (W7)
@@ -1457,6 +1642,30 @@ def main():
     for c in ("unit_floor", "price_lease_months", "price_12_month"):
         MU[c] = MU[c].astype(object)
     MU = apply_call_answers_units(MU, CALLS)
+    # independent check 5, N4: a broker fee and other one-time costs, from the listing's own description (the cached page
+    # each apartment was read on) and from the checkers' facts. One-time costs are never part of the monthly total.
+    sys.path.insert(0, str(Path(__file__).parent / "tools"))
+    import listing_fees
+    FS = listing_fees.for_raw_paths(MU.raw_path) if "raw_path" in MU else {}
+    bk_, bq_, bs_, oi_, om_, od_, ou_ = [], [], [], [], [], [], []
+    b_units = MU.groupby("building_id").size().to_dict()
+    for b, url_, also_, rp_ in zip(MU.building_id, MU.url, MU.also_seen_at, MU.raw_path if "raw_path" in MU else [""] * len(MU)):
+        st = FS.get(str(rp_), {})
+        kind, quote, src_ = st.get("broker", ""), st.get("broker_quote", ""), "the listing's description" if st.get("broker") else ""
+        for fk, fq, furl in broker_facts.get(b, []):
+            if furl and (furl == url_ or furl in str(also_).split() or b_units.get(b, 0) == 1) and not kind:
+                kind, quote, src_ = fk, fq, "the listing, as read by a checker"
+        text_b = rows.get(b, {}).get("one_time_costs_text", "")
+        ob = parsers.one_time_costs(text_b)
+        items = list(dict.fromkeys([x for x in str(st.get("items", "")).split("; ") if x] + [x for x in ob["items"] if x.split(" $")[0] not in {y.split(" $")[0] for y in str(st.get("items", "")).split("; ")}]))
+        fnum = lambda x: float(x) if str(x).strip() not in ("", "nan", "None") else None
+        dm = max([x for x in (fnum(st.get("deposit_months", "")), ob["deposit_months"]) if x is not None], default=None)
+        dd = max([x for x in (fnum(st.get("deposit_dollars", "")), ob["deposit_dollars"]) if x is not None], default=None)
+        bk_.append(kind); bq_.append(quote); bs_.append(src_); oi_.append("; ".join(items))
+        om_.append("" if dm is None else f"{dm:g}"); od_.append("" if dd is None else f"{dd:g}")
+        ou_.append("yes" if (st.get("deposit_up_to") == "yes" or ob["deposit_up_to"]) else "")
+    MU["broker_fee"], MU["broker_fee_quote"], MU["broker_fee_source"] = bk_, bq_, bs_
+    MU["one_time_items"], MU["deposit_months"], MU["deposit_dollars"], MU["deposit_up_to"] = oi_, om_, od_, ou_
     # evidence batch 20, sibling long-lease rule: a unit whose listed price is a long-lease price and whose own 12-month
     # price was not read, in a building where another unit's 12-month price is more than 15 percent above its listed
     # price. No price is guessed; scripts/rank.py makes it one open "listing" fact and says to ask.
@@ -1517,7 +1726,7 @@ def main():
         if corr:
             d_, src_ = corr[0], f"reviewed correction ({corr[2]})"
             read_on = max(read_on, corr[1][:10])
-        lvl, days, why = parsers.staleness(d_, read_on, av, second_source=second_site(url_, also, dupu)) if not str(called).strip() else ("", None, "")
+        lvl, days, why = parsers.staleness(d_, read_on, av, second_source=second_site(url_, also, dupu), as_of=parsers.TOUR_START) if not str(called).strip() else ("", None, "")
         pm.append(d_); pms.append(src_ if d_ else ""); st_lvl.append(lvl); st_days.append("" if days is None else days); st_why.append(why)
     MU["page_modified_date"], MU["page_modified_source"], MU["listing_stale"], MU["listing_stale_days"], MU["listing_stale_why"] = pm, pms, st_lvl, st_days, st_why
     MU.to_csv(DATA / "master_units.csv", index=False)
