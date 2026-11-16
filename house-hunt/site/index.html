@@ -723,6 +723,7 @@ body{padding-bottom:calc(var(--tray-h,56px) + 20px)}
 .life.slim{gap:6px;padding:11px 14px 12px}
 .life.slim .l2{display:block;-webkit-line-clamp:unset;overflow:visible}
 .chip small,.hood.card .chip small{white-space:normal;overflow:visible;font-size:11px}
+.chip b{white-space:normal;overflow:visible;overflow-wrap:anywhere}
 .hhm>.hhm-hint{display:none}
 .figs.xt{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) auto;gap:8px;margin-top:2px}
 .figs.xt b{font-size:19px}
@@ -2218,7 +2219,7 @@ function leadCount(s,min,max){var o="",i=0;while(i<s.length&&o.length<min&&(o+" 
 function ptList(a){return '<ul class="pts">'+a.map(function(p){return '<li><span class="pi'+(p.warn?' warn':'')+'">'+ptIcon(p.icon)+'</span><span>'+(p.b?'<b>'+esc(p.b)+'</b> ':'')+esc(p.text)+'</span></li>'}).join("")+'</ul>'}
 function aboutPoints(o){return arr(o&&o.about_points).map(function(p){return typeof p==="string"?{text:p}:p}).filter(function(p){return p&&textOf(p.text)}).map(function(p){return {icon:p.icon,text:calm(textOf(p.text))}}).filter(function(p){return p.text})}
 function aboutBox(title,o,text,id,katch){var pts=aboutPoints(o),h="",c=calm(textOf(katch));
-  if(pts.length)h=ptList(pts);
+  if(pts.length){var lead=sentences(calm(textOf(text))).join(" ");h=(lead?'<p class="lead2">'+esc(lead)+'</p>':'')+ptList(pts)} /* the written lead, then the points */
   else{var s=sentences(calm(textOf(text)));if(!s.length&&!c)return "";
     var nl=s.length?Math.max(2,leadCount(s,110,260)):0;
     h=(s.length?'<p class="lead2">'+esc(s.slice(0,nl).join(" "))+'</p>':'')+(s.length>nl?ptList(s.slice(nl).map(function(x){return {text:x}})):'')}

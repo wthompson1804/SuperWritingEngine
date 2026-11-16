@@ -360,6 +360,20 @@ def main():
             n += 1
     rep["places with a photos link"] = f"{n} of {len(d['units'])}"
 
+    # resident quotes: nothing about who lives there by race, ethnicity, religion or national origin, in either round
+    # (project rule 9; round 2 screened at collection, round 1 did not catch "diverse" and similar)
+    VOICE_COMPOSITION = re.compile(r"\b(hispanics?|latin[oax]s?|asians?|chinese|korean|indians?|blacks?|whites?|african|caribbean|jewish|jews|orthodox|hasid\w*|"
+                                   r"muslims?|christians?|catholics?|mexicans?|dominicans?|puerto ricans?|polish|italians?|irish|russians?|arabs?|immigrants?|"
+                                   r"ethnic\w*|minorit\w+|divers\w+|multicultural\w*|race|racial\w*|racis\w+)\b", re.I)
+    dropped = 0
+    for h in hoods.values():
+        vs = (h.get("local") or {}).get("voices")
+        if vs:
+            keep = [v for v in vs if not VOICE_COMPOSITION.search(v.get("excerpt", ""))]
+            dropped += len(vs) - len(keep)
+            h["local"]["voices"] = keep
+    rep["resident quotes dropped for describing who lives there"] = dropped
+
     d.setdefault("meta", {})["extras"] = rep
     json.dump(d, open(f, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     print("site/data.json extras:", rep)

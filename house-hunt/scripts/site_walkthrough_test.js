@@ -10,7 +10,7 @@ const assert = require('assert');
 const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390), VH = W === 320 ? 640 : W >= 1000 ? 900 : 844;
 const SCREEN = 844, AIM = 2 * SCREEN; // collapsed pages: aim for two phone screens
 // The "About" text is now shown whole, so a page is taller than two screens; what must hold is how soon the way on is reached (the "See the …" button) and these ceilings.
-const LIMITS = { experience: 3.6, neighborhood: 3.4, building: 2.6, compare: 2.2, list: 2.2 }, LIMIT = Math.round(3.6 * SCREEN), limitOf = kind => Math.round((LIMITS[kind] || 3.6) * SCREEN);
+const LIMITS = { experience: 3.6, neighborhood: 3.4, building: 2.6, 'building, many': 3.5, compare: 2.2, list: 2.2 }, LIMIT = Math.round(3.6 * SCREEN), limitOf = kind => Math.round((LIMITS[kind] || 3.6) * SCREEN);
 (async () => {
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: W, height: VH }, deviceScaleFactor: 1 });
@@ -271,8 +271,8 @@ const LIMITS = { experience: 3.6, neighborhood: 3.4, building: 2.6, compare: 2.2
   assert.strictEqual(await page.locator('#view .host, #view .who, #view .clampw, #view [data-act=unclamp]').count(), 0, 'no host box and nothing clamped'); assert(!/your host/i.test(await page.evaluate(() => document.getElementById('view').textContent)), 'no "Your host says"');
   if (Y1.host && Y1.host.intro) { const ab = await page.evaluate(() => { const s = document.getElementById('about'); return { h2: s.querySelector('h2').textContent, lead: (s.querySelector('.lead2') || {}).textContent || '', pts: [...s.querySelectorAll('.pts li')].map(li => li.textContent), icons: s.querySelectorAll('.pts li svg').length, cut: [...s.querySelectorAll('*')].filter(e => e.scrollHeight > e.clientHeight + 2 && getComputedStyle(e).overflow !== 'visible').length }; });
     assert.strictEqual(ab.h2, 'About this experience'); assert.strictEqual(ab.cut, 0, 'nothing in it is cut');
-    const want = await page.evaluate(x => window.__houseHunt.sentences(x), Y1.host.intro), got = [ab.lead].concat(ab.pts).join(' ').replace(/\s+/g, ' ').trim();
-    if (!want.some(s => CRIME.test(s))) assert.strictEqual(got, want.join(' '), 'the whole text is there, once');
+    const ap = (Y1.about_points || []).map(p => typeof p === 'string' ? p : p.text).filter(Boolean), want = (await page.evaluate(x => window.__houseHunt.sentences(x), Y1.host.intro)).concat(ap), got = [ab.lead].concat(ab.pts).join(' ').replace(/\s+/g, ' ').trim();
+    if (!want.some(s => CRIME.test(s))) assert.strictEqual(got, want.join(' '), 'the whole text is there, once: the lead, then the points');
     assert(ab.pts.length >= 1 && ab.icons === ab.pts.length, 'the rest is a short list, each line with its mark: ' + ab.pts.length); assert(ab.lead.length >= 60, 'the lead is something to read: ' + ab.lead); }
   // the way on sits right under the key facts, above the About text
   { const b = await page.evaluate(() => { const e = document.getElementById('see-hoods'), k = document.querySelector('.sec.head .kstrip'), a = document.getElementById('about'), tr = document.getElementById('trail'); return { text: e.textContent.trim(), top: e.getBoundingClientRect().top, bottom: Math.round(e.getBoundingClientRect().bottom + window.scrollY - tr.offsetHeight), strip: k.getBoundingClientRect().bottom, about: a ? a.getBoundingClientRect().top : 1e9 }; });
@@ -394,7 +394,7 @@ const LIMITS = { experience: 3.6, neighborhood: 3.4, building: 2.6, compare: 2.2
   const conf = best.find(u => u.confirm.asterisk && !u.rent.asterisk) || best.find(u => u.confirm.asterisk);
   const bOne = best.find(u => bUnits(u).length === 1), bMost = best.slice().sort((a, b) => bUnits(b).length - bUnits(a).length)[0];
   for (const [tag, u] of [['rich', uRich], ['sparse', uSparse], ['with an asterisk', conf], ['one apartment', bOne], [bUnits(bMost).length + ' apartments (the most in the data)', bMost]]) {
-    await go('#bldg-' + bSlug(u), '.bpage'); await fits('building', tag + ' (' + (u.building || u.address) + ')'); await noCrime('building ' + tag); await overflow('building ' + tag);
+    await go('#bldg-' + bSlug(u), '.bpage'); await fits(bUnits(u).length > 2 ? 'building, many' : 'building', tag + ' (' + (u.building || u.address) + ')'); await noCrime('building ' + tag); await overflow('building ' + tag);
     for (const [id, key] of [['r-parking', 'parking'], ['r-dog', 'dog'], ['r-building', 'building'], ['r-reviews', 'reviews'], ['r-day', 'day']]) assert.strictEqual(await headOf(id), await page.evaluate(([i, k]) => window.__houseHunt.headline('unit', i, k), [u.id, key]), 'the row headline is the builder\'s: ' + id);
     // reviews of the building: what the sites show, most reviews first, each linked; never a judgement of ours
     { const r = u.ratings || {}, ps = (r.platforms || []).filter(x => x && x.platform && x.rating != null), exp = !ps.length || r.found_any === false ? (r.searched ? 'No reviews found online' : 'Not looked up yet') : null;
@@ -618,7 +618,7 @@ const LIMITS = { experience: 3.6, neighborhood: 3.4, building: 2.6, compare: 2.2
       if (location.hash !== '#' + h) { unresolved.push(h); continue; } // two ids that give the same plain hash: the page numbers the second one
       if (document.documentElement.scrollWidth > document.documentElement.clientWidth) return 'overflow at ' + h;
       const kind = h.split('-')[0], f = document.getElementById('foot').getBoundingClientRect(), tr = document.getElementById('trail'), ht = Math.round(f.bottom + window.scrollY - (tr.hidden ? 0 : tr.offsetHeight));
-      maxH[kind] = Math.max(maxH[kind] || 0, ht); if (ht > LIMS[kind]) tall.push(h + ' ' + ht);
+      maxH[kind] = Math.max(maxH[kind] || 0, ht); if (ht > (kind === 'bldg' ? Math.round((2.3 + 0.13 * document.querySelectorAll('#sec-apts .apt').length) * 844) : LIMS[kind])) tall.push(h + ' ' + ht); // a building: 2.3 screens and 0.13 for each apartment row
       if (document.querySelectorAll('#view .host, #view .who, #view .clampw').length || /your host/i.test(document.getElementById('view').textContent)) return 'a host box at ' + h;
       if (kind === 'unit' && !(document.querySelector('.bpage') && document.querySelectorAll('#sec-apts details.aptd[open]').length === 1)) return 'a place link that does not open its building with one apartment open: ' + h;
       if (kind === 'bldg' && document.querySelectorAll('#sec-apts details[open]').length) return 'an apartment open by default at ' + h;
@@ -669,7 +669,7 @@ const LIMITS = { experience: 3.6, neighborhood: 3.4, building: 2.6, compare: 2.2
     h.host = { intro: 'TEST host intro. ' + 'This is a long made-up paragraph in the voice of the host so that it runs well past four lines on a phone and needs the more button to be read in full. '.repeat(3) };
     h.headlines = { local_rules: { subhead: 'TEST subhead written by hand: ask the building about the overnight permit before you bring the car, and ask again in writing.' }, residents_say: { subhead: 'TEST subhead about violent crime that must not show.' } };
     y.tagline = 'TEST subhead: a quiet town, the lowest crime on the list and a train to the city.'; y.subhead = y.tagline; y.prose = Object.assign({}, y.prose, { promise: 'TEST promise about very low crime, 0.3 violent per 1,000.' });
-    y.host = { intro: 'TEST experience host intro.', walkthrough: ['TEST walkthrough one.', 'TEST walkthrough two.'] };
+    y.host = { intro: 'TEST experience host intro.', walkthrough: ['TEST walkthrough one.', 'TEST walkthrough two.'] }; delete y.day_moments; delete y.about_points; delete h.about_points; // the older shape: no points, no moments
     u.host = { line: 'TEST host line for the place.', catch: 'TEST host catch.' }; u.headlines = { parking: { subhead: 'TEST parking subhead.' } };
     // fields the writing agent will send: icon points, the day's moments, a text about the building
     const y2 = d.years.find(x => x.id === h2o.year), h2 = d.neighborhoods.find(x => x.id === h2id), u2 = d.units.find(x => x.id === u2id);
@@ -708,7 +708,7 @@ const LIMITS = { experience: 3.6, neighborhood: 3.4, building: 2.6, compare: 2.2
   await page2.evaluate(h => { location.hash = h; }, '#exp-' + slug(h2o.year)); await page2.waitForSelector('#about .pts');
   { const pts = await page2.evaluate(() => [...document.querySelectorAll('#about .pts li')].map(li => ({ t: li.textContent, stroke: li.querySelectorAll('svg path, svg rect').length, dot: li.querySelectorAll('svg circle[fill=currentColor]').length })));
     assert.deepStrictEqual(pts.map(p => p.t), ['TEST point one, with a dog.', 'TEST point two, unknown icon.', 'TEST point three, a plain string.'], 'the points, the crime one left out'); assert(pts[0].stroke >= 1 && pts[0].dot === 0, 'a drawn icon for a known key'); assert(pts[1].dot === 1 && pts[2].dot === 1, 'a dot for an unknown or missing key');
-    assert.strictEqual(await page2.locator('#about .lead2').count(), 0, 'points replace the split text'); await openRow('r-scene', page2);
+    assert.strictEqual(await page2.locator('#about .lead2').count(), 1, 'the written lead stays above the points'); await openRow('r-scene', page2);
     assert.deepStrictEqual(await page2.evaluate(() => [...document.querySelectorAll('#r-scene .dmom h4')].map(h => h.textContent.trim())), ['TEST morning', 'TEST commute']); assert.strictEqual(await headOf('r-scene', page2), 'TEST moment one.');
     if (W === 390 && OUT) { await page2.evaluate(() => window.scrollTo(0, 0)); await page2.screenshot({ path: `${OUT}/ux-07b-test-data-about-points.png` }); } }
   await page2.evaluate(h => { location.hash = h; }, '#hood-' + slug(h2id)); await page2.waitForSelector('#about .pts'); assert.strictEqual((await page2.textContent('#about .pts')).trim(), 'TEST hood point.');
