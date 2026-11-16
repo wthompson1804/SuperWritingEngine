@@ -234,3 +234,8 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
   with utilities and fees, clearly labelled. Filters (price and others) are a visible, first-class control on the first
   screen, experience and neighborhood pages and My list. Updating the publicly shared page needs the owner's go-ahead
   (an automated publish to a page shared by link was blocked while he was away).
+
+- **12-month price (2026-11-16, after the live re-read):** the $3,000 total is tested on the 12-month price whenever the
+  page gives one and it differs from the listed price, whatever lease the listed price is quoted on (this replaces any
+  earlier wording about "a lease longer than 13 months"). Where a sibling apartment's 12-month price is more than 15%
+  above its listed price and a unit has no 12-month price of its own, the unit carries one open "listing" fact.
