@@ -1,4 +1,4 @@
-# Run report (2026-11-16T01:00:29+00:00)
+# Run report (2026-11-16T01:26:01+00:00)
 
 ## Steps
 
@@ -6,15 +6,6 @@
 |---|---|---|
 | parser tests (every example in docs/INDEPENDENT_CHECK.md) | `test_parsers.py` | ok |
 | rule tests (every defect in docs/INDEPENDENT_CHECK_2.md) | `test_rules.py` | ok |
-| gates (merge, dedupe, gate each listing) | `gates.py` | ok |
-| NYC building class (PLUTO) | `enrich_nyc_pluto.py` | ok |
-| gates again with PLUTO | `gates.py` | ok |
-| lookup tools per building | `enrich_units.py` | ok |
-| neighborhood assignment | `build_neighborhoods.py` | ok |
-| lifestyle features | `lifestyle_features.py` | ok |
-| lifestyle colour | `lifestyle_color.py` | ok |
-| crime benchmarks | `crime_benchmarks.py` | ok |
-| lifestyle groups (saved centres) | `lifestyle_groups.py` | ok |
 | building amenities (cached pages) | `building_amenities.py --no-fetch` | ok |
 | master tables | `build_master.py` | ok |
 | rent terms | `rent_terms.py` | ok |
@@ -110,79 +101,6 @@ test_parsers: 259 assertions passed
 **rule tests (every defect in docs/INDEPENDENT_CHECK_2.md)**
 ```
 test_rules (rules): 199 checks, 0 failed
-```
-
-**gates (merge, dedupe, gate each listing)**
-```
-| movein | 7842 | 932 | 11690 |
-| dog | 10298 | 1171 | 8995 |
-| elevator | 5811 | 1317 | 13336 |
-| floor | 5092 | 1076 | 14296 |
-| place | 20434 | 0 | 30 |
-| proof | 10376 | 7 | 10081 |
-```
-
-**NYC building class (PLUTO)**
-```
-3033 NYC buildings; {'house_number+location': 1486, 'nearest_lot': 837, 'no_lot_within_40m': 710}
-{'no': 1154, 'yes': 947, nan: 710, 'unknown': 222}
-```
-
-**gates again with PLUTO**
-```
-| movein | 7842 | 932 | 11690 |
-| dog | 10298 | 1171 | 8995 |
-| elevator | 5811 | 1317 | 13336 |
-| floor | 5092 | 1076 | 14296 |
-| place | 20434 | 0 | 30 |
-| proof | 10376 | 7 | 10081 |
-```
-
-**lookup tools per building**
-```
-600 693
-625 693
-650 693
-675 693
-{'pass': 2659} buildings: 693
-coordinates: {'listing rows agree': 662, 'census_geocoder': 3}; lookups redone at a corrected coordinate: 0 address keys
-```
-
-**neighborhood assignment**
-```
-# Checkpoint A: neighborhoods and proposed years
-Passing units: 2659 in 693 buildings, across 221 neighborhoods; 114 neighborhoods have 3+ passing places.
-Cluster quality (silhouette; higher is cleaner): {5: 0.141, 6: 0.145}. Using k=6.
-```
-
-**lifestyle features**
-```
-221 neighborhoods; {'people_per_km2': 0.0, 'age_25_34_share': 0.0, 'median_age': 0.0, 'living_alone_share': 0.0, 'renter_share': 0.0, 'big_building_share': 0.0, 'detached_house_share': 0.0, 'median_year_built': 0.0, 'no_car_share': 0.0, 'transit_commute_share': 0.0, 'walk_commute_share': 0.0, 'wfh_share': 0.0, 'median_hh_income': 0.0, 'newcomer_share': 0.0, 'restaurants_800m': 0.0, 'bars_800m': 0.0, 'cafes_800m': 0.0, 'music_1600m': 0.0, 'park_ha_800m': 0.0, 'park_walk_min': 0.0, 'open_water_m': 0.0, 'beach_m': 0.0, 'supermarket_m': 0.0, 'train_station_m': 0.07, 'motorway_m': 0.0, 'violent_per_1000': 0.02, 'vehicle_theft_per_1000': 0.02, 'sqft': 0.2, 'bfloors': 0.94, 'garage': 0.0, 'sqft_per_1000usd': 0.2}
-```
-
-**lifestyle colour**
-```
-221 {'college_degree_share': 0.0, 'households_with_kids_share': 0.0, 'age_65plus_share': 0.0, 'commute_60min_plus_share': 0.0, 'built_since_2010_share': 0.0, 'built_before_1940_share': 0.0, 'tract_median_rent': 0.01, 'rent_burden_pct': 0.0, 'supermarket_m': 0.0, 'trader_joes_m': 0.19, 'whole_foods_m': 0.24, 'target_m': 0.04, 'vet_m': 0.0, 'dog_park_m': 0.0, 'train_station_m': 0.07, 'breweries_1600m': 0.0, 'restaurants_1600m': 0.0, 'transit_to_parents_min': 0.11, 'pool': 0.0, 'garage_or_gated': 0.0, 'street_parking': 0.0, 'building_floors': 0.59, 'building_year': 0.65, 'unit_sqft': 0.2, 'all_in': 0.0}
-```
-
-**crime benchmarks**
-```
-std       3.02           0.91              0.88              0.95                       0.63
-min       0.00           0.00              0.00              0.00                       0.00
-25%       0.81           0.25              0.24              0.43                       0.24
-50%       2.09           0.63              0.60              0.76                       0.53
-75%       4.13           1.25              1.20              1.51                       0.88
-max      17.21           5.22              5.02              7.26                       4.56
-```
-
-**lifestyle groups (saved centres)**
-```
-enclave :: Berkeley Heights[63]; Harrison[23]; Wilton[8]; Teaneck[7]; Westport[5]; Montgomery[4]; Millburn[3]; Chatham[3]; Watchung[2]; Fairfield[2]
-middle :: Stamford[166]; Parsippany-Troy Hills[114]; Jersey City – Journal Square[112]; New Rochelle[93]; Yonkers[76]; White Plains[66]; Port Chester[59]; Jersey City – West Side[45]; Hackensack[43]; Danbury[24]
-new_water :: Jersey City – Bergen-Lafayette[136]; Norwalk[97]; Harrison[44]; New Brunswick[21]; North Bergen[12]; Jersey City – Downtown[9]; Fort Lee[9]; Weehawken[6]; Jersey City – Newport[4]; Edgewater[2]
-pre_car :: New Haven[330]; Kew Gardens[6]; Astoria (Central)[2]; Bedford-Stuyvesant (West)[2]; Bay Ridge[2]; Sunnyside[2]; Upper West Side-Manhattan Valley[2]; Astoria (East)-Woodside (North)[1]; Hoboken[1]; East Midtown-Turtle Bay[1]
-settled :: Newark[54]; Jersey City – McGinley Square[26]; Flushing-Willets Point[19]; Jamaica Hills-Briarwood[12]; Jamaica[11]; Hempstead[11]; East Flatbush-Erasmus[9]; Mott Haven-Port Morris[9]; Jackson Heights[8]; West New York[8]
-space :: Bridgeport[108]; Bayonne[54]; Dover[41]; Clifton[22]; Burlington[21]; Trumbull[19]; East Brunswick[19]; Flemington[18]; East Orange[17]; Haverstraw[16]
 ```
 
 **building amenities (cached pages)**

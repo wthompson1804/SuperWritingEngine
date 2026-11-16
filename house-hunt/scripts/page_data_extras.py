@@ -342,6 +342,24 @@ def main():
                 if hid in hoods and pd.notna(r.lat) and pd.notna(r.lon):
                     hoods[hid]["lat"], hoods[hid]["lon"] = round(float(r.lat), 5), round(float(r.lon), 5)
 
+    # "See photos": a link out to the page that carries the photos (we do not copy listing photos). The building's own
+    # site first, else the listing page for that apartment, else the building's listing page.
+    AGG = re.compile(r"trulia|zumper|apartmentlist|zillow|apartments\.com|rent\.com", re.I)
+    own_site = {}
+    o = rd(DATA / "reference" / "building_contacts_own_site.csv")
+    if o is not None:
+        own_site = {r.building_id: r.own_site_url for r in o.itertuples() if r.own_site_url and getattr(r, "confidence", "") in ("high", "medium")}
+    n = 0
+    for u in d["units"]:
+        ln = u.get("links") or {}
+        site = own_site.get(u.get("building_id")) or next((x for x in [(u.get("contact") or {}).get("site"), ln.get("building")] if x and not AGG.search(x)), None)
+        url = site or ln.get("listing") or ln.get("building")
+        if url:
+            host = re.sub(r"^www\.", "", re.sub(r"^https?://", "", url).split("/")[0])
+            u["photos"] = {"url": url, "where": "the building's own site" if site else host, "kind": "own_site" if site else "listing"}
+            n += 1
+    rep["places with a photos link"] = f"{n} of {len(d['units'])}"
+
     d.setdefault("meta", {})["extras"] = rep
     json.dump(d, open(f, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     print("site/data.json extras:", rep)
