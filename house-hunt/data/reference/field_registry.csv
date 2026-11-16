@@ -1,5 +1,5 @@
 table,field,status,referenced_by,note
-master_units,listing_id,used,build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;rent_terms.py,
+master_units,listing_id,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;rent_terms.py,
 master_units,building_id,used,build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;enrich_units.py,
 master_units,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 master_units,source_site,used,gates.py;build_master.py;avoid.py,
@@ -31,6 +31,7 @@ master_units,notes,used,gates.py;build_master.py;rank.py;avoid.py;lifestyle_colo
 master_units,other_monthly_fees_json,used,build_master.py;all_in.py;enrich_units.py,
 master_units,listing_type,not_used,build_master.py,bookkeeping or already folded into a merged field
 master_units,gate_status,used,gates.py;build_master.py;enrich_units.py,
+master_units,resolved_by,used,gates.py;build_master.py,
 master_units,duplicate_listing_ids,display,build_master.py,"other listings of the same unit, merged into this row (their links are in also_seen_at)"
 master_units,live_status,used,build_master.py;all_in.py;rank.py,
 master_units,live_price,used,build_master.py;all_in.py,
@@ -111,7 +112,7 @@ master_units,elevator_source,provenance,,travels with elevator
 master_units,dogs_allowed,used,build_master.py;rank.py;avoid.py,
 master_units,dogs_allowed_basis,used,build_master.py;rank.py,
 master_units,dogs_allowed_source,provenance,,travels with dogs_allowed
-master_units,dog_policy_text,display,build_master.py,text shown on the unit card or cost receipt
+master_units,dog_policy_text,used,gates.py;build_master.py,
 master_units,dog_policy_text_basis,provenance,,travels with dog_policy_text
 master_units,dog_policy_text_source,provenance,,travels with dog_policy_text
 master_units,dog_weight_limit_lb,used,gates.py;build_master.py;rank.py,
@@ -550,7 +551,7 @@ master_buildings,elevator_source,provenance,,travels with elevator
 master_buildings,dogs_allowed,used,build_master.py;rank.py;avoid.py,
 master_buildings,dogs_allowed_basis,used,build_master.py;rank.py,
 master_buildings,dogs_allowed_source,provenance,,travels with dogs_allowed
-master_buildings,dog_policy_text,display,build_master.py,text shown on the unit card or cost receipt
+master_buildings,dog_policy_text,used,gates.py;build_master.py,
 master_buildings,dog_policy_text_basis,provenance,,travels with dog_policy_text
 master_buildings,dog_policy_text_source,provenance,,travels with dog_policy_text
 master_buildings,dog_weight_limit_lb,used,gates.py;build_master.py;rank.py,
@@ -890,19 +891,19 @@ evidence:items,category,used,avoid.py,
 evidence:items,item_date,used,avoid.py,
 evidence:items,excerpt,used,avoid.py,
 evidence:items,source_site,used,gates.py;build_master.py;avoid.py,
-evidence:items,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+evidence:items,source_url,used,gates.py;build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
 evidence:items,about,used,avoid.py;rating_standard.py,
 evidence:items,retrieved_at,not_used,,bookkeeping or already folded into a merged field
 evidence:facts,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:facts,fact,used,build_master.py;avoid.py;rent_terms.py,
 evidence:facts,value,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;rent_terms.py;enrich_units.py,
 evidence:facts,quote,used,build_master.py;avoid.py;rent_terms.py,
-evidence:facts,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+evidence:facts,source_url,used,gates.py;build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
 evidence:confirm,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:confirm,fact,used,build_master.py;avoid.py;rent_terms.py,
 evidence:confirm,value,used,build_master.py;rank.py;avoid.py;lifestyle_color.py;rent_terms.py;enrich_units.py,
 evidence:confirm,quote,used,build_master.py;avoid.py;rent_terms.py,
-evidence:confirm,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+evidence:confirm,source_url,used,gates.py;build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
 evidence:confirm,status,used,build_master.py;avoid.py;enrich_units.py,
 evidence:live_check,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:live_check,listing_url,used,avoid.py;rent_terms.py,
@@ -926,7 +927,7 @@ evidence:ratings,reviews_last_6_months,used,rating_standard.py,
 evidence:ratings,negative_last_6_months,used,rating_standard.py,
 evidence:ratings,negative_older,used,rating_standard.py,
 evidence:ratings,serious_issue_tags_last_6_months,used,rating_standard.py,
-evidence:ratings,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+evidence:ratings,source_url,used,gates.py;build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
 evidence:ratings,retrieved_at,not_used,,bookkeeping or already folded into a merged field
 evidence:ratings,notes,used,gates.py;build_master.py;rank.py;avoid.py;lifestyle_color.py;crime_benchmarks.py;rent_terms.py,
 evidence:nyc_records_flags,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
@@ -971,12 +972,12 @@ evidence:rating_standard,recent_tags,used,rating_standard.py,
 evidence:rating_standard,rating_verdict,used,avoid.py;rating_standard.py,
 evidence:rating_standard,rating_verdict_why,used,avoid.py;rating_standard.py,
 evidence:rating_standard,rule_applies,used,rating_standard.py,
-evidence:rating_standard,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+evidence:rating_standard,source_url,used,gates.py;build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
 evidence:rating_standard,has_nyc_records,used,avoid.py;rating_standard.py,
 evidence:rating_standard,avoid,used,rank.py;avoid.py;rating_standard.py,
 evidence:rating_standard,reasons,used,rank.py;avoid.py;rating_standard.py,
 evidence:rating_standard,nyc_record_flags,used,build_master.py;rating_standard.py,
-rent_terms,listing_id,used,build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;rent_terms.py,
+rent_terms,listing_id,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;rent_terms.py,
 rent_terms,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 rent_terms,listed_rent,used,gates.py;build_master.py;all_in.py;rent_terms.py;enrich_units.py,
 rent_terms,listed_price_is,used,all_in.py;rent_terms.py,
@@ -993,7 +994,7 @@ rent_terms,offer_expires,used,rent_terms.py,
 rent_terms,conditions,used,rent_terms.py,
 rent_terms,computed_how,used,rent_terms.py,
 rent_terms,confidence,used,rank.py;rent_terms.py,
-rent_terms,source_url,used,build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
+rent_terms,source_url,used,gates.py;build_master.py;avoid.py;crime_benchmarks.py;rent_terms.py;rating_standard.py,
 rent_terms,needs_call,used,all_in.py;rent_terms.py,
 rent_terms,gross_if_listed_is_net,used,all_in.py;rent_terms.py,
 rent_terms,net_if_listed_is_gross,used,rent_terms.py,

@@ -1,0 +1,15 @@
+# *
+User-agent: *
+Disallow: /*.json$
+Disallow: /*_buildManifest.js$
+Disallow: /*_middlewareManifest.js$
+Disallow: /*_ssgManifest.js$
+Disallow: /my-nyc/favorites
+Disallow: /guide-geek-sitemap
+
+# Host
+Host: https://www.nyctourism.com
+
+# Sitemaps
+Sitemap: https://www.nyctourism.com/sitemap.xml
+Sitemap: https://www.nyctourism.com/server-sitemap.xml

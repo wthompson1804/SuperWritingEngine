@@ -5,8 +5,8 @@ Raw rows: 24311. After dedupe: 20464.
 | status | listings | buildings |
 |---|---|---|
 | fail | 4271 | 3213 |
-| pass | 2598 | 692 |
-| pending | 13595 | 9444 |
+| pass | 2659 | 693 |
+| pending | 13534 | 9444 |
 
 ## Each gate (after dedupe)
 
@@ -15,8 +15,8 @@ Raw rows: 24311. After dedupe: 20464.
 | type | 20241 | 223 | 0 |
 | rent | 20239 | 55 | 170 |
 | movein | 7842 | 932 | 11690 |
-| dog | 10245 | 1171 | 9048 |
-| elevator | 5780 | 1317 | 13367 |
+| dog | 10298 | 1171 | 8995 |
+| elevator | 5811 | 1317 | 13336 |
 | floor | 5092 | 1076 | 14296 |
 | place | 20434 | 0 | 30 |
 | proof | 10376 | 7 | 10081 |
@@ -29,7 +29,7 @@ Raw rows: 24311. After dedupe: 20464.
 | 1eastmainstreet.com                       |      1 |      0 |         0 |
 | 360huguenot.com                           |      1 |      4 |         0 |
 | anninlofts.com                            |      0 |      0 |         1 |
-| apartmentlist.com                         |   1166 |   1364 |      2303 |
+| apartmentlist.com                         |   1166 |   1370 |      2297 |
 | arrivestamford.com                        |      1 |      0 |         0 |
 | avaloncommunities.com                     |     86 |      0 |        90 |
 | bltliveworkplay.com (SightMap embed)      |     28 |     23 |        26 |
@@ -41,7 +41,7 @@ Raw rows: 24311. After dedupe: 20464.
 | gardencommunities.com                     |      8 |      2 |       116 |
 | gardenhomesmanagement.com                 |      1 |      0 |         8 |
 | gdcrentals.com                            |      2 |      0 |        13 |
-| greystar.com                              |     49 |     25 |       154 |
+| greystar.com                              |     49 |     78 |       101 |
 | livecarraway.com                          |      0 |      4 |         0 |
 | livemotifapts.com                         |      1 |      7 |         0 |
 | livethemitchell.com                       |      1 |      1 |         0 |
@@ -67,7 +67,7 @@ Raw rows: 24311. After dedupe: 20464.
 | trulia                                    |   2315 |    999 |      7413 |
 | trulia.com                                |     16 |      0 |         0 |
 | vermellacrossing.com                      |      1 |      0 |        12 |
-| vermellaharrison.com                      |      7 |      0 |         3 |
+| vermellaharrison.com                      |      7 |      2 |         1 |
 | vermellalyndhurst.com                     |      1 |      0 |         1 |
 | vermellawest.com                          |      1 |      0 |         0 |
 | vermellawoodbridge.com                    |      1 |      0 |         3 |
@@ -97,9 +97,9 @@ Raw rows: 24311. After dedupe: 20464.
 |:--------------------------|--------:|
 | movein;dog;elevator;proof |    4996 |
 | movein;elevator;proof     |    2664 |
-| elevator                  |    1833 |
-| dog;elevator              |    1000 |
-| dog                       |     562 |
+| elevator                  |    1825 |
+| dog;elevator              |     977 |
+| dog                       |     532 |
 | movein                    |     454 |
 | movein;proof              |     379 |
 | movein;dog;elevator       |     368 |
@@ -129,6 +129,7 @@ Raw rows: 24311. After dedupe: 20464.
 | ('NY', 'White Plains')          |  66 |
 | ('NY', 'Port Chester')          |  59 |
 | ('NY', 'Brooklyn')              |  56 |
+| ('NJ', 'Berkeley Heights')      |  54 |
 | ('NJ', 'Hackensack')            |  43 |
 | ('NJ', 'Harrison')              |  42 |
 | ('NJ', 'Dover')                 |  41 |
@@ -147,11 +148,10 @@ Raw rows: 24311. After dedupe: 20464.
 | ('NJ', 'Somerset')              |  17 |
 | ('NY', 'Haverstraw')            |  16 |
 | ('NY', 'Peekskill')             |  16 |
-| ('NJ', 'Bloomfield')            |  16 |
 | ('NJ', 'Bogota')                |  16 |
+| ('NJ', 'Bloomfield')            |  16 |
 | ('NY', 'Flushing')              |  14 |
 | ('NJ', 'Englewood')             |  14 |
 | ('CT', 'Shelton')               |  14 |
 | ('CT', 'Milford')               |  13 |
 | ('NJ', 'Orange')                |  12 |
-| ('NJ', 'Long Branch')           |  11 |

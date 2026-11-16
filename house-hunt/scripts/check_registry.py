@@ -41,6 +41,7 @@ DISPLAY = {  # pattern -> why it is kept but not scored
     r"^(dob_active_elevators)$": "the city's count of active passenger elevators on the lot: gate input in build_master.py, asserted in this script",
     r"^(call_notes|call_income_multiple|call_called_at|call_building_called_at|call_available|required_fees_phone)$": "phone answers (data/evidence/call_answers.csv): notes and when the call was made; the fee total is read by all_in.py",
     r"^(page_modified_date|page_modified_source|listing_stale_days|listing_stale_why|elevator_aggregator_only|street_overnight_town|street_overnight_rule|street_overnight_url)$": "the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure",
+    r"^(resolved_by)$": "which later evidence batch settled a pending listing's missing gate fact, and how (gates.py: apply_resolved_pending)",
     r"^(disclosures|more_in_building)$": "shown on the unit card: conditions to know (never an open gate fact), and further showable units in the building",
     r"^(duplicate_listing_ids)$": "other listings of the same unit, merged into this row (their links are in also_seen_at)",
     r"^(near_vs_baseline|crime_latest|crime_source|crime_year|nyc_record_flags)$": "context shown when she asks how a score was reached",

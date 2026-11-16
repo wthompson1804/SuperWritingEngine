@@ -974,7 +974,7 @@ host_intro: I would walk into Elizabeth with my eyes open, because daily life he
 voices: parking
 
 === hood: nj:bloomfield
-host_intro: [[Bloomfield is gentle on the budget: the places we found run about ${pg_lo} to ${pg_hi} a month all in. ]]{b_park} is about {parkwalk} minutes away, {b_dogpark} is {dogpark} miles, and the train station is {station} miles. About {rest} restaurants sit within a {w10}, though people who live here wish for more nightlife. The town has an overnight permit-parking ordinance, so get the hours from the leasing office. Budget about {drive} minutes for the trip home, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: [[Bloomfield is gentle on the budget{!pg_hi<=2500}: the places we found run about ${pg_lo} to ${pg_hi} a month all in. ]]{b_park} is about {parkwalk} minutes away, {b_dogpark} is {dogpark} miles, and the train station is {station} miles. About {rest} restaurants sit within a {w10}, though people who live here wish for more nightlife. The town has an overnight permit-parking ordinance, so get the hours from the leasing office. Budget about {drive} minutes for the trip home, about ${b_toll} round trip with a New York E-ZPass.
 rules: Bloomfield|overnight_parking
 voices: social_life
 
@@ -1021,7 +1021,7 @@ rules: Somerville|resident_permit
 voices: social_life
 
 === hood: ct:danbury
-host_intro: [[Danbury is where the monthly number drops: about ${pg_lo} to ${pg_hi} all in for the places we found. ]]The buildings are new, with {post2010} percent of homes built since 2010. You pay in distance. About {drive} minutes to your parents, about ${b_toll} round trip with a New York E-ZPass, and transit is no real option at about {transit} minutes. The nearest park is a {parkwalk}-minute walk and the dog park is {dogpark} miles away. Bars within a {w10}: {bars}.
+host_intro: [[Danbury is where the monthly number drops{!pg_hi<=2500}: about ${pg_lo} to ${pg_hi} all in for the places we found. ]]The buildings are new, with {post2010} percent of homes built since 2010. You pay in distance. About {drive} minutes to your parents, about ${b_toll} round trip with a New York E-ZPass, and transit is no real option at about {transit} minutes. The nearest park is a {parkwalk}-minute walk and the dog park is {dogpark} miles away. Bars within a {w10}: {bars}.
 
 === hood: nj:red-bank
 host_intro: Dinner, then a show. People who live in Red Bank talk about evenings that end at the theatre, and about {rest} restaurants sit within a {w10}. The water is {water} miles away and the train station {station} miles. Residents also say new buildings are replacing the trees, and the dog park is {dogpark} miles off. Street parking runs on a residential permit from the Parking Utility. The big cost: about {drive} minutes to reach your parents and about ${b_toll} round trip with a New York E-ZPass.
@@ -1065,7 +1065,7 @@ rules: Hawthorne|resident_permit
 voices: dogs_green
 
 === hood: nj:east-orange
-host_intro: East Orange runs on permits. Every car on the street overnight, from 2 to 6 AM, needs a permit at $150 a year. So a place with its own garage is the only version I would show you. [[The draw is price: places here run from about ${pg_lo} to ${pg_hi} a month all in. ]]Nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}{!cafes==0}. The ride home is about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: East Orange runs on permits. Every car on the street overnight, from 2 to 6 AM, needs a permit at $150 a year. So a place with its own garage is the only version I would show you. [[The draw is price{!pg_lo<=2300}: places here run from about ${pg_lo} to ${pg_hi} a month all in. ]]Nothing to eat or drink is within a {w10}{!rest==0}{!bars==0}{!cafes==0}. The ride home is about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
 rules: East Orange|overnight_parking; East Orange|resident_permit
 
 === hood: nj:city-of-orange
@@ -1128,7 +1128,7 @@ rules: Bound Brook|resident_permit
 voices: dogs_green
 
 === hood: ct:bridgeport
-host_intro: [[Bridgeport is about the money: between about ${pg_lo} and ${pg_hi} a month all in. ]]The water is {water} miles away, the beach {beach} miles, the train station {station} miles. People who live here like the beach and the parks, and some say flatly that there is nothing to do. For the car, know that the city restricts all-night parking on some streets. The drive to your parents is about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: [[Bridgeport is about the money{!pg_hi<=2500}: between about ${pg_lo} and ${pg_hi} a month all in. ]]The water is {water} miles away, the beach {beach} miles, the train station {station} miles. People who live here like the beach and the parks, and some say flatly that there is nothing to do. For the car, know that the city restricts all-night parking on some streets. The drive to your parents is about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
 rules: Bridgeport|overnight_parking
 voices: dogs_green, social_life
 
@@ -1169,7 +1169,7 @@ host_intro: The Sunday math, before you get attached. From Bordentown it is abou
 voices: dogs_green, social_life
 
 === hood: ct:beacon-falls
-host_intro: [[The price is the reason to look at Beacon Falls: about ${pg_lo} a month all in for what we found. ]]It is a small town by the water, {water} miles away, with a train station {station} miles from the door and {b_park} about {parkwalk} minutes on foot. People who live here enjoy the walking paths and say there is nothing much to do in town. Your parents are about {drive} minutes away, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: [[The price is the reason to look at Beacon Falls{!pg_lo<=2300}: about ${pg_lo} a month all in for what we found. ]]It is a small town by the water, {water} miles away, with a train station {station} miles from the door and {b_park} about {parkwalk} minutes on foot. People who live here enjoy the walking paths and say there is nothing much to do in town. Your parents are about {drive} minutes away, about ${b_toll} round trip with a New York E-ZPass.
 voices: dogs_green, social_life
 
 === hood: ct:oxford
@@ -1177,7 +1177,7 @@ host_intro: Slow living. That is the phrase people who live in Oxford use, and w
 voices: social_life
 
 === hood: ct:hamden
-host_intro: Hamden is the far edge of this search{!drive>=110}. [[The price helps: between about ${pg_lo} and ${pg_hi} a month all in. ]]Trader Joe's is {tj} miles away, {b_dogpark} is {dogpark} miles, and people who live here like the parks and trails. Against that: about {rest} restaurants and no bars within a {w10}{!bars==0}, and a town built around the car. Sunday is a drive of about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: Hamden is the far edge of this search{!drive>=110}. [[The price helps{!pg_hi<=2500}: between about ${pg_lo} and ${pg_hi} a month all in. ]]Trader Joe's is {tj} miles away, {b_dogpark} is {dogpark} miles, and people who live here like the parks and trails. Against that: about {rest} restaurants and no bars within a {w10}{!bars==0}, and a town built around the car. Sunday is a drive of about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
 voices: dogs_green
 
 === hood: ny:lagrange
@@ -1264,7 +1264,7 @@ host_intro: There is a lot to like for a dog owner: a park about {parkwalk} minu
 voices: dogs_green, social_life
 
 === hood: ny:sheepshead-bay-manhattan-beach-gerritsen-beach
-host_intro: [[Here the number is the news: about ${pg_lo} a month all in for the place we found. ]]The beach is {beach} miles away and {b_dogpark} is {dogpark} miles, so the dog gets a run near the water. People who live here like the cafés and restaurants and the easy trip to the beach, and about {rest} restaurants and {cafes} cafés are within a {w10}. Home is about {drive} minutes by car with no tolls{!b_toll==0}.
+host_intro: [[Here the number is the news{!pg_lo<=2300}: about ${pg_lo} a month all in for the place we found. ]]The beach is {beach} miles away and {b_dogpark} is {dogpark} miles, so the dog gets a run near the water. People who live here like the cafés and restaurants and the easy trip to the beach, and about {rest} restaurants and {cafes} cafés are within a {w10}. Home is about {drive} minutes by car with no tolls{!b_toll==0}.
 voices: social_life, dogs_green
 
 === hood: ny:midwood

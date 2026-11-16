@@ -1,8 +1,8 @@
 # Checkpoint A: neighborhoods and proposed years
 
-Passing units: 2598 in 692 buildings, across 221 neighborhoods; 114 neighborhoods have 3+ passing places.
+Passing units: 2657 in 692 buildings, across 221 neighborhoods; 114 neighborhoods have 3+ passing places.
 
-Cluster quality (silhouette; higher is cleaner): {5: 0.141, 6: 0.144}. Using k=6.
+Cluster quality (silhouette; higher is cleaner): {5: 0.141, 6: 0.145}. Using k=6.
 
 ## Group 1: 8 neighborhoods, 84 places
 
@@ -19,7 +19,7 @@ Distinguishing traits (standard deviations from the average): transit_min +2.5, 
 | Burlington   | Burlington County                         |      21 |           1 |       118.2 |         247   |       2551   |        824 |                2   |           0 |            59.4 |    3406   |       nan |                1.6 |            1.1 |
 | Mount Holly  | Burlington County                         |       8 |           2 |       120.5 |         257   |       1837   |        700 |                0   |           0 |             6.5 |     824   |       nan |                4.1 |            1.2 |
 
-## Group 2: 36 neighborhoods, 487 places
+## Group 2: 36 neighborhoods, 546 places
 
 Distinguishing traits (standard deviations from the average): restaurants_800m -0.8, water_m +0.6, violent_per_1000 -0.6, bars_800m -0.6
 
@@ -42,7 +42,7 @@ Distinguishing traits (standard deviations from the average): restaurants_800m -
 | Riverdale              | Morris County                             |       4 |           1 |        61.1 |         130   |       2750.5 |      744   |                1   |         0   |             6.5 |     361   |       nan |                0.5 |            1   |
 | Chatham                | Morris County                             |       3 |           3 |        63.4 |         128   |       2684   |      850   |                6   |         0   |             9.7 |    2367   |       nan |                0   |            0.2 |
 | Woodbridge             | Middlesex County                          |      11 |           3 |        63.7 |         128   |       2906   |      763   |                2   |         0   |             8.1 |    2018   |       nan |                1.4 |            0.8 |
-| Berkeley Heights       | Union County                              |       4 |           2 |        65.9 |         143   |       2819   |      580   |                0   |         0   |            19.9 |    4020   |       nan |                0.3 |            0.1 |
+| Berkeley Heights       | Union County                              |      63 |           2 |        65.9 |         143   |       2920   |      718   |                0   |         0   |            19.9 |    4020   |       nan |                0.3 |            0.1 |
 | West Haverstraw        | Rockland County                           |       4 |           1 |        67.2 |         nan   |       2622.5 |      750   |                1   |         0   |             7.6 |    1894   |       nan |                2.1 |            0.5 |
 | Patchogue              | Suffolk County                            |       3 |           2 |        67.3 |         105   |       2674   |      700   |                8   |         2   |            15.8 |     908   |         5 |                1   |            1.1 |
 | Brookhaven             | Suffolk County                            |       4 |           2 |        68.3 |         147   |       2708.5 |      830   |                0   |         0   |             5.9 |    2246   |       nan |                1   |            1.1 |

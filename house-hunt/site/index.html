@@ -43,7 +43,7 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance}
 :focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-radius:8px}
 .tray :focus-visible,.pairbox :focus-visible,.t3 :focus-visible{outline-color:var(--butter)}
 .wrap{max-width:560px;margin:0 auto;padding-top:0;padding-bottom:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-#view{outline:0;min-height:60vh}
+#view{outline:0}
 .stack{display:grid;gap:16px}
 .stack.tight{gap:12px}
 .stack>*{min-width:0}
@@ -159,7 +159,7 @@ a.link{display:inline-flex;align-items:center}
 .slot-text+.slot-text{margin-top:8px}
 
 /* ---------- Top three, then more on demand ---------- */
-.pick{display:inline-block;justify-self:start;font-family:var(--display);font-weight:800;font-size:13px;line-height:1.2;border-radius:999px;padding:3px 12px;background:var(--berry-deep);color:#fff}
+.pick{display:inline-block;white-space:nowrap;justify-self:start;font-family:var(--display);font-weight:800;font-size:13px;line-height:1.2;border-radius:999px;padding:3px 12px;background:var(--berry-deep);color:#fff}
 .pick.n{background:var(--ink);min-width:28px;text-align:center}
 .hood.pickc,.unit.pickc{border-width:3px;box-shadow:4px 4px 0 var(--berry)}
 .hood.pickc.none{box-shadow:none}
@@ -214,14 +214,16 @@ a.link{display:inline-flex;align-items:center}
 .sign strong{display:block;font-family:var(--display);font-weight:800;font-size:25px;line-height:1;font-variant-numeric:tabular-nums}
 .sign em{display:block;font-style:normal;font-size:11px;font-weight:700}
 .sign.plain .board{background:var(--white);transform:none;border-width:2px}
-details.receipt{border:2px dashed var(--ink);border-radius:16px;padding:2px 14px;font-variant-numeric:tabular-nums}
-details.receipt summary{font-weight:800;min-height:44px;display:flex;align-items:center;cursor:pointer}
-details.receipt .ln{display:flex;justify-content:space-between;gap:12px;padding:4px 0;font-weight:600}
-details.receipt .ln span:first-child{min-width:0}
-details.receipt .ln small{display:block;font-size:12.5px;font-weight:700;color:var(--muted)}
-details.receipt .ln span:last-child{flex:0 0 auto;white-space:nowrap}
-details.receipt .tot{border-top:2px solid var(--ink);margin-top:4px;padding:6px 0 4px;font-weight:800}
-details.receipt .fn{font-size:13px;font-weight:700;color:var(--muted);padding:2px 0 8px}
+.receipt{background:var(--ink);color:#fff;border-radius:18px;padding:10px 14px 6px;font-variant-numeric:tabular-nums}
+.receipt .tot{border-top-color:#8A5C7E!important}
+.receipt .fn,.receipt .howb{color:#F3DDE8!important}
+.receipt .howb b,.receipt .howd[open]>summary,.receipt a{color:#fff}
+.receipt .ln{display:flex;justify-content:space-between;gap:12px;padding:4px 0;font-weight:600}
+.receipt .ln span:first-child{min-width:0}
+.receipt .ln small{display:block;font-size:12.5px;font-weight:700;color:var(--muted)}
+.receipt .ln span:last-child{flex:0 0 auto;white-space:nowrap}
+.receipt .tot{border-top:2px solid var(--ink);margin-top:4px;padding:6px 0 4px;font-weight:800}
+.receipt .fn{font-size:13px;font-weight:700;color:var(--muted);padding:2px 0 8px}
 .terms{background:var(--butter);border:2px solid var(--ink);border-radius:18px;padding:12px 14px;display:grid;gap:6px}
 .terms h4{font-weight:800;font-size:18px}
 .terms dl{margin:0;display:grid;gap:4px;font-size:15px}
@@ -486,9 +488,11 @@ small.gtkc{display:block;margin-top:6px;padding-top:5px;border-top:1.5px dashed 
 .life.slim{display:grid;gap:7px;padding:12px 14px 12px;border-radius:22px;box-shadow:4px 4px 0 var(--berry)}
 .life.slim h3{font-size:clamp(22px,6.4vw,26px);line-height:1.02}
 .life.slim .foot{margin-top:0}
-.life.slim .enter{padding:2px 12px;font-size:20px;line-height:1.2}
+.life.slim .enter{padding:5px 12px;font-size:14.5px}
 .life.slim.none>*:not(.foot){opacity:.6}
 .hood.card{gap:7px;padding:10px 12px 12px}
+.hood.card>*{min-width:0}
+.hood.card .hd>div{min-width:0}
 .hood.card .hd{align-items:flex-start}
 .hood.card .hd>div{flex:1 1 auto}
 .hood.card .hd .pick{flex:0 0 auto}
@@ -1904,7 +1908,7 @@ function vLives(){
   var h='<header class="title-card"><div class="logo" role="img" aria-label="Lamia\'s House Hunt"><svg viewBox="0 0 360 70" aria-hidden="true"><path d="M30 66 180 8 330 66" fill="none" stroke="#3A1630" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="262" y="16" width="20" height="34" rx="3" fill="#3A1630"/><path d="M180 30c-5-9-19-6-17 4 1 6 9 11 17 17 8-6 16-11 17-17 2-10-12-13-17-4z" fill="#E0457B"/></svg><span class="name">Lamia\'s</span><span class="show">House Hunt</span></div><p class="tagline">'+pl(UNITS.length,"place")+' to see, in '+pl(HOODS.filter(function(H){return H.units.length}).length,"neighborhood")+', across '+pl(YEARS.length,"experience")+'.</p></header>';
   h+='<div class="wrap"><section class="sec" id="sec-experiences" style="margin-top:16px"><h2><span class="s">Pick</span>an experience</h2>'+(HOODS.length?'<button type="button" class="btn sm wide" style="margin-top:10px" data-act="scrollto" data-to="sec-map">'+IC_MAP+'See them on a map ↓</button>':'')+'<div class="stack tight" style="margin-top:12px">';
   YEARS.forEach(function(Y){var us=Y.units,n=us.filter(fits).length,none=!n,line=hlSub(Y,"top")||calmClause(Y.tagline||Y.subhead)||HL.first(pr(Y,"promise"),110);
-    h+='<a class="life slim'+(none?' none':'')+'" href="'+href("year",Y.id)+'"><h3>'+ymark(Y,22)+esc(Y.label)+'</h3>'+(line?'<p class="l2">'+esc(line)+'</p>':'')+yearFigs(Y,false)+'<div class="foot"><span class="facts">'+pl(Y.hoods.length,"neighborhood")+' · '+fitText(n,us.length,"place")+'</span><span class="enter" aria-hidden="true">›</span></div></a>'});
+    h+='<a class="life slim'+(none?' none':'')+'" href="'+href("year",Y.id)+'"><h3>'+ymark(Y,22)+esc(Y.label)+'</h3>'+(line?'<p class="l2">'+esc(line)+'</p>':'')+yearFigs(Y,false)+'<div class="foot"><span class="facts">'+pl(Y.hoods.length,"neighborhood")+' · '+fitText(n,us.length,"place")+'</span><span class="enter">Step in ›</span></div></a>'});
   if(!YEARS.length)h+='<div class="empty"><p><b>Nothing to show yet.</b></p><p>The data has no experiences in it.</p></div>';
   h+='</div></section>';
   if(HOODS.length)h+='<section class="sec" id="sec-map"><h2><span class="s">The</span>whole map</h2><div class="hhmap" id="hhmap" data-year=""></div></section>';
@@ -1926,7 +1930,7 @@ function hoodCard(H,Y,pick){var k=H.units.filter(fits).length,N=H.units.length,n
 function rentShort(U){var R=U.rent||{};if(!rentStar(U))return "";
   return '<p class="confl rent"><b>* Rent:</b> '+(netEff(U)?esc(money(R.basis!=null?R.basis:R.listed))+' is the average after free months'+(R.gross!=null?'; '+esc(money(R.gross))+' in a paying month':''):'a special offer applies')+(R.needs_call?'. Needs a call':'')+'.</p>'}
 function unitChips(U){var k=parkKind(U);
-  return '<div class="chips">'+chip(money(U.all_in)+star(U),esc("all-in · "+seenShort(U.price_seen_at)))+chip(U.sqft!=null?r0(U.sqft)+" sq ft":"Size: ask",esc(bedsWord(U)))+chip(k==="unknown"?"Ask":esc(parkWordShort(U)),k==="unknown"?"parking not published":"parking")+'</div>'}
+  return '<div class="chips">'+chip(money(U.all_in)+star(U),esc(seenShort(U.price_seen_at)||"all-in"))+chip(U.sqft!=null?r0(U.sqft)+" sq ft":"Size: ask",esc(bedsWord(U)))+chip(k==="unknown"?"Ask":esc(parkWordShort(U)),k==="unknown"?"parking not published":"parking")+'</div>'}
 function unitCard(U,pick){var w=why(U),out=w.length>0,top=pick!=null&&pick>-1&&pick<3,line=hlSub(U,"top")||textOf(hostOfRec(U,"line"));
   return '<article class="unit card'+(out?' out':'')+(top?' pickc':'')+'"><a class="cardl" href="'+href("unit",U.id)+'"><div class="hd"><div><h4>'+esc(uName(U))+confStar(U)+'</h4>'+(uSub(U)?'<small>'+esc(uSub(U))+'</small>':'')+'</div>'+pickTag(pick,top)+'</div>'+(line?'<p class="l2">'+esc(line)+'</p>':'')+unitChips(U)+confLines(U)+rentShort(U)+(out?'<p class="why"><b>Outside your limits.</b> '+esc(w.join(". "))+'.</p>':'')+'</a></article>'}
 function nextLink(label,hrefv,title){return '<a class="nextl" href="'+hrefv+'"><small>'+esc(label)+'</small><b>'+esc(title)+' ›</b></a>'}
@@ -1979,7 +1983,7 @@ function vHood(H){
   var tl=H.toll_round_trip;
   var h='<div class="wrap"><section class="sec head"><h1 class="ph1">'+esc(H.name)+'</h1><p class="psub facts">'+esc(hoodWhere(H))+'</p>'+
     '<div class="badges">'+(H.rank_in_experience!=null&&ix>-1?'<span class="pick'+(ix?' n':'')+'" id="hood-rank">'+(ix===0?'Top pick':'#'+(ix+1)+' of '+hs.length)+'</span>':'')+safeBadge(H)+'</div>'+
-    '<div class="chips">'+(H.drive_min!=null?chip(r0(H.drive_min)+" min","to Mom and Dad"):chip("Ask","drive time not known"))+chip(tl==null?"Ask":Number(tl)===0?"No tolls":money(tl),tl==null?"tolls not fully known":Number(tl)===0?"round trip":"tolls a visit"+(tollMail(H)!=null?", NY E-ZPass":""))+(H.transit_min!=null?chip(r0(H.transit_min)+" min","train and bus"):"")+'</div></section>';
+    '<div class="chips">'+(H.drive_min!=null?chip(r0(H.drive_min)+" min","to Mom and Dad"):chip("Ask","drive time not known"))+chip(tl==null?"Ask":Number(tl)===0?"No tolls":money(tl),tl==null?"tolls not fully known":Number(tl)===0?"round trip":tollMail(H)!=null?"tolls, NY E-ZPass":"tolls a visit")+(H.transit_min!=null?chip(r0(H.transit_min)+" min","train and bus"):"")+'</div></section>';
   var hScene=slotText(calmV(pr(H,"scene")||loc.scene)),good=slotText(calmV(pr(H,"good_for_her")||loc.good_for_her)),watch=slotText(calmV(pr(H,"watch_for")||loc.watch_for)),hIntro=hostClamp(hostOfRec(H,"intro"),null,"host-intro");
   h+=hIntro||(hScene?'<section class="sec" id="sec-scene">'+clampBox(hScene,4,"scene")+'</section>':'');
   var cf=costFig(H.units);

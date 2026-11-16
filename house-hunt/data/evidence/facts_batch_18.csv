@@ -1,0 +1,198 @@
+addr_key,fact,value,quote,source_url
+100 albert way 1256|08540,year_built,2016,Apartment List page data field year_built,https://www.apartmentlist.com/nj/princeton/avalon-princeton
+100 albert way 1256|08540,building_size,280,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/princeton/avalon-princeton
+100 albert way 1256|08540,management_company,AvalonBay,Apartment List page data field pmc_display_name,https://www.apartmentlist.com/nj/princeton/avalon-princeton
+100 albert way 1256|08540,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/princeton/avalon-princeton
+100 albert way 1256|08540,building_site_url,https://www.avaloncommunities.com/new-jersey/princeton-apartments/avalon-princeton,Apartment List page data field website_url,https://www.apartmentlist.com/nj/princeton/avalon-princeton
+500 avalon square 3085|08550,building_size,535,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/princeton/avalon-w-squared
+500 avalon square 3085|08550,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/princeton/avalon-w-squared
+500 avalon square 3085|08550,building_site_url,https://www.avaloncommunities.com/new-jersey/west-windsor-apartments/avalon-w-squared-at-princeton-junction/?utm_source=ApartmentsList.com&utm_medium=ILS_Listing,Apartment List page data field website_url,https://www.apartmentlist.com/nj/princeton/avalon-w-squared
+357 grove st|11237,nyc_pluto_note,CONFLICT: listing page names an elevator but PLUTO class C2 is a walk-up class (house_number+location),,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+357 grove st|11237,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/brooklyn/357-grove-st
+357 grove st|11237,building_site_url,https://whlcconstructionincdbawhlcproperties.propertyware.com/rentals.html?uid=5563646036,Apartment List page data field website_url,https://www.apartmentlist.com/ny/brooklyn/357-grove-st
+1512 park pl|11213,nyc_pluto_note,CONFLICT: listing page names an elevator but PLUTO class C1 is a walk-up class (house_number+location),,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+1512 park pl|11213,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/brooklyn/1512-park-pl
+1512 park pl|11213,building_site_url,https://elirealestate.propertyware.com/rentals.html?uid=5500207106,Apartment List page data field website_url,https://www.apartmentlist.com/ny/brooklyn/1512-park-pl
+1511 fulton st|11216,nyc_pluto_note,CONFLICT: listing page names an elevator but PLUTO class C3 is a walk-up class (nearest_lot),,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+1511 fulton st|11216,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/brooklyn/1511-fulton-st-apt-2b
+220 e 57th st|10022,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/220-e-57th-st-apt-14j
+1452 center ave|07024,year_built,1949,Apartment List page data field year_built,https://www.apartmentlist.com/nj/fort-lee/palisades-gardens-apartments
+1452 center ave|07024,building_size,168,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/fort-lee/palisades-gardens-apartments
+1452 center ave|07024,management_company,Goldberg Realty Associates,Apartment List page data field pmc_display_name,https://www.apartmentlist.com/nj/fort-lee/palisades-gardens-apartments
+1452 center ave|07024,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/palisades-gardens-apartments
+1452 center ave|07024,building_site_url,https://www.goldberg-realty.com/nj/fort-lee/palisades-gardens-apts/index.aspx?rcstdid=MTQ=-pGJGpRzZiM8=,Apartment List page data field website_url,https://www.apartmentlist.com/nj/fort-lee/palisades-gardens-apartments
+1 wall st|07024,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/1-wall-street
+5201 city pl|07020,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/edgewater/5201-city-place
+310 94th st|11209,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/brooklyn/310-94th-st
+310 94th st|11209,building_site_url,https://azhomes.propertyware.com/rentals.html?uid=5548670977,Apartment List page data field website_url,https://www.apartmentlist.com/ny/brooklyn/310-94th-st
+191 73rd st|11209,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/brooklyn/191-73rd-street--1
+1122 53rd st|07047,year_built,2017,Apartment List page data field year_built,https://www.apartmentlist.com/nj/north-bergen/plaza-53
+1122 53rd st|07047,building_size,122,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/north-bergen/plaza-53
+1122 53rd st|07047,management_company,Oxford Realty Group,Apartment List page data field pmc_display_name,https://www.apartmentlist.com/nj/north-bergen/plaza-53
+1122 53rd st|07047,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/north-bergen/plaza-53
+1122 53rd st|07047,building_site_url,https://www.oxfordrealtygroup.com/communities/plaza-53/,Apartment List page data field website_url,https://www.apartmentlist.com/nj/north-bergen/plaza-53
+5665 john f kennedy blvd|07047,year_built,2012,Apartment List page data field year_built,https://www.apartmentlist.com/nj/north-bergen/avalon-north-bergen
+5665 john f kennedy blvd|07047,building_size,164,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/north-bergen/avalon-north-bergen
+5665 john f kennedy blvd|07047,management_company,AvalonBay,Apartment List page data field pmc_display_name,https://www.apartmentlist.com/nj/north-bergen/avalon-north-bergen
+5665 john f kennedy blvd|07047,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/north-bergen/avalon-north-bergen
+5665 john f kennedy blvd|07047,building_site_url,https://www.avaloncommunities.com/new-jersey/north-bergen-apartments/avalon-north-bergen,Apartment List page data field website_url,https://www.apartmentlist.com/nj/north-bergen/avalon-north-bergen
+4828 tonnelle ave|07047,building_size,214,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/north-bergen/the-rail-at-north-bergen
+4828 tonnelle ave|07047,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/north-bergen/the-rail-at-north-bergen
+4828 tonnelle ave|07047,building_site_url,https://www.therailnorthbergen.com/?rcstdid=MTQ=-pGJGpRzZiM8=,Apartment List page data field website_url,https://www.apartmentlist.com/nj/north-bergen/the-rail-at-north-bergen
+7427 jfk blvd e|07047,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/north-bergen/7427-blvd-e
+1 harrison ave|07029,year_built,2019,Apartment List page data field year_built,https://www.apartmentlist.com/nj/harrison/one-harrison
+1 harrison ave|07029,building_size,257,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/harrison/one-harrison
+1 harrison ave|07029,management_company,BNE Real Estate Group,Apartment List page data field pmc_display_name,https://www.apartmentlist.com/nj/harrison/one-harrison
+1 harrison ave|07029,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/harrison/one-harrison
+1 harrison ave|07029,building_site_url,https://www.1harrison.com/?built_in=true&rcstdid=MTQ%3D-pGJGpRzZiM8%3D,Apartment List page data field website_url,https://www.apartmentlist.com/nj/harrison/one-harrison
+300 somerset st|07029,building_size,275,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/harrison/harrison-station--2
+300 somerset st|07029,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/harrison/harrison-station--2
+300 somerset st|07029,building_site_url,https://ironstate.com/property/harrison-station/index.aspx?rcstdid=MTQ=-pGJGpRzZiM8=,Apartment List page data field website_url,https://www.apartmentlist.com/nj/harrison/harrison-station--2
+330 angelo cifelli dr|07029,building_size,330,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/harrison/330-harrison-station
+330 angelo cifelli dr|07029,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/harrison/330-harrison-station
+330 angelo cifelli dr|07029,building_site_url,https://ironstate.com/property/330-angelo-cifelli/index.aspx?rcstdid=MTQ=-pGJGpRzZiM8=,Apartment List page data field website_url,https://www.apartmentlist.com/nj/harrison/330-harrison-station
+1 bergen st|07029,building_size,242,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/harrison/dey-bergen
+1 bergen st|07029,management_company,BNE Real Estate Group,Apartment List page data field pmc_display_name,https://www.apartmentlist.com/nj/harrison/dey-bergen
+1 bergen st|07029,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/harrison/dey-bergen
+1 bergen st|07029,building_site_url,https://www.deyandbergen.com/?built_in=true&rcstdid=MTQ%3D-pGJGpRzZiM8%3D,Apartment List page data field website_url,https://www.apartmentlist.com/nj/harrison/dey-bergen
+510 millburn ave|07078,building_size,29,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/short-hills/510-millburn-avenue-apts
+510 millburn ave|07078,management_company,Goldberg Realty Associates,Apartment List page data field pmc_display_name,https://www.apartmentlist.com/nj/short-hills/510-millburn-avenue-apts
+510 millburn ave|07078,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/short-hills/510-millburn-avenue-apts
+510 millburn ave|07078,building_site_url,https://www.goldberg-realty.com/nj/short-hills/510-millburn-avenue/index.aspx?rcstdid=MTQ=-pGJGpRzZiM8=,Apartment List page data field website_url,https://www.apartmentlist.com/nj/short-hills/510-millburn-avenue-apts
+500 district dr|07922,building_size,179,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/summit/rt-500
+500 district dr|07922,building_site_url,https://rt500residences.com/,Apartment List page data field website_url,https://www.apartmentlist.com/nj/summit/rt-500
+1 lone pine dr|07922,year_built,2023,Apartment List page data field year_built,https://www.apartmentlist.com/nj/new-providence/modera-berkeley-heights
+1 lone pine dr|07922,building_size,173,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/new-providence/modera-berkeley-heights
+1 lone pine dr|07922,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/new-providence/modera-berkeley-heights
+1 lone pine dr|07922,building_site_url,https://www.moderaberkeleyheights.com/?switch_cls[id]=65616/?utm_source=ApartmentList&utm_medium=Community+Listing,Apartment List page data field website_url,https://www.apartmentlist.com/nj/new-providence/modera-berkeley-heights
+289 main ave|06851,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/the-flats-at-289-main
+25 hickory pl|07928,year_built,1967,Apartment List page data field year_built,https://www.apartmentlist.com/nj/chatham/chatham-hill-apartments--1
+25 hickory pl|07928,building_size,308,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/chatham/chatham-hill-apartments--1
+25 hickory pl|07928,management_company,Kushner Companies,Apartment List page data field pmc_display_name,https://www.apartmentlist.com/nj/chatham/chatham-hill-apartments--1
+25 hickory pl|07928,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/chatham/chatham-hill-apartments--1
+25 hickory pl|07928,building_site_url,https://www.chathamhillnj.com/?rcstdid=MTQ=-pGJGpRzZiM8=,Apartment List page data field website_url,https://www.apartmentlist.com/nj/chatham/chatham-hill-apartments--1
+101-616 goodmans crossing|07076,year_built,1952,Apartment List page data field year_built,https://www.apartmentlist.com/nj/clark/riverview-terrace
+101-616 goodmans crossing|07076,building_size,120,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/clark/riverview-terrace
+101-616 goodmans crossing|07076,management_company,Goldberg Realty Associates,Apartment List page data field pmc_display_name,https://www.apartmentlist.com/nj/clark/riverview-terrace
+101-616 goodmans crossing|07076,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/clark/riverview-terrace
+101-616 goodmans crossing|07076,building_site_url,https://www.goldberg-realty.com/nj/clark/riverview-terrace/index.aspx?rcstdid=MTQ=-pGJGpRzZiM8=,Apartment List page data field website_url,https://www.apartmentlist.com/nj/clark/riverview-terrace
+one chester circle|08901,year_built,1948,Apartment List page data field year_built,https://www.apartmentlist.com/nj/new-brunswick/the-gardens-at-raritan--1
+one chester circle|08901,building_size,527,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/new-brunswick/the-gardens-at-raritan--1
+one chester circle|08901,management_company,"Renaissance Management Group, Inc.",Apartment List page data field pmc_display_name,https://www.apartmentlist.com/nj/new-brunswick/the-gardens-at-raritan--1
+one chester circle|08901,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/new-brunswick/the-gardens-at-raritan--1
+one chester circle|08901,building_site_url,https://thegardensatraritan.com/,Apartment List page data field website_url,https://www.apartmentlist.com/nj/new-brunswick/the-gardens-at-raritan--1
+1 richmond st|08901,year_built,2004,Apartment List page data field year_built,https://www.apartmentlist.com/nj/new-brunswick/renaissance-plaza-square
+1 richmond st|08901,building_size,415,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/new-brunswick/renaissance-plaza-square
+1 richmond st|08901,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/new-brunswick/renaissance-plaza-square
+1 richmond st|08901,building_site_url,https://plazasquareapts.com/,Apartment List page data field website_url,https://www.apartmentlist.com/nj/new-brunswick/renaissance-plaza-square
+60 paterson st|08901,year_built,2002,Apartment List page data field year_built,https://www.apartmentlist.com/nj/new-brunswick/skyline-tower--1
+60 paterson st|08901,building_size,12,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/new-brunswick/skyline-tower--1
+60 paterson st|08901,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/new-brunswick/skyline-tower--1
+60 paterson st|08901,building_site_url,http://www.oxfordrealtygroup.com/properties/new-jersey/skyline-tower/,Apartment List page data field website_url,https://www.apartmentlist.com/nj/new-brunswick/skyline-tower--1
+64 danbury rd|06897,building_size,93,Apartment List page data field total_units_count,https://www.apartmentlist.com/ct/wilton/brookside-wilton
+64 danbury rd|06897,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/wilton/brookside-wilton
+64 danbury rd|06897,building_site_url,https://brooksidewilton.com/?rcstdid=MTQ=-pGJGpRzZiM8=,Apartment List page data field website_url,https://www.apartmentlist.com/ct/wilton/brookside-wilton
+83-52 talbot st|11415,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/queens/8352-talbot-st-apt-4h
+83-52 talbot st|11415,building_site_url,https://bigapplehome.propertyware.com/rentals.html?uid=5564203025,Apartment List page data field website_url,https://www.apartmentlist.com/ny/queens/8352-talbot-st-apt-4h
+25-40 31st st|11102,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/queens/2540-31st-st-5l
+41-07 42nd st|11104,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/queens/4107-42nd-st--1
+41-07 42nd st|11104,building_site_url,https://hagarrealty.propertyware.com/rentals.html?uid=5566726151,Apartment List page data field website_url,https://www.apartmentlist.com/ny/queens/4107-42nd-st--1
+10-55 47th ave|11101,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/queens/1055-47th-ave-apt-3h--1
+2-40 51st ave|11101,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/queens/240-51st-ave--8
+42-62 hunter st|11101,building_size,27,Apartment List page data field total_units_count,https://www.apartmentlist.com/ny/queens/42-62-hunter-street
+42-62 hunter st|11101,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/queens/42-62-hunter-street
+577 lafayette ave|11216,nyc_pluto_note,"PLUTO class RM (unknown) rests on a nearest_lot match, not an exact address match",,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+577 lafayette ave|11216,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/brooklyn/577-lafayette-ave
+910 park pl|11216,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/brooklyn/910-park-pl-apt-1d
+693 1st ave|10016,nyc_pluto_note,"PLUTO class RM (unknown) rests on a nearest_lot match, not an exact address match",,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+693 1st ave|10016,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/693-1st-ave-apt-39j
+693 1st ave|10016,building_site_url,https://whlcarchitectures.propertyware.com/rentals.html?uid=5534416920,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/693-1st-ave-apt-39j
+248 e 48th st|10017,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/248-e-48th-st-apt-5j
+248 e 48th st|10017,building_site_url,https://whlcarchitectures.propertyware.com/rentals.html?uid=5523341314,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/248-e-48th-st-apt-5j
+246 e 48th st|10017,nyc_pluto_note,"PLUTO class D6 (yes) rests on a nearest_lot match, not an exact address match",,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+246 e 48th st|10017,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/246-e-48th-st-apt-5j
+246 e 48th st|10017,building_site_url,https://whlcarchitectures.propertyware.com/rentals.html?uid=5534416929,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/246-e-48th-st-apt-5j
+314 e 65th st|10065,nyc_pluto_note,"PLUTO class D9 (yes) rests on a nearest_lot match, not an exact address match",,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+314 e 65th st|10065,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/314-e-65th-st-apt-3b
+314 e 65th st|10065,building_site_url,https://whlcarchitectures.propertyware.com/rentals.html?uid=5523341313,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/314-e-65th-st-apt-3b
+303 park ave|10022,nyc_pluto_note,"PLUTO class RM (unknown) rests on a nearest_lot match, not an exact address match",,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+303 park ave|10022,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/303-park-ave--1
+303 park ave|10022,building_site_url,https://azhomes.propertyware.com/rentals.html?uid=5550964748,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/303-park-ave--1
+300 e 54th st|10022,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/300-e-54th-st
+300 e 54th st|10022,building_site_url,https://azhomes.propertyware.com/rentals.html?uid=5564366930,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/300-e-54th-st
+353 e 72nd st|10021,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/353-e-72nd-st-apt-18c
+235 e 73rd st|10021,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/235-e-73rd-st-apt-1a
+235 e 73rd st|10021,building_site_url,https://azhomes.propertyware.com/rentals.html?uid=5564399637,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/235-e-73rd-st-apt-1a
+153 w 68th st|10023,nyc_pluto_note,"PLUTO class RM (unknown) rests on a nearest_lot match, not an exact address match",,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+153 w 68th st|10023,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/153-w-68th-st-apt-204
+153 w 68th st|10023,building_site_url,http://whlcarchitectures.propertyware.com/rentals.html?uid=5534416928,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/153-w-68th-st-apt-204
+266 w 96th st|10025,nyc_pluto_note,"PLUTO class RM (unknown) rests on a nearest_lot match, not an exact address match",,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+266 w 96th st|10025,building_size,171,Apartment List page data field total_units_count,https://www.apartmentlist.com/ny/new-york/266-west-96th-street
+266 w 96th st|10025,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/266-west-96th-street
+2348 linwood ave|07024,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/2348-linwood-avenue
+327 w 83rd st|10024,nyc_pluto_note,"PLUTO class D4 (yes) rests on a nearest_lot match, not an exact address match",,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+327 w 83rd st|10024,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/327-w-83rd-st
+327 w 83rd st|10024,building_site_url,https://azhomes.propertyware.com/rentals.html?uid=5565218827,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/327-w-83rd-st
+410 jefferson st|07030,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/hoboken/410-jefferson-st-apt-1l
+600 hudson st|07030,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/hoboken/600-hudson-st-apt-1e
+2 constitution ct|07030,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/hoboken/2-constitution-ct-apt-1115
+2 constitution ct|07030,building_site_url,https://hagarrealty.propertyware.com/rentals.html?uid=5563908130,Apartment List page data field website_url,https://www.apartmentlist.com/nj/hoboken/2-constitution-ct-apt-1115
+118 adams st|07030,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/hoboken/118-adams-st
+7505 palisade ave|07047,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/north-bergen/7505-palisade-avenue--1
+8600 1st ave|07047,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/north-bergen/8600-1st-avenue-c1
+8508 john f kennedy blvd|07047,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/north-bergen/8508-kennedy-blvd-apt-d3
+34 glenwood ave|06854,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/34-glenwood-ave--1
+94 washington st|06854,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/94-washington-street--2
+207 flax hill rd|06854,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/207-flax-hill-road
+18 knapp st|06854,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/18-knapp-street
+221 lake ave s|11767,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/nesconset/221-s-lake-avenue
+305 smithtown blvd|11767,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/lake-ronkonkoma/305-smithtown-boulevard
+3 union park s|06850,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/3-union-park--1
+57 ledgewood dr|06850,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/57-ledgewood-drive
+10 fairview ave|06850,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/10-fairview-avenue
+266 main ave|06851,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/266-main-avenue
+4 summer st|06851,listing_type,townhouse,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/summerview-square--1
+1 n ave|06851,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/norwalk/1-north-avenue
+219 ash creek blvd|06824,building_size,357,Apartment List page data field total_units_count,https://www.apartmentlist.com/ct/bridgeport/creekline-at-fairfield
+219 ash creek blvd|06824,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ct/bridgeport/creekline-at-fairfield
+219 ash creek blvd|06824,building_site_url,https://www.livecreeklineapts.com/?rcstdid=MTQ=-pGJGpRzZiM8=,Apartment List page data field website_url,https://www.apartmentlist.com/ct/bridgeport/creekline-at-fairfield
+100 thanet circle|08540,year_built,2023,Apartment List page data field year_built,https://www.apartmentlist.com/nj/princeton/avalon-princeton-circle
+100 thanet circle|08540,building_size,221,Apartment List page data field total_units_count,https://www.apartmentlist.com/nj/princeton/avalon-princeton-circle
+100 thanet circle|08540,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/princeton/avalon-princeton-circle
+100 thanet circle|08540,building_site_url,https://www.avaloncommunities.com/new-jersey/princeton-apartments/avalon-princeton-circle/#community-amenities,Apartment List page data field website_url,https://www.apartmentlist.com/nj/princeton/avalon-princeton-circle
+44 nassau st|08542,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/princeton/studio-apartment-in-palmer-square
+5-49 borden ave|11101,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/queens/549-borden-ave-apt-2n
+5-49 borden ave|11101,building_site_url,https://bigapplehome.propertyware.com/rentals.html?uid=5565743133,Apartment List page data field website_url,https://www.apartmentlist.com/ny/queens/549-borden-ave-apt-2n
+71 park ave|10016,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/71-park-ave-2d
+301 e 65th st|10065,nyc_pluto_note,"PLUTO class D4 (yes) rests on a nearest_lot match, not an exact address match",,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+301 e 65th st|10065,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/301-e-65th-st-apt-3b
+301 e 65th st|10065,building_site_url,https://whlcarchitectures.propertyware.com/rentals.html?uid=5534416930,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/301-e-65th-st-apt-3b
+936 w end ave|10025,nyc_pluto_note,"PLUTO class D6 (yes) rests on a nearest_lot match, not an exact address match",,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks
+936 w end ave|10025,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/936-west-end-avenue
+489 main st|07024,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/489-main-street
+1650 john st|07024,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/1650-john-street--1
+1590 anderson ave|07024,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/1590-anderson-avenue--6
+1 horizon rd|07024,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/1-horizon-road
+2077 center ave|07024,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/2077-center-avenue--1
+418 main st|07024,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/418-main-street--1
+1620 valley st|07024,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/1620-valley-street
+4 horizon rd|07024,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/4-horizon-road--1
+3031 edwin ave|07024,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/fort-lee/3031-edwin-avenue--1
+7119 shore rd|11209,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/brooklyn/7119-shore-rd-8765
+7119 shore rd|11209,building_site_url,https://bigapplehome.propertyware.com/rentals.html?uid=5401837572,Apartment List page data field website_url,https://www.apartmentlist.com/ny/brooklyn/7119-shore-rd-8765
+1109 washington st|07030,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/hoboken/1109-washington-st
+1107 72nd st|07047,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/north-bergen/1107-72nd-st
+1100 83rd st|07047,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/north-bergen/1100-83rd-street
+306 springfield ave|07901,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/summit/306-springfield-ave
+88 harvey st|08901,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/new-brunswick/88-harvey-street
+501 u s 46|07847,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/kenvil/501-route46ken
+156 u s 46|07866,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/rockaway/156-us-46
+6 3rd ave|07716,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/atlantic-highlands/6-3rd-avenue--1
+32 leonard ave|07716,listing_type,other,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/atlantic-highlands/32-leonard-avenue--1
+13 jefferson st|11206,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/brooklyn/13-jefferson-st--1
+333 e 53rd st|10022,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/333-e-53rd-st-1109
+333 e 53rd st|10022,building_site_url,https://bigapplehome.propertyware.com/rentals.html?uid=5463244800,Apartment List page data field website_url,https://www.apartmentlist.com/ny/new-york/333-e-53rd-st-1109
+165 w 95th st|10025,listing_type,condo,Apartment List page data field rental_type,https://www.apartmentlist.com/ny/new-york/165-west-95th-street--2
+10 lytle st|08542,listing_type,apartment,Apartment List page data field rental_type,https://www.apartmentlist.com/nj/princeton/10-lytle-street
+queens ny 11103 usa|11103,nyc_pluto_note,CONFLICT: listing page names an elevator but PLUTO class C7 is a walk-up class (nearest_lot),,https://data.cityofnewyork.us/Housing-Development/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks

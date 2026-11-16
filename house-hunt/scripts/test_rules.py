@@ -241,6 +241,25 @@ def pure_3():
         eq((MU.at["x:439", "live_status"], MU.at["x:439", "available_date"], MU.at["x:477", "live_status"]), ("live", "2026-12-01", "gone"), "calls: move-in date offered, and 'gone'")
         eq((MU.at["q:9", "unit_floor_basis"], MU.at["q:9", "call_called_at"]), ("stated", ""), "calls: a unit nobody called about is untouched")
     ok(BM.PREC[0] == "confirmed_by_phone", "calls: confirmed_by_phone is first in the precedence order")
+    # ---- step 6: a pending listing settled by a later evidence batch is gated on the settled fact
+    import gates
+    with tempfile.TemporaryDirectory() as td:
+        pd.DataFrame([{"listing_id": "a:1", "verdict": "now_passes", "duplicate_of": "", "source_url": "https://www.zumper.com/x",
+                       "how_settled": "elevator: Zumper amenity tag: Elevator [stated on the zumper page of the same building (cached harvest page)]"},
+                      {"listing_id": "a:2", "verdict": "now_passes", "duplicate_of": "", "source_url": "u",
+                       "how_settled": "elevator (asterisk, inferred): unit 1003 is listed on floor 10 [plan rule] ; dogs: allowed=true; allowed_pets=dogs/cats [dog policy on the apartmentlist.com page]; no weight limit stated"},
+                      {"listing_id": "a:3", "verdict": "now_passes", "duplicate_of": "b:9", "source_url": "u", "how_settled": "elevator: Apartment List amenity list: Elevator"},
+                      {"listing_id": "a:4", "verdict": "still_open (Is there a passenger elevator?)", "duplicate_of": "", "source_url": "u", "how_settled": ""}]).to_csv(Path(td) / "resolved_pending_batch_99.csv", index=False)
+        L = pd.DataFrame({"listing_id": ["a:1", "a:2", "a:3", "a:4", "a:5"], "elevator": ["unknown"] * 5, "dogs": ["yes", "unknown", "yes", "yes", "yes"],
+                          "dog_policy_text": [""] * 5, "notes": [""] * 5, "building_floors": [""] * 5, "floor": [""] * 5, "unit": ["VH-236", "305", "215", "2", "3"],
+                          "dog_weight_limit_lb": [""] * 5})
+        L = gates.apply_resolved_pending(L, folder=Path(td)).set_index("listing_id")
+        eq((L.at["a:1", "elevator"], gates.gate_elevator(L.loc["a:1"])), ("yes", ("pass", "stated")), "pending: an elevator stated on a listing site's page of the building passes as stated")
+        eq(gates.gate_elevator(L.loc["a:2"]), ("pass", "inferred_harvester"), "pending: an elevator inferred from height passes only as an inference (an open fact)")
+        eq((L.at["a:2", "dogs"], gates.gate_dog(L.loc["a:2"])), ("yes", "pass"), "pending: a dog policy read on another page of the building")
+        ok("allowed_pets=dogs/cats" in L.at["a:2", "dog_policy_text"], "pending: the dog policy text is kept")
+        eq((L.at["a:3", "elevator"], L.at["a:4", "elevator"], L.at["a:5", "elevator"]), ("unknown", "unknown", "unknown"), "pending: duplicates, still-open rows and other listings are untouched")
+        ok(L.at["a:1", "resolved_by"].startswith("resolved_pending_batch_99") and L.at["a:5", "resolved_by"] == "", "pending: resolved_by says which batch settled it")
 
 
 def data():

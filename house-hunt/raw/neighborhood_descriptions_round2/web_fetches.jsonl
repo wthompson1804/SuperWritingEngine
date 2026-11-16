@@ -47,3 +47,57 @@
 {"kind": "page", "sent": true, "hood_id": "nj:bloomfield", "url": "https://www.essexcountyparks.org/parks/brookdale-park", "status": 200, "at": "2026-11-16T00:48:12+00:00", "robots": "group *"}
 {"kind": "page", "sent": true, "hood_id": "nj:belleville", "url": "https://www.essexcountyparks.org/parks/branch-brook-park", "status": 200, "at": "2026-11-16T00:48:13+00:00", "robots": "group *"}
 {"kind": "page", "sent": true, "hood_id": "nj:south-orange", "url": "https://www.essexcountyparks.org/parks/south-mountain-reservation", "status": 200, "at": "2026-11-16T00:48:14+00:00", "robots": "group *"}
+{"kind": "robots", "host": "visithudson.org", "status": 200, "at": "2026-11-16T00:49:07+00:00", "final_url": "https://www.visithudson.org/robots.txt"}
+{"kind": "page", "sent": true, "hood_id": "nj:bayonne", "url": "https://visithudson.org/neighborhoods", "status": 200, "at": "2026-11-16T00:49:11+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:harrison", "url": "https://www.visithudson.org/itineraries/downtown-shopping-areas-hudson-county-nj/", "status": 200, "at": "2026-11-16T00:49:12+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:jersey-city-newport", "url": "https://www.visithudson.org/things-to-do/attractions/hudson-river-waterfront-walkway/", "status": 200, "at": "2026-11-16T00:49:15+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:north-bergen", "url": "https://www.visithudson.org/things-to-do/attractions/", "status": 200, "at": "2026-11-16T00:49:18+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:stratford", "url": "https://ctvisit.com/listings/town-stratford", "status": 200, "at": "2026-11-16T00:49:18+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:stamford", "url": "https://ctvisit.com/listings/city-stamford", "status": 200, "at": "2026-11-16T00:49:19+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:danbury", "url": "https://ctvisit.com/listings/city-danbury", "status": 200, "at": "2026-11-16T00:49:22+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:norwalk", "url": "https://ctvisit.com/listings/city-norwalk", "status": 200, "at": "2026-11-16T00:49:23+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:westport", "url": "https://ctvisit.com/listings/town-westport", "status": 200, "at": "2026-11-16T00:49:25+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:brookfield", "url": "https://ctvisit.com/listings/town-brookfield", "status": 200, "at": "2026-11-16T00:49:27+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:trumbull", "url": "https://ctvisit.com/listings/town-trumbull", "status": 200, "at": "2026-11-16T00:49:29+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:seymour", "url": "https://ctvisit.com/listings/town-seymour", "status": 200, "at": "2026-11-16T00:49:31+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:oxford", "url": "https://ctvisit.com/listings/town-oxford", "status": 200, "at": "2026-11-16T00:49:32+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:beacon-falls", "url": "https://ctvisit.com/listings/town-beacon-falls", "status": 200, "at": "2026-11-16T00:49:33+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:hackensack", "url": "https://www.hackensack.org/news/main-street-revitalization-continues-with-new-residential-developments-restaurants-and-shops-now-open/", "status": 200, "at": "2026-11-16T00:49:33+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:princeton", "url": "https://www.visitprinceton.org/", "status": 404, "at": "2026-11-16T00:49:34+00:00", "robots": "group *"}
+{"kind": "page", "sent": false, "attempted": true, "hood_id": "nj:new-brunswick", "url": "https://www.newbrunswick.com/", "status": "swick.com/: ConnectionError(ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))", "at": "2026-11-16T00:49:47+00:00"}
+{"kind": "robots", "host": "parks.ny.gov", "status": 200, "at": "2026-11-16T00:49:47+00:00", "final_url": "https://parks.ny.gov/robots.txt"}
+{"kind": "page", "sent": false, "hood_id": "ny:hamilton-heights-sugar-hill", "url": "https://parks.ny.gov/parks/93/details.aspx", "why": "robots: groups naming ClaudeBot,anthropic-ai", "at": "2026-11-16T00:49:47+00:00"}
+{"kind": "page", "sent": false, "hood_id": "ny:hamilton-heights-sugar-hill", "url": "https://parks.ny.gov/parks/93/details.aspx", "why": "robots: groups naming ClaudeBot,anthropic-ai", "at": "2026-11-16T00:50:46+00:00"}
+{"kind": "page", "sent": true, "hood_id": "ct:milford-city-balance-", "url": "https://ctvisit.com/listings/city-milford", "status": 200, "at": "2026-11-16T00:50:49+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:bridgeport", "url": "https://ctvisit.com/listings/city-bridgeport", "status": 200, "at": "2026-11-16T00:50:51+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:fairfield", "url": "https://ctvisit.com/listings/town-fairfield", "status": 200, "at": "2026-11-16T00:50:53+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:hamden", "url": "https://ctvisit.com/listings/town-hamden", "status": 200, "at": "2026-11-16T00:50:54+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ct:west-haven", "url": "https://ctvisit.com/listings/city-west-haven", "status": 200, "at": "2026-11-16T00:50:57+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:bayonne", "url": "https://www.visithudson.org/neighborhoods/bayonne/", "status": 200, "at": "2026-11-16T00:50:58+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:harrison", "url": "https://www.visithudson.org/neighborhoods/harrison/", "status": 200, "at": "2026-11-16T00:51:01+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:north-bergen", "url": "https://www.visithudson.org/neighborhoods/north-bergen/", "status": 404, "at": "2026-11-16T00:51:04+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:weehawken", "url": "https://www.visithudson.org/neighborhoods/weehawken/", "status": 200, "at": "2026-11-16T00:51:07+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "nj:jersey-city", "url": "https://www.visithudson.org/neighborhoods/jersey-city/", "status": 200, "at": "2026-11-16T00:51:10+00:00", "robots": "group *"}
+{"kind": "robots", "host": "www.nyctourism.com", "status": 200, "at": "2026-11-16T00:51:11+00:00", "final_url": "https://www.nyctourism.com/robots.txt"}
+{"kind": "page", "sent": true, "hood_id": "ny:flushing-willets-point", "url": "https://www.nyctourism.com/new-york/queens/flushing/", "status": 200, "at": "2026-11-16T00:51:13+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:jamaica", "url": "https://www.nyctourism.com/new-york/queens/jamaica/", "status": 200, "at": "2026-11-16T00:51:14+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:elmhurst", "url": "https://www.nyctourism.com/new-york/queens/elmhurst/", "status": 404, "at": "2026-11-16T00:51:15+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:north-corona", "url": "https://www.nyctourism.com/new-york/queens/corona/", "status": 200, "at": "2026-11-16T00:51:17+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:astoria-east-woodside-north-", "url": "https://www.nyctourism.com/new-york/queens/astoria/", "status": 200, "at": "2026-11-16T00:51:18+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:sunnyside", "url": "https://www.nyctourism.com/new-york/queens/sunnyside/", "status": 200, "at": "2026-11-16T00:51:20+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:bensonhurst", "url": "https://www.nyctourism.com/new-york/brooklyn/bensonhurst/", "status": 404, "at": "2026-11-16T00:51:21+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:flatbush", "url": "https://www.nyctourism.com/new-york/brooklyn/flatbush/", "status": 200, "at": "2026-11-16T00:51:23+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:east-flatbush-erasmus", "url": "https://www.nyctourism.com/new-york/brooklyn/east-flatbush/", "status": 404, "at": "2026-11-16T00:51:24+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:gravesend-south-", "url": "https://www.nyctourism.com/new-york/brooklyn/gravesend/", "status": 404, "at": "2026-11-16T00:51:25+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:east-new-york-north-", "url": "https://www.nyctourism.com/new-york/brooklyn/east-new-york/", "status": 404, "at": "2026-11-16T00:51:28+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:harlem-north-", "url": "https://www.nyctourism.com/new-york/manhattan/harlem/", "status": 200, "at": "2026-11-16T00:51:29+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:east-harlem-south-", "url": "https://www.nyctourism.com/new-york/manhattan/east-harlem/", "status": 200, "at": "2026-11-16T00:51:31+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:hamilton-heights-sugar-hill", "url": "https://www.nyctourism.com/new-york/manhattan/hamilton-heights/", "status": 404, "at": "2026-11-16T00:51:32+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:washington-heights-south-", "url": "https://www.nyctourism.com/new-york/manhattan/washington-heights/", "status": 200, "at": "2026-11-16T00:51:33+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:upper-west-side-manhattan-valley", "url": "https://www.nyctourism.com/new-york/manhattan/upper-west-side/", "status": 200, "at": "2026-11-16T00:51:35+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:prospect-lefferts-gardens-wingate", "url": "https://www.nyctourism.com/new-york/brooklyn/prospect-lefferts-gardens/", "status": 404, "at": "2026-11-16T00:51:37+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:bedford-stuyvesant-east-", "url": "https://www.nyctourism.com/new-york/brooklyn/bedford-stuyvesant/", "status": 200, "at": "2026-11-16T00:51:39+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:madison", "url": "https://www.nyctourism.com/new-york/brooklyn/sheepshead-bay/", "status": 404, "at": "2026-11-16T00:51:39+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:flatlands", "url": "https://www.nyctourism.com/new-york/brooklyn/flatlands/", "status": 404, "at": "2026-11-16T00:51:40+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:manhattanville-west-harlem", "url": "https://www.nyctourism.com/new-york/manhattan/west-harlem/", "status": 404, "at": "2026-11-16T00:51:41+00:00", "robots": "group *"}
+{"kind": "page", "sent": true, "hood_id": "ny:kew-gardens-hills", "url": "https://www.nyctourism.com/new-york/queens/kew-gardens-hills/", "status": 404, "at": "2026-11-16T00:51:42+00:00", "robots": "group *"}

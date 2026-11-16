@@ -34,6 +34,33 @@ def area_key(t):
     return re.sub(r"\b(township|city of|city|town|village|borough)\b|\(.*?\)|[^a-z]", "", t.lower())
 
 
+SUBS = ["cost", "to_parents", "parking", "dog", "building", "going_out", "green", "residents_say", "local_rules", "compared_to_queens"]
+
+
+def _host_fields(obj, r):
+    """Host voice and section subheads from a scene-text row (scripts/build_scene_text.py). Empty cells are skipped."""
+    g = lambda c: str(getattr(r, c, "") or "").strip()
+    host = {}
+    if g("host_intro"):
+        host["intro"] = g("host_intro")
+    if g("host_walkthrough"):
+        host["walkthrough"] = [x.strip() for x in g("host_walkthrough").split("\n\n") if x.strip()]
+    if host:
+        obj["host"] = {**(obj.get("host") or {}), **host}
+    for c in ("tagline", "display_label"):
+        if g(c):
+            obj[c] = g(c)
+    if g("subhead"):
+        obj["subhead_original"] = obj.get("subhead_original") or obj.get("subhead")
+        obj["subhead"] = g("subhead")
+    hl = obj.get("headlines") or {}
+    for k in SUBS:
+        if g("sub_" + k) and g("sub_" + k).lower() != "nan":
+            hl.setdefault(k, {})["subhead"] = g("sub_" + k)
+    if hl:
+        obj["headlines"] = hl
+
+
 def main():
     f = SITE / "data.json"
     d = json.load(open(f, encoding="utf-8"))
@@ -47,6 +74,7 @@ def main():
             r = by.get(y.get("label"))
             if r is not None and r.scene.strip():
                 y["prose"] = {"scene": r.scene, "promise": r.promise, "catch": r.catch}
+                _host_fields(y, r)
                 n += 1
         rep["year prose"] = f"{n} of {len(d['years'])}"
 
@@ -74,6 +102,8 @@ def main():
             for h, about in targets(r.hood_id):
                 if r.scene.strip() and not (about and h["id"] in own):
                     h["prose"] = {"scene": r.scene, "good_for_her": r.good_for_her, "watch_for": r.watch_for}
+                    if not about:
+                        _host_fields(h, r)
                     if about:           # written for the whole city before the split: its figures are the city's, not this neighborhood's
                         h["prose"].update({"about": about, "inherited_from": r.hood_id})
                         inherited += 1
@@ -184,6 +214,27 @@ def main():
             h["rank_in_experience"] = i
         y["hood_ids"] = [h["id"] for h in ranked]
     rep["neighborhoods ranked within experiences"] = sum(1 for h in hoods.values() if h.get("rank_in_experience"))
+
+    # the host's line and honest catch for each place, and its section subheads (scripts/realtor_lines.py)
+    RL = rd(DATA / "reference" / "realtor_lines.csv")
+    if RL is not None:
+        rl = {r.listing_id: r for r in RL.itertuples()}
+        n = 0
+        for u in d["units"]:
+            r = rl.get(u.get("id"))
+            if r is None:
+                continue
+            g = lambda c: str(getattr(r, c, "") or "").strip()
+            if g("host_line"):
+                u["host"] = {"line": g("host_line"), "catch": g("host_catch") or None}
+                n += 1
+            hl = u.get("headlines") or {}
+            for k in SUBS:
+                if g("sub_" + k) and g("sub_" + k).lower() != "nan":
+                    hl.setdefault(k, {})["subhead"] = g("sub_" + k)
+            if hl:
+                u["headlines"] = hl
+        rep["places with a host line"] = f"{n} of {len(d['units'])}"
 
     # short attributed outside descriptions of each place (scripts/neighborhood_descriptions.py). A bare location
     # sentence ("X is a borough in Y County") says nothing about the place, so it is kept only when it is all there is.

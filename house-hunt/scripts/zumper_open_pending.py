@@ -581,12 +581,66 @@ def akey(r):
     return (a, str(r["zip"]).zfill(5)[:5]) if a and re.match(r"\d", a) else None
 
 
-def gate_preview(r, drive):
+_FILLS = None
+
+
+def pipeline_fills(r):
+    """What gates.main() would add to this row before gating: community facts read from management sites
+    (data/reference/community_facts.csv: address+ZIP first, then building name) and, in NYC, the PLUTO building class
+    (data/reference/nyc_building_facts.csv). That code sits inside gates.main() and cannot be imported, so the same
+    rules are RE-IMPLEMENTED here. Returns (row copy with blanks filled, community_building_type, pluto record, notes)."""
+    global _FILLS
     import gates
+    if _FILLS is None:
+        ca, cn, pl = {}, {}, {}
+        f = lib.DATA / "reference" / "community_facts.csv"
+        if f.exists():
+            for c in csv.DictReader(open(f)):
+                m = re.search(r"(\d{5})", c["zip"])
+                ka = gates.norm_addr(c["address"]) + "|" + (m.group(1) if m else "")
+                if len(ka) > 6:
+                    ca.setdefault(ka, c)
+                if c["building_name"].lower().strip():
+                    cn.setdefault(c["building_name"].lower().strip(), c)
+        f = lib.DATA / "reference" / "nyc_building_facts.csv"
+        if f.exists():
+            for c in csv.DictReader(open(f)):
+                pl[c["addr_key"]] = c
+        _FILLS = (ca, cn, pl)
+    ca, cn, pl = _FILLS
+    r2 = dict(r)
+    m = re.search(r"(\d{5})", str(r["zip"]))
+    ak = gates.norm_addr(r["address"]) + "|" + (m.group(1) if m else "")
+    notes = []
+    blank = lambda col: str(r2[col]).strip().lower() in ("", "unknown", "nan")
+    digit = lambda v: v.replace(".", "").isdigit()
+
+    def cval(col):
+        v = (ca.get(ak) or {}).get(col, "")
+        return v if v not in ("", None) else (cn.get(str(r["building_name"]).lower().strip()) or {}).get(col, "")
+    for col, src, ok in (("dogs", "dogs", lambda v: v not in ("", "unknown")),
+                         ("dog_weight_limit_lb", "dog_weight_limit_lb", digit),
+                         ("elevator", "elevator", lambda v: v not in ("", "unknown")),
+                         ("building_floors", "floors_total", lambda v: v.isdigit()),
+                         ("building_floors", "highest_floor_mentioned", lambda v: v.isdigit())):
+        v = cval(src)
+        if blank(col) and ok(v):
+            r2[col] = v
+            notes.append(f"{col}={v} from community_facts")
+    return r2, cval("building_type"), pl.get(ak) or {}, notes
+
+
+def gate_preview(r, drive, cbt="", pluto=None):
+    import gates
+    pluto = pluto or {}
     ns = SimpleNamespace(**{k: ("" if v is None else str(v)) for k, v in r.items()})
-    ns.community_building_type = ""
-    ns.pluto_floors = ""
+    ns.community_building_type = cbt
+    ns.pluto_floors = pluto.get("pluto_floors", "")
     el, el_basis = gates.gate_elevator(ns)
+    if el_basis != "stated" and pluto.get("elevator_from_class") == "yes":
+        el, el_basis = "pass", "nyc_pluto_building_class"
+    elif el_basis == "" and pluto.get("elevator_from_class") == "no":
+        el, el_basis = "fail", "nyc_pluto_building_class"
     fl, floor_used, fl_basis, _ = gates.gate_floor(ns)
     z = str(r["zip"]).zfill(5)[:5]
     dm = drive.get(z)
@@ -669,7 +723,7 @@ def build(quiet=False):
                         summ[sid].update(status=why[0], note=why[1])
                         if why[0] == "opened":
                             g = "type" if "bedrooms" in why[1] else "rent"
-                            summ[sid].update(preview_status="fail", fail_gates=g, **{"g_" + g: "fail"})
+                            summ[sid].update(preview_status="fail", fail_gates=g, pf_status="fail", pf_fail_gates=g, **{"g_" + g: "fail"})
                     continue
                 fu = hz.facts_from(U, vt, ent, "")
                 for k in ("dogs", "dog_policy_text", "dog_weight_limit_lb", "elevator", "building_floors"):
@@ -689,11 +743,11 @@ def build(quiet=False):
                 continue
             p = ent.get("min_price") if ent.get("min_price") is not None else ent.get("price")
             if ent.get("bedrooms") is None or ent["bedrooms"] > 1:
-                summ[target].update(status="opened", g_type="fail", preview_status="fail", fail_gates="type",
+                summ[target].update(status="opened", g_type="fail", preview_status="fail", fail_gates="type", pf_status="fail", pf_fail_gates="type",
                                     note="page shows 2+ bedrooms (or none stated); not written to zumper_opened.csv")
                 continue
             if p is None or p > hz.MAX_RENT:
-                summ[target].update(status="opened", g_rent="fail", preview_status="fail", fail_gates="rent",
+                summ[target].update(status="opened", g_rent="fail", preview_status="fail", fail_gates="rent", pf_status="fail", pf_fail_gates="rent",
                                     note=f"page price {p} is over $3,000 (or absent); not written to zumper_opened.csv")
                 continue
             bld, bvt, bblock = None, "", ""
@@ -758,6 +812,12 @@ def build(quiet=False):
         if first_seen.get(lid):
             r["first_seen"] = min(first_seen[lid], r["first_seen"])
         g = gate_preview(r, drive)
+        r2, cbt, pluto, fnotes = pipeline_fills(r)
+        g2 = gate_preview(r2, drive, cbt, pluto)
+        if g2["elevator_basis"] == "nyc_pluto_building_class":
+            fnotes.append(f"elevator {g2['g_elevator']} from NYC PLUTO class {pluto.get('pluto_class')}")
+        elif g2["elevator_basis"] == "inferred_high_rise_label":
+            fnotes.append("elevator inferred from community_facts building_type high-rise")
         base = summ.get(lid) or {"listing_id": lid, "url": r["url"], "selected_card_row": r["selected_card_row"],
                                  "page_retrieved_at": r["last_seen"], "card_listed_rent": r["card_listed_rent"],
                                  "state": r["state"], "hood_id": r["hood_id"], "group_label": ""}
@@ -769,6 +829,8 @@ def build(quiet=False):
                          "policy_block" if "Policy | Allowed" in t else "amenity_chip")
         opens = [k[2:] for k in ("g_rent", "g_movein", "g_dog", "g_elevator", "g_place") if g[k] == "unknown"]
         fails = [k[2:] for k in ("g_type", "g_rent", "g_movein", "g_dog", "g_elevator", "g_floor", "g_place") if g[k] == "fail"]
+        opens2 = [k[2:] for k in ("g_rent", "g_movein", "g_dog", "g_elevator", "g_place") if g2[k] == "unknown"]
+        fails2 = [k[2:] for k in ("g_type", "g_rent", "g_movein", "g_dog", "g_elevator", "g_floor", "g_place") if g2[k] == "fail"]
         in_grid = str(r["zip"]).zfill(5)[:5] in grid
         base.update(status="opened", note="" if in_grid else "ZIP on the page is outside the search grid; not written to zumper_opened.csv",
                     url=r["url"], page_retrieved_at=r["last_seen"], building_key="|".join(akey(r) or (r["address"], str(r["zip"]))),
@@ -778,6 +840,10 @@ def build(quiet=False):
                     rent_le_2800="yes" if gates.to_num(r["listed_rent"]) is not None and gates.to_num(r["listed_rent"]) <= RENT_SELECT else "no",
                     fail_gates=";".join(fails), unknown_gates=";".join(opens), n_unknown=len(opens),
                     preview_status="fail" if fails else ("pending" if opens else "pass"),
+                    pf_g_dog=g2["g_dog"], pf_g_elevator=g2["g_elevator"], pf_elevator_basis=g2["elevator_basis"],
+                    pf_g_floor=g2["g_floor"], pf_fail_gates=";".join(fails2), pf_unknown_gates=";".join(opens2),
+                    pf_n_unknown=len(opens2), pf_status="fail" if fails2 else ("pending" if opens2 else "pass"),
+                    pf_notes="; ".join(fnotes),
                     state=r["state"], hood_id=r["hood_id"] or base.get("hood_id", ""), **g)
         summ[lid] = base
         if in_grid:
@@ -793,7 +859,10 @@ def build(quiet=False):
             "preview_status", "fail_gates", "unknown_gates", "n_unknown", "selected_card_row", "note", "page_retrieved_at",
             "state", "hood_id", "group_label", "building_key", "building_name", "address", "unit", "beds", "card_listed_rent",
             "listed_rent", "rent_le_2800", "available_date", "dogs", "dog_basis", "dog_weight_limit_lb", "elevator",
-            "elevator_basis", "floor", "floor_used", "floor_basis"]
+            "elevator_basis", "floor", "floor_used", "floor_basis",
+            # the same gates after the fills gates.main() applies first (community facts, NYC PLUTO class)
+            "pf_status", "pf_g_dog", "pf_g_elevator", "pf_elevator_basis", "pf_g_floor", "pf_fail_gates",
+            "pf_unknown_gates", "pf_n_unknown", "pf_notes"]
     tmp = SUMMARY_F.with_suffix(".tmp")
     with open(tmp, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=scol, extrasaction="ignore")
@@ -812,55 +881,52 @@ def report():
     print("selected card rows by status:", S[S.selected_card_row == "yes"].status.value_counts().to_dict())
     O = S[S.status == "opened"].copy()
     print("opened rows (incl. units found on building pages):", len(O), O.selected_card_row.value_counts().to_dict())
-    print("preview:", O.preview_status.value_counts().to_dict())
-    for g in ("g_type", "g_rent", "g_movein", "g_dog", "g_elevator", "g_floor", "g_place"):
+    for g in ("g_type", "g_rent", "g_movein", "g_dog", "g_elevator", "g_floor", "g_place", "pf_g_dog", "pf_g_elevator", "pf_g_floor"):
         print(" ", g, O[g].value_counts().to_dict())
-    # lifestyle group for rows that pass or are one fact away: geocode those buildings (pipeline method)
-    need = O[(O.preview_status == "pass") | ((O.preview_status == "pending") & (O.n_unknown == "1"))]
     R = {}
     for r in csv.DictReader(open(OPENED_F)):
         R[r["listing_id"]] = r
         if r["listings_csv_id"]:
             R[r["listings_csv_id"]] = r
+    G = pd.read_csv(lib.DATA / "lifestyle_groups.csv", dtype=str, keep_default_na=False)
+    gl, cutset = dict(zip(G.hood_id, G.group_label)), set(G[G.safety_cut == "True"].hood_id)
+    # neighborhood (pipeline method, every building geocoded) for rows that pass or are one fact away, either preview
+    m = lambda st, n: (O[st] == "pass") | ((O[st] == "pending") & (O[n] == "1"))
+    need = O[m("preview_status", "n_unknown") | m("pf_status", "pf_n_unknown")].copy()
+    bk = lambda r: "open:" + "|".join(akey(r) or (r["address"], r["zip"]))
     recs, seen = [], set()
     for i in need.listing_id:
         r = R.get(i)
-        if not r:
-            continue
-        bk = "open:" + "|".join(akey(r) or (r["address"], r["zip"]))
-        if bk not in seen:
-            seen.add(bk)
-            recs.append({"bkey": bk, "lat": r["lat"], "lon": r["lon"], "city": r["city"], "state": r["state"],
+        if r and bk(r) not in seen:
+            seen.add(bk(r))
+            recs.append({"bkey": bk(r), "lat": r["lat"], "lon": r["lon"], "city": r["city"], "state": r["state"],
                          "zip5": str(r["zip"]).zfill(5)[:5]})
     hc = hood_for(recs, need_all=True)
-    G = pd.read_csv(lib.DATA / "lifestyle_groups.csv", dtype=str, keep_default_na=False)
-    gl, cutset = dict(zip(G.hood_id, G.group_label)), set(G[G.safety_cut == "True"].hood_id)
-
-    def hood(i):
-        r = R.get(i)
-        if not r:
-            return ""
-        return hc.get("open:" + "|".join(akey(r) or (r["address"], r["zip"])), ["", ""])[0]
-    need = need.copy()
-    need["hood_final"] = need.listing_id.map(hood)
-    need["group"] = need.hood_final.map(lambda h: gl.get(h, "(neighborhood not in lifestyle_groups.csv)"))
+    need["hood_final"] = need.listing_id.map(lambda i: hc.get(bk(R[i]), ["", ""])[0] if i in R else "")
+    need["hood_final_basis"] = need.listing_id.map(lambda i: hc.get(bk(R[i]), ["", ""])[1] if i in R else "")
+    need["group"] = need.hood_final.map(lambda h: gl.get(h, "(neighborhood has no lifestyle group yet)"))
     need["cut"] = need.hood_final.isin(cutset)
     need.to_csv(OUT / "zumper_opened_pass_or_one_open.csv", index=False)
-    P = need[need.preview_status == "pass"]
-    print("PASS every listing gate (floor pass or unknown):", len(P), "units in", P.building_key.nunique(), "buildings;",
-          "of which in a safety-cut neighborhood:", int(P.cut.sum()))
-    P = P[~P.cut]
-    print("  after safety cut:", len(P), "units /", P.building_key.nunique(), "buildings; rent<=2800:",
-          int((P.rent_le_2800 == "yes").sum()), "; floor unknown:", int((P.g_floor == "unknown").sum()),
-          "; dog basis:", P.dog_basis.value_counts().to_dict(), "; elevator basis:", P.elevator_basis.value_counts().to_dict())
-    print("  by state:", {k: (len(g), g.building_key.nunique()) for k, g in P.groupby("state")})
-    print("  by group:", {k: (len(g), g.building_key.nunique()) for k, g in P.groupby("group")})
-    Q = need[(need.preview_status == "pending") & ~need.cut]
-    print("ONE fact open:", len(Q), "units /", Q.building_key.nunique(), "buildings:", Q.unknown_gates.value_counts().to_dict())
-    print("  by state:", {k: (len(g), g.building_key.nunique()) for k, g in Q.groupby("state")})
-    allp = O[O.preview_status == "pending"]
-    print("pending by open facts:", allp.unknown_gates.value_counts().to_dict())
-    print("fails:", O[O.preview_status == "fail"].fail_gates.value_counts().to_dict())
+    for title, st, n, unk, eb in (("PAGE ALONE", "preview_status", "n_unknown", "unknown_gates", "elevator_basis"),
+                                  ("WITH PIPELINE FILLS (community facts, NYC PLUTO)", "pf_status", "pf_n_unknown", "pf_unknown_gates", "pf_elevator_basis")):
+        print("==", title, "all opened:", O[st].value_counts().to_dict())
+        P = need[need[st] == "pass"]
+        print("PASS every listing gate (floor pass or unknown):", len(P), "units /", P.building_key.nunique(), "buildings;",
+              "in a safety-cut neighborhood:", int(P.cut.sum()), P[P.cut].hood_final.value_counts().to_dict())
+        P = P[~P.cut]
+        print("  after safety cut:", len(P), "units /", P.building_key.nunique(), "buildings; rent<=2800:",
+              int((P.rent_le_2800 == "yes").sum()), "; floor unknown:", int((P.g_floor == "unknown").sum()),
+              "; dog basis:", P.dog_basis.value_counts().to_dict(), "; elevator basis:", P[eb].value_counts().to_dict(),
+              "; selected card rows:", int((P.selected_card_row == "yes").sum()))
+        print("  by state:", {k: (len(g), g.building_key.nunique()) for k, g in P.groupby("state")})
+        print("  by group:", {k: (len(g), g.building_key.nunique()) for k, g in P.groupby("group")})
+        Q = need[(need[st] == "pending") & (need[n] == "1") & ~need.cut]
+        print("ONE fact open:", len(Q), "units /", Q.building_key.nunique(), "buildings:", Q[unk].value_counts().to_dict())
+        print("  by state:", {k: (len(g), g.building_key.nunique()) for k, g in Q.groupby("state")})
+        print("  by group:", {k: (len(g), g.building_key.nunique()) for k, g in Q.groupby("group")})
+        print("pending by open facts:", O[O[st] == "pending"][unk].value_counts().to_dict())
+    print("fails (page alone):", O[O.preview_status == "fail"].fail_gates.value_counts().to_dict())
+    print("fails (with fills):", O[O.pf_status == "fail"].pf_fail_gates.value_counts().to_dict())
 
 
 if __name__ == "__main__":

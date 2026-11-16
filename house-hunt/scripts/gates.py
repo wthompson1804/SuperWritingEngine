@@ -144,6 +144,37 @@ def gate_proof(r):
     return "pass" if str(r.detail_level).strip().lower() != "card" else "unknown"
 
 
+def apply_resolved_pending(df, pattern="resolved_pending_batch_*.csv", folder=None):
+    """Pending listings whose missing gate fact a later evidence batch settled from a page we may read
+    (data/evidence/resolved_pending_batch_<n>.csv, verdict now_passes; scripts/resolve_pending_thin_years.py).
+    The settled fact is written onto the listing row, so the ordinary gates decide: an elevator stated on a listing
+    site's page of the same building becomes 'yes'; an elevator inferred from the building's height becomes 'yes'
+    with the note 'elevator: inferred', which the elevator gate reads as an inference (an open fact, asterisk); a
+    dog policy read on another page of the same building becomes dogs 'yes' with the policy text. Rows that only
+    duplicate a unit already passing from another source are left alone. Adds the column resolved_by."""
+    folder = folder or (DATA / "evidence")
+    df["resolved_by"] = ""
+    for f in sorted(Path(folder).glob(pattern)):
+        R = pd.read_csv(f, dtype=str, keep_default_na=False)
+        R = R[R.verdict.str.startswith("now_passes") & (R.duplicate_of == "")].drop_duplicates("listing_id").set_index("listing_id")
+        for i, lid in zip(df.index, df.listing_id):
+            if lid not in R.index:
+                continue
+            r = R.loc[lid]
+            how = r.how_settled
+            for part in [x.strip() for x in how.split(" ; ")]:
+                if part.lower().startswith("elevator"):
+                    df.at[i, "elevator"] = "yes"
+                    if re.match(r"elevator \((?:asterisk, )?inferred\)", part, re.I):
+                        df.at[i, "notes"] = (str(df.at[i, "notes"]) + " | elevator: inferred from the building's height (" + f.stem + ")").strip(" |")
+                elif part.lower().startswith("dogs"):
+                    df.at[i, "dogs"] = "yes"
+                    if not str(df.at[i, "dog_policy_text"]).strip():
+                        df.at[i, "dog_policy_text"] = re.sub(r"^dogs:\s*", "", part)[:300]
+            df.at[i, "resolved_by"] = f"{f.stem}: {how[:300]} ({r.source_url})"
+    return df
+
+
 def main():
     files = sorted((DATA / "listings_raw").glob("*.csv"))
     if not files:
@@ -217,6 +248,8 @@ def main():
     else:
         for col in ("community_building_type", "community_parking_text", "community_utilities_included", "community_utilities_resident_pays"):
             df[col] = ""
+
+    df = apply_resolved_pending(df)
 
     df["g_type"] = df.apply(gate_type, axis=1)
     df["g_rent"] = df.apply(gate_rent, axis=1)

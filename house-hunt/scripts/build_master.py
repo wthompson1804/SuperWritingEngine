@@ -540,6 +540,11 @@ def main():
             # 'stated' only when the page lists an elevator; a harvester's "6+ floors" note is an inference (W3)
             M.add(b, "elevator", "yes", "inferred" if el_basis.startswith("inferred") else ("official_record" if el_basis.startswith("nyc") else "stated"),
                   src if not el_basis.startswith("nyc") else "NYC PLUTO building class " + getattr(r, "pluto_class", ""))
+        if str(getattr(r, "pluto_class", "")).upper().startswith("C") and lot_ok.get(r.addr_key, False) and r.g_elevator == "pass":
+            # the city classes this lot (an exact address match) as walk-up apartments while a listing names an elevator:
+            # the official record contradicts the listing, so the elevator stays open (357 Grove St, 1512 Park Pl, Brooklyn)
+            M.add(b, "elevator_evidence_open", f"the city's record for this lot (building class {r.pluto_class}, walk-up apartments, at the listing's own address) goes against the elevator a listing names",
+                  "official_record", "NYC PLUTO building class " + r.pluto_class)
         if str(getattr(r, "pluto_class", "")).upper().startswith("D") and official_elevator_ok(r.addr_key):
             # the city classes this lot (the listing's own address) as an elevator apartment building, with no zero on the
             # device list: an official record beside whatever the listing says (so the elevator does not rest on a listing site alone)
@@ -852,7 +857,7 @@ def main():
     unit_cols = ["listing_id", "building_id", "addr_key", "source_site", "url", "building_url", "also_seen_at", "detail_level", "first_seen",
                  "last_seen", "unit", "beds", "baths", "sqft", "listed_rent", "price_basis", "concession_text", "available_date_text",
                  "available_date", "floor", "floor_used", "floor_basis", "floor_label_kind", "g_floor", "listing_age_days", "stale_listing", "photo_url", "raw_path", "notes",
-                 "other_monthly_fees_json", "listing_type", "gate_status"]
+                 "other_monthly_fees_json", "listing_type", "gate_status", "resolved_by"]
     MU = U[[c for c in unit_cols if c in U.columns]].copy()
 
     # the same unit listed twice inside one building (W8): same normalized label, or - with no label - the same beds,

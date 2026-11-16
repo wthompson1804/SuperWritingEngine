@@ -1,21 +1,109 @@
-# Scene text notes (written 2026-11-15/16)
+# Scene text notes (written 2026-11-15/16; host voice, crime rule and section subheads added 2026-11-16)
 
-Prose for the page's six years and its neighborhoods, written to Lamia in second person and bound to the collected
-data. Nothing here is wired into the page yet; `site/` and the pipeline were not touched.
+Prose for the page's six experiences (formerly "years"), its neighborhoods and its places, written to Lamia in second
+person and bound to the collected data. The first part of this file describes the system as it stands now. The earlier
+notes are kept below under "First version", because their method still applies to the older fields.
 
 ## Files
 
 | File | What it is |
 |---|---|
-| `data/reference/scene_text_years.csv` | 6 rows: `year_label, scene, promise, catch, evidence_json` |
-| `data/reference/scene_text_neighborhoods.csv` | 129 rows: `hood_id, hood_name, year_label, scene, good_for_her, watch_for, evidence_json` |
-| `data/reference/scene_text_source.txt` | The hand-written drafts the two CSVs are built from. Edit text here, not in the CSVs. |
-| `scripts/build_scene_text.py` | Fills the numbers into the drafts and writes the evidence. Generates no wording. |
+| `data/reference/scene_text_years.csv` | 6 rows. `year_label` (the key, still "... Year"), `display_label` ("The Walk-Everywhere Experience"), `tagline`, `subhead`, `scene`, `promise`, `catch`, `host_intro`, `host_walkthrough` (3 paragraphs separated by a blank line), `sub_cost`, `sub_to_parents`, `sub_going_out`, `sub_green`, `sub_compared_to_queens`, `evidence_json` |
+| `data/reference/scene_text_neighborhoods.csv` | One row per neighborhood drafted (136 today). `hood_id`, `hood_name`, `year_label`, `scene`, `good_for_her`, `watch_for`, `host_intro`, `sub_cost`, `sub_to_parents`, `sub_parking`, `sub_dog`, `sub_going_out`, `sub_green`, `sub_residents_say`, `sub_local_rules`, `sub_compared_to_queens`, `evidence_json` |
+| `data/reference/realtor_lines.csv` | One row per unit on the page. `listing_id`, `host_line`, `host_catch`, `sub_cost`, `sub_parking`, `sub_dog`, `sub_building`, `facts_used_json` |
+| `data/reference/scene_text_source.txt` | The hand-written drafts the two scene CSVs are built from. Edit text here, never in the CSVs. |
+| `scripts/build_scene_text.py` | Fills the numbers into the drafts, picks the section subheads, writes the evidence. Generates no wording. |
 | `scripts/check_scene_text.py` | Re-checks every text against the data. Run it after any data rerun. |
+| `scripts/realtor_lines.py` | Composes the per-unit lines from each unit's own fields (reads `site/data.json`, read-only). |
+| `scripts/test_realtor_lines.py` | 32 tests for the generator; also re-checks every unit on the page. |
 
-129 neighborhoods = the 127 in `site/data.json` when this was written, plus Bensonhurst and
-Tompkinsville-Stapleton-Clifton-Fox Hills, which appeared in `data/ranked_units.csv` during the repair run.
-Seven of the 127 have only an avoid card today; they still get a text.
+After any data rerun: `python3 scripts/build_scene_text.py && python3 scripts/check_scene_text.py`, then
+`python3 scripts/realtor_lines.py && python3 scripts/test_realtor_lines.py`. The builder refills every number, so most
+changes need no editing. It stops on a row only when a sentence's test no longer holds; edit that block in the
+drafts file and build again.
+
+## What changed on 2026-11-16
+
+1. **Experiences.** The page calls a year an experience. The key column is unchanged; `display_label` carries the new
+   wording. New: `tagline` (one line), `subhead` (a replacement for the page's subhead, no crime clause),
+   `host_intro` (110 to 160 words) and `host_walkthrough` (a weekday, a Saturday night, a Sunday with her parents;
+   40 to 60 words each). `promise` and `catch` were rewritten to say what life is like and no longer say "year".
+2. **Figures match the tiles.** Experience prose now quotes the page's own unit-weighted figures: `p_` tokens read
+   `site/data.json` `years[].medians` and counts, `u_` tokens are medians or shares over the units shown. The old
+   `scene` now uses them too for drive, transit, park walk and size. Experience prose gives typical figures only,
+   never a range; where useful it names the nearest neighborhood (`{p_near}`, `{p_near_drive}`).
+3. **Neighborhood `host_intro`** (60 to 90 words) for every neighborhood, in about ten shapes rotated by what is most
+   distinctive (the green, the food, the drive home, the parking rule, the water, the price, the catch first, the
+   dog's morning, the quiet, a residents' line). Local rules are folded in where they bite (overnight bans, permit
+   rules, dog rules), and residents are paraphrased as "people who live here say".
+4. **Tolls.** Every toll figure now comes from `data/enriched/*.json` (`drive.toll_round_trip_ezpass`, complete for
+   every building), as the median over the neighborhood's buildings, through `building_crosswalk.csv` and
+   `master_buildings.csv` (read-only). The wording is fixed: "about $X round trip with a New York E-ZPass". No text
+   says "tolls not fully known" any more.
+5. **No crime in the open prose** (owner's rule). No rates, no "per 1,000", no comparison with Jamaica, no "low crime"
+   as a selling point, in any field. Two wordings are allowed, each tied to a test the checker re-runs:
+   "one of the safest spots on the whole list" (only in `good_for_her`, only where the neighborhood is in the lowest
+   fifth by violent rate among the neighborhoods on the page; 21 rows today) and "the safety limit we set" (only in
+   `watch_for`, only where the violent rate is 8.0 or more against Jamaica's 9.8; 5 rows today). `watch_for` and
+   `catch` are about living there: the drive, parking rules, thin nightlife, car dependence, cost, choice.
+6. **Section subheads** (`sub_` columns): one optional line, at most 14 words, no numbers, under each section headline
+   of the page. They are conditional drafts in the source file (`=== sub:` blocks): each line is
+   `conditions :: wording | wording`, the first line whose conditions hold for a row is used, and the wording is
+   picked by a hash of the row's id. Every condition is stored as evidence with its test. No match means an empty
+   subhead, on purpose.
+7. **Places.** `scripts/realtor_lines.py` writes `host_line` (1 or 2 sentences, at most 45 words), `host_catch`
+   (1 sentence) and four section subheads per unit from the unit's fields, with 42 line patterns. See its docstring.
+8. **Jersey City** is now eight neighborhoods in the data. The whole-city drafts were removed and eight new blocks
+   written. The builder skips (and lists) any draft whose neighborhood has left `lifestyle_groups.csv`.
+
+## Draft syntax added
+
+- `[[ ... ]]` is optional text: dropped whole when a value inside is missing or a hidden test inside fails. Pairs of
+  them give either/or wording (`[[no tolls{!u_toll==0}]][[tolls run about ${u_toll} ...{!u_toll>0}]]`), which keeps
+  the experience prose true while the unit list changes.
+- A block may appear twice in the file (the host voice has its own section); `rules:` and `voices:` lines add up.
+- Tokens: `pg_lo`, `pg_hi`, `pg_n` (the page's all-in range and count for a neighborhood; use inside `[[ ]]`),
+  `pg_safe` (violent-rate percentile among page neighborhoods), `q_cost`, `q_sqft`, `q_drive`, `q_food`, `q_green`
+  (the page's 1 to 5 comparison with Queens), `p_...` and `u_...` for experiences, `b_toll` from the enriched files.
+- Rules and residents' comments are read from both rounds (`local_rules*.csv`, `neighborhood_quotes*.csv`).
+
+## What the checker adds
+
+Word limits for the new fields; three paragraphs for the walkthrough; listing-ad hype words; the crime rule and its two
+allowed wordings; subhead rules (14 words, one sentence, no digits, no hedging words); and a form-letter test across
+rows: at most 3 `host_intro` texts may open with the same 3 words, and no run of 6 words may appear in more than a
+tenth of them (the fixed toll wording and number units are exempt). The `scene` limit for neighborhoods went from 60
+to 68 words because the fixed toll wording is longer than "tolls not fully known".
+
+## Weak spots (current)
+
+1. **`site/data.json` moved several times while this was written** (210, then 326, then 321 units; 94, then 120
+   neighborhoods). The experience prose is built to survive that, but its adjectives are not all tested: "Start here
+   if you like options" is tested, "a soft landing" is not. Reread the six experiences after the unit list settles.
+2. **Neighborhood `host_intro` texts** (median 78 words) nearly all end on the drive and
+   the toll. The form-letter test passes, but read in a row the closing sentence is recognisably the same move.
+3. **Park and dog-park names** come from the most common name among the neighborhood's buildings, and the minutes
+   from the median building, so a name and its distance can belong to different buildings. Three names that read
+   wrongly (a playground, a dog daycare) were replaced with "a park" or "a dog park"; others may exist.
+4. **Paraphrases of residents are not machine-checked for fairness.** The check proves the quotes exist and the
+   counts have not changed. I read the excerpts for parking, dogs and green, and social life; safety and car-crime
+   comments are no longer used anywhere. The quote exclusions file is not applied to the counts.
+5. **Section subheads repeat.** There are 2 or 3 wordings per condition, so the commonest lines appear 15 to 20
+   times across 136 neighborhoods, and the unit subheads more often (the commonest about 75 times in 321 units).
+   They are short enough that this reads as a house style, but it is not unique writing.
+6. **`sub_compared_to_queens`** rests on the page's 1 to 5 scale and also fires for neighborhoods that are in Queens.
+7. **Unit lines:** two patterns carry most garage units (71 of 321), and the catch for 92 units is the same fact (a
+   special whose effect on the price is not stated) in three wordings. "First of N on the scorecard" presents the
+   pipeline's rank as the host's opinion.
+8. **A rule's summary is quoted, not its legal text.** Where a summary says "many streets" the prose says so too.
+9. The earlier weak spots 3 to 7 below still apply to `scene`, `good_for_her` and `watch_for`.
+
+---
+
+# First version (2026-11-15/16), kept for the method
+
+Superseded points: the year figures now use the page's figures (old weak spot 1), tolls are complete (old method 4),
+and crime rates are no longer written anywhere (old method 5, and the crime lines in "What I would not claim").
 
 ## Method
 
