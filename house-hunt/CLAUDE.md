@@ -229,3 +229,8 @@ Decisions by Will that changed or replaced an earlier one. Dates are UTC days of
 - **Overnight accuracy pass (Will, 2026-11-16):** the owner asked that the published page be accurate, re-authorised the
   independent check that had been cancelled, said data that needs updating should be updated, and that work may run as
   long as needed. The front tutorial is restored. The "not re-checked" flag stays removed. Trulia stays untouched.
+
+- **Rent versus total, and filters (Will, 2026-11-16):** wherever a price appears, show both the base rent and the total
+  with utilities and fees, clearly labelled. Filters (price and others) are a visible, first-class control on the first
+  screen, experience and neighborhood pages and My list. Updating the publicly shared page needs the owner's go-ahead
+  (an automated publish to a page shared by link was blocked while he was away).
