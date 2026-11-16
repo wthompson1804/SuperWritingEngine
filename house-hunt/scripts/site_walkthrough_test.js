@@ -1,32 +1,54 @@
+// Walk-through of the page at one width. Usage (from house-hunt/):
+//   python3 scripts/page_data_extras.py && python3 scripts/build_site.py
+//   (cd site && python3 -m http.server 8765 &)
+//   BASE=http://localhost:8765 OUT=site/screens W=390 node scripts/site_walkthrough_test.js     (then W=1280 and W=320)
+// BASE serves site/ (index.html fetches data.json and map_base.json). At W=390 it also opens the built single file
+// (site/dist/index.html) as a phone, a desktop, a small phone with reduced motion, with storage that throws, and with its
+// outer doctype/html/head/body stripped and re-wrapped. Screenshots are written at W=390 only.
 const { chromium } = require('playwright');
 const assert = require('assert');
-const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390);
+const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390), VH = W === 320 ? 640 : W >= 1000 ? 900 : 844;
+const SCREEN = 844, LIMIT = Math.round(2.2 * SCREEN), AIM = 2 * SCREEN; // collapsed pages: aim for two phone screens, never more than 2.2
 (async () => {
   const browser = await chromium.launch();
-  const ctx = await browser.newContext({ viewport: { width: W, height: 844 }, deviceScaleFactor: 1 });
+  const ctx = await browser.newContext({ viewport: { width: W, height: VH }, deviceScaleFactor: 1 });
   await ctx.grantPermissions(['clipboard-read', 'clipboard-write']).catch(() => {});
   const page = await ctx.newPage();
   page.setDefaultTimeout(10000);
-  // plain hashes: the id in lower case, every run of other characters turned into a hyphen (the page's mkSlug)
-  const slug = id => String(id).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'x';
-  // a list shows three, then more: open everything
-  const showAll = async () => { for (let i = 0; i < 20; i++) { const b = page.locator('#view [data-act=more]:not([data-n="3"])').last(); if (!(await b.count())) break; await b.click(); } };
   const errors = [];
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text() + ' @' + (m.location().url || '')); });
   page.on('pageerror', e => errors.push('PAGEERROR ' + e.message));
+  // plain hashes: the id in lower case, every run of other characters turned into a hyphen (the page's mkSlug)
+  const slug = id => String(id).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'x';
+  const go = async (h, sel) => { await page.evaluate(x => { location.hash = x; }, h); await page.waitForSelector(sel || '.ph1'); await page.waitForFunction(x => location.hash === x, h); };
+  // a list shows three, then more: open everything
+  const showAll = async () => { for (let i = 0; i < 20; i++) { const b = page.locator('#view [data-act=more]:not([data-n="3"])').last(); if (!(await b.count())) break; await b.click(); } };
+  // a section is a closed row with a headline: open it
+  const openRow = async (id, pg) => { pg = pg || page; await pg.waitForSelector('#' + id, { state: 'attached' }); if (!(await pg.evaluate(i => document.getElementById(i).open, id))) await pg.click('#' + id + ' > summary'); await pg.waitForFunction(i => document.getElementById(i).open, id); };
+  const headOf = async (id, pg) => (await (pg || page).textContent('#' + id + ' > summary .rh')).trim();
   const overflow = async (tag) => {
     const o = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth,
       bad: [...document.querySelectorAll('#view *, #foot *, #tray *')].filter(e => { const r = e.getBoundingClientRect(); return r.width > 0 && (r.right > window.innerWidth + 1 || r.left < -1) && !e.closest('svg'); }).slice(0, 5).map(e => e.tagName + '.' + e.className + ' ' + Math.round(e.getBoundingClientRect().right)) }));
     assert(o.sw <= o.cw, `horizontal overflow on ${tag}: ${o.sw} > ${o.cw} ${o.bad}`);
-    if (o.bad.length) console.log('WARN offscreen', tag, o.bad);
+    assert.strictEqual(o.bad.length, 0, 'something sits off screen on ' + tag + ': ' + o.bad);
   };
   const small = async (tag) => {
-    const s = await page.evaluate(() => [...document.querySelectorAll('#view a, #view button, #view summary, #view input, #trail a, #tray a')].filter(e => !e.closest('svg') && !e.closest('p.slot-text')).map(e => { const r = e.getBoundingClientRect(); return { t: (e.className || e.tagName) + ':' + (e.textContent || '').trim().slice(0, 24), w: Math.round(r.width), h: Math.round(r.height) }; }).filter(x => x.h > 0 && x.h < 43.5).slice(0, 8));
+    const s = await page.evaluate(() => [...document.querySelectorAll('#view a, #view button, #view summary, #view input, #trail a, #tray a, #foot button')].filter(e => !e.closest('svg') && !e.closest('p.slot-text') && !e.closest('.srcl') && e.getClientRects().length).map(e => { const r = e.getBoundingClientRect(); return { t: (e.className || e.tagName) + ':' + (e.textContent || '').trim().slice(0, 24), w: Math.round(r.width), h: Math.round(r.height) }; }).filter(x => x.h > 0 && x.h < 43.5).slice(0, 8));
     if (s.length) console.log('SMALL targets', tag, JSON.stringify(s));
   };
-  const shot = async (name, full) => { if (W !== 390) return; await page.waitForFunction(() => !document.getElementById('toast').classList.contains('on'), null, { timeout: 5000 }).catch(() => {});
-    if (full) { const y = await page.evaluate(() => window.scrollY); const h = await page.evaluate(() => document.documentElement.scrollHeight); await page.setViewportSize({ width: W, height: h }); await page.waitForTimeout(150); await page.screenshot({ path: `${OUT}/${name}.png` }); await page.setViewportSize({ width: W, height: 844 }); await page.evaluate(y => window.scrollTo(0, y), y); }
+  const shot = async (name, full) => { if (W !== 390 || !OUT) return; await page.waitForFunction(() => !document.getElementById('toast').classList.contains('on'), null, { timeout: 5000 }).catch(() => {});
+    if (full) { const y = await page.evaluate(() => window.scrollY); const h = await page.evaluate(() => document.documentElement.scrollHeight); await page.setViewportSize({ width: W, height: Math.min(h, 6000) }); await page.waitForTimeout(150); await page.screenshot({ path: `${OUT}/${name}.png` }); await page.setViewportSize({ width: W, height: VH }); await page.evaluate(y => window.scrollTo(0, y), y); }
     else await page.screenshot({ path: `${OUT}/${name}.png` }); };
+  // height of a page in its default, collapsed state: from under the sticky top line to the end of the footer (the fixed bottom bar is not counted)
+  const pageHeight = async (pg) => (pg || page).evaluate(() => { const f = document.getElementById('foot').getBoundingClientRect(), t = document.getElementById('trail'); return Math.round(f.bottom + window.scrollY - (t.hidden ? 0 : t.offsetHeight)); });
+  const heights = [];
+  const fits = async (kind, tag) => { const h = await pageHeight(), open = await page.evaluate(() => [...document.querySelectorAll('#view details.rowd[open]')].map(d => d.id));
+    heights.push({ kind, tag, h, screens: +(h / SCREEN).toFixed(2) });
+    if (W === 390) { assert(h <= LIMIT, `${kind} ${tag} is ${h}px collapsed, over ${LIMIT}px (2.2 screens)`); assert(open.length <= 1, `${kind} ${tag} opens with more than one row open: ${open}`); }
+    return h; };
+  // crime is not shown in the open: nothing visible on a page in its default state names it
+  const CRIME = /\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000/i;
+  const noCrime = async (tag) => { const t = await page.evaluate(() => document.getElementById('view').innerText + '\n' + document.getElementById('foot').innerText); const m = CRIME.exec(t); assert(!m, `crime wording in the open on ${tag}: “${m && t.slice(Math.max(0, m.index - 60), m.index + 60).replace(/\s+/g, ' ')}”`); };
   // ================= Map (docs/MAP_COMPONENT.md, "Map integration" in docs/SITE_NOTES.md) =================
   // The most isolated tappable mark that is on screen, clear of the map's own buttons, the sticky trail and the bottom bar.
   const pickMark = async (pg) => pg.evaluate(() => {
@@ -84,9 +106,9 @@ const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390
     await noSideScroll(pg, tag + ' card');
     if (o.shot) { await pg.evaluate(() => { const r = document.querySelector('.hhm-stage').getBoundingClientRect(); window.scrollBy(0, r.top + r.height * 0.55); }); await o.shot('map-int-03-selected-card'); }
     await centre(pg, '.hhm-go'); const yBefore = await pg.evaluate(() => window.scrollY);
-    await pg.click('.hhm-go'); await pg.waitForSelector('#sec-places, .hero h1');
+    await pg.click('.hhm-go'); await pg.waitForSelector('.ph1');
     assert.strictEqual(await pg.evaluate(() => location.hash), '#hood-' + slug(H.id), '"See places" lands on the neighborhood');
-    assert.strictEqual((await pg.textContent('.hero h1')).trim(), H.name);
+    assert.strictEqual((await pg.textContent('.ph1')).trim(), H.name);
     assert.strictEqual(await pg.locator('.hhm').count(), 0, 'the map is gone with its view'); assert.strictEqual(await pg.evaluate(() => window.__houseHunt.map()), null, 'and was destroyed');
     assert(await pg.locator('#trail .path .ymk').count() >= 1, 'the breadcrumb carries the experience marker');
     // Back: the first screen again, at the same spot, with the same card open
@@ -112,7 +134,7 @@ const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390
     if (o.shot) { await pg.evaluate(() => { const r = document.querySelector('.viewsw').getBoundingClientRect(); window.scrollBy(0, r.top - 66); }); await o.shot('map-int-02-experience-map'); }
     const m2 = await tapMark(pg, o.touch), H2 = d.neighborhoods.find(h => h.year === Y.id && m2.label.indexOf(h.name + (h.state ? ', ' + h.state : '') + '. ') === 0);
     assert(H2, 'the tapped mark belongs to this experience: ' + m2.label);
-    await centre(pg, '.hhm-go'); await pg.click('.hhm-go'); await pg.waitForSelector('.hero h1');
+    await centre(pg, '.hhm-go'); await pg.click('.hhm-go'); await pg.waitForSelector('.ph1');
     assert.strictEqual(await pg.evaluate(() => location.hash), '#hood-' + slug(H2.id));
     await pg.goBack(); await pg.waitForSelector('.viewsw');
     assert.strictEqual(await pg.evaluate(() => location.hash), '#exp-' + slug(Y.id), 'Back from the neighborhood returns to the experience');
@@ -128,303 +150,326 @@ const BASE = process.env.BASE, OUT = process.env.OUT, W = +(process.env.W || 390
     console.log(`map flow OK: ${tag} (${w}px) | ${name} -> #hood-${slug(H.id)} | ${Y.id}: ${H2.name}`);
   };
   const data = await (await page.request.get(BASE + '/data.json')).json();
+  const hoodBy = Object.fromEntries(data.neighborhoods.map(h => [h.id, h])), yearBy = Object.fromEntries(data.years.map(y => [y.id, y]));
+  const median = a => { a = a.filter(x => x != null).sort((x, y) => x - y); const m = a.length >> 1; return !a.length ? null : a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; };
+  const money0 = v => '$' + Math.round(v).toLocaleString('en-US');
+  const listed = y => y.hood_ids.map(id => hoodBy[id]).filter(Boolean);
 
   await page.goto(BASE + '/index.html');
   await page.waitForSelector('.life');
-  // first-run tour
+  // first-run card
   await page.waitForSelector('#tour:not([hidden])');
   await page.click('[data-act=tour-next]'); await page.click('[data-act=tour-next]'); await page.click('[data-act=tour-next]');
   assert(await page.isHidden('#tour'));
-  assert.strictEqual(await page.locator('.life').count(), data.years.length);
-  const nStar = data.units.filter(u => u.confirm && u.confirm.asterisk).length;
-  assert.strictEqual(nStar, data.meta.counts.shown_with_asterisk);
-  assert.strictEqual(+(await page.getAttribute('#view .confnote', 'data-conf-count')), nStar, 'home states how many places carry an asterisk');
-  assert((await page.textContent('#view .confnote')).includes(nStar + ' of the ' + data.units.length + ' places'));
-  assert((await page.textContent('#sources')).includes('OpenStreetMap data of 14 Nov 2026'));
+
+  // ---------- first screen: six short cards, the median with the range small beneath, nothing explained ----------
+  assert.strictEqual(await page.locator('a.life').count(), data.years.length);
+  const tiles = await page.evaluate(() => [...document.querySelectorAll('a.life')].map(a => ({ h: Math.round(a.getBoundingClientRect().height), label: a.querySelector('h3').textContent.trim(), figs: [...a.querySelectorAll('.figs b')].map(b => b.textContent), rng: [...a.querySelectorAll('.figs .rng')].map(b => b.textContent), text: a.innerText })));
+  tiles.forEach((t, i) => { const y = data.years[i];
+    assert.strictEqual(t.label, String(y.display_label || y.label).replace(/ Year$/, ' Experience'));
+    if (y.medians && y.medians.all_in != null) assert.strictEqual(t.figs[0], 'about ' + money0(y.medians.all_in), 'the tile shows the median cost');
+    if (y.medians && y.medians.drive_min != null) assert.strictEqual(t.figs[1], 'about ' + Math.round(y.medians.drive_min) + ' min', 'the tile shows the median drive');
+    if (y.all_in_range && money0(y.all_in_range[0]) !== money0(y.all_in_range[1])) assert(t.rng.includes(money0(y.all_in_range[0]) + ' to ' + money0(y.all_in_range[1])), 'the range sits under the median: ' + t.rng);
+    if (W === 390) assert(t.h <= 260, 'an experience tile is a short card: ' + t.h + 'px'); });
+  console.log('first screen: tile heights', tiles.map(t => t.h).join(', '), '| page', await pageHeight(), 'px with the map');
+  assert.strictEqual(await page.locator('#view .mock, #view .coldopen, #view .confnote, #view .tip').count(), 0, 'no explaining lines on the first screen');
+  assert.strictEqual(await page.locator('#view details.howd[open]').count(), 0);
+  assert((await page.textContent('#sources')).includes('OpenStreetMap'), 'the sources are still there, behind the link');
+  assert(await page.isHidden('#foothow'), '"See how we got this" starts closed');
+  await page.click('[data-act=foot-how]'); assert(await page.isVisible('#foothow')); assert.strictEqual(await page.getAttribute('[data-act=foot-how]', 'aria-expanded'), 'true'); await page.click('[data-act=foot-how]');
+  await noCrime('first screen');
   await overflow('home'); await small('home');
-  await shot('01-home', true);
+  await shot('01-home', true); await shot('ux-01-first-screen');
   await mapFlow(page, data, 'served page', { shot });
 
-  // a year: the one holding Bogota (asterisk unit)
-  const star = data.units.find(u => u.rent.asterisk && u.all_in_gross > u.all_in);
-  const y1 = star.year;
+  // ---------- headline builders: small pure functions, tested on made-up records ----------
+  const hl = await page.evaluate(() => { const HL = window.__houseHunt.HL, u = (o) => Object.assign({ moments: { sun: {} }, rent: {}, parking: {}, dog: {}, amenities: {}, elevator: {}, evidence: {}, confirm: null, disclosures: [], all_in_lines: [], all_in_unknown: [], tour_questions: [] }, o);
+    return {
+      cost: HL.cost(u({ all_in: 2710 })), costUnknown: HL.cost(u({ all_in: null })),
+      trip: HL.trip({ drive_min: 28.2, toll_round_trip: 15 }), tripFree: HL.trip({ drive_min: 12, toll_round_trip: 0 }), tripUnk: HL.trip({ drive_min: 40, toll_round_trip: null }), tripNone: HL.trip({ drive_min: null }),
+      park: HL.parking(u({ parking: { rank: 4, type: 'garage', fee: 150 } })), parkFree: HL.parking(u({ parking: { rank: 4, type: 'garage', fee: 0 } })), parkNoFee: HL.parking(u({ parking: { rank: 4, type: 'garage', fee: null } })), parkUnk: HL.parking(u({ parking: { rank: null, type: '' } })),
+      dog: HL.dog(u({ dog: { allowed: 'yes', weight_limit_lb: null } })), dog50: HL.dog(u({ dog: { allowed: 'yes', weight_limit_lb: 50 } })), dogNoLimit: HL.dog(u({ dog: { allowed: 'yes', weight_limit_lb: 'no limit' } })), dogUnk: HL.dog(u({ dog: {} })),
+      bld: HL.building(u({ elevator: { value: 'yes' }, amenities: { gym: 'yes', pool: 'pool' } })), bldNone: HL.building(u({})),
+      queens: HL.queens({ drive_min: 5, all_in: 4, sqft: 1, parking: 3 }), queensSame: HL.queens({ drive_min: 3, all_in: 3 }), queensUnk: HL.queens({}),
+      voices: HL.voices({ local: { voices: [{ excerpt: 'a', sentiment: 'positive', theme: 'parking' }, { excerpt: 'b', sentiment: 'positive', theme: 'parking' }, { excerpt: 'c', sentiment: 'negative', theme: 'noise' }, { excerpt: 'd', sentiment: 'positive', theme: 'safety' }] } }), voicesNone: HL.voices({ local: {} }),
+      rules: HL.rules({ local: { parking_rules: [{ rule: 'overnight_parking', summary: 'Overnight parking on the street needs a permit.' }] } }), rulesPlain: HL.rules({ local: { parking_rules: [{ rule: 'meters', summary: 'Meters run 9 to 6.' }] } }), rulesNone: HL.rules({ local: {} }),
+      described: HL.described({ described: [{ quote: 'A leafy village on the Sound with a train to the city and a main street that people walk on weekends.' }] }),
+      questions: HL.questions(0), first: HL.first('It has 2.5 miles of beach. And more.', 80) }; });
+  assert.deepStrictEqual(hl, { cost: '$2,710 all-in', costUnknown: 'not published, ask',
+    trip: 'about 28 min, $15 in tolls', tripFree: 'about 12 min, no tolls', tripUnk: 'about 40 min, tolls not fully known', tripNone: 'drive time not known',
+    park: 'garage, $150 a month', parkFree: 'garage, no monthly charge', parkNoFee: 'garage, fee not published, ask', parkUnk: 'not published, ask',
+    dog: 'allowed, weight limit not stated', dog50: 'allowed, up to 50 lb', dogNoLimit: 'allowed, no weight limit', dogUnk: 'not stated, ask',
+    bld: 'elevator, gym, pool', bldNone: 'details not published',
+    queens: 'closer, cheaper, smaller', queensSame: 'about the same', queensUnk: 'not known yet',
+    voices: '3 positive, 1 negative; most about parking', voicesNone: 'none found yet',
+    rules: 'overnight street parking restricted', rulesPlain: '1 rule on record', rulesNone: 'not found, ask',
+    described: '“A leafy village on the Sound with a train to the city and a main…”', questions: 'nothing flagged', first: 'It has 2.5 miles of beach.' });
+
+  // ---------- an experience: headline, the day (clamped), the figures, the top three, then rows ----------
+  const star = data.units.find(u => u.rent.asterisk && u.all_in_gross > u.all_in && hoodBy[u.hood_id]) || data.units.find(u => u.rent.asterisk);
+  const y1 = star.year, Y1 = yearBy[y1];
   await page.click(`a.life[href="#exp-${slug(y1)}"]`);
-  await page.waitForSelector('.hero h1');
-  assert.strictEqual(+(await page.getAttribute('#sec-hoods .confnote', 'data-conf-count')), data.units.filter(u => u.year === y1 && u.confirm.asterisk).length, 'year states its asterisk count');
-  await overflow('year'); await small('year');
-  await shot('02-year', true);
-  // year five-point explanation
-  await page.click('.ylist button.pt >> nth=0'); await page.waitForSelector('#sheet.open'); await page.click('#shClose');
+  await page.waitForSelector('.ph1');
+  assert.strictEqual(await page.getAttribute('.viewsw [data-v=list]', 'aria-pressed'), 'true');
+  assert.strictEqual(await page.locator('#sec-hoods a.hood').count(), Math.min(3, listed(Y1).length));
+  const figs = await page.evaluate(() => [...document.querySelectorAll('#sec-cost .figs b')].map(b => b.textContent));
+  if (Y1.medians.all_in != null) assert.strictEqual(figs[0], 'about ' + money0(Y1.medians.all_in));
+  assert((await page.textContent('#r-queens .rl')).trim() === 'Compared to staying in Queens');
+  assert.strictEqual(await page.locator('#r-queens button.pt').count(), data.meta.queens_spectrum.filter(s => !/crime/.test(s.measure)).length, 'the scale leaves crime out');
+  assert.strictEqual(await headOf('r-cost'), await page.evaluate(id => window.__houseHunt.headline('year', id, 'yearCost'), y1));
+  // a neighborhood card: name, rank, one line, three facts
+  const card = await page.evaluate(() => { const a = document.querySelector('#sec-hoods a.hood'); return { chips: a.querySelectorAll('.chip').length, kids: [...a.children].map(c => c.className), h: Math.round(a.getBoundingClientRect().height) }; });
+  assert(card.chips >= 2 && card.chips <= 3, 'a neighborhood card has two or three facts: ' + card.chips); assert(card.kids.every(k => /^(hd|l2|chips)$/.test(k)), 'and nothing else: ' + card.kids);
+  await noCrime('experience ' + y1); await overflow('year'); await small('year');
+  await shot('02-year', true); await shot('ux-02-experience-collapsed');
+  await openRow('r-cost'); assert((await page.textContent('#r-cost .allin')).startsWith('All-in: rent'), 'one plain line says what all-in includes');
+  assert.strictEqual(await page.locator('#r-cost details.howd[open]').count(), 0, '"See how we got this" stays closed inside the row');
+  await page.evaluate(() => document.getElementById('r-cost').scrollIntoView({ block: 'center' })); await shot('ux-02b-experience-costs-open');
+  // the open row is remembered for the visit: away and Back
+  await openRow('r-queens'); await page.click('#r-queens button.pt >> nth=0'); await page.waitForSelector('#sheet.open');
+  assert((await page.textContent('#sheetBody')).includes('Staying in Queens')); assert(!/against/i.test(await page.textContent('#sheetBody')), '"compared to", never "against"'); await page.click('#shClose');
+  await page.click('#sec-hoods a.hood >> nth=0'); await page.waitForFunction(() => location.hash.indexOf('#hood-') === 0); await page.goBack(); await page.waitForSelector('#r-queens');
+  assert(await page.evaluate(() => document.getElementById('r-queens').open && document.getElementById('r-cost').open), 'Back returns to the page with the same rows open');
+  // every experience, collapsed: height, one thing open, no crime, the subhead never about crime
+  for (const y of data.years) { await page.evaluate(() => { location.hash = '#lives'; }); await page.waitForSelector('.life'); await page.click(`a.life[href="#exp-${slug(y.id)}"]`); await page.waitForSelector('.ph1');
+    if (await page.getAttribute('.viewsw [data-v=list]', 'aria-pressed').catch(() => 'true') !== 'true') await page.click('.viewsw [data-v=list]');
+    await page.evaluate(() => [...document.querySelectorAll('#view details.rowd[open] > summary')].forEach(s => s.click())); await page.waitForTimeout(50);
+    await fits('experience', y.id); await noCrime('experience ' + y.id); await overflow('experience ' + y.id); }
 
-  // neighborhood with an avoid card
-  const hAvoid = data.neighborhoods.find(h => h.counts.avoid > 0 && h.counts.shown > 0 && h.name === 'Jamaica') || data.neighborhoods.find(h => h.counts.avoid > 0 && h.counts.shown > 0);
-  await page.goto(BASE + '/index.html#hood-' + slug(hAvoid.id));
-  await page.waitForSelector('.unit.avoid');
-  assert.strictEqual(await page.locator('.unit.avoid').count(), hAvoid.counts.avoid);
-  // top three first, then "Show more places"
-  assert.strictEqual(await page.locator('#sec-places article.unit').count(), Math.min(3, hAvoid.counts.shown), 'a neighborhood opens on its top three places');
-  if (hAvoid.counts.shown > 3) assert((await page.textContent('#sec-places .morectl')).includes('3 of ' + hAvoid.counts.shown + ' places shown'));
-  await showAll();
-  assert.strictEqual(await page.locator('#sec-places article.unit').count(), hAvoid.counts.shown);
-  await overflow('hood'); await small('hood');
-  await shot('03-neighborhood', true);
-  await page.locator('#sec-avoid').scrollIntoViewIfNeeded();
-  await page.evaluate(() => document.getElementById('sec-avoid').scrollIntoView());
-  await shot('03b-neighborhood-avoid-card');
-  // hood with held list
-  const hHeld = data.neighborhoods.find(h => h.counts.held > 0 && h.counts.shown > 0);
-  await page.goto(BASE + '/index.html#hood-' + slug(hHeld.id));
-  await page.waitForSelector('#sec-call .callbox');
-  assert.strictEqual(await page.locator('#sec-call .callitem').count(), hHeld.counts.held);
-  assert.strictEqual(await page.locator('.callbox [data-act=hold]').count(), 0);
-  assert((await page.textContent('#sec-call')).includes('two or more things'));
-  await overflow('hood-held');
-  await page.evaluate(() => document.getElementById('sec-call').scrollIntoView());
-  await shot('03c-worth-a-phone-call');
-  // places waiting for a live re-check that are not already in the phone-call list: "Not re-checked yet"
+  // ---------- neighborhoods ----------
+  const shownHoods = data.neighborhoods.filter(h => h.counts.shown > 0 && yearBy[h.year] && yearBy[h.year].hood_ids.includes(h.id));
+  const richness = h => h.counts.shown + (h.local.voices || []).length + (h.local.parking_rules || []).length + (h.described || []).length + 5 * h.counts.avoid + 5 * h.counts.held;
+  const hRich = shownHoods.slice().sort((a, b) => richness(b) - richness(a))[0], hSparse = shownHoods.slice().sort((a, b) => richness(a) - richness(b))[0];
+  const hAvoid = shownHoods.find(h => h.counts.avoid > 0 && h.name === 'Jamaica') || shownHoods.find(h => h.counts.avoid > 0);
+  const hStar = shownHoods.find(h => data.units.filter(u => u.hood_id === h.id && u.confirm.asterisk).length >= 2) || hoodBy[star.hood_id];
+  for (const [tag, h] of [['rich', hRich], ['sparse', hSparse], ['with avoid cards', hAvoid], ['with asterisks', hStar]]) { if (!h) continue;
+    await go('#hood-' + slug(h.id)); await fits('neighborhood', tag + ' (' + h.name + ')'); await noCrime('neighborhood ' + h.name); await overflow('hood ' + tag);
+    assert.strictEqual(await page.locator('#sec-places article.unit').count(), Math.min(3, h.counts.shown), 'a neighborhood opens on its top three places');
+    if (h.counts.shown > 3) assert((await page.textContent('#sec-places .morectl')).includes('3 of ' + h.counts.shown + ' places shown')); }
+  await go('#hood-' + slug(hRich.id)); await small('hood'); await shot('03-neighborhood', true); await shot('ux-03-neighborhood-collapsed');
+  await openRow('r-voices'); await page.evaluate(() => document.getElementById('r-voices').scrollIntoView({ block: 'start' })); await page.evaluate(() => window.scrollBy(0, -70)); await shot('ux-03b-neighborhood-residents-open');
+  // a place card: name, rank, one line, three facts, the asterisk; the whole card opens the place
+  await go('#hood-' + slug(hStar.id)); await showAll();
+  const hsUnits = data.units.filter(u => u.hood_id === hStar.id);
+  assert.strictEqual(await page.locator('#sec-places article.unit').count(), hsUnits.length);
+  assert.strictEqual(await page.locator('#sec-places article.unit:has(.confl:not(.rent))').count(), hsUnits.filter(u => u.confirm.asterisk).length, 'each asterisk place shows it on its card');
+  assert.strictEqual(await page.locator('#sec-places article.unit .chip').count(), 3 * hsUnits.length, 'three facts on every place card');
+  assert.strictEqual(await page.locator('#sec-places article.unit button, #sec-places article.unit .gtk, #sec-places article.unit .rentl').count(), 0, 'nothing else on a place card');
+  { const cu = hsUnits.find(u => u.confirm.asterisk), t = await page.locator(`a.cardl[href="#unit-${slug(cu.id)}"] .confl:not(.rent)`).first().textContent(); assert(t.startsWith('* To confirm:') && !t.includes(cu.confirm.why), 'the card names what to confirm; the why is behind a tap: ' + t); }
+  // the avoid cards, the phone-call list and the not-re-checked list sit in their own rows
+  await go('#hood-' + slug(hAvoid.id)); assert.strictEqual(await headOf('sec-avoid'), hAvoid.counts.avoid + (hAvoid.counts.avoid === 1 ? ' place' : ' places'));
+  assert(await page.isHidden('.unit.avoid'), 'avoid cards start closed'); await openRow('sec-avoid');
+  assert.strictEqual(await page.locator('.unit.avoid').count(), hAvoid.counts.avoid); await overflow('hood avoid open');
+  await page.evaluate(() => document.getElementById('sec-avoid').scrollIntoView()); await page.evaluate(() => window.scrollBy(0, -70)); await shot('03b-neighborhood-avoid-card');
+  const hHeld = shownHoods.find(h => h.counts.held > 0);
+  if (hHeld) { await go('#hood-' + slug(hHeld.id)); await openRow('sec-call');
+    assert.strictEqual(await page.locator('#sec-call .callitem').count(), hHeld.counts.held); assert.strictEqual(await page.locator('#sec-call [data-act=hold]').count(), 0);
+    assert((await page.textContent('#sec-call > summary')).includes('two or more things')); await overflow('hood-held');
+    await page.evaluate(() => document.getElementById('sec-call').scrollIntoView()); await page.evaluate(() => window.scrollBy(0, -70)); await shot('03c-worth-a-phone-call'); }
   const known = new Set([...data.held, ...data.units, ...data.avoid].map(u => u.id)), hoodIds = new Set(data.neighborhoods.map(h => h.id));
-  const waitOnly = (data.awaiting_live_check || []).filter(a => !known.has(a.id));
-  const waitHood = waitOnly.find(a => hoodIds.has(a.hood_id));
-  console.log('awaiting live check:', (data.awaiting_live_check || []).length, '| not already in held:', waitOnly.length, '| of those in a listed neighborhood:', waitOnly.filter(a => hoodIds.has(a.hood_id)).length);
-  if (waitHood) {
-    await page.goto(BASE + '/index.html#hood-' + slug(waitHood.hood_id));
-    await page.waitForSelector('#sec-wait .callitem');
-    assert.strictEqual(await page.locator('#sec-wait .callitem').count(), waitOnly.filter(a => a.hood_id === waitHood.hood_id).length);
-    assert((await page.textContent('#sec-wait h3')).includes('Not re-checked yet'));
-    await overflow('hood-wait');
-    await page.evaluate(() => document.getElementById('sec-wait').scrollIntoView());
-    await shot('03d-not-re-checked-yet');
-  }
-
-  // neighborhood with local rules: summaries with source links under "For the car" and "For the dog"
-  const hRules = data.neighborhoods.find(h => h.counts.shown > 0 && (h.local.parking_rules || []).length >= 3 && (h.local.dog_rules || []).length && h.state !== 'NY') || data.neighborhoods.find(h => h.counts.shown > 0 && (h.local.parking_rules || []).length && (h.local.dog_rules || []).length);
-  await page.goto(BASE + '/index.html#hood-' + slug(hRules.id));
-  await page.waitForSelector('.amen .rules');
-  assert.strictEqual(await page.locator('.amen .rules li').count(), hRules.local.parking_rules.length + hRules.local.dog_rules.length, 'every local rule is listed');
-  assert.strictEqual(await page.locator('.amen .rules li a.srcl').count(), [...hRules.local.parking_rules, ...hRules.local.dog_rules].filter(r => /^https?:/.test(r.url)).length, 'every rule with a URL links to it');
-  assert((await page.textContent('.amen')).includes(hRules.local.parking_rules[0].summary));
-  assert.strictEqual(await page.locator('#no-park-rules').count(), 0);
-  if (!(hRules.local.voices || []).length && await page.locator('#no-voices').count()) assert((await page.textContent('#no-voices')).includes('No resident comments found yet'));
-  assert((await page.textContent('#view')).includes('How we got this'));
-  await overflow('hood-rules'); await small('hood-rules');
+  const waitOnly = (data.awaiting_live_check || []).filter(a => !known.has(a.id)), waitHood = waitOnly.find(a => hoodIds.has(a.hood_id) && yearBy[hoodBy[a.hood_id].year]);
+  console.log('awaiting live check:', (data.awaiting_live_check || []).length, '| not already in held:', waitOnly.length);
+  if (waitHood) { await go('#hood-' + slug(waitHood.hood_id)); await openRow('sec-wait');
+    assert.strictEqual(await page.locator('#sec-wait .callitem').count(), waitOnly.filter(a => a.hood_id === waitHood.hood_id).length); await overflow('hood-wait'); }
+  // local rules and what is here; crime only inside the closed "See how we got this"
+  const hRules = shownHoods.find(h => (h.local.parking_rules || []).length >= 3 && (h.local.dog_rules || []).length && h.state !== 'NY') || shownHoods.find(h => (h.local.parking_rules || []).length && (h.local.dog_rules || []).length);
+  await go('#hood-' + slug(hRules.id));
+  assert.strictEqual(await page.locator('#r-rules .rules li, #r-here .rules li').count(), hRules.local.parking_rules.length + hRules.local.dog_rules.length, 'every local rule is listed');
+  assert.strictEqual(await headOf('r-rules'), await page.evaluate(id => window.__houseHunt.headline('hood', id, 'rules'), hRules.id));
+  await openRow('r-rules'); assert((await page.textContent('#r-rules')).includes(hRules.local.parking_rules[0].summary)); await overflow('hood-rules open');
+  await openRow('r-here'); assert(await page.isHidden('#hood-crime'), 'the crime figures stay behind "See how we got this"');
+  await page.click('#sec-how details.howd > summary'); assert(await page.isVisible('#hood-crime'));
+  if (hRules.safety && hRules.safety.violent_per_1000 != null) assert((await page.textContent('#hood-crime')).includes('violent crimes per 1,000'));
   await shot('09-neighborhood-local-rules', true);
-  // its Saturday-night and wake-up sheets quote the rules
-  const uRules = data.units.find(u => u.hood_id === hRules.id);
-  await page.goto(BASE + '/index.html#unit-' + slug(uRules.id)); await page.waitForSelector('.tile[data-k=sat]');
-  for (const [k, key, kinds] of [['sat', 'parking_rules', ['overnight_parking', 'resident_permit', 'guest_parking', 'municipal_lot_overnight']], ['wake', 'dog_rules', ['leash_law', 'parks_and_beaches', 'dog_park', 'waste']]]) {
-    await page.click(`.tile[data-k=${k}]`); await page.waitForSelector('#sheet.open');
-    const want = hRules.local[key].filter(r => kinds.includes(r.rule)), body = await page.textContent('#sheetBody');
-    for (const r of want) assert(body.includes(r.summary), k + ' sheet quotes the rule ' + r.rule);
-    assert(body.includes('How we got this'));
-    if (k === 'sat') { await page.waitForTimeout(300); await shot('09b-saturday-sheet-local-rules'); }
-    await overflow('sheet-' + k);
-    await page.keyboard.press('Escape'); await page.waitForSelector('#sheet:not(.open)');
-  }
-  // neighborhood with no local rules: says so, and its places get the parking question
-  const hNone = data.neighborhoods.find(h => h.counts.shown > 0 && !(h.local.parking_rules || []).length);
-  if (hNone) {
-    await page.goto(BASE + '/index.html#hood-' + slug(hNone.id)); await page.waitForSelector('#no-park-rules');
-    assert((await page.textContent('#no-park-rules')).includes('Local parking rules not found yet'));
-    const qs = await page.evaluate(id => window.__houseHunt.tourQs(id), hNone.unit_ids[0]);
-    assert(qs.includes('Where do residents park overnight, and is a permit needed?'));
-    await overflow('hood-no-rules');
-  }
-  // a parking rule that bans overnight street parking or ties the permit to registration shows on a unit with street or unknown parking
-  const flagRe = [['overnight_parking', /\bbanned\b|not allowed|needs (a|the) permit|permit-only|may not park|overnight (parking )?permit|all-night parking restrictions/i], ['resident_permit', /out-of-state|out-of-town|registered in|registration[^.]{0,60}(show|address|same)|(licen[cs]e and|valid vehicle|motor vehicle|permanent vehicle) registration/i]];
-  const flagged = h => (h.local.parking_rules || []).filter(r => flagRe.some(([k, re]) => r.rule === k && re.test(r.summary)));
-  const hoodBy = Object.fromEntries(data.neighborhoods.map(h => [h.id, h]));
-  const uStreet = data.units.filter(u => (u.parking.rank == null || u.parking.rank < 2) && flagged(hoodBy[u.hood_id]).length);
-  const uGarage = data.units.find(u => u.parking.rank >= 2 && flagged(hoodBy[u.hood_id]).length);
-  console.log('units with street or unknown parking under a flagged parking rule:', uStreet.length);
-  if (uStreet.length) {
-    await page.goto(BASE + '/index.html#unit-' + slug(uStreet[0].id)); await page.waitForSelector('#park-rules');
-    assert.strictEqual(await page.locator('#park-rules li').count(), flagged(hoodBy[uStreet[0].hood_id]).length);
-    assert(await page.locator('#park-rules a.srcl').count() >= 1);
-    await overflow('unit-park-rules');
-    await page.evaluate(() => { const r = document.getElementById('park-rules').getBoundingClientRect(); window.scrollBy(0, r.top - 70); });
-    await shot('10-unit-street-parking-rules');
-  }
-  if (uGarage) { await page.goto(BASE + '/index.html#unit-' + slug(uGarage.id)); await page.waitForSelector('#tour-qs'); assert.strictEqual(await page.locator('#park-rules').count(), 0); }
+  const hNone = shownHoods.find(h => !(h.local.parking_rules || []).length);
+  if (hNone) { await go('#hood-' + slug(hNone.id)); assert.strictEqual(await headOf('r-rules'), 'not found, ask'); assert((await page.textContent('#no-park-rules')).includes('Local parking rules not found yet'));
+    const qs = await page.evaluate(id => window.__houseHunt.tourQs(id), hNone.unit_ids[0]); assert(qs.includes('Where do residents park overnight, and is a permit needed?')); }
+  // "Among the safest on the list": the lowest fifth by violent rate among neighborhoods with places, and nothing else about safety
+  { const rated = data.neighborhoods.filter(h => h.counts.shown > 0 && h.safety && h.safety.violent_per_1000 != null && (h.unit_ids || []).some(id => data.units.some(u => u.id === id))).sort((a, b) => a.safety.violent_per_1000 - b.safety.violent_per_1000), n = Math.floor(rated.length / 5);
+    const safe = rated.slice(0, n).find(h => yearBy[h.year] && yearBy[h.year].hood_ids.includes(h.id)), not = rated.slice(n + 3).find(h => yearBy[h.year] && yearBy[h.year].hood_ids.includes(h.id));
+    if (safe) { await go('#hood-' + slug(safe.id)); assert.strictEqual((await page.textContent('.badges .safest')).trim(), 'Among the safest on the list'); }
+    if (not) { await go('#hood-' + slug(not.id)); assert.strictEqual(await page.locator('.safest').count(), 0); }
+    console.log('safest badge:', n, 'of', rated.length, 'rated neighborhoods'); }
 
-  // a unit with a confirmation asterisk, reached from its card
+  // ---------- places ----------
+  const uRich = data.units.filter(u => u.confirm.asterisk && u.rent.asterisk && (u.disclosures || []).length && hoodBy[u.hood_id]).sort((a, b) => (b.evidence.items.length + b.tour_questions.length) - (a.evidence.items.length + a.tour_questions.length))[0] || star;
+  const uSparse = data.units.filter(u => !u.confirm.asterisk && !u.rent.asterisk && !u.contact).sort((a, b) => (a.evidence.items.length + a.tour_questions.length) - (b.evidence.items.length + b.tour_questions.length))[0] || data.units[0];
   const conf = data.units.find(u => u.confirm.asterisk && !u.rent.asterisk) || data.units.find(u => u.confirm.asterisk);
-  await page.goto(BASE + '/index.html#hood-' + slug(conf.hood_id)); await page.waitForSelector('#sec-places'); await showAll();
-  assert.strictEqual(await page.locator('#sec-places article.unit:has(.confl)').count(), data.units.filter(u => u.hood_id === conf.hood_id && u.confirm.asterisk).length, 'each asterisk place shows it on its card');
-  await page.click(`a.btn[href="#unit-${slug(conf.id)}"]`);
-  await page.waitForSelector('#confirm-box');
-  assert((await page.textContent('#confirm-box')).includes(conf.confirm.why));
-  assert((await page.textContent('.unit h4')).includes('*'));
-  assert((await page.textContent('#confirm-box h4')).includes('Still to confirm'));
-  if (await page.locator('#confirm-box p:has-text("What to ask:")').count()) {
-    const confQ = (await page.locator('#confirm-box p:has-text("What to ask:")').first().textContent()).replace('What to ask: ', '');
-    assert((await page.textContent('#tour-qs')).includes(confQ), 'the confirmation question is also in the tour questions'); }
-  await overflow('unit-confirm'); await small('unit-confirm');
-  await shot('08-unit-confirm-asterisk', true);
-  // disclosures: "Good to know before you call" on the card and the place page, lighter than the asterisk, and in the tour questions
+  for (const [tag, u] of [['rich', uRich], ['sparse', uSparse], ['with an asterisk', conf], ['rent asterisk', star]]) {
+    await go('#unit-' + slug(u.id)); await fits('place', tag + ' (' + (u.building || u.address) + ')'); await noCrime('place ' + tag); await overflow('unit ' + tag);
+    for (const [id, key] of [['r-cost', 'cost'], ['r-trip', 'trip'], ['r-parking', 'parking'], ['r-dog', 'dog'], ['r-building', 'building']]) assert.strictEqual(await headOf(id), await page.evaluate(([i, k]) => window.__houseHunt.headline('unit', i, k), [u.id, key]), 'the row headline is the builder\'s: ' + id); }
+  await go('#unit-' + slug(uRich.id)); await small('unit'); await shot('04-place', true); await shot('ux-04-place-collapsed');
+  // the money box: closed, then open; the basis of each line stays behind "See how we got this"
+  await openRow('r-cost');
+  assert.strictEqual(await page.locator('#r-cost .receipt .ln:not(.tot)').count(), uRich.all_in_lines.length, 'every cost line is in the box');
+  assert((await page.textContent('#r-cost .allin')).startsWith('All-in: '));
+  assert.strictEqual(await page.locator('#r-cost .receipt .ln small').count(), 0, 'no basis notes on the lines'); assert(await page.isHidden('#r-cost .receipt .howb'));
+  assert(uRich.all_in_unknown.length === 0 || (await page.textContent('#r-cost .receipt')).toLowerCase().includes('not published'), 'an unknown cost reads "not published", never $0');
+  await page.evaluate(() => document.getElementById('r-cost').scrollIntoView()); await page.evaluate(() => window.scrollBy(0, -70)); await shot('ux-05-money-box-open'); await overflow('receipt');
+  await page.click('#r-cost .receipt details.howd > summary'); assert(await page.isVisible('#r-cost .receipt .howb')); await shot('05-receipt-how-open');
+  // the asterisk: what to confirm on the page, the why behind a tap; disclosures as "Good to know before you call"
+  await go('#unit-' + slug(conf.id));
+  assert((await page.textContent('.ph1')).includes('*')); assert((await page.textContent('.unit.page .confl')).startsWith('* To confirm:'));
+  await openRow('r-confirm'); assert((await page.textContent('#confirm-box h4')).includes('Still to confirm'));
+  assert((await page.textContent('#confirm-box')).includes(conf.confirm.why.replace(/\s*\((?:and )?count(?:ed|s)? as \$0\)/gi, '').slice(0, 40)), 'the why is on the page'); assert(await page.isHidden('#confirm-box blockquote'), 'but behind "See why"');
+  if (await page.locator('#confirm-box p:has-text("What to ask:")').count()) { const q = (await page.locator('#confirm-box p:has-text("What to ask:")').first().textContent()).replace('What to ask: ', ''); assert((await page.textContent('#tour-qs')).includes(q), 'the confirmation question is also in the tour questions'); }
+  await overflow('unit-confirm'); await shot('08-unit-confirm-asterisk', true);
   const whats = u => [...new Set((u.disclosures || []).map(x => String(x.what || '').trim()).filter(w => w && w.toLowerCase() !== String(u.confirm.what || '').toLowerCase()))];
   const dU = data.units.find(u => whats(u).length >= 2 && !u.confirm.asterisk) || data.units.find(u => whats(u).length);
   console.log('places with a disclosure:', data.units.filter(u => whats(u).length).length, 'of', data.units.length);
-  if (dU) {
-    await page.goto(BASE + '/index.html#unit-' + slug(dU.id)); await page.waitForSelector('#good-to-know');
-    assert.strictEqual(await page.locator('#good-to-know li').count(), whats(dU).length, 'every disclosure is listed once');
-    const gtk = await page.textContent('#good-to-know'), tqs = await page.textContent('#tour-qs');
-    assert(gtk.includes('Good to know before you call') && gtk.includes('Things to ask, not problems'));
+  if (dU) { await go('#unit-' + slug(dU.id)); assert.strictEqual(await headOf('r-confirm'), await page.evaluate(id => window.__houseHunt.headline('unit', id, 'confirm'), dU.id));
+    await openRow('r-confirm'); assert.strictEqual(await page.locator('#good-to-know > ul > li').count(), whats(dU).length, 'every disclosure is listed once');
+    const gtk = await page.textContent('#good-to-know'), tqs = await page.textContent('#tour-qs'); assert(gtk.includes('Good to know before you call'));
     for (const w of whats(dU)) assert(gtk.toLowerCase().includes(w.toLowerCase()), 'disclosure shown: ' + w);
     for (const x of dU.disclosures) if (x.question) assert(tqs.includes(x.question), 'the disclosure question is in the tour questions: ' + x.question);
     if (!dU.confirm.asterisk) assert.strictEqual(await page.locator('#confirm-box, .cstar').count(), 0, 'a disclosure is not an asterisk');
-    assert(await page.evaluate(() => { const b = getComputedStyle(document.getElementById('good-to-know')); return b.borderTopStyle === 'solid' && b.backgroundColor === 'rgb(255, 255, 255)'; }), 'the box is plain, not a warning');
-    await overflow('unit-disclosures');
-    await page.evaluate(() => { const r = document.getElementById('good-to-know').getBoundingClientRect(); window.scrollBy(0, r.top - 120); });
-    await shot('12-unit-good-to-know');
-    await page.goto(BASE + '/index.html#hood-' + slug(dU.hood_id)); await page.waitForSelector('#sec-places'); await showAll();
-    const cardGtk = await page.locator(`#sec-places article.unit:has(a[href="#unit-${slug(dU.id)}"]) .gtk`).textContent();
-    assert(cardGtk.startsWith('Good to know before you call:') && cardGtk.includes(whats(dU)[0]), 'the card carries the compact line: ' + cardGtk);
-  }
-  const noConf = data.units.find(u => !u.confirm.asterisk);
-  if (noConf) { await page.goto(BASE + '/index.html#unit-' + slug(noConf.id)); await page.waitForSelector('#tour-qs'); assert.strictEqual(await page.locator('#confirm-box, .unit .confl, .cstar').count(), 0); }
-  // small dogs with no weight number: a plain note, not in "Gives us pause"
+    await page.evaluate(() => document.getElementById('r-confirm').scrollIntoView()); await page.evaluate(() => window.scrollBy(0, -70)); await shot('12-unit-good-to-know'); await overflow('unit-disclosures'); }
+  const noConf = data.units.find(u => !u.confirm.asterisk && !whats(u).length);
+  if (noConf) { await go('#unit-' + slug(noConf.id)); assert.strictEqual(await page.locator('#r-confirm, #confirm-box, .unit .confl:not(.rent), .cstar').count(), 0); }
+  // rent with an asterisk: the short line in the open, the terms in the Costs row
+  await go('#unit-' + slug(star.id)); assert((await page.textContent('.sign strong')).includes('*')); assert((await page.textContent('.unit.page .confl.rent')).startsWith('* Rent:'));
+  await openRow('r-cost'); assert((await page.textContent('#rent-terms')).includes(star.rent.offer_text.slice(0, 30))); await shot('04-unit-rent-asterisk', true);
+  // parking rules that matter for a car on the street, in the Parking row
+  const flagRe = [['overnight_parking', /\bbanned\b|not allowed|needs (a|the) permit|permit-only|may not park|overnight (parking )?permit|all-night parking restrictions/i], ['resident_permit', /out-of-state|out-of-town|registered in|registration[^.]{0,60}(show|address|same)|(licen[cs]e and|valid vehicle|motor vehicle|permanent vehicle) registration/i]];
+  const flagged = h => (h.local.parking_rules || []).filter(r => flagRe.some(([k, re]) => r.rule === k && re.test(r.summary)));
+  const uStreet = data.units.filter(u => (u.parking.rank == null || u.parking.rank < 2) && hoodBy[u.hood_id] && flagged(hoodBy[u.hood_id]).length), uGarage = data.units.find(u => u.parking.rank >= 2 && hoodBy[u.hood_id] && flagged(hoodBy[u.hood_id]).length);
+  console.log('units with street or unknown parking under a flagged parking rule:', uStreet.length);
+  if (uStreet.length) { await go('#unit-' + slug(uStreet[0].id)); await openRow('r-parking'); assert.strictEqual(await page.locator('#park-rules li').count(), flagged(hoodBy[uStreet[0].hood_id]).length); assert(await page.locator('#park-rules a.srcl').count() >= 1); await overflow('unit-park-rules'); await shot('10-unit-street-parking-rules'); }
+  if (uGarage) { await go('#unit-' + slug(uGarage.id)); assert.strictEqual(await page.locator('#park-rules').count(), 0); }
   const sd = data.units.find(u => u.dog.weight_limit_lb == null && u.dog.size_note);
-  if (sd) { await page.goto(BASE + '/index.html#unit-' + slug(sd.id)); await page.waitForSelector('#dog-note');
-    assert((await page.textContent('#dog-note')).includes('The page says small dogs; no weight number given'));
-    assert(!((await page.locator('.panel.pause').count()) && (await page.textContent('.panel.pause')).includes('small dogs'))); }
-  // a building with nothing readable in public records or reviews says so
+  if (sd) { await go('#unit-' + slug(sd.id)); assert.strictEqual(await headOf('r-dog'), 'allowed, small dogs, no weight given'); assert((await page.textContent('#dog-note')).includes('The page says small dogs; no weight number given')); }
   const noEv = data.units.find(u => ['none readable', 'rating screen: not_enough_data'].includes(u.evidence.public_evidence) && !u.evidence.items.length && !u.evidence.positive.length && !u.evidence.pause_notes);
-  if (noEv) { await page.goto(BASE + '/index.html#unit-' + slug(noEv.id)); await page.waitForSelector('.panel.pause');
-    assert((await page.textContent('.panel.pause')).includes('No public records or readable reviews for this building; ask on the tour'));
-    await overflow('unit-no-evidence');
-    await page.evaluate(() => { const r = document.querySelector('.panel.pause').getBoundingClientRect(); window.scrollBy(0, r.top - 200); });
-    await shot('11-unit-no-public-evidence'); }
-  console.log('no public evidence:', data.units.filter(u => ['none readable', 'rating screen: not_enough_data'].includes(u.evidence.public_evidence) && !u.evidence.items.length && !u.evidence.positive.length && !u.evidence.pause_notes).length, 'units | small-dog note:', data.units.filter(u => u.dog.weight_limit_lb == null && u.dog.size_note).length);
+  if (noEv) { await go('#unit-' + slug(noEv.id)); assert((await page.textContent('#r-love .panel.pause')).includes('No public records or readable reviews for this building; ask on the tour')); }
+  // the day: six tiles in their row, each opening its sheet; no crime figure on a tile
+  await go('#unit-' + slug(star.id)); await openRow('r-day');
+  assert(!CRIME.test(await page.evaluate(() => document.getElementById('r-day').innerText)), 'no crime figure on a day tile');
+  for (const k of ['wake', 'work', 'after', 'night', 'sat', 'sun']) { await page.click(`.tile[data-k=${k}]`); await page.waitForSelector('#sheet.open'); assert((await page.locator('#sheetBody li').count()) >= 3);
+    assert.strictEqual(await page.locator('#sheetBody details.howd[open]').count(), 0, 'sources in a sheet start closed');
+    if (k === 'night') { await page.waitForTimeout(300); await shot('04b-tile-sheet-night'); }
+    await page.keyboard.press('Escape'); await page.waitForSelector('#sheet:not(.open)'); }
+  // keyboard: a row opens with Enter and says so
+  await page.focus('#r-building > summary'); await page.keyboard.press('Enter'); assert(await page.evaluate(() => document.getElementById('r-building').open), 'a row opens from the keyboard');
 
-  // go via UI: home -> year -> hood -> unit (asterisk)
-  await page.goto(BASE + '/index.html#lives'); await page.waitForSelector('.life');
-  await page.click(`a.life[href="#exp-${slug(y1)}"]`);
-  await page.waitForSelector('.viewsw');
-  if (await page.getAttribute('.viewsw [data-v=list]', 'aria-pressed') !== 'true') await page.click('.viewsw [data-v=list]');
-  await showAll();
-  await page.click(`a.hood[href="#hood-${slug(star.hood_id)}"]`);
-  await page.waitForSelector('#sec-places'); await showAll();
-  await page.click(`a.btn[href="#unit-${slug(star.id)}"]`);
-  await page.waitForSelector('#rent-terms');
-  assert((await page.textContent('.sign strong')).includes('*'));
-  assert((await page.textContent('#rent-terms')).includes(star.rent.offer_text.slice(0, 30)));
-  await overflow('unit'); await small('unit');
-  await shot('04-unit-rent-asterisk', true);
-  await page.click('details.receipt summary');
-  assert((await page.textContent('details.receipt')).toLowerCase().includes('not published') || star.all_in_unknown.length === 0, 'an unknown cost line reads "not published", never $0');
-  await page.locator('details.receipt').scrollIntoViewIfNeeded();
-  await page.evaluate(() => { const r = document.querySelector('details.receipt').getBoundingClientRect(); window.scrollBy(0, r.top - 70); });
-  await shot('05-receipt-open');
-  await overflow('receipt');
-  // tile sheets: all six
-  for (const k of ['wake', 'work', 'after', 'night', 'sat', 'sun']) {
-    await page.click(`.tile[data-k=${k}]`); await page.waitForSelector('#sheet.open');
-    assert((await page.locator('#sheetBody li').count()) >= 3);
-    if (k === 'night') { await page.waitForTimeout(300); await shot('04b-tile-sheet-night'); assert(await page.locator('#sheetBody a.srcl').count() >= 1, 'night sheet has a source link'); }
-    await page.keyboard.press('Escape'); await page.waitForSelector('#sheet:not(.open)');
-  }
-  // hold it
-  await page.click('.unit > [data-act=hold]');
-  // second unit in a different year, with evidence
-  const two = data.units.find(u => u.year !== y1 && u.evidence.items.length && u.evidence.positive.length) || data.units.find(u => u.year !== y1);
-  await page.goto(BASE + '/index.html#unit-' + slug(two.id));
-  await page.waitForSelector('.unit > [data-act=hold]');
-  assert(await page.locator('.panel.pause .quote a.srcl').count() >= 1);
-  await overflow('unit2');
-  await shot('04c-unit-with-evidence', true);
-  await page.click('.unit > [data-act=hold]');
-  assert.strictEqual(await page.locator('.slot.full').count(), 2);
-  await page.click('#goBtn');
-  await page.waitForSelector('.pairbox');
-  await overflow('compare'); await small('compare');
-  await shot('06-compare', true);
-  const rows1 = await page.locator('#cmp-rows .rowc').count();
-  await page.click('#ties');
-  const rows2 = await page.locator('#cmp-rows .rowc').count();
-  // ten day-part rows, plus "Still to confirm" when either place has an asterisk or a disclosure
-  const hasDisc = u => (u.disclosures || []).length > 0, extra = [star, two].some(u => u.confirm.asterisk || hasDisc(u)) ? 1 : 0;
-  assert.strictEqual(rows2, 10 + extra, 'ten rows plus the confirm row when ties shown, got ' + rows2);
-  if ([star, two].some(hasDisc)) { const t = await page.textContent('#cmp-rows'); assert(t.includes('Still to confirm') && t.includes('Good to know before you call'), 'disclosures sit in the Still to confirm row'); }
-  assert(rows1 <= rows2);
-  console.log('compare rows hidden-ties/all:', rows1, rows2, await page.textContent('#tiesNote'));
-  await page.click('#ties');
-  // five-point
-  assert.strictEqual(await page.locator('#sec-scale button.pt').count(), 18);
-  await page.click('#sec-scale button.pt >> nth=0'); await page.waitForSelector('#sheet.open');
-  const st = await page.textContent('#sheetBody');
-  assert(st.includes('Staying in Queens') && st.includes('The bands'));
-  await page.waitForTimeout(300); await shot('06b-five-point-explanation');
-  await page.click('#shClose');
-  // third hold then pair buttons
-  // limits
-  await page.goto(BASE + '/index.html#lives'); await page.waitForSelector('.life');
+  // ---------- via the interface: experience -> neighborhood -> place, hold three, compare ----------
+  await page.evaluate(() => { location.hash = '#lives'; }); await page.waitForSelector('.life');
+  await page.click(`a.life[href="#exp-${slug(y1)}"]`); await page.waitForSelector('.viewsw'); await showAll();
+  await page.click(`a.hood[href="#hood-${slug(star.hood_id)}"]`); await page.waitForSelector('#sec-places'); await showAll();
+  await page.click(`a.cardl[href="#unit-${slug(star.id)}"]`); await page.waitForSelector('.unit.page');
+  await page.click('.unit.page [data-act=hold]');
+  const two = data.units.find(u => u.year !== y1 && u.evidence.items.length && u.evidence.positive.length && hoodBy[u.hood_id]) || data.units.find(u => u.year !== y1);
+  await go('#unit-' + slug(two.id), '.unit.page'); await openRow('r-love'); assert(await page.locator('#r-love .panel.pause .quote a.srcl').count() >= 1); await overflow('unit2'); await shot('04c-unit-with-evidence', true);
+  await page.click('.unit.page [data-act=hold]');
+  const three = data.units.find(u => u.year !== y1 && u.year !== two.year && hoodBy[u.hood_id]) || data.units.find(u => u.id !== star.id && u.id !== two.id);
+  await go('#unit-' + slug(three.id), '.unit.page'); await page.click('.unit.page [data-act=hold]');
+  assert.strictEqual(await page.locator('.slot.full').count(), 3);
+  await page.click('#goBtn'); await page.waitForSelector('#r-trade');
+  await fits('compare', 'three places'); await overflow('compare'); await small('compare'); await noCrime('compare');
+  await shot('06-compare', true); await shot('ux-06-compare-collapsed');
+  assert(await page.evaluate(() => document.getElementById('r-trade').open), 'the trade in plain words is the one thing open');
+  assert.strictEqual(await page.locator('#view details.rowd.cmp').count(), 5 + ([star, two, three].some(u => u.confirm.asterisk || (u.disclosures || []).length) ? 1 : 0) + 1, 'money, space, car, the trip, the day, what is to confirm, and Queens');
+  assert.strictEqual((await page.textContent('#c-queens .rl')).trim(), 'Compared to staying in Queens'); assert(!/against/i.test(await page.evaluate(() => document.getElementById('view').textContent)), 'no "against" on the compare page');
+  await openRow('c-day'); const rows1 = await page.locator('#cmp-rows .rowc').count(); await page.click('#ties'); const rows2 = await page.locator('#cmp-rows .rowc').count();
+  assert.strictEqual(rows2, 6, 'all six parts of the day when level ones are shown, got ' + rows2); assert(rows1 <= rows2); console.log('compare day parts hidden-ties/all:', rows1, rows2, await page.textContent('#tiesNote')); await page.click('#ties');
+  if ([star, two, three].some(u => (u.disclosures || []).length)) { await openRow('c-confirm'); assert((await page.textContent('#c-confirm')).includes('Good to know before you call'), 'disclosures sit in the Still to confirm row'); }
+  await openRow('c-queens'); assert.strictEqual(await page.locator('#sec-scale button.pt').count(), 3 * data.meta.queens_spectrum.filter(s => !/crime/.test(s.measure)).length);
+  await page.click('#sec-scale button.pt >> nth=0'); await page.waitForSelector('#sheet.open'); const st = await page.textContent('#sheetBody'); assert(st.includes('Staying in Queens') && st.includes('The bands'));
+  await page.waitForTimeout(300); await shot('06b-five-point-explanation'); await page.click('#shClose');
+  await openRow('c-money'); await page.evaluate(() => document.getElementById('c-money').scrollIntoView({ block: 'center' })); await shot('ux-06b-compare-money-open');
+  await page.click('[data-act=pair][data-p="0-2"]'); assert.strictEqual(await page.getAttribute('[data-act=pair][data-p="0-2"]', 'aria-pressed'), 'true');
+
+  // ---------- limits ----------
+  await page.evaluate(() => { location.hash = '#lives'; }); await page.waitForSelector('.life');
   await page.click('[data-act=limits-open]'); await page.waitForSelector('#limsheet.open');
   const before = await page.textContent('#fitline');
   await page.locator('#lim-cost').fill('2400'); await page.locator('#lim-safe').fill('3'); await page.locator('#lim-sqft').fill('700'); await page.locator('#lim-mins').fill('30');
-  const after = await page.textContent('#fitline');
-  assert(before !== after, 'limits changed counts');
+  const after = await page.textContent('#fitline'); assert(before !== after, 'limits changed counts');
   const expect = data.units.filter(u => u.all_in <= 2400 && Math.round(u.moments.sun.drive_min) <= 30 && u.moments.night.violent_vs_jamaica != null && u.moments.night.violent_vs_jamaica < 0.5 && u.sqft != null && u.sqft >= 700).length;
   assert(after.startsWith(expect + ' of '), `limit count ${after} vs expected ${expect}`);
-  console.log('limits:', before, '->', after, '| greyed years:', await page.locator('.life.none').count());
-  await page.waitForTimeout(300); await shot('07-limits-sheet');
-  await overflow('limits');
-  await page.click('[data-act=limits-close]');
-  await shot('07b-home-with-limits', true);
-  // the new limit: only places with nothing left to confirm
-  await page.click('[data-act=limits-open]'); await page.click('[data-act=limits-reset]');
-  await page.check('#lim-clear');
+  console.log('limits:', before, '->', after, '| greyed experiences:', await page.locator('.life.none').count());
+  await page.waitForTimeout(300); await shot('07-limits-sheet'); await overflow('limits');
+  await page.click('[data-act=limits-close]'); assert((await page.textContent('#foot [data-act=limits-open]')).includes(expect + ' of ' + data.units.length + ' fit')); await shot('07b-home-with-limits', true);
+  await page.click('[data-act=limits-open]'); await page.click('[data-act=limits-reset]'); await page.check('#lim-clear');
   const clearN = data.units.filter(u => !u.confirm.asterisk).length;
   assert((await page.textContent('#fitline')).startsWith(clearN + ' of '), 'toggle count ' + (await page.textContent('#fitline')) + ' vs ' + clearN);
-  await page.waitForTimeout(300); await shot('07c-limits-nothing-left-to-confirm');
   await page.click('[data-act=limits-close]');
-  await page.goto(BASE + '/index.html#hood-' + slug(conf.hood_id)); await page.waitForSelector('#sec-places'); await showAll();
+  await go('#hood-' + slug(conf.hood_id)); await showAll();
   assert.strictEqual(await page.locator('#sec-places .unit.out').count(), data.units.filter(u => u.hood_id === conf.hood_id && u.confirm.asterisk).length);
   assert((await page.textContent('#sec-places .unit.out .why')).includes('Still to confirm'));
-  await page.reload(); await page.waitForSelector('#sec-places');
-  assert(await page.isChecked('#lim-clear'), 'the toggle is remembered');
-  await page.goto(BASE + '/index.html#lives'); await page.waitForSelector('.life');
+  await page.reload(); await page.waitForSelector('#sec-places'); assert(await page.isChecked('#lim-clear'), 'the toggle is remembered');
+  await page.evaluate(() => { location.hash = '#lives'; }); await page.waitForSelector('.life');
   await page.click('[data-act=limits-open]'); await page.click('[data-act=limits-reset]'); await page.click('[data-act=limits-close]');
   assert.strictEqual(await page.locator('.life.none').count(), 0);
-  // copy tour list
-  await page.click('#goBtn'); await page.waitForSelector('[data-act=copy]');
-  await page.click('[data-act=copy]');
-  await page.waitForFunction(() => document.getElementById('copyStatus').textContent.length > 0);
-  console.log('copy status:', await page.textContent('#copyStatus'));
-  const txt = await page.evaluate(() => window.__houseHunt.tourText());
-  assert(txt.includes(star.tour_questions[0]) && txt.includes('House 2'));
-  let clip = null; try { clip = await page.evaluate(() => navigator.clipboard.readText()); } catch (e) {}
-  if (clip !== null) assert.strictEqual(clip, txt);
-  // every hood and unit renders without error (performance + robustness)
+  // copy the tour list
+  await page.click('#goBtn'); await page.waitForSelector('[data-act=copy]'); await page.click('[data-act=copy]');
+  await page.waitForFunction(() => document.getElementById('copyStatus').textContent.length > 0); console.log('copy status:', await page.textContent('#copyStatus'));
+  const txt = await page.evaluate(() => window.__houseHunt.tourText()); assert(txt.includes(star.tour_questions[0]) && txt.includes('House 2'));
+  if ((star.disclosures || []).length) assert(txt.includes('Good to know before you call:'));
+  let clip = null; try { clip = await page.evaluate(() => navigator.clipboard.readText()); } catch (e) {} if (clip !== null) assert.strictEqual(clip, txt);
+
+  // ---------- every view renders, collapsed: no side scroll, within 2.2 screens, no crime in the open ----------
   const t0 = Date.now();
-  const res = await page.evaluate(async (ids) => { let worst = 0, n = 0; for (const h of ids) { const t = performance.now(); location.hash = h; await new Promise(r => setTimeout(r, 0)); worst = Math.max(worst, performance.now() - t); n++; if (document.documentElement.scrollWidth > document.documentElement.clientWidth) return 'overflow at ' + h; } return n + ' views, worst ' + Math.round(worst) + ' ms'; },
-    [...data.years.map(y => 'exp-' + slug(y.id)), ...data.neighborhoods.map(h => 'hood-' + slug(h.id)), ...data.units.map(u => 'unit-' + slug(u.id)), 'compare']);
-  console.log('all views:', res, 'in', Date.now() - t0, 'ms');
-  assert(!String(res).startsWith('overflow'), res);
-  // resident voices: empty now, so feed one neighborhood made-up test quotes (in this test only) to check the layout that will fill in later
-  const page2 = await ctx.newPage();
-  page2.on('console', m => { if (m.type() === 'error') errors.push('voices page: ' + m.text()); }); page2.on('pageerror', e => errors.push('voices PAGEERROR ' + e.message));
-  const vh = data.neighborhoods.find(h => h.counts.shown > 0);
-  await page2.route('**/data.json', async route => { const d = JSON.parse(JSON.stringify(data)); const h = d.neighborhoods.find(x => x.id === vh.id);
+  const res = await page.evaluate(async ([ids, LIMIT]) => { let worst = 0, n = 0, tall = [], crime = [], maxH = {}; const RE = /\bcrimes?\b|violen|burglar|\bthefts?\b|robber|assault|per 1,000/i;
+    for (const h of ids) { const t = performance.now(); location.hash = h; await new Promise(r => setTimeout(r, 0)); worst = Math.max(worst, performance.now() - t); n++;
+      if (document.documentElement.scrollWidth > document.documentElement.clientWidth) return 'overflow at ' + h;
+      const kind = h.split('-')[0], f = document.getElementById('foot').getBoundingClientRect(), tr = document.getElementById('trail'), ht = Math.round(f.bottom + window.scrollY - (tr.hidden ? 0 : tr.offsetHeight));
+      maxH[kind] = Math.max(maxH[kind] || 0, ht); if (ht > LIMIT) tall.push(h + ' ' + ht);
+      if (document.querySelectorAll('#view details.rowd[open]').length > 1) return 'more than one row open at ' + h;
+      const m = RE.exec(document.getElementById('view').innerText); if (m) crime.push(h + ': ' + document.getElementById('view').innerText.slice(Math.max(0, m.index - 40), m.index + 40).replace(/\s+/g, ' ')); }
+    return { n, worst: Math.round(worst), maxH, tall, crime }; },
+    [[...data.years.map(y => 'exp-' + slug(y.id)), ...data.neighborhoods.filter(h => yearBy[h.year]).map(h => 'hood-' + slug(h.id)), ...data.units.filter(u => hoodBy[u.hood_id]).map(u => 'unit-' + slug(u.id))], LIMIT]);
+  console.log('all views:', JSON.stringify(res).slice(0, 1500), 'in', Date.now() - t0, 'ms');
+  assert(typeof res === 'object', String(res));
+  if (W === 390) assert.strictEqual(res.tall.length, 0, 'pages over 2.2 screens collapsed: ' + res.tall.slice(0, 8));
+  assert.strictEqual(res.crime.length, 0, 'crime wording in the open: ' + res.crime.slice(0, 5).join(' | '));
+  console.log('collapsed heights (px, screens of ' + SCREEN + '):'); heights.forEach(x => console.log('  ' + x.kind.padEnd(13) + String(x.h).padStart(5) + '  ' + x.screens.toFixed(2) + (x.h > AIM ? '  over 2 screens' : '') + '  ' + x.tag));
+
+  // ---------- made-up test values (in this test only) for fields the data does not carry yet ----------
+  const page2 = await ctx.newPage(); page2.setDefaultTimeout(10000);
+  page2.on('console', m => { if (m.type() === 'error') errors.push('test-data page: ' + m.text()); }); page2.on('pageerror', e => errors.push('test-data PAGEERROR ' + e.message));
+  const vh = shownHoods.find(h => h.counts.shown > 0), vu = data.units.find(u => u.hood_id === vh.id);
+  await page2.route('**/data.json', async route => { const d = JSON.parse(JSON.stringify(data)); const h = d.neighborhoods.find(x => x.id === vh.id), y = d.years.find(x => x.id === vh.year), u = d.units.find(x => x.id === vu.id);
     h.local.voices = [
       { excerpt: 'TEST quote, positive, noise.', theme: 'noise', sentiment: 'positive', context: 'renter', source: 'example forum', date: '2026-05-02', url: 'https://example.com/a' },
       { excerpt: 'TEST quote, positive two, noise.', theme: 'noise', sentiment: 'positive', context: '', source: 'example forum', date: '2026-08-11', url: 'https://example.com/b' },
       { excerpt: 'TEST quote, positive three, noise.', theme: 'noise', sentiment: 'positive', context: '', source: 'example forum', date: '2025-01-11', url: 'https://example.com/c' },
       { excerpt: 'TEST quote, negative, noise.', theme: 'noise', sentiment: 'negative', context: 'owner', source: 'example forum', date: '2026-03-09', url: 'https://example.com/d' },
       { excerpt: 'TEST quote, negative, parking, with a very long unbroken address https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.', theme: 'parking', sentiment: 'negative', context: '', source: 'example forum', date: '', url: '' }];
-    h.toll_round_trip = 13.5; h.toll_round_trip_mail = 21.25; // made-up: both an E-ZPass and a mail-rate figure
     h.local.survey = [{ measure: 'would_recommend_share', value: '71%', source: 'example survey', as_of: '2026-06-30', url: 'https://example.com/s' }];
+    h.toll_round_trip = 13.5; h.toll_round_trip_mail = 21.25; // both an E-ZPass and a mail-rate figure
+    h.host = { intro: 'TEST host intro. ' + 'This is a long made-up paragraph in the voice of the host so that it runs well past four lines on a phone and needs the more button to be read in full. '.repeat(3) };
+    h.headlines = { rules: { subhead: 'TEST subhead written by hand: ask the building about the overnight permit before you bring the car.' }, residents: { subhead: 'TEST subhead about violent crime that must not show.' } };
+    y.subhead = 'TEST subhead: a quiet town, the lowest crime on the list and a train to the city.'; y.prose = Object.assign({}, y.prose, { promise: 'TEST promise about very low crime, 0.3 violent per 1,000.' });
+    y.host = { intro: 'TEST experience host intro.', walkthrough: ['TEST walkthrough one.', 'TEST walkthrough two.'] };
+    u.host = { line: 'TEST host line for the place.', catch: 'TEST host catch.' }; u.headlines = { cost: { subhead: 'TEST cost subhead.' } };
     await route.fulfill({ contentType: 'application/json', body: JSON.stringify(d) }); });
-  await page2.goto(BASE + '/index.html#hood-' + slug(vh.id)); await page2.waitForSelector('#sec-voices .quote');
-  assert.strictEqual(await page2.locator('#no-voices').count(), 0);
-  { const facts = await page2.textContent('.hero .facts'); assert(facts.includes('$13.50 in tolls a visit with a New York E-ZPass') && !facts.includes('21.25'), 'E-ZPass figure with its note when a mail rate is also present: ' + facts); }
-  { const real = await page.evaluate(() => document.body.textContent.includes('with a New York E-ZPass')); if (real) console.log('note: the current data already carries a mail-rate toll'); }
-  assert.strictEqual(await page2.locator('#sec-voices .vtheme').count(), 3, 'two themes and the survey heading');
-  assert.strictEqual(await page2.locator('#sec-voices > .quote.pos').count(), 1, 'one positive shown against the one negative');
-  assert.strictEqual(await page2.locator('#sec-voices > .quote.neg').count(), 2);
-  assert.strictEqual(await page2.locator('#sec-voices details .quote').count(), 2, 'the other positives are folded');
-  assert.strictEqual(await page2.locator('#sec-voices .quote a.srcl').count(), 4);
+  await page2.goto(BASE + '/index.html#hood-' + slug(vh.id)); await page2.waitForSelector('.ph1');
+  if (await page2.isVisible('#tour')) await page2.click('[data-act=tour-skip]');
+  // host voice: the one thing open, clamped to about four lines with "more"
+  assert(await page2.isVisible('#host-intro')); const clampH = await page2.evaluate(() => document.querySelector('#host-intro .clamp').clientHeight);
+  assert(clampH <= 4 * 1.4 * 15.5 + 2, 'the host intro is clamped to about four lines: ' + clampH + 'px'); assert(await page2.isVisible('#host-intro [data-act=unclamp]'));
+  await page2.click('#host-intro [data-act=unclamp]'); assert(await page2.evaluate(() => document.querySelector('#host-intro .clamp').clientHeight) > clampH + 20); assert.strictEqual(await page2.getAttribute('#host-intro [data-act=unclamp]', 'aria-expanded'), 'true'); await page2.click('#host-intro [data-act=unclamp]');
+  // a written subhead under the built headline, lighter and clamped to two lines; a subhead about crime is not shown
+  assert((await page2.textContent('#r-rules > summary .rs')).startsWith('TEST subhead written by hand')); assert.strictEqual(await page2.locator('#r-voices > summary .rs').count(), 0, 'a subhead about crime is dropped');
+  const subStyle = await page2.evaluate(() => { const rs = document.querySelector('#r-rules .rs'), rh = document.querySelector('#r-rules .rh'), a = getComputedStyle(rs), b = getComputedStyle(rh); return { subW: +a.fontWeight, headW: +b.fontWeight, lines: Math.round(rs.clientHeight / parseFloat(a.lineHeight)) }; });
+  assert(subStyle.headW > subStyle.subW && subStyle.lines <= 2, 'headline strong, subhead lighter and at most two lines: ' + JSON.stringify(subStyle));
+  // tolls: the E-ZPass figure, with its note when a mail rate is also present
+  { const chips = await page2.textContent('.sec.head .chips'); assert(chips.includes('$13.50') && chips.includes('NY E-ZPass') && !chips.includes('21.25'), 'E-ZPass figure with its note: ' + chips); }
+  // resident voices in their row
+  assert.strictEqual(await headOf('r-voices', page2), '3 positive, 2 negative; most about noise'); await openRow('r-voices', page2);
+  assert.strictEqual(await page2.locator('#no-voices').count(), 0); assert.strictEqual(await page2.locator('#sec-voices .vtheme').count(), 3, 'two themes and the survey heading');
+  assert.strictEqual(await page2.locator('#sec-voices > .quote.pos').count(), 1, 'one positive shown against the one negative'); assert.strictEqual(await page2.locator('#sec-voices > .quote.neg').count(), 2);
+  assert.strictEqual(await page2.locator('#sec-voices details .quote').count(), 2, 'the other positives are folded'); assert.strictEqual(await page2.locator('#sec-voices .quote a.srcl').count(), 4);
   assert((await page2.textContent('#sec-voices')).includes('Would recommend share: 71%.'));
-  const vo = await page2.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); assert(vo <= 0, 'voices overflow ' + vo);
+  if (W === 390 && OUT) { await page2.evaluate(() => window.scrollTo(0, 0)); await page2.screenshot({ path: `${OUT}/ux-07-test-data-host-voice-and-subhead.png` }); }
+  // experience: a subhead or promise about crime is not rendered; the host walks her through in a row
+  await page2.evaluate(h => { location.hash = h; }, '#exp-' + slug(vh.year)); await page2.waitForSelector('#host-intro');
+  { const t = await page2.evaluate(() => document.getElementById('view').innerText); assert(!CRIME.test(t), 'no crime clause from the subhead or the promise'); assert(t.includes('TEST subhead: a quiet town and a train to the city.'), 'the rest of the subhead stays: ' + t.slice(0, 200)); }
+  assert.strictEqual(await page2.locator('#r-promise').count(), 0, 'a promise about crime is not shown'); assert.strictEqual(await headOf('r-walk', page2), 'TEST walkthrough one.');
+  await page2.evaluate(() => { location.hash = '#lives'; }); await page2.waitForSelector('.life'); assert(!CRIME.test(await page2.evaluate(() => document.getElementById('view').innerText)));
+  // place: the host line open, a written subhead on the Costs row
+  await page2.evaluate(h => { location.hash = h; }, '#unit-' + slug(vu.id)); await page2.waitForSelector('#host-line');
+  assert((await page2.textContent('#host-line')).includes('TEST host line for the place.') && (await page2.textContent('#host-line')).includes('TEST host catch.')); assert.strictEqual((await page2.textContent('#r-cost .rs')).trim(), 'TEST cost subhead.');
+  const vo = await page2.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); assert(vo <= 0, 'test-data overflow ' + vo);
   await page2.close();
   console.log('console errors:', errors.length ? errors : 'none');
   assert.strictEqual(errors.length, 0);

@@ -1,7 +1,7 @@
 # Evidence batch 19: buildings that had no evidence rows (2026-11-16)
 
 Source list: `data/reference/evidence_batches/batch_19.csv`, read once from `data/ranked_units.csv` (`no_evidence == True`) at the start:
-**86 units in 31 buildings** (Stamford 42 units / 21 buildings, Jersey City 38 / 6, Manhattan 3, Bronx 2, Yonkers 1). 73 units came from
+**86 units in 31 buildings** (Stamford 42 units / 19 buildings, Jersey City 38 / 6, Manhattan 3, Bronx 2, Yonkers 1). 73 units came from
 Trulia, 13 from Apartment List. Outputs: `data/evidence/{live_check,confirm,items,facts,ratings}_batch_19.csv` (each written to a temp
 name and renamed). Raw pages: `raw/evidence_b19/`. Nothing else was edited; the pipeline was not run; nothing was committed.
 

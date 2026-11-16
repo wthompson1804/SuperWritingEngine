@@ -2,10 +2,10 @@
 
 Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evidence/*.csv. No network requests. Every passing unit was checked and has one row.
 
-- Units checked: **2657** (one row each; `offer_type = none` for units with no such language).
-- Units with any concession, special-offer or price-basis language: **1782**.
+- Units checked: **2659** (one row each; `offer_type = none` for units with no such language).
+- Units with any concession, special-offer or price-basis language: **1784**.
 - Units whose price or offer is for a lease term other than 12 months: **592**.
-- Units that need a call (`needs_call = yes`): **1683** in 237 buildings.
+- Units that need a call (`needs_call = yes`): **1685** in 238 buildings.
 
 ## Counts by offer_type
 
@@ -16,7 +16,7 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | other | 234 |
 | reduced_deposit_or_fee | 72 |
 | weeks_free | 35 |
-| dollar_credit | 28 |
+| dollar_credit | 30 |
 | look_and_lease | 20 |
 
 ## Listed price basis
@@ -24,14 +24,14 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | listed_price_is | units |
 |---|---|
 | unknown | 1423 |
-| gross | 998 |
+| gross | 1000 |
 | net_effective | 236 |
 
 ## Confidence
 
 | confidence | units |
 |---|---|
-| assumed_terms | 1653 |
+| assumed_terms | 1655 |
 | stated_on_page | 968 |
 | computed_from_stated_terms | 36 |
 
@@ -40,7 +40,7 @@ Rebuilt from data/units.csv, each unit's cached page (`raw_path`) and data/evide
 | timing | units |
 |---|---|
 | unknown | 1368 |
-| (no free period) | 1229 |
+| (no free period) | 1231 |
 | upfront | 42 |
 | end_of_lease | 12 |
 | specific_months | 5 |
