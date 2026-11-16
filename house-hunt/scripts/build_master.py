@@ -738,6 +738,11 @@ def main():
             if len(hit):
                 for col, new in live_cols:
                     MU.at[i, new] = hit.iloc[-1][col]
+                # a check matched to an unlabelled row by its plan name or a price in its note says the row was seen;
+                # its price_now may belong to another plan on the same page, so it is taken only when it is this row's price
+                if not parsers.unit_label_key(un) and str(hit.iloc[-1]["price_now"]).split(".")[0] != str(MU.at[i, "listed_rent"]).split(".")[0] \
+                        and hit.iloc[-1]["status"] != "changed":
+                    MU.at[i, "live_price"] = ""
 
     # floor: confirmed per unit > stated on the listing > inferred from the unit label (W1, W17)
     bf_good = {b: v for b, v, bs in zip(B.index, B.get("building_floors", pd.Series(dtype=str)), B.get("building_floors_basis", pd.Series(dtype=str))) if bs in GOOD_FLOORCOUNT}
