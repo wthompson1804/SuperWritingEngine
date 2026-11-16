@@ -1,4 +1,4 @@
-# Run report (2026-11-16T01:51:15+00:00)
+# Run report (2026-11-16T01:51:56+00:00)
 
 ## Steps
 
@@ -12,8 +12,8 @@
 | all-in cost | `all_in.py` | ok |
 | evidence rules (avoid, exclusions) | `avoid.py` | ok |
 | ranking and selection | `rank.py` | ok |
-| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | FAILED |
-| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | FAILED |
+| rule tests on the output (docs/INDEPENDENT_CHECK_2.md) | `test_rules.py --data` | ok |
+| field registry, wiring check, shown-list assertions and the review rule | `check_registry.py` | ok |
 
 ## Stage counts
 
@@ -28,7 +28,7 @@
 | ranked (after safety rule, confirmed-fact gates, sketchy and evidence exclusions) | 763 | 763 | +0 |
 | shown (every gate fact confirmed or stated; top 10 per neighborhood) | 489 | 489 | +0 |
 | avoid cards | 34 | 34 | +0 |
-|   shown with an asterisk (one thing to confirm) | 293 | 292 | +1 |
+|   shown with an asterisk (one thing to confirm) | 293 | 293 | +0 |
 | removed by a reviewed verdict (data/evidence/review_verdicts.csv) | 121 | 121 | +0 |
 | held back for one confirmation | 35 | 35 | +0 |
 | clean, waiting for a live check (not shown) | 35 | 35 | +0 |
@@ -156,14 +156,12 @@ shown buildings 232; disclosures: {'floor not published': 440, 'special offer': 
 
 **rule tests on the output (docs/INDEPENDENT_CHECK_2.md)**
 ```
-test_rules (data): 306 checks, 1 failed
-  FAIL verdicts: a shown unit has no ok / asterisk / disclose verdict
+test_rules (data): 306 checks, 0 failed
 ```
 
 **field registry, wiring check, shown-list assertions and the review rule**
 ```
 field registry: {'used': 500, 'display': 311, 'provenance': 191, 'not_used': 17}
-SHOWN-LIST ASSERTIONS FAILED: 1 violation(s)
-   zumper-65719910 ( 6G): no reviewed verdict: nobody has read this unit's evidence
+shown-list assertions: all pass
 ```
 
