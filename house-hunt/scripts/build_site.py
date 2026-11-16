@@ -50,13 +50,17 @@ DROP = {
     "neighborhoods[]": [
         "described[].licence",      # licence notes are not shown; the source name and link are
         "described[].topic",
-        "local.voices[].source_area", "local.survey[].source_area",
+        "local.voices[].source_area",   # local.survey[].source_area is read since UI pass 5 (shown when it is not the neighborhood itself)
+        "experience_score_basis",       # the scoring sentence is no longer shown (audit item 28)
         "safety.subcity_estimate", "safety.vs_metro", "safety.vs_local",
         "toll_basis", "experience_score", "sqft_median", "parent_id",
         "traits.built_before_1940_share", "traits.built_since_2010_share", "traits.college_degree_share",
         "traits.detached_house_share", "traits.median_hh_income",
     ],
 }
+# buildings[]: the template reads only the building's own copies of these (bView() in site/index.html); everything else
+# about a building it still takes from the building's apartments.
+BUILDING_KEEP = ("id", "contact", "about_building", "about_points", "ratings", "photos")
 # A local rule's "quote" is shown only when it has no "summary" (ruleLi: r.summary || r.quote): duplicate text otherwise.
 RULE_LISTS = ("parking_rules", "dog_rules")
 # A key whose value is null reads the same as a missing key everywhere in the template except under these, where
@@ -105,6 +109,15 @@ def slim(data):
             for rule in local.get(key) or []:
                 if isinstance(rule, dict) and rule.get("summary") and "quote" in rule:
                     del rule["quote"]
+    if isinstance(data.get("buildings"), list):
+        data["buildings"] = [{k: b[k] for k in BUILDING_KEEP if k in b} for b in data["buildings"] if isinstance(b, dict)]
+        for b in data["buildings"]:
+            r = b.get("ratings")
+            if isinstance(r, dict):
+                r.pop("most_reviews", None)
+                for p in r.get("platforms") or []:
+                    if isinstance(p, dict):
+                        p.pop("seen_via", None)
     for key in ("units", "avoid", "held", "neighborhoods", "awaiting_live_check"):
         if isinstance(data.get(key), list):
             data[key] = [_no_nulls(rec) for rec in data[key]]

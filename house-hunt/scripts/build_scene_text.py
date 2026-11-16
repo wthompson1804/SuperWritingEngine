@@ -14,16 +14,20 @@ Tokens
   [[ ... ]]          an optional stretch of text: dropped whole when any value inside it is missing or any hidden
                      test inside it fails, so a fact that is not in the data is simply not said
 Lines
-  === year: <label>      then  scene: / promise: / catch: / display: / tagline: / host_intro: / walk1: walk2: walk3:
-  === hood: <hood_id>    then  scene: / good: / watch: / host_intro: , and optionally
+  === year: <label>      then  display: / tagline: / subhead: / host_intro: / points: / moment1: moment2: moment3: /
+                               promise: / catch:   (scene and host_walkthrough are written out as the three moments)
+  === hood: <hood_id>    then  host_intro: / scene: / good: / watch: , and optionally
       rules: Municipality|rule ; Municipality|rule      numbers typed in the prose must come from these summaries
       voices: theme, theme                              themes whose balance of comments the prose paraphrases
   A block may appear twice (the host voice sits in its own section of the file); the two are merged, and their
   rules: and voices: lines are added together.
-Year tokens: m_ / max_ / min_ + a neighborhood alias (median neighborhood, lifestyle_groups.csv); p_... the page's own
-  unit-weighted tile figures (site/data.json years[]); u_... medians and shares over the units shown on the page.
-Neighborhood tokens: the aliases in HOOD; b_... over the neighborhood's buildings (tolls come from data/enriched);
-  pg_... the page's all-in range for the neighborhood (use inside [[ ]]: a neighborhood can leave the page).
+Year tokens: p_... the experience page's figure strip, read from the fields the strip reads (site/data.json years[]:
+  counts, medians, all_in_range, hood_ids); u_... medians and shares over the apartments shown; m_ + alias the median
+  neighborhood for census traits (lifestyle_groups.csv), used only inside hidden tests.
+Neighborhood tokens: {drive} {transit} {b_toll} {sqft} {pg_n} {pg_bldgs} {pg_mid} {pg_lo} {pg_hi} are the neighborhood
+  page's figure strip; {rest} {bars} {cafes} {parkwalk} {dogpark} {super} {water} are the traits its "At a glance" row
+  prints; the other aliases in HOOD are census and distance fields. For a neighborhood with nothing shown, all of them
+  fall back to lifestyle_groups.csv. Prices print to the nearest $10, minutes whole.
 
 Run from the house-hunt folder: python3 scripts/build_scene_text.py && python3 scripts/check_scene_text.py
 """
@@ -120,7 +124,12 @@ HOOD_SHOWN = {
 }
 # ... and these are the neighborhood's figure strip, read from the fields the strip itself reads (never recomputed)
 HOOD_STRIP = {"drive": ("drive_min", "int"), "transit": ("transit_min", "int"), "b_toll": ("toll_round_trip", "int"),
-              "sqft": ("sqft_median", "r10"), "s_n": ("shown", "int"), "s_bldgs": ("buildings", "int")}
+              "sqft": ("sqft_median", "r10"), "s_n": ("shown", "int"), "s_bldgs": ("buildings", "int"),
+              # what "At a glance" prints on the neighborhood page (neighborhoods[].traits), so the prose beside it
+              # gives the same count of restaurants and the same walk to the park
+              "rest": ("t_restaurants_800m", "int"), "bars": ("t_bars_800m", "int"), "cafes": ("t_cafes_800m", "int"),
+              "parkwalk": ("t_park_walk_min", "int"), "parkha": ("t_park_ha_800m", "int"),
+              "dogpark": ("t_dog_park_m", "mi"), "super": ("t_supermarket_m_c", "mi"), "water": ("t_open_water_m", "mi")}
 # The same for an experience: figures over the units shown in it (m_ + alias used to be the median neighborhood).
 YEAR_SHOWN = {"bars": ("bars_800m", "int"), "cafes": ("cafes_800m", "int"),
               "rest1600": ("restaurants_1600m", "int"),
@@ -193,7 +202,8 @@ def agree(text):
         if n == 0 and one not in ("minute", "place"):
             return f"no {PLURAL[one]}" + (" are" if verb else "")
         return f"{n} {one if n == 1 else PLURAL[one]}" + ((" is" if n == 1 else " are") if verb else "")
-    return COUNTED.sub(fix, text)
+    text = COUNTED.sub(fix, text)
+    return text[:1].upper() + text[1:]                # "no restaurants are ..." can now open the sentence
 
 
 class Dropped(Exception):
@@ -415,7 +425,7 @@ def hood_rules(hood_id, rule, pattern=None):
 
 
 SUB_MIN_WORDINGS = 3                                   # wordings per condition in the "=== sub:" drafts
-POINT_MIN_WORDINGS = 2                                 # wordings per line in the "=== points:" drafts
+POINT_MIN_WORDINGS = 1                                 # wordings per line in the "=== points:" drafts
 POINT_SHARE = 0.35                                     # a point wording on at most 8% of the neighborhoods
 MAX_PLAIN_POINTS = 5                                   # plus the one warning
 SUB_USED = {}                                          # (kind, section) -> Counter of wordings used so far in this build
@@ -492,7 +502,7 @@ def pick_sub(rules, ctx, salt, cap=None):
     return "", []
 
 
-def hood_points(rules, ctx, evidence, cap=None, lead=""):
+def hood_points(rules, ctx, evidence, cap=None, lead="", lead_fields=()):
     """The icon points of a neighborhood, from the "=== points: hood" drafts -> [{icon, text}].
     Each draft line is `topic | icon | conditions :: wording | wording`. The first `warning` line whose conditions
     hold is the one honest catch; then, in the order written, the first matching line of each other topic, up to
@@ -512,7 +522,9 @@ def hood_points(rules, ctx, evidence, cap=None, lead=""):
                 text = render(raw, ctx, trial)
             except (ValueError, LookupError, KeyError):
                 continue
-            if text and not C.shared_runs({"lead": [lead], "points": [text]}):   # never what the lead already says
+            said = icon != "warning" and any(e.get("shown") and e.get("transform") != "convention"
+                                             and e.get("field") in lead_fields for e in trial)
+            if text and not said and not C.shared_runs({"lead": [lead], "points": [text]}):   # never what the lead already says
                 used[raw] += 1
                 evidence.extend(trial + [{"claim": text, **e} for e in evs])
                 return {"icon": icon, "text": text}
@@ -619,7 +631,10 @@ def main():
                                                          sub_cap[b["kind"]])
                 evidence += evs
             if b["kind"] == "hood":
-                pts = hood_points(point_rules, ctx, evidence, point_cap, texts["host_intro"])
+                lead_sents = set(C.sentences(texts["host_intro"]))
+                lead_fields = {e["field"] for e in evidence if e.get("claim") in lead_sents and e.get("shown")
+                               and e.get("transform") not in ("convention", "in_text")}
+                pts = hood_points(point_rules, ctx, evidence, point_cap, texts["host_intro"], lead_fields)
                 texts["about_points_json"] = json.dumps(pts, ensure_ascii=False)
                 # A one-sentence field whose only sentence the shown places no longer support falls back to the
                 # matching icon point (the catch, or the first fact), which is chosen from the current data.

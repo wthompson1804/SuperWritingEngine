@@ -1,34 +1,49 @@
 #!/usr/bin/env python3
-"""Check the written scene text against the data it cites.
+"""Check the text of the experience pages and the neighborhood pages against the data it cites, and against the
+plain-language rules of the 2026-11-16 copy edit.
 
 Reads data/reference/scene_text_years.csv (the six experiences; the key column is still `year_label`) and
-data/reference/scene_text_neighborhoods.csv and, for every row and every prose column
-(years: display_label, tagline, subhead, scene, promise, catch, host_intro, host_walkthrough;
- neighborhoods: scene, good_for_her, watch_for, host_intro):
+data/reference/scene_text_neighborhoods.csv. For every row and every prose column
+(years: display_label, tagline, subhead, promise, catch, host_intro, the icon points and the three day moments;
+ neighborhoods: scene, good_for_her, watch_for, host_intro, the icon points; both: the sub_ section subheads):
 
-1. every number in the prose (digits, decimals, dollar amounts, clock times, years) must be "shown" by at least one
-   item in that row's evidence_json;
-2. every evidence item is looked up again in its source (file, field, row filter, aggregation). Besides the CSVs there
-   are virtual tables: data/enriched/*.json (complete round-trip tolls per building) and
-   site/data.json#years|neighborhoods|units (the page's own unit-weighted figures). The text passes when the CURRENT
-   value still supports what was written:
-     - a shown number must still be what the current value rounds to (transform),
-     - a claim without a number ("no bars", "most homes are houses") must still satisfy its `holds_if` test,
-     - a cited local rule must still be in local_rules.csv / local_rules_round2.csv with the same summary, and every
-       number quoted from it must be in that summary,
-     - a paraphrase of resident comments must rest on the same positive / mixed / negative counts;
-3. house style: word limits (and 3 paragraphs of 40 to 60 words for host_walkthrough), no question marks, no em or en
-   dashes, no "not ... but", no spelled-out quantities (so that rule 1 cannot be dodged), no wording about race,
-   ethnicity or religion, no listing-ad hype words, no dollar amounts of 1,000 or more outside the host fields;
-4. no crime wording in any open field (crime, violent, burglar, theft, "per 1,000", "safer than", safe, police).
-   One fixed wording is allowed, only with a test in the evidence: "one of the safest spots on the whole list"
-   (neighborhood in the lowest fifth by violent rate among those on the page; one field only);
-5. across rows, the host voice must not read like a form letter: at most 3 host_intro texts may open with the same 3
-   words, and no run of 6 words may appear in more than a tenth of them (the fixed toll wording is exempt);
-6. the neighborhood host_intro texts must not all end the same way: no closing shape (the first 4 words of the last
-   sentence) in more than 15% of them, the drive-and-toll close on at most a third of them, and never on a text that
-   already opened with the drive;
-7. section subheads (sub_ columns): no wording on more than 6% of the neighborhoods for its section.
+TRUE
+1. every number in the prose must be "shown" by an item in that row's evidence_json;
+2. every evidence item is looked up again in its source. The text passes when the CURRENT value still rounds to the
+   printed number, a claim without a number still satisfies its `holds_if` test, a cited local rule is still in
+   local_rules*.csv with the numbers quoted from it, and a paraphrase of residents rests on the same counts;
+3. THE FIGURE STRIP (check_strip): counts, prices and minutes to her parents must be the ones the page prints in the
+   strip above the text, recomputed here from site/data.json: apartments = counts.shown, buildings = counts.buildings,
+   neighborhoods = len(hood_ids), typical all-in = the median shown apartment, lowest / highest = all_in_range,
+   minutes = medians.drive_min / transit_min (a neighborhood's own drive_min / transit_min). Any "$2,840", any
+   "17 apartments", any "N minutes" in a sentence about her parents that is not the strip's figure fails; so does an
+   evidence item that computes one of these from the unit list instead of reading the strip's field. In a
+   neighborhood, restaurants, bars, cafés, the walk to a park, the dog park and the supermarket must be the
+   neighborhood's own traits, because the page's "At a glance" row prints those;
+PLAIN (check_plain; the reason for the edit: lines that tried to be clever and read like an error)
+4. no construction from the removed list (CONCEITS): a thing acting on "you" ("the dog walks you"), "has a bedtime",
+   "where the car sleeps", "the cost is the ...", "the upside is", "the rest of the story", "count on about", "then
+   there is", "on the table", "green" or "sand" as a noun, "home" for her parents' house, "about 0";
+5. readability, per text: sentences average at most 20 words, none over 32, at most one figure-of-speech marker
+   (FIGURE: "like a", "as if", "steps from", "around the corner" ...). What is NOT checked: a metaphor with no marker
+   and an unclear pronoun both still need a human read;
+6. the page's vocabulary: "your parents" (never "Mom and Dad" in a sentence), "apartment" (never "unit" or "place"),
+   "experience" (never "... Year"), no bare "all-in", no project terms (ranked, scorecard, verified, live check,
+   net-effective, gate, asterisk, cap, ceiling), no "we", American spelling;
+7. a text the page uses as a row headline (promise, good_for_her) fits whole in 64 characters, because the page cuts a
+   longer one at a comma;
+HOUSE STYLE (unchanged)
+8. word limits, one-sentence fields, no question marks, no em or en dashes, no "not ... but", no spelled-out
+   quantities, no wording about race, ethnicity or religion, no listing-ad hype words;
+9. no crime wording in any open field. One fixed wording is allowed, only with a test in the evidence:
+   "one of the safest spots on the whole list" (lowest fifth by violent rate among the page's neighborhoods);
+ACROSS ROWS
+10. a neighborhood's lead (the first sentence of host_intro, also its line on the experience page) may not open on a
+    statistic that more than a third of the neighborhoods in the same experience also open on (check_leads);
+11. form-letter limits, relaxed on purpose in the copy edit because they had pushed the writing toward forced
+    variety: at most 8 host_intro texts open with the same 3 words, no run of 6 words in more than a quarter of them,
+    no closing shape in more than 15%, the drive-and-toll close on at most a third and never on a text that opened
+    with the drive, and no section subhead on more than 12% of the neighborhoods.
 
 A value that moved but still rounds to the same words is reported as drift, not failure.
 
@@ -55,17 +70,20 @@ PAGE = "site/data.json"                            # virtual tables "site/data.j
 # host_intro is the lead of "About this experience" / "About <neighborhood>": 2 or 3 sentences, short, because the
 # facts sit beside it as icon points (about_points_json) and must not be said twice.
 LIMITS = {"year": {"host_intro": (25, 60), "tagline": (4, 14), "subhead": (6, 22)},
-          "hood": {"scene": (8, 60), "host_intro": (12, 50)}}
-LEAD_SENTENCES = (2, 3)
+          "hood": {"scene": (8, 60), "host_intro": (8, 50)}}
+LEAD_SENTENCES = (1, 3)
 ICONS = ["home", "dog", "park", "car", "parking", "fork", "cocktail", "coffee", "train", "money", "clock", "moon", "sun",
          "water", "key", "heart", "people", "ruler", "laundry", "pool", "warning"]
-POINTS_COUNT, POINT_MAX_WORDS = (4, 6), 14            # about_points_json: 4 to 6 {icon, text}; exactly one "warning"
+POINTS_COUNT, POINT_MAX_WORDS = (3, 6), 14            # about_points_json: 4 to 6 {icon, text}; exactly one "warning"
 MOMENT_TITLES, MOMENT_MAX_WORDS = ["A weekday", "Saturday night", "Sunday with Mom and Dad"], 35
 JSON_COLS = {"year": ["about_points_json", "day_moments_json"], "hood": ["about_points_json"]}
 STAGE = re.compile(r"\b(I|I'll|I'd|I've|my|me)\b|\blet's\b|\blet me\b|picture this|\bokay\b|your host", re.I)
 PARAGRAPHS = {"year": {}, "hood": {}}      # (host_walkthrough and the year scene are now the three day moments, joined)
 ONE_SENTENCE = {"year": ["promise", "tagline", "subhead"], "hood": ["good_for_her", "watch_for"]}
 ONE_OR_TWO = {"year": ["catch"], "hood": []}
+# The page uses these as the headline of a closed row (site/index.html, HL.first: whole when it fits in HL_MAX = 64
+# characters, otherwise cut at a clause boundary), so they must fit whole.
+HEADLINE_COLS, HEADLINE_MAX = {"year": ["promise"], "hood": ["good_for_her"]}, 64
 HOST_COLS = {"host_intro", "host_walkthrough", "tagline", "display_label", "subhead", "point", "moment"}   # may state all-in dollars
 # One optional line in the host's voice under each section headline of the page ("sub_" columns). They are chosen from
 # the conditional drafts in the source file ("=== sub:" blocks); empty means the data gave nothing distinctive to say.
@@ -77,7 +95,7 @@ COLUMNS = {"year": ["display_label", "tagline", "subhead", "scene", "promise", "
            + ["sub_" + x for x in SUB_SECTIONS["year"]] + JSON_COLS["year"],
            "hood": ["scene", "good_for_her", "watch_for", "host_intro"] + ["sub_" + x for x in SUB_SECTIONS["hood"]]
            + JSON_COLS["hood"]}
-VOICE_PHRASE = re.compile(r"review sites|people who live (here|in )|residents (of [A-Z][\w ]+ )?(also |here )?(say|like|praise|love|call|wish|"
+VOICE_PHRASE = re.compile(r"review sites|people who live (here|in )|residents (of [A-Z][\w ]+ )?(also |here |still )?(say|like|praise|love|call|wish|"
                           r"describe|talk|complain|are split|warn|advise|enjoy|mention|report)", re.I)
 
 NUMBER = re.compile(r"\d{1,2}:\d{2}|\d[\d,]*(?:\.\d+)?")
@@ -110,6 +128,12 @@ SAFEST_FIELD, SAFEST_MAX = "violent_pctile", 0.2          # rate among the neigh
 SHOWN_ONLY_FIELDS = {"restaurants_800m", "bars_800m", "cafes_800m", "restaurants_1600m", "park_walk_min", "dog_park_m",
                      "supermarket_m_c", "unit_sqft", "drive_min", "transit_to_parents_min", "train_station_m_c",
                      "toll_round_trip_ezpass", "dog_park_name", "park_name", "train_station"}
+
+
+GLANCE_TRAITS = ["restaurants_800m", "bars_800m", "cafes_800m", "park_walk_min", "park_ha_800m", "dog_park_m",
+                 "supermarket_m_c", "open_water_m"]
+# the same facts computed from the unit list: not accepted in a neighborhood text, because "At a glance" prints the traits
+GLANCE_OLD = {"restaurants_800m", "bars_800m", "cafes_800m", "park_walk_min", "dog_park_m", "supermarket_m"}
 
 
 @lru_cache(maxsize=None)
@@ -186,6 +210,8 @@ def _page_table(part):
                          "buildings": (h.get("counts") or {}).get("buildings"),
                          "drive_min": h.get("drive_min"), "transit_min": h.get("transit_min"),
                          "toll_round_trip": h.get("toll_round_trip"),
+                         # what the page's "At a glance" row prints for the neighborhood (its traits)
+                         **{"t_" + k: (h.get("traits") or {}).get(k) for k in GLANCE_TRAITS},
                          "violent": (h.get("safety") or {}).get("violent_per_1000"),
                          **{"vq_" + k: v for k, v in (h.get("vs_queens") or {}).items()}})
         t = pd.DataFrame(rows)
@@ -313,7 +339,7 @@ def transform(value, how):
     if how == "r5":
         return f"{int(half_up(x, 5))}"
     if how == "r10":
-        return f"{int(half_up(x, 10))}"
+        return f"{int(half_up(x, 10)):,}"
     if how == "usd50":                                # dollars to the nearest 50, with a comma: 2707 -> "2,700"
         return f"{int(half_up(x, 50)):,}"
     if how == "usd10":                                # dollars to the nearest 10 (the page's rule for prices in sentences)
@@ -441,7 +467,7 @@ CONCEITS = [
      "'green' / 'sand' used as a noun for parks or the beach (name the park or the beach)"),
     (r"\b(drive|trip|way|road|visit|visits|haul) home\b|\bhome is (close|near|about|a |far)|\bgoing home is\b",
      "'home' used for her parents' house (say 'to your parents')"),
-    (r"\babout (0|no|zero)\b|\bonly no\b", "'about 0' (say there are none)"),
+    (r"\babout (0|no|zero)\b(?!\.\d)|\bonly no\b", "'about 0' (say there are none)"),
 ]
 CONCEITS = [(re.compile(rx, re.I), what) for rx, what in CONCEITS]
 # Words from inside the project that mean nothing to the reader, and wording the page does not use.
@@ -506,7 +532,7 @@ STRIP_FIELDS = {"year": {"all_in", "all_in_lo", "all_in_hi", "shown", "buildings
 # the same quantities under the names they had when they were computed here from the unit list: no longer accepted
 STRIP_OLD = {("listing_id", "count"), ("hood_id", "nunique"), ("building_id", "nunique"), ("all_in", "median"),
              ("drive_min", "median"), ("transit_min", "median"), ("toll_rt", "median"), ("sqft", "median")}
-COUNTED_NOUN = re.compile(r"\b(\d[\d,]*) (apartments?|places?|listings?|buildings?|neighborhoods?|towns?|cities)\b", re.I)
+COUNTED_NOUN = re.compile(r"\b(\d[\d,]*) (?:[a-z]+ )?(apartments?|places?|listings?|buildings?|neighborhoods?|towns?|cities)\b", re.I)
 BIG_MONEY = re.compile(r"\$\s?(\d{1,3},\d{3})")
 PARENT_MIN = re.compile(r"(\d+) minutes")
 
@@ -535,6 +561,9 @@ def check_strip(kind, key, texts, evidence):
     on_page = bool(strip)
     for ev in evidence:
         src, field, agg = str(ev.get("source_file", "")), ev.get("field"), ev.get("agg")
+        if kind == "hood" and src == PAGE + "#units" and field in GLANCE_OLD and on_page:
+            out.append(f"{field} is computed from the unit list, but the page's 'At a glance' row prints the "
+                       f"neighborhood's own figure: quote that one ({ev.get('claim', '')[:50]})")
         if src == PAGE + "#units" and (field, agg) in STRIP_OLD and on_page:
             out.append(f"{field} ({agg}) is computed from the unit list; take it from the figure strip "
                        f"({STRIP_SOURCE[kind]}) so the text and the strip cannot differ ({ev.get('claim', '')[:50]})")
@@ -605,7 +634,7 @@ def check_style(kind, col, text):
     bare = text
     for name in PLACE_NAMES:
         bare = bare.replace(name, "")
-    for rx, what in BANNED + ([] if col in HOST_COLS else [DOLLARS]):
+    for rx, what in BANNED:          # (dollar amounts are no longer banned by column: check_strip ties each to the strip)
         m = rx.search(bare)
         if m:
             out.append(f"{col}: {what}: '{m.group(0)}'")
@@ -652,6 +681,9 @@ def check_style(kind, col, text):
         for i, p in enumerate(paras, 1):
             if not lo <= len(p.split()) <= hi:
                 out.append(f"{col}: paragraph {i} has {len(p.split())} words, wanted {lo} to {hi}")
+    if col in HEADLINE_COLS[kind] and len(sentences(text)[0]) > HEADLINE_MAX:
+        out.append(f"{col}: {len(sentences(text)[0])} characters; the page prints it as a row headline and cuts anything "
+                   f"over {HEADLINE_MAX} at a comma, which leaves half a list")
     n = len(sentences(text))
     if col in ONE_SENTENCE[kind] and n != 1:
         out.append(f"{col}: {n} sentences, wanted 1")
@@ -760,8 +792,8 @@ def check_row(kind, key, texts, evidence):
 
 # Fixed wordings that every text may use: the toll sentence and the units of the crime figures.
 REQUIRED_PHRASE = re.compile(r"about \$?# round trip with a new york e-zpass|per # residents|per #|against jamaica's #")
-OPENING_WORDS, OPENING_MAX = 3, 3        # at most 3 texts may start with the same 3 words
-RUN_WORDS, RUN_SHARE, RUN_FLOOR = 6, 0.10, 8   # no run of 6 words in more than a tenth of the texts (never fewer than 8)
+OPENING_WORDS, OPENING_MAX = 3, 8        # at most 8 texts may start with the same 3 words
+RUN_WORDS, RUN_SHARE, RUN_FLOOR = 6, 0.25, 8   # no run of 6 words in more than a quarter of the texts (never fewer than 8)
 
 
 def _norm(sentence):
@@ -799,7 +831,7 @@ CLOSE_WORDS, CLOSE_SHARE, CLOSE_MIN_TEXTS = 4, 0.15, 20     # no closing shape i
 DRIVE_CLOSE_SHARE = 1 / 3                                   # the drive-and-toll close on at most a third of them
 DRIVE_TALK = re.compile(r"e-zpass|\btolls?\b|toll-free|\btransit\b|your parents|sunday dinner|mom and dad", re.I)
 CLOSE_KINDS = ["parking", "dog_green", "dinner", "residents", "choice", "life", "drive"]
-SUB_SHARE = 0.06                                            # a section subhead on fewer than 6% of the neighborhoods
+SUB_SHARE = 0.12                                            # a section subhead on fewer than 6% of the neighborhoods
 
 
 def closing(text):

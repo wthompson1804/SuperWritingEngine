@@ -831,8 +831,9 @@ body{padding-bottom:calc(var(--tray-h,56px) + 20px)}
 .pg .h2s,.pg .sec.about .h2s{font-size:var(--t-l)!important;line-height:1.15}
 .pg .h2s .fig{font-size:var(--t-s);color:var(--muted);font-weight:700}
 .pg .psub{font-size:var(--t-m)}
-.pg .kick{font-size:13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.pg-exp>.illus.banner{height:100px;margin:10px 0 0;border:3px solid var(--ink);border-radius:20px}
+.pg .kick{font-size:13px;display:flex;align-items:flex-start;gap:6px;line-height:1.3}
+.pg .kick .ymk{flex:0 0 auto;margin-top:1px}
+.pg-exp>.illus.banner{height:96px;margin:10px 0 0;border:3px solid var(--ink);border-radius:20px}
 .kf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:var(--line);border:2px solid var(--line);border-radius:16px;overflow:hidden;margin-top:12px}
 .kfc{position:relative;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;width:100%;background:var(--white);padding:8px 5px 9px;min-width:0;text-align:center;border:0;border-radius:0;font:inherit;color:inherit;align-self:stretch}
 .kfc .info{position:absolute;top:6px;right:6px;margin:0}
@@ -882,7 +883,6 @@ button.glf b{text-decoration:underline;text-decoration-color:var(--berry);text-u
 .pg .rowstop{margin:-30px 0 -2px}
 .pg .rl{font-size:13px}
 .pg .rs{font-size:14px;line-height:1.35}
-.pg .bcard .l2.full{display:-webkit-box;-webkit-line-clamp:2;overflow:hidden}
 .pg .hood.card h3,.pg .cardl h3{font-size:20px;line-height:1.1}
 .pg .hood.card small,.pg .cardl small{font-size:14px}
 .pg .l2{font-size:16px}
@@ -916,7 +916,7 @@ h1:focus,h2:focus{outline:none}
 .lfacts{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px}
 .lfacts span{flex:0 0 auto;white-space:nowrap;font-size:12.5px;line-height:1.2}
 .lfacts b{font-size:14px}
-.lmain>a{display:block;padding:8px 0 4px}
+.lmain>a{display:block;padding:12px 0 10px;min-height:44px}
 .lx{width:44px;min-width:44px}
 /* compare: each column head names the apartment on two lines, never cut to "City…" */
 .cmp-head .colh{grid-template-columns:minmax(0,1fr) 44px;align-items:center;padding:4px 0 2px 8px}
@@ -934,6 +934,7 @@ h1:focus,h2:focus{outline:none}
 .pg .btn.sm,.pg .pinl,.pg .nextl b{font-size:16px}
 .pg .link,.pg .rowstop .link,.pg .nextl small{font-size:14px}
 .pg .seeb{font-size:20px;min-height:56px}
+@media (max-width:359px){.kfc{padding-bottom:22px}.kfc .info{top:auto;bottom:4px;right:50%;transform:translateX(50%)}.pg .chip b{font-size:14px}.pg .seeb{font-size:18px}}
 </style>
 </head>
 <body>
@@ -2056,6 +2057,7 @@ function voicesSection(H){var loc=H.local||{},themes=[],by={};
   var h='<div id="sec-voices">';
   if(!vs.length)h+='<p class="lead" id="no-voices">'+NO_VOICES+'.</p>';
   vs.forEach(function(v){var t=v.theme||"other";if(!by[t]){by[t]=[];themes.push(t)}by[t].push(v)});
+  var isSafe=function(t){return /safety/i.test(t)||CRIME_RE.test(String(t).replace(/_/g," "))};themes=themes.filter(function(t){return !isSafe(t)}).concat(themes.filter(isSafe)); /* daily life first; safety talk after it */
   themes.forEach(function(t){var newest=function(a,b){return String(b.date||"")<String(a.date||"")?-1:String(b.date||"")>String(a.date||"")?1:0};
     var pos=by[t].filter(function(v){return /^pos/i.test(v.sentiment||"")}).sort(newest),neg=by[t].filter(function(v){return /^neg/i.test(v.sentiment||"")}).sort(newest),oth=by[t].filter(function(v){return !/^(pos|neg)/i.test(v.sentiment||"")}).sort(newest);
     var show=[],rest=[],i,k;
@@ -2194,7 +2196,7 @@ function clampBox(html,lines,id){return html?'<div class="clampw" data-clamp="'+
 /* One control for all the rows of a page. */
 function rowsTop(){return '<div class="rowstop"><button type="button" class="link" data-act="rows-all" aria-pressed="false">Open all</button></div>'}
 /* The key facts, always in view: four cells, the typical figure big and the range small beneath where there is one. */
-function strip(cells,dark){return '<div class="kstrip'+(dark?' dark':'')+'">'+cells.filter(Boolean).slice(0,4).map(function(c){return '<div'+(c.to?' role="button" tabindex="0" data-act="scrollto" data-to="'+c.to+'"':'')+'><b>'+c.b+'</b><span>'+c.s+'</span>'+(c.r||'')+'</div>'}).join("")+'</div>'}
+function strip(cells,dark){return '<div class="kstrip'+(dark?' dark':'')+'">'+cells.filter(Boolean).slice(0,4).map(function(c){return '<div><b>'+c.b+'</b><span>'+c.s+'</span>'+(c.r||'')+'</div>'}).join("")+'</div>'}
 function staticScale(vs){return '<ul class="qlist">'+SPEC_OPEN.map(function(s){var p=vs&&vs[s.measure];if(p==null)return "";p=Math.round(p);return '<li><b>'+esc(mLabel(s.measure))+'</b><span>'+esc(POINT_WORD[p]||NK)+'</span>'+pips(p)+'</li>'}).join("")+'</ul>'}
 function fitClamps(){[].forEach.call(view.querySelectorAll(".clampw"),function(w){var c=w.querySelector(".clamp"),b=w.querySelector(".morel");if(c.classList.contains("all")||c.scrollHeight>c.clientHeight+3)b.hidden=false})}
 
@@ -2399,13 +2401,13 @@ function costFact(us,cost,r,typ,kind,id){return cost!=null?{t:typ?"typical":"",b
 /* the short street-parking answer: the rule that changes what she does, in two or three words */
 var PARK_SHORT=[["overnight_parking","Overnight limits"],["resident_permit","Permit zones"],["alternate_side","Street-cleaning days"],["snow_emergency","Snow-day bans"],["meter_hours","Metered streets"]];
 function parkShort(H){var a=rulesOf(H,"parking_rules"),i;if(!a.length)return null;
-  for(i=0;i<RULE_FLAG.length;i++){var F=RULE_FLAG[i];if(a.some(function(r){return r.rule===F.rule&&F.re.test(r.summary||"")}))return F.rule==="overnight_parking"?"No overnight parking":"Permit by registration"}
+  for(i=0;i<RULE_FLAG.length;i++){var F=RULE_FLAG[i];if(a.some(function(r){return r.rule===F.rule&&F.re.test(r.summary||"")}))return F.rule==="overnight_parking"?"No overnight parking":"Resident permits only"}
   for(i=0;i<PARK_SHORT.length;i++){if(a.some(function(r){return r.rule===PARK_SHORT[i][0]}))return PARK_SHORT[i][1]}
   return pl(a.length,"rule")+" on record"}
 function distShort(m){if(m==null)return null;if(m<=1600)return Math.max(1,Math.round(m/WALK_M_PER_MIN))+" min walk";var mi=m/1609.34;return (mi<3?Math.round(mi*10)/10:Math.round(mi))+" miles"}
 /* "At a glance": what is around, as icon facts. Always the same facts in the same places; one that the data lacks is left out. */
 function glance(H){var t=H.traits||{},o=[],ps=parkShort(H);
-  if(t.restaurants_800m!=null)o.push(["fork",pl(r0(t.restaurants_800m),"restaurant")+(t.bars_800m!=null?", "+pl(r0(t.bars_800m),"bar"):""),"within a 10-minute walk"]);
+  if(t.restaurants_800m!=null)o.push(["fork",pl(r0(t.restaurants_800m),"restaurant")+(r0(t.bars_800m)>0?", "+pl(r0(t.bars_800m),"bar"):""),"within a 10-minute walk"]);
   if(t.park_walk_min!=null)o.push(["park",Math.max(1,r0(t.park_walk_min))+" min walk","to a park"]);
   if(t.dog_park_m!=null)o.push(["dog",distShort(t.dog_park_m),"to the dog park"]);
   if(t.supermarket_m_c!=null)o.push(["bag",distShort(t.supermarket_m_c),"to a supermarket"]);
@@ -2418,13 +2420,15 @@ function glance(H){var t=H.traits||{},o=[],ps=parkShort(H);
 function storyHtml(a,Y){var n=a.length,col=Y&&Y.mark?Y.mark.color:"var(--berry-deep)";
   return '<section class="sec" id="sec-day"><h2 class="h2s">A day in this experience</h2><div class="story" role="group" aria-label="'+n+' moments, side by side" tabindex="0">'+a.map(function(m,i){var s=sentences(m.text),cap=s.length>1&&s[0].length<=48?s[0]:"",rest=cap?s.slice(1).join(" "):m.text;
     return '<article class="scene" style="--yc:'+col+'"><div class="sct"><span class="sci">'+ptIcon(m.icon)+'</span><div><small>'+(i+1)+' of '+n+'</small><h3>'+esc(m.title)+'</h3></div></div>'+(cap?'<p class="scap">'+esc(cap)+'</p>':'')+'<p>'+esc(rest)+'</p></article>'}).join("")+'</div></section>'}
+/* a headline taken from prose is shown whole: the first candidate whose opening fits, else the plain fallback */
+function wholeHead(a,fallback){for(var i=0;i<a.length;i++){var t=a[i]?HL.first(a[i]):"";if(t&&!/…$/.test(t))return t}return fallback}
 function seeBtn(label,to,id,sub){return '<button type="button" class="btn main wide seeb" id="'+id+'" data-act="scrollto" data-to="'+to+'"><span>'+esc(label)+' ↓'+(sub?' <small>'+esc(sub)+'</small>':'')+'</span></button>'}
 /* an outside description as a pull quote; the source stays a link */
 function descSrc(d){var u=okUrl(d.url),src=d.source?String(d.source):(u?hostOf(u):"");return (u?'<a class="srcl" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(src)+' ↗</a>':esc(src||"Source not recorded")+' · no link in the data')+(d.about?' · about '+esc(String(d.about)):'')+(d.date?' · '+esc(dayStr(d.date,true)||String(d.date)):'')}
 function descText(d){return scrub(d.quote||d.text||d.excerpt).replace(/\s+/g," ").trim()}
 function pullPick(desc){var ok=desc.filter(function(d){return !CRIME_RE.test(descText(d))}),best=null;
   ok.forEach(function(d){if(!best&&(d.featured||d.best)&&descText(d).length<=240)best=d}); /* the data may name the one to feature */
-  ok.forEach(function(d){var n=descText(d).length;if(n>=40&&n<=200&&!best)best=d});
+  if(!best)ok.forEach(function(d){var n=descText(d).length;if(n>=40&&n<=150&&!best)best=d}); /* else the first that is short enough to be read at a glance */
   if(!best)ok.forEach(function(d){var n=descText(d).length;if(n>=40&&(!best||n<descText(best).length))best=d});
   return best&&descText(best).length<=240?best:null}
 function pullQuote(d){return d?'<figure class="pull" id="pull"><blockquote>'+esc(descText(d))+'</blockquote><figcaption>'+descSrc(d)+'</figcaption></figure>':''}
@@ -2458,7 +2462,7 @@ function vYear(Y){
   if(M.toll_round_trip!=null&&tollMail(M)!=null)costHow.push(tollMail(M)>0?"Tolls are the New York E-ZPass figure. By mail they are typically "+money(tollMail(M))+" a round trip.":"No tolls either way.");
   costHow.push(capFirst(["prices from "+SOURCES.listing,"drive times, with clear roads, from "+SOURCES.drive,"tolls from "+SOURCES.tolls,"train and bus from "+SOURCES.transit,"restaurant counts and walks to green space from "+SOURCES.map].join("; "))+".");
   h+='<section class="sec rows" id="sec-rows"><h2 class="h2s">More about this experience</h2>'+rowsTop();
-  if(scenes||prom||kat)h+=row("r-scene","The promise and the catch",HL.first(prom||kat||pr(Y,"scene")||Y.scenes),scenes+(prom||kat?'<div class="two"'+(scenes?' style="margin-top:10px"':'')+'>'+(prom?'<div class="panel love"><h3>The promise</h3><p>'+esc(prom)+'</p></div>':'')+(kat?'<div class="panel pause"><h3>The catch</h3><p>'+esc(kat)+'</p></div>':'')+'</div>':''),{sub:dm.length?"":hlSub(Y,"day","scene")});
+  if(scenes||prom||kat)h+=row("r-scene","The promise and the catch",wholeHead([prom,kat,pr(Y,"scene")||Y.scenes],"what you gain, and what you give up"),scenes+(prom||kat?'<div class="two"'+(scenes?' style="margin-top:10px"':'')+'>'+(prom?'<div class="panel love"><h3>The promise</h3><p>'+esc(prom)+'</p></div>':'')+(kat?'<div class="panel pause"><h3>The catch</h3><p>'+esc(kat)+'</p></div>':'')+'</div>':''),{sub:dm.length?"":hlSub(Y,"day","scene")});
   if(us.length)h+=row("r-cost","What it costs you",HL.yearCost(Y),allInLine(us)+'<div class="figs" style="margin-top:8px"><div>'+(f.cost!=null?'<b>'+m0(f.cost)+'</b><span>a month, all-in, typical</span>'+rngFrom(f.cr,m0):'<b>'+NK+'</b>')+'</div><div>'+(f.drive!=null?'<b>'+r0(f.drive)+' min</b><span>to Mom and Dad, typical</span>'+rngFrom(f.dr,r0," min"):'<b>'+NK+'</b>')+'</div></div>'+(M.transit_min!=null?'<p style="margin-top:8px">'+r0(M.transit_min)+' minutes by train and bus, typically.</p>':'')+(M.sqft!=null?'<p>A typical place is '+r0(M.sqft)+' sq ft.</p>':'')+howHtml('<p>'+costHow.map(esc).join('</p><p>')+'</p>'),{sub:hlSub(Y,"cost","to_parents")});
   if(M.restaurants_800m!=null||M.park_walk_min!=null)h+=row("r-out","Going out and green space",HL.out(M),'<ul>'+lis(yf.slice(2).concat(hlSub(Y,"green")&&hlSub(Y,"going_out")?[hlSub(Y,"green")]:[]))+'</ul>'+how("restaurant counts and walks to green space from "+SOURCES.map),{sub:hlSub(Y,"going_out","green")});
   if(SPEC_OPEN.length&&Y.vs_queens&&SPEC_OPEN.some(function(s){return Y.vs_queens[s.measure]!=null}))h+=row("r-queens","Compared to staying in Queens",HL.queens(Y.vs_queens),SCALE_KEY+'<div class="ylist">'+SPEC_OPEN.map(function(s){var p=Y.vs_queens[s.measure],dk=YEAR_DIFF_KEY[s.measure],d=dk&&Y.vs_queens_diff?Y.vs_queens_diff[dk]:null;p=p==null?null:Math.round(p);
@@ -2526,7 +2530,7 @@ function vHood(H){
   h+='<section class="sec rows" id="sec-rows"><h2 class="h2s">More about '+esc(hoodTitle(H))+'</h2>'+rowsTop();
   h+=row("r-voices","What residents say",HL.voices(H),voicesSection(H),{sub:hlSub(H,"residents_say","residents")});
   if(descRest.length)h+=row("sec-described","How others describe it",HL.described({described:descRest}),descRest.map(descQ).join(""),{sub:hlSub(H,"described")});
-  if(good||watch||hScene)h+=row("r-good","The good and the catch",HL.first(pr(H,"good_for_her")||loc.good_for_her||pr(H,"watch_for")||pr(H,"scene")),(hScene?'<div style="margin-bottom:10px">'+hScene+'</div>':'')+'<div class="two">'+(good?'<div class="panel love"><h3>Good for you</h3>'+good+'</div>':'')+(watch?'<div class="panel pause"><h3>Watch for</h3>'+watch+'</div>':'')+'</div>',{sub:hlSub(H,"good","cost")});
+  if(good||watch||hScene)h+=row("r-good","The good and the catch",wholeHead([pr(H,"good_for_her")||loc.good_for_her,pr(H,"watch_for")||loc.watch_for,pr(H,"scene")],"what is good here, and what to watch"),(hScene?'<div style="margin-bottom:10px">'+hScene+'</div>':'')+'<div class="two">'+(good?'<div class="panel love"><h3>Good for you</h3>'+good+'</div>':'')+(watch?'<div class="panel pause"><h3>Watch for</h3>'+watch+'</div>':'')+'</div>',{sub:hlSub(H,"good","cost")});
   h+=row("r-here","The area in detail",HL.here(H),amenList([[IC.after,"Food and coffee",food],[IC.pup,"For the dog",dogBits.length?dogBits.join("; ")+".":NK+"."],[IC.bag,"Errands",errBits.length?errBits.join("; ")+".":NK+"."],[IC.sun,"To Mom and Dad",HL.trip(H)+(H.transit_min!=null?"; "+r0(H.transit_min)+" min by train and bus":"")+"."],[IC.ppl,"Who lives here (census)",whoBits.length?whoBits.join("; ")+".":NK+"."]])+'<div id="sec-how">'+howHtml(hw.join(""))+'</div>',{sub:hlSub(H,"going_out","green","to_parents","dog")});
   h+=row("r-rules","Local rules",HL.hoodRules(H),rulesBody(H,carBits.length?"Places here: "+carBits.join("; ")+".":""),{sub:hlSub(H,"local_rules","parking","rules"),chip:flagN?flagN+" to know":(!pRules.length?"Ask":""),chipKind:"ask"});
   if(rev)h+=row("r-hreviews","Reviews of the buildings",rev.head,rev.body);
@@ -2867,7 +2871,7 @@ window.addEventListener("resize",fitTray);
 document.addEventListener("toggle",function(e){var d=e.target,id=d&&d.getAttribute&&d.getAttribute("data-row");if(id&&view.contains(d))(OPENED[current]=OPENED[current]||{})[id]=d.open},true);
 window.addEventListener("hashchange",function(){var r=location.hash.replace(/^#/,"")||"lives";if(routeOf(parse(r))!==current){closeSheet();go(r)}});
 
-window.__houseHunt={bldgs:function(){return BLDGS.map(function(B){return {id:B.id,slug:SLUG.bldg[B.id],hood:B.hood.id,units:B.units.map(function(u){return u.id})}})},state:function(){return {saved:S.saved.slice(),pick:S.pick.slice(),sort:S.sort}},tint:function(id,k){return U_BY[id]?tintOf(U_BY[id],k):null},sentences:sentences,HL:HL,HL_MAX:HL_MAX,cleanText:cleanText,looksDump:looksDump,hoodWhere:hoodWhere,hoodTitle:hoodTitle,headline:function(kind,id,key){var o=kind==="unit"?U_BY[id]:kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;
+window.__houseHunt={bldgs:function(){return BLDGS.map(function(B){return {id:B.id,slug:SLUG.bldg[B.id],hood:B.hood.id,units:B.units.map(function(u){return u.id})}})},state:function(){return {saved:S.saved.slice(),pick:S.pick.slice(),sort:S.sort}},tint:function(id,k){return U_BY[id]?tintOf(U_BY[id],k):null},sentences:sentences,payNote:payNote,ptBody:ptBody,parkShort:parkShort,distShort:distShort,HL:HL,HL_MAX:HL_MAX,cleanText:cleanText,looksDump:looksDump,hoodWhere:hoodWhere,hoodTitle:hoodTitle,headline:function(kind,id,key){var o=kind==="unit"?U_BY[id]:kind==="hood"?H_BY[id]:Y_BY[id];if(!o)return null;
     return key==="trip"?HL.trip(kind==="unit"?o.moments.sun:o):key==="queens"?HL.queens(o.vs_queens):key==="reviews"?HL.reviews(o.ratings):HL[key](o)},map:function(){return HHMAP},marks:function(){return YEARS.map(function(Y){return Y.mark})},mapHoods:function(id){return mapData().neighborhoods.filter(function(h){return !id||h.year===id}).length},tourText:tourText,tourQs:function(id){return U_BY[id]?tourQs(U_BY[id]):null},TINT:TINT,SOURCES:SOURCES};
 syncSliders();renderCounts();renderTray();renderFoot();
 go((function(){try{return location.hash.replace(/^#/,"")}catch(e){return ""}})()||"lives");
