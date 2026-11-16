@@ -73,6 +73,8 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
   const noSideScroll = async (pg, tag) => { const o = await pg.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]); assert(o[0] <= o[1], `horizontal page scroll on ${tag}: ${o[0]} > ${o[1]}`); };
   const centre = async (pg, sel) => pg.evaluate(s => { const e = document.querySelector(s), r = e.getBoundingClientRect(), tray = document.getElementById('tray').getBoundingClientRect(); window.scrollBy(0, r.top + r.height / 2 - tray.top / 2); }, sel);
   // First screen map -> New York City -> a mark -> card -> "See places" -> the neighborhood -> Back; then an experience: List -> Map -> a mark -> Back -> List.
+  // the page lists the experiences by how many apartments each shows, most first (chips, tiles, Next)
+  const yearsBySize = d => { const cnt = {}; (d.units || []).filter(u => u.unit != null && String(u.unit).trim() !== '' && !/(^|[:_-])plan-/i.test(String(u.id || ''))).forEach(u => { cnt[u.hood_id] = (cnt[u.hood_id] || 0) + 1; }); const n = y => (y.hood_ids || []).reduce((s, id) => s + (cnt[id] || 0), 0); return d.years.map((y, i) => [y, i]).sort((a, b) => (n(b[0]) - n(a[0])) || (a[1] - b[1])).map(x => x[0]); };
   const mapFlow = async (pg, d, tag, o) => { o = o || {};
     const w = pg.viewportSize().width, hoodByName = n => d.neighborhoods.filter(h => (h.name + (h.state ? ', ' + h.state : '')) === n);
     await pg.waitForSelector('.life');
@@ -86,7 +88,7 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
       return { top: Math.round(r.top), text: t.textContent, fill: p.getAttribute('fill'), d: p.getAttribute('d'), clipped: tr.right > r.right + 0.5 || tr.left < r.left - 0.5 || c.scrollWidth > c.clientWidth + 1 }; }));
     const rows = new Set(chips.map(c => c.top)).size;
     if (w >= 360) assert(rows <= 2, `${tag}: six chips take ${rows} rows`); else console.log(`${tag}: chips take ${rows} rows at ${w}px`);
-    chips.forEach((c, i) => { const y = d.years[i], full = String(y.display_label || y.label).replace(/ Year$/, ' Experience'), short = full.replace(/^The\s+/, '').replace(/\s+Experience$/, '');
+    chips.forEach((c, i) => { const y = yearsBySize(d)[i], full = String(y.display_label || y.label).replace(/ Year$/, ' Experience'), short = full.replace(/^The\s+/, '').replace(/\s+Experience$/, '');
       assert(!/Year\b/.test(c.text), 'chip says experience, not year: ' + c.text);
       assert.strictEqual(c.text, w < 520 ? short : full, 'chip label'); assert(!c.clipped, `${tag}: chip text is clipped: ${c.text}`); });
     // one colour and shape per experience: the tile marker is the chip's (and so the map's)

@@ -659,8 +659,12 @@ def data_4(M, R, S):
     named = lambda pat: M[M.building_name.str.contains(pat, case=False, regex=True) | M.address.str.contains(pat, case=False, regex=True)]
     # ---- S1: the three units
     for lid, why in [("apartmentlist:p10919258-2M", "D1: 98-76 Queens Blvd 2M (dogs open + price to verify)"), ("apartmentlist:p1412214-2182", "D2: Halstead Parsippany 2182 (first-floor pattern)"),
-                     ("rc:trulia:b2751605456:Unit_K3-02:351211069", "D3: Residences at The Summit K3-02 (stale page, never seen live)")]:
+                     ]:
         ok(lid not in S.index, f"IC3 {why} must not be shown")
+    # D3 (Residences at The Summit K3-02) was "stale page AND never seen live: two open items, not shown". Owner, 2026-11-16:
+    # a listing never re-read is not an open item, so the stale page is its ONE open item and it is shown with that asterisk.
+    k3_ = "rc:trulia:b2751605456:Unit_K3-02:351211069"
+    ok(k3_ not in S.index or (S.at[k3_, "confirm_what"] == "listing" and S.at[k3_, "confirm_asterisk"] == "yes"), "IC3 D3: K3-02, if shown, carries the stale page as its one open item (listing)")
     ok("apartmentlist:p1412214-2182" not in R.index, "IC3 D2: 2182 is removed before ranking by the sibling rule")
     k3 = "rc:trulia:b2751605456:Unit_K3-02:351211069"
     if k3 in M.index:

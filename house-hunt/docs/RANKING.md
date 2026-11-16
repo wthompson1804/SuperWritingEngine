@@ -41,6 +41,7 @@ A listing goes through these steps in order. Counts of each step are in `docs/RU
    listing, eligibility). Two or more: "sketchy", excluded (`data/excluded_sketchy.csv`). One: kept with a certainty
    factor of 0.97. Also sketchy: a listing 60+ days old by its age field, no unit and no building named, a thin
    syndicated feed, an all-in under 60 percent of the neighborhood median, a live check that judged the listing doubtful.
+   **A listing that was simply never re-read is not an open item** (owner, 2026-11-16; section 7).
 8. **Evidence rules** (`avoid.py`): unit exclusions and avoid buildings (up to 5 avoid cards per neighborhood).
 
 Phone answers (`data/evidence/call_answers.csv`, when present) outrank every other source and settle the fact they answer.
@@ -139,19 +140,32 @@ the boundary cases (nearest and second-nearest within 10 percent) are in `data/l
 ## 7. Selection: what is shown
 
 In each neighborhood, in this order: dominated units last (beaten or tied on all eight parts by another unit there),
-then rank score, units seen live first, then `listing_id`.
+then rank score, then `listing_id`.
 
-- **Shown**: not an avoid building; at most **one** open item (the open gate facts plus a missing live check); the
-  building has evidence rows; a current `ok`, `asterisk` or `disclose` verdict. One open item is shown with an asterisk
-  (`confirm_asterisk`, `confirm_what`, `confirm_why`).
+- **Shown**: not an avoid building; at most **one** open item, and the open items are the open gate facts only
+  (elevator; dogs allowed; eligibility; whether the listing is real and available); the building has evidence rows; a
+  current `ok`, `asterisk` or `disclose` verdict. One open item is shown with an asterisk (`confirm_asterisk`,
+  `confirm_what`, `confirm_why`); two or more open gate facts and the unit is not shown.
+- **No "not re-checked" flag** (owner, 2026-11-16: "Forget call check"). A unit that was never re-read in an evidence
+  pass (live status blank, not checked, or blocked, such as the Trulia rows that cannot be re-read) carries no open
+  item and no asterisk for that, and it counts against the unit in no rule: not in "two or more open", not in the
+  thin-neighborhood rule, not as a second open item beside an elevator doubt, not in the certainty factor, not in the
+  order among equal scores. `rank.open_item_count` ignores the live status on purpose. **What a re-read found still
+  counts**, through the facts that already existed: gone → removed; a changed price → the price is updated; a page that
+  shows no units, is stale beyond the thresholds or describes a different building, or a checker's "verify the price"
+  note → the open item "listing" or "availability". Reviewed verdicts stay required for every shown unit. Each unit
+  keeps the date its price was read (`last_seen`, `price_seen_at` in the page data) and its `live_status` as
+  information. `data/needs_live_check.csv` is no longer written; the page data keeps `awaiting_live_check` as an empty
+  array.
 - **Up to 8 per building**, in rank order; no cap per neighborhood; `more_in_building` on each shown unit.
 - **Thin neighborhoods** (owner, 2026-11-16). A neighborhood whose shown list is exactly one apartment keeps it only
-  if it is (a) well attested: nothing open at all (seen live, no asterisk; disclosures do not count), and (b) promising:
+  if it is (a) well attested: a real apartment with no open gate fact (no asterisk; disclosures and a listing never
+  re-read do not count), and (b) promising:
   its rank score is at or above the median rank score of the apartments shown in its experience, the median taken before
   this rule. Otherwise the apartment stays in `data/ranked_units.csv` with `shown = False` and
   `not_shown_reason = thin_neighborhood`, and the neighborhood is not on the page. Applied once; a neighborhood with two
   shown apartments is not touched.
-- Candidate and phone-call lists (`hood_rank`, `data/needs_confirmation.csv`, `data/needs_live_check.csv`) take two per building.
+- Candidate and phone-call lists (`hood_rank`, `data/needs_confirmation.csv`) take two per building.
 - Neighborhood order inside an experience (`scripts/page_data_extras.py`): the mean rank score of the three best shown
   places, minus 2 points per missing place; the top three first, the rest on "show more".
 
@@ -188,7 +202,9 @@ then rank score, units seen live first, then `listing_id`.
 | 2026-11-16 | Elevator gate never rests on a unit label |
 | 2026-11-16 | Consistency pass: one elevator rule for every stage (a near-miss lot neither passes nor fails; "high-rise" on the manager's page and a page-stated unit floor count as real height everywhere); frozen area profiles for the experiences; unit moved out of the address; duplicate rule across label spellings; a ranged address is one building; conflicting dog policy is one open fact, not "sketchy"; the dog part rewards a limit of 25 lb or more (the text said 40); in-unit laundry no longer counts a shared laundry room; cap tested on the unrounded sum |
 | 2026-11-16 | Owner: only real apartments (floor plans, building prices and co-living rooms are `not_an_apartment`); thin-neighborhood rule |
+| 2026-11-16 | Owner ("Forget call check"): the "not re-checked live" flag is dropped. A listing never re-read is not an open item in any rule; the thin rule's "well attested" is "no open gate fact"; ties are broken by `listing_id` only; `needs_live_check.csv` and the "awaiting live check" list are gone. A problem a re-read found still counts |
 
 Superseded and no longer true anywhere: "at most 2 per building" for the shown list, "best 10 per neighborhood", "top 15
 candidates then the best 10", a floor-plan row shown with an availability asterisk, "weight limit stated ≥ 40 lb",
-conflicting dog policy as sketchy or as a drop. `scripts/rank_v1_backup.py` keeps version 1.
+conflicting dog policy as sketchy or as a drop, "a missing live check is its own open item", "units seen live first"
+among equal scores, the "waiting for a live check" list. `scripts/rank_v1_backup.py` keeps version 1.

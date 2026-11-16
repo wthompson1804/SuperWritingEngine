@@ -535,3 +535,65 @@ walkthrough's ceilings are 3.6 screens for both page kinds.
   never both.
 - The all-in sheet opens with "A month, everything included."
 - Still to align with the copy's vocabulary: "place(s)" on buttons, counts, My list and "Save this place".
+
+## UI pass 6
+
+(2026-11-16. Owner's review of the pass-5 phone screenshots, plus the copy editor's and the pipeline's notes of the same
+evening. Files: `site/index.html`, `scripts/build_site.py`, `scripts/site_walkthrough_test.js`.)
+
+### What changed
+
+- **About points no longer repeat the page** (`ptRestates`, `aboutBox(..., mode)`). On a neighborhood a point whose icon
+  is one "At a glance" or the key facts already carry (fork, cocktail, coffee, park, dog, train, home, bag; car and clock
+  when the drive is shown) and whose text has a number is left out; a point with no number is a description and stays;
+  the catch always stays. On an experience a point that gives the monthly cost, the drive or the tolls again is left out.
+- **Stale counts** (`staleCount`): a sentence or point in About that gives a number of apartments, buildings or
+  neighborhoods other than the one the page counts is left out. Every count shown is taken from the arrays at render
+  time (`UNITS`, `BLDGS`, `H.units`, `H.bldgs`, `Y.hoods`); the footer no longer reads `meta.counts`.
+- **Pull quote**: only `described[].featured === true` (`pullPick`); none marked, none shown; never chosen by length.
+  Type is 17 px: a 35-word quote is six lines at most at 390 px (tested).
+- **Vocabulary**: "apartments" and "buildings" everywhere ("See the 23 buildings ↓ / 55 apartments", "Save this
+  apartment", "Apartment 508", My list, limits, the map's card and legend). "all-in" is gone from the interface: the key
+  facts, the building strip and the cost box say "a month, everything included", cards and rows after that say "a month";
+  the first screen says "Prices are for a month, everything included." once. "net-effective", "cap", "gate", "live
+  check" are out of the open text (a receipt line "Rent (net-effective)" reads "Rent (with the offer)").
+- **Prices in the open are rounded to $10** (`pm`), the way the written text rounds them; the exact figure is in the
+  cost box of the apartment.
+- **Experience and neighborhood layout**: tighter rhythm; the top-three cards show one sentence clamped to two lines;
+  List / Map sits in the heading row of the list; "Show more" is one row; avoid / worth a call moved into the "More
+  about…" group (on an experience they are one row, "Not on the list"). The owner then dropped the height limit: the
+  walkthrough prints heights and no longer asserts them.
+- **Storyboard** (`storyHtml`, `mountStory`): "1 of 3" under the heading, two 44 px arrow buttons, dots, left / right /
+  Home / End keys, scroll-snap, the next card peeking; the page itself never scrolls sideways (tested).
+- **One-apartment building**: the header carries the apartment's line (`#b-apt`: apartment, bedrooms, sq ft, floor or
+  "floor not published", date). The row is not opened by default.
+- **The rent offer is said once** on an apartment (`offerLine`): the normal-month figure when the data has it, else the
+  written cost subhead when it is about the offer, else "A special offer applies; ask what a normal month costs." The
+  full wording is behind "The offer in full". The second rent box, the warning line, the "Needs a call" chip, the
+  "special offer" / "net-effective rent" items under Good to know and the duplicate tour question are gone
+  (`discsShown`, `oneRentQ`, `noTwins`).
+- **Apartment line and catch**: an open apartment starts with its `host.line` (two sentences at most) and its
+  `host.catch` as "To ask"; the cost subhead sits under "What it costs". "About the building" shows only the building's
+  own text, points and catch.
+- **Row subheads** show only when they add an action or a fact the headline lacks (`subAdds`); on building rows only
+  when every apartment of the building has the same one (`bSub`).
+- **Floor plans / no identifier**: `isPlan`, `hasOwnId`: a floor plan or an apartment without a unit identifier is never
+  listed, counted, linked or saved; a neighborhood left with nothing leaves the lists.
+- **Small experiences**: tiles are ordered by number of apartments; under five a tile says "Only 2 apartments right
+  now" in place of the ranges; no "typical" tag over one item; no "Top pick" among one neighborhood or one building.
+- **Building names** are tidied at render time (`cleanName`); an unnamed building's title is its street address.
+- **"Not re-checked"** rows and wording are removed (owner decision); `awaiting_live_check` is not read.
+- "Before the car sleeps on the street" is "Street parking rules here". The bottom bar is a `nav`; "Open all" no longer
+  carries `aria-pressed`. Dead code removed (30 unused functions, among them `unitCard`).
+
+### Left for later
+
+- Audit items not done: 19 (rounding of distances and differences inside rows), 20 (headlines that count), 24 (dates
+  without a year), 25 (unknowns in compare), 26 ("Only show what differs" default), 28 (pipeline words behind "See how
+  we got this"), 32 (scroll position on reload), 33 (rem font sizes), 36 (remote fonts); the bar still reads "Saved · N".
+- The key-facts label "a month, everything included" wraps to three lines in its cell at 390 px.
+- A card's sentence can be cut by the two-line clamp.
+- `staleCount` drops a whole sentence when its count is stale; the copy should be regenerated after each cut instead.
+- Stored medians and ranges (`years[].medians`, `all_in_range`) are still read for the experience strip and tiles; only
+  counts are recomputed.
+- The map's own chips keep the data's order of experiences, not the first screen's order by size.
