@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/wvxf-dwi5.json?%24select=count%28%2A%29+as+n&%24where=boroid%3D%271%27+AND+block%3D%2702167%27+AND+lot%3D%270010%27",
+ "retrieved_at": "2026-11-16T00:41:36+00:00",
+ "status": 200,
+ "path": "raw/evidence_b19/1c29345ba9579989.json",
+ "source": "evidence_b19"
+}

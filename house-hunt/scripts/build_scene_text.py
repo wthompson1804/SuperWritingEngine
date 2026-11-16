@@ -302,10 +302,13 @@ WALK = ["walk1", "walk2", "walk3"]                    # a weekday, a Saturday ni
 
 def main():
     lg = C.table(LG).set_index("hood_id")
-    years, hoods, errors = [], [], []
+    years, hoods, errors, stale = [], [], [], []
     for b in parse(SOURCE):
         ctx, f, evidence = {"kind": b["kind"], "id": b["id"]}, b["f"], []
         cols = YEAR_COLS if b["kind"] == "year" else HOOD_COLS
+        if b["kind"] == "hood" and b["id"] not in lg.index:       # the data no longer has this neighborhood
+            stale.append(b["id"])
+            continue
         try:
             lacking = [k for k in list(cols) + (WALK if b["kind"] == "year" else []) if not f.get(k)]
             if lacking:
@@ -343,6 +346,8 @@ def main():
     print(f"{len(years)} years, {len(hoods)} neighborhoods written; {len(errors)} problems")
     for e in errors:
         print("  ", e)
+    if stale:
+        print(f"skipped {len(stale)} drafts whose neighborhood is no longer in {LG}: {stale}")
     return 1 if errors else 0
 
 

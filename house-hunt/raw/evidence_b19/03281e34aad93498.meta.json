@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/ygpa-z7cr.json?%24select=major_category%2Ccount%28%2A%29+as+n&%24where=bbl%3D%271020020055%27+AND+received_date%3E%3D%272026-05-16%27&%24group=major_category&%24order=n+desc",
+ "retrieved_at": "2026-11-16T00:41:23+00:00",
+ "status": 200,
+ "path": "raw/evidence_b19/03281e34aad93498.json",
+ "source": "evidence_b19"
+}

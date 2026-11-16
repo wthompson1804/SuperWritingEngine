@@ -32,11 +32,11 @@ ct:bridgeport|Bridgeport, Connecticut|15|2|parks
 ct:bridgeport|Seaside Park (Connecticut)|30|3|waterfront
 ct:bridgeport|Bridgeport, Connecticut|194|2|food and nightlife
 nj:city-of-orange|Orange, New Jersey|145|1|transit
-nj:jersey-city-journal-square|Journal Square|0|2|known for
+nj:jersey-city-journal-square|Journal Square|0|2|transit
 nj:jersey-city-journal-square|Jersey City, New Jersey|581|3|landmark
 nj:jersey-city-journal-square|Jersey City, New Jersey|332|2|transit
 nj:new-brunswick|New Brunswick, New Jersey|204|3|food and nightlife
-nj:new-brunswick|New Brunswick, New Jersey|9|2|known for
+nj:new-brunswick|New Brunswick, New Jersey|10|2|housing feel
 nj:parsippany-troy-hills|Parsippany–Troy Hills, New Jersey|34+35|2|housing feel
 nj:parsippany-troy-hills|Parsippany–Troy Hills, New Jersey|177|2|transit
 ny:flushing-willets-point|Flushing, Queens|2|3|main street
@@ -52,7 +52,7 @@ nj:east-orange|East Orange, New Jersey|99|2|parks
 nj:east-orange|East Orange, New Jersey|101|2|event
 nj:englewood|Englewood, New Jersey|81|2|parks
 ny:east-flatbush-erasmus|East Flatbush, Brooklyn|0|1|housing feel
-ny:jamaica-hills-briarwood|Briarwood, Queens|5|2|known for
+ny:jamaica-hills-briarwood|Briarwood, Queens|5|2|landmark
 ny:jamaica-hills-briarwood|Briarwood, Queens|35|2|history
 ny:old-astoria-hallets-point|Astoria, Queens|237|3|waterfront
 ny:old-astoria-hallets-point|Astoria Park|3|2|parks
@@ -76,3 +76,245 @@ nj:bloomfield|Bloomfield, New Jersey|133|2|main street
 nj:bloomfield|Bloomfield, New Jersey|2|2|landmark
 nj:englewood|Englewood, New Jersey|82|3|parks
 ny:old-astoria-hallets-point|Astoria, Queens|232|2|transit
+ny:east-flatbush-farragut|East Flatbush, Brooklyn|0|1|housing feel
+ny:peekskill|Peekskill, New York|102|2|landmark
+ny:port-chester|Capitol Theatre (Port Chester, New York)|0|2|landmark
+ny:prospect-lefferts-gardens-wingate|Prospect Lefferts Gardens|29|2|housing feel
+ny:prospect-lefferts-gardens-wingate|Prospect Lefferts Gardens|2|2|landmark
+ny:washington-heights-south-|Washington Heights, Manhattan|280|2|parks
+ct:beacon-falls|Beacon Falls, Connecticut|2|1|waterfront
+ct:beacon-falls|Beacon Falls, Connecticut|72|2|transit
+ct:beacon-falls|Beacon Falls, Connecticut|8|2|history
+ct:brookfield|Brookfield, Connecticut|39|2|main street
+ct:fairfield|Fairfield, Connecticut|123|3|parks
+ct:fairfield|Fairfield, Connecticut|115|3|event
+ct:fairfield|Fairfield, Connecticut|114|2|landmark
+ct:hamden|Hamden, Connecticut|20|3|parks
+ct:hamden|Hamden, Connecticut|133|2|event
+ct:hamden|Hamden, Connecticut|136|2|parks
+ct:seymour|Seymour, Connecticut|75|2|transit
+ct:seymour|Seymour, Connecticut|69|2|event
+ct:stratford|Stratford, Connecticut|6|2|history
+ct:stratford|Stratford, Connecticut|72|2|parks
+ct:trumbull|Trumbull, Connecticut|185|2|parks
+nj:belleville|Belleville, New Jersey|16|2|parks
+nj:belleville|Belleville, New Jersey|85|2|transit
+nj:bound-brook|Bound Brook, New Jersey|63|3|parks
+nj:bound-brook|Bound Brook, New Jersey|103|1|transit
+nj:carteret|Carteret, New Jersey|10|2|parks
+nj:carteret|Carteret, New Jersey|122|2|transit
+nj:dover|Dover, New Jersey|141|3|main street
+nj:dover|Dover, New Jersey|76|3|event
+nj:dover|Dover, New Jersey|80|2|parks
+nj:east-brunswick|East Brunswick, New Jersey|79|2|event
+nj:east-brunswick|East Brunswick, New Jersey|87|1|parks
+nj:east-rutherford|East Rutherford, New Jersey|9|2|landmark
+nj:east-rutherford|East Rutherford, New Jersey|132|2|transit
+nj:elizabeth|Elizabeth, New Jersey|59|3|main street
+nj:elizabeth|Elizabeth, New Jersey|23|2|main street
+nj:elizabeth|Elizabeth, New Jersey|60|2|housing feel
+nj:jersey-city-west-side|West Side, Jersey City|4|3|parks
+nj:jersey-city-west-side|West Side, Jersey City|6|3|housing feel
+nj:jersey-city-west-side|West Side, Jersey City|11|2|transit
+nj:long-branch|Long Branch, New Jersey|156|2|transit
+nj:mount-arlington|Mount Arlington, New Jersey|2|3|waterfront
+nj:mount-arlington|Mount Arlington, New Jersey|4|2|housing feel
+nj:rahway|Rahway, New Jersey|106|3|main street
+nj:rahway|Rahway, New Jersey|108|2|landmark
+nj:rahway|Rahway, New Jersey|133|2|parks
+nj:riverdale|Riverdale, New Jersey|3|1|waterfront
+nj:south-orange|South Orange, New Jersey|108|2|parks
+nj:south-orange|South Orange, New Jersey|160|2|landmark
+nj:wayne|Wayne, New Jersey|5|2|landmark
+nj:weehawken|Weehawken, New Jersey|98|3|main street
+nj:weehawken|Weehawken, New Jersey|44|3|waterfront
+ny:brighton-beach|Brighton Beach|55|3|waterfront
+ny:brighton-beach|Brighton Beach|54|2|main street
+ny:elmhurst|Elmhurst, Queens|171+172|2|parks
+ny:forest-hills|Forest Hills, Queens|95|3|main street
+ny:forest-hills|Forest Hills, Queens|183|2|transit
+ny:inwood|Inwood, Manhattan|62|3|food and nightlife
+ny:inwood|Inwood, Manhattan|111|3|parks
+ny:inwood|Inwood Hill Park|3|3|parks
+ny:kew-gardens|Kew Gardens, Queens|96|3|food and nightlife
+ny:kew-gardens|Kew Gardens, Queens|60|2|parks
+ny:kew-gardens|Kew Gardens, Queens|138|2|transit
+ny:patchogue|Patchogue, New York|97|2|transit
+ny:patchogue|Patchogue, New York|17|2|waterfront
+ny:valley-stream|Valley Stream, New York|2|2|transit
+ct:oxford|Oxford, Connecticut|46|2|parks
+nj:atlantic-highlands|Atlantic Highlands, New Jersey|106|3|waterfront
+nj:atlantic-highlands|Atlantic Highlands, New Jersey|107|2|main street
+nj:atlantic-highlands|Atlantic Highlands, New Jersey|131|2|transit
+nj:bordentown|Bordentown, New Jersey|160|3|food and nightlife
+nj:bordentown|Bordentown, New Jersey|161|3|event
+nj:bordentown|Bordentown, New Jersey|157|2|transit
+nj:edgewater|Edgewater, New Jersey|54|3|waterfront
+nj:edgewater|Edgewater, New Jersey|124|2|waterfront
+nj:garwood|Garwood, New Jersey|13|3|housing feel
+nj:garwood|Garwood, New Jersey|12|2|transit
+nj:hawthorne|Hawthorne, New Jersey|101|2|transit
+nj:jersey-city-downtown|Downtown Jersey City|2|3|housing feel
+nj:jersey-city-downtown|Downtown Jersey City|3|3|food and nightlife
+nj:jersey-city-downtown|Exchange Place (Jersey City)|5|2|waterfront
+nj:maplewood|Maplewood, New Jersey|82|3|parks
+nj:maplewood|Maplewood, New Jersey|125+126|3|main street
+nj:maplewood|Maplewood, New Jersey|84|2|parks
+nj:montvale|Montvale, New Jersey|155|3|event
+nj:montvale|Montvale, New Jersey|61|1|landmark
+nj:morris-plains|Morris Plains, New Jersey|4|2|housing feel
+nj:morris-plains|Morris Plains, New Jersey|5|2|transit
+nj:old-bridge|Old Bridge Township, New Jersey|3|2|housing feel
+nj:plainfield|Plainfield, New Jersey|116|3|landmark
+nj:plainfield|Plainfield, New Jersey|239|2|parks
+nj:plainfield|Plainfield, New Jersey|303|2|transit
+nj:princeton|Princeton, New Jersey|7|1|transit
+nj:ridgewood|Ridgewood, New Jersey|96|3|parks
+nj:ridgewood|Ridgewood, New Jersey|100|2|parks
+nj:roxbury|Roxbury Township, New Jersey|95|1|transit
+nj:somerville|Somerville, New Jersey|19|3|food and nightlife
+nj:somerville|Somerville, New Jersey|14|3|housing feel
+nj:somerville|Somerville, New Jersey|131|2|transit
+nj:teaneck|Teaneck, New Jersey|156|3|event
+nj:teaneck|Teaneck, New Jersey|192|2|parks
+ny:astoria-east-woodside-north-|Woodside, Queens|2|2|housing feel
+ny:bay-ridge|Bay Ridge, Brooklyn|123|3|waterfront
+ny:bay-ridge|Bay Ridge, Brooklyn|127|2|transit
+ny:bay-ridge|Bay Ridge, Brooklyn|150|2|housing feel
+ny:bedford-stuyvesant-east-|Bedford–Stuyvesant, Brooklyn|5|3|housing feel
+ny:bedford-stuyvesant-east-|Bedford–Stuyvesant, Brooklyn|2|2|main street
+ny:bedford-stuyvesant-east-|Bedford–Stuyvesant, Brooklyn|235|2|transit
+ny:bedford-stuyvesant-west-|Bedford–Stuyvesant, Brooklyn|5|3|housing feel
+ny:bedford-stuyvesant-west-|Bedford–Stuyvesant, Brooklyn|2|2|main street
+ny:bedford-stuyvesant-west-|Bedford–Stuyvesant, Brooklyn|235|2|transit
+ny:east-harlem-south-|East Harlem|274|2|transit
+ny:flatbush-west-ditmas-park-parkville|Ditmas Park, Brooklyn|24|3|housing feel
+ny:flatbush-west-ditmas-park-parkville|Parkville, Brooklyn|11|2|housing feel
+ny:flatlands|Flatlands, Brooklyn|34|2|main street
+ny:flatlands|Flatlands, Brooklyn|79|2|transit
+ny:flatlands|Flatlands, Brooklyn|18|2|history
+ny:gravesend-east-homecrest|Homecrest, Brooklyn|13|3|housing feel
+ny:gravesend-east-homecrest|Homecrest, Brooklyn|21+22|2|parks
+ny:gravesend-east-homecrest|Gravesend, Brooklyn|135|2|transit
+ny:gravesend-south-|Gravesend, Brooklyn|135|2|transit
+ny:gravesend-south-|Gravesend, Brooklyn|15|1|parks
+ny:gravesend-west-|Gravesend, Brooklyn|135|2|transit
+ny:gravesend-west-|Gravesend, Brooklyn|15|1|parks
+ny:hempstead|Hempstead (village), New York|100|2|transit
+ny:hempstead|Hempstead (village), New York|34|2|history
+ny:long-beach|Long Beach, New York|81|3|housing feel
+ny:long-beach|Long Beach, New York|86|2|main street
+ny:long-beach|Long Beach, New York|85|2|waterfront
+ny:madison|Madison, Brooklyn|135|3|waterfront
+ny:midwood|Midwood, Brooklyn|63|3|housing feel
+ny:midwood|Midwood, Brooklyn|57|3|event
+ny:midwood|Midwood, Brooklyn|90|2|parks
+ny:murray-hill-broadway-flushing|Broadway–Flushing, Queens|6|3|housing feel
+ny:murray-hill-broadway-flushing|Broadway–Flushing, Queens|25|2|transit
+ny:murray-hill-broadway-flushing|Murray Hill, Queens|167|2|landmark
+ny:new-springville-willowbrook-bulls-head-travis|Travis, Staten Island|18|3|event
+ny:new-springville-willowbrook-bulls-head-travis|Willowbrook, Staten Island|5|2|parks
+ny:new-springville-willowbrook-bulls-head-travis|New Springville, Staten Island|7|2|main street
+ny:pomonok-electchester-hillcrest|Pomonok, Queens|3|1|housing feel
+ny:pomonok-electchester-hillcrest|Pomonok, Queens|22|2|main street
+ny:pomonok-electchester-hillcrest|Hillcrest, Queens|264|3|parks
+ny:riverdale-spuyten-duyvil|Riverdale, Bronx|36|3|parks
+ny:riverdale-spuyten-duyvil|Riverdale, Bronx|186|3|landmark
+ny:riverdale-spuyten-duyvil|Spuyten Duyvil, Bronx|41|2|transit
+ny:rockaway-beach-arverne-edgemere|Rockaway Beach, Queens|2|3|waterfront
+ny:rockaway-beach-arverne-edgemere|Rockaway Beach, Queens|81|2|transit
+ny:rockaway-beach-arverne-edgemere|Edgemere, Queens|9|3|housing feel
+ny:sheepshead-bay-manhattan-beach-gerritsen-beach|Sheepshead Bay, Brooklyn|135|3|waterfront
+ny:sheepshead-bay-manhattan-beach-gerritsen-beach|Gerritsen Beach, Brooklyn|25|2|housing feel
+ny:sheepshead-bay-manhattan-beach-gerritsen-beach|Manhattan Beach, Brooklyn|1|2|waterfront
+ny:st-george-new-brighton|St. George, Staten Island|181|3|housing feel
+ny:st-george-new-brighton|New Brighton, Staten Island|120|3|landmark
+ny:st-george-new-brighton|St. George, Staten Island|253|3|transit
+ny:sunnyside|Sunnyside, Queens|15|3|housing feel
+ny:sunnyside|Sunnyside, Queens|212|2|parks
+ny:tompkinsville-stapleton-clifton-fox-hills|Tompkinsville, Staten Island|27|3|main street
+ny:tompkinsville-stapleton-clifton-fox-hills|Stapleton, Staten Island|133|2|transit
+ny:tompkinsville-stapleton-clifton-fox-hills|Clifton, Staten Island|10|2|housing feel
+ny:upper-west-side-manhattan-valley|Upper West Side|1|2|parks
+ny:upper-west-side-manhattan-valley|Manhattan Valley|8|2|housing feel
+ny:wallkill|Wallkill, Orange County, New York|51|2|main street
+ny:wallkill|Wallkill, Orange County, New York|54|2|event
+ny:washington-heights-north-|Hudson Heights, Manhattan|116|3|event
+ny:washington-heights-north-|Hudson Heights, Manhattan|115|3|landmark
+ny:washington-heights-north-|Hudson Heights, Manhattan|5|2|parks
+ct:west-haven|West Haven, Connecticut|86|3|waterfront
+ct:west-haven|West Haven, Connecticut|131|2|transit
+nj:fort-lee|Fort Lee, New Jersey|0|2|waterfront
+nj:fort-lee|Fort Lee, New Jersey|192|2|housing feel
+nj:fort-lee|Fort Lee, New Jersey|120|2|event
+nj:jersey-city|Jersey City, New Jersey|314|3|housing feel
+nj:jersey-city|Jersey City, New Jersey|316|3|food and nightlife
+nj:jersey-city-greenville|Greenville, Jersey City|2|2|housing feel
+nj:jersey-city-greenville|Greenville, Jersey City|4|2|waterfront
+nj:jersey-city-greenville|Greenville, Jersey City|3|1|main street
+nj:jersey-city-mcginley-square|McGinley Square|11|2|main street
+nj:jersey-city-mcginley-square|Jersey City, New Jersey|331|1|main street
+nj:jersey-city-newport|Newport, Jersey City|10|2|food and nightlife
+nj:jersey-city-newport|Jersey City, New Jersey|319|2|housing feel
+nj:jersey-city-newport|Newport, Jersey City|6|2|transit
+nj:jersey-city-the-heights|The Heights, Jersey City|7|3|housing feel
+nj:jersey-city-the-heights|Central Avenue (Hudson Palisades)|15|3|main street
+nj:jersey-city-the-heights|The Heights, Jersey City|6|2|parks
+nj:north-bergen|North Bergen, New Jersey|58+59|3|main street
+nj:north-bergen|North Bergen, New Jersey|52|3|waterfront
+nj:red-bank|Red Bank, New Jersey|102|3|landmark
+nj:red-bank|Red Bank, New Jersey|111|2|event
+nj:springfield|Springfield Township, Union County, New Jersey|32|2|parks
+nj:springfield|Springfield Township, Union County, New Jersey|100|2|transit
+ny:bensonhurst|Bensonhurst, Brooklyn|86|2|housing feel
+ny:bensonhurst|Bensonhurst, Brooklyn|181|2|transit
+ny:east-new-york-north-|East New York, Brooklyn|90|2|parks
+ny:east-new-york-north-|East New York, Brooklyn|127|2|food and nightlife
+ny:flatbush|Flatbush, Brooklyn|157|3|landmark
+ny:flatbush|Flatbush, Brooklyn|173|2|main street
+ny:glen-cove|Glen Cove, New York|119|3|parks
+ny:glen-cove|Glen Cove, New York|123|3|event
+ny:glen-cove|Glen Cove, New York|50|2|waterfront
+ny:hamilton-heights-sugar-hill|Hamilton Heights, Manhattan|4|2|history
+ny:hamilton-heights-sugar-hill|Hamilton Heights, Manhattan|23|2|housing feel
+ny:kingsbridge-heights-van-cortlandt-village|Van Cortlandt Village|31|3|housing feel
+ny:kingsbridge-heights-van-cortlandt-village|Van Cortlandt Village|42|3|parks
+ny:kingsbridge-heights-van-cortlandt-village|Kingsbridge Heights, Bronx|23|2|landmark
+ny:lagrange|LaGrange, New York|10|3|parks
+ny:lagrange|LaGrange, New York|23|2|parks
+ny:manhattanville-west-harlem|Manhattanville, Manhattan|36|2|main street
+ny:middletown|Middletown, Orange County, New York|36|3|housing feel
+ny:middletown|Middletown, Orange County, New York|46|2|event
+ny:new-paltz|New Paltz (village), New York|99|3|parks
+ny:new-paltz|New Paltz (village), New York|100|3|parks
+ny:new-paltz|New Paltz (village), New York|86|3|event
+ny:pelham-bay-country-club-city-island|City Island, Bronx|50|3|food and nightlife
+ny:pelham-bay-country-club-city-island|Pelham Bay (neighborhood), Bronx|13|3|main street
+ny:pelham-bay-country-club-city-island|Pelham Bay (neighborhood), Bronx|1|2|parks
+ny:upper-east-side-lenox-hill-roosevelt-island|Upper East Side|87|3|landmark
+ny:upper-east-side-lenox-hill-roosevelt-island|Lenox Hill|14|3|main street
+ny:upper-east-side-lenox-hill-roosevelt-island|Roosevelt Island|14|3|parks
+ny:williamsbridge-olinville|Williamsbridge, Bronx|32|2|housing feel
+ny:williamsbridge-olinville|Williamsbridge, Bronx|86|2|transit
+ny:williamsbridge-olinville|Williamsbridge, Bronx|36|2|parks
+ny:windsor-terrace-south-slope|Windsor Terrace, Brooklyn|70|3|parks
+ny:windsor-terrace-south-slope|Windsor Terrace, Brooklyn|96|2|main street
+ny:windsor-terrace-south-slope|South Slope, Brooklyn|4|3|housing feel
+ny:washington-heights-south-|Washington Heights, Manhattan|259|3|parks
+nj:south-orange|South Orange, New Jersey|100|2|main street
+nj:wayne|Wayne, New Jersey|34|3|housing feel
+nj:weehawken|Weehawken, New Jersey|183|2|transit
+ny:forest-hills|Forest Hills, Queens|5|3|landmark
+nj:teaneck|Teaneck, New Jersey|10|2|main street
+ny:astoria-central-|Astoria, Queens|51|3|landmark
+ny:astoria-central-|Astoria, Queens|237|3|waterfront
+ny:astoria-central-|Astoria, Queens|232|2|transit
+ny:astoria-east-woodside-north-|Astoria, Queens|51|3|landmark
+ny:flatbush-west-ditmas-park-parkville|Ditmas Park, Brooklyn|21|3|food and nightlife
+ny:north-corona|Corona, Queens|31|3|landmark
+ny:north-corona|Corona, Queens|54|2|main street
+ct:west-haven|West Haven, Connecticut|38|2|history
+nj:jersey-city|Liberty State Park|32|3|waterfront
+nj:north-bergen|North Bergen, New Jersey|169|2|transit
+nj:edgewater|Edgewater, New Jersey|189|2|transit
+ny:kew-gardens-hills|Kew Gardens Hills, Queens|142|2|main street

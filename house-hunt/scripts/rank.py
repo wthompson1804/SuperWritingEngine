@@ -83,6 +83,27 @@ def parking_rank(t):
     return np.nan
 
 
+SETTLED_BY_PHONE = "confirmed_by_phone"
+WINDOW_END = "2026-12-15"
+PARKING_DISCLOSURE = "Overnight street parking is restricted here: confirm the building has a space, and its cost"
+
+
+def needs_parking_disclosure(severity, parking_type, parking_fee) -> bool:
+    """Step 3. The town bans or permit-restricts overnight street parking (severity ban / permit / seasonal, from the
+    reviewed table) and the unit's parking is not confirmed as included or available at the building: the parking
+    type is street, or it is unknown and no fee is known either. A garage, lot or covered space, or an unknown type
+    with a stated fee (a space is on offer at a price, or included at $0), needs no disclosure."""
+    if str(severity or "").strip() not in ("ban", "permit", "seasonal"):
+        return False
+    pr = parking_rank(parking_type)
+    if pr == 1:
+        return True
+    if pr == pr and pr is not None and pr >= 2:
+        return False
+    fee = pd.to_numeric(pd.Series([parking_fee]), errors="coerce").iloc[0]
+    return bool(pd.isna(fee))
+
+
 def color_table(u):
     """places.color() per building, cached on disk; returns a flat frame indexed by addr_key."""
     import places
@@ -134,6 +155,10 @@ def main():
                       (s("dogs_allowed").str.lower().eq("no"), "dogs not allowed (confirmed)"),
                       (wl < 25, "dog weight limit under 25 lb"), (fl < 2, "ground-floor unit"),
                       (s("live_status").eq("gone"), "listing gone at live check"),
+                      # 4b: a listing page unchanged for more than six months when it was read (build_master.py: listing_stale)
+                      (s("listing_stale").eq("remove"), "stale listing: " + s("listing_stale_why")),
+                      # a move-in date after the window (only a phone answer can put one here; the listing gate checks the page's date)
+                      (s("available_date").str.match(r"\d{4}-\d\d-\d\d") & (s("available_date").str[:10] > WINDOW_END), "available after " + WINDOW_END),
                       # ordinary screening ("income 3x rent", "40x rent") is not income-restricted housing (W10)
                       (s("income_requirement").map(parsers.income_restricted), "income-restricted unit"),
                       (s("building_type").str.contains("senior|62\\+", case=False), "senior housing"),
@@ -181,18 +206,24 @@ def main():
     vk = vd("kind").where(v_ast, "")
     # elevator: no page or record states one (base), or the evidence pass looked and could not confirm it (D2, D7, D9),
     # or the reviewer's verdict says it is not established for this building
+    # a fact answered on the phone is settled: neither an older evidence row nor an earlier reviewer's asterisk reopens it
+    phone_e, phone_d = s("elevator_basis").eq(SETTLED_BY_PHONE), s("dogs_allowed_basis").eq(SETTLED_BY_PHONE)
+    phone_av = s("call_available").ne("")
     base_e = s("elevator_basis").isin(["inferred", "", "unknown"]) | s("elevator").str.lower().ne("yes")
-    inf_e = base_e | s("elevator_evidence_open").ne("") | vk.eq("elevator")
+    inf_e = base_e | ((s("elevator_evidence_open").ne("") | vk.eq("elevator")) & ~phone_e)
     fb, fk = s("unit_floor_basis"), s("unit_floor_label_kind")
-    floor_settled = fb.isin(["confirmed", "stated"])
+    floor_settled = fb.isin(["confirmed", "stated", SETTLED_BY_PHONE])
     floor_from_label_ok = fb.eq("inferred") & fk.eq("simple") & (fl >= 3)
     inf_f = ~floor_settled | vk.eq("floor")          # not published: unknown, or only read from the unit number
     u["floor_basis_note"] = np.where(floor_from_label_ok, "read from the unit number", "")
     # dogs: allowed must be stated or confirmed, and dogs must be NAMED as allowed (D2, D3): an unconfirmed evidence
     # row, "pets upon approval", "case by case" or small pets with dogs unnamed leave the fact open
     base_d = s("dogs_allowed").str.lower().ne("yes")
-    dog_open = base_d | s("dogs_evidence_open").ne("") | vk.eq("dogs")
-    dog_small = s("dog_size_only").ne("") & wl.isna()
+    dog_open = base_d | ((s("dogs_evidence_open").ne("") | vk.eq("dogs")) & ~phone_d)
+    no_limit = s("dog_weight_limit_lb").str.lower().eq("no limit")
+    dog_small = s("dog_size_only").ne("") & wl.isna() & ~no_limit
+    # 4a: "weight restrictions apply" / a weight limit with no number passes like "small dogs", with the same tour question
+    dog_wl_unstated = s("dog_weight_unstated").ne("") & wl.isna() & ~no_limit & ~dog_small
     # An elevator "inferred from height" only counts as one open fact when a page or record gives the building 6+ floors.
     # Where the height itself was read off a unit label ("36D", "801"), the elevator is simply unknown: not shown.
     bfl = pd.to_numeric(s("building_floors"), errors="coerce").where(~s("building_floors_basis").isin(["inferred", ""]))
@@ -210,8 +241,11 @@ def main():
     lease_open = (lm > 13) | s("price_lowest_of_terms").eq("yes") | vk.eq("lease_term")
     cost_open = (u.all_in >= CAP - NEAR_CAP) & (pd.to_numeric(s("all_in_unknown_count"), errors="coerce").fillna(0) >= 1)
     plan_only = s("unit").map(parsers.unit_label_key).eq("") & (s("detail_level").eq("building_floorplan") | s("listing_id").str.contains(":plan-") | s("unit").str.strip().ne(""))
-    avail_open = plan_only | vk.isin(["not_available"])
-    listing_open = s("listing_warning").ne("") | vk.isin(["unverified", "wrong_building"])
+    avail_open = (plan_only | vk.isin(["not_available"])) & ~phone_av
+    # 4b: a page last changed more than 60 days before it was read (no second site), or an availability date over six
+    # months old, is the open item "listing" by rule; it is not counted twice when a reviewer already wrote it up as availability
+    stale_open = s("listing_stale").eq("open") & ~vk.isin(["not_available"]) & ~phone_av
+    listing_open = (s("listing_warning").ne("") | vk.isin(["unverified", "wrong_building"]) | stale_open) & ~(phone_av & s("listing_warning").eq(""))
     elig_open, condo_open, other_open = vk.eq("restricted"), vk.eq("coop_condo"), vk.eq("other")
     unknown_lines = s("all_in_unknown_lines").str.replace("building fees (part)", "some required fees", regex=False).str.replace("building fees", "required fees").str.replace("parking fee", "parking") \
         .map(lambda t: " / ".join(x for x in t.split("; ") if x in ("pet rent", "parking", "required fees", "some required fees")))
@@ -231,7 +265,9 @@ def main():
         ("cost", cost_open, "cost near the cap", "Cost near the cap: " + unknown_lines + " not published (counted as $0), and the all-in figure is within $" + str(NEAR_CAP) + " of $3,000.",
          "What are the pet rent, parking and required monthly fees?"),
         ("availability", avail_open, "availability", "This is a floor-plan price, not a named unit: no unit, floor or date could be checked.", "Which unit is available at this price, on which floor, and from when?"),
-        ("listing", listing_open, "listing", "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160], "Is this listing for this building, and is it genuine?"),
+        ("listing", listing_open, "listing", np.where(s("listing_warning").ne(""), "The evidence pass raised a warning about this listing: " + s("listing_warning").str[:160],
+                                                      "The listing may be stale: " + s("listing_stale_why") + "."),
+         np.where(s("listing_warning").ne(""), "Is this listing for this building, and is it genuine?", "Is this unit still available? The listing page has not changed in over two months.")),
         ("eligibility", elig_open, "eligibility", "", "Is this unit open to any renter?"),
         ("condo", condo_open, "condo rules", "", "What are the building's rules for renting this unit?"),
         ("other", other_open, "other", "", ""),
@@ -252,7 +288,12 @@ def main():
     what_l, why_l, q_l, keys_l, disc_l = [], [], [], [], []
     net_eff = s("rent_basis_kind").eq("net_effective").values
     offer_txt = s("rent_offer_text").str[:160].values
-    cols_ = [(k, f.values, lab, np.asarray(floor_why if k == "floor" else (w if not isinstance(w, str) else np.full(len(u), w, dtype=object))), (None if k == "floor" else q)) for k, f, lab, w, q in OPEN]
+    cols_ = [(k, f.values, lab, np.asarray(floor_why if k == "floor" else (w if not isinstance(w, str) else np.full(len(u), w, dtype=object))),
+              (None if k == "floor" else (q if isinstance(q, str) else np.asarray(q)))) for k, f, lab, w, q in OPEN]
+    # step 3: overnight street-parking rule of the town, where the unit's parking is not confirmed at the building
+    park_d = np.array([needs_parking_disclosure(sv, pt, pf) for sv, pt, pf in zip(s("street_overnight_severity"), s("parking_type"), s("parking_fee"))], dtype=bool)
+    po_town, po_rule, po_url, po_sev = s("street_overnight_town").values, s("street_overnight_rule").values, s("street_overnight_url").values, s("street_overnight_severity").values
+    wl_un, wl_txt = dog_wl_unstated.values, s("dog_weight_unstated").str.replace(r"^yes: ", "", regex=True).str.split(" || ", regex=False).str[0].str[:140].values
     fq = pd.Series(floor_q, index=u.index).str.rstrip("; ").values
     for i in range(len(u)):
         whats, whys, qs, keys, disc = [], [], [], [], []
@@ -260,7 +301,7 @@ def main():
             if f[i]:
                 reviewed = v_key.iloc[i] == k
                 why_ = v_why.iloc[i] if reviewed and v_why.iloc[i] else str(w[i])
-                q_ = v_q.iloc[i] if reviewed and v_q.iloc[i] else (fq[i] if k == "floor" else q)
+                q_ = v_q.iloc[i] if reviewed and v_q.iloc[i] else (fq[i] if k == "floor" else (q if isinstance(q, str) else str(q[i])))
                 if k in DISCLOSURE_KEYS:
                     disc.append({"what": "condo rented by its owner" if k in ("condo", "other") else ("floor not published" if k == "floor" else lab),
                                  "why": why_, "question": FLOOR_DISCLOSURE if k == "floor" else (q_ or "")})
@@ -269,6 +310,11 @@ def main():
         if net_eff[i]:
             disc.append({"what": "net-effective rent", "why": "The rent shown is the average after a special offer, not the monthly payment." + (" Offer: " + offer_txt[i] if offer_txt[i] else ""),
                          "question": "What is the full monthly rent, and when is the first full payment due?"})
+        if wl_un[i]:
+            disc.append({"what": "dog weight limit not published", "why": "The page says a weight limit or weight restrictions apply and gives no number: \"" + wl_txt[i] + "\".",
+                         "question": parsers.DOG_WEIGHT_QUESTION})
+        if park_d[i]:
+            disc.append({"what": "overnight street parking", "why": f"{po_town[i]}: {po_rule[i]}", "question": PARKING_DISCLOSURE, "url": po_url[i], "severity": po_sev[i]})
         qs += [d["question"] for d in disc]
         disc_l.append(json.dumps(disc) if disc else "")
         what_l.append("; ".join(whats)); why_l.append(" ".join(whys)); q_l.append("; ".join(x for x in qs if x)); keys_l.append(";".join(keys))
@@ -276,7 +322,8 @@ def main():
     u["disclosures"] = disc_l
     u["to_confirm"] = [q + "; " if q else "" for q in q_l]
     u["tour_confirm"] = (pd.Series(np.where(inf_f, FLOOR_DISCLOSURE + "; ", ""), index=u.index)
-                         + pd.Series(np.where(dog_small, "Confirm the dog weight limit in pounds; ", ""), index=u.index)).str.rstrip("; ")
+                         + pd.Series(np.where(dog_small | dog_wl_unstated, parsers.DOG_WEIGHT_QUESTION + "; ", ""), index=u.index)).str.rstrip("; ")
+    u["phone_settled"] = (pd.Series(np.where(phone_e, "elevator;", ""), index=u.index) + np.where(phone_d, "dogs allowed;", "") + np.where(phone_av, "availability;listing;", "")).str.rstrip(";")
     # the one open fact, in plain words, for the asterisk on the page (owner, 2026-11-15: a unit with exactly one open
     # gate fact is shown with an asterisk instead of being held back)
     u["confirm_what"], u["confirm_why"] = what_l, why_l
@@ -357,7 +404,7 @@ def main():
                 + pts(controlled, False, 2.5) + pts(has("package_room"), False, 1))
     comfort = (pts(laundry.str.contains("in unit|in_unit|in-unit|yes"), laundry.str.strip().ne(""), 2.5)
                + pts(has("gym"), False, 1) + pts(has("roof_deck_or_outdoor_space"), False, 1) + pts(has("balcony_some_units"), False, 0.5)
-               + pts(has("coworking_or_lounge"), False, 1.5) + pts(s("elevator_basis").isin(["confirmed", "amenities_page", "official_record", "stated"]), True, 1))
+               + pts(has("coworking_or_lounge"), False, 1.5) + pts(s("elevator_basis").isin([SETTLED_BY_PHONE, "confirmed", "amenities_page", "official_record", "stated"]), True, 1))
     year = pd.to_numeric(a("year_built").replace("", np.nan), errors="coerce").fillna(n("pluto_year"))
     u["building_security_pts"], u["building_comfort_pts"] = security, comfort
 

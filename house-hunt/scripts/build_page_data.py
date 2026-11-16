@@ -45,7 +45,7 @@ def unit(r):
         if q.startswith("Confirm the floor"):
             qs.append(q + f" (floor {int(float(g('unit_floor')))} is read from the unit number {g('unit')})")
         elif q:
-            qs.append(q + (" (the page says small dogs and gives no number)" if "dog weight" in q else ""))
+            qs.append(q + ((" (the page says small dogs and gives no number)" if g("dog_size_note") else " (the page says weight restrictions apply and gives no number)") if "dog weight" in q else ""))
     if g("rent_needs_call") == "yes":
         qs.append("Is the advertised rent the full monthly rent, or the average after free months? What is the first full payment and when is it due?")
     for line in str(g("all_in_unknown_lines") or "").split("; "):
@@ -65,7 +65,7 @@ def unit(r):
                  "first_full_payment_note": g("rent_first_full_payment_note"), "needs_call": g("rent_needs_call") == "yes"},
         "all_in": g("all_in"), "all_in_gross": g("all_in_gross"), "all_in_lines": j(r.get("all_in_lines"), []),
         "all_in_unknown": [x for x in str(g("all_in_unknown_lines") or "").split("; ") if x],
-        "elevator": {"value": g("elevator"), "basis": g("elevator_basis")},
+        "elevator": {"value": g("elevator"), "basis": g("elevator_basis"), "listing_site_only": g("elevator_aggregator_only") == "yes"},
         "dog": {"allowed": g("dogs_allowed"), "basis": g("dogs_allowed_basis"), "weight_limit_lb": g("dog_weight_limit_lb"), "size_note": g("dog_size_note"), "size_only_source": g("dog_size_only"), "policy_text": g("dog_policy_text"), "pet_rent": g("pet_rent")},
         "parking": {"type": g("parking_type"), "rank": g("parking_rank"), "fee": g("parking_fee"), "fee_note": g("parking_fee_note"), "options_text": g("parking_options")},
         "amenities": {"pool": g("pool") or None, "pool_text": g("pool_text"), "doorman": g("doorman") or None, "doorman_text": g("doorman_text"), "controlled_access": g("controlled_access"),
@@ -108,7 +108,8 @@ def unit(r):
                     "reviewed": g("review_verdict")},
         # conditions to know that are not open gate facts (owner, 2026-11-16): lease term, cost near the cap, condo rented by
         # its owner, net-effective rent. Any number may sit beside at most one open gate fact (confirm).
-        "disclosures": [{"what": d.get("what"), "why": d.get("why"), "question": d.get("question") or None} for d in j(r.get("disclosures"), [])],
+        "disclosures": [{"what": d.get("what"), "why": d.get("why"), "question": d.get("question") or None, "url": d.get("url") or None, "severity": d.get("severity") or None}
+                        for d in j(r.get("disclosures"), [])],
         "more_in_building": g("more_in_building"),
         "cost_check": {"cap_margin": g("cap_margin"), "unknown_count": g("all_in_unknown_count"), "lease_term_months": g("rent_lease_term_months"), "price_12_month": g("rent_12_month_price")},
         "confidence": g("confidence"), "tour_questions": qs,
@@ -238,7 +239,9 @@ def main():
                     "toll_basis": {"assumes": "New York E-ZPass", "rate_time": "weekend off-peak", "mail_rate_field": "toll_round_trip_mail", "note": parsers.TOLL_NOTE},
                     "notes": ["Drive times are free-flow estimates without traffic.", parsers.TOLL_NOTE, "An asterisk on rent means a special offer applies; see the rent terms.",
                               "A floor marked 'read from the unit number' is not stated on the page; confirm it on the tour.",
-                              "A place with an asterisk has one thing still to confirm (elevator, floor, dog policy or a live re-check of the listing); the text beside it says what and why.",
+                              "A place with an asterisk has one thing still to confirm (elevator, dogs allowed, whether the listing is real and available, or a live re-check of the listing); the text beside it says what and why.",
+                              "Disclosures are things to know that never remove a place: floor not published, lease term, cost near the cap, net-effective rent, condo rented by its owner, a dog weight limit with no number, and a town rule restricting overnight street parking where the building's parking is not confirmed.",
+                              "An elevator marked 'listing_site_only' is stated in a listing site's amenity list or text and has not been confirmed on the building's own page.",
                               "Unknown cost lines count as $0 and are named on each receipt."]},
            "years": years, "neighborhoods": hoods, "units": [unit(r) for _, r in shown.iterrows()],
            "avoid": [unit(r) for _, r in avoid.iterrows()], "held": [unit(r) for _, r in held.iterrows()],

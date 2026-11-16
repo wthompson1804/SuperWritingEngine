@@ -1,19 +1,31 @@
 #!/usr/bin/env python3
 """Check the written scene text against the data it cites.
 
-Reads data/reference/scene_text_years.csv and data/reference/scene_text_neighborhoods.csv and, for every row:
+Reads data/reference/scene_text_years.csv (the six experiences; the key column is still `year_label`) and
+data/reference/scene_text_neighborhoods.csv and, for every row and every prose column
+(years: display_label, tagline, subhead, scene, promise, catch, host_intro, host_walkthrough;
+ neighborhoods: scene, good_for_her, watch_for, host_intro):
 
-1. every number in the prose (digits, decimals, dollar amounts, clock times, years, precinct numbers) must be
-   "shown" by at least one item in that row's evidence_json;
-2. every evidence item is looked up again in its source file (file, field, row filter, aggregation). The text
-   passes when the CURRENT value still supports what was written:
+1. every number in the prose (digits, decimals, dollar amounts, clock times, years) must be "shown" by at least one
+   item in that row's evidence_json;
+2. every evidence item is looked up again in its source (file, field, row filter, aggregation). Besides the CSVs there
+   are virtual tables: data/enriched/*.json (complete round-trip tolls per building) and
+   site/data.json#years|neighborhoods|units (the page's own unit-weighted figures). The text passes when the CURRENT
+   value still supports what was written:
      - a shown number must still be what the current value rounds to (transform),
-     - a claim without a number ("no bars", "tolls not fully known") must still satisfy its `holds_if` test,
-     - a cited local rule must still be in local_rules.csv with the same summary, and every number quoted
-       from it must be in that summary,
+     - a claim without a number ("no bars", "most homes are houses") must still satisfy its `holds_if` test,
+     - a cited local rule must still be in local_rules.csv / local_rules_round2.csv with the same summary, and every
+       number quoted from it must be in that summary,
      - a paraphrase of resident comments must rest on the same positive / mixed / negative counts;
-3. house style: word limits, no question marks, no em or en dashes, no "not ... but", no spelled-out quantities
-   (so that rule 1 cannot be dodged), no wording about race, ethnicity or religion, no dollar rents.
+3. house style: word limits (and 3 paragraphs of 40 to 60 words for host_walkthrough), no question marks, no em or en
+   dashes, no "not ... but", no spelled-out quantities (so that rule 1 cannot be dodged), no wording about race,
+   ethnicity or religion, no listing-ad hype words, no dollar amounts of 1,000 or more outside the host fields;
+4. no crime wording in any open field (crime, violent, burglar, theft, "per 1,000", "safer than", safe, police).
+   Two fixed wordings are allowed, each only with a test in the evidence: "one of the safest spots on the whole list"
+   (neighborhood in the lowest fifth by violent rate among those on the page; one field only) and "the safety limit
+   we set" (watch_for only; violent rate of 8.0 or more, where Jamaica's 9.8 is the limit);
+5. across rows, the host voice must not read like a form letter: at most 3 host_intro texts may open with the same 3
+   words, and no run of 6 words may appear in more than a tenth of them (the fixed toll wording is exempt).
 
 A value that moved but still rounds to the same words is reported as drift, not failure.
 
@@ -360,7 +372,7 @@ def check_style(kind, col, text):
         out.append(f"{col}: the 'safest' clause appears more than once")
     if AT_LIMIT in text and col != "watch_for":
         out.append(f"{col}: the safety-limit clause is allowed in watch_for only")
-    m = NUMBER_WORDS.search(text)
+    m = NUMBER_WORDS.search(text.replace(SAFEST, ""))
     if m:
         out.append(f"{col}: spelled-out quantity '{m.group(0)}' (write digits and cite them)")
     words = len(text.split())

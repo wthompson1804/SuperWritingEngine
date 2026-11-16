@@ -1,0 +1,7 @@
+{
+ "url": "https://data.cityofnewyork.us/resource/e5aq-a4j2.json?%24select=device_type%2Cdevice_status%2Ccount%28%2A%29+as+n&%24where=bbl%3D%271020020055%27&%24group=device_type%2Cdevice_status",
+ "retrieved_at": "2026-11-16T00:41:26+00:00",
+ "status": 200,
+ "path": "raw/evidence_b19/44e1a4ba56feab2a.json",
+ "source": "evidence_b19"
+}

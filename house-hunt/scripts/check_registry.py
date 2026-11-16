@@ -39,6 +39,8 @@ DISPLAY = {  # pattern -> why it is kept but not scored
     r"^(parking_text|optional_fees_text|dog_weight_text|dogs_allowed_note|elevator_note)$": "source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)",
     r"^(price_term_text|price_lease_quote|price_lease_source|pluto_lot_address|review_kind)$": "source sentence or record behind the lease-term asterisk and the NYC lot check (independent check 2)",
     r"^(dob_active_elevators)$": "the city's count of active passenger elevators on the lot: gate input in build_master.py, asserted in this script",
+    r"^(call_notes|call_income_multiple|call_called_at|call_building_called_at|call_available|required_fees_phone)$": "phone answers (data/evidence/call_answers.csv): notes and when the call was made; the fee total is read by all_in.py",
+    r"^(page_modified_date|page_modified_source|listing_stale_days|listing_stale_why|elevator_aggregator_only|street_overnight_town|street_overnight_rule|street_overnight_url)$": "the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure",
     r"^(disclosures|more_in_building)$": "shown on the unit card: conditions to know (never an open gate fact), and further showable units in the building",
     r"^(duplicate_listing_ids)$": "other listings of the same unit, merged into this row (their links are in also_seen_at)",
     r"^(near_vs_baseline|crime_latest|crime_source|crime_year|nyc_record_flags)$": "context shown when she asks how a score was reached",
@@ -77,13 +79,13 @@ def shown_violations():
     # A fact that fails outright (no elevator, floor under 2, dogs not allowed) is never shown.
     el = col("elevator").str.lower()
     flag(el.isin(["no", "conflicting"]), "elevator contradicted or conflicting")
-    open_e = (el != "yes") | ~col("elevator_basis").isin(["confirmed", "stated", "official_record", "amenities_page", "community_page"]) | (col("elevator_evidence_open") != "")
+    open_e = (el != "yes") | ~col("elevator_basis").isin(["confirmed_by_phone", "confirmed", "stated", "official_record", "amenities_page", "community_page"]) | (col("elevator_evidence_open") != "")
     fl, fb, fk = num("unit_floor"), col("unit_floor_basis"), col("unit_floor_label_kind")
     flag(fl < 2, "floor under 2")
-    open_f = ~(fb.isin(["confirmed", "stated"]) | ((fb == "inferred") & (fk == "simple") & (fl >= 3)))
+    open_f = ~(fb.isin(["confirmed_by_phone", "confirmed", "stated"]) | ((fb == "inferred") & (fk == "simple") & (fl >= 3)))
     dg = col("dogs_allowed").str.lower()
     flag(dg == "no", "dogs not allowed")
-    flag((dg == "yes") & ~col("dogs_allowed_basis").isin(["confirmed", "stated", "community_page", "amenities_page"]), "dogs-allowed basis is inferred or unknown")
+    flag((dg == "yes") & ~col("dogs_allowed_basis").isin(["confirmed_by_phone", "confirmed", "stated", "community_page", "amenities_page"]), "dogs-allowed basis is inferred or unknown")
     open_d = (dg != "yes") | (col("dogs_evidence_open") != "")
     open_l = ~col("live_status").isin(["live", "changed"])
     # independent check 2: lease term over 13 months (D8), cost near the cap with an unknown line (D12), a floor-plan
@@ -91,12 +93,16 @@ def shown_violations():
     open_lease = (num("price_lease_months") > 13) | (col("price_lowest_of_terms") == "yes")
     open_cost = (num("all_in") >= CAP - 100) & (num("all_in_unknown_count").fillna(0) >= 1)
     open_avail = (S.unit.map(parsers.unit_label_key) == "") & ((col("detail_level") == "building_floorplan") | col("listing_id").str.contains(":plan-") | (S.unit.str.strip() != ""))
-    open_listing = col("listing_warning") != ""
+    phone = col("phone_settled")                   # facts answered on the phone (rank.py): no longer open, whatever an older row or verdict says
+    by_phone = lambda lab: phone.str.split(";").map(lambda xs: lab in xs)
+    open_avail = open_avail & ~by_phone("availability")
+    stale_rule = (col("listing_stale") == "open") & ~by_phone("listing")
+    open_listing = ((col("listing_warning") != "") | stale_rule)
     # GATE facts count toward "at most one open"; DISCLOSURES (lease term, cost near the cap, condo rented by its owner,
     # net-effective rent) never do, but must be listed on the unit (owner, 2026-11-16)
     # (a floor that is not published is a disclosure too: owner, 2026-11-16; a floor under 2 is still flagged above)
     opens = {"elevator": open_e, "dogs allowed": open_d, "availability": open_avail, "listing": open_listing, "eligibility": open_e & False}
-    not_published = ~fb.isin(["confirmed", "stated"])
+    not_published = ~fb.isin(["confirmed_by_phone", "confirmed", "stated"])
     flag(not_published & ~col("disclosures").str.contains('"what": "floor not published"', regex=False), "floor not published but the disclosure is missing")
     flag(not_published & ~col("tour_confirm").str.contains("confirm it is above the ground floor"), "floor not published but the tour question is missing")
     disc = col("disclosures")
@@ -112,8 +118,16 @@ def shown_violations():
     flag(vdisc.isin(["coop_condo", "other"]) & ~disc.str.contains('"what": "condo rented by its owner"', regex=False), "a reviewer's condo verdict is not among the disclosures")
     flag((vdisc == "lease_term") & ~disc.str.contains('"what": "lease term"', regex=False), "a reviewer's lease-term verdict is not among the disclosures")
     vlab = S.listing_id.map(lambda l: KIND_LABEL.get(V.at[l, "kind"], "") if l in V.index and V.at[l, "verdict"] == "asterisk" else "")
+    # 4b: staleness by rule is the open item "listing"; where the reviewer wrote the same doubt up as availability it counts once
+    opens["listing"] = opens["listing"] & ~((vlab == "availability") & (col("listing_warning") == ""))
     for lab in opens:
-        opens[lab] = opens[lab] | (vlab == lab)
+        opens[lab] = opens[lab] | ((vlab == lab) & ~by_phone(lab))
+    flag(col("listing_stale") == "remove", "the listing page was unchanged for more than six months when it was read")
+    import rank as _rank
+    need_p = pd.Series([_rank.needs_parking_disclosure(a, b, c) for a, b, c in zip(col("street_overnight_severity"), col("parking_type"), col("parking_fee"))], index=S.index)
+    flag(need_p & ~disc.str.contains('"what": "overnight street parking"', regex=False), "overnight street parking is restricted in this town and the unit's parking is not confirmed, but the disclosure is missing")
+    flag((col("dog_weight_unstated") != "") & num("dog_weight_limit_lb").isna() & (col("dog_weight_limit_lb").str.lower() != "no limit") & ~col("tour_confirm").str.contains("dog weight limit"),
+         "a dog weight limit with no number is stated, but the tour question is missing")
     opens["live check"] = open_l
     n_open = sum(m.astype(int) for m in opens.values())
     flag(n_open > 1, "more than one open item (things to confirm plus a missing live check)")

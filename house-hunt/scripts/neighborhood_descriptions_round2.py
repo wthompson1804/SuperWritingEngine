@@ -15,8 +15,9 @@ Stages (each resumable and idempotent; `all` runs them in order and refetches no
   web         fetch the pages in web_plan.json (robots.txt first; caps: 2 pages per neighborhood,
               220 in total; one refusal ends a host, persisted in _host_kill.json AND
               raw/_host_kill_shared.json), write their plain text to web_text/
-  write       read curation.json (hand picks: quote, character 1-3, topic, landmarks, summary),
-              re-verify every quote word for word against the cached text, write the CSVs
+  compile     hand files (picks_wiki.txt, picks_web.json, landmarks.txt, summaries.txt) -> curation.json
+  write       read curation.json (quote, character 1-3, topic, landmarks, summary), re-verify every
+              quote word for word against the cached text, write the CSVs
 
 Outputs: data/reference/neighborhood_descriptions_round2.csv,
          data/reference/neighborhood_summaries_round2.csv
@@ -63,7 +64,7 @@ MAX_PAGES_PER_HOOD = 2
 MAX_PAGES_TOTAL = 220
 MARK = r1.MARK
 TOPICS = {"main street", "food and nightlife", "parks", "waterfront", "housing feel", "transit",
-          "landmark", "event", "history", "known for"}
+          "landmark", "event", "history"}
 SCOPES = {"exact", "enclosing", "part"}
 OFF_LIMITS = re.compile(r"(wikipedia\.org|reddit\.com|yelp\.com|nextdoor\.com|patch\.com|qns\.com|niche\.com|"
                         r"zillow\.com|trulia\.com|streeteasy\.com|apartments\.com)$", re.I)
@@ -409,7 +410,9 @@ BAN = re.compile(r1.BAN.pattern + r"|\b(hispanics?|latinos?|blacks|whites|asians
                  r"armenian|lebanese|working[- ]class|middle[- ]class|upper[- ]class|blue[- ]collar|upscale|"
                  r"wealthy|wealthiest|exclusive|gentrif|slum|blight|ghetto|homeless|arrest|robber|burglar|"
                  r"killed|shot|rape|prostitut|housing projects?|public housing|inhabitants|households|"
-                 r"median|per square mile|density|percent|%)\b", re.I)
+                 r"median|per square mile|density|percent|%)\b"
+                 r"|\b(immigra|ethnic|gentrif|segregat|demograph|prostitut|robber|burglar|racial|divers|"
+                 r"minorit|impoverish|affluen|mafia|murder|homicid)\w*", re.I)
 
 KEY = [  # (weight, pattern) for the shortlist only: curation is by hand
     (3, r"\b(downtown|main street|shopping district|commercial (strip|corridor|district|center)|"
@@ -630,6 +633,45 @@ def stage_web(only: list[str] | None = None) -> None:
     print(f"web: {total} page requests sent so far (cap {MAX_PAGES_TOTAL})")
 
 
+# ---------------------------------------------------------------- stage: compile (hand files -> curation.json)
+# Hand inputs, all in raw/neighborhood_descriptions_round2/:
+#   picks_wiki.txt   hood_id|article title|sentence index (a+b = two consecutive)|character|topic[|force]
+#   picks_web.json   [{hood_id, web_url, quote, source_name, about_area, scope, character, topic}]
+#   landmarks.txt    hood_id|name|kind
+#   summaries.txt    hood_id|plain summary (25 words or fewer, restating only what the quotes say)
+
+def stage_compile() -> None:
+    cand = json.loads(CAND.read_text())
+    cur: dict[str, dict] = {}
+    for line in (D / "picks_wiki.txt").read_text().splitlines():
+        if not line.strip() or line.startswith("#"):
+            continue
+        f = line.split("|")
+        hid, title, idx, ch, topic = f[:5]
+        ss = [cand[title]["sentences"][int(i)] for i in idx.split("+")]
+        pick = {"title": title, "quote": " ".join(x["text"] for x in ss), "character": int(ch), "topic": topic}
+        if len(f) > 5 and f[5] == "force":
+            pick["force"] = True
+        cur.setdefault(hid, {"quotes": [], "landmarks": []})["quotes"].append(pick)
+    wp = D / "picks_web.json"
+    for pick in (json.loads(wp.read_text()) if wp.exists() else []):
+        pick = dict(pick)
+        cur.setdefault(pick.pop("hood_id"), {"quotes": [], "landmarks": []})["quotes"].append(pick)
+    for name, key in (("landmarks.txt", "landmarks"), ("summaries.txt", "plain_summary")):
+        fp = D / name
+        for line in (fp.read_text().splitlines() if fp.exists() else []):
+            if not line.strip() or line.startswith("#"):
+                continue
+            f = line.split("|")
+            c = cur.setdefault(f[0], {"quotes": [], "landmarks": []})
+            if key == "landmarks":
+                c["landmarks"].append({"name": f[1], "kind": f[2]})
+            else:
+                c[key] = f[1]
+    CURATION.write_text(json.dumps(cur, indent=1, ensure_ascii=False))
+    print(f"compile: {sum(len(c['quotes']) for c in cur.values())} picks for {len(cur)} neighborhoods")
+
+
 # ---------------------------------------------------------------- stage: write
 
 def wiki_url(art: str) -> str:
@@ -758,6 +800,8 @@ def main() -> None:
         stage_candidates()
     if stage in ("web", "all"):
         stage_web(sys.argv[2:] or None)
+    if stage in ("compile", "write", "all") and (D / "picks_wiki.txt").exists():
+        stage_compile()
     if stage in ("write", "all") and CURATION.exists():
         stage_write()
 

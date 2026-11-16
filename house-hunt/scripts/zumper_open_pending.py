@@ -309,6 +309,7 @@ def fetch(limit: int | None = None):
     n_req = sum(1 for r in log if r.get("counted"))
     errors = unparsed_run = 0
     made = 0
+    last_done = time.time()
     lf = open(REQ_F, "a")
 
     def note(rec):
@@ -328,7 +329,11 @@ def fetch(limit: int | None = None):
         if k:
             print("STOP: zumper.com is in the kill file:", k)
             break
-        time.sleep(random.uniform(*JITTER))
+        # at least 4 s after the previous response finished, plus 0.5-2.5 s of jitter (lib's own throttle counts
+        # from the start of a request, so on its own it would swallow the jitter)
+        wait = last_done + lib.HOST_DELAY[HOST] + random.uniform(*JITTER) - time.time()
+        if wait > 0:
+            time.sleep(wait)
         n_req += 1
         made += 1
         rec = {"url": url, "order": row["order"], "counted": True, "requested_at": lib.now_iso()}
@@ -343,11 +348,13 @@ def fetch(limit: int | None = None):
                 print("REFUSED (429). zumper.com is closed for the session.", url)
                 break
             errors += 1
+            last_done = time.time()
             note(dict(rec, status="error", outcome="error", err=msg[-160:]))
             if errors >= 3:
                 print("3 network/5xx errors: stopping (not a refusal; safe to rerun later)")
                 break
             continue
+        last_done = time.time()
         status = meta.get("status")
         text = content.decode("utf8", "replace") if content else ""
         has_state = "__PRELOADED_STATE__" in text

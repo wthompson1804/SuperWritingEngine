@@ -15,7 +15,8 @@ Rules the code keeps (scripts/test_realtor_lines.py checks them):
   * two neighbouring units in a neighbourhood (in rank order) never open with the same pattern;
   * an unknown is never stated as a fact: no parking type means parking is not mentioned in the line and the catch
     says it is not published; a garage with no price is "fee not published", never "free";
-  * every number printed is the unit's own field (or the count of units it is compared with), never typed.
+  * every number printed is the unit's own field (or the count of units it is compared with), never typed;
+  * no crime or safety wording: everything shown has passed the safety rule, so the lines are about living there.
 
 Run from the house-hunt folder:  python3 scripts/realtor_lines.py     (reads site/data.json, read-only)
 """
@@ -413,7 +414,8 @@ def pick(options, listing_id, salt):
 
 
 def compose_catch(u, f):
-    """-> (host_catch, kind, used). One sentence, in this order: the unit's open question (its asterisk); a rent the
+    """-> (host_catch, kind, used). Never about crime: every unit shown has already passed the safety rule, so the
+    catch is about living there (owner's rule, 2026-11-16). One sentence, in this order: the unit's open question (its asterisk); a rent the
     page leaves ambiguous; parking not published; unpublished costs that could break the cap; an unusual lease term;
     otherwise the unit's weakest fact."""
     c = u.get("confirm") or {}
@@ -447,6 +449,8 @@ def compose_catch(u, f):
 
 
 def weakest(u, f, unknown=()):
+    """The lowest-scoring part of the unit's scorecard that can be said from its own fields. Safety is skipped on
+    purpose (see compose_catch)."""
     parts = {k: v for k, v in (get(u, "scores", "parts") or {}).items() if num(v) is not None}
     for kind in sorted(parts, key=lambda k: (parts[k], k)):
         drive = num(get(u, "moments", "sun", "drive_min"))
@@ -456,9 +460,6 @@ def weakest(u, f, unknown=()):
             return f"The weak spot is size, at {whole(f['sqft'])} square feet for you, a desk and a dog.", "weak:space", {"sqft": f["sqft"]}
         if kind == "cost" and f["all_in"] and f["margin"] is not None:
             return f"The weak spot is cost: about {usd(f['all_in'])} all in leaves only about {usd(f['margin'])} under your cap.", "weak:cost", {"all_in": f["all_in"], "cap_margin": f["margin"]}
-        viol = num(get(u, "moments", "night", "violent_per_1000"))
-        if kind == "safety" and viol is not None:
-            return f"The weak spot is safety: violent crime in this police area is {viol:.1f} per 1,000 residents, so visit after dark before you decide.", "weak:safety", {"violent_per_1000": round(viol, 1)}
         rest = num(get(u, "moments", "after", "restaurants_800m"))
         if kind == "daily" and rest is not None:
             n = int(rest)

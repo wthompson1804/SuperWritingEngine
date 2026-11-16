@@ -67,7 +67,9 @@ def numbers(text):
 def allowed_numbers(u, n_peers):
     """Every number a line about this unit may contain, worked out from the unit's fields without using the
     generator's own templates: its figures, the size of its neighbourhood group, and the page's fixed 800 m wording."""
-    ok = {str(n_peers), "10", "12", "1000"}                   # "10-minute walk", "12-month lease", "per 1,000"
+    ok = {str(n_peers), "10", "12"}                           # "10-minute walk", "12-month lease"
+    if u.get("beds") == 1:
+        ok.add("1")                                           # "1-bedroom"
     def put(x):
         v = R.num(x)
         if v is not None:
@@ -76,7 +78,7 @@ def allowed_numbers(u, n_peers):
     for path in (("all_in",), ("sqft",), ("floor",), ("cost_check", "cap_margin"), ("parking", "fee"),
                  ("rent", "free_months"), ("rent", "lease_months"), ("cost_check", "lease_term_months"),
                  ("moments", "wake", "park_walk_min"), ("moments", "sun", "drive_min"),
-                 ("moments", "night", "violent_per_1000"), ("moments", "after", "restaurants_800m"),
+                 ("moments", "after", "restaurants_800m"),
                  ("scores", "hood_rank")):
         put(R.get(u, *path))
     m = R.num(R.get(u, "moments", "wake", "dog_park_m"))
@@ -204,7 +206,9 @@ class Unknowns(unittest.TestCase):
 
     def test_missing_all_in_prints_no_price(self):
         u = unit("a", all_in=None, cost_check={"cap_margin": None})
-        self.assertNotIn("$", run([u])["a"]["host_line"])
+        line = run([u])["a"]["host_line"]
+        self.assertNotIn("all in", line)
+        self.assertNotIn("2,500", line)
 
     def test_asterisk_comes_first_in_the_catch(self):
         u = unit("a", confirm={"asterisk": True, "what": "elevator", "why": "x", "question": "Does it have one?"},
@@ -219,6 +223,12 @@ class Unknowns(unittest.TestCase):
         row = run([unit("a")])["a"]                                   # distance scores lowest in the synthetic unit
         self.assertEqual(catch_kind(row), "weak:distance")
         self.assertIn("40", numbers(row["host_catch"]))
+
+    def test_safety_is_never_the_catch(self):
+        u = unit("a", scores={"hood_rank": 1.0, "parts": {"safety": 1, "building": 55, "cost": 50, "car": 70, "space": 45,
+                                                            "distance": 30, "dog": 40, "daily": 35}})
+        row = run([u])["a"]
+        self.assertEqual(catch_kind(row), "weak:distance")
 
     def test_unpublished_costs_near_the_cap(self):
         u = unit("a", all_in_unknown=["pet rent", "parking fee"], cost_check={"cap_margin": 120})
@@ -243,6 +253,8 @@ class Numbers(unittest.TestCase):
             self.assertIn(sentence_count(r["host_line"], u), (1, 2), r["host_line"])
             self.assertEqual(sentence_count(r["host_catch"], u), 1, r["host_catch"])
             self.assertNotRegex(r["host_line"] + r["host_catch"], r"[—–]|\b(stunning|nestled|boasts|vibrant)\b")
+            self.assertNotRegex((r["host_line"] + r["host_catch"]).lower(),
+                                r"crime|violent|burglar|theft|per 1,000|safe|police", "no crime or safety wording")
 
     def test_synthetic_units(self):
         us = [unit("a", all_in=2111, sqft=913.0, floor=14.0, amenities={"pool": "pool", "doorman": "24h"}),

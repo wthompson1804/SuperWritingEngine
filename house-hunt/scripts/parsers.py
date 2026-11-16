@@ -996,10 +996,9 @@ def staleness(modified, read_on, available_date="", second_source=False):
 
 
 # ---- step 4c: an elevator known only from a listing site's amenity list
-_ELEV_CONTRA = re.compile(r"own (?:site|pages?|feature list|features? (?:list|page))[^.;|]{0,60}(?:never|not|omit|no elevator|none)|"
-                          r"(?:never|not|doesn't|does not) mention[^.;|]{0,30}(?:own|manager|owner)|omits? it|select buildings|"
-                          r"walk-?up|my reading: (?:unlikely|probably (?:a walk|no|not))|which buildings have|not established|only in (?:some|select|certain)|"
-                          r"floors? 1 to 3|garden", re.I)
+_ELEV_CONTRA = re.compile(r"own (?:site|pages?|feature list|features? (?:list|page)|amenit\w+ page)[^.;|]{0,40}(?:never mention|not mention|(?:does|do) not (?:list|mention|state)|omits?|lists? no|no elevator|none either|did not state)|"
+                          r"own pages never mention|omits? it|select buildings|walk-?up|my reading: (?:unlikely|no elevator|probably (?:a walk|no|not))|"
+                          r"which buildings have|not established|only in (?:some|select|certain)", re.I)
 _ELEV_NEG = re.compile(r"\bno elevator|not (?:listed|stated|mentioned)|none listed|no ['\"]?elevator|unknown|does not mention|lists no|has no elevator|"
                        r"no page (?:read )?(?:states|says|mentions)|implied|inferred", re.I)
 _ELEV_LIST_POS = re.compile(r"amenit|tags?\b|feature|\belevator\b", re.I)

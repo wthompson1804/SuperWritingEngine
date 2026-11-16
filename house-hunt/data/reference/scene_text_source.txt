@@ -186,12 +186,6 @@ good: The riverfront gives you an easy daily walk, and residents on review sites
 watch: The dog park is {dogpark} miles away, and only {rest} restaurants are within a {w10}.
 voices: dogs_green
 
-=== hood: nj:jersey-city
-scene: Jersey City is a big, young city: {young} percent of residents are 25 to 34 and most people rent{!renters>=0.7}. About {rest} restaurants are within a {w10} and {rest1600:r10} within {mile}. A dog run is {dogpark} miles away. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
-good: There is a lot to eat within {mile}, dog runs are close, and residents on review sites call it very dog friendly.
-watch: {nocar} percent of households skip the car and many streets need a permit, so parking deserves questions.
-voices: dogs_green
-
 === hood: ny:port-chester
 scene: Port Chester is an old village{!pre1940>=0.4} on the water, with the train station {station} miles away. About {rest} restaurants sit within a {w10}. The shore is {beach} miles away. Most people rent{!renters>=0.7}. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
 good: Dinner is a short walk[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]].
@@ -211,7 +205,7 @@ voices: parking
 
 === hood: ny:new-springville-willowbrook-bulls-head-travis
 scene: This part of Staten Island is built for cars, with shopping close. Trader Joe's and a vet are each {tj} miles away{!vet<=400}. About {rest} restaurants and {cafes} cafés sit within a {w10}. A very large park{!parkha>=50} is about {parkwalk} minutes on foot. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
-good: Errands are easy, a huge park is close for the dog[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]].
+good: Errands are easy, and a huge park is close for the dog[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]].
 watch: There are no bars within a {w10}{!bars==0}, the nearest dog run is {dogpark} miles away, and the trip to your parents by transit is about {transit} minutes.
 
 === hood: nj:ridgewood
@@ -232,7 +226,7 @@ voices: social_life
 
 === hood: ct:stamford
 scene: Stamford is a small city of apartment towers{!bigbldg>=0.7}, and {newcomers} percent of residents moved in within the last year. About {rest} restaurants, {bars} bars and {cafes} cafés sit within a {w10}. A park is about {parkwalk} minutes on foot and a dog park {dogpark} miles away. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
-good: There are bars and dinner on foot, lots of other newcomers[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]].
+good: There are bars and dinner on foot, and lots of other newcomers[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]].
 watch: Residents on review sites say a car is necessary and nightlife is limited, and the trip to your parents by transit is about {transit:r5} minutes.
 voices: social_life
 
@@ -289,7 +283,6 @@ watch: Your parents are about {drive} minutes away by car and {transit:r5} by tr
 scene: The buildings found in Danbury are new{!post2010>=0.4} and near the train station, {station} miles away. About {bars} bars and {rest} restaurant are within a {w10}. Most neighbors rent{!renters>=0.8} and many live alone{!alone>=0.5}. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
 good: The buildings are new, with {post2010} percent of homes built since 2010.
 watch: The nearest park is about {parkwalk} minutes on foot, the dog park is {dogpark} miles away, and transit to your parents takes about {transit:r5} minutes.
-voices: safety
 
 === hood: nj:red-bank
 scene: Red Bank is a river town with a compact center. About {rest} restaurants, {bars} bar and {cafes} cafés sit within a {w10}. The water is {water} miles away and the train station {station} miles. Many neighbors live alone{!alone>=0.5}. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
@@ -355,7 +348,6 @@ scene: Orange is an older city with a train station {station} miles away. Only {
 good: The train station is {station} miles away.
 watch: Overnight street parking needs a city permit, and the nearest park is about {parkwalk} minutes on foot.
 rules: City of Orange|overnight_parking
-voices: safety, car_crime
 
 === hood: nj:maplewood
 scene: Maplewood is a town of houses and families{!kids>=0.35}. About {rest} restaurants, {bars} bar and {cafes} café are within a {w10}, and {rest1600} restaurants within {mile}. The supermarket is {super} miles away. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
@@ -404,7 +396,7 @@ watch: The nearest park is about {parkwalk} minutes on foot, and the dog park is
 
 === hood: nj:east-brunswick
 scene: East Brunswick is a highway suburb with shopping close. About {rest} restaurants are within a {w10} and the supermarket is {super} miles away. {wfh} percent of workers here work from home. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
-good: Errands are quick, other people work from home too[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]].
+good: Errands are quick, and other people work from home too[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]].
 watch: The nearest park is about {parkwalk} minutes on foot and the dog park is {dogpark} miles away.
 
 === hood: nj:dover
@@ -495,7 +487,7 @@ watch: Your parents are about {drive} minutes away, and the vet is {vet} miles a
 
 === hood: ct:hamden
 scene: Hamden is a suburb beside New Haven. About {rest} restaurants are within a {w10} and {rest1600} within {mile}. Trader Joe's is {tj} miles away and the supermarket {super} miles. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
-good: Groceries are close, a dog park is {dogpark} miles away[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]].
+good: Groceries are close, and a dog park is {dogpark} miles away[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]].
 watch: Your parents are about {drive} minutes away, and there are no bars within a {w10}{!bars==0}.
 
 === hood: ny:lagrange
@@ -590,7 +582,6 @@ scene: Hempstead is a busy village center with a train station {station} miles a
 good: The drive to your parents is short and toll-free, and the town runs dog parks with separate small-dog sections.
 watch: Only {bars} bars are within a {w10}, and the Village is changing its overnight parking rules.
 rules: Hempstead (Town)|dog_park
-voices: safety
 
 === hood: ny:flatlands
 scene: Flatlands is a quiet, settled part of Brooklyn{!newcomers<=0.05}. A supermarket is {super} miles away and a park about {parkwalk} minutes on foot. About {rest} restaurants and {cafes} cafés are within a {w10}. Your parents are about {drive} minutes away by car, with no tolls{!b_toll==0}{!b_tollok==True}.
@@ -741,32 +732,32 @@ voices: parking
 # Each scene follows the same order: the workday at home, the evening dog walk, Saturday night, Sunday at your parents'.
 
 === year: The Walk-Everywhere Year
-scene: You work at home in an old city building{!m_pre1940>=0.4}, with a supermarket {m_super} miles away. The evening dog walk reaches a park in about {m_parkwalk} minutes, and a dog run is {m_dogpark} miles off. On Saturday you walk to dinner: about {m_rest} restaurants, {m_bars} bars and {m_cafes} cafés sit within a {w10}. The car mostly waits. On Sunday the typical neighborhood here is about {m_drive} minutes from your parents by car, or about {m_transit} by transit.
+scene: You work at home in an old city building{!m_pre1940>=0.4}, with a supermarket {m_super} miles away. The evening dog walk reaches a park in about {p_parkwalk} minutes, and a dog run is {m_dogpark} miles off. On Saturday you walk to dinner: about {m_rest} restaurants, {m_bars} bars and {m_cafes} cafés sit within a {w10}. The car mostly waits. On Sunday the typical place here is about {p_drive} minutes from your parents by car, or about {p_transit} by transit.
 promise: Nearly everything you want in an evening is a walk from your door.
 catch: {m_nocar} percent of households here have no car, so easy parking is the hard part. [[The list is short, with {p_places} places in all{!p_places<=15}.]]
 
 === year: The Old-Neighborhood Year
-scene: You work at home in a mid-century apartment building{!m_yrbuilt<=1965}{!m_bigbldg>=0.5}, with a supermarket {m_super} miles away. The evening dog walk reaches a park in about {m_parkwalk} minutes. On Saturday about {m_rest} restaurants sit within a {w10} and {m_rest1600} within {mile}, though only {m_bars} bar is close. Neighbors tend to stay: {m_newcomers} percent moved in within the last year. On Sunday the typical neighborhood here is about {m_drive} minutes from your parents by car.
+scene: You work at home in a mid-century apartment building{!m_yrbuilt<=1965}{!m_bigbldg>=0.5}, with a supermarket {m_super} miles away. The evening dog walk reaches a park in about {p_parkwalk} minutes. On Saturday about {m_rest} restaurants sit within a {w10} and {m_rest1600} within {mile}, though only {m_bars} bar is close. Neighbors tend to stay: {m_newcomers} percent moved in within the last year. On Sunday the typical place here is about {p_drive} minutes from your parents by car.
 promise: Close to your parents, in settled neighborhoods where daily errands are on foot.
 catch: {m_nocar} percent of households have no car, so street parking is crowded and a reserved space is worth asking about. Bars are thin, about {m_bars} within a {w10}.
 
 === year: The Little-City Year
-scene: You work at home in a small city or inner suburb, with a train station about {m_station} miles away. The evening dog walk reaches a park in about {m_parkwalk} minutes, and the dog park is about {m_dogpark} miles off. On Saturday the downtown has about {m_rest} restaurants within a {w10} and {m_rest1600} within {mile}. Most households keep a car{!m_nocar<=0.2}. On Sunday the typical neighborhood here is about {m_drive} minutes from your parents by car, or about {m_transit:r5} by transit.
+scene: You work at home in a small city or inner suburb, with a train station about {m_station} miles away. The evening dog walk reaches a park in about {p_parkwalk} minutes, and the dog park is about {m_dogpark} miles off. On Saturday the downtown has about {m_rest} restaurants within a {w10} and {m_rest1600} within {mile}. Most households keep a car{!m_nocar<=0.2}. On Sunday the typical place here is about {p_drive} minutes from your parents by car, or about {p_transit} by transit.
 promise: A downtown of your own, and a car for everything else.
 catch: Your parents are about {p_drive} minutes from the typical place. Bars are thin, about {m_bars} within a {w10}, so a real night out often means driving.
 
 === year: The Fresh-Start Year
-scene: You work at home in a newer building{!m_yrbuilt>=2000} near the water, {m_water} miles away. The evening dog walk reaches a park in about {m_parkwalk} minutes, and a dog run is {m_dogpark} miles off. On Saturday about {m_rest} restaurants sit within a {w10} and {m_rest1600} within {mile}. Your neighbors are new too: {m_newcomers} percent moved in within the last year and {m_young} percent are 25 to 34. On Sunday the typical neighborhood here is about {m_drive} minutes from your parents by car.
+scene: You work at home in a newer building{!m_yrbuilt>=2000} near the water, {m_water} miles away. The evening dog walk reaches a park in about {p_parkwalk} minutes, and a dog run is {m_dogpark} miles off. On Saturday about {m_rest} restaurants sit within a {w10} and {m_rest1600} within {mile}. Your neighbors are new too: {m_newcomers} percent moved in within the last year and {m_young} percent are 25 to 34. On Sunday the typical place here is about {p_drive} minutes from your parents by car.
 promise: New neighbors like you, with the water and a park just outside.
 catch: Bars are scarce, about {m_bars} within a {w10}, so going out usually means a drive or a ride. Your parents are about {p_drive} minutes away by car.
 
 === year: The Quiet-Street Year
-scene: You work at home on a street of houses: {m_detached} percent of homes are detached, and {m_wfh} percent of workers here also work from home. The evening dog walk follows quiet roads, with a park about {m_parkwalk} minutes on foot. On Saturday you drive to dinner, because only about {m_rest} restaurants and no bars{!m_bars==0} sit within a {w10}. Nearly every household has a car{!m_nocar<=0.05}. On Sunday the typical neighborhood here is about {m_drive} minutes from your parents by car.
+scene: You work at home on a street of houses: {m_detached} percent of homes are detached, and {m_wfh} percent of workers here also work from home. The evening dog walk follows quiet roads, with a park about {p_parkwalk} minutes on foot. On Saturday you drive to dinner, because only about {m_rest} restaurants and no bars{!m_bars==0} sit within a {w10}. Nearly every household has a car{!m_nocar<=0.05}. On Sunday the typical place here is about {p_drive} minutes from your parents by car.
 promise: Lawns, quiet streets{!m_detached>=0.5} and a car for everything.
 catch: Almost nothing is on foot and the dog park is about {m_dogpark} miles away, so every outing starts in the car. Your parents are about {p_drive} minutes away[[, and only {p_places} places of this kind turned up{!p_places<=15}]].
 
 === year: The Room-to-Breathe Year
-scene: You work at home with space to spare: the typical place found here is about {m_sqft} square feet. The evening dog walk reaches a park in about {m_parkwalk} minutes, on streets where {m_detached} percent of homes are houses. On Saturday you drive out, since about {m_rest} restaurants and no bars{!m_bars==0} are within a {w10}. The supermarket is {m_super} miles away. On Sunday the typical neighborhood here is about {m_drive} minutes from your parents by car, or about {m_transit:r5} by transit.
+scene: You work at home with space to spare: the typical place found here is about {p_sqft} square feet. The evening dog walk reaches a park in about {p_parkwalk} minutes, on streets where {m_detached} percent of homes are houses. On Saturday you drive out, since about {m_rest} restaurants and no bars{!m_bars==0} are within a {w10}. The supermarket is {m_super} miles away. On Sunday the typical place here is about {p_drive} minutes from your parents by car, or about {p_transit} by transit.
 promise: More room for you, your desk and the dog, in towns where many neighbors are families{!m_kids>=0.3}.
 catch: Your parents are far, typically about {p_drive} minutes each way. Nearly everything is a drive, including the dog park at about {m_dogpark} miles.
 
@@ -807,10 +798,10 @@ walk3: Sunday takes commitment. The typical drive to your parents is about {p_dr
 === year: The Fresh-Start Year
 display: The Fresh-Start Experience
 subhead: Newer buildings{!m_yrbuilt>=2000} near the water{!m_water<=800}, among other newcomers.
-tagline: New building, new neighbors, water down the block{!m_water<=800}, and a long drive from home.
+tagline: New building, new neighbors, water down the block{!m_water<=800}, and a real drive home.
 host_intro: Nobody here has history, and that is the appeal. These are newer buildings{!m_yrbuilt>=2000} near the water{!m_water<=800}, where about {m_newcomers} percent of the neighbors moved in within the last year and {m_young} percent are aged 25 to 34. You would be new alongside everybody else. The buildings do a lot of the work. [[Every place here has a gym{!u_gym==1}]][[Nearly every place here has a gym{!u_gym>=0.8}{!u_gym<1}]], about {u_garage} percent list garage or covered parking, and about {u_pool} percent have a pool. A park is practically at the door{!p_parkwalk<=3}. It suits you if you want a clean break and a soft landing. The trade is plain. The field is {p_places} places in {p_hoods} neighborhoods, and the typical apartment is about {p_sqft} square feet for about ${p_allin} a month. Your parents are about {p_drive} minutes away. This is the experience where you are properly on your own.
 walk1: Weekday mornings, the dog walks you toward the water. A park is right there{!p_parkwalk<=3} and a dog run is about {u_dogpark} miles away, close enough for a lunch break. You work upstairs, and about {u_laundry} percent of these places have the washer in the unit. Groceries are about {u_super} miles off. It is an easy routine.
-walk2: Saturday has more food than you would guess: about {p_rest} restaurants within a {w10} and about {u_rest1600} within {mile}. Bars are scarce, about {u_bars} nearby, so a real night out is a ride each way. When you drive, the building has your back. Most places here put the car in a garage or under cover{!u_garage>=0.6}.
+walk2: Saturday has more food than you would guess: about {p_rest} restaurants within a {w10} and about {u_rest1600} within {mile}. [[Bars are scarce, about {u_bars} nearby{!u_bars>0}, so a real night out is a ride each way.]][[There are no bars close by{!u_bars==0}, so a real night out is a ride each way.]] When you drive, the building has your back. Most places here put the car in a garage or under cover{!u_garage>=0.6}.
 walk3: Sunday is a trip, and you should know that going in. Your parents are about {p_drive} minutes away by car, and tolls run about ${u_toll} round trip with a New York E-ZPass. Transit takes about {p_transit} minutes. So you go for the whole afternoon, and you bring containers for leftovers.
 
 === year: The Quiet-Street Year
@@ -853,7 +844,7 @@ host_intro: Saturday night, sorted. About {bars} bars, {rest} restaurants and {c
 voices: dogs_green, parking
 
 === hood: ny:bedford-stuyvesant-west-
-host_intro: This is a neighborhood built for coffee people: about {cafes} cafés within a {w10}, plus {bars} bars and {rest} restaurants. A dog run is {dogpark} miles away, and Sunday dinner is about {drive} minutes off with no tolls{!b_toll==0}. Most households have no car{!nocar>=0.5}, so parking is a question for every building.
+host_intro: This is a neighborhood built for coffee people: about {cafes} cafés within a {w10}, plus {bars} bars and {rest} restaurants. A park is a {parkwalk}-minute walk, and {young} percent of residents are aged 25 to 34. A dog run is {dogpark} miles away, and Sunday dinner is about {drive} minutes off with no tolls{!b_toll==0}. Most households have no car{!nocar>=0.5}, so parking is a question for every building.
 
 === hood: ny:upper-east-side-lenox-hill-roosevelt-island
 host_intro: Everything is downstairs. Trader Joe's is {tj} miles away, the vet is {vet} miles, the dog run is {dogpark} miles, and about {rest} restaurants sit within a {w10}. The catch has wheels. {nocar} percent of households here have no car, which tells you what parking is like. Sunday is about {drive} minutes each way, and tolls run about ${b_toll} round trip with a New York E-ZPass.
@@ -879,11 +870,11 @@ host_intro: Westport is beach-town quiet with a long commute to your mother's ki
 voices: social_life
 
 === hood: ct:fairfield
-host_intro: People who live here love the beaches and the parks, and then admit there is little nightlife for anyone your age. Both are true. The beach is {beach} miles away and a park is an {parkwalk}-minute walk[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]]. A short strip offers about {rest} restaurants and {bars} bars within a {w10}. The dog park is {dogpark} miles off. And home is about {drive} minutes off without traffic, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: People who live here love the beaches and the parks, and then admit there is little nightlife for anyone your age. Both are true. The beach is {beach} miles away and a park is an {parkwalk}-minute walk. A short strip offers about {rest} restaurants and {bars} bars within a {w10}. The dog park is {dogpark} miles off. And home is about {drive} minutes off without traffic, about ${b_toll} round trip with a New York E-ZPass.
 voices: dogs_green, social_life
 
 === hood: nj:roxbury
-host_intro: Go far enough out and the apartments get bigger. The typical place we found in Roxbury is about {sqft} square feet[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]]. The township has its own dog park at Emmans Park. Now the distance. The nearest park is a {parkwalk}-minute walk, there are no bars within a {w10}{!bars==0}, and home is about {drive} minutes back, with tolls of about ${b_toll} round trip with a New York E-ZPass.
+host_intro: Go far enough out and the apartments get bigger. The typical place we found in Roxbury is about {sqft} square feet. The township has its own dog park at Emmans Park. Now the distance. The nearest park is a {parkwalk}-minute walk, there are no bars within a {w10}{!bars==0}, and home is about {drive} minutes back, with tolls of about ${b_toll} round trip with a New York E-ZPass.
 rules: Roxbury|dog_park
 
 === hood: nj:atlantic-highlands
@@ -891,7 +882,7 @@ host_intro: The beach is {beach} miles from the door. Say that out loud, then ke
 voices: social_life
 
 === hood: nj:princeton
-host_intro: Princeton has a rule you need to know before you love it. On the downtown streets, no car may park overnight from 2 to 6 AM without a permit, and the permit goes only to homes with no parking of their own. So the building's own parking is the plan. In exchange: about {rest1600} restaurants within {mile}, a park {parkwalk} minutes from the door, and a town where {wfh} percent of workers also work from home. Figure about {drive} minutes to your parents, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: Princeton has a rule to know before you love it. Downtown, no car may park overnight from 2 to 6 AM without a permit, and the permit goes only to homes with no parking of their own. So the building's own parking is the plan. In exchange: about {rest1600} restaurants within {mile}, a park {parkwalk} minutes from the door, and a town where {wfh} percent of workers also work from home. Figure about {drive} minutes to your parents, about ${b_toll} round trip with a New York E-ZPass.
 rules: Princeton|overnight_parking; Princeton|resident_permit
 
 === hood: nj:fort-lee
@@ -956,16 +947,11 @@ rules: Hackensack|overnight_parking; Hackensack|resident_permit
 host_intro: [[Yonkers has range: {pg_n} places, from about ${pg_lo} to ${pg_hi} a month all in. ]]The water is {water} miles from the typical building, the train station {station} miles, and people who live here talk about trails and parks along the water. What it lacks is a walkable night: {rest} restaurants and {bars} bar within a {w10}. Sunday runs about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
 voices: dogs_green
 
-=== hood: nj:jersey-city
-host_intro: Dog people, pay attention. People who live in Jersey City call it very dog friendly, and {b_dogpark} is {dogpark} miles away. About {rest1600} restaurants sit within {mile}. Many streets are zone-permit streets, where a car without a resident permit gets 2 hours, and the permit needs a licence showing your Jersey City address. Home is about {drive} minutes back, about ${b_toll} round trip with a New York E-ZPass.
-rules: Jersey City|resident_permit
-voices: dogs_green
-
 === hood: ny:port-chester
 host_intro: The train station is {station} miles from the door, which is the headline in Port Chester. About {rest} restaurants are within a {w10}. There the list thins out. No bars or cafés are that close{!bars==0}{!cafes==0}, the nearest park is a {parkwalk}-minute walk, and the dog park is {dogpark} miles off, so the dog's big outings need the car. Figure about {drive} minutes back to your parents and about ${b_toll} round trip with a New York E-ZPass.
 
 === hood: nj:east-rutherford
-host_intro: Here is something rare on this page: people who live here say street parking is plentiful. Read the signs anyway, because alternate-side rules are enforced all year. East Rutherford also puts about {rest} restaurants within a {w10}[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]]. The gap is green. The nearest park is a {parkwalk}-minute walk, and the dog park is {dogpark} miles off. It is about {drive} minutes to Sunday dinner, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: Here is something rare on this page: people who live here say street parking is plentiful. Read the signs anyway, because alternate-side rules are enforced all year. East Rutherford also puts about {rest} restaurants within a {w10}. The gap is green. The nearest park is a {parkwalk}-minute walk, and the dog park is {dogpark} miles off. It is about {drive} minutes to Sunday dinner, about ${b_toll} round trip with a New York E-ZPass.
 rules: East Rutherford|alternate_side
 voices: parking
 
@@ -1087,7 +1073,7 @@ host_intro: You love your car, so start with where it sleeps in Orange. Overnigh
 rules: City of Orange|overnight_parking; City of Orange|municipal_garage_monthly
 
 === hood: nj:maplewood
-host_intro: People who live in Maplewood call it very pet friendly. The typical place we found is about {sqft} square feet, a park is about {parkwalk} minutes on foot, and about {rest1600} restaurants sit within {mile}. The honest note: {b_dogpark} is {dogpark} miles off, so the dog rides shotgun. Sunday costs you about {drive} minutes each way and about ${b_toll} round trip with a New York E-ZPass.
+host_intro: People who live in Maplewood call it very pet friendly. The typical place we found is about {sqft} square feet, a park is a {parkwalk}-minute walk, and about {rest1600} restaurants sit within {mile}. The honest note: {b_dogpark} is {dogpark} miles off, so the dog rides shotgun. Sunday costs you about {drive} minutes each way and about ${b_toll} round trip with a New York E-ZPass.
 voices: dogs_green
 
 === hood: nj:rahway
@@ -1100,7 +1086,7 @@ host_intro: Here is the deal with Carteret. You get about {sqft} square feet in 
 voices: parking
 
 === hood: nj:springfield
-host_intro: Springfield does not let cars sleep on the street. At all. No parking on any public street from 2 to 6 AM, and the police grant exceptions a single night at a time. If the building has no space for you, cross it off. If it does, the offer is strong: about {sqft} square feet in the typical place, Trader Joe's {tj} miles away, and a supermarket at {super} miles. Home is about {drive} minutes of highway away, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: Springfield does not let cars sleep on the street. At all. No parking on any public street from 2 to 6 AM, and exceptions are granted a single night at a time. If the building has no space for you, cross it off. If it does, the offer is strong: about {sqft} square feet in the typical place, Trader Joe's {tj} miles away, and a supermarket at {super} miles. Home is about {drive} minutes of highway away, about ${b_toll} round trip with a New York E-ZPass.
 rules: Springfield (Union County)|overnight_parking
 
 === hood: nj:garwood
@@ -1112,7 +1098,7 @@ rules: Haverstraw (Town)|dog_park
 voices: parking
 
 === hood: nj:morris-plains
-host_intro: Morris Plains is a town of houses, with {detached} percent of homes detached, where the supermarket is {super} miles away, the train station {station} miles, and a dog park {dogpark} miles[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]]. People who live here admit it falls flat on nightlife: about {rest} restaurants and no bars within a {w10}{!bars==0}. Quiet has a commute. Sunday is about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: Morris Plains is a town of houses, with {detached} percent of homes detached, where the supermarket is {super} miles away, the train station {station} miles, and a dog park {dogpark} miles. People who live here admit it falls flat on nightlife: about {rest} restaurants and no bars within a {w10}{!bars==0}. Quiet has a commute. Sunday is about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
 voices: social_life
 
 === hood: nj:plainfield
@@ -1133,7 +1119,7 @@ host_intro: Quiet, calm, and a long way from a park bench. That is Old Bridge by
 voices: dogs_green, social_life
 
 === hood: nj:mount-arlington
-host_intro: A cute little lake town. That is what people who live here call it[[, and it is one of the safest spots on the whole list{!pg_safe<=0.2}]]. The typical apartment we found is about {sqft} square feet. That is the dream part. The daily part is the car. The supermarket is {super} miles away, the nearest park is a {parkwalk}-minute walk, and {rest} restaurants fall within a {w10}. Home is about {drive} minutes off, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: A cute little lake town. That is what people who live here call it. The typical apartment we found is about {sqft} square feet. That is the dream part. The daily part is the car. The supermarket is {super} miles away, the nearest park is a {parkwalk}-minute walk, and {rest} restaurants fall within a {w10}. Home is about {drive} minutes off, about ${b_toll} round trip with a New York E-ZPass.
 voices: social_life
 
 === hood: nj:bound-brook
@@ -1175,7 +1161,7 @@ rules: Middletown|overnight_parking
 voices: social_life
 
 === hood: ct:seymour
-host_intro: About {sqft} square feet. That is the typical apartment we found in Seymour, and it changes how a work-from-home day feels. A big park{!parkha>=20} is about {parkwalk} minutes on foot[[, in one of the safest spots on the whole list{!pg_safe<=0.2}]]. People who live here describe antique shops, small diners and not much nightlife. A dog park is {dogpark} miles out. And your parents are far, at about {drive} minutes and about ${b_toll} round trip with a New York E-ZPass.
+host_intro: About {sqft} square feet. That is the typical apartment we found in Seymour, and it changes how a work-from-home day feels. A big park{!parkha>=20} is about {parkwalk} minutes on foot. People who live here describe antique shops, small diners and not much nightlife. A dog park is {dogpark} miles out. And your parents are far, at about {drive} minutes and about ${b_toll} round trip with a New York E-ZPass.
 voices: social_life
 
 === hood: nj:bordentown
@@ -1199,7 +1185,7 @@ host_intro: I would be doing you a disservice if I dressed this up. LaGrange doe
 rules: LaGrange (Town)|parks_and_beaches
 
 === hood: ny:jamaica
-host_intro: This is home. Your parents are about {drive} minutes away, there are no tolls{!b_toll==0}, and Sunday dinner could be Tuesday dinner too. About {rest} restaurants and a supermarket {super} miles off cover daily life. Here is the part you already know. Moving ten blocks is a small step, and you may want a bigger one. People who live here say the parks need care and nightlife could be better. Independence, with the family on speed dial.
+host_intro: This is home. Your parents are about {drive} minutes away, there are no tolls{!b_toll==0}, and Sunday dinner could be Tuesday dinner too. About {rest} restaurants and a supermarket {super} miles off cover daily life. Here is the part you already know. Moving a few blocks is a small step, and you may want a bigger move. People who live here say the parks need care and nightlife could be better. Independence, with the family on speed dial.
 voices: dogs_green, social_life
 
 === hood: ny:jamaica-hills-briarwood
@@ -1222,14 +1208,14 @@ host_intro: Bring an appetite. About {rest} restaurants and {cafes} cafés sit w
 voices: parking
 
 === hood: ny:east-new-york-north-
-host_intro: Close to home is the whole pitch here. What it offers is the drive, about {drive} minutes to reach your parents with no tolls{!b_toll==0}, and old buildings{!pre1940>=0.5} with a dog run {dogpark} miles away. Only about {rest} restaurants fall within a {w10}. I would want you to see the other close-to-home options first.
+host_intro: Close to home is the whole pitch here. What it offers is the drive, about {drive} minutes to reach your parents with no tolls{!b_toll==0}, and old buildings{!pre1940>=0.5} with a dog run {dogpark} miles away. A park is a {parkwalk}-minute walk and the supermarket {super} miles. Only about {rest} restaurants fall within a {w10}. I would want you to see the other close-to-home options first.
 
 === hood: ny:murray-hill-broadway-flushing
 host_intro: A park is about a {parkwalk}-minute walk away, the train station is {station} miles away, and about {rest} restaurants and {cafes} cafés sit within a {w10}. That is a lot of convenience for a place about {drive} minutes from your parents with no tolls{!b_toll==0}. The trouble is your car. People who live here say parking is almost nonexistent, and {nocar} percent of households go without a car. The dog run is {dogpark} miles off, so the park downstairs does the daily work.
 voices: parking
 
 === hood: ny:elmhurst
-host_intro: Elmhurst is a food neighborhood with a caution label. The food: about {rest} restaurants within a {w10} and roughly {rest1600:r10} within {mile}. The caution: {nocar} percent of households have no car, which people who live here feel as a shortage of parking. The typical place we found is roomy, at about {sqft} square feet. Mom and Dad: about {drive} minutes, no tolls{!b_toll==0}.
+host_intro: Elmhurst is a food neighborhood with a caution label. The food: about {rest} restaurants within a {w10} and roughly {rest1600:r10} within {mile}. The caution: {nocar} percent of households go without a car, which people who live here feel as a shortage of parking. The typical place we found is roomy, at about {sqft} square feet. Mom and Dad: about {drive} minutes, no tolls{!b_toll==0}.
 voices: parking
 
 === hood: ny:old-astoria-hallets-point
@@ -1268,7 +1254,7 @@ host_intro: {b_park} is about {parkwalk} minutes away. For a dog, that is the lo
 voices: dogs_green
 
 === hood: ny:east-harlem-south-
-host_intro: Life here happens on foot: about {rest} restaurants within a {w10}, a park {parkwalk} minutes from the door, {b_dogpark} {dogpark} miles away. {nocar} percent of households have no car, so do not count on the street. Sunday is about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: Life here happens on foot: about {rest} restaurants within a {w10}, a park {parkwalk} minutes from the door, {b_dogpark} {dogpark} miles away. Trader Joe's is {tj} miles off and the water {water} miles. {nocar} percent of households skip the car, so do not count on the street. Sunday is about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
 
 === hood: ny:madison
 host_intro: Madison keeps a low profile. Only {newcomers} percent of residents moved in within the last year, a park is {parkwalk} minutes from the door, and the beach is {beach} miles away. Nights are slow, with about {rest} restaurants and no bars within a {w10}{!bars==0}. The dog run is {dogpark} miles off, which is a drive or a long walk. Getting home is easy by car, about {drive} minutes with no tolls{!b_toll==0}, and slow by transit at about {transit}.
@@ -1317,13 +1303,12 @@ voices: dogs_green
 
 === hood: ny:flatbush-west-ditmas-park-parkville
 host_intro: Since you drive, ask every building here for a garage space, because street parking is the weak spot{!nocar>=0.5}. The area is quiet at night by residents' own account, with about {rest} restaurants, {cafes} cafés and {bars} bar within a {w10}. The nearest park is about {parkwalk} minutes on foot and the dog run is {dogpark} miles off. Mom and Dad are about {drive} minutes away, toll-free{!b_toll==0}.
-voices: social_life
 
 === hood: ny:williamsbridge-olinville
-host_intro: I will keep this plain, because the list is short. There is a big park{!parkha>=20} about {parkwalk} minutes from the lobby. About {rest} restaurants and no bars are within a {w10}{!bars==0}. The trip home is about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
+host_intro: I will keep this plain, because the list is short. There is a big park{!parkha>=20} about {parkwalk} minutes from the lobby. The supermarket is {super} miles away and open water {water} miles, and most of the neighbors rent{!renters>=0.8}. About {rest} restaurants and no bars are within a {w10}{!bars==0}. The trip home is about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
 
 === hood: ny:bensonhurst
-host_intro: Bensonhurst is a quiet surprise on the numbers. About {rest} restaurants and {cafes} cafés sit within a {w10}, and the typical place we found is about {sqft} square feet. No bars, though{!bars==0}, so nights are dinner and home. {nocar} percent of households have no car, which makes parking a question for the building. A dog run is {dogpark} miles off. Sunday is a toll-free{!b_toll==0} drive of about {drive} minutes, or about {transit} by transit.
+host_intro: Bensonhurst is a quiet surprise on the numbers. About {rest} restaurants and {cafes} cafés sit within a {w10}, and the typical place we found is about {sqft} square feet. No bars, though{!bars==0}, so nights are dinner and home. {nocar} percent of households go carless, which makes parking a question for the building. A dog run is {dogpark} miles off. Sunday is a toll-free{!b_toll==0} drive of about {drive} minutes, or about {transit} by transit.
 
 === hood: ny:washington-heights-north-
 host_intro: {b_park} is about {parkwalk} minutes from your door. If you have not seen it, it is enormous{!parkha>=50}, and people who live here are proud of it. {b_dogpark} is {dogpark} miles away and the vet {vet} miles, so the dog's whole life is on foot. Yours is harder. Residents say parking is limited, and {nocar} percent of households have no car. The drive home runs about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
@@ -1354,3 +1339,58 @@ voices: dogs_green, social_life
 === hood: nj:newark
 host_intro: Start with the car, because Newark makes you. People who live here call parking frustrating, so the places worth your time have their own garage. About {rest1600} restaurants sit within {mile}. The case for it: {b_park} about {parkwalk} minutes from the lobby, {b_dogpark} at {dogpark} miles[[, and prices between about ${pg_lo} and ${pg_hi} a month all in]]. Home: about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
 voices: parking
+
+# ------------------------------------------------------------------ Jersey City, split into its neighborhoods (2026-11-16)
+
+=== hood: nj:jersey-city-bergen-lafayette
+scene: Newer buildings stand near a very large park here{!parkha>=20}: {post2010} percent of homes went up since 2010. A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away. About {rest} restaurants and no bars{!bars==0} sit within a {w10}. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
+good: A big park is a short walk for the dog, and {young} percent of residents are aged 25 to 34.
+watch: There are no bars within a {w10}{!bars==0}, and many Jersey City streets need a resident permit.
+host_intro: {b_park} is about {parkwalk} minutes from the door, and it is the kind of park you can get lost in{!parkha>=20}. Around it the buildings are new, with {post2010} percent of homes built since 2010, and {young} percent of your neighbors are aged 25 to 34. Dinner takes a little effort: about {rest} restaurants within a {w10} and no bars{!bars==0}, though {rest1600} restaurants sit within {mile}. Sunday is about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
+rules: Jersey City|resident_permit
+
+=== hood: nj:jersey-city-downtown
+scene: This is the dense, walkable end of Jersey City. About {rest} restaurants, {bars} bars and {cafes} cafés sit within a {w10}. A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away. The supermarket is {super} miles away. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
+good: Dinner, coffee and the dog run are all a short walk.
+watch: {nocar} percent of households have no car and many streets need a resident permit, so parking deserves questions.
+host_intro: If Saturday night is the priority, start here. About {rest} restaurants, {bars} bars and {cafes} cafés sit within a {w10}, and {b_dogpark} is {dogpark} miles away. What you trade is space and parking. The typical place here is about {sqft} square feet, {nocar} percent of households skip the car, and many streets give a car without a resident permit 2 hours. It is about {drive} minutes to Sunday dinner, about ${b_toll} round trip with a New York E-ZPass.
+rules: Jersey City|resident_permit
+
+=== hood: nj:jersey-city-greenville
+scene: This is a quieter, residential side of Jersey City. About {rest} restaurants and no bars or cafés{!bars==0}{!cafes==0} sit within a {w10}. A park is about {parkwalk} minutes on foot and the dog park is {dogpark} miles away. The supermarket is {super} miles away. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
+good: A park is a short walk, and few neighbors are new{!newcomers<=0.1}.
+watch: Almost nothing for a night out is within a {w10}{!bars==0}, and the vet is {vet} miles away.
+host_intro: Greenville is the quiet end of Jersey City, and I mean quiet. About {rest} restaurants and no bars or cafés are within a {w10}{!bars==0}{!cafes==0}, and only {newcomers} percent of residents moved in within the last year. A park is a {parkwalk}-minute walk, which covers the dog's daily loop, and the dog park is {dogpark} miles away. The supermarket is {super} miles off and the vet {vet} miles, so errands mean the car. Home is about {drive} minutes back, about ${b_toll} round trip with a New York E-ZPass.
+
+=== hood: nj:jersey-city-journal-square
+scene: Food is close here: about {rest} restaurants, {bars} bar and {cafes} cafés within a {w10}. The supermarket is {super} miles away and a dog run is {dogpark} miles away. The nearest park is about {parkwalk} minutes on foot. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
+good: Dinner and groceries are on foot, and a dog run is close.
+watch: The nearest park is about {parkwalk} minutes on foot, and {nocar} percent of households have no car, so ask about parking.
+host_intro: Journal Square is practical in the best sense. About {rest} restaurants and {cafes} cafés sit within a {w10}, and a dog run is {dogpark} miles off. [[We found {pg_n} places here, between about ${pg_lo} and ${pg_hi} a month all in. ]]The soft spots: {bars} bar close by, a real park about {parkwalk} minutes on foot, and streets where a car without a resident permit gets 2 hours. Sunday runs about {drive} minutes each way, about ${b_toll} round trip with a New York E-ZPass.
+rules: Jersey City|resident_permit
+
+=== hood: nj:jersey-city-mcginley-square
+scene: These are older blocks: {pre1940} percent of homes went up before 1940. About {rest} restaurants, {bars} bars and {cafes} cafés sit within a {w10}. The nearest park is about {parkwalk} minutes on foot and the dog park is {dogpark} miles away. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
+good: There is dinner and coffee on foot, with about {rest1600} restaurants within {mile}.
+watch: {nocar} percent of households have no car and many streets need a resident permit, so parking deserves questions.
+host_intro: McGinley Square is the old-building corner of Jersey City: {pre1940} percent of homes went up before 1940. About {rest} restaurants, {bars} bars and {cafes} cafés are within a {w10}, and {rest1600} restaurants within {mile}. Green takes more effort. The nearest park is a {parkwalk}-minute walk and the dog park is {dogpark} miles away. {nocar} percent of households go without a car, so parking is a question for every building. Getting home takes about {drive} minutes, about ${b_toll} round trip with a New York E-ZPass.
+rules: Jersey City|resident_permit
+
+=== hood: nj:jersey-city-newport
+scene: Newport is towers by the water{!bigbldg>=0.9}, with the water {water} miles away. The supermarket is {super} miles away, the vet {vet} miles and a dog run {dogpark} miles. About {rest} restaurants and {cafes} cafés sit within a {w10}. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
+good: Groceries, the vet and a dog run are all within {dogpark} miles{!super<=400}{!vet<=400}, and {young} percent of residents are aged 25 to 34.
+watch: {nocar} percent of households have no car, so parking is scarce, and the place found here is small at about {sqft} square feet.
+host_intro: Everything in Newport is a short walk. The supermarket is {super} miles away, the vet {vet} miles, a dog run {dogpark} miles and the water {water} miles. {young} percent of residents are aged 25 to 34. About {rest} restaurants sit within a {w10}. The trade is space and the car: the place we found is about {sqft} square feet, and {nocar} percent of households own no car. Mom and Dad are about {drive} minutes by car, about ${b_toll} round trip with a New York E-ZPass.
+
+=== hood: nj:jersey-city-the-heights
+scene: The Heights is an older residential part of Jersey City: {pre1940} percent of homes went up before 1940. About {rest} restaurants, {bars} bar and {cafes} cafés sit within a {w10}. A park is about {parkwalk} minutes on foot and a dog run is {dogpark} miles away. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
+good: A park and a dog run are both a short walk, and the supermarket is {super} miles away.
+watch: Only {bars} bar is within a {w10}, and many streets need a resident permit.
+host_intro: The dog run is {dogpark} miles from the door. A park is a {parkwalk}-minute walk. The Heights is an older part of the city, with {pre1940} percent of homes built before 1940 and {nocar} percent of households without a car. About {rest} restaurants sit within a {w10} and {rest1600} within {mile}, though only {bars} bar is close. Many streets are zone-permit streets. Figure about {drive} minutes of road to Sunday dinner and about ${b_toll} round trip with a New York E-ZPass.
+rules: Jersey City|resident_permit
+
+=== hood: nj:jersey-city-west-side
+scene: The West Side is a residential part of Jersey City where most households keep a car{!nocar<=0.25}. About {rest} restaurants and no bars or cafés{!bars==0}{!cafes==0} sit within a {w10}. A park is about {parkwalk} minutes on foot and the dog park is {dogpark} miles away. Your parents are about {drive} minutes away by car; tolls are about ${b_toll} round trip with a New York E-ZPass{!b_tollok==True}.
+good: A park is a short walk, and the supermarket is {super} miles away.
+watch: Almost nothing for a night out is within a {w10}{!bars==0}, and the vet is {vet} miles away.
+host_intro: This is the car-friendly side of Jersey City: only {nocar} percent of households here go without a car. [[The places we found run between about ${pg_lo} and ${pg_hi} a month all in. ]]A park is a {parkwalk}-minute walk and the dog park is {dogpark} miles away. What it lacks is an evening. About {rest} restaurants and no bars or cafés are within a {w10}{!bars==0}{!cafes==0}, and the vet is {vet} miles away. Home is about {drive} minutes back, about ${b_toll} round trip with a New York E-ZPass.

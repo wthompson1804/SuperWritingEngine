@@ -119,6 +119,10 @@ def main():
             cands.append((0.0, "the listed price is the page's total price, which already includes the required monthly fees", "stated"))
             fee_notes = [n for n in fee_notes if "fee exists" not in n]
             open_note = ""
+        ph = num(r.get("required_fees_phone")) if str(r.get("required_fees_phone", "")).strip() else None
+        if ph is not None:
+            # a total given on the phone replaces every reading of the pages (highest precedence), and nothing stays open
+            cands, fee_notes, open_note = [(ph, "total of the required monthly fees, by " + str(r.get("required_fees_phone_source", "phone call")), "confirmed_by_phone")], [], ""
         fee_has_internet = False
         if cands:
             amt, note, basis = max(cands, key=lambda c: c[0])

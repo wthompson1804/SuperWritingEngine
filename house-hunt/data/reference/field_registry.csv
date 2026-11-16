@@ -17,7 +17,7 @@ master_units,listed_rent,used,gates.py;build_master.py;all_in.py;rent_terms.py;e
 master_units,price_basis,used,build_master.py;all_in.py;rent_terms.py,
 master_units,concession_text,used,build_master.py;all_in.py;rent_terms.py,
 master_units,available_date_text,display,build_master.py,text shown on the unit card or cost receipt
-master_units,available_date,used,gates.py;build_master.py;rent_terms.py,
+master_units,available_date,used,gates.py;build_master.py;rank.py;rent_terms.py,
 master_units,floor,used,gates.py;build_master.py;rank.py;avoid.py,
 master_units,floor_used,used,gates.py;build_master.py,
 master_units,floor_basis,used,gates.py;build_master.py,
@@ -107,15 +107,15 @@ master_units,coord_spread_m,used,build_master.py;enrich_units.py,
 master_units,coord_note,used,build_master.py;enrich_units.py,
 master_units,elevator,used,gates.py;build_master.py;rank.py;avoid.py,
 master_units,elevator_basis,used,gates.py;build_master.py;rank.py,
-master_units,elevator_source,provenance,,travels with elevator
+master_units,elevator_source,provenance,build_master.py,travels with elevator
 master_units,dogs_allowed,used,build_master.py;rank.py;avoid.py,
-master_units,dogs_allowed_basis,provenance,,travels with dogs_allowed
+master_units,dogs_allowed_basis,used,build_master.py;rank.py,
 master_units,dogs_allowed_source,provenance,,travels with dogs_allowed
 master_units,dog_policy_text,display,build_master.py,text shown on the unit card or cost receipt
 master_units,dog_policy_text_basis,provenance,,travels with dog_policy_text
 master_units,dog_policy_text_source,provenance,,travels with dog_policy_text
 master_units,dog_weight_limit_lb,used,gates.py;build_master.py;rank.py,
-master_units,dog_weight_limit_lb_basis,provenance,,travels with dog_weight_limit_lb
+master_units,dog_weight_limit_lb_basis,provenance,build_master.py,travels with dog_weight_limit_lb
 master_units,dog_weight_limit_lb_source,provenance,,travels with dog_weight_limit_lb
 master_units,pet_rent_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_units,pet_rent_monthly_basis,used,all_in.py,
@@ -159,6 +159,9 @@ master_units,package_room_source,provenance,,travels with package_room
 master_units,lounge_or_coworking,used,build_master.py;rank.py,
 master_units,lounge_or_coworking_basis,provenance,,travels with lounge_or_coworking
 master_units,lounge_or_coworking_source,provenance,,travels with lounge_or_coworking
+master_units,elevator_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_units,elevator_note_basis,provenance,,travels with elevator_note
+master_units,elevator_note_source,provenance,,travels with elevator_note
 master_units,dog_weight_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
 master_units,dog_weight_text_basis,provenance,,travels with dog_weight_text
 master_units,dog_weight_text_source,provenance,,travels with dog_weight_text
@@ -189,6 +192,7 @@ master_units,pool_source,provenance,,travels with pool
 master_units,doorman,used,build_master.py;rank.py,
 master_units,doorman_basis,provenance,,travels with doorman
 master_units,doorman_source,provenance,,travels with doorman
+master_units,elevator_aggregator_only,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_units,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_units,parking_fee_monthly_basis,used,all_in.py,
 master_units,parking_fee_monthly_source,provenance,,travels with parking_fee_monthly
@@ -201,6 +205,9 @@ master_units,parking_options_source,provenance,,travels with parking_options
 master_units,balconies,used,build_master.py;rank.py,
 master_units,balconies_basis,provenance,,travels with balconies
 master_units,balconies_source,provenance,,travels with balconies
+master_units,dog_weight_unstated,used,build_master.py;rank.py,
+master_units,dog_weight_unstated_basis,provenance,,travels with dog_weight_unstated
+master_units,dog_weight_unstated_source,provenance,,travels with dog_weight_unstated
 master_units,listing_warning,used,build_master.py;rank.py,
 master_units,listing_warning_basis,provenance,,travels with listing_warning
 master_units,listing_warning_source,provenance,,travels with listing_warning
@@ -240,9 +247,6 @@ master_units,optional_fees_text_source,provenance,,travels with optional_fees_te
 master_units,income_requirement,used,build_master.py;rank.py,
 master_units,income_requirement_basis,provenance,,travels with income_requirement
 master_units,income_requirement_source,provenance,,travels with income_requirement
-master_units,elevator_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
-master_units,elevator_note_basis,provenance,,travels with elevator_note
-master_units,elevator_note_source,provenance,,travels with elevator_note
 master_units,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
 master_units,rent_regulation_basis,provenance,,travels with rent_regulation
 master_units,rent_regulation_source,provenance,,travels with rent_regulation
@@ -437,11 +441,22 @@ master_units,nycrec_sr311_unsanitary_condition__last_24_months,display,,NYC reco
 master_units,nycrec_sr311_unsanitary_condition__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
 master_units,nyc_record_flags,used,build_master.py;rating_standard.py,
 master_units,evidence_rows,used,build_master.py;rank.py,
+master_units,street_overnight_severity,used,build_master.py;rank.py,
+master_units,street_overnight_town,used,build_master.py;rank.py,
+master_units,street_overnight_rule,used,build_master.py;rank.py,
+master_units,street_overnight_url,used,build_master.py;rank.py,
 master_units,price_lease_months,used,build_master.py;all_in.py;rank.py,
 master_units,price_12_month,used,build_master.py;all_in.py;rank.py,
 master_units,price_lease_quote,display,build_master.py,source sentence or record behind the lease-term asterisk and the NYC lot check (independent check 2)
 master_units,price_lease_source,provenance,build_master.py,travels with price_lease
 master_units,price_lowest_of_terms,used,build_master.py;rank.py,
+master_units,call_called_at,display,build_master.py,phone answers (data/evidence/call_answers.csv): notes and when the call was made; the fee total is read by all_in.py
+master_units,call_available,used,build_master.py;rank.py,
+master_units,page_modified_date,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
+master_units,page_modified_source,provenance,build_master.py,travels with page_modified
+master_units,listing_stale,used,build_master.py;rank.py,
+master_units,listing_stale_days,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
+master_units,listing_stale_why,used,build_master.py;rank.py,
 master_units,rent_basis,used,all_in.py,
 master_units,rent_basis_kind,used,all_in.py;rank.py,
 master_units,rent_gross,used,all_in.py,
@@ -531,15 +546,15 @@ master_buildings,coord_spread_m,used,build_master.py;enrich_units.py,
 master_buildings,coord_note,used,build_master.py;enrich_units.py,
 master_buildings,elevator,used,gates.py;build_master.py;rank.py;avoid.py,
 master_buildings,elevator_basis,used,gates.py;build_master.py;rank.py,
-master_buildings,elevator_source,provenance,,travels with elevator
+master_buildings,elevator_source,provenance,build_master.py,travels with elevator
 master_buildings,dogs_allowed,used,build_master.py;rank.py;avoid.py,
-master_buildings,dogs_allowed_basis,provenance,,travels with dogs_allowed
+master_buildings,dogs_allowed_basis,used,build_master.py;rank.py,
 master_buildings,dogs_allowed_source,provenance,,travels with dogs_allowed
 master_buildings,dog_policy_text,display,build_master.py,text shown on the unit card or cost receipt
 master_buildings,dog_policy_text_basis,provenance,,travels with dog_policy_text
 master_buildings,dog_policy_text_source,provenance,,travels with dog_policy_text
 master_buildings,dog_weight_limit_lb,used,gates.py;build_master.py;rank.py,
-master_buildings,dog_weight_limit_lb_basis,provenance,,travels with dog_weight_limit_lb
+master_buildings,dog_weight_limit_lb_basis,provenance,build_master.py,travels with dog_weight_limit_lb
 master_buildings,dog_weight_limit_lb_source,provenance,,travels with dog_weight_limit_lb
 master_buildings,pet_rent_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_buildings,pet_rent_monthly_basis,used,all_in.py,
@@ -583,6 +598,9 @@ master_buildings,package_room_source,provenance,,travels with package_room
 master_buildings,lounge_or_coworking,used,build_master.py;rank.py,
 master_buildings,lounge_or_coworking_basis,provenance,,travels with lounge_or_coworking
 master_buildings,lounge_or_coworking_source,provenance,,travels with lounge_or_coworking
+master_buildings,elevator_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
+master_buildings,elevator_note_basis,provenance,,travels with elevator_note
+master_buildings,elevator_note_source,provenance,,travels with elevator_note
 master_buildings,dog_weight_text,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
 master_buildings,dog_weight_text_basis,provenance,,travels with dog_weight_text
 master_buildings,dog_weight_text_source,provenance,,travels with dog_weight_text
@@ -613,6 +631,7 @@ master_buildings,pool_source,provenance,,travels with pool
 master_buildings,doorman,used,build_master.py;rank.py,
 master_buildings,doorman_basis,provenance,,travels with doorman
 master_buildings,doorman_source,provenance,,travels with doorman
+master_buildings,elevator_aggregator_only,display,build_master.py,"the date and sentence behind the staleness rule, the elevator-evidence count and the overnight-parking disclosure"
 master_buildings,parking_fee_monthly,used,gates.py;build_master.py;all_in.py;rank.py,
 master_buildings,parking_fee_monthly_basis,used,all_in.py,
 master_buildings,parking_fee_monthly_source,provenance,,travels with parking_fee_monthly
@@ -625,6 +644,9 @@ master_buildings,parking_options_source,provenance,,travels with parking_options
 master_buildings,balconies,used,build_master.py;rank.py,
 master_buildings,balconies_basis,provenance,,travels with balconies
 master_buildings,balconies_source,provenance,,travels with balconies
+master_buildings,dog_weight_unstated,used,build_master.py;rank.py,
+master_buildings,dog_weight_unstated_basis,provenance,,travels with dog_weight_unstated
+master_buildings,dog_weight_unstated_source,provenance,,travels with dog_weight_unstated
 master_buildings,listing_warning,used,build_master.py;rank.py,
 master_buildings,listing_warning_basis,provenance,,travels with listing_warning
 master_buildings,listing_warning_source,provenance,,travels with listing_warning
@@ -664,9 +686,6 @@ master_buildings,optional_fees_text_source,provenance,,travels with optional_fee
 master_buildings,income_requirement,used,build_master.py;rank.py,
 master_buildings,income_requirement_basis,provenance,,travels with income_requirement
 master_buildings,income_requirement_source,provenance,,travels with income_requirement
-master_buildings,elevator_note,display,build_master.py,source sentence kept for display beside the parsed value (shown with an asterisk when the parse is unknown)
-master_buildings,elevator_note_basis,provenance,,travels with elevator_note
-master_buildings,elevator_note_source,provenance,,travels with elevator_note
 master_buildings,rent_regulation,display,build_master.py,text shown on the unit card or cost receipt
 master_buildings,rent_regulation_basis,provenance,,travels with rent_regulation
 master_buildings,rent_regulation_source,provenance,,travels with rent_regulation
@@ -861,6 +880,10 @@ master_buildings,nycrec_sr311_unsanitary_condition__last_24_months,display,,NYC 
 master_buildings,nycrec_sr311_unsanitary_condition__last_6_months,display,,NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule
 master_buildings,nyc_record_flags,used,build_master.py;rating_standard.py,
 master_buildings,evidence_rows,used,build_master.py;rank.py,
+master_buildings,street_overnight_severity,used,build_master.py;rank.py,
+master_buildings,street_overnight_town,used,build_master.py;rank.py,
+master_buildings,street_overnight_rule,used,build_master.py;rank.py,
+master_buildings,street_overnight_url,used,build_master.py;rank.py,
 evidence:items,addr_key,used,gates.py;build_master.py;all_in.py;rank.py;avoid.py;build_neighborhoods.py;lifestyle_features.py;lifestyle_color.py;rent_terms.py;rating_standard.py;enrich_units.py,
 evidence:items,building_name,used,gates.py;build_master.py;rank.py;avoid.py;rent_terms.py;rating_standard.py,
 evidence:items,category,used,avoid.py,
