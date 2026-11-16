@@ -1352,6 +1352,8 @@ var DUMP_RE=/totalPrice|\bterm\s*\d+\s*:|[{}\[\]]|=>|\b[a-z]+_[a-z_]+\b|\b[a-z]+
     NOTE_RE=/\bcaptured?\b|gross or net|net-effective|does not say|not stated|neither page|\blisted (?:rent|price) is\b|\bown site\b|\bUTC\b|\bApartment List\b|\bTrulia\b|\bZumper\b|deadline has passed|, which has passed|\.\.\.$/i;
 function looksDump(s){s=String(s||"");return DUMP_RE.test(s)||(s.match(/\b[A-Za-z]+\s*:\s*\$?\d/g)||[]).length>=2}
 function cleanText(t){return String(t==null?"":t).split(/\s+\|\s+/).map(function(s){return s.replace(/\*{2,}/g,"").replace(/\s+/g," ").trim()}).filter(function(s,i,a){return s&&!looksDump(s)&&!NOTE_RE.test(s)&&a.indexOf(s)===i}).join(" · ")}
+/* a note of ours that quotes such text keeps its sentences and loses the dumped parts */
+function noDump(t){t=String(t==null?"":t);return t.indexOf(" | ")<0?(/totalPrice|\bterm\s*\d+\s*:/.test(t)?"":t):t.split(/\s+\|\s+/).filter(function(s){return s&&!looksDump(s)}).join(" ").trim()}
 function offerText(U){return cleanText(U&&U.rent&&U.rent.offer_text)}
 function netEff(U){return U.rent.basis_kind==="net_effective"}
 function rentStar(U){return !!(U.rent.asterisk||netEff(U))}
@@ -1451,7 +1453,7 @@ function rulesBlock(a,order,what){a=sortRules(a,order);var top=a.slice(0,RULES_S
 /* Things still to confirm. Reads unit.confirm (one object or a list), unit.confirms / unit.asterisks (lists), or flat
    confirm_what / confirm_why / what_to_confirm. Each item: what (also what_to_confirm, confirm_what, kind, label),
    why (also confirm_why, reason), and optionally question (also ask). The text is shown as given. */
-function noZero(t){return String(t==null?"":t).replace(/\s*\((?:and )?count(?:ed|s)? as \$0\)/gi,"").replace(/\bcount(?:ed|s)? as \$0\b/gi,"left out of the total")}
+function noZero(t){return noDump(String(t==null?"":t)).replace(/\s*\((?:and )?count(?:ed|s)? as \$0\)/gi,"").replace(/\bcount(?:ed|s)? as \$0\b/gi,"left out of the total")}
 function confItem(x){if(!x)return null;if(typeof x==="string")return {what:x,why:"",ask:""};if(typeof x!=="object"||x.asterisk===false)return null;
   var what=x.what||x.what_to_confirm||x.confirm_what||x.kind||x.label||"",why=x.why||x.confirm_why||x.reason||"",ask=x.question||x.ask||"";
   if(Array.isArray(what))what=what.join("; ");if(Array.isArray(why))why=why.join(" ");
