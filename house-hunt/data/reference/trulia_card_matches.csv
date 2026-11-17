@@ -66,8 +66,8 @@ trulia:466311743,New Jersey,149 Zabriskie St,07307,41M,1,1795,zumper-65669176,,s
 trulia:2095412780,New Jersey,15 Irving St,07307,1,1,1900,,,unmatched_offline,no readable row in the building
 trulia:2134432122,New Jersey,209 Webster Ave,07307,3R,0,1500,,,unmatched_offline,no readable row in the building
 trulia:2061022407,New Jersey,31 Carlton Ave,07307,5,1,1996,,,unmatched_offline,no readable row in the building
-trulia:463360680,New Jersey,401 Central Ave,07307,B1,1,1995,,,unmatched_offline,no readable row in the building
-trulia:2063422587,New Jersey,401 Central Ave,07307,B5,1,1995,,,unmatched_offline,no readable row in the building
+trulia:463360680,New Jersey,401 Central Ave,07307,B1,1,1995,,https://www.apartmentlist.com/nj/jersey-city/401-central-ave--1,site_no_units,Apartment List page read 2026-11-17T20:50:35+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 401 central ave|07307
+trulia:2063422587,New Jersey,401 Central Ave,07307,B5,1,1995,,https://www.apartmentlist.com/nj/jersey-city/401-central-ave--1,site_no_units,Apartment List page read 2026-11-17T20:50:35+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 401 central ave|07307
 trulia:2088925775,New Jersey,418 Liberty Ave,07307,1R,1,1895,,,unmatched_offline,no readable row in the building
 trulia:2056593122,New Jersey,484 Central Ave,07307,3,0,1850,,,unmatched_offline,no readable row in the building
 trulia:466458967,New Jersey,76 Hague St,07307,B,1,1947,,,unmatched_offline,no readable row in the building
@@ -124,10 +124,10 @@ trulia:2062527034,New Jersey,164 Sterling Ave,07305,40,1,1795,zumper-56391729,,s
 trulia:466169908,New Jersey,164 Sterling Ave,07305,41L,1,1895,zumper-56391729,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:466410674,New Jersey,164 Sterling Ave,07305,41N,1,1795,zumper-56391729,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:466559886,New Jersey,171 Martin Luther King Dr,07305,31,1,1750,zumper-65669177,,building_id,"1 readable rows in the building (zumper); 1 at or under $2,200"
-trulia:2078190112,New Jersey,171 Ocean Ave,07305,12,1,1850,,,unmatched_offline,no readable row in the building
-trulia:2087950039,New Jersey,171 Ocean Ave,07305,15,1,1950,,,unmatched_offline,no readable row in the building
-trulia:2092071216,New Jersey,171 Ocean Ave,07305,16,1,1950,,,unmatched_offline,no readable row in the building
-trulia:466001968,New Jersey,171 Ocean Ave,07305,17,1,1950,,,unmatched_offline,no readable row in the building
+trulia:2078190112,New Jersey,171 Ocean Ave,07305,12,1,1850,,,no_site_found,"web search 2026-11-17: aggregators only (after55, forrentuniversity, Zillow); 169-175 Ocean Ave sold via Cervelli (re-nj.com)"
+trulia:2087950039,New Jersey,171 Ocean Ave,07305,15,1,1950,,,no_site_found,"web search 2026-11-17: aggregators only (after55, forrentuniversity, Zillow); 169-175 Ocean Ave sold via Cervelli (re-nj.com)"
+trulia:2092071216,New Jersey,171 Ocean Ave,07305,16,1,1950,,,no_site_found,"web search 2026-11-17: aggregators only (after55, forrentuniversity, Zillow); 169-175 Ocean Ave sold via Cervelli (re-nj.com)"
+trulia:466001968,New Jersey,171 Ocean Ave,07305,17,1,1950,,,no_site_found,"web search 2026-11-17: aggregators only (after55, forrentuniversity, Zillow); 169-175 Ocean Ave sold via Cervelli (re-nj.com)"
 trulia:466134022,New Jersey,176 Ocean Ave,07305,3F,1,1850,,,unmatched_offline,no readable row in the building
 trulia:401897676,New Jersey,186 Ocean Ave,07305,3,1,1800,,,unmatched_offline,no readable row in the building
 trulia:466069733,New Jersey,186 Ocean Ave,07305,4,1,1800,,,unmatched_offline,no readable row in the building
@@ -175,7 +175,7 @@ trulia:460064885,New Jersey,93 Ackerman Ave,07011,5C,1,1749,,,unmatched_offline,
 trulia:2058167021,New Jersey,139-145 Haledon Ave,07522,14,1,1875,,,unmatched_offline,no readable row in the building
 trulia:456343700,New Jersey,166 Kearney St,07522,1B,1,1400,,,unmatched_offline,no readable row in the building
 trulia:b2751847414,New Jersey,1143 Kennedy Blvd,07002,,1,1925,apartmentlist:p847105-1B390-2H2B;apartmentlist:p847105-1B390-175W3B;apartmentlist:p847105-1B390-3P2A;apartmentlist:p847105-1B390-9P3A;apartmentlist:p847105-1B390-9P1A;apartmentlist:p847105-1B390-1B1A;apartmentlist:p847105-1B390-8B1A,,street_key,"7 readable rows in the building (apartmentlist.com); 6 at or under $2,200"
-trulia:458843718,New Jersey,11 Broadway,07002,25,1,1799,,,unmatched_offline,no readable row in the building
+trulia:458843718,New Jersey,11 Broadway,07002,25,1,1799,,https://www.apartmentlist.com/nj/bayonne/11-broadway--5,site_no_units,Apartment List page read 2026-11-17T20:51:47+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 11 broadway|07002
 trulia:466164243,New Jersey,1204 John F Kennedy Blvd,07002,35M,1,1695,zumper-65198202,,street_key_same_unit,"3 readable rows in the building (zumper); 3 at or under $2,200; same unit label on zumper-65198202"
 trulia:465348519,New Jersey,1204 John F Kennedy Blvd,07002,42M,1,1695,zumper-65358241,,street_key_same_unit,"3 readable rows in the building (zumper); 3 at or under $2,200; same unit label on zumper-65358241"
 trulia:2108251969,New Jersey,155 W  29th St,07002,104,0,1595,,,unmatched_offline,no readable row in the building
@@ -419,7 +419,7 @@ trulia:465853724,Connecticut,114-118 Elizabeth St,06516,118-A3,1,1550,,,unmatche
 trulia:464785145,Connecticut,135 York St,06516,2,1,1349,zumper-65272911,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:466064784,Connecticut,170 Canton St,06516,E5,1,1500,,,unmatched_offline,no readable row in the building
 trulia:466252854,Connecticut,170 Canton St,06516,O2,1,1400,,,unmatched_offline,no readable row in the building
-trulia:442147152,Connecticut,337 Main St,06516,8,1,1475,,,unmatched_offline,no readable row in the building
+trulia:442147152,Connecticut,337 Main St,06516,8,1,1475,,https://www.apartmentlist.com/ct/west-haven/337-main-street,site_no_units,Apartment List page read 2026-11-17T20:51:17+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 337 main st|06516
 trulia:439051093,Connecticut,509 Main St,06516,28,1,1775,,,unmatched_offline,no readable row in the building
 trulia:b2798587699,New Jersey,2000 Maplewood Dr,08502,,1,1615,,,unmatched_offline,no readable row in the building
 trulia:457660042,New Jersey,5015 Highway 33,07727,5-34,1,1850,,,unmatched_offline,no readable row in the building
@@ -453,9 +453,9 @@ trulia:465890897,New Jersey,169 Spring St,07860,7,1,1900,,,unmatched_offline,no 
 trulia:87972269,New Jersey,3 Academy St,07860,,1,1775,,,unmatched_offline,no readable row in the building
 trulia:465034016,Connecticut,105 Howe St,06511,507,0,1875,,,unmatched_offline,no readable row in the building
 trulia:2141711620,Connecticut,116 Court St,06511,302,1,1700,,,unmatched_offline,no readable row in the building
-trulia:2057293456,Connecticut,1175 Chapel St,06511,500,1,1475,,,unmatched_offline,no readable row in the building
-trulia:463217039,Connecticut,1175 Chapel St,06511,503,0,1350,,,unmatched_offline,no readable row in the building
-trulia:351064246,Connecticut,1175 Chapel St,06511,600,1,1400,,,unmatched_offline,no readable row in the building
+trulia:2057293456,Connecticut,1175 Chapel St,06511,500,1,1475,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:463217039,Connecticut,1175 Chapel St,06511,503,0,1350,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:351064246,Connecticut,1175 Chapel St,06511,600,1,1400,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
 trulia:450734323,Connecticut,135 Howe St,06511,2,0,1295,,,unmatched_offline,no readable row in the building
 trulia:456126215,Connecticut,1552-1554 Chapel St,06511,3,1,1550,,,unmatched_offline,no readable row in the building
 trulia:2093477006,Connecticut,2 Read St,06511,8,1,1450,,,unmatched_offline,no readable row in the building
@@ -472,7 +472,7 @@ trulia:2100000047,Connecticut,923 Elm St,06511,2A,1,1550,,,unmatched_offline,no 
 trulia:466535965,Connecticut,96 Webster St,06511,2,1,1500,,,unmatched_offline,no readable row in the building
 trulia:b1003145251,New Jersey,3461 S  Broad St,08610,,1,1895,apartmentlist:p781837--3341A;apartmentlist:p781837--3349D;apartmentlist:p781837--3393A;apartmentlist:p781837--3403A;apartmentlist:p781837--3451D;apartmentlist:p781837--3361D,,street_key,"6 readable rows in the building (apartmentlist.com); 6 at or under $2,200"
 trulia:b1139700070,New Jersey,122 Estates Blvd,08610,,1,1809,,,unmatched_offline,no readable row in the building
-trulia:57965073,Connecticut,196 Crown St,06510,5G,1,1699,,,unmatched_offline,no readable row in the building
+trulia:57965073,Connecticut,196 Crown St,06510,5G,1,1699,,https://www.apartmentlist.com/ct/new-haven/196-crown-street--4,site_no_units,Apartment List page is a soft 404 (read 2026-11-17T20:51:45+00:00)
 trulia:465762099,New Jersey,717 Schiller Ave,08610,2B,1,1475,,,unmatched_offline,no readable row in the building
 trulia:b2772852250,New Jersey,4134 S  Broad St,08620,,1,1599,,,unmatched_offline,no readable row in the building
 trulia:b2772566021,New Jersey,4134-T1 S  Broad St,08620,,1,1715,,,unmatched_offline,no readable row in the building
@@ -487,10 +487,10 @@ trulia:463486342,Connecticut,172 Dover St,06513,3,1,1500,,,unmatched_offline,no 
 trulia:2057734305,Connecticut,175 James St,06513,3,1,1450,,,unmatched_offline,no readable row in the building
 trulia:466304063,Connecticut,215 Ferry St,06513,1,1,1300,,,unmatched_offline,no readable row in the building
 trulia:466304071,Connecticut,215 Ferry St,06513,3F,1,1300,,,unmatched_offline,no readable row in the building
-trulia:2081408941,Connecticut,32 Old Foxon Rd,06513,15,1,1500,,,unmatched_offline,no readable row in the building
-trulia:465537460,Connecticut,32 Old Foxon Rd,06513,3,1,1500,,,unmatched_offline,no readable row in the building
-trulia:465536917,Connecticut,32 Old Foxon Rd,06513,39,1,1450,,,unmatched_offline,no readable row in the building
-trulia:465812719,Connecticut,32 Old Foxon Rd,06513,55,1,1500,,,unmatched_offline,no readable row in the building
+trulia:2081408941,Connecticut,32 Old Foxon Rd,06513,15,1,1500,,,no_site_found,"web search 2026-11-17: Foxon Woods Apartments (78 units, 3 stories); only off-limits aggregators (RentHop, HotPads, Apartments.com) and Rentler; no own site"
+trulia:465537460,Connecticut,32 Old Foxon Rd,06513,3,1,1500,,,no_site_found,"web search 2026-11-17: Foxon Woods Apartments (78 units, 3 stories); only off-limits aggregators (RentHop, HotPads, Apartments.com) and Rentler; no own site"
+trulia:465536917,Connecticut,32 Old Foxon Rd,06513,39,1,1450,,,no_site_found,"web search 2026-11-17: Foxon Woods Apartments (78 units, 3 stories); only off-limits aggregators (RentHop, HotPads, Apartments.com) and Rentler; no own site"
+trulia:465812719,Connecticut,32 Old Foxon Rd,06513,55,1,1500,,,no_site_found,"web search 2026-11-17: Foxon Woods Apartments (78 units, 3 stories); only off-limits aggregators (RentHop, HotPads, Apartments.com) and Rentler; no own site"
 trulia:452818031,Connecticut,40 Shelter St,06513,3,1,1600,apartmentlist:p127234463-b98b3164-dbce-11f1-8999-120b9c3576af,,street_key_same_unit,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200; same unit label on apartmentlist:p127234463-b98b3164-dbce-11f1-8999-120b9c3576af"
 trulia:57962344,Connecticut,40 Shelter St,06513,,1,1595,apartmentlist:p127234463-b98b3164-dbce-11f1-8999-120b9c3576af;zumper-65742812,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:459804944,Connecticut,48 Old Foxon Rd,06513,A,1,1500,,,unmatched_offline,no readable row in the building
@@ -516,12 +516,12 @@ trulia:459523124,New Jersey,12 Belvidere St,08618,1,1,1600,,,unmatched_offline,n
 trulia:459523207,New Jersey,12 Belvidere St,08618,2,1,1600,,,unmatched_offline,no readable row in the building
 trulia:39015346,New Jersey,12 Belvidere St,08618,,1,1650,,,unmatched_offline,no readable row in the building
 trulia:441560625,New Jersey,1205 Edgewood Ave,08618,8,1,1475,zumper-65470057,,street_key_same_unit,"2 readable rows in the building (zumper); 2 at or under $2,200; same unit label on zumper-65470057"
-trulia:466384277,New Jersey,488 W  State St,08618,715,1,1250,,,unmatched_offline,no readable row in the building
-trulia:466239376,New Jersey,488 W  State St,08618,716,1,1250,,,unmatched_offline,no readable row in the building
-trulia:466286714,New Jersey,488 W  State St,08618,717,1,1250,,,unmatched_offline,no readable row in the building
-trulia:466384313,New Jersey,488 W  State St,08618,906,0,1099,,,unmatched_offline,no readable row in the building
-trulia:466286505,New Jersey,488 W  State St,08618,908,0,1099,,,unmatched_offline,no readable row in the building
-trulia:466239294,New Jersey,488 W  State St,08618,909,0,1099,,,unmatched_offline,no readable row in the building
+trulia:466384277,New Jersey,488 W  State St,08618,715,1,1250,,,no_site_found,"web search 2026-11-17: only off-limits aggregators (Apartments.com, Zillow) for 488; neighbours 487-489 are Luther Towers (55+)"
+trulia:466239376,New Jersey,488 W  State St,08618,716,1,1250,,,no_site_found,"web search 2026-11-17: only off-limits aggregators (Apartments.com, Zillow) for 488; neighbours 487-489 are Luther Towers (55+)"
+trulia:466286714,New Jersey,488 W  State St,08618,717,1,1250,,,no_site_found,"web search 2026-11-17: only off-limits aggregators (Apartments.com, Zillow) for 488; neighbours 487-489 are Luther Towers (55+)"
+trulia:466384313,New Jersey,488 W  State St,08618,906,0,1099,,,no_site_found,"web search 2026-11-17: only off-limits aggregators (Apartments.com, Zillow) for 488; neighbours 487-489 are Luther Towers (55+)"
+trulia:466286505,New Jersey,488 W  State St,08618,908,0,1099,,,no_site_found,"web search 2026-11-17: only off-limits aggregators (Apartments.com, Zillow) for 488; neighbours 487-489 are Luther Towers (55+)"
+trulia:466239294,New Jersey,488 W  State St,08618,909,0,1099,,,no_site_found,"web search 2026-11-17: only off-limits aggregators (Apartments.com, Zillow) for 488; neighbours 487-489 are Luther Towers (55+)"
 trulia:351584686,New Jersey,9 & 11 Sanhican Dr,08618,A8,0,1300,zumper-65316923,,building_id_same_unit,"5 readable rows in the building (zumper); 5 at or under $2,200; same unit label on zumper-65316923"
 trulia:465004723,New Jersey,9-11 Sanhican Dr,08618,B2,1,1450,zumper-65470053,,street_key_same_unit,"2 readable rows in the building (zumper); 2 at or under $2,200; same unit label on zumper-65470053"
 trulia:466380183,New Jersey,9 & 11 Sanhican Dr,08618,B3,1,1450,zumper-64406233;zumper-64406234;zumper-65241118;zumper-65316923;zumper-65241119,,building_id,"5 readable rows in the building (zumper); 5 at or under $2,200"
@@ -686,7 +686,7 @@ trulia:2099316239,Brooklyn,279 71st St,11209,3F,1,2000,,,unmatched_offline,no re
 trulia:466236375,New Jersey,533 Victory Ave,07657,2,1,1950,,,unmatched_offline,no readable row in the building
 trulia:447912815,New Jersey,54-56 Paulison Ave,07660,L,0,1750,,,unmatched_offline,no readable row in the building
 trulia:463044302,New Jersey,,07660,,1,1625,,,unmatched_offline,no address on card
-trulia:b2799773668,New Jersey,86 Bergen Ave,07666,99e2602ee,1,2000,,,unmatched_offline,no readable row in the building
+trulia:b2799773668,New Jersey,86 Bergen Ave,07666,99e2602ee,1,2000,,,no_site_found,"web search 2026-11-17 (Colonial Garden Apartments, listed at 80 Bergen Ave): aggregators only"
 trulia:38039637,New Jersey,1266 Teaneck Rd,07666,11,1,2000,,,unmatched_offline,no readable row in the building
 trulia:347789914,New Jersey,1648 Shelbourne St,07666,2,1,1850,,,unmatched_offline,no readable row in the building
 trulia:459144784,New Jersey,272 Frances St,07666,2,0,2000,zumper-65681074,,street_key_same_unit,"1 readable rows in the building (zumper); 1 at or under $2,200; same unit label on zumper-65681074"
@@ -761,9 +761,9 @@ trulia:2077531208,New Jersey,3685 John F Kennedy Blvd,07307,1,1,2000,,,unmatched
 trulia:2054666394,New Jersey,393 Central Ave,07307,10,1,1950,,,unmatched_offline,no readable row in the building
 trulia:340038426,New Jersey,40 Booraem Ave,07307,21,1,1895,,,unmatched_offline,no readable row in the building
 trulia:2091436592,New Jersey,40 Booraem Ave,07307,5,1,1695,,,unmatched_offline,no readable row in the building
-trulia:2062148990,New Jersey,401 Central Ave,07307,2,1,1995,,,unmatched_offline,no readable row in the building
-trulia:463353843,New Jersey,401 Central Ave,07307,24E,1,1995,,,unmatched_offline,no readable row in the building
-trulia:466577927,New Jersey,401 Central Ave,07307,B4Y,1,1995,,,unmatched_offline,no readable row in the building
+trulia:2062148990,New Jersey,401 Central Ave,07307,2,1,1995,,https://www.apartmentlist.com/nj/jersey-city/401-central-ave--1,site_no_units,Apartment List page read 2026-11-17T20:50:35+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 401 central ave|07307
+trulia:463353843,New Jersey,401 Central Ave,07307,24E,1,1995,,https://www.apartmentlist.com/nj/jersey-city/401-central-ave--1,site_no_units,Apartment List page read 2026-11-17T20:50:35+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 401 central ave|07307
+trulia:466577927,New Jersey,401 Central Ave,07307,B4Y,1,1995,,https://www.apartmentlist.com/nj/jersey-city/401-central-ave--1,site_no_units,Apartment List page read 2026-11-17T20:50:35+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 401 central ave|07307
 trulia:456275167,New Jersey,403 Liberty Ave,07307,1,1,1698,,,unmatched_offline,no readable row in the building
 trulia:2081185932,New Jersey,516 Central Ave,07307,6,1,1795,,,unmatched_offline,no readable row in the building
 trulia:2085077385,New Jersey,520 Central Ave,07307,6,1,1850,,,unmatched_offline,no readable row in the building
@@ -846,7 +846,7 @@ trulia:466063215,New Jersey,200 Union Ave,07070,AA,1,1895,,,unmatched_offline,no
 trulia:31160663,Long Island,38 Hamilton Ave,11771,,1,1850,zumper-65497971,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:464517508,New Jersey,74B Hastings Ave,07070,B,1,1700,,,unmatched_offline,no readable row in the building
 trulia:38026530,New Jersey,80 Clark Ct,07070,,1,1900,,,unmatched_offline,no readable row in the building
-trulia:b1001479173,New Jersey,235 W  Passaic St,07662,60913680d,1,1835,,,unmatched_offline,no readable row in the building
+trulia:b1001479173,New Jersey,235 W  Passaic St,07662,60913680d,1,1835,,,no_site_found,"web search 2026-11-17 (Swan Court Apartments, 126 units, 2 storeys): aggregators only; Zillow marks it unclaimed"
 trulia:b2737469323,New Jersey,86 Contant Ave,07644,1ba7a310b,1,1925,,,unmatched_offline,no readable row in the building
 trulia:b2750957127,New Jersey,1 Marion Pepe Dr,07644,,1,1899,,,unmatched_offline,no readable row in the building
 trulia:37946758,New Jersey,10 Pine St,07644,,1,1800,,,unmatched_offline,no readable row in the building
@@ -892,8 +892,8 @@ trulia:2102574332,New Jersey,164 Sterling Ave,07305,42,1,1795,zumper-56391729,,s
 trulia:2113878627,New Jersey,164 Sterling Ave,07305,43,1,1795,zumper-56391729,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:2072823774,New Jersey,164 Sterling Ave,07305,44E,1,1795,zumper-56391729,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:2053265533,New Jersey,1697 John F Kennedy Blvd,07305,2R,1,1600,,,unmatched_offline,no readable row in the building
-trulia:466206230,New Jersey,171 Ocean Ave,07305,11E,1,2000,,,unmatched_offline,no readable row in the building
-trulia:440743180,New Jersey,171 Ocean Ave,07305,16E,1,2000,,,unmatched_offline,no readable row in the building
+trulia:466206230,New Jersey,171 Ocean Ave,07305,11E,1,2000,,,no_site_found,"web search 2026-11-17: aggregators only (after55, forrentuniversity, Zillow); 169-175 Ocean Ave sold via Cervelli (re-nj.com)"
+trulia:440743180,New Jersey,171 Ocean Ave,07305,16E,1,2000,,,no_site_found,"web search 2026-11-17: aggregators only (after55, forrentuniversity, Zillow); 169-175 Ocean Ave sold via Cervelli (re-nj.com)"
 trulia:72247065,New Jersey,172 Rose Ave,07305,,1,1750,zumper-65436091,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:2101979996,New Jersey,1861 John F Kennedy Blvd,07305,302,1,1743,,,unmatched_offline,no readable row in the building
 trulia:2091822924,New Jersey,19 Long St,07305,0,1,1800,,,unmatched_offline,no readable row in the building
@@ -917,7 +917,7 @@ trulia:b1001440842,New Jersey,1 Karl Pl,07026,1B-1Ba-860Sqft,1,1995,zumper-46994
 trulia:b1001487166,New Jersey,168 Richfield Ter,07012,,0,1695,,,unmatched_offline,no readable row in the building
 trulia:b2734319254,New Jersey,5 Market St,07012,,0,1790,,,unmatched_offline,no readable row in the building
 trulia:465950106,New Jersey,70 Main St,07026,2,1,1775,,,unmatched_offline,no readable row in the building
-trulia:b2785847104,New Jersey,435 N  Midland Ave,07663,74560593f,1,1542,,,unmatched_offline,no readable row in the building
+trulia:b2785847104,New Jersey,435 N  Midland Ave,07663,74560593f,1,1542,,https://livewillows.com/communities/the-willows-at-saddle-brook/,site_no_units,"own site read 2026-11-17T20:53:12Z: affordable (20-60% AMI, income limits); 'Wait List Open for 1 & 2 BRs'; only 3BR leasing. No studio/1BR to capture"
 trulia:2083368014,New Jersey,522 Saddle River Rd,07663,1,1,1600,zumper-65444970,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:b1001580505,New Jersey,304 Hillside Ave,07110,,1,1875,,,unmatched_offline,no readable row in the building
 trulia:b2750958714,New Jersey,33 Yale St,07110,,1,1879,,,unmatched_offline,no readable row in the building
@@ -988,10 +988,10 @@ trulia:465200860,New Jersey,135 Beech St,07501,203,1,1718,,,unmatched_offline,no
 trulia:465371582,New Jersey,135 Beech St,07501,40,0,1500,,,unmatched_offline,no readable row in the building
 trulia:39764391,New Jersey,135 Beech St,07501,,1,1923,,,unmatched_offline,no readable row in the building
 trulia:466515799,New Jersey,141 Beech St,07501,1,1,1200,,,unmatched_offline,no readable row in the building
-trulia:2060184160,New Jersey,144 Fair St,07501,201,1,1718,,,unmatched_offline,no readable row in the building
-trulia:2053572057,New Jersey,144 Fair St,07501,4,1,1718,,,unmatched_offline,no readable row in the building
-trulia:457608627,New Jersey,144 Fair St,07501,401,1,1718,,,unmatched_offline,no readable row in the building
-trulia:2071153877,New Jersey,144 Fair St,07501,,1,1718,,,unmatched_offline,no readable row in the building
+trulia:2060184160,New Jersey,144 Fair St,07501,201,1,1718,,,no_site_found,"web search 2026-11-17: Apartments.com 144-150 Fair St, no availability; no own site"
+trulia:2053572057,New Jersey,144 Fair St,07501,4,1,1718,,,no_site_found,"web search 2026-11-17: Apartments.com 144-150 Fair St, no availability; no own site"
+trulia:457608627,New Jersey,144 Fair St,07501,401,1,1718,,,no_site_found,"web search 2026-11-17: Apartments.com 144-150 Fair St, no availability; no own site"
+trulia:2071153877,New Jersey,144 Fair St,07501,,1,1718,,,no_site_found,"web search 2026-11-17: Apartments.com 144-150 Fair St, no availability; no own site"
 trulia:2056064762,New Jersey,146 Hamilton Ave,07501,103-C,0,1454,apartmentlist:p11166981-3;zumper-65745326,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:448978384,New Jersey,146 Hamilton Ave,07501,205,1,1718,apartmentlist:p11166981-3;zumper-65745326,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:448601575,New Jersey,154 12th Ave,07501,1,0,900,,,unmatched_offline,no readable row in the building
@@ -1061,7 +1061,7 @@ trulia:453929155,New Jersey,96 16th Ave,07501,99,0,1454,apartmentlist:p127128151
 trulia:39762556,New Jersey,96 16th Ave,07501,,0,1472,apartmentlist:p127128151-3;zumper-65720517,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:2056350250,New Jersey,98 12th Ave,07501,303,1,1718,,,unmatched_offline,no readable row in the building
 trulia:463683186,New Jersey,98 12th Ave,07501,304,1,1718,,,unmatched_offline,no readable row in the building
-trulia:b1008627725,New Jersey,39 4th St,07031,d4715425a,1,1845,,,unmatched_offline,no readable row in the building
+trulia:b1008627725,New Jersey,39 4th St,07031,d4715425a,1,1845,,,no_site_found,"web search 2026-11-17 (Copper Ridge Apartments, 2 storeys): aggregators only"
 trulia:b2750129764,New Jersey,165 Belmont Ave,07109,,0,1795,,,unmatched_offline,no readable row in the building
 trulia:2082356345,New Jersey,12 Pershing Pl,07031,1,1,2000,,,unmatched_offline,no readable row in the building
 trulia:463690511,New Jersey,76 Schuyler Ave,07031,2,1,2000,,,unmatched_offline,no readable row in the building
@@ -1088,9 +1088,9 @@ trulia:b1135999778,New Jersey,840 Kennedy Blvd,07002,405,1,1600,,,unmatched_offl
 trulia:b2743082144,New Jersey,477 Broadway,07002,,0,1935,,,unmatched_offline,no readable row in the building
 trulia:2092301648,New Jersey,10 W  21st St,07002,2R,1,1675,,,unmatched_offline,no readable row in the building
 trulia:2115396995,New Jersey,1084 Kennedy Blvd,07002,3,1,1695,,,unmatched_offline,no readable row in the building
-trulia:2055535070,New Jersey,11 Broadway,07002,24,1,1799,,,unmatched_offline,no readable row in the building
-trulia:2055522401,New Jersey,11 Broadway,07002,24E,1,1799,,,unmatched_offline,no readable row in the building
-trulia:466577477,New Jersey,11 Broadway,07002,24Y,1,1799,,,unmatched_offline,no readable row in the building
+trulia:2055535070,New Jersey,11 Broadway,07002,24,1,1799,,https://www.apartmentlist.com/nj/bayonne/11-broadway--5,site_no_units,Apartment List page read 2026-11-17T20:51:47+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 11 broadway|07002
+trulia:2055522401,New Jersey,11 Broadway,07002,24E,1,1799,,https://www.apartmentlist.com/nj/bayonne/11-broadway--5,site_no_units,Apartment List page read 2026-11-17T20:51:47+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 11 broadway|07002
+trulia:466577477,New Jersey,11 Broadway,07002,24Y,1,1799,,https://www.apartmentlist.com/nj/bayonne/11-broadway--5,site_no_units,Apartment List page read 2026-11-17T20:51:47+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 11 broadway|07002
 trulia:2057231572,New Jersey,1225 Kennedy Blvd,07002,4C,0,1750,zumper-64628691,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:441581641,New Jersey,16 E  34th St,07002,1,1,1725,,,unmatched_offline,no readable row in the building
 trulia:2106729850,New Jersey,176 Broadway,07002,3,1,1750,,,unmatched_offline,no readable row in the building
@@ -1402,7 +1402,7 @@ trulia:b2750955310,New Jersey,100 S  Wood Ave,07036,,0,1895,zumper-62246959;zump
 trulia:b2769601164,New Jersey,1001 W  Elizabeth Ave,07036,,1,1995,zumper-62648218;zumper-62882238;zumper-63137739,,street_key,"3 readable rows in the building (zumper); 3 at or under $2,200"
 trulia:b2745486062,New Jersey,1762 S  Walker Ave,07083,,1,1925,,,unmatched_offline,no readable row in the building
 trulia:b2747900920,New Jersey,307 W  Elizabeth Ave,07036,,0,1985,apartmentlist:p51964663-lin-s02-LIN-427;apartmentlist:p51964663-lin-a01-LIN-315;apartmentlist:p51964663-lin-s01-LIN-109;apartmentlist:p51964663-lin-s02-LIN-220;apartmentlist:p51964663-lin-a01-LIN-337;apartmentlist:p51964663-lin-a02-LIN-223;apartmentlist:p51964663-lin-a02-LIN-447,,street_key,"7 readable rows in the building (apartmentlist.com); 3 at or under $2,200"
-trulia:b2751664185,New Jersey,1407 Morris Ave,07083,b153aa682,1,1795,,,unmatched_offline,no readable row in the building
+trulia:b2751664185,New Jersey,1407 Morris Ave,07083,b153aa682,1,1795,,,no_site_found,"web search 2026-11-17 (Townley Gardens, 48 units, 2 storeys): aggregators only"
 trulia:448790929,New Jersey,1020 S  Wood Ave,07036,2,1,1850,,,unmatched_offline,no readable row in the building
 trulia:346017672,New Jersey,1184 Union St,07036,2,1,2000,,,unmatched_offline,no readable row in the building
 trulia:2104761301,New Jersey,1208 Lincoln St,07036,1,1,1650,,,unmatched_offline,no readable row in the building
@@ -1473,7 +1473,7 @@ trulia:b1002068832,New Jersey,200 Baldwin Rd,07054,2c13cce83,1,1750,,,unmatched_
 trulia:b1001477138,New Jersey,200 Vail Rd,07054,1,1,1695,gardencommunities:nj-morris-lakeview-gardens-one-bedroom,,street_key,"1 readable rows in the building (gardencommunities.com); 1 at or under $2,200"
 trulia:b2763571495,New Jersey,44 High St,08861,,1,1545,,,unmatched_offline,no readable row in the building
 trulia:b2741123273,New Jersey,380-388 Parsippany Rd,07054,,1,1650,,,unmatched_offline,no readable row in the building
-trulia:b1001483197,New Jersey,1100 Parsippany Blvd,07054,b6b9ce2b5,1,1800,,,unmatched_offline,no readable row in the building
+trulia:b1001483197,New Jersey,1100 Parsippany Blvd,07054,b6b9ce2b5,1,1800,,,no_site_found,"web search 2026-11-17 (Tivoli Gardens, 386 units, 2 storeys): aggregators only"
 trulia:b1001552578,New Jersey,1480 US Highway 46,07054,,1,1845,,,unmatched_offline,no readable row in the building
 trulia:b1001472657,New Jersey,350 Parsippany Rd,07054,1,1,1795,gardencommunities:nj-morris-westgate-gardens-ash,,street_key,"1 readable rows in the building (gardencommunities.com); 1 at or under $2,200"
 trulia:454703597,New Jersey,124 William St,08861,2,0,1500,,,unmatched_offline,no readable row in the building
@@ -1510,9 +1510,9 @@ trulia:b1002097917,Connecticut,32 Prospect Ave,06850,,1,1850,,,unmatched_offline
 trulia:b2750819960,Connecticut,61 Wall St,06850,,0,1899,,,unmatched_offline,no readable row in the building
 trulia:241289805,Connecticut,10 Arch St,06850,C2,1,1999,,,unmatched_offline,no readable row in the building
 trulia:466509662,Connecticut,24 Hyatt Ave,06850,1,1,1100,,,unmatched_offline,no readable row in the building
-trulia:464605672,Connecticut,3 Isaacs St,06850,2,1,1875,,,unmatched_offline,no readable row in the building
-trulia:464682813,Connecticut,3 Isaacs St,06850,3,1,1875,,,unmatched_offline,no readable row in the building
-trulia:464682817,Connecticut,3 Isaacs St,06850,4,1,1995,,,unmatched_offline,no readable row in the building
+trulia:464605672,Connecticut,3 Isaacs St,06850,2,1,1875,,,no_site_found,web search 2026-11-17: no result for 3 Isaacs St
+trulia:464682813,Connecticut,3 Isaacs St,06850,3,1,1875,,,no_site_found,web search 2026-11-17: no result for 3 Isaacs St
+trulia:464682817,Connecticut,3 Isaacs St,06850,4,1,1995,,,no_site_found,web search 2026-11-17: no result for 3 Isaacs St
 trulia:2076834881,Connecticut,39 Wall St,06850,6,0,1595,,,unmatched_offline,no readable row in the building
 trulia:366561087,Connecticut,40-1 Prospect Ave,06850,3A,0,1695,,,unmatched_offline,no readable row in the building
 trulia:466067972,Connecticut,40-2 Prospect Ave,06850,3J,1,1840,,,unmatched_offline,no readable row in the building
@@ -1600,7 +1600,7 @@ trulia:b1002418023,New Jersey,140 Montgomery St,08904,,1,1849,,,unmatched_offlin
 trulia:b1002377108,New Jersey,251 Atlantic St,07735,,1,1950,zumper-55433305,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:b1002055069,New Jersey,260 S  11th Ave,08904,,1,1999,,,unmatched_offline,no readable row in the building
 trulia:b2750824374,New Jersey,481 S  2nd Ave,08904,61e81b7c9,1,1795,,,unmatched_offline,no readable row in the building
-trulia:b1002375177,New Jersey,250 Treetops Dr,08904,b571bae9a,1,1940,,,unmatched_offline,no readable row in the building
+trulia:b1002375177,New Jersey,250 Treetops Dr,08904,b571bae9a,1,1940,,,site_offlimits,"web search 2026-11-17 (Treetops, Oxford Realty): only RentCafe (off limits) and aggregators; no own site found"
 trulia:59487656,Long Island,10 Halliday Rd,11727,,1,1600,,,unmatched_offline,no readable row in the building
 trulia:466216071,New Jersey,121 N  4th Ave,08904,2R,1,1500,,,unmatched_offline,no readable row in the building
 trulia:59478458,Long Island,27 Stuart Dr,11727,,1,2000,apartmentlist:p80130811-1_bed_1.0_bath_525_sqft;zumper-64913785,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
@@ -1612,7 +1612,7 @@ trulia:64518019,Long Island,,11766,,1,1950,,,unmatched_offline,no address on car
 trulia:b2748102653,New Jersey,11 Fredwood Pl,07747,D5,1,1695,,,unmatched_offline,no readable row in the building
 trulia:b1045891266,New Jersey,33 Aberdeen Rd,07747,3173626,1,1950,apartmentlist:p847100-u38014387;apartmentlist:p847100-u36176279,,street_key,"2 readable rows in the building (apartmentlist.com); 2 at or under $2,200"
 trulia:464113289,New Jersey,440 Cross Rd,07747,A6,1,1890,zumper-65519023;zumper-65480626,,street_key,"2 readable rows in the building (zumper); 2 at or under $2,200"
-trulia:b2750511042,New Jersey,100 Kennedy Dr,08872,500a59c1e,1,1650,,,unmatched_offline,no readable row in the building
+trulia:b2750511042,New Jersey,100 Kennedy Dr,08872,500a59c1e,1,1650,,,no_site_found,"web search 2026-11-17 (Gillette Towers 55+, age-restricted): aggregators only"
 trulia:b1002377197,New Jersey,64 Winding Wood Dr,08872,,1,1640,,,unmatched_offline,no readable row in the building
 trulia:2058989667,Connecticut,45 Ardmore St,06824,B,1,1850,,,unmatched_offline,no readable row in the building
 trulia:b1002373335,New Jersey,110 Leonardine Ave,08882,,1,1775,,,unmatched_offline,no readable row in the building
@@ -1894,19 +1894,19 @@ trulia:2113529300,Connecticut,10 Highland St,06516,1A,1,1550,,,unmatched_offline
 trulia:466299126,Connecticut,137 Elm St,06516,17,1,1695,,,unmatched_offline,no readable row in the building
 trulia:58034253,Connecticut,149 Canton St,06516,9,1,1400,,,unmatched_offline,no readable row in the building
 trulia:58029419,Connecticut,150 Leete St,06516,,1,1390,zumper-65615022,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
-trulia:448263207,Connecticut,156 Bull Hill Ln,06516,6A,0,1350,,,unmatched_offline,no readable row in the building
-trulia:2087893961,Connecticut,156 Bull Hill Ln,06516,A6,0,1325,,,unmatched_offline,no readable row in the building
+trulia:448263207,Connecticut,156 Bull Hill Ln,06516,6A,0,1350,,,no_site_found,"web search 2026-11-17: Brandon Hall Apartments, aggregator pages only (Apartments.com, Zillow); no own site found"
+trulia:2087893961,Connecticut,156 Bull Hill Ln,06516,A6,0,1325,,,no_site_found,"web search 2026-11-17: Brandon Hall Apartments, aggregator pages only (Apartments.com, Zillow); no own site found"
 trulia:464694951,Connecticut,170 Union Ave,06516,2,1,1300,,,unmatched_offline,no readable row in the building
 trulia:466592915,Connecticut,205 Elm St,06516,12,1,1450,,,unmatched_offline,no readable row in the building
 trulia:58036837,Connecticut,225 Forest Rd,06516,,1,1700,,,unmatched_offline,no readable row in the building
 trulia:466187000,Connecticut,303 2nd Ave,06516,1,1,1414,apartmentlist:p126443302-defa7400-b862-11f1-8f4a-028feccea685,,street_key_same_unit,"1 readable rows in the building (apartmentlist.com); 1 at or under $2,200; same unit label on apartmentlist:p126443302-defa7400-b862-11f1-8f4a-028feccea685"
-trulia:455956804,Connecticut,337 Main St,06516,10A,1,1725,,,unmatched_offline,no readable row in the building
-trulia:446910856,Connecticut,337 Main St,06516,7,1,1475,,,unmatched_offline,no readable row in the building
-trulia:462863986,Connecticut,337 Main St,06516,7A,1,1475,,,unmatched_offline,no readable row in the building
+trulia:455956804,Connecticut,337 Main St,06516,10A,1,1725,,https://www.apartmentlist.com/ct/west-haven/337-main-street,site_no_units,Apartment List page read 2026-11-17T20:51:17+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 337 main st|06516
+trulia:446910856,Connecticut,337 Main St,06516,7,1,1475,,https://www.apartmentlist.com/ct/west-haven/337-main-street,site_no_units,Apartment List page read 2026-11-17T20:51:17+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 337 main st|06516
+trulia:462863986,Connecticut,337 Main St,06516,7A,1,1475,,https://www.apartmentlist.com/ct/west-haven/337-main-street,site_no_units,Apartment List page read 2026-11-17T20:51:17+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 337 main st|06516
 trulia:466509918,Connecticut,40 Jones St,06516,40,1,1100,,,unmatched_offline,no readable row in the building
-trulia:463986897,Connecticut,405 Main St,06516,44,1,1700,,,unmatched_offline,no readable row in the building
-trulia:465960124,Connecticut,405 Main St,06516,I9,1,1650,,,unmatched_offline,no readable row in the building
-trulia:465944702,Connecticut,405 Main St,06516,O16,1,1625,,,unmatched_offline,no readable row in the building
+trulia:463986897,Connecticut,405 Main St,06516,44,1,1700,,,no_site_found,web search 2026-11-17: RentSpree/Apartments.com/ForRent/Zumper building p1609101 (Zumper building page not opened by this step: a lead for the Zumper agent)
+trulia:465960124,Connecticut,405 Main St,06516,I9,1,1650,,,no_site_found,web search 2026-11-17: RentSpree/Apartments.com/ForRent/Zumper building p1609101 (Zumper building page not opened by this step: a lead for the Zumper agent)
+trulia:465944702,Connecticut,405 Main St,06516,O16,1,1625,,,no_site_found,web search 2026-11-17: RentSpree/Apartments.com/ForRent/Zumper building p1609101 (Zumper building page not opened by this step: a lead for the Zumper agent)
 trulia:2057750068,Connecticut,621 Campbell Ave,06516,1,1,1375,,,unmatched_offline,no readable row in the building
 trulia:2057857846,Connecticut,621 Campbell Ave,06516,1A,1,1375,,,unmatched_offline,no readable row in the building
 trulia:466568632,Connecticut,75 W  Clark St,06516,1,1,1425,,,unmatched_offline,no readable row in the building
@@ -1994,26 +1994,26 @@ trulia:b2750918133,Connecticut,201 Munson St,06511,,0,1828,apartmentlist:p734463
 trulia:b2752176076,Connecticut,222 Canal St,06511,,0,1239,,,unmatched_offline,no readable row in the building
 trulia:b1001806378,Connecticut,78 Olive St,06511,,1,1475,apartmentlist:p1204247-u48877424;rc:apartmentlist:p1204247-u48877424;apartmentlist:p1204247-u48877432;apartmentlist:p1204247-u48877422;rc:apartmentlist:p1204247-u48877422;rc:apartmentlist:p1204247-u48877432;rc:apartmentlist:p1204247-u48877426;apartmentlist:p1204247-u48877426;apartmentlist:p1204247-u48877423;rc:apartmentlist:p1204247-u48877423;rc:apartmentlist:p1204247-u48425776;apartmentlist:p1204247-u48425776;apartmentlist:p1204247-u48332774;rc:apartmentlist:p1204247-u48332774;rc:apartmentlist:p1204247-u48877420;apartmentlist:p1204247-u48877420;rc:apartmentlist:p1204247-u48877421;apartmentlist:p1204247-u48877421;apartmentlist:p1204247-u48425775;rc:apartmentlist:p1204247-u48425775,,building_id,"28 readable rows in the building (apartmentlist.com); 28 at or under $2,200"
 trulia:b2749931782,Connecticut,367 Orange St,06511,,0,1900,zumper-61533714;zumper-60082687;zumper-59783101,,street_key,"3 readable rows in the building (zumper); 3 at or under $2,200"
-trulia:466421232,Connecticut,1175 Chapel St,06511,300,1,1400,,,unmatched_offline,no readable row in the building
-trulia:464688601,Connecticut,1175 Chapel St,06511,300B,1,1400,,,unmatched_offline,no readable row in the building
-trulia:463651910,Connecticut,1175 Chapel St,06511,3O0,1,1525,,,unmatched_offline,no readable row in the building
-trulia:342482945,Connecticut,1175 Chapel St,06511,3O1,1,1550,,,unmatched_offline,no readable row in the building
-trulia:453456951,Connecticut,1175 Chapel St,06511,3O2,1,1650,,,unmatched_offline,no readable row in the building
-trulia:459918359,Connecticut,1175 Chapel St,06511,4011,1,1550,,,unmatched_offline,no readable row in the building
-trulia:464850930,Connecticut,1175 Chapel St,06511,5-5-0,1,1425,,,unmatched_offline,no readable row in the building
-trulia:464489463,Connecticut,1175 Chapel St,06511,500A,1,1475,,,unmatched_offline,no readable row in the building
-trulia:2055901875,Connecticut,1175 Chapel St,06511,501,1,1550,,,unmatched_offline,no readable row in the building
-trulia:464327014,Connecticut,1175 Chapel St,06511,501B,1,1600,,,unmatched_offline,no readable row in the building
-trulia:460538167,Connecticut,1175 Chapel St,06511,5022,1,1550,,,unmatched_offline,no readable row in the building
-trulia:464045047,Connecticut,1175 Chapel St,06511,5033,0,1350,,,unmatched_offline,no readable row in the building
-trulia:464931067,Connecticut,1175 Chapel St,06511,504A,0,1275,,,unmatched_offline,no readable row in the building
-trulia:464244663,Connecticut,1175 Chapel St,06511,505,1,1425,,,unmatched_offline,no readable row in the building
-trulia:464268086,Connecticut,1175 Chapel St,06511,505A,1,1425,,,unmatched_offline,no readable row in the building
-trulia:464327528,Connecticut,1175 Chapel St,06511,600B,1,1400,,,unmatched_offline,no readable row in the building
-trulia:466373180,Connecticut,1175 Chapel St,06511,603A,0,1350,,,unmatched_offline,no readable row in the building
-trulia:461709565,Connecticut,1175 Chapel St,06511,A201,1,1650,,,unmatched_offline,no readable row in the building
-trulia:465032419,Connecticut,1175 Chapel St,06511,A600,1,1450,,,unmatched_offline,no readable row in the building
-trulia:464822813,Connecticut,1175 Chapel St,06511,B505,1,1475,,,unmatched_offline,no readable row in the building
+trulia:466421232,Connecticut,1175 Chapel St,06511,300,1,1400,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:464688601,Connecticut,1175 Chapel St,06511,300B,1,1400,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:463651910,Connecticut,1175 Chapel St,06511,3O0,1,1525,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:342482945,Connecticut,1175 Chapel St,06511,3O1,1,1550,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:453456951,Connecticut,1175 Chapel St,06511,3O2,1,1650,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:459918359,Connecticut,1175 Chapel St,06511,4011,1,1550,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:464850930,Connecticut,1175 Chapel St,06511,5-5-0,1,1425,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:464489463,Connecticut,1175 Chapel St,06511,500A,1,1475,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:2055901875,Connecticut,1175 Chapel St,06511,501,1,1550,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:464327014,Connecticut,1175 Chapel St,06511,501B,1,1600,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:460538167,Connecticut,1175 Chapel St,06511,5022,1,1550,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:464045047,Connecticut,1175 Chapel St,06511,5033,0,1350,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:464931067,Connecticut,1175 Chapel St,06511,504A,0,1275,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:464244663,Connecticut,1175 Chapel St,06511,505,1,1425,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:464268086,Connecticut,1175 Chapel St,06511,505A,1,1425,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:464327528,Connecticut,1175 Chapel St,06511,600B,1,1400,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:466373180,Connecticut,1175 Chapel St,06511,603A,0,1350,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:461709565,Connecticut,1175 Chapel St,06511,A201,1,1650,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:465032419,Connecticut,1175 Chapel St,06511,A600,1,1450,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:464822813,Connecticut,1175 Chapel St,06511,B505,1,1475,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
 trulia:2056908036,Connecticut,118 Sheldon Ter,06511,B,1,1400,,,unmatched_offline,no readable row in the building
 trulia:462517781,Connecticut,131 Howe St,06511,22,0,1295,,,unmatched_offline,no readable row in the building
 trulia:462324965,Connecticut,133 Howe St,06511,1,1,1595,,,unmatched_offline,no readable row in the building
@@ -2087,16 +2087,16 @@ trulia:b2737388105,Connecticut,901 Chapel St,06510,,1,1675,,,unmatched_offline,n
 trulia:b1002375527,Connecticut,265 College St,06510,,0,1950,apartmentlist:p87527-826-S1-05A;rc:apartmentlist:p87527-826-S1-05A;apartmentlist:p87527-826-S1-08A;apartmentlist:p87527-826-S1-04A;rc:apartmentlist:p87527-826-S1-04R;rc:apartmentlist:p87527-826-S1-04A;apartmentlist:p87527-826-S1-04R;apartmentlist:p87527-826-S1-14A;rc:apartmentlist:p87527-826-S1-14A;apartmentlist:p87527-826-S1-11A;rc:apartmentlist:p87527-826-S1-11A;rc:apartmentlist:p87527-826-S1-12K;apartmentlist:p87527-826-S1-12K;rc:apartmentlist:p87527-826-A3-03G;apartmentlist:p87527-826-A3-03G;zumper-63536561;apartmentlist:p87527-826-A1-07J;rc:apartmentlist:p87527-826-A1-07J;rc:apartmentlist:p87527-826-A1-12O;rc:apartmentlist:p87527-826-A1-08C,,street_key,"30 readable rows in the building (apartmentlist.com, zumper); 13 at or under $2,200"
 trulia:b2750795414,New Jersey,315 Wert Ave,08610,,1,1765,apartmentlist:p15441-5-250;apartmentlist:p15441-5-24;apartmentlist:p15441-5-251;apartmentlist:p15441-5-276;apartmentlist:p15441-5-74;apartmentlist:p15441-5-23;apartmentlist:p15441-5-109;apartmentlist:p15441-5-86;apartmentlist:p15441-5-99;apartmentlist:p15441-5-259;apartmentlist:p15441-5-45;apartmentlist:p15441-5-157;apartmentlist:p15441-5-25;apartmentlist:p15441-5-269;apartmentlist:p15441-5-44;apartmentlist:p15441-5-211;apartmentlist:p15441-5-20;apartmentlist:p15441-5-215;apartmentlist:p15441-5-40;apartmentlist:p15441-5-22,,street_key,"31 readable rows in the building (apartmentlist.com); 31 at or under $2,200"
 trulia:460514713,Connecticut,139 Orange St,06510,,0,1800,,,unmatched_offline,no readable row in the building
-trulia:2102058845,Connecticut,196 Crown St,06510,204,1,2000,,,unmatched_offline,no readable row in the building
-trulia:2119800456,Connecticut,196 Crown St,06510,303,1,1450,,,unmatched_offline,no readable row in the building
-trulia:2119214067,Connecticut,196 Crown St,06510,503,1,1435,,,unmatched_offline,no readable row in the building
+trulia:2102058845,Connecticut,196 Crown St,06510,204,1,2000,,https://www.apartmentlist.com/ct/new-haven/196-crown-street--4,site_no_units,Apartment List page is a soft 404 (read 2026-11-17T20:51:45+00:00)
+trulia:2119800456,Connecticut,196 Crown St,06510,303,1,1450,,https://www.apartmentlist.com/ct/new-haven/196-crown-street--4,site_no_units,Apartment List page is a soft 404 (read 2026-11-17T20:51:45+00:00)
+trulia:2119214067,Connecticut,196 Crown St,06510,503,1,1435,,https://www.apartmentlist.com/ct/new-haven/196-crown-street--4,site_no_units,Apartment List page is a soft 404 (read 2026-11-17T20:51:45+00:00)
 trulia:2086402003,New Jersey,2835 S  Broad St,08610,2,1,1500,,,unmatched_offline,no readable row in the building
 trulia:464931774,New Jersey,2835 S  Broad St,08610,3,1,1500,,,unmatched_offline,no readable row in the building
 trulia:466135877,Connecticut,50 1/2 Whitney Ave,06510,,1,1599,,,unmatched_offline,no readable row in the building
 trulia:2053131913,New Jersey,542 Miller Ave,08610,7,1,1495,,,unmatched_offline,no readable row in the building
 trulia:123857585,Connecticut,59 Trumbull St,06510,,0,1400,zumper-64662533,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
-trulia:2059032955,Connecticut,75 Whitney Ave,06510,2B,1,1675,,,unmatched_offline,no readable row in the building
-trulia:452306738,Connecticut,75 Whitney Ave,06510,A2,1,1625,,,unmatched_offline,no readable row in the building
+trulia:2059032955,Connecticut,75 Whitney Ave,06510,2B,1,1675,,,no_site_found,web search 2026-11-17: Mandy Management per RentCafe (off limits); Apartment List unit page off the market
+trulia:452306738,Connecticut,75 Whitney Ave,06510,A2,1,1625,,,no_site_found,web search 2026-11-17: Mandy Management per RentCafe (off limits); Apartment List unit page off the market
 trulia:2054343750,Connecticut,93 Whitney Ave,06510,3,1,1725,zumper-52030997,,street_key_same_unit,"1 readable rows in the building (zumper); 1 at or under $2,200; same unit label on zumper-52030997"
 trulia:b2754241989,New Jersey,617 Hilltop Dr,08620,ae0dcc807,1,1585,,,unmatched_offline,no readable row in the building
 trulia:b2753847120,New Jersey,378 Kentwood Blvd,08724,1,1,1840,,,unmatched_offline,no readable row in the building
@@ -2118,24 +2118,24 @@ trulia:58927899,Connecticut,,06770,,1,1800,,,unmatched_offline,no address on car
 trulia:b2755881905,Connecticut,311 Eastern St,06513,,0,1350,,,unmatched_offline,no readable row in the building
 trulia:b2750915209,Connecticut,337 Eastern St,06513,,0,1350,,,unmatched_offline,no readable row in the building
 trulia:b1002386173,Connecticut,339 Eastern St,06513,,0,1350,,,unmatched_offline,no readable row in the building
-trulia:466534676,Connecticut,104 Lexington Ave,06513,3-0,1,1375,,,unmatched_offline,no readable row in the building
-trulia:353675701,Connecticut,104 Lexington Ave,06513,3,1,1375,,,unmatched_offline,no readable row in the building
-trulia:464306269,Connecticut,104 Lexington Ave,06513,3B,1,1375,,,unmatched_offline,no readable row in the building
+trulia:466534676,Connecticut,104 Lexington Ave,06513,3-0,1,1375,,https://www.apartmentlist.com/ct/new-haven/104-lexington-ave,site_no_units,Apartment List page read 2026-11-17T20:51:43+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 104 lexington ave|06513
+trulia:353675701,Connecticut,104 Lexington Ave,06513,3,1,1375,,https://www.apartmentlist.com/ct/new-haven/104-lexington-ave,site_no_units,Apartment List page read 2026-11-17T20:51:43+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 104 lexington ave|06513
+trulia:464306269,Connecticut,104 Lexington Ave,06513,3B,1,1375,,https://www.apartmentlist.com/ct/new-haven/104-lexington-ave,site_no_units,Apartment List page read 2026-11-17T20:51:43+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 104 lexington ave|06513
 trulia:2054935830,Connecticut,110 Maltby St,06513,12,1,1550,,,unmatched_offline,no readable row in the building
 trulia:465066940,Connecticut,110 Maltby St,06513,K,1,1550,,,unmatched_offline,no readable row in the building
 trulia:57958610,Connecticut,115 E  Grand Ave,06513,5,1,1600,,,unmatched_offline,no readable row in the building
 trulia:2093918492,Connecticut,195 Lenox St,06513,5,1,1750,,,unmatched_offline,no readable row in the building
-trulia:462087614,Connecticut,275 Chapel St,06513,1-B,1,1650,,,unmatched_offline,no readable row in the building
-trulia:466267992,Connecticut,275 Chapel St,06513,1B-B,1,1650,,,unmatched_offline,no readable row in the building
-trulia:465935382,Connecticut,275 Chapel St,06513,22L,1,1575,,,unmatched_offline,no readable row in the building
-trulia:466371774,Connecticut,275 Chapel St,06513,2L,1,1575,,,unmatched_offline,no readable row in the building
-trulia:458637401,Connecticut,275 Chapel St,06513,3-L,1,1575,,,unmatched_offline,no readable row in the building
-trulia:465877652,Connecticut,275 Chapel St,06513,4EE,1,1600,,,unmatched_offline,no readable row in the building
-trulia:466001034,Connecticut,279 Chapel St,06513,1J,1,1700,,,unmatched_offline,no readable row in the building
-trulia:457125784,Connecticut,279 Chapel St,06513,2L,1,1600,,,unmatched_offline,no readable row in the building
-trulia:465300352,Connecticut,279 Chapel St,06513,3G,1,1650,,,unmatched_offline,no readable row in the building
-trulia:461066865,Connecticut,279 Chapel St,06513,3K,1,1750,,,unmatched_offline,no readable row in the building
-trulia:465036263,Connecticut,279 Chapel St,06513,3L,1,1550,,,unmatched_offline,no readable row in the building
+trulia:462087614,Connecticut,275 Chapel St,06513,1-B,1,1650,,,no_site_found,web search 2026-11-17: only Zillow building page
+trulia:466267992,Connecticut,275 Chapel St,06513,1B-B,1,1650,,,no_site_found,web search 2026-11-17: only Zillow building page
+trulia:465935382,Connecticut,275 Chapel St,06513,22L,1,1575,,,no_site_found,web search 2026-11-17: only Zillow building page
+trulia:466371774,Connecticut,275 Chapel St,06513,2L,1,1575,,,no_site_found,web search 2026-11-17: only Zillow building page
+trulia:458637401,Connecticut,275 Chapel St,06513,3-L,1,1575,,,no_site_found,web search 2026-11-17: only Zillow building page
+trulia:465877652,Connecticut,275 Chapel St,06513,4EE,1,1600,,,no_site_found,web search 2026-11-17: only Zillow building page
+trulia:466001034,Connecticut,279 Chapel St,06513,1J,1,1700,,,no_site_found,"web search 2026-11-17: Zillow building page only, no prices; no own site"
+trulia:457125784,Connecticut,279 Chapel St,06513,2L,1,1600,,,no_site_found,"web search 2026-11-17: Zillow building page only, no prices; no own site"
+trulia:465300352,Connecticut,279 Chapel St,06513,3G,1,1650,,,no_site_found,"web search 2026-11-17: Zillow building page only, no prices; no own site"
+trulia:461066865,Connecticut,279 Chapel St,06513,3K,1,1750,,,no_site_found,"web search 2026-11-17: Zillow building page only, no prices; no own site"
+trulia:465036263,Connecticut,279 Chapel St,06513,3L,1,1550,,,no_site_found,"web search 2026-11-17: Zillow building page only, no prices; no own site"
 trulia:343666877,Connecticut,28 E  Grand Ave,06513,2,1,1700,,,unmatched_offline,no readable row in the building
 trulia:466610749,Connecticut,81 Saltonstall Ave,06513,A201-0,1,1550,,,unmatched_offline,no readable row in the building
 trulia:439896384,Connecticut,,06513,,1,1580,,,unmatched_offline,no address on card
@@ -2464,8 +2464,8 @@ trulia:38897531,New Jersey,158 Manhattan Ave,07307,,1,1800,,,unmatched_offline,n
 trulia:466269288,New Jersey,207 Webster Ave,07307,3A,0,1500,,,unmatched_offline,no readable row in the building
 trulia:466590449,New Jersey,28-30 Sherman Ave,07307,B4,1,1950,,,unmatched_offline,no readable row in the building
 trulia:2104646696,New Jersey,289 New York Ave,07307,,1,1750,,,unmatched_offline,no readable row in the building
-trulia:2068739831,New Jersey,401 Central Ave,07307,B4,1,1950,,,unmatched_offline,no readable row in the building
-trulia:440045836,New Jersey,401 Central Ave,07307,B6,1,1995,,,unmatched_offline,no readable row in the building
+trulia:2068739831,New Jersey,401 Central Ave,07307,B4,1,1950,,https://www.apartmentlist.com/nj/jersey-city/401-central-ave--1,site_no_units,Apartment List page read 2026-11-17T20:50:35+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 401 central ave|07307
+trulia:440045836,New Jersey,401 Central Ave,07307,B6,1,1995,,https://www.apartmentlist.com/nj/jersey-city/401-central-ave--1,site_no_units,Apartment List page read 2026-11-17T20:50:35+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 401 central ave|07307
 trulia:466416742,New Jersey,55 Graham St,07307,11,0,1550,,,unmatched_offline,no readable row in the building
 trulia:2107339441,New Jersey,59 Webster Ave,07307,1,1,1700,,,unmatched_offline,no readable row in the building
 trulia:439205096,New Jersey,90 Lincoln St,07307,B,1,1450,,,unmatched_offline,no readable row in the building
@@ -2635,8 +2635,8 @@ trulia:459792764,New Jersey,113 12th Ave,07501,,1,1718,,,unmatched_offline,no re
 trulia:466253509,New Jersey,115-117 Hamilton Ave,07501,2,1,1718,apartmentlist:p127017868-3;zumper-65701620,,building_id,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:466500812,New Jersey,133 Pearl St,07501,3,1,1841,,,unmatched_offline,no readable row in the building
 trulia:2058905308,New Jersey,135 Beech St,07501,3,1,1709,,,unmatched_offline,no readable row in the building
-trulia:465500279,New Jersey,144 Fair St,07501,123,1,1800,,,unmatched_offline,no readable row in the building
-trulia:2060151771,New Jersey,144 Fair St,07501,2,1,1718,,,unmatched_offline,no readable row in the building
+trulia:465500279,New Jersey,144 Fair St,07501,123,1,1800,,,no_site_found,"web search 2026-11-17: Apartments.com 144-150 Fair St, no availability; no own site"
+trulia:2060151771,New Jersey,144 Fair St,07501,2,1,1718,,,no_site_found,"web search 2026-11-17: Apartments.com 144-150 Fair St, no availability; no own site"
 trulia:466070453,New Jersey,154 Hamilton Ave,07501,3,1,1718,apartmentlist:p63613517-303;zumper-65695088,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
 trulia:464875605,New Jersey,168 Rosa Parks Blvd,07501,2,1,1718,,,unmatched_offline,no readable row in the building
 trulia:464883633,New Jersey,168 Rosa Parks Blvd,07501,303,1,1800,,,unmatched_offline,no readable row in the building
@@ -2781,13 +2781,13 @@ trulia:447244047,New Jersey,645 Summer Ave,07104,10,1,1650,,,unmatched_offline,n
 trulia:466389019,New Jersey,67 Broadway,07104,6,1,1749,,,unmatched_offline,no readable row in the building
 trulia:466388831,New Jersey,69 Broadway,07104,3,1,1449,,,unmatched_offline,no readable row in the building
 trulia:38695645,New Jersey,760-762 Summer Ave,07104,,1,1450,,,unmatched_offline,no readable row in the building
-trulia:466287525,New Jersey,809 Broadway,07104,105,1,1495,,,unmatched_offline,no readable row in the building
-trulia:466287483,New Jersey,809 Broadway,07104,105A,1,1495,,,unmatched_offline,no readable row in the building
-trulia:466287556,New Jersey,809 Broadway,07104,209A,1,1495,,,unmatched_offline,no readable row in the building
-trulia:466287674,New Jersey,809 Broadway,07104,409,1,1495,,,unmatched_offline,no readable row in the building
-trulia:466287645,New Jersey,809 Broadway,07104,409A,1,1495,,,unmatched_offline,no readable row in the building
-trulia:466287627,New Jersey,809 Broadway,07104,411,1,1495,,,unmatched_offline,no readable row in the building
-trulia:466287668,New Jersey,809 Broadway,07104,411A,1,1495,,,unmatched_offline,no readable row in the building
+trulia:466287525,New Jersey,809 Broadway,07104,105,1,1495,,,no_site_found,"web search 2026-11-17: no own/manager site; only aggregator pages for neighbouring numbers (810, 805 Broadway)"
+trulia:466287483,New Jersey,809 Broadway,07104,105A,1,1495,,,no_site_found,"web search 2026-11-17: no own/manager site; only aggregator pages for neighbouring numbers (810, 805 Broadway)"
+trulia:466287556,New Jersey,809 Broadway,07104,209A,1,1495,,,no_site_found,"web search 2026-11-17: no own/manager site; only aggregator pages for neighbouring numbers (810, 805 Broadway)"
+trulia:466287674,New Jersey,809 Broadway,07104,409,1,1495,,,no_site_found,"web search 2026-11-17: no own/manager site; only aggregator pages for neighbouring numbers (810, 805 Broadway)"
+trulia:466287645,New Jersey,809 Broadway,07104,409A,1,1495,,,no_site_found,"web search 2026-11-17: no own/manager site; only aggregator pages for neighbouring numbers (810, 805 Broadway)"
+trulia:466287627,New Jersey,809 Broadway,07104,411,1,1495,,,no_site_found,"web search 2026-11-17: no own/manager site; only aggregator pages for neighbouring numbers (810, 805 Broadway)"
+trulia:466287668,New Jersey,809 Broadway,07104,411A,1,1495,,,no_site_found,"web search 2026-11-17: no own/manager site; only aggregator pages for neighbouring numbers (810, 805 Broadway)"
 trulia:2061789714,New Jersey,89 Mount Prospect Ave,07104,4A,1,1450,,,unmatched_offline,no readable row in the building
 trulia:464882021,New Jersey,1040 McBride Ave,07424,4,1,1900,,,unmatched_offline,no readable row in the building
 trulia:457161668,New Jersey,122 E  Main St,07424,3,1,1825,zumper-65788077,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
@@ -3333,14 +3333,14 @@ trulia:b2769908030,Connecticut,175 Center St,06516,1,1,1295,,,unmatched_offline,
 trulia:b2750778992,Connecticut,33 Kenneth St,06516,,0,1095,,,unmatched_offline,no readable row in the building
 trulia:b2776937139,Connecticut,131 Dogburn Rd,06516,,0,1375,,,unmatched_offline,no readable row in the building
 trulia:b2005381395,Connecticut,250 Captain Thomas Blvd,06516,207,0,1700,,,unmatched_offline,no readable row in the building
-trulia:2055614921,Connecticut,156 Bull Hill Ln,06516,6,0,1350,,,unmatched_offline,no readable row in the building
-trulia:344485893,Connecticut,156 Bull Hill Ln,06516,A12,0,1325,,,unmatched_offline,no readable row in the building
-trulia:466000084,Connecticut,156 Bull Hill Ln,06516,A66,0,1325,,,unmatched_offline,no readable row in the building
+trulia:2055614921,Connecticut,156 Bull Hill Ln,06516,6,0,1350,,,no_site_found,"web search 2026-11-17: Brandon Hall Apartments, aggregator pages only (Apartments.com, Zillow); no own site found"
+trulia:344485893,Connecticut,156 Bull Hill Ln,06516,A12,0,1325,,,no_site_found,"web search 2026-11-17: Brandon Hall Apartments, aggregator pages only (Apartments.com, Zillow); no own site found"
+trulia:466000084,Connecticut,156 Bull Hill Ln,06516,A66,0,1325,,,no_site_found,"web search 2026-11-17: Brandon Hall Apartments, aggregator pages only (Apartments.com, Zillow); no own site found"
 trulia:58031212,Connecticut,303 2nd Ave,06516,,1,1382,apartmentlist:p126443302-defa7400-b862-11f1-8f4a-028feccea685,,street_key,"1 readable rows in the building (apartmentlist.com); 1 at or under $2,200"
-trulia:460061276,Connecticut,337 Main St,06516,88,1,1475,,,unmatched_offline,no readable row in the building
-trulia:459513389,Connecticut,337 Main St,06516,8A,1,1475,,,unmatched_offline,no readable row in the building
-trulia:462479788,Connecticut,405 Main St,06516,16,1,1700,,,unmatched_offline,no readable row in the building
-trulia:462482046,Connecticut,405 Main St,06516,,1,1700,,,unmatched_offline,no readable row in the building
+trulia:460061276,Connecticut,337 Main St,06516,88,1,1475,,https://www.apartmentlist.com/ct/west-haven/337-main-street,site_no_units,Apartment List page read 2026-11-17T20:51:17+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 337 main st|06516
+trulia:459513389,Connecticut,337 Main St,06516,8A,1,1475,,https://www.apartmentlist.com/ct/west-haven/337-main-street,site_no_units,Apartment List page read 2026-11-17T20:51:17+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 337 main st|06516
+trulia:462479788,Connecticut,405 Main St,06516,16,1,1700,,,no_site_found,web search 2026-11-17: RentSpree/Apartments.com/ForRent/Zumper building p1609101 (Zumper building page not opened by this step: a lead for the Zumper agent)
+trulia:462482046,Connecticut,405 Main St,06516,,1,1700,,,no_site_found,web search 2026-11-17: RentSpree/Apartments.com/ForRent/Zumper building p1609101 (Zumper building page not opened by this step: a lead for the Zumper agent)
 trulia:439273480,Connecticut,619 Campbell Ave,06516,1,1,1375,,,unmatched_offline,no readable row in the building
 trulia:349018963,Connecticut,621 Campbell Ave,06516,A,1,1400,,,unmatched_offline,no readable row in the building
 trulia:b2007936346,New Jersey,86 Spruce St,08542,9,1,1800,zumper-62241182,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
@@ -3408,10 +3408,10 @@ trulia:b2740579312,Connecticut,244 Edwards St,06511,6,0,1595,zumper-56473736,,st
 trulia:b2748145612,Connecticut,129 York St,06511,,0,1695,,,unmatched_offline,no readable row in the building
 trulia:b2772386962,Connecticut,301 Winchester Ave,06511,,0,1958,apartmentlist:p110392722-217;apartmentlist:p110392722-240;apartmentlist:p110392722-417;apartmentlist:p110392722-433;apartmentlist:p110392722-340;apartmentlist:p110392722-339;apartmentlist:p110392722-324;apartmentlist:p110392722-317;apartmentlist:p110392722-405;apartmentlist:p110392722-517;rc:apartmentlist:p110392722-240;rc:apartmentlist:p110392722-217;rc:apartmentlist:p110392722-517;rc:apartmentlist:p110392722-324;rc:apartmentlist:p110392722-433;rc:apartmentlist:p110392722-317;rc:apartmentlist:p110392722-340;rc:apartmentlist:p110392722-339;rc:apartmentlist:p110392722-417;rc:apartmentlist:p110392722-405,,street_key,"94 readable rows in the building (apartmentlist.com); 36 at or under $2,200"
 trulia:b1037833106,Connecticut,84 Howe St,06511,,0,1605,apartmentlist:p125759831-103;zumper-65508852,,street_key,"2 readable rows in the building (apartmentlist.com, zumper); 2 at or under $2,200"
-trulia:450651911,Connecticut,1175 Chapel St,06511,200,1,1650,,,unmatched_offline,no readable row in the building
-trulia:343963052,Connecticut,1175 Chapel St,06511,201,1,1700,,,unmatched_offline,no readable row in the building
-trulia:461440186,Connecticut,1175 Chapel St,06511,202,1,1725,,,unmatched_offline,no readable row in the building
-trulia:463924619,Connecticut,1175 Chapel St,06511,5O1,1,1550,,,unmatched_offline,no readable row in the building
+trulia:450651911,Connecticut,1175 Chapel St,06511,200,1,1650,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:343963052,Connecticut,1175 Chapel St,06511,201,1,1700,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:461440186,Connecticut,1175 Chapel St,06511,202,1,1725,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
+trulia:463924619,Connecticut,1175 Chapel St,06511,5O1,1,1550,,https://www.apartmentlist.com/ct/new-haven/1175-chapel-street,site_no_units,Apartment List page read 2026-11-17T20:50:36+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 1175 chapel st|06511
 trulia:466238733,Connecticut,1407 Chapel St,06511,C2,1,1400,,,unmatched_offline,no readable row in the building
 trulia:466319747,Connecticut,1445 Ella T Grasso Blvd,06511,B9,1,1375,,,unmatched_offline,no readable row in the building
 trulia:413292401,Connecticut,1493 Ella T Grasso Blvd,06511,B9,1,1375,,,unmatched_offline,no readable row in the building
@@ -3440,15 +3440,15 @@ trulia:b2789384214,Connecticut,300 State St,06510,,0,1800,apartmentlist:p7463912
 trulia:2079360232,Connecticut,125 Court St,06510,1A,0,1650,,,unmatched_offline,no readable row in the building
 trulia:465982331,New Jersey,2001 Genesee St,08610,GAR-13,0,200,zumper-63404112;zumper-65547844,,street_key,"2 readable rows in the building (zumper); 2 at or under $2,200"
 trulia:2078023035,New Jersey,202 White Horse Ave,08610,2,1,1400,,,unmatched_offline,no readable row in the building
-trulia:2057573301,Connecticut,75 Whitney Ave,06510,2A,1,1625,,,unmatched_offline,no readable row in the building
+trulia:2057573301,Connecticut,75 Whitney Ave,06510,2A,1,1625,,,no_site_found,web search 2026-11-17: Mandy Management per RentCafe (off limits); Apartment List unit page off the market
 trulia:466293654,New Jersey,212 4th Ave,08736,D,1,1095,,,unmatched_offline,no readable row in the building
 trulia:b1002376249,New Jersey,1378 Nottingham Way,08609,,1,1370,,,unmatched_offline,no readable row in the building
 trulia:465410611,New Jersey,407 Chambers St,08609,4,1,1300,,,unmatched_offline,no readable row in the building
 trulia:b2005555804,Connecticut,372 Rubber Ave,06770,B,1,1395,zumper-63272924,,street_key,"1 readable rows in the building (zumper); 1 at or under $2,200"
 trulia:463614166,Connecticut,308 N  Main St,06770,A,1,1475,,,unmatched_offline,no readable row in the building
 trulia:464154263,Connecticut,5 Meadow St,06770,202,0,1300,,,unmatched_offline,no readable row in the building
-trulia:466413237,Connecticut,104 Lexington Ave,06513,3-C,1,1375,,,unmatched_offline,no readable row in the building
-trulia:464425066,Connecticut,104 Lexington Ave,06513,33,1,1375,,,unmatched_offline,no readable row in the building
+trulia:466413237,Connecticut,104 Lexington Ave,06513,3-C,1,1375,,https://www.apartmentlist.com/ct/new-haven/104-lexington-ave,site_no_units,Apartment List page read 2026-11-17T20:51:43+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 104 lexington ave|06513
+trulia:464425066,Connecticut,104 Lexington Ave,06513,33,1,1375,,https://www.apartmentlist.com/ct/new-haven/104-lexington-ave,site_no_units,Apartment List page read 2026-11-17T20:51:43+00:00: no available studio/1BR <= $2200 (no_unit_le_3000); page address 104 lexington ave|06513
 trulia:466387376,Connecticut,171 Quinnipiac Ave,06513,4B,1,1275,,,unmatched_offline,no readable row in the building
 trulia:465301013,Connecticut,276 Chapel St,06513,3L,1,1575,,,unmatched_offline,no readable row in the building
 trulia:466413024,Connecticut,276 Chapel St,06513,B-1,1,1650,,,unmatched_offline,no readable row in the building

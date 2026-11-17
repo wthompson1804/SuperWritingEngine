@@ -34,6 +34,23 @@ WALL = re.compile(r"(captcha|cf-chl|challenge-platform|access denied|attention r
 _robots: dict[str, rp.RobotFileParser | None] = {}
 
 
+LAST = D / "_last_hit.json"
+
+
+def wait_host(host, delay=3.0):
+    """Cross-process throttle: at least `delay` seconds between two requests to one host from these tools."""
+    host = host.lower()
+    try:
+        last = json.loads(LAST.read_text())
+    except (OSError, ValueError):
+        last = {}
+    w = last.get(host, 0) + delay - time.time()
+    if w > 0:
+        time.sleep(w)
+    last[host] = time.time()
+    LAST.write_text(json.dumps(last))
+
+
 def log(rec):
     with open(LOG, "a") as f:
         f.write(json.dumps({**rec, "at": lib.now_iso()}) + "\n")
@@ -65,7 +82,7 @@ def robots_ok(url) -> bool:
         r = rp.RobotFileParser()
         rurl = f"{p.scheme}://{host}/robots.txt"
         try:
-            lib._throttle(host)
+            wait_host(host)
             content, meta = lib.cached_get(rurl, SRC, ext="txt", retries=1, timeout=30)
             log({"url": rurl, "status": meta["status"]})
             if meta["status"] in (401, 403, 429):
@@ -101,6 +118,7 @@ def fetch(url):
         log({"url": url, "skipped": "robots"})
         return
     lib.HOST_DELAY[host] = max(lib.HOST_DELAY.get(host, 0), 3.0)
+    wait_host(host)
     try:
         content, meta = lib.cached_get(url, SRC, ext="html", retries=1, timeout=45)
     except Exception as e:

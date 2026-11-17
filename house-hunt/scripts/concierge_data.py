@@ -879,7 +879,8 @@ def apartment(u):
     offer_text = (offer or {}).get("why")
     if offer_text and (BANNED.search(offer_text) or CRIME.search(offer_text)):
         offer_text = None
-    return {"id": u["id"], "label": f"Apartment {u['unit']}" if not miss(u.get("unit")) else "Apartment",
+    num_ = re.sub(r"^(?:unit|apt\.?|apartment|no\.?|#)\s*", "", str(u.get("unit") or "").strip(), flags=re.I) if not miss(u.get("unit")) else ""
+    return {"id": u["id"], "label": f"Apartment {num_}" if num_ else "Apartment",          # "Unit 02" -> "Apartment 02"
             "beds": u.get("beds"), "sqft": tidy(num(u.get("sqft"))), "floor_text": floor_text(u),
             "rent": tidy(rent_now(u)), "total": tidy(num(u.get("all_in"))),
             "available_text": available_text(u), "offer": bool((u.get("rent") or {}).get("asterisk")), "offer_text": offer_text,

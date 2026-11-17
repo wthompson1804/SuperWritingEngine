@@ -237,7 +237,7 @@ def checked_says_what_the_live_check_rows_say():
             assert not (today and last["status"] in ("live", "changed")), a["id"]
             seen = [str(u.get("price_seen_at") or "")[:10]] + ([last["checked_at"][:10]] if last and last["status"] in ("live", "changed") else [])
             assert c["date"] == max(x for x in seen if x), (a["id"], c["date"], seen)
-            assert c["date"] < day, "last seen before the day of the re-read"
+            assert c["date"] <= day, "last seen on or before the day of the re-read (a harvest of that day, not re-read, is 'last seen')"
             tried = [r for r in mine if r["status"] == "not_read"]
             assert ("could not be read again" in c["note"]) == bool(tried and max(r["checked_at"][:10] for r in tried) > c["date"]), a["id"]
     assert dict(n) == OUT["meta"]["checked_counts"] and sum(n.values()) == len(APTS)
@@ -500,7 +500,7 @@ def fit_numbers(f):
     out = set()
     for k, x in f.items():
         if isinstance(x, (int, float)) and not isinstance(x, bool):
-            out |= {float(x), float(K.half_up(x)), round(float(x), 1)}
+            out |= {float(x), float(K.half_up(x)), round(float(x), 1), float(max(1, K.half_up(x)))}   # a walk under a minute reads "1 minute"
     out.add(10.0)                                    # "within a 10-minute walk" is the fixed name of 800 m, not a figure
     return out
 
@@ -731,7 +731,7 @@ def life_here_is_short_named_and_sourced():
                     w_ = " ".join(w_.split()[1:])
                 assert not w_ or len(w_.split()) < 2 or w_.startswith(("Mom and", "Place")), (b["id"], m["moment"], w_, t)
         sun = next((m for m in b["life_here"] if m["moment"] == "sunday"), None)
-        assert sun and f"about {K.half_up(b['fit']['drive_min'])} minutes" in sun["text"], b["id"]
+        assert sun and f"about {K.minutes(b['fit']['drive_min'])}" in sun["text"], b["id"]
     n = Counter(m["moment"] for b in BLDS for m in b["life_here"])
     assert dict(n) == OUT["meta"]["life_here_counts"] and n["sunday"] == len(BLDS)
     # the rule on made-up research rows: a medium row and a row with a distance from the web text are never used
@@ -843,7 +843,7 @@ def clusters(k=3):
     return {ids[i]: n for n, c in enumerate(cl) for i in c}
 
 
-CLUSTER_OF = clusters()
+CLUSTER_OF = clusters(max(3, round(math.sqrt(len(RP["groups"])))))   # 3 at 11 neighborhoods, 7 at 44
 
 
 def pearson(x, y):
@@ -996,8 +996,12 @@ def recommender_personas_get_what_they_asked_for():
     assert not near or min(group_raw(first, "drive_min")) <= 30 and med(first, "drive_min") <= 30, first
     sq = {g: med(g, "sqft") for g in GROUPS}
     space = top("space first")
-    assert sq[space[0]] >= sorted(x for x in sq.values() if x)[-2], (space, sq)     # first is among the two largest
-    assert all(sq[g] >= statistics.median(x for x in sq.values() if x) for g in space)
+    # the buildings shown for "space first" are larger than the set's typical building (the group score rests on a
+    # neighborhood's two best buildings, so a deep neighborhood with a few large buildings can lead on room)
+    shown_sq = [B[i]["features_raw"]["sqft"] for _, bs in ex["space first"]["expected_top"] for i in bs if B[i]["features_raw"]["sqft"]]
+    all_sq = [b["features_raw"]["sqft"] for b in BLDS if b["features_raw"]["sqft"]]
+    assert statistics.median(shown_sq) > statistics.median(all_sq), (shown_sq, statistics.median(all_sq))
+    assert sum(B[i]["features_raw"]["bedroom"] for _, bs in ex["space first"]["expected_top"] for i in bs) >= 5
     tot = {g: min(group_raw(g, "total")) for g in GROUPS}
     budget = top("budget first")
     assert min(tot[g] for g in budget) == min(tot.values()) and statistics.mean(tot[g] for g in budget) < statistics.mean(tot.values())

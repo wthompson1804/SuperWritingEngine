@@ -272,5 +272,29 @@
   "url": "https://islipny.gov/town-calendar/26-community-events/2290-bayminster-dog-parade-artisan-fair",
   "at": "2026-11-17T20:28:59Z",
   "by": "life_here_ctny"
+ },
+ "www.townwalkhamden.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.townwalkhamden.com/",
+  "at": "2026-11-17T20:51:37+00:00",
+  "by": "contacts_trawl2"
+ },
+ "www.crestprinceton.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.crestprinceton.com/",
+  "at": "2026-11-17T20:52:53+00:00",
+  "by": "contacts_trawl2"
+ },
+ "www.addisonprinceton.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.addisonprinceton.com/",
+  "at": "2026-11-17T20:52:56+00:00",
+  "by": "contacts_trawl2"
+ },
+ "www.quailridgenj.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.quailridgenj.com/",
+  "at": "2026-11-17T20:53:52+00:00",
+  "by": "contacts_trawl2"
  }
 }
