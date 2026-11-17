@@ -22,7 +22,7 @@ const BANNED = /\ball-in\b|\bcap\b|\bunits?\b|\bgate\b|\bwe\b|net-effective|ever
 const KEY = "lamia-concierge-v3";
 let checks = 0;
 const ok = (cond, msg) => { assert(cond, msg); checks++; };
-const said = (t) => String(t || "").replace(/\b1 places\b/g, "1 place").replace(/\b1 minutes\b/g, "1 minute");
+const said = (t) => String(t || "");   /* the page shows the model's sentences as they are */
 
 async function open(browser, extra, init) {
   const ctx = await browser.newContext(Object.assign({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true }, extra || {}));

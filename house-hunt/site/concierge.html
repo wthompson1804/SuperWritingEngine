@@ -372,6 +372,10 @@ var ConciergeRec = (function () {
   function medianLow(xs) { var s = xs.slice().sort(function (a, b) { return a - b; }); return s[Math.floor((s.length - 1) / 2)]; }
   function fmt(n) { return Number(n).toLocaleString("en-US", { maximumFractionDigits: 20 }); }
   function mins(n) { return n + " minute" + (n === 1 ? "" : "s"); }
+  function placesN(n) { return n + " place" + (n === 1 ? "" : "s"); }
+  var UNKNOWN_TEXT = { room: "The size isn't published yet; ask on the tour", parking: "Parking isn't stated yet; ask on the tour",
+    family: "The drive to Mom and Dad isn't known yet", money: "The monthly total isn't known yet; ask on the tour",
+    going_out: "Places to eat and drink nearby aren't mapped yet", green: "The nearest park isn't mapped yet" };
   function capFirst(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
   function usable(data) {
@@ -535,14 +539,14 @@ var ConciergeRec = (function () {
     if (k === "room") return !f.sqft ? null : f.sqft + (f.bedroom ? 10000 : 0);
     if (k === "going_out") return f.places;
     if (k === "green") return f.walk === null ? null : -f.walk;
-    return f.parking;
+    return f.parking === 0.4 ? null : f.parking;
   }
   function pw(v) { return PARKING_WORDS[String(v)] || "parking not stated"; }
   function good(k, f) {
     if (k === "family") return f.drive !== null ? "About " + mins(f.drive) + " by car to Mom and Dad" : "Close to Mom and Dad";
     if (k === "money") return f.total !== null ? "Monthly totals from $" + fmt(f.total) + " with utilities and fees" : "Lower monthly totals";
     if (k === "room") { var size = f.sqft ? "up to " + fmt(f.sqft) + " sq ft" : "more room"; return f.bedroom ? "A separate bedroom, " + size : capFirst(size); }
-    if (k === "going_out") return f.places !== null ? f.places + " places to eat and drink within a 10-minute walk" : "Places to eat and drink close by";
+    if (k === "going_out") return f.places !== null ? placesN(f.places) + " to eat and drink within a 10-minute walk" : "Places to eat and drink close by";
     if (k === "green") return f.walk !== null ? "A park about " + mins(f.walk) + " on foot" : "A park close by";
     return capFirst(pw(f.parking));
   }
@@ -550,7 +554,7 @@ var ConciergeRec = (function () {
     if (k === "family") return f.drive !== null ? mins(f.drive) : "not known";
     if (k === "money") return f.total !== null ? "$" + fmt(f.total) : "not known";
     if (k === "room") return f.sqft ? fmt(f.sqft) + " sq ft" : "size not published";
-    if (k === "going_out") return f.places !== null ? String(f.places) : "not known";
+    if (k === "going_out") return f.places !== null ? placesN(f.places) : "not known";
     if (k === "green") return f.walk !== null ? mins(f.walk) : "not known";
     return pw(f.parking);
   }
@@ -559,9 +563,9 @@ var ConciergeRec = (function () {
     if (k === "family") return "Farther from Mom and Dad: about " + figText(k, f) + " by car (the other two: " + o + ")";
     if (k === "money") return "Costs more: monthly totals from " + figText(k, f) + " (the other two: " + o + ")";
     if (k === "room") return "Smaller: up to " + figText(k, f) + " (the other two: " + o + ")";
-    if (k === "going_out") return "Quieter: " + figText(k, f) + " places to eat and drink within a 10-minute walk (the other two: " + o + ")";
+    if (k === "going_out") return "Quieter: " + figText(k, f) + " to eat and drink within a 10-minute walk (the other two: " + o + ")";
     if (k === "green") return "The nearest park is farther: about " + figText(k, f) + " on foot (the other two: " + o + ")";
-    return "Parking is less certain: " + figText(k, f) + " (the other two: " + o + ")";
+    return capFirst(figText(k, f)) + " (the other two: " + o + ")";
   }
   function nudged(w, j, factor) { var w2 = w.slice(); w2[j] *= factor; var s = nsum(w2); return w2.map(function (x) { return x / s; }); }
   function whatWouldChange(M, w, G, gid, pos, first) {
@@ -612,16 +616,18 @@ var ConciergeRec = (function () {
       var others = picked.filter(function (o) { return o !== g; }), oc = others.map(function (o) { return cent[o]; });
       var diffs = oc.length ? M.feats.map(function (k, j) { var om = nsum(oc.map(function (x) { return x[j]; })) / oc.length; return [q(M, w[j] * (c[j] - om)), q(M, c[j] - om), k]; }) : [];
       var raw = {}; diffs.forEach(function (t) { raw[t[2]] = t[1]; });
-      var give = null, sorted = diffs.slice().sort(function (x, y) { return x[0] !== y[0] ? x[0] - y[0] : cmpId(x[2], y[2]); });
+      var give = null, giveUnknown = false, sorted = diffs.slice().sort(function (x, y) { return x[0] !== y[0] ? x[0] - y[0] : cmpId(x[2], y[2]); });
       for (var i = 0; i < sorted.length; i++) {
-        var k = sorted[i][2]; if (raw[k] >= 0) continue;
+        var k = sorted[i][2]; if (raw[k] >= 0 || whyK.indexOf(k) >= 0) continue;   /* never give up what `why` praises */
         var mine = betterFig(k, figs[g]), theirs = others.map(function (o) { return betterFig(k, figs[o]); });
-        if (mine !== null && theirs.every(function (x) { return x !== null; }) && mine < nsum(theirs) / theirs.length) { give = k; break; }
+        if (mine === null) { give = k; giveUnknown = true; break; }               /* an unknown: said plainly */
+        if (theirs.every(function (x) { return x !== null; }) && theirs.every(function (x) { return mine < x; })) { give = k; break; }
       }
       var bl = tops[g].map(function (id) { var more = moreLike(M, id, w, taken, removed, M.cfg.n_more_like_this || 3); more.forEach(function (x) { taken[x] = 1; }); return { id: id, score: Number(score(M, id, w).toFixed(6)), more_like_this: more }; });
       return { neighborhood_id: g, name: gmap[g].name, score: Number(gs[g].toFixed(6)), buildings: bl, why_features: whyK,
         why: whyK.map(function (k) { return good(k, figs[g]); }).join(". ") + ".", gives_up_feature: give,
-        gives_up: give ? bad(give, figs[g], others.map(function (o) { return figs[o]; })) + "." : null,
+        gives_up: give ? (giveUnknown ? UNKNOWN_TEXT[give] : bad(give, figs[g], others.map(function (o) { return figs[o]; }))) + "." : null,
+        gives_up_unknown: giveUnknown,
         what_would_change: whatWouldChange(M, w, G, g, pos, first) };
     });
     var scores = {}; live.forEach(function (id) { scores[id] = score(M, id, w); });
@@ -913,8 +919,6 @@ function bcard(id, i, more) {
         '<span class="m">Rent <b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (money(f.rent_from) || "not known") + '</b> &middot; Total with utilities and fees <b>' + (money(f.total_from) || "not known") + '</b></span></button></li>';
     }).join("") + '</ul>' : '') + '</li>';
 }
-/* the model's sentences, with one plural mended for display ("1 places" from the reference) */
-function said(t) { return String(t || "").replace(/\b1 places\b/g, "1 place").replace(/\b1 minutes\b/g, "1 minute"); }
 function results() {
   var c = rec(), r = c.r;
   if (!r.top.length) return top() + '<section class="stack"><p class="kicker">Hmm</p><h1 class="h-big" tabindex="-1">Every place is set aside</h1><p class="none-box">You marked every place "Not for me". Bring them back to see a suggestion.</p><button type="button" class="btn main" data-act="unremove">Bring them back</button></section>';
@@ -925,11 +929,11 @@ function results() {
   r.neighborhoods.forEach(function (nb, i) {
     var A = nb.neighborhood_id, h = HBY[A];
     html += '<section class="area3" data-area="' + esc(A) + '" aria-labelledby="ar-' + i + '"><div class="a-head"><span class="num" aria-hidden="true">' + (i + 1) + '</span><h2 id="ar-' + i + '"><span class="sr">Place ' + (i + 1) + ': </span>' + esc(areaName(A)) + '</h2></div>' +
-      tagList(h) + (nb.why ? '<p class="because"><b>Why:</b> <span class="t">' + esc(said(nb.why)) + '</span></p>' : '') + (nb.gives_up ? '<p class="gives"><b>Gives up:</b> <span class="t">' + esc(said(nb.gives_up)) + '</span></p>' : '') +
+      tagList(h) + (nb.why ? '<p class="because"><b>Why:</b> <span class="t">' + esc(nb.why) + '</span></p>' : '') + (nb.gives_up ? '<p class="gives"><b>Gives up:</b> <span class="t">' + esc(nb.gives_up) + '</span></p>' : '') +
       '<ol class="blist">' + nb.buildings.map(function (x, j) { return bcard(x.id, j, x.more_like_this); }).join("") + '</ol></section>';
   });
   var w = c.what;
-  if (w) html += '<div class="whatif" id="whatif" data-first="' + esc(w.neighborhood_id) + '"><p>' + esc(said(w.text)) + '</p><button type="button" class="quiet" data-act="nudge">Show me that</button></div>';
+  if (w) html += '<div class="whatif" id="whatif" data-first="' + esc(w.neighborhood_id) + '"><p>' + esc(w.text) + '</p><button type="button" class="quiet" data-act="nudge">Show me that</button></div>';
   var nr = S.removed.length;
   html += '<div class="endblock"><h2>Not quite right?</h2><button type="button" class="btn main" data-act="more-choices">Make a few more choices</button>' +
     '<button type="button" class="btn" data-act="all">See everything</button>' +
