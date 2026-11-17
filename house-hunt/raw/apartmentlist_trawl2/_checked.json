@@ -2088,5 +2088,40 @@
 "at": "2026-11-17T17:17:52+00:00",
 "status": 200,
 "reason": "ok"
+},
+"/nj/verona/24-wedgewood-dr-36": {
+"at": "2026-11-17T17:18:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/verona/25-pine-st": {
+"at": "2026-11-17T17:18:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/verona/349-bloomfield-ave--2": {
+"at": "2026-11-17T17:18:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/verona/365-bloomfield-ave-unit-6a": {
+"at": "2026-11-17T17:18:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/verona/630-bloomfield-ave": {
+"at": "2026-11-17T17:18:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/verona/662-bloomfield--1": {
+"at": "2026-11-17T17:18:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/verona/verona-plaza-apartments": {
+"at": "2026-11-17T17:18:17+00:00",
+"status": 200,
+"reason": "ok"
 }
 }

@@ -11,12 +11,12 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 276,
- "props_considered": 627,
- "props_skipped_lowprice": 265,
- "props_read": 362,
+ "srp_pages": 280,
+ "props_considered": 636,
+ "props_skipped_lowprice": 267,
+ "props_read": 369,
  "reasons": {
-  "ok": 361,
+  "ok": 368,
   "no_unit_le_3000": 1
  },
  "transient": [],
@@ -484,6 +484,13 @@
    "drive_min": 55.1,
    "props": 4,
    "read": 3
+  },
+  {
+   "city": "nj/verona",
+   "group": "New Jersey",
+   "drive_min": 55.4,
+   "props": 9,
+   "read": 7
   }
  ],
  "cities_unmatched_far": [
