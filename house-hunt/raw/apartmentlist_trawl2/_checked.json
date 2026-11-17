@@ -2123,5 +2123,70 @@
 "at": "2026-11-17T17:18:17+00:00",
 "status": 200,
 "reason": "ok"
+},
+"/nj/kenilworth/550-boulevard": {
+"at": "2026-11-17T17:18:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/kenilworth/6-n-21st-street": {
+"at": "2026-11-17T17:18:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/roselle-park/222-e-lincoln-ave": {
+"at": "2026-11-17T17:18:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-orange/151-watchung-ave": {
+"at": "2026-11-17T17:18:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-orange/62-forest-hill-rd": {
+"at": "2026-11-17T17:18:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/west-orange/eagle-rock": {
+"at": "2026-11-17T17:18:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/carteret/70-pershing-avenue": {
+"at": "2026-11-17T17:19:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/carteret/lexington-at-carteret": {
+"at": "2026-11-17T17:19:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/carteret/the-botanic": {
+"at": "2026-11-17T17:19:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/roselle/118-w-2nd-ave--1": {
+"at": "2026-11-17T17:19:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/roselle/517-brooklawn-ave": {
+"at": "2026-11-17T17:19:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/roselle/645-east-saint-georges-avenue-3--6": {
+"at": "2026-11-17T17:19:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/roselle/the-park": {
+"at": "2026-11-17T17:19:25+00:00",
+"status": 200,
+"reason": "ok"
 }
 }

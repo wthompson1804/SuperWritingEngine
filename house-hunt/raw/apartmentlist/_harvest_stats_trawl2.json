@@ -11,12 +11,12 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 280,
- "props_considered": 636,
- "props_skipped_lowprice": 267,
- "props_read": 369,
+ "srp_pages": 299,
+ "props_considered": 652,
+ "props_skipped_lowprice": 270,
+ "props_read": 382,
  "reasons": {
-  "ok": 368,
+  "ok": 381,
   "no_unit_le_3000": 1
  },
  "transient": [],
@@ -491,6 +491,48 @@
    "drive_min": 55.4,
    "props": 9,
    "read": 7
+  },
+  {
+   "city": "nj/kenilworth",
+   "group": "New Jersey",
+   "drive_min": 56.0,
+   "props": 3,
+   "read": 2
+  },
+  {
+   "city": "nj/roselle-park",
+   "group": "New Jersey",
+   "drive_min": 56.5,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/west-orange",
+   "group": "New Jersey",
+   "drive_min": 56.5,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "nj/carteret",
+   "group": "New Jersey",
+   "drive_min": 57.0,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "nj/roselle",
+   "group": "New Jersey",
+   "drive_min": 57.3,
+   "props": 4,
+   "read": 4
+  },
+  {
+   "city": "nj/lincoln-park",
+   "group": "New Jersey",
+   "drive_min": 57.7,
+   "props": 1,
+   "read": 0
   }
  ],
  "cities_unmatched_far": [
