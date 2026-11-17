@@ -1,16 +1,24 @@
 building_id,unit_label,floor,basis,source_url,value
-b_c703305174,1031,1,confirmed,https://theaugust.com/floorplans/,1 (unit 1031)
-b_b5e1e32afb,*,1,confirmed,https://www.jcentraburlington.com/floorplans/,1
-b_b5e1e32afb,*,1,confirmed,https://www.jcentraburlington.com/floorplans/,1
-b_e2d2c14006,*,2,confirmed,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/apartment/NJ029-NJ029-001-2154,2
-b_e2d2c14006,*,2,confirmed,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/apartment/NJ029-NJ029-001-2182,2
-b_27056882d3,56-118,1,confirmed,https://www.greystar.com/the-brownstones-at-englewood-south-englewood-nj/p_13462,09-426: floor 4; 56-118: floor 1 (ground floor)
-b_1897e7d980,231,2,confirmed,https://bygomes.com/page-data/property/envy/231/page-data.json,unit 231: 2nd Floor
-b_1897e7d980,308,3,confirmed,https://bygomes.com/page-data/property/envy/308/page-data.json,unit 308: 3rd Floor
-b_1897e7d980,309,3,confirmed,https://bygomes.com/page-data/property/envy/309/page-data.json,unit 309: 3rd Floor
-b_1897e7d980,G02,1,confirmed,https://bygomes.com/page-data/property/envy/G02/page-data.json,unit G02: Ground Floor
-b_84739a68fb,O-0404,4,confirmed,https://bltliveworkplay.com/apartments/jersey-city/the-beacon/availability/,O-0404: 4; P-1203: 12
-b_84739a68fb,P-1203,12,confirmed,https://bltliveworkplay.com/apartments/jersey-city/the-beacon/availability/,O-0404: 4; P-1203: 12
-b_5d1b685d2d,001-436,4,confirmed,https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood,001-436: 4; 001-324: 3
-b_5d1b685d2d,001-324,3,confirmed,https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood,001-436: 4; 001-324: 3
-b_e2d2c14006,1177,1,confirmed,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/,unit 1177: 1
+b_c703305174,1031,1.0,confirmed,https://theaugust.com/floorplans/,1 (unit 1031)
+b_e79bab3c6d,?,,unparsed,https://www.apartmentlist.com/nj/elizabeth/1143-louisa-street,unit APT#2: 3
+b_b5e1e32afb,*,1.0,confirmed,https://www.jcentraburlington.com/floorplans/,1
+b_b5e1e32afb,*,1.0,confirmed,https://www.jcentraburlington.com/floorplans/,1
+b_80d27e82ee,?,,unparsed,https://www.zumper.com/listings/28080497p/1-bedroom-woodbury-ct,two-storey apartment entered at ground level (living space on the first floor)
+b_e2d2c14006,*,2.0,confirmed,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/apartment/NJ029-NJ029-001-2154,2
+b_e2d2c14006,*,2.0,confirmed,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/apartment/NJ029-NJ029-001-2182,2
+b_27056882d3,56-118,1.0,confirmed,https://www.greystar.com/the-brownstones-at-englewood-south-englewood-nj/p_13462,09-426: floor 4; 56-118: floor 1 (ground floor)
+b_1897e7d980,231,2.0,confirmed,https://bygomes.com/page-data/property/envy/231/page-data.json,unit 231: 2nd Floor
+b_1897e7d980,308,3.0,confirmed,https://bygomes.com/page-data/property/envy/308/page-data.json,unit 308: 3rd Floor
+b_1897e7d980,309,3.0,confirmed,https://bygomes.com/page-data/property/envy/309/page-data.json,unit 309: 3rd Floor
+b_1897e7d980,G02,1.0,confirmed,https://bygomes.com/page-data/property/envy/G02/page-data.json,unit G02: Ground Floor
+b_e66167c0e5,*,2.0,confirmed,https://www.avaloncommunities.com/new-jersey/west-windsor-apartments/eaves-west-windsor/apartment/NJ006-NJ006-006-6223,2
+b_dd0d58f3e4,*,2.0,confirmed,https://www.avaloncommunities.com/new-jersey/west-windsor-apartments/eaves-west-windsor/apartment/NJ006-NJ006-009-9124,2
+b_84739a68fb,O-0404,4.0,confirmed,https://bltliveworkplay.com/apartments/jersey-city/the-beacon/availability/,O-0404: 4; P-1203: 12
+b_84739a68fb,P-1203,12.0,confirmed,https://bltliveworkplay.com/apartments/jersey-city/the-beacon/availability/,O-0404: 4; P-1203: 12
+b_5d1b685d2d,001-436,4.0,confirmed,https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood,001-436: 4; 001-324: 3
+b_5d1b685d2d,001-324,3.0,confirmed,https://www.avaloncommunities.com/new-jersey/maplewood-apartments/avalon-maplewood,001-436: 4; 001-324: 3
+b_1871606758,?,,unparsed,https://www.trulia.com/building/villas-at-pine-hills-1b-country-club-dr-manorville-ny-11949-2757039450,ground (every apartment is single-storey)
+b_df7c68e3de,?,,unparsed,https://www.zumper.com/listings/30093474p/1-bedroom-rocky-point-ny,ground level and upstairs (a two-level cottage)
+b_e446f87652,?,,unparsed,https://www.trulia.com/building/brookwood-at-ridge-100-village-dr-ridge-ny-11961-1001449698,upstairs (not ground floor)
+b_e2d2c14006,1177,1.0,confirmed,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/,unit 1177: 1
+b_e2d2c14006,2154,2.0,confirmed,https://www.avaloncommunities.com/new-jersey/boonton-apartments/avalon-boonton/,unit 2154: 2

@@ -244,12 +244,6 @@ master_units,dog_size_only_source,provenance,,travels with dog_size_only
 master_units,balconies,used,build_master.py;rank.py,
 master_units,balconies_basis,provenance,,travels with balconies
 master_units,balconies_source,provenance,,travels with balconies
-master_units,elevator_evidence_open,used,build_master.py;rank.py,
-master_units,elevator_evidence_open_basis,provenance,,travels with elevator_evidence_open
-master_units,elevator_evidence_open_source,provenance,,travels with elevator_evidence_open
-master_units,dogs_evidence_open,used,build_master.py;rank.py,
-master_units,dogs_evidence_open_basis,provenance,,travels with dogs_evidence_open
-master_units,dogs_evidence_open_source,provenance,,travels with dogs_evidence_open
 master_units,dog_weight_unstated,used,build_master.py;rank.py,
 master_units,dog_weight_unstated_basis,provenance,,travels with dog_weight_unstated
 master_units,dog_weight_unstated_source,provenance,,travels with dog_weight_unstated
@@ -262,6 +256,9 @@ master_units,parking_fee_note_source,provenance,,travels with parking_fee_note
 master_units,parking_options,used,build_master.py;all_in.py,
 master_units,parking_options_basis,provenance,,travels with parking_options
 master_units,parking_options_source,provenance,,travels with parking_options
+master_units,dogs_evidence_open,used,build_master.py;rank.py,
+master_units,dogs_evidence_open_basis,provenance,,travels with dogs_evidence_open
+master_units,dogs_evidence_open_source,provenance,,travels with dogs_evidence_open
 master_units,building_type,used,gates.py;build_master.py;rank.py;avoid.py,
 master_units,building_type_basis,used,rank.py,
 master_units,building_type_source,provenance,,travels with building_type
@@ -285,6 +282,9 @@ master_units,optional_fees_text_source,provenance,,travels with optional_fees_te
 master_units,pet_rent_note,used,build_master.py;all_in.py,
 master_units,pet_rent_note_basis,provenance,,travels with pet_rent_note
 master_units,pet_rent_note_source,provenance,,travels with pet_rent_note
+master_units,elevator_evidence_open,used,build_master.py;rank.py,
+master_units,elevator_evidence_open_basis,provenance,,travels with elevator_evidence_open
+master_units,elevator_evidence_open_source,provenance,,travels with elevator_evidence_open
 master_units,eligibility_open,used,build_master.py;rank.py,
 master_units,eligibility_open_basis,provenance,,travels with eligibility_open
 master_units,eligibility_open_source,provenance,,travels with eligibility_open
@@ -756,12 +756,6 @@ master_buildings,dog_size_only_source,provenance,,travels with dog_size_only
 master_buildings,balconies,used,build_master.py;rank.py,
 master_buildings,balconies_basis,provenance,,travels with balconies
 master_buildings,balconies_source,provenance,,travels with balconies
-master_buildings,elevator_evidence_open,used,build_master.py;rank.py,
-master_buildings,elevator_evidence_open_basis,provenance,,travels with elevator_evidence_open
-master_buildings,elevator_evidence_open_source,provenance,,travels with elevator_evidence_open
-master_buildings,dogs_evidence_open,used,build_master.py;rank.py,
-master_buildings,dogs_evidence_open_basis,provenance,,travels with dogs_evidence_open
-master_buildings,dogs_evidence_open_source,provenance,,travels with dogs_evidence_open
 master_buildings,dog_weight_unstated,used,build_master.py;rank.py,
 master_buildings,dog_weight_unstated_basis,provenance,,travels with dog_weight_unstated
 master_buildings,dog_weight_unstated_source,provenance,,travels with dog_weight_unstated
@@ -774,6 +768,9 @@ master_buildings,parking_fee_note_source,provenance,,travels with parking_fee_no
 master_buildings,parking_options,used,build_master.py;all_in.py,
 master_buildings,parking_options_basis,provenance,,travels with parking_options
 master_buildings,parking_options_source,provenance,,travels with parking_options
+master_buildings,dogs_evidence_open,used,build_master.py;rank.py,
+master_buildings,dogs_evidence_open_basis,provenance,,travels with dogs_evidence_open
+master_buildings,dogs_evidence_open_source,provenance,,travels with dogs_evidence_open
 master_buildings,building_type,used,gates.py;build_master.py;rank.py;avoid.py,
 master_buildings,building_type_basis,used,rank.py,
 master_buildings,building_type_source,provenance,,travels with building_type
@@ -797,6 +794,9 @@ master_buildings,optional_fees_text_source,provenance,,travels with optional_fee
 master_buildings,pet_rent_note,used,build_master.py;all_in.py,
 master_buildings,pet_rent_note_basis,provenance,,travels with pet_rent_note
 master_buildings,pet_rent_note_source,provenance,,travels with pet_rent_note
+master_buildings,elevator_evidence_open,used,build_master.py;rank.py,
+master_buildings,elevator_evidence_open_basis,provenance,,travels with elevator_evidence_open
+master_buildings,elevator_evidence_open_source,provenance,,travels with elevator_evidence_open
 master_buildings,eligibility_open,used,build_master.py;rank.py,
 master_buildings,eligibility_open_basis,provenance,,travels with eligibility_open
 master_buildings,eligibility_open_source,provenance,,travels with eligibility_open
