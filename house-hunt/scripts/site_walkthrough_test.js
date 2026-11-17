@@ -638,7 +638,7 @@ const LIMITS = { experience: 2.9, neighborhood: 2.9, building: 2.6, 'building, m
   await go('#hood-' + slug(hRules.id));
   assert.strictEqual(await page.locator('#r-rules .rules li').count(), hRules.local.parking_rules.length + hRules.local.dog_rules.length, 'every local rule is listed');
   assert.strictEqual(await headOf('r-rules'), await page.evaluate(id => window.__houseHunt.headline('hood', id, 'hoodRules'), hRules.id));
-  { const n = await page.locator('#sec-rows details.rowd').count(); assert(n >= 4 && n <= 7, 'four to seven rows on a neighborhood: ' + n); }
+  { const n = await page.locator('#sec-rows details.rowd').count(); assert(n >= 4 && n <= 8, 'four to eight rows on a neighborhood: ' + n); } /* 8 when a neighborhood also has a "worth a phone call" row (2026-11-17, Bridgeport) */
   await openRow('r-rules'); assert((await page.textContent('#r-rules')).includes(hRules.local.parking_rules[0].summary)); await overflow('hood-rules open');
   await openRow('r-here'); assert(await page.isHidden('#hood-crime'), 'the crime figures stay behind "See how we got this"');
   await page.click('#sec-how details.howd > summary'); assert(await page.isVisible('#hood-crime'));

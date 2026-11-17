@@ -96,3 +96,23 @@ separate utilities fee.
   is recomputed from the rule; the 60% balance check stays on the other five moments).
 - `verify_all.py --quick`: 18 passed, 1 failed (`test_concierge_data.py`, rebuilt next by the coordinator), 1 warning
   (`site/dist` older than `site/data.json`: `build_site.py` is the page agent's step), 4 skipped.
+
+## Follow-up: no apartment without a number (coordinator, after sweep 4)
+
+The first page hides an apartment whose `unit` is empty (UI pass 6), so after sweep 4 the page showed 360 while the data
+said 365, and every stored median was over 365. The pipeline now agrees with the page, under the owner's "real
+apartments only" rule: `rank.py` removes, before ranking, any apartment that no source gives a number (not its
+listing's label, words or title, nor another site's listing of the same apartment merged into it; `build_master.py`
+fills `unit_shown` from such a duplicate, basis "another site's listing of the same apartment"). Reason
+`no_apartment_number`, file `data/excluded_no_apartment_number.csv`, counted in the stage line of `rank.py` and in the
+run report (`run_all.py`, one stage row; the only edit to that script).
+
+- 59 rows of the master table (NJ 32, NY 25, CT 2): 24 whose label is a site's index, 35 single-home listings with no
+  label at all. Of the shown list: 5 (1078 East Main St, 809 Garden St, 575 13th Ave, 83 Auburn St, 157 Main St).
+- Knock-on: 146 Hamilton Ave #204 was then the only apartment in Paterson and has an open item, so the thin-neighborhood
+  rule cuts it (it stays in the phone-call list). A Bridgeport apartment (1608 Barnum Ave, $1,167) that the "price far
+  below the neighborhood" rule had dropped as sketchy now sits within 60% of the recomputed median and is held for one
+  confirmation.
+- Shown: **359** (NJ 219, CT 103, NY 37), 191 buildings, 65 neighborhoods, 240 with one open item.
+- Tests: `data_ic6` checks that no ranked apartment lacks a number, that the five are excluded with the reason, and on
+  the page that every apartment has its own number; `test_rules.py --data` 12,240 checks, 0 failed.
