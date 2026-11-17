@@ -5159,6 +5159,36 @@
 "cards": 25,
 "status": "done",
 "searched_at": "2026-11-17T18:59:40+00:00"
+},
+"croton-on-hudson-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 50,
+"status": "done",
+"searched_at": "2026-11-17T18:59:46+00:00"
+},
+"peekskill-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 38,
+"status": "done",
+"searched_at": "2026-11-17T18:59:52+00:00"
+},
+"mohegan-lake-ny": {
+"area": "other",
+"pages": {
+"1-beds": "done",
+"studios": "done"
+},
+"cards": 44,
+"status": "done",
+"searched_at": "2026-11-17T18:59:58+00:00"
 }
 },
 "counts": {
@@ -9321,6 +9351,16 @@ null,
 0,
 0,
 0
+],
+"highland-falls-ny": [
+1,
+7,
+19
+],
+"garrison-ny": [
+0,
+0,
+1
 ]
 }
 }
