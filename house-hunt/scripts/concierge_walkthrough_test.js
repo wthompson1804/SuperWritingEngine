@@ -295,7 +295,7 @@ async function saveFromResults(page, n) {
     for (const q of [probe.city, probe.address, probe.name]) {
       await page.fill("#f-q", q); await page.waitForTimeout(80);
       const ids = await page.locator("#all-list .row").evaluateAll((els) => els.map((e) => e.getAttribute("data-id")));
-      const want = D.buildings.filter((b) => { const h = " " + norm([b.name, b.address, b.city, b.state, b.zip, b.postal_code, b.neighborhood_name, (HB[b.neighborhood_id] || {}).name, (HB[b.group_id] || {}).name].join(" ")) + " "; return norm(q).split(" ").every((w) => h.includes(" " + w)); }).length;
+      const want = D.buildings.filter((b) => { const h = " " + norm([b.name, b.address, b.city, b.state, b.zip, b.postal_code, b.borough, b.neighborhood_name, (HB[b.neighborhood_id] || {}).name, (HB[b.group_id] || {}).name].join(" ")) + " "; return norm(q).split(" ").every((w) => h.includes(" " + w)); }).length;
       ok(ids.includes(probe.id) && ids.length === want, "search '" + q + "' finds it (" + ids.length + " of " + want + ")");
       ok((await page.locator("#f-count").innerText()) === "Showing " + ids.length + " of " + NB + " buildings", "the count follows the search");
     }
@@ -304,7 +304,8 @@ async function saveFromResults(page, n) {
     ok(/Nothing matches/.test(await page.locator("#all-list").innerText()), "no match says so");
     await page.fill("#f-q", ""); await page.waitForTimeout(80);
     ok((await page.locator("#all-list .row").count()) === NB, "clearing the search brings every building back");
-    const box = await page.locator(".filter").boundingBox(); ok(box && box.y < 600, "the filter is near the top of See everything");
+    const box = await page.locator("#filters").boundingBox(); ok(box && box.y < 600, "the filter is near the top of See everything");
+    if (!(await page.locator("#filters").evaluate((d) => d.open))) await page.click("#filters summary");
     const slider = page.locator("#f-rent"), min = Number(await slider.getAttribute("min")), max = Number(await slider.getAttribute("max"));
     await slider.evaluate((el, v) => { el.value = v; el.dispatchEvent(new Event("input", { bubbles: true })); }, String(Math.round((min + (max - min) * 0.45) / 50) * 50));
     await page.waitForTimeout(80);

@@ -299,9 +299,17 @@ details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
 /* everything */
 .search{display:grid;gap:6px}
 .search label{font-weight:800;font-size:16px}
+.search .fcount{font-weight:700;font-size:15px;color:var(--muted)}
 .search input{min-height:52px;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);font:inherit;font-size:18px;padding:8px 14px;width:100%}
 .filter{background:var(--butter);color:var(--on-butter);border:2px solid var(--ink);border-radius:22px;padding:16px;display:grid;gap:14px}
 .filter h2{font-weight:800;font-size:22px}
+details.filter{padding:0}
+details.filter summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px;padding:8px 16px;cursor:pointer;font-family:var(--display);font-weight:800;font-size:20px}
+details.filter summary::-webkit-details-marker{display:none}
+details.filter summary::after{content:"+";font-size:26px;line-height:1;font-weight:500}
+details.filter[open] summary::after{content:"\2212"}
+details.filter .fsum{flex:1 1 auto;font-family:var(--body);font-size:14px;font-weight:700;text-align:right;min-width:0}
+details.filter .fbody{display:grid;gap:14px;padding:0 16px 16px}
 .filter label,.filter .lab{font-weight:800;font-size:16px;display:block;color:var(--on-butter);letter-spacing:0;text-transform:none}
 .filter output{font-family:var(--display);font-size:20px}
 .filter input[type=range]{width:100%;height:44px;margin:0;accent-color:#C12C62}
@@ -1067,10 +1075,10 @@ function welcome() {
   return top("", true) +
     '<section class="hello"><h1 tabindex="-1"><span class="name">Lamia&#39;s<br>House Hunt</span><span class="sr">: </span></h1><span class="tagbox">the short version</span>' +
     (CAN ? '<ol class="how">' +
-        '<li><b>' + cap(WORDS[CJ.n] || String(CJ.n)) + ' quick choices.</b> Each time, pick between two imaginary apartments. Each choice is a trade-off: more of one thing, less of another.</li>' +
-        '<li><b>Your answers teach the page</b> what matters to you.</li>' +
-        '<li><b>Then three neighborhoods</b> that fit you best, with the three best buildings in each.</li>' +
-        '<li><b>Everything stays open.</b> You can still browse, search and filter every place gathered here.</li></ol>' +
+        '<li><span><b>' + cap(WORDS[CJ.n] || String(CJ.n)) + ' quick choices</b> between two imaginary apartments. Each one is a trade-off: more of one thing, less of another.</span></li>' +
+        '<li><span><b>Your answers teach the page</b> what matters to you.</span></li>' +
+        '<li><span><b>Then three neighborhoods</b> that fit you best, with the three best buildings in each.</span></li>' +
+        '<li><span><b>Everything stays open.</b> You can still browse, search and filter every place gathered here.</span></li></ol>' +
       (done ? '<button type="button" class="btn main" data-act="results">See my three places</button><button type="button" class="btn" data-act="restart">Change my answers</button>'
             : '<button type="button" class="btn main" data-act="start">' + (S.cj.length ? 'Carry on' : 'Start') + '</button>')
       : '<p class="lead">Every place, nearest to ' + esc(ANCHOR) + ' first. Save the ones you like.</p><button type="button" class="btn main" data-act="all">See every place</button>') +
@@ -1416,7 +1424,7 @@ function rentBounds() {
 function norm(t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim(); }
 var HAY = {};
 function matchesQuery(b, q) {
-  var h = HAY[b.id] || (HAY[b.id] = " " + norm([b.name, b.address, b.city, b.state, b.zip, b.postal_code, hoodNameOf(b), (HBY[b.area_id] || {}).name].join(" ")) + " ");
+  var h = HAY[b.id] || (HAY[b.id] = " " + norm([b.name, b.address, b.city, b.state, b.zip, b.postal_code, b.borough, hoodNameOf(b), (HBY[b.area_id] || {}).name].join(" ")) + " ");
   return norm(q).split(" ").filter(Boolean).every(function (w) { return h.indexOf(" " + w) >= 0; });
 }
 function stateOf(b) { var h = HBY[b.neighborhood_id]; return b.state || (h && h.state) || ""; }
@@ -1469,19 +1477,27 @@ function listHtml() {
   if (!shown) html = '<p class="empty">' + (VIEW.f.q ? 'Nothing matches &ldquo;' + esc(VIEW.f.q) + '&rdquo; with these filters. Check the spelling, or clear the search.' : 'Nothing fits that filter. Raise the rent or clear a choice.') + '</p>';
   return { html: html, shown: shown };
 }
+function filterSummary() {
+  var f = VIEW.f, rb = rentBounds(), bits = [];
+  if (f.rent != null && f.rent < rb[1]) bits.push("rent up to " + money(f.rent));
+  if (f.beds !== "any") bits.push(f.beds === "0" ? "studios" : "1 bedroom");
+  if (f.state !== "any") bits.push(f.state);
+  if (f.garage) bits.push("garage");
+  return bits.length ? bits.join(", ") : "rent, bedrooms, state, parking";
+}
 function everything() {
   var rb = rentBounds(), f = VIEW.f; if (f.rent == null) f.rent = rb[1];
   var L = listHtml();
   function seg(v, label) { return '<button type="button" data-act="f-beds" data-v="' + v + '" aria-pressed="' + (f.beds === v) + '">' + label + '</button>'; }
   return '<header class="top"><button type="button" class="quiet" data-act="all-close"><span aria-hidden="true">&#8249;</span> Back</button><span class="topbtns" id="topbtns"></span></header>' +
     '<section class="stack" style="gap:6px"><h1 class="h-big" tabindex="-1">Everything</h1><p>Every building, nothing left out. Tap one to see it.</p></section>' +
-    '<div class="search"><label for="f-q">Search by name, street, town or ZIP</label><input type="search" id="f-q" autocomplete="off" placeholder="For example: Stamford, or Monroe" value="' + esc(f.q || "") + '"></div>' +
-    '<section class="filter" aria-label="Filter"><h2>Filter</h2>' +
+    '<div class="search"><label for="f-q">Search by name, street, town or ZIP</label><input type="search" id="f-q" autocomplete="off" placeholder="For example: Stamford, or Monroe" value="' + esc(f.q || "") + '">' +
+    '<p class="fcount" id="f-count" aria-live="polite">Showing ' + L.shown + ' of ' + B.length + ' buildings</p></div>' +
+    '<details class="filter" id="filters"' + (VIEW.fOpen ? ' open' : '') + '><summary><span>Filter</span><span class="fsum" id="f-sum">' + esc(filterSummary()) + '</span></summary><div class="fbody">' +
     '<div><label for="f-rent">Rent up to <output id="f-rent-out" for="f-rent">' + money(f.rent) + '</output></label><input type="range" id="f-rent" min="' + rb[0] + '" max="' + rb[1] + '" step="50" value="' + f.rent + '"></div>' +
     '<div><span class="lab" id="f-beds-l">Bedrooms</span><div class="seg" role="group" aria-labelledby="f-beds-l">' + seg("any", "Any") + seg("0", "Studio") + seg("1", "1 bedroom") + '</div></div>' +
     (STATES.length > 1 ? '<div><span class="lab" id="f-state-l">State</span><div class="seg" role="group" aria-labelledby="f-state-l">' + ['any'].concat(STATES).map(function (st) { return '<button type="button" data-act="f-state" data-v="' + esc(st) + '" aria-pressed="' + (f.state === st) + '">' + (st === "any" ? "Any" : esc(st)) + '</button>'; }).join("") + '</div></div>' : '') +
-    '<label class="check" for="f-garage"><input type="checkbox" id="f-garage"' + (f.garage ? " checked" : "") + '> Garage parking only</label>' +
-    '<p class="fcount" id="f-count" aria-live="polite">Showing ' + L.shown + ' of ' + B.length + ' buildings</p></section>' +
+    '<label class="check" for="f-garage"><input type="checkbox" id="f-garage"' + (f.garage ? " checked" : "") + '> Garage parking only</label></div></details>' +
     (MAPBASE && typeof window.initHouseHuntMap === "function" ? '<div class="tabs" role="group" aria-label="Show as"><button type="button" data-act="tab" data-v="list" aria-pressed="' + (VIEW.tab === "list") + '">List</button><button type="button" data-act="tab" data-v="map" aria-pressed="' + (VIEW.tab === "map") + '">Map</button></div>' : '') +
     '<div id="all-list" class="stack"' + (VIEW.tab === "map" ? " hidden" : "") + '>' + L.html + '</div>' +
     '<div id="all-map" class="mapwrap"' + (VIEW.tab === "map" ? "" : " hidden") + '><div id="map-slot"></div></div>';
@@ -1493,6 +1509,7 @@ function refreshList() {
   var L = listHtml(), box = document.getElementById("all-list"), cnt = document.getElementById("f-count");
   if (box) box.innerHTML = L.html;
   if (cnt) cnt.textContent = "Showing " + L.shown + " of " + B.length + " buildings";
+  var fs = document.getElementById("f-sum"); if (fs) fs.textContent = filterSummary();
   if (VIEW.tab === "map") drawMap();
 }
 function drawMap() {
@@ -1624,6 +1641,7 @@ document.addEventListener("click", function (ev) {
   var el = ev.target.closest ? ev.target.closest("[data-act]") : null;
   if (el && !el.disabled) act(el.getAttribute("data-act"), el);
 });
+document.addEventListener("toggle", function (ev) { if (ev.target && ev.target.id === "filters") VIEW.fOpen = ev.target.open; }, true);
 document.addEventListener("change", function (ev) {
   var t = ev.target, id = t && t.getAttribute && t.getAttribute("data-tick");
   if (!id) return;

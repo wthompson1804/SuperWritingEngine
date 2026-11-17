@@ -144,6 +144,25 @@ TOUR_START, MOVE_IN_BY, ANCHOR_LABEL = "2026-11-22", "2026-12-15", "Mom and Dad"
 v = BP.v
 
 
+
+def borough_of(zip_code, state):
+    """NYC borough from the ZIP, so a search for "Brooklyn" finds a building whose listing says "New York" (2026-11-17)."""
+    z = str(zip_code or "")[:5]
+    if state != "NY" or len(z) < 3:
+        return None
+    p = z[:3]
+    if p == "112":
+        return "Brooklyn"
+    if p in ("113", "114", "116") or z in ("11004", "11005"):
+        return "Queens"
+    if p == "104":
+        return "Bronx"
+    if p == "103":
+        return "Staten Island"
+    if p in ("100", "101", "102"):
+        return "Manhattan"
+    return None
+
 def miss(x):
     return x is None or (isinstance(x, float) and math.isnan(x)) or (isinstance(x, str) and not x.strip())
 
@@ -1045,6 +1064,8 @@ def concierge(b, source):
         totals = [u["all_in"] for u in us]
         blds.append({
             "id": bd["id"], "name": display_name(bd), "address": bd.get("address"), "city": bd.get("city"),
+            "zip": bd.get("zip") or next((u.get("zip") for u in us if u.get("zip")), None),  # for search by ZIP (2026-11-17)
+            "borough": borough_of(bd.get("zip") or next((u.get("zip") for u in us if u.get("zip")), None), bd.get("state")),
             "state": bd.get("state"), "lat": round(sum(u["lat"] for u in us) / len(us), 5), "lon": round(sum(u["lon"] for u in us) / len(us), 5),
             "neighborhood_id": bd["hood_id"], "experience_id": bd.get("experience") or best.get("year"),
             "rank_score": num((best.get("scores") or {}).get("rank")),
