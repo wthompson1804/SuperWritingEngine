@@ -4993,5 +4993,1655 @@
 "at": "2026-11-17T18:07:05+00:00",
 "status": 200,
 "reason": "ok"
+},
+"/ny/long-beach/209-w-fulton-street": {
+"at": "2026-11-17T18:08:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/long-beach/330-e-broadway": {
+"at": "2026-11-17T18:08:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/long-beach/420-shore-road--5": {
+"at": "2026-11-17T18:08:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/long-beach/470-e-broadway--1": {
+"at": "2026-11-17T18:08:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/long-beach/65-w-broadway--1": {
+"at": "2026-11-17T18:08:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/long-beach/765-shore-road--1": {
+"at": "2026-11-17T18:08:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/long-beach/855-e-broadway--3": {
+"at": "2026-11-17T18:08:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/glen-cove/13-smith-st": {
+"at": "2026-11-17T18:09:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/glen-cove/159-landing-road": {
+"at": "2026-11-17T18:09:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/glen-cove/32-pearsall-ave-apt-3f": {
+"at": "2026-11-17T18:09:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/woodbury/22-smith-clove-rd": {
+"at": "2026-11-17T18:10:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/woodbury/534-state-route-32--1": {
+"at": "2026-11-17T18:10:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/west-babylon/1569-4th-street": {
+"at": "2026-11-17T18:10:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/west-babylon/7-angelica-court": {
+"at": "2026-11-17T18:10:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/melville/long-island-melville": {
+"at": "2026-11-17T18:11:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/north-babylon/12-chapel-place": {
+"at": "2026-11-17T18:11:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/babylon/26-frederick-avenue": {
+"at": "2026-11-17T18:11:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/babylon/33-deer-park-avenue--3": {
+"at": "2026-11-17T18:11:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/babylon/50-the-crescent--1": {
+"at": "2026-11-17T18:11:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/babylon/93-deer-park-avenue--1": {
+"at": "2026-11-17T18:11:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/huntington/140-wall-street--2": {
+"at": "2026-11-17T18:11:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/huntington/362-new-york-avenue--1": {
+"at": "2026-11-17T18:12:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bay-shore/23-2b-june-court": {
+"at": "2026-11-17T18:12:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/commack/47-beacon-lane": {
+"at": "2026-11-17T18:12:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/islip/587-main-st--2": {
+"at": "2026-11-17T18:12:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/east-northport/215-bellerose-avenue": {
+"at": "2026-11-17T18:13:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/east-northport/45-valley-road": {
+"at": "2026-11-17T18:13:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/northport/23-laurel-avenue": {
+"at": "2026-11-17T18:13:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/sayville/31-barbara-court": {
+"at": "2026-11-17T18:13:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/nesconset/221-s-lake-avenue": {
+"at": "2026-11-17T18:13:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/holbrook/418-erie-st": {
+"at": "2026-11-17T18:14:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/farmingville/5521-express-drive-north": {
+"at": "2026-11-17T18:14:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/farmingville/7-mark-lane": {
+"at": "2026-11-17T18:14:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/selden/12-edna-ln": {
+"at": "2026-11-17T18:15:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/coram/11-barclay-drive": {
+"at": "2026-11-17T18:15:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/coram/27-stuart-drive": {
+"at": "2026-11-17T18:15:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/coram/49-fargo-court": {
+"at": "2026-11-17T18:15:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/rocky-point/25-nymph-road": {
+"at": "2026-11-17T18:15:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/ridge/398-woodbridge-drive": {
+"at": "2026-11-17T18:16:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/middle-island/98-church-lane": {
+"at": "2026-11-17T18:16:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/1055-47th-ave-apt-3h--1": {
+"at": "2026-11-17T18:17:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/240-51st-ave--8": {
+"at": "2026-11-17T18:17:55+00:00",
+"status": 200,
+"reason": "no_listing_object"
+},
+"/ny/queens/27-09-40th-avenue": {
+"at": "2026-11-17T18:17:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/39-26-30th-street--1": {
+"at": "2026-11-17T18:18:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/4132-27th-st-apt-12c": {
+"at": "2026-11-17T18:18:03+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/queens/42-62-hunter-street": {
+"at": "2026-11-17T18:18:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/4821-5th-st-apt-2d--1": {
+"at": "2026-11-17T18:18:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/549-borden-ave-apt-2n": {
+"at": "2026-11-17T18:18:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/108-60-horace-harding-expressway": {
+"at": "2026-11-17T18:18:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/11020-71st-ave": {
+"at": "2026-11-17T18:18:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/11145-76th-dr": {
+"at": "2026-11-17T18:18:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/11231-38th-ave-apt-2a--1": {
+"at": "2026-11-17T18:18:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/121-06-109th-ave": {
+"at": "2026-11-17T18:18:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/14325-84th-drive": {
+"at": "2026-11-17T18:18:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/149-15-barclay-avenue--1": {
+"at": "2026-11-17T18:18:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/150-11-huron-street": {
+"at": "2026-11-17T18:19:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/15110-35th-ave": {
+"at": "2026-11-17T18:19:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/160-10-89th-avenue": {
+"at": "2026-11-17T18:19:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/167-10-crocheron-avenue--3": {
+"at": "2026-11-17T18:19:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/188-36-jamaica-avenue": {
+"at": "2026-11-17T18:19:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/2157-33rd-st-6767": {
+"at": "2026-11-17T18:19:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/22-50-81st-street": {
+"at": "2026-11-17T18:19:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/2227-76th-st-bbb": {
+"at": "2026-11-17T18:19:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/2243-77th-st-apt-d2": {
+"at": "2026-11-17T18:19:20+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/queens/2335-31st-street": {
+"at": "2026-11-17T18:19:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/240-51st-ave--9": {
+"at": "2026-11-17T18:19:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/2465-38th-st-apt-4c": {
+"at": "2026-11-17T18:19:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/2540-31st-st-5l": {
+"at": "2026-11-17T18:19:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/31-43-101-street": {
+"at": "2026-11-17T18:19:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/3406-jordan-street": {
+"at": "2026-11-17T18:19:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/35-35-75-street--2": {
+"at": "2026-11-17T18:19:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/37-09-20th-rd": {
+"at": "2026-11-17T18:19:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/4107-42nd-st--1": {
+"at": "2026-11-17T18:19:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/4117-crescent-st-apt-10g": {
+"at": "2026-11-17T18:19:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/4125-kissena-blvd-5644": {
+"at": "2026-11-17T18:19:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/4152-63rd-st": {
+"at": "2026-11-17T18:19:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/4317-48th-st--1": {
+"at": "2026-11-17T18:19:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/4318-44th-st": {
+"at": "2026-11-17T18:19:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/45-36-220th-place": {
+"at": "2026-11-17T18:19:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/46-36-162": {
+"at": "2026-11-17T18:20:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/56-64-136": {
+"at": "2026-11-17T18:20:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/61-15-98-street--1": {
+"at": "2026-11-17T18:20:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/61-25-98-street--1": {
+"at": "2026-11-17T18:20:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/6314-queens-blvd-5543": {
+"at": "2026-11-17T18:20:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/6385-woodhaven-blvd-8787": {
+"at": "2026-11-17T18:20:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/6464-wetherole-st-5b": {
+"at": "2026-11-17T18:20:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/65-05-242": {
+"at": "2026-11-17T18:20:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/65-35-yellowstone-boulevard--2": {
+"at": "2026-11-17T18:20:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/6636-yellowstone-blvd-9980": {
+"at": "2026-11-17T18:20:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/6968-78-st": {
+"at": "2026-11-17T18:20:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/7166-parsons-blvd-7661": {
+"at": "2026-11-17T18:20:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/7235-112th-st-apt-8a": {
+"at": "2026-11-17T18:20:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/8352-talbot-st-apt-4h": {
+"at": "2026-11-17T18:20:34+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/queens/84-50-169th-street--1": {
+"at": "2026-11-17T18:20:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/8515-60th-rd": {
+"at": "2026-11-17T18:20:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/8710-51st-ave-6543": {
+"at": "2026-11-17T18:20:41+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/8714-57th-rd": {
+"at": "2026-11-17T18:20:44+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/89-15-parsons-boulevard--1": {
+"at": "2026-11-17T18:20:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/94-25-54-avenue": {
+"at": "2026-11-17T18:20:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/999-beach-9th-st-apt-1b": {
+"at": "2026-11-17T18:20:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/queens/new-york-city-laguardia-airport": {
+"at": "2026-11-17T18:20:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1005-walton-avenue--1": {
+"at": "2026-11-17T18:21:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1068-ward-avenue": {
+"at": "2026-11-17T18:21:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1175-morris-avenue": {
+"at": "2026-11-17T18:21:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1305-sheridan-avenue--1": {
+"at": "2026-11-17T18:21:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1309-sheridan-ave-apt-3a": {
+"at": "2026-11-17T18:21:34+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1310-sheridan-avenue": {
+"at": "2026-11-17T18:21:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1340-merriam-avenue": {
+"at": "2026-11-17T18:21:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1358-sheridan-avenue": {
+"at": "2026-11-17T18:21:41+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1378-inwood-ave-apt-101": {
+"at": "2026-11-17T18:21:44+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1425-thieriot-ave--1": {
+"at": "2026-11-17T18:21:46+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/150-featherbed-ln-apt-7h": {
+"at": "2026-11-17T18:21:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1520-sheridan-ave-apt-4f": {
+"at": "2026-11-17T18:21:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/156-east-184th-street": {
+"at": "2026-11-17T18:21:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1565-grand-concourse": {
+"at": "2026-11-17T18:21:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1738-university-avenue": {
+"at": "2026-11-17T18:21:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1755-clay-avenue": {
+"at": "2026-11-17T18:22:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1775-clay-avenue": {
+"at": "2026-11-17T18:22:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/1841-mohegan-avenue": {
+"at": "2026-11-17T18:22:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2-fordham-hill-oval-apt-16e": {
+"at": "2026-11-17T18:22:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2075-grand-concourse": {
+"at": "2026-11-17T18:22:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2079-morris-avenue": {
+"at": "2026-11-17T18:22:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2080-grand-concourse--7": {
+"at": "2026-11-17T18:22:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2090-grand-concourse": {
+"at": "2026-11-17T18:22:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2095-grand-concourse": {
+"at": "2026-11-17T18:22:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/210-west-262nd-street--1": {
+"at": "2026-11-17T18:22:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2120-daly-ave": {
+"at": "2026-11-17T18:22:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2165-matthews-ave-8787": {
+"at": "2026-11-17T18:22:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2170-university-avenue--1": {
+"at": "2026-11-17T18:22:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/220-e-204th-st": {
+"at": "2026-11-17T18:22:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2265-grand-avenue": {
+"at": "2026-11-17T18:22:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2265-university-avenue--1": {
+"at": "2026-11-17T18:22:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2300-grand-concourse": {
+"at": "2026-11-17T18:22:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2300-olinville-avenue": {
+"at": "2026-11-17T18:22:44+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2301-creston-avenue": {
+"at": "2026-11-17T18:22:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/235-west-233rd-street--1": {
+"at": "2026-11-17T18:22:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2397-morris-ave": {
+"at": "2026-11-17T18:22:52+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/bronx/2419-davidson-avenue": {
+"at": "2026-11-17T18:22:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2434-buck-street": {
+"at": "2026-11-17T18:22:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2523-aqueduct-ave-apt-b3": {
+"at": "2026-11-17T18:22:59+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/bronx/259-e-mosholu-pkwy-n-apt-3a": {
+"at": "2026-11-17T18:23:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2665-grand-concourse": {
+"at": "2026-11-17T18:23:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2676-grand-concourse--1": {
+"at": "2026-11-17T18:23:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2700-grand-concourse--3": {
+"at": "2026-11-17T18:23:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2712-hone-avenue": {
+"at": "2026-11-17T18:23:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2736-independence-ave-7654": {
+"at": "2026-11-17T18:23:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2763-morris-avenue--3": {
+"at": "2026-11-17T18:23:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2851-valentine-avenue": {
+"at": "2026-11-17T18:23:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2855-grand-concourse--1": {
+"at": "2026-11-17T18:23:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2857-valentine-avenue": {
+"at": "2026-11-17T18:23:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2875-bainbridge-avenue": {
+"at": "2026-11-17T18:23:26+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2925-matthews-ave-7654": {
+"at": "2026-11-17T18:23:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/2985-botanical-sq": {
+"at": "2026-11-17T18:23:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3036-cruger-ave": {
+"at": "2026-11-17T18:23:34+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3071-perry-avenue": {
+"at": "2026-11-17T18:23:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/308-east-209th-street": {
+"at": "2026-11-17T18:23:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3176-decatur-ave": {
+"at": "2026-11-17T18:23:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3210-riverdale-ave-apt-6b": {
+"at": "2026-11-17T18:23:44+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3220-fairfield-ave-apt-6b": {
+"at": "2026-11-17T18:23:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3235-cambridge-ave-6543": {
+"at": "2026-11-17T18:23:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3291-hull-avenue": {
+"at": "2026-11-17T18:23:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3451-giles-place": {
+"at": "2026-11-17T18:23:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3465-fort-independence-st": {
+"at": "2026-11-17T18:23:56+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3471-cannon-pl-apt-pfk23gn": {
+"at": "2026-11-17T18:23:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3531-bronxwood-ave-apt-3e": {
+"at": "2026-11-17T18:24:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/3555-kings-college-pl": {
+"at": "2026-11-17T18:24:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/363-e-157th-st": {
+"at": "2026-11-17T18:24:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/367-east-201st-street": {
+"at": "2026-11-17T18:24:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/402-east-162nd-street": {
+"at": "2026-11-17T18:24:11+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/4210-bronxwood-avenue": {
+"at": "2026-11-17T18:24:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/4400-wickham-avenue": {
+"at": "2026-11-17T18:24:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/456-east-149th-street": {
+"at": "2026-11-17T18:24:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/4705-henry-hudson-pkwy-w-8907": {
+"at": "2026-11-17T18:24:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/4755-white-plains-rd": {
+"at": "2026-11-17T18:24:24+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/511-west-232nd-street": {
+"at": "2026-11-17T18:24:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/530-west-236th-street": {
+"at": "2026-11-17T18:24:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/54-w-174th-st": {
+"at": "2026-11-17T18:24:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/5444-arlington-ave--1": {
+"at": "2026-11-17T18:24:34+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/55-dash-pl": {
+"at": "2026-11-17T18:24:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/55-e-196-st--1": {
+"at": "2026-11-17T18:24:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/5635-netherland-ave": {
+"at": "2026-11-17T18:24:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/5645-netherland-ave-7543": {
+"at": "2026-11-17T18:24:44+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/5715-mosholu-ave": {
+"at": "2026-11-17T18:24:46+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/6-east-167th-street": {
+"at": "2026-11-17T18:24:49+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/601-pelham-pkwy-n-7773": {
+"at": "2026-11-17T18:24:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/6655-broadway": {
+"at": "2026-11-17T18:24:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/68-west-238th-street": {
+"at": "2026-11-17T18:24:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/721-walton-ave": {
+"at": "2026-11-17T18:24:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/805-e-182nd-st-4467": {
+"at": "2026-11-17T18:25:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/814-tilden-street-tilden-street-7431": {
+"at": "2026-11-17T18:25:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/878-eagle-ave-apt-23f": {
+"at": "2026-11-17T18:25:07+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/bronx/89-metropolitan-oval--1": {
+"at": "2026-11-17T18:25:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/906-gerard-avenue": {
+"at": "2026-11-17T18:25:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/975-sherman-avenue": {
+"at": "2026-11-17T18:25:14+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/99-metropolitan-oval-8987": {
+"at": "2026-11-17T18:25:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/bronx/equestrian-at-pelham-parkway": {
+"at": "2026-11-17T18:25:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/mount-vernon/19-primrose-avenue": {
+"at": "2026-11-17T18:25:32+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/mount-vernon/25-e-3rd-st": {
+"at": "2026-11-17T18:25:34+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/mount-vernon/33-e-grand-street--1": {
+"at": "2026-11-17T18:25:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/mount-vernon/39-overlook-st": {
+"at": "2026-11-17T18:25:39+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/mount-vernon/660-locust-street": {
+"at": "2026-11-17T18:25:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-rochelle/11-garden-st": {
+"at": "2026-11-17T18:26:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-rochelle/230-pelham-road--5": {
+"at": "2026-11-17T18:26:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-rochelle/838-pelhamdale-avenue": {
+"at": "2026-11-17T18:26:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/new-rochelle/encore": {
+"at": "2026-11-17T18:26:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/mamaroneck/400-mount-pleasant-avenue--3": {
+"at": "2026-11-17T18:26:46+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/tuckahoe/158-lake-avenue": {
+"at": "2026-11-17T18:26:56+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/1133-midland-ave-apt-5b": {
+"at": "2026-11-17T18:27:11+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/115-dehaven-dr-105673": {
+"at": "2026-11-17T18:27:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/2035-central-park-avenue": {
+"at": "2026-11-17T18:27:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/27-ludlow-st": {
+"at": "2026-11-17T18:27:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/29-sedgwick-avenue": {
+"at": "2026-11-17T18:27:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/3-sadore-lane": {
+"at": "2026-11-17T18:27:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/30-winchester": {
+"at": "2026-11-17T18:27:26+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/33-loudoun-street": {
+"at": "2026-11-17T18:27:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/40-park-ave": {
+"at": "2026-11-17T18:27:31+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/510-midland-avenue--2": {
+"at": "2026-11-17T18:27:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/52-yonkers-terrace": {
+"at": "2026-11-17T18:27:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/59-laurel-place": {
+"at": "2026-11-17T18:27:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/yonkers/780-bronx-river-road--2": {
+"at": "2026-11-17T18:27:41+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/white-plains/210-martine-avenue--3": {
+"at": "2026-11-17T18:28:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/white-plains/256-martine-ave": {
+"at": "2026-11-17T18:28:31+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/white-plains/30-windsor-terrace--2": {
+"at": "2026-11-17T18:28:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/white-plains/300-main-st--1": {
+"at": "2026-11-17T18:28:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/white-plains/7-greenridge-ave": {
+"at": "2026-11-17T18:28:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/137-lafayette-ave-fl-2": {
+"at": "2026-11-17T18:28:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/141-saint-marks-pl": {
+"at": "2026-11-17T18:28:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/16-cedar-ave": {
+"at": "2026-11-17T18:28:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/2015-forest-avenue--1": {
+"at": "2026-11-17T18:29:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/22-el-camino-loop": {
+"at": "2026-11-17T18:29:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/249-warwick-avenue": {
+"at": "2026-11-17T18:29:06+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/283-quintard-street": {
+"at": "2026-11-17T18:29:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/304-brehaut-ave": {
+"at": "2026-11-17T18:29:11+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/331-jefferson-avenue": {
+"at": "2026-11-17T18:29:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/339-hamden-avenue": {
+"at": "2026-11-17T18:29:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/364-sand-lane": {
+"at": "2026-11-17T18:29:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/38-sleepy-hollow-rd": {
+"at": "2026-11-17T18:29:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/39-tudor-street": {
+"at": "2026-11-17T18:29:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/395-ashland-ave-apt-b": {
+"at": "2026-11-17T18:29:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/40-devens-street": {
+"at": "2026-11-17T18:29:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/407-king-street": {
+"at": "2026-11-17T18:29:31+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/44-anjali-loop": {
+"at": "2026-11-17T18:29:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/476-howard-ave": {
+"at": "2026-11-17T18:29:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/56-westervelt-avenue": {
+"at": "2026-11-17T18:29:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/581-castleton-ave-apt-2f": {
+"at": "2026-11-17T18:29:40+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/ny/staten-island/67-arden-ave--1": {
+"at": "2026-11-17T18:29:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/86-notre-dame-avenue": {
+"at": "2026-11-17T18:29:46+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/861-rossville-avenue": {
+"at": "2026-11-17T18:29:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/staten-island/869-forest-avenue": {
+"at": "2026-11-17T18:29:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/nyack/38-n-midland-avenue": {
+"at": "2026-11-17T18:30:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/nyack/94-n-highland-avenue": {
+"at": "2026-11-17T18:30:11+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/pearl-river/288-ehrhardt-road": {
+"at": "2026-11-17T18:30:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/ossining/45-47-spring-street": {
+"at": "2026-11-17T18:30:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/congers/1-n-rockland-rockland-avenue": {
+"at": "2026-11-17T18:30:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/congers/50-lenox--1": {
+"at": "2026-11-17T18:30:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/mount-kisco/43-1-2-carpenter-avenue": {
+"at": "2026-11-17T18:31:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/sloatsburg/15-waldron-terrace": {
+"at": "2026-11-17T18:31:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/suffern/21-pavilion-road--4": {
+"at": "2026-11-17T18:31:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/suffern/35-park-ave--1": {
+"at": "2026-11-17T18:31:31+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/suffern/4-sussex-court": {
+"at": "2026-11-17T18:31:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/suffern/49-bon-aire-cir-apt-7712": {
+"at": "2026-11-17T18:31:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/peekskill/150-overlook-avenue": {
+"at": "2026-11-17T18:31:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/peekskill/316-chateau-rive": {
+"at": "2026-11-17T18:31:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/peekskill/668-highland-avenue": {
+"at": "2026-11-17T18:31:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/highland-falls/235-main-street": {
+"at": "2026-11-17T18:32:11+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/highland-falls/29-fort-putnam-street": {
+"at": "2026-11-17T18:32:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/highland-falls/3-pine-terrace-road--6": {
+"at": "2026-11-17T18:32:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/chester/11-academy-avenue": {
+"at": "2026-11-17T18:32:26+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/firthcliffe/6-willow-avenue--1": {
+"at": "2026-11-17T18:32:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/goshen/122-murray-avenue": {
+"at": "2026-11-17T18:32:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/goshen/157-main-st": {
+"at": "2026-11-17T18:32:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/goshen/190-main-st": {
+"at": "2026-11-17T18:32:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/goshen/55-st-john": {
+"at": "2026-11-17T18:32:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/newburgh/134-chambers-st": {
+"at": "2026-11-17T18:33:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/newburgh/15-clark-st": {
+"at": "2026-11-17T18:33:06+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/newburgh/199-chambers-street--1": {
+"at": "2026-11-17T18:33:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/newburgh/238-broadway": {
+"at": "2026-11-17T18:33:11+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/newburgh/30-galloway-avenue": {
+"at": "2026-11-17T18:33:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/newburgh/51-leroy-place": {
+"at": "2026-11-17T18:33:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/newburgh/55-broad-street": {
+"at": "2026-11-17T18:33:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/newburgh/59-carson-avenue": {
+"at": "2026-11-17T18:33:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/orange-lake/16-tighe-avenue": {
+"at": "2026-11-17T18:33:31+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/florida/11-farries-avenue--2": {
+"at": "2026-11-17T18:33:41+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/warwick/19-wheeler-avenue": {
+"at": "2026-11-17T18:33:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/pawling/19-memorial-avenue": {
+"at": "2026-11-17T18:34:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/pawling/5a-spring-street--1": {
+"at": "2026-11-17T18:34:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/walden/103-w-main-street": {
+"at": "2026-11-17T18:34:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/mountain-lodge-park/42-underhill-trail": {
+"at": "2026-11-17T18:34:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/beacon/222-e-main-street": {
+"at": "2026-11-17T18:34:46+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/beacon/257-main-st": {
+"at": "2026-11-17T18:34:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/beacon/28-davis-street--1": {
+"at": "2026-11-17T18:34:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/beacon/457-main-st": {
+"at": "2026-11-17T18:34:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/pa/morrisville/pennsbury-court--1": {
+"at": "2026-11-17T18:35:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/pa/easton/1219-lehigh-st": {
+"at": "2026-11-17T18:35:16+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/16-centre-square--3": {
+"at": "2026-11-17T18:35:18+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/23-n-10th": {
+"at": "2026-11-17T18:35:21+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/34-s-11th-street": {
+"at": "2026-11-17T18:35:23+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/45-north-2nd-st--2": {
+"at": "2026-11-17T18:35:26+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/714-west-berwick-street": {
+"at": "2026-11-17T18:35:28+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/five-point-flats--1": {
+"at": "2026-11-17T18:35:31+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/pine-street-lofts-residential": {
+"at": "2026-11-17T18:35:33+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/the-confluence": {
+"at": "2026-11-17T18:35:35+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/the-marquis": {
+"at": "2026-11-17T18:35:38+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/the-seville-apartments": {
+"at": "2026-11-17T18:35:41+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/watermark": {
+"at": "2026-11-17T18:35:43+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/easton/woodmont-place": {
+"at": "2026-11-17T18:35:46+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/middletown/108-north-street--2": {
+"at": "2026-11-17T18:35:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/middletown/17-w-main-street": {
+"at": "2026-11-17T18:36:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/middletown/55-57-north-street": {
+"at": "2026-11-17T18:36:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/poughkeepsie/160-academy-street": {
+"at": "2026-11-17T18:36:16+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/18-s-clinton-street-3": {
+"at": "2026-11-17T18:36:18+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/222-mill-street-apt-2": {
+"at": "2026-11-17T18:36:21+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/4-south-clinton-street-3": {
+"at": "2026-11-17T18:36:23+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/48-s-clinton-street": {
+"at": "2026-11-17T18:36:26+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/55-carroll-street": {
+"at": "2026-11-17T18:36:28+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/56-pershing-avenue": {
+"at": "2026-11-17T18:36:31+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/57-s-hamilton-st": {
+"at": "2026-11-17T18:36:33+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/6-south-clinton-street-store": {
+"at": "2026-11-17T18:36:36+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/716-main-street": {
+"at": "2026-11-17T18:36:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/poughkeepsie/81-cannon-street": {
+"at": "2026-11-17T18:36:40+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/99-s-hamilton-street": {
+"at": "2026-11-17T18:36:43+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/fox-run-at-fulton-student-housing": {
+"at": "2026-11-17T18:36:46+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/poughkeepsie/the-legion": {
+"at": "2026-11-17T18:36:48+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/ny/port-jervis/12-1-2-schultz-street": {
+"at": "2026-11-17T18:36:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/ny/port-jervis/13-19-cole-street--1": {
+"at": "2026-11-17T18:37:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/pa/stroudsburg/1186-w-main-st--1": {
+"at": "2026-11-17T18:37:26+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/stroudsburg/1332-dreher-ave": {
+"at": "2026-11-17T18:37:28+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/stroudsburg/27-s-seventh-street": {
+"at": "2026-11-17T18:37:31+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/stroudsburg/717-main-street": {
+"at": "2026-11-17T18:37:33+00:00",
+"status": 200,
+"reason": "outside_grid"
+},
+"/pa/newtown/250-s-state-st": {
+"at": "2026-11-17T18:37:56+00:00",
+"status": 200,
+"reason": "outside_grid"
 }
 }

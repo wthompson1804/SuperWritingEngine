@@ -263,3 +263,129 @@
 18:07:35 [Long Island] ny/island-park drive=26.0 props=1 read=0 rows=4913 gone=103 srp=905
 18:07:40 [Long Island] ny/uniondale drive=26.3 props=0 read=0 rows=4913 gone=103 srp=907
 18:07:50 [Long Island] ny/westbury drive=28.3 props=4 read=0 rows=4913 gone=103 srp=911
+18:08:20 [Long Island] ny/long-beach drive=28.7 props=32 read=7 rows=4913 gone=103 srp=916
+18:08:25 [Long Island] ny/east-meadow drive=29.9 props=0 read=0 rows=4913 gone=103 srp=918
+18:08:33 [Long Island] ny/jericho drive=30.0 props=1 read=0 rows=4913 gone=103 srp=921
+18:08:42 [Long Island] ny/hicksville drive=31.7 props=2 read=0 rows=4913 gone=103 srp=925
+18:08:47 [Long Island] ny/manorhaven drive=32.2 props=0 read=0 rows=4913 gone=103 srp=927
+18:08:55 [Long Island] ny/port-washington drive=32.2 props=1 read=0 rows=4913 gone=103 srp=930
+18:09:03 [Long Island] ny/sea-cliff drive=32.5 props=2 read=0 rows=4913 gone=103 srp=933
+18:09:08 [Long Island] ny/levittown drive=33.3 props=0 read=0 rows=4913 gone=103 srp=935
+18:09:13 [Long Island] ny/lido-beach drive=33.6 props=0 read=0 rows=4913 gone=103 srp=937
+18:09:18 [Long Island] ny/point-lookout drive=33.6 props=0 read=0 rows=4913 gone=103 srp=939
+18:09:23 [Long Island] ny/syosset drive=35.2 props=0 read=0 rows=4913 gone=103 srp=941
+18:09:30 [Long Island] ny/amityville drive=35.3 props=3 read=0 rows=4913 gone=103 srp=944
+18:09:48 [Long Island] ny/glen-cove drive=35.7 props=6 read=3 rows=4914 gone=103 srp=948
+18:09:53 [Long Island] ny/plainview drive=36.2 props=0 read=0 rows=4914 gone=103 srp=950
+18:10:00 [Long Island] ny/copiague drive=38.0 props=3 read=0 rows=4914 gone=103 srp=953
+18:10:13 [Long Island] ny/woodbury drive=38.3 props=2 read=2 rows=4914 gone=103 srp=956
+18:10:20 [Long Island] ny/lindenhurst drive=38.6 props=1 read=0 rows=4914 gone=103 srp=959
+18:10:28 [Long Island] ny/east-farmingdale drive=39.3 props=1 read=0 rows=4914 gone=103 srp=962
+18:10:35 [Long Island] ny/farmingdale drive=39.3 props=2 read=0 rows=4914 gone=103 srp=965
+18:10:48 [Long Island] ny/west-babylon drive=42.2 props=3 read=2 rows=4914 gone=103 srp=968
+18:10:53 [Long Island] ny/cold-spring-harbor drive=42.8 props=0 read=0 rows=4914 gone=103 srp=970
+18:11:05 [Long Island] ny/melville drive=42.9 props=3 read=1 rows=4914 gone=103 srp=974
+18:11:17 [Long Island] ny/north-babylon drive=43.9 props=1 read=1 rows=4914 gone=103 srp=977
+18:11:23 [Long Island] ny/dix-hills drive=45.3 props=1 read=0 rows=4914 gone=103 srp=980
+18:11:28 [Long Island] ny/deer-park drive=46.6 props=0 read=0 rows=4914 gone=103 srp=982
+18:11:45 [Long Island] ny/babylon drive=47.2 props=4 read=4 rows=4914 gone=103 srp=985
+18:12:00 [Long Island] ny/huntington drive=49.3 props=6 read=2 rows=4914 gone=103 srp=989
+18:12:12 [Long Island] ny/bay-shore drive=49.7 props=4 read=1 rows=4914 gone=103 srp=993
+18:12:23 [Long Island] ny/commack drive=51.8 props=1 read=1 rows=4914 gone=103 srp=996
+18:12:33 [Long Island] ny/islip drive=52.3 props=2 read=1 rows=4914 gone=103 srp=999
+18:12:40 [Long Island] ny/huntington-station drive=52.6 props=2 read=0 rows=4914 gone=103 srp=1002
+18:12:48 [Long Island] ny/north-bay-shore drive=52.6 props=1 read=0 rows=4914 gone=103 srp=1005
+18:12:55 [Long Island] ny/hauppauge drive=54.0 props=2 read=0 rows=4914 gone=103 srp=1008
+18:13:10 [Long Island] ny/east-northport drive=54.5 props=3 read=2 rows=4914 gone=103 srp=1012
+18:13:18 [Long Island] ny/central-islip drive=55.7 props=1 read=0 rows=4914 gone=103 srp=1015
+18:13:28 [Long Island] ny/northport drive=61.1 props=2 read=1 rows=4914 gone=103 srp=1018
+18:13:37 [Long Island] ny/sayville drive=62.6 props=1 read=1 rows=4914 gone=103 srp=1021
+18:13:47 [Long Island] ny/nesconset drive=63.3 props=2 read=1 rows=4914 gone=103 srp=1024
+18:13:55 [Long Island] ny/lake-ronkonkoma drive=64.6 props=1 read=0 rows=4914 gone=103 srp=1027
+18:14:05 [Long Island] ny/ronkonkoma drive=64.6 props=3 read=0 rows=4914 gone=103 srp=1031
+18:14:13 [Long Island] ny/patchogue drive=66.1 props=3 read=0 rows=4914 gone=103 srp=1034
+18:14:22 [Long Island] ny/holbrook drive=66.7 props=1 read=1 rows=4914 gone=103 srp=1037
+18:14:30 [Long Island] ny/fire-island drive=68.5 props=1 read=0 rows=4914 gone=103 srp=1040
+18:14:38 [Long Island] ny/ocean-beach drive=68.5 props=1 read=0 rows=4914 gone=103 srp=1043
+18:14:50 [Long Island] ny/farmingville drive=69.2 props=2 read=2 rows=4914 gone=103 srp=1046
+18:14:58 [Long Island] ny/centereach drive=70.4 props=2 read=0 rows=4914 gone=103 srp=1049
+18:15:08 [Long Island] ny/selden drive=72.0 props=1 read=1 rows=4914 gone=103 srp=1052
+18:15:13 [Long Island] ny/stony-brook drive=73.8 props=0 read=0 rows=4914 gone=103 srp=1054
+18:15:20 [Long Island] ny/yaphank drive=75.0 props=2 read=0 rows=4914 gone=103 srp=1057
+18:15:35 [Long Island] ny/coram drive=75.4 props=4 read=3 rows=4914 gone=103 srp=1060
+18:15:45 [Long Island] ny/rocky-point drive=83.4 props=3 read=1 rows=4914 gone=103 srp=1063
+18:15:53 [Long Island] ny/mastic-beach drive=84.5 props=1 read=0 rows=4914 gone=103 srp=1066
+18:16:03 [Long Island] ny/ridge drive=84.9 props=2 read=1 rows=4914 gone=103 srp=1069
+18:16:13 [Long Island] ny/middle-island drive=86.0 props=3 read=1 rows=4914 gone=103 srp=1072
+18:16:23 [Long Island] ny/east-moriches drive=87.8 props=2 read=0 rows=4914 gone=103 srp=1076
+18:16:28 [Long Island] ny/remsenburg-speonk drive=93.1 props=0 read=0 rows=4914 gone=103 srp=1078
+18:16:33 [Long Island] ny/west-hampton-dunes drive=93.1 props=0 read=0 rows=4914 gone=103 srp=1080
+18:16:40 [Long Island] ny/westhampton drive=94.2 props=1 read=0 rows=4914 gone=103 srp=1083
+18:16:45 [Long Island] ny/quiogue drive=98.0 props=0 read=0 rows=4914 gone=103 srp=1085
+18:16:53 [Long Island] ny/westhampton-beach drive=98.0 props=2 read=0 rows=4914 gone=103 srp=1088
+18:17:02 [Long Island] ny/riverhead drive=98.7 props=2 read=0 rows=4914 gone=103 srp=1092
+18:17:08 [Long Island] ny/quogue drive=100.8 props=0 read=0 rows=4914 gone=103 srp=1094
+18:17:13 [Long Island] ny/east-quogue drive=101.9 props=0 read=0 rows=4914 gone=103 srp=1096
+18:17:20 [Long Island] ny/hampton-bays drive=105.1 props=5 read=0 rows=4914 gone=103 srp=1099
+18:17:25 [Long Island] ny/jamesport drive=108.5 props=0 read=0 rows=4914 gone=103 srp=1101
+18:17:30 [Long Island] ny/north-sea drive=109.7 props=0 read=0 rows=4914 gone=103 srp=1103
+18:17:35 [Long Island] ny/shinnecock-hills drive=109.7 props=0 read=0 rows=4914 gone=103 srp=1105
+18:17:40 [Long Island] ny/southampton drive=109.7 props=0 read=0 rows=4914 gone=103 srp=1107
+18:17:45 [Long Island] ny/cutchogue drive=116.3 props=0 read=0 rows=4914 gone=103 srp=1109
+18:17:50 [Long Island] ny/mattituck drive=116.3 props=0 read=0 rows=4914 gone=103 srp=1111
+18:17:50 [Long Island] sweep of held properties not reached by search: 0
+18:17:50 [Long Island City] sweep of held properties not reached by search: 8
+18:20:54 [rest] ny/queens drive=4.5 props=148 read=53 rows=4914 gone=106 srp=1123
+18:25:19 [rest] ny/bronx drive=22.3 props=126 read=95 rows=4912 gone=109 srp=1134
+18:25:42 [rest] ny/mount-vernon drive=26.0 props=6 read=5 rows=4912 gone=109 srp=1138
+18:25:49 [rest] ny/pelham drive=26.0 props=1 read=0 rows=4912 gone=109 srp=1141
+18:26:12 [rest] ny/new-rochelle drive=28.1 props=18 read=4 rows=4912 gone=109 srp=1146
+18:26:27 [rest] ny/new-york drive=28.6 props=0 read=0 rows=4912 gone=109 srp=1146
+18:26:33 [rest] ny/eastchester drive=33.0 props=1 read=0 rows=4912 gone=109 srp=1149
+18:26:46 [rest] ny/mamaroneck drive=33.3 props=4 read=1 rows=4912 gone=109 srp=1153
+18:26:56 [rest] ny/tuckahoe drive=34.1 props=2 read=1 rows=4912 gone=109 srp=1156
+18:27:41 [rest] ny/yonkers drive=37.1 props=23 read=13 rows=4913 gone=109 srp=1161
+18:27:46 [rest] ny/rye drive=38.4 props=0 read=0 rows=4913 gone=109 srp=1163
+18:27:56 [rest] ny/harrison drive=42.9 props=6 read=0 rows=4913 gone=109 srp=1167
+18:28:03 [rest] ny/dobbs-ferry drive=43.1 props=1 read=0 rows=4913 gone=109 srp=1170
+18:28:13 [rest] ny/port-chester drive=44.1 props=2 read=0 rows=4913 gone=109 srp=1174
+18:28:39 [rest] ny/white-plains drive=44.5 props=22 read=5 rows=4913 gone=109 srp=1179
+18:29:51 [rest] ny/staten-island drive=47.8 props=37 read=24 rows=4913 gone=110 srp=1184
+18:29:58 [rest] ny/tarrytown drive=51.9 props=3 read=0 rows=4913 gone=110 srp=1187
+18:30:11 [rest] ny/nyack drive=54.1 props=7 read=2 rows=4913 gone=111 srp=1190
+18:30:16 [rest] ny/nanuet drive=55.6 props=0 read=0 rows=4913 gone=111 srp=1192
+18:30:28 [rest] ny/pearl-river drive=56.4 props=3 read=1 rows=4913 gone=111 srp=1196
+18:30:38 [rest] ny/ossining drive=57.5 props=3 read=1 rows=4913 gone=111 srp=1199
+18:30:51 [rest] ny/congers drive=59.9 props=3 read=2 rows=4913 gone=111 srp=1202
+18:31:01 [rest] ny/mount-kisco drive=60.9 props=2 read=1 rows=4913 gone=111 srp=1205
+18:31:08 [rest] ny/new-city drive=62.9 props=1 read=0 rows=4913 gone=111 srp=1208
+18:31:18 [rest] ny/sloatsburg drive=64.3 props=1 read=1 rows=4913 gone=111 srp=1211
+18:31:36 [rest] ny/suffern drive=65.4 props=7 read=4 rows=4913 gone=111 srp=1214
+18:31:53 [rest] ny/peekskill drive=75.8 props=3 read=3 rows=4913 gone=111 srp=1218
+18:31:58 [rest] ny/harriman drive=81.5 props=0 read=0 rows=4913 gone=111 srp=1220
+18:32:16 [rest] ny/highland-falls drive=86.5 props=3 read=3 rows=4914 gone=111 srp=1224
+18:32:26 [rest] ny/chester drive=89.9 props=1 read=1 rows=4914 gone=111 srp=1227
+18:32:36 [rest] ny/firthcliffe drive=94.1 props=1 read=1 rows=4914 gone=111 srp=1230
+18:32:53 [rest] ny/goshen drive=96.8 props=5 read=4 rows=4914 gone=111 srp=1233
+18:33:21 [rest] ny/newburgh drive=96.9 props=9 read=8 rows=4914 gone=111 srp=1236
+18:33:31 [rest] ny/orange-lake drive=96.9 props=1 read=1 rows=4914 gone=111 srp=1239
+18:33:41 [rest] ny/florida drive=97.0 props=2 read=1 rows=4914 gone=111 srp=1242
+18:33:51 [rest] ny/warwick drive=97.5 props=2 read=1 rows=4914 gone=111 srp=1245
+18:34:03 [rest] ny/pawling drive=98.4 props=3 read=2 rows=4914 gone=111 srp=1248
+18:34:08 [rest] ny/mechanicstown drive=104.9 props=0 read=0 rows=4914 gone=111 srp=1250
+18:34:16 [rest] ny/scotchtown drive=104.9 props=1 read=0 rows=4914 gone=111 srp=1253
+18:34:25 [rest] ny/walden drive=105.1 props=1 read=1 rows=4914 gone=111 srp=1256
+18:34:36 [rest] ny/mountain-lodge-park drive=105.5 props=2 read=1 rows=4914 gone=111 srp=1259
+18:34:54 [rest] ny/beacon drive=106.4 props=7 read=4 rows=4914 gone=111 srp=1262
+18:35:03 [rest] pa/morrisville drive=110.8 props=1 read=1 rows=4915 gone=111 srp=1265
+18:35:46 [rest] pa/easton drive=111.9 props=13 read=13 rows=4915 gone=111 srp=1269
+18:36:03 [rest] ny/middletown drive=112.3 props=5 read=3 rows=4915 gone=111 srp=1273
+18:36:48 [rest] ny/poughkeepsie drive=113.4 props=16 read=14 rows=4915 gone=111 srp=1277
+18:37:00 [rest] ny/port-jervis drive=113.6 props=2 read=2 rows=4915 gone=111 srp=1280
+18:37:06 [rest] pa/matamoras drive=113.6 props=0 read=0 rows=4915 gone=111 srp=1282
+18:37:11 [rest] pa/milford drive=115.4 props=0 read=0 rows=4915 gone=111 srp=1284
+18:37:16 [rest] pa/east-stroudsburg drive=116.0 props=0 read=0 rows=4915 gone=111 srp=1286
+18:37:33 [rest] pa/stroudsburg drive=116.0 props=4 read=4 rows=4915 gone=111 srp=1289
+18:37:38 [rest] pa/newtown-grant drive=117.9 props=0 read=0 rows=4915 gone=111 srp=1291
+18:37:46 [rest] pa/bristol drive=118.5 props=1 read=0 rows=4915 gone=111 srp=1294
+18:37:56 [rest] pa/newtown drive=118.9 props=2 read=1 rows=4915 gone=111 srp=1297

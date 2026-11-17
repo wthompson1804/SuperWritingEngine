@@ -343,12 +343,29 @@ def search(max_min: float, refresh: bool):
 
 
 # ---------------------------------------------------------------- second trawl (2026-11-17)
+NET_ERRORS = []          # network errors (cut-off transfers, timeouts) in trawl2: not refusals, never retried
+
+
+class NetError(Exception):
+    pass
+
+
 def _polite(path: str, refresh: bool = False):
-    """fetch() with 0.5-1.5 s of jitter on top of lib's 2.2 s spacing; cache hits are free."""
+    """fetch() with 0.5-1.5 s of jitter on top of lib's spacing (3 s in trawl2); cache hits are free. A network
+    error (not a refusal) is logged and raised as NetError; the URL is not retried, and three end the run."""
     import random
     if refresh or cache_lookup(path)[0] is None:
         time.sleep(random.uniform(0.5, 1.5))
-    return fetch(path, refresh)
+    try:
+        return fetch(path, refresh)
+    except RuntimeError as e:
+        NET_ERRORS.append((lib.now_iso(), path, str(e)[-200:]))
+        with open(RAWD / "trawl2_errors.jsonl", "a") as fh:
+            fh.write(json.dumps({"at": lib.now_iso(), "path": path, "err": str(e)[-300:]}) + "\n")
+        if len(NET_ERRORS) >= 3:
+            raise Blocked(f"three network errors in this run (not a refusal; safe to resume later): {NET_ERRORS}")
+        time.sleep(30)
+        raise NetError(str(e))
 
 
 def trawl2(max_min: float, max_req: int, phases=("priority", "rest"), do_search=True, do_details=True):
@@ -357,6 +374,7 @@ def trawl2(max_min: float, max_req: int, phases=("priority", "rest"), do_search=
     Long Island, LIC; NYC through new-york-ny), then the rest; then the detail page of every new card at or under
     $2,200 that no file holds as a detail row and no cache holds. Status per city: raw/zumper/trawl2_cities.json.
     Stops at the first refusal (fetch records it), at --max-req network requests or at --max-min minutes."""
+    lib.HOST_DELAY["www.zumper.com"] = 3.0
     grid = load_grid()
     gz = {z: dm for z, _, _, dm in grid}
     cities = json.loads(CITIES_F.read_text())
@@ -420,7 +438,7 @@ def trawl2(max_min: float, max_req: int, phases=("priority", "rest"), do_search=
                 print("budget reached during searches")
                 return False
             rec = t2["cities"].get(slug) or {}
-            if rec.get("status") in ("done", "skipped_no_inventory"):
+            if rec.get("status") in ("done", "skipped_no_inventory", "error"):
                 continue
             c = cities[slug]
             s_, o_, lc = t2["counts"].get(slug) or [c.get("studios"), c.get("onebeds"), c.get("listing_count")]
@@ -432,10 +450,13 @@ def trawl2(max_min: float, max_req: int, phases=("priority", "rest"), do_search=
             for bed in ("1-beds", "studios"):
                 if bed == "studios" and s_ == 0:
                     continue
-                st, n, why = run_search(slug, bed)
+                try:
+                    st, n, why = run_search(slug, bed)
+                except NetError:
+                    n, why = 0, "network_error"
                 rec["pages"][bed] = why
                 rec["cards"] += n
-            rec["status"] = "done"
+            rec["status"] = "error" if "network_error" in rec["pages"].values() else "done"
             rec["searched_at"] = lib.now_iso()
             t2["cities"][slug] = rec
             save()
@@ -476,7 +497,10 @@ def trawl2(max_min: float, max_req: int, phases=("priority", "rest"), do_search=
             if out_of_budget():
                 print("budget reached during details")
                 return False
-            _polite(u)
+            try:
+                _polite(u)
+            except NetError:
+                pass
             n += 1
             if n % 50 == 0:
                 print(f"{lib.now_iso()} trawl2 details {n}/{len(order)} requests {N_REQUESTS}", flush=True)

@@ -64,3 +64,7 @@ opened rows written: 1197 | summary: {'opened': 1252, 'gone': 114, 'not_requeste
 2026-11-17T18:00:48+00:00 requests this run 650, total 1551/1700
 2026-11-17T18:03:29+00:00 requests this run 675, total 1576/1700
 2026-11-17T18:06:05+00:00 requests this run 700, total 1601/1700
+2026-11-17T18:08:49+00:00 requests this run 725, total 1626/1700
+2026-11-17T18:11:29+00:00 requests this run 750, total 1651/1700
+fetch finished: requests this run 761, total 1662
+opened rows written: 1914 | summary: {'opened': 1933, 'gone': 210, 'not_requested': 250}

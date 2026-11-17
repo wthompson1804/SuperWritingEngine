@@ -1,0 +1,45 @@
+2026-11-17T18:14:48+00:00 trawl2 cities done 20 requests 29 last williston-park-ny
+2026-11-17T18:15:48+00:00 trawl2 cities done 40 requests 56 last jericho-ny
+2026-11-17T18:16:52+00:00 trawl2 cities done 60 requests 85 last teaneck-nj
+2026-11-17T18:17:55+00:00 trawl2 cities done 80 requests 113 last north-lindenhurst-ny
+2026-11-17T18:18:54+00:00 trawl2 cities done 100 requests 140 last melville-ny
+2026-11-17T18:20:01+00:00 trawl2 cities done 120 requests 170 last little-falls-nj
+2026-11-17T18:21:03+00:00 trawl2 cities done 140 requests 198 last franklin-lakes-nj
+2026-11-17T18:22:08+00:00 trawl2 cities done 160 requests 227 last mahwah-nj
+2026-11-17T18:23:06+00:00 trawl2 cities done 180 requests 253 last west-sayville-ny
+2026-11-17T18:23:53+00:00 trawl2 cities done 200 requests 274 last holbrook-ny
+2026-11-17T18:24:53+00:00 trawl2 cities done 220 requests 301 last north-plainfield-nj
+trawl2: network requests this run 324
+Traceback (most recent call last):
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_zumper.py", line 1536, in <module>
+    main()
+    ~~~~^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_zumper.py", line 1529, in main
+    trawl2(max_min, int(a[a.index("--max-req") + 1]) if "--max-req" in a else 0, ph,
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           do_search="--no-search" not in a, do_details="--no-details" not in a)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_zumper.py", line 487, in trawl2
+    if do_search and not searches(ph):
+                         ~~~~~~~~^^^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_zumper.py", line 435, in searches
+    st, n, why = run_search(slug, bed)
+                 ~~~~~~~~~~^^^^^^^^^^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_zumper.py", line 382, in run_search
+    st, meta, _ = _polite(path)
+                  ~~~~~~~^^^^^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_zumper.py", line 351, in _polite
+    return fetch(path, refresh)
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/h_zumper.py", line 151, in fetch
+    content, meta = lib.cached_get(url, SRC, ext="html", refresh=refresh, retries=1,
+                    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                   headers={"Accept": "text/html,application/xhtml+xml"})
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/SuperWritingEngine/house-hunt/scripts/lib.py", line 165, in cached_get
+    raise RuntimeError(f"fetch failed after {retries} tries: {redact(full_url)}: {last_err}")
+RuntimeError: fetch failed after 1 tries: https://www.zumper.com/apartments-for-rent/wilton-ct/1-beds/under-2200: ChunkedEncodingError(ProtocolError('Connection broken: IncompleteRead(4134 bytes read, 1726 more expected)', IncompleteRead(4134 bytes read, 1726 more expected)))
+2026-11-17T18:31:40+00:00 trawl2 cities done 240 requests 2 last south-river-nj
+2026-11-17T18:33:01+00:00 trawl2 cities done 260 requests 29 last hopatcong-nj
+2026-11-17T18:34:19+00:00 trawl2 cities done 280 requests 55 last east-windsor-nj
+2026-11-17T18:35:54+00:00 trawl2 cities done 300 requests 85 last west-haven-ct
+2026-11-17T18:37:23+00:00 trawl2 cities done 320 requests 109 last wall-township-nj

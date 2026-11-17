@@ -11,17 +11,19 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 911,
- "props_considered": 1729,
- "props_skipped_lowprice": 812,
- "props_read": 943,
+ "srp_pages": 1297,
+ "props_considered": 2371,
+ "props_skipped_lowprice": 1132,
+ "props_read": 1273,
  "reasons": {
-  "ok": 900,
-  "no_unit_le_3000": 20,
-  "outside_grid": 11,
-  "no_listing_object": 12
+  "ok": 1191,
+  "no_unit_le_3000": 27,
+  "outside_grid": 42,
+  "no_listing_object": 13
  },
- "transient": [],
+ "transient": [
+  "ny/new-york search: fetch failed after 1 tries: https://www.apartmentlist.com/ny/new-york/c/1-bedroom-apartments-for-rent: ChunkedEncodingEr"
+ ],
  "blocked": null,
  "unparsed_pages": [
   "/nj/guttenberg/6812-polk-street--1",
@@ -35,7 +37,8 @@
   "/ct/ansonia/central-street-associates-llc",
   "/ct/new-haven/98-howe-st",
   "/ct/west-haven/campbell-ave-apartments",
-  "/ct/west-haven/hilltop-terrace-apartments-1-and-2-bedrooms"
+  "/ct/west-haven/hilltop-terrace-apartments-1-and-2-bedrooms",
+  "/ny/queens/240-51st-ave--8"
  ],
  "cities_done": [
   {
@@ -1857,6 +1860,874 @@
    "drive_min": 28.3,
    "props": 4,
    "read": 0
+  },
+  {
+   "city": "ny/long-beach",
+   "group": "Long Island",
+   "drive_min": 28.7,
+   "props": 32,
+   "read": 7
+  },
+  {
+   "city": "ny/east-meadow",
+   "group": "Long Island",
+   "drive_min": 29.9,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/jericho",
+   "group": "Long Island",
+   "drive_min": 30.0,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/hicksville",
+   "group": "Long Island",
+   "drive_min": 31.7,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/manorhaven",
+   "group": "Long Island",
+   "drive_min": 32.2,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/port-washington",
+   "group": "Long Island",
+   "drive_min": 32.2,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/sea-cliff",
+   "group": "Long Island",
+   "drive_min": 32.5,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/levittown",
+   "group": "Long Island",
+   "drive_min": 33.3,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/lido-beach",
+   "group": "Long Island",
+   "drive_min": 33.6,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/point-lookout",
+   "group": "Long Island",
+   "drive_min": 33.6,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/syosset",
+   "group": "Long Island",
+   "drive_min": 35.2,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/amityville",
+   "group": "Long Island",
+   "drive_min": 35.3,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "ny/glen-cove",
+   "group": "Long Island",
+   "drive_min": 35.7,
+   "props": 6,
+   "read": 3
+  },
+  {
+   "city": "ny/plainview",
+   "group": "Long Island",
+   "drive_min": 36.2,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/copiague",
+   "group": "Long Island",
+   "drive_min": 38.0,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "ny/woodbury",
+   "group": "Long Island",
+   "drive_min": 38.3,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "ny/lindenhurst",
+   "group": "Long Island",
+   "drive_min": 38.6,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/east-farmingdale",
+   "group": "Long Island",
+   "drive_min": 39.3,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/farmingdale",
+   "group": "Long Island",
+   "drive_min": 39.3,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/west-babylon",
+   "group": "Long Island",
+   "drive_min": 42.2,
+   "props": 3,
+   "read": 2
+  },
+  {
+   "city": "ny/cold-spring-harbor",
+   "group": "Long Island",
+   "drive_min": 42.8,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/melville",
+   "group": "Long Island",
+   "drive_min": 42.9,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "ny/north-babylon",
+   "group": "Long Island",
+   "drive_min": 43.9,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/dix-hills",
+   "group": "Long Island",
+   "drive_min": 45.3,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/deer-park",
+   "group": "Long Island",
+   "drive_min": 46.6,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/babylon",
+   "group": "Long Island",
+   "drive_min": 47.2,
+   "props": 4,
+   "read": 4
+  },
+  {
+   "city": "ny/huntington",
+   "group": "Long Island",
+   "drive_min": 49.3,
+   "props": 6,
+   "read": 2
+  },
+  {
+   "city": "ny/bay-shore",
+   "group": "Long Island",
+   "drive_min": 49.7,
+   "props": 4,
+   "read": 1
+  },
+  {
+   "city": "ny/commack",
+   "group": "Long Island",
+   "drive_min": 51.8,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/islip",
+   "group": "Long Island",
+   "drive_min": 52.3,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "ny/huntington-station",
+   "group": "Long Island",
+   "drive_min": 52.6,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/north-bay-shore",
+   "group": "Long Island",
+   "drive_min": 52.6,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/hauppauge",
+   "group": "Long Island",
+   "drive_min": 54.0,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/east-northport",
+   "group": "Long Island",
+   "drive_min": 54.5,
+   "props": 3,
+   "read": 2
+  },
+  {
+   "city": "ny/central-islip",
+   "group": "Long Island",
+   "drive_min": 55.7,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/northport",
+   "group": "Long Island",
+   "drive_min": 61.1,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "ny/sayville",
+   "group": "Long Island",
+   "drive_min": 62.6,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/nesconset",
+   "group": "Long Island",
+   "drive_min": 63.3,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "ny/lake-ronkonkoma",
+   "group": "Long Island",
+   "drive_min": 64.6,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/ronkonkoma",
+   "group": "Long Island",
+   "drive_min": 64.6,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "ny/patchogue",
+   "group": "Long Island",
+   "drive_min": 66.1,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "ny/holbrook",
+   "group": "Long Island",
+   "drive_min": 66.7,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/fire-island",
+   "group": "Long Island",
+   "drive_min": 68.5,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/ocean-beach",
+   "group": "Long Island",
+   "drive_min": 68.5,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/farmingville",
+   "group": "Long Island",
+   "drive_min": 69.2,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "ny/centereach",
+   "group": "Long Island",
+   "drive_min": 70.4,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/selden",
+   "group": "Long Island",
+   "drive_min": 72.0,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/stony-brook",
+   "group": "Long Island",
+   "drive_min": 73.8,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/yaphank",
+   "group": "Long Island",
+   "drive_min": 75.0,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/coram",
+   "group": "Long Island",
+   "drive_min": 75.4,
+   "props": 4,
+   "read": 3
+  },
+  {
+   "city": "ny/rocky-point",
+   "group": "Long Island",
+   "drive_min": 83.4,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "ny/mastic-beach",
+   "group": "Long Island",
+   "drive_min": 84.5,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/ridge",
+   "group": "Long Island",
+   "drive_min": 84.9,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "ny/middle-island",
+   "group": "Long Island",
+   "drive_min": 86.0,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "ny/east-moriches",
+   "group": "Long Island",
+   "drive_min": 87.8,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/remsenburg-speonk",
+   "group": "Long Island",
+   "drive_min": 93.1,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/west-hampton-dunes",
+   "group": "Long Island",
+   "drive_min": 93.1,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/westhampton",
+   "group": "Long Island",
+   "drive_min": 94.2,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/quiogue",
+   "group": "Long Island",
+   "drive_min": 98.0,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/westhampton-beach",
+   "group": "Long Island",
+   "drive_min": 98.0,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/riverhead",
+   "group": "Long Island",
+   "drive_min": 98.7,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/quogue",
+   "group": "Long Island",
+   "drive_min": 100.8,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/east-quogue",
+   "group": "Long Island",
+   "drive_min": 101.9,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/hampton-bays",
+   "group": "Long Island",
+   "drive_min": 105.1,
+   "props": 5,
+   "read": 0
+  },
+  {
+   "city": "ny/jamesport",
+   "group": "Long Island",
+   "drive_min": 108.5,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/north-sea",
+   "group": "Long Island",
+   "drive_min": 109.7,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/shinnecock-hills",
+   "group": "Long Island",
+   "drive_min": 109.7,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/southampton",
+   "group": "Long Island",
+   "drive_min": 109.7,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/cutchogue",
+   "group": "Long Island",
+   "drive_min": 116.3,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/mattituck",
+   "group": "Long Island",
+   "drive_min": 116.3,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/queens",
+   "group": "rest",
+   "drive_min": 4.5,
+   "props": 148,
+   "read": 53
+  },
+  {
+   "city": "ny/bronx",
+   "group": "rest",
+   "drive_min": 22.3,
+   "props": 126,
+   "read": 95
+  },
+  {
+   "city": "ny/mount-vernon",
+   "group": "rest",
+   "drive_min": 26.0,
+   "props": 6,
+   "read": 5
+  },
+  {
+   "city": "ny/pelham",
+   "group": "rest",
+   "drive_min": 26.0,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/new-rochelle",
+   "group": "rest",
+   "drive_min": 28.1,
+   "props": 18,
+   "read": 4
+  },
+  {
+   "city": "ny/new-york",
+   "group": "rest",
+   "drive_min": 28.6,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/eastchester",
+   "group": "rest",
+   "drive_min": 33.0,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/mamaroneck",
+   "group": "rest",
+   "drive_min": 33.3,
+   "props": 4,
+   "read": 1
+  },
+  {
+   "city": "ny/tuckahoe",
+   "group": "rest",
+   "drive_min": 34.1,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "ny/yonkers",
+   "group": "rest",
+   "drive_min": 37.1,
+   "props": 23,
+   "read": 13
+  },
+  {
+   "city": "ny/rye",
+   "group": "rest",
+   "drive_min": 38.4,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/harrison",
+   "group": "rest",
+   "drive_min": 42.9,
+   "props": 6,
+   "read": 0
+  },
+  {
+   "city": "ny/dobbs-ferry",
+   "group": "rest",
+   "drive_min": 43.1,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/port-chester",
+   "group": "rest",
+   "drive_min": 44.1,
+   "props": 2,
+   "read": 0
+  },
+  {
+   "city": "ny/white-plains",
+   "group": "rest",
+   "drive_min": 44.5,
+   "props": 22,
+   "read": 5
+  },
+  {
+   "city": "ny/staten-island",
+   "group": "rest",
+   "drive_min": 47.8,
+   "props": 37,
+   "read": 24
+  },
+  {
+   "city": "ny/tarrytown",
+   "group": "rest",
+   "drive_min": 51.9,
+   "props": 3,
+   "read": 0
+  },
+  {
+   "city": "ny/nyack",
+   "group": "rest",
+   "drive_min": 54.1,
+   "props": 7,
+   "read": 2
+  },
+  {
+   "city": "ny/nanuet",
+   "group": "rest",
+   "drive_min": 55.6,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/pearl-river",
+   "group": "rest",
+   "drive_min": 56.4,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "ny/ossining",
+   "group": "rest",
+   "drive_min": 57.5,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "ny/congers",
+   "group": "rest",
+   "drive_min": 59.9,
+   "props": 3,
+   "read": 2
+  },
+  {
+   "city": "ny/mount-kisco",
+   "group": "rest",
+   "drive_min": 60.9,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "ny/new-city",
+   "group": "rest",
+   "drive_min": 62.9,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/sloatsburg",
+   "group": "rest",
+   "drive_min": 64.3,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/suffern",
+   "group": "rest",
+   "drive_min": 65.4,
+   "props": 7,
+   "read": 4
+  },
+  {
+   "city": "ny/peekskill",
+   "group": "rest",
+   "drive_min": 75.8,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "ny/harriman",
+   "group": "rest",
+   "drive_min": 81.5,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/highland-falls",
+   "group": "rest",
+   "drive_min": 86.5,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "ny/chester",
+   "group": "rest",
+   "drive_min": 89.9,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/firthcliffe",
+   "group": "rest",
+   "drive_min": 94.1,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/goshen",
+   "group": "rest",
+   "drive_min": 96.8,
+   "props": 5,
+   "read": 4
+  },
+  {
+   "city": "ny/newburgh",
+   "group": "rest",
+   "drive_min": 96.9,
+   "props": 9,
+   "read": 8
+  },
+  {
+   "city": "ny/orange-lake",
+   "group": "rest",
+   "drive_min": 96.9,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/florida",
+   "group": "rest",
+   "drive_min": 97.0,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "ny/warwick",
+   "group": "rest",
+   "drive_min": 97.5,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "ny/pawling",
+   "group": "rest",
+   "drive_min": 98.4,
+   "props": 3,
+   "read": 2
+  },
+  {
+   "city": "ny/mechanicstown",
+   "group": "rest",
+   "drive_min": 104.9,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "ny/scotchtown",
+   "group": "rest",
+   "drive_min": 104.9,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "ny/walden",
+   "group": "rest",
+   "drive_min": 105.1,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "ny/mountain-lodge-park",
+   "group": "rest",
+   "drive_min": 105.5,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "ny/beacon",
+   "group": "rest",
+   "drive_min": 106.4,
+   "props": 7,
+   "read": 4
+  },
+  {
+   "city": "pa/morrisville",
+   "group": "rest",
+   "drive_min": 110.8,
+   "props": 1,
+   "read": 1
+  },
+  {
+   "city": "pa/easton",
+   "group": "rest",
+   "drive_min": 111.9,
+   "props": 13,
+   "read": 13
+  },
+  {
+   "city": "ny/middletown",
+   "group": "rest",
+   "drive_min": 112.3,
+   "props": 5,
+   "read": 3
+  },
+  {
+   "city": "ny/poughkeepsie",
+   "group": "rest",
+   "drive_min": 113.4,
+   "props": 16,
+   "read": 14
+  },
+  {
+   "city": "ny/port-jervis",
+   "group": "rest",
+   "drive_min": 113.6,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "pa/matamoras",
+   "group": "rest",
+   "drive_min": 113.6,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "pa/milford",
+   "group": "rest",
+   "drive_min": 115.4,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "pa/east-stroudsburg",
+   "group": "rest",
+   "drive_min": 116.0,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "pa/stroudsburg",
+   "group": "rest",
+   "drive_min": 116.0,
+   "props": 4,
+   "read": 4
+  },
+  {
+   "city": "pa/newtown-grant",
+   "group": "rest",
+   "drive_min": 117.9,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "pa/bristol",
+   "group": "rest",
+   "drive_min": 118.5,
+   "props": 1,
+   "read": 0
+  },
+  {
+   "city": "pa/newtown",
+   "group": "rest",
+   "drive_min": 118.9,
+   "props": 2,
+   "read": 1
   }
  ],
  "cities_unmatched_far": [
@@ -1884,6 +2755,8 @@
  "sweeps": {
   "New Jersey": 16,
   "Brooklyn": 5,
-  "Connecticut": 5
+  "Connecticut": 5,
+  "Long Island": 0,
+  "Long Island City": 8
  }
 }
