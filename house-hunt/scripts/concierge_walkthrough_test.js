@@ -415,13 +415,13 @@ async function saveFromResults(page, n) {
     ok(await p.evaluate(() => localStorage.getItem("lamia-concierge-v4") === null), "the old key is removed");
     await playExample(p, EX[0], "after stale ", false);
     ok(errs.length === 0, "errors (stale): " + errs.join(" || ")); await ctx.close(); }
-  { /* the same task saved twice (and a different data version) */
+  { /* the same task saved three times, under this data's version */
     const t0 = EX[0].expected_tasks[0];
-    const dup = await open(browser, {}, ([t, a]) => { if (!sessionStorage.getItem("seeded")) { sessionStorage.setItem("seeded", "1");
-      localStorage.setItem("lamia-concierge", JSON.stringify({ v: 42, data_version: "__fill__", step: "choose", cj: [{ task_index: t, choice: a }, { task_index: t, choice: a }, { task_index: t, choice: a }], moves: [], saved: [], ticked: [], tour: [] })); } }, [t0, EX[0].answers[0].choice]);
-    const dv = await dup.page.evaluate(() => window.__conciergeDataVersion);
-    await dup.page.evaluate(([dv, t, a]) => { localStorage.setItem("lamia-concierge", JSON.stringify({ v: 42, data_version: dv, step: "choose", cj: [{ task_index: t, choice: a }, { task_index: t, choice: a }, { task_index: t, choice: a }], moves: [], saved: [], ticked: [], tour: [] })); }, [dv, t0, EX[0].answers[0].choice]);
-    await dup.page.reload(); await dup.page.waitForSelector("#app [data-cand]");
+    const probe = await open(browser);
+    const dv = await probe.page.evaluate(() => window.__conciergeDataVersion); await probe.ctx.close();
+    const dup = await open(browser, {}, ([dv, t, a]) => { if (!sessionStorage.getItem("seeded")) { sessionStorage.setItem("seeded", "1");
+      localStorage.setItem("lamia-concierge", JSON.stringify({ v: 42, data_version: dv, step: "choose", cj: [{ task_index: t, choice: a }, { task_index: t, choice: a }, { task_index: t, choice: a }], moves: [], saved: [], ticked: [], tour: [] })); } }, [dv, t0, EX[0].answers[0].choice]);
+    await dup.page.waitForSelector("#app [data-cand]");
     ok(((await state(dup.page)).cj || []).length === 1, "a task saved three times counts once");
     ok((await taskOnScreen(dup.page)) === EX[0].expected_tasks[1], "and the next task is the example's second, not a repeat");
     ok(dup.errs.length === 0, "errors (duplicates): " + dup.errs.join(" || ")); await dup.ctx.close(); }
