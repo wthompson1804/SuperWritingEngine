@@ -1,11 +1,12 @@
-/* Tests for the recommender of the short page (version 3). Plain Node, no packages:  node scripts/test_concierge_pick.js
+/* Tests for the recommender of the short page (version 4: choices between made-up apartments, then the version 3
+   recommendation from her weights). Plain Node, no packages:  node scripts/test_concierge_pick.js
    The file keeps its version 1 name so scripts/verify_concierge.py runs it unchanged; it now tests ConciergeRec.
    The logic is read straight out of site/concierge.html (the <script id="recommender-logic"> block), so the page and
-   the test cannot drift apart. It runs on the page's data (site/concierge_data.json when it carries the version 3
+   the test cannot drift apart. It runs on the page's data (site/concierge_data.json when it carries the recommender
    fields, else site/_concierge_fixture.json; CONCIERGE_DATA=<file> picks one):
-     1. every meta.recommender_examples entry, replayed answer by answer, must ask exactly expected_pairs and end with
-        exactly expected_top, expected_mean_weights, expected_stop_probability, expected_more_like_this,
-        expected_why, expected_gives_up and expected_what_would_change (each where the example has it);
+     1. every meta.recommender_examples entry, replayed answer by answer, must ask exactly expected_tasks and end with
+        exactly expected_mean_weights, expected_priorities, expected_priorities_sentence, expected_top,
+        expected_more_like_this, expected_why and expected_gives_up; and its nudge_example, where it has one;
      2. property tests: deterministic; never a set-aside building anywhere; three different neighborhoods; more like
         this never repeats a building on screen; pairs never repeat; 3 to 6 pairs; "either" favours samples where the
         two are close; the nudge brings the promised neighborhood to the top.
@@ -54,142 +55,123 @@ test("no data, no model", () => {
 });
 
 /* ---- 1. the examples ---- */
+const C = R.cj(M);
+assert(C, "the data has no meta.recommender.conjoint");
+const round6 = (w) => w.map((x) => Number(x.toFixed(6)));
+function replay(ex) {
+  const A = [], tasks = [];
+  for (let i = 0; i < 30; i++) {
+    const t = R.cjNext(M, A); if (t === null) break;
+    tasks.push(t); A.push({ task_index: t, choice: ex.answers[i] ? ex.answers[i].choice : "either" });
+  }
+  const w = R.cjWeights(M, A);
+  return { A, tasks, w, rec: R.recommend(M, [], { w }) };
+}
 test("the data has examples", () => assert(EX.length >= 3, "meta.recommender_examples has " + EX.length));
 EX.forEach((ex) => {
-  const name = ex.persona || ex.name || "example";
-  test("example '" + name + "': the pairs asked, in order (" + ex.expected_pairs.length + ")", () => {
-    const p = R.play(M, ex);
-    assert.deepStrictEqual(p.pairs, ex.expected_pairs);
-    ex.answers.forEach((a, i) => assert(eq([a.a, a.b], ex.expected_pairs[i]), "answer " + i + " is not about the pair asked"));
+  const name = ex.persona || "example";
+  test("example '" + name + "': the tasks asked, in order (" + ex.expected_tasks.length + ")", () => {
+    const p = replay(ex);
+    assert.deepStrictEqual(p.tasks, ex.expected_tasks);
+    ex.answers.forEach((a, i) => assert.strictEqual(a.task_index, ex.expected_tasks[i]));
+    if (ex.expected_tasks_shown) ex.expected_tasks_shown.forEach((rows, i) => assert.deepStrictEqual(C.pool[ex.expected_tasks[i]].map((x) => ({ attribute: C.attr[x[0]].label, a: C.attr[x[0]].levels[x[1]].text, b: C.attr[x[0]].levels[x[2]].text })), rows));
   });
-  test("example '" + name + "': the top three and their buildings", () => {
-    const r = R.play(M, ex).rec;
+  test("example '" + name + "': weights, priorities and the sentence", () => {
+    const p = replay(ex), w6 = round6(p.w);
+    assert.deepStrictEqual(Object.fromEntries(M.feats.map((k, i) => [k, w6[i]])), ex.expected_mean_weights);
+    const pr = R.priorities(M, w6);
+    assert.deepStrictEqual(pr.order, ex.expected_priorities);
+    if (ex.expected_priorities_sentence) assert.strictEqual(pr.sentence, ex.expected_priorities_sentence);
+  });
+  test("example '" + name + "': the three places, more like this, why, gives up", () => {
+    const r = replay(ex).rec, by = (f) => Object.fromEntries(r.neighborhoods.map((x) => [x.neighborhood_id, f(x)]));
     assert.deepStrictEqual(r.top, ex.expected_top);
-  });
-  test("example '" + name + "': weights, probability, more like this, why, gives up, what would change", () => {
-    const p = R.play(M, ex), r = p.rec;
-    if (ex.expected_mean_weights) assert.deepStrictEqual(Object.fromEntries(M.feats.map((k, i) => [k, r.weights[i]])), ex.expected_mean_weights);
-    if (ex.expected_stop_probability != null) assert.strictEqual(Number(R.holds(M, p.asked).p.toFixed(6)), ex.expected_stop_probability);
-    const by = (f) => Object.fromEntries(r.neighborhoods.map((x) => [x.neighborhood_id, f(x)]));
     if (ex.expected_more_like_this) assert.deepStrictEqual(Object.fromEntries(r.neighborhoods.flatMap((x) => x.buildings.map((b) => [b.id, b.more_like_this]))), ex.expected_more_like_this);
     if (ex.expected_why) assert.deepStrictEqual(by((x) => x.why), ex.expected_why);
     if (ex.expected_gives_up) assert.deepStrictEqual(by((x) => x.gives_up), ex.expected_gives_up);
-    if (ex.expected_what_would_change) assert.deepStrictEqual(by((x) => x.what_would_change ? x.what_would_change.text : null), ex.expected_what_would_change);
+  });
+  if (ex.nudge_example) test("example '" + name + "': moving one priority " + ex.nudge_example.direction, () => {
+    const n = ex.nudge_example, w6 = M.feats.map((k) => ex.expected_mean_weights[k]), w2 = R.nudge(M, w6, n.feature, n.direction);
+    assert.deepStrictEqual(Object.fromEntries(M.feats.map((k, i) => [k, Number(w2[i].toFixed(6))])), n.weights_after);
+    assert.strictEqual(R.priorities(M, w2).sentence, n.priorities_sentence_after);
+    assert.deepStrictEqual(R.recommend(M, [], { w: w2 }).top, n.expected_top_after);
   });
 });
 
 /* ---- 2. properties ---- */
-const ids = M.ids, BY = Object.fromEntries(D.buildings.map((b) => [b.id, b]));
-function walk(rule, opts) {   /* answer pairs until the model stops, by a rule (a, b, i) -> choice */
-  const answers = [];
-  for (let i = 0; i < 12; i++) {
-    const p = R.nextPair(M, answers, opts); if (!p) break;
-    answers.push({ a: p[0], b: p[1], choice: rule(p[0], p[1], i) });
-  }
-  return answers;
+const BY = Object.fromEntries(D.buildings.map((b) => [b.id, b]));
+function walk(rule) {
+  const A = [];
+  for (let i = 0; i < 30; i++) { const t = R.cjNext(M, A); if (t === null) break; A.push({ task_index: t, choice: rule(C.pool[t], i) }); }
+  return A;
 }
+const gapUnder = (wObj) => (task) => R.taskGap(M, M.feats.map((k) => wObj[k] || 0), task);
 const RULES = {
-  a: () => "a", b: () => "b", either: () => "either", mixed: (a, b, i) => ["a", "b", "either"][i % 3],
-  near: (a, b) => (BY[a].features.family >= BY[b].features.family ? "a" : "b"),
-  room: (a, b) => (BY[a].features.room >= BY[b].features.room ? "a" : "b"),
+  a: () => "a", b: () => "b", either: () => "either", mixed: (t, i) => ["a", "b", "either"][i % 3],
+  near: (t) => { const g = gapUnder({ family: 1 })(t); return g > 0 ? "a" : g < 0 ? "b" : "either"; },
+  space: (t) => { const g = gapUnder({ room: 1 })(t); return g > 0 ? "a" : g < 0 ? "b" : "either"; },
 };
-test("deterministic: the same answers give the same pairs and the same places", () => {
+test("the pool: two or three attributes differ, never one apartment better on all of them", () => {
+  C.pool.forEach((t, i) => {
+    assert(t.length >= 2 && t.length <= 3, "task " + i);
+    assert.strictEqual(new Set(t.map((x) => x[0])).size, t.length, "task " + i + " repeats an attribute");
+    const better = t.map((x) => Math.sign(C.lv[x[0]][x[1]] - C.lv[x[0]][x[2]]));
+    assert(better.includes(1) && better.includes(-1), "task " + i + " is dominated");
+  });
+});
+test("exactly n_tasks choices, never the same task twice, never the same attributes twice in a row", () => {
+  for (const k in RULES) {
+    const A = walk(RULES[k]);
+    assert.strictEqual(A.length, C.n, k);
+    assert.strictEqual(new Set(A.map((x) => x.task_index)).size, A.length, k);
+    for (let i = 1; i < A.length; i++) {
+      const s = (j) => C.pool[A[j].task_index].map((x) => x[0]).sort().join("|");
+      assert.notStrictEqual(s(i), s(i - 1), k + ": same attributes twice in a row");
+    }
+  }
+});
+test("deterministic: the same answers give the same tasks, weights and places", () => {
   for (const k in RULES) {
     const x = walk(RULES[k]), y = walk(RULES[k]);
     assert(eq(x, y), k);
-    assert(eq(R.recommend(M, x), R.recommend(M, y)), k);
+    assert(eq(R.recommend(M, [], { w: R.cjWeights(M, x) }), R.recommend(M, [], { w: R.cjWeights(M, y) })), k);
   }
 });
-test("between 3 and 6 pairs, never the same pair twice, a < b by id", () => {
-  for (const k in RULES) {
-    const A = walk(RULES[k]);
-    assert(A.length >= M.cfg.min_pairs && A.length <= M.cfg.max_pairs, k + ": " + A.length + " pairs");
-    const keys = A.map((x) => [x.a, x.b].sort().join("|"));
-    assert.strictEqual(new Set(keys).size, keys.length, k + ": a pair repeated");
-    A.forEach((x) => assert(x.a < x.b && x.a !== x.b, k + ": pair order"));
+test("the weights learn: someone who always picks the shorter drive gets Mom and Dad first; space likewise", () => {
+  assert.strictEqual(R.priorities(M, R.cjWeights(M, walk(RULES.near))).order[0], "family");
+  assert.strictEqual(R.priorities(M, R.cjWeights(M, walk(RULES.space))).order[0], "room");
+});
+test("weights stay a distribution", () => {
+  for (const k in RULES) { const w = R.cjWeights(M, walk(RULES[k])); assert(Math.abs(R.nsum(w) - 1) < 1e-9 && w.every((x) => x >= 0), k); }
+});
+test("a move swaps one priority with its neighbour, and only that", () => {
+  const w = R.cjWeights(M, walk(RULES.mixed)), o = R.priorities(M, w).order;
+  for (let i = 0; i < o.length; i++) {
+    const up = R.priorities(M, R.nudge(M, w, o[i], "up")).order, down = R.priorities(M, R.nudge(M, w, o[i], "down")).order;
+    const want = (j) => { const x = o.slice(); if (j < 0 || j >= x.length) return x; [x[i], x[j]] = [x[j], x[i]]; return x; };
+    assert.deepStrictEqual(up, want(i - 1), "up " + o[i]); assert.deepStrictEqual(down, want(i + 1), "down " + o[i]);
   }
+  assert.deepStrictEqual(R.cjWeights(M, walk(RULES.mixed), [[o[1], "up"]]), R.nudge(M, w, o[1], "up"));
 });
 test("three different neighborhoods, each with one to three of its own buildings, best first", () => {
   for (const k in RULES) {
-    const r = R.recommend(M, walk(RULES[k]));
+    const r = R.recommend(M, [], { w: R.cjWeights(M, walk(RULES[k])) });
     assert.strictEqual(r.top.length, Math.min(3, M.groups.length), k);
-    assert.strictEqual(new Set(r.top.map((t) => t[0])).size, r.top.length, k + ": a neighborhood twice");
+    assert.strictEqual(new Set(r.top.map((t) => t[0])).size, r.top.length, k);
     r.top.forEach((t) => {
       const g = M.groups.find((x) => x.id === t[0]);
-      assert(t[1].length >= 1 && t[1].length <= 3 && t[1].every((id) => g.building_ids.includes(id)), k + ": buildings of " + t[0]);
-      const s = t[1].map((id) => r.scores[id]); for (let i = 1; i < s.length; i++) assert(s[i - 1] >= s[i] - 1e-9, k + ": order in " + t[0]);
+      assert(t[1].length >= 1 && t[1].length <= 3 && t[1].every((id) => g.building_ids.includes(id)), k + ": " + t[0]);
+      const s = t[1].map((id) => r.scores[id]); for (let i = 1; i < s.length; i++) assert(s[i - 1] >= s[i] - 1e-9, k);
     });
   }
 });
-test("more like this: at most three, never a building on screen, never one given twice", () => {
-  for (const k in RULES) {
-    const r = R.recommend(M, walk(RULES[k])), on = new Set(r.top.flatMap((t) => t[1])), seen = new Set();
-    r.neighborhoods.forEach((nb) => nb.buildings.forEach((b) => {
-      assert(b.more_like_this.length <= 3, k);
-      b.more_like_this.forEach((x) => { assert(!on.has(x), k + ": " + x + " is on screen"); assert(!seen.has(x), k + ": " + x + " twice"); assert(x !== b.id); seen.add(x); });
-    }));
-  }
+test("more like this on a place: three others, never itself", () => {
+  const w = R.cjWeights(M, walk(RULES.mixed));
+  M.ids.slice(0, 20).forEach((id) => { const m = R.similarTo(M, id, w, 3); assert(m.length === Math.min(3, M.ids.length - 1) && !m.includes(id) && m.every((x) => BY[x]), id); });
 });
-test("a building set aside is never asked, shown, or offered as more like this", () => {
-  const first = R.recommend(M, walk(RULES.near));
-  const out = [first.top[0][1][0], first.top[1][1][0], ids[0]];
-  for (const k in RULES) {
-    const A = walk(RULES[k], { removed: out });
-    A.forEach((x) => assert(!out.includes(x.a) && !out.includes(x.b), k + ": a set-aside building was asked"));
-    const r = R.recommend(M, A, { removed: out });
-    r.neighborhoods.forEach((nb) => nb.buildings.forEach((b) => { assert(!out.includes(b.id), k + ": shown"); b.more_like_this.forEach((x) => assert(!out.includes(x), k + ": offered")); }));
-    assert(!Object.keys(r.scores).some((id) => out.includes(id)), k + ": scored");
-  }
-  /* a whole neighborhood set aside drops out */
-  const g = first.top[0][0], all = M.groups.find((x) => x.id === g).building_ids;
-  const r2 = R.recommend(M, [], { removed: all });
-  assert(!r2.top.some((t) => t[0] === g), "an emptied neighborhood is still recommended");
-  assert.strictEqual(R.recommend(M, [], { removed: ids }).top.length, 0, "with everything set aside, nothing is recommended");
-});
-test("with nothing set aside, the removed option changes nothing", () => {
-  const A = walk(RULES.mixed);
-  assert(eq(R.recommend(M, A, { removed: [] }), R.recommend(M, A)));
-  assert(eq(R.nextPair(M, A.slice(0, 2), { removed: [] }), R.nextPair(M, A.slice(0, 2))));
-});
-test("'either' favours samples where the two places are close; a pick favours the one picked", () => {
-  const p = R.nextPair(M, []);
-  const gap = (c, signed) => { const pi = R.posterior(M, [{ a: p[0], b: p[1], choice: c }]); let s = 0; pi.forEach((x, i) => { const g = M.U[p[0]][i] - M.U[p[1]][i]; s += x * (signed ? g : Math.abs(g)); }); return s; };
-  assert(gap("either") < gap("a") && gap("either") < gap("b"), "mean |gap| " + gap("either") + " " + gap("a") + " " + gap("b"));
-  assert(gap("a", true) > 0 && gap("b", true) < 0, "signed gap");
-});
-test("a choice can be given as the building id", () => {
-  const p = R.nextPair(M, []);
-  assert(eq(R.recommend(M, [{ a: p[0], b: p[1], choice: p[1] }]), R.recommend(M, [{ a: p[0], b: p[1], choice: "b" }])));
-});
-test("more choices: up to extra_pairs after she asks, past the stop rule", () => {
-  const A = walk(RULES.near), more = [];
-  for (let i = 0; i < 6; i++) { const p = R.nextPair(M, A.concat(more), { extraFrom: A.length }); if (!p) break; more.push({ a: p[0], b: p[1], choice: "a" }); }
-  assert.strictEqual(more.length, M.cfg.extra_pairs || 3);
-  assert.strictEqual(R.nextPair(M, A), null, "the stop rule still holds without the request");
-});
-test("the nudge brings the promised neighborhood to the top", () => {
-  for (const k in RULES) {
-    const A = walk(RULES[k]), r = R.recommend(M, A), w = r.neighborhoods[0].what_would_change;
-    if (!w) continue;
-    const r2 = R.recommend(M, A, { nudge: { feature: w.feature, direction: w.direction, factor: w.factor } });
-    assert.strictEqual(r2.top[0][0], w.neighborhood_id, k + ": " + w.text);
-    assert(/^If .+ mattered (more|less), .+ would come first\.$/.test(w.text), k);
-  }
-});
-test("the stop rule: each sample's best neighborhood is among the three with probability >= stop_prob, or max_pairs were asked; never before min_pairs", () => {
-  for (const k in RULES) {
-    const A = walk(RULES[k]), h = R.holds(M, A);
-    assert(h.stop && (A.length >= M.cfg.max_pairs || Number(h.p.toFixed(9)) >= M.cfg.stop_prob), k);
-    for (let i = 0; i < A.length; i++) {   /* it did not stop earlier: before min_pairs, or below stop_prob */
-      const hi = R.holds(M, A.slice(0, i));
-      assert(!hi.stop && (i < M.cfg.min_pairs || Number(hi.p.toFixed(9)) < M.cfg.stop_prob), k + ": should have stopped after " + i);
-    }
-    assert(h.p >= 0 && h.p <= 1 + 1e-12, k + ": a probability");
-  }
-});
-test("every building the model scores is a building in the data, and every group has a name", () => {
+test("every building in exactly one group, every group named", () => {
   M.groups.forEach((g) => { assert(g.name, g.id); g.building_ids.forEach((id) => assert(BY[id], id)); });
-  assert.strictEqual(new Set(M.groups.flatMap((g) => g.building_ids)).size, ids.length, "every building in exactly one group");
+  assert.strictEqual(new Set(M.groups.flatMap((g) => g.building_ids)).size, M.ids.length);
 });
 
 console.log(n + " tests passed");

@@ -999,8 +999,8 @@ def recommender_reference_reproduces_its_examples():
                 assert all(R.clear_margin(n["gives_up_feature"], figs[n["neighborhood_id"]], figs[o]) for o in figs if o != n["neighborhood_id"]), n["gives_up"]
             elif n["gives_up"]:
                 assert "(" not in n["gives_up"] and "ask on the tour" in n["gives_up"] or "yet" in n["gives_up"], n["gives_up"]
-        pr = R.priorities(rec["weights"])
-        assert pr["sentence"] == e["expected_priorities_sentence"] and pr["order"] == e["expected_priorities"]
+        pr = R.priorities(rec["weights"], RP["conjoint"]["flat_below"])
+        assert pr["sentence"] == e["expected_priorities_sentence"] and pr["order"] == e["expected_priorities"] and pr["flat"] == e["expected_flat"]
     pi0 = R.posterior(RS, [], BLDS, RP)
     assert all(abs(p - 1 / 400) < 1e-12 for p in pi0)
 
@@ -1123,6 +1123,14 @@ def recommender_conjoint_design():
         better_a = [lv[k][a] > lv[k][b] for k, a, b in t]
         assert any(better_a) and not all(better_a) and all(lv[k][a] != lv[k][b] for k, a, b in t), t   # never dominated
     # priorities and the nudge
+    fb = RP["conjoint"]["flat_below"]
+    assert fb == R.flat_threshold(RS) and 0 < fb < 0.3
+    flat = R.priorities([0.17, 0.16, 0.17, 0.16, 0.17, 0.17], fb)
+    assert flat["flat"] and flat["sentence"] == "Nothing stood out strongly; you seem fairly open on all of these."
+    lean = R.priorities([0.2, 0.16, 0.16, 0.16, 0.16, 0.16], fb)
+    assert lean["flat"] and lean["sentence"].endswith("if anything being near Mom and Dad a little more.")
+    ex = {e["persona"]: e for e in REX}
+    assert ex["either to everything"]["expected_flat"] and not any(e["expected_flat"] for e in REX if e["hidden_weights"])
     w = [0.1, 0.3, 0.25, 0.15, 0.15, 0.05]
     pr = R.priorities(w)
     assert pr["order"] == ["money", "room", "going_out", "green", "family", "parking"]   # ties in FEATURES order

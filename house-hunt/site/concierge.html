@@ -888,7 +888,7 @@ var CJ = CAN ? R.cj(MODEL) : null;
     var raw = window.localStorage.getItem(KEY); if (!raw) return;
     var o = JSON.parse(raw); if (!o || typeof o !== "object") return;
     if (typeof o.step === "string") S.step = o.step;
-    if (Array.isArray(o.cj) && CJ) S.cj = o.cj.filter(function (x) { return x && CJ.map[x.pair] && /^(a|b|either)$/.test(x.choice); }).slice(0, CJ.n);
+    if (Array.isArray(o.cj) && CJ) S.cj = o.cj.filter(function (x) { return x && isNum(x.task_index) && CJ.pool[x.task_index] && /^(a|b|either)$/.test(x.choice); }).slice(0, CJ.n);
     if (Array.isArray(o.moves) && MODEL) S.moves = o.moves.filter(function (m) { return Array.isArray(m) && MODEL.feats.indexOf(m[0]) >= 0 && (m[1] === "up" || m[1] === "down"); }).slice(0, 20);
     ["saved", "ticked", "tour"].forEach(function (k) { if (Array.isArray(o[k])) S[k] = o[k].filter(function (id, i, a) { return BY[id] && a.indexOf(id) === i; }); });
   } catch (e) { /* storage is a convenience; the page works without it */ }
@@ -920,17 +920,14 @@ function cacheKey() { return JSON.stringify([S.cj, S.moves]); }
 function rec() {
   var k = cacheKey(); if (CACHE.k === k) return CACHE.v;
   var w = R.cjWeights(MODEL, S.cj, S.moves), r = R.recommend(MODEL, [], { w: w });
-  CACHE = { k: k, v: { r: r, w: w, order: R.priorities(MODEL, w), next: null, nextDone: false } };
+  var pr = R.priorities(MODEL, w);
+  CACHE = { k: k, v: { r: r, w: w, order: pr.order, sentence: pr.sentence, next: null, nextDone: false } };
   return CACHE.v;
 }
 function nextNow() { var c = rec(); if (!c.nextDone) { c.next = R.cjNext(MODEL, S.cj); c.nextDone = true; } return c.next; }
 function areaRankOf(id) { var b = BY[id]; if (!b || !CAN || S.cj.length < CJ.n) return null; var top = rec().r.top; for (var i = 0; i < top.length; i++) if (top[i][0] === b.area_id) return i + 1; return null; }
 /* her priorities in plain words */
-var PLAIN = { family: "being near " + ANCHOR, money: "a lower monthly total", room: "space at home", going_out: "going out nearby", green: "a park for the dog", parking: "parking" };
-function plain(k) { var L = CJ && CJ.c.labels; return (L && L[k]) || PLAIN[k] || k; }
-function caresSentence(order) {
-  return cap(plain(order[0])) + " matters most to you, then " + plain(order[1]) + ". " + cap(plain(order[order.length - 1])) + " matters least.";
-}
+function plain(k) { return (CJ && CJ.words && CJ.words[k]) || k; }
 
 /* ---------- the facts, in plain words ---------- */
 function raw(b) {
@@ -1027,21 +1024,22 @@ function welcome() {
 }
 
 /* ---------- this or that, between made-up apartments ---------- */
-function aptCard(cand, side) {
-  var rows = CJ.c.attributes.filter(function (a) { return cand.diff[a.id]; }).map(function (a) {
-    var lv = a.levels[cand.diff[a.id][side === "a" ? 0 : 1]];
+function aptCard(task, side) {
+  var rows = task.map(function (x) {
+    var a = CJ.attr[x[0]], lv = a.levels[side === "a" ? x[1] : x[2]];
     return '<span class="ap-row" data-attr="' + esc(a.id) + '"><span class="ap-l">' + esc(a.label) + '</span><b>' + esc(lv.text) + '</b></span>';
   }).join("");
   return '<button type="button" class="apt" data-act="cj" data-v="' + side + '"><span class="ap-h"><span>Apartment ' + side.toUpperCase() + '</span><span class="ap-go" aria-hidden="true">This one</span></span>' + rows + '</button>';
 }
 function chooseScreen() {
-  var id = nextNow(); if (!id) { S.step = "confirm"; return confirmScreen(); }
-  var cand = CJ.map[id], n = S.cj.length, same = CJ.c.attributes.filter(function (a) { return !cand.diff[a.id]; }).map(function (a) { return a.label.toLowerCase(); });
+  var id = nextNow(); if (id === null) { S.step = "confirm"; return confirmScreen(); }
+  var task = CJ.pool[id], n = S.cj.length, inTask = task.map(function (x) { return x[0]; });
+  var same = CJ.c.attributes.filter(function (a) { return inTask.indexOf(a.id) < 0; }).map(function (a) { return a.label.toLowerCase(); });
   return top() +
     '<div class="qhead"><p class="qtop"><span id="cj-step">' + (n + 1) + ' of ' + CJ.n + '</span><span class="muted">Tap the one you would rather live in</span></p>' +
     '<div class="prog" role="progressbar" aria-label="Choices" aria-valuemin="0" aria-valuemax="' + CJ.n + '" aria-valuenow="' + n + '"><i style="width:' + Math.round((n + 1) / CJ.n * 100) + '%"></i></div></div>' +
     '<section class="stack enter" style="gap:10px" data-cand="' + esc(id) + '"><h1 class="h-pick" tabindex="-1" id="q-h">Which would you rather have?</h1>' +
-    '<div class="duel">' + aptCard(cand, "a") + '<p class="or" aria-hidden="true">or</p>' + aptCard(cand, "b") + '</div>' +
+    '<div class="duel">' + aptCard(task, "a") + '<p class="or" aria-hidden="true">or</p>' + aptCard(task, "b") + '</div>' +
     (same.length ? '<p class="same">Same for both: ' + esc(same.join(", ")) + '.</p>' : '') +
     '<button type="button" class="btn" data-act="cj" data-v="either">No real difference to me</button>' +
     '<div class="qnav"><button type="button" class="quiet" data-act="undo"><span aria-hidden="true">&#8249;</span> Back</button></div></section>';
@@ -1051,7 +1049,7 @@ function chooseScreen() {
 function confirmScreen() {
   var c = rec(), order = c.order, fixing = !!VIEW.fixing;
   return top() +
-    '<section class="stack" style="gap:12px"><p class="kicker">Here&#39;s what you told me</p><h1 class="h-say" tabindex="-1" id="cf-h">' + esc(caresSentence(order)) + '</h1>' +
+    '<section class="stack" style="gap:12px"><p class="kicker">Here&#39;s what you told me</p><h1 class="h-say" tabindex="-1" id="cf-h">' + esc(c.sentence) + '</h1>' +
     '<ol class="prio' + (fixing ? ' fixing' : '') + '" id="prio">' + order.map(function (k, i) {
       return '<li data-feature="' + esc(k) + '"><span class="pn" aria-hidden="true">' + (i + 1) + '</span><span class="pt">' + esc(cap(plain(k))) + '</span>' +
         (fixing ? '<span class="pm"><button type="button" class="mv" data-act="move" data-id="' + esc(k) + '" data-v="up" aria-label="Move ' + esc(plain(k)) + ' up"' + (i === 0 ? ' disabled' : '') + '>&#8593;</button>' +
@@ -1077,7 +1075,7 @@ function placeRow(id, order) {
 function results() {
   var c = rec(), r = c.r, order = c.order;
   if (VIEW.areaOpen === undefined) VIEW.areaOpen = { 0: true };
-  var html = top() + '<section class="stack" style="gap:6px"><p class="kicker">Your three places to look</p><h1 class="h-say" tabindex="-1">' + esc(caresSentence(order)) + '</h1>' +
+  var html = top() + '<section class="stack" style="gap:6px"><p class="kicker">Your three places to look</p><h1 class="h-say" tabindex="-1" id="res-h">' + esc(c.sentence) + '</h1>' +
     '<p class="small">Start with number 1. Tap a place to see it.</p></section><ol class="hlist">';
   r.neighborhoods.forEach(function (nb, i) {
     var A = nb.neighborhood_id, open = !!VIEW.areaOpen[i], ids = nb.buildings.map(function (x) { return x.id; });
@@ -1472,7 +1470,7 @@ function toast(msg) {
 
 /* ---------- actions ---------- */
 /* after an answer or an undo: the next pair, or her three places when the model is sure */
-function afterChoice() { CACHE = {}; VIEW.fixing = false; S.step = nextNow() ? "choose" : "confirm"; render(); }
+function afterChoice() { CACHE = {}; VIEW.fixing = false; S.step = nextNow() !== null ? "choose" : "confirm"; render(); }
 function back() {
   var was = VIEW.stack.pop(); render({ stay: true }); lastFocusKey = null;
   var under = topView();
@@ -1486,8 +1484,8 @@ function act(a, el) {
     case "restart": S.cj = []; S.moves = []; VIEW.stack = []; VIEW.all = false; VIEW.fixing = false; VIEW.areaOpen = undefined; S.step = "choose"; CACHE = {}; render(); break;
     case "results": VIEW.stack = []; VIEW.all = false; S.step = CAN && S.cj.length >= CJ.n ? "results" : CAN ? "choose" : "welcome"; render(); break;
     case "cj": {
-      var cid = nextNow(); if (!cid) { afterChoice(); break; }
-      S.cj.push({ pair: cid, choice: v === "a" || v === "b" ? v : "either" });
+      var cid = nextNow(); if (cid === null) { afterChoice(); break; }
+      S.cj.push({ task_index: cid, choice: v === "a" || v === "b" ? v : "either" });
       live.textContent = v === "either" ? "No real difference." : "Apartment " + v.toUpperCase() + ".";
       afterChoice(); break; }
     case "undo":

@@ -895,6 +895,7 @@ def add_version_three(out):
     out["meta"]["recommender"] = params
     sets = sample_sets(samples, blds, params)
     params["conjoint"] = conjoint_block(blds)                  # version 4: the choices are made-up apartments
+    params["conjoint"]["flat_below"] = flat_threshold(samples)
     out["meta"]["recommender_examples"] = conjoint_examples(samples, blds, params)
 
     out["meta"]["recommender"]["validation"] = validation(out["meta"]["recommender_examples"], blds, params)
@@ -1138,12 +1139,36 @@ def run_conjoint(samples, params, answer_fn):
         answers.append({"task_index": i, "task": t, "choice": answer_fn(t)})
 
 
-def priorities(w):
-    """Her weights in plain-word order (highest first; ties in FEATURES order) and the one-sentence summary."""
+FLAT_QUANTILE = 0.01         # flat: spread (max - min) of her weights below this quantile of the prior samples' spreads
+LEAN_STEP = 0.02             # ... then "if anything, X a little more" when her top weight leads the next by this much
+_FLAT_CACHE = {}
+
+
+def flat_threshold(samples):
+    """The FLAT_QUANTILE quantile of max - min over the weight samples: flatter than 99% of the prior's own vectors."""
+    key = id(samples)
+    if key not in _FLAT_CACHE or _FLAT_CACHE[key][0] is not samples:
+        sp = sorted(max(x) - min(x) for x in samples)
+        _FLAT_CACHE[key] = (samples, round(sp[int(FLAT_QUANTILE * (len(sp) - 1))], 6))
+    return _FLAT_CACHE[key][1]
+
+
+def priorities(w, flat_below=None):
+    """Her weights in plain-word order (highest first; ties in FEATURES order) and the one-sentence summary. When the
+    spread of her weights (max - min) is below flat_below (flat_threshold of the samples), flat is true and the
+    sentence says nothing stood out, adding "if anything, X a little more" when the top weight leads by LEAN_STEP."""
     order = sorted(FEATURES, key=lambda k: (-q(w[FEATURES.index(k)]), FEATURES.index(k)))
     words = [PRIORITY_WORDS[k] for k in order]
-    sent = f"{words[0][0].upper() + words[0][1:]} matters most to you, then {words[1]}; {words[-1]} matters least."
-    return {"order": order, "words": words, "weights": {k: round(w[FEATURES.index(k)], 6) for k in order}, "sentence": sent}
+    ws = sorted(w, reverse=True)
+    flat = flat_below is not None and q(ws[0] - ws[-1]) < flat_below
+    if flat:
+        sent = "Nothing stood out strongly; you seem fairly open on all of these."
+        if q(ws[0] - ws[1]) >= LEAN_STEP:
+            sent = f"Nothing stood out strongly; you seem fairly open on all of these, if anything {words[0]} a little more."
+    else:
+        sent = f"{words[0][0].upper() + words[0][1:]} matters most to you, then {words[1]}; {words[-1]} matters least."
+    return {"order": order, "words": words, "weights": {k: round(w[FEATURES.index(k)], 6) for k in order},
+            "flat": flat, "sentence": sent}
 
 
 def nudge(w, feature, direction):
@@ -1177,7 +1202,7 @@ def conjoint_examples(samples, buildings, params):
         hidden = [hw[k] for k in FEATURES] if hw else None
         ans = run_conjoint(samples, params, lambda t: task_answer(t, hidden, params))
         rec = recommend(samples, ans, buildings, params)
-        pr = priorities(rec["weights"])
+        pr = priorities(rec["weights"], flat_threshold(samples))
         out.append({"persona": name, "hidden_weights": dict(zip(FEATURES, hidden)) if hidden else None,
                     "answer_rule": "either to every task" if hidden is None else
                     f"the apartment with the higher utility under hidden_weights; 'either' when the gap is within {params['either_band']}",
@@ -1185,7 +1210,7 @@ def conjoint_examples(samples, buildings, params):
                     "expected_tasks": [x["task_index"] for x in ans],
                     "expected_tasks_shown": [task_display(x["task"], params) for x in ans],
                     "expected_mean_weights": dict(zip(FEATURES, rec["weights"])),
-                    "expected_priorities": pr["order"], "expected_priorities_sentence": pr["sentence"],
+                    "expected_priorities": pr["order"], "expected_priorities_sentence": pr["sentence"], "expected_flat": pr["flat"],
                     "expected_top": [[n["neighborhood_id"], [b["id"] for b in n["buildings"]]] for n in rec["neighborhoods"]],
                     "expected_more_like_this": {b["id"]: b["more_like_this"] for n in rec["neighborhoods"] for b in n["buildings"]},
                     "expected_why": {n["neighborhood_id"]: n["why"] for n in rec["neighborhoods"]},
@@ -1197,7 +1222,7 @@ def conjoint_examples(samples, buildings, params):
     w2 = nudge(w, k, "up")
     rec2 = recommend_from_weights(w2, buildings, params)
     out[0]["nudge_example"] = {"feature": k, "direction": "up", "weights_after": dict(zip(FEATURES, [round(x, 6) for x in w2])),
-                               "priorities_sentence_after": priorities(w2)["sentence"],
+                               "priorities_sentence_after": priorities(w2, flat_threshold(samples))["sentence"],
                                "expected_top_after": [[n["neighborhood_id"], [b["id"] for b in n["buildings"]]] for n in rec2["neighborhoods"]]}
     return out
 
@@ -1208,7 +1233,8 @@ def conjoint_block(buildings):
             "answers": {"a": "Apartment A", "b": "Apartment B", "either": "No real difference to me"},
             "pool_rules": build_pool.__doc__.strip(), "selection": next_task.__doc__.strip(),
             "levels_rule": conjoint_attributes.__doc__.strip(), "priorities_rule": priorities.__doc__.strip(),
-            "nudge_rule": nudge.__doc__.strip(), "priority_words": PRIORITY_WORDS}
+            "nudge_rule": nudge.__doc__.strip(), "priority_words": PRIORITY_WORDS,
+            "flat_rule": flat_threshold.__doc__.strip(), "lean_step": LEAN_STEP}
 
 
 class FastCJ:

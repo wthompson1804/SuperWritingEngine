@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_at": "2026-11-17T22:37:22+00:00",
+  "built_at": "2026-11-17T22:38:50+00:00",
   "rent_limit": 2000,
   "counts": {
    "apartments": 230,
@@ -23949,7 +23949,7 @@
     "pool_rules": "Every task, in this order (the index is the tie-break):\ntwo attributes: each pair of attributes (in ATTR_ORDER), every pair of different levels on each; A has the better\n  level on the first attribute and the worse on the second (so neither apartment is better on everything);\nthree attributes: each triple, adjacent levels only (one step apart) on each; A better on the first; on the second\n  and third, (A better, B better), (B, A) or (B, B) -- never A better on all three.\nA task is [[attr, level of A, level of B], ...] with level indexes worst = 0.",
     "selection": "The next task index into the pool, or None after n_tasks. Candidates: the pool minus tasks already asked and\nminus tasks on the same attributes as the previous one; the POOL_PREFILTER most utility-balanced at her mean\nweights (round(|gap|), index); of those, the one with the largest expected reduction in posterior uncertainty:\nthe trace of the posterior covariance of the weights, expected over the three answers. Ties: lower index.",
     "levels_rule": "Attributes and levels, worst to best by feature value. Totals: the TOTAL_QUANTILES of the buildings' lowest\ntotals, rounded to $50 (the real spread); the other levels are the design's.",
-    "priorities_rule": "Her weights in plain-word order (highest first; ties in FEATURES order) and the one-sentence summary.",
+    "priorities_rule": "Her weights in plain-word order (highest first; ties in FEATURES order) and the one-sentence summary. When the\nspread of her weights (max - min) is below flat_below (flat_threshold of the samples), flat is true and the\nsentence says nothing stood out, adding \"if anything, X a little more\" when the top weight leads by LEAN_STEP.",
     "nudge_rule": "Move one priority up or down one place: swap its weight with the weight of the priority just above (up) or just\nbelow (down) it in priorities() order; nothing else changes (the sum stays 1). If the two weights are equal (to\nROUND decimals), the moved one is set NUDGE_TIE_STEP above (up) or below (down) the other, floored at 0, and the six\nare renormalised to sum 1. At the top (up) or bottom (down) nothing changes. Returns the new weights.",
     "priority_words": {
      "family": "being near Mom and Dad",
@@ -23958,7 +23958,10 @@
      "going_out": "going out",
      "green": "a park for the dog",
      "parking": "parking"
-    }
+    },
+    "flat_rule": "The FLAT_QUANTILE quantile of max - min over the weight samples: flatter than 99% of the prior's own vectors.",
+    "lean_step": 0.02,
+    "flat_below": 0.14908
    },
    "validation": {
     "tolerance": 0.02,
@@ -24341,6 +24344,7 @@
      "parking"
     ],
     "expected_priorities_sentence": "Being near Mom and Dad matters most to you, then going out; parking matters least.",
+    "expected_flat": false,
     "expected_top": [
      [
       "ny:flushing-willets-point",
@@ -24750,6 +24754,7 @@
      "money"
     ],
     "expected_priorities_sentence": "Space matters most to you, then going out; the monthly cost matters least.",
+    "expected_flat": false,
     "expected_top": [
      [
       "nj:bloomfield",
@@ -25112,6 +25117,7 @@
      "going_out"
     ],
     "expected_priorities_sentence": "The monthly cost matters most to you, then being near Mom and Dad; going out matters least.",
+    "expected_flat": false,
     "expected_top": [
      [
       "ct:stamford",
@@ -25476,6 +25482,7 @@
      "parking"
     ],
     "expected_priorities_sentence": "Going out matters most to you, then being near Mom and Dad; parking matters least.",
+    "expected_flat": false,
     "expected_top": [
      [
       "ny:flushing-willets-point",
@@ -25838,7 +25845,8 @@
      "going_out",
      "money"
     ],
-    "expected_priorities_sentence": "Being near Mom and Dad matters most to you, then a park for the dog; the monthly cost matters least.",
+    "expected_priorities_sentence": "Nothing stood out strongly; you seem fairly open on all of these, if anything being near Mom and Dad a little more.",
+    "expected_flat": true,
     "expected_top": [
      [
       "nj:bloomfield",
