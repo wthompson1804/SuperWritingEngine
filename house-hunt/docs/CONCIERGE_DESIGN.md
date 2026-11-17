@@ -142,3 +142,62 @@ experiences[].line: same line as experience_line, for the badge sheet
 Every number in `fit_chips` and `life_here` comes from the data; every named place comes from the mapped places
 already in `data/enriched_color/` or from `data/reference/life_here_facts.csv` (sourced web research, each row with
 URL and retrieval time). A moment with nothing true and specific to say is left out, never padded.
+
+---
+
+## Version 3 (Will, 2026-11-17): a recommender, asked by "this or that"
+
+Will's direction: the experiences are no longer needed; cut the data by what matters to her. Ask only what is
+diagnostic, as a few trade-offs between real places ("this or this"), not a list of questions. Then recommend the
+**top three neighborhoods**, each with its **top three buildings**; under each, **two or three more like it** as small
+thumbnails; everything else one tap away. (His message ended mid-sentence: "Maybe we do,". Anything he adds wins.)
+
+### What the data says (22 buildings, 2026-11-17)
+Close to Mom and Dad and room at home move strongly apart (correlation -0.74); going out and room apart (-0.64);
+close to Mom and Dad and going out together (+0.55); money and parking mostly independent. So the main choice is
+"city life near family, small studio" against "more room, farther out", with money and parking as side choices.
+
+### The model (one implementation in Python as the reference, the same in the page's JS, tested to agree)
+1. **Fixed rules** stay rules: rent at or under the page's limit, the dog, move-in, floor or elevator.
+2. **Features per building**, each turned into a 0..1 value with a shape that behaves like life:
+   - `family`: drive to Mom and Dad -> value falls slowly to 25 min, steeply from 35 to 90 min (hours a month matter);
+   - `money`: dollars left under $2,300 total a month, linear;
+   - `room`: log of square feet, plus a step for a separate bedroom;
+   - `going_out`: restaurants and bars within a 10-minute walk, steep to about 20, flat after 60;
+   - `green`: nearest park walk, full at 5 minutes or less, half at 12, low past 20; a dog area adds a little;
+   - `parking`: garage or covered 1, off-street 0.7, unknown 0.4, street 0.2;
+   - `sure`: confirmed today 1, last seen earlier 0.6, one thing to confirm 0.8 (multiplies, never adds).
+   Missing values are the median of the set, flagged.
+3. **What we already know is the prior**: 400 weight vectors over the six features, drawn once in Python with a fixed
+   seed from a Dirichlet centred on her profile (family, going out, green and room weighted up a little; parking and
+   money neutral) and shipped in the data, so the page and Python use the very same samples.
+4. **"This or that"**: each question shows two real buildings side by side (name, place, five facts, one line of life
+   here) and three answers: this one, that one, "either is fine". The likelihood is logistic in the utility gap
+   (temperature in the data); "either" favours samples where the gap is small. Weights are re-weighted after each answer.
+5. **Next pair**: among pairs drawn from the current top 30 buildings, the pair whose answer is expected to change the
+   recommended top three most (expected reduction in uncertainty about the top-three neighborhoods). At least three
+   pairs, at most six; stop early when the top three neighborhoods hold with probability 0.8 or more.
+6. **Recommendation**: a building's score is expected utility under the re-weighted samples times `sure`. A
+   neighborhood's score is the mean of its two best buildings. The three neighborhoods are picked greedily for score
+   with a diversity term (maximal marginal relevance, lambda 0.7, distance between neighborhood feature centroids), so
+   the three are real alternatives. Within each, the three best buildings. A one-apartment neighborhood counts as its
+   host's, as now.
+7. **More like this**: per building, the three nearest other buildings in feature space (standardised features,
+   weighted by her current mean weights), excluding ones already on screen; shown as small thumbnails.
+8. **Why, and what would change it**: for each recommended neighborhood, the two features that lift it most against
+   the average, one thing it gives up against the other two, and one "if X mattered less/more, Y would come first"
+   found by nudging one weight.
+9. Tags in place of experiences: two plain words per neighborhood from its strongest features ("Lively, near family",
+   "Quiet, more room").
+
+### Data contract additions (all added, none renamed)
+```
+meta.recommender: {features:[...], value_functions:{...}, temperature, either_band, n_samples, seed,
+                   min_pairs, max_pairs, stop_prob, mmr_lambda, pair_pool}
+recommender_samples: [[w_family, w_money, w_room, w_going_out, w_green, w_parking], ...]   # 400 rows
+buildings[].features: {family, money, room, going_out, green, parking, sure}   # 0..1
+buildings[].features_raw: {drive_min, total, sqft, bedroom, restaurants_10min, park_walk_min, parking_kind, checked}
+buildings[].similar: [ids]                     # unweighted nearest, for the page to re-rank with her weights
+neighborhoods[].tags: ["Lively", "near family"]
+meta.recommender_examples: [{answers:[{a,b,choice}], expected_pairs:[...], expected_top:[[hood,[b1,b2,b3]],...]}]
+```
