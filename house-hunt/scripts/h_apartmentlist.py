@@ -19,6 +19,17 @@ first_seen is kept, last_seen is the fetch time of the property page. The CSV is
 every city. `--refresh` refetches search and property pages (updates last_seen).
 
 Usage: python3 scripts/h_apartmentlist.py [--refresh] [--max-drive 120] [--only ny/queens,ct/stamford]
+
+Second trawl (2026-11-17, `--trawl2`): collection ceiling MAX_RENT = $2,200 listed base rent for NEW units; units
+already held (<= HELD_MAX = $3,000, the pipeline cap) are refreshed at their current price. `--max-age-hours 24` refetches
+any search or property page whose cached copy is older than that. Cities run priority areas first (NJ, Brooklyn, CT,
+Long Island, Long Island City), then the rest of the grid; every held property with a row <= $2,200 is re-read even
+when no search page lists it any more. A held unit that its re-read page no longer lists (unit absent, page inactive,
+page 404/410) is GONE: removed from the CSV, as the Zumper harvester does, and written with the reason to
+raw/apartmentlist_trawl2/gone_units.csv. A held unit whose rent rose above $3,000 is removed the same way
+(reason price_above_3000). A refusal (401/403/429/CAPTCHA) stops the run at once, with no retry, and is written to
+raw/_host_kill_shared.json. Unit labels are kept exactly as given; floor and elevator are never read from them.
+Run: python3 scripts/h_apartmentlist.py --trawl2 --max-age-hours 24 --fetch-max-low 2200
 """
 from __future__ import annotations
 
@@ -39,7 +50,8 @@ HOST = "www.apartmentlist.com"
 BASE = "https://" + HOST
 lib.HOST_DELAY[HOST] = 2.5  # brief: minimum 2 s per host (robots.txt has no Crawl-delay)
 
-MAX_RENT = 3000
+MAX_RENT = 2200   # second trawl (Will, 2026-11-17): collect no new unit above $2,200 listed base rent
+HELD_MAX = 3000   # pipeline cap: units already held are kept and refreshed up to this
 CITY_KM = 8.0
 PROP_KM = 2.5
 STATES = ("ny", "nj", "ct", "pa")
@@ -62,10 +74,47 @@ BOROUGHS = {  # not Census places; coordinates are the borough page's own "coord
 
 DEC = json.JSONDecoder()
 REFRESH = False
+MAX_AGE_H = 0.0   # >0: refetch a cached page older than this many hours
+T2 = lib.RAW / "apartmentlist_trawl2"
+GONE = T2 / "gone_units.csv"
+STATE = T2 / "_checked.json"   # property path -> {at, status, reason}; makes the trawl resumable
 
 
 class Blocked(Exception):
-    pass
+    def __init__(self, msg, url=""):
+        super().__init__(msg)
+        self.url = url
+
+
+class Transient(Exception):
+    """5xx or a network error on one page: that page is skipped, its held rows are left untouched."""
+
+
+def _cache_age_h(url: str):
+    import hashlib
+    import requests
+    full = requests.Request("GET", url).prepare().url
+    key = hashlib.sha1(("GET " + full + " ").encode()).hexdigest()[:16]
+    mp = lib.RAW / SRC / f"{key}.meta.json"
+    if not mp.exists():
+        return None
+    try:
+        at = datetime.fromisoformat(json.loads(mp.read_text())["retrieved_at"])
+    except (ValueError, KeyError):
+        return None
+    return (datetime.now(timezone.utc) - at).total_seconds() / 3600
+
+
+def record_refusal(reason: str, url: str):
+    """One refusal ends the host for the session and after restarts (CLAUDE.md). Merge into the shared kill file."""
+    kf = lib.RAW / lib.KILL_FILE_NAME
+    try:
+        kill = json.loads(kf.read_text())
+    except (OSError, ValueError):
+        kill = {}
+    if HOST not in kill:
+        kill[HOST] = {"reason": reason, "url": url, "at": lib.now_iso(), "by": "scripts/h_apartmentlist.py (trawl 2)"}
+        kf.write_text(json.dumps(kill, indent=1))
 
 
 def log(*a):
@@ -82,16 +131,24 @@ def km(lat1, lon1, lat2, lon2):
 def fetch(path: str, refresh: bool | None = None):
     """Fetch a robots-allowed path. Returns (html, meta). Raises Blocked on 403/429/CAPTCHA."""
     assert not any(path.startswith(d) for d in DISALLOW), path
+    rf = REFRESH if refresh is None else refresh
+    if not rf and MAX_AGE_H > 0:
+        age = _cache_age_h(BASE + path)
+        rf = age is not None and age > MAX_AGE_H
     try:
-        content, meta = lib.cached_get(BASE + path, SRC, ext="html",
-                                       refresh=REFRESH if refresh is None else refresh)
-    except RuntimeError as e:  # lib retries 429/5xx three times, then raises
-        raise Blocked(str(e))
-    if meta["status"] in (403, 429):
-        raise Blocked(f"HTTP {meta['status']} {path}")
+        # retries=1: a 429 is never retried (lib would otherwise retry 429/5xx three times)
+        content, meta = lib.cached_get(BASE + path, SRC, ext="html", refresh=rf, retries=1)
+    except lib.HostRefused as e:
+        raise Blocked(str(e), BASE + path)
+    except RuntimeError as e:
+        if "HTTP 429" in str(e):
+            raise Blocked(f"HTTP 429 {path}", BASE + path)
+        raise Transient(str(e))
+    if meta["status"] in (401, 403, 429):
+        raise Blocked(f"HTTP {meta['status']} {path}", BASE + path)
     html = content.decode("utf8", "replace")
     if meta["status"] == 200 and re.search(r"captcha|px-captcha|cf-challenge|Just a moment", html[:20000], re.I):
-        raise Blocked(f"challenge page {path}")
+        raise Blocked(f"challenge page {path}", BASE + path)
     return html, meta
 
 
@@ -166,7 +223,7 @@ def city_list(grid, max_drive):
         cand = [(z, d) for z, d in cand if d <= CITY_KM and z[3] <= max_drive]
         if cand:
             z, d = min(cand, key=lambda c: c[0][3])
-            cities.append((z[3], s))
+            cities.append((z[3], s, z[0]))
         else:
             far += 1
     cities.sort()
@@ -334,8 +391,8 @@ def pet_facts(L):
     return dogs, policy[:900], wl, pet_rent
 
 
-def build_rows(L, pslug, meta, grid_zips, grid):
-    """Return (rows, reason). rows = list of dicts for studio/1BR units <= MAX_RENT."""
+def build_rows(L, pslug, meta, grid_zips, grid, ceiling=HELD_MAX):
+    """Return (rows, reason). rows = list of dicts for available studio/1BR units <= ceiling."""
     seen_at = meta["retrieved_at"]
     today = seen_at[:10]
     zipc = txt(L.get("zip"))[:5]
@@ -462,7 +519,7 @@ def build_rows(L, pslug, meta, grid_zips, grid):
                 continue
             base, price, total = u.get("base_price"), u.get("price"), u.get("total_price")
             rent = base if isinstance(base, (int, float)) and base > 0 else price
-            if not isinstance(rent, (int, float)) or rent <= 0 or rent > MAX_RENT:
+            if not isinstance(rent, (int, float)) or rent <= 0 or rent > ceiling:
                 continue
             ll = u.get("lease_length")
             basis = "base rent per month" + (f", {ll}-month lease" if ll else "")
@@ -482,7 +539,7 @@ def build_rows(L, pslug, meta, grid_zips, grid):
                 rent, basis, u.get("available_on"), u.get("available_now"), ef, en)
         if not units:
             price = fp.get("price")
-            if isinstance(price, (int, float)) and 0 < price <= MAX_RENT:
+            if isinstance(price, (int, float)) and 0 < price <= ceiling:
                 en = [f"floorplan={txt(fp.get('name'))}", "floor-plan-level price (no unit list on page); 'from' price"]
                 if fp.get("price_max"):
                     en.append(f"price_max={fp['price_max']}")
@@ -516,10 +573,223 @@ def save(rows):
     tmp.replace(OUT)
 
 
+# ---------------------------------------------------------------- second trawl (2026-11-17)
+PRIORITY = ("New Jersey", "Brooklyn", "Connecticut", "Long Island", "Long Island City")
+LIC_ZIPS = ("11101", "11109", "11120")
+
+
+def area_of(state: str, zipc: str, slug: str = "") -> str:
+    st, z = (state or "").lower(), (zipc or "")[:5]
+    if st == "nj":
+        return "New Jersey"
+    if st == "ct":
+        return "Connecticut"
+    if st == "pa":
+        return "Pennsylvania"
+    if z in LIC_ZIPS or slug == "ny/long-island-city":
+        return "Long Island City"
+    if slug == "ny/brooklyn" or z[:3] == "112":
+        return "Brooklyn"
+    if slug == "ny/queens" or z[:3] in ("113", "114", "116") or z in ("11004", "11005"):
+        return "Queens (other)"
+    if z[:3] in ("115", "117", "118", "119") or z[:3] == "110":
+        return "Long Island"
+    if z[:3] in ("100", "101", "102"):
+        return "Manhattan"
+    if z[:3] == "104":
+        return "Bronx"
+    if z[:3] == "103":
+        return "Staten Island"
+    return "New York (other)"
+
+
+def band(rent) -> str:
+    v = float(rent)
+    return "<=2000" if v <= 2000 else ("2001-2200" if v <= 2200 else "2201-3000" if v <= 3000 else ">3000")
+
+
+def trawl2(a, grid, grid_zips, cities, unmatched):
+    started = lib.now_iso()
+    before = {}
+    bp = T2 / "apartmentlist_before.csv"   # snapshot of the CSV taken before the first trawl-2 run
+    with open(bp, newline="", encoding="utf8") as f:
+        for r in csv.DictReader(f):
+            before[r["listing_id"]] = r
+    rows = load_existing()
+    gone = {}
+    if GONE.exists():
+        with open(GONE, newline="", encoding="utf8") as f:
+            for r in csv.DictReader(f):
+                gone[r["listing_id"]] = r
+    checked = json.loads(STATE.read_text()) if STATE.exists() else {}
+    stats = {"started": started, "args": vars(a), "srp_pages": 0, "props_considered": 0, "props_skipped_lowprice": 0,
+             "props_read": 0, "reasons": {}, "transient": [], "blocked": None, "unparsed_pages": [], "cities_done": [],
+             "cities_unmatched_far": []}
+    gcols = COLS + ["gone_at", "gone_reason", "gone_page_status", "rent_on_page_now"]
+
+    def save_all():
+        save(rows)
+        with open(GONE.with_suffix(".tmp"), "w", newline="", encoding="utf8") as f:
+            w = csv.DictWriter(f, fieldnames=gcols)
+            w.writeheader()
+            for r in sorted(gone.values(), key=lambda r: r["listing_id"]):
+                w.writerow({c: r.get(c, "") for c in gcols})
+        GONE.with_suffix(".tmp").replace(GONE)
+        STATE.write_text(json.dumps(checked, indent=0))
+        (lib.RAW / SRC / "_harvest_stats_trawl2.json").write_text(json.dumps(stats, indent=1))
+
+    def held_by_prop():
+        out: dict = {}
+        for lid, r in rows.items():
+            out.setdefault(r["url"][len(BASE):], []).append(lid)
+        return out
+
+    def mark_gone(lid, reason, at, status, rent_now=""):
+        r = dict(rows.pop(lid))
+        r.update({"gone_at": at, "gone_reason": reason, "gone_page_status": status, "rent_on_page_now": rent_now})
+        gone[lid] = r
+
+    def process_prop(pslug):
+        hp = held_by_prop().get(pslug, [])
+        try:
+            html, meta = fetch(pslug)
+        except Transient as e:
+            stats["transient"].append(f"{pslug}: {str(e)[:120]}")
+            return
+        stats["props_read"] += 1
+        at, status = meta["retrieved_at"], meta["status"]
+        reason = f"http_{status}"
+        if status in (404, 410):
+            for lid in hp:
+                mark_gone(lid, f"property page answers HTTP {status}", at, status)
+            reason = f"gone_http_{status}"
+        elif status == 200:
+            L = parse_listing(html)
+            if not L:
+                reason = "no_listing_object"
+                stats["unparsed_pages"].append(pslug)
+            else:
+                rr, reason = build_rows(L, pslug, meta, grid_zips, grid, ceiling=10 ** 9)
+                if reason == "inactive":
+                    for lid in hp:
+                        mark_gone(lid, "property page marks the listing inactive", at, status)
+                elif reason in ("ok", "no_studio_1br", "no_unit_le_3000"):
+                    on_page = set()
+                    for r in rr:
+                        lid, rent = r["listing_id"], float(r["listed_rent"])
+                        on_page.add(lid)
+                        if lid in rows:
+                            if rent > HELD_MAX:
+                                mark_gone(lid, "rent on the page is now above $3,000", at, status, r["listed_rent"])
+                                continue
+                        elif rent > MAX_RENT:
+                            continue
+                        old = before.get(lid) or rows.get(lid)
+                        if old:
+                            r["first_seen"] = min(old["first_seen"], r["first_seen"])
+                            if old.get("listed_rent") and float(old["listed_rent"]) != rent:
+                                r["notes"] += f"; trawl2: listed_rent was {old['listed_rent']} on {old['last_seen'][:10]}"
+                            if old.get("available_date") != r["available_date"]:
+                                r["notes"] += f"; trawl2: available_date was {old.get('available_date') or 'empty'} on {old['last_seen'][:10]}"
+                        rows[lid] = r
+                        gone.pop(lid, None)  # back on the page
+                    for lid in hp:
+                        if lid not in on_page and lid in rows:
+                            mark_gone(lid, "unit no longer listed on its property page", at, status)
+        stats["reasons"][reason] = stats["reasons"].get(reason, 0) + 1
+        checked[pslug] = {"at": at, "status": status, "reason": reason}
+
+    def fresh(pslug):
+        c = checked.get(pslug)
+        if not c:
+            return False
+        age = (datetime.now(timezone.utc) - datetime.fromisoformat(c["at"])).total_seconds() / 3600
+        return age <= (MAX_AGE_H or 24)
+
+    def run():
+        # cities the gazetteer could not place: coordinates from their own first search page
+        cl = list(cities)
+        for slug in unmatched:
+            try:
+                html, meta = fetch(f"/{slug}/{FILTERS[0]}")
+            except Transient as e:
+                stats["transient"].append(f"{slug}: {e}")
+                continue
+            stats["srp_pages"] += 1
+            c = page_city_coords(flight(html), slug) if meta["status"] == 200 else None
+            if not c:
+                stats["cities_unmatched_far"].append({"city": slug, "why": "no coordinates on page"})
+                continue
+            z, d = nearest_grid(grid, *c)
+            if d <= CITY_KM and z[3] <= a.max_drive:
+                cl.append((z[3], slug, z[0]))
+            else:
+                stats["cities_unmatched_far"].append({"city": slug, "km_to_grid": round(d, 1)})
+        groups = {g: [] for g in PRIORITY + ("rest",)}
+        for drive, slug, zc in cl:
+            ar = area_of(slug[:2], zc, slug)
+            groups[ar if ar in PRIORITY else "rest"].append((drive, slug, ar))
+        for g in groups.values():
+            g.sort()
+        log("cities by group:", {g: len(v) for g, v in groups.items()})
+
+        t0 = datetime.now(timezone.utc)
+        for g in PRIORITY + ("rest",):
+            for drive, slug, ar in groups[g]:
+                if a.minutes and (datetime.now(timezone.utc) - t0).total_seconds() > a.minutes * 60:
+                    stats.setdefault("not_reached_time_budget", []).append(slug)
+                    continue
+                try:
+                    found = discover_city(slug, stats)
+                except Transient as e:
+                    stats["transient"].append(f"{slug} search: {str(e)[:120]}")
+                    found = {}
+                hp = held_by_prop()
+                n = 0
+                for pslug, lp in sorted(found.items()):
+                    if fresh(pslug):
+                        continue
+                    stats["props_considered"] += 1
+                    holds_le = any(float(rows[l]["listed_rent"]) <= MAX_RENT for l in hp.get(pslug, []))
+                    if isinstance(lp, (int, float)) and lp > a.fetch_max_low and not holds_le:
+                        stats["props_skipped_lowprice"] += 1
+                        continue
+                    process_prop(pslug)
+                    n += 1
+                stats["cities_done"].append({"city": slug, "group": g, "drive_min": drive, "props": len(found), "read": n})
+                save_all()
+                log(f"[{g}] {slug} drive={drive} props={len(found)} read={n} rows={len(rows)} gone={len(gone)} srp={stats['srp_pages']}")
+            # held properties of this group with a unit <= MAX_RENT that no search page led to: re-read them too
+            sweep = sorted({r["url"][len(BASE):] for r in rows.values() if float(r["listed_rent"]) <= MAX_RENT and
+                            (area_of(r["state"], r["zip"]) if area_of(r["state"], r["zip"]) in PRIORITY else "rest") == g})
+            sweep = [p for p in sweep if not fresh(p)]
+            log(f"[{g}] sweep of held properties not reached by search: {len(sweep)}")
+            for i, pslug in enumerate(sweep):
+                process_prop(pslug)
+                if i % 25 == 24:
+                    save_all()
+            stats.setdefault("sweeps", {})[g] = len(sweep)
+            save_all()
+
+    try:
+        run()
+    except Blocked as e:
+        stats["blocked"] = str(e)
+        stats["finished"] = lib.now_iso()
+        save_all()
+        raise
+    stats["finished"] = lib.now_iso()
+    stats["rows_total"] = len(rows)
+    stats["gone_total"] = len(gone)
+    save_all()
+
+
 def main():
-    global REFRESH
+    global REFRESH, MAX_AGE_H
     ap = argparse.ArgumentParser()
     ap.add_argument("--refresh", action="store_true")
+    ap.add_argument("--trawl2", action="store_true", help="second trawl (see the module docstring)")
+    ap.add_argument("--max-age-hours", type=float, default=0, help="refetch cached pages older than this")
     ap.add_argument("--max-drive", type=float, default=120.0)
     ap.add_argument("--only", default="")
     ap.add_argument("--fetch-max-low", type=float, default=MAX_RENT,
@@ -530,6 +800,7 @@ def main():
     ap.add_argument("--minutes", type=float, default=0, help="stop starting new cities after this many minutes")
     a = ap.parse_args()
     REFRESH = a.refresh
+    MAX_AGE_H = a.max_age_hours
 
     grid = load_grid()
     grid_zips = {z[0]: z[3] for z in grid}
@@ -539,6 +810,15 @@ def main():
         only = set(a.only.split(","))
         cities = [c for c in cities if c[1] in only]
         unmatched = [u for u in unmatched if u in only]
+    if a.trawl2:
+        T2.mkdir(parents=True, exist_ok=True)
+        try:
+            trawl2(a, grid, grid_zips, cities, unmatched)
+        except Blocked as e:
+            record_refusal(str(e), e.url)
+            log("REFUSED, stopping; host written to raw/_host_kill_shared.json:", e)
+            return 2
+        return 0
 
     rows = load_existing()
     stats = {"started": lib.now_iso(), "args": vars(a), "srp_pages": 0, "detail_pages": 0, "cities_done": [], "cities_unmatched_far": [],
@@ -627,11 +907,11 @@ def main():
                 stats["cities_unmatched_far"].append({"city": slug, "km_to_grid": round(d, 1)})
 
     try:
-        for drive, slug in [c for c in cities if a.min_drive <= c[0] <= 50]:
+        for drive, slug, *_ in [c for c in cities if a.min_drive <= c[0] <= 50]:
             do_city(slug, drive)
         if not a.min_drive:
             do_unmatched()  # mostly NJ townships 30-70 min out; done after the <= 50 min cities
-        for drive, slug in [c for c in cities if c[0] > max(50, a.min_drive - 1e-9)]:
+        for drive, slug, *_ in [c for c in cities if c[0] > max(50, a.min_drive - 1e-9)]:
             do_city(slug, drive)
     except Blocked as e:
         stats["blocked"] = str(e)

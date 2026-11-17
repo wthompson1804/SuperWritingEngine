@@ -10,9 +10,11 @@ scripts that reference it and a status:
 It also fails if an analysis script reads a side file directly instead of the master tables.
 
 Shown-list assertions (added after docs/INDEPENDENT_CHECK.md): the run fails when any unit with shown = True in
-data/ranked_units.csv breaks one of Will's rules: more than one open item (elevator open by parsers.elevator_rule; dogs not
+data/ranked_units.csv breaks one of Will's rules: more than one open item (the elevator in doubt, or floor_or_elevator, by
+parsers.floor_elevator_rule over parsers.elevator_rule; dogs not
 settled; the listing's reality or availability in doubt; eligibility; a listing never re-read is NOT one, owner 2026-11-16), or one open item without the asterisk fields
-(confirm_asterisk, confirm_what, confirm_why); elevator contradicted; floor under 2; dogs not explicitly allowed, or a weight limit under 25 lb (a size-only "small dogs" policy passes, by the owner's rule of
+(confirm_asterisk, confirm_what, confirm_why); the floor-and-elevator rule failed (floor under 2; no elevator on floor 3+;
+floor 3+ with no elevator stated); listed base rent over $2,200; dogs not explicitly allowed, or a weight limit under 25 lb (a size-only "small dogs" policy passes, by the owner's rule of
 2026-11-15, but must carry its note and tour question);
 all-in over $3,000; available after 2026-12-15; a duplicate unit; more than 8 shown in one building; a row that is not a real
 apartment (floor plan, building price, co-living room); the only apartment of a neighborhood shown with something open;
@@ -32,6 +34,7 @@ ALLOWED_INPUTS = {"master_units.csv", "master_buildings.csv", "lifestyle_groups.
 USERS = ["gates.py", "build_master.py", "all_in.py", "rank.py", "avoid.py", "build_neighborhoods.py", "lifestyle_features.py",
          "lifestyle_color.py", "lifestyle_groups.py", "crime_benchmarks.py", "rent_terms.py", "rating_standard.py", "enrich_units.py"]
 CAP, WINDOW_END, MAX_PER_BUILDING, MIN_DOG_LB = 3000, "2026-12-15", 8, 25
+RENT_MAX = 2200                                         # owner, 2026-11-17: listed base rent (scripts/gates.py, scripts/rank.py)
 DISPLAY = {  # pattern -> why it is kept but not scored
     r"^(photo_url|url|building_url|also_seen_at|listing_url|building_site_url)$": "link shown on the page",
     r"^(building_name|address|city|state|zip5|unit|baths|hood|hood_area|manager|park_name|dog_park_name|supermarket|train_station|police_agency|police_geography|unit_count)$": "label shown on the page",
@@ -50,6 +53,7 @@ DISPLAY = {  # pattern -> why it is kept but not scored
     r"^(parking_type_listed|parking_kinds|parking_included_kind|parking_included_quote|parking_included_basis|parking_optional|parking_fee_kind|parking_kind_basis|parking_assigned|parking_reviewed|parking_all_sources)$": "independent check 5, N1: structured parking from every source's words (parsers.parking_facts): shown in the page data's parking block; the score reads parking_type, whose head is the primary kind (parking_kind)",
     r"^(one_time_costs_text|broker_fee_quote|broker_fee_source|one_time_costs|dog_weight_limit_untraced|in_unit_appliances|train_station_system|train_station_kind|commuter_station|commuter_station_system|train_station_osm)$": "independent check 5: the sentences behind the one-time-cost and broker-fee disclosures, a dog weight limit no page states (kept beside the removed value), which appliances an in-unit laundry source names, and the name, system and kind of the nearest rail station (shown on the page)",
     r"^(duplicate_listing_ids)$": "other listings of the same unit, merged into this row (their links are in also_seen_at)",
+    r"^(building_stories|building_stories_basis|building_stories_source|building_stories_match|floor_elevator_status|floor_elevator_code|elevator_said_no|g_floor_elevator|floor_elevator_open)$": "owner, 2026-11-17 (second trawl): the building's height in storeys (data/reference/building_stories.csv) and the floor-and-elevator rule's result (parsers.floor_elevator_rule), gate inputs asserted in this script",
     r"^(near_vs_baseline|crime_latest|crime_source|crime_year|nyc_record_flags)$": "context shown when she asks how a score was reached",
     r"^nycrec_": "NYC record counts by period: shown in the building's record summary; flags derived from them drive the avoid rule",
     r"^near250_.*_(2023|2025|borough_median|above_borough_p80)$": "context for the nearby-crime figures",
@@ -85,18 +89,31 @@ def shown_violations():
     # in a way the floor rule does not accept; dogs conflicting) and must then carry the asterisk fields.
     # A fact that fails outright (no elevator, floor under 2, dogs not allowed) is never shown.
     el = col("elevator").str.lower()
-    flag(el.isin(["no", "conflicting"]), "elevator contradicted or conflicting")
     # the one elevator rule (parsers.elevator_rule), recomputed here from the shown row; the reviewer's asterisk is in open_keys
     def _g(r):
         return lambda c: "" if c not in r or pd.isna(r[c]) else (str(r[c])[:-2] if c == "unit_floor" and str(r[c]).endswith(".0") else str(r[c]))
-    st_el = pd.Series([parsers.elevator_rule_master(_g(r))[0] for r in S.to_dict("records")], index=S.index, dtype=object)
-    flag(st_el.isin(["unknown", "no"]), "elevator not established by the elevator rule (no page, record or real height)")
+    recs = S.to_dict("records")
+    said_no = (col("elevator_said_no") == "yes").values
+    st_el = pd.Series([parsers.elevator_rule_master(_g(r))[0] for r in recs], index=S.index, dtype=object)
+    # owner, 2026-11-17: floor and elevator together (parsers.floor_elevator_rule). A shown unit either has an elevator
+    # established, or is on floor 2, or carries ONE open fact (the elevator in doubt, or floor_or_elevator); a walk-up on
+    # floor 3+, a ground-floor unit, or floor 3+ with no elevator stated anywhere is never shown.
+    fe = [parsers.floor_elevator_master(_g(r), "no" if n_ else e) for r, e, n_ in zip(recs, st_el, said_no)]
+    fe_st = pd.Series([x[0] for x in fe], index=S.index, dtype=object)
+    fe_code = pd.Series([x[1] for x in fe], index=S.index, dtype=object)
+    flag(fe_st == "fail", "fails the floor-and-elevator rule (ground floor, or no elevator on floor 3 or above)")
+    flag(fe_st == "unknown", "floor 3 or above and no elevator established by the elevator rule (no page, record or real height)")
+    flag(el.isin(["no", "conflicting"]) & (fe_code == "") , "elevator contradicted or conflicting, but the unit passes as if it had one")
+    st_el_rev = pd.Series([parsers.elevator_rule_master(_g(r), reviewer_open=True)[0] for r in recs], index=S.index, dtype=object)
+    fe_rev = [parsers.floor_elevator_master(_g(r), "no" if n_ else e) for r, e, n_ in zip(recs, st_el_rev, said_no)]
+    rev_e_counts = pd.Series([x[0] == "open" and x[1] == "elevator" for x in fe_rev], index=S.index)    # a reviewer's elevator asterisk still counts here
     # owner, 2026-11-16: only a real apartment is shown (not a floor plan, a building page's price or a co-living room)
     flag(col("listing_kind") != "unit", "not a real apartment (floor plan, building price or co-living room)")
     # owner, 2026-11-16: a neighborhood shown with ONE apartment shows it only when nothing about it is open
     lone = S.hood_id.map(S.groupby("hood_id").size()) == 1
     flag(lone & (col("confirm_asterisk") == "yes"), "the only apartment shown in its neighborhood has something open (thin-neighborhood rule)")
-    open_e = st_el != "established"
+    open_e = (fe_st == "open") & (fe_code == "elevator")
+    open_fe = (fe_st == "open") & (fe_code == parsers.FLOOR_OR_ELEVATOR_CODE)
     fl, fb, fk = num("unit_floor"), col("unit_floor_basis"), col("unit_floor_label_kind")
     flag(fl < 2, "floor under 2")
     open_f = ~(fb.isin(["confirmed_by_phone", "confirmed", "stated"]) | ((fb == "inferred") & (fk == "simple") & (fl >= 3)))
@@ -136,8 +153,8 @@ def shown_violations():
     # GATE facts count toward "at most one open"; DISCLOSURES (lease term, cost near the cap, condo rented by its owner,
     # net-effective rent) never do, but must be listed on the unit (owner, 2026-11-16)
     # (a floor that is not published is a disclosure too: owner, 2026-11-16; a floor under 2 is still flagged above)
-    opens = {"elevator": open_e, "dogs allowed": open_d, "availability": open_avail, "listing": open_listing, "eligibility": (col("eligibility_open") != "") | (col("cond_not_normal_lease") != "")}
-    not_published = ~fb.isin(["confirmed_by_phone", "confirmed", "stated"])
+    opens = {"elevator": open_e, parsers.FLOOR_OR_ELEVATOR_LABEL: open_fe, "dogs allowed": open_d, "availability": open_avail, "listing": open_listing, "eligibility": (col("eligibility_open") != "") | (col("cond_not_normal_lease") != "")}
+    not_published = ~fb.isin(["confirmed_by_phone", "confirmed", "stated"]) & ~open_fe     # floor_or_elevator already asks for the floor
     flag(not_published & ~col("disclosures").str.contains('"what": "floor not published"', regex=False), "floor not published but the disclosure is missing")
     flag(not_published & ~col("tour_confirm").str.contains("confirm it is above the ground floor"), "floor not published but the tour question is missing")
     disc = col("disclosures")
@@ -179,7 +196,10 @@ def shown_violations():
     # 4b: staleness by rule is the open item "listing"; where the reviewer wrote the same doubt up as availability it counts once
     opens["listing"] = opens["listing"] & ~(vgate.map(lambda ks: "availability" in ks) & (~warn0 | stale_only_warning) & ~col("live_notes").map(parsers.price_doubt) & ~place_flag & ~sib12)
     for lab in opens:
-        opens[lab] = opens[lab] | (vgate.map(lambda ks, lab=lab: lab in ks) & ~by_phone(lab))
+        opens[lab] = opens[lab] | (vgate.map(lambda ks, lab=lab: lab in ks) & ~by_phone(lab) & (rev_e_counts | open_fe if lab == "elevator" else True))
+    # (a reviewer's elevator asterisk on a unit the floor-and-elevator rule settles on floor 2 is not an open item; on a
+    # unit already open as floor_or_elevator it is the same fact, counted once)
+    opens["elevator"] = opens["elevator"] & ~open_fe
     # D2: sibling consistency on unit numbers a reviewer read as first-floor
     rem = {}
     for l, d in VU.items():
@@ -229,6 +249,9 @@ def shown_violations():
     flag(size_only & ~(col("dog_size_note").ne("") & col("tour_confirm").str.contains("dog weight limit")), "size-only dog policy shown without its note and tour question")
     flag(wl < MIN_DOG_LB, f"dog weight limit under {MIN_DOG_LB} lb")
     flag(~(num("all_in") <= CAP), f"all-in over ${CAP:,} or missing")
+    # owner, 2026-11-17 (second trawl): nothing above $2,200 listed base rent (the price the live check saw, else the listing's)
+    cur_rent = num("live_price").where(col("live_status").isin(["live", "changed"]) & num("live_price").notna(), num("listed_rent"))
+    flag(cur_rent > RENT_MAX, f"listed base rent over ${RENT_MAX:,}")
     av = col("available_date").str.strip().str.lower()
     flag(~(av.isin(["now", "available now", "immediately"]) | (av.str.match(r"\d{4}-\d{2}-\d{2}") & (av.str[:10] <= WINDOW_END))), f"available after {WINDOW_END} or date unknown")
     key = S.building_id + "|" + S.unit.map(parsers.unit_key)

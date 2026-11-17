@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: *?*filter_by*
+Disallow: /rooms-for-rent*
+Disallow: /for-rent/uws
+Disallow: /for-sale/uws
+Disallow: /for-rent/ues
+Disallow: /for-sale/ues
+Disallow: /for-rent/greater-manhattan
+Disallow: /for-sale/greater-manhattan
+Sitemap: https://propertyclub.nyc/sitemap.xml

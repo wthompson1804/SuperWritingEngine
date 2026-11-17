@@ -23,6 +23,11 @@ been read and a verdict written:
                among the unit's disclosures. Any number of them may sit beside at most one open gate fact.
   ok        -> nothing added; the rules' own asterisks still apply. A verdict never closes a fact the rules leave open.
 
+  Floor and elevator (owner, 2026-11-17): the elevator is judged together with the floor (parsers.floor_elevator_rule).
+  'asterisk | elevator' keeps the elevator in doubt: it is an open fact on floor 3+ or an unknown floor, and nothing on
+  floor 2, where no elevator is needed. 'remove | elevator' alone is read as "no elevator" (scripts/rank.py): it removes
+  a unit on floor 3 or above and leaves a floor-2 apartment. The digest prints the rule's result (floor+elevator=...).
+
 scripts/check_registry.py fails the run when a shown unit has no verdict of ok / asterisk, or when its verdict was
 written against older evidence (the fingerprint no longer matches): new evidence must be read before the unit is shown.
 
@@ -228,7 +233,8 @@ def digest(S: pd.DataFrame, numbered: dict, full=False) -> str:
                    f"dob_el={g(r0, 'dob_active_elevators')} | floors {g(r0, 'building_floors')}({g(r0, 'building_floors_basis')}) type={g(r0, 'building_type')[:40]}")
         for _, r in grp.iterrows():
             out.append(f"#{numbered[r.listing_id]} unit '{g(r, 'unit')}' {g(r, 'source_site')} rent {g(r, 'listed_rent')} all-in {g(r, 'all_in')} avail {g(r, 'available_date')} | rules: {g(r, 'confirm_what') or 'nothing open'} | "
-                       f"elev={g(r, 'elevator')}({g(r, 'elevator_basis')}) floor={g(r, 'unit_floor')}({g(r, 'unit_floor_basis')}/{g(r, 'unit_floor_label_kind')}) dogs={g(r, 'dogs_allowed')}({g(r, 'dogs_allowed_basis')}) "
+                       f"elev={g(r, 'elevator')}({g(r, 'elevator_basis')}) floor={g(r, 'unit_floor')}({g(r, 'unit_floor_basis')}/{g(r, 'unit_floor_label_kind')}) "
+                       f"floor+elevator={g(r, 'floor_elevator_status')}/{g(r, 'floor_elevator_code') or '-'} storeys={g(r, 'building_stories')}({g(r, 'building_stories_basis')}) dogs={g(r, 'dogs_allowed')}({g(r, 'dogs_allowed_basis')}) "
                        f"wl={g(r, 'dog_weight_limit_lb')} small={'y' if g(r, 'dog_size_only') else ''} live={g(r, 'live_status')} lease={g(r, 'price_lease_months')} age={g(r, 'listing_age_days')} "
                        f""
                        + (f"notes='{g(r, 'notes')[:200]}'" if CAUTION.search(g(r, "notes")) else ""))

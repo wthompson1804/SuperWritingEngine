@@ -1,0 +1,7 @@
+{
+ "url": "https://services3.arcgis.com/3FL1kr7L4LvwA2Kb/arcgis/rest/services/Connecticut_CAMA_and_Parcel_Layer_2025/FeatureServer/0?f=json",
+ "retrieved_at": "2026-11-17T16:48:23+00:00",
+ "status": 200,
+ "path": "raw/building_stories/probe/bbdb5783c9db9146.json",
+ "source": "building_stories/probe"
+}

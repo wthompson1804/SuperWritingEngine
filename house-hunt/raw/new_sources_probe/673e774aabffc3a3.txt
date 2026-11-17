@@ -1,0 +1,68 @@
+Sitemap: https://www.listingsproject.com/sitemap.xml
+
+User-agent: Twitterbot
+Disallow:
+
+# AI model-training crawlers.
+#
+# These bots bulk-collect content to train LLMs. They MAY train on our
+# editorial, marketing, and support pages (home, blog/resources, about,
+# how-we-work, press, community agreements, etc.) but NOT on user-generated
+# listings or our legal policies.
+#
+# Note: live answer-engine crawlers (e.g. ChatGPT-User, OAI-SearchBot,
+# PerplexityBot, Perplexity-User, Claude-User, Amzn-SearchBot, Amzn-User) are
+# intentionally NOT listed here. They fall through to the "User-agent: *"
+# rules below and may fetch any public page to answer a user's question and
+# cite us. Search crawlers
+# (Googlebot, Bingbot, Applebot) are likewise unaffected — Google-Extended and
+# Applebot-Extended are the training-only tokens and do not control search.
+# Amazon likewise splits its crawlers (developer.amazon.com/amazonbot):
+# Amazonbot "may be used to train Amazon AI models", so it is blocked below;
+# Amzn-SearchBot (search, Alexa answers) and Amzn-User (live user fetches) do
+# not train and stay allowed. Each Amazon token is independent.
+# Don't reach for a noarchive meta tag to stop training: Bing reads it as
+# "exclude from Copilot answers", which would block answer engines we allow.
+# Tokens follow the ai.robots.txt registry (github.com/ai-robots-txt) plus the
+# names Ahrefs reports. Answer-engine tokens from the same vendors (GrokBot,
+# MistralAI-User, cohere-ai, Diffbot-User) are deliberately left out.
+User-agent: GPTBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: FacebookBot
+User-agent: DeepSeekBot
+User-agent: xAI-Bot
+User-agent: xAI-Grok
+User-agent: cohere-training-data-crawler
+User-agent: MistralAI-Training
+User-agent: AI2Bot
+User-agent: Ai2Bot-Dolma
+User-agent: Diffbot
+User-agent: Timpibot
+User-agent: omgili
+User-agent: omgilibot
+User-agent: ImagesiftBot
+User-agent: PanguBot
+Disallow: /manage/
+Disallow: /new_admin/
+Disallow: /account/
+Disallow: /listings
+Disallow: /real-estate
+Disallow: /jobs-and-gigs
+Disallow: /services
+Disallow: /terms-of-use
+Disallow: /privacy-policy
+Disallow: /refund-policy
+Disallow: /membership-terms-and-conditions
+Disallow: /cookies
+
+User-agent: *
+Disallow: /manage/
+Disallow: /new_admin/
+Disallow: /account/

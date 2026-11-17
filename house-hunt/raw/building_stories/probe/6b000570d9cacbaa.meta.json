@@ -1,0 +1,7 @@
+{
+ "url": "https://www.arcgis.com/sharing/rest/search?q=CAMA+parcel+Connecticut+owner%3ACTDEEP+OR+CAMA+Connecticut+2025&f=json&num=25",
+ "retrieved_at": "2026-11-17T16:47:56+00:00",
+ "status": 200,
+ "path": "raw/building_stories/probe/6b000570d9cacbaa.json",
+ "source": "building_stories/probe"
+}

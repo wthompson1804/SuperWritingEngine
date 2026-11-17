@@ -116,5 +116,47 @@
   "url": "https://brooklyneagle.com/robots.txt",
   "at": "2026-11-17T15:47:42+00:00",
   "by": "life_here"
+ },
+ "www.howardhanna.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.howardhanna.com/robots.txt",
+  "at": "2026-11-17T16:49:14+00:00",
+  "by": "new_sources_trawl2"
+ },
+ "www.bhhsneproperties.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.bhhsneproperties.com/robots.txt",
+  "at": "2026-11-17T16:49:22+00:00",
+  "by": "new_sources_trawl2"
+ },
+ "www.danielgale.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.danielgale.com/robots.txt",
+  "at": "2026-11-17T16:49:27+00:00",
+  "by": "new_sources_trawl2"
+ },
+ "www.signaturepremier.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.signaturepremier.com/terms-of-use",
+  "at": "2026-11-17T16:49:30+00:00",
+  "by": "new_sources_trawl2"
+ },
+ "www.kw.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.kw.com/robots.txt",
+  "at": "2026-11-17T16:49:31+00:00",
+  "by": "new_sources_trawl2"
+ },
+ "www.cityrealty.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.cityrealty.com/robots.txt",
+  "at": "2026-11-17T16:51:05+00:00",
+  "by": "new_sources_trawl2"
+ },
+ "www.homes.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.homes.com/robots.txt",
+  "at": "2026-11-17T16:51:22+00:00",
+  "by": "new_sources_trawl2"
  }
 }

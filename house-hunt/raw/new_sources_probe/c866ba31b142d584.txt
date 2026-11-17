@@ -1,0 +1,24 @@
+User-agent: *
+Disallow: /accounts/login/
+Disallow: /MyNest/schedule-showing/
+Disallow: /MyNest/email-a-listing/
+Disallow: /Finance/MortgageCalculator/
+Disallow: /MyNest/menu
+Disallow: /ajax/
+Disallow: /ajax_select/
+Disallow: /SYNC/
+Disallow: /x/
+Disallow: /a/
+Disallow: /admin/
+Disallow: /ckeditor/
+Disallow: /feed/
+Disallow: /api/private/
+Disallow: /lev/
+Disallow: /availability/
+Disallow: /Bldg/lev/
+Disallow: /mailings/bounced/
+Disallow: /properties/quicksearch
+# Legacy listing search param, now 301-redirected
+Disallow: /*?format=
+Disallow: /*&format=
+Sitemap: https://feeds.nestseekers.com/sitemap.xml

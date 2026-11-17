@@ -1522,6 +1522,106 @@ def elevator_rule_master(get, reviewer_open=False, use_doubt=True):
         high_rise_own_page="inferred_high_rise_label" in hb or (is_high_rise(get("building_type")) and get("building_type_basis") == "community_page"))
 
 
+# ---- floor and elevator together (owner, 2026-11-17, "Second trawl"; replaces "elevator buildings only")
+# A building without an elevator is allowed when the apartment is on floor 2 (one flight up); the ground floor stays
+# out; floor 3 and above need an elevator; with no elevator stated and no floor stated, that is ONE open gate fact.
+#
+#   floor (as the rule counts it)   elevator established   open (doubt / height)   no / conflicting   unknown
+#   1 or ground                     fail                   fail                    fail               fail
+#   2                               settled                settled                 settled            settled
+#   3 and above                     settled                open: elevator          fail               unknown (not shown)
+#   not known                       settled (disclosure)   open: elevator          open: floor_or_elevator
+#                                                                                                     open: floor_or_elevator
+# Floor: stated or confirmed on a page or by phone ('page'), or read from the apartment number ('label': a simple label
+# such as '2B' or '305', a ground word, a complex's reviewed numbering convention, a tower label; it carries the
+# disclosure "read from the apartment number"). A reading that needed the building's floor count to choose among
+# several ('weak') only ever fails a unit (floor 1); it never passes one.
+# Building height (data/reference/building_stories.csv, build_master.py): an official record of ONE storey puts every
+# apartment on the ground floor (fail) unless a page states another floor; a building of 1-2 storeys (official record,
+# OpenStreetMap or a listing) has no floor 3, so a label reading above its height is not a floor, and an elevator in
+# doubt there is asked as floor_or_elevator. OpenStreetMap never infers an elevator (it is not passed as a height).
+WALKUP_MAX_FLOOR = 2
+FLOOR_OR_ELEVATOR_CODE = "floor_or_elevator"
+FLOOR_OR_ELEVATOR_Q = "Confirm the floor, and whether there is an elevator"
+FLOOR_OR_ELEVATOR_LABEL = "floor and elevator"
+FLOOR_2_WALKUP_Q = "it must be floor 2 (one flight up): no elevator is confirmed here"
+STORIES_BASES = ("official_record", "osm", "listing")
+_FLOOR_PAGE_BASES = ("confirmed_by_phone", "confirmed", "stated")
+
+
+def floor_how(unit_floor_basis="", label_kind="", reading=None):
+    """How the floor of a master / listing row counts in floor_elevator_rule: 'page', 'label', 'weak' or ''.
+      unit_floor_basis  confirmed_by_phone / confirmed / stated -> 'page'; inferred -> 'label' for a simple label or a
+                        ground word, 'weak' for a 'complex' reading; anything else -> ''
+      reading           a floor read under the complex's reviewed numbering convention or as a tower label -> 'label'"""
+    b, k = str(unit_floor_basis or "").strip(), str(label_kind or "").strip()
+    if b in _FLOOR_PAGE_BASES:
+        return "page"
+    if b == "inferred" and k in ("simple", "ground_word"):
+        return "label"
+    if _num(reading) is not None:
+        return "label"
+    if b == "inferred":
+        return "weak"
+    return ""
+
+
+def floor_elevator_rule(elevator, floor=None, how="", stories=None, stories_basis=""):
+    """The floor-and-elevator gate (truth table above). Returns (status, code):
+      status  'settled' | 'open' | 'fail' | 'unknown'
+      code    ''                        settled with an elevator
+              'floor_2'                 settled: floor 2, no elevator needed
+              'elevator'                open: the existing elevator fact ("Confirm an elevator serves this apartment")
+              'floor_or_elevator'       open: "Confirm the floor, and whether there is an elevator"
+              'ground_floor'            fail: floor 1 or ground
+              'one_storey_building'     fail: an official record gives the building one storey
+              'no_elevator_above_floor_2'  fail: floor 3 or above with no elevator (or the sources conflict)
+    elevator: the status of elevator_rule ('established' / 'open' / 'no' / 'unknown'; 'conflicting' counts as 'no').
+    floor, how: the floor and how it counts (floor_how). stories, stories_basis: the building's height in storeys."""
+    el = str(elevator or "").strip().lower()
+    el = "no" if el == "conflicting" else el
+    f, how = _num(floor), str(how or "")
+    if how not in ("page", "label", "weak"):
+        f = None
+    st = _num(stories) if str(stories_basis or "") in STORIES_BASES else None
+    st = st if st is not None and st >= 1 else None
+    low = st is not None and st <= WALKUP_MAX_FLOOR
+    if f is not None and how != "page" and st is not None and f > st:
+        f = None                                    # a label reading above the building's height is not a floor
+    if f is None and st == 1 and stories_basis == "official_record":
+        return "fail", "one_storey_building"
+    if f is not None and f < 2:
+        return "fail", "ground_floor"
+    if f is not None and how == "weak":
+        f = None                                    # a weak reading only fails; for anything else the floor is not known
+    if el == "established":
+        return "settled", ""
+    if f is not None and int(f) == WALKUP_MAX_FLOOR:
+        return "settled", "floor_2"
+    if f is not None:                               # floor 3 and above
+        if el == "no":
+            return "fail", "no_elevator_above_floor_2"
+        if el == "open":
+            return "open", "elevator"
+        return "unknown", ""
+    if el == "open" and not low:
+        return "open", "elevator"
+    return "open", FLOOR_OR_ELEVATOR_CODE
+
+
+def floor_elevator_master(get, elevator_status):
+    """floor_elevator_rule on a row of the master / ranked tables (rank.py, check_registry.py, verdicts.py). `get(column)`
+    returns the row's value as a string ('' when missing); elevator_status is elevator_rule_master's status, or
+    'conflicting' when the merged elevator says so."""
+    how = floor_how(get("unit_floor_basis"), get("unit_floor_label_kind"), get("unit_floor_reading"))
+    f = get("unit_floor")
+    if how == "label" and _num(f) is None:
+        f = get("unit_floor_reading")
+    elif how == "label" and get("unit_floor_basis") == "inferred" and _num(get("unit_floor_reading")) is not None:
+        f = get("unit_floor_reading")              # the complex's reviewed convention outranks the plain label reading
+    return floor_elevator_rule(elevator_status, f, how, get("building_stories"), get("building_stories_basis"))
+
+
 # ---- secrets in URLs: a third party's API key must never sit in a data file (Trulia's Street View links carried one)
 _URL_SECRET = re.compile(r"(?<=[?&])(?:key|api_key|apikey|token|signature|sig|access_token)=[^&\s\"',]*&?", re.I)
 

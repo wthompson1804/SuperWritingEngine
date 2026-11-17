@@ -1,0 +1,62 @@
+{
+ "started": "2026-11-17T16:52:10+00:00",
+ "args": {
+  "refresh": false,
+  "trawl2": true,
+  "max_age_hours": 24.0,
+  "max_drive": 120.0,
+  "only": "",
+  "fetch_max_low": 2200.0,
+  "reparse": false,
+  "min_drive": 0,
+  "minutes": 0
+ },
+ "srp_pages": 34,
+ "props_considered": 25,
+ "props_skipped_lowprice": 12,
+ "props_read": 13,
+ "reasons": {
+  "ok": 13
+ },
+ "transient": [],
+ "blocked": null,
+ "unparsed_pages": [],
+ "cities_done": [
+  {
+   "city": "nj/fort-lee",
+   "group": "New Jersey",
+   "drive_min": 28.5,
+   "props": 21,
+   "read": 10
+  },
+  {
+   "city": "nj/leonia",
+   "group": "New Jersey",
+   "drive_min": 29.2,
+   "props": 4,
+   "read": 3
+  }
+ ],
+ "cities_unmatched_far": [
+  {
+   "city": "ct/bloomfield",
+   "km_to_grid": 40.7
+  },
+  {
+   "city": "nj/riverside",
+   "km_to_grid": 10.9
+  },
+  {
+   "city": "pa/cranberry-township",
+   "km_to_grid": 418.0
+  },
+  {
+   "city": "pa/fernway",
+   "km_to_grid": 420.3
+  },
+  {
+   "city": "pa/fox-run",
+   "km_to_grid": 416.1
+  }
+ ]
+}

@@ -50,9 +50,11 @@ HOST = "www.zumper.com"
 KILL_KEY = "zumper.com"
 lib.HOST_DELAY[HOST] = 4.0          # floor between requests; a random 0.5-2.5 s is added on top of it
 JITTER = (0.5, 2.5)
-CAP = 900                           # hard cap on requests to zumper.com by this script, across restarts
+# Hard cap on requests to zumper.com by this script, across restarts. 900 were spent on 2026-11-16; the second trawl
+# (2026-11-17) raises it to 1,700 for the selected URLs at or under $2,200, priority areas first.
+CAP = 1700
 SRC = "zumper_open_pending"
-RENT_SELECT = 2800
+RENT_SELECT = 2200                  # second trawl: only selected URLs whose card rent is at or under $2,200 are fetched
 OUT = lib.DATA / "listings_pending"
 SEL_F = OUT / "zumper_open_selection.csv"
 FUNNEL_F = OUT / "zumper_open_funnel.json"
@@ -302,8 +304,23 @@ def select():
 
 
 # ---------------------------------------------------------------- fetch
+def fetch_order(sel):
+    """Second trawl: keep the selected URLs whose card rent is at or under RENT_SELECT; priority areas (NJ, Brooklyn,
+    CT, Long Island, LIC) first, then the rest, each in the original selection order."""
+    out = []
+    for row in sel:
+        try:
+            if float(row["min_rent"]) > RENT_SELECT:
+                continue
+        except ValueError:
+            continue
+        z = row["bkey"].rsplit("|", 1)[-1]
+        out.append((0 if hz.area_of(z, row["state"]) in hz.PRIORITY_AREAS else 1, int(row["order"]), row))
+    return [r for _, _, r in sorted(out, key=lambda x: (x[0], x[1]))]
+
+
 def fetch(limit: int | None = None):
-    sel = list(csv.DictReader(open(SEL_F)))
+    sel = fetch_order(list(csv.DictReader(open(SEL_F))))
     log = req_log()
     done = {r["url"] for r in log if r.get("outcome") in ("ok", "gone", "unparsed", "no_entity")}
     n_req = sum(1 for r in log if r.get("counted"))
@@ -434,7 +451,7 @@ def fill_common(r, f, block):
     r["other_monthly_fees_json"] = json.dumps(blob, ensure_ascii=False) if blob else ""
 
 
-def unit_row(L, url, seen, raw_path, bld, f, block, kind, cards, seen_day):
+def unit_row(L, url, seen, raw_path, bld, f, block, kind, cards, seen_day, vt=""):
     loc = L.get("listing_location") or {}
     r = base_row(L["listing_id"], url, seen, raw_path)
     fill_common(r, f, block)
@@ -459,26 +476,12 @@ def unit_row(L, url, seen, raw_path, bld, f, block, kind, cards, seen_day):
     r["unit"] = unit
     r["floor"] = loc.get("floor") if loc.get("floor") is not None else ""
     if r["floor"] == "":
-        ORD = (r"(ground|first|1st|second|2nd|third|3rd|fourth|4th|fifth|5th|sixth|6th|seventh|7th|"
-               r"eighth|8th|ninth|9th|tenth|10th|\d{1,2}(?:st|nd|rd|th))")
+        # second trawl: every floor statement about the apartment in its own description and title
         own = (L.get("description") or "") + " " + (L.get("short_description") or "") + " " + title
-        m = re.search(r"\b(?:located|situated|unit|apartment|apt|studio|bedroom|home|residence|is) (?:is )?"
-                      r"(?:conveniently )?(?:located |situated )?on the " + ORD + r"[- ]floor\b", own, re.I) or \
-            re.search(r"\b" + ORD + r"[- ]floor (?:unit|apartment|apt|studio|one[- ]bedroom|1[- ]?(?:br|bed(?:room)?)|"
-                      r"walk[- ]?up|corner|rear|front)\b", own, re.I)
-        if m:
-            w = m.group(1).lower()
-            n = {"ground": 1, "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6,
-                 "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10}.get(w)
-            if n is None and w[0].isdigit():
-                n = int(re.match(r"\d+", w).group(0))
-            if n:
-                r["floor"] = n
-                notes.append(f"floor from description text: '{m.group(0)}'" + (" (ground)" if w == "ground" else ""))
-        else:
-            m = re.search(r"\b" + ORD + r"[- ]floor\b", own, re.I)
-            if m:
-                notes.append(f"floor text in description (not used): '{m.group(0)}'")
+        fl, fnotes = hz.floor_from_text(own)
+        if fl is not None:
+            r["floor"] = fl
+        notes += fnotes
     r["beds"] = L.get("bedrooms") if L.get("bedrooms") is not None else ""
     hb = L.get("half_bathrooms") or 0
     ba = L.get("bathrooms")
@@ -487,7 +490,7 @@ def unit_row(L, url, seen, raw_path, bld, f, block, kind, cards, seen_day):
     card = cards.get(L.get("listing_id")) or {}
     if r["sqft"] == "":
         cs = card.get("card", {}).get("min_square_feet")
-        if cs:
+        if cs and cs < 100000:          # the card can carry a sentinel (9223372036854776000)
             notes.append(f"sqft absent on detail page; search card showed {cs}")
     price = L.get("min_price") if L.get("min_price") is not None else L.get("price")
     r["listed_rent"] = price
@@ -551,6 +554,9 @@ def unit_row(L, url, seen, raw_path, bld, f, block, kind, cards, seen_day):
                 r["dog_weight_limit_lb"] = wm.group(1)
                 notes.append("weight limit from description")
                 break
+    # second trawl: elevator stated on the page, dogs stated in the description, move-in date stated in the
+    # description (h_zumper.page_text_facts; it also reads the page-data weight limit below when dogs are allowed)
+    hz.page_text_facts(r, L, bld, desc, vt, notes, seen_day)
     # DIFF: the page-data pet policy carries `max_wt_in_lbs`, which the harvester's "NN lb" pattern does not see.
     # Used only when no limit was found above: the largest limit among the dog entries that are allowed.
     if not r["dog_weight_limit_lb"]:
@@ -715,8 +721,9 @@ def build(quiet=False):
                     why = ("opened", "page shows 2+ bedrooms (or none stated); not written to zumper_opened.csv")
                 else:
                     p = U.get("min_price") if U.get("min_price") is not None else U.get("price")
-                    if p is None or p > hz.MAX_RENT:
-                        why = ("opened", f"page price {p} is over $3,000 (or absent); not written to zumper_opened.csv")
+                    cap = hz.rent_cap(lid, seen)
+                    if p is None or p > cap:
+                        why = ("opened", f"page price {p} is over ${cap:,} (or absent); not written to zumper_opened.csv")
                 if why:
                     sid = tail.get(lid)
                     if sid:
@@ -729,7 +736,7 @@ def build(quiet=False):
                 for k in ("dogs", "dog_policy_text", "dog_weight_limit_lb", "elevator", "building_floors"):
                     fu[k] = f[k]
                 fu["_notes"] = f["_notes"]
-                r = unit_row(U, s["path"], seen, rawp, ent, fu, block, "building", cards, seen_day)
+                r = unit_row(U, s["path"], seen, rawp, ent, fu, block, "building", cards, seen_day, vt)
                 if lid in tail:
                     sel_id[lid] = tail[lid]
                 r["selected_card_row"] = "yes" if lid in tail else ("no (other card row)" if lid in card_ids else "no (unit found on the building page)")
@@ -763,10 +770,11 @@ def build(quiet=False):
                     summ[target].update(status="opened", g_type="fail", preview_status="fail", fail_gates="type", pf_status="fail", pf_fail_gates="type",
                                         note="page shows 2+ bedrooms (or none stated); not written to zumper_opened.csv")
                 continue
-            if p is None or p > hz.MAX_RENT:
+            cap = hz.rent_cap(lid, seen)
+            if p is None or p > cap:
                 if attach:
                     summ[target].update(status="opened", g_rent="fail", preview_status="fail", fail_gates="rent", pf_status="fail", pf_fail_gates="rent",
-                                        note=f"page price {p} is over $3,000 (or absent); not written to zumper_opened.csv")
+                                        note=f"page price {p} is over ${cap:,} (or absent); not written to zumper_opened.csv")
                 continue
             bld, bvt, bblock = None, "", ""
             if ent.get("pb_id") and ent.get("pb_url"):
@@ -778,7 +786,7 @@ def build(quiet=False):
                         bvt = hz.visible_text(bp.read_text("utf8", "replace"))
                         bblock = hz.fees_block(bvt)
             f = hz.facts_from(ent, vt, bld, bvt)
-            r = unit_row(ent, s["path"], seen, rawp, bld, f, hz.fees_block(vt) or bblock, "listing", cards, seen_day)
+            r = unit_row(ent, s["path"], seen, rawp, bld, f, hz.fees_block(vt) or bblock, "listing", cards, seen_day, vt)
             r["hood_id"], r["hood_basis"] = s["hood_id"], s["hood_basis"]
             if not own:
                 ownp = hz.to_path(ent.get("url") or "")
@@ -871,7 +879,7 @@ def build(quiet=False):
                     building_name=r["building_name"], address=r["address"], unit=r["unit"], beds=r["beds"],
                     listed_rent=r["listed_rent"], available_date=r["available_date"], dogs=r["dogs"], dog_basis=dog_basis,
                     dog_weight_limit_lb=r["dog_weight_limit_lb"], elevator=r["elevator"], floor=r["floor"],
-                    rent_le_2800="yes" if gates.to_num(r["listed_rent"]) is not None and gates.to_num(r["listed_rent"]) <= RENT_SELECT else "no",
+                    rent_le_2800="yes" if gates.to_num(r["listed_rent"]) is not None and gates.to_num(r["listed_rent"]) <= 2800 else "no",
                     fail_gates=";".join(fails), unknown_gates=";".join(opens), n_unknown=len(opens),
                     preview_status="fail" if fails else ("pending" if opens else "pass"),
                     pf_g_dog=g2["g_dog"], pf_g_elevator=g2["g_elevator"], pf_elevator_basis=g2["elevator_basis"],

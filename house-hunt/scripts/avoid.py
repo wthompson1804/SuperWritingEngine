@@ -6,8 +6,11 @@ Outputs:
   data/avoid_buildings.csv    addr_key, avoid (yes/no), reasons, evidence_json, pause_notes  -> shown as avoid cards
   data/reference/ground_reading_unassigned.csv   checker's ground-floor readings that could not be tied to a unit
 Rules (Will, docs/PLAN_V3_APPROVED_2026-11-15.md, later amendments):
-  DROP   listing gone; dogs clearly not allowed, or the elevator contradicted, on the building's page; ground-floor unit;
-         listing the checker judged not open-market, not genuine, stale or a duplicate.
+  DROP   listing gone; dogs clearly not allowed on the building's page; ground-floor unit; listing the checker judged
+         not open-market, not genuine, stale or a duplicate.
+         "No elevator" (contradicted, or the checker's reading) is written with kind 'elevator': since the owner's
+         floor-and-elevator rule (2026-11-17) rank.py reads it as "no elevator", which removes floor 3 and above and
+         leaves a floor-2 apartment (and an unknown floor is one open fact, floor_or_elevator).
          NOT a drop: a dog policy that CONFLICTS between sources. That is one open gate fact (dogs), raised in
          scripts/rank.py; the building's own or its manager's page settles it.
   AVOID  car crime: 3+ independent reports at the building or its parking in 24 months, or (NYC, police-located
@@ -38,6 +41,15 @@ INELIGIBLE = re.compile(r"AGE-RESTRICTED|55\+ (?:only|senior|independent|communi
                         r"(?-i:WAITLIST)|No Units currently available|Rented/Leased|income[- ]restricted|income limits|Pet-free community|"
                         r"probably a dead listing|cannot be found|describes? a different building", re.I)
 BUILDING_WIDE = re.compile(r"AGE-RESTRICTED|55\+|senior housing|active adult|income[- ]restricted|income limits|Pet-free", re.I)
+ELEVATOR_KIND = "elevator"
+
+
+def is_elevator_exclusion(reason) -> bool:
+    """True for an exclusion that says only that the building has no elevator (contradicted, or the checker's reading):
+    under the floor-and-elevator rule (owner, 2026-11-17) it removes a unit on floor 3 or above, not one on floor 2."""
+    return str(reason).startswith(("elevator contradicted", "elevator not stated anywhere and the checker's reading"))
+
+
 NO_LIFT_READING = re.compile(r"probably (?:a )?walk-?up|probably no elevator|my reading: (?:no elevator|unlikely|probably)|My reading: unlikely|fits a small walk-?up|"
                              r"without elevators|came from the unit label only|height inference came from reading|low-rise garden|garden complex: probably", re.I)
 GROUND_READING = re.compile(r"ground|first[- ]floor|\bfloor 1\b|reading 1\b|^\s*\)?\s*:\s*1\b|:\s*1\?|:\s*1\b(?!\d)", re.I)
@@ -216,6 +228,10 @@ def main():
             if m and not NOT_COOP.search(t):
                 ex.append((r["addr_key"], "", "co-op rental (checker's note): " + _around(t, m), r.get(src, "")))
     X = pd.DataFrame([e if len(e) == 5 else e + ("",) for e in ex], columns=["addr_key", "unit", "reason", "source", "listing_id"]).drop_duplicates()
+    # owner, 2026-11-17 (second trawl): "no elevator" is no longer a removal by itself. A building without an elevator is
+    # allowed for an apartment on floor 2. These rows are marked kind 'elevator': scripts/rank.py reads them as "no
+    # elevator" for the floor-and-elevator rule (parsers.floor_elevator_rule) instead of excluding the unit outright.
+    X["kind"] = [ELEVATOR_KIND if is_elevator_exclusion(r) else "" for r in X.reason]
     # a whole-building row (unit == "" and no listing_id) excludes every unit; a row with listing_id excludes that row only
     X.to_csv(DATA / "unit_exclusions.csv", index=False)
     pd.DataFrame(unassigned, columns=["addr_key", "reading", "source"]).to_csv(DATA / "reference" / "ground_reading_unassigned.csv", index=False)

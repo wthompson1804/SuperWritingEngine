@@ -1,0 +1,31 @@
+User-agent: AhrefsBot
+Crawl-Delay: 120
+
+User-agent: MJ12bot
+User-agent: AwarioRssBot
+User-agent: AwarioSmartBot
+User-agent: barkrowler
+User-agent: Bytespider
+User-agent: PetalBot
+User-agent: BLEXBot
+User-agent: 360Spider
+User-agent: wpbot
+User-agent: CheckMarkNetwork/1.0 (+https://www.checkmarknetwork.com/spider.html)
+Disallow: /
+
+User-agent: dotbot
+Crawl-delay: 120
+
+User-agent: DotBot
+Crawl-delay: 120
+
+User-agent: SiteAuditBot
+Crawl-delay: 60
+Allow: /
+
+User-agent: SemrushBot
+Crawl-delay: 60
+Allow: /
+
+User-agent: msnbot
+Crawl-delay: 10

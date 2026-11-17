@@ -1,0 +1,1117 @@
+
+
+
+
+
+<!-- frag_includes-->
+
+
+<!doctype html>
+<html lang="en"  ng-app="NJGIN3StatusPage">
+  <head><script src="/Sprighter-a-newly-of-my-Louer-Entermittlemaine-I" async></script>
+	
+	 
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-P3V3PJ6');</script>
+	<!-- End Google Tag Manager -->
+	
+	
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+
+	<meta name="robots" content="noarchive" />
+	<meta name="googlebot" content="noarchive" />
+	<title>NJ Geographic Information Network | Parcels</title>
+	<meta name="author" content="dkarman"/>
+	<meta name="revised" content="08/27/2026"/>
+	<meta name="keywords" content="State, NJ, Geographic, Information, Network, Parcels"/>
+	<meta name="description" content="Parcels"/>
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="NJ Geographic Information Network" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:site_name" content="Geographic Information Network" />
+	<meta property="og:url" content="https://www.nj.gov/njgin/edata/parcels/" />
+
+	<meta property="og:description"  content="The New Jersey Geographic Information Network (NJGIN) was founded by the NJ Office of Information Technology, Office of GIS in 2001 to facilitate the sharing of geospatial content in the NJ GIS community. The network consists of a loose federation of data stewards across the state that openly share their valuable spatial data." />
+	<meta property="og:image" content="https://nj.gov/njgin/assets/slices/njgin_logo.png" />
+	<meta property="og:image:alt" content="NJGIN Logo" />
+
+	
+	<link rel="stylesheet" href="/nj/design/bootstrap/css/bootstrap.min.css" />
+	<!--/nj/design/css/bootstrap.min.css-->
+		
+	<link href="/nj/design/css/sonj-components.css?v=2026.02.13" rel="stylesheet" type="text/css" />
+
+	<link href="/nj/design/css/site-base.css?v=2022.04.06" rel="stylesheet" type="text/css" />
+	
+	<link rel="stylesheet" type="text/css" href="/nj/design/util/slick/slick.css" />
+
+	<link rel="stylesheet" type="text/css" href="/nj/design/util/slick/slick-theme.css" />
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="/njgin/assets/spotlight/css/ogis_njgin3_main.css"/>
+	<link href="/njgin/assets/css/nj-components.css" rel="stylesheet" type="text/css"  />
+	<link href="/njgin/assets/css/site-custom.css?v=2026.04.20" rel="stylesheet" type="text/css"  />
+	<link href="/njgin/assets/css/spots.css" rel="stylesheet" />
+	<link rel="shortcut icon" href="/njgin/assets/images/favicon.ico"/>
+	
+	</head>
+	<body id="njgin">
+ 
+	 
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src=https://www.googletagmanager.com/ns.html?id=GTM-P3V3PJ6
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+	
+
+
+
+	<div class="skip sr-only"><a href="#content" class="text-dark">Skip to Content</a></div>
+
+	
+	<style>
+header.sonj li.sonj-translate >a{background: #ffffff;color:#000000!important;border-radius: .25rem;}
+header.sonj li.sonj-translate >a{color:#000000!important}
+p.disclaimer {color:#fff!important;}
+p.disclaimer >a{color:#fff!important;}
+</style>
+
+
+<header class="sonj  ">
+<div class="row justify-content-center no-gutters mx-0 px-1">
+		<div id="logo" class="col-sm-8 col-lg-4 col-xl-4">
+			<h1 class="my-2"><a href="https://nj.gov/" title="Go to NJ.gov Home"><img src="/nj/design/images/state_seal_white.png" alt="State of New Jersey Seal" title="Go to  The State of New Jersey Website">Official Site of The State of New Jersey</a></h1>
+		</div>
+		<div class=" col-sm-4 col-lg-6 col-xl-6">
+		  <div class="gov-bar text-right d-none d-lg-block"><a href="https://nj.gov/governor/" target="_blank" title="go to governor website">Governor Mikie Sherrill &bull; Lt. Governor Shirley U. Emehelu</a> </div>
+		  <ul  class="my-sm-2 my-lg-0 social statewide text-right">
+			  <li class="sonj-translate px-md-3" style="border-right:0">
+			  								<a href="#" class="" style="padding: 2px 5px; font-weight: 400;">Translate <i class="fas fa-language fa-lg"></i></a>
+			  							<div class="drop px-4 pb-3">
+			  			<div id="translate-widget-container"></div>
+			  				<script src="/nj/design/js/translate-widget.js"></script>
+			  		<p class="disclaimer pt-3 pb-0 text-left">
+					<!--The State of NJ site may include optional links, information, services, and content from third-party websites for user convenience, such as language translation services. These translation tools are free online services that provide language translations. Users are informed that neither the State of NJ site nor its operators review or endorse any services, information, or content from third-party links.<br>
+							-->
+							<a href="https://www.nj.gov/nj/about/translator/" target="_blank">Translation Disclaimer <i class="fas fa-link"></i></a></p>
+			  				<button type="button" role="button" aria-label="Close" class="pl-0 btn btn-link float-left drop-close"  style="color:#fff"><i class="fas fa-times-circle"></i> close</button>
+			  							</div>
+						</li>
+			<li class="d-none d-lg-inline"><a href="https://nj.gov" title="go to nj state website">NJ.gov</a></li>
+			<li class="d-none d-lg-inline"><a href="https://nj.gov/nj/gov/njgov/alphaserv.html" title="go to page to check NJ services">Services</a></li>
+			<li class="d-none d-lg-inline"><a href="https://nj.gov/nj/gov/deptserv/" title="view list of all the NJ Agencies">Agencies</a></li>
+			<li><a href="https://www.nj.gov/faqs/" aria-label="Frequently asked questions" title="Visit Frequently asked questions website"><span aria-hidden="true">FAQs</span><span class="sr-only">Frequently Asked Questions</span></a>
+
+
+			<!-- Add sign up header menu item -->
+						<li class="sonj-updates">
+							<a href="https://nj.gov/subscribe/" id="updates-label"  role="button" title="subscribe to get updates from NJe">Get Updates <i class="fas fa-envelope fa-lg"></i></a>
+							<div class="drop px-4 pb-3 pt-3 text-left">
+
+								<script src="https://beta.nj.gov/global-signup/embed.js"></script>
+								<div class="global-signup-header pb-5"></div>
+								<button type="button" class="pl-0 btn btn-link drop-close" style="color:#fff" role="button" aria-label="Close"><i class="fas fa-times-circle"></i> close</button>
+							</div>
+			</li>
+			<li class="sonj-search">
+				<a href="https://nj.gov/search/" id="search-label"  role="button" >Search <i class="fas fa-search"></i></a>
+				<div class="drop px-4 pb-3">
+
+					<form id="search" action="https://nj.gov/search/" name="search">
+						<div class="input-group pt-4"><label for="qt" class="visuallyhidden sr-only">Search: </label>
+							<input type="text" class="form-control p-1" placeholder="Type Search Here" aria-label="Search Query" aria-describedby="search-label" name="qt" id="qt">
+							<div class="input-group-append">
+								<button type="submit" class="input-group-text" aria-label="Submit Search" role="button" aria-label="Submit"><i class="fas fa-search fa-lg"></i></button>
+							</div>
+						</div>
+					</form>
+					<button type="button" class="pl-0 btn btn-link float-left drop-close"  style="color:#fff" role="button" aria-label="Close"><i class="fas fa-times-circle"></i> close</button>
+				</div>
+			</li>
+		  </ul>
+		</div>
+		</div>
+	  </header>
+	
+	<div class="container-fluid d-none d-lg-block"> 
+	  <div class="row justify-content-center ">
+		<div id="site-name" class="department col-12 col-xl-10 py-1">
+			<div class="row align-items-center">
+				<div class="col-9">
+					<h2 class="mb-0 mt-0"><span class="align-middle department"><header aria-label="Website title">NJ Geographic Information Network</header></span></h2>
+				</div>
+				<div class="col-3">
+					<img class="img-fluid float-right site-logo my-2" src="/njgin/assets/slices/njgin_logo.png" alt="Site Logo">
+				</div>
+			</div>
+		</div>
+	  </div>
+	</div>
+
+	
+
+<div class="container-fluid sonj-nav njgin department-level"> 
+	<div class="row justify-content-center ">
+		<div id="" class="col-12 col-xl-10">
+			<nav class="navbar navbar-expand-lg navbar-dark x-bg-light px-0 justify-content-between">
+			  <h2 class="navbar-brand x-mr-auto d-lg-none mb-0">NJ Geographic Information Network</h2>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-site" aria-controls="navbar-site" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+
+			  <div class="collapse navbar-collapse" id="navbar-site">
+				<ul class="navbar-nav mr-auto x-nav-pills">
+
+
+	<li class="nav-item  pr-4" id="njgin-pNav1" data-pnav="home"><a class="nav-link " href="/njgin/" target="_self" data-sNav_scalar="0"  >Home <i class="fas fa-home"></i></a>
+	</li>
+	<li class="nav-item dropdown pr-4" id="njgin-pNav2" data-pnav="about"><a class="nav-link dropdown-toggle" href="/njgin/about" target="_self" data-sNav_scalar="3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >About Us</a>
+		<ul class="dropdown-menu" aria-labelledby="njgin-pNav2">
+			<li><a href="/njgin/about/gin" class="dropdown-item" target="_self">NJGIN </a>
+			</li>
+			<li><a href="/njgin/about/ogis" class="dropdown-item" target="_self">NJ Office of GIS </a>
+			</li>
+			<li><a href="/njgin/about/contact-us" class="dropdown-item" target="_self">Contact Us </a>
+			</li>
+		</ul>
+	</li>
+	<li class="nav-item dropdown pr-4" id="njgin-pNav3" data-pnav="edata"><a class="nav-link dropdown-toggle" href="/njgin/edata" target="_self" data-sNav_scalar="10" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Geospatial Data</a>
+		<ul class="dropdown-menu" aria-labelledby="njgin-pNav3">
+			<li><a href="/njgin/edata/parcels" class="dropdown-item" target="_self">Parcels </a>
+			</li>
+			<li><a href="/njgin/edata/roads" class="dropdown-item" target="_self">Roads </a>
+			</li>
+			<li><a href="/njgin/edata/addresses" class="dropdown-item" target="_self">Addresses </a>
+			</li>
+			<li><a href="/njgin/edata/imagery" class="dropdown-item" target="_self">Imagery </a>
+			</li>
+			<li><a href="/njgin/edata/elevation" class="dropdown-item" target="_self">Elevation </a>
+			</li>
+			<li><a href="/njgin/edata/geocoding" class="dropdown-item" target="_self">Geocoding </a>
+			</li>
+			<li><a href="/njgin/edata/maps" class="dropdown-item" target="_self">Basemaps </a>
+			</li>
+			<li><a href="/njgin/edata/boundaries" class="dropdown-item" target="_self">Boundaries </a>
+			</li>
+			<li><a href="/njgin/edata/dataproducts" class="dropdown-item" target="_self">Additional Data Products </a>
+			</li>
+			<li><a href="/njgin/edata/retiredservices" class="dropdown-item" target="_self">Retired Services </a>
+			</li>
+		</ul>
+	</li>
+	<li class="nav-item dropdown pr-4" id="njgin-pNav4" data-pnav="sharing"><a class="nav-link dropdown-toggle" href="/njgin/sharing" target="_self" data-sNav_scalar="2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Data Sharing</a>
+		<ul class="dropdown-menu" aria-labelledby="njgin-pNav4">
+			<li><a href="/njgin/sharing/share" class="dropdown-item" target="_self">Share Your Data </a>
+			</li>
+			<li><a href="/njgin/sharing/support" class="dropdown-item" target="_self">Metadata Support </a>
+			</li>
+		</ul>
+	</li>
+	<li class="nav-item dropdown pr-4" id="njgin-pNav5" data-pnav="resources"><a class="nav-link dropdown-toggle" href="/njgin/resources" target="_self" data-sNav_scalar="3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Resources</a>
+		<ul class="dropdown-menu" aria-labelledby="njgin-pNav5">
+			<li><a href="/njgin/resources/contracts" class="dropdown-item" target="_self">State Contracts </a>
+			</li>
+			<li><a href="/njgin/resources/archives" class="dropdown-item" target="_self">News Archives </a>
+			</li>
+			<li><a href="https://www.nj.gov/treasury/taxation/lpt/localtax.shtml" class="dropdown-item" target="_blank">Digital Tax Map Standards <i class='fas fa-external-link-square-alt ml-1'></i></a>
+			</li>
+		</ul>
+	</li>
+	<li class="nav-item  pr-4" id="njgin-pNav6" data-pnav="open-data"><a class="nav-link " href="https://njogis-newjersey.opendata.arcgis.com" target="_blank" data-sNav_scalar="0"  >NJGIN Open Data<i class='fas fa-external-link-square-alt ml-1'></i></a>
+	</li>
+	<li class="nav-item  pr-4" id="njgin-pNav7" data-pnav="forum"><a class="nav-link " href="https://www.nj.gov/njgf/#!/" target="_blank" data-sNav_scalar="0"  >NJ Geospatial Forum<i class='fas fa-external-link-square-alt ml-1'></i></a>
+	</li>
+
+
+				</ul>
+			  </div>
+			</nav>
+		</div>
+	</div>
+</div>
+
+
+	<aside>
+	<div class="x-container-fluid d-none d-sm-inline sticky-social">
+		<a href="" class="toggle-sticky" aria-label="Toggle Social Links"><i class="fa  fa-angle-double-right fa-1x nj-gray toggle-target"></i><i class="fa fa-angle-double-left fa-1x nj-gray d-none  toggle-target"></i></a>
+		<a href="https://www.youtube.com/channel/UCzZbiEXtuQsIvwm73KYDbqg" class="toggle-target" target="_blank" aria-label="NJGIN YouTube Link"><i class="fa-brands fa-youtube fa-2x nj-gray"></i><span class="sr-only">YouTube</span></a>
+	</div>
+</aside>
+
+<main role="main"> 
+<!-- Breadcrumbs -->
+  <div  class="row justify-content-center my-4 px-0 mx-0">
+    <div id="" class="col-12 col-xl-10">  
+    	<nav aria-label="breadcrumb" class="d-lg-block d-xl-block">
+      <div id="breadcrumbs" class="breadcrumb">
+	    
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb mb-0">
+ <li class="breadcrumb-item"><a href="/njgin/">Home</a></li>
+<li class="breadcrumb-item ">Geospatial Data</li>
+<li class="breadcrumb-item " aria-current="page">Parcels</li>
+
+		</ol>
+	</nav>
+ 
+			</div>
+			</nav>
+    </div>
+  </div>
+<!-- ./Breadcrumbs --> 
+
+<div class="skip"><a name="content"></a></div>
+<!-- new content -->
+    <div class="row justify-content-center px-0 mx-0">
+      <div id="" class="col-12 col-xl-10 px-2">
+			
+			<h2 class="mb-3 mx-1">Parcels</h2>
+			
+			</div>
+		</div>
+
+<!-- Angular JS -->
+			
+<!-- ./ Angular JS -->		
+		
+		
+		
+
+<div class="container-fluid col-12 col-xl-10 ">
+<div class="row justify-content-center">
+
+
+			
+			
+			
+				
+			
+
+	<div id="para-sec" class="col-12 col-xl-12 mb-5 ">	
+		
+		
+				
+						<section>
+		
+		
+		
+		
+		
+		
+				
+			
+
+		
+		
+		
+		
+			
+				<p>Parcel boundaries are a crucial component of our framework GIS datasets. While these parcels are not based on survey data, they facilitate graphical-based analysis and visualization of essential tax assessment information, such as property ownership, tax distribution, exempt properties, and land use. They also support various planning activities, including analyzing vacant and developed land, zoning, preserved open spaces, and flood zones.</p>
+<p>The statewide parcel composite is an integration of each county's parcel data, edge-matched across county lines by NJOGIS. While each county maintains its own parcel data, the composite is updated as new information is received from them.</p>
+<p>Developed between 2008 and 2014 during the Parcels Normalization Project, the statewide composite of parcels (cadastral) data for New Jersey was created by NJOGIS. This normalized parcels data aligns with the New Jersey Department of Treasury's MOD-IV system, currently utilized by Tax Assessors, and serves as a key framework GIS dataset for New Jersey. Although county and municipal governments are responsible for data stewardship and maintenance, NJOGIS maintains the statewide composite. Parcel attributes adhere to the New Jersey GIS Parcel Mapping Standard, ensuring a consistent structure and a parcel identification number (PIN) that matches the PIN in the Property Assessment Management System (PAMS) database.</p>
+<p>The normalization process used statewide municipal, county, and state boundary data from NJOGIS as the spatial framework to align parcel data accurately. As a result, the normalized parcels are correctly edge-matched across most municipal boundaries, with some exceptions noted earlier. During this process, improvements were made to the municipal, county, and state boundary data.</p>
+<p>Please note that the polygons in the dataset do not represent legal boundaries and should not be used for legal determinations of land ownership. Parcels are not survey data and should not be treated as such.</p>
+<p>For the most current county parcels data, please reach out directly to the county parcels Data Steward. County parcels may not be edge-matched with adjacent counties.</p>
+<h4>Redaction of owner names from parcels and tax list database</h4>
+<p>In compliance with the provisions and protections afforded the personally identifiable information of certain persons, as enacted by <a href="https://danielslaw.nj.gov/" target="_blank" rel="noopener">Daniel&rsquo;s Law</a> (P.L. 2020, c. 125), the NJ Office of GIS has redacted owner names from all hosted parcels and tax list database downloads, map services and applications.</p>
+<h4>Additional Resources</h4>
+<p><a href="https://geoapps.nj.gov/njgin/parcel/NJGINParcelMODIVUpdateLog.pdf" target="_blank" rel="noopener">Parcels Update Log</a><br><a href="https://geoapps.nj.gov/njgin/parcel/Parcels_Top_5_FAQs_NJGF_20260604.pdf" target="_blank" rel="noopener">Top 5 FAQs about the Statewide Parcels</a><br><a href="https://geoapps.nj.gov/njgin/parcel/NJ_GIS_Parcel_Mapping_Standard_v321.pdf" target="_blank" title="NJ GIS Parcel Mapping Standard" rel="noopener">NJ GIS Parcel Mapping Standard</a><br><a href="https://www.state.nj.us/treasury/taxation/pdf/lpt/modIVmanual.pdf" target="_blank" rel="noopener">MOD-IV User Manual</a></p>
+			
+			    
+		</section>
+		
+	</div>
+
+		
+
+</div>
+</div>
+
+
+<section class="container-fluid py-0 mb-5" id="tabs">
+	<div class="row justify-content-center no-gutters" id="">
+	<div class="col-12 col-xl-10 no-gutters">
+	<nav>
+		<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+				
+			
+				
+				<a class="nav-item nav-link active" id="Tab0" href="#subtab0" data-toggle="tab" role="tab">
+				Streaming
+				</a>
+			
+				
+				<a class="nav-item nav-link " id="Tab1" href="#subtab1" data-toggle="tab" role="tab">
+				Download
+				</a>
+			
+		
+	</div> 		
+	</nav>
+	<div class="tab-content px-3 px-sm-0" id="nav-tabContent">
+	
+		
+		<div class="tab-pane fade show active" id="subtab0" role="tabpanel" aria-labelledby="Tab0">
+			<div id="accordionTab" class="accordian" aria-multiselectable="true">
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading00">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse00" aria-expanded="true" aria-controls="collapse00">
+						Statewide<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse00" class="collapse show">
+					<div class="card-body">
+						<h5>Property Explorer App</h5>
+<p><a href="https://newjersey.maps.arcgis.com/apps/webappviewer/index.html?id=3a4290e1b3d64094a8b8a127965ab43a" target="_blank" rel="noopener"><img src="/njgin/assets/images/Homepage_IM_PropEx.png" width="298" height="180" alt="Screenshot of the Property Explorer app for exploring New Jersey property boundary information."></a></p>
+<p>Search all parcels in NJ by address, county, municipality, block and lot.<br><a href="https://newjersey.maps.arcgis.com/apps/webappviewer/index.html?id=3a4290e1b3d64094a8b8a127965ab43a" target="_blank" rel="noopener">Link</a></p>
+<h5>Statewide Parcels joined with MOD-IV</h5>
+<p><strong>Web Mercator (Auxiliary Sphere)</strong><br><a href="https://newjersey.maps.arcgis.com/home/item.html?id=533599bbfbaa4748bf39faf1375a8a9c" target="_blank" rel="noopener">Link</a></p>
+<h5>Statewide Tax Blocks</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/datasets/ab2bc05f9ef043d7ae99e666e49f6527_2/about" target="_blank" rel="noopener">Link</a> (both streaming and download)</p>
+<h5>Parcels Basemap</h5>
+<p>Visit <a href="/njgin/edata/maps/" title="NJGIN Basemaps">NJGIN Basemaps</a> for details.</p>
+					</div>
+				</div>
+			    </div>
+			
+			</div>
+		</div>
+	
+		
+		<div class="tab-pane fade " id="subtab1" role="tabpanel" aria-labelledby="Tab1">
+			<div id="accordionTab" class="accordian" aria-multiselectable="true">
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading10">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse10" aria-expanded="true" aria-controls="collapse10">
+						Statewide<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse10" class="collapse show">
+					<div class="card-body">
+						<h5>Statewide Parcels joined with MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/newjersey::parcels-and-mod-iv-composite-of-nj-download/about" target="_blank" rel="noopener">File Geodatabase</a></p>
+<h5>Statewide Parcels</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/newjersey::parcels-composite-of-nj-download/about" target="_blank" rel="noopener">File Geodatabase</a></p>
+<h5>Statewide MOD-IV Table</h5>
+<p><a href="https://njogis-newjersey.opendata.arcgis.com/documents/property-tax-list-mod-iv-of-nj-fgdb-download/about" target="_blank" rel="noopener">File Geodatabase</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading11">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
+						Atlantic County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse11" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/52c8da02ed454135bd04bf77af6f17bb/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/680b02ff9b4348409a2f4ccd4c238215/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading12">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse12" aria-expanded="false" aria-controls="collapse12">
+						Bergen County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse12" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/920feb01c4544e5397b05e15f844d640/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/7cdaf29fd4cb460ebbbace617e2aa220/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading13">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse13" aria-expanded="false" aria-controls="collapse13">
+						Burlington County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse13" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/5432e41873f64196b8d5dc01a87c2428/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/3db5fd3dd668487d818987f981c2a362/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading14">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse14" aria-expanded="false" aria-controls="collapse14">
+						Camden County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse14" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/844d60453e3e4664a097c5c57bc8ad29/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/90a1ce759ecb4d36a4b8d1b9d117556e/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading15">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse15" aria-expanded="false" aria-controls="collapse15">
+						Cape May County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse15" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/9eaf2161dd094357b6878736a5116732/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/9b48a0efb90c4ec5aaf9a829b2457630/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading16">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse16" aria-expanded="false" aria-controls="collapse16">
+						Cumberland County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse16" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/b336916089424f089424d59b73ccdcf7/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/9fc4c50a65304d1c837f85719854f3f9/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading17">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse17" aria-expanded="false" aria-controls="collapse17">
+						Essex County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse17" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/dee9661eab744433a8f1e4d141308bb4/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/34f9940598fc409094a28032e54c864e/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading18">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse18" aria-expanded="false" aria-controls="collapse18">
+						Gloucester County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse18" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/f74e347c0622425cbcb6d59d93ca6ac0/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/70c5b83e661f4d17b14a54642ba07439/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading19">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse19" aria-expanded="false" aria-controls="collapse19">
+						Hudson County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse19" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/ea1be78d1bb04de1a13e236bf97f3737/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/884f1f948dcb4353aa0fe52cdb6bc9f5/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading110">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse110" aria-expanded="false" aria-controls="collapse110">
+						Hunterdon County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse110" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/93575d7d60244e08a59650fb7bc6d235/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/d66b1a4ce7d046649f5189e8840a792d/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading111">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse111" aria-expanded="false" aria-controls="collapse111">
+						Mercer County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse111" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/9310ce145949424caa1eef3b4911c537/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/d99b8d35f7a64621b8d776d0074e06b6/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading112">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse112" aria-expanded="false" aria-controls="collapse112">
+						Middlesex County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse112" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/cae0c9f99c28401cbb7b9c4364648ce9/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/5aeb84ce810f4c06a071806c7bfed000/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading113">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse113" aria-expanded="false" aria-controls="collapse113">
+						Monmouth County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse113" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/372377f86745436b821f2f4b93485be6/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/dcccd6f9a7224708a789214f621ee75b/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading114">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse114" aria-expanded="false" aria-controls="collapse114">
+						Morris County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse114" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/bd538e4bd3db4822a77e4f4915065709/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/c8cb1abeedc54b1c89e251268de80222/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading115">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse115" aria-expanded="false" aria-controls="collapse115">
+						Ocean County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse115" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/cae7138df4594d839b9982d2b005aaa3/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/9ca1cf88d03041d5b468f5751c4a2dd8/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading116">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse116" aria-expanded="false" aria-controls="collapse116">
+						Passaic County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse116" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/383bc45ca33b4466ab89e6ee57551859/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/118d94f4df114f7081400fd525bd760d/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading117">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse117" aria-expanded="false" aria-controls="collapse117">
+						Salem County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse117" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/98612e23ebe14911b60f4df4d1441ad9/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/af31e6cfba5044a3914ba1ff52f5e26e/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading118">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse118" aria-expanded="false" aria-controls="collapse118">
+						Somerset County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse118" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/333f558cfa6f4d3dbe14e4acf9dc633d/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/769e37d01d6a4b89abbd60e965eb6c32/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading119">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse119" aria-expanded="false" aria-controls="collapse119">
+						Sussex County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse119" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/6a7fb6b968d649248bcf5f82d50b30cd/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/ac7e0972335c4647a8abcdca4962ead8/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading120">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse120" aria-expanded="false" aria-controls="collapse120">
+						Union County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse120" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/2abc1d31e61842ea85b237104ddc9576/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/79789530a56d425082afade9fea64252/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			
+				<div class="card">
+			    <div class="card-header acc" id="heading121">
+										
+					<p class="mb-0 h5">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordionTab" href="#collapse121" aria-expanded="false" aria-controls="collapse121">
+						Warren County<i class="fa fa-plus-circle" style="float:right" ></i>
+						<i class="fa fa-minus-circle" style="float:right"></i>
+					</a>
+					</p>
+				 
+										
+			    </div>
+<div id="collapse121" class="collapse ">
+					<div class="card-body">
+						<h5>Parcels &amp; MOD-IV</h5>
+<p><strong>New Jersey State Plane</strong><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/45c73f57ad8a4c38b9768671aa967850/about" target="_blank" rel="noopener">File Geodatabase</a><br><a href="https://njogis-newjersey.opendata.arcgis.com/documents/72046f3545634686aa324e4eebee5add/about" target="_blank" rel="noopener">Shapefile</a></p>
+					</div>
+				</div>
+			    </div>
+			
+			</div>
+		</div>
+	
+					
+	</div>
+	</div><!-- ./Row -->
+	</div>
+</section>
+
+	</main>
+
+	<script src="/njgin/assets/js/nj-header.js"></script>
+
+	<footer>
+		
+
+	<div class="footer site-footer" >
+		<div class="container-fluid"> 
+			<div class="row x-no-gutters justify-content-center">
+				<div class="col-lg-9 col-xl-8">
+					<h3><a href="/njgin/">NJ Geographic Information Network</a></h3>
+					<div class="columned">
+
+						<ul>
+		<li><h4><a href="/njgin/" class="pnav">Home</a></h4>
+							</li>
+		
+						</ul>
+
+		
+						<ul>
+		<li><h4>About Us</h4>		<ul  class="d-none d-md-flex">
+			<li><a href="/njgin/about/gin" target="_self" class="snav">NJGIN </a></li>
+			<li><a href="/njgin/about/ogis" target="_self" class="snav">NJ Office of GIS </a></li>
+			<li><a href="/njgin/about/contact-us" target="_self" class="snav">Contact Us </a></li>
+		</ul>
+
+							</li>
+		
+						</ul>
+
+		
+						<ul>
+		<li><h4>Geospatial Data</h4>		<ul  class="d-none d-md-flex">
+			<li><a href="/njgin/edata/parcels" target="_self" class="snav">Parcels </a></li>
+			<li><a href="/njgin/edata/roads" target="_self" class="snav">Roads </a></li>
+			<li><a href="/njgin/edata/addresses" target="_self" class="snav">Addresses </a></li>
+			<li><a href="/njgin/edata/imagery" target="_self" class="snav">Imagery </a></li>
+			<li><a href="/njgin/edata/elevation" target="_self" class="snav">Elevation </a></li>
+			<li><a href="/njgin/edata/geocoding" target="_self" class="snav">Geocoding </a></li>
+			<li><a href="/njgin/edata/maps" target="_self" class="snav">Basemaps </a></li>
+			<li><a href="/njgin/edata/boundaries" target="_self" class="snav">Boundaries </a></li>
+			<li><a href="/njgin/edata/dataproducts" target="_self" class="snav">Additional Data Products </a></li>
+			<li><a href="/njgin/edata/retiredservices" target="_self" class="snav">Retired Services </a></li>
+		</ul>
+
+							</li>
+		
+						</ul>
+
+		
+						<ul>
+		<li><h4>Data Sharing</h4>		<ul  class="d-none d-md-flex">
+			<li><a href="/njgin/sharing/share" target="_self" class="snav">Share Your Data </a></li>
+			<li><a href="/njgin/sharing/support" target="_self" class="snav">Metadata Support </a></li>
+		</ul>
+
+							</li>
+		
+						</ul>
+
+		
+						<ul>
+		<li><h4>Resources</h4>		<ul  class="d-none d-md-flex">
+			<li><a href="/njgin/resources/contracts" target="_self" class="snav">State Contracts </a></li>
+			<li><a href="/njgin/resources/archives" target="_self" class="snav">News Archives </a></li>
+			<li><a href="https://www.nj.gov/treasury/taxation/lpt/localtax.shtml" target="_blank" class="snav">Digital Tax Map Standards <i class='fas fa-external-link-square-alt ml-1'></i></a></li>
+		</ul>
+
+							</li>
+		
+						</ul>
+
+		
+						<ul>
+		<li><h4><a href="https://njogis-newjersey.opendata.arcgis.com" target="_blank" class="pnav">NJGIN Open Data <i class='fas fa-external-link-square-alt ml-1'></i></a></h4>
+							</li>
+		
+						</ul>
+
+		
+						<ul>
+		<li><h4><a href="https://www.nj.gov/njgf/#!/" target="_blank" class="pnav">NJ Geospatial Forum <i class='fas fa-external-link-square-alt ml-1'></i></a></h4>
+							</li>
+		
+						</ul>
+
+		
+
+					</div>
+				</div>
+				<div class="col-lg-3 col-xl-2">
+										<h3>Statewide</h3>
+					<ul class="statewide d-inline-block float-left mr-1 mr-sm-5 mr-lg-0">
+							<li><a href="//www.nj.gov/governor/" aria-label="Governor Mikie Sherrill:Statewide">Governor Mikie Sherrill</a></li>
+								<li><a href="//www.nj.gov/governor/" aria-label="Lt. Governor :Statewide">Lt. Governor Shirley U. Emehelu</a></li>
+							<li><a href="//www.nj.gov">NJ.gov</a></li>
+							<li><a href="/nj/gov/deptserv/alphaserv.shtml">Services</a></li>
+							<li><a href="/nj/gov/deptserv/">Agencies</a></li>
+							<li><a href="//www.nj.gov/faqs/" aria-label="FAQs:Statewide">FAQs</a></li>
+							<li><a href="/nj/feedback.shtml">Contact Us</a></li>
+							<li><a href="/nj/privacy.shtml">Privacy Notice</a></li>
+							<li><a href="/nj/legal.shtml">Legal Statement &amp; Disclaimers </a></li>
+							<li><a href="/nj/accessibility.shtml">Accessibility Statement</a></li>
+					</ul>
+					<img src="/nj/design/images/digital-nj.png" alt=" Digital NJ Logo (the letters N and J with the sillouette of the state of New Jersey knocked out)" class="digital-nj img-fluid max-width  float-left "/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+ 
+		<footer class="footer nj" >
+
+  <div class="container-fluid">
+    <div class="row no-gutters justify-content-center ">
+      <div class="col-sm-3 col-xl-2 d-block">
+               <a href="//nj.gov/opra/" class="mb-2 d-block  float-left" style=" width: 100%;" ><img src="/njgin/assets/slices/opra.png"  alt="OPRA Logo" class="opra"></a>
+          <br> <a href="https://my.nj.gov/" target="_blank" class="mb-4 d-block float-left"><img src="/nj/assets/slices/myNJ.png"  alt="myNJ Portal Logo" class="mynj"/></a> </div>
+      <div class="col-sm-9 col-xl-8  text-right"> 
+	  <br>
+       <address> Copyright &copy; State of New Jersey, 1996-<script type="text/javascript" language="JavaScript">
+			let begYear="";
+			let today = new Date();
+			document.write(begYear);
+			document.write(today.getFullYear());
+		</script><br>
+        New Jersey Geographic Information Network<br>
+		Trenton, NJ 08625-0700
+		</address>
+      </div>
+    </div>
+    <div class="row no-gutters justify-content-center">
+      <div class="col-12 col-xl-10  text-right"><a href="/it/"> <img src="/njgin/assets/slices/njoit.png"  alt="powered ny njoit"/></a></div>
+    </div>
+  </div>
+</footer>
+	
+	</footer>
+	
+	
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+			<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<!-- Bootstrap core JavaScript -->
+	<!-- ================================================== -->
+	<script src="/nj/design/js/jquery-3.6.0.min.js" ></script>
+	<!-- /nj/design/js/jquery-3.3.1.min.js --> 
+	<script src="/nj/design/bootstrap/js/bootstrap.bundle.min.js" ></script>
+	<!-- /nj/design/js/bootstrap.bundle.min.js -->
+	<!-- new addition --> <script src="/nj/design/bootstrap/js/popper.min.js" ></script>
+	
+	
+	<!-- Font Awesome -->
+	<script defer src="/nj/design/fontawesome/js/all.js?v=5.14.0" ></script>
+	<!--<script defer src="//use.fontawesome.com/releases/v5.0.9/js/all.js" ></script>--> <!-- integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>-->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/nj/design/js/ie10-viewport-bug-workaround.js"></script>
+	
+	<script src="/nj/design/js/sonj-header.js"></script>
+
+	<script src="/nj/design/js/sticky-social.js"></script>
+	
+	<script src="/nj/design/js/navigation.js"></script>
+	
+	<script type="text/javascript" src="/nj/design/util/slick/slick.min.js"></script>
+	<script src="/nj/design/js/slick-init.js"></script>
+	
+	<script>
+	<!--Google Translate WCAG fix -->
+	$( document ).ready(function() {
+		$( "[id^='goog-gt-votingInput']" ).attr( 'title', 'voting' ).attr( 'aria-label', 'voting input' );
+	});
+	</script>
+
+	<!-- Custom Libraries for this site -->
+<script defer src="/nj/design/fontawesome-pro-6.4.2/js/all.js?v=000" ></script>
+<script src="/njgin/assets/js/deep-link.js"></script>
+<script src="/njgin/assets/js/link-correction.js"></script>
+<script src="/njgin/assets/js/spots.nj"></script>
+<script async src="https://siteimproveanalytics.com/js/siteanalyze_6291948.js"></script>
+
+<script>
+	const currentUrl = window.location.href;
+	const url = new URL(currentUrl);
+	const urlTrimWord = "production/";
+	const urlTrimWord2 = "nj.gov/";
+	let urlTrimWordIndex = url.pathname.indexOf(urlTrimWord);
+	let lastPart ="";
+	let lastPartCleaned ="";
+
+	if (urlTrimWordIndex >= 0) {
+		lastPart = url.pathname.substring(urlTrimWordIndex+urlTrimWord.length).trim();
+		lastPartCleaned = lastPart.replace(/\/index\.shtml$/, "");
+	} else {
+		urlTrimWordIndex = url.pathname.indexOf(urlTrimWord2);
+		lastPart = url.pathname.substring(urlTrimWordIndex+urlTrimWord2.length).trim();
+		lastPartCleaned = lastPart.replace(/\/index\.shtml$/, "");
+		lastPartCleaned = "njgin" + lastPartCleaned;
+	}
+
+	const navLinks = document.querySelectorAll("nav a");
+	let navLinkTrimmed = "";
+
+	navLinks.forEach(link => {
+		navLinkTrimmed = link.href.substring(link.href.indexOf("njgin"));
+		const navLinkTrimmedCleaned = navLinkTrimmed.replace(/\/index\.shtml$/, "/");
+		const navLinkTrimmedCleanedExtra = navLinkTrimmedCleaned.replace(/\/?$/, '/');
+
+		if (JSON.stringify(lastPartCleaned) === JSON.stringify(navLinkTrimmedCleanedExtra)) {
+			const parent = link.closest('.nav-item');
+			const parentATag = parent.querySelector('a');
+			parentATag.classList.add("active");
+		}
+	});
+</script> 
+	<aside aria-label="Back to top"><a id="back-to-top" href="#" class="btn btn-lg back-to-top" role="button" title="Back to top">
+	<i class="fas fa-chevron-up" aria-hidden="true"></i>
+	<br>Back<br>to top
+  </a></aside>
+	
+	<script>
+	 $(window).scroll(function () {
+			if ($(this).scrollTop() > 50) {
+				$('#back-to-top').fadeIn();
+			} else {
+				$('#back-to-top').fadeOut();
+			}
+		});
+		// scroll body to 0px on click
+		$('#back-to-top').click(function () {
+			$('#back-to-top').tooltip('hide');
+			$('body,html').animate({
+				scrollTop: 0
+			}, 800);
+			return false;
+		});
+	</script>
+
+<script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=2&cb=647037519" async></script></body>
+</html>

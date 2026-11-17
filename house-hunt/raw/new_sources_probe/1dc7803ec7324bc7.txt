@@ -1,0 +1,591 @@
+# As a condition of accessing this website, you agree to abide by the following
+# content signals:
+
+# (a)  If a Content-Signal = yes, you may collect content for the corresponding
+#      use.
+# (b)  If a Content-Signal = no, you may not collect content for the
+#      corresponding use.
+# (c)  If the website operator does not include a Content-Signal for a
+#      corresponding use, the website operator neither grants nor restricts
+#      permission via Content-Signal with respect to the corresponding use.
+
+# The content signals and their meanings are:
+
+# search:   building a search index and providing search results (e.g., returning
+#           hyperlinks and short excerpts from your website's contents). Search does not
+#           include providing AI-generated search summaries.
+# ai-input: inputting content into one or more AI models (e.g., retrieval
+#           augmented generation, grounding, or other real-time taking of content for
+#           generative AI search answers).
+# ai-train: training or fine-tuning AI models.
+# use:      how AI systems may consume the content (immediate, reference, or full).
+
+# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS OF
+# RIGHTS UNDER ARTICLE 4 OF THE EUROPEAN UNION DIRECTIVE 2019/790 ON COPYRIGHT
+# AND RELATED RIGHTS IN THE DIGITAL SINGLE MARKET.
+
+# BEGIN Cloudflare Managed content
+
+
+User-agent: *
+Content-Signal: search=yes,ai-train=no,use=reference
+Allow: /
+
+# Training crawlers
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: MistralAI-Training
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: GoogleOther
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: AwarioSmartBot
+User-agent: AwarioRssBot
+Disallow: /
+
+User-agent: Google-CloudVertexBot
+Disallow: /
+
+User-agent: QualifiedBot
+Disallow: /
+
+User-agent: Cotoyogi
+Disallow: /
+
+User-agent: ICC-Crawler
+Disallow: /
+
+User-agent: atlassian-bot
+Disallow: /
+
+User-agent: FishBot
+Disallow: /
+
+User-agent: BorderxBot
+Disallow: /
+
+User-agent: NavuBot
+Disallow: /
+
+User-agent: SemrushBot-SWA
+Disallow: /
+
+User-agent: WARDBot
+Disallow: /
+
+User-agent: magpie-crawler
+Disallow: /
+
+User-agent: KimiBot
+Disallow: /
+
+User-agent: CitibotSiteCrawler
+Disallow: /
+
+# END Cloudflare Managed Content
+
+User-agent: *
+Disallow: /admin/
+Disallow: /admindemo/
+Disallow: /Content/HTML
+Disallow: /Content/Images
+Disallow: /Content/PDFs
+Disallow: /Content/Videos
+Disallow: /photos/
+Disallow: /sounds/
+Disallow: /myraveis/
+Disallow: /*ID=
+Disallow: /Office/AwardsList
+Disallow: /office/awardslist
+Noindex: /office/awardslist
+Disallow: /Property/Search
+Noindex: /Property/Search
+Disallow: /property/search
+Noindex: /property/search
+Disallow: /Property/SearchMap
+Noindex: /Property/SearchMap
+Noindex: /*SITE=agt
+Disallow: /*AREAPK=
+Disallow: /*page=
+Disallow: /*PAGE=
+Disallow: /*EXCPK=
+Disallow: /*ROWNUM=
+Disallow: /*TOTAL=
+Disallow: /*sortdir=
+Disallow: /*sort=
+Disallow: /*friendId=
+Disallow: /Content/lpmvideo
+Noindex: /Content/lpmvideo
+Disallow: /agent/SheriParda
+Disallow: /agent/LeslieMarasco
+Disallow: /agent/ShellyLombardo
+Disallow: /agent/MarySemenetz
+Disallow: /agent/PatJohnson
+Disallow: /agent/WayneEdmonds
+Disallow: /agent/RaechelEmma
+Disallow: /agent/ValerieCesca
+Disallow: /agent/DianaFeiner
+Disallow: /agent/IleenGreytak
+Disallow: /agent/NancyRongoe
+Disallow: /agent/BarbaraFitzgerald
+Disallow: /agent/TeresaKlinetob
+Disallow: /agent/BrendaConnors
+Disallow: /agent/AdrienneSpitz
+Disallow: /agent/LindaDorsey
+Disallow: /agent/AlisonCheh
+Disallow: /agent/AnaBurt
+Disallow: /agent/ChrisDAlessandro
+Disallow: /agent/TinaFinkbeiner
+Disallow: /agent/MelissaHamilton
+Disallow: /agent/MarieBlackman
+Disallow: /agent/LynnetteClemens
+Disallow: /agent/RyanRaveis
+Disallow: /agent/MariaAlter
+Disallow: /agent/KarenGorman
+Disallow: /agent/teammember/SarahMassa/7022
+Disallow: /agent/JudyMuligano
+Disallow: /agent/SusanLaFleur
+Disallow: /agent/phyllisnickersonpower
+Disallow: /agent/LoriKay
+Disallow: /agent/RosanneGreco
+Disallow: /agent/MaryDuarte
+Disallow: /agent/KimHebert
+Disallow: /agent/MarilynWhite
+Disallow: /agent/RobertaGaudreau
+Disallow: /agent/HeatherSiekman
+Disallow: /agent/RyanHiggens
+Disallow: /agent/GaryCoxe
+Disallow: /agent/TestAgentCT
+Disallow: /agent/DeniseRobertson
+Disallow: /agent/BradySomerville
+Disallow: /agent/MarisaOmiatacz
+Disallow: /agent/JamieZdru
+Disallow: /agent/HeatherKinney
+Disallow: /agent/SusanLabate
+Disallow: /agent/BethCorso
+Disallow: /agent/MikePowerserve
+Disallow: /agent/CelesteCarlton
+Disallow: /agent/KristenLacasse
+Disallow: /agent/ChristopherDoherty
+Disallow: /agent/JennieNicholson
+Disallow: /agent/MichaelWebb
+Disallow: /agent/JudyGill
+Disallow: /agent/ZizetteWahba
+Disallow: /agent/ShannaKatz
+Disallow: /agent/WinnieWynne
+Disallow: /agent/MaryannJohnson
+Disallow: /agent/ChrisPollack
+Disallow: /agent/FrankMercurio
+Disallow: /agent/ElizabethMesheau
+Disallow: /agent/MargaritaFontes
+Disallow: /agent/AnnMarieSchweir
+Disallow: /agent/AmyAskew
+Disallow: /agent/MichelleNethercottKoellmer
+Disallow: /agent/DenaJacques
+Disallow: /agent/SuzanneAndresen
+Disallow: /agent/MarkMcNeil
+Disallow: /agent/AudreySewall
+Disallow: /agent/KevinCai
+Disallow: /agent/JohnBond
+Disallow: /agent/StevenClark
+Disallow: /agent/AllisonWelch
+Disallow: /agent/GarrettBoatman
+Disallow: /agent/DineshThoniparambil
+Disallow: /agent/MarleneDeArruda
+Disallow: /agent/ShariYates
+Disallow: /agent/TestPortal
+Disallow: /agent/KathyQuinn
+Disallow: /agent/CandaceGanley
+Disallow: /agent/KerriMcInerney
+Disallow: /agent/AshleighGuliano
+Disallow: /agent/JenniferSoto
+Disallow: /agent/RichardSunderland
+Disallow: /agent/DebDumont
+Disallow: /agent/LeahPortale
+Disallow: /agent/JacquelynDInnocenzo
+Disallow: /agent/SteveCsejka
+Disallow: /agent/LisaBrassard
+Disallow: /agent/CraigDobson
+Disallow: /agent/LouiseWang
+Disallow: /agent/AllanStyer
+Disallow: /agent/LoriBethune
+Disallow: /agent/PatriciaLee
+Disallow: /agent/MoxiTrainer1
+Disallow: /agent/MoxiTrainer2
+Disallow: /agent/MoxiTrainer3
+Disallow: /agent/MoxiTrainer4
+Disallow: /agent/SarahWilliamson
+Disallow: /agent/KeenanChild
+Disallow: /agent/CarolGould
+Disallow: /agent/LindsayHannigan
+Disallow: /agent/AlexisKoppy
+Disallow: /agent/RayCashen
+Disallow: /agent/ShaiannJenkins
+Disallow: /agent/LizMartinez
+Disallow: /agent/ElaineF
+Disallow: /agent/KimTefft
+Disallow: /agent/ErinSweeney
+Disallow: /agent/APIUser1
+Disallow: /agent/teammember/KarolinaMajka/12437
+Disallow: /agent/teammember/BrianaCabral/12438
+Disallow: /agent/KathyBohnen
+Disallow: /agent/JenniferStrang
+Disallow: /agent/BrianaBorzesi
+Disallow: /agent/RitaSummersPage
+Disallow: /agent/VictoriaBiondolillo
+Disallow: /agent/DavidWilcox
+Disallow: /agent/ElizabethGreco
+Disallow: /agent/JennaEnright
+Disallow: /agent/JenniferBecker
+Disallow: /agent/KLCFrm
+Disallow: /agent/SkyslopeAdmin
+Disallow: /agent/MaryDehaan
+Disallow: /agent/XiomaraEscobar
+Disallow: /agent/LeonorPerez
+Disallow: /agent/SarahJJohnson
+Disallow: /agent/KarenByrne
+Disallow: /agent/ChelseaGarlock
+Disallow: /agent/TonyAbouJaoude
+Disallow: /agent/JulieBarton
+Disallow: /agent/teammember/PattySampleColwell/12899
+Disallow: /agent/SharonFerrant
+Disallow: /agent/LindaBorzesi
+Disallow: /agent/KarinaOrtega
+Disallow: /agent/WilliamRaveisCustomerService
+Disallow: /agent/CloudTest
+Disallow: /agent/TeamWarren
+Disallow: /agent/BaiaPaul
+Disallow: /agent/JuliaBraun
+Disallow: /agent/JeVaughnBrodie
+Disallow: /agent/teammember/LuczArroyo/13033
+Disallow: /agent/JessicaNunez
+Disallow: /agent/DanetteBogue
+Disallow: /agent/MichelleTomlin
+Disallow: /agent/HeidiOlson
+Disallow: /agent/LanaAlkhatib
+Disallow: /agent/JedMohring
+Disallow: /agent/DanielFarr
+Disallow: /agent/DeirdreHeneberg
+Disallow: /agent/JenniferGoldsmith
+Disallow: /agent/DeborahDeam
+Disallow: /agent/MattyORourke
+Disallow: /agent/JessicaHunt
+Disallow: /agent/MarketingMailbox
+Disallow: /agent/AdamPurcaro
+Disallow: /agent/TristaNewton
+Disallow: /agent/LisaRoberts
+Disallow: /agent/CareerDevelopment
+Disallow: /agent/teammember/BrookeGreatsinger/13500
+Disallow: /agent/AbbyStone
+Disallow: /agent/JillBarile
+Disallow: /agent/SibylleKinley
+Disallow: /agent/LaurenPerregaux
+Disallow: /agent/PaulBaia
+Disallow: /agent/MoxiTrainerPalmBeach
+Disallow: /agent/ArdeliaSedlak
+Disallow: /agent/ChanellaBentley
+Disallow: /agent/TylerMansour
+Disallow: /agent/DavidMartindale
+Disallow: /agent/RyanBroderick
+Disallow: /agent/CaitlynMacri
+Disallow: /agent/SavionAtkinson
+Disallow: /agent/MarkDiSabato
+Disallow: /agent/LuisaTrigueros
+Disallow: /agent/teammember/ShannonDucey/13793
+Disallow: /agent/MicheleAllen
+Disallow: /agent/MauraOBrien
+Disallow: /agent/ValentiniandKolmer
+Disallow: /agent/MiliOrlando
+Disallow: /agent/BriannaAlgazali
+Disallow: /agent/EmilyKent
+Disallow: /agent/KarenGarnacia
+Disallow: /agent/MarketingSF
+Disallow: /agent/CindyPottle
+Disallow: /agent/MoxiWorks1
+Disallow: /agent/MoxiWorks2
+Disallow: /agent/ZanderSlayton
+Disallow: /agent/CarolCollins
+Disallow: /agent/LesleyAGarlock
+Disallow: /agent/JackieMillim
+Disallow: /agent/MelodieNoga
+Disallow: /agent/KarenGuarnaccia
+Disallow: /agent/LisaKeeping
+Disallow: /agent/TamiBaldwin
+Disallow: /agent/BethObara
+Disallow: /agent/LorraineBellico
+Disallow: /agent/ZoeLamore
+Disallow: /agent/VeronicaBournival
+Disallow: /agent/teammember/MeaganFindley/14362
+Disallow: /agent/NathanSobel
+Disallow: /agent/ToyandaDavis
+Disallow: /agent/teammember/RitaDart/14373
+Disallow: /agent/JohnOrdway
+Disallow: /agent/AddisonRobbins
+Disallow: /agent/SamanthaRomero
+Disallow: /agent/LaurieWhite
+Disallow: /agent/LynneHenderlong
+Disallow: /agent/KatyOMelia
+Disallow: /agent/KarolinaAlberski
+Disallow: /agent/DavidTam
+Disallow: /agent/LauraDoering
+Disallow: /agent/VincentNunziata
+Disallow: /agent/LaurenJoy
+Disallow: /agent/MavridesMoves
+Disallow: /agent/BruceGilkes
+Disallow: /agent/EmilyMoore
+Disallow: /agent/LizabethLewis
+Disallow: /agent/LeahPucciarelli
+Disallow: /agent/MichaelLeGrand
+Disallow: /agent/VasiliosDentiste
+Disallow: /agent/CourtneyWilson
+Disallow: /agent/teammember/LindaXu/14797
+Disallow: /agent/KaitlynFanning
+Disallow: /agent/teammember/BethCavalieri/14833
+Disallow: /agent/ErinMeade
+Disallow: /agent/TeresaDeBarros
+Disallow: /agent/SarahMyatt
+Disallow: /agent/TimLeakII
+Disallow: /agent/teammember/LaurenTapper/14854
+Disallow: /agent/JoannDilley
+Disallow: /agent/CaraDimitropolis
+Disallow: /agent/JazminBeacham
+Disallow: /agent/RobinBoyd
+Disallow: /agent/CustomerService
+Disallow: /agent/Test365Account
+Disallow: /agent/JackKrentzman
+Disallow: /agent/LisaBenson
+Disallow: /agent/AllisonGagne
+Disallow: /agent/SamanthaProvost
+Disallow: /agent/KellyKlein
+Disallow: /agent/SaraGodiloGodlevsky
+Disallow: /agent/teammember/StephanieCurran/15004
+Disallow: /agent/teammember/TracyOrloff/15005
+Disallow: /agent/RileeDrake
+Disallow: /agent/KattiaLambert
+Disallow: /agent/LejaunPope
+Disallow: /agent/MadisonWrigley
+Disallow: /agent/KristinDelfs
+Disallow: /agent/AllisonSteiner
+Disallow: /agent/BrittanyGosp
+Disallow: /agent/teammember/JulieTremblay/15060
+Disallow: /agent/ChrisLaZazzera
+Disallow: /agent/teammember/MarlenePolson/15103
+Disallow: /agent/teammember/CarolHale/15113
+Disallow: /agent/RyaneRumore
+Disallow: /agent/AshleyBalogh
+Disallow: /agent/NadineHellwig
+Disallow: /agent/NoraMcILree
+Disallow: /agent/SarahBowling
+Disallow: /agent/AmyKeenan
+Disallow: /agent/VeraIvanova
+Disallow: /agent/LizHeir
+Disallow: /agent/SheilaQuatro
+Disallow: /agent/DonnaChristensen
+Disallow: /agent/JeannaCapella
+Disallow: /agent/KimSampiere
+Disallow: /agent/LionelPina
+Disallow: /agent/MelissaSauer
+Disallow: /agent/MailleDryzgula
+Disallow: /agent/DryzgulaMaille
+Disallow: /agent/teammember/EliseWalters/15224
+Disallow: /agent/teammember/KathleenParker/15226
+Disallow: /agent/CarissaPolski
+Disallow: /agent/KateyVentrilio
+Disallow: /agent/JohnFarrell
+Disallow: /agent/AngelOcasio
+Disallow: /agent/teammember/PatrickColwell/15290
+Disallow: /agent/ChristineBasil
+Disallow: /agent/HollieCurtsYuhas
+Disallow: /agent/HeavenlyTest
+Disallow: /agent/AshleyEllis
+Disallow: /agent/CleavonMauroLyttle
+Disallow: /agent/KathyVaillancourt
+Disallow: /agent/KrystynaKorzenko
+Disallow: /agent/teammember/KyliePafoosha/15414
+Disallow: /agent/JenniferDoman
+Disallow: /agent/ChadSciarra
+Disallow: /agent/ParkerWade
+Disallow: /agent/RebeccaBrennan
+Disallow: /agent/AllisonBiele
+Disallow: /agent/LaurenOConnell
+Disallow: /agent/CarmelitaMatus
+Disallow: /agent/LanaCommons
+Disallow: /agent/LauraDavis
+Disallow: /agent/EvanMayer
+Disallow: /agent/TishBurke
+Disallow: /agent/DyanGrant
+Disallow: /agent/CharlotteBottaro
+Disallow: /agent/KarynAlvarez
+Disallow: /agent/TracyAguilaRamos
+Disallow: /agent/MikeRittenhouse
+Disallow: /agent/CatherineRobertson
+Disallow: /agent/SusanaLameiras
+Disallow: /agent/SamiVivenzo
+Disallow: /agent/AshleyPrescott
+Disallow: /agent/BarbaraClayton
+Disallow: /agent/ElleEnglish
+Disallow: /agent/teammember/JessicaSoltes/15652
+Disallow: /agent/ChandlerKelly
+Disallow: /agent/EstefanyMateo
+Disallow: /agent/KarinaHughes
+Disallow: /agent/RampAgent
+Disallow: /agent/teammember/ReeseReed/15676
+Disallow: /agent/EricaLynch
+Disallow: /agent/RitaSergeeva
+Disallow: /agent/AnneShaffner
+Disallow: /agent/LindaGraham
+Disallow: /agent/CassieSymonds
+Disallow: /agent/RyanFilippone
+Disallow: /agent/EmmaTallon
+Disallow: /agent/BrendaScully
+Disallow: /agent/PatriciaTessier
+Disallow: /agent/PrachiRana
+Disallow: /agent/MaryAnnWelch
+Disallow: /agent/TheresaWeber
+Disallow: /agent/SophieMiddleton
+Disallow: /agent/FloridaTest
+Disallow: /agent/LauraSanders
+Disallow: /agent/HenryLimon
+Disallow: /agent/SherrieHabrat
+Disallow: /agent/LuisSolis
+Disallow: /agent/DominicoColon
+Disallow: /agent/EspenWheeler
+Disallow: /agent/SuzySanchez
+Disallow: /agent/JHUser
+Disallow: /agent/AmyJones
+Disallow: /agent/TracySzelest
+Disallow: /agent/JenniferGialanella
+Disallow: /agent/BryanSpickle
+Disallow: /agent/JaimeGrant
+Disallow: /agent/TracyReilly
+Disallow: /agent/StephanieBahr
+Disallow: /agent/MicrosoftTesting
+Disallow: /agent/MicrosoftTesting2
+Disallow: /agent/JustinSchaffer
+Disallow: /agent/CarolAmero
+Disallow: /agent/AmandaPrice
+Disallow: /agent/LaurenKraft
+Disallow: /agent/LisaRicciardi
+Disallow: /agent/SonyaRock
+Disallow: /agent/RuzheIvezic
+Disallow: /agent/MichelleBracco
+Disallow: /agent/AlexMcReynolds
+Disallow: /agent/SarahHoffman
+Disallow: /agent/KristineChampagne
+Disallow: /agent/BrandonHughes
+Disallow: /agent/EmilyBlanchard
+Disallow: /agent/StaceyGustafson
+Disallow: /agent/WalterPlaza
+Disallow: /agent/JuliaCutler
+Disallow: /agent/AineMcDonagh
+Disallow: /agent/JenCollins
+Disallow: /agent/MeghanKydd
+Disallow: /agent/SophiaDuarte
+Disallow: /agent/MaryGiroux
+Disallow: /agent/AndreaBai
+Disallow: /agent/KathrynRichards
+Disallow: /agent/MichelleHeinrich
+Disallow: /agent/MeganSuslavich
+Disallow: /agent/ShelleyCazlan
+Disallow: /agent/ChristinaByrne
+Disallow: /agent/SaraFoley
+Disallow: /agent/RamptestAgent
+Disallow: /agent/RamptestManager
+Disallow: /agent/RamptestAdmin
+Disallow: /agent/ChristineCleary
+Disallow: /agent/ShannonAckley
+Disallow: /agent/CarriePierce
+Disallow: /agent/MarinaMeyers
+Disallow: /agent/CarrieLaFlamme
+Disallow: /agent/teammember/AshleyCaggiano/16334
+Disallow: /agent/CarlyFortuna
+Disallow: /agent/StevenWeiss
+Disallow: /agent/AnnSmith
+Disallow: /agent/EricBrustAkdemir
+Disallow: /agent/CarolineFitzgerald
+Disallow: /agent/TashaSmith
+Disallow: /agent/VivianHernandez
+Disallow: /agent/MichaelCarlson
+Disallow: /agent/AnaWinokur
+Disallow: /agent/DanielMendes
+Disallow: /agent/LukaDoncic
+Disallow: /agent/NormanJohnson
+Disallow: /agent/JessicaMills
+Disallow: /agent/KristiLevesque
+Disallow: /agent/AngelinaScalia
+Disallow: /agent/JosephLeck
+Disallow: /agent/WendyDeaner
+Disallow: /agent/DylanCarneiro
+Disallow: /agent/CylaMondia
+Disallow: /agent/StaceyVanDuyn
+Disallow: /agent/AngelaWarren
+Disallow: /agent/RhettSingleton
+Disallow: /agent/JulieBWhite
+Disallow: /agent/JanetDeLeo
+Disallow: /agent/DinaTerlik
+Disallow: /agent/teammember/RebeccaHawkins/16552
+Disallow: /agent/AnyaHargraves
+Disallow: /agent/JonathanBogaert
+Disallow: /agent/YokadiMejia
+Disallow: /agent/GiavanaHanna
+Disallow: /agent/GreggDavis
+Disallow: /agent/TraceyCapolupoComplete
+Disallow: /raveis/new/2022_04_20
+Disallow: /prop/town/3247/300000_500000/Allendale
+Disallow: /town/NY/gsPark
+Disallow: /town/NY/enburg
+Disallow: /town/ME/hocPlt
+Disallow: /town/ME/4MDBPP
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: / 
+
+User-agent: OAI-SearchBot
+Allow: /

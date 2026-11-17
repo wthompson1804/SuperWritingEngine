@@ -1,9 +1,14 @@
 """Merge data/listings_raw/*.csv, dedupe, and apply the approved gates (docs/PLAN_V3_APPROVED_2026-11-15.md).
 
 Each gate yields pass / fail / unknown. Overall status:
-  pass      every gate passes (floor may be unknown -> flagged with an asterisk, per the plan)
-  pending   nothing fails, but a gate that must be confirmed is unknown (dogs, elevator, availability, proof)
+  pass      every gate passes (an open fact such as floor_or_elevator passes here and is counted by rank.py)
+  pending   nothing fails, but a gate that must be confirmed is unknown (dogs, floor and elevator, availability, proof)
   fail      at least one gate fails
+Rent (owner, 2026-11-17, second trawl): listed base rent at most $2,200 (RENT_MAX); rows above stay in the data and fail
+with the reason over_2200. Floor and elevator (owner, 2026-11-17): one gate, g_floor_elevator (parsers.floor_elevator_rule
+over parsers.elevator_rule): elevator established -> pass; otherwise floor 2 passes, the ground floor fails, floor 3+
+fails with no elevator and is pending with the elevator unknown, and an unknown floor is ONE open fact (pass, code
+floor_or_elevator, or 'elevator' where an elevator is named but in doubt). g_elevator and g_floor stay as columns.
 The all-in money gate needs parking, fees and utility estimates; it is applied by scripts/all_in.py after
 the utilities tool exists. Here the money gate checks listed rent only.
 
@@ -23,7 +28,8 @@ from lib import DATA, ROOT  # noqa: E402
 import parsers  # noqa: E402
 
 WINDOW_END = date(2026, 12, 15)
-RENT_MAX = 3000
+RENT_MAX = 2200     # Will, 2026-11-17 (second trawl): collect nothing above $2,200 listed base rent; the $3,000 total test is unchanged (all_in.py)
+RENT_FAIL_REASON = f"over_{RENT_MAX}"
 MIN_DOG_LIMIT_LB = 25  # Will, 2026-11-15: the dog will not exceed 25 lb (gate was 40, then 35)
 MAX_DRIVE_MIN = 120
 STALE_DAYS = 60
@@ -222,6 +228,16 @@ def gate_floor(r):
     return ("pass" if g >= 2 else "fail"), int(g), "inferred", kind
 
 
+def floor_elevator_gate(elevator_status, floor_result, floor, floor_basis, label_kind, stories=None, stories_basis=""):
+    """The floor-and-elevator gate of a listing row (owner, 2026-11-17; parsers.floor_elevator_rule). Returns
+    (gate, code): settled or open -> 'pass' (an open fact is counted by rank.py), fail -> 'fail', unknown -> 'unknown'
+    (pending). The floor as gate_floor found it: a floor the listing states counts as 'page'; a reading from the unit
+    label counts as 'label' for a simple label or a ground word, otherwise 'weak' (it can fail a unit, never pass one)."""
+    how = "page" if floor_basis == "stated" else ("" if floor in ("", None) else ("label" if label_kind in ("simple", "ground_word") else "weak"))
+    st, code = parsers.floor_elevator_rule(elevator_status, floor if floor != "" else None, how, stories, stories_basis)
+    return {"settled": "pass", "open": "pass", "fail": "fail", "unknown": "unknown"}[st], code
+
+
 def gate_proof(r):
     if not str(r.url).startswith("http"):
         return "fail"
@@ -394,13 +410,29 @@ def main():
     df["floor_used"] = [x[1] for x in fl]
     df["floor_basis"] = [x[2] for x in fl]
     df["floor_label_kind"] = [x[3] for x in fl]
+    # owner, 2026-11-17 (second trawl): floor and elevator together. A building without an elevator is allowed when the
+    # apartment is on floor 2; the ground floor stays out; floor 3 and above need an elevator; no elevator stated and no
+    # floor stated is ONE open gate fact (floor_or_elevator). The building's height comes from
+    # data/reference/building_stories.csv (build_master.BuildingStories; absent or partial is fine).
+    import build_master
+    STO = build_master.BuildingStories()
+    sto = [STO.lookup(k, "", la, lo) if len(STO) else None for k, la, lo in zip(df.addr_key, df.get("lat", pd.Series("", index=df.index)), df.get("lon", pd.Series("", index=df.index)))]
+    df["building_stories"] = [x["stories"] if x else "" for x in sto]
+    df["building_stories_basis"] = [x["basis"] if x else "" for x in sto]
+    fe = [floor_elevator_gate(es, gf, fu, fb, fk, st_, sb_) for es, gf, fu, fb, fk, st_, sb_ in
+          zip(df.elevator_rule_status, df.g_floor, df.floor_used, df.floor_basis, df.floor_label_kind, df.building_stories, df.building_stories_basis)]
+    df["g_floor_elevator"] = [x[0] for x in fe]
+    df["floor_elevator_code"] = [x[1] for x in fe]
     df["g_place"] = df.drive_min_zip.map(lambda v: "unknown" if pd.isna(v) else ("pass" if v <= MAX_DRIVE_MIN else "fail"))
     df["g_proof"] = df.apply(gate_proof, axis=1)
     age = df.listing_age_days.map(to_num)
     df["stale_listing"] = age.map(lambda v: "yes" if v is not None and v >= STALE_DAYS else "")
 
-    gates = ["g_type", "g_rent", "g_movein", "g_dog", "g_elevator", "g_floor", "g_place", "g_proof"]
-    must_confirm = ["g_rent", "g_movein", "g_dog", "g_elevator", "g_place", "g_proof"]  # floor unknown is allowed (asterisk)
+    # g_elevator and g_floor stay as columns (what the elevator rule and the floor reading found); the gate that decides is
+    # g_floor_elevator (owner, 2026-11-17), which fails a ground-floor unit and a walk-up above floor 2
+    gates = ["g_type", "g_rent", "g_movein", "g_dog", "g_floor_elevator", "g_place", "g_proof"]
+    must_confirm = ["g_rent", "g_movein", "g_dog", "g_floor_elevator", "g_place", "g_proof"]
+    REASON = {"g_rent": RENT_FAIL_REASON}
 
     def status(r):
         if any(r[g] == "fail" for g in gates):
@@ -410,9 +442,10 @@ def main():
         return "pass"
 
     df["gate_status"] = df.apply(status, axis=1)
-    df["fail_reasons"] = df.apply(lambda r: ";".join(g[2:] for g in gates if r[g] == "fail"), axis=1)
+    df["fail_reasons"] = df.apply(lambda r: ";".join((r.floor_elevator_code if g == "g_floor_elevator" else REASON.get(g, g[2:])) for g in gates if r[g] == "fail"), axis=1)
     df["pending_reasons"] = df.apply(lambda r: ";".join(g[2:] for g in must_confirm if r[g] == "unknown"), axis=1)
     df["floor_asterisk"] = (df.g_floor == "unknown").map({True: "yes", False: ""})
+    df["floor_elevator_open"] = [c if g == "pass" and c in ("elevator", parsers.FLOOR_OR_ELEVATOR_CODE) else "" for g, c in zip(df.g_floor_elevator, df.floor_elevator_code)]
 
     df.drop(columns=["_fill", "_detail"]).to_csv(DATA / "listings.csv", index=False)
 
@@ -421,9 +454,12 @@ def main():
     for s_, g in df.groupby("gate_status"):
         lines.append(f"| {s_} | {len(g)} | {g.addr_key.nunique()} |")
     lines += ["", "## Each gate (after dedupe)", "", "| gate | pass | fail | unknown |", "|---|---|---|---|"]
-    for g in gates:
+    for g in gates + ["g_elevator", "g_floor"]:
         c = df[g].value_counts()
         lines.append(f"| {g[2:]} | {c.get('pass', 0)} | {c.get('fail', 0)} | {c.get('unknown', 0)} |")
+    lines += ["", "## Floor and elevator (owner, 2026-11-17)", "", "| result | listings |", "|---|---|"]
+    for k_, n_ in (df.g_floor_elevator + " " + df.floor_elevator_code.replace("", "-")).value_counts().items():
+        lines.append(f"| {k_} | {n_} |")
     lines += ["", "## By source", "", df.groupby(["source_site", "gate_status"]).size().unstack(fill_value=0).to_markdown(),
               "", "## Pending reasons (what would need confirming)", "",
               df[df.gate_status == "pending"].pending_reasons.value_counts().head(15).to_markdown(),

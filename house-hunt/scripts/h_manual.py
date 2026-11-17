@@ -9,6 +9,7 @@ Sources (all cached in raw/manual_envy/ by lib.cached_get; pass --refresh to ref
 Blocked, not worked around: securecafe.com (Cloudflare challenge on robots.txt), rentcafe.com (403), bbb.org (challenge).
 Writes data/listings_raw/manual.csv, data/reference/manual_buildings.csv and data/evidence/*_batch_manual.csv.
 Idempotent: rows are keyed by listing_id; first_seen is kept from an existing file.
+Also reads the inbox/ drop box (scripts/h_inbox.py -> data/listings_raw/manual_inbox.csv); `--inbox` runs only that.
 """
 import csv
 import json
@@ -307,4 +308,9 @@ def write_evidence(rows, tunits, own, om, tm):
 
 
 if __name__ == "__main__":
-    main()
+    # The drop box (inbox/, docs/TRAWL_2_PLAN.md step 5) lives in h_inbox.py and writes its own file,
+    # data/listings_raw/manual_inbox.csv; the Envy rows above are unchanged. --inbox runs only the drop box.
+    if "--inbox" not in sys.argv:
+        main()
+    import h_inbox  # noqa: E402
+    h_inbox.run()

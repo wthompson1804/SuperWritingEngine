@@ -1,0 +1,26 @@
+User-agent: Yandex
+Disallow: /
+
+User-agent: PropsmartCrawler
+Disallow: / 
+
+User-agent: *
+Disallow: /areainfo/townprint.cfm
+Disallow: /leads
+Disallow: /information
+Disallow: /information07
+Disallow: /cf
+Disallow: /savedsearches
+Disallow: /leads
+Disallow: /maps
+Disallow: /geocode
+Disallow: /portfolio
+Disallow: /staff
+Disallow: /tags
+Disallow: /schools
+Disallow: /search.cfm
+Sitemap: https://www.njmls.com/sitemap/sitemap.xml
+
+
+
+

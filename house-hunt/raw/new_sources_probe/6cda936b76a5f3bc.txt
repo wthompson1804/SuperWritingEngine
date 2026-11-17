@@ -1,0 +1,103 @@
+# Block GoogleOther (Google general-purpose crawler, not used for Search indexing)
+User-agent: GoogleOther
+Disallow: /
+
+User-agent: *
+Allow: /sales/*
+Allow: /rentals/*
+Allow: /sold/*
+
+# Block specific filters on search pages
+Disallow: /[0-9]*
+Disallow: /sales/*price.min=*
+Disallow: /sales/*beds=*
+Disallow: /sales/*baths=*
+Disallow: /sales/*home-types=*
+Disallow: /sales/*open-house*
+Disallow: /sales/*features=*
+Disallow: /sales/*sqft.min=*
+Disallow: /sales/*lot.min=*
+Disallow: /sales/*built.min=*
+Disallow: /sales/*new-construction*
+Disallow: /sales/*status=*
+Disallow: /sales/*styles=*
+Disallow: /sales/*school-type=*
+Disallow: /sales/*school-rate=*
+Disallow: /sales/*map-view=*
+Disallow: /sales/*sort=*
+Disallow: /sales/zip-*
+
+Disallow: /rentals/*price.min=*
+Disallow: /rentals/*beds=*
+Disallow: /rentals/*baths=*
+Disallow: /rentals/*home-types=*
+Disallow: /rentals/*open-house*
+Disallow: /rentals/*features=*
+Disallow: /rentals/*sqft.min=*
+Disallow: /rentals/*lot.min=*
+Disallow: /rentals/*built.min=*
+Disallow: /rentals/*new-construction*
+Disallow: /rentals/*status=*
+Disallow: /rentals/*styles=*
+Disallow: /rentals/*school-type=*
+Disallow: /rentals/*school-rate=*
+Disallow: /rentals/*map-view=*
+Disallow: /rentals/*sort=*
+Disallow: /rentals/zip-*
+
+
+Disallow: /sold/*price.min=*
+Disallow: /sold/*beds=*
+Disallow: /sold/*baths=*
+Disallow: /sold/*home-types=*
+Disallow: /sold/*open-house*
+Disallow: /sold/*features=*
+Disallow: /sold/*sqft.min=*
+Disallow: /sold/*lot.min=*
+Disallow: /sold/*built.min=*
+Disallow: /sold/*new-construction*
+Disallow: /sold/*status=*
+Disallow: /sold/*styles=*
+Disallow: /sold/*school-type=*
+Disallow: /sold/*school-rate=*
+Disallow: /sold/*map-view=*
+Disallow: /sold/*sort=*
+Disallow: /sold/zip-*
+
+# Block compare listings URLs
+Disallow: /compare-listings*
+
+# Block account-related URLs
+Disallow: /Account/Login
+Disallow: /Account/Register
+
+# Block insider search URLs
+Disallow: /insider/search*
+
+# Block favorites URLs
+Disallow: /favorites*
+
+# Block TheKey URL
+Disallow: /thekey
+
+# Sitemap URLs
+Sitemap: https://www.elliman.com/sitemaps/listings/exclusives/sales/index.xml
+Sitemap: https://www.elliman.com/sitemaps/listings/exclusives/rentals/index.xml
+Sitemap: https://www.elliman.com/sitemaps/listings/non-exclusives/rentals/index.xml
+Sitemap: https://www.elliman.com/sitemaps/listings/non-exclusives/sales/index.xml
+Sitemap: https://www.elliman.com/sitemaps/listings/new-rentals/index.xml
+Sitemap: https://www.elliman.com/sitemaps/listings/new-sales/index.xml
+
+Sitemap: https://www.elliman.com/sitemaps/rentals/index.xml
+Sitemap: https://www.elliman.com/sitemaps/sales/index.xml
+
+Sitemap: https://www.elliman.com/sitemaps/buildings/sales/index.xml
+Sitemap: https://www.elliman.com/sitemaps/buildings/rentals/index.xml
+
+Sitemap: https://www.elliman.com/sitemaps/agents/index.xml
+Sitemap: https://www.elliman.com/sitemaps/team/index.xml
+Sitemap: https://www.elliman.com/sitemaps/leadership/index.xml
+Sitemap: https://www.elliman.com/sitemaps/featured-cities/index.xml
+Sitemap: https://www.elliman.com/sitemaps/neighborhood-guides/index.xml
+Sitemap: https://www.elliman.com/sitemaps/woe-articles/index.xml
+Sitemap: https://www.elliman.com/sitemaps/insider-articles/index.xml

@@ -2,10 +2,12 @@
 
 Reads only the master tables (build_master.py, all_in.py) and data/lifestyle_groups.csv. In order:
   1. within the all-in cap; neighborhood not cut by the Jamaica safety rule
-  2. removed on confirmed facts (no elevator, dogs not allowed, limit under 25 lb, ground floor, gone, stale 6+ months ...)
+  2. removed on confirmed facts (listed rent over $2,200; no elevator on floor 3+, by parsers.floor_elevator_rule; dogs not
+     allowed, limit under 25 lb, ground floor, gone, stale 6+ months ...)
   3. not a real apartment (floor plan, building-page price, co-living room) -> data/excluded_not_an_apartment.csv
   4. removed by a reviewed verdict; sibling floor rule
-  5. open gate facts counted (elevator by parsers.elevator_rule, dogs, listing / availability / eligibility):
+  5. open gate facts counted (floor and elevator by parsers.floor_elevator_rule over parsers.elevator_rule, dogs,
+     listing / availability / eligibility):
      two or more -> "sketchy", excluded; one -> kept with certainty 0.97
   6. evidence exclusions and avoid buildings (avoid.py)
   7. scores: universal value 0-100 (safety 22, building 16, cost 12, car 12, space 12, distance 10, dog 8, daily life 8;
@@ -193,6 +195,41 @@ def color_table(u):
     return pd.DataFrame(rows).set_index("addr_key")
 
 
+RENT_MAX = 2200            # owner, 2026-11-17 (second trawl): nothing above $2,200 listed base rent (scripts/gates.py: RENT_MAX)
+RENT_FAIL_REASON = f"over_{RENT_MAX}"
+
+
+def elevator_exclusion_keys(path=None, crosswalk=None):
+    """(addr_keys, building_ids) of the evidence exclusions that say only "no elevator" (scripts/avoid.py, kind
+    'elevator'; an older file without the column is read by its reason). Under the floor-and-elevator rule (owner,
+    2026-11-17) these are an elevator 'no' for parsers.floor_elevator_rule, not a removal by themselves."""
+    import avoid as AV_
+    xf = Path(path) if path else DATA / "unit_exclusions.csv"
+    if not xf.exists():
+        return set(), set()
+    X = pd.read_csv(xf, dtype=str, keep_default_na=False)
+    kind = X["kind"] if "kind" in X else X.reason.map(lambda t: AV_.ELEVATOR_KIND if AV_.is_elevator_exclusion(t) else "")
+    X = X[(kind == AV_.ELEVATOR_KIND) & (X.unit == "") & (X.get("listing_id", pd.Series("", index=X.index)) == "")]
+    xwf = Path(crosswalk) if crosswalk else DATA / "reference" / "building_crosswalk.csv"
+    xw = pd.read_csv(xwf, dtype=str, keep_default_na=False).set_index("addr_key").building_id.to_dict() if xwf.exists() else {}
+    return set(X.addr_key), {xw[k] for k in X.addr_key if k in xw}
+
+
+def floor_elevator_rows(u, elevator_status):
+    """parsers.floor_elevator_master for every row of u, with the given elevator status per row (a Series or a
+    string). Returns (status Series, code Series)."""
+    st = elevator_status if isinstance(elevator_status, pd.Series) else pd.Series(elevator_status, index=u.index)
+    cols = ["unit_floor", "unit_floor_basis", "unit_floor_label_kind", "unit_floor_reading", "building_stories", "building_stories_basis"]
+    F = pd.DataFrame({c: (u[c].fillna("").astype(str) if c in u else pd.Series("", index=u.index)) for c in cols})
+    F["unit_floor"] = F.unit_floor.str.replace(r"\.0$", "", regex=True)
+    res = [parsers.floor_elevator_master(lambda c, r=r: r.get(c, ""), e) for r, e in zip(F.to_dict("records"), st)]
+    return pd.Series([x[0] for x in res], index=u.index), pd.Series([x[1] for x in res], index=u.index)
+
+
+FE_FAIL_WHY = {"ground_floor": "ground-floor unit", "one_storey_building": "ground-floor unit: an official record gives the building one storey",
+               "no_elevator_above_floor_2": "no elevator, and the apartment is on floor 3 or above (owner, 2026-11-17: a walk-up is allowed on floor 2 only)"}
+
+
 def main():
     # Reads ONLY the master tables (scripts/build_master.py + scripts/all_in.py). No side files.
     u = pd.read_csv(DATA / "master_units.csv", low_memory=False, dtype={"zip5": str})
@@ -214,8 +251,21 @@ def main():
     fl = pd.to_numeric(u.get("unit_floor"), errors="coerce")
     hard = pd.Series("", index=u.index)
     el = s("elevator").str.lower()
-    for cond, why in [(el.eq("no"), "no elevator (contradicted in the evidence pass)"),
-                      (el.eq("conflicting"), "elevator not established: the sources conflict on which buildings have one"),
+    # owner, 2026-11-17 (second trawl): "no elevator" removes only where the floor-and-elevator rule fails the unit (floor
+    # 3 and above, or the ground floor); a floor-2 apartment stays, and an unknown floor is one open fact. The evidence
+    # exclusions that say "no elevator" (avoid.py, kind elevator) and a reviewer's "remove | elevator" count as "no".
+    import verdicts as VD
+    VU0 = VD.by_unit()
+    ex_k, ex_b = elevator_exclusion_keys()
+    rm_el_only = u.listing_id.map(lambda l: l in VU0 and VU0[l]["verdict"] == "remove" and all(r["kind"] == "elevator" for r in VU0[l]["rows"] if r["verdict"] == "remove")).astype(bool)
+    phone_yes = s("elevator_basis").eq(SETTLED_BY_PHONE) & el.eq("yes")
+    said_no = ((u.addr_key.isin(ex_k) | u.building_id.isin(ex_b)) | rm_el_only) & ~phone_yes
+    u["elevator_said_no"] = np.where(said_no, "yes", "")
+    no_el = el.isin(["no", "conflicting"]) | said_no
+    fe_st0, fe_code0 = floor_elevator_rows(u, "no")
+    cur_rent = pd.to_numeric(s("live_price").where(s("live_status").isin(["live", "changed"]) & s("live_price").ne(""), s("listed_rent")), errors="coerce")
+    for cond, why in [(cur_rent > RENT_MAX, RENT_FAIL_REASON + ": listed base rent above $2,200 (owner, 2026-11-17)"),
+                      (no_el & fe_st0.eq("fail"), fe_code0.map(FE_FAIL_WHY).fillna("no elevator") + np.where(el.eq("conflicting"), " (the sources conflict on the elevator)", "")),
                       (s("dogs_allowed").str.lower().eq("no"), "dogs not allowed (confirmed)"),
                       (wl < 25, "dog weight limit under 25 lb"), (fl < 2, "ground-floor unit"),
                       # independent check 4, D22: reads as floor 1 under the complex's reviewed numbering convention
@@ -269,7 +319,9 @@ def main():
         if c == "kind":
             return u.listing_id.map(lambda l: ";".join(r["kind"] for r in VU[l]["rows"] if r["kind"]) if l in VU else "")
         return u.listing_id.map(lambda l: next((r[c] for r in VU[l]["rows"] if r["verdict"] == VU[l]["verdict"]), "") if l in VU else "")
-    rm = vd("verdict").eq("remove")
+    # a reviewer's "remove | elevator" alone no longer removes a unit the floor-and-elevator rule keeps (owner, 2026-11-17):
+    # it counts as "no elevator" (elevator_said_no, above); a floor-3+ or ground-floor unit was removed with the hard facts
+    rm = vd("verdict").eq("remove") & ~rm_el_only.reindex(u.index).fillna(False)
     u[rm].assign(drop_reason="reviewed: " + vd("why")[rm], review_kind=u.listing_id[rm].map(lambda l: ";".join(r["kind"] for r in VU[l]["rows"] if r["verdict"] == "remove"))) \
         .to_csv(DATA / "excluded_by_review.csv", index=False)
     n_rev = int(rm.sum()); u = u[~rm].copy()
@@ -333,11 +385,24 @@ def main():
     u["elevator_rule_status"], u["elevator_rule_basis"] = st_e, bs_e
     base_e = st_e.isin(["unknown", "no"]) | (st_e.eq("open") & bs_e.str.startswith("inferred"))    # no page or record states one
     doubt_e = s("elevator_doubt").ne("") & ~phone_e & (not NO_ELEVATOR_DOUBT)
-    inf_e = st_e.ne("established")
+    # owner, 2026-11-17 (second trawl): FLOOR AND ELEVATOR TOGETHER (parsers.floor_elevator_rule). Elevator established ->
+    # as before. Otherwise floor 2 (stated, confirmed, or read from the apartment number) is settled, whatever the doubt
+    # table or the garden-style rule say about the elevator; floor 3+ needs the elevator (open stays one open fact, no
+    # fails, unknown is not shown); an unknown floor is ONE open fact: the elevator fact where an elevator is named but in
+    # doubt, else floor_or_elevator ("Confirm the floor, and whether there is an elevator").
+    said_no_e = s("elevator_said_no").eq("yes")
+    el_in = st_e.where(~said_no_e, "no")
+    fe_st, fe_code = floor_elevator_rows(u, el_in)
+    u["floor_elevator_status"], u["floor_elevator_code"] = fe_st, fe_code
+    inf_e = fe_st.eq("open")
+    fe_combo = inf_e & fe_code.eq(parsers.FLOOR_OR_ELEVATOR_CODE)
     fb, fk = s("unit_floor_basis"), s("unit_floor_label_kind")
     floor_settled = fb.isin(["confirmed", "stated", SETTLED_BY_PHONE])
-    floor_from_label_ok = fb.eq("inferred") & fk.eq("simple") & (fl >= 3)
-    inf_f = ~floor_settled | vhas("floor")          # not published: unknown, or only read from the unit number
+    walkup2 = fe_code.eq("floor_2")                 # floor 2 with no elevator established: the floor is what lets it pass
+    floor_from_label_ok = (fb.eq("inferred") & fk.eq("simple") & (fl >= 3)) | (walkup2 & ~floor_settled)
+    # not published: unknown, or only read from the unit number. Where the open fact floor_or_elevator already asks for
+    # the floor, the floor is not listed a second time as a disclosure.
+    inf_f = (~floor_settled | vhas("floor")) & ~fe_combo
     u["floor_basis_note"] = np.where(floor_from_label_ok, "read from the unit number", "")
     # dogs: allowed must be stated or confirmed, and dogs must be NAMED as allowed (D2, D3): an unconfirmed evidence
     # row, "pets upon approval", "case by case" or small pets with dogs unnamed leave the fact open
@@ -357,7 +422,9 @@ def main():
     dog_wl_unstated = s("dog_weight_unstated").ne("") & wl.isna() & ~no_limit & ~dog_small
     # An elevator "inferred from height" counts as ONE open fact only when a page or record gives a real height (the rule's
     # status "open"). Where nothing but a unit label ("36D", "801") suggests the height, the status is "unknown": not shown.
-    weak_e = st_e.isin(["unknown", "no"])
+    # owner, 2026-11-17: what is not shown is now decided by the floor-and-elevator rule: floor 3+ with no elevator
+    # stated anywhere ('unknown'), or a walk-up that fails it ('fail': hard facts above remove most of these)
+    weak_e = fe_st.isin(["unknown", "fail"])
     # ---- the other things a renter must not find out later (independent check 2)
     #  lease      the listed price belongs to a lease longer than 13 months, or is only "the lowest over the lease terms" (D8)
     #  cost       all-in within $100 of the cap while pet rent, parking or required fees is unknown and counted as $0 (D12)
@@ -435,12 +502,15 @@ def main():
                                   "The listing's own terms tie this price to a lease longer than 13 months.")))
     sib_listing_why = "The price shown " + term_txt.where(lm.notna(), "is a long-lease price") + ", and " + parsers.SIBLING_12_MONTH_TEXT.split(":")[0] + ": " + s("price_12_sibling_why") + ". This apartment's own 12-month price was not read, so the price shown is kept and nothing is guessed."
     OPEN = [  # key, flag, label on the page, why, question
-        ("elevator", inf_e, "elevator",
+        ("elevator", inf_e, np.where(fe_combo, parsers.FLOOR_OR_ELEVATOR_LABEL, "elevator"),
+         np.where(fe_combo, np.where(said_no_e | st_e.eq("no"), "The evidence says this building has no elevator, and no page states the floor: without an elevator only an apartment on floor 2 (one flight up) qualifies.",
+                                     "No page states the floor or an elevator: on floor 2 (one flight up) no elevator is needed; on floor 3 or above one is."),
          np.where(base_e, "No page states an elevator; the building's height suggests one.",
                   np.where(s("elevator_evidence_open").ne(""), "The evidence pass could not confirm an elevator for this building: " + s("elevator_evidence_open").str.replace("the evidence pass could not confirm it: ", "", regex=False).str[:140],
                            "An elevator is named for this property, but it is a low-rise or multi-building complex, so that does not say an elevator serves this apartment: "
-                           + s("elevator_doubt").str.replace(r"^(?:reviewed table|rule): ", "", regex=True).str[:220])),
-         np.where(doubt_e & ~base_e & s("elevator_evidence_open").eq(""), ELEVATOR_DOUBT_Q + " (this building of the complex, this floor)", "Does this building have an elevator?")),
+                           + s("elevator_doubt").str.replace(r"^(?:reviewed table|rule): ", "", regex=True).str[:220]))),
+         np.where(fe_combo, parsers.FLOOR_OR_ELEVATOR_Q,
+                  np.where(doubt_e & ~base_e & s("elevator_evidence_open").eq(""), ELEVATOR_DOUBT_Q + " (this building of the complex, this floor)", "Does this building have an elevator?"))),
         ("floor", inf_f, "floor", None, None),
         ("dogs", dog_open, "dogs allowed",
          np.where(base_d, "Two listing sites disagree on whether dogs are allowed, and the building's own page does not settle it.",
@@ -474,7 +544,8 @@ def main():
     d_code = s("dogs_evidence_open").map(parsers.dogs_open_code)
     stale_kind = np.where(s("listing_stale_why").str.contains("availability date"), "stale_date", "stale_page")
     CODE = {
-        "elevator": sel([(base_e, "height_only"), (s("elevator_evidence_open").ne(""), "x"), (doubt_e, "complex")], "reviewer").where(lambda c: c != "x", e_code),
+        "elevator": sel([(base_e, "height_only"), (s("elevator_evidence_open").ne(""), "x"), (doubt_e, "complex")], "reviewer").where(lambda c: c != "x", e_code)
+                    .where(~fe_combo, parsers.FLOOR_OR_ELEVATOR_CODE),
         "floor": pd.Series(np.where(fb.eq("inferred"), "floor_read_from_number", "floor_not_published"), index=u.index),
         "dogs": sel([(s("dogs_evidence_open").ne(""), "x"), (base_d | dog_conflict_open, "sources_disagree")], "reviewer").where(lambda c: c != "x", d_code),
         "lease": sel([(used12, "uses_12_month"), (sib12, "sibling_12"), (lm.notna() & (lm != 12), "term"), (s("price_lowest_of_terms").eq("yes"), "lowest_of_terms")], "reviewer"),
@@ -513,13 +584,15 @@ def main():
     offer_txt = s("rent_offer_text").str[:160].values
     special = (s("rent_offer_kind").eq("special_offer") & ~s("rent_basis_kind").eq("net_effective")).values
     offer_type = s("rent_offer_type").values
-    cols_ = [(k, f.values, lab, np.asarray(floor_why if k == "floor" else (w if not isinstance(w, str) else np.full(len(u), w, dtype=object))),
+    cols_ = [(k, f.values, (lab if isinstance(lab, str) else np.asarray(lab)), np.asarray(floor_why if k == "floor" else (w if not isinstance(w, str) else np.full(len(u), w, dtype=object))),
               (None if k == "floor" else (q if isinstance(q, str) else np.asarray(q)))) for k, f, lab, w, q in OPEN]
     # step 3: overnight street-parking rule of the town, where the unit's parking is not confirmed at the building
     park_d = np.array([needs_parking_disclosure(sv, pt, pf) for sv, pt, pf in zip(s("street_overnight_severity"), s("parking_type"), s("parking_fee"))], dtype=bool)
     po_town, po_rule, po_url, po_sev = s("street_overnight_town").values, s("street_overnight_rule").values, s("street_overnight_url").values, s("street_overnight_severity").values
     wl_un, wl_txt = dog_wl_unstated.values, s("dog_weight_unstated").str.replace(r"^yes: ", "", regex=True).str.split(" || ", regex=False).str[0].str[:140].values
     fq = pd.Series(floor_q, index=u.index).str.rstrip("; ").values
+    # owner, 2026-11-17: a walk-up apartment passes on floor 2 only, so its floor question says so
+    floor_disc_q = np.where(walkup2.values, FLOOR_DISCLOSURE + "; " + parsers.FLOOR_2_WALKUP_Q, FLOOR_DISCLOSURE)
     used12_v, sib12_v, sib_listing_why_v = used12.values, sib_open.values, np.asarray(sib_listing_why)
     for i in range(len(u)):
         whats, whys, qs, keys, disc, codes, rwhys, rqs = [], [], [], [], [], [], [], []
@@ -536,10 +609,10 @@ def main():
                 if k in DISCLOSURE_KEYS:
                     is_condo = k == "condo" or (k == "other" and "condo" in why_.lower())
                     disc.append({"what": "condo rented by its owner" if is_condo else ("floor not published" if k == "floor" else ("something else to know" if k == "other" else lab)),
-                                 "why": why_, "question": FLOOR_DISCLOSURE if k == "floor" else (q_ or ""), "code": ("condo:" if is_condo and k == "other" else k + ":") + str(code_v[k][i]),
+                                 "why": why_, "question": floor_disc_q[i] if k == "floor" else (q_ or ""), "code": ("condo:" if is_condo and k == "other" else k + ":") + str(code_v[k][i]),
                                  "review_why": rv[0] if rv and rv[0] and k != "floor" else "", "review_question": rv[1] if rv and rv[1] and k != "floor" else ""})
                     continue
-                keys.append(k); whats.append(lab); whys.append(why_); qs.append(q_)
+                keys.append(k); whats.append(lab if isinstance(lab, str) else str(lab[i])); whys.append(why_); qs.append(q_)
                 codes.append(str(code_v[k][i])); rwhys.append(rv[0] if rv and rv[0] else ""); rqs.append(rv[1] if rv and rv[1] else "")
         if net_eff[i]:
             disc.append({"what": "net-effective rent", "why": "The rent shown is the average after a special offer, not the monthly payment." + (" Offer: " + offer_txt[i] if offer_txt[i] else ""),
@@ -582,7 +655,7 @@ def main():
     u["one_time_costs"] = otc_v
     u["disclosures"] = disc_l
     u["to_confirm"] = [q + "; " if q else "" for q in q_l]
-    u["tour_confirm"] = (pd.Series(np.where(inf_f, FLOOR_DISCLOSURE + "; ", ""), index=u.index)
+    u["tour_confirm"] = (pd.Series(np.where(inf_f, pd.Series(floor_disc_q, index=u.index) + "; ", ""), index=u.index)
                          + pd.Series(np.where(dog_small | dog_wl_unstated, parsers.DOG_WEIGHT_QUESTION + "; ", ""), index=u.index)).str.rstrip("; ")
     u["phone_settled"] = (pd.Series(np.where(phone_e, "elevator;", ""), index=u.index) + np.where(phone_d, "dogs allowed;", "") + np.where(phone_av, "availability;listing;", "")).str.rstrip(";")
     # the one open fact, in plain words, for the asterisk on the page (owner, 2026-11-15: a unit with exactly one open
@@ -592,7 +665,9 @@ def main():
     u["unknown_cost_lines"] = unknown_lines.str.replace(" / ", "; ")
     u["open_gate_facts"] = n_inf
     u["confidence"] = np.where(reasons != "", "sketchy", np.where(n_inf == 0, "clean", np.where(n_inf == 1, "one_inferred", "sketchy")))
-    u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(weak_e, "elevator not stated on any page and the building's height is not known (it was guessed from the unit label)", np.where(n_inf >= 2, "two or more things unconfirmed: " + u.confirm_what, "")))
+    weak_why = np.where(fe_st.eq("fail"), fe_code.map(FE_FAIL_WHY).fillna("fails the floor-and-elevator rule"),
+                        "floor 3 or above (" + fb + ") and no elevator stated on any page or record, and the building's height is not known (owner, 2026-11-17: floor 3 and above need an elevator)")
+    u["sketchy_reason"] = np.where(reasons != "", reasons, np.where(weak_e, weak_why, np.where(n_inf >= 2, "two or more things unconfirmed: " + u.confirm_what, "")))
     u[u.confidence == "sketchy"].to_csv(DATA / "excluded_sketchy.csv", index=False)
     n_sk = int((u.confidence == "sketchy").sum())
     u = u[u.confidence != "sketchy"].copy()
@@ -609,6 +684,10 @@ def main():
         X["building_id"] = X.addr_key.map(xw).fillna("")
         if "listing_id" not in X:
             X["listing_id"] = ""
+        # "no elevator" rows (kind elevator) were applied above as an elevator 'no' for the floor-and-elevator rule
+        # (owner, 2026-11-17): they do not exclude a floor-2 apartment here
+        import avoid as AV_
+        X = X[~(X["kind"] if "kind" in X else X.reason.map(lambda t: AV_.ELEVATOR_KIND if AV_.is_elevator_exclusion(t) else "")).eq(AV_.ELEVATOR_KIND)]
         by_lid = set(X[X.listing_id != ""].listing_id)                      # a row that names one listing excludes only it
         X = X[X.listing_id == ""]
         whole_k, whole_b = set(X[X.unit == ""].addr_key), set(X[(X.unit == "") & (X.building_id != "")].building_id)

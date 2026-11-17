@@ -42,8 +42,61 @@ CARDS_F = RAWD / "cards.jsonl"           # one line per (search page, card)
 BLOCK_F = RAWD / "BLOCKED.txt"
 OUT = lib.DATA / "listings_raw" / "zumper.csv"
 GRID = lib.DATA / "reference" / "search_grid.csv"
-MAX_RENT = 3000
-SEEDS = ["new-york-ny", "queens-ny", "stamford-ct", "jersey-city-nj", "hempstead-ny", "white-plains-ny",
+# Second trawl (Will, 2026-11-17): collect nothing above $2,200 listed base rent. Rows held before the trawl
+# (listing ids in TRAWL2_HELD_F, snapshot of zumper.csv and the opened file at the trawl's start) and pages or
+# cards read before TRAWL2_START keep the earlier $3,000 limit, so nothing already held is dropped.
+MAX_RENT = 2200
+HELD_MAX_RENT = 3000
+TRAWL2_START = "2026-11-17T16:45:00+00:00"
+TRAWL2_HELD_F = RAWD / "trawl2_held_ids.json"
+TRAWL2_CITIES_F = RAWD / "trawl2_cities.json"
+OPENED_F = lib.DATA / "listings_pending" / "zumper_opened.csv"
+OPENED_SUMMARY_F = lib.DATA / "listings_pending" / "zumper_opened_summary.csv"
+KILL_F = lib.RAW / "_host_kill_shared.json"
+LIC_ZIPS = ("11101", "11109", "11120")
+PRIORITY_AREAS = ("NJ", "Brooklyn", "CT", "Long Island", "LIC")
+
+
+def area_of(zip5, state) -> str:
+    """Priority area of the second trawl: NJ, CT, Brooklyn (112xx), LIC (11101/11109/11120), Long Island (Nassau and
+    Suffolk: NY 110xx except Queens' 11004/11005, 115xx, 117xx-119xx); anything else is 'other'."""
+    z = str(zip5 or "").strip()[:5].zfill(5)
+    st = str(state or "").strip().upper()
+    if st == "NJ":
+        return "NJ"
+    if st == "CT":
+        return "CT"
+    if st not in ("NY", ""):
+        return "other"
+    if z in LIC_ZIPS:
+        return "LIC"
+    if z.startswith("112"):
+        return "Brooklyn"
+    if (z.startswith("110") and z not in ("11004", "11005")) or z[:3] in ("115", "117", "118", "119"):
+        return "Long Island"
+    return "other"
+
+
+def held_ids() -> set:
+    """Listing ids held before the second trawl (snapshot written once, on first use)."""
+    if TRAWL2_HELD_F.exists():
+        return set(json.loads(TRAWL2_HELD_F.read_text()))
+    ids = set()
+    for f in (OUT, OPENED_F):
+        if f.exists():
+            ids |= {r["listing_id"] for r in csv.DictReader(open(f))}
+    TRAWL2_HELD_F.write_text(json.dumps(sorted(ids)))
+    return ids
+
+
+def rent_cap(listing_id: str, seen: str) -> int:
+    """$3,000 for a row held before the second trawl or read before it started; $2,200 for anything new."""
+    if str(seen or "") < TRAWL2_START or str(listing_id) in held_ids():
+        return HELD_MAX_RENT
+    return MAX_RENT
+
+
+SEEDS =["new-york-ny", "queens-ny", "stamford-ct", "jersey-city-nj", "hempstead-ny", "white-plains-ny",
          "newark-nj", "new-haven-ct", "poughkeepsie-ny", "trenton-nj", "riverhead-ny", "morristown-nj",
          "bridgeport-ct", "nyack-ny", "toms-river-nj", "allentown-pa", "danbury-ct", "middletown-ny"]
 COLS = ("listing_id,source_site,url,detail_level,first_seen,last_seen,building_name,address,city,state,zip,lat,lon,"
@@ -590,6 +643,192 @@ def facts_from(entity: dict, vt: str, bld: dict | None, bvt: str):
     return f
 
 
+# ---------------------------------------------------------------- facts stated in the page text (second trawl)
+# Each helper reads only what the listing page itself states and quotes it in `notes`. A unit label is never read
+# for a floor or an elevator here (gates.py reads labels for the floor itself, and never for an elevator).
+ORD_N = {"ground": 1, "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6, "seventh": 7,
+         "eighth": 8, "ninth": 9, "tenth": 10, "eleventh": 11, "twelfth": 12}
+ORD_RE = r"(ground|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|\d{1,2}(?:st|nd|rd|th))"
+FLOOR_MENTION = re.compile(r"\b" + ORD_RE + r"\.?(?:[- ]|\s+)?(?:floor|flr\b\.?|fl\b\.?)", re.I)
+FLOOR_GROUND = re.compile(r"\b(?:ground|street|garden)[- ]level\b(?=[^.]{0,25}\b(?:apartment|apt|unit|studio|"
+                          r"bedroom|1br|rental|suite|home|living)\b)|\b(?:apartment|apt|unit|studio) (?:is )?(?:at|on) "
+                          r"(?:the )?(?:ground|street) level\b", re.I)
+FLOOR_BASEMENT = re.compile(r"\b(?:basement|lower)[- ]level (?:apartment|apt|unit|studio|suite|rental)\b|\b(?:apartment|"
+                            r"apt|unit|studio) (?:is )?(?:in|on) the (?:basement|lower level)\b|\bbasement (?:apartment|"
+                            r"apt|unit|studio)\b", re.I)
+FLOOR_TOP_OF = re.compile(r"\btop[- ]floor (?:of|in) (?:a |an |the |this )?(two|2|three|3)[- ]family\b", re.I)
+# a floor mention about something other than the apartment (laundry on the first floor, a duplex's other level ...)
+FLOOR_OTHER = re.compile(r"laundr|restroom|amenit|office|\bgym\b|fitness|lobby|storage|common|mailroom|lounge|garage|"
+                         r"retail|storefront|store front|commercial|sq\.? ?f|square f|duplex|two[- ]level|2[- ]level|"
+                         r"bi-?level|tri-?level|main floor|other floor|game room|play ?room|business center|"
+                         r"hardwood|tile|vinyl|laminate|carpet", re.I)
+
+
+def _plain(html_text: str) -> str:
+    return re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", " ", html_text or ""))).strip()
+
+
+def floor_from_text(own: str):
+    """(floor or None, [notes]) from the unit's own description and title. A floor is written only when every
+    mention that is about the apartment agrees; ground/street/garden level is 1, a basement or lower-level unit 0."""
+    t = _plain(own)
+    found, notes = [], []
+    for m in FLOOR_MENTION.finditer(t):
+        w = m.group(1).lower()
+        n = ORD_N.get(w)
+        if n is None and w[0].isdigit():
+            n = int(re.match(r"\d+", w).group(0))
+        win = t[max(0, m.start() - 45):m.end() + 30]
+        if not n or n > 60:
+            continue
+        if FLOOR_OTHER.search(win):
+            notes.append(f"floor text in description (not used, about something else): '{m.group(0)}'")
+            continue
+        found.append((n, m.group(0) + (" (ground)" if w == "ground" else "")))
+    for m in FLOOR_GROUND.finditer(t):
+        found.append((1, m.group(0) + " (ground)"))
+    for m in FLOOR_BASEMENT.finditer(t):
+        found.append((0, m.group(0) + " (basement)"))
+    for m in FLOOR_TOP_OF.finditer(t):
+        found.append((2 if m.group(1).lower() in ("two", "2") else 3, m.group(0)))
+    vals = {n for n, _ in found}
+    if len(vals) == 1:
+        n = vals.pop()
+        notes.append("floor from description text: " + " / ".join(f"'{q}'" for _, q in found[:3]))
+        return n, notes
+    if len(vals) > 1:
+        notes.append("floor text in description disagrees (not used): " + " / ".join(f"'{q}'" for _, q in found[:4]))
+    elif re.search(r"\btop[- ]floor\b", t, re.I):
+        notes.append("description says top floor (no number; not used)")
+    return None, notes
+
+
+EL_WORD = re.compile(r"\belevators?\b", re.I)
+EL_NEG = re.compile(r"\b(?:no|without|not|non|lacks?|isn'?t|never)\b[^.;]{0,25}\belevators?\b|\belevators?\b[^.;]{0,20}"
+                    r"\b(?:not available|out of (?:service|order)|not included|none)\b|\belevators?\s*[:\-]\s*(?:no|none|"
+                    r"n/?a)\b|walk[- ]?up", re.I)
+
+
+def elevator_from_page(desc: str, vt: str):
+    """('yes', note) when the listing page states an elevator: the 'Amenities for <address>' list of the page
+    ('Building' part; Zumper shows it on unit pages and says some units at the address have these amenities) or
+    the listing's own description; ('', '') otherwise. Any negative wording on the page leaves it unknown."""
+    if EL_NEG.search(desc or ""):
+        return "", ""
+    i = vt.find("|Amenities for ")
+    if i >= 0:
+        seg = vt[i:i + 1500]
+        j = seg.find("|Building|")
+        if j >= 0:
+            seg = seg[j + 10:]
+            for stop in ("|Unit Amenities|", "|Policies at", "|Policies and fees|", "|Questions about", "|Location|"):
+                k = seg.find(stop)
+                if k >= 0:
+                    seg = seg[:k]
+            if "Elevator" in seg.split("|"):
+                return "yes", ("elevator=yes from the page's building amenity list ('Amenities for ...: Building: "
+                               "Elevator'; Zumper says some units at this address have these amenities)")
+    m = EL_WORD.search(desc or "")
+    if m:
+        q = desc[max(0, m.start() - 60):m.end() + 40].strip()
+        return "yes", f"elevator=yes stated in the listing description: '{q}'"
+    return "", ""
+
+
+DOG_POS = re.compile(r"\b(?:small |large |all )?dogs?\b[^.;]{0,25}?\b(?:allowed|welcome[ds]?|ok(?:ay)?|permitted|"
+                     r"accepted)\b|\bdog[- ]friendly\b", re.I)
+DOG_NEG = re.compile(r"\bno (?:pets|dogs)\b|\b(?:pets?|dogs?) (?:are )?not (?:allowed|permitted|accepted)\b|\bcats? only\b|"
+                     r"\bpet[- ]free\b|\bnot pet[- ]friendly\b", re.I)
+
+
+def dogs_from_desc(desc: str):
+    """('yes'|'no'|'', quote) from the listing description; both kinds of wording leave it unknown."""
+    p, n = DOG_POS.search(desc or ""), DOG_NEG.search(desc or "")
+    if p and re.search(r"\bnot\b|\bno\b", p.group(0), re.I):
+        p = None
+    if p and n:
+        return "", f"CONFLICT in description: '{p.group(0)}' / '{n.group(0)}'"
+    if p:
+        return "yes", p.group(0)
+    if n:
+        return "no", n.group(0)
+    return "", ""
+
+
+MONTHS = {m: i + 1 for i, m in enumerate(("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov",
+                                          "dec"))}
+MONTH_RE = (r"(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|aug(?:ust)?|sep(?:t(?:ember)?)?|"
+            r"oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)")
+AV_LEAD = (r"\b(?:available|availability|move[- ]in|occupancy)(?: date)?(?: for move[- ]in)?\s*(?:[:\-]\s*)?"
+           r"(?:on|from|starting|beginning|as of|after)?\s*(?:(?:mon|tues|wednes|thurs|fri|satur|sun)day,?\s*)?")
+AV_NOW = re.compile(r"\b(?:available|move[- ]in)(?: for move[- ]in)?\s*(?:[:\-]\s*)?(now|immediately|asap|today)\b", re.I)
+AV_MD = re.compile(AV_LEAD + MONTH_RE + r"\.?\s+(\d{1,2})(?:st|nd|rd|th)?\b(?:,?\s*(20\d\d))?", re.I)
+AV_NUM = re.compile(AV_LEAD + r"(\d{1,2})/(\d{1,2})(?:/(\d{4}|\d{2}))?\b(?!\s*(?:bath|ba\b|month|off|price|mile))", re.I)
+
+
+def avail_from_desc(desc: str, seen_day):
+    """(available_date_text, available_date) from an explicit date or 'available now/immediately' in the listing's
+    own description, judged against the day the page was read; ('', '') when it states none. A month without a
+    day is not used. A date without a year is the next one within 90 days before to 9 months after the read day."""
+    from datetime import date
+    t = _plain(desc)
+    cands = []
+    for m in AV_MD.finditer(t):
+        cands.append((m.start(), m.group(0), MONTHS[m.group(1).lower()[:3]], int(m.group(2)), m.group(3)))
+    for m in AV_NUM.finditer(t):
+        y = m.group(3)
+        y = ("20" + y) if y and len(y) == 2 else y
+        cands.append((m.start(), m.group(0), int(m.group(1)), int(m.group(2)), y))
+    for m in AV_NOW.finditer(t):
+        cands.append((m.start(), m.group(0), None, None, None))
+    for _, q, mo, dd, y in sorted(cands):
+        if mo is None:
+            return f"description: '{q}'", "now"
+        try:
+            if y:
+                d = date(int(y), mo, dd)
+            else:
+                d = date(seen_day.year, mo, dd)
+                if (seen_day - d).days > 90:
+                    d = date(seen_day.year + 1, mo, dd)
+        except ValueError:
+            continue
+        if not (-400 <= (d - seen_day).days <= 400):
+            continue
+        return f"description: '{q}'", ("now" if d <= seen_day else d.isoformat())
+    return "", ""
+
+
+def page_text_facts(r: dict, L: dict, bld, desc: str, vt: str, notes: list, day) -> None:
+    """Second-trawl additions, applied after the original rules (which they never override): elevator stated on the
+    page, dogs stated in the description, the page-data weight limit, and a move-in date stated in the description."""
+    if r["elevator"] == "unknown":
+        v, note = elevator_from_page(desc, vt)
+        if v:
+            r["elevator"] = v
+            notes.append(note)
+    if r["dogs"] == "unknown":
+        v, q = dogs_from_desc(desc)
+        if v:
+            r["dogs"] = v
+            r["dog_policy_text"] = (r["dog_policy_text"] + f" ; description: '{q}'").strip(" ;")[:1200]
+            notes.append(f"dogs={v} from the listing description")
+        elif q:
+            notes.append(q)
+    if not r["dog_weight_limit_lb"] and r["dogs"] == "yes":
+        pp = L.get("pet_policy") or (bld or {}).get("pet_policy") or []
+        ws = [p.get("max_wt_in_lbs") for p in pp if isinstance(p, dict) and "dog" in str(p.get("type", "")).lower()
+              and p.get("ok") and p.get("max_wt_in_lbs")]
+        if ws:
+            r["dog_weight_limit_lb"] = int(max(ws))
+            notes.append("weight limit from page-data pet_policy max_wt_in_lbs")
+    if r["available_date"] == "" and r["available_date_text"] == "":
+        txt, iso = avail_from_desc(L.get("description") or "", day)
+        if iso:
+            r["available_date_text"], r["available_date"] = txt, iso
+            notes.append("available date from the listing description")
+
+
 def fees_block(vt: str) -> str:
     i = vt.find("|Policies and fees|")
     if i < 0:
@@ -748,26 +987,12 @@ def build():
         r["unit"] = unit
         r["floor"] = loc.get("floor") if loc.get("floor") is not None else ""
         if r["floor"] == "":
-            ORD = (r"(ground|first|1st|second|2nd|third|3rd|fourth|4th|fifth|5th|sixth|6th|seventh|7th|"
-                   r"eighth|8th|ninth|9th|tenth|10th|\d{1,2}(?:st|nd|rd|th))")
+            # second trawl: every floor statement about the apartment in its own description and title
             own = (L.get("description") or "") + " " + (L.get("short_description") or "") + " " + title
-            m = re.search(r"\b(?:located|situated|unit|apartment|apt|studio|bedroom|home|residence|is) (?:is )?"
-                          r"(?:conveniently )?(?:located |situated )?on the " + ORD + r"[- ]floor\b", own, re.I) or \
-                re.search(r"\b" + ORD + r"[- ]floor (?:unit|apartment|apt|studio|one[- ]bedroom|1[- ]?(?:br|bed(?:room)?)|"
-                          r"walk[- ]?up|corner|rear|front)\b", own, re.I)
-            if m:
-                w = m.group(1).lower()
-                n = {"ground": 1, "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6,
-                     "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10}.get(w)
-                if n is None and w[0].isdigit():
-                    n = int(re.match(r"\d+", w).group(0))
-                if n:
-                    r["floor"] = n
-                    notes.append(f"floor from description text: '{m.group(0)}'" + (" (ground)" if w == "ground" else ""))
-            else:
-                m = re.search(r"\b" + ORD + r"[- ]floor\b", own, re.I)
-                if m:
-                    notes.append(f"floor text in description (not used): '{m.group(0)}'")
+            fl, fnotes = floor_from_text(own)
+            if fl is not None:
+                r["floor"] = fl
+            notes += fnotes
         r["beds"] = L.get("bedrooms") if L.get("bedrooms") is not None else ""
         hb = L.get("half_bathrooms") or 0
         ba = L.get("bathrooms")
@@ -775,7 +1000,7 @@ def build():
         r["sqft"] = L.get("square_feet") or (L.get("unit_data") or {}).get("min_square_feet") or ""
         if r["sqft"] == "":
             cs = (cards.get(L.get("listing_id")) or {}).get("card", {}).get("min_square_feet")
-            if cs:
+            if cs and cs < 100000:          # the card can carry a sentinel (9223372036854776000)
                 notes.append(f"sqft absent on detail page; search card showed {cs}")
         price = L.get("min_price") if L.get("min_price") is not None else L.get("price")
         r["listed_rent"] = price
@@ -838,6 +1063,7 @@ def build():
                     r["dog_weight_limit_lb"] = wm.group(1)
                     notes.append("weight limit from description")
                     break
+        page_text_facts(r, L, bld, desc, vt, notes, today)
         r["notes"] = "; ".join(notes)
         return r
 

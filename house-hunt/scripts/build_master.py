@@ -740,6 +740,74 @@ def garden_style(unit_labels, heights) -> bool:
     return parsers.multi_building_labels(unit_labels) and not any(h >= 4 for h in hs)
 
 
+STORIES_RANK = {"official_record": 0, "listing": 1, "osm": 2}      # an official record outranks a listing, then OpenStreetMap
+STORIES_NEAR_M = 30
+
+
+class BuildingStories:
+    """data/reference/building_stories.csv (second trawl, 2026-11-17: written by the building-heights agent; columns
+    addr_key, address, city, state, zip, lat, lon, stories, stories_basis (official_record | osm | listing), source_name,
+    source_url, retrieved_at, notes). Looked up by addr_key, then by building through the crosswalk
+    (data/reference/building_crosswalk.csv), then by the nearest row within 30 m. The file may be absent or partial: a
+    missing file, a blank or non-numeric storey count, or an unknown basis gives nothing. Where several rows match, the
+    best basis wins (official record, then listing, then OpenStreetMap), then the nearest."""
+
+    def __init__(self, path=None, crosswalk=None):
+        f = Path(path) if path else DATA / "reference" / "building_stories.csv"
+        cols = ["addr_key", "lat", "lon", "stories", "stories_basis", "source_name", "source_url", "retrieved_at"]
+        T = pd.DataFrame(columns=cols)
+        if f.exists():
+            try:
+                T = pd.read_csv(f, dtype=str, keep_default_na=False)
+            except (pd.errors.EmptyDataError, pd.errors.ParserError):
+                T = pd.DataFrame(columns=cols)
+        for c in cols:
+            if c not in T:
+                T[c] = ""
+        T["n"] = pd.to_numeric(T.stories, errors="coerce")
+        T["stories_basis"] = T.stories_basis.str.strip().str.lower()
+        T = T[T.n.notna() & (T.n >= 1) & T.stories_basis.isin(list(STORIES_RANK))].copy()
+        T["rk"] = T.stories_basis.map(STORIES_RANK)
+        T["la"], T["lo"] = pd.to_numeric(T.lat, errors="coerce"), pd.to_numeric(T.lon, errors="coerce")
+        xf = Path(crosswalk) if crosswalk else DATA / "reference" / "building_crosswalk.csv"
+        xw = pd.read_csv(xf, dtype=str, keep_default_na=False).set_index("addr_key").building_id.to_dict() if xf.exists() else {}
+        T["building_id"] = T.addr_key.map(xw).fillna("")
+        self.T = T.sort_values("rk")
+        self.by_key = {k: g for k, g in self.T.groupby("addr_key")}
+        self.by_b = {b: g for b, g in self.T[self.T.building_id != ""].groupby("building_id")}
+        self.xw = xw
+        self.geo = self.T[self.T.la.notna() & self.T.lo.notna()]
+
+    def __len__(self):
+        return len(self.T)
+
+    @staticmethod
+    def _pick(g):
+        r = g.sort_values("rk").iloc[0]
+        return {"stories": f"{r.n:g}", "basis": r.stories_basis, "source": (r.source_name + " " + r.source_url).strip(), "retrieved_at": r.retrieved_at}
+
+    def lookup(self, addr_key="", building_id="", lat=None, lon=None):
+        """{'stories', 'basis', 'source', 'retrieved_at', 'match'} or None."""
+        if addr_key in self.by_key:
+            return {**self._pick(self.by_key[addr_key]), "match": "addr_key"}
+        b = building_id or self.xw.get(addr_key, "")
+        if b and b in self.by_b:
+            return {**self._pick(self.by_b[b]), "match": "building_crosswalk"}
+        try:
+            la, lo = float(lat), float(lon)
+        except (TypeError, ValueError):
+            return None
+        if not (la == la and lo == lo) or self.geo.empty:
+            return None
+        d = np.hypot((self.geo.la - la) * 111320, (self.geo.lo - lo) * 111320 * math.cos(math.radians(la)))
+        near = self.geo[d <= STORIES_NEAR_M].assign(d=d[d <= STORIES_NEAR_M])
+        if near.empty:
+            return None
+        r = near.sort_values(["rk", "d"]).iloc[0]
+        return {"stories": f"{r.n:g}", "basis": r.stories_basis, "source": (r.source_name + " " + r.source_url).strip(),
+                "retrieved_at": r.retrieved_at, "match": f"coordinates within {STORIES_NEAR_M} m ({r.d:.0f} m)"}
+
+
 def load_numbering_conventions(path=None) -> dict:
     """building_id -> convention ('floor_first' / 'building_floor_unit') from the reviewed table
     data/reference/unit_numbering_conventions.csv (each row says how the convention was established)."""
@@ -912,6 +980,7 @@ def main():
         device list for that lot shows no active passenger elevator (an accessibility lift is not an elevator)."""
         return lot_ok.get(addr_key, False) and dob_el.get(addr_key, (1, ""))[0] > 0
 
+    STORIES, stories_of = BuildingStories(), {}         # data/reference/building_stories.csv (may be absent or partial)
     M = Merge()
     cf_dog_addr, cf_dog_name = community_dog_snippets()
     cw_addr, cw_name = community_dog_weight_snippets()
@@ -992,6 +1061,19 @@ def main():
             v = getattr(r, col, "")
             if re.fullmatch(r"[\d.]+", v or "") and float(v) > 0 and lot_ok.get(r.addr_key, False):
                 M.add(b, fld, str(int(float(v))), "official_record", "NYC PLUTO (64uk-42ks)")
+        # second trawl (2026-11-17): the building's height in storeys from data/reference/building_stories.csv. An official
+        # record or a listing is a floor count like any other; OpenStreetMap is kept apart (building_stories only): it never
+        # infers an elevator, and only says that a building of 1-2 storeys has no upper floors.
+        if b not in stories_of:
+            g_ = G.loc[b] if b in G.index else None
+            stories_of[b] = STORIES.lookup(r.addr_key, b, None if g_ is None else g_["lat"], None if g_ is None else g_["lon"])
+        hs_ = STORIES.lookup(r.addr_key, "", None, None) if stories_of[b] is None else None
+        if hs_ is not None:
+            stories_of[b] = hs_
+        st_ = stories_of[b]
+        if st_ and st_["basis"] in ("official_record", "listing"):
+            M.add(b, "building_floors", st_["stories"], "official_record" if st_["basis"] == "official_record" else "stated",
+                  "data/reference/building_stories.csv: " + st_["source"])
         for col, fld in [("community_pool", "pool"), ("community_gym", "gym"), ("community_controlled_access", "controlled_access"),
                          ("community_package_room", "package_room"), ("community_dog_park_pet_spa", "dog_amenities"),
                          ("community_required_fees", "required_fees_text"), ("community_building_type", "building_type")]:
@@ -1290,6 +1372,10 @@ def main():
     B = B.join(G)                                # one coordinate per building (W7)
     B = B.join(pd.DataFrame.from_dict(rows, orient="index"))
     B["addr_keys"] = U.groupby("building_id").addr_key.agg(lambda s: " || ".join(sorted(set(s))))
+    # the building's height in storeys and its basis (official_record / listing / osm), for the floor-and-elevator rule
+    # (parsers.floor_elevator_rule): blank where data/reference/building_stories.csv has nothing for the building
+    for c_, k_ in (("building_stories", "stories"), ("building_stories_basis", "basis"), ("building_stories_source", "source"), ("building_stories_match", "match")):
+        B[c_] = [(stories_of.get(b) or {}).get(k_, "") for b in B.index]
     # D15 (Alexander Crossing): a floor count that only a listing row states, below what the building's own unit labels
     # read as ("2 floors" with a unit 0405), is not a height: it is dropped and logged as a conflict.
     if "building_floors" in B:

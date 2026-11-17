@@ -1,0 +1,20 @@
+Sitemap: https://www.rentable.co/sitemap.xml.gz
+
+User-agent: *
+Disallow: /properties/external_click_tracking/
+Disallow: /properties/combined_reviews/
+Disallow: /users/
+Disallow: /favorites
+Disallow: /areas/
+Disallow: /search/get-suggested-properties
+Disallow: /search/get_property_results
+Disallow: /api/v1/track-landing-page-type
+Disallow: /ahoy
+Disallow: /ahoy/visits
+Disallow: /rent-reports/*/rent-report-chart
+Disallow: /properties/*/listing-details
+Disallow: /properties/*/schools
+Disallow: /properties/*/yelp-businesses
+Disallow: /search/*/carousel-photos
+Disallow: *us_census_name*
+Disallow: *US_CENSUS_NAME*

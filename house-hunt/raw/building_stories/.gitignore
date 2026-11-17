@@ -1,0 +1,5 @@
+# Bulk county parcel files and their extracts: re-created by `python3 scripts/building_stories.py download`
+# (CLAUDE.md rule 4). The .meta.json files and _index.jsonl stay committed as provenance.
+*.zip
+*.part
+*_taxlist.csv.gz

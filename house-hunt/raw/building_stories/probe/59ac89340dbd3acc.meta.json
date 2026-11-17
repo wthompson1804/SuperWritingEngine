@@ -1,0 +1,7 @@
+{
+ "url": "https://www.arcgis.com/sharing/rest/search?q=owner%3Actgisoffice+CAMA&f=json&num=25",
+ "retrieved_at": "2026-11-17T16:48:09+00:00",
+ "status": 200,
+ "path": "raw/building_stories/probe/59ac89340dbd3acc.json",
+ "source": "building_stories/probe"
+}

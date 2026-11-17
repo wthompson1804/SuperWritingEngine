@@ -1,0 +1,142 @@
+User-agent: 008
+Disallow: /
+
+User-agent: sistrix
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: Ezooms
+Disallow: /
+
+User-agent: Linguee
+Disallow: /
+
+User-agent: SeznamBot
+Disallow: /
+
+User-agent: businessdbbot
+Disallow: /
+
+User-agent: Spinn3r
+Disallow: /
+
+User-agent: psbot
+Disallow: /
+
+User-agent: R6_CommentReader
+Disallow: /
+
+User-agent: TurnitinBot
+Disallow: /
+
+User-agent: JikeSpider
+Disallow: /
+
+User-agent: oBot
+Disallow: /
+
+User-agent: PaperLiBot
+Disallow: /
+
+User-agent: Exabot
+Disallow: /
+
+User-agent: WBSearchBot
+Disallow: /
+
+User-agent: SEOkicks-Robot
+Disallow: /
+
+User-agent: discoverybot
+Disallow: /
+
+User-agent: Genieo
+Disallow: /
+
+User-agent: meanpathbot
+Disallow: /
+
+User-agent: *
+Disallow: /onboard_schools
+Disallow: /showings/new
+Disallow: /inquiries/new
+Disallow: /email_friends/new
+Disallow: /searches$
+Disallow: /rental_searches$
+Disallow: /commercial_searches$
+Disallow: /searches/1*
+Disallow: /searches/2*
+Disallow: /searches/3*
+Disallow: /searches/4*
+Disallow: /searches/5*
+Disallow: /searches/6*
+Disallow: /searches/7*
+Disallow: /searches/8*
+Disallow: /searches/9*
+Disallow: /auth/*
+Disallow: /admin/*
+Disallow: /properties/get_market_trends/*
+Disallow: /properties/get_town_pages/*
+Disallow: /properties/get_similar_props/*
+Disallow: /properties/get_area_profile/*
+Disallow: /admin/listing_sheets/*
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-SearchBot
+Disallow: /
+
+User-agent: Amzn-SearchBot
+Disallow: /
+
+User-agent: ElevenlabsBot
+Disallow: /
+
+User-agent: ElevenlabsCrawler
+Disallow: /
+
+User-agent: Applebot
+Disallow: /real-estate/*
+Crawl-delay: 20
+
+User-agent: ScoutJet
+Crawl-delay: 5
+
+User-agent: AppleNewsBot
+Crawl-delay: 5
+
+User-agent: AhrefsBot
+Crawl-delay: 1
+
+User-agent: MJ12bot
+Crawl-delay: 20
+
+User-agent: barkrowler
+Crawl-delay: 5
+
+User-agent: GoogleOther
+Crawl-delay: 1
+Disallow: /*.pdf$
+
+User-agent: AwarioRssBot
+Crawl-delay: 20
+
+User-agent: AwarioSmartBot
+Crawl-delay: 20
+
+Sitemap: https://www.bohemiarealtygroup.com/site_map.xml

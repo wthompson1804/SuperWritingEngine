@@ -1,0 +1,347 @@
+{
+"/nj/hoboken/1109-washington-st": {
+"at": "2026-11-17T16:49:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hoboken/118-adams-st": {
+"at": "2026-11-17T16:49:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hoboken/2-constitution-ct-apt-1115": {
+"at": "2026-11-17T16:49:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hoboken/410-jefferson-st-apt-1l": {
+"at": "2026-11-17T16:49:21+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hoboken/516-park-ave": {
+"at": "2026-11-17T16:49:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/hoboken/600-hudson-st-apt-1e": {
+"at": "2026-11-17T16:49:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/asbury-park/12-borden-ave": {
+"at": "2026-11-17T16:49:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/asbury-park/1411-3rd-avenue": {
+"at": "2026-11-17T16:49:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/asbury-park/304-deal-lake-drive--1": {
+"at": "2026-11-17T16:49:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/asbury-park/400-3rd-ave": {
+"at": "2026-11-17T16:49:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/asbury-park/401-2nd-avenue--1": {
+"at": "2026-11-17T16:49:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/asbury-park/402-sixth-avenue": {
+"at": "2026-11-17T16:49:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/atlantic-highlands/32-leonard-avenue--1": {
+"at": "2026-11-17T16:49:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/atlantic-highlands/6-3rd-avenue--1": {
+"at": "2026-11-17T16:49:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/atlantic-highlands/atlantic-pointe-apartments": {
+"at": "2026-11-17T16:49:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/avenel/40-avenel-street-2": {
+"at": "2026-11-17T16:49:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/1225-kennedy-blvd-apt-1d": {
+"at": "2026-11-17T16:49:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/133-avenue-f": {
+"at": "2026-11-17T16:49:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/15-w-52nd-st": {
+"at": "2026-11-17T16:49:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/157-avenue-c": {
+"at": "2026-11-17T16:50:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/17-centre-lane": {
+"at": "2026-11-17T16:50:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/177-w-48th-st": {
+"at": "2026-11-17T16:50:06+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/18-kelly-parkway": {
+"at": "2026-11-17T16:50:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/21-w-20th-st": {
+"at": "2026-11-17T16:50:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/224-avenue-b": {
+"at": "2026-11-17T16:50:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/250-avenue-e--2": {
+"at": "2026-11-17T16:50:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/34-w-13th-st": {
+"at": "2026-11-17T16:50:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/368-broadway": {
+"at": "2026-11-17T16:50:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/391-broadway": {
+"at": "2026-11-17T16:50:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/60-w-8th-st": {
+"at": "2026-11-17T16:50:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/667-broadway--1": {
+"at": "2026-11-17T16:50:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/683-avenue-e--2": {
+"at": "2026-11-17T16:50:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/735-avenue-a--21": {
+"at": "2026-11-17T16:50:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/74-w-7th-st": {
+"at": "2026-11-17T16:50:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/86-w-34th-st": {
+"at": "2026-11-17T16:50:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/965-avenue-c": {
+"at": "2026-11-17T16:50:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/boulevard-gardens--1": {
+"at": "2026-11-17T16:50:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/bridgepoint-at-bayonne--1": {
+"at": "2026-11-17T16:50:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/city-line-bayonne": {
+"at": "2026-11-17T16:50:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/harbor-pointe": {
+"at": "2026-11-17T16:50:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/park-bayonne": {
+"at": "2026-11-17T16:50:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bayonne/the-seraphine": {
+"at": "2026-11-17T16:50:56+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/109-william-st-2--605": {
+"at": "2026-11-17T16:50:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/11-park-place-apartments": {
+"at": "2026-11-17T16:51:01+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/114-120-montgomery-street-apartments": {
+"at": "2026-11-17T16:51:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/116-brighton-ave": {
+"at": "2026-11-17T16:51:05+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/12-magnolia-st": {
+"at": "2026-11-17T16:51:08+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/263-bloomfield-avenue-apartments": {
+"at": "2026-11-17T16:51:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/539-joralemon-street--1": {
+"at": "2026-11-17T16:51:13+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/55-monroe-place-apartments": {
+"at": "2026-11-17T16:51:16+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/556-washington-ave": {
+"at": "2026-11-17T16:51:18+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/68-70-park-avenue-apartments": {
+"at": "2026-11-17T16:51:20+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/68-mill-st": {
+"at": "2026-11-17T16:51:23+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/76-100-washington-ave": {
+"at": "2026-11-17T16:51:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/78-florence-ave--3": {
+"at": "2026-11-17T16:51:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/belleville/827-d-main-street": {
+"at": "2026-11-17T16:51:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fort-lee/1590-anderson-avenue--6": {
+"at": "2026-11-17T16:53:28+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fort-lee/1650-john-street--1": {
+"at": "2026-11-17T16:53:30+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fort-lee/3021-edwin-avenue--2": {
+"at": "2026-11-17T16:53:33+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fort-lee/3031-edwin-avenue--1": {
+"at": "2026-11-17T16:53:36+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fort-lee/3040-edwin-avenue--1": {
+"at": "2026-11-17T16:53:38+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fort-lee/3060-edwin": {
+"at": "2026-11-17T16:53:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fort-lee/401-park-place--11": {
+"at": "2026-11-17T16:53:43+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fort-lee/418-main-street--1": {
+"at": "2026-11-17T16:53:45+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fort-lee/489-main-street": {
+"at": "2026-11-17T16:53:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fort-lee/palisades-gardens-apartments": {
+"at": "2026-11-17T16:53:51+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/leonia/222-christie-street--1": {
+"at": "2026-11-17T16:54:00+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/leonia/300-broad-avenue": {
+"at": "2026-11-17T16:54:03+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/leonia/431-grand-avenue--1": {
+"at": "2026-11-17T16:54:06+00:00",
+"status": 200,
+"reason": "ok"
+}
+}

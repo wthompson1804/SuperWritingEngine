@@ -1,0 +1,7 @@
+{
+ "url": "https://www.arcgis.com/sharing/rest/search?q=Suffolk+County+tax+parcels&f=json&num=25",
+ "retrieved_at": "2026-11-17T16:48:47+00:00",
+ "status": 200,
+ "path": "raw/building_stories/probe/f1beaf00ae126beb.json",
+ "source": "building_stories/probe"
+}
