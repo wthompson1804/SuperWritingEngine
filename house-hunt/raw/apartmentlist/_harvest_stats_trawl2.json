@@ -11,12 +11,12 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 211,
- "props_considered": 526,
+ "srp_pages": 215,
+ "props_considered": 539,
  "props_skipped_lowprice": 235,
- "props_read": 291,
+ "props_read": 304,
  "reasons": {
-  "ok": 290,
+  "ok": 303,
   "no_unit_le_3000": 1
  },
  "transient": [],
@@ -344,6 +344,13 @@
    "drive_min": 47.6,
    "props": 2,
    "read": 1
+  },
+  {
+   "city": "nj/bloomfield",
+   "group": "New Jersey",
+   "drive_min": 48.1,
+   "props": 13,
+   "read": 13
   }
  ],
  "cities_unmatched_far": [

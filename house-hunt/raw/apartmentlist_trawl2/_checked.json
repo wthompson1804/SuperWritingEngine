@@ -1733,5 +1733,70 @@
 "at": "2026-11-17T17:12:37+00:00",
 "status": 200,
 "reason": "ok"
+},
+"/nj/bloomfield/110-washington": {
+"at": "2026-11-17T16:51:48+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/206-montgomery-street-apartments": {
+"at": "2026-11-17T16:51:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/208-bloomfield-avenue-202--1": {
+"at": "2026-11-17T16:51:53+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/270-bloomfield-ave--1": {
+"at": "2026-11-17T16:51:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/306-hoover-ave": {
+"at": "2026-11-17T16:51:58+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/357-franklin-st--3": {
+"at": "2026-11-17T17:12:47+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/42-llewellyn-avenue": {
+"at": "2026-11-17T17:12:50+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/49-park-avenue": {
+"at": "2026-11-17T17:12:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/64-park-avenue--1": {
+"at": "2026-11-17T17:12:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/70-valentine-rd": {
+"at": "2026-11-17T17:12:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/the-green-at-bloomfield": {
+"at": "2026-11-17T17:12:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/the-royal-bloomfield": {
+"at": "2026-11-17T17:13:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/bloomfield/white-house-apartments": {
+"at": "2026-11-17T17:13:05+00:00",
+"status": 200,
+"reason": "ok"
 }
 }
