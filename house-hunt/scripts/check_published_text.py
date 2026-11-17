@@ -235,8 +235,19 @@ def _dogs_settled(us):
 
 
 def _elevator_settled(us):
+    # owner, 2026-11-17: an apartment settled on floor 2 without an elevator (elevator.walkup_floor_2), and the open item
+    # "floor and elevator", never support "has an elevator"
     return all(R.get(u, "elevator", "value") == "yes" and not R.get(u, "elevator", "listing_site_only")
-               and not (R.get(u, "confirm", "asterisk") and R.get(u, "confirm", "what") == "elevator") for u in us)
+               and R.get(u, "elevator", "walkup_floor_2") is not True
+               and not (R.get(u, "confirm", "asterisk") and R.get(u, "confirm", "what") in ("elevator", "floor and elevator")) for u in us)
+
+
+def _walkup(u):
+    return R.get(u, "elevator", "walkup_floor_2") is True
+
+
+def _no_elevator_stated(u):
+    return str(R.get(u, "elevator", "value") or "").lower() in ("no", "conflicting")
 
 
 # (name, pattern, test(u, building's shown units) -> bool, the field it rests on).  A sentence that asks, or says the
@@ -258,6 +269,10 @@ PLACE_CLAIMS = [
     ("dogs are allowed", r"\b[Dd]ogs are allowed\b|\bdog policy sets no weight limit\b", lambda u, us: _dogs_settled(us),
      "dog.allowed + confirm"),
     ("an elevator", r"\bhas an elevator\b", lambda u, us: _elevator_settled(us), "elevator + confirm"),
+    # owner, 2026-11-17: "a single flight up" / "no elevator needed" only on a floor-2 walk-up; "no elevator" as a plain
+    # fact only where a page or record says there is none
+    ("a single flight up", r"\bsingle flight (?:of stairs )?up\b|\bno elevator (?:is )?needed\b|\bdo not need an elevator\b", lambda u, us: _walkup(u), "elevator.walkup_floor_2"),
+    ("no elevator", r"\bno elevator\b(?! (?:is )?(?:needed|confirmed))", lambda u, us: _no_elevator_stated(u), "elevator.value"),
 ]
 PLACE_CLAIMS = [(n, re.compile(rx, re.I), t, f) for n, rx, t, f in PLACE_CLAIMS]
 NOT_A_CLAIM = re.compile(r"^ask\b|\bwhether\b|\bdisagree\b|\bdo not agree\b|\bask (?:whether|what kind|where|the office|for|before|about)\b|\bnot (?:published|confirmed|"

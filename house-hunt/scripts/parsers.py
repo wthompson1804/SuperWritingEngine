@@ -1543,7 +1543,13 @@ WALKUP_MAX_FLOOR = 2
 FLOOR_OR_ELEVATOR_CODE = "floor_or_elevator"
 FLOOR_OR_ELEVATOR_Q = "Confirm the floor, and whether there is an elevator"
 FLOOR_OR_ELEVATOR_LABEL = "floor and elevator"
-FLOOR_2_WALKUP_Q = "it must be floor 2 (one flight up): no elevator is confirmed here"
+FLOOR_2_WALKUP_Q = "it must be floor 2 (a single flight up): no elevator is confirmed here"
+# Reader wording (build_page_data.py, realtor_lines.py, concierge_data.py; owner, 2026-11-17). "No elevator" is said as a
+# fact only where a page or record says so; where the elevator is unknown or in doubt the plain words say it is not needed.
+WALKUP_WORDS = "A single flight up, no elevator"           # the house rule writes no spelled-out quantity ("one")
+WALKUP_WORDS_NEEDED = "A single flight up, no elevator needed"
+FLOOR_OR_ELEVATOR_READER_LABEL = "the floor, and whether there is an elevator"
+FLOOR_OR_ELEVATOR_READER_Q = "Which floor is the apartment on, and is there an elevator? Without an elevator, it must be floor 2 (a single flight up)."
 STORIES_BASES = ("official_record", "osm", "listing")
 _FLOOR_PAGE_BASES = ("confirmed_by_phone", "confirmed", "stated")
 
@@ -1606,6 +1612,15 @@ def floor_elevator_rule(elevator, floor=None, how="", stories=None, stories_basi
     if el == "open" and not low:
         return "open", "elevator"
     return "open", FLOOR_OR_ELEVATOR_CODE
+
+
+def walkup_words(floor_elevator_code, elevator_value="") -> str | None:
+    """The plain words for an apartment the floor-and-elevator rule settles on floor 2 without an elevator: 'One flight up,
+    no elevator' where a page or record says there is none, 'One flight up, no elevator needed' where the elevator is
+    unknown or in doubt (so the page never states as fact what no page says). None for any other apartment."""
+    if str(floor_elevator_code or "") != "floor_2":
+        return None
+    return WALKUP_WORDS if str(elevator_value or "").strip().lower() in ("no", "conflicting") else WALKUP_WORDS_NEEDED
 
 
 def floor_elevator_master(get, elevator_status):

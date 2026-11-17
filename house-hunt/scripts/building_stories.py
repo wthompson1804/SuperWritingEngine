@@ -490,15 +490,24 @@ def nj_lookup(B):
                     and numbers_match(a, b, parts[i][0], parts[i][1])]
             how = "address"
             if not hits:
-                # the parcel nearest the point, on the same street (a complex filed under one address)
+                # an apartment complex filed under one address: the nearest parcel is a large class 4C lot on the
+                # same street and the point lies well inside its footprint (a neighbour's house is never taken)
                 d, i = tree.query(q)
-                if d <= 0.06 and core and cores[i] == core and streets_match(street, parts[i][2]):
+                try:
+                    area_m2 = float(t.area_m2.iloc[i])
+                except ValueError:
+                    area_m2 = 0.0
+                if (t.PROP_CLASS.iloc[i] == "4C" and area_m2 >= 8000 and d * 1000 <= 0.5 * math.sqrt(area_m2)
+                        and core and cores[i] == core and streets_match(street, parts[i][2])):
                     hits, how = [i], "location"
             if not hits:
                 out[r.addr_key] = {"status": "no_match", "county": county, "meta": meta,
                                    "note": f"no MOD-IV tax record at '{r.address}' within 400 m in {county} County"}
                 continue
             rows = t.iloc[hits]
+            resid = rows[rows.PROP_CLASS.isin(["2", "4C", "4A"]) & (rows.stories != "")]
+            if len(resid) and len(resid) < len(rows):
+                rows = resid                    # a garage, vacant or exempt lot at the same address is not the building
             vals = [v for v in rows.stories if v]
             pins = sorted(set(rows.GIS_PIN))
             desc = Counter(x for x in rows.BLDG_DESC if x).most_common(3)
@@ -510,7 +519,8 @@ def nj_lookup(B):
                 continue
             cnt = Counter(vals)
             best = max(cnt, key=lambda v: (cnt[v], float(v)))
-            out[r.addr_key] = {**base, "status": "ok", "stories": best, "values": dict(cnt),
+            big = [float(a) for a, c in zip(rows.area_m2, rows.PROP_CLASS) if c == "4C" and a and float(a) >= 8000]
+            out[r.addr_key] = {**base, "status": "ok", "stories": best, "values": dict(cnt), "complex": bool(big),
                                "how_desc": rows.stories_how[rows.stories == best].iloc[0],
                                "desc_used": rows.BLDG_DESC[rows.stories == best].iloc[0]}
     return out
@@ -654,8 +664,10 @@ def build_stories():
                              f"{' and %d more' % (len(v['pins']) - 4) if len(v['pins']) > 4 else ''}; "
                              f"tax address '{v['prop_loc']}', {v['mun']}; class {'/'.join(v['classes'])}; joined by "
                              + ("house number and street, parcel within 400 m" if v["how"] == "address" else
-                                f"location: the parcel nearest the point ({v['dist_m']} m) on the same street, house number differs")
-                             + alt)
+                                f"location: the point lies {v['dist_m']} m from the centre of a large apartment lot (class 4C) "
+                                "on the same street whose tax address has another house number")
+                             + alt + ("; a large apartment lot: the description gives the lot's building type, "
+                                      "and single buildings of a complex can differ" if v.get("complex") else ""))
             elif v["status"] == "no_stories":
                 notes.append(f"NJ MOD-IV record found (PIN {', '.join(v['pins'][:3])}, '{v['prop_loc']}', descriptions "
                              + "; ".join(f"'{d}'" for d, _ in v["desc"]) + ") but its BLDG_DESC states no storeys")
@@ -766,6 +778,7 @@ def build_floors(stories_rows):
         conv = {a: bid_conv[b] for a, b in zip(cw.addr_key, cw.building_id) if b in bid_conv}
     st = {r["addr_key"]: (r["stories"], r["stories_basis"]) for r in stories_rows if r["stories"]}
     rows, skipped = [], Counter()
+    above = defaultdict(list)            # addr_key -> label floors above the recorded storeys
     for r in C.itertuples():
         unit = r.unit.strip()
         notes = []
@@ -792,8 +805,13 @@ def build_floors(stories_rows):
                 top = None
             if top is not None and f > math.ceil(top):
                 skipped["reading above the building's storeys"] += 1
+                above[r.addr_key].append(f)
                 continue
             notes.append(f"building has {s[0]} storeys ({s[1]})")
+        elif f >= 10 and name in ("floor_then_letter", "house_number_then_floor_letter"):
+            # '43L' is floor 43 in a tower but floor 4, apartment 3L in a walk-up: read only against a known height
+            skipped["two-digit number + letter with no known building height"] += 1
+            continue
         notes.insert(0, desc)
         stated = str(r.floor).strip()
         if stated and re.fullmatch(r"-?\d+(?:\.0)?", stated) and int(float(stated)) != f:
@@ -804,12 +822,25 @@ def build_floors(stories_rows):
                      "notes": "; ".join(notes)})
     write_csv(OUT_FLOORS, FLOOR_COLS, rows)
     print("unit labels not read:", dict(skipped), flush=True)
-    return rows
+    return rows, above
 
 
 def build() -> None:
     rows, _ = build_stories()
-    build_floors(rows)
+    _, above = build_floors(rows)
+    # a record that unit labels contradict is flagged where build_master.py will read it
+    flagged = 0
+    for r in rows:
+        fl = above.get(r["addr_key"])
+        if fl:
+            flagged += 1
+            r["notes"] += (f"; CHECK: {len(fl)} unit label(s) here read as floor {min(fl)}"
+                           + (f" to {max(fl)}" if max(fl) != min(fl) else "")
+                           + f", above the {r['stories']} storeys recorded: the record may predate the building, be "
+                             "matched to another lot, or the labels may follow another numbering")
+    if flagged:
+        write_csv(OUT_STORIES, STORIES_COLS, rows)
+    print(f"{flagged} buildings flagged where unit labels read above the recorded storeys", flush=True)
 
 
 # ---------------------------------------------------------------- main

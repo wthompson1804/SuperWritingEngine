@@ -11,12 +11,13 @@
   "min_drive": 0,
   "minutes": 0
  },
- "srp_pages": 121,
- "props_considered": 320,
- "props_skipped_lowprice": 189,
- "props_read": 131,
+ "srp_pages": 171,
+ "props_considered": 379,
+ "props_skipped_lowprice": 209,
+ "props_read": 170,
  "reasons": {
-  "ok": 131
+  "ok": 169,
+  "no_unit_le_3000": 1
  },
  "transient": [],
  "blocked": null,
@@ -175,6 +176,111 @@
    "drive_min": 37.7,
    "props": 128,
    "read": 39
+  },
+  {
+   "city": "nj/secaucus",
+   "group": "New Jersey",
+   "drive_min": 38.1,
+   "props": 6,
+   "read": 3
+  },
+  {
+   "city": "nj/cresskill",
+   "group": "New Jersey",
+   "drive_min": 38.9,
+   "props": 0,
+   "read": 0
+  },
+  {
+   "city": "nj/rutherford",
+   "group": "New Jersey",
+   "drive_min": 39.0,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/lodi",
+   "group": "New Jersey",
+   "drive_min": 39.7,
+   "props": 7,
+   "read": 7
+  },
+  {
+   "city": "nj/wood-ridge",
+   "group": "New Jersey",
+   "drive_min": 40.3,
+   "props": 3,
+   "read": 1
+  },
+  {
+   "city": "nj/paramus",
+   "group": "New Jersey",
+   "drive_min": 41.1,
+   "props": 2,
+   "read": 1
+  },
+  {
+   "city": "nj/fair-lawn",
+   "group": "New Jersey",
+   "drive_min": 41.4,
+   "props": 4,
+   "read": 2
+  },
+  {
+   "city": "nj/kearny",
+   "group": "New Jersey",
+   "drive_min": 41.4,
+   "props": 4,
+   "read": 3
+  },
+  {
+   "city": "nj/elmwood-park",
+   "group": "New Jersey",
+   "drive_min": 42.0,
+   "props": 3,
+   "read": 3
+  },
+  {
+   "city": "nj/garfield",
+   "group": "New Jersey",
+   "drive_min": 42.5,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/passaic",
+   "group": "New Jersey",
+   "drive_min": 43.0,
+   "props": 9,
+   "read": 8
+  },
+  {
+   "city": "nj/harrison",
+   "group": "New Jersey",
+   "drive_min": 43.2,
+   "props": 9,
+   "read": 3
+  },
+  {
+   "city": "nj/wallington",
+   "group": "New Jersey",
+   "drive_min": 43.4,
+   "props": 2,
+   "read": 2
+  },
+  {
+   "city": "nj/westwood",
+   "group": "New Jersey",
+   "drive_min": 43.7,
+   "props": 4,
+   "read": 2
+  },
+  {
+   "city": "nj/closter",
+   "group": "New Jersey",
+   "drive_min": 43.8,
+   "props": 2,
+   "read": 1
   }
  ],
  "cities_unmatched_far": [

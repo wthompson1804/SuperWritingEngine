@@ -65,7 +65,7 @@ who Lamia is, but its "data only" scope, tiers and caps are superseded.
 - **Off limits**: Yelp, Reddit (API key only; none yet), Nextdoor, Zillow listing and building pages, StreetEasy,
   Apartments.com, ApartmentRatings, RentHop, Realtor.com, Rent.com, HotPads, RentCafe and other Cloudflare-walled
   building sites, Google Maps, Craigslist by script (its terms prohibit it; pasted links are fine), municipal code
-  hosts that bar Claude (ecode360, Municode, American Legal), the live Wikipedia API (use the dump). Niche and
+  hosts that bar Claude (ecode360, Municode, American Legal), the live Wikipedia API (use the dump). AppFolio listing pages and RealtyMX broker sites are off limits from 2026-11-17: their terms forbid automated collection (found in the trawl-2 probe; earlier reads of them stand as recorded, nothing more is fetched). Niche and
   City-Data are usable only for the targeted lookups above. The full list with reasons is in `docs/SOURCES.md`.
 - Browser automation (headless Playwright) is allowed within these rules.
 

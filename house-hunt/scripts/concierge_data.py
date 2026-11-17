@@ -773,11 +773,18 @@ def dog_fact(b, us):
 
 
 def floor_text(u):
+    """'Floor 5', 'Floor 4 (read from the apartment number)'. Owner, 2026-11-17: an apartment the floor-and-elevator rule
+    settles on floor 2 without an elevator says so in plain words, 'Floor 2, a single flight up, no elevator needed'
+    (elevator.words from parsers.walkup_words: 'no elevator' only where a page or record says there is none)."""
     f = num(u.get("floor"))
     if f is None:
         return None
     basis = str(u.get("floor_basis") or "")
-    return f"Floor {int(f)}" + (" (read from the apartment number)" if basis == "inferred" else "")
+    words = (u.get("elevator") or {}).get("words") if (u.get("elevator") or {}).get("walkup_floor_2") is True else None
+    read = " (read from the apartment number)" if basis == "inferred" else ""
+    if words:
+        return f"Floor {int(f)}, {words[0].lower()}{words[1:]}{read}"
+    return f"Floor {int(f)}" + read
 
 
 def available_text(u):

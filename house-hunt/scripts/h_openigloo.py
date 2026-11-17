@@ -166,27 +166,155 @@ def cmd_detail() -> None:
 
 # ---- unit page parsing ------------------------------------------------------------------------------------------------
 
-def _num(s):
+FLOOR_WORDS = {"ground": 1, "first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5, "sixth": 6, "seventh": 7,
+               "eighth": 8, "ninth": 9, "tenth": 10}
+FLOOR_RX = re.compile(r"\b(ground|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|\d{1,2})(?:st|nd|rd|th)?"
+                      r"[- ]floor\b|\bfloor[: ]+(\d{1,2})\b", re.I)
+
+
+def listing_obj(text: str, uid: str) -> dict | None:
+    fl = flight(text)
+    i = fl.find('{"listing":{"id":"' + uid)
+    if i < 0:
+        return None
     try:
-        return float(s)
-    except (TypeError, ValueError):
+        return json.JSONDecoder().raw_decode(fl, i)[0]["listing"]
+    except (ValueError, KeyError):
         return None
 
 
-def parse_unit(text: str) -> dict:
-    fl = flight(text)
-    d = {}
-    # JSON-LD on the unit page
-    for m in re.finditer(r'<script type="application/ld\+json">(.*?)</script>', text, re.S):
+def _plain(desc: str) -> str:
+    t = re.sub(r"(?i)<br\s*/?>", "\n", desc or "")
+    return htmlmod.unescape(re.sub(r"<[^>]+>", " ", t))
+
+
+def row_for(card: dict, o: dict, meta: dict) -> dict | None:
+    al = o.get("activeListing") or {}
+    gross, net = al.get("grossRent"), al.get("netRent")
+    rent = gross if gross is not None else al.get("rent")
+    if rent is None or rent > MAX_RENT or o.get("numBedrooms") not in (0, 1):
+        return None
+    b = o.get("building") or {}
+    pa = b.get("primaryAddress") or {}
+    desc = _plain(o.get("description") or "")
+    notes = []
+    # floor: only when the listing text states it (an apartment number is not read here; gates.py does that)
+    floor, ftxt = "", ""
+    m = FLOOR_RX.search(desc)
+    if m:
+        w = (m.group(1) or m.group(2) or "").lower()
+        floor = str(FLOOR_WORDS.get(w, w))
+        ftxt = desc[max(0, m.start() - 20):m.end() + 5].replace("\n", " ").strip()
+        notes.append(f'floor stated in the listing text: "{ftxt}"')
+    # dogs
+    pp, ppn = o.get("petPolicy"), o.get("petPolicyNote")
+    ptxt = " ".join(x for x in [f"petPolicy={pp}" if pp else "", ppn or "",
+                                f"isUnitPetsAllowed={o.get('isUnitPetsAllowed')}" if o.get("isUnitPetsAllowed") is not None else ""] if x)
+    low = f"{pp or ''} {ppn or ''}".lower()
+    if re.search(r"\bno dogs?\b|dogs? not allowed|no pets|not[_ ]allowed|cats? only", low):
+        dogs = "no"
+    elif "dog" in low and not re.search(r"no dog", low):
+        dogs = "yes"
+    else:
+        dogs = "unknown"  # "allowed" names pets, not dogs: kept as text
+    weight = ""
+    mw = re.search(r"(\d{2,3})\s*(?:lb|lbs|pounds)", f"{ppn or ''}", re.I)
+    if mw:
+        weight = mw.group(1)
+    # elevator: the amenity flag is a checkbox; true is a statement, false is only "not ticked"
+    if o.get("isBuildingElevator") is True or re.search(r"\belevator\b", desc, re.I) and not re.search(r"no elevator|walk[- ]?up", desc, re.I):
+        elevator = "yes"
+        notes.append("elevator: " + ("building amenity ticked on the listing (aggregator)" if o.get("isBuildingElevator") else "named in the listing text"))
+    elif re.search(r"\bno elevator\b|\bwalk[- ]?up\b", desc, re.I):
+        elevator = "no"
+        notes.append("listing text says walk-up / no elevator")
+    else:
+        elevator = "unknown"
+    laundry = "in_unit" if o.get("isUnitWasherDryer") else ("in_building" if o.get("isBuildingLaundryRoom") else "")
+    avail = al.get("availableDate") or ""
+    avtxt = f"availableDate={avail}" + ("; Openigloo marks it a future listing ('not available yet')" if al.get("isFutureListing") else "")
+    age = ""
+    if al.get("atCreated"):
         try:
-            j = json.loads(m.group(1))
+            from datetime import datetime
+            age = str((datetime.fromisoformat(meta["retrieved_at"]) - datetime.fromisoformat(al["atCreated"])).days)
         except ValueError:
+            age = ""
+    if net is not None and gross is not None and net != gross:
+        notes.append(f"net-effective rent ${net:,} shown on Openigloo search cards; listed_rent is the gross rent")
+    if o.get("isNoFee"):
+        notes.append("no broker fee (isNoFee)")
+    if o.get("isBuildingRentStabilized"):
+        notes.append("building has rent-stabilized units on record")
+    if b.get("numFloors"):
+        notes.append(f"building_floors from Openigloo's building record (city open data), built {b.get('builtYear')}, {b.get('numUnits')} units")
+    if re.search(r"amenity fee|guarantor fee", desc, re.I):
+        notes.append("listing text says it 'might require' an application fee, deposit, amenity or guarantor fees (no amounts)")
+    if re.search(r"similar units", desc, re.I):
+        notes.append("listing text: photos may depict similar units")
+    if al.get("leaseTermMonths"):
+        notes.append(f"lease term {al['leaseTermMonths']} months")
+    if al.get("listerOrg"):
+        notes.append(f"listed by {al['listerOrg']}")
+    imgs = o.get("images") or []
+    ld = lambda v: "" if v is None else v  # noqa: E731
+    return {
+        "listing_id": f"openigloo_{o['id']}", "source_site": "openigloo", "url": card["url"], "detail_level": "detail",
+        "first_seen": meta["retrieved_at"], "last_seen": meta["retrieved_at"],
+        "building_name": ld(b.get("name")), "address": pa.get("streetAddress") or o.get("fullAddress", "").split(" #")[0],
+        "city": "Brooklyn" if (o.get("neighborhood") or {}).get("borough") == "Brooklyn" else (o.get("neighborhood") or {}).get("borough", ""),
+        "state": "NY", "zip": ld(b.get("zipCode")), "lat": ld(b.get("lat") or o.get("buildingLat")),
+        "lon": ld(b.get("lon") or o.get("buildingLon")), "unit": ld(o.get("unitNumber")), "beds": o.get("numBedrooms"),
+        "baths": ld(o.get("numBathrooms")), "sqft": o.get("area") or "", "listed_rent": rent,
+        "price_basis": "gross monthly rent on the unit page (activeListing.grossRent)",
+        "concession_text": ld(al.get("promotion")), "available_date_text": avtxt, "available_date": avail,
+        "dogs": dogs, "dog_policy_text": ptxt, "dog_weight_limit_lb": weight, "elevator": elevator, "floor": floor,
+        "building_floors": ld(b.get("numFloors")), "parking_type": "building parking listed" if o.get("isBuildingParking") else "",
+        "parking_fee": "", "pet_rent": "", "other_monthly_fees_json": "", "utilities_included":
+            "heat and hot water (listing text)" if re.search(r"heat ?(?:&|and|\+) ?hot water(?: are)? included", desc, re.I) else "",
+        "laundry": laundry, "listing_type": "unknown", "manager": ld(al.get("listerOrg")), "listing_age_days": age,
+        "photo_url": (imgs[0].get("url") if imgs else ""), "building_url": ld(b.get("webUrl")),
+        "raw_path": meta["path"], "notes": "; ".join(notes),
+    }
+
+
+def build() -> None:
+    old = {}
+    if OUT.exists():
+        with open(OUT) as f:
+            old = {r["listing_id"]: r for r in csv.DictReader(f)}
+    rows, skipped = {}, {"no listing object": 0, "over cap or not studio/1BR on unit page": 0, "page not cached": 0}
+    for card in cards().values():
+        if (card["gross"] or card["net"] or 10**6) > MAX_RENT:
             continue
-        for o in (j if isinstance(j, list) else [j]):
-            if isinstance(o, dict) and "offers" in o:
-                d["ld"] = o
-    d["flight"] = fl
-    return d
+        text, meta = None, None
+        try:
+            lib.HOST_DELAY[HOST] = DELAY
+            content, meta = lib.cached_get(card["url"], SRC, ext="html", retries=1)  # cache hit only after `detail`
+            text = content.decode("utf-8", "replace") if meta["status"] == 200 else None
+        except Exception:
+            text = None
+        if not text:
+            skipped["page not cached"] += 1
+            continue
+        o = listing_obj(text, card["id"])
+        if not o:
+            skipped["no listing object"] += 1
+            continue
+        r = row_for(card, o, meta)
+        if not r:
+            skipped["over cap or not studio/1BR on unit page"] += 1
+            continue
+        if r["listing_id"] in old:
+            r["first_seen"] = min(old[r["listing_id"]]["first_seen"], r["first_seen"])
+        rows[r["listing_id"]] = r
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    with open(OUT, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=COLS)
+        w.writeheader()
+        for r in sorted(rows.values(), key=lambda r: (r["listed_rent"], r["address"])):
+            w.writerow(r)
+    print(f"wrote {len(rows)} rows to {OUT.relative_to(lib.ROOT)}; skipped {skipped}")
 
 
 def main() -> None:
@@ -201,10 +329,6 @@ def main() -> None:
         return
     if cmd in ("build", "all"):
         build()
-
-
-def build() -> None:  # replaced below once the unit page layout is known
-    raise SystemExit("build not written yet")
 
 
 if __name__ == "__main__":

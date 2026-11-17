@@ -588,8 +588,11 @@ def facts(u):
         "dog_allowed": str(dog.get("allowed") or "").lower() == "yes",
         "dog_open": dog_open(u),
         "pet_rent_known": dog.get("pet_rent") is not None,
-        "elevator_open": bool(get(u, "confirm", "asterisk")) and get(u, "confirm", "what") == "elevator",
-        "elevator_sure": get(u, "elevator", "value") == "yes" and not get(u, "elevator", "listing_site_only"),
+        "elevator_open": bool(get(u, "confirm", "asterisk")) and get(u, "confirm", "what") in ("elevator", "floor and elevator"),
+        # owner, 2026-11-17: an apartment one flight up (floor 2) needs no elevator; on such an apartment the building's
+        # elevator is never stated as a reason to like it (it may be in doubt)
+        "walkup": get(u, "elevator", "walkup_floor_2") is True,
+        "elevator_sure": get(u, "elevator", "value") == "yes" and not get(u, "elevator", "listing_site_only") and get(u, "elevator", "walkup_floor_2") is not True,
         "unknown": list(u.get("all_in_unknown") or []),
         "disclosures": disclosed(u),
     }
@@ -696,6 +699,9 @@ LEADS = {
         "This apartment is about {sqft} square feet.",
         "The listing puts this apartment at about {sqft} square feet.",
         "You would have about {sqft} square feet here."]),
+    "walkup": ("floor", [                                   # owner, 2026-11-17: floor 2 stated, no elevator needed
+        "This apartment is on floor {floor}, a single flight of stairs up, so you do not need an elevator.",
+        "The listing puts this apartment on floor {floor}, a single flight up, so no elevator is needed."]),
     "floor": ("floor", [
         "This apartment is on floor {floor}.",
         "The listing puts this apartment on floor {floor}, above the ground floor."]),
@@ -873,6 +879,14 @@ CATCHES = {
         "The listing does not give the floor. Confirm that the apartment is above the ground floor.",
         "Ask which floor this apartment is on. The listing does not say, and you want to be above the ground floor.",
         "The floor is not published, so confirm that it is above the ground floor before you tour."],
+    "floor:walkup inferred": [                             # owner, 2026-11-17: floor 2 read from the number, no elevator established
+        "The apartment number suggests floor {floor}, a single flight up. No elevator is confirmed here, so confirm the floor.",
+        "Ask the office to confirm the floor is {floor}, a single flight up. No elevator is confirmed here."],
+    "confirm:floor and elevator": [                        # owner, 2026-11-17: one open item, parsers.floor_elevator_rule
+        "The listing gives no floor and does not say there is an elevator. Ask both: without an elevator, only the floor just "
+        "above the ground floor works.",
+        "Ask which floor this apartment is on and whether the building has an elevator. Without an elevator, only the floor "
+        "just above the ground floor works."],
     "floor:inferred": [
         "The listing does not state the floor. The apartment number suggests floor {floor}, so confirm it.",
         "Floor {floor} is read from the apartment number, and the listing does not state it. Ask the office to confirm "
@@ -1353,7 +1367,9 @@ def lead_conditions(f, peers):
         add(36, "studio", beds=f["beds"])
     if f["sqft"] and f["sqft"] < 850:
         add(32, "size", {"sqft": sqft}, sqft=f["sqft"])
-    if f["floor"] and f["floor"] < 10 and f["floor_sure"]:
+    if f["walkup"] and f["floor"] == 2 and f["floor_sure"]:
+        add(33, "walkup", {"floor": f["floor"]}, floor=f["floor"], walkup_floor_2=True)
+    elif f["floor"] and f["floor"] < 10 and f["floor_sure"]:
         add(32, "floor", {"floor": f["floor"]}, floor=f["floor"])
     if f["avail"] and f["avail"] != "now":
         add(30, "avail_date", {"date": f["avail"]}, available=f["avail"])
@@ -1545,6 +1561,8 @@ CATCH_BASIS = {
     "conditions:credit_plain": lambda u: "credit score requirement" in disclosed(u),
     "conditions:furnished": lambda u: "furnished apartment" in disclosed(u),
     "floor:unpublished": lambda u: num(u.get("floor")) is None,
+    "floor:walkup inferred": lambda u: get(u, "elevator", "walkup_floor_2") is True and u.get("floor_basis") not in ("confirmed", "stated"),
+    "confirm:floor and elevator": lambda u: _what(u) == "floor and elevator",
     "floor:inferred": lambda u: num(u.get("floor")) is not None and u.get("floor_basis") not in ("confirmed", "stated"),
     "weak:space": lambda u: num(u.get("sqft")) is not None and num(u.get("sqft")) < 600,
     "weak:cost": lambda u: num(get(u, "cost_check", "cap_margin")) is not None and num(get(u, "cost_check", "cap_margin")) < 150,
@@ -1552,6 +1570,7 @@ CATCH_BASIS = {
 CONFIRM_ORDER = {                                       # the open item -> its families, the most specific first
     "live check": ["confirm:live check"],
     "elevator": ["confirm:elevator named", "confirm:elevator"],
+    "floor and elevator": ["confirm:floor and elevator"],
     "listing": ["confirm:listing permit", "confirm:listing lease price", "confirm:listing which building", "confirm:listing one site",
                 "confirm:listing stale", "confirm:listing"],
     "availability": ["confirm:availability plan", "confirm:availability"],
@@ -1623,6 +1642,8 @@ def catch_options(u, f):
         out.append(("condo", {}, {"disclosure": "condo rented by its owner"}))
     if num(u.get("floor")) is None:
         out.append(("floor:unpublished", {}, {"floor": None}))
+    elif not f["floor_sure"] and f["floor"] and f["walkup"]:
+        out.append(("floor:walkup inferred", {"floor": f["floor"]}, {"floor": f["floor"], "floor_basis": u.get("floor_basis"), "walkup_floor_2": True}))
     elif not f["floor_sure"] and f["floor"]:
         out.append(("floor:inferred", {"floor": f["floor"]}, {"floor": f["floor"], "floor_basis": u.get("floor_basis")}))
     out.append(weakest(u, f))

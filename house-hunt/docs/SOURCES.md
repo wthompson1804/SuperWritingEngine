@@ -340,3 +340,67 @@ Raw downloads (12 MB + 19 MB for the map, 7 MB for the split) are under `raw/` a
 - Figures come from what a web search displayed, from earlier evidence, or from pages already cached. Apartments.com,
   ApartmentRatings, Yelp, Zillow, Facebook and Rent.com pages were not fetched. There is no Google Places key.
   `docs/RATINGS_CENSUS_BRIEF.md`, `harvest_notes/ratings_census_part*.md`.
+
+## Trawl 2 new-source probe (2026-11-17)
+
+Step 4 of `docs/TRAWL_2_PLAN.md`. Each host got one robots.txt request, then at most one content page; where a footer
+link pointed to the terms of use, the terms page was read as well (that is the only second request on any probed host).
+A host was judged usable only if robots allowed the path for **both** ClaudeBot and Claude-User (a group naming Claude
+overrides `*`) **and** its terms do not forbid automated collection. Probe log: `raw/new_sources_probe/_probe.jsonl`
+(captures beside it); probe helper kept outside the repo (scratchpad `probe.py`, longest-match robots evaluation).
+User agent: `lib.USER_AGENT`; 3 s per host; no retries. Every 401/403/429 below is now in `raw/_host_kill_shared.json`
+(`"by": "new_sources_trawl2"`). Details: `docs/harvest_notes/new_sources_trawl2.md`.
+
+| Host | What it has | Robots (Claude) | Terms | Decision |
+|---|---|---|---|---|
+| www.openigloo.com | NYC unit listings (Brooklyn, Queens/LIC) with gross and net rent, available date, pet policy, building amenities, floors from city records | ClaudeBot and Claude-User groups: allow `/` except `/api`, `/_nuxt`, `/internal`, `/wp-admin`, two `/None` paths | `/terms-of-use` read: no clause on automated access; bars copying/republishing content | **Harvested** (`scripts/h_openigloo.py`, facts only, no text or photos copied) |
+| ridgetopapts.appfolio.com (AppFolio `/listings`) | NJ unit cards with rent, beds, sqft, available date, pet policy, amenities | `*` only: `/listings$` and `/listings/listings` allowed, detail pages disallowed; Crawl-delay 10 | Listing pages link `www.appfolio.com/terms/listings`, which forbids "any robot, spider, or other automated device ... to access, retrieve, scrape or index any portion of the Services" | **Not usable.** This contradicts the earlier working note that AppFolio `/listings` index pages are allowed; flagged to the coordinator |
+| www.appfolio.com | AppFolio listing terms (above) | `*`: `/lp/`, `/payment/subscription` disallowed | see above | terms source only |
+| tribro.realtymx.com (RealtyMX broker template) | Brokerage's own rentals (Brooklyn/Manhattan), one list page | RealtyMX default `*`: `/images/`, `/admin*/` | `?page=policy&sub=terms`: "Not reproduce, copy, distribute, scrape, or commercially use any website content without prior written permission" | **Not usable** for harvest; RealtyMX sites share this template, so other RealtyMX brokers were not probed |
+| www.elliman.com | IDX sales and rentals (OneKey MLS, NYC) | `*` allows `/rentals/*` (filter params disallowed) | "use any robot, spider, scraper or other automated means ... to access the Site or extract data" prohibited; IDX data "not ... through automated or high-volume means" | **Not usable** |
+| www.compass.com | IDX listings | `*`: `/api/`, `/for-rent/_map/` and others disallowed | `/legal/` is a summary only; full terms not read (page budget) | Not used (terms not verified) |
+| www.coldwellbankerhomes.com | IDX listings (NJ, CT, LI) | `*`: `/propertylisting/`, `*/mls_` and search APIs disallowed | `/terms-of-use/` → 404; not read | Not used (terms not verified) |
+| www.weichert.com | IDX listings (NJ) | `*`: search-results pages disallowed | `/aboutus/LegalDisclaimers.html` has no use terms; Terms of Use not found within budget | Not used (terms not verified; search results disallowed anyway) |
+| www.raveis.com | IDX listings (CT, SmartMLS) | **ClaudeBot and anthropic-ai: `Disallow: /`** | not read | **Not usable** (robots) |
+| www.onekeymls.com | OneKey MLS consumer search | `*`: `/search?*`, `/ajax/` disallowed; `/home-details/` allowed | `/terms-of-use` is script-rendered (no text in HTML); not read | Not used (terms not verified; search disallowed) |
+| www.njmls.com | NJMLS consumer search | `*`: `/search.cfm`, `/maps` and others disallowed | `/terms.cfm` → 404 | Not used (search disallowed; terms not found) |
+| www.howardhanna.com | IDX (LI, NJ) | **robots.txt 403** | — | **Refused** (kill file) |
+| www.bhhsneproperties.com | IDX (CT) | **robots.txt 403** | — | **Refused** (kill file) |
+| www.danielgale.com | IDX (LI) | **robots.txt 403** | — | **Refused** (kill file) |
+| www.kw.com | IDX (all) | **robots.txt 403** | — | **Refused** (kill file) |
+| www.signaturepremier.com | IDX (LI) | robots 200 (WordPress default) | **terms page 403** | **Refused** (kill file) |
+| www.nestseekers.com | Broker's own NYC inventory | `*`: `/ajax/`, `/availability/`, `/feed/` and others disallowed | `/MyNest/terms-of-use`: no "robot, spider, scraper or other automated means ... to access the Site or extract data" | **Not usable** |
+| www.hlres.com (Highline Residential) | Broker's own Queens/LIC listings | `*` no relevant rules | `/terms-conditions`: no automated searches, scraping or mining; IDX data not through automated means | **Not usable** |
+| nyrentownsell.com | Broker's own NYC listings | `*`: blog paths only | `/term-conditions`: "Scripts, robots, and web crawlers are also forbidden" | **Not usable** |
+| www.bohemiarealtygroup.com | Broker's own inventory (mostly Bronx/Upper Manhattan) | **ClaudeBot: `Disallow: /`** | not read | **Not usable** (robots) |
+| www.idealpropertiesgroup.com | Brooklyn broker | unreachable (proxy 502) | — | Not reached (not a refusal) |
+| propertyclub.nyc | NYC listing site | `*`: filter, rooms and a few area paths disallowed | `/terms` renders almost no text (1.3 k chars); not readable | Not used (terms not verified) |
+| rentalbeast.com | Broker rental listings (NJ, NY) | `*` no relevant rules | `/terms-of-use`: automated queries "with the primary purpose of harvesting information ... are strictly prohibited" | **Not usable** |
+| www.rentable.co | Aggregator (management feeds, NJ/CT/LI) | `*`: listing-details, search APIs disallowed | `/terms-for-renters`: no spiders, robots, scrapers to scrape or download data | **Not usable** |
+| www.veryapt.com | Aggregator | `*` Crawl-delay 10 | `/terms/`: no "automated means ... scripts, bots, scrapers" | **Not usable** |
+| www.redfin.com | Aggregator incl. NJ/CT/LI rentals | `*`: many API paths disallowed | `/about/terms-of-use`: "You may not automatedly crawl or query the Services for any purpose" | **Not usable** |
+| www.listingsproject.com | Sublets, shares, some leases | **ClaudeBot and anthropic-ai group: `/listings`, `/real-estate`, `/terms-of-use` disallowed** | not read | **Not usable** (robots) |
+| www.cityrealty.com | NYC listings and manager pages | **robots.txt 403** | — | **Refused** (kill file) |
+| www.homes.com | Aggregator (CoStar) | **robots.txt 403** | — | **Refused** (kill file) |
+| 1898leasing.com (A&E Real Estate's leasing brand) | was A&E's NYC inventory | `*` allow `/` | — | Domain now a parked "lander" page; nothing there |
+| www.heatherwood.com | LI, Brooklyn, Queens communities; `/find-your-home?location=...` | `*` no relevant rules | `/site-terms-and-conditions`: "Use any robot, spider, or other automatic device ... to access the Site for any purpose" prohibited | **Not usable** (resident portal is securecafe anyway) |
+| sanzari.com | Bergen County residential (Greenway Village, Zephyr Ridge) | `*` allowed | not read | Not used: residential leasing is RentCafe/securecafe |
+| www.carabetta.com | CT and MA apartments | `*` allowed | not read | Not used: `/rent-an-apartment/` links out to RentCafe pages |
+| www.edgewoodproperties.com | NJ apartments (Matawan, Raritan Heights, Hamilton) | `*` allowed | `/terms-conditions`: no clause on automated access | Usable but **no unit-level prices**: property pages list floor-plan layouts only (one property page read into `raw/h_edgewood/`); leasing is RealPage OneSite. Nothing harvested |
+| www.kislakrealty.com | Commercial brokerage | `*` allowed | not read | Not a rental source |
+| www.princetonproperties.com | NJ/CT apartments | **ClaudeBot and anthropic-ai: `Disallow: /`** | not read | **Not usable** (robots) |
+| www.prgrealestate.com | North NJ apartments | robots 200 | **home page 403** | **Refused** (kill file) |
+| www.morganproperties.com | NJ/CT apartments | connection reset at robots.txt | — | Not reached (not a refusal) |
+| www.eaglerockapts.com | LI garden apartments | no robots.txt; home redirects to plain-http `eaglerockmanagement.com`, unreachable here | — | Not reached |
+| www.midislandapartments.com | Bay Shore, LI | unreachable (proxy 502) | — | Not reached |
+
+Not contacted, by rule: Zillow, StreetEasy, Trulia, Apartments.com (and its CoStar sibling ApartmentFinder),
+ApartmentRatings, RentHop, Realtor.com, Rent.com, HotPads, RentCafe/securecafe, Entrata prospectportal, Craigslist,
+Yelp, Reddit, Nextdoor, Facebook, Google Maps, Patch, QNS, and every host already in the three refusal files.
+Search results were used only to find sites; no price or date was taken from a snippet.
+
+**Pattern:** IDX brokerage sites (OneKey, SmartMLS, GSMLS/NJMLS members) either refuse us at robots.txt or carry the
+standard MLS clause against automated or high-volume access; none is usable. Broker sites and aggregators that publish
+their own NYC inventory almost all prohibit scraping in their terms. Regional managers in NJ, LI and CT mostly lease
+through RentCafe/securecafe or RealPage and publish no unit prices on their own pages. Openigloo is the one new source
+that passes.

@@ -1713,7 +1713,7 @@ var RULE_FLAG=[
 ];
 /* Confirmation asterisk (unit.confirm): the plain word for what is open, and how to find the matching tour question.
    CONFIRM_WORD only tidies the kinds it knows. Any other text in confirm.what is shown exactly as the data gives it. */
-var CONFIRM_WORD={floor:"the floor",elevator:"the elevator","dogs allowed":"whether dogs are allowed","live check":"that it is still available",
+var CONFIRM_WORD={floor:"the floor",elevator:"the elevator","floor and elevator":"the floor, and whether there is an elevator","dogs allowed":"whether dogs are allowed","live check":"that it is still available",
   "lease term":"the lease term behind this price","cost near the cap":"pet rent, parking and fees (close to your limit)",availability:"which apartment is available",
   listing:"that the ad is real and for this building",eligibility:"that the apartment is open to any renter","condo rules":"the building's rules for renting this apartment",other:"one more thing"};
 var CONFIRM_Q={floor:[/floor/i,"Which floor is the apartment on?"],elevator:[/elevator/i,"Does the building have an elevator?"],"dogs allowed":[/dogs allowed/i,"Are dogs allowed?"],"live check":[/still available/i,"Is this apartment still available, and at what price?"]};
@@ -2075,6 +2075,7 @@ function pub(t){if(Array.isArray(t))t=t.join(" ");t=String(t==null?"":t);return 
 /* (D5) A fact that is still the open question is never stated as a fact. The elevator and the dog policy are the building's: open on any apartment there, open for its rows. */
 var OPEN_ELEV=/elevator/i,OPEN_DOG=/\bdogs?\b/i,OPEN_AVAIL=/live check|availab/i;
 function openFact(U,re){var B=U&&U.id!=null?B_OF[U.id]:null,us=B?B.units:[U];return us.some(function(u){return !!u&&confs(u).some(function(c){return re.test(String(c.what||""))})})}
+function walkUp(U){var e=U&&U.elevator;return e&&e.walkup_floor_2===true&&e.words?String(e.words):""}
 function openOwn(U,re){return confs(U).some(function(c){return re.test(String(c.what||""))})}
 function confItem(x){if(!x)return null;if(typeof x==="string")return {what:x,why:"",ask:""};if(typeof x!=="object"||x.asterisk===false)return null;
   var what=x.what||x.what_to_confirm||x.confirm_what||x.kind||x.label||"",why=x.why||x.confirm_why||x.reason||"",ask=x.question||x.ask||"";
@@ -2582,7 +2583,7 @@ applyF();
 function gatesLine(){var all=UNITS,ok=function(f){return all.length&&all.every(f)},o=[];
   if(ok(function(u){return u.beds===0||u.beds===1}))o.push("a studio or one-bedroom");
   if(ok(function(u){return u.all_in!=null&&u.all_in<=CAP}))o.push("at or under "+money(CAP)+" a month "+WITH_UF);
-  if(ok(function(u){return u.elevator&&u.elevator.value==="yes"&&!openOwn(u,OPEN_ELEV)}))o.push("in an elevator building");
+  if(ok(function(u){return u.elevator&&u.elevator.value==="yes"&&!openOwn(u,OPEN_ELEV)&&!walkUp(u)}))o.push("in an elevator building");
   if(ok(function(u){return u.dog&&u.dog.allowed==="yes"&&!openOwn(u,OPEN_DOG)}))o.push("open to dogs");
   if(ok(function(u){return u.floor==null||u.floor>=2}))o.push("above the ground floor");
   return o.length?"Every apartment shown is "+list(o)+".":""}
@@ -2655,7 +2656,8 @@ function wdTagOnly(U){var a=obj(U&&U.amenities),b=String(first(a,["in_unit_laund
 function buildingFacts(U){var a=U.amenities||{},o=[],L=okUrl(U.links&&U.links.listing),B=okUrl(U.links&&U.links.building);
   o.push({t:"Address: "+(U.address||NK)+(U.unit?", apartment "+U.unit:"")+".",url:L,l:"listing"});
   o.push({t:SAY.available(U)});
-  o.push({t:openFact(U,OPEN_ELEV)?"Elevator: not confirmed for this apartment. See “Still to confirm”.":"Elevator: "+(U.elevator&&U.elevator.value||NOT_PUB)+(U.elevator&&U.elevator.basis?" ("+(BASIS_WORD[U.elevator.basis]||U.elevator.basis)+")":"")+".",url:B||L,l:B?"building page":"listing"});
+  /* owner, 2026-11-17: an apartment one flight up needs no elevator (elevator.words, from parsers.walkup_words) */
+  o.push({t:walkUp(U)?walkUp(U)+".":openFact(U,OPEN_ELEV)?"Elevator: not confirmed for this apartment. See “Still to confirm”.":"Elevator: "+(U.elevator&&U.elevator.value||NOT_PUB)+(U.elevator&&U.elevator.basis?" ("+(BASIS_WORD[U.elevator.basis]||U.elevator.basis)+")":"")+".",url:B||L,l:B?"building page":"listing"});
   o.push({t:"Dogs: "+(openFact(U,OPEN_DOG)?"the policy is not confirmed, ask":(U.dog&&U.dog.allowed||NOT_PUB)+(U.dog&&U.dog.basis?" ("+(BASIS_WORD[U.dog.basis]||U.dog.basis)+")":""))+"; "+(U.dog&&U.dog.weight_limit_lb!=null?"weight limit "+(U.dog.weight_limit_lb==="no limit"?"none":U.dog.weight_limit_lb+" lb"):smallDog(U)?SMALL_DOG.charAt(0).toLowerCase()+SMALL_DOG.slice(1):"weight limit "+NOT_PUB)+"; pet rent "+(U.dog&&U.dog.pet_rent!=null?(Number(U.dog.pet_rent)===0?"none":money(U.dog.pet_rent)+" a month"):NOT_PUB)+".",url:L,l:"listing"});
   o.push({t:"Laundry: "+(a.in_unit_laundry==="yes"?(!wdBoth(U)?"a "+wdWord(U)+" in the apartment; the listing names no "+(wdWord(U)==="washer"?"dryer":"washer"):wdTagOnly(U)?"a washer and dryer are on the listing site's feature list; confirm they are in the apartment":"in the apartment"):a.in_unit_laundry==="on_site_only"?"in the building, not in the apartment":NK.toLowerCase())+"."});
   o.push({t:"Gym: "+(a.gym?"listed":NK.toLowerCase())+". Package room: "+(a.package_room?"listed":NK.toLowerCase())+". Lounge or co-working: "+(a.lounge_or_coworking?"listed":NK.toLowerCase())+"."});
@@ -2715,7 +2717,7 @@ var HL={
   dog:function(U){var d=U.dog||{},w=d.weight_limit_lb;if(openFact(U,OPEN_DOG))return "dog policy not confirmed, ask";if(d.allowed!=="yes")return "not stated, ask";
     return "allowed, "+(w==="no limit"?"no weight limit":w!=null&&isFinite(+w)?"up to "+r0(+w)+" lb":smallDog(U)?"small dogs, no weight given":"weight limit not stated")},
   building:function(U){var a=U.amenities||{},o=[];
-    if(openFact(U,OPEN_ELEV))o.push("elevator not confirmed");else if(U.elevator&&U.elevator.value==="yes")o.push("elevator");if(a.in_unit_laundry==="yes")o.push(!wdBoth(U)?wdWord(U)+" in the apartment":wdTagOnly(U)?"washer-dryer listed, to confirm":"washer-dryer in the apartment");if(a.gym)o.push("gym");if(a.pool)o.push("pool");
+    if(walkUp(U))o.push(walkUp(U).charAt(0).toLowerCase()+walkUp(U).slice(1));else if(openFact(U,OPEN_ELEV))o.push("elevator not confirmed");else if(U.elevator&&U.elevator.value==="yes")o.push("elevator");if(a.in_unit_laundry==="yes")o.push(!wdBoth(U)?wdWord(U)+" in the apartment":wdTagOnly(U)?"washer-dryer listed, to confirm":"washer-dryer in the apartment");if(a.gym)o.push("gym");if(a.pool)o.push("pool");
     if(deskOf(a))o.push(deskOf(a));if(a.outdoor_space)o.push("outdoor space");
     return o.length?o.slice(0,3).join(", "):"details not published"},
   /* the count behind the star: open gate facts only (N2); then the things to ask */

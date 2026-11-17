@@ -933,5 +933,200 @@
 "at": "2026-11-17T17:02:22+00:00",
 "status": 200,
 "reason": "ok"
+},
+"/nj/secaucus/1030-koelle-blvd": {
+"at": "2026-11-17T17:02:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/secaucus/secaucus-meadowlands": {
+"at": "2026-11-17T17:02:37+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/secaucus/secaucus-new-york-city-area": {
+"at": "2026-11-17T17:02:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/rutherford/12-sylvan-street": {
+"at": "2026-11-17T17:02:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lodi/111-dell-glen": {
+"at": "2026-11-17T17:03:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lodi/184-terhune-avenue": {
+"at": "2026-11-17T17:03:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lodi/222-garibaldi-avenue--2": {
+"at": "2026-11-17T17:03:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lodi/236-corabelle": {
+"at": "2026-11-17T17:03:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lodi/408-passaic-avenue": {
+"at": "2026-11-17T17:03:17+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lodi/5-marion-avenue": {
+"at": "2026-11-17T17:03:19+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/lodi/9-victor-street": {
+"at": "2026-11-17T17:03:22+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/wood-ridge/342-b-hackensack-street": {
+"at": "2026-11-17T17:03:35+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/paramus/192-w-midland-avenue": {
+"at": "2026-11-17T17:03:44+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fair-lawn/2-86-virginia-drive": {
+"at": "2026-11-17T17:03:54+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/fair-lawn/9-16-2nd": {
+"at": "2026-11-17T17:03:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/kearny/125-133-kearny-ave-apartments": {
+"at": "2026-11-17T17:04:09+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/kearny/199-chestnut-street": {
+"at": "2026-11-17T17:04:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/kearny/625-elm-street--1": {
+"at": "2026-11-17T17:04:15+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elmwood-park/31-mulberry-st": {
+"at": "2026-11-17T17:04:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elmwood-park/69-miller-avenue": {
+"at": "2026-11-17T17:04:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/elmwood-park/88-fournier-crescent": {
+"at": "2026-11-17T17:04:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/garfield/359-river-dr": {
+"at": "2026-11-17T17:04:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/garfield/414-midland-avenue": {
+"at": "2026-11-17T17:04:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/passaic/113-boulevard": {
+"at": "2026-11-17T17:04:55+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/passaic/245-passaic--1": {
+"at": "2026-11-17T17:04:57+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/passaic/245-passaic-ave--4": {
+"at": "2026-11-17T17:04:59+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/passaic/306-van-houten-ave--1": {
+"at": "2026-11-17T17:05:02+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/passaic/39-high-st": {
+"at": "2026-11-17T17:05:04+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/passaic/40-hoover-ave": {
+"at": "2026-11-17T17:05:07+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/passaic/417-boulevard-8": {
+"at": "2026-11-17T17:05:10+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/passaic/77-lafayette-ave": {
+"at": "2026-11-17T17:05:12+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/harrison/330-harrison-station": {
+"at": "2026-11-17T17:05:25+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/harrison/harrison-station--2": {
+"at": "2026-11-17T17:05:27+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/harrison/one-harrison": {
+"at": "2026-11-17T17:05:29+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/wallington/10-wadsworth-streetapartment-1": {
+"at": "2026-11-17T17:05:40+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/wallington/223-hayward-place": {
+"at": "2026-11-17T17:05:42+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/westwood/175-center-ave": {
+"at": "2026-11-17T17:05:52+00:00",
+"status": 200,
+"reason": "ok"
+},
+"/nj/westwood/valley-apartments": {
+"at": "2026-11-17T17:05:55+00:00",
+"status": 200,
+"reason": "no_unit_le_3000"
+},
+"/nj/closter/435-durie-ave": {
+"at": "2026-11-17T17:06:05+00:00",
+"status": 200,
+"reason": "ok"
 }
 }

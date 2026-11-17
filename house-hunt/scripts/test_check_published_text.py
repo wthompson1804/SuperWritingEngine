@@ -571,5 +571,61 @@ class NeighborhoodRules(unittest.TestCase):
             self.assertTrue(any("no crime rate is published" in p for p in self.check(r, about_points_json=pts)), h)
 
 
+def walkup_unit(value="", words="A single flight up, no elevator needed"):
+    """A synthetic floor-2 walk-up (owner, 2026-11-17): settled on floor 2, no elevator established."""
+    u = synthetic()
+    u.update({"floor": "2", "floor_basis": "inferred", "elevator": {"value": value, "basis": "", "listing_site_only": False, "rule": "floor_2",
+                                                                    "walkup_floor_2": True, "words": words},
+              "confirm": {"asterisk": False}})
+    return u
+
+
+def floor_or_elevator_unit():
+    """A synthetic apartment with the one open item 'floor and elevator' (code floor_or_elevator)."""
+    u = synthetic()
+    u.update({"floor": None, "floor_basis": "unknown", "elevator": {"value": "", "basis": "", "listing_site_only": False, "rule": "floor_or_elevator",
+                                                                    "walkup_floor_2": False, "words": None},
+              "confirm": {"asterisk": True, "what": "floor and elevator", "label": "the floor, and whether there is an elevator", "code": "floor_or_elevator"}})
+    return u
+
+
+class FloorAndElevator(unittest.TestCase):
+    """Owner, 2026-11-17 (second trawl): a walk-up apartment on floor 2, and the open item 'floor and elevator'."""
+
+    def claims(self, text, u, us=None):
+        return [name for name, rx, test, basis in P.PLACE_CLAIMS for s_ in P.sents(text)
+                if rx.search(s_) and not P.NOT_A_CLAIM.search(s_) and not test(u, us or [u])]
+
+    def test_a_walkup_never_has_an_elevator_in_the_text(self):
+        u = walkup_unit(value="yes")                       # an elevator named, in doubt: floor 2 is what settles it
+        self.assertIn("an elevator", self.claims("The building has an elevator.", u))
+        self.assertEqual(self.claims("This apartment is on floor 2, a single flight of stairs up, so you do not need an elevator.", u), [])
+
+    def test_single_flight_only_on_a_walkup(self):
+        lift = synthetic()
+        lift.update({"floor": "5", "elevator": {"value": "yes", "walkup_floor_2": False}, "confirm": {"asterisk": False}})
+        self.assertIn("a single flight up", self.claims("A single flight up, no elevator needed.", lift))
+        self.assertEqual(self.claims("A single flight up, no elevator needed.", walkup_unit()), [])
+
+    def test_no_elevator_as_a_fact_only_where_a_page_says_so(self):
+        self.assertIn("no elevator", self.claims("The building has no elevator.", walkup_unit(value="")))
+        self.assertEqual(self.claims("The building has no elevator.", walkup_unit(value="no", words="A single flight up, no elevator")), [])
+        self.assertEqual(self.claims("No elevator is confirmed here, so confirm the floor.", walkup_unit()), [])
+
+    def test_floor_or_elevator_is_open_so_no_elevator_claim(self):
+        u = floor_or_elevator_unit()
+        u["elevator"]["value"] = "yes"
+        self.assertIn("an elevator", self.claims("The building has an elevator.", u))
+        self.assertEqual(self.claims("Ask which floor this apartment is on and whether the building has an elevator.", u), [])
+
+    def test_the_reader_wording_passes_the_plain_language_guards(self):
+        import parsers
+        for t in (parsers.WALKUP_WORDS + ".", parsers.WALKUP_WORDS_NEEDED + ".", parsers.FLOOR_OR_ELEVATOR_READER_Q,
+                  "To confirm: " + parsers.FLOOR_OR_ELEVATOR_READER_LABEL + "."):
+            self.assertIsNone(G.NUMBER_WORDS.search(t), t)
+            # a tour question is a question: only the scene-text rule against question marks does not apply to it
+            self.assertEqual([b for rx, b in G.BANNED if rx.search(t) and not (b == "question mark" and t.endswith((")", "?")))], [], t)
+
+
 if __name__ == "__main__":
     unittest.main()

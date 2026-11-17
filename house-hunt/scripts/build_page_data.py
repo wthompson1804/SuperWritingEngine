@@ -233,7 +233,7 @@ def _a(n) -> str:
     return "an" if str(n).startswith(("8", "11", "18")) else "a"
 
 
-OPEN_LABEL = {"elevator": "the elevator", "dogs allowed": "whether dogs are allowed", "availability": "whether this apartment is still available",
+OPEN_LABEL = {"elevator": "the elevator", parsers.FLOOR_OR_ELEVATOR_LABEL: parsers.FLOOR_OR_ELEVATOR_READER_LABEL, "dogs allowed": "whether dogs are allowed", "availability": "whether this apartment is still available",
               "listing": "whether this listing is current", "eligibility": "who can rent this apartment"}
 LISTING_LABEL = {"place": "the building's exact address", "address_mismatch": "which building this apartment is in", "price_doubt": "the price", "sibling_12": "the 12-month price"}
 ELEVATOR_WHY = {
@@ -287,7 +287,14 @@ def open_item_text(r):
     what = str(_f(r, "confirm_what") or "").split("; ")[0] or {"dogs": "dogs allowed"}.get(key, key)
     rv_why, rv_q = reviewed(_f(r, "open_review_why")) if len(keys) == 1 else None, reviewed(_f(r, "open_review_question")) if len(keys) == 1 else None
     label, why, q = OPEN_LABEL.get(what, what), "", ""
-    if key == "elevator":
+    if key == "elevator" and code == parsers.FLOOR_OR_ELEVATOR_CODE:
+        # owner, 2026-11-17: no elevator established and no floor published: ONE open item (parsers.floor_elevator_rule)
+        label = parsers.FLOOR_OR_ELEVATOR_READER_LABEL
+        why = ("A page we read says this building has no elevator, and no page gives the floor. Without an elevator, only an apartment a single flight up (floor 2) qualifies."
+               if str(_f(r, "elevator") or "").lower() in ("no", "conflicting") or _f(r, "elevator_said_no") == "yes"
+               else "No page we read gives the floor or says the building has an elevator. An apartment a single flight up (floor 2) needs no elevator; a higher floor does.")
+        q = parsers.FLOOR_OR_ELEVATOR_READER_Q
+    elif key == "elevator":
         if code == "height_only":
             fl = _months(_f(r, "building_floors")) or _months(_f(r, "pluto_floors"))
             why = f"No page we read says the building has an elevator. It has {fl} floors, which suggests one." if fl and fl >= 6 else "No page we read says the building has an elevator. Its height suggests one."
@@ -765,7 +772,10 @@ def unit_core(r, g, qs):
     return {
         "id": g("listing_id"), "building_id": g("building_id"), "hood_id": g("hood_id"), "year": g("group_key"),
         "building": g("building_name"), "address": g("address"), "unit": g("unit"), "kind": g("listing_kind") or "unit", "beds": g("beds"), "sqft": g("sqft"),
-        "floor": g("unit_floor"), "floor_basis": g("unit_floor_basis"), "floor_basis_note": "read from the apartment number" if g("floor_basis_note") else None, "zip": g("zip5"), "lat": g("lat"), "lon": g("lon"),
+        # owner, 2026-11-17: a floor-2 walk-up whose floor is read under the complex's numbering convention carries that floor
+        **({"floor": g("unit_floor"), "floor_basis": g("unit_floor_basis")} if not (g("floor_elevator_code") == "floor_2" and g("unit_floor") is None and g("unit_floor_reading") is not None)
+           else {"floor": g("unit_floor_reading"), "floor_basis": "inferred"}),
+        "floor_basis_note": "read from the apartment number" if g("floor_basis_note") else None, "zip": g("zip5"), "lat": g("lat"), "lon": g("lon"),
         "available": g("available_date"), "listing_age_days": g("listing_age_days"),
         "rent": {"listed": g("listed_rent"), "basis": g("rent_basis"), "basis_kind": g("rent_basis_kind"), "gross": g("rent_gross"),
                  "asterisk": g("rent_asterisk") == "yes", "offer_text": g("rent_offer_text"), "offer_kind": g("rent_offer_kind"), "offer_type": g("rent_offer_type"), "free_months": g("rent_free_months"),
@@ -781,7 +791,11 @@ def unit_core(r, g, qs):
         "unknown_cost_lines": [{"parking fee": "parking", "building fees": "required fees", "building fees (part)": "some required fees"}.get(x, x)
                                for x in str(g("all_in_unknown_lines") or "").split("; ") if x],
         "estimated_cost_lines": [x for x in str(g("all_in_estimated_lines") or "").split("; ") if x],
-        "elevator": {"value": g("elevator"), "basis": g("elevator_basis"), "listing_site_only": g("elevator_aggregator_only") == "yes"},
+        "elevator": {"value": g("elevator"), "basis": g("elevator_basis"), "listing_site_only": g("elevator_aggregator_only") == "yes",
+                     # owner, 2026-11-17: floor and elevator together (parsers.floor_elevator_rule). walkup_floor_2: settled on
+                     # floor 2 with no elevator established; words: the plain line for the fact list and the compare row
+                     "rule": g("floor_elevator_code") or None, "walkup_floor_2": g("floor_elevator_code") == "floor_2",
+                     "words": parsers.walkup_words(g("floor_elevator_code"), g("elevator"))},
         "dog": {"allowed": g("dogs_allowed"), "basis": g("dogs_allowed_basis"), "weight_limit_lb": g("dog_weight_limit_lb"), "size_note": g("dog_size_note"), "size_only_source": g("dog_size_only"), "policy_text": g("dog_policy_text"), "pet_rent": g("pet_rent")},
         "parking": {"type": g("parking_type"), "rank": g("parking_rank"), "fee": g("parking_fee"), "fee_note": g("parking_fee_note"), "options_text": g("parking_options"),
                     # independent check 4, D18: where the fee comes from (the building's page or a listing, or a resident's
