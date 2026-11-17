@@ -365,9 +365,11 @@ details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
    play(M, example)                     replays an example's answers: {pairs, rec}
    Version 4 (meta.recommender.conjoint; choices between made-up apartments):
    cj(M)                                the conjoint data, or null
-   cjNext(M, answers)                   the next candidate pair id [answers: {pair, choice}], or null after n_choices
-   cjPosterior / cjWeights(M, answers, moves)   pi, and her mean weights with her corrections applied
-   priorities(M, w)                     features, most important first
+   cjNext(M, answers)                   the next task index into conjoint.pool [answers: {task_index, choice}], or null
+                                        after n_tasks
+   cjPosterior / cjWeights(M, answers, moves)   pi, and her mean weights with her moves ([feature, "up"|"down"]) applied
+   priorities(M, w)                     {order, words, sentence}: her priorities, most important first
+   nudge(M, w, feature, direction)      one move
    recommend(M, [], {w: weights})       the three places with those weights
    Not in the reference (the page's own, used only when she sets buildings aside): opts.removed drops buildings from
    every group, pool and list. With nothing removed the result is the reference's.
@@ -699,64 +701,85 @@ var ConciergeRec = (function () {
   }
   /* ---------- version 4: choices between made-up apartments (meta.recommender.conjoint) ---------- */
   function cj(M) {
-    var c = M.cfg.conjoint; if (!c || !Array.isArray(c.attributes) || !Array.isArray(c.candidates) || !c.candidates.length) return null;
-    if (!M.cj) { var map = {}; c.candidates.forEach(function (x) { map[x.id] = x; }); M.cj = { c: c, map: map, n: c.n_choices || 8 }; }
+    var c = M.cfg.conjoint; if (!c || !Array.isArray(c.attributes) || !Array.isArray(c.pool) || !c.pool.length) return null;
+    if (!M.cj) {
+      var lv = {}, byId = {}; c.attributes.forEach(function (a) { byId[a.id] = a; lv[a.id] = a.levels.map(function (x) { return x.value; }); });
+      M.cj = { c: c, pool: c.pool, lv: lv, attr: byId, n: c.n_tasks || 8, words: c.priority_words || LABEL };
+    }
     return M.cj;
   }
-  function cjGap(M, w, cand) {
-    var t = [];
-    M.cfg.conjoint.attributes.forEach(function (a) {
-      var d = cand.diff[a.id]; if (!d) return;
-      t.push(w[M.feats.indexOf(a.feature)] * (a.levels[d[0]].value - a.levels[d[1]].value));
-    });
+  /* U(A) - U(B) for weights w: only the attributes that differ count, summed in the task's own order */
+  function taskGap(M, w, task) {
+    var C = cj(M), t = [];
+    task.forEach(function (x) { t.push(w[M.feats.indexOf(x[0])] * (C.lv[x[0]][x[1]] - C.lv[x[0]][x[2]])); });
     return nsum(t);
   }
+  function choiceOfTask(x) { return x.choice === "a" || x.choice === "b" ? x.choice : "either"; }
+  function taskOf(M, x) { var C = cj(M); return x.task || C.pool[x.task_index]; }
   function cjPosterior(M, answers) {
-    var C = cj(M), n = M.W.length, raw = [];
+    var n = M.W.length, raw = [];
     for (var s = 0; s < n; s++) {
       var p = 1;
-      (answers || []).forEach(function (x) { var c = C.map[x.pair]; if (c) p *= lik(M, cjGap(M, M.W[s], c), x.choice === "a" || x.choice === "b" ? x.choice : "either"); });
+      (answers || []).forEach(function (x) { var t = taskOf(M, x); if (t) p *= lik(M, taskGap(M, M.W[s], t), choiceOfTask(x)); });
       raw.push(p);
     }
     var tot = nsum(raw);
     return tot <= 0 ? raw.map(function () { return 1 / n; }) : raw.map(function (p) { return p / tot; });
   }
+  function keyOf(task) { return JSON.stringify(task); }
+  function attrSet(task) { return task.map(function (x) { return x[0]; }).sort().join("|"); }
+  /* the next task (an index into the pool), or null after n_tasks: not asked, not on the same attributes as the one
+     before, the `prefilter` most utility-balanced at her mean weights, then the largest expected reduction in the trace
+     of the posterior covariance of the weights; ties to the lower index */
   function cjNext(M, answers) {
-    var C = cj(M); if (!C || (answers || []).length >= C.n) return null;
-    var pi = cjPosterior(M, answers), asked = {}, T = M.cfg.temperature, band = M.cfg.either_band, h0 = entropy(pi), best = null;
-    (answers || []).forEach(function (x) { asked[x.pair] = 1; });
-    var gaps = {};
-    C.c.candidates.forEach(function (c) {
-      if (asked[c.id]) return;
-      var m0 = [], m1 = [], m2 = [];
+    var C = cj(M); answers = answers || [];
+    if (!C || answers.length >= C.n) return null;
+    var pi = cjPosterior(M, answers), w = meanW(M, pi), asked = {}, prev = null;
+    answers.forEach(function (x) { asked[keyOf(taskOf(M, x))] = 1; });
+    if (answers.length) prev = attrSet(taskOf(M, answers[answers.length - 1]));
+    var cand = [];
+    C.pool.forEach(function (t, i) { if (!asked[keyOf(t)] && attrSet(t) !== prev) cand.push([q(M, Math.abs(taskGap(M, w, t))), i]); });
+    cand.sort(function (x, y) { return x[0] !== y[0] ? x[0] - y[0] : x[1] - y[1]; });
+    cand = cand.slice(0, C.c.prefilter || 60).map(function (x) { return x[1]; }).sort(function (x, y) { return x - y; });
+    var T = M.cfg.temperature, band = M.cfg.either_band, nf = M.K, best = null;
+    cand.forEach(function (i) {
+      var t = C.pool[i], P = [0, 0, 0], Mx = [[], [], []], a, k;
+      for (a = 0; a < 3; a++) for (k = 0; k < nf; k++) Mx[a].push(0);
       for (var s = 0; s < pi.length; s++) {
-        var g = cjGap(M, M.W[s], c), pa = sig((g - band) / T), pb = sig((-g - band) / T), pe = Math.max(0, 1 - pa - pb);
-        m0.push(pi[s] * pa); m1.push(pi[s] * pb); m2.push(pi[s] * pe);
+        if (pi[s] === 0) continue;
+        var ws = M.W[s], g = taskGap(M, ws, t), pa = sig((g - band) / T), pb = sig((-g - band) / T), L = [pa, pb, Math.max(0, 1 - pa - pb)];
+        for (a = 0; a < 3; a++) { var m = pi[s] * L[a]; P[a] += m; var row = Mx[a]; for (k = 0; k < nf; k++) row[k] += m * ws[k]; }
       }
-      var eh = 0;
-      [m0, m1, m2].forEach(function (m) { var P = nsum(m); if (P > 0) eh += P * entropy(m.map(function (x) { return x / P; })); });
-      var gain = q(M, h0 - eh);
-      if (best === null || gain > best[0]) best = [gain, c.id];
+      var parts = [];
+      for (a = 0; a < 3; a++) if (P[a] > 0) parts.push(nsum(Mx[a].map(function (x) { return x * x; })) / P[a]);
+      var gain = q(M, nsum(parts));
+      if (best === null || gain > best[0]) best = [gain, i];
     });
     return best ? best[1] : null;
   }
-  /* her mean weights after the choices; `moves` are her corrections, each [feature, "up"|"down"]: swap that feature's
-     weight with its neighbour's in the ranked order */
+  /* her weights in plain-word order (highest first; ties in feature order) and the one-sentence summary */
   function priorities(M, w) {
-    return M.feats.map(function (k, j) { return [Number(w[j].toFixed(9)), j, k]; }).sort(function (x, y) { return x[0] !== y[0] ? y[0] - x[0] : x[1] - y[1]; }).map(function (x) { return x[2]; });
+    var C = cj(M), W = (C && C.words) || LABEL;
+    var order = M.feats.map(function (k, j) { return [q(M, w[j]), j, k]; }).sort(function (x, y) { return x[0] !== y[0] ? y[0] - x[0] : x[1] - y[1]; }).map(function (x) { return x[2]; });
+    var words = order.map(function (k) { return W[k] || k; });
+    return { order: order, words: words, sentence: capFirst(words[0]) + " matters most to you, then " + words[1] + "; " + words[words.length - 1] + " matters least." };
+  }
+  /* move one priority up or down one place (meta.recommender.conjoint.nudge_rule) */
+  function nudge(M, w, feature, direction) {
+    var order = priorities(M, w).order, i = order.indexOf(feature), j = direction === "up" ? i - 1 : i + 1;
+    if (i < 0 || j < 0 || j >= order.length) return w.slice();
+    var a = M.feats.indexOf(feature), b = M.feats.indexOf(order[j]), w2 = w.slice();
+    if (q(M, w2[a]) !== q(M, w2[b])) { var t = w2[a]; w2[a] = w2[b]; w2[b] = t; return w2; }
+    w2[a] = Math.max(0, w2[b] + (direction === "up" ? 0.01 : -0.01));
+    var s = nsum(w2); return w2.map(function (x) { return x / s; });
   }
   function cjWeights(M, answers, moves) {
     var w = meanW(M, cjPosterior(M, answers));
-    (moves || []).forEach(function (mv) {
-      var order = priorities(M, w), i = order.indexOf(mv[0]), j = mv[1] === "up" ? i - 1 : i + 1;
-      if (i < 0 || j < 0 || j >= order.length) return;
-      var a = M.feats.indexOf(order[i]), b = M.feats.indexOf(order[j]), t = w[a];
-      if (w[a] === w[b]) { if (mv[1] === "up") w[a] = w[b] + 1e-6; else w[a] = w[b] - 1e-6; } else { w[a] = w[b]; w[b] = t; }
-    });
+    (moves || []).forEach(function (mv) { w = nudge(M, w, mv[0], mv[1]); });
     return w;
   }
   function similarTo(M, id, w, n) { return M.byId[id] ? moreLike(M, id, w, {}, {}, n || 3) : []; }
-  return { similarTo: similarTo, cj: cj, cjGap: cjGap, cjPosterior: cjPosterior, cjNext: cjNext, priorities: priorities, cjWeights: cjWeights,
+  return { similarTo: similarTo, cj: cj, taskGap: taskGap, cjPosterior: cjPosterior, cjNext: cjNext, priorities: priorities, nudge: nudge, cjWeights: cjWeights,
     usable: usable, model: model, posterior: posterior, meanW: meanW, nextPair: nextPair, holds: holds, recommend: recommend,
     play: play, choiceOf: choiceOf, nsum: nsum, pyRound: pyRound, label: LABEL };
 })();
