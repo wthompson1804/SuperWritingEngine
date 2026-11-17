@@ -57,6 +57,25 @@ const act = (page, a, v) => page.click('#app [data-act="' + a + '"]' + (v ? '[da
   const LIMIT = D.meta.rent_limit, EXPS = D.experiences, EO = (D.either_or || []).slice(0, 3);
   const parkedNames = D.neighborhoods.filter((h) => h.parked_under).map((h) => h.name);
   const browser = await chromium.launch();
+  /* what the page should say about today's re-read, worked out here from the data alone */
+  const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const nice = (d) => { const m = /^(\d{4})-(\d\d)-(\d\d)/.exec(d || ""); return m ? MONTHS[+m[2] - 1] + " " + +m[3] : null; };
+  const isToday = (a) => a.checked && (a.checked.status === "confirmed_today" || a.checked.status === "price_changed_today");
+  const expectChecked = (b) => {
+    const ap = b.apartments.filter((a) => a.checked && a.checked.status); if (!ap.length) return null;
+    const n = ap.filter(isToday).length;
+    if (n === b.apartments.length) return "Confirmed on the building's site today";
+    if (n > 0) return "Some apartments confirmed today";
+    const d = ap.map((a) => a.checked.date).filter(Boolean).sort().pop();
+    return (nice(d) ? "Last seen " + nice(d) + ". " : "Not re-read today. ") + "Ask if it is still offered.";
+  };
+  const HAS_CHECKED = D.buildings.some((b) => expectChecked(b));
+  if (!HAS_CHECKED) console.log("note: the data has no apartments[].checked yet; the status lines were checked only for being absent");
+  const cardChecked = async (pg, scope) => {
+    const id = await pg.locator(scope + " .bcard").getAttribute("data-building"), want = expectChecked(D.buildings.find((b) => b.id === id));
+    const got = await pg.locator(scope + " .bcard > .chk").allInnerTexts();
+    ok(want ? got.length === 1 && got[0].replace(/^\S+\s/, "") === want : got.length === 0, "the checked line on " + id + ": wanted " + want + ", got " + got.join("|"));
+  };
 
   /* ================= the main walk ================= */
   const { page, errs, net } = await open(browser);
@@ -107,6 +126,8 @@ const act = (page, a, v) => page.click('#app [data-act="' + a + '"]' + (v ? '[da
   ok((await page.locator(".bcard .pos").count()) >= 2, "position markers on the numbers");
   const me = EXPS.filter((e, i) => ["me", "maybe", "no"][i % 3] === "me").map((e) => e.id);
   me.forEach((e) => ok(st.slots.some((id) => D.buildings.find((b) => b.id === id).experience_id === e), "a pick from each That's me experience"));
+  await cardChecked(page, "#app");
+  ok(await page.locator(".bcard .say .yes .big").isVisible(), "the one reason is on the card");
   await everyScreen(page, "pick 1", LIMIT);
   await screen(page, "05-pick");
   await screen(page, "05-pick-full", true);
@@ -131,6 +152,7 @@ const act = (page, a, v) => page.click('#app [data-act="' + a + '"]' + (v ? '[da
     ok(after.slots[after.pi] !== cur && !before.slots.includes(after.slots[after.pi]), "the card was replaced by a new building");
     before.slots.forEach((id, k) => { if (k !== before.pi) ok(after.slots[k] === id, "the other four stayed put"); });
     ok((await page.locator(".bcard").getAttribute("data-building")) === after.slots[after.pi], "the card on screen is the new one");
+    await cardChecked(page, "#app");
     if (i % 2) await act(page, "pick-next");
   }
   await everyScreen(page, "after swaps", LIMIT);
@@ -158,6 +180,14 @@ const act = (page, a, v) => page.click('#app [data-act="' + a + '"]' + (v ? '[da
   const kb = st.kept.map((id) => D.buildings.find((b) => b.id === id));
   const firstQ = kb.find((b) => b.name && b.confirm.length && b.confirm[0].question);
   if (firstQ) { const qs = await page.locator('.stop:has(h3:text-is("' + firstQ.name.replace(/"/g, '\\"') + '")) ol li').allInnerTexts(); ok(qs[0] === firstQ.confirm[0].question, "confirm questions come first"); }
+  for (const b of kb) {
+    const stop = page.locator('.stop[data-stop="' + b.id + '"]'), want = expectChecked(b);
+    const got = await stop.locator(".chk").allInnerTexts();
+    ok(want ? got.length === 1 && got[0].replace(/^\S+\s/, "") === want : got.length === 0, "the checked line on the stop " + b.name);
+    const first = (await stop.locator("ol li").allInnerTexts())[0];
+    if (want && /^(Last seen|Not re-read)/.test(want)) ok(first === "Is this apartment still offered, and at what rent?", "a last-seen building asks first whether it is still offered");
+    else ok(first !== "Is this apartment still offered, and at what rent?", "the still-offered question is only for last-seen buildings");
+  }
   const planText = (await everyScreen(page, "plan", LIMIT)).text;
   D.buildings.forEach((b) => { const c = b.contact || {}; if (c.private && c.office_phone) ok(!planText.includes(c.office_phone), "a private number is shown"); });
   await screen(page, "06-plan");
@@ -171,7 +201,11 @@ const act = (page, a, v) => page.click('#app [data-act="' + a + '"]' + (v ? '[da
   ok(box && box.y < 500, "the filter is on the first screen of See everything (top at " + Math.round(box.y) + "px)");
   const heads = await page.locator(".grp-h").evaluateAll((els) => els.map((e) => e.firstChild.textContent));
   parkedNames.forEach((nm) => ok(!heads.some((h) => h.replace(/, [A-Z]{2}$/, "") === nm), "a parked neighborhood has its own heading: " + nm));
-  if (parkedNames.length) ok((await page.locator(".nearby").count()) > 0 && (await page.locator(".nearby").first().innerText()).toLowerCase() === "also nearby", "Also nearby label");
+  if (parkedNames.length) {
+    const wantLabels = [...new Set(D.neighborhoods.filter((h) => h.parked_under).map((h) => h.parked_label || "Also nearby"))].sort();
+    const gotLabels = [...new Set(await page.locator(".nearby").evaluateAll((els) => els.map((e) => e.textContent)))].sort();
+    ok(JSON.stringify(gotLabels) === JSON.stringify(wantLabels), "parked neighborhoods sit under their label: " + gotLabels.join(" / ") + " (wanted " + wantLabels.join(" / ") + ")");
+  }
   const total = await page.locator("#all-list .row").count();
   ok(total === D.buildings.length, "every building is listed (" + total + " of " + D.buildings.length + ")");
   const expHeads = await page.locator(".exp-h h2").allInnerTexts();
@@ -200,6 +234,9 @@ const act = (page, a, v) => page.click('#app [data-act="' + a + '"]' + (v ? '[da
   await page.click('#all-list .row[data-id="' + target.id + '"]');
   await page.waitForSelector("#sheet .bcard");
   ok((await page.locator("#sheet .facts .l").count()) === 5, "the same card opens from the list");
+  await cardChecked(page, "#sheet");
+  await page.locator("#sheet details").nth(-2).locator("summary").click().catch(() => {});
+  { const want = target.apartments.filter((a) => a.checked && a.checked.status).length; ok((await page.locator("#sheet .apts .chk").count()) === want, "each apartment says what today's re-read found (" + want + ")"); }
   await everyScreen(page, "building from the list", LIMIT);
   await screen(page, "08-building-from-list");
   await page.click('#sheet [data-act="keep"]');

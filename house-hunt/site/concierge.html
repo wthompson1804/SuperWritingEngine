@@ -123,12 +123,17 @@ h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.
 .bcard h2{font-weight:800;font-stretch:82%;font-size:clamp(29px,8.2vw,36px)}
 .keptflag{justify-self:start;background:var(--ok-bg);color:var(--ok-ink);font-weight:800;font-size:15px;border-radius:999px;padding:4px 12px}
 .passflag{justify-self:start;background:var(--blush);color:var(--muted);font-weight:800;font-size:15px;border-radius:999px;padding:4px 12px}
-.say{display:grid;gap:10px}
-.say p{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:19px;line-height:1.35}
-.say p b{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:1px}
-.say .ic{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:16px;margin-top:2px}
-.say .yes .ic{background:var(--ok-bg);color:var(--ok-ink)}
-.say .but .ic{background:var(--mid-bg);color:var(--mid-ink)}
+.say{display:grid;gap:12px}
+.say p{display:grid;gap:3px}
+.say p b{font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:800}
+.say .yes{background:var(--ok-bg);color:var(--ok-ink);border-radius:18px;padding:14px 16px}
+.say .yes .big{font-family:var(--display);font-weight:800;font-size:24px;line-height:1.18;color:var(--ink);text-wrap:balance}
+.say .but{padding:0 16px;font-size:17px;line-height:1.35}
+.say .but b{color:var(--muted)}
+.chk{font-size:15px;font-weight:700;line-height:1.3;margin-top:-8px}
+.chk.ok{color:var(--ok-ink)}
+.chk.old{color:var(--muted)}
+.apts .chk,.stop .chk{margin-top:0}
 .facts{list-style:none;padding:0;border-top:2px solid var(--line)}
 .facts li{padding:10px 0;border-bottom:2px solid var(--line);display:grid;gap:6px}
 .frow{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
@@ -257,7 +262,9 @@ details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
                                parked under) so that variety is counted per area.
    score(b, answers, eo)    -> rank_score x the answer for the building's experience
                                (That's me 1.0, Maybe 0.6, Not me 0.25, no answer 0.6)
-                               + for every either/or answer: weight delta x the building's 0..1 score for that key.
+                               + for every either/or answer: weight delta x the building's 0..1 score for that key
+                               + CONFIRMED_BONUS (8) when at least one of its apartments was confirmed or re-priced
+                                 today (apartments[].checked.status); nothing when that field is absent.
    pickFive(buildings, answers, eitherOr, vetoed, kept[, n])
                             -> up to n (5) buildings. Kept ones stay, in the order given. A vetoed one is never
                                returned. At most two per area, at least one from each "That's me" experience when one
@@ -269,6 +276,11 @@ details.more .in{padding:2px 0 16px;display:grid;gap:12px;font-size:17px}
 var ConciergePick = (function () {
   "use strict";
   var MULT = { me: 1.0, maybe: 0.6, no: 0.25 }, UNANSWERED = 0.6, PER_AREA = 2;
+  var CONFIRMED_BONUS = 8;   /* on the rank scale: a building with an apartment re-read today goes ahead of one nobody could verify */
+  var TODAY = { confirmed_today: true, price_changed_today: true };
+  function confirmedToday(b) {
+    return ((b && b.apartments) || []).some(function (a) { return !!(a && a.checked && TODAY[a.checked.status] === true); });
+  }
   function num(x) { x = Number(x); return isFinite(x) ? x : 0; }
   function cmpId(a, b) { a = String(a); b = String(b); return a < b ? -1 : a > b ? 1 : 0; }
   function toSet(list) { var s = {}; (list || []).forEach(function (id) { s[id] = true; }); return s; }
@@ -292,6 +304,7 @@ var ConciergePick = (function () {
       if (!w || typeof w !== "object") return;
       for (var k in w) if (typeof w[k] === "number") s += w[k] * num(b.scores && b.scores[k]);
     });
+    if (confirmedToday(b)) s += CONFIRMED_BONUS;
     return s;
   }
 
@@ -330,7 +343,7 @@ var ConciergePick = (function () {
     return !!(experienceIds && experienceIds.length) && experienceIds.every(function (e) { return answers && answers[e] === "no"; });
   }
 
-  return { prepare: prepare, score: score, rankAll: rankAll, pickFive: pickFive, allNotMe: allNotMe, MULT: MULT, PER_AREA: PER_AREA };
+  return { prepare: prepare, score: score, rankAll: rankAll, pickFive: pickFive, allNotMe: allNotMe, confirmedToday: confirmedToday, MULT: MULT, PER_AREA: PER_AREA, CONFIRMED_BONUS: CONFIRMED_BONUS };
 })();
 if (typeof module !== "undefined") module.exports = ConciergePick;
 </script>
@@ -382,6 +395,27 @@ var ICON = {
 ICON.money = ICON.coin;
 function icon(name) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + (ICON[name] || ICON.dot) + '"/></svg>'; }
 function offerText(a) { return typeof a.offer_text === "string" && a.offer_text ? a.offer_text : typeof a.offer === "string" && a.offer ? a.offer : null; }
+/* what today's re-read found. Words come from the status and the date in the data, never a fixed date. */
+var STILL_Q = "Is this apartment still offered, and at what rent?";
+function isToday(a) { var s = a && a.checked && a.checked.status; return s === "confirmed_today" || s === "price_changed_today"; }
+function lastSeenText(date) { var d = niceDate(date); return (d ? "Last seen " + d + ". " : "Not re-read today. ") + "Ask if it is still offered."; }
+function aptChecked(a) {
+  var c = a && a.checked; if (!c || !c.status) return null;
+  if (c.status === "confirmed_today") return { kind: "ok", text: "Confirmed on the building's site today" };
+  if (c.status === "price_changed_today") return { kind: "ok", text: "Confirmed today, at a new price" };
+  if (c.status === "last_seen") return { kind: "old", text: lastSeenText(c.date) };
+  return null;
+}
+function bldChecked(b) {
+  var ap = (b.apartments || []).filter(function (a) { return a && a.checked && a.checked.status; });
+  if (!ap.length) return null;
+  var today = ap.filter(isToday).length;
+  if (today === (b.apartments || []).length) return { kind: "ok", text: "Confirmed on the building's site today" };
+  if (today > 0) return { kind: "ok", text: "Some apartments confirmed today" };
+  var dates = ap.map(function (a) { return a.checked.date; }).filter(function (d) { return /^\d{4}-\d\d-\d\d/.test(d || ""); }).sort();
+  return { kind: "old", text: lastSeenText(dates[dates.length - 1]), ask: true };
+}
+function chkLine(c) { return c ? '<p class="chk ' + c.kind + '"><span aria-hidden="true">' + (c.kind === "ok" ? "&#10003;" : "&#9719;") + '</span> ' + esc(c.text) + '</p>' : ""; }
 function bedsText(n) { return n === 0 ? "Studio" : n === 1 ? "1 bedroom" : isNum(n) ? n + " bedrooms" : null; }
 function hoodName(b) { var h = HBY[b.neighborhood_id]; return h ? h.name + (h.state ? ", " + h.state : "") : [b.city, b.state].filter(Boolean).join(", "); }
 
@@ -529,6 +563,7 @@ function detailsBlocks(b) {
     return '<li><p class="a-h">' + esc(a.label || "Apartment") + '</p>' + (bits ? '<p class="a-s">' + esc(bits) + '</p>' : '') +
       '<div class="pair"><div><span>Rent</span><b' + (isNum(a.rent) ? ' data-rent="' + a.rent + '"' : '') + '>' + (money(a.rent) || "Not known") + '</b></div><div><span>Total with utilities and fees</span><b>' + (money(a.total) || "Not known") + '</b></div></div>' +
       (offerText(a) ? '<p class="a-s">' + esc(offerText(a)) + '</p>' : '') +
+      chkLine(aptChecked(a)) +
       (a.star ? '<p class="star"><span aria-hidden="true">&#9733;</span> ' + esc(a.confirm_label || "One thing to confirm") + '</p>' : '') +
       ext(a.listing_url, "See the listing") + '</li>';
   }).join("") + '</ul>' + (ap.some(function (a) { return a.star; }) ? '<p class="small muted"><span aria-hidden="true">&#9733;</span> A star means one thing to confirm.</p>' : '') + '</div></details>';
@@ -544,10 +579,11 @@ function card(b, hid) {
   return '<article class="bcard enter" data-building="' + esc(b.id) + '">' +
     '<p class="where">' + markSvg(b.experience_id) + '<span>' + esc(hoodName(b)) + (e ? ' · ' + esc(e.label) : '') + '</span></p>' +
     '<h2 tabindex="-1" id="' + hid + '">' + esc(b.name || b.address || "This building") + '</h2>' +
+    chkLine(bldChecked(b)) +
     (isKept(b.id) ? '<p class="keptflag">&#10003; On your tour list</p>' : isVetoed(b.id) ? '<p class="passflag">You passed on this one</p>' : '') +
     ((b.why || b.give_up) ? '<div class="say">' +
-      (b.why ? '<p class="yes"><span class="ic" aria-hidden="true">&#10003;</span><span><b>Why this one</b>' + esc(b.why) + '</span></p>' : '') +
-      (b.give_up ? '<p class="but"><span class="ic" aria-hidden="true">&#8722;</span><span><b>What you give up</b>' + esc(b.give_up) + '</span></p>' : '') + '</div>' : '') +
+      (b.why ? '<p class="yes"><b>Why this one</b><span class="big">' + esc(b.why) + '</span></p>' : '') +
+      (b.give_up ? '<p class="but"><b>What you give up</b><span>' + esc(b.give_up) + '</span></p>' : '') + '</div>' : '') +
     factsList(b) + ext(b.photos_url || b.listing_url, "See photos") + detailsBlocks(b) + '</article>';
 }
 
@@ -600,10 +636,11 @@ function plan() {
     g.list.sort(function (x, y) { return ((x.facts || {}).drive_min || 0) - ((y.facts || {}).drive_min || 0) || (x.id < y.id ? -1 : 1); }).forEach(function (b) {
       var addr = [b.address, b.city, b.state].filter(Boolean).join(", "), ct = b.contact || {}, f = b.facts || {};
       var own = HBY[b.neighborhood_id], parked = own && own.parked_under;
-      var qs = [], seen = {};
+      var qs = [], seen = {}, chk = bldChecked(b);
+      if (chk && chk.ask) { seen[STILL_Q] = 1; qs.push(STILL_Q); }
       (b.confirm || []).forEach(function (c) { var q = c && (c.question || c.label); if (q && !seen[q]) { seen[q] = 1; qs.push(q); } });
       (b.tour_questions || []).forEach(function (q) { if (q && !seen[q]) { seen[q] = 1; qs.push(q); } });
-      html += '<div class="stop"><h3>' + esc(b.name || b.address) + '</h3>' + (parked ? '<p class="small muted">In ' + esc(own.name) + ', nearby</p>' : '') +
+      html += '<div class="stop" data-stop="' + esc(b.id) + '"><h3>' + esc(b.name || b.address) + '</h3>' + (parked ? '<p class="small muted">In ' + esc(own.name) + '</p>' : '') + chkLine(chk) +
         (addr ? '<p><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=' + encodeURIComponent(addr) + '" target="_blank" rel="noopener noreferrer">' + esc(addr) + ' <span aria-hidden="true">&#8599;</span><span class="sr"> (opens a map in a new tab)</span></a></p>' : '') +
         '<div class="pair"><div><span>Rent</span><b' + (isNum(f.rent_from) ? ' data-rent="' + f.rent_from + '"' : '') + '>' + (isNum(f.rent_from) ? (isNum(f.rent_to) && f.rent_to !== f.rent_from ? "from " : "") + money(f.rent_from) : "Not known") + '</b></div><div><span>Total with utilities and fees</span><b>' + (isNum(f.total_from) ? (isNum(f.total_to) && f.total_to !== f.total_from ? "from " : "") + money(f.total_from) : "Not known") + '</b></div></div>' +
         (((ct.office_phone && !ct.private) || httpUrl(ct.site)) ? '<div><p class="lab">Leasing office</p>' + (ct.office_phone && !ct.private ? '<p class="phone">' + esc(ct.office_phone) + '</p>' : '') + ext(ct.site, "Building website") + '</div>' : '') +
@@ -651,11 +688,16 @@ function listHtml() {
             (isKept(b.id) ? '<span class="tag k">&#10003; On your tour list</span>' : isVetoed(b.id) ? '<span class="tag at">You passed on this one</span>' : '') + '</button>';
         }).join("");
       }
-      var own = rows(h.id, null), near = "";
-      HOODS.filter(function (p) { return p.parked_under === h.id; }).sort(function (x, y) { return x.id < y.id ? -1 : 1; }).forEach(function (p) { near += rows(p.id, p.name); });
+      var own = rows(h.id, null), near = "", lastLabel = null;
+      HOODS.filter(function (p) { return p.parked_under === h.id; }).map(function (p) { return { p: p, label: (typeof p.parked_label === "string" && p.parked_label.trim()) || "Also nearby" }; })
+        .sort(function (x, y) { return x.label < y.label ? -1 : x.label > y.label ? 1 : x.p.id < y.p.id ? -1 : 1; }).forEach(function (o) {
+          var r = rows(o.p.id, o.p.name); if (!r) return;
+          if (o.label !== lastLabel) { near += '<p class="nearby">' + esc(o.label) + '</p>'; lastLabel = o.label; }
+          near += r;
+        });
       if (!own && !near) return;
       part += '<div class="grp"><h3 class="grp-h" tabindex="-1" id="grp-' + esc(h.id) + '" data-hood="' + esc(h.id) + '">' + esc(h.name) + (h.state ? ', ' + esc(h.state) : '') + (isNum(h.drive_min) ? '<small>' + Math.round(h.drive_min) + ' min to ' + esc(ANCHOR) + '</small>' : '') + '</h3>' + own +
-        (near ? '<p class="nearby">Also nearby</p>' + near : '') + '</div>';
+        near + '</div>';
     });
     if (part) html += '<div class="exp-h">' + markSvg(e.id) + '<h2>' + esc(e.label) + '</h2></div>' + part;
   });
@@ -847,7 +889,7 @@ function brief(b) {
   var f = b.facts || {}, h = HBY[b.neighborhood_id], e = EBY[b.experience_id];
   return { id: b.id, name: b.name, neighborhood: h ? h.name : null, state: b.state || (h && h.state) || null, experience: e ? e.label : null,
     rent_from: f.rent_from, total_with_utilities_and_fees_from: f.total_from, drive_min_to_mom_and_dad: isNum(f.drive_min) ? Math.round(f.drive_min) : null,
-    tolls_round_trip: f.toll_round_trip, parking: (f.parking || {}).summary || null, parking_kind: (f.parking || {}).kind || null, dog: (f.dog || {}).summary || null,
+    checked: (bldChecked(b) || {}).text || null, tolls_round_trip: f.toll_round_trip, parking: (f.parking || {}).summary || null, parking_kind: (f.parking || {}).kind || null, dog: (f.dog || {}).summary || null,
     on_her_tour_list: isKept(b.id) };
 }
 function findBuilding(x) {
@@ -875,7 +917,7 @@ var LOOKUPS = {
     o.address = [b.address, b.city, b.state].filter(Boolean).join(", "); o.why = b.why || null; o.give_up = b.give_up || null; o.about = b.about || null;
     o.points = (b.points || []).map(function (p) { return p.text; }); o.a_day_here = (b.day || []).map(function (m) { return { moment: m.title, text: m.text, level: m.level }; });
     o.to_confirm = (b.confirm || []).map(function (c) { return c.question || c.label; }); o.tour_questions = b.tour_questions || [];
-    o.apartments = (b.apartments || []).map(function (a) { return { label: a.label, bedrooms: a.beds, sqft: a.sqft, floor: a.floor_text, rent: a.rent, total_with_utilities_and_fees: a.total, available: a.available_text, offer: offerText(a), one_thing_to_confirm: a.star ? (a.confirm_label || true) : null }; });
+    o.apartments = (b.apartments || []).map(function (a) { return { label: a.label, bedrooms: a.beds, sqft: a.sqft, floor: a.floor_text, rent: a.rent, total_with_utilities_and_fees: a.total, available: a.available_text, offer: offerText(a), one_thing_to_confirm: a.star ? (a.confirm_label || true) : null, checked: (aptChecked(a) || {}).text || null }; });
     return o;
   },
   compare: function (q) {

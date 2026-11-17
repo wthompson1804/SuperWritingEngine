@@ -281,6 +281,8 @@
     }
    ],
    "parked_under": null,
+   "parked_distance_km": null,
+   "parked_label": null,
    "also_nearby": [],
    "building_ids": [
     "b_8cb8bf6346"
@@ -323,6 +325,8 @@
     }
    ],
    "parked_under": null,
+   "parked_distance_km": null,
+   "parked_label": null,
    "also_nearby": [
     "ct:trumbull"
    ],
@@ -370,6 +374,8 @@
     }
    ],
    "parked_under": null,
+   "parked_distance_km": null,
+   "parked_label": null,
    "also_nearby": [],
    "building_ids": [
     "b_5204934871",
@@ -413,6 +419,8 @@
     }
    ],
    "parked_under": null,
+   "parked_distance_km": null,
+   "parked_label": null,
    "also_nearby": [],
    "building_ids": [
     "b_0ba5cc966d"
@@ -455,6 +463,8 @@
     }
    ],
    "parked_under": null,
+   "parked_distance_km": null,
+   "parked_label": null,
    "also_nearby": [],
    "building_ids": [
     "b_893edb6df8",
@@ -499,6 +509,8 @@
     }
    ],
    "parked_under": "ct:bridgeport",
+   "parked_distance_km": 5.7,
+   "parked_label": "Also nearby",
    "also_nearby": [],
    "building_ids": [
     "b_8f7ec4f0f6"
@@ -537,6 +549,8 @@
     }
    ],
    "parked_under": "nj:east-orange",
+   "parked_distance_km": 8.7,
+   "parked_label": "Also nearby",
    "also_nearby": [],
    "building_ids": [
     "b_66dc364565"
@@ -579,6 +593,8 @@
     }
    ],
    "parked_under": "ny:yonkers",
+   "parked_distance_km": 29.6,
+   "parked_label": "Also in this kind of life",
    "also_nearby": [],
    "building_ids": [
     "b_e39cde86f4"
@@ -617,6 +633,8 @@
     }
    ],
    "parked_under": "nj:east-orange",
+   "parked_distance_km": 1.4,
+   "parked_label": "Also nearby",
    "also_nearby": [],
    "building_ids": [
     "b_022934bcb2"
@@ -651,6 +669,8 @@
     }
    ],
    "parked_under": null,
+   "parked_distance_km": null,
+   "parked_label": null,
    "also_nearby": [
     "nj:belleville",
     "nj:city-of-orange"
@@ -696,6 +716,8 @@
     }
    ],
    "parked_under": null,
+   "parked_distance_km": null,
+   "parked_label": null,
    "also_nearby": [
     "ny:bath-beach"
    ],
@@ -740,6 +762,8 @@
     }
    ],
    "parked_under": "nj:newark",
+   "parked_distance_km": 21.1,
+   "parked_label": "Also in this kind of life",
    "also_nearby": [],
    "building_ids": [
     "b_674db3118a"
@@ -782,6 +806,8 @@
     }
    ],
    "parked_under": null,
+   "parked_distance_km": null,
+   "parked_label": null,
    "also_nearby": [
     "ny:jamaica-hills-briarwood",
     "ny:murray-hill-broadway-flushing",
@@ -829,6 +855,8 @@
     }
    ],
    "parked_under": "ny:flushing-willets-point",
+   "parked_distance_km": 5.6,
+   "parked_label": "Also nearby",
    "also_nearby": [],
    "building_ids": [
     "b_0c3a7051d4"
@@ -871,6 +899,8 @@
     }
    ],
    "parked_under": "ny:flushing-willets-point",
+   "parked_distance_km": 0.6,
+   "parked_label": "Also nearby",
    "also_nearby": [],
    "building_ids": [
     "b_1d1be12629"
@@ -913,6 +943,8 @@
     }
    ],
    "parked_under": "ny:flushing-willets-point",
+   "parked_distance_km": 21.2,
+   "parked_label": "Also in this kind of life",
    "also_nearby": [],
    "building_ids": [
     "b_84bbe8d99e"
@@ -955,6 +987,8 @@
     }
    ],
    "parked_under": null,
+   "parked_distance_km": null,
+   "parked_label": null,
    "also_nearby": [
     "nj:bloomfield"
    ],
@@ -1043,6 +1077,7 @@
      "text": "The covered parking fee is not published, so ask what it costs each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -1090,7 +1125,12 @@
      "confirm_label": null,
      "listing_url": "https://www.apartmentlist.com/nj/orange/lia-by-vermella",
      "source_site": "apartmentlist.com",
-     "last_read": "2026-11-15T19:36:28+00:00"
+     "last_read": "2026-11-15T19:36:28+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -1162,6 +1202,7 @@
      "text": "The covered parking fee is not published, so ask what it costs each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -1209,7 +1250,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/whitney-towers-2405-whitney-ave-hamden-ct-06518-1004491524",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:59:41+00:00"
+     "last_read": "2026-11-15T21:59:41+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b1004491524:Unit_409:2088707444",
@@ -1225,7 +1271,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/whitney-towers-2405-whitney-ave-hamden-ct-06518-1004491524",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:59:41+00:00"
+     "last_read": "2026-11-15T21:59:41+00:00",
+     "checked": {
+      "status": "price_changed_today",
+      "date": "2026-11-17",
+      "note": "fixture"
+     }
     },
     {
      "id": "rc:trulia:b1004491524:Unit_607:465559876",
@@ -1241,7 +1292,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/whitney-towers-2405-whitney-ave-hamden-ct-06518-1004491524",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:59:41+00:00"
+     "last_read": "2026-11-15T21:59:41+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     }
    ]
   },
@@ -1319,6 +1375,7 @@
      "text": "The listing does not mention parking, so ask where you would park."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -1366,7 +1423,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/home/84-18-143rd-st-3l-jamaica-ny-11435-466618948",
      "source_site": "trulia",
-     "last_read": "2026-11-15T18:18:13+00:00"
+     "last_read": "2026-11-15T18:18:13+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -1450,6 +1512,7 @@
      "text": "The garage fee is not published, so ask what it costs each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -1497,7 +1560,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/soundview-apartments-855-main-st-bridgeport-ct-06604-2734499849",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:49:59+00:00"
+     "last_read": "2026-11-15T21:49:59+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -1582,6 +1650,7 @@
      "text": "It is not confirmed that dogs are allowed, so get a yes in writing."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -1629,7 +1698,12 @@
      "confirm_label": "To confirm: whether dogs are allowed",
      "listing_url": "https://www.trulia.com/home/13324-sanford-ave-2d-flushing-ny-11355-2084734385",
      "source_site": "trulia",
-     "last_read": "2026-11-15T19:19:35+00:00"
+     "last_read": "2026-11-15T19:19:35+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     }
    ]
   },
@@ -1709,6 +1783,7 @@
      "text": "The listing does not mention parking, so ask where you would park."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -1756,7 +1831,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/home/3625-parsons-blvd-5h-flushing-ny-11354-2100688723",
      "source_site": "trulia",
-     "last_read": "2026-11-15T19:20:57+00:00"
+     "last_read": "2026-11-15T19:20:57+00:00",
+     "checked": {
+      "status": "price_changed_today",
+      "date": "2026-11-17",
+      "note": "fixture"
+     }
     }
    ]
   },
@@ -1840,6 +1920,7 @@
      "text": "The parking lot fee is not published, so ask what it costs each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -1887,7 +1968,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:04:36+00:00"
+     "last_read": "2026-11-15T20:04:36+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     },
     {
      "id": "trulia:b1001476365:Unit_5CE:466157390",
@@ -1903,7 +1989,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/harclay-house-299-s-harrison-st-east-orange-nj-07018-1001476365",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:04:36+00:00"
+     "last_read": "2026-11-15T20:04:36+00:00",
+     "checked": {
+      "status": "price_changed_today",
+      "date": "2026-11-17",
+      "note": "fixture"
+     }
     }
    ]
   },
@@ -1981,6 +2072,7 @@
      "text": "The garage fee is not published, so ask what it costs each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -2028,7 +2120,12 @@
      "confirm_label": "To confirm: who can rent this apartment",
      "listing_url": "https://www.trulia.com/building/111-prospect-st-111-prospect-st-stamford-ct-06901-1004237339",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:06:16+00:00"
+     "last_read": "2026-11-15T20:06:16+00:00",
+     "checked": {
+      "status": "price_changed_today",
+      "date": "2026-11-17",
+      "note": "fixture"
+     }
     },
     {
      "id": "rc:trulia:b1004237339:Unit_306:455273113",
@@ -2044,7 +2141,12 @@
      "confirm_label": "To confirm: who can rent this apartment",
      "listing_url": "https://www.trulia.com/building/111-prospect-st-111-prospect-st-stamford-ct-06901-1004237339",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:06:16+00:00"
+     "last_read": "2026-11-15T20:06:16+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b1004237339:Unit_511:454189746",
@@ -2060,7 +2162,12 @@
      "confirm_label": "To confirm: who can rent this apartment",
      "listing_url": "https://www.trulia.com/building/111-prospect-st-111-prospect-st-stamford-ct-06901-1004237339",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:06:16+00:00"
+     "last_read": "2026-11-15T20:06:16+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     }
    ]
   },
@@ -2143,6 +2250,7 @@
      "text": "The listing does not mention parking, so ask where you would park."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -2190,7 +2298,12 @@
      "confirm_label": null,
      "listing_url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-ii",
      "source_site": "apartmentlist.com",
-     "last_read": "2026-11-15T20:23:44+00:00"
+     "last_read": "2026-11-15T20:23:44+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -2274,6 +2387,7 @@
      "text": "The listing does not mention parking, so ask where you would park."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -2321,7 +2435,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/333-state-st-333-state-st-bridgeport-ct-06604-1002139313",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:13:53+00:00"
+     "last_read": "2026-11-15T20:13:53+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -2405,6 +2524,7 @@
      "text": "The garage fee is not published, so ask what it costs each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -2452,7 +2572,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:01:58+00:00"
+     "last_read": "2026-11-15T20:01:58+00:00",
+     "checked": {
+      "status": "price_changed_today",
+      "date": "2026-11-17",
+      "note": "fixture"
+     }
     }
    ]
   },
@@ -2538,6 +2663,7 @@
      "text": "Pet rent is not published, so ask what a dog adds each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -2585,7 +2711,12 @@
      "confirm_label": "To confirm: whether this apartment is still available",
      "listing_url": "https://www.trulia.com/home/1483-shore-pkwy-f-brooklyn-ny-11214-466485024",
      "source_site": "trulia",
-     "last_read": "2026-11-15T19:37:26+00:00"
+     "last_read": "2026-11-15T19:37:26+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -2662,6 +2793,7 @@
      "text": "The listing does not mention parking, so ask where you would park."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -2709,7 +2841,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/home/2781-ocean-ave-6e-brooklyn-ny-11229-466617938",
      "source_site": "trulia",
-     "last_read": "2026-11-15T19:31:37+00:00"
+     "last_read": "2026-11-15T19:31:37+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -2789,6 +2926,7 @@
      "text": "On the tour, look at the hallways, the elevator and the mail room."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -2836,7 +2974,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/summer-street-800-summer-st-stamford-ct-06901-1001672063",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:06:10+00:00"
+     "last_read": "2026-11-15T20:06:10+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b1001672063:Unit_417:466511090",
@@ -2852,7 +2995,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/summer-street-800-summer-st-stamford-ct-06901-1001672063",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:06:10+00:00"
+     "last_read": "2026-11-15T20:06:10+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -2936,6 +3084,7 @@
      "text": "An elevator is not confirmed for every apartment here, so ask before you tour."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -2983,7 +3132,12 @@
      "confirm_label": "To confirm: the elevator",
      "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:58:23+00:00"
+     "last_read": "2026-11-15T21:58:23+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b2750917674:Unit_PA-202:455134598",
@@ -2999,7 +3153,12 @@
      "confirm_label": "To confirm: the elevator",
      "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:58:23+00:00"
+     "last_read": "2026-11-15T21:58:23+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b2750917674:Unit_PA-402:458856974",
@@ -3015,7 +3174,12 @@
      "confirm_label": "To confirm: the elevator",
      "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:58:23+00:00"
+     "last_read": "2026-11-15T21:58:23+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b2750917674:Unit_BM-322:462172447",
@@ -3031,7 +3195,12 @@
      "confirm_label": "To confirm: the elevator",
      "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:58:23+00:00"
+     "last_read": "2026-11-15T21:58:23+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b2750917674:Unit_PU-242:459453525",
@@ -3047,7 +3216,12 @@
      "confirm_label": "To confirm: the elevator",
      "listing_url": "https://www.trulia.com/building/beacon-mill-village-2-n-main-st-beacon-falls-ct-06403-2750917674",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:58:23+00:00"
+     "last_read": "2026-11-15T21:58:23+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     }
    ]
   },
@@ -3133,6 +3307,7 @@
      "text": "An elevator is not confirmed for every apartment here, so ask before you tour."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -3180,7 +3355,12 @@
      "confirm_label": "To confirm: the elevator",
      "listing_url": "https://www.apartmentlist.com/ct/trumbull/the-royce-at-trumbull",
      "source_site": "apartmentlist.com",
-     "last_read": "2026-11-15T19:58:25+00:00"
+     "last_read": "2026-11-15T19:58:25+00:00",
+     "checked": {
+      "status": "price_changed_today",
+      "date": "2026-11-17",
+      "note": "fixture"
+     }
     }
    ]
   },
@@ -3264,6 +3444,7 @@
      "text": "Building fees are not published, so ask what is added to the rent."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -3311,7 +3492,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:50:11+00:00"
+     "last_read": "2026-11-15T21:50:11+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b1002416819:Unit_Duplex701:466361894",
@@ -3327,7 +3513,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:50:11+00:00"
+     "last_read": "2026-11-15T21:50:11+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b1002416819:Unit_302:466360840",
@@ -3343,7 +3534,12 @@
      "confirm_label": "To confirm: whether this listing is current",
      "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:50:11+00:00"
+     "last_read": "2026-11-15T21:50:11+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b1002416819:Unit_402:466360839",
@@ -3359,7 +3555,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:50:11+00:00"
+     "last_read": "2026-11-15T21:50:11+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b1002416819:Unit_702:466360798",
@@ -3375,7 +3576,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:50:11+00:00"
+     "last_read": "2026-11-15T21:50:11+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b1002416819:Unit_511:466361113",
@@ -3391,7 +3597,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:50:11+00:00"
+     "last_read": "2026-11-15T21:50:11+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b1002416819:Unit_611:466361127",
@@ -3407,7 +3618,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:50:11+00:00"
+     "last_read": "2026-11-15T21:50:11+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "rc:trulia:b1002416819:Unit_711:466361130",
@@ -3423,7 +3639,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/building/city-trust-apartments-955-main-st-bridgeport-ct-06604-1002416819",
      "source_site": "trulia",
-     "last_read": "2026-11-15T21:50:11+00:00"
+     "last_read": "2026-11-15T21:50:11+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -3505,6 +3726,7 @@
      "text": "The listing does not mention parking, so ask where you would park."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -3552,7 +3774,12 @@
      "confirm_label": "To confirm: whether this listing is current",
      "listing_url": "https://www.apartmentlist.com/ct/bridgeport/city-trust-collection-arcade-apartments",
      "source_site": "apartmentlist.com",
-     "last_read": "2026-11-15T20:07:04+00:00"
+     "last_read": "2026-11-15T20:07:04+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -3637,6 +3864,7 @@
      "text": "The listing does not mention parking, so ask where you would park."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -3684,7 +3912,12 @@
      "confirm_label": "To confirm: whether this apartment is still available",
      "listing_url": "https://www.trulia.com/home/525-riverdale-ave-5u-yonkers-ny-10705-466334272",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:00:14+00:00"
+     "last_read": "2026-11-15T20:00:14+00:00",
+     "checked": {
+      "status": "price_changed_today",
+      "date": "2026-11-17",
+      "note": "fixture"
+     }
     }
    ]
   },
@@ -3766,6 +3999,7 @@
      "text": "The garage fee is not published, so ask what it costs each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -3813,7 +4047,12 @@
      "confirm_label": null,
      "listing_url": "https://www.trulia.com/home/4110-bowne-st-5w-flushing-ny-11355-466185521",
      "source_site": "trulia",
-     "last_read": "2026-11-15T19:19:55+00:00"
+     "last_read": "2026-11-15T19:19:55+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -3893,6 +4132,7 @@
      "text": "Pet rent is not published, so ask what a dog adds each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -3940,7 +4180,12 @@
      "confirm_label": null,
      "listing_url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-east-great-downtown-living",
      "source_site": "apartmentlist.com",
-     "last_read": "2026-11-15T20:23:42+00:00"
+     "last_read": "2026-11-15T20:23:42+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "apartmentlist:p1741731-0f436cdd-f487-11e9-b4ae-b083fecfc2de",
@@ -3956,7 +4201,12 @@
      "confirm_label": null,
      "listing_url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-east-great-downtown-living",
      "source_site": "apartmentlist.com",
-     "last_read": "2026-11-15T20:23:42+00:00"
+     "last_read": "2026-11-15T20:23:42+00:00",
+     "checked": {
+      "status": "confirmed_today",
+      "date": "2026-11-17",
+      "note": null
+     }
     }
    ]
   },
@@ -4041,6 +4291,7 @@
      "text": "The listing does not mention parking, so ask where you would park."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -4088,7 +4339,12 @@
      "confirm_label": null,
      "listing_url": "https://www.apartmentlist.com/nj/bloomfield/64-park-avenue--1",
      "source_site": "apartmentlist.com",
-     "last_read": "2026-11-15T20:40:27+00:00"
+     "last_read": "2026-11-15T20:40:27+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -4177,6 +4433,7 @@
      "text": "Pet rent is not published, so ask what a dog adds each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -4224,7 +4481,12 @@
      "confirm_label": "To confirm: whether this listing is current",
      "listing_url": "https://www.trulia.com/building/regency-on-hudson-56-prospect-st-yonkers-ny-10701-2774413543",
      "source_site": "trulia",
-     "last_read": "2026-11-15T19:53:38+00:00"
+     "last_read": "2026-11-15T19:53:38+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -4310,6 +4572,7 @@
      "text": "An elevator is not confirmed for every apartment here, so ask before you tour."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -4357,7 +4620,12 @@
      "confirm_label": "To confirm: the elevator",
      "listing_url": "https://www.trulia.com/building/the-stanley-1315-washington-blvd-stamford-ct-06902-2737477812",
      "source_site": "trulia",
-     "last_read": "2026-11-15T20:07:42+00:00"
+     "last_read": "2026-11-15T20:07:42+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   },
@@ -4446,6 +4714,7 @@
      "text": "Pet rent is not published, so ask what a dog adds each month."
     }
    ],
+   "checked_summary": null,
    "day": [
     {
      "title": "Morning walk",
@@ -4493,7 +4762,12 @@
      "confirm_label": "To confirm: whether this listing is current",
      "listing_url": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
      "source_site": "trulia",
-     "last_read": "2026-11-15T19:58:04+00:00"
+     "last_read": "2026-11-15T19:58:04+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "trulia:b2594867367:Unit_211E:466065291",
@@ -4509,7 +4783,12 @@
      "confirm_label": "To confirm: whether this listing is current",
      "listing_url": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
      "source_site": "trulia",
-     "last_read": "2026-11-15T19:58:04+00:00"
+     "last_read": "2026-11-15T19:58:04+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     },
     {
      "id": "trulia:b2594867367:Unit_208E:466065265",
@@ -4525,7 +4804,12 @@
      "confirm_label": "To confirm: whether this listing is current",
      "listing_url": "https://www.trulia.com/building/symphony-1009-broad-st-newark-nj-07102-2594867367",
      "source_site": "trulia",
-     "last_read": "2026-11-15T19:58:04+00:00"
+     "last_read": "2026-11-15T19:58:04+00:00",
+     "checked": {
+      "status": "last_seen",
+      "date": "2026-11-15",
+      "note": null
+     }
     }
    ]
   }

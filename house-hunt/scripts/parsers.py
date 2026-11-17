@@ -1152,6 +1152,33 @@ def sibling_12_month_gap(months, price_12, lowest_of_terms, siblings):
     return True, f"unit {un} of this building is ${l_:,.0f} on its {term} price and ${p_:,.0f} on a 12-month lease ({gap * 100:.0f} percent more)"
 
 
+# ---- live-check batch 21 (2026-11-17): 'not_read' is a status word that means NOTHING WAS LEARNED
+LIVE_NOTHING_LEARNED = ("not_read",)
+
+
+def live_row_learned(status) -> bool:
+    """False for a live-check row whose status says the page could not be read ('not_read'): the checker looked and
+    learned nothing about this apartment. Such a row is not a re-read: it never replaces an earlier live / changed / gone
+    row of the same apartment, sets no status, date, price or note, and (owner, 2026-11-16: no "not re-checked" flag) is
+    not an open item. Where the checker's note does lean against the listing, a reviewer writes that up as a verdict
+    (scripts/verdicts.py): the row stays in the evidence files, and in the evidence fingerprint, to be read."""
+    return str(status or "").strip().lower() not in LIVE_NOTHING_LEARNED
+
+
+def live_rows_learned(rows):
+    """The live-check rows that learned something (a DataFrame with a 'status' column, or a list of dicts)."""
+    if hasattr(rows, "loc"):
+        return rows[[live_row_learned(x) for x in rows["status"]]] if len(rows) and "status" in rows else rows
+    return [r for r in rows if live_row_learned(r.get("status"))]
+
+
+def latest_live_row(rows):
+    """The row a unit's live status is taken from: the latest by 'checked_at' among those that learned something, or
+    None. `rows` is a list of dicts for ONE apartment."""
+    kept = sorted(live_rows_learned(list(rows)), key=lambda r: str(r.get("checked_at", "")))
+    return kept[-1] if kept else None
+
+
 def listing_page_gone(status, available_text, notes) -> bool:
     """A live-check row that says the building's whole listing page is gone (not only one unit left the unit list):
     every unit listed on that page is then gone (The Mercer, batch 20)."""

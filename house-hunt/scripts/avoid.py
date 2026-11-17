@@ -91,6 +91,7 @@ AGGREGATOR = re.compile(r"trulia|zumper|apartmentlist|zillow|apartments\.com|ren
 
 def main():
     L, C, I = cat("live_check"), cat("confirm"), cat("items")
+    L = parsers.live_rows_learned(L).reset_index(drop=True)      # a 'not_read' row learned nothing (batch 21)
     F0 = cat("facts")
     tag_only = {r.addr_key for r in L.itertuples() if TAG_ONLY.search(r.notes or "") and INCOME_WORDS.search(r.notes or "")} | \
                ({r.addr_key for r in F0.itertuples() if TAG_ONLY.search(r.value or "") and INCOME_WORDS.search(r.value or "")} if len(F0) else set())

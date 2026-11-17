@@ -30,6 +30,8 @@ from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import parsers  # noqa: E402
 UNITS = ROOT / "data" / "units.csv"
 OUT = ROOT / "data" / "rent_terms.csv"
 NOTE = ROOT / "docs" / "harvest_notes" / "rent_terms.md"
@@ -303,6 +305,8 @@ def load_evidence():
                 facts[r["addr_key"]].append(r)
     for f in sorted(glob.glob(str(EVID / "live_check_batch_*.csv"))):
         for r in csv.DictReader(open(f, newline="", encoding="utf8")):
+            if not parsers.live_row_learned(r.get("status")):       # 'not_read': nothing was learned (batch 21)
+                continue
             if TRIG.search(r.get("notes") or "") or re.search(r"gross|free on", r.get("notes") or "", re.I):
                 live[r["addr_key"]].append(r)
     return facts, live

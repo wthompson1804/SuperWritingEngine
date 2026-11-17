@@ -7,6 +7,7 @@ scripts/build_concierge.py uses that one whenever it exists.
 
     python3 scripts/concierge_fixture.py
 """
+import hashlib
 import json
 import math
 import statistics
@@ -16,6 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "site" / "data.json"
 OUT = ROOT / "site" / "_concierge_fixture.json"
 RENT_LIMIT = 2000
+TODAY = "2026-11-17"
 
 
 def clamp(x):
@@ -30,6 +32,18 @@ def rng(xs):
 def med(xs):
     xs = [x for x in xs if x is not None]
     return statistics.median(xs) if xs else None
+
+
+def checked(u):
+    """A made-up re-read result so the page's three states can be tested: by a stable hash of the id, about a third
+    confirmed today, a few re-priced, the rest last seen on the day the price was read."""
+    n = int(hashlib.md5(u["id"].encode()).hexdigest(), 16) % 10
+    seen = (u.get("price_seen_at") or "")[:10] or None
+    if n < 3:
+        return {"status": "confirmed_today", "date": TODAY, "note": None}
+    if n == 3:
+        return {"status": "price_changed_today", "date": TODAY, "note": "fixture"}
+    return {"status": "last_seen", "date": seen, "note": None}
 
 
 def main():
@@ -102,7 +116,7 @@ def main():
                 "offer": None, "star": bool(uc.get("asterisk")),
                 "confirm_label": (f"To confirm: {uc['label']}" if uc.get("asterisk") and uc.get("label") else None),
                 "listing_url": (u.get("links") or {}).get("listing"), "source_site": u.get("source_site"),
-                "last_read": u.get("price_seen_at")})
+                "last_read": u.get("price_seen_at"), "checked": checked(u)})
         buildings.append({
             "id": bid, "name": b.get("name") or top.get("building"), "address": b.get("address") or top.get("address"),
             "city": b.get("city"), "state": b.get("state"), "lat": b.get("lat"), "lon": b.get("lon"),
@@ -119,7 +133,7 @@ def main():
             "disclosures": [x.get("label") for x in (top.get("disclosures") or []) if x.get("label")],
             "photos_url": (b.get("photos") or {}).get("url"), "listing_url": (top.get("links") or {}).get("listing"),
             "contact": ({"office_phone": ct.get("phone") if phone_ok else None, "site": ct.get("site")} if ct else None),
-            "about": b.get("about_building"), "points": b.get("about_points") or [],
+            "about": b.get("about_building"), "points": b.get("about_points") or [], "checked_summary": None,
             "day": day, "apartments": apartments})
 
     # neighborhoods; one-apartment neighborhoods are parked under the nearest larger one in the same experience
@@ -133,7 +147,7 @@ def main():
         hoods.append({"id": hid, "name": h.get("name") or hid, "state": h.get("state"), "experience_id": bs[0]["experience_id"],
                       "lat": h.get("lat"), "lon": h.get("lon"), "drive_min": h.get("drive_min"),
                       "toll_round_trip": h.get("toll_round_trip"), "about": (h.get("host") or {}).get("intro"),
-                      "points": h.get("about_points") or [], "parked_under": None, "also_nearby": [],
+                      "points": h.get("about_points") or [], "parked_under": None, "parked_distance_km": None, "parked_label": None, "also_nearby": [],
                       "building_ids": [b["id"] for b in sorted(bs, key=lambda b: (-b["rank_score"], b["id"]))]})
     H = {h["id"]: h for h in hoods}
     for h in hoods:
@@ -144,6 +158,9 @@ def main():
             continue
         host = min(hosts, key=lambda o: (math.hypot((o["lat"] - h["lat"]), (o["lon"] - h["lon"]) * 0.76), o["id"]))
         h["parked_under"] = host["id"]
+        km = math.hypot((host["lat"] - h["lat"]) * 111.0, (host["lon"] - h["lon"]) * 84.4)
+        h["parked_distance_km"] = round(km, 1)
+        h["parked_label"] = "Also nearby" if km <= 15 else "Also in this kind of life"
         H[host["id"]]["also_nearby"].append(h["id"])
 
     experiences = []

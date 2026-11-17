@@ -1032,6 +1032,9 @@ def main():
 
     # ------------------------------------------------------------------ 1. evidence pass
     C, F, L = cat("confirm_batch_*.csv"), cat("facts_batch_*.csv"), cat("live_check_batch_*.csv")
+    # live-check batch 21: a 'not_read' row learned nothing (parsers.live_row_learned). It is dropped here, so it never
+    # replaces an earlier live / changed / gone row of the apartment and never counts as a re-read anywhere below.
+    L = parsers.live_rows_learned(L).reset_index(drop=True)
     floor_rows = []                              # (building, unit label or '*', floor, basis, source)
     dog_yes, dog_contra = {}, {}
     # independent check 2, D2: a fact the evidence pass looked for and could NOT confirm is open, whatever the

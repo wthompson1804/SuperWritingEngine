@@ -120,6 +120,23 @@ test("when two per area cannot fill five, the best of the rest fill in", () => {
   const one = [mk("x1", "A", "h", 9), mk("x2", "A", "h", 8), mk("x3", "A", "h", 7), mk("x4", "A", "h", 6), mk("x5", "A", "h", 5), mk("x6", "A", "h", 4)];
   assert.deepStrictEqual(ids(P.pickFive(one, {}, [], [], [])), ["x1", "x2", "x3", "x4", "x5"]);
 });
+test("a building with an apartment confirmed today gets the bonus and goes first", () => {
+  assert.strictEqual(P.CONFIRMED_BONUS, 8);
+  const apt = (status) => ({ id: "x", checked: status ? { status, date: "2026-11-17" } : undefined });
+  const two = [mk("m1", "A", "h1", 50), mk("m2", "A", "h2", 50), mk("m3", "A", "h3", 50), mk("m4", "A", "h4", 57)];
+  two[0].apartments = [apt("last_seen")]; two[1].apartments = [apt("last_seen"), apt("confirmed_today")]; two[2].apartments = [apt("price_changed_today")];
+  assert.strictEqual(P.score(two[1], { A: "me" }, []) - P.score(two[0], { A: "me" }, []), 8, "the bonus is 8 on the rank scale");
+  assert.strictEqual(P.score(two[1], { A: "no" }, []), 50 * 0.25 + 8, "it is added after the answer, not multiplied");
+  assert.deepStrictEqual(ids(P.pickFive(two, {}, [], [], [])), ["m2", "m3", "m4", "m1"], "equal scores: confirmed first; 8 beats a 7-point lead");
+  assert.strictEqual(P.confirmedToday(two[0]), false); assert.strictEqual(P.confirmedToday(two[2]), true);
+});
+test("no checked field: exactly as before", () => {
+  const plain = [mk("n1", "A", "h1", 50), mk("n2", "A", "h2", 50)];
+  plain[0].apartments = [{ id: "a" }, { id: "b", checked: null }, { id: "c", checked: {} }, { id: "d", checked: { status: "something_else" } }];
+  assert.strictEqual(P.score(plain[0], { A: "me" }, []), 50);
+  assert.deepStrictEqual(ids(P.pickFive(plain, {}, [], [], [])), ["n1", "n2"]);
+  assert.deepStrictEqual(ids(P.pickFive(B, {}, [], [], [])), ["a1", "a2", "b1", "b2", "b3"]);
+});
 test("missing fields do not break it", () => {
   const odd = [{ id: "p" }, { id: "q", rank_score: null, scores: null, experience_id: null }, { id: "r", rank_score: 3 }];
   assert.deepStrictEqual(ids(P.pickFive(odd, null, null, null, null)), ["r", "p", "q"]);

@@ -804,10 +804,76 @@ def data_4(M, R, S):
     data_b20(M, R, S)
     data_ic4(M, R, S)
     data_ic5(M, R, S)
+    data_b21(M, R, S)
 
 
 def data_units_unique(S):
     pass
+
+
+def pure_b21():
+    """Live-check batch 21 (2026-11-17): 'not_read' means nothing was learned. It never replaces an earlier row of the
+    same apartment, is not a re-read, and (owner, 2026-11-16) is not an open item."""
+    ok(not P.live_row_learned("not_read") and not P.live_row_learned(" Not_Read "), "b21: 'not_read' is a row that learned nothing")
+    ok(all(P.live_row_learned(x) for x in ("live", "changed", "gone", "blocked", "")), "b21: live, changed, gone and blocked rows are kept as before")
+    earlier = {"unit": "606", "status": "live", "price_now": "1650", "checked_at": "2026-11-15T22:47:47+00:00", "notes": "seen on the listing page"}
+    today = {"unit": "606", "status": "not_read", "price_now": "", "checked_at": "2026-11-17T14:01:33+00:00", "notes": "Not re-read: no page names this apartment."}
+    eq(P.latest_live_row([earlier, today]), earlier, "b21: 955 Main St 606: today's not_read row does not replace the live row of 2026-11-15")
+    eq(P.latest_live_row([today, earlier]), earlier, "b21: the same, whatever the order of the rows")
+    eq(P.latest_live_row([today]), None, "b21: an apartment whose only row is not_read has no live status at all (never re-read)")
+    gone = dict(earlier, status="gone", checked_at="2026-11-17T15:00:00+00:00")
+    eq(P.latest_live_row([earlier, today, gone]), gone, "b21: a later row that did learn something still wins")
+    import pandas as pd
+    import rank
+    D = pd.DataFrame([earlier, today])
+    eq(list(P.live_rows_learned(D).status), ["live"], "b21: the frame the master is built from holds no not_read row")
+    eq(len(P.live_rows_learned(pd.DataFrame())), 0, "b21: an empty evidence frame stays empty")
+    gate_facts = pd.Series([0, 1])
+    eq(list(rank.open_item_count(gate_facts, pd.Series(["", "not_read"]))), [0, 1], "b21: a missing live status, or a not_read one, adds no open item")
+    ok(not P.second_site_omits("Not re-read: no site of the building's own was found. Zumper has no page for the address (404).", ""),
+       "b21: 'nothing found anywhere' is not the finding 'a second site lists the address without this apartment'")
+
+
+def data_b21(M, R, S):
+    """Batch 21 applied: gone apartments left, changed prices are used, not_read changed nothing."""
+    import glob
+    import pandas as pd
+    num = lambda v: pd.to_numeric(v, errors="coerce")
+    ok(not M.live_status.isin(P.LIVE_NOTHING_LEARNED).any(), "b21: no master row carries the status 'not_read'")
+    ok(not M.live_notes.str.startswith(("Not re-read", "Not confirmed")).any(), "b21: no master row carries the note of a not_read row")
+    files = sorted(glob.glob(str(DATA / "evidence" / "live_check_batch_*.csv")))
+    L = pd.concat([pd.read_csv(f, dtype=str, keep_default_na=False) for f in files], ignore_index=True)
+    xw = pd.read_csv(DATA / "reference" / "building_crosswalk.csv", dtype=str, keep_default_na=False)
+    L["building_id"] = L.addr_key.map(dict(zip(xw.addr_key, xw.building_id)))
+    NR = L[L.status.isin(P.LIVE_NOTHING_LEARNED)]
+    eq(len(NR), 21, "b21: 21 not_read rows are on file")
+    for r in NR.itertuples():
+        m = M[M.building_id.eq(r.building_id) & M.unit.map(P.unit_key).eq(P.unit_key(r.unit))]
+        prev = P.latest_live_row([x for x in L[L.building_id.eq(r.building_id)].to_dict("records") if P.unit_key(x["unit"]) == P.unit_key(r.unit)])
+        for x in m.itertuples():
+            if x.live_page_gone == "yes" or str(getattr(x, "call_called_at", "")).strip():
+                continue
+            eq((x.live_status, x.live_checked_at), ((prev or {}).get("status", ""), (prev or {}).get("checked_at", "")),
+               f"b21: {r.addr_key} {r.unit} keeps the status of its last row that learned something (not_read changed nothing)")
+    B21 = pd.read_csv(DATA / "evidence" / "live_check_batch_21.csv", dtype=str, keep_default_na=False)
+    B21["building_id"] = B21.addr_key.map(dict(zip(xw.addr_key, xw.building_id)))
+    for r in B21.itertuples():
+        m = M[M.building_id.eq(r.building_id) & M.unit.map(P.unit_key).eq(P.unit_key(r.unit))]
+        inS = S[S.building_id.eq(r.building_id) & S.unit.map(P.unit_key).eq(P.unit_key(r.unit))]
+        if r.status == "gone":
+            ok(len(m) == 0 or (m.live_status == "gone").all(), f"b21: {r.addr_key} {r.unit} is gone in the master")
+            ok(len(inS) == 0, f"b21: {r.addr_key} {r.unit} is gone and not shown")
+        elif r.status in ("live", "changed"):
+            ok(len(m) >= 1 and (m.live_status == r.status).all() and (m.live_checked_at == r.checked_at).all(), f"b21: {r.addr_key} {r.unit} carries today's {r.status} row")
+            if r.status == "changed":
+                ok((num(m.rent_basis) == float(r.price_now)).all(), f"b21: {r.addr_key} {r.unit} is costed on the new price ${r.price_now}")
+    bk = M[M.building_name.str.startswith("Brookview Commons") & M.unit.isin(["BC-519W", "BC-524", "BC-406"])]
+    ok(len(bk) == 3 and bk.all_in_lines.str.contains('"line": "required building fees", "amount": 50,', regex=False).all(), "b21: the three Brookview apartments count the mandatory $50 monthly fee in the total")
+    lia = S[S.building_name.eq("LIA by Vermella") & S.unit.eq("423")]
+    ok(len(lia) == 1 and '"what": "lease term"' in lia.disclosures.iloc[0] and str(lia.price_lease_months.iloc[0]).startswith("15"), "b21: LIA 423 is priced on a 15-month lease and says so (lease-term disclosure)")
+    arc = S[S.building_name.str.contains("Arcade", regex=False) & S.unit.eq("302")]
+    ok(len(arc) == 1 and arc.dogs_allowed.iloc[0] == "yes" and arc.dog_size_only.iloc[0].startswith("yes") and "Confirm the dog weight limit in pounds" in (arc.tour_questions.iloc[0] if "tour_questions" in arc else arc.disclosures.iloc[0]),
+       "b21: The Arcade 302 passes the dog rule as 'small dogs' with the tour question about the weight limit")
 
 
 def pure_b20():
@@ -1985,6 +2051,7 @@ if __name__ == "__main__":
         pure_ic4_text()
         pure_cleanup()
         pure_ic5()
+        pure_b21()
     (data if "--data" in sys.argv else pure)()
     print(f"test_rules {'(data)' if '--data' in sys.argv else '(rules)'}: {N[0]} checks, {len(FAILS)} failed")
     for f in FAILS:
