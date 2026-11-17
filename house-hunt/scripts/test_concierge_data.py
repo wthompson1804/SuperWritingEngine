@@ -398,7 +398,7 @@ def missing_values_are_null():
 
 @test
 def contract_shape():
-    assert set(OUT) == {"meta", "experiences", "neighborhoods", "buildings", "either_or"}
+    assert set(OUT) == {"meta", "experiences", "neighborhoods", "buildings", "either_or", "questions"}
     assert set(OUT["meta"]) >= {"built_at", "rent_limit", "counts", "tour_start", "move_in_by", "anchor_label"}
     for e in EXPS:
         assert set(e) >= {"id", "label", "tagline", "illustration_id", "figures", "story", "neighborhood_ids"}
@@ -475,6 +475,257 @@ def helpers():
     assert K.rent_now({"rent": {"listed": 1700, "basis": None}}) == 1700 and K.rent_now({}) is None
     assert K.parked_label(0.8) == "Also nearby" and K.parked_label(10.0) == "Also nearby" and K.parked_label(10.1) == "Also in this kind of life"
     assert K.day_words("2026-11-17") == "November 17" and K.day_words("2026-12-01T10:00:00+00:00") == "December 1"
+
+
+# ---- version 2 -----------------------------------------------------------------------------------------------------
+Q = OUT.get("questions") or []
+ANS = {a["id"]: (q, a) for q in Q for a in q["answers"]}
+NUM = re.compile(r"\$?\d[\d,]*(?:\.\d+)?")
+
+
+def numbers(text, names=()):
+    """The figures in a text, after taking out the names of places (names can hold digits: '16 Handles')."""
+    for n in sorted(names, key=len, reverse=True):
+        text = text.replace(n, " ")
+    return [float(x.replace("$", "").replace(",", "")) for x in NUM.findall(text)]
+
+
+def mask(text, names):
+    for i, n in enumerate(sorted(names, key=len, reverse=True)):
+        text = text.replace(n, f"Place{i}")
+    return text
+
+
+def fit_numbers(f):
+    out = set()
+    for k, x in f.items():
+        if isinstance(x, (int, float)) and not isinstance(x, bool):
+            out |= {float(x), float(K.half_up(x)), round(float(x), 1)}
+    out.add(10.0)                                    # "within a 10-minute walk" is the fixed name of 800 m, not a figure
+    return out
+
+
+@test
+def questions_follow_the_design():
+    assert [q["id"] for q in Q] == ["visits", "drive", "room", "saturday", "dog", "car", "total", "top_two"]
+    assert {q["id"] for q in Q if q["must_have"]} == {"drive", "room", "total"}
+    assert [q["kind"] for q in Q] == ["single"] * 7 + ["pick_two"]
+    assert len(ANS) == sum(len(q["answers"]) for q in Q), "answer ids are unique across questions"
+    for q in Q:
+        assert set(q) >= {"id", "text", "help", "kind", "must_have", "answers"}
+        assert len(q["text"].split()) <= 14 and q["text"].endswith("?"), q["text"]
+        assert re.search(r"\byou(r)?\b", q["text"], re.I) or q["id"] in ("saturday", "dog"), q["text"]
+        for a in q["answers"]:
+            assert set(a) >= {"id", "label", "sublabel", "filter", "weights", "fits_alone"}
+            assert 1 <= len(a["label"].split()) <= 6 and len((a["sublabel"] or "").split()) <= 10, a
+            assert all(k in K.SCORE_KEYS and isinstance(x, (int, float)) and x >= 0 for k, x in a["weights"].items()), a
+            if a["filter"]:
+                assert q["must_have"] and a["filter"]["op"] in ("<=", ">=", "==") and a["filter"]["field"] in BLDS[0]["fit"]
+    v = {a["id"]: a["weights"].get("parents", 0) for a in ANS_of("visits")}
+    assert v["visits_weekly"] > v["visits_fortnightly"] > v["visits_monthly"] > v["visits_rarely"] == 0
+    pick = ANS_of("top_two")
+    assert [list(a["weights"].items()) for a in pick] == [[("parents", 2)], [("home", 2)], [("going_out", 2)], [("green", 2)],
+                                                           [("parking", 2)], [("value", 2)]]
+    assert next(q for q in Q if q["id"] == "top_two")["weights_mode"] == "double"
+    m = OUT["meta"]["matching"]
+    assert (m["pick_floor"], m["unknown_passes"], m["confirmed_bonus"]) == (K.PICK_FLOOR, True, K.CONFIRMED_BONUS)
+
+
+def ANS_of(qid):
+    return next(q for q in Q if q["id"] == qid)["answers"]
+
+
+@test
+def must_have_answers_split_the_set_and_fits_alone_is_right():
+    n = len(BLDS)
+    for q in Q:
+        for a in q["answers"]:
+            want = sum(1 for b in BLDS if a["filter"] is None or K.passes(b["fit"], a["filter"]))
+            assert a["fits_alone"] == want, (a["id"], a["fits_alone"], want)
+            if a["filter"]:
+                assert K.MIN_FITS <= a["fits_alone"] < n, f"{a['id']} must split the {n} buildings and leave {K.MIN_FITS}: {a['fits_alone']}"
+            else:
+                assert a["fits_alone"] == n
+        if q["must_have"]:
+            counts = [a["fits_alone"] for a in q["answers"] if a["filter"]]
+            assert counts == sorted(counts) and len(set(counts)) == len(counts), (q["id"], counts)
+            assert q["answers"][-1]["filter"] is None, "the last answer asks for nothing"
+    totals = [b["fit"]["min_total"] for b in BLDS]
+    for a in ANS_of("total"):
+        if a["filter"]:
+            s = a["filter"]["value"]
+            assert s % 100 == 0 and min(totals) <= s <= max(totals) and a["label"] == f"Up to ${s:,}", a
+    for a in ANS_of("drive"):
+        if a["filter"]:
+            assert a["filter"]["value"] in K.DRIVE_STEPS
+    assert all(b["fit"][f] is not None for b in BLDS for f in ("drive_min", "min_total", "has_one_bedroom")), \
+        "no must-have field is unknown today (a null would pass)"
+
+
+@test
+def match_reproduces_the_examples():
+    ex = OUT["meta"]["matching_examples"]
+    assert len(ex) == 4 and OUT["meta"]["matching"]["confirmed_bonus"] == K.CONFIRMED_BONUS == 8
+    seen = set()
+    for e in ex:
+        for qid, aid in e["answers"].items():
+            for x in (aid if isinstance(aid, list) else [aid]):
+                assert x in ANS and ANS[x][0]["id"] == qid
+        r = K.match(BLDS, e["answers"], Q)
+        assert r["fits"] == e["expected_fits"] == e["order"] and [x["id"] for x in r["doesnt_fit"]] == e["expected_doesnt_fit"] == e["failing"], e["answers"]
+        assert all(abs(r["scores"][i] - s) < 0.001 for i, s in e["expected_scores"].items())
+        assert e["expected_fits"] and sorted(e["expected_fits"] + e["expected_doesnt_fit"]) == sorted(B)
+        seen.add(tuple(e["expected_fits"][:3]))
+    assert len(seen) == 4, "the four examples lead to different best fits"
+    # the formula, by hand, on one building
+    b = BLDS[0]
+    ans = {"visits": "visits_weekly", "saturday": "sat_walk", "top_two": ["pick_parents", "pick_green"]}
+    w = {"parents": max(30, K.PICK_FLOOR) * 2, "going_out": 20, "green": max(0, K.PICK_FLOOR) * 2}
+    bonus = K.CONFIRMED_BONUS if any(a["checked"]["status"] in ("confirmed_today", "price_changed_today") for a in b["apartments"]) else 0
+    want = b["rank_score"] + sum(x * b["scores"][k] for k, x in w.items()) + bonus
+    assert abs(K.match([b], ans, Q)["scores"][b["id"]] - want) < 1e-6
+    # a must-have that fails puts a building in the other group with its reason
+    r = K.match(BLDS, {"drive": "drive_30"}, Q)
+    assert all(B[i]["fit"]["drive_min"] <= 30 for i in r["fits"]) and all(x["reasons"] == ["drive_30"] for x in r["doesnt_fit"])
+    assert len(r["fits"]) == ANS["drive_30"][1]["fits_alone"]
+
+
+@test
+def fit_fields_come_from_the_structured_data():
+    for b in BLDS:
+        f, us = b["fit"], [U[a["id"]] for a in b["apartments"]]
+        best = U[b["apartments"][0]["id"]]
+        assert set(f) >= {"drive_min", "toll_round_trip", "has_one_bedroom", "has_studio", "studio_only", "min_total", "max_total",
+                          "parking_kind", "garage_or_covered", "off_street", "dog_area_in_building", "park_walk_min", "park_name",
+                          "restaurants_10min", "bars_10min", "cafes_10min"}
+        assert f["drive_min"] == b["facts"]["drive_min"] and f["toll_round_trip"] == b["facts"]["toll_round_trip"]
+        assert (f["min_total"], f["max_total"]) == (b["facts"]["total_from"], b["facts"]["total_to"])
+        beds = [u["beds"] for u in us]
+        assert f["has_one_bedroom"] == any(x >= 1 for x in beds) and f["has_studio"] == any(x == 0 for x in beds)
+        assert f["studio_only"] == (not f["has_one_bedroom"])
+        assert f["parking_kind"] == b["facts"]["parking"]["kind"]
+        if f["parking_kind"] is None:
+            assert f["garage_or_covered"] is None and f["off_street"] is None
+        else:
+            assert f["garage_or_covered"] == (f["parking_kind"] in ("garage", "covered")) and f["off_street"] == (f["parking_kind"] != "street")
+        m = best["moments"]
+        assert f["park_walk_min"] == m["wake"]["park_walk_min"] and f["park_name"] == (m["wake"]["park"] or None)
+        assert (f["restaurants_10min"], f["bars_10min"], f["cafes_10min"]) == (m["after"]["restaurants_800m"], m["after"]["bars_800m"], m["after"]["cafes_800m"])
+        src = next(x for x in BASE["buildings"] if x["id"] == b["id"])
+        assert f["dog_area_in_building"] == src["amenities"].get("dog_park_or_run")
+
+
+@test
+def chips_carry_real_figures():
+    for b in BLDS:
+        allowed = fit_numbers(b["fit"])
+        assert set(b["fit_misses"]) <= set(b["fit_chips"]) and set(b["fit_chips"]) <= set(ANS), b["id"]
+        for aid, c in b["fit_chips"].items():
+            assert 1 <= len(c.split()) <= K.CHIP_MAX_WORDS, (b["id"], aid, c)
+            names = [b["fit"]["park_name"]] if b["fit"]["park_name"] else []
+            for x in numbers(c, names):
+                assert x in allowed, (b["id"], aid, c, x)
+            assert not re.search(r"[—–?]", c)
+        for aid, c in b["fit_misses"].items():
+            assert c == b["fit_chips"][aid]
+        # every must-have she could fail on has its reason
+        for aid, (q, a) in ANS.items():
+            if a["filter"] and not K.passes(b["fit"], a["filter"]):
+                assert aid in b["fit_misses"], (b["id"], aid)
+            if a["filter"] and K.passes(b["fit"], a["filter"]):
+                assert aid not in b["fit_misses"], (b["id"], aid)
+        f = b["fit"]
+        assert (b["fit_chips"]["car_garage"] == "Street parking only") == (f["parking_kind"] == "street")
+        assert ("room_bedroom" in b["fit_misses"]) == bool(f["studio_only"])
+    some = [b for b in BLDS if b["fit"]["restaurants_10min"] and b["fit"]["restaurants_10min"] >= 10]
+    assert some and all(str(int(b["fit"]["restaurants_10min"])) in b["fit_chips"]["sat_walk"] for b in some)
+
+
+@test
+def experience_line_is_the_guarded_text():
+    years = {y["id"]: y for y in BASE["years"]}
+    for e in EXPS:
+        y = years[e["id"]]
+        pool = " ".join(K.voice(x) for x in (y.get("tagline"), (y.get("prose") or {}).get("promise"), y.get("subhead")) if x)
+        assert e["line"] and len(e["line"].split()) <= 16 and len(K.sentences(e["line"])) == 1 and e["line"] in pool, e["id"]
+    for b in BLDS:
+        assert b["experience_line"] == next(e["line"] for e in EXPS if e["id"] == b["experience_id"])
+
+
+def life_facts():
+    if not K.LIFE_FACTS.exists():
+        return []
+    import pandas as pd
+    return pd.read_csv(K.LIFE_FACTS, dtype=str, keep_default_na=False, on_bad_lines="skip").to_dict("records")
+
+
+@test
+def life_here_is_short_named_and_sourced():
+    from check_scene_text import CONCEITS, agency, BANNED as STYLE
+    facts = life_facts()
+    used_text = {}
+    for r in facts:
+        if str(r.get("confidence", "")).strip().lower() == "high":
+            used_text.setdefault(r.get("building_id") or r.get("neighborhood_id"), []).append(r)
+    medium = [str(r.get("fact") or "").strip().rstrip(".") for r in facts if str(r.get("confidence", "")).strip().lower() != "high"]
+    order = [m for m, _ in K.MOMENTS]
+    for b in BLDS:
+        moms = [m["moment"] for m in b["life_here"]]
+        assert moms == [m for m in order if m in moms] and len(set(moms)) == len(moms), (b["id"], moms)
+        for m in b["life_here"]:
+            assert set(m) >= {"moment", "title", "text", "places", "sources"} and m["title"] == dict(K.MOMENTS)[m["moment"]]
+            names = [p["name"] for p in m["places"]]
+            t = m["text"]
+            assert 1 <= len(t.split()) <= K.LIFE_MAX_WORDS, (b["id"], m["moment"], len(t.split()))
+            assert 1 <= len(K.sentences(mask(t, names))) <= K.LIFE_MAX_SENTENCES, (b["id"], m["moment"], t)
+            for p in m["places"]:
+                assert set(p) >= {"name", "kind", "walk_min", "distance_mi"} and p["name"] in t, (b["id"], p["name"])
+                assert p["source_url"] in {s["url"] for s in m["sources"]} and p["source_name"], (b["id"], p["name"])
+                if p["walk_min"] is not None:
+                    assert abs(p["walk_min"] - p["distance_mi"] * 1609.344 * K.WALK_DETOUR / K.WALK_M_PER_MIN) < 1.4 or p["kind"] == "park", p
+            assert m["sources"] and all(s["name"] and str(s["url"]).startswith("http") for s in m["sources"]), (b["id"], m["moment"])
+            # the figures: walks and miles of its places, the building's fit fields, or the research row's own words
+            allowed = fit_numbers(b["fit"])
+            for p in m["places"]:
+                for x in (p["walk_min"], p["distance_mi"]):
+                    if x is not None:
+                        allowed |= {round(x, 1), float(max(1, K.half_up(x)))}
+            rows = used_text.get(b["id"], []) + used_text.get(b["neighborhood_id"], [])
+            for r in rows:
+                allowed |= set(numbers(f"{r.get('fact')} {r.get('schedule')}", [r.get("place_name") or ""]))
+            for x in numbers(t, names):
+                assert x in allowed, (b["id"], m["moment"], x, t)
+            # plain language, on the text with the names taken out
+            plain = mask(t, names)
+            for rx, what in STYLE + CONCEITS:
+                assert not rx.search(plain), (b["id"], m["moment"], what, t)
+            assert not agency(plain), (b["id"], t)
+            for s in medium:
+                assert not s or s not in t, f"a medium-confidence fact is in the text: {s}"
+            # a name in the text that is not a place of the moment: capitalised runs other than the moment's places
+            rest = mask(t, names)
+            for w_ in re.findall(r"(?<![.!] )(?<!^)\b[A-Z][a-z]+(?: [A-Z][a-z]+)+", rest):
+                assert w_.startswith(("Mom and", "Place")) or w_ in ("Mom", "Dad"), (b["id"], m["moment"], w_, t)
+        sun = next((m for m in b["life_here"] if m["moment"] == "sunday"), None)
+        assert sun and f"about {K.half_up(b['fit']['drive_min'])} minutes" in sun["text"], b["id"]
+    n = Counter(m["moment"] for b in BLDS for m in b["life_here"])
+    assert dict(n) == OUT["meta"]["life_here_counts"] and n["sunday"] == len(BLDS)
+    # the rule on made-up research rows: a medium row and a row with a distance from the web text are never used
+    pt = {"lat": 41.0592, "lon": -73.5349}
+    row = {"moment": "saturday", "place_name": "Test Hall", "fact": "Test Hall has live music on Fridays.", "schedule": "",
+           "lat": "41.0600", "lon": "-73.5349", "source_name": "Test", "source_url": "https://x.example", "place_kind": "music venue"}
+    s, walk, pls, _ = K.fact_sentence(row, pt)
+    p = pls[0]
+    assert s.startswith("Test Hall has live music on Fridays") and walk.startswith("It is a ") and p["walk_min"] == K.walk_min_of(K.haversine_km(pt, {"lat": 41.06, "lon": -73.5349}) * 1000)
+    assert K.fact_sentence(dict(row, fact="Test Hall is 5 minutes from the station."), pt) is None
+    assert K.fact_sentence(dict(row, fact="Test Hall is a luxury club."), pt) is None
+
+
+@test
+def version_one_fields_are_all_still_there():
+    for b in BLDS:
+        assert {"why", "give_up", "facts", "scores", "day", "apartments", "checked_summary"} <= set(b)
+    assert "either_or" in OUT and OUT["meta"]["counts"]["buildings"] == len(BLDS)
 
 
 def main():

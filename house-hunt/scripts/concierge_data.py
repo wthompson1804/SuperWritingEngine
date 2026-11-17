@@ -38,6 +38,48 @@ ADDED 2026-11-17 (fields are only ever added to the contract, never renamed)
                                 work from home, value); a sentence about a pool, a gym or another amenity is used
                                 only when the building has nothing true and positive on any of those.
 
+VERSION 2 (docs/CONCIERGE_DESIGN.md "Version 2"; add_version_two(), section 5), all added, nothing renamed
+  questions[]                   the eight questions, in order: visits, drive (must-have), room (must-have for "A separate
+                                bedroom"), saturday, dog, car, total (must-have), top_two (pick_two). Each answer has
+                                filter {field, op, value} | null on buildings[].fit, weights {score key: number}, and
+                                fits_alone (the buildings that pass that answer alone). Thresholds come from the kept
+                                buildings: drive DRIVE_STEPS (30, 60, 90 minutes) kept only where each splits the set and
+                                leaves MIN_FITS; totals the round $100 steps whose share of buildings at or under them is
+                                nearest a third, a half and three quarters (today $2,000 / $2,100 / $2,200).
+  SCORING (meta.matching; match() is the reference the page's JS is tested against through meta.matching_examples)
+      w_k = sum of the chosen single answers' weights on k; then for each picked "matters most" answer, in the order
+            picked, w_k = max(w_k, PICK_FLOOR = 10) x 2
+      score = rank_score + sum_k w_k x scores[k] + CONFIRMED_BONUS (8) when an apartment was seen listed today
+      must-haves are filters on fit: a building that fails one is listed apart, with the answer as its reason; a null
+      fit field passes. Order: score descending, then id. Weights: visits weekly 30 / every other week 20 / monthly 10
+      / now and then 0 on parents; separate bedroom 10 (studio with a desk 5) on home; walking out 20 on going_out,
+      driving somewhere 10 on parking, staying in 10 on home; a park 20, a dog area 15 on green; garage 25, off-street
+      15 on parking, street 5 on value; total $2,000 15 / $2,100 10 / $2,200 5 on value.
+  buildings[].fit               drive_min, toll_round_trip, has_one_bedroom, has_studio, studio_only, min_total, max_total,
+                                parking_kind (realtor_lines.parking_facts of the best apartment), parking_included,
+                                parking_fee, garage_or_covered, off_street, dog_area_in_building (amenities.dog_park_or_run
+                                as the building data states it), park_walk_min / park_name (moments.wake), dog_run_name /
+                                dog_run_m, restaurants_10min / bars_10min / cafes_10min (mapped places within 800 m, the
+                                "10-minute walk" of the existing text), sqft_max / sqft_studio / sqft_one_bedroom.
+  buildings[].fit_chips         {answer id: at most 7 words with the building's real figure for that answer};
+  buildings[].fit_misses        the same text for the answers it misses (a must-have it fails, a preference it does not
+                                meet: drive over 30 / 60 / 90 minutes for weekly / every other week / monthly visits and
+                                over 60 for "Close to Mom and Dad", studio only, under 10 restaurants, a park 10 minutes
+                                or more away, no dog area listed, no garage, street or unnamed parking, a total above
+                                the kept buildings' median for "Money left over").
+  experiences[].line, buildings[].experience_line   the experience's guarded tagline (first sentence of at most 16
+                                words of tagline, promise, subhead).
+  buildings[].life_here         up to four moments (weekday, saturday, sunday, dog), each 1 to 3 sentences and at most 45
+                                words, with places [{name, kind, walk_min, distance_mi, source_name, source_url}] and
+                                sources [{name, url}]. Built from the fit fields, the named mapped places of
+                                data/enriched/<sha1(addr_key)[:14]>.json and data/enriched_color/ (OpenStreetMap; the join of
+                                scripts/rank.py color_table, through data/reference/building_crosswalk.csv) and the
+                                confidence-'high' rows of data/reference/life_here_facts.csv (re-read on every run; absent
+                                or partial is fine; other rows are counted in meta.life_here_facts). Walking minutes are
+                                computed here: straight-line metres x 1.3 / 80 m a minute, as scripts/tools/places.py makes
+                                park_walk_min; beyond WALK_MAX_MIN (20) the distance is given in miles. A walk or distance
+                                in the web text is never used. A moment with nothing to say is left out.
+
 BUILDING SCORES (0..1, for re-weighting on the page). They come from the apartment `scores.parts` of the page data
 (scripts/rank.py, docs/RANKING.md section 5: each part is 0-100, a blend of percentiles across all ranked
 apartments). A building's value is the mean over its kept apartments, divided by 100.
@@ -1041,6 +1083,739 @@ def concierge(b, source):
             "experiences": exps, "neighborhoods": hoods, "buildings": blds, "either_or": questions}
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# 5. Version 2: questions, fit, fit_chips / fit_misses, experience_line, life_here (docs/CONCIERGE_DESIGN.md "Version 2")
+# ---------------------------------------------------------------------------------------------------------------------
+CONFIRMED_BONUS = 8                 # as the version-1 page: a building with an apartment seen listed today goes ahead
+PICK_FLOOR = 10                     # a "matters most" key counts at least this much before it is doubled
+DRIVE_STEPS = (30, 60, 90)          # minutes each way; each must split the kept buildings (checked when built)
+TOTAL_TARGETS = (1 / 3, 1 / 2, 3 / 4)   # the $100 steps whose share of buildings is nearest these shares
+MIN_FITS = 3                        # every answer that screens must leave at least this many buildings alone
+WALK_DETOUR, WALK_M_PER_MIN = 1.3, 80.0   # scripts/tools/places.py _walk_min: straight line x 1.3 / 80 m a minute
+WALK_MAX_MIN = 20                   # a place farther than this on foot is given in miles
+NEAR_MIN = 15                       # a café, bar, bakery or library is named only within this walk
+DOG_RUN_MAX_M, VET_MAX_M = 3219, 4828     # 2 miles, 3 miles straight line
+LIFE_MAX_WORDS, LIFE_MAX_SENTENCES, CHIP_MAX_WORDS = 45, 3, 7
+LIFE_FACTS = REF / "life_here_facts.csv"
+ENRICHED, COLOR = ROOT / "data" / "enriched", ROOT / "data" / "enriched_color"
+OSM = "OpenStreetMap"
+MOMENTS = (("weekday", "A weekday"), ("saturday", "Saturday night"), ("sunday", "Sunday with Mom and Dad"), ("dog", "The dog's walk"))
+HYPE = re.compile(r"\b(stunning|nestled|boasts?|vibrant|bustling|oasis|hidden gem|luxur\w+|breathtaking|must-see|coveted|sought-after)\b", re.I)
+
+
+def half_up(x):
+    return int(math.floor(float(x) + 0.5))
+
+
+def walk_min_of(m):
+    """Straight-line metres -> walking minutes, exactly as the existing walk minutes (park_walk_min) are made."""
+    return None if m is None else round(float(m) * WALK_DETOUR / WALK_M_PER_MIN, 1)
+
+
+def miles_of(m):
+    return None if m is None else round(float(m) / 1609.344, 1)
+
+
+def clean_name(s):
+    s = re.sub(r"\s*[—–]\s*", " - ", str(s or "")).strip()
+    return s or None
+
+
+def name_ok(s):
+    return bool(s) and not (BANNED.search(s) or CRIME.search(s) or HYPE.search(s) or "?" in s)
+
+
+def a_walk(n):
+    n = max(1, half_up(n))
+    return ("an " if n in (8, 11, 18) or 80 <= n < 90 else "a ") + f"{n}-minute walk"
+
+
+def minutes(n):
+    n = max(1, half_up(n))
+    return f"{n} minute" + ("" if n == 1 else "s")
+
+
+def words(s):
+    return len(str(s or "").split())
+
+
+# ---- the questions -----------------------------------------------------------------------------------------------
+def _total_steps(totals, n):
+    lo, hi = int(math.ceil(min(totals) / 100) * 100), int(math.floor(max(totals) / 100) * 100)
+    counts = {s: sum(1 for t in totals if t <= s) for s in range(lo, hi + 1, 100)}
+    ok = {s: c for s, c in counts.items() if MIN_FITS <= c < n}
+    out = []
+    for share in TOTAL_TARGETS:
+        best = min((s for s in ok if s not in out), key=lambda s: (abs(ok[s] - share * n), s), default=None)
+        if best is not None:
+            out.append(best)
+    return sorted(set(out))
+
+
+def build_questions(blds):
+    """The eight questions of the version-2 flow. Thresholds come from the kept buildings: the drive steps are
+    DRIVE_STEPS, kept only where they split the set; the totals are the round $100 steps whose share of buildings at
+    or under them is nearest a third, a half and three quarters. fits_alone is added after (count_fits)."""
+    n = len(blds)
+    drives = [x["fit"]["drive_min"] for x in blds if x["fit"]["drive_min"] is not None]
+    totals = [x["fit"]["min_total"] for x in blds if x["fit"]["min_total"] is not None]
+    dsteps = [s for s in DRIVE_STEPS if MIN_FITS <= sum(1 for d in drives if d <= s) < n]
+    dlabel = {30: ("Up to 30 minutes", "Close enough for a weeknight dinner"),
+              60: ("Up to an hour", "An easy Sunday drive"),
+              90: ("Up to 1½ hours", "A real trip, but doable")}
+    tsteps = _total_steps(totals, n)
+    tsub = ["The most left over each month", "A little more room to choose", "The widest choice"]
+    tweight = [15, 10, 5]
+    A = lambda i, label, sub, filt=None, w=None, **kw: dict({"id": i, "label": label, "sublabel": sub, "filter": filt, "weights": w or {}}, **kw)
+    return [
+        {"id": "visits", "text": "How often do you want to see Mom and Dad?", "help": "This sets how much the drive counts.",
+         "kind": "single", "must_have": False, "answers": [
+             A("visits_weekly", "Every week", "Most Sundays, at least", None, {"parents": 30}, visits_per_month=4),
+             A("visits_fortnightly", "Every other week", "Twice a month or so", None, {"parents": 20}, visits_per_month=2),
+             A("visits_monthly", "About once a month", "A visit every few weeks", None, {"parents": 10}, visits_per_month=1),
+             A("visits_rarely", "Now and then", "Holidays and birthdays", None, {}, visits_per_month=None)]},
+        {"id": "drive", "text": "What is the longest drive you would make for a visit?",
+         "help": "Each way, with no traffic.", "kind": "single", "must_have": True, "answers":
+             [A(f"drive_{s}", *dlabel.get(s, (f"Up to {s} minutes", "")), {"field": "drive_min", "op": "<=", "value": s}) for s in dsteps]
+             + [A("drive_any", "Any of them", "Distance is not the deciding thing")]},
+        {"id": "room", "text": "When you work from home, what do you need?", "help": None, "kind": "single", "must_have": True,
+         "answers": [
+             A("room_bedroom", "A separate bedroom", "A door to close at the end of the day",
+               {"field": "has_one_bedroom", "op": "==", "value": True}, {"home": 10}),
+             A("room_desk", "Studio with room for a desk", "One room, set up well", None, {"home": 5}),
+             A("room_either", "Either works", "Any good space will do")]},
+        {"id": "saturday", "text": "What does a good Saturday night look like?", "help": None, "kind": "single", "must_have": False,
+         "answers": [
+             A("sat_walk", "Walking out to dinner", "Restaurants and bars a short walk away", None, {"going_out": 20}),
+             A("sat_drive", "Driving somewhere fun", "Easy parking matters more than the corner bar", None, {"parking": 10}),
+             A("sat_stay", "Staying in", "A comfortable home matters most", None, {"home": 10})]},
+        {"id": "dog", "text": "What does the dog's daily walk look like?", "help": None, "kind": "single", "must_have": False,
+         "answers": [
+             A("dog_park", "A park to walk to", "Green space a few minutes from the door", None, {"green": 20}),
+             A("dog_area", "A dog area at the building", "Quick trips out without going far", None, {"green": 15}),
+             A("dog_either", "Either is fine", "Any good walk will do")]},
+        {"id": "car", "text": "Where will your car sleep at night?", "help": None, "kind": "single", "must_have": False,
+         "answers": [
+             A("car_garage", "A garage, even if it costs", "Covered and close, worth paying for", None, {"parking": 25}),
+             A("car_offstreet", "Any spot off the street", "A lot or a driveway space is fine", None, {"parking": 15}),
+             A("car_street", "On the street is fine", "Keep the money instead", None, {"value": 5})]},
+        {"id": "total", "text": "What monthly total feels right to you, with utilities and fees?",
+         "help": "Rent plus electricity, gas, internet, pet rent and required fees.", "kind": "single", "must_have": True,
+         "answers": [A(f"total_{s}", f"Up to ${s:,}", tsub[i] if i < len(tsub) else "", {"field": "min_total", "op": "<=", "value": s},
+                       {"value": tweight[i] if i < len(tweight) else 0}) for i, s in enumerate(tsteps)]
+                    + [A("total_any", "Any of them", "Price is not the deciding thing")]},
+        {"id": "top_two", "text": "Which two matter most to you?", "help": "Pick two.", "kind": "pick_two", "must_have": False,
+         "weights_mode": "double", "answers": [
+             A("pick_parents", "Close to Mom and Dad", "Shorter drives for visits", None, {"parents": 2}),
+             A("pick_room", "Room to work", "A separate bedroom, or more space", None, {"home": 2}),
+             A("pick_going_out", "Going out nearby", "Dinner and drinks on foot", None, {"going_out": 2}),
+             A("pick_green", "Green space for the dog", "A park close by", None, {"green": 2}),
+             A("pick_parking", "Easy parking", "A space at the building", None, {"parking": 2}),
+             A("pick_money", "Money left over", "The lowest total each month", None, {"value": 2})]},
+    ]
+
+
+def passes(fit, f):
+    """A must-have filter on a building's fit fields. An unknown field (null) passes: a building misses a must-have
+    only on a stated fact, as every gate of this project works (CLAUDE.md rule 10)."""
+    x = fit.get(f["field"])
+    if x is None:
+        return True
+    return {"<=": lambda: x <= f["value"], ">=": lambda: x >= f["value"], "==": lambda: x == f["value"]}[f["op"]]()
+
+
+def count_fits(questions, blds):
+    for q in questions:
+        for a in q["answers"]:
+            a["fits_alone"] = sum(1 for x in blds if a["filter"] is None or passes(x["fit"], a["filter"]))
+
+
+def match(buildings, answers, questions):
+    """The reference implementation of meta.matching (the page's JS must give the same order).
+    answers: {question id: answer id} and, for the pick_two question, {question id: [answer id, answer id]}; a
+    question left out was skipped. -> {"fits": [ids, best first], "doesnt_fit": [{"id", "reasons": [answer ids]}],
+    "scores": {id: score}}. Ties go to the lower id."""
+    Q = {q["id"]: q for q in questions}
+    w = defaultdict(float)
+    filters = []
+    for qid, aid in answers.items():
+        q = Q[qid]
+        if q["kind"] == "pick_two":
+            continue
+        a = next(a for a in q["answers"] if a["id"] == aid)
+        for k, x in a["weights"].items():
+            w[k] += x
+        if a["filter"]:
+            filters.append((aid, a["filter"]))
+    for qid, aids in answers.items():
+        if Q[qid]["kind"] != "pick_two":
+            continue
+        for aid in list(aids)[:2]:                    # in the order she picked them
+            a = next(a for a in Q[qid]["answers"] if a["id"] == aid)
+            for k, m in a["weights"].items():
+                w[k] = max(w[k], PICK_FLOOR) * m
+    scores = {}
+    for b in buildings:
+        s = num(b.get("rank_score")) or 0.0
+        s += sum(x * (num((b.get("scores") or {}).get(k)) or 0.0) for k, x in w.items())
+        if any((a.get("checked") or {}).get("status") in ("confirmed_today", "price_changed_today") for a in b.get("apartments") or []):
+            s += CONFIRMED_BONUS
+        scores[b["id"]] = round(s, 6)
+    order = sorted(buildings, key=lambda b: (-scores[b["id"]], b["id"]))
+    fits, out = [], []
+    for b in order:
+        miss_ = [aid for aid, f in filters if not passes(b["fit"], f)]
+        (out.append({"id": b["id"], "reasons": miss_}) if miss_ else fits.append(b["id"]))
+    return {"fits": fits, "doesnt_fit": out, "scores": scores}
+
+
+MATCHING = {
+    "formula": "score = rank_score + sum over score keys k of (w_k x scores[k]) + CONFIRMED_BONUS when any apartment's "
+               "checked.status is confirmed_today or price_changed_today",
+    "weights": "w_k starts at 0. For every answered single question, add the chosen answer's weights. Then, for each of "
+               "the (at most two) answers picked in the pick_two question, in the order picked, for each key k in its "
+               "weights: w_k = max(w_k, pick_floor) x that weight (2: doubled), so a key that matters most counts at "
+               "least 2 x pick_floor. A skipped question adds nothing.",
+    "must_haves": "For every answered question whose chosen answer has a filter (only must_have questions have one) {field, op, value}: a "
+                  "building passes when fit[field] op value holds (op is <=, >= or ==). A null fit field passes. A "
+                  "building that fails any goes to 'Doesn't fit what you said', with the failed answer ids as "
+                  "reasons (its fit_misses text for each); nothing is deleted.",
+    "order": "Fitting buildings by score, highest first; equal scores by id, ascending. The non-fitting group is in "
+             "the same order.",
+    "confirmed_bonus": CONFIRMED_BONUS, "pick_floor": PICK_FLOOR, "unknown_passes": True,
+    "reference": "scripts/concierge_data.py: match(buildings, answers, questions)",
+}
+
+
+NAMES = ("weekly visits, close by, out on foot", "a separate bedroom within an hour, garage", "rarely visits, money first",
+         "every other week, within 1½ hours, going out and parking")
+
+
+def matching_examples(blds, questions):
+    sets = [
+        {"visits": "visits_weekly", "drive": "drive_30", "room": "room_either", "saturday": "sat_walk", "dog": "dog_park",
+         "car": "car_offstreet", "total": "total_2200", "top_two": ["pick_parents", "pick_going_out"]},
+        {"visits": "visits_monthly", "drive": "drive_60", "room": "room_bedroom", "saturday": "sat_stay", "dog": "dog_area",
+         "car": "car_garage", "total": "total_any", "top_two": ["pick_room", "pick_parking"]},
+        {"visits": "visits_rarely", "drive": "drive_any", "room": "room_desk", "saturday": "sat_drive", "dog": "dog_either",
+         "car": "car_street", "total": "total_2000", "top_two": ["pick_money", "pick_green"]},
+        {"visits": "visits_fortnightly", "drive": "drive_90", "saturday": "sat_walk", "car": "car_garage",
+         "total": "total_2100", "top_two": ["pick_going_out", "pick_parking"]},
+    ]
+    ids = {a["id"] for q in questions for a in q["answers"]}
+    out = []
+    for s in sets:
+        s = {k: (v_ if isinstance(v_, list) else v_) for k, v_ in s.items()
+             if (all(x in ids for x in v_) if isinstance(v_, list) else v_ in ids)}
+        r = match(blds, s, questions)
+        out.append({"name": NAMES[len(out)], "answers": s, "expected_fits": r["fits"], "expected_doesnt_fit": [x["id"] for x in r["doesnt_fit"]],
+                    "order": r["fits"], "failing": [x["id"] for x in r["doesnt_fit"]],
+                    "expected_scores": {i: round(x, 3) for i, x in sorted(r["scores"].items())}})
+    return out
+
+
+# ---- fit ---------------------------------------------------------------------------------------------------------
+def fit_fields(x, src_b, us):
+    """The fields filters and chips read, from structured data only. null where the data does not say."""
+    best = us[0]
+    P = RL.parking_facts(best)
+    kind = P["kind"] or None
+    beds = [int(u["beds"]) for u in us if u.get("beds") is not None]
+    w = (best.get("moments") or {}).get("wake") or {}
+    a = (best.get("moments") or {}).get("after") or {}
+    am = src_b.get("amenities") or {}
+    dog_area = am.get("dog_park_or_run")
+    return {"drive_min": x["facts"]["drive_min"], "toll_round_trip": x["facts"]["toll_round_trip"],
+            "has_one_bedroom": any(b_ >= 1 for b_ in beds) if beds else None,
+            "has_studio": any(b_ == 0 for b_ in beds) if beds else None,
+            "studio_only": (all(b_ == 0 for b_ in beds) if beds else None),
+            "min_total": x["facts"]["total_from"], "max_total": x["facts"]["total_to"],
+            "parking_kind": kind, "parking_included": bool(P["included"]) if kind else None,
+            "parking_fee": tidy(P["fee"], 2) if kind else None,
+            "garage_or_covered": (kind in ("garage", "covered")) if kind else None,
+            "off_street": (kind != "street") if kind else None,
+            "dog_area_in_building": bool(dog_area) if dog_area is not None else None,
+            "park_walk_min": tidy(num(w.get("park_walk_min"))), "park_name": w.get("park") or None,
+            "dog_run_name": w.get("dog_park") or None, "dog_run_m": tidy(num(w.get("dog_park_m")), 0),
+            "restaurants_10min": tidy(num(a.get("restaurants_800m")), 0), "bars_10min": tidy(num(a.get("bars_800m")), 0),
+            "cafes_10min": tidy(num(a.get("cafes_800m")), 0),
+            "sqft_max": tidy(max([num(u.get("sqft")) for u in us if num(u.get("sqft")) is not None], default=None) or None, 0),
+            "sqft_studio": tidy(max([num(u.get("sqft")) for u in us if u.get("beds") == 0 and num(u.get("sqft")) is not None], default=None) or None, 0),
+            "sqft_one_bedroom": tidy(max([num(u.get("sqft")) for u in us if (u.get("beds") or 0) >= 1 and num(u.get("sqft")) is not None], default=None) or None, 0)}
+
+
+# ---- fit_chips / fit_misses --------------------------------------------------------------------------------------
+def _drive_chip(f):
+    return None if f["drive_min"] is None else f"About {half_up(f['drive_min'])} minutes to Mom and Dad"
+
+
+def _rest_chip(f):
+    r = f["restaurants_10min"]
+    if r is None:
+        return None
+    r = int(r)
+    if r == 0:
+        return "No restaurants within a 10-minute walk"
+    return f"{'About ' if r >= 10 else ''}{r} restaurant{'s' if r != 1 else ''} within a 10-minute walk"
+
+
+def _park_chip(f):
+    if f["park_walk_min"] is None:
+        return None
+    t = f"{f['park_name']}, {minutes(f['park_walk_min'])} on foot" if f["park_name"] else None
+    return t if t and words(t) <= CHIP_MAX_WORDS else f"A park {minutes(f['park_walk_min'])} on foot"
+
+
+def _parking_chip(f):
+    k = f["parking_kind"]
+    if k is None:
+        return "Parking not named in the listing"
+    base = {"garage": "Garage parking", "covered": "Covered parking", "lot": "A parking lot", "off_street": "Off-street parking",
+            "street": "Street parking only"}.get(k, "Parking named in the listing")
+    if k == "street":
+        return base
+    if f["parking_included"]:
+        return f"{base}, included in the rent"
+    if f["parking_fee"]:
+        return f"{base}, ${half_up(f['parking_fee'])} a month"
+    return base
+
+
+def _room_chip(f):
+    if f["has_one_bedroom"]:
+        return f"Separate bedroom, about {int(f['sqft_one_bedroom']):,} square feet" if f["sqft_one_bedroom"] else "A separate bedroom"
+    if f["has_one_bedroom"] is False:
+        return f"Studio only, about {int(f['sqft_studio']):,} square feet" if f["sqft_studio"] else "Studio only"
+    return None
+
+
+def _total_chip(f):
+    if f["min_total"] is None:
+        return None
+    lo = f"${half_up(f['min_total']):,}"
+    return f"Total about {lo} a month" if f["max_total"] == f["min_total"] else f"Total from about {lo} a month"
+
+
+def chips_for(x, questions, med_total):
+    """{answer id: chip} and {answer id: miss}. A chip states the building's real figure for that answer; a miss is
+    the same kind of statement where the building misses the answer (a must-have it fails, or a preference it does
+    not meet). Answers that ask for nothing ("Either works", "Any of them", "Now and then") carry neither."""
+    f = x["fit"]
+    chips, misses = {}, {}
+    drive, rest, park, parking, room, total = _drive_chip(f), _rest_chip(f), _park_chip(f), _parking_chip(f), _room_chip(f), _total_chip(f)
+    miss_drive = {"visits_weekly": 30, "visits_fortnightly": 60, "visits_monthly": 90, "pick_parents": 60}
+    for q in questions:
+        for a in q["answers"]:
+            i, c, m = a["id"], None, False
+            if i in miss_drive or (i.startswith("drive_") and a["filter"]):
+                c = drive
+                lim = miss_drive.get(i) or (a["filter"] or {}).get("value")
+                m = lim is not None and f["drive_min"] is not None and f["drive_min"] > lim
+            elif i in ("room_bedroom", "pick_room"):
+                c, m = room, f["has_one_bedroom"] is False
+            elif i == "room_desk":
+                c = room if f["has_one_bedroom"] is False else (room if f["has_one_bedroom"] else None)
+                if f["has_one_bedroom"] is False and not f["sqft_studio"]:
+                    c = "A studio; size not published"
+            elif i in ("sat_walk", "pick_going_out"):
+                c, m = rest, f["restaurants_10min"] is not None and f["restaurants_10min"] < 10
+            elif i == "sat_drive":
+                c, m = parking, f["parking_kind"] == "street"
+            elif i == "sat_stay":
+                c = (f"Up to about {int(f['sqft_max']):,} square feet" if f["sqft_max"] else None)
+            elif i in ("dog_park", "pick_green"):
+                c = park
+                m = f["park_walk_min"] is not None and half_up(f["park_walk_min"]) >= 10
+                if m:
+                    c = f"Nearest park about {minutes(f['park_walk_min'])} on foot"
+            elif i == "dog_area":
+                c = "A dog area at the building" if f["dog_area_in_building"] else "No dog area listed at the building"
+                m = not f["dog_area_in_building"]
+            elif i in ("car_garage", "car_offstreet", "pick_parking"):
+                c = parking
+                m = (not f["garage_or_covered"]) if i == "car_garage" else (f["parking_kind"] in (None, "street"))
+            elif i.startswith("total_") and a["filter"]:
+                c, m = total, not passes(f, a["filter"])
+            elif i == "pick_money":
+                c, m = total, f["min_total"] is not None and f["min_total"] > med_total
+            if c:
+                chips[i] = c
+                if m:
+                    misses[i] = c
+    return chips, misses
+
+
+# ---- experience line ---------------------------------------------------------------------------------------------
+def experience_line(e, base_year):
+    """One plain sentence on what the kind of life means: the experience's guarded tagline, else the first sentence of
+    its promise, else of its subhead, whichever first has at most 16 words."""
+    for t in (e.get("tagline"), (base_year.get("prose") or {}).get("promise"), base_year.get("subhead")):
+        s = sentences(voice(t))
+        if s and words(s[0]) <= 16:
+            return s[0]
+    return None
+
+
+# ---- life here ---------------------------------------------------------------------------------------------------
+def enriched_for(bid, lat, lon):
+    """(places record of data/enriched/<hash>.json, colour record of data/enriched_color/<hash>.json, point) for a
+    building: its address keys through data/reference/building_crosswalk.csv, the file name the sha1 of the key
+    (scripts/rank.py color_table, scripts/enrich_units.py), the key whose point is nearest the building."""
+    import hashlib
+    xw = _crosswalk()
+    best = None
+    for k in sorted(xw.get(bid, []), key=len):
+        h = hashlib.sha1(k.encode()).hexdigest()[:14]
+        f = ENRICHED / f"{h}.json"
+        if not f.exists():
+            continue
+        e = json.loads(f.read_text(encoding="utf-8"))
+        d = haversine_km({"lat": lat, "lon": lon}, {"lat": e["lat"], "lon": e["lon"]})
+        if best is None or d < best[0] - 1e-9:
+            c = COLOR / f"{h}.json"
+            best = (d, e, json.loads(c.read_text(encoding="utf-8")) if c.exists() else {})
+    if best is None:
+        return {}, {}, None
+    return best[1], best[2], {"lat": best[1]["lat"], "lon": best[1]["lon"]}
+
+
+_XW = None
+
+
+def _crosswalk():
+    global _XW
+    if _XW is None:
+        xw = pd.read_csv(REF / "building_crosswalk.csv", dtype=str, keep_default_na=False)
+        _XW = defaultdict(list)
+        for a, b in zip(xw.addr_key, xw.building_id):
+            _XW[b].append(a)
+    return _XW
+
+
+def osm_list(rec):
+    v_ = (rec or {}).get("value")
+    return [p for p in v_ if isinstance(p, dict) and p.get("name") and p.get("metres") is not None] if isinstance(v_, list) else []
+
+
+def osm_one(rec):
+    rec = rec or {}
+    if rec.get("name") and num(rec.get("value")) is not None:
+        return [{"name": rec["name"], "metres": num(rec["value"]), "osm_url": rec.get("osm_url")}]
+    return []
+
+
+def place(p, kind, source_name=OSM, url=None):
+    m = num(p.get("metres"))
+    return {"name": clean_name(p["name"]), "kind": kind, "walk_min": walk_min_of(m), "distance_mi": miles_of(m),
+            "source_name": source_name, "source_url": url or p.get("osm_url") or "https://www.openstreetmap.org/"}
+
+
+def nearest(cands, kind, max_walk=NEAR_MIN, skip=()):
+    for p in sorted(cands, key=lambda p: num(p.get("metres"))):
+        n = clean_name(p.get("name"))
+        if not name_ok(n) or n in skip:
+            continue
+        pl = place(p, kind)
+        if max_walk is None or pl["walk_min"] <= max_walk:
+            return pl
+        return None
+    return None
+
+
+def far_words(pl):
+    """'a 6-minute walk' up to WALK_MAX_MIN, else 'N miles away' (straight line)."""
+    return a_walk(pl["walk_min"]) if pl["walk_min"] <= WALK_MAX_MIN else f"{pl['distance_mi']:.1f} miles away"
+
+
+def load_life_facts():
+    """data/reference/life_here_facts.csv as {building id: [rows]} and {neighborhood id: [rows]}: absent or partial is
+    fine (written by a research agent; the script picks up more rows on its next run). Only confidence 'high' rows
+    are used; the counts of the rest are reported."""
+    out_b, out_h, skipped = defaultdict(list), defaultdict(list), Counter()
+    if not LIFE_FACTS.exists():
+        return out_b, out_h, {"file": "absent"}
+    try:
+        t = pd.read_csv(LIFE_FACTS, dtype=str, keep_default_na=False, on_bad_lines="skip")
+    except (OSError, ValueError, pd.errors.ParserError) as e:
+        return out_b, out_h, {"file": f"unreadable: {e}"[:200]}
+    for r in t.to_dict("records"):
+        r = {k: str(v_ or "").strip() for k, v_ in r.items()}
+        conf = r.get("confidence", "").lower()
+        if conf != "high":
+            skipped[f"confidence {conf or 'blank'}"] += 1
+            continue
+        r["moment"] = MOMENT_ALIASES.get(r.get("moment", "").lower(), r.get("moment", "").lower())
+        if r["moment"] not in dict(MOMENTS):
+            skipped[f"moment {r['moment'] or 'blank'} (not one of the four)"] += 1
+            continue
+        if not (r.get("fact") and r.get("place_name") and r.get("source_url", "").startswith("http")):
+            skipped["incomplete"] += 1
+            continue
+        if r.get("building_id"):
+            out_b[r["building_id"]].append(r)
+        elif r.get("neighborhood_id"):
+            out_h[r["neighborhood_id"]].append(r)
+        else:
+            skipped["no building or neighborhood"] += 1
+    return out_b, out_h, {"file": "present", "rows": int(len(t)), "used_high": sum(map(len, out_b.values())) + sum(map(len, out_h.values())),
+                          "skipped": dict(skipped)}
+
+
+MOMENT_ALIASES = {"dog_walk": "dog", "dog's walk": "dog", "sat": "saturday", "sun": "sunday", "work": "weekday"}
+
+
+def name_span(name, text):
+    """The longest run of two or more words of `name` that the text contains (case-insensitive), as the text writes
+    it; the whole name when it is one word and present. None when the text does not name the place."""
+    ws = name.split()
+    for n in range(len(ws), 0, -1):
+        if n == 1 and len(ws) > 1:
+            break
+        for i in range(0, len(ws) - n + 1):
+            span = " ".join(ws[i:i + n])
+            m = re.search(r"(?<!\w)" + re.escape(span) + r"(?!\w)", text, re.I)
+            if m:
+                return text[m.start():m.end()]
+    for w_ in ws:                                     # one distinctive word of the name ("Berlinetta"), as written
+        if len(w_) >= 5 and w_[0].isupper() and w_.lower() not in GENERIC_NAME_WORDS:
+            m = re.search(r"(?<!\w)" + re.escape(w_) + r"(?!\w)", text)
+            if m:
+                return w_
+    return None
+
+
+GENERIC_NAME_WORDS = {"park", "parks", "street", "avenue", "downtown", "market", "library", "center", "centre", "theater",
+                      "theatre", "night", "music", "trivia", "farmers", "public", "garden", "gardens", "green", "plaza",
+                      "square", "beach", "river", "brewing", "brewery", "coffee", "house", "hall", "branch", "jazz",
+                      "sunday", "saturday", "weekly", "school", "church", "museum", "festival", "series", "stamford",
+                      "bridgeport", "flushing", "yonkers", "newark", "danbury", "hamden", "orange", "bloomfield",
+                      "belleville", "brooklyn", "queens"}
+
+
+def fact_sentence(r, pt):
+    """A research row -> (fact sentence, walk sentence or None, place or None, extra source or None), or None.
+    The fact is the row's own words (a dash between two words becomes a hyphen), with its schedule in brackets where
+    the fact does not already say it. Where the row has coordinates, the walk is computed here from the building's
+    point; a distance or a walking time in the web text is never used (the row is skipped). Not used: a banned,
+    crime or hype word, a question, more than 32 words, coordinates more than 25 miles from the building."""
+    name = clean_name(r["place_name"])
+    fact = re.sub(r"(?<=\w)\s*[–—]\s*(?=\w)", "-", re.sub(r"\s+", " ", r["fact"])).strip().rstrip(".") + "."
+    sched = re.sub(r"(?<=\w)\s*[–—]\s*(?=\w)", "-", r.get("schedule", "").strip())
+    if not name_ok(name) or BANNED.search(fact + " " + sched) or CRIME.search(fact) or HYPE.search(fact) or re.search(r"[—–?]", fact + sched):
+        return None
+    if re.search(r"\b(minutes?|miles?|blocks?|feet|meters?)\b[^.]{0,12}\b(away|from|walk|drive)\b|\bwalking distance\b", fact, re.I):
+        return None
+    lat, lon = num(r.get("lat")), num(r.get("lon"))
+    m = haversine_km(pt, {"lat": lat, "lon": lon}) * 1000 if (pt and lat is not None and lon is not None) else None
+    if m is not None and m > 1609.344 * 25:
+        return None
+    kind = r.get("place_kind") or "place"
+    src = {"name": r.get("source_name") or "Source", "url": r["source_url"]}
+    if kind == "route":
+        return (fact, None, mentioned(fact, [], src), src) if words(fact) <= 32 else None
+    sched = re.sub(r"\s*\([^)]*\)", "", sched).strip(" ,;")
+    span = name_span(name, fact)
+    named_after = False
+    if span is None:
+        if re.match(r"(The|A|An|It) ", fact) and ":" not in fact:
+            fact = f"At {name}, {fact[0].lower()}{fact[1:]}"
+        else:
+            named_after = True                         # "City park rules: ... (Seaside Park)."
+        span = name
+    cal = {w_.lower().rstrip("s") for w_ in re.findall(r"[A-Za-z]+", sched) if CAL_WORDS.match(w_)}
+    says_when = any(re.search(rf"\b{c}", fact, re.I) for c in cal)
+    extra = []
+    if sched and sched.lower() not in fact.lower() and (re.search(r"\d", sched) or not says_when):
+        extra.append(sched)
+    if named_after:
+        extra.insert(0, name)
+    if extra and words(fact) + sum(words(x) for x in extra) <= 30:
+        fact = fact.rstrip(".") + f" ({'; '.join(extra)})."
+    elif named_after:
+        return None
+    if words(fact) > 32:
+        return None
+    pl = {"name": span, "official_name": name, "kind": kind, "walk_min": walk_min_of(m), "distance_mi": miles_of(m),
+          "source_name": src["name"], "source_url": src["url"]}
+    walk = f"It is {far_words(pl)}." if pl["walk_min"] is not None else None
+    return fact, walk, [pl] + mentioned(fact, [span, name], src), None
+
+
+CAL_WORDS = re.compile(r"^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\w*$|^(January|February|March|April|May|June|July|August|September|October|"
+                       r"November|December|Thanksgiving|Christmas)$")
+
+
+def mentioned(text, own, src):
+    """Other places a research fact names (two or more capitalised words in a row, not opening the sentence, not a
+    day or month): each goes into places[] with the row's source, as 'named in the source', with no walk."""
+    t = text
+    for n in sorted(own, key=len, reverse=True):
+        t = re.sub(re.escape(n), " ", t, flags=re.I)
+    out = []
+    for m in re.finditer(r"(?<![.!?]\s)(?<!^)\b([A-Z][\w'’&]+(?:\s+(?:of|the|and|&|de|on)\s+[A-Z][\w'’&]+|\s+[A-Z][\w'’&]+)+)", t):
+        run = m.group(1).strip()
+        parts = run.split()
+        if all(CAL_WORDS.match(w_) for w_ in parts if w_[0].isupper()) or run in [p["name"] for p in out]:
+            continue
+        out.append({"name": run, "official_name": run, "kind": "named in the source", "walk_min": None, "distance_mi": None,
+                    "source_name": src["name"], "source_url": src["url"]})
+    return out
+
+
+def life_here(x, src_b, us, life_b, life_h):
+    """Four moments (weekday, saturday, sunday, dog) for one building, from structured data, the named mapped places of
+    data/enriched*/ (OpenStreetMap) and the high-confidence rows of data/reference/life_here_facts.csv. Each sentence is
+    a candidate with a priority; they are added in order while the text stays within 3 sentences and 45 words. A moment
+    with no candidate is left out."""
+    e, c, pt = enriched_for(x["id"], x["lat"], x["lon"])
+    P = (e.get("places") or {})
+    go, er, gs = P.get("going_out") or {}, P.get("errands") or {}, P.get("green_space") or {}
+    best = us[0]
+    f = x["fit"]
+    rows = life_b.get(x["id"], []) + life_h.get(x["neighborhood_id"], [])
+    cand = defaultdict(list)                         # moment -> [(priority, sentence, [places], [sources])]
+
+    def add(mom, pri, s, places=(), sources=(), n_sent=1, alt=None):
+        cand[mom].append((pri, s, list(places), list(sources), n_sent, alt))
+
+    # weekday
+    cafe = nearest(osm_list(go.get("nearest_cafes")), "café")
+    if cafe:
+        add("weekday", 1, f"Coffee at {cafe['name']}, {minutes(cafe['walk_min'])} on foot, then back to the desk.", [cafe])
+    sup = nearest(osm_one(er.get("nearest_supermarket")), "supermarket", max_walk=None)
+    if sup:
+        add("weekday", 3, f"For groceries, {sup['name']} is {far_words(sup)}.", [sup])
+    lib = nearest([p for p in osm_list((c.get("culture") or {}).get("library_examples")) if not re.search(r"\blaw\b|judicial|museum", p["name"], re.I)],
+                  "library")
+    if lib:
+        add("weekday", 4, f"For a change of desk, {lib['name']} is {a_walk(lib['walk_min'])}.", [lib])
+    # saturday
+    r8 = f["restaurants_10min"]
+    bar = nearest(osm_list(go.get("nearest_bars")), "bar")
+    show = nearest(osm_list((c.get("culture") or {}).get("cinema_theatre_examples")), "cinema or theater", max_walk=WALK_MAX_MIN)
+    if r8 is not None and (r8 >= 5 or bar or show):
+        n = int(r8)
+        cnt = (go.get("restaurant_count_800m") or {}).get("source_url")
+        if n:
+            add("saturday", 1, f"{n} restaurant{' is' if n == 1 else 's are'} within a 10-minute walk.", [],
+                [{"name": f"{OSM} (mapped places within 800 m)", "url": cnt}] if cnt else [])
+    if bar:
+        add("saturday", 3, f"The nearest bar, {bar['name']}, is {minutes(bar['walk_min'])} on foot.", [bar])
+    if show:
+        add("saturday", 4, f"For a night out, {show['name']} is {a_walk(show['walk_min'])}.", [show])
+    # sunday
+    d, toll = f["drive_min"], f["toll_round_trip"]
+    if d is not None:
+        t = "" if toll is None else (", with no tolls" if toll == 0 else f", about ${half_up(toll)} round trip in tolls")
+        src = []
+        dr = (e.get("drive") or {}).get("minutes_to_jamaica") or {}
+        if dr.get("source_url"):
+            src.append({"name": "OSRM route estimate, no traffic", "url": dr["source_url"]})
+        for it in ((e.get("drive") or {}).get("toll_round_trip_ezpass") or {}).get("items") or []:
+            if str(it.get("source_url") or "").startswith("http") and toll:
+                src.append({"name": f"Toll rates: {it.get('agency') or it.get('facility')}", "url": it["source_url"]})
+        add("sunday", 1, f"Mom and Dad are about {minutes(d)} away by car{t}.", [], src)
+    bak = nearest(osm_list(go.get("nearest_bakeries")), "bakery")
+    if bak:
+        add("sunday", 4, f"Bring something from {bak['name']}, {a_walk(bak['walk_min'])}.", [bak])
+    # dog
+    pw = f["park_walk_min"]
+    if pw is not None:
+        if f["park_name"]:
+            rec = next((r for r in (gs.get("nearest_named_park"), gs.get("nearest_park")) if (r or {}).get("name") and f["park_name"] in clean_name(r["name"])), None) or {}
+            pk = {"name": f["park_name"], "kind": "park", "walk_min": pw, "distance_mi": miles_of(num(rec.get("value"))),
+                  "source_name": OSM, "source_url": rec.get("osm_url") or "https://www.openstreetmap.org/"}
+            add("dog", 1, f"{f['park_name']} is {a_walk(pw)} for the daily loop.", [pk])
+        else:
+            u_ = ((gs.get("nearest_named_park") or {}).get("osm_url") or (gs.get("nearest_park") or {}).get("osm_url"))
+            add("dog", 1, f"The nearest park is {a_walk(pw)} for the daily loop.", [], [{"name": OSM, "url": u_}] if u_ else [])
+    if f["dog_area_in_building"]:
+        add("dog", 2, "The building lists its own dog area.", [],
+            [{"name": "The building's listing", "url": x.get("listing_url") or x.get("photos_url")}] if (x.get("listing_url") or x.get("photos_url")) else [])
+    else:
+        run = nearest(osm_one(gs.get("nearest_dog_park")), "dog run", max_walk=None)
+        if run and num(gs.get("nearest_dog_park", {}).get("value")) <= DOG_RUN_MAX_M:
+            nm = run["name"]
+            add("dog", 3, (f"{nm} is {far_words(run)}." if re.search(r"\bdog\b", nm, re.I) else f"The nearest dog run is at {nm}, {far_words(run)}."), [run])
+    vet = nearest(osm_one(er.get("nearest_veterinary")), "vet", max_walk=None)
+    if vet and num(er.get("nearest_veterinary", {}).get("value")) <= VET_MAX_M:
+        add("dog", 4, f"The nearest vet, {vet['name']}, is {far_words(vet)}.", [vet])
+    # research rows: after the first sentence of the moment
+    for r in rows:
+        fs = fact_sentence(r, pt)
+        if not fs:
+            continue
+        fact, walk, pls, src = fs
+        pl = (pls or [None])[0]
+        add(r["moment"], 2, fact + (" " + walk if walk else ""), pls or [], [src] if src else [], 2 if walk else 1,
+            alt=fact if walk else None)               # the fact alone, where the walk to the place is already said
+    out = []
+    for mom, title in MOMENTS:
+        cs = sorted(cand.get(mom, []), key=lambda t: t[0])
+        if not cs:
+            continue
+        take, n_w, n_s = [], 0, 0
+        for pri, s, pls, srcs, k, alt in cs:
+            said = {p["name"].lower() for t in take for p in t[2]} | {p.get("official_name", "").lower() for t in take for p in t[2]}
+            if alt and pls and (pls[0]["name"].lower() in said or pls[0]["official_name"].lower() in said):
+                s, k = alt, 1
+            if n_s + k > LIFE_MAX_SENTENCES or n_w + words(s) > LIFE_MAX_WORDS or any(s == t[1] for t in take):
+                continue
+            take.append((pri, s, pls, srcs))
+            n_w += words(s)
+            n_s += k
+        places, sources, seen = [], [], set()
+        for _, _, pls, srcs in take:
+            for p in pls:
+                if p["name"] not in {q["name"] for q in places}:
+                    places.append(p)
+                if p["source_url"] not in seen:
+                    seen.add(p["source_url"])
+                    sources.append({"name": p["source_name"], "url": p["source_url"]})
+            for s_ in srcs:
+                if s_["url"] and s_["url"] not in seen:
+                    seen.add(s_["url"])
+                    sources.append(s_)
+        out.append({"moment": mom, "title": title, "text": " ".join(t[1] for t in take),
+                    "places": places, "sources": sources})
+    return out
+
+
+def add_version_two(out, b_base):
+    """Adds questions, buildings[].fit / fit_chips / fit_misses / experience_line / life_here, experiences[].line and
+    meta.matching / matching_examples / life_here_facts to the concierge data. Nothing existing is changed."""
+    blds = out["buildings"]
+    src = {bd["id"]: bd for bd in b_base["buildings"]}
+    by_b = defaultdict(list)
+    for u in sorted(b_base["units"], key=lambda u: (-(num((u.get("scores") or {}).get("rank")) or 0), u["id"])):
+        by_b[u["building_id"]].append(u)
+    for x in blds:
+        x["fit"] = fit_fields(x, src[x["id"]], by_b[x["id"]])
+    questions = build_questions(blds)
+    count_fits(questions, blds)
+    med_total = median(x["fit"]["min_total"] for x in blds)
+    years = {y["id"]: y for y in b_base["years"]}
+    lines = {}
+    for e in out["experiences"]:
+        e["line"] = experience_line(e, years.get(e["id"]) or {})
+        lines[e["id"]] = e["line"]
+    life_b, life_h, facts_report = load_life_facts()
+    for x in blds:
+        x["fit_chips"], x["fit_misses"] = chips_for(x, questions, med_total)
+        x["experience_line"] = lines.get(x["experience_id"])
+        x["life_here"] = life_here(x, src[x["id"]], by_b[x["id"]], life_b, life_h)
+    out["questions"] = questions
+    m = out["meta"]
+    m["matching"] = MATCHING
+    m["matching_examples"] = matching_examples(blds, questions)
+    m["walk_pace"] = (f"Walking minutes are straight-line metres x {WALK_DETOUR} / {WALK_M_PER_MIN:.0f} m a minute, as the "
+                      f"park walks elsewhere on the page; miles are straight line. Counts 'within a 10-minute walk' are "
+                      f"mapped places within 800 m.")
+    m["life_here_facts"] = facts_report
+    m["life_here_counts"] = dict(Counter(mo_["moment"] for x in blds for mo_ in x["life_here"]))
+    return out
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--no-text", action="store_true", help="reuse the _u2000 text tables on disk (the guards still run)")
@@ -1060,12 +1835,15 @@ def main(argv=None):
     if bad:
         print(f"{bad} text step(s) failed: {OUT.name} not written")
         return 1
-    out = concierge(b, d)
+    out = add_version_two(concierge(b, d), b)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8")
     print(f"{OUT.relative_to(ROOT)}: {out['meta']['counts']}")
     for p in out["meta"]["parked"]:
         print(f"  parked: {p['neighborhood']} under {p['under']} ({p['km']} km, \"{p['label']}\"{', fallback' if p['fallback'] else ''})")
     print(f"  checked on {out['meta']['checked_day']}: {out['meta']['checked_counts']}")
+    for q in out["questions"]:
+        print(f"  question {q['id']}: " + ", ".join(f"{a['id']} {a['fits_alone']}" for a in q["answers"]))
+    print(f"  life here: {out['meta']['life_here_counts']}; facts file: {out['meta']['life_here_facts']}")
     for q in out["meta"]["either_or_audit"]:
         print(f"  either/or {q['id']}: spearman {q['spearman']}, top-5 shared {q['top5_shared']} -> {'kept' if q['kept'] else 'trade-off, not among the three' if q['trade_off'] else 'no trade-off'}")
     return 0

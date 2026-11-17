@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built_at": "2026-11-17T14:51:13+00:00",
+  "built_at": "2026-11-17T15:30:14+00:00",
   "rent_limit": 2000,
   "counts": {
    "apartments": 38,
@@ -172,7 +172,401 @@
    "Drive times are estimates with no traffic.",
    "Tolls are round trip at New York E-ZPass rates, weekend off-peak.",
    "The total with utilities and fees is the rent plus required fees, pet rent, parking where its price is published, and estimated electricity, gas and internet."
-  ]
+  ],
+  "matching": {
+   "formula": "score = rank_score + sum over score keys k of (w_k x scores[k]) + CONFIRMED_BONUS when any apartment's checked.status is confirmed_today or price_changed_today",
+   "weights": "w_k starts at 0. For every answered single question, add the chosen answer's weights. Then, for each of the (at most two) answers picked in the pick_two question, in the order picked, for each key k in its weights: w_k = max(w_k, pick_floor) x that weight (2: doubled), so a key that matters most counts at least 2 x pick_floor. A skipped question adds nothing.",
+   "must_haves": "For every answered question whose chosen answer has a filter (only must_have questions have one) {field, op, value}: a building passes when fit[field] op value holds (op is <=, >= or ==). A null fit field passes. A building that fails any goes to 'Doesn't fit what you said', with the failed answer ids as reasons (its fit_misses text for each); nothing is deleted.",
+   "order": "Fitting buildings by score, highest first; equal scores by id, ascending. The non-fitting group is in the same order.",
+   "confirmed_bonus": 8,
+   "pick_floor": 10,
+   "unknown_passes": true,
+   "reference": "scripts/concierge_data.py: match(buildings, answers, questions)"
+  },
+  "matching_examples": [
+   {
+    "name": "weekly visits, close by, out on foot",
+    "answers": {
+     "visits": "visits_weekly",
+     "drive": "drive_30",
+     "room": "room_either",
+     "saturday": "sat_walk",
+     "dog": "dog_park",
+     "car": "car_offstreet",
+     "total": "total_2200",
+     "top_two": [
+      "pick_parents",
+      "pick_going_out"
+     ]
+    },
+    "expected_fits": [
+     "b_1d1be12629",
+     "b_d007846fe9",
+     "b_0f0fcfc79c",
+     "b_84bbe8d99e"
+    ],
+    "expected_doesnt_fit": [
+     "b_674db3118a",
+     "b_893edb6df8",
+     "b_f95c86db48",
+     "b_e39cde86f4",
+     "b_377a717d0d",
+     "b_66dc364565",
+     "b_fec325fa9f",
+     "b_ee2549a834",
+     "b_c4831201c1",
+     "b_917f6a1ed1",
+     "b_296b3095f3",
+     "b_b29a9ae0e3",
+     "b_0ba5cc966d",
+     "b_0e634d994b",
+     "b_5204934871",
+     "b_e2378bf884",
+     "b_022934bcb2",
+     "b_5f84c933a2"
+    ],
+    "order": [
+     "b_1d1be12629",
+     "b_d007846fe9",
+     "b_0f0fcfc79c",
+     "b_84bbe8d99e"
+    ],
+    "failing": [
+     "b_674db3118a",
+     "b_893edb6df8",
+     "b_f95c86db48",
+     "b_e39cde86f4",
+     "b_377a717d0d",
+     "b_66dc364565",
+     "b_fec325fa9f",
+     "b_ee2549a834",
+     "b_c4831201c1",
+     "b_917f6a1ed1",
+     "b_296b3095f3",
+     "b_b29a9ae0e3",
+     "b_0ba5cc966d",
+     "b_0e634d994b",
+     "b_5204934871",
+     "b_e2378bf884",
+     "b_022934bcb2",
+     "b_5f84c933a2"
+    ],
+    "expected_scores": {
+     "b_022934bcb2": 90.95,
+     "b_0ba5cc966d": 97.42,
+     "b_0e634d994b": 96.58,
+     "b_0f0fcfc79c": 167.375,
+     "b_1d1be12629": 174.845,
+     "b_296b3095f3": 102.115,
+     "b_377a717d0d": 133.415,
+     "b_5204934871": 94.685,
+     "b_5f84c933a2": 89.42,
+     "b_66dc364565": 125.705,
+     "b_674db3118a": 145.02,
+     "b_84bbe8d99e": 160.565,
+     "b_893edb6df8": 138.95,
+     "b_917f6a1ed1": 106.325,
+     "b_b29a9ae0e3": 100.675,
+     "b_c4831201c1": 108.725,
+     "b_d007846fe9": 174.325,
+     "b_e2378bf884": 91.49,
+     "b_e39cde86f4": 134.61,
+     "b_ee2549a834": 118.75,
+     "b_f95c86db48": 138.005,
+     "b_fec325fa9f": 121.72
+    }
+   },
+   {
+    "name": "a separate bedroom within an hour, garage",
+    "answers": {
+     "visits": "visits_monthly",
+     "drive": "drive_60",
+     "room": "room_bedroom",
+     "saturday": "sat_stay",
+     "dog": "dog_area",
+     "car": "car_garage",
+     "total": "total_any",
+     "top_two": [
+      "pick_room",
+      "pick_parking"
+     ]
+    },
+    "expected_fits": [
+     "b_e39cde86f4",
+     "b_296b3095f3"
+    ],
+    "expected_doesnt_fit": [
+     "b_66dc364565",
+     "b_917f6a1ed1",
+     "b_d007846fe9",
+     "b_674db3118a",
+     "b_377a717d0d",
+     "b_0e634d994b",
+     "b_1d1be12629",
+     "b_0ba5cc966d",
+     "b_893edb6df8",
+     "b_f95c86db48",
+     "b_5204934871",
+     "b_84bbe8d99e",
+     "b_b29a9ae0e3",
+     "b_ee2549a834",
+     "b_0f0fcfc79c",
+     "b_e2378bf884",
+     "b_fec325fa9f",
+     "b_5f84c933a2",
+     "b_022934bcb2",
+     "b_c4831201c1"
+    ],
+    "order": [
+     "b_e39cde86f4",
+     "b_296b3095f3"
+    ],
+    "failing": [
+     "b_66dc364565",
+     "b_917f6a1ed1",
+     "b_d007846fe9",
+     "b_674db3118a",
+     "b_377a717d0d",
+     "b_0e634d994b",
+     "b_1d1be12629",
+     "b_0ba5cc966d",
+     "b_893edb6df8",
+     "b_f95c86db48",
+     "b_5204934871",
+     "b_84bbe8d99e",
+     "b_b29a9ae0e3",
+     "b_ee2549a834",
+     "b_0f0fcfc79c",
+     "b_e2378bf884",
+     "b_fec325fa9f",
+     "b_5f84c933a2",
+     "b_022934bcb2",
+     "b_c4831201c1"
+    ],
+    "expected_scores": {
+     "b_022934bcb2": 72.745,
+     "b_0ba5cc966d": 97.875,
+     "b_0e634d994b": 102.605,
+     "b_0f0fcfc79c": 90.73,
+     "b_1d1be12629": 100.855,
+     "b_296b3095f3": 103.34,
+     "b_377a717d0d": 102.905,
+     "b_5204934871": 96.755,
+     "b_5f84c933a2": 84.4,
+     "b_66dc364565": 115.335,
+     "b_674db3118a": 105.365,
+     "b_84bbe8d99e": 96.135,
+     "b_893edb6df8": 97.515,
+     "b_917f6a1ed1": 109.045,
+     "b_b29a9ae0e3": 95.485,
+     "b_c4831201c1": 69.205,
+     "b_d007846fe9": 105.555,
+     "b_e2378bf884": 90.155,
+     "b_e39cde86f4": 106.065,
+     "b_ee2549a834": 93.745,
+     "b_f95c86db48": 97.06,
+     "b_fec325fa9f": 87.635
+    }
+   },
+   {
+    "name": "rarely visits, money first",
+    "answers": {
+     "visits": "visits_rarely",
+     "drive": "drive_any",
+     "room": "room_desk",
+     "saturday": "sat_drive",
+     "dog": "dog_either",
+     "car": "car_street",
+     "total": "total_2000",
+     "top_two": [
+      "pick_money",
+      "pick_green"
+     ]
+    },
+    "expected_fits": [
+     "b_893edb6df8",
+     "b_917f6a1ed1",
+     "b_377a717d0d",
+     "b_84bbe8d99e",
+     "b_0ba5cc966d",
+     "b_b29a9ae0e3",
+     "b_c4831201c1"
+    ],
+    "expected_doesnt_fit": [
+     "b_e39cde86f4",
+     "b_f95c86db48",
+     "b_1d1be12629",
+     "b_66dc364565",
+     "b_d007846fe9",
+     "b_296b3095f3",
+     "b_674db3118a",
+     "b_0f0fcfc79c",
+     "b_0e634d994b",
+     "b_5204934871",
+     "b_e2378bf884",
+     "b_fec325fa9f",
+     "b_ee2549a834",
+     "b_5f84c933a2",
+     "b_022934bcb2"
+    ],
+    "order": [
+     "b_893edb6df8",
+     "b_917f6a1ed1",
+     "b_377a717d0d",
+     "b_84bbe8d99e",
+     "b_0ba5cc966d",
+     "b_b29a9ae0e3",
+     "b_c4831201c1"
+    ],
+    "failing": [
+     "b_e39cde86f4",
+     "b_f95c86db48",
+     "b_1d1be12629",
+     "b_66dc364565",
+     "b_d007846fe9",
+     "b_296b3095f3",
+     "b_674db3118a",
+     "b_0f0fcfc79c",
+     "b_0e634d994b",
+     "b_5204934871",
+     "b_e2378bf884",
+     "b_fec325fa9f",
+     "b_ee2549a834",
+     "b_5f84c933a2",
+     "b_022934bcb2"
+    ],
+    "expected_scores": {
+     "b_022934bcb2": 89.275,
+     "b_0ba5cc966d": 108.165,
+     "b_0e634d994b": 99.965,
+     "b_0f0fcfc79c": 104.11,
+     "b_1d1be12629": 112.52,
+     "b_296b3095f3": 107.365,
+     "b_377a717d0d": 110.585,
+     "b_5204934871": 99.225,
+     "b_5f84c933a2": 91.3,
+     "b_66dc364565": 112.04,
+     "b_674db3118a": 105.705,
+     "b_84bbe8d99e": 110.52,
+     "b_893edb6df8": 115.96,
+     "b_917f6a1ed1": 110.705,
+     "b_b29a9ae0e3": 103.805,
+     "b_c4831201c1": 83.72,
+     "b_d007846fe9": 107.93,
+     "b_e2378bf884": 97.225,
+     "b_e39cde86f4": 117.38,
+     "b_ee2549a834": 91.88,
+     "b_f95c86db48": 113.42,
+     "b_fec325fa9f": 92.32
+    }
+   },
+   {
+    "name": "every other week, within 1½ hours, going out and parking",
+    "answers": {
+     "visits": "visits_fortnightly",
+     "drive": "drive_90",
+     "saturday": "sat_walk",
+     "car": "car_garage",
+     "total": "total_2100",
+     "top_two": [
+      "pick_going_out",
+      "pick_parking"
+     ]
+    },
+    "expected_fits": [
+     "b_377a717d0d",
+     "b_84bbe8d99e",
+     "b_0f0fcfc79c",
+     "b_893edb6df8",
+     "b_917f6a1ed1",
+     "b_b29a9ae0e3",
+     "b_5f84c933a2",
+     "b_296b3095f3",
+     "b_c4831201c1"
+    ],
+    "expected_doesnt_fit": [
+     "b_d007846fe9",
+     "b_1d1be12629",
+     "b_674db3118a",
+     "b_f95c86db48",
+     "b_e39cde86f4",
+     "b_66dc364565",
+     "b_fec325fa9f",
+     "b_ee2549a834",
+     "b_0ba5cc966d",
+     "b_0e634d994b",
+     "b_5204934871",
+     "b_e2378bf884",
+     "b_022934bcb2"
+    ],
+    "order": [
+     "b_377a717d0d",
+     "b_84bbe8d99e",
+     "b_0f0fcfc79c",
+     "b_893edb6df8",
+     "b_917f6a1ed1",
+     "b_b29a9ae0e3",
+     "b_5f84c933a2",
+     "b_296b3095f3",
+     "b_c4831201c1"
+    ],
+    "failing": [
+     "b_d007846fe9",
+     "b_1d1be12629",
+     "b_674db3118a",
+     "b_f95c86db48",
+     "b_e39cde86f4",
+     "b_66dc364565",
+     "b_fec325fa9f",
+     "b_ee2549a834",
+     "b_0ba5cc966d",
+     "b_0e634d994b",
+     "b_5204934871",
+     "b_e2378bf884",
+     "b_022934bcb2"
+    ],
+    "expected_scores": {
+     "b_022934bcb2": 78.42,
+     "b_0ba5cc966d": 99.68,
+     "b_0e634d994b": 99.56,
+     "b_0f0fcfc79c": 131.79,
+     "b_1d1be12629": 142.21,
+     "b_296b3095f3": 86.71,
+     "b_377a717d0d": 133.93,
+     "b_5204934871": 99.37,
+     "b_5f84c933a2": 87.84,
+     "b_66dc364565": 116.95,
+     "b_674db3118a": 126.3,
+     "b_84bbe8d99e": 132.45,
+     "b_893edb6df8": 127.66,
+     "b_917f6a1ed1": 111.17,
+     "b_b29a9ae0e3": 96.95,
+     "b_c4831201c1": 84.19,
+     "b_d007846fe9": 148.59,
+     "b_e2378bf884": 95.86,
+     "b_e39cde86f4": 121.16,
+     "b_ee2549a834": 103.98,
+     "b_f95c86db48": 124.07,
+     "b_fec325fa9f": 112.48
+    }
+   }
+  ],
+  "walk_pace": "Walking minutes are straight-line metres x 1.3 / 80 m a minute, as the park walks elsewhere on the page; miles are straight line. Counts 'within a 10-minute walk' are mapped places within 800 m.",
+  "life_here_facts": {
+   "file": "present",
+   "rows": 109,
+   "used_high": 62,
+   "skipped": {
+    "confidence medium": 42,
+    "moment neighborhood (not one of the four)": 5
+   }
+  },
+  "life_here_counts": {
+   "weekday": 22,
+   "saturday": 21,
+   "sunday": 22,
+   "dog": 22
+  }
  },
  "experiences": [
   {
@@ -272,7 +666,8 @@
      "icon": "warning",
      "text": "The typical drive to Mom and Dad is about 82 minutes, each way."
     }
-   ]
+   ],
+   "line": "Towns farther out, with more space for you in Hamden and East Orange."
   },
   {
    "id": "middle",
@@ -374,7 +769,8 @@
      "icon": "warning",
      "text": "The typical drive to Mom and Dad is about 54 minutes, so visits take planning."
     }
-   ]
+   ],
+   "line": "Small cities with a walkable downtown, and a longer drive to Mom and Dad."
   },
   {
    "id": "settled",
@@ -473,7 +869,8 @@
      "icon": "warning",
      "text": "Street parking is crowded, so ask each building for a space."
     }
-   ]
+   ],
+   "line": "An older city neighborhood: close to Mom and Dad, except in Newark."
   }
  ],
  "neighborhoods": [
@@ -1414,7 +1811,209 @@
    },
    "why_source": "neighborhood point",
    "give_up_source": "apartment line",
-   "why_topic": "parents"
+   "why_topic": "parents",
+   "fit": {
+    "drive_min": 11.9,
+    "toll_round_trip": 0,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 2163,
+    "max_total": 2163,
+    "parking_kind": "garage",
+    "parking_included": false,
+    "parking_fee": null,
+    "garage_or_covered": true,
+    "off_street": true,
+    "dog_area_in_building": false,
+    "park_walk_min": 1.5,
+    "park_name": "Bowne Playground",
+    "dog_run_name": "Underbridge Dog Run",
+    "dog_run_m": 3335,
+    "restaurants_10min": 91,
+    "bars_10min": 3,
+    "cafes_10min": 21,
+    "sqft_max": 525,
+    "sqft_studio": 525,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 12 minutes to Mom and Dad",
+    "visits_fortnightly": "About 12 minutes to Mom and Dad",
+    "visits_monthly": "About 12 minutes to Mom and Dad",
+    "drive_30": "About 12 minutes to Mom and Dad",
+    "drive_60": "About 12 minutes to Mom and Dad",
+    "drive_90": "About 12 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 525 square feet",
+    "room_desk": "Studio only, about 525 square feet",
+    "sat_walk": "About 91 restaurants within a 10-minute walk",
+    "sat_drive": "Garage parking",
+    "sat_stay": "Up to about 525 square feet",
+    "dog_park": "Bowne Playground, 2 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Garage parking",
+    "car_offstreet": "Garage parking",
+    "total_2000": "Total about $2,163 a month",
+    "total_2100": "Total about $2,163 a month",
+    "total_2200": "Total about $2,163 a month",
+    "pick_parents": "About 12 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 525 square feet",
+    "pick_going_out": "About 91 restaurants within a 10-minute walk",
+    "pick_green": "Bowne Playground, 2 minutes on foot",
+    "pick_parking": "Garage parking",
+    "pick_money": "Total about $2,163 a month"
+   },
+   "fit_misses": {
+    "room_bedroom": "Studio only, about 525 square feet",
+    "dog_area": "No dog area listed at the building",
+    "total_2000": "Total about $2,163 a month",
+    "total_2100": "Total about $2,163 a month",
+    "pick_room": "Studio only, about 525 square feet",
+    "pick_money": "Total about $2,163 a month"
+   },
+   "experience_line": "An older city neighborhood: close to Mom and Dad, except in Newark.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Gong Cha, 4 minutes on foot, then back to the desk. For groceries, H Mart is a 3-minute walk. For a change of desk, Queens Public Library at Flushing is a 7-minute walk.",
+     "places": [
+      {
+       "name": "Gong Cha",
+       "kind": "café",
+       "walk_min": 3.5,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/9023025529"
+      },
+      {
+       "name": "H Mart",
+       "kind": "supermarket",
+       "walk_min": 3.4,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/284621757"
+      },
+      {
+       "name": "Queens Public Library at Flushing",
+       "kind": "library",
+       "walk_min": 6.9,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/284622538"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/9023025529"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/284621757"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/284622538"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "91 restaurants are within a 10-minute walk. The nearest bar, Zebra Lounge, is 9 minutes on foot. For a night out, Flushing Town Hall is an 11-minute walk.",
+     "places": [
+      {
+       "name": "Zebra Lounge",
+       "kind": "bar",
+       "walk_min": 8.9,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/5457983386"
+      },
+      {
+       "name": "Flushing Town Hall",
+       "kind": "cinema or theater",
+       "walk_min": 11.4,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/284620855"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/5457983386"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/284620855"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 12 minutes away by car, with no tolls. Bring something from U Best Bakery, a 4-minute walk.",
+     "places": [
+      {
+       "name": "U Best Bakery",
+       "kind": "bakery",
+       "walk_min": 4.0,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/9466924820"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.824287,40.759331;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/9466924820"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Bowne Playground is a 2-minute walk for the daily loop. The nearest vet, Petopia Animal Clinic, is 1.2 miles away.",
+     "places": [
+      {
+       "name": "Bowne Playground",
+       "kind": "park",
+       "walk_min": 1.5,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/425616456"
+      },
+      {
+       "name": "Petopia Animal Clinic",
+       "kind": "vet",
+       "walk_min": 31.1,
+       "distance_mi": 1.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/284515144"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/425616456"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/284515144"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_84bbe8d99e",
@@ -1564,7 +2163,209 @@
    },
    "why_source": "neighborhood good_for_her",
    "give_up_source": "neighborhood about",
-   "why_topic": "value"
+   "why_topic": "value",
+   "fit": {
+    "drive_min": 25,
+    "toll_round_trip": 0,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 1905,
+    "max_total": 1905,
+    "parking_kind": null,
+    "parking_included": null,
+    "parking_fee": null,
+    "garage_or_covered": null,
+    "off_street": null,
+    "dog_area_in_building": false,
+    "park_walk_min": 5.3,
+    "park_name": "Bill Brown Playground",
+    "dog_run_name": "Manhattan Beach Dog Run",
+    "dog_run_m": 1865,
+    "restaurants_10min": 21,
+    "bars_10min": 1,
+    "cafes_10min": 10,
+    "sqft_max": 519,
+    "sqft_studio": 519,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 25 minutes to Mom and Dad",
+    "visits_fortnightly": "About 25 minutes to Mom and Dad",
+    "visits_monthly": "About 25 minutes to Mom and Dad",
+    "drive_30": "About 25 minutes to Mom and Dad",
+    "drive_60": "About 25 minutes to Mom and Dad",
+    "drive_90": "About 25 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 519 square feet",
+    "room_desk": "Studio only, about 519 square feet",
+    "sat_walk": "About 21 restaurants within a 10-minute walk",
+    "sat_drive": "Parking not named in the listing",
+    "sat_stay": "Up to about 519 square feet",
+    "dog_park": "Bill Brown Playground, 5 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $1,905 a month",
+    "total_2100": "Total about $1,905 a month",
+    "total_2200": "Total about $1,905 a month",
+    "pick_parents": "About 25 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 519 square feet",
+    "pick_going_out": "About 21 restaurants within a 10-minute walk",
+    "pick_green": "Bill Brown Playground, 5 minutes on foot",
+    "pick_parking": "Parking not named in the listing",
+    "pick_money": "Total about $1,905 a month"
+   },
+   "fit_misses": {
+    "room_bedroom": "Studio only, about 519 square feet",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "pick_room": "Studio only, about 519 square feet",
+    "pick_parking": "Parking not named in the listing"
+   },
+   "experience_line": "An older city neighborhood: close to Mom and Dad, except in Newark.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Pep Bakehouse & Coffee Shop, 7 minutes on foot, then back to the desk. For groceries, NetCost Market is a 7-minute walk. For a change of desk, Kings Bay Library is a 13-minute walk.",
+     "places": [
+      {
+       "name": "Pep Bakehouse & Coffee Shop",
+       "kind": "café",
+       "walk_min": 6.6,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/10208288369"
+      },
+      {
+       "name": "NetCost Market",
+       "kind": "supermarket",
+       "walk_min": 7.4,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/9364569285"
+      },
+      {
+       "name": "Kings Bay Library",
+       "kind": "library",
+       "walk_min": 12.5,
+       "distance_mi": 0.5,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/249730311"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/10208288369"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/9364569285"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/249730311"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "21 restaurants are within a 10-minute walk. The nearest bar, Next, is 3 minutes on foot.",
+     "places": [
+      {
+       "name": "Next",
+       "kind": "bar",
+       "walk_min": 3.0,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/13012366637"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/13012366637"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 25 minutes away by car, with no tolls. Bring something from Brooklyn Bread House, an 11-minute walk.",
+     "places": [
+      {
+       "name": "Brooklyn Bread House",
+       "kind": "bakery",
+       "walk_min": 11.2,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/2858289880"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.950050,40.593403;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/2858289880"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Bill Brown Playground is a 5-minute walk for the daily loop. Manhattan Beach Dog Run is 1.2 miles away. The nearest vet, South Brooklyn Animal Clinic, is an 18-minute walk.",
+     "places": [
+      {
+       "name": "Bill Brown Playground",
+       "kind": "park",
+       "walk_min": 5.3,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/184676319"
+      },
+      {
+       "name": "Manhattan Beach Dog Run",
+       "kind": "dog run",
+       "walk_min": 30.3,
+       "distance_mi": 1.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/955051726"
+      },
+      {
+       "name": "South Brooklyn Animal Clinic",
+       "kind": "vet",
+       "walk_min": 18.2,
+       "distance_mi": 0.7,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/4478247670"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/184676319"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/955051726"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/4478247670"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_66dc364565",
@@ -1721,7 +2522,179 @@
    },
    "why_source": "building point",
    "give_up_source": "neighborhood watch_for",
-   "why_topic": "dog"
+   "why_topic": "dog",
+   "fit": {
+    "drive_min": 44.1,
+    "toll_round_trip": 38.71,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 2157,
+    "max_total": 2157,
+    "parking_kind": "garage",
+    "parking_included": false,
+    "parking_fee": null,
+    "garage_or_covered": true,
+    "off_street": true,
+    "dog_area_in_building": true,
+    "park_walk_min": 6.6,
+    "park_name": "Monsignor Owens Park",
+    "dog_run_name": null,
+    "dog_run_m": 1395,
+    "restaurants_10min": 5,
+    "bars_10min": 1,
+    "cafes_10min": 0,
+    "sqft_max": 636,
+    "sqft_studio": 636,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 44 minutes to Mom and Dad",
+    "visits_fortnightly": "About 44 minutes to Mom and Dad",
+    "visits_monthly": "About 44 minutes to Mom and Dad",
+    "drive_30": "About 44 minutes to Mom and Dad",
+    "drive_60": "About 44 minutes to Mom and Dad",
+    "drive_90": "About 44 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 636 square feet",
+    "room_desk": "Studio only, about 636 square feet",
+    "sat_walk": "5 restaurants within a 10-minute walk",
+    "sat_drive": "Garage parking",
+    "sat_stay": "Up to about 636 square feet",
+    "dog_park": "Monsignor Owens Park, 7 minutes on foot",
+    "dog_area": "A dog area at the building",
+    "car_garage": "Garage parking",
+    "car_offstreet": "Garage parking",
+    "total_2000": "Total about $2,157 a month",
+    "total_2100": "Total about $2,157 a month",
+    "total_2200": "Total about $2,157 a month",
+    "pick_parents": "About 44 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 636 square feet",
+    "pick_going_out": "5 restaurants within a 10-minute walk",
+    "pick_green": "Monsignor Owens Park, 7 minutes on foot",
+    "pick_parking": "Garage parking",
+    "pick_money": "Total about $2,157 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 44 minutes to Mom and Dad",
+    "drive_30": "About 44 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 636 square feet",
+    "sat_walk": "5 restaurants within a 10-minute walk",
+    "total_2000": "Total about $2,157 a month",
+    "total_2100": "Total about $2,157 a month",
+    "pick_room": "Studio only, about 636 square feet",
+    "pick_going_out": "5 restaurants within a 10-minute walk",
+    "pick_money": "Total about $2,157 a month"
+   },
+   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "For groceries, ShopRite is a 1-minute walk.",
+     "places": [
+      {
+       "name": "ShopRite",
+       "kind": "supermarket",
+       "walk_min": 1.4,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/1102721744"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/1102721744"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "5 restaurants are within a 10-minute walk. The nearest bar, JK's Boathouse Pub, is 11 minutes on foot.",
+     "places": [
+      {
+       "name": "JK's Boathouse Pub",
+       "kind": "bar",
+       "walk_min": 11.1,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/1320115939"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/1320115939"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 44 minutes away by car, about $39 round trip in tolls.",
+     "places": [],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-74.145570,40.805657;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: Port Authority of NY & NJ",
+       "url": "https://www.panynj.gov/bridges-tunnels/en/tolls.html"
+      },
+      {
+       "name": "Toll rates: MTA (Triborough Bridge and Tunnel Authority)",
+       "url": "https://www.governor.ny.gov/news/putting-commuters-first-keeping-costs-down-governor-hochul-unveils-plans-future-transit-and"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Monsignor Owens Park is a 7-minute walk for the daily loop. The building lists its own dog area. The nearest vet, Rutherford Animal Hospital, is 2.0 miles away.",
+     "places": [
+      {
+       "name": "Monsignor Owens Park",
+       "kind": "park",
+       "walk_min": 6.6,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/39647948"
+      },
+      {
+       "name": "Rutherford Animal Hospital",
+       "kind": "vet",
+       "walk_min": 51.6,
+       "distance_mi": 2.0,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/650384021"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/39647948"
+      },
+      {
+       "name": "The building's listing",
+       "url": "https://www.trulia.com/building/ethos-kelsey-740-748-washington-ave-belleville-nj-07109-2746633852"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/650384021"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_296b3095f3",
@@ -1902,7 +2875,144 @@
    },
    "why_source": "building about",
    "give_up_source": "neighborhood scene",
-   "why_topic": "green"
+   "why_topic": "green",
+   "fit": {
+    "drive_min": 52,
+    "toll_round_trip": 43.05,
+    "has_one_bedroom": true,
+    "has_studio": false,
+    "studio_only": false,
+    "min_total": 2097,
+    "max_total": 2131,
+    "parking_kind": "lot",
+    "parking_included": false,
+    "parking_fee": null,
+    "garage_or_covered": false,
+    "off_street": true,
+    "dog_area_in_building": false,
+    "park_walk_min": 2.1,
+    "park_name": "Orange Park",
+    "dog_run_name": "Watsessing Dog Park",
+    "dog_run_m": 3718,
+    "restaurants_10min": 0,
+    "bars_10min": 0,
+    "cafes_10min": 0,
+    "sqft_max": 912,
+    "sqft_studio": null,
+    "sqft_one_bedroom": 912
+   },
+   "fit_chips": {
+    "visits_weekly": "About 52 minutes to Mom and Dad",
+    "visits_fortnightly": "About 52 minutes to Mom and Dad",
+    "visits_monthly": "About 52 minutes to Mom and Dad",
+    "drive_30": "About 52 minutes to Mom and Dad",
+    "drive_60": "About 52 minutes to Mom and Dad",
+    "drive_90": "About 52 minutes to Mom and Dad",
+    "room_bedroom": "Separate bedroom, about 912 square feet",
+    "room_desk": "Separate bedroom, about 912 square feet",
+    "sat_walk": "No restaurants within a 10-minute walk",
+    "sat_drive": "A parking lot",
+    "sat_stay": "Up to about 912 square feet",
+    "dog_park": "Orange Park, 2 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "A parking lot",
+    "car_offstreet": "A parking lot",
+    "total_2000": "Total from about $2,097 a month",
+    "total_2100": "Total from about $2,097 a month",
+    "total_2200": "Total from about $2,097 a month",
+    "pick_parents": "About 52 minutes to Mom and Dad",
+    "pick_room": "Separate bedroom, about 912 square feet",
+    "pick_going_out": "No restaurants within a 10-minute walk",
+    "pick_green": "Orange Park, 2 minutes on foot",
+    "pick_parking": "A parking lot",
+    "pick_money": "Total from about $2,097 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 52 minutes to Mom and Dad",
+    "drive_30": "About 52 minutes to Mom and Dad",
+    "sat_walk": "No restaurants within a 10-minute walk",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "A parking lot",
+    "total_2000": "Total from about $2,097 a month",
+    "pick_going_out": "No restaurants within a 10-minute walk"
+   },
+   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "For groceries, ShopRite is a 19-minute walk.",
+     "places": [
+      {
+       "name": "ShopRite",
+       "kind": "supermarket",
+       "walk_min": 18.6,
+       "distance_mi": 0.7,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/4485772808"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/4485772808"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 52 minutes away by car, about $43 round trip in tolls.",
+     "places": [],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-74.228924,40.759795;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: New Jersey Turnpike Authority",
+       "url": "https://www.njta.gov/wp-json/njta/v1/partials?slug=map%2Ftrip-details&tab=turnpike&vehicle-type=1&green-discount=false&senior-discount=false&entrance=15W&exit=16E"
+      },
+      {
+       "name": "Toll rates: Port Authority of NY & NJ",
+       "url": "https://www.panynj.gov/bridges-tunnels/en/tolls.html"
+      },
+      {
+       "name": "Toll rates: MTA (Triborough Bridge and Tunnel Authority)",
+       "url": "https://www.governor.ny.gov/news/putting-commuters-first-keeping-costs-down-governor-hochul-unveils-plans-future-transit-and"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "Toll rates: New Jersey Turnpike Authority",
+       "url": "https://www.njta.gov/wp-json/njta/v1/partials?slug=map%2Ftrip-details&tab=turnpike&vehicle-type=1&green-discount=false&senior-discount=false&entrance=16E&exit=15W"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Orange Park is a 2-minute walk for the daily loop.",
+     "places": [
+      {
+       "name": "Orange Park",
+       "kind": "park",
+       "walk_min": 2.1,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/39680064"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/39680064"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_917f6a1ed1",
@@ -2232,7 +3342,252 @@
    },
    "why_source": "neighborhood point",
    "give_up_source": "neighborhood point",
-   "why_topic": "green"
+   "why_topic": "green",
+   "fit": {
+    "drive_min": 81.5,
+    "toll_round_trip": 16.66,
+    "has_one_bedroom": true,
+    "has_studio": true,
+    "studio_only": false,
+    "min_total": 1703,
+    "max_total": 2167,
+    "parking_kind": "garage",
+    "parking_included": false,
+    "parking_fee": 100,
+    "garage_or_covered": true,
+    "off_street": true,
+    "dog_area_in_building": false,
+    "park_walk_min": 2.1,
+    "park_name": null,
+    "dog_run_name": null,
+    "dog_run_m": 6042,
+    "restaurants_10min": 4,
+    "bars_10min": 0,
+    "cafes_10min": 1,
+    "sqft_max": 751,
+    "sqft_studio": 491,
+    "sqft_one_bedroom": 751
+   },
+   "fit_chips": {
+    "visits_weekly": "About 82 minutes to Mom and Dad",
+    "visits_fortnightly": "About 82 minutes to Mom and Dad",
+    "visits_monthly": "About 82 minutes to Mom and Dad",
+    "drive_30": "About 82 minutes to Mom and Dad",
+    "drive_60": "About 82 minutes to Mom and Dad",
+    "drive_90": "About 82 minutes to Mom and Dad",
+    "room_bedroom": "Separate bedroom, about 751 square feet",
+    "room_desk": "Separate bedroom, about 751 square feet",
+    "sat_walk": "4 restaurants within a 10-minute walk",
+    "sat_drive": "Garage parking, $100 a month",
+    "sat_stay": "Up to about 751 square feet",
+    "dog_park": "A park 2 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Garage parking, $100 a month",
+    "car_offstreet": "Garage parking, $100 a month",
+    "total_2000": "Total from about $1,703 a month",
+    "total_2100": "Total from about $1,703 a month",
+    "total_2200": "Total from about $1,703 a month",
+    "pick_parents": "About 82 minutes to Mom and Dad",
+    "pick_room": "Separate bedroom, about 751 square feet",
+    "pick_going_out": "4 restaurants within a 10-minute walk",
+    "pick_green": "A park 2 minutes on foot",
+    "pick_parking": "Garage parking, $100 a month",
+    "pick_money": "Total from about $1,703 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 82 minutes to Mom and Dad",
+    "visits_fortnightly": "About 82 minutes to Mom and Dad",
+    "drive_30": "About 82 minutes to Mom and Dad",
+    "drive_60": "About 82 minutes to Mom and Dad",
+    "sat_walk": "4 restaurants within a 10-minute walk",
+    "dog_area": "No dog area listed at the building",
+    "pick_parents": "About 82 minutes to Mom and Dad",
+    "pick_going_out": "4 restaurants within a 10-minute walk"
+   },
+   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Starbucks, 11 minutes on foot, then back to the desk. The downtown district runs a weekday farmers market on McLevy Green, at Main and Bank Streets (Thursdays 10:30am to 2pm, July to October). For groceries, Save-A-Lot is 0.9 miles away.",
+     "places": [
+      {
+       "name": "Starbucks",
+       "kind": "café",
+       "walk_min": 10.7,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/3899856136"
+      },
+      {
+       "name": "McLevy Green",
+       "official_name": "Downtown Market at McLevy Green",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "Main and Bank Streets",
+       "official_name": "Main and Bank Streets",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "Save-A-Lot",
+       "kind": "supermarket",
+       "walk_min": 22.6,
+       "distance_mi": 0.9,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/3446734677"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3899856136"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3446734677"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "4 restaurants are within a 10-minute walk. The Stress Factory comedy club downtown has stand-up shows most Thursday to Sunday nights. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre.",
+     "places": [
+      {
+       "name": "Stress Factory comedy club",
+       "official_name": "Vinnie Brand's Stress Factory Comedy Club",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "The Bijou",
+       "official_name": "The Bijou Theatre",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bijou Theatre",
+       "source_url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Fairfield Avenue",
+       "official_name": "Fairfield Avenue",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bijou Theatre",
+       "source_url": "https://www.bijoutheatrect.com/"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District events calendar",
+       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "Bijou Theatre",
+       "url": "https://www.bijoutheatrect.com/"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 82 minutes away by car, about $17 round trip in tolls. On some Sunday afternoons Berlinetta's taproom has three hours of small-group jazz, with no cover charge (Sundays 3pm to 6pm, recurring sessions).",
+     "places": [
+      {
+       "name": "Berlinetta",
+       "official_name": "Gold Note Jazz at Berlinetta",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District, event page",
+       "source_url": "https://www.colorfulbridgeport.com/event/gold-note-jazz-session-xiii/"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.189739,41.177351;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "Toll rates: NYS Thruway Authority",
+       "url": "https://thruway.ny.gov/sites/default/files/2025-07/gantry-rate-toll-charts.pdf"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District, event page",
+       "url": "https://www.colorfulbridgeport.com/event/gold-note-jazz-session-xiii/"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "The nearest park is a 2-minute walk for the daily loop. Seaside Park is 325 acres of lawns and shore on Long Island Sound, laid out by Olmsted and Vaux. It is 1.4 miles away.",
+     "places": [
+      {
+       "name": "Seaside Park",
+       "official_name": "Seaside Park",
+       "kind": "park",
+       "walk_min": 37.7,
+       "distance_mi": 1.4,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Long Island Sound",
+       "official_name": "Long Island Sound",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Olmsted and Vaux",
+       "official_name": "Olmsted and Vaux",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/43398264"
+      },
+      {
+       "name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_1d1be12629",
@@ -2387,7 +3742,211 @@
    },
    "why_source": "building point",
    "give_up_source": "neighborhood about",
-   "why_topic": "going_out"
+   "why_topic": "going_out",
+   "fit": {
+    "drive_min": 11.9,
+    "toll_round_trip": 0,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 2135,
+    "max_total": 2135,
+    "parking_kind": null,
+    "parking_included": null,
+    "parking_fee": null,
+    "garage_or_covered": null,
+    "off_street": null,
+    "dog_area_in_building": false,
+    "park_walk_min": 1.5,
+    "park_name": "Margaret I. Carman Green - Weeping Beech",
+    "dog_run_name": null,
+    "dog_run_m": 3671,
+    "restaurants_10min": 45,
+    "bars_10min": 3,
+    "cafes_10min": 11,
+    "sqft_max": null,
+    "sqft_studio": null,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 12 minutes to Mom and Dad",
+    "visits_fortnightly": "About 12 minutes to Mom and Dad",
+    "visits_monthly": "About 12 minutes to Mom and Dad",
+    "drive_30": "About 12 minutes to Mom and Dad",
+    "drive_60": "About 12 minutes to Mom and Dad",
+    "drive_90": "About 12 minutes to Mom and Dad",
+    "room_bedroom": "Studio only",
+    "room_desk": "A studio; size not published",
+    "sat_walk": "About 45 restaurants within a 10-minute walk",
+    "sat_drive": "Parking not named in the listing",
+    "dog_park": "A park 2 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $2,135 a month",
+    "total_2100": "Total about $2,135 a month",
+    "total_2200": "Total about $2,135 a month",
+    "pick_parents": "About 12 minutes to Mom and Dad",
+    "pick_room": "Studio only",
+    "pick_going_out": "About 45 restaurants within a 10-minute walk",
+    "pick_green": "A park 2 minutes on foot",
+    "pick_parking": "Parking not named in the listing",
+    "pick_money": "Total about $2,135 a month"
+   },
+   "fit_misses": {
+    "room_bedroom": "Studio only",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $2,135 a month",
+    "total_2100": "Total about $2,135 a month",
+    "pick_room": "Studio only",
+    "pick_parking": "Parking not named in the listing",
+    "pick_money": "Total about $2,135 a month"
+   },
+   "experience_line": "An older city neighborhood: close to Mom and Dad, except in Newark.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Tous les Jours, 8 minutes on foot, then back to the desk. For groceries, Great Wall Supermarket is a 2-minute walk. For a change of desk, Queens Library at Mitchell-Linden is an 11-minute walk.",
+     "places": [
+      {
+       "name": "Tous les Jours",
+       "kind": "café",
+       "walk_min": 8.1,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/4959225990"
+      },
+      {
+       "name": "Great Wall Supermarket",
+       "kind": "supermarket",
+       "walk_min": 2.2,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/533864729"
+      },
+      {
+       "name": "Queens Library at Mitchell-Linden",
+       "kind": "library",
+       "walk_min": 10.9,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/10948389845"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/4959225990"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/533864729"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/10948389845"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "45 restaurants are within a 10-minute walk. The nearest bar, Zebra Lounge, is 12 minutes on foot. For a night out, Flushing Town Hall is a 10-minute walk.",
+     "places": [
+      {
+       "name": "Zebra Lounge",
+       "kind": "bar",
+       "walk_min": 11.7,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/5457983386"
+      },
+      {
+       "name": "Flushing Town Hall",
+       "kind": "cinema or theater",
+       "walk_min": 10.2,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/284620855"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/5457983386"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/284620855"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 12 minutes away by car, with no tolls. Bring something from Tous les Jours, an 8-minute walk.",
+     "places": [
+      {
+       "name": "Tous les Jours",
+       "kind": "bakery",
+       "walk_min": 8.1,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/4959225990"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.822647,40.763901;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/4959225990"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Margaret I. Carman Green - Weeping Beech is a 2-minute walk for the daily loop. The nearest vet, Petopia Animal Clinic, is 1.1 miles away.",
+     "places": [
+      {
+       "name": "Margaret I. Carman Green - Weeping Beech",
+       "kind": "park",
+       "walk_min": 1.5,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/836889897"
+      },
+      {
+       "name": "Petopia Animal Clinic",
+       "kind": "vet",
+       "walk_min": 29.3,
+       "distance_mi": 1.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/284515144"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/836889897"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/284515144"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_0f0fcfc79c",
@@ -2545,7 +4104,223 @@
    },
    "why_source": "building about",
    "give_up_source": "building point",
-   "why_topic": "going_out"
+   "why_topic": "going_out",
+   "fit": {
+    "drive_min": 10.4,
+    "toll_round_trip": 0,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 2079,
+    "max_total": 2079,
+    "parking_kind": "street",
+    "parking_included": false,
+    "parking_fee": null,
+    "garage_or_covered": false,
+    "off_street": false,
+    "dog_area_in_building": false,
+    "park_walk_min": 7.2,
+    "park_name": "Flushing Meadows-Corona Park",
+    "dog_run_name": "Underbridge Dog Run",
+    "dog_run_m": 2767,
+    "restaurants_10min": 89,
+    "bars_10min": 3,
+    "cafes_10min": 22,
+    "sqft_max": 600,
+    "sqft_studio": 600,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 10 minutes to Mom and Dad",
+    "visits_fortnightly": "About 10 minutes to Mom and Dad",
+    "visits_monthly": "About 10 minutes to Mom and Dad",
+    "drive_30": "About 10 minutes to Mom and Dad",
+    "drive_60": "About 10 minutes to Mom and Dad",
+    "drive_90": "About 10 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 600 square feet",
+    "room_desk": "Studio only, about 600 square feet",
+    "sat_walk": "About 89 restaurants within a 10-minute walk",
+    "sat_drive": "Street parking only",
+    "sat_stay": "Up to about 600 square feet",
+    "dog_park": "Flushing Meadows-Corona Park, 7 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Street parking only",
+    "car_offstreet": "Street parking only",
+    "total_2000": "Total about $2,079 a month",
+    "total_2100": "Total about $2,079 a month",
+    "total_2200": "Total about $2,079 a month",
+    "pick_parents": "About 10 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 600 square feet",
+    "pick_going_out": "About 89 restaurants within a 10-minute walk",
+    "pick_green": "Flushing Meadows-Corona Park, 7 minutes on foot",
+    "pick_parking": "Street parking only",
+    "pick_money": "Total about $2,079 a month"
+   },
+   "fit_misses": {
+    "room_bedroom": "Studio only, about 600 square feet",
+    "sat_drive": "Street parking only",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Street parking only",
+    "car_offstreet": "Street parking only",
+    "total_2000": "Total about $2,079 a month",
+    "pick_room": "Studio only, about 600 square feet",
+    "pick_parking": "Street parking only"
+   },
+   "experience_line": "An older city neighborhood: close to Mom and Dad, except in Newark.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Starbucks, 4 minutes on foot, then back to the desk. For groceries, Chung Fat is a 2-minute walk. For a change of desk, Queens Public Library at Flushing is a 4-minute walk.",
+     "places": [
+      {
+       "name": "Starbucks",
+       "kind": "café",
+       "walk_min": 4.0,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/2883480565"
+      },
+      {
+       "name": "Chung Fat",
+       "kind": "supermarket",
+       "walk_min": 1.6,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/5455592025"
+      },
+      {
+       "name": "Queens Public Library at Flushing",
+       "kind": "library",
+       "walk_min": 3.7,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/284622538"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/2883480565"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/5455592025"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/284622538"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "89 restaurants are within a 10-minute walk. The nearest bar, The Compass, is 8 minutes on foot. For a night out, Regal Tangram 4DX is a 10-minute walk.",
+     "places": [
+      {
+       "name": "The Compass",
+       "kind": "bar",
+       "walk_min": 8.2,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/13963058101"
+      },
+      {
+       "name": "Regal Tangram 4DX",
+       "kind": "cinema or theater",
+       "walk_min": 9.8,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/9649218717"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/13963058101"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/9649218717"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 10 minutes away by car, with no tolls. Bring something from Fay Da Bakery, a 1-minute walk.",
+     "places": [
+      {
+       "name": "Fay Da Bakery",
+       "kind": "bakery",
+       "walk_min": 1.4,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/8085618891"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.829702,40.755807;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/8085618891"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Flushing Meadows-Corona Park is a 7-minute walk for the daily loop. Underbridge Dog Run is 1.7 miles away. The nearest vet, Petopia Animal Clinic, is 1.5 miles away.",
+     "places": [
+      {
+       "name": "Flushing Meadows-Corona Park",
+       "kind": "park",
+       "walk_min": 7.2,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/relation/14402283"
+      },
+      {
+       "name": "Underbridge Dog Run",
+       "kind": "dog run",
+       "walk_min": 45.0,
+       "distance_mi": 1.7,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/484568724"
+      },
+      {
+       "name": "Petopia Animal Clinic",
+       "kind": "vet",
+       "walk_min": 39.5,
+       "distance_mi": 1.5,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/284515144"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/relation/14402283"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/484568724"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/284515144"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_e39cde86f4",
@@ -2703,7 +4478,210 @@
    },
    "why_source": "building about",
    "give_up_source": "neighborhood watch_for",
-   "why_topic": "green"
+   "why_topic": "green",
+   "fit": {
+    "drive_min": 50.7,
+    "toll_round_trip": 38.71,
+    "has_one_bedroom": true,
+    "has_studio": false,
+    "studio_only": false,
+    "min_total": 2112,
+    "max_total": 2112,
+    "parking_kind": null,
+    "parking_included": null,
+    "parking_fee": null,
+    "garage_or_covered": null,
+    "off_street": null,
+    "dog_area_in_building": false,
+    "park_walk_min": 3,
+    "park_name": "The Glen",
+    "dog_run_name": null,
+    "dog_run_m": 1007,
+    "restaurants_10min": 18,
+    "bars_10min": 1,
+    "cafes_10min": 3,
+    "sqft_max": 564,
+    "sqft_studio": null,
+    "sqft_one_bedroom": 564
+   },
+   "fit_chips": {
+    "visits_weekly": "About 51 minutes to Mom and Dad",
+    "visits_fortnightly": "About 51 minutes to Mom and Dad",
+    "visits_monthly": "About 51 minutes to Mom and Dad",
+    "drive_30": "About 51 minutes to Mom and Dad",
+    "drive_60": "About 51 minutes to Mom and Dad",
+    "drive_90": "About 51 minutes to Mom and Dad",
+    "room_bedroom": "Separate bedroom, about 564 square feet",
+    "room_desk": "Separate bedroom, about 564 square feet",
+    "sat_walk": "About 18 restaurants within a 10-minute walk",
+    "sat_drive": "Parking not named in the listing",
+    "sat_stay": "Up to about 564 square feet",
+    "dog_park": "The Glen, 3 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $2,112 a month",
+    "total_2100": "Total about $2,112 a month",
+    "total_2200": "Total about $2,112 a month",
+    "pick_parents": "About 51 minutes to Mom and Dad",
+    "pick_room": "Separate bedroom, about 564 square feet",
+    "pick_going_out": "About 18 restaurants within a 10-minute walk",
+    "pick_green": "The Glen, 3 minutes on foot",
+    "pick_parking": "Parking not named in the listing",
+    "pick_money": "Total about $2,112 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 51 minutes to Mom and Dad",
+    "drive_30": "About 51 minutes to Mom and Dad",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $2,112 a month",
+    "total_2100": "Total about $2,112 a month",
+    "pick_parking": "Parking not named in the listing"
+   },
+   "experience_line": "Small cities with a walkable downtown, and a longer drive to Mom and Dad.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Starbucks, 3 minutes on foot, then back to the desk. For groceries, Super Foodtown of Bloomfield is an 11-minute walk. For a change of desk, Bloomfield Public Library is a 4-minute walk.",
+     "places": [
+      {
+       "name": "Starbucks",
+       "kind": "café",
+       "walk_min": 2.6,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/11163134605"
+      },
+      {
+       "name": "Super Foodtown of Bloomfield",
+       "kind": "supermarket",
+       "walk_min": 10.9,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/9934384058"
+      },
+      {
+       "name": "Bloomfield Public Library",
+       "kind": "library",
+       "walk_min": 4.3,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/1071175227"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/11163134605"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/9934384058"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/1071175227"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "18 restaurants are within a 10-minute walk. The nearest bar, Six Points, is 11 minutes on foot. For a night out, VanFossan Theater is a 10-minute walk.",
+     "places": [
+      {
+       "name": "Six Points",
+       "kind": "bar",
+       "walk_min": 10.5,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/9934384060"
+      },
+      {
+       "name": "VanFossan Theater",
+       "kind": "cinema or theater",
+       "walk_min": 9.8,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/11946031284"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/9934384060"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/11946031284"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 51 minutes away by car, about $39 round trip in tolls.",
+     "places": [],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-74.199990,40.798597;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: Port Authority of NY & NJ",
+       "url": "https://www.panynj.gov/bridges-tunnels/en/tolls.html"
+      },
+      {
+       "name": "Toll rates: MTA (Triborough Bridge and Tunnel Authority)",
+       "url": "https://www.governor.ny.gov/news/putting-commuters-first-keeping-costs-down-governor-hochul-unveils-plans-future-transit-and"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "The Glen is a 3-minute walk for the daily loop. The nearest vet, Essex Animal Hospital, is a 2-minute walk.",
+     "places": [
+      {
+       "name": "The Glen",
+       "kind": "park",
+       "walk_min": 3,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/421886763"
+      },
+      {
+       "name": "Essex Animal Hospital",
+       "kind": "vet",
+       "walk_min": 1.9,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/1289202477"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/421886763"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/1289202477"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_674db3118a",
@@ -2862,7 +4840,178 @@
    },
    "why_source": "neighborhood point",
    "give_up_source": "apartment line",
-   "why_topic": "parking"
+   "why_topic": "parking",
+   "fit": {
+    "drive_min": 28.7,
+    "toll_round_trip": 0,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 2254,
+    "max_total": 2254,
+    "parking_kind": "garage",
+    "parking_included": false,
+    "parking_fee": 200,
+    "garage_or_covered": true,
+    "off_street": true,
+    "dog_area_in_building": false,
+    "park_walk_min": 0.7,
+    "park_name": null,
+    "dog_run_name": "Dyker Beach Park",
+    "dog_run_m": 2687,
+    "restaurants_10min": 8,
+    "bars_10min": 0,
+    "cafes_10min": 1,
+    "sqft_max": null,
+    "sqft_studio": null,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 29 minutes to Mom and Dad",
+    "visits_fortnightly": "About 29 minutes to Mom and Dad",
+    "visits_monthly": "About 29 minutes to Mom and Dad",
+    "drive_30": "About 29 minutes to Mom and Dad",
+    "drive_60": "About 29 minutes to Mom and Dad",
+    "drive_90": "About 29 minutes to Mom and Dad",
+    "room_bedroom": "Studio only",
+    "room_desk": "A studio; size not published",
+    "sat_walk": "8 restaurants within a 10-minute walk",
+    "sat_drive": "Garage parking, $200 a month",
+    "dog_park": "A park 1 minute on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Garage parking, $200 a month",
+    "car_offstreet": "Garage parking, $200 a month",
+    "total_2000": "Total about $2,254 a month",
+    "total_2100": "Total about $2,254 a month",
+    "total_2200": "Total about $2,254 a month",
+    "pick_parents": "About 29 minutes to Mom and Dad",
+    "pick_room": "Studio only",
+    "pick_going_out": "8 restaurants within a 10-minute walk",
+    "pick_green": "A park 1 minute on foot",
+    "pick_parking": "Garage parking, $200 a month",
+    "pick_money": "Total about $2,254 a month"
+   },
+   "fit_misses": {
+    "room_bedroom": "Studio only",
+    "sat_walk": "8 restaurants within a 10-minute walk",
+    "dog_area": "No dog area listed at the building",
+    "total_2000": "Total about $2,254 a month",
+    "total_2100": "Total about $2,254 a month",
+    "total_2200": "Total about $2,254 a month",
+    "pick_room": "Studio only",
+    "pick_going_out": "8 restaurants within a 10-minute walk",
+    "pick_money": "Total about $2,254 a month"
+   },
+   "experience_line": "An older city neighborhood: close to Mom and Dad, except in Newark.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Starbucks, 6 minutes on foot, then back to the desk. For groceries, Key Food is a 12-minute walk.",
+     "places": [
+      {
+       "name": "Starbucks",
+       "kind": "café",
+       "walk_min": 6.2,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/4518440389"
+      },
+      {
+       "name": "Key Food",
+       "kind": "supermarket",
+       "walk_min": 12.1,
+       "distance_mi": 0.5,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/5192834590"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/4518440389"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/5192834590"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "8 restaurants are within a 10-minute walk.",
+     "places": [],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 29 minutes away by car, with no tolls. Bring something from Paris Baguette, a 14-minute walk.",
+     "places": [
+      {
+       "name": "Paris Baguette",
+       "kind": "bakery",
+       "walk_min": 14.1,
+       "distance_mi": 0.5,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/12239582361"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-74.003334,40.597584;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/12239582361"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "The nearest park is a 1-minute walk for the daily loop. The nearest dog run is at Dyker Beach Park, 1.7 miles away. The nearest vet, Faithful Friends Animal Hospital, is 1.6 miles away.",
+     "places": [
+      {
+       "name": "Dyker Beach Park",
+       "kind": "dog run",
+       "walk_min": 43.7,
+       "distance_mi": 1.7,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/1059127012"
+      },
+      {
+       "name": "Faithful Friends Animal Hospital",
+       "kind": "vet",
+       "walk_min": 41.9,
+       "distance_mi": 1.6,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/7217363802"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/557791673"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/1059127012"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/7217363802"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_893edb6df8",
@@ -3039,7 +5188,221 @@
    },
    "why_source": "apartment headline (cost)",
    "give_up_source": "apartment line",
-   "why_topic": "value"
+   "why_topic": "value",
+   "fit": {
+    "drive_min": 52.8,
+    "toll_round_trip": 16.66,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 1806,
+    "max_total": 1806,
+    "parking_kind": "off_street",
+    "parking_included": true,
+    "parking_fee": 0,
+    "garage_or_covered": false,
+    "off_street": true,
+    "dog_area_in_building": true,
+    "park_walk_min": 7.4,
+    "park_name": "Mill River Park",
+    "dog_run_name": null,
+    "dog_run_m": 1818,
+    "restaurants_10min": 27,
+    "bars_10min": 6,
+    "cafes_10min": 3,
+    "sqft_max": 350,
+    "sqft_studio": 350,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 53 minutes to Mom and Dad",
+    "visits_fortnightly": "About 53 minutes to Mom and Dad",
+    "visits_monthly": "About 53 minutes to Mom and Dad",
+    "drive_30": "About 53 minutes to Mom and Dad",
+    "drive_60": "About 53 minutes to Mom and Dad",
+    "drive_90": "About 53 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 350 square feet",
+    "room_desk": "Studio only, about 350 square feet",
+    "sat_walk": "About 27 restaurants within a 10-minute walk",
+    "sat_drive": "Off-street parking, included in the rent",
+    "sat_stay": "Up to about 350 square feet",
+    "dog_park": "Mill River Park, 7 minutes on foot",
+    "dog_area": "A dog area at the building",
+    "car_garage": "Off-street parking, included in the rent",
+    "car_offstreet": "Off-street parking, included in the rent",
+    "total_2000": "Total about $1,806 a month",
+    "total_2100": "Total about $1,806 a month",
+    "total_2200": "Total about $1,806 a month",
+    "pick_parents": "About 53 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 350 square feet",
+    "pick_going_out": "About 27 restaurants within a 10-minute walk",
+    "pick_green": "Mill River Park, 7 minutes on foot",
+    "pick_parking": "Off-street parking, included in the rent",
+    "pick_money": "Total about $1,806 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 53 minutes to Mom and Dad",
+    "drive_30": "About 53 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 350 square feet",
+    "car_garage": "Off-street parking, included in the rent",
+    "pick_room": "Studio only, about 350 square feet"
+   },
+   "experience_line": "Small cities with a walkable downtown, and a longer drive to Mom and Dad.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Lorca, 6 minutes on foot, then back to the desk. Winfield Street Coffee sits beside the Ferguson Library on Broad Street, serving coffee, pastries, sandwiches and salads (Mon to Sat 7am to 5pm, Sun 7am to 4pm). It is a 6-minute walk.",
+     "places": [
+      {
+       "name": "Lorca",
+       "kind": "café",
+       "walk_min": 5.7,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/6625188920"
+      },
+      {
+       "name": "Winfield Street Coffee",
+       "official_name": "Winfield Street Coffee",
+       "kind": "cafe",
+       "walk_min": 6.3,
+       "distance_mi": 0.2,
+       "source_name": "Winfield Street Coffee, Locations",
+       "source_url": "https://winfieldcoffee.com/locations"
+      },
+      {
+       "name": "Ferguson Library on Broad Street",
+       "official_name": "Ferguson Library on Broad Street",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Winfield Street Coffee, Locations",
+       "source_url": "https://winfieldcoffee.com/locations"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/6625188920"
+      },
+      {
+       "name": "Winfield Street Coffee, Locations",
+       "url": "https://winfieldcoffee.com/locations"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "27 restaurants are within a 10-minute walk. The downtown farmers market fills Veterans Memorial Park on Saturday mornings with local produce, flowers, bread, cheese and baked goods (Saturdays 9am to 1pm, mid-June to mid-October). For a night out, Avon Theatre is a 4-minute walk.",
+     "places": [
+      {
+       "name": "downtown farmers market",
+       "official_name": "Stamford Downtown Farmers Market",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Stamford Downtown Special Services District, events",
+       "source_url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
+      },
+      {
+       "name": "Veterans Memorial Park on Saturday",
+       "official_name": "Veterans Memorial Park on Saturday",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Stamford Downtown Special Services District, events",
+       "source_url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
+      },
+      {
+       "name": "Avon Theatre",
+       "kind": "cinema or theater",
+       "walk_min": 4.1,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/368222949"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "Stamford Downtown Special Services District, events",
+       "url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/368222949"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 53 minutes away by car, about $17 round trip in tolls. For a Sunday brunch close to home, Barcelona Wine Bar serves weekend brunch from late morning (Saturday and Sunday 11am to 3pm).",
+     "places": [
+      {
+       "name": "Barcelona Wine Bar",
+       "official_name": "Barcelona Wine Bar",
+       "kind": "restaurant",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Barcelona Wine Bar, Stamford location page",
+       "source_url": "https://barcelonawinebar.com/location/stamford"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.540467,41.058909;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "Toll rates: NYS Thruway Authority",
+       "url": "https://thruway.ny.gov/sites/default/files/2025-07/gantry-rate-toll-charts.pdf"
+      },
+      {
+       "name": "Barcelona Wine Bar, Stamford location page",
+       "url": "https://barcelonawinebar.com/location/stamford"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Mill River Park is a 7-minute walk for the daily loop. The building lists its own dog area. Mill River Park, in the heart of downtown, is free and open all year; dogs are welcome on leash.",
+     "places": [
+      {
+       "name": "Mill River Park",
+       "kind": "park",
+       "walk_min": 7.4,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/471331688"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/471331688"
+      },
+      {
+       "name": "The building's listing",
+       "url": "https://www.trulia.com/building/summer-street-800-summer-st-stamford-ct-06901-1001672063"
+      },
+      {
+       "name": "Mill River Park Collaborative, Park FAQs",
+       "url": "https://millriverpark.org/?p=32"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_f95c86db48",
@@ -3198,7 +5561,236 @@
    },
    "why_source": "building about",
    "give_up_source": "neighborhood point",
-   "why_topic": "green"
+   "why_topic": "green",
+   "fit": {
+    "drive_min": 53.4,
+    "toll_round_trip": 16.66,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 2126,
+    "max_total": 2126,
+    "parking_kind": "lot",
+    "parking_included": false,
+    "parking_fee": null,
+    "garage_or_covered": false,
+    "off_street": true,
+    "dog_area_in_building": false,
+    "park_walk_min": 3.8,
+    "park_name": "Mill River Park",
+    "dog_run_name": null,
+    "dog_run_m": 1676,
+    "restaurants_10min": 27,
+    "bars_10min": 7,
+    "cafes_10min": 3,
+    "sqft_max": 455,
+    "sqft_studio": 455,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 53 minutes to Mom and Dad",
+    "visits_fortnightly": "About 53 minutes to Mom and Dad",
+    "visits_monthly": "About 53 minutes to Mom and Dad",
+    "drive_30": "About 53 minutes to Mom and Dad",
+    "drive_60": "About 53 minutes to Mom and Dad",
+    "drive_90": "About 53 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 455 square feet",
+    "room_desk": "Studio only, about 455 square feet",
+    "sat_walk": "About 27 restaurants within a 10-minute walk",
+    "sat_drive": "A parking lot",
+    "sat_stay": "Up to about 455 square feet",
+    "dog_park": "Mill River Park, 4 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "A parking lot",
+    "car_offstreet": "A parking lot",
+    "total_2000": "Total about $2,126 a month",
+    "total_2100": "Total about $2,126 a month",
+    "total_2200": "Total about $2,126 a month",
+    "pick_parents": "About 53 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 455 square feet",
+    "pick_going_out": "About 27 restaurants within a 10-minute walk",
+    "pick_green": "Mill River Park, 4 minutes on foot",
+    "pick_parking": "A parking lot",
+    "pick_money": "Total about $2,126 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 53 minutes to Mom and Dad",
+    "drive_30": "About 53 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 455 square feet",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "A parking lot",
+    "total_2000": "Total about $2,126 a month",
+    "total_2100": "Total about $2,126 a month",
+    "pick_room": "Studio only, about 455 square feet",
+    "pick_money": "Total about $2,126 a month"
+   },
+   "experience_line": "Small cities with a walkable downtown, and a longer drive to Mom and Dad.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Honey Joe’s Family Coffeehouse, 4 minutes on foot, then back to the desk. Tiernan's bar runs a trivia night every Wednesday evening, listed on the downtown district's calendar (Wednesdays, 7:30pm). For groceries, Target is a 5-minute walk.",
+     "places": [
+      {
+       "name": "Honey Joe’s Family Coffeehouse",
+       "kind": "café",
+       "walk_min": 3.9,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/11338961881"
+      },
+      {
+       "name": "trivia night",
+       "official_name": "Trivia Night at Tiernan's",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Stamford Downtown Special Services District, events",
+       "source_url": "https://stamford-downtown.com/event/trivia-night-at-tiernans/2026-11-18/"
+      },
+      {
+       "name": "Target",
+       "kind": "supermarket",
+       "walk_min": 4.5,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/8014914391"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/11338961881"
+      },
+      {
+       "name": "Stamford Downtown Special Services District, events",
+       "url": "https://stamford-downtown.com/event/trivia-night-at-tiernans/2026-11-18/"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/8014914391"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "27 restaurants are within a 10-minute walk. The downtown farmers market fills Veterans Memorial Park on Saturday mornings with local produce, flowers, bread, cheese and baked goods (Saturdays 9am to 1pm, mid-June to mid-October). For a night out, Avon Theatre is a 6-minute walk.",
+     "places": [
+      {
+       "name": "downtown farmers market",
+       "official_name": "Stamford Downtown Farmers Market",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Stamford Downtown Special Services District, events",
+       "source_url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
+      },
+      {
+       "name": "Veterans Memorial Park on Saturday",
+       "official_name": "Veterans Memorial Park on Saturday",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Stamford Downtown Special Services District, events",
+       "source_url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
+      },
+      {
+       "name": "Avon Theatre",
+       "kind": "cinema or theater",
+       "walk_min": 6.0,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/368222949"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "Stamford Downtown Special Services District, events",
+       "url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/368222949"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 53 minutes away by car, about $17 round trip in tolls. For a Sunday brunch close to home, Barcelona Wine Bar serves weekend brunch from late morning (Saturday and Sunday 11am to 3pm).",
+     "places": [
+      {
+       "name": "Barcelona Wine Bar",
+       "official_name": "Barcelona Wine Bar",
+       "kind": "restaurant",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Barcelona Wine Bar, Stamford location page",
+       "source_url": "https://barcelonawinebar.com/location/stamford"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.542860,41.057532;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "Toll rates: NYS Thruway Authority",
+       "url": "https://thruway.ny.gov/sites/default/files/2025-07/gantry-rate-toll-charts.pdf"
+      },
+      {
+       "name": "Barcelona Wine Bar, Stamford location page",
+       "url": "https://barcelonawinebar.com/location/stamford"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Mill River Park is a 4-minute walk for the daily loop. Mill River Park, in the heart of downtown, is free and open all year; dogs are welcome on leash. The nearest vet, Bull's Head Pet Hospital, is 1.1 miles away.",
+     "places": [
+      {
+       "name": "Mill River Park",
+       "kind": "park",
+       "walk_min": 3.8,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/471331688"
+      },
+      {
+       "name": "Bull's Head Pet Hospital",
+       "kind": "vet",
+       "walk_min": 28.1,
+       "distance_mi": 1.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/13914841101"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/471331688"
+      },
+      {
+       "name": "Mill River Park Collaborative, Park FAQs",
+       "url": "https://millriverpark.org/?p=32"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/13914841101"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_0ba5cc966d",
@@ -3391,7 +5983,182 @@
    },
    "why_source": "neighborhood good_for_her",
    "give_up_source": "neighborhood watch_for",
-   "why_topic": "value"
+   "why_topic": "value",
+   "fit": {
+    "drive_min": 111.8,
+    "toll_round_trip": 16.66,
+    "has_one_bedroom": true,
+    "has_studio": false,
+    "studio_only": false,
+    "min_total": 1932,
+    "max_total": 2112,
+    "parking_kind": "covered",
+    "parking_included": false,
+    "parking_fee": null,
+    "garage_or_covered": true,
+    "off_street": true,
+    "dog_area_in_building": false,
+    "park_walk_min": 9.2,
+    "park_name": "Town Center Park",
+    "dog_run_name": "Hamden Dog Park",
+    "dog_run_m": 3484,
+    "restaurants_10min": 11,
+    "bars_10min": 0,
+    "cafes_10min": 0,
+    "sqft_max": 860,
+    "sqft_studio": null,
+    "sqft_one_bedroom": 860
+   },
+   "fit_chips": {
+    "visits_weekly": "About 112 minutes to Mom and Dad",
+    "visits_fortnightly": "About 112 minutes to Mom and Dad",
+    "visits_monthly": "About 112 minutes to Mom and Dad",
+    "drive_30": "About 112 minutes to Mom and Dad",
+    "drive_60": "About 112 minutes to Mom and Dad",
+    "drive_90": "About 112 minutes to Mom and Dad",
+    "room_bedroom": "Separate bedroom, about 860 square feet",
+    "room_desk": "Separate bedroom, about 860 square feet",
+    "sat_walk": "About 11 restaurants within a 10-minute walk",
+    "sat_drive": "Covered parking",
+    "sat_stay": "Up to about 860 square feet",
+    "dog_park": "Town Center Park, 9 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Covered parking",
+    "car_offstreet": "Covered parking",
+    "total_2000": "Total from about $1,932 a month",
+    "total_2100": "Total from about $1,932 a month",
+    "total_2200": "Total from about $1,932 a month",
+    "pick_parents": "About 112 minutes to Mom and Dad",
+    "pick_room": "Separate bedroom, about 860 square feet",
+    "pick_going_out": "About 11 restaurants within a 10-minute walk",
+    "pick_green": "Town Center Park, 9 minutes on foot",
+    "pick_parking": "Covered parking",
+    "pick_money": "Total from about $1,932 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 112 minutes to Mom and Dad",
+    "visits_fortnightly": "About 112 minutes to Mom and Dad",
+    "visits_monthly": "About 112 minutes to Mom and Dad",
+    "drive_30": "About 112 minutes to Mom and Dad",
+    "drive_60": "About 112 minutes to Mom and Dad",
+    "drive_90": "About 112 minutes to Mom and Dad",
+    "dog_area": "No dog area listed at the building",
+    "pick_parents": "About 112 minutes to Mom and Dad"
+   },
+   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "For groceries, Trader Joe's is 0.9 miles away. For a change of desk, Miller Memorial Library is a 6-minute walk.",
+     "places": [
+      {
+       "name": "Trader Joe's",
+       "kind": "supermarket",
+       "walk_min": 24.8,
+       "distance_mi": 0.9,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/208768485"
+      },
+      {
+       "name": "Miller Memorial Library",
+       "kind": "library",
+       "walk_min": 6.0,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/367138598"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/208768485"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/367138598"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "11 restaurants are within a 10-minute walk.",
+     "places": [],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 112 minutes away by car, about $17 round trip in tolls. Bring something from Bread & Chocolate, a 3-minute walk.",
+     "places": [
+      {
+       "name": "Bread & Chocolate",
+       "kind": "bakery",
+       "walk_min": 2.7,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/4524421989"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-72.900672,41.384855;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "Toll rates: NYS Thruway Authority",
+       "url": "https://thruway.ny.gov/sites/default/files/2025-07/gantry-rate-toll-charts.pdf"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/4524421989"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Town Center Park is a 9-minute walk for the daily loop. The nearest vet, Spring Glen Veterinary Clinic, is 1.9 miles away.",
+     "places": [
+      {
+       "name": "Town Center Park",
+       "kind": "park",
+       "walk_min": 9.2,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/1274528586"
+      },
+      {
+       "name": "Spring Glen Veterinary Clinic",
+       "kind": "vet",
+       "walk_min": 48.5,
+       "distance_mi": 1.9,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/13136696902"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/1274528586"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/13136696902"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_377a717d0d",
@@ -3594,7 +6361,228 @@
    },
    "why_source": "building about",
    "give_up_source": "apartment line",
-   "why_topic": "parking"
+   "why_topic": "parking",
+   "fit": {
+    "drive_min": 53.6,
+    "toll_round_trip": 16.66,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 1866,
+    "max_total": 1866,
+    "parking_kind": "garage",
+    "parking_included": false,
+    "parking_fee": null,
+    "garage_or_covered": true,
+    "off_street": true,
+    "dog_area_in_building": false,
+    "park_walk_min": 10.6,
+    "park_name": "Veterans Memorial Park",
+    "dog_run_name": "Courtland Dog Park",
+    "dog_run_m": 1878,
+    "restaurants_10min": 24,
+    "bars_10min": 4,
+    "cafes_10min": 3,
+    "sqft_max": 489,
+    "sqft_studio": 489,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 54 minutes to Mom and Dad",
+    "visits_fortnightly": "About 54 minutes to Mom and Dad",
+    "visits_monthly": "About 54 minutes to Mom and Dad",
+    "drive_30": "About 54 minutes to Mom and Dad",
+    "drive_60": "About 54 minutes to Mom and Dad",
+    "drive_90": "About 54 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 489 square feet",
+    "room_desk": "Studio only, about 489 square feet",
+    "sat_walk": "About 24 restaurants within a 10-minute walk",
+    "sat_drive": "Garage parking",
+    "sat_stay": "Up to about 489 square feet",
+    "dog_park": "Nearest park about 11 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Garage parking",
+    "car_offstreet": "Garage parking",
+    "total_2000": "Total about $1,866 a month",
+    "total_2100": "Total about $1,866 a month",
+    "total_2200": "Total about $1,866 a month",
+    "pick_parents": "About 54 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 489 square feet",
+    "pick_going_out": "About 24 restaurants within a 10-minute walk",
+    "pick_green": "Nearest park about 11 minutes on foot",
+    "pick_parking": "Garage parking",
+    "pick_money": "Total about $1,866 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 54 minutes to Mom and Dad",
+    "drive_30": "About 54 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 489 square feet",
+    "dog_park": "Nearest park about 11 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "pick_room": "Studio only, about 489 square feet",
+    "pick_green": "Nearest park about 11 minutes on foot"
+   },
+   "experience_line": "Small cities with a walkable downtown, and a longer drive to Mom and Dad.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Lorca, 7 minutes on foot, then back to the desk. Winfield Street Coffee sits beside the Ferguson Library on Broad Street, serving coffee, pastries, sandwiches and salads (Mon to Sat 7am to 5pm, Sun 7am to 4pm). It is a 9-minute walk.",
+     "places": [
+      {
+       "name": "Lorca",
+       "kind": "café",
+       "walk_min": 7.3,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/6625188920"
+      },
+      {
+       "name": "Winfield Street Coffee",
+       "official_name": "Winfield Street Coffee",
+       "kind": "cafe",
+       "walk_min": 9.0,
+       "distance_mi": 0.3,
+       "source_name": "Winfield Street Coffee, Locations",
+       "source_url": "https://winfieldcoffee.com/locations"
+      },
+      {
+       "name": "Ferguson Library on Broad Street",
+       "official_name": "Ferguson Library on Broad Street",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Winfield Street Coffee, Locations",
+       "source_url": "https://winfieldcoffee.com/locations"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/6625188920"
+      },
+      {
+       "name": "Winfield Street Coffee, Locations",
+       "url": "https://winfieldcoffee.com/locations"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "24 restaurants are within a 10-minute walk. The downtown farmers market fills Veterans Memorial Park on Saturday mornings with local produce, flowers, bread, cheese and baked goods (Saturdays 9am to 1pm, mid-June to mid-October). For a night out, Avon Theatre is a 6-minute walk.",
+     "places": [
+      {
+       "name": "downtown farmers market",
+       "official_name": "Stamford Downtown Farmers Market",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Stamford Downtown Special Services District, events",
+       "source_url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
+      },
+      {
+       "name": "Veterans Memorial Park on Saturday",
+       "official_name": "Veterans Memorial Park on Saturday",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Stamford Downtown Special Services District, events",
+       "source_url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
+      },
+      {
+       "name": "Avon Theatre",
+       "kind": "cinema or theater",
+       "walk_min": 6.1,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/368222949"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "Stamford Downtown Special Services District, events",
+       "url": "https://stamford-downtown.com/tribeevents/list/?tribe-bar-search=farmers+market&eventDisplay=past"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/368222949"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 54 minutes away by car, about $17 round trip in tolls. For a Sunday brunch close to home, Barcelona Wine Bar serves weekend brunch from late morning (Saturday and Sunday 11am to 3pm).",
+     "places": [
+      {
+       "name": "Barcelona Wine Bar",
+       "official_name": "Barcelona Wine Bar",
+       "kind": "restaurant",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Barcelona Wine Bar, Stamford location page",
+       "source_url": "https://barcelonawinebar.com/location/stamford"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.534892,41.059205;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "Toll rates: NYS Thruway Authority",
+       "url": "https://thruway.ny.gov/sites/default/files/2025-07/gantry-rate-toll-charts.pdf"
+      },
+      {
+       "name": "Barcelona Wine Bar, Stamford location page",
+       "url": "https://barcelonawinebar.com/location/stamford"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Veterans Memorial Park is an 11-minute walk for the daily loop. Mill River Park, in the heart of downtown, is free and open all year; dogs are welcome on leash. It is a 16-minute walk.",
+     "places": [
+      {
+       "name": "Veterans Memorial Park",
+       "kind": "park",
+       "walk_min": 10.6,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/544004596"
+      },
+      {
+       "name": "Mill River Park",
+       "official_name": "Mill River Park",
+       "kind": "park",
+       "walk_min": 16.1,
+       "distance_mi": 0.6,
+       "source_name": "Mill River Park Collaborative, Park FAQs",
+       "source_url": "https://millriverpark.org/?p=32"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/544004596"
+      },
+      {
+       "name": "Mill River Park Collaborative, Park FAQs",
+       "url": "https://millriverpark.org/?p=32"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_b29a9ae0e3",
@@ -3747,7 +6735,255 @@
    },
    "why_source": "building about",
    "give_up_source": "neighborhood point",
-   "why_topic": "amenity"
+   "why_topic": "amenity",
+   "fit": {
+    "drive_min": 81.4,
+    "toll_round_trip": 16.66,
+    "has_one_bedroom": true,
+    "has_studio": false,
+    "studio_only": false,
+    "min_total": 1892,
+    "max_total": 1892,
+    "parking_kind": null,
+    "parking_included": null,
+    "parking_fee": null,
+    "garage_or_covered": null,
+    "off_street": null,
+    "dog_area_in_building": false,
+    "park_walk_min": 1,
+    "park_name": null,
+    "dog_run_name": null,
+    "dog_run_m": 5985,
+    "restaurants_10min": 3,
+    "bars_10min": 0,
+    "cafes_10min": 1,
+    "sqft_max": 751,
+    "sqft_studio": null,
+    "sqft_one_bedroom": 751
+   },
+   "fit_chips": {
+    "visits_weekly": "About 81 minutes to Mom and Dad",
+    "visits_fortnightly": "About 81 minutes to Mom and Dad",
+    "visits_monthly": "About 81 minutes to Mom and Dad",
+    "drive_30": "About 81 minutes to Mom and Dad",
+    "drive_60": "About 81 minutes to Mom and Dad",
+    "drive_90": "About 81 minutes to Mom and Dad",
+    "room_bedroom": "Separate bedroom, about 751 square feet",
+    "room_desk": "Separate bedroom, about 751 square feet",
+    "sat_walk": "3 restaurants within a 10-minute walk",
+    "sat_drive": "Parking not named in the listing",
+    "sat_stay": "Up to about 751 square feet",
+    "dog_park": "A park 1 minute on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $1,892 a month",
+    "total_2100": "Total about $1,892 a month",
+    "total_2200": "Total about $1,892 a month",
+    "pick_parents": "About 81 minutes to Mom and Dad",
+    "pick_room": "Separate bedroom, about 751 square feet",
+    "pick_going_out": "3 restaurants within a 10-minute walk",
+    "pick_green": "A park 1 minute on foot",
+    "pick_parking": "Parking not named in the listing",
+    "pick_money": "Total about $1,892 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 81 minutes to Mom and Dad",
+    "visits_fortnightly": "About 81 minutes to Mom and Dad",
+    "drive_30": "About 81 minutes to Mom and Dad",
+    "drive_60": "About 81 minutes to Mom and Dad",
+    "sat_walk": "3 restaurants within a 10-minute walk",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "pick_parents": "About 81 minutes to Mom and Dad",
+    "pick_going_out": "3 restaurants within a 10-minute walk",
+    "pick_parking": "Parking not named in the listing"
+   },
+   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Starbucks, 11 minutes on foot, then back to the desk. The downtown district runs a weekday farmers market on McLevy Green, at Main and Bank Streets (Thursdays 10:30am to 2pm, July to October). For groceries, Save-A-Lot is 0.8 miles away.",
+     "places": [
+      {
+       "name": "Starbucks",
+       "kind": "café",
+       "walk_min": 10.5,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/3899856136"
+      },
+      {
+       "name": "McLevy Green",
+       "official_name": "Downtown Market at McLevy Green",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "Main and Bank Streets",
+       "official_name": "Main and Bank Streets",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "Save-A-Lot",
+       "kind": "supermarket",
+       "walk_min": 22.1,
+       "distance_mi": 0.8,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/3446734677"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3899856136"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3446734677"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "3 restaurants are within a 10-minute walk. The Stress Factory comedy club downtown has stand-up shows most Thursday to Sunday nights. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre.",
+     "places": [
+      {
+       "name": "Stress Factory comedy club",
+       "official_name": "Vinnie Brand's Stress Factory Comedy Club",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "The Bijou",
+       "official_name": "The Bijou Theatre",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bijou Theatre",
+       "source_url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Fairfield Avenue",
+       "official_name": "Fairfield Avenue",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bijou Theatre",
+       "source_url": "https://www.bijoutheatrect.com/"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District events calendar",
+       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "Bijou Theatre",
+       "url": "https://www.bijoutheatrect.com/"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 81 minutes away by car, about $17 round trip in tolls. On some Sunday afternoons Berlinetta's taproom has three hours of small-group jazz, with no cover charge (Sundays 3pm to 6pm, recurring sessions).",
+     "places": [
+      {
+       "name": "Berlinetta",
+       "official_name": "Gold Note Jazz at Berlinetta",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District, event page",
+       "source_url": "https://www.colorfulbridgeport.com/event/gold-note-jazz-session-xiii/"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.189634,41.178102;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "Toll rates: NYS Thruway Authority",
+       "url": "https://thruway.ny.gov/sites/default/files/2025-07/gantry-rate-toll-charts.pdf"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District, event page",
+       "url": "https://www.colorfulbridgeport.com/event/gold-note-jazz-session-xiii/"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "The nearest park is a 1-minute walk for the daily loop. Seaside Park is 325 acres of lawns and shore on Long Island Sound, laid out by Olmsted and Vaux. It is 1.5 miles away.",
+     "places": [
+      {
+       "name": "Seaside Park",
+       "official_name": "Seaside Park",
+       "kind": "park",
+       "walk_min": 39.0,
+       "distance_mi": 1.5,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Long Island Sound",
+       "official_name": "Long Island Sound",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Olmsted and Vaux",
+       "official_name": "Olmsted and Vaux",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/43398264"
+      },
+      {
+       "name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_5f84c933a2",
@@ -3909,7 +7145,256 @@
    },
    "why_source": "building about",
    "give_up_source": "neighborhood point",
-   "why_topic": "work"
+   "why_topic": "work",
+   "fit": {
+    "drive_min": 81.4,
+    "toll_round_trip": 16.66,
+    "has_one_bedroom": true,
+    "has_studio": false,
+    "studio_only": false,
+    "min_total": 2067,
+    "max_total": 2067,
+    "parking_kind": null,
+    "parking_included": null,
+    "parking_fee": null,
+    "garage_or_covered": null,
+    "off_street": null,
+    "dog_area_in_building": false,
+    "park_walk_min": 4.7,
+    "park_name": null,
+    "dog_run_name": null,
+    "dog_run_m": 6079,
+    "restaurants_10min": 5,
+    "bars_10min": 0,
+    "cafes_10min": 0,
+    "sqft_max": 745,
+    "sqft_studio": null,
+    "sqft_one_bedroom": 745
+   },
+   "fit_chips": {
+    "visits_weekly": "About 81 minutes to Mom and Dad",
+    "visits_fortnightly": "About 81 minutes to Mom and Dad",
+    "visits_monthly": "About 81 minutes to Mom and Dad",
+    "drive_30": "About 81 minutes to Mom and Dad",
+    "drive_60": "About 81 minutes to Mom and Dad",
+    "drive_90": "About 81 minutes to Mom and Dad",
+    "room_bedroom": "Separate bedroom, about 745 square feet",
+    "room_desk": "Separate bedroom, about 745 square feet",
+    "sat_walk": "5 restaurants within a 10-minute walk",
+    "sat_drive": "Parking not named in the listing",
+    "sat_stay": "Up to about 745 square feet",
+    "dog_park": "A park 5 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $2,067 a month",
+    "total_2100": "Total about $2,067 a month",
+    "total_2200": "Total about $2,067 a month",
+    "pick_parents": "About 81 minutes to Mom and Dad",
+    "pick_room": "Separate bedroom, about 745 square feet",
+    "pick_going_out": "5 restaurants within a 10-minute walk",
+    "pick_green": "A park 5 minutes on foot",
+    "pick_parking": "Parking not named in the listing",
+    "pick_money": "Total about $2,067 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 81 minutes to Mom and Dad",
+    "visits_fortnightly": "About 81 minutes to Mom and Dad",
+    "drive_30": "About 81 minutes to Mom and Dad",
+    "drive_60": "About 81 minutes to Mom and Dad",
+    "sat_walk": "5 restaurants within a 10-minute walk",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $2,067 a month",
+    "pick_parents": "About 81 minutes to Mom and Dad",
+    "pick_going_out": "5 restaurants within a 10-minute walk",
+    "pick_parking": "Parking not named in the listing"
+   },
+   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Starbucks, 14 minutes on foot, then back to the desk. The downtown district runs a weekday farmers market on McLevy Green, at Main and Bank Streets (Thursdays 10:30am to 2pm, July to October). For groceries, Save-A-Lot is 0.8 miles away.",
+     "places": [
+      {
+       "name": "Starbucks",
+       "kind": "café",
+       "walk_min": 14.1,
+       "distance_mi": 0.5,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/3899856136"
+      },
+      {
+       "name": "McLevy Green",
+       "official_name": "Downtown Market at McLevy Green",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "Main and Bank Streets",
+       "official_name": "Main and Bank Streets",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "Save-A-Lot",
+       "kind": "supermarket",
+       "walk_min": 21.9,
+       "distance_mi": 0.8,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/3446734677"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3899856136"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3446734677"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "5 restaurants are within a 10-minute walk. The Stress Factory comedy club downtown has stand-up shows most Thursday to Sunday nights. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre.",
+     "places": [
+      {
+       "name": "Stress Factory comedy club",
+       "official_name": "Vinnie Brand's Stress Factory Comedy Club",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "The Bijou",
+       "official_name": "The Bijou Theatre",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bijou Theatre",
+       "source_url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Fairfield Avenue",
+       "official_name": "Fairfield Avenue",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bijou Theatre",
+       "source_url": "https://www.bijoutheatrect.com/"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District events calendar",
+       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "Bijou Theatre",
+       "url": "https://www.bijoutheatrect.com/"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 81 minutes away by car, about $17 round trip in tolls. On some Sunday afternoons Berlinetta's taproom has three hours of small-group jazz, with no cover charge (Sundays 3pm to 6pm, recurring sessions).",
+     "places": [
+      {
+       "name": "Berlinetta",
+       "official_name": "Gold Note Jazz at Berlinetta",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District, event page",
+       "source_url": "https://www.colorfulbridgeport.com/event/gold-note-jazz-session-xiii/"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.191746,41.175681;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "Toll rates: NYS Thruway Authority",
+       "url": "https://thruway.ny.gov/sites/default/files/2025-07/gantry-rate-toll-charts.pdf"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District, event page",
+       "url": "https://www.colorfulbridgeport.com/event/gold-note-jazz-session-xiii/"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "The nearest park is a 5-minute walk for the daily loop. Seaside Park is 325 acres of lawns and shore on Long Island Sound, laid out by Olmsted and Vaux. It is 1.3 miles away.",
+     "places": [
+      {
+       "name": "Seaside Park",
+       "official_name": "Seaside Park",
+       "kind": "park",
+       "walk_min": 33.9,
+       "distance_mi": 1.3,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Long Island Sound",
+       "official_name": "Long Island Sound",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      },
+      {
+       "name": "Olmsted and Vaux",
+       "official_name": "Olmsted and Vaux",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "source_url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/43398264"
+      },
+      {
+       "name": "City of Bridgeport, Parks & Recreation: Seaside Park History",
+       "url": "https://bridgeportct.gov/government/departments/parks-recreation/seaside-park-history"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_5204934871",
@@ -4065,7 +7550,241 @@
    },
    "why_source": "building about",
    "give_up_source": "neighborhood point",
-   "why_topic": "dog"
+   "why_topic": "dog",
+   "fit": {
+    "drive_min": 89.6,
+    "toll_round_trip": 14.92,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 2241,
+    "max_total": 2241,
+    "parking_kind": null,
+    "parking_included": null,
+    "parking_fee": null,
+    "garage_or_covered": null,
+    "off_street": null,
+    "dog_area_in_building": true,
+    "park_walk_min": 10.5,
+    "park_name": "Rowan Avenue Playground",
+    "dog_run_name": null,
+    "dog_run_m": 5527,
+    "restaurants_10min": 1,
+    "bars_10min": 3,
+    "cafes_10min": 0,
+    "sqft_max": 600,
+    "sqft_studio": 600,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 90 minutes to Mom and Dad",
+    "visits_fortnightly": "About 90 minutes to Mom and Dad",
+    "visits_monthly": "About 90 minutes to Mom and Dad",
+    "drive_30": "About 90 minutes to Mom and Dad",
+    "drive_60": "About 90 minutes to Mom and Dad",
+    "drive_90": "About 90 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 600 square feet",
+    "room_desk": "Studio only, about 600 square feet",
+    "sat_walk": "1 restaurant within a 10-minute walk",
+    "sat_drive": "Parking not named in the listing",
+    "sat_stay": "Up to about 600 square feet",
+    "dog_park": "Nearest park about 11 minutes on foot",
+    "dog_area": "A dog area at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $2,241 a month",
+    "total_2100": "Total about $2,241 a month",
+    "total_2200": "Total about $2,241 a month",
+    "pick_parents": "About 90 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 600 square feet",
+    "pick_going_out": "1 restaurant within a 10-minute walk",
+    "pick_green": "Nearest park about 11 minutes on foot",
+    "pick_parking": "Parking not named in the listing",
+    "pick_money": "Total about $2,241 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 90 minutes to Mom and Dad",
+    "visits_fortnightly": "About 90 minutes to Mom and Dad",
+    "drive_30": "About 90 minutes to Mom and Dad",
+    "drive_60": "About 90 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 600 square feet",
+    "sat_walk": "1 restaurant within a 10-minute walk",
+    "dog_park": "Nearest park about 11 minutes on foot",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $2,241 a month",
+    "total_2100": "Total about $2,241 a month",
+    "total_2200": "Total about $2,241 a month",
+    "pick_parents": "About 90 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 600 square feet",
+    "pick_going_out": "1 restaurant within a 10-minute walk",
+    "pick_green": "Nearest park about 11 minutes on foot",
+    "pick_parking": "Parking not named in the listing",
+    "pick_money": "Total about $2,241 a month"
+   },
+   "experience_line": "Small cities with a walkable downtown, and a longer drive to Mom and Dad.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "On select summer Thursdays, food trucks and live music gather at Kennedy Park downtown for lunch. For groceries, Price Rite is 0.8 miles away. For a change of desk, Danbury Public Library is an 11-minute walk.",
+     "places": [
+      {
+       "name": "Kennedy Park",
+       "official_name": "Downtown ChowDown, Kennedy Park",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "CityCenter Danbury: CityCenter Events",
+       "source_url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+      },
+      {
+       "name": "Price Rite",
+       "kind": "supermarket",
+       "walk_min": 21.6,
+       "distance_mi": 0.8,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/462818325"
+      },
+      {
+       "name": "Danbury Public Library",
+       "kind": "library",
+       "walk_min": 10.7,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/367138722"
+      }
+     ],
+     "sources": [
+      {
+       "name": "CityCenter Danbury: CityCenter Events",
+       "url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/462818325"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/367138722"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "1 restaurant is within a 10-minute walk. CityCenter Danbury puts on free live music on the CityCenter Green on select summer Fridays; bring a lawn chair (Summer in the City Concert Series). The nearest bar, La Kabanita, is 3 minutes on foot.",
+     "places": [
+      {
+       "name": "Summer in the City Concert Series",
+       "official_name": "Summer in the City Concert Series",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "CityCenter Danbury: CityCenter Events",
+       "source_url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+      },
+      {
+       "name": "CityCenter Green",
+       "official_name": "CityCenter Green",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "CityCenter Danbury: CityCenter Events",
+       "source_url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+      },
+      {
+       "name": "La Kabanita",
+       "kind": "bar",
+       "walk_min": 3.4,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/13966532102"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "CityCenter Danbury: CityCenter Events",
+       "url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/13966532102"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 90 minutes away by car, about $15 round trip in tolls. Bring something from Mothership, a 2-minute walk.",
+     "places": [
+      {
+       "name": "Mothership",
+       "kind": "bakery",
+       "walk_min": 1.9,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/13426916401"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.454305,41.398340;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/13426916401"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Rowan Avenue Playground is an 11-minute walk for the daily loop. The building lists its own dog area. Tarrywile is free and open sunrise to sunset every day; city ordinance requires dogs on leash at all times (Daily, sunrise to sunset).",
+     "places": [
+      {
+       "name": "Rowan Avenue Playground",
+       "kind": "park",
+       "walk_min": 10.5,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/43435920"
+      },
+      {
+       "name": "Tarrywile",
+       "official_name": "Tarrywile Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Tarrywile Park & Mansion: The Park",
+       "source_url": "https://tarrywile.com/?p=22571"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/43435920"
+      },
+      {
+       "name": "The building's listing",
+       "url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-ii"
+      },
+      {
+       "name": "Tarrywile Park & Mansion: The Park",
+       "url": "https://tarrywile.com/?p=22571"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_ee2549a834",
@@ -4227,7 +7946,194 @@
    },
    "why_source": "building about",
    "give_up_source": "neighborhood watch_for",
-   "why_topic": "parking"
+   "why_topic": "parking",
+   "fit": {
+    "drive_min": 36.7,
+    "toll_round_trip": 14.92,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 2383,
+    "max_total": 2383,
+    "parking_kind": "garage",
+    "parking_included": false,
+    "parking_fee": 150,
+    "garage_or_covered": true,
+    "off_street": true,
+    "dog_area_in_building": false,
+    "park_walk_min": 5.2,
+    "park_name": "Washington Park",
+    "dog_run_name": "Trevor Park Dog Park",
+    "dog_run_m": 2232,
+    "restaurants_10min": 3,
+    "bars_10min": 1,
+    "cafes_10min": 0,
+    "sqft_max": 480,
+    "sqft_studio": 480,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 37 minutes to Mom and Dad",
+    "visits_fortnightly": "About 37 minutes to Mom and Dad",
+    "visits_monthly": "About 37 minutes to Mom and Dad",
+    "drive_30": "About 37 minutes to Mom and Dad",
+    "drive_60": "About 37 minutes to Mom and Dad",
+    "drive_90": "About 37 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 480 square feet",
+    "room_desk": "Studio only, about 480 square feet",
+    "sat_walk": "3 restaurants within a 10-minute walk",
+    "sat_drive": "Garage parking, $150 a month",
+    "sat_stay": "Up to about 480 square feet",
+    "dog_park": "Washington Park, 5 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Garage parking, $150 a month",
+    "car_offstreet": "Garage parking, $150 a month",
+    "total_2000": "Total about $2,383 a month",
+    "total_2100": "Total about $2,383 a month",
+    "total_2200": "Total about $2,383 a month",
+    "pick_parents": "About 37 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 480 square feet",
+    "pick_going_out": "3 restaurants within a 10-minute walk",
+    "pick_green": "Washington Park, 5 minutes on foot",
+    "pick_parking": "Garage parking, $150 a month",
+    "pick_money": "Total about $2,383 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 37 minutes to Mom and Dad",
+    "drive_30": "About 37 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 480 square feet",
+    "sat_walk": "3 restaurants within a 10-minute walk",
+    "dog_area": "No dog area listed at the building",
+    "total_2000": "Total about $2,383 a month",
+    "total_2100": "Total about $2,383 a month",
+    "total_2200": "Total about $2,383 a month",
+    "pick_room": "Studio only, about 480 square feet",
+    "pick_going_out": "3 restaurants within a 10-minute walk",
+    "pick_money": "Total about $2,383 a month"
+   },
+   "experience_line": "Small cities with a walkable downtown, and a longer drive to Mom and Dad.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "For groceries, ShopRite is a 3-minute walk. For a change of desk, Yonkers Public Library Riverfront Branch is a 7-minute walk.",
+     "places": [
+      {
+       "name": "ShopRite",
+       "kind": "supermarket",
+       "walk_min": 2.9,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/506828372"
+      },
+      {
+       "name": "Yonkers Public Library Riverfront Branch",
+       "kind": "library",
+       "walk_min": 7.1,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/557410442"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/506828372"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/557410442"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "3 restaurants are within a 10-minute walk. The nearest bar, Francey Brady's Bar, is 4 minutes on foot.",
+     "places": [
+      {
+       "name": "Francey Brady's Bar",
+       "kind": "bar",
+       "walk_min": 4.2,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/4856391954"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/4856391954"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 37 minutes away by car, about $15 round trip in tolls. Bring something from La Pinata Bakery, an 8-minute walk.",
+     "places": [
+      {
+       "name": "La Pinata Bakery",
+       "kind": "bakery",
+       "walk_min": 7.7,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/4964904663"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.902639,40.932377;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/4964904663"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Washington Park is a 5-minute walk for the daily loop. Trevor Park Dog Park is 1.4 miles away.",
+     "places": [
+      {
+       "name": "Washington Park",
+       "kind": "park",
+       "walk_min": 5.2,
+       "distance_mi": 0.2,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/506810762"
+      },
+      {
+       "name": "Trevor Park Dog Park",
+       "kind": "dog run",
+       "walk_min": 36.3,
+       "distance_mi": 1.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/1539070359"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/506810762"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/1539070359"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_fec325fa9f",
@@ -4437,7 +8343,208 @@
    },
    "why_source": "neighborhood about",
    "give_up_source": "neighborhood point",
-   "why_topic": "parking"
+   "why_topic": "parking",
+   "fit": {
+    "drive_min": 47.6,
+    "toll_round_trip": 23.79,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 2292,
+    "max_total": 2342,
+    "parking_kind": "garage",
+    "parking_included": false,
+    "parking_fee": 200,
+    "garage_or_covered": true,
+    "off_street": true,
+    "dog_area_in_building": false,
+    "park_walk_min": 3.2,
+    "park_name": "Lincoln Park",
+    "dog_run_name": null,
+    "dog_run_m": 1902,
+    "restaurants_10min": 14,
+    "bars_10min": 1,
+    "cafes_10min": 1,
+    "sqft_max": 457,
+    "sqft_studio": 457,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 48 minutes to Mom and Dad",
+    "visits_fortnightly": "About 48 minutes to Mom and Dad",
+    "visits_monthly": "About 48 minutes to Mom and Dad",
+    "drive_30": "About 48 minutes to Mom and Dad",
+    "drive_60": "About 48 minutes to Mom and Dad",
+    "drive_90": "About 48 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 457 square feet",
+    "room_desk": "Studio only, about 457 square feet",
+    "sat_walk": "About 14 restaurants within a 10-minute walk",
+    "sat_drive": "Garage parking, $200 a month",
+    "sat_stay": "Up to about 457 square feet",
+    "dog_park": "Lincoln Park, 3 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Garage parking, $200 a month",
+    "car_offstreet": "Garage parking, $200 a month",
+    "total_2000": "Total from about $2,292 a month",
+    "total_2100": "Total from about $2,292 a month",
+    "total_2200": "Total from about $2,292 a month",
+    "pick_parents": "About 48 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 457 square feet",
+    "pick_going_out": "About 14 restaurants within a 10-minute walk",
+    "pick_green": "Lincoln Park, 3 minutes on foot",
+    "pick_parking": "Garage parking, $200 a month",
+    "pick_money": "Total from about $2,292 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 48 minutes to Mom and Dad",
+    "drive_30": "About 48 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 457 square feet",
+    "dog_area": "No dog area listed at the building",
+    "total_2000": "Total from about $2,292 a month",
+    "total_2100": "Total from about $2,292 a month",
+    "total_2200": "Total from about $2,292 a month",
+    "pick_room": "Studio only, about 457 square feet",
+    "pick_money": "Total from about $2,292 a month"
+   },
+   "experience_line": "An older city neighborhood: close to Mom and Dad, except in Newark.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Espetos cafe, 10 minutes on foot, then back to the desk. For groceries, Angelo's mini market is an 8-minute walk.",
+     "places": [
+      {
+       "name": "Espetos cafe",
+       "kind": "café",
+       "walk_min": 10.3,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/11346879018"
+      },
+      {
+       "name": "Angelo's mini market",
+       "kind": "supermarket",
+       "walk_min": 8.4,
+       "distance_mi": 0.3,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/11356337481"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/11346879018"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/11356337481"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "14 restaurants are within a 10-minute walk. The nearest bar, Allure Lounge, is 3 minutes on foot. For a night out, Newark Symphony Hall is a 2-minute walk.",
+     "places": [
+      {
+       "name": "Allure Lounge",
+       "kind": "bar",
+       "walk_min": 3.1,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/416584462"
+      },
+      {
+       "name": "Newark Symphony Hall",
+       "kind": "cinema or theater",
+       "walk_min": 1.9,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/1422133492"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/416584462"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/1422133492"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 48 minutes away by car, about $24 round trip in tolls. Bring something from Mr. Tod's Pies, a 12-minute walk.",
+     "places": [
+      {
+       "name": "Mr. Tod's Pies",
+       "kind": "bakery",
+       "walk_min": 12.3,
+       "distance_mi": 0.5,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/13845485592"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-74.176391,40.728724;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: Port Authority of NY & NJ",
+       "url": "https://www.panynj.gov/bridges-tunnels/en/tolls.html"
+      },
+      {
+       "name": "Toll rates: MTA (Triborough Bridge and Tunnel Authority)",
+       "url": "https://www.governor.ny.gov/news/putting-commuters-first-keeping-costs-down-governor-hochul-unveils-plans-future-transit-and"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/13845485592"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Lincoln Park is a 3-minute walk for the daily loop. The nearest vet, Veterinarian Pet Alliance, is 2.0 miles away.",
+     "places": [
+      {
+       "name": "Lincoln Park",
+       "kind": "park",
+       "walk_min": 3.2,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/39680168"
+      },
+      {
+       "name": "Veterinarian Pet Alliance",
+       "kind": "vet",
+       "walk_min": 52.6,
+       "distance_mi": 2.0,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/14073686607"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/39680168"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/14073686607"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_0e634d994b",
@@ -4596,7 +8703,240 @@
    },
    "why_source": "building point",
    "give_up_source": "neighborhood point",
-   "why_topic": "dog"
+   "why_topic": "dog",
+   "fit": {
+    "drive_min": 81.1,
+    "toll_round_trip": 16.66,
+    "has_one_bedroom": true,
+    "has_studio": false,
+    "studio_only": false,
+    "min_total": 2117,
+    "max_total": 2117,
+    "parking_kind": "garage",
+    "parking_included": false,
+    "parking_fee": null,
+    "garage_or_covered": true,
+    "off_street": true,
+    "dog_area_in_building": true,
+    "park_walk_min": 4.5,
+    "park_name": null,
+    "dog_run_name": null,
+    "dog_run_m": 6189,
+    "restaurants_10min": 4,
+    "bars_10min": 0,
+    "cafes_10min": 1,
+    "sqft_max": 330,
+    "sqft_studio": null,
+    "sqft_one_bedroom": 330
+   },
+   "fit_chips": {
+    "visits_weekly": "About 81 minutes to Mom and Dad",
+    "visits_fortnightly": "About 81 minutes to Mom and Dad",
+    "visits_monthly": "About 81 minutes to Mom and Dad",
+    "drive_30": "About 81 minutes to Mom and Dad",
+    "drive_60": "About 81 minutes to Mom and Dad",
+    "drive_90": "About 81 minutes to Mom and Dad",
+    "room_bedroom": "Separate bedroom, about 330 square feet",
+    "room_desk": "Separate bedroom, about 330 square feet",
+    "sat_walk": "4 restaurants within a 10-minute walk",
+    "sat_drive": "Garage parking",
+    "sat_stay": "Up to about 330 square feet",
+    "dog_park": "A park 5 minutes on foot",
+    "dog_area": "A dog area at the building",
+    "car_garage": "Garage parking",
+    "car_offstreet": "Garage parking",
+    "total_2000": "Total about $2,117 a month",
+    "total_2100": "Total about $2,117 a month",
+    "total_2200": "Total about $2,117 a month",
+    "pick_parents": "About 81 minutes to Mom and Dad",
+    "pick_room": "Separate bedroom, about 330 square feet",
+    "pick_going_out": "4 restaurants within a 10-minute walk",
+    "pick_green": "A park 5 minutes on foot",
+    "pick_parking": "Garage parking",
+    "pick_money": "Total about $2,117 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 81 minutes to Mom and Dad",
+    "visits_fortnightly": "About 81 minutes to Mom and Dad",
+    "drive_30": "About 81 minutes to Mom and Dad",
+    "drive_60": "About 81 minutes to Mom and Dad",
+    "sat_walk": "4 restaurants within a 10-minute walk",
+    "total_2000": "Total about $2,117 a month",
+    "total_2100": "Total about $2,117 a month",
+    "pick_parents": "About 81 minutes to Mom and Dad",
+    "pick_going_out": "4 restaurants within a 10-minute walk",
+    "pick_money": "Total about $2,117 a month"
+   },
+   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Starbucks, 10 minutes on foot, then back to the desk. The downtown district runs a weekday farmers market on McLevy Green, at Main and Bank Streets (Thursdays 10:30am to 2pm, July to October). For groceries, Save-A-Lot is 0.9 miles away.",
+     "places": [
+      {
+       "name": "Starbucks",
+       "kind": "café",
+       "walk_min": 10.0,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/3899856136"
+      },
+      {
+       "name": "McLevy Green",
+       "official_name": "Downtown Market at McLevy Green",
+       "kind": "market",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "Main and Bank Streets",
+       "official_name": "Main and Bank Streets",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "source_url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "Save-A-Lot",
+       "kind": "supermarket",
+       "walk_min": 24.7,
+       "distance_mi": 0.9,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/3446734677"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3899856136"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District (Colorful Bridgeport), Signature Events",
+       "url": "https://www.colorfulbridgeport.com/signature-events/"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/3446734677"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "4 restaurants are within a 10-minute walk. The Stress Factory comedy club downtown has stand-up shows most Thursday to Sunday nights. The Bijou on Fairfield Avenue has hosted performing arts since 1909 and now runs concerts, comedy and theatre.",
+     "places": [
+      {
+       "name": "Stress Factory comedy club",
+       "official_name": "Vinnie Brand's Stress Factory Comedy Club",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District events calendar",
+       "source_url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "The Bijou",
+       "official_name": "The Bijou Theatre",
+       "kind": "other",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bijou Theatre",
+       "source_url": "https://www.bijoutheatrect.com/"
+      },
+      {
+       "name": "Fairfield Avenue",
+       "official_name": "Fairfield Avenue",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bijou Theatre",
+       "source_url": "https://www.bijoutheatrect.com/"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District events calendar",
+       "url": "https://www.colorfulbridgeport.com/wp-json/tribe/events/v1/events?per_page=50"
+      },
+      {
+       "name": "Bijou Theatre",
+       "url": "https://www.bijoutheatrect.com/"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 81 minutes away by car, about $17 round trip in tolls. On some Sunday afternoons Berlinetta's taproom has three hours of small-group jazz, with no cover charge (Sundays 3pm to 6pm, recurring sessions).",
+     "places": [
+      {
+       "name": "Berlinetta",
+       "official_name": "Gold Note Jazz at Berlinetta",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Bridgeport Downtown Special Services District, event page",
+       "source_url": "https://www.colorfulbridgeport.com/event/gold-note-jazz-session-xiii/"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.188785,41.176228;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "Toll rates: NYS Thruway Authority",
+       "url": "https://thruway.ny.gov/sites/default/files/2025-07/gantry-rate-toll-charts.pdf"
+      },
+      {
+       "name": "Bridgeport Downtown Special Services District, event page",
+       "url": "https://www.colorfulbridgeport.com/event/gold-note-jazz-session-xiii/"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "The nearest park is a 5-minute walk for the daily loop. The building lists its own dog area. City park rules: dogs on a six-foot leash, no dogs on the beach; parks open 8am to 8pm (Seaside Park).",
+     "places": [
+      {
+       "name": "Seaside Park",
+       "official_name": "Seaside Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "City of Bridgeport, Parks & Recreation: Park Events (park rules)",
+       "source_url": "https://bridgeportct.gov/eventpermit"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/43398264"
+      },
+      {
+       "name": "The building's listing",
+       "url": "https://www.trulia.com/building/soundview-apartments-855-main-st-bridgeport-ct-06604-2734499849"
+      },
+      {
+       "name": "City of Bridgeport, Parks & Recreation: Park Events (park rules)",
+       "url": "https://bridgeportct.gov/eventpermit"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_e2378bf884",
@@ -4773,7 +9113,237 @@
    },
    "why_source": "apartment headline (cost)",
    "give_up_source": "neighborhood watch_for",
-   "why_topic": "value"
+   "why_topic": "value",
+   "fit": {
+    "drive_min": 88.7,
+    "toll_round_trip": 14.92,
+    "has_one_bedroom": true,
+    "has_studio": false,
+    "studio_only": false,
+    "min_total": 2204,
+    "max_total": 2204,
+    "parking_kind": "lot",
+    "parking_included": true,
+    "parking_fee": 0,
+    "garage_or_covered": false,
+    "off_street": true,
+    "dog_area_in_building": true,
+    "park_walk_min": 11.4,
+    "park_name": "Rowan Avenue Playground",
+    "dog_run_name": null,
+    "dog_run_m": 5611,
+    "restaurants_10min": 1,
+    "bars_10min": 3,
+    "cafes_10min": 0,
+    "sqft_max": 675,
+    "sqft_studio": null,
+    "sqft_one_bedroom": 675
+   },
+   "fit_chips": {
+    "visits_weekly": "About 89 minutes to Mom and Dad",
+    "visits_fortnightly": "About 89 minutes to Mom and Dad",
+    "visits_monthly": "About 89 minutes to Mom and Dad",
+    "drive_30": "About 89 minutes to Mom and Dad",
+    "drive_60": "About 89 minutes to Mom and Dad",
+    "drive_90": "About 89 minutes to Mom and Dad",
+    "room_bedroom": "Separate bedroom, about 675 square feet",
+    "room_desk": "Separate bedroom, about 675 square feet",
+    "sat_walk": "1 restaurant within a 10-minute walk",
+    "sat_drive": "A parking lot, included in the rent",
+    "sat_stay": "Up to about 675 square feet",
+    "dog_park": "Nearest park about 11 minutes on foot",
+    "dog_area": "A dog area at the building",
+    "car_garage": "A parking lot, included in the rent",
+    "car_offstreet": "A parking lot, included in the rent",
+    "total_2000": "Total about $2,204 a month",
+    "total_2100": "Total about $2,204 a month",
+    "total_2200": "Total about $2,204 a month",
+    "pick_parents": "About 89 minutes to Mom and Dad",
+    "pick_room": "Separate bedroom, about 675 square feet",
+    "pick_going_out": "1 restaurant within a 10-minute walk",
+    "pick_green": "Nearest park about 11 minutes on foot",
+    "pick_parking": "A parking lot, included in the rent",
+    "pick_money": "Total about $2,204 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 89 minutes to Mom and Dad",
+    "visits_fortnightly": "About 89 minutes to Mom and Dad",
+    "drive_30": "About 89 minutes to Mom and Dad",
+    "drive_60": "About 89 minutes to Mom and Dad",
+    "sat_walk": "1 restaurant within a 10-minute walk",
+    "dog_park": "Nearest park about 11 minutes on foot",
+    "car_garage": "A parking lot, included in the rent",
+    "total_2000": "Total about $2,204 a month",
+    "total_2100": "Total about $2,204 a month",
+    "total_2200": "Total about $2,204 a month",
+    "pick_parents": "About 89 minutes to Mom and Dad",
+    "pick_going_out": "1 restaurant within a 10-minute walk",
+    "pick_green": "Nearest park about 11 minutes on foot",
+    "pick_money": "Total about $2,204 a month"
+   },
+   "experience_line": "Small cities with a walkable downtown, and a longer drive to Mom and Dad.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "On select summer Thursdays, food trucks and live music gather at Kennedy Park downtown for lunch. For groceries, Price Rite is 0.8 miles away. For a change of desk, Danbury Public Library is a 10-minute walk.",
+     "places": [
+      {
+       "name": "Kennedy Park",
+       "official_name": "Downtown ChowDown, Kennedy Park",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "CityCenter Danbury: CityCenter Events",
+       "source_url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+      },
+      {
+       "name": "Price Rite",
+       "kind": "supermarket",
+       "walk_min": 20.3,
+       "distance_mi": 0.8,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/462818325"
+      },
+      {
+       "name": "Danbury Public Library",
+       "kind": "library",
+       "walk_min": 9.7,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/367138722"
+      }
+     ],
+     "sources": [
+      {
+       "name": "CityCenter Danbury: CityCenter Events",
+       "url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/462818325"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/367138722"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "1 restaurant is within a 10-minute walk. CityCenter Danbury puts on free live music on the CityCenter Green on select summer Fridays; bring a lawn chair (Summer in the City Concert Series). The nearest bar, La Kabanita, is 2 minutes on foot.",
+     "places": [
+      {
+       "name": "Summer in the City Concert Series",
+       "official_name": "Summer in the City Concert Series",
+       "kind": "event",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "CityCenter Danbury: CityCenter Events",
+       "source_url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+      },
+      {
+       "name": "CityCenter Green",
+       "official_name": "CityCenter Green",
+       "kind": "named in the source",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "CityCenter Danbury: CityCenter Events",
+       "source_url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+      },
+      {
+       "name": "La Kabanita",
+       "kind": "bar",
+       "walk_min": 1.8,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/13966532102"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "CityCenter Danbury: CityCenter Events",
+       "url": "https://citycenterdanbury.com/explore-2/our-citycenter-events/"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/13966532102"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 89 minutes away by car, about $15 round trip in tolls. Bring something from Mothership, a 3-minute walk.",
+     "places": [
+      {
+       "name": "Mothership",
+       "kind": "bakery",
+       "walk_min": 2.7,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/13426916401"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.453198,41.398020;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/13426916401"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Rowan Avenue Playground is an 11-minute walk for the daily loop. The building lists its own dog area. Tarrywile is free and open sunrise to sunset every day; city ordinance requires dogs on leash at all times (Daily, sunrise to sunset).",
+     "places": [
+      {
+       "name": "Rowan Avenue Playground",
+       "kind": "park",
+       "walk_min": 11.4,
+       "distance_mi": 0.4,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/43435920"
+      },
+      {
+       "name": "Tarrywile",
+       "official_name": "Tarrywile Park",
+       "kind": "park",
+       "walk_min": null,
+       "distance_mi": null,
+       "source_name": "Tarrywile Park & Mansion: The Park",
+       "source_url": "https://tarrywile.com/?p=22571"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/43435920"
+      },
+      {
+       "name": "The building's listing",
+       "url": "https://www.apartmentlist.com/ct/danbury/brookview-commons-east-great-downtown-living"
+      },
+      {
+       "name": "Tarrywile Park & Mansion: The Park",
+       "url": "https://tarrywile.com/?p=22571"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_022934bcb2",
@@ -4928,7 +9498,197 @@
    },
    "why_source": "building about",
    "give_up_source": "neighborhood scene",
-   "why_topic": "dog"
+   "why_topic": "dog",
+   "fit": {
+    "drive_min": 53.2,
+    "toll_round_trip": 43.05,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 2176,
+    "max_total": 2176,
+    "parking_kind": "covered",
+    "parking_included": false,
+    "parking_fee": null,
+    "garage_or_covered": true,
+    "off_street": true,
+    "dog_area_in_building": true,
+    "park_walk_min": 15.7,
+    "park_name": "Orange Park",
+    "dog_run_name": "Watsessing Dog Park",
+    "dog_run_m": 3145,
+    "restaurants_10min": 0,
+    "bars_10min": 1,
+    "cafes_10min": 0,
+    "sqft_max": 500,
+    "sqft_studio": 500,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 53 minutes to Mom and Dad",
+    "visits_fortnightly": "About 53 minutes to Mom and Dad",
+    "visits_monthly": "About 53 minutes to Mom and Dad",
+    "drive_30": "About 53 minutes to Mom and Dad",
+    "drive_60": "About 53 minutes to Mom and Dad",
+    "drive_90": "About 53 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 500 square feet",
+    "room_desk": "Studio only, about 500 square feet",
+    "sat_walk": "No restaurants within a 10-minute walk",
+    "sat_drive": "Covered parking",
+    "sat_stay": "Up to about 500 square feet",
+    "dog_park": "Nearest park about 16 minutes on foot",
+    "dog_area": "A dog area at the building",
+    "car_garage": "Covered parking",
+    "car_offstreet": "Covered parking",
+    "total_2000": "Total about $2,176 a month",
+    "total_2100": "Total about $2,176 a month",
+    "total_2200": "Total about $2,176 a month",
+    "pick_parents": "About 53 minutes to Mom and Dad",
+    "pick_room": "Studio only, about 500 square feet",
+    "pick_going_out": "No restaurants within a 10-minute walk",
+    "pick_green": "Nearest park about 16 minutes on foot",
+    "pick_parking": "Covered parking",
+    "pick_money": "Total about $2,176 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 53 minutes to Mom and Dad",
+    "drive_30": "About 53 minutes to Mom and Dad",
+    "room_bedroom": "Studio only, about 500 square feet",
+    "sat_walk": "No restaurants within a 10-minute walk",
+    "dog_park": "Nearest park about 16 minutes on foot",
+    "total_2000": "Total about $2,176 a month",
+    "total_2100": "Total about $2,176 a month",
+    "pick_room": "Studio only, about 500 square feet",
+    "pick_going_out": "No restaurants within a 10-minute walk",
+    "pick_green": "Nearest park about 16 minutes on foot",
+    "pick_money": "Total about $2,176 a month"
+   },
+   "experience_line": "Towns farther out, with more space for you in Hamden and East Orange.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "For groceries, ShopRite is 0.9 miles away. For a change of desk, Orange Public Library is a 4-minute walk.",
+     "places": [
+      {
+       "name": "ShopRite",
+       "kind": "supermarket",
+       "walk_min": 23.7,
+       "distance_mi": 0.9,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/4485772808"
+      },
+      {
+       "name": "Orange Public Library",
+       "kind": "library",
+       "walk_min": 3.7,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/11914102713"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/4485772808"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/11914102713"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "The nearest bar, Four City Brewery, is 4 minutes on foot.",
+     "places": [
+      {
+       "name": "Four City Brewery",
+       "kind": "bar",
+       "walk_min": 3.5,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/6817946350"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/6817946350"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 53 minutes away by car, about $43 round trip in tolls.",
+     "places": [],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-74.234154,40.772277;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: New Jersey Turnpike Authority",
+       "url": "https://www.njta.gov/wp-json/njta/v1/partials?slug=map%2Ftrip-details&tab=turnpike&vehicle-type=1&green-discount=false&senior-discount=false&entrance=15W&exit=16E"
+      },
+      {
+       "name": "Toll rates: Port Authority of NY & NJ",
+       "url": "https://www.panynj.gov/bridges-tunnels/en/tolls.html"
+      },
+      {
+       "name": "Toll rates: MTA (Triborough Bridge and Tunnel Authority)",
+       "url": "https://www.governor.ny.gov/news/putting-commuters-first-keeping-costs-down-governor-hochul-unveils-plans-future-transit-and"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      },
+      {
+       "name": "Toll rates: New Jersey Turnpike Authority",
+       "url": "https://www.njta.gov/wp-json/njta/v1/partials?slug=map%2Ftrip-details&tab=turnpike&vehicle-type=1&green-discount=false&senior-discount=false&entrance=16E&exit=15W"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Orange Park is a 16-minute walk for the daily loop. The building lists its own dog area. The nearest vet, Essex Animal Hospital, is 2.5 miles away.",
+     "places": [
+      {
+       "name": "Orange Park",
+       "kind": "park",
+       "walk_min": 15.7,
+       "distance_mi": 0.6,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/39680064"
+      },
+      {
+       "name": "Essex Animal Hospital",
+       "kind": "vet",
+       "walk_min": 65.1,
+       "distance_mi": 2.5,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/1289202477"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/39680064"
+      },
+      {
+       "name": "The building's listing",
+       "url": "https://www.apartmentlist.com/nj/orange/lia-by-vermella"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/1289202477"
+      }
+     ]
+    }
+   ]
   },
   {
    "id": "b_c4831201c1",
@@ -5086,7 +9846,179 @@
    },
    "why_source": "building about",
    "give_up_source": "neighborhood watch_for",
-   "why_topic": "green"
+   "why_topic": "green",
+   "fit": {
+    "drive_min": 35.2,
+    "toll_round_trip": 14.92,
+    "has_one_bedroom": false,
+    "has_studio": true,
+    "studio_only": true,
+    "min_total": 1989,
+    "max_total": 1989,
+    "parking_kind": null,
+    "parking_included": null,
+    "parking_fee": null,
+    "garage_or_covered": null,
+    "off_street": null,
+    "dog_area_in_building": false,
+    "park_walk_min": 2.2,
+    "park_name": "Fay Park",
+    "dog_run_name": "Canine Court",
+    "dog_run_m": 1772,
+    "restaurants_10min": 4,
+    "bars_10min": 0,
+    "cafes_10min": 0,
+    "sqft_max": null,
+    "sqft_studio": null,
+    "sqft_one_bedroom": null
+   },
+   "fit_chips": {
+    "visits_weekly": "About 35 minutes to Mom and Dad",
+    "visits_fortnightly": "About 35 minutes to Mom and Dad",
+    "visits_monthly": "About 35 minutes to Mom and Dad",
+    "drive_30": "About 35 minutes to Mom and Dad",
+    "drive_60": "About 35 minutes to Mom and Dad",
+    "drive_90": "About 35 minutes to Mom and Dad",
+    "room_bedroom": "Studio only",
+    "room_desk": "A studio; size not published",
+    "sat_walk": "4 restaurants within a 10-minute walk",
+    "sat_drive": "Parking not named in the listing",
+    "dog_park": "Fay Park, 2 minutes on foot",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "total_2000": "Total about $1,989 a month",
+    "total_2100": "Total about $1,989 a month",
+    "total_2200": "Total about $1,989 a month",
+    "pick_parents": "About 35 minutes to Mom and Dad",
+    "pick_room": "Studio only",
+    "pick_going_out": "4 restaurants within a 10-minute walk",
+    "pick_green": "Fay Park, 2 minutes on foot",
+    "pick_parking": "Parking not named in the listing",
+    "pick_money": "Total about $1,989 a month"
+   },
+   "fit_misses": {
+    "visits_weekly": "About 35 minutes to Mom and Dad",
+    "drive_30": "About 35 minutes to Mom and Dad",
+    "room_bedroom": "Studio only",
+    "sat_walk": "4 restaurants within a 10-minute walk",
+    "dog_area": "No dog area listed at the building",
+    "car_garage": "Parking not named in the listing",
+    "car_offstreet": "Parking not named in the listing",
+    "pick_room": "Studio only",
+    "pick_going_out": "4 restaurants within a 10-minute walk",
+    "pick_parking": "Parking not named in the listing"
+   },
+   "experience_line": "Small cities with a walkable downtown, and a longer drive to Mom and Dad.",
+   "life_here": [
+    {
+     "moment": "weekday",
+     "title": "A weekday",
+     "text": "Coffee at Carlos and Gabby's, 14 minutes on foot, then back to the desk.",
+     "places": [
+      {
+       "name": "Carlos and Gabby's",
+       "kind": "café",
+       "walk_min": 13.8,
+       "distance_mi": 0.5,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/2039276429"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/2039276429"
+      }
+     ]
+    },
+    {
+     "moment": "saturday",
+     "title": "Saturday night",
+     "text": "4 restaurants are within a 10-minute walk. The nearest bar, Madisons, is 14 minutes on foot.",
+     "places": [
+      {
+       "name": "Madisons",
+       "kind": "bar",
+       "walk_min": 13.8,
+       "distance_mi": 0.5,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/2039276430"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap (mapped places within 800 m)",
+       "url": "https://ftp5.gwdg.de/pub/misc/openstreetmap/download.geofabrik.de/north-america-latest.osm.pbf"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/2039276430"
+      }
+     ]
+    },
+    {
+     "moment": "sunday",
+     "title": "Sunday with Mom and Dad",
+     "text": "Mom and Dad are about 35 minutes away by car, about $15 round trip in tolls.",
+     "places": [],
+     "sources": [
+      {
+       "name": "OSRM route estimate, no traffic",
+       "url": "https://router.project-osrm.org/route/v1/driving/-73.902290,40.914051;-73.808530,40.699608?overview=full&geometries=geojson&steps=true&alternatives=3"
+      },
+      {
+       "name": "Toll rates: MTA Bridges and Tunnels",
+       "url": "https://dos.ny.gov/december-24-2025vol-xlvii-issue-51"
+      }
+     ]
+    },
+    {
+     "moment": "dog",
+     "title": "The dog's walk",
+     "text": "Fay Park is a 2-minute walk for the daily loop. The nearest dog run is at Canine Court, 1.1 miles away. The nearest vet, Riverdale Veterinary Group, is 1.9 miles away.",
+     "places": [
+      {
+       "name": "Fay Park",
+       "kind": "park",
+       "walk_min": 2.2,
+       "distance_mi": 0.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/506835390"
+      },
+      {
+       "name": "Canine Court",
+       "kind": "dog run",
+       "walk_min": 28.8,
+       "distance_mi": 1.1,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/way/442203294"
+      },
+      {
+       "name": "Riverdale Veterinary Group",
+       "kind": "vet",
+       "walk_min": 49.6,
+       "distance_mi": 1.9,
+       "source_name": "OpenStreetMap",
+       "source_url": "https://www.openstreetmap.org/node/8641884269"
+      }
+     ],
+     "sources": [
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/506835390"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/way/442203294"
+      },
+      {
+       "name": "OpenStreetMap",
+       "url": "https://www.openstreetmap.org/node/8641884269"
+      }
+     ]
+    }
+   ]
   }
  ],
  "either_or": [
@@ -5152,6 +10084,397 @@
     "top5_shared": 1,
     "buildings": 22
    }
+  }
+ ],
+ "questions": [
+  {
+   "id": "visits",
+   "text": "How often do you want to see Mom and Dad?",
+   "help": "This sets how much the drive counts.",
+   "kind": "single",
+   "must_have": false,
+   "answers": [
+    {
+     "id": "visits_weekly",
+     "label": "Every week",
+     "sublabel": "Most Sundays, at least",
+     "filter": null,
+     "weights": {
+      "parents": 30
+     },
+     "visits_per_month": 4,
+     "fits_alone": 22
+    },
+    {
+     "id": "visits_fortnightly",
+     "label": "Every other week",
+     "sublabel": "Twice a month or so",
+     "filter": null,
+     "weights": {
+      "parents": 20
+     },
+     "visits_per_month": 2,
+     "fits_alone": 22
+    },
+    {
+     "id": "visits_monthly",
+     "label": "About once a month",
+     "sublabel": "A visit every few weeks",
+     "filter": null,
+     "weights": {
+      "parents": 10
+     },
+     "visits_per_month": 1,
+     "fits_alone": 22
+    },
+    {
+     "id": "visits_rarely",
+     "label": "Now and then",
+     "sublabel": "Holidays and birthdays",
+     "filter": null,
+     "weights": {},
+     "visits_per_month": null,
+     "fits_alone": 22
+    }
+   ]
+  },
+  {
+   "id": "drive",
+   "text": "What is the longest drive you would make for a visit?",
+   "help": "Each way, with no traffic.",
+   "kind": "single",
+   "must_have": true,
+   "answers": [
+    {
+     "id": "drive_30",
+     "label": "Up to 30 minutes",
+     "sublabel": "Close enough for a weeknight dinner",
+     "filter": {
+      "field": "drive_min",
+      "op": "<=",
+      "value": 30
+     },
+     "weights": {},
+     "fits_alone": 5
+    },
+    {
+     "id": "drive_60",
+     "label": "Up to an hour",
+     "sublabel": "An easy Sunday drive",
+     "filter": {
+      "field": "drive_min",
+      "op": "<=",
+      "value": 60
+     },
+     "weights": {},
+     "fits_alone": 15
+    },
+    {
+     "id": "drive_90",
+     "label": "Up to 1½ hours",
+     "sublabel": "A real trip, but doable",
+     "filter": {
+      "field": "drive_min",
+      "op": "<=",
+      "value": 90
+     },
+     "weights": {},
+     "fits_alone": 21
+    },
+    {
+     "id": "drive_any",
+     "label": "Any of them",
+     "sublabel": "Distance is not the deciding thing",
+     "filter": null,
+     "weights": {},
+     "fits_alone": 22
+    }
+   ]
+  },
+  {
+   "id": "room",
+   "text": "When you work from home, what do you need?",
+   "help": null,
+   "kind": "single",
+   "must_have": true,
+   "answers": [
+    {
+     "id": "room_bedroom",
+     "label": "A separate bedroom",
+     "sublabel": "A door to close at the end of the day",
+     "filter": {
+      "field": "has_one_bedroom",
+      "op": "==",
+      "value": true
+     },
+     "weights": {
+      "home": 10
+     },
+     "fits_alone": 8
+    },
+    {
+     "id": "room_desk",
+     "label": "Studio with room for a desk",
+     "sublabel": "One room, set up well",
+     "filter": null,
+     "weights": {
+      "home": 5
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "room_either",
+     "label": "Either works",
+     "sublabel": "Any good space will do",
+     "filter": null,
+     "weights": {},
+     "fits_alone": 22
+    }
+   ]
+  },
+  {
+   "id": "saturday",
+   "text": "What does a good Saturday night look like?",
+   "help": null,
+   "kind": "single",
+   "must_have": false,
+   "answers": [
+    {
+     "id": "sat_walk",
+     "label": "Walking out to dinner",
+     "sublabel": "Restaurants and bars a short walk away",
+     "filter": null,
+     "weights": {
+      "going_out": 20
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "sat_drive",
+     "label": "Driving somewhere fun",
+     "sublabel": "Easy parking matters more than the corner bar",
+     "filter": null,
+     "weights": {
+      "parking": 10
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "sat_stay",
+     "label": "Staying in",
+     "sublabel": "A comfortable home matters most",
+     "filter": null,
+     "weights": {
+      "home": 10
+     },
+     "fits_alone": 22
+    }
+   ]
+  },
+  {
+   "id": "dog",
+   "text": "What does the dog's daily walk look like?",
+   "help": null,
+   "kind": "single",
+   "must_have": false,
+   "answers": [
+    {
+     "id": "dog_park",
+     "label": "A park to walk to",
+     "sublabel": "Green space a few minutes from the door",
+     "filter": null,
+     "weights": {
+      "green": 20
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "dog_area",
+     "label": "A dog area at the building",
+     "sublabel": "Quick trips out without going far",
+     "filter": null,
+     "weights": {
+      "green": 15
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "dog_either",
+     "label": "Either is fine",
+     "sublabel": "Any good walk will do",
+     "filter": null,
+     "weights": {},
+     "fits_alone": 22
+    }
+   ]
+  },
+  {
+   "id": "car",
+   "text": "Where will your car sleep at night?",
+   "help": null,
+   "kind": "single",
+   "must_have": false,
+   "answers": [
+    {
+     "id": "car_garage",
+     "label": "A garage, even if it costs",
+     "sublabel": "Covered and close, worth paying for",
+     "filter": null,
+     "weights": {
+      "parking": 25
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "car_offstreet",
+     "label": "Any spot off the street",
+     "sublabel": "A lot or a driveway space is fine",
+     "filter": null,
+     "weights": {
+      "parking": 15
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "car_street",
+     "label": "On the street is fine",
+     "sublabel": "Keep the money instead",
+     "filter": null,
+     "weights": {
+      "value": 5
+     },
+     "fits_alone": 22
+    }
+   ]
+  },
+  {
+   "id": "total",
+   "text": "What monthly total feels right to you, with utilities and fees?",
+   "help": "Rent plus electricity, gas, internet, pet rent and required fees.",
+   "kind": "single",
+   "must_have": true,
+   "answers": [
+    {
+     "id": "total_2000",
+     "label": "Up to $2,000",
+     "sublabel": "The most left over each month",
+     "filter": {
+      "field": "min_total",
+      "op": "<=",
+      "value": 2000
+     },
+     "weights": {
+      "value": 15
+     },
+     "fits_alone": 7
+    },
+    {
+     "id": "total_2100",
+     "label": "Up to $2,100",
+     "sublabel": "A little more room to choose",
+     "filter": {
+      "field": "min_total",
+      "op": "<=",
+      "value": 2100
+     },
+     "weights": {
+      "value": 10
+     },
+     "fits_alone": 10
+    },
+    {
+     "id": "total_2200",
+     "label": "Up to $2,200",
+     "sublabel": "The widest choice",
+     "filter": {
+      "field": "min_total",
+      "op": "<=",
+      "value": 2200
+     },
+     "weights": {
+      "value": 5
+     },
+     "fits_alone": 17
+    },
+    {
+     "id": "total_any",
+     "label": "Any of them",
+     "sublabel": "Price is not the deciding thing",
+     "filter": null,
+     "weights": {},
+     "fits_alone": 22
+    }
+   ]
+  },
+  {
+   "id": "top_two",
+   "text": "Which two matter most to you?",
+   "help": "Pick two.",
+   "kind": "pick_two",
+   "must_have": false,
+   "weights_mode": "double",
+   "answers": [
+    {
+     "id": "pick_parents",
+     "label": "Close to Mom and Dad",
+     "sublabel": "Shorter drives for visits",
+     "filter": null,
+     "weights": {
+      "parents": 2
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "pick_room",
+     "label": "Room to work",
+     "sublabel": "A separate bedroom, or more space",
+     "filter": null,
+     "weights": {
+      "home": 2
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "pick_going_out",
+     "label": "Going out nearby",
+     "sublabel": "Dinner and drinks on foot",
+     "filter": null,
+     "weights": {
+      "going_out": 2
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "pick_green",
+     "label": "Green space for the dog",
+     "sublabel": "A park close by",
+     "filter": null,
+     "weights": {
+      "green": 2
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "pick_parking",
+     "label": "Easy parking",
+     "sublabel": "A space at the building",
+     "filter": null,
+     "weights": {
+      "parking": 2
+     },
+     "fits_alone": 22
+    },
+    {
+     "id": "pick_money",
+     "label": "Money left over",
+     "sublabel": "The lowest total each month",
+     "filter": null,
+     "weights": {
+      "value": 2
+     },
+     "fits_alone": 22
+    }
+   ]
   }
  ]
 }

@@ -1,186 +1,143 @@
-/* Tests for the pick logic of the short page. Plain Node, no packages:  node scripts/test_concierge_pick.js
-   The logic is read straight out of site/concierge.html (the <script id="pick-logic"> block), so the page and the test
-   can never drift apart. Runs on made-up buildings and then on the page's data file when one exists
-   (site/concierge_data.json, else site/_concierge_fixture.json). */
+/* Tests for the match logic of the short page (version 2). Plain Node, no packages:  node scripts/test_concierge_pick.js
+   The file keeps its version 1 name so scripts/verify_concierge.py runs it unchanged; it now tests ConciergeMatch.
+   The logic is read straight out of site/concierge.html (the <script id="match-logic"> block), so the page and the test
+   cannot drift apart. Runs on made-up buildings, then on the page's data file (site/concierge_data.json when it has
+   `questions`, else site/_concierge_fixture.json; CONCIERGE_DATA=<file> picks one): every entry of meta.matching_examples must give exactly the order
+   and the failing set the data says. */
 "use strict";
 const fs = require("fs"), path = require("path"), assert = require("assert");
 const ROOT = path.resolve(__dirname, "..");
 const html = fs.readFileSync(path.join(ROOT, "site", "concierge.html"), "utf8");
-const m = /<script id="pick-logic">([\s\S]*?)<\/script>/.exec(html);
-assert(m, 'no <script id="pick-logic"> block in site/concierge.html');
-assert(!/\b(document|window|localStorage|navigator)\b/.test(m[1].replace(/\/\*[\s\S]*?\*\//g, "")), "the pick logic must not touch the page");
+const m = /<script id="match-logic">([\s\S]*?)<\/script>/.exec(html);
+assert(m, 'no <script id="match-logic"> block in site/concierge.html');
+assert(!/<script id="pick-logic">/.test(html), "the version 1 pick logic is still in the page");
+assert(!/\b(document|window|localStorage|navigator)\b/.test(m[1].replace(/\/\*[\s\S]*?\*\//g, "")), "the match logic must not touch the page");
 const mod = { exports: {} };
 new Function("module", m[1])(mod);
-const P = mod.exports;
+const M = mod.exports;
 let n = 0;
 function test(name, fn) { fn(); n++; console.log("ok  " + name); }
-const ids = (list) => list.map((b) => b.id);
+const ids = (list) => list.map((r) => r.b.id);
 
-/* ---- made-up data: 3 experiences, areas of different sizes ---- */
-function mk(id, exp, hood, rank, scores) { return { id, experience_id: exp, neighborhood_id: hood, rank_score: rank, scores: scores || {} }; }
-const data = {
-  neighborhoods: [{ id: "h1" }, { id: "h2" }, { id: "h3" }, { id: "h4", parked_under: "h1" }, { id: "h5" }, { id: "h6" }],
-  buildings: [
-    mk("a1", "A", "h1", 90, { parents: 1 }), mk("a2", "A", "h1", 88, { parents: 0.9 }), mk("a3", "A", "h4", 86), mk("a4", "A", "h1", 85),
-    mk("b1", "B", "h2", 70, { going_out: 1 }), mk("b2", "B", "h2", 60), mk("b3", "B", "h3", 55, { going_out: 0.2 }),
-    mk("c1", "C", "h5", 40, { green: 1 }), mk("c2", "C", "h6", 30), mk("c3", "C", "h6", 30),
-  ],
-};
-const B = P.prepare(data);
-const perArea = (list) => list.reduce((o, b) => ((o[b.area_id] = (o[b.area_id] || 0) + 1), o), {});
+/* ---- made-up data ---- */
+function mk(id, rank, scores, fit, extra) { return Object.assign({ id, experience_id: "E", neighborhood_id: "h", rank_score: rank, scores: scores || {}, fit: fit || {}, apartments: [] }, extra || {}); }
+const QS = [
+  { id: "visits", kind: "single", must_have: false, answers: [{ id: "weekly", label: "Every week", weights: { parents: 20 }, per_month: 4 }, { id: "monthly", label: "Once a month", weights: { parents: 4 } }] },
+  { id: "drive", kind: "single", must_have: true, answers: [{ id: "d30", label: "Half an hour", filter: { field: "drive_min", op: "<=", value: 30 }, weights: {} }, { id: "dany", label: "Any", filter: null, weights: {} }] },
+  { id: "room", kind: "single", must_have: true, answers: [{ id: "bed", label: "A separate bedroom", filter: { field: "has_one_bedroom", op: "==", value: true }, weights: { home: 10 } }, { id: "either", label: "Either", weights: {} }] },
+  { id: "sat", kind: "single", must_have: false, answers: [{ id: "walk", label: "Walk out", weights: { going_out: 20 } }, { id: "home", label: "Stay in", weights: { home: 10 } }] },
+  { id: "pri", kind: "pick_two", must_have: false, answers: [{ id: "p_par", label: "Mom and Dad", weights: { parents: 10 } }, { id: "p_out", label: "Going out", weights: { going_out: 10 } }, { id: "p_room", label: "Room", weights: { home: 10 } }] },
+];
+const BS = [
+  mk("a", 50, { parents: 1, going_out: 0.2, home: 0.1 }, { drive_min: 12, has_one_bedroom: false }, { fit_chips: { weekly: "12 minutes to Mom and Dad", d30: "12 minutes to Mom and Dad", walk: "3 restaurants" }, fit_misses: { bed: "Studios only here", walk: "Only 3 restaurants within a 10-minute walk" } }),
+  mk("b", 52, { parents: 0.2, going_out: 1, home: 0.5 }, { drive_min: 50, has_one_bedroom: true }, { fit_chips: { walk: "40 restaurants within a 10-minute walk", bed: "A separate bedroom" }, fit_misses: { d30: "50 minutes to Mom and Dad, more than your 30", weekly: "50 minutes each way" } }),
+  mk("c", 40, { parents: 0.5, going_out: 0.5, home: 1 }, { drive_min: null, has_one_bedroom: true }),
+  mk("d", 40, { parents: 0.5, going_out: 0.5, home: 1 }, { drive_min: 25, has_one_bedroom: true }),
+];
+const CFG = M.config({ meta: { matching: { priority_multiplier: 2, confirmed_bonus: 8 } } });
+const FLOOR = M.config({ meta: { matching: { pick_floor: 10, confirmed_bonus: 8 } } });
 
-test("prepare: a parked neighborhood counts as its host", () => {
-  assert.strictEqual(B.find((b) => b.id === "a3").area_id, "h1");
-  assert.strictEqual(B.find((b) => b.id === "b1").area_id, "h2");
-  assert.strictEqual(data.buildings[2].area_id, undefined, "the data itself is not changed");
+test("no answers: rank order, ties by id, nothing fails", () => {
+  const r = M.match(BS, QS, {}, CFG);
+  assert.deepStrictEqual(ids(r.fits), ["b", "a", "c", "d"]); assert.strictEqual(r.fails.length, 0);
 });
-test("returns five, in score order, with no duplicates", () => {
-  const r = P.pickFive(B, {}, [], [], []);
-  assert.strictEqual(r.length, 5);
-  assert.strictEqual(new Set(ids(r)).size, 5);
-  assert.deepStrictEqual(ids(r), ["a1", "a2", "b1", "b2", "b3"]);
+test("weights add weight x score", () => {
+  const s = M.score(BS[0], QS, { visits: "weekly" }, CFG);
+  assert.strictEqual(s, 50 + 20 * 1);
 });
-test("at most two per area, parked ones included", () => {
-  const r = P.pickFive(B, { A: "me" }, [], [], []);
-  Object.values(perArea(r)).forEach((c) => assert(c <= 2));
-  assert(!ids(r).includes("a3") && !ids(r).includes("a4"), "a3 (parked under h1) and a4 are the third and fourth in h1");
+test("a pick doubles the single-question weights on its key and adds its own weight", () => {
+  assert.strictEqual(M.score(BS[0], QS, { visits: "weekly", pri: ["p_par"] }, CFG), 50 + (20 * 2 + 10) * 1);
+  assert.strictEqual(M.score(BS[0], QS, { pri: ["p_par"] }, CFG), 50 + 10 * 1, "a key no other answer weighted counts the pick's own weight");
+  const t = M.score(BS[1], QS, { visits: "weekly", sat: "walk", pri: ["p_out", "p_room"] }, CFG);
+  assert.ok(Math.abs(t - (52 + 20 * 0.2 + (20 * 2 + 10) * 1 + 10 * 0.5)) < 1e-6);
+  assert.strictEqual(M.score(BS[0], QS, { pri: ["p_par", "p_out", "p_room"] }, CFG), M.score(BS[0], QS, { pri: ["p_par", "p_out"] }, CFG), "only two picks count");
 });
-test("answers re-weight: That's me 1.0, Maybe 0.6, Not me 0.25, none 0.6", () => {
-  const b = B[0];
-  assert.strictEqual(P.score(b, { A: "me" }, []), 90);
-  assert.strictEqual(P.score(b, { A: "maybe" }, []), 54);
-  assert.strictEqual(P.score(b, { A: "no" }, []), 22.5);
-  assert.strictEqual(P.score(b, {}, []), 54);
+test("the pick_floor form, when the data publishes it instead", () => {
+  const Q2 = QS.map((q) => q.kind === "pick_two" ? Object.assign({}, q, { answers: q.answers.map((a) => Object.assign({}, a, { weights: Object.fromEntries(Object.keys(a.weights).map((k) => [k, 2])) })) }) : q);
+  assert.strictEqual(M.score(BS[0], Q2, { visits: "weekly", pri: ["p_par"] }, FLOOR), 50 + 40 * 1);
+  assert.strictEqual(M.score(BS[0], Q2, { visits: "monthly", pri: ["p_par"] }, FLOOR), 50 + 20 * 1, "4 is raised to the floor, then doubled");
 });
-test("either/or adds the weight delta times the building's score", () => {
-  assert.strictEqual(P.score(B[0], { A: "me" }, [{ label: "x", weight: { parents: 10 } }]), 100);
-  assert.strictEqual(P.score(B[1], { A: "me" }, [{ parents: 10 }]), 97);
-  assert.strictEqual(P.score(B[2], { A: "me" }, [{ weight: { parents: 10, nothing: 5 } }]), 86);
-  const without = ids(P.pickFive(B, { A: "no", B: "no", C: "no" }, [], [], []));
-  const withGreen = ids(P.pickFive(B, { A: "no", B: "no", C: "no" }, [{ weight: { green: 50 } }], [], []));
-  assert(!without.includes("c1") && withGreen[0] === "c1", "a strong either/or answer moves a building up");
+test("a filter on a question that is not a must-have does not screen", () => {
+  const q2 = [{ id: "x", kind: "single", must_have: false, answers: [{ id: "x1", label: "X", filter: { field: "drive_min", op: "<=", value: 1 }, weights: {} }] }];
+  assert.strictEqual(M.match(BS, q2, { x: "x1" }, CFG).fails.length, 0);
 });
-test("at least one from each That's me experience", () => {
-  const r = P.pickFive(B, { A: "no", B: "no", C: "me" }, [], [], []);
-  assert(r.some((b) => b.experience_id === "C"));
-  const r2 = P.pickFive(B, { A: "me", B: "me", C: "me" }, [], [], []);
-  ["A", "B", "C"].forEach((e) => assert(r2.some((b) => b.experience_id === e), "missing " + e));
-  const lowC = B.map((b) => (b.experience_id === "C" ? Object.assign({}, b, { rank_score: 1 }) : b));
-  assert(P.pickFive(lowC, { A: "me", B: "me", C: "me" }, [], [], []).some((b) => b.experience_id === "C"), "even when it scores far lower");
+test("must-have filters move places to the failing group, with reasons; an unknown field passes", () => {
+  const r = M.match(BS, QS, { drive: "d30" }, CFG);
+  assert.deepStrictEqual(ids(r.fits).sort(), ["a", "c", "d"]);
+  assert.deepStrictEqual(ids(r.fails), ["b"]);
+  assert.deepStrictEqual(M.reasons(r.fails[0].b, r.fails[0].failed), [{ text: "50 minutes to Mom and Dad, more than your 30", said: "Half an hour" }]);
+  const r2 = M.match(BS, QS, { drive: "d30", room: "bed" }, CFG);
+  assert.deepStrictEqual(ids(r2.fits), ["c", "d"]);
+  assert.deepStrictEqual(M.reasons(r2.fails.find((x) => x.b.id === "a").b, r2.fails.find((x) => x.b.id === "a").failed).map((x) => x.text), ["Studios only here"]);
 });
-test("Not me moves an experience down and never removes it", () => {
-  const r = P.pickFive(B, { A: "no" }, [], [], []);
-  assert.deepStrictEqual(ids(r).slice(0, 3), ["b1", "b2", "b3"]);
-  const all = P.pickFive(B, { A: "no", B: "no", C: "no" }, [], [], [], 10);
-  assert.strictEqual(all.length, 10, "every building is still reachable");
+test("a failed filter with no miss text still gets a plain reason", () => {
+  const r = M.match([mk("z", 1, {}, { drive_min: 99 })], QS, { drive: "d30" }, CFG);
+  assert.deepStrictEqual(M.reasons(r.fails[0].b, r.fails[0].failed), [{ text: "Does not match", said: "Half an hour" }]);
 });
-test("everything Not me: still five, the best overall", () => {
-  const r = P.pickFive(B, { A: "no", B: "no", C: "no" }, [], [], []);
-  assert.strictEqual(r.length, 5);
-  assert.deepStrictEqual(ids(r), ids(P.pickFive(B, {}, [], [], [])));
-  assert.strictEqual(P.allNotMe(["A", "B", "C"], { A: "no", B: "no", C: "no" }), true);
-  assert.strictEqual(P.allNotMe(["A", "B", "C"], { A: "no", B: "no" }), false);
-  assert.strictEqual(P.allNotMe([], {}), false);
+test("countFits agrees with match", () => {
+  [{}, { drive: "d30" }, { drive: "d30", room: "bed" }, { room: "bed" }].forEach((a) => assert.strictEqual(M.countFits(BS, QS, a, CFG), M.match(BS, QS, a, CFG).fits.length));
 });
-test("a vetoed building is never returned", () => {
-  let vetoed = [];
-  for (let i = 0; i < 12; i++) {
-    const r = P.pickFive(B, { A: "me" }, [], vetoed, []);
-    r.forEach((b) => assert(!vetoed.includes(b.id), b.id + " came back"));
-    if (!r.length) break;
-    vetoed = vetoed.concat(r[0].id);
-  }
-  assert.strictEqual(P.pickFive(B, {}, [], ids(B), []).length, 0);
-  assert.strictEqual(P.pickFive(B, {}, [], ids(B).slice(0, 7), []).length, 3, "fewer than five when fewer are left");
-  assert(!ids(P.pickFive(B, {}, [], ["a1"], ["a1"])).includes("a1"), "a veto wins over a keep");
+test("confirmed today adds the bonus", () => {
+  const b = mk("x", 10, {}, {}, { apartments: [{ checked: { status: "confirmed_today" } }] });
+  assert.strictEqual(M.score(b, QS, {}, CFG), 18);
+  assert.strictEqual(M.score(mk("y", 10, {}, {}, { apartments: [{ checked: { status: "last_seen" } }] }), QS, {}, CFG), 10);
 });
-test("kept ones stay, first and in the order kept", () => {
-  const r = P.pickFive(B, { A: "me" }, [], ["a1"], ["c3", "b3"]);
-  assert.deepStrictEqual(ids(r).slice(0, 2), ["c3", "b3"]);
-  assert.strictEqual(r.length, 5);
-  const many = ["a1", "a2", "a3", "a4", "b1", "b2"];
-  assert.deepStrictEqual(ids(P.pickFive(B, {}, [], [], many, many.length)), many, "more than five kept: all stay");
-  assert.deepStrictEqual(ids(P.pickFive(B, {}, [], [], ["a1", "a2"])).filter((x) => x === "a3" || x === "a4"), [], "kept ones count toward two per area");
+test("chips: her answers only, not the ones it misses, her priorities first, at most three, no repeats", () => {
+  assert.deepStrictEqual(M.chips(BS[0], QS, { visits: "weekly", drive: "d30", sat: "walk" }), ["12 minutes to Mom and Dad"]);
+  const b = Object.assign({}, BS[0], { fit_chips: { weekly: "W", walk: "R", either: "E", p_out: "R" }, fit_misses: {} });
+  assert.deepStrictEqual(M.chips(b, QS, { visits: "weekly", room: "either", sat: "walk", pri: ["p_out"] }), ["R", "W", "E"]);
+  assert.deepStrictEqual(M.chips(BS[1], QS, { room: "bed", sat: "walk", pri: ["p_out"] }), ["40 restaurants within a 10-minute walk", "A separate bedroom"]);
+  assert.deepStrictEqual(M.chips(BS[1], QS, {}), []);
 });
-test("swapping one out leaves the other four alone", () => {
-  const first = ids(P.pickFive(B, { B: "me" }, [], [], []));
-  const others = first.slice(1);
-  const next = ids(P.pickFive(B, { B: "me" }, [], [first[0]], others));
-  assert.deepStrictEqual(next.slice(0, 4), others);
-  assert(!first.includes(next[4]));
+test("miss: at most one, only for a preference, priority first", () => {
+  assert.strictEqual(M.miss(BS[0], QS, { sat: "walk", room: "bed" }), "Only 3 restaurants within a 10-minute walk");
+  const b = Object.assign({}, BS[1], { fit_misses: { weekly: "50 minutes each way", p_room: "A small studio" } });
+  assert.strictEqual(M.miss(b, QS, { visits: "weekly", pri: ["p_room"] }), "A small studio", "a missed priority comes first");
+  assert.strictEqual(M.miss(BS[1], QS, { drive: "d30" }), null, "a must-have miss is a failure, not an amber chip");
+  assert.strictEqual(M.miss(BS[1], QS, { visits: "weekly" }), "50 minutes each way");
 });
-test("ties go to the lower id, whatever order the buildings come in", () => {
-  const r1 = ids(P.pickFive(B, { A: "no", B: "no", C: "me" }, [], ["c1"], []));
-  const r2 = ids(P.pickFive(B.slice().reverse(), { A: "no", B: "no", C: "me" }, [], ["c1"], []));
-  assert.deepStrictEqual(r1, r2);
-  assert(r1.indexOf("c2") < r1.indexOf("c3"));
-  for (let i = 0; i < 5; i++) assert.deepStrictEqual(ids(P.pickFive(B, { A: "me" }, [], [], [])), ids(P.pickFive(B, { A: "me" }, [], [], [])));
+test("visits a month", () => {
+  assert.strictEqual(M.perMonth(QS[0].answers[0]), 4);
+  assert.strictEqual(M.perMonth(QS[0].answers[1]), 1);
+  assert.strictEqual(M.perMonth({ id: "visits_twice", label: "Twice a month" }), 2);
+  assert.strictEqual(M.perMonth({ id: "visits_rarely", label: "Now and then", visits_per_month: null }), null);
+  assert.strictEqual(M.perMonth({ id: "v", label: "x", visits_per_month: 4 }), 4);
 });
-test("when two per area cannot fill five, the best of the rest fill in", () => {
-  const one = [mk("x1", "A", "h", 9), mk("x2", "A", "h", 8), mk("x3", "A", "h", 7), mk("x4", "A", "h", 6), mk("x5", "A", "h", 5), mk("x6", "A", "h", 4)];
-  assert.deepStrictEqual(ids(P.pickFive(one, {}, [], [], [])), ["x1", "x2", "x3", "x4", "x5"]);
+test("without questions the version 1 either/or questions are used, skippable", () => {
+  const q = M.questionsOf({ either_or: [{ id: "x", question: "This or that?", a: { label: "A", weight: { home: 30 } }, b: { label: "B", weight: { parents: 30 } } }] });
+  assert.strictEqual(q.length, 1); assert.strictEqual(q[0].must_have, false); assert.deepStrictEqual(q[0].answers.map((a) => a.id), ["x:a", "x:b"]);
+  assert.deepStrictEqual(M.questionsOf({}), []);
 });
-test("a building with an apartment confirmed today gets the bonus and goes first", () => {
-  assert.strictEqual(P.CONFIRMED_BONUS, 8);
-  const apt = (status) => ({ id: "x", checked: status ? { status, date: "2026-11-17" } : undefined });
-  const two = [mk("m1", "A", "h1", 50), mk("m2", "A", "h2", 50), mk("m3", "A", "h3", 50), mk("m4", "A", "h4", 57)];
-  two[0].apartments = [apt("last_seen")]; two[1].apartments = [apt("last_seen"), apt("confirmed_today")]; two[2].apartments = [apt("price_changed_today")];
-  assert.strictEqual(P.score(two[1], { A: "me" }, []) - P.score(two[0], { A: "me" }, []), 8, "the bonus is 8 on the rank scale");
-  assert.strictEqual(P.score(two[1], { A: "no" }, []), 50 * 0.25 + 8, "it is added after the answer, not multiplied");
-  assert.deepStrictEqual(ids(P.pickFive(two, {}, [], [], [])), ["m2", "m3", "m4", "m1"], "equal scores: confirmed first; 8 beats a 7-point lead");
-  assert.strictEqual(P.confirmedToday(two[0]), false); assert.strictEqual(P.confirmedToday(two[2]), true);
-});
-test("no checked field: exactly as before", () => {
-  const plain = [mk("n1", "A", "h1", 50), mk("n2", "A", "h2", 50)];
-  plain[0].apartments = [{ id: "a" }, { id: "b", checked: null }, { id: "c", checked: {} }, { id: "d", checked: { status: "something_else" } }];
-  assert.strictEqual(P.score(plain[0], { A: "me" }, []), 50);
-  assert.deepStrictEqual(ids(P.pickFive(plain, {}, [], [], [])), ["n1", "n2"]);
-  assert.deepStrictEqual(ids(P.pickFive(B, {}, [], [], [])), ["a1", "a2", "b1", "b2", "b3"]);
-});
-test("missing fields do not break it", () => {
-  const odd = [{ id: "p" }, { id: "q", rank_score: null, scores: null, experience_id: null }, { id: "r", rank_score: 3 }];
-  assert.deepStrictEqual(ids(P.pickFive(odd, null, null, null, null)), ["r", "p", "q"]);
-  assert.deepStrictEqual(P.pickFive([], {}, [], [], []), []);
+test("pick_two answers are a list; an unknown answer id is ignored", () => {
+  assert.strictEqual(M.score(BS[0], QS, { pri: ["nope"] }, CFG), 50);
+  assert.strictEqual(M.score(BS[0], QS, { visits: "nope" }, CFG), 50);
 });
 
-/* ---- the page's own data ---- */
-const real = path.join(ROOT, "site", "concierge_data.json"), fixture = path.join(ROOT, "site", "_concierge_fixture.json");
-const file = fs.existsSync(real) ? real : fs.existsSync(fixture) ? fixture : null;
-if (!file) console.log("--  no data file yet (site/concierge_data.json): the checks on real data were skipped");
-else {
-  const D = JSON.parse(fs.readFileSync(file, "utf8")), RB = P.prepare(D), exps = (D.experiences || []).map((e) => e.id);
-  const want = Math.min(5, RB.length);
-  const combos = [{}];
-  ["me", "maybe", "no"].forEach((v) => { const a = {}; exps.forEach((e) => (a[e] = v)); combos.push(a); });
-  exps.forEach((e) => { const a = {}; exps.forEach((x) => (a[x] = x === e ? "me" : "no")); combos.push(a); });
-  const sides = [[]].concat((D.either_or || []).map((q) => [q.a]), (D.either_or || []).map((q) => [q.b]), [(D.either_or || []).map((q) => q.a)]);
-  test(path.basename(file) + ": five every time, variety holds, That's me is represented (" + RB.length + " buildings)", () => {
-    combos.forEach((a) => sides.forEach((s) => {
-      const r = P.pickFive(RB, a, s, [], []);
-      assert.strictEqual(r.length, want);
-      assert.strictEqual(new Set(ids(r)).size, r.length);
-      const areas = new Set(RB.map((b) => b.area_id));
-      if (areas.size * P.PER_AREA >= want) Object.values(perArea(r)).forEach((c) => assert(c <= P.PER_AREA, "more than two in one area"));
-      exps.filter((e) => a[e] === "me").slice(0, want).forEach((e) => { if (RB.some((b) => b.experience_id === e)) assert(r.some((b) => b.experience_id === e), "no building from " + e); });
-      assert.deepStrictEqual(ids(r), ids(P.pickFive(RB.slice().reverse(), a, s, [], [])), "same answer whatever the order");
-    }));
+/* ---- the page's data ---- */
+const realPath = path.join(ROOT, "site", "concierge_data.json"), fixPath = path.join(ROOT, "site", "_concierge_fixture.json");
+let dataPath = null;
+for (const p of (process.env.CONCIERGE_DATA ? [path.resolve(process.env.CONCIERGE_DATA)] : [realPath, fixPath])) { if (fs.existsSync(p)) { const d = JSON.parse(fs.readFileSync(p, "utf8")); if (Array.isArray(d.questions) && d.questions.length) { dataPath = p; break; } } }
+if (dataPath) {
+  const D = JSON.parse(fs.readFileSync(dataPath, "utf8"));
+  const B = M.prepare(D), Q = M.questionsOf(D), C = M.config(D);
+  const ex = (D.meta && D.meta.matching_examples) || [];
+  test("the data (" + path.basename(dataPath) + ") has matching examples", () => assert.ok(ex.length >= 1, "meta.matching_examples is empty"));
+  ex.forEach((e, i) => test("example " + (i + 1) + ": " + (e.name || ""), () => {
+    const r = M.match(B, Q, e.answers || {}, C);
+    const want = e.expected_fits || e.order || e.expected_order || [];
+    assert.deepStrictEqual(ids(r.fits), want, "order");
+    const wf = e.expected_doesnt_fit || e.failing || e.expected_failing;
+    if (wf) assert.deepStrictEqual(ids(r.fails), wf, "the non-fitting group, in order");
+    const sc = e.expected_scores;
+    if (sc) r.fits.concat(r.fails).forEach((x) => assert.ok(Math.abs(x.s - sc[x.b.id]) < 0.0015, x.b.id + " score " + x.s + " vs " + sc[x.b.id]));
+  }));
+  test("every filter names a field that buildings[].fit carries", () => {
+    const fields = new Set(); B.forEach((b) => Object.keys(b.fit || {}).forEach((k) => fields.add(k)));
+    Q.forEach((q) => q.answers.forEach((a) => { if (a.filter) assert.ok(fields.has(a.filter.field), q.id + "/" + a.id + " filters on " + a.filter.field); }));
   });
-  test(path.basename(file) + ": vetoing through the whole list never brings one back", () => {
-    const vetoed = [], seen = new Set();
-    let slots = ids(P.pickFive(RB, combos[1], [], [], []));
-    for (let guard = 0; guard < RB.length + 5 && slots.length; guard++) {
-      slots.forEach((id) => { assert(!vetoed.includes(id)); seen.add(id); });
-      const out = slots[0], others = slots.slice(1);
-      vetoed.push(out);
-      const r = ids(P.pickFive(RB, combos[1], [], vetoed, others));
-      assert(!r.includes(out));
-      slots = r;
-    }
-    assert.strictEqual(seen.size, RB.length, "every building gets its turn");
+  test("chips and misses are keyed by real answer ids", () => {
+    const aids = new Set(); Q.forEach((q) => q.answers.forEach((a) => aids.add(a.id)));
+    B.forEach((b) => ["fit_chips", "fit_misses"].forEach((k) => Object.keys(b[k] || {}).forEach((id) => assert.ok(aids.has(id), b.id + " " + k + " has " + id))));
   });
-  test(path.basename(file) + ": parked neighborhoods point at a real, unparked host", () => {
-    const H = {}; (D.neighborhoods || []).forEach((h) => (H[h.id] = h));
-    (D.neighborhoods || []).forEach((h) => { if (h.parked_under) { assert(H[h.parked_under], h.id + " is parked under a neighborhood that is not in the data"); assert(!H[h.parked_under].parked_under, h.id + " is parked under a parked neighborhood"); } });
-  });
-}
-console.log("\n" + n + " tests passed");
+} else console.log("note: no data file with questions; only the made-up tests ran");
+console.log(n + " tests passed");

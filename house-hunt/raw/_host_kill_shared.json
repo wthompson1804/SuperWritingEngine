@@ -74,5 +74,35 @@
   "url": "https://tours.liabyvermella.com/",
   "at": "2026-11-17T13:55:41+00:00",
   "by": "live_check_batch_21"
+ },
+ "www.queenslibrary.org": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://www.queenslibrary.org/robots.txt",
+  "at": "2026-11-17T15:17:03+00:00",
+  "by": "life_here"
+ },
+ "www.stamfordct.gov": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://www.stamfordct.gov/robots.txt",
+  "at": "2026-11-17T15:17:03+00:00",
+  "by": "life_here"
+ },
+ "tiginirishpub.com": {
+  "reason": "HTTP 403 bot wall",
+  "url": "https://tiginirishpub.com/stamford/",
+  "at": "2026-11-17T15:21:07+00:00",
+  "by": "life_here"
+ },
+ "avontheatre.org": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://avontheatre.org/robots.txt",
+  "at": "2026-11-17T15:21:56+00:00",
+  "by": "life_here"
+ },
+ "www.toasttab.com": {
+  "reason": "HTTP 403 bot wall",
+  "url": "https://www.toasttab.com/local/order/mothership-on-main-331-main-st",
+  "at": "2026-11-17T15:28:52+00:00",
+  "by": "life_here"
  }
 }
