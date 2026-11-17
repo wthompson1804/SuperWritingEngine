@@ -985,7 +985,7 @@ watch: The apartments are small, about {sqft} square feet{!sqft_hi<=600}.
 
 === hood: nj:elizabeth
 host_intro: Residents of Elizabeth praise its parks and the downtown shops, and they warn that parking is hard. [[A park is about {parkwalk} minutes {door}, and the supermarket is {super} miles away{!parkwalk<=6}{!super<=500}.]]
-scene: About {rest} restaurants are within a {w10}, and there are no bars{!bars==0}. {thestation} is {station} miles away.
+scene: About {rest} restaurants are within a {w10}[[, and there are no bars{!bars==0}]][[, and there are {fewbars} nearby{!bars>=0.5}]]. {thestation} is {station} miles away.
 good: A park and the supermarket are both a short walk{!parkwalk<=6}{!super<=500}.
 watch: Ask {eachb} where you would park, because residents say street spaces are hard to find.
 voices: dogs_green, social_life, parking
@@ -1034,9 +1034,9 @@ good: Dinner, drinks and {thetrain} are all a short walk{!rest>=40}{!station<=10
 watch: Your parents are about {drive} minutes away, and each visit costs {tollcost}.
 
 === hood: nj:paterson
-host_intro: Paterson has {pg_n} apartments to choose from{!pg_n>=12}. [[A dog run is {dogpark} miles {door}{!dogpark<=800}{!dog_any==0}, and a park about {parkwalk} minutes on foot.]] Within {mile} there are {rest1600} restaurants.
+host_intro: [[Paterson has {pg_n} apartments to choose from{!pg_n>=12}.]] [[A dog run is {dogpark} miles {door}{!dogpark<=800}{!dog_any==0}, and a park about {parkwalk} minutes on foot.]] Within {mile} there are {rest1600} restaurants.
 scene: The supermarket is {super} miles {door}, and {thestation} {station} miles. {fewbars} are within a {w10}.
-good: [[Many apartments to compare, with a dog run close by{!pg_n>=12}{!dogpark<=800}{!dog_any==0}.]]
+good: [[Many apartments to compare, with a dog run close by{!pg_n>=12}{!dogpark<=800}{!dog_any==0}.]][[You can walk to {thetrain}{!station<=1000}{!nb==0}.]]
 watch: Ask {eachb} about parking, because most have no garage{!own_garage<0.5}.
 
 === hood: nj:piscataway
@@ -1096,8 +1096,8 @@ good: The drive to your parents has no tolls{!b_toll==0}.
 watch: You would drive for dinner, groceries and the train{!rest==0}{!super>=1200}{!station>=3200}.
 
 === hood: ny:goshen
-host_intro: In Goshen a park is about {parkwalk} minutes {door}{!parkwalk<=3}, and about {rest} restaurants are within a {w10}{!rest>=5}. The apartments cost about ${pg_mid} a month with utilities and fees, well under your limit{!pg_hi<=2400}.
-scene: The supermarket is {super} miles away, so groceries are a drive{!super>=3200}. [[A dog park is {dogpark} miles away{!dog_any==0}.]] The apartments are a good size, about {sqft} square feet{!sqft_lo>=750}.
+host_intro: In Goshen a park is about {parkwalk} minutes {door}{!parkwalk<=3}, and about {rest} restaurants are within a {w10}{!rest>=5}. {theapts_cap} {costs_cost} about ${pg_mid} a month with utilities and fees, well under your limit{!pg_hi<=2400}.
+scene: The supermarket is {super} miles away, so groceries are a drive{!super>=3200}. [[A dog park is {dogpark} miles away{!dog_any==0}.]] {theapts_cap} {is_are} a good size, about {sqft} square feet{!sqft_lo>=750}.
 good: A park, dinner and coffee are all a short walk{!parkwalk<=3}{!rest>=5}.
 watch: Your parents are about {drive} minutes away, so visits would be day trips{!drive>=90}.
 

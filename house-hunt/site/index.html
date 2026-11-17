@@ -2717,9 +2717,11 @@ var HL={
   dog:function(U){var d=U.dog||{},w=d.weight_limit_lb;if(openFact(U,OPEN_DOG))return "dog policy not confirmed, ask";if(d.allowed!=="yes")return "not stated, ask";
     return "allowed, "+(w==="no limit"?"no weight limit":w!=null&&isFinite(+w)?"up to "+r0(+w)+" lb":smallDog(U)?"small dogs, no weight given":"weight limit not stated")},
   building:function(U){var a=U.amenities||{},o=[];
-    if(walkUp(U))o.push(walkUp(U).charAt(0).toLowerCase()+walkUp(U).slice(1));else if(openFact(U,OPEN_ELEV))o.push("elevator not confirmed");else if(U.elevator&&U.elevator.value==="yes")o.push("elevator");if(a.in_unit_laundry==="yes")o.push(!wdBoth(U)?wdWord(U)+" in the apartment":wdTagOnly(U)?"washer-dryer listed, to confirm":"washer-dryer in the apartment");if(a.gym)o.push("gym");if(a.pool)o.push("pool");
+    if(walkUp(U))o.push("floor 2, no elevator needed"); /* short in the headline; the fact line keeps the full wording */else if(openFact(U,OPEN_ELEV))o.push("elevator not confirmed");else if(U.elevator&&U.elevator.value==="yes")o.push("elevator");if(a.in_unit_laundry==="yes")o.push(!wdBoth(U)?wdWord(U)+" in the apartment":wdTagOnly(U)?"washer-dryer listed, to confirm":"washer-dryer in the apartment");if(a.gym)o.push("gym");if(a.pool)o.push("pool");
     if(deskOf(a))o.push(deskOf(a));if(a.outdoor_space)o.push("outdoor space");
-    return o.length?o.slice(0,3).join(", "):"details not published"},
+    /* keep whole items only, while the headline fits HL_MAX (a cut headline is never shown) */
+    var out=[];o.slice(0,3).forEach(function(x){if((out.concat([x]).join(", ")).length<=HL_MAX)out.push(x)});
+    return out.length?out.join(", "):"details not published"},
   /* the count behind the star: open gate facts only (N2); then the things to ask */
   confirm:function(U){var c=confs(U).length,d=discsShown(U).length;return [c?pl(c,"thing")+" to confirm":"",d?d+" to ask":""].filter(Boolean).join(" · ")||"nothing"},
   day:function(U){var d=dayOfUnit(U),c=function(t){return d.filter(function(x){return x.tint===t}).length},o=[c("s")?c("s")+" strong":"",c("m")?c("m")+" mixed":"",c("w")?c("w")+" weak":""].filter(Boolean);

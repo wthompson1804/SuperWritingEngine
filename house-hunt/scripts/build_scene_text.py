@@ -207,6 +207,11 @@ OWN_WORDS = {
 # {eachb} / {everyb}: "each building" / "every building" where several are shown (or none: the text is then about
 # the area), "the building" where one is: advice to "ask each building" above a single building reads as an error.
 BUILDING_WORDS = {"eachb": "each building", "everyb": "every building"}
+# {theapts_cap} / {theapts} and the verbs {is_are} {costs_cost} {has_have}: the words follow the number of apartments
+# shown (2026-11-17, Goshen going from 2 apartments to 1), so "The apartments cost ..." becomes "The apartment costs ..."
+# without a second draft. The test rests on counts.shown; with nothing shown the plural is used.
+APT_WORDS = {"theapts_cap": ("The apartment", "The apartments"), "theapts": ("the apartment", "the apartments"),
+             "is_are": ("is", "are"), "costs_cost": ("costs", "cost"), "has_have": ("has", "have")}
 # WORD TOKENS (independent check 5). Each prints fixed words chosen by a field, and records the test it rests on.
 # {thestation} {astation} {thetrain}: the nearest station named by its kind (N3). The kind is the one every shown
 #   building shares; where they differ the words are neutral ("the nearest station"). A neighborhood with nothing
@@ -403,7 +408,7 @@ def drop_optional(raw, ctx):
     def keep(m):
         for t in TOKEN.finditer(m.group(1)):
             hidden, at, alias, _, op, operand = t.groups()
-            if alias in CONVENTION or alias == "door" or alias in BUILDING_WORDS:
+            if alias in CONVENTION or alias == "door" or alias in BUILDING_WORDS or alias in APT_WORDS:
                 continue
             if alias in OWN_WORDS:
                 if own_words(alias, ctx)[0] is None:
@@ -477,6 +482,14 @@ def render(raw, ctx, evidence, scope=False):
                     pending.append({"field": "buildings", "value": nb, "source_file": PAGE_H, "row": {"hood_id": ctx["id"]},
                                     "holds_if": ["==", "1"] if nb == 1 else [">=", "2"]})
                 return "the building" if nb == 1 else BUILDING_WORDS[alias]
+            if alias in APT_WORDS:
+                if ctx["kind"] != "hood":
+                    raise ValueError(f"{ctx['id']}: {{{alias}}} is for neighborhood text")
+                n = int(C.lookup(PAGE_H, "shown", {"hood_id": ctx["id"]}) or 0) if ctx["id"] in C.shown_hoods() else 0
+                if ctx["id"] in C.shown_hoods():
+                    pending.append({"field": "shown", "value": n, "source_file": PAGE_H, "row": {"hood_id": ctx["id"]},
+                                    "holds_if": ["==", "1"] if n == 1 else [">=", "2"]})
+                return APT_WORDS[alias][0 if n == 1 else 1]
             if alias in OWN_WORDS:
                 words, evs = own_words(alias, ctx)
                 if words is None:
