@@ -296,8 +296,30 @@ const shownTop = (page) => page.evaluate(() => [...document.querySelectorAll("#a
     const box = await page.locator(".filter").boundingBox(); ok(box && box.y < 600, "the filter is near the top of See everything");
     const slider = page.locator("#f-rent"), min = Number(await slider.getAttribute("min")), max = Number(await slider.getAttribute("max"));
     await slider.evaluate((el, v) => { el.value = v; el.dispatchEvent(new Event("input", { bubbles: true })); }, String(Math.round((min + (max - min) * 0.45) / 50) * 50));
+    await page.waitForTimeout(80);
     const fewer = await page.locator("#all-list .row").count(); ok(fewer < NB && fewer > 0, "the rent filter changes the list");
     await slider.evaluate((el, v) => { el.value = v; el.dispatchEvent(new Event("input", { bubbles: true })); }, String(max));
+    await page.waitForTimeout(80);
+    ok((await page.locator("#all-list .row").count()) === NB, "back to every building");
+    /* at most three rows show per place until "Show N more" */
+    const over = await page.evaluate(() => [...document.querySelectorAll("#all-list .grp")].filter((g) => [...g.querySelectorAll(".row")].filter((r) => r.checkVisibility()).length > 3).length);
+    ok(over === 0, "no place shows more than three rows before Show more");
+    const moreBtn = page.locator('#all-list [data-act="grp-more"]').first();
+    if (await moreBtn.count()) {
+      const ctl = await moreBtn.getAttribute("aria-controls"), hidden = await page.locator("#" + ctl.replace(/:/g, "\\:") + " .row").count();
+      ok(/^Show \d+ more in /.test(await moreBtn.innerText()) && Number(/\d+/.exec(await moreBtn.innerText())[0]) === hidden, "Show N more says how many");
+      await moreBtn.click();
+      ok((await moreBtn.getAttribute("aria-expanded")) === "true" && (await page.locator("#" + ctl.replace(/:/g, "\\:")).isVisible()), "Show more opens the rest");
+      await everyScreen(page, L + "show more", LIMIT);
+      await moreBtn.click();
+    }
+    /* the state filter */
+    const states = [...new Set(D.buildings.map((b) => b.state || (HB[b.neighborhood_id] || {}).state).filter(Boolean))].sort();
+    if (states.length > 1) {
+      await page.click('[data-act="f-state"][data-v="' + states[0] + '"]');
+      ok((await page.locator("#all-list .row").count()) === D.buildings.filter((b) => (b.state || (HB[b.neighborhood_id] || {}).state) === states[0]).length, "state filter");
+      await page.click('[data-act="f-state"][data-v="any"]');
+    }
     await page.click('[data-act="f-beds"][data-v="0"]');
     ok((await page.locator("#all-list .row").count()) === D.buildings.filter((b) => b.apartments.some((a) => a.beds === 0)).length, "bedrooms filter");
     await page.click('[data-act="f-beds"][data-v="any"]');

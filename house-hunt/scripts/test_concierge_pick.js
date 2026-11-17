@@ -4,7 +4,7 @@
    the test cannot drift apart. It runs on the page's data (site/concierge_data.json when it carries the version 3
    fields, else site/_concierge_fixture.json; CONCIERGE_DATA=<file> picks one):
      1. every meta.recommender_examples entry, replayed answer by answer, must ask exactly expected_pairs and end with
-        exactly expected_top, expected_mean_weights, expected_top_set_probability, expected_more_like_this,
+        exactly expected_top, expected_mean_weights, expected_stop_probability, expected_more_like_this,
         expected_why, expected_gives_up and expected_what_would_change (each where the example has it);
      2. property tests: deterministic; never a set-aside building anywhere; three different neighborhoods; more like
         this never repeats a building on screen; pairs never repeat; 3 to 6 pairs; "either" favours samples where the
@@ -69,7 +69,7 @@ EX.forEach((ex) => {
   test("example '" + name + "': weights, probability, more like this, why, gives up, what would change", () => {
     const p = R.play(M, ex), r = p.rec;
     if (ex.expected_mean_weights) assert.deepStrictEqual(Object.fromEntries(M.feats.map((k, i) => [k, r.weights[i]])), ex.expected_mean_weights);
-    if (ex.expected_top_set_probability != null) assert.strictEqual(Number(R.holds(M, p.asked).p.toFixed(6)), ex.expected_top_set_probability);
+    if (ex.expected_stop_probability != null) assert.strictEqual(Number(R.holds(M, p.asked).p.toFixed(6)), ex.expected_stop_probability);
     const by = (f) => Object.fromEntries(r.neighborhoods.map((x) => [x.neighborhood_id, f(x)]));
     if (ex.expected_more_like_this) assert.deepStrictEqual(Object.fromEntries(r.neighborhoods.flatMap((x) => x.buildings.map((b) => [b.id, b.more_like_this]))), ex.expected_more_like_this);
     if (ex.expected_why) assert.deepStrictEqual(by((x) => x.why), ex.expected_why);
@@ -176,10 +176,15 @@ test("the nudge brings the promised neighborhood to the top", () => {
     assert(/^If .+ mattered (more|less), .+ would come first\.$/.test(w.text), k);
   }
 });
-test("the stop rule: the most likely top three holds at stop_prob, or six pairs were asked", () => {
+test("the stop rule: each sample's best neighborhood is among the three with probability >= stop_prob, or max_pairs were asked; never before min_pairs", () => {
   for (const k in RULES) {
     const A = walk(RULES[k]), h = R.holds(M, A);
     assert(h.stop && (A.length >= M.cfg.max_pairs || Number(h.p.toFixed(9)) >= M.cfg.stop_prob), k);
+    for (let i = 0; i < A.length; i++) {   /* it did not stop earlier: before min_pairs, or below stop_prob */
+      const hi = R.holds(M, A.slice(0, i));
+      assert(!hi.stop && (i < M.cfg.min_pairs || Number(hi.p.toFixed(9)) < M.cfg.stop_prob), k + ": should have stopped after " + i);
+    }
+    assert(h.p >= 0 && h.p <= 1 + 1e-12, k + ": a probability");
   }
 });
 test("every building the model scores is a building in the data, and every group has a name", () => {
