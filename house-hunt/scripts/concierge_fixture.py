@@ -529,6 +529,187 @@ def add_v3(out):
     return out
 
 
+# ======================================================================================================================
+# Version 4 (docs/CONCIERGE_DESIGN.md, "Version 4"): choices between made-up apartments (choice-based conjoint, partial
+# profiles). FIXTURE ONLY until scripts/recommender.py ships meta.recommender.conjoint: the attributes, levels,
+# candidate pairs, the small reference below and its examples are stand-ins made here. Level values come from the
+# reference's own value functions (recommender.f_*), so a made-up apartment scores like a real one would.
+#   meta.recommender.conjoint = {fixture, n_choices, attributes: [{id, feature, label, levels: [{text, value}]}],
+#                                candidates: [{id, diff: {attribute id: [level index for A, level index for B]}}],
+#                                labels: {feature: plain words}, algorithm: {...}}
+#   meta.recommender_examples = [{persona, hidden_weights, answers: [{pair, choice}], expected_pairs: [ids],
+#                                 expected_mean_weights, expected_priorities: [features, most first], expected_top}]
+# ======================================================================================================================
+CJ_N = 8
+CJ_LABELS = {"family": "being near Mom and Dad", "money": "a lower monthly total", "room": "space at home",
+             "going_out": "going out nearby", "green": "a park for the dog", "parking": "parking"}
+
+
+def cj_attributes(R):
+    money = [1700, 1900, 2100, 2300]
+    drive = [15, 35, 60, 90]
+    room = [(450, False, "Studio, about 450 sq ft"), (600, False, "Studio, about 600 sq ft"),
+            (700, True, "One bedroom, about 700 sq ft"), (900, True, "One bedroom, about 900 sq ft")]
+    going = [(2, "Quiet: a couple of places on foot"), (15, "Some: about 15 places on foot"), (45, "Lively: 40 or more places on foot")]
+    park = [("street", "Street parking only"), ("lot", "A spot in a lot"), ("garage", "A garage")]
+    green = [2, 8, 15]
+    r6 = lambda x: round(x, 6)
+    return [
+        {"id": "money", "feature": "money", "label": "Monthly total with utilities and fees",
+         "levels": [{"text": f"${m:,} a month", "value": r6(R.f_money(m))} for m in money]},
+        {"id": "family", "feature": "family", "label": "Drive to Mom and Dad",
+         "levels": [{"text": f"{d} minutes", "value": r6(R.f_family(d))} for d in drive]},
+        {"id": "room", "feature": "room", "label": "Space",
+         "levels": [{"text": t, "value": r6(R.f_room(sq, bd))} for sq, bd, t in room]},
+        {"id": "going_out", "feature": "going_out", "label": "Going out",
+         "levels": [{"text": t, "value": r6(R.f_going(n))} for n, t in going]},
+        {"id": "parking", "feature": "parking", "label": "Parking",
+         "levels": [{"text": t, "value": r6(R.f_parking(k))} for k, t in park]},
+        {"id": "green", "feature": "green", "label": "A park for the dog",
+         "levels": [{"text": f"{g} minutes on foot", "value": r6(R.f_green(g, False))} for g in green]},
+    ]
+
+
+def cj_candidates(attrs):
+    """Two attributes differ; A is better on the first and worse on the second (never dominated); every level pair."""
+    out = []
+    for x in range(len(attrs)):
+        for y in range(len(attrs)):
+            if x == y:
+                continue
+            ax, ay = attrs[x], attrs[y]
+            for i in range(len(ax["levels"])):
+                for j in range(len(ax["levels"])):
+                    if ax["levels"][i]["value"] <= ax["levels"][j]["value"]:
+                        continue                     # A better on x
+                    for k in range(len(ay["levels"])):
+                        for l in range(len(ay["levels"])):
+                            if ay["levels"][k]["value"] >= ay["levels"][l]["value"]:
+                                continue             # A worse on y
+                            if x > y:
+                                continue             # one orientation per attribute pair: x listed first
+                            out.append({"diff": {ax["id"]: [i, j], ay["id"]: [k, l]}})
+    for n, c in enumerate(out):
+        c["id"] = f"c{n:04d}"
+    return out
+
+
+def cj_gap(w, cand, attrs, feats):
+    t = []
+    for a in attrs:
+        if a["id"] in cand["diff"]:
+            ia, ib = cand["diff"][a["id"]]
+            t.append(w[feats.index(a["feature"])] * (a["levels"][ia]["value"] - a["levels"][ib]["value"]))
+    return sum(t)
+
+
+def cj_posterior(R, samples, answers, cmap, attrs, params):
+    feats = params["features"]
+    raw = []
+    for w in samples:
+        p = 1.0
+        for x in answers:
+            p *= R.likelihood(cj_gap(w, cmap[x["pair"]], attrs, feats), x["choice"], params)
+        raw.append(p)
+    s = sum(raw)
+    return [1.0 / len(raw)] * len(raw) if s <= 0 else [p / s for p in raw]
+
+
+def cj_entropy(ps):
+    return -sum(p * math.log(p) for p in ps if p > 0)
+
+
+def cj_next(R, samples, answers, cands, cmap, attrs, params, n_choices):
+    if len(answers) >= n_choices:
+        return None
+    feats, T, band = params["features"], params["temperature"], params["either_band"]
+    pi = cj_posterior(R, samples, answers, cmap, attrs, params)
+    asked = {x["pair"] for x in answers}
+    h0 = cj_entropy(pi)
+    best = None
+    for c in cands:
+        if c["id"] in asked:
+            continue
+        m = [[], [], []]
+        for s, w in enumerate(samples):
+            g = cj_gap(w, c, attrs, feats)
+            pa, pb = R._sig((g - band) / T), R._sig((-g - band) / T)
+            pe = max(0.0, 1.0 - pa - pb)
+            m[0].append(pi[s] * pa); m[1].append(pi[s] * pb); m[2].append(pi[s] * pe)
+        eh = 0.0
+        for mm in m:
+            P = sum(mm)
+            if P > 0:
+                eh += P * cj_entropy([x / P for x in mm])
+        gain = R.q(h0 - eh)
+        if best is None or gain > best[0]:
+            best = (gain, c["id"])
+    return best[1] if best else None
+
+
+def cj_priorities(w, feats):
+    return [k for _, _, k in sorted((-round(w[j], 9), j, k) for j, k in enumerate(feats))]
+
+
+def add_v4(out):
+    m = out["meta"].setdefault("recommender", {})
+    if (m.get("conjoint") or {}) and not (m.get("conjoint") or {}).get("fixture"):
+        return out
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import recommender as R  # noqa: E402
+    attrs = cj_attributes(R)
+    cands = cj_candidates(attrs)
+    cmap = {c["id"]: c for c in cands}
+    params = m
+    samples = out["recommender_samples"]
+    feats = params["features"]
+    m["conjoint"] = {"fixture": True, "n_choices": CJ_N, "attributes": attrs, "candidates": cands, "labels": CJ_LABELS,
+                     "algorithm": {"gap": "sum over the differing attributes, in attribute order, of w[feature] x (value A - value B)",
+                                   "likelihood": "as meta.recommender.algorithm.likelihood, on that gap",
+                                   "posterior": "pi_s = prod of the likelihoods, divided by the sum (uniform if 0)",
+                                   "next": "the unasked candidate with the highest round(H(pi) - expected H(pi after the answer)), H over samples in nats; ties to the earlier candidate; stop after n_choices",
+                                   "priorities": "features by mean weight, highest first (rounded to 9 decimals), ties in feature order",
+                                   "recommend": "the version 3 recommend with the posterior mean weights (or her corrected order)"}}
+    personas = [("near family, studio fine", {"family": 0.5, "money": 0.1, "room": 0.03, "going_out": 0.22, "green": 0.1, "parking": 0.05}),
+                ("space first", {"family": 0.05, "money": 0.1, "room": 0.55, "going_out": 0.05, "green": 0.1, "parking": 0.15}),
+                ("budget first", {"family": 0.15, "money": 0.55, "room": 0.1, "going_out": 0.05, "green": 0.1, "parking": 0.05}),
+                ("going out above all", {"family": 0.15, "money": 0.1, "room": 0.05, "going_out": 0.55, "green": 0.1, "parking": 0.05}),
+                ("either to everything", None)]
+    ex = []
+    for name, hw in personas:
+        hidden = [hw[k] for k in feats] if hw else None
+        answers = []
+        while True:
+            c = cj_next(R, samples, answers, cands, cmap, attrs, params, CJ_N)
+            if not c:
+                break
+            if hidden is None:
+                ch = "either"
+            else:
+                g = cj_gap(hidden, cmap[c], attrs, feats)
+                ch = "either" if abs(g) <= params["either_band"] else ("a" if g > 0 else "b")
+            answers.append({"pair": c, "choice": ch})
+        pi = cj_posterior(R, samples, answers, cmap, attrs, params)
+        w = R.mean_weights(samples, pi)
+        keep = R.posterior
+        R.posterior = lambda *a, **k: pi           # the version 3 recommend, with these weights
+        try:
+            rec = R.recommend(samples, [], out["buildings"], params)
+        finally:
+            R.posterior = keep
+        ex.append({"persona": name, "hidden_weights": hw, "answers": answers, "expected_pairs": [x["pair"] for x in answers],
+                   "expected_mean_weights": dict(zip(feats, [round(x, 6) for x in w])),
+                   "expected_priorities": cj_priorities(w, feats),
+                   "expected_top": [[n["neighborhood_id"], [b["id"] for b in n["buildings"]]] for n in rec["neighborhoods"]],
+                   "expected_why": {n["neighborhood_id"]: n["why"] for n in rec["neighborhoods"]},
+                   "expected_gives_up": {n["neighborhood_id"]: n["gives_up"] for n in rec["neighborhoods"]}})
+    out["meta"]["recommender_examples"] = ex
+    out["meta"]["fixture_v4"] = "meta.recommender.conjoint and meta.recommender_examples are fixture stand-ins (scripts/concierge_fixture.py)"
+    out["meta"]["fixture"] = True
+    return out
+
+
 def main():
     d = json.loads(SRC.read_text(encoding="utf-8"))
     real = ROOT / "site" / "concierge_data.json"
@@ -541,10 +722,11 @@ def main():
     if not out.get("questions"):
         out = add_v2(out, d)
     out = add_v3(out)
+    out = add_v4(out)
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{OUT}: {out['meta']['counts']}, samples: {len(out['recommender_samples'])}")
     for ex in out["meta"]["recommender_examples"]:
-        print(f"  {ex['persona']}: {len(ex['expected_pairs'])} pairs, top {[t[0] for t in ex['expected_top']]}")
+        print(f"  {ex['persona']}: {len(ex['expected_pairs'])} choices, priorities {ex.get('expected_priorities')}, top {[t[0] for t in ex['expected_top']]}")
 
 
 if __name__ == "__main__":

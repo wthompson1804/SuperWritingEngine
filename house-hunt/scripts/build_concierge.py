@@ -9,8 +9,8 @@
     python3 scripts/build_concierge.py
     python3 scripts/build_concierge.py --data site/_concierge_fixture.json     # the test stand-in
 
-Without --data the script uses site/concierge_data.json when it carries the version 3 recommender fields
-(recommender_samples, meta.recommender, buildings[].features) and otherwise the fixture (site/_concierge_fixture.json,
+Without --data the script uses site/concierge_data.json when it carries the recommender fields the page needs
+(recommender_samples, meta.recommender with its version 4 `conjoint`, buildings[].features) and otherwise the fixture (site/_concierge_fixture.json,
 written by scripts/concierge_fixture.py), and says which. Version 3 shows no experience drawings, so none are inlined.
 
 Two things are done to the map block on the way in, in memory only (site/map_component.html is not changed):
@@ -74,7 +74,8 @@ def has_v3(path: Path) -> bool:
         d = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return False
-    return bool(d.get("recommender_samples")) and bool((d.get("meta") or {}).get("recommender")) \
+    rec = (d.get("meta") or {}).get("recommender") or {}
+    return bool(d.get("recommender_samples")) and bool(rec) and bool(rec.get("conjoint")) \
         and all(isinstance(b.get("features"), dict) for b in d.get("buildings") or [{}])
 
 

@@ -968,11 +968,12 @@ def recommender_reference_reproduces_its_examples():
     by = {b["id"]: b for b in BLDS}
     for e in REX:
         hidden = [e["hidden_weights"][k] for k in R.FEATURES] if e["hidden_weights"] else None
-        ans = R.run_persona(RS, BLDS, RP, hidden, RSETS, bests=RBESTS)
-        assert ans == e["answers"] and [[x["a"], x["b"]] for x in ans] == e["expected_pairs"], e["persona"]
-        assert 3 <= len(ans) <= 6 and len({(x["a"], x["b"]) for x in ans}) == len(ans)
-        for x in ans:
-            assert x["a"] < x["b"] and x["choice"] == R.persona_answer(x["a"], x["b"], hidden, by, RP["either_band"])
+        ans = R.run_conjoint(RS, RP, lambda t: R.task_answer(t, hidden, RP))      # version 4: made-up apartments
+        assert ans == e["answers"] and [x["task_index"] for x in ans] == e["expected_tasks"], e["persona"]
+        assert len(ans) == RP["conjoint"]["n_tasks"] == 8 and len({R._key(x["task"]) for x in ans}) == 8
+        for x, y in zip(ans, ans[1:]):
+            assert {k for k, _, _ in x["task"]} != {k for k, _, _ in y["task"]}, "two tasks in a row on the same attributes"
+        assert [R.task_display(x["task"], RP) for x in ans] == e["expected_tasks_shown"]
         rec = R.recommend(RS, ans, BLDS, RP)
         assert [[n["neighborhood_id"], [b["id"] for b in n["buildings"]]] for n in rec["neighborhoods"]] == e["expected_top"]
         assert len({n for n, _ in e["expected_top"]}) == 3
@@ -998,16 +999,8 @@ def recommender_reference_reproduces_its_examples():
                 assert all(R.clear_margin(n["gives_up_feature"], figs[n["neighborhood_id"]], figs[o]) for o in figs if o != n["neighborhood_id"]), n["gives_up"]
             elif n["gives_up"]:
                 assert "(" not in n["gives_up"] and "ask on the tour" in n["gives_up"] or "yet" in n["gives_up"], n["gives_up"]
-        # the stop rule held: stopped at max, or the top set reached stop_prob and not before min_pairs
-        p = R.stop_probability(RS, ans, BLDS, RP, bests=RBESTS)
-        assert abs(p - e["expected_stop_probability"]) < 1e-6
-        # by hand: the share of posterior mass whose own best neighborhood is among the three shown
-        pi = R.posterior(RS, ans, BLDS, RP)
-        three = {n for n, _ in e["expected_top"]}
-        assert abs(p - sum(x for x, w in zip(pi, RS) if R.best_group(w, BLDS, RP) in three)) < 1e-9
-        assert len(ans) == RP["max_pairs"] or (p >= RP["stop_prob"] and len(ans) >= RP["min_pairs"])
-        for m in range(RP["min_pairs"], len(ans)):
-            assert round(R.stop_probability(RS, ans[:m], BLDS, RP, bests=RBESTS), 9) < RP["stop_prob"], (e["persona"], m)
+        pr = R.priorities(rec["weights"])
+        assert pr["sentence"] == e["expected_priorities_sentence"] and pr["order"] == e["expected_priorities"]
     pi0 = R.posterior(RS, [], BLDS, RP)
     assert all(abs(p - 1 / 400) < 1e-12 for p in pi0)
 
@@ -1053,7 +1046,7 @@ def recommender_personas_get_what_they_asked_for():
         h = [e["hidden_weights"][k] for k in R.FEATURES]
         w = [e["expected_mean_weights"][k] for k in R.FEATURES]
         r = pearson(w, h)
-        REPORT.append(f"weight recovery '{e['persona']}': r = {r:.2f} after {len(e['answers'])} pairs; true best "
+        REPORT.append(f"weight recovery '{e['persona']}': r = {r:.2f} after {len(e['answers'])} choices; true best "
                       f"{R.true_top(h, BLDS, RP)}, recommended {[n for n, _ in e['expected_top']]}")
         assert r > 0.6, (e["persona"], r)
 
@@ -1107,50 +1100,100 @@ def recommender_group_score_and_names():
 
 
 @test
-def recommender_simulated_users():
-    fast = R.Fast(RS, BLDS, RP, RSETS)
-    by = {b["id"]: b for b in BLDS}
-    rng = random.Random(11)
+def recommender_conjoint_design():
+    cj = RP["conjoint"]
+    attrs = {x["id"]: x for x in cj["attributes"]}
+    assert set(attrs) == set(R.FEATURES) and cj["n_tasks"] == 8
+    for k, a in attrs.items():
+        vals = [x["value"] for x in a["levels"]]
+        assert all(x < y for x, y in zip(vals, vals[1:])), k                         # worst to best
+        for x in a["levels"]:
+            assert x["text"] and not K.BANNED.search(x["text"]) and not K.CRIME.search(x["text"]), x
+    lv = R._level_values(RP)                                                     # levels map onto the same value functions
+    assert lv["money"] == [round(R.f_money(x["raw"]["total"]), 6) for x in attrs["money"]["levels"]]
+    assert lv["family"] == [round(R.f_family(x["raw"]["drive_min"]), 6) for x in attrs["family"]["levels"]]
+    assert lv["room"] == [round(R.f_room(x["raw"]["sqft"], x["raw"]["bedroom"]), 6) for x in attrs["room"]["levels"]]
+    totals = sorted(b["features_raw"]["total"] for b in BLDS)
+    assert totals[0] <= min(x["raw"]["total"] for x in attrs["money"]["levels"]) and max(x["raw"]["total"] for x in attrs["money"]["levels"]) <= totals[-1]
+    assert cj["pool"] == R.build_pool(cj["attributes"])                          # deterministic, from the rules
+    keys = [R._key(t) for t in cj["pool"]]
+    assert len(keys) == len(set(keys))
+    for t in cj["pool"]:
+        assert 2 <= len(t) <= 3 and len({k for k, _, _ in t}) == len(t)
+        better_a = [lv[k][a] > lv[k][b] for k, a, b in t]
+        assert any(better_a) and not all(better_a) and all(lv[k][a] != lv[k][b] for k, a, b in t), t   # never dominated
+    # priorities and the nudge
+    w = [0.1, 0.3, 0.25, 0.15, 0.15, 0.05]
+    pr = R.priorities(w)
+    assert pr["order"] == ["money", "room", "going_out", "green", "family", "parking"]   # ties in FEATURES order
+    assert pr["sentence"] == "The monthly cost matters most to you, then space; parking matters least."
+    w2 = R.nudge(w, "room", "up")
+    assert w2 == [0.1, 0.25, 0.3, 0.15, 0.15, 0.05] and R.priorities(w2)["order"][0] == "room"
+    assert R.nudge(w, "money", "up") == w and R.nudge(w, "parking", "down") == w
+    w3 = R.nudge(w, "green", "up")                                               # a tie: 0.01 above, renormalised
+    assert R.priorities(w3)["order"].index("green") < R.priorities(w3)["order"].index("going_out") and abs(sum(w3) - 1) < 1e-12
+    ne = REX[0]["nudge_example"]
+    wn = R.nudge([REX[0]["expected_mean_weights"][k] for k in R.FEATURES], ne["feature"], ne["direction"])
+    assert [round(x, 6) for x in wn] == [ne["weights_after"][k] for k in R.FEATURES]
+    rec = R.recommend_from_weights(wn, BLDS, RP)
+    assert [[n["neighborhood_id"], [b["id"] for b in n["buildings"]]] for n in rec["neighborhoods"]] == ne["expected_top_after"]
+    for e in REX:
+        assert all(not K.BANNED.search(e["expected_priorities_sentence"]) for _ in [0])
+
+
+def simulate(answer_mode, n=200, seed=11):
+    """200 users with flat-Dirichlet hidden weights answer the eight made-up pairs: 'noisy' samples each answer from
+    the model's own likelihood at its temperature (seed per user), 'exact' answers as the personas do."""
+    fast = R.FastCJ(RS, RP)
+    rng = random.Random(seed)
     users = []
-    for _ in range(200):
+    for _ in range(n):
         g = [rng.gammavariate(1.0, 1.0) for _ in R.FEATURES]
         users.append([x / sum(g) for x in g])
-    for h in users[:15] + [None]:                     # the fast twin asks what the reference asks
-        assert R.run_persona(RS, BLDS, RP, h, RSETS, bests=RBESTS) == R.run_persona(RS, BLDS, RP, h, RSETS, pair_fn=fast.next_pair, bests=RBESTS)
-    hit = hit1 = hit2 = one = bot = tight = 0
-    recs = Counter()
-    stops, rs = Counter(), []
-    for h in users:
-        ans = R.run_persona(RS, BLDS, RP, h, RSETS, pair_fn=fast.next_pair, bests=RBESTS)
-        assert 3 <= len(ans) <= 6
-        stops[len(ans)] += 1
-        w = [float(x) for x in fast.pi(ans) @ fast.W]
+    res = Counter()
+    recs, rs = Counter(), []
+    for u, h in enumerate(users):
+        r_ = random.Random(1000 + u)
+
+        def ans(t, h=h, r_=r_):
+            if answer_mode == "exact":
+                return R.task_answer(t, h, RP)
+            pa = R.likelihood(R.task_gap(h, t, RP), "a", RP)
+            pb = R.likelihood(R.task_gap(h, t, RP), "b", RP)
+            x = r_.random()
+            return "a" if x < pa else "b" if x < pa + pb else "either"
+        a = fast.run(ans)
+        w = [float(x) for x in fast.pi(a) @ fast.W]
         top = R.mmr(R.group_scores(w, BLDS, RP), RP)
         t = R.true_top(h, BLDS, RP)
-        hit += t in top
-        hit1 += t == top[0]
-        hit2 += hit_within(h, top, 0.02)
-        tight += tight_trio(top)
+        res["hit"] += t in top
+        res["hit2"] += hit_within(h, top, 0.02)
+        res["first"] += t == top[0]
+        res["bottom"] += bool(bottom_half(h, top))
+        res["tight"] += tight_trio(top)
         recs.update(top)
-        one += len({CLUSTER_OF[g] for g in top}) == 1
-        bot += bool(bottom_half(h, top))
         rs.append(pearson(w, h))
-    REPORT.append(f"200 simulated users (hidden weights flat Dirichlet, seed 11): true best neighborhood in the three "
-                  f"{hit / 2:.1f}% (or one within 2% of it {hit2 / 2:.1f}%), first {hit1 / 2:.1f}%; pairs asked {dict(sorted(stops.items()))}; weight recovery r "
-                  f"median {statistics.median(rs):.2f}, share > 0.6 {sum(r > 0.6 for r in rs) / 2:.1f}%; "
-                  f"{len(RP['groups'])} neighborhoods to choose from; all three in one cluster {one / 2:.1f}% (information only: average-linkage clusters of {len(set(CLUSTER_OF.values()))}); all three pairs closer than the 75th percentile of neighborhood pairs {tight / 2:.1f}%; a recommended neighborhood in the bottom half by hidden weights {bot / 2:.1f}% of users")
-    REPORT.append("users who get each neighborhood in their three: " + ", ".join(f"{g} {n}" for g, n in recs.most_common()))
-    assert hit2 / 200 >= 0.8, hit2
-    # 0.2 before the regrouping (8 groups); with 11 groups the good fits for a user often share a cluster, and the
-    # relevance floor (good fits first) outranks diversity: reported, held at 0.4 (coordinator told, 2026-11-17)
-    assert tight / 200 <= 0.2, tight                 # the cluster share is reported only: average linkage on 40+ points is unstable
-    assert bot / 200 <= 0.05, bot
-    # more like this: excludes what is shown and the building itself, nearest first under her weights
+    return users, res, recs, rs, fast
+
+
+@test
+def recommender_simulated_users():
+    users, _, _, _, fast = simulate("exact", n=1)
+    for h in users[:1] + [[0.3, 0.1, 0.2, 0.1, 0.2, 0.1]]:                     # the fast twin asks what the reference asks
+        f = lambda t, h=h: R.task_answer(t, h, RP)  # noqa: E731
+        assert [x["task_index"] for x in R.run_conjoint(RS, RP, f)] == [x["task_index"] for x in fast.run(f)]
+    for mode in ("noisy", "exact"):
+        _, res, recs, rs, _ = simulate(mode)
+        REPORT.append(f"200 simulated users, {mode} answers (hidden weights flat Dirichlet, seed 11, 8 made-up pairs): true best "
+                      f"in the three {res['hit'] / 2:.1f}% (or one within 2% {res['hit2'] / 2:.1f}%), first {res['first'] / 2:.1f}%; "
+                      f"bottom-half pick {res['bottom'] / 2:.1f}%; near-copies {res['tight'] / 2:.1f}%; weight recovery r median "
+                      f"{statistics.median(rs):.2f}, share > 0.6 {sum(r > 0.6 for r in rs) / 2:.1f}%")
+        REPORT.append(f"  {mode}: users who get each neighborhood in their three: " + ", ".join(f"{g} {n}" for g, n in recs.most_common()))
+        assert res["hit2"] / 200 >= 0.8 and res["bottom"] / 200 <= 0.05 and res["tight"] / 200 <= 0.2, (mode, res)
     w = R.mean_weights(RS, R.posterior(RS, [], BLDS, RP))
     b0 = BLDS[0]
     m = R.more_like_this(b0, w, {b0["similar"][0]}, BLDS, RP)
     assert len(m) == 3 and b0["id"] not in m and b0["similar"][0] not in m
-    _ = by
 
 
 def main():

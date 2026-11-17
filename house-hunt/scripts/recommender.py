@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""The short version's recommender, version 3 (docs/CONCIERGE_DESIGN.md "Version 3"): its data and its reference.
+"""The short version's recommender (docs/CONCIERGE_DESIGN.md "Version 3" and "Version 4"): its data and its reference.
+
+VERSION 4 (current): the choices are eight made-up apartments in pairs (choice-based conjoint, partial profiles),
+picked adaptively from a fixed pool (meta.recommender.conjoint; see the section at the end of this file: build_pool,
+next_task, run_conjoint, priorities, nudge, recommend_from_weights). The posterior, the recommendation, tags and
+why / gives-up are version 3's. The version 3 pair functions (next_pair, should_stop) stay for reference but no
+example uses them.
 
 Pure Python (no numpy in the reference). scripts/concierge_data.py calls add_version_three(out) as its last step; the
 page's JS implements the same functions on the same shipped numbers and is tested to agree with
@@ -391,7 +397,8 @@ def posterior(samples, answers, buildings, params):
     for w in samples:
         p = 1.0
         for x in answers:
-            p *= likelihood(utility(by[x["a"]], w) - utility(by[x["b"]], w), x["choice"], params)
+            gap = task_gap(w, x["task"], params) if "task" in x else utility(by[x["a"]], w) - utility(by[x["b"]], w)
+            p *= likelihood(gap, x["choice"], params)
         raw.append(p)
     s = sum(raw)
     if s <= 0:
@@ -705,9 +712,12 @@ def more_like_this(building, weights, shown, buildings, params, n=N_MORE):
 
 
 def recommend(samples, answers, buildings, params):
+    return recommend_from_weights(mean_weights(samples, posterior(samples, answers, buildings, params)), buildings, params)
+
+
+def recommend_from_weights(w, buildings, params):
+    """The recommendation for weights w (her posterior mean, or the mean after a nudge)."""
     by = {b["id"]: b for b in buildings}
-    pi = posterior(samples, answers, buildings, params)
-    w = mean_weights(samples, pi)
     gs = group_scores(w, buildings, params)
     picked = mmr(gs, params)
     first = sorted(gs, key=lambda g: (-q(gs[g]), g))[0]
@@ -846,6 +856,7 @@ def params_block(buildings, groups, sim, mean, sd, alpha, meds):
         "groups": [{k: g[k] for k in ("id", "name", "building_ids", "neighborhood_ids")} for g in groups],
         "group_similarity": sim,
         "algorithm": {
+            "version": "4: the choices are meta.recommender.conjoint tasks (eight, adaptive); next_pair, stop, sample_sets and sample_bests below are version 3's and no longer drive the page",
             "utility": "U_w(b) = sum_k w_k x features[k] over `features` (sure excluded)",
             "score": "score_w(b) = U_w(b) x features.sure",
             "group_score": "each building's score is rounded to round_decimals; a group scores the expected mean of the two best of a random 3-building subset of its buildings (exact: (3 x mean - E[min of 3]) / 2, with P(the i-th best is the min) = C(i-1, 2) / C(n, 3), i counted from 1 in score order, best first); a group with fewer than three buildings is filled to three with the median building score of the whole set under the same weights (the mean of the two middle values when the count is even), then the mean of its two best. Why (coordinator, 2026-11-17): with the mean of its two best, a deep neighborhood wins by having many buildings to pick from (Newark, 20 buildings, was in the three for 197 of 200 simulated users); a one-building neighborhood is not treated as a deep one either",
@@ -883,7 +894,9 @@ def add_version_three(out):
     out["recommender_samples"] = samples
     out["meta"]["recommender"] = params
     sets = sample_sets(samples, blds, params)
-    out["meta"]["recommender_examples"] = examples(samples, blds, params, sets, sample_bests(samples, blds, params))
+    params["conjoint"] = conjoint_block(blds)                  # version 4: the choices are made-up apartments
+    out["meta"]["recommender_examples"] = conjoint_examples(samples, blds, params)
+
     out["meta"]["recommender"]["validation"] = validation(out["meta"]["recommender_examples"], blds, params)
     return out
 
@@ -966,3 +979,298 @@ class Fast:
         gain = np.round(h0[0] - eh, ROUND)
         k = int(np.argmax(gain))                                # first maximum: pairs are in (a, b) id order
         return (self.ids[A[k]], self.ids[B[k]])
+
+
+# ================================================================ VERSION 4: choice-based conjoint on made-up apartments
+# docs/CONCIERGE_DESIGN.md "Version 4". Each task shows two made-up apartments that differ on two or three attributes
+# (partial profiles); the rest read "Same for both". Each attribute maps onto one recommender feature through the same
+# value functions, so the weights learned here apply to the real buildings. Answers: "a", "b", "either" ("No real
+# difference to me"), with the same likelihood as version 3 on the task's utility gap.
+
+N_TASKS = 8
+POOL_PREFILTER = 60          # the most utility-balanced candidates (smallest |gap| at her current mean weights)
+TOTAL_QUANTILES = (0.1, 0.4, 0.7, 0.95)
+ATTR_ORDER = ("money", "family", "room", "going_out", "parking", "green")
+ATTR_LABEL = {"money": "Monthly total with utilities and fees", "family": "Drive to Mom and Dad", "room": "Space", "going_out": "Going out",
+              "parking": "Parking", "green": "A park for the dog"}
+PRIORITY_WORDS = {"family": "being near Mom and Dad", "money": "the monthly cost", "room": "space",
+                  "going_out": "going out", "green": "a park for the dog", "parking": "parking"}
+NUDGE_TIE_STEP = 0.01
+
+
+def _round50(x):
+    return int(50 * round(x / 50))
+
+
+def conjoint_attributes(buildings):
+    """Attributes and levels, worst to best by feature value. Totals: the TOTAL_QUANTILES of the buildings' lowest
+    totals, rounded to $50 (the real spread); the other levels are the design's."""
+    t = sorted(b["features_raw"]["total"] for b in buildings if b["features_raw"]["total"] is not None)
+    totals = sorted({_round50(t[int(qq * (len(t) - 1))]) for qq in TOTAL_QUANTILES}, reverse=True)
+    lv = {
+        "money": [{"text": f"${x:,} a month", "raw": {"total": x}, "value": round(f_money(x), 6)} for x in totals],
+        "family": [{"text": f"{m} minutes by car", "raw": {"drive_min": m}, "value": round(f_family(m), 6)} for m in (90, 60, 35, 15)],
+        "room": [{"text": t_, "raw": {"sqft": sq, "bedroom": bd}, "value": round(f_room(sq, bd), 6)}
+                 for t_, sq, bd in (("Studio, about 450 sq ft", 450, False), ("Studio, about 600 sq ft", 600, False),
+                                    ("One bedroom, about 700 sq ft", 700, True), ("One bedroom, about 900 sq ft", 900, True))],
+        "going_out": [{"text": t_, "raw": {"places": n}, "value": round(f_going(n), 6)}
+                      for t_, n in (("Quiet: a couple of places to eat nearby", 2), ("Some: about 15 places to eat and drink nearby", 15),
+                                    ("Lively: 40 or more places to eat and drink nearby", 40))],
+        "parking": [{"text": t_, "raw": {"parking_kind": k}, "value": round(f_parking(k), 6)}
+                    for t_, k in (("Street parking only", "street"), ("A spot in a lot", "lot"), ("A garage space", "garage"))],
+        "green": [{"text": f"{m} minutes' walk", "raw": {"park_walk_min": m}, "value": round(f_green(m, False), 6)} for m in (15, 8, 2)],
+    }
+    for k, levels in lv.items():
+        vals = [x["value"] for x in levels]
+        assert all(a < b for a, b in zip(vals, vals[1:])), (k, vals)       # strictly worse to better
+    return [{"id": k, "label": ATTR_LABEL[k], "feature": k, "levels": lv[k]} for k in ATTR_ORDER]
+
+
+def build_pool(attrs):
+    """Every task, in this order (the index is the tie-break):
+    two attributes: each pair of attributes (in ATTR_ORDER), every pair of different levels on each; A has the better
+      level on the first attribute and the worse on the second (so neither apartment is better on everything);
+    three attributes: each triple, adjacent levels only (one step apart) on each; A better on the first; on the second
+      and third, (A better, B better), (B, A) or (B, B) -- never A better on all three.
+    A task is [[attr, level of A, level of B], ...] with level indexes worst = 0."""
+    import itertools
+    n = {a["id"]: len(a["levels"]) for a in attrs}
+    ids = [a["id"] for a in attrs]
+    pool = []
+    for i, j in itertools.combinations(ids, 2):
+        for lo1, hi1 in itertools.combinations(range(n[i]), 2):
+            for lo2, hi2 in itertools.combinations(range(n[j]), 2):
+                pool.append([[i, hi1, lo1], [j, lo2, hi2]])
+    for i, j, k in itertools.combinations(ids, 3):
+        for l1 in range(n[i] - 1):
+            for l2 in range(n[j] - 1):
+                for l3 in range(n[k] - 1):
+                    for d2, d3 in (("a", "b"), ("b", "a"), ("b", "b")):
+                        t = [[i, l1 + 1, l1]]
+                        t.append([j, l2 + 1, l2] if d2 == "a" else [j, l2, l2 + 1])
+                        t.append([k, l3 + 1, l3] if d3 == "a" else [k, l3, l3 + 1])
+                        pool.append(t)
+    return pool
+
+
+def _level_values(params):
+    return {a["id"]: [x["value"] for x in a["levels"]] for a in params["conjoint"]["attributes"]}
+
+
+_LV_CACHE = {}
+
+
+def task_gap(w, task, params):
+    """U(A) - U(B) for weights w (FEATURES order): only the attributes that differ count."""
+    cj = params["conjoint"]
+    hit = _LV_CACHE.get(id(cj))
+    if hit is None or hit[0] is not cj:
+        hit = _LV_CACHE[id(cj)] = (cj, _level_values(params))
+    lv = hit[1]
+    return sum(w[FEATURES.index(k)] * (lv[k][a] - lv[k][b]) for k, a, b in task)
+
+
+def _key(task):
+    return tuple(tuple(x) for x in task)
+
+
+def next_task(samples, answers, params, explain=False):
+    """The next task index into the pool, or None after n_tasks. Candidates: the pool minus tasks already asked and
+    minus tasks on the same attributes as the previous one; the POOL_PREFILTER most utility-balanced at her mean
+    weights (round(|gap|), index); of those, the one with the largest expected reduction in posterior uncertainty:
+    the trace of the posterior covariance of the weights, expected over the three answers. Ties: lower index."""
+    cj = params["conjoint"]
+    if len(answers) >= cj["n_tasks"]:
+        return None
+    pool = cj["pool"]
+    pi = posterior(samples, answers, [], params)
+    w = mean_weights(samples, pi)
+    asked = {_key(x["task"]) for x in answers}
+    prev = {k for k, _, _ in answers[-1]["task"]} if answers else None
+    cand = [i for i, t in enumerate(pool) if _key(t) not in asked and {k for k, _, _ in t} != prev]
+    cand.sort(key=lambda i: (q(abs(task_gap(w, pool[i], params))), i))
+    cand = sorted(cand[:cj["prefilter"]])
+    T, band = params["temperature"], params["either_band"]
+    nf = len(FEATURES)
+    best = None
+    for i in cand:
+        t = pool[i]
+        P = [0.0, 0.0, 0.0]
+        M = [[0.0] * nf for _ in range(3)]
+        for s, ws in enumerate(samples):
+            if pi[s] == 0.0:
+                continue
+            g = task_gap(ws, t, params)
+            pa = _sig((g - band) / T)
+            pb = _sig((-g - band) / T)
+            pe = max(0.0, 1.0 - pa - pb)
+            for a_, L in enumerate((pa, pb, pe)):
+                m = pi[s] * L
+                P[a_] += m
+                row = M[a_]
+                for k in range(nf):
+                    row[k] += m * ws[k]
+        gain = q(sum(sum(x * x for x in M[a_]) / P[a_] for a_ in range(3) if P[a_] > 0))
+        if best is None or gain > best[0]:
+            best = (gain, i)
+    if best is None:
+        return None
+    return (best[1], best[0]) if explain else best[1]
+
+
+def task_answer(task, hidden, params):
+    """A persona's answer: the apartment with the higher utility under hidden weights; 'either' within the band."""
+    if hidden is None:
+        return "either"
+    g = task_gap(hidden, task, params)
+    if abs(g) <= params["either_band"]:
+        return "either"
+    return "a" if g > 0 else "b"
+
+
+def run_conjoint(samples, params, answer_fn):
+    answers = []
+    while True:
+        i = next_task(samples, answers, params)
+        if i is None:
+            return answers
+        t = params["conjoint"]["pool"][i]
+        answers.append({"task_index": i, "task": t, "choice": answer_fn(t)})
+
+
+def priorities(w):
+    """Her weights in plain-word order (highest first; ties in FEATURES order) and the one-sentence summary."""
+    order = sorted(FEATURES, key=lambda k: (-q(w[FEATURES.index(k)]), FEATURES.index(k)))
+    words = [PRIORITY_WORDS[k] for k in order]
+    sent = f"{words[0][0].upper() + words[0][1:]} matters most to you, then {words[1]}; {words[-1]} matters least."
+    return {"order": order, "words": words, "weights": {k: round(w[FEATURES.index(k)], 6) for k in order}, "sentence": sent}
+
+
+def nudge(w, feature, direction):
+    """Move one priority up or down one place: swap its weight with the weight of the priority just above (up) or just
+    below (down) it in priorities() order; nothing else changes (the sum stays 1). If the two weights are equal (to
+    ROUND decimals), the moved one is set NUDGE_TIE_STEP above (up) or below (down) the other, floored at 0, and the six
+    are renormalised to sum 1. At the top (up) or bottom (down) nothing changes. Returns the new weights."""
+    order = priorities(w)["order"]
+    i = order.index(feature)
+    j = i - 1 if direction == "up" else i + 1
+    if j < 0 or j >= len(order):
+        return list(w)
+    a, b = FEATURES.index(feature), FEATURES.index(order[j])
+    w2 = list(w)
+    if q(w2[a]) != q(w2[b]):
+        w2[a], w2[b] = w2[b], w2[a]
+        return w2
+    w2[a] = max(0.0, w2[b] + (NUDGE_TIE_STEP if direction == "up" else -NUDGE_TIE_STEP))
+    s = sum(w2)
+    return [x / s for x in w2]
+
+
+def task_display(task, params):
+    attrs = {a["id"]: a for a in params["conjoint"]["attributes"]}
+    return [{"attribute": attrs[k]["label"], "a": attrs[k]["levels"][a]["text"], "b": attrs[k]["levels"][b]["text"]} for k, a, b in task]
+
+
+def conjoint_examples(samples, buildings, params):
+    out = []
+    for name, hw in PERSONAS:
+        hidden = [hw[k] for k in FEATURES] if hw else None
+        ans = run_conjoint(samples, params, lambda t: task_answer(t, hidden, params))
+        rec = recommend(samples, ans, buildings, params)
+        pr = priorities(rec["weights"])
+        out.append({"persona": name, "hidden_weights": dict(zip(FEATURES, hidden)) if hidden else None,
+                    "answer_rule": "either to every task" if hidden is None else
+                    f"the apartment with the higher utility under hidden_weights; 'either' when the gap is within {params['either_band']}",
+                    "answers": [{"task_index": x["task_index"], "task": x["task"], "choice": x["choice"]} for x in ans],
+                    "expected_tasks": [x["task_index"] for x in ans],
+                    "expected_tasks_shown": [task_display(x["task"], params) for x in ans],
+                    "expected_mean_weights": dict(zip(FEATURES, rec["weights"])),
+                    "expected_priorities": pr["order"], "expected_priorities_sentence": pr["sentence"],
+                    "expected_top": [[n["neighborhood_id"], [b["id"] for b in n["buildings"]]] for n in rec["neighborhoods"]],
+                    "expected_more_like_this": {b["id"]: b["more_like_this"] for n in rec["neighborhoods"] for b in n["buildings"]},
+                    "expected_why": {n["neighborhood_id"]: n["why"] for n in rec["neighborhoods"]},
+                    "expected_gives_up": {n["neighborhood_id"]: n["gives_up"] for n in rec["neighborhoods"]}})
+    # the nudge, on the first persona: move its second priority up one place
+    e = out[0]
+    w = [e["expected_mean_weights"][k] for k in FEATURES]
+    k = e["expected_priorities"][1]
+    w2 = nudge(w, k, "up")
+    rec2 = recommend_from_weights(w2, buildings, params)
+    out[0]["nudge_example"] = {"feature": k, "direction": "up", "weights_after": dict(zip(FEATURES, [round(x, 6) for x in w2])),
+                               "priorities_sentence_after": priorities(w2)["sentence"],
+                               "expected_top_after": [[n["neighborhood_id"], [b["id"] for b in n["buildings"]]] for n in rec2["neighborhoods"]]}
+    return out
+
+
+def conjoint_block(buildings):
+    attrs = conjoint_attributes(buildings)
+    return {"attributes": attrs, "n_tasks": N_TASKS, "prefilter": POOL_PREFILTER, "pool": build_pool(attrs),
+            "answers": {"a": "Apartment A", "b": "Apartment B", "either": "No real difference to me"},
+            "pool_rules": build_pool.__doc__.strip(), "selection": next_task.__doc__.strip(),
+            "levels_rule": conjoint_attributes.__doc__.strip(), "priorities_rule": priorities.__doc__.strip(),
+            "nudge_rule": nudge.__doc__.strip(), "priority_words": PRIORITY_WORDS}
+
+
+class FastCJ:
+    """next_task and posterior of version 4, vectorised with numpy, for simulating many users. Tested to choose the
+    same tasks as the reference. Not part of the page's contract."""
+
+    def __init__(self, samples, params):
+        import numpy as np
+        self.np, self.p = np, params
+        self.W = np.array(samples, dtype=float)
+        lv = _level_values(params)
+        self.pool = params["conjoint"]["pool"]
+        D = np.zeros((len(self.pool), len(FEATURES)))
+        for i, t in enumerate(self.pool):
+            for k, a, b in t:
+                D[i, FEATURES.index(k)] += lv[k][a] - lv[k][b]
+        self.D = D
+        self.G = D @ self.W.T                                   # tasks x samples
+        self.keys = [_key(t) for t in self.pool]
+        self.sets = [frozenset(k for k, _, _ in t) for t in self.pool]
+
+    def L(self, g):
+        np, p = self.np, self.p
+        pa = 1 / (1 + np.exp(-(g - p["either_band"]) / p["temperature"]))
+        pb = 1 / (1 + np.exp(-(-g - p["either_band"]) / p["temperature"]))
+        return pa, pb, np.maximum(0, 1 - pa - pb)
+
+    def pi(self, answers):
+        np = self.np
+        lp = np.ones(self.W.shape[0])
+        for x in answers:
+            pa, pb, pe = self.L(self.G[x["task_index"]])
+            lp = lp * {"a": pa, "b": pb, "either": pe}[x["choice"]]
+        s = lp.sum()
+        return lp / s if s > 0 else np.full(len(lp), 1 / len(lp))
+
+    def next_task(self, answers):
+        np, cj = self.np, self.p["conjoint"]
+        if len(answers) >= cj["n_tasks"]:
+            return None
+        pi = self.pi(answers)
+        w = pi @ self.W
+        asked = {_key(x["task"]) for x in answers}
+        prev = frozenset(k for k, _, _ in answers[-1]["task"]) if answers else None
+        gb = np.round(np.abs(self.D @ w), ROUND)
+        cand = [i for i in range(len(self.pool)) if self.keys[i] not in asked and self.sets[i] != prev]
+        cand.sort(key=lambda i: (gb[i], i))
+        cand = sorted(cand[:cj["prefilter"]])
+        gain = 0
+        for L in self.L(self.G[cand]):
+            m = L * pi
+            P = m.sum(axis=1)
+            M = m @ self.W
+            with np.errstate(divide="ignore", invalid="ignore"):
+                gain = gain + np.where(P > 0, (M * M).sum(axis=1) / P, 0.0)
+        gain = np.round(gain, ROUND)
+        return cand[int(np.argmax(gain))]
+
+    def run(self, answer_fn):
+        answers = []
+        while True:
+            i = self.next_task(answers)
+            if i is None:
+                return answers
+            answers.append({"task_index": i, "task": self.pool[i], "choice": answer_fn(self.pool[i])})
