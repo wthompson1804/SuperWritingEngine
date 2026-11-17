@@ -750,7 +750,34 @@ class BuildingStories:
     source_url, retrieved_at, notes). Looked up by addr_key, then by building through the crosswalk
     (data/reference/building_crosswalk.csv), then by the nearest row within 30 m. The file may be absent or partial: a
     missing file, a blank or non-numeric storey count, or an unknown basis gives nothing. Where several rows match, the
-    best basis wins (official record, then listing, then OpenStreetMap), then the nearest."""
+    best basis wins (official record, then listing, then OpenStreetMap), then the nearest.
+
+    NOT TRUSTED (coordinator, 2026-11-17): a row whose notes carry the producer's `CHECK:` flag (unit labels read above the
+    recorded storeys), or whose notes give another storey count from OpenStreetMap ("OSM building:levels says 6") or a
+    listing ("listing page states 4") that differs from the row's own count, is kept but not used: the building's storeys
+    are unknown (stories blank, basis `not_trusted`, the reason in `source`), so it neither fails a unit (one-storey record)
+    nor settles "no elevator needed" (a 1-2 storey building), nor gives a floor count. Ethos Kelsey, Belleville: the tax
+    record says '1SB' beside apartments 301 to 526, an established elevator and OSM's 6 storeys."""
+
+    NOT_TRUSTED = "not_trusted"
+
+    @staticmethod
+    def distrust(stories, notes) -> str:
+        """Why a row of building_stories.csv is not trusted, or ''."""
+        notes = str(notes or "")
+        why = []
+        m = re.search(r"CHECK:\s*([^;]*)", notes)
+        if m:
+            why.append("CHECK: " + m.group(1).strip()[:160])
+        try:
+            n = float(stories)
+        except (TypeError, ValueError):
+            n = None
+        for src, pat in (("OpenStreetMap", r"OSM building:levels says (\d+)"), ("a listing", r"listing page states (\d+)")):
+            for v in re.findall(pat, notes):
+                if n is not None and float(v) != n:
+                    why.append(f"{src} gives {v} storeys, the record {n:g}")
+        return "; ".join(why)
 
     def __init__(self, path=None, crosswalk=None):
         f = Path(path) if path else DATA / "reference" / "building_stories.csv"
@@ -767,7 +794,10 @@ class BuildingStories:
         T["n"] = pd.to_numeric(T.stories, errors="coerce")
         T["stories_basis"] = T.stories_basis.str.strip().str.lower()
         T = T[T.n.notna() & (T.n >= 1) & T.stories_basis.isin(list(STORIES_RANK))].copy()
-        T["rk"] = T.stories_basis.map(STORIES_RANK)
+        if "notes" not in T:
+            T["notes"] = ""
+        T["why_not"] = [self.distrust(a, b) for a, b in zip(T.stories, T.notes)]
+        T["rk"] = T.stories_basis.map(STORIES_RANK) + np.where(T.why_not != "", 10, 0)      # a trusted row first
         T["la"], T["lo"] = pd.to_numeric(T.lat, errors="coerce"), pd.to_numeric(T.lon, errors="coerce")
         xf = Path(crosswalk) if crosswalk else DATA / "reference" / "building_crosswalk.csv"
         xw = pd.read_csv(xf, dtype=str, keep_default_na=False).set_index("addr_key").building_id.to_dict() if xf.exists() else {}
@@ -781,10 +811,16 @@ class BuildingStories:
     def __len__(self):
         return len(self.T)
 
-    @staticmethod
-    def _pick(g):
-        r = g.sort_values("rk").iloc[0]
-        return {"stories": f"{r.n:g}", "basis": r.stories_basis, "source": (r.source_name + " " + r.source_url).strip(), "retrieved_at": r.retrieved_at}
+    @classmethod
+    def _row(cls, r):
+        src = (r.source_name + " " + r.source_url).strip()
+        if r.why_not:
+            return {"stories": "", "basis": cls.NOT_TRUSTED, "source": f"not trusted ({r.why_not}): {r.n:g} storeys per {src}", "retrieved_at": r.retrieved_at}
+        return {"stories": f"{r.n:g}", "basis": r.stories_basis, "source": src, "retrieved_at": r.retrieved_at}
+
+    @classmethod
+    def _pick(cls, g):
+        return cls._row(g.sort_values("rk").iloc[0])
 
     def lookup(self, addr_key="", building_id="", lat=None, lon=None):
         """{'stories', 'basis', 'source', 'retrieved_at', 'match'} or None."""
@@ -804,8 +840,7 @@ class BuildingStories:
         if near.empty:
             return None
         r = near.sort_values(["rk", "d"]).iloc[0]
-        return {"stories": f"{r.n:g}", "basis": r.stories_basis, "source": (r.source_name + " " + r.source_url).strip(),
-                "retrieved_at": r.retrieved_at, "match": f"coordinates within {STORIES_NEAR_M} m ({r.d:.0f} m)"}
+        return {**self._row(r), "match": f"coordinates within {STORIES_NEAR_M} m ({r.d:.0f} m)"}
 
 
 def load_numbering_conventions(path=None) -> dict:

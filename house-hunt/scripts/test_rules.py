@@ -2230,6 +2230,26 @@ def pure_floor_elevator():
         bad.write_text("addr_key,stories\n")
         eq(len(build_master.BuildingStories(bad, xw)), 0, "storeys: a header-only (partial) file gives nothing")
         eq(len(build_master.BuildingStories(td / "empty.csv" if (td / "empty.csv").write_text("") == 0 else td / "empty.csv", xw)), 0, "storeys: an empty file gives nothing")
+        # a row the producer flagged CHECK, or whose OSM / listing count disagrees with it, is kept but not trusted
+        BS = build_master.BuildingStories
+        eq(BS.distrust("1", "BLDG_DESC '1SB'; OSM building:levels says 6 (https://osm.example/w); CHECK: 4 unit label(s) here read as floor 3 to 5")[:6], "CHECK:", "storeys: the CHECK flag is a reason not to trust the row")
+        ok("OpenStreetMap gives 6 storeys, the record 1" in BS.distrust("1", "OSM building:levels says 6 (https://osm.example/w)"), "storeys: OSM disagreeing with the record is a reason")
+        ok("a listing gives 4 storeys, the record 2" in BS.distrust("2", "listing page states 4"), "storeys: a listing disagreeing with the record is a reason")
+        eq(BS.distrust("4", "OSM building:levels says 4 (https://osm.example/w)"), "", "storeys: OSM agreeing with the record is no reason")
+        eq(BS.distrust("3", "joined by house number and street"), "", "storeys: an ordinary row is trusted")
+        ft = td / "st_trust.csv"
+        ft.write_text("addr_key,lat,lon,stories,stories_basis,source_name,source_url,retrieved_at,notes\n"
+                      "740 washington ave|07109,40.80,-74.14,1,official_record,MOD-IV,https://example.gov/e,2026-11-17T00:00:00Z,\"BLDG_DESC '1SB'; OSM building:levels says 6 (https://osm.example/w); CHECK: 4 unit label(s) here read as floor 3 to 5\"\n"
+                      "9 elm st|07002,40.9,-74.1,2,official_record,MOD-IV,https://example.gov/9,2026-11-17T00:00:00Z,joined by house number\n"
+                      "9 elm st|07002,40.9,-74.1,5,osm,OSM,https://osm.example/9,2026-11-17T00:00:00Z,OSM outline\n")
+        St = BS(ft, xw)
+        rk = St.lookup("740 washington ave|07109")
+        eq((rk["stories"], rk["basis"]), ("", "not_trusted"), "storeys: a CHECK row gives no storeys and the basis not_trusted")
+        ok(rk["source"].startswith("not trusted (CHECK:") and "1 storeys per MOD-IV" in rk["source"], f"storeys: the reason and the record are kept in the source note: {rk['source'][:120]}")
+        eq(St.lookup("9 elm st|07002")["stories"], "2", "storeys: a trusted official record still outranks OSM")
+        eq(P.floor_elevator_rule("established", None, "", rk["stories"], rk["basis"]), ("settled", ""), "storeys: Ethos Kelsey (elevator established, CHECK record) is settled, not failed")
+        eq(P.floor_elevator_rule("unknown", None, "", rk["stories"], rk["basis"]), ("open", P.FLOOR_OR_ELEVATOR_CODE), "storeys: an untrusted one-storey record leaves the floor-and-elevator fact open")
+        eq(P.floor_elevator_rule("open", None, "", "", "not_trusted"), ("open", "elevator"), "storeys: an untrusted low record does not turn an elevator doubt into floor_or_elevator")
         # unit_floor_reads.csv (second trawl): the floor read from the apartment number, per listing
         eq(build_master.load_unit_floor_reads(td / "missing.csv"), {}, "floor reads: an absent file gives nothing")
         fr = td / "reads.csv"
