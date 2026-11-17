@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Disallow expensive endpoints (enforced platform-wide)
+User-agent: *
+Disallow: /?action=search.view
+Disallow: /*action=search.view

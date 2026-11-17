@@ -706,6 +706,17 @@ def sentences(text):
 PLACE_NAMES = ["White Plains"]                    # place names that would trip the wording test
 
 
+@lru_cache(maxsize=None)
+def dashed_place_names():
+    """The page's own neighborhood names that contain a dash ("Jersey City – McGinley Square"). A small experience must
+    name each of its neighborhoods as the page does, so the dash in such a name is not a dash in the prose."""
+    try:
+        return sorted({str(n.get("name")) for n in _page().get("neighborhoods", []) if re.search(r"[—–]", str(n.get("name")))},
+                      key=len, reverse=True)
+    except (OSError, ValueError):
+        return []
+
+
 # ---------------------------------------------------------------------------------------------------------------
 # Plain-language guards (copy edit of 2026-11-16). The owner's complaint was lines that try to be clever and end up
 # unclear ("the dog walks you toward the water"). Each pattern below is a construction that was removed from the
@@ -1025,7 +1036,7 @@ def agreement(text):
 def check_style(kind, col, text):
     out = check_plain(col, text)
     bare = text
-    for name in PLACE_NAMES:
+    for name in PLACE_NAMES + dashed_place_names():
         bare = bare.replace(name, "")
     for rx, what in BANNED:          # (dollar amounts are no longer banned by column: check_strip ties each to the strip)
         m = rx.search(bare)

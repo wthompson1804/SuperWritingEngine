@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+# The "near this place" category searches: endless combinations of place, category and page.
+Disallow: /places/*?uid=
+Disallow: /places/*&uid=
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: Baiduspider
+User-agent: Baiduspider-video
+User-agent: Baiduspider-image
+Disallow: /
+
+Sitemap: https://getoutsidenj.com/sitemap.xml

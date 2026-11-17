@@ -1,0 +1,9 @@
+user-agent: *
+Sitemap:http://thetrentonfarmersmarket.com/sitemap.xml
+Disallow: /includes/ 
+Disallow: /emaillist.php
+Disallow: /counters.php
+Disallow: /optin.php
+Disallow: /optout.php
+Disallow: /cp/
+

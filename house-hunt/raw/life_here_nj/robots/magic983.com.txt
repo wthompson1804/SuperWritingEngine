@@ -1,0 +1,32 @@
+User-agent: *
+Disallow: /wp/wp-admin/
+Allow: /wp/wp-admin/admin-ajax.php
+Disallow: /search/
+Disallow: /.rss/
+Disallow: /uk/
+Disallow: /preview?*
+Disallow: /*/edit$
+Disallow: /*/edit/$
+Disallow: /edit$
+Disallow: /edit/$
+
+user-agent: Pinterestbot
+Crawl-delay: 1
+
+Sitemap: https://magic983.com/video-sitemap.xml
+
+Sitemap: https://magic983.com/sitemap_index.xml
+Sitemap: https://magic983.com/sitemap-news.xml
+
+User-agent: AhrefsBot
+Disallow: /wp/wp-admin/
+Allow: /wp/wp-admin/admin-ajax.php
+Disallow: /search/
+Disallow: /.rss/
+Disallow: /uk/
+Disallow: /preview?*
+Disallow: /*/edit$
+Disallow: /*/edit/$
+Disallow: /edit$
+Disallow: /edit/$
+Disallow: /api/newsroom/

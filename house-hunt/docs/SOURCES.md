@@ -424,3 +424,9 @@ Second trawl step 3: storeys per candidate building and floor per apartment labe
 Zumper's terms have no robot or scraping clause but allow use "only in reasonable limited quantities for your personal,
 non-commercial use". This project is one person's personal, non-commercial apartment search; volume is kept modest
 (about 1,773 requests on 2026-11-17, 3 s floor). Keep later runs to re-reads of held listings.
+
+### Life-here research, New Jersey (2026-11-17)
+Refused and closed for the session (raw/_host_kill_shared.json, by life_here_nj): www.passaiccountynj.org,
+middlesexcountynj.gov, mercercounty.org, www.hamiltonnj.com, lhtrail.org (403 on robots.txt); newyorkyimby.com,
+thesunpapers.com, www.somersetcountyparks.org (403 on a page); www.nj.gov (flagged as a bot-challenge page; body not
+kept, so possibly a false match, but treated as a refusal). visithudson.org `?p=` URLs are robots-disallowed.

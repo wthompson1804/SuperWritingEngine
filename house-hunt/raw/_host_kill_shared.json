@@ -212,5 +212,65 @@
   "url": "https://newyorkyimby.com/2016/06/17-5-acre-berry-lane-park-opens-to-the-public-in-jersey-city.html",
   "at": "2026-11-17T20:15:06Z",
   "by": "life_here_nj"
+ },
+ "www.playwrightirishpub.com": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://www.playwrightirishpub.com/robots.txt",
+  "at": "2026-11-17T20:16:20Z",
+  "by": "life_here_ctny"
+ },
+ "middlesexcountynj.gov": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://middlesexcountynj.gov/robots.txt",
+  "at": "2026-11-17T20:17:51Z",
+  "by": "life_here_nj"
+ },
+ "www.scratchbaking.com": {
+  "reason": "HTTP 403",
+  "url": "https://www.scratchbaking.com/",
+  "at": "2026-11-17T20:18:59Z",
+  "by": "life_here_ctny"
+ },
+ "thesunpapers.com": {
+  "reason": "HTTP 403",
+  "url": "https://thesunpapers.com/lifestyle/best-coffee-shops-south-jersey/",
+  "at": "2026-11-17T20:21:09Z",
+  "by": "life_here_nj"
+ },
+ "mercercounty.org": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://mercercounty.org/robots.txt",
+  "at": "2026-11-17T20:21:54Z",
+  "by": "life_here_nj"
+ },
+ "www.grownyc.org": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://www.grownyc.org/robots.txt",
+  "at": "2026-11-17T20:23:47Z",
+  "by": "life_here_ctny"
+ },
+ "www.hamiltonnj.com": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://www.hamiltonnj.com/robots.txt",
+  "at": "2026-11-17T20:23:52Z",
+  "by": "life_here_nj"
+ },
+ "lhtrail.org": {
+  "reason": "HTTP 403 on robots.txt",
+  "url": "https://lhtrail.org/robots.txt",
+  "at": "2026-11-17T20:24:01Z",
+  "by": "life_here_nj"
+ },
+ "www.somersetcountyparks.org": {
+  "reason": "HTTP 403",
+  "url": "https://www.somersetcountyparks.org/sourland-mountain-preserve",
+  "at": "2026-11-17T20:27:49Z",
+  "by": "life_here_nj"
+ },
+ "islipny.gov": {
+  "reason": "HTTP 403",
+  "url": "https://islipny.gov/town-calendar/26-community-events/2290-bayminster-dog-parade-artisan-fair",
+  "at": "2026-11-17T20:28:59Z",
+  "by": "life_here_ctny"
  }
 }

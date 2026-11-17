@@ -1,0 +1,15 @@
+User-agent: *
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/ 
+Disallow: /wp-content/themes/
+Allow: /wp-admin/admin-ajax.php
+Crawl-delay: 10
+
+User-Agent: Googlebot
+Allow: .js
+Allow: .css
+Disallow: /*&s=
+
+Sitemap: https://whyy.org/sitemap_index.xml
+Sitemap: https://whyy.org/news-sitemap.xml

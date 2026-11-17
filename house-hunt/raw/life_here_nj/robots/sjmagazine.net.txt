@@ -1,0 +1,16 @@
+User-agent: *
+Crawl-delay: 3
+
+
+Disallow: /wp-admin/
+
+Sitemap: https://sjmagazine.net/sitemap_index.xml
+Sitemap: https://sjmagazine.net/post-sitemap1.xml
+Sitemap: https://sjmagazine.net/post-sitemap2.xml
+Sitemap: https://sjmagazine.net/post-sitemap3.xml
+Sitemap: https://sjmagazine.net/page-sitemap.xml
+Sitemap: https://sjmagazine.net/tribe_events-sitemap.xml
+Sitemap: https://sjmagazine.net/printed-pages-sitemap.xml
+Sitemap: https://sjmagazine.net/party-pics-sitemap.xml
+Sitemap: https://sjmagazine.net/profiles-sitemap.xml
+Sitemap: https://sjmagazine.net/category-sitemap.xml

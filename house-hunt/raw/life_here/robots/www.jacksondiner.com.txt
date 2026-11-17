@@ -1,0 +1,6 @@
+# Robots.txt file from https://www.jacksondiner.com
+
+Sitemap: https://www.jacksondiner.com/sitemap.xml
+
+User-agent: *
+Disallow:

@@ -1,0 +1,10 @@
+Sitemap: https://ucpac.org/sitemap.xml
+Sitemap: https://ucpac.org/news-sitemap.xml
+# START YOAST BLOCK
+# ---------------------------
+User-agent: *
+Disallow:
+
+Sitemap: https://ucpac.org/sitemap_index.xml
+# ---------------------------
+# END YOAST BLOCK
