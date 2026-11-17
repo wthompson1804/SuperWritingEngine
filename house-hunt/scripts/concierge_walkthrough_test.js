@@ -156,7 +156,7 @@ const act = (page, a, v) => page.click('#app [data-act="' + a + '"]' + (v ? '[da
   ok(drives.every((v, i) => i === 0 || v >= drives[i - 1]), "areas are ordered by drive time: " + drives.join(", "));
   ok((await page.locator('.stop a[href*="maps"]').count()) >= 1, "addresses link to a map");
   const kb = st.kept.map((id) => D.buildings.find((b) => b.id === id));
-  const firstQ = kb.find((b) => b.confirm.length && b.confirm[0].question);
+  const firstQ = kb.find((b) => b.name && b.confirm.length && b.confirm[0].question);
   if (firstQ) { const qs = await page.locator('.stop:has(h3:text-is("' + firstQ.name.replace(/"/g, '\\"') + '")) ol li').allInnerTexts(); ok(qs[0] === firstQ.confirm[0].question, "confirm questions come first"); }
   const planText = (await everyScreen(page, "plan", LIMIT)).text;
   D.buildings.forEach((b) => { const c = b.contact || {}; if (c.private && c.office_phone) ok(!planText.includes(c.office_phone), "a private number is shown"); });
